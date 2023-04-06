@@ -51,7 +51,8 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CrowdBatchTaskPending extends AbstractLazyPending<CrowdInfoVo> {
 
-    @Autowired private SendService sendService;
+    @Autowired
+    private SendService sendService;
 
     public CrowdBatchTaskPending() {
         PendingParam<CrowdInfoVo> pendingParam = new PendingParam<>();
@@ -74,9 +75,7 @@ public class CrowdBatchTaskPending extends AbstractLazyPending<CrowdInfoVo> {
             if (Objects.isNull(paramMap.get(vars))) {
                 paramMap.put(vars, receiver);
             } else {
-                String newReceiver =
-                        StringUtils.join(
-                                new String[] {paramMap.get(vars), receiver}, StrUtil.COMMA);
+                String newReceiver = StringUtils.join(new String[] {paramMap.get(vars), receiver}, StrUtil.COMMA);
                 paramMap.put(vars, newReceiver);
             }
         }
@@ -84,22 +83,19 @@ public class CrowdBatchTaskPending extends AbstractLazyPending<CrowdInfoVo> {
         // 2. 组装参数
         List<MessageParam> messageParams = Lists.newArrayList();
         for (Map.Entry<Map<String, String>, String> entry : paramMap.entrySet()) {
-            MessageParam messageParam =
-                    MessageParam.builder()
-                            .receiver(entry.getValue())
-                            .variables(entry.getKey())
-                            .build();
+            MessageParam messageParam = MessageParam.builder()
+                    .receiver(entry.getValue())
+                    .variables(entry.getKey())
+                    .build();
             messageParams.add(messageParam);
         }
 
         // 3. 调用批量发送接口发送消息
-        BatchSendRequest batchSendRequest =
-                BatchSendRequest.builder()
-                        .code(BusinessCode.COMMON_SEND.getCode())
-                        .messageParamList(messageParams)
-                        .messageTemplateId(
-                                CollUtil.getFirst(crowdInfoVos.iterator()).getMessageTemplateId())
-                        .build();
+        BatchSendRequest batchSendRequest = BatchSendRequest.builder()
+                .code(BusinessCode.COMMON_SEND.getCode())
+                .messageParamList(messageParams)
+                .messageTemplateId(CollUtil.getFirst(crowdInfoVos.iterator()).getMessageTemplateId())
+                .build();
         sendService.batchSend(batchSendRequest);
     }
 }

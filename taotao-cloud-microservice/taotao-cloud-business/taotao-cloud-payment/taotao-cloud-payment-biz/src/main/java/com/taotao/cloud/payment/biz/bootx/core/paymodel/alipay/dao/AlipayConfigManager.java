@@ -45,10 +45,7 @@ public class AlipayConfigManager extends BaseManager<AlipayConfigMapper, AlipayC
         return lambdaQuery()
                 .select(AlipayConfig.class, MpBigFieldHandler::excludeBigField)
                 .like(StrUtil.isNotBlank(param.getName()), AlipayConfig::getName, param.getName())
-                .like(
-                        StrUtil.isNotBlank(param.getAppId()),
-                        AlipayConfig::getAppId,
-                        param.getAppId())
+                .like(StrUtil.isNotBlank(param.getAppId()), AlipayConfig::getAppId, param.getAppId())
                 .page(mpPage);
     }
 

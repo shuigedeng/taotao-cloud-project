@@ -40,6 +40,5 @@ public interface IOrderItemMapper extends BaseSuperMapper<OrderItem, Long> {
 		FROM tt_order_item AS oi INNER JOIN tt_order AS o ON oi.order_sn=o.sn
 		${ew.customSqlSegment}
 		""")
-    List<OrderItem> waitOperationOrderItem(
-            @Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
+    List<OrderItem> waitOperationOrderItem(@Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
 }

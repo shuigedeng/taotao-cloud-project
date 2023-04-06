@@ -65,10 +65,17 @@ import org.springframework.stereotype.Service;
 public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEngineEntity>
         implements FlowEngineService {
 
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private UserProvider userProvider;
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private FlowEngineVisibleService flowEngineVisibleService;
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private UserProvider userProvider;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private FlowEngineVisibleService flowEngineVisibleService;
 
     @Override
     public IPage<FlowEngineEntity> getPageList(FlowPagination pagination) {
@@ -78,8 +85,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
         engine.setFormType(2);
         engine.setType(1);
         List<FlowEngineEntity> engineEntities = getList(engine);
-        List<String> id =
-                engineEntities.stream().map(FlowEngineEntity::getId).collect(Collectors.toList());
+        List<String> id = engineEntities.stream().map(FlowEngineEntity::getId).collect(Collectors.toList());
         QueryWrapper<FlowEngineEntity> queryWrapper = new QueryWrapper<>();
         if (StrUtil.isNotEmpty(pagination.getKeyword())) {
             flag = true;
@@ -93,15 +99,11 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             queryWrapper.lambda().eq(FlowEngineEntity::getCategory, pagination.getCategory());
         }
         // 排序
-        queryWrapper
-                .lambda()
-                .orderByAsc(FlowEngineEntity::getSortCode)
-                .orderByDesc(FlowEngineEntity::getCreatorTime);
+        queryWrapper.lambda().orderByAsc(FlowEngineEntity::getSortCode).orderByDesc(FlowEngineEntity::getCreatorTime);
         if (flag) {
             queryWrapper.lambda().orderByDesc(FlowEngineEntity::getLastModifyTime);
         }
-        Page<FlowEngineEntity> page =
-                new Page<>(pagination.getCurrentPage(), pagination.getPageSize());
+        Page<FlowEngineEntity> page = new Page<>(pagination.getCurrentPage(), pagination.getPageSize());
         return this.page(page, queryWrapper);
     }
 
@@ -127,10 +129,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             queryWrapper.lambda().eq(FlowEngineEntity::getEnabledMark, pagination.getEnabledMark());
         }
         // 排序
-        queryWrapper
-                .lambda()
-                .orderByAsc(FlowEngineEntity::getSortCode)
-                .orderByDesc(FlowEngineEntity::getCreatorTime);
+        queryWrapper.lambda().orderByAsc(FlowEngineEntity::getSortCode).orderByDesc(FlowEngineEntity::getCreatorTime);
         if (flag) {
             queryWrapper.lambda().orderByDesc(FlowEngineEntity::getLastModifyTime);
         }
@@ -156,10 +155,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
     @Override
     public List<FlowEngineEntity> getList() {
         QueryWrapper<FlowEngineEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper
-                .lambda()
-                .orderByAsc(FlowEngineEntity::getSortCode)
-                .orderByDesc(FlowEngineEntity::getCreatorTime);
+        queryWrapper.lambda().orderByAsc(FlowEngineEntity::getSortCode).orderByDesc(FlowEngineEntity::getCreatorTime);
         return this.list(queryWrapper);
     }
 
@@ -168,12 +164,12 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
         // 定义变量判断是否需要使用修改时间倒序
         boolean flag = false;
         UserInfo userInfo = userProvider.get();
-        List<String> id =
-                flowEngineVisibleService.getVisibleFlowList(userInfo.getUserId()).stream()
-                        .map(FlowEngineVisibleEntity::getFlowId)
-                        .collect(Collectors.toList());
+        List<String> id = flowEngineVisibleService.getVisibleFlowList(userInfo.getUserId()).stream()
+                .map(FlowEngineVisibleEntity::getFlowId)
+                .collect(Collectors.toList());
         List<FlowEngineEntity> flowFormTypeList = getFlowFormTypeList();
-        List<String> formTypeId = flowFormTypeList.stream().map(FlowEngineEntity::getId).toList();
+        List<String> formTypeId =
+                flowFormTypeList.stream().map(FlowEngineEntity::getId).toList();
         id.addAll(formTypeId);
         QueryWrapper<FlowEngineEntity> queryWrapper = new QueryWrapper<>();
         if (id.size() > 0) {
@@ -187,10 +183,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             flag = true;
             queryWrapper.lambda().eq(FlowEngineEntity::getCategory, pagination.getCategory());
         }
-        queryWrapper
-                .lambda()
-                .orderByAsc(FlowEngineEntity::getSortCode)
-                .orderByDesc(FlowEngineEntity::getCreatorTime);
+        queryWrapper.lambda().orderByAsc(FlowEngineEntity::getSortCode).orderByDesc(FlowEngineEntity::getCreatorTime);
         if (flag) {
             queryWrapper.lambda().orderByDesc(FlowEngineEntity::getLastModifyTime);
         }
@@ -211,8 +204,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
                         FlowEngineEntity::getEnabledMark,
                         FlowEngineEntity::getCreatorTime);
         if (isPage) {
-            Page<FlowEngineEntity> page =
-                    new Page<>(pagination.getCurrentPage(), pagination.getPageSize());
+            Page<FlowEngineEntity> page = new Page<>(pagination.getCurrentPage(), pagination.getPageSize());
             IPage<FlowEngineEntity> userPage = this.page(page, queryWrapper);
             return pagination.setData(userPage.getRecords(), page.getTotal());
         } else {
@@ -262,10 +254,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
     @Override
     public FlowEngineEntity getInfoByEnCode(String enCode) throws WorkFlowException {
         QueryWrapper<FlowEngineEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper
-                .lambda()
-                .eq(FlowEngineEntity::getEnCode, enCode)
-                .eq(FlowEngineEntity::getEnabledMark, 1);
+        queryWrapper.lambda().eq(FlowEngineEntity::getEnCode, enCode).eq(FlowEngineEntity::getEnabledMark, 1);
         FlowEngineEntity flowEngineEntity = this.getOne(queryWrapper);
         if (flowEngineEntity == null) {
             throw new WorkFlowException(MsgCode.WF113.get());
@@ -352,8 +341,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
         entity.setVisibleType(visibleList.size() == 0 ? 0 : 1);
         String num = "1";
         FlowEngineEntity info = getInfo(id);
-        BigDecimal b1 =
-                new BigDecimal(StrUtil.isEmpty(info.getVersion()) ? "0" : info.getVersion());
+        BigDecimal b1 = new BigDecimal(StrUtil.isEmpty(info.getVersion()) ? "0" : info.getVersion());
         BigDecimal b2 = new BigDecimal(num);
         entity.setVersion(String.valueOf(b1.add(b2)));
         boolean flag = this.updateById(entity);
@@ -375,8 +363,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
     public void update(String id, FlowEngineEntity entity) throws WorkFlowException {
         String num = "1";
         FlowEngineEntity info = getInfo(id);
-        BigDecimal b1 =
-                new BigDecimal(StrUtil.isEmpty(info.getVersion()) ? "0" : info.getVersion());
+        BigDecimal b1 = new BigDecimal(StrUtil.isEmpty(info.getVersion()) ? "0" : info.getVersion());
         BigDecimal b2 = new BigDecimal(num);
         entity.setVersion(String.valueOf(b1.add(b2)));
         entity.setId(id);
@@ -455,9 +442,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             model.setFullName(entity.getFullName());
             model.setId(entity.getId());
             List<FlowEngineEntity> childList =
-                    dataList.get(entity.getEnCode()) != null
-                            ? dataList.get(entity.getEnCode())
-                            : new ArrayList<>();
+                    dataList.get(entity.getEnCode()) != null ? dataList.get(entity.getEnCode()) : new ArrayList<>();
             model.setNum(childList.size());
             if (childList.size() > 0) {
                 model.setChildren(FlowTaskConvert.INSTANCE.convertComment(childList));
@@ -488,9 +473,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
             }
             // 可见的角色
             List<String> roleList =
-                    properties.getInitiateRole() != null
-                            ? properties.getInitiateRole()
-                            : new ArrayList<>();
+                    properties.getInitiateRole() != null ? properties.getInitiateRole() : new ArrayList<>();
             for (String role : roleList) {
                 FlowEngineVisibleEntity visible = new FlowEngineVisibleEntity();
                 visible.setOperatorId(role);
@@ -504,8 +487,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
     @Override
     public FlowExportModel exportData(String id) throws WorkFlowException {
         FlowEngineEntity entity = getInfo(id);
-        List<FlowEngineVisibleEntity> visibleList =
-                flowEngineVisibleService.getVisibleFlowList(entity.getId());
+        List<FlowEngineVisibleEntity> visibleList = flowEngineVisibleService.getVisibleFlowList(entity.getId());
         FlowExportModel model = new FlowExportModel();
         model.setFlowEngine(entity);
         model.setVisibleList(visibleList);

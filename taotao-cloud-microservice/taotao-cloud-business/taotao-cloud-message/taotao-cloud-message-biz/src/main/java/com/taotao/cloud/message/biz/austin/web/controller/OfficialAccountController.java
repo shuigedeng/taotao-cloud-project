@@ -64,11 +64,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("微信服务号")
 public class OfficialAccountController {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
-    @Autowired private LoginUtils loginUtils;
+    @Autowired
+    private LoginUtils loginUtils;
 
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      * @param id 账号Id
@@ -84,18 +87,15 @@ public class OfficialAccountController {
             List<WxMpTemplate> allPrivateTemplate =
                     wxMpService.getTemplateMsgService().getAllPrivateTemplate();
             for (WxMpTemplate wxMpTemplate : allPrivateTemplate) {
-                CommonAmisVo commonAmisVo =
-                        CommonAmisVo.builder()
-                                .label(wxMpTemplate.getTitle())
-                                .value(wxMpTemplate.getTemplateId())
-                                .build();
+                CommonAmisVo commonAmisVo = CommonAmisVo.builder()
+                        .label(wxMpTemplate.getTitle())
+                        .value(wxMpTemplate.getTemplateId())
+                        .build();
                 result.add(commonAmisVo);
             }
             return result;
         } catch (Exception e) {
-            log.error(
-                    "OfficialAccountController#queryList fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("OfficialAccountController#queryList fail:{}", Throwables.getStackTraceAsString(e));
             throw new CommonException(RespStatusEnum.SERVICE_ERROR);
         }
     }
@@ -117,9 +117,7 @@ public class OfficialAccountController {
                     wxMpService.getTemplateMsgService().getAllPrivateTemplate();
             return Convert4Amis.getWxMpTemplateParam(wxTemplateId, allPrivateTemplate);
         } catch (Exception e) {
-            log.error(
-                    "OfficialAccountController#queryDetailList fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("OfficialAccountController#queryDetailList fail:{}", Throwables.getStackTraceAsString(e));
             throw new CommonException(RespStatusEnum.SERVICE_ERROR);
         }
     }
@@ -157,10 +155,9 @@ public class OfficialAccountController {
                 return RespStatusEnum.CLIENT_BAD_PARAMETERS.getMsg();
             }
 
-            String encryptType =
-                    StrUtil.isBlank(request.getParameter(OfficialAccountParamConstant.ENCRYPT_TYPE))
-                            ? OfficialAccountParamConstant.RAW
-                            : request.getParameter(OfficialAccountParamConstant.ENCRYPT_TYPE);
+            String encryptType = StrUtil.isBlank(request.getParameter(OfficialAccountParamConstant.ENCRYPT_TYPE))
+                    ? OfficialAccountParamConstant.RAW
+                    : request.getParameter(OfficialAccountParamConstant.ENCRYPT_TYPE);
             if (OfficialAccountParamConstant.RAW.equals(encryptType)) {
                 WxMpXmlMessage inMessage = WxMpXmlMessage.fromXml(request.getInputStream());
                 log.info("raw inMessage:{}", JSON.toJSONString(inMessage));
@@ -168,15 +165,9 @@ public class OfficialAccountController {
                         configService.getWxMpMessageRouter().route(inMessage);
                 return outMessage.toXml();
             } else if (OfficialAccountParamConstant.AES.equals(encryptType)) {
-                String msgSignature =
-                        request.getParameter(OfficialAccountParamConstant.MSG_SIGNATURE);
-                WxMpXmlMessage inMessage =
-                        WxMpXmlMessage.fromEncryptedXml(
-                                request.getInputStream(),
-                                configService.getConfig(),
-                                timestamp,
-                                nonce,
-                                msgSignature);
+                String msgSignature = request.getParameter(OfficialAccountParamConstant.MSG_SIGNATURE);
+                WxMpXmlMessage inMessage = WxMpXmlMessage.fromEncryptedXml(
+                        request.getInputStream(), configService.getConfig(), timestamp, nonce, msgSignature);
                 log.info("aes inMessage:{}", JSON.toJSONString(inMessage));
                 WxMpXmlOutMessage outMessage =
                         configService.getWxMpMessageRouter().route(inMessage);
@@ -184,9 +175,7 @@ public class OfficialAccountController {
             }
             return RespStatusEnum.SUCCESS.getMsg();
         } catch (Exception e) {
-            log.error(
-                    "OfficialAccountController#receiptMessage fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("OfficialAccountController#receiptMessage fail:{}", Throwables.getStackTraceAsString(e));
             return RespStatusEnum.SERVICE_ERROR.getMsg();
         }
     }
@@ -206,14 +195,11 @@ public class OfficialAccountController {
             }
             String id = IdUtil.getSnowflake().nextIdStr();
             WxMpService wxMpService = configService.getOfficialAccountLoginService();
-            WxMpQrCodeTicket ticket =
-                    wxMpService.getQrcodeService().qrCodeCreateTmpTicket(id, 2592000);
+            WxMpQrCodeTicket ticket = wxMpService.getQrcodeService().qrCodeCreateTmpTicket(id, 2592000);
             String url = wxMpService.getQrcodeService().qrCodePictureUrl(ticket.getTicket());
             return Convert4Amis.getWxMpQrCode(url, id);
         } catch (Exception e) {
-            log.error(
-                    "OfficialAccountController#getQrCode fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("OfficialAccountController#getQrCode fail:{}", Throwables.getStackTraceAsString(e));
             throw new CommonException(RespStatusEnum.SERVICE_ERROR);
         }
     }
@@ -233,9 +219,7 @@ public class OfficialAccountController {
             }
             return JSON.parseObject(userInfo, (Type) WxMpUser.class);
         } catch (Exception e) {
-            log.error(
-                    "OfficialAccountController#checkLogin fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("OfficialAccountController#checkLogin fail:{}", Throwables.getStackTraceAsString(e));
             return null;
         }
     }
@@ -259,24 +243,24 @@ public class OfficialAccountController {
             String action = "delfan";
 
             String cookie = request.getHeader(Header.COOKIE.getValue());
-            List<String> openIds =
-                    loginUtils
-                            .getLoginConfig()
-                            .getOfficialAccountLoginService()
-                            .getUserService()
-                            .userList(null)
-                            .getOpenids();
+            List<String> openIds = loginUtils
+                    .getLoginConfig()
+                    .getOfficialAccountLoginService()
+                    .getUserService()
+                    .userList(null)
+                    .getOpenids();
             for (String openId : openIds) {
                 Map<String, Object> params = new HashMap<>(4);
                 params.put("openid", openId);
                 params.put("random", RandomUtil.randomDouble());
                 params.put("action", action);
-                HttpUtil.createPost(testUrl).header(Header.COOKIE, cookie).form(params).execute();
+                HttpUtil.createPost(testUrl)
+                        .header(Header.COOKIE, cookie)
+                        .form(params)
+                        .execute();
             }
         } catch (Exception e) {
-            log.error(
-                    "OfficialAccountController#deleteTestUser fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("OfficialAccountController#deleteTestUser fail:{}", Throwables.getStackTraceAsString(e));
         }
     }
 }

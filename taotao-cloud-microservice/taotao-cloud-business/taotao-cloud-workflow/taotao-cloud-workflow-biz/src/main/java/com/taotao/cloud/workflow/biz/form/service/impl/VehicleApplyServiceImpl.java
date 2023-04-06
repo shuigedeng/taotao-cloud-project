@@ -34,8 +34,11 @@ import org.springframework.stereotype.Service;
 public class VehicleApplyServiceImpl extends ServiceImpl<VehicleApplyMapper, VehicleApplyEntity>
         implements VehicleApplyService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public VehicleApplyEntity getInfo(String id) {
@@ -69,8 +72,7 @@ public class VehicleApplyServiceImpl extends ServiceImpl<VehicleApplyMapper, Veh
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, VehicleApplyEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, VehicleApplyEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -97,8 +99,7 @@ public class VehicleApplyServiceImpl extends ServiceImpl<VehicleApplyMapper, Veh
     @Override
     public void data(String id, String data) {
         VehicleApplyForm vehicleApplyForm = JsonUtil.getJsonToBean(data, VehicleApplyForm.class);
-        VehicleApplyEntity entity =
-                JsonUtil.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
+        VehicleApplyEntity entity = JsonUtil.getJsonToBean(vehicleApplyForm, VehicleApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -52,11 +52,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class FlowMsgUtil {
 
-    @Autowired private UserProvider userProvider;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private SentMessageUtil sentMessageUtil;
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private FlowDelegateService flowDelegateService;
+    @Autowired
+    private UserProvider userProvider;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private SentMessageUtil sentMessageUtil;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private FlowDelegateService flowDelegateService;
 
     /**
      * 发送消息
@@ -76,22 +85,19 @@ public class FlowMsgUtil {
         List<FlowTaskNodeEntity> nodeList = flowMsgModel.getNodeList();
         List<FlowTaskOperatorEntity> operatorList = flowMsgModel.getOperatorList();
         List<FlowTaskCirculateEntity> circulateList = flowMsgModel.getCirculateList();
-        FlowTaskNodeEntity startNode =
-                nodeList.stream()
-                        .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
-                        .findFirst()
-                        .orElse(null);
+        FlowTaskNodeEntity startNode = nodeList.stream()
+                .filter(t -> FlowNature.NodeStart.equals(t.getNodeType()))
+                .findFirst()
+                .orElse(null);
         FlowTaskOperatorRecordEntity recordEntity = new FlowTaskOperatorRecordEntity();
         recordEntity.setTaskId(startNode != null ? startNode.getTaskId() : "");
         // 等待
         if (flowMsgModel.isWait()) {
-            ChildNodeList childNode =
-                    JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig taskMsgConfig = properties.getWaitMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap =
-                    operatorList.stream()
-                            .collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
+                    operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
             for (String key : operatorMap.keySet()) {
                 recordEntity.setTaskNodeId(key);
                 List<SentMessageForm> messageList = new ArrayList<>();
@@ -106,8 +112,7 @@ public class FlowMsgUtil {
                 this.setMessageList(messageList, messageModel);
                 messageListAll.addAll(messageList);
                 for (FlowTaskOperatorEntity operator : taskOperatorList) {
-                    List<SentMessageForm> delegationMsg =
-                            this.delegationMsg(operator, messageModel, engine);
+                    List<SentMessageForm> delegationMsg = this.delegationMsg(operator, messageModel, engine);
                     messageListAll.addAll(delegationMsg);
                 }
             }
@@ -115,8 +120,7 @@ public class FlowMsgUtil {
         // 结束
         if (flowMsgModel.isEnd()) {
             // 发起人
-            ChildNodeList childNode =
-                    JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getEndMsgConfig();
             List<SentMessageForm> messageList = new ArrayList<>();
@@ -128,40 +132,35 @@ public class FlowMsgUtil {
             messageModel.setRecordEntity(recordEntity);
             messageModel.setStatus(taskEntity.getStatus());
             messageModel.setFullName(taskEntity.getFullName());
-            List<FlowTaskOperatorEntity> taskOperatorList =
-                    new ArrayList() {
-                        {
-                            FlowTaskOperatorEntity operatorEntity = new FlowTaskOperatorEntity();
-                            operatorEntity.setTaskId(childNode.getTaskId());
-                            operatorEntity.setTaskNodeId(childNode.getTaskNodeId());
-                            operatorEntity.setHandleId(taskEntity.getCreatorUserId());
-                            add(operatorEntity);
-                        }
-                    };
+            List<FlowTaskOperatorEntity> taskOperatorList = new ArrayList() {
+                {
+                    FlowTaskOperatorEntity operatorEntity = new FlowTaskOperatorEntity();
+                    operatorEntity.setTaskId(childNode.getTaskId());
+                    operatorEntity.setTaskNodeId(childNode.getTaskNodeId());
+                    operatorEntity.setHandleId(taskEntity.getCreatorUserId());
+                    add(operatorEntity);
+                }
+            };
             this.messageModel(taskOperatorList, engine, messageModel);
             this.setMessageList(messageList, messageModel);
             messageListAll.addAll(messageList);
         }
         // 同意
         if (flowMsgModel.isApprove()) {
-            ChildNodeList childNode =
-                    JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getApproveMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap =
-                    operatorList.stream()
-                            .collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
+                    operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
             for (String key : operatorMap.keySet()) {
                 recordEntity.setTaskNodeId(key);
                 // 默认获取当前节点
-                FlowTaskNodeEntity taskNode =
-                        nodeList.stream()
-                                .filter(t -> t.getId().equals(key))
-                                .findFirst()
-                                .orElse(null);
+                FlowTaskNodeEntity taskNode = nodeList.stream()
+                        .filter(t -> t.getId().equals(key))
+                        .findFirst()
+                        .orElse(null);
                 ChildNodeList taskChildNode =
-                        JsonUtils.getJsonToBean(
-                                taskNode.getNodePropertyJson(), ChildNodeList.class);
+                        JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getApproveMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -183,24 +182,20 @@ public class FlowMsgUtil {
         }
         // 拒绝
         if (flowMsgModel.isReject()) {
-            ChildNodeList childNode =
-                    JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getRejectMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap =
-                    operatorList.stream()
-                            .collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
+                    operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
             for (String key : operatorMap.keySet()) {
                 recordEntity.setTaskNodeId(key);
                 // 默认获取当前节点
-                FlowTaskNodeEntity taskNode =
-                        nodeList.stream()
-                                .filter(t -> t.getId().equals(key))
-                                .findFirst()
-                                .orElse(null);
+                FlowTaskNodeEntity taskNode = nodeList.stream()
+                        .filter(t -> t.getId().equals(key))
+                        .findFirst()
+                        .orElse(null);
                 ChildNodeList taskChildNode =
-                        JsonUtils.getJsonToBean(
-                                taskNode.getNodePropertyJson(), ChildNodeList.class);
+                        JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getRejectMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -222,24 +217,20 @@ public class FlowMsgUtil {
         }
         // 抄送
         if (flowMsgModel.isCopy()) {
-            ChildNodeList childNode =
-                    JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getCopyMsgConfig();
             Map<String, List<FlowTaskCirculateEntity>> circulateMap =
-                    circulateList.stream()
-                            .collect(Collectors.groupingBy(FlowTaskCirculateEntity::getTaskNodeId));
+                    circulateList.stream().collect(Collectors.groupingBy(FlowTaskCirculateEntity::getTaskNodeId));
             for (String key : circulateMap.keySet()) {
                 recordEntity.setTaskNodeId(key);
                 // 默认获取当前节点
-                FlowTaskNodeEntity taskNode =
-                        nodeList.stream()
-                                .filter(t -> t.getId().equals(key))
-                                .findFirst()
-                                .orElse(null);
+                FlowTaskNodeEntity taskNode = nodeList.stream()
+                        .filter(t -> t.getId().equals(key))
+                        .findFirst()
+                        .orElse(null);
                 ChildNodeList taskChildNode =
-                        JsonUtils.getJsonToBean(
-                                taskNode.getNodePropertyJson(), ChildNodeList.class);
+                        JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getCopyMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -268,24 +259,20 @@ public class FlowMsgUtil {
         }
         // 子流程
         if (flowMsgModel.isLaunch()) {
-            ChildNodeList childNode =
-                    JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
+            ChildNodeList childNode = JsonUtils.getJsonToBean(startNode.getNodePropertyJson(), ChildNodeList.class);
             Properties properties = childNode.getProperties();
             MsgConfig msgConfig = properties.getLaunchMsgConfig();
             Map<String, List<FlowTaskOperatorEntity>> operatorMap =
-                    operatorList.stream()
-                            .collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
+                    operatorList.stream().collect(Collectors.groupingBy(FlowTaskOperatorEntity::getTaskNodeId));
             for (String key : operatorMap.keySet()) {
                 recordEntity.setTaskNodeId(key);
                 // 默认获取当前节点
-                FlowTaskNodeEntity taskNode =
-                        nodeList.stream()
-                                .filter(t -> t.getId().equals(key))
-                                .findFirst()
-                                .orElse(null);
+                FlowTaskNodeEntity taskNode = nodeList.stream()
+                        .filter(t -> t.getId().equals(key))
+                        .findFirst()
+                        .orElse(null);
                 ChildNodeList taskChildNode =
-                        JsonUtils.getJsonToBean(
-                                taskNode.getNodePropertyJson(), ChildNodeList.class);
+                        JsonUtils.getJsonToBean(taskNode.getNodePropertyJson(), ChildNodeList.class);
                 Properties taskProperties = taskChildNode.getProperties();
                 MsgConfig taskMsgConfig = taskProperties.getLaunchMsgConfig();
                 if (taskMsgConfig.getOn() == 2) {
@@ -316,15 +303,14 @@ public class FlowMsgUtil {
             meModel.setStatus(taskEntity.getStatus());
             meModel.setType(FlowMessageEnum.me.getCode());
             meModel.setFullName(taskEntity.getFullName());
-            List<FlowTaskOperatorEntity> meOperatorList =
-                    new ArrayList() {
-                        {
-                            FlowTaskOperatorEntity operatorEntity = new FlowTaskOperatorEntity();
-                            operatorEntity.setTaskId(taskNodeEntity.getTaskId());
-                            operatorEntity.setHandleId(taskEntity.getCreatorUserId());
-                            add(operatorEntity);
-                        }
-                    };
+            List<FlowTaskOperatorEntity> meOperatorList = new ArrayList() {
+                {
+                    FlowTaskOperatorEntity operatorEntity = new FlowTaskOperatorEntity();
+                    operatorEntity.setTaskId(taskNodeEntity.getTaskId());
+                    operatorEntity.setHandleId(taskEntity.getCreatorUserId());
+                    add(operatorEntity);
+                }
+            };
             this.messageModel(meOperatorList, engine, meModel);
             this.setMessageList(messageList, meModel);
             messageListAll.addAll(messageList);
@@ -343,9 +329,7 @@ public class FlowMsgUtil {
      * @param messageModel
      */
     private void messageModel(
-            List<FlowTaskOperatorEntity> taskOperatorList,
-            FlowEngineEntity engine,
-            FlowMessageModel messageModel) {
+            List<FlowTaskOperatorEntity> taskOperatorList, FlowEngineEntity engine, FlowMessageModel messageModel) {
         List<String> userList = new ArrayList<>();
         Map<String, String> contMsg = new HashMap<>();
         for (FlowTaskOperatorEntity taskOperator : taskOperatorList) {
@@ -365,9 +349,7 @@ public class FlowMsgUtil {
      * @return
      */
     private FlowContModel flowMessage(
-            FlowEngineEntity engine,
-            FlowTaskOperatorEntity taskOperator,
-            FlowMessageModel messageModel) {
+            FlowEngineEntity engine, FlowTaskOperatorEntity taskOperator, FlowMessageModel messageModel) {
         FlowContModel contModel = new FlowContModel();
         contModel.setEnCode(engine.getEnCode());
         contModel.setFlowId(engine.getId());
@@ -386,20 +368,15 @@ public class FlowMsgUtil {
      * @param messageList
      * @param flowMessageModel
      */
-    private void setMessageList(
-            List<SentMessageForm> messageList, FlowMessageModel flowMessageModel) {
+    private void setMessageList(List<SentMessageForm> messageList, FlowMessageModel flowMessageModel) {
         Map<String, Object> data = flowMessageModel.getData();
         MsgConfig msgConfig =
-                flowMessageModel.getMsgConfig() != null
-                        ? flowMessageModel.getMsgConfig()
-                        : new MsgConfig();
+                flowMessageModel.getMsgConfig() != null ? flowMessageModel.getMsgConfig() : new MsgConfig();
         List<String> userList = flowMessageModel.getUserList();
         FlowTaskOperatorRecordEntity recordEntity = flowMessageModel.getRecordEntity();
         String templateId = msgConfig.getOn() == 0 ? "0" : msgConfig.getMsgId();
         List<TemplateJsonModel> templateJson =
-                msgConfig.getTemplateJson() != null
-                        ? msgConfig.getTemplateJson()
-                        : new ArrayList<>();
+                msgConfig.getTemplateJson() != null ? msgConfig.getTemplateJson() : new ArrayList<>();
         SentMessageForm messageModel = new SentMessageForm();
         messageModel.setTemplateId(templateId);
         messageModel.setToUserIds(userList);
@@ -407,14 +384,12 @@ public class FlowMsgUtil {
         for (TemplateJsonModel templateJsonModel : templateJson) {
             String fieldId = templateJsonModel.getField();
             String relationField = templateJsonModel.getRelationField();
-            String dataJson =
-                    data.get(relationField) != null ? String.valueOf(data.get(relationField)) : "";
-            FlowEventModel eventModel =
-                    FlowEventModel.builder()
-                            .dataJson(dataJson)
-                            .record(recordEntity)
-                            .relationField(relationField)
-                            .build();
+            String dataJson = data.get(relationField) != null ? String.valueOf(data.get(relationField)) : "";
+            FlowEventModel eventModel = FlowEventModel.builder()
+                    .dataJson(dataJson)
+                    .record(recordEntity)
+                    .relationField(relationField)
+                    .build();
             dataJson = this.data(eventModel);
             parameterMap.put(fieldId, dataJson);
         }
@@ -433,13 +408,12 @@ public class FlowMsgUtil {
         String dataJson = eventModel.getDataJson();
         String userId = userProvider.get().getUserId();
         String value = dataJson;
-        FlowTaskEntity taskEntity =
-                flowTaskService.getInfoSubmit(
-                        record.getTaskId(),
-                        FlowTaskEntity::getFlowId,
-                        FlowTaskEntity::getFlowName,
-                        FlowTaskEntity::getFullName,
-                        FlowTaskEntity::getCreatorUserId);
+        FlowTaskEntity taskEntity = flowTaskService.getInfoSubmit(
+                record.getTaskId(),
+                FlowTaskEntity::getFlowId,
+                FlowTaskEntity::getFlowName,
+                FlowTaskEntity::getFullName,
+                FlowTaskEntity::getCreatorUserId);
         switch (relationField) {
             case "flowFlowId":
                 value = taskEntity.getFlowId();
@@ -458,9 +432,7 @@ public class FlowMsgUtil {
                 break;
             case "flowLaunchUserName":
                 UserEntity createUser =
-                        taskEntity != null
-                                ? serviceUtil.getUserInfo(taskEntity.getCreatorUserId())
-                                : null;
+                        taskEntity != null ? serviceUtil.getUserInfo(taskEntity.getCreatorUserId()) : null;
                 value = createUser != null ? createUser.getRealName() : "";
                 break;
             case "flowFlowOperatorUserId":
@@ -486,10 +458,7 @@ public class FlowMsgUtil {
      * @param record 审批数据
      */
     public void event(
-            Integer status,
-            ChildNodeList childNode,
-            FlowTaskOperatorRecordEntity record,
-            FlowModel flowModel) {
+            Integer status, ChildNodeList childNode, FlowTaskOperatorRecordEntity record, FlowModel flowModel) {
         boolean on = false;
         String interId = "";
         List<TemplateJsonModel> templateJsonModelList = new ArrayList<>();
@@ -531,16 +500,12 @@ public class FlowMsgUtil {
             for (TemplateJsonModel templateJsonModel : templateJsonModelList) {
                 String fieldId = templateJsonModel.getField();
                 String relationField = templateJsonModel.getRelationField();
-                String dataJson =
-                        data.get(relationField) != null
-                                ? String.valueOf(data.get(relationField))
-                                : "";
-                FlowEventModel eventModel =
-                        FlowEventModel.builder()
-                                .dataJson(dataJson)
-                                .record(record)
-                                .relationField(relationField)
-                                .build();
+                String dataJson = data.get(relationField) != null ? String.valueOf(data.get(relationField)) : "";
+                FlowEventModel eventModel = FlowEventModel.builder()
+                        .dataJson(dataJson)
+                        .record(record)
+                        .relationField(relationField)
+                        .build();
                 dataJson = data(eventModel);
                 parameterMap.put(fieldId, "'" + dataJson + "'");
             }
@@ -557,22 +522,16 @@ public class FlowMsgUtil {
      * @return
      */
     private List<SentMessageForm> delegationMsg(
-            FlowTaskOperatorEntity operator,
-            FlowMessageModel messageModel,
-            FlowEngineEntity engine) {
+            FlowTaskOperatorEntity operator, FlowMessageModel messageModel, FlowEngineEntity engine) {
         List<SentMessageForm> messageList = new ArrayList<>();
-        FlowTaskEntity taskEntity =
-                flowTaskService.getInfoSubmit(operator.getTaskId(), FlowTaskEntity::getFlowId);
+        FlowTaskEntity taskEntity = flowTaskService.getInfoSubmit(operator.getTaskId(), FlowTaskEntity::getFlowId);
         List<String> userList =
-                flowDelegateService
-                        .getUser(null, taskEntity.getFlowId(), operator.getHandleId())
-                        .stream()
+                flowDelegateService.getUser(null, taskEntity.getFlowId(), operator.getHandleId()).stream()
                         .map(t -> t.getFTouserid())
                         .collect(Collectors.toList());
         List<FlowTaskOperatorEntity> taskOperatorList = new ArrayList<>();
         for (String user : userList) {
-            FlowTaskOperatorEntity delegaOperator =
-                    JsonUtils.getJsonToBean(operator, FlowTaskOperatorEntity.class);
+            FlowTaskOperatorEntity delegaOperator = JsonUtils.getJsonToBean(operator, FlowTaskOperatorEntity.class);
             delegaOperator.setHandleId(user);
             taskOperatorList.add(delegaOperator);
         }

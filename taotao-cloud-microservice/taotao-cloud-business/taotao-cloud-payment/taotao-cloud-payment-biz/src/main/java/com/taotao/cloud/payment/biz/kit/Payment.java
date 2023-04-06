@@ -43,8 +43,7 @@ public interface Payment {
      * @return {@link Result }<{@link Object }>
      * @since 2022-06-02 14:44:06
      */
-    default Result<Object> h5pay(
-            HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
+    default Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response, PayParam payParam) {
         throw new BusinessException(ResultEnum.PAY_ERROR);
     }
 

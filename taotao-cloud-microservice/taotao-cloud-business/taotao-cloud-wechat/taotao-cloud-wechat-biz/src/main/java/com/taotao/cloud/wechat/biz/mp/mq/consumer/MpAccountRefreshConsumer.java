@@ -30,10 +30,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MpAccountRefreshConsumer
-        extends AbstractChannelMessageListener<MpAccountRefreshMessage> {
+public class MpAccountRefreshConsumer extends AbstractChannelMessageListener<MpAccountRefreshMessage> {
 
-    @Resource private MpAccountService mpAccountService;
+    @Resource
+    private MpAccountService mpAccountService;
 
     @Override
     public void onMessage(MpAccountRefreshMessage message) {

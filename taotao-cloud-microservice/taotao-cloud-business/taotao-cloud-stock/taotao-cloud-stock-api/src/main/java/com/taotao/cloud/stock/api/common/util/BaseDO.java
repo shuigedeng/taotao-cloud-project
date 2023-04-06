@@ -28,7 +28,8 @@ public class BaseDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** id */
-    @TableId private String id;
+    @TableId
+    private String id;
 
     /** 删除标识 */
     private String delFlag;

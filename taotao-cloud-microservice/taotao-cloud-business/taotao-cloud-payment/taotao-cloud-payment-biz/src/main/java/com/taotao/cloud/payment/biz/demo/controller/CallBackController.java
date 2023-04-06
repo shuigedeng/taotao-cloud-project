@@ -34,13 +34,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/callback")
 public class CallBackController {
 
-    @Resource private OrderService orderService;
+    @Resource
+    private OrderService orderService;
 
     @RequestMapping("/notify")
     public String notify(
-            @RequestParam Map<String, String> data,
-            HttpServletRequest request,
-            HttpServletResponse response) {
+            @RequestParam Map<String, String> data, HttpServletRequest request, HttpServletResponse response) {
         try {
 
             System.out.println("接受到支付结果回调");

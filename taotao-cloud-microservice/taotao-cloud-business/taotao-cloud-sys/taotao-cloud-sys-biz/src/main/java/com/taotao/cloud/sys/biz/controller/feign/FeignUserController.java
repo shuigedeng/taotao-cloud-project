@@ -37,8 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @AllArgsConstructor
-public class FeignUserController extends BaseFeignController<IUserService, User, Long>
-        implements IFeignUserApi {
+public class FeignUserController extends BaseFeignController<IUserService, User, Long> implements IFeignUserApi {
 
     private final IFeignUserService feignUserService;
 

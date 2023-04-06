@@ -91,8 +91,7 @@ public class JustAuthConfigController {
     @GetMapping("/query")
     @ApiOperation(value = "查询租户第三方登录功能配置表详情")
     public Result<?> query(QueryJustAuthConfigDTO queryJustAuthConfigDTO) {
-        JustAuthConfigDTO justAuthConfigDTO =
-                justAuthConfigService.queryJustAuthConfig(queryJustAuthConfigDTO);
+        JustAuthConfigDTO justAuthConfigDTO = justAuthConfigService.queryJustAuthConfig(queryJustAuthConfigDTO);
         return Result.success(justAuthConfigDTO);
     }
 
@@ -189,8 +188,7 @@ public class JustAuthConfigController {
                 paramType = "path")
     })
     public Result<?> updateStatus(
-            @PathVariable("justAuthConfigId") Long justAuthConfigId,
-            @PathVariable("status") Integer status) {
+            @PathVariable("justAuthConfigId") Long justAuthConfigId, @PathVariable("status") Integer status) {
 
         if (null == justAuthConfigId || StringUtils.isEmpty(status)) {
             return Result.error("ID和状态不能为空");
@@ -211,15 +209,13 @@ public class JustAuthConfigController {
      */
     @GetMapping("/download")
     @ApiOperation("导出数据")
-    public void download(
-            HttpServletResponse response, QueryJustAuthConfigDTO queryJustAuthConfigDTO)
+    public void download(HttpServletResponse response, QueryJustAuthConfigDTO queryJustAuthConfigDTO)
             throws IOException {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
         String fileName = URLEncoder.encode("租户第三方登录功能配置表数据列表", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader(
-                "Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         List<JustAuthConfigDTO> justAuthConfigList =
                 justAuthConfigService.queryJustAuthConfigList(queryJustAuthConfigDTO);
         List<JustAuthConfigExport> justAuthConfigExportList = new ArrayList<>();
@@ -244,19 +240,15 @@ public class JustAuthConfigController {
     @PostMapping("/upload")
     @ApiOperation("批量上传数据")
     public Result<?> upload(@RequestParam("uploadFile") MultipartFile file) throws IOException {
-        List<JustAuthConfigImport> justAuthConfigImportList =
-                EasyExcel.read(file.getInputStream(), JustAuthConfigImport.class, null)
-                        .sheet()
-                        .doReadSync();
+        List<JustAuthConfigImport> justAuthConfigImportList = EasyExcel.read(
+                        file.getInputStream(), JustAuthConfigImport.class, null)
+                .sheet()
+                .doReadSync();
         if (!CollectionUtils.isEmpty(justAuthConfigImportList)) {
             List<JustAuthConfig> justAuthConfigList = new ArrayList<>();
-            justAuthConfigImportList.stream()
-                    .forEach(
-                            justAuthConfigImport -> {
-                                justAuthConfigList.add(
-                                        BeanCopierUtils.copyByClass(
-                                                justAuthConfigImport, JustAuthConfig.class));
-                            });
+            justAuthConfigImportList.stream().forEach(justAuthConfigImport -> {
+                justAuthConfigList.add(BeanCopierUtils.copyByClass(justAuthConfigImport, JustAuthConfig.class));
+            });
             justAuthConfigService.saveBatch(justAuthConfigList);
         }
         return Result.success();
@@ -275,8 +267,7 @@ public class JustAuthConfigController {
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
         String fileName = URLEncoder.encode("租户第三方登录功能配置表数据导入模板", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader(
-                "Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         String sheetName = "租户第三方登录功能配置表数据列表";
         EasyExcel.write(response.getOutputStream(), JustAuthConfigImport.class)
                 .sheet(sheetName)

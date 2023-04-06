@@ -47,11 +47,14 @@ import org.springframework.stereotype.Service;
 public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStatusChangeEvent {
 
     /** 配置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
     /** 会员 */
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignMemberApi memberApi;
     /** 订单 */
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
 
     /**
      * 非积分订单订单完成后赠送积分
@@ -73,15 +76,13 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
                 }
                 String content = "订单取消，积分返还：" + point + "分";
                 // 赠送会员积分
-                memberApi.updateMemberPoint(
-                        point, PointTypeEnum.INCREASE.name(), order.getMemberId(), content);
+                memberApi.updateMemberPoint(point, PointTypeEnum.INCREASE.name(), order.getMemberId(), content);
             }
             case COMPLETED -> {
                 Order order = orderService.getBySn(orderMessage.orderSn());
                 // 如果是积分订单 则直接返回
                 if (StringUtils.isNotEmpty(order.getOrderPromotionType())
-                        && order.getOrderPromotionType()
-                                .equals(OrderPromotionTypeEnum.POINTS.name())) {
+                        && order.getOrderPromotionType().equals(OrderPromotionTypeEnum.POINTS.name())) {
                     return;
                 }
                 // 获取积分设置
@@ -90,8 +91,7 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
                     return;
                 }
                 // 计算赠送积分数量
-                BigDecimal point =
-                        CurrencyUtils.mul(pointSetting.getConsumer(), order.getFlowPrice(), 0);
+                BigDecimal point = CurrencyUtils.mul(pointSetting.getConsumer(), order.getFlowPrice(), 0);
                 // 赠送会员积分
                 memberApi.updateMemberPoint(
                         point.longValue(),
@@ -114,14 +114,10 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
             // 获取积分设置
             PointSettingVO pointSetting = getPointSetting();
             // 计算扣除积分数量
-            BigDecimal point =
-                    CurrencyUtils.mul(pointSetting.getMoney(), afterSale.getActualRefundPrice(), 0);
+            BigDecimal point = CurrencyUtils.mul(pointSetting.getMoney(), afterSale.getActualRefundPrice(), 0);
             // 扣除会员积分
             memberApi.updateMemberPoint(
-                    point.longValue(),
-                    PointTypeEnum.REDUCE.name(),
-                    afterSale.getMemberId(),
-                    "会员退款，回退积分" + point + "分");
+                    point.longValue(), PointTypeEnum.REDUCE.name(), afterSale.getMemberId(), "会员退款，回退积分" + point + "分");
         }
     }
 

@@ -51,7 +51,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Service
 public class AppApiService implements AppApi {
 
-    @Autowired private AppDataService appDataService;
+    @Autowired
+    private AppDataService appDataService;
 
     /**
      * 常用数据

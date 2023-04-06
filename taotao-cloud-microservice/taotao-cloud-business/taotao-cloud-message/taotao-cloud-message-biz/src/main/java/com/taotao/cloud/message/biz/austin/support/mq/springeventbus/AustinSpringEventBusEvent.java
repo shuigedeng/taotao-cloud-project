@@ -30,8 +30,7 @@ public class AustinSpringEventBusEvent extends ApplicationEvent {
 
     private AustinSpringEventSource austinSpringEventSource;
 
-    public AustinSpringEventBusEvent(
-            Object source, AustinSpringEventSource austinSpringEventSource) {
+    public AustinSpringEventBusEvent(Object source, AustinSpringEventSource austinSpringEventSource) {
         super(source);
         this.austinSpringEventSource = austinSpringEventSource;
     }

@@ -70,12 +70,8 @@ public class XxpayChannelRefundNoticeService extends AbstractChannelRefundNotice
             MchAppConfigContext mchAppConfigContext,
             NoticeTypeEnum noticeTypeEnum) {
         try {
-            XxpayNormalMchParams xxpayParams =
-                    (XxpayNormalMchParams)
-                            configContextQueryService.queryNormalMchParams(
-                                    mchAppConfigContext.getMchNo(),
-                                    mchAppConfigContext.getAppId(),
-                                    getIfCode());
+            XxpayNormalMchParams xxpayParams = (XxpayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                    mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
 
             // 获取请求参数
             JSONObject jsonParams = (JSONObject) params;

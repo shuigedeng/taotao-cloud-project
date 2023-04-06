@@ -46,13 +46,17 @@ public class SeckillPageController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SeckillPageController.class);
 
-    @Autowired private ISeckillService seckillService;
+    @Autowired
+    private ISeckillService seckillService;
 
-    @Autowired private ActiveMQSender activeMQSender;
+    @Autowired
+    private ActiveMQSender activeMQSender;
 
-    @Autowired private RedisUtil redisUtil;
+    @Autowired
+    private RedisUtil redisUtil;
 
-    @Autowired private HttpClient httpClient;
+    @Autowired
+    private HttpClient httpClient;
 
     @Value("${qq.captcha.url}")
     private String url;

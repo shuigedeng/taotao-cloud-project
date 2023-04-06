@@ -73,8 +73,6 @@ public class MemberNoticeLog extends BaseSuperEntity<MemberNoticeLog, Long> {
     private LocalDateTime sendTime;
 
     /** 发送类型,0全站，1指定会员 */
-    @Column(
-            name = "send_type",
-            columnDefinition = "int not null default 0 comment '发送类型,0全站，1指定会员'")
+    @Column(name = "send_type", columnDefinition = "int not null default 0 comment '发送类型,0全站，1指定会员'")
     private Integer sendType;
 }

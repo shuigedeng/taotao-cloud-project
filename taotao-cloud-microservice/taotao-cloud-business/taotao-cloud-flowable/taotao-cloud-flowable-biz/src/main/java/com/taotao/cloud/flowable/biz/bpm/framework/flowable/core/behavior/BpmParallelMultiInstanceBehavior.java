@@ -36,10 +36,10 @@ import org.flowable.engine.impl.bpmn.behavior.ParallelMultiInstanceBehavior;
 @Slf4j
 public class BpmParallelMultiInstanceBehavior extends ParallelMultiInstanceBehavior {
 
-    @Setter private BpmTaskAssignRuleService bpmTaskRuleService;
+    @Setter
+    private BpmTaskAssignRuleService bpmTaskRuleService;
 
-    public BpmParallelMultiInstanceBehavior(
-            Activity activity, AbstractBpmnActivityBehavior innerActivityBehavior) {
+    public BpmParallelMultiInstanceBehavior(Activity activity, AbstractBpmnActivityBehavior innerActivityBehavior) {
         super(activity, innerActivityBehavior);
     }
 
@@ -57,8 +57,7 @@ public class BpmParallelMultiInstanceBehavior extends ParallelMultiInstanceBehav
         // 第一步，设置 collectionVariable 和 CollectionVariable
         // 从  execution.getVariable() 读取所有任务处理人的 key
         super.collectionExpression = null; // collectionExpression 和 collectionVariable 是互斥的
-        super.collectionVariable =
-                FlowableUtils.formatCollectionVariable(execution.getCurrentActivityId());
+        super.collectionVariable = FlowableUtils.formatCollectionVariable(execution.getCurrentActivityId());
         // 从 execution.getVariable() 读取当前所有任务处理的人的 key
         super.collectionElementVariable =
                 FlowableUtils.formatCollectionElementVariable(execution.getCurrentActivityId());

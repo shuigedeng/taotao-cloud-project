@@ -35,13 +35,10 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class KafkaEventListener {
     @Component
-    public static class ConsumerFailedToStartEventListener
-            implements ApplicationListener<ConsumerFailedToStartEvent> {
+    public static class ConsumerFailedToStartEventListener implements ApplicationListener<ConsumerFailedToStartEvent> {
         @Override
         public void onApplicationEvent(ConsumerFailedToStartEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerFailedToStartEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("KafkaEventListener ----- ConsumerFailedToStartEvent onApplicationEvent {}", event);
         }
     }
 
@@ -50,9 +47,7 @@ public class KafkaEventListener {
             implements ApplicationListener<ConsumerPartitionPausedEvent> {
         @Override
         public void onApplicationEvent(ConsumerPartitionPausedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerPartitionPausedEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("KafkaEventListener ----- ConsumerPartitionPausedEvent onApplicationEvent {}", event);
         }
     }
 
@@ -61,70 +56,55 @@ public class KafkaEventListener {
             implements ApplicationListener<ConsumerPartitionResumedEvent> {
         @Override
         public void onApplicationEvent(ConsumerPartitionResumedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerPartitionResumedEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("KafkaEventListener ----- ConsumerPartitionResumedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class ConsumerPausedEventListener
-            implements ApplicationListener<ConsumerPausedEvent> {
+    public static class ConsumerPausedEventListener implements ApplicationListener<ConsumerPausedEvent> {
         @Override
         public void onApplicationEvent(ConsumerPausedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerPausedEvent onApplicationEvent {}", event);
+            LogUtils.info("KafkaEventListener ----- ConsumerPausedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class ConsumerResumedEventListener
-            implements ApplicationListener<ConsumerResumedEvent> {
+    public static class ConsumerResumedEventListener implements ApplicationListener<ConsumerResumedEvent> {
         @Override
         public void onApplicationEvent(ConsumerResumedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerResumedEvent onApplicationEvent {}", event);
+            LogUtils.info("KafkaEventListener ----- ConsumerResumedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class ConsumerStartedEventListener
-            implements ApplicationListener<ConsumerStartedEvent> {
+    public static class ConsumerStartedEventListener implements ApplicationListener<ConsumerStartedEvent> {
         @Override
         public void onApplicationEvent(ConsumerStartedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerStartedEvent onApplicationEvent {}", event);
+            LogUtils.info("KafkaEventListener ----- ConsumerStartedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class ConsumerStoppedEventListener
-            implements ApplicationListener<ConsumerStoppedEvent> {
+    public static class ConsumerStoppedEventListener implements ApplicationListener<ConsumerStoppedEvent> {
         @Override
         public void onApplicationEvent(ConsumerStoppedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ConsumerStoppedEvent onApplicationEvent {}", event);
+            LogUtils.info("KafkaEventListener ----- ConsumerStoppedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class ContainerStoppedEventListener
-            implements ApplicationListener<ContainerStoppedEvent> {
+    public static class ContainerStoppedEventListener implements ApplicationListener<ContainerStoppedEvent> {
         @Override
         public void onApplicationEvent(ContainerStoppedEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ContainerStoppedEvent onApplicationEvent {}", event);
+            LogUtils.info("KafkaEventListener ----- ContainerStoppedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class ListenerContainerIdleEventListener
-            implements ApplicationListener<ListenerContainerIdleEvent> {
+    public static class ListenerContainerIdleEventListener implements ApplicationListener<ListenerContainerIdleEvent> {
         @Override
         public void onApplicationEvent(ListenerContainerIdleEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- ListenerContainerIdleEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("KafkaEventListener ----- ListenerContainerIdleEvent onApplicationEvent {}", event);
         }
     }
 
@@ -134,20 +114,15 @@ public class KafkaEventListener {
         @Override
         public void onApplicationEvent(ListenerContainerPartitionIdleEvent event) {
             LogUtils.info(
-                    "KafkaEventListener ----- ListenerContainerPartitionIdleEvent"
-                            + " onApplicationEvent {}",
-                    event);
+                    "KafkaEventListener ----- ListenerContainerPartitionIdleEvent" + " onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class NonResponsiveConsumerEventListener
-            implements ApplicationListener<NonResponsiveConsumerEvent> {
+    public static class NonResponsiveConsumerEventListener implements ApplicationListener<NonResponsiveConsumerEvent> {
         @Override
         public void onApplicationEvent(NonResponsiveConsumerEvent event) {
-            LogUtils.info(
-                    "KafkaEventListener ----- NonResponsiveConsumerEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("KafkaEventListener ----- NonResponsiveConsumerEvent onApplicationEvent {}", event);
         }
     }
 }

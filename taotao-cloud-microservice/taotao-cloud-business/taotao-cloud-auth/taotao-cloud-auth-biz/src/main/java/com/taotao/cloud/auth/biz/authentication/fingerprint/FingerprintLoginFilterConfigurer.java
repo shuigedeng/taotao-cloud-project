@@ -50,8 +50,7 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         return this;
     }
 
-    public FingerprintLoginFilterConfigurer<H> jwtTokenGenerator(
-            JwtTokenGenerator jwtTokenGenerator) {
+    public FingerprintLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
         this.jwtTokenGenerator = jwtTokenGenerator;
         return this;
     }
@@ -65,10 +64,9 @@ public class FingerprintLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-        FingerprintUserDetailsService fingerprintUserDetailsService =
-                this.fingerprintUserDetailsService != null
-                        ? this.fingerprintUserDetailsService
-                        : getBeanOrNull(applicationContext, FingerprintUserDetailsService.class);
+        FingerprintUserDetailsService fingerprintUserDetailsService = this.fingerprintUserDetailsService != null
+                ? this.fingerprintUserDetailsService
+                : getBeanOrNull(applicationContext, FingerprintUserDetailsService.class);
         Assert.notNull(fingerprintUserDetailsService, "fingerprintUserDetailsService is required");
 
         return new FingerprintAuthenticationProvider(fingerprintUserDetailsService);

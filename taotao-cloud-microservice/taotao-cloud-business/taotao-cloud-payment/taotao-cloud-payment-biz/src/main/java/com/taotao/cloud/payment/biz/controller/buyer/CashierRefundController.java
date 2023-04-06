@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buyer/payment/cashierRefund")
 public class CashierRefundController {
 
-    @Autowired private RefundSupport refundSupport;
+    @Autowired
+    private RefundSupport refundSupport;
 
     @Operation(summary = "退款通知", description = "退款通知")
     @RequestLogger

@@ -46,8 +46,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/mchNotify")
 public class MchNotifyController extends CommonCtrl {
 
-    @Autowired private MchNotifyRecordService mchNotifyService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private MchNotifyRecordService mchNotifyService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @author: pangxiaoyu

@@ -55,8 +55,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/coupon")
 public class CouponManagerController {
 
-    @Autowired private ICouponService couponService;
-    @Autowired private IMemberCouponService memberCouponService;
+    @Autowired
+    private ICouponService couponService;
+
+    @Autowired
+    private IMemberCouponService memberCouponService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -133,8 +136,7 @@ public class CouponManagerController {
     @GetMapping(value = "/member/{id}")
     public Result<IPage<MemberCoupon>> getByPage(@PathVariable String id, PageVO page) {
         QueryWrapper<MemberCoupon> queryWrapper = new QueryWrapper<>();
-        IPage<MemberCoupon> data =
-                memberCouponService.page(PageUtil.initPage(page), queryWrapper.eq("coupon_id", id));
+        IPage<MemberCoupon> data = memberCouponService.page(PageUtil.initPage(page), queryWrapper.eq("coupon_id", id));
         return Result.success(data);
     }
 

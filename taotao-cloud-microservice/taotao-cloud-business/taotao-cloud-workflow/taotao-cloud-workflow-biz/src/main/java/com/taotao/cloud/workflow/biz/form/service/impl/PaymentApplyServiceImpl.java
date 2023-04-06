@@ -34,8 +34,11 @@ import org.springframework.stereotype.Service;
 public class PaymentApplyServiceImpl extends ServiceImpl<PaymentApplyMapper, PaymentApplyEntity>
         implements PaymentApplyService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public PaymentApplyEntity getInfo(String id) {
@@ -69,8 +72,7 @@ public class PaymentApplyServiceImpl extends ServiceImpl<PaymentApplyMapper, Pay
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, PaymentApplyEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, PaymentApplyEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -97,8 +99,7 @@ public class PaymentApplyServiceImpl extends ServiceImpl<PaymentApplyMapper, Pay
     @Override
     public void data(String id, String data) {
         PaymentApplyForm paymentApplyForm = JsonUtil.getJsonToBean(data, PaymentApplyForm.class);
-        PaymentApplyEntity entity =
-                JsonUtil.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
+        PaymentApplyEntity entity = JsonUtil.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

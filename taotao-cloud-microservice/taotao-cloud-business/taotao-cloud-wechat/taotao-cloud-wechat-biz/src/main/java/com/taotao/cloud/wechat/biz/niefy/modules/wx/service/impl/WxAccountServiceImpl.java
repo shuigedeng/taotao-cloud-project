@@ -41,21 +41,19 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 @Service("wxAccountService")
-public class WxAccountServiceImpl extends ServiceImpl<WxAccountMapper, WxAccount>
-        implements WxAccountService {
+public class WxAccountServiceImpl extends ServiceImpl<WxAccountMapper, WxAccount> implements WxAccountService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired WxMpService wxMpService;
+    @Autowired
+    WxMpService wxMpService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String name = (String) params.get("name");
-        IPage<WxAccount> page =
-                this.page(
-                        new Query<WxAccount>().getPage(params),
-                        new QueryWrapper<WxAccount>()
-                                .like(StringUtils.hasText(name), "name", name));
+        IPage<WxAccount> page = this.page(
+                new Query<WxAccount>().getPage(params),
+                new QueryWrapper<WxAccount>().like(StringUtils.hasText(name), "name", name));
 
         return new PageUtils(page);
     }

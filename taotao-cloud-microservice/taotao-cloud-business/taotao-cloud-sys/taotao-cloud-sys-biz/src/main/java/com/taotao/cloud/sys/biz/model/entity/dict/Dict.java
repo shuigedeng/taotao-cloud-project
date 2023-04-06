@@ -67,10 +67,7 @@ public class Dict extends BaseSuperEntity<Dict, Long> {
     private String dictName;
 
     /** 字典编码 */
-    @Column(
-            name = "dict_code",
-            unique = true,
-            columnDefinition = "varchar(255) not null comment '字典编码'")
+    @Column(name = "dict_code", unique = true, columnDefinition = "varchar(255) not null comment '字典编码'")
     private String dictCode;
 
     /** 描述 */

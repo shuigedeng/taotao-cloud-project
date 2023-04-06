@@ -31,10 +31,7 @@ import org.springframework.util.Assert;
 
 public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                MpLoginFilterConfigurer<H>,
-                MpAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, MpLoginFilterConfigurer<H>, MpAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private MpUserDetailsService mpUserDetailsService;
 
@@ -44,8 +41,7 @@ public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         super(securityConfigurer, new MpAuthenticationFilter(), "/login/mp");
     }
 
-    public MpLoginFilterConfigurer<H> mpUserDetailsService(
-            MpUserDetailsService mpUserDetailsService) {
+    public MpLoginFilterConfigurer<H> mpUserDetailsService(MpUserDetailsService mpUserDetailsService) {
         this.mpUserDetailsService = mpUserDetailsService;
         return this;
     }
@@ -64,10 +60,9 @@ public class MpLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-        MpUserDetailsService mpUserDetailsService =
-                this.mpUserDetailsService != null
-                        ? this.mpUserDetailsService
-                        : getBeanOrNull(applicationContext, MpUserDetailsService.class);
+        MpUserDetailsService mpUserDetailsService = this.mpUserDetailsService != null
+                ? this.mpUserDetailsService
+                : getBeanOrNull(applicationContext, MpUserDetailsService.class);
         Assert.notNull(mpUserDetailsService, "mpUserDetailsService is required");
 
         return new MpAuthenticationProvider(mpUserDetailsService);

@@ -40,13 +40,11 @@ public class PppayPayOrderQueryService implements IPayOrderQueryService {
         return CS.IF_CODE.PPPAY;
     }
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
-    public ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
-        return configContextQueryService
-                .getPaypalWrapper(mchAppConfigContext)
-                .processOrder(null, payOrder);
+    public ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
+        return configContextQueryService.getPaypalWrapper(mchAppConfigContext).processOrder(null, payOrder);
     }
 }

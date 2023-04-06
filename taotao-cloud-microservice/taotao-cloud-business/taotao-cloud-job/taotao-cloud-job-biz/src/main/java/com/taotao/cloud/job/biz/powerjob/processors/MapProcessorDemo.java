@@ -31,7 +31,8 @@ import tech.powerjob.worker.core.processor.sdk.MapProcessor;
 @Component
 public class MapProcessorDemo implements MapProcessor {
 
-    @Autowired private MysteryService mysteryService;
+    @Autowired
+    private MysteryService mysteryService;
 
     /** 每一批发送任务大小 */
     private static final int BATCH_SIZE = 100;
@@ -68,10 +69,7 @@ public class MapProcessorDemo implements MapProcessor {
                 if (Thread.interrupted()) {
                     // 任务被中断
                     System.out.println(
-                            "job has been stop! so stop to process subTask:"
-                                    + subTask.getSiteId()
-                                    + "=>"
-                                    + itemId);
+                            "job has been stop! so stop to process subTask:" + subTask.getSiteId() + "=>" + itemId);
                     break;
                 }
                 System.out.println("processing subTask: " + subTask.getSiteId() + "=>" + itemId);
@@ -84,8 +82,7 @@ public class MapProcessorDemo implements MapProcessor {
                 }
             }
             // 测试在 Map 任务中追加上下文
-            context.getWorkflowContext()
-                    .appendData2WfContext("Yasuo", "A sword's poor company for a long road.");
+            context.getWorkflowContext().appendData2WfContext("Yasuo", "A sword's poor company for a long road.");
             boolean b = ThreadLocalRandom.current().nextBoolean();
             return new ProcessResult(b, "RESULT:" + b);
         }

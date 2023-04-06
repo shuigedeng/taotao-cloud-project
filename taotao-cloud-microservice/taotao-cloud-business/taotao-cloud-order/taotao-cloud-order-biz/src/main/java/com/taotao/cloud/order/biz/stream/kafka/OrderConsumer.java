@@ -66,10 +66,7 @@ public class OrderConsumer {
     public static class NoOpBindingMeters {
 
         NoOpBindingMeters(MeterRegistry registry) {
-            registry.config()
-                    .meterFilter(
-                            MeterFilter.denyNameStartsWith(
-                                    KafkaBinderMetrics.OFFSET_LAG_METRIC_NAME));
+            registry.config().meterFilter(MeterFilter.denyNameStartsWith(KafkaBinderMetrics.OFFSET_LAG_METRIC_NAME));
         }
     }
 

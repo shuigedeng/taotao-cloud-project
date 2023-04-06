@@ -53,11 +53,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayOrderDivisionProcessService {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private MchDivisionReceiverService mchDivisionReceiverService;
-    @Autowired private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
-    @Autowired private PayOrderDivisionRecordService payOrderDivisionRecordService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private MchDivisionReceiverService mchDivisionReceiverService;
+
+    @Autowired
+    private MchDivisionReceiverGroupService mchDivisionReceiverGroupService;
+
+    @Autowired
+    private PayOrderDivisionRecordService payOrderDivisionRecordService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /***
      * 处理分账，
@@ -97,12 +106,10 @@ public class PayOrderDivisionProcessService {
         }
 
         // 更新订单为： 分账任务处理中
-        boolean updPayOrder =
-                payOrderService.update(
-                        new LambdaUpdateWrapper<PayOrder>()
-                                .set(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_ING)
-                                .eq(PayOrder::getPayOrderId, payOrderId)
-                                .eq(PayOrder::getDivisionState, payOrder.getDivisionState()));
+        boolean updPayOrder = payOrderService.update(new LambdaUpdateWrapper<PayOrder>()
+                .set(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_ING)
+                .eq(PayOrder::getPayOrderId, payOrderId)
+                .eq(PayOrder::getDivisionState, payOrder.getDivisionState()));
         if (!updPayOrder) {
             log.error("{}, 更新支付订单为分账处理中异常！", logPrefix);
             throw new BizException("更新支付订单为分账处理中异常");
@@ -113,10 +120,8 @@ public class PayOrderDivisionProcessService {
 
         // 重发通知，可直接查库
         if (isResend) {
-            recordList =
-                    payOrderDivisionRecordService.list(
-                            PayOrderDivisionRecord.gw()
-                                    .eq(PayOrderDivisionRecord::getPayOrderId, payOrderId));
+            recordList = payOrderDivisionRecordService.list(
+                    PayOrderDivisionRecord.gw().eq(PayOrderDivisionRecord::getPayOrderId, payOrderId));
         } else {
 
             // 查询&过滤 所有的分账接收对象
@@ -134,8 +139,7 @@ public class PayOrderDivisionProcessService {
 
             // 剩余待分账金额 (用作最后一个分账账号的 计算， 避免出现分账金额超出最大) [结果向下取整 ， 避免出现金额溢出的情况。 ]
             Long subDivisionAmount =
-                    AmountUtil.calPercentageFee(
-                            payOrderDivisionAmount, allDivisionProfit, BigDecimal.ROUND_FLOOR);
+                    AmountUtil.calPercentageFee(payOrderDivisionAmount, allDivisionProfit, BigDecimal.ROUND_FLOOR);
 
             recordList = new ArrayList<>();
 
@@ -146,12 +150,7 @@ public class PayOrderDivisionProcessService {
             for (MchDivisionReceiver receiver : allReceiver) {
 
                 PayOrderDivisionRecord record =
-                        genRecord(
-                                batchOrderId,
-                                payOrder,
-                                receiver,
-                                payOrderDivisionAmount,
-                                subDivisionAmount);
+                        genRecord(batchOrderId, payOrder, receiver, payOrderDivisionAmount, subDivisionAmount);
 
                 // 剩余金额
                 subDivisionAmount = subDivisionAmount - record.getCalDivisionAmount();
@@ -168,18 +167,15 @@ public class PayOrderDivisionProcessService {
 
             // 调用渠道侧分账接口
             IDivisionService divisionService =
-                    SpringBeansUtil.getBean(
-                            payOrder.getIfCode() + "DivisionService", IDivisionService.class);
+                    SpringBeansUtil.getBean(payOrder.getIfCode() + "DivisionService", IDivisionService.class);
             if (divisionService == null) {
                 throw new BizException("通道无此分账接口");
             }
 
-            channelRetMsg =
-                    divisionService.singleDivision(
-                            payOrder,
-                            recordList,
-                            configContextQueryService.queryMchInfoAndAppInfo(
-                                    payOrder.getMchNo(), payOrder.getAppId()));
+            channelRetMsg = divisionService.singleDivision(
+                    payOrder,
+                    recordList,
+                    configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId()));
 
             // 确认分账成功
             if (channelRetMsg.getChannelState() == ChannelRetMsg.ChannelState.CONFIRM_SUCCESS) {
@@ -209,12 +205,11 @@ public class PayOrderDivisionProcessService {
         }
 
         // 更新 支付订单主表状态  分账任务已结束。
-        payOrderService.update(
-                new LambdaUpdateWrapper<PayOrder>()
-                        .set(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_FINISH)
-                        .set(PayOrder::getDivisionLastTime, new Date())
-                        .eq(PayOrder::getPayOrderId, payOrderId)
-                        .eq(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_ING));
+        payOrderService.update(new LambdaUpdateWrapper<PayOrder>()
+                .set(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_FINISH)
+                .set(PayOrder::getDivisionLastTime, new Date())
+                .eq(PayOrder::getPayOrderId, payOrderId)
+                .eq(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_ING));
 
         return channelRetMsg;
     }
@@ -256,8 +251,7 @@ public class PayOrderDivisionProcessService {
 
             // 计算的分账金额
             record.setCalDivisionAmount(
-                    AmountUtil.calPercentageFee(
-                            record.getPayOrderDivisionAmount(), record.getDivisionProfit()));
+                    AmountUtil.calPercentageFee(record.getPayOrderDivisionAmount(), record.getDivisionProfit()));
             if (record.getCalDivisionAmount() > subDivisionAmount) { // 分账金额超过剩余总金额时： 将按照剩余金额进行分账。
                 record.setCalDivisionAmount(subDivisionAmount);
             }
@@ -282,11 +276,9 @@ public class PayOrderDivisionProcessService {
         // 自动分账组的账号
         if (useSysAutoDivisionReceivers == CS.YES) {
 
-            List<MchDivisionReceiverGroup> groups =
-                    mchDivisionReceiverGroupService.list(
-                            MchDivisionReceiverGroup.gw()
-                                    .eq(MchDivisionReceiverGroup::getMchNo, payOrder.getMchNo())
-                                    .eq(MchDivisionReceiverGroup::getAutoDivisionFlag, CS.YES));
+            List<MchDivisionReceiverGroup> groups = mchDivisionReceiverGroupService.list(MchDivisionReceiverGroup.gw()
+                    .eq(MchDivisionReceiverGroup::getMchNo, payOrder.getMchNo())
+                    .eq(MchDivisionReceiverGroup::getAutoDivisionFlag, CS.YES));
 
             if (groups.isEmpty()) {
                 return new ArrayList<>();
@@ -318,21 +310,17 @@ public class PayOrderDivisionProcessService {
         List<MchDivisionReceiver> filterMchReceiver = new ArrayList<>();
 
         for (MchDivisionReceiver mchDivisionReceiver : allMchReceiver) {
-            for (PayOrderDivisionMQ.CustomerDivisionReceiver customerDivisionReceiver :
-                    customerDivisionReceiverList) {
+            for (PayOrderDivisionMQ.CustomerDivisionReceiver customerDivisionReceiver : customerDivisionReceiverList) {
 
                 // 查询匹配相同的项目
-                if (mchDivisionReceiver
-                                .getReceiverId()
-                                .equals(customerDivisionReceiver.getReceiverId())
+                if (mchDivisionReceiver.getReceiverId().equals(customerDivisionReceiver.getReceiverId())
                         || mchDivisionReceiver
                                 .getReceiverGroupId()
                                 .equals(customerDivisionReceiver.getReceiverGroupId())) {
 
                     // 重新对分账比例赋值
                     if (customerDivisionReceiver.getDivisionProfit() != null) {
-                        mchDivisionReceiver.setDivisionProfit(
-                                customerDivisionReceiver.getDivisionProfit());
+                        mchDivisionReceiver.setDivisionProfit(customerDivisionReceiver.getDivisionProfit());
                     }
                     filterMchReceiver.add(mchDivisionReceiver);
                 }

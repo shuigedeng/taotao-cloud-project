@@ -38,7 +38,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnBean(ResetIsvMchAppInfoConfigMQ.IMQReceiver.class)
 public class ResetIsvMchAppInfoActiveMQReceiver implements IMQMsgReceiver {
 
-    @Autowired private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 MQSendTypeEnum.BROADCAST 】 广播类型的消息 * */
     @Override

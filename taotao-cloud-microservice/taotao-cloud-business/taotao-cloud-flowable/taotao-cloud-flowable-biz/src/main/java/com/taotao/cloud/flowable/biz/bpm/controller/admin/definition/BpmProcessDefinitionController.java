@@ -43,7 +43,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class BpmProcessDefinitionController {
 
-    @Resource private BpmProcessDefinitionService bpmDefinitionService;
+    @Resource
+    private BpmProcessDefinitionService bpmDefinitionService;
 
     @GetMapping("/page")
     @ApiOperation(value = "获得流程定义分页")
@@ -63,12 +64,7 @@ public class BpmProcessDefinitionController {
 
     @GetMapping("/get-bpmn-xml")
     @ApiOperation(value = "获得流程定义的 BPMN XML")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = String.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:process-definition:query')")
     public CommonResult<String> getProcessDefinitionBpmnXML(@RequestParam("id") String id) {
         String bpmnXML = bpmDefinitionService.getProcessDefinitionBpmnXML(id);

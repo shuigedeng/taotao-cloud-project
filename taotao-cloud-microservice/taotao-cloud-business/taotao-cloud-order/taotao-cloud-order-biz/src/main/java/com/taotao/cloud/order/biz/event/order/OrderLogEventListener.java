@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderLogEventListener {
 
-    @Autowired private IOrderLogService orderLogService;
+    @Autowired
+    private IOrderLogService orderLogService;
 
     @Async
     @EventListener(OrderLogEvent.class)

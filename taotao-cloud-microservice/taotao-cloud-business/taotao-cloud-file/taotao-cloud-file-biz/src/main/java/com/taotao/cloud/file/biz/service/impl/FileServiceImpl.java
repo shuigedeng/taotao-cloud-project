@@ -48,8 +48,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @since 2020/11/12 17:43
  */
 @Service
-public class FileServiceImpl
-        extends BaseSuperServiceImpl<IFileMapper, File, FileRepository, IFileRepository, Long>
+public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, FileRepository, IFileRepository, Long>
         implements IFileService {
 
     @Autowired(required = false)
@@ -82,26 +81,21 @@ public class FileServiceImpl
         OssInfo ossInfo = standardOssClient.upLoadWithMultipartFile(multipartFile);
 
         // 添加文件
-        File file =
-                File.builder()
-                        .bizType(type)
-                        .type(Optional.of(ossInfo.getUploadFileInfo().getFileType()).get())
-                        .contextType(multipartFile.getContentType())
-                        .ext(FileUtil.getExtension(multipartFile))
-                        .original(multipartFile.getOriginalFilename())
-                        .url(ossInfo.getUrl())
-                        .name(ossInfo.getName())
-                        .length(ossInfo.getLength())
-                        .md5(Optional.of(ossInfo.getUploadFileInfo().getFileMd5()).get())
-                        .build();
+        File file = File.builder()
+                .bizType(type)
+                .type(Optional.of(ossInfo.getUploadFileInfo().getFileType()).get())
+                .contextType(multipartFile.getContentType())
+                .ext(FileUtil.getExtension(multipartFile))
+                .original(multipartFile.getOriginalFilename())
+                .url(ossInfo.getUrl())
+                .name(ossInfo.getName())
+                .length(ossInfo.getLength())
+                .md5(Optional.of(ossInfo.getUploadFileInfo().getFileMd5()).get())
+                .build();
 
         try {
-            file.setCreateTime(
-                    LocalDateTime.parse(
-                            ossInfo.getCreateTime(), DatePattern.NORM_DATETIME_FORMATTER));
-            file.setUpdateTime(
-                    LocalDateTime.parse(
-                            ossInfo.getLastUpdateTime(), DatePattern.NORM_DATETIME_FORMATTER));
+            file.setCreateTime(LocalDateTime.parse(ossInfo.getCreateTime(), DatePattern.NORM_DATETIME_FORMATTER));
+            file.setUpdateTime(LocalDateTime.parse(ossInfo.getLastUpdateTime(), DatePattern.NORM_DATETIME_FORMATTER));
             file.setDataType(FileTypeUtil.getType(multipartFile.getInputStream()));
             file.setCreateBy(SecurityUtils.getCurrentUser().getUserId());
             file.setCreateName(SecurityUtils.getCurrentUser().getUsername());

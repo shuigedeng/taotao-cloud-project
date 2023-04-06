@@ -45,13 +45,11 @@ import org.springframework.util.StringUtils;
  * @author : gengwei.zheng
  * @date : 2022/2/22 17:03
  */
-public final class OAuth2ResourceOwnerPasswordAuthenticationConverter
-        implements AuthenticationConverter {
+public final class OAuth2ResourceOwnerPasswordAuthenticationConverter implements AuthenticationConverter {
 
     private final HttpCryptoProcessor httpCryptoProcessor;
 
-    public OAuth2ResourceOwnerPasswordAuthenticationConverter(
-            HttpCryptoProcessor httpCryptoProcessor) {
+    public OAuth2ResourceOwnerPasswordAuthenticationConverter(HttpCryptoProcessor httpCryptoProcessor) {
         this.httpCryptoProcessor = httpCryptoProcessor;
     }
 
@@ -67,14 +65,11 @@ public final class OAuth2ResourceOwnerPasswordAuthenticationConverter
         MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
 
         // scope (OPTIONAL)
-        String scope =
-                OAuth2EndpointUtils.checkOptionalParameter(parameters, OAuth2ParameterNames.SCOPE);
+        String scope = OAuth2EndpointUtils.checkOptionalParameter(parameters, OAuth2ParameterNames.SCOPE);
 
         Set<String> requestedScopes = null;
         if (StringUtils.hasText(scope)) {
-            requestedScopes =
-                    new HashSet<>(
-                            Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
+            requestedScopes = new HashSet<>(Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
         }
 
         // username (REQUIRED)
@@ -93,16 +88,11 @@ public final class OAuth2ResourceOwnerPasswordAuthenticationConverter
 
         String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
 
-        Map<String, Object> additionalParameters =
-                parameters.entrySet().stream()
-                        .filter(
-                                e ->
-                                        !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE)
-                                                && !e.getKey().equals(OAuth2ParameterNames.SCOPE))
-                        .collect(
-                                Collectors.toMap(
-                                        Map.Entry::getKey,
-                                        e -> parameterDecrypt(e.getValue().get(0), sessionId)));
+        Map<String, Object> additionalParameters = parameters.entrySet().stream()
+                .filter(e -> !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE)
+                        && !e.getKey().equals(OAuth2ParameterNames.SCOPE))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey, e -> parameterDecrypt(e.getValue().get(0), sessionId)));
 
         return new OAuth2ResourceOwnerPasswordAuthenticationToken(
                 clientPrincipal, requestedScopes, additionalParameters);

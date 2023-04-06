@@ -32,10 +32,7 @@ public class BroadcastProcessorDemo implements BroadcastProcessor {
     @Override
     public ProcessResult preProcess(TaskContext context) throws Exception {
         System.out.println("===== BroadcastProcessorDemo#preProcess ======");
-        context.getOmsLogger()
-                .info(
-                        "BroadcastProcessorDemo#preProcess, current host: {}",
-                        NetUtils.getLocalHost());
+        context.getOmsLogger().info("BroadcastProcessorDemo#preProcess, current host: {}", NetUtils.getLocalHost());
         if ("rootFailed".equals(context.getJobParams())) {
             return new ProcessResult(false, "console need failed");
         } else {
@@ -59,8 +56,7 @@ public class BroadcastProcessorDemo implements BroadcastProcessor {
     }
 
     @Override
-    public ProcessResult postProcess(TaskContext context, List<TaskResult> taskResults)
-            throws Exception {
+    public ProcessResult postProcess(TaskContext context, List<TaskResult> taskResults) throws Exception {
         System.out.println("===== BroadcastProcessorDemo#postProcess ======");
         context.getOmsLogger()
                 .info(

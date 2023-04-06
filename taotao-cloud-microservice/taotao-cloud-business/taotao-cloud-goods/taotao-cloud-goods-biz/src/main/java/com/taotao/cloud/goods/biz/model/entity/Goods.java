@@ -121,9 +121,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
     private String original;
 
     /** 店铺分类id */
-    @Column(
-            name = "store_category_path",
-            columnDefinition = "varchar(255) not null comment '店铺分类id'")
+    @Column(name = "store_category_path", columnDefinition = "varchar(255) not null comment '店铺分类id'")
     private String storeCategoryPath;
 
     /** 评论数量 */
@@ -159,9 +157,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
     private String underMessage;
 
     /** 是否自营 */
-    @Column(
-            name = "self_operated",
-            columnDefinition = "boolean not null default false comment '是否自营'")
+    @Column(name = "self_operated", columnDefinition = "boolean not null default false comment '是否自营'")
     private Boolean selfOperated;
 
     /** 商品移动端详情 */
@@ -173,9 +169,7 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
     private String goodsVideo;
 
     /** 是否为推荐商品 */
-    @Column(
-            name = "recommend",
-            columnDefinition = "boolean not null default false comment '是否为推荐商品'")
+    @Column(name = "recommend", columnDefinition = "boolean not null default false comment '是否为推荐商品'")
     private Boolean recommend;
 
     /** 销售模式 */
@@ -218,10 +212,9 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
         }
 
         // 如果立即上架则
-        this.marketEnable =
-                Boolean.TRUE.equals(goodsOperationDTO.getRelease())
-                        ? GoodsStatusEnum.UPPER.name()
-                        : GoodsStatusEnum.DOWN.name();
+        this.marketEnable = Boolean.TRUE.equals(goodsOperationDTO.getRelease())
+                ? GoodsStatusEnum.UPPER.name()
+                : GoodsStatusEnum.DOWN.name();
         this.goodsType = goodsOperationDTO.getGoodsType();
         this.grade = BigDecimal.valueOf(100);
 

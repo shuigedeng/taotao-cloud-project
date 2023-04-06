@@ -42,7 +42,8 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "菜单更新对象")
 public class ResourceUpdateDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "菜单名称", required = true)
     @NotBlank(message = "菜单名称不能超过为空")

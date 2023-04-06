@@ -39,8 +39,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author : gengwei.zheng
  * @date : 2022/7/7 20:58
  */
-public class AuthenticationSuccessListener
-        implements ApplicationListener<AuthenticationSuccessEvent> {
+public class AuthenticationSuccessListener implements ApplicationListener<AuthenticationSuccessEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationSuccessListener.class);
 
@@ -48,8 +47,7 @@ public class AuthenticationSuccessListener
     private final OAuth2ComplianceService complianceService;
 
     public AuthenticationSuccessListener(
-            SignInFailureLimitedStampManager stampManager,
-            OAuth2ComplianceService complianceService) {
+            SignInFailureLimitedStampManager stampManager, OAuth2ComplianceService complianceService) {
         this.stampManager = stampManager;
         this.complianceService = complianceService;
     }
@@ -74,10 +72,8 @@ public class AuthenticationSuccessListener
             String clientId = authenticationToken.getRegisteredClient().getId();
 
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-            if (ObjectUtils.isNotEmpty(requestAttributes)
-                    && requestAttributes instanceof ServletRequestAttributes) {
-                ServletRequestAttributes servletRequestAttributes =
-                        (ServletRequestAttributes) requestAttributes;
+            if (ObjectUtils.isNotEmpty(requestAttributes) && requestAttributes instanceof ServletRequestAttributes) {
+                ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
                 HttpServletRequest request = servletRequestAttributes.getRequest();
 
                 if (ObjectUtils.isNotEmpty(request) && StringUtils.isNotBlank(username)) {

@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "租户id")
 public class MemberPointMessageDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "积分")
     private Long point;

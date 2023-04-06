@@ -27,10 +27,7 @@ public class MpOpenHandleMessageReqVO {
 
     public static final String ENCRYPT_TYPE_AES = "aes";
 
-    @ApiModelProperty(
-            value = "微信加密签名",
-            required = true,
-            example = "490eb57f448b87bd5f20ccef58aa4de46aa1908e")
+    @ApiModelProperty(value = "微信加密签名", required = true, example = "490eb57f448b87bd5f20ccef58aa4de46aa1908e")
     @NotEmpty(message = "微信加密签名不能为空")
     private String signature;
 
@@ -42,18 +39,13 @@ public class MpOpenHandleMessageReqVO {
     @NotEmpty(message = "随机数不能为空")
     private String nonce;
 
-    @ApiModelProperty(
-            value = "粉丝 openid",
-            required = true,
-            example = "oz-Jdtyn-WGm4C4I5Z-nvBMO_ZfY")
+    @ApiModelProperty(value = "粉丝 openid", required = true, example = "oz-Jdtyn-WGm4C4I5Z-nvBMO_ZfY")
     @NotEmpty(message = "粉丝 openid 不能为空")
     private String openid;
 
     @ApiModelProperty(value = "消息加密类型", example = "aes")
     private String encrypt_type;
 
-    @ApiModelProperty(
-            value = "微信签名",
-            example = "QW5kcm9pZCBUaGUgQmFzZTY0IGlzIGEgZ2VuZXJhdGVkIHN0cmluZw==")
+    @ApiModelProperty(value = "微信签名", example = "QW5kcm9pZCBUaGUgQmFzZTY0IGlzIGEgZ2VuZXJhdGVkIHN0cmluZw==")
     private String msg_signature;
 }

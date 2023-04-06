@@ -34,7 +34,10 @@ public enum ApplyStatusEnum {
     IGNORE("3", "忽略"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     ApplyStatusEnum(String code, String info) {

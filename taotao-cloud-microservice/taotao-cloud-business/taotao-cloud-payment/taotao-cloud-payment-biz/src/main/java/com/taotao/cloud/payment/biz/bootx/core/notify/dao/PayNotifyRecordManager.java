@@ -40,18 +40,9 @@ public class PayNotifyRecordManager extends BaseManager<PayNotifyRecordMapper, P
         Page<PayNotifyRecord> mpPage = MpUtil.getMpPage(PageQuery, PayNotifyRecord.class);
         return lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
-                .like(
-                        Objects.nonNull(param.getPaymentId()),
-                        PayNotifyRecord::getPaymentId,
-                        param.getPaymentId())
-                .eq(
-                        Objects.nonNull(param.getPayChannel()),
-                        PayNotifyRecord::getPayChannel,
-                        param.getPayChannel())
-                .eq(
-                        Objects.nonNull(param.getStatus()),
-                        PayNotifyRecord::getStatus,
-                        param.getStatus())
+                .like(Objects.nonNull(param.getPaymentId()), PayNotifyRecord::getPaymentId, param.getPaymentId())
+                .eq(Objects.nonNull(param.getPayChannel()), PayNotifyRecord::getPayChannel, param.getPayChannel())
+                .eq(Objects.nonNull(param.getStatus()), PayNotifyRecord::getStatus, param.getStatus())
                 .page(mpPage);
     }
 }

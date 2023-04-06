@@ -81,8 +81,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSale>
-        implements IAfterSaleService {
+public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSale> implements IAfterSaleService {
 
     /** 订单 */
     private final IOrderService orderService;
@@ -101,8 +100,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 
     @Override
     public IPage<AfterSale> pageQuery(AfterSalePageQuery afterSalePageQuery) {
-        return baseMapper.queryByParams(
-                afterSalePageQuery.buildMpPage(), QueryUtils.queryWrapper(afterSalePageQuery));
+        return baseMapper.queryByParams(afterSalePageQuery.buildMpPage(), QueryUtils.queryWrapper(afterSalePageQuery));
     }
 
     @Override
@@ -125,9 +123,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
         OrderItem orderItem = orderItemService.getBySn(sn);
 
         // 未申请售后订单货物才能进行申请
-        if (!orderItem
-                .getAfterSaleStatus()
-                .equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())) {
+        if (!orderItem.getAfterSaleStatus().equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())) {
             throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
         }
 
@@ -154,8 +150,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
         }
 
         afterSaleApplyVOBuilder.accountType(order.getPaymentMethod());
-        afterSaleApplyVOBuilder.applyRefundPrice(
-                CurrencyUtils.div(orderItem.getFlowPrice(), orderItem.getNum()));
+        afterSaleApplyVOBuilder.applyRefundPrice(CurrencyUtils.div(orderItem.getFlowPrice(), orderItem.getNum()));
         afterSaleApplyVOBuilder.num(orderItem.getNum());
         afterSaleApplyVOBuilder.goodsId(orderItem.getGoodsId());
         afterSaleApplyVOBuilder.goodsName(orderItem.getGoodsName());
@@ -176,14 +171,11 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
         return true;
     }
 
-    @AfterSaleLogPoint(
-            sn = "#afterSaleSn",
-            description = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
+    @AfterSaleLogPoint(sn = "#afterSaleSn", description = "'审核售后:售后编号['+#afterSaleSn+']，'+ #serviceStatus")
     // @SystemLogPoint(description = "售后-审核售后", customerLog = "'审核售后:售后编号['+#afterSaleSn+']，'+
     // #serviceStatus")
     @Override
-    public Boolean review(
-            String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice) {
+    public Boolean review(String afterSaleSn, String serviceStatus, String remark, BigDecimal actualRefundPrice) {
         // 根据售后单号获取售后单
         AfterSale afterSale = OperationalJudgment.judgment(this.getBySn(afterSaleSn));
 
@@ -230,9 +222,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
         return true;
     }
 
-    @AfterSaleLogPoint(
-            sn = "#afterSaleSn",
-            description = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
+    @AfterSaleLogPoint(sn = "#afterSaleSn", description = "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
     // @SystemLogPoint(description = "售后-买家退货,物流填写", customerLog =
     // "'买家退货,物流填写:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']'")
     @Override
@@ -277,9 +267,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
     @Override
     @AfterSaleLogPoint(
             sn = "#afterSaleSn",
-            description =
-                    "'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']"
-                            + ",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
+            description = "'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']"
+                    + ",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
     // @SystemLogPoint(description = "售后-商家收货", customerLog =
     //	"'售后-商家收货:单号['+#afterSaleSn+']，物流单号为['+#logisticsNo+']" +
     //		",处理结果['+serviceStatus='PASS'?'商家收货':'商家拒收'+']'")
@@ -295,8 +284,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
         String pass = "PASS";
         // 判断审核状态
         // 在线支付 则直接进行退款
-        if (pass.equals(serviceStatus)
-                && afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
+        if (pass.equals(serviceStatus) && afterSale.getRefundWay().equals(AfterSaleRefundWayEnum.ORIGINAL.name())) {
             refundSupportApi.refund(afterSale.getSn());
             afterSaleStatusEnum = AfterSaleStatusEnum.COMPLETE;
         } else if (pass.equals(serviceStatus)) {
@@ -317,9 +305,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
     }
 
     @Override
-    @AfterSaleLogPoint(
-            sn = "#afterSaleSn",
-            description = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
+    @AfterSaleLogPoint(sn = "#afterSaleSn", description = "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
     // @SystemLogPoint(description = "售后-平台退款", customerLog =
     // "'售后-平台退款:单号['+#afterSaleSn+']，备注为['+#remark+']'")
     public Boolean refund(String afterSaleSn, String remark) {
@@ -428,8 +414,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
         } else {
             // 单价计算
             BigDecimal utilPrice =
-                    CurrencyUtils.div(
-                            orderItem.getPriceDetailDTO().flowPrice(), orderItem.getNum());
+                    CurrencyUtils.div(orderItem.getPriceDetailDTO().flowPrice(), orderItem.getNum());
             afterSale.setApplyRefundPrice(CurrencyUtils.mul(afterSale.getNum(), utilPrice));
         }
 
@@ -447,18 +432,14 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
     /** 修改OrderItem订单中正在售后的商品数量及OrderItem订单状态 */
     private void updateOrderItemAfterSaleStatus(AfterSale afterSale) {
         // 根据商品skuId及订单sn获取子订单
-        OrderItem orderItem =
-                orderItemService.getOne(
-                        new LambdaQueryWrapper<OrderItem>()
-                                .eq(OrderItem::getOrderSn, afterSale.getOrderSn())
-                                .eq(OrderItem::getSkuId, afterSale.getSkuId()));
-        AfterSaleStatusEnum afterSaleStatusEnum =
-                AfterSaleStatusEnum.valueOf(afterSale.getServiceStatus());
+        OrderItem orderItem = orderItemService.getOne(new LambdaQueryWrapper<OrderItem>()
+                .eq(OrderItem::getOrderSn, afterSale.getOrderSn())
+                .eq(OrderItem::getSkuId, afterSale.getSkuId()));
+        AfterSaleStatusEnum afterSaleStatusEnum = AfterSaleStatusEnum.valueOf(afterSale.getServiceStatus());
 
         switch (afterSaleStatusEnum) {
                 // 判断当前售后的状态---申请中
-            case APPLY -> orderItem.setReturnGoodsNumber(
-                    orderItem.getReturnGoodsNumber() + afterSale.getNum());
+            case APPLY -> orderItem.setReturnGoodsNumber(orderItem.getReturnGoodsNumber() + afterSale.getNum());
                 // 判断当前售后的状态---已拒绝,买家取消售后,卖家终止售后
             case REFUSE, BUYER_CANCEL, SELLER_TERMINATION -> orderItem.setReturnGoodsNumber(
                     orderItem.getReturnGoodsNumber() - afterSale.getNum());
@@ -484,9 +465,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 
         // 未申请售后或部分售后订单货物才能进行申请
         if (!orderItem.getAfterSaleStatus().equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())
-                && !orderItem
-                        .getAfterSaleStatus()
-                        .equals(OrderItemAfterSaleStatusEnum.PART_AFTER_SALE.name())) {
+                && !orderItem.getAfterSaleStatus().equals(OrderItemAfterSaleStatusEnum.PART_AFTER_SALE.name())) {
             throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
         }
 
@@ -508,11 +487,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
             }
             case RETURN_GOODS -> {
                 // 是否为有效状态
-                boolean availableStatus =
-                        CharSequenceUtil.equalsAny(
-                                order.getOrderStatus(),
-                                OrderStatusEnum.DELIVERED.name(),
-                                OrderStatusEnum.COMPLETED.name());
+                boolean availableStatus = CharSequenceUtil.equalsAny(
+                        order.getOrderStatus(), OrderStatusEnum.DELIVERED.name(), OrderStatusEnum.COMPLETED.name());
                 if (!PayStatusEnum.PAID.name().equals(order.getPayStatus()) && availableStatus) {
                     throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
                 }
@@ -529,10 +505,9 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
     private void checkAfterSaleReturnMoneyParam(AfterSaleDTO afterSaleDTO) {
         // 如果为线下支付银行信息不能为空
         if (AfterSaleRefundWayEnum.OFFLINE.name().equals(afterSaleDTO.refundWay())) {
-            boolean emptyBankParam =
-                    CharSequenceUtil.isEmpty(afterSaleDTO.bankDepositName())
-                            || CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountName())
-                            || CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountNumber());
+            boolean emptyBankParam = CharSequenceUtil.isEmpty(afterSaleDTO.bankDepositName())
+                    || CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountName())
+                    || CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountNumber());
             if (emptyBankParam) {
                 throw new BusinessException(ResultEnum.RETURN_MONEY_OFFLINE_BANK_ERROR);
             }
@@ -572,14 +547,10 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
     private void sendAfterSaleMessage(AfterSale afterSale) {
         // 发送售后创建消息
         String destination =
-                rocketmqCustomProperties.getAfterSaleTopic()
-                        + ":"
-                        + AfterSaleTagsEnum.AFTER_SALE_STATUS_CHANGE.name();
+                rocketmqCustomProperties.getAfterSaleTopic() + ":" + AfterSaleTagsEnum.AFTER_SALE_STATUS_CHANGE.name();
         // 发送订单变更mq消息
         rocketMQTemplate.asyncSend(
-                destination,
-                JSONUtil.toJsonStr(afterSale),
-                RocketmqSendCallbackBuilder.commonCallback());
+                destination, JSONUtil.toJsonStr(afterSale), RocketmqSendCallbackBuilder.commonCallback());
     }
 
     /**
@@ -590,62 +561,28 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
      */
     private void updateOrderItemGoodsNumber(OrderItem orderItem, List<AfterSale> afterSaleList) {
         // 根据售后状态获取不是已结束的售后记录
-        List<AfterSale> implementList =
-                afterSaleList.stream()
-                        .filter(
-                                afterSale ->
-                                        afterSale
-                                                        .getServiceStatus()
-                                                        .equals(AfterSaleStatusEnum.APPLY.name())
-                                                || afterSale
-                                                        .getServiceStatus()
-                                                        .equals(AfterSaleStatusEnum.PASS.name())
-                                                || afterSale
-                                                        .getServiceStatus()
-                                                        .equals(
-                                                                AfterSaleStatusEnum.BUYER_RETURN
-                                                                        .name())
-                                                || afterSale
-                                                        .getServiceStatus()
-                                                        .equals(
-                                                                AfterSaleStatusEnum.SELLER_CONFIRM
-                                                                        .name())
-                                                || afterSale
-                                                        .getServiceStatus()
-                                                        .equals(
-                                                                AfterSaleStatusEnum.WAIT_REFUND
-                                                                        .name())
-                                                || afterSale
-                                                        .getServiceStatus()
-                                                        .equals(
-                                                                AfterSaleStatusEnum.COMPLETE
-                                                                        .name()))
-                        .toList();
+        List<AfterSale> implementList = afterSaleList.stream()
+                .filter(afterSale -> afterSale.getServiceStatus().equals(AfterSaleStatusEnum.APPLY.name())
+                        || afterSale.getServiceStatus().equals(AfterSaleStatusEnum.PASS.name())
+                        || afterSale.getServiceStatus().equals(AfterSaleStatusEnum.BUYER_RETURN.name())
+                        || afterSale.getServiceStatus().equals(AfterSaleStatusEnum.SELLER_CONFIRM.name())
+                        || afterSale.getServiceStatus().equals(AfterSaleStatusEnum.WAIT_REFUND.name())
+                        || afterSale.getServiceStatus().equals(AfterSaleStatusEnum.COMPLETE.name()))
+                .toList();
 
         if (!implementList.isEmpty()) {
             // 遍历售后记录获取售后商品数量
-            implementList.forEach(
-                    a ->
-                            orderItem.setReturnGoodsNumber(
-                                    orderItem.getReturnGoodsNumber() + a.getNum()));
+            implementList.forEach(a -> orderItem.setReturnGoodsNumber(orderItem.getReturnGoodsNumber() + a.getNum()));
         }
 
         // 获取已完成售后订单数量
-        List<AfterSale> completeList =
-                afterSaleList.stream()
-                        .filter(
-                                afterSale ->
-                                        afterSale
-                                                .getServiceStatus()
-                                                .equals(AfterSaleStatusEnum.COMPLETE.name()))
-                        .toList();
+        List<AfterSale> completeList = afterSaleList.stream()
+                .filter(afterSale -> afterSale.getServiceStatus().equals(AfterSaleStatusEnum.COMPLETE.name()))
+                .toList();
 
         if (!completeList.isEmpty()) {
             // 遍历售后记录获取已完成售后商品数量
-            completeList.forEach(
-                    a ->
-                            orderItem.setReturnGoodsNumber(
-                                    orderItem.getReturnGoodsNumber() + a.getNum()));
+            completeList.forEach(a -> orderItem.setReturnGoodsNumber(orderItem.getReturnGoodsNumber() + a.getNum()));
         }
     }
 
@@ -664,24 +601,21 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
                 // 通过正在售后商品总数修改订单售后状态
                 if (orderItem.getReturnGoodsNumber().equals(orderItem.getNum())) {
                     // 修改订单的售后状态--已申请
-                    orderItem.setAfterSaleStatus(
-                            OrderItemAfterSaleStatusEnum.ALREADY_APPLIED.name());
+                    orderItem.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.ALREADY_APPLIED.name());
                 } else if (orderItem.getReturnGoodsNumber().equals(0)) {
                     // 修改订单的售后状态--未申请
                     orderItem.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name());
                 } else {
                     // 修改订单的售后状态--部分售后
-                    orderItem.setAfterSaleStatus(
-                            OrderItemAfterSaleStatusEnum.PART_AFTER_SALE.name());
+                    orderItem.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.PART_AFTER_SALE.name());
                 }
             }
             default -> {}
         }
 
-        orderItemService.update(
-                new LambdaUpdateWrapper<OrderItem>()
-                        .eq(OrderItem::getSn, orderItem.getSn())
-                        .set(OrderItem::getAfterSaleStatus, orderItem.getAfterSaleStatus())
-                        .set(OrderItem::getReturnGoodsNumber, orderItem.getReturnGoodsNumber()));
+        orderItemService.update(new LambdaUpdateWrapper<OrderItem>()
+                .eq(OrderItem::getSn, orderItem.getSn())
+                .set(OrderItem::getAfterSaleStatus, orderItem.getAfterSaleStatus())
+                .set(OrderItem::getReturnGoodsNumber, orderItem.getReturnGoodsNumber()));
     }
 }

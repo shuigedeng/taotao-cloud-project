@@ -36,11 +36,7 @@ public class MpMessageSendReqVO {
 
     // ========== 消息内容 ==========
 
-    @ApiModelProperty(
-            value = "消息类型",
-            required = true,
-            example = "text",
-            notes = "TEXT/IMAGE/VOICE/VIDEO/NEWS")
+    @ApiModelProperty(value = "消息类型", required = true, example = "text", notes = "TEXT/IMAGE/VOICE/VIDEO/NEWS")
     @NotEmpty(message = "消息类型不能为空")
     public String type;
 
@@ -48,10 +44,7 @@ public class MpMessageSendReqVO {
     @NotEmpty(message = "消息内容不能为空", groups = TextMessageGroup.class)
     private String content;
 
-    @ApiModelProperty(
-            value = "媒体 ID",
-            required = true,
-            example = "qqc_2Fot30Jse-HDoZmo5RrUDijz2nGUkP")
+    @ApiModelProperty(value = "媒体 ID", required = true, example = "qqc_2Fot30Jse-HDoZmo5RrUDijz2nGUkP")
     @NotEmpty(
             message = "消息内容不能为空",
             groups = {ImageMessageGroup.class, VoiceMessageGroup.class, VideoMessageGroup.class})
@@ -65,10 +58,7 @@ public class MpMessageSendReqVO {
     @NotEmpty(message = "消息描述不能为空", groups = VideoMessageGroup.class)
     private String description;
 
-    @ApiModelProperty(
-            value = "缩略图的媒体 id",
-            required = true,
-            example = "qqc_2Fot30Jse-HDoZmo5RrUDijz2nGUkP")
+    @ApiModelProperty(value = "缩略图的媒体 id", required = true, example = "qqc_2Fot30Jse-HDoZmo5RrUDijz2nGUkP")
     @NotEmpty(message = "缩略图的媒体 id 不能为空", groups = MusicMessageGroup.class)
     private String thumbMediaId;
 
@@ -77,15 +67,9 @@ public class MpMessageSendReqVO {
     @NotNull(message = "图文消息不能为空", groups = NewsMessageGroup.class)
     private List<MpMessageDO.Article> articles;
 
-    @ApiModelProperty(
-            value = "音乐链接",
-            example = "https://www.iocoder.cn/music.mp3",
-            notes = "消息类型为 MUSIC 时")
+    @ApiModelProperty(value = "音乐链接", example = "https://www.iocoder.cn/music.mp3", notes = "消息类型为 MUSIC 时")
     private String musicUrl;
 
-    @ApiModelProperty(
-            value = "高质量音乐链接",
-            example = "https://www.iocoder.cn/music.mp3",
-            notes = "消息类型为 MUSIC 时")
+    @ApiModelProperty(value = "高质量音乐链接", example = "https://www.iocoder.cn/music.mp3", notes = "消息类型为 MUSIC 时")
     private String hqMusicUrl;
 }

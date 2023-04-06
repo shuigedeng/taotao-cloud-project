@@ -52,10 +52,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/mchInfo")
 public class MchInfoController extends CommonCtrl {
 
-    @Autowired private MchInfoService mchInfoService;
-    @Autowired private SysUserService sysUserService;
-    @Autowired private SysUserAuthService sysUserAuthService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private MchInfoService mchInfoService;
+
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private SysUserAuthService sysUserAuthService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @author: pangxiaoyu
@@ -127,8 +134,7 @@ public class MchInfoController extends CommonCtrl {
 
         // 推送mq到目前节点进行更新数据
         mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_INFO, null, mchNo, null));
+                ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_INFO, null, mchNo, null));
         return ApiRes.ok();
     }
 
@@ -155,11 +161,10 @@ public class MchInfoController extends CommonCtrl {
         // 如果商户状态为禁用状态，清除该商户用户登录信息
         if (mchInfo.getState() == CS.NO) {
             sysUserService
-                    .list(
-                            SysUser.gw()
-                                    .select(SysUser::getSysUserId)
-                                    .eq(SysUser::getBelongInfoId, mchNo)
-                                    .eq(SysUser::getSysType, CS.SYS_TYPE.MCH))
+                    .list(SysUser.gw()
+                            .select(SysUser::getSysUserId)
+                            .eq(SysUser::getBelongInfoId, mchNo)
+                            .eq(SysUser::getSysType, CS.SYS_TYPE.MCH))
                     .stream()
                     .forEach(u -> removeCacheUserIdList.add(u.getSysUserId()));
         }
@@ -167,16 +172,14 @@ public class MchInfoController extends CommonCtrl {
         // 判断是否重置密码
         if (getReqParamJSON().getBooleanValue("resetPass")) {
             // 待更新的密码
-            String updatePwd =
-                    getReqParamJSON().getBoolean("defaultPass")
-                            ? CS.DEFAULT_PWD
-                            : Base64.decodeStr(getValStringRequired("confirmPwd"));
+            String updatePwd = getReqParamJSON().getBoolean("defaultPass")
+                    ? CS.DEFAULT_PWD
+                    : Base64.decodeStr(getValStringRequired("confirmPwd"));
             // 获取商户超管
             Long mchAdminUserId = sysUserService.findMchAdminUserId(mchNo);
 
             // 重置超管密码
-            sysUserAuthService.resetAuthInfo(
-                    mchAdminUserId, null, null, updatePwd, CS.SYS_TYPE.MCH);
+            sysUserAuthService.resetAuthInfo(mchAdminUserId, null, null, updatePwd, CS.SYS_TYPE.MCH);
 
             // 删除超管登录信息
             removeCacheUserIdList.add(mchAdminUserId);
@@ -194,8 +197,7 @@ public class MchInfoController extends CommonCtrl {
 
         // 推送mq到目前节点进行更新数据
         mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_INFO, null, mchNo, null));
+                ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_INFO, null, mchNo, null));
 
         return ApiRes.ok();
     }

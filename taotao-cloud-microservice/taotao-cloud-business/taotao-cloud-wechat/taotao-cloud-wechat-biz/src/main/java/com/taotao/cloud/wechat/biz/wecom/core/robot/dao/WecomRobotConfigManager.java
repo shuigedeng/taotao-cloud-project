@@ -48,24 +48,18 @@ public class WecomRobotConfigManager extends BaseManager<WecomRobotConfigMapper,
     }
 
     public boolean existsByCode(String code, Long id) {
-        return lambdaQuery().eq(WecomRobotConfig::getCode, code).ne(MpIdEntity::getId, id).exists();
+        return lambdaQuery()
+                .eq(WecomRobotConfig::getCode, code)
+                .ne(MpIdEntity::getId, id)
+                .exists();
     }
     /** 分页 */
     public Page<WecomRobotConfig> page(PageQuery PageQuery, WecomRobotConfigParam param) {
         Page<WecomRobotConfig> mpPage = MpUtil.getMpPage(PageQuery, WecomRobotConfig.class);
         return lambdaQuery()
-                .like(
-                        StrUtil.isNotBlank(param.getCode()),
-                        WecomRobotConfig::getCode,
-                        param.getCode())
-                .like(
-                        StrUtil.isNotBlank(param.getName()),
-                        WecomRobotConfig::getCode,
-                        param.getName())
-                .like(
-                        StrUtil.isNotBlank(param.getWebhookKey()),
-                        WecomRobotConfig::getWebhookKey,
-                        param.getWebhookKey())
+                .like(StrUtil.isNotBlank(param.getCode()), WecomRobotConfig::getCode, param.getCode())
+                .like(StrUtil.isNotBlank(param.getName()), WecomRobotConfig::getCode, param.getName())
+                .like(StrUtil.isNotBlank(param.getWebhookKey()), WecomRobotConfig::getWebhookKey, param.getWebhookKey())
                 .orderByDesc(MpIdEntity::getId)
                 .page(mpPage);
     }

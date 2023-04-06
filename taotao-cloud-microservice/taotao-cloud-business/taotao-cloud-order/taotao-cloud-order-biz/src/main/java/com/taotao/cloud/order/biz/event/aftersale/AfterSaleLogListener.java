@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AfterSaleLogListener {
 
-    @Autowired private IAfterSaleLogService afterSaleLogService;
+    @Autowired
+    private IAfterSaleLogService afterSaleLogService;
 
     @Async
     @EventListener(AfterSaleLogEvent.class)

@@ -28,28 +28,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegisterApplicationServiceImpl implements RegisterApplicationService {
 
-    @Autowired private CaptchaRepository captchaRepository;
+    @Autowired
+    private CaptchaRepository captchaRepository;
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Autowired private TenantRepository tenantRepository;
+    @Autowired
+    private TenantRepository tenantRepository;
 
-    @Autowired private RoleRepository roleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
-    @Autowired private PermissionRepository permissionRepository;
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     @Override
     public void registerTenant(RegisterTenantCommand registerTenantCommand) {
-        CaptchaValidateService captchaValidateService =
-                new CaptchaValidateService(captchaRepository);
+        CaptchaValidateService captchaValidateService = new CaptchaValidateService(captchaRepository);
         if (!captchaValidateService.validate(
-                new Uuid(registerTenantCommand.getUuid()),
-                new CaptchaCode(registerTenantCommand.getCaptcha()))) {
+                new Uuid(registerTenantCommand.getUuid()), new CaptchaCode(registerTenantCommand.getCaptcha()))) {
             throw new RuntimeException("验证码不正确");
         }
         TenantRegisterService tenantRegisterService =
-                new TenantRegisterService(
-                        tenantRepository, roleRepository, permissionRepository, userRepository);
+                new TenantRegisterService(tenantRepository, roleRepository, permissionRepository, userRepository);
         tenantRegisterService.registerTenant(
                 new TenantName(registerTenantCommand.getTenantName()),
                 new TenantCode(registerTenantCommand.getTenantCode()),

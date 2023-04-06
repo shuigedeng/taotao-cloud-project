@@ -35,30 +35,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 手机号码+短信 登录 */
-public class PhoneAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class PhoneAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final PhoneUserDetailsService phoneUserDetailsService;
     private final PhoneService phoneService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public PhoneAuthenticationProvider(
-            PhoneUserDetailsService phoneUserDetailsService, PhoneService phoneService) {
+    public PhoneAuthenticationProvider(PhoneUserDetailsService phoneUserDetailsService, PhoneService phoneService) {
         this.phoneUserDetailsService = phoneUserDetailsService;
         this.phoneService = phoneService;
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 PhoneAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "CaptchaAuthenticationProvider.onlySupports",
-                                "Only CaptchaAuthenticationToken is supported"));
+                () -> messages.getMessage(
+                        "CaptchaAuthenticationProvider.onlySupports", "Only CaptchaAuthenticationToken is supported"));
 
         PhoneAuthenticationToken unAuthenticationToken = (PhoneAuthenticationToken) authentication;
 
@@ -100,11 +95,9 @@ public class PhoneAuthenticationProvider
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
 
         String type = "";
         String captcha = "";
@@ -113,8 +106,7 @@ public class PhoneAuthenticationProvider
             captcha = (String) accountAuthenticationToken.getCredentials();
         }
 
-        PhoneAuthenticationToken authenticationToken =
-                new PhoneAuthenticationToken(user, captcha, type, authorities);
+        PhoneAuthenticationToken authenticationToken = new PhoneAuthenticationToken(user, captcha, type, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

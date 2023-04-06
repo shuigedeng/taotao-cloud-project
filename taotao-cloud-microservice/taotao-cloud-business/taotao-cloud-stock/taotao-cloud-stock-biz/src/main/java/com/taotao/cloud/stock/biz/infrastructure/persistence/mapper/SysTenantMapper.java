@@ -36,6 +36,5 @@ public interface SysTenantMapper extends BaseSuperMapper<SysTenantDO> {
      * @param params
      * @return
      */
-    IPage<SysTenantDO> queryPage(
-            IPage<SysTenantDO> page, @Param("params") Map<String, Object> params);
+    IPage<SysTenantDO> queryPage(IPage<SysTenantDO> page, @Param("params") Map<String, Object> params);
 }

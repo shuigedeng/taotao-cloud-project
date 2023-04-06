@@ -35,8 +35,7 @@ import org.springframework.stereotype.Component;
 public class EmailDisruptorHandler implements DisruptorHandler<DisruptorBindEvent> {
 
     @Override
-    public void doHandler(DisruptorBindEvent event, HandlerChain<DisruptorBindEvent> handlerChain)
-            throws Exception {
+    public void doHandler(DisruptorBindEvent event, HandlerChain<DisruptorBindEvent> handlerChain) throws Exception {
         LogUtils.info(event.toString());
     }
 }

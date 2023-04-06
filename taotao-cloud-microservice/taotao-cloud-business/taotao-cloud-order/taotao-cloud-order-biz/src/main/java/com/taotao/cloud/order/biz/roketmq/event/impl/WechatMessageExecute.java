@@ -35,7 +35,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class WechatMessageExecute implements OrderStatusChangeEvent, TradeEvent {
 
-    @Autowired private WechatMessageUtil wechatMessageUtil;
+    @Autowired
+    private WechatMessageUtil wechatMessageUtil;
 
     @Override
     public void orderCreate(TradeDTO tradeDTO) {

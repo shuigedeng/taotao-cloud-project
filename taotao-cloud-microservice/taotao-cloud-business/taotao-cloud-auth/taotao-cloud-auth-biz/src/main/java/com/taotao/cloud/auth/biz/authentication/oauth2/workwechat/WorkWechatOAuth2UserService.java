@@ -59,13 +59,11 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author felord.cn
  * @since 2021 /8/12 17:45
  */
-public class WorkWechatOAuth2UserService
-        implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
     private static final String MISSING_CODE_ERROR = "missing_code_attribute";
-    private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE =
-            "invalid_user_info_response";
+    private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE = "invalid_user_info_response";
     private static final ParameterizedTypeReference<WorkWechatOAuth2User> OAUTH2_USER_OBJECT =
             new ParameterizedTypeReference<WorkWechatOAuth2User>() {};
     private final RestOperations restOperations;
@@ -73,38 +71,32 @@ public class WorkWechatOAuth2UserService
     /** Instantiates a new Wechat o auth 2 user service. */
     public WorkWechatOAuth2UserService() {
         RestTemplate restTemplate =
-                new RestTemplate(
-                        Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
+                new RestTemplate(Collections.singletonList(new WechatOAuth2UserHttpMessageConverter()));
         restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
         this.restOperations = restTemplate;
     }
 
     @Override
-    public WorkWechatOAuth2User loadUser(OAuth2UserRequest userRequest)
-            throws OAuth2AuthenticationException {
+    public WorkWechatOAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         ClientRegistration clientRegistration = userRequest.getClientRegistration();
         String registrationId = clientRegistration.getRegistrationId();
         Assert.notNull(userRequest, "userRequest cannot be null");
         if (!StringUtils.hasText(
                 clientRegistration.getProviderDetails().getUserInfoEndpoint().getUri())) {
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(
-                            MISSING_USER_INFO_URI_ERROR_CODE,
-                            "Missing required UserInfo Uri in UserInfoEndpoint for Client"
-                                    + " Registration: "
-                                    + registrationId,
-                            null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    MISSING_USER_INFO_URI_ERROR_CODE,
+                    "Missing required UserInfo Uri in UserInfoEndpoint for Client" + " Registration: " + registrationId,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
         String code = (String) userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE);
         if (!StringUtils.hasText(code)) {
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(
-                            MISSING_CODE_ERROR,
-                            "Missing required \"code\" attribute in UserInfoEndpoint for Client"
-                                    + " Registration: "
-                                    + registrationId,
-                            null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    MISSING_CODE_ERROR,
+                    "Missing required \"code\" attribute in UserInfoEndpoint for Client"
+                            + " Registration: "
+                            + registrationId,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
         return getResponse(userRequest).getBody();
@@ -118,12 +110,11 @@ public class WorkWechatOAuth2UserService
      * @return response
      */
     private ResponseEntity<WorkWechatOAuth2User> getResponse(OAuth2UserRequest userRequest) {
-        String userInfoUri =
-                userRequest
-                        .getClientRegistration()
-                        .getProviderDetails()
-                        .getUserInfoEndpoint()
-                        .getUri();
+        String userInfoUri = userRequest
+                .getClientRegistration()
+                .getProviderDetails()
+                .getUserInfoEndpoint()
+                .getUri();
         try {
             LinkedMultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
 
@@ -132,17 +123,14 @@ public class WorkWechatOAuth2UserService
                     userRequest.getAccessToken().getTokenValue());
             queryParams.add(
                     OAuth2ParameterNames.CODE,
-                    String.valueOf(
-                            userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE)));
+                    String.valueOf(userRequest.getAdditionalParameters().get(OAuth2ParameterNames.CODE)));
 
-            URI userInfoEndpoint =
-                    UriComponentsBuilder.fromUriString(userInfoUri)
-                            .queryParams(queryParams)
-                            .build()
-                            .toUri();
+            URI userInfoEndpoint = UriComponentsBuilder.fromUriString(userInfoUri)
+                    .queryParams(queryParams)
+                    .build()
+                    .toUri();
 
-            return this.restOperations.exchange(
-                    userInfoEndpoint, HttpMethod.GET, null, OAUTH2_USER_OBJECT);
+            return this.restOperations.exchange(userInfoEndpoint, HttpMethod.GET, null, OAUTH2_USER_OBJECT);
 
         } catch (OAuth2AuthorizationException ex) {
             OAuth2Error oauth2Error = ex.getError();
@@ -154,37 +142,31 @@ public class WorkWechatOAuth2UserService
                 errorDetails.append(", Error Description: ").append(oauth2Error.getDescription());
             }
             errorDetails.append("]");
-            oauth2Error =
-                    new OAuth2Error(
-                            INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-                            "An error occurred while attempting to retrieve the UserInfo Resource: "
-                                    + errorDetails,
-                            null);
+            oauth2Error = new OAuth2Error(
+                    INVALID_USER_INFO_RESPONSE_ERROR_CODE,
+                    "An error occurred while attempting to retrieve the UserInfo Resource: " + errorDetails,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         } catch (UnknownContentTypeException ex) {
-            String errorMessage =
-                    "An error occurred while attempting to retrieve the UserInfo Resource from '"
-                            + userInfoUri
-                            + "': response contains invalid content type '"
-                            + ex.getContentType()
-                            + "'. The UserInfo Response should return a JSON object (content type"
-                            + " 'application/json') that contains a collection of name and value"
-                            + " pairs of the claims about the authenticated End-User. Please ensure"
-                            + " the UserInfo Uri in UserInfoEndpoint for Client Registration '"
-                            + userRequest.getClientRegistration().getRegistrationId()
-                            + "' conforms to the UserInfo Endpoint, as defined in OpenID Connect"
-                            + " 1.0:"
-                            + " 'https://openid.net/specs/openid-connect-core-1_0.html#UserInfo'";
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE, errorMessage, null);
+            String errorMessage = "An error occurred while attempting to retrieve the UserInfo Resource from '"
+                    + userInfoUri
+                    + "': response contains invalid content type '"
+                    + ex.getContentType()
+                    + "'. The UserInfo Response should return a JSON object (content type"
+                    + " 'application/json') that contains a collection of name and value"
+                    + " pairs of the claims about the authenticated End-User. Please ensure"
+                    + " the UserInfo Uri in UserInfoEndpoint for Client Registration '"
+                    + userRequest.getClientRegistration().getRegistrationId()
+                    + "' conforms to the UserInfo Endpoint, as defined in OpenID Connect"
+                    + " 1.0:"
+                    + " 'https://openid.net/specs/openid-connect-core-1_0.html#UserInfo'";
+            OAuth2Error oauth2Error = new OAuth2Error(INVALID_USER_INFO_RESPONSE_ERROR_CODE, errorMessage, null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         } catch (RestClientException ex) {
-            OAuth2Error oauth2Error =
-                    new OAuth2Error(
-                            INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-                            "An error occurred while attempting to retrieve the UserInfo Resource: "
-                                    + ex.getMessage(),
-                            null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    INVALID_USER_INFO_RESPONSE_ERROR_CODE,
+                    "An error occurred while attempting to retrieve the UserInfo Resource: " + ex.getMessage(),
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString(), ex);
         }
     }
@@ -218,21 +200,18 @@ public class WorkWechatOAuth2UserService
                 // gh-6463: Parse parameter values as Object in order to handle potential JSON
                 // Object and then convert values to String
                 return (WorkWechatOAuth2User)
-                        this.jsonMessageConverter.read(
-                                OAUTH2_USER_OBJECT.getType(), null, inputMessage);
+                        this.jsonMessageConverter.read(OAUTH2_USER_OBJECT.getType(), null, inputMessage);
 
             } catch (Exception ex) {
                 throw new HttpMessageNotReadableException(
-                        "An error occurred reading the OAuth 2.0 Access Token Response: "
-                                + ex.getMessage(),
+                        "An error occurred reading the OAuth 2.0 Access Token Response: " + ex.getMessage(),
                         ex,
                         inputMessage);
             }
         }
 
         @Override
-        protected void writeInternal(
-                WorkWechatOAuth2User tokenResponse, HttpOutputMessage outputMessage)
+        protected void writeInternal(WorkWechatOAuth2User tokenResponse, HttpOutputMessage outputMessage)
                 throws HttpMessageNotWritableException {
             // noop
         }
@@ -247,11 +226,8 @@ public class WorkWechatOAuth2UserService
 
             static {
                 ClassLoader classLoader = HttpMessageConverters.class.getClassLoader();
-                jackson2Present =
-                        ClassUtils.isPresent(
-                                        "com.fasterxml.jackson.databind.ObjectMapper", classLoader)
-                                && ClassUtils.isPresent(
-                                        "com.fasterxml.jackson.core.JsonGenerator", classLoader);
+                jackson2Present = ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper", classLoader)
+                        && ClassUtils.isPresent("com.fasterxml.jackson.core.JsonGenerator", classLoader);
                 gsonPresent = ClassUtils.isPresent("com.google.gson.Gson", classLoader);
                 jsonbPresent = ClassUtils.isPresent("javax.json.bind.Jsonb", classLoader);
             }

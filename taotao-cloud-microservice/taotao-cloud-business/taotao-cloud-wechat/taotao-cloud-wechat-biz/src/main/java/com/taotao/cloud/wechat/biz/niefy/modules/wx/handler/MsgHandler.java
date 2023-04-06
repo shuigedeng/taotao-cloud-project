@@ -37,8 +37,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MsgHandler extends AbstractHandler {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired MsgReplyService msgReplyService;
-    @Autowired WxMsgService wxMsgService;
+
+    @Autowired
+    MsgReplyService msgReplyService;
+
+    @Autowired
+    WxMsgService wxMsgService;
+
     private static final String TRANSFER_CUSTOMER_SERVICE_KEY = "人工";
 
     @Override
@@ -54,9 +59,7 @@ public class MsgHandler extends AbstractHandler {
         boolean autoReplyed = msgReplyService.tryAutoReply(appid, false, fromUser, textContent);
         // 当用户输入关键词如“你好”，“客服”等，并且有客服在线时，把消息转发给在线客服
         if (TRANSFER_CUSTOMER_SERVICE_KEY.equals(textContent) || !autoReplyed) {
-            wxMsgService.addWxMsg(
-                    WxMsg.buildOutMsg(
-                            WxConsts.KefuMsgType.TRANSFER_CUSTOMER_SERVICE, fromUser, null));
+            wxMsgService.addWxMsg(WxMsg.buildOutMsg(WxConsts.KefuMsgType.TRANSFER_CUSTOMER_SERVICE, fromUser, null));
             return WxMpXmlOutMessage.TRANSFER_CUSTOMER_SERVICE()
                     .fromUser(wxMessage.getToUser())
                     .toUser(fromUser)

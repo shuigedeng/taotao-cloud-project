@@ -89,8 +89,7 @@ public class WalletController {
 
     @Operation(summary = "分页")
     @GetMapping("/pageByNotWallet")
-    public ResResult<PageResult<UserInfoDto>> pageByNotWallet(
-            PageQuery PageQuery, UserInfoParam param) {
+    public ResResult<PageResult<UserInfoDto>> pageByNotWallet(PageQuery PageQuery, UserInfoParam param) {
         return Res.ok(walletQueryService.pageByNotWallet(PageQuery, param));
     }
 

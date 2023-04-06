@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LoginUtils {
 
-    @Autowired private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Value("${spring.profiles.active}")
     private String env;
@@ -59,10 +60,8 @@ public class LoginUtils {
      */
     public boolean needLogin() {
         try {
-            WeChatLoginConfig bean =
-                    applicationContext.getBean(
-                            OfficialAccountParamConstant.WE_CHAT_LOGIN_CONFIG,
-                            WeChatLoginConfig.class);
+            WeChatLoginConfig bean = applicationContext.getBean(
+                    OfficialAccountParamConstant.WE_CHAT_LOGIN_CONFIG, WeChatLoginConfig.class);
             if (CommonConstant.ENV_TEST.equals(env) && Objects.nonNull(bean)) {
                 return true;
             }

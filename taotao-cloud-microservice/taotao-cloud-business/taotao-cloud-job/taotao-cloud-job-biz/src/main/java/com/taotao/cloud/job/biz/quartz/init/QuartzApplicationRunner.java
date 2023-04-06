@@ -30,7 +30,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuartzApplicationRunner implements ApplicationRunner {
 
-    @Resource private QuartzJobService quartzJobService;
+    @Resource
+    private QuartzJobService quartzJobService;
 
     private final Logger logger = LoggerFactory.getLogger(QuartzApplicationRunner.class);
 

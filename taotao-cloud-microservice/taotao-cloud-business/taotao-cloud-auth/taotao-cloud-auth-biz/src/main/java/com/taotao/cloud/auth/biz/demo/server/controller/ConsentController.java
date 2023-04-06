@@ -92,13 +92,11 @@ public class ConsentController {
         OAuth2AuthorizationConsent currentAuthorizationConsent =
                 this.authorizationConsentService.findById(clientId, principal.getName());
         // 当前Client下用户已经授权的scope
-        Set<String> authorizedScopes =
-                Optional.ofNullable(currentAuthorizationConsent)
-                        .map(OAuth2AuthorizationConsent::getScopes)
-                        .orElse(Collections.emptySet());
+        Set<String> authorizedScopes = Optional.ofNullable(currentAuthorizationConsent)
+                .map(OAuth2AuthorizationConsent::getScopes)
+                .orElse(Collections.emptySet());
         // 遍历请求的scope，提取之前已授权过 和 待授权的scope
-        for (String requestedScope :
-                StringUtils.delimitedListToStringArray(scope, SymbolConstants.SPACE)) {
+        for (String requestedScope : StringUtils.delimitedListToStringArray(scope, SymbolConstants.SPACE)) {
             if (authorizedScopes.contains(requestedScope)) {
                 previouslyApprovedScopes.add(requestedScope);
             } else if (!OidcScopes.OPENID.equals(requestedScope)) {
@@ -121,9 +119,7 @@ public class ConsentController {
         List<OAuth2Scope> scopes = scopeService.findAll();
         if (CollectionUtils.isNotEmpty(scopes)) {
             if (MapUtils.isEmpty(dictionaries) || scopes.size() != dictionaries.size()) {
-                dictionaries =
-                        scopes.stream()
-                                .collect(Collectors.toMap(OAuth2Scope::getScopeCode, item -> item));
+                dictionaries = scopes.stream().collect(Collectors.toMap(OAuth2Scope::getScopeCode, item -> item));
             }
         }
     }

@@ -33,11 +33,11 @@ import org.springframework.stereotype.Service;
 
 /** 流程经办记录 */
 @Service
-public class FlowTaskOperatorServiceImpl
-        extends ServiceImpl<FlowTaskOperatorMapper, FlowTaskOperatorEntity>
+public class FlowTaskOperatorServiceImpl extends ServiceImpl<FlowTaskOperatorMapper, FlowTaskOperatorEntity>
         implements FlowTaskOperatorService {
 
-    @Autowired private FlowDelegateService flowDelegateService;
+    @Autowired
+    private FlowDelegateService flowDelegateService;
 
     @Override
     public List<FlowTaskOperatorEntity> getList(String taskId) {
@@ -105,9 +105,7 @@ public class FlowTaskOperatorServiceImpl
             UpdateWrapper<FlowTaskOperatorEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().eq(FlowTaskOperatorEntity::getTaskNodeId, taskNodeId);
             updateWrapper.lambda().in(FlowTaskOperatorEntity::getHandleId, userId);
-            updateWrapper
-                    .lambda()
-                    .set(FlowTaskOperatorEntity::getCompletion, FlowNature.AuditCompletion);
+            updateWrapper.lambda().set(FlowTaskOperatorEntity::getCompletion, FlowNature.AuditCompletion);
             this.update(updateWrapper);
         }
     }
@@ -117,9 +115,7 @@ public class FlowTaskOperatorServiceImpl
         UpdateWrapper<FlowTaskOperatorEntity> updateWrapper = new UpdateWrapper<>();
         updateWrapper.lambda().eq(FlowTaskOperatorEntity::getTaskNodeId, taskNodeId);
         updateWrapper.lambda().eq(FlowTaskOperatorEntity::getType, type);
-        updateWrapper
-                .lambda()
-                .set(FlowTaskOperatorEntity::getCompletion, FlowNature.AuditCompletion);
+        updateWrapper.lambda().set(FlowTaskOperatorEntity::getCompletion, FlowNature.AuditCompletion);
         this.update(updateWrapper);
     }
 
@@ -127,9 +123,7 @@ public class FlowTaskOperatorServiceImpl
     public void update(String taskId) {
         UpdateWrapper<FlowTaskOperatorEntity> updateWrapper = new UpdateWrapper<>();
         updateWrapper.lambda().eq(FlowTaskOperatorEntity::getTaskId, taskId);
-        updateWrapper
-                .lambda()
-                .set(FlowTaskOperatorEntity::getState, FlowNodeEnum.Futility.getCode());
+        updateWrapper.lambda().set(FlowTaskOperatorEntity::getState, FlowNodeEnum.Futility.getCode());
         this.update(updateWrapper);
     }
 
@@ -150,9 +144,7 @@ public class FlowTaskOperatorServiceImpl
             UpdateWrapper<FlowTaskOperatorEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().eq(FlowTaskOperatorEntity::getTaskId, taskId);
             updateWrapper.lambda().in(FlowTaskOperatorEntity::getTaskNodeId, taskNodeId);
-            updateWrapper
-                    .lambda()
-                    .set(FlowTaskOperatorEntity::getState, FlowNodeEnum.Futility.getCode());
+            updateWrapper.lambda().set(FlowTaskOperatorEntity::getState, FlowNodeEnum.Futility.getCode());
             this.update(updateWrapper);
         }
     }
@@ -179,12 +171,8 @@ public class FlowTaskOperatorServiceImpl
         if (idAll.size() > 0) {
             UpdateWrapper<FlowTaskOperatorEntity> queryWrapper = new UpdateWrapper<>();
             queryWrapper.lambda().in(FlowTaskOperatorEntity::getId, idAll);
-            queryWrapper
-                    .lambda()
-                    .set(FlowTaskOperatorEntity::getState, FlowNodeEnum.Futility.getCode());
-            queryWrapper
-                    .lambda()
-                    .set(FlowTaskOperatorEntity::getCompletion, FlowNature.RejectCompletion);
+            queryWrapper.lambda().set(FlowTaskOperatorEntity::getState, FlowNodeEnum.Futility.getCode());
+            queryWrapper.lambda().set(FlowTaskOperatorEntity::getCompletion, FlowNature.RejectCompletion);
             this.update(queryWrapper);
         }
     }
@@ -192,16 +180,13 @@ public class FlowTaskOperatorServiceImpl
     @Override
     public List<FlowTaskOperatorEntity> getBatchList() {
         UserInfo userInfo = userProvider.get();
-        List<String> userList =
-                flowDelegateService.getUser(userInfo.getUserId()).stream()
-                        .map(FlowDelegateEntity::getCreatorUserId)
-                        .collect(Collectors.toList());
+        List<String> userList = flowDelegateService.getUser(userInfo.getUserId()).stream()
+                .map(FlowDelegateEntity::getCreatorUserId)
+                .collect(Collectors.toList());
         userList.add(userInfo.getUserId());
         QueryWrapper<FlowTaskOperatorEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().in(FlowTaskOperatorEntity::getHandleId, userList);
-        queryWrapper
-                .lambda()
-                .eq(FlowTaskOperatorEntity::getCompletion, FlowNature.ProcessCompletion);
+        queryWrapper.lambda().eq(FlowTaskOperatorEntity::getCompletion, FlowNature.ProcessCompletion);
         queryWrapper.lambda().eq(FlowTaskOperatorEntity::getState, FlowNature.ProcessCompletion);
         queryWrapper.lambda().select(FlowTaskOperatorEntity::getTaskId);
         return list(queryWrapper);

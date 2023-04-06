@@ -33,7 +33,8 @@ import lombok.Setter;
 @Schema(description = "售后搜索参数")
 public class StorePageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     // 结算单ID
     private String id;

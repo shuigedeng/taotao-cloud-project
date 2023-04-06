@@ -32,41 +32,36 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
  * @author : gengwei.zheng
  * @date : 2022/10/15 11:58
  */
-public class HerodotusOidcUserInfoMapper
-        implements Function<OidcUserInfoAuthenticationContext, OidcUserInfo> {
+public class HerodotusOidcUserInfoMapper implements Function<OidcUserInfoAuthenticationContext, OidcUserInfo> {
 
     private static final List<String> EMAIL_CLAIMS =
             Arrays.asList(StandardClaimNames.EMAIL, StandardClaimNames.EMAIL_VERIFIED);
     private static final List<String> PHONE_CLAIMS =
-            Arrays.asList(
-                    StandardClaimNames.PHONE_NUMBER, StandardClaimNames.PHONE_NUMBER_VERIFIED);
-    private static final List<String> PROFILE_CLAIMS =
-            Arrays.asList(
-                    StandardClaimNames.NAME,
-                    StandardClaimNames.FAMILY_NAME,
-                    StandardClaimNames.GIVEN_NAME,
-                    StandardClaimNames.MIDDLE_NAME,
-                    StandardClaimNames.NICKNAME,
-                    StandardClaimNames.PREFERRED_USERNAME,
-                    StandardClaimNames.PROFILE,
-                    StandardClaimNames.PICTURE,
-                    StandardClaimNames.WEBSITE,
-                    StandardClaimNames.GENDER,
-                    StandardClaimNames.BIRTHDATE,
-                    StandardClaimNames.ZONEINFO,
-                    StandardClaimNames.LOCALE,
-                    StandardClaimNames.UPDATED_AT);
+            Arrays.asList(StandardClaimNames.PHONE_NUMBER, StandardClaimNames.PHONE_NUMBER_VERIFIED);
+    private static final List<String> PROFILE_CLAIMS = Arrays.asList(
+            StandardClaimNames.NAME,
+            StandardClaimNames.FAMILY_NAME,
+            StandardClaimNames.GIVEN_NAME,
+            StandardClaimNames.MIDDLE_NAME,
+            StandardClaimNames.NICKNAME,
+            StandardClaimNames.PREFERRED_USERNAME,
+            StandardClaimNames.PROFILE,
+            StandardClaimNames.PICTURE,
+            StandardClaimNames.WEBSITE,
+            StandardClaimNames.GENDER,
+            StandardClaimNames.BIRTHDATE,
+            StandardClaimNames.ZONEINFO,
+            StandardClaimNames.LOCALE,
+            StandardClaimNames.UPDATED_AT);
 
     @Override
     public OidcUserInfo apply(OidcUserInfoAuthenticationContext authenticationContext) {
         OidcUserInfoAuthenticationToken authentication = authenticationContext.getAuthentication();
         if (authentication.getPrincipal() instanceof BearerTokenAuthentication) {
-            BearerTokenAuthentication principal =
-                    (BearerTokenAuthentication) authentication.getPrincipal();
+            BearerTokenAuthentication principal = (BearerTokenAuthentication) authentication.getPrincipal();
             return new OidcUserInfo(getClaims(principal.getTokenAttributes()));
         } else {
-            JwtAuthenticationToken principal =
-                    (JwtAuthenticationToken) authentication.getPrincipal();
+            JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
             return new OidcUserInfo(getClaims(principal.getToken().getClaims()));
         }
     }

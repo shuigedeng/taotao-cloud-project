@@ -51,8 +51,7 @@ public class BuyerDictController extends BaseBusinessController<IDictService, Di
     @NotAuth
     @GetMapping("/add/{type}")
     @ApiOperation(value = "通过code查询所有字典列表", notes = "通过code查询所有字典列表")
-    public Result<Boolean> add(@PathVariable String type)
-            throws SQLIntegrityConstraintViolationException {
+    public Result<Boolean> add(@PathVariable String type) throws SQLIntegrityConstraintViolationException {
         Boolean result = service().add(type);
         return success(result);
     }

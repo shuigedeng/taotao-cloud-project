@@ -30,9 +30,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class BaseHandler implements Handler {
 
-    @Autowired private HandlerHolder handlerHolder;
-    @Autowired private LogUtils logUtils;
-    @Autowired private FlowControlFactory flowControlFactory;
+    @Autowired
+    private HandlerHolder handlerHolder;
+
+    @Autowired
+    private LogUtils logUtils;
+
+    @Autowired
+    private FlowControlFactory flowControlFactory;
 
     /** 标识渠道的Code 子类初始化的时候指定 */
     protected Integer channelCode;
@@ -62,20 +67,18 @@ public abstract class BaseHandler implements Handler {
     public void doHandler(TaskInfo taskInfo) {
         flowControl(taskInfo);
         if (handler(taskInfo)) {
-            logUtils.print(
-                    AnchorInfo.builder()
-                            .state(AnchorState.SEND_SUCCESS.getCode())
-                            .businessId(taskInfo.getBusinessId())
-                            .ids(taskInfo.getReceiver())
-                            .build());
+            logUtils.print(AnchorInfo.builder()
+                    .state(AnchorState.SEND_SUCCESS.getCode())
+                    .businessId(taskInfo.getBusinessId())
+                    .ids(taskInfo.getReceiver())
+                    .build());
             return;
         }
-        logUtils.print(
-                AnchorInfo.builder()
-                        .state(AnchorState.SEND_FAIL.getCode())
-                        .businessId(taskInfo.getBusinessId())
-                        .ids(taskInfo.getReceiver())
-                        .build());
+        logUtils.print(AnchorInfo.builder()
+                .state(AnchorState.SEND_FAIL.getCode())
+                .businessId(taskInfo.getBusinessId())
+                .ids(taskInfo.getReceiver())
+                .build());
     }
 
     /**

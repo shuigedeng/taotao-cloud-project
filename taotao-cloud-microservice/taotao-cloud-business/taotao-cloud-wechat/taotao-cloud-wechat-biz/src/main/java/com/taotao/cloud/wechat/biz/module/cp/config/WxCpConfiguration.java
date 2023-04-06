@@ -90,25 +90,21 @@ public class WxCpConfiguration {
 
     @PostConstruct
     public void initServices() {
-        cpServices =
-                this.properties.getAppConfigs().stream()
-                        .map(
-                                a -> {
-                                    val configStorage = new WxCpDefaultConfigImpl();
-                                    configStorage.setCorpId(this.properties.getCorpId());
-                                    configStorage.setAgentId(a.getAgentId());
-                                    configStorage.setCorpSecret(a.getSecret());
-                                    configStorage.setToken(a.getToken());
-                                    configStorage.setAesKey(a.getAesKey());
-                                    val service = new WxCpServiceImpl();
-                                    service.setWxCpConfigStorage(configStorage);
-                                    routers.put(a.getAgentId(), this.newRouter(service));
-                                    return service;
-                                })
-                        .collect(
-                                Collectors.toMap(
-                                        service -> service.getWxCpConfigStorage().getAgentId(),
-                                        a -> a));
+        cpServices = this.properties.getAppConfigs().stream()
+                .map(a -> {
+                    val configStorage = new WxCpDefaultConfigImpl();
+                    configStorage.setCorpId(this.properties.getCorpId());
+                    configStorage.setAgentId(a.getAgentId());
+                    configStorage.setCorpSecret(a.getSecret());
+                    configStorage.setToken(a.getToken());
+                    configStorage.setAesKey(a.getAesKey());
+                    val service = new WxCpServiceImpl();
+                    service.setWxCpConfigStorage(configStorage);
+                    routers.put(a.getAgentId(), this.newRouter(service));
+                    return service;
+                })
+                .collect(Collectors.toMap(
+                        service -> service.getWxCpConfigStorage().getAgentId(), a -> a));
     }
 
     private WxCpMessageRouter newRouter(WxCpService wxCpService) {

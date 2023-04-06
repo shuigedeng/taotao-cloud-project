@@ -64,8 +64,7 @@ public interface MpMessageConvert {
             })
     MpMessageDO convert(WxMpXmlMessage bean);
 
-    default MpMessageDO convert(
-            MpMessageSendOutReqBO sendReqBO, MpAccountDO account, MpUserDO user) {
+    default MpMessageDO convert(MpMessageSendOutReqBO sendReqBO, MpAccountDO account, MpUserDO user) {
         // 构建消息
         MpMessageDO message = new MpMessageDO();
         message.setType(sendReqBO.getType());
@@ -119,23 +118,21 @@ public interface MpMessageConvert {
                 builder = WxMpXmlOutMessage.VOICE().mediaId(message.getMediaId());
                 break;
             case WxConsts.XmlMsgType.VIDEO:
-                builder =
-                        WxMpXmlOutMessage.VIDEO()
-                                .mediaId(message.getMediaId())
-                                .title(message.getTitle())
-                                .description(message.getDescription());
+                builder = WxMpXmlOutMessage.VIDEO()
+                        .mediaId(message.getMediaId())
+                        .title(message.getTitle())
+                        .description(message.getDescription());
                 break;
             case WxConsts.XmlMsgType.NEWS:
                 builder = WxMpXmlOutMessage.NEWS().articles(convertList02(message.getArticles()));
                 break;
             case WxConsts.XmlMsgType.MUSIC:
-                builder =
-                        WxMpXmlOutMessage.MUSIC()
-                                .title(message.getTitle())
-                                .description(message.getDescription())
-                                .musicUrl(message.getMusicUrl())
-                                .hqMusicUrl(message.getHqMusicUrl())
-                                .thumbMediaId(message.getThumbMediaId());
+                builder = WxMpXmlOutMessage.MUSIC()
+                        .title(message.getTitle())
+                        .description(message.getDescription())
+                        .musicUrl(message.getMusicUrl())
+                        .hqMusicUrl(message.getHqMusicUrl())
+                        .thumbMediaId(message.getThumbMediaId());
                 break;
             default:
                 throw new IllegalArgumentException("不支持的消息类型：" + message.getType());
@@ -162,23 +159,21 @@ public interface MpMessageConvert {
                 builder = WxMpKefuMessage.VOICE().mediaId(sendReqVO.getMediaId());
                 break;
             case WxConsts.KefuMsgType.VIDEO:
-                builder =
-                        WxMpKefuMessage.VIDEO()
-                                .mediaId(sendReqVO.getMediaId())
-                                .title(sendReqVO.getTitle())
-                                .description(sendReqVO.getDescription());
+                builder = WxMpKefuMessage.VIDEO()
+                        .mediaId(sendReqVO.getMediaId())
+                        .title(sendReqVO.getTitle())
+                        .description(sendReqVO.getDescription());
                 break;
             case WxConsts.KefuMsgType.NEWS:
                 builder = WxMpKefuMessage.NEWS().articles(convertList03(sendReqVO.getArticles()));
                 break;
             case WxConsts.KefuMsgType.MUSIC:
-                builder =
-                        WxMpKefuMessage.MUSIC()
-                                .title(sendReqVO.getTitle())
-                                .description(sendReqVO.getDescription())
-                                .thumbMediaId(sendReqVO.getThumbMediaId())
-                                .musicUrl(sendReqVO.getMusicUrl())
-                                .hqMusicUrl(sendReqVO.getHqMusicUrl());
+                builder = WxMpKefuMessage.MUSIC()
+                        .title(sendReqVO.getTitle())
+                        .description(sendReqVO.getDescription())
+                        .thumbMediaId(sendReqVO.getThumbMediaId())
+                        .musicUrl(sendReqVO.getMusicUrl())
+                        .hqMusicUrl(sendReqVO.getHqMusicUrl());
                 break;
             default:
                 throw new IllegalArgumentException("不支持的消息类型：" + sendReqVO.getType());

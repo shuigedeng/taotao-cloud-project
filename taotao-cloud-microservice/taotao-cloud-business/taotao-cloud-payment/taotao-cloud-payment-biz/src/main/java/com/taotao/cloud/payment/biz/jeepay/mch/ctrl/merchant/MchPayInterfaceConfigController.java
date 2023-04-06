@@ -55,11 +55,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/mch/payConfigs")
 public class MchPayInterfaceConfigController extends CommonCtrl {
 
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
-    @Autowired private MchInfoService mchInfoService;
-    @Autowired private MchAppService mchAppService;
-    @Autowired private SysConfigService sysConfigService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
+
+    @Autowired
+    private MchInfoService mchInfoService;
+
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @Author: ZhuXiao @Description: 查询商户支付接口配置列表 @Date: 10:51 2021/5/13
@@ -69,8 +78,7 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     public ApiRes list() {
         MchInfo mchInfo = mchInfoService.getById(getCurrentUser().getSysUser().getBelongInfoId());
         List<PayInterfaceDefine> list =
-                payInterfaceConfigService.selectAllPayIfConfigListByAppId(
-                        getValStringRequired("appId"));
+                payInterfaceConfigService.selectAllPayIfConfigListByAppId(getValStringRequired("appId"));
 
         for (PayInterfaceDefine define : list) {
             define.addExt(
@@ -90,15 +98,13 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     @PreAuthorize("hasAuthority('ENT_MCH_PAY_CONFIG_VIEW')")
     @GetMapping("/{appId}/{ifCode}")
     public ApiRes getByMchNo(
-            @PathVariable(value = "appId") String appId,
-            @PathVariable(value = "ifCode") String ifCode) {
+            @PathVariable(value = "appId") String appId, @PathVariable(value = "ifCode") String ifCode) {
         PayInterfaceConfig payInterfaceConfig =
                 payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_MCH_APP, appId, ifCode);
         if (payInterfaceConfig != null) {
             // 费率转换为百分比数值
             if (payInterfaceConfig.getIfRate() != null) {
-                payInterfaceConfig.setIfRate(
-                        payInterfaceConfig.getIfRate().multiply(new BigDecimal("100")));
+                payInterfaceConfig.setIfRate(payInterfaceConfig.getIfRate().multiply(new BigDecimal("100")));
             }
 
             // 敏感数据脱敏
@@ -108,9 +114,7 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
                 // 普通商户的支付参数执行数据脱敏
                 if (mchInfo.getType() == CS.MCH_TYPE_NORMAL) {
                     NormalMchParams mchParams =
-                            NormalMchParams.factory(
-                                    payInterfaceConfig.getIfCode(),
-                                    payInterfaceConfig.getIfParams());
+                            NormalMchParams.factory(payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams());
                     if (mchParams != null) {
                         payInterfaceConfig.setIfParams(mchParams.deSenData());
                     }
@@ -138,9 +142,7 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
         // 存入真实费率
         if (payInterfaceConfig.getIfRate() != null) {
             payInterfaceConfig.setIfRate(
-                    payInterfaceConfig
-                            .getIfRate()
-                            .divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
+                    payInterfaceConfig.getIfRate().divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
         }
 
         // 添加更新者信息
@@ -151,15 +153,13 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
 
         // 根据 商户号、接口类型 获取商户参数配置
         PayInterfaceConfig dbRecoed =
-                payInterfaceConfigService.getByInfoIdAndIfCode(
-                        CS.INFO_TYPE_MCH_APP, infoId, ifCode);
+                payInterfaceConfigService.getByInfoIdAndIfCode(CS.INFO_TYPE_MCH_APP, infoId, ifCode);
         // 若配置存在，为saveOrUpdate添加ID，第一次配置添加创建者
         if (dbRecoed != null) {
             payInterfaceConfig.setId(dbRecoed.getId());
 
             // 合并支付参数
-            payInterfaceConfig.setIfParams(
-                    StringKit.marge(dbRecoed.getIfParams(), payInterfaceConfig.getIfParams()));
+            payInterfaceConfig.setIfParams(StringKit.marge(dbRecoed.getIfParams(), payInterfaceConfig.getIfParams()));
         } else {
             payInterfaceConfig.setCreatedUid(userId);
             payInterfaceConfig.setCreatedBy(realName);
@@ -169,12 +169,8 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
         if (!result) {
             throw new BizException("配置失败");
         }
-        mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
-                        null,
-                        getCurrentMchNo(),
-                        infoId));
+        mqSender.send(ResetIsvMchAppInfoConfigMQ.build(
+                ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, getCurrentMchNo(), infoId));
 
         return ApiRes.ok();
     }
@@ -191,8 +187,7 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
 
         MchInfo mchInfo = mchInfoService.getById(mchApp.getMchNo());
         DBApplicationConfig dbApplicationConfig = sysConfigService.getDBApplicationConfig();
-        String authUrl =
-                dbApplicationConfig.genAlipayIsvsubMchAuthUrl(mchInfo.getIsvNo(), mchAppId);
+        String authUrl = dbApplicationConfig.genAlipayIsvsubMchAuthUrl(mchInfo.getIsvNo(), mchAppId);
         String authQrImgUrl = dbApplicationConfig.genScanImgUrl(authUrl);
 
         JSONObject result = new JSONObject();
@@ -207,9 +202,7 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     public ApiRes getIfCodeByAppId(@PathVariable("appId") String appId) {
 
         if (mchAppService.count(
-                        MchApp.gw()
-                                .eq(MchApp::getMchNo, getCurrentMchNo())
-                                .eq(MchApp::getAppId, appId))
+                        MchApp.gw().eq(MchApp::getMchNo, getCurrentMchNo()).eq(MchApp::getAppId, appId))
                 <= 0) {
             throw new BizException("商户应用不存在");
         }
@@ -217,12 +210,11 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
         Set<String> result = new HashSet<>();
 
         payInterfaceConfigService
-                .list(
-                        PayInterfaceConfig.gw()
-                                .select(PayInterfaceConfig::getIfCode)
-                                .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
-                                .eq(PayInterfaceConfig::getInfoId, appId)
-                                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP))
+                .list(PayInterfaceConfig.gw()
+                        .select(PayInterfaceConfig::getIfCode)
+                        .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
+                        .eq(PayInterfaceConfig::getInfoId, appId)
+                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP))
                 .stream()
                 .forEach(r -> result.add(r.getIfCode()));
 

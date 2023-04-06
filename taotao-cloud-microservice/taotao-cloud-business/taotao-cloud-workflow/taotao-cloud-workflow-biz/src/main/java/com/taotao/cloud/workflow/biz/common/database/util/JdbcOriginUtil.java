@@ -51,19 +51,18 @@ public class JdbcOriginUtil {
         String primaryField = getPrimaryField(conn, table);
         List<DbFieldMod> DbFieldModList = getFieldsMeta(conn, table);
         List<DbTableFieldModel> dbTableFieldModelList = new ArrayList<>();
-        DbFieldModList.forEach(
-                x -> {
-                    DbTableFieldModel dbTableFieldModel = new DbTableFieldModel();
-                    dbTableFieldModel.setField(x.getColumnName());
-                    dbTableFieldModel.setDefaults(x.getColumnDefault());
-                    dbTableFieldModel.setIdentity(x.getIsAutoIncrement());
-                    dbTableFieldModel.setFieldName(x.getColumnComment());
-                    dbTableFieldModel.setDataType(x.getColumnTypeName());
-                    dbTableFieldModel.setPrimaryKey(x.getColumnName().equals(primaryField) ? 1 : 0);
-                    dbTableFieldModel.setAllowNull(x.getIsNull());
-                    dbTableFieldModel.setDataLength(x.getColumnSize());
-                    dbTableFieldModelList.add(dbTableFieldModel);
-                });
+        DbFieldModList.forEach(x -> {
+            DbTableFieldModel dbTableFieldModel = new DbTableFieldModel();
+            dbTableFieldModel.setField(x.getColumnName());
+            dbTableFieldModel.setDefaults(x.getColumnDefault());
+            dbTableFieldModel.setIdentity(x.getIsAutoIncrement());
+            dbTableFieldModel.setFieldName(x.getColumnComment());
+            dbTableFieldModel.setDataType(x.getColumnTypeName());
+            dbTableFieldModel.setPrimaryKey(x.getColumnName().equals(primaryField) ? 1 : 0);
+            dbTableFieldModel.setAllowNull(x.getIsNull());
+            dbTableFieldModel.setDataLength(x.getColumnSize());
+            dbTableFieldModelList.add(dbTableFieldModel);
+        });
         return dbTableFieldModelList;
     }
 
@@ -91,15 +90,10 @@ public class JdbcOriginUtil {
     }
 
     private static void setTableInfo(
-            Connection conn,
-            List<DbTableInfoModel> dbTableInfoModelList,
-            List<Map<String, String>> mapList) {
+            Connection conn, List<DbTableInfoModel> dbTableInfoModelList, List<Map<String, String>> mapList) {
         try {
             // 从conn中获取数据库的表元数据
-            @Cleanup
-            ResultSet rs =
-                    conn.getMetaData()
-                            .getTables(conn.getCatalog(), null, null, new String[] {"TABLE"});
+            @Cleanup ResultSet rs = conn.getMetaData().getTables(conn.getCatalog(), null, null, new String[] {"TABLE"});
             while (rs.next()) {
                 if (dbTableInfoModelList != null) {
                     DbTableInfoModel dbTableInfoModel = new DbTableInfoModel();
@@ -126,8 +120,7 @@ public class JdbcOriginUtil {
     private static String getPrimaryField(Connection conn, String table) {
         try {
             // 获取表主键
-            @Cleanup
-            ResultSet rs2 = conn.getMetaData().getPrimaryKeys(conn.getCatalog(), null, table);
+            @Cleanup ResultSet rs2 = conn.getMetaData().getPrimaryKeys(conn.getCatalog(), null, table);
             while (rs2.next()) {
                 return rs2.getString("COLUMN_NAME");
             }
@@ -138,16 +131,12 @@ public class JdbcOriginUtil {
     }
 
     private static void setFieldInfo(
-            Connection conn,
-            List<DbFieldMod> dbFieldModList,
-            List<Map<String, String>> mapList,
-            String table) {
+            Connection conn, List<DbFieldMod> dbFieldModList, List<Map<String, String>> mapList, String table) {
         try {
             DatabaseMetaData dbMetaData = conn.getMetaData();
             // 字段信息
             @Cleanup
-            ResultSet resultSet =
-                    dbMetaData.getColumns(conn.getCatalog(), dbMetaData.getUserName(), table, null);
+            ResultSet resultSet = dbMetaData.getColumns(conn.getCatalog(), dbMetaData.getUserName(), table, null);
             while (resultSet.next()) {
                 if (dbFieldModList != null) {
                     DbFieldMod dbFieldMod = new DbFieldMod();

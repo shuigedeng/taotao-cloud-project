@@ -41,8 +41,7 @@ public record PaymentLogVO(
         @Schema(description = "付款状态") String payStatus,
         @Schema(description = "第三方付款流水号") String receivableNo,
         @Schema(description = "支付方式") String paymentMethod,
-        @Schema(description = "支付时间")
-                @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+        @Schema(description = "支付时间") @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
                 LocalDateTime paymentTime,
         @Schema(description = "总价格") BigDecimal flowPrice,
         @Schema(description = "支付方式返回的交易号") String payOrderNo,
@@ -58,5 +57,6 @@ public record PaymentLogVO(
         @Schema(description = "订单类型") String orderType)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -6293102172184734928L;
+    @Serial
+    private static final long serialVersionUID = -6293102172184734928L;
 }

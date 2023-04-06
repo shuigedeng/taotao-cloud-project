@@ -44,8 +44,7 @@ public class ConcurrentHashMapUtils {
      * @see <a
      *     href="https://bugs.openjdk.java.net/browse/JDK-8161372">https://bugs.openjdk.java.net/browse/JDK-8161372</a>
      */
-    public static <K, V> V computeIfAbsent(
-            ConcurrentMap<K, V> map, K key, Function<? super K, ? extends V> func) {
+    public static <K, V> V computeIfAbsent(ConcurrentMap<K, V> map, K key, Function<? super K, ? extends V> func) {
         if (IS_JAVA8) {
             V v = map.get(key);
             if (null == v) {

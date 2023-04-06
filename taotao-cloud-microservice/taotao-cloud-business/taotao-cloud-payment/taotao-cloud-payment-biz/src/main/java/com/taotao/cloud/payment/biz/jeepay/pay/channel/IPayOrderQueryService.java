@@ -33,6 +33,5 @@ public interface IPayOrderQueryService {
     String getIfCode();
 
     /** 查询订单 * */
-    ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception;
+    ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception;
 }

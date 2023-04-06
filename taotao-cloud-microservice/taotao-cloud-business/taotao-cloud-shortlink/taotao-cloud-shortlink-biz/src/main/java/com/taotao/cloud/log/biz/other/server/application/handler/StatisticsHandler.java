@@ -27,15 +27,15 @@ import shorturl.server.server.application.threadpool.CommonExecutor;
 @Component
 public class StatisticsHandler implements Handler {
 
-    @Autowired CommonExecutor commonExecutor;
+    @Autowired
+    CommonExecutor commonExecutor;
 
     @Override
     public void handle(UrlRequest urlReq, UrlResponse urlResponse) {
         //
-        commonExecutor.runTask(
-                () -> {
-                    log.info("requestId {}async StaticsHandler", urlReq.getRequestId());
-                    /*to Statistic */
-                });
+        commonExecutor.runTask(() -> {
+            log.info("requestId {}async StaticsHandler", urlReq.getRequestId());
+            /*to Statistic */
+        });
     }
 }

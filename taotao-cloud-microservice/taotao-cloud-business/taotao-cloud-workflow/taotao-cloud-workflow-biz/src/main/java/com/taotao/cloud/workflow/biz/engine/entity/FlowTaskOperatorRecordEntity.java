@@ -27,8 +27,7 @@ import lombok.Data;
 /** 流程经办记录 */
 @Data
 @TableName("flow_taskoperatorrecord")
-public class FlowTaskOperatorRecordEntity
-        extends SuperEntity<FlowTaskOperatorRecordEntity, String> {
+public class FlowTaskOperatorRecordEntity extends SuperEntity<FlowTaskOperatorRecordEntity, String> {
     /** 节点流转主键 */
     @TableId("id")
     private String id;

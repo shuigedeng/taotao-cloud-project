@@ -40,7 +40,8 @@ import lombok.Setter;
 @Schema(description = "商品计量VO")
 public class GoodsUnitVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4433579132929428572L;
+    @Serial
+    private static final long serialVersionUID = -4433579132929428572L;
 
     private Long id;
 

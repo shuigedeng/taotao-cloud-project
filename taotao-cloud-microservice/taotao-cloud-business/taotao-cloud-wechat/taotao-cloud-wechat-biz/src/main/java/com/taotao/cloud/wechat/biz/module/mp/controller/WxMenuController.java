@@ -55,14 +55,12 @@ public class WxMenuController {
      * @return 如果是个性化菜单，则返回menuid，否则返回null
      */
     @PostMapping("/create")
-    public String menuCreate(@PathVariable String appid, @RequestBody WxMenu menu)
-            throws WxErrorException {
+    public String menuCreate(@PathVariable String appid, @RequestBody WxMenu menu) throws WxErrorException {
         return this.wxService.switchoverTo(appid).getMenuService().menuCreate(menu);
     }
 
     @GetMapping("/create")
-    public String menuCreateSample(@PathVariable String appid)
-            throws WxErrorException, MalformedURLException {
+    public String menuCreateSample(@PathVariable String appid) throws WxErrorException, MalformedURLException {
         WxMenu menu = new WxMenu();
         WxMenuButton button1 = new WxMenuButton();
         button1.setType(MenuButtonType.CLICK);
@@ -107,16 +105,15 @@ public class WxMenuController {
         if (servletRequestAttributes != null) {
             HttpServletRequest request = servletRequestAttributes.getRequest();
             URL requestURL = new URL(request.getRequestURL().toString());
-            String url =
-                    this.wxService
-                            .switchoverTo(appid)
-                            .getOAuth2Service()
-                            .buildAuthorizationUrl(
-                                    String.format(
-                                            "%s://%s/wx/redirect/%s/greet",
-                                            requestURL.getProtocol(), requestURL.getHost(), appid),
-                                    WxConsts.OAuth2Scope.SNSAPI_USERINFO,
-                                    null);
+            String url = this.wxService
+                    .switchoverTo(appid)
+                    .getOAuth2Service()
+                    .buildAuthorizationUrl(
+                            String.format(
+                                    "%s://%s/wx/redirect/%s/greet",
+                                    requestURL.getProtocol(), requestURL.getHost(), appid),
+                            WxConsts.OAuth2Scope.SNSAPI_USERINFO,
+                            null);
             button34.setUrl(url);
         }
 
@@ -142,8 +139,7 @@ public class WxMenuController {
      * @return 如果是个性化菜单，则返回menuid，否则返回null
      */
     @PostMapping("/createByJson")
-    public String menuCreate(@PathVariable String appid, @RequestBody String json)
-            throws WxErrorException {
+    public String menuCreate(@PathVariable String appid, @RequestBody String json) throws WxErrorException {
         return this.wxService.switchoverTo(appid).getMenuService().menuCreate(json);
     }
 
@@ -171,8 +167,7 @@ public class WxMenuController {
      * @param menuId 个性化菜单的menuid
      */
     @GetMapping("/delete/{menuId}")
-    public void menuDelete(@PathVariable String appid, @PathVariable String menuId)
-            throws WxErrorException {
+    public void menuDelete(@PathVariable String appid, @PathVariable String menuId) throws WxErrorException {
         this.wxService.switchoverTo(appid).getMenuService().menuDelete(menuId);
     }
 
@@ -200,8 +195,7 @@ public class WxMenuController {
      * @param userid 可以是粉丝的OpenID，也可以是粉丝的微信号。
      */
     @GetMapping("/menuTryMatch/{userid}")
-    public WxMenu menuTryMatch(@PathVariable String appid, @PathVariable String userid)
-            throws WxErrorException {
+    public WxMenu menuTryMatch(@PathVariable String appid, @PathVariable String userid) throws WxErrorException {
         return this.wxService.switchoverTo(appid).getMenuService().menuTryMatch(userid);
     }
 
@@ -223,8 +217,7 @@ public class WxMenuController {
      * </pre>
      */
     @GetMapping("/getSelfMenuInfo")
-    public WxMpGetSelfMenuInfoResult getSelfMenuInfo(@PathVariable String appid)
-            throws WxErrorException {
+    public WxMpGetSelfMenuInfoResult getSelfMenuInfo(@PathVariable String appid) throws WxErrorException {
         return this.wxService.switchoverTo(appid).getMenuService().getSelfMenuInfo();
     }
 }

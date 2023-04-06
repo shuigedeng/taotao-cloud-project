@@ -36,11 +36,11 @@ import org.springframework.stereotype.Service;
  * @since 2022-05-16 17:34:50
  */
 @Service
-public class DistributionOrderExecute
-        implements OrderStatusChangeEvent, EveryDayExecute, AfterSaleStatusChangeEvent {
+public class DistributionOrderExecute implements OrderStatusChangeEvent, EveryDayExecute, AfterSaleStatusChangeEvent {
 
     /** 分销订单 */
-    @Autowired private IFeignDistributionOrderApi distributionOrderService;
+    @Autowired
+    private IFeignDistributionOrderApi distributionOrderService;
 
     @Override
     public void orderChange(OrderMessage orderMessage) {
@@ -61,8 +61,7 @@ public class DistributionOrderExecute
     @Override
     public void execute() {
         // 计算分销提佣
-        distributionOrderService.rebate(
-                DistributionOrderStatusEnum.WAIT_BILL.name(), new DateTime());
+        distributionOrderService.rebate(DistributionOrderStatusEnum.WAIT_BILL.name(), new DateTime());
         // 修改分销订单状态
         distributionOrderService.updateStatus();
     }

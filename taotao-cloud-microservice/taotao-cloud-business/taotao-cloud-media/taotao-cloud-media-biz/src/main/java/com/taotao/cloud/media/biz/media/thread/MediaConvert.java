@@ -47,8 +47,7 @@ public class MediaConvert extends Thread {
     /** ws客户端 */
     private ConcurrentHashMap<String, ChannelHandlerContext> wsClients = new ConcurrentHashMap<>();
     /** http客户端 */
-    private ConcurrentHashMap<String, ChannelHandlerContext> httpClients =
-            new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, ChannelHandlerContext> httpClients = new ConcurrentHashMap<>();
 
     /** 运行状态 */
     private boolean runing = false;
@@ -113,8 +112,7 @@ public class MediaConvert extends Thread {
         }
 
         // 推流器
-        FFmpegFrameRecorder recorder =
-                new FFmpegFrameRecorder(bos, grabber.getImageWidth(), grabber.getImageHeight());
+        FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(bos, grabber.getImageWidth(), grabber.getImageHeight());
 
         avutil.av_log_set_level(avutil.AV_LOG_ERROR);
         FFmpegLogCallback.set();
@@ -199,9 +197,7 @@ public class MediaConvert extends Thread {
                         // ws输出帧流
                         for (Entry<String, ChannelHandlerContext> entry : wsClients.entrySet()) {
                             if (entry.getValue().channel().isWritable()) {
-                                entry.getValue()
-                                        .writeAndFlush(
-                                                new BinaryWebSocketFrame(Unpooled.copiedBuffer(b)));
+                                entry.getValue().writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(b)));
                             } else {
                                 wsClients.remove(entry.getKey());
                                 hasClient();
@@ -258,19 +254,15 @@ public class MediaConvert extends Thread {
             if (runing) {
                 if (ctx.channel().isWritable()) {
                     // 发送帧前先发送header
-                    ChannelFuture future =
-                            ctx.writeAndFlush(
-                                    new BinaryWebSocketFrame(Unpooled.copiedBuffer(header)));
-                    future.addListener(
-                            new GenericFutureListener<Future<? super Void>>() {
-                                @Override
-                                public void operationComplete(Future<? super Void> future)
-                                        throws Exception {
-                                    if (future.isSuccess()) {
-                                        wsClients.put(ctx.channel().id().toString(), ctx);
-                                    }
-                                }
-                            });
+                    ChannelFuture future = ctx.writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(header)));
+                    future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                        @Override
+                        public void operationComplete(Future<? super Void> future) throws Exception {
+                            if (future.isSuccess()) {
+                                wsClients.put(ctx.channel().id().toString(), ctx);
+                            }
+                        }
+                    });
                 }
 
                 break;
@@ -302,11 +294,7 @@ public class MediaConvert extends Thread {
         if (hcSize != newHcSize || wcSize != newWcSize) {
             hcSize = newHcSize;
             wcSize = newWcSize;
-            LogUtils.info(
-                    "\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n",
-                    cameraDto.getUrl(),
-                    newHcSize,
-                    newWcSize);
+            LogUtils.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize, newWcSize);
         }
 
         // 自动拉流无需关闭
@@ -346,16 +334,14 @@ public class MediaConvert extends Thread {
                 if (ctx.channel().isWritable()) {
                     // 发送帧前先发送header
                     ChannelFuture future = ctx.writeAndFlush(Unpooled.copiedBuffer(header));
-                    future.addListener(
-                            new GenericFutureListener<Future<? super Void>>() {
-                                @Override
-                                public void operationComplete(Future<? super Void> future)
-                                        throws Exception {
-                                    if (future.isSuccess()) {
-                                        httpClients.put(ctx.channel().id().toString(), ctx);
-                                    }
-                                }
-                            });
+                    future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                        @Override
+                        public void operationComplete(Future<? super Void> future) throws Exception {
+                            if (future.isSuccess()) {
+                                httpClients.put(ctx.channel().id().toString(), ctx);
+                            }
+                        }
+                    });
                 }
 
                 break;

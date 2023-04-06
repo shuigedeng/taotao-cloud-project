@@ -94,7 +94,9 @@ public class QueryPayOrderRS extends AbstractRS {
         QueryPayOrderRS result = new QueryPayOrderRS();
         BeanUtils.copyProperties(payOrder, result);
         result.setSuccessTime(
-                payOrder.getSuccessTime() == null ? null : payOrder.getSuccessTime().getTime());
+                payOrder.getSuccessTime() == null
+                        ? null
+                        : payOrder.getSuccessTime().getTime());
         result.setCreatedAt(
                 payOrder.getCreatedAt() == null ? null : payOrder.getCreatedAt().getTime());
 

@@ -62,52 +62,37 @@ public class DistributionPriceRender implements ICartRenderStep {
     private void renderDistribution(TradeDTO tradeDTO) {
 
         // 如果存在分销员
-        String distributionId =
-                (String)
-                        cache.get(
-                                CachePrefix.DISTRIBUTION.getPrefix()
-                                        + "_"
-                                        + tradeDTO.getMemberId());
+        String distributionId = (String) cache.get(CachePrefix.DISTRIBUTION.getPrefix() + "_" + tradeDTO.getMemberId());
         if (StringUtil.isEmpty(distributionId)) {
             return;
         }
         // 循环订单商品列表，如果是分销商品则计算商品佣金
         tradeDTO.setDistributionId(distributionId);
 
-        List<String> skuIds =
-                tradeDTO.getCheckedSkuList().stream()
-                        .map(
-                                cartSkuVO -> {
-                                    return cartSkuVO.getGoodsSku().getId();
-                                })
-                        .collect(Collectors.toList());
+        List<String> skuIds = tradeDTO.getCheckedSkuList().stream()
+                .map(cartSkuVO -> {
+                    return cartSkuVO.getGoodsSku().getId();
+                })
+                .collect(Collectors.toList());
         // 是否包含分销商品
-        List<DistributionGoods> distributionGoods =
-                distributionGoodsService.distributionGoods(skuIds);
+        List<DistributionGoods> distributionGoods = distributionGoodsService.distributionGoods(skuIds);
         if (distributionGoods != null && distributionGoods.size() > 0) {
-            distributionGoods.forEach(
-                    dg -> {
-                        tradeDTO.getCheckedSkuList()
-                                .forEach(
-                                        cartSkuVO -> {
-                                            if (cartSkuVO
-                                                    .getGoodsSku()
-                                                    .getId()
-                                                    .equals(dg.getSkuId())) {
-                                                cartSkuVO.setDistributionGoods(dg);
-                                            }
-                                        });
-                    });
+            distributionGoods.forEach(dg -> {
+                tradeDTO.getCheckedSkuList().forEach(cartSkuVO -> {
+                    if (cartSkuVO.getGoodsSku().getId().equals(dg.getSkuId())) {
+                        cartSkuVO.setDistributionGoods(dg);
+                    }
+                });
+            });
         }
 
         for (CartSkuVO cartSkuVO : tradeDTO.getCheckedSkuList()) {
             if (cartSkuVO.getDistributionGoods() != null) {
                 cartSkuVO
                         .getPriceDetailDTO()
-                        .setDistributionCommission(
-                                CurrencyUtils.mul(
-                                        cartSkuVO.getNum(),
-                                        cartSkuVO.getDistributionGoods().getCommission()));
+                        .setDistributionCommission(CurrencyUtils.mul(
+                                cartSkuVO.getNum(),
+                                cartSkuVO.getDistributionGoods().getCommission()));
             }
         }
     }

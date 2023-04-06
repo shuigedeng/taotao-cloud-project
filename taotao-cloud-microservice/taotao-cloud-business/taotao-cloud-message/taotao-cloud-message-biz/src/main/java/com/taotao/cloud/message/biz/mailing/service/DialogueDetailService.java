@@ -94,10 +94,8 @@ public class DialogueDetailService extends BaseLayeredService<DialogueDetail, St
 
         if (StringUtils.isBlank(domain.getDialogueId())) {
             DialogueContact dialogueContact =
-                    dialogueContactService.findBySenderIdAndReceiverId(
-                            domain.getSenderId(), domain.getReceiverId());
-            if (ObjectUtils.isNotEmpty(dialogueContact)
-                    && ObjectUtils.isNotEmpty(dialogueContact.getDialogue())) {
+                    dialogueContactService.findBySenderIdAndReceiverId(domain.getSenderId(), domain.getReceiverId());
+            if (ObjectUtils.isNotEmpty(dialogueContact) && ObjectUtils.isNotEmpty(dialogueContact.getDialogue())) {
                 String dialogueId = dialogueContact.getDialogue().getDialogueId();
                 domain.setDialogueId(dialogueId);
                 dialogueService.updateDialogue(dialogueId, domain.getContent());
@@ -126,17 +124,16 @@ public class DialogueDetailService extends BaseLayeredService<DialogueDetail, St
     public Page<DialogueDetail> findByCondition(int pageNumber, int pageSize, String dialogueId) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        Specification<DialogueDetail> specification =
-                (root, criteriaQuery, criteriaBuilder) -> {
-                    List<Predicate> predicates = new ArrayList<>();
+        Specification<DialogueDetail> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-                    predicates.add(criteriaBuilder.equal(root.get("dialogueId"), dialogueId));
+            predicates.add(criteriaBuilder.equal(root.get("dialogueId"), dialogueId));
 
-                    Predicate[] predicateArray = new Predicate[predicates.size()];
-                    criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
-                    criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
-                    return criteriaQuery.getRestriction();
-                };
+            Predicate[] predicateArray = new Predicate[predicates.size()];
+            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
+            return criteriaQuery.getRestriction();
+        };
 
         log.debug("[Websocket] |- DialogueDetail Service findByCondition.");
         return this.findByPage(specification, pageable);

@@ -32,7 +32,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class HlsService {
 
-    @Autowired private Environment env;
+    @Autowired
+    private Environment env;
 
     /** */
     public static ConcurrentHashMap<String, MediaTransferHls> cameras = new ConcurrentHashMap<>();
@@ -94,8 +95,7 @@ public class HlsService {
         MediaTransferHls mediaTransferHls = cameras.get(mediaKey);
 
         if (null == mediaTransferHls) {
-            mediaTransferHls =
-                    new MediaTransferHls(cameraDto, Convert.toInt(env.getProperty("server.port")));
+            mediaTransferHls = new MediaTransferHls(cameraDto, Convert.toInt(env.getProperty("server.port")));
             cameras.put(mediaKey, mediaTransferHls);
             mediaTransferHls.execute();
         }

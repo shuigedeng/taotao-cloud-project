@@ -47,8 +47,7 @@ public class ReflectionUtil {
      *
      * @param propertyType 用于查找Setter方法,为空时使用value的Class替代.
      */
-    public static void invokeSetterMethod(
-            Object obj, String propertyName, Object value, Class<?> propertyType) {
+    public static void invokeSetterMethod(Object obj, String propertyName, Object value, Class<?> propertyType) {
         Class<?> type = propertyType != null ? propertyType : value.getClass();
         String setterMethodName = "set" + StringUtil.capitalize(propertyName);
         invokeMethod(obj, setterMethodName, new Class[] {type}, new Object[] {value});
@@ -58,8 +57,7 @@ public class ReflectionUtil {
     public static Object getFieldValue(final Object obj, final String fieldName) {
         Field field = getAccessibleField(obj, fieldName);
         if (field == null) {
-            throw new IllegalArgumentException(
-                    "Could not find field [" + fieldName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
         }
         Object result = null;
         try {
@@ -74,8 +72,7 @@ public class ReflectionUtil {
     public static void setFieldValue(final Object obj, final String fieldName, final Object value) {
         Field field = getAccessibleField(obj, fieldName);
         if (field == null) {
-            throw new IllegalArgumentException(
-                    "Could not find field [" + fieldName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
         }
         try {
             field.set(obj, value);
@@ -108,14 +105,10 @@ public class ReflectionUtil {
 
     /** 直接调用对象方法, 无视private/protected修饰符. 用于一次性调用的情况. */
     public static Object invokeMethod(
-            final Object obj,
-            final String methodName,
-            final Class<?>[] parameterTypes,
-            final Object[] args) {
+            final Object obj, final String methodName, final Class<?>[] parameterTypes, final Object[] args) {
         Method method = getAccessibleMethod(obj, methodName, parameterTypes);
         if (method == null) {
-            throw new IllegalArgumentException(
-                    "Could not find method [" + methodName + "] on target [" + obj + "]");
+            throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + obj + "]");
         }
         try {
             return method.invoke(obj, args);
@@ -126,10 +119,7 @@ public class ReflectionUtil {
 
     /** 系统调度使用！！！ 直接调用对象方法, 无视private/protected修饰符. 用于一次性调用的情况. */
     public static Boolean invokeMethodByTask(
-            final Object obj,
-            final String methodName,
-            final Class<?>[] parameterTypes,
-            final Object[] args) {
+            final Object obj, final String methodName, final Class<?>[] parameterTypes, final Object[] args) {
         Method method = getAccessibleMethod(obj, methodName, parameterTypes);
         if (method == null) {
             return false;
@@ -193,19 +183,16 @@ public class ReflectionUtil {
         }
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
         if (index >= params.length || index < 0) {
-            log.warn(
-                    "Index: "
-                            + index
-                            + ", Size of "
-                            + clazz.getSimpleName()
-                            + "'s Parameterized Type: "
-                            + params.length);
+            log.warn("Index: "
+                    + index
+                    + ", Size of "
+                    + clazz.getSimpleName()
+                    + "'s Parameterized Type: "
+                    + params.length);
             return Object.class;
         }
         if (!(params[index] instanceof Class)) {
-            log.warn(
-                    clazz.getSimpleName()
-                            + " not set the actual class on superclass generic parameter");
+            log.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
             return Object.class;
         }
         return (Class<?>) params[index];
@@ -219,8 +206,7 @@ public class ReflectionUtil {
             return new IllegalArgumentException("Reflection workflow.exception.", e);
         } else if (e instanceof InvocationTargetException) {
             return new RuntimeException(
-                    "Reflection workflow.exception.",
-                    ((InvocationTargetException) e).getTargetException());
+                    "Reflection workflow.exception.", ((InvocationTargetException) e).getTargetException());
         } else if (e instanceof RuntimeException) {
             return (RuntimeException) e;
         }

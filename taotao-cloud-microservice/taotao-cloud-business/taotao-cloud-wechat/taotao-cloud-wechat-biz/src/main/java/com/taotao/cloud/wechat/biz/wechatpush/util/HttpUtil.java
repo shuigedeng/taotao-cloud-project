@@ -39,27 +39,25 @@ import org.apache.http.util.EntityUtils;
 /** 请求http的帮助类 */
 public class HttpUtil {
     static final int retry = 3;
-    static PoolingHttpClientConnectionManager connectionManager =
-            new PoolingHttpClientConnectionManager();
+    static PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
     static ConnectionKeepAliveStrategy myStrategy;
 
     public HttpUtil() {}
 
     public static String doPost(String url, String data) {
-        CloseableHttpClient httpClient =
-                HttpClients.custom()
-                        .setConnectionManager(connectionManager)
-                        .setKeepAliveStrategy(myStrategy)
-                        .setDefaultRequestConfig(
-                                RequestConfig.custom().setStaleConnectionCheckEnabled(true).build())
-                        .build();
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setConnectionManager(connectionManager)
+                .setKeepAliveStrategy(myStrategy)
+                .setDefaultRequestConfig(RequestConfig.custom()
+                        .setStaleConnectionCheckEnabled(true)
+                        .build())
+                .build();
         HttpPost httpPost = new HttpPost(url);
-        RequestConfig requestConfig =
-                RequestConfig.custom()
-                        .setSocketTimeout(10000)
-                        .setConnectTimeout(20000)
-                        .setConnectionRequestTimeout(10000)
-                        .build();
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setSocketTimeout(10000)
+                .setConnectTimeout(20000)
+                .setConnectionRequestTimeout(10000)
+                .build();
         httpPost.setConfig(requestConfig);
         String context = "";
         if (data != null && data.length() > 0) {
@@ -95,12 +93,11 @@ public class HttpUtil {
         try {
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("Connection", "close");
-            RequestConfig requestConfig =
-                    RequestConfig.custom()
-                            .setSocketTimeout(18000)
-                            .setConnectTimeout(5000)
-                            .setConnectionRequestTimeout(18000)
-                            .build();
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setSocketTimeout(18000)
+                    .setConnectTimeout(5000)
+                    .setConnectionRequestTimeout(18000)
+                    .build();
             httpGet.setConfig(requestConfig);
             CloseableHttpResponse response1 = httpclient.execute(httpGet);
 
@@ -151,27 +148,24 @@ public class HttpUtil {
     static {
         connectionManager.setMaxTotal(1000);
         connectionManager.setDefaultMaxPerRoute(1000);
-        myStrategy =
-                new ConnectionKeepAliveStrategy() {
-                    public long getKeepAliveDuration(HttpResponse response, HttpContext context) {
-                        BasicHeaderElementIterator it =
-                                new BasicHeaderElementIterator(
-                                        response.headerIterator("Keep-Alive"));
+        myStrategy = new ConnectionKeepAliveStrategy() {
+            public long getKeepAliveDuration(HttpResponse response, HttpContext context) {
+                BasicHeaderElementIterator it = new BasicHeaderElementIterator(response.headerIterator("Keep-Alive"));
 
-                        String param;
-                        String value;
-                        do {
-                            if (!it.hasNext()) {
-                                return 60000L;
-                            }
-
-                            HeaderElement he = it.nextElement();
-                            param = he.getName();
-                            value = he.getValue();
-                        } while (value == null || !param.equalsIgnoreCase("timeout"));
-
-                        return Long.parseLong(value) * 1000L;
+                String param;
+                String value;
+                do {
+                    if (!it.hasNext()) {
+                        return 60000L;
                     }
-                };
+
+                    HeaderElement he = it.nextElement();
+                    param = he.getName();
+                    value = he.getValue();
+                } while (value == null || !param.equalsIgnoreCase("timeout"));
+
+                return Long.parseLong(value) * 1000L;
+            }
+        };
     }
 }

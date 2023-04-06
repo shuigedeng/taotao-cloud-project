@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.clickhouse.controller;
 
 import com.taotao.cloud.data.analysis.clickhouse.service.CkUserService;
@@ -31,23 +32,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CkUserController {
 
-	@Autowired
-	private CkUserService userService;
+    @Autowired
+    private CkUserService userService;
 
-	@RequestMapping("/queryUser")
-	public Object query() {
-		List userList = userService.testUseMapperInterface();
-		return userList.toString();
-	}
+    @RequestMapping("/queryUser")
+    public Object query() {
+        List userList = userService.testUseMapperInterface();
+        return userList.toString();
+    }
 
-//	@RequestMapping("/insertUser")
-//	public Object insertUser() {
-//		User user = new User();
-////		user.setAppId("SS");
-////		user.setRegTime(new Date());
-////		user.setUserId(777744);
-////		user.setVersion("3.2");
-//		Integer flag = userMapper.insertUser(user);
-//		return flag;
-//	}
+    //	@RequestMapping("/insertUser")
+    //	public Object insertUser() {
+    //		User user = new User();
+    ////		user.setAppId("SS");
+    ////		user.setRegTime(new Date());
+    ////		user.setUserId(777744);
+    ////		user.setVersion("3.2");
+    //		Integer flag = userMapper.insertUser(user);
+    //		return flag;
+    //	}
 }

@@ -99,13 +99,7 @@ public class RectificationController extends BaseController {
         Mat dst = new Mat(source1.rows(), source1.cols(), source1.type());
         System.out.println(source1.rows() + " " + source1.cols());
         Imgproc.warpPerspective(
-                source1,
-                dst,
-                warpMatrix,
-                dst.size(),
-                Imgproc.INTER_LINEAR,
-                0,
-                new Scalar(255, 255, 255));
+                source1, dst, warpMatrix, dst.size(), Imgproc.INTER_LINEAR, 0, new Scalar(255, 255, 255));
         destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect2.png";
         Highgui.imwrite(destPath, dst);
         try {
@@ -125,12 +119,7 @@ public class RectificationController extends BaseController {
      * @param anchor04 void
      */
     public static void fetchAnchorPoints1(
-            String sourcePath,
-            String matchPath,
-            Point anchor01,
-            Point anchor02,
-            Point anchor03,
-            Point anchor04) {
+            String sourcePath, String matchPath, Point anchor01, Point anchor02, Point anchor03, Point anchor04) {
         Mat imagematch = new Mat();
         Mat colorimage = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_COLOR);
         Point maxLoc01, maxLoc02, maxLoc03, maxLoc04;
@@ -216,16 +205,7 @@ public class RectificationController extends BaseController {
 
         // Mat rrr = OpenCVUtil.imageBinary(src01);
         Mat circles = new Mat(); // 声明一个向量，保存检测出的圆的圆心坐标和半径
-        Imgproc.HoughCircles(
-                source1,
-                circles,
-                Imgproc.CV_HOUGH_GRADIENT,
-                1.0,
-                300 / 8,
-                200,
-                90,
-                10,
-                50); // 霍夫变换检测圆
+        Imgproc.HoughCircles(source1, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50); // 霍夫变换检测圆
         System.out.println("图片高 宽：" + src.rows() + "		" + src.cols());
         System.out.println(circles.cols());
         int cols = circles.cols();
@@ -243,16 +223,7 @@ public class RectificationController extends BaseController {
         String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_cc1.png";
         Highgui.imwrite(destPath, src01);
 
-        Imgproc.HoughCircles(
-                source2,
-                circles,
-                Imgproc.CV_HOUGH_GRADIENT,
-                1.0,
-                300 / 8,
-                200,
-                90,
-                10,
-                50); // 霍夫变换检测圆
+        Imgproc.HoughCircles(source2, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50); // 霍夫变换检测圆
         System.out.println(circles.cols());
         if (circles.cols() > 0) {
             for (int i = 0; i < circles.cols(); i++) {
@@ -268,16 +239,7 @@ public class RectificationController extends BaseController {
         destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_cc2.png";
         Highgui.imwrite(destPath, src02);
 
-        Imgproc.HoughCircles(
-                source3,
-                circles,
-                Imgproc.CV_HOUGH_GRADIENT,
-                1.0,
-                300 / 8,
-                200,
-                90,
-                10,
-                50); // 霍夫变换检测圆
+        Imgproc.HoughCircles(source3, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50); // 霍夫变换检测圆
         System.out.println(circles.cols());
         if (circles.cols() > 0) {
             for (int i = 0; i < circles.cols(); i++) {
@@ -293,16 +255,7 @@ public class RectificationController extends BaseController {
         destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect_cc3.png";
         Highgui.imwrite(destPath, src03);
 
-        Imgproc.HoughCircles(
-                source4,
-                circles,
-                Imgproc.CV_HOUGH_GRADIENT,
-                1.0,
-                300 / 8,
-                200,
-                90,
-                10,
-                50); // 霍夫变换检测圆
+        Imgproc.HoughCircles(source4, circles, Imgproc.CV_HOUGH_GRADIENT, 1.0, 300 / 8, 200, 90, 10, 50); // 霍夫变换检测圆
         System.out.println(circles.cols());
         if (circles.cols() > 0) {
             for (int i = 0; i < circles.cols(); i++) {

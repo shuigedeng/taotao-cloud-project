@@ -50,9 +50,7 @@ public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Lo
     public static final String TABLE_NAME = "tt_member_withdraw_apply";
 
     /** 申请提现金额 */
-    @Column(
-            name = "apply_money",
-            columnDefinition = "decimal(10,2) not null default 0 comment '申请提现金额'")
+    @Column(name = "apply_money", columnDefinition = "decimal(10,2) not null default 0 comment '申请提现金额'")
     private BigDecimal applyMoney;
 
     /** 提现状态 */

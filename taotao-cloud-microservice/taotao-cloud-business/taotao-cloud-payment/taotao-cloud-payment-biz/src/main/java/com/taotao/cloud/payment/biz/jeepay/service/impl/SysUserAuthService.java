@@ -44,8 +44,7 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
 
     /** 添加用户认证表 * */
     @Transactional
-    public void addUserAuthDefault(
-            Long userId, String loginUserName, String telPhone, String pwdRaw, String sysType) {
+    public void addUserAuthDefault(Long userId, String loginUserName, String telPhone, String pwdRaw, String sysType) {
 
         String salt = StringKit.getUUID(6); // 6位随机数
         String userPwd = new BCryptPasswordEncoder().encode(pwdRaw);
@@ -74,11 +73,7 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
     /** 重置密码 */
     @Transactional
     public void resetAuthInfo(
-            Long resetUserId,
-            String authLoginUserName,
-            String telphone,
-            String newPwd,
-            String sysType) {
+            Long resetUserId, String authLoginUserName, String telphone, String newPwd, String sysType) {
 
         // 更改登录用户名
         //        if(StringKit.isNotEmpty(authLoginUserName)){
@@ -102,10 +97,7 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
         if (StringUtils.isNotEmpty(newPwd)) {
             // 根据当前用户ID 查询出用户的所有认证记录
             List<SysUserAuth> authList =
-                    list(
-                            SysUserAuth.gw()
-                                    .eq(SysUserAuth::getSysType, sysType)
-                                    .eq(SysUserAuth::getUserId, resetUserId));
+                    list(SysUserAuth.gw().eq(SysUserAuth::getSysType, sysType).eq(SysUserAuth::getUserId, resetUserId));
             for (SysUserAuth auth : authList) {
                 if (StringUtils.isEmpty(auth.getSalt())) { // 可能为其他登录方式， 不存在salt
                     continue;
@@ -122,15 +114,11 @@ public class SysUserAuthService extends ServiceImpl<SysUserAuthMapper, SysUserAu
     public boolean validateCurrentUserPwd(String pwdRaw) {
 
         // 根据当前用户ID + 认证方式为 登录用户名的方式 查询一条记录
-        SysUserAuth auth =
-                getOne(
-                        SysUserAuth.gw()
-                                .eq(
-                                        SysUserAuth::getUserId,
-                                        JeeUserDetails.getCurrentUserDetails()
-                                                .getSysUser()
-                                                .getSysUserId())
-                                .eq(SysUserAuth::getIdentityType, CS.AUTH_TYPE.LOGIN_USER_NAME));
+        SysUserAuth auth = getOne(SysUserAuth.gw()
+                .eq(
+                        SysUserAuth::getUserId,
+                        JeeUserDetails.getCurrentUserDetails().getSysUser().getSysUserId())
+                .eq(SysUserAuth::getIdentityType, CS.AUTH_TYPE.LOGIN_USER_NAME));
         if (auth != null && new BCryptPasswordEncoder().matches(pwdRaw, auth.getCredential())) {
             return true;
         }

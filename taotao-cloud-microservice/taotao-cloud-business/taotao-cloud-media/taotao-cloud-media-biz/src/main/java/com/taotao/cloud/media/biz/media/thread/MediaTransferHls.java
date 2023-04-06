@@ -92,8 +92,7 @@ public class MediaTransferHls extends MediaTransfer {
         command.add("/ts/" + cameraDto.getMediaKey() + "/");
         command.add("-method");
         command.add("put");
-        command.add(
-                "http://localhost:" + port + "/record/" + cameraDto.getMediaKey() + "/out.m3u8");
+        command.add("http://localhost:" + port + "/record/" + cameraDto.getMediaKey() + "/out.m3u8");
     }
 
     /** 执行 */
@@ -132,65 +131,61 @@ public class MediaTransferHls extends MediaTransfer {
             return;
         }
         // 处理InputStream的线程
-        inputThread =
-                new Thread() {
-                    @Override
-                    public void run() {
-                        BufferedReader in =
-                                new BufferedReader(new InputStreamReader(process.getInputStream()));
-                        String line = null;
-                        try {
-                            while (running) {
-                                line = in.readLine();
-                                if (line == null) {
-                                    break;
-                                }
-                                if (enableLog) {
-                                    LogUtils.info("output: " + line);
-                                }
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                running = false;
-                                in.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+        inputThread = new Thread() {
+            @Override
+            public void run() {
+                BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line = null;
+                try {
+                    while (running) {
+                        line = in.readLine();
+                        if (line == null) {
+                            break;
+                        }
+                        if (enableLog) {
+                            LogUtils.info("output: " + line);
                         }
                     }
-                };
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        running = false;
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
         // 处理ErrorStream的线程
-        errThread =
-                new Thread() {
-                    @Override
-                    public void run() {
-                        BufferedReader err =
-                                new BufferedReader(new InputStreamReader(process.getErrorStream()));
-                        String line = null;
-                        try {
-                            while (running) {
-                                line = err.readLine();
-                                if (line == null) {
-                                    break;
-                                }
-                                if (enableLog) {
-                                    LogUtils.info("err: " + line);
-                                }
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                running = false;
-                                err.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+        errThread = new Thread() {
+            @Override
+            public void run() {
+                BufferedReader err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                String line = null;
+                try {
+                    while (running) {
+                        line = err.readLine();
+                        if (line == null) {
+                            break;
+                        }
+                        if (enableLog) {
+                            LogUtils.info("err: " + line);
                         }
                     }
-                };
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        running = false;
+                        err.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
 
         inputThread.start();
         errThread.start();

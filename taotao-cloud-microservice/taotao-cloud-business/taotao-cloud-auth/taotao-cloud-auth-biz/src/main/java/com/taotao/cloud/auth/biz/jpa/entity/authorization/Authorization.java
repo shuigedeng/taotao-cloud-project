@@ -25,7 +25,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "`authorization`")
 public class Authorization {
-    @Id @Column private String id;
+    @Id
+    @Column
+    private String id;
+
     private String registeredClientId;
     private String principalName;
     private String authorizationGrantType;

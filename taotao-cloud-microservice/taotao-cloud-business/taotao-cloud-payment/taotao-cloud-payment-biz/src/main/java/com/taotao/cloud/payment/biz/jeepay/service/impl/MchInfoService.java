@@ -48,19 +48,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
 
-    @Autowired private SysUserService sysUserService;
+    @Autowired
+    private SysUserService sysUserService;
 
-    @Autowired private PayOrderService payOrderService;
+    @Autowired
+    private PayOrderService payOrderService;
 
-    @Autowired private MchPayPassageService mchPayPassageService;
+    @Autowired
+    private MchPayPassageService mchPayPassageService;
 
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
 
-    @Autowired private SysUserAuthService sysUserAuthService;
+    @Autowired
+    private SysUserAuthService sysUserAuthService;
 
-    @Autowired private IsvInfoService isvInfoService;
+    @Autowired
+    private IsvInfoService isvInfoService;
 
-    @Autowired private MchAppService mchAppService;
+    @Autowired
+    private MchAppService mchAppService;
 
     @Transactional(rollbackFor = Exception.class)
     public void addMch(MchInfo mchInfo, String loginUserName) {
@@ -137,19 +144,13 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
 
             // 3.删除当前商户支付接口配置参数
             List<String> appIdList = new LinkedList<>();
-            mchAppService
-                    .list(MchApp.gw().eq(MchApp::getMchNo, mchNo))
-                    .forEach(item -> appIdList.add(item.getAppId()));
-            payInterfaceConfigService.remove(
-                    PayInterfaceConfig.gw()
-                            .in(PayInterfaceConfig::getInfoId, appIdList)
-                            .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP));
+            mchAppService.list(MchApp.gw().eq(MchApp::getMchNo, mchNo)).forEach(item -> appIdList.add(item.getAppId()));
+            payInterfaceConfigService.remove(PayInterfaceConfig.gw()
+                    .in(PayInterfaceConfig::getInfoId, appIdList)
+                    .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP));
 
-            List<SysUser> userList =
-                    sysUserService.list(
-                            SysUser.gw()
-                                    .eq(SysUser::getBelongInfoId, mchNo)
-                                    .eq(SysUser::getSysType, CS.SYS_TYPE.MCH));
+            List<SysUser> userList = sysUserService.list(
+                    SysUser.gw().eq(SysUser::getBelongInfoId, mchNo).eq(SysUser::getSysType, CS.SYS_TYPE.MCH));
 
             // 4.删除当前商户应用信息
             mchAppService.removeByIds(appIdList);
@@ -166,9 +167,7 @@ public class MchInfoService extends ServiceImpl<MchInfoMapper, MchInfo> {
 
             // 6.删除当前商户的登录用户
             sysUserService.remove(
-                    SysUser.gw()
-                            .eq(SysUser::getBelongInfoId, mchNo)
-                            .eq(SysUser::getSysType, CS.SYS_TYPE.MCH));
+                    SysUser.gw().eq(SysUser::getBelongInfoId, mchNo).eq(SysUser::getSysType, CS.SYS_TYPE.MCH));
 
             // 7.删除当前商户
             boolean removeMchInfo = removeById(mchNo);

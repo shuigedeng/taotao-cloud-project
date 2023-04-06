@@ -45,8 +45,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/BatchTable")
 public class BatchTableController {
 
-    @Autowired private BatchTableService batchTableService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private BatchTableService batchTableService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取行文呈批表信息
@@ -56,8 +59,7 @@ public class BatchTableController {
      */
     @Operation("获取行文呈批表信息")
     @GetMapping("/{id}")
-    public Result<BatchTableInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<BatchTableInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         BatchTableInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -84,8 +86,7 @@ public class BatchTableController {
      */
     @Operation("新建行文呈批表")
     @PostMapping
-    public Result create(@RequestBody @Valid BatchTableForm batchTableForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid BatchTableForm batchTableForm) throws WorkFlowException {
         if (batchTableForm.getShareNum() != null
                 && StringUtil.isNotEmpty(batchTableForm.getShareNum())
                 && !RegexUtils.checkDigit2(batchTableForm.getShareNum())) {
@@ -109,8 +110,7 @@ public class BatchTableController {
      */
     @Operation("修改行文呈批表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid BatchTableForm batchTableForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid BatchTableForm batchTableForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (batchTableForm.getShareNum() != null
                 && StringUtil.isNotEmpty(batchTableForm.getShareNum())

@@ -47,15 +47,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buyer/promotion/pintuan")
 public class PintuanBuyerController {
 
-    @Autowired private IPromotionGoodsService promotionGoodsService;
-    @Autowired private IPintuanService pintuanService;
+    @Autowired
+    private IPromotionGoodsService promotionGoodsService;
+
+    @Autowired
+    private IPintuanService pintuanService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取拼团商品")
     @GetMapping
-    public Result<IPage<PromotionGoods>> getPintuanCategory(
-            String goodsName, String categoryPath, PageVO pageVo) {
+    public Result<IPage<PromotionGoods>> getPintuanCategory(String goodsName, String categoryPath, PageVO pageVo) {
         PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
         searchParams.setGoodsName(goodsName);
         searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());

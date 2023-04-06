@@ -31,10 +31,7 @@ import org.springframework.util.Assert;
 
 public class FaceLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                FaceLoginFilterConfigurer<H>,
-                FaceAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, FaceLoginFilterConfigurer<H>, FaceAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private FaceUserDetailsService faceUserDetailsService;
 
@@ -44,8 +41,7 @@ public class FaceLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         super(securityConfigurer, new FaceAuthenticationFilter(), "/login/face");
     }
 
-    public FaceLoginFilterConfigurer<H> faceUserDetailsService(
-            FaceUserDetailsService faceUserDetailsService) {
+    public FaceLoginFilterConfigurer<H> faceUserDetailsService(FaceUserDetailsService faceUserDetailsService) {
         this.faceUserDetailsService = faceUserDetailsService;
         return this;
     }
@@ -64,10 +60,9 @@ public class FaceLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-        FaceUserDetailsService captchaUserDetailsService =
-                this.faceUserDetailsService != null
-                        ? this.faceUserDetailsService
-                        : getBeanOrNull(applicationContext, FaceUserDetailsService.class);
+        FaceUserDetailsService captchaUserDetailsService = this.faceUserDetailsService != null
+                ? this.faceUserDetailsService
+                : getBeanOrNull(applicationContext, FaceUserDetailsService.class);
         Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
 
         return new FaceAuthenticationProvider(faceUserDetailsService);

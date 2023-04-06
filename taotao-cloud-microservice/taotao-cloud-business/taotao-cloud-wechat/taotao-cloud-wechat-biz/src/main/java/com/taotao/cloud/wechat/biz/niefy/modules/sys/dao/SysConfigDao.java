@@ -34,6 +34,5 @@ public interface SysConfigDao extends BaseSuperMapper<SysConfigEntity> {
     SysConfigEntity queryByKey(String paramKey);
 
     /** 根据key，更新value */
-    int updateValueByKey(
-            @Param("paramKey") String paramKey, @Param("paramValue") String paramValue);
+    int updateValueByKey(@Param("paramKey") String paramKey, @Param("paramValue") String paramValue);
 }

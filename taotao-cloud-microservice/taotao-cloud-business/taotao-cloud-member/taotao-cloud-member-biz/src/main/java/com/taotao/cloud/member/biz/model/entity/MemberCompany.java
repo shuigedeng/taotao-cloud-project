@@ -74,17 +74,11 @@ public class MemberCompany extends BaseSuperEntity<MemberCompany, Long> {
     private String email;
 
     /** 联系人 */
-    @Column(
-            name = "username",
-            unique = true,
-            columnDefinition = "varchar(255) not null comment '联系人'")
+    @Column(name = "username", unique = true, columnDefinition = "varchar(255) not null comment '联系人'")
     private String username;
 
     /** 联系人手机号 */
-    @Column(
-            name = "phone",
-            unique = true,
-            columnDefinition = "varchar(255) not null comment '联系人手机号'")
+    @Column(name = "phone", unique = true, columnDefinition = "varchar(255) not null comment '联系人手机号'")
     private String phone;
 
     /** 联系人地址 */

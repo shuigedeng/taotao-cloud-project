@@ -91,19 +91,17 @@ public class ExcelTest {
                 // 每次写入的数据量20w
                 Integer writeDataRows = 20 * 10000;
                 // 计算需要的Sheet数量
-                int sheetNum =
-                        totalCount % sheetDataRows == 0
-                                ? (totalCount / sheetDataRows)
-                                : (totalCount / sheetDataRows + 1);
+                int sheetNum = totalCount % sheetDataRows == 0
+                        ? (totalCount / sheetDataRows)
+                        : (totalCount / sheetDataRows + 1);
                 // 计算一般情况下每一个Sheet需要写入的次数(一般情况不包含最后一个sheet,因为最后一个sheet不确定会写入多少条数据)
                 int oneSheetWriteCount = sheetDataRows / writeDataRows;
                 // 计算最后一个sheet需要写入的次数
-                int lastSheetWriteCount =
-                        totalCount % sheetDataRows == 0
-                                ? oneSheetWriteCount
-                                : (totalCount % sheetDataRows % writeDataRows == 0
-                                        ? (totalCount / sheetDataRows / writeDataRows)
-                                        : (totalCount / sheetDataRows / writeDataRows + 1));
+                int lastSheetWriteCount = totalCount % sheetDataRows == 0
+                        ? oneSheetWriteCount
+                        : (totalCount % sheetDataRows % writeDataRows == 0
+                                ? (totalCount / sheetDataRows / writeDataRows)
+                                : (totalCount / sheetDataRows / writeDataRows + 1));
 
                 // 开始分批查询分次写入
                 // 注意这次的循环就需要进行嵌套循环了,外层循环是Sheet数目,内层循环是写入次数
@@ -116,9 +114,7 @@ public class ExcelTest {
 
                     // 循环写入次数:
                     // j的自增条件是当不是最后一个Sheet的时候写入次数为正常的每个Sheet写入的次数,如果是最后一个就需要使用计算的次数lastSheetWriteCount
-                    for (int j = 0;
-                            j < (i != sheetNum - 1 ? oneSheetWriteCount : lastSheetWriteCount);
-                            j++) {
+                    for (int j = 0; j < (i != sheetNum - 1 ? oneSheetWriteCount : lastSheetWriteCount); j++) {
                         // 集合复用,便于GC清理
                         dataList.clear();
                         // 分页查询一次20w
@@ -144,9 +140,7 @@ public class ExcelTest {
                 // 下载EXCEL
                 response.setHeader(
                         "Content-Disposition",
-                        "attachment;filename="
-                                + new String((fileName).getBytes("gb2312"), "ISO-8859-1")
-                                + ".xlsx");
+                        "attachment;filename=" + new String((fileName).getBytes("gb2312"), "ISO-8859-1") + ".xlsx");
                 response.setContentType("multipart/form-data");
                 response.setCharacterEncoding("utf-8");
                 writer.finish();
@@ -185,8 +179,7 @@ public class ExcelTest {
     }
 
     // 事件监听
-    public static class EasyExceGeneralDatalListener
-            extends AnalysisEventListener<Map<Integer, String>> {
+    public static class EasyExceGeneralDatalListener extends AnalysisEventListener<Map<Integer, String>> {
 
         /** 处理业务逻辑的Service,也可以是Mapper */
         // private ActResultLogService2 actResultLogService2;
@@ -249,10 +242,7 @@ public class ExcelTest {
             // 加载数据库连接池对象
             try {
                 // 获取数据库连接池对象
-                pro.load(
-                        JDBCDruidUtils.class
-                                .getClassLoader()
-                                .getResourceAsStream("druid.properties"));
+                pro.load(JDBCDruidUtils.class.getClassLoader().getResourceAsStream("druid.properties"));
                 dataSource = DruidDataSourceFactory.createDataSource(pro);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -341,10 +331,9 @@ public class ExcelTest {
             conn = JDBCDruidUtils.getConnection();
             // 控制事务:默认不提交
             conn.setAutoCommit(false);
-            String sql =
-                    "insert into ACT_RESULT_LOG"
-                        + " (onlineseqid,businessid,becifno,ivisresult,createdby,createddate,updateby,updateddate,risklevel)"
-                        + " values";
+            String sql = "insert into ACT_RESULT_LOG"
+                    + " (onlineseqid,businessid,becifno,ivisresult,createdby,createddate,updateby,updateddate,risklevel)"
+                    + " values";
             sql += "(?,?,?,?,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
             // 循环结果集:这里循环不支持"烂布袋"表达式

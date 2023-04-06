@@ -71,8 +71,7 @@ public class WalletPayStrategy extends AbsPayStrategy {
     @Override
     public void doPayHandler() {
         walletPayService.pay(getPayMode().getAmount(), this.getPayment(), this.wallet);
-        walletPaymentService.savePayment(
-                this.getPayment(), this.getPayParam(), this.getPayMode(), this.wallet);
+        walletPaymentService.savePayment(this.getPayment(), this.getPayParam(), this.getPayMode(), this.wallet);
     }
 
     /** 成功 */
@@ -92,8 +91,8 @@ public class WalletPayStrategy extends AbsPayStrategy {
     @Override
     public void doRefundHandler() {
         walletPayService.refund(this.getPayment().getId(), this.getPayMode().getAmount());
-        walletPaymentService.updateRefund(this.getPayment().getId(), this.getPayMode().getAmount());
-        paymentService.updateRefundSuccess(
-                this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.WALLET);
+        walletPaymentService.updateRefund(
+                this.getPayment().getId(), this.getPayMode().getAmount());
+        paymentService.updateRefundSuccess(this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.WALLET);
     }
 }

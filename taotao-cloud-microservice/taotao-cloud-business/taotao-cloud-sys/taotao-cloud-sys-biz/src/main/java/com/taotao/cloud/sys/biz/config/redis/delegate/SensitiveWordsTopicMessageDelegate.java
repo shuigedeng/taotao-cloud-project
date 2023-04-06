@@ -31,7 +31,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SensitiveWordsTopicMessageDelegate {
 
-    @Autowired private ISensitiveWordService sensitiveWordService;
+    @Autowired
+    private ISensitiveWordService sensitiveWordService;
 
     public void handleSensitiveWords(String message) {
         LogUtils.info(message);

@@ -95,8 +95,7 @@ public class MemberController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @PutMapping("/status")
-    public Result<Boolean> updateMemberStatus(
-            @RequestParam List<Long> memberIds, @RequestParam Boolean disabled) {
+    public Result<Boolean> updateMemberStatus(@RequestParam List<Long> memberIds, @RequestParam Boolean disabled) {
         return Result.success(memberService.updateMemberStatus(memberIds, disabled));
     }
 

@@ -27,10 +27,17 @@ import jakarta.annotation.Resource;
 // 领域服务
 public class PlayerDomainService {
 
-    @Resource private UserClientProxy userClientProxy;
-    @Resource private PlayerRepository playerEntityMapper;
-    @Resource private PlayerDomainAdapter playerDomainAdapter;
-    @Resource private PlayerMessageSender playerMessageSender;
+    @Resource
+    private UserClientProxy userClientProxy;
+
+    @Resource
+    private PlayerRepository playerEntityMapper;
+
+    @Resource
+    private PlayerDomainAdapter playerDomainAdapter;
+
+    @Resource
+    private PlayerMessageSender playerMessageSender;
 
     public boolean updatePlayer(PlayerUpdateDomain player) {
         AssertUtil.notNull(player, new BizException(ErrorCodeBizEnum.ILLEGAL_ARGUMENT));

@@ -52,13 +52,9 @@ public class MemberPointsHistoryController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/page")
-    public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(
-            MemberPointHistoryPageQuery pageQuery) {
-        IPage<MemberPointsHistory> page =
-                memberPointsHistoryService.memberPointsHistoryPageQuery(
-                        pageQuery.getPageParm(),
-                        pageQuery.getMemberId(),
-                        pageQuery.getMemberName());
+    public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(MemberPointHistoryPageQuery pageQuery) {
+        IPage<MemberPointsHistory> page = memberPointsHistoryService.memberPointsHistoryPageQuery(
+                pageQuery.getPageParm(), pageQuery.getMemberId(), pageQuery.getMemberName());
         return Result.success(PageResult.convertMybatisPage(page, MemberPointsHistoryPageVO.class));
     }
 

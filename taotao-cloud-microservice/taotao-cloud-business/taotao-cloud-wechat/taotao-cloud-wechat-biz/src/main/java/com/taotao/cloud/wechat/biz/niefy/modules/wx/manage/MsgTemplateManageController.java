@@ -43,9 +43,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/msgTemplate")
 @Api(tags = {"消息模板-管理后台", "模板消息的模板"})
 public class MsgTemplateManageController {
-    @Autowired private MsgTemplateService msgTemplateService;
-    @Autowired private TemplateMsgService templateMsgService;
-    @Autowired private WxMpService wxMpService;
+    @Autowired
+    private MsgTemplateService msgTemplateService;
+
+    @Autowired
+    private TemplateMsgService templateMsgService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     /** 列表 */
     @GetMapping("/list")

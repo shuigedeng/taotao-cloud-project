@@ -42,6 +42,5 @@ public interface KanJiaActivityGoodsMapper extends BaseSuperMapper<KanjiaActivit
      */
     @Select("SELECT * FROM tt_kanjia_activity_goods ${ew.customSqlSegment}")
     IPage<KanjiaActivityGoodsListVO> kanjiaActivityGoodsVOPage(
-            IPage<KanjiaActivityGoods> page,
-            @Param(Constants.WRAPPER) Wrapper<KanjiaActivityGoods> queryWrapper);
+            IPage<KanjiaActivityGoods> page, @Param(Constants.WRAPPER) Wrapper<KanjiaActivityGoods> queryWrapper);
 }

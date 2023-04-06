@@ -50,14 +50,13 @@ public class OAuth2EndpointUtils {
     public static MultiValueMap<String, String> getParameters(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>(parameterMap.size());
-        parameterMap.forEach(
-                (key, values) -> {
-                    if (values.length > 0) {
-                        for (String value : values) {
-                            parameters.add(key, value);
-                        }
-                    }
-                });
+        parameterMap.forEach((key, values) -> {
+            if (values.length > 0) {
+                for (String value : values) {
+                    parameters.add(key, value);
+                }
+            }
+        });
         return parameters;
     }
 
@@ -69,8 +68,7 @@ public class OAuth2EndpointUtils {
         return getParameters(request, exclusions);
     }
 
-    public static Map<String, Object> getParameters(
-            HttpServletRequest request, String... exclusions) {
+    public static Map<String, Object> getParameters(HttpServletRequest request, String... exclusions) {
         Map<String, Object> parameters = new HashMap<>(getParameters(request).toSingleValueMap());
         for (String exclusion : exclusions) {
             parameters.remove(exclusion);
@@ -101,19 +99,20 @@ public class OAuth2EndpointUtils {
     }
 
     public static void throwError(String errorCode, String parameterName, String errorUri) {
-        OAuth2Error error =
-                new OAuth2Error(errorCode, "OAuth 2.0 Parameter: " + parameterName, errorUri);
+        OAuth2Error error = new OAuth2Error(errorCode, "OAuth 2.0 Parameter: " + parameterName, errorUri);
         throw new OAuth2AuthenticationException(error);
     }
 
     private static boolean checkRequired(
             MultiValueMap<String, String> parameters, String parameterName, String parameterValue) {
-        return !StringUtils.hasText(parameterValue) || parameters.get(parameterName).size() != 1;
+        return !StringUtils.hasText(parameterValue)
+                || parameters.get(parameterName).size() != 1;
     }
 
     private static boolean checkOptional(
             MultiValueMap<String, String> parameters, String parameterName, String parameterValue) {
-        return StringUtils.hasText(parameterValue) && parameters.get(parameterName).size() != 1;
+        return StringUtils.hasText(parameterValue)
+                && parameters.get(parameterName).size() != 1;
     }
 
     public static String checkParameter(
@@ -137,46 +136,32 @@ public class OAuth2EndpointUtils {
     }
 
     public static String checkRequiredParameter(
-            MultiValueMap<String, String> parameters,
-            String parameterName,
-            String errorCode,
-            String errorUri) {
+            MultiValueMap<String, String> parameters, String parameterName, String errorCode, String errorUri) {
         return checkParameter(parameters, parameterName, true, errorCode, errorUri);
     }
 
     public static String checkRequiredParameter(
             MultiValueMap<String, String> parameters, String parameterName, String errorCode) {
         return checkRequiredParameter(
-                parameters,
-                parameterName,
-                errorCode,
-                OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
+                parameters, parameterName, errorCode, OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
     }
 
-    public static String checkRequiredParameter(
-            MultiValueMap<String, String> parameters, String parameterName) {
+    public static String checkRequiredParameter(MultiValueMap<String, String> parameters, String parameterName) {
         return checkRequiredParameter(parameters, parameterName, OAuth2ErrorCodes.INVALID_REQUEST);
     }
 
     public static String checkOptionalParameter(
-            MultiValueMap<String, String> parameters,
-            String parameterName,
-            String errorCode,
-            String errorUri) {
+            MultiValueMap<String, String> parameters, String parameterName, String errorCode, String errorUri) {
         return checkParameter(parameters, parameterName, false, errorCode, errorUri);
     }
 
     public static String checkOptionalParameter(
             MultiValueMap<String, String> parameters, String parameterName, String errorCode) {
         return checkOptionalParameter(
-                parameters,
-                parameterName,
-                errorCode,
-                OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
+                parameters, parameterName, errorCode, OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
     }
 
-    public static String checkOptionalParameter(
-            MultiValueMap<String, String> parameters, String parameterName) {
+    public static String checkOptionalParameter(MultiValueMap<String, String> parameters, String parameterName) {
         return checkOptionalParameter(parameters, parameterName, OAuth2ErrorCodes.INVALID_REQUEST);
     }
 }

@@ -159,10 +159,7 @@ public class DateUtil {
                 dateStr = dateToStr(date, "yyyy");
                 break;
             case YEAR_WEEK:
-                dateStr =
-                        dateToStr(date, "yyyy")
-                                + "|"
-                                + String.format("%02d", getWhichWeekOfYear(date));
+                dateStr = dateToStr(date, "yyyy") + "|" + String.format("%02d", getWhichWeekOfYear(date));
                 break;
             case MONTH_WEEK:
                 dateStr = dateToStr(date, "yyyy-MM") + "|" + getWhichWeekOfMonth(date);
@@ -527,13 +524,8 @@ public class DateUtil {
             Calendar c = Calendar.getInstance();
             c.setFirstDayOfWeek(firstDayOfWeek);
             c.setTime(date);
-            int weekOfYear =
-                    (int)
-                            Math.ceil(
-                                    (c.get(Calendar.DAY_OF_YEAR)
-                                                    + wholeDayOfWeek
-                                                    - getDayOfWeek(c.getTime()))
-                                            / (double) wholeDayOfWeek);
+            int weekOfYear = (int) Math.ceil((c.get(Calendar.DAY_OF_YEAR) + wholeDayOfWeek - getDayOfWeek(c.getTime()))
+                    / (double) wholeDayOfWeek);
             int tempInterval = (weekOfYear + interval) - minWeekOfYear;
             if (tempInterval < 0) {
                 c.add(Calendar.YEAR, -1);
@@ -552,23 +544,14 @@ public class DateUtil {
             temp.setTime(date);
             temp.set(Calendar.DAY_OF_YEAR, temp.getActualMaximum(Calendar.DAY_OF_YEAR));
             int maxWeekOfYear =
-                    (int)
-                            Math.ceil(
-                                    (temp.get(Calendar.DAY_OF_YEAR)
-                                                    + wholeDayOfWeek
-                                                    - getDayOfWeek(temp.getTime()))
-                                            / (double) wholeDayOfWeek);
+                    (int) Math.ceil((temp.get(Calendar.DAY_OF_YEAR) + wholeDayOfWeek - getDayOfWeek(temp.getTime()))
+                            / (double) wholeDayOfWeek);
 
             Calendar c = Calendar.getInstance();
             c.setFirstDayOfWeek(firstDayOfWeek);
             c.setTime(date);
-            int weekOfYear =
-                    (int)
-                            Math.ceil(
-                                    (c.get(Calendar.DAY_OF_YEAR)
-                                                    + wholeDayOfWeek
-                                                    - getDayOfWeek(c.getTime()))
-                                            / (double) wholeDayOfWeek);
+            int weekOfYear = (int) Math.ceil((c.get(Calendar.DAY_OF_YEAR) + wholeDayOfWeek - getDayOfWeek(c.getTime()))
+                    / (double) wholeDayOfWeek);
             int tempInterval = (weekOfYear + interval) - maxWeekOfYear;
             if (tempInterval > 0) {
                 c.add(Calendar.YEAR, 1);
@@ -644,13 +627,8 @@ public class DateUtil {
         Calendar c = Calendar.getInstance();
         c.setFirstDayOfWeek(firstDayOfWeek);
         c.setTime(date);
-        int weekOfYear =
-                (int)
-                        Math.ceil(
-                                (c.get(Calendar.DAY_OF_YEAR)
-                                                + wholeDayOfWeek
-                                                - getDayOfWeek(c.getTime()))
-                                        / (double) wholeDayOfWeek);
+        int weekOfYear = (int) Math.ceil(
+                (c.get(Calendar.DAY_OF_YEAR) + wholeDayOfWeek - getDayOfWeek(c.getTime())) / (double) wholeDayOfWeek);
         return weekOfYear;
     }
 

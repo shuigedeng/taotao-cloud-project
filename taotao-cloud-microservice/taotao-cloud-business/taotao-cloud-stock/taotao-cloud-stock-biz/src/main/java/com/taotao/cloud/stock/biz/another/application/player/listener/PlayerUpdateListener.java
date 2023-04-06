@@ -22,7 +22,8 @@ import com.taotao.cloud.ddd.biz.domain.player.event.PlayerUpdateEvent;
 // 比赛领域监听运动员变更事件
 public class PlayerUpdateListener {
 
-    @Resource private GameDomainService gameDomainService;
+    @Resource
+    private GameDomainService gameDomainService;
 
     @PostConstruct
     public void init() {

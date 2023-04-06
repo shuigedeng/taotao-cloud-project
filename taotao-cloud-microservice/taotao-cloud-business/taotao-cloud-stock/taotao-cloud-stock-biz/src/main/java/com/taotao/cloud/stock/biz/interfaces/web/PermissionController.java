@@ -35,18 +35,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/permission")
 public class PermissionController {
 
-    @Autowired private PermissionApplicationService permissionApplicationService;
+    @Autowired
+    private PermissionApplicationService permissionApplicationService;
 
-    @Autowired private PermissionQueryService permissionQueryService;
+    @Autowired
+    private PermissionQueryService permissionQueryService;
 
     /** 导航菜单 */
     @ApiOperation("导航菜单")
     @GetMapping("/nav")
     public Result nav() {
-        List<PermissionDTO> menuList =
-                permissionQueryService.getUserMenuTree(RequestUtils.getUserId());
-        Set<String> permissions =
-                permissionQueryService.getPermissionCodes(RequestUtils.getUserId());
+        List<PermissionDTO> menuList = permissionQueryService.getUserMenuTree(RequestUtils.getUserId());
+        Set<String> permissions = permissionQueryService.getPermissionCodes(RequestUtils.getUserId());
         return Result.ok().put("menuList", menuList).put("permissions", permissions);
     }
 

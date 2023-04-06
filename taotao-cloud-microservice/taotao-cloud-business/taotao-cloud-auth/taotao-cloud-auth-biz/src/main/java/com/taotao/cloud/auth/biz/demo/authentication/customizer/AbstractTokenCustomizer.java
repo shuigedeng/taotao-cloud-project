@@ -37,30 +37,24 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 public abstract class AbstractTokenCustomizer {
 
     protected void appendAll(
-            Map<String, Object> attributes,
-            Authentication authentication,
-            Set<String> authorizedScopes) {
+            Map<String, Object> attributes, Authentication authentication, Set<String> authorizedScopes) {
 
         appendAuthorities(attributes, authentication);
         appendCommons(attributes, authentication, authorizedScopes);
     }
 
-    protected void appendAuthorities(
-            Map<String, Object> attributes, Authentication authentication) {
+    protected void appendAuthorities(Map<String, Object> attributes, Authentication authentication) {
 
         if (CollectionUtils.isNotEmpty(authentication.getAuthorities())) {
-            Set<String> authorities =
-                    authentication.getAuthorities().stream()
-                            .map(GrantedAuthority::getAuthority)
-                            .collect(Collectors.toSet());
+            Set<String> authorities = authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toSet());
             attributes.put(BaseConstants.AUTHORITIES, authorities);
         }
     }
 
     protected void appendCommons(
-            Map<String, Object> attributes,
-            Authentication authentication,
-            Set<String> authorizedScopes) {
+            Map<String, Object> attributes, Authentication authentication, Set<String> authorizedScopes) {
 
         if (CollectionUtils.isNotEmpty(authorizedScopes)) {
             attributes.put(OAuth2ParameterNames.SCOPE, authorizedScopes);

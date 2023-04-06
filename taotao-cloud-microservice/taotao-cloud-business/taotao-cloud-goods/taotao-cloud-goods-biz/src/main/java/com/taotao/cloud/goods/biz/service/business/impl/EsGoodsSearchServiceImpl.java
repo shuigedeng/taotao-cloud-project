@@ -101,9 +101,11 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
     @Qualifier("elasticsearchRestTemplate")
     private ElasticsearchTemplate restTemplate;
 
-    @Autowired private IEsGoodsIndexService esGoodsIndexService;
+    @Autowired
+    private IEsGoodsIndexService esGoodsIndexService;
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     @Override
     public SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchQuery esGoodsSearchQuery) {
@@ -113,8 +115,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
         }
 
         if (CharSequenceUtil.isNotEmpty(esGoodsSearchQuery.getKeyword())) {
-            redisRepository.hincr(
-                    CachePrefix.HOT_WORD.getPrefix(), esGoodsSearchQuery.getKeyword(), 1.0);
+            redisRepository.hincr(CachePrefix.HOT_WORD.getPrefix(), esGoodsSearchQuery.getKeyword(), 1.0);
         }
 
         NativeSearchQueryBuilder searchQueryBuilder = createSearchQueryBuilder(esGoodsSearchQuery);
@@ -133,8 +134,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
         // redis 排序中，下标从0开始，所以这里需要 -1 处理 reverseRangeWithScores
         count = count - 1;
         Set<TypedTuple<Object>> set =
-                redisRepository.zReverseRangeByScoreWithScores(
-                        CachePrefix.HOT_WORD.getPrefix(), 0, count);
+                redisRepository.zReverseRangeByScoreWithScores(CachePrefix.HOT_WORD.getPrefix(), 0, count);
         if (set == null || set.isEmpty()) {
             return new ArrayList<>();
         }
@@ -147,9 +147,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
     @Override
     public Boolean setHotWords(HotWordsDTO hotWords) {
         redisRepository.hincr(
-                CachePrefix.HOT_WORD.getPrefix(),
-                hotWords.getKeywords(),
-                Double.valueOf(hotWords.getPoint()));
+                CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(), Double.valueOf(hotWords.getPoint()));
         return true;
     }
 
@@ -171,35 +169,30 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
         AggregationBuilder categoryNameBuilder =
                 AggregationBuilders.terms("categoryNameAgg").field("categoryNamePath.keyword");
         builder.withAggregations(
-                AggregationBuilders.terms("categoryAgg")
-                        .field("categoryPath")
-                        .subAggregation(categoryNameBuilder));
+                AggregationBuilders.terms("categoryAgg").field("categoryPath").subAggregation(categoryNameBuilder));
 
         // 品牌
         AggregationBuilder brandNameBuilder =
                 AggregationBuilders.terms(ATTR_BRAND_NAME).field("brandName.keyword");
-        builder.withAggregations(
-                AggregationBuilders.terms("brandIdNameAgg")
-                        .field(ATTR_BRAND_ID)
-                        .size(Integer.MAX_VALUE)
-                        .subAggregation(brandNameBuilder));
+        builder.withAggregations(AggregationBuilders.terms("brandIdNameAgg")
+                .field(ATTR_BRAND_ID)
+                .size(Integer.MAX_VALUE)
+                .subAggregation(brandNameBuilder));
         AggregationBuilder brandUrlBuilder =
                 AggregationBuilders.terms(ATTR_BRAND_URL).field("brandUrl.keyword");
-        builder.withAggregations(
-                AggregationBuilders.terms("brandIdUrlAgg")
-                        .field(ATTR_BRAND_ID)
-                        .size(Integer.MAX_VALUE)
-                        .subAggregation(brandUrlBuilder));
+        builder.withAggregations(AggregationBuilders.terms("brandIdUrlAgg")
+                .field(ATTR_BRAND_ID)
+                .size(Integer.MAX_VALUE)
+                .subAggregation(brandUrlBuilder));
 
         // 参数
         AggregationBuilder valuesBuilder = AggregationBuilders.terms("valueAgg").field(ATTR_VALUE);
         AggregationBuilder sortBuilder = AggregationBuilders.sum("sortAgg").field(ATTR_SORT);
-        AggregationBuilder paramsNameBuilder =
-                AggregationBuilders.terms("nameAgg")
-                        .field(ATTR_NAME)
-                        .subAggregation(sortBuilder)
-                        .order(BucketOrder.aggregation("sortAgg", false))
-                        .subAggregation(valuesBuilder);
+        AggregationBuilder paramsNameBuilder = AggregationBuilders.terms("nameAgg")
+                .field(ATTR_NAME)
+                .subAggregation(sortBuilder)
+                .order(BucketOrder.aggregation("sortAgg", false))
+                .subAggregation(valuesBuilder);
         builder.withAggregations(
                 AggregationBuilders.nested("attrAgg", ATTR_PATH).subAggregation(paramsNameBuilder));
         NativeSearchQuery searchQuery = builder.build();
@@ -301,9 +294,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
             String brandName = "";
             if (brandBuckets.get(i).getAggregations() != null
                     && brandBuckets.get(i).getAggregations().get(ATTR_BRAND_NAME) != null) {
-                brandName =
-                        this.getAggregationsBrandOptions(
-                                brandBuckets.get(i).getAggregations().get(ATTR_BRAND_NAME));
+                brandName = this.getAggregationsBrandOptions(
+                        brandBuckets.get(i).getAggregations().get(ATTR_BRAND_NAME));
                 if (StringUtils.isEmpty(brandName)) {
                     continue;
                 }
@@ -314,9 +306,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
                     && !brandUrlBuckets.isEmpty()
                     && brandUrlBuckets.get(i).getAggregations() != null
                     && brandUrlBuckets.get(i).getAggregations().get(ATTR_BRAND_URL) != null) {
-                brandUrl =
-                        this.getAggregationsBrandOptions(
-                                brandUrlBuckets.get(i).getAggregations().get(ATTR_BRAND_URL));
+                brandUrl = this.getAggregationsBrandOptions(
+                        brandUrlBuckets.get(i).getAggregations().get(ATTR_BRAND_URL));
                 if (StringUtils.isEmpty(brandUrl)) {
                     continue;
                 }
@@ -350,13 +341,11 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
      * @param categoryBuckets 分类聚合结果
      * @return 分类选择项集合
      */
-    private List<SelectorOptions> convertCategoryOptions(
-            List<? extends Terms.Bucket> categoryBuckets) {
+    private List<SelectorOptions> convertCategoryOptions(List<? extends Terms.Bucket> categoryBuckets) {
         List<SelectorOptions> categoryOptions = new ArrayList<>();
         for (Terms.Bucket categoryBucket : categoryBuckets) {
             String categoryPath = categoryBucket.getKey().toString();
-            ParsedStringTerms categoryNameAgg =
-                    categoryBucket.getAggregations().get("categoryNameAgg");
+            ParsedStringTerms categoryNameAgg = categoryBucket.getAggregations().get("categoryNameAgg");
             List<? extends Terms.Bucket> categoryNameBuckets = categoryNameAgg.getBuckets();
 
             String categoryNamePath = categoryPath;
@@ -406,8 +395,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
      * @param nameList 查询的规格名
      * @return 商品参数属性集合
      */
-    private List<ParamOptions> buildGoodsParamOptions(
-            ParsedStringTerms nameAgg, List<String> nameList) {
+    private List<ParamOptions> buildGoodsParamOptions(ParsedStringTerms nameAgg, List<String> nameList) {
         List<ParamOptions> paramOptions = new ArrayList<>();
         List<? extends Terms.Bucket> nameBuckets = nameAgg.getBuckets();
 
@@ -440,8 +428,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
      * @param esGoodsSearchQuery 搜索条件
      * @return es搜索builder
      */
-    private NativeSearchQueryBuilder createSearchQueryBuilder(
-            EsGoodsSearchQuery esGoodsSearchQuery) {
+    private NativeSearchQueryBuilder createSearchQueryBuilder(EsGoodsSearchQuery esGoodsSearchQuery) {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         if (esGoodsSearchQuery != null) {
             int pageNumber = esGoodsSearchQuery.getCurrentPage() - 1;
@@ -462,30 +449,24 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
             this.commonSearch(filterBuilder, esGoodsSearchQuery);
 
             // 未上架的商品不显示
-            filterBuilder.must(
-                    QueryBuilders.matchQuery("marketEnable", GoodsStatusEnum.UPPER.name()));
+            filterBuilder.must(QueryBuilders.matchQuery("marketEnable", GoodsStatusEnum.UPPER.name()));
             // 待审核和审核不通过的商品不显示
             filterBuilder.must(QueryBuilders.matchQuery("authFlag", GoodsAuthEnum.PASS.name()));
 
             // 关键字检索
             if (CharSequenceUtil.isEmpty(esGoodsSearchQuery.getKeyword())) {
-                List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders =
-                        new ArrayList<>();
-                GaussDecayFunctionBuilder skuNoScore =
-                        ScoreFunctionBuilders.gaussDecayFunction("skuSource", 100, 10)
-                                .setWeight(10);
+                List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
+                GaussDecayFunctionBuilder skuNoScore = ScoreFunctionBuilders.gaussDecayFunction("skuSource", 100, 10)
+                        .setWeight(10);
                 FunctionScoreQueryBuilder.FilterFunctionBuilder skuNoBuilder =
-                        new FunctionScoreQueryBuilder.FilterFunctionBuilder(
-                                QueryBuilders.matchAllQuery(), skuNoScore);
+                        new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchAllQuery(), skuNoScore);
                 filterFunctionBuilders.add(skuNoBuilder);
                 FunctionScoreQueryBuilder.FilterFunctionBuilder[] builders =
-                        new FunctionScoreQueryBuilder.FilterFunctionBuilder
-                                [filterFunctionBuilders.size()];
+                        new FunctionScoreQueryBuilder.FilterFunctionBuilder[filterFunctionBuilders.size()];
                 filterFunctionBuilders.toArray(builders);
-                FunctionScoreQueryBuilder functionScoreQueryBuilder =
-                        QueryBuilders.functionScoreQuery(builders)
-                                .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
-                                .setMinScore(2);
+                FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(builders)
+                        .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
+                        .setMinScore(2);
                 // 聚合搜索则将结果放入过滤条件
                 filterBuilder.must(functionScoreQueryBuilder);
             } else {
@@ -498,11 +479,8 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
             if (esGoodsSearchQuery != null
                     && CharSequenceUtil.isNotEmpty(esGoodsSearchQuery.getOrder())
                     && CharSequenceUtil.isNotEmpty(esGoodsSearchQuery.getSort())) {
-                nativeSearchQueryBuilder.withSorts(
-                        SortBuilders.fieldSort(esGoodsSearchQuery.getSort())
-                                .order(
-                                        SortOrder.valueOf(
-                                                esGoodsSearchQuery.getOrder().toUpperCase())));
+                nativeSearchQueryBuilder.withSorts(SortBuilders.fieldSort(esGoodsSearchQuery.getSort())
+                        .order(SortOrder.valueOf(esGoodsSearchQuery.getOrder().toUpperCase())));
             } else {
                 nativeSearchQueryBuilder.withSorts(SortBuilders.scoreSort().order(SortOrder.DESC));
             }
@@ -533,23 +511,16 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
         }
         // 规格项判定
         if (searchDTO.getNameIds() != null && !searchDTO.getNameIds().isEmpty()) {
-            filterBuilder.must(
-                    QueryBuilders.nestedQuery(
-                            ATTR_PATH,
-                            QueryBuilders.termsQuery("attrList.nameId", searchDTO.getNameIds()),
-                            ScoreMode.None));
+            filterBuilder.must(QueryBuilders.nestedQuery(
+                    ATTR_PATH, QueryBuilders.termsQuery("attrList.nameId", searchDTO.getNameIds()), ScoreMode.None));
         }
         // 分类判定
         if (CharSequenceUtil.isNotEmpty(searchDTO.getCategoryId())) {
-            filterBuilder.must(
-                    QueryBuilders.wildcardQuery(
-                            "categoryPath", "*" + searchDTO.getCategoryId() + "*"));
+            filterBuilder.must(QueryBuilders.wildcardQuery("categoryPath", "*" + searchDTO.getCategoryId() + "*"));
         }
         // 店铺分类判定
         if (CharSequenceUtil.isNotEmpty(searchDTO.getStoreCatId())) {
-            filterBuilder.must(
-                    QueryBuilders.wildcardQuery(
-                            "storeCategoryPath", "*" + searchDTO.getStoreCatId() + "*"));
+            filterBuilder.must(QueryBuilders.wildcardQuery("storeCategoryPath", "*" + searchDTO.getStoreCatId() + "*"));
         }
         // 店铺判定
         if (CharSequenceUtil.isNotEmpty(searchDTO.getStoreId())) {
@@ -580,12 +551,11 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
             if (max > Double.MAX_VALUE) {
                 max = Double.MAX_VALUE;
             }
-            filterBuilder.must(
-                    QueryBuilders.rangeQuery("price")
-                            .from(min)
-                            .to(max)
-                            .includeLower(true)
-                            .includeUpper(true));
+            filterBuilder.must(QueryBuilders.rangeQuery("price")
+                    .from(min)
+                    .to(max)
+                    .includeLower(true)
+                    .includeUpper(true));
         }
     }
 
@@ -621,18 +591,12 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
         }
         // 遍历所有的规格
         for (Map.Entry<String, List<String>> entry : valueMap.entrySet()) {
-            filterBuilder.must(
-                    QueryBuilders.nestedQuery(
-                            ATTR_PATH,
-                            QueryBuilders.matchQuery(ATTR_NAME, entry.getKey()),
-                            ScoreMode.None));
+            filterBuilder.must(QueryBuilders.nestedQuery(
+                    ATTR_PATH, QueryBuilders.matchQuery(ATTR_NAME, entry.getKey()), ScoreMode.None));
             BoolQueryBuilder shouldBuilder = QueryBuilders.boolQuery();
             for (String s : entry.getValue()) {
                 shouldBuilder.should(
-                        QueryBuilders.nestedQuery(
-                                ATTR_PATH,
-                                QueryBuilders.matchQuery(ATTR_VALUE, s),
-                                ScoreMode.None));
+                        QueryBuilders.nestedQuery(ATTR_PATH, QueryBuilders.matchQuery(ATTR_VALUE, s), ScoreMode.None));
             }
             filterBuilder.must(shouldBuilder);
         }
@@ -647,8 +611,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
      * @param keyword 关键字
      */
     private void keywordSearch(BoolQueryBuilder filterBuilder, String keyword) {
-        List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders =
-                new ArrayList<>();
+        List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
         if (keyword.contains(" ")) {
             for (String s : keyword.split(" ")) {
                 filterFunctionBuilders.addAll(this.buildKeywordSearch(s));
@@ -660,10 +623,9 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
         FunctionScoreQueryBuilder.FilterFunctionBuilder[] builders =
                 new FunctionScoreQueryBuilder.FilterFunctionBuilder[filterFunctionBuilders.size()];
         filterFunctionBuilders.toArray(builders);
-        FunctionScoreQueryBuilder functionScoreQueryBuilder =
-                QueryBuilders.functionScoreQuery(builders)
-                        .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
-                        .setMinScore(2);
+        FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(builders)
+                .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
+                .setMinScore(2);
         // 聚合搜索则将结果放入过滤条件
         filterBuilder.must(functionScoreQueryBuilder);
     }
@@ -674,24 +636,18 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
      * @param keyword 关键字
      * @return 构造查询的集合
      */
-    private List<FunctionScoreQueryBuilder.FilterFunctionBuilder> buildKeywordSearch(
-            String keyword) {
-        List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders =
-                new ArrayList<>();
+    private List<FunctionScoreQueryBuilder.FilterFunctionBuilder> buildKeywordSearch(String keyword) {
+        List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
         MatchQueryBuilder goodsNameQuery =
                 QueryBuilders.matchQuery("goodsName", keyword).operator(Operator.AND);
         // 分词匹配
-        filterFunctionBuilders.add(
-                new FunctionScoreQueryBuilder.FilterFunctionBuilder(
-                        goodsNameQuery, ScoreFunctionBuilders.weightFactorFunction(10)));
+        filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(
+                goodsNameQuery, ScoreFunctionBuilders.weightFactorFunction(10)));
         // 属性匹配
-        filterFunctionBuilders.add(
-                new FunctionScoreQueryBuilder.FilterFunctionBuilder(
-                        QueryBuilders.nestedQuery(
-                                ATTR_PATH,
-                                QueryBuilders.wildcardQuery(ATTR_VALUE, "*" + keyword + "*"),
-                                ScoreMode.None),
-                        ScoreFunctionBuilders.weightFactorFunction(8)));
+        filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(
+                QueryBuilders.nestedQuery(
+                        ATTR_PATH, QueryBuilders.wildcardQuery(ATTR_VALUE, "*" + keyword + "*"), ScoreMode.None),
+                ScoreFunctionBuilders.weightFactorFunction(8)));
 
         GaussDecayFunctionBuilder skuNoScore =
                 ScoreFunctionBuilders.gaussDecayFunction("skuSource", 100, 10).setWeight(7);
@@ -699,10 +655,9 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
                 new FunctionScoreQueryBuilder.FilterFunctionBuilder(goodsNameQuery, skuNoScore);
         filterFunctionBuilders.add(skuNoBuilder);
 
-        FieldValueFactorFunctionBuilder buyCountScore =
-                ScoreFunctionBuilders.fieldValueFactorFunction("buyCount")
-                        .modifier(FieldValueFactorFunction.Modifier.LOG1P)
-                        .setWeight(6);
+        FieldValueFactorFunctionBuilder buyCountScore = ScoreFunctionBuilders.fieldValueFactorFunction("buyCount")
+                .modifier(FieldValueFactorFunction.Modifier.LOG1P)
+                .setWeight(6);
         FunctionScoreQueryBuilder.FilterFunctionBuilder buyCountBuilder =
                 new FunctionScoreQueryBuilder.FilterFunctionBuilder(goodsNameQuery, buyCountScore);
         filterFunctionBuilders.add(buyCountBuilder);

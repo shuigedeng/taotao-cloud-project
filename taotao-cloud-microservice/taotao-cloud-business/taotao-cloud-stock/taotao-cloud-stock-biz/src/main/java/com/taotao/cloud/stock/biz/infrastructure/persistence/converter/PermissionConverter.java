@@ -47,20 +47,18 @@ public class PermissionConverter {
                 subPermissions.add(subPermission);
             }
         }
-        Permission permission =
-                new Permission(
-                        new PermissionId(sysPermissionDO.getId()),
-                        new PermissionName(sysPermissionDO.getPermissionName()),
-                        PermissionTypeEnum.getMenuTypeEnum(sysPermissionDO.getPermissionType()),
-                        PermissionLevelEnum.getMenuLevelEnum(sysPermissionDO.getPermissionLevel()),
-                        sysPermissionDO.getMenuIcon(),
-                        toPermissionCodes(
-                                Collections.singletonList(sysPermissionDO.getPermissionCodes())),
-                        sysPermissionDO.getOrderNum(),
-                        menuUrl,
-                        parent,
-                        StatusEnum.getStatusEnum(sysPermissionDO.getStatus()),
-                        subPermissions);
+        Permission permission = new Permission(
+                new PermissionId(sysPermissionDO.getId()),
+                new PermissionName(sysPermissionDO.getPermissionName()),
+                PermissionTypeEnum.getMenuTypeEnum(sysPermissionDO.getPermissionType()),
+                PermissionLevelEnum.getMenuLevelEnum(sysPermissionDO.getPermissionLevel()),
+                sysPermissionDO.getMenuIcon(),
+                toPermissionCodes(Collections.singletonList(sysPermissionDO.getPermissionCodes())),
+                sysPermissionDO.getOrderNum(),
+                menuUrl,
+                parent,
+                StatusEnum.getStatusEnum(sysPermissionDO.getStatus()),
+                subPermissions);
         return permission;
     }
 
@@ -72,20 +70,18 @@ public class PermissionConverter {
         if (sysPermissionDO.getMenuUrl() != null) {
             menuUrl = new MenuUrl(sysPermissionDO.getMenuUrl());
         }
-        Permission permission =
-                new Permission(
-                        new PermissionId(sysPermissionDO.getId()),
-                        new PermissionName(sysPermissionDO.getPermissionName()),
-                        PermissionTypeEnum.getMenuTypeEnum(sysPermissionDO.getPermissionType()),
-                        PermissionLevelEnum.getMenuLevelEnum(sysPermissionDO.getPermissionLevel()),
-                        sysPermissionDO.getMenuIcon(),
-                        toPermissionCodes(
-                                Collections.singletonList(sysPermissionDO.getPermissionCodes())),
-                        sysPermissionDO.getOrderNum(),
-                        menuUrl,
-                        null,
-                        StatusEnum.getStatusEnum(sysPermissionDO.getStatus()),
-                        null);
+        Permission permission = new Permission(
+                new PermissionId(sysPermissionDO.getId()),
+                new PermissionName(sysPermissionDO.getPermissionName()),
+                PermissionTypeEnum.getMenuTypeEnum(sysPermissionDO.getPermissionType()),
+                PermissionLevelEnum.getMenuLevelEnum(sysPermissionDO.getPermissionLevel()),
+                sysPermissionDO.getMenuIcon(),
+                toPermissionCodes(Collections.singletonList(sysPermissionDO.getPermissionCodes())),
+                sysPermissionDO.getOrderNum(),
+                menuUrl,
+                null,
+                StatusEnum.getStatusEnum(sysPermissionDO.getStatus()),
+                null);
         return permission;
     }
 
@@ -108,7 +104,9 @@ public class PermissionConverter {
     public static SysPermissionDO fromPermission(Permission permission) {
         SysPermissionDO sysPermissionDO = new SysPermissionDO();
         sysPermissionDO.setId(
-                permission.getPermissionId() == null ? null : permission.getPermissionId().getId());
+                permission.getPermissionId() == null
+                        ? null
+                        : permission.getPermissionId().getId());
         sysPermissionDO.setPermissionName(
                 permission.getPermissionName() == null
                         ? null

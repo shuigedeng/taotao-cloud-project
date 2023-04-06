@@ -73,8 +73,7 @@ public class CategorySpecificationManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/{categoryId}")
-    public Result<Boolean> saveCategoryBrand(
-            @PathVariable Long categoryId, @RequestParam String[] categorySpecs) {
+    public Result<Boolean> saveCategoryBrand(@PathVariable Long categoryId, @RequestParam String[] categorySpecs) {
         return Result.success(specificationService.saveCategoryBrand(categoryId, categorySpecs));
     }
 }

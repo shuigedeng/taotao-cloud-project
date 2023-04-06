@@ -33,9 +33,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class BankTransferPlugin implements Payment {
     /** 退款日志 */
-    @Autowired private RefundLogService refundLogService;
+    @Autowired
+    private RefundLogService refundLogService;
     /** 支付日志 */
-    @Autowired private PaymentService paymentService;
+    @Autowired
+    private PaymentService paymentService;
 
     @Override
     public void refund(RefundLog refundLog) {
@@ -64,8 +66,7 @@ public class BankTransferPlugin implements Payment {
         payParam.setClientType(ClientTypeEnum.PC.name());
 
         PaymentSuccessParams paymentSuccessParams =
-                new PaymentSuccessParams(
-                        PaymentMethodEnum.BANK_TRANSFER.name(), "", order.getFlowPrice(), payParam);
+                new PaymentSuccessParams(PaymentMethodEnum.BANK_TRANSFER.name(), "", order.getFlowPrice(), payParam);
 
         // 记录支付日志
         paymentService.adminPaySuccess(paymentSuccessParams);

@@ -30,7 +30,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleTaskRecordImpl implements ScheduleTaskRecord {
 
-    @Autowired private ScheduledJobLogMapper scheduledJobLogMapper;
+    @Autowired
+    private ScheduledJobLogMapper scheduledJobLogMapper;
 
     @Override
     public ScheduledTask selectTaskById(String id) {
@@ -45,13 +46,11 @@ public class ScheduleTaskRecordImpl implements ScheduleTaskRecord {
 
     @Override
     public List<ScheduledTask> taskList() {
-        List<ScheduledJob> scheduledJobs =
-                scheduledJobLogMapper.selectList(new LambdaQueryWrapper<>());
+        List<ScheduledJob> scheduledJobs = scheduledJobLogMapper.selectList(new LambdaQueryWrapper<>());
         return scheduledJobs.stream()
-                .map(
-                        task -> {
-                            return BeanUtil.copyProperties(task, ScheduledTask.class);
-                        })
+                .map(task -> {
+                    return BeanUtil.copyProperties(task, ScheduledTask.class);
+                })
                 .collect(Collectors.toList());
     }
 }

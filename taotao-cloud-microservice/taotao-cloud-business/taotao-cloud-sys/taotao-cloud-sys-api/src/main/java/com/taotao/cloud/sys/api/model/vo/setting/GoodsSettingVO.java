@@ -30,7 +30,8 @@ import lombok.*;
 @Schema(description = "商品配置VO")
 public class GoodsSettingVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     /** 是否开启商品审核 */
     private Boolean goodsCheck;

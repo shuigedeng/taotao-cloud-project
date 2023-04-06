@@ -32,7 +32,8 @@ public record CartBaseVO(
         @Schema(description = "此商品价格展示") PriceDetailVO priceDetailVO)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -5172752506920017597L;
+    @Serial
+    private static final long serialVersionUID = -5172752506920017597L;
 
     public PriceDetailVO getPriceDetailVO() {
         if (this.priceDetailDTO != null) {

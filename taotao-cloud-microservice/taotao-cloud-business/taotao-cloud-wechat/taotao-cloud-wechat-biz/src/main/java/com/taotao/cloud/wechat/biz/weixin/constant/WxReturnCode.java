@@ -36,9 +36,7 @@ public enum WxReturnCode {
     ERR_30001("30001", "原创校验出现系统错误且用户选择了被判为转载就不群发 ") {},
     ERR_30002("30002", "原创校验被判定为不能群发 ") {},
     ERR_30003("30003", "原创校验被判定为转载文且用户选择了被判为转载就不群发 ") {},
-    ERR_40001(
-            "40001",
-            "获取access_token时AppSecret错误，或者access_token无效。请开发者认真比对AppSecret的正确性，或查看是否正在为恰当的公众号调用接口") {},
+    ERR_40001("40001", "获取access_token时AppSecret错误，或者access_token无效。请开发者认真比对AppSecret的正确性，或查看是否正在为恰当的公众号调用接口") {},
     ERR_40002("40002", "不合法的凭证类型") {},
     ERR_40003("40003", "不合法的OpenID，请开发者确认OpenID（该用户）是否已关注公众号，或是否是其他公众号的OpenID") {},
     ERR_40004("40004", "不合法的媒体文件类型") {},
@@ -103,9 +101,7 @@ public enum WxReturnCode {
     ERR_41028("41028", "form_id不正确，或者过期") {},
     ERR_41029("41029", "form_id已被使用") {},
     ERR_41030("41030", "page不正确") {},
-    ERR_42001(
-            "42001",
-            "access_token超时，请检查access_token的有效期，请参考基础支持-获取access_token中，对access_token的详细机制说明") {},
+    ERR_42001("42001", "access_token超时，请检查access_token的有效期，请参考基础支持-获取access_token中，对access_token的详细机制说明") {},
     ERR_42002("42002", "refresh_token超时") {},
     ERR_42003("42003", "oauth_code超时") {},
     ERR_43001("43001", "需要GET请求") {},

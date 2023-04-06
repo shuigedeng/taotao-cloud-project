@@ -79,16 +79,15 @@ public class DefaultMpServiceFactory implements MpServiceFactory {
         Map<Long, WxMpService> id2MpServices = Maps.newHashMap();
         Map<String, WxMpMessageRouter> mpMessageRouters = Maps.newHashMap();
         // 处理 list
-        list.forEach(
-                account -> {
-                    // 构建 WxMpService 对象
-                    WxMpService mpService = buildMpService(account);
-                    appId2MpServices.put(account.getAppId(), mpService);
-                    id2MpServices.put(account.getId(), mpService);
-                    // 构建 WxMpMessageRouter 对象
-                    WxMpMessageRouter mpMessageRouter = buildMpMessageRouter(mpService);
-                    mpMessageRouters.put(account.getAppId(), mpMessageRouter);
-                });
+        list.forEach(account -> {
+            // 构建 WxMpService 对象
+            WxMpService mpService = buildMpService(account);
+            appId2MpServices.put(account.getAppId(), mpService);
+            id2MpServices.put(account.getId(), mpService);
+            // 构建 WxMpMessageRouter 对象
+            WxMpMessageRouter mpMessageRouter = buildMpMessageRouter(mpService);
+            mpMessageRouters.put(account.getAppId(), mpMessageRouter);
+        });
 
         // 设置到缓存
         this.appId2MpServices = appId2MpServices;
@@ -113,9 +112,8 @@ public class DefaultMpServiceFactory implements MpServiceFactory {
 
     private WxMpService buildMpService(MpAccountDO account) {
         // 第一步，创建 WxMpRedisConfigImpl 对象
-        WxMpRedisConfigImpl configStorage =
-                new WxMpRedisConfigImpl(
-                        redisTemplateWxRedisOps, mpProperties.getConfigStorage().getKeyPrefix());
+        WxMpRedisConfigImpl configStorage = new WxMpRedisConfigImpl(
+                redisTemplateWxRedisOps, mpProperties.getConfigStorage().getKeyPrefix());
         configStorage.setAppId(account.getAppId());
         configStorage.setSecret(account.getAppSecret());
         configStorage.setToken(account.getToken());

@@ -28,11 +28,7 @@ public class BpmFormBaseVO {
     @NotNull(message = "表单名称不能为空")
     private String name;
 
-    @ApiModelProperty(
-            value = "表单状态",
-            required = true,
-            notes = "参见 CommonStatusEnum 枚举",
-            example = "1")
+    @ApiModelProperty(value = "表单状态", required = true, notes = "参见 CommonStatusEnum 枚举", example = "1")
     @NotNull(message = "表单状态不能为空")
     private Integer status;
 

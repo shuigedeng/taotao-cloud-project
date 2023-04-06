@@ -37,7 +37,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MenuHandler implements WxMpMessageHandler {
 
-    @Resource private MpMenuService mpMenuService;
+    @Resource
+    private MpMenuService mpMenuService;
 
     @Override
     public WxMpXmlOutMessage handle(
@@ -45,7 +46,6 @@ public class MenuHandler implements WxMpMessageHandler {
             Map<String, Object> context,
             WxMpService weixinService,
             WxSessionManager sessionManager) {
-        return mpMenuService.reply(
-                MpContextHolder.getAppId(), wxMessage.getEventKey(), wxMessage.getFromUser());
+        return mpMenuService.reply(MpContextHolder.getAppId(), wxMessage.getEventKey(), wxMessage.getFromUser());
     }
 }

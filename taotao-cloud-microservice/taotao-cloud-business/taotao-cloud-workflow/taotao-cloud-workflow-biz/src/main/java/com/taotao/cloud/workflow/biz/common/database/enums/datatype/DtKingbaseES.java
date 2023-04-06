@@ -69,8 +69,7 @@ public enum DtKingbaseES implements DtInterface {
         this.precisionMax = precisionMax;
     }
 
-    DtKingbaseES(
-            String dbFieldType, String viewDataType, Integer defaultLength, Integer lengthMax) {
+    DtKingbaseES(String dbFieldType, String viewDataType, Integer defaultLength, Integer lengthMax) {
         this.dbFieldType = dbFieldType;
         this.lengthModifyFlag = true;
         this.viewDataType = viewDataType;

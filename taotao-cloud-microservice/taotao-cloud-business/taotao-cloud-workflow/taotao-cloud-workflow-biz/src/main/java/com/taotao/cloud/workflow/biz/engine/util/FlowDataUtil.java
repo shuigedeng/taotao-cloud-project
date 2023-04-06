@@ -72,10 +72,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class FlowDataUtil {
 
-    @Autowired private UserProvider userProvider;
-    @Autowired private DataSourceUtil dataSourceUtil;
-    @Autowired private ConfigValueUtil configValueUtil;
-    @Autowired private ServiceAllUtil serviceUtil;
+    @Autowired
+    private UserProvider userProvider;
+
+    @Autowired
+    private DataSourceUtil dataSourceUtil;
+
+    @Autowired
+    private ConfigValueUtil configValueUtil;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
 
     /**
      * 获取有表的数据库连接
@@ -116,8 +123,7 @@ public class FlowDataUtil {
      * @return
      * @throws DataException
      */
-    private List<Map<String, Object>> getTableList(Connection conn, String sql)
-            throws WorkFlowException {
+    private List<Map<String, Object>> getTableList(Connection conn, String sql) throws WorkFlowException {
         try {
             return JdbcUtil.queryListLowercase(new PreparedStatementDTO(conn, sql));
         } catch (DataException e) {
@@ -156,8 +162,7 @@ public class FlowDataUtil {
         String pKeyName = "f_id";
         // catalog 数据库名
         String catalog = conn.getCatalog();
-        @Cleanup
-        ResultSet primaryKeyResultSet = conn.getMetaData().getPrimaryKeys(catalog, null, mainTable);
+        @Cleanup ResultSet primaryKeyResultSet = conn.getMetaData().getPrimaryKeys(catalog, null, mainTable);
         while (primaryKeyResultSet.next()) {
             pKeyName = primaryKeyResultSet.getString("COLUMN_NAME");
         }
@@ -173,12 +178,10 @@ public class FlowDataUtil {
             boolean convert,
             DbLinkEntity link)
             throws WorkFlowException {
-        Map<String, Object> data =
-                StrUtil.isNotEmpty(entity.getFlowFormContentJson())
-                        ? JsonUtils.stringToMap(entity.getFlowFormContentJson())
-                        : new HashMap<>(16);
-        DataModel dataModel =
-                new DataModel(data, fieLdslist, tableList, entity.getId(), link, convert);
+        Map<String, Object> data = StrUtil.isNotEmpty(entity.getFlowFormContentJson())
+                ? JsonUtils.stringToMap(entity.getFlowFormContentJson())
+                : new HashMap<>(16);
+        DataModel dataModel = new DataModel(data, fieLdslist, tableList, entity.getId(), link, convert);
         return this.info(dataModel);
     }
 
@@ -247,47 +250,36 @@ public class FlowDataUtil {
                 throw new WorkFlowException(MsgCode.COD001.get());
             }
             String mastTableName = first.get().getTable();
-            List<FormAllModel> mastForm =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
-                            .toList();
-            List<String> mastFile =
-                    mastForm.stream()
-                            .filter(
-                                    t ->
-                                            StrUtil.isNotEmpty(
-                                                    t.getFormColumnModel()
-                                                            .getFieLdsModel()
-                                                            .getVModel()))
-                            .map(t -> t.getFormColumnModel().getFieLdsModel().getVModel())
-                            .collect(Collectors.toList());
+            List<FormAllModel> mastForm = formAllModel.stream()
+                    .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
+                    .toList();
+            List<String> mastFile = mastForm.stream()
+                    .filter(t -> StrUtil.isNotEmpty(
+                            t.getFormColumnModel().getFieLdsModel().getVModel()))
+                    .map(t -> t.getFormColumnModel().getFieLdsModel().getVModel())
+                    .collect(Collectors.toList());
             String pKeyName = this.getKey(conn, mastTableName);
             // 主表数据
-            String mastInfo =
-                    " select "
-                            + String.join(",", mastFile)
-                            + " from "
-                            + mastTableName
-                            + " where "
-                            + pKeyName
-                            + " = '"
-                            + mainId
-                            + "'";
+            String mastInfo = " select "
+                    + String.join(",", mastFile)
+                    + " from "
+                    + mastTableName
+                    + " where "
+                    + pKeyName
+                    + " = '"
+                    + mainId
+                    + "'";
             Map<String, Object> mastData = getMast(conn, mastInfo);
             Map<String, Object> mastDataAll = new HashMap<>();
             for (String key : mastData.keySet()) {
                 Object value = mastData.get(key);
-                FormAllModel formAll =
-                        mastForm.stream()
-                                .filter(
-                                        t ->
-                                                key.equals(
-                                                        t.getFormColumnModel()
-                                                                .getFieLdsModel()
-                                                                .getVModel()
-                                                                .toLowerCase()))
-                                .findFirst()
-                                .orElse(null);
+                FormAllModel formAll = mastForm.stream()
+                        .filter(t -> key.equals(t.getFormColumnModel()
+                                .getFieLdsModel()
+                                .getVModel()
+                                .toLowerCase()))
+                        .findFirst()
+                        .orElse(null);
                 if (formAll != null) {
                     FieLdsModel fieLdsModel = formAll.getFormColumnModel().getFieLdsModel();
                     String dataKey = fieLdsModel.getVModel();
@@ -297,39 +289,37 @@ public class FlowDataUtil {
             }
             data.putAll(mastDataAll);
             // 子表数据
-            List<FormAllModel> tableForm =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                            .toList();
+            List<FormAllModel> tableForm = formAllModel.stream()
+                    .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                    .toList();
             Map<String, Object> childData = new HashMap<>();
             for (FormAllModel model : tableForm) {
                 FormColumnTableModel childList = model.getChildList();
                 String tableName = childList.getTableName();
                 String tableModel = childList.getTableModel();
                 String childKey = this.getKey(conn, tableName);
-                List<String> childFile =
-                        childList.getChildList().stream()
-                                .filter(t -> StrUtil.isNotEmpty(t.getFieLdsModel().getVModel()))
-                                .map(t -> t.getFieLdsModel().getVModel())
-                                .collect(Collectors.toList());
-                Optional<TableModel> first1 =
-                        tableList.stream().filter(t -> t.getTable().equals(tableName)).findFirst();
+                List<String> childFile = childList.getChildList().stream()
+                        .filter(t -> StrUtil.isNotEmpty(t.getFieLdsModel().getVModel()))
+                        .map(t -> t.getFieLdsModel().getVModel())
+                        .collect(Collectors.toList());
+                Optional<TableModel> first1 = tableList.stream()
+                        .filter(t -> t.getTable().equals(tableName))
+                        .findFirst();
                 if (first1.isEmpty()) {
                     throw new WorkFlowException(MsgCode.COD001.get());
                 }
                 TableModel table = first1.get();
-                String tableInfo =
-                        "select "
-                                + String.join(",", childFile)
-                                + " from "
-                                + tableName
-                                + " where "
-                                + table.getTableField()
-                                + "='"
-                                + mainId
-                                + "' order by "
-                                + childKey
-                                + " asc";
+                String tableInfo = "select "
+                        + String.join(",", childFile)
+                        + " from "
+                        + tableName
+                        + " where "
+                        + table.getTableField()
+                        + "='"
+                        + mainId
+                        + "' order by "
+                        + childKey
+                        + " asc";
                 List<Map<String, Object>> tableDataList = getTableList(conn, tableInfo);
                 List<Map<String, Object>> tableDataAll = new LinkedList<>();
                 // 子表赋值
@@ -337,15 +327,12 @@ public class FlowDataUtil {
                     Map<String, Object> childDataOne = new HashMap<>();
                     for (String key : tableData.keySet()) {
                         Object value = tableData.get(key);
-                        FieLdsModel fieLdsModel =
-                                childList.getChildList().stream()
-                                        .map(FormColumnModel::getFieLdsModel)
-                                        .filter(
-                                                ldsModel ->
-                                                        key.equals(
-                                                                ldsModel.getVModel().toLowerCase()))
-                                        .findFirst()
-                                        .orElse(null);
+                        FieLdsModel fieLdsModel = childList.getChildList().stream()
+                                .map(FormColumnModel::getFieLdsModel)
+                                .filter(ldsModel ->
+                                        key.equals(ldsModel.getVModel().toLowerCase()))
+                                .findFirst()
+                                .orElse(null);
                         assert fieLdsModel != null;
                         value = this.info(fieLdsModel, value, true);
                         String dataKey = fieLdsModel.getVModel();
@@ -357,12 +344,10 @@ public class FlowDataUtil {
             }
             data.putAll(childData);
             // 副表
-            Map<String, List<FormAllModel>> mastTableAll =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
-                            .collect(
-                                    Collectors.groupingBy(
-                                            e -> e.getFormMastTableModel().getTable()));
+            Map<String, List<FormAllModel>> mastTableAll = formAllModel.stream()
+                    .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
+                    .collect(
+                            Collectors.groupingBy(e -> e.getFormMastTableModel().getTable()));
             for (String key : mastTableAll.keySet()) {
                 Optional<TableModel> first1 =
                         tableList.stream().filter(t -> t.getTable().equals(key)).findFirst();
@@ -372,43 +357,30 @@ public class FlowDataUtil {
                 TableModel tableModel = first1.get();
                 String table = tableModel.getTable();
                 List<FormAllModel> mastTableList = mastTableAll.get(key);
-                List<String> field =
-                        mastTableList.stream()
-                                .filter(
-                                        t ->
-                                                StrUtil.isNotEmpty(
-                                                        t.getFormMastTableModel().getField()))
-                                .map(t -> t.getFormMastTableModel().getField())
-                                .collect(Collectors.toList());
-                String mastTableInfo =
-                        "select "
-                                + String.join(",", field)
-                                + " from "
-                                + table
-                                + " where "
-                                + tableModel.getTableField()
-                                + "='"
-                                + mainId
-                                + "'";
+                List<String> field = mastTableList.stream()
+                        .filter(t ->
+                                StrUtil.isNotEmpty(t.getFormMastTableModel().getField()))
+                        .map(t -> t.getFormMastTableModel().getField())
+                        .collect(Collectors.toList());
+                String mastTableInfo = "select "
+                        + String.join(",", field)
+                        + " from "
+                        + table
+                        + " where "
+                        + tableModel.getTableField()
+                        + "='"
+                        + mainId
+                        + "'";
                 Map<String, Object> dataAll = getMast(conn, mastTableInfo);
                 Map<String, Object> mastTable = new HashMap<>();
                 for (String mastKey : dataAll.keySet()) {
                     Object value = dataAll.get(mastKey);
-                    FieLdsModel fieLdsModel =
-                            mastTableList.stream()
-                                    .filter(
-                                            t ->
-                                                    mastKey.equals(
-                                                            t.getFormMastTableModel()
-                                                                    .getField()
-                                                                    .toLowerCase()))
-                                    .map(
-                                            t ->
-                                                    t.getFormMastTableModel()
-                                                            .getMastTable()
-                                                            .getFieLdsModel())
-                                    .findFirst()
-                                    .orElse(null);
+                    FieLdsModel fieLdsModel = mastTableList.stream()
+                            .filter(t -> mastKey.equals(
+                                    t.getFormMastTableModel().getField().toLowerCase()))
+                            .map(t -> t.getFormMastTableModel().getMastTable().getFieLdsModel())
+                            .findFirst()
+                            .orElse(null);
                     assert fieLdsModel != null;
                     value = this.info(fieLdsModel, value, true);
                     String dataKey = fieLdsModel.getVModel();
@@ -431,52 +403,40 @@ public class FlowDataUtil {
     private Map<String, Object> data(DataModel dataModel, List<FormAllModel> formAllModel) {
         Map<String, Object> dataMap = dataModel.getDataNewMap();
         Map<String, Object> result = new HashMap<>();
-        List<FormAllModel> mastForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
-        List<FormAllModel> tableForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
+        List<FormAllModel> mastForm = formAllModel.stream()
+                .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
+                .toList();
+        List<FormAllModel> tableForm = formAllModel.stream()
+                .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                .toList();
         for (String key : dataMap.keySet()) {
-            FormAllModel model =
-                    mastForm.stream()
-                            .filter(
-                                    t ->
-                                            key.equals(
-                                                    t.getFormColumnModel()
-                                                            .getFieLdsModel()
-                                                            .getVModel()))
-                            .findFirst()
-                            .orElse(null);
+            FormAllModel model = mastForm.stream()
+                    .filter(t ->
+                            key.equals(t.getFormColumnModel().getFieLdsModel().getVModel()))
+                    .findFirst()
+                    .orElse(null);
             if (model != null) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
                 Object data = dataMap.get(key);
                 data = this.info(fieLdsModel, data, false);
                 result.put(key, data);
             } else {
-                FormAllModel childModel =
-                        tableForm.stream()
-                                .filter(t -> key.equals(t.getChildList().getTableModel()))
-                                .findFirst()
-                                .orElse(null);
+                FormAllModel childModel = tableForm.stream()
+                        .filter(t -> key.equals(t.getChildList().getTableModel()))
+                        .findFirst()
+                        .orElse(null);
                 if (childModel != null) {
                     String childKeyName = childModel.getChildList().getTableModel();
-                    List<Map<String, Object>> childDataMap =
-                            (List<Map<String, Object>>) dataMap.get(key);
+                    List<Map<String, Object>> childDataMap = (List<Map<String, Object>>) dataMap.get(key);
                     List<Map<String, Object>> childdataAll = new ArrayList<>();
                     for (Map<String, Object> child : childDataMap) {
                         Map<String, Object> tablValue = new HashMap<>(16);
                         for (String childKey : child.keySet()) {
-                            FormColumnModel columnModel =
-                                    childModel.getChildList().getChildList().stream()
-                                            .filter(
-                                                    t ->
-                                                            childKey.equals(
-                                                                    t.getFieLdsModel().getVModel()))
-                                            .findFirst()
-                                            .orElse(null);
+                            FormColumnModel columnModel = childModel.getChildList().getChildList().stream()
+                                    .filter(t ->
+                                            childKey.equals(t.getFieLdsModel().getVModel()))
+                                    .findFirst()
+                                    .orElse(null);
                             if (columnModel != null) {
                                 FieLdsModel fieLdsModel = columnModel.getFieLdsModel();
                                 Object childValue = child.get(childKey);
@@ -504,16 +464,13 @@ public class FlowDataUtil {
             case WorkflowKeyConsts.CURRORGANIZE:
             case WorkflowKeyConsts.CURRDEPT:
                 if (ObjectUtil.isNotEmpty(value)) {
-                    OrganizeEntity organizeEntity =
-                            serviceUtil.getOrganizeInfo(String.valueOf(value));
+                    OrganizeEntity organizeEntity = serviceUtil.getOrganizeInfo(String.valueOf(value));
                     if ("all".equals(showLevel)) {
                         if (organizeEntity != null) {
-                            List<OrganizeEntity> organizeList =
-                                    serviceUtil.getOrganizeId(organizeEntity.getId());
-                            value =
-                                    organizeList.stream()
-                                            .map(OrganizeEntity::getFullName)
-                                            .collect(Collectors.joining("/"));
+                            List<OrganizeEntity> organizeList = serviceUtil.getOrganizeId(organizeEntity.getId());
+                            value = organizeList.stream()
+                                    .map(OrganizeEntity::getFullName)
+                                    .collect(Collectors.joining("/"));
                         }
                     } else {
                         if (organizeEntity != null) {
@@ -533,8 +490,7 @@ public class FlowDataUtil {
                 break;
             case WorkflowKeyConsts.CURRPOSITION:
                 if (ObjectUtil.isNotEmpty(value)) {
-                    PositionEntity positionEntity =
-                            serviceUtil.getPositionInfo(String.valueOf(value));
+                    PositionEntity positionEntity = serviceUtil.getPositionInfo(String.valueOf(value));
                     if (positionEntity != null) {
                         value = positionEntity.getFullName();
                     }
@@ -607,8 +563,7 @@ public class FlowDataUtil {
                 } else {
                     if (isTable) {
                         PropsBeanModel propsModel =
-                                JsonUtils.toObject(
-                                        fieLdsModel.getProps().getProps(), PropsBeanModel.class);
+                                JsonUtils.toObject(fieLdsModel.getProps().getProps(), PropsBeanModel.class);
                         if (propsModel.getMultiple()) {
                             value = JsonUtils.toObject(String.valueOf(value), String[][].class);
                         } else {
@@ -633,8 +588,7 @@ public class FlowDataUtil {
             Map<String, String> billData,
             DbLinkEntity link)
             throws WorkFlowException {
-        DataModel dataModel =
-                new DataModel(allDataMap, fieLdsModelList, tableModelList, mainId, link, false);
+        DataModel dataModel = new DataModel(allDataMap, fieLdsModelList, tableModelList, mainId, link, false);
         return this.create(dataModel);
     }
 
@@ -666,9 +620,7 @@ public class FlowDataUtil {
         // 有表数据处理
         if (tableModelList.size() > 0) {
             DbLinkEntity link = dataModel.getLink();
-            boolean isOracle =
-                    (DbTypeUtil.checkOracle(dataSourceUtil)
-                            || DbTypeUtil.checkPostgre(dataSourceUtil));
+            boolean isOracle = (DbTypeUtil.checkOracle(dataSourceUtil) || DbTypeUtil.checkPostgre(dataSourceUtil));
             if (link != null) {
                 isOracle = (DbTypeUtil.checkOracle(link) || DbTypeUtil.checkPostgre(link));
             }
@@ -676,14 +628,11 @@ public class FlowDataUtil {
             @Cleanup Connection conn = this.getTableConn(link);
             conn.setAutoCommit(false);
             // 子表
-            this.createTable(
-                    formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
+            this.createTable(formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
             // 副表
-            this.createMastTable(
-                    formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
+            this.createMastTable(formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
             // 主表
-            this.createMast(
-                    formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
+            this.createMast(formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
         } else {
             // 无表数据处理
             result = this.createAll(dataNewMap, formAllModel);
@@ -702,37 +651,31 @@ public class FlowDataUtil {
             Map<String, Object> result)
             throws SQLException {
         // 子表
-        List<FormAllModel> tableForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
+        List<FormAllModel> tableForm = formAllModel.stream()
+                .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                .toList();
         Map<String, List<FormColumnModel>> childMap = new HashMap<>();
         Map<String, TableModel> chidTable = new HashMap<>();
-        tableForm.forEach(
-                t -> {
-                    FormColumnTableModel childListAll = t.getChildList();
-                    String tableModel = childListAll.getTableModel();
-                    List<FormColumnModel> childList =
-                            childListAll.getChildList().stream()
-                                    .filter(g -> StrUtil.isNotEmpty(g.getFieLdsModel().getVModel()))
-                                    .collect(Collectors.toList());
-                    childMap.put(tableModel, childList);
-                    String tableName = childListAll.getTableName();
-                    Optional<TableModel> first =
-                            tableModelList.stream()
-                                    .filter(k -> k.getTable().equals(tableName))
-                                    .findFirst();
-                    if (first.isPresent()) {
-                        TableModel childTable = first.get();
-                        chidTable.put(tableModel, childTable);
-                    }
-                });
+        tableForm.forEach(t -> {
+            FormColumnTableModel childListAll = t.getChildList();
+            String tableModel = childListAll.getTableModel();
+            List<FormColumnModel> childList = childListAll.getChildList().stream()
+                    .filter(g -> StrUtil.isNotEmpty(g.getFieLdsModel().getVModel()))
+                    .collect(Collectors.toList());
+            childMap.put(tableModel, childList);
+            String tableName = childListAll.getTableName();
+            Optional<TableModel> first = tableModelList.stream()
+                    .filter(k -> k.getTable().equals(tableName))
+                    .findFirst();
+            if (first.isPresent()) {
+                TableModel childTable = first.get();
+                chidTable.put(tableModel, childTable);
+            }
+        });
         for (String key : childMap.keySet()) {
             // 子表数据
             List<Map<String, Object>> chidList =
-                    allDataMap.get(key) != null
-                            ? (List<Map<String, Object>>) allDataMap.get(key)
-                            : new ArrayList<>();
+                    allDataMap.get(key) != null ? (List<Map<String, Object>>) allDataMap.get(key) : new ArrayList<>();
             List<FormColumnModel> formColumnModels = childMap.get(key);
             Map<String, FieLdsModel> columMap = new HashMap<>();
             // 获取子表对象的类型
@@ -746,8 +689,9 @@ public class FlowDataUtil {
             String table = tableModel.getTable();
             String childKeyName = this.getKey(conn, table);
             // 关联字段
-            Optional<TableModel> first =
-                    tableModelList.stream().filter(t -> t.getTable().equals(table)).findFirst();
+            Optional<TableModel> first = tableModelList.stream()
+                    .filter(t -> t.getTable().equals(table))
+                    .findFirst();
             String mastKeyName = "";
             if (first.isPresent()) {
                 mastKeyName = first.get().getTableField();
@@ -768,14 +712,12 @@ public class FlowDataUtil {
                     Object data = objectMap.get(childKey);
                     // 处理系统自动生成
                     data = this.create(fieLdsModel, data, true);
-                    String value =
-                            (isOracle
-                                            && (WorkflowKeyConsts.DATE.equals(flowKey)
-                                                    || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
-                                                    || WorkflowKeyConsts.CREATETIME.equals(
-                                                            flowKey)))
-                                    ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
-                                    : "?";
+                    String value = (isOracle
+                                    && (WorkflowKeyConsts.DATE.equals(flowKey)
+                                            || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
+                                            || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
+                            ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
+                            : "?";
                     // 添加数据
                     childData.add(data);
                     childOneResult.put(childKey, data);
@@ -805,8 +747,7 @@ public class FlowDataUtil {
             // 返回值
             result.put(key, childResultAll);
             String[] del = new String[] {};
-            String childSql =
-                    "insert into " + table + "(" + filedModel + ") values (" + filedValue + ")";
+            String childSql = "insert into " + table + "(" + filedModel + ") values (" + filedValue + ")";
             this.sql(childSql, childDataAll, del, conn, false);
         }
     }
@@ -822,13 +763,13 @@ public class FlowDataUtil {
             Map<String, Object> result)
             throws SQLException {
         // 副表
-        Map<String, List<FormAllModel>> mastTableAll =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
-                        .collect(Collectors.groupingBy(e -> e.getFormMastTableModel().getTable()));
+        Map<String, List<FormAllModel>> mastTableAll = formAllModel.stream()
+                .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
+                .collect(Collectors.groupingBy(e -> e.getFormMastTableModel().getTable()));
         for (String key : mastTableAll.keySet()) {
-            Optional<TableModel> first =
-                    tableModelList.stream().filter(t -> t.getTable().equals(key)).findFirst();
+            Optional<TableModel> first = tableModelList.stream()
+                    .filter(t -> t.getTable().equals(key))
+                    .findFirst();
             if (first.isEmpty()) {
                 throw new SQLException(MsgCode.COD001.get());
             }
@@ -859,13 +800,12 @@ public class FlowDataUtil {
                 // 添加字段
                 mastData.add(data);
                 String field = formMastTableModel.getField();
-                String value =
-                        (isOracle
-                                        && (WorkflowKeyConsts.DATE.equals(flowKey)
-                                                || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
-                                                || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
-                                ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
-                                : "?";
+                String value = (isOracle
+                                && (WorkflowKeyConsts.DATE.equals(flowKey)
+                                        || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
+                                        || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
+                        ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
+                        : "?";
                 filedModel.add(field);
                 filedValue.add(value);
             }
@@ -878,14 +818,7 @@ public class FlowDataUtil {
             filedModel.add(mastKeyName);
             filedValue.add("?");
             // 新增sql语句
-            String sql =
-                    "insert into "
-                            + tableModelTable
-                            + "("
-                            + filedModel
-                            + ") values ("
-                            + filedValue
-                            + ")";
+            String sql = "insert into " + tableModelTable + "(" + filedModel + ") values (" + filedValue + ")";
             List<List<Object>> data = new LinkedList<>();
             data.add(mastData);
             this.sql(sql, data, new String[] {}, conn, false);
@@ -909,16 +842,11 @@ public class FlowDataUtil {
         }
         TableModel tableModel = first.get();
         String mastTableName = tableModel.getTable();
-        List<FormAllModel> mastForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
-                        .filter(
-                                t ->
-                                        StrUtil.isNotEmpty(
-                                                t.getFormColumnModel()
-                                                        .getFieLdsModel()
-                                                        .getVModel()))
-                        .toList();
+        List<FormAllModel> mastForm = formAllModel.stream()
+                .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
+                .filter(t -> StrUtil.isNotEmpty(
+                        t.getFormColumnModel().getFieLdsModel().getVModel()))
+                .toList();
         // 新增字段
         StringJoiner filedModel = new StringJoiner(",");
         StringJoiner filedValue = new StringJoiner(",");
@@ -933,13 +861,12 @@ public class FlowDataUtil {
             data = this.create(fieLdsModel, data, true);
             mastData.add(data);
             // 添加字段
-            String value =
-                    (isOracle
-                                    && (WorkflowKeyConsts.DATE.equals(flowKey)
-                                            || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
-                                            || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
-                            ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
-                            : "?";
+            String value = (isOracle
+                            && (WorkflowKeyConsts.DATE.equals(flowKey)
+                                    || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
+                                    || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
+                    ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
+                    : "?";
             filedModel.add(field);
             filedValue.add(value);
             result.put(field, data);
@@ -949,8 +876,7 @@ public class FlowDataUtil {
         filedModel.add(keyName);
         filedValue.add("?");
         // 新增sql语句
-        String sql =
-                "insert into " + mastTableName + "(" + filedModel + ") values (" + filedValue + ")";
+        String sql = "insert into " + mastTableName + "(" + filedModel + ") values (" + filedValue + ")";
         List<List<Object>> data = new LinkedList<>();
         data.add(mastData);
         this.sql(sql, data, new String[] {}, conn, true);
@@ -992,10 +918,8 @@ public class FlowDataUtil {
             case WorkflowKeyConsts.DATE:
                 if (isTable) {
                     try {
-                        value =
-                                DateUtil.dateToString(
-                                        new Date(Long.valueOf(String.valueOf(dataValue))),
-                                        "yyyy-MM-dd HH:mm:ss");
+                        value = DateUtil.dateToString(
+                                new Date(Long.valueOf(String.valueOf(dataValue))), "yyyy-MM-dd HH:mm:ss");
                     } catch (Exception e) {
 
                     }
@@ -1026,29 +950,21 @@ public class FlowDataUtil {
     }
 
     /** 无表插入数据 */
-    private Map<String, Object> createAll(
-            Map<String, Object> dataNewMap, List<FormAllModel> formAllModel) {
+    private Map<String, Object> createAll(Map<String, Object> dataNewMap, List<FormAllModel> formAllModel) {
         // 处理好的数据
         Map<String, Object> result = new HashMap<>(16);
-        List<FormAllModel> mastForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
-        List<FormAllModel> tableForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
+        List<FormAllModel> mastForm = formAllModel.stream()
+                .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
+                .toList();
+        List<FormAllModel> tableForm = formAllModel.stream()
+                .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                .toList();
         for (String key : dataNewMap.keySet()) {
-            FormAllModel model =
-                    mastForm.stream()
-                            .filter(
-                                    t ->
-                                            key.equals(
-                                                    t.getFormColumnModel()
-                                                            .getFieLdsModel()
-                                                            .getVModel()))
-                            .findFirst()
-                            .orElse(null);
+            FormAllModel model = mastForm.stream()
+                    .filter(t ->
+                            key.equals(t.getFormColumnModel().getFieLdsModel().getVModel()))
+                    .findFirst()
+                    .orElse(null);
             if (model != null) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
                 Object data = dataNewMap.get(key);
@@ -1056,30 +972,25 @@ public class FlowDataUtil {
                 data = this.create(fieLdsModel, data, false);
                 result.put(key, data);
             } else {
-                FormAllModel childModel =
-                        tableForm.stream()
-                                .filter(t -> key.equals(t.getChildList().getTableModel()))
-                                .findFirst()
-                                .orElse(null);
+                FormAllModel childModel = tableForm.stream()
+                        .filter(t -> key.equals(t.getChildList().getTableModel()))
+                        .findFirst()
+                        .orElse(null);
                 if (childModel != null) {
                     // 子表主键
                     List<FormColumnModel> childList = childModel.getChildList().getChildList();
-                    List<Map<String, Object>> childDataMap =
-                            (List<Map<String, Object>>) dataNewMap.get(key);
+                    List<Map<String, Object>> childDataMap = (List<Map<String, Object>>) dataNewMap.get(key);
                     // 子表处理的数据
                     List<Map<String, Object>> childResult = new ArrayList<>();
                     for (Map<String, Object> objectMap : childDataMap) {
                         // 子表单体处理的数据
                         Map<String, Object> childOneResult = new HashMap<>(16);
                         for (String childKey : objectMap.keySet()) {
-                            FormColumnModel columnModel =
-                                    childList.stream()
-                                            .filter(
-                                                    t ->
-                                                            childKey.equals(
-                                                                    t.getFieLdsModel().getVModel()))
-                                            .findFirst()
-                                            .orElse(null);
+                            FormColumnModel columnModel = childList.stream()
+                                    .filter(t ->
+                                            childKey.equals(t.getFieLdsModel().getVModel()))
+                                    .findFirst()
+                                    .orElse(null);
                             if (columnModel != null) {
                                 FieLdsModel fieLdsModel = columnModel.getFieLdsModel();
                                 Object data = objectMap.get(childKey);
@@ -1108,8 +1019,7 @@ public class FlowDataUtil {
             String mainId,
             DbLinkEntity link)
             throws WorkFlowException {
-        DataModel dataModel =
-                new DataModel(allDataMap, fieLdsModelList, tableModelList, mainId, link, false);
+        DataModel dataModel = new DataModel(allDataMap, fieLdsModelList, tableModelList, mainId, link, false);
         return this.update(dataModel);
     }
 
@@ -1141,9 +1051,7 @@ public class FlowDataUtil {
         // 有表数据处理
         if (tableModelList.size() > 0) {
             DbLinkEntity link = dataModel.getLink();
-            boolean isOracle =
-                    (DbTypeUtil.checkOracle(dataSourceUtil)
-                            || DbTypeUtil.checkPostgre(dataSourceUtil));
+            boolean isOracle = (DbTypeUtil.checkOracle(dataSourceUtil) || DbTypeUtil.checkPostgre(dataSourceUtil));
             if (link != null) {
                 isOracle = (DbTypeUtil.checkOracle(link) || DbTypeUtil.checkPostgre(link));
             }
@@ -1151,14 +1059,11 @@ public class FlowDataUtil {
             @Cleanup Connection conn = this.getTableConn(link);
             conn.setAutoCommit(false);
             // 子表
-            this.updateTable(
-                    formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
+            this.updateTable(formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
             // 副表
-            this.updateMastTable(
-                    formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
+            this.updateMastTable(formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
             // 主表
-            this.updateMast(
-                    formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
+            this.updateMast(formAllModel, tableModelList, isOracle, dataNewMap, conn, mainId, result);
         } else {
             // 无表数据处理
             result = this.updateAll(dataNewMap, formAllModel);
@@ -1177,37 +1082,31 @@ public class FlowDataUtil {
             Map<String, Object> result)
             throws SQLException {
         // 子表
-        List<FormAllModel> tableForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
+        List<FormAllModel> tableForm = formAllModel.stream()
+                .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                .toList();
         Map<String, List<FormColumnModel>> childMap = new HashMap<>();
         Map<String, TableModel> chidTable = new HashMap<>();
-        tableForm.forEach(
-                t -> {
-                    FormColumnTableModel childListAll = t.getChildList();
-                    String tableModel = childListAll.getTableModel();
-                    List<FormColumnModel> childList =
-                            childListAll.getChildList().stream()
-                                    .filter(g -> StrUtil.isNotEmpty(g.getFieLdsModel().getVModel()))
-                                    .collect(Collectors.toList());
-                    childMap.put(tableModel, childList);
-                    String tableName = childListAll.getTableName();
-                    Optional<TableModel> first =
-                            tableModelList.stream()
-                                    .filter(k -> k.getTable().equals(tableName))
-                                    .findFirst();
-                    if (first.isPresent()) {
-                        TableModel childTable = first.get();
-                        chidTable.put(tableModel, childTable);
-                    }
-                });
+        tableForm.forEach(t -> {
+            FormColumnTableModel childListAll = t.getChildList();
+            String tableModel = childListAll.getTableModel();
+            List<FormColumnModel> childList = childListAll.getChildList().stream()
+                    .filter(g -> StrUtil.isNotEmpty(g.getFieLdsModel().getVModel()))
+                    .collect(Collectors.toList());
+            childMap.put(tableModel, childList);
+            String tableName = childListAll.getTableName();
+            Optional<TableModel> first = tableModelList.stream()
+                    .filter(k -> k.getTable().equals(tableName))
+                    .findFirst();
+            if (first.isPresent()) {
+                TableModel childTable = first.get();
+                chidTable.put(tableModel, childTable);
+            }
+        });
         for (String key : childMap.keySet()) {
             // 子表数据
             List<Map<String, Object>> chidList =
-                    dataNewMap.get(key) != null
-                            ? (List<Map<String, Object>>) dataNewMap.get(key)
-                            : new ArrayList<>();
+                    dataNewMap.get(key) != null ? (List<Map<String, Object>>) dataNewMap.get(key) : new ArrayList<>();
             List<FormColumnModel> formColumnModels = childMap.get(key);
             Map<String, FieLdsModel> columMap = new HashMap<>();
             // 获取子表对象的类型
@@ -1221,8 +1120,9 @@ public class FlowDataUtil {
             String table = tableModel.getTable();
             String childKeyName = this.getKey(conn, table);
             // 关联字段
-            Optional<TableModel> first =
-                    tableModelList.stream().filter(t -> t.getTable().equals(table)).findFirst();
+            Optional<TableModel> first = tableModelList.stream()
+                    .filter(t -> t.getTable().equals(table))
+                    .findFirst();
             if (first.isEmpty()) {
                 throw new SQLException(MsgCode.COD001.get());
             }
@@ -1243,14 +1143,12 @@ public class FlowDataUtil {
                     Object data = objectMap.get(childKey);
                     // 处理系统自动生成
                     data = this.update(fieLdsModel, data, true);
-                    String value =
-                            (isOracle
-                                            && (WorkflowKeyConsts.DATE.equals(flowKey)
-                                                    || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
-                                                    || WorkflowKeyConsts.CREATETIME.equals(
-                                                            flowKey)))
-                                    ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
-                                    : "?";
+                    String value = (isOracle
+                                    && (WorkflowKeyConsts.DATE.equals(flowKey)
+                                            || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
+                                            || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
+                            ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
+                            : "?";
                     // 添加数据
                     childData.add(data);
                     childOneResult.put(childKey, data);
@@ -1279,12 +1177,8 @@ public class FlowDataUtil {
             }
             // 返回值
             result.put(key, childResultAll);
-            String[] del =
-                    new String[] {
-                        "delete from " + table + " where " + mastKeyName + " = ?", mainId
-                    };
-            String childSql =
-                    "insert into " + table + "(" + filedModel + ") values (" + filedValue + ")";
+            String[] del = new String[] {"delete from " + table + " where " + mastKeyName + " = ?", mainId};
+            String childSql = "insert into " + table + "(" + filedModel + ") values (" + filedValue + ")";
             this.sql(childSql, childDataAll, del, conn, false);
         }
     }
@@ -1300,14 +1194,14 @@ public class FlowDataUtil {
             Map<String, Object> result)
             throws SQLException {
         // 副表
-        Map<String, List<FormAllModel>> mastTableAll =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
-                        .collect(Collectors.groupingBy(e -> e.getFormMastTableModel().getTable()));
+        Map<String, List<FormAllModel>> mastTableAll = formAllModel.stream()
+                .filter(t -> FormEnum.mastTable.getMessage().equals(t.getWorkflowKey()))
+                .collect(Collectors.groupingBy(e -> e.getFormMastTableModel().getTable()));
         for (String key : mastTableAll.keySet()) {
             // 副表
-            Optional<TableModel> first =
-                    tableModelList.stream().filter(t -> t.getTable().equals(key)).findFirst();
+            Optional<TableModel> first = tableModelList.stream()
+                    .filter(t -> t.getTable().equals(key))
+                    .findFirst();
             if (first.isEmpty()) {
                 throw new SQLException(MsgCode.COD001.get());
             }
@@ -1334,13 +1228,12 @@ public class FlowDataUtil {
                 // 添加字段
                 mastData.add(data);
                 String field = formMastTableModel.getField();
-                String value =
-                        (isOracle
-                                        && (WorkflowKeyConsts.DATE.equals(flowKey)
-                                                || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
-                                                || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
-                                ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
-                                : "?";
+                String value = (isOracle
+                                && (WorkflowKeyConsts.DATE.equals(flowKey)
+                                        || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
+                                        || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
+                        ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
+                        : "?";
                 filed.add(field + "=" + value);
             }
             // sql主键
@@ -1349,8 +1242,7 @@ public class FlowDataUtil {
             // 关联字段
             mastData.add(mainId);
             // 新增sql语句
-            String sql =
-                    "update " + tableModelTable + " set " + filed + " where " + mastKeyName + "= ?";
+            String sql = "update " + tableModelTable + " set " + filed + " where " + mastKeyName + "= ?";
             List<List<Object>> data = new LinkedList<>();
             data.add(mastData);
             this.sql(sql, data, new String[] {}, conn, false);
@@ -1374,16 +1266,11 @@ public class FlowDataUtil {
         }
         TableModel tableModel = first.get();
         String mastTableName = tableModel.getTable();
-        List<FormAllModel> mastForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
-                        .filter(
-                                t ->
-                                        StrUtil.isNotEmpty(
-                                                t.getFormColumnModel()
-                                                        .getFieLdsModel()
-                                                        .getVModel()))
-                        .toList();
+        List<FormAllModel> mastForm = formAllModel.stream()
+                .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
+                .filter(t -> StrUtil.isNotEmpty(
+                        t.getFormColumnModel().getFieLdsModel().getVModel()))
+                .toList();
         // 修改字段
         StringJoiner filed = new StringJoiner(",");
         List<Object> mastData = new LinkedList<>();
@@ -1397,13 +1284,12 @@ public class FlowDataUtil {
             data = this.update(fieLdsModel, data, true);
             mastData.add(data);
             // 添加字段
-            String value =
-                    (isOracle
-                                    && (WorkflowKeyConsts.DATE.equals(flowKey)
-                                            || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
-                                            || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
-                            ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
-                            : "?";
+            String value = (isOracle
+                            && (WorkflowKeyConsts.DATE.equals(flowKey)
+                                    || WorkflowKeyConsts.MODIFYTIME.equals(flowKey)
+                                    || WorkflowKeyConsts.CREATETIME.equals(flowKey)))
+                    ? "to_date(?,'yyyy-mm-dd HH24:mi:ss')"
+                    : "?";
             filed.add(field + "=" + value);
             result.put(field, data);
         }
@@ -1417,30 +1303,22 @@ public class FlowDataUtil {
     }
 
     /** 修改无表数据 */
-    private Map<String, Object> updateAll(
-            Map<String, Object> dataNewMap, List<FormAllModel> formAllModel) {
+    private Map<String, Object> updateAll(Map<String, Object> dataNewMap, List<FormAllModel> formAllModel) {
         // 处理好的数据
         Map<String, Object> result = new HashMap<>(16);
         // 系统数据
-        List<FormAllModel> mastForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
-        List<FormAllModel> tableForm =
-                formAllModel.stream()
-                        .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
-                        .toList();
+        List<FormAllModel> mastForm = formAllModel.stream()
+                .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
+                .toList();
+        List<FormAllModel> tableForm = formAllModel.stream()
+                .filter(t -> FormEnum.table.getMessage().equals(t.getWorkflowKey()))
+                .toList();
         for (String key : dataNewMap.keySet()) {
-            FormAllModel model =
-                    mastForm.stream()
-                            .filter(
-                                    t ->
-                                            key.equals(
-                                                    t.getFormColumnModel()
-                                                            .getFieLdsModel()
-                                                            .getVModel()))
-                            .findFirst()
-                            .orElse(null);
+            FormAllModel model = mastForm.stream()
+                    .filter(t ->
+                            key.equals(t.getFormColumnModel().getFieLdsModel().getVModel()))
+                    .findFirst()
+                    .orElse(null);
             if (model != null) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
                 Object data = dataNewMap.get(key);
@@ -1448,28 +1326,23 @@ public class FlowDataUtil {
                 data = this.update(fieLdsModel, data, false);
                 result.put(key, data);
             } else {
-                FormAllModel childModel =
-                        tableForm.stream()
-                                .filter(t -> key.equals(t.getChildList().getTableModel()))
-                                .findFirst()
-                                .orElse(null);
+                FormAllModel childModel = tableForm.stream()
+                        .filter(t -> key.equals(t.getChildList().getTableModel()))
+                        .findFirst()
+                        .orElse(null);
                 if (childModel != null) {
-                    List<Map<String, Object>> childDataMap =
-                            (List<Map<String, Object>>) dataNewMap.get(key);
+                    List<Map<String, Object>> childDataMap = (List<Map<String, Object>>) dataNewMap.get(key);
                     // 子表处理的数据
                     List<Map<String, Object>> childResult = new ArrayList<>();
                     for (Map<String, Object> objectMap : childDataMap) {
                         // 子表单体处理的数据
                         Map<String, Object> childOneResult = new HashMap<>(16);
                         for (String childKey : objectMap.keySet()) {
-                            FormColumnModel columnModel =
-                                    childModel.getChildList().getChildList().stream()
-                                            .filter(
-                                                    t ->
-                                                            childKey.equals(
-                                                                    t.getFieLdsModel().getVModel()))
-                                            .findFirst()
-                                            .orElse(null);
+                            FormColumnModel columnModel = childModel.getChildList().getChildList().stream()
+                                    .filter(t ->
+                                            childKey.equals(t.getFieLdsModel().getVModel()))
+                                    .findFirst()
+                                    .orElse(null);
                             if (columnModel != null) {
                                 FieLdsModel fieLdsModel = columnModel.getFieLdsModel();
                                 Object data = objectMap.get(childKey);
@@ -1526,8 +1399,7 @@ public class FlowDataUtil {
                 break;
             case WorkflowKeyConsts.CURRPOSITION:
                 if (!ObjectUtil.isEmpty(value)) {
-                    PositionEntity positionEntity =
-                            serviceUtil.getPositionFullName(String.valueOf(value));
+                    PositionEntity positionEntity = serviceUtil.getPositionFullName(String.valueOf(value));
                     value = positionEntity != null ? positionEntity.getId() : "";
                 }
                 break;
@@ -1543,10 +1415,8 @@ public class FlowDataUtil {
             case WorkflowKeyConsts.DATE:
                 if (isTable) {
                     try {
-                        value =
-                                DateUtil.dateToString(
-                                        new Date(Long.parseLong(String.valueOf(dataValue))),
-                                        "yyyy-MM-dd HH:mm:ss");
+                        value = DateUtil.dateToString(
+                                new Date(Long.parseLong(String.valueOf(dataValue))), "yyyy-MM-dd HH:mm:ss");
                     } catch (Exception ignored) {
 
                     }
@@ -1573,8 +1443,7 @@ public class FlowDataUtil {
     }
 
     /** 执行sql语句 */
-    private void sql(
-            String sql, List<List<Object>> dataAll, String[] del, Connection conn, boolean isCommit)
+    private void sql(String sql, List<List<Object>> dataAll, String[] del, Connection conn, boolean isCommit)
             throws SQLException {
         try {
             if (del.length > 0) {

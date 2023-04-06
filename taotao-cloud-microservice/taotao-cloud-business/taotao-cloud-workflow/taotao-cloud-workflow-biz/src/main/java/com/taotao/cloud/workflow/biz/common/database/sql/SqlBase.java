@@ -99,23 +99,19 @@ public abstract class SqlBase {
     protected abstract void init();
 
     /** 查询字段SQL */
-    public PreparedStatementDTO getFieldListPSD(
-            Connection conn, String table, DataSourceMod dbSourceOrDbLink) {
+    public PreparedStatementDTO getFieldListPSD(Connection conn, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dto = dbSourceOrDbLink.convertDTO();
-        return new PreparedStatementDTO(
-                conn, fieldListSql, this.dbBase.getStructParams(fieldListParams, table, dto));
+        return new PreparedStatementDTO(conn, fieldListSql, this.dbBase.getStructParams(fieldListParams, table, dto));
     }
 
     /** 查询表SQL */
     public PreparedStatementDTO getTableListPSD(Connection conn, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dto = dbSourceOrDbLink.convertDTO();
-        return new PreparedStatementDTO(
-                conn, tableListSql, this.dbBase.getStructParams(tableListParams, "", dto));
+        return new PreparedStatementDTO(conn, tableListSql, this.dbBase.getStructParams(tableListParams, "", dto));
     }
 
     /** 查询表是否存在SQL */
-    public PreparedStatementDTO getExistsTablePSD(
-            Connection conn, String table, DataSourceMod dbSourceOrDbLink) {
+    public PreparedStatementDTO getExistsTablePSD(Connection conn, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dto = dbSourceOrDbLink.convertDTO();
         return new PreparedStatementDTO(
                 conn, existsTableSql, this.dbBase.getStructParams(existsTableParams, table, dto));
@@ -123,10 +119,8 @@ public abstract class SqlBase {
 
     /** 添加表SQL */
     public List<PreparedStatementDTO> getCreateTablePSD(
-            String table, String tableComment, List<DbTableFieldModel> dbTableFieldModelList)
-            throws Exception {
-        return CreateSql.getCreTabSql(
-                new CreateSqlDTO(this.dbBase, table, tableComment, dbTableFieldModelList));
+            String table, String tableComment, List<DbTableFieldModel> dbTableFieldModelList) throws Exception {
+        return CreateSql.getCreTabSql(new CreateSqlDTO(this.dbBase, table, tableComment, dbTableFieldModelList));
     }
 
     public PreparedStatementDTO getDeleteSqlPSD(Connection conn, String deleteTable) {
@@ -138,11 +132,9 @@ public abstract class SqlBase {
     /** 设置表注释 */
     public PreparedStatementDTO getTableCommentPSD(CreateSqlDTO createSqlDTO) {
         // 模板：COMMENT ON TABLE {table} is {comment}
-        String table =
-                HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
+        String table = HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
         //        String preparedSql = "COMMENT ON TABLE " + table + " is ?;";
-        String preparedSql =
-                "COMMENT ON TABLE " + table + " is '" + createSqlDTO.getTableComment() + "'";
+        String preparedSql = "COMMENT ON TABLE " + table + " is '" + createSqlDTO.getTableComment() + "'";
         //        return new PreparedStatementDTO(null, preparedSql, createSqlDTO.getNewTable(),
         // createSqlDTO.getTableComment());
         return new PreparedStatementDTO(null, preparedSql);
@@ -151,15 +143,13 @@ public abstract class SqlBase {
     /** 设置字段注释 */
     public List<PreparedStatementDTO> getFieldCommentPSD(CreateSqlDTO createSqlDTO) {
         // 模板：COMMENT ON TABLE {table}.{column} is {comment}
-        String table =
-                HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
+        String table = HtmlUtils.htmlEscape(String.valueOf(createSqlDTO.getNewTable()), CharsetKit.UTF_8);
         String prepareSql = "COMMENT ON COLUMN " + table + ".{column} is '{comment}'";
         List<PreparedStatementDTO> listPSD = new ArrayList<>();
         for (DbTableFieldModel fieldModel : createSqlDTO.getFieldModels()) {
-            String preparedSql =
-                    prepareSql
-                            .replace("{column}", fieldModel.getField())
-                            .replace("{comment}", fieldModel.getFieldName());
+            String preparedSql = prepareSql
+                    .replace("{column}", fieldModel.getField())
+                    .replace("{comment}", fieldModel.getFieldName());
             listPSD.add(new PreparedStatementDTO(null, preparedSql));
         }
         return listPSD;
@@ -172,6 +162,5 @@ public abstract class SqlBase {
     }
     ;
 
-    public abstract String[] getPageSql(
-            String sql, String sortType, Integer currentPage, Integer pageSize);
+    public abstract String[] getPageSql(String sql, String sortType, Integer currentPage, Integer pageSize);
 }

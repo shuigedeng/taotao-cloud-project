@@ -57,14 +57,12 @@ public interface IGoodsMapper extends BaseSuperMapper<Goods, Long> {
      * @param goodsId 商品ID
      * @since 2022-04-27 16:56:00
      */
-    @Update(
-            """
+    @Update("""
 		UPDATE tt_goods
 		SET comment_num = comment_num + #{commentNum}
 		WHERE id = #{goodsId}
 		""")
-    void addGoodsCommentNum(
-            @Param("commentNum") Integer commentNum, @Param("goodsId") Long goodsId);
+    void addGoodsCommentNum(@Param("commentNum") Integer commentNum, @Param("goodsId") Long goodsId);
 
     /**
      * 查询商品VO分页
@@ -79,6 +77,5 @@ public interface IGoodsMapper extends BaseSuperMapper<Goods, Long> {
 		from tt_goods as g
 		""")
     IPage<GoodsSkuParamsVO> queryByParams(
-            IPage<GoodsSkuParamsVO> page,
-            @Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
+            IPage<GoodsSkuParamsVO> page, @Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
 }

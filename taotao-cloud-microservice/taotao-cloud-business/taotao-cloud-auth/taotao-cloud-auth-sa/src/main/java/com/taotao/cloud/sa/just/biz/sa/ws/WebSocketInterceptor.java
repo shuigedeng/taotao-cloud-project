@@ -55,10 +55,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
     // 握手之后触发
     @Override
     public void afterHandshake(
-            ServerHttpRequest request,
-            ServerHttpResponse response,
-            WebSocketHandler wsHandler,
-            Exception exception) {
+            ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
         System.out.println("---- 握手之后触发 ");
     }
 }

@@ -46,29 +46,26 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
 
     @Override
     public OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails) {
-        JwsHeader jwsHeader = JwsHeader.with(SignatureAlgorithm.RS256).type("JWT").build();
+        JwsHeader jwsHeader =
+                JwsHeader.with(SignatureAlgorithm.RS256).type("JWT").build();
 
         Instant issuedAt = Clock.system(ZoneId.of("Asia/Shanghai")).instant();
-        Set<String> scopes =
-                userDetails.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toSet());
+        Set<String> scopes = userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toSet());
 
         Instant expiresAt = issuedAt.plusSeconds(5 * 60);
-        JwtClaimsSet claimsSet =
-                JwtClaimsSet.builder()
-                        .issuer("https://felord.cn")
-                        .subject(userDetails.getUsername())
-                        .expiresAt(expiresAt)
-                        .audience(Arrays.asList("client1", "client2"))
-                        .issuedAt(issuedAt)
-                        .claim("scope", scopes)
-                        .build();
+        JwtClaimsSet claimsSet = JwtClaimsSet.builder()
+                .issuer("https://felord.cn")
+                .subject(userDetails.getUsername())
+                .expiresAt(expiresAt)
+                .audience(Arrays.asList("client1", "client2"))
+                .issuedAt(issuedAt)
+                .claim("scope", scopes)
+                .build();
 
         JWKSource jwkSource = ContextUtils.getBean(JWKSource.class, false);
-        Jwt jwt =
-                new NimbusJwtEncoder(jwkSource)
-                        .encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
+        Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
         return OAuth2AccessTokenResponse.withToken(jwt.getTokenValue())
                 .tokenType(OAuth2AccessToken.TokenType.BEARER)
                 .expiresIn(expiresAt.getEpochSecond())

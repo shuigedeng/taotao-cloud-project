@@ -34,7 +34,8 @@ public class CreateHtmlController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateHtmlController.class);
 
-    @Autowired private ICreateHtmlService createHtmlService;
+    @Autowired
+    private ICreateHtmlService createHtmlService;
 
     @ApiOperation(value = "生成静态商品页", nickname = "科帮网")
     @PostMapping("/start")

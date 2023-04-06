@@ -74,9 +74,7 @@ public class Chatbot extends JpaSuperEntity {
     private String channelMark;
 
     /** 是否开启 0-未开启，1-开启 */
-    @Column(
-            name = "enabled",
-            columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否开启 0-未开启 1-开启'")
+    @Column(name = "enabled", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否开启 0-未开启 1-开启'")
     private boolean enabled;
 
     /**

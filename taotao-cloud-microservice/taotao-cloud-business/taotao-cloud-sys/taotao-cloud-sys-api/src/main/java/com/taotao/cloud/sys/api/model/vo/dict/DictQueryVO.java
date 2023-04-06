@@ -36,7 +36,8 @@ import lombok.*;
 @Schema(description = "字典查询对象")
 public class DictQueryVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "id")
     private Long id;

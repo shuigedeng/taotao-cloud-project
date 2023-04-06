@@ -42,7 +42,8 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 public class GoodsOperationDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -509667581371776913L;
+    @Serial
+    private static final long serialVersionUID = -509667581371776913L;
 
     @Schema(description = "商品id")
     private Long goodsId;

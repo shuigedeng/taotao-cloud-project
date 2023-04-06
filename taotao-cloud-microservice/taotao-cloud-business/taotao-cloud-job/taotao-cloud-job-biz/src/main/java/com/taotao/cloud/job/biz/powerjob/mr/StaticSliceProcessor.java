@@ -53,8 +53,7 @@ public class StaticSliceProcessor implements MapReduceProcessor {
             // 实际处理
             // 当然，如果觉得 subTask 还是很大，也可以继续分发哦
 
-            return new ProcessResult(
-                    true, "subTask:" + ((SubTask) subTask).getIndex() + " process successfully");
+            return new ProcessResult(true, "subTask:" + ((SubTask) subTask).getIndex() + " process successfully");
         }
         return new ProcessResult(false, "UNKNOWN BUG");
     }

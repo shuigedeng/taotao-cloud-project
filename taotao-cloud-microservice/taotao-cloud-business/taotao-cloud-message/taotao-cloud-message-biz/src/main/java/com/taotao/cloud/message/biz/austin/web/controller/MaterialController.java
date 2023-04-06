@@ -40,7 +40,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Api("素材管理接口")
 public class MaterialController {
 
-    @Autowired private MaterialService materialService;
+    @Autowired
+    private MaterialService materialService;
 
     /**
      * 素材上传接口
@@ -54,10 +55,7 @@ public class MaterialController {
     @PostMapping("/upload")
     @ApiOperation("/素材上传接口")
     public BasicResultVO uploadMaterial(
-            @RequestParam("file") MultipartFile file,
-            String sendAccount,
-            Integer sendChannel,
-            String fileType) {
+            @RequestParam("file") MultipartFile file, String sendAccount, Integer sendChannel, String fileType) {
         if (ChannelType.DING_DING_WORK_NOTICE.getCode().equals(sendChannel)) {
             return materialService.dingDingMaterialUpload(file, sendAccount, fileType);
         } else if (ChannelType.ENTERPRISE_WE_CHAT_ROBOT.getCode().equals(sendChannel)) {

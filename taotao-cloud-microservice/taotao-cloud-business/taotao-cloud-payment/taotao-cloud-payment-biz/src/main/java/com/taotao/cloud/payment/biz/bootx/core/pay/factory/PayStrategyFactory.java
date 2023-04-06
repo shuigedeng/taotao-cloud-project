@@ -100,32 +100,23 @@ public class PayStrategyFactory {
      * @param payModeParamList 支付类型
      * @return 支付策略
      */
-    private static List<AbsPayStrategy> create(
-            List<PayModeParam> payModeParamList, boolean description) {
+    private static List<AbsPayStrategy> create(List<PayModeParam> payModeParamList, boolean description) {
         if (CollectionUtil.isEmpty(payModeParamList)) {
             return Collections.emptyList();
         }
         List<AbsPayStrategy> list = new ArrayList<>(payModeParamList.size());
 
         // 同步支付
-        List<PayModeParam> syncPayModeParamList =
-                payModeParamList.stream()
-                        .filter(Objects::nonNull)
-                        .filter(
-                                payModeParam ->
-                                        !PayChannelCode.ASYNC_TYPE.contains(
-                                                payModeParam.getPayChannel()))
-                        .collect(Collectors.toList());
+        List<PayModeParam> syncPayModeParamList = payModeParamList.stream()
+                .filter(Objects::nonNull)
+                .filter(payModeParam -> !PayChannelCode.ASYNC_TYPE.contains(payModeParam.getPayChannel()))
+                .collect(Collectors.toList());
 
         // 异步支付
-        List<PayModeParam> asyncPayModeParamList =
-                payModeParamList.stream()
-                        .filter(Objects::nonNull)
-                        .filter(
-                                payModeParam ->
-                                        PayChannelCode.ASYNC_TYPE.contains(
-                                                payModeParam.getPayChannel()))
-                        .collect(Collectors.toList());
+        List<PayModeParam> asyncPayModeParamList = payModeParamList.stream()
+                .filter(Objects::nonNull)
+                .filter(payModeParam -> PayChannelCode.ASYNC_TYPE.contains(payModeParam.getPayChannel()))
+                .collect(Collectors.toList());
 
         List<PayModeParam> sortList = new ArrayList<>(payModeParamList.size());
 

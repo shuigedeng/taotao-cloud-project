@@ -34,15 +34,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({BaiduFaceProperties.class})
 public class BaiduFaceConfiguration {
 
-    @Autowired private BaiduFaceProperties baiduFaceProperties;
+    @Autowired
+    private BaiduFaceProperties baiduFaceProperties;
 
     @Bean
     public AipFace aipFace() {
-        AipFace aipFace =
-                new AipFace(
-                        baiduFaceProperties.getAppId(),
-                        baiduFaceProperties.getApiKey(),
-                        baiduFaceProperties.getSecretKey());
+        AipFace aipFace = new AipFace(
+                baiduFaceProperties.getAppId(), baiduFaceProperties.getApiKey(), baiduFaceProperties.getSecretKey());
         aipFace.setConnectionTimeoutInMillis(60 * 1000);
         aipFace.setSocketTimeoutInMillis(60 * 1000);
         return aipFace;

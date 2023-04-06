@@ -64,16 +64,14 @@ public class WebClientConfiguration {
             ClientRegistrationRepository clientRegistrationRepository,
             OAuth2AuthorizedClientRepository authorizedClientRepository) {
 
-        OAuth2AuthorizedClientProvider authorizedClientProvider =
-                OAuth2AuthorizedClientProviderBuilder.builder()
-                        .authorizationCode()
-                        .refreshToken()
-                        .clientCredentials()
-                        .build();
+        OAuth2AuthorizedClientProvider authorizedClientProvider = OAuth2AuthorizedClientProviderBuilder.builder()
+                .authorizationCode()
+                .refreshToken()
+                .clientCredentials()
+                .build();
 
         DefaultOAuth2AuthorizedClientManager authorizedClientManager =
-                new DefaultOAuth2AuthorizedClientManager(
-                        clientRegistrationRepository, authorizedClientRepository);
+                new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientRepository);
 
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
 
@@ -89,8 +87,7 @@ public class WebClientConfiguration {
         return authorizeRequest -> {
             Map<String, Object> contextAttributes = Collections.emptyMap();
 
-            HttpServletRequest servletRequest =
-                    authorizeRequest.getAttribute(HttpServletRequest.class.getName());
+            HttpServletRequest servletRequest = authorizeRequest.getAttribute(HttpServletRequest.class.getName());
 
             String username = servletRequest.getParameter(OAuth2ParameterNames.USERNAME);
             String password = servletRequest.getParameter(OAuth2ParameterNames.PASSWORD);

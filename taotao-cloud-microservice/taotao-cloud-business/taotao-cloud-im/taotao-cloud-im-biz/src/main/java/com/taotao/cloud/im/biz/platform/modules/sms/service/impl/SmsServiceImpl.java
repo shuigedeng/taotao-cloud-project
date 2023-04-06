@@ -37,7 +37,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class SmsServiceImpl implements SmsService {
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public Dict sendSms(SmsVo smsVo) {

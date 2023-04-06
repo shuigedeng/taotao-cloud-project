@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.avg;
 
 import java.text.DecimalFormat;
@@ -24,8 +25,8 @@ import java.text.DecimalFormat;
  */
 public class PrecisionUtil {
 
-	public static double getPrecision(double value) {
-		DecimalFormat df = new DecimalFormat("####0.0000");
-		return Double.parseDouble(df.format(value));
-	}
+    public static double getPrecision(double value) {
+        DecimalFormat df = new DecimalFormat("####0.0000");
+        return Double.parseDouble(df.format(value));
+    }
 }

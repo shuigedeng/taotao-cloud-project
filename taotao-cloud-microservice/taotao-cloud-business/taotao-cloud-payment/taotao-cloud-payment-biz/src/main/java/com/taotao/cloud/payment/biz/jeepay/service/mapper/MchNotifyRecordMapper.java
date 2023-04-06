@@ -28,9 +28,7 @@ import org.apache.ibatis.annotations.Param;
 public interface MchNotifyRecordMapper extends BaseSuperMapper<MchNotifyRecord> {
 
     Integer updateNotifyResult(
-            @Param("notifyId") Long notifyId,
-            @Param("state") Byte state,
-            @Param("resResult") String resResult);
+            @Param("notifyId") Long notifyId, @Param("state") Byte state, @Param("resResult") String resResult);
 
     /*
      * 功能描述: 更改为通知中 & 增加允许重发通知次数

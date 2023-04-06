@@ -35,17 +35,14 @@ import org.springframework.stereotype.Service;
  * @date : 2022/2/25 21:06
  */
 @Service
-public class HerodotusRegisteredClientService
-        extends BaseLayeredService<HerodotusRegisteredClient, String> {
+public class HerodotusRegisteredClientService extends BaseLayeredService<HerodotusRegisteredClient, String> {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(HerodotusRegisteredClientService.class);
+    private static final Logger log = LoggerFactory.getLogger(HerodotusRegisteredClientService.class);
 
     private final HerodotusRegisteredClientRepository registeredClientRepository;
 
     @Autowired
-    public HerodotusRegisteredClientService(
-            HerodotusRegisteredClientRepository registeredClientRepository) {
+    public HerodotusRegisteredClientService(HerodotusRegisteredClientRepository registeredClientRepository) {
         this.registeredClientRepository = registeredClientRepository;
     }
 
@@ -55,8 +52,7 @@ public class HerodotusRegisteredClientService
     }
 
     public Optional<HerodotusRegisteredClient> findByClientId(String clientId) {
-        Optional<HerodotusRegisteredClient> result =
-                this.registeredClientRepository.findByClientId(clientId);
+        Optional<HerodotusRegisteredClient> result = this.registeredClientRepository.findByClientId(clientId);
         log.debug("[Herodotus] |- HerodotusRegisteredClient Service findByClientId.");
         return result;
     }

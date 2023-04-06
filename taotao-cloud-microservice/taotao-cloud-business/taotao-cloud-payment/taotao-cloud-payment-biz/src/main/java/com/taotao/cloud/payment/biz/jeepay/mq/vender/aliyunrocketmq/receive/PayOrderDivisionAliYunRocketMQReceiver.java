@@ -34,7 +34,8 @@ public class PayOrderDivisionAliYunRocketMQReceiver extends AbstractAliYunRocket
 
     private static final String CONSUMER_NAME = "支付订单分账消息";
 
-    @Autowired private PayOrderDivisionMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private PayOrderDivisionMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 */
     @Override

@@ -38,14 +38,8 @@ public class PaywayUtil {
 
             // 下划线转换驼峰 & 首字母大写
             String clsName = StrUtil.upperFirst(StrUtil.toCamelCase(wayCode.toLowerCase()));
-            return (IPaymentService)
-                    SpringBeansUtil.getBean(
-                            Class.forName(
-                                    obj.getClass().getPackage().getName()
-                                            + "."
-                                            + PAYWAY_PACKAGE_NAME
-                                            + "."
-                                            + clsName));
+            return (IPaymentService) SpringBeansUtil.getBean(
+                    Class.forName(obj.getClass().getPackage().getName() + "." + PAYWAY_PACKAGE_NAME + "." + clsName));
 
         } catch (ClassNotFoundException e) {
             return null;
@@ -59,14 +53,8 @@ public class PaywayUtil {
 
             // 下划线转换驼峰 & 首字母大写
             String clsName = StrUtil.upperFirst(StrUtil.toCamelCase(wayCode.toLowerCase()));
-            return (IPaymentService)
-                    SpringBeansUtil.getBean(
-                            Class.forName(
-                                    obj.getClass().getPackage().getName()
-                                            + "."
-                                            + PAYWAYV3_PACKAGE_NAME
-                                            + "."
-                                            + clsName));
+            return (IPaymentService) SpringBeansUtil.getBean(
+                    Class.forName(obj.getClass().getPackage().getName() + "." + PAYWAYV3_PACKAGE_NAME + "." + clsName));
 
         } catch (ClassNotFoundException e) {
             return null;

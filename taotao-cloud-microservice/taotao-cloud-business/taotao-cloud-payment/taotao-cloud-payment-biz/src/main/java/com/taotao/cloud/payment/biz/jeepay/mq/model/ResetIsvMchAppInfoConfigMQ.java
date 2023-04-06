@@ -81,8 +81,7 @@ public class ResetIsvMchAppInfoConfigMQ extends AbstractMQ {
     }
 
     /** 【！重要配置项！】 构造MQModel , 一般用于发送MQ时 * */
-    public static ResetIsvMchAppInfoConfigMQ build(
-            Byte resetType, String isvNo, String mchNo, String appId) {
+    public static ResetIsvMchAppInfoConfigMQ build(Byte resetType, String isvNo, String mchNo, String appId) {
         return new ResetIsvMchAppInfoConfigMQ(new MsgPayload(resetType, isvNo, mchNo, appId));
     }
 

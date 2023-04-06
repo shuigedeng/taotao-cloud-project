@@ -47,13 +47,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class DictItemServiceImpl
-        extends BaseSuperServiceImpl<
-                IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
+        extends BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
         implements IDictItemService {
 
     private static final QDictItem DICT_ITEM = QDictItem.dictItem;
-    private static final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC =
-            DICT_ITEM.createTime.desc();
+    private static final OrderSpecifier<LocalDateTime> CREATE_TIME_DESC = DICT_ITEM.createTime.desc();
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -105,16 +103,14 @@ public class DictItemServiceImpl
     @Override
     public List<DictItem> getInfo(DictItemQuery dictItemQuery) {
         BooleanExpression predicate = DICT_ITEM.delFlag.eq(false);
-        Optional.ofNullable(dictItemQuery.getDictId())
-                .ifPresent(dictId -> predicate.and(DICT_ITEM.dictId.eq(dictId)));
+        Optional.ofNullable(dictItemQuery.getDictId()).ifPresent(dictId -> predicate.and(DICT_ITEM.dictId.eq(dictId)));
         Optional.ofNullable(dictItemQuery.getItemText())
                 .ifPresent(itemText -> predicate.and(DICT_ITEM.itemText.like(itemText)));
         Optional.ofNullable(dictItemQuery.getItemValue())
                 .ifPresent(itemValue -> predicate.and(DICT_ITEM.itemValue.like(itemValue)));
         Optional.ofNullable(dictItemQuery.getDescription())
                 .ifPresent(description -> predicate.and(DICT_ITEM.description.like(description)));
-        Optional.ofNullable(dictItemQuery.getStatus())
-                .ifPresent(status -> predicate.and(DICT_ITEM.status.eq(status)));
+        Optional.ofNullable(dictItemQuery.getStatus()).ifPresent(status -> predicate.and(DICT_ITEM.status.eq(status)));
         return cr().find(predicate, DICT_ITEM, CREATE_TIME_DESC);
     }
 }

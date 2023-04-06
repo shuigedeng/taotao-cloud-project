@@ -63,10 +63,17 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 public class BpmModelServiceImpl implements BpmModelService {
 
-    @Resource private RepositoryService repositoryService;
-    @Resource private BpmProcessDefinitionService processDefinitionService;
-    @Resource private BpmFormService bpmFormService;
-    @Resource private BpmTaskAssignRuleService taskAssignRuleService;
+    @Resource
+    private RepositoryService repositoryService;
+
+    @Resource
+    private BpmProcessDefinitionService processDefinitionService;
+
+    @Resource
+    private BpmFormService bpmFormService;
+
+    @Resource
+    private BpmTaskAssignRuleService taskAssignRuleService;
 
     @Override
     public PageResult<BpmModelPageItemRespVO> getModelPage(BpmModelPageReqVO pageVO) {
@@ -82,29 +89,20 @@ public class BpmModelServiceImpl implements BpmModelService {
         }
         // 执行查询
         List<Model> models =
-                modelQuery
-                        .orderByCreateTime()
-                        .desc()
-                        .listPage(PageUtils.getStart(pageVO), pageVO.getPageSize());
+                modelQuery.orderByCreateTime().desc().listPage(PageUtils.getStart(pageVO), pageVO.getPageSize());
 
         // 获得 Form Map
-        Set<Long> formIds =
-                CollectionUtils.convertSet(
-                        models,
-                        model -> {
-                            BpmModelMetaInfoRespDTO metaInfo =
-                                    JsonUtils.parseObject(
-                                            model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
-                            return metaInfo != null ? metaInfo.getFormId() : null;
-                        });
+        Set<Long> formIds = CollectionUtils.convertSet(models, model -> {
+            BpmModelMetaInfoRespDTO metaInfo =
+                    JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
+            return metaInfo != null ? metaInfo.getFormId() : null;
+        });
         Map<Long, BpmFormDO> formMap = bpmFormService.getFormMap(formIds);
 
         // 获得 Deployment Map
         Set<String> deploymentIds = new HashSet<>();
-        models.forEach(
-                model -> CollectionUtils.addIfNotNull(deploymentIds, model.getDeploymentId()));
-        Map<String, Deployment> deploymentMap =
-                processDefinitionService.getDeploymentMap(deploymentIds);
+        models.forEach(model -> CollectionUtils.addIfNotNull(deploymentIds, model.getDeploymentId()));
+        Map<String, Deployment> deploymentMap = processDefinitionService.getDeploymentMap(deploymentIds);
         // 获得 ProcessDefinition Map
         List<ProcessDefinition> processDefinitions =
                 processDefinitionService.getProcessDefinitionListByDeploymentIds(deploymentIds);
@@ -114,9 +112,7 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 拼接结果
         long modelCount = modelQuery.count();
         return new PageResult<>(
-                BpmModelConvert.INSTANCE.convertList(
-                        models, formMap, deploymentMap, processDefinitionMap),
-                modelCount);
+                BpmModelConvert.INSTANCE.convertList(models, formMap, deploymentMap, processDefinitionMap), modelCount);
     }
 
     @Override
@@ -195,21 +191,17 @@ public class BpmModelServiceImpl implements BpmModelService {
         // 1.5 校验模型是否发生修改。如果未修改，则不允许创建
         BpmProcessDefinitionCreateReqDTO definitionCreateReqDTO =
                 BpmModelConvert.INSTANCE.convert2(model, form).setBpmnBytes(bpmnBytes);
-        if (processDefinitionService.isProcessDefinitionEquals(
-                definitionCreateReqDTO)) { // 流程定义的信息相等
+        if (processDefinitionService.isProcessDefinitionEquals(definitionCreateReqDTO)) { // 流程定义的信息相等
             ProcessDefinition oldProcessDefinition =
-                    processDefinitionService.getProcessDefinitionByDeploymentId(
-                            model.getDeploymentId());
+                    processDefinitionService.getProcessDefinitionByDeploymentId(model.getDeploymentId());
             if (oldProcessDefinition != null
-                    && taskAssignRuleService.isTaskAssignRulesEquals(
-                            model.getId(), oldProcessDefinition.getId())) {
+                    && taskAssignRuleService.isTaskAssignRulesEquals(model.getId(), oldProcessDefinition.getId())) {
                 throw exception(MODEL_DEPLOY_FAIL_TASK_INFO_EQUALS);
             }
         }
 
         // 2.1 创建流程定义
-        String definitionId =
-                processDefinitionService.createProcessDefinition(definitionCreateReqDTO);
+        String definitionId = processDefinitionService.createProcessDefinition(definitionCreateReqDTO);
 
         // 2.2 将老的流程定义进行挂起。也就是说，只有最新部署的流程定义，才可以发起任务。
         updateProcessDefinitionSuspended(model.getDeploymentId());
@@ -246,8 +238,7 @@ public class BpmModelServiceImpl implements BpmModelService {
         }
         // 校验流程定义存在
         ProcessDefinition definition =
-                processDefinitionService.getProcessDefinitionByDeploymentId(
-                        model.getDeploymentId());
+                processDefinitionService.getProcessDefinitionByDeploymentId(model.getDeploymentId());
         if (definition == null) {
             throw exception(PROCESS_DEFINITION_NOT_EXISTS);
         }
@@ -279,8 +270,7 @@ public class BpmModelServiceImpl implements BpmModelService {
      * @return 流程表单
      */
     private BpmFormDO checkFormConfig(String metaInfoStr) {
-        BpmModelMetaInfoRespDTO metaInfo =
-                JsonUtils.parseObject(metaInfoStr, BpmModelMetaInfoRespDTO.class);
+        BpmModelMetaInfoRespDTO metaInfo = JsonUtils.parseObject(metaInfoStr, BpmModelMetaInfoRespDTO.class);
         if (metaInfo == null || metaInfo.getFormType() == null) {
             throw exception(MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG);
         }
@@ -311,8 +301,7 @@ public class BpmModelServiceImpl implements BpmModelService {
         if (StrUtil.isEmpty(deploymentId)) {
             return;
         }
-        ProcessDefinition oldDefinition =
-                processDefinitionService.getProcessDefinitionByDeploymentId(deploymentId);
+        ProcessDefinition oldDefinition = processDefinitionService.getProcessDefinitionByDeploymentId(deploymentId);
         if (oldDefinition == null) {
             return;
         }

@@ -20,5 +20,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
 
 /** 流程经办记录 */
-public interface FlowTaskOperatorRecordMapper
-        extends BaseSuperMapper<FlowTaskOperatorRecordEntity, String> {}
+public interface FlowTaskOperatorRecordMapper extends BaseSuperMapper<FlowTaskOperatorRecordEntity, String> {}

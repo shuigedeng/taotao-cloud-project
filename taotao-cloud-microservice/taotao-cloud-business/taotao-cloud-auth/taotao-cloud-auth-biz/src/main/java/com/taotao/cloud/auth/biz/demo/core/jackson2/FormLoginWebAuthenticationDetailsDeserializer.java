@@ -32,11 +32,9 @@ import java.io.IOException;
  * @author : gengwei.zheng
  * @date : 2022/4/14 11:48
  */
-public class FormLoginWebAuthenticationDetailsDeserializer
-        extends JsonDeserializer<FormLoginWebAuthenticationDetails> {
+public class FormLoginWebAuthenticationDetailsDeserializer extends JsonDeserializer<FormLoginWebAuthenticationDetails> {
     @Override
-    public FormLoginWebAuthenticationDetails deserialize(
-            JsonParser jp, DeserializationContext deserializationContext)
+    public FormLoginWebAuthenticationDetails deserialize(JsonParser jp, DeserializationContext deserializationContext)
             throws IOException, JacksonException {
         ObjectMapper mapper = (ObjectMapper) jp.getCodec();
         JsonNode jsonNode = mapper.readTree(jp);

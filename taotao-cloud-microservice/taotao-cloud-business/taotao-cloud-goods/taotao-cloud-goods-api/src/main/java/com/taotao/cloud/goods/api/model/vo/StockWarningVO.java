@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StockWarningVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "库存警告数量")
     private Integer stockWarningNum;

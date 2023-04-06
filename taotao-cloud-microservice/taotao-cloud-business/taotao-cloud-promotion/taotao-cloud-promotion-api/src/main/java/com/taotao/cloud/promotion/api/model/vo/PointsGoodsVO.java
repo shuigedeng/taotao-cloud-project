@@ -32,7 +32,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PointsGoodsVO extends PointsGoodsBaseVO {
 
-    @Serial private static final long serialVersionUID = -5163709626742905057L;
+    @Serial
+    private static final long serialVersionUID = -5163709626742905057L;
 
     private String test;
 

@@ -40,8 +40,11 @@ public class RefundOrderReissueTask {
 
     private static final int QUERY_PAGE_SIZE = 100; // 每次查询数量
 
-    @Autowired private RefundOrderService refundOrderService;
-    @Autowired private ChannelOrderReissueService channelOrderReissueService;
+    @Autowired
+    private RefundOrderService refundOrderService;
+
+    @Autowired
+    private ChannelOrderReissueService channelOrderReissueService;
 
     @Scheduled(cron = "0 0/1 * * * ?") // 每分钟执行一次
     public void start() {
@@ -55,11 +58,9 @@ public class RefundOrderReissueTask {
 
             try {
                 IPage<RefundOrder> refundOrderIPage =
-                        refundOrderService.page(
-                                new Page(currentPageIndex, QUERY_PAGE_SIZE), lambdaQueryWrapper);
+                        refundOrderService.page(new Page(currentPageIndex, QUERY_PAGE_SIZE), lambdaQueryWrapper);
 
-                if (refundOrderIPage == null
-                        || refundOrderIPage.getRecords().isEmpty()) { // 本次查询无结果, 不再继续查询;
+                if (refundOrderIPage == null || refundOrderIPage.getRecords().isEmpty()) { // 本次查询无结果, 不再继续查询;
                     break;
                 }
 

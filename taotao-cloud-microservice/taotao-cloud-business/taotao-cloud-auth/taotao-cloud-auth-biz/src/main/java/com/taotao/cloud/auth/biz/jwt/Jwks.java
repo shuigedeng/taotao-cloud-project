@@ -58,6 +58,8 @@ public final class Jwks {
     public static OctetSequenceKey generateSecret() {
 
         SecretKey secretKey = KeyGeneratorUtils.generateSecretKey();
-        return new OctetSequenceKey.Builder(secretKey).keyID(UUID.randomUUID().toString()).build();
+        return new OctetSequenceKey.Builder(secretKey)
+                .keyID(UUID.randomUUID().toString())
+                .build();
     }
 }

@@ -55,8 +55,7 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
 
     public static final String TABLE_NAME = "tt_distribution";
 
-    public Distribution(
-            Long memberId, String memberName, DistributionApplyDTO distributionApplyDTO) {
+    public Distribution(Long memberId, String memberName, DistributionApplyDTO distributionApplyDTO) {
         this.memberId = memberId;
         this.memberName = memberName;
         distributionOrderCount = 0;
@@ -97,24 +96,16 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
      *
      * @see DistributionStatusEnum
      */
-    @Column(
-            name = "distribution_status",
-            columnDefinition = "varchar(255) not null  comment '分销员状态'")
+    @Column(name = "distribution_status", columnDefinition = "varchar(255) not null  comment '分销员状态'")
     private String distributionStatus;
     /** 结算银行开户行名称 */
-    @Column(
-            name = "settlement_bank_account_name",
-            columnDefinition = "varchar(255) not null  comment '结算银行开户行名称'")
+    @Column(name = "settlement_bank_account_name", columnDefinition = "varchar(255) not null  comment '结算银行开户行名称'")
     private String settlementBankAccountName;
     /** 结算银行开户账号 */
-    @Column(
-            name = "settlement_bank_account_num",
-            columnDefinition = "varchar(255) not null  comment '结算银行开户账号'")
+    @Column(name = "settlement_bank_account_num", columnDefinition = "varchar(255) not null  comment '结算银行开户账号'")
     private String settlementBankAccountNum;
     /** 结算银行开户支行名称 */
-    @Column(
-            name = "settlement_bank_branch_name",
-            columnDefinition = "varchar(255) not null  comment '结算银行开户支行名称'")
+    @Column(name = "settlement_bank_branch_name", columnDefinition = "varchar(255) not null  comment '结算银行开户支行名称'")
     private String settlementBankBranchName;
 
     @Override

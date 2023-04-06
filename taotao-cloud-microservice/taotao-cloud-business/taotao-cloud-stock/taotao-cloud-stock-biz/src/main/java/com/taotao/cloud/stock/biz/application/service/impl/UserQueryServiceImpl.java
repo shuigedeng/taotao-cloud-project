@@ -33,13 +33,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserQueryServiceImpl implements UserQueryService {
 
-    @Autowired private SysUserMapper sysUserMapper;
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Autowired private SysTenantMapper sysTenantMapper;
+    @Autowired
+    private SysTenantMapper sysTenantMapper;
 
-    @Autowired private PermissionQueryService permissionQueryService;
+    @Autowired
+    private PermissionQueryService permissionQueryService;
 
     @Override
     public Page queryPage(Map<String, Object> params) {

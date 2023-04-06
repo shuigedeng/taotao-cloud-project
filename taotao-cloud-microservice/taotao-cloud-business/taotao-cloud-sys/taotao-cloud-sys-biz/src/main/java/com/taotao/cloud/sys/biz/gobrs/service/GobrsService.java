@@ -69,8 +69,7 @@ public class GobrsService {
     public void updateRule() {
         RuleConfig r = new RuleConfig();
         r.setName("anyConditionGeneral");
-        r.setContent(
-                "AService->CService->EService->GService; BService->DService->FService->HService;");
+        r.setContent("AService->CService->EService->GService; BService->DService->FService->HService;");
         // ruleThermalLoad.load(r);
     }
 }

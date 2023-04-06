@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.funnel;
 
 import io.airlift.slice.Slice;
@@ -31,17 +32,17 @@ import java.util.Map;
  */
 public class FunnelBase {
 
-	// 查询的漏斗事件和索引关系 {events: {event: index, ....}, ....}
-	public static Map<Slice, Map<Slice, Byte>> event_pos_dict = new HashMap<>();
+    // 查询的漏斗事件和索引关系 {events: {event: index, ....}, ....}
+    public static Map<Slice, Map<Slice, Byte>> event_pos_dict = new HashMap<>();
 
-	public static void initEvents(Slice events) {
-		// 漏斗事件之间用 , 分割
-		List<String> fs = Arrays.asList(new String(events.getBytes()).split(","));
+    public static void initEvents(Slice events) {
+        // 漏斗事件之间用 , 分割
+        List<String> fs = Arrays.asList(new String(events.getBytes()).split(","));
 
-		Map<Slice, Byte> postDict = new HashMap<>();
-		for (byte i = 0; i < fs.size(); i++) {
-			postDict.put(Slices.utf8Slice(fs.get(i)), i);
-		}
-		event_pos_dict.put(events, postDict);
-	}
+        Map<Slice, Byte> postDict = new HashMap<>();
+        for (byte i = 0; i < fs.size(); i++) {
+            postDict.put(Slices.utf8Slice(fs.get(i)), i);
+        }
+        event_pos_dict.put(events, postDict);
+    }
 }

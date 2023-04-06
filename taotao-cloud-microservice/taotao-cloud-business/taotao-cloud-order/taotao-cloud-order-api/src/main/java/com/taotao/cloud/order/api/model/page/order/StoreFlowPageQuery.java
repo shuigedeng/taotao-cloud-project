@@ -41,7 +41,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "店铺流水查询DTO")
 public class StoreFlowPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     @Schema(description = "类型")
     private String type;

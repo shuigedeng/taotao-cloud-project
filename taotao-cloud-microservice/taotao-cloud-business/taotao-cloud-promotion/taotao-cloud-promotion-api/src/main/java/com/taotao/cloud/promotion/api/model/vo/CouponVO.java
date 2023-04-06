@@ -37,7 +37,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "优惠券")
 public class CouponVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8372420376262437018L;
+    @Serial
+    private static final long serialVersionUID = 8372420376262437018L;
 
     private String couponName;
 

@@ -36,7 +36,8 @@ import lombok.*;
 @Schema(description = "地区查询对象")
 public class RegionQueryVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 5126530068827085130L;
+    @Serial
+    private static final long serialVersionUID = 5126530068827085130L;
 
     @Schema(description = "地区编码")
     private String code;

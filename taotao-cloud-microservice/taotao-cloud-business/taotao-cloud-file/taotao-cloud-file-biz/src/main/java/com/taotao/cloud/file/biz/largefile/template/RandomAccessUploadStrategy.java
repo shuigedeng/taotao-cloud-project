@@ -30,7 +30,8 @@ import org.springframework.beans.factory.annotation.Value;
 @Slf4j
 public class RandomAccessUploadStrategy extends SliceUploadTemplate {
 
-    @Autowired private FilePathUtil filePathUtil;
+    @Autowired
+    private FilePathUtil filePathUtil;
 
     @Value("${upload.chunkSize}")
     private long defaultChunkSize;
@@ -44,9 +45,7 @@ public class RandomAccessUploadStrategy extends SliceUploadTemplate {
             accessTmpFile = new RandomAccessFile(tmpFile, "rw");
             // 这个必须与前端设定的值一致
             long chunkSize =
-                    Objects.isNull(param.getChunkSize())
-                            ? defaultChunkSize * 1024 * 1024
-                            : param.getChunkSize();
+                    Objects.isNull(param.getChunkSize()) ? defaultChunkSize * 1024 * 1024 : param.getChunkSize();
             long offset = chunkSize * param.getChunk();
             // 定位到该分片的偏移量
             accessTmpFile.seek(offset);

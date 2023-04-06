@@ -31,12 +31,14 @@ import org.springframework.stereotype.Service;
 
 /** 领用办公用品申请表 */
 @Service
-public class OfficeSuppliesServiceImpl
-        extends ServiceImpl<OfficeSuppliesMapper, OfficeSuppliesEntity>
+public class OfficeSuppliesServiceImpl extends ServiceImpl<OfficeSuppliesMapper, OfficeSuppliesEntity>
         implements OfficeSuppliesService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public OfficeSuppliesEntity getInfo(String id) {
@@ -70,8 +72,7 @@ public class OfficeSuppliesServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, OfficeSuppliesEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, OfficeSuppliesEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -97,10 +98,8 @@ public class OfficeSuppliesServiceImpl
 
     @Override
     public void data(String id, String data) {
-        OfficeSuppliesForm officeSuppliesForm =
-                JsonUtil.getJsonToBean(data, OfficeSuppliesForm.class);
-        OfficeSuppliesEntity entity =
-                JsonUtil.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
+        OfficeSuppliesForm officeSuppliesForm = JsonUtil.getJsonToBean(data, OfficeSuppliesForm.class);
+        OfficeSuppliesEntity entity = JsonUtil.getJsonToBean(officeSuppliesForm, OfficeSuppliesEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

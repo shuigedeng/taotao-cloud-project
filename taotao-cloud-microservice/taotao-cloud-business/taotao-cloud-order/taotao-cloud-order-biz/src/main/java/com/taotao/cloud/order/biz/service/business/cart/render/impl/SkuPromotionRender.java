@@ -67,22 +67,12 @@ public class SkuPromotionRender implements ICartRenderStep {
      * @since 2022-04-28 08:54:15
      */
     private void renderBasePrice(TradeDTO tradeDTO) {
-        tradeDTO.getCartList()
-                .forEach(
-                        cartVO ->
-                                cartVO.getCheckedSkuList()
-                                        .forEach(
-                                                cartSkuVO -> {
-                                                    PriceDetailDTO priceDetailDTO =
-                                                            cartSkuVO.getPriceDetailDTO();
-                                                    priceDetailDTO.setGoodsPrice(
-                                                            cartSkuVO.getSubTotal());
-                                                    priceDetailDTO.setDiscountPrice(
-                                                            CurrencyUtils.sub(
-                                                                    priceDetailDTO
-                                                                            .getOriginalPrice(),
-                                                                    cartSkuVO.getSubTotal()));
-                                                }));
+        tradeDTO.getCartList().forEach(cartVO -> cartVO.getCheckedSkuList().forEach(cartSkuVO -> {
+            PriceDetailDTO priceDetailDTO = cartSkuVO.getPriceDetailDTO();
+            priceDetailDTO.setGoodsPrice(cartSkuVO.getSubTotal());
+            priceDetailDTO.setDiscountPrice(
+                    CurrencyUtils.sub(priceDetailDTO.getOriginalPrice(), cartSkuVO.getSubTotal()));
+        }));
     }
 
     /**
@@ -100,9 +90,7 @@ public class SkuPromotionRender implements ICartRenderStep {
                     for (CartSkuVO cartSkuVO : cartVO.getCheckedSkuList()) {
                         cartSkuVO.getPriceDetailDTO().setPayPoint(cartSkuVO.getPoint());
                         PromotionSkuVO promotionSkuVO =
-                                new PromotionSkuVO(
-                                        PromotionTypeEnum.POINTS_GOODS.name(),
-                                        cartSkuVO.getPointsId());
+                                new PromotionSkuVO(PromotionTypeEnum.POINTS_GOODS.name(), cartSkuVO.getPointsId());
                         cartSkuVO.getPriceDetailDTO().getJoinPromotion().add(promotionSkuVO);
                     }
                 }
@@ -110,28 +98,24 @@ public class SkuPromotionRender implements ICartRenderStep {
             case KANJIA:
                 for (CartVO cartVO : tradeDTO.getCartList()) {
                     for (CartSkuVO cartSkuVO : cartVO.getCheckedSkuList()) {
-                        KanjiaActivitySearchParams kanjiaActivitySearchParams =
-                                new KanjiaActivitySearchParams();
-                        kanjiaActivitySearchParams.setGoodsSkuId(cartSkuVO.getGoodsSku().getId());
+                        KanjiaActivitySearchParams kanjiaActivitySearchParams = new KanjiaActivitySearchParams();
+                        kanjiaActivitySearchParams.setGoodsSkuId(
+                                cartSkuVO.getGoodsSku().getId());
                         kanjiaActivitySearchParams.setMemberId(
                                 UserContext.getCurrentUser().getId());
                         kanjiaActivitySearchParams.setStatus(KanJiaStatusEnum.SUCCESS.name());
                         KanjiaActivityVO kanjiaActivityVO =
-                                kanjiaActivityService.getKanjiaActivityVO(
-                                        kanjiaActivitySearchParams);
+                                kanjiaActivityService.getKanjiaActivityVO(kanjiaActivitySearchParams);
                         // 可以砍价金额购买，则处理信息
                         if (kanjiaActivityVO.getPass()) {
                             cartSkuVO.setKanjiaId(kanjiaActivityVO.getId());
                             cartSkuVO.setPurchasePrice(kanjiaActivityVO.getPurchasePrice());
                             cartSkuVO.setSubTotal(kanjiaActivityVO.getPurchasePrice());
-                            cartSkuVO
-                                    .getPriceDetailDTO()
-                                    .setGoodsPrice(kanjiaActivityVO.getPurchasePrice());
+                            cartSkuVO.getPriceDetailDTO().setGoodsPrice(kanjiaActivityVO.getPurchasePrice());
                         }
 
                         PromotionSkuVO promotionSkuVO =
-                                new PromotionSkuVO(
-                                        PromotionTypeEnum.KANJIA.name(), cartSkuVO.getKanjiaId());
+                                new PromotionSkuVO(PromotionTypeEnum.KANJIA.name(), cartSkuVO.getKanjiaId());
                         cartSkuVO.getPriceDetailDTO().getJoinPromotion().add(promotionSkuVO);
                     }
                 }
@@ -140,8 +124,7 @@ public class SkuPromotionRender implements ICartRenderStep {
                 for (CartVO cartVO : tradeDTO.getCartList()) {
                     for (CartSkuVO cartSkuVO : cartVO.getCheckedSkuList()) {
                         PromotionSkuVO promotionSkuVO =
-                                new PromotionSkuVO(
-                                        PromotionTypeEnum.PINTUAN.name(), cartSkuVO.getPintuanId());
+                                new PromotionSkuVO(PromotionTypeEnum.PINTUAN.name(), cartSkuVO.getPintuanId());
                         cartSkuVO.getPriceDetailDTO().getJoinPromotion().add(promotionSkuVO);
                     }
                 }
@@ -160,19 +143,13 @@ public class SkuPromotionRender implements ICartRenderStep {
                         for (PromotionGoods promotionGoods : cartSkuVO.getPromotions()) {
 
                             // 忽略拼团活动
-                            if (promotionGoods
-                                    .getPromotionType()
-                                    .equals(PromotionTypeEnum.PINTUAN.name())) {
+                            if (promotionGoods.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name())) {
                                 continue;
                             }
-                            PromotionSkuVO promotionSkuVO =
-                                    new PromotionSkuVO(
-                                            promotionGoods.getPromotionType(),
-                                            promotionGoods.getPromotionId());
+                            PromotionSkuVO promotionSkuVO = new PromotionSkuVO(
+                                    promotionGoods.getPromotionType(), promotionGoods.getPromotionId());
                             cartSkuVO.setPurchasePrice(promotionGoods.getPrice());
-                            cartSkuVO.setSubTotal(
-                                    CurrencyUtils.mul(
-                                            promotionGoods.getPrice(), cartSkuVO.getNum()));
+                            cartSkuVO.setSubTotal(CurrencyUtils.mul(promotionGoods.getPrice(), cartSkuVO.getNum()));
                             cartSkuVO.getPriceDetailDTO().setGoodsPrice(cartSkuVO.getSubTotal());
 
                             cartSkuVO.getPriceDetailDTO().getJoinPromotion().add(promotionSkuVO);

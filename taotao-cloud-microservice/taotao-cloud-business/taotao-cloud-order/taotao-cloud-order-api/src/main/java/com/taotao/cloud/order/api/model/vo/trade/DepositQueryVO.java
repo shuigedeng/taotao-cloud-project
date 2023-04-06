@@ -37,5 +37,6 @@ public record DepositQueryVO(
         @Schema(description = "结束日期") String endDate)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -6413611244037073693L;
+    @Serial
+    private static final long serialVersionUID = -6413611244037073693L;
 }

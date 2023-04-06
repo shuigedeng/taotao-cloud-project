@@ -32,13 +32,11 @@ import org.springframework.stereotype.Service;
  * @date 2023/2/6 11:19
  */
 @Service
-@ConditionalOnProperty(
-        name = "austin.mq.pipeline",
-        havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)
-public class SpringEventBusReceiverListener
-        implements ApplicationListener<AustinSpringEventBusEvent> {
+@ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)
+public class SpringEventBusReceiverListener implements ApplicationListener<AustinSpringEventBusEvent> {
 
-    @Autowired private SpringEventBusReceiver springEventBusReceiver;
+    @Autowired
+    private SpringEventBusReceiver springEventBusReceiver;
 
     @Value("${austin.business.topic.name}")
     private String sendTopic;

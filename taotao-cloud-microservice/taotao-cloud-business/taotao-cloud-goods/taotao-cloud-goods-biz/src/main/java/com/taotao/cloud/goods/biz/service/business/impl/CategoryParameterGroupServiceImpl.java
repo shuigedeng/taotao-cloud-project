@@ -71,9 +71,7 @@ public class CategoryParameterGroupServiceImpl
         // 根据id查询参数组
         List<CategoryParameterGroup> groups = this.getCategoryGroup(categoryId);
         // 查询参数
-        List<Parameters> params =
-                parametersService.list(
-                        new QueryWrapper<Parameters>().eq("category_id", categoryId));
+        List<Parameters> params = parametersService.list(new QueryWrapper<Parameters>().eq("category_id", categoryId));
         // 组合参数vo
         return convertParamList(groups, params);
     }
@@ -99,13 +97,9 @@ public class CategoryParameterGroupServiceImpl
         for (Map<String, Object> goods : goodsList) {
             String params = (String) goods.get("params");
             List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params, GoodsParamsDTO.class);
-            List<GoodsParamsDTO> goodsParamsDTOList =
-                    goodsParamsDTOS.stream()
-                            .filter(
-                                    i ->
-                                            i.getGroupId() != null
-                                                    && i.getGroupId().equals(origin.getId()))
-                            .toList();
+            List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
+                    .filter(i -> i.getGroupId() != null && i.getGroupId().equals(origin.getId()))
+                    .toList();
             for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
                 goodsParamsDTO.setGroupName(categoryParameterGroup.getGroupName());
             }
@@ -119,9 +113,8 @@ public class CategoryParameterGroupServiceImpl
 
     @Override
     public Boolean deleteByCategoryId(Long categoryId) {
-        return this.baseMapper.delete(
-                        new LambdaUpdateWrapper<CategoryParameterGroup>()
-                                .eq(CategoryParameterGroup::getCategoryId, categoryId))
+        return this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroup>()
+                        .eq(CategoryParameterGroup::getCategoryId, categoryId))
                 > 0;
     }
 
@@ -132,8 +125,7 @@ public class CategoryParameterGroupServiceImpl
      * @param paramList 商品参数list
      * @return 参数组和参数的返回值
      */
-    public List<ParameterGroupVO> convertParamList(
-            List<CategoryParameterGroup> groupList, List<Parameters> paramList) {
+    public List<ParameterGroupVO> convertParamList(List<CategoryParameterGroup> groupList, List<Parameters> paramList) {
         Map<Long, List<Parameters>> map = new HashMap<>(paramList.size());
         for (Parameters param : paramList) {
             List<Parameters> list = map.get(param.getGroupId());

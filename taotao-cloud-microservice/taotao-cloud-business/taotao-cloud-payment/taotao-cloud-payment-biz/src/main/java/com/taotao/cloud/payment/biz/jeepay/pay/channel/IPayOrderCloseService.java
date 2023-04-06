@@ -33,6 +33,5 @@ public interface IPayOrderCloseService {
     String getIfCode();
 
     /** 查询订单 * */
-    ChannelRetMsg close(PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception;
+    ChannelRetMsg close(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception;
 }

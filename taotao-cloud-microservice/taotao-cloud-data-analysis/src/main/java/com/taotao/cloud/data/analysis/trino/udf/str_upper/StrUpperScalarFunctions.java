@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udf.str_upper;
 
 import io.airlift.slice.Slice;
@@ -31,11 +32,11 @@ import io.trino.spi.type.StandardTypes;
  */
 public class StrUpperScalarFunctions {
 
-	@ScalarFunction("my_upper") // 标量函数名称
-	@Description("我的大小写转换函数") //函数注释
-	@SqlType(StandardTypes.VARBINARY) //函数数据类型
-	public static Slice myUpper(@SqlType(StandardTypes.VARBINARY) Slice input) {
-		String upper = input.toStringUtf8().toUpperCase();
-		return Slices.utf8Slice(upper);
-	}
+    @ScalarFunction("my_upper") // 标量函数名称
+    @Description("我的大小写转换函数") // 函数注释
+    @SqlType(StandardTypes.VARBINARY) // 函数数据类型
+    public static Slice myUpper(@SqlType(StandardTypes.VARBINARY) Slice input) {
+        String upper = input.toStringUtf8().toUpperCase();
+        return Slices.utf8Slice(upper);
+    }
 }

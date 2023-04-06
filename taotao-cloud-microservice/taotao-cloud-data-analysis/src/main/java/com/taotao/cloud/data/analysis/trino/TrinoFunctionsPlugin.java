@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino;
 
 import com.google.common.collect.ImmutableSet;
@@ -41,20 +42,20 @@ import java.util.Set;
  */
 public class TrinoFunctionsPlugin implements Plugin {
 
-	@Override
-	public Set<Class<?>> getFunctions() {
-		return ImmutableSet.<Class<?>>builder()
-			// udaf
-			.add(AvgAggregationFunctions.class)
-			.add(CollectListAggregationFunctions.class)
-			.add(DecodeBitSetAggregationFunctions.class)
-			.add(RouteUserGroupAggregationFunctions.class)
-			.add(FunnelAggregationsFunctions.class)
-			.add(FunnelMergeAggregationsFunctions.class)
-			.add(SumDoubleAggregationsFunctions.class)
-			//udf
-			.add(HiveToDateScalarFunctions.class)
-			.add(StrUpperScalarFunctions.class)
-			.build();
-	}
+    @Override
+    public Set<Class<?>> getFunctions() {
+        return ImmutableSet.<Class<?>>builder()
+                // udaf
+                .add(AvgAggregationFunctions.class)
+                .add(CollectListAggregationFunctions.class)
+                .add(DecodeBitSetAggregationFunctions.class)
+                .add(RouteUserGroupAggregationFunctions.class)
+                .add(FunnelAggregationsFunctions.class)
+                .add(FunnelMergeAggregationsFunctions.class)
+                .add(SumDoubleAggregationsFunctions.class)
+                // udf
+                .add(HiveToDateScalarFunctions.class)
+                .add(StrUpperScalarFunctions.class)
+                .build();
+    }
 }

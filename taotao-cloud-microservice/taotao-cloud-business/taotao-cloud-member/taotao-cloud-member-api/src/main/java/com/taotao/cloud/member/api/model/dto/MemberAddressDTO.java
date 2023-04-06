@@ -40,7 +40,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "租户id")
 public class MemberAddressDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @NotEmpty(message = "收货人姓名不能为空")
     @Schema(description = "收货人姓名")

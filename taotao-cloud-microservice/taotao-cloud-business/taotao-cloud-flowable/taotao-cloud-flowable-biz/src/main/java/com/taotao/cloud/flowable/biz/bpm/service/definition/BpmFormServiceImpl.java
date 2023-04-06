@@ -47,7 +47,8 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class BpmFormServiceImpl implements BpmFormService {
 
-    @Resource private BpmFormMapper formMapper;
+    @Resource
+    private BpmFormMapper formMapper;
 
     @Override
     public Long createForm(BpmFormCreateReqVO createReqVO) {
@@ -105,8 +106,7 @@ public class BpmFormServiceImpl implements BpmFormService {
 
     @Override
     public BpmFormDO checkFormConfig(String configStr) {
-        BpmModelMetaInfoRespDTO metaInfo =
-                JsonUtils.parseObject(configStr, BpmModelMetaInfoRespDTO.class);
+        BpmModelMetaInfoRespDTO metaInfo = JsonUtils.parseObject(configStr, BpmModelMetaInfoRespDTO.class);
         if (metaInfo == null || metaInfo.getFormType() == null) {
             throw exception(MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG);
         }
@@ -142,11 +142,7 @@ public class BpmFormServiceImpl implements BpmFormService {
                 continue;
             }
             // 如果存在，则报错
-            throw exception(
-                    ErrorCodeConstants.FORM_FIELD_REPEAT,
-                    oldLabel,
-                    fieldDTO.getLabel(),
-                    fieldDTO.getVModel());
+            throw exception(ErrorCodeConstants.FORM_FIELD_REPEAT, oldLabel, fieldDTO.getLabel(), fieldDTO.getVModel());
         }
     }
 }

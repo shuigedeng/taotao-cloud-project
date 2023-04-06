@@ -43,26 +43,26 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SmsPullReceiptStarterImpl implements ReceiptMessageStater {
 
-    @Autowired private ChannelAccountDao channelAccountDao;
+    @Autowired
+    private ChannelAccountDao channelAccountDao;
 
-    @Autowired private Map<String, SmsScript> scriptMap;
+    @Autowired
+    private Map<String, SmsScript> scriptMap;
 
-    @Autowired private SmsRecordDao smsRecordDao;
+    @Autowired
+    private SmsRecordDao smsRecordDao;
 
     /** 拉取消息并入库 */
     @Override
     public void start() {
         try {
-            List<ChannelAccount> channelAccountList =
-                    channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-                            CommonConstant.FALSE, ChannelType.SMS.getCode());
+            List<ChannelAccount> channelAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                    CommonConstant.FALSE, ChannelType.SMS.getCode());
             for (ChannelAccount channelAccount : channelAccountList) {
-                SmsAccount smsAccount =
-                        JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);
-                List<SmsRecord> smsRecordList =
-                        scriptMap
-                                .get(smsAccount.getScriptName())
-                                .pull(channelAccount.getId().intValue());
+                SmsAccount smsAccount = JSON.parseObject(channelAccount.getAccountConfig(), SmsAccount.class);
+                List<SmsRecord> smsRecordList = scriptMap
+                        .get(smsAccount.getScriptName())
+                        .pull(channelAccount.getId().intValue());
                 if (CollUtil.isNotEmpty(smsRecordList)) {
                     smsRecordDao.saveAll(smsRecordList);
                 }

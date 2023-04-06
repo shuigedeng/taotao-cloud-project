@@ -34,5 +34,6 @@ public record OrderComplaintDTO(
         @NotBlank @Schema(description = "sku主键") String skuId)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

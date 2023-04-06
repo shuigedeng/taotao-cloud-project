@@ -38,5 +38,6 @@ public record OrderComplaintCommunicationBaseVO(
         @Schema(description = "对话所属id,卖家id/买家id") Long ownerId)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -2384351827382795547L;
+    @Serial
+    private static final long serialVersionUID = -2384351827382795547L;
 }

@@ -27,29 +27,23 @@ import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostP
  * determineCandidateConstructors：该触发点发生在postProcessBeforeInstantiation之后，用于确定该bean的构造函数之用，返回的是该bean的所有构造函数列表。用户可以扩展这个点，来自定义选择相应的构造器来实例化这个bean。
  * getEarlyBeanReference：该触发点发生在postProcessAfterInstantiation之后，当有循环依赖的场景，当bean实例化好之后，为了防止有循环依赖，会提前暴露回调方法，用于bean实例化的后置处理。这个方法就是在提前暴露的回调方法中触发。
  */
-public class TestSmartInstantiationAwareBeanPostProcessor
-        implements SmartInstantiationAwareBeanPostProcessor {
+public class TestSmartInstantiationAwareBeanPostProcessor implements SmartInstantiationAwareBeanPostProcessor {
 
     @Override
     public Class<?> predictBeanType(Class<?> beanClass, String beanName) throws BeansException {
-        System.out.println(
-                "[TestSmartInstantiationAwareBeanPostProcessor] predictBeanType " + beanName);
+        System.out.println("[TestSmartInstantiationAwareBeanPostProcessor] predictBeanType " + beanName);
         return beanClass;
     }
 
     @Override
-    public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName)
-            throws BeansException {
-        System.out.println(
-                "[TestSmartInstantiationAwareBeanPostProcessor] determineCandidateConstructors "
-                        + beanName);
+    public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName) throws BeansException {
+        System.out.println("[TestSmartInstantiationAwareBeanPostProcessor] determineCandidateConstructors " + beanName);
         return null;
     }
 
     @Override
     public Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
-        System.out.println(
-                "[TestSmartInstantiationAwareBeanPostProcessor] getEarlyBeanReference " + beanName);
+        System.out.println("[TestSmartInstantiationAwareBeanPostProcessor] getEarlyBeanReference " + beanName);
         return bean;
     }
 }

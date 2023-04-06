@@ -49,10 +49,7 @@ public interface MaterialRequisitionService extends IService<MaterialRequisition
      * @param materialEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            MaterialRequisitionEntity entity,
-            List<MaterialEntryEntity> materialEntryEntityList)
+    void save(String id, MaterialRequisitionEntity entity, List<MaterialEntryEntity> materialEntryEntityList)
             throws WorkFlowException;
 
     /**

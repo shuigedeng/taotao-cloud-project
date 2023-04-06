@@ -33,9 +33,8 @@ public class MchDivisionReceiverGroupService
 
     /** 根据ID和商户号查询 * */
     public MchDivisionReceiverGroup findByIdAndMchNo(Long groupId, String mchNo) {
-        return getOne(
-                MchDivisionReceiverGroup.gw()
-                        .eq(MchDivisionReceiverGroup::getReceiverGroupId, groupId)
-                        .eq(MchDivisionReceiverGroup::getMchNo, mchNo));
+        return getOne(MchDivisionReceiverGroup.gw()
+                .eq(MchDivisionReceiverGroup::getReceiverGroupId, groupId)
+                .eq(MchDivisionReceiverGroup::getMchNo, mchNo));
     }
 }

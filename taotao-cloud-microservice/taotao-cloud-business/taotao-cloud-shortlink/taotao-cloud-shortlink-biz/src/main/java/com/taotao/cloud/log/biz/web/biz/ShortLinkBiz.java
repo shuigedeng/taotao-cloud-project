@@ -39,7 +39,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShortLinkBiz {
 
-    @Resource private ShortLinkInvoker shortLinkInvoker;
+    @Resource
+    private ShortLinkInvoker shortLinkInvoker;
 
     public boolean checkShortLinkCodeValid(ShortLinkDTO shortLinkDTO) {
         if (Objects.nonNull(shortLinkDTO)) {
@@ -52,10 +53,9 @@ public class ShortLinkBiz {
 
     public Optional<String> parseShortLinkCode(String shortLinkCode) {
 
-        ShortLinkListRequest queryRequest =
-                ShortLinkListRequest.builder()
-                        .shortLinkCodeSet(Collections.singleton(shortLinkCode))
-                        .build();
+        ShortLinkListRequest queryRequest = ShortLinkListRequest.builder()
+                .shortLinkCodeSet(Collections.singleton(shortLinkCode))
+                .build();
         List<ShortLinkDTO> shortLinkDtoList = shortLinkInvoker.listShortLinkCode(queryRequest);
 
         if (CollectionUtils.isNotEmpty(shortLinkDtoList)) {
@@ -70,10 +70,9 @@ public class ShortLinkBiz {
 
     public Optional<ShortLinkDTO> getShortLinkCodeDto(String shortLinkCode) {
 
-        ShortLinkListRequest queryRequest =
-                ShortLinkListRequest.builder()
-                        .shortLinkCodeSet(Collections.singleton(shortLinkCode))
-                        .build();
+        ShortLinkListRequest queryRequest = ShortLinkListRequest.builder()
+                .shortLinkCodeSet(Collections.singleton(shortLinkCode))
+                .build();
         List<ShortLinkDTO> shortLinkDtoList = shortLinkInvoker.listShortLinkCode(queryRequest);
 
         if (CollectionUtils.isNotEmpty(shortLinkDtoList)) {

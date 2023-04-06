@@ -33,5 +33,6 @@ import org.springframework.stereotype.Service;
 @DubboService(interfaceClass = IDubboOrderRpc.class, validation = "true")
 public class DubboOrderServiceImpl implements IDubboOrderRpc {
 
-    @DubboReference private IDubboUserRpc dubboUserRpc;
+    @DubboReference
+    private IDubboUserRpc dubboUserRpc;
 }

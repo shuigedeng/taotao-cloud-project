@@ -73,17 +73,13 @@ public class Coupon extends BasePromotions<Coupon, Long> {
     private BigDecimal price;
 
     /** 折扣 */
-    @Column(
-            name = "coupon_discount",
-            columnDefinition = "decimal(10,2) not null default 0 comment '折扣'")
+    @Column(name = "coupon_discount", columnDefinition = "decimal(10,2) not null default 0 comment '折扣'")
     private BigDecimal couponDiscount;
 
     /**
      * @see CouponGetEnum 优惠券类型，分为免费领取和活动赠送
      */
-    @Column(
-            name = "get_type",
-            columnDefinition = "varchar(255) not null comment '优惠券类型，分为免费领取和活动赠送'")
+    @Column(name = "get_type", columnDefinition = "varchar(255) not null comment '优惠券类型，分为免费领取和活动赠送'")
     private String getType;
 
     /** 店铺承担比例,平台发布时可以提供一定返点 */
@@ -97,9 +93,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
     private String description;
 
     /** 发行数量,如果是0则是不限制 */
-    @Column(
-            name = "publish_num",
-            columnDefinition = "int not null default 0 comment '发行数量,如果是0则是不限制'")
+    @Column(name = "publish_num", columnDefinition = "int not null default 0 comment '发行数量,如果是0则是不限制'")
     private Integer publishNum;
 
     /** 领取限制 */
@@ -115,9 +109,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
     private Integer receivedNum;
 
     /** 消费门槛 */
-    @Column(
-            name = "consume_threshold",
-            columnDefinition = "decimal(10,2) not null default 0 comment '消费门槛'")
+    @Column(name = "consume_threshold", columnDefinition = "decimal(10,2) not null default 0 comment '消费门槛'")
     private BigDecimal consumeThreshold;
 
     /**
@@ -138,9 +130,7 @@ public class Coupon extends BasePromotions<Coupon, Long> {
     public String getPromotionStatus() {
         if (this.rangeDayType != null
                 && this.rangeDayType.equals(CouponRangeDayEnum.DYNAMICTIME.name())
-                && (this.effectiveDays != null
-                        && this.effectiveDays > 0
-                        && this.effectiveDays <= 365)) {
+                && (this.effectiveDays != null && this.effectiveDays > 0 && this.effectiveDays <= 365)) {
             return PromotionsStatusEnum.START.name();
         }
         return super.getPromotionStatus();

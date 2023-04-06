@@ -42,7 +42,8 @@ import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 @Slf4j
 public class BpmUserTaskActivityBehavior extends UserTaskActivityBehavior {
 
-    @Setter private BpmTaskAssignRuleService bpmTaskRuleService;
+    @Setter
+    private BpmTaskAssignRuleService bpmTaskRuleService;
 
     public BpmUserTaskActivityBehavior(UserTask userTask) {
         super(userTask);

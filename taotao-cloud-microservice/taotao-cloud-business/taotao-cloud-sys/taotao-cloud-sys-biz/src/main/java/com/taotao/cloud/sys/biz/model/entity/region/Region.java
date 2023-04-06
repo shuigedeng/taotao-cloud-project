@@ -75,9 +75,7 @@ public class Region extends BaseSuperEntity<Region, Long> {
      */
     @Column(
             name = "level",
-            columnDefinition =
-                    "varchar(255) null comment"
-                            + " '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
+            columnDefinition = "varchar(255) null comment" + " '地区级别（1:省份province,2:市city,3:区县district,4:街道street）'")
     private String level;
 
     /** 城市编码 */

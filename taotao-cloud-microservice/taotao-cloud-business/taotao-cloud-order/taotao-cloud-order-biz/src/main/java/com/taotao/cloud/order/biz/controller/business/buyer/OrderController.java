@@ -78,8 +78,7 @@ public class OrderController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{orderSn}")
-    public Result<OrderDetailVO> detail(
-            @NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
+    public Result<OrderDetailVO> detail(@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
         OrderDetailVO orderDetailVO = orderService.queryDetail(orderSn);
         OperationalJudgment.judgment(orderDetailVO.order());
         return Result.success(orderDetailVO);
@@ -89,8 +88,7 @@ public class OrderController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/{orderSn}/receiving")
-    public Result<Boolean> receiving(
-            @NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
+    public Result<Boolean> receiving(@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
         Order order = orderService.getBySn(orderSn);
         if (order == null) {
             throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);

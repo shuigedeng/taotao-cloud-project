@@ -34,9 +34,14 @@ import org.springframework.stereotype.Service;
 public class BatchTableServiceImpl extends ServiceImpl<BatchTableMapper, BatchTableEntity>
         implements BatchTableService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public BatchTableEntity getInfo(String id) {

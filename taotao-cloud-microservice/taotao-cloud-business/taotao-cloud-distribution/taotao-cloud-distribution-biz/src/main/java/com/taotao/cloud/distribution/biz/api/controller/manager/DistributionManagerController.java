@@ -44,14 +44,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/distribution/distribution")
 public class DistributionManagerController {
 
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
 
     @Operation(summary = "分页获取", description = "分页获取")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/getByPage")
-    public Result<IPage<Distribution>> getByPage(
-            DistributionPageQuery distributionPageQuery, PageVO page) {
+    public Result<IPage<Distribution>> getByPage(DistributionPageQuery distributionPageQuery, PageVO page) {
         return Result.success(distributionService.distributionPage(distributionPageQuery, page));
     }
 

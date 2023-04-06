@@ -35,9 +35,14 @@ import org.springframework.stereotype.Service;
 public class MonthlyReportServiceImpl extends ServiceImpl<MonthlyReportMapper, MonthlyReportEntity>
         implements MonthlyReportService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public MonthlyReportEntity getInfo(String id) {
@@ -77,8 +82,7 @@ public class MonthlyReportServiceImpl extends ServiceImpl<MonthlyReportMapper, M
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, MonthlyReportEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, MonthlyReportEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -110,10 +114,8 @@ public class MonthlyReportServiceImpl extends ServiceImpl<MonthlyReportMapper, M
 
     @Override
     public void data(String id, String data) {
-        MonthlyReportForm monthlyReportForm =
-                JsonUtils.getJsonToBean(data, MonthlyReportForm.class);
-        MonthlyReportEntity entity =
-                JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
+        MonthlyReportForm monthlyReportForm = JsonUtils.getJsonToBean(data, MonthlyReportForm.class);
+        MonthlyReportEntity entity = JsonUtils.getJsonToBean(monthlyReportForm, MonthlyReportEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

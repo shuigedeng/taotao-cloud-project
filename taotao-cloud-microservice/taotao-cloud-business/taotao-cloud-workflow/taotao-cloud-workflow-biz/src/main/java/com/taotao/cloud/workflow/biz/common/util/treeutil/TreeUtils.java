@@ -144,8 +144,7 @@ public class TreeUtils {
      * @param parentTreeModel 父点
      * @param tList @MethosName getChildTreeList
      */
-    private static List<TreeModel> getChildTreeList(
-            TreeModel parentTreeModel, List<TreeModel> tList) {
+    private static List<TreeModel> getChildTreeList(TreeModel parentTreeModel, List<TreeModel> tList) {
         List<TreeModel> childTreeModelList = new ArrayList<>();
         for (TreeModel t : tList) {
             if (parentTreeModel.getId().equals(t.getParentId())) {

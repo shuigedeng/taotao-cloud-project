@@ -80,7 +80,13 @@ public class WxMpMessageRouterConfiguration {
                 .handler(this.unsubscribeHandler)
                 .end();
         // 扫描带参二维码事件
-        newRouter.rule().async(false).msgType(EVENT).event(SCAN).handler(this.scanHandler).end();
+        newRouter
+                .rule()
+                .async(false)
+                .msgType(EVENT)
+                .event(SCAN)
+                .handler(this.scanHandler)
+                .end();
         // 其他事件
         newRouter.rule().async(false).msgType(EVENT).handler(this.nullHandler).end();
 

@@ -29,8 +29,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultPhoneUserDetailsService implements PhoneUserDetailsService {
 
-    @Autowired private IFeignUserApi userApi;
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignUserApi userApi;
+
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public UserDetails loadUserByPhone(String phone, String type) throws UsernameNotFoundException {

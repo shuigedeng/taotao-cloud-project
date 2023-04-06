@@ -35,7 +35,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KanjiaActivityGoodsOperationDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -1378599087650538592L;
+    @Serial
+    private static final long serialVersionUID = -1378599087650538592L;
 
     @Min(message = "活动开始时间不能为空", value = 0)
     @Schema(description = "活动开始时间", required = true)

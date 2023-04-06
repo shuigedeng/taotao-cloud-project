@@ -29,7 +29,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class WxPayServiceImpl implements WxPayService {
 
-    @Resource private OrderService orderService;
+    @Resource
+    private OrderService orderService;
 
     @Override
     public Map<String, Object> nativePay(String body, String money) {
@@ -41,20 +42,19 @@ public class WxPayServiceImpl implements WxPayService {
             }
             map = new HashMap<String, Object>();
             String notify_url = "http://yungouos.wicp.net/api/callback/notify";
-            String result =
-                    WxPay.nativePay(
-                            order.getOrderNo(),
-                            order.getMoney(),
-                            WxPayConfig.mchId,
-                            order.getBody(),
-                            "2",
-                            null,
-                            notify_url,
-                            null,
-                            null,
-                            null,
-                            null,
-                            WxPayConfig.key);
+            String result = WxPay.nativePay(
+                    order.getOrderNo(),
+                    order.getMoney(),
+                    WxPayConfig.mchId,
+                    order.getBody(),
+                    "2",
+                    null,
+                    notify_url,
+                    null,
+                    null,
+                    null,
+                    null,
+                    WxPayConfig.key);
             map.put("url", result);
             map.put("orderNo", order.getOrderNo());
         } catch (PayException e) {

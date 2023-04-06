@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test")
 public class TestController extends BaseController {
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     /** 获取所有key */
     @ApiVersion(VersionEnum.V1_0_0)

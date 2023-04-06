@@ -45,8 +45,6 @@ public class ShortLink extends BaseSuperEntity<ShortLink, Long> {
     public static final String TABLE_NAME = "tt_short_link";
 
     /** 原始参数 */
-    @Column(
-            name = "original_params",
-            columnDefinition = "varchar(255) not null default '' comment '原始参数'")
+    @Column(name = "original_params", columnDefinition = "varchar(255) not null default '' comment '原始参数'")
     private String originalParams;
 }

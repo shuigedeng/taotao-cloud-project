@@ -56,10 +56,6 @@ public enum BpmProcessInstanceResultEnum {
      */
     public static boolean isEndResult(Integer result) {
         return ObjectUtils.equalsAny(
-                result,
-                APPROVE.getResult(),
-                REJECT.getResult(),
-                CANCEL.getResult(),
-                BACK.getResult());
+                result, APPROVE.getResult(), REJECT.getResult(), CANCEL.getResult(), BACK.getResult());
     }
 }

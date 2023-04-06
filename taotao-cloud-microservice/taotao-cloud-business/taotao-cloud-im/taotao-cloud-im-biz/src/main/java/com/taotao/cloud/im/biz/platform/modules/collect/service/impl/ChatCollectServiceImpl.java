@@ -35,10 +35,10 @@ import org.springframework.stereotype.Service;
 
 /** 收藏表 服务层实现 q3z3 */
 @Service("chatCollectService")
-public class ChatCollectServiceImpl extends BaseServiceImpl<ChatCollect>
-        implements ChatCollectService {
+public class ChatCollectServiceImpl extends BaseServiceImpl<ChatCollect> implements ChatCollectService {
 
-    @Resource private ChatCollectDao chatCollectDao;
+    @Resource
+    private ChatCollectDao chatCollectDao;
 
     @Autowired
     public void setBaseDao() {
@@ -53,12 +53,11 @@ public class ChatCollectServiceImpl extends BaseServiceImpl<ChatCollect>
 
     @Override
     public void addCollect(CollectVo01 collectVo) {
-        ChatCollect collect =
-                new ChatCollect()
-                        .setUserId(ShiroUtils.getUserId())
-                        .setCollectType(collectVo.getCollectType())
-                        .setContent(collectVo.getContent())
-                        .setCreateTime(DateUtil.date());
+        ChatCollect collect = new ChatCollect()
+                .setUserId(ShiroUtils.getUserId())
+                .setCollectType(collectVo.getCollectType())
+                .setContent(collectVo.getContent())
+                .setCreateTime(DateUtil.date());
         this.add(collect);
     }
 
@@ -79,10 +78,9 @@ public class ChatCollectServiceImpl extends BaseServiceImpl<ChatCollect>
         collect.setUserId(ShiroUtils.getUserId());
         List<ChatCollect> collectList = queryList(collect);
         List<CollectVo02> dataList = new ArrayList<>();
-        collectList.forEach(
-                e -> {
-                    dataList.add(BeanUtil.toBean(e, CollectVo02.class).setCollectId(e.getId()));
-                });
+        collectList.forEach(e -> {
+            dataList.add(BeanUtil.toBean(e, CollectVo02.class).setCollectId(e.getId()));
+        });
         return getPageInfo(dataList, collectList);
     }
 }

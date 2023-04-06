@@ -41,21 +41,20 @@ import org.springframework.stereotype.Service;
 
 /** 分销商品接口实现 */
 @Service
-public class DistributionGoodsServiceImpl
-        extends ServiceImpl<DistributionGoodsMapper, DistributionGoods>
+public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsMapper, DistributionGoods>
         implements IDistributionGoodsService {
 
     /** 分销员 */
-    @Autowired private IDistributionService distributionService;
+    @Autowired
+    private IDistributionService distributionService;
     /** 规格商品 */
-    @Autowired private IFeignGoodsSkuApi goodsSkuApi;
+    @Autowired
+    private IFeignGoodsSkuApi goodsSkuApi;
 
     @Override
     public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery searchParams) {
         // 获取商家的分销商品列表
-        if (Objects.requireNonNull(UserContext.getCurrentUser())
-                .getRole()
-                .equals(UserEnums.STORE)) {
+        if (Objects.requireNonNull(UserContext.getCurrentUser()).getRole().equals(UserEnums.STORE)) {
             return this.baseMapper.getDistributionGoodsVO(
                     PageUtil.initPage(searchParams), searchParams.storeQueryWrapper());
         } else if (UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
@@ -89,8 +88,7 @@ public class DistributionGoodsServiceImpl
      * @return 分销商品信息列表
      */
     @Override
-    public List<DistributionGoods> getDistributionGoodsList(
-            DistributionGoodsPageQuery distributionGoodsPageQuery) {
+    public List<DistributionGoods> getDistributionGoodsList(DistributionGoodsPageQuery distributionGoodsPageQuery) {
         return this.list(distributionGoodsPageQuery.queryWrapper());
     }
 
@@ -101,8 +99,7 @@ public class DistributionGoodsServiceImpl
      * @return 分销商品信息
      */
     @Override
-    public DistributionGoods getDistributionGoods(
-            DistributionGoodsPageQuery distributionGoodsPageQuery) {
+    public DistributionGoods getDistributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
         return this.getOne(distributionGoodsPageQuery.queryWrapper(), false);
     }
 
@@ -124,16 +121,12 @@ public class DistributionGoodsServiceImpl
 
     @Override
     public DistributionGoods distributionGoodsVOBySkuId(String skuId) {
-        return this.getOne(
-                new LambdaUpdateWrapper<DistributionGoods>()
-                        .eq(DistributionGoods::getSkuId, skuId));
+        return this.getOne(new LambdaUpdateWrapper<DistributionGoods>().eq(DistributionGoods::getSkuId, skuId));
     }
 
     @Override
     public List<DistributionGoods> distributionGoods(List<String> skuIds) {
-        return this.list(
-                new LambdaUpdateWrapper<DistributionGoods>()
-                        .in(DistributionGoods::getSkuId, skuIds));
+        return this.list(new LambdaUpdateWrapper<DistributionGoods>().in(DistributionGoods::getSkuId, skuIds));
     }
 
     @Override

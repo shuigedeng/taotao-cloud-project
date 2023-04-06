@@ -41,7 +41,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class ShortUrlController {
 
-    @Autowired private UrlMapServer urlMapServer;
+    @Autowired
+    private UrlMapServer urlMapServer;
 
     @Value("${shorturl.prefix}")
     private String shortUrlPrefix;

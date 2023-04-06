@@ -31,7 +31,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ParametersVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 724427321881170297L;
+    @Serial
+    private static final long serialVersionUID = 724427321881170297L;
 
     @Schema(description = "id")
     private String id;

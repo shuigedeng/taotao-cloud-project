@@ -30,7 +30,10 @@ public enum PushTalkEnum {
     GROUP("GROUP", "群聊"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     PushTalkEnum(String code, String info) {

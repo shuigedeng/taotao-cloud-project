@@ -55,16 +55,22 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 public class MpMenuServiceImpl implements MpMenuService {
 
-    @Resource private MpMessageService mpMessageService;
-    @Resource @Lazy // 延迟加载，避免循环引用报错
+    @Resource
+    private MpMessageService mpMessageService;
+
+    @Resource
+    @Lazy // 延迟加载，避免循环引用报错
     private MpAccountService mpAccountService;
 
-    @Resource @Lazy // 延迟加载，避免循环引用报错
+    @Resource
+    @Lazy // 延迟加载，避免循环引用报错
     private MpServiceFactory mpServiceFactory;
 
-    @Resource private Validator validator;
+    @Resource
+    private Validator validator;
 
-    @Resource private MpMenuMapper mpMenuMapper;
+    @Resource
+    private MpMenuMapper mpMenuMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -86,19 +92,15 @@ public class MpMenuServiceImpl implements MpMenuService {
 
         // 第二步，存储到数据库
         mpMenuMapper.deleteByAccountId(createReqVO.getAccountId());
-        createReqVO
-                .getMenus()
-                .forEach(
-                        menu -> {
-                            // 先保存顶级菜单
-                            MpMenuDO menuDO = createMenu(menu, null, account);
-                            // 再保存子菜单
-                            if (CollUtil.isEmpty(menu.getChildren())) {
-                                return;
-                            }
-                            menu.getChildren()
-                                    .forEach(childMenu -> createMenu(childMenu, menuDO, account));
-                        });
+        createReqVO.getMenus().forEach(menu -> {
+            // 先保存顶级菜单
+            MpMenuDO menuDO = createMenu(menu, null, account);
+            // 再保存子菜单
+            if (CollUtil.isEmpty(menu.getChildren())) {
+                return;
+            }
+            menu.getChildren().forEach(childMenu -> createMenu(childMenu, menuDO, account));
+        });
     }
 
     /**
@@ -123,13 +125,11 @@ public class MpMenuServiceImpl implements MpMenuService {
      * @param account 公众号账号
      * @return 创建后的菜单
      */
-    private MpMenuDO createMenu(
-            MpMenuSaveReqVO.Menu wxMenu, MpMenuDO parentMenu, MpAccountDO account) {
+    private MpMenuDO createMenu(MpMenuSaveReqVO.Menu wxMenu, MpMenuDO parentMenu, MpAccountDO account) {
         // 创建菜单
-        MpMenuDO menu =
-                CollUtil.isNotEmpty(wxMenu.getChildren())
-                        ? new MpMenuDO().setName(wxMenu.getName())
-                        : MpMenuConvert.INSTANCE.convert02(wxMenu);
+        MpMenuDO menu = CollUtil.isNotEmpty(wxMenu.getChildren())
+                ? new MpMenuDO().setName(wxMenu.getName())
+                : MpMenuConvert.INSTANCE.convert02(wxMenu);
         // 设置菜单的公众号账号信息
         if (account != null) {
             menu.setAccountId(account.getId()).setAppId(account.getAppId());

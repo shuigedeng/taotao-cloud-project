@@ -132,8 +132,7 @@ public class UserJobHandler {
             Process process = processBuilder.start();
             // Process process = Runtime.getRuntime().exec(command);
 
-            BufferedInputStream bufferedInputStream =
-                    new BufferedInputStream(process.getInputStream());
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(process.getInputStream());
             bufferedReader = new BufferedReader(new InputStreamReader(bufferedInputStream));
 
             // command log
@@ -182,7 +181,10 @@ public class UserJobHandler {
                 url = httpParam.substring(httpParam.indexOf("url:") + 4).trim();
             }
             if (httpParam.startsWith("method:")) {
-                method = httpParam.substring(httpParam.indexOf("method:") + 7).trim().toUpperCase();
+                method = httpParam
+                        .substring(httpParam.indexOf("method:") + 7)
+                        .trim()
+                        .toUpperCase();
             }
             if (httpParam.startsWith("data:")) {
                 data = httpParam.substring(httpParam.indexOf("data:") + 5).trim();
@@ -228,8 +230,7 @@ public class UserJobHandler {
 
             // data
             if (isPostMethod && data != null && data.trim().length() > 0) {
-                DataOutputStream dataOutputStream =
-                        new DataOutputStream(connection.getOutputStream());
+                DataOutputStream dataOutputStream = new DataOutputStream(connection.getOutputStream());
                 dataOutputStream.write(data.getBytes("UTF-8"));
                 dataOutputStream.flush();
                 dataOutputStream.close();
@@ -242,8 +243,7 @@ public class UserJobHandler {
             }
 
             // result
-            bufferedReader =
-                    new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
             StringBuilder result = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {

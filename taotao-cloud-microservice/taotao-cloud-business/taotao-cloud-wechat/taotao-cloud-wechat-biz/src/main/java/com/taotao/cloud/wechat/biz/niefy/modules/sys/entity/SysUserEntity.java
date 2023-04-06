@@ -40,7 +40,8 @@ public class SysUserEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
-    @TableId private Long userId;
+    @TableId
+    private Long userId;
 
     /** 用户名 */
     @NotBlank(

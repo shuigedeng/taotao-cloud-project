@@ -45,8 +45,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/engine/flow-task")
 public class FlowTaskController {
 
-    @Autowired private FlowDynamicService flowDynamicService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private FlowDynamicService flowDynamicService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Operation(summary = "动态表单信息", description = "动态表单信息")
     @GetMapping("/{id}")
@@ -71,8 +74,7 @@ public class FlowTaskController {
 
     @Operation(summary = "更新动态表单", description = "更新动态表单")
     @PutMapping("/{id}")
-    public Result<Boolean> submit(
-            @RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
+    public Result<Boolean> submit(@RequestBody FlowTaskForm flowTaskForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (FlowStatusEnum.save.getMessage().equals(flowTaskForm.getStatus())) {
             flowDynamicService.save(id, flowTaskForm);
@@ -86,12 +88,8 @@ public class FlowTaskController {
     @Operation(summary = "动态表单详情", description = "动态表单详情")
     @GetMapping("/{flowId}/{id}")
     public Result<Map<String, Object>> info(
-            @Parameter(description = "引擎主键值")
-                    @NotNull(message = "引擎主键值不能为空")
-                    @PathVariable("flowId")
-                    String flowId,
-            @Parameter(description = "id") @NotNull(message = "主键值不能为空") @PathVariable("id")
-                    String id)
+            @Parameter(description = "引擎主键值") @NotNull(message = "引擎主键值不能为空") @PathVariable("flowId") String flowId,
+            @Parameter(description = "id") @NotNull(message = "主键值不能为空") @PathVariable("id") String id)
             throws WorkFlowException {
         Map<String, Object> data = flowDynamicService.getData(flowId, id);
         return Result.success(data);

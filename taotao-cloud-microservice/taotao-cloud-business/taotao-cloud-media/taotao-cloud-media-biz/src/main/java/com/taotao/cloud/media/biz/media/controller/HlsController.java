@@ -38,8 +38,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HlsController {
 
-    @Autowired private HlsService hlsService;
-    @Autowired private CameraMapper cameraMapper;
+    @Autowired
+    private HlsService hlsService;
+
+    @Autowired
+    private CameraMapper cameraMapper;
 
     /**
      * ts接收接口（回传，这里只占用网络资源，避免使用硬盘资源）
@@ -108,8 +111,7 @@ public class HlsController {
                 response.getOutputStream().write("尚未生成m3u8".getBytes("utf-8"));
                 response.getOutputStream().flush();
             } else {
-                response.setContentType(
-                        "application/vnd.apple.mpegurl"); // application/x-mpegURL //video/mp2t ts;
+                response.setContentType("application/vnd.apple.mpegurl"); // application/x-mpegURL //video/mp2t ts;
                 response.getOutputStream().write(hls);
                 response.getOutputStream().flush();
             }

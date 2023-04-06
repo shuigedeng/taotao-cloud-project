@@ -33,61 +33,49 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/index")
 public class CompletableFutureController {
 
-    @Resource private ThreadPoolExecutor asyncThreadPoolExecutor;
+    @Resource
+    private ThreadPoolExecutor asyncThreadPoolExecutor;
 
     @RequestMapping(
             value = "/homeIndex",
             method = {RequestMethod.POST, RequestMethod.GET})
-    public String homeIndex(
-            @RequestParam(required = false) String userId,
-            @RequestParam(value = "lang") String lang) {
+    public String homeIndex(@RequestParam(required = false) String userId, @RequestParam(value = "lang") String lang) {
         ResultData<HomeVO> result = new ResultData<>();
 
         // 获取Banner轮播图信息
         CompletableFuture<List<BannerVO>> future1 =
-                CompletableFuture.supplyAsync(
-                        () -> this.buildBanners(userId, lang), asyncThreadPoolExecutor);
+                CompletableFuture.supplyAsync(() -> this.buildBanners(userId, lang), asyncThreadPoolExecutor);
         // 获取用户message通知信息
         CompletableFuture<List<NotificationVO>> future2 =
-                CompletableFuture.supplyAsync(
-                        () -> this.buildNotifications(userId, lang), asyncThreadPoolExecutor);
+                CompletableFuture.supplyAsync(() -> this.buildNotifications(userId, lang), asyncThreadPoolExecutor);
         // 获取用户权益信息
         CompletableFuture<List<BenefitVO>> future3 =
-                CompletableFuture.supplyAsync(
-                        () -> this.buildBenefits(userId, lang), asyncThreadPoolExecutor);
+                CompletableFuture.supplyAsync(() -> this.buildBenefits(userId, lang), asyncThreadPoolExecutor);
         // 获取优惠券信息
         CompletableFuture<List<CouponVO>> future4 =
-                CompletableFuture.supplyAsync(
-                        () -> this.buildCoupons(userId), asyncThreadPoolExecutor);
+                CompletableFuture.supplyAsync(() -> this.buildCoupons(userId), asyncThreadPoolExecutor);
 
-        CompletableFuture<Void> allOfFuture =
-                CompletableFuture.allOf(future1, future2, future3, future4);
+        CompletableFuture<Void> allOfFuture = CompletableFuture.allOf(future1, future2, future3, future4);
 
         HomeVO finalHomeVO = new HomeVO();
-        CompletableFuture<HomeVO> resultFuture =
-                allOfFuture
-                        .thenApply(
-                                v -> {
-                                    try {
-                                        finalHomeVO.setBanners(future1.get());
-                                        finalHomeVO.setNotifications(future2.get());
-                                        finalHomeVO.setBenefits(future3.get());
-                                        finalHomeVO.setCoupons(future4.get());
-                                        return finalHomeVO;
-                                    } catch (Exception e) {
-                                        LogUtils.error("[Error] assemble homeVO data error: {}", e);
-                                        throw new RuntimeException(e);
-                                    }
-                                })
-                        .exceptionally(
-                                error -> {
-                                    // 通过exceptionally捕获异常，打印日志并返回默认值
-                                    LogUtils.error(
-                                            "RemoteDictService.getDictDataAsync Exception dictId ="
-                                                    + " {}",
-                                            error);
-                                    return null;
-                                });
+        CompletableFuture<HomeVO> resultFuture = allOfFuture
+                .thenApply(v -> {
+                    try {
+                        finalHomeVO.setBanners(future1.get());
+                        finalHomeVO.setNotifications(future2.get());
+                        finalHomeVO.setBenefits(future3.get());
+                        finalHomeVO.setCoupons(future4.get());
+                        return finalHomeVO;
+                    } catch (Exception e) {
+                        LogUtils.error("[Error] assemble homeVO data error: {}", e);
+                        throw new RuntimeException(e);
+                    }
+                })
+                .exceptionally(error -> {
+                    // 通过exceptionally捕获异常，打印日志并返回默认值
+                    LogUtils.error("RemoteDictService.getDictDataAsync Exception dictId =" + " {}", error);
+                    return null;
+                });
 
         HomeVO homeVO = resultFuture.join();
         result.setData(homeVO);

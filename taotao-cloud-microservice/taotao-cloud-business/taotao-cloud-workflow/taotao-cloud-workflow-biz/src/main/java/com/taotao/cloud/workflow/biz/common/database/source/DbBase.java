@@ -55,17 +55,10 @@ public abstract class DbBase {
     public static final String SQL_SERVER = "SQLServer";
 
     public static final DbBase[] DB_BASES = {
-        new DbMySQL(),
-        new DbSQLServer(),
-        new DbDM(),
-        new DbOracle(),
-        new DbKingbase(),
-        new DbPostgre()
+        new DbMySQL(), new DbSQLServer(), new DbDM(), new DbOracle(), new DbKingbase(), new DbPostgre()
     };
 
-    public static final String[] DB_ENCODES = {
-        MYSQL, DM, KINGBASE_ES, ORACLE, POSTGRE_SQL, SQL_SERVER
-    };
+    public static final String[] DB_ENCODES = {MYSQL, DM, KINGBASE_ES, ORACLE, POSTGRE_SQL, SQL_SERVER};
 
     /** WORKFLOW数据库编码 */
     protected String workflowDbEncode;
@@ -125,11 +118,9 @@ public abstract class DbBase {
     public DataTypeModel getDataTypeModel(DataTypeEnum dte) throws DataException {
         try {
             // DM8 后期要统一改成 DM
-            String workflowDbEncode =
-                    this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
+            String workflowDbEncode = this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
             Class<DataTypeEnum> clz =
-                    (Class<DataTypeEnum>)
-                            Class.forName("workflow.database.enums.datatype.viewshow.DataTypeEnum");
+                    (Class<DataTypeEnum>) Class.forName("workflow.database.enums.datatype.viewshow.DataTypeEnum");
             // 方法命名规则：getDt + workflowDbEncode
             Method method = clz.getMethod("getDt" + workflowDbEncode);
             DtInterface dt = (DtInterface) method.invoke(dte, null);
@@ -147,12 +138,10 @@ public abstract class DbBase {
      */
     public DataTypeModel getDataTypeModel(String dbFieldType) throws Exception {
         // DM8 后期要统一改成 DM
-        String workflowDbEncode =
-                this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
+        String workflowDbEncode = this.getWorkflowDbEncode().equals(DM) ? "DM" : this.getWorkflowDbEncode();
         // 数据类型枚举类命名规则：Dt + workflowDbEncode
         Class<DtInterface> clz =
-                (Class<DtInterface>)
-                        Class.forName("workflow.database.enums.datatype.Dt" + workflowDbEncode);
+                (Class<DtInterface>) Class.forName("workflow.database.enums.datatype.Dt" + workflowDbEncode);
         Method method = clz.getMethod("values");
         DtInterface[] dataTypes = (DtInterface[]) method.invoke(null, null);
         for (DtInterface dataType : dataTypes) {
@@ -173,16 +162,14 @@ public abstract class DbBase {
     public TableNameHandler getDynamicTableNameHandler() {
         return (sql, tableName) -> {
             // 是否租户系统指定数据源
-            boolean isAssignDataSource =
-                    StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
-                            && "true".equals(DataSourceContextHolder.getDatasourceName());
+            boolean isAssignDataSource = StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
+                    && "true".equals(DataSourceContextHolder.getDatasourceName());
             if (isAssignDataSource) {
                 return tableName;
             } else {
                 // 是否指定数据源, 且在初始库中包含的表
-                boolean hasDataSource =
-                        StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
-                                && dynamicAllTableName.contains(tableName.toLowerCase());
+                boolean hasDataSource = StringUtil.isNotEmpty(DataSourceContextHolder.getDatasourceName())
+                        && dynamicAllTableName.contains(tableName.toLowerCase());
                 return hasDataSource ? getDynamicTableName(tableName) : tableName;
             }
         };
@@ -216,8 +203,7 @@ public abstract class DbBase {
      *
      * @return String 连接
      */
-    protected String getConnUrl(
-            String prepareUrl, String host, Integer port, String dbName, String schema) {
+    protected String getConnUrl(String prepareUrl, String host, Integer port, String dbName, String schema) {
         // 配置文件是否存在自定义数据连接url
         if (StringUtil.isEmpty(prepareUrl)) {
             prepareUrl = this.defaultPrepareUrl;
@@ -245,8 +231,7 @@ public abstract class DbBase {
      * @param table 表
      * @return 转换后SQL语句
      */
-    public LinkedList<Object> getStructParams(
-            String structParams, String table, DataSourceMod dbSourceOrDbLink) {
+    public LinkedList<Object> getStructParams(String structParams, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dto = dbSourceOrDbLink.convertDTO();
         LinkedList<Object> data = new LinkedList<>();
         for (String paramStr : structParams.split(":")) {
@@ -275,12 +260,7 @@ public abstract class DbBase {
 
     public static class BaseCommon {
         public static String getDbBaseConnUrl(
-                DbBase dbBase,
-                String prepareUrl,
-                String host,
-                Integer port,
-                String dbName,
-                String schema) {
+                DbBase dbBase, String prepareUrl, String host, Integer port, String dbName, String schema) {
             return dbBase.getConnUrl(prepareUrl, host, port, dbName, schema);
         }
     }

@@ -109,8 +109,7 @@ public class GenTableColumn extends BaseSuperEntity<GenTableColumn, Long> {
     /** 查询方式（EQ等于、NE不等于、GT大于、LT小于、LIKE模糊、BETWEEN范围） */
     @Column(
             name = "query_type",
-            columnDefinition =
-                    "varchar(1024) not null comment '查询方式（EQ等于、NE不等于、GT大于、LT小于、LIKE模糊、BETWEEN范围）'")
+            columnDefinition = "varchar(1024) not null comment '查询方式（EQ等于、NE不等于、GT大于、LT小于、LIKE模糊、BETWEEN范围）'")
     private String queryType;
 
     /**
@@ -120,7 +119,7 @@ public class GenTableColumn extends BaseSuperEntity<GenTableColumn, Long> {
             name = "html_type",
             columnDefinition =
                     "varchar(1024) not null comment"
-                        + " '显示类型（input文本框、textarea文本域、select下拉框、checkbox复选框、radio单选框、datetime日期控件、image图片上传控件、upload文件上传控件、editor富文本控件）'")
+                            + " '显示类型（input文本框、textarea文本域、select下拉框、checkbox复选框、radio单选框、datetime日期控件、image图片上传控件、upload文件上传控件、editor富文本控件）'")
     private String htmlType;
 
     /** 字典类型 */
@@ -218,8 +217,7 @@ public class GenTableColumn extends BaseSuperEntity<GenTableColumn, Long> {
     }
 
     public String readConverterExp() {
-        String remarks =
-                org.apache.commons.lang3.StringUtils.substringBetween(this.columnComment, "（", "）");
+        String remarks = org.apache.commons.lang3.StringUtils.substringBetween(this.columnComment, "（", "）");
         StringBuilder sb = new StringBuilder();
         if (StringUtils.isNotEmpty(remarks)) {
             for (String value : remarks.split(" ")) {

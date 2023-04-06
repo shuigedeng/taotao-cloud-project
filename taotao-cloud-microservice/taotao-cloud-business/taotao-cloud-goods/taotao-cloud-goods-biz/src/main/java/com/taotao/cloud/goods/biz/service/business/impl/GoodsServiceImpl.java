@@ -83,8 +83,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @AllArgsConstructor
 @Service
-public class GoodsServiceImpl
-        extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
+public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
         implements IGoodsService {
 
     /** 分类 */
@@ -195,8 +194,7 @@ public class GoodsServiceImpl
         // 修改商品
         this.updateById(goods);
         // 修改商品sku信息
-        this.goodsSkuService.update(
-                goodsOperationDTO.getSkuList(), goods, goodsOperationDTO.getRegeneratorSkuFlag());
+        this.goodsSkuService.update(goodsOperationDTO.getSkuList(), goods, goodsOperationDTO.getRegeneratorSkuFlag());
         // 添加相册
         if (goodsOperationDTO.getGoodsGalleryList() != null
                 && !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
@@ -231,15 +229,13 @@ public class GoodsServiceImpl
         goodsSkuParamsVO.setId(goods.getId());
         // 商品相册
         List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-        goodsSkuParamsVO.setGoodsGalleryList(
-                galleryList.stream()
-                        .filter(Objects::nonNull)
-                        .map(GoodsGallery::getOriginal)
-                        .toList());
+        goodsSkuParamsVO.setGoodsGalleryList(galleryList.stream()
+                .filter(Objects::nonNull)
+                .map(GoodsGallery::getOriginal)
+                .toList());
 
         // 商品sku赋值
-        List<GoodsSkuSpecGalleryVO> goodsListByGoodsId =
-                goodsSkuService.getGoodsListByGoodsId(goodsId);
+        List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
         if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
             goodsSkuParamsVO.setSkuList(goodsListByGoodsId);
         }
@@ -248,13 +244,14 @@ public class GoodsServiceImpl
         String categoryPath = goods.getCategoryPath();
         String[] strArray = categoryPath.split(",");
         List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
-        goodsSkuParamsVO.setCategoryName(
-                categories.stream().filter(Objects::nonNull).map(Category::getName).toList());
+        goodsSkuParamsVO.setCategoryName(categories.stream()
+                .filter(Objects::nonNull)
+                .map(Category::getName)
+                .toList());
 
         // 参数非空则填写参数
         if (StrUtil.isNotEmpty(goods.getParams())) {
-            goodsSkuParamsVO.setGoodsParamsDTOList(
-                    JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
+            goodsSkuParamsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
         }
 
         redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsVO);
@@ -283,23 +280,17 @@ public class GoodsServiceImpl
             // 删除之前的缓存
             redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsId);
             // 商品审核消息
-            String destination =
-                    rocketmqCustomProperties.getGoodsTopic()
-                            + ":"
-                            + GoodsTagsEnum.GOODS_AUDIT.name();
+            String destination = rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_AUDIT.name();
             // 发送mq消息
             rocketMQTemplate.asyncSend(
-                    destination,
-                    JSONUtil.toJsonStr(goods),
-                    RocketmqSendCallbackBuilder.commonCallback());
+                    destination, JSONUtil.toJsonStr(goods), RocketmqSendCallbackBuilder.commonCallback());
         }
         return result;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateGoodsMarketAble(
-            List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason) {
+    public Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason) {
         boolean result;
 
         // 如果商品为空，直接返回
@@ -421,13 +412,8 @@ public class GoodsServiceImpl
         Long highPraiseNum = memberEvaluationApi.count(goodsId, EvaluationGradeEnum.GOOD.name());
 
         // 好评率
-        BigDecimal grade =
-                NumberUtil.mul(
-                        NumberUtil.div(
-                                BigDecimal.valueOf(highPraiseNum),
-                                BigDecimal.valueOf(goods.getCommentNum()),
-                                2),
-                        100);
+        BigDecimal grade = NumberUtil.mul(
+                NumberUtil.div(BigDecimal.valueOf(highPraiseNum), BigDecimal.valueOf(goods.getCommentNum()), 2), 100);
 
         // 修改商品好评率
         goods.setGrade(grade);
@@ -436,10 +422,7 @@ public class GoodsServiceImpl
 
     @Override
     public Boolean updateGoodsBuyCount(Long goodsId, int buyCount) {
-        this.update(
-                new LambdaUpdateWrapper<Goods>()
-                        .eq(Goods::getId, goodsId)
-                        .set(Goods::getBuyCount, buyCount));
+        this.update(new LambdaUpdateWrapper<Goods>().eq(Goods::getId, goodsId).set(Goods::getBuyCount, buyCount));
         return true;
     }
 
@@ -457,11 +440,10 @@ public class GoodsServiceImpl
 
     @Override
     public Long countStoreGoodsNum(Long storeId) {
-        return this.count(
-                new LambdaQueryWrapper<Goods>()
-                        .eq(Goods::getStoreId, storeId)
-                        // .eq(Goods::getAuthFlag, GoodsAuthEnum.PASS.name())
-                        .eq(Goods::getMarketEnable, GoodsStatusEnum.UPPER.name()));
+        return this.count(new LambdaQueryWrapper<Goods>()
+                .eq(Goods::getStoreId, storeId)
+                // .eq(Goods::getAuthFlag, GoodsAuthEnum.PASS.name())
+                .eq(Goods::getMarketEnable, GoodsStatusEnum.UPPER.name()));
     }
 
     /**
@@ -471,13 +453,10 @@ public class GoodsServiceImpl
      */
     private void deleteEsGoods(List<Long> goodsIds) {
         // 商品删除消息
-        String destination =
-                rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_DELETE.name();
+        String destination = rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_DELETE.name();
         // 发送mq消息
         rocketMQTemplate.asyncSend(
-                destination,
-                JSONUtil.toJsonStr(goodsIds),
-                RocketmqSendCallbackBuilder.commonCallback());
+                destination, JSONUtil.toJsonStr(goodsIds), RocketmqSendCallbackBuilder.commonCallback());
     }
 
     /**
@@ -529,8 +508,7 @@ public class GoodsServiceImpl
         }
 
         // 获取商品系统配置决定是否审核
-        GoodsSettingVO goodsSetting =
-                settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
+        GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
         // 是否需要审核
         goods.setIsAuth(
                 Boolean.TRUE.equals(goodsSetting.getGoodsCheck())
@@ -588,8 +566,7 @@ public class GoodsServiceImpl
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
         // 如果当前会员不为空，且为店铺角色
         if (currentUser != null
-                && (currentUser.getType().equals(UserEnum.STORE.getCode())
-                        && currentUser.getStoreId() != null)) {
+                && (currentUser.getType().equals(UserEnum.STORE.getCode()) && currentUser.getStoreId() != null)) {
             return currentUser;
         }
         return null;

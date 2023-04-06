@@ -45,9 +45,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/store/bill")
 public class BillManagerController {
 
-    @Autowired private BillService billService;
+    @Autowired
+    private BillService billService;
 
-    @Autowired private IFeignStoreFlowApi storeFlowApi;
+    @Autowired
+    private IFeignStoreFlowApi storeFlowApi;
 
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
     @RequestLogger

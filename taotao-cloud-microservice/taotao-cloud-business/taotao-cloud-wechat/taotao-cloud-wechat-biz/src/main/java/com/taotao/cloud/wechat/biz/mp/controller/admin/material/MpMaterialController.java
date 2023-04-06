@@ -40,13 +40,14 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpMaterialController {
 
-    @Resource private MpMaterialService mpMaterialService;
+    @Resource
+    private MpMaterialService mpMaterialService;
 
     @ApiOperation("上传临时素材")
     @PostMapping("/upload-temporary")
     @PreAuthorize("@ss.hasPermission('mp:material:upload-temporary')")
-    public CommonResult<MpMaterialUploadRespVO> uploadTemporaryMaterial(
-            @Valid MpMaterialUploadTemporaryReqVO reqVO) throws IOException {
+    public CommonResult<MpMaterialUploadRespVO> uploadTemporaryMaterial(@Valid MpMaterialUploadTemporaryReqVO reqVO)
+            throws IOException {
         MpMaterialDO material = mpMaterialService.uploadTemporaryMaterial(reqVO);
         return success(MpMaterialConvert.INSTANCE.convert(material));
     }
@@ -54,20 +55,15 @@ public class MpMaterialController {
     @ApiOperation("上传永久素材")
     @PostMapping("/upload-permanent")
     @PreAuthorize("@ss.hasPermission('mp:material:upload-permanent')")
-    public CommonResult<MpMaterialUploadRespVO> uploadPermanentMaterial(
-            @Valid MpMaterialUploadPermanentReqVO reqVO) throws IOException {
+    public CommonResult<MpMaterialUploadRespVO> uploadPermanentMaterial(@Valid MpMaterialUploadPermanentReqVO reqVO)
+            throws IOException {
         MpMaterialDO material = mpMaterialService.uploadPermanentMaterial(reqVO);
         return success(MpMaterialConvert.INSTANCE.convert(material));
     }
 
     @ApiOperation("删除素材")
     @DeleteMapping("/delete-permanent")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:material:delete')")
     public CommonResult<Boolean> deleteMaterial(@RequestParam("id") Long id) {
         mpMaterialService.deleteMaterial(id);
@@ -77,16 +73,14 @@ public class MpMaterialController {
     @ApiOperation("上传图文内容中的图片")
     @PostMapping("/upload-news-image")
     @PreAuthorize("@ss.hasPermission('mp:material:upload-news-image')")
-    public CommonResult<String> uploadNewsImage(@Valid MpMaterialUploadNewsImageReqVO reqVO)
-            throws IOException {
+    public CommonResult<String> uploadNewsImage(@Valid MpMaterialUploadNewsImageReqVO reqVO) throws IOException {
         return success(mpMaterialService.uploadNewsImage(reqVO));
     }
 
     @ApiOperation("获得素材分页")
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPermission('mp:material:query')")
-    public CommonResult<PageResult<MpMaterialRespVO>> getMaterialPage(
-            @Valid MpMaterialPageReqVO pageReqVO) {
+    public CommonResult<PageResult<MpMaterialRespVO>> getMaterialPage(@Valid MpMaterialPageReqVO pageReqVO) {
         PageResult<MpMaterialDO> pageResult = mpMaterialService.getMaterialPage(pageReqVO);
         return success(MpMaterialConvert.INSTANCE.convertPage(pageResult));
     }

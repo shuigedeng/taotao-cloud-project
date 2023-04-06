@@ -34,8 +34,12 @@ import org.springframework.stereotype.Service;
 @CacheConfig(cacheNames = {"wxUserTagsServiceCache"})
 @Slf4j
 public class WxUserTagsServiceImpl implements WxUserTagsService {
-    @Autowired private WxMpService wxMpService;
-    @Autowired private WxUserService wxUserService;
+    @Autowired
+    private WxMpService wxMpService;
+
+    @Autowired
+    private WxUserService wxUserService;
+
     public static final String CACHE_KEY = "'WX_USER_TAGS'";
 
     @Override
@@ -68,16 +72,14 @@ public class WxUserTagsServiceImpl implements WxUserTagsService {
     }
 
     @Override
-    public void batchTagging(String appid, Long tagid, String[] openidList)
-            throws WxErrorException {
+    public void batchTagging(String appid, Long tagid, String[] openidList) throws WxErrorException {
         wxMpService.switchoverTo(appid);
         wxMpService.getUserTagService().batchTagging(tagid, openidList);
         wxUserService.refreshUserInfoAsync(openidList, appid); // 标签更新后更新对应用户信息
     }
 
     @Override
-    public void batchUnTagging(String appid, Long tagid, String[] openidList)
-            throws WxErrorException {
+    public void batchUnTagging(String appid, Long tagid, String[] openidList) throws WxErrorException {
         wxMpService.switchoverTo(appid);
         wxMpService.getUserTagService().batchUntagging(tagid, openidList);
         wxUserService.refreshUserInfoAsync(openidList, appid); // 标签更新后更新对应用户信息

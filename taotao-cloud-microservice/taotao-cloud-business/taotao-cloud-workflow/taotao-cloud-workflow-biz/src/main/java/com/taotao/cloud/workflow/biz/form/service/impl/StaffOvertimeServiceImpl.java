@@ -36,8 +36,11 @@ import org.springframework.stereotype.Service;
 public class StaffOvertimeServiceImpl extends ServiceImpl<StaffOvertimeMapper, StaffOvertimeEntity>
         implements StaffOvertimeService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public StaffOvertimeEntity getInfo(String id) {
@@ -71,8 +74,7 @@ public class StaffOvertimeServiceImpl extends ServiceImpl<StaffOvertimeMapper, S
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, StaffOvertimeEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, StaffOvertimeEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -98,10 +100,8 @@ public class StaffOvertimeServiceImpl extends ServiceImpl<StaffOvertimeMapper, S
 
     @Override
     public void data(String id, String data) {
-        StaffOvertimeForm staffOvertimeForm =
-                JsonUtils.getJsonToBean(data, StaffOvertimeForm.class);
-        StaffOvertimeEntity entity =
-                JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
+        StaffOvertimeForm staffOvertimeForm = JsonUtils.getJsonToBean(data, StaffOvertimeForm.class);
+        StaffOvertimeEntity entity = JsonUtils.getJsonToBean(staffOvertimeForm, StaffOvertimeEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

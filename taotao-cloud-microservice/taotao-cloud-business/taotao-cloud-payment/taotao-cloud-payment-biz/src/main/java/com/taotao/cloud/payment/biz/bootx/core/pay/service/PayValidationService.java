@@ -53,11 +53,10 @@ public class PayValidationService {
         // 组合支付时只允许有一个异步支付方式
         List<PayModeParam> payModeList = payParam.getPayModeList();
 
-        long asyncPayModeCount =
-                payModeList.stream()
-                        .map(PayModeParam::getPayChannel)
-                        .filter(PayChannelCode.ASYNC_TYPE::contains)
-                        .count();
+        long asyncPayModeCount = payModeList.stream()
+                .map(PayModeParam::getPayChannel)
+                .filter(PayChannelCode.ASYNC_TYPE::contains)
+                .count();
         if (asyncPayModeCount > 1) {
             throw new PayFailureException("组合支付时只允许有一个异步支付方式");
         }

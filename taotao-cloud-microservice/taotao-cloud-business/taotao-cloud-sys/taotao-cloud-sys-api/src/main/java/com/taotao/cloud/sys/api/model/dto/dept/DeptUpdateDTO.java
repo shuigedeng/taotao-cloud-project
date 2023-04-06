@@ -36,7 +36,8 @@ import lombok.*;
 @Schema(description = "部门更新对象")
 public class DeptUpdateDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "部门id", required = true)
     private Integer deptId;

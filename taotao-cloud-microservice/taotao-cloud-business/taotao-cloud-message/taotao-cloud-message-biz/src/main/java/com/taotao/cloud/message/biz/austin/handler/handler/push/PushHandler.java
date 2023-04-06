@@ -62,31 +62,29 @@ public class PushHandler extends BaseHandler implements Handler {
         channelCode = ChannelType.PUSH.getCode();
     }
 
-    @Autowired private AccountUtils accountUtils;
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private AccountUtils accountUtils;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public boolean handler(TaskInfo taskInfo) {
 
         try {
-            GeTuiAccount account =
-                    accountUtils.getAccount(
-                            taskInfo.getSendAccount(),
-                            SendAccountConstant.GE_TUI_ACCOUNT_KEY,
-                            SendAccountConstant.GE_TUI_ACCOUNT_PREFIX,
-                            GeTuiAccount.class);
-            String token =
-                    redisTemplate
-                            .opsForValue()
-                            .get(
-                                    SendAccountConstant.GE_TUI_ACCESS_TOKEN_PREFIX
-                                            + taskInfo.getSendAccount());
-            PushParam pushParam =
-                    PushParam.builder()
-                            .token(token)
-                            .appId(account.getAppId())
-                            .taskInfo(taskInfo)
-                            .build();
+            GeTuiAccount account = accountUtils.getAccount(
+                    taskInfo.getSendAccount(),
+                    SendAccountConstant.GE_TUI_ACCOUNT_KEY,
+                    SendAccountConstant.GE_TUI_ACCOUNT_PREFIX,
+                    GeTuiAccount.class);
+            String token = redisTemplate
+                    .opsForValue()
+                    .get(SendAccountConstant.GE_TUI_ACCESS_TOKEN_PREFIX + taskInfo.getSendAccount());
+            PushParam pushParam = PushParam.builder()
+                    .token(token)
+                    .appId(account.getAppId())
+                    .taskInfo(taskInfo)
+                    .build();
 
             String result;
             if (taskInfo.getReceiver().size() == 1) {
@@ -120,18 +118,16 @@ public class PushHandler extends BaseHandler implements Handler {
      */
     private String singlePush(PushParam pushParam) {
         String url = BASE_URL + pushParam.getAppId() + SINGLE_PUSH_PATH;
-        SendPushParam sendPushParam =
-                assembleParam(
-                        (PushContentModel) pushParam.getTaskInfo().getContentModel(),
-                        pushParam.getTaskInfo().getReceiver());
-        String body =
-                HttpRequest.post(url)
-                        .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                        .header("token", pushParam.getToken())
-                        .body(JSON.toJSONString(sendPushParam))
-                        .timeout(2000)
-                        .execute()
-                        .body();
+        SendPushParam sendPushParam = assembleParam(
+                (PushContentModel) pushParam.getTaskInfo().getContentModel(),
+                pushParam.getTaskInfo().getReceiver());
+        String body = HttpRequest.post(url)
+                .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                .header("token", pushParam.getToken())
+                .body(JSON.toJSONString(sendPushParam))
+                .timeout(2000)
+                .execute()
+                .body();
         return body;
     }
 
@@ -144,23 +140,20 @@ public class PushHandler extends BaseHandler implements Handler {
      */
     private String batchPush(String taskId, PushParam pushParam) {
         String url = BASE_URL + pushParam.getAppId() + BATCH_PUSH_PATH;
-        BatchSendPushParam batchSendPushParam =
-                BatchSendPushParam.builder()
-                        .taskId(taskId)
-                        .isAsync(true)
-                        .audience(
-                                BatchSendPushParam.AudienceVO.builder()
-                                        .cid(pushParam.getTaskInfo().getReceiver())
-                                        .build())
-                        .build();
-        String body =
-                HttpRequest.post(url)
-                        .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                        .header("token", pushParam.getToken())
-                        .body(JSON.toJSONString(batchSendPushParam))
-                        .timeout(2000)
-                        .execute()
-                        .body();
+        BatchSendPushParam batchSendPushParam = BatchSendPushParam.builder()
+                .taskId(taskId)
+                .isAsync(true)
+                .audience(BatchSendPushParam.AudienceVO.builder()
+                        .cid(pushParam.getTaskInfo().getReceiver())
+                        .build())
+                .build();
+        String body = HttpRequest.post(url)
+                .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                .header("token", pushParam.getToken())
+                .body(JSON.toJSONString(batchSendPushParam))
+                .timeout(2000)
+                .execute()
+                .body();
         return body;
     }
 
@@ -176,14 +169,13 @@ public class PushHandler extends BaseHandler implements Handler {
                 assembleParam((PushContentModel) pushParam.getTaskInfo().getContentModel());
         String taskId = "";
         try {
-            String body =
-                    HttpRequest.post(url)
-                            .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                            .header("token", pushParam.getToken())
-                            .body(JSON.toJSONString(param))
-                            .timeout(2000)
-                            .execute()
-                            .body();
+            String body = HttpRequest.post(url)
+                    .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                    .header("token", pushParam.getToken())
+                    .body(JSON.toJSONString(param))
+                    .timeout(2000)
+                    .execute()
+                    .body();
 
             taskId = JSON.parseObject(body, SendPushResult.class).getData().getString("taskId");
         } catch (Exception e) {
@@ -201,19 +193,16 @@ public class PushHandler extends BaseHandler implements Handler {
     }
 
     private SendPushParam assembleParam(PushContentModel pushContentModel, Set<String> cid) {
-        SendPushParam param =
-                SendPushParam.builder()
-                        .requestId(String.valueOf(IdUtil.getSnowflake().nextId()))
-                        .pushMessage(
-                                SendPushParam.PushMessageVO.builder()
-                                        .notification(
-                                                SendPushParam.PushMessageVO.NotificationVO.builder()
-                                                        .title(pushContentModel.getTitle())
-                                                        .body(pushContentModel.getContent())
-                                                        .clickType("startapp")
-                                                        .build())
-                                        .build())
-                        .build();
+        SendPushParam param = SendPushParam.builder()
+                .requestId(String.valueOf(IdUtil.getSnowflake().nextId()))
+                .pushMessage(SendPushParam.PushMessageVO.builder()
+                        .notification(SendPushParam.PushMessageVO.NotificationVO.builder()
+                                .title(pushContentModel.getTitle())
+                                .body(pushContentModel.getContent())
+                                .clickType("startapp")
+                                .build())
+                        .build())
+                .build();
         if (CollUtil.isNotEmpty(cid)) {
             param.setAudience(SendPushParam.AudienceVO.builder().cid(cid).build());
         }

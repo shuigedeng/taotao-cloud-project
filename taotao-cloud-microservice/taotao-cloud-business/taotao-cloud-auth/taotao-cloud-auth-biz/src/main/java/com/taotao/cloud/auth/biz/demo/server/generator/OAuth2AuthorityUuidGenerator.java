@@ -34,15 +34,12 @@ import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 public class OAuth2AuthorityUuidGenerator extends AbstractUuidGenerator {
 
     public OAuth2AuthorityUuidGenerator(
-            OAuth2AuthorityUuid config,
-            Member idMember,
-            CustomIdGeneratorCreationContext creationContext) {
+            OAuth2AuthorityUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
         super(idMember);
     }
 
     @Override
-    public Object generate(SharedSessionContractImplementor session, Object object)
-            throws HibernateException {
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         if (ObjectUtils.isEmpty(object)) {
             throw new HibernateException(new NullPointerException());
         }

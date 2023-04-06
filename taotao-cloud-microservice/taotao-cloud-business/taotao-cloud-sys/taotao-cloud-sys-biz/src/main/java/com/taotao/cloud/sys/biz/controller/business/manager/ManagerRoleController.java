@@ -56,8 +56,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/role")
 @Tag(name = "管理端-角色管理API", description = "管理端-角色管理API")
 public class ManagerRoleController
-        extends BaseSuperController<
-                IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
+        extends BaseSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
     @Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
     @RequestLogger
@@ -78,9 +77,7 @@ public class ManagerRoleController
     @PreAuthorize("hasAuthority('sys:role:info:userIds')")
     @GetMapping("/userId")
     public Result<List<RoleQueryVO>> findRoleByUserIds(
-            @Parameter(description = "用户id列表", required = true)
-                    @NotEmpty(message = "用户id列表不能为空")
-                    @RequestParam
+            @Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空") @RequestParam
                     Set<Long> userIds) {
         List<RoleBO> roles = service().findRoleByUserIds(userIds);
         List<RoleQueryVO> result = RoleConvert.INSTANCE.convertListVO(roles);
@@ -96,9 +93,7 @@ public class ManagerRoleController
                     @NotNull(message = "角色id不能为空")
                     @PathVariable(name = "roleId")
                     Long roleId,
-            @Parameter(description = "菜单id列表", required = true)
-                    @NotEmpty(message = "菜单id列表不能为空")
-                    @RequestBody
+            @Parameter(description = "菜单id列表", required = true) @NotEmpty(message = "菜单id列表不能为空") @RequestBody
                     Set<Long> menuIds) {
         return success(service().saveRoleMenus(roleId, menuIds));
     }

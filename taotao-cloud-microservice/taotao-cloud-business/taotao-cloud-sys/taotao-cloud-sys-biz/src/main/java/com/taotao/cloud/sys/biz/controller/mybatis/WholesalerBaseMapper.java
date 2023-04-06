@@ -107,9 +107,8 @@ public interface WholesalerBaseMapper extends BaseMapper<WholesalerBase> {
             @Param("endTime") LocalDateTime endTime,
             ResultHandler<TaskSettleLogDTO> resultHandler);
 
-    @Select(
-            "select * from wholesaler_base base WHERE base.verify_status != 3 "
-                    + "                and base.deleted=0 and base.level=2")
+    @Select("select * from wholesaler_base base WHERE base.verify_status != 3 "
+            + "                and base.deleted=0 and base.level=2")
     Cursor<WholesalerBase> scan();
 
     @Select("${sql}")

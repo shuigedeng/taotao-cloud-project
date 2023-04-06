@@ -31,8 +31,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
  * @version 2022.03
  * @since 2021/12/07 22:02
  */
-public class CloudJdbcOAuth2AuthorizationConsentService
-        extends JdbcOAuth2AuthorizationConsentService {
+public class CloudJdbcOAuth2AuthorizationConsentService extends JdbcOAuth2AuthorizationConsentService {
 
     public CloudJdbcOAuth2AuthorizationConsentService(
             JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {

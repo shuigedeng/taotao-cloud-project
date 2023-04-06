@@ -73,8 +73,7 @@ public class WxServiceWrapper {
             wxPayConfig.setSignType(WxPayConstants.SignType.MD5);
         }
 
-        ChannelCertConfigKitBean channelCertConfigKitBean =
-                SpringBeansUtil.getBean(ChannelCertConfigKitBean.class);
+        ChannelCertConfigKitBean channelCertConfigKitBean = SpringBeansUtil.getBean(ChannelCertConfigKitBean.class);
 
         if (StringUtils.isNotBlank(apiV3Key)) {
             wxPayConfig.setApiV3Key(apiV3Key);

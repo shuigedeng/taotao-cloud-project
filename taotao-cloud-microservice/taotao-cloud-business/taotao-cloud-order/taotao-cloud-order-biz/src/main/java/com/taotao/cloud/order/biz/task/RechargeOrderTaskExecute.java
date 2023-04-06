@@ -39,20 +39,21 @@ import org.springframework.stereotype.Component;
 public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 
     /** 充值 */
-    @Autowired private IFeignMemberRechargeApi memberRechargeApi;
+    @Autowired
+    private IFeignMemberRechargeApi memberRechargeApi;
     /** 设置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
     @Override
     public void execute() {
-        OrderSettingVO orderSetting =
-                settingApi.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
+        OrderSettingVO orderSetting = settingApi.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
         if (orderSetting != null && orderSetting.getAutoCancel() != null) {
             // 充值订单自动取消时间 = 当前时间 - 自动取消时间分钟数
-            DateTime cancelTime =
-                    DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
+            DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
             List<MemberRechargeVO> list = memberRechargeApi.list(cancelTime);
-            List<String> cancelSnList = list.stream().map(MemberRechargeVO::getRechargeSn).toList();
+            List<String> cancelSnList =
+                    list.stream().map(MemberRechargeVO::getRechargeSn).toList();
             for (String sn : cancelSnList) {
                 memberRechargeApi.rechargeOrderCancel(sn);
             }

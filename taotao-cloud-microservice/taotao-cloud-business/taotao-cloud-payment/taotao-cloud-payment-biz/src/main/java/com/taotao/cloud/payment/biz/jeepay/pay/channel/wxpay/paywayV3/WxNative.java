@@ -51,13 +51,11 @@ public class WxNative extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         WxNativeOrderRQ bizRQ = (WxNativeOrderRQ) rq;
 
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
 

@@ -48,8 +48,7 @@ public interface TravelReimbursementService extends IService<TravelReimbursement
      * @param entity 实体对象
      * @throws WorkFlowException 异常
      */
-    void submit(
-            String id, TravelReimbursementEntity entity, Map<String, List<String>> candidateList)
+    void submit(String id, TravelReimbursementEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException;
 
     /**

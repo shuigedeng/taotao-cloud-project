@@ -35,18 +35,16 @@ import org.springframework.stereotype.Repository;
 public class PermissionRepositoryImpl extends ServiceImpl<SysPermissionMapper, SysPermissionDO>
         implements PermissionRepository, IService<SysPermissionDO> {
 
-    @Autowired private SysRolePermissionMapper sysRolePermissionMapper;
+    @Autowired
+    private SysRolePermissionMapper sysRolePermissionMapper;
 
     @Override
     public List<Permission> queryList(Map<String, Object> params) {
         List<Permission> permissions = new ArrayList<>();
         List<SysPermissionDO> list = getBaseMapper().queryList(params);
         for (SysPermissionDO sysPermissionDO : list) {
-            Permission permission =
-                    PermissionConverter.toPermission(
-                            sysPermissionDO,
-                            getParentPermission(sysPermissionDO.getParentId()),
-                            null);
+            Permission permission = PermissionConverter.toPermission(
+                    sysPermissionDO, getParentPermission(sysPermissionDO.getParentId()), null);
             permissions.add(permission);
         }
         return permissions;
@@ -57,11 +55,8 @@ public class PermissionRepositoryImpl extends ServiceImpl<SysPermissionMapper, S
         List<Permission> permissions = new ArrayList<>();
         List<SysPermissionDO> list = getBaseMapper().queryPermissionByRoleCode(rolecode.getCode());
         for (SysPermissionDO sysPermissionDO : list) {
-            Permission permission =
-                    PermissionConverter.toPermission(
-                            sysPermissionDO,
-                            getParentPermission(sysPermissionDO.getParentId()),
-                            null);
+            Permission permission = PermissionConverter.toPermission(
+                    sysPermissionDO, getParentPermission(sysPermissionDO.getParentId()), null);
             permissions.add(permission);
         }
         return permissions;
@@ -73,28 +68,24 @@ public class PermissionRepositoryImpl extends ServiceImpl<SysPermissionMapper, S
         if (sysPermissionDO == null) {
             return null;
         }
-        Permission permission =
-                PermissionConverter.toPermission(
-                        sysPermissionDO,
-                        getParentPermission(sysPermissionDO.getParentId()),
-                        getSubPermission(sysPermissionDO.getId()));
+        Permission permission = PermissionConverter.toPermission(
+                sysPermissionDO,
+                getParentPermission(sysPermissionDO.getParentId()),
+                getSubPermission(sysPermissionDO.getId()));
         return permission;
     }
 
     @Override
     public Permission find(PermissionName permissionName) {
         SysPermissionDO sysPermissionDO =
-                this.getOne(
-                        new QueryWrapper<SysPermissionDO>()
-                                .eq("permission_name", permissionName.getName()));
+                this.getOne(new QueryWrapper<SysPermissionDO>().eq("permission_name", permissionName.getName()));
         if (sysPermissionDO == null) {
             return null;
         }
-        Permission permission =
-                PermissionConverter.toPermission(
-                        sysPermissionDO,
-                        getParentPermission(sysPermissionDO.getParentId()),
-                        getSubPermission(sysPermissionDO.getId()));
+        Permission permission = PermissionConverter.toPermission(
+                sysPermissionDO,
+                getParentPermission(sysPermissionDO.getParentId()),
+                getSubPermission(sysPermissionDO.getId()));
         return permission;
     }
 
@@ -117,8 +108,7 @@ public class PermissionRepositoryImpl extends ServiceImpl<SysPermissionMapper, S
      * @param permissionId
      */
     private List<SysPermissionDO> getSubPermission(String permissionId) {
-        List<SysPermissionDO> list =
-                this.list(new QueryWrapper<SysPermissionDO>().eq("parent_id", permissionId));
+        List<SysPermissionDO> list = this.list(new QueryWrapper<SysPermissionDO>().eq("parent_id", permissionId));
         return list;
     }
 

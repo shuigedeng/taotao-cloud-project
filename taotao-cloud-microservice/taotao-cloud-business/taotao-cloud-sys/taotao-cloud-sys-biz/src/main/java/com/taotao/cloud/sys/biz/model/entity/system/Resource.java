@@ -81,9 +81,7 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
     private Integer sortNum;
 
     /** 是否缓存页面: 0:否 1:是 (默认值0) */
-    @Column(
-            name = "keep_alive",
-            columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
+    @Column(name = "keep_alive", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否缓存页面: 0:否 1:是 (默认值0)'")
     private Boolean keepAlive;
 
     /**
@@ -95,15 +93,11 @@ public class Resource extends BaseSuperEntity<Resource, Long> {
     private Integer type;
 
     /** url请求Id (type=3 时, 此id有值) */
-    @Column(
-            name = "request_path_id",
-            columnDefinition = "bigint null comment 'url请求Id (type=3时, 此id有值)'")
+    @Column(name = "request_path_id", columnDefinition = "bigint null comment 'url请求Id (type=3时, 此id有值)'")
     private Long requestPathId;
 
     /** 是否隐藏路由菜单: 0否,1是（默认值0） */
-    @Column(
-            name = "hidden",
-            columnDefinition = "boolean DEFAULT false comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
+    @Column(name = "hidden", columnDefinition = "boolean DEFAULT false comment '是否隐藏路由菜单: 0否,1是（默认值0)'")
     private Boolean hidden;
 
     /** 重定向 */

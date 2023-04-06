@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.funnel;
 
 import io.airlift.slice.Slice;
@@ -39,58 +40,54 @@ import io.trino.spi.type.StandardTypes;
 @AggregationFunction("taotao_cloud_funnel_merge")
 public class FunnelMergeAggregationsFunctions {
 
-	@InputFunction
-	public static void input(
-		@AggregationState FunnelSliceState state,
-		//漏斗深度
-		@SqlType(StandardTypes.INTEGER) long userState,
-		//事件个数
-		@SqlType(StandardTypes.INTEGER) long eventsCount) {
+    @InputFunction
+    public static void input(
+            @AggregationState FunnelSliceState state,
+            // 漏斗深度
+            @SqlType(StandardTypes.INTEGER) long userState,
+            // 事件个数
+            @SqlType(StandardTypes.INTEGER) long eventsCount) {
 
-		Slice slice = state.getSlice();
-		if (null == slice) {
-			slice = Slices.allocate((int) eventsCount + 4);
-		}
+        Slice slice = state.getSlice();
+        if (null == slice) {
+            slice = Slices.allocate((int) eventsCount + 4);
+        }
 
-		for (int status = 0; status < userState; ++status) {
-			int index = status + 4;
-			slice.setInt(index, slice.getInt(status) + 1);
-		}
+        for (int status = 0; status < userState; ++status) {
+            int index = status + 4;
+            slice.setInt(index, slice.getInt(status) + 1);
+        }
 
-		state.setSlice(slice);
-	}
+        state.setSlice(slice);
+    }
 
-	@CombineFunction
-	public static void combine(
-		@AggregationState FunnelSliceState state1,
-		@AggregationState FunnelSliceState state2) {
-		Slice slice1 = state1.getSlice();
-		Slice slice2 = state2.getSlice();
+    @CombineFunction
+    public static void combine(@AggregationState FunnelSliceState state1, @AggregationState FunnelSliceState state2) {
+        Slice slice1 = state1.getSlice();
+        Slice slice2 = state2.getSlice();
 
-		if (null == slice1) {
-			state1.setSlice(slice2);
-		} else {
-			for (int index = 0; index < slice1.length(); index += 4) {
-				slice1.setInt(index, slice1.getInt(index) + slice2.getInt(index));
-			}
-			state1.setSlice(slice1);
-		}
-	}
+        if (null == slice1) {
+            state1.setSlice(slice2);
+        } else {
+            for (int index = 0; index < slice1.length(); index += 4) {
+                slice1.setInt(index, slice1.getInt(index) + slice2.getInt(index));
+            }
+            state1.setSlice(slice1);
+        }
+    }
 
-	@OutputFunction("array<bigint>")
-	public static void output(
-		@AggregationState FunnelSliceState state,
-		BlockBuilder out) {
-		Slice slice = state.getSlice();
-		if (null == slice) {
-			out.closeEntry();
-			return;
-		}
+    @OutputFunction("array<bigint>")
+    public static void output(@AggregationState FunnelSliceState state, BlockBuilder out) {
+        Slice slice = state.getSlice();
+        if (null == slice) {
+            out.closeEntry();
+            return;
+        }
 
-		for (int index = 0; index < slice.length(); index += 4) {
-			BigintType.BIGINT.writeLong(out.beginBlockEntry(), slice.getInt(index));
-		}
+        for (int index = 0; index < slice.length(); index += 4) {
+            BigintType.BIGINT.writeLong(out.beginBlockEntry(), slice.getInt(index));
+        }
 
-		out.closeEntry();
-	}
+        out.closeEntry();
+    }
 }

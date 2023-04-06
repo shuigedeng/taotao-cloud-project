@@ -75,9 +75,7 @@ public class Feedback extends BaseSuperEntity<Feedback, Long> {
      *
      * @see FeedbackTypeEnum
      */
-    @Column(
-            name = "biz_type",
-            columnDefinition = "varchar(255) not null comment '业务类型 FUNCTION,OPTIMIZE,OTHER'")
+    @Column(name = "biz_type", columnDefinition = "varchar(255) not null comment '业务类型 FUNCTION,OPTIMIZE,OTHER'")
     private String type;
 
     @Override

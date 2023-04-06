@@ -24,8 +24,7 @@ import org.springframework.context.annotation.Configuration;
  * @author laokou
  */
 @Configuration
-public class FlowableConfig
-        implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
+public class FlowableConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
     @Override
     public void configure(SpringProcessEngineConfiguration engineConfiguration) {
         engineConfiguration.setActivityFontName("宋体");

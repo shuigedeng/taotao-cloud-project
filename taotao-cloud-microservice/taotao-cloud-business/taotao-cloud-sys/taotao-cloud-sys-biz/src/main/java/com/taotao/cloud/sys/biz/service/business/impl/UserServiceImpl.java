@@ -51,8 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @AllArgsConstructor
-public class UserServiceImpl
-        extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+public class UserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
         implements IUserService {
 
     private static final QUser USER = QUser.user;
@@ -70,8 +69,7 @@ public class UserServiceImpl
             throw new BusinessException("不允许存在id值");
         }
         Optional<User> byIdWithColumns =
-                findByIdWithColumns(
-                        sysUser.getId(), User::getId, User::getUsername, User::getPhone);
+                findByIdWithColumns(sysUser.getId(), User::getId, User::getUsername, User::getPhone);
 
         String phone = sysUser.getPhone();
         Boolean isExists = existsByPhone(phone);
@@ -100,19 +98,16 @@ public class UserServiceImpl
         }
 
         // 此处修改用户角色
-        userRelationService.remove(
-                Wrappers.<UserRelation>lambdaQuery().eq(UserRelation::getId, user.getId()));
-        List<UserRelation> userRoles =
-                new ArrayList<Long>()
-                        .stream()
-                                .map(
-                                        item -> {
-                                            UserRelation sysUserRole = new UserRelation();
-                                            sysUserRole.setObjectId(item);
-                                            sysUserRole.setUserId(user.getId());
-                                            return sysUserRole;
-                                        })
-                                .collect(Collectors.toList());
+        userRelationService.remove(Wrappers.<UserRelation>lambdaQuery().eq(UserRelation::getId, user.getId()));
+        List<UserRelation> userRoles = new ArrayList<Long>()
+                .stream()
+                        .map(item -> {
+                            UserRelation sysUserRole = new UserRelation();
+                            sysUserRole.setObjectId(item);
+                            sysUserRole.setUserId(user.getId());
+                            return sysUserRole;
+                        })
+                        .collect(Collectors.toList());
 
         userRelationService.saveBatch(userRoles);
         return user;

@@ -30,7 +30,10 @@ public enum TopicReplyTypeEnum {
     USER("2", "用户"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String name;
 
     TopicReplyTypeEnum(String code, String name) {

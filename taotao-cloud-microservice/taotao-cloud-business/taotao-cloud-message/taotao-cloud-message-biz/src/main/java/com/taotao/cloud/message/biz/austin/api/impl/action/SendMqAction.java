@@ -39,7 +39,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SendMqAction implements BusinessProcess<SendTaskModel> {
 
-    @Autowired private SendMqService sendMqService;
+    @Autowired
+    private SendMqService sendMqService;
 
     @Value("${austin.business.topic.name}")
     private String sendMessageTopic;
@@ -58,21 +59,16 @@ public class SendMqAction implements BusinessProcess<SendTaskModel> {
         SendTaskModel sendTaskModel = context.getProcessModel();
         try {
             if (BusinessCode.COMMON_SEND.getCode().equals(context.getCode())) {
-                String message =
-                        JSON.toJSONString(
-                                sendTaskModel.getTaskInfo(),
-                                new SerializerFeature[] {SerializerFeature.WriteClassName});
+                String message = JSON.toJSONString(
+                        sendTaskModel.getTaskInfo(), new SerializerFeature[] {SerializerFeature.WriteClassName});
                 sendMqService.send(sendMessageTopic, message, tagId);
             } else if (BusinessCode.RECALL.getCode().equals(context.getCode())) {
-                String message =
-                        JSON.toJSONString(
-                                sendTaskModel.getMessageTemplate(),
-                                new SerializerFeature[] {SerializerFeature.WriteClassName});
+                String message = JSON.toJSONString(
+                        sendTaskModel.getMessageTemplate(), new SerializerFeature[] {SerializerFeature.WriteClassName});
                 sendMqService.send(austinRecall, message, tagId);
             }
         } catch (Exception e) {
-            context.setNeedBreak(true)
-                    .setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));
+            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));
             log.error(
                     "send {} fail! e:{},params:{}",
                     mqPipeline,

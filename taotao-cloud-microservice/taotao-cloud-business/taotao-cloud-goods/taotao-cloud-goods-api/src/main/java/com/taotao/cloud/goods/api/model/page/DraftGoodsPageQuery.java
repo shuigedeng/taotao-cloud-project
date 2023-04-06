@@ -37,7 +37,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DraftGoodsPageQuery extends GoodsPageQuery {
 
-    @Serial private static final long serialVersionUID = -1057830772267228050L;
+    @Serial
+    private static final long serialVersionUID = -1057830772267228050L;
 
     /**
      * @see DraftGoodsSaveTypeEnum

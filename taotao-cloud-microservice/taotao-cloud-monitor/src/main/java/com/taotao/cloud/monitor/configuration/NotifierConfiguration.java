@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
@@ -26,15 +27,13 @@ import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent;
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import reactor.core.publisher.Mono;
-
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import reactor.core.publisher.Mono;
 
 /**
  * NotifierConfiguration
@@ -46,80 +45,100 @@ import java.util.Map;
 @AutoConfiguration(after = AdminServerAutoConfiguration.class)
 public class NotifierConfiguration {
 
-	@Bean
-	public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
-		return new DingDingNotifier(repository);
-	}
+    @Bean
+    public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
+        return new DingDingNotifier(repository);
+    }
 
-	public static class DingDingNotifier extends AbstractStatusChangeNotifier {
+    public static class DingDingNotifier extends AbstractStatusChangeNotifier {
 
-		private final String[] ignoreChanges = new String[]{"UNKNOWN:UP", "DOWN:UP", "OFFLINE:UP"};
+        private final String[] ignoreChanges = new String[] {"UNKNOWN:UP", "DOWN:UP", "OFFLINE:UP"};
 
-		@Autowired
-		private DingerSender sender;
+        @Autowired
+        private DingerSender sender;
 
-		public DingDingNotifier(InstanceRepository repository) {
-			super(repository);
-		}
+        public DingDingNotifier(InstanceRepository repository) {
+            super(repository);
+        }
 
-		@Override
-		protected boolean shouldNotify(InstanceEvent event, Instance instance) {
-			if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
-				return false;
-			} else {
-				String from = this.getLastStatus(event.getInstance());
-				String to = statusChange.getStatusInfo().getStatus();
-				return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
-					&& Arrays.binarySearch(this.ignoreChanges, "*:" + to) < 0
-					&& Arrays.binarySearch(this.ignoreChanges, from + ":*") < 0;
-			}
-		}
+        @Override
+        protected boolean shouldNotify(InstanceEvent event, Instance instance) {
+            if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
+                return false;
+            } else {
+                String from = this.getLastStatus(event.getInstance());
+                String to = statusChange.getStatusInfo().getStatus();
+                return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
+                        && Arrays.binarySearch(this.ignoreChanges, "*:" + to) < 0
+                        && Arrays.binarySearch(this.ignoreChanges, from + ":*") < 0;
+            }
+        }
 
-		@Override
-		protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
-			String serviceName = instance.getRegistration().getName();
-			String serviceUrl = instance.getRegistration().getServiceUrl();
+        @Override
+        protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
+            String serviceName = instance.getRegistration().getName();
+            String serviceUrl = instance.getRegistration().getServiceUrl();
 
-			StringBuilder str = new StringBuilder();
-			str.append("taotaocloud微服务监控 \n");
-			str.append("[时间戳]: ").append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT)).append("\n");
-			str.append("[服务名] : ").append(serviceName).append("\n");
-			str.append("[服务ip]: ").append(serviceUrl).append("\n");
+            StringBuilder str = new StringBuilder();
+            str.append("taotaocloud微服务监控 \n");
+            str.append("[时间戳]: ")
+                    .append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT))
+                    .append("\n");
+            str.append("[服务名] : ").append(serviceName).append("\n");
+            str.append("[服务ip]: ").append(serviceUrl).append("\n");
 
-			return Mono.fromRunnable(() -> {
-				if (event instanceof InstanceStatusChangedEvent) {
-					String status = ((InstanceStatusChangedEvent) event).getStatusInfo()
-						.getStatus();
-					switch (status) {
-						// 健康检查没通过
-						case "DOWN" -> str.append("[服务状态]: ").append(status).append("(")
-							.append("健康检未通过").append(")").append("\n");
+            return Mono.fromRunnable(() -> {
+                if (event instanceof InstanceStatusChangedEvent) {
+                    String status =
+                            ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
+                    switch (status) {
+                            // 健康检查没通过
+                        case "DOWN" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("健康检未通过")
+                                .append(")")
+                                .append("\n");
 
-						// 服务离线
-						case "OFFLINE" -> str.append("[服务状态]: ").append(status).append("(")
-							.append("服务离线").append(")").append("\n");
+                            // 服务离线
+                        case "OFFLINE" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务离线")
+                                .append(")")
+                                .append("\n");
 
-						//服务上线
-						case "UP" -> str.append("[服务状态]: ").append(status).append("(")
-							.append("服务上线").append(")").append("\n");
+                            // 服务上线
+                        case "UP" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务上线")
+                                .append(")")
+                                .append("\n");
 
-						// 服务未知异常
-						case "UNKNOWN" -> str.append("[服务状态]: ").append(status).append("(")
-							.append("服务未知异常").append(")").append("\n");
+                            // 服务未知异常
+                        case "UNKNOWN" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务未知异常")
+                                .append(")")
+                                .append("\n");
 
-						default -> str.append("[服务状态]: ").append(status).append("(")
-							.append("服务未知异常").append(")").append("\n");
-					}
+                        default -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务未知异常")
+                                .append(")")
+                                .append("\n");
+                    }
 
-					Map<String, Object> details = ((InstanceStatusChangedEvent) event).getStatusInfo()
-						.getDetails();
-					str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
+                    Map<String, Object> details =
+                            ((InstanceStatusChangedEvent) event).getStatusInfo().getDetails();
+                    str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
 
-					sender.send(
-						MessageSubType.TEXT,
-						DingerRequest.request(str.toString()));
-				}
-			});
-		}
-	}
+                    sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
+                }
+            });
+        }
+    }
 }

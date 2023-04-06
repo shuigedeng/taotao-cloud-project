@@ -44,8 +44,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UnifiedOrderController extends AbstractPayOrderController {
 
-    @Autowired private PayWayService payWayService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private PayWayService payWayService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /** 统一下单接口 * */
     @PostMapping("/api/pay/unifiedOrder")
@@ -79,7 +82,9 @@ public class UnifiedOrderController extends AbstractPayOrderController {
 
         return ApiRes.okWithSign(
                 res,
-                configContextQueryService.queryMchApp(rq.getMchNo(), rq.getAppId()).getAppSecret());
+                configContextQueryService
+                        .queryMchApp(rq.getMchNo(), rq.getAppId())
+                        .getAppSecret());
     }
 
     private UnifiedOrderRQ buildBizRQ(UnifiedOrderRQ rq) {

@@ -40,7 +40,8 @@ public class FeignOrderServiceImpl
         extends BaseSuperServiceImpl<IOrderMapper, Order, OrderRepository, IOrderRepository, Long>
         implements IFeignOrderService {
 
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
 
     @Override
     public <T> T test123(T t) {

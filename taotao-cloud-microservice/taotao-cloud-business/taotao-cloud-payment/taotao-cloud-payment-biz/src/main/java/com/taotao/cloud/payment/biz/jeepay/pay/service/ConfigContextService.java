@@ -60,21 +60,25 @@ import org.springframework.stereotype.Service;
 public class ConfigContextService {
 
     /** <商户ID, 商户配置项> * */
-    private static final Map<String, MchInfoConfigContext> mchInfoConfigContextMap =
-            new ConcurrentHashMap<>();
+    private static final Map<String, MchInfoConfigContext> mchInfoConfigContextMap = new ConcurrentHashMap<>();
 
     /** <应用ID, 商户配置上下文> * */
-    private static final Map<String, MchAppConfigContext> mchAppConfigContextMap =
-            new ConcurrentHashMap<>();
+    private static final Map<String, MchAppConfigContext> mchAppConfigContextMap = new ConcurrentHashMap<>();
 
     /** <服务商号, 服务商配置上下文> * */
-    private static final Map<String, IsvConfigContext> isvConfigContextMap =
-            new ConcurrentHashMap<>();
+    private static final Map<String, IsvConfigContext> isvConfigContextMap = new ConcurrentHashMap<>();
 
-    @Autowired private MchInfoService mchInfoService;
-    @Autowired private MchAppService mchAppService;
-    @Autowired private IsvInfoService isvInfoService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
+    @Autowired
+    private MchInfoService mchInfoService;
+
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private IsvInfoService isvInfoService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
 
     /** 获取 [商户配置信息] * */
     public MchInfoConfigContext getMchInfoConfigContext(String mchNo) {
@@ -128,9 +132,7 @@ public class ConfigContextService {
 
             // 删除所有的商户应用
             if (mchInfoConfigContext != null) {
-                mchInfoConfigContext
-                        .getAppMap()
-                        .forEach((k, v) -> mchAppConfigContextMap.remove(k));
+                mchInfoConfigContext.getAppMap().forEach((k, v) -> mchAppConfigContextMap.remove(k));
             }
 
             mchInfoConfigContextMap.remove(mchNo);
@@ -143,21 +145,18 @@ public class ConfigContextService {
         mchInfoConfigContext.setMchNo(mchInfo.getMchNo());
         mchInfoConfigContext.setMchType(mchInfo.getType());
         mchInfoConfigContext.setMchInfo(mchInfo);
-        mchAppService.list(MchApp.gw().eq(MchApp::getMchNo, mchNo)).stream()
-                .forEach(
-                        mchApp -> {
-                            // 1. 更新商户内appId集合
-                            mchInfoConfigContext.putMchApp(mchApp);
+        mchAppService.list(MchApp.gw().eq(MchApp::getMchNo, mchNo)).stream().forEach(mchApp -> {
+            // 1. 更新商户内appId集合
+            mchInfoConfigContext.putMchApp(mchApp);
 
-                            MchAppConfigContext mchAppConfigContext =
-                                    mchAppConfigContextMap.get(mchApp.getAppId());
-                            if (mchAppConfigContext != null) {
-                                mchAppConfigContext.setMchApp(mchApp);
-                                mchAppConfigContext.setMchNo(mchInfo.getMchNo());
-                                mchAppConfigContext.setMchType(mchInfo.getType());
-                                mchAppConfigContext.setMchInfo(mchInfo);
-                            }
-                        });
+            MchAppConfigContext mchAppConfigContext = mchAppConfigContextMap.get(mchApp.getAppId());
+            if (mchAppConfigContext != null) {
+                mchAppConfigContext.setMchApp(mchApp);
+                mchAppConfigContext.setMchNo(mchInfo.getMchNo());
+                mchAppConfigContext.setMchType(mchInfo.getType());
+                mchAppConfigContext.setMchInfo(mchInfo);
+            }
+        });
 
         mchInfoConfigContextMap.put(mchNo, mchInfoConfigContext);
     }
@@ -204,15 +203,11 @@ public class ConfigContextService {
         mchAppConfigContext.setMchApp(dbMchApp);
 
         // 查询商户的所有支持的参数配置
-        List<PayInterfaceConfig> allConfigList =
-                payInterfaceConfigService.list(
-                        PayInterfaceConfig.gw()
-                                .select(
-                                        PayInterfaceConfig::getIfCode,
-                                        PayInterfaceConfig::getIfParams)
-                                .eq(PayInterfaceConfig::getState, CS.YES)
-                                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
-                                .eq(PayInterfaceConfig::getInfoId, appId));
+        List<PayInterfaceConfig> allConfigList = payInterfaceConfigService.list(PayInterfaceConfig.gw()
+                .select(PayInterfaceConfig::getIfCode, PayInterfaceConfig::getIfParams)
+                .eq(PayInterfaceConfig::getState, CS.YES)
+                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
+                .eq(PayInterfaceConfig::getInfoId, appId));
 
         // 普通商户
         if (mchInfo.getType() == CS.MCH_TYPE_NORMAL) {
@@ -222,35 +217,28 @@ public class ConfigContextService {
                         .put(
                                 payInterfaceConfig.getIfCode(),
                                 NormalMchParams.factory(
-                                        payInterfaceConfig.getIfCode(),
-                                        payInterfaceConfig.getIfParams()));
+                                        payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams()));
             }
 
             // 放置alipay client
             AlipayNormalMchParams alipayParams =
-                    mchAppConfigContext.getNormalMchParamsByIfCode(
-                            CS.IF_CODE.ALIPAY, AlipayNormalMchParams.class);
+                    mchAppConfigContext.getNormalMchParamsByIfCode(CS.IF_CODE.ALIPAY, AlipayNormalMchParams.class);
             if (alipayParams != null) {
-                mchAppConfigContext.setAlipayClientWrapper(
-                        AlipayClientWrapper.buildAlipayClientWrapper(alipayParams));
+                mchAppConfigContext.setAlipayClientWrapper(AlipayClientWrapper.buildAlipayClientWrapper(alipayParams));
             }
 
             // 放置 wxJavaService
             WxpayNormalMchParams wxpayParams =
-                    mchAppConfigContext.getNormalMchParamsByIfCode(
-                            CS.IF_CODE.WXPAY, WxpayNormalMchParams.class);
+                    mchAppConfigContext.getNormalMchParamsByIfCode(CS.IF_CODE.WXPAY, WxpayNormalMchParams.class);
             if (wxpayParams != null) {
-                mchAppConfigContext.setWxServiceWrapper(
-                        WxServiceWrapper.buildWxServiceWrapper(wxpayParams));
+                mchAppConfigContext.setWxServiceWrapper(WxServiceWrapper.buildWxServiceWrapper(wxpayParams));
             }
 
             // 放置 paypal client
             PpPayNormalMchParams ppPayMchParams =
-                    mchAppConfigContext.getNormalMchParamsByIfCode(
-                            CS.IF_CODE.PPPAY, PpPayNormalMchParams.class);
+                    mchAppConfigContext.getNormalMchParamsByIfCode(CS.IF_CODE.PPPAY, PpPayNormalMchParams.class);
             if (ppPayMchParams != null) {
-                mchAppConfigContext.setPaypalWrapper(
-                        PaypalWrapper.buildPaypalWrapper(ppPayMchParams));
+                mchAppConfigContext.setPaypalWrapper(PaypalWrapper.buildPaypalWrapper(ppPayMchParams));
             }
         } else { // 服务商模式商户
             for (PayInterfaceConfig payInterfaceConfig : allConfigList) {
@@ -259,8 +247,7 @@ public class ConfigContextService {
                         .put(
                                 payInterfaceConfig.getIfCode(),
                                 IsvsubMchParams.factory(
-                                        payInterfaceConfig.getIfCode(),
-                                        payInterfaceConfig.getIfParams()));
+                                        payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams()));
             }
 
             // 放置 当前商户的 服务商信息
@@ -312,40 +299,30 @@ public class ConfigContextService {
         isvConfigContext.setIsvInfo(isvInfo);
 
         // 查询商户的所有支持的参数配置
-        List<PayInterfaceConfig> allConfigList =
-                payInterfaceConfigService.list(
-                        PayInterfaceConfig.gw()
-                                .select(
-                                        PayInterfaceConfig::getIfCode,
-                                        PayInterfaceConfig::getIfParams)
-                                .eq(PayInterfaceConfig::getState, CS.YES)
-                                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_ISV)
-                                .eq(PayInterfaceConfig::getInfoId, isvNo));
+        List<PayInterfaceConfig> allConfigList = payInterfaceConfigService.list(PayInterfaceConfig.gw()
+                .select(PayInterfaceConfig::getIfCode, PayInterfaceConfig::getIfParams)
+                .eq(PayInterfaceConfig::getState, CS.YES)
+                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_ISV)
+                .eq(PayInterfaceConfig::getInfoId, isvNo));
 
         for (PayInterfaceConfig payInterfaceConfig : allConfigList) {
             isvConfigContext
                     .getIsvParamsMap()
                     .put(
                             payInterfaceConfig.getIfCode(),
-                            IsvParams.factory(
-                                    payInterfaceConfig.getIfCode(),
-                                    payInterfaceConfig.getIfParams()));
+                            IsvParams.factory(payInterfaceConfig.getIfCode(), payInterfaceConfig.getIfParams()));
         }
 
         // 放置alipay client
-        AlipayIsvParams alipayParams =
-                isvConfigContext.getIsvParamsByIfCode(CS.IF_CODE.ALIPAY, AlipayIsvParams.class);
+        AlipayIsvParams alipayParams = isvConfigContext.getIsvParamsByIfCode(CS.IF_CODE.ALIPAY, AlipayIsvParams.class);
         if (alipayParams != null) {
-            isvConfigContext.setAlipayClientWrapper(
-                    AlipayClientWrapper.buildAlipayClientWrapper(alipayParams));
+            isvConfigContext.setAlipayClientWrapper(AlipayClientWrapper.buildAlipayClientWrapper(alipayParams));
         }
 
         // 放置 wxJavaService
-        WxpayIsvParams wxpayParams =
-                isvConfigContext.getIsvParamsByIfCode(CS.IF_CODE.WXPAY, WxpayIsvParams.class);
+        WxpayIsvParams wxpayParams = isvConfigContext.getIsvParamsByIfCode(CS.IF_CODE.WXPAY, WxpayIsvParams.class);
         if (wxpayParams != null) {
-            isvConfigContext.setWxServiceWrapper(
-                    WxServiceWrapper.buildWxServiceWrapper(wxpayParams));
+            isvConfigContext.setWxServiceWrapper(WxServiceWrapper.buildWxServiceWrapper(wxpayParams));
         }
 
         isvConfigContextMap.put(isvNo, isvConfigContext);

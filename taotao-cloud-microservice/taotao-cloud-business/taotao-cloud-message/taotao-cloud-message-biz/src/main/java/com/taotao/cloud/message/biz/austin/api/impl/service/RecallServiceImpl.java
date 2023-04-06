@@ -34,22 +34,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecallServiceImpl implements RecallService {
 
-    @Autowired private ProcessController processController;
+    @Autowired
+    private ProcessController processController;
 
     @Override
     public SendResponse recall(SendRequest sendRequest) {
-        SendTaskModel sendTaskModel =
-                SendTaskModel.builder()
-                        .messageTemplateId(sendRequest.getMessageTemplateId())
-                        .build();
-        ProcessContext context =
-                ProcessContext.builder()
-                        .code(sendRequest.getCode())
-                        .processModel(sendTaskModel)
-                        .needBreak(false)
-                        .response(BasicResultVO.success())
-                        .build();
+        SendTaskModel sendTaskModel = SendTaskModel.builder()
+                .messageTemplateId(sendRequest.getMessageTemplateId())
+                .build();
+        ProcessContext context = ProcessContext.builder()
+                .code(sendRequest.getCode())
+                .processModel(sendTaskModel)
+                .needBreak(false)
+                .response(BasicResultVO.success())
+                .build();
         ProcessContext process = processController.process(context);
-        return new SendResponse(process.getResponse().getStatus(), process.getResponse().getMsg());
+        return new SendResponse(
+                process.getResponse().getStatus(), process.getResponse().getMsg());
     }
 }

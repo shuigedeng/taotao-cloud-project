@@ -37,11 +37,7 @@ public class BpmTaskTodoPageItemRespVO {
     @ApiModelProperty(value = "创建时间", required = true)
     private LocalDateTime createTime;
 
-    @ApiModelProperty(
-            value = "激活状态",
-            required = true,
-            example = "1",
-            notes = "参见 SuspensionState 枚举")
+    @ApiModelProperty(value = "激活状态", required = true, example = "1", notes = "参见 SuspensionState 枚举")
     private Integer suspensionState;
 
     /** 所属流程实例 */

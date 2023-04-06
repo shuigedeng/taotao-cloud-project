@@ -45,29 +45,20 @@ import lombok.Builder;
 public class Client extends JpaSuperEntity {
 
     /** 用于唯一标识每一个客户端(client) */
-    @Column(
-            name = "client_id",
-            unique = true,
-            columnDefinition = "varchar(32) NOT NULL COMMENT '应用标识'")
+    @Column(name = "client_id", unique = true, columnDefinition = "varchar(32) NOT NULL COMMENT '应用标识'")
     private String clientId;
     /** 应用名称 */
     @Column(name = "client_name", columnDefinition = "varchar(128)  NOT NULL COMMENT '应用名称'")
     private String clientName;
     /** 客户端密钥 */
-    @Column(
-            name = "client_secret",
-            columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(bcyt) 加密'")
+    @Column(name = "client_secret", columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(bcyt) 加密'")
     private String clientSecret;
     /** 客户端密钥(明文) */
-    @Column(
-            name = "client_secret_str",
-            columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(明文)'")
+    @Column(name = "client_secret_str", columnDefinition = "varchar(256)  NOT NULL COMMENT '应用密钥(明文)'")
     private String clientSecretStr;
     /** 资源ID */
     @Builder.Default
-    @Column(
-            name = "resource_ids",
-            columnDefinition = "varchar(256) NULL DEFAULT '' COMMENT '资源限定串(逗号分割)'")
+    @Column(name = "resource_ids", columnDefinition = "varchar(256) NULL DEFAULT '' COMMENT '资源限定串(逗号分割)'")
     private String resourceIds = "";
     /** 作用域 */
     @Builder.Default
@@ -77,16 +68,12 @@ public class Client extends JpaSuperEntity {
     @Builder.Default
     @Column(
             name = "authorized_grant_types",
-            columnDefinition =
-                    "varchar(256) NULL default"
-                        + " 'authorization_code,password,refresh_token,client_credentials' COMMENT"
-                        + " '4种oauth授权方式(authorization_code,password,refresh_token,client_credentials)'")
-    private String authorizedGrantTypes =
-            "authorization_code,password,refresh_token,client_credentials";
+            columnDefinition = "varchar(256) NULL default"
+                    + " 'authorization_code,password,refresh_token,client_credentials' COMMENT"
+                    + " '4种oauth授权方式(authorization_code,password,refresh_token,client_credentials)'")
+    private String authorizedGrantTypes = "authorization_code,password,refresh_token,client_credentials";
     /** 客户端重定向uri */
-    @Column(
-            name = "web_server_redirect_uri",
-            columnDefinition = "varchar(256) NULL DEFAULT NULL COMMENT '回调地址 '")
+    @Column(name = "web_server_redirect_uri", columnDefinition = "varchar(256) NULL DEFAULT NULL COMMENT '回调地址 '")
     private String webServerRedirectUri;
     /** 指定用户的权限范围 */
     @Builder.Default
@@ -94,28 +81,20 @@ public class Client extends JpaSuperEntity {
     private String authorities = "";
     /** 请求令牌有效时间 设置access_token的有效时间(秒),默认(606012,12小时) */
     @Builder.Default
-    @Column(
-            name = "access_token_validity",
-            columnDefinition = "int(11) NULL DEFAULT 18000 COMMENT 'access_token有效期'")
+    @Column(name = "access_token_validity", columnDefinition = "int(11) NULL DEFAULT 18000 COMMENT 'access_token有效期'")
     private Integer accessTokenValiditySeconds = 18000;
     /** 刷新令牌有效时间 设置refresh_token有效期(秒)，默认(606024*30, 30填) */
     @Builder.Default
-    @Column(
-            name = "refresh_token_validity",
-            columnDefinition = "int(11) NULL DEFAULT 28800 COMMENT 'refresh_token有效期'")
+    @Column(name = "refresh_token_validity", columnDefinition = "int(11) NULL DEFAULT 28800 COMMENT 'refresh_token有效期'")
     private Integer refreshTokenValiditySeconds = 28800;
     /** 扩展信息 值必须是json格式 */
     @Builder.Default
-    @Column(
-            name = "additional_information",
-            columnDefinition = "varchar(4096) NULL DEFAULT '{}' COMMENT '{}'")
+    @Column(name = "additional_information", columnDefinition = "varchar(4096) NULL DEFAULT '{}' COMMENT '{}'")
     private String additionalInformation = "{}";
     /**
      * 是否自动放行 默认false,适用于authorization_code模式,设置用户是否自动approval操作,设置true跳过用户确认授权操作页面，直接跳到redirect_uri
      */
     @Builder.Default
-    @Column(
-            name = "autoapprove",
-            columnDefinition = "char(5) NULL DEFAULT 'true' COMMENT '是否自动授权 是-true'")
+    @Column(name = "autoapprove", columnDefinition = "char(5) NULL DEFAULT 'true' COMMENT '是否自动授权 是-true'")
     private String autoapprove = "true";
 }

@@ -78,8 +78,7 @@ public class OAuth2ComplianceConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public AuthenticationFailureListener authenticationFailureListener(
-            SignInFailureLimitedStampManager stampManager,
-            OAuth2AccountStatusService accountLockService) {
+            SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusService accountLockService) {
         AuthenticationFailureListener authenticationFailureListener =
                 new AuthenticationFailureListener(stampManager, accountLockService);
         log.trace("[Herodotus] |- Bean [OAuth2 Authentication Failure Listener] Auto Configure.");
@@ -89,8 +88,7 @@ public class OAuth2ComplianceConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public AuthenticationSuccessListener authenticationSuccessListener(
-            SignInFailureLimitedStampManager stampManager,
-            OAuth2ComplianceService complianceService) {
+            SignInFailureLimitedStampManager stampManager, OAuth2ComplianceService complianceService) {
         AuthenticationSuccessListener authenticationSuccessListener =
                 new AuthenticationSuccessListener(stampManager, complianceService);
         log.trace("[Herodotus] |- Bean [OAuth2 Authentication Success Listener] Auto Configure.");

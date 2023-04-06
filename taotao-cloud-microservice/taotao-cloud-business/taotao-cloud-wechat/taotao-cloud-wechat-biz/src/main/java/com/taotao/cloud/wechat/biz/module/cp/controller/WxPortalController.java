@@ -49,9 +49,7 @@ public class WxPortalController {
             @RequestParam(name = "nonce", required = false) String nonce,
             @RequestParam(name = "echostr", required = false) String echostr) {
         this.logger.info(
-                "\n"
-                    + "接收到来自微信服务器的认证消息：signature = [{}], timestamp = [{}], nonce = [{}], echostr ="
-                    + " [{}]",
+                "\n" + "接收到来自微信服务器的认证消息：signature = [{}], timestamp = [{}], nonce = [{}], echostr =" + " [{}]",
                 signature,
                 timestamp,
                 nonce,
@@ -88,13 +86,8 @@ public class WxPortalController {
                 requestBody);
 
         final WxCpService wxCpService = WxCpConfiguration.getCpService(agentId);
-        WxCpXmlMessage inMessage =
-                WxCpXmlMessage.fromEncryptedXml(
-                        requestBody,
-                        wxCpService.getWxCpConfigStorage(),
-                        timestamp,
-                        nonce,
-                        signature);
+        WxCpXmlMessage inMessage = WxCpXmlMessage.fromEncryptedXml(
+                requestBody, wxCpService.getWxCpConfigStorage(), timestamp, nonce, signature);
         this.logger.debug("\n消息解密后内容为：\n{} ", JsonUtils.toJson(inMessage));
         WxCpXmlOutMessage outMessage = this.route(agentId, inMessage);
         if (outMessage == null) {

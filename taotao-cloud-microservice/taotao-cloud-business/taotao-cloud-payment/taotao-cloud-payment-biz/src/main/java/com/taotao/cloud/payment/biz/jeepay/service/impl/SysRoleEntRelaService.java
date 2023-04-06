@@ -34,7 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SysRoleEntRelaService extends ServiceImpl<SysRoleEntRelaMapper, SysRoleEntRela> {
 
-    @Autowired private SysEntitlementService sysEntitlementService;
+    @Autowired
+    private SysEntitlementService sysEntitlementService;
 
     /** 根据人查询出所有权限ID集合 */
     public List<String> selectEntIdsByUserId(Long userId, Byte isAdmin, String sysType) {
@@ -43,11 +44,10 @@ public class SysRoleEntRelaService extends ServiceImpl<SysRoleEntRelaMapper, Sys
 
             List<String> result = new ArrayList<>();
             sysEntitlementService
-                    .list(
-                            SysEntitlement.gw()
-                                    .select(SysEntitlement::getEntId)
-                                    .eq(SysEntitlement::getSysType, sysType)
-                                    .eq(SysEntitlement::getState, CS.PUB_USABLE))
+                    .list(SysEntitlement.gw()
+                            .select(SysEntitlement::getEntId)
+                            .eq(SysEntitlement::getSysType, sysType)
+                            .eq(SysEntitlement::getState, CS.PUB_USABLE))
                     .stream()
                     .forEach(r -> result.add(r.getEntId()));
 

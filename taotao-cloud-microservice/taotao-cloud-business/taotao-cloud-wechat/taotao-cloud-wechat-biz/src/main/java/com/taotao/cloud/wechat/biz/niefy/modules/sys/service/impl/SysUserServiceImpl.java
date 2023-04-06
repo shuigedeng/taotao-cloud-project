@@ -45,22 +45,23 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Mark sunlightcs@gmail.com
  */
 @Service("sysUserService")
-public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity>
-        implements SysUserService {
-    @Autowired private SysUserRoleService sysUserRoleService;
-    @Autowired private SysRoleService sysRoleService;
+public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
+
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String username = (String) params.get("username");
         Long createUserId = (Long) params.get("createUserId");
 
-        IPage<SysUserEntity> page =
-                this.page(
-                        new Query<SysUserEntity>().getPage(params),
-                        new QueryWrapper<SysUserEntity>()
-                                .like(StringUtils.isNotBlank(username), "username", username)
-                                .eq(createUserId != null, "create_user_id", createUserId));
+        IPage<SysUserEntity> page = this.page(
+                new Query<SysUserEntity>().getPage(params),
+                new QueryWrapper<SysUserEntity>()
+                        .like(StringUtils.isNotBlank(username), "username", username)
+                        .eq(createUserId != null, "create_user_id", createUserId));
 
         return new PageUtils(page);
     }

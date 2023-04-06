@@ -38,12 +38,13 @@ import org.springframework.util.CollectionUtils;
 
 /** 服务层实现 q3z3 */
 @Service("chatGroupInfoService")
-public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo>
-        implements ChatGroupInfoService {
+public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo> implements ChatGroupInfoService {
 
-    @Resource private ChatGroupInfoDao chatGroupInfoDao;
+    @Resource
+    private ChatGroupInfoDao chatGroupInfoDao;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Autowired
     public void setBaseDao() {
@@ -65,10 +66,8 @@ public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo>
             info = JSONUtil.toBean(redisUtils.get(key), ChatGroupInfo.class);
         }
         // 缓存不存在
-        else if ((info = this.queryOne(new ChatGroupInfo().setUserId(userId).setGroupId(groupId)))
-                != null) {
-            redisUtils.set(
-                    key, JSONUtil.toJsonStr(info), ApiConstant.REDIS_GROUP_TIME, TimeUnit.DAYS);
+        else if ((info = this.queryOne(new ChatGroupInfo().setUserId(userId).setGroupId(groupId))) != null) {
+            redisUtils.set(key, JSONUtil.toJsonStr(info), ApiConstant.REDIS_GROUP_TIME, TimeUnit.DAYS);
         }
         if (YesOrNoEnum.NO.equals(verify)) {
             return info;
@@ -84,10 +83,9 @@ public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo>
 
     @Override
     public void delGroupInfoCache(Long groupId, List<Long> userList) {
-        userList.forEach(
-                e -> {
-                    redisUtils.delete(StrUtil.format(ApiConstant.REDIS_GROUP_INFO, groupId, e));
-                });
+        userList.forEach(e -> {
+            redisUtils.delete(StrUtil.format(ApiConstant.REDIS_GROUP_INFO, groupId, e));
+        });
     }
 
     @Override
@@ -108,10 +106,9 @@ public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo>
         List<ChatGroupInfo> dataList =
                 this.queryList(new ChatGroupInfo().setGroupId(groupId).setKicked(YesOrNoEnum.NO));
         if (!CollectionUtils.isEmpty(userList)) {
-            dataList =
-                    dataList.stream()
-                            .filter(data -> userList.contains(data.getUserId()))
-                            .collect(Collectors.toList());
+            dataList = dataList.stream()
+                    .filter(data -> userList.contains(data.getUserId()))
+                    .collect(Collectors.toList());
         }
         return dataList;
     }
@@ -120,8 +117,7 @@ public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo>
     public Map<Long, ChatGroupInfo> queryUserMap(Long groupId) {
         // 查询所有成员
         List<ChatGroupInfo> dataList = this.queryList(new ChatGroupInfo().setGroupId(groupId));
-        return dataList.stream()
-                .collect(Collectors.toMap(ChatGroupInfo::getUserId, a -> a, (k1, k2) -> k1));
+        return dataList.stream().collect(Collectors.toMap(ChatGroupInfo::getUserId, a -> a, (k1, k2) -> k1));
     }
 
     @Override

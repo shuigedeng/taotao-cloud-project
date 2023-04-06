@@ -50,9 +50,11 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
         implements ArticleCategoryService {
 
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
     /** 文章 */
-    @Autowired private ArticleService articleService;
+    @Autowired
+    private ArticleService articleService;
     /** 顶级父分类ID */
     private static final String parentId = "0";
     /** 最大分类等级 */
@@ -62,8 +64,7 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
     @Transactional(rollbackFor = Exception.class)
     public ArticleCategory saveArticleCategory(ArticleCategory articleCategory) {
         // 非顶级分类
-        if (articleCategory.getParentId() != null
-                && !parentId.equals(articleCategory.getParentId())) {
+        if (articleCategory.getParentId() != null && !parentId.equals(articleCategory.getParentId())) {
             ArticleCategory parent = this.getById(articleCategory.getParentId());
             if (parent == null) {
                 throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_PARENT_NOT_EXIST);
@@ -93,12 +94,8 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
             }
         }
         // 验证分类名称是否重复
-        ArticleCategory category =
-                this.getOne(
-                        new LambdaQueryWrapper<ArticleCategory>()
-                                .eq(
-                                        ArticleCategory::getArticleCategoryName,
-                                        articleCategory.getArticleCategoryName()));
+        ArticleCategory category = this.getOne(new LambdaQueryWrapper<ArticleCategory>()
+                .eq(ArticleCategory::getArticleCategoryName, articleCategory.getArticleCategoryName()));
         if (category != null && !category.getId().equals(articleCategory.getId())) {
             throw new BusinessException(ResultEnum.ARTICLE_CATEGORY_NAME_EXIST);
         }
@@ -160,25 +157,22 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
     private List<ArticleCategoryVO> initCategory() {
         List<ArticleCategory> articleCategories = this.list();
         List<ArticleCategoryVO> tree = new ArrayList<>();
-        articleCategories.forEach(
-                item -> {
-                    if (item.getLevel() == 0) {
-                        ArticleCategoryVO articleCategoryVO =
-                                ArticleCategoryConvert.INSTANCE.articleCategoryToArticleCategoryVO(
-                                        item);
-                        initChild(articleCategoryVO, articleCategories);
-                        tree.add(articleCategoryVO);
-                    }
-                });
+        articleCategories.forEach(item -> {
+            if (item.getLevel() == 0) {
+                ArticleCategoryVO articleCategoryVO =
+                        ArticleCategoryConvert.INSTANCE.articleCategoryToArticleCategoryVO(item);
+                initChild(articleCategoryVO, articleCategories);
+                tree.add(articleCategoryVO);
+            }
+        });
 
         // 对一级菜单排序
-        tree.sort(
-                new Comparator<ArticleCategoryVO>() {
-                    @Override
-                    public int compare(ArticleCategoryVO o1, ArticleCategoryVO o2) {
-                        return o1.getSortNum().compareTo(o2.getSortNum());
-                    }
-                });
+        tree.sort(new Comparator<ArticleCategoryVO>() {
+            @Override
+            public int compare(ArticleCategoryVO o1, ArticleCategoryVO o2) {
+                return o1.getSortNum().compareTo(o2.getSortNum());
+            }
+        });
         redisRepository.set(CachePrefix.ARTICLE_CATEGORY.getPrefix(), tree);
 
         return tree;
@@ -196,14 +190,12 @@ public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMappe
         }
         articleCategories.stream()
                 .filter(item -> (item.getParentId().equals(tree.getId())))
-                .forEach(
-                        child -> {
-                            ArticleCategoryVO childTree =
-                                    ArticleCategoryConvert.INSTANCE
-                                            .articleCategoryToArticleCategoryVO(child);
-                            initChild(childTree, articleCategories);
-                            tree.getChildren().add(childTree);
-                        });
+                .forEach(child -> {
+                    ArticleCategoryVO childTree =
+                            ArticleCategoryConvert.INSTANCE.articleCategoryToArticleCategoryVO(child);
+                    initChild(childTree, articleCategories);
+                    tree.getChildren().add(childTree);
+                });
     }
 
     /** 清除缓存中的文章分类 */

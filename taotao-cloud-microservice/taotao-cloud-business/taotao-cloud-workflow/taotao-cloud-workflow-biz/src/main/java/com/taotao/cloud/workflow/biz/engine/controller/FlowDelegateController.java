@@ -53,7 +53,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/engine/flow-delegate")
 public class FlowDelegateController {
 
-    @Autowired private FlowDelegateService flowDelegateService;
+    @Autowired
+    private FlowDelegateService flowDelegateService;
 
     @Operation(summary = "分页获取流程委托列表", description = "分页获取流程委托列表")
     @GetMapping("/page")
@@ -86,8 +87,7 @@ public class FlowDelegateController {
     @Operation(summary = "更新流程委托", description = "更新流程委托")
     @PutMapping("/{id}")
     public Result<Boolean> update(
-            @PathVariable("id") String id,
-            @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
+            @PathVariable("id") String id, @RequestBody @Valid FlowDelegateUpForm flowDelegateUpForm) {
         FlowDelegateEntity entity = FlowTaskConvert.INSTANCE.convert(flowDelegateUpForm);
         Long userId = SecurityUtils.getUserId();
         if (userId.equals(entity.getToUserid())) {

@@ -40,18 +40,16 @@ public class CollectionUtils {
         // 使用迭代器进行循环遍历
         Set<String> requestSet = requestMap.keySet();
         Iterator<String> iterator = requestSet.iterator();
-        iterator.forEachRemaining(
-                obj -> {
-                    // 判断Key对应的Value是否为Map
-                    if ((requestMap.get(obj) instanceof Map)) {
-                        // 递归调用，将value中的Map的key转小写
-                        responseMap.put(
-                                obj.toLowerCase(), mapKeyToLower((Map) requestMap.get(obj)));
-                    } else {
-                        // 直接将key小写放入responseMap
-                        responseMap.put(obj.toLowerCase(), requestMap.get(obj));
-                    }
-                });
+        iterator.forEachRemaining(obj -> {
+            // 判断Key对应的Value是否为Map
+            if ((requestMap.get(obj) instanceof Map)) {
+                // 递归调用，将value中的Map的key转小写
+                responseMap.put(obj.toLowerCase(), mapKeyToLower((Map) requestMap.get(obj)));
+            } else {
+                // 直接将key小写放入responseMap
+                responseMap.put(obj.toLowerCase(), requestMap.get(obj));
+            }
+        });
 
         return responseMap;
     }

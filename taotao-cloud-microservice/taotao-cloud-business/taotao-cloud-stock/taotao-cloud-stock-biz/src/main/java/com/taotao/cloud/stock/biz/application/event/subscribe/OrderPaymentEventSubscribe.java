@@ -53,10 +53,7 @@ public class OrderPaymentEventSubscribe {
 
     private void handlePaymentEvent(PaymentEvent event) {
         var payment = event.getPayment();
-        var orderIds =
-                payment.getOrders().stream()
-                        .map(PaymentOrder::getId)
-                        .collect(Collectors.toUnmodifiableSet());
+        var orderIds = payment.getOrders().stream().map(PaymentOrder::getId).collect(Collectors.toUnmodifiableSet());
         var paymentResult = this.createPaymentResult(payment);
         this.orderService.payOrders(orderIds, paymentResult);
     }

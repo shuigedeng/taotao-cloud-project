@@ -40,7 +40,10 @@ public enum MsgStatusEnum {
     GROUP_INFO_NOT_EXIST("6", "你不在当前群中，消息发送失败"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String info;
 
     MsgStatusEnum(String code, String info) {

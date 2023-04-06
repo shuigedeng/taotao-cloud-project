@@ -51,8 +51,6 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         //	(SecurityUser) authentication.getPrincipal());
 
         LogUtils.error("用户认证成功", authentication);
-        ResponseUtils.success(
-                response,
-                jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
+        ResponseUtils.success(response, jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
     }
 }

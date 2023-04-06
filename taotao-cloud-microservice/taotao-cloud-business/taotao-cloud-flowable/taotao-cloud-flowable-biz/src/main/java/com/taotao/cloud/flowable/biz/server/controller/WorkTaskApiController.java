@@ -65,8 +65,7 @@ public class WorkTaskApiController {
 
     @GetMapping(value = "/diagram")
     @Operation(summary = "流程任务>任务流程", description = "流程任务>任务流程")
-    public HttpResult<String> diagram(@RequestParam("processInstanceId") String processInstanceId)
-            throws IOException {
+    public HttpResult<String> diagram(@RequestParam("processInstanceId") String processInstanceId) throws IOException {
         return new HttpResult<String>().ok(workTaskService.diagramTask(processInstanceId));
     }
 

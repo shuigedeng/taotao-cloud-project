@@ -49,30 +49,24 @@ public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
 
         // 1.没有传入 消息模板Id 或者 messageParam
         if (Objects.isNull(messageTemplateId) || CollUtil.isEmpty(messageParamList)) {
-            context.setNeedBreak(true)
-                    .setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
+            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
             return;
         }
 
         // 2.过滤 receiver=null 的messageParam
-        List<MessageParam> resultMessageParamList =
-                messageParamList.stream()
-                        .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
-                        .collect(Collectors.toList());
+        List<MessageParam> resultMessageParamList = messageParamList.stream()
+                .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
+                .collect(Collectors.toList());
         if (CollUtil.isEmpty(resultMessageParamList)) {
-            context.setNeedBreak(true)
-                    .setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
+            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
             return;
         }
 
         // 3.过滤receiver大于100的请求
         if (resultMessageParamList.stream()
-                .anyMatch(
-                        messageParam ->
-                                messageParam.getReceiver().split(StrUtil.COMMA).length
-                                        > AustinConstant.BATCH_RECEIVER_SIZE)) {
-            context.setNeedBreak(true)
-                    .setResponse(BasicResultVO.fail(RespStatusEnum.TOO_MANY_RECEIVER));
+                .anyMatch(messageParam ->
+                        messageParam.getReceiver().split(StrUtil.COMMA).length > AustinConstant.BATCH_RECEIVER_SIZE)) {
+            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TOO_MANY_RECEIVER));
             return;
         }
 

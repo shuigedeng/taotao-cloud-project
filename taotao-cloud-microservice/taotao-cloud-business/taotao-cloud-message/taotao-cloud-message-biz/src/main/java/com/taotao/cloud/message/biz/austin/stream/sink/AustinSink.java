@@ -50,49 +50,38 @@ public class AustinSink implements SinkFunction<AnchorInfo> {
      */
     private void realTimeData(AnchorInfo info) {
         try {
-            LettuceRedisUtils.pipeline(
-                    redisAsyncCommands -> {
-                        List<RedisFuture<?>> redisFutures = new ArrayList<>();
-                        /**
-                         * 1.构建userId维度的链路信息 数据结构list:{key,list}
-                         * key:userId,listValue:[{timestamp,state,businessId},{timestamp,state,businessId}]
-                         */
-                        SimpleAnchorInfo simpleAnchorInfo =
-                                SimpleAnchorInfo.builder()
-                                        .businessId(info.getBusinessId())
-                                        .state(info.getState())
-                                        .timestamp(info.getLogTimestamp())
-                                        .build();
-                        for (String id : info.getIds()) {
-                            redisFutures.add(
-                                    redisAsyncCommands.lpush(
-                                            id.getBytes(),
-                                            JSON.toJSONString(simpleAnchorInfo).getBytes()));
-                            redisFutures.add(
-                                    redisAsyncCommands.expire(
-                                            id.getBytes(),
-                                            (DateUtil.endOfDay(new Date()).getTime()
-                                                            - DateUtil.current())
-                                                    / 1000));
-                        }
+            LettuceRedisUtils.pipeline(redisAsyncCommands -> {
+                List<RedisFuture<?>> redisFutures = new ArrayList<>();
+                /**
+                 * 1.构建userId维度的链路信息 数据结构list:{key,list}
+                 * key:userId,listValue:[{timestamp,state,businessId},{timestamp,state,businessId}]
+                 */
+                SimpleAnchorInfo simpleAnchorInfo = SimpleAnchorInfo.builder()
+                        .businessId(info.getBusinessId())
+                        .state(info.getState())
+                        .timestamp(info.getLogTimestamp())
+                        .build();
+                for (String id : info.getIds()) {
+                    redisFutures.add(redisAsyncCommands.lpush(
+                            id.getBytes(), JSON.toJSONString(simpleAnchorInfo).getBytes()));
+                    redisFutures.add(redisAsyncCommands.expire(
+                            id.getBytes(), (DateUtil.endOfDay(new Date()).getTime() - DateUtil.current()) / 1000));
+                }
 
-                        /**
-                         * 2.构建消息模板维度的链路信息 数据结构hash:{key,hash}
-                         * key:businessId,hashValue:{state,stateCount}
-                         */
-                        redisFutures.add(
-                                redisAsyncCommands.hincrby(
-                                        String.valueOf(info.getBusinessId()).getBytes(),
-                                        String.valueOf(info.getState()).getBytes(),
-                                        info.getIds().size()));
-                        redisFutures.add(
-                                redisAsyncCommands.expire(
-                                        String.valueOf(info.getBusinessId()).getBytes(),
-                                        ((DateUtil.offsetDay(new Date(), 30).getTime()) / 1000)
-                                                - DateUtil.currentSeconds()));
+                /**
+                 * 2.构建消息模板维度的链路信息 数据结构hash:{key,hash}
+                 * key:businessId,hashValue:{state,stateCount}
+                 */
+                redisFutures.add(redisAsyncCommands.hincrby(
+                        String.valueOf(info.getBusinessId()).getBytes(),
+                        String.valueOf(info.getState()).getBytes(),
+                        info.getIds().size()));
+                redisFutures.add(redisAsyncCommands.expire(
+                        String.valueOf(info.getBusinessId()).getBytes(),
+                        ((DateUtil.offsetDay(new Date(), 30).getTime()) / 1000) - DateUtil.currentSeconds()));
 
-                        return redisFutures;
-                    });
+                return redisFutures;
+            });
 
         } catch (Exception e) {
             log.error("AustinSink#invoke error: {}", Throwables.getStackTraceAsString(e));

@@ -69,8 +69,7 @@ public class QrCodeKit {
         hints.put(EncodeHintType.MARGIN, margin);
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         try {
-            BitMatrix bitMatrix =
-                    new MultiFormatWriter().encode(contents, barcodeFormat, width, height, hints);
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(contents, barcodeFormat, width, height, hints);
             MatrixToImageConfig config = new MatrixToImageConfig(0xFF000001, 0xFFFFFFFF);
             bufImg = MatrixToImageWriter.toBufferedImage(bitMatrix, config);
             bool = writeToFile(bufImg, format, saveImgFilePath);

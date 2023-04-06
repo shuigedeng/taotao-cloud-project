@@ -27,10 +27,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BpmTaskExtMapper extends BaseMapperX<BpmTaskExtDO> {
 
     default void updateByTaskId(BpmTaskExtDO entity) {
-        update(
-                entity,
-                new LambdaQueryWrapper<BpmTaskExtDO>()
-                        .eq(BpmTaskExtDO::getTaskId, entity.getTaskId()));
+        update(entity, new LambdaQueryWrapper<BpmTaskExtDO>().eq(BpmTaskExtDO::getTaskId, entity.getTaskId()));
     }
 
     default List<BpmTaskExtDO> selectListByTaskIds(Collection<String> taskIds) {

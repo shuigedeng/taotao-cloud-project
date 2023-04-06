@@ -40,30 +40,18 @@ public class MpAutoReplyBaseVO {
 
     // ==================== 请求消息 ====================
 
-    @ApiModelProperty(
-            value = "请求的关键字",
-            example = "关键字",
-            notes = "当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填")
+    @ApiModelProperty(value = "请求的关键字", example = "关键字", notes = "当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填")
     private String requestKeyword;
 
-    @ApiModelProperty(
-            value = "请求的匹配方式",
-            example = "1",
-            notes = "当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填")
+    @ApiModelProperty(value = "请求的匹配方式", example = "1", notes = "当 type 为 MpAutoReplyTypeEnum#KEYWORD 时，必填")
     private Integer requestMatch;
 
-    @ApiModelProperty(
-            value = "请求的消息类型",
-            example = "text",
-            notes = "当 type 为 MpAutoReplyTypeEnum#MESSAGE 时，必填")
+    @ApiModelProperty(value = "请求的消息类型", example = "text", notes = "当 type 为 MpAutoReplyTypeEnum#MESSAGE 时，必填")
     private String requestMessageType;
 
     // ==================== 响应消息 ====================
 
-    @ApiModelProperty(
-            value = "回复的消息类型",
-            example = "text",
-            notes = "枚举 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC")
+    @ApiModelProperty(value = "回复的消息类型", example = "text", notes = "枚举 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC")
     @NotEmpty(message = "回复的消息类型不能为空")
     private String responseMessageType;
 

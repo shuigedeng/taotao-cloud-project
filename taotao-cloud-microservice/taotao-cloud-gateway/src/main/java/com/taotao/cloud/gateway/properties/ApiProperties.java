@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,44 +30,44 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @ConfigurationProperties(prefix = ApiProperties.PREFIX)
 public class ApiProperties {
 
-	public static final String PREFIX = "taotao.cloud.gateway.api";
+    public static final String PREFIX = "taotao.cloud.gateway.api";
 
-	/**
-	 * 网关基础路由前缀
-	 */
-	private String prefix = "/api";
+    /**
+     * 网关基础路由前缀
+     */
+    private String prefix = "/api";
 
-	/**
-	 * 网关基础路由版本
-	 */
-	private String version = "/v1.0";
+    /**
+     * 网关基础路由版本
+     */
+    private String version = "/v1.0";
 
-	/**
-	 * 网关基础路由uri
-	 */
-	private String baseUri = prefix + version;
+    /**
+     * 网关基础路由uri
+     */
+    private String baseUri = prefix + version;
 
-	public String getPrefix() {
-		return prefix;
-	}
+    public String getPrefix() {
+        return prefix;
+    }
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
-	public String getVersion() {
-		return version;
-	}
+    public String getVersion() {
+        return version;
+    }
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
-	public String getBaseUri() {
-		return baseUri;
-	}
+    public String getBaseUri() {
+        return baseUri;
+    }
 
-	public void setBaseUri(String baseUri) {
-		this.baseUri = baseUri;
-	}
+    public void setBaseUri(String baseUri) {
+        this.baseUri = baseUri;
+    }
 }

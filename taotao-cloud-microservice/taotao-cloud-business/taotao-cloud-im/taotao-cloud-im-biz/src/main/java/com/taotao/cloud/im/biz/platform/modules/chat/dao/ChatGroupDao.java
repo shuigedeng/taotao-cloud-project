@@ -35,6 +35,5 @@ public interface ChatGroupDao extends BaseDao<ChatGroup> {
     List<ChatGroup> queryList(ChatGroup chatGroup);
 
     /** 查询用户 */
-    List<PushParamVo> queryFriendPushFrom(
-            @Param("groupId") Long groupId, @Param("userId") Long userId);
+    List<PushParamVo> queryFriendPushFrom(@Param("groupId") Long groupId, @Param("userId") Long userId);
 }

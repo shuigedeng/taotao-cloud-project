@@ -44,19 +44,18 @@ public record AfterSaleDTO(
         /**
          * @see AfterSaleTypeEnum
          */
-        @Schema(description = "售后类型", allowableValues = "RETURN_GOODS,EXCHANGE_GOODS,RETURN_MONEY")
-                String serviceType,
+        @Schema(description = "售后类型", allowableValues = "RETURN_GOODS,EXCHANGE_GOODS,RETURN_MONEY") String serviceType,
 
         /**
          * @see AfterSaleRefundWayEnum
          */
         @Schema(description = "退款方式", allowableValues = "ORIGINAL,OFFLINE") String refundWay,
-        @Schema(description = "账号类型", allowableValues = "ALIPAY,WECHATPAY,BANKTRANSFER")
-                String accountType,
+        @Schema(description = "账号类型", allowableValues = "ALIPAY,WECHATPAY,BANKTRANSFER") String accountType,
         @Schema(description = "银行开户行") String bankDepositName,
         @Schema(description = "银行开户名") String bankAccountName,
         @Schema(description = "银行卡号") String bankAccountNumber)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

@@ -138,14 +138,12 @@ public class RequestKitBean {
         // 将转换好的reqParam JSON格式的对象保存在当前请求上下文对象中进行保存；
         // 注意1： springMVC的CTRL默认单例模式， 不可使用局部变量保存，会出现线程安全问题；
         // 注意2： springMVC的请求模式为线程池，如果采用ThreadLocal保存对象信息，可能会出现不清空或者被覆盖的问题。
-        Object reqParamObject =
-                RequestContextHolder.getRequestAttributes()
-                        .getAttribute(REQ_CONTEXT_KEY_PARAMJSON, RequestAttributes.SCOPE_REQUEST);
+        Object reqParamObject = RequestContextHolder.getRequestAttributes()
+                .getAttribute(REQ_CONTEXT_KEY_PARAMJSON, RequestAttributes.SCOPE_REQUEST);
         if (reqParamObject == null) {
             JSONObject reqParam = reqParam2JSON();
             RequestContextHolder.getRequestAttributes()
-                    .setAttribute(
-                            REQ_CONTEXT_KEY_PARAMJSON, reqParam, RequestAttributes.SCOPE_REQUEST);
+                    .setAttribute(REQ_CONTEXT_KEY_PARAMJSON, reqParam, RequestAttributes.SCOPE_REQUEST);
             return reqParam;
         }
         return (JSONObject) reqParamObject;

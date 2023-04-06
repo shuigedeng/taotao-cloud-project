@@ -57,8 +57,11 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 @RequestMapping("/sys/async/hello")
 public class AsyncController extends BaseFeignController<IDictService, Dict, Long> {
 
-    @Autowired private IFeignDictService feignDictService;
-    @Autowired private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
+    @Autowired
+    private IFeignDictService feignDictService;
+
+    @Autowired
+    private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
     private final List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 
@@ -96,52 +99,49 @@ public class AsyncController extends BaseFeignController<IDictService, Dict, Lon
      * <p>DeferredResult使用方式与Callable类似，重点在于跨线程之间的通信。 @Async也是替换Runable的一种方式，可以代替我们自己创建线程。而且适用的范围更广，并不局限于Controller层，而可以是任何层的方法上。
      */
     @RequestMapping("/asyncTask")
-    public void asyncTask(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    public void asyncTask(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("控制层线程:" + Thread.currentThread().getName());
         AsyncContext asyncContext = request.startAsync();
-        asyncContext.addListener(
-                new AsyncListener() {
-                    @Override
-                    public void onComplete(AsyncEvent asyncEvent) throws IOException {
-                        // 异步执行完毕时
-                        System.out.println("异步执行完毕");
-                    }
+        asyncContext.addListener(new AsyncListener() {
+            @Override
+            public void onComplete(AsyncEvent asyncEvent) throws IOException {
+                // 异步执行完毕时
+                System.out.println("异步执行完毕");
+            }
 
-                    @Override
-                    public void onTimeout(AsyncEvent asyncEvent) throws IOException {
-                        // 异步线程执行超时
-                        System.out.println("异步线程执行超时");
-                    }
+            @Override
+            public void onTimeout(AsyncEvent asyncEvent) throws IOException {
+                // 异步线程执行超时
+                System.out.println("异步线程执行超时");
+            }
 
-                    @Override
-                    public void onError(AsyncEvent asyncEvent) throws IOException {
-                        // 异步线程出错时
-                        System.out.println("异步线程出错");
-                    }
+            @Override
+            public void onError(AsyncEvent asyncEvent) throws IOException {
+                // 异步线程出错时
+                System.out.println("异步线程出错");
+            }
 
-                    @Override
-                    public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
-                        // 异步线程开始时
-                        System.out.println("异步线程开始");
-                    }
-                });
+            @Override
+            public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
+                // 异步线程开始时
+                System.out.println("异步线程开始");
+            }
+        });
         asyncContext.setTimeout(3000);
-        asyncContext.start(
-                () -> {
-                    try {
-                        System.out.println("异步执行线程:" + Thread.currentThread().getName());
-                        // String str = piceaService.task2();
-                        Thread.sleep(1000);
-                        asyncContext.getResponse().setCharacterEncoding("UTF-8");
-                        asyncContext.getResponse().setContentType("text/html;charset=UTF-8");
-                        asyncContext.getResponse().getWriter().println("这是【异步】的请求返回: ");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    // 异步请求完成通知，所有任务完成了，才执行
-                    asyncContext.complete();
-                });
+        asyncContext.start(() -> {
+            try {
+                System.out.println("异步执行线程:" + Thread.currentThread().getName());
+                // String str = piceaService.task2();
+                Thread.sleep(1000);
+                asyncContext.getResponse().setCharacterEncoding("UTF-8");
+                asyncContext.getResponse().setContentType("text/html;charset=UTF-8");
+                asyncContext.getResponse().getWriter().println("这是【异步】的请求返回: ");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 异步请求完成通知，所有任务完成了，才执行
+            asyncContext.complete();
+        });
     }
 
     /*** 异步，不阻塞Tomcat的线程 ，提升Tomcat吞吐量***/
@@ -158,29 +158,24 @@ public class AsyncController extends BaseFeignController<IDictService, Dict, Lon
     @RequestMapping("/async2")
     public Callable<String> async2() {
         System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
-        Callable<String> callable =
-                () -> {
-                    System.out.println(" 当前线程 内部 " + Thread.currentThread().getName());
-                    return "success";
-                };
+        Callable<String> callable = () -> {
+            System.out.println(" 当前线程 内部 " + Thread.currentThread().getName());
+            return "success";
+        };
         return callable;
     }
 
     @GetMapping("/webAsyncTask")
     public WebAsyncTask<String> webAsyncTask() {
         LogUtils.info("外部线程：" + Thread.currentThread().getName());
-        WebAsyncTask<String> result =
-                new WebAsyncTask<>(
-                        60 * 1000L,
-                        () -> {
-                            LogUtils.info("内部线程：" + Thread.currentThread().getName());
-                            return "success";
-                        });
-        result.onTimeout(
-                () -> {
-                    LogUtils.info("timeout callback");
-                    return "timeout callback";
-                });
+        WebAsyncTask<String> result = new WebAsyncTask<>(60 * 1000L, () -> {
+            LogUtils.info("内部线程：" + Thread.currentThread().getName());
+            return "success";
+        });
+        result.onTimeout(() -> {
+            LogUtils.info("timeout callback");
+            return "timeout callback";
+        });
         result.onCompletion(() -> LogUtils.info("finish callback"));
         return result;
     }
@@ -188,13 +183,12 @@ public class AsyncController extends BaseFeignController<IDictService, Dict, Lon
     @GetMapping("/email")
     public Callable<String> order() {
         System.out.println("主线程开始：" + Thread.currentThread().getName());
-        Callable<String> result =
-                () -> {
-                    System.out.println("副线程开始：" + Thread.currentThread().getName());
-                    Thread.sleep(1000);
-                    System.out.println("副线程返回：" + Thread.currentThread().getName());
-                    return "success";
-                };
+        Callable<String> result = () -> {
+            System.out.println("副线程开始：" + Thread.currentThread().getName());
+            Thread.sleep(1000);
+            System.out.println("副线程返回：" + Thread.currentThread().getName());
+            return "success";
+        };
 
         System.out.println("主线程返回：" + Thread.currentThread().getName());
         return result;

@@ -37,21 +37,22 @@ import org.springframework.stereotype.Service;
 
 /** 领料单 */
 @Service
-public class MaterialRequisitionServiceImpl
-        extends ServiceImpl<MaterialRequisitionMapper, MaterialRequisitionEntity>
+public class MaterialRequisitionServiceImpl extends ServiceImpl<MaterialRequisitionMapper, MaterialRequisitionEntity>
         implements MaterialRequisitionService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private MaterialEntryService materialEntryService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private MaterialEntryService materialEntryService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public List<MaterialEntryEntity> getMaterialEntryList(String id) {
         QueryWrapper<MaterialEntryEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper
-                .lambda()
-                .eq(MaterialEntryEntity::getLeadeId, id)
-                .orderByDesc(MaterialEntryEntity::getSortCode);
+        queryWrapper.lambda().eq(MaterialEntryEntity::getLeadeId, id).orderByDesc(MaterialEntryEntity::getSortCode);
         return materialEntryService.list(queryWrapper);
     }
 
@@ -64,10 +65,7 @@ public class MaterialRequisitionServiceImpl
 
     @Override
     @DSTransactional
-    public void save(
-            String id,
-            MaterialRequisitionEntity entity,
-            List<MaterialEntryEntity> materialEntryEntityList)
+    public void save(String id, MaterialRequisitionEntity entity, List<MaterialEntryEntity> materialEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -155,14 +153,12 @@ public class MaterialRequisitionServiceImpl
 
     @Override
     public void data(String id, String data) {
-        MaterialRequisitionForm materialRequisitionForm =
-                JsonUtils.getJsonToBean(data, MaterialRequisitionForm.class);
+        MaterialRequisitionForm materialRequisitionForm = JsonUtils.getJsonToBean(data, MaterialRequisitionForm.class);
         MaterialRequisitionEntity entity =
                 JsonUtils.getJsonToBean(materialRequisitionForm, MaterialRequisitionEntity.class);
-        List<MaterialEntryEntityInfoModel> entryList =
-                materialRequisitionForm.getEntryList() != null
-                        ? materialRequisitionForm.getEntryList()
-                        : new ArrayList<>();
+        List<MaterialEntryEntityInfoModel> entryList = materialRequisitionForm.getEntryList() != null
+                ? materialRequisitionForm.getEntryList()
+                : new ArrayList<>();
         List<MaterialEntryEntity> materialEntryEntityList =
                 JsonUtils.getJsonToList(entryList, MaterialEntryEntity.class);
         entity.setId(id);

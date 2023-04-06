@@ -50,18 +50,14 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 MiniAppAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "MiniAppAuthenticationProvider.onlySupports",
-                                "Only MiniAppAuthenticationToken is supported"));
+                () -> messages.getMessage(
+                        "MiniAppAuthenticationProvider.onlySupports", "Only MiniAppAuthenticationToken is supported"));
 
-        MiniAppAuthenticationToken unAuthenticationToken =
-                (MiniAppAuthenticationToken) authentication;
+        MiniAppAuthenticationToken unAuthenticationToken = (MiniAppAuthenticationToken) authentication;
         MiniAppRequest credentials = (MiniAppRequest) unAuthenticationToken.getCredentials();
 
         String clientId = credentials.getClientId();
@@ -69,10 +65,8 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
 
         UserDetails userDetails = miniAppUserDetailsService.loadByOpenId(clientId, openId);
         if (Objects.isNull(userDetails)) {
-            userDetails =
-                    miniAppUserDetailsService.register(
-                            credentials,
-                            miniAppSessionKeyCacheService.get(clientId + "::" + openId));
+            userDetails = miniAppUserDetailsService.register(
+                    credentials, miniAppSessionKeyCacheService.get(clientId + "::" + openId));
         }
         return createSuccessAuthentication(authentication, userDetails);
     }
@@ -94,13 +88,10 @@ public class MiniAppAuthenticationProvider implements AuthenticationProvider, Me
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
-        MiniAppAuthenticationToken authenticationToken =
-                new MiniAppAuthenticationToken(user, authorities);
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
+        MiniAppAuthenticationToken authenticationToken = new MiniAppAuthenticationToken(user, authorities);
         authenticationToken.setDetails(authentication.getPrincipal());
 
         return authenticationToken;

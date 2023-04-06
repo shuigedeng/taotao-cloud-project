@@ -39,11 +39,14 @@ import org.springframework.stereotype.Component;
 public class RefundSupport {
 
     /** 店铺流水 */
-    @Autowired private IFeignStoreFlowApi storeFlowApi;
+    @Autowired
+    private IFeignStoreFlowApi storeFlowApi;
     /** 订单 */
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
     /** 子订单 */
-    @Autowired private IFeignOrderItemApi orderItemApi;
+    @Autowired
+    private IFeignOrderItemApi orderItemApi;
 
     /**
      * 售后退款
@@ -52,22 +55,20 @@ public class RefundSupport {
      */
     public void refund(AfterSaleVO afterSale) {
         OrderVO order = orderApi.getBySn(afterSale.orderSn());
-        RefundLog refundLog =
-                RefundLog.builder()
-                        .isRefund(false)
-                        .totalAmount(afterSale.getActualRefundPrice())
-                        .payPrice(afterSale.getActualRefundPrice())
-                        .memberId(afterSale.getMemberId())
-                        .paymentName(order.getPaymentMethod())
-                        .afterSaleNo(afterSale.getSn())
-                        .paymentReceivableNo(order.getReceivableNo())
-                        .outOrderNo("AF" + SnowFlake.getIdStr())
-                        .orderSn(afterSale.getOrderSn())
-                        .refundReason(afterSale.getReason())
-                        .build();
+        RefundLog refundLog = RefundLog.builder()
+                .isRefund(false)
+                .totalAmount(afterSale.getActualRefundPrice())
+                .payPrice(afterSale.getActualRefundPrice())
+                .memberId(afterSale.getMemberId())
+                .paymentName(order.getPaymentMethod())
+                .afterSaleNo(afterSale.getSn())
+                .paymentReceivableNo(order.getReceivableNo())
+                .outOrderNo("AF" + SnowFlake.getIdStr())
+                .orderSn(afterSale.getOrderSn())
+                .refundReason(afterSale.getReason())
+                .build();
 
-        PaymentMethodEnum paymentMethodEnum =
-                PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
+        PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
         payment.refund(refundLog);
 
@@ -80,8 +81,7 @@ public class RefundSupport {
     /** 功能描述: 修改子订单中已售后退款商品数量 */
     private void updateReturnGoodsNumber(AfterSaleVO afterSale) {
         // 根据商品id及订单sn获取子订单
-        OrderItemVO orderItem =
-                orderItemApi.getByOrderSnAndSkuId(afterSale.orderSn(), afterSale.skuId());
+        OrderItemVO orderItem = orderItemApi.getByOrderSnAndSkuId(afterSale.orderSn(), afterSale.skuId());
 
         orderItem.setReturnGoodsNumber(afterSale.getNum() + orderItem.getReturnGoodsNumber());
 
@@ -92,21 +92,19 @@ public class RefundSupport {
     /** 订单取消 */
     public void cancel(AfterSaleVO afterSale) {
         OrderVO order = orderApi.getBySn(afterSale.orderSn());
-        RefundLog refundLog =
-                RefundLog.builder()
-                        .isRefund(false)
-                        .totalAmount(afterSale.getActualRefundPrice())
-                        .payPrice(afterSale.getActualRefundPrice())
-                        .memberId(afterSale.getMemberId())
-                        .paymentName(order.getPaymentMethod())
-                        .afterSaleNo(afterSale.getSn())
-                        .paymentReceivableNo(order.getReceivableNo())
-                        .outOrderNo("AF" + SnowFlake.getIdStr())
-                        .orderSn(afterSale.getOrderSn())
-                        .refundReason(afterSale.getReason())
-                        .build();
-        PaymentMethodEnum paymentMethodEnum =
-                PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
+        RefundLog refundLog = RefundLog.builder()
+                .isRefund(false)
+                .totalAmount(afterSale.getActualRefundPrice())
+                .payPrice(afterSale.getActualRefundPrice())
+                .memberId(afterSale.getMemberId())
+                .paymentName(order.getPaymentMethod())
+                .afterSaleNo(afterSale.getSn())
+                .paymentReceivableNo(order.getReceivableNo())
+                .outOrderNo("AF" + SnowFlake.getIdStr())
+                .orderSn(afterSale.getOrderSn())
+                .refundReason(afterSale.getReason())
+                .build();
+        PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.paymentNameOf(order.getPaymentMethod());
         Payment payment = (Payment) SpringContextUtil.getBean(paymentMethodEnum.getPlugin());
         payment.refund(refundLog);
     }

@@ -32,14 +32,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-04-28 08:55:37
  */
 @Service
-public class PurchaseOrderItemServiceImpl
-        extends ServiceImpl<IPurchaseOrderItemMapper, PurchaseOrderItem>
+public class PurchaseOrderItemServiceImpl extends ServiceImpl<IPurchaseOrderItemMapper, PurchaseOrderItem>
         implements IPurchaseOrderItemService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addPurchaseOrderItem(
-            String purchaseOrderId, List<PurchaseOrderItem> purchaseOrderItemList) {
+    public boolean addPurchaseOrderItem(String purchaseOrderId, List<PurchaseOrderItem> purchaseOrderItemList) {
         // 添加采购单子内容
         for (PurchaseOrderItem purchaseOrderItem : purchaseOrderItemList) {
             purchaseOrderItem.setPurchaseOrderId(purchaseOrderId);

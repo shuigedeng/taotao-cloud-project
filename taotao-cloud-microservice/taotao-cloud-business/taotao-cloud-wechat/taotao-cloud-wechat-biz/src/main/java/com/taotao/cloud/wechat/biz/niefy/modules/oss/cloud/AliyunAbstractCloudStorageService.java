@@ -38,12 +38,8 @@ public class AliyunAbstractCloudStorageService extends AbstractCloudStorageServi
     }
 
     private void init() {
-        client =
-                new OSSClientBuilder()
-                        .build(
-                                config.getAliyunEndPoint(),
-                                config.getAliyunAccessKeyId(),
-                                config.getAliyunAccessKeySecret());
+        client = new OSSClientBuilder()
+                .build(config.getAliyunEndPoint(), config.getAliyunAccessKeyId(), config.getAliyunAccessKeySecret());
     }
 
     @Override

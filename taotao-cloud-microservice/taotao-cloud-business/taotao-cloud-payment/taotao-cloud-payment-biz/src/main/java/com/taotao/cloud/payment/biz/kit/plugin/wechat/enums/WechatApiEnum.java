@@ -139,8 +139,7 @@ public enum WechatApiEnum {
     /** 支付有礼-新增活动发券商户号 */
     PAY_GIFT_ACTIVITY_ADD_MERCHANTS("/v3/marketing/paygiftactivity/activities/%s/merchants/add"),
     /** 支付有礼-删除活动发券商户号 */
-    PAY_GIFT_ACTIVITY_DELETE_MERCHANTS(
-            "/v3/marketing/paygiftactivity/activities/%s/merchants/delete"),
+    PAY_GIFT_ACTIVITY_DELETE_MERCHANTS("/v3/marketing/paygiftactivity/activities/%s/merchants/delete"),
 
     /** 点金计划-点金计划管理 */
     CHANGE_GOLD_PLAN_STATUS("/v3/goldplan/merchants/changegoldplanstatus"),

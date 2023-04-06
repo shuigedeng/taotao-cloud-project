@@ -54,13 +54,18 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class MpAutoReplyServiceImpl implements MpAutoReplyService {
 
-    @Resource private MpMessageService mpMessageService;
-    @Resource @Lazy // 延迟加载，避免循环依赖
+    @Resource
+    private MpMessageService mpMessageService;
+
+    @Resource
+    @Lazy // 延迟加载，避免循环依赖
     private MpAccountService mpAccountService;
 
-    @Resource private Validator validator;
+    @Resource
+    private Validator validator;
 
-    @Resource private MpAutoReplyMapper mpAutoReplyMapper;
+    @Resource
+    private MpAutoReplyMapper mpAutoReplyMapper;
 
     @Override
     public PageResult<MpAutoReplyDO> getAutoReplyPage(MpMessagePageReqVO pageVO) {
@@ -108,11 +113,10 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
                 updateReqVO.getRequestMessageType());
 
         // 第二步，更新数据
-        MpAutoReplyDO updateObj =
-                MpAutoReplyConvert.INSTANCE
-                        .convert(updateReqVO)
-                        .setAccountId(null)
-                        .setAppId(null); // 避免前端传递，更新着两个字段
+        MpAutoReplyDO updateObj = MpAutoReplyConvert.INSTANCE
+                .convert(updateReqVO)
+                .setAccountId(null)
+                .setAppId(null); // 避免前端传递，更新着两个字段
         mpAutoReplyMapper.updateById(updateObj);
     }
 
@@ -129,11 +133,7 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
      * @param requestMessageType 请求消息类型
      */
     private void validateAutoReplyConflict(
-            Long id,
-            Long accountId,
-            Integer type,
-            String requestKeyword,
-            String requestMessageType) {
+            Long id, Long accountId, Integer type, String requestKeyword, String requestMessageType) {
         // 获得已经存在的自动回复
         MpAutoReplyDO autoReply = null;
         ErrorCode errorCode = null;
@@ -141,8 +141,7 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
             autoReply = mpAutoReplyMapper.selectByAccountIdAndSubscribe(accountId);
             errorCode = AUTO_REPLY_ADD_SUBSCRIBE_FAIL_EXISTS;
         } else if (MpAutoReplyTypeEnum.MESSAGE.getType().equals(type)) {
-            autoReply =
-                    mpAutoReplyMapper.selectByAccountIdAndMessage(accountId, requestMessageType);
+            autoReply = mpAutoReplyMapper.selectByAccountIdAndMessage(accountId, requestMessageType);
             errorCode = AUTO_REPLY_ADD_MESSAGE_FAIL_EXISTS;
         } else if (MpAutoReplyTypeEnum.KEYWORD.getType().equals(type)) {
             autoReply = mpAutoReplyMapper.selectByAccountIdAndKeyword(accountId, requestKeyword);
@@ -183,13 +182,10 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
         // 1.1 关键字
         if (wxMessage.getMsgType().equals(WxConsts.XmlMsgType.TEXT)) {
             // 完全匹配
-            replies =
-                    mpAutoReplyMapper.selectListByAppIdAndKeywordAll(appId, wxMessage.getContent());
+            replies = mpAutoReplyMapper.selectListByAppIdAndKeywordAll(appId, wxMessage.getContent());
             if (CollUtil.isEmpty(replies)) {
                 // 模糊匹配
-                replies =
-                        mpAutoReplyMapper.selectListByAppIdAndKeywordLike(
-                                appId, wxMessage.getContent());
+                replies = mpAutoReplyMapper.selectListByAppIdAndKeywordLike(appId, wxMessage.getContent());
             }
         }
         // 1.2 消息类型
@@ -202,8 +198,7 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
         MpAutoReplyDO reply = CollUtil.getFirst(replies);
 
         // 第二步，基于自动回复，创建消息
-        MpMessageSendOutReqBO sendReqBO =
-                MpAutoReplyConvert.INSTANCE.convert(wxMessage.getFromUser(), reply);
+        MpMessageSendOutReqBO sendReqBO = MpAutoReplyConvert.INSTANCE.convert(wxMessage.getFromUser(), reply);
         return mpMessageService.sendOutMessage(sendReqBO);
     }
 
@@ -211,14 +206,12 @@ public class MpAutoReplyServiceImpl implements MpAutoReplyService {
     public WxMpXmlOutMessage replyForSubscribe(String appId, WxMpXmlMessage wxMessage) {
         // 第一步，匹配自动回复
         List<MpAutoReplyDO> replies = mpAutoReplyMapper.selectListByAppIdAndSubscribe(appId);
-        MpAutoReplyDO reply =
-                CollUtil.isNotEmpty(replies)
-                        ? CollUtil.getFirst(replies)
-                        : buildDefaultSubscribeAutoReply(appId); // 如果不存在，提供一个默认末班
+        MpAutoReplyDO reply = CollUtil.isNotEmpty(replies)
+                ? CollUtil.getFirst(replies)
+                : buildDefaultSubscribeAutoReply(appId); // 如果不存在，提供一个默认末班
 
         // 第二步，基于自动回复，创建消息
-        MpMessageSendOutReqBO sendReqBO =
-                MpAutoReplyConvert.INSTANCE.convert(wxMessage.getFromUser(), reply);
+        MpMessageSendOutReqBO sendReqBO = MpAutoReplyConvert.INSTANCE.convert(wxMessage.getFromUser(), reply);
         return mpMessageService.sendOutMessage(sendReqBO);
     }
 

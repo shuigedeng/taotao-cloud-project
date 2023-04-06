@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 // @RestController
 public class TestController {
 
-    @Autowired TestThreadPoolManager testThreadPoolManager;
+    @Autowired
+    TestThreadPoolManager testThreadPoolManager;
 
     /**
      * 测试模拟下单请求 入口

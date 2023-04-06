@@ -30,9 +30,7 @@ import org.mapstruct.factory.Mappers;
  * @version 2022.04
  * @since 2022-04-07 20:55:46
  */
-@Mapper(
-        unmappedSourcePolicy = ReportingPolicy.IGNORE,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AfterSaleLogConvert {
 
     AfterSaleLogConvert INSTANCE = Mappers.getMapper(AfterSaleLogConvert.class);

@@ -61,9 +61,7 @@ public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
     private Boolean enable = true;
 
     /** 订单状态 */
-    @Column(
-            name = "order_status",
-            columnDefinition = "varchar(255) not null default '' comment '订单状态'")
+    @Column(name = "order_status", columnDefinition = "varchar(255) not null default '' comment '订单状态'")
     private String orderStatus;
 
     /** 模版头部信息 */
@@ -71,8 +69,6 @@ public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
     private String first;
 
     /** 模版备注（位于最下方） */
-    @Column(
-            name = "remark",
-            columnDefinition = "varchar(255) not null default '' comment '模版备注（位于最下方）'")
+    @Column(name = "remark", columnDefinition = "varchar(255) not null default '' comment '模版备注（位于最下方）'")
     private String remark;
 }

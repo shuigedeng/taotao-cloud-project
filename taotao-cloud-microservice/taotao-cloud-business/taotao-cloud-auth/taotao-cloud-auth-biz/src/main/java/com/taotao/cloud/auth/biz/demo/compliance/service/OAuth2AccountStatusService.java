@@ -73,19 +73,15 @@ public class OAuth2AccountStatusService {
     public void lock(String username) {
         String userId = getUserId(username);
         if (ObjectUtils.isNotEmpty(userId)) {
-            accountStatusChangeService.process(
-                    new UserStatus(userId, DataItemStatus.LOCKING.name()));
+            accountStatusChangeService.process(new UserStatus(userId, DataItemStatus.LOCKING.name()));
             userDetailsStampManager.put(userId, username);
-            log.info(
-                    "[Herodotus] |- User count [{}] has been locked, and record into cache!",
-                    username);
+            log.info("[Herodotus] |- User count [{}] has been locked, and record into cache!", username);
         }
     }
 
     public void enable(String userId) {
         if (ObjectUtils.isNotEmpty(userId)) {
-            accountStatusChangeService.process(
-                    new UserStatus(userId, DataItemStatus.ENABLE.name()));
+            accountStatusChangeService.process(new UserStatus(userId, DataItemStatus.ENABLE.name()));
         }
     }
 

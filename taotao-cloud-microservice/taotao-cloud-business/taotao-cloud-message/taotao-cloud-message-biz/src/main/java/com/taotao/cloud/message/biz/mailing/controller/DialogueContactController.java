@@ -38,8 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/dialogue/contact")
 @Tags({@Tag(name = "消息管理接口"), @Tag(name = "私信管理接口"), @Tag(name = "私信联系人管理接口")})
-public class DialogueContactController
-        extends BaseWriteableRestController<DialogueContact, String> {
+public class DialogueContactController extends BaseWriteableRestController<DialogueContact, String> {
 
     private final DialogueContactService dialogueContactService;
 
@@ -59,21 +58,11 @@ public class DialogueContactController
                 @ApiResponse(
                         description = "联系人列表",
                         content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = Map.class)))
+                                @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))
             })
     @Parameters({
-        @Parameter(
-                name = "pageNumber",
-                required = true,
-                description = "当前页码",
-                schema = @Schema(type = "integer")),
-        @Parameter(
-                name = "pageSize",
-                required = true,
-                description = "每页显示数量",
-                schema = @Schema(type = "integer")),
+        @Parameter(name = "pageNumber", required = true, description = "当前页码", schema = @Schema(type = "integer")),
+        @Parameter(name = "pageSize", required = true, description = "每页显示数量", schema = @Schema(type = "integer")),
         @Parameter(name = "receiverId", required = true, description = "收信人ID，即当前用户ID"),
     })
     @GetMapping("/condition")
@@ -81,8 +70,7 @@ public class DialogueContactController
             @NotNull @RequestParam("pageNumber") Integer pageNumber,
             @NotNull @RequestParam("pageSize") Integer pageSize,
             @NotNull @RequestParam("receiverId") String receiverId) {
-        Page<DialogueContact> pages =
-                dialogueContactService.findByCondition(pageNumber, pageSize, receiverId);
+        Page<DialogueContact> pages = dialogueContactService.findByCondition(pageNumber, pageSize, receiverId);
         return result(pages);
     }
 }

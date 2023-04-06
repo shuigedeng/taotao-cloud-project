@@ -77,10 +77,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FlowEngineApiService implements FlowEngineApi {
 
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private VisualDevTableCre visualDevTableCre;
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private VisualDevTableCre visualDevTableCre;
 
     /**
      * 获取流程设计列表
@@ -91,15 +98,13 @@ public class FlowEngineApiService implements FlowEngineApi {
     @GetMapping
     public ActionResult list(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getPageList(pagination);
-        List<DictionaryDataEntity> dictionList =
-                serviceUtil.getDictionName(
-                        list.stream().map(t -> t.getCategory()).collect(Collectors.toList()));
+        List<DictionaryDataEntity> dictionList = serviceUtil.getDictionName(
+                list.stream().map(t -> t.getCategory()).collect(Collectors.toList()));
         for (FlowEngineEntity entity : list) {
-            DictionaryDataEntity dataEntity =
-                    dictionList.stream()
-                            .filter(t -> t.getEnCode().equals(entity.getCategory()))
-                            .findFirst()
-                            .orElse(null);
+            DictionaryDataEntity dataEntity = dictionList.stream()
+                    .filter(t -> t.getEnCode().equals(entity.getCategory()))
+                    .findFirst()
+                    .orElse(null);
             entity.setCategory(dataEntity != null ? dataEntity.getFullName() : "");
         }
         PaginationVO paginationVO = JsonUtil.getJsonToBean(pagination, PaginationVO.class);
@@ -137,8 +142,7 @@ public class FlowEngineApiService implements FlowEngineApi {
         FlowEngineEntity entity = flowEngineService.getInfo(id);
         List<FormDataField> formDataFieldList = new ArrayList<>();
         if (entity.getFormType() == 1) {
-            List<FlowEngineModel> list =
-                    JsonUtil.getJsonToList(entity.getFormData(), FlowEngineModel.class);
+            List<FlowEngineModel> list = JsonUtil.getJsonToList(entity.getFormData(), FlowEngineModel.class);
             for (FlowEngineModel model : list) {
                 FormDataField formDataField = new FormDataField();
                 formDataField.setLabel(model.getFiledName());
@@ -147,20 +151,16 @@ public class FlowEngineApiService implements FlowEngineApi {
             }
         } else {
             // formTempJson
-            FormDataModel formData =
-                    JsonUtil.getJsonToBean(entity.getFormData(), FormDataModel.class);
-            List<FieLdsModel> list =
-                    JsonUtil.getJsonToList(formData.getFields(), FieLdsModel.class);
-            List<TableModel> tableModelList =
-                    JsonUtil.getJsonToList(entity.getFlowTables(), TableModel.class);
+            FormDataModel formData = JsonUtil.getJsonToBean(entity.getFormData(), FormDataModel.class);
+            List<FieLdsModel> list = JsonUtil.getJsonToList(formData.getFields(), FieLdsModel.class);
+            List<TableModel> tableModelList = JsonUtil.getJsonToList(entity.getFlowTables(), TableModel.class);
             List<FormAllModel> formAllModel = new ArrayList<>();
             RecursionForm recursionForm = new RecursionForm(list, tableModelList);
             FormCloumnUtil.recursionForm(recursionForm, formAllModel);
             // 主表数据
-            List<FormAllModel> mast =
-                    formAllModel.stream()
-                            .filter(t -> FormEnum.mast.getMessage().equals(t.getJnpfKey()))
-                            .collect(Collectors.toList());
+            List<FormAllModel> mast = formAllModel.stream()
+                    .filter(t -> FormEnum.mast.getMessage().equals(t.getJnpfKey()))
+                    .collect(Collectors.toList());
             for (FormAllModel model : mast) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
                 String vmodel = fieLdsModel.getVModel();
@@ -190,18 +190,13 @@ public class FlowEngineApiService implements FlowEngineApi {
     public ActionResult<ListVO<FlowEngineSelectVO>> getFormData(@PathVariable("id") String id) {
         List<FlowTaskEntity> flowTaskList =
                 flowTaskService
-                        .getTaskList(
-                                id,
-                                FlowTaskEntity::getId,
-                                FlowTaskEntity::getFullName,
-                                FlowTaskEntity::getEnCode)
+                        .getTaskList(id, FlowTaskEntity::getId, FlowTaskEntity::getFullName, FlowTaskEntity::getEnCode)
                         .stream()
                         .filter(t -> FlowTaskStatusEnum.Adopt.getCode().equals(t.getStatus()))
                         .collect(Collectors.toList());
         List<FlowEngineSelectVO> vo = new ArrayList<>();
         for (FlowTaskEntity taskEntity : flowTaskList) {
-            FlowEngineSelectVO selectVO =
-                    JsonUtil.getJsonToBean(taskEntity, FlowEngineSelectVO.class);
+            FlowEngineSelectVO selectVO = JsonUtil.getJsonToBean(taskEntity, FlowEngineSelectVO.class);
             selectVO.setFullName(taskEntity.getFullName() + "/" + taskEntity.getEnCode());
             vo.add(selectVO);
         }
@@ -247,8 +242,7 @@ public class FlowEngineApiService implements FlowEngineApi {
      */
     @ApiOperation("获取流程引擎信息")
     @GetMapping("/{id}")
-    public ActionResult<FlowEngineInfoVO> info(@PathVariable("id") String id)
-            throws WorkFlowException {
+    public ActionResult<FlowEngineInfoVO> info(@PathVariable("id") String id) throws WorkFlowException {
         FlowEngineEntity flowEntity = flowEngineService.getInfo(id);
         FlowEngineInfoVO vo = JsonUtil.getJsonToBean(flowEntity, FlowEngineInfoVO.class);
         return ActionResult.success(vo);
@@ -261,16 +255,12 @@ public class FlowEngineApiService implements FlowEngineApi {
      */
     @ApiOperation("新建流程引擎")
     @PostMapping
-    public ActionResult create(@RequestBody @Valid FlowEngineCrForm flowEngineCrForm)
-            throws WorkFlowException {
-        FlowEngineEntity flowEngineEntity =
-                JsonUtil.getJsonToBean(flowEngineCrForm, FlowEngineEntity.class);
-        if (flowEngineService.isExistByFullName(
-                flowEngineEntity.getFullName(), flowEngineEntity.getId())) {
+    public ActionResult create(@RequestBody @Valid FlowEngineCrForm flowEngineCrForm) throws WorkFlowException {
+        FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineCrForm, FlowEngineEntity.class);
+        if (flowEngineService.isExistByFullName(flowEngineEntity.getFullName(), flowEngineEntity.getId())) {
             return ActionResult.fail("流程名称不能重复");
         }
-        if (flowEngineService.isExistByEnCode(
-                flowEngineEntity.getEnCode(), flowEngineEntity.getId())) {
+        if (flowEngineService.isExistByEnCode(flowEngineEntity.getEnCode(), flowEngineEntity.getId())) {
             return ActionResult.fail("流程编码不能重复");
         }
         flowEngineService.create(flowEngineEntity);
@@ -285,11 +275,9 @@ public class FlowEngineApiService implements FlowEngineApi {
      */
     @ApiOperation("更新流程引擎")
     @PutMapping("/{id}")
-    public ActionResult update(
-            @PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
+    public ActionResult update(@PathVariable("id") String id, @RequestBody @Valid FlowEngineUpForm flowEngineUpForm)
             throws WorkFlowException {
-        FlowEngineEntity flowEngineEntity =
-                JsonUtil.getJsonToBean(flowEngineUpForm, FlowEngineEntity.class);
+        FlowEngineEntity flowEngineEntity = JsonUtil.getJsonToBean(flowEngineUpForm, FlowEngineEntity.class);
         if (flowEngineService.isExistByFullName(flowEngineUpForm.getFullName(), id)) {
             return ActionResult.fail("流程名称不能重复");
         }
@@ -423,8 +411,7 @@ public class FlowEngineApiService implements FlowEngineApi {
      */
     @ApiOperation("工作流导入")
     @PostMapping(value = "/Actions/ImportData", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ActionResult ImportData(@RequestPart("file") MultipartFile multipartFile)
-            throws WorkFlowException {
+    public ActionResult ImportData(@RequestPart("file") MultipartFile multipartFile) throws WorkFlowException {
         // 判断是否为.json结尾
         if (FileUtil.existsSuffix(multipartFile, ModuleTypeEnum.FLOW_FLOWENGINE.getTableName())) {
             return ActionResult.fail(MsgCode.IMP002.get());
@@ -438,15 +425,10 @@ public class FlowEngineApiService implements FlowEngineApi {
     @Override
     @ApiOperation("无表生成有表")
     @PostMapping(value = "/tableCre")
-    public TableModels tableCre(@RequestBody TableCreModels tableCreModels)
-            throws WorkFlowException {
+    public TableModels tableCre(@RequestBody TableCreModels tableCreModels) throws WorkFlowException {
         JSONArray jsonArray = JsonUtil.getListToJsonArray(tableCreModels.getJsonArray());
-        List<TableModel> tableModels =
-                visualDevTableCre.tableList(
-                        jsonArray,
-                        tableCreModels.getFormAllModel(),
-                        tableCreModels.getTable(),
-                        tableCreModels.getLinkId());
+        List<TableModel> tableModels = visualDevTableCre.tableList(
+                jsonArray, tableCreModels.getFormAllModel(), tableCreModels.getTable(), tableCreModels.getLinkId());
         TableModels tableModels1 = new TableModels();
         tableModels1.setJsonArray(JsonUtil.getJsonToList(jsonArray));
         tableModels1.setTable(tableModels);
@@ -470,8 +452,7 @@ public class FlowEngineApiService implements FlowEngineApi {
     @Override
     @ApiOperation("获取流程引擎")
     @PostMapping(value = "/updateByID/{id}")
-    public void updateByID(
-            @PathVariable("id") String id, @RequestBody FlowEngineEntity flowEngineEntity)
+    public void updateByID(@PathVariable("id") String id, @RequestBody FlowEngineEntity flowEngineEntity)
             throws WorkFlowException {
         flowEngineService.update(id, flowEngineEntity);
     }

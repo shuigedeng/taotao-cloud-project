@@ -43,8 +43,7 @@ public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingF
     private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
     private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
-    private Converter<HttpServletRequest, PhoneAuthenticationToken>
-            captchaAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, PhoneAuthenticationToken> captchaAuthenticationTokenConverter;
 
     private boolean postOnly = true;
 
@@ -59,12 +58,10 @@ public class PhoneAuthenticationFilter extends AbstractAuthenticationProcessingF
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
         PhoneAuthenticationToken authRequest = captchaAuthenticationTokenConverter.convert(request);

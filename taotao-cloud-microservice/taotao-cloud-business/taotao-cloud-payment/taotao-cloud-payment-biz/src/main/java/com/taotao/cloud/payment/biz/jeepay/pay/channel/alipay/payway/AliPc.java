@@ -52,8 +52,7 @@ public class AliPc extends AlipayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         AliPcOrderRQ bizRQ = (AliPcOrderRQ) rq;
 
@@ -62,11 +61,8 @@ public class AliPc extends AlipayPaymentService {
         model.setOutTradeNo(payOrder.getPayOrderId());
         model.setSubject(payOrder.getSubject()); // 订单标题
         model.setBody(payOrder.getBody()); // 订单描述信息
-        model.setTotalAmount(
-                AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
-        model.setTimeExpire(
-                DateUtil.format(
-                        payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
+        model.setTotalAmount(AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
+        model.setTimeExpire(DateUtil.format(payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
         model.setProductCode("FAST_INSTANT_TRADE_PAY");
         model.setQrPayMode("2"); // 订单码-跳转模式
         req.setNotifyUrl(getNotifyUrl()); // 设置异步通知地址
@@ -81,19 +77,17 @@ public class AliPc extends AlipayPaymentService {
 
         try {
             if (CS.PAY_DATA_TYPE.FORM.equals(bizRQ.getPayDataType())) {
-                res.setFormContent(
-                        configContextQueryService
-                                .getAlipayClientWrapper(mchAppConfigContext)
-                                .getAlipayClient()
-                                .pageExecute(req)
-                                .getBody());
+                res.setFormContent(configContextQueryService
+                        .getAlipayClientWrapper(mchAppConfigContext)
+                        .getAlipayClient()
+                        .pageExecute(req)
+                        .getBody());
             } else {
-                res.setPayUrl(
-                        configContextQueryService
-                                .getAlipayClientWrapper(mchAppConfigContext)
-                                .getAlipayClient()
-                                .pageExecute(req, "GET")
-                                .getBody());
+                res.setPayUrl(configContextQueryService
+                        .getAlipayClientWrapper(mchAppConfigContext)
+                        .getAlipayClient()
+                        .pageExecute(req, "GET")
+                        .getBody());
             }
         } catch (AlipayApiException e) {
             throw ChannelException.sysError(e.getMessage());

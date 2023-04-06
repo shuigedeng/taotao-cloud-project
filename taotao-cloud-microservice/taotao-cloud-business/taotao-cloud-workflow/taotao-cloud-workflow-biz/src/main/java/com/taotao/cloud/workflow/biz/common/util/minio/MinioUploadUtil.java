@@ -68,11 +68,10 @@ public class MinioUploadUtil {
             // 开始上传
             try {
                 @Cleanup InputStream inputStream = file.getInputStream();
-                minioClient.putObject(
-                        PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
-                                        inputStream, file.getSize(), -1)
-                                .contentType(file.getContentType())
-                                .build());
+                minioClient.putObject(PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
+                                inputStream, file.getSize(), -1)
+                        .contentType(file.getContentType())
+                        .build());
             } catch (Exception e) {
                 log.error(e.getMessage());
             }
@@ -87,15 +86,13 @@ public class MinioUploadUtil {
      * @param fileName
      * @throws IOException
      */
-    public void uploadFiles(String filePath, String bucketName, String fileName)
-            throws IOException {
+    public void uploadFiles(String filePath, String bucketName, String fileName) throws IOException {
         MultipartFile file = FileUtil.createFileItem(new File(XSSEscape.escapePath(filePath)));
         // 开始上传
         try {
             @Cleanup InputStream inputStream = file.getInputStream();
             minioClient.putObject(
-                    PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
-                                    inputStream, file.getSize(), -1)
+                    PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(inputStream, file.getSize(), -1)
                             .contentType(file.getContentType())
                             .build());
         } catch (Exception e) {
@@ -113,9 +110,8 @@ public class MinioUploadUtil {
     public void downFile(String fileName, String bucketName, String downName) {
         InputStream inputStream = null;
         try {
-            inputStream =
-                    minioClient.getObject(
-                            GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
+            inputStream = minioClient.getObject(
+                    GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
             // 下载文件
             HttpServletResponse response = ServletUtil.getResponse();
             HttpServletRequest request = ServletUtil.getRequest();
@@ -143,8 +139,7 @@ public class MinioUploadUtil {
                 }
                 response.setHeader(
                         "Content-Disposition",
-                        "attachment;filename="
-                                + XSSEscape.escape(new String(codeFileName.getBytes(), "utf-8")));
+                        "attachment;filename=" + XSSEscape.escape(new String(codeFileName.getBytes(), "utf-8")));
                 @Cleanup OutputStream os = response.getOutputStream();
                 int i;
                 byte[] buff = new byte[1024 * 8];
@@ -184,9 +179,8 @@ public class MinioUploadUtil {
     public void dowloadMinioFile(String fileName, String bucketName) {
         try {
             @Cleanup
-            InputStream inputStream =
-                    minioClient.getObject(
-                            GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
+            InputStream inputStream = minioClient.getObject(
+                    GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
             @Cleanup
             ServletOutputStream outputStream1 = ServletUtil.getResponse().getOutputStream();
             // 读取指定路径下面的文件
@@ -216,13 +210,11 @@ public class MinioUploadUtil {
     public String getFile(String fileName, String bucketName) {
         String objectUrl = null;
         try {
-            objectUrl =
-                    minioClient.getPresignedObjectUrl(
-                            GetPresignedObjectUrlArgs.builder()
-                                    .method(Method.GET)
-                                    .bucket(bucketName)
-                                    .object(fileName)
-                                    .build());
+            objectUrl = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
+                    .method(Method.GET)
+                    .bucket(bucketName)
+                    .object(fileName)
+                    .build());
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -239,9 +231,8 @@ public class MinioUploadUtil {
     public InputStream downloadMinio(String fileName, String bucketName) {
         try {
             @Cleanup
-            InputStream stream =
-                    minioClient.getObject(
-                            GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
+            InputStream stream = minioClient.getObject(
+                    GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
             return stream;
         } catch (Exception e) {
             e.printStackTrace();
@@ -334,8 +325,7 @@ public class MinioUploadUtil {
             }
             // 压缩文件后上传到minio
             FileUtil.toZip(filePath + ".zip", true, filePath);
-            MultipartFile multipartFile =
-                    FileUtil.createFileItem(new File(XSSEscape.escapePath(filePath + ".zip")));
+            MultipartFile multipartFile = FileUtil.createFileItem(new File(XSSEscape.escapePath(filePath + ".zip")));
             // 上传到minio
             uploadFile(multipartFile, bucketName, objectName + ".zip");
             flag = true;
@@ -355,9 +345,10 @@ public class MinioUploadUtil {
     public void streamToDown(String bucketName, String filePath, String objectName) {
         try {
             @Cleanup
-            InputStream stream =
-                    minioClient.getObject(
-                            GetObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            InputStream stream = minioClient.getObject(GetObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(objectName)
+                    .build());
             FileUtil.writeFile(stream, filePath, objectName);
         } catch (Exception e) {
             e.printStackTrace();
@@ -374,8 +365,8 @@ public class MinioUploadUtil {
     public List getFileList(String bucketName) {
         List<Item> list = new ArrayList<>();
         try {
-            Iterable<Result<Item>> results =
-                    minioClient.listObjects(ListObjectsArgs.builder().bucket(bucketName).build());
+            Iterable<Result<Item>> results = minioClient.listObjects(
+                    ListObjectsArgs.builder().bucket(bucketName).build());
             for (Result<Item> result : results) {
                 Item item = result.get();
                 list.add(item);
@@ -396,13 +387,11 @@ public class MinioUploadUtil {
     public List getFileList(String bucketName, String type) {
         List<Item> list = new ArrayList<>();
         try {
-            Iterable<Result<Item>> results =
-                    minioClient.listObjects(
-                            ListObjectsArgs.builder()
-                                    .bucket(bucketName)
-                                    .prefix(type)
-                                    .recursive(true)
-                                    .build());
+            Iterable<Result<Item>> results = minioClient.listObjects(ListObjectsArgs.builder()
+                    .bucket(bucketName)
+                    .prefix(type)
+                    .recursive(true)
+                    .build());
             for (Result<Item> result : results) {
                 Item item = result.get();
                 list.add(item);
@@ -421,22 +410,16 @@ public class MinioUploadUtil {
      * @param copyToBucketName 目标bucket名称
      * @param copyToObjectName 目标文件名称
      */
-    public void copyObject(
-            String bucketName,
-            String objectName,
-            String copyToBucketName,
-            String copyToObjectName) {
+    public void copyObject(String bucketName, String objectName, String copyToBucketName, String copyToObjectName) {
         try {
-            minioClient.copyObject(
-                    CopyObjectArgs.builder()
-                            .source(
-                                    CopySource.builder()
-                                            .bucket(bucketName)
-                                            .object(objectName)
-                                            .build())
-                            .bucket(copyToBucketName)
-                            .object(copyToObjectName)
-                            .build());
+            minioClient.copyObject(CopyObjectArgs.builder()
+                    .source(CopySource.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .build())
+                    .bucket(copyToBucketName)
+                    .object(copyToObjectName)
+                    .build());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -482,9 +465,10 @@ public class MinioUploadUtil {
     public void downToLocal(String bucketName, String filePath, String objectName) {
         try {
             @Cleanup
-            InputStream stream =
-                    minioClient.getObject(
-                            GetObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            InputStream stream = minioClient.getObject(GetObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(objectName)
+                    .build());
             FileUtil.write(stream, filePath, objectName);
         } catch (Exception e) {
             e.printStackTrace();

@@ -32,7 +32,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MenuHandler extends AbstractHandler {
-    @Autowired MsgReplyService msgReplyService;
+    @Autowired
+    MsgReplyService msgReplyService;
 
     @Override
     public WxMpXmlOutMessage handle(

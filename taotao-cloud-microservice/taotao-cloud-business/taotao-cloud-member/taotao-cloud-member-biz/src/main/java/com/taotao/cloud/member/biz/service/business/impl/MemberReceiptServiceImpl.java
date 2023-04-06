@@ -47,7 +47,8 @@ import org.springframework.stereotype.Service;
 public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, MemberReceipt>
         implements IMemberReceiptService {
 
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
 
     @Override
     public IPage<MemberReceipt> getPage(MemberReceiptPageQuery memberReceiptPageQuery) {
@@ -72,11 +73,9 @@ public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, 
     @Override
     public Boolean addMemberReceipt(MemberReceiptAddVO memberReceiptAddVO, Long memberId) {
         // 校验发票抬头是否重复
-        List<MemberReceipt> receipts =
-                this.baseMapper.selectList(
-                        new QueryWrapper<MemberReceipt>()
-                                .eq("member_id", memberId)
-                                .eq("receipt_title", memberReceiptAddVO.getReceiptTitle()));
+        List<MemberReceipt> receipts = this.baseMapper.selectList(new QueryWrapper<MemberReceipt>()
+                .eq("member_id", memberId)
+                .eq("receipt_title", memberReceiptAddVO.getReceiptTitle()));
         if (receipts.size() > 0) {
             throw new BusinessException(ResultEnum.USER_RECEIPT_REPEAT_ERROR);
         }
@@ -90,8 +89,7 @@ public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, 
             memberReceipt.setMemberName(member.getUsername());
             // 设置发票默认
             List<MemberReceipt> list =
-                    this.baseMapper.selectList(
-                            new QueryWrapper<MemberReceipt>().eq("member_id", memberId));
+                    this.baseMapper.selectList(new QueryWrapper<MemberReceipt>().eq("member_id", memberId));
             // 如果当前会员只有一个发票则默认为默认发票，反之需要校验参数默认值，做一些处理
             if (list.size() <= 0) {
                 memberReceipt.setDefaulted(1);
@@ -120,12 +118,10 @@ public class MemberReceiptServiceImpl extends ServiceImpl<IMemberReceiptMapper, 
                 throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
             }
             // 校验发票抬头是否重复
-            List<MemberReceipt> receipts =
-                    this.baseMapper.selectList(
-                            new QueryWrapper<MemberReceipt>()
-                                    .eq("member_id", memberId)
-                                    .eq("receipt_title", memberReceiptAddVO.getReceiptTitle())
-                                    .ne("id", memberReceiptAddVO.getId()));
+            List<MemberReceipt> receipts = this.baseMapper.selectList(new QueryWrapper<MemberReceipt>()
+                    .eq("member_id", memberId)
+                    .eq("receipt_title", memberReceiptAddVO.getReceiptTitle())
+                    .ne("id", memberReceiptAddVO.getId()));
             if (receipts.size() > 0) {
                 throw new BusinessException(ResultEnum.USER_RECEIPT_REPEAT_ERROR);
             }

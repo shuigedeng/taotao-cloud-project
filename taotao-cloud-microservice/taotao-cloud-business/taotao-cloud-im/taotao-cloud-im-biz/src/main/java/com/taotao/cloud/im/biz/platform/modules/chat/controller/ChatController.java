@@ -38,7 +38,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/chat")
 public class ChatController extends BaseController {
 
-    @Resource private ChatMsgService chatMsgService;
+    @Resource
+    private ChatMsgService chatMsgService;
 
     /** 发送信息 */
     @ApiVersion(VersionEnum.V1_0_0)

@@ -36,8 +36,11 @@ public class SeckillServiceImpl implements ISeckillService {
     /** 思考：为什么不用synchronized service 默认是单例的，并发下lock只有一个实例 互斥锁 参数默认false，不公平锁 */
     private Lock lock = new ReentrantLock(true);
 
-    @Autowired private DynamicQuery dynamicQuery;
-    @Autowired private SeckillRepository seckillRepository;
+    @Autowired
+    private DynamicQuery dynamicQuery;
+
+    @Autowired
+    private SeckillRepository seckillRepository;
 
     @Override
     public List<Seckill> getSeckillList() {
@@ -89,14 +92,8 @@ public class SeckillServiceImpl implements ISeckillService {
              * 这样迁移的数据量，就小很多了。 这个问题不算很大问题，毕竟一次扩容，可以保证比较长的时间，而且使用倍数增加的方式，已经减少了数据迁移量。
              */
             String table = "success_killed_" + userId % 8;
-            nativeSql =
-                    "INSERT INTO "
-                            + table
-                            + " (seckill_id, user_id,state,create_time)VALUES(?,?,?,?)";
-            Object[] params =
-                    new Object[] {
-                        seckillId, userId, (short) 0, new Timestamp(System.currentTimeMillis())
-                    };
+            nativeSql = "INSERT INTO " + table + " (seckill_id, user_id,state,create_time)VALUES(?,?,?,?)";
+            Object[] params = new Object[] {seckillId, userId, (short) 0, new Timestamp(System.currentTimeMillis())};
             dynamicQuery.nativeExecuteUpdate(nativeSql, params);
             // 支付
             return Result.ok(SeckillStatEnum.SUCCESS);
@@ -217,11 +214,9 @@ public class SeckillServiceImpl implements ISeckillService {
         if (kill.getNumber() >= number) {
             // 乐观锁
             String nativeSql =
-                    "UPDATE seckill  SET number=number-?,version=version+1 WHERE seckill_id=? AND"
-                            + " version = ?";
+                    "UPDATE seckill  SET number=number-?,version=version+1 WHERE seckill_id=? AND" + " version = ?";
             int count =
-                    dynamicQuery.nativeExecuteUpdate(
-                            nativeSql, new Object[] {number, seckillId, kill.getVersion()});
+                    dynamicQuery.nativeExecuteUpdate(nativeSql, new Object[] {number, seckillId, kill.getVersion()});
             if (count > 0) {
                 SuccessKilled killed = new SuccessKilled();
                 killed.setSeckillId(seckillId);

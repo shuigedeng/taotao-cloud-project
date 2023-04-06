@@ -29,19 +29,17 @@ public class TaskExcutor {
          * 线程最大空闲时间为10秒 workQueue=new SynchronousQueue<Runnable>() 链表队列 handler=new
          * ThreadPoolExecutor.CallerRunsPolicy()
          */
-        private static final ExecutorService EXCUTOR =
-                new ThreadPoolExecutor(
-                        5,
-                        30,
-                        60L,
-                        TimeUnit.SECONDS,
-                        new SynchronousQueue<Runnable>(),
-                        new ThreadPoolExecutor.CallerRunsPolicy());
+        private static final ExecutorService EXCUTOR = new ThreadPoolExecutor(
+                5,
+                30,
+                60L,
+                TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>(),
+                new ThreadPoolExecutor.CallerRunsPolicy());
     }
     /** 使用静态内部类实现单例懒加载 */
     private static class SchedulerHolder {
-        private static final ScheduledExecutorService SCHEDULER =
-                Executors.newScheduledThreadPool(5);
+        private static final ScheduledExecutorService SCHEDULER = Executors.newScheduledThreadPool(5);
     }
 
     /**

@@ -25,10 +25,7 @@ import lombok.Data;
 @Data
 public class MpOpenCheckSignatureReqVO {
 
-    @ApiModelProperty(
-            value = "微信加密签名",
-            required = true,
-            example = "490eb57f448b87bd5f20ccef58aa4de46aa1908e")
+    @ApiModelProperty(value = "微信加密签名", required = true, example = "490eb57f448b87bd5f20ccef58aa4de46aa1908e")
     @NotEmpty(message = "微信加密签名不能为空")
     private String signature;
 

@@ -43,7 +43,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
 public class Receiver {
 
-    @Autowired private ConsumeService consumeService;
+    @Autowired
+    private ConsumeService consumeService;
 
     /**
      * 发送消息
@@ -51,19 +52,14 @@ public class Receiver {
      * @param consumerRecord
      * @param topicGroupId
      */
-    @KafkaListener(
-            topics = "#{'${austin.business.topic.name}'}",
-            containerFactory = "filterContainerFactory")
-    public void consumer(
-            ConsumerRecord<?, String> consumerRecord,
-            @Header(KafkaHeaders.GROUP_ID) String topicGroupId) {
+    @KafkaListener(topics = "#{'${austin.business.topic.name}'}", containerFactory = "filterContainerFactory")
+    public void consumer(ConsumerRecord<?, String> consumerRecord, @Header(KafkaHeaders.GROUP_ID) String topicGroupId) {
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if (kafkaMessage.isPresent()) {
 
             List<TaskInfo> taskInfoLists = JSON.parseArray(kafkaMessage.get(), TaskInfo.class);
             String messageGroupId =
-                    GroupIdMappingUtils.getGroupIdByTaskInfo(
-                            CollUtil.getFirst(taskInfoLists.iterator()));
+                    GroupIdMappingUtils.getGroupIdByTaskInfo(CollUtil.getFirst(taskInfoLists.iterator()));
             /** 每个消费者组 只消费 他们自身关心的消息 */
             if (topicGroupId.equals(messageGroupId)) {
                 consumeService.consume2Send(taskInfoLists);
@@ -83,8 +79,7 @@ public class Receiver {
     public void recall(ConsumerRecord<?, String> consumerRecord) {
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if (kafkaMessage.isPresent()) {
-            MessageTemplate messageTemplate =
-                    JSON.parseObject(kafkaMessage.get(), MessageTemplate.class);
+            MessageTemplate messageTemplate = JSON.parseObject(kafkaMessage.get(), MessageTemplate.class);
             consumeService.consume2recall(messageTemplate);
         }
     }

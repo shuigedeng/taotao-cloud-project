@@ -82,12 +82,7 @@ public enum DtMySQL implements DtInterface {
         this.precisionMax = precisionMax;
     }
 
-    DtMySQL(
-            String dbFieldType,
-            String viewDataType,
-            Integer defaultLength,
-            Integer lengthMax,
-            DtDM dtDmEnum) {
+    DtMySQL(String dbFieldType, String viewDataType, Integer defaultLength, Integer lengthMax, DtDM dtDmEnum) {
         this.dbFieldType = dbFieldType;
         this.lengthModifyFlag = true;
         this.viewDataType = viewDataType;

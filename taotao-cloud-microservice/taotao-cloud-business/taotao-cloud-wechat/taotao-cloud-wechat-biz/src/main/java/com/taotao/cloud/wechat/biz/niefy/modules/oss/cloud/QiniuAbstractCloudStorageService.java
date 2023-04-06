@@ -44,9 +44,8 @@ public class QiniuAbstractCloudStorageService extends AbstractCloudStorageServic
 
     private void init() {
         uploadManager = new UploadManager(new Configuration(Region.autoRegion()));
-        token =
-                Auth.create(config.getQiniuAccessKey(), config.getQiniuSecretKey())
-                        .uploadToken(config.getQiniuBucketName());
+        token = Auth.create(config.getQiniuAccessKey(), config.getQiniuSecretKey())
+                .uploadToken(config.getQiniuBucketName());
     }
 
     @Override

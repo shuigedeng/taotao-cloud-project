@@ -46,8 +46,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ReceiverStart {
 
-    @Autowired private ApplicationContext context;
-    @Autowired private ConsumerFactory consumerFactory;
+    @Autowired
+    private ApplicationContext context;
+
+    @Autowired
+    private ConsumerFactory consumerFactory;
 
     /** receiver的消费方法常量 */
     private static final String RECEIVER_METHOD_NAME = "Receiver.consumer";
@@ -72,9 +75,7 @@ public class ReceiverStart {
         return (attrs, element) -> {
             if (element instanceof Method) {
                 String name =
-                        ((Method) element).getDeclaringClass().getSimpleName()
-                                + "."
-                                + ((Method) element).getName();
+                        ((Method) element).getDeclaringClass().getSimpleName() + "." + ((Method) element).getName();
                 if (RECEIVER_METHOD_NAME.equals(name)) {
                     attrs.put("groupId", groupIds.get(index++));
                 }
@@ -92,28 +93,23 @@ public class ReceiverStart {
     public ConcurrentKafkaListenerContainerFactory filterContainerFactory(
             @Value("${austin.business.tagId.key}") String tagIdKey,
             @Value("${austin.business.tagId.value}") String tagIdValue) {
-        ConcurrentKafkaListenerContainerFactory factory =
-                new ConcurrentKafkaListenerContainerFactory();
+        ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(consumerFactory);
         factory.setAckDiscarded(true);
 
-        factory.setRecordFilterStrategy(
-                consumerRecord -> {
-                    if (Optional.ofNullable(consumerRecord.value()).isPresent()) {
-                        for (Header header : consumerRecord.headers()) {
-                            if (header.key().equals(tagIdKey)
-                                    && new String(header.value())
-                                            .equals(
-                                                    new String(
-                                                            tagIdValue.getBytes(
-                                                                    StandardCharsets.UTF_8)))) {
-                                return false;
-                            }
-                        }
+        factory.setRecordFilterStrategy(consumerRecord -> {
+            if (Optional.ofNullable(consumerRecord.value()).isPresent()) {
+                for (Header header : consumerRecord.headers()) {
+                    if (header.key().equals(tagIdKey)
+                            && new String(header.value())
+                                    .equals(new String(tagIdValue.getBytes(StandardCharsets.UTF_8)))) {
+                        return false;
                     }
-                    // 返回true将会被丢弃
-                    return true;
-                });
+                }
+            }
+            // 返回true将会被丢弃
+            return true;
+        });
         return factory;
     }
 }

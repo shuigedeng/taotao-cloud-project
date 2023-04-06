@@ -55,8 +55,7 @@ public class RedissonDelayApplication {
             }
 
             @Override
-            public Object fromMessage(RedissonMessage redissonMessage)
-                    throws MessageConversionException {
+            public Object fromMessage(RedissonMessage redissonMessage) throws MessageConversionException {
                 String payload = redissonMessage.getPayload();
                 String payloadStr = new String(payload);
                 return JsonUtils.toObject(payloadStr, CarLbsDto.class);

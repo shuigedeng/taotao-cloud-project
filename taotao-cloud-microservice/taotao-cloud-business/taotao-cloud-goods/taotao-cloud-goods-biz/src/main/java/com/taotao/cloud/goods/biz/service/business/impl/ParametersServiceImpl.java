@@ -54,8 +54,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class ParametersServiceImpl
-        extends BaseSuperServiceImpl<
-                IParametersMapper, Parameters, ParametersRepository, IParametersRepository, Long>
+        extends BaseSuperServiceImpl<IParametersMapper, Parameters, ParametersRepository, IParametersRepository, Long>
         implements IParametersService {
 
     /** 商品服务 */
@@ -81,16 +80,10 @@ public class ParametersServiceImpl
         if (!goodsList.isEmpty()) {
             for (Map<String, Object> goods : goodsList) {
                 String params = (String) goods.get("params");
-                List<GoodsParamsDTO> goodsParamsDTOS =
-                        JSONUtil.toList(params, GoodsParamsDTO.class);
-                List<GoodsParamsDTO> goodsParamsDTOList =
-                        goodsParamsDTOS.stream()
-                                .filter(
-                                        i ->
-                                                i.getGroupId() != null
-                                                        && i.getGroupId()
-                                                                .equals(parameters.getGroupId()))
-                                .collect(Collectors.toList());
+                List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params, GoodsParamsDTO.class);
+                List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
+                        .filter(i -> i.getGroupId() != null && i.getGroupId().equals(parameters.getGroupId()))
+                        .collect(Collectors.toList());
                 this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
                 this.goodsService.updateGoodsParams(
                         Convert.toLong(goods.get("id")), JSONUtil.toJsonStr(goodsParamsDTOS));
@@ -98,14 +91,10 @@ public class ParametersServiceImpl
             }
 
             String destination =
-                    rocketmqCustomProperties.getGoodsTopic()
-                            + ":"
-                            + GoodsTagsEnum.UPDATE_GOODS_INDEX.name();
+                    rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX.name();
             // 发送mq消息
             rocketMQTemplate.asyncSend(
-                    destination,
-                    JSONUtil.toJsonStr(goodsIds),
-                    RocketmqSendCallbackBuilder.commonCallback());
+                    destination, JSONUtil.toJsonStr(goodsIds), RocketmqSendCallbackBuilder.commonCallback());
         }
         return this.updateById(parameters);
     }
@@ -116,16 +105,11 @@ public class ParametersServiceImpl
      * @param goodsParamsDTOList 商品参数项列表
      * @param parameters 参数信息
      */
-    private void setGoodsItemDTOList(
-            List<GoodsParamsDTO> goodsParamsDTOList, Parameters parameters) {
+    private void setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList, Parameters parameters) {
         for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
-            List<GoodsParamsItemDTO> goodsParamsItemDTOList =
-                    goodsParamsDTO.getGoodsParamsItemDTOList().stream()
-                            .filter(
-                                    i ->
-                                            i.getParamId() != null
-                                                    && i.getParamId().equals(parameters.getId()))
-                            .toList();
+            List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList().stream()
+                    .filter(i -> i.getParamId() != null && i.getParamId().equals(parameters.getId()))
+                    .toList();
             for (GoodsParamsItemDTO goodsParamsItemDTO : goodsParamsItemDTOList) {
                 this.setGoodsItemDTO(goodsParamsItemDTO, parameters);
             }
@@ -149,10 +133,9 @@ public class ParametersServiceImpl
                     && CharSequenceUtil.isNotEmpty(goodsParamsItemDTO.getParamValue())
                     && !parameters.getOptions().contains(goodsParamsItemDTO.getParamValue())) {
                 if (parameters.getOptions().contains(",")) {
-                    goodsParamsItemDTO.setParamValue(
-                            parameters
-                                    .getOptions()
-                                    .substring(0, parameters.getOptions().indexOf(",")));
+                    goodsParamsItemDTO.setParamValue(parameters
+                            .getOptions()
+                            .substring(0, parameters.getOptions().indexOf(",")));
                 } else {
                     goodsParamsItemDTO.setParamValue(parameters.getOptions());
                 }

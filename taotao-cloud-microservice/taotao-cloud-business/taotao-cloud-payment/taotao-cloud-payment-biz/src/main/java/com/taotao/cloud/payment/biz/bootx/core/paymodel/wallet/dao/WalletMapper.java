@@ -81,6 +81,5 @@ public interface WalletMapper extends BaseSuperMapper<Wallet> {
             @Param("date") LocalDateTime date);
 
     /** 待开通钱包的用户列表 */
-    Page<UserInfo> pageByNotWallet(
-            Page<UserInfo> mpPage, @Param(Constants.WRAPPER) Wrapper<?> wrapper);
+    Page<UserInfo> pageByNotWallet(Page<UserInfo> mpPage, @Param(Constants.WRAPPER) Wrapper<?> wrapper);
 }

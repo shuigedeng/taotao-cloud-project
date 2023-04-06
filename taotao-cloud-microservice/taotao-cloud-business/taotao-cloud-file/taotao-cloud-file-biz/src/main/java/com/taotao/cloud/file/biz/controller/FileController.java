@@ -39,15 +39,15 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/common/common/file")
 public class FileController {
 
-    @Autowired private IFileService fileService;
+    @Autowired
+    private IFileService fileService;
 
     // @Autowired
     // private Cache cache;
 
     @PostMapping(value = "/upload")
     public Result<UploadFileVO> upload(
-            @RequestParam("type") String type,
-            @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
+            @RequestParam("type") String type, @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
         return Result.success(fileService.uploadFile(type, file));
     }
 

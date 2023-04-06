@@ -37,8 +37,8 @@ public class AlipayClientSingleton {
 
     private AlipayClientSingleton() {}
 
-    public static DefaultAlipayClient getSingleton(
-            AlipayMiniProgramAccount alipayMiniProgramAccount) throws AlipayApiException {
+    public static DefaultAlipayClient getSingleton(AlipayMiniProgramAccount alipayMiniProgramAccount)
+            throws AlipayApiException {
         if (!alipayClientMap.containsKey(alipayMiniProgramAccount.getAppId())) {
             synchronized (DefaultAlipayClient.class) {
                 if (!alipayClientMap.containsKey(alipayMiniProgramAccount.getAppId())) {

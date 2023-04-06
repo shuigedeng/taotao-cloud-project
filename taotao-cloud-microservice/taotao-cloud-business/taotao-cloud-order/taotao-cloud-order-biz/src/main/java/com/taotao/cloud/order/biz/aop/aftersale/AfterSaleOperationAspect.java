@@ -44,7 +44,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AfterSaleOperationAspect {
 
-    @Autowired private ApplicationEventPublisher publisher;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @AfterReturning(
             returning = "rvt",
@@ -65,13 +66,8 @@ public class AfterSaleOperationAspect {
             }
 
             Map<String, String> afterSaleLogPoints = spelFormat(joinPoint, rvt);
-            AfterSaleLog afterSaleLog =
-                    new AfterSaleLog(
-                            afterSaleLogPoints.get("sn"),
-                            id,
-                            role,
-                            userName,
-                            afterSaleLogPoints.get("description"));
+            AfterSaleLog afterSaleLog = new AfterSaleLog(
+                    afterSaleLogPoints.get("sn"), id, role, userName, afterSaleLogPoints.get("description"));
 
             publisher.publishEvent(new AfterSaleLogEvent(afterSaleLog));
         } catch (Exception e) {
@@ -88,10 +84,8 @@ public class AfterSaleOperationAspect {
     public static Map<String, String> spelFormat(JoinPoint joinPoint, Object rvt) {
         Map<String, String> result = new HashMap<>(2);
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        AfterSaleLogPoint afterSaleLogPoint =
-                signature.getMethod().getAnnotation(AfterSaleLogPoint.class);
-        String description =
-                SpelUtils.compileParams(joinPoint, rvt, afterSaleLogPoint.description());
+        AfterSaleLogPoint afterSaleLogPoint = signature.getMethod().getAnnotation(AfterSaleLogPoint.class);
+        String description = SpelUtils.compileParams(joinPoint, rvt, afterSaleLogPoint.description());
         String sn = SpelUtils.compileParams(joinPoint, rvt, afterSaleLogPoint.sn());
         result.put("description", description);
         result.put("sn", sn);

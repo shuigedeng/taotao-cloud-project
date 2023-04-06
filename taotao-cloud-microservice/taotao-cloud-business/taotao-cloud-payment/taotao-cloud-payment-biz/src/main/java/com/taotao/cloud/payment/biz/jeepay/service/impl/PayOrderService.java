@@ -50,11 +50,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
 
-    @Autowired private PayOrderMapper payOrderMapper;
-    @Autowired private MchInfoMapper mchInfoMapper;
-    @Autowired private IsvInfoMapper isvInfoMapper;
-    @Autowired private PayWayMapper payWayMapper;
-    @Autowired private PayOrderDivisionRecordMapper payOrderDivisionRecordMapper;
+    @Autowired
+    private PayOrderMapper payOrderMapper;
+
+    @Autowired
+    private MchInfoMapper mchInfoMapper;
+
+    @Autowired
+    private IsvInfoMapper isvInfoMapper;
+
+    @Autowired
+    private PayWayMapper payWayMapper;
+
+    @Autowired
+    private PayOrderDivisionRecordMapper payOrderDivisionRecordMapper;
 
     /** 更新订单状态 【订单生成】 --》 【支付中】 * */
     public boolean updateInit2Ing(String payOrderId, PayOrder payOrder) {
@@ -78,8 +87,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
     }
 
     /** 更新订单状态 【支付中】 --》 【支付成功】 * */
-    public boolean updateIng2Success(
-            String payOrderId, String channelOrderNo, String channelUserId) {
+    public boolean updateIng2Success(String payOrderId, String channelOrderNo, String channelUserId) {
 
         PayOrder updateRecord = new PayOrder();
         updateRecord.setState(PayOrder.STATE_SUCCESS);
@@ -144,8 +152,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
         } else if (updateState == PayOrder.STATE_SUCCESS) {
             return updateIng2Success(payOrderId, channelOrderNo, channelUserId);
         } else if (updateState == PayOrder.STATE_FAIL) {
-            return updateIng2Fail(
-                    payOrderId, channelOrderNo, channelUserId, channelErrCode, channelErrMsg);
+            return updateIng2Fail(payOrderId, channelOrderNo, channelUserId, channelErrCode, channelErrMsg);
         }
         return false;
     }
@@ -154,22 +161,15 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
     public PayOrder queryMchOrder(String mchNo, String payOrderId, String mchOrderNo) {
 
         if (StringUtils.isNotEmpty(payOrderId)) {
-            return getOne(
-                    PayOrder.gw()
-                            .eq(PayOrder::getMchNo, mchNo)
-                            .eq(PayOrder::getPayOrderId, payOrderId));
+            return getOne(PayOrder.gw().eq(PayOrder::getMchNo, mchNo).eq(PayOrder::getPayOrderId, payOrderId));
         } else if (StringUtils.isNotEmpty(mchOrderNo)) {
-            return getOne(
-                    PayOrder.gw()
-                            .eq(PayOrder::getMchNo, mchNo)
-                            .eq(PayOrder::getMchOrderNo, mchOrderNo));
+            return getOne(PayOrder.gw().eq(PayOrder::getMchNo, mchNo).eq(PayOrder::getMchOrderNo, mchOrderNo));
         } else {
             return null;
         }
     }
 
-    public Map payCount(
-            String mchNo, Byte state, Byte refundState, String dayStart, String dayEnd) {
+    public Map payCount(String mchNo, Byte state, Byte refundState, String dayStart, String dayEnd) {
         Map param = new HashMap<>();
         if (state != null) {
             param.put("state", state);
@@ -189,8 +189,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
         return payOrderMapper.payCount(param);
     }
 
-    public List<Map> payTypeCount(
-            String mchNo, Byte state, Byte refundState, String dayStart, String dayEnd) {
+    public List<Map> payTypeCount(String mchNo, Byte state, Byte refundState, String dayStart, String dayEnd) {
         Map param = new HashMap<>();
         if (state != null) {
             param.put("state", state);
@@ -219,9 +218,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
         return baseMapper.update(
                 payOrder,
                 PayOrder.gw()
-                        .in(
-                                PayOrder::getState,
-                                Arrays.asList(PayOrder.STATE_INIT, PayOrder.STATE_ING))
+                        .in(PayOrder::getState, Arrays.asList(PayOrder.STATE_INIT, PayOrder.STATE_ING))
                         .le(PayOrder::getExpiredTime, new Date()));
     }
 
@@ -246,10 +243,8 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
         Date today = new Date();
         for (int i = 0; i < 7; i++) {
             Date date = DateUtil.offsetDay(today, -i).toJdkDate();
-            String dayStart =
-                    DateUtil.beginOfDay(date).toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
-            String dayEnd =
-                    DateUtil.endOfDay(date).toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
+            String dayStart = DateUtil.beginOfDay(date).toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
+            String dayEnd = DateUtil.endOfDay(date).toString(DatePattern.NORM_DATETIME_MINUTE_PATTERN);
             // 每日交易金额查询
             dayAmount = payCount(mchNo, PayOrder.STATE_SUCCESS, null, dayStart, dayEnd);
             if (dayAmount != null) {
@@ -300,12 +295,8 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
             createdStart = createdStart + " 00:00:00";
             createdEnd = createdEnd + " 23:59:59";
             // 计算两时间间隔天数
-            daySpace =
-                    Math.toIntExact(
-                            DateUtil.betweenDay(
-                                    DateUtil.parseDate(createdStart),
-                                    DateUtil.parseDate(createdEnd),
-                                    true));
+            daySpace = Math.toIntExact(
+                    DateUtil.betweenDay(DateUtil.parseDate(createdStart), DateUtil.parseDate(createdEnd), true));
         } else {
             Date today = new Date();
             createdStart = DateUtil.formatDate(DateUtil.offsetDay(today, -daySpace)) + " 00:00:00";
@@ -342,8 +333,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
             createdEnd = end + " 23:59:59";
         }
         // 统计列表
-        List<Map> payCountMap =
-                payTypeCount(mchNo, PayOrder.STATE_SUCCESS, null, createdStart, createdEnd);
+        List<Map> payCountMap = payTypeCount(mchNo, PayOrder.STATE_SUCCESS, null, createdStart, createdEnd);
 
         // 得到所有支付方式
         Map<String, String> payWayNameMap = new HashMap<>();
@@ -417,14 +407,10 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
     public Long calMchIncomeAmount(PayOrder dbPayOrder) {
 
         // 商家订单入账金额 （支付金额 - 手续费 - 退款金额 - 总分账金额）
-        Long mchIncomeAmount =
-                dbPayOrder.getAmount()
-                        - dbPayOrder.getMchFeeAmount()
-                        - dbPayOrder.getRefundAmount();
+        Long mchIncomeAmount = dbPayOrder.getAmount() - dbPayOrder.getMchFeeAmount() - dbPayOrder.getRefundAmount();
 
         // 减去已分账金额
-        mchIncomeAmount -=
-                payOrderDivisionRecordMapper.sumSuccessDivisionAmount(dbPayOrder.getPayOrderId());
+        mchIncomeAmount -= payOrderDivisionRecordMapper.sumSuccessDivisionAmount(dbPayOrder.getPayOrderId());
 
         return mchIncomeAmount <= 0 ? 0 : mchIncomeAmount;
     }
@@ -439,10 +425,7 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
      * @return
      */
     public IPage<PayOrder> listByPage(
-            IPage iPage,
-            PayOrder payOrder,
-            JSONObject paramJSON,
-            LambdaQueryWrapper<PayOrder> wrapper) {
+            IPage iPage, PayOrder payOrder, JSONObject paramJSON, LambdaQueryWrapper<PayOrder> wrapper) {
         if (StringUtils.isNotEmpty(payOrder.getPayOrderId())) {
             wrapper.eq(PayOrder::getPayOrderId, payOrder.getPayOrderId());
         }
@@ -483,16 +466,13 @@ public class PayOrderService extends ServiceImpl<PayOrderMapper, PayOrder> {
         }
         // 三合一订单
         if (paramJSON != null && StringUtils.isNotEmpty(paramJSON.getString("unionOrderId"))) {
-            wrapper.and(
-                    wr -> {
-                        wr.eq(PayOrder::getPayOrderId, paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(PayOrder::getMchOrderNo, paramJSON.getString("unionOrderId"))
-                                .or()
-                                .eq(
-                                        PayOrder::getChannelOrderNo,
-                                        paramJSON.getString("unionOrderId"));
-                    });
+            wrapper.and(wr -> {
+                wr.eq(PayOrder::getPayOrderId, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(PayOrder::getMchOrderNo, paramJSON.getString("unionOrderId"))
+                        .or()
+                        .eq(PayOrder::getChannelOrderNo, paramJSON.getString("unionOrderId"));
+            });
         }
 
         wrapper.orderByDesc(PayOrder::getCreatedAt);

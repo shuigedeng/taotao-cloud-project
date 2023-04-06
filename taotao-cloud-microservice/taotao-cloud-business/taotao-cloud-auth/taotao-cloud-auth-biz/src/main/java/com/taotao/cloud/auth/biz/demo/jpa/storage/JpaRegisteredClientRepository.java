@@ -56,8 +56,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public JpaRegisteredClientRepository(
-            HerodotusRegisteredClientService herodotusRegisteredClientService,
-            PasswordEncoder passwordEncoder) {
+            HerodotusRegisteredClientService herodotusRegisteredClientService, PasswordEncoder passwordEncoder) {
         this.herodotusRegisteredClientService = herodotusRegisteredClientService;
         this.passwordEncoder = passwordEncoder;
 
@@ -78,8 +77,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     @Override
     public RegisteredClient findById(String id) {
         log.debug("[Herodotus] |- Jpa Registered Client Repository findById.");
-        HerodotusRegisteredClient herodotusRegisteredClient =
-                this.herodotusRegisteredClientService.findById(id);
+        HerodotusRegisteredClient herodotusRegisteredClient = this.herodotusRegisteredClientService.findById(id);
         if (ObjectUtils.isNotEmpty(herodotusRegisteredClient)) {
             return toObject(herodotusRegisteredClient);
         }
@@ -102,91 +100,61 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 
     private RegisteredClient toObject(HerodotusRegisteredClient herodotusRegisteredClient) {
         Set<String> clientAuthenticationMethods =
-                StringUtils.commaDelimitedListToSet(
-                        herodotusRegisteredClient.getClientAuthenticationMethods());
+                StringUtils.commaDelimitedListToSet(herodotusRegisteredClient.getClientAuthenticationMethods());
         Set<String> authorizationGrantTypes =
-                StringUtils.commaDelimitedListToSet(
-                        herodotusRegisteredClient.getAuthorizationGrantTypes());
-        Set<String> redirectUris =
-                StringUtils.commaDelimitedListToSet(herodotusRegisteredClient.getRedirectUris());
-        Set<String> clientScopes =
-                StringUtils.commaDelimitedListToSet(herodotusRegisteredClient.getScopes());
+                StringUtils.commaDelimitedListToSet(herodotusRegisteredClient.getAuthorizationGrantTypes());
+        Set<String> redirectUris = StringUtils.commaDelimitedListToSet(herodotusRegisteredClient.getRedirectUris());
+        Set<String> clientScopes = StringUtils.commaDelimitedListToSet(herodotusRegisteredClient.getScopes());
 
-        RegisteredClient.Builder builder =
-                RegisteredClient.withId(herodotusRegisteredClient.getId())
-                        .clientId(herodotusRegisteredClient.getClientId())
-                        .clientIdIssuedAt(
-                                DateUtil.toInstant(herodotusRegisteredClient.getClientIdIssuedAt()))
-                        .clientSecret(herodotusRegisteredClient.getClientSecret())
-                        .clientSecretExpiresAt(
-                                DateUtil.toInstant(
-                                        herodotusRegisteredClient.getClientSecretExpiresAt()))
-                        .clientName(herodotusRegisteredClient.getClientName())
-                        .clientAuthenticationMethods(
-                                authenticationMethods ->
-                                        clientAuthenticationMethods.forEach(
-                                                authenticationMethod ->
-                                                        authenticationMethods.add(
-                                                                OAuth2AuthorizationUtils
-                                                                        .resolveClientAuthenticationMethod(
-                                                                                authenticationMethod))))
-                        .authorizationGrantTypes(
-                                (grantTypes) ->
-                                        authorizationGrantTypes.forEach(
-                                                grantType ->
-                                                        grantTypes.add(
-                                                                OAuth2AuthorizationUtils
-                                                                        .resolveAuthorizationGrantType(
-                                                                                grantType))))
-                        .redirectUris((uris) -> uris.addAll(redirectUris))
-                        .scopes((scopes) -> scopes.addAll(clientScopes));
+        RegisteredClient.Builder builder = RegisteredClient.withId(herodotusRegisteredClient.getId())
+                .clientId(herodotusRegisteredClient.getClientId())
+                .clientIdIssuedAt(DateUtil.toInstant(herodotusRegisteredClient.getClientIdIssuedAt()))
+                .clientSecret(herodotusRegisteredClient.getClientSecret())
+                .clientSecretExpiresAt(DateUtil.toInstant(herodotusRegisteredClient.getClientSecretExpiresAt()))
+                .clientName(herodotusRegisteredClient.getClientName())
+                .clientAuthenticationMethods(authenticationMethods ->
+                        clientAuthenticationMethods.forEach(authenticationMethod -> authenticationMethods.add(
+                                OAuth2AuthorizationUtils.resolveClientAuthenticationMethod(authenticationMethod))))
+                .authorizationGrantTypes((grantTypes) -> authorizationGrantTypes.forEach(
+                        grantType -> grantTypes.add(OAuth2AuthorizationUtils.resolveAuthorizationGrantType(grantType))))
+                .redirectUris((uris) -> uris.addAll(redirectUris))
+                .scopes((scopes) -> scopes.addAll(clientScopes));
 
-        Map<String, Object> clientSettingsMap =
-                parseMap(herodotusRegisteredClient.getClientSettings());
+        Map<String, Object> clientSettingsMap = parseMap(herodotusRegisteredClient.getClientSettings());
         builder.clientSettings(ClientSettings.withSettings(clientSettingsMap).build());
 
-        Map<String, Object> tokenSettingsMap =
-                parseMap(herodotusRegisteredClient.getTokenSettings());
+        Map<String, Object> tokenSettingsMap = parseMap(herodotusRegisteredClient.getTokenSettings());
         builder.tokenSettings(TokenSettings.withSettings(tokenSettingsMap).build());
 
         return builder.build();
     }
 
     private HerodotusRegisteredClient toEntity(RegisteredClient registeredClient) {
-        List<String> clientAuthenticationMethods =
-                new ArrayList<>(registeredClient.getClientAuthenticationMethods().size());
+        List<String> clientAuthenticationMethods = new ArrayList<>(
+                registeredClient.getClientAuthenticationMethods().size());
         registeredClient
                 .getClientAuthenticationMethods()
-                .forEach(
-                        clientAuthenticationMethod ->
-                                clientAuthenticationMethods.add(
-                                        clientAuthenticationMethod.getValue()));
+                .forEach(clientAuthenticationMethod ->
+                        clientAuthenticationMethods.add(clientAuthenticationMethod.getValue()));
 
         List<String> authorizationGrantTypes =
                 new ArrayList<>(registeredClient.getAuthorizationGrantTypes().size());
         registeredClient
                 .getAuthorizationGrantTypes()
-                .forEach(
-                        authorizationGrantType ->
-                                authorizationGrantTypes.add(authorizationGrantType.getValue()));
+                .forEach(authorizationGrantType -> authorizationGrantTypes.add(authorizationGrantType.getValue()));
 
         HerodotusRegisteredClient entity = new HerodotusRegisteredClient();
         entity.setId(registeredClient.getId());
         entity.setClientId(registeredClient.getClientId());
-        entity.setClientIdIssuedAt(
-                DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
+        entity.setClientIdIssuedAt(DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
         entity.setClientSecret(encode(registeredClient.getClientSecret()));
-        entity.setClientSecretExpiresAt(
-                DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
+        entity.setClientSecretExpiresAt(DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
         entity.setClientName(registeredClient.getClientName());
         entity.setClientAuthenticationMethods(
                 StringUtils.collectionToCommaDelimitedString(clientAuthenticationMethods));
-        entity.setAuthorizationGrantTypes(
-                StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
-        entity.setRedirectUris(
-                StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
-        entity.setScopes(
-                StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
+        entity.setAuthorizationGrantTypes(StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
+        entity.setRedirectUris(StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
+        entity.setScopes(StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
         entity.setClientSettings(writeMap(registeredClient.getClientSettings().getSettings()));
         entity.setTokenSettings(writeMap(registeredClient.getTokenSettings().getSettings()));
 

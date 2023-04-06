@@ -75,41 +75,33 @@ public class DefaultSecurityConfiguration {
         httpSecurity.csrf().disable().cors();
 
         httpSecurity
-                .authorizeHttpRequests(
-                        authorizeRequests ->
-                                authorizeRequests
-                                        .requestMatchers(
-                                                securityMatcherConfigurer.getPermitAllArray())
-                                        .permitAll()
-                                        .requestMatchers(
-                                                securityMatcherConfigurer.getStaticResourceArray())
-                                        .permitAll()
-                                        .requestMatchers(EndpointRequest.toAnyEndpoint())
-                                        .permitAll()
-                                        .anyRequest()
-                                        .access(herodotusAuthorizationManager))
-                .formLogin(
-                        form -> {
-                            form.loginPage(uiProperties.getLoginPageUrl())
-                                    .usernameParameter(uiProperties.getUsernameParameter())
-                                    .passwordParameter(uiProperties.getPasswordParameter());
-                            if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
-                                form.failureForwardUrl(uiProperties.getFailureForwardUrl());
-                            }
-                            if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
-                                form.successForwardUrl(uiProperties.getSuccessForwardUrl());
-                            }
-                        })
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers(securityMatcherConfigurer.getPermitAllArray())
+                        .permitAll()
+                        .requestMatchers(securityMatcherConfigurer.getStaticResourceArray())
+                        .permitAll()
+                        .requestMatchers(EndpointRequest.toAnyEndpoint())
+                        .permitAll()
+                        .anyRequest()
+                        .access(herodotusAuthorizationManager))
+                .formLogin(form -> {
+                    form.loginPage(uiProperties.getLoginPageUrl())
+                            .usernameParameter(uiProperties.getUsernameParameter())
+                            .passwordParameter(uiProperties.getPasswordParameter());
+                    if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
+                        form.failureForwardUrl(uiProperties.getFailureForwardUrl());
+                    }
+                    if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
+                        form.successForwardUrl(uiProperties.getSuccessForwardUrl());
+                    }
+                })
                 .sessionManagement(Customizer.withDefaults())
                 .exceptionHandling()
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(
-                        configurer -> herodotusTokenStrategyConfigurer.from(configurer))
-                .apply(
-                        new OAuth2FormLoginConfigurer(
-                                userDetailsService, uiProperties, captchaRendererFactory));
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer))
+                .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
 
         return httpSecurity.build();
     }
@@ -121,16 +113,14 @@ public class DefaultSecurityConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public AuthenticationEventPublisher authenticationEventPublisher(
-            ApplicationContext applicationContext) {
+    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
         log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
         return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public UserDetailsService userDetailsService(
-            StrategyUserDetailsService strategyUserDetailsService) {
+    public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
         HerodotusUserDetailsService herodotusUserDetailsService =
                 new HerodotusUserDetailsService(strategyUserDetailsService);
         log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");

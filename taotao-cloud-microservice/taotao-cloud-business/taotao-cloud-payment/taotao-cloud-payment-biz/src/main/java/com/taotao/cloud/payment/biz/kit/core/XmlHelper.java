@@ -42,8 +42,7 @@ public class XmlHelper {
     private final XPath path;
     private final Document doc;
 
-    private XmlHelper(InputSource inputSource)
-            throws ParserConfigurationException, SAXException, IOException {
+    private XmlHelper(InputSource inputSource) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory dbf = getDocumentBuilderFactory();
         // This is the PRIMARY defense. If DTDs (doctypes) are disallowed, almost all
         // XML entity attacks are prevented
@@ -248,8 +247,7 @@ public class XmlHelper {
 
     /** 内部类单例 */
     private static class XmlHelperHolder {
-        private static DocumentBuilderFactory documentBuilderFactory =
-                DocumentBuilderFactory.newInstance();
+        private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         private static XPathFactory xPathFactory = XPathFactory.newInstance();
     }
 }

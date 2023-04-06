@@ -27,7 +27,8 @@ import lombok.Data;
 @Data
 public class TaskVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -8942395421885937298L;
+    @Serial
+    private static final long serialVersionUID = -8942395421885937298L;
     /** 任务id */
     private String taskId;
 

@@ -55,7 +55,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/store/promotion/coupon")
 public class CouponStoreController {
 
-    @Autowired private ICouponService couponService;
+    @Autowired
+    private ICouponService couponService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -130,15 +131,13 @@ public class CouponStoreController {
     public Result<Object> updateCouponStatus(String couponIds, Long startTime, Long endTime) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         String[] split = couponIds.split(",");
-        List<String> couponIdList =
-                couponService
-                        .list(
-                                new LambdaQueryWrapper<Coupon>()
-                                        .in(Coupon::getId, Arrays.asList(split))
-                                        .eq(Coupon::getStoreId, currentUser.getStoreId()))
-                        .stream()
-                        .map(Coupon::getId)
-                        .collect(Collectors.toList());
+        List<String> couponIdList = couponService
+                .list(new LambdaQueryWrapper<Coupon>()
+                        .in(Coupon::getId, Arrays.asList(split))
+                        .eq(Coupon::getStoreId, currentUser.getStoreId()))
+                .stream()
+                .map(Coupon::getId)
+                .collect(Collectors.toList());
         if (couponService.updateStatus(couponIdList, startTime, endTime)) {
             return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
         }

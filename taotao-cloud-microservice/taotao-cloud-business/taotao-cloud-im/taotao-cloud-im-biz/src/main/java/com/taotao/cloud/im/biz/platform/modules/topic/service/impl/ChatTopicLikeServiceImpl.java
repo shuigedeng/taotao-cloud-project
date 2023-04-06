@@ -30,10 +30,10 @@ import org.springframework.stereotype.Service;
 
 /** 帖子点赞 服务层实现 q3z3 */
 @Service("chatTopicLikeService")
-public class ChatTopicLikeServiceImpl extends BaseServiceImpl<ChatTopicLike>
-        implements ChatTopicLikeService {
+public class ChatTopicLikeServiceImpl extends BaseServiceImpl<ChatTopicLike> implements ChatTopicLikeService {
 
-    @Resource private ChatTopicLikeDao chatTopicLikeDao;
+    @Resource
+    private ChatTopicLikeDao chatTopicLikeDao;
 
     @Autowired
     public void setBaseDao() {

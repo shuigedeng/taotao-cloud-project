@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "schedule任务管理API", description = "schedule任务管理API")
 public class ScheduledJobController {
 
-    @Resource private ScheduledJobService scheduledJobService;
+    @Resource
+    private ScheduledJobService scheduledJobService;
 
     @GetMapping("/jobs")
     @Operation(summary = "任务列表", description = "任务列表")

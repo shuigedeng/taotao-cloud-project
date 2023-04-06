@@ -30,7 +30,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TenantQueryServiceImpl implements TenantQueryService {
 
-    @Autowired private SysTenantMapper sysTenantMapper;
+    @Autowired
+    private SysTenantMapper sysTenantMapper;
 
     @Override
     public Page queryPage(Map<String, Object> params) {

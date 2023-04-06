@@ -46,8 +46,6 @@ public class PaymentRabbitMqConfiguration {
     /** 绑定支付完成 */
     @Bean
     public Binding bindPayCompleted() {
-        return BindingBuilder.bind(payCompleted())
-                .to(paymentExchange())
-                .with(PaymentEventCode.PAY_COMPLETE);
+        return BindingBuilder.bind(payCompleted()).to(paymentExchange()).with(PaymentEventCode.PAY_COMPLETE);
     }
 }

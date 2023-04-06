@@ -33,8 +33,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 用户+密码登录 */
-public class AccountAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class AccountAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final AccountUserDetailsService accountUserDetailsService;
@@ -45,26 +44,22 @@ public class AccountAuthenticationProvider
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 AccountAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "AccountVerificationAuthenticationProvider.onlySupports",
-                                "Only AccountVerificationAuthenticationProvider is supported"));
+                () -> messages.getMessage(
+                        "AccountVerificationAuthenticationProvider.onlySupports",
+                        "Only AccountVerificationAuthenticationProvider is supported"));
 
-        AccountAuthenticationToken unAuthenticationToken =
-                (AccountAuthenticationToken) authentication;
+        AccountAuthenticationToken unAuthenticationToken = (AccountAuthenticationToken) authentication;
 
         String username = unAuthenticationToken.getName();
         String passowrd = (String) unAuthenticationToken.getCredentials();
         String type = unAuthenticationToken.getType();
 
         // 验证码校验
-        UserDetails userDetails =
-                accountUserDetailsService.loadUserByUsername(username, passowrd, type);
+        UserDetails userDetails = accountUserDetailsService.loadUserByUsername(username, passowrd, type);
         return createSuccessAuthentication(authentication, userDetails);
     }
 
@@ -90,8 +85,7 @@ public class AccountAuthenticationProvider
      * @param userDetails the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails userDetails) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails userDetails) {
         Collection<? extends GrantedAuthority> authorities =
                 authoritiesMapper.mapAuthorities(userDetails.getAuthorities());
 

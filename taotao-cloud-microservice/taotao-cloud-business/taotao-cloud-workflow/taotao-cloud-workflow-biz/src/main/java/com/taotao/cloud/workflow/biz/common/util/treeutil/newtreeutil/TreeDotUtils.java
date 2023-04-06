@@ -28,16 +28,13 @@ import org.apache.commons.collections4.CollectionUtils;
 public class TreeDotUtils {
 
     /** 将List转换为Tree */
-    public static <T extends SumTree> List<SumTree<T>> convertListToTreeDot(
-            List<T> tList, String parentId) {
+    public static <T extends SumTree> List<SumTree<T>> convertListToTreeDot(List<T> tList, String parentId) {
         List<SumTree<T>> sumTrees = new ArrayList<>();
         List<T> list = new ArrayList<>();
         CollectionUtils.addAll(list, tList);
         if (StringUtil.isNotEmpty(parentId)) {
             List<T> data =
-                    list.stream()
-                            .filter(t -> parentId.equals(t.getParentId()))
-                            .collect(Collectors.toList());
+                    list.stream().filter(t -> parentId.equals(t.getParentId())).collect(Collectors.toList());
             list.removeAll(data);
             for (int i = 0; i < data.size(); i++) {
                 T t = data.get(i);
@@ -108,13 +105,11 @@ public class TreeDotUtils {
      * @return java.util.List<cn.eshore.common.entity.Tree < T>> @MethosName
      *     getChildTreeList @Author xiaowd @Date 2020/4/22 10:02
      */
-    private static <T extends SumTree> List<SumTree<T>> getChildTreeDotList(
-            SumTree<T> parentTreeDot, List<T> tList) {
+    private static <T extends SumTree> List<SumTree<T>> getChildTreeDotList(SumTree<T> parentTreeDot, List<T> tList) {
         List<SumTree<T>> childTreeDotList = new ArrayList<>();
-        List<T> data =
-                tList.stream()
-                        .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
-                        .collect(Collectors.toList());
+        List<T> data = tList.stream()
+                .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
+                .collect(Collectors.toList());
         for (T t : data) {
             if (parentTreeDot.getId().equals(t.getParentId())) {
                 // 如果父ID是传递树点的ID，那么就是传递树点的子点

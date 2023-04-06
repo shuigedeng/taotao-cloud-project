@@ -36,15 +36,12 @@ import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 public class HerodotusRegisteredClientUuidGenerator extends AbstractUuidGenerator {
 
     public HerodotusRegisteredClientUuidGenerator(
-            HerodotusRegisteredClientUuid config,
-            Member idMember,
-            CustomIdGeneratorCreationContext creationContext) {
+            HerodotusRegisteredClientUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
         super(idMember);
     }
 
     @Override
-    public Object generate(SharedSessionContractImplementor session, Object object)
-            throws HibernateException {
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         if (ObjectUtils.isEmpty(object)) {
             throw new HibernateException(new NullPointerException());
         }

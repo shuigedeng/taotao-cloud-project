@@ -85,23 +85,15 @@ public class PromotionTools {
      * @return mybatis plus query wrapper对象
      */
     public static <T extends BasePromotions> QueryWrapper<T> checkActiveTime(
-            Date startTime,
-            Date endTime,
-            PromotionTypeEnum typeEnum,
-            String storeId,
-            String activityId) {
+            Date startTime, Date endTime, PromotionTypeEnum typeEnum, String storeId, String activityId) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         if (PromotionTypeEnum.SECKILL != typeEnum) {
-            queryWrapper.nested(
-                    i -> {
-                        // 新活动起始时间 大于 之前活动的起始时间 小于 之前活动的截止时间
-                        i.nested(
-                                i2 ->
-                                        i2.le(START_TIME_COLUMN, startTime)
-                                                .ge(END_TIME_COLUMN, startTime));
-                        // 新活动结束时间 大于 之前活动的起始时间 小于 之前活动的截止时间
-                        i.or(i1 -> i1.le(START_TIME_COLUMN, endTime).ge(END_TIME_COLUMN, endTime));
-                    });
+            queryWrapper.nested(i -> {
+                // 新活动起始时间 大于 之前活动的起始时间 小于 之前活动的截止时间
+                i.nested(i2 -> i2.le(START_TIME_COLUMN, startTime).ge(END_TIME_COLUMN, startTime));
+                // 新活动结束时间 大于 之前活动的起始时间 小于 之前活动的截止时间
+                i.or(i1 -> i1.le(START_TIME_COLUMN, endTime).ge(END_TIME_COLUMN, endTime));
+            });
         } else {
             queryWrapper
                     .ge(START_TIME_COLUMN, DateUtil.beginOfDay(startTime))
@@ -113,32 +105,20 @@ public class PromotionTools {
         if (activityId != null) {
             queryWrapper.ne("id", activityId);
         }
-        queryWrapper.and(
-                i ->
-                        i.or(queryPromotionStatus(PromotionsStatusEnum.NEW))
-                                .or(queryPromotionStatus(PromotionsStatusEnum.START)));
+        queryWrapper.and(i -> i.or(queryPromotionStatus(PromotionsStatusEnum.NEW))
+                .or(queryPromotionStatus(PromotionsStatusEnum.START)));
         queryWrapper.eq("delete_flag", false);
         return queryWrapper;
     }
 
-    public static <T> Consumer<QueryWrapper<T>> queryPromotionStatus(
-            PromotionsStatusEnum promotionsStatusEnum) {
+    public static <T> Consumer<QueryWrapper<T>> queryPromotionStatus(PromotionsStatusEnum promotionsStatusEnum) {
         return switch (promotionsStatusEnum) {
             case NEW -> (QueryWrapper<T> t) ->
-                    t.nested(
-                            i ->
-                                    i.gt(START_TIME_COLUMN, new Date())
-                                            .gt(END_TIME_COLUMN, new Date()));
+                    t.nested(i -> i.gt(START_TIME_COLUMN, new Date()).gt(END_TIME_COLUMN, new Date()));
             case START -> (QueryWrapper<T> t) ->
-                    t.nested(
-                            i ->
-                                    i.le(START_TIME_COLUMN, new Date())
-                                            .ge(END_TIME_COLUMN, new Date()));
+                    t.nested(i -> i.le(START_TIME_COLUMN, new Date()).ge(END_TIME_COLUMN, new Date()));
             case END -> (QueryWrapper<T> t) ->
-                    t.nested(
-                            i ->
-                                    i.lt(START_TIME_COLUMN, new Date())
-                                            .lt(END_TIME_COLUMN, new Date()));
+                    t.nested(i -> i.lt(START_TIME_COLUMN, new Date()).lt(END_TIME_COLUMN, new Date()));
             case CLOSE -> (QueryWrapper<T> t) ->
                     t.nested(i -> i.isNull(START_TIME_COLUMN).isNull(END_TIME_COLUMN));
         };
@@ -152,9 +132,7 @@ public class PromotionTools {
      * @return 促销商品列表
      */
     public static List<PromotionGoods> promotionGoodsInit(
-            List<PromotionGoods> originList,
-            BasePromotions promotion,
-            PromotionTypeEnum promotionTypeEnum) {
+            List<PromotionGoods> originList, BasePromotions promotion, PromotionTypeEnum promotionTypeEnum) {
         if (originList != null) {
             // 本次促销商品入库
             for (PromotionGoods promotionGoods : originList) {
@@ -200,20 +178,15 @@ public class PromotionTools {
 
         // 移除无效促销活动
         return map.entrySet().stream()
-                .filter(
-                        i -> {
-                            JSONObject promotionsObj = JSONUtil.parseObj(i.getValue());
-                            BasePromotions basePromotions =
-                                    promotionsObj.toBean(BasePromotions.class);
-                            if (basePromotions.getStartTime() != null
-                                    && basePromotions.getEndTime() != null) {
-                                return basePromotions.getStartTime().getTime()
-                                                <= System.currentTimeMillis()
-                                        && basePromotions.getEndTime().getTime()
-                                                >= System.currentTimeMillis();
-                            }
-                            return true;
-                        })
+                .filter(i -> {
+                    JSONObject promotionsObj = JSONUtil.parseObj(i.getValue());
+                    BasePromotions basePromotions = promotionsObj.toBean(BasePromotions.class);
+                    if (basePromotions.getStartTime() != null && basePromotions.getEndTime() != null) {
+                        return basePromotions.getStartTime().getTime() <= System.currentTimeMillis()
+                                && basePromotions.getEndTime().getTime() >= System.currentTimeMillis();
+                    }
+                    return true;
+                })
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

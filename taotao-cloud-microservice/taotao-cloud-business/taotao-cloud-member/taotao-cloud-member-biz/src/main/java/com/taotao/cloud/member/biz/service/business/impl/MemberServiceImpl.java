@@ -75,23 +75,29 @@ import org.springframework.transaction.annotation.Transactional;
 /** 会员接口业务层实现 */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
-        implements IMemberService {
+public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implements IMemberService {
 
     /** 会员token */
-    @Autowired private MemberTokenGenerate memberTokenGenerate;
+    @Autowired
+    private MemberTokenGenerate memberTokenGenerate;
     /** 商家token */
-    @Autowired private StoreTokenGenerate storeTokenGenerate;
+    @Autowired
+    private StoreTokenGenerate storeTokenGenerate;
     /** 联合登录 */
-    @Autowired private ConnectService connectService;
+    @Autowired
+    private ConnectService connectService;
     /** 店铺 */
-    @Autowired private IFeignStoreApi feignStoreApi;
+    @Autowired
+    private IFeignStoreApi feignStoreApi;
     /** RocketMQ 配置 */
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
     /** RocketMQ */
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     @Override
     public Member findByUsername(String userName) {
@@ -180,15 +186,14 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
         }
         try {
             String username = UUID.fastUUID().toString();
-            Member member =
-                    new Member(
-                            username,
-                            UUID.fastUUID().toString(),
-                            authUser.getAvatar(),
-                            authUser.getNickname(),
-                            authUser.getGender() != null
-                                    ? Convert.toInt(authUser.getGender().getCode())
-                                    : 0);
+            Member member = new Member(
+                    username,
+                    UUID.fastUUID().toString(),
+                    authUser.getAvatar(),
+                    authUser.getNickname(),
+                    authUser.getGender() != null
+                            ? Convert.toInt(authUser.getGender().getCode())
+                            : 0);
             // 保存会员
             this.save(member);
             Member loadMember = this.findByUsername(username);
@@ -229,11 +234,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
             this.save(member);
 
             String destination =
-                    rocketmqCustomProperties.getMemberTopic()
-                            + ":"
-                            + MemberTagsEnum.MEMBER_REGISTER.name();
-            rocketMQTemplate.asyncSend(
-                    destination, member, RocketmqSendCallbackBuilder.commonCallback());
+                    rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_REGISTER.name();
+            rocketMQTemplate.asyncSend(destination, member, RocketmqSendCallbackBuilder.commonCallback());
         }
         loginBindUser(member);
         return memberTokenGenerate.createToken(member, false);
@@ -260,8 +262,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
         // 修改会员密码
         LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
         lambdaUpdateWrapper.eq(Member::getId, member.getId());
-        lambdaUpdateWrapper.set(
-                Member::getPassword, new BCryptPasswordEncoder().encode(newPassword));
+        lambdaUpdateWrapper.set(Member::getPassword, new BCryptPasswordEncoder().encode(newPassword));
         this.update(lambdaUpdateWrapper);
         return true;
     }
@@ -271,17 +272,13 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
         // 检测会员信息
         checkMember(userName, mobilePhone);
         // 设置会员信息
-        Member member =
-                new Member(userName, new BCryptPasswordEncoder().encode(password), mobilePhone);
+        Member member = new Member(userName, new BCryptPasswordEncoder().encode(password), mobilePhone);
         // 注册成功后用户自动登录
         if (this.save(member)) {
             Token token = memberTokenGenerate.createToken(member, false);
             String destination =
-                    rocketmqCustomProperties.getMemberTopic()
-                            + ":"
-                            + MemberTagsEnum.MEMBER_REGISTER.name();
-            rocketMQTemplate.asyncSend(
-                    destination, member, RocketmqSendCallbackBuilder.commonCallback());
+                    rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_REGISTER.name();
+            rocketMQTemplate.asyncSend(destination, member, RocketmqSendCallbackBuilder.commonCallback());
             return token;
         }
         return null;
@@ -309,8 +306,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
             // 修改密码
             LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
             lambdaUpdateWrapper.eq(Member::getMobile, phone);
-            lambdaUpdateWrapper.set(
-                    Member::getPassword, new BCryptPasswordEncoder().encode(password));
+            lambdaUpdateWrapper.set(Member::getPassword, new BCryptPasswordEncoder().encode(password));
             return this.update(lambdaUpdateWrapper);
         } else {
             throw new BusinessException(ResultEnum.USER_PHONE_NOT_EXIST);
@@ -323,19 +319,14 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
         checkMember(memberAddDTO.getUsername(), memberAddDTO.getMobile());
 
         // 添加会员
-        Member member =
-                new Member(
-                        memberAddDTO.getUsername(),
-                        new BCryptPasswordEncoder().encode(memberAddDTO.getPassword()),
-                        memberAddDTO.getMobile());
+        Member member = new Member(
+                memberAddDTO.getUsername(),
+                new BCryptPasswordEncoder().encode(memberAddDTO.getPassword()),
+                memberAddDTO.getMobile());
         this.save(member);
 
-        String destination =
-                rocketmqCustomProperties.getMemberTopic()
-                        + ":"
-                        + MemberTagsEnum.MEMBER_REGISTER.name();
-        rocketMQTemplate.asyncSend(
-                destination, member, RocketmqSendCallbackBuilder.commonCallback());
+        String destination = rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_REGISTER.name();
+        rocketMQTemplate.asyncSend(destination, member, RocketmqSendCallbackBuilder.commonCallback());
         return true;
     }
 
@@ -348,13 +339,11 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
         }
         // 过滤会员昵称敏感词
         if (StringUtils.isNotBlank(managerMemberEditDTO.getNickName())) {
-            managerMemberEditDTO.setNickName(
-                    SensitiveWordsFilter.filter(managerMemberEditDTO.getNickName()));
+            managerMemberEditDTO.setNickName(SensitiveWordsFilter.filter(managerMemberEditDTO.getNickName()));
         }
         // 如果密码不为空则加密密码
         if (StringUtils.isNotBlank(managerMemberEditDTO.getPassword())) {
-            managerMemberEditDTO.setPassword(
-                    new BCryptPasswordEncoder().encode(managerMemberEditDTO.getPassword()));
+            managerMemberEditDTO.setPassword(new BCryptPasswordEncoder().encode(managerMemberEditDTO.getPassword()));
         }
         // 查询会员信息
         Member member = this.findByUsername(managerMemberEditDTO.getUsername());
@@ -421,13 +410,9 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
                 memberPointMessageDTO.setType(type);
                 memberPointMessageDTO.setMemberId(memberId);
                 String destination =
-                        rocketmqCustomProperties.getMemberTopic()
-                                + ":"
-                                + MemberTagsEnum.MEMBER_POINT_CHANGE.name();
+                        rocketmqCustomProperties.getMemberTopic() + ":" + MemberTagsEnum.MEMBER_POINT_CHANGE.name();
                 rocketMQTemplate.asyncSend(
-                        destination,
-                        memberPointMessageDTO,
-                        RocketmqSendCallbackBuilder.commonCallback());
+                        destination, memberPointMessageDTO, RocketmqSendCallbackBuilder.commonCallback());
                 return true;
             }
             return false;
@@ -479,9 +464,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
      * @param type 状态
      */
     private void loginBindUser(Member member, String unionId, String type) {
-        Connect connect =
-                connectService.queryConnect(
-                        ConnectQuery.builder().unionId(unionId).unionType(type).build());
+        Connect connect = connectService.queryConnect(
+                ConnectQuery.builder().unionId(unionId).unionType(type).build());
 
         if (connect == null) {
             connect = new Connect(member.getId(), unionId, type);
@@ -496,10 +480,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
      */
     private void loginBindUser(Member member) {
         // 获取cookie存储的信息
-        String uuid =
-                CookieUtils.getCookie(ConnectService.CONNECT_COOKIE, RequestUtils.getRequest());
-        String connectType =
-                CookieUtils.getCookie(ConnectService.CONNECT_TYPE, RequestUtils.getRequest());
+        String uuid = CookieUtils.getCookie(ConnectService.CONNECT_COOKIE, RequestUtils.getRequest());
+        String connectType = CookieUtils.getCookie(ConnectService.CONNECT_TYPE, RequestUtils.getRequest());
 
         // 如果联合登陆存储了信息
         if (CharSequenceUtil.isNotEmpty(uuid) && CharSequenceUtil.isNotEmpty(connectType)) {
@@ -509,12 +491,10 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
                 if (connectAuthUser == null) {
                     return;
                 }
-                Connect connect =
-                        connectService.queryConnect(
-                                ConnectQuery.builder()
-                                        .unionId(connectAuthUser.getUuid())
-                                        .unionType(connectType)
-                                        .build());
+                Connect connect = connectService.queryConnect(ConnectQuery.builder()
+                        .unionId(connectAuthUser.getUuid())
+                        .unionType(connectType)
+                        .build());
                 if (connect == null) {
                     connect = new Connect(member.getId(), connectAuthUser.getUuid(), connectType);
                     connectService.save(connect);
@@ -536,10 +516,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
      */
     private ConnectAuthUser checkConnectUser() {
         // 获取cookie存储的信息
-        String uuid =
-                CookieUtils.getCookie(ConnectService.CONNECT_COOKIE, RequestUtils.getRequest());
-        String connectType =
-                CookieUtils.getCookie(ConnectService.CONNECT_TYPE, RequestUtils.getRequest());
+        String uuid = CookieUtils.getCookie(ConnectService.CONNECT_COOKIE, RequestUtils.getRequest());
+        String connectType = CookieUtils.getCookie(ConnectService.CONNECT_TYPE, RequestUtils.getRequest());
 
         // 如果联合登陆存储了信息
         if (CharSequenceUtil.isNotEmpty(uuid) && CharSequenceUtil.isNotEmpty(connectType)) {
@@ -551,12 +529,10 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
                 throw new BusinessException(ResultEnum.USER_OVERDUE_CONNECT_ERROR);
             }
             // 检测是否已经绑定过用户
-            Connect connect =
-                    connectService.queryConnect(
-                            ConnectQuery.builder()
-                                    .unionType(connectType)
-                                    .unionId(connectAuthUser.getUuid())
-                                    .build());
+            Connect connect = connectService.queryConnect(ConnectQuery.builder()
+                    .unionType(connectType)
+                    .unionId(connectAuthUser.getUuid())
+                    .build());
             // 没有关联则返回true，表示可以继续绑定
             if (connect == null) {
                 connectAuthUser.setConnectEnum(authInterface);
@@ -574,14 +550,10 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
         QueryWrapper<Member> queryWrapper = Wrappers.query();
         // 用户名查询
         queryWrapper.like(
-                CharSequenceUtil.isNotBlank(memberSearchVO.getUsername()),
-                "username",
-                memberSearchVO.getUsername());
+                CharSequenceUtil.isNotBlank(memberSearchVO.getUsername()), "username", memberSearchVO.getUsername());
         // 按照电话号码查询
         queryWrapper.like(
-                CharSequenceUtil.isNotBlank(memberSearchVO.getMobile()),
-                "mobile",
-                memberSearchVO.getMobile());
+                CharSequenceUtil.isNotBlank(memberSearchVO.getMobile()), "mobile", memberSearchVO.getMobile());
         // 按照状态查询
         // queryWrapper.eq(CharSequenceUtil.isNotBlank(memberSearchVO.getDisabled()), "disabled",
         //	memberSearchVO.getDisabled().equals(SwitchEnum.OPEN.name()) ? 1 : 0);
@@ -598,10 +570,9 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member>
      */
     @Override
     public List<Map<String, Object>> listFieldsByMemberIds(String columns, List<Long> memberIds) {
-        return this.listMaps(
-                new QueryWrapper<Member>()
-                        .select(columns)
-                        .in(memberIds != null && !memberIds.isEmpty(), "id", memberIds));
+        return this.listMaps(new QueryWrapper<Member>()
+                .select(columns)
+                .in(memberIds != null && !memberIds.isEmpty(), "id", memberIds));
     }
 
     /** 登出 */

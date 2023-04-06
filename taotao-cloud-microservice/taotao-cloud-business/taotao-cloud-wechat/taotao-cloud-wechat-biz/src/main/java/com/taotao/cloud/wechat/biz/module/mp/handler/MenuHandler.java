@@ -37,10 +37,8 @@ public class MenuHandler extends AbstractHandler {
             Map<String, Object> context,
             WxMpService weixinService,
             WxSessionManager sessionManager) {
-        String msg =
-                String.format(
-                        "type:%s, event:%s, key:%s",
-                        wxMessage.getMsgType(), wxMessage.getEvent(), wxMessage.getEventKey());
+        String msg = String.format(
+                "type:%s, event:%s, key:%s", wxMessage.getMsgType(), wxMessage.getEvent(), wxMessage.getEventKey());
         if (EventType.VIEW.equals(wxMessage.getEvent())) {
             return null;
         }

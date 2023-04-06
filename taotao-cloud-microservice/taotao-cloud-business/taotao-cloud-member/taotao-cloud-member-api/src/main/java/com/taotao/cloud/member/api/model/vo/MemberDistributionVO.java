@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员分布VO")
 public class MemberDistributionVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "客户端类型")
     private String clientEnum;

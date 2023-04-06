@@ -34,19 +34,17 @@ public class Constants {
     public static final String PATH =
             ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
     /** 文件 */
-    public static final String SOURCE_IMAGE_PATH =
-            Constants.SF_FILE_SEPARATOR
-                    + "statics"
-                    + Constants.SF_FILE_SEPARATOR
-                    + "sourceimage"
-                    + Constants.SF_FILE_SEPARATOR; // 图片原地址
+    public static final String SOURCE_IMAGE_PATH = Constants.SF_FILE_SEPARATOR
+            + "statics"
+            + Constants.SF_FILE_SEPARATOR
+            + "sourceimage"
+            + Constants.SF_FILE_SEPARATOR; // 图片原地址
 
-    public static final String DEST_IMAGE_PATH =
-            Constants.SF_FILE_SEPARATOR
-                    + "statics"
-                    + Constants.SF_FILE_SEPARATOR
-                    + "destimage"
-                    + Constants.SF_FILE_SEPARATOR; // 图片生成地址
+    public static final String DEST_IMAGE_PATH = Constants.SF_FILE_SEPARATOR
+            + "statics"
+            + Constants.SF_FILE_SEPARATOR
+            + "destimage"
+            + Constants.SF_FILE_SEPARATOR; // 图片生成地址
 
     /** 返回参数规范 */
     /** 区分类型 1 -- 无错误，Code重复 */

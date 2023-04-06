@@ -33,8 +33,11 @@ import org.springframework.stereotype.Service;
 public class ApplyBanquetServiceImpl extends ServiceImpl<ApplyBanquetMapper, ApplyBanquetEntity>
         implements ApplyBanquetService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public ApplyBanquetEntity getInfo(String id) {
@@ -68,8 +71,7 @@ public class ApplyBanquetServiceImpl extends ServiceImpl<ApplyBanquetMapper, App
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ApplyBanquetEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ApplyBanquetEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -96,8 +98,7 @@ public class ApplyBanquetServiceImpl extends ServiceImpl<ApplyBanquetMapper, App
     @Override
     public void data(String id, String data) {
         ApplyBanquetForm applyBanquetForm = JsonUtil.getJsonToBean(data, ApplyBanquetForm.class);
-        ApplyBanquetEntity entity =
-                JsonUtil.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
+        ApplyBanquetEntity entity = JsonUtil.getJsonToBean(applyBanquetForm, ApplyBanquetEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

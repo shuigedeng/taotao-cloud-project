@@ -49,7 +49,8 @@ import org.hibernate.Hibernate;
 @org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "购物车表")
 public class Cart extends JpaSuperEntity<Long> {
 
-    @Serial private static final long serialVersionUID = 6887296988458221221L;
+    @Serial
+    private static final long serialVersionUID = 6887296988458221221L;
 
     /** 申请单号 */
     @Column(name = "code", unique = true, columnDefinition = "varchar(32) not null comment '申请单号'")
@@ -68,9 +69,7 @@ public class Cart extends JpaSuperEntity<Long> {
     private BigDecimal amount;
 
     /** 钱包余额 */
-    @Column(
-            name = "balance_amount",
-            columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
+    @Column(name = "balance_amount", columnDefinition = "decimal(10,2) not null default 0 comment '钱包余额'")
     private BigDecimal balanceAmount;
 
     @Override

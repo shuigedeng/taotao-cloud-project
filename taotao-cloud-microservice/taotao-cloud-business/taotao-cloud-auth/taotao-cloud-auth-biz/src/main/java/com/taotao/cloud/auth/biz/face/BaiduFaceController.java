@@ -33,7 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login/face")
 public class BaiduFaceController {
 
-    @Autowired private FaceUtils faceUtils;
+    @Autowired
+    private FaceUtils faceUtils;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(String userName, String faceBase) throws IOException {

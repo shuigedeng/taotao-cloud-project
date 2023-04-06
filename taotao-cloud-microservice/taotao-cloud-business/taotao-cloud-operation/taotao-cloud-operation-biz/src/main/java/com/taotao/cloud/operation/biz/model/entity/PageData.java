@@ -64,9 +64,7 @@ public class PageData extends BaseSuperEntity<PageData, Long> {
      *
      * @see SwitchEnum
      */
-    @Column(
-            name = "page_show",
-            columnDefinition = "varchar(255) not null comment '页面开关状态 OPEN,CLOSE '")
+    @Column(name = "page_show", columnDefinition = "varchar(255) not null comment '页面开关状态 OPEN,CLOSE '")
     private String pageShow;
 
     /**
@@ -74,9 +72,7 @@ public class PageData extends BaseSuperEntity<PageData, Long> {
      *
      * @see PageEnum
      */
-    @Column(
-            name = "page_type",
-            columnDefinition = "varchar(255) not null comment '页面类型 INDEX,STORE,SPECIAL '")
+    @Column(name = "page_type", columnDefinition = "varchar(255) not null comment '页面类型 INDEX,STORE,SPECIAL '")
     private String pageType;
 
     /**
@@ -84,9 +80,7 @@ public class PageData extends BaseSuperEntity<PageData, Long> {
      *
      * @see ClientTypeEnum
      */
-    @Column(
-            name = "page_client_type",
-            columnDefinition = "varchar(255) not null comment '客户端类型 PC,H5,WECHAT_MP,AP '")
+    @Column(name = "page_client_type", columnDefinition = "varchar(255) not null comment '客户端类型 PC,H5,WECHAT_MP,AP '")
     private String pageClientType;
     /** 值 */
     @Column(name = "num", columnDefinition = "varchar(255) not null comment '值 '")

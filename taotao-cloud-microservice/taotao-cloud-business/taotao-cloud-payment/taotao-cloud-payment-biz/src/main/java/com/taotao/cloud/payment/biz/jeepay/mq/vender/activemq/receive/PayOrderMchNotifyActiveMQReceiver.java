@@ -39,7 +39,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnBean(PayOrderMchNotifyMQ.IMQReceiver.class)
 public class PayOrderMchNotifyActiveMQReceiver implements IMQMsgReceiver {
 
-    @Autowired private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 * */
     @Override

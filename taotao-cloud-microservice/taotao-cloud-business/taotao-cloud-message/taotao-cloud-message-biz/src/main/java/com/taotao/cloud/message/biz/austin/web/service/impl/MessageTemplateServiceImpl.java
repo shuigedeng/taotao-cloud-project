@@ -51,43 +51,35 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageTemplateServiceImpl implements MessageTemplateService {
 
-    @Autowired private MessageTemplateDao messageTemplateDao;
+    @Autowired
+    private MessageTemplateDao messageTemplateDao;
 
-    @Autowired private CronTaskService cronTaskService;
+    @Autowired
+    private CronTaskService cronTaskService;
 
-    @Autowired private XxlJobUtils xxlJobUtils;
+    @Autowired
+    private XxlJobUtils xxlJobUtils;
 
     @Override
     public Page<MessageTemplate> queryList(MessageTemplateParam param) {
         PageRequest pageRequest = PageRequest.of(param.getPage() - 1, param.getPerPage());
-        String creator =
-                StrUtil.isBlank(param.getCreator())
-                        ? AustinConstant.DEFAULT_CREATOR
-                        : param.getCreator();
+        String creator = StrUtil.isBlank(param.getCreator()) ? AustinConstant.DEFAULT_CREATOR : param.getCreator();
         return messageTemplateDao.findAll(
-                (Specification<MessageTemplate>)
-                        (root, query, cb) -> {
-                            List<Predicate> predicateList = new ArrayList<>();
-                            // 加搜索条件
-                            if (StrUtil.isNotBlank(param.getKeywords())) {
-                                predicateList.add(
-                                        cb.like(
-                                                root.get("name").as(String.class),
-                                                "%" + param.getKeywords() + "%"));
-                            }
-                            predicateList.add(
-                                    cb.equal(
-                                            root.get("isDeleted").as(Integer.class),
-                                            CommonConstant.FALSE));
-                            predicateList.add(
-                                    cb.equal(root.get("creator").as(String.class), creator));
-                            Predicate[] p = new Predicate[predicateList.size()];
-                            // 查询
-                            query.where(cb.and(predicateList.toArray(p)));
-                            // 排序
-                            query.orderBy(cb.desc(root.get("updated")));
-                            return query.getRestriction();
-                        },
+                (Specification<MessageTemplate>) (root, query, cb) -> {
+                    List<Predicate> predicateList = new ArrayList<>();
+                    // 加搜索条件
+                    if (StrUtil.isNotBlank(param.getKeywords())) {
+                        predicateList.add(cb.like(root.get("name").as(String.class), "%" + param.getKeywords() + "%"));
+                    }
+                    predicateList.add(cb.equal(root.get("isDeleted").as(Integer.class), CommonConstant.FALSE));
+                    predicateList.add(cb.equal(root.get("creator").as(String.class), creator));
+                    Predicate[] p = new Predicate[predicateList.size()];
+                    // 查询
+                    query.where(cb.and(predicateList.toArray(p)));
+                    // 排序
+                    query.orderBy(cb.desc(root.get("updated")));
+                    return query.getRestriction();
+                },
                 pageRequest);
     }
 
@@ -111,11 +103,9 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
     @Override
     public void deleteByIds(List<Long> ids) {
         Iterable<MessageTemplate> messageTemplates = messageTemplateDao.findAllById(ids);
-        messageTemplates.forEach(
-                messageTemplate -> messageTemplate.setIsDeleted(CommonConstant.TRUE));
+        messageTemplates.forEach(messageTemplate -> messageTemplate.setIsDeleted(CommonConstant.TRUE));
         for (MessageTemplate messageTemplate : messageTemplates) {
-            if (Objects.nonNull(messageTemplate.getCronTaskId())
-                    && messageTemplate.getCronTaskId() > 0) {
+            if (Objects.nonNull(messageTemplate.getCronTaskId()) && messageTemplate.getCronTaskId() > 0) {
                 cronTaskService.deleteCronTask(messageTemplate.getCronTaskId());
             }
         }
@@ -160,11 +150,10 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         // 4. 启动定时任务
         if (Objects.nonNull(taskId)) {
             cronTaskService.startCronTask(taskId);
-            MessageTemplate clone =
-                    ObjectUtil.clone(messageTemplate)
-                            .setMsgStatus(MessageStatus.RUN.getCode())
-                            .setCronTaskId(taskId)
-                            .setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
+            MessageTemplate clone = ObjectUtil.clone(messageTemplate)
+                    .setMsgStatus(MessageStatus.RUN.getCode())
+                    .setCronTaskId(taskId)
+                    .setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
             messageTemplateDao.save(clone);
             return BasicResultVO.success();
         }
@@ -178,10 +167,9 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         if (Objects.isNull(messageTemplate)) {
             return BasicResultVO.fail();
         }
-        MessageTemplate clone =
-                ObjectUtil.clone(messageTemplate)
-                        .setMsgStatus(MessageStatus.STOP.getCode())
-                        .setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
+        MessageTemplate clone = ObjectUtil.clone(messageTemplate)
+                .setMsgStatus(MessageStatus.STOP.getCode())
+                .setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
         messageTemplateDao.save(clone);
 
         // 2.暂停定时任务

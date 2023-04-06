@@ -31,11 +31,13 @@ import org.springframework.stereotype.Service;
 
 /** 借支单 */
 @Service
-public class DebitBillServiceImpl extends ServiceImpl<DebitBillMapper, DebitBillEntity>
-        implements DebitBillService {
+public class DebitBillServiceImpl extends ServiceImpl<DebitBillMapper, DebitBillEntity> implements DebitBillService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public DebitBillEntity getInfo(String id) {

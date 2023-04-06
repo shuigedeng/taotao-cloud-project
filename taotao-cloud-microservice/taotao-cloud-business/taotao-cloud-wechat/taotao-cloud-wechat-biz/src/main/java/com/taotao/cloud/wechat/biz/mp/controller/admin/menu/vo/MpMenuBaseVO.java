@@ -67,18 +67,13 @@ public class MpMenuBaseVO {
     @NotEmpty(message = "小程序的页面路径不能为空", groups = MiniProgramButtonGroup.class)
     private String miniProgramPagePath;
 
-    @ApiModelProperty(
-            value = "跳转图文的媒体编号",
-            example = "jCQk93AIIgp8ixClWcW_NXXqBKInNWNmq2XnPeDZl7IMVqWiNeL4FfELtggRXd83")
+    @ApiModelProperty(value = "跳转图文的媒体编号", example = "jCQk93AIIgp8ixClWcW_NXXqBKInNWNmq2XnPeDZl7IMVqWiNeL4FfELtggRXd83")
     @NotEmpty(message = "跳转图文的媒体编号不能为空", groups = ViewLimitedButtonGroup.class)
     private String articleId;
 
     // ========== 消息内容 ==========
 
-    @ApiModelProperty(
-            value = "回复的消息类型",
-            example = "text",
-            notes = "枚举 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC")
+    @ApiModelProperty(value = "回复的消息类型", example = "text", notes = "枚举 TEXT、IMAGE、VOICE、VIDEO、NEWS、MUSIC")
     @NotEmpty(
             message = "回复的消息类型不能为空",
             groups = {ClickButtonGroup.class, ScanCodeWaitMsgButtonGroup.class})

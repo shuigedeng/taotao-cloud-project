@@ -38,18 +38,11 @@ public class PayFlow extends JpaSuperEntity {
     private static final long serialVersionUID = 6887296988458221221L;
 
     /** 支付流水号 */
-    @Column(
-            name = "code",
-            unique = true,
-            updatable = false,
-            columnDefinition = "varchar(32) not null COMMENT '支付流水号'")
+    @Column(name = "code", unique = true, updatable = false, columnDefinition = "varchar(32) not null COMMENT '支付流水号'")
     private String code;
 
     /** 订单号 */
-    @Column(
-            name = "order_code",
-            updatable = false,
-            columnDefinition = "varchar(32) not null COMMENT '订单号'")
+    @Column(name = "order_code", updatable = false, columnDefinition = "varchar(32) not null COMMENT '订单号'")
     private String orderCode;
 
     /** 商品id */

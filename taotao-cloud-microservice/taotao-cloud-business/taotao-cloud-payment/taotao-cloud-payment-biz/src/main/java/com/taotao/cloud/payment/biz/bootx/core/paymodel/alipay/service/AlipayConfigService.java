@@ -65,8 +65,7 @@ public class AlipayConfigService {
     /** 设置启用的支付宝配置 */
     @Transactional(rollbackFor = Exception.class)
     public void setUpActivity(Long id) {
-        AlipayConfig alipayConfig =
-                alipayConfigManager.findById(id).orElseThrow(DataNotExistException::new);
+        AlipayConfig alipayConfig = alipayConfigManager.findById(id).orElseThrow(DataNotExistException::new);
         if (Objects.equals(alipayConfig.getActivity(), Boolean.TRUE)) {
             return;
         }
@@ -79,9 +78,7 @@ public class AlipayConfigService {
     @Transactional(rollbackFor = Exception.class)
     public void clearActivity(Long id) {
         AlipayConfig alipayConfig =
-                alipayConfigManager
-                        .findById(id)
-                        .orElseThrow(() -> new PayFailureException("支付宝配置不存在"));
+                alipayConfigManager.findById(id).orElseThrow(() -> new PayFailureException("支付宝配置不存在"));
         if (Objects.equals(alipayConfig.getActivity(), Boolean.FALSE)) {
             return;
         }
@@ -92,8 +89,7 @@ public class AlipayConfigService {
     /** 修改 */
     @Transactional(rollbackFor = Exception.class)
     public AlipayConfigDto update(AlipayConfigParam param) {
-        AlipayConfig alipayConfig =
-                alipayConfigManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
+        AlipayConfig alipayConfig = alipayConfigManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
         BeanUtil.copyProperties(param, alipayConfig, CopyOptions.create().ignoreNullValue());
         // 支付方式
         if (CollUtil.isNotEmpty(param.getPayWayList())) {
@@ -106,10 +102,7 @@ public class AlipayConfigService {
 
     /** 获取 */
     public AlipayConfigDto findById(Long id) {
-        return alipayConfigManager
-                .findById(id)
-                .map(AlipayConfig::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return alipayConfigManager.findById(id).map(AlipayConfig::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 分页 */
@@ -131,29 +124,27 @@ public class AlipayConfigService {
         AliPayApiConfig aliPayApiConfig;
         // 公钥
         if (Objects.equals(alipayConfig.getAuthType(), AliPayCode.AUTH_TYPE_KEY)) {
-            aliPayApiConfig =
-                    AliPayApiConfig.builder()
-                            .setAppId(alipayConfig.getAppId())
-                            .setPrivateKey(alipayConfig.getPrivateKey())
-                            .setAliPayPublicKey(alipayConfig.getAlipayPublicKey())
-                            .setCharset(CharsetUtil.UTF_8)
-                            .setServiceUrl(alipayConfig.getServerUrl())
-                            .setSignType(alipayConfig.getSignType())
-                            .build();
+            aliPayApiConfig = AliPayApiConfig.builder()
+                    .setAppId(alipayConfig.getAppId())
+                    .setPrivateKey(alipayConfig.getPrivateKey())
+                    .setAliPayPublicKey(alipayConfig.getAlipayPublicKey())
+                    .setCharset(CharsetUtil.UTF_8)
+                    .setServiceUrl(alipayConfig.getServerUrl())
+                    .setSignType(alipayConfig.getSignType())
+                    .build();
         }
         // 证书
         else if (Objects.equals(alipayConfig.getAuthType(), AliPayCode.AUTH_TYPE_CART)) {
-            aliPayApiConfig =
-                    AliPayApiConfig.builder()
-                            .setAppId(alipayConfig.getAppId())
-                            .setPrivateKey(alipayConfig.getPrivateKey())
-                            .setAppCertContent(alipayConfig.getAppCert())
-                            .setAliPayCertContent(alipayConfig.getAlipayCert())
-                            .setAliPayRootCertContent(alipayConfig.getAlipayRootCert())
-                            .setCharset(CharsetUtil.UTF_8)
-                            .setServiceUrl(alipayConfig.getServerUrl())
-                            .setSignType(alipayConfig.getSignType())
-                            .buildByCertContent();
+            aliPayApiConfig = AliPayApiConfig.builder()
+                    .setAppId(alipayConfig.getAppId())
+                    .setPrivateKey(alipayConfig.getPrivateKey())
+                    .setAppCertContent(alipayConfig.getAppCert())
+                    .setAliPayCertContent(alipayConfig.getAlipayCert())
+                    .setAliPayRootCertContent(alipayConfig.getAlipayRootCert())
+                    .setCharset(CharsetUtil.UTF_8)
+                    .setServiceUrl(alipayConfig.getServerUrl())
+                    .setSignType(alipayConfig.getSignType())
+                    .buildByCertContent();
         } else {
             throw new BizException("支付宝认证方式不可为空");
         }

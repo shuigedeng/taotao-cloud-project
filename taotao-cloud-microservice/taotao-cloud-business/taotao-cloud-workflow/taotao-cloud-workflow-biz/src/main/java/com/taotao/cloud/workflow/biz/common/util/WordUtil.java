@@ -38,10 +38,7 @@ public class WordUtil {
      * @return 成功返回true,失败返回false
      */
     public static void changWord(
-            String inputUrl,
-            String outputUrl,
-            Map<String, String> textMap,
-            List<String[]> tableList) {
+            String inputUrl, String outputUrl, Map<String, String> textMap, List<String[]> tableList) {
         boolean changeFlag = true;
         try {
             @Cleanup XWPFDocument document = new XWPFDocument(POIXMLDocument.openPackage(inputUrl));
@@ -82,8 +79,7 @@ public class WordUtil {
      * @param textMap 需要替换的信息集合
      * @param tableList 需要插入的表格信息集合
      */
-    public static void changeTable(
-            XWPFDocument document, Map<String, String> textMap, List<String[]> tableList) {
+    public static void changeTable(XWPFDocument document, Map<String, String> textMap, List<String[]> tableList) {
         List<XWPFTable> tables = document.getTables();
         for (int i = 0; i < tables.size(); i++) {
             XWPFTable table = tables.get(i);

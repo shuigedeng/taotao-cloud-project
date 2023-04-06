@@ -62,8 +62,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 public class RegionServiceImpl
-        extends BaseSuperServiceImpl<
-                IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
+        extends BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
         implements IRegionService {
 
     private final OkHttpService okHttpService;
@@ -73,8 +72,7 @@ public class RegionServiceImpl
     private static final String AMAP_SECURITY_KEY = System.getenv("AMAP_SECURITY_KEY");
 
     /** 同步请求地址 */
-    private static final String syncUrl =
-            "https://restapi.amap.com/v3/config/district?subdistrict=4&key=" + AMAP_KEY;
+    private static final String syncUrl = "https://restapi.amap.com/v3/config/district?subdistrict=4&key=" + AMAP_KEY;
 
     @Override
     public List<RegionParentVO> queryRegionByParentId(Long parentId) {
@@ -83,16 +81,11 @@ public class RegionServiceImpl
         List<Region> sysRegions = getBaseMapper().selectList(query);
         List<RegionParentVO> result = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(sysRegions)) {
-            sysRegions.forEach(
-                    sysRegion -> {
-                        RegionParentVO vo =
-                                new RegionParentVO(
-                                        sysRegion.getId(),
-                                        sysRegion.getName(),
-                                        sysRegion.getCode(),
-                                        new ArrayList<>());
-                        result.add(vo);
-                    });
+            sysRegions.forEach(sysRegion -> {
+                RegionParentVO vo = new RegionParentVO(
+                        sysRegion.getId(), sysRegion.getName(), sysRegion.getCode(), new ArrayList<>());
+                result.add(vo);
+            });
         }
         return result;
     }
@@ -118,9 +111,8 @@ public class RegionServiceImpl
     @Override
     public Map<String, Object> getRegion(String cityCode, String townName) {
         // 获取地址信息
-        Region region =
-                this.baseMapper.selectOne(
-                        new QueryWrapper<Region>().eq("city_code", cityCode).eq("name", townName));
+        Region region = this.baseMapper.selectOne(
+                new QueryWrapper<Region>().eq("city_code", cityCode).eq("name", townName));
         if (region != null) {
             // 获取它的层级关系
             // String path = region.getPath();
@@ -174,25 +166,21 @@ public class RegionServiceImpl
         List<RegionVO> regionVOS = new ArrayList<>();
         regions.stream()
                 .filter(region -> ("province").equals(region.getLevel()))
-                .forEach(
-                        item -> {
-                            RegionVO vo = new RegionVO();
-                            OrikaUtils.copy(item, vo);
-                            regionVOS.add(vo);
-                        });
+                .forEach(item -> {
+                    RegionVO vo = new RegionVO();
+                    OrikaUtils.copy(item, vo);
+                    regionVOS.add(vo);
+                });
 
-        regions.stream()
-                .filter(region -> ("city").equals(region.getLevel()))
-                .forEach(
-                        item -> {
-                            for (RegionVO region : regionVOS) {
-                                if (region.getId().equals(item.getParentId())) {
-                                    RegionVO vo = new RegionVO();
-                                    OrikaUtils.copy(item, vo);
-                                    region.getChildren().add(vo);
-                                }
-                            }
-                        });
+        regions.stream().filter(region -> ("city").equals(region.getLevel())).forEach(item -> {
+            for (RegionVO region : regionVOS) {
+                if (region.getId().equals(item.getParentId())) {
+                    RegionVO vo = new RegionVO();
+                    OrikaUtils.copy(item, vo);
+                    region.getChildren().add(vo);
+                }
+            }
+        });
         return regionVOS;
     }
 
@@ -205,16 +193,11 @@ public class RegionServiceImpl
         List<Region> sysRegions = getBaseMapper().selectList(wrapper);
         List<RegionParentVO> vos = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(sysRegions)) {
-            sysRegions.forEach(
-                    sysRegion -> {
-                        RegionParentVO vo =
-                                new RegionParentVO(
-                                        sysRegion.getId(),
-                                        sysRegion.getName(),
-                                        sysRegion.getCode(),
-                                        new ArrayList<>());
-                        vos.add(vo);
-                    });
+            sysRegions.forEach(sysRegion -> {
+                RegionParentVO vo = new RegionParentVO(
+                        sysRegion.getId(), sysRegion.getName(), sysRegion.getCode(), new ArrayList<>());
+                vos.add(vo);
+            });
         }
 
         if (vos.size() > 0) {
@@ -231,12 +214,11 @@ public class RegionServiceImpl
 
         return RegionConvert.INSTANCE.convertTree(list).stream()
                 .filter(Objects::nonNull)
-                .peek(
-                        e -> {
-                            e.setKey(e.getId());
-                            e.setValue(e.getId());
-                            e.setTitle(e.getName());
-                        })
+                .peek(e -> {
+                    e.setKey(e.getId());
+                    e.setValue(e.getId());
+                    e.setTitle(e.getName());
+                })
                 .collect(Collectors.toList());
     }
 
@@ -249,16 +231,11 @@ public class RegionServiceImpl
         List<Region> sysRegions = getBaseMapper().selectList(wrapper);
         List<RegionParentVO> regions = new ArrayList<>();
         if (CollectionUtil.isNotEmpty(sysRegions)) {
-            sysRegions.forEach(
-                    sysRegion -> {
-                        RegionParentVO region =
-                                new RegionParentVO(
-                                        sysRegion.getId(),
-                                        sysRegion.getName(),
-                                        sysRegion.getCode(),
-                                        new ArrayList<>());
-                        regions.add(region);
-                    });
+            sysRegions.forEach(sysRegion -> {
+                RegionParentVO region = new RegionParentVO(
+                        sysRegion.getId(), sysRegion.getName(), sysRegion.getCode(), new ArrayList<>());
+                regions.add(region);
+            });
         }
 
         vo.setChildren(regions);
@@ -276,15 +253,16 @@ public class RegionServiceImpl
             String jsonString;
             String signUrl = SignUtils.sign(AMAP_SECURITY_KEY, syncUrl);
             if (Objects.nonNull(okHttpService)) {
-                jsonString =
-                        okHttpService.url(StringUtils.isBlank(url) ? signUrl : url).get().sync();
+                jsonString = okHttpService
+                        .url(StringUtils.isBlank(url) ? signUrl : url)
+                        .get()
+                        .sync();
             } else {
-                jsonString =
-                        HttpRequest.get(StringUtils.isBlank(url) ? signUrl : url)
-                                .useConsoleLog()
-                                .executeAsync()
-                                .join()
-                                .asString();
+                jsonString = HttpRequest.get(StringUtils.isBlank(url) ? signUrl : url)
+                        .useConsoleLog()
+                        .executeAsync()
+                        .join()
+                        .asString();
             }
 
             if (StrUtil.isNotBlank(jsonString)) {
@@ -347,19 +325,18 @@ public class RegionServiceImpl
             List<String> codeTree = new ArrayList<>();
 
             // 插入国家
-            Long countryId =
-                    insert(
-                            regions,
-                            null,
-                            countryCode,
-                            countryAdCode,
-                            countryName,
-                            countryCenter,
-                            countryLevel,
-                            idTree,
-                            codeTree,
-                            1,
-                            i + 1);
+            Long countryId = insert(
+                    regions,
+                    null,
+                    countryCode,
+                    countryAdCode,
+                    countryName,
+                    countryCenter,
+                    countryLevel,
+                    idTree,
+                    codeTree,
+                    1,
+                    i + 1);
 
             JSONArray provinceAll = contry.getJSONArray("districts");
             for (int j = 0; j < provinceAll.size(); j++) {
@@ -374,19 +351,18 @@ public class RegionServiceImpl
                 List<String> countryCodeTree = List.of(countryAdCode);
 
                 // 1.插入省
-                Long provinceId =
-                        insert(
-                                regions,
-                                countryId,
-                                provinceCode,
-                                provinceAdcode,
-                                provinceName,
-                                provinceCenter,
-                                provinceLevel,
-                                countryIdTree,
-                                countryCodeTree,
-                                2,
-                                j + 1);
+                Long provinceId = insert(
+                        regions,
+                        countryId,
+                        provinceCode,
+                        provinceAdcode,
+                        provinceName,
+                        provinceCenter,
+                        provinceLevel,
+                        countryIdTree,
+                        countryCodeTree,
+                        2,
+                        j + 1);
 
                 JSONArray cityAll = province.getJSONArray("districts");
                 for (int z = 0; z < cityAll.size(); z++) {
@@ -401,19 +377,18 @@ public class RegionServiceImpl
                     List<String> provinceCodeTree = List.of(countryAdCode, provinceAdcode);
 
                     // 2.插入市
-                    Long cityId =
-                            insert(
-                                    regions,
-                                    provinceId,
-                                    cityCode,
-                                    cityAdcode,
-                                    cityName,
-                                    cityCenter,
-                                    cityLevel,
-                                    provinceIdTree,
-                                    provinceCodeTree,
-                                    3,
-                                    z + 1);
+                    Long cityId = insert(
+                            regions,
+                            provinceId,
+                            cityCode,
+                            cityAdcode,
+                            cityName,
+                            cityCenter,
+                            cityLevel,
+                            provinceIdTree,
+                            provinceCodeTree,
+                            3,
+                            z + 1);
 
                     JSONArray districtAll = city.getJSONArray("districts");
                     for (int w = 0; w < districtAll.size(); w++) {
@@ -425,23 +400,21 @@ public class RegionServiceImpl
                         String districtLevel = district.getString("level");
 
                         List<Long> cityIdTree = List.of(countryId, provinceId, cityId);
-                        List<String> cityCodeTree =
-                                List.of(countryAdCode, provinceAdcode, cityAdcode);
+                        List<String> cityCodeTree = List.of(countryAdCode, provinceAdcode, cityAdcode);
 
                         // 3.插入区县
-                        Long districtId =
-                                insert(
-                                        regions,
-                                        cityId,
-                                        districtCode,
-                                        districtAdcode,
-                                        districtName,
-                                        districtCenter,
-                                        districtLevel,
-                                        cityIdTree,
-                                        cityCodeTree,
-                                        4,
-                                        w + 1);
+                        Long districtId = insert(
+                                regions,
+                                cityId,
+                                districtCode,
+                                districtAdcode,
+                                districtName,
+                                districtCenter,
+                                districtLevel,
+                                cityIdTree,
+                                cityCodeTree,
+                                4,
+                                w + 1);
 
                         // 有需要可以继续向下遍历
                         JSONArray streetAll = district.getJSONArray("districts");
@@ -453,14 +426,9 @@ public class RegionServiceImpl
                             String streetCenter = street.getString("center");
                             String streetLevel = street.getString("level");
 
-                            List<Long> districtIdTree =
-                                    List.of(countryId, provinceId, cityId, districtId);
+                            List<Long> districtIdTree = List.of(countryId, provinceId, cityId, districtId);
                             List<String> districtCodeTree =
-                                    List.of(
-                                            countryAdCode,
-                                            provinceAdcode,
-                                            cityAdcode,
-                                            districtAdcode);
+                                    List.of(countryAdCode, provinceAdcode, cityAdcode, districtAdcode);
                             ;
 
                             // 4.插入街道

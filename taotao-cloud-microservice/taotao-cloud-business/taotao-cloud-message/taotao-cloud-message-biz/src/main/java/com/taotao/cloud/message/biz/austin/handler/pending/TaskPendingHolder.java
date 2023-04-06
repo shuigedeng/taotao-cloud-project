@@ -36,7 +36,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskPendingHolder {
 
-    @Autowired private ThreadPoolUtils threadPoolUtils;
+    @Autowired
+    private ThreadPoolUtils threadPoolUtils;
 
     private Map<String, ExecutorService> taskPendingHolder = new HashMap<>(32);
 

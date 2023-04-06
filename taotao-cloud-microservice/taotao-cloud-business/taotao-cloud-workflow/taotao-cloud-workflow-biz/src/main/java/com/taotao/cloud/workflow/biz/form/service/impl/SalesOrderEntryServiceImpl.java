@@ -24,6 +24,5 @@ import org.springframework.stereotype.Service;
 
 /** 销售订单明细 */
 @Service
-public class SalesOrderEntryServiceImpl
-        extends ServiceImpl<SalesOrderEntryMapper, SalesOrderEntryEntity>
+public class SalesOrderEntryServiceImpl extends ServiceImpl<SalesOrderEntryMapper, SalesOrderEntryEntity>
         implements SalesOrderEntryService {}

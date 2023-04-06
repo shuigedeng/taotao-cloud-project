@@ -55,8 +55,7 @@ public interface IOrderMapper extends BaseSuperMapper<Order, Long> {
 		FROM tt_order o LEFT JOIN tt_order_item oi ON oi.order_sn=o.sn
 		${ew.customSqlSegment}
 		""")
-    List<OrderExportVO> queryExportOrder(
-            @Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
+    List<OrderExportVO> queryExportOrder(@Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
 
     /**
      * 查询订单支付记录
@@ -93,8 +92,7 @@ public interface IOrderMapper extends BaseSuperMapper<Order, Long> {
 		${ew.customSqlSegment}
 		""")
     IPage<OrderSimpleVO> queryByParams(
-            IPage<OrderSimpleVO> page,
-            @Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
+            IPage<OrderSimpleVO> page, @Param(Constants.WRAPPER) Wrapper<OrderSimpleVO> queryWrapper);
 
     /**
      * 查询订单信息

@@ -44,19 +44,20 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class BpmTaskEventListener extends AbstractFlowableEngineEventListener {
 
-    @Resource @Lazy // 解决循环依赖
+    @Resource
+    @Lazy // 解决循环依赖
     private BpmTaskService taskService;
 
-    @Resource @Lazy // 解决循环依赖
+    @Resource
+    @Lazy // 解决循环依赖
     private BpmActivityService activityService;
 
-    public static final Set<FlowableEngineEventType> TASK_EVENTS =
-            ImmutableSet.<FlowableEngineEventType>builder()
-                    .add(FlowableEngineEventType.TASK_CREATED)
-                    .add(FlowableEngineEventType.TASK_ASSIGNED)
-                    .add(FlowableEngineEventType.TASK_COMPLETED)
-                    .add(FlowableEngineEventType.ACTIVITY_CANCELLED)
-                    .build();
+    public static final Set<FlowableEngineEventType> TASK_EVENTS = ImmutableSet.<FlowableEngineEventType>builder()
+            .add(FlowableEngineEventType.TASK_CREATED)
+            .add(FlowableEngineEventType.TASK_ASSIGNED)
+            .add(FlowableEngineEventType.TASK_COMPLETED)
+            .add(FlowableEngineEventType.ACTIVITY_CANCELLED)
+            .build();
 
     public BpmTaskEventListener() {
         super(TASK_EVENTS);
@@ -82,17 +83,15 @@ public class BpmTaskEventListener extends AbstractFlowableEngineEventListener {
         List<HistoricActivityInstance> activityList =
                 activityService.getHistoricActivityListByExecutionId(event.getExecutionId());
         if (CollUtil.isEmpty(activityList)) {
-            log.error(
-                    "[activityCancelled][使用 executionId({}) 查找不到对应的活动实例]", event.getExecutionId());
+            log.error("[activityCancelled][使用 executionId({}) 查找不到对应的活动实例]", event.getExecutionId());
             return;
         }
         // 遍历处理
-        activityList.forEach(
-                activity -> {
-                    if (StrUtil.isEmpty(activity.getTaskId())) {
-                        return;
-                    }
-                    taskService.updateTaskExtCancel(activity.getTaskId());
-                });
+        activityList.forEach(activity -> {
+            if (StrUtil.isEmpty(activity.getTaskId())) {
+                return;
+            }
+            taskService.updateTaskExtCancel(activity.getTaskId());
+        });
     }
 }

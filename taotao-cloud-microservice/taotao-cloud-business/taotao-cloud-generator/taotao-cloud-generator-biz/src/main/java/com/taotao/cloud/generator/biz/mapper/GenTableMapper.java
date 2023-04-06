@@ -32,8 +32,7 @@ import org.apache.ibatis.annotations.Param;
 public interface GenTableMapper extends BaseMapper<GenTable> {
 
     Page<GenTable> selectPageDbTableList(
-            @Param("com/taotao/cloud/generator/biz/page") Page<GenTable> page,
-            @Param("genTable") GenTable genTable);
+            @Param("com/taotao/cloud/generator/biz/page") Page<GenTable> page, @Param("genTable") GenTable genTable);
 
     /**
      * 查询据库列表

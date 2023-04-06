@@ -35,7 +35,8 @@ public class ChatApply extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 发起id */
     private Long fromId;
     /** 接收id */

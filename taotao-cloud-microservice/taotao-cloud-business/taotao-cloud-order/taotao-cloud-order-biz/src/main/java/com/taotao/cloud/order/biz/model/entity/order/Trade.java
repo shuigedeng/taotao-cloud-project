@@ -57,7 +57,8 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
 
     public static final String TABLE_NAME = "tt_trade";
 
-    @Serial private static final long serialVersionUID = 5177608752643561827L;
+    @Serial
+    private static final long serialVersionUID = 5177608752643561827L;
 
     /** 交易编号 */
     @Column(name = "sn", columnDefinition = "varchar(64) not null comment '交易编号'")
@@ -106,14 +107,10 @@ public class Trade extends BaseSuperEntity<Trade, Long> {
     @Column(name = "consignee_mobile", columnDefinition = "varchar(64) not null comment '收件人手机'")
     private String consigneeMobile;
     /** 地址名称 逗号分割 */
-    @Column(
-            name = "consignee_address_path",
-            columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
+    @Column(name = "consignee_address_path", columnDefinition = "varchar(64) not null comment '地址名称 逗号分割'")
     private String consigneeAddressPath;
     /** 地址id逗号分割 */
-    @Column(
-            name = "consignee_address_id_path",
-            columnDefinition = "varchar(64) not null comment '地址id逗号分割'")
+    @Column(name = "consignee_address_id_path", columnDefinition = "varchar(64) not null comment '地址id逗号分割'")
     private String consigneeAddressIdPath;
 
     public Trade(TradeDTO tradeDTO) {

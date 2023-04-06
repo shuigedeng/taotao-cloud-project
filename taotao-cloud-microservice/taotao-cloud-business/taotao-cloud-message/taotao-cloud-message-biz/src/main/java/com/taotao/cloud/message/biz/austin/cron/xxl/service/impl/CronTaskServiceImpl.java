@@ -57,10 +57,9 @@ public class CronTaskServiceImpl implements CronTaskService {
     @Override
     public BasicResultVO saveCronTask(XxlJobInfo xxlJobInfo) {
         Map<String, Object> params = JSON.parseObject(JSON.toJSONString(xxlJobInfo), Map.class);
-        String path =
-                Objects.isNull(xxlJobInfo.getId())
-                        ? xxlAddresses + XxlJobConstant.INSERT_URL
-                        : xxlAddresses + XxlJobConstant.UPDATE_URL;
+        String path = Objects.isNull(xxlJobInfo.getId())
+                ? xxlAddresses + XxlJobConstant.INSERT_URL
+                : xxlAddresses + XxlJobConstant.UPDATE_URL;
 
         HttpResponse response;
         ReturnT returnT = null;
@@ -173,11 +172,10 @@ public class CronTaskServiceImpl implements CronTaskService {
         HttpResponse response = null;
         try {
             response = HttpRequest.post(path).form(params).cookie(getCookie()).execute();
-            Integer id =
-                    JSON.parseObject(response.body())
-                            .getJSONArray("data")
-                            .getJSONObject(0)
-                            .getInteger("id");
+            Integer id = JSON.parseObject(response.body())
+                    .getJSONArray("data")
+                    .getJSONObject(0)
+                    .getInteger("id");
             if (response.isOk() && Objects.nonNull(id)) {
                 return BasicResultVO.success(id);
             }

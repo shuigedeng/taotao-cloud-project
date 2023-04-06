@@ -26,12 +26,7 @@ import org.springframework.stereotype.Controller;
 public class FMSGCallBack implements HCNetSDK.FRealDataCallBack_V30 {
 
     @Override
-    public void invoke(
-            NativeLong lRealHandle,
-            int dwDataType,
-            ByteByReference pBuffer,
-            int dwBufSize,
-            Pointer pUser) {
+    public void invoke(NativeLong lRealHandle, int dwDataType, ByteByReference pBuffer, int dwBufSize, Pointer pUser) {
         // TODO Auto-generated method stub
 
     }

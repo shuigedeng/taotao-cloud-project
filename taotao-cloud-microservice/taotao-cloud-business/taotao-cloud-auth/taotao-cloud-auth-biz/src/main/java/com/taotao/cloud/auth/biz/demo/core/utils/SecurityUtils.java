@@ -42,8 +42,7 @@ public class SecurityUtils {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityUtils.class);
 
-    private static final PasswordEncoder passwordEncoder =
-            PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    private static final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     public static final String PREFIX_ROLE = "ROLE_";
     public static final String PREFIX_SCOPE = "SCOPE_";
@@ -78,7 +77,8 @@ public class SecurityUtils {
     }
 
     public static boolean isAuthenticated() {
-        return ObjectUtils.isNotEmpty(getAuthentication()) && getAuthentication().isAuthenticated();
+        return ObjectUtils.isNotEmpty(getAuthentication())
+                && getAuthentication().isAuthenticated();
     }
 
     public static Object getDetails() {
@@ -92,11 +92,8 @@ public class SecurityUtils {
      */
     public static void reloadAuthority(HerodotusUser newHerodotusUser) {
         // 重新new一个token，因为Authentication中的权限是不可变的.
-        UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(
-                        newHerodotusUser,
-                        newHerodotusUser.getPassword(),
-                        newHerodotusUser.getAuthorities());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                newHerodotusUser, newHerodotusUser.getPassword(), newHerodotusUser.getAuthorities());
         token.setDetails(getDetails());
         getSecurityContext().setAuthentication(token);
     }
@@ -131,7 +128,8 @@ public class SecurityUtils {
     }
 
     public static HerodotusUser getPrincipals() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal =
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
             if (principal instanceof HerodotusUser) {
                 return (HerodotusUser) principal;

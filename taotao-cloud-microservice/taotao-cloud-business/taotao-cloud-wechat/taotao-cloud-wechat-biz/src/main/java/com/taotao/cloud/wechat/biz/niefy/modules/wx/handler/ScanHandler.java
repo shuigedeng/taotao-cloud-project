@@ -31,7 +31,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ScanHandler extends AbstractHandler {
-    @Autowired MsgReplyService msgReplyService;
+    @Autowired
+    MsgReplyService msgReplyService;
 
     @Override
     public WxMpXmlOutMessage handle(
@@ -42,8 +43,7 @@ public class ScanHandler extends AbstractHandler {
         // 扫码事件处理
         this.logger.info("用户扫描带参二维码 OPENID: " + wxMpXmlMessage.getFromUser());
         String appid = WxMpConfigStorageHolder.get();
-        msgReplyService.tryAutoReply(
-                appid, true, wxMpXmlMessage.getFromUser(), wxMpXmlMessage.getEventKey());
+        msgReplyService.tryAutoReply(appid, true, wxMpXmlMessage.getFromUser(), wxMpXmlMessage.getEventKey());
 
         return null;
     }

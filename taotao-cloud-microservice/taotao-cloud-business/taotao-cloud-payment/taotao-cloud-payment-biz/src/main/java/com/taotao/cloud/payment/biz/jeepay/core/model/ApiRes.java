@@ -67,8 +67,7 @@ public class ApiRes {
     public static ApiRes okWithSign(Object data, String mchKey) {
 
         if (data == null) {
-            return new ApiRes(
-                    ApiCodeEnum.SUCCESS.getCode(), ApiCodeEnum.SUCCESS.getMsg(), null, null);
+            return new ApiRes(ApiCodeEnum.SUCCESS.getCode(), ApiCodeEnum.SUCCESS.getMsg(), null, null);
         }
 
         JSONObject jsonObject = (JSONObject) JSONObject.toJSON(data);
@@ -98,8 +97,7 @@ public class ApiRes {
         if (params == null || params.length <= 0) {
             return new ApiRes(apiCodeEnum.getCode(), apiCodeEnum.getMsg(), null, null);
         }
-        return new ApiRes(
-                apiCodeEnum.getCode(), String.format(apiCodeEnum.getMsg(), params), null, null);
+        return new ApiRes(apiCodeEnum.getCode(), String.format(apiCodeEnum.getMsg(), params), null, null);
     }
 
     /** 自定义错误信息, 原封不用的返回输入的错误信息 * */

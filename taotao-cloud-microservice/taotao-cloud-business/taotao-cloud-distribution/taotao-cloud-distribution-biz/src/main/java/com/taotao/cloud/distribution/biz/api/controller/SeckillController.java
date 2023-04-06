@@ -46,15 +46,11 @@ public class SeckillController {
 
     private static int corePoolSize = Runtime.getRuntime().availableProcessors();
     /** 创建线程池 调整队列数 拒绝服务 */
-    private static ThreadPoolExecutor executor =
-            new ThreadPoolExecutor(
-                    corePoolSize,
-                    corePoolSize + 1,
-                    10l,
-                    TimeUnit.SECONDS,
-                    new LinkedBlockingQueue<>(1000));
+    private static ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            corePoolSize, corePoolSize + 1, 10l, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1000));
 
-    @Autowired private ISeckillService seckillService;
+    @Autowired
+    private ISeckillService seckillService;
 
     @ApiOperation(value = "秒杀一(最low实现)", nickname = "爪哇笔记")
     @PostMapping("/start")
@@ -68,26 +64,24 @@ public class SeckillController {
          * 开启新线程之前，将RequestAttributes对象设置为子线程共享 这里仅仅是为了测试，否则 IPUtils 中获取不到 request 对象
          * 用到限流注解的测试用例，都需要加一下两行代码
          */
-        ServletRequestAttributes sra =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         RequestContextHolder.setRequestAttributes(sra, true);
         for (int i = 0; i < skillNum; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        /** 坏蛋说 抛异常影响最终效果 */
-                        try {
-                            Result result = seckillService.startSeckil(killId, userId);
-                            if (result != null) {
-                                LOGGER.info("用户:{}{}", userId, result.get("msg"));
-                            } else {
-                                LOGGER.info("用户:{}{}", userId, "哎呦喂，人也太多了，请稍后！");
-                            }
-                        } catch (RrException e) {
-                            LOGGER.error("哎呀报错了{}", e.getMsg());
-                        }
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                /** 坏蛋说 抛异常影响最终效果 */
+                try {
+                    Result result = seckillService.startSeckil(killId, userId);
+                    if (result != null) {
+                        LOGGER.info("用户:{}{}", userId, result.get("msg"));
+                    } else {
+                        LOGGER.info("用户:{}{}", userId, "哎呦喂，人也太多了，请稍后！");
+                    }
+                } catch (RrException e) {
+                    LOGGER.error("哎呀报错了{}", e.getMsg());
+                }
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -110,12 +104,11 @@ public class SeckillController {
         LOGGER.info("开始秒杀二(正常)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        Result result = seckillService.startSeckilLock(killId, userId);
-                        LOGGER.info("用户:{}{}", userId, result.get("msg"));
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                Result result = seckillService.startSeckilLock(killId, userId);
+                LOGGER.info("用户:{}{}", userId, result.get("msg"));
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -138,12 +131,11 @@ public class SeckillController {
         LOGGER.info("开始秒杀三(正常)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        Result result = seckillService.startSeckilAopLock(killId, userId);
-                        LOGGER.info("用户:{}{}", userId, result.get("msg"));
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                Result result = seckillService.startSeckilAopLock(killId, userId);
+                LOGGER.info("用户:{}{}", userId, result.get("msg"));
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -166,12 +158,11 @@ public class SeckillController {
         LOGGER.info("开始秒杀四(正常)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        Result result = seckillService.startSeckilDBPCC_ONE(killId, userId);
-                        LOGGER.info("用户:{}{}", userId, result.get("msg"));
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                Result result = seckillService.startSeckilDBPCC_ONE(killId, userId);
+                LOGGER.info("用户:{}{}", userId, result.get("msg"));
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -194,12 +185,11 @@ public class SeckillController {
         LOGGER.info("开始秒杀五(正常、数据库锁最优实现)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        Result result = seckillService.startSeckilDBPCC_TWO(killId, userId);
-                        LOGGER.info("用户:{}{}", userId, result.get("msg"));
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                Result result = seckillService.startSeckilDBPCC_TWO(killId, userId);
+                LOGGER.info("用户:{}{}", userId, result.get("msg"));
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -222,14 +212,13 @@ public class SeckillController {
         LOGGER.info("开始秒杀六(正常、数据库锁最优实现)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        // 这里使用的乐观锁、可以自定义抢购数量、如果配置的抢购人数比较少、比如120:100(人数:商品) 会出现少买的情况
-                        // 用户同时进入会出现更新失败的情况
-                        Result result = seckillService.startSeckilDBOCC(killId, userId, 1);
-                        LOGGER.info("用户:{}{}", userId, result.get("msg"));
-                        latch.countDown();
-                    };
+            Runnable task = () -> {
+                // 这里使用的乐观锁、可以自定义抢购数量、如果配置的抢购人数比较少、比如120:100(人数:商品) 会出现少买的情况
+                // 用户同时进入会出现更新失败的情况
+                Result result = seckillService.startSeckilDBOCC(killId, userId, 1);
+                LOGGER.info("用户:{}{}", userId, result.get("msg"));
+                latch.countDown();
+            };
             executor.execute(task);
         }
         try {
@@ -250,19 +239,18 @@ public class SeckillController {
         LOGGER.info("开始秒杀柒(正常)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        SuccessKilled kill = new SuccessKilled();
-                        kill.setSeckillId(killId);
-                        kill.setUserId(userId);
-                        Boolean flag = SeckillQueue.getSkillQueue().produce(kill);
-                        /** 虽然进入了队列，但是不一定能秒杀成功 进队列出队有间隙 */
-                        if (flag) {
-                            // LOGGER.info("用户:{}{}",kill.getUserId(),"秒杀成功");
-                        } else {
-                            // LOGGER.info("用户:{}{}",userId,"秒杀失败");
-                        }
-                    };
+            Runnable task = () -> {
+                SuccessKilled kill = new SuccessKilled();
+                kill.setSeckillId(killId);
+                kill.setUserId(userId);
+                Boolean flag = SeckillQueue.getSkillQueue().produce(kill);
+                /** 虽然进入了队列，但是不一定能秒杀成功 进队列出队有间隙 */
+                if (flag) {
+                    // LOGGER.info("用户:{}{}",kill.getUserId(),"秒杀成功");
+                } else {
+                    // LOGGER.info("用户:{}{}",userId,"秒杀失败");
+                }
+            };
             executor.execute(task);
         }
         try {
@@ -283,13 +271,12 @@ public class SeckillController {
         LOGGER.info("开始秒杀八(正常)");
         for (int i = 0; i < 1000; i++) {
             final long userId = i;
-            Runnable task =
-                    () -> {
-                        SeckillEvent kill = new SeckillEvent();
-                        kill.setSeckillId(killId);
-                        kill.setUserId(userId);
-                        DisruptorUtil.producer(kill);
-                    };
+            Runnable task = () -> {
+                SeckillEvent kill = new SeckillEvent();
+                kill.setSeckillId(killId);
+                kill.setUserId(userId);
+                DisruptorUtil.producer(kill);
+            };
             executor.execute(task);
         }
         try {

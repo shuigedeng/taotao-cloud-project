@@ -39,8 +39,7 @@ public class XssFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        XssHttpServletRequestWrapper xssRequest =
-                new XssHttpServletRequestWrapper((HttpServletRequest) request);
+        XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper((HttpServletRequest) request);
         chain.doFilter(xssRequest, response);
     }
 

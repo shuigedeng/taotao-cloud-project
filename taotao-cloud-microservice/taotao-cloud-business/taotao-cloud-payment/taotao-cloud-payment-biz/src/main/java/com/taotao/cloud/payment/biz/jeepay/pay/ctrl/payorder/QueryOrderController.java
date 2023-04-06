@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class QueryOrderController extends ApiController {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /** 查单接口 * */
     @RequestMapping("/api/pay/query")
@@ -55,9 +58,7 @@ public class QueryOrderController extends ApiController {
             throw new BizException("mchOrderNo 和 payOrderId不能同时为空");
         }
 
-        PayOrder payOrder =
-                payOrderService.queryMchOrder(
-                        rq.getMchNo(), rq.getPayOrderId(), rq.getMchOrderNo());
+        PayOrder payOrder = payOrderService.queryMchOrder(rq.getMchNo(), rq.getPayOrderId(), rq.getMchOrderNo());
         if (payOrder == null) {
             throw new BizException("订单不存在");
         }
@@ -65,6 +66,8 @@ public class QueryOrderController extends ApiController {
         QueryPayOrderRS bizRes = QueryPayOrderRS.buildByPayOrder(payOrder);
         return ApiRes.okWithSign(
                 bizRes,
-                configContextQueryService.queryMchApp(rq.getMchNo(), rq.getAppId()).getAppSecret());
+                configContextQueryService
+                        .queryMchApp(rq.getMchNo(), rq.getAppId())
+                        .getAppSecret());
     }
 }

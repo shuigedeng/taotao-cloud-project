@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DefaultPhoneService implements PhoneService {
-    @Autowired private IFeignNoticeMessageApi feignNoticeMessageApi;
+    @Autowired
+    private IFeignNoticeMessageApi feignNoticeMessageApi;
 
     @Override
     public boolean verifyCaptcha(String phone, String rawCode) {

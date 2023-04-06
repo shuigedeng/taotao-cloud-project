@@ -30,7 +30,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class GoodsParamsVO extends GoodsParamsDTO {
 
-    @Serial private static final long serialVersionUID = -4904700751774005326L;
+    @Serial
+    private static final long serialVersionUID = -4904700751774005326L;
 
     @Schema(description = "1 输入项   2 选择项")
     private Integer paramType;

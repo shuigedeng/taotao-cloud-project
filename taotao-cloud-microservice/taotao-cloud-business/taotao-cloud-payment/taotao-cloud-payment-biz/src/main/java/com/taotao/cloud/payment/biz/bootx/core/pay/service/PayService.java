@@ -116,10 +116,7 @@ public class PayService {
 
         // 0. 处理支付完成情况(完成/退款)
         List<Integer> trades =
-                Arrays.asList(
-                        PayStatusCode.TRADE_SUCCESS,
-                        PayStatusCode.TRADE_REFUNDING,
-                        PayStatusCode.TRADE_REFUNDED);
+                Arrays.asList(PayStatusCode.TRADE_SUCCESS, PayStatusCode.TRADE_REFUNDING, PayStatusCode.TRADE_REFUNDED);
         if (trades.contains(payment.getPayStatus())) {
             return PaymentBuilder.buildResultByPayment(payment);
         }
@@ -127,8 +124,7 @@ public class PayService {
         // 1.获取 异步支付 通道，通过工厂生成对应的策略组
         PayParam oldPayParam = PaymentBuilder.buildPayParamByPayment(payment);
         PayModeParam payModeParam = this.getAsyncPayModeParam(payParam, oldPayParam);
-        List<AbsPayStrategy> paymentStrategyList =
-                PayStrategyFactory.create(Collections.singletonList(payModeParam));
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(Collections.singletonList(payModeParam));
 
         // 2.初始化支付的参数
         for (AbsPayStrategy paymentStrategy : paymentStrategyList) {
@@ -139,14 +135,10 @@ public class PayService {
         this.doHandler(payment, paymentStrategyList, AbsPayStrategy::doBeforePay, null);
 
         // 4. 发起支付
-        this.doHandler(
-                payment,
-                paymentStrategyList,
-                AbsPayStrategy::doPayHandler,
-                (strategyList, paymentObj) -> {
-                    // 发起支付成功进行的执行方法
-                    strategyList.forEach(AbsPayStrategy::doSuccessHandler);
-                });
+        this.doHandler(payment, paymentStrategyList, AbsPayStrategy::doPayHandler, (strategyList, paymentObj) -> {
+            // 发起支付成功进行的执行方法
+            strategyList.forEach(AbsPayStrategy::doSuccessHandler);
+        });
 
         // 5. 获取支付记录信息
         payment = paymentManager.findById(payment.getId()).orElseThrow(PayNotExistedException::new);
@@ -159,8 +151,7 @@ public class PayService {
     private void payMethod(PayParam payParam, Payment payment) {
 
         // 1.获取支付方式，通过工厂生成对应的策略组
-        List<AbsPayStrategy> paymentStrategyList =
-                PayStrategyFactory.create(payParam.getPayModeList());
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
         if (CollectionUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
         }
@@ -174,21 +165,17 @@ public class PayService {
         this.doHandler(payment, paymentStrategyList, AbsPayStrategy::doBeforePay, null);
 
         // 4.支付
-        this.doHandler(
-                payment,
-                paymentStrategyList,
-                AbsPayStrategy::doPayHandler,
-                (strategyList, paymentObj) -> {
-                    // 发起支付成功进行的执行方法
-                    strategyList.forEach(AbsPayStrategy::doSuccessHandler);
-                    // 所有支付方式都是同步时进行Payment处理
-                    if (PayModelUtil.isNotSync(payParam.getPayModeList())) {
-                        // 修改payment支付状态为成功
-                        paymentObj.setPayStatus(PayStatusCode.TRADE_SUCCESS);
-                        paymentObj.setPayTime(LocalDateTime.now());
-                    }
-                    paymentManager.updateById(paymentObj);
-                });
+        this.doHandler(payment, paymentStrategyList, AbsPayStrategy::doPayHandler, (strategyList, paymentObj) -> {
+            // 发起支付成功进行的执行方法
+            strategyList.forEach(AbsPayStrategy::doSuccessHandler);
+            // 所有支付方式都是同步时进行Payment处理
+            if (PayModelUtil.isNotSync(payParam.getPayModeList())) {
+                // 修改payment支付状态为成功
+                paymentObj.setPayStatus(PayStatusCode.TRADE_SUCCESS);
+                paymentObj.setPayTime(LocalDateTime.now());
+            }
+            paymentManager.updateById(paymentObj);
+        });
     }
 
     /**
@@ -209,8 +196,7 @@ public class PayService {
         strategyList.forEach(payMethod);
 
         // 执行操作成功的处理
-        Optional.ofNullable(successMethod)
-                .ifPresent(function -> function.accept(strategyList, payment));
+        Optional.ofNullable(successMethod).ifPresent(function -> function.accept(strategyList, payment));
     }
 
     /** 获取异步支付参数 */
@@ -218,22 +204,16 @@ public class PayService {
 
         List<PayModeParam> oldPayModes = oldPaymentParam.getPayModeList();
         // 旧的异步支付方式
-        PayModeParam oldModeParam =
-                oldPayModes.stream()
-                        .filter(
-                                payMode ->
-                                        PayChannelCode.ASYNC_TYPE.contains(payMode.getPayChannel()))
-                        .findFirst()
-                        .orElseThrow(() -> new PayFailureException("支付方式数据异常"));
+        PayModeParam oldModeParam = oldPayModes.stream()
+                .filter(payMode -> PayChannelCode.ASYNC_TYPE.contains(payMode.getPayChannel()))
+                .findFirst()
+                .orElseThrow(() -> new PayFailureException("支付方式数据异常"));
 
         // 新的异步支付方式
-        PayModeParam payModeParam =
-                payParam.getPayModeList().stream()
-                        .filter(
-                                payMode ->
-                                        PayChannelCode.ASYNC_TYPE.contains(payMode.getPayChannel()))
-                        .findFirst()
-                        .orElseThrow(() -> new PayFailureException("支付方式数据异常"));
+        PayModeParam payModeParam = payParam.getPayModeList().stream()
+                .filter(payMode -> PayChannelCode.ASYNC_TYPE.contains(payMode.getPayChannel()))
+                .findFirst()
+                .orElseThrow(() -> new PayFailureException("支付方式数据异常"));
         payModeParam.setAmount(oldModeParam.getAmount());
 
         return payModeParam;

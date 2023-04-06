@@ -55,7 +55,8 @@ public class ProcessController {
         }
 
         /** 遍历流程节点 */
-        List<BusinessProcess> processList = templateConfig.get(context.getCode()).getProcessList();
+        List<BusinessProcess> processList =
+                templateConfig.get(context.getCode()).getProcessList();
         for (BusinessProcess businessProcess : processList) {
             businessProcess.process(context);
             if (context.getNeedBreak()) {

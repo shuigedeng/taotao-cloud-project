@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员评价VO")
 public class MemberEvaluationVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 6696978796248845481L;
+    @Serial
+    private static final long serialVersionUID = 6696978796248845481L;
 
     @Schema(description = "会员ID")
     private String memberId;

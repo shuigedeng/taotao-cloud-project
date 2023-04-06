@@ -51,8 +51,7 @@ public class AppController {
     @GetMapping(value = "/page")
     public Result<PageResult<AppDTO>> pageSysApp(AppPageDTO appPageDTO) {
         // Validator.validateParam(appPageDTO, ValidationGroups.query.class);
-        return Result.success(
-                PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
+        return Result.success(PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
     }
 
     /** 添加 */

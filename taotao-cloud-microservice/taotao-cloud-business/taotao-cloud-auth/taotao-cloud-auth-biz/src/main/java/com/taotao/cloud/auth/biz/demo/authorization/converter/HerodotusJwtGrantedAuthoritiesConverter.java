@@ -36,15 +36,13 @@ import org.springframework.util.StringUtils;
  * @author : gengwei.zheng
  * @date : 2022/3/13 14:21
  */
-public class HerodotusJwtGrantedAuthoritiesConverter
-        implements Converter<Jwt, Collection<GrantedAuthority>> {
+public class HerodotusJwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     private final Log logger = LogFactory.getLog(getClass());
 
     private static final String DEFAULT_AUTHORITY_PREFIX = "SCOPE_";
 
-    private static final Collection<String> WELL_KNOWN_AUTHORITIES_CLAIM_NAMES =
-            Arrays.asList("scope", "scp");
+    private static final Collection<String> WELL_KNOWN_AUTHORITIES_CLAIM_NAMES = Arrays.asList("scope", "scp");
 
     private String authorityPrefix = DEFAULT_AUTHORITY_PREFIX;
 
@@ -105,8 +103,7 @@ public class HerodotusJwtGrantedAuthoritiesConverter
         String claimName = getAuthoritiesClaimName(jwt);
         if (claimName == null) {
             this.logger.trace(
-                    "Returning no authorities since could not find any claims that might contain"
-                            + " scopes");
+                    "Returning no authorities since could not find any claims that might contain" + " scopes");
             return Collections.emptyList();
         }
         if (this.logger.isTraceEnabled()) {

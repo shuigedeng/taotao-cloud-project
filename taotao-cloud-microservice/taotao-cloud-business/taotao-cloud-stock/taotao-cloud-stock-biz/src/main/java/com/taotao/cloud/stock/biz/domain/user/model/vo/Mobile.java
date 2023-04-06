@@ -31,9 +31,8 @@ public final class Mobile implements ValueObject<Mobile> {
     private String mobile;
 
     /** 有效性正则 */
-    private static final Pattern VALID_PATTERN =
-            Pattern.compile(
-                    "^((13[0-9])|(14[0,1,4-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[0-3,5-9]))\\d{8}$");
+    private static final Pattern VALID_PATTERN = Pattern.compile(
+            "^((13[0-9])|(14[0,1,4-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[0-3,5-9]))\\d{8}$");
 
     /**
      * Constructor.

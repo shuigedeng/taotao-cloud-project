@@ -45,6 +45,5 @@ public interface IMemberMapper extends BaseSuperMapper<Member, Long> {
 		from tt_member
 		${ew.customSqlSegment}
 		""")
-    IPage<MemberVO> pageByMemberVO(
-            IPage<MemberVO> page, @Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
+    IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page, @Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
 }

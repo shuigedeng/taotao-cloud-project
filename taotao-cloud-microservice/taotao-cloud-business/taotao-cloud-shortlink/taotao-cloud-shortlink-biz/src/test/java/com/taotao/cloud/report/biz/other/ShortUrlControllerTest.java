@@ -33,13 +33,12 @@ import org.springframework.test.web.servlet.MvcResult;
 import shorturl.server.server.application.dto.UrlRequest;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.MOCK,
-        classes = ShortUrlServerApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = ShortUrlServerApplication.class)
 @AutoConfigureMockMvc
 public class ShortUrlControllerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     public ShortUrlControllerTest() {}
 
@@ -52,12 +51,10 @@ public class ShortUrlControllerTest {
         url.setLongUrl("https://blog.csdn.net/linsongbin1/article/details/83574619");
         System.out.println(url.getLongUrl().length());
 
-        MvcResult mvcResult =
-                mockMvc.perform(
-                                post("/shortUrlServer/getShortUrl")
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .content(JSON.toJSONString(url)))
-                        .andReturn();
+        MvcResult mvcResult = mockMvc.perform(post("/shortUrlServer/getShortUrl")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JSON.toJSONString(url)))
+                .andReturn();
 
         // shortUrl = mvcResult.getResponse().getContentType().
         System.out.println(mvcResult.getResponse().getContentAsString());
@@ -70,12 +67,10 @@ public class ShortUrlControllerTest {
         url.setShortUrl("http://t.cn/eRKFcl9M");
         System.out.println(url.getShortUrl().length());
 
-        MvcResult mvcResult =
-                mockMvc.perform(
-                                get("/shortUrlServer/getLongUrl")
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .content(JSON.toJSONString(url)))
-                        .andReturn();
+        MvcResult mvcResult = mockMvc.perform(get("/shortUrlServer/getLongUrl")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JSON.toJSONString(url)))
+                .andReturn();
         System.out.println(mvcResult.getResponse().getContentAsString());
     }
 }

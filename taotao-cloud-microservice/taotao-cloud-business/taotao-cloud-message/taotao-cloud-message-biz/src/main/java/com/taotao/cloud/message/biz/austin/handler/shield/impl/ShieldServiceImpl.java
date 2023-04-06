@@ -42,8 +42,12 @@ import org.springframework.stereotype.Service;
 public class ShieldServiceImpl implements ShieldService {
 
     private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";
-    @Autowired private RedisUtils redisUtils;
-    @Autowired private LogUtils logUtils;
+
+    @Autowired
+    private RedisUtils redisUtils;
+
+    @Autowired
+    private LogUtils logUtils;
 
     @Override
     public void shield(TaskInfo taskInfo) {
@@ -55,27 +59,22 @@ public class ShieldServiceImpl implements ShieldService {
         /** example:当消息下发至austin平台时，已经是凌晨1点，业务希望此类消息在次日的早上9点推送 (配合 分布式任务定时任务框架搞掂) */
         if (isNight()) {
             if (ShieldType.NIGHT_SHIELD.getCode().equals(taskInfo.getShieldType())) {
-                logUtils.print(
-                        AnchorInfo.builder()
-                                .state(AnchorState.NIGHT_SHIELD.getCode())
-                                .businessId(taskInfo.getBusinessId())
-                                .ids(taskInfo.getReceiver())
-                                .build());
+                logUtils.print(AnchorInfo.builder()
+                        .state(AnchorState.NIGHT_SHIELD.getCode())
+                        .businessId(taskInfo.getBusinessId())
+                        .ids(taskInfo.getReceiver())
+                        .build());
             }
-            if (ShieldType.NIGHT_SHIELD_BUT_NEXT_DAY_SEND
-                    .getCode()
-                    .equals(taskInfo.getShieldType())) {
+            if (ShieldType.NIGHT_SHIELD_BUT_NEXT_DAY_SEND.getCode().equals(taskInfo.getShieldType())) {
                 redisUtils.lPush(
                         NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY,
                         JSON.toJSONString(taskInfo, SerializerFeature.WriteClassName),
-                        (DateUtil.offsetDay(new Date(), 1).getTime() / 1000)
-                                - DateUtil.currentSeconds());
-                logUtils.print(
-                        AnchorInfo.builder()
-                                .state(AnchorState.NIGHT_SHIELD_NEXT_SEND.getCode())
-                                .businessId(taskInfo.getBusinessId())
-                                .ids(taskInfo.getReceiver())
-                                .build());
+                        (DateUtil.offsetDay(new Date(), 1).getTime() / 1000) - DateUtil.currentSeconds());
+                logUtils.print(AnchorInfo.builder()
+                        .state(AnchorState.NIGHT_SHIELD_NEXT_SEND.getCode())
+                        .businessId(taskInfo.getBusinessId())
+                        .ids(taskInfo.getReceiver())
+                        .build());
             }
             taskInfo.setReceiver(new HashSet<>());
         }

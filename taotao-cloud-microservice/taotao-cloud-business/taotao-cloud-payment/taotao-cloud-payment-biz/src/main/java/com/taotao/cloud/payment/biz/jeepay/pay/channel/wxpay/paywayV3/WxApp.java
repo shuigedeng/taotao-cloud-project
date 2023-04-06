@@ -50,11 +50,9 @@ public class WxApp extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
         wxPayService.getConfig().setTradeType(WxPayConstants.TradeType.APP);
 

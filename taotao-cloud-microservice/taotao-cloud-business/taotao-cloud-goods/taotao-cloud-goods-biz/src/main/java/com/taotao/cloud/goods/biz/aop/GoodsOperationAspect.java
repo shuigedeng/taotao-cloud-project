@@ -34,7 +34,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class GoodsOperationAspect {
 
-    @Autowired private ApplicationEventPublisher publisher;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @After("@annotation(com.taotao.cloud.goods.biz.aop.GoodsLogPoint)")
     public void doAfter(JoinPoint joinPoint) {}

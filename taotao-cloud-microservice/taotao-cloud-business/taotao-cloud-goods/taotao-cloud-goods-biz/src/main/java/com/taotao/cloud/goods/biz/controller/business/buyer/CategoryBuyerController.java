@@ -55,8 +55,7 @@ public class CategoryBuyerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{parentId}")
     public Result<List<CategoryTreeVO>> list(
-            @Parameter(description = "父ID 0-最上级id") @NotNull(message = "父ID不能为空") @PathVariable
-                    Long parentId) {
+            @Parameter(description = "父ID 0-最上级id") @NotNull(message = "父ID不能为空") @PathVariable Long parentId) {
         return Result.success(categoryService.listAllChildren(parentId));
     }
 }

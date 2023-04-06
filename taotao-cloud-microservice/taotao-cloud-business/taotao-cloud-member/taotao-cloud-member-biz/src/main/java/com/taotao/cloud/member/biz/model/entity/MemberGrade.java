@@ -60,8 +60,6 @@ public class MemberGrade extends BaseSuperEntity<MemberGrade, Long> {
     private Integer experienceValue;
 
     /** 是否为默认等级 */
-    @Column(
-            name = "defaulted",
-            columnDefinition = "boolean not null default false comment '是否为默认等级'")
+    @Column(name = "defaulted", columnDefinition = "boolean not null default false comment '是否为默认等级'")
     private Boolean defaulted;
 }

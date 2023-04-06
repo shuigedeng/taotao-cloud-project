@@ -40,7 +40,8 @@ public class PayResult implements Serializable {
     private Integer asyncPayChannel;
 
     /** 主支付记录 */
-    @JsonIgnore private PaymentInfo payment;
+    @JsonIgnore
+    private PaymentInfo payment;
 
     /**
      * @see TRADE_PROGRESS

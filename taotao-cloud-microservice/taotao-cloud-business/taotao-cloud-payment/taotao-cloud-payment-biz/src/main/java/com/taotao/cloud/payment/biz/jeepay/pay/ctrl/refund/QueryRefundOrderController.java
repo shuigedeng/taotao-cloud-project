@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class QueryRefundOrderController extends ApiController {
 
-    @Autowired private RefundOrderService refundOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private RefundOrderService refundOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     /** 查单接口 * */
     @RequestMapping("/api/refund/query")
@@ -56,8 +59,7 @@ public class QueryRefundOrderController extends ApiController {
         }
 
         RefundOrder refundOrder =
-                refundOrderService.queryMchOrder(
-                        rq.getMchNo(), rq.getMchRefundNo(), rq.getRefundOrderId());
+                refundOrderService.queryMchOrder(rq.getMchNo(), rq.getMchRefundNo(), rq.getRefundOrderId());
         if (refundOrder == null) {
             throw new BizException("订单不存在");
         }
@@ -65,6 +67,8 @@ public class QueryRefundOrderController extends ApiController {
         QueryRefundOrderRS bizRes = QueryRefundOrderRS.buildByRefundOrder(refundOrder);
         return ApiRes.okWithSign(
                 bizRes,
-                configContextQueryService.queryMchApp(rq.getMchNo(), rq.getAppId()).getAppSecret());
+                configContextQueryService
+                        .queryMchApp(rq.getMchNo(), rq.getAppId())
+                        .getAppSecret());
     }
 }

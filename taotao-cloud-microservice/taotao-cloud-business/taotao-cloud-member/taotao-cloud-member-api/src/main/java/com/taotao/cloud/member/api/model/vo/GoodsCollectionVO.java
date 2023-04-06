@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员商品收藏VO")
 public class GoodsCollectionVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "id")
     private String id;

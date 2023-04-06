@@ -46,28 +46,23 @@ public class QQOAuth2AccessTokenResponseClient
     }
 
     @Override
-    public OAuth2AccessTokenResponse getTokenResponse(
-            OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest)
+    public OAuth2AccessTokenResponse getTokenResponse(OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest)
             throws OAuth2AuthenticationException {
         ClientRegistration clientRegistration = authorizationGrantRequest.getClientRegistration();
-        OAuth2AuthorizationExchange oAuth2AuthorizationExchange =
-                authorizationGrantRequest.getAuthorizationExchange();
+        OAuth2AuthorizationExchange oAuth2AuthorizationExchange = authorizationGrantRequest.getAuthorizationExchange();
 
         // 根据API文档获取请求access_token参数
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.set("client_id", clientRegistration.getClientId());
         params.set("client_secret", clientRegistration.getClientSecret());
-        params.set("code", oAuth2AuthorizationExchange.getAuthorizationResponse().getCode());
+        params.set(
+                "code", oAuth2AuthorizationExchange.getAuthorizationResponse().getCode());
         params.set(
                 "redirect_uri",
                 oAuth2AuthorizationExchange.getAuthorizationRequest().getRedirectUri());
         params.set("grant_type", "authorization_code");
-        String tmpTokenResponse =
-                getRestTemplate()
-                        .postForObject(
-                                clientRegistration.getProviderDetails().getTokenUri(),
-                                params,
-                                String.class);
+        String tmpTokenResponse = getRestTemplate()
+                .postForObject(clientRegistration.getProviderDetails().getTokenUri(), params, String.class);
 
         // 从API文档中可以轻易获知解析accessToken的方式
         String[] items = tmpTokenResponse.split("&");
@@ -76,9 +71,8 @@ public class QQOAuth2AccessTokenResponseClient
         String accessToken = items[0].substring(items[0].lastIndexOf("=") + 1);
         long expiresIn = Long.parseLong(items[1].substring(items[1].lastIndexOf("=") + 1));
 
-        Set<String> scopes =
-                new LinkedHashSet<>(
-                        oAuth2AuthorizationExchange.getAuthorizationRequest().getScopes());
+        Set<String> scopes = new LinkedHashSet<>(
+                oAuth2AuthorizationExchange.getAuthorizationRequest().getScopes());
         Map<String, Object> additionalParameters = new LinkedHashMap<>();
         OAuth2AccessToken.TokenType accessTokenType = OAuth2AccessToken.TokenType.BEARER;
 

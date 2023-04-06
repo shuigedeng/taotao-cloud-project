@@ -29,13 +29,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PermissionApplicationServiceImpl implements PermissionApplicationService {
 
-    @Autowired private PermissionRepository permissionRepository;
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(PermissionCommand permissionCommand) {
-        Permission parent =
-                permissionRepository.find(new PermissionId(permissionCommand.getParentId()));
+        Permission parent = permissionRepository.find(new PermissionId(permissionCommand.getParentId()));
         Permission permission = PermissionDTOAssembler.toPermission(permissionCommand, parent);
         PermissionCreateSpecification permissionCreateSpecification =
                 new PermissionCreateSpecification(permissionRepository);
@@ -56,8 +56,7 @@ public class PermissionApplicationServiceImpl implements PermissionApplicationSe
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void disable(String id) {
-        PermissionDisableService permissionDisableService =
-                new PermissionDisableService(permissionRepository);
+        PermissionDisableService permissionDisableService = new PermissionDisableService(permissionRepository);
         permissionDisableService.disable(new PermissionId(id));
     }
 }

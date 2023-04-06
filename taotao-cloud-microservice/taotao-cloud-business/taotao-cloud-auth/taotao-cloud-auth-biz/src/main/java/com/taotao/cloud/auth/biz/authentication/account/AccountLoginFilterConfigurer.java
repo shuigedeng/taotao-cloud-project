@@ -31,10 +31,7 @@ import org.springframework.util.Assert;
 
 public class AccountLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                AccountLoginFilterConfigurer<H>,
-                AccountAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, AccountLoginFilterConfigurer<H>, AccountAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private AccountUserDetailsService accountUserDetailsService;
 
@@ -63,10 +60,9 @@ public class AccountLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     @Override
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        AccountUserDetailsService accountUserDetailsService =
-                this.accountUserDetailsService != null
-                        ? this.accountUserDetailsService
-                        : getBeanOrNull(applicationContext, AccountUserDetailsService.class);
+        AccountUserDetailsService accountUserDetailsService = this.accountUserDetailsService != null
+                ? this.accountUserDetailsService
+                : getBeanOrNull(applicationContext, AccountUserDetailsService.class);
         Assert.notNull(accountUserDetailsService, "accountUserDetailsService is required");
         return new AccountAuthenticationProvider(accountUserDetailsService);
     }

@@ -63,22 +63,13 @@ public class PaymentHttpResponse implements Serializable {
         if (StrUtil.isBlank(name)) {
             return null;
         } else {
-            CaseInsensitiveMap<String, List<String>> headersIgnoreCase =
-                    new CaseInsensitiveMap<>(getHeaders());
+            CaseInsensitiveMap<String, List<String>> headersIgnoreCase = new CaseInsensitiveMap<>(getHeaders());
             return headersIgnoreCase.get(name.trim());
         }
     }
 
     @Override
     public String toString() {
-        return "IJPayHttpResponse{"
-                + "body='"
-                + body
-                + '\''
-                + ", status="
-                + status
-                + ", headers="
-                + headers
-                + '}';
+        return "IJPayHttpResponse{" + "body='" + body + '\'' + ", status=" + status + ", headers=" + headers + '}';
     }
 }

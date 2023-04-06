@@ -62,12 +62,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public abstract class AbstractPayOrderController extends ApiController {
 
-    @Autowired private MchPayPassageService mchPayPassageService;
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private PayOrderProcessService payOrderProcessService;
-    @Autowired private SysConfigService sysConfigService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private MchPayPassageService mchPayPassageService;
+
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private PayOrderProcessService payOrderProcessService;
+
+    @Autowired
+    private SysConfigService sysConfigService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /** 统一下单 (新建订单模式) * */
     protected ApiRes unifiedOrder(String wayCode, UnifiedOrderRQ bizRQ) {
@@ -114,26 +125,22 @@ public abstract class AbstractPayOrderController extends ApiController {
 
             // 只有新订单模式，进行校验
             if (isNewOrder
-                    && payOrderService.count(
-                                    PayOrder.gw()
-                                            .eq(PayOrder::getMchNo, mchNo)
-                                            .eq(PayOrder::getMchOrderNo, bizRQ.getMchOrderNo()))
+                    && payOrderService.count(PayOrder.gw()
+                                    .eq(PayOrder::getMchNo, mchNo)
+                                    .eq(PayOrder::getMchOrderNo, bizRQ.getMchOrderNo()))
                             > 0) {
                 throw new BizException("商户订单[" + bizRQ.getMchOrderNo() + "]已存在");
             }
 
-            if (StringUtils.isNotEmpty(bizRQ.getNotifyUrl())
-                    && !StringKit.isAvailableUrl(bizRQ.getNotifyUrl())) {
+            if (StringUtils.isNotEmpty(bizRQ.getNotifyUrl()) && !StringKit.isAvailableUrl(bizRQ.getNotifyUrl())) {
                 throw new BizException("异步通知地址协议仅支持http:// 或 https:// !");
             }
-            if (StringUtils.isNotEmpty(bizRQ.getReturnUrl())
-                    && !StringKit.isAvailableUrl(bizRQ.getReturnUrl())) {
+            if (StringUtils.isNotEmpty(bizRQ.getReturnUrl()) && !StringKit.isAvailableUrl(bizRQ.getReturnUrl())) {
                 throw new BizException("同步通知地址协议仅支持http:// 或 https:// !");
             }
 
             // 获取支付参数 (缓存数据) 和 商户信息
-            MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
+            MchAppConfigContext mchAppConfigContext = configContextQueryService.queryMchInfoAndAppInfo(mchNo, appId);
             if (mchAppConfigContext == null) {
                 throw new BizException("获取商户应用信息失败");
             }
@@ -156,8 +163,7 @@ public abstract class AbstractPayOrderController extends ApiController {
                 DBApplicationConfig dbApplicationConfig = sysConfigService.getDBApplicationConfig();
 
                 String payUrl = dbApplicationConfig.genUniJsapiPayUrl(payOrderId);
-                if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(
-                        qrCashierOrderRQ.getPayDataType())) { // 二维码地址
+                if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(qrCashierOrderRQ.getPayDataType())) { // 二维码地址
                     qrCashierOrderRS.setCodeImgUrl(dbApplicationConfig.genScanImgUrl(payUrl));
 
                 } else { // 默认都为跳转地址方式
@@ -168,18 +174,14 @@ public abstract class AbstractPayOrderController extends ApiController {
             }
 
             // 根据支付方式， 查询出 该商户 可用的支付接口
-            MchPayPassage mchPayPassage =
-                    mchPayPassageService.findMchPayPassage(
-                            mchAppConfigContext.getMchNo(),
-                            mchAppConfigContext.getAppId(),
-                            wayCode);
+            MchPayPassage mchPayPassage = mchPayPassageService.findMchPayPassage(
+                    mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), wayCode);
             if (mchPayPassage == null) {
                 throw new BizException("商户应用不支持该支付方式");
             }
 
             // 获取支付接口
-            IPaymentService paymentService =
-                    checkMchWayCodeAndGetService(mchAppConfigContext, mchPayPassage);
+            IPaymentService paymentService = checkMchWayCodeAndGetService(mchAppConfigContext, mchPayPassage);
             String ifCode = paymentService.getIfCode();
 
             // 生成订单
@@ -191,8 +193,7 @@ public abstract class AbstractPayOrderController extends ApiController {
                 // 查询支付方式的费率，并 在更新ing时更新费率信息
                 payOrder.setMchFeeRate(mchPayPassage.getRate());
                 payOrder.setMchFeeAmount(
-                        AmountUtil.calPercentageFee(
-                                payOrder.getAmount(), payOrder.getMchFeeRate())); // 商户手续费,单位分
+                        AmountUtil.calPercentageFee(payOrder.getAmount(), payOrder.getMchFeeRate())); // 商户手续费,单位分
             }
 
             // 预先校验
@@ -235,11 +236,7 @@ public abstract class AbstractPayOrderController extends ApiController {
     }
 
     private PayOrder genPayOrder(
-            UnifiedOrderRQ rq,
-            MchInfo mchInfo,
-            MchApp mchApp,
-            String ifCode,
-            MchPayPassage mchPayPassage) {
+            UnifiedOrderRQ rq, MchInfo mchInfo, MchApp mchApp, String ifCode, MchPayPassage mchPayPassage) {
 
         PayOrder payOrder = new PayOrder();
         payOrder.setPayOrderId(SeqKit.genPayOrderId()); // 生成订单ID
@@ -260,8 +257,7 @@ public abstract class AbstractPayOrderController extends ApiController {
         }
 
         payOrder.setMchFeeAmount(
-                AmountUtil.calPercentageFee(
-                        payOrder.getAmount(), payOrder.getMchFeeRate())); // 商户手续费,单位分
+                AmountUtil.calPercentageFee(payOrder.getAmount(), payOrder.getMchFeeRate())); // 商户手续费,单位分
 
         payOrder.setCurrency(rq.getCurrency()); // 币种
         payOrder.setState(PayOrder.STATE_INIT); // 订单状态, 默认订单生成状态
@@ -276,8 +272,7 @@ public abstract class AbstractPayOrderController extends ApiController {
         payOrder.setReturnUrl(rq.getReturnUrl()); // 页面跳转地址
 
         // 分账模式
-        payOrder.setDivisionMode(
-                ObjectUtils.defaultIfNull(rq.getDivisionMode(), PayOrder.DIVISION_MODE_FORBID));
+        payOrder.setDivisionMode(ObjectUtils.defaultIfNull(rq.getDivisionMode(), PayOrder.DIVISION_MODE_FORBID));
 
         Date nowDate = new Date();
 
@@ -298,8 +293,7 @@ public abstract class AbstractPayOrderController extends ApiController {
 
         // 接口代码
         String ifCode = mchPayPassage.getIfCode();
-        IPaymentService paymentService =
-                SpringBeansUtil.getBean(ifCode + "PaymentService", IPaymentService.class);
+        IPaymentService paymentService = SpringBeansUtil.getBean(ifCode + "PaymentService", IPaymentService.class);
         if (paymentService == null) {
             throw new BizException("无此支付通道接口");
         }
@@ -346,8 +340,7 @@ public abstract class AbstractPayOrderController extends ApiController {
         // 明确成功
         if (ChannelRetMsg.ChannelState.CONFIRM_SUCCESS == channelRetMsg.getChannelState()) {
 
-            this.updateInitOrderStateThrowException(
-                    PayOrder.STATE_SUCCESS, payOrder, channelRetMsg);
+            this.updateInitOrderStateThrowException(PayOrder.STATE_SUCCESS, payOrder, channelRetMsg);
 
             // 订单支付成功，其他业务逻辑
             payOrderProcessService.confirmSuccess(payOrder);
@@ -379,8 +372,7 @@ public abstract class AbstractPayOrderController extends ApiController {
     }
 
     /** 更新订单状态 --》 订单生成--》 其他状态 (向外抛出异常) * */
-    private void updateInitOrderStateThrowException(
-            byte orderState, PayOrder payOrder, ChannelRetMsg channelRetMsg) {
+    private void updateInitOrderStateThrowException(byte orderState, PayOrder payOrder, ChannelRetMsg channelRetMsg) {
 
         payOrder.setState(orderState);
         payOrder.setChannelOrderNo(channelRetMsg.getChannelOrderId());
@@ -397,22 +389,20 @@ public abstract class AbstractPayOrderController extends ApiController {
             throw new BizException("更新订单异常!");
         }
 
-        isSuccess =
-                payOrderService.updateIng2SuccessOrFail(
-                        payOrder.getPayOrderId(),
-                        payOrder.getState(),
-                        channelRetMsg.getChannelOrderId(),
-                        channelRetMsg.getChannelUserId(),
-                        channelRetMsg.getChannelErrCode(),
-                        channelRetMsg.getChannelErrMsg());
+        isSuccess = payOrderService.updateIng2SuccessOrFail(
+                payOrder.getPayOrderId(),
+                payOrder.getState(),
+                channelRetMsg.getChannelOrderId(),
+                channelRetMsg.getChannelUserId(),
+                channelRetMsg.getChannelErrCode(),
+                channelRetMsg.getChannelErrMsg());
         if (!isSuccess) {
             throw new BizException("更新订单异常!");
         }
     }
 
     /** 统一封装订单数据 * */
-    private ApiRes packageApiResByPayOrder(
-            UnifiedOrderRQ bizRQ, UnifiedOrderRS bizRS, PayOrder payOrder) {
+    private ApiRes packageApiResByPayOrder(UnifiedOrderRQ bizRQ, UnifiedOrderRS bizRS, PayOrder payOrder) {
 
         // 返回接口数据
         bizRS.setPayOrderId(payOrder.getPayOrderId());
@@ -421,13 +411,9 @@ public abstract class AbstractPayOrderController extends ApiController {
 
         if (payOrder.getState() == PayOrder.STATE_FAIL) {
             bizRS.setErrCode(
-                    bizRS.getChannelRetMsg() != null
-                            ? bizRS.getChannelRetMsg().getChannelErrCode()
-                            : null);
+                    bizRS.getChannelRetMsg() != null ? bizRS.getChannelRetMsg().getChannelErrCode() : null);
             bizRS.setErrMsg(
-                    bizRS.getChannelRetMsg() != null
-                            ? bizRS.getChannelRetMsg().getChannelErrMsg()
-                            : null);
+                    bizRS.getChannelRetMsg() != null ? bizRS.getChannelRetMsg().getChannelErrMsg() : null);
         }
 
         return ApiRes.okWithSign(

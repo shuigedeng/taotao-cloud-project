@@ -37,8 +37,10 @@ public class OrderInfoRepository extends BaseClassSuperRepository<OrderInfo, Lon
     public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 
     public OrderInfo findOrderInfoById(Long id) {
-        OrderInfo fetch =
-                jpaQueryFactory().selectFrom(ORDER_INFO).where(ORDER_INFO.id.eq(id)).fetchOne();
+        OrderInfo fetch = jpaQueryFactory()
+                .selectFrom(ORDER_INFO)
+                .where(ORDER_INFO.id.eq(id))
+                .fetchOne();
 
         OrderInfo t = getById(id);
 

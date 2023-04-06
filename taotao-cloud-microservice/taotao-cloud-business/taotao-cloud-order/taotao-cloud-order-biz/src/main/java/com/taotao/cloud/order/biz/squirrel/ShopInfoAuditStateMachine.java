@@ -79,19 +79,12 @@ public class ShopInfoAuditStateMachine extends AbstractUntypedStateMachine {
     }
 
     public void main(String[] args, ShopInfoAuditStatusUpdateParam param) {
-        StateMachineEngine stateMachineEngine =
-                getApplicationContext().getBean(StateMachineEngine.class);
+        StateMachineEngine stateMachineEngine = getApplicationContext().getBean(StateMachineEngine.class);
         // 审核通过调case
         stateMachineEngine.fire(
-                ShopInfoAuditStateMachine.class,
-                ShopInfoAuditStatusEnum.audit,
-                ShopInfoAuditEvent.AGREE,
-                param);
+                ShopInfoAuditStateMachine.class, ShopInfoAuditStatusEnum.audit, ShopInfoAuditEvent.AGREE, param);
         // 审核驳回case
         stateMachineEngine.fire(
-                ShopInfoAuditStateMachine.class,
-                ShopInfoAuditStatusEnum.audit,
-                ShopInfoAuditEvent.REJECT,
-                param);
+                ShopInfoAuditStateMachine.class, ShopInfoAuditStatusEnum.audit, ShopInfoAuditEvent.REJECT, param);
     }
 }

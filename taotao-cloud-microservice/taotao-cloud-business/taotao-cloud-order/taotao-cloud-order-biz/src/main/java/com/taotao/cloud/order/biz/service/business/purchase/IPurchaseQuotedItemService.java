@@ -37,8 +37,7 @@ public interface IPurchaseQuotedItemService extends IService<PurchaseQuotedItem>
      * @return boolean
      * @since 2022-04-28 08:55:32
      */
-    boolean addPurchaseQuotedItem(
-            String PurchaseQuotedId, List<PurchaseQuotedItem> purchaseQuotedItemList);
+    boolean addPurchaseQuotedItem(String PurchaseQuotedId, List<PurchaseQuotedItem> purchaseQuotedItemList);
 
     /**
      * 获取报价单子内容列表

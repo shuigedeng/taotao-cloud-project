@@ -50,30 +50,19 @@ public interface BpmModelConvert {
             Map<Long, BpmFormDO> formMap,
             Map<String, Deployment> deploymentMap,
             Map<String, ProcessDefinition> processDefinitionMap) {
-        return CollectionUtils.convertList(
-                list,
-                model -> {
-                    BpmModelMetaInfoRespDTO metaInfo =
-                            JsonUtils.parseObject(
-                                    model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
-                    BpmFormDO form = metaInfo != null ? formMap.get(metaInfo.getFormId()) : null;
-                    Deployment deployment =
-                            model.getDeploymentId() != null
-                                    ? deploymentMap.get(model.getDeploymentId())
-                                    : null;
-                    ProcessDefinition processDefinition =
-                            model.getDeploymentId() != null
-                                    ? processDefinitionMap.get(model.getDeploymentId())
-                                    : null;
-                    return convert(model, form, deployment, processDefinition);
-                });
+        return CollectionUtils.convertList(list, model -> {
+            BpmModelMetaInfoRespDTO metaInfo =
+                    JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
+            BpmFormDO form = metaInfo != null ? formMap.get(metaInfo.getFormId()) : null;
+            Deployment deployment = model.getDeploymentId() != null ? deploymentMap.get(model.getDeploymentId()) : null;
+            ProcessDefinition processDefinition =
+                    model.getDeploymentId() != null ? processDefinitionMap.get(model.getDeploymentId()) : null;
+            return convert(model, form, deployment, processDefinition);
+        });
     }
 
     default BpmModelPageItemRespVO convert(
-            Model model,
-            BpmFormDO form,
-            Deployment deployment,
-            ProcessDefinition processDefinition) {
+            Model model, BpmFormDO form, Deployment deployment, ProcessDefinition processDefinition) {
         BpmModelPageItemRespVO modelRespVO = new BpmModelPageItemRespVO();
         modelRespVO.setId(model.getId());
         modelRespVO.setCreateTime(DateUtils.of(model.getCreateTime()));
@@ -93,9 +82,7 @@ public interface BpmModelConvert {
                             processDefinition.isSuspended()
                                     ? SuspensionState.SUSPENDED.getStateCode()
                                     : SuspensionState.ACTIVE.getStateCode());
-            modelRespVO
-                    .getProcessDefinition()
-                    .setDeploymentTime(DateUtils.of(deployment.getDeploymentTime()));
+            modelRespVO.getProcessDefinition().setDeploymentTime(DateUtils.of(deployment.getDeploymentTime()));
         }
         return modelRespVO;
     }
@@ -114,8 +101,7 @@ public interface BpmModelConvert {
         to.setKey(model.getKey());
         to.setCategory(model.getCategory());
         // metaInfo
-        BpmModelMetaInfoRespDTO metaInfo =
-                JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
+        BpmModelMetaInfoRespDTO metaInfo = JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
         copyTo(metaInfo, to);
     }
 
@@ -127,8 +113,7 @@ public interface BpmModelConvert {
         createReqDTO.setName(model.getName());
         createReqDTO.setKey(model.getKey());
         createReqDTO.setCategory(model.getCategory());
-        BpmModelMetaInfoRespDTO metaInfo =
-                JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
+        BpmModelMetaInfoRespDTO metaInfo = JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class);
         // metaInfo
         copyTo(metaInfo, createReqDTO);
         // form
@@ -154,14 +139,13 @@ public interface BpmModelConvert {
     default void copy(Model model, BpmModelUpdateReqVO bean) {
         model.setName(bean.getName());
         model.setCategory(bean.getCategory());
-        model.setMetaInfo(
-                buildMetaInfoStr(
-                        JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class),
-                        bean.getDescription(),
-                        bean.getFormType(),
-                        bean.getFormId(),
-                        bean.getFormCustomCreatePath(),
-                        bean.getFormCustomViewPath()));
+        model.setMetaInfo(buildMetaInfoStr(
+                JsonUtils.parseObject(model.getMetaInfo(), BpmModelMetaInfoRespDTO.class),
+                bean.getDescription(),
+                bean.getFormType(),
+                bean.getFormId(),
+                bean.getFormCustomCreatePath(),
+                bean.getFormCustomViewPath()));
     }
 
     default String buildMetaInfoStr(

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.funnel;
 
 import io.airlift.slice.Slice;
@@ -29,15 +30,15 @@ import io.trino.spi.type.Type;
  */
 public interface FunnelSliceState extends AccumulatorState {
 
-	Slice getSlice();
+    Slice getSlice();
 
-	void setSlice(Slice value);
+    void setSlice(Slice value);
 
-	static void write(Type type, FunnelSliceState sliceState, BlockBuilder out) {
-		if (sliceState.getSlice() == null) {
-			out.appendNull();
-		} else {
-			type.writeSlice(out, sliceState.getSlice());
-		}
-	}
+    static void write(Type type, FunnelSliceState sliceState, BlockBuilder out) {
+        if (sliceState.getSlice() == null) {
+            out.appendNull();
+        } else {
+            type.writeSlice(out, sliceState.getSlice());
+        }
+    }
 }

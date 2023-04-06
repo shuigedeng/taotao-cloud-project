@@ -59,8 +59,6 @@ public class RefundLogController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/tree")
     public Result<IPage<RefundLog>> getByPage(RefundLog entity, SearchVO searchVo, PageVO page) {
-        return Result.success(
-                refundLogService.page(
-                        PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
+        return Result.success(refundLogService.page(PageUtil.initPage(page), PageUtil.initWrapper(entity, searchVo)));
     }
 }

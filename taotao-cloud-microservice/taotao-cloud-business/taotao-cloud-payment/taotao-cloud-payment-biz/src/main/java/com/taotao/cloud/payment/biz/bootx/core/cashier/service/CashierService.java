@@ -65,11 +65,10 @@ public class CashierService {
         }
 
         // 构建支付方式参数
-        PayModeParam payModeParam =
-                new PayModeParam()
-                        .setPayChannel(param.getPayChannel())
-                        .setPayWay(param.getPayWay())
-                        .setAmount(param.getAmount());
+        PayModeParam payModeParam = new PayModeParam()
+                .setPayChannel(param.getPayChannel())
+                .setPayWay(param.getPayWay())
+                .setAmount(param.getAmount());
 
         // 处理附加参数
         HashMap<String, String> map = new HashMap<>(1);
@@ -78,12 +77,11 @@ public class CashierService {
         String extraParamsJson = PayModelUtil.buildExtraParamsJson(param.getPayChannel(), map);
         payModeParam.setExtraParamsJson(extraParamsJson);
 
-        PayParam payParam =
-                new PayParam()
-                        .setTitle(param.getTitle())
-                        .setBusinessId(param.getBusinessId())
-                        .setUserId(SecurityUtils.getUserIdOrDefaultId())
-                        .setPayModeList(Collections.singletonList(payModeParam));
+        PayParam payParam = new PayParam()
+                .setTitle(param.getTitle())
+                .setBusinessId(param.getBusinessId())
+                .setUserId(SecurityUtils.getUserIdOrDefaultId())
+                .setPayModeList(Collections.singletonList(payModeParam));
         PayResult payResult = payService.pay(payParam);
 
         if (PayStatusCode.TRADE_REFUNDED == payResult.getPayStatus()) {
@@ -94,8 +92,7 @@ public class CashierService {
 
     /** 扫码发起自动支付 */
     public String aggregatePay(String key, String ua) {
-        CashierSinglePayParam cashierSinglePayParam =
-                new CashierSinglePayParam().setPayWay(PayWayCode.QRCODE);
+        CashierSinglePayParam cashierSinglePayParam = new CashierSinglePayParam().setPayWay(PayWayCode.QRCODE);
         // 判断是哪种支付方式
         if (ua.contains(PayChannelCode.UA_ALI_PAY)) {
             cashierSinglePayParam.setPayChannel(PayChannelCode.ALI);
@@ -104,9 +101,8 @@ public class CashierService {
         } else {
             throw new PayFailureException("不支持的支付方式");
         }
-        String jsonStr =
-                Optional.ofNullable(redisClient.get(PREFIX_KEY + key))
-                        .orElseThrow(() -> new PayFailureException("支付超时"));
+        String jsonStr = Optional.ofNullable(redisClient.get(PREFIX_KEY + key))
+                .orElseThrow(() -> new PayFailureException("支付超时"));
         AggregatePayInfo aggregatePayInfo = JSONUtil.toBean(jsonStr, AggregatePayInfo.class);
         cashierSinglePayParam
                 .setTitle(aggregatePayInfo.getTitle())
@@ -121,19 +117,16 @@ public class CashierService {
         // 处理支付参数
         List<PayModeParam> payModeList = param.getPayModeList();
         // 删除小于等于零的
-        payModeList.removeIf(
-                payModeParam ->
-                        BigDecimalUtil.compareTo(payModeParam.getAmount(), BigDecimal.ZERO) < 1);
+        payModeList.removeIf(payModeParam -> BigDecimalUtil.compareTo(payModeParam.getAmount(), BigDecimal.ZERO) < 1);
         if (CollUtil.isEmpty(payModeList)) {
             throw new PayFailureException("支付参数有误");
         }
         // 发起支付
-        PayParam payParam =
-                new PayParam()
-                        .setTitle(param.getTitle())
-                        .setBusinessId(param.getBusinessId())
-                        .setUserId(SecurityUtils.getUserIdOrDefaultId())
-                        .setPayModeList(param.getPayModeList());
+        PayParam payParam = new PayParam()
+                .setTitle(param.getTitle())
+                .setBusinessId(param.getBusinessId())
+                .setUserId(SecurityUtils.getUserIdOrDefaultId())
+                .setPayModeList(param.getPayModeList());
         PayResult payResult = payService.pay(payParam);
 
         if (PayStatusCode.TRADE_REFUNDED == payResult.getPayStatus()) {

@@ -34,7 +34,8 @@ public record PriceDetailVO(
         @Schema(description = "最终成交金额") BigDecimal finalePrice)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -960537582096338500L;
+    @Serial
+    private static final long serialVersionUID = -960537582096338500L;
 
     /**
      * 初始化默认值

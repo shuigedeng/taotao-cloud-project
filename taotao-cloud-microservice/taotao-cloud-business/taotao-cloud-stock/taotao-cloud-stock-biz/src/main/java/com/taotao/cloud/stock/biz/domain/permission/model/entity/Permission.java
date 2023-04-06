@@ -113,8 +113,7 @@ public class Permission implements Entity<Permission> {
      * @return
      */
     public boolean isMenu() {
-        return permissionType == PermissionTypeEnum.CATALOG
-                || permissionType == PermissionTypeEnum.MENU;
+        return permissionType == PermissionTypeEnum.CATALOG || permissionType == PermissionTypeEnum.MENU;
     }
 
     /**
@@ -131,8 +130,7 @@ public class Permission implements Entity<Permission> {
         if (this.permissionType == PermissionTypeEnum.CATALOG) {
             throw new IllegalArgumentException("目录无法启用或禁用");
         }
-        StatusEnum status =
-                this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+        StatusEnum status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
         this.status = status;
         if (subList != null && !subList.isEmpty()) {
             for (Permission subPermission : subList) {

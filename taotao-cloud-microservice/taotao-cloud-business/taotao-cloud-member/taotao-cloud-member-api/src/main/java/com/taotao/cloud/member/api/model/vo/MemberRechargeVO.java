@@ -34,7 +34,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "会员搜索VO")
 public class MemberRechargeVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     /** 充值订单编号 */
     private String rechargeSn;

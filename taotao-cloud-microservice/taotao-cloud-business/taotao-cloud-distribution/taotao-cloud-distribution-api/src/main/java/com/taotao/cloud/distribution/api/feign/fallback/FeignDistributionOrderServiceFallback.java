@@ -20,8 +20,7 @@ import cn.hutool.core.date.DateTime;
 import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderApi;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
-public class FeignDistributionOrderServiceFallback
-        implements FallbackFactory<IFeignDistributionOrderApi> {
+public class FeignDistributionOrderServiceFallback implements FallbackFactory<IFeignDistributionOrderApi> {
     @Override
     public IFeignDistributionOrderApi create(Throwable throwable) {
         return new IFeignDistributionOrderApi() {

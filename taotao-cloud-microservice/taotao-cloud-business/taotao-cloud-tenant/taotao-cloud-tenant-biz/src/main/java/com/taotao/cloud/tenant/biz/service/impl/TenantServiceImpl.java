@@ -49,11 +49,17 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TenantServiceImpl implements TenantService {
 
-    @Resource private TenantPackageService tenantPackageService;
-    @Resource private TenantManager tenantManager;
+    @Resource
+    private TenantPackageService tenantPackageService;
 
-    @Resource private IFeignUserApi userApi;
-    @Resource private IFeignRoleApi roleApi;
+    @Resource
+    private TenantManager tenantManager;
+
+    @Resource
+    private IFeignUserApi userApi;
+
+    @Resource
+    private IFeignRoleApi roleApi;
 
     @Override
     public void validTenant(Long id) {
@@ -72,17 +78,14 @@ public class TenantServiceImpl implements TenantService {
 
     @Override
     public List<Long> getTenantIds() {
-        return tenantManager.listTenant().stream()
-                .map(TenantDO::getId)
-                .collect(Collectors.toList());
+        return tenantManager.listTenant().stream().map(TenantDO::getId).collect(Collectors.toList());
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean addSysTenant(TenantDTO tenant) {
         // 检查套餐信息
-        TenantPackageDO tenantPackageDO =
-                tenantPackageService.validTenantPackage(tenant.getPackageId());
+        TenantPackageDO tenantPackageDO = tenantPackageService.validTenantPackage(tenant.getPackageId());
 
         // 保存租户信息
         Long tenantId = tenantManager.addTenant(tenant);

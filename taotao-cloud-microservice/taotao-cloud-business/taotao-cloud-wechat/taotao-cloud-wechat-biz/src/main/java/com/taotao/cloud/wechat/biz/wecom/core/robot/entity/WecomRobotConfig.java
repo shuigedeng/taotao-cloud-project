@@ -38,8 +38,7 @@ import lombok.experimental.Accessors;
 @Data
 @TableName("starter_wecom_robot_config")
 @Accessors(chain = true)
-public class WecomRobotConfig extends MpBaseEntity
-        implements EntityBaseFunction<WecomRobotConfigDto> {
+public class WecomRobotConfig extends MpBaseEntity implements EntityBaseFunction<WecomRobotConfigDto> {
 
     /** 名称 */
     private String name;

@@ -39,7 +39,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderCreateReceiptExecute implements TradeEvent {
 
-    @Autowired private IReceiptService receiptService;
+    @Autowired
+    private IReceiptService receiptService;
 
     @Override
     public void orderCreate(TradeDTO tradeDTO) {

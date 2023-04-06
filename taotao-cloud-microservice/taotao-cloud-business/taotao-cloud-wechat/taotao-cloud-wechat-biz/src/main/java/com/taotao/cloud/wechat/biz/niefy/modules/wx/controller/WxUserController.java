@@ -38,7 +38,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = {"微信粉丝"})
 public class WxUserController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired WxUserService wxUserService;
+
+    @Autowired
+    WxUserService wxUserService;
+
     private final WxMpService wxMpService;
 
     @GetMapping("/getUserInfo")

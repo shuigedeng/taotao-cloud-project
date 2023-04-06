@@ -40,16 +40,14 @@ public class CreateHtmlServiceImpl implements ICreateHtmlService {
 
     private static int corePoolSize = Runtime.getRuntime().availableProcessors();
     // 多线程生成静态页面
-    private static ThreadPoolExecutor executor =
-            new ThreadPoolExecutor(
-                    corePoolSize,
-                    corePoolSize + 1,
-                    10l,
-                    TimeUnit.SECONDS,
-                    new LinkedBlockingQueue<Runnable>(1000));
+    private static ThreadPoolExecutor executor = new ThreadPoolExecutor(
+            corePoolSize, corePoolSize + 1, 10l, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(1000));
 
-    @Autowired public Configuration configuration;
-    @Autowired private SeckillRepository seckillRepository;
+    @Autowired
+    public Configuration configuration;
+
+    @Autowired
+    private SeckillRepository seckillRepository;
 
     @Value("${spring.freemarker.html.path}")
     private String path;

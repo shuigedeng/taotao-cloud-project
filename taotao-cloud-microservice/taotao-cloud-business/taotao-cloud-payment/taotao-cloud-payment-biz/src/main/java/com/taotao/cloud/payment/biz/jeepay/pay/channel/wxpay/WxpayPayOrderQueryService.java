@@ -44,7 +44,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class WxpayPayOrderQueryService implements IPayOrderQueryService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -56,8 +57,7 @@ public class WxpayPayOrderQueryService implements IPayOrderQueryService {
 
         try {
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) { // V2
 
@@ -92,33 +92,19 @@ public class WxpayPayOrderQueryService implements IPayOrderQueryService {
                 String query;
                 if (mchAppConfigContext.isIsvsubMch()) { // 特约商户
                     WxpayIsvsubMchParams isvsubMchParams =
-                            (WxpayIsvsubMchParams)
-                                    configContextQueryService.queryIsvsubMchParams(
-                                            mchAppConfigContext.getMchNo(),
-                                            mchAppConfigContext.getAppId(),
-                                            getIfCode());
-                    reqUrl =
-                            String.format(
-                                    "/v3/pay/partner/transactions/out-trade-no/%s",
-                                    payOrder.getPayOrderId());
-                    query =
-                            String.format(
-                                    "?sp_mchid=%s&sub_mchid=%s",
-                                    wxServiceWrapper.getWxPayService().getConfig().getMchId(),
-                                    isvsubMchParams.getSubMchId());
+                            (WxpayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                                    mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
+                    reqUrl = String.format("/v3/pay/partner/transactions/out-trade-no/%s", payOrder.getPayOrderId());
+                    query = String.format(
+                            "?sp_mchid=%s&sub_mchid=%s",
+                            wxServiceWrapper.getWxPayService().getConfig().getMchId(), isvsubMchParams.getSubMchId());
                 } else {
-                    reqUrl =
-                            String.format(
-                                    "/v3/pay/transactions/out-trade-no/%s",
-                                    payOrder.getPayOrderId());
-                    query =
-                            String.format(
-                                    "?mchid=%s",
-                                    wxServiceWrapper.getWxPayService().getConfig().getMchId());
+                    reqUrl = String.format("/v3/pay/transactions/out-trade-no/%s", payOrder.getPayOrderId());
+                    query = String.format(
+                            "?mchid=%s",
+                            wxServiceWrapper.getWxPayService().getConfig().getMchId());
                 }
-                JSONObject resultJSON =
-                        WxpayV3Util.queryOrderV3(
-                                reqUrl + query, wxServiceWrapper.getWxPayService());
+                JSONObject resultJSON = WxpayV3Util.queryOrderV3(reqUrl + query, wxServiceWrapper.getWxPayService());
 
                 String channelState = resultJSON.getString("trade_state");
                 if ("SUCCESS".equals(channelState)) {

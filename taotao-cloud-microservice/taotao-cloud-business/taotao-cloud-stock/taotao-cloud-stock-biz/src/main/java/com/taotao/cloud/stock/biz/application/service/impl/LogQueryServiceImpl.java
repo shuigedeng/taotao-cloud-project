@@ -32,16 +32,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class LogQueryServiceImpl implements LogQueryService {
 
-    @Autowired private SysLogMapper sysLogMapper;
+    @Autowired
+    private SysLogMapper sysLogMapper;
 
     @Override
     public Page queryPage(Map<String, Object> params) {
         String key = (String) params.get("key");
-        IPage<SysLogDO> page =
-                sysLogMapper.selectPage(
-                        new Query<SysLogDO>().getPage(params),
-                        new QueryWrapper<SysLogDO>()
-                                .like(StringUtils.isNotBlank(key), "username", key));
+        IPage<SysLogDO> page = sysLogMapper.selectPage(
+                new Query<SysLogDO>().getPage(params),
+                new QueryWrapper<SysLogDO>().like(StringUtils.isNotBlank(key), "username", key));
         return PageAssembler.toPage(page);
     }
 }

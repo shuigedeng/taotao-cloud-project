@@ -44,8 +44,11 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "店铺端,秒杀活动接口")
 @RequestMapping("/store/promotion/seckill")
 public class SeckillStoreController {
-    @Autowired private ISeckillService seckillService;
-    @Autowired private ISeckillApplyService seckillApplyService;
+    @Autowired
+    private ISeckillService seckillService;
+
+    @Autowired
+    private ISeckillApplyService seckillApplyService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -60,8 +63,7 @@ public class SeckillStoreController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/apply")
     @Operation(summary = "获取秒杀活动申请列表")
-    public Result<IPage<SeckillApply>> getSeckillApplyPage(
-            SeckillPageQuery queryParam, PageVO pageVo) {
+    public Result<IPage<SeckillApply>> getSeckillApplyPage(SeckillPageQuery queryParam, PageVO pageVo) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         queryParam.setStoreId(storeId);
         IPage<SeckillApply> seckillPage = seckillApplyService.getSeckillApply(queryParam, pageVo);
@@ -81,20 +83,15 @@ public class SeckillStoreController {
     @GetMapping("/apply/{seckillApplyId}")
     @Operation(summary = "获取秒杀活动申请")
     public Result<SeckillApply> getSeckillApply(@PathVariable String seckillApplyId) {
-        SeckillApply seckillApply =
-                OperationalJudgment.judgment(seckillApplyService.getById(seckillApplyId));
+        SeckillApply seckillApply = OperationalJudgment.judgment(seckillApplyService.getById(seckillApplyId));
         return Result.success(seckillApply);
     }
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PostMapping(
-            path = "/apply/{seckillId}",
-            consumes = "application/json",
-            produces = "application/json")
+    @PostMapping(path = "/apply/{seckillId}", consumes = "application/json", produces = "application/json")
     @Operation(summary = "添加秒杀活动申请")
-    public Result<String> addSeckillApply(
-            @PathVariable String seckillId, @RequestBody List<SeckillApplyVO> applyVos) {
+    public Result<String> addSeckillApply(@PathVariable String seckillId, @RequestBody List<SeckillApplyVO> applyVos) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         seckillApplyService.addSeckillApply(seckillId, storeId, applyVos);
         return Result.success();
@@ -104,8 +101,7 @@ public class SeckillStoreController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @DeleteMapping("/apply/{seckillId}/{id}")
     @Operation(summary = "删除秒杀活动商品")
-    public Result<String> deleteSeckillApply(
-            @PathVariable String seckillId, @PathVariable String id) {
+    public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
         OperationalJudgment.judgment(seckillApplyService.getById(id));
         seckillApplyService.removeSeckillApply(seckillId, id);
         return Result.success();

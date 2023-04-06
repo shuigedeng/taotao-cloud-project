@@ -85,12 +85,7 @@ public class CodeImgUtil {
      * @param destImagePath 二维码生成的地址
      */
     public static void encode(
-            String content,
-            int width,
-            int height,
-            String srcImagePath,
-            String destImagePath,
-            String fileName) {
+            String content, int width, int height, String srcImagePath, String destImagePath, String fileName) {
         try {
             File dir = new File(destImagePath);
             _log.error("==================" + destImagePath);
@@ -101,10 +96,7 @@ public class CodeImgUtil {
                 _log.error("==================midirsResult" + result);
             }
             // ImageIO.write 参数 1、BufferedImage 2、输出的格式 3、输出的文件
-            ImageIO.write(
-                    genBarcode(content, width, height, srcImagePath),
-                    "jpg",
-                    new File(destImagePath + fileName));
+            ImageIO.write(genBarcode(content, width, height, srcImagePath), "jpg", new File(destImagePath + fileName));
 
         } catch (Exception e) {
             _log.error("生成二维码出错", e);
@@ -123,8 +115,7 @@ public class CodeImgUtil {
      * @throws IOException
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
-    private static BufferedImage genBarcode(
-            String content, int width, int height, String srcImagePath)
+    private static BufferedImage genBarcode(String content, int width, int height, String srcImagePath)
             throws WriterException, IOException {
         // 读取源图像
         BufferedImage scaleImage = scale(srcImagePath, IMAGE_WIDTH, IMAGE_HEIGHT, false);
@@ -155,8 +146,7 @@ public class CodeImgUtil {
                         && x < halfW + IMAGE_HALF_WIDTH
                         && y > halfH - IMAGE_HALF_WIDTH
                         && y < halfH + IMAGE_HALF_WIDTH) {
-                    pixels[y * width + x] =
-                            srcPixels[x - halfW + IMAGE_HALF_WIDTH][y - halfH + IMAGE_HALF_WIDTH];
+                    pixels[y * width + x] = srcPixels[x - halfW + IMAGE_HALF_WIDTH][y - halfH + IMAGE_HALF_WIDTH];
                 }
                 // 在图片四周形成边框
                 else if ((x > halfW - IMAGE_HALF_WIDTH - FRAME_WIDTH
@@ -198,8 +188,8 @@ public class CodeImgUtil {
      * @param hasFiller 比例不对时是否需要补白：true为补白; false为不补白;
      * @throws IOException
      */
-    private static BufferedImage scale(
-            String srcImageFile, int height, int width, boolean hasFiller) throws IOException {
+    private static BufferedImage scale(String srcImageFile, int height, int width, boolean hasFiller)
+            throws IOException {
         double ratio = 0.0; // 缩放比例
 
         URL url = new URL(srcImageFile);
@@ -213,8 +203,7 @@ public class CodeImgUtil {
             } else {
                 ratio = (new Integer(width)).doubleValue() / srcImage.getWidth();
             }
-            AffineTransformOp op =
-                    new AffineTransformOp(AffineTransform.getScaleInstance(ratio, ratio), null);
+            AffineTransformOp op = new AffineTransformOp(AffineTransform.getScaleInstance(ratio, ratio), null);
             destImage = op.filter(srcImage, null);
         }
         if (hasFiller) { // 补白
@@ -254,15 +243,12 @@ public class CodeImgUtil {
      * @throws WriterException
      * @throws IOException
      */
-    public static String codeImgEncode(
-            String filePath, String fileName, String info, int width, int height)
+    public static String codeImgEncode(String filePath, String fileName, String info, int width, int height)
             throws WriterException, IOException {
         String format = "png";
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-        BitMatrix bitMatrix =
-                new MultiFormatWriter()
-                        .encode(info, BarcodeFormat.QR_CODE, width, height, hints); // 生成矩阵
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(info, BarcodeFormat.QR_CODE, width, height, hints); // 生成矩阵
         Path path = FileSystems.getDefault().getPath(filePath, fileName);
         File dir = new File(filePath);
         _log.error("==================" + filePath);
@@ -281,9 +267,7 @@ public class CodeImgUtil {
         Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         hints.put(EncodeHintType.MARGIN, 0);
-        BitMatrix bitMatrix =
-                new MultiFormatWriter()
-                        .encode(info, BarcodeFormat.QR_CODE, width, height, hints); // 生成矩阵
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(info, BarcodeFormat.QR_CODE, width, height, hints); // 生成矩阵
         bitMatrix = deleteWhite(bitMatrix);
         BufferedImage bi = MatrixToImageWriter.toBufferedImage(bitMatrix);
         bi = zoomInImage(bi, width, height);

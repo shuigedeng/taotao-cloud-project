@@ -51,14 +51,7 @@ public class Log implements Entity<Log> {
     /** 租户ID */
     private TenantId tenantId;
 
-    public Log(
-            LogId logId,
-            UserName userName,
-            String operation,
-            String method,
-            String params,
-            Long time,
-            String ip) {
+    public Log(LogId logId, UserName userName, String operation, String method, String params, Long time, String ip) {
         this.logId = logId;
         this.userName = userName;
         this.operation = operation;

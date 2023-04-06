@@ -24,7 +24,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductProducer {
 
-    @Autowired private PulsarTemplate<Product> producer;
+    @Autowired
+    private PulsarTemplate<Product> producer;
 
     public void send() throws PulsarClientException {
         producer.send(Product.PRODUCT_TOPIC, new Product("Hello world!"));

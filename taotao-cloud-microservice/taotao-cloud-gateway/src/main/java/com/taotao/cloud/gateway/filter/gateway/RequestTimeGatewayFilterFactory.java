@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.filter.gateway;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -35,57 +36,54 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactory<Config> {
-	private static final String START_TIME = "StartTime";
-	private static final String ENABLED = "enabled";
+    private static final String START_TIME = "StartTime";
+    private static final String ENABLED = "enabled";
 
-	@Override
-	public List<String> shortcutFieldOrder() {
-		return Collections.singletonList(ENABLED);
-	}
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Collections.singletonList(ENABLED);
+    }
 
-	public RequestTimeGatewayFilterFactory() {
-		super(Config.class);
-	}
+    public RequestTimeGatewayFilterFactory() {
+        super(Config.class);
+    }
 
-	@Override
-	public GatewayFilter apply(Config config) {
-		return (exchange, chain) -> {
-			if (!config.isEnabled()) {
-				return chain.filter(exchange);
-			}
-			exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
-			return chain.filter(exchange).then(
-					Mono.fromRunnable(() -> {
-						Long startTime = exchange.getAttribute(START_TIME);
-						if (Objects.nonNull(startTime)) {
-							ServerHttpRequest request = exchange.getRequest();
-							StringBuilder sb = new StringBuilder(request.getURI().getRawPath())
-									.append(" 请求时间: ")
-									.append(System.currentTimeMillis() - startTime)
-									.append("ms");
-							sb.append(" 请求参数: ").append(request.getQueryParams());
-							LogUtils.info(sb.toString());
-						}
-					})
-			);
-		};
-	}
+    @Override
+    public GatewayFilter apply(Config config) {
+        return (exchange, chain) -> {
+            if (!config.isEnabled()) {
+                return chain.filter(exchange);
+            }
+            exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
+            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+                Long startTime = exchange.getAttribute(START_TIME);
+                if (Objects.nonNull(startTime)) {
+                    ServerHttpRequest request = exchange.getRequest();
+                    StringBuilder sb = new StringBuilder(request.getURI().getRawPath())
+                            .append(" 请求时间: ")
+                            .append(System.currentTimeMillis() - startTime)
+                            .append("ms");
+                    sb.append(" 请求参数: ").append(request.getQueryParams());
+                    LogUtils.info(sb.toString());
+                }
+            }));
+        };
+    }
 
-	public static class Config {
-		/**
-		 * 控制是否开启统计
-		 */
-		private boolean enabled;
+    public static class Config {
+        /**
+         * 控制是否开启统计
+         */
+        private boolean enabled;
 
-		public Config() {
-		}
+        public Config() {}
 
-		public boolean isEnabled() {
-			return enabled;
-		}
+        public boolean isEnabled() {
+            return enabled;
+        }
 
-		public void setEnabled(boolean enabled) {
-			this.enabled = enabled;
-		}
-	}
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+    }
 }

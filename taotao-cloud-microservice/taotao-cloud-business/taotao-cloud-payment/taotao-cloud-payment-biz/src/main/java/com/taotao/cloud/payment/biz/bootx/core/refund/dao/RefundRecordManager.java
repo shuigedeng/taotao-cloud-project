@@ -41,14 +41,8 @@ public class RefundRecordManager extends BaseManager<RefundRecordMapper, RefundR
         Page<RefundRecord> mpPage = MpUtil.getMpPage(PageQuery, RefundRecord.class);
         return lambdaQuery()
                 .orderByDesc(MpBaseEntity::getId)
-                .like(
-                        Objects.nonNull(param.getPaymentId()),
-                        RefundRecord::getPaymentId,
-                        param.getPaymentId())
-                .like(
-                        Objects.nonNull(param.getBusinessId()),
-                        RefundRecord::getBusinessId,
-                        param.getBusinessId())
+                .like(Objects.nonNull(param.getPaymentId()), RefundRecord::getPaymentId, param.getPaymentId())
+                .like(Objects.nonNull(param.getBusinessId()), RefundRecord::getBusinessId, param.getBusinessId())
                 .like(Objects.nonNull(param.getTitle()), RefundRecord::getTitle, param.getTitle())
                 .page(mpPage);
     }

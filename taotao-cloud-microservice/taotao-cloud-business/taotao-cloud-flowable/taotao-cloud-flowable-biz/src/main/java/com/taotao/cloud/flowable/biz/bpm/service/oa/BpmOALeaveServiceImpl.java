@@ -49,39 +49,37 @@ public class BpmOALeaveServiceImpl implements BpmOALeaveService {
     /** OA 请假对应的流程定义 KEY */
     public static final String PROCESS_KEY = "oa_leave";
 
-    @Resource private BpmOALeaveMapper leaveMapper;
+    @Resource
+    private BpmOALeaveMapper leaveMapper;
 
-    @Resource private BpmProcessInstanceApi processInstanceApi;
+    @Resource
+    private BpmProcessInstanceApi processInstanceApi;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long createLeave(Long userId, BpmOALeaveCreateReqVO createReqVO) {
         // 插入 OA 请假单
-        long day =
-                LocalDateTimeUtil.between(createReqVO.getStartTime(), createReqVO.getEndTime())
-                        .toDays();
-        BpmOALeaveDO leave =
-                BpmOALeaveConvert.INSTANCE
-                        .convert(createReqVO)
-                        .setUserId(userId)
-                        .setDay(day)
-                        .setResult(BpmProcessInstanceResultEnum.PROCESS.getResult());
+        long day = LocalDateTimeUtil.between(createReqVO.getStartTime(), createReqVO.getEndTime())
+                .toDays();
+        BpmOALeaveDO leave = BpmOALeaveConvert.INSTANCE
+                .convert(createReqVO)
+                .setUserId(userId)
+                .setDay(day)
+                .setResult(BpmProcessInstanceResultEnum.PROCESS.getResult());
         leaveMapper.insert(leave);
 
         // 发起 BPM 流程
         Map<String, Object> processInstanceVariables = new HashMap<>();
         processInstanceVariables.put("day", day);
-        String processInstanceId =
-                processInstanceApi.createProcessInstance(
-                        userId,
-                        new BpmProcessInstanceCreateReqDTO()
-                                .setProcessDefinitionKey(PROCESS_KEY)
-                                .setVariables(processInstanceVariables)
-                                .setBusinessKey(String.valueOf(leave.getId())));
+        String processInstanceId = processInstanceApi.createProcessInstance(
+                userId,
+                new BpmProcessInstanceCreateReqDTO()
+                        .setProcessDefinitionKey(PROCESS_KEY)
+                        .setVariables(processInstanceVariables)
+                        .setBusinessKey(String.valueOf(leave.getId())));
 
         // 将工作流的编号，更新到 OA 请假单中
-        leaveMapper.updateById(
-                new BpmOALeaveDO().setId(leave.getId()).setProcessInstanceId(processInstanceId));
+        leaveMapper.updateById(new BpmOALeaveDO().setId(leave.getId()).setProcessInstanceId(processInstanceId));
         return leave.getId();
     }
 

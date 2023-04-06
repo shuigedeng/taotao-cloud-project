@@ -33,7 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SeckillDistributedServiceImpl implements ISeckillDistributedService {
 
-    @Autowired private DynamicQuery dynamicQuery;
+    @Autowired
+    private DynamicQuery dynamicQuery;
 
     @Override
     @Transactional
@@ -66,8 +67,7 @@ public class SeckillDistributedServiceImpl implements ISeckillDistributedService
                     killed.setState((short) 0);
                     killed.setCreateTime(new Timestamp(new Date().getTime()));
                     dynamicQuery.save(killed);
-                    nativeSql =
-                            "UPDATE seckill  SET number=number-1 WHERE seckill_id=? AND number>0";
+                    nativeSql = "UPDATE seckill  SET number=number-1 WHERE seckill_id=? AND number>0";
                     dynamicQuery.nativeExecuteUpdate(nativeSql, new Object[] {seckillId});
                 } else {
                     return Result.error(SeckillStatEnum.END);
@@ -103,8 +103,7 @@ public class SeckillDistributedServiceImpl implements ISeckillDistributedService
                     killed.setState((short) 0);
                     killed.setCreateTime(new Timestamp(new Date().getTime()));
                     dynamicQuery.save(killed);
-                    nativeSql =
-                            "UPDATE seckill  SET number=number-1 WHERE seckill_id=? AND number>0";
+                    nativeSql = "UPDATE seckill  SET number=number-1 WHERE seckill_id=? AND number>0";
                     dynamicQuery.nativeExecuteUpdate(nativeSql, new Object[] {seckillId});
                 } else {
                     return Result.error(SeckillStatEnum.END);
@@ -140,8 +139,7 @@ public class SeckillDistributedServiceImpl implements ISeckillDistributedService
                     killed.setState((short) 0);
                     killed.setCreateTime(new Timestamp(new Date().getTime()));
                     dynamicQuery.save(killed);
-                    nativeSql =
-                            "UPDATE seckill  SET number=number-? WHERE seckill_id=? AND number>0";
+                    nativeSql = "UPDATE seckill  SET number=number-? WHERE seckill_id=? AND number>0";
                     dynamicQuery.nativeExecuteUpdate(nativeSql, new Object[] {number, seckillId});
                 } else {
                     return Result.error(SeckillStatEnum.END);

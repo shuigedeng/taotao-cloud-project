@@ -37,8 +37,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/SalesOrder")
 public class SalesOrderController {
 
-    @Autowired private SalesOrderService salesOrderService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private SalesOrderService salesOrderService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取销售订单信息
@@ -48,8 +51,7 @@ public class SalesOrderController {
      */
     @Operation("获取销售订单信息")
     @GetMapping("/{id}")
-    public Result<SalesOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<SalesOrderInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         SalesOrderInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -65,8 +67,7 @@ public class SalesOrderController {
             SalesOrderEntity entity = salesOrderService.getInfo(id);
             List<SalesOrderEntryEntity> entityList = salesOrderService.getSalesEntryList(id);
             vo = JsonUtil.getJsonToBean(entity, SalesOrderInfoVO.class);
-            vo.setEntryList(
-                    JsonUtil.getJsonToList(entityList, SalesOrderEntryEntityInfoModel.class));
+            vo.setEntryList(JsonUtil.getJsonToList(entityList, SalesOrderEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -88,8 +89,7 @@ public class SalesOrderController {
             salesOrderService.save(sales.getId(), sales, salesEntryList);
             return Result.success(MsgCode.SU002.get());
         }
-        salesOrderService.submit(
-                sales.getId(), sales, salesEntryList, salesOrderForm.getCandidateList());
+        salesOrderService.submit(sales.getId(), sales, salesEntryList, salesOrderForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 

@@ -46,7 +46,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysLogAspect {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired private SysLogService sysLogService;
+
+    @Autowired
+    private SysLogService sysLogService;
 
     @Pointcut("@annotation(com.github.niefy.common.annotation.SysLog)")
     public void logPointCut() {}

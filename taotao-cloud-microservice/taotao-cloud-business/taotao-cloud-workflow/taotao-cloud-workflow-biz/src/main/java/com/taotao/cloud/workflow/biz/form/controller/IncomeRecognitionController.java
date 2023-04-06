@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/IncomeRecognition")
 public class IncomeRecognitionController {
 
-    @Autowired private IncomeRecognitionService incomeRecognitionService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private IncomeRecognitionService incomeRecognitionService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取收入确认分析表信息
@@ -52,17 +55,15 @@ public class IncomeRecognitionController {
      */
     @Operation("获取收入确认分析表信息")
     @GetMapping("/{id}")
-    public Result<IncomeRecognitionInfoVO> info(
-            @PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<IncomeRecognitionInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+            throws DataException {
         IncomeRecognitionInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), IncomeRecognitionInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), IncomeRecognitionInfoVO.class);
                     isData = false;
                 }
             }
@@ -82,16 +83,13 @@ public class IncomeRecognitionController {
      */
     @Operation("新建收入确认分析表")
     @PostMapping
-    public Result create(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm)
-            throws WorkFlowException {
-        IncomeRecognitionEntity entity =
-                JsonUtils.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
+    public Result create(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm) throws WorkFlowException {
+        IncomeRecognitionEntity entity = JsonUtils.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(incomeRecognitionForm.getStatus())) {
             incomeRecognitionService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        incomeRecognitionService.submit(
-                entity.getId(), entity, incomeRecognitionForm.getCandidateList());
+        incomeRecognitionService.submit(entity.getId(), entity, incomeRecognitionForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -104,12 +102,9 @@ public class IncomeRecognitionController {
      */
     @Operation("修改收入确认分析表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm,
-            @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid IncomeRecognitionForm incomeRecognitionForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        IncomeRecognitionEntity entity =
-                JsonUtils.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
+        IncomeRecognitionEntity entity = JsonUtils.getJsonToBean(incomeRecognitionForm, IncomeRecognitionEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(incomeRecognitionForm.getStatus())) {
             incomeRecognitionService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

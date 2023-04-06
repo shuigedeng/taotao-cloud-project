@@ -54,9 +54,7 @@ public class ArticleCategory extends BaseSuperEntity<ArticleCategory, Long> {
 
     public static final String TABLE_NAME = "tt_article_category";
     /** 分类名称 */
-    @Column(
-            name = "article_category_name",
-            columnDefinition = "varchar(255) not null comment '分类名称 '")
+    @Column(name = "article_category_name", columnDefinition = "varchar(255) not null comment '分类名称 '")
     private String articleCategoryName;
     /** 父分类ID */
     @Column(name = "parent_id", columnDefinition = "varchar(255) not null comment '父分类ID '")

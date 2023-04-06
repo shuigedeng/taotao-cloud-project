@@ -46,14 +46,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/kan-jia-goods")
 public class KanJiaActivityGoodsManagerController {
 
-    @Autowired private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
+    @Autowired
+    private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @PostMapping
     @Operation(summary = "添加砍价活动")
-    public Result<Object> add(
-            @RequestBody KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {
+    public Result<Object> add(@RequestBody KanjiaActivityGoodsOperationDTO kanJiaActivityGoodsOperationDTO) {
         kanJiaActivityGoodsService.add(kanJiaActivityGoodsOperationDTO);
         return Result.success();
     }
@@ -72,8 +72,7 @@ public class KanJiaActivityGoodsManagerController {
     @GetMapping("/{id}")
     @Operation(summary = "获取积分商品详情")
     public Result<KanjiaActivityGoodsDTO> getPointsGoodsDetail(@PathVariable("id") String goodsId) {
-        KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO =
-                kanJiaActivityGoodsService.getKanjiaGoodsDetail(goodsId);
+        KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO = kanJiaActivityGoodsService.getKanjiaGoodsDetail(goodsId);
         return Result.success(kanJiaActivityGoodsDTO);
     }
 
@@ -81,8 +80,7 @@ public class KanJiaActivityGoodsManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @PutMapping
     @Operation(summary = "修改砍价商品")
-    public Result<Boolean> updatePointsGoods(
-            @RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
+    public Result<Boolean> updatePointsGoods(@RequestBody KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {
         kanJiaActivityGoodsService.updateKanjiaActivityGoods(kanJiaActivityGoodsDTO);
         return Result.success();
     }

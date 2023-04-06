@@ -113,13 +113,9 @@ public final class HerodotusRequestMatcher implements RequestMatcher, Serializab
             // If the pattern ends with {@code /**} and has no other wildcards or path
             // variables, then optimize to a sub-path match
             if (pattern.endsWith(MATCH_ALL)
-                    && (pattern.indexOf('?') == -1
-                            && pattern.indexOf('{') == -1
-                            && pattern.indexOf('}') == -1)
+                    && (pattern.indexOf('?') == -1 && pattern.indexOf('{') == -1 && pattern.indexOf('}') == -1)
                     && pattern.indexOf("*") == pattern.length() - 2) {
-                this.matcher =
-                        new SubPathMatcher(
-                                pattern.substring(0, pattern.length() - 3), caseSensitive);
+                this.matcher = new SubPathMatcher(pattern.substring(0, pattern.length() - 3), caseSensitive);
             } else {
                 this.matcher = new SpringAntMatcher(pattern, caseSensitive);
             }
@@ -308,8 +304,7 @@ public final class HerodotusRequestMatcher implements RequestMatcher, Serializab
             if (!this.caseSensitive) {
                 path = path.toLowerCase();
             }
-            return path.startsWith(this.subPath)
-                    && (path.length() == this.length || path.charAt(this.length) == '/');
+            return path.startsWith(this.subPath) && (path.length() == this.length || path.charAt(this.length) == '/');
         }
     }
 }

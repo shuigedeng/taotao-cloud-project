@@ -30,7 +30,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ThreadPoolUtils {
 
-    @Autowired private ThreadPoolExecutorShutdownDefinition shutdownDefinition;
+    @Autowired
+    private ThreadPoolExecutorShutdownDefinition shutdownDefinition;
 
     private static final String SOURCE_NAME = "austin";
 

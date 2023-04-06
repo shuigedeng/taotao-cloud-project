@@ -30,8 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-public class PayOrderAllServiceImpl extends ServiceImpl<PayOrderAllMapper, PayOrderAll>
-        implements PayOrderAllService {
+public class PayOrderAllServiceImpl extends ServiceImpl<PayOrderAllMapper, PayOrderAll> implements PayOrderAllService {
 
     private final IDGenerate defaultSnowflakeIDGenerate;
 

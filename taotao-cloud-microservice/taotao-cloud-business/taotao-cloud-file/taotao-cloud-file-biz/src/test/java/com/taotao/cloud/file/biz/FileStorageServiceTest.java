@@ -31,7 +31,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class FileStorageServiceTest {
 
-    @Autowired private FileStorageService fileStorageService;
+    @Autowired
+    private FileStorageService fileStorageService;
 
     /** 单独对文件上传进行测试 */
     @Test
@@ -134,27 +135,19 @@ class FileStorageServiceTest {
         FileInfo fileInfo = uploadPretreatment.upload();
         Assert.notNull(fileInfo, "文件上传失败！");
 
-        byte[] bytes =
-                fileStorageService
-                        .download(fileInfo)
-                        .setProgressMonitor(
-                                (progressSize, allSize) ->
-                                        log.info(
-                                                "文件下载进度：{} {}%",
-                                                progressSize, progressSize * 100 / allSize))
-                        .bytes();
+        byte[] bytes = fileStorageService
+                .download(fileInfo)
+                .setProgressMonitor((progressSize, allSize) ->
+                        log.info("文件下载进度：{} {}%", progressSize, progressSize * 100 / allSize))
+                .bytes();
         Assert.notNull(bytes, "文件下载失败！");
         log.info("文件下载成功，文件大小：{}", bytes.length);
 
-        byte[] thBytes =
-                fileStorageService
-                        .downloadTh(fileInfo)
-                        .setProgressMonitor(
-                                (progressSize, allSize) ->
-                                        log.info(
-                                                "缩略图文件下载进度：{} {}%",
-                                                progressSize, progressSize * 100 / allSize))
-                        .bytes();
+        byte[] thBytes = fileStorageService
+                .downloadTh(fileInfo)
+                .setProgressMonitor((progressSize, allSize) ->
+                        log.info("缩略图文件下载进度：{} {}%", progressSize, progressSize * 100 / allSize))
+                .bytes();
         Assert.notNull(thBytes, "缩略图文件下载失败！");
         log.info("缩略图文件下载成功，文件大小：{}", thBytes.length);
     }

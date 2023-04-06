@@ -33,13 +33,17 @@ import org.springframework.stereotype.Service;
 
 /** 报价审批表 */
 @Service
-public class QuotationApprovalServiceImpl
-        extends ServiceImpl<QuotationApprovalMapper, QuotationApprovalEntity>
+public class QuotationApprovalServiceImpl extends ServiceImpl<QuotationApprovalMapper, QuotationApprovalEntity>
         implements QuotationApprovalService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public QuotationApprovalEntity getInfo(String id) {
@@ -79,8 +83,7 @@ public class QuotationApprovalServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, QuotationApprovalEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, QuotationApprovalEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -112,10 +115,8 @@ public class QuotationApprovalServiceImpl
 
     @Override
     public void data(String id, String data) {
-        QuotationApprovalForm quotationApprovalForm =
-                JsonUtils.getJsonToBean(data, QuotationApprovalForm.class);
-        QuotationApprovalEntity entity =
-                JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
+        QuotationApprovalForm quotationApprovalForm = JsonUtils.getJsonToBean(data, QuotationApprovalForm.class);
+        QuotationApprovalEntity entity = JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

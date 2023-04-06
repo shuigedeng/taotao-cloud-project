@@ -43,7 +43,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class StreamFunctionService {
 
-    @Autowired private StreamBridge bridge;
+    @Autowired
+    private StreamBridge bridge;
 
     public void sendRocketmqExample() {
         boolean s1 = bridge.send("example-out-0", "topic example");
@@ -56,8 +57,9 @@ public class StreamFunctionService {
         Map<String, Object> headers = new HashMap<>();
         headers.put(MessageConst.PROPERTY_TAGS, "s1");
         MessageHeaders messageHeaders = new MessageHeaders(headers);
-        Message<String> message =
-                MessageBuilder.withPayload(payload).copyHeadersIfAbsent(messageHeaders).build();
+        Message<String> message = MessageBuilder.withPayload(payload)
+                .copyHeadersIfAbsent(messageHeaders)
+                .build();
         boolean s3 = bridge.send("demo1-out-0", message);
         LogUtils.info("demo1 send msg:{}", s3);
     }
@@ -68,8 +70,9 @@ public class StreamFunctionService {
         // 延迟消费 延迟10秒
         headers.put(MessageConst.PROPERTY_DELAY_TIME_LEVEL, "3");
         MessageHeaders messageHeaders = new MessageHeaders(headers);
-        Message<String> message =
-                MessageBuilder.withPayload(payload).copyHeadersIfAbsent(messageHeaders).build();
+        Message<String> message = MessageBuilder.withPayload(payload)
+                .copyHeadersIfAbsent(messageHeaders)
+                .build();
         boolean s3 = bridge.send("test1-out-0", message);
         LogUtils.info("test send msg:{}", s3);
     }
@@ -121,33 +124,27 @@ public class StreamFunctionService {
     @Bean
     public Consumer<Message<String>> demo() {
         return message -> {
-            LogUtils.info(
-                    "demo1获取消息tag:{}",
-                    message.getHeaders().get(RocketMQHeaders.PREFIX + RocketMQHeaders.TAGS));
+            LogUtils.info("demo1获取消息tag:{}", message.getHeaders().get(RocketMQHeaders.PREFIX + RocketMQHeaders.TAGS));
             LogUtils.info("demo1接收数据:{}", message.getPayload());
         };
     }
 
     @Bean
     public Function<Flux<Message<String>>, Mono<Void>> example() {
-        return flux ->
-                flux.map(
-                                message -> {
-                                    LogUtils.info("example接收数据:{}", message.getPayload());
-                                    return message;
-                                })
-                        .then();
+        return flux -> flux.map(message -> {
+                    LogUtils.info("example接收数据:{}", message.getPayload());
+                    return message;
+                })
+                .then();
     }
 
     @Bean
     public Consumer<Flux<Message<String>>> test() {
-        return flux ->
-                flux.map(
-                                message -> {
-                                    LogUtils.info("test接收数据:{}", message.getPayload());
-                                    return message;
-                                })
-                        .subscribe();
+        return flux -> flux.map(message -> {
+                    LogUtils.info("test接收数据:{}", message.getPayload());
+                    return message;
+                })
+                .subscribe();
     }
 
     // @Bean

@@ -37,13 +37,17 @@ import org.springframework.stereotype.Service;
  * @date 2019年9月29日 上午9:18
  */
 @Service
-public class WarehouseReceiptServiceImpl
-        extends ServiceImpl<WarehouseReceiptMapper, WarehouseReceiptEntity>
+public class WarehouseReceiptServiceImpl extends ServiceImpl<WarehouseReceiptMapper, WarehouseReceiptEntity>
         implements WarehouseReceiptService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private WarehouseEntryService warehouseEntryService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private WarehouseEntryService warehouseEntryService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public List<WarehouseEntryEntity> getWarehouseEntryList(String id) {
@@ -64,10 +68,7 @@ public class WarehouseReceiptServiceImpl
 
     @Override
     @DSTransactional
-    public void save(
-            String id,
-            WarehouseReceiptEntity entity,
-            List<WarehouseEntryEntity> warehouseEntryEntityList)
+    public void save(String id, WarehouseReceiptEntity entity, List<WarehouseEntryEntity> warehouseEntryEntityList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -155,14 +156,10 @@ public class WarehouseReceiptServiceImpl
 
     @Override
     public void data(String id, String data) {
-        WarehouseReceiptForm warehouseReceiptForm =
-                JsonUtil.getJsonToBean(data, WarehouseReceiptForm.class);
-        WarehouseReceiptEntity entity =
-                JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
+        WarehouseReceiptForm warehouseReceiptForm = JsonUtil.getJsonToBean(data, WarehouseReceiptForm.class);
+        WarehouseReceiptEntity entity = JsonUtil.getJsonToBean(warehouseReceiptForm, WarehouseReceiptEntity.class);
         List<WarehouseReceiptEntityInfoModel> entryList =
-                warehouseReceiptForm.getEntryList() != null
-                        ? warehouseReceiptForm.getEntryList()
-                        : new ArrayList<>();
+                warehouseReceiptForm.getEntryList() != null ? warehouseReceiptForm.getEntryList() : new ArrayList<>();
         List<WarehouseEntryEntity> warehouseEntryEntityList =
                 JsonUtil.getJsonToList(entryList, WarehouseEntryEntity.class);
         entity.setId(id);

@@ -57,8 +57,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class CommodityServiceImpl
-        extends BaseSuperServiceImpl<
-                ICommodityMapper, Commodity, CommodityRepository, ICommodityRepository, Long>
+        extends BaseSuperServiceImpl<ICommodityMapper, Commodity, CommodityRepository, ICommodityRepository, Long>
         implements ICommodityService {
 
     private final WechatLivePlayerUtil wechatLivePlayerUtil;
@@ -98,10 +97,7 @@ public class CommodityServiceImpl
         }
 
         // 是否已添加规格商品
-        if (this.count(
-                        new LambdaQueryWrapper<Commodity>()
-                                .eq(Commodity::getSkuId, commodity.getSkuId()))
-                > 0) {
+        if (this.count(new LambdaQueryWrapper<Commodity>().eq(Commodity::getSkuId, commodity.getSkuId())) > 0) {
             throw new BusinessException(goodsSku.getGoodsName() + " 已添加规格商品，无法重复增加");
         }
     }
@@ -110,19 +106,15 @@ public class CommodityServiceImpl
     public Boolean deleteCommodity(Long goodsId) {
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
         if (currentUser == null
-                || (currentUser.getType().equals(UserEnum.STORE.getCode())
-                        && currentUser.getStoreId() == null)) {
+                || (currentUser.getType().equals(UserEnum.STORE.getCode()) && currentUser.getStoreId() == null)) {
             throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
 
         JSONObject json = wechatLivePlayerUtil.deleteGoods(goodsId);
         if ("0".equals(json.getStr("errcode"))) {
-            return this.remove(
-                    new LambdaQueryWrapper<Commodity>()
-                            .eq(Commodity::getLiveGoodsId, goodsId)
-                            .eq(
-                                    Commodity::getStoreId,
-                                    SecurityUtils.getCurrentUser().getStoreId()));
+            return this.remove(new LambdaQueryWrapper<Commodity>()
+                    .eq(Commodity::getLiveGoodsId, goodsId)
+                    .eq(Commodity::getStoreId, SecurityUtils.getCurrentUser().getStoreId()));
         }
         return false;
     }
@@ -136,22 +128,19 @@ public class CommodityServiceImpl
             // 同步状态
             JSONObject json = wechatLivePlayerUtil.getGoodsWareHouse(goodsIdList);
             // 修改状态
-            List<CommodityDTO> commodityDTOList =
-                    JSONUtil.toList((JSONArray) json.get("goods"), CommodityDTO.class);
+            List<CommodityDTO> commodityDTOList = JSONUtil.toList((JSONArray) json.get("goods"), CommodityDTO.class);
             for (CommodityDTO commodityDTO : commodityDTOList) {
                 // 修改审核状态
-                this.update(
-                        new LambdaUpdateWrapper<Commodity>()
-                                .eq(Commodity::getLiveGoodsId, commodityDTO.getGoodsId())
-                                .set(Commodity::getAuditStatus, commodityDTO.getAuditStatus()));
+                this.update(new LambdaUpdateWrapper<Commodity>()
+                        .eq(Commodity::getLiveGoodsId, commodityDTO.getGoodsId())
+                        .set(Commodity::getAuditStatus, commodityDTO.getAuditStatus()));
             }
         }
         return true;
     }
 
     @Override
-    public IPage<CommoditySkuVO> commodityList(
-            PageQuery PageQuery, String name, String auditStatus) {
+    public IPage<CommoditySkuVO> commodityList(PageQuery PageQuery, String name, String auditStatus) {
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
 
         return this.baseMapper.commodityVOList(

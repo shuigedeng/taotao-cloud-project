@@ -126,8 +126,7 @@ public class WeChatPayStrategy extends AbsPayStrategy {
     @Override
     public void doAsyncSuccessHandler(Map<String, String> map) {
         String tradeNo = map.get(WeChatPayCode.OUT_TRADE_NO);
-        weChatPaymentService.updateSyncSuccess(
-                this.getPayment().getId(), this.getPayMode(), tradeNo);
+        weChatPaymentService.updateSyncSuccess(this.getPayment().getId(), this.getPayMode(), tradeNo);
     }
 
     /** 异步支付失败 */
@@ -159,8 +158,7 @@ public class WeChatPayStrategy extends AbsPayStrategy {
         this.initWeChatPayConfig();
         weChatPaymentService.updatePayRefund(
                 this.getPayment().getId(), this.getPayMode().getAmount());
-        paymentService.updateRefundSuccess(
-                this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.WECHAT);
+        paymentService.updateRefundSuccess(this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.WECHAT);
     }
 
     /** 异步支付单与支付网关进行状态比对 */
@@ -174,12 +172,8 @@ public class WeChatPayStrategy extends AbsPayStrategy {
     /** 初始化微信支付 */
     private void initWeChatPayConfig() {
         // 检查并获取微信支付配置
-        this.weChatPayConfig =
-                Optional.ofNullable(this.weChatPayConfig)
-                        .orElse(
-                                weChatPayConfigManager
-                                        .findEnable()
-                                        .orElseThrow(() -> new PayFailureException("支付配置不存在")));
+        this.weChatPayConfig = Optional.ofNullable(this.weChatPayConfig)
+                .orElse(weChatPayConfigManager.findEnable().orElseThrow(() -> new PayFailureException("支付配置不存在")));
         WeChatPayConfigService.initApiConfig(weChatPayConfig);
         ;
     }

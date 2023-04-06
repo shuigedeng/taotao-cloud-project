@@ -101,8 +101,7 @@ public class AfterSaleController {
             String remark,
             BigDecimal actualRefundPrice) {
 
-        return Result.success(
-                afterSaleService.review(afterSaleSn, serviceStatus, remark, actualRefundPrice));
+        return Result.success(afterSaleService.review(afterSaleSn, serviceStatus, remark, actualRefundPrice));
     }
 
     @Operation(summary = "卖家确认收货", description = "卖家确认收货")

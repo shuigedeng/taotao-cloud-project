@@ -70,32 +70,19 @@ public class OAuth2ExtendController {
             requestBody =
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(mediaType = "application/x-www-form-urlencoded")),
-            responses = {
-                @ApiResponse(
-                        description = "是否成功",
-                        content = @Content(mediaType = "application/json"))
-            })
+            responses = {@ApiResponse(description = "是否成功", content = @Content(mediaType = "application/json"))})
     @Parameters({
         @Parameter(name = "accessToken", required = true, description = "Access Token"),
-        @Parameter(
-                name = "Authorization",
-                in = ParameterIn.HEADER,
-                required = true,
-                description = "Basic Token"),
+        @Parameter(name = "Authorization", in = ParameterIn.HEADER, required = true, description = "Basic Token"),
     })
     @PutMapping("/sign-out")
     public Result<String> signOut(
-            @RequestParam(name = "accessToken") @NotBlank String accessToken,
-            HttpServletRequest request) {
-        OAuth2Authorization authorization =
-                authorizationService.findByToken(accessToken, OAuth2TokenType.ACCESS_TOKEN);
+            @RequestParam(name = "accessToken") @NotBlank String accessToken, HttpServletRequest request) {
+        OAuth2Authorization authorization = authorizationService.findByToken(accessToken, OAuth2TokenType.ACCESS_TOKEN);
         if (ObjectUtils.isNotEmpty(authorization)) {
             authorizationService.remove(authorization);
             complianceService.save(
-                    authorization.getPrincipalName(),
-                    authorization.getRegisteredClientId(),
-                    "退出系统",
-                    request);
+                    authorization.getPrincipalName(), authorization.getRegisteredClientId(), "退出系统", request);
             accountLockService.releaseFromCache(authorization.getPrincipalName());
         }
         return Result.success("注销成功");

@@ -54,17 +54,13 @@ public class VoucherService {
         List<Voucher> vouchers = new ArrayList<>(count);
         long batchNo = IdUtil.getSnowflakeNextId();
         for (int i = 0; i < count; i++) {
-            Voucher voucher =
-                    new Voucher()
-                            .setCardNo(
-                                    'V'
-                                            + IdUtil.getSnowflakeNextIdStr()
-                                            + RandomUtil.randomNumbers(2))
-                            .setBatchNo(batchNo)
-                            .setBalance(param.getFaceValue())
-                            .setFaceValue(param.getFaceValue())
-                            .setEnduring(param.getEnduring())
-                            .setStatus(param.getStatus());
+            Voucher voucher = new Voucher()
+                    .setCardNo('V' + IdUtil.getSnowflakeNextIdStr() + RandomUtil.randomNumbers(2))
+                    .setBatchNo(batchNo)
+                    .setBalance(param.getFaceValue())
+                    .setFaceValue(param.getFaceValue())
+                    .setEnduring(param.getEnduring())
+                    .setStatus(param.getStatus());
             if (Objects.equals(param.getEnduring(), Boolean.FALSE)) {
                 voucher.setStartTime(param.getStartTime()).setEndTime(param.getEndTime());
             }
@@ -72,16 +68,13 @@ public class VoucherService {
         }
         voucherManager.saveAll(vouchers);
         // 日志
-        List<VoucherLog> voucherLogs =
-                vouchers.stream()
-                        .map(
-                                voucher ->
-                                        new VoucherLog()
-                                                .setType(VoucherCode.LOG_ACTIVE)
-                                                .setAmount(voucher.getBalance())
-                                                .setVoucherId(voucher.getId())
-                                                .setVoucherNo(voucher.getCardNo()))
-                        .collect(Collectors.toList());
+        List<VoucherLog> voucherLogs = vouchers.stream()
+                .map(voucher -> new VoucherLog()
+                        .setType(VoucherCode.LOG_ACTIVE)
+                        .setAmount(voucher.getBalance())
+                        .setVoucherId(voucher.getId())
+                        .setVoucherNo(voucher.getCardNo()))
+                .collect(Collectors.toList());
         voucherLogManager.saveAll(voucherLogs);
     }
 

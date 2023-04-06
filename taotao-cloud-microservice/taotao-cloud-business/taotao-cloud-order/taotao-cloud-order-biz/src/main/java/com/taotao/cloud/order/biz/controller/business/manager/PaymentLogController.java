@@ -54,7 +54,6 @@ public class PaymentLogController {
     @GetMapping("/tree")
     public Result<IPage<PaymentLogVO>> getByPage(Order order, SearchVO searchVo) {
         return Result.success(
-                orderService.queryPaymentLogs(
-                        PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
+                orderService.queryPaymentLogs(PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
     }
 }

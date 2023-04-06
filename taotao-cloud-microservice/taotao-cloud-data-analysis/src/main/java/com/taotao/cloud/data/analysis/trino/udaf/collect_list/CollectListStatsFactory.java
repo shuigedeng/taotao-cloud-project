@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.collect_list;
 
 import io.trino.array.ObjectBigArray;
@@ -26,87 +27,85 @@ import io.trino.spi.function.GroupedAccumulatorState;
  * @version 2022.04
  * @since 2020/10/29 18:06
  */
-public class CollectListStatsFactory implements
-	AccumulatorStateFactory<CollectListAggregationFunctions.CollectState> {
+public class CollectListStatsFactory implements AccumulatorStateFactory<CollectListAggregationFunctions.CollectState> {
 
-	@Override
-	public CollectListAggregationFunctions.CollectState createSingleState() {
-		return new SingleState();
-	}
+    @Override
+    public CollectListAggregationFunctions.CollectState createSingleState() {
+        return new SingleState();
+    }
 
-	//@Override
-	public Class<? extends CollectListAggregationFunctions.CollectState> getSingleStateClass() {
-		return SingleState.class;
-	}
+    // @Override
+    public Class<? extends CollectListAggregationFunctions.CollectState> getSingleStateClass() {
+        return SingleState.class;
+    }
 
-	@Override
-	public CollectListAggregationFunctions.CollectState createGroupedState() {
-		return new GroupState();
-	}
+    @Override
+    public CollectListAggregationFunctions.CollectState createGroupedState() {
+        return new GroupState();
+    }
 
-	//@Override
-	public Class<? extends CollectListAggregationFunctions.CollectState> getGroupedStateClass() {
-		return GroupState.class;
-	}
+    // @Override
+    public Class<? extends CollectListAggregationFunctions.CollectState> getGroupedStateClass() {
+        return GroupState.class;
+    }
 
-	public static class GroupState implements GroupedAccumulatorState,
-		CollectListAggregationFunctions.CollectState {
+    public static class GroupState implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
 
-		private final ObjectBigArray<CollectListStats> collectStatsList = new ObjectBigArray<>();
-		private long size;
-		private long groupId;
+        private final ObjectBigArray<CollectListStats> collectStatsList = new ObjectBigArray<>();
+        private long size;
+        private long groupId;
 
-		@Override
-		public void setGroupId(long groupId) {
-			this.groupId = groupId;
-		}
+        @Override
+        public void setGroupId(long groupId) {
+            this.groupId = groupId;
+        }
 
-		@Override
-		public void ensureCapacity(long size) {
-			collectStatsList.ensureCapacity(size);
-		}
+        @Override
+        public void ensureCapacity(long size) {
+            collectStatsList.ensureCapacity(size);
+        }
 
-		@Override
-		public CollectListStats get() {
-			return collectStatsList.get(groupId);
-		}
+        @Override
+        public CollectListStats get() {
+            return collectStatsList.get(groupId);
+        }
 
-		@Override
-		public void set(CollectListStats value) {
-			CollectListStats previous = get();
-			if (previous != null) {
-				size -= previous.estimatedInMemorySize();
-			}
-			//collectStatsList.set(groupId, value);
-			size += value.estimatedInMemorySize();
-		}
+        @Override
+        public void set(CollectListStats value) {
+            CollectListStats previous = get();
+            if (previous != null) {
+                size -= previous.estimatedInMemorySize();
+            }
+            // collectStatsList.set(groupId, value);
+            size += value.estimatedInMemorySize();
+        }
 
-		@Override
-		public long getEstimatedSize() {
-			return size + collectStatsList.sizeOf();
-		}
-	}
+        @Override
+        public long getEstimatedSize() {
+            return size + collectStatsList.sizeOf();
+        }
+    }
 
-	public static class SingleState implements CollectListAggregationFunctions.CollectState {
+    public static class SingleState implements CollectListAggregationFunctions.CollectState {
 
-		private CollectListStats stats;
+        private CollectListStats stats;
 
-		@Override
-		public CollectListStats get() {
-			return stats;
-		}
+        @Override
+        public CollectListStats get() {
+            return stats;
+        }
 
-		@Override
-		public void set(CollectListStats value) {
-			stats = value;
-		}
+        @Override
+        public void set(CollectListStats value) {
+            stats = value;
+        }
 
-		@Override
-		public long getEstimatedSize() {
-			if (stats == null) {
-				return 0;
-			}
-			return stats.estimatedInMemorySize();
-		}
-	}
+        @Override
+        public long getEstimatedSize() {
+            if (stats == null) {
+                return 0;
+            }
+            return stats.estimatedInMemorySize();
+        }
+    }
 }

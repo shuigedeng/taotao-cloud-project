@@ -62,16 +62,14 @@ public class WxJsapi extends WxpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
 
         WxJsapiOrderRQ bizRQ = (WxJsapiOrderRQ) rq;
 
         WxPayUnifiedOrderRequest req = buildUnifiedOrderRequest(payOrder, mchAppConfigContext);
         req.setTradeType(WxPayConstants.TradeType.JSAPI);
-        if (mchAppConfigContext.isIsvsubMch()
-                && StringUtils.isNotBlank(req.getSubAppId())) { // 特约商户 && 传了子商户appId
+        if (mchAppConfigContext.isIsvsubMch() && StringUtils.isNotBlank(req.getSubAppId())) { // 特约商户 && 传了子商户appId
             req.setSubOpenid(bizRQ.getOpenid()); // 用户在子商户appid下的唯一标识
         } else {
             req.setOpenid(bizRQ.getOpenid());
@@ -85,8 +83,7 @@ public class WxJsapi extends WxpayPaymentService {
         // 调起上游接口：
         // 1. 如果抛异常，则订单状态为： 生成状态，此时没有查单处理操作。 订单将超时关闭
         // 2. 接口调用成功， 后续异常需进行捕捉， 如果 逻辑代码出现异常则需要走完正常流程，此时订单状态为： 支付中， 需要查单处理。
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
         WxPayService wxPayService = wxServiceWrapper.getWxPayService();
         try {
             WxPayMpOrderResult payResult = wxPayService.createOrder(req);

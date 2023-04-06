@@ -46,9 +46,6 @@ public class PayNotifyRecordService {
 
     /** 根据id查询 */
     public PayNotifyRecordDto findById(Long id) {
-        return payNotifyRecordManager
-                .findById(id)
-                .map(PayNotifyRecord::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return payNotifyRecordManager.findById(id).map(PayNotifyRecord::toDto).orElseThrow(DataNotExistException::new);
     }
 }

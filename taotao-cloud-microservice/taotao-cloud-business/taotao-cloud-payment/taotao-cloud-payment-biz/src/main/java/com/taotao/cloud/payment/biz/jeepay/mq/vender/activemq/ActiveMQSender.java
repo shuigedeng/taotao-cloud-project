@@ -37,9 +37,11 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.ACTIVE_MQ)
 public class ActiveMQSender implements IMQSender {
 
-    @Autowired private ActiveMQConfig activeMQConfig;
+    @Autowired
+    private ActiveMQConfig activeMQConfig;
 
-    @Autowired private JmsTemplate jmsTemplate;
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     @Override
     public void send(AbstractMQ mqModel) {
@@ -48,14 +50,12 @@ public class ActiveMQSender implements IMQSender {
 
     @Override
     public void send(AbstractMQ mqModel, int delay) {
-        jmsTemplate.send(
-                activeMQConfig.getDestination(mqModel),
-                session -> {
-                    TextMessage tm = session.createTextMessage(mqModel.toMessage());
-                    tm.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, delay * 1000);
-                    tm.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_PERIOD, 1 * 1000);
-                    tm.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_REPEAT, 1);
-                    return tm;
-                });
+        jmsTemplate.send(activeMQConfig.getDestination(mqModel), session -> {
+            TextMessage tm = session.createTextMessage(mqModel.toMessage());
+            tm.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, delay * 1000);
+            tm.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_PERIOD, 1 * 1000);
+            tm.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_REPEAT, 1);
+            return tm;
+        });
     }
 }

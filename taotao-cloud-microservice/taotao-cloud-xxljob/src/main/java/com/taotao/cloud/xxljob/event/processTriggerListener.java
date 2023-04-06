@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.xxljob.event;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
@@ -46,95 +47,95 @@ import org.springframework.stereotype.Component;
 @Component
 public class processTriggerListener {
 
-	@Autowired
-	private DingerSender dingerSender;
-	@Autowired
-	private MailProperties mailProperties;
+    @Autowired
+    private DingerSender dingerSender;
 
-	@Async
-	@EventListener(ProcessTriggerEvent.class)
-	public void processTriggerEventListener(ProcessTriggerEvent event) {
-		XxlJobLog xxlJobLog = event.getXxlJobLog();
-		XxlJobInfo jobInfo = event.getJobInfo();
-		long time = event.getTime();
+    @Autowired
+    private MailProperties mailProperties;
 
-		sendDingDing(xxlJobLog, jobInfo, time);
-		sendEmail(xxlJobLog, jobInfo, time);
-	}
+    @Async
+    @EventListener(ProcessTriggerEvent.class)
+    public void processTriggerEventListener(ProcessTriggerEvent event) {
+        XxlJobLog xxlJobLog = event.getXxlJobLog();
+        XxlJobInfo jobInfo = event.getJobInfo();
+        long time = event.getTime();
 
-	private void sendDingDing(XxlJobLog jobLog, XxlJobInfo info, long time) {
-		Map<String, Object> data = new HashMap<>();
-		data.put("执行日志信息", jobLog);
-		data.put("执行job信息", info);
-		data.put("执行时间", time);
+        sendDingDing(xxlJobLog, jobInfo, time);
+        sendEmail(xxlJobLog, jobInfo, time);
+    }
 
-		String jsonData = JsonUtils.toJSONString(data);
+    private void sendDingDing(XxlJobLog jobLog, XxlJobInfo info, long time) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("执行日志信息", jobLog);
+        data.put("执行job信息", info);
+        data.put("执行时间", time);
 
-		dingerSender.send(MessageSubType.TEXT, DingerRequest.request(jsonData));
-	}
+        String jsonData = JsonUtils.toJSONString(data);
 
-	private void sendEmail(XxlJobLog jobLog, XxlJobInfo info, long time) {
-		// alarmContent
-		String alarmContent = "Job LogId=" + jobLog.getId();
-		alarmContent += "<br>TriggerMsg=<br>" + jobLog.getTriggerMsg();
-		alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
+        dingerSender.send(MessageSubType.TEXT, DingerRequest.request(jsonData));
+    }
 
-		XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao()
-			.load(info.getJobGroup());
-		String title = "xxljob执行信息监控";
-		String content = MessageFormat.format(loadEmailJobAlarmTemplate(),
-			group != null ? group.getTitle() : "null",
-			info.getId(),
-			info.getJobDesc(),
-			time,
-			jobLog.getTriggerCode() == ReturnT.SUCCESS_CODE ? "执行成功" : "执行失败",
-			alarmContent);
+    private void sendEmail(XxlJobLog jobLog, XxlJobInfo info, long time) {
+        // alarmContent
+        String alarmContent = "Job LogId=" + jobLog.getId();
+        alarmContent += "<br>TriggerMsg=<br>" + jobLog.getTriggerMsg();
+        alarmContent += "<br>HandleCode=" + jobLog.getHandleMsg();
 
-		// make mail
-		try {
-			MimeMessage mimeMessage = XxlJobAdminConfig.getAdminConfig().getMailSender()
-				.createMimeMessage();
+        XxlJobGroup group =
+                XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao().load(info.getJobGroup());
+        String title = "xxljob执行信息监控";
+        String content = MessageFormat.format(
+                loadEmailJobAlarmTemplate(),
+                group != null ? group.getTitle() : "null",
+                info.getId(),
+                info.getJobDesc(),
+                time,
+                jobLog.getTriggerCode() == ReturnT.SUCCESS_CODE ? "执行成功" : "执行失败",
+                alarmContent);
 
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-			helper.setFrom(mailProperties.getUsername());
-			helper.setTo("981376577@qq.com");
-			helper.setSubject(title);
-			helper.setText(content, true);
+        // make mail
+        try {
+            MimeMessage mimeMessage =
+                    XxlJobAdminConfig.getAdminConfig().getMailSender().createMimeMessage();
 
-			XxlJobAdminConfig.getAdminConfig().getMailSender().send(mimeMessage);
-		} catch (Exception e) {
-			LogUtils.error(">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}",
-				jobLog.getId(), e);
-		}
-	}
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setFrom(mailProperties.getUsername());
+            helper.setTo("981376577@qq.com");
+            helper.setSubject(title);
+            helper.setText(content, true);
 
-	/**
-	 * load email job alarm template
-	 */
-	private static String loadEmailJobAlarmTemplate() {
-		return "<h5>" + "任务执行信息" + "：</span>" +
-			"<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse; width:80%;\" >\n"
-			+
-			"   <thead style=\"font-weight: bold;color: #ffffff;background-color: #ff8c00;\" >" +
-			"      <tr>\n" +
-			"         <td width=\"20%\" >" + "执行器名称" + "</td>\n" +
-			"         <td width=\"10%\" >" + "任务ID" + "</td>\n" +
-			"         <td width=\"10%\" >" + "任务描述" + "</td>\n" +
-			"         <td width=\"10%\" >" + "执行时间(毫秒)" + "</td>\n" +
-			"         <td width=\"10%\" >" + "执行状态" + "</td>\n" +
-			"         <td width=\"40%\" >" + "执行详细信息" + "</td>\n" +
-			"      </tr>\n" +
-			"   </thead>\n" +
-			"   <tbody>\n" +
-			"      <tr>\n" +
-			"         <td>{0}</td>\n" +
-			"         <td>{1}</td>\n" +
-			"         <td>{2}</td>\n" +
-			"         <td>{3}</td>\n" +
-			"         <td>{4}</td>\n" +
-			"         <td>{5}</td>\n" +
-			"      </tr>\n" +
-			"   </tbody>\n" +
-			"</table>";
-	}
+            XxlJobAdminConfig.getAdminConfig().getMailSender().send(mimeMessage);
+        } catch (Exception e) {
+            LogUtils.error(">>>>>>>>>>> xxl-job, job fail alarm email send error, JobLogId:{}", jobLog.getId(), e);
+        }
+    }
+
+    /**
+     * load email job alarm template
+     */
+    private static String loadEmailJobAlarmTemplate() {
+        return "<h5>" + "任务执行信息" + "：</span>"
+                + "<table border=\"1\" cellpadding=\"3\" style=\"border-collapse:collapse; width:80%;\" >\n"
+                + "   <thead style=\"font-weight: bold;color: #ffffff;background-color: #ff8c00;\" >"
+                + "      <tr>\n"
+                + "         <td width=\"20%\" >"
+                + "执行器名称" + "</td>\n" + "         <td width=\"10%\" >"
+                + "任务ID" + "</td>\n" + "         <td width=\"10%\" >"
+                + "任务描述" + "</td>\n" + "         <td width=\"10%\" >"
+                + "执行时间(毫秒)" + "</td>\n" + "         <td width=\"10%\" >"
+                + "执行状态" + "</td>\n" + "         <td width=\"40%\" >"
+                + "执行详细信息" + "</td>\n" + "      </tr>\n"
+                + "   </thead>\n"
+                + "   <tbody>\n"
+                + "      <tr>\n"
+                + "         <td>{0}</td>\n"
+                + "         <td>{1}</td>\n"
+                + "         <td>{2}</td>\n"
+                + "         <td>{3}</td>\n"
+                + "         <td>{4}</td>\n"
+                + "         <td>{5}</td>\n"
+                + "      </tr>\n"
+                + "   </tbody>\n"
+                + "</table>";
+    }
 }

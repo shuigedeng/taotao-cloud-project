@@ -29,7 +29,9 @@ import org.springframework.stereotype.Component;
 public abstract class AbstractCheckHandler {
 
     /** 当前处理器持有下一个处理器的引用 */
-    @Getter @Setter private AbstractCheckHandler nextHandler;
+    @Getter
+    @Setter
+    private AbstractCheckHandler nextHandler;
 
     /**
      * 处理器执行方法
@@ -40,7 +42,9 @@ public abstract class AbstractCheckHandler {
     public abstract Result handle(ProductVO param);
 
     /** 处理器配置 */
-    @Setter @Getter protected CheckHandlerConfig config;
+    @Setter
+    @Getter
+    protected CheckHandlerConfig config;
 
     /**
      * 链路传递

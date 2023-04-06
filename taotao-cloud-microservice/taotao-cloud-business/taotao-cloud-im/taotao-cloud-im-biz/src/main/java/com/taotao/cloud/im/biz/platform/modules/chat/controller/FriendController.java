@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/friend")
 public class FriendController extends BaseController {
 
-    @Resource private ChatFriendService chatFriendService;
+    @Resource
+    private ChatFriendService chatFriendService;
 
     /** 搜索好友 */
     @ApiVersion(VersionEnum.V1_0_0)

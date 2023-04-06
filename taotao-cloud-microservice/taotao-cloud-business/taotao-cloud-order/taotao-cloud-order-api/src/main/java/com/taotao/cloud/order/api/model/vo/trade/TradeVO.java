@@ -38,5 +38,6 @@ public record TradeVO(
         @Schema(description = "购物车车计算后的总价") PriceDetailVO priceDetailVO)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4563542542090139404L;
+    @Serial
+    private static final long serialVersionUID = -4563542542090139404L;
 }

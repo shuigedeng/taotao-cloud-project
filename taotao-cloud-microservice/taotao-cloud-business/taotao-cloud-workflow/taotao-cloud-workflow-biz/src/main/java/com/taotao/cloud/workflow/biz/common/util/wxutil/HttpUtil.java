@@ -73,20 +73,18 @@ public class HttpUtil {
 
     private static PoolingHttpClientConnectionManager connectionManager = null;
 
-    private static RequestConfig requestConfig =
-            RequestConfig.custom()
-                    .setSocketTimeout(5000)
-                    .setConnectTimeout(5000)
-                    .setConnectionRequestTimeout(3000)
-                    .build();
+    private static RequestConfig requestConfig = RequestConfig.custom()
+            .setSocketTimeout(5000)
+            .setConnectTimeout(5000)
+            .setConnectionRequestTimeout(3000)
+            .build();
 
     static {
         SSLContext sslcontext = SSLContexts.createSystemDefault();
-        Registry<ConnectionSocketFactory> socketFactoryRegistry =
-                RegistryBuilder.<ConnectionSocketFactory>create()
-                        .register("http", PlainConnectionSocketFactory.INSTANCE)
-                        .register("https", new SSLConnectionSocketFactory(sslcontext))
-                        .build();
+        Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.INSTANCE)
+                .register("https", new SSLConnectionSocketFactory(sslcontext))
+                .build();
         connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
         connectionManager.setMaxTotal(1000);
         // 每个路由最大的请求数量
@@ -102,9 +100,7 @@ public class HttpUtil {
     }
 
     public static HttpClientBuilder getHttpClientBuilder() {
-        return HttpClients.custom()
-                .setConnectionManager(connectionManager)
-                .setDefaultRequestConfig(requestConfig);
+        return HttpClients.custom().setConnectionManager(connectionManager).setDefaultRequestConfig(requestConfig);
     }
 
     public static HttpClientBuilder getHttpClientBuilder(SSLContext sslContext) {
@@ -187,8 +183,7 @@ public class HttpUtil {
      * @param maps 参数
      * @param sslContext ssl证书信息
      */
-    public static String sendHttpPost(
-            String httpUrl, Map<String, String> maps, SSLContext sslContext) {
+    public static String sendHttpPost(String httpUrl, Map<String, String> maps, SSLContext sslContext) {
         HttpPost httpPost = wrapHttpPost(httpUrl, maps);
         return sendHttpPost(httpPost, null);
     }
@@ -245,8 +240,7 @@ public class HttpUtil {
      * @param fileLists 附件
      * @param maps 参数
      */
-    public static String sendHttpPost(
-            String httpUrl, List<File> fileLists, Map<String, String> maps) {
+    public static String sendHttpPost(String httpUrl, List<File> fileLists, Map<String, String> maps) {
         return sendHttpPost(httpUrl, fileLists, maps, null);
     }
 
@@ -257,8 +251,7 @@ public class HttpUtil {
      * @param fileMap 附件,名称和File对应
      * @param maps 参数
      */
-    public static String sendHttpPost(
-            String httpUrl, Map<String, File> fileMap, Map<String, String> maps) {
+    public static String sendHttpPost(String httpUrl, Map<String, File> fileMap, Map<String, String> maps) {
         return sendHttpPost(httpUrl, fileMap, maps, null);
     }
 
@@ -290,10 +283,7 @@ public class HttpUtil {
      * @param sslContext ssl证书信息
      */
     public static String sendHttpPost(
-            String httpUrl,
-            Map<String, File> fileMap,
-            Map<String, String> maps,
-            SSLContext sslContext) {
+            String httpUrl, Map<String, File> fileMap, Map<String, String> maps, SSLContext sslContext) {
         // 创建httpPost
         HttpPost httpPost = new HttpPost(httpUrl);
         MultipartEntityBuilder meBuilder = MultipartEntityBuilder.create();
@@ -448,8 +438,7 @@ public class HttpUtil {
      * @param outputStr 参数
      * @return
      */
-    public static JSONObject httpRequest(
-            String requestUrl, String requestMethod, String outputStr) {
+    public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr) {
         return httpRequest(requestUrl, requestMethod, outputStr, null);
     }
 
@@ -461,8 +450,7 @@ public class HttpUtil {
      * @param outputStr 参数
      * @return
      */
-    public static JSONObject httpRequest(
-            String requestUrl, String requestMethod, String outputStr, String... token) {
+    public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr, String... token) {
         JSONObject jsonObject = null;
         try {
             URL url = new URL(requestUrl);
@@ -494,9 +482,7 @@ public class HttpUtil {
                 outputStream.close();
             }
             @Cleanup InputStream inputStream = conn.getInputStream();
-            @Cleanup
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(inputStream, Constants.UTF8);
+            @Cleanup InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Constants.UTF8);
             @Cleanup BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String str = null;
             StringBuffer buffer = new StringBuffer();
@@ -526,13 +512,12 @@ public class HttpUtil {
         //                , "POST", s1, "bearer
         // eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJzaW5nbGVMb2dpbiI6IjEiLCJleHAiOjE2NDY0MjEwMDYsImp0aSI6Ijg4ZDFmMzY5LWRlYzQtNDI2Ny1iNjlkLTMwMzFjNWYzMGU3YyIsImNsaWVudF9pZCI6ImFkbWluIiwidG9rZW4iOiJsb2dpbl90b2tlbl8yNjk0NDc5Nzk0ODI0ODYyMTMifQ.G0cmAtOJxC9k6SoUyc-aS4Q-Us8xE-D5ojpa-1DXmoQRqTvKb7BCYThwrMglNY53c24Qk8HvOBvivzgsfB7Dhtm9CxhK89mDqf_tK34OjHkvH95_mdstItCcKm6uwFa02AsfZRIVoa_d1cYInLCcEDK7Q9pKS9QqkYJCUVxHjeZgD430JaX_wdhtSyTqqA59-OWslTpHSDji4keQcz5Y-Vw1k4jquzNWvBn1BX6HIAnksGpApTZ9uyVB2I5gPKqIs8Z3rHEun2rbQPkwbxZBUrAvKz2pbu74q8LMi2i7HdHxj9lTV2mwbFZURt1K_WH8xt-tfz4LYnaoHz8sQ_VXEA");
         //        System.out.println(jsonObject);
-        boolean get =
-                httpCronRequest(
-                        "http://192.168.20.128:30000/api/scheduletask",
-                        "GET",
-                        null,
-                        "bearer"
-                            + " eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJzaW5nbGVMb2dpbiI6IjEiLCJleHAiOjE2NDY4MzU2MTEsImp0aSI6ImQ2MTVhZDEyLWI0NmItNDgwOC04YmI2LWNhZTY2Y2QyZDVhYSIsImNsaWVudF9pZCI6ImFkbWluIiwidG9rZW4iOiJsb2dpbl90b2tlbl8yNzExODY5NTgxMTIyNjExMjUifQ.E-sPzi1dFoNh-q-cVHn3jti6cxDm1y2fiH8UVYtAYcsoFwZSvx6oubkUefB7xkE9VhCh_syGLbuYhZvRrUAtY-YfH0GG_sNIQXXrzjjieEtpynyBeCGjjZ2U46InjJhOXDMW9FMQS1VSuIx_Z5FuKV93M7kZcAO4ZxhxYcG1_3R4zscxx2hed8ChQvVWf8nbcnuZBUYffan26Y4Fecvi6b0yGrQE_Tmu1D0TjBnsJ5SugRcA_9IxDHIA2H8NfI4tVmeWMVqvNomjBzJaxWZkuXsA-CTzGUvaz9wpRfskh6qTrpnnNpc5p7KsCfkV_Se6KCvfnmD4eNJ27zRvHg1WJA");
+        boolean get = httpCronRequest(
+                "http://192.168.20.128:30000/api/scheduletask",
+                "GET",
+                null,
+                "bearer"
+                        + " eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJzaW5nbGVMb2dpbiI6IjEiLCJleHAiOjE2NDY4MzU2MTEsImp0aSI6ImQ2MTVhZDEyLWI0NmItNDgwOC04YmI2LWNhZTY2Y2QyZDVhYSIsImNsaWVudF9pZCI6ImFkbWluIiwidG9rZW4iOiJsb2dpbl90b2tlbl8yNzExODY5NTgxMTIyNjExMjUifQ.E-sPzi1dFoNh-q-cVHn3jti6cxDm1y2fiH8UVYtAYcsoFwZSvx6oubkUefB7xkE9VhCh_syGLbuYhZvRrUAtY-YfH0GG_sNIQXXrzjjieEtpynyBeCGjjZ2U46InjJhOXDMW9FMQS1VSuIx_Z5FuKV93M7kZcAO4ZxhxYcG1_3R4zscxx2hed8ChQvVWf8nbcnuZBUYffan26Y4Fecvi6b0yGrQE_Tmu1D0TjBnsJ5SugRcA_9IxDHIA2H8NfI4tVmeWMVqvNomjBzJaxWZkuXsA-CTzGUvaz9wpRfskh6qTrpnnNpc5p7KsCfkV_Se6KCvfnmD4eNJ27zRvHg1WJA");
         System.out.println(get);
     }
 
@@ -544,53 +529,48 @@ public class HttpUtil {
      * @param outputStr 参数
      * @return
      */
-    public static boolean httpCronRequest(
-            String requestUrl, String requestMethod, String outputStr, String token) {
+    public static boolean httpCronRequest(String requestUrl, String requestMethod, String outputStr, String token) {
         boolean falg = false;
         try {
             URL url = new URL(requestUrl);
             final HttpURLConnection[] conn = {null};
-            Callable<String> task =
-                    new Callable<String>() {
-                        @Override
-                        public String call() throws Exception {
-                            // 执行耗时代码
-                            try {
-                                conn[0] = (HttpURLConnection) url.openConnection();
-                            } catch (Exception e) {
-                                log.error(e.getMessage());
-                            }
-                            conn[0].setDoOutput(true);
-                            conn[0].setDoInput(true);
-                            conn[0].setUseCaches(false);
-                            conn[0].setRequestMethod(requestMethod);
-                            conn[0].setRequestProperty("Content-Type", "application/json");
-                            if (StringUtil.isNotEmpty(token)) {
-                                conn[0].setRequestProperty(Constants.AUTHORIZATION, token);
-                            }
-                            if (null != outputStr) {
-                                @Cleanup OutputStream outputStream = conn[0].getOutputStream();
-                                outputStream.write(outputStr.getBytes(Constants.UTF8));
-                                outputStream.close();
-                            }
-                            @Cleanup InputStream inputStream = conn[0].getInputStream();
-                            @Cleanup
-                            InputStreamReader inputStreamReader =
-                                    new InputStreamReader(inputStream, Constants.UTF8);
-                            @Cleanup
-                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                            String str = null;
-                            StringBuffer buffer = new StringBuffer();
-                            while ((str = bufferedReader.readLine()) != null) {
-                                buffer.append(str);
-                            }
-                            bufferedReader.close();
-                            inputStreamReader.close();
-                            inputStream.close();
-                            conn[0].disconnect();
-                            return "url连接ok";
-                        }
-                    };
+            Callable<String> task = new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    // 执行耗时代码
+                    try {
+                        conn[0] = (HttpURLConnection) url.openConnection();
+                    } catch (Exception e) {
+                        log.error(e.getMessage());
+                    }
+                    conn[0].setDoOutput(true);
+                    conn[0].setDoInput(true);
+                    conn[0].setUseCaches(false);
+                    conn[0].setRequestMethod(requestMethod);
+                    conn[0].setRequestProperty("Content-Type", "application/json");
+                    if (StringUtil.isNotEmpty(token)) {
+                        conn[0].setRequestProperty(Constants.AUTHORIZATION, token);
+                    }
+                    if (null != outputStr) {
+                        @Cleanup OutputStream outputStream = conn[0].getOutputStream();
+                        outputStream.write(outputStr.getBytes(Constants.UTF8));
+                        outputStream.close();
+                    }
+                    @Cleanup InputStream inputStream = conn[0].getInputStream();
+                    @Cleanup InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Constants.UTF8);
+                    @Cleanup BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String str = null;
+                    StringBuffer buffer = new StringBuffer();
+                    while ((str = bufferedReader.readLine()) != null) {
+                        buffer.append(str);
+                    }
+                    bufferedReader.close();
+                    inputStreamReader.close();
+                    inputStream.close();
+                    conn[0].disconnect();
+                    return "url连接ok";
+                }
+            };
             ThreadPoolTaskExecutor executor = SpringContext.getBean(ThreadPoolTaskExecutor.class);
             Future<String> future = executor.submit(task);
             try {

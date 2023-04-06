@@ -30,14 +30,12 @@ public class DataSourceInfo {
 
     public static final String oracleDriver = "oracle.jdbc.OracleDriver";
 
-    public static final String sqlserverUrl =
-            "jdbc:sqlserver://{host}:{port};Databasename={dbName}";
+    public static final String sqlserverUrl = "jdbc:sqlserver://{host}:{port};Databasename={dbName}";
 
     public static final String sqlserverDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-    public static final String dmUrl =
-            "jdbc:dm://{host}:{port}/{dbName}?zeroDateTimeBehavior=convertToNull&useUnicode"
-                    + "=true&characterEncoding=utf-8";
+    public static final String dmUrl = "jdbc:dm://{host}:{port}/{dbName}?zeroDateTimeBehavior=convertToNull&useUnicode"
+            + "=true&characterEncoding=utf-8";
 
     public static final String dmDriver = "dm.jdbc.driver.DmDriver";
 

@@ -42,11 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @see <a href="https://conkeyn.iteye.com/blog/2296406">参考文档</a>
  */
 @RestController
-@Tags({
-    @Tag(name = "OAuth2 认证服务接口"),
-    @Tag(name = "OAuth2 应用安全合规接口"),
-    @Tag(name = "OAuth2 登录错误提示接口")
-})
+@Tags({@Tag(name = "OAuth2 认证服务接口"), @Tag(name = "OAuth2 应用安全合规接口"), @Tag(name = "OAuth2 登录错误提示接口")})
 public class SignInErrorPromptController {
 
     private final Logger log = LoggerFactory.getLogger(SignInErrorPromptController.class);
@@ -54,8 +50,7 @@ public class SignInErrorPromptController {
     private final SignInFailureLimitedStampManager signInFailureLimitedStampManager;
 
     @Autowired
-    public SignInErrorPromptController(
-            SignInFailureLimitedStampManager signInFailureLimitedStampManager) {
+    public SignInErrorPromptController(SignInFailureLimitedStampManager signInFailureLimitedStampManager) {
         this.signInFailureLimitedStampManager = signInFailureLimitedStampManager;
     }
 
@@ -66,11 +61,7 @@ public class SignInErrorPromptController {
             requestBody =
                     @io.swagger.v3.oas.annotations.parameters.RequestBody(
                             content = @Content(mediaType = "application/json")),
-            responses = {
-                @ApiResponse(
-                        description = "加密后的AES",
-                        content = @Content(mediaType = "application/json"))
-            })
+            responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
     @Parameters({
         @Parameter(
                 name = "signInErrorPrompt",
@@ -79,8 +70,7 @@ public class SignInErrorPromptController {
                 schema = @Schema(implementation = SignInErrorPrompt.class)),
     })
     @PostMapping("/open/identity/prompt")
-    public Result<SignInErrorStatus> prompt(
-            @Validated @RequestBody SignInErrorPrompt signInErrorPrompt) {
+    public Result<SignInErrorStatus> prompt(@Validated @RequestBody SignInErrorPrompt signInErrorPrompt) {
         SignInErrorStatus signInErrorStatus =
                 signInFailureLimitedStampManager.errorStatus(signInErrorPrompt.getUsername());
         return Result.content(signInErrorStatus);

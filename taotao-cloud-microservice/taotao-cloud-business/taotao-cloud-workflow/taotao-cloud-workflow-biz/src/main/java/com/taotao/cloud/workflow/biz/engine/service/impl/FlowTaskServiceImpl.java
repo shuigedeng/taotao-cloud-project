@@ -70,16 +70,28 @@ import org.springframework.stereotype.Service;
 /** 流程任务 */
 @Slf4j
 @Service
-public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEntity>
-        implements FlowTaskService {
+public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEntity> implements FlowTaskService {
 
-    @Autowired private ServiceAllUtil serviceUtil;
-    @Autowired private FlowDelegateService flowDelegateService;
-    @Autowired private FlowTaskNodeService flowTaskNodeService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
-    @Autowired private FlowTaskOperatorRecordService flowTaskOperatorRecordService;
-    @Autowired private FlowTaskCirculateService flowTaskCirculateService;
-    @Autowired private DataSourceUtil dataSourceUtil;
+    @Autowired
+    private ServiceAllUtil serviceUtil;
+
+    @Autowired
+    private FlowDelegateService flowDelegateService;
+
+    @Autowired
+    private FlowTaskNodeService flowTaskNodeService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
+
+    @Autowired
+    private FlowTaskOperatorRecordService flowTaskOperatorRecordService;
+
+    @Autowired
+    private FlowTaskCirculateService flowTaskCirculateService;
+
+    @Autowired
+    private DataSourceUtil dataSourceUtil;
 
     @Override
     public List<FlowTaskEntity> getMonitorList(PaginationFlowTask paginationFlowTask) {
@@ -88,33 +100,20 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         QueryWrapper<FlowTaskEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().gt(FlowTaskEntity::getStatus, FlowTaskStatusEnum.Draft.getCode());
         // 关键字（流程名称、流程编码）
-        String keyWord =
-                paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
+        String keyWord = paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
         if (!StringUtils.isEmpty(keyWord)) {
             flag = true;
-            queryWrapper
-                    .lambda()
-                    .and(
-                            t ->
-                                    t.like(FlowTaskEntity::getEnCode, keyWord)
-                                            .or()
-                                            .like(FlowTaskEntity::getFullName, keyWord));
+            queryWrapper.lambda().and(t -> t.like(FlowTaskEntity::getEnCode, keyWord)
+                    .or()
+                    .like(FlowTaskEntity::getFullName, keyWord));
         }
         // 日期范围（近7天、近1月、近3月、自定义）
-        String startTime =
-                paginationFlowTask.getStartTime() != null
-                        ? paginationFlowTask.getStartTime()
-                        : null;
-        String endTime =
-                paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
+        String startTime = paginationFlowTask.getStartTime() != null ? paginationFlowTask.getStartTime() : null;
+        String endTime = paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
         if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
             flag = true;
-            Date startTimes =
-                    DateUtil.stringToDate(
-                            DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00");
-            Date endTimes =
-                    DateUtil.stringToDate(
-                            DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59");
+            Date startTimes = DateUtil.stringToDate(DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00");
+            Date endTimes = DateUtil.stringToDate(DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59");
             queryWrapper
                     .lambda()
                     .ge(FlowTaskEntity::getCreatorTime, startTimes)
@@ -126,26 +125,21 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
             queryWrapper.lambda().eq(FlowTaskEntity::getStatus, paginationFlowTask.getStatus());
         }
         // 所属流程
-        String flowId =
-                paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
+        String flowId = paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
         if (!StringUtils.isEmpty(flowId)) {
             flag = true;
             queryWrapper.lambda().eq(FlowTaskEntity::getFlowId, flowId);
         }
         // 所属分类
         String flowCategory =
-                paginationFlowTask.getFlowCategory() != null
-                        ? paginationFlowTask.getFlowCategory()
-                        : null;
+                paginationFlowTask.getFlowCategory() != null ? paginationFlowTask.getFlowCategory() : null;
         if (!StringUtils.isEmpty(flowCategory)) {
             flag = true;
             queryWrapper.lambda().eq(FlowTaskEntity::getFlowCategory, flowCategory);
         }
         // 发起人员
         String creatorUserId =
-                paginationFlowTask.getCreatorUserId() != null
-                        ? paginationFlowTask.getCreatorUserId()
-                        : null;
+                paginationFlowTask.getCreatorUserId() != null ? paginationFlowTask.getCreatorUserId() : null;
         if (!StringUtils.isEmpty(creatorUserId)) {
             flag = true;
             queryWrapper.lambda().eq(FlowTaskEntity::getCreatorUserId, creatorUserId);
@@ -154,16 +148,12 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         //        if ("desc".equals(paginationFlowTask.getSort().toLowerCase())) {
         //            queryWrapper.lambda().orderByDesc(FlowTaskEntity::getCreatorTime);
         //        } else {
-        queryWrapper
-                .lambda()
-                .orderByAsc(FlowTaskEntity::getSortCode)
-                .orderByDesc(FlowTaskEntity::getCreatorTime);
+        queryWrapper.lambda().orderByAsc(FlowTaskEntity::getSortCode).orderByDesc(FlowTaskEntity::getCreatorTime);
         //        }
         if (flag) {
             queryWrapper.lambda().orderByDesc(FlowTaskEntity::getLastModifyTime);
         }
-        Page<FlowTaskEntity> page =
-                new Page<>(paginationFlowTask.getCurrentPage(), paginationFlowTask.getPageSize());
+        Page<FlowTaskEntity> page = new Page<>(paginationFlowTask.getCurrentPage(), paginationFlowTask.getPageSize());
         IPage<FlowTaskEntity> flowTaskEntityPage = this.page(page, queryWrapper);
         return paginationFlowTask.setData(flowTaskEntityPage.getRecords(), page.getTotal());
     }
@@ -172,44 +162,27 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
     public List<FlowTaskEntity> getLaunchList(PaginationFlowTask paginationFlowTask) {
         QueryWrapper<FlowTaskEntity> queryWrapper = new QueryWrapper<>();
         String userId = userProvider.get().getUserId();
-        queryWrapper
-                .lambda()
-                .select(FlowTaskEntity::getId)
-                .eq(FlowTaskEntity::getCreatorUserId, userId);
+        queryWrapper.lambda().select(FlowTaskEntity::getId).eq(FlowTaskEntity::getCreatorUserId, userId);
         // 关键字（流程名称、流程编码）
-        String keyWord =
-                paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
+        String keyWord = paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
         if (!StringUtils.isEmpty(keyWord)) {
-            queryWrapper
-                    .lambda()
-                    .and(
-                            t ->
-                                    t.like(FlowTaskEntity::getEnCode, keyWord)
-                                            .or()
-                                            .like(FlowTaskEntity::getFullName, keyWord));
+            queryWrapper.lambda().and(t -> t.like(FlowTaskEntity::getEnCode, keyWord)
+                    .or()
+                    .like(FlowTaskEntity::getFullName, keyWord));
         }
         // 日期范围（近7天、近1月、近3月、自定义）
-        String startTime =
-                paginationFlowTask.getStartTime() != null
-                        ? paginationFlowTask.getStartTime()
-                        : null;
-        String endTime =
-                paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
+        String startTime = paginationFlowTask.getStartTime() != null ? paginationFlowTask.getStartTime() : null;
+        String endTime = paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
         if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
-            Date startTimes =
-                    DateUtil.stringToDate(
-                            DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00");
-            Date endTimes =
-                    DateUtil.stringToDate(
-                            DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59");
+            Date startTimes = DateUtil.stringToDate(DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00");
+            Date endTimes = DateUtil.stringToDate(DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59");
             queryWrapper
                     .lambda()
                     .ge(FlowTaskEntity::getCreatorTime, startTimes)
                     .le(FlowTaskEntity::getCreatorTime, endTimes);
         }
         // 所属流程
-        String flowName =
-                paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
+        String flowName = paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
         if (!StringUtils.isEmpty(flowName)) {
             queryWrapper.lambda().eq(FlowTaskEntity::getFlowId, flowName);
         }
@@ -219,45 +192,28 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         // 所属分类
         String flowCategory =
-                paginationFlowTask.getFlowCategory() != null
-                        ? paginationFlowTask.getFlowCategory()
-                        : null;
+                paginationFlowTask.getFlowCategory() != null ? paginationFlowTask.getFlowCategory() : null;
         if (!StringUtils.isEmpty(flowCategory)) {
             queryWrapper.lambda().eq(FlowTaskEntity::getFlowCategory, flowCategory);
         }
         // 排序
         if ("asc".equals(paginationFlowTask.getSort().toLowerCase())) {
-            queryWrapper
-                    .lambda()
-                    .orderByAsc(FlowTaskEntity::getStatus)
-                    .orderByAsc(FlowTaskEntity::getStartTime);
+            queryWrapper.lambda().orderByAsc(FlowTaskEntity::getStatus).orderByAsc(FlowTaskEntity::getStartTime);
         } else {
-            queryWrapper
-                    .lambda()
-                    .orderByAsc(FlowTaskEntity::getStatus)
-                    .orderByDesc(FlowTaskEntity::getStartTime);
+            queryWrapper.lambda().orderByAsc(FlowTaskEntity::getStatus).orderByDesc(FlowTaskEntity::getStartTime);
         }
-        Page<FlowTaskEntity> page =
-                new Page<>(paginationFlowTask.getCurrentPage(), paginationFlowTask.getPageSize());
+        Page<FlowTaskEntity> page = new Page<>(paginationFlowTask.getCurrentPage(), paginationFlowTask.getPageSize());
         IPage<FlowTaskEntity> flowTaskEntityPage = this.page(page, queryWrapper);
         if (!flowTaskEntityPage.getRecords().isEmpty()) {
             List<String> ids =
-                    flowTaskEntityPage.getRecords().stream()
-                            .map(m -> m.getId())
-                            .collect(Collectors.toList());
+                    flowTaskEntityPage.getRecords().stream().map(m -> m.getId()).collect(Collectors.toList());
             queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().in(FlowTaskEntity::getId, ids);
             // 排序
             if ("asc".equals(paginationFlowTask.getSort().toLowerCase())) {
-                queryWrapper
-                        .lambda()
-                        .orderByAsc(FlowTaskEntity::getStatus)
-                        .orderByAsc(FlowTaskEntity::getStartTime);
+                queryWrapper.lambda().orderByAsc(FlowTaskEntity::getStatus).orderByAsc(FlowTaskEntity::getStartTime);
             } else {
-                queryWrapper
-                        .lambda()
-                        .orderByAsc(FlowTaskEntity::getStatus)
-                        .orderByDesc(FlowTaskEntity::getStartTime);
+                queryWrapper.lambda().orderByAsc(FlowTaskEntity::getStatus).orderByDesc(FlowTaskEntity::getStartTime);
             }
             flowTaskEntityPage.setRecords(this.list(queryWrapper));
         }
@@ -293,75 +249,52 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         dbSql.append("o.F_HandleId in (" + joiner.toString() + " ) )");
         // 关键字（流程名称、流程编码）
-        String keyWord =
-                paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
+        String keyWord = paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
         if (!StringUtils.isEmpty(keyWord)) {
-            dbSql.append(
-                    " AND (t.F_EnCode like '%"
-                            + keyWord
-                            + "%' or t.F_FullName like '%"
-                            + keyWord
-                            + "%') ");
+            dbSql.append(" AND (t.F_EnCode like '%" + keyWord + "%' or t.F_FullName like '%" + keyWord + "%') ");
         }
 
         // 日期范围（近7天、近1月、近3月、自定义）
-        String startTime =
-                paginationFlowTask.getStartTime() != null
-                        ? paginationFlowTask.getStartTime()
-                        : null;
-        String endTime =
-                paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
+        String startTime = paginationFlowTask.getStartTime() != null ? paginationFlowTask.getStartTime() : null;
+        String endTime = paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
         if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
             if (DbTypeUtil.checkOracle(dataSourceUtil)) {
                 String startTimes = DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00";
                 String endTimes = DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59";
-                dbSql.append(
-                        " AND o.F_CreatorTime Between TO_DATE('"
-                                + startTimes
-                                + "','yyyy-mm-dd HH24:mi:ss') AND TO_DATE('"
-                                + endTimes
-                                + "','yyyy-mm-dd HH24:mi:ss') ");
+                dbSql.append(" AND o.F_CreatorTime Between TO_DATE('"
+                        + startTimes
+                        + "','yyyy-mm-dd HH24:mi:ss') AND TO_DATE('"
+                        + endTimes
+                        + "','yyyy-mm-dd HH24:mi:ss') ");
             } else {
                 String startTimes = DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00";
                 String endTimes = DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59";
-                dbSql.append(
-                        " AND o.F_CreatorTime Between '"
-                                + startTimes
-                                + "' AND '"
-                                + endTimes
-                                + "' ");
+                dbSql.append(" AND o.F_CreatorTime Between '" + startTimes + "' AND '" + endTimes + "' ");
             }
         }
         // 所属流程
-        String flowId =
-                paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
+        String flowId = paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
         if (!StringUtils.isEmpty(flowId)) {
             dbSql.append(" AND t.F_FlowId = '" + flowId + "'");
         }
         // 所属分类
         String flowCategory =
-                paginationFlowTask.getFlowCategory() != null
-                        ? paginationFlowTask.getFlowCategory()
-                        : null;
+                paginationFlowTask.getFlowCategory() != null ? paginationFlowTask.getFlowCategory() : null;
         if (!StringUtils.isEmpty(flowCategory)) {
             dbSql.append(" AND t.F_FlowCategory = '" + flowCategory + "'");
         }
         // 发起人员
         String creatorUserId =
-                paginationFlowTask.getCreatorUserId() != null
-                        ? paginationFlowTask.getCreatorUserId()
-                        : null;
+                paginationFlowTask.getCreatorUserId() != null ? paginationFlowTask.getCreatorUserId() : null;
         if (!StringUtils.isEmpty(creatorUserId)) {
             dbSql.append(" AND t.F_CreatorUserId = '" + creatorUserId + "'");
         }
         // 节点编码
-        String nodeCode =
-                paginationFlowTask.getNodeCode() != null ? paginationFlowTask.getNodeCode() : null;
+        String nodeCode = paginationFlowTask.getNodeCode() != null ? paginationFlowTask.getNodeCode() : null;
         if (!StringUtils.isEmpty(nodeCode)) {
             dbSql.append(" AND o.F_NodeCode = '" + nodeCode + "'");
         }
-        Integer isBatch =
-                paginationFlowTask.getIsBatch() != null ? paginationFlowTask.getIsBatch() : null;
+        Integer isBatch = paginationFlowTask.getIsBatch() != null ? paginationFlowTask.getIsBatch() : null;
         if (!ObjectUtil.isEmpty(isBatch)) {
             dbSql.append(" AND t.F_IsBatch = " + isBatch + " ");
         }
@@ -376,28 +309,25 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         List<FlowTaskListModel> data = this.baseMapper.getWaitList(sql);
         List<FlowTaskListModel> result = new LinkedList<>();
         for (FlowTaskListModel entity : data) {
-            List<Date> list =
-                    StringUtils.isNotEmpty(entity.getDescription())
-                            ? JsonUtils.getJsonToList(entity.getDescription(), Date.class)
-                            : new ArrayList<>();
+            List<Date> list = StringUtils.isNotEmpty(entity.getDescription())
+                    ? JsonUtils.getJsonToList(entity.getDescription(), Date.class)
+                    : new ArrayList<>();
             boolean delegate = true;
             boolean isuser = entity.getHandleId().equals(userId);
             entity.setFullName(!isuser ? entity.getFullName() + "(委托)" : entity.getFullName());
-            List<FlowDelegateEntity> flowList =
-                    flowDelegateList.stream()
-                            .filter(t -> t.getFlowId().equals(entity.getFlowId()))
-                            .toList();
+            List<FlowDelegateEntity> flowList = flowDelegateList.stream()
+                    .filter(t -> t.getFlowId().equals(entity.getFlowId()))
+                    .toList();
             // 判断是否有自己审核
             if (!isuser) {
                 // 是否委托当前流程引擎 true是 flas否
-                delegate =
-                        flowList.stream()
-                                .anyMatch(t -> t.getCreatorUserId().equals(entity.getHandleId()));
+                delegate = flowList.stream().anyMatch(t -> t.getCreatorUserId().equals(entity.getHandleId()));
             }
             if (delegate) {
                 result.add(entity);
                 Date date = new Date();
-                boolean del = list.stream().filter(t -> t.getTime() > date.getTime()).count() > 0;
+                boolean del =
+                        list.stream().filter(t -> t.getTime() > date.getTime()).count() > 0;
                 if (del) {
                     result.remove(entity);
                 }
@@ -412,59 +342,42 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         Map<String, Object> queryParam = new HashMap<>(16);
         StringBuilder dbSql = new StringBuilder();
         // 关键字（流程名称、流程编码）
-        String keyWord =
-                paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
+        String keyWord = paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
         if (!StringUtils.isEmpty(keyWord)) {
-            dbSql.append(
-                    " AND (t.F_EnCode like '%"
-                            + keyWord
-                            + "%' or t.F_FullName like '%"
-                            + keyWord
-                            + "%') ");
+            dbSql.append(" AND (t.F_EnCode like '%" + keyWord + "%' or t.F_FullName like '%" + keyWord + "%') ");
         }
         // 日期范围（近7天、近1月、近3月、自定义）
-        String startTime =
-                paginationFlowTask.getStartTime() != null
-                        ? paginationFlowTask.getStartTime()
-                        : null;
-        String endTime =
-                paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
+        String startTime = paginationFlowTask.getStartTime() != null ? paginationFlowTask.getStartTime() : null;
+        String endTime = paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
         if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
             if (DbTypeUtil.checkOracle(dataSourceUtil)) {
                 String startTimes = DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00";
                 String endTimes = DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59";
-                dbSql.append(
-                        " AND r.F_HandleTime Between TO_DATE('"
-                                + startTimes
-                                + "','yyyy-mm-dd HH24:mi:ss') AND TO_DATE('"
-                                + endTimes
-                                + "','yyyy-mm-dd HH24:mi:ss') ");
+                dbSql.append(" AND r.F_HandleTime Between TO_DATE('"
+                        + startTimes
+                        + "','yyyy-mm-dd HH24:mi:ss') AND TO_DATE('"
+                        + endTimes
+                        + "','yyyy-mm-dd HH24:mi:ss') ");
             } else {
                 String startTimes = DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00";
                 String endTimes = DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59";
-                dbSql.append(
-                        " AND r.F_HandleTime Between '" + startTimes + "' AND '" + endTimes + "' ");
+                dbSql.append(" AND r.F_HandleTime Between '" + startTimes + "' AND '" + endTimes + "' ");
             }
         }
         // 所属流程
-        String flowId =
-                paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
+        String flowId = paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
         if (!StringUtils.isEmpty(flowId)) {
             dbSql.append(" AND t.F_FlowId = '" + flowId + "' ");
         }
         // 所属分类
         String flowCategory =
-                paginationFlowTask.getFlowCategory() != null
-                        ? paginationFlowTask.getFlowCategory()
-                        : null;
+                paginationFlowTask.getFlowCategory() != null ? paginationFlowTask.getFlowCategory() : null;
         if (!StringUtils.isEmpty(flowCategory)) {
             dbSql.append(" AND t.F_FlowCategory = '" + flowCategory + "' ");
         }
         // 发起人员
         String creatorUserId =
-                paginationFlowTask.getCreatorUserId() != null
-                        ? paginationFlowTask.getCreatorUserId()
-                        : null;
+                paginationFlowTask.getCreatorUserId() != null ? paginationFlowTask.getCreatorUserId() : null;
         if (!StringUtils.isEmpty(creatorUserId)) {
             dbSql.append(" AND t.F_CreatorUserId = '" + creatorUserId + "' ");
         }
@@ -583,8 +496,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         List<String> userIdList = new ArrayList<>();
         userIdList.add(userId);
         List<UserRelationEntity> list = serviceUtil.getListByUserIdAll(userIdList);
-        List<String> userRelationList =
-                list.stream().map(u -> u.getObjectId()).collect(Collectors.toList());
+        List<String> userRelationList = list.stream().map(u -> u.getObjectId()).collect(Collectors.toList());
         String[] objectId = (String.join(",", userRelationList) + "," + userId).split(",");
         // 传阅人员
         StringBuilder dbSql = new StringBuilder();
@@ -597,66 +509,49 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         dbSql.append(")");
         // 关键字（流程名称、流程编码）
-        String keyWord =
-                paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
+        String keyWord = paginationFlowTask.getKeyword() != null ? paginationFlowTask.getKeyword() : null;
         if (!StringUtils.isEmpty(keyWord)) {
-            dbSql.append(
-                    " AND (t.F_EnCode like "
-                            + " '%"
-                            + keyWord
-                            + "%' "
-                            + " or t.F_FullName like"
-                            + " '%"
-                            + keyWord
-                            + "%') ");
+            dbSql.append(" AND (t.F_EnCode like "
+                    + " '%"
+                    + keyWord
+                    + "%' "
+                    + " or t.F_FullName like"
+                    + " '%"
+                    + keyWord
+                    + "%') ");
         }
         // 日期范围（近7天、近1月、近3月、自定义）
-        String startTime =
-                paginationFlowTask.getStartTime() != null
-                        ? paginationFlowTask.getStartTime()
-                        : null;
-        String endTime =
-                paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
+        String startTime = paginationFlowTask.getStartTime() != null ? paginationFlowTask.getStartTime() : null;
+        String endTime = paginationFlowTask.getEndTime() != null ? paginationFlowTask.getEndTime() : null;
         if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
             if (DbTypeUtil.checkOracle(dataSourceUtil)) {
                 String startTimes = DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00";
                 String endTimes = DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59";
-                dbSql.append(
-                        " AND c.F_CreatorTime Between TO_DATE('"
-                                + startTimes
-                                + "','yyyy-mm-dd HH24:mi:ss') AND TO_DATE('"
-                                + endTimes
-                                + "','yyyy-mm-dd HH24:mi:ss') ");
+                dbSql.append(" AND c.F_CreatorTime Between TO_DATE('"
+                        + startTimes
+                        + "','yyyy-mm-dd HH24:mi:ss') AND TO_DATE('"
+                        + endTimes
+                        + "','yyyy-mm-dd HH24:mi:ss') ");
             } else {
                 String startTimes = DateUtil.daFormatYmd(Long.parseLong(startTime)) + " 00:00:00";
                 String endTimes = DateUtil.daFormatYmd(Long.parseLong(endTime)) + " 23:59:59";
-                dbSql.append(
-                        " AND c.F_CreatorTime Between  '"
-                                + startTimes
-                                + "' AND '"
-                                + endTimes
-                                + "' ");
+                dbSql.append(" AND c.F_CreatorTime Between  '" + startTimes + "' AND '" + endTimes + "' ");
             }
         }
         // 所属流程
-        String flowId =
-                paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
+        String flowId = paginationFlowTask.getFlowId() != null ? paginationFlowTask.getFlowId() : null;
         if (!StringUtils.isEmpty(flowId)) {
             dbSql.append(" AND t.F_FlowId = '" + flowId + "'");
         }
         // 所属分类
         String flowCategory =
-                paginationFlowTask.getFlowCategory() != null
-                        ? paginationFlowTask.getFlowCategory()
-                        : null;
+                paginationFlowTask.getFlowCategory() != null ? paginationFlowTask.getFlowCategory() : null;
         if (!StringUtils.isEmpty(flowCategory)) {
             dbSql.append(" AND t.F_FlowCategory = '" + flowCategory + "'");
         }
         // 发起人员
         String creatorUserId =
-                paginationFlowTask.getCreatorUserId() != null
-                        ? paginationFlowTask.getCreatorUserId()
-                        : null;
+                paginationFlowTask.getCreatorUserId() != null ? paginationFlowTask.getCreatorUserId() : null;
         if (!StringUtils.isEmpty(creatorUserId)) {
             dbSql.append(" AND t.F_CreatorUserId = '" + creatorUserId + "'");
         }
@@ -703,8 +598,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
     }
 
     @Override
-    public List<FlowTaskEntity> getInfosSubmit(
-            String[] ids, SFunction<FlowTaskEntity, ?>... columns) {
+    public List<FlowTaskEntity> getInfosSubmit(String[] ids, SFunction<FlowTaskEntity, ?>... columns) {
         List<FlowTaskEntity> resultList = Collections.emptyList();
         if (ids == null || ids.length == 0) {
             return resultList;
@@ -719,14 +613,9 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
                 resultList = this.list(queryWrapper);
             }
         } else {
-            queryWrapper
-                    .select(FlowTaskEntity::getId)
-                    .and(
-                            t -> {
-                                t.in(FlowTaskEntity::getId, ids)
-                                        .or()
-                                        .in(FlowTaskEntity::getProcessId, ids);
-                            });
+            queryWrapper.select(FlowTaskEntity::getId).and(t -> {
+                t.in(FlowTaskEntity::getId, ids).or().in(FlowTaskEntity::getProcessId, ids);
+            });
             List<String> resultIds = this.listObjs(queryWrapper, Object::toString);
             if (!resultIds.isEmpty()) {
                 queryWrapper = new LambdaQueryWrapper<>();
@@ -783,12 +672,8 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
             if (isDel) {
                 throw new WorkFlowException(MsgCode.WF117.get());
             }
-            isDel =
-                    flowTaskList.stream()
-                            .anyMatch(
-                                    t ->
-                                            !FlowNature.ParentId.equals(t.getParentId())
-                                                    && StrUtil.isNotEmpty(t.getParentId()));
+            isDel = flowTaskList.stream()
+                    .anyMatch(t -> !FlowNature.ParentId.equals(t.getParentId()) && StrUtil.isNotEmpty(t.getParentId()));
             if (isDel) {
                 throw new WorkFlowException(MsgCode.WF118.get());
             }
@@ -839,13 +724,12 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
     public List<FlowTaskEntity> getTaskFlowList(String flowId) {
         QueryWrapper<FlowTaskEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FlowTaskEntity::getFlowId, flowId);
-        List<Integer> list =
-                new ArrayList() {
-                    {
-                        add(2);
-                        add(5);
-                    }
-                };
+        List<Integer> list = new ArrayList() {
+            {
+                add(2);
+                add(5);
+            }
+        };
         queryWrapper.lambda().notIn(FlowTaskEntity::getStatus, list);
         return this.list(queryWrapper);
     }
@@ -862,31 +746,28 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
     public List<FlowBatchModel> batchFlowSelector() {
         List<FlowTaskOperatorEntity> operatorList = flowTaskOperatorService.getBatchList();
         List<String> taskIdList =
-                operatorList.stream()
-                        .map(FlowTaskOperatorEntity::getTaskId)
-                        .collect(Collectors.toList());
+                operatorList.stream().map(FlowTaskOperatorEntity::getTaskId).collect(Collectors.toList());
         List<FlowTaskEntity> taskList = getOrderStaList(taskIdList);
-        Map<String, List<FlowTaskEntity>> flowIdList =
-                taskList.stream()
-                        .filter(t -> ObjectUtil.isNotEmpty(t.getIsBatch()) && t.getIsBatch() == 1)
-                        .collect(Collectors.groupingBy(FlowTaskEntity::getFlowId));
+        Map<String, List<FlowTaskEntity>> flowIdList = taskList.stream()
+                .filter(t -> ObjectUtil.isNotEmpty(t.getIsBatch()) && t.getIsBatch() == 1)
+                .collect(Collectors.groupingBy(FlowTaskEntity::getFlowId));
         List<FlowBatchModel> batchFlowList = new ArrayList<>();
         for (String key : flowIdList.keySet()) {
             List<FlowTaskEntity> flowTaskList = flowIdList.get(key);
-            List<String> flowTask = flowTaskList.stream().map(FlowTaskEntity::getId).toList();
+            List<String> flowTask =
+                    flowTaskList.stream().map(FlowTaskEntity::getId).toList();
             if (flowTaskList.size() > 0) {
-                String flowName =
-                        flowTaskList.stream()
-                                .map(FlowTaskEntity::getFlowName)
-                                .distinct()
-                                .collect(Collectors.joining(","));
-                String flowId =
-                        flowTaskList.stream()
-                                .map(FlowTaskEntity::getFlowId)
-                                .distinct()
-                                .collect(Collectors.joining(","));
-                Long count =
-                        operatorList.stream().filter(t -> flowTask.contains(t.getTaskId())).count();
+                String flowName = flowTaskList.stream()
+                        .map(FlowTaskEntity::getFlowName)
+                        .distinct()
+                        .collect(Collectors.joining(","));
+                String flowId = flowTaskList.stream()
+                        .map(FlowTaskEntity::getFlowId)
+                        .distinct()
+                        .collect(Collectors.joining(","));
+                Long count = operatorList.stream()
+                        .filter(t -> flowTask.contains(t.getTaskId()))
+                        .count();
                 FlowBatchModel batchModel = new FlowBatchModel();
                 batchModel.setNum(count);
                 batchModel.setId(flowId);
@@ -894,10 +775,9 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
                 batchFlowList.add(batchModel);
             }
         }
-        batchFlowList =
-                batchFlowList.stream()
-                        .sorted(Comparator.comparing(FlowBatchModel::getNum).reversed())
-                        .collect(Collectors.toList());
+        batchFlowList = batchFlowList.stream()
+                .sorted(Comparator.comparing(FlowBatchModel::getNum).reversed())
+                .collect(Collectors.toList());
         return batchFlowList;
     }
 

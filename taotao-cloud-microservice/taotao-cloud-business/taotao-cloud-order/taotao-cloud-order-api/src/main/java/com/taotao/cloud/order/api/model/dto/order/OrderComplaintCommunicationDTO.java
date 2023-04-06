@@ -30,8 +30,8 @@ import java.io.Serializable;
  */
 @RecordBuilder
 @Schema(description = "投诉通信VO")
-public record OrderComplaintCommunicationDTO(@Schema(description = "内容") String content)
-        implements Serializable {
+public record OrderComplaintCommunicationDTO(@Schema(description = "内容") String content) implements Serializable {
 
-    @Serial private static final long serialVersionUID = -8460949951683122695L;
+    @Serial
+    private static final long serialVersionUID = -8460949951683122695L;
 }

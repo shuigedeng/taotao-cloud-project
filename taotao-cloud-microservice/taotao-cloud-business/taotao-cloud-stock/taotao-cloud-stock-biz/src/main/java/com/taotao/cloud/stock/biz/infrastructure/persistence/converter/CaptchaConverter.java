@@ -36,11 +36,10 @@ public class CaptchaConverter {
         if (sysCaptchaDO == null) {
             return null;
         }
-        Captcha captcha =
-                new Captcha(
-                        new Uuid(sysCaptchaDO.getUuid()),
-                        new CaptchaCode(sysCaptchaDO.getCode()),
-                        sysCaptchaDO.getExpireTime());
+        Captcha captcha = new Captcha(
+                new Uuid(sysCaptchaDO.getUuid()),
+                new CaptchaCode(sysCaptchaDO.getCode()),
+                sysCaptchaDO.getExpireTime());
         return captcha;
     }
 }

@@ -61,19 +61,16 @@ public class WxpayPaymentService extends AbstractPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
 
         // 微信API版本
 
-        WxServiceWrapper wxServiceWrapper =
-                configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+        WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
         String apiVersion = wxServiceWrapper.getApiVersion();
         if (CS.PAY_IF_VERSION.WX_V2.equals(apiVersion)) {
-            return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode())
-                    .pay(rq, payOrder, mchAppConfigContext);
+            return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode()).pay(rq, payOrder, mchAppConfigContext);
         } else if (CS.PAY_IF_VERSION.WX_V3.equals(apiVersion)) {
             return PaywayUtil.getRealPaywayV3Service(this, payOrder.getWayCode())
                     .pay(rq, payOrder, mchAppConfigContext);
@@ -102,8 +99,7 @@ public class WxpayPaymentService extends AbstractPaymentService {
         request.setSpbillCreateIp(payOrder.getClientIp());
         request.setNotifyUrl(getNotifyUrl());
         request.setProductId(System.currentTimeMillis() + "");
-        request.setTimeExpire(
-                DateUtil.format(payOrder.getExpiredTime(), DatePattern.PURE_DATETIME_PATTERN));
+        request.setTimeExpire(DateUtil.format(payOrder.getExpiredTime(), DatePattern.PURE_DATETIME_PATTERN));
 
         // 订单分账， 将冻结商户资金。
         if (isDivisionOrder(payOrder)) {
@@ -113,11 +109,8 @@ public class WxpayPaymentService extends AbstractPaymentService {
         // 特约商户
         if (mchAppConfigContext.isIsvsubMch()) {
             WxpayIsvsubMchParams isvsubMchParams =
-                    (WxpayIsvsubMchParams)
-                            configContextQueryService.queryIsvsubMchParams(
-                                    mchAppConfigContext.getMchNo(),
-                                    mchAppConfigContext.getAppId(),
-                                    getIfCode());
+                    (WxpayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                            mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
             request.setSubMchId(isvsubMchParams.getSubMchId());
             if (StringUtils.isNotBlank(isvsubMchParams.getSubMchAppId())) {
                 request.setSubAppId(isvsubMchParams.getSubMchAppId());
@@ -133,8 +126,7 @@ public class WxpayPaymentService extends AbstractPaymentService {
      * @param payOrder
      * @return
      */
-    public JSONObject buildV3OrderRequest(
-            PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public JSONObject buildV3OrderRequest(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
         String payOrderId = payOrder.getPayOrderId();
 
         // 微信统一下单请求对象
@@ -167,18 +159,14 @@ public class WxpayPaymentService extends AbstractPaymentService {
             reqJSON.put("settle_info", settleInfo);
         }
 
-        WxPayService wxPayService =
-                configContextQueryService
-                        .getWxServiceWrapper(mchAppConfigContext)
-                        .getWxPayService();
+        WxPayService wxPayService = configContextQueryService
+                .getWxServiceWrapper(mchAppConfigContext)
+                .getWxPayService();
         if (mchAppConfigContext.isIsvsubMch()) { // 特约商户
 
             WxpayIsvsubMchParams isvsubMchParams =
-                    (WxpayIsvsubMchParams)
-                            configContextQueryService.queryIsvsubMchParams(
-                                    mchAppConfigContext.getMchNo(),
-                                    mchAppConfigContext.getAppId(),
-                                    getIfCode());
+                    (WxpayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                            mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
             reqJSON.put("sp_appid", wxPayService.getConfig().getAppId());
             reqJSON.put("sp_mchid", wxPayService.getConfig().getMchId());
             reqJSON.put("sub_mchid", isvsubMchParams.getSubMchId());

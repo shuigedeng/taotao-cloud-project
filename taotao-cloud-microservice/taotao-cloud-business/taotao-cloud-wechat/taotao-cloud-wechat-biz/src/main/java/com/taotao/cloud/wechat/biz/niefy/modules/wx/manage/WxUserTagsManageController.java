@@ -35,8 +35,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/wxUserTags")
 @Api(tags = {"公众号用户标签-管理后台"})
 public class WxUserTagsManageController {
-    @Autowired private WxUserService wxUserService;
-    @Autowired private WxUserTagsService wxUserTagsService;
+    @Autowired
+    private WxUserService wxUserService;
+
+    @Autowired
+    private WxUserTagsService wxUserTagsService;
 
     /** 查询用户标签 */
     @GetMapping("/list")
@@ -51,8 +54,7 @@ public class WxUserTagsManageController {
     @PostMapping("/save")
     @RequiresPermissions("wx:wxuser:save")
     @ApiOperation(value = "保存")
-    public R save(@CookieValue String appid, @RequestBody WxUserTagForm form)
-            throws WxErrorException {
+    public R save(@CookieValue String appid, @RequestBody WxUserTagForm form) throws WxErrorException {
         Long tagid = form.getId();
         if (tagid == null || tagid <= 0) {
             wxUserTagsService.creatTag(appid, form.getName());
@@ -66,8 +68,7 @@ public class WxUserTagsManageController {
     @PostMapping("/delete/{tagid}")
     @RequiresPermissions("wx:wxuser:save")
     @ApiOperation(value = "删除标签")
-    public R delete(@CookieValue String appid, @PathVariable("tagid") Long tagid)
-            throws WxErrorException {
+    public R delete(@CookieValue String appid, @PathVariable("tagid") Long tagid) throws WxErrorException {
         if (tagid == null || tagid <= 0) {
             return R.error("标签ID不得为空");
         }
@@ -79,8 +80,7 @@ public class WxUserTagsManageController {
     @PostMapping("/batchTagging")
     @RequiresPermissions("wx:wxuser:save")
     @ApiOperation(value = "批量给用户打标签")
-    public R batchTagging(@CookieValue String appid, @RequestBody WxUserBatchTaggingForm form)
-            throws WxErrorException {
+    public R batchTagging(@CookieValue String appid, @RequestBody WxUserBatchTaggingForm form) throws WxErrorException {
 
         wxUserTagsService.batchTagging(appid, form.getTagid(), form.getOpenidList());
         return R.ok();

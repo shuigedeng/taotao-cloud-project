@@ -701,9 +701,7 @@ public class Convert {
      * @return 字符串
      */
     public static String str(byte[] bytes, String charset) {
-        return str(
-                bytes,
-                StringUtil.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+        return str(bytes, StringUtil.isEmpty(charset) ? Charset.defaultCharset() : Charset.forName(charset));
     }
 
     /**
@@ -840,9 +838,7 @@ public class Convert {
 
         String s = "";
         for (int i = 0; i < fraction.length; i++) {
-            s +=
-                    (digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i])
-                            .replaceAll("(零.)+", "");
+            s += (digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", "");
         }
         if (s.length() < 1) {
             s = "整";

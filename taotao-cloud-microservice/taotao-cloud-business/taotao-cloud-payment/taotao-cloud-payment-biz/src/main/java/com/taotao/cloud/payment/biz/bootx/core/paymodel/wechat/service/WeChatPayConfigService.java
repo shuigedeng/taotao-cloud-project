@@ -64,9 +64,7 @@ public class WeChatPayConfigService {
     @Transactional(rollbackFor = Exception.class)
     public WeChatPayConfigDto update(WeChatPayConfigDto param) {
         WeChatPayConfig weChatPayConfig =
-                weChatPayConfigManager
-                        .findById(param.getId())
-                        .orElseThrow(() -> new BizException("微信支付配置不存在"));
+                weChatPayConfigManager.findById(param.getId()).orElseThrow(() -> new BizException("微信支付配置不存在"));
         BeanUtil.copyProperties(param, weChatPayConfig, CopyOptions.create().ignoreNullValue());
         // 支付方式
         if (CollUtil.isNotEmpty(param.getPayWayList())) {
@@ -86,9 +84,7 @@ public class WeChatPayConfigService {
     @Transactional(rollbackFor = Exception.class)
     public void setUpActivity(Long id) {
         WeChatPayConfig weChatPayConfig =
-                weChatPayConfigManager
-                        .findById(id)
-                        .orElseThrow(() -> new BizException("微信支付配置不存在"));
+                weChatPayConfigManager.findById(id).orElseThrow(() -> new BizException("微信支付配置不存在"));
         if (Objects.equals(weChatPayConfig.getActivity(), Boolean.TRUE)) {
             return;
         }
@@ -101,9 +97,7 @@ public class WeChatPayConfigService {
     @Transactional(rollbackFor = Exception.class)
     public void clearActivity(Long id) {
         WeChatPayConfig weChatPayConfig =
-                weChatPayConfigManager
-                        .findById(id)
-                        .orElseThrow(() -> new BizException("微信支付配置不存在"));
+                weChatPayConfigManager.findById(id).orElseThrow(() -> new BizException("微信支付配置不存在"));
         if (Objects.equals(weChatPayConfig.getActivity(), Boolean.TRUE)) {
             return;
         }
@@ -113,10 +107,7 @@ public class WeChatPayConfigService {
 
     /** 获取 */
     public WeChatPayConfigDto findById(Long id) {
-        return weChatPayConfigManager
-                .findById(id)
-                .map(WeChatPayConfig::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return weChatPayConfigManager.findById(id).map(WeChatPayConfig::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 微信支持支付方式 */
@@ -131,25 +122,23 @@ public class WeChatPayConfigService {
         WxPayApiConfig wxPayApiConfig;
         // 公钥方式
         if (Objects.equals(weChatPayConfig.getAuthType(), WeChatPayCode.AUTH_TYPE_KEY)) {
-            wxPayApiConfig =
-                    WxPayApiConfig.builder()
-                            .appId(weChatPayConfig.getAppId())
-                            .mchId(weChatPayConfig.getMchId())
-                            .apiKey(weChatPayConfig.getApiKey())
-                            .certPath(weChatPayConfig.getCertPath())
-                            .domain(weChatPayConfig.getDomain())
-                            .build();
+            wxPayApiConfig = WxPayApiConfig.builder()
+                    .appId(weChatPayConfig.getAppId())
+                    .mchId(weChatPayConfig.getMchId())
+                    .apiKey(weChatPayConfig.getApiKey())
+                    .certPath(weChatPayConfig.getCertPath())
+                    .domain(weChatPayConfig.getDomain())
+                    .build();
         }
         // 证书
         else if (Objects.equals(weChatPayConfig.getAuthType(), WeChatPayCode.AUTH_TYPE_CART)) {
-            wxPayApiConfig =
-                    WxPayApiConfig.builder()
-                            .appId(weChatPayConfig.getAppId())
-                            .mchId(weChatPayConfig.getMchId())
-                            .apiKey(weChatPayConfig.getApiKey())
-                            .certPath(weChatPayConfig.getCertPath())
-                            .keyPemPath(weChatPayConfig.getDomain())
-                            .build();
+            wxPayApiConfig = WxPayApiConfig.builder()
+                    .appId(weChatPayConfig.getAppId())
+                    .mchId(weChatPayConfig.getMchId())
+                    .apiKey(weChatPayConfig.getApiKey())
+                    .certPath(weChatPayConfig.getCertPath())
+                    .keyPemPath(weChatPayConfig.getDomain())
+                    .build();
         } else {
             throw new BizException("微信支付认证类型配置不存在");
         }

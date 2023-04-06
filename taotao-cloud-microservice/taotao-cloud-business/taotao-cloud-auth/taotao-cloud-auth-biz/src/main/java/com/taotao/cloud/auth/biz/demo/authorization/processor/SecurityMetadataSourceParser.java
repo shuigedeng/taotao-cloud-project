@@ -63,21 +63,17 @@ public class SecurityMetadataSourceParser {
      *
      * @return requestMap 中存储的权限数据
      */
-    public LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>
-            getConfiguredSecurityMetadata() {
+    public LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> getConfiguredSecurityMetadata() {
 
         List<String> permitAllMatcher = securityMatcherConfigurer.getPermitAllList();
 
         if (CollectionUtils.isNotEmpty(permitAllMatcher)) {
-            LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> result =
-                    new LinkedHashMap<>();
-            permitAllMatcher.forEach(
-                    item -> {
-                        result.put(
-                                new HerodotusRequestMatcher(item),
-                                new HerodotusConfigAttribute(
-                                        PermissionExpression.PERMIT_ALL.getValue()));
-                    });
+            LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> result = new LinkedHashMap<>();
+            permitAllMatcher.forEach(item -> {
+                result.put(
+                        new HerodotusRequestMatcher(item),
+                        new HerodotusConfigAttribute(PermissionExpression.PERMIT_ALL.getValue()));
+            });
             return result;
         }
         return new LinkedHashMap<>();
@@ -121,8 +117,7 @@ public class SecurityMetadataSourceParser {
                     httpMethod = values.get(1);
                 }
                 log.trace(
-                        "[Herodotus] |- Parse the request matcher value with regex is pattern:"
-                                + " [{}], method: [{}]",
+                        "[Herodotus] |- Parse the request matcher value with regex is pattern:" + " [{}], method: [{}]",
                         pattern,
                         httpMethod);
                 return new HerodotusRequestMatcher(pattern, httpMethod);
@@ -143,8 +138,7 @@ public class SecurityMetadataSourceParser {
      */
     private static String hasAnyRole(String rolePrefix, String... authorities) {
         String anyAuthorities =
-                org.springframework.util.StringUtils.arrayToDelimitedString(
-                        authorities, "','" + rolePrefix);
+                org.springframework.util.StringUtils.arrayToDelimitedString(authorities, "','" + rolePrefix);
         return "hasAnyRole('" + rolePrefix + anyAuthorities + "')";
     }
 
@@ -161,12 +155,11 @@ public class SecurityMetadataSourceParser {
         Assert.notNull(role, "role cannot be null");
         Assert.isTrue(
                 rolePrefix.isEmpty() || !role.startsWith(rolePrefix),
-                () ->
-                        "role should not start with '"
-                                + rolePrefix
-                                + "' since it is automatically inserted. Got '"
-                                + role
-                                + "'");
+                () -> "role should not start with '"
+                        + rolePrefix
+                        + "' since it is automatically inserted. Got '"
+                        + role
+                        + "'");
         return "hasRole('" + rolePrefix + role + "')";
     }
 
@@ -191,8 +184,7 @@ public class SecurityMetadataSourceParser {
      * @return 权限表达式
      */
     private static String hasAnyAuthority(String... authorities) {
-        String anyAuthorities =
-                org.springframework.util.StringUtils.arrayToDelimitedString(authorities, "','");
+        String anyAuthorities = org.springframework.util.StringUtils.arrayToDelimitedString(authorities, "','");
         return "hasAnyAuthority('" + anyAuthorities + "')";
     }
 
@@ -222,9 +214,7 @@ public class SecurityMetadataSourceParser {
     public LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> postProcess(
             SecurityAttribute securityAttribute) {
         return convertToSecurityMetadata(
-                securityAttribute.getUrl(),
-                securityAttribute.getRequestMethod(),
-                analysis(securityAttribute));
+                securityAttribute.getUrl(), securityAttribute.getRequestMethod(), analysis(securityAttribute));
     }
 
     /**
@@ -233,8 +223,7 @@ public class SecurityMetadataSourceParser {
      * @param requestMapping {@link RequestMapping}
      * @return 请求和权限的映射的Map
      */
-    public LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> postProcess(
-            RequestMapping requestMapping) {
+    public LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> postProcess(RequestMapping requestMapping) {
         return convertToSecurityMetadata(
                 requestMapping.getUrl(),
                 requestMapping.getRequestMethod(),
@@ -324,10 +313,9 @@ public class SecurityMetadataSourceParser {
      * @param expression 权限代码{@link GrantedAuthority#getAuthority()}
      * @return 请求和权限的映射的Map
      */
-    private LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>
-            convertToSecurityMetadata(String url, String methods, String expression) {
-        return this.convertToSecurityMetadata(
-                url, methods, new HerodotusConfigAttribute(expression));
+    private LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> convertToSecurityMetadata(
+            String url, String methods, String expression) {
+        return this.convertToSecurityMetadata(url, methods, new HerodotusConfigAttribute(expression));
     }
 
     /**
@@ -338,11 +326,9 @@ public class SecurityMetadataSourceParser {
      * @param herodotusConfigAttribute Security权限{@link ConfigAttribute}
      * @return 保存请求和权限的映射的Map
      */
-    private LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute>
-            convertToSecurityMetadata(
-                    String url, String methods, HerodotusConfigAttribute herodotusConfigAttribute) {
-        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> result =
-                new LinkedHashMap<>();
+    private LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> convertToSecurityMetadata(
+            String url, String methods, HerodotusConfigAttribute herodotusConfigAttribute) {
+        LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> result = new LinkedHashMap<>();
         if (StringUtils.isBlank(methods)) {
             result.put(new HerodotusRequestMatcher(url), herodotusConfigAttribute);
         } else {
@@ -370,17 +356,16 @@ public class SecurityMetadataSourceParser {
     }
 
     @Nullable
-    private String createExpression(
-            SecurityAttribute securityAttribute, Set<HerodotusGrantedAuthority> relations) {
+    private String createExpression(SecurityAttribute securityAttribute, Set<HerodotusGrantedAuthority> relations) {
         if (CollectionUtils.isNotEmpty(relations)) {
             if (StringUtils.containsIgnoreCase(getExpression(securityAttribute), "Any")) {
-                String code =
-                        relations.stream()
-                                .map(HerodotusGrantedAuthority::getAuthority)
-                                .collect(Collectors.joining(SymbolConstants.COMMA));
+                String code = relations.stream()
+                        .map(HerodotusGrantedAuthority::getAuthority)
+                        .collect(Collectors.joining(SymbolConstants.COMMA));
                 return createExpression(securityAttribute, code);
             } else {
-                Optional<HerodotusGrantedAuthority> optional = relations.stream().findFirst();
+                Optional<HerodotusGrantedAuthority> optional =
+                        relations.stream().findFirst();
                 if (optional.isPresent()) {
                     String code = optional.get().getAuthority();
                     return createExpression(securityAttribute, code);

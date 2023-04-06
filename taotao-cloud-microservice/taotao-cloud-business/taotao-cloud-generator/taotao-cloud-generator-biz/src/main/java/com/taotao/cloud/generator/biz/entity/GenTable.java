@@ -96,9 +96,7 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
     private String functionAuthor;
 
     /** 生成代码方式（0zip压缩包 1自定义路径） */
-    @Column(
-            name = "gen_type",
-            columnDefinition = "varchar(64) not null comment '生成代码方式（0zip压缩包 1自定义路径）'")
+    @Column(name = "gen_type", columnDefinition = "varchar(64) not null comment '生成代码方式（0zip压缩包 1自定义路径）'")
     private String genType;
 
     /** 生成路径（不填默认项目路径） */
@@ -170,8 +168,7 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
     }
 
     public static boolean isSub(String tplCategory) {
-        return tplCategory != null
-                && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_SUB, tplCategory);
+        return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_SUB, tplCategory);
     }
 
     public boolean isTree() {
@@ -179,8 +176,7 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
     }
 
     public static boolean isTree(String tplCategory) {
-        return tplCategory != null
-                && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_TREE, tplCategory);
+        return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_TREE, tplCategory);
     }
 
     public boolean isCrud() {
@@ -188,8 +184,7 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
     }
 
     public static boolean isCrud(String tplCategory) {
-        return tplCategory != null
-                && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_CRUD, tplCategory);
+        return tplCategory != null && org.apache.commons.lang3.StringUtils.equals(GenConstants.TPL_CRUD, tplCategory);
     }
 
     public boolean isSuperColumn(String javaField) {
@@ -199,10 +194,8 @@ public class GenTable extends BaseSuperEntity<GenTable, Long> {
     public static boolean isSuperColumn(String tplCategory, String javaField) {
         if (isTree(tplCategory)) {
             return org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase(
-                    javaField,
-                    ArrayUtils.addAll(GenConstants.TREE_ENTITY, GenConstants.BASE_ENTITY));
+                    javaField, ArrayUtils.addAll(GenConstants.TREE_ENTITY, GenConstants.BASE_ENTITY));
         }
-        return org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase(
-                javaField, GenConstants.BASE_ENTITY);
+        return org.apache.commons.lang3.StringUtils.equalsAnyIgnoreCase(javaField, GenConstants.BASE_ENTITY);
     }
 }

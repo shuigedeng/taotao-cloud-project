@@ -44,7 +44,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class WxpayTransferService implements ITransferService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -55,8 +56,7 @@ public class WxpayTransferService implements ITransferService {
     public boolean isSupport(String entryType) {
 
         // 微信仅支持 零钱 和 银行卡入账方式
-        if (TransferOrder.ENTRY_WX_CASH.equals(entryType)
-                || TransferOrder.ENTRY_BANK_CARD.equals(entryType)) {
+        if (TransferOrder.ENTRY_WX_CASH.equals(entryType) || TransferOrder.ENTRY_BANK_CARD.equals(entryType)) {
             return true;
         }
 
@@ -80,19 +80,15 @@ public class WxpayTransferService implements ITransferService {
 
     @Override
     public ChannelRetMsg transfer(
-            TransferOrderRQ bizRQ,
-            TransferOrder transferOrder,
-            MchAppConfigContext mchAppConfigContext) {
+            TransferOrderRQ bizRQ, TransferOrder transferOrder, MchAppConfigContext mchAppConfigContext) {
 
         try {
 
             EntPayRequest request = new EntPayRequest();
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
-            request.setMchAppid(
-                    wxServiceWrapper.getWxPayService().getConfig().getAppId()); // 商户账号appid
+            request.setMchAppid(wxServiceWrapper.getWxPayService().getConfig().getAppId()); // 商户账号appid
             request.setMchId(wxServiceWrapper.getWxPayService().getConfig().getMchId()); // 商户号
 
             request.setPartnerTradeNo(transferOrder.getTransferId()); // 商户订单号
@@ -128,8 +124,7 @@ public class WxpayTransferService implements ITransferService {
                     null,
                     WxpayKit.appendErrCode(e.getReturnMsg(), e.getErrCode()),
                     WxpayKit.appendErrMsg(
-                            e.getReturnMsg(),
-                            StringUtils.defaultIfEmpty(e.getErrCodeDes(), e.getCustomErrorMsg())));
+                            e.getReturnMsg(), StringUtils.defaultIfEmpty(e.getErrCodeDes(), e.getCustomErrorMsg())));
 
         } catch (Exception e) {
             log.error("转账异常：", e);

@@ -40,7 +40,8 @@ import lombok.*;
 public class BpmUserGroupDO extends BaseDO {
 
     /** 编号，自增 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 组名 */
     private String name;
     /** 描述 */

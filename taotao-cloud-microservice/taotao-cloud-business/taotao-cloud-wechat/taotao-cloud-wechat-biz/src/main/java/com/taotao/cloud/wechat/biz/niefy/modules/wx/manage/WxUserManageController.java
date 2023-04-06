@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/wxUser")
 @Api(tags = {"公众号粉丝-管理后台"})
 public class WxUserManageController {
-    @Autowired private WxUserService userService;
+    @Autowired
+    private WxUserService userService;
 
     /** 列表 */
     @GetMapping("/list")

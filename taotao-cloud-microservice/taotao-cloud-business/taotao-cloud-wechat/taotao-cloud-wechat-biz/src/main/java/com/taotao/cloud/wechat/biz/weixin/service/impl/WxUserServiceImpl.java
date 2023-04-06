@@ -84,9 +84,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         WxUser wxUser;
         if ("tagging".equals(taggingType)) {
             for (String openId : openIds) {
-                wxUser =
-                        baseMapper.selectOne(
-                                Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
+                wxUser = baseMapper.selectOne(Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
                 Long[] tagidList = wxUser.getTagidList();
                 List<Long> list = Arrays.asList(tagidList);
                 list = new ArrayList<>(list);
@@ -101,9 +99,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         }
         if ("unTagging".equals(taggingType)) {
             for (String openId : openIds) {
-                wxUser =
-                        baseMapper.selectOne(
-                                Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
+                wxUser = baseMapper.selectOne(Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
                 Long[] tagidList = wxUser.getTagidList();
                 List<Long> list = Arrays.asList(tagidList);
                 list = new ArrayList<>(list);
@@ -125,9 +121,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         WxUser wxUser = new WxUser();
         wxUser.setSubscribe(ConfigConstant.SUBSCRIBE_TYPE_NO);
         this.baseMapper.update(
-                wxUser,
-                Wrappers.<WxUser>lambdaQuery()
-                        .eq(WxUser::getSubscribe, ConfigConstant.SUBSCRIBE_TYPE_YES));
+                wxUser, Wrappers.<WxUser>lambdaQuery().eq(WxUser::getSubscribe, ConfigConstant.SUBSCRIBE_TYPE_YES));
         WxMpUserService wxMpUserService = wxService.getUserService();
         this.recursionGet(wxMpUserService, null);
     }
@@ -141,19 +135,16 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         WxMpUserList userList = wxMpUserService.userList(nextOpenid);
         List<WxUser> listWxUser = new ArrayList<>();
         List<WxMpUser> listWxMpUser = getWxMpUserList(wxMpUserService, userList.getOpenids());
-        listWxMpUser.forEach(
-                wxMpUser -> {
-                    WxUser wxUser =
-                            baseMapper.selectOne(
-                                    Wrappers.<WxUser>lambdaQuery()
-                                            .eq(WxUser::getOpenId, wxMpUser.getOpenId()));
-                    if (wxUser == null) { // 用户未存在
-                        wxUser = new WxUser();
-                        wxUser.setSubscribeNum(1);
-                    }
-                    SubscribeHandler.setWxUserValue(wxUser, wxMpUser);
-                    listWxUser.add(wxUser);
-                });
+        listWxMpUser.forEach(wxMpUser -> {
+            WxUser wxUser =
+                    baseMapper.selectOne(Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, wxMpUser.getOpenId()));
+            if (wxUser == null) { // 用户未存在
+                wxUser = new WxUser();
+                wxUser.setSubscribeNum(1);
+            }
+            SubscribeHandler.setWxUserValue(wxUser, wxMpUser);
+            listWxUser.add(wxUser);
+        });
         this.saveOrUpdateBatch(listWxUser);
         if (userList.getCount() >= 10000) {
             this.recursionGet(wxMpUserService, userList.getNextOpenid());
@@ -169,8 +160,8 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
      * @throws WxErrorException
      * @author
      */
-    private List<WxMpUser> getWxMpUserList(
-            WxMpUserService wxMpUserService, List<String> openidsList) throws WxErrorException {
+    private List<WxMpUser> getWxMpUserList(WxMpUserService wxMpUserService, List<String> openidsList)
+            throws WxErrorException {
         // 粉丝openid数量
         int count = openidsList.size();
         if (count <= 0) {
@@ -182,15 +173,13 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         for (int i = 0; i < a; i++) {
             if (i + 1 < a) {
                 log.debug("i:{},from:{},to:{}", i, i * 100, (i + 1) * 100);
-                followersInfoList =
-                        wxMpUserService.userInfoList(openidsList.subList(i * 100, ((i + 1) * 100)));
+                followersInfoList = wxMpUserService.userInfoList(openidsList.subList(i * 100, ((i + 1) * 100)));
                 if (null != followersInfoList && !followersInfoList.isEmpty()) {
                     list.addAll(followersInfoList);
                 }
             } else {
                 log.debug("i:{},from:{},to:{}", i, i * 100, count - i * 100);
-                followersInfoList =
-                        wxMpUserService.userInfoList(openidsList.subList(i * 100, count));
+                followersInfoList = wxMpUserService.userInfoList(openidsList.subList(i * 100, count));
                 if (null != followersInfoList && !followersInfoList.isEmpty()) {
                     list.addAll(followersInfoList);
                 }
@@ -202,8 +191,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
 
     @Override
     public WxUser getByOpenId(String openId) {
-        return this.baseMapper.selectOne(
-                Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
+        return this.baseMapper.selectOne(Wrappers.<WxUser>lambdaQuery().eq(WxUser::getOpenId, openId));
     }
 
     @Override
@@ -245,11 +233,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
         String key = WxMaConstants.THIRD_SESSION_BEGIN + ":" + thirdSessionKey;
         redisTemplate
                 .opsForValue()
-                .set(
-                        key,
-                        JSONUtil.toJsonStr(thirdSession),
-                        WxMaConstants.TIME_OUT_SESSION,
-                        TimeUnit.HOURS);
+                .set(key, JSONUtil.toJsonStr(thirdSession), WxMaConstants.TIME_OUT_SESSION, TimeUnit.HOURS);
         wxUser.setSessionKey(thirdSessionKey);
         return wxUser;
     }
@@ -259,11 +243,8 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
     public WxUser saveOrUptateWxUser(WxOpenDataDTO wxOpenDataDTO) {
         WxMaUserService wxMaUserService =
                 WxMaConfiguration.getMaService(wxOpenDataDTO.getAppId()).getUserService();
-        WxMaUserInfo wxMaUserInfo =
-                wxMaUserService.getUserInfo(
-                        wxOpenDataDTO.getSessionKey(),
-                        wxOpenDataDTO.getEncryptedData(),
-                        wxOpenDataDTO.getIv());
+        WxMaUserInfo wxMaUserInfo = wxMaUserService.getUserInfo(
+                wxOpenDataDTO.getSessionKey(), wxOpenDataDTO.getEncryptedData(), wxOpenDataDTO.getIv());
         WxUser wxUser = new WxUser();
         BeanUtil.copyProperties(wxMaUserInfo, wxUser);
         wxUser.setId(wxOpenDataDTO.getUserId());

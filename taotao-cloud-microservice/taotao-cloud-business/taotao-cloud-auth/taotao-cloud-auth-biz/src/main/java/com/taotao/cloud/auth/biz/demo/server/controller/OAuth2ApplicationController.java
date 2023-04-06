@@ -68,16 +68,13 @@ public class OAuth2ApplicationController extends BaseController<OAuth2Applicatio
     @GetMapping
     @Override
     public Result<Map<String, Object>> findByPage(
-            @RequestParam("pageNumber") Integer pageNumber,
-            @RequestParam("pageSize") Integer pageSize) {
+            @RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
 
         Page<OAuth2Application> pages = applicationService.findByPage(pageNumber, pageSize);
         if (ObjectUtils.isNotEmpty(pages) && CollectionUtils.isNotEmpty(pages.getContent())) {
             List<OAuth2ApplicationDto> auth2Applications =
                     pages.getContent().stream().map(this::toDto).collect(Collectors.toList());
-            return result(
-                    getPageInfoMap(
-                            auth2Applications, pages.getTotalPages(), pages.getTotalElements()));
+            return result(getPageInfoMap(auth2Applications, pages.getTotalPages(), pages.getTotalElements()));
         }
 
         return Result.failure("查询数据失败！");
@@ -85,10 +82,7 @@ public class OAuth2ApplicationController extends BaseController<OAuth2Applicatio
 
     @Operation(summary = "保存或更新OAuth2应用", description = "接收JSON数据，转换为OauthClientDetails实体，进行更新")
     @Parameters({
-        @Parameter(
-                name = "oauthClientDetails",
-                required = true,
-                description = "可转换为OauthClientDetails实体的json数据")
+        @Parameter(name = "oauthClientDetails", required = true, description = "可转换为OauthClientDetails实体的json数据")
     })
     @PostMapping
     public Result<OAuth2Application> saveOrUpdate(@RequestBody OAuth2ApplicationDto domain) {
@@ -97,9 +91,7 @@ public class OAuth2ApplicationController extends BaseController<OAuth2Applicatio
     }
 
     @Operation(summary = "删除OAuth2应用", description = "根据应用ID删除OAuth2应用，以及相关联的关系数据")
-    @Parameters({
-        @Parameter(name = "applicationId", required = true, description = "applicationId")
-    })
+    @Parameters({@Parameter(name = "applicationId", required = true, description = "applicationId")})
     @DeleteMapping
     @Override
     public Result<String> delete(@RequestBody String applicationId) {
@@ -114,8 +106,7 @@ public class OAuth2ApplicationController extends BaseController<OAuth2Applicatio
     })
     @PutMapping
     public Result<OAuth2Application> authorize(
-            @RequestParam(name = "applicationId") String scopeId,
-            @RequestParam(name = "scopes[]") String[] scopes) {
+            @RequestParam(name = "applicationId") String scopeId, @RequestParam(name = "scopes[]") String[] scopes) {
         OAuth2Application application = applicationService.authorize(scopeId, scopes);
         return result(application);
     }
@@ -131,8 +122,7 @@ public class OAuth2ApplicationController extends BaseController<OAuth2Applicatio
         dto.setClientId(entity.getClientId());
         dto.setClientSecret(entity.getClientSecret());
         dto.setRedirectUris(entity.getRedirectUris());
-        dto.setAuthorizationGrantTypes(
-                StringUtils.commaDelimitedListToSet(entity.getAuthorizationGrantTypes()));
+        dto.setAuthorizationGrantTypes(StringUtils.commaDelimitedListToSet(entity.getAuthorizationGrantTypes()));
         dto.setClientAuthenticationMethods(
                 StringUtils.commaDelimitedListToSet(entity.getClientAuthenticationMethods()));
         dto.setRequireProofKey(entity.getRequireProofKey());

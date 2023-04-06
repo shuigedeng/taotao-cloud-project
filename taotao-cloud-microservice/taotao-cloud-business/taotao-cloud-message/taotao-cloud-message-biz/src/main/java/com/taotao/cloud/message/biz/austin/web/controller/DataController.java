@@ -44,7 +44,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("获取数据接口（全链路追踪)")
 public class DataController {
 
-    @Autowired private DataService dataService;
+    @Autowired
+    private DataService dataService;
 
     @PostMapping("/user")
     @ApiOperation("/获取【当天】用户接收消息的全链路数据")

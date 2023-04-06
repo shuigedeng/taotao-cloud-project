@@ -150,10 +150,9 @@ public class WeChatMenuInfo {
     /** 从WxJava对象转成 */
     public static WeChatMenuInfo init(WxMpMenu wxMpMenu) {
         WeChatMenuInfo weChatMenuInfo = new WeChatMenuInfo();
-        List<Button> buttons =
-                wxMpMenu.getMenu().getButtons().stream()
-                        .map(WeChatMenuInfo::initButton)
-                        .collect(Collectors.toList());
+        List<Button> buttons = wxMpMenu.getMenu().getButtons().stream()
+                .map(WeChatMenuInfo::initButton)
+                .collect(Collectors.toList());
 
         weChatMenuInfo.setButtons(buttons);
         return weChatMenuInfo;
@@ -161,10 +160,9 @@ public class WeChatMenuInfo {
 
     /** 菜单按钮转换 */
     private static Button initButton(WxMenuButton wxMenuButton) {
-        List<Button> subButtons =
-                wxMenuButton.getSubButtons().stream()
-                        .map(WeChatMenuInfo::initButton)
-                        .collect(Collectors.toList());
+        List<Button> subButtons = wxMenuButton.getSubButtons().stream()
+                .map(WeChatMenuInfo::initButton)
+                .collect(Collectors.toList());
         Button button = new Button();
         button.setType(wxMenuButton.getType());
         button.setName(wxMenuButton.getName());

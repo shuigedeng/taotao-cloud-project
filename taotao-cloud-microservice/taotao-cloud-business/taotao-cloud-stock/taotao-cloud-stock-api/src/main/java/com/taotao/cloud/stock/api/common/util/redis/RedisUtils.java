@@ -29,17 +29,23 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RedisUtils {
-    @Autowired private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired private ValueOperations<String, String> valueOperations;
+    @Autowired
+    private ValueOperations<String, String> valueOperations;
 
-    @Autowired private HashOperations<String, String, Object> hashOperations;
+    @Autowired
+    private HashOperations<String, String, Object> hashOperations;
 
-    @Autowired private ListOperations<String, Object> listOperations;
+    @Autowired
+    private ListOperations<String, Object> listOperations;
 
-    @Autowired private SetOperations<String, Object> setOperations;
+    @Autowired
+    private SetOperations<String, Object> setOperations;
 
-    @Autowired private ZSetOperations<String, Object> zSetOperations;
+    @Autowired
+    private ZSetOperations<String, Object> zSetOperations;
 
     /** 默认过期时长，单位：秒 */
     public static final long DEFAULT_EXPIRE = 60 * 60 * 24;

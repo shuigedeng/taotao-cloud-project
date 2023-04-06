@@ -28,5 +28,4 @@ import org.springframework.stereotype.Service;
  * @since 2021-04-27
  */
 @Service
-public class PayInterfaceDefineService
-        extends ServiceImpl<PayInterfaceDefineMapper, PayInterfaceDefine> {}
+public class PayInterfaceDefineService extends ServiceImpl<PayInterfaceDefineMapper, PayInterfaceDefine> {}

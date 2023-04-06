@@ -42,9 +42,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class TaskHandlerImpl implements TaskHandler {
 
-    @Autowired private MessageTemplateDao messageTemplateDao;
+    @Autowired
+    private MessageTemplateDao messageTemplateDao;
 
-    @Autowired private ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
     @Override
     public void handle(Long messageTemplateId) {
@@ -55,40 +57,33 @@ public class TaskHandlerImpl implements TaskHandler {
             return;
         }
         if (StrUtil.isBlank(messageTemplate.getCronCrowdPath())) {
-            log.error(
-                    "TaskHandler#handle crowdPath empty! messageTemplateId:{}", messageTemplateId);
+            log.error("TaskHandler#handle crowdPath empty! messageTemplateId:{}", messageTemplateId);
             return;
         }
 
         // 1. 获取文件行数大小
-        long countCsvRow =
-                ReadFileUtils.countCsvRow(
-                        messageTemplate.getCronCrowdPath(), new CountFileRowHandler());
+        long countCsvRow = ReadFileUtils.countCsvRow(messageTemplate.getCronCrowdPath(), new CountFileRowHandler());
 
         // 2. 读取文件得到每一行记录给到队列做lazy batch处理
         CrowdBatchTaskPending crowdBatchTaskPending = context.getBean(CrowdBatchTaskPending.class);
-        ReadFileUtils.getCsvRow(
-                messageTemplate.getCronCrowdPath(),
-                row -> {
-                    if (CollUtil.isEmpty(row.getFieldMap())
-                            || StrUtil.isBlank(row.getFieldMap().get(ReadFileUtils.RECEIVER_KEY))) {
-                        return;
-                    }
+        ReadFileUtils.getCsvRow(messageTemplate.getCronCrowdPath(), row -> {
+            if (CollUtil.isEmpty(row.getFieldMap())
+                    || StrUtil.isBlank(row.getFieldMap().get(ReadFileUtils.RECEIVER_KEY))) {
+                return;
+            }
 
-                    // 3. 每一行处理交给LazyPending
-                    HashMap<String, String> params =
-                            ReadFileUtils.getParamFromLine(row.getFieldMap());
-                    CrowdInfoVo crowdInfoVo =
-                            CrowdInfoVo.builder()
-                                    .receiver(row.getFieldMap().get(ReadFileUtils.RECEIVER_KEY))
-                                    .params(params)
-                                    .messageTemplateId(messageTemplateId)
-                                    .build();
-                    crowdBatchTaskPending.pending(crowdInfoVo);
+            // 3. 每一行处理交给LazyPending
+            HashMap<String, String> params = ReadFileUtils.getParamFromLine(row.getFieldMap());
+            CrowdInfoVo crowdInfoVo = CrowdInfoVo.builder()
+                    .receiver(row.getFieldMap().get(ReadFileUtils.RECEIVER_KEY))
+                    .params(params)
+                    .messageTemplateId(messageTemplateId)
+                    .build();
+            crowdBatchTaskPending.pending(crowdInfoVo);
 
-                    // 4. 判断是否读取文件完成回收资源且更改状态
-                    onComplete(row, countCsvRow, crowdBatchTaskPending, messageTemplateId);
-                });
+            // 4. 判断是否读取文件完成回收资源且更改状态
+            onComplete(row, countCsvRow, crowdBatchTaskPending, messageTemplateId);
+        });
     }
 
     /**
@@ -100,10 +95,7 @@ public class TaskHandlerImpl implements TaskHandler {
      * @param messageTemplateId
      */
     private void onComplete(
-            CsvRow row,
-            long countCsvRow,
-            AbstractLazyPending crowdBatchTaskPending,
-            Long messageTemplateId) {
+            CsvRow row, long countCsvRow, AbstractLazyPending crowdBatchTaskPending, Long messageTemplateId) {
         if (row.getOriginalLineNumber() == countCsvRow) {
             crowdBatchTaskPending.setStop(true);
             log.info("messageTemplate:[{}] read csv file complete!", messageTemplateId);

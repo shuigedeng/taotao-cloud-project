@@ -35,10 +35,12 @@ import lombok.NoArgsConstructor;
 public class MessageTemplateParam {
 
     /** 当前页码 */
-    @NotNull private Integer page = 1;
+    @NotNull
+    private Integer page = 1;
 
     /** 当前页大小 */
-    @NotNull private Integer perPage = 10;
+    @NotNull
+    private Integer perPage = 10;
 
     /** 模板ID */
     private Long id;

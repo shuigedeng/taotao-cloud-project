@@ -29,23 +29,18 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class CloudEventListener {
     @Component
-    public static class RefreshScopeRefreshedEventListener
-            implements ApplicationListener<RefreshScopeRefreshedEvent> {
+    public static class RefreshScopeRefreshedEventListener implements ApplicationListener<RefreshScopeRefreshedEvent> {
         @Override
         public void onApplicationEvent(RefreshScopeRefreshedEvent event) {
-            LogUtils.info(
-                    "CloudEventListener ----- RefreshScopeRefreshedEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("CloudEventListener ----- RefreshScopeRefreshedEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class EnvironmentChangeEventListener
-            implements ApplicationListener<EnvironmentChangeEvent> {
+    public static class EnvironmentChangeEventListener implements ApplicationListener<EnvironmentChangeEvent> {
         @Override
         public void onApplicationEvent(EnvironmentChangeEvent event) {
-            LogUtils.info(
-                    "CloudEventListener ----- EnvironmentChangeEvent onApplicationEvent {}", event);
+            LogUtils.info("CloudEventListener ----- EnvironmentChangeEvent onApplicationEvent {}", event);
         }
     }
 
@@ -58,13 +53,10 @@ public class CloudEventListener {
     }
 
     @Component
-    public static class InstanceRegisteredEventListener
-            implements ApplicationListener<InstanceRegisteredEvent> {
+    public static class InstanceRegisteredEventListener implements ApplicationListener<InstanceRegisteredEvent> {
         @Override
         public void onApplicationEvent(InstanceRegisteredEvent event) {
-            LogUtils.info(
-                    "CloudEventListener ----- InstanceRegisteredEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("CloudEventListener ----- InstanceRegisteredEvent onApplicationEvent {}", event);
         }
     }
 
@@ -73,9 +65,7 @@ public class CloudEventListener {
             implements ApplicationListener<InstancePreRegisteredEvent> {
         @Override
         public void onApplicationEvent(InstancePreRegisteredEvent event) {
-            LogUtils.info(
-                    "CloudEventListener ----- InstancePreRegisteredEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("CloudEventListener ----- InstancePreRegisteredEvent onApplicationEvent {}", event);
         }
     }
 }

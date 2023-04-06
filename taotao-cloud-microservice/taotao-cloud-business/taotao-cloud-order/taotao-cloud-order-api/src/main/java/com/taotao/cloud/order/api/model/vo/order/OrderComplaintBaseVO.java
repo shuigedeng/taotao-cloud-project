@@ -66,5 +66,6 @@ public record OrderComplaintBaseVO(
         @Schema(description = "仲裁结果") String arbitrationResult)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7013465343480854816L;
+    @Serial
+    private static final long serialVersionUID = -7013465343480854816L;
 }

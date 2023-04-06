@@ -34,9 +34,14 @@ import org.springframework.stereotype.Service;
 public class ReceiptSignServiceImpl extends ServiceImpl<ReceiptSignMapper, ReceiptSignEntity>
         implements ReceiptSignService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public ReceiptSignEntity getInfo(String id) {
@@ -113,8 +118,7 @@ public class ReceiptSignServiceImpl extends ServiceImpl<ReceiptSignMapper, Recei
     @Override
     public void data(String id, String data) {
         ReceiptSignForm receiptSignForm = JsonUtils.getJsonToBean(data, ReceiptSignForm.class);
-        ReceiptSignEntity entity =
-                JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
+        ReceiptSignEntity entity = JsonUtils.getJsonToBean(receiptSignForm, ReceiptSignEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -38,22 +38,21 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmProcessInstanceController {
 
-    @Resource private BpmProcessInstanceService processInstanceService;
+    @Resource
+    private BpmProcessInstanceService processInstanceService;
 
     @GetMapping("/my-page")
     @ApiOperation(value = "获得我的实例分页列表", notes = "在【我的流程】菜单中，进行调用")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
     public CommonResult<PageResult<BpmProcessInstancePageItemRespVO>> getMyProcessInstancePage(
             @Valid BpmProcessInstanceMyPageReqVO pageReqVO) {
-        return success(
-                processInstanceService.getMyProcessInstancePage(getLoginUserId(), pageReqVO));
+        return success(processInstanceService.getMyProcessInstancePage(getLoginUserId(), pageReqVO));
     }
 
     @PostMapping("/create")
     @ApiOperation("新建流程实例")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
-    public CommonResult<String> createProcessInstance(
-            @Valid @RequestBody BpmProcessInstanceCreateReqVO createReqVO) {
+    public CommonResult<String> createProcessInstance(@Valid @RequestBody BpmProcessInstanceCreateReqVO createReqVO) {
         return success(processInstanceService.createProcessInstance(getLoginUserId(), createReqVO));
     }
 
@@ -61,16 +60,14 @@ public class BpmProcessInstanceController {
     @ApiOperation(value = "获得指定流程实例", notes = "在【流程详细】界面中，进行调用")
     @ApiImplicitParam(name = "id", value = "流程实例的编号", required = true, dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:query')")
-    public CommonResult<BpmProcessInstanceRespVO> getProcessInstance(
-            @RequestParam("id") String id) {
+    public CommonResult<BpmProcessInstanceRespVO> getProcessInstance(@RequestParam("id") String id) {
         return success(processInstanceService.getProcessInstanceVO(id));
     }
 
     @DeleteMapping("/cancel")
     @ApiOperation(value = "取消流程实例", notes = "撤回发起的流程")
     @PreAuthorize("@ss.hasPermission('bpm:process-instance:cancel')")
-    public CommonResult<Boolean> cancelProcessInstance(
-            @Valid @RequestBody BpmProcessInstanceCancelReqVO cancelReqVO) {
+    public CommonResult<Boolean> cancelProcessInstance(@Valid @RequestBody BpmProcessInstanceCancelReqVO cancelReqVO) {
         processInstanceService.cancelProcessInstance(getLoginUserId(), cancelReqVO);
         return success(true);
     }

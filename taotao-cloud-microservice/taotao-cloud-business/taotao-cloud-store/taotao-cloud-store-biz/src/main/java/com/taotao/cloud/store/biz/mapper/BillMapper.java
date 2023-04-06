@@ -44,8 +44,7 @@ public interface BillMapper extends BaseSuperMapper<Bill> {
 		select b.id,b.sn,b.start_time,b.end_time,b.bill_status,b.store_name,b.bill_price,b.create_time
 		from tt_bill as b ${ew.customSqlSegment}
 		""")
-    IPage<BillListVO> queryBillPage(
-            IPage<BillListVO> page, @Param(Constants.WRAPPER) Wrapper<BillListVO> queryWrapper);
+    IPage<BillListVO> queryBillPage(IPage<BillListVO> page, @Param(Constants.WRAPPER) Wrapper<BillListVO> queryWrapper);
 
     /**
      * 查询订单结算

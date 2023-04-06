@@ -32,8 +32,7 @@ public enum UploadContext {
 
     private static final String PACKAGE_NAME = "com.github.lybgeek.upload.strategy.impl";
 
-    private Map<UploadModeEnum, Class<SliceUploadStrategy>> uploadStrategyMap =
-            new ConcurrentHashMap<>();
+    private Map<UploadModeEnum, Class<SliceUploadStrategy>> uploadStrategyMap = new ConcurrentHashMap<>();
 
     public void init() {
         Reflections reflections = new Reflections(PACKAGE_NAME);

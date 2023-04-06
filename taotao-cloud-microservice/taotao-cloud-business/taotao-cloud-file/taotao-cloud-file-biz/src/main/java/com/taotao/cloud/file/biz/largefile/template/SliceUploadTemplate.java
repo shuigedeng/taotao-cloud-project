@@ -60,8 +60,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
         boolean isOk = this.upload(param);
         if (isOk) {
             File tmpFile = this.createTmpFile(param);
-            FileUpload fileUploadDTO =
-                    this.saveAndFileUploadDTO(param.getFile().getOriginalFilename(), tmpFile);
+            FileUpload fileUploadDTO = this.saveAndFileUploadDTO(param.getFile().getOriginalFilename(), tmpFile);
             return fileUploadDTO;
         }
         String md5 = FileMD5Util.getFileMD5(param.getFile());
@@ -101,18 +100,13 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
         } finally {
             FileUtil.close(accessConfFile);
         }
-        boolean isOk =
-                setUploadProgress2Redis(param, uploadDirPath, fileName, confFile, isComplete);
+        boolean isOk = setUploadProgress2Redis(param, uploadDirPath, fileName, confFile, isComplete);
         return isOk;
     }
 
     /** 把上传进度信息存进redis */
     private boolean setUploadProgress2Redis(
-            FileUploadRequest param,
-            String uploadDirPath,
-            String fileName,
-            File confFile,
-            byte isComplete) {
+            FileUploadRequest param, String uploadDirPath, String fileName, File confFile, byte isComplete) {
 
         RedisUtil redisUtil = SpringContextHolder.getBean(RedisUtil.class);
         if (isComplete == Byte.MAX_VALUE) {
@@ -141,11 +135,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
 
             fileUploadDTO = renameFile(tmpFile, fileName);
             if (fileUploadDTO.isUploadComplete()) {
-                System.out.println(
-                        "upload complete !!"
-                                + fileUploadDTO.isUploadComplete()
-                                + " name="
-                                + fileName);
+                System.out.println("upload complete !!" + fileUploadDTO.isUploadComplete() + " name=" + fileName);
                 // TODO 保存文件信息到数据库
 
             }

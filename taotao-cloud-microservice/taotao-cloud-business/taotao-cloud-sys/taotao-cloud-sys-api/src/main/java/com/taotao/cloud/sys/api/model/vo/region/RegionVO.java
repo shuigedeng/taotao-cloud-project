@@ -31,7 +31,8 @@ import lombok.*;
 @Schema(description = "地区VO")
 public class RegionVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 5126530068827085130L;
+    @Serial
+    private static final long serialVersionUID = 5126530068827085130L;
 
     @Schema(description = "id")
     private Long id;

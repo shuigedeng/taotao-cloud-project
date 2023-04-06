@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.open.platform.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
@@ -29,10 +30,9 @@ import org.springframework.boot.SpringApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudOpenPlatformApplication {
 
-	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-open-platform");
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-open-platform");
 
-		SpringApplication.run(TaoTaoCloudOpenPlatformApplication.class, args);
-	}
-
+        SpringApplication.run(TaoTaoCloudOpenPlatformApplication.class, args);
+    }
 }

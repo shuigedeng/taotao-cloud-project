@@ -31,7 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/wxpay")
 public class WxPayController {
 
-    @Resource private WxPayService wxPayService;
+    @Resource
+    private WxPayService wxPayService;
 
     @RequestMapping("/nativePay")
     @ResponseBody

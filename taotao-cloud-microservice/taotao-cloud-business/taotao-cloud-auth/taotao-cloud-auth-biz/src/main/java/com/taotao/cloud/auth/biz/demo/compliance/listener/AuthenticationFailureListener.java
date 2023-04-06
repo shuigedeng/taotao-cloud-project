@@ -40,8 +40,7 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
  * @author : gengwei.zheng
  * @date : 2021/12/18 17:58
  */
-public class AuthenticationFailureListener
-        implements ApplicationListener<AbstractAuthenticationFailureEvent> {
+public class AuthenticationFailureListener implements ApplicationListener<AbstractAuthenticationFailureEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationFailureListener.class);
 
@@ -49,8 +48,7 @@ public class AuthenticationFailureListener
     private final OAuth2AccountStatusService accountLockService;
 
     public AuthenticationFailureListener(
-            SignInFailureLimitedStampManager stampManager,
-            OAuth2AccountStatusService accountLockService) {
+            SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusService accountLockService) {
         this.stampManager = stampManager;
         this.accountLockService = accountLockService;
     }
@@ -69,9 +67,8 @@ public class AuthenticationFailureListener
 
             if (authentication instanceof OAuth2AuthorizationGrantAuthenticationToken) {
 
-                log.debug(
-                        "[Herodotus] |- Toke object in failure event  is"
-                                + " OAuth2AuthorizationGrantAuthenticationToken");
+                log.debug("[Herodotus] |- Toke object in failure event  is"
+                        + " OAuth2AuthorizationGrantAuthenticationToken");
 
                 OAuth2AuthorizationGrantAuthenticationToken token =
                         (OAuth2AuthorizationGrantAuthenticationToken) authentication;
@@ -81,12 +78,9 @@ public class AuthenticationFailureListener
 
             if (authentication instanceof UsernamePasswordAuthenticationToken) {
 
-                log.debug(
-                        "[Herodotus] |- Toke object in failure event  is"
-                                + " UsernamePasswordAuthenticationToken");
+                log.debug("[Herodotus] |- Toke object in failure event  is" + " UsernamePasswordAuthenticationToken");
 
-                UsernamePasswordAuthenticationToken token =
-                        (UsernamePasswordAuthenticationToken) authentication;
+                UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
                 Object principal = token.getPrincipal();
                 if (principal instanceof String) {
                     username = (String) principal;
@@ -97,30 +91,20 @@ public class AuthenticationFailureListener
 
                 log.debug("[Herodotus] |- Parse the username in failure event is [{}].", username);
 
-                int maxTimes =
-                        stampManager
-                                .getComplianceProperties()
-                                .getSignInFailureLimited()
-                                .getMaxTimes();
-                Duration expire =
-                        stampManager
-                                .getComplianceProperties()
-                                .getSignInFailureLimited()
-                                .getExpire();
+                int maxTimes = stampManager
+                        .getComplianceProperties()
+                        .getSignInFailureLimited()
+                        .getMaxTimes();
+                Duration expire = stampManager
+                        .getComplianceProperties()
+                        .getSignInFailureLimited()
+                        .getExpire();
                 try {
                     int times =
-                            stampManager.counting(
-                                    username,
-                                    maxTimes,
-                                    expire,
-                                    true,
-                                    "AuthenticationFailureListener");
+                            stampManager.counting(username, maxTimes, expire, true, "AuthenticationFailureListener");
                     log.debug("[Herodotus] |- Sign in user input password error [{}] items", times);
                 } catch (MaximumLimitExceededException e) {
-                    log.warn(
-                            "[Herodotus] |- User [{}] password error [{}] items, LOCK ACCOUNT!",
-                            username,
-                            maxTimes);
+                    log.warn("[Herodotus] |- User [{}] password error [{}] items, LOCK ACCOUNT!", username, maxTimes);
                     accountLockService.lock(username);
                 }
             }

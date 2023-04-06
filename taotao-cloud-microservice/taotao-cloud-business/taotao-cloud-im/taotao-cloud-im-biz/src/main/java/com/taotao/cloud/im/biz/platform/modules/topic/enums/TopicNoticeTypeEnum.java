@@ -30,7 +30,10 @@ public enum TopicNoticeTypeEnum {
     REPLY("2", "回复"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String name;
 
     TopicNoticeTypeEnum(String code, String name) {

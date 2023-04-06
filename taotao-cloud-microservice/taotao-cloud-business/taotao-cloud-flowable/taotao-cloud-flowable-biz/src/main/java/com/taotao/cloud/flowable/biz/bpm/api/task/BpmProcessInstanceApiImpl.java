@@ -33,7 +33,8 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class BpmProcessInstanceApiImpl implements BpmProcessInstanceApi {
 
-    @Resource private BpmProcessInstanceService processInstanceService;
+    @Resource
+    private BpmProcessInstanceService processInstanceService;
 
     @Override
     public String createProcessInstance(Long userId, @Valid BpmProcessInstanceCreateReqDTO reqDTO) {

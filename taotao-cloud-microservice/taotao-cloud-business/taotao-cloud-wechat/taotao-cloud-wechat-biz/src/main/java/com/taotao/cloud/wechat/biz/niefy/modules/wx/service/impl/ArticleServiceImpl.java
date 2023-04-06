@@ -40,14 +40,14 @@ import org.springframework.util.StringUtils;
  * @date 2017-10-27
  */
 @Service
-public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
-        implements ArticleService {
+public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
     private static final String ID_PLACEHOLDER = "${articleId}";
     /** 查询文章列表时返回的字段（过滤掉详情字段以加快速度） */
     private static final String LIST_FILEDS =
             "id,summary,image,sub_category,update_time,title,type,tags,create_time,target_link,open_count,category";
 
-    @Autowired ArticleMapper articleMapper;
+    @Autowired
+    ArticleMapper articleMapper;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -55,15 +55,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
         String type = (String) params.get("type");
         String category = (String) params.get("category");
         String subCategory = (String) params.get("subCategory");
-        IPage<Article> page =
-                this.page(
-                        new Query<Article>().getPage(params),
-                        new QueryWrapper<Article>()
-                                .select(LIST_FILEDS)
-                                .eq(StringUtils.hasText(type), "type", type)
-                                .like(StringUtils.hasText(category), "category", category)
-                                .like(StringUtils.hasText(subCategory), "sub_category", subCategory)
-                                .like(StringUtils.hasText(title), "title", title));
+        IPage<Article> page = this.page(
+                new Query<Article>().getPage(params),
+                new QueryWrapper<Article>()
+                        .select(LIST_FILEDS)
+                        .eq(StringUtils.hasText(type), "type", type)
+                        .like(StringUtils.hasText(category), "category", category)
+                        .like(StringUtils.hasText(subCategory), "sub_category", subCategory)
+                        .like(StringUtils.hasText(title), "title", title));
 
         return new PageUtils(page);
     }
@@ -98,12 +97,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
             articleMapper.updateById(article);
         } else {
             String title = article.getTitle();
-            long count =
-                    articleMapper.selectCount(
-                            new QueryWrapper<Article>()
-                                    .eq("title", title)
-                                    .eq("category", article.getCategory())
-                                    .eq("sub_category", article.getSubCategory()));
+            long count = articleMapper.selectCount(new QueryWrapper<Article>()
+                    .eq("title", title)
+                    .eq("category", article.getCategory())
+                    .eq("sub_category", article.getSubCategory()));
             if (count > 0) {
                 throw new RRException("同目录下文章[" + title + "]已存在，不可重复添加");
             }
@@ -144,11 +141,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
      */
     @Override
     public List<Article> selectCategory(ArticleTypeEnum articleType, String category) {
-        return this.list(
-                new QueryWrapper<Article>()
-                        .select(LIST_FILEDS)
-                        .eq("type", articleType.getValue())
-                        .eq("category", category));
+        return this.list(new QueryWrapper<Article>()
+                .select(LIST_FILEDS)
+                .eq("type", articleType.getValue())
+                .eq("category", category));
     }
 
     /**
@@ -161,11 +157,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
      */
     @Override
     public List<Article> search(ArticleTypeEnum articleType, String category, String keywords) {
-        return this.list(
-                new QueryWrapper<Article>()
-                        .select(LIST_FILEDS)
-                        .eq("type", articleType.getValue())
-                        .eq(StringUtils.hasText(category), "category", category)
-                        .and(i -> i.like("summary", keywords).or().like("title", keywords)));
+        return this.list(new QueryWrapper<Article>()
+                .select(LIST_FILEDS)
+                .eq("type", articleType.getValue())
+                .eq(StringUtils.hasText(category), "category", category)
+                .and(i -> i.like("summary", keywords).or().like("title", keywords)));
     }
 }

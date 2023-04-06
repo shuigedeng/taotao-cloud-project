@@ -38,7 +38,8 @@ import lombok.*;
 public class MpAccountDO extends TenantBaseDO {
 
     /** 编号 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 公众号名称 */
     private String name;
     /** 公众号账号 */

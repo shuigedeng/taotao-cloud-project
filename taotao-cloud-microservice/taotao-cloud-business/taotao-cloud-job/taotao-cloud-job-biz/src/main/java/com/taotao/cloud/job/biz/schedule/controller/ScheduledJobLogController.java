@@ -32,7 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "schedule任务管理日志API", description = "schedule任务管理日志API")
 public class ScheduledJobLogController {
 
-    @Resource private ScheduledJobLogService scheduledJobLogService;
+    @Resource
+    private ScheduledJobLogService scheduledJobLogService;
 
     @GetMapping("/list")
     @RequestLogger

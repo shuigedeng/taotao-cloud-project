@@ -30,15 +30,13 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-public class JwtGrantedAuthoritiesConverter
-        implements Converter<Jwt, Collection<GrantedAuthority>> {
+public class JwtGrantedAuthoritiesConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     private final Log logger = LogFactory.getLog(getClass());
 
     private static final String DEFAULT_AUTHORITY_PREFIX = "SCOPE_";
 
-    private static final Collection<String> WELL_KNOWN_AUTHORITIES_CLAIM_NAMES =
-            Arrays.asList("scope", "scp");
+    private static final Collection<String> WELL_KNOWN_AUTHORITIES_CLAIM_NAMES = Arrays.asList("scope", "scp");
 
     private String authorityPrefix = DEFAULT_AUTHORITY_PREFIX;
 
@@ -100,8 +98,7 @@ public class JwtGrantedAuthoritiesConverter
         String claimName = getAuthoritiesClaimName(jwt);
         if (claimName == null) {
             this.logger.trace(
-                    "Returning no authorities since could not find any claims that might contain"
-                            + " scopes");
+                    "Returning no authorities since could not find any claims that might contain" + " scopes");
             return Collections.emptyList();
         }
         if (this.logger.isTraceEnabled()) {

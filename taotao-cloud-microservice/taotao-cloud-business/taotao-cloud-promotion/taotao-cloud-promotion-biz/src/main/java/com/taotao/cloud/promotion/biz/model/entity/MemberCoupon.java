@@ -68,9 +68,7 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
     @Column(name = "store_id", columnDefinition = "bigint not null  comment '商家id，如果是平台发送，这个值为 0'")
     private Long storeId;
     /** 商家名称，如果是平台，这个值为 platfor */
-    @Column(
-            name = "store_name",
-            columnDefinition = "varchar(255) not null  comment '商家名称，如果是平台，这个值为 platfor'")
+    @Column(name = "store_name", columnDefinition = "varchar(255) not null  comment '商家名称，如果是平台，这个值为 platfor'")
     private String storeName;
     /** 面额 */
     @Column(name = "price", columnDefinition = "decimal(10,2) not null  comment '面额'")
@@ -118,17 +116,13 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
      *
      * @see CouponGetEnum
      */
-    @Column(
-            name = "get_type",
-            columnDefinition = "varchar(255) not null  comment '优惠券类型，分为免费领取和活动赠送'")
+    @Column(name = "get_type", columnDefinition = "varchar(255) not null  comment '优惠券类型，分为免费领取和活动赠送'")
     private String getType;
     /** 是否是平台优惠券 */
     @Column(name = "is_platform", columnDefinition = "boolean not null  comment '是否是平台优惠券'")
     private Boolean isPlatform;
     /** 店铺承担比例 */
-    @Column(
-            name = "store_commission",
-            columnDefinition = "decimal(10,2) not null  comment '店铺承担比例'")
+    @Column(name = "store_commission", columnDefinition = "decimal(10,2) not null  comment '店铺承担比例'")
     private BigDecimal storeCommission;
     /** 核销时间 */
     @Column(name = "consumption_time", columnDefinition = "datetime not null  comment '核销时间'")
@@ -139,9 +133,7 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
      *
      * @see MemberCouponStatusEnum
      */
-    @Column(
-            name = "member_coupon_status",
-            columnDefinition = "varchar(255) not null  comment '会员优惠券状态'")
+    @Column(name = "member_coupon_status", columnDefinition = "varchar(255) not null  comment '会员优惠券状态'")
     private String memberCouponStatus;
 
     public MemberCoupon(Coupon coupon) {
@@ -161,12 +153,8 @@ public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
         if (coupon.getRangeDayType().equals(CouponRangeDayEnum.FIXEDTIME.name())) {
             setEndTime(coupon.getEndTime());
         } else {
-            setEndTime(
-                    DateUtil.endOfDay(
-                            DateUtil.offset(
-                                    new DateTime(),
-                                    DateField.DAY_OF_YEAR,
-                                    (coupon.getEffectiveDays() - 1))));
+            setEndTime(DateUtil.endOfDay(
+                    DateUtil.offset(new DateTime(), DateField.DAY_OF_YEAR, (coupon.getEffectiveDays() - 1))));
         }
     }
 

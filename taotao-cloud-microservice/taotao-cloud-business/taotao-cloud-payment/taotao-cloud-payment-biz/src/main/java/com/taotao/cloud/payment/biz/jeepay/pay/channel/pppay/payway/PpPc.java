@@ -54,21 +54,19 @@ public class PpPc extends PppayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         PPPcOrderRQ bizRQ = (PPPcOrderRQ) rq;
 
         OrderRequest orderRequest = new OrderRequest();
 
         // 配置 Paypal ApplicationContext 也就是支付页面信息
-        ApplicationContext applicationContext =
-                new ApplicationContext()
-                        .brandName(mchAppConfigContext.getMchApp().getAppName())
-                        .landingPage("NO_PREFERENCE")
-                        .returnUrl(getReturnUrl(payOrder.getPayOrderId()))
-                        .userAction("PAY_NOW")
-                        .shippingPreference("NO_SHIPPING");
+        ApplicationContext applicationContext = new ApplicationContext()
+                .brandName(mchAppConfigContext.getMchApp().getAppName())
+                .landingPage("NO_PREFERENCE")
+                .returnUrl(getReturnUrl(payOrder.getPayOrderId()))
+                .userAction("PAY_NOW")
+                .shippingPreference("NO_SHIPPING");
 
         if (StringUtils.isNotBlank(bizRQ.getCancelUrl())) {
             applicationContext.cancelUrl(bizRQ.getCancelUrl());
@@ -84,43 +82,31 @@ public class PpPc extends PppayPaymentService {
         String currency = payOrder.getCurrency().toUpperCase();
 
         // 由于 Paypal 是支持订单多商品的，这里值添加一个
-        PurchaseUnitRequest purchaseUnitRequest =
-                new PurchaseUnitRequest()
-                        // 绑定 订单 ID 否则回调和异步较难处理
-                        .customId(payOrder.getPayOrderId())
-                        .invoiceId(payOrder.getPayOrderId())
-                        .amountWithBreakdown(
-                                new AmountWithBreakdown()
-                                        .currencyCode(currency)
-                                        .value(amountStr)
-                                        .amountBreakdown(
-                                                new AmountBreakdown()
-                                                        .itemTotal(
-                                                                new Money()
-                                                                        .currencyCode(currency)
-                                                                        .value(amountStr))))
-                        .items(
-                                new ArrayList<Item>() {
-                                    {
-                                        add(
-                                                new Item()
-                                                        .name(payOrder.getSubject())
-                                                        .description(payOrder.getBody())
-                                                        .sku(payOrder.getPayOrderId())
-                                                        .unitAmount(
-                                                                new Money()
-                                                                        .currencyCode(currency)
-                                                                        .value(amountStr))
-                                                        .quantity("1"));
-                                    }
-                                });
+        PurchaseUnitRequest purchaseUnitRequest = new PurchaseUnitRequest()
+                // 绑定 订单 ID 否则回调和异步较难处理
+                .customId(payOrder.getPayOrderId())
+                .invoiceId(payOrder.getPayOrderId())
+                .amountWithBreakdown(new AmountWithBreakdown()
+                        .currencyCode(currency)
+                        .value(amountStr)
+                        .amountBreakdown(new AmountBreakdown()
+                                .itemTotal(new Money().currencyCode(currency).value(amountStr))))
+                .items(new ArrayList<Item>() {
+                    {
+                        add(new Item()
+                                .name(payOrder.getSubject())
+                                .description(payOrder.getBody())
+                                .sku(payOrder.getPayOrderId())
+                                .unitAmount(new Money().currencyCode(currency).value(amountStr))
+                                .quantity("1"));
+                    }
+                });
 
         purchaseUnitRequests.add(purchaseUnitRequest);
         orderRequest.purchaseUnits(purchaseUnitRequests);
 
         // 从缓存获取 Paypal 操作工具
-        PaypalWrapper paypalWrapper =
-                configContextQueryService.getPaypalWrapper(mchAppConfigContext);
+        PaypalWrapper paypalWrapper = configContextQueryService.getPaypalWrapper(mchAppConfigContext);
 
         OrdersCreateRequest request = new OrdersCreateRequest();
         request.header("prefer", "return=representation");
@@ -152,17 +138,12 @@ public class PpPc extends PppayPaymentService {
             String tradeNo = response.result().id();
 
             // 从返回数据里读取出支付链接
-            LinkDescription paypalLink =
-                    order.links().stream()
-                            .reduce(
-                                    null,
-                                    (result, curr) -> {
-                                        if (curr.rel().equalsIgnoreCase("approve")
-                                                && curr.method().equalsIgnoreCase("get")) {
-                                            result = curr;
-                                        }
-                                        return result;
-                                    });
+            LinkDescription paypalLink = order.links().stream().reduce(null, (result, curr) -> {
+                if (curr.rel().equalsIgnoreCase("approve") && curr.method().equalsIgnoreCase("get")) {
+                    result = curr;
+                }
+                return result;
+            });
 
             // 设置返回实体
             channelRetMsg.setChannelAttach(JSONUtil.toJsonStr(new Json().serialize(order)));

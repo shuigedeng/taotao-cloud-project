@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.decode_bit_set;
 
 import io.airlift.slice.Slice;
@@ -27,13 +28,13 @@ import io.trino.spi.function.AccumulatorState;
  */
 public class RouteUserAggregationBase {
 
-	/**
-	 * Slice State 中间数据 Buffer
-	 */
-	public interface SliceState extends AccumulatorState {
+    /**
+     * Slice State 中间数据 Buffer
+     */
+    public interface SliceState extends AccumulatorState {
 
-		Slice getSlice();
+        Slice getSlice();
 
-		void setSlice(Slice slice);
-	}
+        void setSlice(Slice slice);
+    }
 }

@@ -103,13 +103,7 @@ public abstract class HttpClient {
 
     protected static String buildXJeepayClientUserAgentString(String version) {
         String[] propertyNames = {
-            "os.name",
-            "os.version",
-            "os.arch",
-            "java.version",
-            "java.vendor",
-            "java.vm.version",
-            "java.vm.vendor"
+            "os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version", "java.vm.vendor"
         };
 
         Map<String, String> propertyMap = new HashMap<>();
@@ -123,10 +117,7 @@ public abstract class HttpClient {
     }
 
     private boolean shouldRetry(
-            int numRetries,
-            JeepayException exception,
-            APIJeepayRequest request,
-            APIJeepayResponse response) {
+            int numRetries, JeepayException exception, APIJeepayRequest request, APIJeepayResponse response) {
         // Do not retry if we are out of retries.
         if (numRetries >= request.options.getMaxNetworkRetries()) {
             return false;

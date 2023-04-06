@@ -30,10 +30,7 @@ public class LogUtils {
 
     /** 记录登陆信息 */
     public static void recordLogin(
-            final String username,
-            final YesOrNoEnum status,
-            final String message,
-            final Object... args) {
+            final String username, final YesOrNoEnum status, final String message, final Object... args) {
         final UserAgent userAgent =
                 UserAgentUtil.parse(ServletUtils.getRequest().getHeader("User-Agent"));
         final String ipAddr = IpUtils.getIpAddr(ServletUtils.getRequest());
@@ -62,11 +59,10 @@ public class LogUtils {
         //        logLogin.setStatus(status);
         //        // 时间
         //        logLogin.setCreateTime(DateUtil.date());
-        ThreadUtil.execAsync(
-                () -> {
-                    // 插入数据
-                    //            SpringUtil.getBean(LogLoginService.class).add(logLogin);
-                });
+        ThreadUtil.execAsync(() -> {
+            // 插入数据
+            //            SpringUtil.getBean(LogLoginService.class).add(logLogin);
+        });
     }
 
     private static String getBlock(Object msg) {

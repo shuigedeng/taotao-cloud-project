@@ -74,13 +74,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Api("发送消息")
 public class MessageTemplateController {
 
-    @Autowired private MessageTemplateService messageTemplateService;
+    @Autowired
+    private MessageTemplateService messageTemplateService;
 
-    @Autowired private SendService sendService;
+    @Autowired
+    private SendService sendService;
 
-    @Autowired private RecallService recallService;
+    @Autowired
+    private RecallService recallService;
 
-    @Autowired private LoginUtils loginUtils;
+    @Autowired
+    private LoginUtils loginUtils;
 
     @Value("${austin.business.upload.crowd.path}")
     private String dataPath;
@@ -102,8 +106,7 @@ public class MessageTemplateController {
         if (loginUtils.needLogin() && StrUtil.isBlank(messageTemplateParam.getCreator())) {
             throw new CommonException(RespStatusEnum.NO_LOGIN);
         }
-        Page<MessageTemplate> messageTemplates =
-                messageTemplateService.queryList(messageTemplateParam);
+        Page<MessageTemplate> messageTemplates = messageTemplateService.queryList(messageTemplateParam);
         List<Map<String, Object>> result = Convert4Amis.flatListMap(messageTemplates.toList());
         return MessageTemplateVo.builder()
                 .count(messageTemplates.getTotalElements())
@@ -131,9 +134,7 @@ public class MessageTemplateController {
     public void deleteByIds(@PathVariable("id") String id) {
         if (StrUtil.isNotBlank(id)) {
             List<Long> idList =
-                    Arrays.stream(id.split(StrUtil.COMMA))
-                            .map(Long::valueOf)
-                            .collect(Collectors.toList());
+                    Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).collect(Collectors.toList());
             messageTemplateService.deleteByIds(idList);
         }
     }
@@ -143,19 +144,16 @@ public class MessageTemplateController {
     @ApiOperation("/测试发送接口")
     public SendResponse test(@RequestBody MessageTemplateParam messageTemplateParam) {
 
-        Map<String, String> variables =
-                JSON.parseObject(messageTemplateParam.getMsgContent(), Map.class);
-        MessageParam messageParam =
-                MessageParam.builder()
-                        .receiver(messageTemplateParam.getReceiver())
-                        .variables(variables)
-                        .build();
-        SendRequest sendRequest =
-                SendRequest.builder()
-                        .code(BusinessCode.COMMON_SEND.getCode())
-                        .messageTemplateId(messageTemplateParam.getId())
-                        .messageParam(messageParam)
-                        .build();
+        Map<String, String> variables = JSON.parseObject(messageTemplateParam.getMsgContent(), Map.class);
+        MessageParam messageParam = MessageParam.builder()
+                .receiver(messageTemplateParam.getReceiver())
+                .variables(variables)
+                .build();
+        SendRequest sendRequest = SendRequest.builder()
+                .code(BusinessCode.COMMON_SEND.getCode())
+                .messageTemplateId(messageTemplateParam.getId())
+                .messageParam(messageParam)
+                .build();
         SendResponse response = sendService.send(sendRequest);
         if (!Objects.equals(response.getCode(), RespStatusEnum.SUCCESS.getCode())) {
             throw new CommonException(response.getMsg());
@@ -175,11 +173,10 @@ public class MessageTemplateController {
     @PostMapping("recall/{id}")
     @ApiOperation("/撤回消息接口")
     public SendResponse recall(@PathVariable("id") String id) {
-        SendRequest sendRequest =
-                SendRequest.builder()
-                        .code(BusinessCode.RECALL.getCode())
-                        .messageTemplateId(Long.valueOf(id))
-                        .build();
+        SendRequest sendRequest = SendRequest.builder()
+                .code(BusinessCode.RECALL.getCode())
+                .messageTemplateId(Long.valueOf(id))
+                .build();
         SendResponse response = recallService.recall(sendRequest);
         if (!Objects.equals(response.getCode(), RespStatusEnum.SUCCESS.getCode())) {
             throw new CommonException(response.getMsg());

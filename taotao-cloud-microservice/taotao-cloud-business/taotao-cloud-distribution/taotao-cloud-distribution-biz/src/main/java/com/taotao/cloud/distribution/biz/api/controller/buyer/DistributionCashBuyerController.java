@@ -46,9 +46,11 @@ import springfox.documentation.annotations.ApiIgnore;
 public class DistributionCashBuyerController {
 
     /** 分销佣金 */
-    @Autowired private IDistributionCashService distributionCashService;
+    @Autowired
+    private IDistributionCashService distributionCashService;
     /** 分销员提现 */
-    @Autowired private IDistributionCashService distributorCashService;
+    @Autowired
+    private IDistributionCashService distributorCashService;
 
     @Operation(summary = "分销员提现", description = "分销员提现")
     @RequestLogger

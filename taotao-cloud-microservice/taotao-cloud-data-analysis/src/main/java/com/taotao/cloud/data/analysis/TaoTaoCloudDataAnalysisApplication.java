@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
@@ -31,10 +32,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TaoTaoCloudDataAnalysisApplication {
 
-	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-data-analysis");
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-data-analysis");
 
-		SpringApplication.run(TaoTaoCloudDataAnalysisApplication.class, args);
-	}
-
+        SpringApplication.run(TaoTaoCloudDataAnalysisApplication.class, args);
+    }
 }

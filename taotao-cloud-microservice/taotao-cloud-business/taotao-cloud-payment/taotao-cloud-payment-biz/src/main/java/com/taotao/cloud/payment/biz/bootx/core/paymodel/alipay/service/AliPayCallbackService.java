@@ -82,8 +82,7 @@ public class AliPayCallbackService extends AbsPayCallbackStrategy {
             log.warn("支付宝回调报文 appId 为空 {}", callReq);
             return false;
         }
-        AlipayConfig alipayConfig =
-                alipayConfigManager.findActivity().orElseThrow(DataNotExistException::new);
+        AlipayConfig alipayConfig = alipayConfigManager.findActivity().orElseThrow(DataNotExistException::new);
         if (alipayConfig == null) {
             log.warn("支付宝回调报文 appId 不合法 {}", callReq);
             return false;
@@ -92,10 +91,7 @@ public class AliPayCallbackService extends AbsPayCallbackStrategy {
         try {
             if (Objects.equals(alipayConfig.getAuthType(), AliPayCode.AUTH_TYPE_KEY)) {
                 return AlipaySignature.rsaCheckV1(
-                        params,
-                        alipayConfig.getAlipayPublicKey(),
-                        CharsetUtil.UTF_8,
-                        AlipayConstants.SIGN_TYPE_RSA2);
+                        params, alipayConfig.getAlipayPublicKey(), CharsetUtil.UTF_8, AlipayConstants.SIGN_TYPE_RSA2);
             } else {
                 return AlipaySignature.verifyV1(
                         params,

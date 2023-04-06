@@ -33,7 +33,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class GoodsSkuSpecGalleryVO extends GoodsSkuVO {
 
-    @Serial private static final long serialVersionUID = -7651149660489332344L;
+    @Serial
+    private static final long serialVersionUID = -7651149660489332344L;
 
     @Schema(description = "规格列表")
     private List<SpecValueVO> specList;

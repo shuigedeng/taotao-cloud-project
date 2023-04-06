@@ -38,7 +38,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlipayPayOrderCloseService implements IPayOrderCloseService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -58,8 +59,9 @@ public class AlipayPayOrderCloseService implements IPayOrderCloseService {
         // 通用字段
         AlipayKit.putApiIsvInfo(mchAppConfigContext, req, model);
 
-        AlipayTradeCloseResponse resp =
-                configContextQueryService.getAlipayClientWrapper(mchAppConfigContext).execute(req);
+        AlipayTradeCloseResponse resp = configContextQueryService
+                .getAlipayClientWrapper(mchAppConfigContext)
+                .execute(req);
 
         // 返回状态成功
         if (resp.isSuccess()) {

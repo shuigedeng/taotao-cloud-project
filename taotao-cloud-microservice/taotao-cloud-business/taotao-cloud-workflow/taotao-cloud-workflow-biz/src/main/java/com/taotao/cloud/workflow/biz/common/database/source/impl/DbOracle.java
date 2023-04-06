@@ -53,13 +53,7 @@ public class DbOracle extends DbBase {
     @Override
     protected void init() {
         setInstance(
-                DbBase.ORACLE,
-                DbType.ORACLE,
-                "1521",
-                "oracle",
-                "oracle.jdbc.OracleDriver",
-                "",
-                new SqlOracle(this));
+                DbBase.ORACLE, DbType.ORACLE, "1521", "oracle", "oracle.jdbc.OracleDriver", "", new SqlOracle(this));
     }
 
     /** Oracle特殊添加数据连接方式 */
@@ -75,8 +69,7 @@ public class DbOracle extends DbBase {
     }
 
     @Override
-    public String getConnUrl(
-            String prepareUrl, String host, Integer port, String dbName, String schema) {
+    public String getConnUrl(String prepareUrl, String host, Integer port, String dbName, String schema) {
         if (StringUtil.isNotEmpty(this.getOracleParam()) && StringUtil.isEmpty(prepareUrl)) {
             Map<String, Object> oracleParamMap = JsonUtil.stringToMap(this.getOracleParam());
             if (oracleParamMap.size() > 0) {
@@ -113,20 +106,17 @@ public class DbOracle extends DbBase {
     }
 
     @Override
-    public LinkedList<Object> getStructParams(
-            String structParams, String table, DataSourceMod dbSourceOrDbLink) {
+    public LinkedList<Object> getStructParams(String structParams, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dataSourceDTO = dbSourceOrDbLink.convertDTO();
         dataSourceDTO.setDbName(dataSourceDTO.getUserName());
         return super.getStructParams(structParams, table, dataSourceDTO);
     }
 
     private static Connection createOracleConn(
-            String driver, String logonUser, String userName, String password, String url)
-            throws DataException {
+            String driver, String logonUser, String userName, String password, String url) throws DataException {
         // Oracle登录角色设置（Default，SYSDBA，SYSOPER）
         Properties conProps = DbOracle.setConnProp(logonUser, userName, password);
-        return ConnUtil.ConnCommon.createConnByProp(
-                driver, conProps.getProperty("user"), password, url, conProps);
+        return ConnUtil.ConnCommon.createConnByProp(driver, conProps.getProperty("user"), password, url, conProps);
     }
 
     public static Properties setConnProp(String logonUser, String userName, String password) {

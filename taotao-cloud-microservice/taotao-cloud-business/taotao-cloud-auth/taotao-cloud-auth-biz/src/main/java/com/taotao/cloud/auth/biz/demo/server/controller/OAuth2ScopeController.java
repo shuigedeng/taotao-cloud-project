@@ -83,8 +83,7 @@ public class OAuth2ScopeController extends BaseWriteableRestController<OAuth2Sco
 
         Set<OAuth2Authority> authorities = new HashSet<>();
         if (CollectionUtils.isNotEmpty(scope.getAuthorities())) {
-            authorities =
-                    scope.getAuthorities().stream().map(this::toEntity).collect(Collectors.toSet());
+            authorities = scope.getAuthorities().stream().map(this::toEntity).collect(Collectors.toSet());
         }
 
         OAuth2Scope result = scopeService.authorize(scope.getScopeId(), authorities);

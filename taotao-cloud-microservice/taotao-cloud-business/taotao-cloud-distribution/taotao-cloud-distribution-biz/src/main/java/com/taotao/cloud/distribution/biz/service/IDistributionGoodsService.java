@@ -41,8 +41,7 @@ public interface IDistributionGoodsService extends IService<DistributionGoods> {
      * @param distributionGoodsPageQuery 条件
      * @return 分销商品信息列表
      */
-    List<DistributionGoods> getDistributionGoodsList(
-            DistributionGoodsPageQuery distributionGoodsPageQuery);
+    List<DistributionGoods> getDistributionGoodsList(DistributionGoodsPageQuery distributionGoodsPageQuery);
 
     /**
      * 根据条件查询分销商品信息

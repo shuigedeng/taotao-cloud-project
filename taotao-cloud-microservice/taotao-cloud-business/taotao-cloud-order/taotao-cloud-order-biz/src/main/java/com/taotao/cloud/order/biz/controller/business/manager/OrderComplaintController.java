@@ -91,8 +91,7 @@ public class OrderComplaintController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> update(
-            @PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
+    public Result<Boolean> update(@PathVariable Long id, @Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
         OrderComplaint orderComplaint = OrderComplainConvert.INSTANCE.convert(orderComplaintDTO);
         orderComplaint.setId(id);
         return Result.success(orderComplaintService.updateOrderComplain(orderComplaint));
@@ -106,26 +105,22 @@ public class OrderComplaintController {
             @PathVariable("complainId") Long complainId,
             @Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
         SecurityUser user = SecurityUtils.getCurrentUser();
-        OrderComplaintCommunication orderComplaintCommunication =
-                OrderComplaintCommunication.builder()
-                        .complainId(complainId)
-                        .content(orderComplaintCommunicationDTO.content())
-                        .owner(CommunicationOwnerEnum.PLATFORM.name())
-                        .ownerName(user.getUsername())
-                        .ownerId(user.getUserId())
-                        .build();
-        return Result.success(
-                orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
+        OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
+                .complainId(complainId)
+                .content(orderComplaintCommunicationDTO.content())
+                .owner(CommunicationOwnerEnum.PLATFORM.name())
+                .ownerName(user.getUsername())
+                .ownerId(user.getUserId())
+                .build();
+        return Result.success(orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
     }
 
     @Operation(summary = "修改状态", description = "修改状态")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/status")
-    public Result<Boolean> updateStatus(
-            @Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
-        return Result.success(
-                orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
+    public Result<Boolean> updateStatus(@Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
+        return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
     }
 
     @Operation(summary = "仲裁", description = "仲裁")
@@ -134,15 +129,13 @@ public class OrderComplaintController {
     @PutMapping(value = "/complete/{id}")
     public Result<Boolean> complete(@PathVariable Long id, String arbitrationResult) {
         // 新建对象
-        OrderComplaintOperationDTO orderComplaintOperationDTO =
-                OrderComplaintOperationDTOBuilder.builder()
-                        .complainId(id)
-                        .arbitrationResult(arbitrationResult)
-                        .complainStatus(OrderComplaintStatusEnum.COMPLETE.name())
-                        .build();
+        OrderComplaintOperationDTO orderComplaintOperationDTO = OrderComplaintOperationDTOBuilder.builder()
+                .complainId(id)
+                .arbitrationResult(arbitrationResult)
+                .complainStatus(OrderComplaintStatusEnum.COMPLETE.name())
+                .build();
 
         // 修改状态
-        return Result.success(
-                orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
+        return Result.success(orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
     }
 }

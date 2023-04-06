@@ -44,7 +44,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class NumberSenderShortLinkGenerator implements ShortLinkGeneratorAdapter {
 
-    @Resource private RedissonClient redissonClient;
+    @Resource
+    private RedissonClient redissonClient;
 
     private static final String KEY_SHORT_LINK_GENERATOR = "KEY_SHORT_LINK_NUMBER_SENDER";
 

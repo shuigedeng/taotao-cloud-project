@@ -56,20 +56,19 @@ public class Cs1DbJobHandler {
 
             CountDownLatch latch = new CountDownLatch(tableNameList.length); // 设置与表相同的线程计数器，同时备份表
             for (String tableName : tableNameList) {
-                new Thread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            // cs1DbService.tableOperation(tableName);
-                                            Thread.sleep(10000);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        } finally {
-                                            latch.countDown();
-                                        }
-                                    }
-                                })
+                new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    // cs1DbService.tableOperation(tableName);
+                                    Thread.sleep(10000);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    latch.countDown();
+                                }
+                            }
+                        })
                         .start();
             }
             latch.await();

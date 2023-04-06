@@ -38,8 +38,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
  * @see
  *     org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer
  */
-public class OAuth2FormLoginConfigurer
-        extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+public class OAuth2FormLoginConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     private static final Logger log = LoggerFactory.getLogger(OAuth2FormLoginConfigurer.class);
 
@@ -59,20 +58,16 @@ public class OAuth2FormLoginConfigurer
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
 
-        AuthenticationManager authenticationManager =
-                httpSecurity.getSharedObject(AuthenticationManager.class);
+        AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
         SecurityContextRepository securityContextRepository =
                 httpSecurity.getSharedObject(SecurityContextRepository.class);
 
-        OAuth2FormLoginAuthenticationFilter filter =
-                new OAuth2FormLoginAuthenticationFilter(authenticationManager);
+        OAuth2FormLoginAuthenticationFilter filter = new OAuth2FormLoginAuthenticationFilter(authenticationManager);
         filter.setUsernameParameter(uiProperties.getUsernameParameter());
         filter.setPasswordParameter(uiProperties.getPasswordParameter());
-        filter.setAuthenticationDetailsSource(
-                new OAuth2FormLoginWebAuthenticationDetailSource(uiProperties));
+        filter.setAuthenticationDetailsSource(new OAuth2FormLoginWebAuthenticationDetailSource(uiProperties));
         filter.setAuthenticationFailureHandler(
-                new OAuth2FormLoginAuthenticationFailureHandler(
-                        uiProperties.getFailureForwardUrl()));
+                new OAuth2FormLoginAuthenticationFailureHandler(uiProperties.getFailureForwardUrl()));
         filter.setSecurityContextRepository(securityContextRepository);
 
         OAuth2FormLoginAuthenticationProvider provider =

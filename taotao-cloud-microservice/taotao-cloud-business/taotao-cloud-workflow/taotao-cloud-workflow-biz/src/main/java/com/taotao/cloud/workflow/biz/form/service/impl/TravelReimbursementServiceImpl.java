@@ -31,12 +31,14 @@ import org.springframework.stereotype.Service;
 
 /** 差旅报销申请表 */
 @Service
-public class TravelReimbursementServiceImpl
-        extends ServiceImpl<TravelReimbursementMapper, TravelReimbursementEntity>
+public class TravelReimbursementServiceImpl extends ServiceImpl<TravelReimbursementMapper, TravelReimbursementEntity>
         implements TravelReimbursementService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public TravelReimbursementEntity getInfo(String id) {
@@ -70,8 +72,7 @@ public class TravelReimbursementServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, TravelReimbursementEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, TravelReimbursementEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -97,8 +98,7 @@ public class TravelReimbursementServiceImpl
 
     @Override
     public void data(String id, String data) {
-        TravelReimbursementForm travelReimbursementForm =
-                JsonUtil.getJsonToBean(data, TravelReimbursementForm.class);
+        TravelReimbursementForm travelReimbursementForm = JsonUtil.getJsonToBean(data, TravelReimbursementForm.class);
         TravelReimbursementEntity entity =
                 JsonUtil.getJsonToBean(travelReimbursementForm, TravelReimbursementEntity.class);
         entity.setId(id);

@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RequestLogTopicMessageDelegate {
 
-    @Autowired private ILogService logService;
+    @Autowired
+    private ILogService logService;
 
     public void handleRequestLog(String message, String channel) {
         try {

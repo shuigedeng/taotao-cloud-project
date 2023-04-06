@@ -42,8 +42,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/menu")
 @Api(tags = {"管理后台菜单"})
 public class SysMenuController extends AbstractController {
-    @Autowired private SysMenuService sysMenuService;
-    @Autowired private ShiroService shiroService;
+    @Autowired
+    private SysMenuService sysMenuService;
+
+    @Autowired
+    private ShiroService shiroService;
 
     /** 导航菜单 */
     @GetMapping("/nav")
@@ -51,8 +54,7 @@ public class SysMenuController extends AbstractController {
     public R nav() {
         List<SysMenuEntity> menuList = sysMenuService.getUserMenuList(getUserId());
         Set<String> permissions = shiroService.getUserPermissions(getUserId());
-        return Objects.requireNonNull(R.ok().put("menuList", menuList))
-                .put("permissions", permissions);
+        return Objects.requireNonNull(R.ok().put("menuList", menuList)).put("permissions", permissions);
     }
 
     /** 所有菜单列表 */

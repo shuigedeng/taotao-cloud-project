@@ -32,9 +32,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleQueryServiceImpl implements RoleQueryService {
 
-    @Autowired private RoleRepository roleRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
-    @Autowired private SysRoleMapper sysRoleMapper;
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     @Override
     public Page queryPage(Map<String, Object> params) {

@@ -28,14 +28,13 @@ import org.apache.ibatis.type.MappedJdbcTypes;
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public class JSONObjectTypeHandler extends BaseTypeHandler<JSONObject> {
     @Override
-    public void setNonNullParameter(
-            PreparedStatement ps, int i, JSONObject array, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps, int i, JSONObject array, JdbcType jdbcType)
+            throws SQLException {
         ps.setString(i, array.toJSONString());
     }
 
     @Override
-    public JSONObject getNullableResult(ResultSet resultSet, String columnName)
-            throws SQLException {
+    public JSONObject getNullableResult(ResultSet resultSet, String columnName) throws SQLException {
         return JSONObject.parseObject(resultSet.getString(columnName));
     }
 
@@ -45,8 +44,7 @@ public class JSONObjectTypeHandler extends BaseTypeHandler<JSONObject> {
     }
 
     @Override
-    public JSONObject getNullableResult(CallableStatement callableStatement, int columnIndex)
-            throws SQLException {
+    public JSONObject getNullableResult(CallableStatement callableStatement, int columnIndex) throws SQLException {
         return JSONObject.parseObject(callableStatement.getString(columnIndex));
     }
 }

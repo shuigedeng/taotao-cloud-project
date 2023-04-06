@@ -38,12 +38,11 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.ROCKET_MQ)
 @ConditionalOnBean(PayOrderMchNotifyMQ.IMQReceiver.class)
-@RocketMQMessageListener(
-        topic = PayOrderMchNotifyMQ.MQ_NAME,
-        consumerGroup = PayOrderMchNotifyMQ.MQ_NAME)
+@RocketMQMessageListener(topic = PayOrderMchNotifyMQ.MQ_NAME, consumerGroup = PayOrderMchNotifyMQ.MQ_NAME)
 public class PayOrderMchNotifyRocketMQReceiver implements IMQMsgReceiver, RocketMQListener<String> {
 
-    @Autowired private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 * */
     @Override

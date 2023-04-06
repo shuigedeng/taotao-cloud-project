@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/QuotationApproval")
 public class QuotationApprovalController {
 
-    @Autowired private QuotationApprovalService quotationApprovalService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private QuotationApprovalService quotationApprovalService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取报价审批表信息
@@ -51,17 +54,15 @@ public class QuotationApprovalController {
      */
     @Operation("获取报价审批表信息")
     @GetMapping("/{id}")
-    public Result<QuotationApprovalInfoVO> info(
-            @PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<QuotationApprovalInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+            throws DataException {
         QuotationApprovalInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), QuotationApprovalInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), QuotationApprovalInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,16 +82,13 @@ public class QuotationApprovalController {
      */
     @Operation("新建报价审批表")
     @PostMapping
-    public Result create(@RequestBody QuotationApprovalForm quotationApprovalForm)
-            throws WorkFlowException {
-        QuotationApprovalEntity entity =
-                JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
+    public Result create(@RequestBody QuotationApprovalForm quotationApprovalForm) throws WorkFlowException {
+        QuotationApprovalEntity entity = JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(quotationApprovalForm.getStatus())) {
             quotationApprovalService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        quotationApprovalService.submit(
-                entity.getId(), entity, quotationApprovalForm.getCandidateList());
+        quotationApprovalService.submit(entity.getId(), entity, quotationApprovalForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -103,11 +101,9 @@ public class QuotationApprovalController {
      */
     @Operation("修改报价审批表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody QuotationApprovalForm quotationApprovalForm, @PathVariable("id") String id)
+    public Result update(@RequestBody QuotationApprovalForm quotationApprovalForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        QuotationApprovalEntity entity =
-                JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
+        QuotationApprovalEntity entity = JsonUtils.getJsonToBean(quotationApprovalForm, QuotationApprovalEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(quotationApprovalForm.getStatus())) {
             quotationApprovalService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

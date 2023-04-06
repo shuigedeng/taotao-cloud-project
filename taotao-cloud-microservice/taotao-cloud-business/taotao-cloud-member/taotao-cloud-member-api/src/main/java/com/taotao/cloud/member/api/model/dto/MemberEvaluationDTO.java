@@ -34,7 +34,8 @@ import org.hibernate.validator.constraints.Length;
 @Schema(description = "租户id")
 public class MemberEvaluationDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "子订单编号")
     @NotEmpty(message = "订单异常")

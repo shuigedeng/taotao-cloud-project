@@ -45,9 +45,7 @@ public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
     public static final String TABLE_NAME = "tt_wechat_mp_message";
 
     /** 模版id */
-    @Column(
-            name = "template_id",
-            columnDefinition = "varchar(255) not null default '' comment '模版id'")
+    @Column(name = "template_id", columnDefinition = "varchar(255) not null default '' comment '模版id'")
     private String templateId;
 
     /** 模版名称 */
@@ -63,9 +61,7 @@ public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
     private String keywords;
 
     /** 关键字描述（小程序发送消息时使用） */
-    @Column(
-            name = "keywords_text",
-            columnDefinition = "varchar(255) not null default '' comment '关键字描述（小程序发送消息时使用）'")
+    @Column(name = "keywords_text", columnDefinition = "varchar(255) not null default '' comment '关键字描述（小程序发送消息时使用）'")
     private String keywordsText;
 
     /** 是否开启 */
@@ -73,8 +69,6 @@ public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
     private Boolean enable = true;
 
     /** 订单状态 */
-    @Column(
-            name = "order_status",
-            columnDefinition = "varchar(255) not null default '' comment '订单状态'")
+    @Column(name = "order_status", columnDefinition = "varchar(255) not null default '' comment '订单状态'")
     private String orderStatus;
 }

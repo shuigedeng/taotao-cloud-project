@@ -50,9 +50,7 @@ public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
     public static final String TABLE_NAME = "tt_sensitive_words";
 
     /** 敏感词名称 */
-    @Column(
-            name = "sensitive_word",
-            columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
+    @Column(name = "sensitive_word", columnDefinition = "varchar(255) not null default '' comment '敏感词名称'")
     private String sensitiveWord;
 
     @Builder

@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CouponActivityItemVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     /** 优惠券活动ID */
     private Long activityId;

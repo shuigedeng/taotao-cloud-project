@@ -28,5 +28,4 @@ import org.springframework.stereotype.Service;
  * @since 2021-08-19
  */
 @Service
-public class MchDivisionReceiverService
-        extends ServiceImpl<MchDivisionReceiverMapper, MchDivisionReceiver> {}
+public class MchDivisionReceiverService extends ServiceImpl<MchDivisionReceiverMapper, MchDivisionReceiver> {}

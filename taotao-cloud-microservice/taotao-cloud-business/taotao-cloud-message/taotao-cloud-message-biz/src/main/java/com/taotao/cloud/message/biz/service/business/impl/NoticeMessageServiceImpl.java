@@ -37,11 +37,11 @@ import org.springframework.stereotype.Service;
 
 /** 通知类消息模板业务层实现 */
 @Service
-public class NoticeMessageServiceImpl
-        extends ServiceImpl<NoticeMessageTemplateMapper, NoticeMessage>
+public class NoticeMessageServiceImpl extends ServiceImpl<NoticeMessageTemplateMapper, NoticeMessage>
         implements NoticeMessageService {
 
-    @Autowired private MemberMessageService memberMessageService;
+    @Autowired
+    private MemberMessageService memberMessageService;
 
     @Override
     public IPage<NoticeMessage> getMessageTemplate(PageQuery PageQuery, String type) {
@@ -61,18 +61,15 @@ public class NoticeMessageServiceImpl
             return;
         }
         try {
-            NoticeMessage noticeMessage =
-                    this.getOne(
-                            new LambdaQueryWrapper<NoticeMessage>()
-                                    .eq(
-                                            NoticeMessage::getNoticeNode,
-                                            noticeMessageDTO
-                                                    .getNoticeMessageNodeEnum()
-                                                    .getDescription()
-                                                    .trim()));
+            NoticeMessage noticeMessage = this.getOne(new LambdaQueryWrapper<NoticeMessage>()
+                    .eq(
+                            NoticeMessage::getNoticeNode,
+                            noticeMessageDTO
+                                    .getNoticeMessageNodeEnum()
+                                    .getDescription()
+                                    .trim()));
             // 如果通知类站内信开启的情况下
-            if (noticeMessage != null
-                    && noticeMessage.getNoticeStatus().equals(SwitchEnum.OPEN.name())) {
+            if (noticeMessage != null && noticeMessage.getNoticeStatus().equals(SwitchEnum.OPEN.name())) {
                 MemberMessage memberMessage = new MemberMessage();
                 // memberMessage.setMemberId(noticeMessageDTO.getMemberId());
                 memberMessage.setTitle(noticeMessage.getNoticeTitle());
@@ -80,9 +77,7 @@ public class NoticeMessageServiceImpl
                 // 参数不为空，替换内容
                 if (noticeMessageDTO.getParameter() != null) {
                     memberMessage.setContent(
-                            replaceNoticeContent(
-                                    noticeMessage.getNoticeContent(),
-                                    noticeMessageDTO.getParameter()));
+                            replaceNoticeContent(noticeMessage.getNoticeContent(), noticeMessageDTO.getParameter()));
                 } else {
                     memberMessage.setContent(noticeMessage.getNoticeContent());
                 }
@@ -106,8 +101,7 @@ public class NoticeMessageServiceImpl
         for (Map.Entry<String, String> entry : parameter.entrySet()) {
             String description = NoticeMessageParameterEnum.getValueByType(entry.getKey());
             if (description != null && entry.getValue() != null) {
-                noticeContent =
-                        noticeContent.replace("#{" + description + "}".trim(), entry.getValue());
+                noticeContent = noticeContent.replace("#{" + description + "}".trim(), entry.getValue());
             }
         }
         return noticeContent;

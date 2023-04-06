@@ -140,8 +140,7 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
     @Column(
             name = "comment_status",
             columnDefinition =
-                    "varchar(64) not null comment"
-                            + " '评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，'")
+                    "varchar(64) not null comment" + " '评论状态:未评论(UNFINISHED),待追评(WAIT_CHASE),评论完成(FINISHED)，'")
     private String commentStatus;
 
     /**
@@ -169,9 +168,7 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
     private Long complainId;
 
     /** 退货商品数量 */
-    @Column(
-            name = "return_goods_number",
-            columnDefinition = "varchar(64) not null comment '退货商品数量'")
+    @Column(name = "return_goods_number", columnDefinition = "varchar(64) not null comment '退货商品数量'")
     private Integer returnGoodsNumber;
 
     public OrderItem(CartSkuVO cartSkuVO, CartVO cartVO, TradeDTO tradeDTO) {
@@ -182,18 +179,16 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
         this.setId(oldId);
         if (cartSkuVO.getPriceDetailDTO().getJoinPromotion() != null
                 && !cartSkuVO.getPriceDetailDTO().getJoinPromotion().isEmpty()) {
-            this.setPromotionType(
-                    CollUtil.join(
-                            cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
-                                    .map(PromotionSkuVO::getPromotionType)
-                                    .collect(Collectors.toList()),
-                            ","));
-            this.setPromotionId(
-                    CollUtil.join(
-                            cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
-                                    .map(PromotionSkuVO::getActivityId)
-                                    .collect(Collectors.toList()),
-                            ","));
+            this.setPromotionType(CollUtil.join(
+                    cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
+                            .map(PromotionSkuVO::getPromotionType)
+                            .collect(Collectors.toList()),
+                    ","));
+            this.setPromotionId(CollUtil.join(
+                    cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
+                            .map(PromotionSkuVO::getActivityId)
+                            .collect(Collectors.toList()),
+                    ","));
         }
         this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());
         this.setCommentStatus(CommentStatusEnum.NEW.name());
@@ -204,11 +199,10 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
         this.setImage(cartSkuVO.getGoodsSku().getThumbnail());
         this.setGoodsName(cartSkuVO.getGoodsSku().getGoodsName());
         this.setSkuId(cartSkuVO.getGoodsSku().getId());
-        this.setCategoryId(
-                cartSkuVO
-                        .getGoodsSku()
-                        .getCategoryPath()
-                        .substring(cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1));
+        this.setCategoryId(cartSkuVO
+                .getGoodsSku()
+                .getCategoryPath()
+                .substring(cartSkuVO.getGoodsSku().getCategoryPath().lastIndexOf(",") + 1));
         this.setGoodsPrice(cartSkuVO.getGoodsSku().getPrice());
         this.setUnitPrice(cartSkuVO.getPurchasePrice());
         this.setSubTotal(cartSkuVO.getSubTotal());

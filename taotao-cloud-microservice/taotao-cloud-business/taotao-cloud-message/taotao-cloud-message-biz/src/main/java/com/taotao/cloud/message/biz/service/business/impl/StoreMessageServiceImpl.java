@@ -43,8 +43,7 @@ public class StoreMessageServiceImpl extends ServiceImpl<StoreMessageMapper, Sto
     }
 
     @Override
-    public IPage<StoreMessage> getPage(
-            StoreMessageQueryVO storeMessageQueryVO, PageQuery PageQuery) {
+    public IPage<StoreMessage> getPage(StoreMessageQueryVO storeMessageQueryVO, PageQuery PageQuery) {
 
         QueryWrapper<StoreMessage> queryWrapper = new QueryWrapper<>();
         // 消息id查询

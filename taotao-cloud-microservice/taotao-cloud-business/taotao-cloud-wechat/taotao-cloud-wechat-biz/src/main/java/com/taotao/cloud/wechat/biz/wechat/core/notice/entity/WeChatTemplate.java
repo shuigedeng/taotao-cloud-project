@@ -57,9 +57,11 @@ public class WeChatTemplate extends MpDelEntity implements EntityBaseFunction<We
     /** 模板所属行业的二级行业 */
     private String deputyIndustry;
     /** 模板内容 */
-    @BigField private String content;
+    @BigField
+    private String content;
     /** 示例 */
-    @BigField private String example;
+    @BigField
+    private String example;
 
     /** 创建对象 */
     public static WeChatTemplate init(WeChatTemplateParam in) {

@@ -43,15 +43,20 @@ public class InitServer implements CommandLineRunner {
     @Value("${mediaserver.port}")
     private int port;
 
-    @Autowired private MediaServer mediaServer;
+    @Autowired
+    private MediaServer mediaServer;
 
-    @Autowired private MediaService mediaService;
+    @Autowired
+    private MediaService mediaService;
 
-    @Autowired private HlsService hlsService;
+    @Autowired
+    private HlsService hlsService;
 
-    @Autowired private CameraMapper cameraMapper;
+    @Autowired
+    private CameraMapper cameraMapper;
 
-    @Autowired private Environment env;
+    @Autowired
+    private Environment env;
 
     @Override
     public void run(String... args) throws Exception {

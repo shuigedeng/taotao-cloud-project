@@ -43,7 +43,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/order/special")
 public class SpecialManagerController {
 
-    @Autowired private SpecialService specialService;
+    @Autowired
+    private SpecialService specialService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -93,8 +94,7 @@ public class SpecialManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取专题活动")
     @GetMapping(value = "/{id}")
-    public Result<Special> getSpecialsList(
-            @Parameter(description = "专题ID", required = true) @PathVariable String id) {
+    public Result<Special> getSpecialsList(@Parameter(description = "专题ID", required = true) @PathVariable String id) {
         return Result.success(specialService.getById(id));
     }
 }

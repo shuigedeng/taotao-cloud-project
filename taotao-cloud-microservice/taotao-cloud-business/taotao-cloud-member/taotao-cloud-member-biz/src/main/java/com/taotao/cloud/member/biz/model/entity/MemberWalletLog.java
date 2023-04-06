@@ -94,14 +94,10 @@ public class MemberWalletLog extends BaseSuperEntity<MemberWalletLog, Long> {
      * @param memberWalletUpdateDTO 变动模型
      * @param isReduce 是否是消费
      */
-    public MemberWalletLog(
-            String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO, boolean isReduce) {
+    public MemberWalletLog(String memberName, MemberWalletUpdateDTO memberWalletUpdateDTO, boolean isReduce) {
         this.setMemberId(memberWalletUpdateDTO.getMemberId());
         this.setMemberName(memberName);
-        this.setMoney(
-                isReduce
-                        ? memberWalletUpdateDTO.getMoney().negate()
-                        : memberWalletUpdateDTO.getMoney());
+        this.setMoney(isReduce ? memberWalletUpdateDTO.getMoney().negate() : memberWalletUpdateDTO.getMoney());
         this.setDetail(memberWalletUpdateDTO.getDetail());
         this.setServiceType(memberWalletUpdateDTO.getServiceType());
     }

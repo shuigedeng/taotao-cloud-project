@@ -46,7 +46,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
 
-    @Resource private ShortLinkMapper shortLinkMapper;
+    @Resource
+    private ShortLinkMapper shortLinkMapper;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public Optional<ShortLinkDTO> saveShortLinkCode(ShortLink shortLink) {
@@ -54,26 +55,24 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
             CommonBizUtil.throwBizError(ErrorCodeConstant.SHORT_LINK_CODE_GENERATE_ERROR);
         }
 
-        ShortLinkDTO shortLinkDTO =
-                ShortLinkDTO.builder()
-                        .id(shortLink.getId())
-                        .domain(shortLink.getDomain())
-                        .accountNo(shortLink.getAccountNo())
-                        .code(shortLink.getCode())
-                        .expired(shortLink.getExpired())
-                        .groupId(shortLink.getGroupId())
-                        .title(shortLink.getTitle())
-                        .originUrl(shortLink.getOriginUrl())
-                        .state(BooleanEnum.TRUE.getCode())
-                        .build();
+        ShortLinkDTO shortLinkDTO = ShortLinkDTO.builder()
+                .id(shortLink.getId())
+                .domain(shortLink.getDomain())
+                .accountNo(shortLink.getAccountNo())
+                .code(shortLink.getCode())
+                .expired(shortLink.getExpired())
+                .groupId(shortLink.getGroupId())
+                .title(shortLink.getTitle())
+                .originUrl(shortLink.getOriginUrl())
+                .state(BooleanEnum.TRUE.getCode())
+                .build();
         return Optional.of(shortLinkDTO);
     }
 
     public Optional<ShortLinkDTO> getShortLinkBySign(String sign) {
-        QueryWrapper<ShortLink> queryWrapper =
-                new QueryWrapper<ShortLink>()
-                        .eq(ShortLink.COL_SIGN, sign)
-                        .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
+        QueryWrapper<ShortLink> queryWrapper = new QueryWrapper<ShortLink>()
+                .eq(ShortLink.COL_SIGN, sign)
+                .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
 
         List<ShortLink> shortLinks = shortLinkMapper.selectList(queryWrapper);
         if (CollectionUtils.isEmpty(shortLinks)) {
@@ -81,25 +80,23 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
         }
 
         ShortLink shortLink = shortLinks.get(0);
-        return Optional.of(
-                ShortLinkDTO.builder()
-                        .id(shortLink.getId())
-                        .accountNo(shortLink.getAccountNo())
-                        .groupId(shortLink.getGroupId())
-                        .title(shortLink.getTitle())
-                        .code(shortLink.getCode())
-                        .domain(shortLink.getDomain())
-                        .expired(shortLink.getExpired())
-                        .originUrl(shortLink.getOriginUrl())
-                        .state(shortLink.getState())
-                        .build());
+        return Optional.of(ShortLinkDTO.builder()
+                .id(shortLink.getId())
+                .accountNo(shortLink.getAccountNo())
+                .groupId(shortLink.getGroupId())
+                .title(shortLink.getTitle())
+                .code(shortLink.getCode())
+                .domain(shortLink.getDomain())
+                .expired(shortLink.getExpired())
+                .originUrl(shortLink.getOriginUrl())
+                .state(shortLink.getState())
+                .build());
     }
 
     public Optional<ShortLinkDTO> getShortLinkByCode(String shortLinkCode) {
-        QueryWrapper<ShortLink> queryWrapper =
-                new QueryWrapper<ShortLink>()
-                        .eq(ShortLink.COL_CODE, shortLinkCode)
-                        .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
+        QueryWrapper<ShortLink> queryWrapper = new QueryWrapper<ShortLink>()
+                .eq(ShortLink.COL_CODE, shortLinkCode)
+                .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
 
         List<ShortLink> shortLinks = shortLinkMapper.selectList(queryWrapper);
         if (CollectionUtils.isEmpty(shortLinks)) {
@@ -107,8 +104,26 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
         }
 
         ShortLink shortLink = shortLinks.get(0);
-        return Optional.of(
-                ShortLinkDTO.builder()
+        return Optional.of(ShortLinkDTO.builder()
+                .id(shortLink.getId())
+                .accountNo(shortLink.getAccountNo())
+                .groupId(shortLink.getGroupId())
+                .title(shortLink.getTitle())
+                .code(shortLink.getCode())
+                .domain(shortLink.getDomain())
+                .expired(shortLink.getExpired())
+                .originUrl(shortLink.getOriginUrl())
+                .state(shortLink.getState())
+                .build());
+    }
+
+    public List<ShortLinkDTO> listShortLinkByCode(Set<String> shortLinkCodeSet) {
+        QueryWrapper<ShortLink> queryWrapper = new QueryWrapper<ShortLink>()
+                .in(ShortLink.COL_CODE, shortLinkCodeSet)
+                .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
+
+        return CommonBizUtil.notNullList(shortLinkMapper.selectList(queryWrapper)).stream()
+                .map(shortLink -> ShortLinkDTO.builder()
                         .id(shortLink.getId())
                         .accountNo(shortLink.getAccountNo())
                         .groupId(shortLink.getGroupId())
@@ -118,61 +133,33 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
                         .expired(shortLink.getExpired())
                         .originUrl(shortLink.getOriginUrl())
                         .state(shortLink.getState())
-                        .build());
-    }
-
-    public List<ShortLinkDTO> listShortLinkByCode(Set<String> shortLinkCodeSet) {
-        QueryWrapper<ShortLink> queryWrapper =
-                new QueryWrapper<ShortLink>()
-                        .in(ShortLink.COL_CODE, shortLinkCodeSet)
-                        .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode());
-
-        return CommonBizUtil.notNullList(shortLinkMapper.selectList(queryWrapper)).stream()
-                .map(
-                        shortLink ->
-                                ShortLinkDTO.builder()
-                                        .id(shortLink.getId())
-                                        .accountNo(shortLink.getAccountNo())
-                                        .groupId(shortLink.getGroupId())
-                                        .title(shortLink.getTitle())
-                                        .code(shortLink.getCode())
-                                        .domain(shortLink.getDomain())
-                                        .expired(shortLink.getExpired())
-                                        .originUrl(shortLink.getOriginUrl())
-                                        .state(shortLink.getState())
-                                        .build())
+                        .build())
                 .collect(Collectors.toList());
     }
 
     public PageResult<ShortLinkDTO> pageShortLinkByCreateTime(ShortLinkTimePageRequest request) {
-        QueryWrapper<ShortLink> queryWrapper =
-                new QueryWrapper<ShortLink>()
-                        .ge(ShortLink.COL_CREATE_TIME, request.getDateRange().getLower())
-                        .le(ShortLink.COL_CREATE_TIME, request.getDateRange().getUpper())
-                        .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode())
-                        .orderByDesc(
-                                BooleanEnum.TRUE.getCode().equals(request.getDesc()),
-                                ShortLink.COL_CREATE_TIME);
+        QueryWrapper<ShortLink> queryWrapper = new QueryWrapper<ShortLink>()
+                .ge(ShortLink.COL_CREATE_TIME, request.getDateRange().getLower())
+                .le(ShortLink.COL_CREATE_TIME, request.getDateRange().getUpper())
+                .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode())
+                .orderByDesc(BooleanEnum.TRUE.getCode().equals(request.getDesc()), ShortLink.COL_CREATE_TIME);
 
-        IPage<ShortLink> page =
-                page(new Page<>(request.getPageNo(), request.getPageSize()), queryWrapper);
-        List<ShortLinkDTO> shortLinkDtoList =
-                CommonBizUtil.notNullList(page.getRecords()).stream()
-                        .map(
-                                shortLink -> {
-                                    return ShortLinkDTO.builder()
-                                            .id(shortLink.getId())
-                                            .accountNo(shortLink.getAccountNo())
-                                            .groupId(shortLink.getGroupId())
-                                            .title(shortLink.getTitle())
-                                            .code(shortLink.getCode())
-                                            .domain(shortLink.getDomain())
-                                            .expired(shortLink.getExpired())
-                                            .originUrl(shortLink.getOriginUrl())
-                                            .state(shortLink.getState())
-                                            .build();
-                                })
-                        .collect(Collectors.toList());
+        IPage<ShortLink> page = page(new Page<>(request.getPageNo(), request.getPageSize()), queryWrapper);
+        List<ShortLinkDTO> shortLinkDtoList = CommonBizUtil.notNullList(page.getRecords()).stream()
+                .map(shortLink -> {
+                    return ShortLinkDTO.builder()
+                            .id(shortLink.getId())
+                            .accountNo(shortLink.getAccountNo())
+                            .groupId(shortLink.getGroupId())
+                            .title(shortLink.getTitle())
+                            .code(shortLink.getCode())
+                            .domain(shortLink.getDomain())
+                            .expired(shortLink.getExpired())
+                            .originUrl(shortLink.getOriginUrl())
+                            .state(shortLink.getState())
+                            .build();
+                })
+                .collect(Collectors.toList());
 
         PageResult<ShortLinkDTO> pageResult = new PageResult<>();
         pageResult.setPage(request.getPageNo());
@@ -183,34 +170,28 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
     }
 
     public PageResult<ShortLinkDTO> pageShortLinkByUpdateTime(ShortLinkTimePageRequest request) {
-        QueryWrapper<ShortLink> queryWrapper =
-                new QueryWrapper<ShortLink>()
-                        .ge(ShortLink.COL_UPDATE_TIME, request.getDateRange().getLower())
-                        .le(ShortLink.COL_UPDATE_TIME, request.getDateRange().getUpper())
-                        .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode())
-                        .orderByDesc(
-                                BooleanEnum.TRUE.getCode().equals(request.getDesc()),
-                                ShortLink.COL_UPDATE_TIME);
+        QueryWrapper<ShortLink> queryWrapper = new QueryWrapper<ShortLink>()
+                .ge(ShortLink.COL_UPDATE_TIME, request.getDateRange().getLower())
+                .le(ShortLink.COL_UPDATE_TIME, request.getDateRange().getUpper())
+                .eq(Domain.COL_IS_DELETED, BooleanEnum.FALSE.getCode())
+                .orderByDesc(BooleanEnum.TRUE.getCode().equals(request.getDesc()), ShortLink.COL_UPDATE_TIME);
 
-        IPage<ShortLink> page =
-                page(new Page<>(request.getPageNo(), request.getPageSize()), queryWrapper);
-        List<ShortLinkDTO> shortLinkDtoList =
-                CommonBizUtil.notNullList(page.getRecords()).stream()
-                        .map(
-                                shortLink -> {
-                                    return ShortLinkDTO.builder()
-                                            .id(shortLink.getId())
-                                            .accountNo(shortLink.getAccountNo())
-                                            .groupId(shortLink.getGroupId())
-                                            .title(shortLink.getTitle())
-                                            .code(shortLink.getCode())
-                                            .domain(shortLink.getDomain())
-                                            .expired(shortLink.getExpired())
-                                            .originUrl(shortLink.getOriginUrl())
-                                            .state(shortLink.getState())
-                                            .build();
-                                })
-                        .collect(Collectors.toList());
+        IPage<ShortLink> page = page(new Page<>(request.getPageNo(), request.getPageSize()), queryWrapper);
+        List<ShortLinkDTO> shortLinkDtoList = CommonBizUtil.notNullList(page.getRecords()).stream()
+                .map(shortLink -> {
+                    return ShortLinkDTO.builder()
+                            .id(shortLink.getId())
+                            .accountNo(shortLink.getAccountNo())
+                            .groupId(shortLink.getGroupId())
+                            .title(shortLink.getTitle())
+                            .code(shortLink.getCode())
+                            .domain(shortLink.getDomain())
+                            .expired(shortLink.getExpired())
+                            .originUrl(shortLink.getOriginUrl())
+                            .state(shortLink.getState())
+                            .build();
+                })
+                .collect(Collectors.toList());
 
         PageResult<ShortLinkDTO> pageResult = new PageResult<>();
         pageResult.setPage(request.getPageNo());

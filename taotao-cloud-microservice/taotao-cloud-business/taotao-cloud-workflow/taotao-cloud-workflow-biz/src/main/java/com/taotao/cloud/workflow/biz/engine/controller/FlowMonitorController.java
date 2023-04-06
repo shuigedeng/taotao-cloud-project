@@ -51,38 +51,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/engine/flow-monitor")
 public class FlowMonitorController {
 
-    @Autowired private FlowEngineService flowEngineService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private ServiceAllUtil serviceUtil;
+    @Autowired
+    private FlowEngineService flowEngineService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private ServiceAllUtil serviceUtil;
 
     @Operation(summary = "获取流程监控列表", description = "获取流程监控列表")
     @GetMapping("/page")
     public Result<PageResult<FlowMonitorListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> list = flowTaskService.getMonitorList(paginationFlowTask);
-        List<FlowEngineEntity> engineList =
-                flowEngineService.getFlowList(
-                        list.stream().map(FlowTaskEntity::getFlowId).collect(Collectors.toList()));
-        List<UserEntity> userList =
-                serviceUtil.getUserName(
-                        list.stream()
-                                .map(FlowTaskEntity::getCreatorUserId)
-                                .collect(Collectors.toList()));
+        List<FlowEngineEntity> engineList = flowEngineService.getFlowList(
+                list.stream().map(FlowTaskEntity::getFlowId).collect(Collectors.toList()));
+        List<UserEntity> userList = serviceUtil.getUserName(
+                list.stream().map(FlowTaskEntity::getCreatorUserId).collect(Collectors.toList()));
 
         List<FlowMonitorListVO> listVO = new LinkedList<>();
         for (FlowTaskEntity taskEntity : list) {
             // 用户名称赋值
             FlowMonitorListVO vo = FlowTaskConvert.INSTANCE.convertMonitor(taskEntity);
-            UserEntity user =
-                    userList.stream()
-                            .filter(t -> t.getId().equals(taskEntity.getCreatorUserId()))
-                            .findFirst()
-                            .orElse(null);
+            UserEntity user = userList.stream()
+                    .filter(t -> t.getId().equals(taskEntity.getCreatorUserId()))
+                    .findFirst()
+                    .orElse(null);
             vo.setUserName(user != null ? user.getRealName() + "/" + user.getAccount() : "");
-            FlowEngineEntity engine =
-                    engineList.stream()
-                            .filter(t -> t.getId().equals(taskEntity.getFlowId()))
-                            .findFirst()
-                            .orElse(null);
+            FlowEngineEntity engine = engineList.stream()
+                    .filter(t -> t.getId().equals(taskEntity.getFlowId()))
+                    .findFirst()
+                    .orElse(null);
             if (engine != null) {
                 vo.setFormData(engine.getFormData());
                 vo.setFormType(engine.getFormType());
@@ -95,8 +94,7 @@ public class FlowMonitorController {
 
     @Operation(summary = "批量删除流程监控", description = "批量删除流程监控")
     @DeleteMapping
-    public Result<Boolean> delete(@RequestBody FlowDeleteModel deleteModel)
-            throws WorkFlowException {
+    public Result<Boolean> delete(@RequestBody FlowDeleteModel deleteModel) throws WorkFlowException {
         String[] taskId = deleteModel.getIds().split(",");
         flowTaskService.delete(taskId);
         return Result.success(true);

@@ -43,10 +43,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleBuyerController {
 
     /** 文章 */
-    @Autowired private ArticleService articleService;
+    @Autowired
+    private ArticleService articleService;
 
     /** 文章分类 */
-    @Autowired private ArticleCategoryService articleCategoryService;
+    @Autowired
+    private ArticleCategoryService articleCategoryService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")

@@ -112,8 +112,7 @@ public class DbTypeUtil {
     /*============================专用代码区域=========================*/
 
     /** MybatisPlusConfig */
-    public static <T extends DataSourceUtil> DbType getMybatisEnum(T dataSourceUtil)
-            throws DataException {
+    public static <T extends DataSourceUtil> DbType getMybatisEnum(T dataSourceUtil) throws DataException {
         return getDb(dataSourceUtil).getMpDbType();
     }
 
@@ -166,8 +165,7 @@ public class DbTypeUtil {
      * @return 数据标准编码
      * @throws DataException 数据库类型不符合编码
      */
-    private static String checkDbTypeExist(String dbType, Boolean exceptionOnOff)
-            throws DataException {
+    private static String checkDbTypeExist(String dbType, Boolean exceptionOnOff) throws DataException {
         for (String enEncode : DbBase.DB_ENCODES) {
             if (enEncode.equals(dbType)) {
                 return enEncode;

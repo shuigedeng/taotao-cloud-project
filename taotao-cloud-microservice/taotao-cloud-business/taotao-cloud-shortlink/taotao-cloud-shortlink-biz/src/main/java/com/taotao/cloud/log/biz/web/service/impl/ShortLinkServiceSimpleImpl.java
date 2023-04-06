@@ -42,9 +42,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShortLinkServiceSimpleImpl implements IShortLinkService {
 
-    @Resource private RedissonClient redissonClient;
+    @Resource
+    private RedissonClient redissonClient;
 
-    @Resource private ShortLinkBiz shortLinkBiz;
+    @Resource
+    private ShortLinkBiz shortLinkBiz;
 
     private static final String CACHE_KEY_SHORT_CODE = "SHORT_LINK_MAPPING:%s";
 
@@ -55,8 +57,7 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
     private static final String CACHE_EMPTY = "null";
 
     public Optional<ShortLinkDTO> getShortLinkFromCache(String shortLinkCode) {
-        RBucket<String> cacheBucket =
-                redissonClient.getBucket(String.format(CACHE_KEY_SHORT_CODE, shortLinkCode));
+        RBucket<String> cacheBucket = redissonClient.getBucket(String.format(CACHE_KEY_SHORT_CODE, shortLinkCode));
 
         String cacheJson = cacheBucket.get();
         if (StringUtils.isNoneBlank(cacheJson) || !CACHE_EMPTY.equals(cacheJson)) {
@@ -73,8 +74,7 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
 
     @Override
     public Optional<String> parseShortLinkCode(String shortLinkCode) {
-        RBucket<String> codeBucket =
-                redissonClient.getBucket(String.format(CACHE_KEY_SHORT_CODE, shortLinkCode));
+        RBucket<String> codeBucket = redissonClient.getBucket(String.format(CACHE_KEY_SHORT_CODE, shortLinkCode));
 
         String cacheJson = codeBucket.get();
         if (StringUtils.isNoneBlank(cacheJson) || !CACHE_EMPTY.equals(cacheJson)) {
@@ -107,8 +107,7 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
                 // TIPS: double check: 避免积压在锁上的请求，一个个进来后都得查库
                 cacheJson = codeBucket.get();
                 if (StringUtils.isNoneBlank(cacheJson) || !CACHE_EMPTY.equals(cacheJson)) {
-                    ShortLinkDTO shortLinkDTO =
-                            JSONObject.parseObject(cacheJson, ShortLinkDTO.class);
+                    ShortLinkDTO shortLinkDTO = JSONObject.parseObject(cacheJson, ShortLinkDTO.class);
                     if (shortLinkBiz.checkShortLinkCodeValid(shortLinkDTO)) {
                         codeBucket.expire(Duration.ofMillis(getShortLinkCodeCacheTime()));
                         log.info("解析短链：double check缓存，拿到缓存数据，code -> {}", shortLinkDTO.getCode());
@@ -116,8 +115,7 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
                     }
                 }
 
-                Optional<ShortLinkDTO> shortLinkCodeOpt =
-                        shortLinkBiz.getShortLinkCodeDto(shortLinkCode);
+                Optional<ShortLinkDTO> shortLinkCodeOpt = shortLinkBiz.getShortLinkCodeDto(shortLinkCode);
                 if (!shortLinkCodeOpt.isPresent()) {
                     // TODO 缓存穿透的解决：缓存空值，新增该短码时，要不空数据去掉或用实际数据替换
                     // fixme 消费失败，却被误以为是拿不到值，缓存了空值，导致数据不一致
@@ -127,9 +125,7 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
 
                 ShortLinkDTO shortLinkDTO = shortLinkCodeOpt.get();
                 codeBucket.set(
-                        JSONObject.toJSONString(shortLinkDTO),
-                        getShortLinkCodeCacheTime(),
-                        TimeUnit.MILLISECONDS);
+                        JSONObject.toJSONString(shortLinkDTO), getShortLinkCodeCacheTime(), TimeUnit.MILLISECONDS);
                 return Optional.ofNullable(shortLinkDTO.getOriginUrl());
             }
 
@@ -161,19 +157,16 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
         RLock lock = redissonClient.getLock(String.format(LOCK_KEY_SHORT_CODE, request.getCode()));
         if (lock.tryLock()) {
             try {
-                Boolean result =
-                        shortLinkBiz.updateShortLinkCode(
-                                ShortLinkDTO.builder()
-                                        .id(request.getId())
-                                        .code(request.getCode())
-                                        .originUrl(request.getOriginUrl())
-                                        .build());
+                Boolean result = shortLinkBiz.updateShortLinkCode(ShortLinkDTO.builder()
+                        .id(request.getId())
+                        .code(request.getCode())
+                        .originUrl(request.getOriginUrl())
+                        .build());
                 if (Boolean.FALSE.equals(result)) {
                     return Boolean.FALSE;
                 }
                 // 查库
-                Optional<ShortLinkDTO> shortLinkCodeOpt =
-                        shortLinkBiz.getShortLinkCodeDto(request.getCode());
+                Optional<ShortLinkDTO> shortLinkCodeOpt = shortLinkBiz.getShortLinkCodeDto(request.getCode());
                 if (!shortLinkCodeOpt.isPresent()) {
                     return Boolean.FALSE;
                 }
@@ -181,10 +174,7 @@ public class ShortLinkServiceSimpleImpl implements IShortLinkService {
                 ShortLinkDTO shortLinkDTO = shortLinkCodeOpt.get();
                 redissonClient
                         .getBucket(String.format(CACHE_KEY_SHORT_CODE, request.getCode()))
-                        .set(
-                                JSONObject.toJSONString(shortLinkDTO),
-                                getShortLinkCodeCacheTime(),
-                                TimeUnit.MILLISECONDS);
+                        .set(JSONObject.toJSONString(shortLinkDTO), getShortLinkCodeCacheTime(), TimeUnit.MILLISECONDS);
 
                 return Boolean.TRUE;
             } catch (Exception e) {

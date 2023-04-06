@@ -58,10 +58,7 @@ public class ScheduledJob extends BaseSuperEntity<ScheduledJob, String> {
     private String invokeTarget;
 
     // 周期(month、week、day、hour、minute、secods)
-    @Column(
-            name = "cycle",
-            columnDefinition =
-                    "varchar(125) not null comment '周期(month、week、day、hour、minute、secods)'")
+    @Column(name = "cycle", columnDefinition = "varchar(125) not null comment '周期(month、week、day、hour、minute、secods)'")
     private String cycle;
 
     // cron表达式
@@ -77,9 +74,7 @@ public class ScheduledJob extends BaseSuperEntity<ScheduledJob, String> {
     private Integer status;
 
     // 执行情况(1-执行中,2-已暂停)
-    @Column(
-            name = "situation",
-            columnDefinition = "int not null default 0 comment '执行情况(1-执行中,2-已暂停)'")
+    @Column(name = "situation", columnDefinition = "int not null default 0 comment '执行情况(1-执行中,2-已暂停)'")
     private Integer situation;
 
     // 上次执行时间

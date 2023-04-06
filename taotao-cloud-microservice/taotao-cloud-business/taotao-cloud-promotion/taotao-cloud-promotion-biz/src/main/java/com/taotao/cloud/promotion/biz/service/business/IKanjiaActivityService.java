@@ -80,6 +80,5 @@ public interface IKanjiaActivityService extends IService<KanjiaActivity> {
      * @return {@link IPage }<{@link KanjiaActivity }>
      * @since 2022-04-27 16:43:45
      */
-    IPage<KanjiaActivity> getForPage(
-            KanjiaActivityPageQuery kanJiaActivityPageQuery, PageQuery page);
+    IPage<KanjiaActivity> getForPage(KanjiaActivityPageQuery kanJiaActivityPageQuery, PageQuery page);
 }

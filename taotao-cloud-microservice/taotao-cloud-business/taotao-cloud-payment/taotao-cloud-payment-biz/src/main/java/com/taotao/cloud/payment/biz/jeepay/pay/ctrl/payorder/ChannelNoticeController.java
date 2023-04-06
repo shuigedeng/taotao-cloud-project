@@ -50,10 +50,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ChannelNoticeController extends AbstractCtrl {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private PayMchNotifyService payMchNotifyService;
-    @Autowired private PayOrderProcessService payOrderProcessService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private PayMchNotifyService payMchNotifyService;
+
+    @Autowired
+    private PayOrderProcessService payOrderProcessService;
 
     /** 同步通知入口 */
     @RequestMapping(value = {"/api/pay/return/{ifCode}", "/api/pay/return/{ifCode}/{payOrderId}"})
@@ -63,12 +70,7 @@ public class ChannelNoticeController extends AbstractCtrl {
             @PathVariable(value = "payOrderId", required = false) String urlOrderId) {
 
         String payOrderId = null;
-        String logPrefix =
-                "进入["
-                        + ifCode
-                        + "]支付同步跳转：urlOrderId：["
-                        + StringUtils.defaultIfEmpty(urlOrderId, "")
-                        + "] ";
+        String logPrefix = "进入[" + ifCode + "]支付同步跳转：urlOrderId：[" + StringUtils.defaultIfEmpty(urlOrderId, "") + "] ";
         log.info("===== {} =====", logPrefix);
 
         try {
@@ -80,8 +82,7 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 查询支付接口是否存在
             IChannelNoticeService payNotifyService =
-                    SpringBeansUtil.getBean(
-                            ifCode + "ChannelNoticeService", IChannelNoticeService.class);
+                    SpringBeansUtil.getBean(ifCode + "ChannelNoticeService", IChannelNoticeService.class);
 
             // 支付通道接口实现不存在
             if (payNotifyService == null) {
@@ -91,8 +92,7 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 解析订单号 和 请求参数
             MutablePair<String, Object> mutablePair =
-                    payNotifyService.parseParams(
-                            request, urlOrderId, IChannelNoticeService.NoticeTypeEnum.DO_RETURN);
+                    payNotifyService.parseParams(request, urlOrderId, IChannelNoticeService.NoticeTypeEnum.DO_RETURN);
             if (mutablePair == null) { // 解析数据失败， 响应已处理
                 log.error("{}, mutablePair is null ", logPrefix);
                 throw new BizException("解析数据异常！"); // 需要实现类自行抛出ResponseException, 不应该在这抛此异常。
@@ -100,18 +100,10 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 解析到订单号
             payOrderId = mutablePair.left;
-            log.info(
-                    "{}, 解析数据为：payOrderId:{}, params:{}",
-                    logPrefix,
-                    payOrderId,
-                    mutablePair.getRight());
+            log.info("{}, 解析数据为：payOrderId:{}, params:{}", logPrefix, payOrderId, mutablePair.getRight());
 
             if (StringUtils.isNotEmpty(urlOrderId) && !urlOrderId.equals(payOrderId)) {
-                log.error(
-                        "{}, 订单号不匹配. urlOrderId={}, payOrderId={} ",
-                        logPrefix,
-                        urlOrderId,
-                        payOrderId);
+                log.error("{}, 订单号不匹配. urlOrderId={}, payOrderId={} ", logPrefix, urlOrderId, payOrderId);
                 throw new BizException("订单号不匹配！");
             }
 
@@ -126,26 +118,21 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 查询出商户应用的配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            payOrder.getMchNo(), payOrder.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
 
             // 调起接口的回调判断
-            ChannelRetMsg notifyResult =
-                    payNotifyService.doNotice(
-                            request,
-                            mutablePair.getRight(),
-                            payOrder,
-                            mchAppConfigContext,
-                            IChannelNoticeService.NoticeTypeEnum.DO_RETURN);
+            ChannelRetMsg notifyResult = payNotifyService.doNotice(
+                    request,
+                    mutablePair.getRight(),
+                    payOrder,
+                    mchAppConfigContext,
+                    IChannelNoticeService.NoticeTypeEnum.DO_RETURN);
 
             // 返回null 表明出现异常， 无需处理通知下游等操作。
             if (notifyResult == null
                     || notifyResult.getChannelState() == null
                     || notifyResult.getResponseEntity() == null) {
-                log.error(
-                        "{}, 处理回调事件异常  notifyResult data error, notifyResult ={} ",
-                        logPrefix,
-                        notifyResult);
+                log.error("{}, 处理回调事件异常  notifyResult data error, notifyResult ={} ", logPrefix, notifyResult);
                 throw new BizException("处理回调事件异常！"); // 需要实现类自行抛出ResponseException, 不应该在这抛此异常。
             }
 
@@ -167,9 +154,8 @@ public class ChannelNoticeController extends AbstractCtrl {
             // 包含通知地址时
             if (hasReturnUrl) {
                 // 重定向
-                response.sendRedirect(
-                        payMchNotifyService.createReturnUrl(
-                                payOrder, mchAppConfigContext.getMchApp().getAppSecret()));
+                response.sendRedirect(payMchNotifyService.createReturnUrl(
+                        payOrder, mchAppConfigContext.getMchApp().getAppSecret()));
                 return null;
             } else {
 
@@ -200,12 +186,7 @@ public class ChannelNoticeController extends AbstractCtrl {
             @PathVariable(value = "payOrderId", required = false) String urlOrderId) {
 
         String payOrderId = null;
-        String logPrefix =
-                "进入["
-                        + ifCode
-                        + "]支付回调：urlOrderId：["
-                        + StringUtils.defaultIfEmpty(urlOrderId, "")
-                        + "] ";
+        String logPrefix = "进入[" + ifCode + "]支付回调：urlOrderId：[" + StringUtils.defaultIfEmpty(urlOrderId, "") + "] ";
         log.info("===== {} =====", logPrefix);
 
         try {
@@ -217,8 +198,7 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 查询支付接口是否存在
             IChannelNoticeService payNotifyService =
-                    SpringBeansUtil.getBean(
-                            ifCode + "ChannelNoticeService", IChannelNoticeService.class);
+                    SpringBeansUtil.getBean(ifCode + "ChannelNoticeService", IChannelNoticeService.class);
 
             // 支付通道接口实现不存在
             if (payNotifyService == null) {
@@ -228,8 +208,7 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 解析订单号 和 请求参数
             MutablePair<String, Object> mutablePair =
-                    payNotifyService.parseParams(
-                            request, urlOrderId, IChannelNoticeService.NoticeTypeEnum.DO_NOTIFY);
+                    payNotifyService.parseParams(request, urlOrderId, IChannelNoticeService.NoticeTypeEnum.DO_NOTIFY);
             if (mutablePair == null) { // 解析数据失败， 响应已处理
                 log.error("{}, mutablePair is null ", logPrefix);
                 throw new BizException("解析数据异常！"); // 需要实现类自行抛出ResponseException, 不应该在这抛此异常。
@@ -237,18 +216,10 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 解析到订单号
             payOrderId = mutablePair.left;
-            log.info(
-                    "{}, 解析数据为：payOrderId:{}, params:{}",
-                    logPrefix,
-                    payOrderId,
-                    mutablePair.getRight());
+            log.info("{}, 解析数据为：payOrderId:{}, params:{}", logPrefix, payOrderId, mutablePair.getRight());
 
             if (StringUtils.isNotEmpty(urlOrderId) && !urlOrderId.equals(payOrderId)) {
-                log.error(
-                        "{}, 订单号不匹配. urlOrderId={}, payOrderId={} ",
-                        logPrefix,
-                        urlOrderId,
-                        payOrderId);
+                log.error("{}, 订单号不匹配. urlOrderId={}, payOrderId={} ", logPrefix, urlOrderId, payOrderId);
                 throw new BizException("订单号不匹配！");
             }
 
@@ -263,26 +234,21 @@ public class ChannelNoticeController extends AbstractCtrl {
 
             // 查询出商户应用的配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            payOrder.getMchNo(), payOrder.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
 
             // 调起接口的回调判断
-            ChannelRetMsg notifyResult =
-                    payNotifyService.doNotice(
-                            request,
-                            mutablePair.getRight(),
-                            payOrder,
-                            mchAppConfigContext,
-                            IChannelNoticeService.NoticeTypeEnum.DO_NOTIFY);
+            ChannelRetMsg notifyResult = payNotifyService.doNotice(
+                    request,
+                    mutablePair.getRight(),
+                    payOrder,
+                    mchAppConfigContext,
+                    IChannelNoticeService.NoticeTypeEnum.DO_NOTIFY);
 
             // 返回null 表明出现异常， 无需处理通知下游等操作。
             if (notifyResult == null
                     || notifyResult.getChannelState() == null
                     || notifyResult.getResponseEntity() == null) {
-                log.error(
-                        "{}, 处理回调事件异常  notifyResult data error, notifyResult ={} ",
-                        logPrefix,
-                        notifyResult);
+                log.error("{}, 处理回调事件异常  notifyResult data error, notifyResult ={} ", logPrefix, notifyResult);
                 throw new BizException("处理回调事件异常！"); // 需要实现类自行抛出ResponseException, 不应该在这抛此异常。
             }
 
@@ -293,23 +259,18 @@ public class ChannelNoticeController extends AbstractCtrl {
                 // 明确成功
                 if (ChannelRetMsg.ChannelState.CONFIRM_SUCCESS == notifyResult.getChannelState()) {
 
-                    updateOrderSuccess =
-                            payOrderService.updateIng2Success(
-                                    payOrderId,
-                                    notifyResult.getChannelOrderId(),
-                                    notifyResult.getChannelUserId());
+                    updateOrderSuccess = payOrderService.updateIng2Success(
+                            payOrderId, notifyResult.getChannelOrderId(), notifyResult.getChannelUserId());
 
                     // 明确失败
-                } else if (ChannelRetMsg.ChannelState.CONFIRM_FAIL
-                        == notifyResult.getChannelState()) {
+                } else if (ChannelRetMsg.ChannelState.CONFIRM_FAIL == notifyResult.getChannelState()) {
 
-                    updateOrderSuccess =
-                            payOrderService.updateIng2Fail(
-                                    payOrderId,
-                                    notifyResult.getChannelOrderId(),
-                                    notifyResult.getChannelUserId(),
-                                    notifyResult.getChannelErrCode(),
-                                    notifyResult.getChannelErrMsg());
+                    updateOrderSuccess = payOrderService.updateIng2Fail(
+                            payOrderId,
+                            notifyResult.getChannelOrderId(),
+                            notifyResult.getChannelUserId(),
+                            notifyResult.getChannelErrCode(),
+                            notifyResult.getChannelErrMsg());
                 }
             }
 

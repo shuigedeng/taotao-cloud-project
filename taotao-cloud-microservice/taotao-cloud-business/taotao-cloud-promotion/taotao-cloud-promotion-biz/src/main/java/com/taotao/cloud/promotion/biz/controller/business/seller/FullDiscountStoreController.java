@@ -52,7 +52,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/store/promotion/fullDiscount")
 public class FullDiscountStoreController {
 
-    @Autowired private IFullDiscountService fullDiscountService;
+    @Autowired
+    private IFullDiscountService fullDiscountService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -73,8 +74,7 @@ public class FullDiscountStoreController {
     @Operation(summary = "通过id获取")
     @GetMapping("/{id}")
     public Result<FullDiscountVO> get(@PathVariable String id) {
-        FullDiscountVO fullDiscount =
-                OperationalJudgment.judgment(fullDiscountService.getFullDiscount(id));
+        FullDiscountVO fullDiscount = OperationalJudgment.judgment(fullDiscountService.getFullDiscount(id));
         return Result.success(fullDiscount);
     }
 
@@ -82,12 +82,10 @@ public class FullDiscountStoreController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "根据条件分页查询满优惠活动")
     @GetMapping
-    public Result<IPage<FullDiscount>> getFullDiscountByPage(
-            FullDiscountPageQuery searchParams, PageVO page) {
+    public Result<IPage<FullDiscount>> getFullDiscountByPage(FullDiscountPageQuery searchParams, PageVO page) {
         String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
         searchParams.setStoreId(storeId);
-        IPage<FullDiscount> fullDiscountByPage =
-                fullDiscountService.pageFindAll(searchParams, page);
+        IPage<FullDiscount> fullDiscountByPage = fullDiscountService.pageFindAll(searchParams, page);
         return Result.success(fullDiscountByPage);
     }
 
@@ -126,9 +124,7 @@ public class FullDiscountStoreController {
     // })
     @PutMapping("/status/{id}")
     public Result<Object> updateCouponStatus(
-            @Parameter(description = "满额活动ID") @PathVariable String id,
-            Long startTime,
-            Long endTime) {
+            @Parameter(description = "满额活动ID") @PathVariable String id, Long startTime, Long endTime) {
         OperationalJudgment.judgment(fullDiscountService.getFullDiscount(id));
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
             return Result.success(ResultEnum.SUCCESS);

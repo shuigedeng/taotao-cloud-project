@@ -44,11 +44,14 @@ import org.springframework.stereotype.Component;
 public class OrderMessageListener implements RocketMQListener<MessageExt> {
 
     /** 交易 */
-    @Autowired private List<TradeEvent> tradeEvent;
+    @Autowired
+    private List<TradeEvent> tradeEvent;
     /** 订单状态 */
-    @Autowired private List<OrderStatusChangeEvent> orderStatusChangeEvents;
+    @Autowired
+    private List<OrderStatusChangeEvent> orderStatusChangeEvents;
     /** 缓存 */
-    @Autowired private RedisRepository redisRepository;
+    @Autowired
+    private RedisRepository redisRepository;
 
     @Override
     public void onMessage(MessageExt messageExt) {
@@ -69,8 +72,7 @@ public class OrderMessageListener implements RocketMQListener<MessageExt> {
                 // 订单创建
             case ORDER_CREATE:
                 String key = new String(messageExt.getBody());
-                TradeDTO tradeDTO =
-                        JSONUtil.toBean(redisRepository.get(key).toString(), TradeDTO.class);
+                TradeDTO tradeDTO = JSONUtil.toBean(redisRepository.get(key).toString(), TradeDTO.class);
                 boolean result = true;
                 for (TradeEvent event : tradeEvent) {
                     try {
@@ -95,8 +97,7 @@ public class OrderMessageListener implements RocketMQListener<MessageExt> {
                 for (OrderStatusChangeEvent orderStatusChangeEvent : orderStatusChangeEvents) {
                     try {
                         OrderMessage orderMessage =
-                                JSONUtil.toBean(
-                                        new String(messageExt.getBody()), OrderMessage.class);
+                                JSONUtil.toBean(new String(messageExt.getBody()), OrderMessage.class);
                         orderStatusChangeEvent.orderChange(orderMessage);
                     } catch (Exception e) {
                         LogUtils.error(

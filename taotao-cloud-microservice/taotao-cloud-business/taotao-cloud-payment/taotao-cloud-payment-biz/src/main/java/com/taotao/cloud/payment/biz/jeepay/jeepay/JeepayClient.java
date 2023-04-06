@@ -85,8 +85,7 @@ public class JeepayClient extends APIResource {
 
     public JeepayClient() {}
 
-    public static synchronized JeepayClient getInstance(
-            String appId, String apiKey, String apiBase) {
+    public static synchronized JeepayClient getInstance(String appId, String apiKey, String apiBase) {
         JeepayClient client = clientMap.get(appId);
         if (client != null) {
             return client;
@@ -126,13 +125,12 @@ public class JeepayClient extends APIResource {
 
         // 支持用户自己设置RequestOptions
         if (request.getRequestOptions() == null) {
-            RequestOptions options =
-                    RequestOptions.builder()
-                            .setVersion(request.getApiVersion())
-                            .setUri(request.getApiUri())
-                            .setAppId(this.appId)
-                            .setApiKey(this.apiKey)
-                            .build();
+            RequestOptions options = RequestOptions.builder()
+                    .setVersion(request.getApiVersion())
+                    .setUri(request.getApiUri())
+                    .setAppId(this.appId)
+                    .setApiKey(this.apiKey)
+                    .build();
             request.setRequestOptions(options);
         }
 

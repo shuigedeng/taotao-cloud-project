@@ -26,7 +26,8 @@ import lombok.Data;
  */
 @Data
 public class ProcessDTO implements Serializable {
-    @Serial private static final long serialVersionUID = -3073170522496527593L;
+    @Serial
+    private static final long serialVersionUID = -3073170522496527593L;
 
     @NotBlank(message = "流程编号不为空")
     private String processKey;

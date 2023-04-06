@@ -41,8 +41,7 @@ public class CashierController {
 
     @Operation(summary = "发起支付(单渠道)")
     @PostMapping("/singlePay")
-    public ResResult<PayResult> singlePay(
-            @RequestBody CashierSinglePayParam cashierSinglePayParam) {
+    public ResResult<PayResult> singlePay(@RequestBody CashierSinglePayParam cashierSinglePayParam) {
         return Res.ok(cashierService.singlePay(cashierSinglePayParam));
     }
 

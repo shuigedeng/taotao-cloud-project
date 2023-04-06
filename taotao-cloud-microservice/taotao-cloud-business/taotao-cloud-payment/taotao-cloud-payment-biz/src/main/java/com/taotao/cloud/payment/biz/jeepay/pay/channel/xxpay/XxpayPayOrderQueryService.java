@@ -44,7 +44,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class XxpayPayOrderQueryService implements IPayOrderQueryService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -53,12 +54,8 @@ public class XxpayPayOrderQueryService implements IPayOrderQueryService {
 
     @Override
     public ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
-        XxpayNormalMchParams xxpayParams =
-                (XxpayNormalMchParams)
-                        configContextQueryService.queryNormalMchParams(
-                                mchAppConfigContext.getMchNo(),
-                                mchAppConfigContext.getAppId(),
-                                getIfCode());
+        XxpayNormalMchParams xxpayParams = (XxpayNormalMchParams) configContextQueryService.queryNormalMchParams(
+                mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
         Map<String, Object> paramMap = new TreeMap();
         // 接口类型
         paramMap.put("mchId", xxpayParams.getMchId());
@@ -67,12 +64,13 @@ public class XxpayPayOrderQueryService implements IPayOrderQueryService {
         paramMap.put("sign", sign);
         String resStr = "";
         String queryPayOrderUrl =
-                XxpayKit.getQueryPayOrderUrl(xxpayParams.getPayUrl())
-                        + "?"
-                        + JeepayKit.genUrlParams(paramMap);
+                XxpayKit.getQueryPayOrderUrl(xxpayParams.getPayUrl()) + "?" + JeepayKit.genUrlParams(paramMap);
         try {
             log.info("支付查询[{}]参数：{}", getIfCode(), queryPayOrderUrl);
-            resStr = HttpUtil.createPost(queryPayOrderUrl).timeout(60 * 1000).execute().body();
+            resStr = HttpUtil.createPost(queryPayOrderUrl)
+                    .timeout(60 * 1000)
+                    .execute()
+                    .body();
             log.info("支付查询[{}]结果：{}", getIfCode(), resStr);
         } catch (Exception e) {
             log.error("http error", e);

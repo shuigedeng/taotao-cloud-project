@@ -33,8 +33,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class VisitsInit implements ApplicationRunner {
 
-    @Autowired private IVisitsService visitsService;
-    @Autowired private IRegionService regionService;
+    @Autowired
+    private IVisitsService visitsService;
+
+    @Autowired
+    private IRegionService regionService;
 
     @Override
     public void run(ApplicationArguments args) {

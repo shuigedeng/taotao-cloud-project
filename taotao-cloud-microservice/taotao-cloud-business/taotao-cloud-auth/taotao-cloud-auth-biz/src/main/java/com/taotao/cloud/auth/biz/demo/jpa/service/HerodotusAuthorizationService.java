@@ -41,16 +41,14 @@ import org.springframework.stereotype.Service;
  * @date : 2022/2/25 21:06
  */
 @Service
-public class HerodotusAuthorizationService
-        extends BaseLayeredService<HerodotusAuthorization, String> {
+public class HerodotusAuthorizationService extends BaseLayeredService<HerodotusAuthorization, String> {
 
     private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationService.class);
 
     private final HerodotusAuthorizationRepository herodotusAuthorizationRepository;
 
     @Autowired
-    public HerodotusAuthorizationService(
-            HerodotusAuthorizationRepository herodotusAuthorizationRepository) {
+    public HerodotusAuthorizationService(HerodotusAuthorizationRepository herodotusAuthorizationRepository) {
         this.herodotusAuthorizationRepository = herodotusAuthorizationRepository;
     }
 
@@ -60,8 +58,7 @@ public class HerodotusAuthorizationService
     }
 
     public Optional<HerodotusAuthorization> findByState(String state) {
-        Optional<HerodotusAuthorization> result =
-                this.herodotusAuthorizationRepository.findByState(state);
+        Optional<HerodotusAuthorization> result = this.herodotusAuthorizationRepository.findByState(state);
         log.debug("[Herodotus] |- HerodotusAuthorization Service findByState.");
         return result;
     }
@@ -74,8 +71,7 @@ public class HerodotusAuthorizationService
     }
 
     public Optional<HerodotusAuthorization> findByAccessToken(String accessToken) {
-        Optional<HerodotusAuthorization> result =
-                this.herodotusAuthorizationRepository.findByAccessToken(accessToken);
+        Optional<HerodotusAuthorization> result = this.herodotusAuthorizationRepository.findByAccessToken(accessToken);
         log.debug("[Herodotus] |- HerodotusAuthorization Service findByAccessToken.");
         return result;
     }
@@ -87,55 +83,46 @@ public class HerodotusAuthorizationService
         return result;
     }
 
-    public Optional<HerodotusAuthorization>
-            findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(String token) {
+    public Optional<HerodotusAuthorization> findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
+            String token) {
 
-        Specification<HerodotusAuthorization> specification =
-                (root, criteriaQuery, criteriaBuilder) -> {
-                    List<Predicate> predicates = new ArrayList<>();
-                    predicates.add(criteriaBuilder.equal(root.get("state"), token));
-                    predicates.add(criteriaBuilder.equal(root.get("authorizationCode"), token));
-                    predicates.add(criteriaBuilder.equal(root.get("accessToken"), token));
-                    predicates.add(criteriaBuilder.equal(root.get("refreshToken"), token));
+        Specification<HerodotusAuthorization> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(criteriaBuilder.equal(root.get("state"), token));
+            predicates.add(criteriaBuilder.equal(root.get("authorizationCode"), token));
+            predicates.add(criteriaBuilder.equal(root.get("accessToken"), token));
+            predicates.add(criteriaBuilder.equal(root.get("refreshToken"), token));
 
-                    Predicate[] predicateArray = new Predicate[predicates.size()];
-                    criteriaQuery.where(criteriaBuilder.or(predicates.toArray(predicateArray)));
-                    return criteriaQuery.getRestriction();
-                };
+            Predicate[] predicateArray = new Predicate[predicates.size()];
+            criteriaQuery.where(criteriaBuilder.or(predicates.toArray(predicateArray)));
+            return criteriaQuery.getRestriction();
+        };
 
-        Optional<HerodotusAuthorization> result =
-                this.herodotusAuthorizationRepository.findOne(specification);
+        Optional<HerodotusAuthorization> result = this.herodotusAuthorizationRepository.findOne(specification);
         log.debug("[Herodotus] |- HerodotusAuthorization Service findByDetection.");
         return result;
     }
 
     public void clearHistoryToken() {
-        this.herodotusAuthorizationRepository.deleteByRefreshTokenExpiresAtBefore(
-                LocalDateTime.now());
+        this.herodotusAuthorizationRepository.deleteByRefreshTokenExpiresAtBefore(LocalDateTime.now());
         log.debug("[Herodotus] |- HerodotusAuthorization Service clearExpireAccessToken.");
     }
 
-    public List<HerodotusAuthorization> findAvailableAuthorizations(
-            String registeredClientId, String principalName) {
-        List<HerodotusAuthorization> authorizations =
-                this.herodotusAuthorizationRepository
-                        .findAllByRegisteredClientIdAndPrincipalNameAndAccessTokenExpiresAtAfter(
-                                registeredClientId, principalName, LocalDateTime.now());
+    public List<HerodotusAuthorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
+        List<HerodotusAuthorization> authorizations = this.herodotusAuthorizationRepository
+                .findAllByRegisteredClientIdAndPrincipalNameAndAccessTokenExpiresAtAfter(
+                        registeredClientId, principalName, LocalDateTime.now());
         log.debug("[Herodotus] |- HerodotusAuthorization Service findAvailableAuthorizations.");
         return authorizations;
     }
 
     public int findAuthorizationCount(String registeredClientId, String principalName) {
-        List<HerodotusAuthorization> authorizations =
-                findAvailableAuthorizations(registeredClientId, principalName);
+        List<HerodotusAuthorization> authorizations = findAvailableAuthorizations(registeredClientId, principalName);
         int count = 0;
         if (CollectionUtils.isNotEmpty(authorizations)) {
             count = authorizations.size();
         }
-        log.debug(
-                "[Herodotus] |- HerodotusAuthorization Service current authorization count is"
-                        + " [{}].",
-                count);
+        log.debug("[Herodotus] |- HerodotusAuthorization Service current authorization count is" + " [{}].", count);
         return count;
     }
 }

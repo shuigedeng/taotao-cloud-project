@@ -81,8 +81,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
     public void delete(String instanceId, String deleteReason) {
 
         // 查询历史数据
-        HistoricProcessInstance historicProcessInstance =
-                getHistoricProcessInstanceById(instanceId);
+        HistoricProcessInstance historicProcessInstance = getHistoricProcessInstanceById(instanceId);
         if (historicProcessInstance.getEndTime() != null) {
             historyService.deleteHistoricProcessInstance(historicProcessInstance.getId());
             return;
@@ -101,11 +100,10 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
      */
     @Override
     public HistoricProcessInstance getHistoricProcessInstanceById(String processInstanceId) {
-        HistoricProcessInstance historicProcessInstance =
-                historyService
-                        .createHistoricProcessInstanceQuery()
-                        .processInstanceId(processInstanceId)
-                        .singleResult();
+        HistoricProcessInstance historicProcessInstance = historyService
+                .createHistoricProcessInstanceQuery()
+                .processInstanceId(processInstanceId)
+                .singleResult();
         if (Objects.isNull(historicProcessInstance)) {
             throw new FlowableObjectNotFoundException("流程实例不存在: " + processInstanceId);
         }

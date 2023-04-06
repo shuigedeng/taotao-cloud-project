@@ -46,7 +46,8 @@ public class MpMenuDO extends BaseDO {
     public static final Long ID_ROOT = 0L;
 
     /** 编号 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /**
      * 公众号账号的编号
      *

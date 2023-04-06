@@ -34,7 +34,9 @@ public class PermissionDTOAssembler {
     public static PermissionDTO fromPermission(final Permission permission) {
         final PermissionDTO dto = new PermissionDTO();
         dto.setId(
-                permission.getPermissionId() == null ? null : permission.getPermissionId().getId());
+                permission.getPermissionId() == null
+                        ? null
+                        : permission.getPermissionId().getId());
         dto.setPermissionName(
                 permission.getPermissionName() == null
                         ? null
@@ -44,7 +46,8 @@ public class PermissionDTOAssembler {
                         ? null
                         : permission.getPermissionType().getValue());
         dto.setMenuIcon(permission.getMenuIcon());
-        dto.setMenuUrl(permission.getMenuUrl() == null ? null : permission.getMenuUrl().getUrl());
+        dto.setMenuUrl(
+                permission.getMenuUrl() == null ? null : permission.getMenuUrl().getUrl());
         dto.setOrderNum(permission.getOrderNum());
         dto.setParentId(
                 permission.getParent() == null
@@ -65,8 +68,7 @@ public class PermissionDTOAssembler {
         return dto;
     }
 
-    public static Permission toPermission(
-            final PermissionCommand permissionCommand, Permission parent) {
+    public static Permission toPermission(final PermissionCommand permissionCommand, Permission parent) {
         PermissionId permissionId = null;
         if (permissionCommand.getId() != null) {
             permissionId = new PermissionId(permissionCommand.getId());
@@ -77,13 +79,11 @@ public class PermissionDTOAssembler {
         }
         PermissionTypeEnum permissionType = null;
         if (permissionCommand.getPermissionType() != null) {
-            permissionType =
-                    PermissionTypeEnum.getMenuTypeEnum(permissionCommand.getPermissionType());
+            permissionType = PermissionTypeEnum.getMenuTypeEnum(permissionCommand.getPermissionType());
         }
         PermissionLevelEnum permissionLevel = null;
         if (permissionCommand.getPermissionLevel() != null) {
-            permissionLevel =
-                    PermissionLevelEnum.getMenuLevelEnum(permissionCommand.getPermissionLevel());
+            permissionLevel = PermissionLevelEnum.getMenuLevelEnum(permissionCommand.getPermissionLevel());
         }
         PermissionCodes permissionCodes = null;
         if (permissionCommand.getPermissionCodes() != null) {
@@ -96,19 +96,18 @@ public class PermissionDTOAssembler {
         if (!StringUtils.isEmpty(permissionCommand.getMenuUrl())) {
             menuUrl = new MenuUrl(permissionCommand.getMenuUrl());
         }
-        Permission permission =
-                new Permission(
-                        permissionId,
-                        permissionName,
-                        permissionType,
-                        permissionLevel,
-                        permissionCommand.getMenuIcon(),
-                        permissionCodes,
-                        permissionCommand.getOrderNum(),
-                        menuUrl,
-                        parent,
-                        null,
-                        null);
+        Permission permission = new Permission(
+                permissionId,
+                permissionName,
+                permissionType,
+                permissionLevel,
+                permissionCommand.getMenuIcon(),
+                permissionCodes,
+                permissionCommand.getOrderNum(),
+                menuUrl,
+                parent,
+                null,
+                null);
         return permission;
     }
 

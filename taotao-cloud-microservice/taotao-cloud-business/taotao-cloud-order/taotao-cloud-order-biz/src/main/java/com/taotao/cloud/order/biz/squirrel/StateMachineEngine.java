@@ -29,8 +29,7 @@ import org.squirrelframework.foundation.fsm.UntypedStateMachine;
 import org.squirrelframework.foundation.fsm.UntypedStateMachineBuilder;
 
 /** StateMachineBuilder实例 */
-public class StateMachineEngine<T extends UntypedStateMachine, S, E, C>
-        implements ApplicationContextAware {
+public class StateMachineEngine<T extends UntypedStateMachine, S, E, C> implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
@@ -52,8 +51,7 @@ public class StateMachineEngine<T extends UntypedStateMachine, S, E, C>
     private StateMachineBuilder getStateMachineBuilder(Class<T> stateMachine) {
         UntypedStateMachineBuilder stateMachineBuilder = builderMap.get(stateMachine.getName());
         if (stateMachineBuilder == null) {
-            stateMachineBuilder =
-                    StateMachineBuilderFactory.create(stateMachine, ApplicationContext.class);
+            stateMachineBuilder = StateMachineBuilderFactory.create(stateMachine, ApplicationContext.class);
             builderMap.put(stateMachine.getName(), stateMachineBuilder);
         }
         return stateMachineBuilder;

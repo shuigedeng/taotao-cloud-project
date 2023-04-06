@@ -48,8 +48,7 @@ public interface LeaveApplyService extends IService<LeaveApplyEntity> {
      * @param entity 实体对象
      * @throws WorkFlowException 异常
      */
-    void submit(String id, LeaveApplyEntity entity, Map<String, List<String>> candidateList)
-            throws WorkFlowException;
+    void submit(String id, LeaveApplyEntity entity, Map<String, List<String>> candidateList) throws WorkFlowException;
 
     /**
      * 更改数据

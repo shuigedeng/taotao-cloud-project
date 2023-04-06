@@ -73,41 +73,34 @@ public class PayConfigInit {
         while (CollectionUtil.isEmpty(data)) {
             data = sysTenantServiceFeign.list(IS_COMMING_ANONYMOUS_YES).getData();
         }
-        data.forEach(
-                tenant -> {
-                    XHuiCommonThreadLocalHolder.setTenant(tenant.getId());
+        data.forEach(tenant -> {
+            XHuiCommonThreadLocalHolder.setTenant(tenant.getId());
 
-                    List<PayChannel> payChannelList =
-                            payChannelService.list(
-                                    Wrappers.<PayChannel>lambdaQuery()
-                                            .eq(PayChannel::getDelFlag, 1)
-                                            .eq(PayChannel::getTenantId, tenant.getId()));
-                    payChannels.addAll(payChannelList);
-                    tenantMaps.put(tenant.getId(), tenant);
-                });
+            List<PayChannel> payChannelList = payChannelService.list(Wrappers.<PayChannel>lambdaQuery()
+                    .eq(PayChannel::getDelFlag, 1)
+                    .eq(PayChannel::getTenantId, tenant.getId()));
+            payChannels.addAll(payChannelList);
+            tenantMaps.put(tenant.getId(), tenant);
+        });
 
-        payChannels.forEach(
-                payChannel -> {
-                    tenantIdAliPayAppIdMaps.put(payChannel.getTenantId(), payChannel.getAppId());
-                });
+        payChannels.forEach(payChannel -> {
+            tenantIdAliPayAppIdMaps.put(payChannel.getTenantId(), payChannel.getAppId());
+        });
 
-        payChannels.forEach(
-                payChannel -> {
-                    JSONObject params = JSONUtil.parseObj(payChannel.getConfig());
-                    if (StringUtils.equals(
-                            payChannel.getChannelId(), (PayTypeEnum.ALIPAY_WAP.getType()))) {
-                        AliPayApiConfig aliPayApiConfig =
-                                AliPayApiConfig.New()
-                                        .setAppId(payChannel.getAppId())
-                                        .setPrivateKey(params.getStr("privateKey"))
-                                        .setCharset(CharsetUtil.UTF_8)
-                                        .setAlipayPublicKey(params.getStr("alipayPublicKey"))
-                                        .setServiceUrl(params.getStr("serviceUrl"))
-                                        .setSignType("RSA2")
-                                        .build();
-                        AliPayApiConfigKit.putApiConfig(aliPayApiConfig);
-                        log.info("AliPay支付渠道初始化完成:AppId:{}", payChannel.getAppId());
-                    }
-                });
+        payChannels.forEach(payChannel -> {
+            JSONObject params = JSONUtil.parseObj(payChannel.getConfig());
+            if (StringUtils.equals(payChannel.getChannelId(), (PayTypeEnum.ALIPAY_WAP.getType()))) {
+                AliPayApiConfig aliPayApiConfig = AliPayApiConfig.New()
+                        .setAppId(payChannel.getAppId())
+                        .setPrivateKey(params.getStr("privateKey"))
+                        .setCharset(CharsetUtil.UTF_8)
+                        .setAlipayPublicKey(params.getStr("alipayPublicKey"))
+                        .setServiceUrl(params.getStr("serviceUrl"))
+                        .setSignType("RSA2")
+                        .build();
+                AliPayApiConfigKit.putApiConfig(aliPayApiConfig);
+                log.info("AliPay支付渠道初始化完成:AppId:{}", payChannel.getAppId());
+            }
+        });
     }
 }

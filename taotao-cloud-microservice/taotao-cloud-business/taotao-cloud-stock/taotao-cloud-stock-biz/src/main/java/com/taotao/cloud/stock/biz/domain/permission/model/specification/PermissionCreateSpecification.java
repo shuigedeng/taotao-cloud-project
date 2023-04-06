@@ -39,9 +39,7 @@ public class PermissionCreateSpecification extends AbstractSpecification<Permiss
         if (permission.getPermissionName() != null) {
             Permission existPermission = permissionRepository.find(permission.getPermissionName());
             if (existPermission != null
-                    && !existPermission
-                            .getPermissionId()
-                            .sameValueAs(permission.getPermissionId())) {
+                    && !existPermission.getPermissionId().sameValueAs(permission.getPermissionId())) {
                 throw new IllegalArgumentException("权限名已存在");
             }
         }

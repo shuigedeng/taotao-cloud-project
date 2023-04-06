@@ -54,11 +54,7 @@ public class TaskInfoUtils {
         if (url.indexOf(CommonConstant.QM) == -1) {
             return url + CommonConstant.QM_STRING + CODE + CommonConstant.EQUAL_STRING + businessId;
         } else {
-            return url
-                    + CommonConstant.AND_STRING
-                    + CODE
-                    + CommonConstant.EQUAL_STRING
-                    + businessId;
+            return url + CommonConstant.AND_STRING + CODE + CommonConstant.EQUAL_STRING + businessId;
         }
     }
 }

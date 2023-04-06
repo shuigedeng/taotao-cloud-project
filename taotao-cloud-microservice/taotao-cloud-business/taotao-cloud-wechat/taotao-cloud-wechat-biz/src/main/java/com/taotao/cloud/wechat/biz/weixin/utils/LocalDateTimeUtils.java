@@ -40,7 +40,7 @@ public class LocalDateTimeUtils {
 
     private static final String BASE_TIME_FORMAT =
             "[yyyyMMddHHmmss][yyyyMMddHHmm][yyyyMMddHH][yyyyMMdd][yyyyMM][yyyy][[-][/][.]MM][[-][/][.]dd]["
-                + " ][HH][[:][.]mm][[:][.]ss][[:][.]SSS]";
+                    + " ][HH][[:][.]mm][[:][.]ss][[:][.]SSS]";
     /**
      * 【推荐】解析常用时间字符串，支持,并不局限于以下形式： [yyyy][yyyy-MM][yyyy-MM-dd][yyyy-MM-dd HH][yyyy-MM-dd
      * HH:mm][yyyy-MM-dd HH:mm:ss][yyyy-MM-dd HH:mm:ss:SSS] [yyyy][yyyy/MM][yyyy/MM/dd][yyyy/MM/dd

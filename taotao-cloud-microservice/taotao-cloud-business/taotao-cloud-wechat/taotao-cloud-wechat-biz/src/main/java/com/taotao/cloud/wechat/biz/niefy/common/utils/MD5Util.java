@@ -21,8 +21,7 @@ import java.util.Objects;
 
 /** MD5加密工具类 */
 public class MD5Util {
-    private static final String DEFAULT_MD_5_SALT =
-            "fjdsl321312kf349832&*^*903294[JNLIUIK]%fsdjfkl"; // 加盐md5盐值
+    private static final String DEFAULT_MD_5_SALT = "fjdsl321312kf349832&*^*903294[JNLIUIK]%fsdjfkl"; // 加盐md5盐值
 
     /**
      * 获得字符串的md5值
@@ -30,9 +29,7 @@ public class MD5Util {
      * @return md5加密后的字符串
      */
     public static String getMd5(String s) {
-        char[] hexDigits = {
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-        };
+        char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象

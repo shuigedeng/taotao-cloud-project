@@ -35,9 +35,11 @@ public enum ShortLinkDomainTypeEnum {
         this.msg = msg;
     }
 
-    @Getter private final Integer code;
+    @Getter
+    private final Integer code;
 
-    @Getter private final String msg;
+    @Getter
+    private final String msg;
 
     public static Optional<ShortLinkDomainTypeEnum> findEnum(Integer code) {
         return Arrays.stream(ShortLinkDomainTypeEnum.values())

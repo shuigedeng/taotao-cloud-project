@@ -32,7 +32,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LogHandler extends AbstractHandler {
-    @Autowired WxMsgService wxMsgService;
+    @Autowired
+    WxMsgService wxMsgService;
 
     @Override
     public WxMpXmlOutMessage handle(

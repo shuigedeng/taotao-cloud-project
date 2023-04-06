@@ -41,11 +41,7 @@ public class UploadUtil {
      * @param multipartFile 本地存储时的文件路径
      */
     public static void uploadFile(
-            String type,
-            String bucketName,
-            String objectName,
-            MultipartFile multipartFile,
-            String filePath) {
+            String type, String bucketName, String objectName, MultipartFile multipartFile, String filePath) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
@@ -67,8 +63,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param fileName 文件名
      */
-    public static void uploadFile(String type, String filePath, String bucketName, String fileName)
-            throws IOException {
+    public static void uploadFile(String type, String filePath, String bucketName, String fileName) throws IOException {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
@@ -107,8 +102,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param filePath 文件路径
      */
-    public static void downFile(
-            String type, String fileName, String bucketName, String filePath, String downName) {
+    public static void downFile(String type, String fileName, String bucketName, String filePath, String downName) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
@@ -131,8 +125,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param filePath 文件路径
      */
-    public static void writeImage(
-            String type, String fileName, String bucketName, String filePath) {
+    public static void writeImage(String type, String fileName, String bucketName, String filePath) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
@@ -155,8 +148,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param filePath 文件路径
      */
-    public static void streamToDown(
-            String type, String fileName, String bucketName, String filePath) {
+    public static void streamToDown(String type, String fileName, String bucketName, String filePath) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
@@ -176,8 +168,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param filePath 文件路径
      */
-    public static boolean downCode(
-            String type, String fileName, String bucketName, String filePath, String zipFile) {
+    public static boolean downCode(String type, String fileName, String bucketName, String filePath, String zipFile) {
         boolean exists = true;
         switch (type) {
                 // Minio存储
@@ -206,8 +197,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param filePath 文件夹路径
      */
-    public static void uploadFolder(
-            String type, String folderName, String bucketName, String filePath) {
+    public static void uploadFolder(String type, String folderName, String bucketName, String filePath) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
@@ -229,8 +219,7 @@ public class UploadUtil {
      * @param keyWord
      * @return
      */
-    public static List getFileList(
-            String type, String bucketName, String path, String keyWord, boolean flag) {
+    public static List getFileList(String type, String bucketName, String path, String keyWord, boolean flag) {
         List<FileModel> data = new ArrayList<>();
         switch (type) {
                 // Minio存储
@@ -256,10 +245,9 @@ public class UploadUtil {
                         data = getFileModels(data);
                     }
                     if (keyWord != null && !StringUtils.isEmpty(keyWord)) {
-                        data =
-                                data.stream()
-                                        .filter(t -> t.getFileName().contains(keyWord))
-                                        .collect(Collectors.toList());
+                        data = data.stream()
+                                .filter(t -> t.getFileName().contains(keyWord))
+                                .collect(Collectors.toList());
                     }
                 }
                 break;
@@ -280,10 +268,9 @@ public class UploadUtil {
                     }
                     data = getFileModels(data);
                     if (keyWord != null && !StringUtils.isEmpty(keyWord)) {
-                        data =
-                                data.stream()
-                                        .filter(t -> t.getFileName().contains(keyWord))
-                                        .collect(Collectors.toList());
+                        data = data.stream()
+                                .filter(t -> t.getFileName().contains(keyWord))
+                                .collect(Collectors.toList());
                     }
                 }
                 break;
@@ -298,18 +285,15 @@ public class UploadUtil {
      * @return
      */
     private static List<FileModel> getFileModels(List<FileModel> data) {
-        data =
-                data.stream()
-                        .filter(
-                                m ->
-                                        "xlsx".equals(m.getFileType())
-                                                || "xls".equals(m.getFileType())
-                                                || "docx".equals(m.getFileType())
-                                                || "doc".equals(m.getFileType())
-                                                || "pptx".equals(m.getFileType())
-                                                || "ppt".equals(m.getFileType())
-                                                || "pdf".equals(m.getFileType()))
-                        .collect(Collectors.toList());
+        data = data.stream()
+                .filter(m -> "xlsx".equals(m.getFileType())
+                        || "xls".equals(m.getFileType())
+                        || "docx".equals(m.getFileType())
+                        || "doc".equals(m.getFileType())
+                        || "pptx".equals(m.getFileType())
+                        || "ppt".equals(m.getFileType())
+                        || "pdf".equals(m.getFileType()))
+                .collect(Collectors.toList());
         return data;
     }
 
@@ -367,16 +351,11 @@ public class UploadUtil {
      * @param copyToFileName
      */
     public static void copyObject(
-            String type,
-            String filePath,
-            String fileName,
-            String copyToFilePath,
-            String copyToFileName) {
+            String type, String filePath, String fileName, String copyToFilePath, String copyToFileName) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:
-                minioUploadUtil.copyObject(
-                        FileTypeEnum.TEMPORARY, fileName, FileTypeEnum.MAIL, copyToFileName);
+                minioUploadUtil.copyObject(FileTypeEnum.TEMPORARY, fileName, FileTypeEnum.MAIL, copyToFileName);
                 break;
                 // 本地存储
             default:
@@ -393,8 +372,7 @@ public class UploadUtil {
      * @param bucketName 存储空间
      * @param filePath 文件路径
      */
-    public static void downToLocal(
-            String type, String fileName, String bucketName, String filePath) {
+    public static void downToLocal(String type, String fileName, String bucketName, String filePath) {
         switch (type) {
                 // Minio存储
             case StorageType.MINIO:

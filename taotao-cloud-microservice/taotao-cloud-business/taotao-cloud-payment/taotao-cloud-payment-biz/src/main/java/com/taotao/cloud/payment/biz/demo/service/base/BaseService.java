@@ -32,7 +32,8 @@ import tk.mybatis.mapper.entity.Example;
  */
 public abstract class BaseService<T> {
 
-    @Autowired private Mapper<T> mapper;
+    @Autowired
+    private Mapper<T> mapper;
 
     /**
      * 根据id查询数据

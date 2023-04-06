@@ -57,7 +57,8 @@ public class Article extends BaseSuperEntity<Article, Long> {
 
     public static final String TABLE_NAME = "tt_article";
 
-    @Serial private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
     /** 文章标题 */
     @Column(name = "title", columnDefinition = "varchar(255) not null comment '文章标题 '")
     private String title;

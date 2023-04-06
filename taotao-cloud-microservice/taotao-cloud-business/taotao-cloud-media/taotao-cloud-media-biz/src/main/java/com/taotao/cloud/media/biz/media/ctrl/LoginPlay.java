@@ -42,8 +42,7 @@ public class LoginPlay {
     private NativeLong lPreviewHandle;
 
     /** 登录到设备 */
-    public boolean doLogin(String ip, short port, String username, String password)
-            throws Exception {
+    public boolean doLogin(String ip, short port, String username, String password) throws Exception {
         boolean initSuc = hCNetSDK.NET_DVR_Init();
         if (initSuc != true) {
             // hCNetSDK初始化失败
@@ -104,14 +103,13 @@ public class LoginPlay {
         m_strIpparaCfg = new HCNetSDK.NET_DVR_IPPARACFG();
         m_strIpparaCfg.write();
         Pointer lpIpParaConfig = m_strIpparaCfg.getPointer();
-        bRet =
-                hCNetSDK.NET_DVR_GetDVRConfig(
-                        lUserID,
-                        HCNetSDK.NET_DVR_GET_IPPARACFG,
-                        new NativeLong(0),
-                        lpIpParaConfig,
-                        m_strIpparaCfg.size(),
-                        ibrBytesReturned);
+        bRet = hCNetSDK.NET_DVR_GetDVRConfig(
+                lUserID,
+                HCNetSDK.NET_DVR_GET_IPPARACFG,
+                new NativeLong(0),
+                lpIpParaConfig,
+                m_strIpparaCfg.size(),
+                ibrBytesReturned);
         m_strIpparaCfg.read();
 
         // 设备是否支持IP通道, true为不支持

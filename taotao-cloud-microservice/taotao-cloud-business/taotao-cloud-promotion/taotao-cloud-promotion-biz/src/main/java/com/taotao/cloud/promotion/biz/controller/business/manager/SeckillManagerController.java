@@ -50,8 +50,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/seckill")
 public class SeckillManagerController {
 
-    @Autowired private ISeckillService seckillService;
-    @Autowired private ISeckillApplyService seckillApplyService;
+    @Autowired
+    private ISeckillService seckillService;
+
+    @Autowired
+    private ISeckillApplyService seckillApplyService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -73,12 +76,7 @@ public class SeckillManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "通过id获取")
-    @ApiImplicitParam(
-            name = "id",
-            value = "秒杀活动ID",
-            required = true,
-            dataType = "String",
-            paramType = "path")
+    @ApiImplicitParam(name = "id", value = "秒杀活动ID", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/{id}")
     public Result<Seckill> get(@PathVariable String id) {
         Seckill seckill = seckillService.getById(id);
@@ -97,8 +95,7 @@ public class SeckillManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "删除一个秒杀活动")
     @DeleteMapping("/{id}")
-    public Result<Object> deleteSeckill(
-            @Parameter(description = "秒杀活动ID") @PathVariable String id) {
+    public Result<Object> deleteSeckill(@Parameter(description = "秒杀活动ID") @PathVariable String id) {
         seckillService.removePromotions(Collections.singletonList(id));
         return Result.success();
     }
@@ -108,9 +105,7 @@ public class SeckillManagerController {
     @Operation(summary = "操作秒杀活动状态")
     @PutMapping("/status/{id}")
     public Result<Object> updateSeckillStatus(
-            @Parameter(description = "秒杀活动ID") @PathVariable String id,
-            Long startTime,
-            Long endTime) {
+            @Parameter(description = "秒杀活动ID") @PathVariable String id, Long startTime, Long endTime) {
         seckillService.updateStatus(Collections.singletonList(id), startTime, endTime);
         return Result.success();
     }
@@ -128,8 +123,7 @@ public class SeckillManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @DeleteMapping("/apply/{seckillId}/{id}")
     @Operation(summary = "删除秒杀活动申请")
-    public Result<String> deleteSeckillApply(
-            @PathVariable String seckillId, @PathVariable String id) {
+    public Result<String> deleteSeckillApply(@PathVariable String seckillId, @PathVariable String id) {
         seckillApplyService.removeSeckillApply(seckillId, id);
         return Result.success();
     }

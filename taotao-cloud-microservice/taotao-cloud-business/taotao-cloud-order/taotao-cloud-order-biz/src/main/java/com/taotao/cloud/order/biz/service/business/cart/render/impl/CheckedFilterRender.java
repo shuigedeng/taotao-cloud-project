@@ -44,10 +44,9 @@ public class CheckedFilterRender implements ICartRenderStep {
     @Override
     public void render(TradeDTO tradeDTO) {
         // 将购物车到sku未选择信息过滤
-        List<CartSkuVO> collect =
-                tradeDTO.getSkuList().parallelStream()
-                        .filter(i -> Boolean.TRUE.equals(i.getChecked()))
-                        .collect(Collectors.toList());
+        List<CartSkuVO> collect = tradeDTO.getSkuList().parallelStream()
+                .filter(i -> Boolean.TRUE.equals(i.getChecked()))
+                .collect(Collectors.toList());
         tradeDTO.setSkuList(collect);
 
         // 购物车信息过滤

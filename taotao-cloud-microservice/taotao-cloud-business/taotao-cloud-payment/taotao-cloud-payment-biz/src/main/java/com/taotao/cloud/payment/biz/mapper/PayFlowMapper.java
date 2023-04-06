@@ -27,9 +27,7 @@ import org.mapstruct.factory.Mappers;
  * @since 2020/11/11 14:42
  * @version 2022.03
  */
-@Mapper(
-        unmappedSourcePolicy = ReportingPolicy.IGNORE,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PayFlowMapper {
 
     PayFlowMapper INSTANCE = Mappers.getMapper(PayFlowMapper.class);

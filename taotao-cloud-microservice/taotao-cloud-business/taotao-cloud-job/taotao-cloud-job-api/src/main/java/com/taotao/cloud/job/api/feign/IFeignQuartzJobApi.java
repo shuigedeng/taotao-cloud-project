@@ -26,7 +26,5 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(
-        value = ServiceName.TAOTAO_CLOUD_JOB,
-        fallbackFactory = FeignQuartzJobFallbackImpl.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_JOB, fallbackFactory = FeignQuartzJobFallbackImpl.class)
 public interface IFeignQuartzJobApi {}

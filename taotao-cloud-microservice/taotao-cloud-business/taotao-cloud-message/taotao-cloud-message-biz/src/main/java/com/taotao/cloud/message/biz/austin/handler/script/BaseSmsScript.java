@@ -30,7 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public abstract class BaseSmsScript implements SmsScript {
 
-    @Autowired private SmsScriptHolder smsScriptHolder;
+    @Autowired
+    private SmsScriptHolder smsScriptHolder;
 
     @PostConstruct
     public void registerProcessScript() {

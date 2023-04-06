@@ -116,9 +116,7 @@ public class CardController extends BaseController {
         // 加载为灰度图显示
         Mat source = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
         Mat destination = new Mat(source.rows(), source.cols(), source.type());
-        Mat element =
-                Imgproc.getStructuringElement(
-                        Imgproc.MORPH_RECT, new Size(2 * ksize + 1, 2 * ksize + 1));
+        Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(2 * ksize + 1, 2 * ksize + 1));
 
         Imgproc.morphologyEx(source, destination, Imgproc.MORPH_OPEN, element);
         String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "card3.png";
@@ -207,13 +205,7 @@ public class CardController extends BaseController {
         for (int no = 0; no < chlist.size(); no++) {
             Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
             Mat ch = chlist.get(no);
-            Imgproc.findContours(
-                    ch,
-                    contours,
-                    hierarchy,
-                    Imgproc.RETR_TREE,
-                    Imgproc.CHAIN_APPROX_SIMPLE,
-                    new Point());
+            Imgproc.findContours(ch, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE, new Point());
 
             Vector<RectComp> rectCompList = new Vector<RectComp>();
             for (int i = 0; i < contours.size(); i++) {

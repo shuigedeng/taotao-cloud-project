@@ -103,8 +103,7 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
         // 写入缓存，给消费者调用
         redisRepository.set(key, tradeDTO);
         // 构建订单创建消息
-        String destination =
-                rocketmqCustomProperties.getOrderTopic() + ":" + OrderTagsEnum.ORDER_CREATE.name();
+        String destination = rocketmqCustomProperties.getOrderTopic() + ":" + OrderTagsEnum.ORDER_CREATE.name();
         // 发送订单创建消息
         rocketMQTemplate.asyncSend(destination, key, RocketmqSendCallbackBuilder.commonCallback());
         return trade;
@@ -123,15 +122,13 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
         }
 
         // 订单配送区域校验
-        if (tradeDTO.getNotSupportFreight() != null && tradeDTO.getNotSupportFreight().size() > 0) {
+        if (tradeDTO.getNotSupportFreight() != null
+                && tradeDTO.getNotSupportFreight().size() > 0) {
             StringBuilder stringBuilder = new StringBuilder("包含商品有-");
-            tradeDTO.getNotSupportFreight()
-                    .forEach(
-                            sku -> {
-                                stringBuilder.append(sku.getGoodsSku().getGoodsName());
-                            });
-            throw new BusinessException(
-                    ResultEnum.ORDER_NOT_SUPPORT_DISTRIBUTION.getCode(), stringBuilder.toString());
+            tradeDTO.getNotSupportFreight().forEach(sku -> {
+                stringBuilder.append(sku.getGoodsSku().getGoodsName());
+            });
+            throw new BusinessException(ResultEnum.ORDER_NOT_SUPPORT_DISTRIBUTION.getCode(), stringBuilder.toString());
         }
     }
 
@@ -169,10 +166,9 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
         if (!storeCoupons.isEmpty()) {
             memberCouponDTOList.addAll(storeCoupons);
         }
-        List<String> ids =
-                memberCouponDTOList.stream()
-                        .map(e -> e.getMemberCoupon().getId())
-                        .collect(Collectors.toList());
+        List<String> ids = memberCouponDTOList.stream()
+                .map(e -> e.getMemberCoupon().getId())
+                .collect(Collectors.toList());
         memberCouponApi.used(ids);
         memberCouponDTOList.forEach(
                 e -> couponApi.usedCoupon(e.getMemberCoupon().getCouponId(), 1));
@@ -192,12 +188,11 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
             for (CartVO item : tradeDTO.getCartList()) {
                 orderSns.append(item.getSn());
             }
-            Result<Boolean> result =
-                    memberApi.updateMemberPoint(
-                            tradeDTO.getPriceDetailDTO().getPayPoint(),
-                            PointTypeEnum.REDUCE.name(),
-                            tradeDTO.getMemberId(),
-                            "订单【" + orderSns + "】创建，积分扣减");
+            Result<Boolean> result = memberApi.updateMemberPoint(
+                    tradeDTO.getPriceDetailDTO().getPayPoint(),
+                    PointTypeEnum.REDUCE.name(),
+                    tradeDTO.getMemberId(),
+                    "订单【" + orderSns + "】创建，积分扣减");
 
             if (!result) {
                 throw new BusinessException(ResultEnum.PAY_POINT_ENOUGH);
@@ -213,10 +208,9 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
     private void kanjiaPretreatment(TradeDTO tradeDTO) {
         if (tradeDTO.getCartTypeEnum().equals(CartTypeEnum.KANJIA)) {
             String kanjiaId = tradeDTO.getSkuList().get(0).getKanjiaId();
-            kanjiaActivityApi.update(
-                    new LambdaUpdateWrapper<KanjiaActivity>()
-                            .eq(KanjiaActivity::getId, kanjiaId)
-                            .set(KanjiaActivity::getStatus, KanJiaStatusEnum.END.name()));
+            kanjiaActivityApi.update(new LambdaUpdateWrapper<KanjiaActivity>()
+                    .eq(KanjiaActivity::getId, kanjiaId)
+                    .set(KanjiaActivity::getStatus, KanJiaStatusEnum.END.name()));
         }
     }
 }

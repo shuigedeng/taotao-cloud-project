@@ -37,9 +37,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class PayOrderProcessService {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private PayMchNotifyService payMchNotifyService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private PayMchNotifyService payMchNotifyService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /** 明确成功的处理逻辑（除更新订单其他业务） * */
     public void confirmSuccess(PayOrder payOrder) {
@@ -67,22 +72,14 @@ public class PayOrderProcessService {
             }
 
             // 更新订单表分账状态为： 等待分账任务处理
-            boolean updDivisionState =
-                    payOrderService.update(
-                            new LambdaUpdateWrapper<PayOrder>()
-                                    .set(
-                                            PayOrder::getDivisionState,
-                                            PayOrder.DIVISION_STATE_WAIT_TASK)
-                                    .eq(PayOrder::getPayOrderId, payOrder.getPayOrderId())
-                                    .eq(
-                                            PayOrder::getDivisionState,
-                                            PayOrder.DIVISION_STATE_UNHAPPEN));
+            boolean updDivisionState = payOrderService.update(new LambdaUpdateWrapper<PayOrder>()
+                    .set(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_WAIT_TASK)
+                    .eq(PayOrder::getPayOrderId, payOrder.getPayOrderId())
+                    .eq(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_UNHAPPEN));
 
             if (updDivisionState) {
                 // 推送到分账MQ
-                mqSender.send(
-                        PayOrderDivisionMQ.build(payOrder.getPayOrderId(), CS.YES, null),
-                        80); // 80s 后执行
+                mqSender.send(PayOrderDivisionMQ.build(payOrder.getPayOrderId(), CS.YES, null), 80); // 80s 后执行
             }
 
         } catch (Exception e) {

@@ -31,7 +31,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PintuanBaseVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     public static final String TABLE_NAME = "tt_pintuan";
 

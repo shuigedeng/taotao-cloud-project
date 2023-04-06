@@ -42,9 +42,11 @@ import org.springframework.stereotype.Component;
 public class OrderCashier implements CashierExecute {
 
     /** 订单 */
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
     /** 设置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
     @Override
     public CashierEnum cashierEnum() {
@@ -70,8 +72,7 @@ public class OrderCashier implements CashierExecute {
             cashierParam.setPrice(order.order().flowPrice());
 
             try {
-                BaseSetting baseSetting =
-                        settingApi.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
+                BaseSetting baseSetting = settingApi.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
                 cashierParam.setTitle(baseSetting.getSiteName());
             } catch (Exception e) {
                 cashierParam.setTitle("多用户商城，在线支付");
@@ -98,9 +99,7 @@ public class OrderCashier implements CashierExecute {
         PayParam payParam = paymentSuccessParams.getPayParam();
         if (payParam.getOrderType().equals(CashierEnum.ORDER.name())) {
             orderApi.payOrder(
-                    payParam.getSn(),
-                    paymentSuccessParams.getPaymentMethod(),
-                    paymentSuccessParams.getReceivableNo());
+                    payParam.getSn(), paymentSuccessParams.getPaymentMethod(), paymentSuccessParams.getReceivableNo());
             LogUtils.info(
                     "订单{}支付成功,金额{},方式{}",
                     payParam.getSn(),

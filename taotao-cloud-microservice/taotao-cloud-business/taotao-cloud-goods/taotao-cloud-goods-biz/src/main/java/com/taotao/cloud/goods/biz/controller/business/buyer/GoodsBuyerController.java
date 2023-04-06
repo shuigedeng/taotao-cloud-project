@@ -72,8 +72,7 @@ public class GoodsBuyerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{goodsId}")
     public Result<GoodsSkuParamsVO> get(
-            @Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable
-                    Long goodsId) {
+            @Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable Long goodsId) {
         return Result.success(goodsService.getGoodsVO(goodsId));
     }
 
@@ -83,10 +82,8 @@ public class GoodsBuyerController {
     @GetMapping(value = "/{goodsId}/{skuId}")
     // @PageViewPoint(type = PageViewEnum.SKU, id = "#id")
     public Result<Map<String, Object>> getSku(
-            @Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable
-                    Long goodsId,
-            @Parameter(description = "skuId") @NotNull(message = "skuId不能为空") @PathVariable
-                    Long skuId) {
+            @Parameter(description = "商品ID") @NotNull(message = "商品ID不能为空") @PathVariable Long goodsId,
+            @Parameter(description = "skuId") @NotNull(message = "skuId不能为空") @PathVariable Long skuId) {
         Map<String, Object> map = goodsSkuService.getGoodsSkuDetail(goodsId, skuId);
         return Result.success(map);
     }
@@ -103,8 +100,7 @@ public class GoodsBuyerController {
     @Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")
     @RequestLogger
     @GetMapping("/es")
-    public Result<SearchPage<EsGoodsIndex>> getGoodsByPageFromEs(
-            @Validated EsGoodsSearchQuery goodsSearchParams) {
+    public Result<SearchPage<EsGoodsIndex>> getGoodsByPageFromEs(@Validated EsGoodsSearchQuery goodsSearchParams) {
         SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(goodsSearchParams);
         return Result.success(esGoodsIndices);
     }
@@ -113,8 +109,7 @@ public class GoodsBuyerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/es/related")
-    public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(
-            @Validated EsGoodsSearchQuery esGoodsSearchQuery) {
+    public Result<EsGoodsRelatedInfo> getGoodsRelatedByPageFromEs(@Validated EsGoodsSearchQuery esGoodsSearchQuery) {
         // pageVO.setNotConvert(true);
         EsGoodsRelatedInfo selector = goodsSearchService.getSelector(esGoodsSearchQuery);
         return Result.success(selector);

@@ -40,11 +40,10 @@ public class GlobalExceptionHandler {
         }
         /** 校验异常 */
         if (e instanceof MethodArgumentNotValidException) {
-            return AjaxResult.fail(
-                    ((MethodArgumentNotValidException) e)
-                            .getBindingResult()
-                            .getFieldError()
-                            .getDefaultMessage());
+            return AjaxResult.fail(((MethodArgumentNotValidException) e)
+                    .getBindingResult()
+                    .getFieldError()
+                    .getDefaultMessage());
         }
         /** 自定义异常 */
         if (e instanceof BaseException) {

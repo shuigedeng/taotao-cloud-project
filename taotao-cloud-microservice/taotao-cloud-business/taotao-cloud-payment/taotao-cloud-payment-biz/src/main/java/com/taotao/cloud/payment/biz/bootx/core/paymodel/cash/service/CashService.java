@@ -56,25 +56,23 @@ public class CashService {
     /** 关闭 */
     public void close(Long paymentId) {
         Optional<CashPayment> cashPaymentOpt = cashPaymentManager.findByPaymentId(paymentId);
-        cashPaymentOpt.ifPresent(
-                cashPayment -> {
-                    cashPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
-                    cashPaymentManager.updateById(cashPayment);
-                });
+        cashPaymentOpt.ifPresent(cashPayment -> {
+            cashPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
+            cashPaymentManager.updateById(cashPayment);
+        });
     }
 
     /** 退款 */
     public void refund(Long paymentId, BigDecimal amount) {
         Optional<CashPayment> cashPayment = cashPaymentManager.findByPaymentId(paymentId);
-        cashPayment.ifPresent(
-                payment -> {
-                    BigDecimal refundableBalance = payment.getRefundableBalance().subtract(amount);
-                    if (BigDecimalUtil.compareTo(refundableBalance, BigDecimal.ZERO) == 0) {
-                        payment.setPayStatus(PayStatusCode.TRADE_REFUNDED);
-                    } else {
-                        payment.setPayStatus(PayStatusCode.TRADE_REFUNDING);
-                    }
-                    cashPaymentManager.updateById(payment);
-                });
+        cashPayment.ifPresent(payment -> {
+            BigDecimal refundableBalance = payment.getRefundableBalance().subtract(amount);
+            if (BigDecimalUtil.compareTo(refundableBalance, BigDecimal.ZERO) == 0) {
+                payment.setPayStatus(PayStatusCode.TRADE_REFUNDED);
+            } else {
+                payment.setPayStatus(PayStatusCode.TRADE_REFUNDING);
+            }
+            cashPaymentManager.updateById(payment);
+        });
     }
 }

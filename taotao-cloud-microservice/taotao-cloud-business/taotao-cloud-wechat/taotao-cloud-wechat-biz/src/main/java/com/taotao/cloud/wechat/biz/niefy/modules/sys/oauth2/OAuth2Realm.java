@@ -35,7 +35,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OAuth2Realm extends AuthorizingRealm {
-    @Autowired private ShiroService shiroService;
+    @Autowired
+    private ShiroService shiroService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -58,15 +59,13 @@ public class OAuth2Realm extends AuthorizingRealm {
 
     /** 认证(登录时调用) */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
-            throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String accessToken = (String) token.getPrincipal();
 
         // 根据accessToken，查询用户信息
         SysUserTokenEntity tokenEntity = shiroService.queryByToken(accessToken);
         // token失效
-        if (tokenEntity == null
-                || tokenEntity.getExpireTime().getTime() < System.currentTimeMillis()) {
+        if (tokenEntity == null || tokenEntity.getExpireTime().getTime() < System.currentTimeMillis()) {
             throw new IncorrectCredentialsException("token失效，请重新登录");
         }
 

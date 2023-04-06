@@ -38,8 +38,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboRoleRpc.class, validation = "true")
-public class DubboRoleRpcImpl
-        extends BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
+public class DubboRoleRpcImpl extends BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
         implements IDubboRoleRpc {
 
     private static final QRole ROLE = QRole.role;

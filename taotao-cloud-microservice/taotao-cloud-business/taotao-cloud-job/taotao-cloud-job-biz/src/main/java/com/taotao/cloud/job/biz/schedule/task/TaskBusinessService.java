@@ -29,10 +29,7 @@ public class TaskBusinessService {
 
     /** 为了记录异常 所有的方法必须在try内 每个方法默认接收一个taskId */
     // @Async
-    @SchedulerLock(
-            name = "taskBusinessService_taskA",
-            lockAtLeastFor = "PT30S",
-            lockAtMostFor = "PT10M")
+    @SchedulerLock(name = "taskBusinessService_taskA", lockAtLeastFor = "PT30S", lockAtMostFor = "PT10M")
     public void taskA(String id) {
         try {
             logger.info("======执行业务代码 --- this is A ======");

@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/SalesSupport")
 public class SalesSupportController {
 
-    @Autowired private SalesSupportService salesSupportService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private SalesSupportService salesSupportService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取销售支持表信息
@@ -51,8 +54,7 @@ public class SalesSupportController {
      */
     @Operation("获取销售支持表信息")
     @GetMapping("/{id}")
-    public Result<SalesSupportInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<SalesSupportInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         SalesSupportInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class SalesSupportController {
     @Operation("新建保存销售支持表")
     @PostMapping
     public Result create(@RequestBody SalesSupportForm salesSupportForm) throws WorkFlowException {
-        SalesSupportEntity entity =
-                JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
+        SalesSupportEntity entity = JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesSupportForm.getStatus())) {
             salesSupportService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -99,11 +100,9 @@ public class SalesSupportController {
      */
     @Operation("修改销售支持表")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody SalesSupportForm salesSupportForm, @PathVariable("id") String id)
+    public Result update(@RequestBody SalesSupportForm salesSupportForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        SalesSupportEntity entity =
-                JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
+        SalesSupportEntity entity = JsonUtils.getJsonToBean(salesSupportForm, SalesSupportEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(salesSupportForm.getStatus())) {
             salesSupportService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

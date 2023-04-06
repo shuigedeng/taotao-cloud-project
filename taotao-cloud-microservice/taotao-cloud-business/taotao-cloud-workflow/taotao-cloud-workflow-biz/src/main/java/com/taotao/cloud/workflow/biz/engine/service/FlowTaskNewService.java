@@ -74,8 +74,7 @@ public interface FlowTaskNewService {
      * @param flowModel 提交数据
      * @throws WorkFlowException
      */
-    void audit(FlowTaskEntity flowTask, FlowTaskOperatorEntity operator, FlowModel flowModel)
-            throws WorkFlowException;
+    void audit(FlowTaskEntity flowTask, FlowTaskOperatorEntity operator, FlowModel flowModel) throws WorkFlowException;
 
     /**
      * 驳回
@@ -95,8 +94,7 @@ public interface FlowTaskNewService {
      * @param flowModel 提交数据
      * @throws WorkFlowException
      */
-    void reject(FlowTaskEntity flowTask, FlowTaskOperatorEntity operator, FlowModel flowModel)
-            throws WorkFlowException;
+    void reject(FlowTaskEntity flowTask, FlowTaskOperatorEntity operator, FlowModel flowModel) throws WorkFlowException;
 
     /**
      * 已办撤回
@@ -106,8 +104,7 @@ public interface FlowTaskNewService {
      * @param flowModel 提交数据
      * @throws WorkFlowException 异常
      */
-    void recall(String id, FlowTaskOperatorRecordEntity operatorRecord, FlowModel flowModel)
-            throws WorkFlowException;
+    void recall(String id, FlowTaskOperatorRecordEntity operatorRecord, FlowModel flowModel) throws WorkFlowException;
 
     /**
      * 发起撤回
@@ -150,8 +147,7 @@ public interface FlowTaskNewService {
      * @return
      * @throws WorkFlowException 异常
      */
-    FlowBeforeInfoVO getBeforeInfo(String id, String taskNodeId, String taskOperatorId)
-            throws WorkFlowException;
+    FlowBeforeInfoVO getBeforeInfo(String id, String taskNodeId, String taskOperatorId) throws WorkFlowException;
 
     /**
      * 查询审批汇总
@@ -180,8 +176,7 @@ public interface FlowTaskNewService {
      * @return
      * @throws WorkFlowException
      */
-    List<FlowCandidateVO> candidates(String id, FlowHandleModel flowHandleModel)
-            throws WorkFlowException;
+    List<FlowCandidateVO> candidates(String id, FlowHandleModel flowHandleModel) throws WorkFlowException;
 
     /**
      * 获取候选人list
@@ -191,8 +186,7 @@ public interface FlowTaskNewService {
      * @return
      * @throws WorkFlowException
      */
-    List<FlowCandidateUserModel> candidateUser(String id, FlowHandleModel flowHandleModel)
-            throws WorkFlowException;
+    List<FlowCandidateUserModel> candidateUser(String id, FlowHandleModel flowHandleModel) throws WorkFlowException;
 
     /**
      * 批量审批
@@ -207,8 +201,7 @@ public interface FlowTaskNewService {
      *
      * @return
      */
-    List<FlowCandidateVO> batchCandidates(String flowId, String taskOperatorId)
-            throws WorkFlowException;
+    List<FlowCandidateVO> batchCandidates(String flowId, String taskOperatorId) throws WorkFlowException;
 
     /**
      * 判断操作权限

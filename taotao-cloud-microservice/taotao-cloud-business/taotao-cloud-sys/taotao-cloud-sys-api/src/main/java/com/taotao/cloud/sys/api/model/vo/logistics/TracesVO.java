@@ -30,7 +30,8 @@ import lombok.*;
 @NoArgsConstructor
 public class TracesVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     /** 物流公司 */
     private String shipper;

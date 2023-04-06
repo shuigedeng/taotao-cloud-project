@@ -39,7 +39,8 @@ public class SlideWindowLimitService extends AbstractLimitService {
 
     private static final String LIMIT_TAG = "SW_";
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     private DefaultRedisScript<Long> redisScript;
 
@@ -57,8 +58,7 @@ public class SlideWindowLimitService extends AbstractLimitService {
      * @return 返回不符合条件的手机号码
      */
     @Override
-    public Set<String> limitFilter(
-            AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param) {
+    public Set<String> limitFilter(AbstractDeduplicationService service, TaskInfo taskInfo, DeduplicationParam param) {
 
         Set<String> filterReceiver = new HashSet<>(taskInfo.getReceiver().size());
         long nowTime = System.currentTimeMillis();

@@ -41,7 +41,8 @@ import lombok.Setter;
 @Schema(description = "订单投诉查询参数")
 public class OrderComplaintPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     /**
      * @see ComplaintStatusEnum

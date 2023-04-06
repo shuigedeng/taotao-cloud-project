@@ -90,8 +90,7 @@ public interface IMemberCouponService extends IService<MemberCoupon> {
      * @return {@link IPage }<{@link MemberCoupon }>
      * @since 2022-04-27 16:43:53
      */
-    IPage<MemberCoupon> getMemberCouponsByCanUse(
-            CouponPageQuery param, BigDecimal totalPrice, PageQuery pageVo);
+    IPage<MemberCoupon> getMemberCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageQuery pageVo);
 
     /**
      * 获取当前会员当前商品可用的会员优惠券
@@ -102,8 +101,7 @@ public interface IMemberCouponService extends IService<MemberCoupon> {
      * @return {@link List }<{@link MemberCoupon }>
      * @since 2022-04-27 16:43:53
      */
-    List<MemberCoupon> getCurrentGoodsCanUse(
-            String memberId, List<String> couponIds, BigDecimal totalPrice);
+    List<MemberCoupon> getCurrentGoodsCanUse(String memberId, List<String> couponIds, BigDecimal totalPrice);
 
     /**
      * 获取当前会员全品类优惠券

@@ -33,7 +33,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class CouponActivityVO extends CouponActivityBaseVO {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     @Schema(description = "优惠券活动下的优惠券列表")
     private List<CouponActivityItemVO> couponActivityItems;

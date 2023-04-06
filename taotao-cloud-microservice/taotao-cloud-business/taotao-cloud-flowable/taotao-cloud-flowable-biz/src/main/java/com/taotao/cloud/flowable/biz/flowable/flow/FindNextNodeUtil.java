@@ -41,15 +41,12 @@ public class FindNextNodeUtil {
      * @return
      */
     public static List<UserTask> getNextUserTasks(
-            RepositoryService repositoryService,
-            org.flowable.task.api.Task task,
-            Map<String, Object> map) {
+            RepositoryService repositoryService, org.flowable.task.api.Task task, Map<String, Object> map) {
         List<UserTask> data = new ArrayList<>();
-        ProcessDefinition processDefinition =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .processDefinitionId(task.getProcessDefinitionId())
-                        .singleResult();
+        ProcessDefinition processDefinition = repositoryService
+                .createProcessDefinitionQuery()
+                .processDefinitionId(task.getProcessDefinitionId())
+                .singleResult();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
         Process mainProcess = bpmnModel.getMainProcess();
         Collection<FlowElement> flowElements = mainProcess.getFlowElements();
@@ -67,9 +64,7 @@ public class FindNextNodeUtil {
      * @return
      */
     public static List<UserTask> getNextUserTasksByStart(
-            RepositoryService repositoryService,
-            ProcessDefinition processDefinition,
-            Map<String, Object> map) {
+            RepositoryService repositoryService, ProcessDefinition processDefinition, Map<String, Object> map) {
         List<UserTask> data = new ArrayList<>();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
         Process mainProcess = bpmnModel.getMainProcess();
@@ -129,9 +124,7 @@ public class FindNextNodeUtil {
                 if (expression == null
                         || expressionResult(
                                 map,
-                                expression.substring(
-                                        expression.lastIndexOf("{") + 1,
-                                        expression.lastIndexOf("}")))) {
+                                expression.substring(expression.lastIndexOf("{") + 1, expression.lastIndexOf("}")))) {
                     // 出线的下一节点
                     String nextFlowElementID = sequenceFlow.getTargetRef();
                     if (checkSubProcess(nextFlowElementID, flowElements, nextUser)) {
@@ -139,8 +132,7 @@ public class FindNextNodeUtil {
                     }
 
                     // 查询下一节点的信息
-                    FlowElement nextFlowElement =
-                            getFlowElementById(nextFlowElementID, flowElements);
+                    FlowElement nextFlowElement = getFlowElementById(nextFlowElementID, flowElements);
                     // 调用流程
                     if (nextFlowElement instanceof CallActivity) {
                         CallActivity ca = (CallActivity) nextFlowElement;
@@ -189,8 +181,7 @@ public class FindNextNodeUtil {
     }
 
     /** 判断是否是多实例子流程并且需要设置集合类型变量 */
-    public static boolean checkSubProcess(
-            String Id, Collection<FlowElement> flowElements, List<UserTask> nextUser) {
+    public static boolean checkSubProcess(String Id, Collection<FlowElement> flowElements, List<UserTask> nextUser) {
         for (FlowElement flowElement1 : flowElements) {
             if (flowElement1 instanceof SubProcess && flowElement1.getId().equals(Id)) {
 
@@ -217,8 +208,7 @@ public class FindNextNodeUtil {
      * @param flowElement 当前节点
      * @return
      */
-    public static FlowElement getSubProcess(
-            Collection<FlowElement> flowElements, FlowElement flowElement) {
+    public static FlowElement getSubProcess(Collection<FlowElement> flowElements, FlowElement flowElement) {
         for (FlowElement flowElement1 : flowElements) {
             if (flowElement1 instanceof SubProcess) {
                 for (FlowElement flowElement2 : ((SubProcess) flowElement1).getFlowElements()) {
@@ -248,8 +238,7 @@ public class FindNextNodeUtil {
                 return flowElement;
             }
             if (flowElement instanceof SubProcess) {
-                FlowElement flowElement1 =
-                        getFlowElementById(Id, ((SubProcess) flowElement).getFlowElements());
+                FlowElement flowElement1 = getFlowElementById(Id, ((SubProcess) flowElement).getFlowElements());
                 if (flowElement1 != null) {
                     return flowElement1;
                 }

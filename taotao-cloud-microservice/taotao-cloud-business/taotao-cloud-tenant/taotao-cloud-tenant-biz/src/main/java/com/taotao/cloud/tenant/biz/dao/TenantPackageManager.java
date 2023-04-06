@@ -61,22 +61,17 @@ public class TenantPackageManager {
     }
 
     public Page<TenantPackageDO> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
-        LambdaQueryWrapper<TenantPackageDO> wrapper =
-                Wrappers.<TenantPackageDO>lambdaQuery()
-                        .eq(
-                                Objects.nonNull(tenantPackagePageDTO.getId()),
-                                TenantPackageDO::getId,
-                                tenantPackagePageDTO.getId())
-                        .eq(
-                                Objects.nonNull(tenantPackagePageDTO.getStatus()),
-                                TenantPackageDO::getStatus,
-                                tenantPackagePageDTO.getStatus())
-                        .like(
-                                StrUtil.isNotBlank(tenantPackagePageDTO.getName()),
-                                TenantPackageDO::getName,
-                                tenantPackagePageDTO.getName());
+        LambdaQueryWrapper<TenantPackageDO> wrapper = Wrappers.<TenantPackageDO>lambdaQuery()
+                .eq(Objects.nonNull(tenantPackagePageDTO.getId()), TenantPackageDO::getId, tenantPackagePageDTO.getId())
+                .eq(
+                        Objects.nonNull(tenantPackagePageDTO.getStatus()),
+                        TenantPackageDO::getStatus,
+                        tenantPackagePageDTO.getStatus())
+                .like(
+                        StrUtil.isNotBlank(tenantPackagePageDTO.getName()),
+                        TenantPackageDO::getName,
+                        tenantPackagePageDTO.getName());
         return tenantPackageMapper.selectPage(
-                Page.of(tenantPackagePageDTO.getCurrentPage(), tenantPackagePageDTO.getPageSize()),
-                wrapper);
+                Page.of(tenantPackagePageDTO.getCurrentPage(), tenantPackagePageDTO.getPageSize()), wrapper);
     }
 }

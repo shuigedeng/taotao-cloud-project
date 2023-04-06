@@ -23,9 +23,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(
-        value = ServiceName.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignCategoryApiFallback.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryApiFallback.class)
 public interface IFeignStoreGoodsLabelApi {
 
     @GetMapping(value = "/product/info/id/{id:[0-9]*}")

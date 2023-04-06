@@ -27,24 +27,18 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class FunctionEventListener {
     @Component
-    public static class FunctionCatalogEventListener
-            implements ApplicationListener<FunctionCatalogEvent> {
+    public static class FunctionCatalogEventListener implements ApplicationListener<FunctionCatalogEvent> {
         @Override
         public void onApplicationEvent(FunctionCatalogEvent event) {
-            LogUtils.info(
-                    "FunctionEventListener ----- FunctionCatalogEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("FunctionEventListener ----- FunctionCatalogEvent onApplicationEvent {}", event);
         }
     }
 
     @Component
-    public static class FunctionRegistrationEventListener
-            implements ApplicationListener<FunctionRegistrationEvent> {
+    public static class FunctionRegistrationEventListener implements ApplicationListener<FunctionRegistrationEvent> {
         @Override
         public void onApplicationEvent(FunctionRegistrationEvent event) {
-            LogUtils.info(
-                    "FunctionEventListener ----- FunctionRegistrationEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("FunctionEventListener ----- FunctionRegistrationEvent onApplicationEvent {}", event);
         }
     }
 
@@ -53,9 +47,7 @@ public class FunctionEventListener {
             implements ApplicationListener<FunctionUnregistrationEvent> {
         @Override
         public void onApplicationEvent(FunctionUnregistrationEvent event) {
-            LogUtils.info(
-                    "FunctionEventListener ----- FunctionUnregistrationEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("FunctionEventListener ----- FunctionUnregistrationEvent onApplicationEvent {}", event);
         }
     }
 }

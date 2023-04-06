@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayOrderDivisionMQReceiver implements PayOrderDivisionMQ.IMQReceiver {
 
-    @Autowired private PayOrderDivisionProcessService payOrderDivisionProcessService;
+    @Autowired
+    private PayOrderDivisionProcessService payOrderDivisionProcessService;
 
     @Override
     public void receive(PayOrderDivisionMQ.MsgPayload payload) {

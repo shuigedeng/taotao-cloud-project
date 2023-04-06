@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreMessageController {
 
     /** 商家消息 */
-    @Autowired private StoreMessageService storeMessageService;
+    @Autowired
+    private StoreMessageService storeMessageService;
 
     // @Operation(summary = "获取商家消息", description = "获取商家消息")
     // @RequestLogger("获取商家消息")
@@ -106,8 +107,7 @@ public class StoreMessageController {
     @DeleteMapping("/{id}")
     public Result<Boolean> deleteMessage(@PathVariable String id) {
         OperationalJudgment.judgment(storeMessageService.getById(id));
-        Boolean result =
-                storeMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), id);
+        Boolean result = storeMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), id);
         return Result.success(result);
     }
 

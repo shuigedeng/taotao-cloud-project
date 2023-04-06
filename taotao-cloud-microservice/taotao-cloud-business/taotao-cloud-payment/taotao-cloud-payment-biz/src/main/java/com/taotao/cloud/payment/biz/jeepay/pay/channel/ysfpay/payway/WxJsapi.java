@@ -53,8 +53,7 @@ public class WxJsapi extends YsfpayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         String logPrefix = "【云闪付(wechatJs)jsapi支付】";
         JSONObject reqParams = new JSONObject();
@@ -70,20 +69,16 @@ public class WxJsapi extends YsfpayPaymentService {
         reqParams.put("userId", bizRQ.getOpenid()); // openId
 
         // 客户端IP
-        reqParams.put(
-                "customerIp", StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1"));
+        reqParams.put("customerIp", StringUtils.defaultIfEmpty(payOrder.getClientIp(), "127.0.0.1"));
 
         // 获取微信官方配置 的appId
-        WxpayIsvParams wxpayIsvParams =
-                (WxpayIsvParams)
-                        configContextQueryService.queryIsvParams(
-                                mchAppConfigContext.getMchInfo().getIsvNo(), CS.IF_CODE.WXPAY);
+        WxpayIsvParams wxpayIsvParams = (WxpayIsvParams) configContextQueryService.queryIsvParams(
+                mchAppConfigContext.getMchInfo().getIsvNo(), CS.IF_CODE.WXPAY);
         reqParams.put("subAppId", wxpayIsvParams.getAppId()); // 用户ID
 
         // 发送请求并返回订单状态
         JSONObject resJSON =
-                packageParamAndReq(
-                        "/gateway/api/pay/unifiedorder", reqParams, logPrefix, mchAppConfigContext);
+                packageParamAndReq("/gateway/api/pay/unifiedorder", reqParams, logPrefix, mchAppConfigContext);
         // 请求 & 响应成功， 判断业务逻辑
         String respCode = resJSON.getString("respCode"); // 应答码
         String respMsg = resJSON.getString("respMsg"); // 应答信息

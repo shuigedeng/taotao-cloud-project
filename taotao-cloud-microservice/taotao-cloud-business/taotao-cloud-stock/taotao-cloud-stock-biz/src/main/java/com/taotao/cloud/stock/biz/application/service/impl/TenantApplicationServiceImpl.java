@@ -29,7 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TenantApplicationServiceImpl implements TenantApplicationService {
 
-    @Autowired private TenantRepository tenantRepository;
+    @Autowired
+    private TenantRepository tenantRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

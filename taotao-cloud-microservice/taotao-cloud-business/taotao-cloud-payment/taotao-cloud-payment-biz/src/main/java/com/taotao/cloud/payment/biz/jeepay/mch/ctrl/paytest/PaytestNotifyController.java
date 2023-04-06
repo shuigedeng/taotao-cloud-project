@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/anon/paytestNotify")
 public class PaytestNotifyController extends CommonCtrl {
 
-    @Autowired private MchAppService mchAppService;
+    @Autowired
+    private MchAppService mchAppService;
 
     @RequestMapping("/payOrder")
     public void payOrderNotify() throws IOException {

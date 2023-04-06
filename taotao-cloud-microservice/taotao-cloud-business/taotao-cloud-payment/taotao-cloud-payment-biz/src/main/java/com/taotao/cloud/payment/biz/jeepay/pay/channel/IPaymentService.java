@@ -40,6 +40,5 @@ public interface IPaymentService {
     String preCheck(UnifiedOrderRQ bizRQ, PayOrder payOrder);
 
     /** 调起支付接口，并响应数据； 内部处理普通商户和服务商模式 * */
-    AbstractRS pay(UnifiedOrderRQ bizRQ, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception;
+    AbstractRS pay(UnifiedOrderRQ bizRQ, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception;
 }

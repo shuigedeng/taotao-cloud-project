@@ -34,7 +34,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class CommonController {
 
-    @Resource private ChatVersionService versionService;
+    @Resource
+    private ChatVersionService versionService;
 
     /** 校验版本号 */
     @ApiVersion(VersionEnum.V1_0_0)

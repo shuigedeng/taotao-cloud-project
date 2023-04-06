@@ -66,14 +66,10 @@ public class PointsGoods extends BasePromotions<PointsGoods, Long> {
     @Column(name = "settlement_price", columnDefinition = "decimal(10,2) not null  comment '结算价格'")
     private BigDecimal settlementPrice;
     /** 积分商品分类编号 */
-    @Column(
-            name = "points_goods_category_id",
-            columnDefinition = "bigint not null  comment '积分商品分类编号'")
+    @Column(name = "points_goods_category_id", columnDefinition = "bigint not null  comment '积分商品分类编号'")
     private Long pointsGoodsCategoryId;
     /** 分类名称 */
-    @Column(
-            name = "points_goods_category_name",
-            columnDefinition = "varchar(255) not null  comment '分类名称'")
+    @Column(name = "points_goods_category_name", columnDefinition = "varchar(255) not null  comment '分类名称'")
     private String pointsGoodsCategoryName;
     /** 缩略图 */
     @Column(name = "thumbnail", columnDefinition = "varchar(255) not null  comment '缩略图'")

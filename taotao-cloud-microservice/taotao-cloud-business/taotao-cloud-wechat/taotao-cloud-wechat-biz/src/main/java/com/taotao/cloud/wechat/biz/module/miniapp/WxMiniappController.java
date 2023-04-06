@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class WxMiniappController {
 
-    @Autowired private WxMaService maService;
+    @Autowired
+    private WxMaService maService;
 
     @GetMapping("/test")
     public String test() throws WxErrorException {

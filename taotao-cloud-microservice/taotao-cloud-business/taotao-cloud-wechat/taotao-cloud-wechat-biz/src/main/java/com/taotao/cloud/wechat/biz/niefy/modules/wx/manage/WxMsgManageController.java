@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/wxMsg")
 @Api(tags = {"公众号消息记录-管理后台"})
 public class WxMsgManageController {
-    @Autowired private WxMsgService wxMsgService;
-    @Autowired private MsgReplyService msgReplyService;
+    @Autowired
+    private WxMsgService wxMsgService;
+
+    @Autowired
+    private MsgReplyService msgReplyService;
 
     /** 列表 */
     @GetMapping("/list")

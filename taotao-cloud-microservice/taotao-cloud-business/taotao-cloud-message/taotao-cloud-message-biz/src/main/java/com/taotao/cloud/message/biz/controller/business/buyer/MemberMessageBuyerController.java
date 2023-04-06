@@ -39,7 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberMessageBuyerController {
 
     /** 会员站内消息 */
-    @Autowired private MemberMessageService memberMessageService;
+    @Autowired
+    private MemberMessageService memberMessageService;
 
     // @Operation(summary = "分页获取会员站内消息", description = "分页获取会员站内消息")
     // @RequestLogger
@@ -56,8 +57,7 @@ public class MemberMessageBuyerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{message_id}")
     public Result<Boolean> read(@PathVariable("message_id") String messageId) {
-        return Result.success(
-                memberMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), messageId));
+        return Result.success(memberMessageService.editStatus(MessageStatusEnum.ALREADY_READY.name(), messageId));
     }
 
     @Operation(summary = "消息放入回收站", description = "消息放入回收站")
@@ -65,8 +65,6 @@ public class MemberMessageBuyerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping("/{message_id}")
     public Result<Boolean> deleteMessage(@PathVariable("message_id") String messageId) {
-        return Result.success(
-                memberMessageService.editStatus(
-                        MessageStatusEnum.ALREADY_REMOVE.name(), messageId));
+        return Result.success(memberMessageService.editStatus(MessageStatusEnum.ALREADY_REMOVE.name(), messageId));
     }
 }

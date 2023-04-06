@@ -147,15 +147,11 @@ public class Order extends BaseSuperEntity<Order, Long> {
     private String deliveryMethod;
 
     /** 地址名称， ','分割 */
-    @Column(
-            name = "consignee_address_path",
-            columnDefinition = "varchar(64) not null comment '地址名称，逗号分割'")
+    @Column(name = "consignee_address_path", columnDefinition = "varchar(64) not null comment '地址名称，逗号分割'")
     private String consigneeAddressPath;
 
     /** 地址id，','分割 */
-    @Column(
-            name = "consignee_address_id_path",
-            columnDefinition = "varchar(64) not null comment '地址id，逗号分割'")
+    @Column(name = "consignee_address_id_path", columnDefinition = "varchar(64) not null comment '地址id，逗号分割'")
     private String consigneeAddressIdPath;
 
     /** 详细地址 */
@@ -235,15 +231,11 @@ public class Order extends BaseSuperEntity<Order, Long> {
     private Boolean needReceipt;
 
     /** 是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空 */
-    @Column(
-            name = "parent_order_sn",
-            columnDefinition = "varchar(64) not null comment '是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空'")
+    @Column(name = "parent_order_sn", columnDefinition = "varchar(64) not null comment '是否为其他订单下的订单，如果是则为依赖订单的sn，否则为空'")
     private String parentOrderSn;
 
     /** 是否为某订单类型的订单，如果是则为订单类型的id，否则为空 */
-    @Column(
-            name = "promotion_id",
-            columnDefinition = "bigint  null comment '是否为某订单类型的订单，如果是则为订单类型的id，否则为空'")
+    @Column(name = "promotion_id", columnDefinition = "bigint  null comment '是否为某订单类型的订单，如果是则为订单类型的id，否则为空'")
     private Long promotionId;
 
     /**
@@ -259,9 +251,7 @@ public class Order extends BaseSuperEntity<Order, Long> {
      *
      * @see OrderPromotionTypeEnum
      */
-    @Column(
-            name = "order_promotion_type",
-            columnDefinition = "varchar(64) not null comment '订单促销类型'")
+    @Column(name = "order_promotion_type", columnDefinition = "varchar(64) not null comment '订单促销类型'")
     private String orderPromotionType;
 
     /** 价格详情 */
@@ -287,9 +277,7 @@ public class Order extends BaseSuperEntity<Order, Long> {
     private String useStoreMemberCouponIds;
 
     /** 使用的平台会员优惠券id */
-    @Column(
-            name = "use_platform_member_coupon_id",
-            columnDefinition = "varchar(64) not null comment '使用的平台会员优惠券id'")
+    @Column(name = "use_platform_member_coupon_id", columnDefinition = "varchar(64) not null comment '使用的平台会员优惠券id'")
     private String usePlatformMemberCouponId;
 
     /**
@@ -351,8 +339,7 @@ public class Order extends BaseSuperEntity<Order, Long> {
         } else {
             // 促销订单（拼团、积分）-判断购买的是虚拟商品还是实物商品
             String goodsType = cartVO.getCheckedSkuList().get(0).getGoodsSku().getGoodsType();
-            if (StrUtil.isEmpty(goodsType)
-                    || goodsType.equals(GoodsTypeEnum.PHYSICAL_GOODS.name())) {
+            if (StrUtil.isEmpty(goodsType) || goodsType.equals(GoodsTypeEnum.PHYSICAL_GOODS.name())) {
                 this.setOrderType(OrderTypeEnum.NORMAL.name());
             } else {
                 this.setOrderType(OrderTypeEnum.VIRTUAL.name());
@@ -362,14 +349,10 @@ public class Order extends BaseSuperEntity<Order, Long> {
 
             // 判断是否为拼团订单，如果为拼团订单获取拼团ID，判断是否为主订单
             if (tradeDTO.getCartTypeEnum().name().equals(PromotionTypeEnum.PINTUAN.name())) {
-                Optional<String> pintuanId =
-                        cartVO.getCheckedSkuList().get(0).getPromotions().stream()
-                                .filter(
-                                        i ->
-                                                i.getPromotionType()
-                                                        .equals(PromotionTypeEnum.PINTUAN.name()))
-                                .map(PromotionGoods::getPromotionId)
-                                .findFirst();
+                Optional<String> pintuanId = cartVO.getCheckedSkuList().get(0).getPromotions().stream()
+                        .filter(i -> i.getPromotionType().equals(PromotionTypeEnum.PINTUAN.name()))
+                        .map(PromotionGoods::getPromotionId)
+                        .findFirst();
                 promotionId = pintuanId.get();
             }
         }

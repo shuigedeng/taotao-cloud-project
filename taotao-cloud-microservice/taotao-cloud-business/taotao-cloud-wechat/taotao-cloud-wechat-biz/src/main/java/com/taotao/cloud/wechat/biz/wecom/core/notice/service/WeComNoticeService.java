@@ -77,8 +77,7 @@ public class WeComNoticeService {
         WxCpMediaService mediaService = wxCpService.getMediaService();
         byte[] bytes = IoUtil.readBytes(inputStream);
         String fileType = FileTypeUtil.getType(new ByteArrayInputStream(bytes));
-        WxMediaUploadResult result =
-                mediaService.upload(mediaType, fileType, new ByteArrayInputStream(bytes));
+        WxMediaUploadResult result = mediaService.upload(mediaType, fileType, new ByteArrayInputStream(bytes));
         return result.getMediaId();
     }
 }

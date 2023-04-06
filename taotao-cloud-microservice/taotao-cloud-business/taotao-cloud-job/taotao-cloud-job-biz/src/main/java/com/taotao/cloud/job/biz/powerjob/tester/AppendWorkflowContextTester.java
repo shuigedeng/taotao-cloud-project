@@ -46,8 +46,7 @@ public class AppendWorkflowContextTester implements BasicProcessor {
         } catch (Exception e) {
             // ignore
         }
-        context.getWorkflowContext()
-                .appendData2WfContext(WorkflowContextConstant.CONTEXT_INIT_PARAMS_KEY, num + 1);
+        context.getWorkflowContext().appendData2WfContext(WorkflowContextConstant.CONTEXT_INIT_PARAMS_KEY, num + 1);
         System.out.println("======= AppendWorkflowContextTester#end =======");
         if (FAIL_CODE.equals(context.getJobParams())) {
             return new ProcessResult(false, "Failed!");

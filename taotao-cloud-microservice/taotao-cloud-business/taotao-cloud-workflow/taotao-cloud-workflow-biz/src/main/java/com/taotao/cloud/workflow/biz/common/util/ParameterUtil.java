@@ -28,8 +28,7 @@ public class ParameterUtil {
      * @param list 存放参数的集合
      * @return
      */
-    public static String parse(
-            String openToken, String closeToken, String text, List<String> list) {
+    public static String parse(String openToken, String closeToken, String text, List<String> list) {
         if (text == null || text.isEmpty()) {
             return "";
         }

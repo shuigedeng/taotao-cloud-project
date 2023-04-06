@@ -48,8 +48,7 @@ public interface ApplyMeetingService extends IService<ApplyMeetingEntity> {
      * @param entity 实体对象
      * @throws WorkFlowException 异常
      */
-    void submit(String id, ApplyMeetingEntity entity, Map<String, List<String>> candidateList)
-            throws WorkFlowException;
+    void submit(String id, ApplyMeetingEntity entity, Map<String, List<String>> candidateList) throws WorkFlowException;
 
     /**
      * 更改数据

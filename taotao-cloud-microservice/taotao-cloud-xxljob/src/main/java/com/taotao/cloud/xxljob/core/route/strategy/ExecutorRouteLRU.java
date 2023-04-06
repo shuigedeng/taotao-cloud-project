@@ -1,9 +1,24 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.xxljob.core.route.strategy;
 
 import com.taotao.cloud.xxljob.core.route.ExecutorRouter;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.biz.model.TriggerParam;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,7 +34,8 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ExecutorRouteLRU extends ExecutorRouter {
 
-    private static ConcurrentMap<Integer, LinkedHashMap<String, String>> jobLRUMap = new ConcurrentHashMap<Integer, LinkedHashMap<String, String>>();
+    private static ConcurrentMap<Integer, LinkedHashMap<String, String>> jobLRUMap =
+            new ConcurrentHashMap<Integer, LinkedHashMap<String, String>>();
     private static long CACHE_VALID_TIME = 0;
 
     public String route(int jobId, List<String> addressList) {
@@ -27,7 +43,7 @@ public class ExecutorRouteLRU extends ExecutorRouter {
         // cache clear
         if (System.currentTimeMillis() > CACHE_VALID_TIME) {
             jobLRUMap.clear();
-            CACHE_VALID_TIME = System.currentTimeMillis() + 1000*60*60*24;
+            CACHE_VALID_TIME = System.currentTimeMillis() + 1000 * 60 * 60 * 24;
         }
 
         // init lru
@@ -43,20 +59,20 @@ public class ExecutorRouteLRU extends ExecutorRouter {
         }
 
         // put new
-        for (String address: addressList) {
+        for (String address : addressList) {
             if (!lruItem.containsKey(address)) {
                 lruItem.put(address, address);
             }
         }
         // remove old
         List<String> delKeys = new ArrayList<>();
-        for (String existKey: lruItem.keySet()) {
+        for (String existKey : lruItem.keySet()) {
             if (!addressList.contains(existKey)) {
                 delKeys.add(existKey);
             }
         }
         if (delKeys.size() > 0) {
-            for (String delKey: delKeys) {
+            for (String delKey : delKeys) {
                 lruItem.remove(delKey);
             }
         }
@@ -72,5 +88,4 @@ public class ExecutorRouteLRU extends ExecutorRouter {
         String address = route(triggerParam.getJobId(), addressList);
         return new ReturnT<String>(address);
     }
-
 }

@@ -43,14 +43,12 @@ public class AggregateService {
     /** 创建聚合支付QR支付, 单渠道 */
     public String createAggregatePay(CashierSinglePayParam param) {
         // 保存并生成code
-        AggregatePayInfo aggregatePayInfo =
-                new AggregatePayInfo()
-                        .setAmount(param.getAmount())
-                        .setTitle(param.getTitle())
-                        .setBusinessId(param.getBusinessId());
+        AggregatePayInfo aggregatePayInfo = new AggregatePayInfo()
+                .setAmount(param.getAmount())
+                .setTitle(param.getTitle())
+                .setBusinessId(param.getBusinessId());
         String key = RandomUtil.randomString(10);
-        redisClient.setWithTimeout(
-                PREFIX_KEY + key, JSONUtil.toJsonStr(aggregatePayInfo), 2 * 60 * 1000);
+        redisClient.setWithTimeout(PREFIX_KEY + key, JSONUtil.toJsonStr(aggregatePayInfo), 2 * 60 * 1000);
         return key;
     }
 

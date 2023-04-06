@@ -46,7 +46,8 @@ import me.chanjar.weixin.mp.builder.kefu.NewsBuilder;
 public class MpMessageDO extends BaseDO {
 
     /** 主键 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 微信公众号消息 id */
     private Long msgId;
     /**

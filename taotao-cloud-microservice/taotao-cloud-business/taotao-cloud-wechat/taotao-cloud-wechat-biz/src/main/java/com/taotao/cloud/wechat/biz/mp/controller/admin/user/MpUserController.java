@@ -41,7 +41,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpUserController {
 
-    @Resource private MpUserService mpUserService;
+    @Resource
+    private MpUserService mpUserService;
 
     @GetMapping("/page")
     @ApiOperation("获得公众号粉丝分页")
@@ -53,12 +54,7 @@ public class MpUserController {
 
     @GetMapping("/get")
     @ApiOperation("获得公众号粉丝")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:user:query')")
     public CommonResult<MpUserRespVO> getUser(@RequestParam("id") Long id) {
         return success(MpUserConvert.INSTANCE.convert(mpUserService.getUser(id)));
@@ -74,11 +70,7 @@ public class MpUserController {
 
     @PostMapping("/sync")
     @ApiOperation("同步公众号粉丝")
-    @ApiImplicitParam(
-            name = "accountId",
-            value = "公众号账号的编号",
-            required = true,
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "accountId", value = "公众号账号的编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:user:sync')")
     public CommonResult<Boolean> syncUser(@RequestParam("accountId") Long accountId) {
         mpUserService.syncUser(accountId);

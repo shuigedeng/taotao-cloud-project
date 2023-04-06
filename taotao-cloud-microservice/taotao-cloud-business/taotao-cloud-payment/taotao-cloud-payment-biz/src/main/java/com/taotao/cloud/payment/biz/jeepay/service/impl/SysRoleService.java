@@ -37,16 +37,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
 
-    @Autowired private SysUserRoleRelaService sysUserRoleRelaService;
+    @Autowired
+    private SysUserRoleRelaService sysUserRoleRelaService;
 
-    @Autowired private SysRoleEntRelaService sysRoleEntRelaService;
+    @Autowired
+    private SysRoleEntRelaService sysRoleEntRelaService;
 
     /** 根据用户查询全部角色集合 * */
     public List<String> findListByUser(Long sysUserId) {
         List<String> result = new ArrayList<>();
-        sysUserRoleRelaService
-                .list(SysUserRoleRela.gw().eq(SysUserRoleRela::getUserId, sysUserId))
-                .stream()
+        sysUserRoleRelaService.list(SysUserRoleRela.gw().eq(SysUserRoleRela::getUserId, sysUserId)).stream()
                 .forEach(r -> result.add(r.getRoleId()));
 
         return result;
@@ -55,9 +55,7 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> {
     @Transactional
     public void removeRole(String roleId) {
 
-        if (sysUserRoleRelaService.count(
-                        SysUserRoleRela.gw().eq(SysUserRoleRela::getRoleId, roleId))
-                > 0) {
+        if (sysUserRoleRelaService.count(SysUserRoleRela.gw().eq(SysUserRoleRela::getRoleId, roleId)) > 0) {
             throw new BizException("当前角色已分配到用户， 不可删除！");
         }
 

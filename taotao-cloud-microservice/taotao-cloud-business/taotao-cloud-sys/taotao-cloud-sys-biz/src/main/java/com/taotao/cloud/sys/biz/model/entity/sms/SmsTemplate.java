@@ -59,10 +59,9 @@ public class SmsTemplate extends BaseSuperEntity<SmsTemplate, Long> {
 
     @Column(
             name = "template_status",
-            columnDefinition =
-                    "int not null default 0 comment '模板审核状态  0：审核中。"
-                            + "     * 1：审核通过。"
-                            + "     * 2：审核失败，请在返回参数Reason中查看审核失败原因。'")
+            columnDefinition = "int not null default 0 comment '模板审核状态  0：审核中。"
+                    + "     * 1：审核通过。"
+                    + "     * 2：审核失败，请在返回参数Reason中查看审核失败原因。'")
     private Integer templateStatus;
 
     @Column(name = "template_code", columnDefinition = "varchar(2000) not null comment '短信模板CODE'")

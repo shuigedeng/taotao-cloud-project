@@ -166,7 +166,7 @@ public class Log extends BaseSuperEntity<Log, Long> {
 
     /** 浏览器 */
     @Column(name = "browser", columnDefinition = "text null comment '浏览器'")
-	@EncryptField
+    @EncryptField
     private String browser;
 
     @Override

@@ -53,31 +53,30 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class MaterialServiceImpl implements MaterialService {
 
-    @Autowired private StringRedisTemplate redisTemplate;
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private AccountUtils accountUtils;
 
     private static final String DING_DING_URL = "https://oapi.dingtalk.com/media/upload";
     private static final String ENTERPRISE_WE_CHAT_ROBOT_URL =
             "https://qyapi.weixin.qq.com/cgi-bin/webhook/upload_media?key=<KEY>&type=<TYPE>";
 
     @Override
-    public BasicResultVO dingDingMaterialUpload(
-            MultipartFile file, String sendAccount, String fileType) {
+    public BasicResultVO dingDingMaterialUpload(MultipartFile file, String sendAccount, String fileType) {
         OapiMediaUploadResponse rsp;
         try {
             String accessToken =
-                    redisTemplate
-                            .opsForValue()
-                            .get(SendAccountConstant.DING_DING_ACCESS_TOKEN_PREFIX + sendAccount);
+                    redisTemplate.opsForValue().get(SendAccountConstant.DING_DING_ACCESS_TOKEN_PREFIX + sendAccount);
             DingTalkClient client = new DefaultDingTalkClient(DING_DING_URL);
             OapiMediaUploadRequest req = new OapiMediaUploadRequest();
-            FileItem item =
-                    new FileItem(
-                            new StringBuilder()
-                                    .append(IdUtil.fastSimpleUUID())
-                                    .append(file.getOriginalFilename())
-                                    .toString(),
-                            file.getInputStream());
+            FileItem item = new FileItem(
+                    new StringBuilder()
+                            .append(IdUtil.fastSimpleUUID())
+                            .append(file.getOriginalFilename())
+                            .toString(),
+                    file.getInputStream());
             req.setMedia(item);
             req.setType(FileType.getNameByCode(fileType));
             rsp = client.execute(req, accessToken);
@@ -88,9 +87,7 @@ public class MaterialServiceImpl implements MaterialService {
             }
             log.error("MaterialService#dingDingMaterialUpload fail:{}", rsp.getErrmsg());
         } catch (Exception e) {
-            log.error(
-                    "MaterialService#dingDingMaterialUpload fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("MaterialService#dingDingMaterialUpload fail:{}", Throwables.getStackTraceAsString(e));
         }
         return BasicResultVO.fail("未知错误，联系管理员");
     }
@@ -100,37 +97,25 @@ public class MaterialServiceImpl implements MaterialService {
             MultipartFile multipartFile, String sendAccount, String fileType) {
         try {
             EnterpriseWeChatRobotAccount weChatRobotAccount =
-                    accountUtils.getAccountById(
-                            Integer.valueOf(sendAccount), EnterpriseWeChatRobotAccount.class);
-            String key =
-                    weChatRobotAccount
-                            .getWebhook()
-                            .substring(
-                                    weChatRobotAccount
-                                                    .getWebhook()
-                                                    .indexOf(CommonConstant.EQUAL_STRING)
-                                            + 1);
-            String url =
-                    ENTERPRISE_WE_CHAT_ROBOT_URL.replace("<KEY>", key).replace("<TYPE>", "file");
-            String response =
-                    HttpRequest.post(url)
-                            .form(IdUtil.fastSimpleUUID(), SpringFileUtils.getFile(multipartFile))
-                            .execute()
-                            .body();
-            EnterpriseWeChatRootResult result =
-                    JSON.parseObject(response, EnterpriseWeChatRootResult.class);
+                    accountUtils.getAccountById(Integer.valueOf(sendAccount), EnterpriseWeChatRobotAccount.class);
+            String key = weChatRobotAccount
+                    .getWebhook()
+                    .substring(weChatRobotAccount.getWebhook().indexOf(CommonConstant.EQUAL_STRING) + 1);
+            String url = ENTERPRISE_WE_CHAT_ROBOT_URL.replace("<KEY>", key).replace("<TYPE>", "file");
+            String response = HttpRequest.post(url)
+                    .form(IdUtil.fastSimpleUUID(), SpringFileUtils.getFile(multipartFile))
+                    .execute()
+                    .body();
+            EnterpriseWeChatRootResult result = JSON.parseObject(response, EnterpriseWeChatRootResult.class);
             if (result.getErrcode() == 0) {
                 return new BasicResultVO(
                         RespStatusEnum.SUCCESS,
                         UploadResponseVo.builder().id(result.getMediaId()).build());
             }
-            log.error(
-                    "MaterialService#enterpriseWeChatRootMaterialUpload fail:{}",
-                    result.getErrmsg());
+            log.error("MaterialService#enterpriseWeChatRootMaterialUpload fail:{}", result.getErrmsg());
         } catch (Exception e) {
             log.error(
-                    "MaterialService#enterpriseWeChatRootMaterialUpload fail:{}",
-                    Throwables.getStackTraceAsString(e));
+                    "MaterialService#enterpriseWeChatRootMaterialUpload fail:{}", Throwables.getStackTraceAsString(e));
         }
         return BasicResultVO.fail("未知错误，联系管理员");
     }
@@ -140,28 +125,20 @@ public class MaterialServiceImpl implements MaterialService {
             MultipartFile multipartFile, String sendAccount, String fileType) {
         try {
             WxCpDefaultConfigImpl accountConfig =
-                    accountUtils.getAccountById(
-                            Integer.valueOf(sendAccount), WxCpDefaultConfigImpl.class);
+                    accountUtils.getAccountById(Integer.valueOf(sendAccount), WxCpDefaultConfigImpl.class);
             WxCpServiceImpl wxCpService = new WxCpServiceImpl();
             wxCpService.setWxCpConfigStorage(accountConfig);
-            WxMediaUploadResult result =
-                    wxCpService
-                            .getMediaService()
-                            .upload(
-                                    FileType.getNameByCode(fileType),
-                                    SpringFileUtils.getFile(multipartFile));
+            WxMediaUploadResult result = wxCpService
+                    .getMediaService()
+                    .upload(FileType.getNameByCode(fileType), SpringFileUtils.getFile(multipartFile));
             if (StrUtil.isNotBlank(result.getMediaId())) {
                 return new BasicResultVO(
                         RespStatusEnum.SUCCESS,
                         UploadResponseVo.builder().id(result.getMediaId()).build());
             }
-            log.error(
-                    "MaterialService#enterpriseWeChatMaterialUpload fail:{}",
-                    JSON.toJSONString(result));
+            log.error("MaterialService#enterpriseWeChatMaterialUpload fail:{}", JSON.toJSONString(result));
         } catch (Exception e) {
-            log.error(
-                    "MaterialService#enterpriseWeChatMaterialUpload fail:{}",
-                    Throwables.getStackTraceAsString(e));
+            log.error("MaterialService#enterpriseWeChatMaterialUpload fail:{}", Throwables.getStackTraceAsString(e));
         }
         return BasicResultVO.fail("未知错误，联系管理员");
     }

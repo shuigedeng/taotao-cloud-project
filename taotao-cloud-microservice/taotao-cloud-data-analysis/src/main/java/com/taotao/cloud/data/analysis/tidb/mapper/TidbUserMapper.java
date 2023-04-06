@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.tidb.mapper;
 
 import com.taotao.cloud.data.analysis.tidb.model.TidbUser;
@@ -29,7 +30,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TidbUserMapper {
 
-	List<TidbUser> queryUser();
+    List<TidbUser> queryUser();
 
-	Integer insertUser(TidbUser user);
+    Integer insertUser(TidbUser user);
 }

@@ -47,17 +47,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class KanjiaActivityLogServiceImpl
-        extends ServiceImpl<KanJiaActivityLogMapper, KanjiaActivityLog>
+public class KanjiaActivityLogServiceImpl extends ServiceImpl<KanJiaActivityLogMapper, KanjiaActivityLog>
         implements IKanjiaActivityLogService {
 
-    @Autowired private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
+    @Autowired
+    private IKanjiaActivityGoodsService kanJiaActivityGoodsService;
 
-    @Autowired private IKanjiaActivityService kanJiaActivityService;
+    @Autowired
+    private IKanjiaActivityService kanJiaActivityService;
 
     @Override
-    public IPage<KanjiaActivityLog> getForPage(
-            KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO pageVO) {
+    public IPage<KanjiaActivityLog> getForPage(KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageVO pageVO) {
         QueryWrapper<KanjiaActivityLog> queryWrapper = kanJiaActivityLogPageQuery.wrapper();
         return this.page(PageUtil.initPage(pageVO), queryWrapper);
     }
@@ -65,13 +65,14 @@ public class KanjiaActivityLogServiceImpl
     @Override
     public KanjiaActivityLog addKanJiaActivityLog(KanjiaActivityDTO kanjiaActivityDTO) {
         // 校验当前会员是否已经参与过此次砍价
-        LambdaQueryWrapper<KanjiaActivityLog> queryWrapper =
-                new LambdaQueryWrapper<KanjiaActivityLog>();
+        LambdaQueryWrapper<KanjiaActivityLog> queryWrapper = new LambdaQueryWrapper<KanjiaActivityLog>();
         queryWrapper.eq(
                 kanjiaActivityDTO.getKanjiaActivityId() != null,
                 KanjiaActivityLog::getKanjiaActivityId,
                 kanjiaActivityDTO.getKanjiaActivityId());
-        queryWrapper.eq(KanjiaActivityLog::getKanjiaMemberId, UserContext.getCurrentUser().getId());
+        queryWrapper.eq(
+                KanjiaActivityLog::getKanjiaMemberId,
+                UserContext.getCurrentUser().getId());
         long count = this.baseMapper.selectCount(queryWrapper);
         if (count > 0) {
             throw new BusinessException(ResultEnum.KANJIA_ACTIVITY_LOG_MEMBER_ERROR);
@@ -81,12 +82,9 @@ public class KanjiaActivityLogServiceImpl
                 kanJiaActivityGoodsService.getById(kanjiaActivityDTO.getKanjiaActivityGoodsId());
         // 如果当前活动不为空且还在活动时间内 才可以参与砍价活动
         if (kanjiaActivityGoods != null
-                && kanjiaActivityGoods
-                        .getPromotionStatus()
-                        .equals(PromotionsStatusEnum.START.name())) {
+                && kanjiaActivityGoods.getPromotionStatus().equals(PromotionsStatusEnum.START.name())) {
             // 获取砍价参与者记录
-            KanjiaActivity kanjiaActivity =
-                    kanJiaActivityService.getById(kanjiaActivityDTO.getKanjiaActivityId());
+            KanjiaActivity kanjiaActivity = kanJiaActivityService.getById(kanjiaActivityDTO.getKanjiaActivityId());
             if (kanjiaActivity != null) {
                 KanjiaActivityLog kanJiaActivityLog = new KanjiaActivityLog();
                 kanJiaActivityLog.setKanjiaActivityId(kanjiaActivity.getId());

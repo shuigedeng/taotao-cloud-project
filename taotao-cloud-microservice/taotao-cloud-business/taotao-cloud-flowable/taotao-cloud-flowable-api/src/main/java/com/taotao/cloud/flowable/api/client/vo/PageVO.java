@@ -33,7 +33,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PageVO<T> implements Serializable {
 
-    @Serial private static final long serialVersionUID = 483921799089968341L;
+    @Serial
+    private static final long serialVersionUID = 483921799089968341L;
+
     private List<T> records;
     private Long total;
 }

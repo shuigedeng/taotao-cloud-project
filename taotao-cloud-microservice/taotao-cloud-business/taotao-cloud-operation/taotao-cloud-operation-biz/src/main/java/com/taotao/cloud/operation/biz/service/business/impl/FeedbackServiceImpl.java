@@ -24,5 +24,4 @@ import org.springframework.stereotype.Service;
 
 /** 意见反馈业务层实现 */
 @Service
-public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback>
-        implements FeedbackService {}
+public class FeedbackServiceImpl extends ServiceImpl<FeedbackMapper, Feedback> implements FeedbackService {}

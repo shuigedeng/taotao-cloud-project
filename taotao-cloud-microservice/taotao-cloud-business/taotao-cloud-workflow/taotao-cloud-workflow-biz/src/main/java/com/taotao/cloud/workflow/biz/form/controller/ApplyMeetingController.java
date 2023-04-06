@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ApplyMeeting")
 public class ApplyMeetingController {
 
-    @Autowired private ApplyMeetingService applyMeetingService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ApplyMeetingService applyMeetingService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取会议申请信息
@@ -52,8 +55,7 @@ public class ApplyMeetingController {
      */
     @Operation("获取会议申请信息")
     @GetMapping("/{id}")
-    public Result<ApplyMeetingInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<ApplyMeetingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ApplyMeetingInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class ApplyMeetingController {
      */
     @Operation("新建会议申请")
     @PostMapping
-    public Result create(@RequestBody @Valid ApplyMeetingForm applyMeetingForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid ApplyMeetingForm applyMeetingForm) throws WorkFlowException {
         if (applyMeetingForm.getStartDate() > applyMeetingForm.getEndDate()) {
             return Result.fail("结束时间不能小于开始时间");
         }
@@ -91,12 +92,10 @@ public class ApplyMeetingController {
             return Result.fail("预计人数只能输入正整数");
         }
         if (applyMeetingForm.getEstimatedAmount() != null
-                && !RegexUtils.checkDecimals2(
-                        String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
+                && !RegexUtils.checkDecimals2(String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
             return Result.fail("预计金额必须大于0，最多精确小数点后两位");
         }
-        ApplyMeetingEntity entity =
-                JsonUtils.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
+        ApplyMeetingEntity entity = JsonUtils.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyMeetingForm.getStatus())) {
             applyMeetingService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -114,8 +113,7 @@ public class ApplyMeetingController {
      */
     @Operation("修改会议申请")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid ApplyMeetingForm applyMeetingForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid ApplyMeetingForm applyMeetingForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (applyMeetingForm.getStartDate() > applyMeetingForm.getEndDate()) {
             return Result.fail("结束时间不能小于开始时间");
@@ -126,12 +124,10 @@ public class ApplyMeetingController {
             return Result.fail("预计人数只能输入正整数");
         }
         if (applyMeetingForm.getEstimatedAmount() != null
-                && !RegexUtils.checkDecimals2(
-                        String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
+                && !RegexUtils.checkDecimals2(String.valueOf(applyMeetingForm.getEstimatedAmount()))) {
             return Result.fail("预计金额必须大于0，最多精确小数点后两位");
         }
-        ApplyMeetingEntity entity =
-                JsonUtils.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
+        ApplyMeetingEntity entity = JsonUtils.getJsonToBean(applyMeetingForm, ApplyMeetingEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(applyMeetingForm.getStatus())) {
             applyMeetingService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

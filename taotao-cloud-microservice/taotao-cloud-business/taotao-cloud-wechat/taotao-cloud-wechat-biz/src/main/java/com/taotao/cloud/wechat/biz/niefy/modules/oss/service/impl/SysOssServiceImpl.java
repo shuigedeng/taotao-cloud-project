@@ -27,8 +27,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 @Service("sysOssService")
-public class SysOssServiceImpl extends ServiceImpl<SysOssDao, SysOssEntity>
-        implements SysOssService {
+public class SysOssServiceImpl extends ServiceImpl<SysOssDao, SysOssEntity> implements SysOssService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {

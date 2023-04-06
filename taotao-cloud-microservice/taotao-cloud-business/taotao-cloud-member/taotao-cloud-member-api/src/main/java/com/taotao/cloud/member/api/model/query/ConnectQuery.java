@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "联合登录查询dto")
 public class ConnectQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "租户id")
     private String userId;

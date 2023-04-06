@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.sum_double;
 
 import io.trino.operator.aggregation.state.NullableDoubleState;
@@ -38,45 +39,44 @@ import io.trino.spi.type.StandardTypes;
 @Description("这是一个聚合函数")
 public class SumDoubleAggregationsFunctions {
 
-	//输入函数
-	@InputFunction
-	public static void input(
-		//输入数据状态类型
-		@AggregationState NullableDoubleState state,
-		//输入类型
-		@SqlType(StandardTypes.DOUBLE) double input) {
+    // 输入函数
+    @InputFunction
+    public static void input(
+            // 输入数据状态类型
+            @AggregationState NullableDoubleState state,
+            // 输入类型
+            @SqlType(StandardTypes.DOUBLE) double input) {
 
-		state.setNull(false);
-		state.setValue(state.getValue() + input);
-	}
+        state.setNull(false);
+        state.setValue(state.getValue() + input);
+    }
 
-	//聚合函数
-	@CombineFunction
-	public static void combine(
-		//表示第一条数据 也可以用作中间聚合集合
-		@AggregationState NullableDoubleState state1,
-		//表示每次进来的状态数据
-		@AggregationState NullableDoubleState state2) {
+    // 聚合函数
+    @CombineFunction
+    public static void combine(
+            // 表示第一条数据 也可以用作中间聚合集合
+            @AggregationState NullableDoubleState state1,
+            // 表示每次进来的状态数据
+            @AggregationState NullableDoubleState state2) {
 
-		if (state1.isNull()) {
-			state1.setNull(false);
-			state1.setValue(state2.getValue());
-			return;
-		}
+        if (state1.isNull()) {
+            state1.setNull(false);
+            state1.setValue(state2.getValue());
+            return;
+        }
 
-		state1.setValue(state1.getValue() + state2.getValue());
-	}
+        state1.setValue(state1.getValue() + state2.getValue());
+    }
 
-	//输出函数
-	@OutputFunction(StandardTypes.DOUBLE)
-	public static void output(
-		// 聚合后的结果状态
-		@AggregationState NullableDoubleState state,
-		// 设置返回结果
-		BlockBuilder out) {
+    // 输出函数
+    @OutputFunction(StandardTypes.DOUBLE)
+    public static void output(
+            // 聚合后的结果状态
+            @AggregationState NullableDoubleState state,
+            // 设置返回结果
+            BlockBuilder out) {
 
-		// 将结果以状态返回 每次数据的获取都是状态存储的 最后结果也是已状态返回
-		NullableDoubleState.write(DoubleType.DOUBLE, state, out);
-	}
-
+        // 将结果以状态返回 每次数据的获取都是状态存储的 最后结果也是已状态返回
+        NullableDoubleState.write(DoubleType.DOUBLE, state, out);
+    }
 }

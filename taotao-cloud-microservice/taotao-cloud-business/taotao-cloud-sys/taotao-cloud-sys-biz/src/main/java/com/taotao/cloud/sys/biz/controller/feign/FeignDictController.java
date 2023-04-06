@@ -50,8 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/feign/dict")
-public class FeignDictController extends BaseFeignController<IDictService, Dict, Long>
-        implements IFeignDictApi {
+public class FeignDictController extends BaseFeignController<IDictService, Dict, Long> implements IFeignDictApi {
 
     @Override
     @NotAuth

@@ -164,8 +164,7 @@ public interface IEsGoodsIndexService {
      * @return {@link Boolean }
      * @since 2022-04-27 17:00:01
      */
-    Boolean updateEsGoodsIndexByList(
-            List<PromotionGoodsVO> promotionGoodsList, BasePromotionsVO promotion, String key);
+    Boolean updateEsGoodsIndexByList(List<PromotionGoodsVO> promotionGoodsList, BasePromotionsVO promotion, String key);
 
     /**
      * 更新全部商品索引的促销信息

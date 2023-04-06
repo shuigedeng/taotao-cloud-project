@@ -24,7 +24,8 @@ import lombok.Data;
 @Data
 public class EmailSetting implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7261037221941716140L;
+    @Serial
+    private static final long serialVersionUID = 7261037221941716140L;
 
     /** 邮箱服务器 */
     private String host;

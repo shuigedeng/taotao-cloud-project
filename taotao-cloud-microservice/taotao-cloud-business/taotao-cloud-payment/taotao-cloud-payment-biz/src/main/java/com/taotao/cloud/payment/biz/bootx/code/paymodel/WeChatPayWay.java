@@ -32,12 +32,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class WeChatPayWay {
     private static final List<PayWayEnum> PAY_WAYS =
-            Arrays.asList(
-                    PayWayEnum.WAP,
-                    PayWayEnum.APP,
-                    PayWayEnum.JSAPI,
-                    PayWayEnum.QRCODE,
-                    PayWayEnum.BARCODE);
+            Arrays.asList(PayWayEnum.WAP, PayWayEnum.APP, PayWayEnum.JSAPI, PayWayEnum.QRCODE, PayWayEnum.BARCODE);
 
     /** 根据数字编号获取 */
     public PayWayEnum findByNo(int no) {

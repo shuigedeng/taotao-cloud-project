@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RefundOrderExpiredTask {
 
-    @Autowired private RefundOrderService refundOrderService;
+    @Autowired
+    private RefundOrderService refundOrderService;
 
     @Scheduled(cron = "0 0/1 * * * ?") // 每分钟执行一次
     public void start() {

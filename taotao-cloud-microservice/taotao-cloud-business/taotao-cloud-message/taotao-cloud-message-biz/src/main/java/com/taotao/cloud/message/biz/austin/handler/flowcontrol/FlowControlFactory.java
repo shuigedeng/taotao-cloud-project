@@ -43,10 +43,10 @@ public class FlowControlFactory implements ApplicationContextAware {
     private static final String FLOW_CONTROL_KEY = "flowControlRule";
     private static final String FLOW_CONTROL_PREFIX = "flow_control_";
 
-    private final Map<RateLimitStrategy, FlowControlService> flowControlServiceMap =
-            new ConcurrentHashMap<>();
+    private final Map<RateLimitStrategy, FlowControlService> flowControlServiceMap = new ConcurrentHashMap<>();
 
-    @Autowired private ConfigService config;
+    @Autowired
+    private ConfigService config;
 
     private ApplicationContext applicationContext;
 
@@ -65,8 +65,7 @@ public class FlowControlFactory implements ApplicationContextAware {
             flowControlParam.setRateInitValue(rateLimitConfig);
             flowControlParam.setRateLimiter(rateLimiter);
         }
-        FlowControlService flowControlService =
-                flowControlServiceMap.get(flowControlParam.getRateLimitStrategy());
+        FlowControlService flowControlService = flowControlServiceMap.get(flowControlParam.getRateLimitStrategy());
         if (Objects.isNull(flowControlService)) {
             log.error("没有找到对应的单机限流策略");
             return;
@@ -90,8 +89,7 @@ public class FlowControlFactory implements ApplicationContextAware {
      * @param channelCode
      */
     private Double getRateLimitConfig(Integer channelCode) {
-        String flowControlConfig =
-                config.getProperty(FLOW_CONTROL_KEY, CommonConstant.EMPTY_JSON_OBJECT);
+        String flowControlConfig = config.getProperty(FLOW_CONTROL_KEY, CommonConstant.EMPTY_JSON_OBJECT);
         JSONObject jsonObject = JSON.parseObject(flowControlConfig);
         if (Objects.isNull(jsonObject.getDouble(FLOW_CONTROL_PREFIX + channelCode))) {
             return null;
@@ -101,18 +99,14 @@ public class FlowControlFactory implements ApplicationContextAware {
 
     @PostConstruct
     private void init() {
-        Map<String, Object> serviceMap =
-                this.applicationContext.getBeansWithAnnotation(LocalRateLimit.class);
-        serviceMap.forEach(
-                (name, service) -> {
-                    if (service instanceof FlowControlService) {
-                        LocalRateLimit localRateLimit =
-                                AopUtils.getTargetClass(service)
-                                        .getAnnotation(LocalRateLimit.class);
-                        RateLimitStrategy rateLimitStrategy = localRateLimit.rateLimitStrategy();
-                        // 通常情况下 实现的限流service与rateLimitStrategy一一对应
-                        flowControlServiceMap.put(rateLimitStrategy, (FlowControlService) service);
-                    }
-                });
+        Map<String, Object> serviceMap = this.applicationContext.getBeansWithAnnotation(LocalRateLimit.class);
+        serviceMap.forEach((name, service) -> {
+            if (service instanceof FlowControlService) {
+                LocalRateLimit localRateLimit = AopUtils.getTargetClass(service).getAnnotation(LocalRateLimit.class);
+                RateLimitStrategy rateLimitStrategy = localRateLimit.rateLimitStrategy();
+                // 通常情况下 实现的限流service与rateLimitStrategy一一对应
+                flowControlServiceMap.put(rateLimitStrategy, (FlowControlService) service);
+            }
+        });
     }
 }

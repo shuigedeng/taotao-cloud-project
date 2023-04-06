@@ -65,8 +65,7 @@ public class ParameterManagerController {
     @RequestLogger("编辑参数")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> update(
-            @Validated @RequestBody ParametersDTO parametersDTO, @PathVariable Long id) {
+    public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO, @PathVariable Long id) {
         Parameters parameters = ParametersConvert.INSTANCE.convert(parametersDTO);
         parameters.setId(id);
         return Result.success(parametersService.updateParameter(parameters));

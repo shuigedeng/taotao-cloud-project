@@ -43,9 +43,7 @@ public class WeChatPayConfigManager extends BaseManager<WeChatPayConfigMapper, W
     }
 
     public void removeAllActivity() {
-        lambdaUpdate()
-                .eq(WeChatPayConfig::getActivity, Boolean.TRUE)
-                .set(WeChatPayConfig::getActivity, Boolean.FALSE);
+        lambdaUpdate().eq(WeChatPayConfig::getActivity, Boolean.TRUE).set(WeChatPayConfig::getActivity, Boolean.FALSE);
     }
 
     public Page<WeChatPayConfig> page(PageQuery PageQuery) {

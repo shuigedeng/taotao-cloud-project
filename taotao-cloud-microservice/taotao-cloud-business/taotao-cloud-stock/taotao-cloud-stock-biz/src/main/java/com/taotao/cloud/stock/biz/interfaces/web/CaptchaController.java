@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CaptchaController {
 
-    @Autowired private CaptchaApplicationService captchaApplicationService;
+    @Autowired
+    private CaptchaApplicationService captchaApplicationService;
 
     @GetMapping("/captcha")
     public void captcha(HttpServletResponse response, String uuid) throws IOException {

@@ -1,34 +1,51 @@
-//package com.taotao.cloud.gateway.router;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.gateway.router;
 //
-//import cn.hutool.core.collection.CollectionUtil;
-//import cn.hutool.json.JSONUtil;
-//import com.alibaba.cloud.nacos.NacosConfigManager;
-//import com.alibaba.cloud.nacos.NacosConfigProperties;
-//import com.alibaba.nacos.api.config.ConfigService;
-//import com.alibaba.nacos.api.config.listener.Listener;
-//import com.alibaba.nacos.api.exception.NacosException;
-//import com.github.benmanes.caffeine.cache.Cache;
-//import jakarta.annotation.PostConstruct;
-//import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.concurrent.Executor;
-//import java.util.concurrent.Executors;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
-//import org.springframework.cloud.gateway.route.RouteDefinition;
-//import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
-//import org.springframework.context.ApplicationEventPublisher;
-//import org.springframework.context.ApplicationEventPublisherAware;
-//import org.springframework.stereotype.Component;
-//import reactor.core.publisher.Flux;
-//import reactor.core.publisher.Mono;
+// import cn.hutool.core.collection.CollectionUtil;
+// import cn.hutool.json.JSONUtil;
+// import com.alibaba.cloud.nacos.NacosConfigManager;
+// import com.alibaba.cloud.nacos.NacosConfigProperties;
+// import com.alibaba.nacos.api.config.ConfigService;
+// import com.alibaba.nacos.api.config.listener.Listener;
+// import com.alibaba.nacos.api.exception.NacosException;
+// import com.github.benmanes.caffeine.cache.Cache;
+// import jakarta.annotation.PostConstruct;
+// import java.util.ArrayList;
+// import java.util.Collection;
+// import java.util.concurrent.Executor;
+// import java.util.concurrent.Executors;
+// import lombok.RequiredArgsConstructor;
+// import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
+// import org.springframework.cloud.gateway.route.RouteDefinition;
+// import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
+// import org.springframework.context.ApplicationEventPublisher;
+// import org.springframework.context.ApplicationEventPublisherAware;
+// import org.springframework.stereotype.Component;
+// import reactor.core.publisher.Flux;
+// import reactor.core.publisher.Mono;
 //
-///**
-// * https://github.com/alibaba/spring-cloud-alibaba/blob/2.2.x/spring-cloud-alibaba-examples/nacos-example/nacos-config-example/src/main/java/com/alibaba/cloud/examples/example/ConfigListenerExample.java
+/// **
+// *
+// https://github.com/alibaba/spring-cloud-alibaba/blob/2.2.x/spring-cloud-alibaba-examples/nacos-example/nacos-config-example/src/main/java/com/alibaba/cloud/examples/example/ConfigListenerExample.java
 // */
-//@Component
-//@RequiredArgsConstructor
-//public class NacosRouteDefinitionRepository implements RouteDefinitionRepository,
+// @Component
+// @RequiredArgsConstructor
+// public class NacosRouteDefinitionRepository implements RouteDefinitionRepository,
 //	ApplicationEventPublisherAware {
 //
 //	private static final String DATA_ID = "router.json";
@@ -95,4 +112,4 @@
 //	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
 //		this.applicationEventPublisher = applicationEventPublisher;
 //	}
-//}
+// }

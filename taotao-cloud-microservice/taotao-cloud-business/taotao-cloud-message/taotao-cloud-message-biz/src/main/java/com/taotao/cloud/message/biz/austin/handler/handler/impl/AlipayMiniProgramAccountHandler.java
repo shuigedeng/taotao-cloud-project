@@ -29,7 +29,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AlipayMiniProgramAccountHandler extends BaseHandler implements Handler {
 
-    @Autowired private AlipayMiniProgramAccountService alipayMiniProgramAccountService;
+    @Autowired
+    private AlipayMiniProgramAccountService alipayMiniProgramAccountService;
 
     public AlipayMiniProgramAccountHandler() {
         channelCode = ChannelType.ALIPAY_MINI_PROGRAM.getCode();
@@ -57,15 +58,13 @@ public class AlipayMiniProgramAccountHandler extends BaseHandler implements Hand
      * @return AlipayMiniProgramParam
      */
     private AlipayMiniProgramParam buildMiniProgramParam(TaskInfo taskInfo) {
-        AlipayMiniProgramParam param =
-                AlipayMiniProgramParam.builder()
-                        .toUserId(taskInfo.getReceiver())
-                        .messageTemplateId(taskInfo.getMessageTemplateId())
-                        .sendAccount(taskInfo.getSendAccount())
-                        .build();
+        AlipayMiniProgramParam param = AlipayMiniProgramParam.builder()
+                .toUserId(taskInfo.getReceiver())
+                .messageTemplateId(taskInfo.getMessageTemplateId())
+                .sendAccount(taskInfo.getSendAccount())
+                .build();
 
-        AlipayMiniProgramContentModel contentModel =
-                (AlipayMiniProgramContentModel) taskInfo.getContentModel();
+        AlipayMiniProgramContentModel contentModel = (AlipayMiniProgramContentModel) taskInfo.getContentModel();
         param.setData(contentModel.getMap());
         return param;
     }

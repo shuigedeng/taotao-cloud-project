@@ -119,8 +119,7 @@ public class Card2Controller extends BaseController {
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
         // 轮廓查找，主要就是找最外表格框
-        Imgproc.findContours(
-                img, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(img, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
         // 找出轮廓对应凸包的四边形拟合
         List<MatOfPoint> squares = new ArrayList<>();
@@ -144,8 +143,7 @@ public class Card2Controller extends BaseController {
             contourHull.fromList(newPoints);
 
             // 多边形拟合凸包边框(此时的拟合的精度较低)
-            Imgproc.approxPolyDP(
-                    contourHull, approx, Imgproc.arcLength(contourHull, true) * 0.02, true);
+            Imgproc.approxPolyDP(contourHull, approx, Imgproc.arcLength(contourHull, true) * 0.02, true);
 
             // 筛选出面积大于某一阈值的，且四边形的各个角度都接近直角的凸四边形
             MatOfPoint approxf1 = new MatOfPoint();
@@ -156,12 +154,8 @@ public class Card2Controller extends BaseController {
                     && Imgproc.isContourConvex(approxf1)) {
                 BigDecimal maxCosine = 0;
                 for (int j = 2; j < 5; j++) {
-                    BigDecimal cosine =
-                            Math.abs(
-                                    getAngle(
-                                            approxf1.toArray()[j % 4],
-                                            approxf1.toArray()[j - 2],
-                                            approxf1.toArray()[j - 1]));
+                    BigDecimal cosine = Math.abs(
+                            getAngle(approxf1.toArray()[j % 4], approxf1.toArray()[j - 2], approxf1.toArray()[j - 1]));
                     maxCosine = Math.max(maxCosine, cosine);
                 }
                 // 考虑到图片倾斜等情况，角度大概72度
@@ -209,12 +203,7 @@ public class Card2Controller extends BaseController {
                 lines.add(new BigDecimal[] {p1.x, p1.y, p2.x, p2.y});
                 logger.info("p1x:" + p1.x + "  p1y:" + p1.y + "  p2x:" + p2.x + "  p2y:" + p2.y);
                 // 画出4条边线，真正识别过程中这些都是可以注释掉的，只是为了方便观察
-                Core.line(
-                        source,
-                        new Point(p1.x, p1.y),
-                        new Point(p2.x, p2.y),
-                        new Scalar(255, 0, 0),
-                        4);
+                Core.line(source, new Point(p1.x, p1.y), new Point(p2.x, p2.y), new Scalar(255, 0, 0), 4);
             }
         }
 
@@ -272,12 +261,8 @@ public class Card2Controller extends BaseController {
         //			        new Point(imgWidth*1.6, imgHeight*1.6));
 
         // quadMat目标图像的点设置，以之前取出的最长的长宽作为新图像的长宽，创建一个图层
-        MatOfPoint2f quadMat =
-                new MatOfPoint2f(
-                        new Point(0, 0),
-                        new Point(imgWidth, 0),
-                        new Point(imgWidth, imgHeight),
-                        new Point(0, imgHeight));
+        MatOfPoint2f quadMat = new MatOfPoint2f(
+                new Point(0, 0), new Point(imgWidth, 0), new Point(imgWidth, imgHeight), new Point(0, imgHeight));
 
         // 提取图像，使用warpPerspective做图像的透视变换
         Mat transmtx = Imgproc.getPerspectiveTransform(cornerMat, quadMat);
@@ -291,8 +276,7 @@ public class Card2Controller extends BaseController {
         BigDecimal dy1 = pt1.y - pt0.y;
         BigDecimal dx2 = pt2.x - pt0.x;
         BigDecimal dy2 = pt2.y - pt0.y;
-        return (dx1 * dx2 + dy1 * dy2)
-                / Math.sqrt((dx1 * dx1 + dy1 * dy1) * (dx2 * dx2 + dy2 * dy2) + 1e-10);
+        return (dx1 * dx2 + dy1 * dy2) / Math.sqrt((dx1 * dx1 + dy1 * dy1) * (dx2 * dx2 + dy2 * dy2) + 1e-10);
     }
 
     // 找到最大的正方形轮廓
@@ -328,14 +312,7 @@ public class Card2Controller extends BaseController {
         if (a.length != 4 || b.length != 4) {
             throw new ClassFormatError();
         }
-        BigDecimal x1 = a[0],
-                y1 = a[1],
-                x2 = a[2],
-                y2 = a[3],
-                x3 = b[0],
-                y3 = b[1],
-                x4 = b[2],
-                y4 = b[3];
+        BigDecimal x1 = a[0], y1 = a[1], x2 = a[2], y2 = a[3], x3 = b[0], y3 = b[1], x4 = b[2], y4 = b[3];
         BigDecimal d = ((x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4));
         if (d != 0) {
             Point pt = new Point();
@@ -370,8 +347,7 @@ public class Card2Controller extends BaseController {
             for (int j = i + 1; j < corners.size(); j++) {
                 Point point1 = corners.get(i);
                 Point point2 = corners.get(j);
-                if ((point1.y - lp.y * 1.0) / (point1.x - lp.x)
-                        > (point2.y - lp.y * 1.0) / (point2.x - lp.x)) {
+                if ((point1.y - lp.y * 1.0) / (point1.x - lp.x) > (point2.y - lp.y * 1.0) / (point2.x - lp.x)) {
                     Point temp = point1.clone();
                     corners.set(i, corners.get(j));
                     corners.set(j, temp);
@@ -395,8 +371,7 @@ public class Card2Controller extends BaseController {
         // 图像灰度化
         Imgproc.cvtColor(img_cut, img_gray, Imgproc.COLOR_BGR2GRAY);
         // 图像二值化，注意是反向二值化以及OTSU算法
-        Imgproc.threshold(
-                img_gray, img_gray, 170, 255, Imgproc.THRESH_BINARY_INV | Imgproc.THRESH_OTSU);
+        Imgproc.threshold(img_gray, img_gray, 170, 255, Imgproc.THRESH_BINARY_INV | Imgproc.THRESH_OTSU);
         Mat temp = img_gray.clone();
         // 此处使用的是方式2，形态学梯度算法保留填图选项的边框
         //		 	//方式1：通过高斯滤波然后边缘检测膨胀来链接边缘，将轮廓连通便于轮廓识别
@@ -418,48 +393,21 @@ public class Card2Controller extends BaseController {
         Mat cut1 = temp.submat(0, temp.rows(), 0, (int) (0.275 * temp.cols()));
         Mat cut_gray1 = img_gray.submat(0, img_gray.rows(), 0, (int) (0.275 * img_gray.cols()));
 
-        Mat cut2 =
-                temp.submat(
-                        0, temp.rows(), (int) (0.275 * temp.cols()), (int) (0.518 * temp.cols()));
+        Mat cut2 = temp.submat(0, temp.rows(), (int) (0.275 * temp.cols()), (int) (0.518 * temp.cols()));
         Mat cut_gray2 =
-                img_gray.submat(
-                        0,
-                        img_gray.rows(),
-                        (int) (0.275 * img_gray.cols()),
-                        (int) (0.518 * img_gray.cols()));
+                img_gray.submat(0, img_gray.rows(), (int) (0.275 * img_gray.cols()), (int) (0.518 * img_gray.cols()));
 
-        Mat cut3 =
-                temp.submat(
-                        0, temp.rows(), (int) (0.518 * temp.cols()), (int) (0.743 * temp.cols()));
+        Mat cut3 = temp.submat(0, temp.rows(), (int) (0.518 * temp.cols()), (int) (0.743 * temp.cols()));
         Mat cut_gray3 =
-                img_gray.submat(
-                        0,
-                        img_gray.rows(),
-                        (int) (0.518 * img_gray.cols()),
-                        (int) (0.743 * img_gray.cols()));
+                img_gray.submat(0, img_gray.rows(), (int) (0.518 * img_gray.cols()), (int) (0.743 * img_gray.cols()));
 
-        Mat cut4 =
-                temp.submat(
-                        (int) (0.387 * temp.rows()),
-                        temp.rows(),
-                        (int) (0.743 * temp.cols()),
-                        temp.cols());
-        Mat cut_gray4 =
-                img_gray.submat(
-                        (int) (0.387 * img_gray.rows()),
-                        img_gray.rows(),
-                        (int) (0.743 * img_gray.cols()),
-                        img_gray.cols());
+        Mat cut4 = temp.submat((int) (0.387 * temp.rows()), temp.rows(), (int) (0.743 * temp.cols()), temp.cols());
+        Mat cut_gray4 = img_gray.submat(
+                (int) (0.387 * img_gray.rows()), img_gray.rows(), (int) (0.743 * img_gray.cols()), img_gray.cols());
         // 学号
-        Mat cut5 =
-                temp.submat(
-                        0, (int) (0.387 * temp.rows()), (int) (0.743 * temp.cols()), temp.cols());
+        Mat cut5 = temp.submat(0, (int) (0.387 * temp.rows()), (int) (0.743 * temp.cols()), temp.cols());
         Mat cut_gray5 =
-                img_gray.submat(
-                        0,
-                        (int) (0.387 * img_gray.rows()),
-                        (int) (0.743 * img_gray.cols()),
-                        img_gray.cols());
+                img_gray.submat(0, (int) (0.387 * img_gray.rows()), (int) (0.743 * img_gray.cols()), img_gray.cols());
 
         //		 Highgui.imwrite("D:\\test\\abc\\card\\card_cut1.png", cut1);
         //		 Highgui.imwrite("D:\\test\\abc\\card\\card_cut1_gary.png", cut_gray1);
@@ -504,12 +452,7 @@ public class Card2Controller extends BaseController {
         List<MatOfPoint> answerList = new ArrayList<MatOfPoint>();
         Mat hierarchy = new Mat();
         // 进行轮廓查找，注意因为该答题卡特征是闭合填图区域，所以用这种方式，如果是非闭合填涂区域，则不适用
-        Imgproc.findContours(
-                cut1.clone(),
-                contours,
-                hierarchy,
-                Imgproc.RETR_EXTERNAL,
-                Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(cut1.clone(), contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
         //		 logger.info(contours.size());
         //		 logger.info("-----w------"+(temp.width()*80/2693-20));
         //		 logger.info("-----h------"+(temp.height()*80/2764-20));
@@ -534,23 +477,21 @@ public class Card2Controller extends BaseController {
             }
         }
 
-        Collections.sort(
-                answerList,
-                new Comparator<MatOfPoint>() {
-                    // 按照y坐标升序排列
-                    @Override
-                    public int compare(MatOfPoint o1, MatOfPoint o2) {
-                        Rect rect1 = Imgproc.boundingRect(o1);
-                        Rect rect2 = Imgproc.boundingRect(o2);
-                        if (rect1.y < rect2.y) {
-                            return -1;
-                        } else if (rect1.y > rect2.y) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-                });
+        Collections.sort(answerList, new Comparator<MatOfPoint>() {
+            // 按照y坐标升序排列
+            @Override
+            public int compare(MatOfPoint o1, MatOfPoint o2) {
+                Rect rect1 = Imgproc.boundingRect(o1);
+                Rect rect2 = Imgproc.boundingRect(o2);
+                if (rect1.y < rect2.y) {
+                    return -1;
+                } else if (rect1.y > rect2.y) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
         // 每4/5个一组组成新list，并按x坐标排序
         // 该方式依赖于预处理后的图片没有干扰轮廓。如果图像处理不佳，干扰项没排除，那么此处的分组就会错乱。
         // 提供一个优化思路：对于闭合填涂区域的可以使用水平垂直投影进行坐标定位点的判定。
@@ -562,23 +503,21 @@ public class Card2Controller extends BaseController {
                 toIndex = totoSize - 1;
             }
             List<MatOfPoint> newList = answerList.subList(i, toIndex);
-            Collections.sort(
-                    newList,
-                    new Comparator<MatOfPoint>() {
-                        // 按照x坐标升序排列
-                        @Override
-                        public int compare(MatOfPoint o1, MatOfPoint o2) {
-                            Rect rect1 = Imgproc.boundingRect(o1);
-                            Rect rect2 = Imgproc.boundingRect(o2);
-                            if (rect1.x < rect2.x) {
-                                return -1;
-                            } else if (rect1.x > rect2.x) {
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        }
-                    });
+            Collections.sort(newList, new Comparator<MatOfPoint>() {
+                // 按照x坐标升序排列
+                @Override
+                public int compare(MatOfPoint o1, MatOfPoint o2) {
+                    Rect rect1 = Imgproc.boundingRect(o1);
+                    Rect rect2 = Imgproc.boundingRect(o2);
+                    if (rect1.x < rect2.x) {
+                        return -1;
+                    } else if (rect1.x > rect2.x) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
             String resultChoose = "";
             for (int j = 0; j < newList.size(); j++) {
                 Imgproc.drawContours(cut_gray, newList, j, new Scalar(170), 2);
@@ -600,8 +539,7 @@ public class Card2Controller extends BaseController {
                 }
                 //     			Highgui.imwrite("D:\\test\\abc\\card\\card_x"+i+j+".png", dst);
                 if (i == 0 && j == 0) { // 输出一下第一个掩模
-                    String destPath =
-                            Constants.PATH + Constants.DEST_IMAGE_PATH + "cardResult_5.png";
+                    String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "cardResult_5.png";
                     Highgui.imwrite(destPath, dst);
                 }
             }

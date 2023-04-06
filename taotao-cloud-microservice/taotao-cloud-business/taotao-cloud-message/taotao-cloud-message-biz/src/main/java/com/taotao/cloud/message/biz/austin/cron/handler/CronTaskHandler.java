@@ -35,17 +35,18 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class CronTaskHandler {
 
-    @Autowired private TaskHandler taskHandler;
+    @Autowired
+    private TaskHandler taskHandler;
 
-    @Autowired private ThreadPoolUtils threadPoolUtils;
+    @Autowired
+    private ThreadPoolUtils threadPoolUtils;
+
     private DtpExecutor dtpExecutor = CronAsyncThreadPoolConfig.getXxlCronExecutor();
 
     /** 处理后台的 austin 定时任务消息 */
     @XxlJob("austinJob")
     public void execute() {
-        log.info(
-                "CronTaskHandler#execute messageTemplateId:{} cron exec!",
-                XxlJobHelper.getJobParam());
+        log.info("CronTaskHandler#execute messageTemplateId:{} cron exec!", XxlJobHelper.getJobParam());
         threadPoolUtils.register(dtpExecutor);
 
         Long messageTemplateId = Long.valueOf(XxlJobHelper.getJobParam());

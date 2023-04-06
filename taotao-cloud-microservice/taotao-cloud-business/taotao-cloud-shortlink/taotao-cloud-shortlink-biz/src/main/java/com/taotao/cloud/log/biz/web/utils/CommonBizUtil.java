@@ -34,11 +34,9 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class CommonBizUtil {
 
-    private static final String CHARS =
-            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    private static final String CHARS_OUT_ORDER =
-            "qwertyuiopmnbvcxzlkjhgfdsaMNBVCXZASDFGHJKLPOIUYTREWQ0987654321";
+    private static final String CHARS_OUT_ORDER = "qwertyuiopmnbvcxzlkjhgfdsaMNBVCXZASDFGHJKLPOIUYTREWQ0987654321";
 
     /** MD5加密 */
     public static Optional<String> MD5(String str) {
@@ -67,16 +65,11 @@ public class CommonBizUtil {
      * @return 布尔值
      */
     public static boolean isSuccessResponse(CommonResponse<?> response) {
-        return Objects.nonNull(response)
-                && response.isSuccess()
-                && Objects.equals(response.getCode(), 200);
+        return Objects.nonNull(response) && response.isSuccess() && Objects.equals(response.getCode(), 200);
     }
 
     public static void throwBizError(ErrorCode errorCode, String msg) {
-        String msgExt =
-                StringUtils.trimToNull(msg) == null
-                        ? errorCode.getMsg()
-                        : errorCode.getMsg() + ":" + msg;
+        String msgExt = StringUtils.trimToNull(msg) == null ? errorCode.getMsg() : errorCode.getMsg() + ":" + msg;
         throw new BusinessException(errorCode.getCode(), msgExt);
     }
 

@@ -43,10 +43,7 @@ public class PaymentQueryService {
 
     /** 根据支付Id查询支付单 */
     public PaymentDto findById(Long id) {
-        return paymentManager
-                .findById(id)
-                .map(Payment::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return paymentManager.findById(id).map(Payment::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 根据业务ID获取成功记录 */
@@ -70,30 +67,21 @@ public class PaymentQueryService {
     /** 根据businessId获取订单支付方式 */
     public List<PayChannelInfo> findPayTypeInfoByBusinessId(String businessId) {
         List<Payment> payments = paymentManager.findByBusinessIdDesc(businessId);
-        return payments.stream()
-                .findFirst()
-                .map(Payment::getPayChannelInfoList)
-                .orElse(new ArrayList<>(1));
+        return payments.stream().findFirst().map(Payment::getPayChannelInfoList).orElse(new ArrayList<>(1));
     }
 
     /** 根据id获取订单支付方式 */
     public List<PayChannelInfo> findPayTypeInfoById(Long id) {
-        return paymentManager
-                .findById(id)
-                .map(Payment::getPayChannelInfoList)
-                .orElse(new ArrayList<>(1));
+        return paymentManager.findById(id).map(Payment::getPayChannelInfoList).orElse(new ArrayList<>(1));
     }
 
     /** 根据用户id查询 */
     public List<PaymentDto> findByUser(Long userId) {
-        return paymentManager.findByUserId(userId).stream()
-                .map(Payment::toDto)
-                .collect(Collectors.toList());
+        return paymentManager.findByUserId(userId).stream().map(Payment::toDto).collect(Collectors.toList());
     }
 
     /** 分页 */
-    public PageResult<PaymentDto> page(
-            PageQuery PageQuery, PaymentQuery param, OrderParam orderParam) {
+    public PageResult<PaymentDto> page(PageQuery PageQuery, PaymentQuery param, OrderParam orderParam) {
         return MpUtil.convert2DtoPageResult(paymentManager.page(PageQuery, param, orderParam));
     }
 

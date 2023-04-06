@@ -69,8 +69,7 @@ public enum DtPostgreSQL implements DtInterface {
         this.precisionMax = precisionMax;
     }
 
-    DtPostgreSQL(
-            String dbFieldType, String viewDataType, Integer defaultLength, Integer lengthMax) {
+    DtPostgreSQL(String dbFieldType, String viewDataType, Integer defaultLength, Integer lengthMax) {
         this.dbFieldType = dbFieldType;
         this.lengthModifyFlag = true;
         this.viewDataType = viewDataType;

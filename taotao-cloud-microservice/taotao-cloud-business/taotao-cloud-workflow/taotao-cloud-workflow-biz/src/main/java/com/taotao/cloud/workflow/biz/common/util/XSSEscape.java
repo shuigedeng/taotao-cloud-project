@@ -30,8 +30,7 @@ public class XSSEscape {
 
     /** 非法路径符号 */
     private static final Pattern PATH_PATTERN =
-            Pattern.compile(
-                    "\\.\\.\\|\\.\\./|~/|~\\|[<]|>|\"|[*]|[|]|[?]", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("\\.\\.\\|\\.\\./|~/|~\\|[<]|>|\"|[*]|[|]|[?]", Pattern.CASE_INSENSITIVE);
 
     private static InputStream inputStream;
     private static Policy policy;
@@ -42,8 +41,7 @@ public class XSSEscape {
             inputStream = XSSEscape.class.getClassLoader().getResourceAsStream("antisamy-ebay.xml");
             policy = Policy.getInstance(inputStream);
             inputStream.close();
-            inputStream =
-                    XSSEscape.class.getClassLoader().getResourceAsStream("antisamy-empty.xml");
+            inputStream = XSSEscape.class.getClassLoader().getResourceAsStream("antisamy-empty.xml");
             emptyPolicy = Policy.getInstance(inputStream);
             inputStream.close();
         } catch (Exception e) {
@@ -79,8 +77,7 @@ public class XSSEscape {
      */
     public static <T> T escapeObj(T character) {
         try {
-            return (T)
-                    JsonUtil.getJsonToBean(escapeEmpty(character.toString()), character.getClass());
+            return (T) JsonUtil.getJsonToBean(escapeEmpty(character.toString()), character.getClass());
         } catch (Exception e) {
         }
         return character;

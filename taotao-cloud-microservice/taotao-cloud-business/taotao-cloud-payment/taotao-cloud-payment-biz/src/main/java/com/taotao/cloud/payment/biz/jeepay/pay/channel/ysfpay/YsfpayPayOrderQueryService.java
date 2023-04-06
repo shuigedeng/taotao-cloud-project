@@ -43,11 +43,11 @@ public class YsfpayPayOrderQueryService implements IPayOrderQueryService {
         return CS.IF_CODE.YSFPAY;
     }
 
-    @Autowired private YsfpayPaymentService ysfpayPaymentService;
+    @Autowired
+    private YsfpayPaymentService ysfpayPaymentService;
 
     @Override
-    public ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg query(PayOrder payOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
         JSONObject reqParams = new JSONObject();
         String orderType = YsfHttpUtil.getOrderTypeByCommon(payOrder.getWayCode());
         String logPrefix = "【云闪付(" + orderType + ")查单】";
@@ -57,12 +57,8 @@ public class YsfpayPayOrderQueryService implements IPayOrderQueryService {
             reqParams.put("orderType", orderType); // 订单类型
 
             // 封装公共参数 & 签名 & 调起http请求 & 返回响应数据并包装为json格式。
-            JSONObject resJSON =
-                    ysfpayPaymentService.packageParamAndReq(
-                            "/gateway/api/pay/queryOrder",
-                            reqParams,
-                            logPrefix,
-                            mchAppConfigContext);
+            JSONObject resJSON = ysfpayPaymentService.packageParamAndReq(
+                    "/gateway/api/pay/queryOrder", reqParams, logPrefix, mchAppConfigContext);
             log.info("查询订单 payorderId:{}, 返回结果:{}", payOrder.getPayOrderId(), resJSON);
             if (resJSON == null) {
                 return ChannelRetMsg.waiting(); // 支付中

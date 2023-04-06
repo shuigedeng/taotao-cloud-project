@@ -39,13 +39,11 @@ import org.springframework.stereotype.Service;
  */
 @AllArgsConstructor
 @Service
-public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt>
-        implements IReceiptService {
+public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> implements IReceiptService {
 
     @Override
     public IPage<OrderReceiptDTO> pageQuery(ReceiptPageQuery receiptPageQuery) {
-        return this.baseMapper.getReceipt(
-                receiptPageQuery.buildMpPage(), receiptPageQuery.wrapper());
+        return this.baseMapper.getReceipt(receiptPageQuery.buildMpPage(), receiptPageQuery.wrapper());
     }
 
     @Override

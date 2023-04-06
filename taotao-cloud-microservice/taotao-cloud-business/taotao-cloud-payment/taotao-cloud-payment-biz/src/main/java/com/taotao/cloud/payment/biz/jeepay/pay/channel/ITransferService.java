@@ -40,9 +40,6 @@ public interface ITransferService {
     String preCheck(TransferOrderRQ bizRQ, TransferOrder transferOrder);
 
     /** 调起退款接口，并响应数据； 内部处理普通商户和服务商模式 * */
-    ChannelRetMsg transfer(
-            TransferOrderRQ bizRQ,
-            TransferOrder refundOrder,
-            MchAppConfigContext mchAppConfigContext)
+    ChannelRetMsg transfer(TransferOrderRQ bizRQ, TransferOrder refundOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception;
 }

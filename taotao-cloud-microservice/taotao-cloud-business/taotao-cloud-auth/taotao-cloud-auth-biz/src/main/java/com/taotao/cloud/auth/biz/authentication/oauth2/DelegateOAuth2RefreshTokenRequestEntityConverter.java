@@ -36,29 +36,24 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class DelegateOAuth2RefreshTokenRequestEntityConverter
         implements Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> {
 
-    private static final String REFRESH_TOKEN_ENDPOINT =
-            "https://api.weixin.qq.com/sns/oauth2/refresh_token";
-    private final Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>>
-            requestEntityConverter = new OAuth2RefreshTokenGrantRequestEntityConverter();
+    private static final String REFRESH_TOKEN_ENDPOINT = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+    private final Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> requestEntityConverter =
+            new OAuth2RefreshTokenGrantRequestEntityConverter();
 
     @Override
     public RequestEntity<?> convert(OAuth2RefreshTokenGrantRequest source) {
         ClientRegistration clientRegistration = source.getClientRegistration();
-        if (ClientProviders.WECHAT_WEB_LOGIN_CLIENT
-                .registrationId()
-                .equals(clientRegistration.getClientId())) {
+        if (ClientProviders.WECHAT_WEB_LOGIN_CLIENT.registrationId().equals(clientRegistration.getClientId())) {
             MultiValueMap<String, String> queryParameters = new LinkedMultiValueMap<>();
             queryParameters.add(WechatParameterNames.APP_ID, clientRegistration.getClientId());
-            queryParameters.add(
-                    OAuth2ParameterNames.GRANT_TYPE, GrantType.REFRESH_TOKEN.getValue());
+            queryParameters.add(OAuth2ParameterNames.GRANT_TYPE, GrantType.REFRESH_TOKEN.getValue());
             queryParameters.add(
                     OAuth2ParameterNames.REFRESH_TOKEN, source.getRefreshToken().getTokenValue());
 
-            URI uri =
-                    UriComponentsBuilder.fromUriString(REFRESH_TOKEN_ENDPOINT)
-                            .queryParams(queryParameters)
-                            .build()
-                            .toUri();
+            URI uri = UriComponentsBuilder.fromUriString(REFRESH_TOKEN_ENDPOINT)
+                    .queryParams(queryParameters)
+                    .build()
+                    .toUri();
             return RequestEntity.get(uri).build();
         }
         return requestEntityConverter.convert(source);

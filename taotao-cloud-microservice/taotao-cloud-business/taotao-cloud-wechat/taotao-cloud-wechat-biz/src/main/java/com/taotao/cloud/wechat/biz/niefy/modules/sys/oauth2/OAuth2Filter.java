@@ -55,14 +55,12 @@ public class OAuth2Filter extends AuthenticatingFilter {
     }
 
     @Override
-    protected boolean isAccessAllowed(
-            ServletRequest request, ServletResponse response, Object mappedValue) {
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         return ((HttpServletRequest) request).getMethod().equals(RequestMethod.OPTIONS.name());
     }
 
     @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response)
-            throws Exception {
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         // 获取请求token，如果token不存在，直接返回401
         String token = getRequestToken((HttpServletRequest) request);
         if (StringUtils.isBlank(token)) {
@@ -82,10 +80,7 @@ public class OAuth2Filter extends AuthenticatingFilter {
 
     @Override
     protected boolean onLoginFailure(
-            AuthenticationToken token,
-            AuthenticationException e,
-            ServletRequest request,
-            ServletResponse response) {
+            AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.setContentType("application/json;charset=utf-8");
         httpResponse.setHeader("Access-Control-Allow-Credentials", "true");

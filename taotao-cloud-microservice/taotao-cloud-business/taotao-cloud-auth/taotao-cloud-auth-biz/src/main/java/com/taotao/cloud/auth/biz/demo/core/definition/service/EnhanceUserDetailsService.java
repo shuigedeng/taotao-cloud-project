@@ -41,8 +41,7 @@ public interface EnhanceUserDetailsService extends UserDetailsService {
      * @return {@link UserDetails}
      * @throws UsernameNotFoundException 用户不存在
      */
-    UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal)
-            throws AuthenticationException;
+    UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal) throws AuthenticationException;
 
     /**
      * 系统用户名

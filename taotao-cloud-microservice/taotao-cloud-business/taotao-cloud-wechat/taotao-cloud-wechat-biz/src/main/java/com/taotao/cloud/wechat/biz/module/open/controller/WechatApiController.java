@@ -39,7 +39,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/api")
 public class WechatApiController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired private WxOpenServiceDemo wxOpenServiceDemo;
+
+    @Autowired
+    private WxOpenServiceDemo wxOpenServiceDemo;
 
     @GetMapping("/auth/goto_auth_url_show")
     @ResponseBody

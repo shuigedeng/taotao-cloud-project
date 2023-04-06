@@ -40,7 +40,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SubscribeHandler implements WxMpMessageHandler {
 
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      * 拿到场景值和用户信息，写入到redis
@@ -59,12 +60,9 @@ public class SubscribeHandler implements WxMpMessageHandler {
             WxSessionManager sessionManager) {
         try {
             WxMpUser user = wxMpService.getUserService().userInfo(wxMessage.getFromUser());
-            String eventKey =
-                    wxMessage
-                            .getEventKey()
-                            .replaceAll(
-                                    OfficialAccountParamConstant.QR_CODE_SCENE_PREFIX,
-                                    CommonConstant.EMPTY_STRING);
+            String eventKey = wxMessage
+                    .getEventKey()
+                    .replaceAll(OfficialAccountParamConstant.QR_CODE_SCENE_PREFIX, CommonConstant.EMPTY_STRING);
             redisTemplate.opsForValue().set(eventKey, JSON.toJSONString(user), 30, TimeUnit.DAYS);
         } catch (Exception e) {
             log.error("SubscribeHandler#handle fail:{}", Throwables.getStackTraceAsString(e));

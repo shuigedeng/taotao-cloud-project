@@ -40,7 +40,8 @@ import lombok.*;
 @Schema(description = "用户更新DTO")
 public class UpdateUserDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "昵称", required = true)
     @NotBlank(message = "昵称不能为空")

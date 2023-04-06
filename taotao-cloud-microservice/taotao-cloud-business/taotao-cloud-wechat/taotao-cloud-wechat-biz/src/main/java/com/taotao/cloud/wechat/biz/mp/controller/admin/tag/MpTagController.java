@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpTagController {
 
-    @Resource private MpTagService mpTagService;
+    @Resource
+    private MpTagService mpTagService;
 
     @PostMapping("/create")
     @ApiOperation("创建公众号标签")
@@ -84,11 +85,7 @@ public class MpTagController {
 
     @PostMapping("/sync")
     @ApiOperation("同步公众号标签")
-    @ApiImplicitParam(
-            name = "accountId",
-            value = "公众号账号的编号",
-            required = true,
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "accountId", value = "公众号账号的编号", required = true, dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:tag:sync')")
     public CommonResult<Boolean> syncTag(@RequestParam("accountId") Long accountId) {
         mpTagService.syncTag(accountId);

@@ -113,8 +113,7 @@ public interface FlowTaskApi {
      * @throws WorkFlowException
      */
     @PostMapping("/updateFlowEngine/{id}")
-    void update(@PathVariable("id") String id, @RequestBody FlowEngineEntity engineEntity)
-            throws WorkFlowException;
+    void update(@PathVariable("id") String id, @RequestBody FlowEngineEntity engineEntity) throws WorkFlowException;
 
     /** 删除流程引擎 */
     @PostMapping("/deleteFlowEngine")
@@ -146,8 +145,7 @@ public interface FlowTaskApi {
      * @throws WorkFlowException
      */
     @GetMapping("/getInfoByEnCode/{encode}")
-    FlowEngineEntity getInfoByEnCode(@PathVariable("encode") String encode)
-            throws WorkFlowException;
+    FlowEngineEntity getInfoByEnCode(@PathVariable("encode") String encode) throws WorkFlowException;
 
     /**
      * 工作流的列表

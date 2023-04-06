@@ -56,8 +56,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/store/promotion/pintuan")
 public class PintuanStoreController {
 
-    @Autowired private IPintuanService pintuanService;
-    @Autowired private IPromotionGoodsService promotionGoodsService;
+    @Autowired
+    private IPintuanService pintuanService;
+
+    @Autowired
+    private IPromotionGoodsService promotionGoodsService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -82,8 +85,7 @@ public class PintuanStoreController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/goods/{pintuanId}")
     @Operation(summary = "根据条件分页查询拼团活动商品列表")
-    public Result<IPage<PromotionGoods>> getPintuanGoodsByPage(
-            @PathVariable String pintuanId, PageVO pageVo) {
+    public Result<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId, PageVO pageVo) {
         AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
         PromotionGoodsSearchParams searchParams = new PromotionGoodsSearchParams();
         searchParams.setStoreId(currentUser.getStoreId());
@@ -125,8 +127,7 @@ public class PintuanStoreController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @PutMapping("/status/{pintuanId}")
     @Operation(summary = "操作拼团活动状态")
-    public Result<String> openPintuan(
-            @PathVariable String pintuanId, Long startTime, Long endTime) {
+    public Result<String> openPintuan(@PathVariable String pintuanId, Long startTime, Long endTime) {
         OperationalJudgment.judgment(pintuanService.getById(pintuanId));
         if (pintuanService.updateStatus(Collections.singletonList(pintuanId), startTime, endTime)) {
             return Result.success(ResultEnum.PINTUAN_MANUAL_OPEN_SUCCESS);

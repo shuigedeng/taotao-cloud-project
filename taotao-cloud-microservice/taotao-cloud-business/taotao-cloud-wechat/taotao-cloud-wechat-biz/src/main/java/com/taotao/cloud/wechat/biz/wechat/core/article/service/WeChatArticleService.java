@@ -45,10 +45,8 @@ public class WeChatArticleService {
     @SneakyThrows
     public PageResult<WeChatArticleDto> page(PageQuery PageQuery) {
         val freePublishService = wxMpService.getFreePublishService();
-        val result =
-                freePublishService.getPublicationRecords(PageQuery.start(), PageQuery.getSize());
-        val items =
-                result.getItems().stream().map(WeChatArticleDto::init).collect(Collectors.toList());
+        val result = freePublishService.getPublicationRecords(PageQuery.start(), PageQuery.getSize());
+        val items = result.getItems().stream().map(WeChatArticleDto::init).collect(Collectors.toList());
         PageResult<WeChatArticleDto> pageResult = new PageResult<>();
         pageResult
                 .setCurrent(PageQuery.getCurrent())

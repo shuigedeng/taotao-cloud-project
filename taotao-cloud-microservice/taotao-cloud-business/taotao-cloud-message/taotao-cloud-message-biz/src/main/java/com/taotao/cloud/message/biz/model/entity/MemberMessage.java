@@ -45,15 +45,11 @@ public class MemberMessage extends BaseSuperEntity<MemberMessage, Long> {
 
     public static final String TABLE_NAME = "tt_member_message";
     /** 会员id */
-    @Column(
-            name = "member_id",
-            columnDefinition = "varchar(255) not null default '' comment '会员id'")
+    @Column(name = "member_id", columnDefinition = "varchar(255) not null default '' comment '会员id'")
     private String memberId;
 
     /** 会员名称 */
-    @Column(
-            name = "member_name",
-            columnDefinition = "varchar(255) not null default '' comment '会员名称'")
+    @Column(name = "member_name", columnDefinition = "varchar(255) not null default '' comment '会员名称'")
     private String memberName;
 
     /** 消息标题 */
@@ -65,9 +61,7 @@ public class MemberMessage extends BaseSuperEntity<MemberMessage, Long> {
     private String content;
 
     /** 关联消息id */
-    @Column(
-            name = "message_id",
-            columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
+    @Column(name = "message_id", columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
     private String messageId;
 
     /**

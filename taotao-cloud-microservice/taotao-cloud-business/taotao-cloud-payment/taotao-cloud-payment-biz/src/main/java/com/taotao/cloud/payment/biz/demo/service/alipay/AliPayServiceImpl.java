@@ -29,7 +29,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AliPayServiceImpl implements AliPayService {
 
-    @Resource private OrderService orderService;
+    @Resource
+    private OrderService orderService;
 
     @Override
     public Map<String, Object> nativePay(String body, String money) {
@@ -44,20 +45,19 @@ public class AliPayServiceImpl implements AliPayService {
 
             String notify_url = "http://yungouos.wicp.net/api/callback/notify";
 
-            String url =
-                    AliPay.nativePay(
-                            order.getOrderNo(),
-                            order.getMoney(),
-                            AliPayConfig.mchId,
-                            order.getBody(),
-                            "2",
-                            attach,
-                            notify_url,
-                            null,
-                            null,
-                            null,
-                            null,
-                            AliPayConfig.key);
+            String url = AliPay.nativePay(
+                    order.getOrderNo(),
+                    order.getMoney(),
+                    AliPayConfig.mchId,
+                    order.getBody(),
+                    "2",
+                    attach,
+                    notify_url,
+                    null,
+                    null,
+                    null,
+                    null,
+                    AliPayConfig.key);
             map.put("url", url);
             map.put("orderNo", order.getOrderNo());
         } catch (Exception e) {
@@ -81,20 +81,19 @@ public class AliPayServiceImpl implements AliPayService {
 
             String return_url = "http://yungouos.wicp.net?orderNo=" + order.getOrderNo();
 
-            AliPayH5Biz aliPayH5Biz =
-                    AliPay.h5Pay(
-                            order.getOrderNo(),
-                            order.getMoney(),
-                            AliPayConfig.mchId,
-                            order.getBody(),
-                            attach,
-                            notify_url,
-                            return_url,
-                            null,
-                            null,
-                            null,
-                            null,
-                            AliPayConfig.key);
+            AliPayH5Biz aliPayH5Biz = AliPay.h5Pay(
+                    order.getOrderNo(),
+                    order.getMoney(),
+                    AliPayConfig.mchId,
+                    order.getBody(),
+                    attach,
+                    notify_url,
+                    return_url,
+                    null,
+                    null,
+                    null,
+                    null,
+                    AliPayConfig.key);
 
             if (aliPayH5Biz == null) {
                 throw new Exception("支付宝下单失败");

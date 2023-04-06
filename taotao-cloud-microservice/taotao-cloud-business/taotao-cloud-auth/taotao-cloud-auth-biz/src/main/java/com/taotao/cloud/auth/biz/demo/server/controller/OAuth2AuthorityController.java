@@ -49,8 +49,7 @@ public class OAuth2AuthorityController implements Controller {
     private final StrategyAuthorityDetailsService strategyAuthorityDetailsService;
 
     @Autowired
-    public OAuth2AuthorityController(
-            StrategyAuthorityDetailsService strategyAuthorityDetailsService) {
+    public OAuth2AuthorityController(StrategyAuthorityDetailsService strategyAuthorityDetailsService) {
         this.strategyAuthorityDetailsService = strategyAuthorityDetailsService;
     }
 

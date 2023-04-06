@@ -64,10 +64,7 @@ public class PayNotifyRecordController {
         // 获取支付宝反馈信息
         Map<String, String> map = AliPayApi.toMap(request);
         if (AlipaySignature.rsaCheckV1(
-                map,
-                AliPayApiConfigKit.getApiConfig(map.get("app_id")).getAlipayPublicKey(),
-                "UTF-8",
-                "RSA2")) {
+                map, AliPayApiConfigKit.getApiConfig(map.get("app_id")).getAlipayPublicKey(), "UTF-8", "RSA2")) {
             // TODO 支付成功
             response.getWriter().print("success");
         }
@@ -88,17 +85,12 @@ public class PayNotifyRecordController {
         // 获取支付宝POST过来反馈信息
         Map<String, String> map = AliPayApi.toMap(request);
         if (AlipaySignature.rsaCheckV1(
-                map,
-                AliPayApiConfigKit.getApiConfig(map.get("app_id")).getAlipayPublicKey(),
-                "UTF-8",
-                "RSA2")) {
+                map, AliPayApiConfigKit.getApiConfig(map.get("app_id")).getAlipayPublicKey(), "UTF-8", "RSA2")) {
             // TODO 请在这里加上商户的业务逻辑程序代码 异步通知可能出现订单重复通知 需要做去重处理
 
             // 校验是否有这个订单
-            PayOrderAll payOrderAll =
-                    payOrderAllService.getOne(
-                            Wrappers.<PayOrderAll>lambdaQuery()
-                                    .eq(PayOrderAll::getOrderNo, map.get("out_trade_no")));
+            PayOrderAll payOrderAll = payOrderAllService.getOne(
+                    Wrappers.<PayOrderAll>lambdaQuery().eq(PayOrderAll::getOrderNo, map.get("out_trade_no")));
 
             OrderUtil.checkOrder(payOrderAll, map);
         }

@@ -33,31 +33,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 指纹 登录 */
-public class FingerprintAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class FingerprintAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final FingerprintUserDetailsService fingerprintUserDetailsService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public FingerprintAuthenticationProvider(
-            FingerprintUserDetailsService fingerprintUserDetailsService) {
+    public FingerprintAuthenticationProvider(FingerprintUserDetailsService fingerprintUserDetailsService) {
         this.fingerprintUserDetailsService = fingerprintUserDetailsService;
     }
 
     @Override
-    public Authentication authenticate(Authentication authentication)
-            throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
                 FingerprintAuthenticationToken.class,
                 authentication,
-                () ->
-                        messages.getMessage(
-                                "AccountVerificationAuthenticationProvider.onlySupports",
-                                "Only AccountVerificationAuthenticationProvider is supported"));
+                () -> messages.getMessage(
+                        "AccountVerificationAuthenticationProvider.onlySupports",
+                        "Only AccountVerificationAuthenticationProvider is supported"));
 
-        FingerprintAuthenticationToken unAuthenticationToken =
-                (FingerprintAuthenticationToken) authentication;
+        FingerprintAuthenticationToken unAuthenticationToken = (FingerprintAuthenticationToken) authentication;
 
         String username = unAuthenticationToken.getName();
         String passowrd = (String) unAuthenticationToken.getCredentials();
@@ -76,8 +71,7 @@ public class FingerprintAuthenticationProvider
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Assert.notNull(
-                fingerprintUserDetailsService, "fingerprintUserDetailsService must not be null");
+        Assert.notNull(fingerprintUserDetailsService, "fingerprintUserDetailsService must not be null");
     }
 
     @Override
@@ -92,11 +86,9 @@ public class FingerprintAuthenticationProvider
      * @param user the user
      * @return the authentication
      */
-    protected Authentication createSuccessAuthentication(
-            Authentication authentication, UserDetails user) {
+    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
 
-        Collection<? extends GrantedAuthority> authorities =
-                authoritiesMapper.mapAuthorities(user.getAuthorities());
+        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
         FingerprintAuthenticationToken authenticationToken =
                 new FingerprintAuthenticationToken(user, null, authorities);
         authenticationToken.setDetails(authentication.getDetails());

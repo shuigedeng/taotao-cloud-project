@@ -57,43 +57,21 @@ public interface GenConstants {
 
     /** 数据库数字类型 */
     String[] COLUMNTYPE_NUMBER = {
-        "tinyint",
-        "smallint",
-        "mediumint",
-        "int",
-        "number",
-        "integer",
-        "bigint",
-        "float",
-        "double",
-        "decimal"
+        "tinyint", "smallint", "mediumint", "int", "number", "integer", "bigint", "float", "double", "decimal"
     };
 
     /** BO对象 不需要添加字段 */
-    String[] COLUMNNAME_NOT_ADD = {
-        "create_by", "create_time", "del_flag", "update_by", "update_time", "version"
-    };
+    String[] COLUMNNAME_NOT_ADD = {"create_by", "create_time", "del_flag", "update_by", "update_time", "version"};
 
     /** BO对象 不需要编辑字段 */
-    String[] COLUMNNAME_NOT_EDIT = {
-        "create_by", "create_time", "del_flag", "update_by", "update_time", "version"
-    };
+    String[] COLUMNNAME_NOT_EDIT = {"create_by", "create_time", "del_flag", "update_by", "update_time", "version"};
 
     /** VO对象 不需要返回字段 */
-    String[] COLUMNNAME_NOT_LIST = {
-        "create_by", "create_time", "del_flag", "update_by", "update_time", "version"
-    };
+    String[] COLUMNNAME_NOT_LIST = {"create_by", "create_time", "del_flag", "update_by", "update_time", "version"};
 
     /** BO对象 不需要查询字段 */
     String[] COLUMNNAME_NOT_QUERY = {
-        "id",
-        "create_by",
-        "create_time",
-        "del_flag",
-        "update_by",
-        "update_time",
-        "remark",
-        "version"
+        "id", "create_by", "create_time", "del_flag", "update_by", "update_time", "remark", "version"
     };
 
     /** Entity基类字段 */

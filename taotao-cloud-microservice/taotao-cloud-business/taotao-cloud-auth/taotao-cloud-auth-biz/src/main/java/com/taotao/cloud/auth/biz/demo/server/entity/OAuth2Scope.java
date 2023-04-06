@@ -64,12 +64,7 @@ public class OAuth2Scope extends BaseSysEntity {
             usage = CacheConcurrencyStrategy.READ_WRITE,
             region = OAuth2Constants.REGION_OAUTH2_AUTHORITY)
     @ManyToMany(
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.DETACH,
-                CascadeType.REMOVE,
-                CascadeType.MERGE
-            },
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REMOVE, CascadeType.MERGE},
             fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(

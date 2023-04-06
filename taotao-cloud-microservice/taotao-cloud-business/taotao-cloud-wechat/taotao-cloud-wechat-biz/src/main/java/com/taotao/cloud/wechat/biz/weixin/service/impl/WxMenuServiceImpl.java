@@ -48,12 +48,10 @@ public class WxMenuServiceImpl extends ServiceImpl<WxMenuMapper, WxMenu> impleme
     @Override
     public String getWxMenuButton() {
         // 查出一级菜单
-        List<WxMenu> listWxMenu =
-                baseMapper.selectList(
-                        Wrappers.<WxMenu>query()
-                                .lambda()
-                                .eq(WxMenu::getParentId, CommonConstants.PARENT_ID)
-                                .orderByAsc(WxMenu::getSort));
+        List<WxMenu> listWxMenu = baseMapper.selectList(Wrappers.<WxMenu>query()
+                .lambda()
+                .eq(WxMenu::getParentId, CommonConstants.PARENT_ID)
+                .orderByAsc(WxMenu::getSort));
         Menu menu = new Menu();
         List<MenuButton> listMenuButton = new ArrayList<>();
         MenuButton menuButton;
@@ -69,12 +67,10 @@ public class WxMenuServiceImpl extends ServiceImpl<WxMenuMapper, WxMenu> impleme
                     setButtonValue(menuButton, wxMenu);
                 } else { // 有二级菜单
                     // 查出二级菜单
-                    List<WxMenu> listWxMenu1 =
-                            baseMapper.selectList(
-                                    Wrappers.<WxMenu>query()
-                                            .lambda()
-                                            .eq(WxMenu::getParentId, wxMenu.getId())
-                                            .orderByAsc(WxMenu::getSort));
+                    List<WxMenu> listWxMenu1 = baseMapper.selectList(Wrappers.<WxMenu>query()
+                            .lambda()
+                            .eq(WxMenu::getParentId, wxMenu.getId())
+                            .orderByAsc(WxMenu::getSort));
                     subButtons = new ArrayList<>();
                     for (WxMenu wxMenu1 : listWxMenu1) {
                         subButton = new MenuButton();

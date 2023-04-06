@@ -39,14 +39,16 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
 
     protected LimitService limitService;
 
-    @Autowired private DeduplicationHolder deduplicationHolder;
+    @Autowired
+    private DeduplicationHolder deduplicationHolder;
 
     @PostConstruct
     private void init() {
         deduplicationHolder.putService(deduplicationType, this);
     }
 
-    @Autowired private LogUtils logUtils;
+    @Autowired
+    private LogUtils logUtils;
 
     @Override
     public void deduplication(DeduplicationParam param) {
@@ -57,12 +59,11 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
         // 剔除符合去重条件的用户
         if (CollUtil.isNotEmpty(filterReceiver)) {
             taskInfo.getReceiver().removeAll(filterReceiver);
-            logUtils.print(
-                    AnchorInfo.builder()
-                            .businessId(taskInfo.getBusinessId())
-                            .ids(filterReceiver)
-                            .state(param.getAnchorState().getCode())
-                            .build());
+            logUtils.print(AnchorInfo.builder()
+                    .businessId(taskInfo.getBusinessId())
+                    .ids(filterReceiver)
+                    .state(param.getAnchorState().getCode())
+                    .build());
         }
     }
 

@@ -37,7 +37,8 @@ import lombok.*;
 @Schema(description = "角色查询对象")
 public class RoleQueryVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 5126530068827085130L;
+    @Serial
+    private static final long serialVersionUID = 5126530068827085130L;
 
     @Schema(description = "id")
     private Long id;

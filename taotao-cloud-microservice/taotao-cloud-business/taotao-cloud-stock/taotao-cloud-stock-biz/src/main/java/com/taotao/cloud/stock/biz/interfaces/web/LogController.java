@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/log")
 public class LogController {
 
-    @Autowired private LogQueryService logQueryService;
+    @Autowired
+    private LogQueryService logQueryService;
 
     /** 列表 */
     @ApiOperation("分页查询日志")

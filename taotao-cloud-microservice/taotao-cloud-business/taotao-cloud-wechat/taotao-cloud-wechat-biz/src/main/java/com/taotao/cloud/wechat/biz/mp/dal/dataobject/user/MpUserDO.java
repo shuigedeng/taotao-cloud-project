@@ -45,7 +45,8 @@ import lombok.*;
 public class MpUserDO extends BaseDO {
 
     /** 编号 */
-    @TableId private Long id;
+    @TableId
+    private Long id;
     /** 粉丝标识 */
     private String openid;
     /**

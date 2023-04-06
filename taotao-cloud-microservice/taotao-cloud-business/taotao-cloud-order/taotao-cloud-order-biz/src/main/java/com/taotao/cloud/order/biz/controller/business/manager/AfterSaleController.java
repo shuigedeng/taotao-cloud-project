@@ -99,8 +99,7 @@ public class AfterSaleController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/refund/{afterSaleSn}")
     public Result<Boolean> refund(
-            @NotNull(message = "请选择售后单") @PathVariable String afterSaleSn,
-            @RequestParam String remark) {
+            @NotNull(message = "请选择售后单") @PathVariable String afterSaleSn, @RequestParam String remark) {
         return Result.success(afterSaleService.refund(afterSaleSn, remark));
     }
 
@@ -113,8 +112,7 @@ public class AfterSaleController {
             @NotNull(message = "请审核") String serviceStatus,
             String remark,
             BigDecimal actualRefundPrice) {
-        return Result.success(
-                afterSaleService.review(afterSaleSn, serviceStatus, remark, actualRefundPrice));
+        return Result.success(afterSaleService.review(afterSaleSn, serviceStatus, remark, actualRefundPrice));
     }
 
     @Operation(summary = "获取商家售后收件地址", description = "获取商家售后收件地址")

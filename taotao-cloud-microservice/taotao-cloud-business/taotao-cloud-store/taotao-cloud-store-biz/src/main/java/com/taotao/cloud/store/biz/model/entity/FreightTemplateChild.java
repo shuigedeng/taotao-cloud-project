@@ -58,24 +58,16 @@ public class FreightTemplateChild extends BaseSuperEntity<FreightTemplateChild, 
     @Column(name = "freight_template_id", columnDefinition = "bigint not null comment '店铺模板ID'")
     private Long freightTemplateId;
 
-    @Column(
-            name = "first_company",
-            columnDefinition = "decimal(10,2) not null default 0 comment '首重/首件'")
+    @Column(name = "first_company", columnDefinition = "decimal(10,2) not null default 0 comment '首重/首件'")
     private BigDecimal firstCompany;
 
-    @Column(
-            name = "first_price",
-            columnDefinition = "decimal(10,2) not null default 0 comment '运费'")
+    @Column(name = "first_price", columnDefinition = "decimal(10,2) not null default 0 comment '运费'")
     private BigDecimal firstPrice;
 
-    @Column(
-            name = "continued_company",
-            columnDefinition = "decimal(10,2) not null default 0 comment '续重/续件'")
+    @Column(name = "continued_company", columnDefinition = "decimal(10,2) not null default 0 comment '续重/续件'")
     private BigDecimal continuedCompany;
 
-    @Column(
-            name = "continued_price",
-            columnDefinition = "decimal(10,2) not null default 0 comment '续费'")
+    @Column(name = "continued_price", columnDefinition = "decimal(10,2) not null default 0 comment '续费'")
     private BigDecimal continuedPrice;
 
     @Column(name = "area", columnDefinition = "varchar(32) not null comment '地址，示例参数：上海,江苏,浙江'")

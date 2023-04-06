@@ -31,8 +31,11 @@ import org.springframework.stereotype.Component;
 /** 商家token生成 */
 @Component
 public class StoreTokenGenerate extends AbstractTokenGenerate<Member> {
-    @Autowired private IFeignStoreApi storeService;
-    @Autowired private TokenUtil tokenUtil;
+    @Autowired
+    private IFeignStoreApi storeService;
+
+    @Autowired
+    private TokenUtil tokenUtil;
 
     @Override
     public Token createToken(Member member, Boolean longTerm) {

@@ -30,11 +30,11 @@ import org.springframework.stereotype.Service;
 
 /** 流程可见 */
 @Service
-public class FlowEngineVisibleServiceImpl
-        extends ServiceImpl<FlowEngineVisibleMapper, FlowEngineVisibleEntity>
+public class FlowEngineVisibleServiceImpl extends ServiceImpl<FlowEngineVisibleMapper, FlowEngineVisibleEntity>
         implements FlowEngineVisibleService {
 
-    @Autowired private ServiceAllUtil serviceUtil;
+    @Autowired
+    private ServiceAllUtil serviceUtil;
 
     @Override
     public List<FlowEngineVisibleEntity> getList(String flowId) {
@@ -52,8 +52,7 @@ public class FlowEngineVisibleServiceImpl
         List<String> userList = new ArrayList<>();
         userList.add(userId);
         List<UserRelationEntity> list = serviceUtil.getListByUserIdAll(userList);
-        List<String> userRelationList =
-                list.stream().map(u -> u.getObjectId()).collect(Collectors.toList());
+        List<String> userRelationList = list.stream().map(u -> u.getObjectId()).collect(Collectors.toList());
         userRelationList.add(userId);
         QueryWrapper<FlowEngineVisibleEntity> wrapper = new QueryWrapper<>();
         wrapper.lambda().in(FlowEngineVisibleEntity::getOperatorId, userRelationList);

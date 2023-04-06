@@ -35,13 +35,13 @@ import org.springframework.stereotype.Service;
  * @since 2020-07-29
  */
 @Service
-public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig>
-        implements ISysConfigService {
+public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig> implements ISysConfigService {
 
     /** 是否启用缓存 true: 表示将使用内存缓存， 将部分系统配置项 或 商户应用/服务商信息进行缓存并读取 false: 直接查询DB * */
     public static boolean IS_USE_CACHE = false;
 
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** 数据库application配置参数 * */
     private static MutablePair<String, DBApplicationConfig> APPLICATION_CONFIG =
@@ -55,8 +55,7 @@ public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig>
         }
 
         if (APPLICATION_CONFIG.getLeft().equalsIgnoreCase(groupKey)) {
-            APPLICATION_CONFIG.right =
-                    this.selectByGroupKey(groupKey).toJavaObject(DBApplicationConfig.class);
+            APPLICATION_CONFIG.right = this.selectByGroupKey(groupKey).toJavaObject(DBApplicationConfig.class);
         }
     }
 
@@ -66,8 +65,7 @@ public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig>
 
         // 查询DB
         if (!IS_USE_CACHE) {
-            return this.selectByGroupKey(APPLICATION_CONFIG.getLeft())
-                    .toJavaObject(DBApplicationConfig.class);
+            return this.selectByGroupKey(APPLICATION_CONFIG.getLeft()).toJavaObject(DBApplicationConfig.class);
         }
 
         // 缓存数据
@@ -81,10 +79,9 @@ public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig>
     public JSONObject selectByGroupKey(String groupKey) {
 
         JSONObject result = new JSONObject();
-        list(
-                        SysConfig.gw()
-                                .select(SysConfig::getConfigKey, SysConfig::getConfigVal)
-                                .eq(SysConfig::getGroupKey, groupKey))
+        list(SysConfig.gw()
+                        .select(SysConfig::getConfigKey, SysConfig::getConfigVal)
+                        .eq(SysConfig::getGroupKey, groupKey))
                 .stream()
                 .forEach(item -> result.put(item.getConfigKey(), item.getConfigVal()));
         return result;

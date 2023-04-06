@@ -53,9 +53,7 @@ public interface MpUserConvert {
     default MpUserDO convert(MpAccountDO account, WxMpUser wxMpUser) {
         MpUserDO user = convert(wxMpUser);
         user.setSubscribeStatus(
-                wxMpUser.getSubscribe()
-                        ? CommonStatusEnum.ENABLE.getStatus()
-                        : CommonStatusEnum.DISABLE.getStatus());
+                wxMpUser.getSubscribe() ? CommonStatusEnum.ENABLE.getStatus() : CommonStatusEnum.DISABLE.getStatus());
         user.setSubscribeTime(LocalDateTimeUtil.of(wxMpUser.getSubscribeTime() * 1000L));
         if (account != null) {
             user.setAccountId(account.getId());

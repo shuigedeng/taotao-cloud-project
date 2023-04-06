@@ -78,23 +78,17 @@ public class VoucherPayService {
             throw new PayFailureException("储值卡支付参数错误");
         }
         // 判断有效期
-        boolean timeCheck =
-                vouchers.stream()
-                        .allMatch(
-                                voucher ->
-                                        LocalDateTimeUtil.between(
-                                                LocalDateTime.now(),
-                                                voucher.getStartTime(),
-                                                voucher.getEndTime()));
+        boolean timeCheck = vouchers.stream()
+                .allMatch(voucher ->
+                        LocalDateTimeUtil.between(LocalDateTime.now(), voucher.getStartTime(), voucher.getEndTime()));
         if (!timeCheck) {
             throw new PayFailureException("储值卡不再有效期内");
         }
         // 金额是否满足
-        BigDecimal amount =
-                vouchers.stream()
-                        .map(Voucher::getBalance)
-                        .reduce(BigDecimal::add)
-                        .orElse(BigDecimal.ZERO);
+        BigDecimal amount = vouchers.stream()
+                .map(Voucher::getBalance)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
         if (BigDecimalUtil.compareTo(amount, payModeParam.getAmount()) < 0) {
             throw new PayFailureException("储值卡余额不足");
         }
@@ -116,13 +110,12 @@ public class VoucherPayService {
 
             BigDecimal balance = voucher.getBalance();
             // 日志
-            VoucherLog voucherLog =
-                    new VoucherLog()
-                            .setPaymentId(payment.getId())
-                            .setBusinessId(payment.getBusinessId())
-                            .setType(VoucherCode.LOG_PAY)
-                            .setVoucherId(voucher.getId())
-                            .setVoucherNo(voucher.getCardNo());
+            VoucherLog voucherLog = new VoucherLog()
+                    .setPaymentId(payment.getId())
+                    .setBusinessId(payment.getBusinessId())
+                    .setType(VoucherCode.LOG_PAY)
+                    .setVoucherId(voucher.getId())
+                    .setVoucherNo(voucher.getCardNo());
 
             // 待支付额大于储值卡余额. 全扣光
             if (BigDecimalUtil.compareTo(amount, balance) == 1) {
@@ -142,8 +135,7 @@ public class VoucherPayService {
     /** 取消支付 */
     public void close(Long paymentId) {
         // 查找支付记录日志
-        List<VoucherLog> voucherLogs =
-                voucherLogManager.findByPaymentIdAndType(paymentId, VoucherCode.LOG_PAY);
+        List<VoucherLog> voucherLogs = voucherLogManager.findByPaymentIdAndType(paymentId, VoucherCode.LOG_PAY);
         // 查出关联的储值卡
         Map<Long, VoucherLog> voucherLogMap =
                 voucherLogs.stream().collect(Collectors.toMap(VoucherLog::getVoucherId, o -> o));
@@ -153,14 +145,13 @@ public class VoucherPayService {
         for (Voucher voucher : vouchers) {
             VoucherLog voucherLog = voucherLogMap.get(voucher.getId());
             voucher.setBalance(voucher.getBalance().add(voucherLog.getAmount()));
-            VoucherLog log =
-                    new VoucherLog()
-                            .setAmount(voucherLog.getAmount())
-                            .setPaymentId(paymentId)
-                            .setBusinessId(voucherLog.getBusinessId())
-                            .setVoucherId(voucher.getId())
-                            .setVoucherNo(voucher.getCardNo())
-                            .setType(VoucherCode.LOG_CLOSE);
+            VoucherLog log = new VoucherLog()
+                    .setAmount(voucherLog.getAmount())
+                    .setPaymentId(paymentId)
+                    .setBusinessId(voucherLog.getBusinessId())
+                    .setVoucherId(voucher.getId())
+                    .setVoucherNo(voucher.getCardNo())
+                    .setType(VoucherCode.LOG_CLOSE);
             logs.add(log);
         }
         voucherManager.updateAllById(vouchers);
@@ -170,24 +161,20 @@ public class VoucherPayService {
     /** 退款 退到使用的第一个卡上 */
     public void refund(Long paymentId, BigDecimal amount) {
         VoucherPayment voucherPayment =
-                voucherPaymentManager
-                        .findByPaymentId(paymentId)
-                        .orElseThrow(() -> new BizException("储值卡支付记录不存在"));
+                voucherPaymentManager.findByPaymentId(paymentId).orElseThrow(() -> new BizException("储值卡支付记录不存在"));
 
         Long voucherId = Long.valueOf(voucherPayment.getVoucherIds().split(",")[0]);
-        Voucher voucher =
-                voucherManager.findById(voucherId).orElseThrow(DataNotExistException::new);
+        Voucher voucher = voucherManager.findById(voucherId).orElseThrow(DataNotExistException::new);
 
         voucher.setBalance(voucher.getBalance().add(amount));
 
-        VoucherLog log =
-                new VoucherLog()
-                        .setAmount(amount)
-                        .setPaymentId(paymentId)
-                        .setBusinessId(voucherPayment.getBusinessId())
-                        .setVoucherId(voucher.getId())
-                        .setVoucherNo(voucher.getCardNo())
-                        .setType(VoucherCode.LOG_REFUND);
+        VoucherLog log = new VoucherLog()
+                .setAmount(amount)
+                .setPaymentId(paymentId)
+                .setBusinessId(voucherPayment.getBusinessId())
+                .setVoucherId(voucher.getId())
+                .setVoucherNo(voucher.getCardNo())
+                .setType(VoucherCode.LOG_REFUND);
         voucherManager.updateById(voucher);
         voucherLogManager.save(log);
     }

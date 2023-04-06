@@ -36,9 +36,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/role")
 public class RoleController {
 
-    @Autowired private RoleQueryService roleQueryService;
+    @Autowired
+    private RoleQueryService roleQueryService;
 
-    @Autowired private RoleApplicationService roleApplicationService;
+    @Autowired
+    private RoleApplicationService roleApplicationService;
 
     /** 角色分页查询 */
     @ApiOperation("角色分页查询")

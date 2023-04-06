@@ -45,7 +45,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleManagerController {
 
     /** 文章 */
-    @Autowired private ArticleService articleService;
+    @Autowired
+    private ArticleService articleService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
@@ -78,8 +79,7 @@ public class ArticleManagerController {
     @Operation(summary = "修改文章")
     @PutMapping(value = "update/{id}", consumes = "application/json", produces = "application/json")
     public Result<Article> update(
-            @RequestBody Article article,
-            @Parameter(description = "文章ID") @PathVariable("id") String id) {
+            @RequestBody Article article, @Parameter(description = "文章ID") @PathVariable("id") String id) {
         article.setId(id);
         return Result.success(articleService.updateArticle(article));
     }

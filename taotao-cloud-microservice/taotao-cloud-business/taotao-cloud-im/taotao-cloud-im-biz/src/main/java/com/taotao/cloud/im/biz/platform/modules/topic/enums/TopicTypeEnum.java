@@ -32,7 +32,10 @@ public enum TopicTypeEnum {
     VIDEO("VIDEO", "视频"),
     ;
 
-    @EnumValue @JsonValue private String code;
+    @EnumValue
+    @JsonValue
+    private String code;
+
     private String name;
 
     TopicTypeEnum(String code, String name) {

@@ -40,7 +40,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper, PurchaseQuoted>
         implements IPurchaseQuotedService {
 
-    @Autowired private IPurchaseQuotedItemService purchaseQuotedItemService;
+    @Autowired
+    private IPurchaseQuotedItemService purchaseQuotedItemService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -70,8 +71,7 @@ public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper
         PurchaseQuoted purchaseQuoted = this.baseMapper.selectById(id);
         BeanUtils.copyProperties(purchaseQuoted, purchaseQuotedVO);
         // 获取报价单子内容
-        purchaseQuotedVO.setPurchaseQuotedItems(
-                purchaseQuotedItemService.purchaseQuotedItemList(id));
+        purchaseQuotedVO.setPurchaseQuotedItems(purchaseQuotedItemService.purchaseQuotedItemList(id));
         return purchaseQuotedVO;
     }
 }

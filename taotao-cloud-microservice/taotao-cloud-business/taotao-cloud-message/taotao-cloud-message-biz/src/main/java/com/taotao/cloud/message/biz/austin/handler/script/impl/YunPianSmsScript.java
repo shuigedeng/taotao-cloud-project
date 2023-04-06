@@ -51,30 +51,25 @@ import org.springframework.stereotype.Component;
 @Component("YunPianSmsScript")
 public class YunPianSmsScript implements SmsScript {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     @Override
     public List<SmsRecord> send(SmsParam smsParam) {
 
         try {
-            YunPianSmsAccount account =
-                    Objects.nonNull(smsParam.getSendAccountId())
-                            ? accountUtils.getAccountById(
-                                    smsParam.getSendAccountId(), YunPianSmsAccount.class)
-                            : accountUtils.getSmsAccountByScriptName(
-                                    smsParam.getScriptName(), YunPianSmsAccount.class);
+            YunPianSmsAccount account = Objects.nonNull(smsParam.getSendAccountId())
+                    ? accountUtils.getAccountById(smsParam.getSendAccountId(), YunPianSmsAccount.class)
+                    : accountUtils.getSmsAccountByScriptName(smsParam.getScriptName(), YunPianSmsAccount.class);
             Map<String, Object> params = assembleParam(smsParam, account);
 
-            String result =
-                    HttpRequest.post(account.getUrl())
-                            .header(
-                                    Header.CONTENT_TYPE.getValue(),
-                                    CommonConstant.CONTENT_TYPE_FORM_URL_ENCODE)
-                            .header(Header.ACCEPT.getValue(), CommonConstant.CONTENT_TYPE_JSON)
-                            .form(params)
-                            .timeout(2000)
-                            .execute()
-                            .body();
+            String result = HttpRequest.post(account.getUrl())
+                    .header(Header.CONTENT_TYPE.getValue(), CommonConstant.CONTENT_TYPE_FORM_URL_ENCODE)
+                    .header(Header.ACCEPT.getValue(), CommonConstant.CONTENT_TYPE_JSON)
+                    .form(params)
+                    .timeout(2000)
+                    .execute()
+                    .body();
             YunPianSendResult yunPianSendResult = JSON.parseObject(result, YunPianSendResult.class);
             return assembleSmsRecord(smsParam, yunPianSendResult, account);
         } catch (Exception e) {
@@ -117,27 +112,20 @@ public class YunPianSmsScript implements SmsScript {
         List<SmsRecord> smsRecordList = new ArrayList<>();
 
         for (YunPianSendResult.DataDTO datum : response.getData()) {
-            SmsRecord smsRecord =
-                    SmsRecord.builder()
-                            .sendDate(
-                                    Integer.valueOf(
-                                            DateUtil.format(
-                                                    new Date(), DatePattern.PURE_DATE_PATTERN)))
-                            .messageTemplateId(smsParam.getMessageTemplateId())
-                            .phone(Long.valueOf(datum.getMobile()))
-                            .supplierId(account.getSupplierId())
-                            .supplierName(account.getSupplierName())
-                            .msgContent(smsParam.getContent())
-                            .seriesId(datum.getSid())
-                            .chargingNum(Math.toIntExact(datum.getCount()))
-                            .status(
-                                    0 == datum.getCode()
-                                            ? SmsStatus.SEND_SUCCESS.getCode()
-                                            : SmsStatus.SEND_FAIL.getCode())
-                            .reportContent(datum.getMsg())
-                            .created(Math.toIntExact(DateUtil.currentSeconds()))
-                            .updated(Math.toIntExact(DateUtil.currentSeconds()))
-                            .build();
+            SmsRecord smsRecord = SmsRecord.builder()
+                    .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
+                    .messageTemplateId(smsParam.getMessageTemplateId())
+                    .phone(Long.valueOf(datum.getMobile()))
+                    .supplierId(account.getSupplierId())
+                    .supplierName(account.getSupplierName())
+                    .msgContent(smsParam.getContent())
+                    .seriesId(datum.getSid())
+                    .chargingNum(Math.toIntExact(datum.getCount()))
+                    .status(0 == datum.getCode() ? SmsStatus.SEND_SUCCESS.getCode() : SmsStatus.SEND_FAIL.getCode())
+                    .reportContent(datum.getMsg())
+                    .created(Math.toIntExact(DateUtil.currentSeconds()))
+                    .updated(Math.toIntExact(DateUtil.currentSeconds()))
+                    .build();
 
             smsRecordList.add(smsRecord);
         }

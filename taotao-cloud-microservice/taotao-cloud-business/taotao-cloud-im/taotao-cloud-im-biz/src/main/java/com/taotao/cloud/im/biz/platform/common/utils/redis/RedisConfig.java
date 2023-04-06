@@ -29,7 +29,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableCaching
 public class RedisConfig {
 
-    @Autowired private RedisTemplate redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Bean
     public RedisTemplate<String, Object> stringSerializerRedisTemplate() {

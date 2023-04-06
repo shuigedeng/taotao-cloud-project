@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/message/store")
 public class StoreMessageManagerController {
 
-    @Autowired private IFeignStoreMessageApi storeMessageService;
+    @Autowired
+    private IFeignStoreMessageApi storeMessageService;
 
     @Operation(summary = "多条件分页获取", description = "多条件分页获取")
     @RequestLogger

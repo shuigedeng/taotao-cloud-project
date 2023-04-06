@@ -45,8 +45,7 @@ public class FlowTaskOperatorRecordServiceImpl
     }
 
     @Override
-    public List<FlowTaskOperatorRecordEntity> getRecordList(
-            String taskId, List<Integer> handleStatus) {
+    public List<FlowTaskOperatorRecordEntity> getRecordList(String taskId, List<Integer> handleStatus) {
         QueryWrapper<FlowTaskOperatorRecordEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskId, taskId);
         if (handleStatus.size() > 0) {
@@ -88,26 +87,19 @@ public class FlowTaskOperatorRecordServiceImpl
             UpdateWrapper<FlowTaskOperatorRecordEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().in(FlowTaskOperatorRecordEntity::getTaskNodeId, taskNodeId);
             updateWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskId, taskId);
-            updateWrapper
-                    .lambda()
-                    .set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
+            updateWrapper.lambda().set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
             this.update(updateWrapper);
         }
     }
 
     @Override
-    public FlowTaskOperatorRecordEntity getInfo(
-            String taskId, String taskNodeId, String taskOperatorId) {
+    public FlowTaskOperatorRecordEntity getInfo(String taskId, String taskNodeId, String taskOperatorId) {
         QueryWrapper<FlowTaskOperatorRecordEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskId, taskId);
         queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskNodeId, taskNodeId);
         queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskOperatorId, taskOperatorId);
-        queryWrapper
-                .lambda()
-                .eq(FlowTaskOperatorRecordEntity::getStatus, FlowNodeEnum.FreeApprover.getCode());
-        queryWrapper
-                .lambda()
-                .eq(FlowTaskOperatorRecordEntity::getHandleStatus, FlowRecordEnum.audit.getCode());
+        queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getStatus, FlowNodeEnum.FreeApprover.getCode());
+        queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getHandleStatus, FlowRecordEnum.audit.getCode());
         return this.getOne(queryWrapper);
     }
 
@@ -116,9 +108,7 @@ public class FlowTaskOperatorRecordServiceImpl
         if (idAll.size() > 0) {
             UpdateWrapper<FlowTaskOperatorRecordEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().in(FlowTaskOperatorRecordEntity::getId, idAll);
-            updateWrapper
-                    .lambda()
-                    .set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
+            updateWrapper.lambda().set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
             this.update(updateWrapper);
         }
     }
@@ -127,9 +117,7 @@ public class FlowTaskOperatorRecordServiceImpl
     public void update(String taskId) {
         UpdateWrapper<FlowTaskOperatorRecordEntity> updateWrapper = new UpdateWrapper<>();
         updateWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskId, taskId);
-        updateWrapper
-                .lambda()
-                .set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
+        updateWrapper.lambda().set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
         this.update(updateWrapper);
     }
 }

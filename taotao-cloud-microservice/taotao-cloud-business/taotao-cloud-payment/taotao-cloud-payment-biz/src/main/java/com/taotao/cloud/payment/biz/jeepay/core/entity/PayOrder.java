@@ -67,7 +67,8 @@ public class PayOrder extends BaseModel implements Serializable {
     public static final byte DIVISION_STATE_FINISH = 3; // 分账任务已结束(不体现状态)
 
     /** 支付订单号 */
-    @TableId private String payOrderId;
+    @TableId
+    private String payOrderId;
 
     /** 商户号 */
     private String mchNo;

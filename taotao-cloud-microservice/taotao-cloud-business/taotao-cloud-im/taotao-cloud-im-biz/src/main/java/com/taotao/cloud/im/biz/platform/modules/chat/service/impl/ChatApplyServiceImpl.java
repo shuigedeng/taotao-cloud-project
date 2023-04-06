@@ -52,13 +52,18 @@ import org.springframework.util.CollectionUtils;
 @Service("chatApplyService")
 public class ChatApplyServiceImpl extends BaseServiceImpl<ChatApply> implements ChatApplyService {
 
-    @Resource private ChatApplyDao chatApplyDao;
+    @Resource
+    private ChatApplyDao chatApplyDao;
 
-    @Lazy @Resource private ChatUserService chatUserService;
+    @Lazy
+    @Resource
+    private ChatUserService chatUserService;
 
-    @Resource private ChatPushService chatPushService;
+    @Resource
+    private ChatPushService chatPushService;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Autowired
     public void setBaseDao() {
@@ -76,13 +81,12 @@ public class ChatApplyServiceImpl extends BaseServiceImpl<ChatApply> implements 
         Date now = DateUtil.date();
         Long fromId = ShiroUtils.getUserId();
         // 查询
-        ChatApply query =
-                new ChatApply()
-                        .setFromId(fromId)
-                        .setToId(acceptId)
-                        .setTargetId(acceptId)
-                        .setApplyType(ApplyTypeEnum.FRIEND)
-                        .setApplyStatus(ApplyStatusEnum.NONE);
+        ChatApply query = new ChatApply()
+                .setFromId(fromId)
+                .setToId(acceptId)
+                .setTargetId(acceptId)
+                .setApplyType(ApplyTypeEnum.FRIEND)
+                .setApplyStatus(ApplyStatusEnum.NONE);
         ChatApply apply = this.queryOne(query);
         query.setApplySource(source).setReason(reason).setCreateTime(now);
         if (apply == null) {
@@ -100,12 +104,11 @@ public class ChatApplyServiceImpl extends BaseServiceImpl<ChatApply> implements 
         Date now = DateUtil.date();
         Long fromId = ShiroUtils.getUserId();
         // 查询
-        ChatApply query =
-                new ChatApply()
-                        .setFromId(fromId)
-                        .setToId(acceptId)
-                        .setApplyType(ApplyTypeEnum.GROUP)
-                        .setApplyStatus(ApplyStatusEnum.NONE);
+        ChatApply query = new ChatApply()
+                .setFromId(fromId)
+                .setToId(acceptId)
+                .setApplyType(ApplyTypeEnum.GROUP)
+                .setApplyStatus(ApplyStatusEnum.NONE);
         ChatApply apply = this.queryOne(query);
         query.setReason("申请加入群聊").setApplySource(ApplySourceEnum.SCAN).setCreateTime(now);
         if (apply == null) {
@@ -126,31 +129,28 @@ public class ChatApplyServiceImpl extends BaseServiceImpl<ChatApply> implements 
         // 查询
         List<ChatApply> dataList = queryList(new ChatApply().setToId(userId));
         // 获取申请人
-        List<Long> fromList =
-                dataList.stream().map(ChatApply::getFromId).collect(Collectors.toList());
+        List<Long> fromList = dataList.stream().map(ChatApply::getFromId).collect(Collectors.toList());
         // 集合判空
         if (CollectionUtils.isEmpty(fromList)) {
             return new PageInfo();
         }
         // 查询申请人
-        HashMap<Long, ChatUser> dataMap =
-                chatUserService.getByIds(fromList).stream()
-                        .collect(
-                                HashMap::new,
-                                (x, y) -> {
-                                    x.put(y.getUserId(), y);
-                                },
-                                HashMap::putAll);
+        HashMap<Long, ChatUser> dataMap = chatUserService.getByIds(fromList).stream()
+                .collect(
+                        HashMap::new,
+                        (x, y) -> {
+                            x.put(y.getUserId(), y);
+                        },
+                        HashMap::putAll);
         // 转换
         List<ApplyVo02> dictList = new ArrayList<>();
         for (ChatApply apply : dataList) {
             ChatUser chatUser = ChatUser.initUser(dataMap.get(apply.getFromId()));
-            ApplyVo02 applyVo =
-                    BeanUtil.toBean(apply, ApplyVo02.class)
-                            .setApplyId(apply.getId())
-                            .setUserId(apply.getFromId())
-                            .setPortrait(chatUser.getPortrait())
-                            .setNickName(chatUser.getNickName());
+            ApplyVo02 applyVo = BeanUtil.toBean(apply, ApplyVo02.class)
+                    .setApplyId(apply.getId())
+                    .setUserId(apply.getFromId())
+                    .setPortrait(chatUser.getPortrait())
+                    .setNickName(chatUser.getNickName());
             dictList.add(applyVo);
         }
         return getPageInfo(dictList, dataList);

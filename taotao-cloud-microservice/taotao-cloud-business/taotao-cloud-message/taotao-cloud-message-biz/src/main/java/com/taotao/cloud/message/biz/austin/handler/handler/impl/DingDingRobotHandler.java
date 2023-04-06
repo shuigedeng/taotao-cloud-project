@@ -53,7 +53,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DingDingRobotHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     public DingDingRobotHandler() {
         channelCode = ChannelType.DING_DING_ROBOT.getCode();
@@ -63,13 +64,10 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
     public boolean handler(TaskInfo taskInfo) {
         try {
             DingDingRobotAccount account =
-                    accountUtils.getAccountById(
-                            taskInfo.getSendAccount(), DingDingRobotAccount.class);
+                    accountUtils.getAccountById(taskInfo.getSendAccount(), DingDingRobotAccount.class);
             DingDingRobotParam dingDingRobotParam = assembleParam(taskInfo);
-            String httpResult =
-                    HttpUtil.post(assembleParamUrl(account), JSON.toJSONString(dingDingRobotParam));
-            DingDingRobotResult dingDingRobotResult =
-                    JSON.parseObject(httpResult, DingDingRobotResult.class);
+            String httpResult = HttpUtil.post(assembleParamUrl(account), JSON.toJSONString(dingDingRobotParam));
+            DingDingRobotResult dingDingRobotResult = JSON.parseObject(httpResult, DingDingRobotResult.class);
             if (dingDingRobotResult.getErrCode() == 0) {
                 return true;
             }
@@ -98,55 +96,46 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
         }
 
         // 消息类型以及内容相关
-        DingDingRobotContentModel contentModel =
-                (DingDingRobotContentModel) taskInfo.getContentModel();
-        DingDingRobotParam param =
-                DingDingRobotParam.builder()
-                        .at(atVo)
-                        .msgtype(
-                                SendMessageType.getDingDingRobotTypeByCode(
-                                        contentModel.getSendType()))
-                        .build();
+        DingDingRobotContentModel contentModel = (DingDingRobotContentModel) taskInfo.getContentModel();
+        DingDingRobotParam param = DingDingRobotParam.builder()
+                .at(atVo)
+                .msgtype(SendMessageType.getDingDingRobotTypeByCode(contentModel.getSendType()))
+                .build();
         if (SendMessageType.TEXT.getCode().equals(contentModel.getSendType())) {
-            param.setText(
-                    DingDingRobotParam.TextVO.builder().content(contentModel.getContent()).build());
+            param.setText(DingDingRobotParam.TextVO.builder()
+                    .content(contentModel.getContent())
+                    .build());
         }
         if (SendMessageType.MARKDOWN.getCode().equals(contentModel.getSendType())) {
-            param.setMarkdown(
-                    DingDingRobotParam.MarkdownVO.builder()
-                            .title(contentModel.getTitle())
-                            .text(contentModel.getContent())
-                            .build());
+            param.setMarkdown(DingDingRobotParam.MarkdownVO.builder()
+                    .title(contentModel.getTitle())
+                    .text(contentModel.getContent())
+                    .build());
         }
         if (SendMessageType.LINK.getCode().equals(contentModel.getSendType())) {
-            param.setLink(
-                    DingDingRobotParam.LinkVO.builder()
-                            .title(contentModel.getTitle())
-                            .text(contentModel.getContent())
-                            .messageUrl(contentModel.getUrl())
-                            .picUrl(contentModel.getPicUrl())
-                            .build());
+            param.setLink(DingDingRobotParam.LinkVO.builder()
+                    .title(contentModel.getTitle())
+                    .text(contentModel.getContent())
+                    .messageUrl(contentModel.getUrl())
+                    .picUrl(contentModel.getPicUrl())
+                    .build());
         }
         if (SendMessageType.NEWS.getCode().equals(contentModel.getSendType())) {
             List<DingDingRobotParam.FeedCardVO.LinksVO> linksVoS =
-                    JSON.parseArray(
-                            contentModel.getFeedCards(),
-                            DingDingRobotParam.FeedCardVO.LinksVO.class);
+                    JSON.parseArray(contentModel.getFeedCards(), DingDingRobotParam.FeedCardVO.LinksVO.class);
             DingDingRobotParam.FeedCardVO feedCardVO =
                     DingDingRobotParam.FeedCardVO.builder().links(linksVoS).build();
             param.setFeedCard(feedCardVO);
         }
         if (SendMessageType.ACTION_CARD.getCode().equals(contentModel.getSendType())) {
             List<DingDingRobotParam.ActionCardVO.BtnsVO> btnsVoS =
-                    JSON.parseArray(
-                            contentModel.getBtns(), DingDingRobotParam.ActionCardVO.BtnsVO.class);
-            DingDingRobotParam.ActionCardVO actionCardVO =
-                    DingDingRobotParam.ActionCardVO.builder()
-                            .title(contentModel.getTitle())
-                            .text(contentModel.getContent())
-                            .btnOrientation(contentModel.getBtnOrientation())
-                            .btns(btnsVoS)
-                            .build();
+                    JSON.parseArray(contentModel.getBtns(), DingDingRobotParam.ActionCardVO.BtnsVO.class);
+            DingDingRobotParam.ActionCardVO actionCardVO = DingDingRobotParam.ActionCardVO.builder()
+                    .title(contentModel.getTitle())
+                    .text(contentModel.getContent())
+                    .btnOrientation(contentModel.getBtnOrientation())
+                    .btns(btnsVoS)
+                    .build();
             param.setActionCard(actionCardVO);
         }
 
@@ -177,14 +166,10 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
         try {
             String stringToSign = currentTimeMillis + String.valueOf(StrUtil.C_LF) + secret;
             Mac mac = Mac.getInstance(CommonConstant.HMAC_SHA256_ENCRYPTION_ALGO);
-            mac.init(
-                    new SecretKeySpec(
-                            secret.getBytes(CommonConstant.CHARSET_NAME),
-                            CommonConstant.HMAC_SHA256_ENCRYPTION_ALGO));
+            mac.init(new SecretKeySpec(
+                    secret.getBytes(CommonConstant.CHARSET_NAME), CommonConstant.HMAC_SHA256_ENCRYPTION_ALGO));
             byte[] signData = mac.doFinal(stringToSign.getBytes(CommonConstant.CHARSET_NAME));
-            sign =
-                    URLEncoder.encode(
-                            new String(Base64.encodeBase64(signData)), CommonConstant.CHARSET_NAME);
+            sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)), CommonConstant.CHARSET_NAME);
         } catch (Exception e) {
             log.error("DingDingHandler#assembleSign fail!:{}", Throwables.getStackTraceAsString(e));
         }

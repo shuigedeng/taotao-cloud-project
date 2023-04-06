@@ -35,17 +35,14 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2021-08-19
  */
 @Service
-public class PayOrderDivisionRecordService
-        extends ServiceImpl<PayOrderDivisionRecordMapper, PayOrderDivisionRecord> {
+public class PayOrderDivisionRecordService extends ServiceImpl<PayOrderDivisionRecordMapper, PayOrderDivisionRecord> {
 
-    @Autowired private PayOrderMapper payOrderMapper;
+    @Autowired
+    private PayOrderMapper payOrderMapper;
 
     /** 更新分账记录为分账成功* */
     public void updateRecordSuccessOrFail(
-            List<PayOrderDivisionRecord> records,
-            Byte state,
-            String channelBatchOrderId,
-            String channelRespResult) {
+            List<PayOrderDivisionRecord> records, Byte state, String channelBatchOrderId, String channelRespResult) {
 
         if (records == null || records.isEmpty()) {
             return;
@@ -73,12 +70,11 @@ public class PayOrderDivisionRecordService
         updateRecord.setDivisionState(PayOrder.DIVISION_STATE_WAIT_TASK);
 
         // 更新订单
-        int payOrderUpdateRow =
-                payOrderMapper.update(
-                        updateRecord,
-                        PayOrder.gw()
-                                .eq(PayOrder::getPayOrderId, payOrderId)
-                                .eq(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_FINISH));
+        int payOrderUpdateRow = payOrderMapper.update(
+                updateRecord,
+                PayOrder.gw()
+                        .eq(PayOrder::getPayOrderId, payOrderId)
+                        .eq(PayOrder::getDivisionState, PayOrder.DIVISION_STATE_FINISH));
 
         if (payOrderUpdateRow <= 0) {
             throw new BizException("更新订单分账状态失败");
@@ -88,14 +84,11 @@ public class PayOrderDivisionRecordService
         updateRecordByDiv.setState(PayOrderDivisionRecord.STATE_WAIT); // 待分账
         updateRecordByDiv.setChannelRespResult("");
         updateRecordByDiv.setChannelBatchOrderId("");
-        boolean recordUpdateFlag =
-                update(
-                        updateRecordByDiv,
-                        PayOrderDivisionRecord.gw()
-                                .eq(PayOrderDivisionRecord::getPayOrderId, payOrderId)
-                                .eq(
-                                        PayOrderDivisionRecord::getState,
-                                        PayOrderDivisionRecord.STATE_FAIL));
+        boolean recordUpdateFlag = update(
+                updateRecordByDiv,
+                PayOrderDivisionRecord.gw()
+                        .eq(PayOrderDivisionRecord::getPayOrderId, payOrderId)
+                        .eq(PayOrderDivisionRecord::getState, PayOrderDivisionRecord.STATE_FAIL));
 
         if (!recordUpdateFlag) {
             throw new BizException("更新分账记录状态失败");

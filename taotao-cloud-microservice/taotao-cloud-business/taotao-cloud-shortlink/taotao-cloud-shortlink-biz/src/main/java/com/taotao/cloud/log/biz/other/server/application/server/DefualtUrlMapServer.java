@@ -32,9 +32,11 @@ public class DefualtUrlMapServer implements UrlMapServer {
     private static final String LONG2SHORTURL = "长链接转短连接";
     private static final String SHORT2LONGURL = "根据短链接获取长链接";
 
-    @Autowired UrlMapHandler urlMaphandler;
+    @Autowired
+    UrlMapHandler urlMaphandler;
 
-    @Autowired StatisticsHandler statisticsHandler;
+    @Autowired
+    StatisticsHandler statisticsHandler;
 
     @Override
     public ResponseEntity getShortUrl(UrlRequest longUrlReq) {

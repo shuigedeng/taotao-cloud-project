@@ -43,8 +43,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Lion Li
  */
 @Slf4j
-public class SysUserImportListener extends AnalysisEventListener<UserImport>
-        implements ExcelListener<UserImport> {
+public class SysUserImportListener extends AnalysisEventListener<UserImport> implements ExcelListener<UserImport> {
 
     private final IUserService userService;
 

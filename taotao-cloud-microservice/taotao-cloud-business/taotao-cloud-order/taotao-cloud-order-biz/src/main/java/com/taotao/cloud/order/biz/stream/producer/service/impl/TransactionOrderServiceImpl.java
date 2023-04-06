@@ -45,15 +45,14 @@ public class TransactionOrderServiceImpl implements ITransactionOrderService {
     @StreamListener(Sink.INPUT)
     @Override
     public void testTransaction() {
-        Order order =
-                Order.builder()
-                        .id(1L)
-                        .goodsId(100L)
-                        .goodsPrice(BigDecimal.valueOf(100.00))
-                        .tradeId(100L)
-                        .number(2)
-                        .createTime(LocalDateTime.now())
-                        .build();
+        Order order = Order.builder()
+                .id(1L)
+                .goodsId(100L)
+                .goodsPrice(BigDecimal.valueOf(100.00))
+                .tradeId(100L)
+                .number(2)
+                .createTime(LocalDateTime.now())
+                .build();
 
         // 事务id
         String transactionId = UUID.randomUUID().toString();
@@ -72,15 +71,14 @@ public class TransactionOrderServiceImpl implements ITransactionOrderService {
     @Override
     public void testStreamTransaction() {
 
-        Order order =
-                Order.builder()
-                        .id(1L)
-                        .goodsId(100L)
-                        .goodsPrice(BigDecimal.valueOf(100.00))
-                        .tradeId(100L)
-                        .number(2)
-                        .createTime(LocalDateTime.now())
-                        .build();
+        Order order = Order.builder()
+                .id(1L)
+                .goodsId(100L)
+                .goodsPrice(BigDecimal.valueOf(100.00))
+                .tradeId(100L)
+                .number(2)
+                .createTime(LocalDateTime.now())
+                .build();
         // 事务id
         String transactionId = UUID.randomUUID().toString();
 

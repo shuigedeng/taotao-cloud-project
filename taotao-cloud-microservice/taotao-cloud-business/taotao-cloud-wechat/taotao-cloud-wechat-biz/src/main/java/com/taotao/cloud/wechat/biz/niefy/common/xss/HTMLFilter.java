@@ -50,19 +50,15 @@ public final class HTMLFilter {
     private static final Pattern P_COMMENT = Pattern.compile("^!--(.*)--$", REGEX_FLAGS_SI);
     private static final Pattern P_TAGS = Pattern.compile("<(.*?)>", Pattern.DOTALL);
     private static final Pattern P_END_TAG = Pattern.compile("^/([a-z0-9]+)", REGEX_FLAGS_SI);
-    private static final Pattern P_START_TAG =
-            Pattern.compile("^([a-z0-9]+)(.*?)(/?)$", REGEX_FLAGS_SI);
-    private static final Pattern P_QUOTED_ATTRIBUTES =
-            Pattern.compile("([a-z0-9]+)=([\"'])(.*?)\\2", REGEX_FLAGS_SI);
-    private static final Pattern P_UNQUOTED_ATTRIBUTES =
-            Pattern.compile("([a-z0-9]+)(=)([^\"\\s']+)", REGEX_FLAGS_SI);
+    private static final Pattern P_START_TAG = Pattern.compile("^([a-z0-9]+)(.*?)(/?)$", REGEX_FLAGS_SI);
+    private static final Pattern P_QUOTED_ATTRIBUTES = Pattern.compile("([a-z0-9]+)=([\"'])(.*?)\\2", REGEX_FLAGS_SI);
+    private static final Pattern P_UNQUOTED_ATTRIBUTES = Pattern.compile("([a-z0-9]+)(=)([^\"\\s']+)", REGEX_FLAGS_SI);
     private static final Pattern P_PROTOCOL = Pattern.compile("^([^:]+):", REGEX_FLAGS_SI);
     private static final Pattern P_ENTITY = Pattern.compile("&#(\\d+);?");
     private static final Pattern P_ENTITY_UNICODE = Pattern.compile("&#x([0-9a-f]+);?");
     private static final Pattern P_ENCODE = Pattern.compile("%([0-9a-f]{2});?");
     private static final Pattern P_VALID_ENTITIES = Pattern.compile("&([^&;]*)(?=(;|&|$))");
-    private static final Pattern P_VALID_QUOTES =
-            Pattern.compile("(>|^)([^<]+?)(<|$)", Pattern.DOTALL);
+    private static final Pattern P_VALID_QUOTES = Pattern.compile("(>|^)([^<]+?)(<|$)", Pattern.DOTALL);
     private static final Pattern P_END_ARROW = Pattern.compile("^>");
     private static final Pattern P_BODY_TO_END = Pattern.compile("<([^>]*?)(?=<|$)");
     private static final Pattern P_XML_CONTENT = Pattern.compile("(^|>)([^<]*?)(?=>)");
@@ -75,10 +71,8 @@ public final class HTMLFilter {
     private static final Pattern P_BOTH_ARROWS = Pattern.compile("<>");
 
     // @xxx could grow large... maybe use sesat's ReferenceMap
-    private static final ConcurrentMap<String, Pattern> P_REMOVE_PAIR_BLANKS =
-            new ConcurrentHashMap<>();
-    private static final ConcurrentMap<String, Pattern> P_REMOVE_SELF_BLANKS =
-            new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Pattern> P_REMOVE_PAIR_BLANKS = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Pattern> P_REMOVE_SELF_BLANKS = new ConcurrentHashMap<>();
 
     /** set of allowed html elements, along with allowed attributes for each element */
     private final Map<String, List<String>> vAllowed;
@@ -171,8 +165,7 @@ public final class HTMLFilter {
         assert conf.containsKey("vRemoveBlanks") : "configuration requires vRemoveBlanks";
         assert conf.containsKey("vAllowedEntities") : "configuration requires vAllowedEntities";
 
-        vAllowed =
-                Collections.unmodifiableMap((HashMap<String, List<String>>) conf.get("vAllowed"));
+        vAllowed = Collections.unmodifiableMap((HashMap<String, List<String>>) conf.get("vAllowed"));
         vSelfClosingTags = (String[]) conf.get("vSelfClosingTags");
         vNeedClosingTags = (String[]) conf.get("vNeedClosingTags");
         vDisallowed = (String[]) conf.get("vDisallowed");
@@ -182,8 +175,7 @@ public final class HTMLFilter {
         vAllowedEntities = (String[]) conf.get("vAllowedEntities");
         stripComment = conf.containsKey("stripComment") ? (Boolean) conf.get("stripComment") : true;
         encodeQuotes = conf.containsKey("encodeQuotes") ? (Boolean) conf.get("encodeQuotes") : true;
-        alwaysMakeTags =
-                conf.containsKey("alwaysMakeTags") ? (Boolean) conf.get("alwaysMakeTags") : true;
+        alwaysMakeTags = conf.containsKey("alwaysMakeTags") ? (Boolean) conf.get("alwaysMakeTags") : true;
     }
 
     private void reset() {
@@ -258,8 +250,7 @@ public final class HTMLFilter {
         final StringBuffer buf = new StringBuffer();
         if (m.find()) {
             final String match = m.group(1); // (.*?)
-            m.appendReplacement(
-                    buf, Matcher.quoteReplacement("<!--" + htmlSpecialChars(match) + "-->"));
+            m.appendReplacement(buf, Matcher.quoteReplacement("<!--" + htmlSpecialChars(match) + "-->"));
         }
         m.appendTail(buf);
 
@@ -321,8 +312,7 @@ public final class HTMLFilter {
         String result = s;
         for (String tag : vRemoveBlanks) {
             if (!P_REMOVE_PAIR_BLANKS.containsKey(tag)) {
-                P_REMOVE_PAIR_BLANKS.putIfAbsent(
-                        tag, Pattern.compile("<" + tag + "(\\s[^>]*)?></" + tag + ">"));
+                P_REMOVE_PAIR_BLANKS.putIfAbsent(tag, Pattern.compile("<" + tag + "(\\s[^>]*)?></" + tag + ">"));
             }
             result = regexReplace(P_REMOVE_PAIR_BLANKS.get(tag), "", result);
             if (!P_REMOVE_SELF_BLANKS.containsKey(tag)) {
@@ -334,8 +324,7 @@ public final class HTMLFilter {
         return result;
     }
 
-    private static String regexReplace(
-            final Pattern regexPattern, final String replacement, final String s) {
+    private static String regexReplace(final Pattern regexPattern, final String replacement, final String s) {
         Matcher m = regexPattern.matcher(s);
         return m.replaceAll(replacement);
     }
@@ -501,10 +490,7 @@ public final class HTMLFilter {
                 final String one = m.group(1); // (>|^)
                 final String two = m.group(2); // ([^<]+?)
                 final String three = m.group(3); // (<|$)
-                m.appendReplacement(
-                        buf,
-                        Matcher.quoteReplacement(
-                                one + regexReplace(P_QUOTE, "&quot;", two) + three));
+                m.appendReplacement(buf, Matcher.quoteReplacement(one + regexReplace(P_QUOTE, "&quot;", two) + three));
             }
             m.appendTail(buf);
             return buf.toString();

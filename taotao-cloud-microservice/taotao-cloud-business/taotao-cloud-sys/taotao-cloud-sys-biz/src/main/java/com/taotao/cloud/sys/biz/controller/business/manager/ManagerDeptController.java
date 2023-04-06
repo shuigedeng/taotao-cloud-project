@@ -48,8 +48,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys/manager/dept")
 @Tag(name = "管理端-部门管理API", description = "管理端-部门管理API")
 public class ManagerDeptController
-        extends BaseSuperController<
-                IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
+        extends BaseSuperController<IDeptService, Dept, Long, BaseQuery, DeptSaveDTO, DeptUpdateDTO, DeptQueryVO> {
 
     @Operation(summary = "获取部门树", description = "获取部门树")
     @RequestLogger

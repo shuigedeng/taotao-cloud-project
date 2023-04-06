@@ -43,11 +43,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ScheduledJobServiceImpl implements ScheduledJobService {
 
-    @Resource private ScheduledJobLogMapper scheduledJobLogMapper;
+    @Resource
+    private ScheduledJobLogMapper scheduledJobLogMapper;
 
-    @Resource private TaskManager taskManager;
+    @Resource
+    private TaskManager taskManager;
 
-    @Resource private ScheduledJobMapper scheduledJobMapper;
+    @Resource
+    private ScheduledJobMapper scheduledJobMapper;
 
     @Override
     public List<ScheduledJob> taskList() {
@@ -88,10 +91,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
         scheduledJobLogMapper.insert(scheduledJob);
 
         // 执行任务
-        String runType =
-                param.getPolicy() == 1
-                        ? TaskRunTypeConstant.USER_RUN
-                        : TaskRunTypeConstant.SYSTEM_RUN;
+        String runType = param.getPolicy() == 1 ? TaskRunTypeConstant.USER_RUN : TaskRunTypeConstant.SYSTEM_RUN;
 
         ScheduledTask scheduledTask = new ScheduledTask();
         BeanUtil.copyProperties(scheduledJob, scheduledTask);
@@ -126,10 +126,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
         scheduledJobLogMapper.updateById(scheduledJob);
 
         // 执行任务
-        String runType =
-                param.getPolicy() == 1
-                        ? TaskRunTypeConstant.USER_RUN
-                        : TaskRunTypeConstant.SYSTEM_RUN;
+        String runType = param.getPolicy() == 1 ? TaskRunTypeConstant.USER_RUN : TaskRunTypeConstant.SYSTEM_RUN;
 
         ScheduledTask scheduledTask = new ScheduledTask();
         BeanUtil.copyProperties(scheduledJob, scheduledTask);
@@ -209,8 +206,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
         TaskVo taskVo = new TaskVo();
         BeanUtils.copyProperties(scheduledJob, taskVo);
         List<String> nextExecution =
-                (List<String>)
-                        CronUtils.getNextExecution(scheduledJob.getCronExpression(), 8, true);
+                (List<String>) CronUtils.getNextExecution(scheduledJob.getCronExpression(), 8, true);
         taskVo.setNext(nextExecution);
         return taskVo;
     }

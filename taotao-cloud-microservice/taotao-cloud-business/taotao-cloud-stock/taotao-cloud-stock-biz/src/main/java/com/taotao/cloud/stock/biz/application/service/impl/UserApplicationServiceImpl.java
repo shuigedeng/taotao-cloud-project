@@ -31,31 +31,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserApplicationServiceImpl implements UserApplicationService {
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Autowired private TenantRepository tenantRepository;
+    @Autowired
+    private TenantRepository tenantRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(UserCommand userCommand) {
         List<RoleId> roleIdList = new ArrayList<>();
         if (userCommand.getRoleIdList() != null) {
-            userCommand
-                    .getRoleIdList()
-                    .forEach(
-                            roleId -> {
-                                roleIdList.add(new RoleId(roleId));
-                            });
+            userCommand.getRoleIdList().forEach(roleId -> {
+                roleIdList.add(new RoleId(roleId));
+            });
         }
         UserFactory userFactory = new UserFactory(userRepository);
-        User user =
-                userFactory.createUser(
-                        new Mobile(userCommand.getMobile()),
-                        new Email(userCommand.getEmail()),
-                        Password.create(Password.DEFAULT),
-                        new UserName(userCommand.getUserName()),
-                        roleIdList,
-                        new TenantId(TenantContext.getTenantId()));
+        User user = userFactory.createUser(
+                new Mobile(userCommand.getMobile()),
+                new Email(userCommand.getEmail()),
+                Password.create(Password.DEFAULT),
+                new UserName(userCommand.getUserName()),
+                roleIdList,
+                new TenantId(TenantContext.getTenantId()));
         userRepository.store(user);
     }
 
@@ -69,12 +67,10 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Transactional(rollbackFor = Exception.class)
     public void deleteBatch(List<String> ids) {
         List<UserId> userIds = new ArrayList<>();
-        ids.forEach(
-                id -> {
-                    userIds.add(new UserId(id));
-                });
-        UserUpdateSpecification userUpdateSpecification =
-                new UserUpdateSpecification(tenantRepository);
+        ids.forEach(id -> {
+            userIds.add(new UserId(id));
+        });
+        UserUpdateSpecification userUpdateSpecification = new UserUpdateSpecification(tenantRepository);
         for (UserId userId : userIds) {
             User user = userRepository.find(userId);
             userUpdateSpecification.isSatisfiedBy(user);
@@ -86,8 +82,7 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     @Transactional(rollbackFor = Exception.class)
     public void disable(String id) {
         User user = userRepository.find(new UserId(id));
-        UserUpdateSpecification userUpdateSpecification =
-                new UserUpdateSpecification(tenantRepository);
+        UserUpdateSpecification userUpdateSpecification = new UserUpdateSpecification(tenantRepository);
         userUpdateSpecification.isSatisfiedBy(user);
         user.disable();
         userRepository.store(user);

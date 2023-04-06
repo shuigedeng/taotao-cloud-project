@@ -58,14 +58,13 @@ public record AfterSalePriceDetailDTO(
         @Schema(description = "站点优惠券佣金") BigDecimal siteCouponCommission,
         // =========end platform coupon==========
 
-        @Schema(description = "流水金额(入账 出帐金额) = goodsPrice - discountPrice - couponPrice")
-                BigDecimal flowPrice,
-        @Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission")
-                BigDecimal billPrice,
+        @Schema(description = "流水金额(入账 出帐金额) = goodsPrice - discountPrice - couponPrice") BigDecimal flowPrice,
+        @Schema(description = "最终结算金额 = flowPrice - platFormCommission - distributionCommission") BigDecimal billPrice,
         @Schema(description = "参与的促销活动") List<BasePromotionsDTO> joinPromotion)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     public static class BasePromotionsDTO {}
 }

@@ -44,7 +44,6 @@ public class HerodotusAccountStatusChangeService implements AccountStatusChangeS
     @Override
     public void postRemoteProcess(String data, String originService, String destinationService) {
         ServiceContext.getInstance()
-                .publishEvent(
-                        new RemoteChangeUserStatusEvent(data, originService, destinationService));
+                .publishEvent(new RemoteChangeUserStatusEvent(data, originService, destinationService));
     }
 }

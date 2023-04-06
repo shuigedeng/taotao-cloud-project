@@ -38,32 +38,27 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
  * @author : gengwei.zheng
  * @date : 2022/11/8 14:57
  */
-public class HerodotusAuthorizationManager
-        implements AuthorizationManager<RequestAuthorizationContext> {
+public class HerodotusAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {
 
     private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationManager.class);
 
     private final HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
 
-    public HerodotusAuthorizationManager(
-            HerodotusSecurityMetadataSource herodotusSecurityMetadataSource) {
+    public HerodotusAuthorizationManager(HerodotusSecurityMetadataSource herodotusSecurityMetadataSource) {
         this.herodotusSecurityMetadataSource = herodotusSecurityMetadataSource;
     }
 
     @Override
-    public AuthorizationDecision check(
-            Supplier<Authentication> authentication, RequestAuthorizationContext object) {
+    public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
 
-        HerodotusConfigAttribute configAttribute =
-                herodotusSecurityMetadataSource.getAttributes(object);
+        HerodotusConfigAttribute configAttribute = herodotusSecurityMetadataSource.getAttributes(object);
         if (ObjectUtils.isEmpty(configAttribute)) {
             return new AuthorizationDecision(true);
         }
 
         WebExpressionAuthorizationManager webExpressionAuthorizationManager =
                 new WebExpressionAuthorizationManager(configAttribute.getAttribute());
-        AuthorizationDecision decision =
-                webExpressionAuthorizationManager.check(authentication, object);
+        AuthorizationDecision decision = webExpressionAuthorizationManager.check(authentication, object);
         log.debug(
                 "[Herodotus] |- Authorization decision for request [{}] is! [{}]",
                 object.getRequest().getRequestURI(),

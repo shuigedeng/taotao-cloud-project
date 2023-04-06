@@ -40,33 +40,27 @@ public interface ErrorCodeConstants {
     // ========== 流程模型 1-009-002-000 ==========
     ErrorCode MODEL_KEY_EXISTS = new ErrorCode(1009002000, "已经存在流程标识为【{}】的流程");
     ErrorCode MODEL_NOT_EXISTS = new ErrorCode(1009002001, "流程模型不存在");
-    ErrorCode MODEL_KEY_VALID =
-            new ErrorCode(1009002002, "流程标识格式不正确，需要以字母或下划线开头，后接任意字母、数字、中划线、下划线、句点！");
-    ErrorCode MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG =
-            new ErrorCode(1009002003, "部署流程失败，原因：流程表单未配置，请点击【修改流程】按钮进行配置");
+    ErrorCode MODEL_KEY_VALID = new ErrorCode(1009002002, "流程标识格式不正确，需要以字母或下划线开头，后接任意字母、数字、中划线、下划线、句点！");
+    ErrorCode MODEL_DEPLOY_FAIL_FORM_NOT_CONFIG = new ErrorCode(1009002003, "部署流程失败，原因：流程表单未配置，请点击【修改流程】按钮进行配置");
     ErrorCode MODEL_DEPLOY_FAIL_TASK_ASSIGN_RULE_NOT_CONFIG =
             new ErrorCode(1009002004, "部署流程失败，" + "原因：用户任务({})未配置分配规则，请点击【修改流程】按钮进行配置");
     ErrorCode MODEL_DEPLOY_FAIL_TASK_INFO_EQUALS = new ErrorCode(1009003005, "流程定义部署失败，原因：信息未发生变化");
 
     // ========== 流程定义 1-009-003-000 ==========
-    ErrorCode PROCESS_DEFINITION_KEY_NOT_MATCH =
-            new ErrorCode(1009003000, "流程定义的标识期望是({})，当前是({})，请修改 BPMN 流程图");
-    ErrorCode PROCESS_DEFINITION_NAME_NOT_MATCH =
-            new ErrorCode(1009003001, "流程定义的名字期望是({})，当前是({})，请修改 BPMN 流程图");
+    ErrorCode PROCESS_DEFINITION_KEY_NOT_MATCH = new ErrorCode(1009003000, "流程定义的标识期望是({})，当前是({})，请修改 BPMN 流程图");
+    ErrorCode PROCESS_DEFINITION_NAME_NOT_MATCH = new ErrorCode(1009003001, "流程定义的名字期望是({})，当前是({})，请修改 BPMN 流程图");
     ErrorCode PROCESS_DEFINITION_NOT_EXISTS = new ErrorCode(1009003002, "流程定义不存在");
     ErrorCode PROCESS_DEFINITION_IS_SUSPENDED = new ErrorCode(1009003003, "流程定义处于挂起状态");
     ErrorCode PROCESS_DEFINITION_BPMN_MODEL_NOT_EXISTS = new ErrorCode(1009003004, "流程定义的模型不存在");
 
     // ========== 流程实例 1-009-004-000 ==========
     ErrorCode PROCESS_INSTANCE_NOT_EXISTS = new ErrorCode(1009004000, "流程实例不存在");
-    ErrorCode PROCESS_INSTANCE_CANCEL_FAIL_NOT_EXISTS =
-            new ErrorCode(1009004001, "流程取消失败，流程不处于运行中");
+    ErrorCode PROCESS_INSTANCE_CANCEL_FAIL_NOT_EXISTS = new ErrorCode(1009004001, "流程取消失败，流程不处于运行中");
     ErrorCode PROCESS_INSTANCE_CANCEL_FAIL_NOT_SELF = new ErrorCode(1009004002, "流程取消失败，该流程不是你发起的");
 
     // ========== 流程任务 1-009-005-000 ==========
     ErrorCode TASK_COMPLETE_FAIL_NOT_EXISTS = new ErrorCode(1009005000, "审批任务失败，原因：该任务不处于未审批");
-    ErrorCode TASK_COMPLETE_FAIL_ASSIGN_NOT_SELF =
-            new ErrorCode(1009005001, "审批任务失败，原因：该任务的审批人不是你");
+    ErrorCode TASK_COMPLETE_FAIL_ASSIGN_NOT_SELF = new ErrorCode(1009005001, "审批任务失败，原因：该任务的审批人不是你");
 
     // ========== 流程任务分配规则 1-009-006-000 ==========
     ErrorCode TASK_ASSIGN_RULE_EXISTS = new ErrorCode(1009006000, "流程({}) 的任务({}) 已经存在分配规则");

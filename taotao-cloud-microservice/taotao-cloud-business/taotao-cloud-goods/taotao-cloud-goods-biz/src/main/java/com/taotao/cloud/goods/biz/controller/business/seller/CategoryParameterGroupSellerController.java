@@ -52,8 +52,7 @@ public class CategoryParameterGroupSellerController {
     @RequestLogger("查询某分类下绑定的参数信息")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
-    public Result<List<ParameterGroupVO>> getCategoryParam(
-            @PathVariable("categoryId") Long categoryId) {
+    public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable("categoryId") Long categoryId) {
         return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
     }
 }

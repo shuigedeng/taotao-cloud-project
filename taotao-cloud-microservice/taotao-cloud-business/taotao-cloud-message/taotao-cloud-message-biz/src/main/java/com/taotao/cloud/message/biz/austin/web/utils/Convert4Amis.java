@@ -67,16 +67,14 @@ public class Convert4Amis {
     private static final List<String> FLAT_FIELD_NAME = Arrays.asList("msgContent");
 
     /** 需要格式化为jsonArray返回的字段 (前端是一个JSONArray传递进来) */
-    private static final List<String> PARSE_JSON_ARRAY =
-            Arrays.asList("feedCards", "btns", "articles");
+    private static final List<String> PARSE_JSON_ARRAY = Arrays.asList("feedCards", "btns", "articles");
 
     /** (前端是一个JSONObject传递进来，返回一个JSONArray回去) */
     private static final List<String> PARSE_JSON_OBJ_TO_ARRAY =
             Arrays.asList("officialAccountParam", "miniProgramParam");
 
     /** 钉钉工作消息OA实际的映射 */
-    private static final List<String> DING_DING_OA_FIELD =
-            Arrays.asList("dingDingOaHead", "dingDingOaBody");
+    private static final List<String> DING_DING_OA_FIELD = Arrays.asList("dingDingOaHead", "dingDingOaBody");
     /** 钉钉OA字段名实际的映射 */
     private static final Map<String, String> DING_DING_OA_NAME_MAPPING = new HashMap<>();
 
@@ -124,9 +122,7 @@ public class Convert4Amis {
                     if (DING_DING_OA_FIELD.contains(key)) {
                         JSONObject object = jsonObject.getJSONObject(key);
                         for (String objKey : object.keySet()) {
-                            result.put(
-                                    DING_DING_OA_NAME_MAPPING.get(objKey),
-                                    object.getString(objKey));
+                            result.put(DING_DING_OA_NAME_MAPPING.get(objKey), object.getString(objKey));
                         }
                     } else if (PARSE_JSON_ARRAY.contains(key)) {
                         /** 部分字段是直接传入数组，把数组直接返回(用于回显) */
@@ -154,29 +150,26 @@ public class Convert4Amis {
      * @param allPrivateTemplate
      * @return
      */
-    public static CommonAmisVo getWxMpTemplateParam(
-            String wxTemplateId, List<WxMpTemplate> allPrivateTemplate) {
+    public static CommonAmisVo getWxMpTemplateParam(String wxTemplateId, List<WxMpTemplate> allPrivateTemplate) {
         CommonAmisVo officialAccountParam = null;
         for (WxMpTemplate wxMpTemplate : allPrivateTemplate) {
             if (wxTemplateId.equals(wxMpTemplate.getTemplateId())) {
                 String[] data = wxMpTemplate.getContent().split(StrUtil.LF);
-                officialAccountParam =
-                        CommonAmisVo.builder()
-                                .type("input-table")
-                                .name("officialAccountParam")
-                                .addable(true)
-                                .editable(true)
-                                .needConfirm(false)
-                                .build();
+                officialAccountParam = CommonAmisVo.builder()
+                        .type("input-table")
+                        .name("officialAccountParam")
+                        .addable(true)
+                        .editable(true)
+                        .needConfirm(false)
+                        .build();
                 List<CommonAmisVo.ColumnsDTO> columnsDtoS = new ArrayList<>();
                 for (String datum : data) {
                     String name = datum.substring(datum.indexOf("{{") + 2, datum.indexOf("."));
-                    CommonAmisVo.ColumnsDTO.ColumnsDTOBuilder dtoBuilder =
-                            CommonAmisVo.ColumnsDTO.builder()
-                                    .name(name)
-                                    .type("input-text")
-                                    .required(true)
-                                    .quickEdit(true);
+                    CommonAmisVo.ColumnsDTO.ColumnsDTOBuilder dtoBuilder = CommonAmisVo.ColumnsDTO.builder()
+                            .name(name)
+                            .type("input-text")
+                            .required(true)
+                            .quickEdit(true);
                     if (datum.contains("first")) {
                         dtoBuilder.label("名字");
                     } else if (datum.contains("remark")) {
@@ -207,24 +200,22 @@ public class Convert4Amis {
         }
 
         // placeholderList!=null  说明有占位符
-        CommonAmisVo testParam =
-                CommonAmisVo.builder()
-                        .type("input-table")
-                        .name("testParam")
-                        .addable(true)
-                        .editable(true)
-                        .needConfirm(false)
-                        .build();
+        CommonAmisVo testParam = CommonAmisVo.builder()
+                .type("input-table")
+                .name("testParam")
+                .addable(true)
+                .editable(true)
+                .needConfirm(false)
+                .build();
         List<CommonAmisVo.ColumnsDTO> columnsDtoS = new ArrayList<>();
         for (String param : placeholderList) {
-            CommonAmisVo.ColumnsDTO dto =
-                    CommonAmisVo.ColumnsDTO.builder()
-                            .name(param)
-                            .label(param)
-                            .type("input-text")
-                            .required(true)
-                            .quickEdit(true)
-                            .build();
+            CommonAmisVo.ColumnsDTO dto = CommonAmisVo.ColumnsDTO.builder()
+                    .name(param)
+                    .label(param)
+                    .type("input-text")
+                    .required(true)
+                    .quickEdit(true)
+                    .build();
             columnsDtoS.add(dto);
         }
         testParam.setColumns(columnsDtoS);
@@ -268,42 +259,35 @@ public class Convert4Amis {
                         }
                     }
                     break;
-                case '}':
-                    {
-                        if (modeTg == READ_TG) {
-                            modeTg = IGNORE_TG;
-                            sb.append(c);
-                            String str = sb.toString();
-                            if (StrUtil.isNotEmpty(str)) {
-                                placeholderList.add(str);
-                                textSofar = new StringBuilder();
-                            }
-                            sb = new StringBuilder();
-                        } else if (modeTg == START_TG) {
-                            modeTg = IGNORE_TG;
-                            sb = new StringBuilder();
+                case '}': {
+                    if (modeTg == READ_TG) {
+                        modeTg = IGNORE_TG;
+                        sb.append(c);
+                        String str = sb.toString();
+                        if (StrUtil.isNotEmpty(str)) {
+                            placeholderList.add(str);
+                            textSofar = new StringBuilder();
                         }
-                        break;
+                        sb = new StringBuilder();
+                    } else if (modeTg == START_TG) {
+                        modeTg = IGNORE_TG;
+                        sb = new StringBuilder();
                     }
-                default:
-                    {
-                        if (modeTg == READ_TG) {
-                            sb.append(c);
-                        } else if (modeTg == START_TG) {
-                            modeTg = IGNORE_TG;
-                            sb = new StringBuilder();
-                        }
+                    break;
+                }
+                default: {
+                    if (modeTg == READ_TG) {
+                        sb.append(c);
+                    } else if (modeTg == START_TG) {
+                        modeTg = IGNORE_TG;
+                        sb = new StringBuilder();
                     }
+                }
             }
         }
-        Set<String> result =
-                placeholderList.stream()
-                        .map(
-                                s ->
-                                        s.replaceAll("\\{", "")
-                                                .replaceAll("\\$", "")
-                                                .replaceAll("\\}", ""))
-                        .collect(Collectors.toSet());
+        Set<String> result = placeholderList.stream()
+                .map(s -> s.replaceAll("\\{", "").replaceAll("\\$", "").replaceAll("\\}", ""))
+                .collect(Collectors.toSet());
         return result;
     }
 
@@ -316,32 +300,29 @@ public class Convert4Amis {
      * @param templateList
      * @return
      */
-    public static CommonAmisVo getWxMaTemplateParam(
-            String wxTemplateId, List<TemplateInfo> templateList) {
+    public static CommonAmisVo getWxMaTemplateParam(String wxTemplateId, List<TemplateInfo> templateList) {
         CommonAmisVo officialAccountParam = null;
         for (TemplateInfo templateInfo : templateList) {
             if (wxTemplateId.equals(templateInfo.getPriTmplId())) {
                 String[] data = templateInfo.getContent().split(StrUtil.LF);
-                officialAccountParam =
-                        CommonAmisVo.builder()
-                                .type("input-table")
-                                .name("miniProgramParam")
-                                .addable(true)
-                                .editable(true)
-                                .needConfirm(false)
-                                .build();
+                officialAccountParam = CommonAmisVo.builder()
+                        .type("input-table")
+                        .name("miniProgramParam")
+                        .addable(true)
+                        .editable(true)
+                        .needConfirm(false)
+                        .build();
                 List<CommonAmisVo.ColumnsDTO> columnsDtoS = new ArrayList<>();
                 for (String datum : data) {
                     String name = datum.substring(datum.indexOf("{{") + 2, datum.indexOf("."));
                     String label = datum.split(":")[0];
-                    CommonAmisVo.ColumnsDTO columnsDTO =
-                            CommonAmisVo.ColumnsDTO.builder()
-                                    .name(name)
-                                    .type("input-text")
-                                    .required(true)
-                                    .quickEdit(true)
-                                    .label(label)
-                                    .build();
+                    CommonAmisVo.ColumnsDTO columnsDTO = CommonAmisVo.ColumnsDTO.builder()
+                            .name(name)
+                            .type("input-text")
+                            .required(true)
+                            .quickEdit(true)
+                            .label(label)
+                            .build();
                     columnsDtoS.add(columnsDTO);
                 }
                 officialAccountParam.setColumns(columnsDtoS);
@@ -358,49 +339,42 @@ public class Convert4Amis {
      * @return
      */
     public static CommonAmisVo getWxMpQrCode(String url, String id) {
-        CommonAmisVo image =
-                CommonAmisVo.builder()
-                        .type("static-image")
-                        .value(url)
-                        .originalSrc(url)
-                        .name("image")
-                        .label("扫描关注")
-                        .fixedSize(true)
-                        .fixedSizeClassName(url)
-                        .fixedSizeClassName("h-32")
-                        .build();
+        CommonAmisVo image = CommonAmisVo.builder()
+                .type("static-image")
+                .value(url)
+                .originalSrc(url)
+                .name("image")
+                .label("扫描关注")
+                .fixedSize(true)
+                .fixedSizeClassName(url)
+                .fixedSizeClassName("h-32")
+                .build();
 
-        String requestAdaptor =
-                "var openId = localStorage.getItem(\"openId\");\n"
-                        + "if (openId != null && openId != 'null' && openId != '' && openId !=="
-                        + " undefined) {\n"
-                        + "    alert(\"已登录，你的ID是：\" + openId);\n"
-                        + "    window.location.href = 'index.html';\n"
-                        + "    return api;\n"
-                        + "}";
+        String requestAdaptor = "var openId = localStorage.getItem(\"openId\");\n"
+                + "if (openId != null && openId != 'null' && openId != '' && openId !=="
+                + " undefined) {\n"
+                + "    alert(\"已登录，你的ID是：\" + openId);\n"
+                + "    window.location.href = 'index.html';\n"
+                + "    return api;\n"
+                + "}";
 
-        String adaptor =
-                "if (payload.data != 'NO_LOGIN' && payload.status == '0') {\n"
-                        + "    localStorage.setItem(\"openId\", payload.data.openId);\n"
-                        + "    alert(\"扫码已登录成功，你的ID是：\" + payload.data.openId);\n"
-                        + "    window.location.href = 'index.html';\n"
-                        + "}\n"
-                        + "return payload;";
+        String adaptor = "if (payload.data != 'NO_LOGIN' && payload.status == '0') {\n"
+                + "    localStorage.setItem(\"openId\", payload.data.openId);\n"
+                + "    alert(\"扫码已登录成功，你的ID是：\" + payload.data.openId);\n"
+                + "    window.location.href = 'index.html';\n"
+                + "}\n"
+                + "return payload;";
 
-        CommonAmisVo service =
-                CommonAmisVo.builder()
-                        .type("service")
-                        .api(
-                                CommonAmisVo.ApiDTO.builder()
-                                        .url(
-                                                "${ls:backend_url}/officialAccount/check/login?sceneId="
-                                                        + id)
-                                        .adaptor(adaptor)
-                                        .requestAdaptor(requestAdaptor)
-                                        .build())
-                        .interval(2000)
-                        .silentPolling(true)
-                        .build();
+        CommonAmisVo service = CommonAmisVo.builder()
+                .type("service")
+                .api(CommonAmisVo.ApiDTO.builder()
+                        .url("${ls:backend_url}/officialAccount/check/login?sceneId=" + id)
+                        .adaptor(adaptor)
+                        .requestAdaptor(requestAdaptor)
+                        .build())
+                .interval(2000)
+                .silentPolling(true)
+                .build();
 
         return CommonAmisVo.builder()
                 .type("form")
@@ -417,19 +391,18 @@ public class Convert4Amis {
      *
      * @return
      */
-    public static List<CommonAmisVo> getChannelAccountVo(
-            List<ChannelAccount> channelAccounts, Integer channelType) {
+    public static List<CommonAmisVo> getChannelAccountVo(List<ChannelAccount> channelAccounts, Integer channelType) {
         List<CommonAmisVo> result = new ArrayList<>();
         if (ChannelType.SMS.getCode().equals(channelType)) {
-            CommonAmisVo commonAmisVo = CommonAmisVo.builder().label("AUTO").value("0").build();
+            CommonAmisVo commonAmisVo =
+                    CommonAmisVo.builder().label("AUTO").value("0").build();
             result.add(commonAmisVo);
         }
         for (ChannelAccount channelAccount : channelAccounts) {
-            CommonAmisVo commonAmisVo =
-                    CommonAmisVo.builder()
-                            .label(channelAccount.getName())
-                            .value(String.valueOf(channelAccount.getId()))
-                            .build();
+            CommonAmisVo commonAmisVo = CommonAmisVo.builder()
+                    .label(channelAccount.getName())
+                    .value(String.valueOf(channelAccount.getId()))
+                    .build();
             result.add(commonAmisVo);
         }
         return result;
@@ -442,44 +415,35 @@ public class Convert4Amis {
      * @param businessId
      * @return
      */
-    public static EchartsVo getEchartsVo(
-            Map<Object, Object> anchorResult, String templateName, String businessId) {
+    public static EchartsVo getEchartsVo(Map<Object, Object> anchorResult, String templateName, String businessId) {
         List<String> xAxisList = new ArrayList<>();
         List<Integer> actualData = new ArrayList<>();
         if (CollUtil.isNotEmpty(anchorResult)) {
             anchorResult = MapUtil.sort(anchorResult);
             for (Map.Entry<Object, Object> entry : anchorResult.entrySet()) {
-                String description =
-                        AnchorState.getDescriptionByCode(
-                                Integer.valueOf(String.valueOf(entry.getKey())));
+                String description = AnchorState.getDescriptionByCode(Integer.valueOf(String.valueOf(entry.getKey())));
                 xAxisList.add(description);
                 actualData.add(Integer.valueOf(String.valueOf(entry.getValue())));
             }
         }
 
-        String title =
-                "【"
-                        + templateName
-                        + "】在"
-                        + DateUtil.format(
-                                DateUtil.parse(
-                                        String.valueOf(
-                                                TaskInfoUtils.getDateFromBusinessId(
-                                                        Long.valueOf(businessId)))),
-                                DatePattern.CHINESE_DATE_FORMATTER)
-                        + "的下发情况：";
+        String title = "【"
+                + templateName
+                + "】在"
+                + DateUtil.format(
+                        DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))),
+                        DatePattern.CHINESE_DATE_FORMATTER)
+                + "的下发情况：";
 
         return EchartsVo.builder()
                 .title(EchartsVo.TitleVO.builder().text(title).build())
                 .legend(EchartsVo.LegendVO.builder().data(Arrays.asList("人数")).build())
                 .xAxis(EchartsVo.XaxisVO.builder().data(xAxisList).build())
-                .series(
-                        Arrays.asList(
-                                EchartsVo.SeriesVO.builder()
-                                        .name("人数")
-                                        .type("bar")
-                                        .data(actualData)
-                                        .build()))
+                .series(Arrays.asList(EchartsVo.SeriesVO.builder()
+                        .name("人数")
+                        .type("bar")
+                        .data(actualData)
+                        .build()))
                 .yAxis(EchartsVo.YaxisVO.builder().build())
                 .tooltip(EchartsVo.TooltipVO.builder().build())
                 .build();
@@ -503,17 +467,13 @@ public class Convert4Amis {
                     itemsVO.setBusinessId(String.valueOf(smsRecord.getMessageTemplateId()));
                     itemsVO.setContent(smsRecord.getMsgContent());
                     itemsVO.setSendType(SmsStatus.getDescriptionByStatus(smsRecord.getStatus()));
-                    itemsVO.setSendTime(
-                            DateUtil.format(
-                                    new Date(Long.valueOf(smsRecord.getCreated() * 1000L)),
-                                    DatePattern.NORM_DATETIME_PATTERN));
+                    itemsVO.setSendTime(DateUtil.format(
+                            new Date(Long.valueOf(smsRecord.getCreated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
                 } else {
                     itemsVO.setReceiveType(SmsStatus.getDescriptionByStatus(smsRecord.getStatus()));
                     itemsVO.setReceiveContent(smsRecord.getReportContent());
-                    itemsVO.setReceiveTime(
-                            DateUtil.format(
-                                    new Date(Long.valueOf(smsRecord.getUpdated() * 1000L)),
-                                    DatePattern.NORM_DATETIME_PATTERN));
+                    itemsVO.setReceiveTime(DateUtil.format(
+                            new Date(Long.valueOf(smsRecord.getUpdated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
                 }
             }
             itemsVoS.add(itemsVO);

@@ -42,7 +42,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class VisualDevTableCre {
 
-    @Autowired private ServiceAllUtil serviceAllUtil;
+    @Autowired
+    private ServiceAllUtil serviceAllUtil;
 
     /**
      * 表单赋值tableName
@@ -59,23 +60,18 @@ public class VisualDevTableCre {
                     || FormEnum.tab.getMessage().equals(flowKey)
                     || FormEnum.collapse.getMessage().equals(flowKey)
                     || StrUtil.isEmpty(flowKey)) {
-                JSONArray childArray =
-                        jsonObject.getJSONObject("__config__").getJSONArray("children");
+                JSONArray childArray = jsonObject.getJSONObject("__config__").getJSONArray("children");
                 this.fieldsTableName(childArray, tableModels);
                 jsonObject.getJSONObject("__config__").put("children", childArray);
             } else if (FormEnum.table.getMessage().equals(flowKey)) {
                 JSONArray childrenList = new JSONArray();
-                JSONArray children =
-                        jsonObject.getJSONObject("__config__").getJSONArray("children");
+                JSONArray children = jsonObject.getJSONObject("__config__").getJSONArray("children");
                 String tableModel = "";
                 for (Object child : children) {
                     JSONObject childrenObject = (JSONObject) child;
                     this.fieldsModel(childrenObject, tableModels);
                     if (StrUtil.isEmpty(tableModel)) {
-                        tableModel =
-                                childrenObject
-                                        .getJSONObject("__config__")
-                                        .getString("relationTable");
+                        tableModel = childrenObject.getJSONObject("__config__").getString("relationTable");
                     }
                     childrenList.add(childrenObject);
                 }
@@ -96,42 +92,33 @@ public class VisualDevTableCre {
     private TableModel fieldsModel(JSONObject jsonObject, List<TableModel> tableModels) {
         String vModel = jsonObject.getString("__vModel__");
         String relationField =
-                StrUtil.isNotEmpty(jsonObject.getString("relationField"))
-                        ? jsonObject.getString("relationField")
-                        : "";
+                StrUtil.isNotEmpty(jsonObject.getString("relationField")) ? jsonObject.getString("relationField") : "";
         String flowKey = jsonObject.getJSONObject("__config__").getString("flowKey");
-        TableModel tableName =
-                tableModels.stream()
-                        .filter(t -> "1".equals(t.getTypeId()))
-                        .findFirst()
-                        .orElse(null);
+        TableModel tableName = tableModels.stream()
+                .filter(t -> "1".equals(t.getTypeId()))
+                .findFirst()
+                .orElse(null);
         if (tableName != null) {
             jsonObject.getJSONObject("__config__").put("tableName", tableName.getTable());
         }
         List<TableModel> childTableAll =
                 tableModels.stream().filter(t -> "0".equals(t.getTypeId())).toList();
-        TableModel childTableaa =
-                childTableAll.stream()
-                        .filter(
-                                t ->
-                                        t.getFields().stream()
-                                                .anyMatch(k -> k.getField().equals(vModel)))
-                        .findFirst()
-                        .orElse(null);
+        TableModel childTableaa = childTableAll.stream()
+                .filter(t -> t.getFields().stream().anyMatch(k -> k.getField().equals(vModel)))
+                .findFirst()
+                .orElse(null);
         if (childTableaa != null) {
             jsonObject.getJSONObject("__config__").put("relationTable", childTableaa.getTable());
         }
         if (FormEnum.relationFormAttr.getMessage().equals(flowKey)
                 || FormEnum.popupAttr.getMessage().equals(flowKey)) {
             if (StrUtil.isNotEmpty(relationField)) {
-                boolean isSubTable =
-                        jsonObject.getJSONObject("__config__").getBoolean("isSubTable") != null
-                                ? jsonObject.getJSONObject("__config__").getBoolean("isSubTable")
-                                : false;
+                boolean isSubTable = jsonObject.getJSONObject("__config__").getBoolean("isSubTable") != null
+                        ? jsonObject.getJSONObject("__config__").getBoolean("isSubTable")
+                        : false;
                 String model = relationField.split("_flowTable_")[0];
                 jsonObject.put(
-                        "relationField",
-                        model + "_flowTable_" + tableName.getTable() + (isSubTable ? "0" : "1"));
+                        "relationField", model + "_flowTable_" + tableName.getTable() + (isSubTable ? "0" : "1"));
             }
         }
         return childTableaa;
@@ -143,8 +130,7 @@ public class VisualDevTableCre {
      * @param formAllModel
      * @return
      */
-    public List<TableModel> tableList(
-            JSONArray jsonArray, List<FormAllModel> formAllModel, String table, String linkId)
+    public List<TableModel> tableList(JSONArray jsonArray, List<FormAllModel> formAllModel, String table, String linkId)
             throws WorkFlowException {
         List<TableModel> tableModelList = new LinkedList<>();
         Map<String, String> tableNameList = new HashMap<>();
@@ -162,10 +148,9 @@ public class VisualDevTableCre {
                     FormColumnTableModel fieLdsModel = model.getChildList();
                     List<DbTableFieldModel> tableList = new ArrayList<>();
                     String tableModel = fieLdsModel.getTableModel();
-                    List<FieLdsModel> fieldsList =
-                            fieLdsModel.getChildList().stream()
-                                    .map(t -> t.getFieLdsModel())
-                                    .collect(Collectors.toList());
+                    List<FieLdsModel> fieldsList = fieLdsModel.getChildList().stream()
+                            .map(t -> t.getFieLdsModel())
+                            .collect(Collectors.toList());
                     for (FieLdsModel tableFieLdsModel : fieldsList) {
                         this.fieldList(tableFieLdsModel, tableName, tableList);
                         tableNameAll.put(tableFieLdsModel.getVModel(), tableName);
@@ -200,8 +185,7 @@ public class VisualDevTableCre {
      * @param fieLdsModel
      * @param tableList
      */
-    private void fieldList(
-            FieLdsModel fieLdsModel, String table, List<DbTableFieldModel> tableList) {
+    private void fieldList(FieLdsModel fieLdsModel, String table, List<DbTableFieldModel> tableList) {
         String vmodel = fieLdsModel.getVModel();
         String lable = fieLdsModel.getConfig().getLabel();
         String flowKey = fieLdsModel.getConfig().getFlowKey();
@@ -296,10 +280,7 @@ public class VisualDevTableCre {
      * @return
      */
     private DbTableCreate dbTable(
-            String linkId,
-            String tableName,
-            List<DbTableFieldModel> tableFieldList,
-            boolean isforeign) {
+            String linkId, String tableName, List<DbTableFieldModel> tableFieldList, boolean isforeign) {
         DbTableCreate dbTable = new DbTableCreate();
         dbTable.setDbLinkId(linkId);
         dbTable.setNewTable(tableName);

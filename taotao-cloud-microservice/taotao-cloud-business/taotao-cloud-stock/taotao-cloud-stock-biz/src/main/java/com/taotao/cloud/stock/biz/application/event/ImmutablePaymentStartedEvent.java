@@ -18,8 +18,7 @@ package com.taotao.cloud.stock.biz.application.event;
 
 import com.egzosn.pay.paypal.bean.order.Payment;
 
-public class ImmutablePaymentStartedEvent extends PaymentEventSupport
-        implements PaymentStartedEvent {
+public class ImmutablePaymentStartedEvent extends PaymentEventSupport implements PaymentStartedEvent {
 
     public ImmutablePaymentStartedEvent(Payment payment) {
         super(payment);

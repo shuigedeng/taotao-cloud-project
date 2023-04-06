@@ -41,8 +41,7 @@ public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthent
 
     private boolean postOnly = true;
 
-    private static final Logger log =
-            LoggerFactory.getLogger(OAuth2FormLoginAuthenticationFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2FormLoginAuthenticationFilter.class);
 
     public OAuth2FormLoginAuthenticationFilter() {
         super();
@@ -53,12 +52,10 @@ public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthent
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !request.getMethod().equals("POST")) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
         OAuth2FormLoginAuthenticationToken authRequest = getAuthenticationToken(request);
 
@@ -82,16 +79,11 @@ public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthent
             password = "";
         }
 
-        if (StringUtils.isNotBlank(key)
-                && StringUtils.isNotBlank(username)
-                && StringUtils.isNotBlank(password)) {
+        if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
             byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
             username = SymmetricUtils.decrypt(username, byteKey);
             password = SymmetricUtils.decrypt(password, byteKey);
-            log.debug(
-                    "[Herodotus] |- Decrypt Username is : [{}], Password is : [{}]",
-                    username,
-                    password);
+            log.debug("[Herodotus] |- Decrypt Username is : [{}], Password is : [{}]", username, password);
         }
 
         return new OAuth2FormLoginAuthenticationToken(username, password);
@@ -114,9 +106,7 @@ public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthent
      */
     @Override
     protected void unsuccessfulAuthentication(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException failed)
+            HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
             throws IOException, ServletException {
         SecurityContextHolder.clearContext();
         getRememberMeServices().loginFail(request, response);

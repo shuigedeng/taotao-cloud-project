@@ -37,9 +37,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQReceiver {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private MchNotifyRecordService mchNotifyRecordService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private MchNotifyRecordService mchNotifyRecordService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     @Override
     public void receive(PayOrderMchNotifyMQ.MsgPayload payload) {
@@ -77,15 +82,13 @@ public class PayOrderMchNotifyMQReceiver implements PayOrderMchNotifyMQ.IMQRecei
 
             // 通知成功
             if ("SUCCESS".equalsIgnoreCase(res)) {
-                mchNotifyRecordService.updateNotifyResult(
-                        notifyId, MchNotifyRecord.STATE_SUCCESS, res);
+                mchNotifyRecordService.updateNotifyResult(notifyId, MchNotifyRecord.STATE_SUCCESS, res);
                 return;
             }
 
             // 通知次数 >= 最大通知次数时， 更新响应结果为异常， 不在继续延迟发送消息
             if (currentCount >= record.getNotifyCountLimit()) {
-                mchNotifyRecordService.updateNotifyResult(
-                        notifyId, MchNotifyRecord.STATE_FAIL, res);
+                mchNotifyRecordService.updateNotifyResult(notifyId, MchNotifyRecord.STATE_FAIL, res);
                 return;
             }
 

@@ -50,19 +50,15 @@ public class AliApp extends AlipayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         AlipayTradeAppPayRequest req = new AlipayTradeAppPayRequest();
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
         model.setOutTradeNo(payOrder.getPayOrderId());
         model.setSubject(payOrder.getSubject()); // 订单标题
         model.setBody(payOrder.getBody()); // 订单描述信息
-        model.setTotalAmount(
-                AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
-        model.setTimeExpire(
-                DateUtil.format(
-                        payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
+        model.setTotalAmount(AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
+        model.setTimeExpire(DateUtil.format(payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
         req.setNotifyUrl(getNotifyUrl()); // 设置异步通知地址
         req.setBizModel(model);
 
@@ -73,12 +69,11 @@ public class AliApp extends AlipayPaymentService {
 
         // sdk方式需自行拦截接口异常信息
         try {
-            payData =
-                    configContextQueryService
-                            .getAlipayClientWrapper(mchAppConfigContext)
-                            .getAlipayClient()
-                            .sdkExecute(req)
-                            .getBody();
+            payData = configContextQueryService
+                    .getAlipayClientWrapper(mchAppConfigContext)
+                    .getAlipayClient()
+                    .sdkExecute(req)
+                    .getBody();
         } catch (AlipayApiException e) {
             throw ChannelException.sysError(e.getMessage());
         }

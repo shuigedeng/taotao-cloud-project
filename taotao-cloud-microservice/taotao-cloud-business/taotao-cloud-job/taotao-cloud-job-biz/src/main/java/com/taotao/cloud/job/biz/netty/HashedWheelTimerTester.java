@@ -49,13 +49,12 @@ public class HashedWheelTimerTester {
         Thread.sleep(5000);
 
         // add a new timeout
-        Timeout tm =
-                timer.newTimeout(
-                        timeout -> {
-                            log.info("running task 2...");
-                        },
-                        5,
-                        TimeUnit.SECONDS);
+        Timeout tm = timer.newTimeout(
+                timeout -> {
+                    log.info("running task 2...");
+                },
+                5,
+                TimeUnit.SECONDS);
 
         // cancel
         if (!tm.isExpired()) {

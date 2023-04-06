@@ -83,8 +83,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
         buildCommand();
     }
 
-    public MediaTransferFlvByFFmpeg(
-            final String executable, CameraDto cameraDto, boolean enableLog) {
+    public MediaTransferFlvByFFmpeg(final String executable, CameraDto cameraDto, boolean enableLog) {
         command.add(executable);
         this.cameraDto = cameraDto;
         this.enableLog = enableLog;
@@ -227,130 +226,123 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 
     /** flv数据 */
     private void outputData() {
-        outputThread =
-                new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                Socket client = null;
-                                try {
-                                    client = tcpServer.accept();
-                                    DataInputStream input =
-                                            new DataInputStream(client.getInputStream());
+        outputThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Socket client = null;
+                try {
+                    client = tcpServer.accept();
+                    DataInputStream input = new DataInputStream(client.getInputStream());
 
-                                    byte[] buffer = new byte[1024];
-                                    int len = 0;
-                                    //					ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                                    while (running) {
+                    byte[] buffer = new byte[1024];
+                    int len = 0;
+                    //					ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    while (running) {
 
-                                        len = input.read(buffer);
-                                        if (len == -1) {
-                                            break;
-                                        }
+                        len = input.read(buffer);
+                        if (len == -1) {
+                            break;
+                        }
 
-                                        bos.write(buffer, 0, len);
+                        bos.write(buffer, 0, len);
 
-                                        if (header == null) {
-                                            header = bos.toByteArray();
-                                            //
-                                            //	System.out.println(HexUtil.encodeHexStr(header));
-                                            bos.reset();
-                                            continue;
-                                        }
+                        if (header == null) {
+                            header = bos.toByteArray();
+                            //
+                            //	System.out.println(HexUtil.encodeHexStr(header));
+                            bos.reset();
+                            continue;
+                        }
 
-                                        // 帧数据
-                                        byte[] data = bos.toByteArray();
-                                        bos.reset();
+                        // 帧数据
+                        byte[] data = bos.toByteArray();
+                        bos.reset();
 
-                                        // 发送到前端
-                                        sendFrameData(data);
-                                    }
+                        // 发送到前端
+                        sendFrameData(data);
+                    }
 
-                                    try {
-                                        client.close();
-                                    } catch (Exception e) {
-                                    }
-                                    try {
-                                        input.close();
-                                    } catch (Exception e) {
-                                    }
-                                    try {
-                                        bos.close();
-                                    } catch (Exception e) {
-                                    }
+                    try {
+                        client.close();
+                    } catch (Exception e) {
+                    }
+                    try {
+                        input.close();
+                    } catch (Exception e) {
+                    }
+                    try {
+                        bos.close();
+                    } catch (Exception e) {
+                    }
 
-                                    LogUtils.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
+                    LogUtils.info("关闭媒体流-ffmpeg，{} ", cameraDto.getUrl());
 
-                                } catch (SocketTimeoutException e1) {
-                                    //					e1.printStackTrace();
-                                    //					超时关闭
-                                } catch (IOException e) {
-                                    //					e.printStackTrace();
-                                } finally {
-                                    MediaService.cameras.remove(cameraDto.getMediaKey());
-                                    running = false;
-                                    process.destroy();
-                                    try {
-                                        if (null != client) {
-                                            client.close();
-                                        }
-                                    } catch (IOException e) {
-                                    }
-                                    try {
-                                        if (null != tcpServer) {
-                                            tcpServer.close();
-                                        }
-                                    } catch (IOException e) {
-                                    }
-                                }
-                            }
-                        });
+                } catch (SocketTimeoutException e1) {
+                    //					e1.printStackTrace();
+                    //					超时关闭
+                } catch (IOException e) {
+                    //					e.printStackTrace();
+                } finally {
+                    MediaService.cameras.remove(cameraDto.getMediaKey());
+                    running = false;
+                    process.destroy();
+                    try {
+                        if (null != client) {
+                            client.close();
+                        }
+                    } catch (IOException e) {
+                    }
+                    try {
+                        if (null != tcpServer) {
+                            tcpServer.close();
+                        }
+                    } catch (IOException e) {
+                    }
+                }
+            }
+        });
 
         outputThread.start();
     }
 
     /** 监听客户端 */
     public void listenClient() {
-        listenThread =
-                new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                while (running) {
-                                    hasClient();
-                                    try {
-                                        Thread.sleep(1000);
-                                    } catch (InterruptedException e) {
-                                    }
-                                }
-                            }
-                        });
+        listenThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (running) {
+                    hasClient();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        });
         listenThread.start();
     }
 
     /** 监听网络异常超时 */
     public void listenNetTimeout() {
-        Thread listenNetTimeoutThread =
-                new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                while (true) {
+        Thread listenNetTimeoutThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
 
-                                    if ((System.currentTimeMillis() - currentTimeMillis) > 15000) {
-                                        LogUtils.info("网络异常超时");
-                                        MediaService.cameras.remove(cameraDto.getMediaKey());
-                                        stopFFmpeg();
-                                        break;
-                                    }
+                    if ((System.currentTimeMillis() - currentTimeMillis) > 15000) {
+                        LogUtils.info("网络异常超时");
+                        MediaService.cameras.remove(cameraDto.getMediaKey());
+                        stopFFmpeg();
+                        break;
+                    }
 
-                                    try {
-                                        Thread.sleep(5000);
-                                    } catch (InterruptedException e) {
-                                    }
-                                }
-                            }
-                        });
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        });
         listenNetTimeoutThread.setDaemon(true);
         listenNetTimeoutThread.start();
     }
@@ -380,67 +372,63 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
             return;
         }
         // 处理InputStream的线程
-        inputThread =
-                new Thread() {
-                    @Override
-                    public void run() {
-                        BufferedReader in =
-                                new BufferedReader(new InputStreamReader(process.getInputStream()));
-                        String line = null;
-                        try {
-                            while (running) {
-                                line = in.readLine();
-                                currentTimeMillis = System.currentTimeMillis();
-                                if (line == null) {
-                                    break;
-                                }
-                                if (enableLog) {
-                                    LogUtils.info("output: " + line);
-                                }
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                running = false;
-                                in.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+        inputThread = new Thread() {
+            @Override
+            public void run() {
+                BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line = null;
+                try {
+                    while (running) {
+                        line = in.readLine();
+                        currentTimeMillis = System.currentTimeMillis();
+                        if (line == null) {
+                            break;
+                        }
+                        if (enableLog) {
+                            LogUtils.info("output: " + line);
                         }
                     }
-                };
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        running = false;
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
         // 处理ErrorStream的线程
-        errThread =
-                new Thread() {
-                    @Override
-                    public void run() {
-                        BufferedReader err =
-                                new BufferedReader(new InputStreamReader(process.getErrorStream()));
-                        String line = null;
-                        try {
-                            while (running) {
-                                line = err.readLine();
-                                currentTimeMillis = System.currentTimeMillis();
-                                if (line == null) {
-                                    break;
-                                }
-                                if (enableLog) {
-                                    LogUtils.info("ffmpeg: " + line);
-                                }
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                running = false;
-                                err.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+        errThread = new Thread() {
+            @Override
+            public void run() {
+                BufferedReader err = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                String line = null;
+                try {
+                    while (running) {
+                        line = err.readLine();
+                        currentTimeMillis = System.currentTimeMillis();
+                        if (line == null) {
+                            break;
+                        }
+                        if (enableLog) {
+                            LogUtils.info("ffmpeg: " + line);
                         }
                     }
-                };
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        running = false;
+                        err.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
 
         inputThread.start();
         errThread.start();
@@ -503,11 +491,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
         if (hcSize != newHcSize || wcSize != newWcSize) {
             hcSize = newHcSize;
             wcSize = newWcSize;
-            LogUtils.info(
-                    "\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n",
-                    cameraDto.getUrl(),
-                    newHcSize,
-                    newWcSize);
+            LogUtils.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize, newWcSize);
         }
 
         // 无需自动关闭
@@ -540,8 +524,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
         // ws
         for (Entry<String, ChannelHandlerContext> entry : wsClients.entrySet()) {
             if (entry.getValue().channel().isWritable()) {
-                entry.getValue()
-                        .writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(data)));
+                entry.getValue().writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(data)));
             } else {
                 wsClients.remove(entry.getKey());
                 hasClient();
@@ -572,30 +555,25 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
                     // 发送帧前先发送header
                     if (ClientType.HTTP.getType() == ctype.getType()) {
                         ChannelFuture future = ctx.writeAndFlush(Unpooled.copiedBuffer(header));
-                        future.addListener(
-                                new GenericFutureListener<Future<? super Void>>() {
-                                    @Override
-                                    public void operationComplete(Future<? super Void> future)
-                                            throws Exception {
-                                        if (future.isSuccess()) {
-                                            httpClients.put(ctx.channel().id().toString(), ctx);
-                                        }
-                                    }
-                                });
+                        future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                            @Override
+                            public void operationComplete(Future<? super Void> future) throws Exception {
+                                if (future.isSuccess()) {
+                                    httpClients.put(ctx.channel().id().toString(), ctx);
+                                }
+                            }
+                        });
                     } else if (ClientType.WEBSOCKET.getType() == ctype.getType()) {
                         ChannelFuture future =
-                                ctx.writeAndFlush(
-                                        new BinaryWebSocketFrame(Unpooled.copiedBuffer(header)));
-                        future.addListener(
-                                new GenericFutureListener<Future<? super Void>>() {
-                                    @Override
-                                    public void operationComplete(Future<? super Void> future)
-                                            throws Exception {
-                                        if (future.isSuccess()) {
-                                            wsClients.put(ctx.channel().id().toString(), ctx);
-                                        }
-                                    }
-                                });
+                                ctx.writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(header)));
+                        future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                            @Override
+                            public void operationComplete(Future<? super Void> future) throws Exception {
+                                if (future.isSuccess()) {
+                                    wsClients.put(ctx.channel().id().toString(), ctx);
+                                }
+                            }
+                        });
                     }
                 }
 

@@ -57,17 +57,15 @@ public class TencentSmsScript implements SmsScript {
 
     private static final Integer PHONE_NUM = 11;
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     @Override
     public List<SmsRecord> send(SmsParam smsParam) {
         try {
-            TencentSmsAccount tencentSmsAccount =
-                    Objects.nonNull(smsParam.getSendAccountId())
-                            ? accountUtils.getAccountById(
-                                    smsParam.getSendAccountId(), TencentSmsAccount.class)
-                            : accountUtils.getSmsAccountByScriptName(
-                                    smsParam.getScriptName(), TencentSmsAccount.class);
+            TencentSmsAccount tencentSmsAccount = Objects.nonNull(smsParam.getSendAccountId())
+                    ? accountUtils.getAccountById(smsParam.getSendAccountId(), TencentSmsAccount.class)
+                    : accountUtils.getSmsAccountByScriptName(smsParam.getScriptName(), TencentSmsAccount.class);
             SmsClient client = init(tencentSmsAccount);
             SendSmsRequest request = assembleSendReq(smsParam, tencentSmsAccount);
             SendSmsResponse response = client.SendSms(request);
@@ -84,8 +82,7 @@ public class TencentSmsScript implements SmsScript {
     @Override
     public List<SmsRecord> pull(Integer accountId) {
         try {
-            TencentSmsAccount account =
-                    accountUtils.getAccountById(accountId, TencentSmsAccount.class);
+            TencentSmsAccount account = accountUtils.getAccountById(accountId, TencentSmsAccount.class);
             SmsClient client = init(account);
             PullSmsSendStatusRequest req = assemblePullReq(account);
             PullSmsSendStatusResponse resp = client.PullSmsSendStatus(req);
@@ -114,32 +111,26 @@ public class TencentSmsScript implements SmsScript {
         for (SendStatus sendStatus : response.getSendStatusSet()) {
 
             // 腾讯返回的电话号有前缀，这里取巧直接翻转获取手机号
-            String phone =
-                    new StringBuilder(
-                                    new StringBuilder(sendStatus.getPhoneNumber())
-                                            .reverse()
-                                            .substring(0, PHONE_NUM))
+            String phone = new StringBuilder(new StringBuilder(sendStatus.getPhoneNumber())
                             .reverse()
-                            .toString();
+                            .substring(0, PHONE_NUM))
+                    .reverse()
+                    .toString();
 
-            SmsRecord smsRecord =
-                    SmsRecord.builder()
-                            .sendDate(
-                                    Integer.valueOf(
-                                            DateUtil.format(
-                                                    new Date(), DatePattern.PURE_DATE_PATTERN)))
-                            .messageTemplateId(smsParam.getMessageTemplateId())
-                            .phone(Long.valueOf(phone))
-                            .supplierId(tencentSmsAccount.getSupplierId())
-                            .supplierName(tencentSmsAccount.getSupplierName())
-                            .msgContent(smsParam.getContent())
-                            .seriesId(sendStatus.getSerialNo())
-                            .chargingNum(Math.toIntExact(sendStatus.getFee()))
-                            .status(SmsStatus.SEND_SUCCESS.getCode())
-                            .reportContent(sendStatus.getCode())
-                            .created(Math.toIntExact(DateUtil.currentSeconds()))
-                            .updated(Math.toIntExact(DateUtil.currentSeconds()))
-                            .build();
+            SmsRecord smsRecord = SmsRecord.builder()
+                    .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
+                    .messageTemplateId(smsParam.getMessageTemplateId())
+                    .phone(Long.valueOf(phone))
+                    .supplierId(tencentSmsAccount.getSupplierId())
+                    .supplierName(tencentSmsAccount.getSupplierName())
+                    .msgContent(smsParam.getContent())
+                    .seriesId(sendStatus.getSerialNo())
+                    .chargingNum(Math.toIntExact(sendStatus.getFee()))
+                    .status(SmsStatus.SEND_SUCCESS.getCode())
+                    .reportContent(sendStatus.getCode())
+                    .created(Math.toIntExact(DateUtil.currentSeconds()))
+                    .updated(Math.toIntExact(DateUtil.currentSeconds()))
+                    .build();
 
             smsRecordList.add(smsRecord);
         }
@@ -183,34 +174,29 @@ public class TencentSmsScript implements SmsScript {
      * @param resp
      * @return
      */
-    private List<SmsRecord> assemblePullSmsRecord(
-            TencentSmsAccount account, PullSmsSendStatusResponse resp) {
+    private List<SmsRecord> assemblePullSmsRecord(TencentSmsAccount account, PullSmsSendStatusResponse resp) {
         List<SmsRecord> smsRecordList = new ArrayList<>();
         if (Objects.nonNull(resp)
                 && Objects.nonNull(resp.getPullSmsSendStatusSet())
                 && resp.getPullSmsSendStatusSet().length > 0) {
             for (PullSmsSendStatus pullSmsSendStatus : resp.getPullSmsSendStatusSet()) {
-                SmsRecord smsRecord =
-                        SmsRecord.builder()
-                                .sendDate(
-                                        Integer.valueOf(
-                                                DateUtil.format(
-                                                        new Date(), DatePattern.PURE_DATE_PATTERN)))
-                                .messageTemplateId(0L)
-                                .phone(Long.valueOf(pullSmsSendStatus.getSubscriberNumber()))
-                                .supplierId(account.getSupplierId())
-                                .supplierName(account.getSupplierName())
-                                .msgContent("")
-                                .seriesId(pullSmsSendStatus.getSerialNo())
-                                .chargingNum(0)
-                                .status(
-                                        "SUCCESS".equals(pullSmsSendStatus.getReportStatus())
-                                                ? SmsStatus.RECEIVE_SUCCESS.getCode()
-                                                : SmsStatus.RECEIVE_FAIL.getCode())
-                                .reportContent(pullSmsSendStatus.getDescription())
-                                .updated(Math.toIntExact(pullSmsSendStatus.getUserReceiveTime()))
-                                .created(Math.toIntExact(DateUtil.currentSeconds()))
-                                .build();
+                SmsRecord smsRecord = SmsRecord.builder()
+                        .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
+                        .messageTemplateId(0L)
+                        .phone(Long.valueOf(pullSmsSendStatus.getSubscriberNumber()))
+                        .supplierId(account.getSupplierId())
+                        .supplierName(account.getSupplierName())
+                        .msgContent("")
+                        .seriesId(pullSmsSendStatus.getSerialNo())
+                        .chargingNum(0)
+                        .status(
+                                "SUCCESS".equals(pullSmsSendStatus.getReportStatus())
+                                        ? SmsStatus.RECEIVE_SUCCESS.getCode()
+                                        : SmsStatus.RECEIVE_FAIL.getCode())
+                        .reportContent(pullSmsSendStatus.getDescription())
+                        .updated(Math.toIntExact(pullSmsSendStatus.getUserReceiveTime()))
+                        .created(Math.toIntExact(DateUtil.currentSeconds()))
+                        .build();
                 smsRecordList.add(smsRecord);
             }
         }

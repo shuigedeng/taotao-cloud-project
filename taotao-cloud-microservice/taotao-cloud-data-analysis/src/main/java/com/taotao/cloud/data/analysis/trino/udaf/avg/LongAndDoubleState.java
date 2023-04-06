@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.data.analysis.trino.udaf.avg;
 
+package com.taotao.cloud.data.analysis.trino.udaf.avg;
 
 import io.trino.spi.function.AccumulatorState;
 
@@ -25,11 +25,11 @@ import io.trino.spi.function.AccumulatorState;
  */
 public interface LongAndDoubleState extends AccumulatorState {
 
-	long getLong();
+    long getLong();
 
-	void setLong(long value);
+    void setLong(long value);
 
-	double getDouble();
+    double getDouble();
 
-	void setDouble(double value);
+    void setDouble(double value);
 }

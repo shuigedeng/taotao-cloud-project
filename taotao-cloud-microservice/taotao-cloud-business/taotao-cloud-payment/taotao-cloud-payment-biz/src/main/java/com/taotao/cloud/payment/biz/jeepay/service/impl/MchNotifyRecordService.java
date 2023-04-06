@@ -32,10 +32,9 @@ public class MchNotifyRecordService extends ServiceImpl<MchNotifyRecordMapper, M
 
     /** 根据订单号和类型查询 */
     public MchNotifyRecord findByOrderAndType(String orderId, Byte orderType) {
-        return getOne(
-                MchNotifyRecord.gw()
-                        .eq(MchNotifyRecord::getOrderId, orderId)
-                        .eq(MchNotifyRecord::getOrderType, orderType));
+        return getOne(MchNotifyRecord.gw()
+                .eq(MchNotifyRecord::getOrderId, orderId)
+                .eq(MchNotifyRecord::getOrderType, orderType));
     }
 
     /** 查询支付订单 */

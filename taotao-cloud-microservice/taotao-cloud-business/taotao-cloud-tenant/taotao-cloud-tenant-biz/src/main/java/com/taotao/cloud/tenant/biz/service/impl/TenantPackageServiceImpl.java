@@ -48,7 +48,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TenantPackageServiceImpl implements TenantPackageService {
 
-    @Resource private TenantService tenantService;
+    @Resource
+    private TenantService tenantService;
 
     private final TenantManager tenantManager;
 
@@ -75,12 +76,10 @@ public class TenantPackageServiceImpl implements TenantPackageService {
         // 菜单信息变化 则更新租户下的角色菜单信息
         if (!CollUtil.isEqualList(Arrays.asList(newMenus), Arrays.asList(oldMenus))) {
             // 本套餐下的所有租户
-            List<TenantDO> tenantDOList =
-                    tenantManager.getTenantListByPackageId(tenantPackageDTO.getId());
+            List<TenantDO> tenantDOList = tenantManager.getTenantListByPackageId(tenantPackageDTO.getId());
 
             // 遍历所有租户 更新租户下的角色菜单信息
-            tenantDOList.forEach(
-                    t -> tenantService.updateTenantRoleMenu(t.getId(), Arrays.asList(newMenus)));
+            tenantDOList.forEach(t -> tenantService.updateTenantRoleMenu(t.getId(), Arrays.asList(newMenus)));
         }
 
         return Boolean.TRUE;
@@ -112,8 +111,7 @@ public class TenantPackageServiceImpl implements TenantPackageService {
 
     @Override
     public IPage<TenantPackageDTO> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
-        return TenantPackageConvert.INSTANCE.convert(
-                tenantPackageManager.pageTenantPackage(tenantPackagePageDTO));
+        return TenantPackageConvert.INSTANCE.convert(tenantPackageManager.pageTenantPackage(tenantPackagePageDTO));
     }
 
     @Override

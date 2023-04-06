@@ -37,9 +37,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayOrderReissueMQReceiver implements PayOrderReissueMQ.IMQReceiver {
 
-    @Autowired private IMQSender mqSender;
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private ChannelOrderReissueService channelOrderReissueService;
+    @Autowired
+    private IMQSender mqSender;
+
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private ChannelOrderReissueService channelOrderReissueService;
 
     @Override
     public void receive(PayOrderReissueMQ.MsgPayload payload) {

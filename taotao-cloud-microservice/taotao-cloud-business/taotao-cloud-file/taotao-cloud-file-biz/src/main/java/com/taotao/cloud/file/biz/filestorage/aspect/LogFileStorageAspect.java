@@ -53,10 +53,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
     /** 删除文件，成功返回 true */
     @Override
     public boolean deleteAround(
-            DeleteAspectChain chain,
-            FileInfo fileInfo,
-            FileStorage fileStorage,
-            FileRecorder fileRecorder) {
+            DeleteAspectChain chain, FileInfo fileInfo, FileStorage fileStorage, FileRecorder fileRecorder) {
         log.info("删除文件 before -> {}", fileInfo);
         boolean res = chain.next(fileInfo, fileStorage, fileRecorder);
         log.info("删除文件 after -> {}", res);
@@ -65,8 +62,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
 
     /** 文件是否存在 */
     @Override
-    public boolean existsAround(
-            ExistsAspectChain chain, FileInfo fileInfo, FileStorage fileStorage) {
+    public boolean existsAround(ExistsAspectChain chain, FileInfo fileInfo, FileStorage fileStorage) {
         log.info("文件是否存在 before -> {}", fileInfo);
         boolean res = chain.next(fileInfo, fileStorage);
         log.info("文件是否存在 after -> {}", res);
@@ -76,10 +72,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
     /** 下载文件 */
     @Override
     public void downloadAround(
-            DownloadAspectChain chain,
-            FileInfo fileInfo,
-            FileStorage fileStorage,
-            Consumer<InputStream> consumer) {
+            DownloadAspectChain chain, FileInfo fileInfo, FileStorage fileStorage, Consumer<InputStream> consumer) {
         log.info("下载文件 before -> {}", fileInfo);
         chain.next(fileInfo, fileStorage, consumer);
         log.info("下载文件 after -> {}", fileInfo);
@@ -88,10 +81,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
     /** 下载缩略图文件 */
     @Override
     public void downloadThAround(
-            DownloadThAspectChain chain,
-            FileInfo fileInfo,
-            FileStorage fileStorage,
-            Consumer<InputStream> consumer) {
+            DownloadThAspectChain chain, FileInfo fileInfo, FileStorage fileStorage, Consumer<InputStream> consumer) {
         log.info("下载缩略图文件 before -> {}", fileInfo);
         chain.next(fileInfo, fileStorage, consumer);
         log.info("下载缩略图文件 after -> {}", fileInfo);

@@ -42,10 +42,7 @@ public class PageModel {
     public <T> List<T> setData(List<T> data, long records) {
         this.records = records;
         if (this.records > 0) {
-            this.total =
-                    this.records % this.rows == 0
-                            ? this.records / this.rows
-                            : this.records / this.rows + 1;
+            this.total = this.records % this.rows == 0 ? this.records / this.rows : this.records / this.rows + 1;
         } else {
             this.total = 0;
         }

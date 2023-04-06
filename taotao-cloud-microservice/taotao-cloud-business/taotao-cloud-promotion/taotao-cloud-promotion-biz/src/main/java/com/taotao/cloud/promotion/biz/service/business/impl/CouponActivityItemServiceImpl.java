@@ -33,8 +33,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-04-27 16:46:01
  */
 @Service
-public class CouponActivityItemServiceImpl
-        extends ServiceImpl<CouponActivityItemMapper, CouponActivityItem>
+public class CouponActivityItemServiceImpl extends ServiceImpl<CouponActivityItemMapper, CouponActivityItem>
         implements ICouponActivityItemService {
 
     @Override
@@ -56,8 +55,6 @@ public class CouponActivityItemServiceImpl
      */
     @Override
     public void removeByCouponId(List<String> couponIds) {
-        this.remove(
-                new LambdaQueryWrapper<CouponActivityItem>()
-                        .in(CouponActivityItem::getCouponId, couponIds));
+        this.remove(new LambdaQueryWrapper<CouponActivityItem>().in(CouponActivityItem::getCouponId, couponIds));
     }
 }

@@ -59,9 +59,7 @@ public class DistributionOrder extends BaseSuperEntity<DistributionOrder, Long> 
      *
      * @see DistributionOrderStatusEnum
      */
-    @Column(
-            name = "distribution_order_status",
-            columnDefinition = "varchar(255) not null  comment '分销订单状态'")
+    @Column(name = "distribution_order_status", columnDefinition = "varchar(255) not null  comment '分销订单状态'")
     private String distributionOrderStatus;
     /** 购买会员的id */
     @Column(name = "member_id", columnDefinition = "bigint not null  comment '购买会员的id'")

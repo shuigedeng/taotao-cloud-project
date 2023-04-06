@@ -39,8 +39,7 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
 
     private String uuidParameter = SPRING_SECURITY_FORM_UUID_KEY;
 
-    private Converter<HttpServletRequest, QrcodeAuthenticationToken>
-            qrcodeAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, QrcodeAuthenticationToken> qrcodeAuthenticationTokenConverter;
 
     private boolean postOnly = true;
 
@@ -55,12 +54,10 @@ public class QrcodeAuthenticationFilter extends AbstractAuthenticationProcessing
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
         QrcodeAuthenticationToken authRequest = qrcodeAuthenticationTokenConverter.convert(request);

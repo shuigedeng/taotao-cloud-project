@@ -44,7 +44,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderOperationAspect {
 
-    @Autowired private ApplicationEventPublisher publisher;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @After("@annotation(com.taotao.cloud.order.biz.aop.order.OrderLogPoint)")
     public void doAfter(JoinPoint joinPoint) {
@@ -64,12 +65,7 @@ public class OrderOperationAspect {
 
             Map<String, String> orderLogPoints = spelFormat(joinPoint);
             OrderLog orderLog =
-                    new OrderLog(
-                            orderLogPoints.get("orderSn"),
-                            id,
-                            role,
-                            userName,
-                            orderLogPoints.get("description"));
+                    new OrderLog(orderLogPoints.get("orderSn"), id, role, userName, orderLogPoints.get("description"));
 
             publisher.publishEvent(new OrderLogEvent(orderLog));
         } catch (Exception e) {

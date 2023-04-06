@@ -40,7 +40,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/order/paymentLog")
 public class PaymentLogManagerController {
 
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
 
     @Operation(summary = "分页获取支付日志", description = "分页获取支付日志")
     @RequestLogger
@@ -48,7 +49,6 @@ public class PaymentLogManagerController {
     @GetMapping
     public Result<IPage<PaymentLog>> getByPage(OrderVO order, SearchVO searchVo, PageVO page) {
         return Result.success(
-                orderApi.queryPaymentLogs(
-                        PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
+                orderApi.queryPaymentLogs(PageUtil.initPage(page), PageUtil.initWrapper(order, searchVo)));
     }
 }

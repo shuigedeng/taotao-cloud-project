@@ -40,16 +40,13 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmTaskAssignRuleController {
 
-    @Resource private BpmTaskAssignRuleService taskAssignRuleService;
+    @Resource
+    private BpmTaskAssignRuleService taskAssignRuleService;
 
     @GetMapping("/list")
     @ApiOperation(value = "获得任务分配规则列表")
     @ApiImplicitParams({
-        @ApiImplicitParam(
-                name = "modelId",
-                value = "模型编号",
-                example = "1024",
-                dataTypeClass = String.class),
+        @ApiImplicitParam(name = "modelId", value = "模型编号", example = "1024", dataTypeClass = String.class),
         @ApiImplicitParam(
                 name = "processDefinitionId",
                 value = "流程定义的编号",
@@ -59,24 +56,21 @@ public class BpmTaskAssignRuleController {
     @PreAuthorize("@ss.hasPermission('bpm:task-assign-rule:query')")
     public CommonResult<List<BpmTaskAssignRuleRespVO>> getTaskAssignRuleList(
             @RequestParam(value = "modelId", required = false) String modelId,
-            @RequestParam(value = "processDefinitionId", required = false)
-                    String processDefinitionId) {
+            @RequestParam(value = "processDefinitionId", required = false) String processDefinitionId) {
         return success(taskAssignRuleService.getTaskAssignRuleList(modelId, processDefinitionId));
     }
 
     @PostMapping("/create")
     @ApiOperation(value = "创建任务分配规则")
     @PreAuthorize("@ss.hasPermission('bpm:task-assign-rule:create')")
-    public CommonResult<Long> createTaskAssignRule(
-            @Valid @RequestBody BpmTaskAssignRuleCreateReqVO reqVO) {
+    public CommonResult<Long> createTaskAssignRule(@Valid @RequestBody BpmTaskAssignRuleCreateReqVO reqVO) {
         return success(taskAssignRuleService.createTaskAssignRule(reqVO));
     }
 
     @PutMapping("/update")
     @ApiOperation(value = "更新任务分配规则")
     @PreAuthorize("@ss.hasPermission('bpm:task-assign-rule:update')")
-    public CommonResult<Boolean> updateTaskAssignRule(
-            @Valid @RequestBody BpmTaskAssignRuleUpdateReqVO reqVO) {
+    public CommonResult<Boolean> updateTaskAssignRule(@Valid @RequestBody BpmTaskAssignRuleUpdateReqVO reqVO) {
         taskAssignRuleService.updateTaskAssignRule(reqVO);
         return success(true);
     }

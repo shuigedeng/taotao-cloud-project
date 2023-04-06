@@ -42,8 +42,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ContractApprovalSheet")
 public class ContractApprovalSheetController {
 
-    @Autowired private ContractApprovalSheetService contractApprovalSheetService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ContractApprovalSheetService contractApprovalSheetService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取合同申请单表信息
@@ -53,17 +56,15 @@ public class ContractApprovalSheetController {
      */
     @Operation("获取合同申请单表信息")
     @GetMapping("/{id}")
-    public Result<ContractApprovalSheetInfoVO> info(
-            @PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ContractApprovalSheetInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+            throws DataException {
         ContractApprovalSheetInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), ContractApprovalSheetInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), ContractApprovalSheetInfoVO.class);
                     isData = false;
                 }
             }
@@ -85,31 +86,26 @@ public class ContractApprovalSheetController {
     @PostMapping
     public Result create(@RequestBody @Valid ContractApprovalSheetForm contractApprovalSheetForm)
             throws WorkFlowException {
-        if (contractApprovalSheetForm.getStartContractDate()
-                > contractApprovalSheetForm.getEndContractDate()) {
+        if (contractApprovalSheetForm.getStartContractDate() > contractApprovalSheetForm.getEndContractDate()) {
             return Result.fail("结束时间不能小于开始时间");
         }
         if (contractApprovalSheetForm.getIncomeAmount() != null
                 && !"".equals(String.valueOf(contractApprovalSheetForm.getIncomeAmount()))
-                && !RegexUtils.checkDecimals2(
-                        String.valueOf(contractApprovalSheetForm.getIncomeAmount()))) {
+                && !RegexUtils.checkDecimals2(String.valueOf(contractApprovalSheetForm.getIncomeAmount()))) {
             return Result.fail("收入金额必须大于0，最多可以输入两位小数点");
         }
         if (contractApprovalSheetForm.getTotalExpenditure() != null
                 && !"".equals(String.valueOf(contractApprovalSheetForm.getIncomeAmount()))
-                && !RegexUtils.checkDecimals2(
-                        String.valueOf(contractApprovalSheetForm.getTotalExpenditure()))) {
+                && !RegexUtils.checkDecimals2(String.valueOf(contractApprovalSheetForm.getTotalExpenditure()))) {
             return Result.fail("支出金额必须大于0，最多可以输入两位小数点");
         }
         ContractApprovalSheetEntity entity =
-                JsonUtils.getJsonToBean(
-                        contractApprovalSheetForm, ContractApprovalSheetEntity.class);
+                JsonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalSheetForm.getStatus())) {
             contractApprovalSheetService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        contractApprovalSheetService.submit(
-                entity.getId(), entity, contractApprovalSheetForm.getCandidateList());
+        contractApprovalSheetService.submit(entity.getId(), entity, contractApprovalSheetForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -123,34 +119,28 @@ public class ContractApprovalSheetController {
     @Operation("修改合同申请单表")
     @PutMapping("/{id}")
     public Result update(
-            @RequestBody @Valid ContractApprovalSheetForm contractApprovalSheetForm,
-            @PathVariable("id") String id)
+            @RequestBody @Valid ContractApprovalSheetForm contractApprovalSheetForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        if (contractApprovalSheetForm.getStartContractDate()
-                > contractApprovalSheetForm.getEndContractDate()) {
+        if (contractApprovalSheetForm.getStartContractDate() > contractApprovalSheetForm.getEndContractDate()) {
             return Result.fail("结束时间不能小于开始时间");
         }
         if (contractApprovalSheetForm.getIncomeAmount() != null
                 && !"".equals(String.valueOf(contractApprovalSheetForm.getIncomeAmount()))
-                && !RegexUtils.checkDecimals2(
-                        String.valueOf(contractApprovalSheetForm.getIncomeAmount()))) {
+                && !RegexUtils.checkDecimals2(String.valueOf(contractApprovalSheetForm.getIncomeAmount()))) {
             return Result.fail("收入金额必须大于0，最多可以输入两位小数点");
         }
         if (contractApprovalSheetForm.getTotalExpenditure() != null
                 && !"".equals(String.valueOf(contractApprovalSheetForm.getTotalExpenditure()))
-                && !RegexUtils.checkDecimals2(
-                        String.valueOf(contractApprovalSheetForm.getTotalExpenditure()))) {
+                && !RegexUtils.checkDecimals2(String.valueOf(contractApprovalSheetForm.getTotalExpenditure()))) {
             return Result.fail("支出金额必须大于0，最多可以输入两位小数点");
         }
         ContractApprovalSheetEntity entity =
-                JsonUtils.getJsonToBean(
-                        contractApprovalSheetForm, ContractApprovalSheetEntity.class);
+                JsonUtils.getJsonToBean(contractApprovalSheetForm, ContractApprovalSheetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(contractApprovalSheetForm.getStatus())) {
             contractApprovalSheetService.save(id, entity);
             return Result.success(MsgCode.SU002.get());
         }
-        contractApprovalSheetService.submit(
-                id, entity, contractApprovalSheetForm.getCandidateList());
+        contractApprovalSheetService.submit(id, entity, contractApprovalSheetForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 }

@@ -50,14 +50,13 @@ public class WeChatPaySyncService {
     public PaySyncResult syncPayStatus(Long paymentId, WeChatPayConfig weChatPayConfig) {
         WxPayApiConfig wxPayApiConfig = WxPayApiConfigKit.getWxPayApiConfig();
         PaySyncResult paySyncResult = new PaySyncResult().setPaySyncStatus(PaySyncStatus.FAIL);
-        Map<String, String> params =
-                UnifiedOrderModel.builder()
-                        .appid(wxPayApiConfig.getAppId())
-                        .mch_id(wxPayApiConfig.getMchId())
-                        .nonce_str(WxPayKit.generateStr())
-                        .out_trade_no(String.valueOf(paymentId))
-                        .build()
-                        .createSign(wxPayApiConfig.getApiKey(), SignType.HMACSHA256);
+        Map<String, String> params = UnifiedOrderModel.builder()
+                .appid(wxPayApiConfig.getAppId())
+                .mch_id(wxPayApiConfig.getMchId())
+                .nonce_str(WxPayKit.generateStr())
+                .out_trade_no(String.valueOf(paymentId))
+                .build()
+                .createSign(wxPayApiConfig.getApiKey(), SignType.HMACSHA256);
         try {
             String xmlResult = WxPayApi.orderQuery(params);
             Map<String, String> result = WxPayKit.xmlToMap(xmlResult);
@@ -81,7 +80,9 @@ public class WeChatPaySyncService {
                     || Objects.equals(tradeStatus, WeChatPayCode.TRADE_ACCEPT)) {
                 HashMap<String, String> map = new HashMap<>(1);
                 map.put(WeChatPayCode.OUT_TRADE_NO, outTradeNo);
-                return paySyncResult.setPaySyncStatus(PaySyncStatus.TRADE_SUCCESS).setMap(map);
+                return paySyncResult
+                        .setPaySyncStatus(PaySyncStatus.TRADE_SUCCESS)
+                        .setMap(map);
             }
             // 待支付
             if (Objects.equals(tradeStatus, WeChatPayCode.TRADE_NOTPAY)

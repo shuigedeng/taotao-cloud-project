@@ -32,7 +32,8 @@ public class CheckService {
      * 使用Spring注入:所有继承了AbstractCheckHandler抽象类的Spring
      * Bean都会注入进来。Map的Key对应Bean的name,Value是name对应相应的Bean
      */
-    @Resource private Map<String, AbstractCheckHandler> handlerMap;
+    @Resource
+    private Map<String, AbstractCheckHandler> handlerMap;
 
     /// **
     // * 创建商品

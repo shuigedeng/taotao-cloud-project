@@ -26,7 +26,8 @@ import lombok.Data;
  */
 @Data
 public class DefinitionDTO implements Serializable {
-    @Serial private static final long serialVersionUID = -818653141079850719L;
+    @Serial
+    private static final long serialVersionUID = -818653141079850719L;
 
     @NotNull(message = "显示页码不为空")
     private Integer pageNum;

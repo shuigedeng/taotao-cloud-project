@@ -37,15 +37,11 @@ public class QueryUtils {
      * @author shuigedeng
      * @since 2022/3/14 11:22
      */
-    public static <T> QueryWrapper<T> evaluationQueryWrapper(
-            EvaluationPageQuery evaluationPageQuery) {
+    public static <T> QueryWrapper<T> evaluationQueryWrapper(EvaluationPageQuery evaluationPageQuery) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotEmpty(evaluationPageQuery.getStartTime())
                 && StringUtils.isNotEmpty(evaluationPageQuery.getEndTime())) {
-            queryWrapper.between(
-                    "create_time",
-                    evaluationPageQuery.getStartTime(),
-                    evaluationPageQuery.getEndTime());
+            queryWrapper.between("create_time", evaluationPageQuery.getStartTime(), evaluationPageQuery.getEndTime());
         }
         if (StringUtils.isNotEmpty(evaluationPageQuery.getGrade())) {
             queryWrapper.eq("grade", evaluationPageQuery.getGrade());

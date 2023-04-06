@@ -34,12 +34,7 @@ public class JobUtils {
         // 特殊处理，选择周 就不能拼接月、日；选择月就不能拼接周；选择日不能拼接周,并且默认每月
         // 周不能选择为每周
 
-        String finalWeek = "?",
-                finalMonth = "*",
-                finalDay = "*",
-                finalHour = "*",
-                finalMinute = "*",
-                finalSecods = "*";
+        String finalWeek = "?", finalMonth = "*", finalDay = "*", finalHour = "*", finalMinute = "*", finalSecods = "*";
 
         switch (param.getCycle()) {
             case CycleTypeConstant.WEEK -> {
@@ -89,17 +84,7 @@ public class JobUtils {
         }
         // 已空格拼接
         String cron =
-                finalSecods
-                        + " "
-                        + finalMinute
-                        + " "
-                        + finalHour
-                        + " "
-                        + finalDay
-                        + " "
-                        + finalMonth
-                        + " "
-                        + finalWeek;
+                finalSecods + " " + finalMinute + " " + finalHour + " " + finalDay + " " + finalMonth + " " + finalWeek;
         if (!CronUtils.isValid(cron)) {
             throw new RuntimeException("表达式解析出错!");
         }

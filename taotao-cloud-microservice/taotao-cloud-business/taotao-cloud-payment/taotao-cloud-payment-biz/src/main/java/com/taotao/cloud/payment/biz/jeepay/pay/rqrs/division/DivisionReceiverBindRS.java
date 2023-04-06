@@ -92,7 +92,9 @@ public class DivisionReceiverBindRS extends AbstractRS {
         DivisionReceiverBindRS result = new DivisionReceiverBindRS();
         BeanUtils.copyProperties(record, result);
         result.setBindSuccessTime(
-                record.getBindSuccessTime() != null ? record.getBindSuccessTime().getTime() : null);
+                record.getBindSuccessTime() != null
+                        ? record.getBindSuccessTime().getTime()
+                        : null);
 
         return result;
     }

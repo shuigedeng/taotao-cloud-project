@@ -44,9 +44,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/payWays")
 public class PayWayController extends CommonCtrl {
 
-    @Autowired PayWayService payWayService;
-    @Autowired MchPayPassageService mchPayPassageService;
-    @Autowired PayOrderService payOrderService;
+    @Autowired
+    PayWayService payWayService;
+
+    @Autowired
+    MchPayPassageService mchPayPassageService;
+
+    @Autowired
+    PayOrderService payOrderService;
 
     /**
      * @Author: ZhuXiao @Description: list @Date: 15:52 2021/4/27
@@ -126,8 +131,7 @@ public class PayWayController extends CommonCtrl {
     public ApiRes delete(@PathVariable("wayCode") String wayCode) {
 
         // 校验该支付方式是否有商户已配置通道或者已有订单
-        if (mchPayPassageService.count(MchPayPassage.gw().eq(MchPayPassage::getWayCode, wayCode))
-                        > 0
+        if (mchPayPassageService.count(MchPayPassage.gw().eq(MchPayPassage::getWayCode, wayCode)) > 0
                 || payOrderService.count(PayOrder.gw().eq(PayOrder::getWayCode, wayCode)) > 0) {
             throw new BizException("该支付方式已有商户配置通道或已发生交易，无法删除！");
         }

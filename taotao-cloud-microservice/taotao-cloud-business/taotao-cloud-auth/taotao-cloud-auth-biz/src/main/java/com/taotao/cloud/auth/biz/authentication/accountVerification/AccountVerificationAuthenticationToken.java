@@ -82,9 +82,8 @@ public class AccountVerificationAuthenticationToken extends AbstractAuthenticati
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
         if (isAuthenticated) {
-            throw new IllegalArgumentException(
-                    "Cannot set this token to trusted - use constructor which takes a"
-                            + " GrantedAuthority list instead");
+            throw new IllegalArgumentException("Cannot set this token to trusted - use constructor which takes a"
+                    + " GrantedAuthority list instead");
         }
 
         super.setAuthenticated(false);

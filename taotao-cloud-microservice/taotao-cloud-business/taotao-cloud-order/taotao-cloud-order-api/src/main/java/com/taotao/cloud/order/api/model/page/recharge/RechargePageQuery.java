@@ -34,7 +34,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Schema(description = "预存款充值记录查询条件")
 public class RechargePageQuery extends PageQuery implements Serializable {
-    @Serial private static final long serialVersionUID = 318396158590640917L;
+    @Serial
+    private static final long serialVersionUID = 318396158590640917L;
 
     @Schema(description = "充值订单编号")
     private String rechargeSn;

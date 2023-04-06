@@ -35,13 +35,10 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 public class HerodotusAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException exception)
+            HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
             throws IOException, ServletException {
         Result<String> result =
-                SecurityGlobalExceptionHandler.resolveSecurityException(
-                        exception, request.getRequestURI());
+                SecurityGlobalExceptionHandler.resolveSecurityException(exception, request.getRequestURI());
         response.setStatus(result.getStatus());
         WebUtils.renderJson(response, result);
     }

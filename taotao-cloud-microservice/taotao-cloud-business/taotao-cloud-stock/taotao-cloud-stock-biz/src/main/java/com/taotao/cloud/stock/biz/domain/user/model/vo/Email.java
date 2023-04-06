@@ -31,8 +31,7 @@ public final class Email implements ValueObject<Email> {
 
     /** 有效性正则 */
     private static final Pattern VALID_PATTERN =
-            Pattern.compile(
-                    "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
+            Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
 
     /**
      * Constructor.

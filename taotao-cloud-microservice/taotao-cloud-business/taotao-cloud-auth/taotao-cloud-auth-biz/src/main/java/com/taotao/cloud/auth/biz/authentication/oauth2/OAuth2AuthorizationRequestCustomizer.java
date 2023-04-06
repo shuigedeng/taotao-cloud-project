@@ -39,18 +39,11 @@ public class OAuth2AuthorizationRequestCustomizer {
      * @param builder the builder
      */
     public static void customize(OAuth2AuthorizationRequest.Builder builder) {
-        builder.attributes(
-                attributes ->
-                        Arrays.stream(ClientProviders.values())
-                                .filter(
-                                        clientProvider ->
-                                                Objects.equals(
-                                                        clientProvider.registrationId(),
-                                                        attributes.get(
-                                                                OAuth2ParameterNames
-                                                                        .REGISTRATION_ID)))
-                                .findAny()
-                                .map(ClientProviders::requestConsumer)
-                                .ifPresent(requestConsumer -> requestConsumer.accept(builder)));
+        builder.attributes(attributes -> Arrays.stream(ClientProviders.values())
+                .filter(clientProvider -> Objects.equals(
+                        clientProvider.registrationId(), attributes.get(OAuth2ParameterNames.REGISTRATION_ID)))
+                .findAny()
+                .map(ClientProviders::requestConsumer)
+                .ifPresent(requestConsumer -> requestConsumer.accept(builder)));
     }
 }

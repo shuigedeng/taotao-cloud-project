@@ -42,7 +42,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(tags = {"公众号素材-管理后台"})
 public class WxAssetsManageController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired WxAssetsService wxAssetsService;
+
+    @Autowired
+    WxAssetsService wxAssetsService;
 
     /**
      * 获取素材总数
@@ -86,8 +88,7 @@ public class WxAssetsManageController {
             @RequestParam(defaultValue = "image") String type,
             @RequestParam(defaultValue = "1") int page)
             throws WxErrorException {
-        WxMpMaterialFileBatchGetResult res =
-                wxAssetsService.materialFileBatchGet(appid, type, page);
+        WxMpMaterialFileBatchGetResult res = wxAssetsService.materialFileBatchGet(appid, type, page);
         return R.ok().put(res);
     }
 
@@ -101,8 +102,7 @@ public class WxAssetsManageController {
     @GetMapping("/materialNewsBatchGet")
     @RequiresPermissions("wx:wxassets:list")
     @ApiOperation(value = "分页获取图文素材列表")
-    public R materialNewsBatchGet(
-            @CookieValue String appid, @RequestParam(defaultValue = "1") int page)
+    public R materialNewsBatchGet(@CookieValue String appid, @RequestParam(defaultValue = "1") int page)
             throws WxErrorException {
         WxMpMaterialNewsBatchGetResult res = wxAssetsService.materialNewsBatchGet(appid, page);
         return R.ok().put(res);
@@ -118,8 +118,7 @@ public class WxAssetsManageController {
     @PostMapping("/materialNewsUpload")
     @RequiresPermissions("wx:wxassets:save")
     @ApiOperation(value = "添加图文永久素材")
-    public R materialNewsUpload(
-            @CookieValue String appid, @RequestBody List<WxMpNewsArticle> articles)
+    public R materialNewsUpload(@CookieValue String appid, @RequestBody List<WxMpNewsArticle> articles)
             throws WxErrorException {
         if (articles.isEmpty()) {
             return R.error("图文列表不得为空");
@@ -138,8 +137,7 @@ public class WxAssetsManageController {
     @PostMapping("/materialArticleUpdate")
     @RequiresPermissions("wx:wxassets:save")
     @ApiOperation(value = "修改图文素材文章")
-    public R materialArticleUpdate(
-            @CookieValue String appid, @RequestBody WxMpMaterialArticleUpdate form)
+    public R materialArticleUpdate(@CookieValue String appid, @RequestBody WxMpMaterialArticleUpdate form)
             throws WxErrorException {
         if (form.getArticles() == null) {
             return R.error("文章不得为空");
@@ -161,15 +159,13 @@ public class WxAssetsManageController {
     @PostMapping("/materialFileUpload")
     @RequiresPermissions("wx:wxassets:save")
     @ApiOperation(value = "添加多媒体永久素材")
-    public R materialFileUpload(
-            @CookieValue String appid, MultipartFile file, String fileName, String mediaType)
+    public R materialFileUpload(@CookieValue String appid, MultipartFile file, String fileName, String mediaType)
             throws WxErrorException, IOException {
         if (file == null) {
             return R.error("文件不得为空");
         }
 
-        WxMpMaterialUploadResult res =
-                wxAssetsService.materialFileUpload(appid, mediaType, fileName, file);
+        WxMpMaterialUploadResult res = wxAssetsService.materialFileUpload(appid, mediaType, fileName, file);
         return R.ok().put(res);
     }
 

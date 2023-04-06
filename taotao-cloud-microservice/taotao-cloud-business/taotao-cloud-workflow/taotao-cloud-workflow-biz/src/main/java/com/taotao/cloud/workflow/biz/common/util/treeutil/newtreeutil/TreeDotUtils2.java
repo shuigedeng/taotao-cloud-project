@@ -26,8 +26,7 @@ import org.springframework.beans.BeanUtils;
 public class TreeDotUtils2 {
 
     /** 将List转换为指定对象的Tree */
-    public static <T extends SumTree2<T>> List<T> convertListToBeanTreeDot(
-            List<T> tList, Class<T> clz) {
+    public static <T extends SumTree2<T>> List<T> convertListToBeanTreeDot(List<T> tList, Class<T> clz) {
         List<T> SumTree2s = new ArrayList<>();
 
         if (tList != null && tList.size() > 0) {
@@ -64,10 +63,9 @@ public class TreeDotUtils2 {
     private static <T extends SumTree2<T>> List<T> getChildTreeDotList(
             SumTree2<T> parentTreeDot, List<T> tList, Class<T> clz) {
         List<T> childTreeDotList = new ArrayList<>();
-        List<T> data =
-                tList.stream()
-                        .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
-                        .collect(Collectors.toList());
+        List<T> data = tList.stream()
+                .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
+                .collect(Collectors.toList());
         for (T t : data) {
             if (parentTreeDot.getId().equals(t.getParentId())) {
                 // 如果父ID是传递树点的ID，那么就是传递树点的子点

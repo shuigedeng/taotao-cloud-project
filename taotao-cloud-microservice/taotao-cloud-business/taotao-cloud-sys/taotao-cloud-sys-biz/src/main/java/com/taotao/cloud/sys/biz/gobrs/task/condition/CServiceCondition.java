@@ -55,8 +55,7 @@ public class CServiceCondition extends AsyncTask<String, AnyConditionResult<Stri
         TaskResult<AnyConditionResult<String>> tk = getTaskResult(support);
 
         /** 尝试获取 AServiceCondition 任务的返回结果 */
-        TaskResult<String> taskResult =
-                getTaskResult(support, AServiceCondition.class, String.class);
+        TaskResult<String> taskResult = getTaskResult(support, AServiceCondition.class, String.class);
         /** 设置任务返回结果 */
         if (taskResult != null) {
             builder.result(taskResult.getResult());

@@ -48,8 +48,7 @@ public interface ContractApprovalSheetService extends IService<ContractApprovalS
      * @param entity 实体对象
      * @throws WorkFlowException 异常
      */
-    void submit(
-            String id, ContractApprovalSheetEntity entity, Map<String, List<String>> candidateList)
+    void submit(String id, ContractApprovalSheetEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException;
 
     /**

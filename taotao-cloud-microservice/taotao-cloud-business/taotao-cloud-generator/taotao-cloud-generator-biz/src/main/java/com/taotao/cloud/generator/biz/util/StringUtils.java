@@ -173,8 +173,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param searchCharSequences 需要检查的字符串数组
      * @return 是否包含任意一个字符串
      */
-    public static boolean containsAnyIgnoreCase(
-            CharSequence cs, CharSequence... searchCharSequences) {
+    public static boolean containsAnyIgnoreCase(CharSequence cs, CharSequence... searchCharSequences) {
         return StrUtil.containsAnyIgnoreCase(cs, searchCharSequences);
     }
 
@@ -318,8 +317,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param mapper 自定义转换
      * @return 分割后的数据列表
      */
-    public static <T> List<T> splitTo(
-            String str, String separator, Function<? super Object, T> mapper) {
+    public static <T> List<T> splitTo(String str, String separator, Function<? super Object, T> mapper) {
         if (isBlank(str)) {
             return new ArrayList<>(0);
         }

@@ -45,13 +45,11 @@ public class CompositeOAuth2AccessTokenResponseClient
     }
 
     @Override
-    public OAuth2AccessTokenResponse getTokenResponse(
-            OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest)
+    public OAuth2AccessTokenResponse getTokenResponse(OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest)
             throws OAuth2AuthenticationException {
         ClientRegistration clientRegistration = authorizationGrantRequest.getClientRegistration();
 
-        OAuth2AccessTokenResponseClient client =
-                clients.get(clientRegistration.getRegistrationId());
+        OAuth2AccessTokenResponseClient client = clients.get(clientRegistration.getRegistrationId());
         if (client == null) {
             client = clients.get(DefaultClientKey);
         }

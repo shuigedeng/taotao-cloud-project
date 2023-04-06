@@ -25,10 +25,7 @@ import lombok.Data;
 public class DbTableDTO {
 
     public DbTableDTO(
-            Connection conn,
-            DbTableModel dbTableModel,
-            List<DbTableFieldModel> dbTableFieldList,
-            String tableSpace) {
+            Connection conn, DbTableModel dbTableModel, List<DbTableFieldModel> dbTableFieldList, String tableSpace) {
         this.conn = conn;
         this.dbTableFieldList = dbTableFieldList;
         this.tableComment = dbTableModel.getTableComment();

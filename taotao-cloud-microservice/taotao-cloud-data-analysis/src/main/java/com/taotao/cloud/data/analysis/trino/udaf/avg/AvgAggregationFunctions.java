@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.trino.udaf.avg;
 
 import static io.trino.spi.type.DoubleType.DOUBLE;
@@ -38,40 +39,34 @@ import io.trino.spi.type.StandardTypes;
 @Description("聚合求平均值函数")
 public class AvgAggregationFunctions {
 
-	@InputFunction
-	public static void input(
-		@AggregationState LongAndDoubleState state,
-		@SqlType(StandardTypes.BIGINT) long value) {
-		state.setLong(state.getLong() + 1);
-		state.setDouble(state.getDouble() + value);
-	}
+    @InputFunction
+    public static void input(@AggregationState LongAndDoubleState state, @SqlType(StandardTypes.BIGINT) long value) {
+        state.setLong(state.getLong() + 1);
+        state.setDouble(state.getDouble() + value);
+    }
 
-	@InputFunction
-	public static void input(
-		@AggregationState LongAndDoubleState state,
-		@SqlType(StandardTypes.DOUBLE) double value) {
-		state.setLong(state.getLong() + 1);
-		state.setDouble(state.getDouble() + value);
-	}
+    @InputFunction
+    public static void input(@AggregationState LongAndDoubleState state, @SqlType(StandardTypes.DOUBLE) double value) {
+        state.setLong(state.getLong() + 1);
+        state.setDouble(state.getDouble() + value);
+    }
 
-	@CombineFunction
-	public static void combine(
-		@AggregationState LongAndDoubleState state,
-		@AggregationState LongAndDoubleState otherState) {
-		state.setLong(state.getLong() + otherState.getLong());
-		state.setDouble(state.getDouble() + otherState.getDouble());
-	}
+    @CombineFunction
+    public static void combine(
+            @AggregationState LongAndDoubleState state, @AggregationState LongAndDoubleState otherState) {
+        state.setLong(state.getLong() + otherState.getLong());
+        state.setDouble(state.getDouble() + otherState.getDouble());
+    }
 
-	@OutputFunction(StandardTypes.DOUBLE)
-	public static void output(@AggregationState LongAndDoubleState state,
-		BlockBuilder out) {
-		long count = state.getLong();
-		if (count == 0) {
-			out.appendNull();
-		} else {
-			double value = state.getDouble();
-			double tmp = PrecisionUtil.getPrecision(value / count);
-			DOUBLE.writeDouble(out, tmp);
-		}
-	}
+    @OutputFunction(StandardTypes.DOUBLE)
+    public static void output(@AggregationState LongAndDoubleState state, BlockBuilder out) {
+        long count = state.getLong();
+        if (count == 0) {
+            out.appendNull();
+        } else {
+            double value = state.getDouble();
+            double tmp = PrecisionUtil.getPrecision(value / count);
+            DOUBLE.writeDouble(out, tmp);
+        }
+    }
 }

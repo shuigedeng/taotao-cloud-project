@@ -48,11 +48,8 @@ public class OAuth2LoginController {
     public String oauth2LoginPage(
             Model model,
             @CurrentSecurityContext(expression = "authentication") Authentication authentication,
-            @Value("${spring.security.oauth2.server.login.captcha.enabled:true}")
-                    boolean enableCaptchaLogin,
-            @RequestAttribute(
-                            name = "org.springframework.security.web.csrf.CsrfToken",
-                            required = false)
+            @Value("${spring.security.oauth2.server.login.captcha.enabled:true}") boolean enableCaptchaLogin,
+            @RequestAttribute(name = "org.springframework.security.web.csrf.CsrfToken", required = false)
                     CsrfToken csrfToken) {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return "redirect:/";
@@ -80,9 +77,7 @@ public class OAuth2LoginController {
     public String oauth2IndexPage(
             Model model,
             @CurrentSecurityContext(expression = "authentication") Authentication authentication,
-            @RequestAttribute(
-                            name = "org.springframework.security.web.csrf.CsrfToken",
-                            required = false)
+            @RequestAttribute(name = "org.springframework.security.web.csrf.CsrfToken", required = false)
                     CsrfToken csrfToken) {
 
         if (csrfToken != null) {

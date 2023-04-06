@@ -85,7 +85,6 @@ public class VoucherStrategy extends AbsPayStrategy {
         voucherPayService.refund(this.getPayment().getId(), this.getPayMode().getAmount());
         voucherPaymentService.updateRefund(
                 this.getPayment().getId(), this.getPayMode().getAmount());
-        paymentService.updateRefundSuccess(
-                this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.VOUCHER);
+        paymentService.updateRefundSuccess(this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.VOUCHER);
     }
 }

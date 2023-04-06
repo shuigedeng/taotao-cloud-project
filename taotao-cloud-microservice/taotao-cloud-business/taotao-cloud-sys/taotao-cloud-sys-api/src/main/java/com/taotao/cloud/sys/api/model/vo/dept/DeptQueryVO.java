@@ -35,7 +35,8 @@ import lombok.*;
 @Schema(description = "部门查询对象")
 public class DeptQueryVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4132785717179910025L;
+    @Serial
+    private static final long serialVersionUID = -4132785717179910025L;
 
     @Schema(description = "部门id", required = true)
     private Long deptId;

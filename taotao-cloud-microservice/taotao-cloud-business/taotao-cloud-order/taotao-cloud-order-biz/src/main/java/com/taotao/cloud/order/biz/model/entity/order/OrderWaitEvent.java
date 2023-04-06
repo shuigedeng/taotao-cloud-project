@@ -57,9 +57,7 @@ public class OrderWaitEvent extends BaseSuperEntity<OrderWaitEvent, Long> {
     private Integer eventType = 0;
 
     /** 事件状态；1--已处理；0--待处理 */
-    @Column(
-            name = "event_status",
-            columnDefinition = "int not null default 0 comment '事件状态；1--已处理；0--待处理'")
+    @Column(name = "event_status", columnDefinition = "int not null default 0 comment '事件状态；1--已处理；0--待处理'")
     private Integer eventStatus = 0;
 
     /** 触发时间 */

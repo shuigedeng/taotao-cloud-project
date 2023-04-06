@@ -41,13 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-字典项管理API", description = "管理端-字典项管理API")
 public class ManagerDictItemController
         extends BaseSuperController<
-                IDictItemService,
-                DictItem,
-                Long,
-                BaseQuery,
-                DictItemSaveDTO,
-                DictItemUpdateDTO,
-                DictItemQueryVO> {
+                IDictItemService, DictItem, Long, BaseQuery, DictItemSaveDTO, DictItemUpdateDTO, DictItemQueryVO> {
 
     /// **
     // * 根据code查询字典项列表

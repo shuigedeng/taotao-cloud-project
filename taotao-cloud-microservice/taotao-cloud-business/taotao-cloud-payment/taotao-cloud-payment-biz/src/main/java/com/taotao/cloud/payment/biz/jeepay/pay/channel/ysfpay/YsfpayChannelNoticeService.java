@@ -106,8 +106,7 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
      *
      * @return
      */
-    public boolean verifyParams(
-            JSONObject jsonParams, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public boolean verifyParams(JSONObject jsonParams, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         String orderNo = jsonParams.getString("orderNo"); // 商户订单号
         String txnAmt = jsonParams.getString("txnAmt"); // 支付金额
@@ -120,31 +119,22 @@ public class YsfpayChannelNoticeService extends AbstractChannelNoticeService {
             return false;
         }
 
-        YsfpayIsvParams isvParams =
-                (YsfpayIsvParams)
-                        configContextQueryService.queryIsvParams(
-                                mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
+        YsfpayIsvParams isvParams = (YsfpayIsvParams) configContextQueryService.queryIsvParams(
+                mchAppConfigContext.getMchInfo().getIsvNo(), getIfCode());
 
         // 验签
         String ysfpayPublicKey = isvParams.getYsfpayPublicKey();
 
         // 验签失败
         if (!YsfSignUtils.validate((JSONObject) JSONObject.toJSON(jsonParams), ysfpayPublicKey)) {
-            log.info(
-                    "【云闪付回调】 验签失败！ 回调参数：parameter = {}, ysfpayPublicKey={} ",
-                    jsonParams,
-                    ysfpayPublicKey);
+            log.info("【云闪付回调】 验签失败！ 回调参数：parameter = {}, ysfpayPublicKey={} ", jsonParams, ysfpayPublicKey);
             return false;
         }
 
         // 核对金额
         long dbPayAmt = payOrder.getAmount().longValue();
         if (dbPayAmt != Long.parseLong(txnAmt)) {
-            log.info(
-                    "订单金额与参数金额不符。 dbPayAmt={}, txnAmt={}, payOrderId={}",
-                    dbPayAmt,
-                    txnAmt,
-                    orderNo);
+            log.info("订单金额与参数金额不符。 dbPayAmt={}, txnAmt={}, payOrderId={}", dbPayAmt, txnAmt, orderNo);
             return false;
         }
         return true;

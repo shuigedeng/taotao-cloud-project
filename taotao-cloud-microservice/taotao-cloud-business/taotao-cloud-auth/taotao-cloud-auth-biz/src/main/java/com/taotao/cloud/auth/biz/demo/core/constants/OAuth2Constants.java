@@ -40,8 +40,7 @@ public interface OAuth2Constants extends BaseConstants {
     String REGION_OAUTH2_SCOPE = AREA_PREFIX + "oauth2:scope";
     String REGION_OAUTH2_APPLICATION_SCOPE = AREA_PREFIX + "oauth2:application:scope";
 
-    String CACHE_NAME_TOKEN_SIGN_IN_FAILURE_LIMITED =
-            CACHE_TOKEN_BASE_PREFIX + "sign_in:failure_limited:";
+    String CACHE_NAME_TOKEN_SIGN_IN_FAILURE_LIMITED = CACHE_TOKEN_BASE_PREFIX + "sign_in:failure_limited:";
     String CACHE_NAME_TOKEN_LOCKED_USER_DETAIL = CACHE_TOKEN_BASE_PREFIX + "locked:user_details:";
 
     String CACHE_SECURITY_PREFIX = CACHE_PREFIX + "security:";

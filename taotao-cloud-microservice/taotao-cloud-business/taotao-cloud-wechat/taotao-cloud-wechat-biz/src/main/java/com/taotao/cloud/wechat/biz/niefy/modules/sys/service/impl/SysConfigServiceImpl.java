@@ -33,19 +33,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("sysConfigService")
-public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEntity>
-        implements SysConfigService {
+public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEntity> implements SysConfigService {
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String paramKey = (String) params.get("paramKey");
 
-        IPage<SysConfigEntity> page =
-                this.page(
-                        new Query<SysConfigEntity>().getPage(params),
-                        new QueryWrapper<SysConfigEntity>()
-                                .like(StringUtils.isNotBlank(paramKey), "param_key", paramKey)
-                                .eq("status", 1));
+        IPage<SysConfigEntity> page = this.page(
+                new Query<SysConfigEntity>().getPage(params),
+                new QueryWrapper<SysConfigEntity>()
+                        .like(StringUtils.isNotBlank(paramKey), "param_key", paramKey)
+                        .eq("status", 1));
 
         return new PageUtils(page);
     }

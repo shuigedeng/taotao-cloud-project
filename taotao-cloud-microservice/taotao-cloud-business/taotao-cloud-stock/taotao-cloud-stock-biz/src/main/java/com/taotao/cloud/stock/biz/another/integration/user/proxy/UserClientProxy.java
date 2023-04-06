@@ -21,8 +21,11 @@ import com.taotao.cloud.stock.biz.another.integration.user.vo.UserBaseInfoVO;
 
 public class UserClientProxy {
 
-    @Resource private UserClientService userClientService;
-    @Resource private UserClientAdapter userIntegrationAdapter;
+    @Resource
+    private UserClientService userClientService;
+
+    @Resource
+    private UserClientAdapter userIntegrationAdapter;
 
     // 查询用户
     public UserBaseInfoVO getUserInfo(String userId) {

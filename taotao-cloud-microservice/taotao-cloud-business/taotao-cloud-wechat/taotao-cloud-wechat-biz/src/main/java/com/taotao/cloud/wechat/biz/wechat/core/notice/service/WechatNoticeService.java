@@ -47,29 +47,23 @@ public class WechatNoticeService {
     /** 发送模板信息 根据模板编号 */
     @SneakyThrows
     public String sentNotice(String code, String wxOpenId, List<KeyValue> keyValues) {
-        WeChatTemplate weChatTemplate =
-                weChatTemplateManager
-                        .findTemplateIdByCode(code)
-                        .orElseThrow(() -> new DataNotExistException("微信消息模板不存在"));
+        WeChatTemplate weChatTemplate = weChatTemplateManager
+                .findTemplateIdByCode(code)
+                .orElseThrow(() -> new DataNotExistException("微信消息模板不存在"));
         return this.sentNoticeByTemplateId(weChatTemplate.getTemplateId(), wxOpenId, keyValues);
     }
 
     /** 发送模板信息 根据微信消息模板ID */
     @SneakyThrows
-    public String sentNoticeByTemplateId(
-            String templateId, String wxOpenId, List<KeyValue> keyValues) {
+    public String sentNoticeByTemplateId(String templateId, String wxOpenId, List<KeyValue> keyValues) {
         WxMpTemplateMsgService templateMsgService = wxMpService.getTemplateMsgService();
         WxMpTemplateMessage message = new WxMpTemplateMessage();
         message.setToUser(wxOpenId);
         message.setTemplateId(templateId);
 
-        List<WxMpTemplateData> wxMpTemplateData =
-                keyValues.stream()
-                        .map(
-                                keyValue ->
-                                        new WxMpTemplateData(
-                                                keyValue.getKey(), keyValue.getValue()))
-                        .collect(Collectors.toList());
+        List<WxMpTemplateData> wxMpTemplateData = keyValues.stream()
+                .map(keyValue -> new WxMpTemplateData(keyValue.getKey(), keyValue.getValue()))
+                .collect(Collectors.toList());
         message.setData(wxMpTemplateData);
         return templateMsgService.sendTemplateMsg(message);
     }

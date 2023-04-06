@@ -53,7 +53,8 @@ public class Receipt extends BaseSuperEntity<Receipt, Long> {
 
     public static final String TABLE_NAME = "tt_receipt";
 
-    @Serial private static final long serialVersionUID = -8210927482915675995L;
+    @Serial
+    private static final long serialVersionUID = -8210927482915675995L;
 
     /** 订单编号 */
     @Column(name = "order_sn", columnDefinition = "varchar(64) not null comment '订单编号'")
@@ -83,9 +84,7 @@ public class Receipt extends BaseSuperEntity<Receipt, Long> {
     @Column(name = "store_name", columnDefinition = "varchar(64) not null comment '商家名称'")
     private String storeName;
     /** 发票状态 0未开 1已开 */
-    @Column(
-            name = "receipt_status",
-            columnDefinition = "varchar(64) not null comment '发票状态 0未开 1已开'")
+    @Column(name = "receipt_status", columnDefinition = "varchar(64) not null comment '发票状态 0未开 1已开'")
     private Integer receiptStatus;
     /** 发票详情 */
     @Column(name = "receipt_detail", columnDefinition = "varchar(64) not null comment '发票详情'")

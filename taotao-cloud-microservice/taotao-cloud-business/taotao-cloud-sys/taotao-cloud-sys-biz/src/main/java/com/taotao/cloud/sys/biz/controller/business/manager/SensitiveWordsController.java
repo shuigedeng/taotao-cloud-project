@@ -51,9 +51,7 @@ public class SensitiveWordsController {
     @Operation(summary = "通过id获取", description = "通过id获取")
     @GetMapping(value = "/{id}")
     public Result<SensitiveWord> get(
-            @Parameter(description = "敏感词ID", required = true)
-                    @NotBlank(message = "敏感词ID不能为空")
-                    @PathVariable
+            @Parameter(description = "敏感词ID", required = true) @NotBlank(message = "敏感词ID不能为空") @PathVariable
                     String id) {
         return Result.success(sensitiveWordService.getById(id));
     }
@@ -75,10 +73,7 @@ public class SensitiveWordsController {
     @Operation(summary = "修改敏感词", description = "修改敏感词")
     @PutMapping("/{id}")
     public Result<SensitiveWord> edit(
-            @Parameter(description = "敏感词ID", required = true)
-                    @NotNull(message = "敏感词ID不能为空")
-                    @PathVariable
-                    Long id,
+            @Parameter(description = "敏感词ID", required = true) @NotNull(message = "敏感词ID不能为空") @PathVariable Long id,
             @RequestBody SensitiveWord sensitiveWords) {
         sensitiveWords.setId(id);
         sensitiveWordService.updateById(sensitiveWords);
@@ -89,9 +84,7 @@ public class SensitiveWordsController {
     @Operation(summary = "批量删除", description = "批量删除")
     @DeleteMapping(value = "/{ids}")
     public Result<Boolean> delAllByIds(
-            @Parameter(description = "敏感词ID", required = true)
-                    @NotEmpty(message = "敏感词ID不能为空")
-                    @PathVariable
+            @Parameter(description = "敏感词ID", required = true) @NotEmpty(message = "敏感词ID不能为空") @PathVariable
                     List<String> ids) {
         sensitiveWordService.removeByIds(ids);
         sensitiveWordService.resetCache();

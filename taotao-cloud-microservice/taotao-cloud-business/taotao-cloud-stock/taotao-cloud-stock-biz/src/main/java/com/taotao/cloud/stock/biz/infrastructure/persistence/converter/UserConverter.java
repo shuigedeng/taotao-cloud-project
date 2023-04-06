@@ -30,21 +30,21 @@ public class UserConverter {
         if (sysUserDO == null) {
             return null;
         }
-        User user =
-                new User(
-                        new UserId(sysUserDO.getId()),
-                        new UserName(sysUserDO.getUserName()),
-                        StatusEnum.getStatusEnum(sysUserDO.getStatus()),
-                        account,
-                        new TenantId(sysUserDO.getTenantId()),
-                        roleIdList);
+        User user = new User(
+                new UserId(sysUserDO.getId()),
+                new UserName(sysUserDO.getUserName()),
+                StatusEnum.getStatusEnum(sysUserDO.getStatus()),
+                account,
+                new TenantId(sysUserDO.getTenantId()),
+                roleIdList);
         return user;
     }
 
     public static SysUserDO fromUser(User user, String accountId) {
         SysUserDO sysUserDO = new SysUserDO();
         sysUserDO.setId(user.getUserId() == null ? null : user.getUserId().getId());
-        sysUserDO.setUserName(user.getUserName() == null ? null : user.getUserName().getName());
+        sysUserDO.setUserName(
+                user.getUserName() == null ? null : user.getUserName().getName());
         sysUserDO.setStatus(user.getStatus() == null ? null : user.getStatus().getValue());
         sysUserDO.setAccountId(accountId);
         return sysUserDO;
@@ -56,8 +56,10 @@ public class UserConverter {
         if (account == null) {
             return null;
         }
-        sysAccountDO.setId(account.getAccountId() == null ? null : account.getAccountId().getId());
-        sysAccountDO.setEmail(account.getEmail() == null ? null : account.getEmail().getEmail());
+        sysAccountDO.setId(
+                account.getAccountId() == null ? null : account.getAccountId().getId());
+        sysAccountDO.setEmail(
+                account.getEmail() == null ? null : account.getEmail().getEmail());
         sysAccountDO.setMobile(
                 account.getMobile() == null ? null : account.getMobile().getMobile());
         sysAccountDO.setPassword(

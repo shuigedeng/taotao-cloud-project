@@ -39,54 +39,38 @@ import org.apache.commons.lang3.StringUtils;
 public class AlipayKit {
 
     /** 放置 isv特殊信息 * */
-    public static void putApiIsvInfo(
-            MchAppConfigContext mchAppConfigContext, AlipayRequest req, AlipayObject model) {
+    public static void putApiIsvInfo(MchAppConfigContext mchAppConfigContext, AlipayRequest req, AlipayObject model) {
 
         // 不是特约商户， 无需放置此值
         if (!mchAppConfigContext.isIsvsubMch()) {
             return;
         }
 
-        ConfigContextQueryService configContextQueryService =
-                SpringBeansUtil.getBean(ConfigContextQueryService.class);
+        ConfigContextQueryService configContextQueryService = SpringBeansUtil.getBean(ConfigContextQueryService.class);
 
         // 获取支付参数
-        AlipayIsvParams isvParams =
-                (AlipayIsvParams)
-                        configContextQueryService.queryIsvParams(
-                                mchAppConfigContext.getMchInfo().getIsvNo(), CS.IF_CODE.ALIPAY);
-        AlipayIsvsubMchParams isvsubMchParams =
-                (AlipayIsvsubMchParams)
-                        configContextQueryService.queryIsvsubMchParams(
-                                mchAppConfigContext.getMchNo(),
-                                mchAppConfigContext.getAppId(),
-                                CS.IF_CODE.ALIPAY);
+        AlipayIsvParams isvParams = (AlipayIsvParams) configContextQueryService.queryIsvParams(
+                mchAppConfigContext.getMchInfo().getIsvNo(), CS.IF_CODE.ALIPAY);
+        AlipayIsvsubMchParams isvsubMchParams = (AlipayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), CS.IF_CODE.ALIPAY);
 
         // 子商户信息
         if (req instanceof AlipayTradePayRequest) {
-            ((AlipayTradePayRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradePayRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeAppPayRequest) {
-            ((AlipayTradeAppPayRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradeAppPayRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeCreateRequest) {
-            ((AlipayTradeCreateRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradeCreateRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradePagePayRequest) {
-            ((AlipayTradePagePayRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradePagePayRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradePrecreateRequest) {
-            ((AlipayTradePrecreateRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradePrecreateRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeWapPayRequest) {
-            ((AlipayTradeWapPayRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradeWapPayRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeQueryRequest) {
-            ((AlipayTradeQueryRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradeQueryRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeRefundRequest) {
-            ((AlipayTradeRefundRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradeRefundRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeFastpayRefundQueryRequest) {
             ((AlipayTradeFastpayRefundQueryRequest) req)
                     .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
@@ -100,8 +84,7 @@ public class AlipayKit {
             ((AlipayTradeOrderSettleRequest) req)
                     .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         } else if (req instanceof AlipayTradeCloseRequest) {
-            ((AlipayTradeCloseRequest) req)
-                    .putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
+            ((AlipayTradeCloseRequest) req).putOtherTextParam("app_auth_token", isvsubMchParams.getAppAuthToken());
         }
 
         // 服务商信息

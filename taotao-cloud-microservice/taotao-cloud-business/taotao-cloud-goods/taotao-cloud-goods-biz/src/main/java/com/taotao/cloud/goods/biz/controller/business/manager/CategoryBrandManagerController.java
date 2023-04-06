@@ -65,9 +65,7 @@ public class CategoryBrandManagerController {
     @PostMapping(value = "/{categoryId}/{categoryBrands}")
     public Result<Boolean> saveCategoryBrand(
             @NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId,
-            @NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands")
-                    List<Long> categoryBrands) {
-        return Result.success(
-                categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
+            @NotBlank(message = "品牌id列表不能为空") @PathVariable(value = "categoryBrands") List<Long> categoryBrands) {
+        return Result.success(categoryBrandService.saveCategoryBrandList(categoryId, categoryBrands));
     }
 }

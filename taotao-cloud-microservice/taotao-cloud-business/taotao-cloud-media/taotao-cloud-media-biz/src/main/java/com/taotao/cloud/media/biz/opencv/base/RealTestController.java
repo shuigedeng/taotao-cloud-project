@@ -89,13 +89,7 @@ public class RealTestController extends BaseController {
         Mat dst = new Mat(source1.rows(), source1.cols(), source1.type());
         System.out.println(source1.rows() + " " + source1.cols());
         Imgproc.warpPerspective(
-                source1,
-                dst,
-                warpMatrix,
-                dst.size(),
-                Imgproc.INTER_LINEAR,
-                0,
-                new Scalar(255, 255, 255));
+                source1, dst, warpMatrix, dst.size(), Imgproc.INTER_LINEAR, 0, new Scalar(255, 255, 255));
         // destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "rect2.png";
         // Highgui.imwrite(destPath, dst);
         long time2 = new Date().getTime();
@@ -118,12 +112,7 @@ public class RealTestController extends BaseController {
      * @param anchor04 void @Date 2018年2月7日
      */
     public static void fetchAnchorPoints1(
-            Mat grayImage,
-            Mat mattmp,
-            Point anchor01,
-            Point anchor02,
-            Point anchor03,
-            Point anchor04) {
+            Mat grayImage, Mat mattmp, Point anchor01, Point anchor02, Point anchor03, Point anchor04) {
         long t1 = new Date().getTime();
         Mat imagematch = new Mat();
         Point maxLoc01, maxLoc02, maxLoc03, maxLoc04;

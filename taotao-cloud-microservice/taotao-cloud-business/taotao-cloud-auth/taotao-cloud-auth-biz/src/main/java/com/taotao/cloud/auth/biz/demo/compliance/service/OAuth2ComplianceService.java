@@ -66,34 +66,31 @@ public class OAuth2ComplianceService extends BaseLayeredService<OAuth2Compliance
             int pageNumber, int pageSize, String principalName, String clientId, String ip) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        Specification<OAuth2Compliance> specification =
-                (root, criteriaQuery, criteriaBuilder) -> {
-                    List<Predicate> predicates = new ArrayList<>();
+        Specification<OAuth2Compliance> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-                    if (StringUtils.isNotBlank(principalName)) {
-                        predicates.add(
-                                criteriaBuilder.equal(root.get("principalName"), principalName));
-                    }
+            if (StringUtils.isNotBlank(principalName)) {
+                predicates.add(criteriaBuilder.equal(root.get("principalName"), principalName));
+            }
 
-                    if (StringUtils.isNotBlank(clientId)) {
-                        predicates.add(criteriaBuilder.equal(root.get("clientId"), clientId));
-                    }
+            if (StringUtils.isNotBlank(clientId)) {
+                predicates.add(criteriaBuilder.equal(root.get("clientId"), clientId));
+            }
 
-                    if (StringUtils.isNotBlank(ip)) {
-                        predicates.add(criteriaBuilder.equal(root.get("ip"), ip));
-                    }
+            if (StringUtils.isNotBlank(ip)) {
+                predicates.add(criteriaBuilder.equal(root.get("ip"), ip));
+            }
 
-                    Predicate[] predicateArray = new Predicate[predicates.size()];
-                    criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
-                    return criteriaQuery.getRestriction();
-                };
+            Predicate[] predicateArray = new Predicate[predicates.size()];
+            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
+            return criteriaQuery.getRestriction();
+        };
 
         log.debug("[Herodotus] |- OAuth2Compliance Service findByCondition.");
         return this.findByPage(specification, pageable);
     }
 
-    public OAuth2Compliance save(
-            String principalName, String clientId, String operation, HttpServletRequest request) {
+    public OAuth2Compliance save(String principalName, String clientId, String operation, HttpServletRequest request) {
         OAuth2Compliance compliance = toEntity(principalName, clientId, operation, request);
         log.debug("[Herodotus] |- Sign in user is [{}]", compliance);
         return super.save(compliance);

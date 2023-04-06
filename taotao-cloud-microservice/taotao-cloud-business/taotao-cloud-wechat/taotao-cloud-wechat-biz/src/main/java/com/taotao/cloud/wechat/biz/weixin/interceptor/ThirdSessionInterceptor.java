@@ -49,8 +49,7 @@ public class ThirdSessionInterceptor extends HandlerInterceptorAdapter {
     private final RedisTemplate redisTemplate;
 
     @Override
-    public boolean preHandle(
-            HttpServletRequest request, HttpServletResponse response, Object handler)
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         // 获取header中的thirdSession
         String thirdSessionHeader = request.getHeader(ConfigConstant.HEADER_THIRDSESSION);
@@ -59,9 +58,7 @@ public class ThirdSessionInterceptor extends HandlerInterceptorAdapter {
             String key = WxMaConstants.THIRD_SESSION_BEGIN + ":" + thirdSessionHeader;
             Object thirdSessionObj = redisTemplate.opsForValue().get(key);
             if (thirdSessionObj == null) { // session过期
-                AjaxResult r =
-                        AjaxResult.error(
-                                MyReturnCode.ERR_60001.getCode(), MyReturnCode.ERR_60001.getMsg());
+                AjaxResult r = AjaxResult.error(MyReturnCode.ERR_60001.getCode(), MyReturnCode.ERR_60001.getMsg());
                 this.writerPrint(response, r);
                 return Boolean.FALSE;
             } else {
@@ -70,9 +67,7 @@ public class ThirdSessionInterceptor extends HandlerInterceptorAdapter {
                 ThirdSessionHolder.setThirdSession(thirdSession); // 设置thirdSession
             }
         } else {
-            AjaxResult r =
-                    AjaxResult.error(
-                            MyReturnCode.ERR_60002.getCode(), MyReturnCode.ERR_60002.getMsg());
+            AjaxResult r = AjaxResult.error(MyReturnCode.ERR_60002.getCode(), MyReturnCode.ERR_60002.getMsg());
             this.writerPrint(response, r);
             return Boolean.FALSE;
         }

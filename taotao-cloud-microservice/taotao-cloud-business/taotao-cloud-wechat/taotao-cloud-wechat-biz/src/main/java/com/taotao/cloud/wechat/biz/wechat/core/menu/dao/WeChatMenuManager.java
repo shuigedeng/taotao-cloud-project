@@ -49,6 +49,9 @@ public class WeChatMenuManager extends BaseManager<WeChatMenuMapper, WeChatMenu>
 
     /** 清除其他发布状态 */
     public void clearPublish() {
-        lambdaUpdate().eq(WeChatMenu::isPublish, true).set(WeChatMenu::isPublish, false).update();
+        lambdaUpdate()
+                .eq(WeChatMenu::isPublish, true)
+                .set(WeChatMenu::isPublish, false)
+                .update();
     }
 }

@@ -29,5 +29,4 @@ import org.springframework.stereotype.Service;
  * @create: 2022-03-19 20:42:34
  */
 @Service
-public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLogLogin>
-        implements SysLogLoginService {}
+public class SysLogLoginServiceImpl extends ServiceImpl<SysLogLoginMapper, SysLogLogin> implements SysLogLoginService {}

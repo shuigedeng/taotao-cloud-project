@@ -40,7 +40,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "发票搜索参数")
 public class ReceiptPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 
     @Schema(description = "发票抬头")
     private String receiptTitle;

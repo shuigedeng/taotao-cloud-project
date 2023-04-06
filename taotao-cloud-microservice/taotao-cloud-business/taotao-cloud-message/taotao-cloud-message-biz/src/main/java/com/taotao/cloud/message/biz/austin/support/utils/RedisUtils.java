@@ -37,7 +37,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class RedisUtils {
 
-    @Autowired private StringRedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      * mGet将结果封装为Map
@@ -91,17 +92,13 @@ public class RedisUtils {
     /** pipeline 设置 key-value 并设置过期时间 */
     public void pipelineSetEx(Map<String, String> keyValues, Long seconds) {
         try {
-            redisTemplate.executePipelined(
-                    (RedisCallback<String>)
-                            connection -> {
-                                for (Map.Entry<String, String> entry : keyValues.entrySet()) {
-                                    connection.setEx(
-                                            entry.getKey().getBytes(),
-                                            seconds,
-                                            entry.getValue().getBytes());
-                                }
-                                return null;
-                            });
+            redisTemplate.executePipelined((RedisCallback<String>) connection -> {
+                for (Map.Entry<String, String> entry : keyValues.entrySet()) {
+                    connection.setEx(
+                            entry.getKey().getBytes(), seconds, entry.getValue().getBytes());
+                }
+                return null;
+            });
         } catch (Exception e) {
             log.error("RedisUtils#pipelineSetEx fail! e:{}", Throwables.getStackTraceAsString(e));
         }
@@ -110,13 +107,11 @@ public class RedisUtils {
     /** lpush 方法 并指定 过期时间 */
     public void lPush(String key, String value, Long seconds) {
         try {
-            redisTemplate.executePipelined(
-                    (RedisCallback<String>)
-                            connection -> {
-                                connection.lPush(key.getBytes(), value.getBytes());
-                                connection.expire(key.getBytes(), seconds);
-                                return null;
-                            });
+            redisTemplate.executePipelined((RedisCallback<String>) connection -> {
+                connection.lPush(key.getBytes(), value.getBytes());
+                connection.expire(key.getBytes(), seconds);
+                return null;
+            });
         } catch (Exception e) {
             log.error("RedisUtils#pipelineSetEx fail! e:{}", Throwables.getStackTraceAsString(e));
         }
@@ -150,18 +145,14 @@ public class RedisUtils {
      */
     public void pipelineHashIncrByEx(Map<String, String> keyValues, Long seconds, Long delta) {
         try {
-            redisTemplate.executePipelined(
-                    (RedisCallback<String>)
-                            connection -> {
-                                for (Map.Entry<String, String> entry : keyValues.entrySet()) {
-                                    connection.hIncrBy(
-                                            entry.getKey().getBytes(),
-                                            entry.getValue().getBytes(),
-                                            delta);
-                                    connection.expire(entry.getKey().getBytes(), seconds);
-                                }
-                                return null;
-                            });
+            redisTemplate.executePipelined((RedisCallback<String>) connection -> {
+                for (Map.Entry<String, String> entry : keyValues.entrySet()) {
+                    connection.hIncrBy(
+                            entry.getKey().getBytes(), entry.getValue().getBytes(), delta);
+                    connection.expire(entry.getKey().getBytes(), seconds);
+                }
+                return null;
+            });
         } catch (Exception e) {
             log.error("redis pipelineSetEX fail! e:{}", Throwables.getStackTraceAsString(e));
         }

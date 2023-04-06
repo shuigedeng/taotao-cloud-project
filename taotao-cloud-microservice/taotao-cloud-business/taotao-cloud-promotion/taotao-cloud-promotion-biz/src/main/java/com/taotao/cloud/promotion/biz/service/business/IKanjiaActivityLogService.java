@@ -40,8 +40,7 @@ public interface IKanjiaActivityLogService extends IService<KanjiaActivityLog> {
      * @return {@link IPage }<{@link KanjiaActivityLog }>
      * @since 2022-04-27 16:43:40
      */
-    IPage<KanjiaActivityLog> getForPage(
-            KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageQuery pageVO);
+    IPage<KanjiaActivityLog> getForPage(KanJiaActivityLogPageQuery kanJiaActivityLogPageQuery, PageQuery pageVO);
 
     /**
      * 砍一刀

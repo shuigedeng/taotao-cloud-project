@@ -67,16 +67,10 @@ public class RetryUtils {
             try {
                 v = retryCallable.call();
             } catch (Exception e) {
-                log.warn(
-                        "retry on " + (i + 1) + " times v = " + (v == null ? null : v.getJson()),
-                        e);
+                log.warn("retry on " + (i + 1) + " times v = " + (v == null ? null : v.getJson()), e);
             }
             if (null != v && v.matching()) break;
-            log.error(
-                    "retry on "
-                            + (i + 1)
-                            + " times but not matching v = "
-                            + (v == null ? null : v.getJson()));
+            log.error("retry on " + (i + 1) + " times but not matching v = " + (v == null ? null : v.getJson()));
         }
         return v;
     }
@@ -99,18 +93,12 @@ public class RetryUtils {
             try {
                 v = retryCallable.call();
             } catch (Exception e) {
-                log.warn(
-                        "retry on " + (i + 1) + " times v = " + (v == null ? null : v.getJson()),
-                        e);
+                log.warn("retry on " + (i + 1) + " times v = " + (v == null ? null : v.getJson()), e);
             }
             if (null != v && v.matching()) {
                 break;
             }
-            log.error(
-                    "retry on "
-                            + (i + 1)
-                            + " times but not matching v = "
-                            + (v == null ? null : v.getJson()));
+            log.error("retry on " + (i + 1) + " times but not matching v = " + (v == null ? null : v.getJson()));
             if (sleepMillis > 0) {
                 Thread.sleep(sleepMillis);
             }

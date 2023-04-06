@@ -32,8 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ExpenseExpenditure")
 public class ExpenseExpenditureController {
 
-    @Autowired private ExpenseExpenditureService expenseExpenditureService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ExpenseExpenditureService expenseExpenditureService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取费用支出单信息
@@ -43,17 +46,15 @@ public class ExpenseExpenditureController {
      */
     @Operation("获取费用支出单信息")
     @GetMapping("/{id}")
-    public Result<ExpenseExpenditureInfoVO> info(
-            @PathVariable("id") String id, String taskOperatorId) throws DataException {
+    public Result<ExpenseExpenditureInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
+            throws DataException {
         ExpenseExpenditureInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtil.getJsonToBean(
-                                    operator.getDraftData(), ExpenseExpenditureInfoVO.class);
+                    vo = JsonUtil.getJsonToBean(operator.getDraftData(), ExpenseExpenditureInfoVO.class);
                     isData = false;
                 }
             }
@@ -73,16 +74,14 @@ public class ExpenseExpenditureController {
      */
     @Operation("新建费用支出单")
     @PostMapping
-    public Result create(@RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm) throws WorkFlowException {
         ExpenseExpenditureEntity entity =
                 JsonUtil.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(expenseExpenditureForm.getStatus())) {
             expenseExpenditureService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        expenseExpenditureService.submit(
-                entity.getId(), entity, expenseExpenditureForm.getCandidateList());
+        expenseExpenditureService.submit(entity.getId(), entity, expenseExpenditureForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -96,8 +95,7 @@ public class ExpenseExpenditureController {
     @Operation("修改费用支出单")
     @PutMapping("/{id}")
     public Result update(
-            @RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm,
-            @PathVariable("id") String id)
+            @RequestBody @Valid ExpenseExpenditureForm expenseExpenditureForm, @PathVariable("id") String id)
             throws WorkFlowException {
         ExpenseExpenditureEntity entity =
                 JsonUtil.getJsonToBean(expenseExpenditureForm, ExpenseExpenditureEntity.class);

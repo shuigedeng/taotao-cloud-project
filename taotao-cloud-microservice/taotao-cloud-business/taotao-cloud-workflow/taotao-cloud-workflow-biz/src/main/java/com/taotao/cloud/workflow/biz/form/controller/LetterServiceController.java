@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/LetterService")
 public class LetterServiceController {
 
-    @Autowired private LetterServiceService letterServiceService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private LetterServiceService letterServiceService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取发文单信息
@@ -52,17 +55,14 @@ public class LetterServiceController {
      */
     @Operation("获取发文单信息")
     @GetMapping("/{id}")
-    public Result<LetterServiceInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<LetterServiceInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         LetterServiceInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), LetterServiceInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), LetterServiceInfoVO.class);
                     isData = false;
                 }
             }
@@ -82,15 +82,13 @@ public class LetterServiceController {
      */
     @Operation("新建发文单")
     @PostMapping
-    public Result create(@RequestBody @Valid LetterServiceForm letterServiceForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid LetterServiceForm letterServiceForm) throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null
                 && StringUtil.isNotEmpty(letterServiceForm.getShareNum())
                 && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
             return Result.fail("份数只能输入正整数");
         }
-        LetterServiceEntity entity =
-                JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
+        LetterServiceEntity entity = JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(letterServiceForm.getStatus())) {
             letterServiceService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -108,16 +106,14 @@ public class LetterServiceController {
      */
     @Operation("修改发文单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid LetterServiceForm letterServiceForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid LetterServiceForm letterServiceForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (letterServiceForm.getShareNum() != null
                 && StringUtil.isNotEmpty(letterServiceForm.getShareNum())
                 && !RegexUtils.checkDigit2(letterServiceForm.getShareNum())) {
             return Result.fail("份数只能输入正整数");
         }
-        LetterServiceEntity entity =
-                JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
+        LetterServiceEntity entity = JsonUtils.getJsonToBean(letterServiceForm, LetterServiceEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(letterServiceForm.getStatus())) {
             letterServiceService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

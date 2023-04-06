@@ -34,7 +34,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class DraftGoodsSkuParamsVO extends DraftGoodsVO {
 
-    @Serial private static final long serialVersionUID = 6377623919990713567L;
+    @Serial
+    private static final long serialVersionUID = 6377623919990713567L;
 
     @Schema(description = "分类名称")
     private List<String> categoryName;

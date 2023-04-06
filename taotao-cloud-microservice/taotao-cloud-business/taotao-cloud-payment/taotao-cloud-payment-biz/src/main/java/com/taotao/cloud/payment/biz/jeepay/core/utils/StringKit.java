@@ -33,7 +33,8 @@ import org.apache.commons.lang3.StringUtils;
 public class StringKit {
 
     public static String getUUID() {
-        return UUID.randomUUID().toString().replace("-", "") + Thread.currentThread().getId();
+        return UUID.randomUUID().toString().replace("-", "")
+                + Thread.currentThread().getId();
     }
 
     public static String getUUID(int endAt) {
@@ -76,12 +77,11 @@ public class StringKit {
             return url;
         }
         UrlBuilder result = UrlBuilder.of(url);
-        map.forEach(
-                (k, v) -> {
-                    if (k != null && v != null) {
-                        result.addQuery(k, v.toString());
-                    }
-                });
+        map.forEach((k, v) -> {
+            if (k != null && v != null) {
+                result.addQuery(k, v.toString());
+            }
+        });
 
         return result.build();
     }

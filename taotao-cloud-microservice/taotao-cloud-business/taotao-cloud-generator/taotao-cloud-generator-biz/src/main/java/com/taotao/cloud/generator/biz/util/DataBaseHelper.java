@@ -34,8 +34,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DataBaseHelper {
 
-    private static final DynamicRoutingDataSource DS =
-            ContextUtils.getBean(DynamicRoutingDataSource.class);
+    private static final DynamicRoutingDataSource DS = ContextUtils.getBean(DynamicRoutingDataSource.class);
 
     /** 获取当前数据库类型 */
     public static DataBaseType getDataBaseType() {

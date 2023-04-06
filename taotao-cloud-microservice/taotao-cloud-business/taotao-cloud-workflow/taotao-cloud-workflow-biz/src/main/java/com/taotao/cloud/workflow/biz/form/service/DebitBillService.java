@@ -48,8 +48,7 @@ public interface DebitBillService extends IService<DebitBillEntity> {
      * @param entity 实体对象
      * @throws WorkFlowException 异常
      */
-    void submit(String id, DebitBillEntity entity, Map<String, List<String>> candidateList)
-            throws WorkFlowException;
+    void submit(String id, DebitBillEntity entity, Map<String, List<String>> candidateList) throws WorkFlowException;
 
     /**
      * 更改数据

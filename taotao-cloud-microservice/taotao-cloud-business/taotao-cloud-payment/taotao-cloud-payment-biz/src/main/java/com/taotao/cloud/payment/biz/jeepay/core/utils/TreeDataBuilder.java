@@ -58,12 +58,7 @@ public class TreeDataBuilder {
 
     /** 自定义字段 + 排序标志 * */
     public TreeDataBuilder(
-            Collection nodes,
-            String idName,
-            String pidName,
-            String childrenName,
-            String sortName,
-            boolean isAscSort) {
+            Collection nodes, String idName, String pidName, String childrenName, String sortName, boolean isAscSort) {
         super();
         this.nodes = nodes;
         this.idName = idName;
@@ -148,8 +143,7 @@ public class TreeDataBuilder {
     private boolean isRootNode(JSONObject node) {
         boolean isRootNode = true;
         for (JSONObject n : nodes) {
-            if (node.getString(pidName) != null
-                    && node.getString(pidName).equals(n.getString(idName))) {
+            if (node.getString(pidName) != null && node.getString(pidName).equals(n.getString(idName))) {
                 isRootNode = false;
                 break;
             }
@@ -170,21 +164,19 @@ public class TreeDataBuilder {
 
     /** 将list进行排序 */
     private void listSort(List<JSONObject> list) {
-        Collections.sort(
-                list,
-                (o1, o2) -> {
-                    int result;
-                    if (o1.get(sortName) instanceof Integer) {
-                        result = o1.getInteger(sortName).compareTo(o2.getInteger(sortName));
-                    } else {
-                        result = o1.get(sortName).toString().compareTo(o2.get(sortName).toString());
-                    }
+        Collections.sort(list, (o1, o2) -> {
+            int result;
+            if (o1.get(sortName) instanceof Integer) {
+                result = o1.getInteger(sortName).compareTo(o2.getInteger(sortName));
+            } else {
+                result = o1.get(sortName).toString().compareTo(o2.get(sortName).toString());
+            }
 
-                    if (!isAscSort) { // 倒序， 取反数
-                        return -result;
-                    }
+            if (!isAscSort) { // 倒序， 取反数
+                return -result;
+            }
 
-                    return result;
-                });
+            return result;
+        });
     }
 }

@@ -46,8 +46,7 @@ public class InterruptTaskC extends AsyncTask<String, Integer> {
             Integer rt = getResult(support);
             String result = getResult(support, InterruptTaskA.class, String.class);
             TaskResult<Integer> tk = getTaskResult(support);
-            TaskResult<String> taskResult =
-                    getTaskResult(support, InterruptTaskA.class, String.class);
+            TaskResult<String> taskResult = getTaskResult(support, InterruptTaskA.class, String.class);
             Thread.sleep(300);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;

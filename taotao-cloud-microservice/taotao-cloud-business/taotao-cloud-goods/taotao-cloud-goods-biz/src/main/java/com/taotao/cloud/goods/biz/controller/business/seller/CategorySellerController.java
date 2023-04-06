@@ -65,8 +65,7 @@ public class CategorySellerController {
         // 获取店铺经营范围
         String goodsManagementCategory =
                 storeDetailService.getStoreDetailVO(storeId).getGoodsManagementCategory();
-        return Result.success(
-                this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
+        return Result.success(this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
     }
 
     @Operation(summary = "获取所选分类关联的品牌信息", description = "获取所选分类关联的品牌信息")

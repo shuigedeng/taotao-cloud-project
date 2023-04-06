@@ -70,9 +70,7 @@ public class DistributionCash extends BaseSuperEntity<DistributionCash, Long> {
     @Column(name = "pay_time", columnDefinition = "datetime not null  comment '支付时间'")
     private LocalDateTime payTime;
     /** 状态 */
-    @Column(
-            name = "distribution_cash_status",
-            columnDefinition = "varchar(255) not null  comment '状态'")
+    @Column(name = "distribution_cash_status", columnDefinition = "varchar(255) not null  comment '状态'")
     private String distributionCashStatus;
 
     public DistributionCash(String sn, Long distributionId, BigDecimal price, String memberName) {

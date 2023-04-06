@@ -40,7 +40,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GoodsPageQuery extends PageQuery {
 
-    @Serial private static final long serialVersionUID = 2544015852728566887L;
+    @Serial
+    private static final long serialVersionUID = 2544015852728566887L;
 
     @Schema(description = "商品编号")
     private Long goodsId;

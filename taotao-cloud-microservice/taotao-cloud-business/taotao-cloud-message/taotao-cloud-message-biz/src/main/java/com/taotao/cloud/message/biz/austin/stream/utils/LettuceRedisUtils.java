@@ -38,11 +38,10 @@ public class LettuceRedisUtils {
     private static RedisClient redisClient;
 
     static {
-        RedisURI redisUri =
-                RedisURI.Builder.redis(AustinFlinkConstant.REDIS_IP)
-                        .withPort(Integer.valueOf(AustinFlinkConstant.REDIS_PORT))
-                        .withPassword(AustinFlinkConstant.REDIS_PASSWORD.toCharArray())
-                        .build();
+        RedisURI redisUri = RedisURI.Builder.redis(AustinFlinkConstant.REDIS_IP)
+                .withPort(Integer.valueOf(AustinFlinkConstant.REDIS_PORT))
+                .withPassword(AustinFlinkConstant.REDIS_PASSWORD.toCharArray())
+                .build();
         redisClient = RedisClient.create(redisUri);
     }
 
@@ -54,8 +53,7 @@ public class LettuceRedisUtils {
         List<RedisFuture<?>> futures = pipelineCallBack.invoke(commands);
 
         commands.flushCommands();
-        LettuceFutures.awaitAll(
-                10, TimeUnit.SECONDS, futures.toArray(new RedisFuture[futures.size()]));
+        LettuceFutures.awaitAll(10, TimeUnit.SECONDS, futures.toArray(new RedisFuture[futures.size()]));
         connect.close();
     }
 }

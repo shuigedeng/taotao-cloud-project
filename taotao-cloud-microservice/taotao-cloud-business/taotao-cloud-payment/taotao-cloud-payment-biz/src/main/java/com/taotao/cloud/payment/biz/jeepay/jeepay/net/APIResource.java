@@ -67,15 +67,14 @@ public abstract class APIResource {
         }
     }
 
-    public <T extends JeepayResponse> T execute(
-            JeepayRequest<T> request, RequestMethod method, String url) throws JeepayException {
+    public <T extends JeepayResponse> T execute(JeepayRequest<T> request, RequestMethod method, String url)
+            throws JeepayException {
 
         String jsonParam = new JSONWriter().write(request.getBizModel(), true);
 
         JSONObject params = JSONObject.parseObject(jsonParam);
         request.getRequestOptions();
-        APIJeepayRequest apiJeepayRequest =
-                new APIJeepayRequest(method, url, params, request.getRequestOptions());
+        APIJeepayRequest apiJeepayRequest = new APIJeepayRequest(method, url, params, request.getRequestOptions());
         if (_log.isDebugEnabled())
             _log.debug(
                     "Jeepay_SDK_REQ：url={}, data={}",
@@ -84,8 +83,7 @@ public abstract class APIResource {
         APIJeepayResponse response = httpClient.requestWithRetries(apiJeepayRequest);
         int responseCode = response.getResponseCode();
         String responseBody = response.getResponseBody();
-        if (_log.isDebugEnabled())
-            _log.debug("Jeepay_SDK_RES：code={}, body={}", responseCode, responseBody);
+        if (_log.isDebugEnabled()) _log.debug("Jeepay_SDK_RES：code={}, body={}", responseCode, responseBody);
         if (responseCode != 200) {
             handleAPIError(response);
         }
@@ -131,8 +129,7 @@ public abstract class APIResource {
         }
     }
 
-    private static void raiseMalformedJsonError(String responseBody, int responseCode)
-            throws APIException {
+    private static void raiseMalformedJsonError(String responseBody, int responseCode) throws APIException {
         throw new APIException(
                 String.format(
                         "Invalid response object from API: %s. (HTTP response code was %d)",

@@ -56,9 +56,7 @@ public class TenantManager {
         TenantDO tenantDO = new TenantDO();
         tenantDO.setId(tenantId);
 
-        tenantMapper.update(
-                tenantDO,
-                Wrappers.<TenantDO>lambdaUpdate().set(TenantDO::getTenantAdminId, userId));
+        tenantMapper.update(tenantDO, Wrappers.<TenantDO>lambdaUpdate().set(TenantDO::getTenantAdminId, userId));
     }
 
     public Integer updateTenant(TenantDTO tenantDTO) {
@@ -80,16 +78,13 @@ public class TenantManager {
     }
 
     public List<TenantDO> getTenantListByPackageId(Long packageId) {
-        return tenantMapper.selectList(
-                Wrappers.<TenantDO>lambdaQuery().eq(TenantDO::getPackageId, packageId));
+        return tenantMapper.selectList(Wrappers.<TenantDO>lambdaQuery().eq(TenantDO::getPackageId, packageId));
     }
 
     public Boolean validTenantPackageUsed(Long packageId) {
-        TenantDO tenantDO =
-                tenantMapper.selectOne(
-                        Wrappers.<TenantDO>lambdaQuery()
-                                .eq(TenantDO::getPackageId, packageId)
-                                .last("limit 1"));
+        TenantDO tenantDO = tenantMapper.selectOne(Wrappers.<TenantDO>lambdaQuery()
+                .eq(TenantDO::getPackageId, packageId)
+                .last("limit 1"));
         return Objects.nonNull(tenantDO);
     }
 }

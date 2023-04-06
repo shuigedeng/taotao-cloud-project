@@ -40,8 +40,7 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
  */
 public class HerodotusSecurityMetadataSource {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(HerodotusSecurityMetadataSource.class);
+    private static final Logger log = LoggerFactory.getLogger(HerodotusSecurityMetadataSource.class);
 
     private final SecurityMetadataSourceStorage securityMetadataSourceStorage;
     private final SecurityMatcherConfigurer securityMatcherConfigurer;
@@ -64,8 +63,7 @@ public class HerodotusSecurityMetadataSource {
      * @throws IllegalArgumentException 参数错误
      * @see <a href="https://blog.csdn.net/u012373815/article/details/54633046">参考资料</a>
      */
-    public HerodotusConfigAttribute getAttributes(RequestAuthorizationContext object)
-            throws IllegalArgumentException {
+    public HerodotusConfigAttribute getAttributes(RequestAuthorizationContext object) throws IllegalArgumentException {
 
         // object 中包含用户请求的request 信息
         final HttpServletRequest request = object.getRequest();
@@ -92,26 +90,20 @@ public class HerodotusSecurityMetadataSource {
         return findConfigAttribute(url, method, request);
     }
 
-    private HerodotusConfigAttribute findConfigAttribute(
-            String url, String method, HttpServletRequest request) {
+    private HerodotusConfigAttribute findConfigAttribute(String url, String method, HttpServletRequest request) {
 
         log.debug("[Herodotus] |- Current Request is : [{}] - [{}]", url, method);
 
-        HerodotusConfigAttribute configAttribute =
-                this.securityMetadataSourceStorage.getConfigAttribute(url, method);
+        HerodotusConfigAttribute configAttribute = this.securityMetadataSourceStorage.getConfigAttribute(url, method);
         if (ObjectUtils.isNotEmpty(configAttribute)) {
-            log.debug(
-                    "[Herodotus] |- Get configAttributes from local storage for : [{}] - [{}]",
-                    url,
-                    method);
+            log.debug("[Herodotus] |- Get configAttributes from local storage for : [{}] - [{}]", url, method);
             return configAttribute;
         } else {
             LinkedHashMap<HerodotusRequestMatcher, HerodotusConfigAttribute> compatible =
                     this.securityMetadataSourceStorage.getCompatible();
             if (MapUtils.isNotEmpty(compatible)) {
                 // 支持含有**通配符的路径搜索
-                for (Map.Entry<HerodotusRequestMatcher, HerodotusConfigAttribute> entry :
-                        compatible.entrySet()) {
+                for (Map.Entry<HerodotusRequestMatcher, HerodotusConfigAttribute> entry : compatible.entrySet()) {
                     if (entry.getKey().matches(request)) {
                         log.debug(
                                 "[Herodotus] |- Request match the wildcard [{}] - [{}]",

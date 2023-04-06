@@ -29,8 +29,7 @@ import org.springframework.data.jpa.repository.QueryHints;
  * @author : gengwei.zheng
  * @date : 2022/2/25 21:05
  */
-public interface HerodotusRegisteredClientRepository
-        extends BaseRepository<HerodotusRegisteredClient, String> {
+public interface HerodotusRegisteredClientRepository extends BaseRepository<HerodotusRegisteredClient, String> {
 
     /**
      * 根据 ClientId 查询 RegisteredClient

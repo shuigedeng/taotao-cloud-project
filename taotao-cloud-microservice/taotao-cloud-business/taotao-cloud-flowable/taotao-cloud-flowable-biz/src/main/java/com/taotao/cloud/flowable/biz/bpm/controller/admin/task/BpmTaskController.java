@@ -39,31 +39,26 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class BpmTaskController {
 
-    @Resource private BpmTaskService taskService;
+    @Resource
+    private BpmTaskService taskService;
 
     @GetMapping("todo-page")
     @ApiOperation("获取 Todo 待办任务分页")
     @PreAuthorize("@ss.hasPermission('bpm:task:query')")
-    public CommonResult<PageResult<BpmTaskTodoPageItemRespVO>> getTodoTaskPage(
-            @Valid BpmTaskTodoPageReqVO pageVO) {
+    public CommonResult<PageResult<BpmTaskTodoPageItemRespVO>> getTodoTaskPage(@Valid BpmTaskTodoPageReqVO pageVO) {
         return success(taskService.getTodoTaskPage(getLoginUserId(), pageVO));
     }
 
     @GetMapping("done-page")
     @ApiOperation("获取 Done 已办任务分页")
     @PreAuthorize("@ss.hasPermission('bpm:task:query')")
-    public CommonResult<PageResult<BpmTaskDonePageItemRespVO>> getDoneTaskPage(
-            @Valid BpmTaskDonePageReqVO pageVO) {
+    public CommonResult<PageResult<BpmTaskDonePageItemRespVO>> getDoneTaskPage(@Valid BpmTaskDonePageReqVO pageVO) {
         return success(taskService.getDoneTaskPage(getLoginUserId(), pageVO));
     }
 
     @GetMapping("/list-by-process-instance-id")
     @ApiOperation(value = "获得指定流程实例的任务列表", notes = "包括完成的、未完成的")
-    @ApiImplicitParam(
-            name = "processInstanceId",
-            value = "流程实例的编号",
-            required = true,
-            dataTypeClass = String.class)
+    @ApiImplicitParam(name = "processInstanceId", value = "流程实例的编号", required = true, dataTypeClass = String.class)
     @PreAuthorize("@ss.hasPermission('bpm:task:query')")
     public CommonResult<List<BpmTaskRespVO>> getTaskListByProcessInstanceId(
             @RequestParam("processInstanceId") String processInstanceId) {
@@ -89,8 +84,7 @@ public class BpmTaskController {
     @PutMapping("/update-assignee")
     @ApiOperation(value = "更新任务的负责人", notes = "用于【流程详情】的【转派】按钮")
     @PreAuthorize("@ss.hasPermission('bpm:task:update')")
-    public CommonResult<Boolean> updateTaskAssignee(
-            @Valid @RequestBody BpmTaskUpdateAssigneeReqVO reqVO) {
+    public CommonResult<Boolean> updateTaskAssignee(@Valid @RequestBody BpmTaskUpdateAssigneeReqVO reqVO) {
         taskService.updateTaskAssignee(getLoginUserId(), reqVO);
         return success(true);
     }

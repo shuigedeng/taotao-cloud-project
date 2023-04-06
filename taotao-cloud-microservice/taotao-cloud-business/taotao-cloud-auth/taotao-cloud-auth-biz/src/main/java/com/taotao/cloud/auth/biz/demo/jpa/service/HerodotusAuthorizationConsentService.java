@@ -39,8 +39,7 @@ import org.springframework.stereotype.Service;
 public class HerodotusAuthorizationConsentService
         extends BaseLayeredService<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
 
-    private static final Logger log =
-            LoggerFactory.getLogger(HerodotusAuthorizationConsentService.class);
+    private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationConsentService.class);
 
     private final HerodotusAuthorizationConsentRepository authorizationConsentRepository;
 
@@ -51,8 +50,7 @@ public class HerodotusAuthorizationConsentService
     }
 
     @Override
-    public BaseRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId>
-            getRepository() {
+    public BaseRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> getRepository() {
         return this.authorizationConsentRepository;
     }
 
@@ -62,17 +60,14 @@ public class HerodotusAuthorizationConsentService
                 this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(
                         registeredClientId, principalName);
         log.debug(
-                "[Herodotus] |- HerodotusAuthorizationConsent Service"
-                        + " findByRegisteredClientIdAndPrincipalName.");
+                "[Herodotus] |- HerodotusAuthorizationConsent Service" + " findByRegisteredClientIdAndPrincipalName.");
         return result;
     }
 
-    public void deleteByRegisteredClientIdAndPrincipalName(
-            String registeredClientId, String principalName) {
+    public void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName) {
         this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(
                 registeredClientId, principalName);
-        log.debug(
-                "[Herodotus] |- HerodotusAuthorizationConsent Service"
-                        + " deleteByRegisteredClientIdAndPrincipalName.");
+        log.debug("[Herodotus] |- HerodotusAuthorizationConsent Service"
+                + " deleteByRegisteredClientIdAndPrincipalName.");
     }
 }

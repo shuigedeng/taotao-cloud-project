@@ -35,8 +35,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     private static final String USER_ID = "user_id_";
 
     /** 存放Session集合，方便推送消息 */
-    private static ConcurrentHashMap<String, WebSocketSession> webSocketSessionMaps =
-            new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, WebSocketSession> webSocketSessionMaps = new ConcurrentHashMap<>();
 
     // 监听：连接开启
     @Override
@@ -54,8 +53,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
     // 监听：连接关闭
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status)
-            throws Exception {
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         // 从集合移除
         String userId = session.getAttributes().get("userId").toString();
         webSocketSessionMaps.remove(USER_ID + userId);
@@ -67,8 +65,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
     // 收到消息
     @Override
-    public void handleTextMessage(WebSocketSession session, TextMessage message)
-            throws IOException {
+    public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         System.out.println("sid为：" + session.getId() + "，发来：" + message);
     }
 

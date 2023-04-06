@@ -150,8 +150,7 @@ public class AfterSale extends BaseSuperEntity<AfterSale, Long> {
      */
     @Schema(
             description = "售后单状态",
-            allowableValues =
-                    "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
+            allowableValues = "APPLY,PASS,REFUSE,BUYER_RETURN,SELLER_RE_DELIVERY,BUYER_CONFIRM,SELLER_CONFIRM,COMPLETE")
     @Column(name = "service_status", columnDefinition = "varchar(64) null comment '售后单状态'")
     private String serviceStatus;
 

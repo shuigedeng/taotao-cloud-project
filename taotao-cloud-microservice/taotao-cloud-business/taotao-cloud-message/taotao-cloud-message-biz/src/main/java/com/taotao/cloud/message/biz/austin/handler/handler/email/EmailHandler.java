@@ -44,19 +44,19 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EmailHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();
 
         // 按照请求限流，默认单机 3 qps （具体数值配置在apollo动态调整)
         double rateInitValue = 3.0;
-        flowControlParam =
-                FlowControlParam.builder()
-                        .rateInitValue(rateInitValue)
-                        .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
-                        .rateLimiter(RateLimiter.create(rateInitValue))
-                        .build();
+        flowControlParam = FlowControlParam.builder()
+                .rateInitValue(rateInitValue)
+                .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
+                .rateLimiter(RateLimiter.create(rateInitValue))
+                .build();
     }
 
     @Override
@@ -72,10 +72,7 @@ public class EmailHandler extends BaseHandler implements Handler {
                     true,
                     null);
         } catch (Exception e) {
-            log.error(
-                    "EmailHandler#handler fail!{},params:{}",
-                    Throwables.getStackTraceAsString(e),
-                    taskInfo);
+            log.error("EmailHandler#handler fail!{},params:{}", Throwables.getStackTraceAsString(e), taskInfo);
             return false;
         }
         return true;
@@ -87,12 +84,11 @@ public class EmailHandler extends BaseHandler implements Handler {
      * @return
      */
     private MailAccount getAccountConfig(Integer sendAccount) {
-        MailAccount account =
-                accountUtils.getAccount(
-                        sendAccount,
-                        SendAccountConstant.EMAIL_ACCOUNT_KEY,
-                        SendAccountConstant.EMAIL_ACCOUNT_PREFIX,
-                        MailAccount.class);
+        MailAccount account = accountUtils.getAccount(
+                sendAccount,
+                SendAccountConstant.EMAIL_ACCOUNT_KEY,
+                SendAccountConstant.EMAIL_ACCOUNT_PREFIX,
+                MailAccount.class);
         try {
             MailSSLSocketFactory sf = new MailSSLSocketFactory();
             sf.setTrustAllHosts(true);

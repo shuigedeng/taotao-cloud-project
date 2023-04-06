@@ -34,7 +34,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChannelAccountServiceImpl implements ChannelAccountService {
 
-    @Autowired private ChannelAccountDao channelAccountDao;
+    @Autowired
+    private ChannelAccountDao channelAccountDao;
 
     @Override
     public ChannelAccount save(ChannelAccount channelAccount) {

@@ -51,8 +51,7 @@ public class AliQr extends AlipayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         AliQrOrderRQ aliQrOrderRQ = (AliQrOrderRQ) rq;
 
@@ -61,11 +60,8 @@ public class AliQr extends AlipayPaymentService {
         model.setOutTradeNo(payOrder.getPayOrderId());
         model.setSubject(payOrder.getSubject()); // 订单标题
         model.setBody(payOrder.getBody()); // 订单描述信息
-        model.setTotalAmount(
-                AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
-        model.setTimeExpire(
-                DateUtil.format(
-                        payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
+        model.setTotalAmount(AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
+        model.setTimeExpire(DateUtil.format(payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
         req.setNotifyUrl(getNotifyUrl()); // 设置异步通知地址
         req.setBizModel(model);
 
@@ -73,8 +69,9 @@ public class AliQr extends AlipayPaymentService {
         AlipayKit.putApiIsvInfo(mchAppConfigContext, req, model);
 
         // 调起支付宝 （如果异常， 将直接跑出   ChannelException ）
-        AlipayTradePrecreateResponse alipayResp =
-                configContextQueryService.getAlipayClientWrapper(mchAppConfigContext).execute(req);
+        AlipayTradePrecreateResponse alipayResp = configContextQueryService
+                .getAlipayClientWrapper(mchAppConfigContext)
+                .execute(req);
 
         // 构造函数响应数据
         AliQrOrderRS res = ApiResBuilder.buildSuccess(AliQrOrderRS.class);
@@ -89,10 +86,7 @@ public class AliQr extends AlipayPaymentService {
         if (alipayResp.isSuccess()) { // 处理成功
 
             if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(aliQrOrderRQ.getPayDataType())) { // 二维码地址
-                res.setCodeImgUrl(
-                        sysConfigService
-                                .getDBApplicationConfig()
-                                .genScanImgUrl(alipayResp.getQrCode()));
+                res.setCodeImgUrl(sysConfigService.getDBApplicationConfig().genScanImgUrl(alipayResp.getQrCode()));
 
             } else { // 默认都为跳转地址方式
                 res.setCodeUrl(alipayResp.getQrCode());
@@ -102,10 +96,8 @@ public class AliQr extends AlipayPaymentService {
 
         } else { // 其他状态, 表示下单失败
             res.setOrderState(PayOrder.STATE_FAIL); // 支付失败
-            channelRetMsg.setChannelErrCode(
-                    AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
-            channelRetMsg.setChannelErrMsg(
-                    AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
+            channelRetMsg.setChannelErrCode(AlipayKit.appendErrCode(alipayResp.getCode(), alipayResp.getSubCode()));
+            channelRetMsg.setChannelErrMsg(AlipayKit.appendErrMsg(alipayResp.getMsg(), alipayResp.getSubMsg()));
         }
 
         return res;

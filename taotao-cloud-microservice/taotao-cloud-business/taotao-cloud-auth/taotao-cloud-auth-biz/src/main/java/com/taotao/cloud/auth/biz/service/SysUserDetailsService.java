@@ -34,7 +34,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class SysUserDetailsService implements UserDetailsService {
 
-    @Autowired private IFeignUserApi userApi;
+    @Autowired
+    private IFeignUserApi userApi;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -53,21 +54,20 @@ public class SysUserDetailsService implements UserDetailsService {
         roles.add("admin");
         roles.add("super_admin");
 
-        SecurityUser user =
-                SecurityUser.builder()
-                        .account("admin")
-                        .userId(1L)
-                        .username("admin")
-                        .nickname("admin")
-                        .password("$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
-                        .phone("15730445331")
-                        .mobile("15730445331")
-                        .email("981376578@qq.com")
-                        .sex(1)
-                        .status(1)
-                        .type(2)
-                        .permissions(permissions)
-                        .build();
+        SecurityUser user = SecurityUser.builder()
+                .account("admin")
+                .userId(1L)
+                .username("admin")
+                .nickname("admin")
+                .password("$2a$10$ofQ95D2nNs1JC.JiPaGo3O11.P7sP3TkcRyXBpyfskwBDJRAh0caG")
+                .phone("15730445331")
+                .mobile("15730445331")
+                .email("981376578@qq.com")
+                .sex(1)
+                .status(1)
+                .type(2)
+                .permissions(permissions)
+                .build();
 
         return user;
     }

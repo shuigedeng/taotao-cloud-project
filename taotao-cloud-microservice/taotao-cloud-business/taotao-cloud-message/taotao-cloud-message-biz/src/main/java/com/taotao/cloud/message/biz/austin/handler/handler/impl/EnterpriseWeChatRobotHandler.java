@@ -36,7 +36,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EnterpriseWeChatRobotHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     public EnterpriseWeChatRobotHandler() {
         channelCode = ChannelType.ENTERPRISE_WE_CHAT_ROBOT.getCode();
@@ -46,18 +47,15 @@ public class EnterpriseWeChatRobotHandler extends BaseHandler implements Handler
     public boolean handler(TaskInfo taskInfo) {
         try {
             EnterpriseWeChatRobotAccount account =
-                    accountUtils.getAccountById(
-                            taskInfo.getSendAccount(), EnterpriseWeChatRobotAccount.class);
+                    accountUtils.getAccountById(taskInfo.getSendAccount(), EnterpriseWeChatRobotAccount.class);
             EnterpriseWeChatRobotParam enterpriseWeChatRobotParam = assembleParam(taskInfo);
-            String result =
-                    HttpRequest.post(account.getWebhook())
-                            .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                            .body(JSON.toJSONString(enterpriseWeChatRobotParam))
-                            .timeout(2000)
-                            .execute()
-                            .body();
-            EnterpriseWeChatRootResult weChatRootResult =
-                    JSON.parseObject(result, EnterpriseWeChatRootResult.class);
+            String result = HttpRequest.post(account.getWebhook())
+                    .header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                    .body(JSON.toJSONString(enterpriseWeChatRobotParam))
+                    .timeout(2000)
+                    .execute()
+                    .body();
+            EnterpriseWeChatRootResult weChatRootResult = JSON.parseObject(result, EnterpriseWeChatRootResult.class);
             if (weChatRootResult.getErrcode() == 0) {
                 return true;
             }
@@ -75,47 +73,38 @@ public class EnterpriseWeChatRobotHandler extends BaseHandler implements Handler
     }
 
     private EnterpriseWeChatRobotParam assembleParam(TaskInfo taskInfo) {
-        EnterpriseWeChatRobotContentModel contentModel =
-                (EnterpriseWeChatRobotContentModel) taskInfo.getContentModel();
-        EnterpriseWeChatRobotParam param =
-                EnterpriseWeChatRobotParam.builder()
-                        .msgType(
-                                SendMessageType.getEnterpriseWeChatRobotTypeByCode(
-                                        contentModel.getSendType()))
-                        .build();
+        EnterpriseWeChatRobotContentModel contentModel = (EnterpriseWeChatRobotContentModel) taskInfo.getContentModel();
+        EnterpriseWeChatRobotParam param = EnterpriseWeChatRobotParam.builder()
+                .msgType(SendMessageType.getEnterpriseWeChatRobotTypeByCode(contentModel.getSendType()))
+                .build();
 
         if (SendMessageType.TEXT.getCode().equals(contentModel.getSendType())) {
-            param.setText(
-                    EnterpriseWeChatRobotParam.TextDTO.builder()
-                            .content(contentModel.getContent())
-                            .build());
+            param.setText(EnterpriseWeChatRobotParam.TextDTO.builder()
+                    .content(contentModel.getContent())
+                    .build());
         }
         if (SendMessageType.MARKDOWN.getCode().equals(contentModel.getSendType())) {
-            param.setMarkdown(
-                    EnterpriseWeChatRobotParam.MarkdownDTO.builder()
-                            .content(contentModel.getContent())
-                            .build());
+            param.setMarkdown(EnterpriseWeChatRobotParam.MarkdownDTO.builder()
+                    .content(contentModel.getContent())
+                    .build());
         }
         if (SendMessageType.IMAGE.getCode().equals(contentModel.getSendType())) {
-            param.setImage(
-                    EnterpriseWeChatRobotParam.ImageDTO.builder()
-                            .base64(contentModel.getBase64())
-                            .md5(contentModel.getMd5())
-                            .build());
+            param.setImage(EnterpriseWeChatRobotParam.ImageDTO.builder()
+                    .base64(contentModel.getBase64())
+                    .md5(contentModel.getMd5())
+                    .build());
         }
         if (SendMessageType.FILE.getCode().equals(contentModel.getSendType())) {
-            param.setFile(
-                    EnterpriseWeChatRobotParam.FileDTO.builder()
-                            .mediaId(contentModel.getMediaId())
-                            .build());
+            param.setFile(EnterpriseWeChatRobotParam.FileDTO.builder()
+                    .mediaId(contentModel.getMediaId())
+                    .build());
         }
         if (SendMessageType.NEWS.getCode().equals(contentModel.getSendType())) {
             List<EnterpriseWeChatRobotParam.NewsDTO.ArticlesDTO> articlesDtoS =
-                    JSON.parseArray(
-                            contentModel.getArticles(),
-                            EnterpriseWeChatRobotParam.NewsDTO.ArticlesDTO.class);
-            param.setNews(
-                    EnterpriseWeChatRobotParam.NewsDTO.builder().articles(articlesDtoS).build());
+                    JSON.parseArray(contentModel.getArticles(), EnterpriseWeChatRobotParam.NewsDTO.ArticlesDTO.class);
+            param.setNews(EnterpriseWeChatRobotParam.NewsDTO.builder()
+                    .articles(articlesDtoS)
+                    .build());
         }
         if (SendMessageType.TEMPLATE_CARD.getCode().equals(contentModel.getSendType())) {
             //

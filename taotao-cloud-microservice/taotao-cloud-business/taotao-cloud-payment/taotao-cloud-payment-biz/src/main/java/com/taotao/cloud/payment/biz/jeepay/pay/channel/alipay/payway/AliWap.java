@@ -52,8 +52,7 @@ public class AliWap extends AlipayPaymentService {
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
+    public AbstractRS pay(UnifiedOrderRQ rq, PayOrder payOrder, MchAppConfigContext mchAppConfigContext) {
 
         AliWapOrderRQ bizRQ = (AliWapOrderRQ) rq;
 
@@ -62,11 +61,8 @@ public class AliWap extends AlipayPaymentService {
         model.setOutTradeNo(payOrder.getPayOrderId());
         model.setSubject(payOrder.getSubject()); // 订单标题
         model.setBody(payOrder.getBody()); // 订单描述信息
-        model.setTotalAmount(
-                AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
-        model.setTimeExpire(
-                DateUtil.format(
-                        payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
+        model.setTotalAmount(AmountUtil.convertCent2Dollar(payOrder.getAmount().toString())); // 支付金额
+        model.setTimeExpire(DateUtil.format(payOrder.getExpiredTime(), DatePattern.NORM_DATETIME_FORMAT)); // 订单超时时间
         model.setProductCode("QUICK_WAP_PAY");
         req.setNotifyUrl(getNotifyUrl()); // 设置异步通知地址
         req.setReturnUrl(getReturnUrl()); // 同步跳转地址
@@ -80,30 +76,27 @@ public class AliWap extends AlipayPaymentService {
 
         try {
             if (CS.PAY_DATA_TYPE.FORM.equals(bizRQ.getPayDataType())) { // 表单方式
-                res.setFormContent(
-                        configContextQueryService
-                                .getAlipayClientWrapper(mchAppConfigContext)
-                                .getAlipayClient()
-                                .pageExecute(req)
-                                .getBody());
+                res.setFormContent(configContextQueryService
+                        .getAlipayClientWrapper(mchAppConfigContext)
+                        .getAlipayClient()
+                        .pageExecute(req)
+                        .getBody());
 
             } else if (CS.PAY_DATA_TYPE.CODE_IMG_URL.equals(bizRQ.getPayDataType())) { // 二维码图片地址
 
-                String payUrl =
-                        configContextQueryService
-                                .getAlipayClientWrapper(mchAppConfigContext)
-                                .getAlipayClient()
-                                .pageExecute(req, "GET")
-                                .getBody();
+                String payUrl = configContextQueryService
+                        .getAlipayClientWrapper(mchAppConfigContext)
+                        .getAlipayClient()
+                        .pageExecute(req, "GET")
+                        .getBody();
                 res.setCodeImgUrl(sysConfigService.getDBApplicationConfig().genScanImgUrl(payUrl));
             } else { // 默认都为 payUrl方式
 
-                res.setPayUrl(
-                        configContextQueryService
-                                .getAlipayClientWrapper(mchAppConfigContext)
-                                .getAlipayClient()
-                                .pageExecute(req, "GET")
-                                .getBody());
+                res.setPayUrl(configContextQueryService
+                        .getAlipayClientWrapper(mchAppConfigContext)
+                        .getAlipayClient()
+                        .pageExecute(req, "GET")
+                        .getBody());
             }
         } catch (AlipayApiException e) {
             throw ChannelException.sysError(e.getMessage());

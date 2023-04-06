@@ -78,8 +78,7 @@ public class TencentUtils {
     /** 图灵机器人调用 */
     public static String turing(TencentConfig tencentConfig, Long userId, String content) {
         try {
-            Credential cred =
-                    new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
+            Credential cred = new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
             // 实例化一个http选项，可选的，没有特殊需求可以跳过
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("nlp.tencentcloudapi.com");
@@ -104,8 +103,7 @@ public class TencentUtils {
     /** 语音识别 */
     public static String audio2Text(TencentConfig tencentConfig, String content) {
         try {
-            Credential cred =
-                    new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
+            Credential cred = new Credential(tencentConfig.getAppKey(), tencentConfig.getAppSecret());
             ClientProfile clientProfile = new ClientProfile();
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("tmt.tencentcloudapi.com");

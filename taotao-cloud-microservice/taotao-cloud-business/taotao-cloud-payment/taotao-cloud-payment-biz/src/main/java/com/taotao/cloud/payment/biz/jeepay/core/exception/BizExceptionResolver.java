@@ -43,17 +43,12 @@ public class BizExceptionResolver implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Object handler,
-            Exception ex) {
+            HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
         // 是否包含ss框架
         boolean hasSpringSecurity = false;
         try {
-            hasSpringSecurity =
-                    Class.forName("org.springframework.security.access.AccessDeniedException")
-                            != null;
+            hasSpringSecurity = Class.forName("org.springframework.security.access.AccessDeniedException") != null;
         } catch (Exception e) {
         }
 
@@ -66,11 +61,10 @@ public class BizExceptionResolver implements HandlerExceptionResolver {
         } else if (ex instanceof DataAccessException) {
             logger.error("公共捕捉[DataAccessException]异常：", ex);
             outPutJson = ApiRes.fail(ApiCodeEnum.DB_ERROR).toJSONString();
-        } else if (hasSpringSecurity
-                && ex instanceof org.springframework.security.access.AccessDeniedException) {
+        } else if (hasSpringSecurity && ex instanceof org.springframework.security.access.AccessDeniedException) {
             logger.error("公共捕捉[AccessDeniedException]异常：", ex);
-            outPutJson =
-                    ApiRes.fail(ApiCodeEnum.SYS_PERMISSION_ERROR, ex.getMessage()).toJSONString();
+            outPutJson = ApiRes.fail(ApiCodeEnum.SYS_PERMISSION_ERROR, ex.getMessage())
+                    .toJSONString();
         } else {
             logger.error("公共捕捉[Exception]异常：", ex);
             outPutJson = ApiRes.fail(ApiCodeEnum.SYSTEM_ERROR, ex.getMessage()).toJSONString();

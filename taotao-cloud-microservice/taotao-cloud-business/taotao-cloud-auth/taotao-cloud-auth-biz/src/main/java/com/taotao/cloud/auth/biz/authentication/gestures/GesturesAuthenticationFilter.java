@@ -39,8 +39,7 @@ public class GesturesAuthenticationFilter extends AbstractAuthenticationProcessi
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
-    private Converter<HttpServletRequest, GesturesAuthenticationToken>
-            gesturesAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, GesturesAuthenticationToken> gesturesAuthenticationTokenConverter;
 
     private boolean postOnly = true;
 
@@ -55,16 +54,13 @@ public class GesturesAuthenticationFilter extends AbstractAuthenticationProcessi
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        GesturesAuthenticationToken authRequest =
-                gesturesAuthenticationTokenConverter.convert(request);
+        GesturesAuthenticationToken authRequest = gesturesAuthenticationTokenConverter.convert(request);
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
         return this.getAuthenticationManager().authenticate(authRequest);

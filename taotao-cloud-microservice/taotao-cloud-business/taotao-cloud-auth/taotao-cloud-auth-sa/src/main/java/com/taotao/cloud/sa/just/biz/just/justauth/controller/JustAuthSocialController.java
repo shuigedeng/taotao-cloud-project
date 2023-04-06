@@ -85,8 +85,7 @@ public class JustAuthSocialController {
     @GetMapping("/query")
     @ApiOperation(value = "查询租户第三方登录功能配置表详情")
     public Result<?> query(QueryJustAuthSocialDTO queryJustAuthSocialDTO) {
-        JustAuthSocialDTO justAuthSocialDTO =
-                justAuthSocialService.queryJustAuthSocial(queryJustAuthSocialDTO);
+        JustAuthSocialDTO justAuthSocialDTO = justAuthSocialService.queryJustAuthSocial(queryJustAuthSocialDTO);
         return Result.success(justAuthSocialDTO);
     }
 
@@ -168,15 +167,13 @@ public class JustAuthSocialController {
      */
     @GetMapping("/download")
     @ApiOperation("导出数据")
-    public void download(
-            HttpServletResponse response, QueryJustAuthSocialDTO queryJustAuthSocialDTO)
+    public void download(HttpServletResponse response, QueryJustAuthSocialDTO queryJustAuthSocialDTO)
             throws IOException {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
         String fileName = URLEncoder.encode("租户第三方登录功能配置表数据列表", "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader(
-                "Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
         List<JustAuthSocialDTO> justAuthSocialList =
                 justAuthSocialService.queryJustAuthSocialList(queryJustAuthSocialDTO);
         List<JustAuthSocialExport> justAuthSocialExportList = new ArrayList<>();

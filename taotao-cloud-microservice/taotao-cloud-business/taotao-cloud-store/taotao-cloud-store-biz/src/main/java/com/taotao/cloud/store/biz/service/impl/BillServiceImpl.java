@@ -71,9 +71,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IBillService {
 
     /** 店铺详情 */
-    @Autowired private IStoreDetailService storeDetailService;
+    @Autowired
+    private IStoreDetailService storeDetailService;
     /** 商家流水 */
-    @Autowired private IFeignStoreFlowApi storeFlowApi;
+    @Autowired
+    private IFeignStoreFlowApi storeFlowApi;
 
     @Override
     public void createBill(Long storeId, LocalDateTime startTime, LocalDateTime endTime) {
@@ -98,12 +100,10 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
         bill.setSn(IdGeneratorUtils.createStr("B"));
 
         // 入账结算信息
-        Bill orderBill =
-                this.baseMapper.getOrderBill(
-                        new QueryWrapper<Bill>()
-                                .eq("store_id", storeId)
-                                .eq("flow_type", FlowTypeEnum.PAY.name())
-                                .between("create_time", startTime, endTime));
+        Bill orderBill = this.baseMapper.getOrderBill(new QueryWrapper<Bill>()
+                .eq("store_id", storeId)
+                .eq("flow_type", FlowTypeEnum.PAY.name())
+                .between("create_time", startTime, endTime));
 
         BigDecimal orderPrice = BigDecimal.ZERO;
         if (orderBill != null) {
@@ -114,20 +114,16 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
             bill.setPointSettlementPrice(orderBill.getPointSettlementPrice());
             bill.setKanjiaSettlementPrice(orderBill.getKanjiaSettlementPrice());
             // 入账金额=订单金额+积分商品+砍价商品
-            orderPrice =
-                    CurrencyUtils.add(
-                            CurrencyUtils.add(
-                                    orderBill.getBillPrice(), orderBill.getPointSettlementPrice()),
-                            orderBill.getKanjiaSettlementPrice());
+            orderPrice = CurrencyUtils.add(
+                    CurrencyUtils.add(orderBill.getBillPrice(), orderBill.getPointSettlementPrice()),
+                    orderBill.getKanjiaSettlementPrice());
         }
 
         // 退款结算信息
-        Bill refundBill =
-                this.baseMapper.getRefundBill(
-                        new QueryWrapper<Bill>()
-                                .eq("store_id", storeId)
-                                .eq("flow_type", FlowTypeEnum.REFUND.name())
-                                .between("create_time", startTime, endTime));
+        Bill refundBill = this.baseMapper.getRefundBill(new QueryWrapper<Bill>()
+                .eq("store_id", storeId)
+                .eq("flow_type", FlowTypeEnum.REFUND.name())
+                .between("create_time", startTime, endTime));
         BigDecimal refundPrice = BigDecimal.ZERO;
         if (refundBill != null) {
             bill.setRefundPrice(refundBill.getRefundPrice());
@@ -242,12 +238,10 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 
         StoreFlowQuery.BillDTO billDTO = new StoreFlowQuery.BillDTO();
         BeanUtils.copyProperties(bill, billDTO);
-        List<StoreFlowPayDownloadVO> storeFlowList =
-                storeFlowApi.getStoreFlowPayDownloadVO(
-                        StoreFlowQuery.builder()
-                                .type(FlowTypeEnum.PAY.name())
-                                .bill(billDTO)
-                                .build());
+        List<StoreFlowPayDownloadVO> storeFlowList = storeFlowApi.getStoreFlowPayDownloadVO(StoreFlowQuery.builder()
+                .type(FlowTypeEnum.PAY.name())
+                .bill(billDTO)
+                .build());
         writer.write(storeFlowList, true);
 
         writer.setSheet("退款订单");
@@ -277,11 +271,10 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
         StoreFlowQuery.BillDTO billDTO1 = new StoreFlowQuery.BillDTO();
         BeanUtils.copyProperties(bill, billDTO1);
         List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList =
-                storeFlowApi.getStoreFlowRefundDownloadVO(
-                        StoreFlowQuery.builder()
-                                .type(FlowTypeEnum.REFUND.name())
-                                .bill(billDTO1)
-                                .build());
+                storeFlowApi.getStoreFlowRefundDownloadVO(StoreFlowQuery.builder()
+                        .type(FlowTypeEnum.REFUND.name())
+                        .bill(billDTO1)
+                        .build());
         writer.write(storeFlowRefundDownloadVOList, true);
 
         ServletOutputStream out = null;
@@ -291,9 +284,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
             response.setHeader(
                     "Content-Disposition",
                     "attachment;filename="
-                            + URLEncoder.encode(
-                                    bill.getStoreName() + "-" + bill.getSn(),
-                                    StandardCharsets.UTF_8)
+                            + URLEncoder.encode(bill.getStoreName() + "-" + bill.getSn(), StandardCharsets.UTF_8)
                             + ".xls");
             out = response.getOutputStream();
             writer.flush(out, true);

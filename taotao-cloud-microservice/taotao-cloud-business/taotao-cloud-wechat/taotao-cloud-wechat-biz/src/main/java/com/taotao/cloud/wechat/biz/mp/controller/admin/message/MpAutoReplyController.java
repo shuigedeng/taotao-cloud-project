@@ -42,25 +42,20 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpAutoReplyController {
 
-    @Resource private MpAutoReplyService mpAutoReplyService;
+    @Resource
+    private MpAutoReplyService mpAutoReplyService;
 
     @GetMapping("/page")
     @ApiOperation("获得公众号自动回复分页")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:query')")
-    public CommonResult<PageResult<MpAutoReplyRespVO>> getAutoReplyPage(
-            @Valid MpMessagePageReqVO pageVO) {
+    public CommonResult<PageResult<MpAutoReplyRespVO>> getAutoReplyPage(@Valid MpMessagePageReqVO pageVO) {
         PageResult<MpAutoReplyDO> pageResult = mpAutoReplyService.getAutoReplyPage(pageVO);
         return success(MpAutoReplyConvert.INSTANCE.convertPage(pageResult));
     }
 
     @GetMapping("/get")
     @ApiOperation("获得公众号自动回复")
-    @ApiImplicitParam(
-            name = "id",
-            value = "编号",
-            required = true,
-            example = "1024",
-            dataTypeClass = Long.class)
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:query')")
     public CommonResult<MpAutoReplyRespVO> getAutoReply(@RequestParam("id") Long id) {
         MpAutoReplyDO autoReply = mpAutoReplyService.getAutoReply(id);
@@ -70,16 +65,14 @@ public class MpAutoReplyController {
     @PostMapping("/create")
     @ApiOperation("创建公众号自动回复")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:create')")
-    public CommonResult<Long> createAutoReply(
-            @Valid @RequestBody MpAutoReplyCreateReqVO createReqVO) {
+    public CommonResult<Long> createAutoReply(@Valid @RequestBody MpAutoReplyCreateReqVO createReqVO) {
         return success(mpAutoReplyService.createAutoReply(createReqVO));
     }
 
     @PutMapping("/update")
     @ApiOperation("更新公众号自动回复")
     @PreAuthorize("@ss.hasPermission('mp:auto-reply:update')")
-    public CommonResult<Boolean> updateAutoReply(
-            @Valid @RequestBody MpAutoReplyUpdateReqVO updateReqVO) {
+    public CommonResult<Boolean> updateAutoReply(@Valid @RequestBody MpAutoReplyUpdateReqVO updateReqVO) {
         mpAutoReplyService.updateAutoReply(updateReqVO);
         return success(true);
     }

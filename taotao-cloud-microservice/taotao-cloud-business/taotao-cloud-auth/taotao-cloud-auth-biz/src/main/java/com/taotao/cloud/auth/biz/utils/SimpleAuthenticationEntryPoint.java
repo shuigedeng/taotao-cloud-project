@@ -34,9 +34,7 @@ public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException authException)
+            HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
         // String message = exceptionMessage(authException);
         // request.setAttribute("exMsg", message);

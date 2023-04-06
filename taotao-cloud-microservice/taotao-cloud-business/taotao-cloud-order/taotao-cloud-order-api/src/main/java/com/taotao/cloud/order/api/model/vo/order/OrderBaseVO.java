@@ -195,5 +195,6 @@ public record OrderBaseVO(
         String usePlatformMemberCouponId)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

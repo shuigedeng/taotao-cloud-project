@@ -44,27 +44,20 @@ public class UserDTOAssembler {
         if (userCommand.getUserName() != null) {
             userName = new UserName(userCommand.getUserName());
         }
-        return new User(
-                new UserId(userCommand.getId()),
-                userName,
-                StatusEnum.ENABLE,
-                null,
-                null,
-                roleIdList);
+        return new User(new UserId(userCommand.getId()), userName, StatusEnum.ENABLE, null, null, roleIdList);
     }
 
     public static UserDTO fromUser(final User user) {
         List<String> roleIdList = new ArrayList<>();
         if (user.getRoleIds() != null) {
-            user.getRoleIds()
-                    .forEach(
-                            roleId -> {
-                                roleIdList.add(roleId.getId());
-                            });
+            user.getRoleIds().forEach(roleId -> {
+                roleIdList.add(roleId.getId());
+            });
         }
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getUserId() == null ? null : user.getUserId().getId());
-        userDTO.setUserName(user.getUserName() == null ? null : user.getUserName().getName());
+        userDTO.setUserName(
+                user.getUserName() == null ? null : user.getUserName().getName());
         userDTO.setEmail(
                 user.getAccount().getEmail() == null
                         ? null

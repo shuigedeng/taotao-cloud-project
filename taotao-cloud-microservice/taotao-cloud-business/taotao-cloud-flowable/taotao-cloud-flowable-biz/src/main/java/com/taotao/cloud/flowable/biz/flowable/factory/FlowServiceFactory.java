@@ -32,17 +32,23 @@ import org.springframework.stereotype.Component;
 @Getter
 public class FlowServiceFactory {
 
-    @Resource protected RepositoryService repositoryService;
+    @Resource
+    protected RepositoryService repositoryService;
 
-    @Resource protected RuntimeService runtimeService;
+    @Resource
+    protected RuntimeService runtimeService;
 
-    @Resource protected IdentityService identityService;
+    @Resource
+    protected IdentityService identityService;
 
-    @Resource protected TaskService taskService;
+    @Resource
+    protected TaskService taskService;
 
-    @Resource protected HistoryService historyService;
+    @Resource
+    protected HistoryService historyService;
 
-    @Resource protected ManagementService managementService;
+    @Resource
+    protected ManagementService managementService;
 
     @Qualifier("processEngine")
     @Resource

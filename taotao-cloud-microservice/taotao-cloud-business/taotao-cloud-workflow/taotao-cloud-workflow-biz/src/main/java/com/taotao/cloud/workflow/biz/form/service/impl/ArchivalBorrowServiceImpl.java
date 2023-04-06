@@ -33,12 +33,14 @@ import org.springframework.stereotype.Service;
 
 /** 档案借阅申请 */
 @Service
-public class ArchivalBorrowServiceImpl
-        extends ServiceImpl<ArchivalBorrowMapper, ArchivalBorrowEntity>
+public class ArchivalBorrowServiceImpl extends ServiceImpl<ArchivalBorrowMapper, ArchivalBorrowEntity>
         implements ArchivalBorrowService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public ArchivalBorrowEntity getInfo(String id) {
@@ -72,8 +74,7 @@ public class ArchivalBorrowServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ArchivalBorrowEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ArchivalBorrowEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -99,10 +100,8 @@ public class ArchivalBorrowServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ArchivalBorrowForm archivalBorrowForm =
-                JsonUtils.getJsonToBean(data, ArchivalBorrowForm.class);
-        ArchivalBorrowEntity entity =
-                JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
+        ArchivalBorrowForm archivalBorrowForm = JsonUtils.getJsonToBean(data, ArchivalBorrowForm.class);
+        ArchivalBorrowEntity entity = JsonUtils.getJsonToBean(archivalBorrowForm, ArchivalBorrowEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

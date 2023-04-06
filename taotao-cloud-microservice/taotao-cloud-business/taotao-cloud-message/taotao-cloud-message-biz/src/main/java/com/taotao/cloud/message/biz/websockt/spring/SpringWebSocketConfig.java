@@ -33,8 +33,11 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class SpringWebSocketConfig implements WebSocketConfigurer {
 
-    @Autowired private AuthTextWebSocketHandler authTextWebSocketHandler;
-    @Autowired private WebsocketInterceptor websocketInterceptor;
+    @Autowired
+    private AuthTextWebSocketHandler authTextWebSocketHandler;
+
+    @Autowired
+    private WebsocketInterceptor websocketInterceptor;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {

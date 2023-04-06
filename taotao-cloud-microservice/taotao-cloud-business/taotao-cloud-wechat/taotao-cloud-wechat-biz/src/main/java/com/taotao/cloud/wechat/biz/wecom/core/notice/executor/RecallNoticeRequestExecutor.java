@@ -38,12 +38,12 @@ import me.chanjar.weixin.common.util.http.ResponseHandler;
 public class RecallNoticeRequestExecutor implements RequestExecutor<WxError, String> {
 
     @Override
-    public WxError execute(String uri, String data, WxType wxType)
-            throws WxErrorException, IOException {
+    public WxError execute(String uri, String data, WxType wxType) throws WxErrorException, IOException {
 
         Map<String, String> map = new HashMap<>(1);
         map.put(NOTICE_MSG_ID, data);
-        String response = HttpUtil.createPost(uri).body(JacksonUtil.toJson(map)).execute().body();
+        String response =
+                HttpUtil.createPost(uri).body(JacksonUtil.toJson(map)).execute().body();
 
         WxError result = WxError.fromJson(response);
         if (result.getErrorCode() != 0) {

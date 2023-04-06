@@ -96,8 +96,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl
-        extends BaseSuperServiceImpl<
-                IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long>
+        extends BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long>
         implements IGoodsSkuService {
 
     /** 缓存服务 */
@@ -144,8 +143,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean update(
-            List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag) {
+    public Boolean update(List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag) {
         // 是否存在规格
         if (skuList == null || skuList.isEmpty()) {
             throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
@@ -168,14 +166,9 @@ public class GoodsSkuServiceImpl
             newSkuList = this.addGoodsSku(skuList, goods);
 
             // 发送mq消息
-            String destination =
-                    rocketmqCustomProperties.getGoodsTopic()
-                            + ":"
-                            + GoodsTagsEnum.SKU_DELETE.name();
+            String destination = rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.SKU_DELETE.name();
             rocketMQTemplate.asyncSend(
-                    destination,
-                    JSONUtil.toJsonStr(oldSkuIds),
-                    RocketmqSendCallbackBuilder.commonCallback());
+                    destination, JSONUtil.toJsonStr(oldSkuIds), RocketmqSendCallbackBuilder.commonCallback());
         } else {
             newSkuList = new ArrayList<>();
             for (Map<String, Object> map : skuList) {
@@ -270,9 +263,7 @@ public class GoodsSkuServiceImpl
         // 获取当前商品的索引信息
         EsGoodsIndex goodsIndex = goodsIndexService.findById(skuId);
         if (goodsIndex == null) {
-            goodsIndex =
-                    goodsIndexService.getResetEsGoodsIndex(
-                            goodsSku, goodsSkuParamsVO.getGoodsParamsDTOList());
+            goodsIndex = goodsIndexService.getResetEsGoodsIndex(goodsSku, goodsSkuParamsVO.getGoodsParamsDTOList());
         }
 
         // 商品规格
@@ -281,51 +272,39 @@ public class GoodsSkuServiceImpl
         Map<String, Object> promotionMap = goodsIndex.getPromotionMap();
         // 设置当前商品的促销价格
         if (promotionMap != null && !promotionMap.isEmpty()) {
-            promotionMap =
-                    promotionMap.entrySet().stream()
-                            .parallel()
-                            .filter(
-                                    i -> {
-                                        JSONObject jsonObject = JSONUtil.parseObj(i.getValue());
-                                        // 过滤活动赠送优惠券和无效时间的活动
-                                        return (jsonObject.get("getType") == null
-                                                        || jsonObject
-                                                                .get("getType", String.class)
-                                                                .equals(CouponGetEnum.FREE.name()))
-                                                && (jsonObject.get("startTime") != null
-                                                        && jsonObject
-                                                                        .get(
-                                                                                "startTime",
-                                                                                Date.class)
-                                                                        .getTime()
-                                                                <= System.currentTimeMillis())
-                                                && (jsonObject.get("endTime") == null
-                                                        || jsonObject
-                                                                        .get("endTime", Date.class)
-                                                                        .getTime()
-                                                                >= System.currentTimeMillis());
-                                    })
-                            .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+            promotionMap = promotionMap.entrySet().stream()
+                    .parallel()
+                    .filter(i -> {
+                        JSONObject jsonObject = JSONUtil.parseObj(i.getValue());
+                        // 过滤活动赠送优惠券和无效时间的活动
+                        return (jsonObject.get("getType") == null
+                                        || jsonObject
+                                                .get("getType", String.class)
+                                                .equals(CouponGetEnum.FREE.name()))
+                                && (jsonObject.get("startTime") != null
+                                        && jsonObject
+                                                        .get("startTime", Date.class)
+                                                        .getTime()
+                                                <= System.currentTimeMillis())
+                                && (jsonObject.get("endTime") == null
+                                        || jsonObject.get("endTime", Date.class).getTime()
+                                                >= System.currentTimeMillis());
+                    })
+                    .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 
             // 是否包含促销商品
-            Optional<Entry<String, Object>> containsPromotion =
-                    promotionMap.entrySet().stream()
-                            .filter(
-                                    i ->
-                                            i.getKey().contains(PromotionTypeEnum.SECKILL.name())
-                                                    || i.getKey()
-                                                            .contains(
-                                                                    PromotionTypeEnum.PINTUAN
-                                                                            .name()))
-                            .findFirst();
+            Optional<Entry<String, Object>> containsPromotion = promotionMap.entrySet().stream()
+                    .filter(i -> i.getKey().contains(PromotionTypeEnum.SECKILL.name())
+                            || i.getKey().contains(PromotionTypeEnum.PINTUAN.name()))
+                    .findFirst();
             if (containsPromotion.isPresent()) {
                 // 获取促销商品信息
-                JSONObject jsonObject = JSONUtil.parseObj(containsPromotion.get().getValue());
+                JSONObject jsonObject =
+                        JSONUtil.parseObj(containsPromotion.get().getValue());
                 PromotionGoodsPageQuery promotionGoodsPageQuery = new PromotionGoodsPageQuery();
                 promotionGoodsPageQuery.setSkuId(String.valueOf(skuId));
                 promotionGoodsPageQuery.setPromotionId(jsonObject.getLong("id"));
-                PromotionGoodsVO promotionsGoods =
-                        promotionGoodsApi.getPromotionsGoods(promotionGoodsPageQuery);
+                PromotionGoodsVO promotionsGoods = promotionGoodsApi.getPromotionsGoods(promotionGoodsPageQuery);
                 if (promotionsGoods != null && promotionsGoods.getPrice() != null) {
                     goodsSkuDetail.setPromotionFlag(true);
                     goodsSkuDetail.setPromotionPrice(promotionsGoods.getPrice());
@@ -341,7 +320,8 @@ public class GoodsSkuServiceImpl
         long[] split = StringUtils.splitToLong(goodsSkuDetail.getCategoryPath(), ",");
         map.put(
                 "categoryName",
-                categoryService.getCategoryNameByIds(Arrays.stream(split).boxed().toList()));
+                categoryService.getCategoryNameByIds(
+                        Arrays.stream(split).boxed().toList()));
 
         // 获取规格信息
         map.put("specs", this.groupBySkuAndSpec(goodsSkuParamsVO.getSkuList()));
@@ -446,12 +426,11 @@ public class GoodsSkuServiceImpl
                 specValueVO.setSpecName(entry.getKey());
                 if (entry.getValue().toString().contains("url")) {
                     List<SpecValueVO.SpecImages> specImages =
-                            JSONUtil.toList(
-                                    JSONUtil.parseArray(entry.getValue()),
-                                    SpecValueVO.SpecImages.class);
+                            JSONUtil.toList(JSONUtil.parseArray(entry.getValue()), SpecValueVO.SpecImages.class);
                     specValueVO.setSpecImage(specImages);
-                    goodsGalleryList =
-                            specImages.stream().map(SpecValueVO.SpecImages::getUrl).toList();
+                    goodsGalleryList = specImages.stream()
+                            .map(SpecValueVO.SpecImages::getUrl)
+                            .toList();
                 }
             } else {
                 specValueVO.setSpecName(entry.getKey());
@@ -492,11 +471,9 @@ public class GoodsSkuServiceImpl
                 goodsIndexService.deleteIndexById(goodsSku.getId());
             }
             goodsSku.setQuantity(quantity);
-            boolean update =
-                    this.update(
-                            new LambdaUpdateWrapper<GoodsSku>()
-                                    .eq(GoodsSku::getId, skuId)
-                                    .set(GoodsSku::getQuantity, quantity));
+            boolean update = this.update(new LambdaUpdateWrapper<GoodsSku>()
+                    .eq(GoodsSku::getId, skuId)
+                    .set(GoodsSku::getQuantity, quantity));
             if (update) {
                 redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsSku.getGoodsId());
             }
@@ -568,36 +545,27 @@ public class GoodsSkuServiceImpl
         goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);
 
         // todo 此处需要修改 好评率
-        BigDecimal grade =
-                BigDecimal.valueOf(
-                        NumberUtil.mul(
-                                NumberUtil.div(
-                                        highPraiseNum, goodsSku.getCommentNum().doubleValue(), 2),
-                                100));
+        BigDecimal grade = BigDecimal.valueOf(NumberUtil.mul(
+                NumberUtil.div(highPraiseNum, goodsSku.getCommentNum().doubleValue(), 2), 100));
         goodsSku.setGrade(grade);
         // 修改规格
         this.update(goodsSku);
 
         // 修改规格索引,发送mq消息
-        Map<String, Object> updateIndexFieldsMap =
-                EsIndexUtil.getUpdateIndexFieldsMap(
-                        MapUtil.builder(new HashMap<String, Object>())
-                                .put("id", goodsSku.getId())
-                                .build(),
-                        MapUtil.builder(new HashMap<String, Object>())
-                                .put("commentNum", goodsSku.getCommentNum())
-                                .put("highPraiseNum", highPraiseNum)
-                                .put("grade", grade)
-                                .build());
+        Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
+                MapUtil.builder(new HashMap<String, Object>())
+                        .put("id", goodsSku.getId())
+                        .build(),
+                MapUtil.builder(new HashMap<String, Object>())
+                        .put("commentNum", goodsSku.getCommentNum())
+                        .put("highPraiseNum", highPraiseNum)
+                        .put("grade", grade)
+                        .build());
 
         String destination =
-                rocketmqCustomProperties.getGoodsTopic()
-                        + ":"
-                        + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
+                rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
         rocketMQTemplate.asyncSend(
-                destination,
-                JSONUtil.toJsonStr(updateIndexFieldsMap),
-                RocketmqSendCallbackBuilder.commonCallback());
+                destination, JSONUtil.toJsonStr(updateIndexFieldsMap), RocketmqSendCallbackBuilder.commonCallback());
 
         // 修改商品的评价数量
         goodsService.updateGoodsCommentNum(goodsSku.getGoodsId());
@@ -616,8 +584,7 @@ public class GoodsSkuServiceImpl
                 || !GoodsAuthEnum.PASS.name().equals(goods.getIsAuth())) {
             return;
         }
-        applicationEventPublisher.publishEvent(
-                new GeneratorEsGoodsIndexEvent("生成商品索引事件", goods.getId()));
+        applicationEventPublisher.publishEvent(new GeneratorEsGoodsIndexEvent("生成商品索引事件", goods.getId()));
     }
 
     /**
@@ -653,8 +620,7 @@ public class GoodsSkuServiceImpl
             }
             goodsSku.setGoodsType(goods.getGoodsType());
             skus.add(goodsSku);
-            redisRepository.set(
-                    IGoodsSkuService.getStockCacheKey(goodsSku.getId()), goodsSku.getQuantity());
+            redisRepository.set(IGoodsSkuService.getStockCacheKey(goodsSku.getId()), goodsSku.getQuantity());
         }
         this.saveBatch(skus);
         return skus;
@@ -722,8 +688,7 @@ public class GoodsSkuServiceImpl
      * @param map 规格信息
      * @param esGoodsIndex 商品索引
      */
-    private void skuInfo(
-            GoodsSku sku, Goods goods, Map<String, Object> map, EsGoodsIndex esGoodsIndex) {
+    private void skuInfo(GoodsSku sku, Goods goods, Map<String, Object> map, EsGoodsIndex esGoodsIndex) {
         // 规格简短信息
         StringBuilder simpleSpecs = new StringBuilder();
         // 商品名称
@@ -756,14 +721,12 @@ public class GoodsSkuServiceImpl
                     // 设置规格商品缩略图
                     // 如果规格没有图片，则用商品图片复盖。有则增加规格图片，放在商品图片集合之前
                     if (CharSequenceUtil.isNotEmpty(spec.getValue().toString())) {
-                        thumbnail =
-                                goodsGalleryService
-                                        .getGoodsGallery(images.get(0).get("url"))
-                                        .getThumbnail();
-                        small =
-                                goodsGalleryService
-                                        .getGoodsGallery(images.get(0).get("url"))
-                                        .getSmall();
+                        thumbnail = goodsGalleryService
+                                .getGoodsGallery(images.get(0).get("url"))
+                                .getThumbnail();
+                        small = goodsGalleryService
+                                .getGoodsGallery(images.get(0).get("url"))
+                                .getSmall();
                     }
                 } else {
                     if (spec.getValue() != null) {
@@ -802,8 +765,7 @@ public class GoodsSkuServiceImpl
      * @param goodsSkuSpecGalleryVOList 商品VO列表
      * @return 分组后的商品sku及其规格信息
      */
-    private List<GoodsSkuSpecVO> groupBySkuAndSpec(
-            List<GoodsSkuSpecGalleryVO> goodsSkuSpecGalleryVOList) {
+    private List<GoodsSkuSpecVO> groupBySkuAndSpec(List<GoodsSkuSpecGalleryVO> goodsSkuSpecGalleryVOList) {
         List<GoodsSkuSpecVO> skuSpecVOList = new ArrayList<>();
         for (GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO : goodsSkuSpecGalleryVOList) {
             GoodsSkuSpecVO specVO = new GoodsSkuSpecVO();

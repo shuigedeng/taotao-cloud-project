@@ -62,9 +62,7 @@ public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationServ
         String username = authorization.getPrincipalName();
         Instant expiresAt = authorization.getAttribute(EXP);
 
-        boolean res =
-                redisRepository.set(
-                        PREFIX_AUTHORIZATION + clientId + COLON + username, authorization, 10000L);
+        boolean res = redisRepository.set(PREFIX_AUTHORIZATION + clientId + COLON + username, authorization, 10000L);
         if (!res) {
             LogUtils.info("OAuth2Authorization saved failed...");
         }
@@ -97,8 +95,7 @@ public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationServ
         String client = jwt.getAudience().get(0);
 
         OAuth2Authorization oAuth2Authorization =
-                (OAuth2Authorization)
-                        redisRepository.get(PREFIX_AUTHORIZATION + client + COLON + username);
+                (OAuth2Authorization) redisRepository.get(PREFIX_AUTHORIZATION + client + COLON + username);
 
         if (Objects.isNull(oAuth2Authorization)) {
             return super.findByToken(token, tokenType);

@@ -24,7 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Data
 public class InsertSql {
 
-    @Autowired DataSourceUtil dataSourceUtil;
+    @Autowired
+    DataSourceUtil dataSourceUtil;
 
     /*==================框架======================**/
     /*
@@ -43,17 +44,14 @@ public class InsertSql {
             StringBuilder values = new StringBuilder();
             // 遍历字段
             for (DbFieldMod field : data) {
-                String fieldValue =
-                        insertSqlDTO.getFieldValue(
-                                field.getColumnTypeName(), field.getColumnValue());
+                String fieldValue = insertSqlDTO.getFieldValue(field.getColumnTypeName(), field.getColumnValue());
                 values.append(fieldValue);
             }
-            String sqlFragment =
-                    insertSqlDTO.getOracleInsertBasicSql()
-                            + "("
-                            + values.substring(0, values.length() - 1)
-                            + ")"
-                            + insertSqlDTO.getBatchInsertSeparator();
+            String sqlFragment = insertSqlDTO.getOracleInsertBasicSql()
+                    + "("
+                    + values.substring(0, values.length() - 1)
+                    + ")"
+                    + insertSqlDTO.getBatchInsertSeparator();
             sql.append(sqlFragment);
         }
         return insertSqlDTO.getMysqlInsertBasicSql() + sql;

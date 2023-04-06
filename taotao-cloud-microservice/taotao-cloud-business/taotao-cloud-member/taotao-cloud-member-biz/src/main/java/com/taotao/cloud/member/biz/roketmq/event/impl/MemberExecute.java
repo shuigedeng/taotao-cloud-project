@@ -26,7 +26,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberExecute implements MemberLoginEvent {
 
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
 
     @Override
     public void memberLogin(Member member) {

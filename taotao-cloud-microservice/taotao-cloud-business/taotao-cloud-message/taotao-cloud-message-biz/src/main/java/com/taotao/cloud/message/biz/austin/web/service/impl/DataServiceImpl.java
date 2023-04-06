@@ -58,11 +58,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class DataServiceImpl implements DataService {
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
-    @Autowired private MessageTemplateDao messageTemplateDao;
+    @Autowired
+    private MessageTemplateDao messageTemplateDao;
 
-    @Autowired private SmsRecordDao smsRecordDao;
+    @Autowired
+    private SmsRecordDao smsRecordDao;
 
     @Override
     public UserTimeLineVo getTraceUserInfo(String receiver) {
@@ -72,18 +75,16 @@ public class DataServiceImpl implements DataService {
         }
 
         // 0. 按时间排序
-        List<SimpleAnchorInfo> sortAnchorList =
-                userInfoList.stream()
-                        .map(s -> JSON.parseObject(s, SimpleAnchorInfo.class))
-                        .sorted((o1, o2) -> Math.toIntExact(o1.getTimestamp() - o2.getTimestamp()))
-                        .collect(Collectors.toList());
+        List<SimpleAnchorInfo> sortAnchorList = userInfoList.stream()
+                .map(s -> JSON.parseObject(s, SimpleAnchorInfo.class))
+                .sorted((o1, o2) -> Math.toIntExact(o1.getTimestamp() - o2.getTimestamp()))
+                .collect(Collectors.toList());
 
         // 1. 对相同的businessId进行分类
         // {"businessId":[{businessId,state,timeStamp},{businessId,state,timeStamp}]}
         Map<String, List<SimpleAnchorInfo>> map = MapUtil.newHashMap();
         for (SimpleAnchorInfo simpleAnchorInfo : sortAnchorList) {
-            List<SimpleAnchorInfo> simpleAnchorInfos =
-                    map.get(String.valueOf(simpleAnchorInfo.getBusinessId()));
+            List<SimpleAnchorInfo> simpleAnchorInfos = map.get(String.valueOf(simpleAnchorInfo.getBusinessId()));
             if (CollUtil.isEmpty(simpleAnchorInfos)) {
                 simpleAnchorInfos = new ArrayList<>();
             }
@@ -94,8 +95,7 @@ public class DataServiceImpl implements DataService {
         // 2. 封装vo 给到前端渲染展示
         List<UserTimeLineVo.ItemsVO> items = new ArrayList<>();
         for (Map.Entry<String, List<SimpleAnchorInfo>> entry : map.entrySet()) {
-            Long messageTemplateId =
-                    TaskInfoUtils.getMessageTemplateIdFromBusinessId(Long.valueOf(entry.getKey()));
+            Long messageTemplateId = TaskInfoUtils.getMessageTemplateIdFromBusinessId(Long.valueOf(entry.getKey()));
             MessageTemplate messageTemplate =
                     messageTemplateDao.findById(messageTemplateId).orElse(null);
             if (Objects.isNull(messageTemplate)) {
@@ -108,27 +108,24 @@ public class DataServiceImpl implements DataService {
                     sb.append(StrPool.CRLF);
                 }
                 String startTime =
-                        DateUtil.format(
-                                new Date(simpleAnchorInfo.getTimestamp()),
-                                DatePattern.NORM_DATETIME_PATTERN);
-                String stateDescription =
-                        AnchorState.getDescriptionByCode(simpleAnchorInfo.getState());
-                sb.append(startTime).append(StrPool.C_COLON).append(stateDescription).append("==>");
+                        DateUtil.format(new Date(simpleAnchorInfo.getTimestamp()), DatePattern.NORM_DATETIME_PATTERN);
+                String stateDescription = AnchorState.getDescriptionByCode(simpleAnchorInfo.getState());
+                sb.append(startTime)
+                        .append(StrPool.C_COLON)
+                        .append(stateDescription)
+                        .append("==>");
             }
 
             for (String detail : sb.toString().split(StrPool.CRLF)) {
                 if (StrUtil.isNotBlank(detail)) {
-                    UserTimeLineVo.ItemsVO itemsVO =
-                            UserTimeLineVo.ItemsVO.builder()
-                                    .businessId(entry.getKey())
-                                    .sendType(
-                                            ChannelType.getEnumByCode(
-                                                            messageTemplate.getSendChannel())
-                                                    .getDescription())
-                                    .creator(messageTemplate.getCreator())
-                                    .title(messageTemplate.getName())
-                                    .detail(detail)
-                                    .build();
+                    UserTimeLineVo.ItemsVO itemsVO = UserTimeLineVo.ItemsVO.builder()
+                            .businessId(entry.getKey())
+                            .sendType(ChannelType.getEnumByCode(messageTemplate.getSendChannel())
+                                    .getDescription())
+                            .creator(messageTemplate.getCreator())
+                            .title(messageTemplate.getName())
+                            .detail(detail)
+                            .build();
                     items.add(itemsVO);
                 }
             }
@@ -142,8 +139,7 @@ public class DataServiceImpl implements DataService {
         // 获取businessId并获取模板信息
         businessId = getRealBusinessId(businessId);
         Optional<MessageTemplate> optional =
-                messageTemplateDao.findById(
-                        TaskInfoUtils.getMessageTemplateIdFromBusinessId(Long.valueOf(businessId)));
+                messageTemplateDao.findById(TaskInfoUtils.getMessageTemplateIdFromBusinessId(Long.valueOf(businessId)));
         if (!optional.isPresent()) {
             return null;
         }
@@ -157,14 +153,10 @@ public class DataServiceImpl implements DataService {
     @Override
     public SmsTimeLineVo getTraceSmsInfo(DataParam dataParam) {
 
-        Integer sendDate =
-                Integer.valueOf(
-                        DateUtil.format(
-                                new Date(dataParam.getDateTime() * 1000L),
-                                DatePattern.PURE_DATE_PATTERN));
+        Integer sendDate = Integer.valueOf(
+                DateUtil.format(new Date(dataParam.getDateTime() * 1000L), DatePattern.PURE_DATE_PATTERN));
         List<SmsRecord> smsRecordList =
-                smsRecordDao.findByPhoneAndSendDate(
-                        Long.valueOf(dataParam.getReceiver()), sendDate);
+                smsRecordDao.findByPhoneAndSendDate(Long.valueOf(dataParam.getReceiver()), sendDate);
         if (CollUtil.isEmpty(smsRecordList)) {
             return SmsTimeLineVo.builder()
                     .items(Arrays.asList(SmsTimeLineVo.ItemsVO.builder().build()))
@@ -172,8 +164,7 @@ public class DataServiceImpl implements DataService {
         }
 
         Map<String, List<SmsRecord>> maps =
-                smsRecordList.stream()
-                        .collect(Collectors.groupingBy((o) -> o.getPhone() + o.getSeriesId()));
+                smsRecordList.stream().collect(Collectors.groupingBy((o) -> o.getPhone() + o.getSeriesId()));
         return Convert4Amis.getSmsTimeLineVo(maps);
     }
 
@@ -189,8 +180,7 @@ public class DataServiceImpl implements DataService {
         if (optional.isPresent()) {
             MessageTemplate messageTemplate = optional.get();
             return String.valueOf(
-                    TaskInfoUtils.generateBusinessId(
-                            messageTemplate.getId(), messageTemplate.getTemplateType()));
+                    TaskInfoUtils.generateBusinessId(messageTemplate.getId(), messageTemplate.getTemplateType()));
         }
         return businessId;
     }

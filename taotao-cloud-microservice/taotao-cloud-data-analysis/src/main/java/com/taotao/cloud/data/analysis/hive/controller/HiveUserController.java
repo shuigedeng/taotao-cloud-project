@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.hive.controller;
 
 import com.taotao.cloud.data.analysis.hive.service.HiveUserService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,23 +31,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HiveUserController {
 
-	@Autowired
-	private HiveUserService userService;
+    @Autowired
+    private HiveUserService userService;
 
-	@RequestMapping("/queryUser")
-	public Object query() {
-		 userService.testUseJdbcTemplate();
-		return new Object();
-	}
+    @RequestMapping("/queryUser")
+    public Object query() {
+        userService.testUseJdbcTemplate();
+        return new Object();
+    }
 
-//	@RequestMapping("/insertUser")
-//	public Object insertUser() {
-//		User user = new User();
-////		user.setAppId("SS");
-////		user.setRegTime(new Date());
-////		user.setUserId(777744);
-////		user.setVersion("3.2");
-//		Integer flag = userMapper.insertUser(user);
-//		return flag;
-//	}
+    //	@RequestMapping("/insertUser")
+    //	public Object insertUser() {
+    //		User user = new User();
+    ////		user.setAppId("SS");
+    ////		user.setRegTime(new Date());
+    ////		user.setUserId(777744);
+    ////		user.setVersion("3.2");
+    //		Integer flag = userMapper.insertUser(user);
+    //		return flag;
+    //	}
 }

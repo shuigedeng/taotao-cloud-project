@@ -47,8 +47,7 @@ public record OrderSimpleVO(
          */
         @Schema(description = "付款状态") String payStatus,
         @Schema(description = "支付方式") String paymentMethod,
-        @Schema(description = "支付时间")
-                @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+        @Schema(description = "支付时间") @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
                 LocalDateTime paymentTime,
         @Schema(description = "用户名") String memberName,
         @Schema(description = "店铺名称") String storeName,
@@ -75,8 +74,7 @@ public record OrderSimpleVO(
         @Schema(
                         hidden = true,
                         description = "item 售后状态",
-                        allowableValues =
-                                "NOT_APPLIED(未申请),ALREADY_APPLIED(已申请),EXPIRED(已失效不允许申请售后)")
+                        allowableValues = "NOT_APPLIED(未申请),ALREADY_APPLIED(已申请),EXPIRED(已失效不允许申请售后)")
                 String groupAfterSaleStatus,
 
         /**
@@ -100,7 +98,8 @@ public record OrderSimpleVO(
         @Schema(description = "货运状态") String deliverStatus)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -6293102172184734928L;
+    @Serial
+    private static final long serialVersionUID = -6293102172184734928L;
 
     // public List<OrderItemVO> getOrderItems() {
     // 	if (StringUtil.isEmpty(groupGoodsId)) {

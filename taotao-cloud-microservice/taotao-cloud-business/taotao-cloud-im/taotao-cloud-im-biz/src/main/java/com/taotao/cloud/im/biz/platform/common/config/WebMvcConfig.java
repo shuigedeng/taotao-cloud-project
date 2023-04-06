@@ -28,9 +28,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Resource private VersionInterceptor versionInterceptor;
+    @Resource
+    private VersionInterceptor versionInterceptor;
 
-    @Resource private DeviceInterceptor deviceInterceptor;
+    @Resource
+    private DeviceInterceptor deviceInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {}

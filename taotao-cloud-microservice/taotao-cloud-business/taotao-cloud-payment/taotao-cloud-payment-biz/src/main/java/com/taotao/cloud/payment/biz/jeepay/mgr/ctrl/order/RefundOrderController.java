@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/refundOrder")
 public class RefundOrderController extends CommonCtrl {
 
-    @Autowired private RefundOrderService refundOrderService;
+    @Autowired
+    private RefundOrderService refundOrderService;
 
     /**
      * @author: pangxiaoyu
@@ -56,8 +57,7 @@ public class RefundOrderController extends CommonCtrl {
         RefundOrder refundOrder = getObject(RefundOrder.class);
         JSONObject paramJSON = getReqParamJSON();
         LambdaQueryWrapper<RefundOrder> wrapper = RefundOrder.gw();
-        IPage<RefundOrder> pages =
-                refundOrderService.pageList(getIPage(), wrapper, refundOrder, paramJSON);
+        IPage<RefundOrder> pages = refundOrderService.pageList(getIPage(), wrapper, refundOrder, paramJSON);
 
         return ApiRes.page(pages);
     }

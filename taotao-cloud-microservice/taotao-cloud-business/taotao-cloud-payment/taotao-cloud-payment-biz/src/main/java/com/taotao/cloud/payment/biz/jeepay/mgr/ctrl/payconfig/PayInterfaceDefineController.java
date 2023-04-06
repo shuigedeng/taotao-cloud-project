@@ -44,9 +44,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/payIfDefines")
 public class PayInterfaceDefineController extends CommonCtrl {
 
-    @Autowired private PayInterfaceDefineService payInterfaceDefineService;
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
+    @Autowired
+    private PayInterfaceDefineService payInterfaceDefineService;
+
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
 
     /**
      * @Author: ZhuXiao @Description: list @Date: 15:51 2021/4/27
@@ -56,8 +61,7 @@ public class PayInterfaceDefineController extends CommonCtrl {
     public ApiRes list() {
 
         List<PayInterfaceDefine> list =
-                payInterfaceDefineService.list(
-                        PayInterfaceDefine.gw().orderByAsc(PayInterfaceDefine::getCreatedAt));
+                payInterfaceDefineService.list(PayInterfaceDefine.gw().orderByAsc(PayInterfaceDefine::getCreatedAt));
         return ApiRes.ok(list);
     }
 
@@ -130,9 +134,7 @@ public class PayInterfaceDefineController extends CommonCtrl {
     public ApiRes delete(@PathVariable("ifCode") String ifCode) {
 
         // 校验该支付方式是否有服务商或商户配置参数或者已有订单
-        if (payInterfaceConfigService.count(
-                                PayInterfaceConfig.gw().eq(PayInterfaceConfig::getIfCode, ifCode))
-                        > 0
+        if (payInterfaceConfigService.count(PayInterfaceConfig.gw().eq(PayInterfaceConfig::getIfCode, ifCode)) > 0
                 || payOrderService.count(PayOrder.gw().eq(PayOrder::getIfCode, ifCode)) > 0) {
             throw new BizException("该支付接口已有服务商或商户配置参数或已发生交易，无法删除！");
         }

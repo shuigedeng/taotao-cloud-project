@@ -37,5 +37,6 @@ public record OrderBatchDeliverDTO(
         @Schema(description = "发货单号") String logisticsNo)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

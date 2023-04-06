@@ -37,7 +37,8 @@ import lombok.*;
 @Schema(description = "查询应用列表数据VO")
 public class RegionParentVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 5126530068827085130L;
+    @Serial
+    private static final long serialVersionUID = 5126530068827085130L;
 
     @Schema(description = "主键ID")
     private Long id;

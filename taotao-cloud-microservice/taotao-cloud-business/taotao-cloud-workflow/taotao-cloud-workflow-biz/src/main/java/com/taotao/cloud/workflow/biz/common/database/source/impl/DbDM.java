@@ -40,8 +40,7 @@ public class DbDM extends DbBase {
     }
 
     @Override
-    public LinkedList<Object> getStructParams(
-            String structParams, String table, DataSourceMod dbSourceOrDbLink) {
+    public LinkedList<Object> getStructParams(String structParams, String table, DataSourceMod dbSourceOrDbLink) {
         DataSourceDTO dataSourceDTO = dbSourceOrDbLink.convertDTO();
         dataSourceDTO.setDbSchema(dataSourceDTO.getUserName());
         return super.getStructParams(structParams, table, dataSourceDTO);

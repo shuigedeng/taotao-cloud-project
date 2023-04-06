@@ -43,16 +43,21 @@ import org.springframework.stereotype.Component;
 public class MemberMessageListener implements RocketMQListener<MessageExt> {
 
     /** 会员签到 */
-    @Autowired private IMemberSignService memberSignService;
+    @Autowired
+    private IMemberSignService memberSignService;
     /** 会员积分变化 */
-    @Autowired private List<MemberPointChangeEvent> memberPointChangeEvents;
+    @Autowired
+    private List<MemberPointChangeEvent> memberPointChangeEvents;
     /** 会员提现 */
-    @Autowired private List<MemberWithdrawalEvent> memberWithdrawalEvents;
+    @Autowired
+    private List<MemberWithdrawalEvent> memberWithdrawalEvents;
     /** 会员注册 */
-    @Autowired private List<MemberRegisterEvent> memberSignEvents;
+    @Autowired
+    private List<MemberRegisterEvent> memberSignEvents;
 
     /** 会员注册 */
-    @Autowired private List<MemberLoginEvent> memberLoginEvents;
+    @Autowired
+    private List<MemberLoginEvent> memberLoginEvents;
 
     @Override
     public void onMessage(MessageExt messageExt) {
@@ -61,8 +66,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
             case MEMBER_REGISTER -> {
                 for (MemberRegisterEvent memberRegisterEvent : memberSignEvents) {
                     try {
-                        Member member =
-                                JSONUtil.toBean(new String(messageExt.getBody()), Member.class);
+                        Member member = JSONUtil.toBean(new String(messageExt.getBody()), Member.class);
                         memberRegisterEvent.memberRegister(member);
                     } catch (Exception e) {
                         LogUtils.error(
@@ -76,8 +80,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
             case MEMBER_LOGIN -> {
                 for (MemberLoginEvent memberLoginEvent : memberLoginEvents) {
                     try {
-                        Member member =
-                                JSONUtil.toBean(new String(messageExt.getBody()), Member.class);
+                        Member member = JSONUtil.toBean(new String(messageExt.getBody()), Member.class);
                         memberLoginEvent.memberLogin(member);
                     } catch (Exception e) {
                         LogUtils.error(
@@ -90,19 +93,15 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
             }
                 // 会员签到
             case MEMBER_SING -> {
-                MemberSign memberSign =
-                        JSONUtil.toBean(new String(messageExt.getBody()), MemberSign.class);
-                memberSignService.memberSignSendPoint(
-                        memberSign.getMemberId(), memberSign.getSignDay());
+                MemberSign memberSign = JSONUtil.toBean(new String(messageExt.getBody()), MemberSign.class);
+                memberSignService.memberSignSendPoint(memberSign.getMemberId(), memberSign.getSignDay());
             }
                 // 会员积分变动
             case MEMBER_POINT_CHANGE -> {
                 for (MemberPointChangeEvent memberPointChangeEvent : memberPointChangeEvents) {
                     try {
                         MemberPointMessageDTO memberPointMessageDTO =
-                                JSONUtil.toBean(
-                                        new String(messageExt.getBody()),
-                                        MemberPointMessageDTO.class);
+                                JSONUtil.toBean(new String(messageExt.getBody()), MemberPointMessageDTO.class);
                         memberPointChangeEvent.memberPointChange(memberPointMessageDTO);
                     } catch (Exception e) {
                         LogUtils.error(
@@ -118,9 +117,7 @@ public class MemberMessageListener implements RocketMQListener<MessageExt> {
                 for (MemberWithdrawalEvent memberWithdrawalEvent : memberWithdrawalEvents) {
                     try {
                         MemberWithdrawalMessage memberWithdrawalMessage =
-                                JSONUtil.toBean(
-                                        new String(messageExt.getBody()),
-                                        MemberWithdrawalMessage.class);
+                                JSONUtil.toBean(new String(messageExt.getBody()), MemberWithdrawalMessage.class);
                         memberWithdrawalEvent.memberWithdrawal(memberWithdrawalMessage);
                     } catch (Exception e) {
                         LogUtils.error(

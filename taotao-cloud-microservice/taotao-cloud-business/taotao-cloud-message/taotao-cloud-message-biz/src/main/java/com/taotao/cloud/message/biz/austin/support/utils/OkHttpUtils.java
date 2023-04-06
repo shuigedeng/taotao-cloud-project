@@ -42,7 +42,8 @@ public class OkHttpUtils {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
 
-    @Autowired private OkHttpClient okHttpClient;
+    @Autowired
+    private OkHttpClient okHttpClient;
 
     /**
      * get 请求
@@ -181,10 +182,8 @@ public class OkHttpUtils {
         return executePost(url, xml, XML, null);
     }
 
-    private String executePost(
-            String url, String data, MediaType contentType, Map<String, String> headers) {
-        RequestBody requestBody =
-                RequestBody.create(data.getBytes(StandardCharsets.UTF_8), contentType);
+    private String executePost(String url, String data, MediaType contentType, Map<String, String> headers) {
+        RequestBody requestBody = RequestBody.create(data.getBytes(StandardCharsets.UTF_8), contentType);
         Request.Builder builder = getBuilderWithHeaders(headers);
         Request request = builder.url(url).post(requestBody).build();
 

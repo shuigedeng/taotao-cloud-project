@@ -49,8 +49,7 @@ public class HerodotusJwtTokenCustomizer extends AbstractTokenCustomizer
     public void customize(JwtEncodingContext context) {
 
         AbstractAuthenticationToken token = null;
-        Authentication clientAuthentication =
-                SecurityContextHolder.getContext().getAuthentication();
+        Authentication clientAuthentication = SecurityContextHolder.getContext().getAuthentication();
         if (clientAuthentication instanceof OAuth2ClientAuthenticationToken) {
             token = (OAuth2ClientAuthenticationToken) clientAuthentication;
         }

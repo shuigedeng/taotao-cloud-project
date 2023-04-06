@@ -59,11 +59,9 @@ public class MemberAddressController {
     @GetMapping("/{memberId}")
     public Result<PageResult<MemberAddressVO>> queryPage(
             @Validated PageQuery page,
-            @Parameter(description = "会员地址ID", required = true) @PathVariable("memberId")
-                    Long memberId) {
+            @Parameter(description = "会员地址ID", required = true) @PathVariable("memberId") Long memberId) {
         IPage<MemberAddress> addressByMember = memberAddressService.queryPage(page, memberId);
-        return Result.success(
-                PageResult.convertMybatisPage(addressByMember, MemberAddressVO.class));
+        return Result.success(PageResult.convertMybatisPage(addressByMember, MemberAddressVO.class));
     }
 
     @Operation(summary = "删除会员收件地址", description = "删除会员收件地址")

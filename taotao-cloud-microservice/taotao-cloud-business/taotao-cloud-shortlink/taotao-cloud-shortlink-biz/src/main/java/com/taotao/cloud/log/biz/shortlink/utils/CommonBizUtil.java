@@ -34,12 +34,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CommonBizUtil {
 
     /** 用以转换62进制 */
-    private static final String CHARS =
-            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     /** 用以转换62进制 - 将字符顺序打乱，避免生成的字符串可以反推出具体数值 */
-    private static final String CHARS_OUT_ORDER =
-            "qwertyuiopmnbvcxzlkjhgfdsaMNBVCXZASDFGHJKLPOIUYTREWQ0987654321";
+    private static final String CHARS_OUT_ORDER = "qwertyuiopmnbvcxzlkjhgfdsaMNBVCXZASDFGHJKLPOIUYTREWQ0987654321";
 
     private CommonBizUtil() {}
 

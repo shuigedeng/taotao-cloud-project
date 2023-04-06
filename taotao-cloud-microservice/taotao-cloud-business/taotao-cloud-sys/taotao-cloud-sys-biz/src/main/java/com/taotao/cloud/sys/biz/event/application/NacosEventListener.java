@@ -30,9 +30,7 @@ public class NacosEventListener {
             implements ApplicationListener<NacosDiscoveryInfoChangedEvent> {
         @Override
         public void onApplicationEvent(NacosDiscoveryInfoChangedEvent event) {
-            LogUtils.info(
-                    "NacosEventListener ----- NacosDiscoveryInfoChangedEvent onApplicationEvent {}",
-                    event);
+            LogUtils.info("NacosEventListener ----- NacosDiscoveryInfoChangedEvent onApplicationEvent {}", event);
         }
     }
 

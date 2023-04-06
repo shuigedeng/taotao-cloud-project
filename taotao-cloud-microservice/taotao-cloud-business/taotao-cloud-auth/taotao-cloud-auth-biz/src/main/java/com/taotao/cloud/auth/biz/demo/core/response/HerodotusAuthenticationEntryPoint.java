@@ -36,13 +36,10 @@ public class HerodotusAuthenticationEntryPoint implements AuthenticationEntryPoi
 
     @Override
     public void commence(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException authException)
+            HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
         Result<String> result =
-                SecurityGlobalExceptionHandler.resolveSecurityException(
-                        authException, request.getRequestURI());
+                SecurityGlobalExceptionHandler.resolveSecurityException(authException, request.getRequestURI());
         response.setStatus(result.getStatus());
         WebUtils.renderJson(response, result);
     }

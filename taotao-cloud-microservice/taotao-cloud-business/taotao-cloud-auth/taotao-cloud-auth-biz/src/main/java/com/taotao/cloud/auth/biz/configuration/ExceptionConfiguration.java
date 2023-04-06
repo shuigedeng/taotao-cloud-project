@@ -107,8 +107,7 @@ public class ExceptionConfiguration implements InitializingBean {
     }
 
     @ExceptionHandler({IllegalArgumentException.class})
-    public Result<String> illegalArgumentException(
-            NativeWebRequest req, IllegalArgumentException e) {
+    public Result<String> illegalArgumentException(NativeWebRequest req, IllegalArgumentException e) {
         printLog(req, e);
         return Result.fail(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
     }
@@ -126,8 +125,7 @@ public class ExceptionConfiguration implements InitializingBean {
     }
 
     @ExceptionHandler({UsernameNotFoundException.class})
-    public Result<String> badUsernameNotFoundException(
-            NativeWebRequest req, UsernameNotFoundException e) {
+    public Result<String> badUsernameNotFoundException(NativeWebRequest req, UsernameNotFoundException e) {
         printLog(req, e);
         return Result.fail(ResultEnum.USERNAME_OR_PASSWORD_ERROR);
     }
@@ -153,8 +151,7 @@ public class ExceptionConfiguration implements InitializingBean {
     }
 
     @ExceptionHandler({SQLIntegrityConstraintViolationException.class})
-    public Result<String> handleSqlException(
-            NativeWebRequest req, SQLIntegrityConstraintViolationException e) {
+    public Result<String> handleSqlException(NativeWebRequest req, SQLIntegrityConstraintViolationException e) {
         printLog(req, e);
         return Result.fail(ResultEnum.ERROR);
     }
@@ -190,8 +187,7 @@ public class ExceptionConfiguration implements InitializingBean {
     }
 
     @ExceptionHandler({MethodArgumentTypeMismatchException.class})
-    public Result<String> requestTypeMismatch(
-            NativeWebRequest req, MethodArgumentTypeMismatchException e) {
+    public Result<String> requestTypeMismatch(NativeWebRequest req, MethodArgumentTypeMismatchException e) {
         printLog(req, e);
         return Result.fail(ResultEnum.METHOD_ARGUMENTS_TYPE_MISMATCH);
     }
@@ -204,8 +200,7 @@ public class ExceptionConfiguration implements InitializingBean {
     }
 
     @ExceptionHandler({HttpMessageNotReadableException.class})
-    public Result<String> httpMessageNotReadableException(
-            NativeWebRequest req, HttpMessageNotReadableException e) {
+    public Result<String> httpMessageNotReadableException(NativeWebRequest req, HttpMessageNotReadableException e) {
         printLog(req, e);
         return Result.fail(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
     }
@@ -218,8 +213,7 @@ public class ExceptionConfiguration implements InitializingBean {
 
     /** RequestParam上validate失败后抛出的异常是jakarta.validation.ConstraintViolationException */
     @ExceptionHandler(ConstraintViolationException.class)
-    public Result<Map<String, String>> handleException(
-            NativeWebRequest req, ConstraintViolationException e) {
+    public Result<Map<String, String>> handleException(NativeWebRequest req, ConstraintViolationException e) {
         printLog(req, e);
         return Result.fail(getErrors(e));
     }

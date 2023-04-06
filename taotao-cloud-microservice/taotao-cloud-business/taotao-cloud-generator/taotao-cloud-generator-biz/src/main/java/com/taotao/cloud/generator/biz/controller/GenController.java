@@ -145,8 +145,7 @@ public class GenController {
      */
     // @SaCheckPermission("tool:gen:preview")
     @GetMapping("/preview/{tableId}")
-    public Result<Map<String, String>> preview(@PathVariable("tableId") Long tableId)
-            throws IOException {
+    public Result<Map<String, String>> preview(@PathVariable("tableId") Long tableId) throws IOException {
         Map<String, String> dataMap = genTableService.previewCode(tableId);
         return Result.success(dataMap);
     }
@@ -159,8 +158,7 @@ public class GenController {
     // @SaCheckPermission("tool:gen:code")
     // @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/download/{tableName}")
-    public void download(HttpServletResponse response, @PathVariable("tableName") String tableName)
-            throws IOException {
+    public void download(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
         byte[] data = genTableService.downloadCode(tableName);
         genCode(response, data);
     }

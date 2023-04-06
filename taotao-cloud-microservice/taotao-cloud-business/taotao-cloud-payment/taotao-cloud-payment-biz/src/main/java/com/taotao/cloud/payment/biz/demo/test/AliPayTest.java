@@ -51,133 +51,125 @@ public class AliPayTest {
             // 付款码
             String auth_code = "288717351683453412";
             // 支付宝付款码支付
-            AliPayCodePayBiz aliPayCodePayBiz =
-                    AliPay.codePay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            "测试",
-                            auth_code,
-                            null,
-                            notify,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            AliPayCodePayBiz aliPayCodePayBiz = AliPay.codePay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    "测试",
+                    auth_code,
+                    null,
+                    notify,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             System.out.println(aliPayCodePayBiz.toString());
 
             // 支付宝扫码支付
-            result =
-                    AliPay.nativePay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            "测试订单",
-                            "2",
-                            null,
-                            notify,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            result = AliPay.nativePay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    "测试订单",
+                    "2",
+                    null,
+                    notify,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             System.out.println("支付宝扫码支付返回结果：" + result);
 
             // 支付宝wap支付
-            result =
-                    AliPay.wapPay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            "支付测试",
-                            null,
-                            notify,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            result = AliPay.wapPay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    "支付测试",
+                    null,
+                    notify,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             System.out.println("支付宝wap支付返回结果：" + result);
 
             String buyer_id = "支付宝买家唯一编号，通过支付宝授权接口获取";
 
             // 支付宝JS支付
-            AliPayJsPayBiz aliPayJsPayBiz =
-                    AliPay.jsPay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            buyer_id,
-                            "支付测试",
-                            null,
-                            notify,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            AliPayJsPayBiz aliPayJsPayBiz = AliPay.jsPay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    buyer_id,
+                    "支付测试",
+                    null,
+                    notify,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             System.out.println("支付宝JS支付返回结果：" + aliPayJsPayBiz.toString());
 
             // 支付宝H5支付
-            AliPayH5Biz aliPayH5Biz =
-                    AliPay.h5Pay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            "接口测试",
-                            null,
-                            notify,
-                            returnUrl,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            AliPayH5Biz aliPayH5Biz = AliPay.h5Pay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    "接口测试",
+                    null,
+                    notify,
+                    returnUrl,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             // form表单需要自行输出跳转
             System.out.println("支付宝H5支付返回form表单：" + aliPayH5Biz.getForm());
             // url直接重定向访问即可
             System.out.println("支付宝H5支付返回url：" + aliPayH5Biz.getUrl());
 
             // 支付宝appPay支付
-            String appPay =
-                    AliPay.appPay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            "接口测试",
-                            null,
-                            notify,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            String appPay = AliPay.appPay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    "接口测试",
+                    null,
+                    notify,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             System.out.println("支付宝APP支付返回结果：" + appPay);
 
             // 电脑网站支付
-            AliPayWebPayBiz aliPayWebPayBiz =
-                    AliPay.webPay(
-                            System.currentTimeMillis() + "",
-                            "0.01",
-                            mch_id,
-                            "接口测试",
-                            null,
-                            notify,
-                            null,
-                            null,
-                            null,
-                            null,
-                            hbFqBiz,
-                            key);
+            AliPayWebPayBiz aliPayWebPayBiz = AliPay.webPay(
+                    System.currentTimeMillis() + "",
+                    "0.01",
+                    mch_id,
+                    "接口测试",
+                    null,
+                    notify,
+                    null,
+                    null,
+                    null,
+                    null,
+                    hbFqBiz,
+                    key);
             // form表单需要自行输出跳转
             System.out.println("支付宝电脑网站支付返回form表单：" + aliPayWebPayBiz.getForm());
             // url直接重定向访问即可
             System.out.println("支付宝电脑网站支付返回url：" + aliPayWebPayBiz.getUrl());
 
             // 发起退款
-            RefundOrder orderRefund =
-                    AliPay.orderRefund("Y194506551713811", mch_id, "0.01", null, "测试退款", null, key);
+            RefundOrder orderRefund = AliPay.orderRefund("Y194506551713811", mch_id, "0.01", null, "测试退款", null, key);
             System.out.println("支付宝发起退款返回结果：" + orderRefund.toString());
 
             // 退款查询
@@ -189,8 +181,7 @@ public class AliPayTest {
             System.out.println("支付宝关闭订单结果：" + closeOrder);
 
             // 撤销订单
-            AliPayReverseOrderBiz aliPayReverseOrderBiz =
-                    AliPay.reverseOrder("Y194506551713811", mch_id, key);
+            AliPayReverseOrderBiz aliPayReverseOrderBiz = AliPay.reverseOrder("Y194506551713811", mch_id, key);
             System.out.println("支付宝撤销订单结果：" + aliPayReverseOrderBiz.toString());
 
         } catch (Exception e) {

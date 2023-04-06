@@ -65,15 +65,20 @@ import org.springframework.util.StringUtils;
 @Service("chatUserService")
 public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements ChatUserService {
 
-    @Resource private ChatUserDao chatUserDao;
+    @Resource
+    private ChatUserDao chatUserDao;
 
-    @Resource private TokenService tokenService;
+    @Resource
+    private TokenService tokenService;
 
-    @Resource private ChatPushService chatPushService;
+    @Resource
+    private ChatPushService chatPushService;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
-    @Autowired private GeoHashUtils geoHashUtils;
+    @Autowired
+    private GeoHashUtils geoHashUtils;
 
     @Autowired
     public void setBaseDao() {
@@ -98,17 +103,16 @@ public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements Ch
         }
         String salt = RandomUtil.randomString(4);
         String chatNo = IdUtil.simpleUUID();
-        ChatUser cu =
-                new ChatUser()
-                        .setNickName(nickName)
-                        .setChatNo(chatNo)
-                        .setGender(GenderEnum.MALE)
-                        .setPortrait(ApiConstant.DEFAULT_PORTRAIT)
-                        .setSalt(salt)
-                        .setPhone(phone)
-                        .setPassword(Md5Utils.credentials(password, salt))
-                        .setStatus(YesOrNoEnum.YES)
-                        .setCreateTime(DateUtil.date());
+        ChatUser cu = new ChatUser()
+                .setNickName(nickName)
+                .setChatNo(chatNo)
+                .setGender(GenderEnum.MALE)
+                .setPortrait(ApiConstant.DEFAULT_PORTRAIT)
+                .setSalt(salt)
+                .setPhone(phone)
+                .setPassword(Md5Utils.credentials(password, salt))
+                .setStatus(YesOrNoEnum.YES)
+                .setCreateTime(DateUtil.date());
         try {
             this.add(cu);
         } catch (org.springframework.dao.DuplicateKeyException e) {
@@ -125,10 +129,7 @@ public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements Ch
     public void resetPass(Long userId, String password) {
         String salt = RandomUtil.randomString(4);
         ChatUser chatUser =
-                new ChatUser()
-                        .setUserId(userId)
-                        .setSalt(salt)
-                        .setPassword(Md5Utils.credentials(password, salt));
+                new ChatUser().setUserId(userId).setSalt(salt).setPassword(Md5Utils.credentials(password, salt));
         this.updateById(chatUser);
     }
 
@@ -141,10 +142,7 @@ public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements Ch
         }
         String salt = RandomUtil.randomString(4);
         ChatUser chatUser =
-                new ChatUser()
-                        .setUserId(cu.getUserId())
-                        .setSalt(salt)
-                        .setPassword(Md5Utils.credentials(pwd, salt));
+                new ChatUser().setUserId(cu.getUserId()).setSalt(salt).setPassword(Md5Utils.credentials(pwd, salt));
         this.updateById(chatUser);
     }
 
@@ -169,8 +167,7 @@ public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements Ch
     public MyVo09 getInfo() {
         // 当前用户
         ChatUser cu = findById(ShiroUtils.getUserId());
-        return BeanUtil.toBean(cu, MyVo09.class)
-                .setPhone(DesensitizedUtil.mobilePhone(cu.getPhone()));
+        return BeanUtil.toBean(cu, MyVo09.class).setPhone(DesensitizedUtil.mobilePhone(cu.getPhone()));
     }
 
     @Override
@@ -187,24 +184,17 @@ public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements Ch
         Long userId = ShiroUtils.getUserId();
         ChatUser chatUser = getById(userId);
         String content = ApiConstant.QR_CODE_USER + userId;
-        File original =
-                HttpUtil.downloadFileFromUrl(
-                        chatUser.getPortrait() + ApiConstant.IMAGE_PARAM,
-                        FileUtil.file(PlatformConfig.UPLOAD_PATH));
-        QrConfig qrConfig =
-                QrConfig.create()
-                        .setWidth(ApiConstant.QR_CODE_SIZE)
-                        .setHeight(ApiConstant.QR_CODE_SIZE)
-                        .setImg(original);
+        File original = HttpUtil.downloadFileFromUrl(
+                chatUser.getPortrait() + ApiConstant.IMAGE_PARAM, FileUtil.file(PlatformConfig.UPLOAD_PATH));
+        QrConfig qrConfig = QrConfig.create()
+                .setWidth(ApiConstant.QR_CODE_SIZE)
+                .setHeight(ApiConstant.QR_CODE_SIZE)
+                .setImg(original);
         byte[] data = QrCodeUtil.generatePng(content, qrConfig);
         // 删除临时图片
         FileUtil.del(original);
         String value = ApiConstant.BASE64_PREFIX.concat(Base64.encode(data));
-        redisUtils.set(
-                ApiConstant.REDIS_QR_CODE + userId,
-                value,
-                ApiConstant.REDIS_QR_CODE_TIME,
-                TimeUnit.DAYS);
+        redisUtils.set(ApiConstant.REDIS_QR_CODE + userId, value, ApiConstant.REDIS_QR_CODE_TIME, TimeUnit.DAYS);
         return value;
     }
 
@@ -214,8 +204,7 @@ public class ChatUserServiceImpl extends BaseServiceImpl<ChatUser> implements Ch
         // 移除缓存
         removeCache();
         // 更新用户
-        ChatUser cu =
-                new ChatUser().setUserId(ShiroUtils.getUserId()).setDeletedTime(DateUtil.date());
+        ChatUser cu = new ChatUser().setUserId(ShiroUtils.getUserId()).setDeletedTime(DateUtil.date());
         this.updateById(cu);
     }
 

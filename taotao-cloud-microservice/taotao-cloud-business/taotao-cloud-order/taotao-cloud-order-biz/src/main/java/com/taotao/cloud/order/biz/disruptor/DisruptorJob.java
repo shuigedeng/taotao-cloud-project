@@ -32,7 +32,8 @@ import org.springframework.context.annotation.Configuration;
 // @EnableScheduling
 public class DisruptorJob {
 
-    @Autowired private DisruptorTemplate disruptorTemplate;
+    @Autowired
+    private DisruptorTemplate disruptorTemplate;
 
     // @Scheduled(fixedDelay = 1000000)
     public void send() {

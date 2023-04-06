@@ -45,8 +45,7 @@ public class WalletPaymentService {
     private final WalletPaymentManager walletPaymentManager;
 
     /** 保存钱包支付记录 */
-    public void savePayment(
-            Payment payment, PayParam payParam, PayModeParam payMode, Wallet wallet) {
+    public void savePayment(Payment payment, PayParam payParam, PayModeParam payMode, Wallet wallet) {
         WalletPayment walletPayment = new WalletPayment().setWalletId(wallet.getId());
         walletPayment
                 .setPaymentId(payment.getId())
@@ -71,9 +70,7 @@ public class WalletPaymentService {
     /** 关闭操作 */
     public void updateClose(Long paymentId) {
         WalletPayment walletPayment =
-                walletPaymentManager
-                        .findByPaymentId(paymentId)
-                        .orElseThrow(() -> new BizException("未查询到查询交易记录"));
+                walletPaymentManager.findByPaymentId(paymentId).orElseThrow(() -> new BizException("未查询到查询交易记录"));
         walletPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
         walletPaymentManager.updateById(walletPayment);
     }
@@ -81,16 +78,15 @@ public class WalletPaymentService {
     /** 更新退款 */
     public void updateRefund(Long paymentId, BigDecimal amount) {
         Optional<WalletPayment> walletPayment = walletPaymentManager.findByPaymentId(paymentId);
-        walletPayment.ifPresent(
-                payment -> {
-                    BigDecimal refundableBalance = payment.getRefundableBalance().subtract(amount);
-                    payment.setRefundableBalance(refundableBalance);
-                    if (BigDecimalUtil.compareTo(refundableBalance, BigDecimal.ZERO) == 0) {
-                        payment.setPayStatus(PayStatusCode.TRADE_REFUNDED);
-                    } else {
-                        payment.setPayStatus(PayStatusCode.TRADE_REFUNDING);
-                    }
-                    walletPaymentManager.updateById(payment);
-                });
+        walletPayment.ifPresent(payment -> {
+            BigDecimal refundableBalance = payment.getRefundableBalance().subtract(amount);
+            payment.setRefundableBalance(refundableBalance);
+            if (BigDecimalUtil.compareTo(refundableBalance, BigDecimal.ZERO) == 0) {
+                payment.setPayStatus(PayStatusCode.TRADE_REFUNDED);
+            } else {
+                payment.setPayStatus(PayStatusCode.TRADE_REFUNDING);
+            }
+            walletPaymentManager.updateById(payment);
+        });
     }
 }

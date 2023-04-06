@@ -33,7 +33,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BasePromotionsVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = 7814832369110695758L;
+    @Serial
+    private static final long serialVersionUID = 7814832369110695758L;
 
     private Long id;
 
@@ -60,9 +61,7 @@ public class BasePromotionsVO implements Serializable {
      */
     public String getPromotionStatus() {
         if (endTime == null) {
-            return startTime != null
-                    ? PromotionsStatusEnum.START.name()
-                    : PromotionsStatusEnum.CLOSE.name();
+            return startTime != null ? PromotionsStatusEnum.START.name() : PromotionsStatusEnum.CLOSE.name();
         }
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(startTime)) {

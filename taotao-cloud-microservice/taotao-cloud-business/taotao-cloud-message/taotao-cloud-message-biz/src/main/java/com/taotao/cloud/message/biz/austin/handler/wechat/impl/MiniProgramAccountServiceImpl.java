@@ -43,20 +43,19 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class MiniProgramAccountServiceImpl implements MiniProgramAccountService {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     @Override
     public void send(WeChatMiniProgramParam miniProgramParam) throws Exception {
-        WeChatMiniProgramAccount miniProgramAccount =
-                accountUtils.getAccount(
-                        miniProgramParam.getSendAccount(),
-                        SendAccountConstant.WECHAT_MINI_PROGRAM_ACCOUNT_KEY,
-                        SendAccountConstant.WECHAT_MINI_PROGRAM_PREFIX,
-                        WeChatMiniProgramAccount.class);
+        WeChatMiniProgramAccount miniProgramAccount = accountUtils.getAccount(
+                miniProgramParam.getSendAccount(),
+                SendAccountConstant.WECHAT_MINI_PROGRAM_ACCOUNT_KEY,
+                SendAccountConstant.WECHAT_MINI_PROGRAM_PREFIX,
+                WeChatMiniProgramAccount.class);
 
         WxMaSubscribeService wxMaSubscribeService = initService(miniProgramAccount);
-        List<WxMaSubscribeMessage> subscribeMessageList =
-                assembleReq(miniProgramParam, miniProgramAccount);
+        List<WxMaSubscribeMessage> subscribeMessageList = assembleReq(miniProgramParam, miniProgramAccount);
         for (WxMaSubscribeMessage subscribeMessage : subscribeMessageList) {
             wxMaSubscribeService.sendSubscribeMsg(subscribeMessage);
         }
@@ -70,14 +69,13 @@ public class MiniProgramAccountServiceImpl implements MiniProgramAccountService 
 
         // 构建微信小程序订阅消息
         for (String openId : receiver) {
-            WxMaSubscribeMessage subscribeMessage =
-                    WxMaSubscribeMessage.builder()
-                            .toUser(openId)
-                            .data(getWxMTemplateData(miniProgramParam.getData()))
-                            .miniprogramState(miniProgramAccount.getMiniProgramState())
-                            .templateId(miniProgramAccount.getTemplateId())
-                            .page(miniProgramAccount.getPage())
-                            .build();
+            WxMaSubscribeMessage subscribeMessage = WxMaSubscribeMessage.builder()
+                    .toUser(openId)
+                    .data(getWxMTemplateData(miniProgramParam.getData()))
+                    .miniprogramState(miniProgramAccount.getMiniProgramState())
+                    .templateId(miniProgramAccount.getTemplateId())
+                    .page(miniProgramAccount.getPage())
+                    .build();
             messageList.add(subscribeMessage);
         }
         return messageList;

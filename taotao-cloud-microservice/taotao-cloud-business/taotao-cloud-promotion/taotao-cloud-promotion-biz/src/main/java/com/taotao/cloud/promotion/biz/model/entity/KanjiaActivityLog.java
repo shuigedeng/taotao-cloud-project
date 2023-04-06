@@ -58,14 +58,10 @@ public class KanjiaActivityLog extends BaseSuperEntity<KanjiaActivityLog, Long> 
     @Column(name = "kanjia_member_id", columnDefinition = "bigint not null  comment '砍价会员id'")
     private Long kanjiaMemberId;
     /** 砍价会员名称 */
-    @Column(
-            name = "kanjia_member_name",
-            columnDefinition = "varchar(255) not null  comment '砍价会员名称'")
+    @Column(name = "kanjia_member_name", columnDefinition = "varchar(255) not null  comment '砍价会员名称'")
     private String kanjiaMemberName;
     /** 砍价会员头像 */
-    @Column(
-            name = "kanjia_member_face",
-            columnDefinition = "varchar(255) not null  comment '砍价会员头像'")
+    @Column(name = "kanjia_member_face", columnDefinition = "varchar(255) not null  comment '砍价会员头像'")
     private String kanjiaMemberFace;
     /** 砍价金额 */
     @Column(name = "kanjia_price", columnDefinition = "decimal(10,2) not null  comment '砍价金额'")

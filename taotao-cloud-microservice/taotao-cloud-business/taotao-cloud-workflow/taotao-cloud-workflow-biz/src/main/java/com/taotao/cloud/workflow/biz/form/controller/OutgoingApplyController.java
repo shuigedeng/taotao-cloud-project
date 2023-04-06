@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/OutgoingApply")
 public class OutgoingApplyController {
 
-    @Autowired private OutgoingApplyService outgoingApplyService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private OutgoingApplyService outgoingApplyService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取外出申请单信息
@@ -51,17 +54,14 @@ public class OutgoingApplyController {
      */
     @Operation("获取外出申请单信息")
     @GetMapping("/{id}")
-    public Result<OutgoingApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<OutgoingApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         OutgoingApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), OutgoingApplyInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), OutgoingApplyInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,13 +81,11 @@ public class OutgoingApplyController {
      */
     @Operation("新建外出申请单")
     @PostMapping
-    public Result create(@RequestBody OutgoingApplyForm outgoingApplyForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody OutgoingApplyForm outgoingApplyForm) throws WorkFlowException {
         if (outgoingApplyForm.getStartTime() > outgoingApplyForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        OutgoingApplyEntity entity =
-                JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
+        OutgoingApplyEntity entity = JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outgoingApplyForm.getStatus())) {
             outgoingApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -105,14 +103,12 @@ public class OutgoingApplyController {
      */
     @Operation("修改外出申请单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody OutgoingApplyForm outgoingApplyForm, @PathVariable("id") String id)
+    public Result update(@RequestBody OutgoingApplyForm outgoingApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (outgoingApplyForm.getStartTime() > outgoingApplyForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        OutgoingApplyEntity entity =
-                JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
+        OutgoingApplyEntity entity = JsonUtils.getJsonToBean(outgoingApplyForm, OutgoingApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(outgoingApplyForm.getStatus())) {
             outgoingApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

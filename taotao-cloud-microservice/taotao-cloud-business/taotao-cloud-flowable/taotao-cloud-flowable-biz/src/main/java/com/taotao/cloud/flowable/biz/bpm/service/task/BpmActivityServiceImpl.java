@@ -36,20 +36,23 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class BpmActivityServiceImpl implements BpmActivityService {
 
-    @Resource private HistoryService historyService;
+    @Resource
+    private HistoryService historyService;
 
     @Override
     public List<BpmActivityRespVO> getActivityListByProcessInstanceId(String processInstanceId) {
-        List<HistoricActivityInstance> activityList =
-                historyService
-                        .createHistoricActivityInstanceQuery()
-                        .processInstanceId(processInstanceId)
-                        .list();
+        List<HistoricActivityInstance> activityList = historyService
+                .createHistoricActivityInstanceQuery()
+                .processInstanceId(processInstanceId)
+                .list();
         return BpmActivityConvert.INSTANCE.convertList(activityList);
     }
 
     @Override
     public List<HistoricActivityInstance> getHistoricActivityListByExecutionId(String executionId) {
-        return historyService.createHistoricActivityInstanceQuery().executionId(executionId).list();
+        return historyService
+                .createHistoricActivityInstanceQuery()
+                .executionId(executionId)
+                .list();
     }
 }

@@ -27,8 +27,7 @@ import org.springframework.stereotype.Service;
 
 /** 流程候选人 */
 @Service
-public class FlowCandidatesServiceImpls
-        extends ServiceImpl<FlowCandidatesMapper, FlowCandidatesEntity>
+public class FlowCandidatesServiceImpls extends ServiceImpl<FlowCandidatesMapper, FlowCandidatesEntity>
         implements FlowCandidatesService {
 
     @Override

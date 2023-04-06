@@ -31,9 +31,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShiroServiceImpl implements ShiroService {
-    @Autowired private SysMenuDao sysMenuDao;
-    @Autowired private SysUserDao sysUserDao;
-    @Autowired private SysUserTokenDao sysUserTokenDao;
+    @Autowired
+    private SysMenuDao sysMenuDao;
+
+    @Autowired
+    private SysUserDao sysUserDao;
+
+    @Autowired
+    private SysUserTokenDao sysUserTokenDao;
 
     @Override
     public Set<String> getUserPermissions(long userId) {

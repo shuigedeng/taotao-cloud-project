@@ -31,13 +31,17 @@ import org.springframework.stereotype.Service;
 
 /** 收文处理表 */
 @Service
-public class ReceiptProcessingServiceImpl
-        extends ServiceImpl<ReceiptProcessingMapper, ReceiptProcessingEntity>
+public class ReceiptProcessingServiceImpl extends ServiceImpl<ReceiptProcessingMapper, ReceiptProcessingEntity>
         implements ReceiptProcessingService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
-    @Autowired private FileManageUtil fileManageUtil;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
+
+    @Autowired
+    private FileManageUtil fileManageUtil;
 
     @Override
     public ReceiptProcessingEntity getInfo(String id) {
@@ -77,8 +81,7 @@ public class ReceiptProcessingServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ReceiptProcessingEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ReceiptProcessingEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -110,10 +113,8 @@ public class ReceiptProcessingServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ReceiptProcessingForm receiptProcessingForm =
-                JsonUtils.getJsonToBean(data, ReceiptProcessingForm.class);
-        ReceiptProcessingEntity entity =
-                JsonUtils.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
+        ReceiptProcessingForm receiptProcessingForm = JsonUtils.getJsonToBean(data, ReceiptProcessingForm.class);
+        ReceiptProcessingEntity entity = JsonUtils.getJsonToBean(receiptProcessingForm, ReceiptProcessingEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

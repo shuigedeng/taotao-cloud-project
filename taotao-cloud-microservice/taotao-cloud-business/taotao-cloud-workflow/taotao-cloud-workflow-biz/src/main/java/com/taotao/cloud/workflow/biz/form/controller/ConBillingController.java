@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/ConBilling")
 public class ConBillingController {
 
-    @Autowired private ConBillingService conBillingService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private ConBillingService conBillingService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取合同开票流程信息
@@ -52,8 +55,7 @@ public class ConBillingController {
      */
     @Operation("获取合同开票流程信息")
     @GetMapping("/{id}")
-    public Result<ConBillingInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<ConBillingInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         ConBillingInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class ConBillingController {
      */
     @Operation("新建合同开票流程")
     @PostMapping
-    public Result create(@RequestBody @Valid ConBillingForm conBillingForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid ConBillingForm conBillingForm) throws WorkFlowException {
         if (conBillingForm.getBillAmount() != null
                 && !"".equals(String.valueOf(conBillingForm.getBillAmount()))
                 && !RegexUtils.checkDecimals2(String.valueOf(conBillingForm.getBillAmount()))) {
@@ -110,8 +111,7 @@ public class ConBillingController {
      */
     @Operation("修改合同开票流程")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid ConBillingForm conBillingForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid ConBillingForm conBillingForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (conBillingForm.getBillAmount() != null
                 && !"".equals(conBillingForm.getBillAmount())

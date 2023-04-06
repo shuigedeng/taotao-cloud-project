@@ -40,8 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @AllArgsConstructor
-public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits>
-        implements IVisitsService {
+public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implements IVisitsService {
 
     // private final ILogService logService;
 
@@ -49,9 +48,7 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits>
     @Transactional(rollbackFor = Exception.class)
     public void save() {
         LocalDate localDate = LocalDate.now();
-        Visits visits =
-                this.getOne(
-                        new LambdaQueryWrapper<Visits>().eq(Visits::getDate, localDate.toString()));
+        Visits visits = this.getOne(new LambdaQueryWrapper<Visits>().eq(Visits::getDate, localDate.toString()));
         if (visits == null) {
             visits = new Visits();
             visits.setWeekDay(String.valueOf(DateUtils.getCurrentWeek()));
@@ -65,9 +62,7 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits>
     @Override
     public void count(HttpServletRequest request) {
         LocalDate localDate = LocalDate.now();
-        Visits visits =
-                this.getOne(
-                        new LambdaQueryWrapper<Visits>().eq(Visits::getDate, localDate.toString()));
+        Visits visits = this.getOne(new LambdaQueryWrapper<Visits>().eq(Visits::getDate, localDate.toString()));
         if (visits == null) {
             visits = new Visits();
             visits.setPvCounts(1L);
@@ -84,12 +79,9 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits>
     public Object get() {
         Map<String, Object> map = new HashMap<>(4);
         LocalDate localDate = LocalDate.now();
-        Visits visits =
-                this.getOne(
-                        new LambdaQueryWrapper<Visits>().eq(Visits::getDate, localDate.toString()));
-        List<Visits> list =
-                this.baseMapper.findAllVisits(
-                        localDate.minusDays(6).toString(), localDate.plusDays(1).toString());
+        Visits visits = this.getOne(new LambdaQueryWrapper<Visits>().eq(Visits::getDate, localDate.toString()));
+        List<Visits> list = this.baseMapper.findAllVisits(
+                localDate.minusDays(6).toString(), localDate.plusDays(1).toString());
 
         long recentVisits = 0, recentIp = 0;
         for (Visits data : list) {

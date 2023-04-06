@@ -46,9 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = CouponActivityItem.TABLE_NAME)
 @TableName(CouponActivityItem.TABLE_NAME)
-@org.hibernate.annotations.Table(
-        appliesTo = CouponActivityItem.TABLE_NAME,
-        comment = "优惠券活动-优惠券关联实体类")
+@org.hibernate.annotations.Table(appliesTo = CouponActivityItem.TABLE_NAME, comment = "优惠券活动-优惠券关联实体类")
 public class CouponActivityItem extends BaseSuperEntity<CouponActivityItem, Long> {
 
     public static final String TABLE_NAME = "tt_coupon_activity_item";

@@ -39,5 +39,6 @@ public record OrderComplaintOperationDTO(
         @Schema(description = "仲裁结果") String arbitrationResult)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

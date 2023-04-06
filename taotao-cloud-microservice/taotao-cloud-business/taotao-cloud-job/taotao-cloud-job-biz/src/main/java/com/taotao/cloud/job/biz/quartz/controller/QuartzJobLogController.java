@@ -35,7 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "quartz任务管理日志API", description = "quartz任务管理日志API")
 public class QuartzJobLogController {
 
-    @Resource private QuartzJobLogService quartzJobLogService;
+    @Resource
+    private QuartzJobLogService quartzJobLogService;
 
     @GetMapping("/page")
     @Operation(summary = "分页查询任务日志", description = "分页查询任务日志")

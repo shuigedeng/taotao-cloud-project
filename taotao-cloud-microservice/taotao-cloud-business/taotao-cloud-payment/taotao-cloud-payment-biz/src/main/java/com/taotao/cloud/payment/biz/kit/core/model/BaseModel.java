@@ -62,8 +62,7 @@ public class BaseModel {
      * @param haveSignType 签名是否包含 sign_type 字段
      * @return 构建签名后的 Map
      */
-    public Map<String, String> createSign(
-            String partnerKey, SignType signType, boolean haveSignType) {
+    public Map<String, String> createSign(String partnerKey, SignType signType, boolean haveSignType) {
         return WxPayKit.buildSign(toMap(), partnerKey, signType, haveSignType);
     }
 
@@ -92,12 +91,11 @@ public class BaseModel {
     public Object getFieldValueByName(String fieldName, Object obj) {
         try {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();
-            String getter =
-                    new StringBuffer()
-                            .append("get")
-                            .append(firstLetter)
-                            .append(fieldName.substring(1))
-                            .toString();
+            String getter = new StringBuffer()
+                    .append("get")
+                    .append(firstLetter)
+                    .append(fieldName.substring(1))
+                    .toString();
             Method method = obj.getClass().getMethod(getter);
             return method.invoke(obj);
         } catch (Exception e) {

@@ -33,10 +33,10 @@ import org.springframework.stereotype.Service;
 
 /** 版本 服务层实现 q3z3 */
 @Service("chatVersionService")
-public class ChatVersionServiceImpl extends BaseServiceImpl<ChatVersion>
-        implements ChatVersionService {
+public class ChatVersionServiceImpl extends BaseServiceImpl<ChatVersion> implements ChatVersionService {
 
-    @Resource private ChatVersionDao chatVersionDao;
+    @Resource
+    private ChatVersionDao chatVersionDao;
 
     @Autowired
     public void setBaseDao() {
@@ -63,16 +63,9 @@ public class ChatVersionServiceImpl extends BaseServiceImpl<ChatVersion>
         VersionTypeEnum versionType = initDevice(device);
         ChatVersion chatVersion = this.findById(versionType.getCode());
         YesOrNoEnum upgrade =
-                VersionUtils.compareTo(version, chatVersion.getVersion()) < 0
-                        ? YesOrNoEnum.YES
-                        : YesOrNoEnum.NO;
-        YesOrNoEnum forceUpgrade =
-                VersionUtils.compareTo(version, this.version) < 0
-                        ? YesOrNoEnum.YES
-                        : YesOrNoEnum.NO;
-        return BeanUtil.toBean(chatVersion, VersionVo.class)
-                .setUpgrade(upgrade)
-                .setForceUpgrade(forceUpgrade);
+                VersionUtils.compareTo(version, chatVersion.getVersion()) < 0 ? YesOrNoEnum.YES : YesOrNoEnum.NO;
+        YesOrNoEnum forceUpgrade = VersionUtils.compareTo(version, this.version) < 0 ? YesOrNoEnum.YES : YesOrNoEnum.NO;
+        return BeanUtil.toBean(chatVersion, VersionVo.class).setUpgrade(upgrade).setForceUpgrade(forceUpgrade);
     }
 
     /** 计算版本 */

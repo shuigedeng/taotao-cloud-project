@@ -34,7 +34,7 @@ import org.springframework.stereotype.Component;
 public class DataVersionLogTopicMessageDelegate {
 
     @Autowired
-	private ILogService logService;
+    private ILogService logService;
 
     public void handleRequestLog(String message, String channel) {
         try {

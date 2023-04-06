@@ -39,7 +39,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EmailHandler extends BaseHandler implements Handler {
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private AccountUtils accountUtils;
 
     @Value("${austin.business.upload.crowd.path}")
     private String dataPath;
@@ -49,12 +50,11 @@ public class EmailHandler extends BaseHandler implements Handler {
 
         // 按照请求限流，默认单机 3 qps （具体数值配置在apollo动态调整)
         Double rateInitValue = Double.valueOf(3);
-        flowControlParam =
-                FlowControlParam.builder()
-                        .rateInitValue(rateInitValue)
-                        .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
-                        .rateLimiter(RateLimiter.create(rateInitValue))
-                        .build();
+        flowControlParam = FlowControlParam.builder()
+                .rateInitValue(rateInitValue)
+                .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
+                .rateLimiter(RateLimiter.create(rateInitValue))
+                .build();
     }
 
     @Override
@@ -62,31 +62,25 @@ public class EmailHandler extends BaseHandler implements Handler {
         EmailContentModel emailContentModel = (EmailContentModel) taskInfo.getContentModel();
         MailAccount account = getAccountConfig(taskInfo.getSendAccount());
         try {
-            File file =
-                    StrUtil.isNotBlank(emailContentModel.getUrl())
-                            ? AustinFileUtils.getRemoteUrl2File(
-                                    dataPath, emailContentModel.getUrl())
-                            : null;
-            String result =
-                    Objects.isNull(file)
-                            ? MailUtil.send(
-                                    account,
-                                    taskInfo.getReceiver(),
-                                    emailContentModel.getTitle(),
-                                    emailContentModel.getContent(),
-                                    true)
-                            : MailUtil.send(
-                                    account,
-                                    taskInfo.getReceiver(),
-                                    emailContentModel.getTitle(),
-                                    emailContentModel.getContent(),
-                                    true,
-                                    file);
+            File file = StrUtil.isNotBlank(emailContentModel.getUrl())
+                    ? AustinFileUtils.getRemoteUrl2File(dataPath, emailContentModel.getUrl())
+                    : null;
+            String result = Objects.isNull(file)
+                    ? MailUtil.send(
+                            account,
+                            taskInfo.getReceiver(),
+                            emailContentModel.getTitle(),
+                            emailContentModel.getContent(),
+                            true)
+                    : MailUtil.send(
+                            account,
+                            taskInfo.getReceiver(),
+                            emailContentModel.getTitle(),
+                            emailContentModel.getContent(),
+                            true,
+                            file);
         } catch (Exception e) {
-            log.error(
-                    "EmailHandler#handler fail!{},params:{}",
-                    Throwables.getStackTraceAsString(e),
-                    taskInfo);
+            log.error("EmailHandler#handler fail!{},params:{}", Throwables.getStackTraceAsString(e), taskInfo);
             return false;
         }
         return true;

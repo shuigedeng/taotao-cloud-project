@@ -38,7 +38,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sys/config")
 @Api(tags = {"系统配置信息"})
 public class SysConfigController extends AbstractController {
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private SysConfigService sysConfigService;
 
     /** 所有配置列表 */
     @GetMapping("/list")

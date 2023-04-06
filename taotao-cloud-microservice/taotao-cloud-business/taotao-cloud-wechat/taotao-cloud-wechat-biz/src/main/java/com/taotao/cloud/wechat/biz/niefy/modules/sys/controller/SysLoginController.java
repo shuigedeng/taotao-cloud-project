@@ -46,16 +46,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(tags = {"系统登录-管理后台"})
 public class SysLoginController extends AbstractController {
-    @Autowired private SysUserService sysUserService;
-    @Autowired private SysUserTokenService sysUserTokenService;
-    @Autowired private SysCaptchaService sysCaptchaService;
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private SysUserTokenService sysUserTokenService;
+
+    @Autowired
+    private SysCaptchaService sysCaptchaService;
 
     /** 验证码 */
     @GetMapping("captcha")
     @ApiOperation(value = "获取验证码", notes = "返回验证码图片")
-    public void captcha(
-            HttpServletResponse response,
-            @ApiParam(value = "随意填，但每次不得重复", required = true) String uuid)
+    public void captcha(HttpServletResponse response, @ApiParam(value = "随意填，但每次不得重复", required = true) String uuid)
             throws IOException {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
@@ -82,9 +85,7 @@ public class SysLoginController extends AbstractController {
         SysUserEntity user = sysUserService.queryByUserName(form.getUsername());
 
         // 账号不存在、密码错误
-        if (user == null
-                || !user.getPassword()
-                        .equals(new Sha256Hash(form.getPassword(), user.getSalt()).toHex())) {
+        if (user == null || !user.getPassword().equals(new Sha256Hash(form.getPassword(), user.getSalt()).toHex())) {
             return R.error("账号或密码不正确");
         }
 

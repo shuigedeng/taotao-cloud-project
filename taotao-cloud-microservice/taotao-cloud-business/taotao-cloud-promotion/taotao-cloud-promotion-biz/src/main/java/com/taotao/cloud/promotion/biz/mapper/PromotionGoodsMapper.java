@@ -86,6 +86,5 @@ public interface PromotionGoodsMapper extends BaseSuperMapper<PromotionGoods> {
      * @return 共参加了几种活动
      */
     @Select("select price from tt_promotion_goods ${ew.customSqlSegment} ")
-    BigDecimal selectPromotionsGoodsPrice(
-            @Param(Constants.WRAPPER) Wrapper<PromotionGoods> queryWrapper);
+    BigDecimal selectPromotionsGoodsPrice(@Param(Constants.WRAPPER) Wrapper<PromotionGoods> queryWrapper);
 }

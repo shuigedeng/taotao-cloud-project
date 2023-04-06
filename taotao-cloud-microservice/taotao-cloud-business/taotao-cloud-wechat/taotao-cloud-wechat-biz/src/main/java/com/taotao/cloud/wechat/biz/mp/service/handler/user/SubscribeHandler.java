@@ -40,8 +40,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SubscribeHandler implements WxMpMessageHandler {
 
-    @Resource private MpUserService mpUserService;
-    @Resource private MpAutoReplyService mpAutoReplyService;
+    @Resource
+    private MpUserService mpUserService;
+
+    @Resource
+    private MpAutoReplyService mpAutoReplyService;
 
     @Override
     public WxMpXmlOutMessage handle(

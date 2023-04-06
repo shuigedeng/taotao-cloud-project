@@ -42,13 +42,13 @@ import org.springframework.util.CollectionUtils;
 @Service
 public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPayPassage> {
 
-    @Autowired private PayInterfaceDefineService payInterfaceDefineService;
+    @Autowired
+    private PayInterfaceDefineService payInterfaceDefineService;
 
     /**
      * @Author: ZhuXiao @Description: 根据支付方式查询可用的支付接口列表 @Date: 9:56 2021/5/10
      */
-    public List<JSONObject> selectAvailablePayInterfaceList(
-            String wayCode, String appId, Byte infoType, Byte mchType) {
+    public List<JSONObject> selectAvailablePayInterfaceList(String wayCode, String appId, Byte infoType, Byte mchType) {
         Map params = new HashMap();
         params.put("wayCode", wayCode);
         params.put("appId", appId);
@@ -61,12 +61,10 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
 
         // 添加通道状态
         for (JSONObject object : list) {
-            MchPayPassage payPassage =
-                    baseMapper.selectOne(
-                            MchPayPassage.gw()
-                                    .eq(MchPayPassage::getAppId, appId)
-                                    .eq(MchPayPassage::getWayCode, wayCode)
-                                    .eq(MchPayPassage::getIfCode, object.getString("ifCode")));
+            MchPayPassage payPassage = baseMapper.selectOne(MchPayPassage.gw()
+                    .eq(MchPayPassage::getAppId, appId)
+                    .eq(MchPayPassage::getWayCode, wayCode)
+                    .eq(MchPayPassage::getIfCode, object.getString("ifCode")));
             if (payPassage != null) {
                 object.put("passageId", payPassage.getId());
                 if (payPassage.getRate() != null) {
@@ -75,8 +73,7 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
                 object.put("state", payPassage.getState());
             }
             if (object.getBigDecimal("ifRate") != null) {
-                object.put(
-                        "ifRate", object.getBigDecimal("ifRate").multiply(new BigDecimal("100")));
+                object.put("ifRate", object.getBigDecimal("ifRate").multiply(new BigDecimal("100")));
             }
         }
         return list;
@@ -92,10 +89,7 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
                 payPassage.setMchNo(mchNo);
             }
             if (payPassage.getRate() != null) {
-                payPassage.setRate(
-                        payPassage
-                                .getRate()
-                                .divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
+                payPassage.setRate(payPassage.getRate().divide(new BigDecimal("100"), 6, BigDecimal.ROUND_HALF_UP));
             }
             if (!saveOrUpdate(payPassage)) {
                 throw new BizException("操作失败");
@@ -106,13 +100,11 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
     /** 根据应用ID 和 支付方式， 查询出商户可用的支付接口 * */
     public MchPayPassage findMchPayPassage(String mchNo, String appId, String wayCode) {
 
-        List<MchPayPassage> list =
-                list(
-                        MchPayPassage.gw()
-                                .eq(MchPayPassage::getMchNo, mchNo)
-                                .eq(MchPayPassage::getAppId, appId)
-                                .eq(MchPayPassage::getState, CS.YES)
-                                .eq(MchPayPassage::getWayCode, wayCode));
+        List<MchPayPassage> list = list(MchPayPassage.gw()
+                .eq(MchPayPassage::getMchNo, mchNo)
+                .eq(MchPayPassage::getAppId, appId)
+                .eq(MchPayPassage::getState, CS.YES)
+                .eq(MchPayPassage::getWayCode, wayCode));
 
         if (list.isEmpty()) {
             return null;
@@ -124,15 +116,12 @@ public class MchPayPassageService extends ServiceImpl<MchPayPassageMapper, MchPa
                 mchPayPassageMap.put(mchPayPassage.getIfCode(), mchPayPassage);
             }
             // 查询ifCode所有接口
-            PayInterfaceDefine interfaceDefine =
-                    payInterfaceDefineService.getOne(
-                            PayInterfaceDefine.gw()
-                                    .select(
-                                            PayInterfaceDefine::getIfCode,
-                                            PayInterfaceDefine::getState)
-                                    .eq(PayInterfaceDefine::getState, CS.YES)
-                                    .in(PayInterfaceDefine::getIfCode, mchPayPassageMap.keySet()),
-                            false);
+            PayInterfaceDefine interfaceDefine = payInterfaceDefineService.getOne(
+                    PayInterfaceDefine.gw()
+                            .select(PayInterfaceDefine::getIfCode, PayInterfaceDefine::getState)
+                            .eq(PayInterfaceDefine::getState, CS.YES)
+                            .in(PayInterfaceDefine::getIfCode, mchPayPassageMap.keySet()),
+                    false);
 
             if (interfaceDefine != null) {
                 return mchPayPassageMap.get(interfaceDefine.getIfCode());

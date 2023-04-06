@@ -40,11 +40,11 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-01 13:48:04
  */
 @Service
-public class MemberPointsHistoryServiceImpl
-        extends ServiceImpl<IMemberPointsHistoryMapper, MemberPointsHistory>
+public class MemberPointsHistoryServiceImpl extends ServiceImpl<IMemberPointsHistoryMapper, MemberPointsHistory>
         implements IMemberPointsHistoryService {
 
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
 
     @Override
     public MemberPointsHistoryVO getMemberPointsHistoryVO(Long memberId) {
@@ -71,10 +71,9 @@ public class MemberPointsHistoryServiceImpl
     @Override
     public IPage<MemberPointsHistory> memberPointsHistoryPageQuery(
             PageQuery pageQuery, Long memberId, String memberName) {
-        LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper =
-                new LambdaQueryWrapper<MemberPointsHistory>()
-                        .eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
-                        .like(memberName != null, MemberPointsHistory::getMemberName, memberName);
+        LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistory>()
+                .eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
+                .like(memberName != null, MemberPointsHistory::getMemberName, memberName);
 
         // 如果排序为空，则默认创建时间倒序
         if (StringUtils.isNotBlank(pageQuery.getSort())) {

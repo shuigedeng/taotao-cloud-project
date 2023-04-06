@@ -32,7 +32,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "参数组关联的参数集合")
 public class SpecificationVO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4433579132929428572L;
+    @Serial
+    private static final long serialVersionUID = -4433579132929428572L;
 
     @Schema(description = "id")
     private Long id;

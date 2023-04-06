@@ -31,9 +31,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CaptchaApplicationServiceImpl implements CaptchaApplicationService {
 
-    @Autowired private Producer producer;
+    @Autowired
+    private Producer producer;
 
-    @Autowired private CaptchaRepository captchaRepository;
+    @Autowired
+    private CaptchaRepository captchaRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

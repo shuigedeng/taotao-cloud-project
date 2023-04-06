@@ -30,7 +30,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RegisteredCouponActivityExecute implements MemberRegisterEvent {
 
-    @Autowired private IFeignCouponActivityApi couponActivityService;
+    @Autowired
+    private IFeignCouponActivityApi couponActivityService;
 
     /**
      * 获取进行中的注册赠券的优惠券活动 发送注册赠券

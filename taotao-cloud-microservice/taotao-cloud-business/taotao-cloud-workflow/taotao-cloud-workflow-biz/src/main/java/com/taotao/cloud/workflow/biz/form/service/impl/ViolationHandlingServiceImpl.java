@@ -33,12 +33,14 @@ import org.springframework.stereotype.Service;
 
 /** 违章处理申请表 */
 @Service
-public class ViolationHandlingServiceImpl
-        extends ServiceImpl<ViolationHandlingMapper, ViolationHandlingEntity>
+public class ViolationHandlingServiceImpl extends ServiceImpl<ViolationHandlingMapper, ViolationHandlingEntity>
         implements ViolationHandlingService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public ViolationHandlingEntity getInfo(String id) {
@@ -72,8 +74,7 @@ public class ViolationHandlingServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ViolationHandlingEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ViolationHandlingEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -99,10 +100,8 @@ public class ViolationHandlingServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ViolationHandlingForm violationHandlingForm =
-                JsonUtils.getJsonToBean(data, ViolationHandlingForm.class);
-        ViolationHandlingEntity entity =
-                JsonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);
+        ViolationHandlingForm violationHandlingForm = JsonUtils.getJsonToBean(data, ViolationHandlingForm.class);
+        ViolationHandlingEntity entity = JsonUtils.getJsonToBean(violationHandlingForm, ViolationHandlingEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

@@ -39,14 +39,13 @@ public record AfterSaleApplyVO(
          * @see AfterSaleRefundWayEnum
          */
         @Schema(description = "退款方式", allowableValues = "ORIGINAL,OFFLINE") String refundWay,
-        @Schema(
-                        description = "账号类型",
-                        allowableValues = "ALIPAY,WECHATPAY,MEMBERWALLET,BANKTRANSFER")
+        @Schema(description = "账号类型", allowableValues = "ALIPAY,WECHATPAY,MEMBERWALLET,BANKTRANSFER")
                 String accountType,
         @Schema(description = "是否支持退货") Boolean returnGoods,
         @Schema(description = "是否支持退款") Boolean returnMoney,
         @Schema(description = "会员ID") Long memberId)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = 8808470688518188146L;
+    @Serial
+    private static final long serialVersionUID = 8808470688518188146L;
 }

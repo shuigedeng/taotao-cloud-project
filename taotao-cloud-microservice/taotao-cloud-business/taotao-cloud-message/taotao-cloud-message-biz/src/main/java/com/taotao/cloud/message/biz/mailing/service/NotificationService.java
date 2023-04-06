@@ -61,57 +61,48 @@ public class NotificationService extends BaseLayeredService<Notification, String
 
     public void pullAnnouncements(String userId) {
         PullStamp pullStamp = pullStampService.getPullStamp(userId);
-        List<Announcement> systemAnnouncements =
-                announcementService.pullAnnouncements(pullStamp.getLatestPullTime());
+        List<Announcement> systemAnnouncements = announcementService.pullAnnouncements(pullStamp.getLatestPullTime());
         if (CollectionUtils.isNotEmpty(systemAnnouncements)) {
-            List<Notification> notificationQueues =
-                    convertAnnouncementsToNotifications(userId, systemAnnouncements);
+            List<Notification> notificationQueues = convertAnnouncementsToNotifications(userId, systemAnnouncements);
             this.saveAll(notificationQueues);
         }
     }
 
     public Page<Notification> findByCondition(
-            int pageNumber,
-            int pageSize,
-            String userId,
-            NotificationCategory category,
-            Boolean read) {
+            int pageNumber, int pageSize, String userId, NotificationCategory category, Boolean read) {
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        Specification<Notification> specification =
-                (root, criteriaQuery, criteriaBuilder) -> {
-                    List<Predicate> predicates = new ArrayList<>();
+        Specification<Notification> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-                    predicates.add(criteriaBuilder.equal(root.get("userId"), userId));
+            predicates.add(criteriaBuilder.equal(root.get("userId"), userId));
 
-                    if (ObjectUtils.isNotEmpty(category)) {
-                        predicates.add(criteriaBuilder.equal(root.get("category"), category));
-                    }
+            if (ObjectUtils.isNotEmpty(category)) {
+                predicates.add(criteriaBuilder.equal(root.get("category"), category));
+            }
 
-                    if (ObjectUtils.isNotEmpty(read)) {
-                        predicates.add(criteriaBuilder.equal(root.get("read"), read));
-                    }
+            if (ObjectUtils.isNotEmpty(read)) {
+                predicates.add(criteriaBuilder.equal(root.get("read"), read));
+            }
 
-                    Predicate[] predicateArray = new Predicate[predicates.size()];
-                    criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
-                    criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
-                    return criteriaQuery.getRestriction();
-                };
+            Predicate[] predicateArray = new Predicate[predicates.size()];
+            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(predicateArray)));
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createTime")));
+            return criteriaQuery.getRestriction();
+        };
 
         log.debug("[Websocket] |- Notification Service findByCondition.");
         return this.findByPage(specification, pageable);
     }
 
-    private List<Notification> convertAnnouncementsToNotifications(
-            String userId, List<Announcement> announcements) {
+    private List<Notification> convertAnnouncementsToNotifications(String userId, List<Announcement> announcements) {
         return announcements.stream()
                 .map(announcement -> convertAnnouncementToNotification(userId, announcement))
                 .collect(Collectors.toList());
     }
 
-    private Notification convertAnnouncementToNotification(
-            String userId, Announcement announcement) {
+    private Notification convertAnnouncementToNotification(String userId, Announcement announcement) {
         Notification notification = new Notification();
         notification.setUserId(userId);
         notification.setContent(announcement.getContent());

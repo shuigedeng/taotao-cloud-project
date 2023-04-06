@@ -35,9 +35,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired private UserApplicationService userApplicationService;
+    @Autowired
+    private UserApplicationService userApplicationService;
 
-    @Autowired private UserQueryService userQueryService;
+    @Autowired
+    private UserQueryService userQueryService;
 
     /** 用户分页查询 */
     @ApiOperation("用户分页查询")

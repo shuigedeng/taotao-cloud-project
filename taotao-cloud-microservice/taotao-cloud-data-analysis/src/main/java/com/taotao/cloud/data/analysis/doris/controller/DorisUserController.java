@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.data.analysis.doris.controller;
 
 import com.taotao.cloud.data.analysis.doris.mapper.DorisUserMapper;
@@ -32,23 +33,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DorisUserController {
 
-	@Autowired
-	private DorisUserMapper userMapper;
+    @Autowired
+    private DorisUserMapper userMapper;
 
-	@RequestMapping("/queryUser")
-	public Object query() {
-		List userList = userMapper.queryUser();
-		return userList.toString();
-	}
+    @RequestMapping("/queryUser")
+    public Object query() {
+        List userList = userMapper.queryUser();
+        return userList.toString();
+    }
 
-	@RequestMapping("/insertUser")
-	public Object insertUser() {
-		DorisUser user = new DorisUser();
-//		user.setAppId("SS");
-//		user.setRegTime(new Date());
-//		user.setUserId(777744);
-//		user.setVersion("3.2");
-		Integer flag = userMapper.insertUser(user);
-		return flag;
-	}
+    @RequestMapping("/insertUser")
+    public Object insertUser() {
+        DorisUser user = new DorisUser();
+        //		user.setAppId("SS");
+        //		user.setRegTime(new Date());
+        //		user.setUserId(777744);
+        //		user.setVersion("3.2");
+        Integer flag = userMapper.insertUser(user);
+        return flag;
+    }
 }

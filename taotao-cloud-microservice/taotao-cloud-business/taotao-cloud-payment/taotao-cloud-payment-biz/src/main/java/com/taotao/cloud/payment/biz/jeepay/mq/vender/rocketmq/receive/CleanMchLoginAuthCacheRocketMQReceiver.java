@@ -36,13 +36,11 @@ import org.springframework.stereotype.Component;
 @Component
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.ROCKET_MQ)
 @ConditionalOnBean(CleanMchLoginAuthCacheMQ.IMQReceiver.class)
-@RocketMQMessageListener(
-        topic = CleanMchLoginAuthCacheMQ.MQ_NAME,
-        consumerGroup = CleanMchLoginAuthCacheMQ.MQ_NAME)
-public class CleanMchLoginAuthCacheRocketMQReceiver
-        implements IMQMsgReceiver, RocketMQListener<String> {
+@RocketMQMessageListener(topic = CleanMchLoginAuthCacheMQ.MQ_NAME, consumerGroup = CleanMchLoginAuthCacheMQ.MQ_NAME)
+public class CleanMchLoginAuthCacheRocketMQReceiver implements IMQMsgReceiver, RocketMQListener<String> {
 
-    @Autowired private CleanMchLoginAuthCacheMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private CleanMchLoginAuthCacheMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 * */
     @Override

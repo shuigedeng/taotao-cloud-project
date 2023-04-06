@@ -54,27 +54,26 @@ public class AsyncConfig implements AsyncConfigurer {
         executor.setThreadNamePrefix("sysTaskExecutor");
         // 设置任务丢弃后的处理策略
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        executor.setTaskDecorator(
-                r -> {
-                    // 实现线程上下文穿透， 异步线程内无法获取之前的Request，租户信息等， 如有新的上下文对象在此处添加
-                    RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
-                    String dataSourceId = DataSourceContextHolder.getDatasourceId();
-                    String dataSourceName = DataSourceContextHolder.getDatasourceName();
-                    return () -> {
-                        try {
-                            if (attributes != null) {
-                                RequestContextHolder.setRequestAttributes(attributes);
-                            }
-                            if (dataSourceId != null || dataSourceName != null) {
-                                DataSourceContextHolder.setDatasource(dataSourceId, dataSourceName);
-                            }
-                            r.run();
-                        } finally {
-                            RequestContextHolder.resetRequestAttributes();
-                            DataSourceContextHolder.clearDatasourceType();
-                        }
-                    };
-                });
+        executor.setTaskDecorator(r -> {
+            // 实现线程上下文穿透， 异步线程内无法获取之前的Request，租户信息等， 如有新的上下文对象在此处添加
+            RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+            String dataSourceId = DataSourceContextHolder.getDatasourceId();
+            String dataSourceName = DataSourceContextHolder.getDatasourceName();
+            return () -> {
+                try {
+                    if (attributes != null) {
+                        RequestContextHolder.setRequestAttributes(attributes);
+                    }
+                    if (dataSourceId != null || dataSourceName != null) {
+                        DataSourceContextHolder.setDatasource(dataSourceId, dataSourceName);
+                    }
+                    r.run();
+                } finally {
+                    RequestContextHolder.resetRequestAttributes();
+                    DataSourceContextHolder.clearDatasourceType();
+                }
+            };
+        });
         return executor;
     }
 }

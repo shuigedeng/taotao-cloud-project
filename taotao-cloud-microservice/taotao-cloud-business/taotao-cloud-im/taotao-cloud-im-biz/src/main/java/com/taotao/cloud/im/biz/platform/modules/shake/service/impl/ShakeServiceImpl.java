@@ -37,11 +37,14 @@ import org.springframework.stereotype.Service;
 @Service("shakeService")
 public class ShakeServiceImpl implements ShakeService {
 
-    @Autowired private GeoHashUtils geoHashUtils;
+    @Autowired
+    private GeoHashUtils geoHashUtils;
 
-    @Autowired private RedisUtils redisUtils;
+    @Autowired
+    private RedisUtils redisUtils;
 
-    @Resource private ChatUserService chatUserService;
+    @Resource
+    private ChatUserService chatUserService;
 
     private static final String ERR_MSG = "暂无匹配到的结果";
 
@@ -57,8 +60,7 @@ public class ShakeServiceImpl implements ShakeService {
         // 保存集合
         redisUtils.lRightPush(ApiConstant.REDIS_SHAKE, userId);
         // 保存经纬度
-        geoHashUtils.add(
-                ApiConstant.REDIS_GEO, shakeVo.getLongitude(), shakeVo.getLatitude(), userId);
+        geoHashUtils.add(ApiConstant.REDIS_GEO, shakeVo.getLongitude(), shakeVo.getLatitude(), userId);
     }
 
     private ShakeVo02 getShake() {
@@ -75,8 +77,7 @@ public class ShakeServiceImpl implements ShakeService {
             }
             throw new BaseException(ERR_MSG);
         }
-        ChatUser chatUser =
-                ChatUser.initUser(chatUserService.getById(NumberUtil.parseLong(userId)));
+        ChatUser chatUser = ChatUser.initUser(chatUserService.getById(NumberUtil.parseLong(userId)));
         Distance distance = geoHashUtils.dist(ApiConstant.REDIS_GEO, userId, current);
         return BeanUtil.toBean(chatUser, ShakeVo02.class)
                 .setDistance(distance.getValue())

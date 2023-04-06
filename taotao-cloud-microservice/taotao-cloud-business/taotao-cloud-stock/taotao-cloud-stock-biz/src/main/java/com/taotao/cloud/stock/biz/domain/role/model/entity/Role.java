@@ -73,8 +73,7 @@ public class Role implements Entity<Role> {
 
     /** 禁用 */
     public void disable() {
-        StatusEnum status =
-                this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
+        StatusEnum status = this.status == StatusEnum.DISABLE ? StatusEnum.ENABLE : StatusEnum.DISABLE;
         this.status = status;
     }
 

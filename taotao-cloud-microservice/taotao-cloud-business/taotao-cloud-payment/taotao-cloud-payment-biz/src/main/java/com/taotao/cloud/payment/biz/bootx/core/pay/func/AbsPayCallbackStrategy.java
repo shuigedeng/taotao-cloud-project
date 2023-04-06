@@ -36,8 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbsPayCallbackStrategy {
-    protected static final ThreadLocal<Map<String, String>> PARAMS =
-            new TransmittableThreadLocal<>();
+    protected static final ThreadLocal<Map<String, String>> PARAMS = new TransmittableThreadLocal<>();
     private final RedisClient redisClient;
     private final PayNotifyRecordManager payNotifyRecordManager;
     private final PayCallbackService payCallbackService;
@@ -56,8 +55,7 @@ public abstract class AbsPayCallbackStrategy {
                 return null;
             }
             // 调用统一回调处理
-            PayCallbackResult result =
-                    payCallbackService.callback(this.getPaymentId(), this.getTradeStatus(), params);
+            PayCallbackResult result = payCallbackService.callback(this.getPaymentId(), this.getTradeStatus(), params);
             // 记录回调记录
             this.saveNotifyRecord(result);
         } finally {
@@ -98,14 +96,13 @@ public abstract class AbsPayCallbackStrategy {
 
     /** 保存回调记录 */
     public void saveNotifyRecord(PayCallbackResult result) {
-        PayNotifyRecord payNotifyRecord =
-                new PayNotifyRecord()
-                        .setNotifyInfo(JSONUtil.toJsonStr(PARAMS.get()))
-                        .setNotifyTime(LocalDateTime.now())
-                        .setPaymentId(this.getPaymentId())
-                        .setPayChannel(this.getPayChannel())
-                        .setStatus(result.getCode())
-                        .setMsg(result.getMsg());
+        PayNotifyRecord payNotifyRecord = new PayNotifyRecord()
+                .setNotifyInfo(JSONUtil.toJsonStr(PARAMS.get()))
+                .setNotifyTime(LocalDateTime.now())
+                .setPaymentId(this.getPaymentId())
+                .setPayChannel(this.getPayChannel())
+                .setStatus(result.getCode())
+                .setMsg(result.getMsg());
         payNotifyRecordManager.save(payNotifyRecord);
     }
 }

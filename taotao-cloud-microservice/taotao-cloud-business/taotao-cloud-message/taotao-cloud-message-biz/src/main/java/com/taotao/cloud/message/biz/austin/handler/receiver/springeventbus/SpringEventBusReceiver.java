@@ -31,12 +31,11 @@ import org.springframework.stereotype.Component;
  * @date 2023/2/6 11:18
  */
 @Component
-@ConditionalOnProperty(
-        name = "austin.mq.pipeline",
-        havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)
+@ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)
 public class SpringEventBusReceiver {
 
-    @Autowired private ConsumeService consumeService;
+    @Autowired
+    private ConsumeService consumeService;
 
     public void consume(List<TaskInfo> lists) {
         consumeService.consume2Send(lists);

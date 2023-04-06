@@ -24,11 +24,7 @@ import lombok.Data;
 @Data
 public class InsertSqlDTO {
 
-    public InsertSqlDTO(
-            DbBase dbBase,
-            String table,
-            List<List<DbFieldMod>> dataList,
-            String batchInsertSeparator) {
+    public InsertSqlDTO(DbBase dbBase, String table, List<List<DbFieldMod>> dataList, String batchInsertSeparator) {
         this.dbBase = dbBase;
         this.table = table;
         this.dataList = dataList;

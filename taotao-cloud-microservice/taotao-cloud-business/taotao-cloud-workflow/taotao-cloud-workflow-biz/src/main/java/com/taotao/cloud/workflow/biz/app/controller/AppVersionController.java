@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/app")
 public class AppVersionController {
 
-    @Autowired private SysConfigApi sysConfigApi;
+    @Autowired
+    private SysConfigApi sysConfigApi;
 
     /**
      * 判断是否需要验证码

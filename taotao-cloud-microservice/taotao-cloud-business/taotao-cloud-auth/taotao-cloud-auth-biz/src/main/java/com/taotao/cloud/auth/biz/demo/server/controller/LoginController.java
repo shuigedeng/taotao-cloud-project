@@ -82,8 +82,7 @@ public class LoginController {
         modelAndView.addObject("login_error", loginError);
         modelAndView.addObject("logout_success", logoutSuccess);
         modelAndView.addObject(
-                "message",
-                StringUtils.isNotBlank(errorMessage) ? HtmlUtils.htmlEscape(errorMessage) : null);
+                "message", StringUtils.isNotBlank(errorMessage) ? HtmlUtils.htmlEscape(errorMessage) : null);
         modelAndView.addObject("contentPath", request.getContextPath());
 
         String sessionId;

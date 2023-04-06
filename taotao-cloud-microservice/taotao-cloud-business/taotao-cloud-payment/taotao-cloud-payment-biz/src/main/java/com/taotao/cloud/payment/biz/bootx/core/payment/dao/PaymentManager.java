@@ -64,18 +64,12 @@ public class PaymentManager extends BaseManager<PaymentMapper, Payment> {
                         Objects.nonNull(orderParam.getSortField()),
                         orderParam.isAsc(),
                         StrUtil.toUnderlineCase(orderParam.getSortField()))
-                .like(
-                        Objects.nonNull(param.getPaymentId()),
-                        MpUtil.getColumnName(Payment::getId),
-                        param.getPaymentId())
+                .like(Objects.nonNull(param.getPaymentId()), MpUtil.getColumnName(Payment::getId), param.getPaymentId())
                 .like(
                         Objects.nonNull(param.getBusinessId()),
                         MpUtil.getColumnName(Payment::getBusinessId),
                         param.getBusinessId())
-                .like(
-                        Objects.nonNull(param.getTitle()),
-                        MpUtil.getColumnName(Payment::getTitle),
-                        param.getTitle())
+                .like(Objects.nonNull(param.getTitle()), MpUtil.getColumnName(Payment::getTitle), param.getTitle())
                 .page(mpPage);
     }
     /** 分页查询 */

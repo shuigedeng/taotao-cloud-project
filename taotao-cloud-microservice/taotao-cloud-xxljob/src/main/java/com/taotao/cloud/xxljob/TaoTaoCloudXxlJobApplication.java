@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.xxljob;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
@@ -35,10 +36,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication
 public class TaoTaoCloudXxlJobApplication {
 
-	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-xxljob");
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-xxljob");
 
-		SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
-	}
-
+        SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
+    }
 }

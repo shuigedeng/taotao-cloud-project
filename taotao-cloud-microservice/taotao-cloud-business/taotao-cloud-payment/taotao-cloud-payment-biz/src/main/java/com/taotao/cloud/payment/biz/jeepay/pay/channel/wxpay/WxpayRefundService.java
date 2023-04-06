@@ -61,17 +61,13 @@ public class WxpayRefundService extends AbstractRefundService {
     /** 微信退款接口 * */
     @Override
     public ChannelRetMsg refund(
-            RefundOrderRQ bizRQ,
-            RefundOrder refundOrder,
-            PayOrder payOrder,
-            MchAppConfigContext mchAppConfigContext)
+            RefundOrderRQ bizRQ, RefundOrder refundOrder, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
         try {
 
             ChannelRetMsg channelRetMsg = new ChannelRetMsg();
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) { // V2
 
@@ -112,16 +108,12 @@ public class WxpayRefundService extends AbstractRefundService {
 
                 if (mchAppConfigContext.isIsvsubMch()) { // 特约商户
                     WxpayIsvsubMchParams isvsubMchParams =
-                            (WxpayIsvsubMchParams)
-                                    configContextQueryService.queryIsvsubMchParams(
-                                            mchAppConfigContext.getMchNo(),
-                                            mchAppConfigContext.getAppId(),
-                                            getIfCode());
+                            (WxpayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                                    mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
                     reqJSON.put("sub_mchid", isvsubMchParams.getSubMchId());
                 }
 
-                JSONObject resultJSON =
-                        WxpayV3Util.refundV3(reqJSON, wxServiceWrapper.getWxPayService());
+                JSONObject resultJSON = WxpayV3Util.refundV3(reqJSON, wxServiceWrapper.getWxPayService());
                 String status = resultJSON.getString("status");
                 if ("SUCCESS".equals(status)) { // 退款成功
                     String refundId = resultJSON.getString("refund_id");
@@ -151,13 +143,11 @@ public class WxpayRefundService extends AbstractRefundService {
 
     /** 微信退款查单接口 * */
     @Override
-    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext)
-            throws Exception {
+    public ChannelRetMsg query(RefundOrder refundOrder, MchAppConfigContext mchAppConfigContext) throws Exception {
         try {
             ChannelRetMsg channelRetMsg = new ChannelRetMsg();
 
-            WxServiceWrapper wxServiceWrapper =
-                    configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
+            WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
 
             if (CS.PAY_IF_VERSION.WX_V2.equals(wxServiceWrapper.getApiVersion())) { // V2
 
@@ -182,18 +172,12 @@ public class WxpayRefundService extends AbstractRefundService {
                 JSONObject resultJSON = null;
                 if (mchAppConfigContext.isIsvsubMch()) {
                     WxpayIsvsubMchParams isvsubMchParams =
-                            (WxpayIsvsubMchParams)
-                                    configContextQueryService.queryIsvsubMchParams(
-                                            mchAppConfigContext.getMchNo(),
-                                            mchAppConfigContext.getAppId(),
-                                            getIfCode());
+                            (WxpayIsvsubMchParams) configContextQueryService.queryIsvsubMchParams(
+                                    mchAppConfigContext.getMchNo(), mchAppConfigContext.getAppId(), getIfCode());
                     wxPayService.getConfig().setSubMchId(isvsubMchParams.getSubMchId());
-                    resultJSON =
-                            WxpayV3Util.refundQueryV3Isv(
-                                    refundOrder.getRefundOrderId(), wxPayService);
+                    resultJSON = WxpayV3Util.refundQueryV3Isv(refundOrder.getRefundOrderId(), wxPayService);
                 } else {
-                    resultJSON =
-                            WxpayV3Util.refundQueryV3(refundOrder.getRefundOrderId(), wxPayService);
+                    resultJSON = WxpayV3Util.refundQueryV3(refundOrder.getRefundOrderId(), wxPayService);
                 }
                 String status = resultJSON.getString("status");
                 if ("SUCCESS".equals(status)) { // 退款成功

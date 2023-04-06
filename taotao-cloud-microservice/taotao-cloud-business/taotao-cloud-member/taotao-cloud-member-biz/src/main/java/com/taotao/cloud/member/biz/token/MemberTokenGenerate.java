@@ -32,10 +32,14 @@ import org.springframework.stereotype.Component;
 /** 会员token生成 */
 @Component
 public class MemberTokenGenerate extends AbstractTokenGenerate<Member> {
-    @Autowired private TokenUtil tokenUtil;
-    @Autowired private RocketmqCustomProperties rocketmqCustomProperties;
+    @Autowired
+    private TokenUtil tokenUtil;
 
-    @Autowired private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketmqCustomProperties rocketmqCustomProperties;
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public Token createToken(Member member, Boolean longTerm) {

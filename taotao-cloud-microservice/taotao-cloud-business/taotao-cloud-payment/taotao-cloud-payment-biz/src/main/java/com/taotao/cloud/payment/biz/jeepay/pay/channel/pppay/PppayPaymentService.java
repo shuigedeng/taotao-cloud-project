@@ -37,7 +37,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PppayPaymentService extends AbstractPaymentService {
 
-    @Autowired public ConfigContextQueryService configContextQueryService;
+    @Autowired
+    public ConfigContextQueryService configContextQueryService;
 
     @Override
     public String getIfCode() {
@@ -51,15 +52,12 @@ public class PppayPaymentService extends AbstractPaymentService {
 
     @Override
     public String preCheck(UnifiedOrderRQ bizRQ, PayOrder payOrder) {
-        return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode())
-                .preCheck(bizRQ, payOrder);
+        return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode()).preCheck(bizRQ, payOrder);
     }
 
     @Override
-    public AbstractRS pay(
-            UnifiedOrderRQ bizRQ, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
+    public AbstractRS pay(UnifiedOrderRQ bizRQ, PayOrder payOrder, MchAppConfigContext mchAppConfigContext)
             throws Exception {
-        return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode())
-                .pay(bizRQ, payOrder, mchAppConfigContext);
+        return PaywayUtil.getRealPaywayService(this, payOrder.getWayCode()).pay(bizRQ, payOrder, mchAppConfigContext);
     }
 }

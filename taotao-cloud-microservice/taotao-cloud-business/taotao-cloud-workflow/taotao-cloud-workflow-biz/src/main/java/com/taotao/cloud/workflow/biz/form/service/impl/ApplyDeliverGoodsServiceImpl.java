@@ -33,13 +33,17 @@ import org.springframework.stereotype.Service;
 
 /** 发货申请单 */
 @Service
-public class ApplyDeliverGoodsServiceImpl
-        extends ServiceImpl<ApplyDeliverGoodsMapper, ApplyDeliverGoodsEntity>
+public class ApplyDeliverGoodsServiceImpl extends ServiceImpl<ApplyDeliverGoodsMapper, ApplyDeliverGoodsEntity>
         implements ApplyDeliverGoodsService {
 
-    @Autowired private ApplyDeliverGoodsEntryService applyDeliverGoodsEntryService;
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private ApplyDeliverGoodsEntryService applyDeliverGoodsEntryService;
+
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public List<ApplyDeliverGoodsEntryEntity> getDeliverEntryList(String id) {
@@ -147,14 +151,10 @@ public class ApplyDeliverGoodsServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ApplyDeliverGoodsForm applyDeliverGoodsForm =
-                JsonUtil.getJsonToBean(data, ApplyDeliverGoodsForm.class);
-        ApplyDeliverGoodsEntity entity =
-                JsonUtil.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
+        ApplyDeliverGoodsForm applyDeliverGoodsForm = JsonUtil.getJsonToBean(data, ApplyDeliverGoodsForm.class);
+        ApplyDeliverGoodsEntity entity = JsonUtil.getJsonToBean(applyDeliverGoodsForm, ApplyDeliverGoodsEntity.class);
         List<ApplyDeliverGoodsEntryInfoModel> entryList =
-                applyDeliverGoodsForm.getEntryList() != null
-                        ? applyDeliverGoodsForm.getEntryList()
-                        : new ArrayList<>();
+                applyDeliverGoodsForm.getEntryList() != null ? applyDeliverGoodsForm.getEntryList() : new ArrayList<>();
         List<ApplyDeliverGoodsEntryEntity> applyDeliverGoodsEntryEntityList =
                 JsonUtil.getJsonToList(entryList, ApplyDeliverGoodsEntryEntity.class);
         entity.setId(id);

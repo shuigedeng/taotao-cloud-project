@@ -54,7 +54,8 @@ public record CartVO(
         @Schema(description = "已参与的的促销活动提示，直接展示给客户") String promotionNotice,
         CartBaseVO cartBase) {
 
-    @Serial private static final long serialVersionUID = -5651775413457562422L;
+    @Serial
+    private static final long serialVersionUID = -5651775413457562422L;
 
     // public CartVO(CartSkuVO cartSkuVO) {
     // 	this.setStoreId(cartSkuVO.getStoreId());

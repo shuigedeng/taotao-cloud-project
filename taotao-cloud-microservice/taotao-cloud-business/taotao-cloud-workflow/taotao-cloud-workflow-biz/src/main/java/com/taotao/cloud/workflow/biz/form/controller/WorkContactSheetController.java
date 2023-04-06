@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/WorkContactSheet")
 public class WorkContactSheetController {
 
-    @Autowired private WorkContactSheetService workContactSheetService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private WorkContactSheetService workContactSheetService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取工作联系单信息
@@ -59,9 +62,7 @@ public class WorkContactSheetController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), WorkContactSheetInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), WorkContactSheetInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,16 +82,13 @@ public class WorkContactSheetController {
      */
     @Operation("新建工作联系单")
     @PostMapping
-    public Result create(@RequestBody WorkContactSheetForm workContactSheetForm)
-            throws WorkFlowException {
-        WorkContactSheetEntity entity =
-                JsonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
+    public Result create(@RequestBody WorkContactSheetForm workContactSheetForm) throws WorkFlowException {
+        WorkContactSheetEntity entity = JsonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(workContactSheetForm.getStatus())) {
             workContactSheetService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
         }
-        workContactSheetService.submit(
-                entity.getId(), entity, workContactSheetForm.getCandidateList());
+        workContactSheetService.submit(entity.getId(), entity, workContactSheetForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -103,11 +101,9 @@ public class WorkContactSheetController {
      */
     @Operation("修改工作联系单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody WorkContactSheetForm workContactSheetForm, @PathVariable("id") String id)
+    public Result update(@RequestBody WorkContactSheetForm workContactSheetForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        WorkContactSheetEntity entity =
-                JsonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
+        WorkContactSheetEntity entity = JsonUtils.getJsonToBean(workContactSheetForm, WorkContactSheetEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(workContactSheetForm.getStatus())) {
             workContactSheetService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

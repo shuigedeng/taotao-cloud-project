@@ -52,17 +52,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class DistributionGoodsStoreController {
 
     /** 分销商品 */
-    @Autowired private IDistributionGoodsService distributionGoodsService;
+    @Autowired
+    private IDistributionGoodsService distributionGoodsService;
 
     /** 已选择分销商品 */
-    @Autowired private IDistributionSelectedGoodsService distributionSelectedGoodsService;
+    @Autowired
+    private IDistributionSelectedGoodsService distributionSelectedGoodsService;
 
     @Operation(summary = "获取分销商商品列表", description = "获取分销商商品列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<IPage<DistributionGoodsVO>> distributionGoods(
-            DistributionGoodsPageQuery distributionGoodsPageQuery) {
+    public Result<IPage<DistributionGoodsVO>> distributionGoods(DistributionGoodsPageQuery distributionGoodsPageQuery) {
         return Result.success(distributionGoodsService.goodsPage(distributionGoodsPageQuery));
     }
 

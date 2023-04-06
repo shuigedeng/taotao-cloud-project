@@ -103,15 +103,11 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
     private Integer childStatus;
 
     /** 售后主状态 */
-    @Column(
-            name = "refund_main_status",
-            columnDefinition = "int not null default 0 comment '售后主状态'")
+    @Column(name = "refund_main_status", columnDefinition = "int not null default 0 comment '售后主状态'")
     private Integer refundMainStatus = 0;
 
     /** 售后子状态 */
-    @Column(
-            name = "refund_child_status",
-            columnDefinition = "int not null default 0 comment '售后子状态'")
+    @Column(name = "refund_child_status", columnDefinition = "int not null default 0 comment '售后子状态'")
     private Integer refundChildStatus = 0;
 
     /**
@@ -120,22 +116,15 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
      * 可评价 --1 <br>
      * 可追评 --2
      */
-    @Column(
-            name = "evaluate_status",
-            columnDefinition = "int not null default 0 comment '评价状态 0-不可评价 1-可评价 2-可追评'")
+    @Column(name = "evaluate_status", columnDefinition = "int not null default 0 comment '评价状态 0-不可评价 1-可评价 2-可追评'")
     private Integer evaluateStatus = 0;
 
     /** 申请售后code */
-    @Column(
-            name = "refund_code",
-            unique = true,
-            columnDefinition = "varchar(32) comment '申请售后code'")
+    @Column(name = "refund_code", unique = true, columnDefinition = "varchar(32) comment '申请售后code'")
     private String refundCode;
 
     /** 申请售后是否撤销 1--已撤销 0--未撤销 */
-    @Column(
-            name = "has_cancel",
-            columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '申请售后是否撤销 1-已撤销 0-未撤销'")
+    @Column(name = "has_cancel", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '申请售后是否撤销 1-已撤销 0-未撤销'")
     private Boolean hasCancel = false;
 
     /** 发货时间 */
@@ -159,9 +148,7 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
     private String receiverPhone;
 
     /** 收货地址:json的形式存储 {"province":"省","city":"市","zone":"区","detail":"详细地址"} */
-    @Column(
-            name = "receiver_address_json",
-            columnDefinition = "json not null comment '收货地址:json的形式存储'")
+    @Column(name = "receiver_address_json", columnDefinition = "json not null comment '收货地址:json的形式存储'")
     private String receiverAddressJson;
 
     /** 冗余收货地址字符串 */
@@ -193,9 +180,7 @@ public class OrderInfo extends BaseSuperEntity<OrderInfo, Long> {
     private String memberIp;
 
     /** 是否结算 0-未结算，1-已结算 */
-    @Column(
-            name = "has_settlement",
-            columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否结算 0-未结算，1-已结算'")
+    @Column(name = "has_settlement", columnDefinition = "tinyint(1) NOT NULL DEFAULT 0 comment '是否结算 0-未结算，1-已结算'")
     private Boolean hasSettlement = false;
 
     /** 订单类型 */

@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.front.controller;
 
 import com.taotao.cloud.front.util.CaptchaUtil;
 import com.taotao.cloud.front.util.Constants;
 import com.taotao.cloud.front.util.CookieUtil;
 import com.wf.captcha.ArithmeticCaptcha;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,55 +41,52 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class IndexController {
 
-	// @Autowired
-	// private UserServiceFegin userServiceFegin;
+    // @Autowired
+    // private UserServiceFegin userServiceFegin;
 
-	@RequestMapping("")
-	public String index(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
-		System.out.println(">>>>>>>>>>>>>>> index token: " + token);
+    @RequestMapping("")
+    public String index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
+        System.out.println(">>>>>>>>>>>>>>> index token: " + token);
 
-		// if (StrUtil.isEmpty(token)) {
-		// 	response.sendRedirect("/login");
-		// }
+        // if (StrUtil.isEmpty(token)) {
+        // 	response.sendRedirect("/login");
+        // }
 
-		// ResponseBase responseBase = userServiceFegin.findUserByToken(token);
-		// ResponseBase responseBase = new ResponseBase();
-		// responseBase.setCode(200);
-		// LinkedHashMap<String, String> map = new LinkedHashMap<>();
-		// map.put("username", "taotao-cloud");
-		// responseBase.setData(map);
-		//
-		// if (!responseBase.getCode().equals(Constants.HTTP_RES_CODE_200)) {
-		// 	request.setAttribute("error", "请先登录!");
-		// 	return "login";
-		// }
-		//
-		// LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) responseBase.getData();
-		// String username = linkedHashMap.get("username");
+        // ResponseBase responseBase = userServiceFegin.findUserByToken(token);
+        // ResponseBase responseBase = new ResponseBase();
+        // responseBase.setCode(200);
+        // LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        // map.put("username", "taotao-cloud");
+        // responseBase.setData(map);
+        //
+        // if (!responseBase.getCode().equals(Constants.HTTP_RES_CODE_200)) {
+        // 	request.setAttribute("error", "请先登录!");
+        // 	return "login";
+        // }
+        //
+        // LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) responseBase.getData();
+        // String username = linkedHashMap.get("username");
 
-		// request.setAttribute("username", username);
-		return "index";
-	}
+        // request.setAttribute("username", username);
+        return "index";
+    }
 
-	@RequestMapping("/login.html")
-	public String login(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		return "login";
-	}
+    @RequestMapping("/login.html")
+    public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        return "login";
+    }
 
-	@GetMapping("/code")
-	@ResponseBody
-	public Map<String, Object> code(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		ArithmeticCaptcha captcha = CaptchaUtil.getArithmeticCaptcha();
-		Map<String, Object> res = new HashMap<>();
-		res.put("code", 200);
-		res.put("message", "success");
-		res.put("data", captcha.toBase64());
-		res.put("requestId", "232");
-		res.put("timestamp", LocalDateTime.now());
-		return res;
-	}
+    @GetMapping("/code")
+    @ResponseBody
+    public Map<String, Object> code(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ArithmeticCaptcha captcha = CaptchaUtil.getArithmeticCaptcha();
+        Map<String, Object> res = new HashMap<>();
+        res.put("code", 200);
+        res.put("message", "success");
+        res.put("data", captcha.toBase64());
+        res.put("requestId", "232");
+        res.put("timestamp", LocalDateTime.now());
+        return res;
+    }
 }

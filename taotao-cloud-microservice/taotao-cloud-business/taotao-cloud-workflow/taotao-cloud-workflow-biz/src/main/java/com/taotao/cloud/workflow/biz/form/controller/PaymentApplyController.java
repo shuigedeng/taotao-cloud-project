@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/PaymentApply")
 public class PaymentApplyController {
 
-    @Autowired private PaymentApplyService paymentApplyService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private PaymentApplyService paymentApplyService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取付款申请单信息
@@ -51,8 +54,7 @@ public class PaymentApplyController {
      */
     @Operation("获取付款申请单信息")
     @GetMapping("/{id}")
-    public Result<PaymentApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<PaymentApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PaymentApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class PaymentApplyController {
     @Operation("新建付款申请单")
     @PostMapping
     public Result create(@RequestBody PaymentApplyForm paymentApplyForm) throws WorkFlowException {
-        PaymentApplyEntity entity =
-                JsonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
+        PaymentApplyEntity entity = JsonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(paymentApplyForm.getStatus())) {
             paymentApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -99,11 +100,9 @@ public class PaymentApplyController {
      */
     @Operation("修改付款申请单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody PaymentApplyForm paymentApplyForm, @PathVariable("id") String id)
+    public Result update(@RequestBody PaymentApplyForm paymentApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        PaymentApplyEntity entity =
-                JsonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
+        PaymentApplyEntity entity = JsonUtils.getJsonToBean(paymentApplyForm, PaymentApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(paymentApplyForm.getStatus())) {
             paymentApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -34,12 +34,7 @@ public class AliPayWay {
 
     // 支付方式
     private static final List<PayWayEnum> PAY_WAYS =
-            Arrays.asList(
-                    PayWayEnum.WAP,
-                    PayWayEnum.APP,
-                    PayWayEnum.WEB,
-                    PayWayEnum.QRCODE,
-                    PayWayEnum.BARCODE);
+            Arrays.asList(PayWayEnum.WAP, PayWayEnum.APP, PayWayEnum.WEB, PayWayEnum.QRCODE, PayWayEnum.BARCODE);
 
     /** 根据数字编号获取 */
     public PayWayEnum findByNo(int no) {

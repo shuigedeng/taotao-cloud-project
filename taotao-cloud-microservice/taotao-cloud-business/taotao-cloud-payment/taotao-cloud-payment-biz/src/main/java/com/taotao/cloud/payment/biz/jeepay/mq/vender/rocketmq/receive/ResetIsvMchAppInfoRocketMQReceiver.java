@@ -41,10 +41,10 @@ import org.springframework.stereotype.Component;
         topic = ResetIsvMchAppInfoConfigMQ.MQ_NAME,
         consumerGroup = ResetIsvMchAppInfoConfigMQ.MQ_NAME,
         messageModel = MessageModel.BROADCASTING)
-public class ResetIsvMchAppInfoRocketMQReceiver
-        implements IMQMsgReceiver, RocketMQListener<String> {
+public class ResetIsvMchAppInfoRocketMQReceiver implements IMQMsgReceiver, RocketMQListener<String> {
 
-    @Autowired private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private ResetIsvMchAppInfoConfigMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 MQSendTypeEnum.BROADCAST 】 广播类型的消息 * */
     @Override

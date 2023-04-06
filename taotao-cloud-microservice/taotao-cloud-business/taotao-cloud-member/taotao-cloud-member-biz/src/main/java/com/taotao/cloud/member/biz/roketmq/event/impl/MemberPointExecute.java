@@ -32,11 +32,14 @@ import org.springframework.stereotype.Service;
 public class MemberPointExecute implements MemberRegisterEvent {
 
     /** 配置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
     /** 会员 */
-    @Autowired private IMemberService memberService;
+    @Autowired
+    private IMemberService memberService;
     /** 订单 */
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
 
     /**
      * 会员注册赠送积分
@@ -61,8 +64,7 @@ public class MemberPointExecute implements MemberRegisterEvent {
      * @return 积分设置
      */
     private PointSettingVO getPointSetting() {
-        PointSettingVO setting =
-                settingApi.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
+        PointSettingVO setting = settingApi.getPointSetting(SettingCategoryEnum.POINT_SETTING.name());
         return setting;
     }
 }

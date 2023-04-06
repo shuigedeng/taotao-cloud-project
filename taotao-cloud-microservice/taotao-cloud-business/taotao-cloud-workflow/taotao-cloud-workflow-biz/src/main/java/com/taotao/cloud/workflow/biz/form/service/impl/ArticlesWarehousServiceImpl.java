@@ -30,12 +30,14 @@ import org.springframework.stereotype.Service;
 
 /** 用品入库申请表 */
 @Service
-public class ArticlesWarehousServiceImpl
-        extends ServiceImpl<ArticlesWarehousMapper, ArticlesWarehousEntity>
+public class ArticlesWarehousServiceImpl extends ServiceImpl<ArticlesWarehousMapper, ArticlesWarehousEntity>
         implements ArticlesWarehousService {
 
-    @Autowired private BillRuleService billRuleService;
-    @Autowired private FlowTaskService flowTaskService;
+    @Autowired
+    private BillRuleService billRuleService;
+
+    @Autowired
+    private FlowTaskService flowTaskService;
 
     @Override
     public ArticlesWarehousEntity getInfo(String id) {
@@ -69,8 +71,7 @@ public class ArticlesWarehousServiceImpl
 
     @Override
     @DSTransactional
-    public void submit(
-            String id, ArticlesWarehousEntity entity, Map<String, List<String>> candidateList)
+    public void submit(String id, ArticlesWarehousEntity entity, Map<String, List<String>> candidateList)
             throws WorkFlowException {
         // 表单信息
         if (id == null) {
@@ -96,10 +97,8 @@ public class ArticlesWarehousServiceImpl
 
     @Override
     public void data(String id, String data) {
-        ArticlesWarehousForm articlesWarehousForm =
-                JsonUtil.getJsonToBean(data, ArticlesWarehousForm.class);
-        ArticlesWarehousEntity entity =
-                JsonUtil.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
+        ArticlesWarehousForm articlesWarehousForm = JsonUtil.getJsonToBean(data, ArticlesWarehousForm.class);
+        ArticlesWarehousEntity entity = JsonUtil.getJsonToBean(articlesWarehousForm, ArticlesWarehousEntity.class);
         entity.setId(id);
         this.saveOrUpdate(entity);
     }

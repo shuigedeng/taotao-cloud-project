@@ -73,10 +73,7 @@ public class ChannelRetMsg implements Serializable {
     public ChannelRetMsg() {}
 
     public ChannelRetMsg(
-            ChannelState channelState,
-            String channelOrderId,
-            String channelErrCode,
-            String channelErrMsg) {
+            ChannelState channelState, String channelOrderId, String channelErrCode, String channelErrMsg) {
         this.channelState = channelState;
         this.channelOrderId = channelOrderId;
         this.channelErrCode = channelErrCode;
@@ -94,10 +91,8 @@ public class ChannelRetMsg implements Serializable {
     }
 
     /** 明确失败 * */
-    public static ChannelRetMsg confirmFail(
-            String channelOrderId, String channelErrCode, String channelErrMsg) {
-        return new ChannelRetMsg(
-                ChannelState.CONFIRM_FAIL, channelOrderId, channelErrCode, channelErrMsg);
+    public static ChannelRetMsg confirmFail(String channelOrderId, String channelErrCode, String channelErrMsg) {
+        return new ChannelRetMsg(ChannelState.CONFIRM_FAIL, channelOrderId, channelErrCode, channelErrMsg);
     }
 
     /** 明确失败 * */

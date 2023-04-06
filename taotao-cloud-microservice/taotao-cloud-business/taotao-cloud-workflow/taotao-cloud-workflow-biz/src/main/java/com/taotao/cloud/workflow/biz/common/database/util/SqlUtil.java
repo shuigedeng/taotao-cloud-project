@@ -31,9 +31,7 @@ public class SqlUtil {
         // 执行一些个别数据独有的方式
         if (createSqlDTO.getDbBase().getClass() == DbSQLServer.class) {
             return SqlSQLServer.getTableComment(
-                    createSqlDTO.getTableComment(),
-                    createSqlDTO.getNewTable(),
-                    createSqlDTO.getFieldModels());
+                    createSqlDTO.getTableComment(), createSqlDTO.getNewTable(), createSqlDTO.getFieldModels());
         }
         return null;
     }

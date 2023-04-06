@@ -39,8 +39,7 @@ public class MiniAppAuthenticationToken extends AbstractAuthenticationToken {
      * @param principal the principal
      * @param authorities the authorities
      */
-    public MiniAppAuthenticationToken(
-            Object principal, Collection<? extends GrantedAuthority> authorities) {
+    public MiniAppAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         // must use super, as we override
@@ -60,9 +59,8 @@ public class MiniAppAuthenticationToken extends AbstractAuthenticationToken {
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
         if (isAuthenticated) {
-            throw new IllegalArgumentException(
-                    "Cannot set this token to trusted - use constructor which takes a"
-                            + " GrantedAuthority list instead");
+            throw new IllegalArgumentException("Cannot set this token to trusted - use constructor which takes a"
+                    + " GrantedAuthority list instead");
         }
 
         super.setAuthenticated(false);

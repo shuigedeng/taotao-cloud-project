@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/SupplementCard")
 public class SupplementCardController {
 
-    @Autowired private SupplementCardService supplementCardService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private SupplementCardService supplementCardService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取补卡申请信息
@@ -59,9 +62,7 @@ public class SupplementCardController {
             FlowTaskOperatorEntity operator = flowTaskOperatorService.getInfo(taskOperatorId);
             if (operator != null) {
                 if (StringUtil.isNotEmpty(operator.getDraftData())) {
-                    vo =
-                            JsonUtils.getJsonToBean(
-                                    operator.getDraftData(), SupplementCardInfoVO.class);
+                    vo = JsonUtils.getJsonToBean(operator.getDraftData(), SupplementCardInfoVO.class);
                     isData = false;
                 }
             }
@@ -81,13 +82,11 @@ public class SupplementCardController {
      */
     @Operation("新建补卡申请")
     @PostMapping
-    public Result create(@RequestBody SupplementCardForm supplementCardForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody SupplementCardForm supplementCardForm) throws WorkFlowException {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        SupplementCardEntity entity =
-                JsonUtils.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
+        SupplementCardEntity entity = JsonUtils.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(supplementCardForm.getStatus())) {
             supplementCardService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -105,14 +104,12 @@ public class SupplementCardController {
      */
     @Operation("修改补卡申请")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody SupplementCardForm supplementCardForm, @PathVariable("id") String id)
+    public Result update(@RequestBody SupplementCardForm supplementCardForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (supplementCardForm.getStartTime() > supplementCardForm.getEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
-        SupplementCardEntity entity =
-                JsonUtils.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
+        SupplementCardEntity entity = JsonUtils.getJsonToBean(supplementCardForm, SupplementCardEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(supplementCardForm.getStatus())) {
             supplementCardService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

@@ -29,8 +29,7 @@ public interface IMemberPointsHistoryMapper extends BaseSuperMapper<MemberPoints
      * @param pointType 积分类型
      * @return 积分
      */
-    @Select(
-            """
+    @Select("""
 		SELECT SUM( variable_point )
 		FROM tt_member_points_history
 		WHERE point_type = #{pointType}

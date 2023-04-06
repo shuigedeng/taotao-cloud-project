@@ -157,9 +157,9 @@ public class AliPayStrategy extends AbsPayStrategy {
     public void doRefundHandler() {
         this.initAlipayConfig();
         aliPayCancelService.refund(this.getPayment(), this.getPayMode().getAmount());
-        aliPaymentService.updatePayRefund(this.getPayment().getId(), this.getPayMode().getAmount());
-        paymentService.updateRefundSuccess(
-                this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.ALI);
+        aliPaymentService.updatePayRefund(
+                this.getPayment().getId(), this.getPayMode().getAmount());
+        paymentService.updateRefundSuccess(this.getPayment(), this.getPayMode().getAmount(), PayChannelEnum.ALI);
     }
 
     /** 异步支付单与支付网关进行状态比对 */
@@ -172,10 +172,7 @@ public class AliPayStrategy extends AbsPayStrategy {
     /** 初始化支付宝配置信息 */
     private void initAlipayConfig() {
         // 检查并获取支付宝支付配置
-        this.alipayConfig =
-                alipayConfigManager
-                        .findActivity()
-                        .orElseThrow(() -> new PayFailureException("支付配置不存在"));
+        this.alipayConfig = alipayConfigManager.findActivity().orElseThrow(() -> new PayFailureException("支付配置不存在"));
         AlipayConfigService.initApiConfig(this.alipayConfig);
     }
 }

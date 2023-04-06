@@ -25,11 +25,11 @@ import java.io.Serializable;
 @RecordBuilder
 @Schema(description = "投诉通信VO")
 public record OrderComplaintCommunicationVO(
-        @Schema(description = "投诉通信")
-                OrderComplaintCommunicationBaseVO orderComplaintCommunicationBase)
+        @Schema(description = "投诉通信") OrderComplaintCommunicationBaseVO orderComplaintCommunicationBase)
         implements Serializable {
 
-    @Serial private static final long serialVersionUID = -8460949951683122695L;
+    @Serial
+    private static final long serialVersionUID = -8460949951683122695L;
 
     // public OrderComplaintCommunicationVO(Long complainId, String content, String owner,
     // 	String ownerName, Long ownerId) {

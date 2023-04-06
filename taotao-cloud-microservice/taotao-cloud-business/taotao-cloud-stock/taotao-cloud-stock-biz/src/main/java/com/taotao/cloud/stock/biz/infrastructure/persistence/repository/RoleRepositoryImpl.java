@@ -34,11 +34,14 @@ import org.springframework.stereotype.Repository;
 public class RoleRepositoryImpl extends ServiceImpl<SysRoleMapper, SysRoleDO>
         implements RoleRepository, IService<SysRoleDO> {
 
-    @Autowired private SysPermissionMapper sysPermissionMapper;
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
 
-    @Autowired private SysRolePermissionMapper sysRolePermissionMapper;
+    @Autowired
+    private SysRolePermissionMapper sysRolePermissionMapper;
 
-    @Autowired private SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
     @Override
     public Role find(RoleId roleId) {
@@ -46,35 +49,27 @@ public class RoleRepositoryImpl extends ServiceImpl<SysRoleMapper, SysRoleDO>
         if (sysRoleDO == null) {
             return null;
         }
-        Role role =
-                RoleConverter.toRole(
-                        sysRoleDO, getRolePermission(sysRoleDO.getRoleCode(), sysRoleDO.getId()));
+        Role role = RoleConverter.toRole(sysRoleDO, getRolePermission(sysRoleDO.getRoleCode(), sysRoleDO.getId()));
         return role;
     }
 
     @Override
     public Role find(RoleName roleName) {
-        SysRoleDO sysRoleDO =
-                this.getOne(new QueryWrapper<SysRoleDO>().eq("role_name", roleName.getName()));
+        SysRoleDO sysRoleDO = this.getOne(new QueryWrapper<SysRoleDO>().eq("role_name", roleName.getName()));
         if (sysRoleDO == null) {
             return null;
         }
-        Role role =
-                RoleConverter.toRole(
-                        sysRoleDO, getRolePermission(sysRoleDO.getRoleCode(), sysRoleDO.getId()));
+        Role role = RoleConverter.toRole(sysRoleDO, getRolePermission(sysRoleDO.getRoleCode(), sysRoleDO.getId()));
         return role;
     }
 
     @Override
     public Role find(RoleCode roleCode) {
-        SysRoleDO sysRoleDO =
-                this.getOne(new QueryWrapper<SysRoleDO>().eq("role_code", roleCode.getCode()));
+        SysRoleDO sysRoleDO = this.getOne(new QueryWrapper<SysRoleDO>().eq("role_code", roleCode.getCode()));
         if (sysRoleDO == null) {
             return null;
         }
-        Role role =
-                RoleConverter.toRole(
-                        sysRoleDO, getRolePermission(sysRoleDO.getRoleCode(), sysRoleDO.getId()));
+        Role role = RoleConverter.toRole(sysRoleDO, getRolePermission(sysRoleDO.getRoleCode(), sysRoleDO.getId()));
         return role;
     }
 
@@ -109,10 +104,9 @@ public class RoleRepositoryImpl extends ServiceImpl<SysRoleMapper, SysRoleDO>
     @Override
     public void remove(List<RoleId> roleIds) {
         List<String> ids = new ArrayList<>();
-        roleIds.forEach(
-                roleId -> {
-                    ids.add(roleId.getId());
-                });
+        roleIds.forEach(roleId -> {
+            ids.add(roleId.getId());
+        });
         // 删除角色
         this.removeByIds(ids);
         // 删除角色与菜单关联

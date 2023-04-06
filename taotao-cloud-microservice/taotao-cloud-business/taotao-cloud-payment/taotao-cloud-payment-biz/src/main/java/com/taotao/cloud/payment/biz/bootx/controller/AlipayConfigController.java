@@ -67,8 +67,7 @@ public class AlipayConfigController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<AlipayConfigDto>> page(
-            PageQuery PageQuery, AlipayConfigQuery param) {
+    public ResResult<PageResult<AlipayConfigDto>> page(PageQuery PageQuery, AlipayConfigQuery param) {
         return Res.ok(alipayConfigService.page(PageQuery, param));
     }
 

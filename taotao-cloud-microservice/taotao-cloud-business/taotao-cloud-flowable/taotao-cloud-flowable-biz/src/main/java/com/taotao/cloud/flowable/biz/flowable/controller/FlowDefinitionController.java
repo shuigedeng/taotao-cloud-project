@@ -57,20 +57,24 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/flowable/definition")
 public class FlowDefinitionController extends BaseController {
 
-    @Autowired private IFlowDefinitionService flowDefinitionService;
+    @Autowired
+    private IFlowDefinitionService flowDefinitionService;
 
-    @Autowired private ISysUserService userService;
+    @Autowired
+    private ISysUserService userService;
 
-    @Resource private ISysRoleService sysRoleService;
-    @Resource private ISysExpressionService sysExpressionService;
+    @Resource
+    private ISysRoleService sysRoleService;
+
+    @Resource
+    private ISysExpressionService sysExpressionService;
 
     @GetMapping(value = "/list")
     @ApiOperation(value = "流程定义列表", response = FlowProcDefDto.class)
     public AjaxResult list(
             @ApiParam(value = "当前页码", required = true) @RequestParam Integer pageNum,
             @ApiParam(value = "每页条数", required = true) @RequestParam Integer pageSize,
-            @ApiParam(value = "流程名称", required = false) @RequestParam(required = false)
-                    String name) {
+            @ApiParam(value = "流程名称", required = false) @RequestParam(required = false) String name) {
         return AjaxResult.success(flowDefinitionService.list(name, pageNum, pageSize));
     }
 
@@ -102,8 +106,7 @@ public class FlowDefinitionController extends BaseController {
 
     @ApiOperation(value = "读取xml文件")
     @GetMapping("/readXml/{deployId}")
-    public AjaxResult readXml(
-            @ApiParam(value = "流程定义id") @PathVariable(value = "deployId") String deployId) {
+    public AjaxResult readXml(@ApiParam(value = "流程定义id") @PathVariable(value = "deployId") String deployId) {
         try {
             return flowDefinitionService.readXml(deployId);
         } catch (Exception e) {

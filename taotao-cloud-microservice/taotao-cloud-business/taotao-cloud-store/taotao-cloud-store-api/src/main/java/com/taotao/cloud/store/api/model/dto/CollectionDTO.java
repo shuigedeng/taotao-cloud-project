@@ -38,7 +38,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "收藏数量变化DTO")
 public class CollectionDTO implements Serializable {
 
-    @Serial private static final long serialVersionUID = -7605952923416404638L;
+    @Serial
+    private static final long serialVersionUID = -7605952923416404638L;
 
     @Schema(description = "变化的模型id 商品id/店铺id")
     private String id;

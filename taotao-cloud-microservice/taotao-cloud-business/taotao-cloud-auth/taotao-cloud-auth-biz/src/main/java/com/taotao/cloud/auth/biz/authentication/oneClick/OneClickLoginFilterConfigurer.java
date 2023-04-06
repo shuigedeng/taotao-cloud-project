@@ -31,10 +31,7 @@ import org.springframework.util.Assert;
 
 public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H,
-                OneClickLoginFilterConfigurer<H>,
-                OneClickAuthenticationFilter,
-                LoginFilterSecurityConfigurer<H>> {
+                H, OneClickLoginFilterConfigurer<H>, OneClickAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private OneClickUserDetailsService oneClickUserDetailsService;
 
@@ -64,10 +61,9 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
     protected AuthenticationProvider authenticationProvider(H http) {
         ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-        OneClickUserDetailsService oneClickUserDetailsService =
-                this.oneClickUserDetailsService != null
-                        ? this.oneClickUserDetailsService
-                        : getBeanOrNull(applicationContext, OneClickUserDetailsService.class);
+        OneClickUserDetailsService oneClickUserDetailsService = this.oneClickUserDetailsService != null
+                ? this.oneClickUserDetailsService
+                : getBeanOrNull(applicationContext, OneClickUserDetailsService.class);
         Assert.notNull(oneClickUserDetailsService, "oneClickUserDetailsService is required");
 
         return new OneClickAuthenticationProvider(oneClickUserDetailsService);

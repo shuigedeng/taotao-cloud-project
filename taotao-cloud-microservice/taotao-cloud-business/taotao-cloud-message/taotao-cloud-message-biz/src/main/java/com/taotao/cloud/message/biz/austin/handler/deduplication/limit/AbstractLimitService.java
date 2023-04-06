@@ -33,8 +33,7 @@ public abstract class AbstractLimitService implements LimitService {
      * @param taskInfo
      * @return
      */
-    protected List<String> deduplicationAllKey(
-            AbstractDeduplicationService service, TaskInfo taskInfo) {
+    protected List<String> deduplicationAllKey(AbstractDeduplicationService service, TaskInfo taskInfo) {
         List<String> result = new ArrayList<>(taskInfo.getReceiver().size());
         for (String receiver : taskInfo.getReceiver()) {
             String key = deduplicationSingleKey(service, taskInfo, receiver);
@@ -43,8 +42,7 @@ public abstract class AbstractLimitService implements LimitService {
         return result;
     }
 
-    protected String deduplicationSingleKey(
-            AbstractDeduplicationService service, TaskInfo taskInfo, String receiver) {
+    protected String deduplicationSingleKey(AbstractDeduplicationService service, TaskInfo taskInfo, String receiver) {
 
         return service.deduplicationSingleKey(taskInfo, receiver);
     }

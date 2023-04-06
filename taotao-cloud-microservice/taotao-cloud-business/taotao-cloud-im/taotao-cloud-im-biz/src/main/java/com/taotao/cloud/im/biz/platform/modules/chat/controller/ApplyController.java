@@ -41,9 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/apply")
 public class ApplyController extends BaseController {
 
-    @Resource private ChatFriendService chatFriendService;
+    @Resource
+    private ChatFriendService chatFriendService;
 
-    @Resource private ChatApplyService chatApplyService;
+    @Resource
+    private ChatApplyService chatApplyService;
 
     /** 申请添加 */
     @ApiVersion(VersionEnum.V1_0_0)

@@ -49,19 +49,13 @@ public class WalletQueryService {
 
     /** 根据ID查询Wallet */
     public WalletDto findById(Long walletId) {
-        return walletManager
-                .findById(walletId)
-                .map(Wallet::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return walletManager.findById(walletId).map(Wallet::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 根据用户ID查询钱包 */
     public WalletDto findByUser() {
         Long userId = SecurityUtil.getUserId();
-        return walletManager
-                .findByUser(userId)
-                .map(Wallet::toDto)
-                .orElseThrow(DataNotExistException::new);
+        return walletManager.findByUser(userId).map(Wallet::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /** 获取钱包综合信息 */
@@ -80,9 +74,7 @@ public class WalletQueryService {
     }
 
     /** 待开通钱包的用户列表 */
-    public PageResult<UserInfoDto> pageByNotWallet(
-            PageQuery PageQuery, UserInfoParam userInfoParam) {
-        return MpUtil.convert2DtoPageResult(
-                walletManager.pageByNotWallet(PageQuery, userInfoParam));
+    public PageResult<UserInfoDto> pageByNotWallet(PageQuery PageQuery, UserInfoParam userInfoParam) {
+        return MpUtil.convert2DtoPageResult(walletManager.pageByNotWallet(PageQuery, userInfoParam));
     }
 }

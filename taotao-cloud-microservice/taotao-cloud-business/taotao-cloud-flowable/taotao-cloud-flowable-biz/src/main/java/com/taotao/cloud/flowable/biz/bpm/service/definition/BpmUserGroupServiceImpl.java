@@ -47,7 +47,8 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class BpmUserGroupServiceImpl implements BpmUserGroupService {
 
-    @Resource private BpmUserGroupMapper userGroupMapper;
+    @Resource
+    private BpmUserGroupMapper userGroupMapper;
 
     @Override
     public Long createUserGroup(BpmUserGroupCreateReqVO createReqVO) {
@@ -108,18 +109,16 @@ public class BpmUserGroupServiceImpl implements BpmUserGroupService {
         }
         // 获得用户组信息
         List<BpmUserGroupDO> userGroups = userGroupMapper.selectBatchIds(ids);
-        Map<Long, BpmUserGroupDO> userGroupMap =
-                CollectionUtils.convertMap(userGroups, BpmUserGroupDO::getId);
+        Map<Long, BpmUserGroupDO> userGroupMap = CollectionUtils.convertMap(userGroups, BpmUserGroupDO::getId);
         // 校验
-        ids.forEach(
-                id -> {
-                    BpmUserGroupDO userGroup = userGroupMap.get(id);
-                    if (userGroup == null) {
-                        throw ServiceExceptionUtil.exception(USER_GROUP_NOT_EXISTS);
-                    }
-                    if (!CommonStatusEnum.ENABLE.getStatus().equals(userGroup.getStatus())) {
-                        throw exception(USER_GROUP_IS_DISABLE, userGroup.getName());
-                    }
-                });
+        ids.forEach(id -> {
+            BpmUserGroupDO userGroup = userGroupMap.get(id);
+            if (userGroup == null) {
+                throw ServiceExceptionUtil.exception(USER_GROUP_NOT_EXISTS);
+            }
+            if (!CommonStatusEnum.ENABLE.getStatus().equals(userGroup.getStatus())) {
+                throw exception(USER_GROUP_IS_DISABLE, userGroup.getName());
+            }
+        });
     }
 }

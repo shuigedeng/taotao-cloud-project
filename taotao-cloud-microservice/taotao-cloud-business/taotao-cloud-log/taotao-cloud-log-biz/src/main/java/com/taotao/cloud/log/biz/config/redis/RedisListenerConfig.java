@@ -52,22 +52,21 @@ public class RedisListenerConfig {
     @Bean
     @Primary
     public RedisMessageListenerContainer redisMessageListenerContainer(
-		RedisConnectionFactory redisConnectionFactory,
-		RequestLogTopicMessageDelegate requestLogTopicMessageDelegate,
-		DataVersionLogTopicMessageDelegate dataVersionLogTopicMessageDelegate) {
+            RedisConnectionFactory redisConnectionFactory,
+            RequestLogTopicMessageDelegate requestLogTopicMessageDelegate,
+            DataVersionLogTopicMessageDelegate dataVersionLogTopicMessageDelegate) {
 
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
 
         // Runtime.getRuntime().availableProcessors() * 2
-        MonitorThreadPoolExecutor executor =
-                new MonitorThreadPoolExecutor(
-                        100,
-                        1500,
-                        2000,
-                        TimeUnit.SECONDS,
-                        new SynchronousQueue<>(),
-                        new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
+        MonitorThreadPoolExecutor executor = new MonitorThreadPoolExecutor(
+                100,
+                1500,
+                2000,
+                TimeUnit.SECONDS,
+                new SynchronousQueue<>(),
+                new MonitorThreadPoolFactory("taotao-cloud-redis-listener-executor"));
         executor.setNamePrefix("taotao-cloud-redis-listener-executor");
         container.setTaskExecutor(executor);
 
@@ -75,13 +74,13 @@ public class RedisListenerConfig {
 
         MessageListenerAdapter requestLogMessageListenerAdapter =
                 new MessageListenerAdapter(requestLogTopicMessageDelegate, "handleRequestLog");
-		requestLogMessageListenerAdapter.afterPropertiesSet();
+        requestLogMessageListenerAdapter.afterPropertiesSet();
         listeners.put(requestLogMessageListenerAdapter, List.of(ChannelTopic.of(RedisConstant.REQUEST_LOG_TOPIC)));
 
-		MessageListenerAdapter dataVersionLogListenerAdapter =
-			new MessageListenerAdapter(dataVersionLogTopicMessageDelegate, "handleRequestLog");
-		dataVersionLogListenerAdapter.afterPropertiesSet();
-		listeners.put(dataVersionLogListenerAdapter, List.of(ChannelTopic.of(RedisConstant.DATA_VERSION_LOG_TOPIC)));
+        MessageListenerAdapter dataVersionLogListenerAdapter =
+                new MessageListenerAdapter(dataVersionLogTopicMessageDelegate, "handleRequestLog");
+        dataVersionLogListenerAdapter.afterPropertiesSet();
+        listeners.put(dataVersionLogListenerAdapter, List.of(ChannelTopic.of(RedisConstant.DATA_VERSION_LOG_TOPIC)));
 
         container.setMessageListeners(listeners);
         return container;
@@ -94,11 +93,9 @@ public class RedisListenerConfig {
         return new RedisKeyExpirationEventMessageListener(listenerContainer);
     }
 
-    public static class RedisKeyExpirationEventMessageListener
-            extends KeyExpirationEventMessageListener {
+    public static class RedisKeyExpirationEventMessageListener extends KeyExpirationEventMessageListener {
 
-        public RedisKeyExpirationEventMessageListener(
-                RedisMessageListenerContainer listenerContainer) {
+        public RedisKeyExpirationEventMessageListener(RedisMessageListenerContainer listenerContainer) {
             super(listenerContainer);
         }
 

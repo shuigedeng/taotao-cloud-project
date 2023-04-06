@@ -24,6 +24,5 @@ import org.springframework.stereotype.Service;
 
 /** 采购原材料明细 */
 @Service
-public class ProcurementEntryServiceImpl
-        extends ServiceImpl<ProcurementEntryMapper, ProcurementEntryEntity>
+public class ProcurementEntryServiceImpl extends ServiceImpl<ProcurementEntryMapper, ProcurementEntryEntity>
         implements ProcurementEntryService {}

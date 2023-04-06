@@ -32,7 +32,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class PintuanVO extends PintuanBaseVO {
 
-    @Serial private static final long serialVersionUID = 218582640653676201L;
+    @Serial
+    private static final long serialVersionUID = 218582640653676201L;
 
     private List<PromotionGoodsVO> promotionGoodsList;
 }

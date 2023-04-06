@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/LeaveApply")
 public class LeaveApplyController {
 
-    @Autowired private LeaveApplyService leaveApplyService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private LeaveApplyService leaveApplyService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取请假申请信息
@@ -52,8 +55,7 @@ public class LeaveApplyController {
      */
     @Operation("获取请假申请信息")
     @GetMapping("/{id}")
-    public Result<LeaveApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<LeaveApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         LeaveApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class LeaveApplyController {
      */
     @Operation("新建请假申请")
     @PostMapping
-    public Result create(@RequestBody @Valid LeaveApplyForm leaveApplyForm)
-            throws WorkFlowException {
+    public Result create(@RequestBody @Valid LeaveApplyForm leaveApplyForm) throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {
             return Result.fail("结束时间不能小于起始时间");
         }
@@ -109,8 +110,7 @@ public class LeaveApplyController {
      */
     @Operation("修改请假申请")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody @Valid LeaveApplyForm leaveApplyForm, @PathVariable("id") String id)
+    public Result update(@RequestBody @Valid LeaveApplyForm leaveApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
         if (leaveApplyForm.getLeaveStartTime() > leaveApplyForm.getLeaveEndTime()) {
             return Result.fail("结束时间不能小于起始时间");

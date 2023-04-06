@@ -42,9 +42,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MchAppService extends ServiceImpl<MchAppMapper, MchApp> {
 
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private MchPayPassageService mchPayPassageService;
-    @Autowired private PayInterfaceConfigService payInterfaceConfigService;
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private MchPayPassageService mchPayPassageService;
+
+    @Autowired
+    private PayInterfaceConfigService payInterfaceConfigService;
 
     @Transactional(rollbackFor = Exception.class)
     public void removeByAppId(String appId) {
@@ -59,10 +64,9 @@ public class MchAppService extends ServiceImpl<MchAppMapper, MchApp> {
         mchPayPassageService.remove(MchPayPassage.gw().eq(MchPayPassage::getAppId, appId));
 
         // 3.删除应用配置的支付参数
-        payInterfaceConfigService.remove(
-                PayInterfaceConfig.gw()
-                        .eq(PayInterfaceConfig::getInfoId, appId)
-                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP));
+        payInterfaceConfigService.remove(PayInterfaceConfig.gw()
+                .eq(PayInterfaceConfig::getInfoId, appId)
+                .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP));
 
         // 4.删除当前应用
         if (!removeById(appId)) {
@@ -100,10 +104,7 @@ public class MchAppService extends ServiceImpl<MchAppMapper, MchApp> {
         IPage<MchApp> pages = this.page(iPage, wrapper);
 
         pages.getRecords().stream()
-                .forEach(
-                        item ->
-                                item.setAppSecret(
-                                        StringKit.str2Star(item.getAppSecret(), 6, 6, 6)));
+                .forEach(item -> item.setAppSecret(StringKit.str2Star(item.getAppSecret(), 6, 6, 6)));
 
         return pages;
     }

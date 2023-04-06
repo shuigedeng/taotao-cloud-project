@@ -53,23 +53,23 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class MpFreePublishController {
 
-    @Resource private MpServiceFactory mpServiceFactory;
+    @Resource
+    private MpServiceFactory mpServiceFactory;
 
-    @Resource private MpMaterialService mpMaterialService;
+    @Resource
+    private MpMaterialService mpMaterialService;
 
     @GetMapping("/page")
     @ApiOperation("获得已发布的图文分页")
     @PreAuthorize("@ss.hasPermission('mp:free-publish:query')")
-    public CommonResult<PageResult<WxMpFreePublishItem>> getFreePublishPage(
-            MpFreePublishPageReqVO reqVO) {
+    public CommonResult<PageResult<WxMpFreePublishItem>> getFreePublishPage(MpFreePublishPageReqVO reqVO) {
         // 从公众号查询已发布的图文列表
         WxMpService mpService = mpServiceFactory.getRequiredMpService(reqVO.getAccountId());
         WxMpFreePublishList publicationRecords;
         try {
-            publicationRecords =
-                    mpService
-                            .getFreePublishService()
-                            .getPublicationRecords(PageUtils.getStart(reqVO), reqVO.getPageSize());
+            publicationRecords = mpService
+                    .getFreePublishService()
+                    .getPublicationRecords(PageUtils.getStart(reqVO), reqVO.getPageSize());
         } catch (WxErrorException e) {
             throw exception(FREE_PUBLISH_LIST_FAIL, e.getError().getErrorMsg());
         }
@@ -77,42 +77,28 @@ public class MpFreePublishController {
         setFreePublishThumbUrl(publicationRecords.getItems());
 
         // 返回分页
-        return success(
-                new PageResult<>(
-                        publicationRecords.getItems(),
-                        publicationRecords.getTotalCount().longValue()));
+        return success(new PageResult<>(
+                publicationRecords.getItems(),
+                publicationRecords.getTotalCount().longValue()));
     }
 
     private void setFreePublishThumbUrl(List<WxMpFreePublishItem> items) {
         // 1.1 获得 mediaId 数组
         Set<String> mediaIds = new HashSet<>();
         items.forEach(
-                item ->
-                        item.getContent()
-                                .getNewsItem()
-                                .forEach(newsItem -> mediaIds.add(newsItem.getThumbMediaId())));
+                item -> item.getContent().getNewsItem().forEach(newsItem -> mediaIds.add(newsItem.getThumbMediaId())));
         if (CollUtil.isEmpty(mediaIds)) {
             return;
         }
         // 1.2 批量查询对应的 Media 素材
-        Map<String, MpMaterialDO> materials =
-                CollectionUtils.convertMap(
-                        mpMaterialService.getMaterialListByMediaId(mediaIds),
-                        MpMaterialDO::getMediaId);
+        Map<String, MpMaterialDO> materials = CollectionUtils.convertMap(
+                mpMaterialService.getMaterialListByMediaId(mediaIds), MpMaterialDO::getMediaId);
 
         // 2. 设置回 WxMpFreePublishItem 记录
-        items.forEach(
-                item ->
-                        item.getContent()
-                                .getNewsItem()
-                                .forEach(
-                                        newsItem ->
-                                                findAndThen(
-                                                        materials,
-                                                        newsItem.getThumbMediaId(),
-                                                        material ->
-                                                                newsItem.setThumbUrl(
-                                                                        material.getUrl()))));
+        items.forEach(item -> item.getContent()
+                .getNewsItem()
+                .forEach(newsItem -> findAndThen(
+                        materials, newsItem.getThumbMediaId(), material -> newsItem.setThumbUrl(material.getUrl()))));
     }
 
     @PostMapping("/submit")
@@ -161,8 +147,7 @@ public class MpFreePublishController {
     })
     @PreAuthorize("@ss.hasPermission('mp:free-publish:delete')")
     public CommonResult<Boolean> deleteFreePublish(
-            @RequestParam("accountId") Long accountId,
-            @RequestParam("articleId") String articleId) {
+            @RequestParam("accountId") Long accountId, @RequestParam("articleId") String articleId) {
         WxMpService mpService = mpServiceFactory.getRequiredMpService(accountId);
         try {
             mpService.getFreePublishService().deletePushAllArticle(articleId);

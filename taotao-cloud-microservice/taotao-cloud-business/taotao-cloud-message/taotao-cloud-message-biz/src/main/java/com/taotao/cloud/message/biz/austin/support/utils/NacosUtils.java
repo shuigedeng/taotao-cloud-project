@@ -79,9 +79,7 @@ public class NacosUtils {
             request.put(PropertyKeyConst.NAMESPACE, nacosNamespace);
             request.put(PropertyKeyConst.USERNAME, nacosUsername);
             request.put(PropertyKeyConst.PASSWORD, nacosPassword);
-            context =
-                    NacosFactory.createConfigService(request)
-                            .getConfig(nacosDataId, nacosGroup, 5000);
+            context = NacosFactory.createConfigService(request).getConfig(nacosDataId, nacosGroup, 5000);
         } catch (NacosException e) {
             log.error("Nacos error:{}", ExceptionUtils.getStackTrace(e));
         }

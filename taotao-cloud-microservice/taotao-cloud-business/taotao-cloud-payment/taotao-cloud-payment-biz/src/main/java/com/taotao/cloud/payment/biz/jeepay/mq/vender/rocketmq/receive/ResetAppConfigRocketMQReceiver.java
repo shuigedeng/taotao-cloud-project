@@ -43,7 +43,8 @@ import org.springframework.stereotype.Component;
         messageModel = MessageModel.BROADCASTING)
 public class ResetAppConfigRocketMQReceiver implements IMQMsgReceiver, RocketMQListener<String> {
 
-    @Autowired private ResetAppConfigMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private ResetAppConfigMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 MQSendTypeEnum.BROADCAST 】 广播类型的消息 * */
     @Override

@@ -42,20 +42,21 @@ import org.springframework.stereotype.Component;
 public class CancelOrderTaskExecute implements EveryMinuteExecute {
 
     /** 订单 */
-    @Autowired private IOrderService orderService;
+    @Autowired
+    private IOrderService orderService;
     /** 设置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
-    @Autowired private DistributedLock distributedLock;
+    @Autowired
+    private DistributedLock distributedLock;
 
     @Override
     public void execute() {
-        OrderSettingVO orderSetting =
-                settingApi.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
+        OrderSettingVO orderSetting = settingApi.getOrderSetting(SettingCategoryEnum.ORDER_SETTING.name());
         if (orderSetting != null && orderSetting.getAutoCancel() != null) {
             // 订单自动取消时间 = 当前时间 - 自动取消时间分钟数
-            DateTime cancelTime =
-                    DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
+            DateTime cancelTime = DateUtil.offsetMinute(DateUtil.date(), -orderSetting.getAutoCancel());
             LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(Order::getOrderStatus, OrderStatusEnum.UNPAID.name());
             // 订单创建时间 <= 订单自动取消时间

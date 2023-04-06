@@ -36,7 +36,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.RABBIT_MQ)
 public class RabbitMQSender implements IMQSender {
 
-    @Autowired private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public void send(AbstractMQ mqModel) {
@@ -48,9 +49,7 @@ public class RabbitMQSender implements IMQSender {
 
             // fanout模式 的 routeKEY 没意义。
             this.rabbitTemplate.convertAndSend(
-                    RabbitMQConfig.FANOUT_EXCHANGE_NAME_PREFIX + mqModel.getMQName(),
-                    null,
-                    mqModel.toMessage());
+                    RabbitMQConfig.FANOUT_EXCHANGE_NAME_PREFIX + mqModel.getMQName(), null, mqModel.toMessage());
         }
     }
 
@@ -64,18 +63,14 @@ public class RabbitMQSender implements IMQSender {
                     mqModel.getMQName(),
                     mqModel.toMessage(),
                     messagePostProcessor -> {
-                        messagePostProcessor
-                                .getMessageProperties()
-                                .setDelay(Math.toIntExact(delay * 1000));
+                        messagePostProcessor.getMessageProperties().setDelay(Math.toIntExact(delay * 1000));
                         return messagePostProcessor;
                     });
         } else {
 
             // fanout模式 的 routeKEY 没意义。  没有延迟属性
             this.rabbitTemplate.convertAndSend(
-                    RabbitMQConfig.FANOUT_EXCHANGE_NAME_PREFIX + mqModel.getMQName(),
-                    null,
-                    mqModel.toMessage());
+                    RabbitMQConfig.FANOUT_EXCHANGE_NAME_PREFIX + mqModel.getMQName(), null, mqModel.toMessage());
         }
     }
 }

@@ -39,17 +39,13 @@ public class WxMsgServiceImpl extends ServiceImpl<WxMsgMapper, WxMsg> implements
         String startTime = (String) params.get("startTime");
         String openid = (String) params.get("openid");
         String appid = (String) params.get("appid");
-        IPage<WxMsg> page =
-                this.page(
-                        new Query<WxMsg>().getPage(params),
-                        new QueryWrapper<WxMsg>()
-                                .eq(StringUtils.hasText(appid), "appid", appid)
-                                .in(
-                                        StringUtils.hasText(msgTypes),
-                                        "msg_type",
-                                        Arrays.asList(msgTypes.split(",")))
-                                .eq(StringUtils.hasText(openid), "openid", openid)
-                                .ge(StringUtils.hasText(startTime), "create_time", startTime));
+        IPage<WxMsg> page = this.page(
+                new Query<WxMsg>().getPage(params),
+                new QueryWrapper<WxMsg>()
+                        .eq(StringUtils.hasText(appid), "appid", appid)
+                        .in(StringUtils.hasText(msgTypes), "msg_type", Arrays.asList(msgTypes.split(",")))
+                        .eq(StringUtils.hasText(openid), "openid", openid)
+                        .ge(StringUtils.hasText(startTime), "create_time", startTime));
 
         return new PageUtils(page);
     }

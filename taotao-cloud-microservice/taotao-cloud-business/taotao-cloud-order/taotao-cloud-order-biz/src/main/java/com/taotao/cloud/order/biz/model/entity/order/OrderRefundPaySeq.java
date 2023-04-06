@@ -74,21 +74,15 @@ public class OrderRefundPaySeq extends BaseSuperEntity<OrderRefundPaySeq, Long> 
     private String wxRefundId;
 
     /** 微信退款渠道 需要通过微信 “查询退款”接口设置 */
-    @Column(
-            name = "wx_refund_chanel",
-            columnDefinition = "varchar(32) not null comment '微信退款渠道 需要通过微信 “查询退款”接口设置'")
+    @Column(name = "wx_refund_chanel", columnDefinition = "varchar(32) not null comment '微信退款渠道 需要通过微信 “查询退款”接口设置'")
     private String wxRefundChanel;
 
     /** 微信退款状态 需要通过微信 “查询退款”接口设置 */
-    @Column(
-            name = "wx_refund_status",
-            columnDefinition = "int not null default 0 comment ' 微信退款状态 需要通过微信 “查询退款”接口设置'")
+    @Column(name = "wx_refund_status", columnDefinition = "int not null default 0 comment ' 微信退款状态 需要通过微信 “查询退款”接口设置'")
     private Integer wxRefundStatus;
 
     /** 微信退款收款账户 需要通过微信 “查询退款”接口设置 */
-    @Column(
-            name = "wx_refund_target",
-            columnDefinition = "varchar(32) not null comment '微信退款收款账户 需要通过微信 “查询退款”接口设置'")
+    @Column(name = "wx_refund_target", columnDefinition = "varchar(32) not null comment '微信退款收款账户 需要通过微信 “查询退款”接口设置'")
     private String wxRefundTarget;
 
     /** 退款时间 */

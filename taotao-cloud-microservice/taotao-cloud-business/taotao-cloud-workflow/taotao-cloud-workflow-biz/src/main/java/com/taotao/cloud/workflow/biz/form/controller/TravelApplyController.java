@@ -40,8 +40,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/TravelApply")
 public class TravelApplyController {
 
-    @Autowired private TravelApplyService travelApplyService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private TravelApplyService travelApplyService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取出差预支申请单信息
@@ -51,8 +54,7 @@ public class TravelApplyController {
      */
     @Operation("获取出差预支申请单信息")
     @GetMapping("/{id}")
-    public Result<TravelApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<TravelApplyInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         TravelApplyInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -80,8 +82,7 @@ public class TravelApplyController {
     @Operation("新建出差预支申请单")
     @PostMapping
     public Result create(@RequestBody TravelApplyForm travelApplyForm) throws WorkFlowException {
-        TravelApplyEntity entity =
-                JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(entity.getId(), entity);
             return Result.success(MsgCode.SU002.get());
@@ -99,11 +100,9 @@ public class TravelApplyController {
      */
     @Operation("修改出差预支申请单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id)
+    public Result update(@RequestBody TravelApplyForm travelApplyForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        TravelApplyEntity entity =
-                JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
+        TravelApplyEntity entity = JsonUtils.getJsonToBean(travelApplyForm, TravelApplyEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(travelApplyForm.getStatus())) {
             travelApplyService.save(id, entity);
             return Result.success(MsgCode.SU002.get());

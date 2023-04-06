@@ -57,8 +57,7 @@ public class WechatMediaUtil {
         /*
          * 上传媒体文件到微信服务器需要请求的地址
          */
-        String MEDIA_URL =
-                "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
+        String MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE";
 
         StringBuffer resultStr = null;
         // 拼装url地址
@@ -98,16 +97,15 @@ public class WechatMediaUtil {
             int size = 0;
             // 使用outputStream流输出信息到请求体当中去
             out.write(("--" + boundary + "\r\n").getBytes());
-            out.write(
-                    ("Content-Disposition: form-data; name=\"media\";\r\n"
-                                    + "filename=\""
-                                    + (System.currentTimeMillis())
-                                    + fileExt
-                                    + "\"\r\n"
-                                    + "Content-Type: "
-                                    + contentType
-                                    + "\r\n\r\n")
-                            .getBytes());
+            out.write(("Content-Disposition: form-data; name=\"media\";\r\n"
+                            + "filename=\""
+                            + (System.currentTimeMillis())
+                            + fileExt
+                            + "\"\r\n"
+                            + "Content-Type: "
+                            + contentType
+                            + "\r\n\r\n")
+                    .getBytes());
             while ((size = bufferedIn.read(bytes)) != -1) {
                 out.write(bytes, 0, size);
             }

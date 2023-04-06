@@ -40,8 +40,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-public class JustAuthSocialUserServiceImpl
-        extends ServiceImpl<JustAuthSocialUserMapper, JustAuthSocialUser>
+public class JustAuthSocialUserServiceImpl extends ServiceImpl<JustAuthSocialUserMapper, JustAuthSocialUser>
         implements IJustAuthSocialUserService {
 
     private final JustAuthSocialUserMapper justAuthSocialUserMapper;
@@ -55,11 +54,9 @@ public class JustAuthSocialUserServiceImpl
      */
     @Override
     public Page<JustAuthSocialUserDTO> queryJustAuthSocialUserList(
-            Page<JustAuthSocialUserDTO> page,
-            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO) {
+            Page<JustAuthSocialUserDTO> page, QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO) {
         Page<JustAuthSocialUserDTO> justAuthSocialUserInfoList =
-                justAuthSocialUserMapper.queryJustAuthSocialUserList(
-                        page, queryJustAuthSocialUserDTO);
+                justAuthSocialUserMapper.queryJustAuthSocialUserList(page, queryJustAuthSocialUserDTO);
         return justAuthSocialUserInfoList;
     }
 
@@ -84,8 +81,7 @@ public class JustAuthSocialUserServiceImpl
      * @return
      */
     @Override
-    public JustAuthSocialUserDTO queryJustAuthSocialUser(
-            QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO) {
+    public JustAuthSocialUserDTO queryJustAuthSocialUser(QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO) {
         JustAuthSocialUserDTO justAuthSocialUserDTO =
                 justAuthSocialUserMapper.queryJustAuthSocialUser(queryJustAuthSocialUserDTO);
         return justAuthSocialUserDTO;
@@ -98,13 +94,11 @@ public class JustAuthSocialUserServiceImpl
      * @return
      */
     @Override
-    public JustAuthSocialUser createJustAuthSocialUser(
-            CreateJustAuthSocialUserDTO justAuthSocialUser) {
+    public JustAuthSocialUser createJustAuthSocialUser(CreateJustAuthSocialUserDTO justAuthSocialUser) {
 
         QueryJustAuthSocialUserDTO queryJustAuthSocialUserDTO = new QueryJustAuthSocialUserDTO();
         queryJustAuthSocialUserDTO.setSocialId(justAuthSocialUser.getSocialId());
-        JustAuthSocialUserDTO justAuthSocialUserDTO =
-                this.queryJustAuthSocialUser(queryJustAuthSocialUserDTO);
+        JustAuthSocialUserDTO justAuthSocialUserDTO = this.queryJustAuthSocialUser(queryJustAuthSocialUserDTO);
         if (null != justAuthSocialUserDTO) {
             throw new BusinessException("已经存在绑定用户，请勿重复绑定。");
         }

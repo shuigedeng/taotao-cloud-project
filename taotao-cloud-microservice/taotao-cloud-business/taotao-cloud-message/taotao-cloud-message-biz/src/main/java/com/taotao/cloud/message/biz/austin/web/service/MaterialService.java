@@ -44,8 +44,7 @@ public interface MaterialService {
      * @param fileType
      * @return
      */
-    BasicResultVO enterpriseWeChatRootMaterialUpload(
-            MultipartFile file, String sendAccount, String fileType);
+    BasicResultVO enterpriseWeChatRootMaterialUpload(MultipartFile file, String sendAccount, String fileType);
 
     /**
      * 企业微信（应用消息）素材上传
@@ -55,6 +54,5 @@ public interface MaterialService {
      * @param fileType
      * @return
      */
-    BasicResultVO enterpriseWeChatMaterialUpload(
-            MultipartFile file, String sendAccount, String fileType);
+    BasicResultVO enterpriseWeChatMaterialUpload(MultipartFile file, String sendAccount, String fileType);
 }

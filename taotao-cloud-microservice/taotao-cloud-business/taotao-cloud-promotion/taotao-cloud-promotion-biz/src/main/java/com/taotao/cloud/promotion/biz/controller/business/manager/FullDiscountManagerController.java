@@ -47,14 +47,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/manager/promotion/fullDiscount")
 public class FullDiscountManagerController {
 
-    @Autowired private IFullDiscountService fullDiscountService;
+    @Autowired
+    private IFullDiscountService fullDiscountService;
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取满优惠列表")
     @GetMapping
-    public Result<IPage<FullDiscount>> getCouponList(
-            FullDiscountPageQuery searchParams, PageVO page) {
+    public Result<IPage<FullDiscount>> getCouponList(FullDiscountPageQuery searchParams, PageVO page) {
         page.setNotConvert(true);
         return Result.success(fullDiscountService.pageFindAll(searchParams, page));
     }
@@ -72,15 +72,10 @@ public class FullDiscountManagerController {
     @Operation(summary = "修改满额活动状态")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "id", value = "满额活动ID", required = true, paramType = "path"),
-        @ApiImplicitParam(
-                name = "promotionStatus",
-                value = "满额活动状态",
-                required = true,
-                paramType = "path")
+        @ApiImplicitParam(name = "promotionStatus", value = "满额活动状态", required = true, paramType = "path")
     })
     @PutMapping("/status/{id}")
-    public Result<Object> updateCouponStatus(
-            @PathVariable String id, Long startTime, Long endTime) {
+    public Result<Object> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
             return Result.success(ResultEnum.SUCCESS);
         }

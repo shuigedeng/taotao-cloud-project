@@ -45,8 +45,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/isvInfo")
 public class IsvInfoController extends CommonCtrl {
 
-    @Autowired private IsvInfoService isvInfoService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private IsvInfoService isvInfoService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @author: pangxiaoyu
@@ -107,8 +110,7 @@ public class IsvInfoController extends CommonCtrl {
 
         // 推送mq到目前节点进行更新数据
         mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
+                ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
         return ApiRes.ok();
     }
 
@@ -127,8 +129,7 @@ public class IsvInfoController extends CommonCtrl {
 
         // 推送mq到目前节点进行更新数据
         mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
+                ResetIsvMchAppInfoConfigMQ.build(ResetIsvMchAppInfoConfigMQ.RESET_TYPE_ISV_INFO, isvNo, null, null));
 
         if (!result) {
             return ApiRes.fail(ApiCodeEnum.SYS_OPERATION_FAIL_UPDATE);

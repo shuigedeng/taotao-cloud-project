@@ -32,7 +32,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysFormServiceImpl implements ISysFormService {
-    @Autowired private SysFormMapper sysFormMapper;
+    @Autowired
+    private SysFormMapper sysFormMapper;
 
     /**
      * 查询流程表单

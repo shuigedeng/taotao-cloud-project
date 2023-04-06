@@ -40,10 +40,17 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ChannelOrderReissueService {
 
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private PayOrderService payOrderService;
-    @Autowired private PayOrderProcessService payOrderProcessService;
-    @Autowired private RefundOrderProcessService refundOrderProcessService;
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private PayOrderService payOrderService;
+
+    @Autowired
+    private PayOrderProcessService payOrderProcessService;
+
+    @Autowired
+    private RefundOrderProcessService refundOrderProcessService;
 
     /** 处理订单 * */
     public ChannelRetMsg processPayOrder(PayOrder payOrder) {
@@ -54,9 +61,7 @@ public class ChannelOrderReissueService {
 
             // 查询支付接口是否存在
             IPayOrderQueryService queryService =
-                    SpringBeansUtil.getBean(
-                            payOrder.getIfCode() + "PayOrderQueryService",
-                            IPayOrderQueryService.class);
+                    SpringBeansUtil.getBean(payOrder.getIfCode() + "PayOrderQueryService", IPayOrderQueryService.class);
 
             // 支付通道接口实现不存在
             if (queryService == null) {
@@ -66,8 +71,7 @@ public class ChannelOrderReissueService {
 
             // 查询出商户应用的配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            payOrder.getMchNo(), payOrder.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(payOrder.getMchNo(), payOrder.getAppId());
 
             ChannelRetMsg channelRetMsg = queryService.query(payOrder, mchAppConfigContext);
             if (channelRetMsg == null) {
@@ -80,15 +84,12 @@ public class ChannelOrderReissueService {
             // 查询成功
             if (channelRetMsg.getChannelState() == ChannelRetMsg.ChannelState.CONFIRM_SUCCESS) {
                 if (payOrderService.updateIng2Success(
-                        payOrderId,
-                        channelRetMsg.getChannelOrderId(),
-                        channelRetMsg.getChannelUserId())) {
+                        payOrderId, channelRetMsg.getChannelOrderId(), channelRetMsg.getChannelUserId())) {
 
                     // 订单支付成功，其他业务逻辑
                     payOrderProcessService.confirmSuccess(payOrder);
                 }
-            } else if (channelRetMsg.getChannelState()
-                    == ChannelRetMsg.ChannelState.CONFIRM_FAIL) { // 确认失败
+            } else if (channelRetMsg.getChannelState() == ChannelRetMsg.ChannelState.CONFIRM_FAIL) { // 确认失败
 
                 // 1. 更新支付订单表为失败状态
                 payOrderService.updateIng2Fail(
@@ -116,8 +117,7 @@ public class ChannelOrderReissueService {
 
             // 查询支付接口是否存在
             IRefundService queryService =
-                    SpringBeansUtil.getBean(
-                            refundOrder.getIfCode() + "RefundService", IRefundService.class);
+                    SpringBeansUtil.getBean(refundOrder.getIfCode() + "RefundService", IRefundService.class);
 
             // 支付通道接口实现不存在
             if (queryService == null) {
@@ -127,8 +127,7 @@ public class ChannelOrderReissueService {
 
             // 查询出商户应用的配置信息
             MchAppConfigContext mchAppConfigContext =
-                    configContextQueryService.queryMchInfoAndAppInfo(
-                            refundOrder.getMchNo(), refundOrder.getAppId());
+                    configContextQueryService.queryMchInfoAndAppInfo(refundOrder.getMchNo(), refundOrder.getAppId());
 
             ChannelRetMsg channelRetMsg = queryService.query(refundOrder, mchAppConfigContext);
             if (channelRetMsg == null) {

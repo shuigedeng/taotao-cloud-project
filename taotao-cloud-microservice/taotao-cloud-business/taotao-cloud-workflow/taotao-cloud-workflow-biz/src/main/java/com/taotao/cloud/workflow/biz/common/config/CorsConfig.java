@@ -25,7 +25,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
-    @Autowired private ConfigValueUtil configValueUtil;
+    @Autowired
+    private ConfigValueUtil configValueUtil;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

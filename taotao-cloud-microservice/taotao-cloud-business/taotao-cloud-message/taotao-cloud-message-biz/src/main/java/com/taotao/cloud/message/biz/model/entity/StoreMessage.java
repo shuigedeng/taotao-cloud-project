@@ -47,21 +47,15 @@ public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
 
     private static final long serialVersionUID = 1L;
     /** 关联消息id */
-    @Column(
-            name = "message_id",
-            columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
+    @Column(name = "message_id", columnDefinition = "varchar(255) not null default '' comment '关联消息id'")
     private String messageId;
 
     /** 关联店铺id */
-    @Column(
-            name = "store_id",
-            columnDefinition = "varchar(255) not null default '' comment '关联店铺id'")
+    @Column(name = "store_id", columnDefinition = "varchar(255) not null default '' comment '关联店铺id'")
     private String storeId;
 
     /** 关联店铺名称 */
-    @Column(
-            name = "store_name",
-            columnDefinition = "varchar(255) not null default '' comment '关联店铺名称'")
+    @Column(name = "store_name", columnDefinition = "varchar(255) not null default '' comment '关联店铺名称'")
     private String storeName;
 
     /**
@@ -69,9 +63,7 @@ public class StoreMessage extends BaseSuperEntity<StoreMessage, Long> {
      *
      * @see MessageStatusEnum
      */
-    @Column(
-            name = "status",
-            columnDefinition = "varchar(255) not null default '' comment '状态 0默认未读 1已读 2回收站'")
+    @Column(name = "status", columnDefinition = "varchar(255) not null default '' comment '状态 0默认未读 1已读 2回收站'")
     private String status = MessageStatusEnum.UN_READY.name();
 
     /** 消息标题 */

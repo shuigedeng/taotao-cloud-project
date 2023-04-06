@@ -49,10 +49,7 @@ public interface OutboundOrderService extends IService<OutboundOrderEntity> {
      * @param outboundEntryEntityList 子表
      * @throws WorkFlowException 异常
      */
-    void save(
-            String id,
-            OutboundOrderEntity entity,
-            List<OutboundEntryEntity> outboundEntryEntityList)
+    void save(String id, OutboundOrderEntity entity, List<OutboundEntryEntity> outboundEntryEntityList)
             throws WorkFlowException;
 
     /**

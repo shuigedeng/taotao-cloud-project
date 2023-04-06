@@ -31,11 +31,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class DingDingWorkReceipt {
 
-    private static final String URL =
-            "https://oapi.dingtalk.com/topapi/message/corpconversation/getsendresult";
-    @Autowired private StringRedisTemplate redisTemplate;
+    private static final String URL = "https://oapi.dingtalk.com/topapi/message/corpconversation/getsendresult";
 
-    @Autowired private AccountUtils accountUtils;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private AccountUtils accountUtils;
 
     public void pull() {
         //        try {

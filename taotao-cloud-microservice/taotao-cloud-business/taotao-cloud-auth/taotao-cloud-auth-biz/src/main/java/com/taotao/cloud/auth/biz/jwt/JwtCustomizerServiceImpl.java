@@ -47,8 +47,7 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
         }
 
         if (token != null) {
-            if (token.isAuthenticated()
-                    && OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) {
+            if (token.isAuthenticated() && OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) {
 
                 Authentication authentication = context.getPrincipal();
 
@@ -57,10 +56,9 @@ public class JwtCustomizerServiceImpl implements JwtCustomizer {
                         SecurityUser principal = (SecurityUser) authentication.getPrincipal();
                         Long userId = principal.getUserId();
 
-                        Set<String> authorities =
-                                principal.getAuthorities().stream()
-                                        .map(GrantedAuthority::getAuthority)
-                                        .collect(Collectors.toSet());
+                        Set<String> authorities = principal.getAuthorities().stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toSet());
 
                         Map<String, Object> userAttributes = new HashMap<>();
                         userAttributes.put("userId", userId);

@@ -68,18 +68,37 @@ import org.springframework.validation.annotation.Validated;
 @Slf4j
 public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
 
-    @Resource private BpmTaskAssignRuleMapper taskRuleMapper;
-    @Resource @Lazy // 解决循环依赖
+    @Resource
+    private BpmTaskAssignRuleMapper taskRuleMapper;
+
+    @Resource
+    @Lazy // 解决循环依赖
     private BpmModelService modelService;
-    @Resource @Lazy // 解决循环依赖
+
+    @Resource
+    @Lazy // 解决循环依赖
     private BpmProcessDefinitionService processDefinitionService;
-    @Resource private BpmUserGroupService userGroupService;
-    @Resource private RoleApi roleApi;
-    @Resource private DeptApi deptApi;
-    @Resource private PostApi postApi;
-    @Resource private AdminUserApi adminUserApi;
-    @Resource private DictDataApi dictDataApi;
-    @Resource private PermissionApi permissionApi;
+
+    @Resource
+    private BpmUserGroupService userGroupService;
+
+    @Resource
+    private RoleApi roleApi;
+
+    @Resource
+    private DeptApi deptApi;
+
+    @Resource
+    private PostApi postApi;
+
+    @Resource
+    private AdminUserApi adminUserApi;
+
+    @Resource
+    private DictDataApi dictDataApi;
+
+    @Resource
+    private PermissionApi permissionApi;
     /** 任务分配脚本 */
     private Map<Long, BpmTaskAssignScript> scriptMap = Collections.emptyMap();
 
@@ -91,8 +110,7 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
     @Override
     public List<BpmTaskAssignRuleDO> getTaskAssignRuleListByProcessDefinitionId(
             String processDefinitionId, String taskDefinitionKey) {
-        return taskRuleMapper.selectListByProcessDefinitionId(
-                processDefinitionId, taskDefinitionKey);
+        return taskRuleMapper.selectListByProcessDefinitionId(processDefinitionId, taskDefinitionKey);
     }
 
     @Override
@@ -101,8 +119,7 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
     }
 
     @Override
-    public List<BpmTaskAssignRuleRespVO> getTaskAssignRuleList(
-            String modelId, String processDefinitionId) {
+    public List<BpmTaskAssignRuleRespVO> getTaskAssignRuleList(String modelId, String processDefinitionId) {
         // 获得规则
         List<BpmTaskAssignRuleDO> rules = Collections.emptyList();
         BpmnModel model = null;
@@ -130,20 +147,16 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
         // 校验参数
         validTaskAssignRuleOptions(reqVO.getType(), reqVO.getOptions());
         // 校验是否已经配置
-        BpmTaskAssignRuleDO existRule =
-                taskRuleMapper.selectListByModelIdAndTaskDefinitionKey(
-                        reqVO.getModelId(), reqVO.getTaskDefinitionKey());
+        BpmTaskAssignRuleDO existRule = taskRuleMapper.selectListByModelIdAndTaskDefinitionKey(
+                reqVO.getModelId(), reqVO.getTaskDefinitionKey());
         if (existRule != null) {
-            throw exception(
-                    TASK_ASSIGN_RULE_EXISTS, reqVO.getModelId(), reqVO.getTaskDefinitionKey());
+            throw exception(TASK_ASSIGN_RULE_EXISTS, reqVO.getModelId(), reqVO.getTaskDefinitionKey());
         }
 
         // 存储
-        BpmTaskAssignRuleDO rule =
-                BpmTaskAssignRuleConvert.INSTANCE
-                        .convert(reqVO)
-                        .setProcessDefinitionId(
-                                BpmTaskAssignRuleDO.PROCESS_DEFINITION_ID_NULL); // 只有流程模型，才允许新建
+        BpmTaskAssignRuleDO rule = BpmTaskAssignRuleConvert.INSTANCE
+                .convert(reqVO)
+                .setProcessDefinitionId(BpmTaskAssignRuleDO.PROCESS_DEFINITION_ID_NULL); // 只有流程模型，才允许新建
         taskRuleMapper.insert(rule);
         return rule.getId();
     }
@@ -158,9 +171,7 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
             throw exception(TASK_ASSIGN_RULE_NOT_EXISTS);
         }
         // 只允许修改流程模型的规则
-        if (!Objects.equals(
-                BpmTaskAssignRuleDO.PROCESS_DEFINITION_ID_NULL,
-                existRule.getProcessDefinitionId())) {
+        if (!Objects.equals(BpmTaskAssignRuleDO.PROCESS_DEFINITION_ID_NULL, existRule.getProcessDefinitionId())) {
             throw exception(TASK_UPDATE_FAIL_NOT_MODEL);
         }
 
@@ -172,25 +183,21 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
     public boolean isTaskAssignRulesEquals(String modelId, String processDefinitionId) {
         // 调用 VO 接口的原因是，过滤掉流程模型不需要的规则，保持和 copyTaskAssignRules 方法的一致性
         List<BpmTaskAssignRuleRespVO> modelRules = getTaskAssignRuleList(modelId, null);
-        List<BpmTaskAssignRuleRespVO> processInstanceRules =
-                getTaskAssignRuleList(null, processDefinitionId);
+        List<BpmTaskAssignRuleRespVO> processInstanceRules = getTaskAssignRuleList(null, processDefinitionId);
         if (modelRules.size() != processInstanceRules.size()) {
             return false;
         }
 
         // 遍历，匹配对应的规则
         Map<String, BpmTaskAssignRuleRespVO> processInstanceRuleMap =
-                CollectionUtils.convertMap(
-                        processInstanceRules, BpmTaskAssignRuleRespVO::getTaskDefinitionKey);
+                CollectionUtils.convertMap(processInstanceRules, BpmTaskAssignRuleRespVO::getTaskDefinitionKey);
         for (BpmTaskAssignRuleRespVO modelRule : modelRules) {
-            BpmTaskAssignRuleRespVO processInstanceRule =
-                    processInstanceRuleMap.get(modelRule.getTaskDefinitionKey());
+            BpmTaskAssignRuleRespVO processInstanceRule = processInstanceRuleMap.get(modelRule.getTaskDefinitionKey());
             if (processInstanceRule == null) {
                 return false;
             }
             if (!ObjectUtil.equals(modelRule.getType(), processInstanceRule.getType())
-                    || !ObjectUtil.equal(
-                            modelRule.getOptions(), processInstanceRule.getOptions())) {
+                    || !ObjectUtil.equal(modelRule.getOptions(), processInstanceRule.getOptions())) {
                 return false;
             }
         }
@@ -205,12 +212,10 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
         }
         // 开始复制
         List<BpmTaskAssignRuleDO> newRules = BpmTaskAssignRuleConvert.INSTANCE.convertList2(rules);
-        newRules.forEach(
-                rule ->
-                        rule.setProcessDefinitionId(toProcessDefinitionId)
-                                .setId(null)
-                                .setCreateTime(null)
-                                .setUpdateTime(null));
+        newRules.forEach(rule -> rule.setProcessDefinitionId(toProcessDefinitionId)
+                .setId(null)
+                .setCreateTime(null)
+                .setUpdateTime(null));
         taskRuleMapper.insertBatch(newRules);
     }
 
@@ -222,14 +227,11 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
             return;
         }
         // 校验未配置规则的任务
-        taskAssignRules.forEach(
-                rule -> {
-                    if (CollUtil.isEmpty(rule.getOptions())) {
-                        throw exception(
-                                MODEL_DEPLOY_FAIL_TASK_ASSIGN_RULE_NOT_CONFIG,
-                                rule.getTaskDefinitionName());
-                    }
-                });
+        taskAssignRules.forEach(rule -> {
+            if (CollUtil.isEmpty(rule.getOptions())) {
+                throw exception(MODEL_DEPLOY_FAIL_TASK_ASSIGN_RULE_NOT_CONFIG, rule.getTaskDefinitionName());
+            }
+        });
     }
 
     private void validTaskAssignRuleOptions(Integer type, Set<Long> options) {
@@ -248,8 +250,7 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
             userGroupService.validUserGroups(options);
         } else if (Objects.equals(type, BpmTaskAssignRuleTypeEnum.SCRIPT.getType())) {
             dictDataApi.validDictDatas(
-                    DictTypeConstants.TASK_ASSIGN_SCRIPT,
-                    CollectionUtils.convertSet(options, String::valueOf));
+                    DictTypeConstants.TASK_ASSIGN_SCRIPT, CollectionUtils.convertSet(options, String::valueOf));
         } else {
             throw new IllegalArgumentException(format("未知的规则类型({})", type));
         }
@@ -264,24 +265,21 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
 
     @VisibleForTesting
     BpmTaskAssignRuleDO getTaskRule(DelegateExecution execution) {
-        List<BpmTaskAssignRuleDO> taskRules =
-                getTaskAssignRuleListByProcessDefinitionId(
-                        execution.getProcessDefinitionId(), execution.getCurrentActivityId());
+        List<BpmTaskAssignRuleDO> taskRules = getTaskAssignRuleListByProcessDefinitionId(
+                execution.getProcessDefinitionId(), execution.getCurrentActivityId());
         if (CollUtil.isEmpty(taskRules)) {
-            throw new FlowableException(
-                    format(
-                            "流程任务({}/{}/{}) 找不到符合的任务规则",
-                            execution.getId(),
-                            execution.getProcessDefinitionId(),
-                            execution.getCurrentActivityId()));
+            throw new FlowableException(format(
+                    "流程任务({}/{}/{}) 找不到符合的任务规则",
+                    execution.getId(),
+                    execution.getProcessDefinitionId(),
+                    execution.getCurrentActivityId()));
         }
         if (taskRules.size() > 1) {
-            throw new FlowableException(
-                    format(
-                            "流程任务({}/{}/{}) 找到过多任务规则({})",
-                            execution.getId(),
-                            execution.getProcessDefinitionId(),
-                            execution.getCurrentActivityId()));
+            throw new FlowableException(format(
+                    "流程任务({}/{}/{}) 找到过多任务规则({})",
+                    execution.getId(),
+                    execution.getProcessDefinitionId(),
+                    execution.getCurrentActivityId()));
         }
         return taskRules.get(0);
     }
@@ -291,11 +289,9 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
         Set<Long> assigneeUserIds = null;
         if (Objects.equals(BpmTaskAssignRuleTypeEnum.ROLE.getType(), rule.getType())) {
             assigneeUserIds = calculateTaskCandidateUsersByRole(rule);
-        } else if (Objects.equals(
-                BpmTaskAssignRuleTypeEnum.DEPT_MEMBER.getType(), rule.getType())) {
+        } else if (Objects.equals(BpmTaskAssignRuleTypeEnum.DEPT_MEMBER.getType(), rule.getType())) {
             assigneeUserIds = calculateTaskCandidateUsersByDeptMember(rule);
-        } else if (Objects.equals(
-                BpmTaskAssignRuleTypeEnum.DEPT_LEADER.getType(), rule.getType())) {
+        } else if (Objects.equals(BpmTaskAssignRuleTypeEnum.DEPT_LEADER.getType(), rule.getType())) {
             assigneeUserIds = calculateTaskCandidateUsersByDeptLeader(rule);
         } else if (Objects.equals(BpmTaskAssignRuleTypeEnum.POST.getType(), rule.getType())) {
             assigneeUserIds = calculateTaskCandidateUsersByPost(rule);
@@ -352,23 +348,19 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
         return userIds;
     }
 
-    private Set<Long> calculateTaskCandidateUsersByScript(
-            DelegateExecution execution, BpmTaskAssignRuleDO rule) {
+    private Set<Long> calculateTaskCandidateUsersByScript(DelegateExecution execution, BpmTaskAssignRuleDO rule) {
         // 获得对应的脚本
         List<BpmTaskAssignScript> scripts = new ArrayList<>(rule.getOptions().size());
-        rule.getOptions()
-                .forEach(
-                        id -> {
-                            BpmTaskAssignScript script = scriptMap.get(id);
-                            if (script == null) {
-                                throw exception(TASK_ASSIGN_SCRIPT_NOT_EXISTS, id);
-                            }
-                            scripts.add(script);
-                        });
+        rule.getOptions().forEach(id -> {
+            BpmTaskAssignScript script = scriptMap.get(id);
+            if (script == null) {
+                throw exception(TASK_ASSIGN_SCRIPT_NOT_EXISTS, id);
+            }
+            scripts.add(script);
+        });
         // 逐个计算任务
         Set<Long> userIds = new HashSet<>();
-        scripts.forEach(
-                script -> CollUtil.addAll(userIds, script.calculateTaskCandidateUsers(execution)));
+        scripts.forEach(script -> CollUtil.addAll(userIds, script.calculateTaskCandidateUsers(execution)));
         return userIds;
     }
 
@@ -378,11 +370,9 @@ public class BpmTaskAssignRuleServiceImpl implements BpmTaskAssignRuleService {
             return;
         }
         Map<Long, AdminUserRespDTO> userMap = adminUserApi.getUserMap(assigneeUserIds);
-        assigneeUserIds.removeIf(
-                id -> {
-                    AdminUserRespDTO user = userMap.get(id);
-                    return user == null
-                            || !CommonStatusEnum.ENABLE.getStatus().equals(user.getStatus());
-                });
+        assigneeUserIds.removeIf(id -> {
+            AdminUserRespDTO user = userMap.get(id);
+            return user == null || !CommonStatusEnum.ENABLE.getStatus().equals(user.getStatus());
+        });
     }
 }

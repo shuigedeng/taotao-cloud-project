@@ -34,26 +34,22 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageReceipt {
 
-    @Autowired private List<ReceiptMessageStater> receiptMessageStaterList;
+    @Autowired
+    private List<ReceiptMessageStater> receiptMessageStaterList;
 
     @PostConstruct
     private void init() {
-        SupportThreadPoolConfig.getPendingSingleThreadPool()
-                .execute(
-                        () -> {
-                            while (true) {
-                                try {
-                                    for (ReceiptMessageStater receiptMessageStater :
-                                            receiptMessageStaterList) {
-                                        receiptMessageStater.start();
-                                    }
-                                    Thread.sleep(2000);
-                                } catch (Exception e) {
-                                    log.error(
-                                            "MessageReceipt#init fail:{}",
-                                            Throwables.getStackTraceAsString(e));
-                                }
-                            }
-                        });
+        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+            while (true) {
+                try {
+                    for (ReceiptMessageStater receiptMessageStater : receiptMessageStaterList) {
+                        receiptMessageStater.start();
+                    }
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    log.error("MessageReceipt#init fail:{}", Throwables.getStackTraceAsString(e));
+                }
+            }
+        });
     }
 }

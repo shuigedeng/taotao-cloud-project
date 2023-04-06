@@ -39,8 +39,7 @@ public class MiniAppAuthenticationFilter extends AbstractAuthenticationProcessin
     private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
             new AntPathRequestMatcher("/login/miniapp", "POST");
     private final ObjectMapper om = new ObjectMapper();
-    private Converter<HttpServletRequest, MiniAppAuthenticationToken>
-            miniAppAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, MiniAppAuthenticationToken> miniAppAuthenticationTokenConverter;
     private boolean postOnly = true;
 
     public MiniAppAuthenticationFilter() {
@@ -54,19 +53,15 @@ public class MiniAppAuthenticationFilter extends AbstractAuthenticationProcessin
     }
 
     @Override
-    public Authentication attemptAuthentication(
-            HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
         if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException(
-                    "Authentication method not supported: " + request.getMethod());
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        MiniAppAuthenticationToken authRequest =
-                miniAppAuthenticationTokenConverter.convert(request);
+        MiniAppAuthenticationToken authRequest = miniAppAuthenticationTokenConverter.convert(request);
         if (authRequest == null) {
-            throw new BadCredentialsException(
-                    "fail to extract miniapp authentication request params");
+            throw new BadCredentialsException("fail to extract miniapp authentication request params");
         }
         setDetails(request, authRequest);
         return this.getAuthenticationManager().authenticate(authRequest);

@@ -45,9 +45,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class PayMchNotifyService {
 
-    @Autowired private MchNotifyRecordService mchNotifyRecordService;
-    @Autowired private ConfigContextQueryService configContextQueryService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private MchNotifyRecordService mchNotifyRecordService;
+
+    @Autowired
+    private ConfigContextQueryService configContextQueryService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /** 商户通知信息， 只有订单是终态，才会发送通知， 如明确成功和明确失败 * */
     public void payOrderNotify(PayOrder dbPayOrder) {
@@ -58,8 +63,7 @@ public class PayMchNotifyService {
             }
 
             // 获取到通知对象
-            MchNotifyRecord mchNotifyRecord =
-                    mchNotifyRecordService.findByPayOrder(dbPayOrder.getPayOrderId());
+            MchNotifyRecord mchNotifyRecord = mchNotifyRecordService.findByPayOrder(dbPayOrder.getPayOrderId());
 
             if (mchNotifyRecord != null) {
 
@@ -68,10 +72,9 @@ public class PayMchNotifyService {
             }
 
             // 商户app私钥
-            String appSecret =
-                    configContextQueryService
-                            .queryMchApp(dbPayOrder.getMchNo(), dbPayOrder.getAppId())
-                            .getAppSecret();
+            String appSecret = configContextQueryService
+                    .queryMchApp(dbPayOrder.getMchNo(), dbPayOrder.getAppId())
+                    .getAppSecret();
 
             // 封装通知url
             String notifyUrl = createNotifyUrl(dbPayOrder, appSecret);
@@ -123,10 +126,9 @@ public class PayMchNotifyService {
             }
 
             // 商户app私钥
-            String appSecret =
-                    configContextQueryService
-                            .queryMchApp(dbRefundOrder.getMchNo(), dbRefundOrder.getAppId())
-                            .getAppSecret();
+            String appSecret = configContextQueryService
+                    .queryMchApp(dbRefundOrder.getMchNo(), dbRefundOrder.getAppId())
+                    .getAppSecret();
 
             // 封装通知url
             String notifyUrl = createNotifyUrl(dbRefundOrder, appSecret);
@@ -177,10 +179,9 @@ public class PayMchNotifyService {
             }
 
             // 商户app私钥
-            String appSecret =
-                    configContextQueryService
-                            .queryMchApp(dbTransferOrder.getMchNo(), dbTransferOrder.getAppId())
-                            .getAppSecret();
+            String appSecret = configContextQueryService
+                    .queryMchApp(dbTransferOrder.getMchNo(), dbTransferOrder.getAppId())
+                    .getAppSecret();
 
             // 封装通知url
             String notifyUrl = createNotifyUrl(dbTransferOrder, appSecret);

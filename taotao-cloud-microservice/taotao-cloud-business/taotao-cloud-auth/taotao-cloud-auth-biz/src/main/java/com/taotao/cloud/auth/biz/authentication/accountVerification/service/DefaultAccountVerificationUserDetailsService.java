@@ -28,11 +28,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefaultAccountVerificationUserDetailsService
-        implements AccountVerificationUserDetailsService {
+public class DefaultAccountVerificationUserDetailsService implements AccountVerificationUserDetailsService {
 
-    @Autowired private IFeignUserApi userApi;
-    @Autowired private IFeignMemberApi memberApi;
+    @Autowired
+    private IFeignUserApi userApi;
+
+    @Autowired
+    private IFeignMemberApi memberApi;
 
     @Override
     public UserDetails loadUserByUsername(String username, String password, String type)

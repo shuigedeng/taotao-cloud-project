@@ -99,8 +99,7 @@ public class CartController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/sku/num/{skuId}")
     public Result<Boolean> update(
-            @NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
-            Integer num) {
+            @NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId, Integer num) {
         return Result.success(cartService.add(skuId, num, CartTypeEnum.CART.name(), true));
     }
 
@@ -109,8 +108,7 @@ public class CartController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/sku/checked/{skuId}")
     public Result<Boolean> updateChecked(
-            @NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId,
-            boolean checked) {
+            @NotNull(message = "产品id不能为空") @PathVariable(name = "skuId") String skuId, boolean checked) {
         return Result.success(cartService.checked(skuId, checked));
     }
 
@@ -127,8 +125,7 @@ public class CartController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/store/{storeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Result<Boolean> updateStoreAll(
-            @NotNull(message = "卖家id不能为空") @PathVariable(name = "storeId") String storeId,
-            boolean checked) {
+            @NotNull(message = "卖家id不能为空") @PathVariable(name = "storeId") String storeId, boolean checked) {
         return Result.success(cartService.checkedStore(storeId, checked));
     }
 
@@ -161,8 +158,7 @@ public class CartController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/shippingAddress")
-    public Result<Boolean> shippingAddress(
-            @NotNull(message = "收货地址ID不能为空") String shippingAddressId, String way) {
+    public Result<Boolean> shippingAddress(@NotNull(message = "收货地址ID不能为空") String shippingAddressId, String way) {
         return Result.success(cartService.shippingAddress(shippingAddressId, way));
     }
 

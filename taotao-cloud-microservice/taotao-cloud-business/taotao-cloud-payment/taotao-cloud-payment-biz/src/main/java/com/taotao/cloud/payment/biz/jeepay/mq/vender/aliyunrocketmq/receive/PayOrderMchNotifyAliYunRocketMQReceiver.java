@@ -36,7 +36,8 @@ public class PayOrderMchNotifyAliYunRocketMQReceiver extends AbstractAliYunRocke
 
     private static final String CONSUMER_NAME = "支付订单商户消息";
 
-    @Autowired private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
+    @Autowired
+    private PayOrderMchNotifyMQ.IMQReceiver mqReceiver;
 
     /** 接收 【 queue 】 类型的消息 */
     @Override

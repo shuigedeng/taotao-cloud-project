@@ -61,21 +61,11 @@ public class NotificationController extends BaseWriteableRestController<Notifica
                 @ApiResponse(
                         description = "详情列表",
                         content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = Map.class)))
+                                @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))
             })
     @Parameters({
-        @Parameter(
-                name = "pageNumber",
-                required = true,
-                description = "当前页码",
-                schema = @Schema(type = "integer")),
-        @Parameter(
-                name = "pageSize",
-                required = true,
-                description = "每页显示数量",
-                schema = @Schema(type = "integer")),
+        @Parameter(name = "pageNumber", required = true, description = "当前页码", schema = @Schema(type = "integer")),
+        @Parameter(name = "pageSize", required = true, description = "每页显示数量", schema = @Schema(type = "integer")),
         @Parameter(name = "userId", required = true, description = "用户ID"),
         @Parameter(name = "category", description = "通知类别", schema = @Schema(type = "integer")),
         @Parameter(name = "read", description = "是否已读", schema = @Schema(type = "boolean")),
@@ -95,19 +85,14 @@ public class NotificationController extends BaseWriteableRestController<Notifica
         }
 
         Page<Notification> pages =
-                notificationService.findByCondition(
-                        pageNumber, pageSize, userId, notificationCategory, read);
+                notificationService.findByCondition(pageNumber, pageSize, userId, notificationCategory, read);
         return result(pages);
     }
 
     @Operation(
             summary = "全部通知已读",
             description = "根据用户ID设置该用户的全部通知为已读",
-            responses = {
-                @ApiResponse(
-                        description = "影响数据条目数",
-                        content = @Content(mediaType = "application/json"))
-            })
+            responses = {@ApiResponse(description = "影响数据条目数", content = @Content(mediaType = "application/json"))})
     @Parameters({@Parameter(name = "userId", description = "用户ID")})
     @PutMapping("/all-read")
     public Result<Integer> setAllRead(@RequestParam("userId") String userId) {

@@ -54,27 +54,29 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class FlowDefinitionServiceImpl extends FlowServiceFactory
-        implements IFlowDefinitionService {
+public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFlowDefinitionService {
 
-    @Resource private ISysDeployFormService sysDeployFormService;
+    @Resource
+    private ISysDeployFormService sysDeployFormService;
 
-    @Resource private ISysUserService sysUserService;
+    @Resource
+    private ISysUserService sysUserService;
 
-    @Resource private ISysDeptService sysDeptService;
+    @Resource
+    private ISysDeptService sysDeptService;
 
-    @Resource private ISysPostService postService;
+    @Resource
+    private ISysPostService postService;
 
-    @Resource private FlowDeployMapper flowDeployMapper;
+    @Resource
+    private FlowDeployMapper flowDeployMapper;
 
     private static final String BPMN_FILE_SUFFIX = ".bpmn";
 
     @Override
     public boolean exist(String processDefinitionKey) {
         ProcessDefinitionQuery processDefinitionQuery =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .processDefinitionKey(processDefinitionKey);
+                repositoryService.createProcessDefinitionQuery().processDefinitionKey(processDefinitionKey);
         long count = processDefinitionQuery.count();
         return count > 0 ? true : false;
     }
@@ -121,8 +123,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory
         final List<FlowProcDefDto> dataList = flowDeployMapper.selectDeployList(name);
         // 加载挂表单
         for (FlowProcDefDto procDef : dataList) {
-            SysForm sysForm =
-                    sysDeployFormService.selectSysDeployFormByDeployId(procDef.getDeploymentId());
+            SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(procDef.getDeploymentId());
             if (Objects.nonNull(sysForm)) {
                 procDef.setFormName(sysForm.getFormName());
                 procDef.setFormId(sysForm.getFormId());
@@ -144,18 +145,16 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory
      */
     @Override
     public void importFile(String name, String category, InputStream in) {
-        Deployment deploy =
-                repositoryService
-                        .createDeployment()
-                        .addInputStream(name + BPMN_FILE_SUFFIX, in)
-                        .name(name)
-                        .category(category)
-                        .deploy();
-        ProcessDefinition definition =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .deploymentId(deploy.getId())
-                        .singleResult();
+        Deployment deploy = repositoryService
+                .createDeployment()
+                .addInputStream(name + BPMN_FILE_SUFFIX, in)
+                .name(name)
+                .category(category)
+                .deploy();
+        ProcessDefinition definition = repositoryService
+                .createProcessDefinitionQuery()
+                .deploymentId(deploy.getId())
+                .singleResult();
         repositoryService.setProcessDefinitionCategory(definition.getId(), category);
     }
 
@@ -167,14 +166,12 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory
      */
     @Override
     public AjaxResult readXml(String deployId) throws IOException {
-        ProcessDefinition definition =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .deploymentId(deployId)
-                        .singleResult();
+        ProcessDefinition definition = repositoryService
+                .createProcessDefinitionQuery()
+                .deploymentId(deployId)
+                .singleResult();
         InputStream inputStream =
-                repositoryService.getResourceAsStream(
-                        definition.getDeploymentId(), definition.getResourceName());
+                repositoryService.getResourceAsStream(definition.getDeploymentId(), definition.getResourceName());
         String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
         return AjaxResult.success("", result);
     }
@@ -187,26 +184,16 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory
      */
     @Override
     public InputStream readImage(String deployId) {
-        ProcessDefinition processDefinition =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .deploymentId(deployId)
-                        .singleResult();
+        ProcessDefinition processDefinition = repositoryService
+                .createProcessDefinitionQuery()
+                .deploymentId(deployId)
+                .singleResult();
         // 获得图片流
         DefaultProcessDiagramGenerator diagramGenerator = new DefaultProcessDiagramGenerator();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
         // 输出为图片
         return diagramGenerator.generateDiagram(
-                bpmnModel,
-                "png",
-                Collections.emptyList(),
-                Collections.emptyList(),
-                "宋体",
-                "宋体",
-                "宋体",
-                null,
-                1.0,
-                false);
+                bpmnModel, "png", Collections.emptyList(), Collections.emptyList(), "宋体", "宋体", "宋体", null, 1.0, false);
     }
 
     /**
@@ -219,12 +206,11 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory
     @Override
     public AjaxResult startProcessInstanceById(String procDefId, Map<String, Object> variables) {
         try {
-            ProcessDefinition processDefinition =
-                    repositoryService
-                            .createProcessDefinitionQuery()
-                            .processDefinitionId(procDefId)
-                            .latestVersion()
-                            .singleResult();
+            ProcessDefinition processDefinition = repositoryService
+                    .createProcessDefinitionQuery()
+                    .processDefinitionId(procDefId)
+                    .latestVersion()
+                    .singleResult();
             if (Objects.nonNull(processDefinition) && processDefinition.isSuspended()) {
                 return AjaxResult.error("流程已被挂起,请先激活流程");
             }
@@ -265,11 +251,10 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory
      */
     @Override
     public void updateState(Integer state, String deployId) {
-        ProcessDefinition procDef =
-                repositoryService
-                        .createProcessDefinitionQuery()
-                        .deploymentId(deployId)
-                        .singleResult();
+        ProcessDefinition procDef = repositoryService
+                .createProcessDefinitionQuery()
+                .deploymentId(deployId)
+                .singleResult();
         // 激活
         if (state == 1) {
             repositoryService.activateProcessDefinitionById(procDef.getId(), true, null);

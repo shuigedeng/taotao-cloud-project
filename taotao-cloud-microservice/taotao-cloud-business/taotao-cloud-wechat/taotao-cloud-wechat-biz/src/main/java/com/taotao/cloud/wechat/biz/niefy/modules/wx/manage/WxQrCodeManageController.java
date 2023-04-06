@@ -41,15 +41,17 @@ import org.springframework.web.bind.annotation.*;
 public class WxQrCodeManageController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired private WxQrCodeService wxQrCodeService;
-    @Autowired private WxMpService wxMpService;
+    @Autowired
+    private WxQrCodeService wxQrCodeService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     /** 创建带参二维码ticket */
     @PostMapping("/createTicket")
     @RequiresPermissions("wx:wxqrcode:save")
     @ApiOperation(value = "创建带参二维码ticket", notes = "ticket可以换取二维码图片")
-    public R createTicket(@CookieValue String appid, @RequestBody WxQrCodeForm form)
-            throws WxErrorException {
+    public R createTicket(@CookieValue String appid, @RequestBody WxQrCodeForm form) throws WxErrorException {
         wxMpService.switchoverTo(appid);
         WxMpQrCodeTicket ticket = wxQrCodeService.createQrCode(appid, form);
         return R.ok().put(ticket);

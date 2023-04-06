@@ -57,9 +57,7 @@ public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
     @Column(name = "context", columnDefinition = "varchar(2000) not null comment '消息内容'")
     private String context;
 
-    @Column(
-            name = "sms_range",
-            columnDefinition = "varchar(2000) not null comment '接收人 1:全部会员，2：选择会员 '")
+    @Column(name = "sms_range", columnDefinition = "varchar(2000) not null comment '接收人 1:全部会员，2：选择会员 '")
     private String smsRange;
 
     @Column(name = "num", columnDefinition = "varchar(2000) not null comment '预计发送条数'")

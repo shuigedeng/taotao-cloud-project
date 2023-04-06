@@ -49,14 +49,9 @@ public class TenantRegisterService {
     }
 
     public void registerTenant(
-            TenantName tenantName,
-            TenantCode tenantCode,
-            Mobile mobile,
-            Password password,
-            UserName userName) {
+            TenantName tenantName, TenantCode tenantCode, Mobile mobile, Password password, UserName userName) {
         Tenant tenant = new Tenant(tenantCode, tenantName);
-        TenantCreateSpecification roleCreateSpecification =
-                new TenantCreateSpecification(tenantRepository);
+        TenantCreateSpecification roleCreateSpecification = new TenantCreateSpecification(tenantRepository);
         roleCreateSpecification.isSatisfiedBy(tenant);
         // 保存租户
         TenantId tenantId = tenantRepository.store(tenant);
@@ -69,23 +64,14 @@ public class TenantRegisterService {
             tenantPermissionId.add(permission.getPermissionId());
         }
         Role adminRole =
-                new Role(
-                        new RoleCode(RoleCode.TENANT_ADMIN),
-                        new RoleName(RoleName.TENANT_ADMIN),
-                        tenantPermissionId);
+                new Role(new RoleCode(RoleCode.TENANT_ADMIN), new RoleName(RoleName.TENANT_ADMIN), tenantPermissionId);
         RoleId adminRoleId = roleRepository.store(adminRole);
         // 保存用户
         List<RoleId> roleIdList = new ArrayList<>();
         roleIdList.add(adminRoleId);
         UserFactory userFactory = new UserFactory(userRepository);
         User user =
-                userFactory.createUser(
-                        mobile,
-                        null,
-                        password,
-                        userName,
-                        roleIdList,
-                        new TenantId(tenantId.getId()));
+                userFactory.createUser(mobile, null, password, userName, roleIdList, new TenantId(tenantId.getId()));
         UserId userId = userRepository.store(user);
         tenant = new Tenant(tenantId, tenantCode, tenantName, StatusEnum.ENABLE, userId);
         tenantRepository.store(tenant);

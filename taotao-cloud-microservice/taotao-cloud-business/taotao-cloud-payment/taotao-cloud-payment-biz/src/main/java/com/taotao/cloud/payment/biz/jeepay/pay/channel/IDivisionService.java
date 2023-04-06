@@ -39,12 +39,9 @@ public interface IDivisionService {
     boolean isSupport();
 
     /** 绑定关系 * */
-    ChannelRetMsg bind(
-            MchDivisionReceiver mchDivisionReceiver, MchAppConfigContext mchAppConfigContext);
+    ChannelRetMsg bind(MchDivisionReceiver mchDivisionReceiver, MchAppConfigContext mchAppConfigContext);
 
     /** 单次分账 （无需调用完结接口，或自动解冻商户资金) * */
     ChannelRetMsg singleDivision(
-            PayOrder payOrder,
-            List<PayOrderDivisionRecord> recordList,
-            MchAppConfigContext mchAppConfigContext);
+            PayOrder payOrder, List<PayOrderDivisionRecord> recordList, MchAppConfigContext mchAppConfigContext);
 }

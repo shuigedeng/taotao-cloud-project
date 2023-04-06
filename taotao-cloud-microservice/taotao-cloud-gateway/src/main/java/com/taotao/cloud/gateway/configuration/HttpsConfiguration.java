@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gateway.configuration;
 
 import com.taotao.cloud.gateway.properties.HttpsProperties;
@@ -36,23 +37,21 @@ import org.springframework.http.server.reactive.HttpHandler;
 @ConditionalOnProperty(prefix = HttpsProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfiguration {
 
-	@Resource
-	private HttpHandler httpHandler;
+    @Resource
+    private HttpHandler httpHandler;
 
-	@Resource
-	private WebServer webServer;
+    @Resource
+    private WebServer webServer;
 
-	@PostConstruct
-	public void start(HttpsProperties httpsProperties) {
-		NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(
-			httpsProperties.getPort());
-		WebServer webServer = factory.getWebServer(httpHandler);
-		webServer.start();
-	}
+    @PostConstruct
+    public void start(HttpsProperties httpsProperties) {
+        NettyReactiveWebServerFactory factory = new NettyReactiveWebServerFactory(httpsProperties.getPort());
+        WebServer webServer = factory.getWebServer(httpHandler);
+        webServer.start();
+    }
 
-	@PreDestroy
-	public void stop() {
-		webServer.stop();
-	}
-
+    @PreDestroy
+    public void stop() {
+        webServer.stop();
+    }
 }

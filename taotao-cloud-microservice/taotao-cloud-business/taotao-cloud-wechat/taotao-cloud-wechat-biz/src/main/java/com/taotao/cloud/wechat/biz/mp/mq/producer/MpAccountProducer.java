@@ -29,7 +29,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MpAccountProducer {
 
-    @Resource private RedisMQTemplate redisMQTemplate;
+    @Resource
+    private RedisMQTemplate redisMQTemplate;
 
     /** 发送 {@link MpAccountRefreshMessage} 消息 */
     public void sendAccountRefreshMessage() {

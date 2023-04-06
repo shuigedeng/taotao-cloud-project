@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResetAppConfigMQReceiver implements ResetAppConfigMQ.IMQReceiver {
 
-    @Autowired private SysConfigService sysConfigService;
+    @Autowired
+    private SysConfigService sysConfigService;
 
     @Override
     public void receive(ResetAppConfigMQ.MsgPayload payload) {

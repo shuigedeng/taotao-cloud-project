@@ -75,10 +75,9 @@ public class DAGSimulationProcessor implements MapReduceProcessor {
     @Override
     public ProcessResult reduce(TaskContext context, List<TaskResult> taskResults) {
         // L4. 执行最终 Reduce 任务，taskResults保存了之前所有任务的结果
-        taskResults.forEach(
-                taskResult -> {
-                    // do something...
-                });
+        taskResults.forEach(taskResult -> {
+            // do something...
+        });
         return new ProcessResult(true, "reduce success");
     }
 

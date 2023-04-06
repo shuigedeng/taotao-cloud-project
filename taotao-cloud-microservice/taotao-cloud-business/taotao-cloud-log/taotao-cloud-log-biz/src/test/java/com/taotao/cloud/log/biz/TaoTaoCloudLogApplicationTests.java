@@ -18,42 +18,38 @@ package com.taotao.cloud.log.biz;
 
 import com.taotao.cloud.log.biz.log.param.LoginLogParam;
 import com.taotao.cloud.log.biz.log.service.LoginLogService;
-import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-
-import java.time.LocalDateTime;
 
 @SpringBootTest
 class TaoTaoCloudLogApplicationTests {
 
-	@Autowired
-	private LoginLogService loginLogService;
+    @Autowired
+    private LoginLogService loginLogService;
 
     @Test
     public void contextLoads() {}
 
-	@Test
-	public void save() {
-		LoginLogParam param = new LoginLogParam();
-		param.setUserId(0L);
-		param.setAccount("aa");
-		param.setLogin(false);
-		param.setClient("aaa");
-		param.setLoginType("bbb");
-		param.setIp("ccc");
-		param.setLoginLocation("cc");
-		param.setBrowser("vv");
-		param.setOs("aa");
-		param.setMsg("");
-		param.setLoginTime(LocalDateTime.now());
-		param.setCurrentPage(0);
-		param.setPageSize(0);
-		param.setSort("");
-		param.setOrder("");
-		loginLogService.add(param);
-
-	}
+    @Test
+    public void save() {
+        LoginLogParam param = new LoginLogParam();
+        param.setUserId(0L);
+        param.setAccount("aa");
+        param.setLogin(false);
+        param.setClient("aaa");
+        param.setLoginType("bbb");
+        param.setIp("ccc");
+        param.setLoginLocation("cc");
+        param.setBrowser("vv");
+        param.setOs("aa");
+        param.setMsg("");
+        param.setLoginTime(LocalDateTime.now());
+        param.setCurrentPage(0);
+        param.setPageSize(0);
+        param.setSort("");
+        param.setOrder("");
+        loginLogService.add(param);
+    }
 }

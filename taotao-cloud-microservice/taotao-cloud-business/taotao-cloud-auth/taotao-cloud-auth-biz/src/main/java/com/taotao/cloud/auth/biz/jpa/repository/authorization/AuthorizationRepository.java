@@ -34,12 +34,10 @@ public interface AuthorizationRepository extends JpaRepository<Authorization, St
 
     Optional<Authorization> findByRefreshTokenValue(String refreshToken);
 
-    @Query(
-            "select a from Authorization a where a.state = :token"
-                    + " or a.authorizationCodeValue = :token"
-                    + " or a.accessTokenValue = :token"
-                    + " or a.refreshTokenValue = :token")
-    Optional<Authorization>
-            findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
-                    @Param("token") String token);
+    @Query("select a from Authorization a where a.state = :token"
+            + " or a.authorizationCodeValue = :token"
+            + " or a.accessTokenValue = :token"
+            + " or a.refreshTokenValue = :token")
+    Optional<Authorization> findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValue(
+            @Param("token") String token);
 }

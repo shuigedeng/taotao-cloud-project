@@ -30,8 +30,7 @@ public interface IDistributionOrderService extends IService<DistributionOrder> {
      * @param distributionOrderPageQuery 分销订单搜索参数
      * @return 分销订单分页
      */
-    IPage<DistributionOrder> getDistributionOrderPage(
-            DistributionOrderPageQuery distributionOrderPageQuery);
+    IPage<DistributionOrder> getDistributionOrderPage(DistributionOrderPageQuery distributionOrderPageQuery);
 
     /**
      * 支付订单 记录分销订单

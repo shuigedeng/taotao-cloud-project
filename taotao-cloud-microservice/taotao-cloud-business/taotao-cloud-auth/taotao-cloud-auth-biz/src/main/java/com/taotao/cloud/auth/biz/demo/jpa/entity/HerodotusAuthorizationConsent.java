@@ -40,9 +40,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(
         name = "oauth2_authorization_consent",
         indexes = {
-            @Index(
-                    name = "oauth2_authorization_consent_rcid_idx",
-                    columnList = "registered_client_id"),
+            @Index(name = "oauth2_authorization_consent_rcid_idx", columnList = "registered_client_id"),
             @Index(name = "oauth2_authorization_consent_pn_idx", columnList = "principal_name")
         })
 @IdClass(HerodotusAuthorizationConsentId.class)

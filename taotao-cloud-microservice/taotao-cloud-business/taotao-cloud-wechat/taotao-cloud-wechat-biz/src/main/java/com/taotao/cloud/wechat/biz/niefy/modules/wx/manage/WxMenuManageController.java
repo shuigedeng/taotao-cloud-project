@@ -42,7 +42,9 @@ import org.springframework.web.bind.annotation.*;
 public class WxMenuManageController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private final WxMpService wxService;
-    @Autowired private WxMpService wxMpService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     /** 获取公众号菜单 */
     @GetMapping("/getMenu")
@@ -57,8 +59,7 @@ public class WxMenuManageController {
     @PostMapping("/updateMenu")
     @RequiresPermissions("wx:menu:save")
     @ApiOperation(value = "创建、更新菜单")
-    public R updateMenu(@CookieValue String appid, @RequestBody WxMenu wxMenu)
-            throws WxErrorException {
+    public R updateMenu(@CookieValue String appid, @RequestBody WxMenu wxMenu) throws WxErrorException {
         wxMpService.switchoverTo(appid);
         wxService.getMenuService().menuCreate(wxMenu);
         return R.ok();

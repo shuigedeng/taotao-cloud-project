@@ -42,7 +42,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/transferOrders")
 public class TransferOrderController extends CommonCtrl {
 
-    @Autowired private TransferOrderService transferOrderService;
+    @Autowired
+    private TransferOrderService transferOrderService;
 
     /** list * */
     @PreAuthorize("hasAuthority('ENT_TRANSFER_ORDER_LIST')")
@@ -52,8 +53,7 @@ public class TransferOrderController extends CommonCtrl {
         TransferOrder transferOrder = getObject(TransferOrder.class);
         JSONObject paramJSON = getReqParamJSON();
         LambdaQueryWrapper<TransferOrder> wrapper = TransferOrder.gw();
-        IPage<TransferOrder> pages =
-                transferOrderService.pageList(getIPage(), wrapper, transferOrder, paramJSON);
+        IPage<TransferOrder> pages = transferOrderService.pageList(getIPage(), wrapper, transferOrder, paramJSON);
 
         return ApiRes.page(pages);
     }

@@ -43,11 +43,14 @@ import org.springframework.stereotype.Component;
 public class TradeCashier implements CashierExecute {
 
     /** 交易 */
-    @Autowired private IFeignTradeApi tradeApi;
+    @Autowired
+    private IFeignTradeApi tradeApi;
     /** 订单 */
-    @Autowired private IFeignOrderApi orderApi;
+    @Autowired
+    private IFeignOrderApi orderApi;
     /** 设置 */
-    @Autowired private IFeignSettingApi settingApi;
+    @Autowired
+    private IFeignSettingApi settingApi;
 
     @Override
     public CashierEnum cashierEnum() {
@@ -81,8 +84,7 @@ public class TradeCashier implements CashierExecute {
             cashierParam.setPrice(trade.getFlowPrice());
 
             try {
-                BaseSetting baseSetting =
-                        settingApi.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
+                BaseSetting baseSetting = settingApi.getBaseSetting(SettingCategoryEnum.BASE_SETTING.name());
                 cashierParam.setTitle(baseSetting.getSiteName());
             } catch (Exception e) {
                 cashierParam.setTitle("多用户商城，在线支付");

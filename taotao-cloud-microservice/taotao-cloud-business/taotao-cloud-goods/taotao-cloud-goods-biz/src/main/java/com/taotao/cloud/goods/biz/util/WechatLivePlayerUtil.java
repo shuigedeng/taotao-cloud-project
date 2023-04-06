@@ -39,7 +39,8 @@ public class WechatLivePlayerUtil {
     // private WechatAccessTokenUtil wechatAccessTokenUtil;
 
     /** 微信媒体实效 */
-    @Autowired private WechatMediaUtil wechatMediaUtil;
+    @Autowired
+    private WechatMediaUtil wechatMediaUtil;
 
     /**
      * 创建小程序直播间

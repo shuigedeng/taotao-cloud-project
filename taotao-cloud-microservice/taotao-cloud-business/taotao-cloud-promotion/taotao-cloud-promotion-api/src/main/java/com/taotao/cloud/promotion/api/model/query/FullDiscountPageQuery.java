@@ -33,7 +33,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FullDiscountPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
-    @Serial private static final long serialVersionUID = -4052716630253333681L;
+    @Serial
+    private static final long serialVersionUID = -4052716630253333681L;
 
     @Schema(description = "活动名称")
     private String promotionName;

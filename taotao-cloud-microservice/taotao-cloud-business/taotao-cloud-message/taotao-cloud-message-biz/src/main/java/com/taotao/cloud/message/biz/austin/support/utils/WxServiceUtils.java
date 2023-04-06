@@ -55,7 +55,8 @@ public class WxServiceUtils {
 
     private Map<Long, WxMaSubscribeService> miniProgramServiceMap = new ConcurrentHashMap<>();
 
-    @Autowired private ChannelAccountDao channelAccountDao;
+    @Autowired
+    private ChannelAccountDao channelAccountDao;
 
     @PostConstruct
     public void init() {
@@ -70,29 +71,23 @@ public class WxServiceUtils {
 
     /** 得到所有的小程序账号 */
     private void initMiniProgram() {
-        List<ChannelAccount> miniProgram =
-                channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-                        CommonConstant.FALSE, ChannelType.MINI_PROGRAM.getCode());
+        List<ChannelAccount> miniProgram = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                CommonConstant.FALSE, ChannelType.MINI_PROGRAM.getCode());
         for (ChannelAccount channelAccount : miniProgram) {
             WeChatMiniProgramAccount weChatMiniProgramAccount =
-                    JSON.parseObject(
-                            channelAccount.getAccountConfig(), WeChatMiniProgramAccount.class);
-            miniProgramServiceMap.put(
-                    channelAccount.getId(), initMiniProgramService(weChatMiniProgramAccount));
+                    JSON.parseObject(channelAccount.getAccountConfig(), WeChatMiniProgramAccount.class);
+            miniProgramServiceMap.put(channelAccount.getId(), initMiniProgramService(weChatMiniProgramAccount));
         }
     }
 
     /** 得到所有的微信服务号账号 */
     private void initOfficialAccount() {
-        List<ChannelAccount> officialAccountList =
-                channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
-                        CommonConstant.FALSE, ChannelType.OFFICIAL_ACCOUNT.getCode());
+        List<ChannelAccount> officialAccountList = channelAccountDao.findAllByIsDeletedEqualsAndSendChannelEquals(
+                CommonConstant.FALSE, ChannelType.OFFICIAL_ACCOUNT.getCode());
         for (ChannelAccount channelAccount : officialAccountList) {
             WeChatOfficialAccount weChatOfficialAccount =
-                    JSON.parseObject(
-                            channelAccount.getAccountConfig(), WeChatOfficialAccount.class);
-            officialAccountServiceMap.put(
-                    channelAccount.getId(), initOfficialAccountService(weChatOfficialAccount));
+                    JSON.parseObject(channelAccount.getAccountConfig(), WeChatOfficialAccount.class);
+            officialAccountServiceMap.put(channelAccount.getId(), initOfficialAccountService(weChatOfficialAccount));
         }
     }
 
@@ -116,8 +111,7 @@ public class WxServiceUtils {
      *
      * @return
      */
-    private WxMaSubscribeServiceImpl initMiniProgramService(
-            WeChatMiniProgramAccount miniProgramAccount) {
+    private WxMaSubscribeServiceImpl initMiniProgramService(WeChatMiniProgramAccount miniProgramAccount) {
         WxMaService wxMaService = new WxMaServiceImpl();
         WxMaDefaultConfigImpl wxMaConfig = new WxMaDefaultConfigImpl();
         wxMaConfig.setAppid(miniProgramAccount.getAppId());

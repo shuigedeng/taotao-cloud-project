@@ -163,12 +163,8 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
      * @return
      */
     protected boolean createTransterOrRecodeRecorder() {
-        recorder =
-                new FFmpegFrameRecorder(
-                        bos,
-                        grabber.getImageWidth(),
-                        grabber.getImageHeight(),
-                        grabber.getAudioChannels());
+        recorder = new FFmpegFrameRecorder(
+                bos, grabber.getImageWidth(), grabber.getImageHeight(), grabber.getAudioChannels());
         recorder.setFormat("flv");
         if (!transferFlag) {
             // 转码
@@ -379,8 +375,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
         // ws
         for (Entry<String, ChannelHandlerContext> entry : wsClients.entrySet()) {
             if (entry.getValue().channel().isWritable()) {
-                entry.getValue()
-                        .writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(data)));
+                entry.getValue().writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(data)));
             } else {
                 wsClients.remove(entry.getKey());
                 hasClient();
@@ -409,11 +404,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
         if (hcSize != newHcSize || wcSize != newWcSize) {
             hcSize = newHcSize;
             wcSize = newWcSize;
-            LogUtils.info(
-                    "\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n",
-                    cameraDto.getUrl(),
-                    newHcSize,
-                    newWcSize);
+            LogUtils.info("\r\n{}\r\nhttp连接数：{}, ws连接数：{} \r\n", cameraDto.getUrl(), newHcSize, newWcSize);
         }
 
         // 无需自动关闭
@@ -438,20 +429,18 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
 
     /** 监听客户端，用于判断无人观看时自动关闭推流 */
     public void listenClient() {
-        listenThread =
-                new Thread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                while (running) {
-                                    hasClient();
-                                    try {
-                                        Thread.sleep(1000);
-                                    } catch (InterruptedException e) {
-                                    }
-                                }
-                            }
-                        });
+        listenThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (running) {
+                    hasClient();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        });
         listenThread.start();
     }
 
@@ -515,30 +504,25 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
                     // 发送帧前先发送header
                     if (ClientType.HTTP.getType() == ctype.getType()) {
                         ChannelFuture future = ctx.writeAndFlush(Unpooled.copiedBuffer(header));
-                        future.addListener(
-                                new GenericFutureListener<Future<? super Void>>() {
-                                    @Override
-                                    public void operationComplete(Future<? super Void> future)
-                                            throws Exception {
-                                        if (future.isSuccess()) {
-                                            httpClients.put(ctx.channel().id().toString(), ctx);
-                                        }
-                                    }
-                                });
+                        future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                            @Override
+                            public void operationComplete(Future<? super Void> future) throws Exception {
+                                if (future.isSuccess()) {
+                                    httpClients.put(ctx.channel().id().toString(), ctx);
+                                }
+                            }
+                        });
                     } else if (ClientType.WEBSOCKET.getType() == ctype.getType()) {
                         ChannelFuture future =
-                                ctx.writeAndFlush(
-                                        new BinaryWebSocketFrame(Unpooled.copiedBuffer(header)));
-                        future.addListener(
-                                new GenericFutureListener<Future<? super Void>>() {
-                                    @Override
-                                    public void operationComplete(Future<? super Void> future)
-                                            throws Exception {
-                                        if (future.isSuccess()) {
-                                            wsClients.put(ctx.channel().id().toString(), ctx);
-                                        }
-                                    }
-                                });
+                                ctx.writeAndFlush(new BinaryWebSocketFrame(Unpooled.copiedBuffer(header)));
+                        future.addListener(new GenericFutureListener<Future<? super Void>>() {
+                            @Override
+                            public void operationComplete(Future<? super Void> future) throws Exception {
+                                if (future.isSuccess()) {
+                                    wsClients.put(ctx.channel().id().toString(), ctx);
+                                }
+                            }
+                        });
                     }
                 }
 

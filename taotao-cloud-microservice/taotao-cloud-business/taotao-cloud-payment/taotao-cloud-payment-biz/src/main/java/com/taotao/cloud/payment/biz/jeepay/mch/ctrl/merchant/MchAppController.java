@@ -41,8 +41,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/mchApps")
 public class MchAppController extends CommonCtrl {
 
-    @Autowired private MchAppService mchAppService;
-    @Autowired private IMQSender mqSender;
+    @Autowired
+    private MchAppService mchAppService;
+
+    @Autowired
+    private IMQSender mqSender;
 
     /**
      * @Author: ZhuXiao @Description: 应用列表 @Date: 9:59 2021/6/16
@@ -110,12 +113,8 @@ public class MchAppController extends CommonCtrl {
             return ApiRes.fail(ApiCodeEnum.SYS_OPERATION_FAIL_UPDATE);
         }
         // 推送修改应用消息
-        mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
-                        null,
-                        mchApp.getMchNo(),
-                        appId));
+        mqSender.send(ResetIsvMchAppInfoConfigMQ.build(
+                ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, mchApp.getMchNo(), appId));
         return ApiRes.ok();
     }
 
@@ -135,12 +134,8 @@ public class MchAppController extends CommonCtrl {
         mchAppService.removeByAppId(appId);
 
         // 推送mq到目前节点进行更新数据
-        mqSender.send(
-                ResetIsvMchAppInfoConfigMQ.build(
-                        ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP,
-                        null,
-                        mchApp.getMchNo(),
-                        appId));
+        mqSender.send(ResetIsvMchAppInfoConfigMQ.build(
+                ResetIsvMchAppInfoConfigMQ.RESET_TYPE_MCH_APP, null, mchApp.getMchNo(), appId));
         return ApiRes.ok();
     }
 }

@@ -63,55 +63,37 @@ public class JsonMapper extends ObjectMapper {
         // 设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
         this.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         // 空值处理为空串
-        this.getSerializerProvider()
-                .setNullValueSerializer(
-                        new JsonSerializer<Object>() {
-                            @Override
-                            public void serialize(
-                                    Object value, JsonGenerator jgen, SerializerProvider provider)
-                                    throws IOException, JsonProcessingException {
-                                jgen.writeString("");
-                            }
-                        });
+        this.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+            @Override
+            public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider)
+                    throws IOException, JsonProcessingException {
+                jgen.writeString("");
+            }
+        });
         // 统一默认Date类型转换格式。如果设置，Bean中的@JsonFormat将无效
         final String dataFormat = "yyyy-MM-dd HH:mm:ss";
         final SimpleDateFormat sdf = new SimpleDateFormat(dataFormat);
         if (StringUtils.isNotBlank(dataFormat)) {
-            this.registerModule(
-                    new SimpleModule()
-                            .addSerializer(
-                                    Date.class,
-                                    new JsonSerializer<Date>() {
-                                        @Override
-                                        public void serialize(
-                                                Date value,
-                                                JsonGenerator jgen,
-                                                SerializerProvider provider)
-                                                throws IOException, JsonProcessingException {
-                                            if (value != null) {
-                                                jgen.writeString(sdf.format(value));
-                                            }
-                                        }
-                                    }));
+            this.registerModule(new SimpleModule().addSerializer(Date.class, new JsonSerializer<Date>() {
+                @Override
+                public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider)
+                        throws IOException, JsonProcessingException {
+                    if (value != null) {
+                        jgen.writeString(sdf.format(value));
+                    }
+                }
+            }));
         }
         // 进行HTML解码。
-        this.registerModule(
-                new SimpleModule()
-                        .addSerializer(
-                                String.class,
-                                new JsonSerializer<String>() {
-                                    @Override
-                                    public void serialize(
-                                            String value,
-                                            JsonGenerator jgen,
-                                            SerializerProvider provider)
-                                            throws IOException, JsonProcessingException {
-                                        if (value != null) {
-                                            jgen.writeString(
-                                                    StringEscapeUtils.unescapeHtml4(value));
-                                        }
-                                    }
-                                }));
+        this.registerModule(new SimpleModule().addSerializer(String.class, new JsonSerializer<String>() {
+            @Override
+            public void serialize(String value, JsonGenerator jgen, SerializerProvider provider)
+                    throws IOException, JsonProcessingException {
+                if (value != null) {
+                    jgen.writeString(StringEscapeUtils.unescapeHtml4(value));
+                }
+            }
+        }));
         // 设置时区
         this.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
     }

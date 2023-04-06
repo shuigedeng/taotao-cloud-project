@@ -43,8 +43,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workflow/Form/PurchaseList")
 public class PurchaseListController {
 
-    @Autowired private PurchaseListService purchaseListService;
-    @Autowired private FlowTaskOperatorService flowTaskOperatorService;
+    @Autowired
+    private PurchaseListService purchaseListService;
+
+    @Autowired
+    private FlowTaskOperatorService flowTaskOperatorService;
 
     /**
      * 获取日常物品采购清单信息
@@ -54,8 +57,7 @@ public class PurchaseListController {
      */
     @Operation("获取日常物品采购清单信息")
     @GetMapping("/{id}")
-    public Result<PurchaseListInfoVO> info(@PathVariable("id") String id, String taskOperatorId)
-            throws DataException {
+    public Result<PurchaseListInfoVO> info(@PathVariable("id") String id, String taskOperatorId) throws DataException {
         PurchaseListInfoVO vo = null;
         boolean isData = true;
         if (StringUtil.isNotEmpty(taskOperatorId)) {
@@ -71,8 +73,7 @@ public class PurchaseListController {
             PurchaseListEntity entity = purchaseListService.getInfo(id);
             List<PurchaseListEntryEntity> entityList = purchaseListService.getPurchaseEntryList(id);
             vo = JsonUtils.getJsonToBean(entity, PurchaseListInfoVO.class);
-            vo.setEntryList(
-                    JsonUtils.getJsonToList(entityList, PurchaseListEntryEntityInfoModel.class));
+            vo.setEntryList(JsonUtils.getJsonToList(entityList, PurchaseListEntryEntityInfoModel.class));
         }
         return Result.success(vo);
     }
@@ -87,20 +88,15 @@ public class PurchaseListController {
     @Operation("新建日常物品采购清单")
     @PostMapping
     public Result create(@RequestBody PurchaseListForm purchaseListForm) throws WorkFlowException {
-        PurchaseListEntity procurement =
-                JsonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
+        PurchaseListEntity procurement = JsonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
         List<PurchaseListEntryEntity> procurementEntryList =
-                JsonUtils.getJsonToList(
-                        purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
+                JsonUtils.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(purchaseListForm.getStatus())) {
             purchaseListService.save(procurement.getId(), procurement, procurementEntryList);
             return Result.success(MsgCode.SU002.get());
         }
         purchaseListService.submit(
-                procurement.getId(),
-                procurement,
-                procurementEntryList,
-                purchaseListForm.getCandidateList());
+                procurement.getId(), procurement, procurementEntryList, purchaseListForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 
@@ -114,20 +110,16 @@ public class PurchaseListController {
      */
     @Operation("修改日常物品采购清单")
     @PutMapping("/{id}")
-    public Result update(
-            @RequestBody PurchaseListForm purchaseListForm, @PathVariable("id") String id)
+    public Result update(@RequestBody PurchaseListForm purchaseListForm, @PathVariable("id") String id)
             throws WorkFlowException {
-        PurchaseListEntity procurement =
-                JsonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
+        PurchaseListEntity procurement = JsonUtils.getJsonToBean(purchaseListForm, PurchaseListEntity.class);
         List<PurchaseListEntryEntity> procurementEntryList =
-                JsonUtils.getJsonToList(
-                        purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
+                JsonUtils.getJsonToList(purchaseListForm.getEntryList(), PurchaseListEntryEntity.class);
         if (FlowStatusEnum.save.getMessage().equals(purchaseListForm.getStatus())) {
             purchaseListService.save(id, procurement, procurementEntryList);
             return Result.success(MsgCode.SU002.get());
         }
-        purchaseListService.submit(
-                id, procurement, procurementEntryList, purchaseListForm.getCandidateList());
+        purchaseListService.submit(id, procurement, procurementEntryList, purchaseListForm.getCandidateList());
         return Result.success(MsgCode.SU006.get());
     }
 }
