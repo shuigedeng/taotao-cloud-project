@@ -5,7 +5,7 @@ name: Microservice Docker graalvm Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
@@ -25,8 +25,11 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
+
       - name: show release
         run: lsb_release -a
+
+      #https://github.com/marketplace/actions/github-action-for-graalvm
       - uses: graalvm/setup-graalvm@v1
         with:
           version: '22.3.0'
@@ -34,6 +37,8 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+
+      #https://github.com/marketplace/actions/gradle-build-action
       - name: Gradle BootJar taotao-cloud-job-biz
         uses: gradle/gradle-build-action@v2
         with:
