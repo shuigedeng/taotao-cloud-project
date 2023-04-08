@@ -24,7 +24,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
-    implementation 'com.maciejwalkowiak.spring:spring-boot-startup-report:0.1.0'
+    //implementation 'com.maciejwalkowiak.spring:spring-boot-startup-report:0.2.0'
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     //implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
@@ -102,22 +102,22 @@ graalvmNative {
             buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback')
             buildArgs.add('--initialize-at-run-time=io.netty')
             buildArgs.add('--no-fallback')
-            buildArgs.add('--initialize-at-build-time=org.springframework.util.unit.DataSize')
-            buildArgs.add('--initialize-at-build-time=org.slf4j.MDC')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.Level')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.Logger')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.util.StatusPrinter')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.status.StatusBase')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.status.InfoStatus')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.spi.AppenderAttachableImpl')
-            buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.util.Loader')
-            buildArgs.add('--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.spi.ThrowableProxy')
-            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.CoreConstants')
-            buildArgs.add('--report-unsupported-elements-at-runtime')
-            buildArgs.add('--allow-incomplete-classpath')
-            buildArgs.add('-H:+ReportExceptionStackTraces')
+//            buildArgs.add('--initialize-at-build-time=org.springframework.util.unit.DataSize')
+//            buildArgs.add('--initialize-at-build-time=org.slf4j.MDC')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.Level')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.Logger')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.util.StatusPrinter')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.status.StatusBase')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.status.InfoStatus')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.spi.AppenderAttachableImpl')
+//            buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.util.Loader')
+//            buildArgs.add('--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.spi.ThrowableProxy')
+//            buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.CoreConstants')
+//            buildArgs.add('--report-unsupported-elements-at-runtime')
+//            buildArgs.add('--allow-incomplete-classpath')
+//            buildArgs.add('-H:+ReportExceptionStackTraces')
         }
     }
 }
