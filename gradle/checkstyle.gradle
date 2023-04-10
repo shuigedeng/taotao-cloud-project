@@ -20,7 +20,7 @@ checkstyle {
     // Whether or not rule violations are to be displayed on the console.
     showViolations = true
 
-    reportsDir = file("$project.buildDir/code-analysis/checkstyle")
+    reportsDir = file("$project.buildDir/code-analysis/checkstyleReportsDir")
 }
 
 tasks.withType(Checkstyle) {

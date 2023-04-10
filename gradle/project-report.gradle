@@ -1,0 +1,4 @@
+apply plugin: 'project-report'
+
+//reportsDir = file("$project.buildDir/code-analysis/projectReportsDir")
+

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- My preferred PMD configuration. -->
+<ruleset name="Custom ruleset"
+		 xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+	<description>
+		PMD configuration.
+	</description>
+
+	<rule ref="category/java/codestyle.xml/ClassNamingConventions">
+		<properties>
+			<!-- I don't like forcing certain classes to be name Factory or Util. The pattern is useful -->
+			<!-- for other types of classes as well. -->
+			<property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]*" />
+		</properties>
+	</rule>
+	<rule ref="category/java/codestyle.xml/ShortMethodName">
+		<properties>
+			<!-- "of" is a ver common function name. -->
+			<property name="minimum" value="4" />
+		</properties>
+	</rule>
+	<rule ref="category/java/codestyle.xml/LinguisticNaming" >
+		<properties>
+			<!-- I prefer the builder pattern for setters. This rule requires you to return void. -->
+			<property name="checkSetters" value="false" />
+			<!--The way I like to name tests breaks this rule, so ignore anything annotated as @Test. -->
+			<property name="violationSuppressXPath" value="//ClassOrInterfaceBodyDeclaration/Annotation/MarkerAnnotation//Name[@Image='Test']" />
+		</properties>
+	</rule>
+	<rule ref="category/java/codestyle.xml/MethodNamingConventions" >
+		<properties>
+			<!-- I like have underscores in my test names. This allows for that. -->
+			<property name="junit4TestPattern" value="[a-z][a-zA-Z0-9_]*" />
+		</properties>
+	</rule>
+	<rule ref="category/java/documentation.xml/CommentSize">
+		<properties>
+			<!-- 6 lines is too restrictive for comment length as it includes the Javadoc comments. -->
+			<property name="maxLines" value="30" />
+			<!-- I want the line size to match the code requirement. -->
+			<property name="maxLineLength" value="150" />
+		</properties>
+	</rule>
+</ruleset>

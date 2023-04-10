@@ -1,0 +1,17 @@
+apply plugin: 'pmd'
+
+pmd {
+    //targetJdk = 17
+    consoleOutput = true
+    threads = 4
+    ignoreFailures = true
+    incrementalAnalysis = true
+    reportsDir = file("$project.buildDir/code-analysis/pmdReportsDir")
+    //https://github.com/pmd/pmd/releases
+    toolVersion = "6.55.0"                             // The version of PMD to use.
+    ruleSetFiles = files(rootProject.file('code-analysis/pmd/pmd.xml'))       // The location of the configuration file.
+    ruleSets = []                                      // Ignore the default rules. The ones this config
+    // uses are set with the ruleSetFiles property.
+    rulesMinimumPriority = 5
+
+}

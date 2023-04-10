@@ -41,7 +41,7 @@ spotbugsMain {
     reports {
         html {
             required = true
-            outputLocation = file("$buildDir/code-analysis/spotbugs/spotbugs.html")
+            outputLocation = file("$buildDir/code-analysis/spotbugsReportDir/spotbugs.html")
             stylesheet = 'fancy-hist.xsl'
         }
     }
