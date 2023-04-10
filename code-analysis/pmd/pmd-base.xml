@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- A Sample PMD configuration file that turns on a set of rules -->
+<!-- but has no special configuration of the rules. -->
+<ruleset name="Custom ruleset"
+		 xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+	<description>
+		PMD Basic Configuration
+	</description>
+
+	<rule ref="category/java/bestpractices.xml" />
+
+	<rule ref="category/java/codestyle.xml" />
+
+	<rule ref="category/java/design.xml" deprecated="true"/>
+
+	<rule ref="category/java/documentation.xml"/>
+
+	<rule ref="category/java/multithreading.xml" deprecated="true"/>
+
+	<rule ref="category/java/performance.xml" deprecated="true"/>
+
+	<rule ref="category/java/security.xml" deprecated="true"/>
+
+	<rule ref="rulesets/java/quickstart.xml" deprecated="true"/>
+
+	<rule ref="category/java/errorprone.xml" deprecated="true"/>
+
+</ruleset>

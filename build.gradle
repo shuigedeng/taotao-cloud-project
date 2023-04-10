@@ -78,21 +78,33 @@ plugins {
     //https://docs.gradle.org/current/userguide/plugin_reference.html
 
     //Java 插件将 Java 编译以及测试和捆绑功能添加到项目中。它是许多其他 JVM 语言 Gradle 插件的基础
+    //https://docs.gradle.org/current/userguide/java_plugin.html#java_plugin
     id 'java'
     // Java 库插件通过提供有关 Java 库的特定知识来扩展 Java 插件的功能。
+    //https://docs.gradle.org/current/userguide/java_library_plugin.html#java_library_plugin
     id 'java-library'
     //IDEA 插件生成 IntelliJ IDEA 使用的文件，从而可以从 IDEA（文件 - 打开项目）打开项目。外部依赖项（包括相关的源文件和 Javadoc 文件）和项目依赖项都被考虑在内。
+    //https://docs.gradle.org/current/userguide/idea_plugin.html#idea_plugin
     id 'idea'
     //签名插件增加了对构建文件和工件进行数字签名的能力。然后，这些数字签名可用于证明谁构建了签名所附加的工件以及其他信息，例如生成签名的时间。
+    //https://docs.gradle.org/current/userguide/signing_plugin.html#signing_plugin
     id 'signing'
     //Maven 发布插件提供了将构建工件发布到 Apache Maven 存储库的能力
+    //https://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven
     id 'maven-publish'
     //JaCoCo 插件通过与 JaCoCo 集成为 Java 代码提供代码覆盖率指标。
+    //https://docs.gradle.org/current/userguide/jacoco_plugin.html#jacoco_plugin
     id 'jacoco'
     //Checkstyle 插件使用 Checkstyle 对项目的 Java 源文件执行质量检查，并根据这些检查生成报告。
+    //https://docs.gradle.org/current/userguide/checkstyle_plugin.html#checkstyle_plugin
     id 'checkstyle'
     //Application 插件有助于创建可执行的 JVM 应用程序。它可以在开发过程中轻松地在本地启动应用程序，并将应用程序打包为 TAR 和/或 ZIP，包括操作系统特定的启动脚本。
+    //https://docs.gradle.org/current/userguide/application_plugin.html#application_plugin
     id 'application'
+    //https://docs.gradle.org/current/userguide/pmd_plugin.html
+    id 'pmd'
+    //https://docs.gradle.org/current/userguide/project_report_plugin.html#project_report_plugin
+    id 'project-report'
 
     // *******************************************第三方插件************************************************************
     //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
@@ -229,6 +241,8 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
     apply from: rootProject.file('gradle/checkstyle.gradle')
     apply from: rootProject.file('gradle/spotless.gradle')
     apply from: rootProject.file('gradle/spotbugs.gradle')
+    apply from: rootProject.file('gradle/pmd.gradle')
+    apply from: rootProject.file('gradle/project-report.gradle')
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
