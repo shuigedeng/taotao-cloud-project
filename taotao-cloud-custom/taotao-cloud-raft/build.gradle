@@ -1,0 +1,17 @@
+dependencies {
+    testImplementation "junit:junit:4.13.2"
+
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation('com.alipay.sofa:bolt:1.6.6') {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    implementation 'com.alibaba:fastjson:2.0.27'
+    implementation 'com.alipay.sofa:hessian:4.0.4'
+    implementation "redis.clients:jedis:4.3.2"
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.rocksdb:rocksdbjni:5.17.2'
+
+    implementation "org.projectlombok:lombok:1.18.26"
+    annotationProcessor "org.projectlombok:lombok:1.18.26"
+}

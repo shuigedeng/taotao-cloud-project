@@ -129,7 +129,7 @@ plugins {
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
-    id "com.bmuschko.docker-spring-boot-application" version "9.3.0"
+    id "com.bmuschko.docker-spring-boot-application" version "9.3.1"
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
@@ -155,7 +155,7 @@ plugins {
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
-    id "com.diffplug.spotless" version "6.17.0"
+    id "com.diffplug.spotless" version "6.18.0"
 }
 
 allprojects {
