@@ -4,6 +4,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-useragent"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"

@@ -159,7 +159,7 @@ public class RouterFunctionConfiguration {
 
         private String buildMessage(ServerRequest request) {
             StringBuilder message = new StringBuilder("[");
-            message.append(request.methodName());
+            message.append(request.method().name());
             message.append(" ");
             message.append(request.uri());
             MultiValueMap<String, String> params = request.queryParams();

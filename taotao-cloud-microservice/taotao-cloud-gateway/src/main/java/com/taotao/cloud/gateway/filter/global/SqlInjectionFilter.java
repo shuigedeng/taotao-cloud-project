@@ -23,6 +23,7 @@ import com.taotao.cloud.common.utils.sql.SqlInjectionUtils;
 import com.taotao.cloud.gateway.utils.WebFluxUtil;
 import io.netty.buffer.ByteBufAllocator;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicReference;
@@ -159,7 +160,9 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();
         body.subscribe(buffer -> {
-            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.toByteBuffer());
+			ByteBuffer byteBuffer = ByteBuffer.allocate(buffer.readableByteCount());
+			buffer.toByteBuffer(byteBuffer);
+            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(byteBuffer);
             DataBufferUtils.release(buffer);
             bodyRef.set(charBuffer.toString());
         });

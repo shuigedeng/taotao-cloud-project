@@ -4,6 +4,9 @@ plugins {
     id "org.jetbrains.intellij" version "1.13.3"
 }
 
+apply plugin: "java"
+apply plugin: "org.jetbrains.intellij"
+
 dependencies {
     //testImplementation "junit:junit:4.13.2"
 

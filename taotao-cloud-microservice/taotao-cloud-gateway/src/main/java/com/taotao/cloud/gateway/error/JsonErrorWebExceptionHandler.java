@@ -68,7 +68,7 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
     protected Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
         Throwable error = super.getError(request);
 
-        LogUtils.error("请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}", request.path(), request.methodName(), error.getMessage());
+        LogUtils.error("请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}", request.path(), request.method().name(), error.getMessage());
         LogUtils.error(error.getMessage(), error);
 
         String errorMessage;
