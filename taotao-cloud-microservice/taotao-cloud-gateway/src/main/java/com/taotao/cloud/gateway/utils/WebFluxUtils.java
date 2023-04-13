@@ -21,6 +21,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 import cn.hutool.core.util.ObjectUtil;
 import com.taotao.cloud.gateway.filter.global.GlobalCacheRequestFilter;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashSet;
@@ -72,7 +73,9 @@ public class WebFluxUtils {
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();
         body.subscribe(buffer -> {
-            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.asByteBuffer());
+			ByteBuffer byteBuffer = ByteBuffer.allocate(buffer.readableByteCount());
+			buffer.toByteBuffer(byteBuffer);
+            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(byteBuffer);
             DataBufferUtils.release(buffer);
             bodyRef.set(charBuffer.toString());
         });
@@ -93,7 +96,9 @@ public class WebFluxUtils {
             return null;
         }
         DataBuffer buffer = (DataBuffer) obj;
-        CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.toByteBuffer());
+		ByteBuffer byteBuffer = ByteBuffer.allocate(buffer.readableByteCount());
+		buffer.toByteBuffer(byteBuffer);
+        CharBuffer charBuffer = StandardCharsets.UTF_8.decode(byteBuffer);
         return charBuffer.toString();
     }
 

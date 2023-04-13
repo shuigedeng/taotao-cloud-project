@@ -18,6 +18,8 @@ package com.taotao.cloud.gateway.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.model.Result;
+
+import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -118,7 +120,9 @@ public class WebFluxUtil {
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyReference = new AtomicReference<>();
         body.subscribe(buffer -> {
-            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.toByteBuffer());
+			ByteBuffer byteBuffer = ByteBuffer.allocate(buffer.readableByteCount());
+			buffer.toByteBuffer(byteBuffer);
+            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(byteBuffer);
             DataBufferUtils.release(buffer);
             bodyReference.set(charBuffer.toString());
         });

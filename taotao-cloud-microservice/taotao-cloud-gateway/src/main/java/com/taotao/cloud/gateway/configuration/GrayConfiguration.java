@@ -200,7 +200,7 @@ public class GrayConfiguration {
                 ServiceInstanceListSupplier supplier =
                         this.serviceInstanceListSupplierProvider.getIfAvailable(NoopServiceInstanceListSupplier::new);
 
-                return ((Flux) supplier.get())
+                return supplier.get()
                         .next()
                         .map(list -> getInstanceResponse((List<ServiceInstance>) list, headers));
             }
@@ -294,7 +294,7 @@ public class GrayConfiguration {
         /**
          * 该方法返回权重随机对象
          *
-         * @return
+         * @return t
          */
         public T random() {
             int index = Arrays.binarySearch(weights, ran.nextInt(maxW) + 1);
