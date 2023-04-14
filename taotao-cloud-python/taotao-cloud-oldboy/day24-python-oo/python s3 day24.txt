@@ -1,6 +1,0 @@
-面向对象：
-    Python开发【第七篇】：面向对象
-    http://www.cnblogs.com/wupeiqi/articles/5538623.html
-
-    Python之路【第五篇】：面向对象及相关
-    http://www.cnblogs.com/wupeiqi/articles/5017742.html
