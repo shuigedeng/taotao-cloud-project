@@ -1,7 +1,0 @@
-
-
-
-
-class BaseKingAdmin(object):
-
-    pass

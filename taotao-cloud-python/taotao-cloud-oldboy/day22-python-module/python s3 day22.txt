@@ -1,3 +1,0 @@
-模块：
-    Python开发【第六篇】：模块
-    http://www.cnblogs.com/wupeiqi/articles/5501365.html
