@@ -47,12 +47,9 @@ import org.springframework.boot.SpringApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-sys");
-        try {
-            SpringApplication.run(TaoTaoCloudSysApplication.class, args);
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
-        }
-    }
+	public static void main(String[] args) {
+		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
+
+		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
+	}
 }

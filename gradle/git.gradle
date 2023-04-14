@@ -1,0 +1,20 @@
+apply plugin: "com.gorylenko.gradle-git-properties"
+
+gitProperties {
+    // 日期格式
+    dateFormat = "yyyy-MM-dd HH:mm:ss"
+    // 时区
+    dateFormatTimeZone = "GMT+8"
+    // 生成的 git.properties 文件位置
+    //gitPropertiesDir = new File("${project.dir}/build/resources/main/")
+    // git 文件所在目录
+    //gitRepositoryRoot = new File("${project.rootDir}/")
+    //自定义需要显示的信息
+    //keys = ['git.branch','git.commit.id','git.commit.time','git.commit.user.name','git.build.version']
+
+    customProperty 'project_version', { project.version }
+    //branch = System.getenv('GIT_BRANCH')
+    branch = "dev"
+    failOnNoGitDirectory = false
+    //dotGitDirectory = "${project.rootDir}/.git"
+}
