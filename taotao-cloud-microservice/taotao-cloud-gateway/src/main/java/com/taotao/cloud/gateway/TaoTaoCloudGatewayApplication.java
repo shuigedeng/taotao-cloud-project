@@ -35,13 +35,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class TaoTaoCloudGatewayApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-gateway-springcloud");
+	public static void main(String[] args) {
+		PropertyUtils.setDefaultProperty("taotao-cloud-gateway-springcloud");
 
-        try {
-            SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
-        }
-    }
+		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+	}
 }

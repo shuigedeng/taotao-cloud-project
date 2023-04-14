@@ -156,6 +156,12 @@ plugins {
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
     id "com.diffplug.spotless" version "6.18.0"
+
+    //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
+    id "com.gorylenko.gradle-git-properties" version "2.4.1"
+
+    //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
+    id 'org.graalvm.buildtools.native' version '0.9.20'
 }
 
 allprojects {
@@ -243,6 +249,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
     apply from: rootProject.file('gradle/spotbugs.gradle')
     apply from: rootProject.file('gradle/pmd.gradle')
     apply from: rootProject.file('gradle/project-report.gradle')
+    apply from: rootProject.file('gradle/git.gradle')
 
     dependencies {
         implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
