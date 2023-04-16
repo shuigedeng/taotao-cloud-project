@@ -35,7 +35,7 @@ dependencies {
     //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-mock:2.5.1"
 
     api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-apache-dubbo:2.5.1"
-    api "org.apache.dubbo:dubbo:3.2.0-beta.6"
+    api "org.apache.dubbo:dubbo:3.2.0"
 
     //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-tars:2.5.1"
     //api "com.tencent.tars:tars-client:1.7.2"

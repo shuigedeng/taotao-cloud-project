@@ -57,17 +57,24 @@ graalvmNative {
 
             imageName.set(projectName)
             buildArgs.add('--verbose')
+            buildArgs.add('--no-fallback')
+
             buildArgs.add('--add-opens=java.base/java.nio=ALL-UNNAMED')
             buildArgs.add('--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED')
             buildArgs.add('--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED')
+
             buildArgs.add('--trace-class-initialization=ch.qos.logback.classic.Logger')
-            buildArgs.add('--trace-class-initialization=io.netty.util.AbstractReferenceCounted')
-            buildArgs.add('--trace-class-initialization=io.netty.channel.DefaultFileRegion')
+            buildArgs.add('--trace-class-initialization=java.net.Inet4Address')
+
             buildArgs.add('--trace-object-instantiation=ch.qos.logback.core.AsyncAppenderBase$Worker')
-            buildArgs.add('--no-fallback')
-            buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback')
-            buildArgs.add('--initialize-at-run-time=io.netty')
+            buildArgs.add('--trace-object-instantiation=java.net.Inet4Address')
+
+            //buildArgs.add('--initialize-at-run-time=io.netty')
+            buildArgs.add('--initialize-at-run-time=io.netty.util.NetUtil')
+            //buildArgs.add('--initialize-at-run-time=java.net.Inet4Address')
+
             buildArgs.add('--initialize-at-build-time=org.springframework.util.unit.DataSize')
+            buildArgs.add('--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback')
             buildArgs.add('--initialize-at-build-time=org.slf4j.MDC')
             buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.Level')
             buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.Logger')
@@ -80,8 +87,8 @@ graalvmNative {
             buildArgs.add('--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder')
             buildArgs.add('--initialize-at-build-time=ch.qos.logback.classic.spi.ThrowableProxy')
             buildArgs.add('--initialize-at-build-time=ch.qos.logback.core.CoreConstants')
-            buildArgs.add('--initialize-at-build-time=io.netty.channel.DefaultFileRegion')
-            buildArgs.add('--initialize-at-build-time=io.netty.util.AbstractReferenceCounted')
+//            buildArgs.add('--initialize-at-build-time=io.netty.channel.DefaultFileRegion')
+//            buildArgs.add('--initialize-at-build-time=io.netty.util.AbstractReferenceCounted')
             buildArgs.add('--report-unsupported-elements-at-runtime')
             buildArgs.add('--allow-incomplete-classpath')
             buildArgs.add('-H:+ReportExceptionStackTraces')
