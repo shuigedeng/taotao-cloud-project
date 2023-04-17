@@ -1,0 +1,99 @@
+import proguard.gradle.ProGuardTask
+
+task proguard(type: ProGuardTask) {
+    // 输出混淆前->混淆后的映射
+    printmapping "$buildDir/mapping.txt"
+    // 混淆规则文件
+    configuration rootProject.file('gradle/proguard.pro')
+
+    // 混淆时依赖的库
+    libraryjars configurations.runtimeClasspath.collect()
+
+    // jdk 依赖，区分jdk8 前后版本
+    if (System.getProperty('java.version').startsWith('1.')) {
+        libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+    } else {
+        libraryjars "${System.getProperty('java.home')}/jmods/java.base.jmod", jarfilter: '!**.jar', filter: '!module-info.class'
+        libraryjars "${System.getProperty('java.home')}/jmods/java.desktop.jmod", jarfilter: '!**.jar', filter: '!module-info.class'
+    }
+
+    // 混淆输入
+    //class 混淆
+    injars sourceSets.main.output
+
+    //injars "${project(":xx:a").buildDir}/classes\java\main"
+    //injars "${project(":xx:b").buildDir}/classes\java\main"
+    //injars "${project(":xx:c").buildDir}/classes\java\main"
+    //injars "${project(":xx:d").buildDir}/classes\java\main"
+
+
+    // 混淆输出
+    outjars "$buildDir/classes-pro"
+}
+
+// 清除现有的lib目录
+//task clearJar(type: Delete) {
+//    delete "$buildDir\libs\lib"
+//}
+//
+//// 拷贝配置文件
+//task copyConfigFile(type: Copy) {
+//    // 清除现有的配置目录
+//    delete "$buildDir\libs\config"
+//    from 'src/main/resources'
+//    into 'build/libs/config'
+//}
+//
+//// 将依赖包复制到lib目录
+//task copyJar(type: Copy, dependsOn: 'clearJar') {
+//    from configurations.compileClasspath
+//    into "$buildDir\libs\lib"
+//}
+//
+//
+//task clearSdkJar(type: Delete) {
+//    delete "$buildDir\libs\sdk.jar"
+//}
+
+tasks.register('makeJar', Jar) {
+    //指定生成的jar名
+    baseName 'xx'
+    from sourceSets.main.output
+
+    // lib目录的清除和复制任务
+    dependsOn clearJar
+    dependsOn copyJar
+
+    // 指定依赖包的路径
+    manifest {
+        attributes "Manifest-Version": 1.0,
+                'Main-Class': 'xx.xx.xx',
+                'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
+    }
+
+}
+
+tasks.register('makeProJar', Jar) {
+
+    dependsOn makeJar
+    dependsOn proguard
+
+    //指定生成的jar名
+    baseName 'xx-pro'
+    //从哪里打包class文件
+    from("$buildDir/classes-pro")
+
+    dependsOn copyJar
+
+    // 指定依赖包的路径
+    manifest {
+        attributes "Manifest-Version": 1.0,
+                'Main-Class': 'xx.xx.xx',
+                'Class-Path': configurations.compileClasspath.files.collect { "lib/$it.name" }.join(' ')
+    }
+
+    doLast {
+        delete 'build/libs/lib/com'
+    }
+
+}

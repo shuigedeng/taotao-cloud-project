@@ -70,6 +70,14 @@ buildscript {
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
         classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.14"
+
+        //https://github.com/spring-io/spring-javaformat/
+        classpath("io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.38")
+
+        //代码混淆工具
+        //https://github.com/Guardsquare/proguard
+        //https://www.guardsquare.com/manual/quickstart
+        classpath("com.guardsquare:proguard-gradle:7.3.2")
     }
 }
 
