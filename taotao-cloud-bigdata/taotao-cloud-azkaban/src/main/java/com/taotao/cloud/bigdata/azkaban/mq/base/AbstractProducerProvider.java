@@ -1,8 +1,7 @@
 package com.taotao.cloud.bigdata.azkaban.mq.base;
 
-import com.free.bsf.core.base.Callable;
-import com.free.bsf.mq.rocketmq.RocketMQSendMessage;
-import lombok.val;
+
+import com.taotao.cloud.bigdata.azkaban.mq.rocketmq.RocketMQSendMessage;
 
 /**
  * @author: chejiangyi

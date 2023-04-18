@@ -1,15 +1,9 @@
 package com.taotao.cloud.bigdata.azkaban.mq.rocketmq;
 
-import com.free.bsf.core.util.JsonUtils;
-import com.free.bsf.mq.base.*;
-import lombok.val;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.remoting.common.RemotingHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.free.bsf.core.util.LogUtils;
+import com.taobao.api.internal.util.StringUtils;
+import com.taotao.cloud.bigdata.azkaban.mq.base.*;
 
 import java.util.Arrays;
 
@@ -87,7 +81,7 @@ public class RocketMQProducerProvider extends AbstractProducerProvider {
                 if(msg.getKeys()!=null){
                     message2.setKeys(Arrays.asList(msg.getKeys()));
                 }
-                if(msg.getDelayTimeEnum()!=DelayTimeEnum.None) {
+                if(msg.getDelayTimeEnum()!= DelayTimeEnum.None) {
                     message2.setDelayTimeLevel(msg.getDelayTimeEnum().getCode());
                 }
                 if(msg.getPartitionSelector()!=null) {

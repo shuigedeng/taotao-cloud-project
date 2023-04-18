@@ -1,18 +1,7 @@
 package com.taotao.cloud.bigdata.azkaban.mq.rocketmq;
 
-import com.free.bsf.core.util.JsonUtils;
-import com.free.bsf.core.util.LogUtils;
-import com.free.bsf.mq.base.*;
-import lombok.val;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
-import org.apache.rocketmq.common.message.MessageExt;
-import org.apache.rocketmq.remoting.common.RemotingHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import com.taotao.cloud.bigdata.azkaban.mq.base.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +11,7 @@ import java.util.UUID;
  * @version: 2019-06-12 13:01
  * rocketmq的消费者封装使用提供类
  **/
-public class RocketMQConsumerProvider extends AbstractConsumerProvider{
+public class RocketMQConsumerProvider extends AbstractConsumerProvider {
 
     @Autowired
     RocketMQProperties rocketMQProperties;
