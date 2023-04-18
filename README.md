@@ -132,7 +132,7 @@ Maven:
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
  Guava                | 31.1-jre        
- Grpc                 | 1.54.0          
+ Grpc                 | 1.54.1          
  Arthas               | 3.6.7           
  Dynamic-tp           | 1.1.2           
  Elasticjob           | 3.0.2           
