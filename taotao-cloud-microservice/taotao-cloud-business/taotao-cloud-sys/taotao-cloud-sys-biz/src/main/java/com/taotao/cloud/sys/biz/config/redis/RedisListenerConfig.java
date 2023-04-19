@@ -16,10 +16,12 @@
 
 package com.taotao.cloud.sys.biz.config.redis;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
 import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
+import com.taotao.cloud.sys.api.grpc.DeviceFix;
 import com.taotao.cloud.sys.biz.config.redis.delegate.SensitiveWordsTopicMessageDelegate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,11 +34,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.KeyExpirationEventMessageListener;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.SerializationException;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * RedisListenerConfig
@@ -47,6 +53,46 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
  */
 @Configuration
 public class RedisListenerConfig {
+
+	/**
+	 * 使用protobuf进行redis序列化
+	 * @param redisConnectionFactory
+	 * @return
+	 */
+	@Bean(name = "protoRedisTemplate")
+	public RedisTemplate<String, byte[]> protoRedisTemplate(RedisConnectionFactory redisConnectionFactory){
+		RedisTemplate<String, byte[]> redisTemplate = new RedisTemplate<>();
+		StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+		RedisSerializer<byte[]> bytRedisSerializer = new RedisSerializer<byte[]>() {
+			@Override
+			public byte[] serialize(byte[] bytes) throws SerializationException {
+				return bytes;
+			}
+
+			@Override
+			public byte[] deserialize(byte[] bytes) throws SerializationException {
+				return bytes;
+			}
+		};
+
+		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		redisTemplate.setKeySerializer(stringRedisSerializer);
+		redisTemplate.setHashKeySerializer(stringRedisSerializer);
+
+		redisTemplate.setValueSerializer(bytRedisSerializer);
+		redisTemplate.setHashValueSerializer(bytRedisSerializer);
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
+	}
+
+	public void testProto(RedisTemplate<String, byte[]> protoRedisTemplate) throws InvalidProtocolBufferException {
+		DeviceFix deviceFix = DeviceFix.newBuilder().setType(1).setAddress("aaa").build();
+		protoRedisTemplate.opsForValue().set("deviceFix_prot0"+ deviceFix.getType(), deviceFix.toByteArray());
+
+		byte[] bytes = protoRedisTemplate.opsForValue().get("deviceFix_prot0" + deviceFix.getType());
+		DeviceFix deviceFix1 = DeviceFix.parseFrom(bytes);
+
+	}
 
     @Bean
     @Primary
