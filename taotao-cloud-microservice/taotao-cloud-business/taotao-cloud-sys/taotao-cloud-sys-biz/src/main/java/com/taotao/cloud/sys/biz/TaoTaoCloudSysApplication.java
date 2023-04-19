@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.sys.api.grpc.DeviceFix;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
@@ -49,7 +50,6 @@ public class TaoTaoCloudSysApplication {
 
 	public static void main(String[] args) {
 		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
-
 		SpringApplication.run(TaoTaoCloudSysApplication.class, args);
 	}
 }
