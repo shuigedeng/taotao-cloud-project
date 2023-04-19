@@ -2,7 +2,8 @@
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = "0.8.8"
+    //https://www.eclemma.org/jacoco/
+    toolVersion = "0.8.9"
     reportsDirectory = file("$buildDir/code-analysis/jacocoReportDir")
 }
 /**
