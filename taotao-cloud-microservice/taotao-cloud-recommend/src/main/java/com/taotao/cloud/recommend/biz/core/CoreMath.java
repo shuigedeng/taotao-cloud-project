@@ -92,14 +92,15 @@ public class CoreMath {
         if (n < 2) {
             return 0D;
         }
-        double Ex = xs.stream().mapToDouble(x -> x).sum();
-        double Ey = ys.stream().mapToDouble(y -> y).sum();
-        double Ex2 = xs.stream().mapToDouble(x -> Math.pow(x, 2)).sum();
-        double Ey2 = ys.stream().mapToDouble(y -> Math.pow(y, 2)).sum();
-        double Exy =
+        double ex = xs.stream().mapToDouble(x -> x).sum();
+        double ey = ys.stream().mapToDouble(y -> y).sum();
+        double ex2 = xs.stream().mapToDouble(x -> Math.pow(x, 2)).sum();
+        double ey2 = ys.stream().mapToDouble(y -> Math.pow(y, 2)).sum();
+        double exy =
                 IntStream.range(0, n).mapToDouble(i -> xs.get(i) * ys.get(i)).sum();
-        double numerator = Exy - Ex * Ey / n;
-        double denominator = Math.sqrt((Ex2 - Math.pow(Ex, 2) / n) * (Ey2 - Math.pow(Ey, 2) / n));
+
+        double numerator = exy - ex * ey / n;
+        double denominator = Math.sqrt((ex2 - Math.pow(ex, 2) / n) * (ey2 - Math.pow(ey, 2) / n));
         if (denominator == 0) {
             return 0D;
         }
