@@ -111,7 +111,7 @@ Maven:
  依赖                   | 版本              
 ----------------------|-----------------
  Spring               | 6.0.7           
- Spring Boot          | 3.0.5           
+ Spring Boot          | 3.0.6           
  Spring Cloud         | 2022.0.1        
  Spring Cloud Alibaba | 2022.0.0.0--RC1 
  Spring Cloud Tencent | 1.10.2-2022.0.1 
@@ -122,7 +122,7 @@ Maven:
  Spring Security      | 6.0.3           
  Mybatis Plus         | 3.5.3.1         
  Hutool               | 5.8.16          
- Mysql                | 8.0.32          
+ Mysql                | 8.0.33          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
@@ -133,7 +133,7 @@ Maven:
  EasyCaptcha          | 1.6.2           
  Guava                | 31.1-jre        
  Grpc                 | 1.54.1          
- Arthas               | 3.6.7           
+ Arthas               | 3.6.8           
  Dynamic-tp           | 1.1.2           
  Elasticjob           | 3.0.2           
  Forest               | 1.5.30          
@@ -170,7 +170,7 @@ Maven:
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
   非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.0.5、Spring Cloud 2022.0.1、Spring Cloud Alibaba
+* **主体框架**：采用最新的Spring Boot 3.0.6、Spring Cloud 2022.0.1、Spring Cloud Alibaba
   2022.0.0.0--RC1 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
