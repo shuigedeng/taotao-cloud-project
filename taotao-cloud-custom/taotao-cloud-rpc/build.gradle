@@ -17,7 +17,7 @@ dependencies {
     api 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
     api 'com.fasterxml.jackson.core:jackson-core:2.14.2'
     //kryo 序列化 工具
-    api 'com.esotericsoftware:kryo:5.4.0'
+    api 'com.esotericsoftware:kryo:5.5.0'
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
