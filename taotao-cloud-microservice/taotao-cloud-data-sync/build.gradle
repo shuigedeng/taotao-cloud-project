@@ -31,8 +31,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:6.0.4'
-    implementation 'org.springframework.integration:spring-integration-jdbc:6.0.4'
+    implementation 'org.springframework.integration:spring-integration-core:6.0.5'
+    implementation 'org.springframework.integration:spring-integration-jdbc:6.0.5'
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     //以下依赖使用的是springboot2.7先不打开 https://github.com/spring-projects/spring-batch-extensions
