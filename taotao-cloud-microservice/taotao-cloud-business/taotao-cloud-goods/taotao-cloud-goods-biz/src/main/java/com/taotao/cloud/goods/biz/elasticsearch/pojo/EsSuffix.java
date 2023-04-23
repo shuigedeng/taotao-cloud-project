@@ -14,27 +14,20 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
-
-import java.util.List;
-import lombok.Data;
+package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
 /**
- * 搜索相关商品品牌名称，分类名称及属性
+ * elasticsearch 索引后缀
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-25 16:18:14
+ * @since 2022-04-25 16:18:20
  */
-@Data
-public class EsGoodsRelatedInfo {
+public class EsSuffix {
 
-    /** 分类集合 */
-    List<SelectorOptions> categories;
+    /** 商品索引后缀 */
+    public static final String GOODS_INDEX_NAME = "goods";
 
-    /** 品牌集合 */
-    List<SelectorOptions> brands;
-
-    /** 参数集合 */
-    List<ParamOptions> paramOptions;
+    /** 日志索引后缀 */
+    public static final String LOGS_INDEX_NAME = "logs";
 }

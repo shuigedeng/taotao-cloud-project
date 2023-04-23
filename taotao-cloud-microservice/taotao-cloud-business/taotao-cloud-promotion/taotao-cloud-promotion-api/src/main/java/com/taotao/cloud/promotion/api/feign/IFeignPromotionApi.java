@@ -18,7 +18,11 @@ package com.taotao.cloud.promotion.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.promotion.api.feign.fallback.FeignPromotionApiFallback;
+
+import java.util.List;
 import java.util.Map;
+
+import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -36,4 +40,14 @@ public interface IFeignPromotionApi {
 
     @GetMapping(value = "/withdraw/info/}")
     Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId);
+
+    List<PromotionGoodsVO> findSkuValidPromotions(List<String> categories, List<String> skuIds);
+
+	/**
+	 * 根据促销商品信息包装促销信息
+	 *
+	 * @param promotionGoodsList 促销商品信息
+	 * @return 促销信息
+	 */
+	Map<String, Object> wrapperPromotionMapList(List<PromotionGoodsVO> promotionGoodsList);
 }

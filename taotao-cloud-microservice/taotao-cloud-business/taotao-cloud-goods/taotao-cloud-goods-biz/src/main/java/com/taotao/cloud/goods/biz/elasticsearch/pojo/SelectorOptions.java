@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
+package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
-/**
- * elasticsearch 索引后缀
- *
- * @author shuigedeng
- * @version 2022.04
- * @since 2022-04-25 16:18:20
- */
-public class EsSuffix {
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    /** 商品索引后缀 */
-    public static final String GOODS_INDEX_NAME = "goods";
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class SelectorOptions {
 
-    /** 日志索引后缀 */
-    public static final String LOGS_INDEX_NAME = "logs";
+    private String name;
+
+    private String value;
+
+    private String url;
+
+    private List<SelectorOptions> otherOptions;
 }

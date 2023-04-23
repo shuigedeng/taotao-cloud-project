@@ -46,4 +46,6 @@ public interface IFeignPromotionGoodsApi {
 
     @GetMapping(value = "/getValidPromotionsGoodsPrice")
     BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList);
+
+    List<PromotionGoodsVO> findSkuValidPromotions(List<String> categories, List<String> skuIds);
 }

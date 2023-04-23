@@ -30,7 +30,14 @@ import com.taotao.cloud.order.biz.model.entity.order.Trade;
 public interface ITradeService extends IService<Trade> {
 
     /**
-     * 创建交易 1.订单数据校验 2.积分预处理 3.优惠券预处理 4.添加交易 5.添加订单 6.将交易写入缓存供消费者调用 7.发送交易创建消息
+     * 创建交易
+	 * <p>1.订单数据校验
+	 * <p>2.积分预处理
+	 * <p>3.优惠券预处理
+	 * <p>4.添加交易
+	 * <p>5.添加订单
+	 * <p>6.将交易写入缓存供消费者调用
+	 * <p>7.发送交易创建消息
      *
      * @param tradeDTO 购物车视图
      * @return {@link Trade }

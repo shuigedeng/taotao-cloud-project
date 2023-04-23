@@ -14,25 +14,28 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
+package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+/**
+ * 搜索相关商品品牌名称，分类名称及属性
+ *
+ * @author shuigedeng
+ * @version 2022.04
+ * @since 2022-04-25 16:18:14
+ */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class SelectorOptions {
+public class EsGoodsRelatedInfo {
 
-    private String name;
+    /** 分类集合 */
+    List<SelectorOptions> categories;
 
-    private String value;
+    /** 品牌集合 */
+    List<SelectorOptions> brands;
 
-    private String url;
-
-    private List<SelectorOptions> otherOptions;
+    /** 参数集合 */
+    List<ParamOptions> paramOptions;
 }

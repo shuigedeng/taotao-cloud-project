@@ -180,8 +180,8 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
      *
      * @see GoodsAuthEnum
      */
-    @Column(name = "is_auth", columnDefinition = "varchar(255) not null comment '审核状态'")
-    private String isAuth;
+    @Column(name = "auth_flag", columnDefinition = "varchar(255) not null comment '审核状态'")
+    private String authFlag;
 
     /** 审核信息 */
     @Column(name = "auth_message", columnDefinition = "varchar(255) null comment '审核信息'")
@@ -251,4 +251,35 @@ public class GoodsSku extends BaseSuperEntity<GoodsSku, Long> {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+	/**
+	 * 设置规格商品的基本商品信息
+	 *
+	 * @param goods 基本商品信息
+	 */
+	// public GoodsSku(Goods goods) {
+	// 	//商品基本信息
+	// 	this.goodsId = goods.getId();
+	// 	this.goodsName = goods.getGoodsName();
+	// 	this.goodsType = goods.getGoodsType();
+	//
+	// 	this.selfOperated = goods.getSelfOperated();
+	// 	this.sellingPoint = goods.getSellingPoint();
+	// 	this.categoryPath = goods.getCategoryPath();
+	// 	this.brandId = goods.getBrandId();
+	// 	this.marketEnable = goods.getMarketEnable();
+	// 	this.intro = goods.getIntro();
+	// 	this.mobileIntro = goods.getMobileIntro();
+	// 	this.goodsUnit = goods.getGoodsUnit();
+	// 	this.grade = new BigDecimal(100);
+	// 	//商品状态
+	// 	this.authFlag = goods.getAuthFlag();
+	// 	this.salesModel = goods.getSalesModel();
+	// 	//卖家信息
+	// 	this.storeId = goods.getStoreId();
+	// 	this.storeName = goods.getStoreName();
+	// 	this.storeCategoryPath = goods.getStoreCategoryPath();
+	// 	this.freightTemplateId = goods.getTemplateId();
+	// 	this.recommend = goods.getRecommend();
+	// }
 }
