@@ -145,8 +145,8 @@ public class Goods extends BaseSuperEntity<Goods, Long> {
      *
      * @see GoodsAuthEnum
      */
-    @Column(name = "is_auth", columnDefinition = "varchar(255) not null comment '审核状态'")
-    private String isAuth;
+    @Column(name = "auth_flag", columnDefinition = "varchar(255) not null comment '审核状态'")
+    private String authFlag;
 
     /** 审核信息 */
     @Column(name = "auth_message", columnDefinition = "varchar(255) null comment '审核信息'")

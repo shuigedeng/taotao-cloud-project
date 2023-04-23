@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
+package com.taotao.cloud.goods.biz.elasticsearch.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -71,10 +71,6 @@ public abstract class BaseElasticsearchService {
     @Qualifier("elasticsearchClient")
     protected RestHighLevelClient client;
 
-    /** elasticsearch属性 */
-    @Autowired
-    private ElasticsearchProperties elasticsearchProperties;
-
     /**
      * build DeleteIndexRequest
      *
@@ -113,10 +109,10 @@ public abstract class BaseElasticsearchService {
             request.settings(Settings.builder()
                     .put(
                             "index.number_of_shards",
-                            elasticsearchProperties.getIndex().getNumberOfShards())
+                            3)
                     .put(
                             "index.number_of_replicas",
-                            elasticsearchProperties.getIndex().getNumberOfReplicas())
+                            2)
                     .put("index.mapping.total_fields.limit", 2000));
 
             // 创建索引

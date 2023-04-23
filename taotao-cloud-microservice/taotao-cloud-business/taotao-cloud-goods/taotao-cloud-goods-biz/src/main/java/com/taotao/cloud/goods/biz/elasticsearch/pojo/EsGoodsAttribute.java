@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
+package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
 import java.io.Serial;
 import java.io.Serializable;

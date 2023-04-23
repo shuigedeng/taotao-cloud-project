@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
+package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -17,9 +17,11 @@
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.api.model.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 商品分类业务层
@@ -30,127 +32,123 @@ import java.util.List;
  */
 public interface ICategoryService extends BaseSuperService<Category, Long> {
 
-    /**
-     * 管理端获取所有分类 即获取的对象不管是否删除，都要展示，而且不从缓存获取，保证内容是最新的
-     *
-     * @param parentId 分类父ID
-     * @return {@link List }<{@link Category }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<Category> childrenList(Long parentId);
+	/**
+	 * 管理端获取所有分类
+	 * 即获取的对象不管是否删除，都要展示，而且不从缓存获取，保证内容是最新的
+	 *
+	 * @param parentId 分类父ID
+	 * @return 商品分类列表
+	 */
+	List<Category> dbList(String parentId);
 
-    /**
-     * 获取分类
-     *
-     * @param id 分类id
-     * @return {@link Category }
-     * @since 2022-04-27 16:59:28
-     */
-    Category getCategoryById(Long id);
+	/**
+	 * 获取分类
+	 *
+	 * @param id
+	 * @return
+	 */
+	Category getCategoryById(String id);
 
-    /**
-     * 根据分类id集合获取所有分类根据层级排序
-     *
-     * @param ids 分类ID集合
-     * @return {@link List }<{@link Category }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<Category> listByIdsOrderByLevel(List<Long> ids);
+	/**
+	 * 根据分类id集合获取所有分类根据层级排序
+	 *
+	 * @param ids 分类ID集合
+	 * @return 商品分类列表
+	 */
+	List<Category> listByIdsOrderByLevel(List<String> ids);
 
-    /**
-     * 获取分类树
-     *
-     * @return {@link List }<{@link CategoryTreeVO }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<CategoryTreeVO> categoryTree();
+	/**
+	 * 根据分类id集合获取所有分类根据层级排序
+	 *
+	 * @param ids 分类ID集合
+	 * @return 商品分类列表
+	 */
+	List<Map<String, Object>> listMapsByIdsOrderByLevel(List<String> ids, String columns);
 
-    /**
-     * 查询所有的分类，父子关系
-     *
-     * @param parentId 分类父ID
-     * @return {@link List }<{@link CategoryTreeVO }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<CategoryTreeVO> listAllChildren(Long parentId);
+	/**
+	 * 获取分类树
+	 *
+	 * @return 分类树
+	 */
+	List<CategoryVO> categoryTree();
 
-    /**
-     * 查询所有的分类，父子关系 数据库获取
-     *
-     * @return {@link List }<{@link CategoryTreeVO }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<CategoryTreeVO> listAllChildren();
+	/**
+	 * 查询所有的分类，父子关系
+	 *
+	 * @param parentId 分类父ID
+	 * @return 所有的分类，父子关系
+	 */
+	List<CategoryVO> listAllChildren(String parentId);
 
-    /**
-     * 获取指定分类的分类名称
-     *
-     * @param ids 指定分类id集合
-     * @return {@link List }<{@link String }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<String> getCategoryNameByIds(List<Long> ids);
+	/**
+	 * 查询所有的分类，父子关系
+	 * 数据库获取
+	 *
+	 * @return 所有的分类，父子关系
+	 */
+	List<CategoryVO> listAllChildren();
 
-    /**
-     * 获取商品分类list
-     *
-     * @param category 分类
-     * @return {@link List }<{@link Category }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<Category> findByAllBySortOrder(Category category);
+	/**
+	 * 获取指定分类的分类名称
+	 *
+	 * @param ids 指定分类id集合
+	 * @return 分类名称集合
+	 */
+	List<String> getCategoryNameByIds(List<String> ids);
 
-    /**
-     * 添加商品分类
-     *
-     * @param category 商品分类信息
-     * @return {@link Boolean }
-     * @since 2022-04-27 16:59:28
-     */
-    Boolean saveCategory(Category category);
+	/**
+	 * 获取商品分类list
+	 *
+	 * @param category 分类
+	 * @return 商品分类list
+	 */
+	List<Category> findByAllBySortOrder(Category category);
 
-    /**
-     * 修改商品分类
-     *
-     * @param category 商品分类信息
-     * @return {@link Boolean }
-     * @since 2022-04-27 16:59:28
-     */
-    Boolean updateCategory(Category category);
+	/**
+	 * 添加商品分类
+	 *
+	 * @param category 商品分类信息
+	 * @return 添加结果
+	 */
+	boolean saveCategory(Category category);
 
-    /**
-     * 批量删除分类
-     *
-     * @param id 分类ID
-     * @return {@link Boolean }
-     * @since 2022-04-27 16:59:28
-     */
-    Boolean delete(Long id);
+	/**
+	 * 修改商品分类
+	 *
+	 * @param category 商品分类信息
+	 * @return 修改结果
+	 */
+	void updateCategory(Category category);
 
-    /**
-     * 分类状态的更改
-     *
-     * @param categoryId 商品分类ID
-     * @param enableOperations 是否可用
-     * @return {@link Boolean }
-     * @since 2022-04-27 16:59:28
-     */
-    Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations);
+	/**
+	 * 批量删除分类
+	 *
+	 * @param id 分类ID
+	 */
+	void delete(String id);
 
-    /**
-     * 获取商家经营类目
-     *
-     * @param categories 经营范围
-     * @return {@link List }<{@link CategoryTreeVO }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<CategoryTreeVO> getStoreCategory(String[] categories);
+	/**
+	 * 分类状态的更改
+	 *
+	 * @param categoryId       商品分类ID
+	 * @param enableOperations 是否可用
+	 */
+	void updateCategoryStatus(String categoryId, Boolean enableOperations);
 
-    /**
-     * 获取一级分类列表 用于商家入驻选择
-     *
-     * @return {@link List }<{@link Category }>
-     * @since 2022-04-27 16:59:28
-     */
-    List<Category> firstCategory();
+	/**
+	 * 获取商家经营类目
+	 *
+	 * @param categories 经营范围
+	 * @return 分类VO列表
+	 */
+	List<CategoryVO> getStoreCategory(String[] categories);
+
+	/**
+	 * 获取一级分类列表
+	 * 用于商家入驻选择
+	 *
+	 * @return 分类列表
+	 */
+	List<Category> firstCategory();
+
 }

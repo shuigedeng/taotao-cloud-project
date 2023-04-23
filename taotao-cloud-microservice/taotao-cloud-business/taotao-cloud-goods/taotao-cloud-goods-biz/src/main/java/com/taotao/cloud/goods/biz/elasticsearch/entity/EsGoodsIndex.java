@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch;
+package com.taotao.cloud.goods.biz.elasticsearch.entity;
 
 import cn.hutool.json.JSONUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsAttribute;
+import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsSuffix;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import java.io.Serial;
@@ -226,7 +228,7 @@ public class EsGoodsIndex implements Serializable {
             this.selfOperated = sku.getSelfOperated();
             this.salesModel = sku.getSalesModel();
             this.marketEnable = sku.getMarketEnable();
-            this.authFlag = sku.getIsAuth();
+            this.authFlag = sku.getAuthFlag();
             this.intro = sku.getIntro();
             this.grade = sku.getGrade();
             this.recommend = sku.getRecommend();
@@ -292,7 +294,7 @@ public class EsGoodsIndex implements Serializable {
             this.selfOperated = sku.getSelfOperated();
             this.salesModel = sku.getSalesModel();
             this.marketEnable = sku.getMarketEnable();
-            this.authFlag = sku.getIsAuth();
+            this.authFlag = sku.getAuthFlag();
             this.intro = sku.getIntro();
             this.grade = sku.getGrade();
             this.releaseTime = LocalDateTime.now();
