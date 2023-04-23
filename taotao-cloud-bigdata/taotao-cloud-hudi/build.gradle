@@ -4,8 +4,8 @@ apply plugin: "com.github.johnrengelman.shadow"
 //import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 
 dependencies {
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.28"
-    implementation "com.alibaba.fastjson2:fastjson2-extension-spring6:2.0.28"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.29"
+    implementation "com.alibaba.fastjson2:fastjson2-extension-spring6:2.0.29"
 
     implementation("org.apache.spark:spark-core_2.13:3.3.2")
     implementation("org.apache.spark:spark-catalyst_2.13:3.3.2")
