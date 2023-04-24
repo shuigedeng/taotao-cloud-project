@@ -207,27 +207,27 @@ dubbo:
       namespace: taotao-cloud-dubbo
     check: false
   metrics:
-    #default: false
-    #id: ${spring.application.name}
-    #port: 9091
-    #enable-jvm-metrics: true
-    #protocol: prometheus
-    #aggregation:
-    #  enabled: true
-    #  bucketNum: 100
-    #  timeWindowSeconds: 30
-    #prometheus:
-    #  exporter:
-    #    enabled: false
-    #    enableHttpServiceDiscovery: true
-    #    metricsPort: 18081
-    #    metricsPath: /test
-    #  pushgateway:
-    #    enabled: false
     enable-jvm: false
     enable-metadata: false
     enable-registry: false
     enable-threadpool: false
+    exportServicePort: 9091
+    protocol: prometheus
+    exportServiceProtocol: prometheus
+    histogram:
+      enabled: false
+    aggregation:
+      enabled: false
+      bucketNum: 100
+      timeWindowSeconds: 30
+    prometheus:
+      exporter:
+        enabled: false
+        enableHttpServiceDiscovery: true
+        metricsPort: 18081
+        metricsPath: /test
+      pushgateway:
+        enabled: false
 
 seata:
   enabled: true
