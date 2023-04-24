@@ -206,24 +206,28 @@ dubbo:
     parameters:
       namespace: taotao-cloud-dubbo
     check: false
-  #metrics:
-  #  default: false
-  #  id: ${spring.application.name}
-  #  port: 9091
-  #  enable-jvm-metrics: true
-  #  protocol: prometheus
-  #  aggregation:
-  #    enabled: true
-  #    bucketNum: 100
-  #    timeWindowSeconds: 30
-  #  prometheus:
-  #    exporter:
-  #      enabled: false
-  #      enableHttpServiceDiscovery: true
-  #      metricsPort: 18081
-  #      metricsPath: /test
-  #    pushgateway:
-  #      enabled: false
+  metrics:
+    #default: false
+    #id: ${spring.application.name}
+    #port: 9091
+    #enable-jvm-metrics: true
+    #protocol: prometheus
+    #aggregation:
+    #  enabled: true
+    #  bucketNum: 100
+    #  timeWindowSeconds: 30
+    #prometheus:
+    #  exporter:
+    #    enabled: false
+    #    enableHttpServiceDiscovery: true
+    #    metricsPort: 18081
+    #    metricsPath: /test
+    #  pushgateway:
+    #    enabled: false
+    enable-jvm: false
+    enable-metadata: false
+    enable-registry: false
+    enable-threadpool: false
 
 seata:
   enabled: true
@@ -1119,3 +1123,17 @@ knife4j:
 log:
   store:
     type: mongodb
+
+grpc:
+  enabled: true
+  port: 6565
+  enableReflection: true
+  start-up-phase: Integer.MAX_VALUE
+  shutdownGrace: 30
+  #netty-server:
+  #  keep-alive-time: 30s
+  #  max-inbound-message-size: 10MB
+  #  primary-listen-address: 10.10.15.23:0
+  #  additional-listen-addresses:
+  #    - 192.168.0.100:6767
+  #  on-collision-prefer-shaded-netty: false
