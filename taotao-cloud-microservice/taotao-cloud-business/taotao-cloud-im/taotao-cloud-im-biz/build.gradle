@@ -8,8 +8,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-
     implementation "com.tencentcloudapi:tencentcloud-sdk-java:4.0.11"
     implementation "com.google.zxing:core:3.5.1"
     implementation "com.getui.push:restful-sdk:1.0.0.11"

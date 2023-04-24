@@ -7,7 +7,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-sms-aliyun"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sms-tencentv3"
@@ -15,14 +14,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
-
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
-
 
     implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.3'
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
