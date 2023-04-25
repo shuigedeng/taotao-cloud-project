@@ -4,7 +4,7 @@ dependencies {
     implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
     }
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
     implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
