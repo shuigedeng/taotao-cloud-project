@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.taotao.cloud.log.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.log.api.grpc";
+option java_outer_classname = "EnumPostfixOverrideProtos";
+
+enum EnumPostfixOverrideValuesDTO {
+  ENUM_POSTFIX_OVERRIDE_VALUES_D_T_O_INVALID = 0;
+  ENUM_POSTFIX_OVERRIDE_VALUES_D_T_O_ONE = 1;
+  ENUM_POSTFIX_OVERRIDE_VALUES_D_T_O_TWO = 2;
+}
