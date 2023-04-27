@@ -33,14 +33,19 @@ dependencies {
 	testImplementation "org.springframework.boot:spring-boot-starter-test"
 	testImplementation "junit:junit:4.13.2"
 
-	api "org.projectlombok:lombok"
+	implementation "org.projectlombok:lombok"
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-	api "io.soabase.record-builder:record-builder-core"
+
+	implementation "io.soabase.record-builder:record-builder-core"
 	annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
-	api "org.mapstruct:mapstruct"
+
+	implementation "org.mapstruct:mapstruct"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
+	annotationProcessor "no.entur.mapstruct.spi:protobuf-spi-impl:1.43"
+
 //        annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
+
 	annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }

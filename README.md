@@ -137,7 +137,7 @@ Maven:
  Dynamic-tp           | 1.1.2           
  Elasticjob           | 3.0.2           
  Forest               | 1.5.30          
- Netty                | 4.1.91.Final    
+ Netty                | 4.1.92.Final    
  Querydsl             | 5.0.0           
 
 ## 6. 演示地址
