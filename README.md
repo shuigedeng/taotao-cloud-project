@@ -4,25 +4,27 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/6.0.4-Spring-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/3.0.1-Spring%20Boot-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/2022.0.0-Spring%20Cloud-yellowgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/2022.0.0.0--RC1-Spring%20Cloud%20Alibaba-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/1.8.2--2022.0.0-Spring%20Cloud%20Tencent-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/4.1.87.Final-Netty-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/6.0.1-Spring%20Security-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/6.0.8-Spring-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/3.0.6-spring%20boot-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/2022.0.2-spring%20cloud-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/2022.0.0.0----RC2-spring%20cloud%20alibaba-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/1.11.2--2022.0.1-spring%20cloud%20tencent-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/4.1.91.Final-netty-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/6.0.3-spring%20security-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/8.5.3-Elasticsearch-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/3.5.3.1-Mybatis%20Plus-yellow" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/4.0.0-Knife4j-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/4.1.0-knife4j-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/Swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/3.19.1-Redisson-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/5.8.11-Hutool-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/3.20.1-redisson-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/5.8.18-hutool-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao cloud project** 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **
-仓库代码中不涉及公司任何业务代码**
+**taotao-cloud-project**(taotao云平台) 是一款企业级微服务架构的云服务平台 遵循SpringBoot编程思想，高度模块化和可配置化。具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。目前支持Docker、k8s等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
+仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发)
+**仓库代码中不涉及公司任何业务代码**
+
 主要包括如下几部分
 
 - **大数据模块** 集成基于**hadoop、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark
@@ -75,7 +77,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.04"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.05"
   }
 }
 
@@ -90,7 +92,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2023.04</version>
+      <version>2023.05</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -110,24 +112,24 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.7           
+ Spring               | 6.0.8           
  Spring Boot          | 3.0.6           
- Spring Cloud         | 2022.0.1        
- Spring Cloud Alibaba | 2022.0.0.0--RC1 
- Spring Cloud Tencent | 1.10.2-2022.0.1 
- Seata                | 1.6.1           
+ Spring Cloud         | 2022.0.2        
+ Spring Cloud Alibaba | 2022.0.0.0--RC2 
+ Spring Cloud Tencent | 1.11.2-2022.0.1 
+ Seata                | 1.7.0-native-rc2
  Sentinel             | 1.8.6           
  Spring-kafka         | 6.0.5           
  Roketmq              | 5.0.0           
  Spring Security      | 6.0.3           
  Mybatis Plus         | 3.5.3.1         
- Hutool               | 5.8.16          
+ Hutool               | 5.8.18          
  Mysql                | 8.0.33          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
  Redisson             | 3.20.1          
- Lettuce              | 6.0.3.RELEASE   
+ Lettuce              | 6.0.4.RELEASE   
  Elasticsearch        | 8.5.3           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
@@ -135,10 +137,10 @@ Maven:
  Grpc                 | 1.54.1          
  Arthas               | 3.6.8           
  Dynamic-tp           | 1.1.2           
- Elasticjob           | 3.0.2           
- Forest               | 1.5.30          
- Netty                | 4.1.92.Final    
- Querydsl             | 5.0.0           
+ Elasticjob           | 3.0.3           
+ Powerjob             | 4.3.2           
+ Forest               | 1.5.31          
+ Netty                | 4.1.92.Final
 
 ## 6. 演示地址
 
@@ -168,10 +170,9 @@ Maven:
 
 ## 7. 功能特点
 
-* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的**
-  非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.0.6、Spring Cloud 2022.0.1、Spring Cloud Alibaba
-  2022.0.0.0--RC1 版本进行设计
+* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
+* **主体框架**：采用最新的Spring Boot 3.0.6、Spring Cloud 2022.0.2、Spring Cloud Alibaba
+  2022.0.0.0--RC2 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
