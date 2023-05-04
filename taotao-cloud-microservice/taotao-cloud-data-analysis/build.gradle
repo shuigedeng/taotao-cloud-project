@@ -42,9 +42,9 @@ dependencies {
     implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
 
     //https://search.maven.org/artifact/io.trino/trino-jdbc
-    implementation "io.trino:trino-jdbc:407"
-    implementation "io.trino:trino-spi:407"
-    implementation "io.trino:trino-main:407"
+    implementation "io.trino:trino-jdbc:415"
+    implementation "io.trino:trino-spi:415"
+    implementation "io.trino:trino-main:415"
     //https://search.maven.org/artifact/io.airlift/slice
     implementation "io.airlift:slice:0.45"
     //https://search.maven.org/artifact/io.airlift/units
@@ -55,7 +55,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.0"
 
     //https://search.maven.org/artifact/org.apache.hbase/hbase-client
-    implementation "org.apache.hbase:hbase-client:2.5.3-hadoop3"
+    implementation "org.apache.hbase:hbase-client:2.5.4-hadoop3"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
