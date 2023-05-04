@@ -283,6 +283,8 @@ management:
       probability: 1.0
 
 logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
   level:
     root: INFO
     org.springframework.web: off
