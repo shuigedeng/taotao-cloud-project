@@ -578,7 +578,7 @@ spring:
   web:
     resources:
       # pro环境关闭
-      add-mappings: true
+      add-mappings: false
   mvc:
     servlet:
       load-on-startup: 1
@@ -590,6 +590,7 @@ spring:
     dispatch-options-request: true
     log-request-details: true
     log-resolved-exception: true
+    throw-exception-if-no-handler-found: true
   servlet:
     multipart:
       enabled: true
@@ -1140,9 +1141,11 @@ management:
 #      name: ${spring.application.name}
 #    compression:
 #      enabled: true
+
 logging:
   file:
-    path: ${user.home}/logs/${spring.application.name}
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
   logback:
     rollingpolicy:
       max-file-size: 10GB
