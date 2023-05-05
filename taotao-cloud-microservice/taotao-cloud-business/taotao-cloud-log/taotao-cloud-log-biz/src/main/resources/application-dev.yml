@@ -1026,9 +1026,11 @@ management:
 #      name: ${spring.application.name}
 #    compression:
 #      enabled: true
+
 logging:
   file:
-    path: ${user.home}/logs/${spring.application.name}
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
   logback:
     rollingpolicy:
       max-file-size: 10GB

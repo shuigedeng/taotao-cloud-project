@@ -250,6 +250,10 @@ management:
       exposure:
         include: '*'
   endpoint:
+    scheduledtasks:
+      enabled: true
+    logfile:
+      enabled: true
     metrics:
       enabled: true
     prometheus:
@@ -257,6 +261,8 @@ management:
     health:
       show-details: ALWAYS
     shutdown:
+      enabled: true
+    loggers:
       enabled: true
   metrics:
     tags:
@@ -285,6 +291,7 @@ management:
 logging:
   file:
     name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
   level:
     root: INFO
     org.springframework.web: off
