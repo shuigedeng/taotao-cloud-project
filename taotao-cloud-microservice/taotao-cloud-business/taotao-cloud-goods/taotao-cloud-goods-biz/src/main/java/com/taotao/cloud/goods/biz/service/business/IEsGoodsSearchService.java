@@ -54,19 +54,19 @@ public interface IEsGoodsSearchService {
      * 设置热门关键词
      *
      * @param hotWords 热词分数
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:00:07
      */
-    Boolean setHotWords(HotWordsDTO hotWords);
+    boolean setHotWords(HotWordsDTO hotWords);
 
     /**
      * 删除热门关键词
      *
      * @param keywords 热词
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:00:07
      */
-    Boolean deleteHotWords(String keywords);
+    boolean deleteHotWords(String keywords);
 
     /**
      * 获取筛选器

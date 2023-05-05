@@ -35,10 +35,10 @@ public interface ISpecificationService extends BaseSuperService<Specification, L
      * 删除规格
      *
      * @param ids 规格ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:01:01
      */
-    Boolean deleteSpecification(List<Long> ids);
+    boolean deleteSpecification(List<Long> ids);
 
     /**
      * 分页查询
@@ -49,5 +49,5 @@ public interface ISpecificationService extends BaseSuperService<Specification, L
      */
     IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery);
 
-    Boolean saveCategoryBrand(Long categoryId, String[] categorySpecs);
+    boolean saveCategoryBrand(Long categoryId, String[] categorySpecs);
 }

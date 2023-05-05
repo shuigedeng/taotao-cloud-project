@@ -123,7 +123,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean add(List<Map<String, Object>> skuList, Goods goods) {
+    public boolean add(List<Map<String, Object>> skuList, Goods goods) {
         // 检查是否需要生成索引
         List<GoodsSku> newSkuList;
         // 如果有规格
@@ -143,14 +143,14 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean update(List<Map<String, Object>> skuList, Goods goods, Boolean regeneratorSkuFlag) {
+    public boolean update(List<Map<String, Object>> skuList, Goods goods, boolean regeneratorSkuFlag) {
         // 是否存在规格
         if (skuList == null || skuList.isEmpty()) {
             throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
         }
         List<GoodsSku> newSkuList;
         // 删除旧的sku信息
-        if (Boolean.TRUE.equals(regeneratorSkuFlag)) {
+        if (boolean.TRUE.equals(regeneratorSkuFlag)) {
             List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = getGoodsListByGoodsId(goods.getId());
             List<Long> oldSkuIds = new ArrayList<>();
             // 删除旧索引
@@ -197,7 +197,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean update(GoodsSku goodsSku) {
+    public boolean update(GoodsSku goodsSku) {
         this.updateById(goodsSku);
         redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSku.getId()));
         redisRepository.set(IGoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
@@ -205,7 +205,7 @@ public class GoodsSkuServiceImpl
     }
 
     @Override
-    public Boolean clearCache(Long skuId) {
+    public boolean clearCache(Long skuId) {
         redisRepository.del(IGoodsSkuService.getCacheKeys(skuId));
         return true;
     }
@@ -256,7 +256,7 @@ public class GoodsSkuServiceImpl
         // 商品下架||商品未审核通过||商品删除，则提示：商品已下架
         if (GoodsStatusEnum.DOWN.name().equals(goodsSkuParamsVO.getMarketEnable())
                 || !GoodsAuthEnum.PASS.name().equals(goodsSkuParamsVO.getIsAuth())
-                || Boolean.TRUE.equals(goodsSkuParamsVO.getDelFlag())) {
+                || boolean.TRUE.equals(goodsSkuParamsVO.getDelFlag())) {
             throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
         }
 
@@ -347,14 +347,14 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateGoodsSkuStatus(Goods goods) {
+    public boolean updateGoodsSkuStatus(Goods goods) {
         LambdaUpdateWrapper<GoodsSku> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(GoodsSku::getGoodsId, goods.getId());
         updateWrapper.set(GoodsSku::getMarketEnable, goods.getMarketEnable());
         updateWrapper.set(GoodsSku::getIsAuth, goods.getIsAuth());
         updateWrapper.set(GoodsSku::getDelFlag, goods.getDelFlag());
         boolean update = this.update(updateWrapper);
-        if (Boolean.TRUE.equals(update)) {
+        if (boolean.TRUE.equals(update)) {
             List<GoodsSku> goodsSkus = this.getGoodsSkuListByGoodsId(goods.getId());
             for (GoodsSku sku : goodsSkus) {
                 redisRepository.del(IGoodsSkuService.getCacheKeys(sku.getId()));
@@ -455,7 +455,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateStocks(List<GoodsSkuStockDTO> goodsSkuStockDTOS) {
+    public boolean updateStocks(List<GoodsSkuStockDTO> goodsSkuStockDTOS) {
         for (GoodsSkuStockDTO goodsSkuStockDTO : goodsSkuStockDTOS) {
             this.updateStock(goodsSkuStockDTO.getSkuId(), goodsSkuStockDTO.getQuantity());
         }
@@ -464,7 +464,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateStock(Long skuId, Integer quantity) {
+    public boolean updateStock(Long skuId, Integer quantity) {
         GoodsSku goodsSku = getGoodsSkuByIdFromCache(skuId);
         if (goodsSku != null) {
             if (quantity <= 0) {
@@ -503,7 +503,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateGoodsStuck(List<GoodsSku> goodsSkus) {
+    public boolean updateGoodsStuck(List<GoodsSku> goodsSkus) {
         // 商品id集合 hashset 去重复
         Set<Long> goodsIds = new HashSet<>();
         for (GoodsSku sku : goodsSkus) {
@@ -531,7 +531,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateGoodsSkuCommentNum(Long skuId) {
+    public boolean updateGoodsSkuCommentNum(Long skuId) {
         // 获取商品信息
         GoodsSku goodsSku = this.getGoodsSkuByIdFromCache(skuId);
 

@@ -32,8 +32,8 @@ public interface IParametersService extends BaseSuperService<Parameters, Long> {
      * 更新参数组信息
      *
      * @param parameters 参数组信息
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:00:58
      */
-    Boolean updateParameter(Parameters parameters);
+    boolean updateParameter(Parameters parameters);
 }

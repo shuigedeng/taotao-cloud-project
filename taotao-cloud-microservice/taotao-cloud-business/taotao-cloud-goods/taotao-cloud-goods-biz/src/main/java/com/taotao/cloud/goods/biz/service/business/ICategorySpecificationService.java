@@ -43,8 +43,8 @@ public interface ICategorySpecificationService extends BaseSuperService<Category
      * 通过分类ID删除关联规格
      *
      * @param categoryId 分类ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:40
      */
-    Boolean deleteByCategoryId(Long categoryId);
+    boolean deleteByCategoryId(Long categoryId);
 }

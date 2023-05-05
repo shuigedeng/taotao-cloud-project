@@ -47,7 +47,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 *
 	 * @param ids 品牌id
 	 */
-	void deleteBrands(List<String> ids);
+	boolean deleteBrands(List<String> ids);
 
 	/**
 	 * 根据分类ID获取品牌列表
@@ -71,7 +71,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param brandVO 品牌信息
 	 * @return 添加结果
 	 */
-	boolean addBrand(BrandVO brandVO);
+	boolean addBrand(BrandDTO brandVO);
 
 	/**
 	 * 更新品牌
@@ -79,7 +79,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param brandVO 品牌信息
 	 * @return 更新结果
 	 */
-	boolean updateBrand(BrandVO brandVO);
+	boolean updateBrand(BrandDTO brandVO);
 
 	/**
 	 * 更新品牌是否可用

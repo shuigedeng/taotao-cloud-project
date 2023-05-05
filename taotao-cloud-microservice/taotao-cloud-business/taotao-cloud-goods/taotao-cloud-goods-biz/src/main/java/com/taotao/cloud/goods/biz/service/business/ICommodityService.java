@@ -36,27 +36,27 @@ public interface ICommodityService extends BaseSuperService<Commodity, Long> {
      * 添加直播商品
      *
      * @param commodity 直播商品列表
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:47
      */
-    Boolean addCommodity(List<Commodity> commodity);
+    boolean addCommodity(List<Commodity> commodity);
 
     /**
      * 删除直播商品
      *
      * @param goodsId 直播商品ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:47
      */
-    Boolean deleteCommodity(Long goodsId);
+    boolean deleteCommodity(Long goodsId);
 
     /**
      * 查询微信小程序直播商品审核状态
      *
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:47
      */
-    Boolean getGoodsWareHouse();
+    boolean getGoodsWareHouse();
 
     /**
      * 查看直播商品分页

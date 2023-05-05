@@ -34,10 +34,10 @@ public interface IGoodsGalleryService extends BaseSuperService<GoodsGallery, Lon
      *
      * @param goodsGalleryList 商品相册列表
      * @param goodsId 商品ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:00:12
      */
-    Boolean add(List<String> goodsGalleryList, Long goodsId);
+    boolean add(List<String> goodsGalleryList, Long goodsId);
 
     /**
      * 根据原图获取缩略图

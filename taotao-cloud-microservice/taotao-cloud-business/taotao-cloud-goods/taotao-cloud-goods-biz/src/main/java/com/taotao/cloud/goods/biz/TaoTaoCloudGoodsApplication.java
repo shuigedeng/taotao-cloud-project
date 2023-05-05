@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.goods.biz;
 
+import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
@@ -31,7 +33,7 @@ import org.springframework.boot.SpringApplication;
 public class TaoTaoCloudGoodsApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-goods");
+        PropertyUtils.setDefaultProperty(ServiceName.TAOTAO_CLOUD_GOODS);
 
         SpringApplication.run(TaoTaoCloudGoodsApplication.class, args);
     }

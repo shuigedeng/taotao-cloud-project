@@ -65,7 +65,7 @@ public class ParametersServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateParameter(Parameters parameters) {
+    public boolean updateParameter(Parameters parameters) {
         Parameters origin = this.getById(parameters.getId());
         if (origin == null) {
             throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

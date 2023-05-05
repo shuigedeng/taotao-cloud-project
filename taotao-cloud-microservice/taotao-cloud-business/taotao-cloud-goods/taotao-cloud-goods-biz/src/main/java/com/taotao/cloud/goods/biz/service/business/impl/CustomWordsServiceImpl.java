@@ -83,7 +83,7 @@ public class CustomWordsServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addCustomWords(CustomWordsVO customWordsVO) {
+    public boolean addCustomWords(CustomWordsVO customWordsVO) {
         LambdaQueryWrapper<CustomWords> queryWrapper =
                 new LambdaQueryWrapper<CustomWords>().eq(CustomWords::getName, customWordsVO.getName());
         CustomWords one = this.getOne(queryWrapper, false);
@@ -98,7 +98,7 @@ public class CustomWordsServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean deleteCustomWords(Long id) {
+    public boolean deleteCustomWords(Long id) {
         if (this.getById(id) == null) {
             throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
         }
@@ -106,7 +106,7 @@ public class CustomWordsServiceImpl
     }
 
     @Override
-    public Boolean updateCustomWords(CustomWordsVO customWordsVO) {
+    public boolean updateCustomWords(CustomWordsVO customWordsVO) {
         if (this.getById(customWordsVO.getId()) == null) {
             throw new BusinessException(ResultEnum.CUSTOM_WORDS_NOT_EXIST_ERROR);
         }
@@ -122,7 +122,7 @@ public class CustomWordsServiceImpl
     }
 
     @Override
-    public Boolean existWords(String words) {
+    public boolean existWords(String words) {
         LambdaQueryWrapper<CustomWords> queryWrapper =
                 new LambdaQueryWrapper<CustomWords>().eq(CustomWords::getName, words);
         long count = count(queryWrapper);

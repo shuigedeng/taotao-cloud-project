@@ -36,37 +36,37 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoods, Long> {
      * 添加草稿商品
      *
      * @param draftGoods 草稿商品
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    Boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
+    boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
 
     /**
      * 更新草稿商品
      *
      * @param draftGoods 草稿商品
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    Boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
+    boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
 
     /**
      * 保存草稿商品
      *
      * @param draftGoodsVO 草稿商品
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoodsVO);
+    boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoodsVO);
 
     /**
      * 根据ID删除草稿商品
      *
      * @param id 草稿商品ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    Boolean deleteGoodsDraft(Long id);
+    boolean deleteGoodsDraft(Long id);
 
     /**
      * 获取草稿商品详情

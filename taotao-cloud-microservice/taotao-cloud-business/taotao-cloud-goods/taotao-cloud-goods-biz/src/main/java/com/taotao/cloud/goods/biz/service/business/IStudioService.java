@@ -36,19 +36,19 @@ public interface IStudioService extends BaseSuperService<Studio, Long> {
      * 创建直播间 直播间默认手机直播 默认开启：点赞、商品货架、评论、回放
      *
      * @param studio 直播间
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:01:11
      */
-    Boolean create(Studio studio);
+    boolean create(Studio studio);
 
     /**
      * 修改直播间 直播间默认手机直播
      *
      * @param studio 直播间
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:01:11
      */
-    Boolean edit(Studio studio);
+    boolean edit(Studio studio);
 
     /**
      * 获取直播间信息
@@ -74,10 +74,10 @@ public interface IStudioService extends BaseSuperService<Studio, Long> {
      * @param roomId 房间ID
      * @param goodsId 商品ID
      * @param storeId 店铺ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:01:11
      */
-    Boolean push(Integer roomId, Long goodsId, Long storeId);
+    boolean push(Integer roomId, Long goodsId, Long storeId);
 
     /**
      * 删除商品
@@ -85,10 +85,10 @@ public interface IStudioService extends BaseSuperService<Studio, Long> {
      * @param roomId 店铺ID
      * @param goodsId 商品ID
      * @param storeId
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:01:11
      */
-    Boolean goodsDeleteInRoom(Integer roomId, Long goodsId, Long storeId);
+    boolean goodsDeleteInRoom(Integer roomId, Long goodsId, Long storeId);
 
     /**
      * 获取直播间列表
@@ -105,8 +105,8 @@ public interface IStudioService extends BaseSuperService<Studio, Long> {
      * 修改直播间状态
      *
      * @param broadcastMessage 直播间消息
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 17:01:12
      */
-    Boolean updateStudioStatus(BroadcastMessage broadcastMessage);
+    boolean updateStudioStatus(BroadcastMessage broadcastMessage);
 }

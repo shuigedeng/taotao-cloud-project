@@ -52,17 +52,17 @@ public interface ICategoryParameterGroupService extends BaseSuperService<Categor
      * 更新分类参数组绑定信息
      *
      * @param categoryParameterGroup 分类参数组信息
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:23
      */
-    Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup);
+    boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup);
 
     /**
      * 通过分类ID删除关联品牌
      *
      * @param categoryId 品牌ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:23
      */
-    Boolean deleteByCategoryId(Long categoryId);
+    boolean deleteByCategoryId(Long categoryId);
 }

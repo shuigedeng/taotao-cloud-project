@@ -83,7 +83,7 @@ public class CategoryParameterGroupServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {
+    public boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {
         CategoryParameterGroup origin = this.getById(categoryParameterGroup.getId());
         if (origin == null) {
             throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_NOT_EXIST);
@@ -112,7 +112,7 @@ public class CategoryParameterGroupServiceImpl
     }
 
     @Override
-    public Boolean deleteByCategoryId(Long categoryId) {
+    public boolean deleteByCategoryId(Long categoryId) {
         return this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroup>()
                         .eq(CategoryParameterGroup::getCategoryId, categoryId))
                 > 0;
