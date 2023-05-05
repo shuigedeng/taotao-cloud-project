@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 管理端-品牌接口
+ * 管理端-品牌管理API
  *
  * @author shuigedeng
  * @version 2022.04

@@ -43,10 +43,10 @@ public interface ICategoryBrandService extends BaseSuperService<CategoryBrand, L
      * 通过分类ID删除关联品牌
      *
      * @param categoryId 品牌ID
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:19
      */
-    Boolean deleteByCategoryId(Long categoryId);
+    boolean deleteByCategoryId(Long categoryId);
 
     /**
      * 根据品牌ID获取分类品牌关联信息
@@ -62,8 +62,8 @@ public interface ICategoryBrandService extends BaseSuperService<CategoryBrand, L
      *
      * @param categoryId 分类id
      * @param brandIds 品牌ids
-     * @return {@link Boolean }
+     * @return {@link boolean }
      * @since 2022-04-27 16:59:19
      */
-    Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds);
+    boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds);
 }

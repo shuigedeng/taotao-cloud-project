@@ -48,7 +48,7 @@ public class CategoryBrandServiceImpl
     }
 
     @Override
-    public Boolean deleteByCategoryId(Long categoryId) {
+    public boolean deleteByCategoryId(Long categoryId) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(CategoryBrand::getCategoryId, categoryId);
         return this.baseMapper.delete(wrapper) > 0;
@@ -63,7 +63,7 @@ public class CategoryBrandServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
+    public boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
         // 删除分类品牌绑定信息
         this.deleteByCategoryId(categoryId);
 

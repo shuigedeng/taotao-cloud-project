@@ -68,7 +68,7 @@ public class DraftGoodsServiceImpl
     private final IGoodsSkuService goodsSkuService;
 
     @Override
-    public Boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+    public boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
         draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
         draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
         draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -77,7 +77,7 @@ public class DraftGoodsServiceImpl
     }
 
     @Override
-    public Boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+    public boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
         draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
         draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
         draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -90,7 +90,7 @@ public class DraftGoodsServiceImpl
     }
 
     @Override
-    public Boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+    public boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
         if (draftGoods.getGoodsGalleryList() != null
                 && !draftGoods.getGoodsGalleryList().isEmpty()) {
             GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(
@@ -107,7 +107,7 @@ public class DraftGoodsServiceImpl
     }
 
     @Override
-    public Boolean deleteGoodsDraft(Long id) {
+    public boolean deleteGoodsDraft(Long id) {
         return this.removeById(id);
     }
 

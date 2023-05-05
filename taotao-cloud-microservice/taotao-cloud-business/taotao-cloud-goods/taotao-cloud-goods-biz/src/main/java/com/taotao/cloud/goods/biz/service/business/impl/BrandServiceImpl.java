@@ -101,7 +101,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
     }
 
     @Override
-    public Boolean addBrand(BrandDTO brandDTO) {
+    public boolean addBrand(BrandDTO brandDTO) {
         LambdaQueryWrapper<Brand> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Brand::getName, brandDTO.getName());
         if (getOne(lambdaQueryWrapper) != null) {
@@ -111,7 +111,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
     }
 
     @Override
-    public Boolean updateBrand(BrandDTO brandDTO) {
+    public boolean updateBrand(BrandDTO brandDTO) {
         this.checkExist(brandDTO.getId());
 
         if (getOne(new LambdaQueryWrapper<Brand>()
@@ -125,10 +125,10 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
     }
 
     @Override
-    public Boolean brandDisable(Long brandId, boolean disable) {
+    public boolean brandDisable(Long brandId, boolean disable) {
         Brand brand = this.checkExist(brandId);
         // 如果是要禁用，则需要先判定绑定关系
-        if (Boolean.TRUE.equals(disable)) {
+        if (boolean.TRUE.equals(disable)) {
             List<Long> ids = new ArrayList<>();
             ids.add(brandId);
             checkBind(ids);
@@ -145,7 +145,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
     }
 
     @Override
-    public Boolean deleteBrands(List<Long> ids) {
+    public boolean deleteBrands(List<Long> ids) {
         checkBind(ids);
         return this.removeByIds(ids);
     }

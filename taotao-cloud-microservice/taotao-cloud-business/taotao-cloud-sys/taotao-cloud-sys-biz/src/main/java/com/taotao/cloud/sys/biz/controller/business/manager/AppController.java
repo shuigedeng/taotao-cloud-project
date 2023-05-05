@@ -35,8 +35,9 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 系统应用表
  *
- * @author
- * @date 2022-09-12
+ * @author shuigedeng
+ * @version 2023.05
+ * @since 2023-05-05 17:12:15
  */
 @Tag(name = "应用管理")
 @RestController

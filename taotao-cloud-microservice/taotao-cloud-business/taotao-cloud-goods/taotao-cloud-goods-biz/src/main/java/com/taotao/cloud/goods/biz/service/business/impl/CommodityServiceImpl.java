@@ -66,7 +66,7 @@ public class CommodityServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addCommodity(List<Commodity> commodityList) {
+    public boolean addCommodity(List<Commodity> commodityList) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         for (Commodity commodity : commodityList) {
             // 检测直播商品
@@ -103,7 +103,7 @@ public class CommodityServiceImpl
     }
 
     @Override
-    public Boolean deleteCommodity(Long goodsId) {
+    public boolean deleteCommodity(Long goodsId) {
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
         if (currentUser == null
                 || (currentUser.getType().equals(UserEnum.STORE.getCode()) && currentUser.getStoreId() == null)) {
@@ -121,7 +121,7 @@ public class CommodityServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean getGoodsWareHouse() {
+    public boolean getGoodsWareHouse() {
         // 查询审核中的商品
         List<String> goodsIdList = this.baseMapper.getAuditCommodity();
         if (!goodsIdList.isEmpty()) {

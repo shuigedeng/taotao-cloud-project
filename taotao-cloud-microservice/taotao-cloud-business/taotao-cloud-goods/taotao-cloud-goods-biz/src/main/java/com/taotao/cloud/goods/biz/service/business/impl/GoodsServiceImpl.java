@@ -117,7 +117,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean underStoreGoods(Long storeId) {
+    public boolean underStoreGoods(Long storeId) {
         // 获取商品ID列表
         List<Long> list = this.baseMapper.getGoodsIdByStoreId(storeId);
         // 下架店铺下的商品
@@ -133,7 +133,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateGoodsParams(Long goodsId, String params) {
+    public boolean updateGoodsParams(Long goodsId, String params) {
         LambdaUpdateWrapper<Goods> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Goods::getId, goodsId);
         updateWrapper.set(Goods::getParams, params);
@@ -152,7 +152,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addGoods(GoodsOperationDTO goodsOperationDTO) {
+    public boolean addGoods(GoodsOperationDTO goodsOperationDTO) {
         Goods goods = new Goods(goodsOperationDTO);
         // 检查商品
         this.checkGoods(goods);
@@ -178,7 +178,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId) {
+    public boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId) {
         Goods goods = new Goods(goodsOperationDTO);
         goods.setId(goodsId);
 
@@ -270,7 +270,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean auditGoods(List<Long> goodsIds, GoodsAuthEnum goodsAuthEnum) {
+    public boolean auditGoods(List<Long> goodsIds, GoodsAuthEnum goodsAuthEnum) {
         boolean result = false;
         for (Long goodsId : goodsIds) {
             Goods goods = this.checkExist(goodsId);
@@ -290,7 +290,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason) {
+    public boolean updateGoodsMarketAble(List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason) {
         boolean result;
 
         // 如果商品为空，直接返回
@@ -320,7 +320,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean managerUpdateGoodsMarketAble(
+    public boolean managerUpdateGoodsMarketAble(
             List<Long> goodsIds, GoodsStatusEnum goodsStatusEnum, String underReason) {
         boolean result;
 
@@ -353,7 +353,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean deleteGoods(List<Long> goodsIds) {
+    public boolean deleteGoods(List<Long> goodsIds) {
         LambdaUpdateWrapper<Goods> updateWrapper = this.getUpdateWrapperByStoreAuthority();
         updateWrapper.set(Goods::getMarketEnable, GoodsStatusEnum.DOWN.name());
         updateWrapper.set(Goods::getDelFlag, true);
@@ -375,7 +375,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean freight(List<Long> goodsIds, Long templateId) {
+    public boolean freight(List<Long> goodsIds, Long templateId) {
         SecurityUser authUser = this.checkStoreAuthority();
 
         FreightTemplateVO freightTemplate = freightTemplateApi.getById(templateId);
@@ -393,7 +393,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
     }
 
     @Override
-    public Boolean updateStock(Long goodsId, Integer quantity) {
+    public boolean updateStock(Long goodsId, Integer quantity) {
         LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
         lambdaUpdateWrapper.set(Goods::getQuantity, quantity);
         lambdaUpdateWrapper.eq(Goods::getId, goodsId);
@@ -402,7 +402,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
     }
 
     @Override
-    public Boolean updateGoodsCommentNum(Long goodsId) {
+    public boolean updateGoodsCommentNum(Long goodsId) {
         // 获取商品信息
         Goods goods = this.getById(goodsId);
         // 修改商品评价数量
@@ -421,14 +421,14 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
     }
 
     @Override
-    public Boolean updateGoodsBuyCount(Long goodsId, int buyCount) {
+    public boolean updateGoodsBuyCount(Long goodsId, int buyCount) {
         this.update(new LambdaUpdateWrapper<Goods>().eq(Goods::getId, goodsId).set(Goods::getBuyCount, buyCount));
         return true;
     }
 
     // @Override
     // @Transactional(rollbackFor = Exception.class)
-    // public Boolean updateStoreDetail(Store store) {
+    // public boolean updateStoreDetail(Store store) {
     //	UpdateWrapper updateWrapper = new UpdateWrapper<>()
     //		.eq("store_id", store.getId())
     //		.set("store_name", store.getStoreName())
@@ -511,7 +511,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
         GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
         // 是否需要审核
         goods.setIsAuth(
-                Boolean.TRUE.equals(goodsSetting.getGoodsCheck())
+                boolean.TRUE.equals(goodsSetting.getGoodsCheck())
                         ? GoodsAuthEnum.TOBEAUDITED.name()
                         : GoodsAuthEnum.PASS.name());
         // 判断当前用户是否为店铺

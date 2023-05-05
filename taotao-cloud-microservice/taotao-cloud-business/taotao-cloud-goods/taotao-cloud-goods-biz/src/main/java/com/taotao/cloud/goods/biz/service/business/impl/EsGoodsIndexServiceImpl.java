@@ -142,13 +142,13 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Override
 	public void init() {
 		// 获取索引任务标识
-		Boolean flag = (Boolean) cache.get(CachePrefix.INIT_INDEX_FLAG.getPrefix());
+		boolean flag = (boolean) cache.get(CachePrefix.INIT_INDEX_FLAG.getPrefix());
 		// 为空则默认写入没有任务
 		if (flag == null) {
 			cache.set(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
 		}
 		// 有正在初始化的任务，则提示异常
-		if (Boolean.TRUE.equals(flag)) {
+		if (boolean.TRUE.equals(flag)) {
 			throw new RuntimeException("索引正在生成");
 		}
 
@@ -272,8 +272,8 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		if (map == null) {
 			return Collections.emptyMap();
 		}
-		Boolean flag = (Boolean) cache.get(CachePrefix.INIT_INDEX_FLAG.getPrefix());
-		map.put("flag", Boolean.TRUE.equals(flag) ? 1L : 0L);
+		boolean flag = (boolean) cache.get(CachePrefix.INIT_INDEX_FLAG.getPrefix());
+		map.put("flag", boolean.TRUE.equals(flag) ? 1L : 0L);
 		return map;
 	}
 

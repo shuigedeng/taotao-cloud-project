@@ -55,7 +55,7 @@ public class GoodsGalleryServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean add(List<String> goodsGalleryList, Long goodsId) {
+    public boolean add(List<String> goodsGalleryList, Long goodsId) {
         // 删除原来商品相册信息
         this.baseMapper.delete(new UpdateWrapper<GoodsGallery>().eq("goods_id", goodsId));
         // 确定好图片选择器后进行处理

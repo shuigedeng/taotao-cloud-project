@@ -52,7 +52,7 @@ public class CategorySpecificationServiceImpl
     }
 
     @Override
-    public Boolean deleteByCategoryId(Long categoryId) {
+    public boolean deleteByCategoryId(Long categoryId) {
         return this.baseMapper.delete(new LambdaQueryWrapper<CategorySpecification>()
                         .eq(CategorySpecification::getCategoryId, categoryId))
                 > 0;

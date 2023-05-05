@@ -230,7 +230,7 @@ public class CategoryServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean saveCategory(Category category) {
+    public boolean saveCategory(Category category) {
         // 判断分类佣金是否正确
         if (category.getCommissionRate().compareTo(BigDecimal.ZERO) < 0) {
             throw new BusinessException(ResultEnum.CATEGORY_COMMISSION_RATE_ERROR);
@@ -249,7 +249,7 @@ public class CategoryServiceImpl
     @Override
     @CacheEvict(key = "#category.id")
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateCategory(Category category) {
+    public boolean updateCategory(Category category) {
         // 判断分类佣金是否正确
         if (category.getCommissionRate().compareTo(BigDecimal.ZERO) < 0) {
             throw new BusinessException(ResultEnum.CATEGORY_COMMISSION_RATE_ERROR);
@@ -278,7 +278,7 @@ public class CategoryServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean delete(Long id) {
+    public boolean delete(Long id) {
         this.removeById(id);
         removeCache();
 
@@ -290,7 +290,7 @@ public class CategoryServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateCategoryStatus(Long categoryId, Boolean enableOperations) {
+    public boolean updateCategoryStatus(Long categoryId, boolean enableOperations) {
         // 禁用子分类
         Category category = this.getById(categoryId);
         CategoryTreeVO categoryTreeVO = BeanUtils.copy(category, CategoryTreeVO.class);

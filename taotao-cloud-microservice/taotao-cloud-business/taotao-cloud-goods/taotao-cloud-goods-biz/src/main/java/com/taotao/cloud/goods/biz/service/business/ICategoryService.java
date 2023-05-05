@@ -133,7 +133,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param categoryId       商品分类ID
 	 * @param enableOperations 是否可用
 	 */
-	void updateCategoryStatus(String categoryId, Boolean enableOperations);
+	void updateCategoryStatus(String categoryId, boolean enableOperations);
 
 	/**
 	 * 获取商家经营类目

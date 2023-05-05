@@ -59,7 +59,7 @@ public class SpecificationServiceImpl
     private final ICategoryService categoryService;
 
     @Override
-    public Boolean deleteSpecification(List<Long> ids) {
+    public boolean deleteSpecification(List<Long> ids) {
         boolean result = false;
         for (Long id : ids) {
             // 如果此规格绑定分类则不允许删除
@@ -91,7 +91,7 @@ public class SpecificationServiceImpl
 
     @Override
     @Transactional
-    public Boolean saveCategoryBrand(Long categoryId, String[] categorySpecs) {
+    public boolean saveCategoryBrand(Long categoryId, String[] categorySpecs) {
         QueryWrapper<CategorySpecification> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("category_id", categoryId);
         // 删除分类规格绑定信息

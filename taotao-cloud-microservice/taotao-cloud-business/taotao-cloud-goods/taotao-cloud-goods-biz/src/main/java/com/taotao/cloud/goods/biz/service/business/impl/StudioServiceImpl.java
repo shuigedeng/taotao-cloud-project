@@ -91,7 +91,7 @@ public class StudioServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean create(Studio studio) {
+    public boolean create(Studio studio) {
         studio.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         // 创建小程序直播
         Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
@@ -129,7 +129,7 @@ public class StudioServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean edit(Studio studio) {
+    public boolean edit(Studio studio) {
         Studio oldStudio = this.getById(studio.getId());
         wechatLivePlayerUtil.editRoom(studio);
         if (this.updateById(studio)) {
@@ -187,7 +187,7 @@ public class StudioServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean push(Integer roomId, Long goodsId, Long storeId) {
+    public boolean push(Integer roomId, Long goodsId, Long storeId) {
         // 判断直播间是否已添加商品
         if (studioCommodityService.getOne(new LambdaQueryWrapper<StudioCommodity>()
                         .eq(StudioCommodity::getRoomId, roomId)
@@ -203,7 +203,7 @@ public class StudioServiceImpl
         }
 
         // 调用微信接口添加直播间商品并进行记录
-        if (Boolean.TRUE.equals(wechatLivePlayerUtil.pushGoods(roomId, goodsId))) {
+        if (boolean.TRUE.equals(wechatLivePlayerUtil.pushGoods(roomId, goodsId))) {
             // studioCommodityService.save(new StudioCommodity(roomId, goodsId));
             // 添加直播间商品数量
             Studio studio = this.getByRoomId(roomId);
@@ -219,14 +219,14 @@ public class StudioServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Boolean goodsDeleteInRoom(Integer roomId, Long goodsId, Long storeId) {
+    public boolean goodsDeleteInRoom(Integer roomId, Long goodsId, Long storeId) {
         Goods goods = goodsService.getOne(
                 new LambdaQueryWrapper<Goods>().eq(Goods::getId, goodsId).eq(Goods::getStoreId, storeId));
         if (goods == null) {
             throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
         // 调用微信接口删除直播间商品并进行记录
-        if (Boolean.TRUE.equals(wechatLivePlayerUtil.goodsDeleteInRoom(roomId, goodsId))) {
+        if (boolean.TRUE.equals(wechatLivePlayerUtil.goodsDeleteInRoom(roomId, goodsId))) {
             studioCommodityService.remove(
                     new QueryWrapper<StudioCommodity>().eq("room_id", roomId).eq("goods_id", goodsId));
             // 减少直播间商品数量
@@ -255,7 +255,7 @@ public class StudioServiceImpl
     }
 
     @Override
-    public Boolean updateStudioStatus(BroadcastMessage broadcastMessage) {
+    public boolean updateStudioStatus(BroadcastMessage broadcastMessage) {
         return this.update(new LambdaUpdateWrapper<Studio>()
                 .eq(Studio::getId, broadcastMessage.getStudioId())
                 .set(Studio::getStatus, broadcastMessage.getStatus()));

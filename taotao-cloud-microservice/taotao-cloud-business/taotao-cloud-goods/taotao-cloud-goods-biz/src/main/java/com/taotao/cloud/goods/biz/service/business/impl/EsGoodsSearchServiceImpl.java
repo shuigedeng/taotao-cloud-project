@@ -145,7 +145,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
     }
 
     @Override
-    public Boolean setHotWords(HotWordsDTO hotWords) {
+    public boolean setHotWords(HotWordsDTO hotWords) {
         redisRepository.hincr(
                 CachePrefix.HOT_WORD.getPrefix(), hotWords.getKeywords(), Double.valueOf(hotWords.getPoint()));
         return true;
@@ -157,7 +157,7 @@ public class EsGoodsSearchServiceImpl implements IEsGoodsSearchService {
      * @param keywords 热词
      */
     @Override
-    public Boolean deleteHotWords(String keywords) {
+    public boolean deleteHotWords(String keywords) {
         redisRepository.del(CachePrefix.HOT_WORD.getPrefix(), keywords);
         return true;
     }
