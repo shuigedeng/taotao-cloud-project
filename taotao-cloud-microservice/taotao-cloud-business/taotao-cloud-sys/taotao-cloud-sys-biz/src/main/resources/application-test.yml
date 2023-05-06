@@ -1222,19 +1222,6 @@ taotao:
       enabled: false
     kafka:
       enabled: true
-    job:
-      xxl:
-        enabled: true
-        admin:
-          addresses:
-        executor:
-          appname: ${spring.application.name}
-          ip:
-          port: 1113
-          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-          log-path: ${user.home}/logs/${spring.application.name}/xxl-job
-      elastic:
-        enabled: false
     ip2region:
       enabled: true
     monitor:
