@@ -36,6 +36,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 反爬配置
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-06 17:01:21
+ */
 @Configuration
 @ConditionalOnBean(RedissonClient.class)
 @EnableConfigurationProperties(AntiReptileProperties.class)

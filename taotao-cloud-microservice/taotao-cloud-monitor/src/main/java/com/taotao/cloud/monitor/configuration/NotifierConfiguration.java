@@ -32,7 +32,9 @@ import java.util.Arrays;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
 
 /**
@@ -42,7 +44,8 @@ import reactor.core.publisher.Mono;
  * @version 2022.03
  * @since 2021/12/01 10:01
  */
-@AutoConfiguration(after = AdminServerAutoConfiguration.class)
+@Configuration
+@AutoConfigureAfter(AdminServerAutoConfiguration.class)
 public class NotifierConfiguration {
 
     @Bean
