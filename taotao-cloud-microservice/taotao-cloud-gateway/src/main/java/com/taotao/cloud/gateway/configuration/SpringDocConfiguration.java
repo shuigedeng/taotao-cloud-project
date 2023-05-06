@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 /**
- * OpenApiConfig
+ * springdoc 配置
  *
  * @author shuigedeng
  * @version 2022.03
@@ -52,7 +52,6 @@ import org.springframework.context.annotation.Profile;
  */
 @Profile(value = {"dev"})
 @EnableKnife4j
-// @EnableOpenApi
 @Configuration
 public class SpringDocConfiguration {
 

@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * GatewayCircuitBreakerConfiguration
+ * 断路器配置
  *
  * @author shuigedeng
  * @version 2022.03

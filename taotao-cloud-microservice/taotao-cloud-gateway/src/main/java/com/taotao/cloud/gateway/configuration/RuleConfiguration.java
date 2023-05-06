@@ -23,6 +23,10 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 规则配置
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-06 17:39:13
  */
 @Configuration
 public class RuleConfiguration {

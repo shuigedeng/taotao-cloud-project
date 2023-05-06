@@ -62,6 +62,7 @@ public class SecurityProperties {
         "/js/**",
         "/k8s/**",
         "/k8s",
+        "/doc.html",
         "/images/**"
     };
 

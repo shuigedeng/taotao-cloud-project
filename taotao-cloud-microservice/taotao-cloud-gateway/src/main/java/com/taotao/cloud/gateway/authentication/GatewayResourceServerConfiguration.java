@@ -54,7 +54,7 @@ import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 
 /**
- * ResourceServerConfig
+ * 资源服务器配置
  *
  * @author shuigedeng
  * @version 2022.03

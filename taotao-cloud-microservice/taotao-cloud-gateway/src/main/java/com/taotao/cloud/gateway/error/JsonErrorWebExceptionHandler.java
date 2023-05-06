@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.error;
 
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.time.LocalDateTime;
@@ -71,23 +72,30 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
         LogUtils.error("请求发生异常，请求URI：{}，请求方法：{}，异常信息：{}", request.path(), request.method().name(), error.getMessage());
         LogUtils.error(error.getMessage(), error);
 
-        String errorMessage;
+        String errorMessage = ResultEnum.INNER_ERROR.getDesc();
+		int code  = ResultEnum.INNER_ERROR.getCode();
         if (error instanceof NotFoundException) {
             String serverId = StringUtils.substringAfterLast(error.getMessage(), "Unable to find instance for ");
             serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
-            errorMessage = String.format("无法找到%s服务", serverId);
+			LogUtils.error(String.format("无法找到%s服务", serverId));
         } else if (StringUtils.containsIgnoreCase(error.getMessage(), "connection refused")) {
-            errorMessage = "目标服务拒绝连接";
-        } else if (error instanceof TimeoutException) {
-            errorMessage = "访问服务超时";
+			String serverId = StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
+			serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
+			LogUtils.error(String.format("目标服务拒绝连接%s服务", serverId));
+        } else if (error instanceof TimeoutException timeoutException) {
+			String serverId = StringUtils.substringAfterLast(error.getMessage(), "connection refuse");
+			serverId = StringUtils.replace(serverId, "\"", StringUtils.EMPTY);
+			LogUtils.error(String.format("访问服务超时%s服务", serverId));
+
         } else if (error instanceof ResponseStatusException
                 && StringUtils.containsIgnoreCase(error.getMessage(), HttpStatus.NOT_FOUND.toString())) {
-            errorMessage = "未找到该资源";
-        } else {
-            errorMessage = "网关异常";
+			LogUtils.error("未找到该资源");
+
+			errorMessage = ResultEnum.REQUEST_NOT_FOUND.getDesc();
+			code = ResultEnum.REQUEST_NOT_FOUND.getCode();
         }
 
-        return responseError(errorMessage);
+        return responseError(errorMessage, code);
     }
 
     @Override
@@ -105,10 +113,11 @@ public class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandle
      *
      * @param errorMessage 异常信息
      */
-    public static Map<String, Object> responseError(String errorMessage) {
-        Result<Object> result = Result.fail(errorMessage);
+    public static Map<String, Object> responseError(String errorMessage, int code) {
+        Result<String> result = Result.fail(errorMessage, code);
         Map<String, Object> res = new HashMap<>();
         res.put("errorMsg", result.getErrorMsg());
+        res.put("message", result.getMessage());
         res.put("code", result.getCode());
         res.put("success", result.isSuccess());
         res.put("requestId", result.getRequestId());
