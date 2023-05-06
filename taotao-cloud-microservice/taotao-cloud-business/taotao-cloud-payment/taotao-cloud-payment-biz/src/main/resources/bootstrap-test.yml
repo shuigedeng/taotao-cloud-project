@@ -341,12 +341,7 @@ taotao:
           - sys_user
         ignore-sqls:
           - com.central.user.mapper.SysRoleMapper.findAll
-    xxl:
-      job:
-        enabled: true
-        adminAddresses: ${TAOTAO-CLOUD-XXL-JOB-ADMIN-ADDRESS:http://192.168.99.230:8080/xxl-job-admin}
-        appName: ${spring.application.name}
-        logPath: ../logs/application/${spring.application.name}
+
 
 feign:
   sentinel:
