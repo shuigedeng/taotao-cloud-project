@@ -23,6 +23,8 @@ import org.springframework.cloud.gateway.support.ConfigurationService;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 /**
  * CustomRateLimiter
  *
@@ -35,7 +37,7 @@ public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.C
 
     private final RateLimiter rateLimiter = RateLimiter.create(2.0);
 
-    public static final String CONFIG_PROPERTY_NAME = "taotao-cloud-gateway-springcloud-rate-limiter";
+    public static final String CONFIG_PROPERTY_NAME = "taotao-cloud-gateway-rate-limiter";
 
     protected GatewayRateLimiter(ConfigurationService configurationService) {
         super(Config.class, CONFIG_PROPERTY_NAME, configurationService);
@@ -44,20 +46,25 @@ public class GatewayRateLimiter extends AbstractRateLimiter<GatewayRateLimiter.C
     @Override
     public Mono<Response> isAllowed(String routeId, String id) {
         Config config = getConfig().get(routeId);
-        return Mono.fromSupplier(() -> {
-            boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
-            if (acquire) {
-                return new Response(true, Maps.newHashMap());
-            }
+		if(Objects.nonNull(config)){
+			return Mono.fromSupplier(() -> {
+				boolean acquire = rateLimiter.tryAcquire(config.requestedToken);
+				if (acquire) {
+					return new Response(true, Maps.newHashMap());
+				}
 
-            return new Response(false, Maps.newHashMap());
-        });
+				return new Response(false, Maps.newHashMap());
+			});
+		}else {
+			return Mono.fromSupplier(() -> new Response(true, Maps.newHashMap()));
+		}
+
     }
 
     public static class Config {
 
         // 每次请求多少个token
-        private Integer requestedToken;
+        private Integer requestedToken = 100;
 
         public Integer getRequestedToken() {
             return requestedToken;

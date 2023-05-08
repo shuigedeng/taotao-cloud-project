@@ -19,6 +19,13 @@ package com.taotao.cloud.gateway.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
+/**
+ * 过滤器配置
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-08 09:25:49
+ */
 @RefreshScope
 @ConfigurationProperties(prefix = FilterProperties.PREFIX)
 public class FilterProperties {

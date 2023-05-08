@@ -27,6 +27,13 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+/**
+ * 日志过滤器
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-08 13:18:58
+ */
 @Log4j2
 public class LogFilter implements GlobalFilter, Ordered {
 	private static final String START_TIME = "startTime";

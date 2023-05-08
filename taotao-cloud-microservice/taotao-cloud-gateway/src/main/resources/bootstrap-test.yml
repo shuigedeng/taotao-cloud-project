@@ -20,7 +20,7 @@ spring:
     web-application-type: reactive
     banner-mode: off
   application:
-    name: taotao-cloud-gateway-springcloud
+    name: taotao-cloud-gateway
   cloud:
     loadbalancer:
       enabled: true

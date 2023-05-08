@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.configuration;
 
-import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+// import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -51,7 +51,7 @@ import org.springframework.context.annotation.Profile;
  * @since 2021/03/04 13:48
  */
 @Profile(value = {"dev"})
-@EnableKnife4j
+// @EnableKnife4j
 @Configuration
 public class SpringDocConfiguration {
 

@@ -86,23 +86,23 @@ jobs:
 
       - name: Gradle BootJar taotao-cloud-gateway
         uses: gradle/gradle-build-action@v2
-        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway-springcloud') }}
+        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
         with:
           gradle-version: 8.1
           arguments: clean bootJar -x test
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway/taotao-cloud-gateway-springcloud
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway/taotao-cloud-gateway
 
       - name: Publish Docker Image taotao-cloud-gateway
         uses: elgohr/Publish-Docker-Github-Action@v4
-        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway-springcloud') }}
+        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
         with:
-          name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway-springcloud
+          name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway
           username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway/taotao-cloud-gateway-springcloud
+          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-gateway/taotao-cloud-gateway
 
       - name: Gradle BootJar taotao-cloud-auth
         uses: gradle/gradle-build-action@v2
