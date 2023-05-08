@@ -34,6 +34,13 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+/**
+ * 黑名单过滤器
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-08 13:19:32
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ConditionalOnProperty(

@@ -19,6 +19,13 @@ package com.taotao.cloud.gateway.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
+/**
+ * https配置
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-08 09:26:03
+ */
 @RefreshScope
 @ConfigurationProperties(prefix = HttpsProperties.PREFIX)
 public class HttpsProperties {

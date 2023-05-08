@@ -1383,17 +1383,40 @@ springdoc:
   #    packages-to-scan: com.xiaominfo.knife4j.demo.web
 
 knife4j:
+  production: true
   enable: true
-  setting:
-    language: zh_cn
-    swagger-model-name: 实体类列表
+  basic:
+    enable: true
+    username: admin
+    password: 123456
+  cors: false
   documents:
-    - name: 标题1
-      locations: classpath:markdown/*
-      group: default
+    - group: 1.2.x
+      name: 测试自定义标题分组
+      locations: classpath:md/*
     - name: 标题2
       locations: classpath:markdown1/*
       group: 用户模块
+  setting:
+    swagger-model-name: 实体类列表
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    enableHost: false
+    enableHostText: http://localhost:18568
+    enableRequestCache: true
+    enableFilterMultipartApis: false
+    enableFilterMultipartApiMethodType: POST
+    language: zh-CN
+    enableAfterScript: false
+    enableHomeCustom: true
+    homeCustomLocation: classpath:test/home.md
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: 八一菜刀研究中心
+    enableSearch: true
+    enableDebug: true
+    enableOpenApi: true
+    enableGroup: true
 
 grpc:
   server:

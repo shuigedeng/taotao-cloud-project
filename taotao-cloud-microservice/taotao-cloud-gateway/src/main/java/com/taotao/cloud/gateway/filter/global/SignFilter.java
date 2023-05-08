@@ -55,11 +55,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * SignFilter
+ * 签名过滤器
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2021/07/19 14:42
+ * @version 2023.04
+ * @since 2023-05-08 13:19:14
  */
 @Component
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "sign", havingValue = "true", matchIfMissing = true)

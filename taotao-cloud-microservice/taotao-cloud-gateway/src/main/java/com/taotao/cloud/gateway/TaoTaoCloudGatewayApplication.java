@@ -20,7 +20,6 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-
 /**
  * TaoTaoCloudGatewayApplication
  *
@@ -36,7 +35,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-gateway-springcloud");
+
+		PropertyUtils.setDefaultProperty("taotao-cloud-gateway");
 
 		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 	}
