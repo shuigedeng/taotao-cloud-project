@@ -17,15 +17,19 @@
 package com.taotao.cloud.job.biz.schedule.controller;
 
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.file.api.feign.IFeignFileApi;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
-import com.taotao.cloud.job.biz.schedule.model.TaskParam;
-import com.taotao.cloud.job.biz.schedule.model.TaskVo;
+import com.taotao.cloud.job.biz.schedule.model.ScheduledJobDTO;
+import com.taotao.cloud.job.biz.schedule.model.ScheduledJobVO;
+import com.taotao.cloud.job.biz.schedule.model.convert.ScheduledConvert;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,34 +40,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 安排工作控制器
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:09:53
+ */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/job/schedule")
 @Tag(name = "schedule任务管理API", description = "schedule任务管理API")
 public class ScheduledJobController {
 
-    @Resource
-    private ScheduledJobService scheduledJobService;
+    private final ScheduledJobService scheduledJobService;
+	private final IFeignFileApi fileApi;
 
     @GetMapping("/jobs")
     @Operation(summary = "任务列表", description = "任务列表")
     @RequestLogger
-    public Result<List<ScheduledJob>> taskList() {
-        List<ScheduledJob> result = scheduledJobService.taskList();
-        return Result.success(result);
+    public Result<List<com.taotao.cloud.job.api.model.vo.ScheduledJobVO>> jobList() {
+        List<ScheduledJob> jobs = scheduledJobService.jobList();
+
+		// FeignFileResponse sdfasdf = fileApi.findByCode("sdfasdf");
+		// System.out.println(sdfasdf);
+
+		return Result.success(ScheduledConvert.INSTANCE.convertList(jobs));
     }
 
     @PostMapping("/job")
     @Operation(summary = "新增任务", description = "新增任务")
     @RequestLogger
-    public Result<Boolean> addTask(@RequestBody TaskParam param) {
+    public Result<Boolean> addTask(@RequestBody ScheduledJobDTO param) {
         return Result.success(scheduledJobService.addTask(param));
     }
 
     @PutMapping("/job")
     @Operation(summary = "更新任务", description = "更新任务")
     @RequestLogger
-    public Result<Boolean> updateTask(@RequestBody TaskParam param) {
+    public Result<Boolean> updateTask(@RequestBody ScheduledJobDTO param) {
         return Result.success(scheduledJobService.updateTask(param));
     }
 
@@ -91,7 +107,7 @@ public class ScheduledJobController {
     @GetMapping("/job/info/{id}")
     @Operation(summary = "查询详情", description = "查询详情")
     @RequestLogger
-    public Result<TaskVo> getTaskById(@PathVariable("id") String id) {
+    public Result<ScheduledJobVO> getTaskById(@PathVariable("id") String id) {
         return Result.success(scheduledJobService.getTaskById(id));
     }
 }

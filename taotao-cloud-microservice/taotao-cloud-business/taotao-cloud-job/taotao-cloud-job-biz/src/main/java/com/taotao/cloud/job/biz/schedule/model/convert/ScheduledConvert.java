@@ -14,30 +14,27 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.file.biz.largefile.po;
+package com.taotao.cloud.job.biz.schedule.model.convert;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import com.taotao.cloud.job.api.model.vo.ScheduledJobVO;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Accessors(chain = true)
-public class Result<T> {
+import java.util.List;
 
-    public static final int success = 0;
-    public static final int fail = 1;
-    private int status = success;
-    private String message = "success";
-    private T data;
+/**
+ * 将转换
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:13:39
+ */
+@Mapper
+public interface ScheduledConvert {
 
-    public Result setErrorMsgInfo(String msg) {
-        this.setStatus(fail);
-        this.setMessage(msg);
-        return this;
-    }
+	ScheduledConvert INSTANCE = Mappers.getMapper(ScheduledConvert.class);
+
+	List<ScheduledJobVO> convertList(List<ScheduledJob> jobs);
+
 }

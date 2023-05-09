@@ -29,10 +29,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class FilePathUtil implements ApplicationRunner {
 
-    @Value("${upload.root.dir}")
+    @Value("${upload.root.dir:/}")
     private String uploadRootDir;
 
-    @Value("${upload.window.root}")
+    @Value("${upload.window.root:/}")
     private String uploadWindowRoot;
 
     @Override

@@ -19,6 +19,13 @@ package com.taotao.cloud.job.biz.schedule.service.impl;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
 import org.springframework.stereotype.Service;
 
+/**
+ * 计划工作日志服务实现类
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:17:29
+ */
 @Service
 public class ScheduledJobLogServiceImpl implements ScheduledJobLogService {
 

@@ -51,10 +51,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, FileRepository, IFileRepository, Long>
         implements IFileService {
 
-    @Autowired(required = false)
+    @Autowired
     private UploadFileService uploadFileService;
 
-    @Autowired(required = false)
+    @Autowired
     private StandardOssClient standardOssClient;
 
     @Override

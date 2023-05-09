@@ -21,19 +21,27 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 将工作日志控制器
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:20:36
+ */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/job/schedule/log")
 @Tag(name = "schedule任务管理日志API", description = "schedule任务管理日志API")
 public class ScheduledJobLogController {
 
-    @Resource
-    private ScheduledJobLogService scheduledJobLogService;
+    private final ScheduledJobLogService scheduledJobLogService;
 
     @GetMapping("/list")
     @RequestLogger

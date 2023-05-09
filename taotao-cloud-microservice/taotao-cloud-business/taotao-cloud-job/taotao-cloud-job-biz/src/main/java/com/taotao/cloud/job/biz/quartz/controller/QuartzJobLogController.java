@@ -23,30 +23,38 @@ import com.taotao.cloud.job.biz.quartz.service.QuartzJobLogService;
 import com.taotao.cloud.job.biz.quartz.vo.QuartzJobLogVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 石英工作日志控制器
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:19:05
+ */
+@AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/job/quartz/log")
 @Tag(name = "quartz任务管理日志API", description = "quartz任务管理日志API")
 public class QuartzJobLogController {
 
-    @Resource
-    private QuartzJobLogService quartzJobLogService;
+	private final QuartzJobLogService quartzJobLogService;
 
-    @GetMapping("/page")
-    @Operation(summary = "分页查询任务日志", description = "分页查询任务日志")
-    public Result<PageResult<QuartzJobLogVO>> page(QuartzJobLogQuery quartzJobLogQuery) {
-        return Result.success(quartzJobLogService.page(quartzJobLogQuery));
-    }
+	@GetMapping("/page")
+	@Operation(summary = "分页查询任务日志", description = "分页查询任务日志")
+	public Result<PageResult<QuartzJobLogVO>> page(QuartzJobLogQuery quartzJobLogQuery) {
+		return Result.success(quartzJobLogService.page(quartzJobLogQuery));
+	}
 
-    @GetMapping("/findById")
-    @Operation(summary = "查询单个任务日志", description = "查询单个任务日志")
-    public Result<QuartzJobLogVO> findById(Long id) {
-        return Result.success(quartzJobLogService.findById(id));
-    }
+	@GetMapping("/{id}")
+	@Operation(summary = "查询单个任务日志", description = "查询单个任务日志")
+	public Result<QuartzJobLogVO> findById(@PathVariable Long id) {
+		return Result.success(quartzJobLogService.findById(id));
+	}
 }

@@ -20,6 +20,13 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
+/**
+ * 文件应用程序
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 14:52:09
+ */
 @TaoTaoCloudApplication
 public class TaoTaoCloudFileApplication {
 

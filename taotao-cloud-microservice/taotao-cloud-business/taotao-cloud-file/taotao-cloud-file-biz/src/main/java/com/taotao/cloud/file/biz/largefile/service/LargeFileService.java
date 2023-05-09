@@ -20,7 +20,7 @@ import com.taotao.cloud.file.biz.largefile.po.FileUpload;
 import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
 import java.io.IOException;
 
-public interface FileService {
+public interface LargeFileService {
 
     FileUpload upload(FileUploadRequest fileUploadRequestDTO) throws IOException;
 
