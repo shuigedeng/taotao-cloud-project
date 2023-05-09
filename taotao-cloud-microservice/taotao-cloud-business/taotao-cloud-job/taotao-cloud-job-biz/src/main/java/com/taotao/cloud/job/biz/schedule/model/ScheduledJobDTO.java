@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 
 @Schema(title = "scheduled定时任务")
-public class TaskParam {
+public class ScheduledJobDTO {
 
     // 任务id
     @Schema(description = "主键 创建时不传，更新时传", example = "1")

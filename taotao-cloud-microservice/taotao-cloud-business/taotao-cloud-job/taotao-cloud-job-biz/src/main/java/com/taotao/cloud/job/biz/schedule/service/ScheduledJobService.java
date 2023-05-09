@@ -18,70 +18,80 @@ package com.taotao.cloud.job.biz.schedule.service;
 
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
-import com.taotao.cloud.job.biz.schedule.model.TaskParam;
-import com.taotao.cloud.job.biz.schedule.model.TaskVo;
+import com.taotao.cloud.job.biz.schedule.model.ScheduledJobDTO;
+import com.taotao.cloud.job.biz.schedule.model.ScheduledJobVO;
+
 import java.util.List;
 
+/**
+ * 计划工作服务
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:10:03
+ */
 public interface ScheduledJobService {
 
-    /***
-     *任务列表查询
-     * @return o
-     */
-    List<ScheduledJob> taskList();
+	/***
+	 *任务列表查询
+	 * @return o
+	 */
+	List<ScheduledJob> jobList();
 
-    /**
-     * 新增任务
-     *
-     * @param param 新增参数
-     * @return
-     */
-    Boolean addTask(TaskParam param);
+	/**
+	 * 新增任务
+	 *
+	 * @param param 新增参数
+	 * @return Boolean
+	 */
+	boolean addTask(ScheduledJobDTO param);
 
-    /**
-     * 修改任务
-     *
-     * @param param 修改参数
-     * @return
-     */
-    Boolean updateTask(TaskParam param);
+	/**
+	 * 修改任务
+	 *
+	 * @param param 修改参数
+	 * @return Boolean
+	 */
+	boolean updateTask(ScheduledJobDTO param);
 
-    /**
-     * 执行任务
-     *
-     * @param id 任务id
-     * @return
-     */
-    Boolean invokeTask(String id);
+	/**
+	 * 执行任务
+	 *
+	 * @param id 任务id
+	 * @return
+	 */
+	boolean invokeTask(String id);
 
-    /**
-     * 暂停任务
-     *
-     * @param id 任务id
-     */
-    Boolean stopTask(String id);
+	/**
+	 * 暂停任务
+	 *
+	 * @param id 任务id
+	 */
+	boolean stopTask(String id);
 
-    /**
-     * 删除任务
-     *
-     * @param id 任务id
-     */
-    Boolean deleteTask(String id);
+	/**
+	 * 删除任务
+	 *
+	 * @param id 任务id
+	 */
+	boolean deleteTask(String id);
 
-    /**
-     * 禁用任务
-     *
-     * @param id 任务id
-     */
-    Boolean forbidTask(String id);
+	/**
+	 * 禁用任务
+	 *
+	 * @param id 任务id
+	 */
+	boolean forbidTask(String id);
 
-    /**
-     * 查询详情
-     *
-     * @param id 任务id
-     */
-    TaskVo getTaskById(String id);
+	/**
+	 * 查询详情
+	 *
+	 * @param id 任务id
+	 */
+	ScheduledJobVO getTaskById(String id);
 
-    /** 任务日志 */
-    void insertTaskLog(ScheduledJobLog log);
+	/**
+	 * 任务日志
+	 */
+	void insertTaskLog(ScheduledJobLog log);
 }

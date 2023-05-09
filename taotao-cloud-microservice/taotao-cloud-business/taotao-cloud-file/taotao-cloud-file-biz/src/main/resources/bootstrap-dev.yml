@@ -1,616 +1,167 @@
 server:
-  port: 8800
+  port: 33339
   http2:
     enabled: true
   undertow:
     buffer-size: 2048
     direct-buffers: true
 
-jasypt:
-  encryptor:
-    password: taotao-cloud
-    algorithm: PBEWITHHMACSHA512ANDAES_256
-#    property:
-#      prefix: "ENC@["
-#      suffix: "]"
-
-mybatis-plus-join:
-  banner: true
-  sub-table-logic: true
-
-mybatis-plus:
-  typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity  #实体扫描 多个package用户逗号或者分号分割
-  mapperLocations: classpath:mapper/*.xml # mapper xml 地址
-  global-config:
-    banner: true # 关闭mp3.0自带的banner
-    db-config:
-      id-type: auto #主键类型
-      table-underline: true  #驼峰下划线转换
-      logic-delete-value: 1 #逻辑删除全局值 1已删除
-      logic-not-delete-value: 0 #逻辑未删除全局值 0未删除
-      insert-strategy: not_null  #字段策略
-      update-strategy: not_null  #字段策略
-      where-strategy: not_empty  #字段策略
-  configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
-    lazyLoadingEnabled: true  #查询时，关闭关联对象即时加载以提高性能
-    aggressiveLazyLoading: false  #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
-    multipleResultSetsEnabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
-    useColumnLabel: true #允许使用列标签代替列名
-    useGeneratedKeys: true #允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖
-    autoMappingBehavior: FULL #给予被嵌套的resultMap以字段-属性的映射支持
-    defaultExecutorType: SIMPLE #对于批量更新操作缓存SQL以提高性能
-    defaultStatementTimeout: 15  #数据库超过15秒仍未响应则超时，部分语句可单独指定超时时间
-    jdbcTypeForNull: NULL
-    callSettersOnNulls: true  #当参数为NULL且字段列可为空的Double等类型时可直接当NULL插入
-    logPrefix: "dao."  #打印sql语句
-  configuration-properties:
-    CONSTANT_CIPHER_TEXT: taotao-cloud
-
-
-seata:
-  enabled: true
-  service:
-    grouplist:
-      default: 127.0.0.1:8091
-    vgroup-mapping:
-      my_test_tx_group: default
-  application-id: taotao-cloud-search-service
-  tx-service-group: my_test_tx_group
-  enable-auto-data-source-proxy: true
-  config:
-    type: nacos
-    nacos:
-      namespace: bbeb253d-aaa8-4a75-9d0b-27931232439f
-      server-addr: 127.0.0.1:8848
-      group: SEATA_GROUP
-      username: nacos
-      password: nacos
-  registry:
-    type: nacos
-    nacos:
-      application: seata-server
-      server-addr: 127.0.0.1:8848
-      group: SEATA_GROUP
-      namespace: bbeb253d-aaa8-4a75-9d0b-27931232439f
-      username: nacos
-      password: nacos
-      cluster: default
-
 spring:
+  config:
+    activate:
+      on-profile: dev
+  pid:
+    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:
+    allow-circular-references: true
     allow-bean-definition-overriding: true
+    banner-mode: off
+    register-shutdown-hook: true
   application:
-    name: taotao-cloud-search-service
+    name: taotao-cloud-file
   cloud:
+    circuitbreaker:
+      sentinel:
+        enabled: true
+    loadbalancer:
+      enabled: true
     nacos:
       discovery:
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:192.168.10.200}:${TAOTAO-CLOUD-NACOS-PORT:8848}
+        server-addr: 192.168.10.220:8848
         metadata:
           version: ${taotaoCloudVersion}
+          user.name: "admin"
+          user.password: "123456"
+        group: TAOTAO_CLOUD_GROUP
+        namespace: taotao-cloud-dev
+        username: nacos
+        password: nacos
+        cluster-name: CQ
+        naming-load-cache-at-start: false
       config:
-        enabled: false
-        server-addr: ${TAOTAO-CLOUD-NACOS-HOST:192.168.10.200}:${TAOTAO-CLOUD-NACOS-PORT:8848}
-        namespace: 2c421c7d-7c62-422e-a4f3-996a2d301c67
+        enabled: true
+        server-addr: 192.168.10.220:8848
+        namespace: taotao-cloud-dev
+        username: nacos
+        password: nacos
+        group: TAOTAO_CLOUD_GROUP
         file-extension: yml
+        cluster-name: CQ
+        refresh-enabled: true
+        #使用nacos配置中心配置 dynamic-tp-nacos-cloud-demo-dtp-dev.yml
+        #extension-configs:
+        #  - dataId: ${spring.application.name}-dtp-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        #    group: DEFAULT_GROUP
+        #    refresh: true  # 必须配置，负责自动刷新不生效
     sentinel:
       enabled: true
       eager: true
-      datasource:
-        ds1:
-          nacos:
-            server-addr: 127.0.0.1:8848
-            dataId: taotao-cloud-search-sentinel
-            groupId: DEFAULT_GROUP
-            data-type: json
-            rule-type: flow
+      #      datasource:
+      #        #流控 名称随意
+      #        flow:
+      #          nacos:
+      #            server-addr: 192.168.10.210:8848
+      #            dataId: ${spring.application.name}-flow-rules.json
+      #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+      #            username: nacos
+      #            password: nacos
+      #            groupId: SENTINEL_GROUP
+      #            data-type: json
+      #            # 规则类型，取值见： org.springframework.cloud.alibaba.sentinel.datasource.RuleType
+      #            rule-type: flow
+      #        #熔断降级 名称随意
+      #        degrade:
+      #          nacos:
+      #            server-addr: 192.168.10.210:8848
+      #            dataId: ${spring.application.name}-degrade-rules.json
+      #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+      #            username: nacos
+      #            password: nacos
+      #            groupId: SENTINEL_GROUP
+      #            data-type: json
+      #            rule-type: degrade
+      #        #系统规则 名称随意
+      #        system:
+      #          nacos:
+      #            server-addr: 192.168.10.210:8848
+      #            dataId: ${spring.application.name}-system-rules.json
+      #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+      #            username: nacos
+      #            password: nacos
+      #            groupId: SENTINEL_GROUP
+      #            data-type: json
+      #            rule-type: system
+      #        #授权规则 名称随意
+      #        authority:
+      #          nacos:
+      #            server-addr: 192.168.10.210:8848
+      #            dataId: ${spring.application.name}-authority-rules.json
+      #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+      #            username: nacos
+      #            password: nacos
+      #            groupId: SENTINEL_GROUP
+      #            data-type: json
+      #            rule-type: authority
+      #        #参数规则 名称随意
+      #        param-flow:
+      #          nacos:
+      #            server-addr: 192.168.10.210:8848
+      #            dataId: ${spring.application.name}-param-flow-rules.json
+      #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
+      #            username: nacos
+      #            password: nacos
+      #            groupId: SENTINEL_GROUP
+      #            data-type: json
+      #            rule-type: param-flow
       transport:
-        dashboard: ${TAOTAO-CLOUD-SENTINEL-DASHBOARD-HOST:192.168.10.200}:${TAOTAO-CLOUD-SENTINEL-DASHBOARD-PORT:8858}
-        port: ${TAOTAO-CLOUD-SENTINEL-PORT:8717}
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.10.200}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-search-service?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: ${TAOTAO-CLOUD-MYSQL-USERNAME:ENC(RGAhmAvQZI2/69eo8rl5bSwPXjXkMTk8M0QuL5vlVM/epApayMBFzdlLpomy8kDk)}
-    password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:ENC(y9HJzgk9hlfH3n3kh/UMI1n+V4E5R3pb2K4JyKT58qBg7CLq1xvGALRi7X1tL21F)}
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    hikari:
-      auto-commit: true
-      connection-timeout: 30000
-      idle-timeout: 25000
-      login-timeout: 5
-      validation-timeout: 3000
-      max-lifetime: 50000
-      read-only: false
-      connection-test-query: SELECT 1
-      maximum-pool-size: 15
-      minimum-idle: 10
-      pool-name: DatebookHikariCP
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-  jpa:
-    database: mysql
-    show-sql: true
-    open-in-view: false
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-  redis:
-    host: ${TAOTAO-CLOUD-REDIS-HOST:192.168.10.200}
-    port: ${TAOTAO-CLOUD-REDIS-PORT:6379}
-    database: 1
-    #    password: ${TAOTAO-CLOUD-REDIS-PASSWORD:123456}
-    lettuce:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
-#  data:
-#    elasticsearch:
-#      repositories:
-#        # elasticsearch 开发阶段关闭
-#        enabled: true
-#      client:
-#        reactive:
-#          endpoints:
-#            - ${TAOTAO-CLOUD-ELASTICSEARCH-HOST:192.168.99.230}:${TAOTAO-CLOUD-ELASTICSEARCH-PORT:9200}
-#          connection-timeout: 5
-#          username: ${TAOTAO-CLOUD-ELASTICSEARCH-USERNAME:elastic}
-#          password: ${TAOTAO-CLOUD-ELASTICSEARCH-PASSWORD:elastic}
-#  kafka:
-#    bootstrap-servers: ${TAOTAO-CLOUD-KAFKA-HOST}:${TAOTAO-CLOUD-KAFKA-PORT}
-#    producer:
-#      retries: 0
-#      batch-size: 16384
-#      buffer-memory: 33554432
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-#      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-#      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
-#      acks: 1
-#      properties:
-#        linger.ms: 500
-#    consumer:
-#      auto-commit-interval: 1S
-#      auto-offset-reset: earliest
-#      enable-auto-commit: false
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#    listener:
-#      concurrency: 5
-#      ack-mode: manual_immediate
-#      missing-topics-fatal: false
-#  gson:
-#    date-format: yyyy-MM-dd HH:mm:ss
-#    disable-html-escaping: true
-#    pretty-printing: true
-#    serialize-nulls: true
-#    long-serialization-policy: string
-#  sleuth:
-#    web:
-#      client:
-#        # sleuth 开发阶段关闭
-#        enabled: true
-#    sampler:
-#      probability: 1.0
-#  zipkin:
-#    # zipkin 开发阶段关闭
-#    enabled: true
-#    sender:
-#      type: kafka
-#  shardingsphere:
-#    # zipkin 开发阶段关闭
-#    enabled: false
-#    datasource:
-#      names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
-#      mysql-master-1:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/taotao-cloud-sys-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-#        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
-#        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-#        driver-class-name: com.mysql.jdbc.Driver
-#        hikari:
-#          connection-test-query: SELECT 1
-#          max-lifetime: 120000
-#          maximum-pool-size: 15
-#          minimum-idle: 3
-#          connection-timeout: 30000
-#          idle-timeout: 30000
-#          auto-commit: true
-#          pool-name: DatebookHikariCP
-#      mysql-slave-1:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/taotao-cloud-sys-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-#        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
-#        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-#        driver-class-name: com.mysql.jdbc.Driver
-#        hikari:
-#          connection-test-query: SELECT 1
-#          max-lifetime: 120000
-#          maximum-pool-size: 15
-#          minimum-idle: 3
-#          connection-timeout: 30000
-#          idle-timeout: 30000
-#          auto-commit: true
-#          pool-name: DatebookHikariCP
-#      mysql-master-2:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/taotao-cloud-sys-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-#        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
-#        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-#        driver-class-name: com.mysql.jdbc.Driver
-#        hikari:
-#          connection-test-query: SELECT 1
-#          max-lifetime: 120000
-#          maximum-pool-size: 15
-#          minimum-idle: 3
-#          connection-timeout: 30000
-#          idle-timeout: 30000
-#          auto-commit: true
-#          pool-name: DatebookHikariCP
-#      mysql-slave-2:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/taotao-cloud-sys-service?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-#        username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
-#        password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
-#        driver-class-name: com.mysql.jdbc.Driver
-#        hikari:
-#          connection-test-query: SELECT 1
-#          max-lifetime: 120000
-#          maximum-pool-size: 15
-#          minimum-idle: 3
-#          connection-timeout: 30000
-#          idle-timeout: 30000
-#          auto-commit: true
-#          pool-name: DatebookHikariCP
-#    sharding:
-#      default-database-strategy:
-#        inline:
-#          sharding-column: id
-#          algorithm-expression: ds_$->{id % 2}
-#      #      binding-tables: sys_user,sys_dept,sys_job
-#      tables:
-#        sys_user:
-#          key-generator-column-name: id
-#          actual-data-nodes: ds_$->{0..1}.sys_user_$->{0..3}
-#          table-strategy:
-#            inline:
-#              sharding-column: id
-#              algorithm-expression: sys_user_$->{id % 4}
-#      master-slave-rules:
-#        ds_0:
-#          load-balance-algorithm-type: round_robin
-#          master-data-source-name: mysql-master-1
-#          slave-data-source-names: mysql-slave-1
-#        ds_1:
-#          load-balance-algorithm-type: round_robin
-#          master-data-source-name: mysql-master-2
-#          slave-data-source-names: mysql-slave-2
-#    props:
-#      sql:
-#        show: true
+        dashboard: 192.168.10.220:8858
+        port: 8712
+      metric:
+        file-single-size: 1024 * 1024 * 50
+        file-total-count: 10
+      flow:
+        cold-factor: 3
+      log:
+        dir: ${user.home}/logs/${spring.application.name}/sentinel
+        switch-pid: false
 
-security:
-  oauth2:
-    client:
-      clientId: taotao-cloud-sys-service
-      clientSecret: taotao-cloud-sys-service
-      userAuthorizationUri: http://taotao-cloud-sys-service/oauth/authorize
-      access-token-uri: http://taotao-cloud-sys-service/oauth/token
-    resource:
-      id: taotao-cloud-sys-service
-      prefer-token-info: false
-      token-info-uri: http://taotao-cloud-sys-service/oauth/check_token
-      user-info-uri: http://taotao-cloud-sys-service/oauth/user
-    authorization:
-      check-token-access: http://taotao-cloud-sys-service/oauth/check_token
-
-
-#mybatis-plus:
-#  #  mapper-locations: classpath:/mapper/*Mapper.xml
-#  typeAliasesPackage: com.taotao.cloud.uc.biz.entity
-#  global-config:
-#    db-config:
-#      id-type: auto
-#      table-underline: true
-#      field-strategy: NOT_NULL
-#      logic-delete-value: 1
-#      logic-not-delete-value: 0
-#  configuration:
-#    map-underscore-to-camel-case: true
-#    cache-enabled: false
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-taotao:
-  cloud:
-    oauth2:
-      security:
-        enabled: true
-        ignore:
-          # 忽略认证的地址
-          http-urls:
-            - /api-docs
-            - /user/info/username
-            - /resource/test/seata
-            - /role/info/userId
-            - /resource/info/codes
-            - /member/info/security
-            - /user
-    swagger:
-      enabled: true
-      title: 用户中心
-      description: 用户中心接口文档
-      version: ${taotaoCloudVersion}
-      license: Apache
-      license-url: https://opensource.org/licenses/Apache-2.0Url
-      contact:
-        name: shuigedeng
-        url: http://dtbox.top/
-        email: 981376577@qq.com
-      base-package: com.taotao.cloud.aftersale.biz.controller
-      host: ${spring.cloud.client.ip-address}:${server.port}
-    ribbon:
-      isolation:
-        enabled: true
-      rest-template:
-        max-total: 200
-        max-per-route: 50
-        read-timeout: 35000
-        connect-timeout: 10000
-    log:
-      enabled: true
-      types:
-        - logger
-    p6spy:
-      enabled: true
-      dateformat: yyyy-MM-dd HH:mm:ss
-      driverlist: com.mysql.cj.jdbc.Driver
-      database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.p6spy.logger.P6spyLogger
-      log-message-format: com.taotao.cloud.p6spy.component.P6spyLogFormat
-      # 使用日志系统记录sql
-      #appender: com.p6spy.engine.spy.appender.Slf4JLogger
-    logger:
-      enabled: true
-    oss:
-      enabled: true
-      type: minio
-      miniooss:
-        endpoint: xxxxxx
-        access-key: xxxx
-        secret-key: xxxx
-        bucket-name: xstest
-        #base-path: taotao-cloud-dev
-        slice-config:
-          task-num: 8
-          part-size: 104857600
-        client-config:
-          connect-timeout: 5000
-        #oss-config:
-        #  minio1:
-        #    endpoint: https://play.min.io
-        #    access-key: Q3AM3UQ867SPQQA43P2F
-        #    secret-key: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
-        #    bucket-name: asiatrip
-        #    base-path: /test
-        #    slice-config:
-        #      task-num: 8
-        #      part-size: 104857600
-        #    client-config:
-        #      connect-timeout: 5000
-    file-storage: #文件存储配置，不使用的情况下可以不写
-      default-platform: local-plus-1 #默认使用的存储平台
-      thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
-      local: # 本地存储（不推荐使用）
-        - platform: local-1 # 存储平台标识
-          enable-storage: true  #启用存储
-          enable-access: true #启用访问（线上请使用 Nginx 配置，效率更高）
-          domain: "" # 访问域名，例如：“http://127.0.0.1:8030/test/file/”，注意后面要和 path-patterns 保持一致，“/”结尾，本地存储建议使用相对路径，方便后期更换域名
-          base-path: D:/Temp/test/ # 存储地址
-          path-patterns: /test/file/** # 访问路径，开启 enable-access 后，通过此路径可以访问到上传的文件
-      local-plus: # 本地存储升级版
-        - platform: local-plus-1 # 存储平台标识
-          enable-storage: true  #启用存储
-          enable-access: true #启用访问（线上请使用 Nginx 配置，效率更高）
-          domain: "" # 访问域名，例如：“http://127.0.0.1:8030/”，注意后面要和 path-patterns 保持一致，“/”结尾，本地存储建议使用相对路径，方便后期更换域名
-          base-path: local-plus/ # 基础路径
-          path-patterns: /** # 访问路径
-          storage-path: D:/Temp/ # 存储路径
-      huawei-obs: # 华为云 OBS ，不使用的情况下可以不写
-        - platform: huawei-obs-1 # 存储平台标识
-          enable-storage: false  # 启用存储
-          access-key: ??
-          secret-key: ??
-          end-point: ??
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：http://abc.obs.com/
-          base-path: hy/ # 基础路径
-      aliyun-oss: # 阿里云 OSS ，不使用的情况下可以不写
-        - platform: aliyun-oss-1 # 存储平台标识
-          enable-storage: false  # 启用存储
-          access-key: ??
-          secret-key: ??
-          end-point: ??
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://abc.oss-cn-shanghai.aliyuncs.com/
-          base-path: hy/ # 基础路径
-      qiniu-kodo: # 七牛云 kodo ，不使用的情况下可以不写
-        - platform: qiniu-kodo-1 # 存储平台标识
-          enable-storage: false  # 启用存储
-          access-key: ??
-          secret-key: ??
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：http://abc.hn-bkt.clouddn.com/
-          base-path: base/ # 基础路径
-      tencent-cos: # 腾讯云 COS
-        - platform: tencent-cos-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          secret-id: ??
-          secret-key: ??
-          region: ?? #存仓库所在地域
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://abc.cos.ap-nanjing.myqcloud.com/
-          base-path: hy/ # 基础路径
-      baidu-bos: # 百度云 BOS
-        - platform: baidu-bos-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          access-key: ??
-          secret-key: ??
-          end-point: ?? # 例如 abc.fsh.bcebos.com
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://abc.fsh.bcebos.com/abc/
-          base-path: hy/ # 基础路径
-      upyun-uss: # 又拍云 USS
-        - platform: upyun-uss-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          username: ??
-          password: ??
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：http://abc.test.upcdn.net/
-          base-path: hy/ # 基础路径
-      minio: # MinIO，由于 MinIO SDK 支持 AWS S3，其它兼容 AWS S3 协议的存储平台也都可配置在这里
-        - platform: minio-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          access-key: ??
-          secret-key: ??
-          end-point: ??
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：http://minio.abc.com/abc/
-          base-path: hy/ # 基础路径
-      aws-s3: # AWS S3，其它兼容 AWS S3 协议的存储平台也都可配置在这里
-        - platform: aws-s3-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          access-key: ??
-          secret-key: ??
-          region: ?? # 与 end-point 参数至少填一个
-          end-point: ?? # 与 region 参数至少填一个
-          bucket-name: ??
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://abc.hn-bkt.clouddn.com/
-          base-path: s3/ # 基础路径
-      ftp: # FTP
-        - platform: ftp-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          host: ?? # 主机，例如：192.168.1.105
-          port: 21 # 端口，默认21
-          user: anonymous # 用户名，默认 anonymous（匿名）
-          password: "" # 密码，默认空
-          domain: ?? # 访问域名，注意“/”结尾，例如：ftp://192.168.1.105/
-          base-path: ftp/ # 基础路径
-          storage-path: / # 存储路径，上传的文件都会存储在这个路径下面，默认“/”，注意“/”结尾
-      sftp: # SFTP
-        - platform: sftp-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          host: ?? # 主机，例如：192.168.1.105
-          port: 22 # 端口，默认22
-          user: root # 用户名
-          password: ?? # 密码或私钥密码
-          private-key-path: ?? # 私钥路径，兼容Spring的ClassPath路径、文件路径、HTTP路径等，例如：classpath:id_rsa_2048
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://file.abc.com/
-          base-path: sftp/ # 基础路径
-          storage-path: /www/wwwroot/file.abc.com/ # 存储路径，注意“/”结尾
-      webdav: # WebDAV
-        - platform: webdav-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          server: ?? # 服务器地址，例如：http://192.168.1.105:8405/
-          user: ?? # 用户名
-          password: ?? # 密码
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://file.abc.com/
-          base-path: webdav/ # 基础路径
-          storage-path: / # 存储路径，上传的文件都会存储在这个路径下面，默认“/”，注意“/”结尾
-      google-cloud: # 谷歌云存储
-        - platform: google-1 # 存储平台标识
-          enable-storage: true  # 启用存储
-          project-id: ?? # 项目 id
-          bucket-name: ??
-          credentials-path: file:/deploy/example-key.json # 授权 key json 路径，兼容Spring的ClassPath路径、文件路径、HTTP路径等
-          domain: ?? # 访问域名，注意“/”结尾，例如：https://storage.googleapis.com/test-bucket/
-          base-path: hy/ # 基础路径
-
-
-feign:
-  sentinel:
-    enabled: true
-  hystrix:
-    enabled: false
-  okhttp:
-    enabled: false
-  httpclient:
-    enabled: false
-    max-connections: 1000
-    max-connections-per-route: 100
-  client:
-    config:
-      feignName:
-        connectTimeout: 30000
-        readTimeout: 30000
-  compression:
-    request:
-      enabled: true
-      mime-types: text/xml,application/xml,application/json
-      min-request-size: 2048
-    response:
-      enabled: true
-
-#hystrix:
-#  threadpool:
-#    default:
-#      coreSize: 1200
-#      maximumSize: 15000
-#      allowMaximumSizeToDivergeFromCoreSize: true
-#      maxQueueSize: 2000
-#      queueSizeRejectionThreshold: 1800
-#  command:
-#    default:
-#      circuitBreaker:
-#        # 当在配置时间窗口内达到此数量的失败后，进行短路。默认20个
-#        requestVolumeThreshold: 30
-#        # 触发短路的时间值，当该值设为5000时，则当触发 circuit break 后的5000毫秒内都会拒绝request
-#        # 也就是5000毫秒后才会关闭circuit。默认5000
-#        sleepWindowInMilliseconds: 45000
-#      execution:
-#        timeout:
-#          enabled: false
-#        isolation:
-#          strategy: SEMAPHORE
-#          semaphore:
-#            maxConcurrentRequests: 100
-#          thread:
-#            # 断路器超时时间，默认1000ms
-#            timeoutInMilliseconds: 300000
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 90000
-
-ribbon:
-  eager-load:
-    enabled: true
-  ServerListRefreshInterval: 10  #刷新服务列表源的间隔时间
-  httpclient:
-    enabled: false
-  okhttp:
-    enabled: true
-  ReadTimeout: 300000
-  ConnectTimeout: 300000
-  OkToRetryOnAllOperations: true
-  MaxAutoRetries: 1
-  MaxAutoRetriesNextServer: 1
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  metrics:
-    tags:
-      application: ${spring.application.name}
-  health:
-    elasticsearch:
-      enabled: false
-
-
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
+  logback:
+    rollingpolicy:
+      max-file-size: 10GB
+      max-history: 30
+      clean-history-on-start: true
+      total-size-cap: 20GB
+  level:
+    root: INFO
+    org.apache.zookeeper.ZooKeeper: info
+    com.taotao.cloud.sys.api.feign: debug
+    net.ttddyy.dsproxy.listener: debug
+    net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
+    # hibernate log
+    #org.hibernate.SQL: debug
+    #org.hibernate.type: info
+    #org.hibernate.type.descriptor.sql.BasicBinder: trace
+    #org.hibernate.type.descriptor.sql.BasicExtractor: debug
+    #org.hibernate.engine.QueryParameters: debug
+    #org.hibernate.engine.query.HQLQueryPlan: debug
+    # mybatis log
+    #com.apache.ibatis: trace
+    #java.sql.Connection: debug
+    #java.sql.Statement: debug
+    #java.sql.PreparedStatement: debug
+    # kafka log
+    #kafka.server.KafkaConfig: info
+    #kafka.admin.AdminClient.AdminConfig: info
+    #org.apache.kafka: off
+    #org.I0Itec.zkclient: info
+    # springframework log
+    #org.springframework.cloud.openfeign: debug
+    #org.springframework.web: off
+    #org.springframework.security: off
+    #org.springframework.security.oauth2: off
+    #org.springframework.boot.autoconfigure: off
+    #org.elasticsearch.client: debug

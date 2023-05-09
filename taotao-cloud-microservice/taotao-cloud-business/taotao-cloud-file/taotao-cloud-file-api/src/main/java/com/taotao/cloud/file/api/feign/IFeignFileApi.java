@@ -54,6 +54,6 @@ public interface IFeignFileApi {
                 @Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
                 @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
-    @GetMapping("/sys/feign/dict/code")
+    @GetMapping("/file/feign/file/code")
     FeignFileResponse findByCode(@RequestParam(value = "code") String code);
 }

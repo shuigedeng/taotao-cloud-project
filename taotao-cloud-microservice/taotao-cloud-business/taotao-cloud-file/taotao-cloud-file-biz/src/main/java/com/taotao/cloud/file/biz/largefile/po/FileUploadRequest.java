@@ -48,5 +48,5 @@ public class FileUploadRequest {
     private String md5;
 
     // 当前分片大小
-    private Long size = 0L;
+    private Long size;
 }

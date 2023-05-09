@@ -18,7 +18,7 @@ package com.taotao.cloud.job.biz.schedule.model;
 
 import java.util.List;
 
-public class TaskVo {
+public class ScheduledJobVO {
 
     // 任务名
     private String name;

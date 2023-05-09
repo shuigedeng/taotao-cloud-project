@@ -22,8 +22,8 @@ import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
 import com.taotao.cloud.job.biz.schedule.mapper.ScheduledJobLogMapper;
 import com.taotao.cloud.job.biz.schedule.mapper.ScheduledJobMapper;
-import com.taotao.cloud.job.biz.schedule.model.TaskParam;
-import com.taotao.cloud.job.biz.schedule.model.TaskVo;
+import com.taotao.cloud.job.biz.schedule.model.ScheduledJobDTO;
+import com.taotao.cloud.job.biz.schedule.model.ScheduledJobVO;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobService;
 import com.taotao.cloud.job.biz.util.JobUtils;
 import com.taotao.cloud.job.schedule.constant.TaskRunTypeConstant;
@@ -40,6 +40,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 计划工作服务实现类
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-09 15:05:03
+ */
 @Service
 public class ScheduledJobServiceImpl implements ScheduledJobService {
 
@@ -53,13 +60,13 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
     private ScheduledJobMapper scheduledJobMapper;
 
     @Override
-    public List<ScheduledJob> taskList() {
+    public List<ScheduledJob> jobList() {
         return scheduledJobLogMapper.selectList(new QueryWrapper<>());
     }
 
     @Override
     @Transactional
-    public Boolean addTask(TaskParam param) {
+    public boolean addTask(ScheduledJobDTO param) {
         // 解析表达式，此表达式由后端根据规则进行解析，可以直接由前端进行传递
         String cron = JobUtils.dateConvertToCron(param);
 
@@ -102,7 +109,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 
     @Override
     @Transactional
-    public Boolean updateTask(TaskParam param) {
+    public boolean updateTask(ScheduledJobDTO param) {
         ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(param.getId());
         if (scheduledJob == null) {
             throw new RuntimeException("更新失败,任务不存在");
@@ -137,7 +144,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 
     @Override
     @Transactional
-    public Boolean invokeTask(String id) {
+    public boolean invokeTask(String id) {
         ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
         if (scheduledJob == null) {
@@ -154,7 +161,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 
     @Override
     @Transactional
-    public Boolean stopTask(String id) {
+    public boolean stopTask(String id) {
         ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
         if (scheduledJob == null) {
@@ -167,7 +174,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 
     @Override
     @Transactional
-    public Boolean deleteTask(String id) {
+    public boolean deleteTask(String id) {
         ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
         if (scheduledJob == null) {
@@ -182,7 +189,7 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
 
     @Override
     @Transactional
-    public Boolean forbidTask(String id) {
+    public boolean forbidTask(String id) {
         ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
 
         if (scheduledJob == null) {
@@ -201,14 +208,14 @@ public class ScheduledJobServiceImpl implements ScheduledJobService {
     }
 
     @Override
-    public TaskVo getTaskById(String id) {
+    public ScheduledJobVO getTaskById(String id) {
         ScheduledJob scheduledJob = scheduledJobLogMapper.selectById(id);
-        TaskVo taskVo = new TaskVo();
-        BeanUtils.copyProperties(scheduledJob, taskVo);
+        ScheduledJobVO scheduledJobVO = new ScheduledJobVO();
+        BeanUtils.copyProperties(scheduledJob, scheduledJobVO);
         List<String> nextExecution =
                 (List<String>) CronUtils.getNextExecution(scheduledJob.getCronExpression(), 8, true);
-        taskVo.setNext(nextExecution);
-        return taskVo;
+        scheduledJobVO.setNext(nextExecution);
+        return scheduledJobVO;
     }
 
     /** 任务日志 */

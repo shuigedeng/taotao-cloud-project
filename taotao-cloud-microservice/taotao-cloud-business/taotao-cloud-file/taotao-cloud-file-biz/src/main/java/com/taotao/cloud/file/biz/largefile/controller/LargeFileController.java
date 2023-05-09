@@ -20,14 +20,13 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.file.biz.largefile.po.FileDownloadRequest;
 import com.taotao.cloud.file.biz.largefile.po.FileUpload;
 import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
-import com.taotao.cloud.file.biz.largefile.service.FileService;
+import com.taotao.cloud.file.biz.largefile.service.LargeFileService;
 import com.taotao.cloud.file.biz.largefile.util.FileUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StopWatch;
@@ -38,12 +37,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/largefile")
 @Slf4j
-public class FileController {
+public class LargeFileController {
 
     @Autowired
-    private FileService fileService;
+    private LargeFileService largeFileService;
 
     @Autowired
     private HttpServletRequest request;
@@ -70,15 +69,16 @@ public class FileController {
     @ResponseBody
     public Result<FileUpload> upload(FileUploadRequest fileUploadRequestDTO) throws IOException {
 
-        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        // boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        boolean isMultipart = true;
         FileUpload fileUploadDTO = null;
         if (isMultipart) {
             StopWatch stopWatch = new StopWatch();
             stopWatch.start("upload");
             if (fileUploadRequestDTO.getChunk() != null && fileUploadRequestDTO.getChunks() > 0) {
-                fileUploadDTO = fileService.sliceUpload(fileUploadRequestDTO);
+                fileUploadDTO = largeFileService.sliceUpload(fileUploadRequestDTO);
             } else {
-                fileUploadDTO = fileService.upload(fileUploadRequestDTO);
+                fileUploadDTO = largeFileService.upload(fileUploadRequestDTO);
             }
             stopWatch.stop();
             log.info("{}", stopWatch.prettyPrint());
@@ -93,7 +93,7 @@ public class FileController {
     @ResponseBody
     public Result<FileUpload> checkFileMd5(String md5, String path) throws IOException {
         FileUploadRequest param = new FileUploadRequest().setPath(path).setMd5(md5);
-        FileUpload fileUploadDTO = fileService.checkFileMd5(param);
+        FileUpload fileUploadDTO = largeFileService.checkFileMd5(param);
 
         return Result.success(fileUploadDTO);
     }
