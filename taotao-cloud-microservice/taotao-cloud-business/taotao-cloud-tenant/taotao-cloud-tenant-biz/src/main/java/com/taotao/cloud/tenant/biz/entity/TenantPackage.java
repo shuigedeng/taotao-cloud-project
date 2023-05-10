@@ -14,11 +14,30 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.biz.dao;
+package com.taotao.cloud.tenant.biz.entity;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.tenant.biz.entity.TenantPackage;
-import org.apache.ibatis.annotations.Mapper;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.taotao.cloud.common.enums.GlobalStatusEnum;
+import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.Data;
 
-@Mapper
-public interface TenantPackageMapper extends BaseMapper<TenantPackage> {}
+@Data
+@TableName("tenant_package")
+public class TenantPackage extends BaseSuperEntity<TenantPackage, Long> {
+
+    /** 套餐名 */
+    private String name;
+
+    /**
+     * 套餐状态
+     *
+     * <p>枚举 {@link GlobalStatusEnum}
+     */
+    private Integer status;
+
+    /** 备注 */
+    private String remark;
+
+    /** 套餐关联的菜单编号 */
+    private String menuIds;
+}

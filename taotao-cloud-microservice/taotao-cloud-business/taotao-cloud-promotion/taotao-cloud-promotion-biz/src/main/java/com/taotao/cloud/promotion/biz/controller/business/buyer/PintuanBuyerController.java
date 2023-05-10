@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanShareVO;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
@@ -40,7 +40,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 买家端,拼团接口
  *
- * @since 2021/2/20
  */
 @Tag(name = "买家端,拼团接口")
 @RestController

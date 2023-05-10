@@ -21,42 +21,38 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.api.model.dto.TenantPageDTO;
 import com.taotao.cloud.tenant.biz.convert.TenantConvert;
-import com.taotao.cloud.tenant.biz.entity.TenantDO;
+import com.taotao.cloud.tenant.biz.entity.Tenant;
+
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-/**
- * @author
- * @version 0.0.1
- * @date 2022/11/26 14:21
- */
 @RequiredArgsConstructor
 @Component
 public class TenantManager {
 
     private final TenantMapper tenantMapper;
 
-    public List<TenantDO> listTenant() {
+    public List<Tenant> listTenant() {
         return tenantMapper.selectList(Wrappers.emptyWrapper());
     }
 
-    public TenantDO getTenantById(Long id) {
+    public Tenant getTenantById(Long id) {
         return tenantMapper.selectById(id);
     }
 
     public Long addTenant(TenantDTO tenant) {
-        TenantDO tenantDO = TenantConvert.INSTANCE.convert(tenant);
+        Tenant tenantDO = TenantConvert.INSTANCE.convert(tenant);
         tenantMapper.insert(tenantDO);
         return tenantDO.getId();
     }
 
     public void updateTenantAdmin(Long tenantId, Long userId) {
-        TenantDO tenantDO = new TenantDO();
-        tenantDO.setId(tenantId);
+        Tenant tenant = new Tenant();
+        tenant.setId(tenantId);
 
-        tenantMapper.update(tenantDO, Wrappers.<TenantDO>lambdaUpdate().set(TenantDO::getTenantAdminId, userId));
+        tenantMapper.update(tenant, Wrappers.<Tenant>lambdaUpdate().set(Tenant::getTenantAdminId, userId));
     }
 
     public Integer updateTenant(TenantDTO tenantDTO) {
@@ -67,24 +63,24 @@ public class TenantManager {
         return tenantMapper.deleteById(id);
     }
 
-    public TenantDO getTenantByName(String name) {
+    public Tenant getTenantByName(String name) {
         return tenantMapper.selectOne(
-                Wrappers.<TenantDO>lambdaQuery().eq(TenantDO::getName, name).last("limit 1"));
+                Wrappers.<Tenant>lambdaQuery().eq(Tenant::getName, name).last("limit 1"));
     }
 
-    public Page<TenantDO> pageTenant(TenantPageDTO pageDTO) {
+    public Page<Tenant> pageTenant(TenantPageDTO pageDTO) {
         return tenantMapper.selectPage(
                 Page.of(pageDTO.getCurrentPage(), pageDTO.getPageSize()), Wrappers.emptyWrapper());
     }
 
-    public List<TenantDO> getTenantListByPackageId(Long packageId) {
-        return tenantMapper.selectList(Wrappers.<TenantDO>lambdaQuery().eq(TenantDO::getPackageId, packageId));
+    public List<Tenant> getTenantListByPackageId(Long packageId) {
+        return tenantMapper.selectList(Wrappers.<Tenant>lambdaQuery().eq(Tenant::getPackageId, packageId));
     }
 
     public Boolean validTenantPackageUsed(Long packageId) {
-        TenantDO tenantDO = tenantMapper.selectOne(Wrappers.<TenantDO>lambdaQuery()
-                .eq(TenantDO::getPackageId, packageId)
+        Tenant tenant = tenantMapper.selectOne(Wrappers.<Tenant>lambdaQuery()
+                .eq(Tenant::getPackageId, packageId)
                 .last("limit 1"));
-        return Objects.nonNull(tenantDO);
+        return Objects.nonNull(tenant);
     }
 }

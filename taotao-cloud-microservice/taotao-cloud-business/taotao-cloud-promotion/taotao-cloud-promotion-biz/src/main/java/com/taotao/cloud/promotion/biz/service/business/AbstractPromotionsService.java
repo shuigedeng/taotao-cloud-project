@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.promotion.api.model.query.BasePromotionsSearchQuery;
+import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 import java.util.List;
 

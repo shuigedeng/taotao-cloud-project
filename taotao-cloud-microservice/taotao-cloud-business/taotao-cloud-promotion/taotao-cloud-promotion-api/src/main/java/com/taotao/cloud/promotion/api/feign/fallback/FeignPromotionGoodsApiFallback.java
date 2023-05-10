@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import java.math.BigDecimal;
 import java.util.List;
@@ -49,6 +49,11 @@ public class FeignPromotionGoodsApiFallback implements FallbackFactory<IFeignPro
             public BigDecimal getValidPromotionsGoodsPrice(Long skuId, List<String> singletonList) {
                 return null;
             }
-        };
+
+			@Override
+			public List<PromotionGoodsVO> findSkuValidPromotions(List<String> categories, List<String> skuIds) {
+				return null;
+			}
+		};
     }
 }

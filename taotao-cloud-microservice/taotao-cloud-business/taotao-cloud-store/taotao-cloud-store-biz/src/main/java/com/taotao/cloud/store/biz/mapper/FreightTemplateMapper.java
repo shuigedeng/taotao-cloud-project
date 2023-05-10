@@ -17,6 +17,7 @@
 package com.taotao.cloud.store.biz.mapper;
 
 import com.taotao.cloud.store.biz.model.entity.FreightTemplate;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 店铺配送模板数据处理层 */
-public interface FreightTemplateMapper extends BaseSuperMapper<FreightTemplate> {}
+public interface FreightTemplateMapper extends BaseSuperMapper<FreightTemplate, String> {}

@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.vo.kanjia;
+package com.taotao.cloud.promotion.api.model.page;
 
-import com.taotao.cloud.promotion.api.model.query.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,11 +26,10 @@ import lombok.Setter;
 /** 砍价活动搜索参数 */
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivitySearchQuery extends BasePromotionsSearchQuery {
+public class KanjiaActivitySearchPageQuery extends BasePromotionsSearchQuery {
 
     @Schema(description = "砍价活动ID")
     private String id;
@@ -52,15 +49,16 @@ public class KanjiaActivitySearchQuery extends BasePromotionsSearchQuery {
     @Schema(description = "规格商品ID", hidden = true)
     private String goodsSkuId;
 
-    // 	public <T> QueryWrapper<T> wrapper() {
-    // 		QueryWrapper<T> queryWrapper = new QueryWrapper<>();
     //
-    // 		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityId), "id", kanjiaActivityId);
-    // 		queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityGoodsId), "kanjia_activity_goods_id",
-    // 			kanjiaActivityGoodsId);
-    // 		queryWrapper.eq(StrUtil.isNotEmpty(goodsSkuId), "sku_id", goodsSkuId);
-    // 		queryWrapper.eq(StrUtil.isNotEmpty(memberId), "member_id", memberId);
-    // 		queryWrapper.eq(StrUtil.isNotEmpty(status), "status", status);
-    // 		return queryWrapper;
-    // 	}
+    // public <T> QueryWrapper<T> wrapper() {
+    // 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
+    //
+    // 	queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityId), "id", kanjiaActivityId);
+    // 	queryWrapper.eq(StrUtil.isNotEmpty(kanjiaActivityGoodsId), "kanjia_activity_goods_id",
+    // kanjiaActivityGoodsId);
+    // 	queryWrapper.eq(StrUtil.isNotEmpty(goodsSkuId), "sku_id", goodsSkuId);
+    // 	queryWrapper.eq(StrUtil.isNotEmpty(memberId), "member_id", memberId);
+    // 	queryWrapper.eq(StrUtil.isNotEmpty(status), "status", status);
+    // 	return queryWrapper;
+    // }
 }

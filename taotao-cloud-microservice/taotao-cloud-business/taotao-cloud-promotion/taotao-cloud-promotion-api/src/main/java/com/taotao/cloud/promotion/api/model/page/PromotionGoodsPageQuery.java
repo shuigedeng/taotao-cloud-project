@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.page;
 
+import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;

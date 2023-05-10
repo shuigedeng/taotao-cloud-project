@@ -20,14 +20,13 @@ import cn.hutool.core.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.model.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityVO;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;
 import com.taotao.cloud.promotion.biz.service.business.ICouponActivityService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collections;
@@ -59,7 +58,7 @@ public class CouponActivityManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取优惠券活动分页")
     @GetMapping
-    public Result<IPage<CouponActivity>> getCouponActivityPage(PageVO page) {
+    public Result<IPage<CouponActivity>> getCouponActivityPage(PageQuery page) {
         return Result.success(couponActivityService.page(PageUtil.initPage(page)));
     }
 
@@ -76,7 +75,7 @@ public class CouponActivityManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "添加优惠券活动")
     @PostMapping
-    @PutMapping(consumes = "application/json", produces = "application/json")
+    @PutMapping
     public Result<CouponActivity> addCouponActivity(
             @RequestBody(required = false) CouponActivityDTO couponActivityDTO) {
         if (couponActivityService.savePromotions(couponActivityDTO)) {
@@ -88,9 +87,6 @@ public class CouponActivityManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "关闭优惠券活动")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "优惠券活动ID", required = true, dataType = "String", paramType = "path")
-    })
     @DeleteMapping("/{id}")
     public Result<CouponActivity> updateStatus(@PathVariable String id) {
         if (couponActivityService.updateStatus(Collections.singletonList(id), null, null)) {

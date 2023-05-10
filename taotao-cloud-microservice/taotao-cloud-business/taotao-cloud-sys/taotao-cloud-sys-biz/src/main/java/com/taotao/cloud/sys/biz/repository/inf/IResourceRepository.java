@@ -17,11 +17,12 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * CompanyMapper
@@ -32,13 +33,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IResourceRepository extends JpaRepository<Resource, Long> {
 
-    public List<Resource> searchByComponent(String component);
+	public List<Resource> searchByComponent(String component);
 
-    default List<Long> selectByComponent(String component) {
-        List<Resource> resources = searchByComponent(component);
-        return Optional.ofNullable(resources).stream()
-                .filter(Objects::nonNull)
-                .map(e -> e.get(0).getId())
-                .collect(Collectors.toList());
-    }
+	default List<Long> selectByComponent(String component) {
+		List<Resource> resources = searchByComponent(component);
+		return Optional.ofNullable(resources)
+			.stream()
+			.filter(Objects::nonNull)
+			.map(e -> e.get(0).getId())
+			.collect(Collectors.toList());
+	}
 }

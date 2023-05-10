@@ -145,7 +145,8 @@ public class TreeUtil {
      * @since 2020/10/21 11:23
      */
     public static List<MenuTreeVO> buildTree(List<Resource> resources) {
-        return resources.stream()
+        return resources
+			.stream()
                 .filter(Objects::nonNull)
                 .map(sysMenu -> {
                     MenuTreeVO tree = OrikaUtils.convert(sysMenu, MenuTreeVO.class);
@@ -186,7 +187,8 @@ public class TreeUtil {
      * @since 2022-04-17 10:29:02
      */
     public static <E extends TreeNode> List<E> streamToTree(List<E> treeList, Long parentId) {
-        return treeList.stream()
+        return treeList
+			.stream()
                 .filter(Objects::nonNull)
                 // 过滤父节点
                 .filter(parent -> parent.getParentId().equals(parentId))
@@ -394,7 +396,8 @@ public class TreeUtil {
         List<Region> emptyList = new ArrayList<>();
 
         // 将数组数据转为map结构，pcode为key
-        Map<String, List<Region>> regionMap = regionList.stream()
+        Map<String, List<Region>> regionMap = regionList
+			.stream()
                 .map(item -> {
                     Region region = new Region();
                     BeanUtils.copyProperties(item, region);

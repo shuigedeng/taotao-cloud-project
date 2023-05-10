@@ -19,8 +19,10 @@ package com.taotao.cloud.promotion.biz.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsListVO;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsListVO;
+import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -31,7 +33,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:36:49
  */
-public interface KanJiaActivityGoodsMapper extends BaseSuperMapper<KanjiaActivityGoods> {
+public interface KanJiaActivityGoodsMapper extends BaseSuperMapper<KanjiaActivityGoods, Long> {
 
     /**
      * 获取砍价商品VO分页
@@ -41,6 +43,6 @@ public interface KanJiaActivityGoodsMapper extends BaseSuperMapper<KanjiaActivit
      * @return 砍价商品VO分页
      */
     @Select("SELECT * FROM tt_kanjia_activity_goods ${ew.customSqlSegment}")
-    IPage<KanjiaActivityGoodsListVO> kanjiaActivityGoodsVOPage(
+    IPage<KanjiaActivityGoodsBO> kanjiaActivityGoodsPage(
             IPage<KanjiaActivityGoods> page, @Param(Constants.WRAPPER) Wrapper<KanjiaActivityGoods> queryWrapper);
 }

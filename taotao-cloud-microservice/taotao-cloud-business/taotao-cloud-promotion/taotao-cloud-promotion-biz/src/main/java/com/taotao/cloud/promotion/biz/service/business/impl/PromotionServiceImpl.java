@@ -20,11 +20,11 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
-import com.taotao.cloud.promotion.api.model.query.FullDiscountPageQuery;
-import com.taotao.cloud.promotion.api.model.query.PintuanPageQuery;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.model.query.SeckillPageQuery;
+import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
+import com.taotao.cloud.promotion.api.model.page.FullDiscountPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PintuanPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.SeckillPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
@@ -197,7 +197,9 @@ public class PromotionServiceImpl implements IPromotionService {
             SeckillApply seckillApply = seckillApplyList.get(0);
             int nextHour = 23;
             String[] split = seckill.getHours().split(",");
-            int[] hoursSored = Arrays.stream(split).mapToInt(Integer::parseInt).toArray();
+            int[] hoursSored = Arrays
+				.stream(split)
+				.mapToInt(Integer::parseInt).toArray();
             Arrays.sort(hoursSored);
             for (int i : hoursSored) {
                 if (seckillApply.getTimeLine() < i) {

@@ -264,7 +264,8 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
             List<String> ids = new ArrayList<>();
             if (JSONUtil.isJsonArray(couponActivity.getActivityScopeInfo())) {
                 JSONArray array = JSONUtil.parseArray(couponActivity.getActivityScopeInfo());
-                ids = array.toList(Map.class).stream()
+                ids = array.toList(Map.class)
+					.stream()
                         .map(i -> i.get("id").toString())
                         .collect(Collectors.toList());
             }

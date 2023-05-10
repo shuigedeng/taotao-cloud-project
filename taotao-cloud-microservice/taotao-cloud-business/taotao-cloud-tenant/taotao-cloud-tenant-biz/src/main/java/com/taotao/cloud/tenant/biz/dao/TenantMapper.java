@@ -17,14 +17,8 @@
 package com.taotao.cloud.tenant.biz.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.tenant.biz.entity.TenantDO;
+import com.taotao.cloud.tenant.biz.entity.Tenant;
 import org.apache.ibatis.annotations.Mapper;
 
-/**
- * 租户表
- *
- * @author
- * @date 2022-10-01
- */
 @Mapper
-public interface TenantMapper extends BaseMapper<TenantDO> {}
+public interface TenantMapper extends BaseMapper<Tenant> {}

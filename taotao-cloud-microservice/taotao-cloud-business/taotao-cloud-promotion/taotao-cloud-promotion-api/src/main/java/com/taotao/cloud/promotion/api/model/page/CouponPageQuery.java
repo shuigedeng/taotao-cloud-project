@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.page;
 
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
+import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

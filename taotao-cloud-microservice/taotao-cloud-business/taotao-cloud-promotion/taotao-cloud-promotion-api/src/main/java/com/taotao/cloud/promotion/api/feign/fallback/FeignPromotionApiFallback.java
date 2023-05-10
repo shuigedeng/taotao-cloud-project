@@ -17,7 +17,11 @@
 package com.taotao.cloud.promotion.api.feign.fallback;
 
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionApi;
+
+import java.util.List;
 import java.util.Map;
+
+import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -36,6 +40,16 @@ public class FeignPromotionApiFallback implements FallbackFactory<IFeignPromotio
             public Map<String, Object> getGoodsSkuPromotionMap(Long storeId, Long goodsIndexId) {
                 return null;
             }
-        };
+
+			@Override
+			public List<PromotionGoodsVO> findSkuValidPromotions(List<String> categories, List<String> skuIds) {
+				return null;
+			}
+
+			@Override
+			public Map<String, Object> wrapperPromotionMapList(List<PromotionGoodsVO> promotionGoodsList) {
+				return null;
+			}
+		};
     }
 }

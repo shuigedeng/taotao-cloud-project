@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.page;
 
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
@@ -36,7 +36,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberCouponSearchQuery extends BasePromotionsSearchQuery implements Serializable {
+public class MemberCouponSearchPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 4566880169478260409L;

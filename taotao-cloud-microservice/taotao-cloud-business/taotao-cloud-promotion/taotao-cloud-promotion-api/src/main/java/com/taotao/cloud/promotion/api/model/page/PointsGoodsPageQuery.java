@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.page;
 
+import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,28 +43,5 @@ public class PointsGoodsPageQuery extends BasePromotionsSearchQuery {
 
     @Schema(description = "积分,可以为范围，如10_1000")
     private String points;
-
-    // @Override
-    // public <T> QueryWrapper<T> queryWrapper() {
-    // 	QueryWrapper<T> queryWrapper = super.queryWrapper();
-    // 	if (CharSequenceUtil.isNotEmpty(goodsName)) {
-    // 		queryWrapper.like("goods_name", goodsName);
-    // 	}
-    // 	if (CharSequenceUtil.isNotEmpty(skuId)) {
-    // 		queryWrapper.eq("sku_id", skuId);
-    // 	}
-    // 	if (CharSequenceUtil.isNotEmpty(pointsGoodsCategoryId)) {
-    // 		queryWrapper.eq("points_goods_category_id", pointsGoodsCategoryId);
-    // 	}
-    // 	if (CharSequenceUtil.isNotEmpty(points)) {
-    // 		String[] s = points.split("_");
-    // 		if (s.length > 1) {
-    // 			queryWrapper.between("points", s[0], s[1]);
-    // 		} else {
-    // 			queryWrapper.eq("points", s[0]);
-    // 		}
-    // 	}
-    // 	return queryWrapper;
-    // }
 
 }

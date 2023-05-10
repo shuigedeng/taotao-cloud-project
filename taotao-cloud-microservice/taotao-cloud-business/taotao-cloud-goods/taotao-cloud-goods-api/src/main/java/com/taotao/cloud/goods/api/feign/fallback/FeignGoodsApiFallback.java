@@ -30,7 +30,7 @@ public class FeignGoodsApiFallback implements FallbackFactory<IFeignGoodsApi> {
     public IFeignGoodsApi create(Throwable throwable) {
         return new IFeignGoodsApi() {
             @Override
-            public Boolean updateStoreDetail(Long id) {
+            public Boolean updateStoreDetail(String id) {
                 return null;
             }
 

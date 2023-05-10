@@ -94,4 +94,5 @@ public class CouponVO implements Serializable {
     /** 促销关联的商品 */
     @Schema(description = "优惠券关联商品集合")
     private List<PromotionGoodsVO> promotionGoodsList;
+
 }

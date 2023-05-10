@@ -25,8 +25,8 @@ import com.taotao.cloud.tenant.api.model.dto.TenantPackagePageDTO;
 import com.taotao.cloud.tenant.biz.convert.TenantPackageConvert;
 import com.taotao.cloud.tenant.biz.dao.TenantManager;
 import com.taotao.cloud.tenant.biz.dao.TenantPackageManager;
-import com.taotao.cloud.tenant.biz.entity.TenantDO;
-import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
+import com.taotao.cloud.tenant.biz.entity.Tenant;
+import com.taotao.cloud.tenant.biz.entity.TenantPackage;
 import com.taotao.cloud.tenant.biz.service.TenantPackageService;
 import com.taotao.cloud.tenant.biz.service.TenantService;
 import java.util.Arrays;
@@ -39,9 +39,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * 租户套餐表
- *
- * @author
- * @date 2022-10-01
  */
 @Slf4j
 @Service
@@ -63,7 +60,7 @@ public class TenantPackageServiceImpl implements TenantPackageService {
     @Override
     public Boolean updateTenantPackage(TenantPackageDTO tenantPackageDTO) {
         // 校验套餐是否存在
-        TenantPackageDO packageExists = validTenantPackageExists(tenantPackageDTO.getId());
+        TenantPackage packageExists = validTenantPackageExists(tenantPackageDTO.getId());
 
         // 更新套餐信息
         tenantPackageManager.updateTenantPackageById(tenantPackageDTO);
@@ -76,10 +73,10 @@ public class TenantPackageServiceImpl implements TenantPackageService {
         // 菜单信息变化 则更新租户下的角色菜单信息
         if (!CollUtil.isEqualList(Arrays.asList(newMenus), Arrays.asList(oldMenus))) {
             // 本套餐下的所有租户
-            List<TenantDO> tenantDOList = tenantManager.getTenantListByPackageId(tenantPackageDTO.getId());
+            List<Tenant> tenantList = tenantManager.getTenantListByPackageId(tenantPackageDTO.getId());
 
             // 遍历所有租户 更新租户下的角色菜单信息
-            tenantDOList.forEach(t -> tenantService.updateTenantRoleMenu(t.getId(), Arrays.asList(newMenus)));
+            tenantList.forEach(t -> tenantService.updateTenantRoleMenu(t.getId(), Arrays.asList(newMenus)));
         }
 
         return Boolean.TRUE;
@@ -98,15 +95,15 @@ public class TenantPackageServiceImpl implements TenantPackageService {
     }
 
     @Override
-    public TenantPackageDO validTenantPackage(Long packageId) {
-        TenantPackageDO tenantPackageDO = tenantPackageManager.getTenantPackageById(packageId);
-        if (Objects.isNull(tenantPackageDO)) {
+    public TenantPackage validTenantPackage(Long packageId) {
+        TenantPackage tenantPackage = tenantPackageManager.getTenantPackageById(packageId);
+        if (Objects.isNull(tenantPackage)) {
             throw new RuntimeException("租户套餐不存在！");
-        } else if (GlobalStatusEnum.DISABLE.getValue().equals(tenantPackageDO.getStatus())) {
+        } else if (GlobalStatusEnum.DISABLE.getValue().equals(tenantPackage.getStatus())) {
             throw new RuntimeException("套餐未开启！");
         }
 
-        return tenantPackageDO;
+        return tenantPackage;
     }
 
     @Override
@@ -130,13 +127,13 @@ public class TenantPackageServiceImpl implements TenantPackageService {
      * @param id 套餐id
      * @return 租户套餐
      */
-    private TenantPackageDO validTenantPackageExists(Long id) {
-        TenantPackageDO tenantPackageDO = tenantPackageManager.getTenantPackageById(id);
-        if (Objects.isNull(tenantPackageDO)) {
+    private TenantPackage validTenantPackageExists(Long id) {
+        TenantPackage tenantPackage = tenantPackageManager.getTenantPackageById(id);
+        if (Objects.isNull(tenantPackage)) {
             throw new RuntimeException("套餐信息不存在！更新失败！");
         }
 
-        return tenantPackageDO;
+        return tenantPackage;
     }
 
     private void validTenantPackageUsed(Long packageId) {

@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.store.biz.service.impl;
 
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -39,14 +37,10 @@ import com.taotao.cloud.store.biz.model.entity.Store;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import com.taotao.cloud.store.biz.service.IStoreDetailService;
 import com.taotao.cloud.store.biz.service.IStoreService;
-import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,14 +64,14 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
     @Autowired
     private IFeignGoodsApi goodsApi;
 
-    @Autowired
-    private RocketmqCustomProperties rocketmqCustomProperties;
-
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
+    // @Autowired
+    // private RocketmqCustomProperties rocketmqCustomProperties;
+	//
+    // @Autowired
+    // private RocketMQTemplate rocketMQTemplate;
 
     @Override
-    public StoreDetailInfoVO getStoreDetailVO(Long storeId) {
+    public StoreDetailInfoVO getStoreDetailVO(String storeId) {
         return this.baseMapper.getStoreDetail(storeId);
     }
 
@@ -110,17 +104,17 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
     public void updateStoreGoodsInfo(Store store) {
         goodsApi.updateStoreDetail(store.getId());
 
-        Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
-                MapUtil.builder().put("storeId", store.getId()).build(),
-                MapUtil.builder()
-                        .put("storeName", store.getStoreName())
-                        .put("selfOperated", store.getSelfOperated())
-                        .build());
-        String destination =
-                rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
-        // 发送mq消息
-        rocketMQTemplate.asyncSend(
-                destination, JSONUtil.toJsonStr(updateIndexFieldsMap), RocketmqSendCallbackBuilder.commonCallback());
+        // Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
+        //         MapUtil.builder().put("storeId", store.getId()).build(),
+        //         MapUtil.builder()
+        //                 .put("storeName", store.getStoreName())
+        //                 .put("selfOperated", store.getSelfOperated())
+        //                 .build());
+        // String destination =
+        //         rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
+        // // 发送mq消息
+        // rocketMQTemplate.asyncSend(
+        //         destination, JSONUtil.toJsonStr(updateIndexFieldsMap), RocketmqSendCallbackBuilder.commonCallback());
     }
 
     @Override

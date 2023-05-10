@@ -41,7 +41,7 @@ public interface IBillService extends IService<Bill> {
      * @param endTime 结束时间
      * @since 2022-06-01 14:58:55
      */
-    void createBill(Long storeId, LocalDateTime startTime, LocalDateTime endTime);
+    void createBill(String storeId, LocalDateTime startTime, LocalDateTime endTime);
 
     /**
      * 立即结算 用于关闭商家，立即结算使用

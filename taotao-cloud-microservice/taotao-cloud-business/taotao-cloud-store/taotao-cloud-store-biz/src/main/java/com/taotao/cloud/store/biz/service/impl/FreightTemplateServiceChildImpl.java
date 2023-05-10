@@ -39,7 +39,7 @@ public class FreightTemplateServiceChildImpl extends ServiceImpl<FreightTemplate
         implements IFreightTemplateChildService {
 
     @Override
-    public List<FreightTemplateChild> getFreightTemplateChild(Long freightTemplateId) {
+    public List<FreightTemplateChild> getFreightTemplateChild(String freightTemplateId) {
         LambdaQueryWrapper<FreightTemplateChild> lambdaQueryWrapper = Wrappers.lambdaQuery();
         lambdaQueryWrapper.eq(FreightTemplateChild::getFreightTemplateId, freightTemplateId);
         return this.baseMapper.selectList(lambdaQueryWrapper);

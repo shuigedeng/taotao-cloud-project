@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Table(name = "`client`")
+@Table(name = "client")
 public class Client {
     @Id
     private String id;

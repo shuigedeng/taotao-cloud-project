@@ -46,7 +46,10 @@ public class SensitiveWordServiceImpl
             return;
         }
         List<String> sensitiveWords =
-                sensitiveWordsList.stream().map(SensitiveWord::getSensitiveWord).collect(Collectors.toList());
+                sensitiveWordsList
+					.stream()
+					.map(SensitiveWord::getSensitiveWord)
+					.collect(Collectors.toList());
 
         redisRepository.set(RedisConstant.SENSITIVE_WORDS_KEY, sensitiveWords);
     }

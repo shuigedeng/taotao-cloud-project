@@ -30,18 +30,21 @@ import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsListVO;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsParams;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsVO;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsListVO;
+import com.taotao.cloud.promotion.api.model.page.KanjiaActivityGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityGoodsMapper;
+import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.taotao.cloud.promotion.biz.util.PageQueryUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,15 +105,16 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 
     @Override
     public IPage<KanjiaActivityGoods> getForPage(
-            KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery PageQuery) {
-        return this.page(PageQuery.buildMpPage(), kanJiaActivityGoodsParams.wrapper());
+		KanjiaActivityGoodsPageQuery kanJiaActivityGoodsPageQuery, PageQuery pageQuery) {
+        return this.page(PageQuery.buildMpPage(), kanJiaActivityGoodsPageQuery.wrapper());
     }
 
     @Override
-    public IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(
-            KanjiaActivityGoodsParams kanjiaActivityGoodsParams, PageQuery PageQuery) {
-        return this.baseMapper.kanjiaActivityGoodsVOPage(PageQuery.buildMpPage(), kanjiaActivityGoodsParams.wrapper());
-    }
+    public IPage<KanjiaActivityGoodsBO> kanjiaGoodsPage(
+		KanjiaActivityGoodsPageQuery kanjiaActivityGoodsPageQuery, PageQuery pageQuery) {
+		QueryWrapper<KanjiaActivityGoods> wrapper = PageQueryUtils.kanjiaActivityGoodsPageQueryWrapper(kanjiaActivityGoodsPageQuery);
+		return this.baseMapper.kanjiaActivityGoodsPage(pageQuery.buildMpPage(), wrapper);
+	}
 
     /**
      * 检查商品Sku是否存
@@ -224,20 +228,6 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
         return null;
     }
 
-    @Override
-    public KanjiaActivityGoodsVO getKanJiaGoodsVO(String id) {
-        KanjiaActivityGoodsVO kanJiaActivityGoodsVO = new KanjiaActivityGoodsVO();
-        // 获取砍价商品
-        KanjiaActivityGoods kanJiaActivityGoods = this.getById(id);
-        // 获取商品SKU
-        GoodsSkuSpecGalleryVO goodsSku = this.goodsSkuApi.getGoodsSkuByIdFromCache(kanJiaActivityGoods.getSkuId());
-        // 填写活动商品价格、剩余数量
-        kanJiaActivityGoodsVO.setGoodsSku(goodsSku);
-        kanJiaActivityGoodsVO.setStock(kanJiaActivityGoods.getStock());
-        kanJiaActivityGoodsVO.setPurchasePrice(kanJiaActivityGoods.getPurchasePrice());
-        // 返回商品数据
-        return kanJiaActivityGoodsVO;
-    }
 
     @Override
     public boolean updateKanjiaActivityGoods(KanjiaActivityGoodsDTO kanJiaActivityGoodsDTO) {

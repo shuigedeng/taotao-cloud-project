@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.page;
 
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "砍价活动参与记录查询对象")
-public class KanJiaActivityLogPageQuery implements Serializable {
+public class KanJiaActivityLogPageQuery extends PageQuery implements Serializable {
 
     private static final long serialVersionUID = -1583030890805926292L;
 

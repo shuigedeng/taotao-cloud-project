@@ -18,26 +18,29 @@ package com.taotao.cloud.tenant.biz.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;
-import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
+import com.taotao.cloud.tenant.biz.entity.TenantPackage;
+
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 /**
- * @author
- * @version 0.0.1
- * @date 2022/11/26 15:28
+ * 租户包转换
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-10 10:58:58
  */
 @Mapper
 public interface TenantPackageConvert {
 
     TenantPackageConvert INSTANCE = Mappers.getMapper(TenantPackageConvert.class);
 
-    TenantPackageDTO convert(TenantPackageDO tenantPackage);
+    TenantPackageDTO convert(TenantPackage tenantPackage);
 
-    TenantPackageDO convert(TenantPackageDTO tenantPackage);
+    TenantPackage convert(TenantPackageDTO tenantPackage);
 
-    List<TenantPackageDTO> convert(List<TenantPackageDO> list);
+    List<TenantPackageDTO> convert(List<TenantPackage> list);
 
-    Page<TenantPackageDTO> convert(Page<TenantPackageDO> list);
+    Page<TenantPackageDTO> convert(Page<TenantPackage> list);
 }

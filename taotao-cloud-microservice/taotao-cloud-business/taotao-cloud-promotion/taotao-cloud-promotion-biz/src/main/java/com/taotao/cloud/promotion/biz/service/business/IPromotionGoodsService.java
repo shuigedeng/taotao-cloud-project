@@ -22,7 +22,7 @@ import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -78,11 +78,11 @@ public interface IPromotionGoodsService extends IService<PromotionGoods> {
      * 分页获取促销商品信息
      *
      * @param searchParams 查询参数
-     * @param pageVo 分页参数
+     * @param pageQuery 分页参数
      * @return {@link IPage }<{@link PromotionGoods }>
      * @since 2022-04-27 16:44:13
      */
-    IPage<PromotionGoods> pageFindAll(PromotionGoodsPageQuery searchParams, PageQuery pageVo);
+    IPage<PromotionGoods> pageFindAll(PromotionGoodsPageQuery searchParams, PageQuery pageQuery);
 
     /**
      * 获取促销商品信息

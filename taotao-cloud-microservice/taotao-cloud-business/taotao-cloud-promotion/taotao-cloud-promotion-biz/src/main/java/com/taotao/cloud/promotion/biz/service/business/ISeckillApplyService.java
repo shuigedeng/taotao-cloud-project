@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.service.business;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.promotion.api.model.query.SeckillPageQuery;
+import com.taotao.cloud.promotion.api.model.page.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;

@@ -25,7 +25,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** 秒杀活动时刻视图对象 */
+/**
+ * 秒杀活动时刻视图对象
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-10 14:04:24
+ */
 @Data
 @Builder
 @AllArgsConstructor

@@ -24,8 +24,6 @@ import java.util.List;
 /**
  * 租户表
  *
- * @author
- * @date 2022-10-01
  */
 public interface TenantService {
 

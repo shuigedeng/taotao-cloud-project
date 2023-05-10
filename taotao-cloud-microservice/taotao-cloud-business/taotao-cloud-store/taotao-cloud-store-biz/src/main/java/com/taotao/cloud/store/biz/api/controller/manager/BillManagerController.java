@@ -78,8 +78,8 @@ public class BillManagerController {
             @Parameter(description = "结算单ID") @PathVariable String id,
             @Parameter(description = "流水类型:PAY、REFUND") String flowType,
             PageQuery PageQuery) {
-        IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
-        return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
+		PageResult<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
+        return Result.success(storeFlow);
     }
 
     @Operation(summary = "支付结算单", description = "支付结算单")

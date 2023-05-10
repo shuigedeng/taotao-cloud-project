@@ -31,7 +31,7 @@ import com.taotao.cloud.order.api.feign.IFeignOrderApi;
 import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PintuanMemberVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanShareVO;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
@@ -216,7 +216,8 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
         }
         if (promotions.getEndTime() == null && promotions.getStartTime() == null) {
             // 过滤父级拼团订单，根据父级拼团订单分组
-            Map<String, List<Order>> collect = orderApi.queryListByPromotion(promotions.getId()).stream()
+            Map<String, List<Order>> collect = orderApi.queryListByPromotion(promotions.getId())
+				.stream()
                     .filter(i -> CharSequenceUtil.isNotEmpty(i.getParentOrderSn()))
                     .collect(Collectors.groupingBy(Order::getParentOrderSn));
             this.isOpenFictitiousPintuan(promotions, collect);
@@ -321,7 +322,9 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
      */
     private void fictitiousPintuan(Map.Entry<String, List<Order>> entry, Integer requiredNum) {
         Map<String, List<Order>> listMap =
-                entry.getValue().stream().collect(Collectors.groupingBy(Order::getPayStatus));
+                entry.getValue()
+					.stream()
+					.collect(Collectors.groupingBy(Order::getPayStatus));
         // 未付款订单
         List<Order> unpaidOrders = listMap.get(PayStatusEnum.UNPAID.name());
         // 未付款订单自动取消

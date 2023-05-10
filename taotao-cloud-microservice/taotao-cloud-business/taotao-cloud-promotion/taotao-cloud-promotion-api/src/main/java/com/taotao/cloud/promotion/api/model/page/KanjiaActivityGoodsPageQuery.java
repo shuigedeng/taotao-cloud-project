@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.vo.kanjia;
+package com.taotao.cloud.promotion.api.model.page;
 
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -32,7 +33,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivityGoodsParams implements Serializable {
+public class KanjiaActivityGoodsPageQuery extends PageQuery implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1344104067705714289L;
@@ -55,28 +56,6 @@ public class KanjiaActivityGoodsParams implements Serializable {
     @Schema(description = "活动状态")
     private String promotionStatus;
 
-    // public <T> QueryWrapper<T> wrapper() {
-    // 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-    //
-    // 	if (CharSequenceUtil.isNotEmpty(goodsName)) {
-    // 		queryWrapper.like("goods_name", goodsName);
-    // 	}
-    // 	if (promotionStatus != null) {
-    // 		queryWrapper.and(
-    // 			PromotionTools.queryPromotionStatus(PromotionsStatusEnum.valueOf(promotionStatus)));
-    // 	}
-    // 	if (startTime != null) {
-    // 		queryWrapper.le("start_time", new Date(startTime));
-    // 	}
-    // 	if (endTime != null) {
-    // 		queryWrapper.ge("end_time", new Date(endTime));
-    // 	}
-    // 	//if (UserContext.getCurrentUser() != null &&
-    // UserContext.getCurrentUser().getRole().equals(UserEnums.MEMBER)) {
-    // 	//    queryWrapper.gt("stock", 0);
-    // 	//}
-    // 	queryWrapper.eq("delete_flag", false);
-    // 	return queryWrapper;
-    // }
+
 
 }

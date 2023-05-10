@@ -14,35 +14,47 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.biz.entity;
+package com.taotao.cloud.promotion.biz.model.bo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.GlobalStatusEnum;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
- * @author
- * @version 0.0.1
- * @date 2022/10/1 16:22
+ * 砍价商品视图对象
  */
 @Data
-@TableName("sys_tenant_package")
-public class TenantPackageDO extends BaseSuperEntity<TenantPackageDO, Long> {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class KanjiaActivityGoodsBO implements Serializable {
 
-    /** 套餐名 */
-    private String name;
+	/**
+	 * 砍价活动商品id
+	 */
+	private String id;
 
-    /**
-     * 套餐状态
-     *
-     * <p>枚举 {@link GlobalStatusEnum}
-     */
-    private Integer status;
+	/**
+	 * 货品名称
+	 */
+	private String goodsName;
 
-    /** 备注 */
-    private String remark;
+	/**
+	 * 缩略图
+	 */
+	private String thumbnail;
 
-    /** 套餐关联的菜单编号 */
-    private String menuIds;
+	/**
+	 * 最低购买金额
+	 */
+	private BigDecimal purchasePrice;
+
+	/**
+	 * 活动库存
+	 */
+	private Integer stock;
 }

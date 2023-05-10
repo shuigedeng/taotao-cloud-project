@@ -25,11 +25,12 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
+import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
 import com.taotao.cloud.promotion.biz.mapper.MemberCouponMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
@@ -114,7 +115,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
 
     @Override
     public List<MemberCoupon> getMemberCoupons() {
-        AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
+        AuthUser authUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
         LambdaQueryWrapper<MemberCoupon> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(MemberCoupon::getMemberId, authUser.getId());
         queryWrapper.eq(MemberCoupon::getMemberCouponStatus, MemberCouponStatusEnum.NEW.name());
@@ -184,7 +185,7 @@ public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, Mem
 
     @Override
     public long getMemberCouponsNum() {
-        AuthUser authUser = Objects.requireNonNull(UserContext.getCurrentUser());
+        AuthUser authUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
         QueryWrapper<MemberCoupon> queryWrapper = Wrappers.query();
         queryWrapper.eq("member_id", authUser.getId());
         queryWrapper.eq("member_coupon_status", MemberCouponStatusEnum.NEW.name());

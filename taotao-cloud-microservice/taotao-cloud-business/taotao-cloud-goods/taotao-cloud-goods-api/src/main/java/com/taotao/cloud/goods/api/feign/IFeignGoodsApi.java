@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface IFeignGoodsApi {
 
     @PostMapping(value = "/product/info/id/{id:[0-9]*}")
-    Boolean updateStoreDetail(Long id);
+    Boolean updateStoreDetail(String id);
 
     @PostMapping(value = "/product/info/id/{id:[0-9]*}")
     Boolean underStoreGoods(String id);

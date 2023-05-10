@@ -18,10 +18,11 @@ package com.taotao.cloud.store.biz.mapstruct;
 
 import com.taotao.cloud.store.api.model.vo.FreightTemplateChildVO;
 import com.taotao.cloud.store.biz.model.entity.FreightTemplateChild;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * DeptMapStruct
@@ -33,12 +34,14 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IFreightTemplateChildMapStruct {
 
-    /** 实例 */
-    IFreightTemplateChildMapStruct INSTANCE = Mappers.getMapper(IFreightTemplateChildMapStruct.class);
+	/**
+	 * 实例
+	 */
+	IFreightTemplateChildMapStruct INSTANCE = Mappers.getMapper(IFreightTemplateChildMapStruct.class);
 
-    List<FreightTemplateChildVO> freightTemplateChildListToFreightTemplateChildVoList(
-            List<FreightTemplateChild> freightTemplateChildList);
+	List<FreightTemplateChildVO> convertToList(
+		List<FreightTemplateChild> freightTemplateChildList);
 
-    List<FreightTemplateChild> freightTemplateChildVOListTofreightTemplateChildList(
-            List<FreightTemplateChildVO> freightTemplateChildVOList);
+	List<FreightTemplateChild> convertToVoList(
+		List<FreightTemplateChildVO> freightTemplateChildVOList);
 }

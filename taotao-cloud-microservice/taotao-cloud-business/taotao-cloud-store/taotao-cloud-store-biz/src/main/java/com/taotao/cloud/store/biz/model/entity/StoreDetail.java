@@ -52,13 +52,13 @@ import org.hibernate.validator.constraints.Length;
 @TableName(StoreDetail.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = StoreDetail.TABLE_NAME, comment = "店铺详细表")
-public class StoreDetail extends BaseSuperEntity<StoreDetail, Long> {
+public class StoreDetail extends BaseSuperEntity<StoreDetail, String> {
 
     public static final String TABLE_NAME = "tt_store_detail";
 
     @NotBlank(message = "店铺不能为空")
     @Column(name = "store_id", columnDefinition = "varchar(64) not null comment '店铺id'")
-    private Long storeId;
+    private String storeId;
 
     @Size(min = 2, max = 200, message = "店铺名称长度为2-200位")
     @NotBlank(message = "店铺名称不能为空")

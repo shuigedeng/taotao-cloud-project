@@ -100,7 +100,7 @@ public class StoreManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/edit/{id}")
-    public Result<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
+    public Result<Store> edit(@PathVariable Long id, @Valid StoreEditDTO storeEditDTO) {
         storeEditDTO.setStoreId(id);
         return Result.success(storeService.edit(storeEditDTO));
     }

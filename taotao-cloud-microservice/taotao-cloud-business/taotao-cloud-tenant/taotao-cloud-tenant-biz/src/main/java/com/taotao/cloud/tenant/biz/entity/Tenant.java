@@ -22,14 +22,9 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import java.time.LocalDateTime;
 import lombok.Data;
 
-/**
- * @author
- * @version 0.0.1
- * @date 2022/10/1 16:13
- */
-@TableName("sys_tenant")
+@TableName("tenant")
 @Data
-public class TenantDO extends BaseSuperEntity<TenantDO, Long> {
+public class Tenant extends BaseSuperEntity<Tenant, Long> {
 
     /** 租户名 */
     private String name;

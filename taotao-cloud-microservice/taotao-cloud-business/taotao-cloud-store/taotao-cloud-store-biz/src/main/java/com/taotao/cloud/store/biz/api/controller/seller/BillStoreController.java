@@ -85,8 +85,8 @@ public class BillStoreController {
     public Result<PageResult<StoreFlowVO>> getStoreFlow(
             @PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
-        IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
-        return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
+		PageResult<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
+        return Result.success(storeFlow);
     }
 
     @Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页")
@@ -95,8 +95,8 @@ public class BillStoreController {
     @GetMapping(value = "/{id}/getDistributionFlow")
     public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
-        IPage<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);
-        return Result.success(PageResult.convertMybatisPage(distributionFlow, StoreFlowVO.class));
+		PageResult<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);
+        return Result.success(distributionFlow);
     }
 
     @Operation(summary = "核对结算单", description = "核对结算单")

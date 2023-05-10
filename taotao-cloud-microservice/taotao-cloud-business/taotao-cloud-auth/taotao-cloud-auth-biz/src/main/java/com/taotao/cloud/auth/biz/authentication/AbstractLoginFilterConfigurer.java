@@ -28,8 +28,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.PortMapper;
@@ -325,8 +325,8 @@ public abstract class AbstractLoginFilterConfigurer<
         @SuppressWarnings("unchecked")
         static void permitAll(
                 HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, RequestMatcher... requestMatchers) {
-            ExpressionUrlAuthorizationConfigurer<?> configurer =
-                    http.getConfigurer(ExpressionUrlAuthorizationConfigurer.class);
+			AuthorizeHttpRequestsConfigurer<?> configurer =
+                    http.getConfigurer(AuthorizeHttpRequestsConfigurer.class);
             Assert.state(configurer != null, "permitAll only works with HttpSecurity.authorizeRequests()");
             configurer.getRegistry().requestMatchers(requestMatchers).permitAll();
         }

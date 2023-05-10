@@ -49,7 +49,7 @@ public class StoreMessageManagerController {
     @GetMapping
     public Result<PageResult<StoreMessageVO>> getByCondition(
             StoreMessageQueryVO storeMessageQueryVO, PageQuery PageQuery) {
-        IPage<StoreMessageVO> page = storeMessageService.getPage(storeMessageQueryVO, PageQuery);
-        return Result.success(PageResult.convertMybatisPage(page, StoreMessageVO.class));
+        // IPage<StoreMessageVO> page = storeMessageService.getPage(storeMessageQueryVO, PageQuery);
+        return Result.success(PageResult.convertMybatisPage(null, StoreMessageVO.class));
     }
 }
