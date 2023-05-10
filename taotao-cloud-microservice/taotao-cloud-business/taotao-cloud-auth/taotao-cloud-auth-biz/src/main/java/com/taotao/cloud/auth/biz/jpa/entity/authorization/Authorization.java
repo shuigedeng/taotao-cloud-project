@@ -23,7 +23,7 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Table(name = "`authorization`")
+@Table(name = "authorization")
 public class Authorization {
     @Id
     @Column
@@ -36,26 +36,26 @@ public class Authorization {
     @Column(length = 1000)
     private String authorizedScopes;
 
-    @Column(length = 4000)
+    @Column(length = 1000)
     private String attributes;
 
     @Column(length = 500)
     private String state;
 
-    @Column(length = 4000)
+    @Column(length = 1000)
     private String authorizationCodeValue;
 
     private Instant authorizationCodeIssuedAt;
     private Instant authorizationCodeExpiresAt;
     private String authorizationCodeMetadata;
 
-    @Column(length = 4000)
+    @Column(length = 1000)
     private String accessTokenValue;
 
     private Instant accessTokenIssuedAt;
     private Instant accessTokenExpiresAt;
 
-    @Column(length = 2000)
+    @Column(length = 1000)
     private String accessTokenMetadata;
 
     private String accessTokenType;
@@ -63,25 +63,25 @@ public class Authorization {
     @Column(length = 1000)
     private String accessTokenScopes;
 
-    @Column(length = 4000)
+    @Column(length = 1000)
     private String refreshTokenValue;
 
     private Instant refreshTokenIssuedAt;
     private Instant refreshTokenExpiresAt;
 
-    @Column(length = 2000)
+    @Column(length = 1000)
     private String refreshTokenMetadata;
 
-    @Column(length = 4000)
+    @Column(length = 1000)
     private String oidcIdTokenValue;
 
     private Instant oidcIdTokenIssuedAt;
     private Instant oidcIdTokenExpiresAt;
 
-    @Column(length = 2000)
+    @Column(length = 1000)
     private String oidcIdTokenMetadata;
 
-    @Column(length = 2000)
+    @Column(length = 1000)
     private String oidcIdTokenClaims;
 
     // @fold:on

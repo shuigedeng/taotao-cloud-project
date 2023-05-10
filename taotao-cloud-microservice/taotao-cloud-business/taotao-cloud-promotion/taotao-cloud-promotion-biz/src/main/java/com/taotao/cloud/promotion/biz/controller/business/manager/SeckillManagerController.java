@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.model.query.SeckillPageQuery;
+import com.taotao.cloud.promotion.api.model.page.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.SeckillVO;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
@@ -67,7 +67,7 @@ public class SeckillManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改秒杀活动")
-    @PutMapping(consumes = "application/json", produces = "application/json")
+    @PutMapping("/{id}")
     public Result<Seckill> updateSeckill(@RequestBody SeckillVO seckillVO) {
         seckillService.updatePromotions(seckillVO);
         return Result.success(seckillVO);

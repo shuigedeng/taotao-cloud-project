@@ -7,6 +7,11 @@ server:
     direct-buffers: true
 
 spring:
+  config:
+    activate:
+      on-profile: dev
+  pid:
+    file: ${user.home}/logs/${spring.application.name}/${spring.application.name}.pid
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
@@ -22,7 +27,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 192.168.10.210:8848
+        server-addr: 192.168.10.220:8848
         metadata:
           version: ${taotaoCloudVersion}
           user.name: "admin"
@@ -35,7 +40,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 192.168.10.210:8848
+        server-addr: 192.168.10.220:8848
         namespace: taotao-cloud-dev
         username: nacos
         password: nacos
@@ -55,7 +60,7 @@ spring:
       #        #流控 名称随意
       #        flow:
       #          nacos:
-      #            server-addr: 192.168.10.210:8848
+      #            server-addr: 192.168.10.220:8848
       #            dataId: ${spring.application.name}-flow-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -67,7 +72,7 @@ spring:
       #        #熔断降级 名称随意
       #        degrade:
       #          nacos:
-      #            server-addr: 192.168.10.210:8848
+      #            server-addr: 192.168.10.220:8848
       #            dataId: ${spring.application.name}-degrade-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -78,7 +83,7 @@ spring:
       #        #系统规则 名称随意
       #        system:
       #          nacos:
-      #            server-addr: 192.168.10.210:8848
+      #            server-addr: 192.168.10.220:8848
       #            dataId: ${spring.application.name}-system-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -89,7 +94,7 @@ spring:
       #        #授权规则 名称随意
       #        authority:
       #          nacos:
-      #            server-addr: 192.168.10.210:8848
+      #            server-addr: 192.168.10.220:8848
       #            dataId: ${spring.application.name}-authority-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -100,7 +105,7 @@ spring:
       #        #参数规则 名称随意
       #        param-flow:
       #          nacos:
-      #            server-addr: 192.168.10.210:8848
+      #            server-addr: 192.168.10.220:8848
       #            dataId: ${spring.application.name}-param-flow-rules.json
       #            namespace: 4c21599b-c836-4f1a-a72f-1260d5474f0f
       #            username: nacos
@@ -109,7 +114,7 @@ spring:
       #            data-type: json
       #            rule-type: param-flow
       transport:
-        dashboard: 192.168.10.210:8858
+        dashboard: 192.168.10.220:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50
@@ -119,3 +124,44 @@ spring:
       log:
         dir: ${user.home}/logs/${spring.application.name}/sentinel
         switch-pid: false
+
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
+  logback:
+    rollingpolicy:
+      max-file-size: 10GB
+      max-history: 30
+      clean-history-on-start: true
+      total-size-cap: 20GB
+  level:
+    root: INFO
+    org.apache.zookeeper.ZooKeeper: info
+    com.taotao.cloud.sys.api.feign: debug
+    net.ttddyy.dsproxy.listener: debug
+    net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
+    # hibernate log
+    #org.hibernate.SQL: debug
+    #org.hibernate.type: info
+    #org.hibernate.type.descriptor.sql.BasicBinder: trace
+    #org.hibernate.type.descriptor.sql.BasicExtractor: debug
+    #org.hibernate.engine.QueryParameters: debug
+    #org.hibernate.engine.query.HQLQueryPlan: debug
+    # mybatis log
+    #com.apache.ibatis: trace
+    #java.sql.Connection: debug
+    #java.sql.Statement: debug
+    #java.sql.PreparedStatement: debug
+    # kafka log
+    #kafka.server.KafkaConfig: info
+    #kafka.admin.AdminClient.AdminConfig: info
+    #org.apache.kafka: off
+    #org.I0Itec.zkclient: info
+    # springframework log
+    #org.springframework.cloud.openfeign: debug
+    #org.springframework.web: off
+    #org.springframework.security: off
+    #org.springframework.security.oauth2: off
+    #org.springframework.boot.autoconfigure: off
+    #org.elasticsearch.client: debug

@@ -17,9 +17,10 @@
 package com.taotao.cloud.promotion.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionService;
@@ -64,12 +65,12 @@ public class PromotionManagerController {
     @GetMapping("/{promotionId}/goods")
     @Operation(summary = "获取当前进行中的促销活动商品")
     public Result<IPage<PromotionGoods>> getPromotionGoods(
-            @PathVariable String promotionId, String promotionType, PageVO pageVO) {
+            @PathVariable String promotionId, String promotionType, PageQuery pageQuery) {
         PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
-        searchParams.setPromotionId(promotionId);
+        // searchParams.setPromotionId(promotionId);
         searchParams.setPromotionType(promotionType);
         searchParams.setPromotionStatus(PromotionsStatusEnum.START.name());
-        IPage<PromotionGoods> promotionGoods = promotionGoodsService.pageFindAll(searchParams, pageVO);
+        IPage<PromotionGoods> promotionGoods = promotionGoodsService.pageFindAll(searchParams, pageQuery);
         return Result.success(promotionGoods);
     }
 }

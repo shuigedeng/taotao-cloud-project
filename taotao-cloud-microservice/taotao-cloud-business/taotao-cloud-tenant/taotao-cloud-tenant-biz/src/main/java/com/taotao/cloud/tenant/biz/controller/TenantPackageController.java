@@ -23,15 +23,17 @@ import com.taotao.cloud.tenant.api.model.dto.TenantPackagePageDTO;
 import com.taotao.cloud.tenant.biz.service.TenantPackageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 租户套餐表
  *
- * @author
- * @date 2022-10-01
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-10 10:58:30
  */
 @Tag(name = "租户套餐管理")
 @RestController
@@ -39,48 +41,42 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TenantPackageController {
 
-    private final TenantPackageService tenantPackageService;
+	private final TenantPackageService tenantPackageService;
 
-    /** 保存租户套餐信息 */
-    @Operation(summary = "保存租户套餐信息")
-    @PostMapping(value = "/add")
-    public Result<Boolean> add(@RequestBody TenantPackageDTO tenantPackageDTO) {
-        return Result.success(tenantPackageService.addTenantPackage(tenantPackageDTO));
-    }
+	@Operation(summary = "保存租户套餐信息")
+	@PostMapping(value = "/add")
+	public Result<Boolean> add(@RequestBody TenantPackageDTO tenantPackageDTO) {
+		return Result.success(tenantPackageService.addTenantPackage(tenantPackageDTO));
+	}
 
-    /** 更新租户套餐信息 */
-    @Operation(summary = "更新租户套餐信息")
-    @PostMapping(value = "/update")
-    public Result<Boolean> update(@RequestBody TenantPackageDTO tenantPackageDTO) {
-        return Result.success(tenantPackageService.updateTenantPackage(tenantPackageDTO));
-    }
+	@Operation(summary = "更新租户套餐信息")
+	@PostMapping(value = "/update")
+	public Result<Boolean> update(@RequestBody TenantPackageDTO tenantPackageDTO) {
+		return Result.success(tenantPackageService.updateTenantPackage(tenantPackageDTO));
+	}
 
-    /** 删除租户套餐信息 */
-    @Operation(summary = "删除租户套餐信息")
-    @DeleteMapping(value = "/delete")
-    public Result<Boolean> delete(Long id) {
-        return Result.success(tenantPackageService.deleteTenantPackage(id));
-    }
+	@Operation(summary = "删除租户套餐信息")
+	@DeleteMapping(value = "/delete")
+	public Result<Boolean> delete(Long id) {
+		return Result.success(tenantPackageService.deleteTenantPackage(id));
+	}
 
-    /** 获取单条租户套餐信息 */
-    @Operation(summary = "获取单条租户套餐信息")
-    @GetMapping(value = "/findById")
-    public Result<TenantPackageDTO> findById(Long id) {
-        return Result.success(tenantPackageService.findById(id));
-    }
+	@Operation(summary = "获取单条租户套餐信息")
+	@GetMapping(value = "/findById")
+	public Result<TenantPackageDTO> findById(Long id) {
+		return Result.success(tenantPackageService.findById(id));
+	}
 
-    /** 获取全部租户套餐信息 */
-    @Operation(summary = "获取全部租户套餐信息")
-    @GetMapping(value = "/findAll")
-    public Result<List<TenantPackageDTO>> findAll() {
-        return Result.success(tenantPackageService.findAll());
-    }
+	@Operation(summary = "获取全部租户套餐信息")
+	@GetMapping(value = "/findAll")
+	public Result<List<TenantPackageDTO>> findAll() {
+		return Result.success(tenantPackageService.findAll());
+	}
 
-    /** 分页查询租户套餐信息 */
-    @Operation(summary = "分页查询租户套餐信息")
-    @GetMapping(value = "/page")
-    public Result<PageResult<TenantPackageDTO>> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
-        return Result.success(PageResult.convertMybatisPage(
-                tenantPackageService.pageTenantPackage(tenantPackagePageDTO), TenantPackageDTO.class));
-    }
+	@Operation(summary = "分页查询租户套餐信息")
+	@GetMapping(value = "/page")
+	public Result<PageResult<TenantPackageDTO>> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
+		return Result.success(PageResult.convertMybatisPage(
+			tenantPackageService.pageTenantPackage(tenantPackagePageDTO), TenantPackageDTO.class));
+	}
 }

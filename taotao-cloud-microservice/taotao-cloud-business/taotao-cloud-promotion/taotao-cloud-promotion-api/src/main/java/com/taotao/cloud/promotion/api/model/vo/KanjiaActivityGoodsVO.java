@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.vo.kanjia;
+package com.taotao.cloud.promotion.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -29,19 +29,21 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class KanjiaActivityGoodsListVO implements Serializable {
+public class KanjiaActivityGoodsVO implements Serializable {
 
-    @Schema(description = "砍价活动商品id")
-    private String id;
-
-    @Schema(description = "货品名称")
-    private String goodsName;
-
-    @Schema(description = "缩略图")
-    private String thumbnail;
+    // @Schema(description =  "商品规格详细信息")
+    // private GoodsSku goodsSku;
 
     @Schema(description = "最低购买金额")
     private BigDecimal purchasePrice;
+
+    public BigDecimal getPurchasePrice() {
+        //		if (purchasePrice < 0) {
+        //			return 0D;
+        //		}
+        //		return purchasePrice;
+        return BigDecimal.ZERO;
+    }
 
     @Schema(description = "活动库存")
     private Integer stock;

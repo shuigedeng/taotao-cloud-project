@@ -14,24 +14,32 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.store.biz.api.remote;
+package com.taotao.cloud.promotion.api.model.vo;
 
-import com.taotao.cloud.web.base.controller.BaseBusinessController;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
- * 移动端-字典API
+ * 砍价活动商品实体类
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-10-09 14:24:19
+ * @version 2022.04
+ * @since 2022-04-27 16:24:50
  */
-@Validated
-@RestController
-@RequestMapping("/remote/mall/dict")
-@Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class RemoteDictController {
+public class KanjiaActivityLogVO  {
+
+    public static final String TABLE_NAME = "tt_kanjia_activity_log";
+    /** 砍价活动参与记录id */
+    private Long kanjiaActivityId;
+    /** 砍价会员id */
+    private Long kanjiaMemberId;
+    /** 砍价会员名称 */
+    private String kanjiaMemberName;
+    /** 砍价会员头像 */
+    private String kanjiaMemberFace;
+    /** 砍价金额 */
+    private BigDecimal kanjiaPrice;
+    /** 剩余购买金额 */
+    private BigDecimal surplusPrice;
+
 }

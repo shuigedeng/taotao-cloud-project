@@ -22,10 +22,11 @@ import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignCategoryApiFallback.class)
 public interface IFeignStoreGoodsLabelApi {
 
-    @GetMapping(value = "/product/info/id/{id:[0-9]*}")
-    List<StoreGoodsLabelVO> listByStoreId(String id);
+    @GetMapping(value = "/product/info/id/{id}")
+    List<StoreGoodsLabelVO> listByStoreId(@PathVariable String id);
 }

@@ -14,44 +14,35 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-/** 砍价活动参与实体类 */
-@Getter
-@Setter
+/** 砍价商品视图对象 */
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "砍价活动参与记录查询对象")
-public class KanjiaActivityPageQuery implements Serializable {
+public class KanjiaActivityGoodsListVO implements Serializable {
 
-    private static final long serialVersionUID = -1583030890805926292L;
+    @Schema(description = "砍价活动商品id")
+    private String id;
 
     @Schema(description = "货品名称")
     private String goodsName;
 
-    @Schema(description = "会员id", hidden = true)
-    private String memberId;
+    @Schema(description = "缩略图")
+    private String thumbnail;
 
-    // public <T> QueryWrapper<T> wrapper() {
-    //     QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-    //
-    //     if (CharSequenceUtil.isNotEmpty(goodsName)) {
-    //         queryWrapper.like("goods_name", goodsName);
-    //     }
-    //     if (memberId != null) {
-    //         queryWrapper.eq("member_id", memberId);
-    //     }
-    //     queryWrapper.eq("delete_flag", false);
-    //     queryWrapper.orderByDesc("create_time");
-    //     return queryWrapper;
-    // }
+    @Schema(description = "最低购买金额")
+    private BigDecimal purchasePrice;
+
+    @Schema(description = "活动库存")
+    private Integer stock;
 }

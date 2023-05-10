@@ -24,12 +24,14 @@ import com.taotao.cloud.store.api.model.vo.StoreDetailInfoVO;
 import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import java.util.List;
+
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /** 店铺详细数据处理层 */
-public interface StoreDetailMapper extends BaseSuperMapper<StoreDetail> {
+public interface StoreDetailMapper extends BaseSuperMapper<StoreDetail, String> {
 
     /**
      * 获取店铺详情VO
@@ -42,7 +44,7 @@ public interface StoreDetailMapper extends BaseSuperMapper<StoreDetail> {
 		select s.store_logo,s.member_name,s.store_name,s.store_disable,s.self_operated,s.store_address_detail,s.store_address_path,s.store_address_id_path,s.store_center,s.store_desc,s.yzf_sign,s.yzf_mp_sign,d.*
 		from tt_store s inner join tt_store_detail d on s.id=d.store_id where s.id=#{storeId}
 		""")
-    StoreDetailInfoVO getStoreDetail(Long storeId);
+    StoreDetailInfoVO getStoreDetail(String storeId);
 
     /**
      * 根据会员ID获取店铺详情

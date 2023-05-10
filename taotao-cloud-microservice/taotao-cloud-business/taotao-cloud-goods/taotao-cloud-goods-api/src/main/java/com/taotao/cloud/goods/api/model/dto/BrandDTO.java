@@ -23,12 +23,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** 品牌VO */
+/** 品牌DTO */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "品牌VO")
+@Schema(description = "品牌DTO")
 public class BrandDTO {
 
     private static final long serialVersionUID = 3829199991161122317L;

@@ -21,8 +21,8 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.model.query.PintuanPageQuery;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PintuanPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PintuanVO;
 import com.taotao.cloud.promotion.biz.model.entity.Pintuan;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
@@ -69,7 +69,7 @@ public class PintuanManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "根据条件分页查询拼团活动列表")
-    public Result<IPage<Pintuan>> getPintuanByPage(PintuanPageQuery queryParam, PageVO pageVo) {
+    public Result<IPage<Pintuan>> getPintuanByPage(PintuanPageQuery queryParam) {
         IPage<Pintuan> pintuanIPage = pintuanService.pageFindAll(queryParam, pageVo);
         return Result.success(pintuanIPage);
     }
@@ -78,7 +78,7 @@ public class PintuanManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/goods/{pintuanId}")
     @Operation(summary = "根据条件分页查询拼团活动商品列表")
-    public Result<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId, PageVO pageVo) {
+    public Result<IPage<PromotionGoods>> getPintuanGoodsByPage(@PathVariable String pintuanId) {
         PromotionGoodsPageQuery searchParams = new PromotionGoodsPageQuery();
         searchParams.setPromotionId(pintuanId);
         searchParams.setPromotionType(PromotionTypeEnum.PINTUAN.name());

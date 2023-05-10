@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.model.query.PointsGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PointsGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsService;
@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,7 +57,7 @@ public class PointsGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping
     @Operation(summary = "添加积分商品")
     public Result<Object> addPointsGoods(@RequestBody List<PointsGoods> pointsGoodsList) {
         if (pointsGoodsService.savePointsGoodsBatch(pointsGoodsList)) {
@@ -68,10 +68,10 @@ public class PointsGoodsManagerController {
 
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @PutMapping(consumes = "application/json", produces = "application/json")
+    @PutMapping
     @Operation(summary = "修改积分商品")
     public Result<Object> updatePointsGoods(@RequestBody PointsGoodsVO pointsGoods) {
-        Objects.requireNonNull(UserContext.getCurrentUser());
+        Objects.requireNonNull(SecurityUtils.getCurrentUser());
         pointsGoodsService.updatePromotions(pointsGoods);
         return Result.success();
     }
@@ -102,7 +102,7 @@ public class PointsGoodsManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "分页获取积分商品")
-    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams, PageVO page) {
+    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams) {
         IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, page);
         return Result.success(pointsGoodsByPage);
     }

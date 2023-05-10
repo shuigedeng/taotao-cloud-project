@@ -19,7 +19,8 @@ package com.taotao.cloud.tenant.biz.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackagePageDTO;
-import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
+import com.taotao.cloud.tenant.biz.entity.TenantPackage;
+
 import java.util.List;
 
 /**
@@ -54,5 +55,5 @@ public interface TenantPackageService {
      * @param packageId 套餐id
      * @return 套餐信息
      */
-    TenantPackageDO validTenantPackage(Long packageId);
+    TenantPackage validTenantPackage(Long packageId);
 }

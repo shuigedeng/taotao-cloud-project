@@ -19,9 +19,10 @@ package com.taotao.cloud.promotion.biz.controller.business.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
 import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;
-import com.taotao.cloud.promotion.api.model.query.FullDiscountPageQuery;
+import com.taotao.cloud.promotion.api.model.page.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -30,7 +31,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collections;
 import java.util.Objects;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,9 +59,9 @@ public class FullDiscountStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "新增满优惠活动")
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping
     public Result<FullDiscount> addFullDiscount(@RequestBody FullDiscountVO fullDiscountVO) {
-        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
         fullDiscountVO.setStoreId(currentUser.getStoreId());
         fullDiscountVO.setStoreName(currentUser.getStoreName());
         if (!fullDiscountService.savePromotions(fullDiscountVO)) {
@@ -83,7 +84,7 @@ public class FullDiscountStoreController {
     @Operation(summary = "根据条件分页查询满优惠活动")
     @GetMapping
     public Result<IPage<FullDiscount>> getFullDiscountByPage(FullDiscountPageQuery searchParams, PageVO page) {
-        String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
+        String storeId = Objects.requireNonNull(SecurityUtils.getCurrentUser()).getStoreId();
         searchParams.setStoreId(storeId);
         IPage<FullDiscount> fullDiscountByPage = fullDiscountService.pageFindAll(searchParams, page);
         return Result.success(fullDiscountByPage);
@@ -92,10 +93,10 @@ public class FullDiscountStoreController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改满优惠活动")
-    @PutMapping(consumes = "application/json", produces = "application/json")
+    @PutMapping
     public Result<String> editFullDiscount(@RequestBody FullDiscountVO fullDiscountVO) {
         OperationalJudgment.judgment(fullDiscountService.getFullDiscount(fullDiscountVO.getId()));
-        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
+		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
         fullDiscountVO.setStoreId(currentUser.getStoreId());
         fullDiscountVO.setStoreName(currentUser.getStoreName());
         if (!fullDiscountService.updatePromotions(fullDiscountVO)) {

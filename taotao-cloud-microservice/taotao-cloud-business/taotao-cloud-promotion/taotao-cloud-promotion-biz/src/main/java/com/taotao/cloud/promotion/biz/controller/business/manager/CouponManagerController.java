@@ -21,8 +21,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
+import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
@@ -33,7 +35,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
+import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,7 +67,7 @@ public class CouponManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取优惠券列表")
     @GetMapping
-    public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
+    public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam) {
         queryParam.setStoreId("platform");
         return Result.success(couponService.pageVOFindAll(queryParam, page));
     }
@@ -82,7 +84,7 @@ public class CouponManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "添加优惠券")
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping
     public Result<CouponVO> addCoupon(@RequestBody CouponVO couponVO) {
         this.setStoreInfo(couponVO);
         couponService.savePromotions(couponVO);
@@ -92,7 +94,7 @@ public class CouponManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改优惠券")
-    @PutMapping(consumes = "application/json", produces = "application/json")
+    @PutMapping
     public Result<Coupon> updateCoupon(@RequestBody CouponVO couponVO) {
         this.setStoreInfo(couponVO);
         Coupon coupon = couponService.getById(couponVO.getId());
@@ -134,14 +136,14 @@ public class CouponManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "根据优惠券id券分页获取会员领详情")
     @GetMapping(value = "/member/{id}")
-    public Result<IPage<MemberCoupon>> getByPage(@PathVariable String id, PageVO page) {
+    public Result<IPage<MemberCoupon>> getByPage(@PathVariable String id, PageQuery page) {
         QueryWrapper<MemberCoupon> queryWrapper = new QueryWrapper<>();
         IPage<MemberCoupon> data = memberCouponService.page(PageUtil.initPage(page), queryWrapper.eq("coupon_id", id));
         return Result.success(data);
     }
 
     private void setStoreInfo(CouponVO couponVO) {
-        AuthUser currentUser = UserContext.getCurrentUser();
+		SecurityUser currentUser = SecurityUtils.getCurrentUser();
         if (currentUser == null) {
             throw new BusinessException(ResultEnum.USER_NOT_EXIST);
         }

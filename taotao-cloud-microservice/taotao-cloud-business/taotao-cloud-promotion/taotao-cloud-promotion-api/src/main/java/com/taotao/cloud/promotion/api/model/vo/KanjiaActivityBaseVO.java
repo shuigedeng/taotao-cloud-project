@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.vo.kanjia;
+package com.taotao.cloud.promotion.api.model.vo;
 
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import java.io.Serializable;

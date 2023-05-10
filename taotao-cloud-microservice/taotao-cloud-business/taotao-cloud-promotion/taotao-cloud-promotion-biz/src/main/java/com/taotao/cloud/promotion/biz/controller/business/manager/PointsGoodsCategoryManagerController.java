@@ -78,7 +78,7 @@ public class PointsGoodsCategoryManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "获取积分商品分类分页")
-    public Result<IPage<PointsGoodsCategory>> page(String name, PageVO page) {
+    public Result<IPage<PointsGoodsCategory>> page(String name) {
         return Result.success(pointsGoodsCategoryService.getCategoryByPage(name, page));
     }
 

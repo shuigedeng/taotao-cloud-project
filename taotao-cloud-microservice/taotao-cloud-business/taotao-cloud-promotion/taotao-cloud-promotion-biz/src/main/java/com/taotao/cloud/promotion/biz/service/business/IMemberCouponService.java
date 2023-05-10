@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.MemberCouponStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
+import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
 import java.math.BigDecimal;
 import java.util.List;

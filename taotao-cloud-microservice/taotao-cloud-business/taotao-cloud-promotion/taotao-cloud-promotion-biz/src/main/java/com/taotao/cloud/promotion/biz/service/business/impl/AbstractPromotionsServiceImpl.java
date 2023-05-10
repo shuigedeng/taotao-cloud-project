@@ -27,12 +27,13 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
-import com.taotao.cloud.promotion.api.model.query.BasePromotionsSearchQuery;
+import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.model.entity.BasePromotions;
 import com.taotao.cloud.promotion.biz.model.entity.PromotionGoods;
 import com.taotao.cloud.promotion.biz.service.business.AbstractPromotionsService;
 import com.taotao.cloud.promotion.biz.service.business.IPromotionGoodsService;
+import com.taotao.cloud.promotion.biz.util.PageQueryUtils;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
@@ -41,6 +42,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -141,12 +144,12 @@ public class AbstractPromotionsServiceImpl<M extends BaseSuperMapper<T>, T exten
     @Override
     public <S extends BasePromotionsSearchQuery> IPage<T> pageFindAll(S searchParams, PageQuery page) {
         // page.setNotConvert(false);
-        return this.page(page.buildMpPage(), searchParams.queryWrapper());
+        return this.page(page.buildMpPage(), PageQueryUtils.queryWrapper(searchParams));
     }
 
     @Override
     public <S extends BasePromotionsSearchQuery> List<T> listFindAll(S searchParams) {
-        return this.list(searchParams.queryWrapper());
+        return this.list(PageQueryUtils.queryWrapper(searchParams));
     }
 
     @Override

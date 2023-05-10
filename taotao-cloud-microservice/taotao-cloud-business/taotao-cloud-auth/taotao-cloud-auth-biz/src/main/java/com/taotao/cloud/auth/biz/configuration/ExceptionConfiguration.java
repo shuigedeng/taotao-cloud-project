@@ -208,7 +208,7 @@ public class ExceptionConfiguration implements InitializingBean {
     @ExceptionHandler(ValidationException.class)
     public Result<String> handleException(NativeWebRequest req, ValidationException e) {
         printLog(req, e);
-        return Result.fail(ResultEnum.VERIFY_ARGUMENT_ERROR);
+        return Result.fail(ResultEnum.ILLEGAL_ARGUMENT_ERROR);
     }
 
     /** RequestParam上validate失败后抛出的异常是jakarta.validation.ConstraintViolationException */

@@ -78,16 +78,16 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
     private IFeignStoreFlowApi storeFlowApi;
 
     @Override
-    public void createBill(Long storeId, LocalDateTime startTime, LocalDateTime endTime) {
+    public void createBill(String storeId, LocalDateTime startTime, LocalDateTime endTime) {
         // 获取结算店铺
         StoreDetailInfoVO store = storeDetailService.getStoreDetailVO(storeId);
         Bill bill = new Bill();
 
         // 结算基础信息
         bill.setStartTime(startTime);
-        bill.setEndTime(DateUtil.yesterday());
+        // bill.setEndTime(DateUtil.yesterday());
         bill.setBillStatus(BillStatusEnum.OUT.name());
-        bill.setStoreId(storeId);
+        // bill.setStoreId(storeId);
         bill.setStoreName(store.getStoreName());
 
         // 设置结算信息
@@ -145,29 +145,30 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void immediatelyBill(String storeId, Long endTime) {
 
-        Long now = DateUtil.getDateline();
-        // TODO 需要获取真实店铺
-        StoreDetailVO store = new StoreDetailVO();
-        Long startTime = store.getLastBillTime().getTime();
-
-        store.setLastBillTime(new Date(now));
-        // TODO   store.save 保存新的结束时间
-
-        // TODO 获取结算周期内的结算详情
-        BillDTO billDTO = new BillDTO();
-
-        // 如果没有需要结算单，那么就可以直接返回，也不需要保存新的结算单
-        if (billDTO.getOrderPrice() == 0 && billDTO.getRefundPrice() == 0) {
-            return;
-        }
-
-        this.createBill(storeId, startTime, endTime);
+        // Long now = DateUtil.getDateline();
+        // // TODO 需要获取真实店铺
+        // StoreDetailVO store = new StoreDetailVO();
+        // Long startTime = store.getLastBillTime().getTime();
+		//
+        // store.setLastBillTime(new Date(now));
+        // // TODO   store.save 保存新的结束时间
+		//
+        // // TODO 获取结算周期内的结算详情
+        // BillDTO billDTO = new BillDTO();
+		//
+        // // 如果没有需要结算单，那么就可以直接返回，也不需要保存新的结算单
+        // if (billDTO.getOrderPrice() == 0 && billDTO.getRefundPrice() == 0) {
+        //     return;
+        // }
+		//
+        // this.createBill(storeId, startTime, endTime);
     }
 
     @Override
     public IPage<BillListVO> billPage(BillPageQuery billPageQuery) {
-        QueryWrapper<BillListVO> queryWrapper = billPageQuery.queryWrapper();
-        return this.baseMapper.queryBillPage(billPageQuery.buildMpPage(), queryWrapper);
+        // QueryWrapper<BillListVO> queryWrapper = billPageQuery.queryWrapper();
+        // return this.baseMapper.queryBillPage(billPageQuery.buildMpPage(), queryWrapper);
+		return null;
     }
 
     @Override
@@ -238,11 +239,11 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 
         StoreFlowQuery.BillDTO billDTO = new StoreFlowQuery.BillDTO();
         BeanUtils.copyProperties(bill, billDTO);
-        List<StoreFlowPayDownloadVO> storeFlowList = storeFlowApi.getStoreFlowPayDownloadVO(StoreFlowQuery.builder()
-                .type(FlowTypeEnum.PAY.name())
-                .bill(billDTO)
-                .build());
-        writer.write(storeFlowList, true);
+        // List<StoreFlowPayDownloadVO> storeFlowList = storeFlowApi.getStoreFlowPayDownloadVO(StoreFlowQuery.builder()
+        //         .type(FlowTypeEnum.PAY.name())
+        //         .bill(billDTO)
+        //         .build());
+        // writer.write(storeFlowList, true);
 
         writer.setSheet("退款订单");
         writer.addHeaderAlias("createTime", "入账时间");
@@ -270,12 +271,12 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
 
         StoreFlowQuery.BillDTO billDTO1 = new StoreFlowQuery.BillDTO();
         BeanUtils.copyProperties(bill, billDTO1);
-        List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList =
-                storeFlowApi.getStoreFlowRefundDownloadVO(StoreFlowQuery.builder()
-                        .type(FlowTypeEnum.REFUND.name())
-                        .bill(billDTO1)
-                        .build());
-        writer.write(storeFlowRefundDownloadVOList, true);
+        // List<StoreFlowRefundDownloadVO> storeFlowRefundDownloadVOList =
+        //         storeFlowApi.getStoreFlowRefundDownloadVO(StoreFlowQuery.builder()
+        //                 .type(FlowTypeEnum.REFUND.name())
+        //                 .bill(billDTO1)
+        //                 .build());
+        // writer.write(storeFlowRefundDownloadVOList, true);
 
         ServletOutputStream out = null;
         try {

@@ -19,9 +19,9 @@ package com.taotao.cloud.promotion.biz.service.business;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.promotion.api.model.query.KanjiaActivityPageQuery;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivitySearchQuery;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityVO;
+import com.taotao.cloud.promotion.api.model.page.KanjiaActivityPageQuery;
+import com.taotao.cloud.promotion.api.model.query.KanjiaActivitySearchQuery;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityVO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivity;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 

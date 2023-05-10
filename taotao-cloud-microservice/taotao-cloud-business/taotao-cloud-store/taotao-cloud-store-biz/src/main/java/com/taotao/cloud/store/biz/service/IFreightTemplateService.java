@@ -57,7 +57,7 @@ public interface IFreightTemplateService extends IService<FreightTemplate> {
      * @return {@link FreightTemplateInfoVO }
      * @since 2022-06-01 14:59:37
      */
-    FreightTemplateInfoVO getFreightTemplate(Long id);
+    FreightTemplateInfoVO getFreightTemplate(String id);
 
     /**
      * 添加商家运费模板 运费模板分为卖家包邮、运费计算两种类型

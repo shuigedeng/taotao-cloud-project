@@ -64,7 +64,7 @@ import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.math.BigDecimal;

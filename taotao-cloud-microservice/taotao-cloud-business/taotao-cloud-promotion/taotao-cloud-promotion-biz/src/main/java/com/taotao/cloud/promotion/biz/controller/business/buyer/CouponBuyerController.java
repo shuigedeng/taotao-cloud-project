@@ -17,12 +17,17 @@
 package com.taotao.cloud.promotion.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.CouponPageQuery;
+import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
+import com.taotao.cloud.promotion.api.model.vo.MemberCouponVO;
+import com.taotao.cloud.promotion.biz.model.convert.MemberCouponConvert;
 import com.taotao.cloud.promotion.biz.model.entity.MemberCoupon;
 import com.taotao.cloud.promotion.biz.service.business.ICouponService;
 import com.taotao.cloud.promotion.biz.service.business.IMemberCouponService;
@@ -30,85 +35,93 @@ import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.Objects;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/** 买家端,买家优惠券接口 */
+import java.math.BigDecimal;
+import java.util.Objects;
+
+/**
+ * 买家端,买家优惠券接口
+ */
+@AllArgsConstructor
 @RestController
 @Tag(name = "买家端,买家优惠券接口")
 @RequestMapping("/buyer/promotion/coupon")
 public class CouponBuyerController {
 
-    /** 优惠券 */
-    @Autowired
-    private ICouponService couponService;
+	/**
+	 * 优惠券
+	 */
+	private final ICouponService couponService;
 
-    /** 会员优惠券 */
-    @Autowired
-    private IMemberCouponService memberCouponService;
+	/**
+	 * 会员优惠券
+	 */
+	private final IMemberCouponService memberCouponService;
 
-    @RequestLogger
-    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @GetMapping
-    @Operation(summary = "获取可领取优惠券列表")
-    public Result<IPage<CouponVO>> getCouponList(CouponPageQuery queryParam, PageVO page) {
-        queryParam.setPromotionStatus(PromotionsStatusEnum.START.name());
-        queryParam.setGetType(CouponGetEnum.FREE.name());
-        IPage<CouponVO> canUseCoupons = couponService.pageVOFindAll(queryParam, page);
-        return Result.success(canUseCoupons);
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@GetMapping("/page")
+	@Operation(summary = "获取可领取优惠券列表")
+	public Result<PageResult<CouponVO>> getCouponList(CouponPageQuery queryParam) {
+		queryParam.setPromotionStatus(PromotionsStatusEnum.START.name());
+		queryParam.setGetType(CouponGetEnum.FREE.name());
 
-    @RequestLogger
-    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @Operation(summary = "获取当前会员的优惠券列表")
-    @GetMapping("/getCoupons")
-    public Result<IPage<MemberCoupon>> getCoupons(CouponPageQuery param, PageVO pageVo) {
-        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-        param.setMemberId(currentUser.getId());
-        return Result.success(memberCouponService.getMemberCoupons(param, pageVo));
-    }
+		IPage<CouponVO> couponVOIPage = couponService.pageVOFindAll(queryParam, queryParam.getPageParm());
+		return Result.success(PageResult.convertMybatisPage(couponVOIPage, CouponVO.class));
+	}
 
-    @RequestLogger
-    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @Operation(summary = "获取当前会员的对于当前商品可使用的优惠券列表")
-    @GetMapping("/canUse")
-    public Result<IPage<MemberCoupon>> getCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice, PageVO pageVo) {
-        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-        param.setMemberId(currentUser.getId());
-        return Result.success(memberCouponService.getMemberCouponsByCanUse(param, totalPrice, pageVo));
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@Operation(summary = "获取当前会员的优惠券列表")
+	@GetMapping("/getCoupons")
+	public Result<PageResult<MemberCouponVO>> getCoupons(CouponPageQuery param) {
+		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
+		// param.setMemberId(currentUser.getId());
+		IPage<MemberCoupon> memberCoupons = memberCouponService.getMemberCoupons(param, param.getPageParm());
+		return Result.success(PageResult.convertMybatisPage(memberCoupons, MemberCouponVO.class));
+	}
 
-    @RequestLogger
-    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @Operation(summary = "获取当前会员可使用的优惠券数量")
-    @GetMapping("/getCouponsNum")
-    public Result<Object> getMemberCouponsNum() {
-        return Result.success(memberCouponService.getMemberCouponsNum());
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@Operation(summary = "获取当前会员的对于当前商品可使用的优惠券列表")
+	@GetMapping("/canUse")
+	public Result<PageResult<MemberCouponVO>> getCouponsByCanUse(CouponPageQuery param, BigDecimal totalPrice) {
+		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
+		// param.setMemberId(currentUser.getId());
+		IPage<MemberCoupon> memberCoupons = memberCouponService.getMemberCouponsByCanUse(param, totalPrice, param.getPageParm());
+		return Result.success(PageResult.convertMybatisPage(memberCoupons, MemberCouponVO.class));
+	}
 
-    @RequestLogger
-    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @Operation(summary = "会员领取优惠券")
-    @GetMapping("/receive/{couponId}")
-    public Result<Object> receiveCoupon(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
-        AuthUser currentUser = Objects.requireNonNull(UserContext.getCurrentUser());
-        memberCouponService.receiveBuyerCoupon(couponId, currentUser.getId(), currentUser.getNickName());
-        return Result.success();
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@Operation(summary = "获取当前会员可使用的优惠券数量")
+	@GetMapping("/getCouponsNum")
+	public Result<Long> getMemberCouponsNum() {
+		return Result.success(memberCouponService.getMemberCouponsNum());
+	}
 
-    @RequestLogger
-    @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
-    @Operation(summary = "通过id获取")
-    @GetMapping(value = "/get/{couponId}")
-    public Result<MemberCoupon> get(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
-        MemberCoupon memberCoupon = OperationalJudgment.judgment(memberCouponService.getById(couponId));
-        return Result.success(memberCoupon);
-    }
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@Operation(summary = "会员领取优惠券")
+	@GetMapping("/receive/{couponId}")
+	public Result<Boolean> receiveCoupon(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
+		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
+		memberCouponService.receiveBuyerCoupon(couponId, currentUser.getId(), currentUser.getNickName());
+		return Result.success(true);
+	}
+
+	@RequestLogger
+	@PreAuthorize("hasAuthority('sys:resource:info:roleId')")
+	@Operation(summary = "通过id获取")
+	@GetMapping(value = "/get/{couponId}")
+	public Result<MemberCouponVO> get(@NotNull(message = "优惠券ID不能为空") @PathVariable("couponId") String couponId) {
+		MemberCoupon memberCoupon = OperationalJudgment.judgment(memberCouponService.getById(couponId));
+		return Result.success(MemberCouponConvert.INSTANCE.convert(memberCoupon));
+	}
 }

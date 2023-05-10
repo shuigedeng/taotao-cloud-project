@@ -24,7 +24,6 @@ import lombok.experimental.SuperBuilder;
 /**
  * 小程序直播间基础哦
  *
- * @since 2021/5/17 9:47 上午
  */
 @Data
 @SuperBuilder

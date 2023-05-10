@@ -25,10 +25,11 @@ import com.taotao.cloud.sys.biz.repository.cls.DeptRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDeptRepository;
 import com.taotao.cloud.sys.biz.service.business.IDeptService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
 
 /**
  * DeptServiceImpl
@@ -39,21 +40,22 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DeptServiceImpl extends BaseSuperServiceImpl<IDeptMapper, Dept, DeptRepository, IDeptRepository, Long>
-        implements IDeptService {
+	implements IDeptService {
 
-    @Override
-    public List<DeptTreeVO> tree() {
-        LambdaQueryWrapper<Dept> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.orderByDesc(Dept::getSortNum);
-        List<Dept> list = list(queryWrapper);
+	@Override
+	public List<DeptTreeVO> tree() {
+		LambdaQueryWrapper<Dept> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.orderByDesc(Dept::getSortNum);
+		List<Dept> list = list(queryWrapper);
 
-        return DeptConvert.INSTANCE.convertTree(list).stream()
-                .filter(Objects::nonNull)
-                .peek(e -> {
-                    e.setKey(e.getId());
-                    e.setValue(e.getId());
-                    e.setTitle(e.getName());
-                })
-                .collect(Collectors.toList());
-    }
+		return DeptConvert.INSTANCE.convertTree(list)
+			.stream()
+			.filter(Objects::nonNull)
+			.peek(e -> {
+				e.setKey(e.getId());
+				e.setValue(e.getId());
+				e.setTitle(e.getName());
+			})
+			.collect(Collectors.toList());
+	}
 }

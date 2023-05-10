@@ -44,7 +44,7 @@ public interface IStoreDetailService extends IService<StoreDetail> {
      * @return {@link StoreDetailInfoVO }
      * @since 2022-06-01 15:00:34
      */
-    StoreDetailInfoVO getStoreDetailVO(Long storeId);
+    StoreDetailInfoVO getStoreDetailVO(String storeId);
 
     /**
      * 根据会员ID获取店铺信息VO

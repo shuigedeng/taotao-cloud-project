@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.query;
+package com.taotao.cloud.promotion.api.model.page;
 
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
@@ -52,28 +52,8 @@ public class BasePromotionsSearchQuery extends PageQuery implements Serializable
      */
     @Schema(description = "关联范围类型")
     private String scopeType;
-    //
-    // public <T> QueryWrapper<T> queryWrapper() {
-    // 	QueryWrapper<T> queryWrapper = new QueryWrapper<>();
-    //
-    // 	if (CharSequenceUtil.isNotEmpty(id)) {
-    // 		queryWrapper.eq("id", id);
-    // 	}
-    // 	if (startTime != null) {
-    // 		queryWrapper.ge("start_time", new Date(startTime));
-    // 	}
-    // 	if (endTime != null) {
-    // 		queryWrapper.le("end_time", new Date(endTime));
-    // 	}
-    // 	if (CharSequenceUtil.isNotEmpty(promotionStatus)) {
-    // 		queryWrapper.and(
-    // 			PromotionTools.queryPromotionStatus(PromotionsStatusEnum.valueOf(promotionStatus)));
-    // 	}
-    // 	if (CharSequenceUtil.isNotEmpty(scopeType)) {
-    // 		queryWrapper.eq("scope_type", scopeType);
-    // 	}
-    // 	queryWrapper.eq("delete_flag", false);
-    // 	return queryWrapper;
-    // }
 
+	public BasePromotionsSearchQuery baseSearchQuery(){
+		return this;
+	}
 }

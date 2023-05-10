@@ -22,7 +22,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsParams;
+import com.taotao.cloud.promotion.api.model.page.KanjiaActivityGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import com.taotao.cloud.promotion.biz.service.business.IKanjiaActivityGoodsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -63,7 +63,7 @@ public class KanJiaActivityGoodsManagerController {
     @Operation(summary = "获取砍价活动分页")
     @GetMapping
     public Result<IPage<KanjiaActivityGoods>> getKanJiaActivityPage(
-            KanjiaActivityGoodsParams KanJiaActivityParams, PageVO page) {
+            KanjiaActivityGoodsPageQuery KanJiaActivityParams) {
         return Result.success(kanJiaActivityGoodsService.getForPage(KanJiaActivityParams, page));
     }
 

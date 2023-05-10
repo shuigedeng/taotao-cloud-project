@@ -22,6 +22,13 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * 远程商店物流api
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-10 11:20:18
+ */
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = FeignStoreApiFallback.class)
 public interface IFeignStoreLogisticsApi {
 

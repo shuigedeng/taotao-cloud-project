@@ -17,8 +17,9 @@
 package com.taotao.cloud.promotion.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.promotion.api.model.query.PointsGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PointsGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
@@ -55,8 +56,8 @@ public class PointsGoodsBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping
     @Operation(summary = "分页获取积分商品")
-    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams, PageVO page) {
-        IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, page);
+    public Result<IPage<PointsGoods>> getPointsGoodsPage(PointsGoodsPageQuery searchParams ){
+        IPage<PointsGoods> pointsGoodsByPage = pointsGoodsService.pageFindAll(searchParams, searchParams.getPageParm());
         return Result.success(pointsGoodsByPage);
     }
 
@@ -64,7 +65,7 @@ public class PointsGoodsBuyerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @GetMapping("/category")
     @Operation(summary = "获取积分商品分类分页")
-    public Result<IPage<PointsGoodsCategory>> page(String name, PageVO page) {
+    public Result<IPage<PointsGoodsCategory>> page(String name, PageQuery page) {
         return Result.success(pointsGoodsCategoryService.getCategoryByPage(name, page));
     }
 

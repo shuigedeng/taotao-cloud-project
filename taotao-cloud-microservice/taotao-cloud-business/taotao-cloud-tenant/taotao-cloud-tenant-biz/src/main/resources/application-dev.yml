@@ -85,16 +85,16 @@ redisson:
     database: 3     #尝试连接的数据库编号。
     dns_monitoring_interval: 5000     #用来指定检查节点DNS变化的时间间隔。使用的时候应该确保JVM里的DNS数据的缓存时间保持在足够低的范围才有意义。用-1来禁用该功能。
 
-#arthas:
-#  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
-#  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
-#  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
-#  telnetPort: -1
-#  httpPort: -1
-#  ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
-#  agent-id: ${spring.application.name}
-#  app-name: ${spring.application.name}
-#  tunnel-server: ws://192.168.10.220:7777/ws
+arthas:
+  # telnetPort、httpPort为 -1 ，则不listen telnet端口，为 0 ，则随机telnet端口
+  # 如果是防止一个机器上启动多个 arthas端口冲突。可以配置为随机端口，或者配置为 -1，并且通过tunnel server来使用arthas。
+  # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
+  telnetPort: -1
+  httpPort: -1
+  ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  agent-id: ${spring.application.name}
+  app-name: ${spring.application.name}
+  tunnel-server: ws://192.168.10.220:7777/ws
 
 dubbo:
   enabled: true
@@ -655,7 +655,7 @@ taotao:
       enabled: true
       group: ${spring.applicaion.name}
       version: ${taotaoCloudVersion}
-      title: 定时任务中心
+      title: 租户管理中心
     metrics:
       enabled: true
       druid:
@@ -813,9 +813,11 @@ management:
 #      name: ${spring.application.name}
 #    compression:
 #      enabled: true
+
 logging:
   file:
-    path: ${user.home}/logs/${spring.application.name}
+    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+    path: ${user.home}/logs/${spring.application.name}/
   logback:
     rollingpolicy:
       max-file-size: 10GB
@@ -864,22 +866,6 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-kylin:
-  lock:
-    acquire-timeout: 3000       #获取锁超时时间 默认值3000L 单位：毫秒
-    expire: 30000               #过期时间，默认值30000L 单位：毫秒
-    retry-interval: 100         #获取锁失败时重试时间间隔，默认值100L 单位：毫秒
-    lock-key-prefix: kylin-lock #锁前缀 默认配置
-    primary-executor: com.taotao.cloud.lock.kylin.executor.redisson.RedissonLockExecutor #默认执行器。默认redisson>zookeeper
-    redisson: true              #是否开启redisson 默认true
-    #zookeeper:
-    #  zk-servers: 127.0.0.1:2181 #zk的server地址，多个server之间使用英文逗号分隔开 。配置地址则开启zookeeper
-    #  session-timeout: 60000     #会话超时时间，默认值60000 单位：毫秒
-    #  connection-timeout: 15000  #连接超时时间，默认值15000 单位：毫秒
-    #  base-sleep-time-ms: 5000   #初始sleep时间，默认值5000 单位：毫秒
-    #  max-retries: 3             #最大失败重试次数
-    #  namespace: curator/kylin/lock #命名空间
 
 springdoc:
   api-docs:

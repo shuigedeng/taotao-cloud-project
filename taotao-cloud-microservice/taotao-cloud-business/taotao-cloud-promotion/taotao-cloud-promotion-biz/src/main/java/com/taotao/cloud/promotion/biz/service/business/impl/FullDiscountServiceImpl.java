@@ -24,7 +24,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.cloud.promotion.api.model.query.PromotionGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.biz.mapper.FullDiscountMapper;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;

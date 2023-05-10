@@ -23,17 +23,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackagePageDTO;
 import com.taotao.cloud.tenant.biz.convert.TenantPackageConvert;
-import com.taotao.cloud.tenant.biz.entity.TenantPackageDO;
+import com.taotao.cloud.tenant.biz.entity.TenantPackage;
+
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-/**
- * @author
- * @version 0.0.1
- * @date 2022/11/26 15:27
- */
 @RequiredArgsConstructor
 @Component
 public class TenantPackageManager {
@@ -44,7 +40,7 @@ public class TenantPackageManager {
         return tenantPackageMapper.insert(TenantPackageConvert.INSTANCE.convert(tenantPackageDTO));
     }
 
-    public TenantPackageDO getTenantPackageById(Long id) {
+    public TenantPackage getTenantPackageById(Long id) {
         return tenantPackageMapper.selectById(id);
     }
 
@@ -56,20 +52,20 @@ public class TenantPackageManager {
         return tenantPackageMapper.deleteById(id);
     }
 
-    public List<TenantPackageDO> listTenantPackage() {
+    public List<TenantPackage> listTenantPackage() {
         return tenantPackageMapper.selectList(Wrappers.emptyWrapper());
     }
 
-    public Page<TenantPackageDO> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
-        LambdaQueryWrapper<TenantPackageDO> wrapper = Wrappers.<TenantPackageDO>lambdaQuery()
-                .eq(Objects.nonNull(tenantPackagePageDTO.getId()), TenantPackageDO::getId, tenantPackagePageDTO.getId())
+    public Page<TenantPackage> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
+        LambdaQueryWrapper<TenantPackage> wrapper = Wrappers.<TenantPackage>lambdaQuery()
+                .eq(Objects.nonNull(tenantPackagePageDTO.getId()), TenantPackage::getId, tenantPackagePageDTO.getId())
                 .eq(
                         Objects.nonNull(tenantPackagePageDTO.getStatus()),
-                        TenantPackageDO::getStatus,
+                        TenantPackage::getStatus,
                         tenantPackagePageDTO.getStatus())
                 .like(
                         StrUtil.isNotBlank(tenantPackagePageDTO.getName()),
-                        TenantPackageDO::getName,
+                        TenantPackage::getName,
                         tenantPackagePageDTO.getName());
         return tenantPackageMapper.selectPage(
                 Page.of(tenantPackagePageDTO.getCurrentPage(), tenantPackagePageDTO.getPageSize()), wrapper);

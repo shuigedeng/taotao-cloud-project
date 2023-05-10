@@ -8,8 +8,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
@@ -18,7 +17,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.sync.biz.TaoTaoCloudStoreApplication"
-description = "商店中心"
+description = "店铺中心"
 archivesBaseName = 'taotao-cloud-store'
 
 configurations {

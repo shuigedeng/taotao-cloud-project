@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "运费模板子配置vo")
 public class FreightTemplateChildVO {
 
-    private Long freightTemplateId;
+    private String freightTemplateId;
 
     private BigDecimal firstCompany;
 

@@ -33,7 +33,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenRespon
 public class CompositeOAuth2AccessTokenResponseClient
         implements OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> {
 
-    private Map<String, OAuth2AccessTokenResponseClient> clients;
+    private Map<String, OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest>> clients;
 
     private static final String DefaultClientKey = "default_key";
 
@@ -49,7 +49,7 @@ public class CompositeOAuth2AccessTokenResponseClient
             throws OAuth2AuthenticationException {
         ClientRegistration clientRegistration = authorizationGrantRequest.getClientRegistration();
 
-        OAuth2AccessTokenResponseClient client = clients.get(clientRegistration.getRegistrationId());
+        OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> client = clients.get(clientRegistration.getRegistrationId());
         if (client == null) {
             client = clients.get(DefaultClientKey);
         }
@@ -57,7 +57,7 @@ public class CompositeOAuth2AccessTokenResponseClient
         return client.getTokenResponse(authorizationGrantRequest);
     }
 
-    public Map<String, OAuth2AccessTokenResponseClient> getOAuth2AccessTokenResponseClients() {
+    public Map<String, OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest>> getOAuth2AccessTokenResponseClients() {
         return clients;
     }
 }

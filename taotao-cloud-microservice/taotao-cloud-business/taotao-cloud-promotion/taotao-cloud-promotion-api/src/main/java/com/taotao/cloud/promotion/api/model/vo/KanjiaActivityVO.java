@@ -14,37 +14,35 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.promotion.api.model.vo.kanjia;
+package com.taotao.cloud.promotion.api.model.vo;
 
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityBaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
-/** 砍价商品视图对象 */
+/** 砍价活动参与实体类 */
 @Data
-@Builder
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @AllArgsConstructor
-@NoArgsConstructor
-public class KanjiaActivityGoodsVO implements Serializable {
+@Schema(description = "砍价活动VO")
+public class KanjiaActivityVO extends KanjiaActivityBaseVO {
 
-    // @Schema(description =  "商品规格详细信息")
-    // private GoodsSku goodsSku;
+    @Schema(description = "是否可以砍价")
+    private Boolean help;
 
-    @Schema(description = "最低购买金额")
-    private BigDecimal purchasePrice;
+    @Schema(description = "是否已发起砍价")
+    private Boolean launch;
 
-    public BigDecimal getPurchasePrice() {
-        //		if (purchasePrice < 0) {
-        //			return 0D;
-        //		}
-        //		return purchasePrice;
-        return BigDecimal.ZERO;
+    @Schema(description = "是否可购买")
+    private Boolean pass;
+
+    public KanjiaActivityVO() {
+        this.setHelp(false);
+        this.setLaunch(false);
+        this.setPass(false);
     }
-
-    @Schema(description = "活动库存")
-    private Integer stock;
 }

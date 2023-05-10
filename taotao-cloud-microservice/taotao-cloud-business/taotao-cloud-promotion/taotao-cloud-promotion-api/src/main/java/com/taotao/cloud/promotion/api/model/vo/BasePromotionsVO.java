@@ -21,6 +21,8 @@ import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,23 +41,23 @@ public class BasePromotionsVO implements Serializable {
     private static final long serialVersionUID = 7814832369110695758L;
 
     private Long id;
-	@ApiModelProperty(value = "商家名称，如果是平台，这个值为 platform")
+	@Schema(description =  "商家名称，如果是平台，这个值为 platform")
     private String storeName;
-	@ApiModelProperty(value = "商家id，如果是平台，这个值为 0")
+	@Schema(description =  "商家id，如果是平台，这个值为 0")
     private String storeId;
 	@NotEmpty(message = "活动名称不能为空")
-	@ApiModelProperty(value = "活动名称", required = true)
+	@Schema(description =  "活动名称", required = true)
     private String promotionName;
-	@ApiModelProperty(value = "活动开始时间", required = true)
+	@Schema(description =  "活动开始时间", required = true)
     private LocalDateTime startTime;
-	@ApiModelProperty(value = "活动结束时间", required = true)
+	@Schema(description =  "活动结束时间", required = true)
     private LocalDateTime endTime;
 
     /**
      * @see PromotionsScopeTypeEnum PromotionsScopeTypeEnum.PORTION_GOODS.name()
      */
     private String scopeType;
-	@ApiModelProperty(value = "范围关联的id")
+	@Schema(description =  "范围关联的id")
     private String scopeId;
 
     /**

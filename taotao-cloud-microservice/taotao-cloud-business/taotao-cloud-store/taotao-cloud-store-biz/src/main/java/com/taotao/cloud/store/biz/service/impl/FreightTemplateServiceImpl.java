@@ -84,7 +84,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
 
                     freightTemplateInfoVO.setFreightTemplateChildList(
                             IFreightTemplateChildMapStruct.INSTANCE
-                                    .freightTemplateChildListToFreightTemplateChildVoList(freightTemplateChildren));
+                                    .convertToList(freightTemplateChildren));
                 }
                 list.add(freightTemplateInfoVO);
             }
@@ -102,7 +102,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
     }
 
     @Override
-    public FreightTemplateInfoVO getFreightTemplate(Long id) {
+    public FreightTemplateInfoVO getFreightTemplate(String id) {
         FreightTemplateInfoVO freightTemplateInfoVO = new FreightTemplateInfoVO();
         // 获取运费模板
         FreightTemplate freightTemplate = this.getById(id);
@@ -113,7 +113,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
             List<FreightTemplateChild> freightTemplateChildList =
                     freightTemplateChildService.getFreightTemplateChild(id);
             freightTemplateInfoVO.setFreightTemplateChildList(
-                    IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildListToFreightTemplateChildVoList(
+                    IFreightTemplateChildMapStruct.INSTANCE.convertToList(
                             freightTemplateChildList));
         }
         return freightTemplateInfoVO;
@@ -139,7 +139,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
                 list.add(freightTemplateChild);
             }
             List<FreightTemplateChild> freightTemplateChildren =
-                    IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildVOListTofreightTemplateChildList(list);
+                    IFreightTemplateChildMapStruct.INSTANCE.convertToVoList(list);
             // 添加运费模板子内容
             freightTemplateChildService.addFreightTemplateChild(freightTemplateChildren);
         }
@@ -172,7 +172,7 @@ public class FreightTemplateServiceImpl extends ServiceImpl<FreightTemplateMappe
             list.add(freightTemplateChild);
         }
         List<FreightTemplateChild> freightTemplateChildren =
-                IFreightTemplateChildMapStruct.INSTANCE.freightTemplateChildVOListTofreightTemplateChildList(list);
+                IFreightTemplateChildMapStruct.INSTANCE.convertToVoList(list);
         // 添加模板子内容
         freightTemplateChildService.addFreightTemplateChild(freightTemplateChildren);
         // 更新缓存

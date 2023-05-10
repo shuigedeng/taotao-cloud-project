@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.model.vo.cart.FullDiscountVO;
-import com.taotao.cloud.promotion.api.model.query.FullDiscountPageQuery;
+import com.taotao.cloud.promotion.api.model.page.FullDiscountPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.FullDiscount;
 import com.taotao.cloud.promotion.biz.service.business.IFullDiscountService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -54,9 +54,9 @@ public class FullDiscountManagerController {
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "获取满优惠列表")
     @GetMapping
-    public Result<IPage<FullDiscount>> getCouponList(FullDiscountPageQuery searchParams, PageVO page) {
-        page.setNotConvert(true);
-        return Result.success(fullDiscountService.pageFindAll(searchParams, page));
+    public Result<IPage<FullDiscount>> getCouponList(FullDiscountPageQuery searchParams) {
+        // page.setNotConvert(true);
+        return Result.success(fullDiscountService.pageFindAll(searchParams, searchParams.getPageParm()));
     }
 
     @RequestLogger
@@ -67,18 +67,15 @@ public class FullDiscountManagerController {
         return Result.success(fullDiscountService.getFullDiscount(id));
     }
 
+	//满额活动ID 满额活动状态
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @Operation(summary = "修改满额活动状态")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "id", value = "满额活动ID", required = true, paramType = "path"),
-        @ApiImplicitParam(name = "promotionStatus", value = "满额活动状态", required = true, paramType = "path")
-    })
     @PutMapping("/status/{id}")
-    public Result<Object> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
+    public Result<String> updateCouponStatus(@PathVariable String id, Long startTime, Long endTime) {
         if (fullDiscountService.updateStatus(Collections.singletonList(id), startTime, endTime)) {
             return Result.success(ResultEnum.SUCCESS);
         }
-        return Result.error(ResultEnum.ERROR);
+        return Result.fail(ResultEnum.ERROR);
     }
 }

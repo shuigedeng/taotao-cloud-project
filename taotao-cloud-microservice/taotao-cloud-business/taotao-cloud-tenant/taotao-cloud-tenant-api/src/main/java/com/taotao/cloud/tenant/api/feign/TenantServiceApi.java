@@ -28,16 +28,16 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @date 2022-04-07 14:50
  */
 @FeignClient(
-        contextId = "tenantServiceApi",
-        value = ServiceName.TAOTAO_CLOUD_TENANT,
-        fallbackFactory = FeignTenantFallbackImpl.class)
+	contextId = "tenantServiceApi",
+	value = ServiceName.TAOTAO_CLOUD_TENANT,
+	fallbackFactory = FeignTenantFallbackImpl.class)
 public interface TenantServiceApi {
 
-    /**
-     * 校验租户信息是否合法
-     *
-     * @param id 租户id
-     */
-    @GetMapping(value = "/tenant/validTenant/{id}")
-    void validTenant(@PathVariable("id") Long id);
+	/**
+	 * 校验租户信息是否合法
+	 *
+	 * @param id 租户id
+	 */
+	@GetMapping(value = "/tenant/validTenant/{id}")
+	void validTenant(@PathVariable("id") Long id);
 }

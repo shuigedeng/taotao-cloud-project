@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @TableName(Bill.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
 @org.hibernate.annotations.Table(appliesTo = Bill.TABLE_NAME, comment = "结算清单表")
-public class Bill extends BaseSuperEntity<Bill, Long> {
+public class Bill extends BaseSuperEntity<Bill, String> {
 
     public static final String TABLE_NAME = "tt_bill";
 

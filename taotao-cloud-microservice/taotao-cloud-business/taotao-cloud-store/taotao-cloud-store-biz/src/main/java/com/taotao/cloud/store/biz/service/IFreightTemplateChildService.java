@@ -36,7 +36,7 @@ public interface IFreightTemplateChildService extends IService<FreightTemplateCh
      * @return {@link List }<{@link FreightTemplateChild }>
      * @since 2022-06-01 14:59:03
      */
-    List<FreightTemplateChild> getFreightTemplateChild(Long freightTemplateId);
+    List<FreightTemplateChild> getFreightTemplateChild(String freightTemplateId);
 
     /**
      * 添加商家运费模板

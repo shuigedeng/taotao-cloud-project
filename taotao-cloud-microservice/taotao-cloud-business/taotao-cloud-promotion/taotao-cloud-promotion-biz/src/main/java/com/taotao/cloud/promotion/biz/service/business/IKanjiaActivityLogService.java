@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityDTO;
-import com.taotao.cloud.promotion.api.model.query.KanJiaActivityLogPageQuery;
+import com.taotao.cloud.promotion.api.model.page.KanJiaActivityLogPageQuery;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityLog;
 
 /**
@@ -50,4 +50,6 @@ public interface IKanjiaActivityLogService extends IService<KanjiaActivityLog> {
      * @since 2022-04-27 16:43:40
      */
     KanjiaActivityLog addKanJiaActivityLog(KanjiaActivityDTO kanJiaActivityDTO);
+
+	KanjiaActivityLog queryKanjiaActivityLog(Long id, Long userId);
 }

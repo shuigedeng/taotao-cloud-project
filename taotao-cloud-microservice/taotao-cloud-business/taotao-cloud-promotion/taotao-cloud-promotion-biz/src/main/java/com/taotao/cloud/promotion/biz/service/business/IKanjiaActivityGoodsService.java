@@ -21,9 +21,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsListVO;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsParams;
-import com.taotao.cloud.promotion.api.model.vo.kanjia.KanjiaActivityGoodsVO;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsListVO;
+import com.taotao.cloud.promotion.api.model.page.KanjiaActivityGoodsPageQuery;
+import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsVO;
+import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
 import java.util.List;
 
@@ -48,23 +49,23 @@ public interface IKanjiaActivityGoodsService extends IService<KanjiaActivityGood
     /**
      * 查询砍价活动商品分页信息
      *
-     * @param kanJiaActivityGoodsParams 砍价活动商品
+     * @param kanJiaActivityGoodsPageQuery 砍价活动商品
      * @param pageVO 分页信息
      * @return {@link IPage }<{@link KanjiaActivityGoods }>
      * @since 2022-04-27 16:43:36
      */
-    IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery pageVO);
+    IPage<KanjiaActivityGoods> getForPage(KanjiaActivityGoodsPageQuery kanJiaActivityGoodsPageQuery, PageQuery pageQuery);
 
     /**
      * 查询砍价活动商品分页信息
      *
-     * @param kanJiaActivityGoodsParams 砍价活动商品
+     * @param kanJiaActivityGoodsPageQuery 砍价活动商品
      * @param pageVO 分页信息
      * @return {@link IPage }<{@link KanjiaActivityGoodsListVO }>
      * @since 2022-04-27 16:43:36
      */
-    IPage<KanjiaActivityGoodsListVO> kanjiaGoodsVOPage(
-            KanjiaActivityGoodsParams kanJiaActivityGoodsParams, PageQuery pageVO);
+    IPage<KanjiaActivityGoodsBO> kanjiaGoodsPage(
+		KanjiaActivityGoodsPageQuery kanJiaActivityGoodsPageQuery, PageQuery pageQuery);
 
     /**
      * 查询砍价活动商品
@@ -83,15 +84,6 @@ public interface IKanjiaActivityGoodsService extends IService<KanjiaActivityGood
      * @since 2022-04-27 16:43:36
      */
     KanjiaActivityGoods getKanjiaGoodsBySkuId(String skuId);
-
-    /**
-     * 查询砍价活动商品VO
-     *
-     * @param id 砍价活动商品ID
-     * @return {@link KanjiaActivityGoodsVO }
-     * @since 2022-04-27 16:43:36
-     */
-    KanjiaActivityGoodsVO getKanJiaGoodsVO(String id);
 
     /**
      * 修改看见商品信息
