@@ -22,7 +22,8 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**
- * TaoTaoCloudSysApplication 抑制java9 module 报错
+ * 系统管理中心
+ * <p>抑制java9 module 报错
  *
  * <pre class="code">
  * --add-opens java.base/java.lang=ALL-UNNAMED

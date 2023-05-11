@@ -128,7 +128,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
     public boolean brandDisable(Long brandId, boolean disable) {
         Brand brand = this.checkExist(brandId);
         // 如果是要禁用，则需要先判定绑定关系
-        if (boolean.TRUE.equals(disable)) {
+        if (disable) {
             List<Long> ids = new ArrayList<>();
             ids.add(brandId);
             checkBind(ids);

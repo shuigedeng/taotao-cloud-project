@@ -1,11 +1,23 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-media:taotao-cloud-media-api")
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-common"
+
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+    }
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
 
     implementation "net.sourceforge.tess4j:tess4j:5.6.0"
     implementation "com.google.zxing:core:3.5.1"
     implementation "com.google.zxing:javase:3.5.1"
-    implementation "cn.hutool:hutool-all:5.8.18"
 
     //implementation fileTree(dir: "src/main/resource/lib", includes: ["*.jar"])
     implementation files("src/main/resources/lib/opencv-2413.jar")

@@ -19,7 +19,13 @@ package com.taotao.cloud.graphql;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-// @EnableTaoTaoCloudJpa
+/**
+ * graphql系统中心
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-11 17:47:35
+ */// @EnableTaoTaoCloudJpa
 // @EnableTaoTaoCloudP6spy
 // @EnableTaoTaoCloudFeign
 // @EnableTaoTaoCloudLogger

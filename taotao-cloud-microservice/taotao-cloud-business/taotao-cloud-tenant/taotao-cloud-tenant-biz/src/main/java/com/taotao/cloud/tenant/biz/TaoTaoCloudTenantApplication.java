@@ -21,7 +21,7 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**
- * 淘淘云租户应用程序
+ * 租户管理中心
  *
  * @author shuigedeng
  * @version 2023.04

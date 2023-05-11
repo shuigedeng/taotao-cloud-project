@@ -1,11 +1,12 @@
 dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-common"
     implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
 

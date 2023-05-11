@@ -17,7 +17,6 @@
 package com.taotao.cloud.generator.biz.util;
 
 import cn.hutool.core.convert.Convert;
-import com.baomidou.dynamic.datasource.DynamicRoutingDataSource;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -34,18 +33,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DataBaseHelper {
 
-    private static final DynamicRoutingDataSource DS = ContextUtils.getBean(DynamicRoutingDataSource.class);
+    // private static final DynamicRoutingDataSource DS = ContextUtils.getBean(DynamicRoutingDataSource.class);
 
     /** 获取当前数据库类型 */
     public static DataBaseType getDataBaseType() {
-        DataSource dataSource = DS.determineDataSource();
-        try (Connection conn = dataSource.getConnection()) {
-            DatabaseMetaData metaData = conn.getMetaData();
-            String databaseProductName = metaData.getDatabaseProductName();
-            return DataBaseType.find(databaseProductName);
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        // DataSource dataSource = DS.determineDataSource();
+        // try (Connection conn = dataSource.getConnection()) {
+        //     DatabaseMetaData metaData = conn.getMetaData();
+        //     String databaseProductName = metaData.getDatabaseProductName();
+        //     return DataBaseType.find(databaseProductName);
+        // } catch (SQLException e) {
+        //     throw new RuntimeException(e.getMessage());
+        // }
+		return null;
     }
 
     public static boolean isMySql() {

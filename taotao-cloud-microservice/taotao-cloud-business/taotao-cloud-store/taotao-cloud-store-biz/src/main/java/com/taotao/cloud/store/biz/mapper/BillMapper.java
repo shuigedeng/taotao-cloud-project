@@ -29,7 +29,9 @@ import org.apache.ibatis.annotations.Select;
 /**
  * 结算单数据处理层
  *
- * @since 2020/11/17 4:27 下午
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-11 17:42:50
  */
 public interface BillMapper extends BaseSuperMapper<Bill, String> {
 
