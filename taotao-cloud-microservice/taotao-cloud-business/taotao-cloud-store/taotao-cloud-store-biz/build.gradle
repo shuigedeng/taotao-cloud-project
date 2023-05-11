@@ -17,7 +17,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.sync.biz.TaoTaoCloudStoreApplication"
-description = "店铺中心"
+description = "店铺管理中心"
 archivesBaseName = 'taotao-cloud-store'
 
 configurations {

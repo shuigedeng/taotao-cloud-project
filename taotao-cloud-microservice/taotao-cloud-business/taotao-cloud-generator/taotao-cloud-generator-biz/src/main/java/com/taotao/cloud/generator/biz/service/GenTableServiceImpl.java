@@ -25,7 +25,6 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
@@ -70,7 +69,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author ruoyi
  */
-@DS("#header.datasource")
+// @DS("#header.datasource")
 @Slf4j
 @RequiredArgsConstructor
 @Service

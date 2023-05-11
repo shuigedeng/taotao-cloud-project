@@ -24,7 +24,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * TaoTaoCloudWebApp
+ * pc端商城
  *
  * nohup java -jar /root/taotao-cloud/taotao-cloud-front-1.0.jar >/root/taotao-cloud/logs/front.log 2>&1 &
  *

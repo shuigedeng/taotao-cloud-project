@@ -67,7 +67,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 @Configuration
 public class AuthorizationServerConfiguration {
 
-    @Value("${oauth2.token.issuer}")
+    @Value("${oauth2.token.issuer:https://felord.cn}")
     private String tokenIssuer;
 
     @Autowired
@@ -76,13 +76,13 @@ public class AuthorizationServerConfiguration {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    @Qualifier("memberUserDetailsService")
-    private UserDetailsService memberUserDetailsService;
-
-    @Autowired
-    @Qualifier("sysUserDetailsService")
-    private UserDetailsService sysUserDetailsService;
+    // @Autowired
+    // @Qualifier("memberUserDetailsService")
+    // private UserDetailsService memberUserDetailsService;
+	//
+    // @Autowired
+    // @Qualifier("sysUserDetailsService")
+    // private UserDetailsService sysUserDetailsService;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)

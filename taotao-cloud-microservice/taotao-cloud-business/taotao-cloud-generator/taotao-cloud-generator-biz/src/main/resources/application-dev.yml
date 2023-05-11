@@ -783,6 +783,7 @@ taotao:
           enabled: false
         tenant:
           enabled: false
+        snowFlakeIdGenerator: true
       jpa:
         enabled: true
         packages: com.taotao.cloud.generator.biz.model.entity
@@ -843,15 +844,15 @@ taotao:
       enabled: true
     security:
       ignore-url:
-        - /job/**
+        - /maku-generator/**
 
 mybatis-plus-join:
   banner: true
   sub-table-logic: true
 
 mybatis-plus:
-  typeAliasesPackage: com.taotao.cloud.generator.biz.entity  #实体扫描 多个package用户逗号或者分号分割
-  mapperLocations: classpath:mapper/*.xml # mapper xml 地址
+  typeAliasesPackage: com.taotao.cloud.generator.biz.entity,net.maku.generator.entity  #实体扫描 多个package用户逗号或者分号分割
+  mapperLocations: classpath:mapper/*.xml,classpath:mapper/generator/*.xml # mapper xml 地址
   global-config:
     banner: true # 关闭mp3.0自带的banner
     db-config:
@@ -1052,3 +1053,6 @@ knife4j:
     - name: 标题2
       locations: classpath:markdown1/*
       group: 用户模块
+
+generator:
+  template: /template/maku-boot

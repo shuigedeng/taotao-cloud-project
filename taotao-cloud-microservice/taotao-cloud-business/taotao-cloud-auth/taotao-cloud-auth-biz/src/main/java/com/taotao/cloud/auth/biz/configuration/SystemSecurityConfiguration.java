@@ -120,16 +120,16 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
     private Environment environment;
 
-    @Primary
-    @Bean(name = "memberUserDetailsService")
-    public UserDetailsService memberUserDetailsService() {
-        return new MemberUserDetailsService();
-    }
-
-    @Bean(name = "sysUserDetailsService")
-    public UserDetailsService sysUserDetailsService() {
-        return new SysUserDetailsService();
-    }
+    // @Primary
+    // @Bean(name = "memberUserDetailsService")
+    // public UserDetailsService memberUserDetailsService() {
+    //     return new MemberUserDetailsService();
+    // }
+	//
+    // @Bean(name = "sysUserDetailsService")
+    // public UserDetailsService sysUserDetailsService() {
+    //     return new SysUserDetailsService();
+    // }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -138,10 +138,10 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(memberUserDetailsService())
-                .passwordEncoder(passwordEncoder())
-                .and()
-                .eraseCredentials(true);
+        // builder.userDetailsService(memberUserDetailsService())
+        //         .passwordEncoder(passwordEncoder())
+        //         .and()
+        //         .eraseCredentials(true);
     }
 
     @Value("${jwk.set.uri}")

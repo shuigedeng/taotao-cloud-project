@@ -23,6 +23,13 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import java.util.List;
 import org.springframework.boot.SpringApplication;
 
+/**
+ * 推荐系统中心
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-11 17:46:59
+ */
 @TaoTaoCloudApplication
 public class TaoTaoCloudRecommendApplication {
 

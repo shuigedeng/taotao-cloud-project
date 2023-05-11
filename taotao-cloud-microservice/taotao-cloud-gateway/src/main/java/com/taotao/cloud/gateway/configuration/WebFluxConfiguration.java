@@ -24,6 +24,8 @@ import com.taotao.cloud.gateway.properties.HttpsProperties;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,6 +33,7 @@ import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilterChain;
@@ -54,6 +57,13 @@ import reactor.core.publisher.Mono;
 })
 public class WebFluxConfiguration {
 
+	//    # 指定解析器，使用spEl表达式按beanName从spring容器中获取
+	//                 key-resolver: "#{@pathKeyResolver}"
+	@Bean(name = "pathKeyResolver")
+	public KeyResolver pathKeyResolver() {
+		return exchange -> Mono.just(exchange.getRequest().getPath().toString());
+	}
+	
     @Bean(name = "userKeyResolver")
     public KeyResolver userKeyResolver() {
         return exchange -> Mono.just(exchange.getRequest().getQueryParams().getFirst("userId"));

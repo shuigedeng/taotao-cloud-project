@@ -24,7 +24,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * TaoTaoCloudXxlJobAdminApplication
+ * xxljob 定时任务中心
  *
  * @author shuigedeng
  * @version 2022.03

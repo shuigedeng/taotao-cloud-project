@@ -23,7 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * TaoTaoCloudAdminServerApplication
+ * 监控系统中心
  *
  * @author shuigedeng
  * @version 2022.03

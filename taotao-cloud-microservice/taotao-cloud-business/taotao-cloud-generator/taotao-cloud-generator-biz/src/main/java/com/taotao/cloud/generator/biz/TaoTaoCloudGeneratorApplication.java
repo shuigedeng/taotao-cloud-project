@@ -18,8 +18,21 @@ package com.taotao.cloud.generator.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import net.maku.generator.autoconfigure.GeneratorAutoConfiguration;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Import;
 
+/**
+ * 代码生成器管理中心
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-11 13:55:49
+ */
+@Import(GeneratorAutoConfiguration.class)
+@MapperScan(basePackages = {"net.maku.generator.dao"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudGeneratorApplication {
 

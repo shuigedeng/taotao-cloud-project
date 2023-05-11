@@ -45,7 +45,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-@Component
+// @Component
 public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
     private final AuthorizationRepository authorizationRepository;

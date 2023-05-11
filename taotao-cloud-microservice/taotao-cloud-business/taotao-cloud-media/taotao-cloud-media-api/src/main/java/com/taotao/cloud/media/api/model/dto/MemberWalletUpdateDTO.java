@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.api.model.dto;
 
-import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
+// import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;

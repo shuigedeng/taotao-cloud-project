@@ -20,8 +20,9 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
 /**
- * TaoTaoCloudGatewayApplication
+ * 网关系统中心
  *
  * <p>http://127.0.0.1:33333/swagger-ui.html</p>
  * <p>http://127.0.0.1:33333/doc.html</p>

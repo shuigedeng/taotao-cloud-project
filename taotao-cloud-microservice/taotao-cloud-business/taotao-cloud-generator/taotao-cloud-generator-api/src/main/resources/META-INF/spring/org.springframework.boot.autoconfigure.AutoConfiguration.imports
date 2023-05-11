@@ -1,1 +1,1 @@
-com.taotao.cloud.report.api.feign.fallback.FeignMemberStatisticsFallbackImpl
+com.taotao.cloud.generator.api.feign.fallback.FeignGeneratorFallbackImpl

@@ -1,26 +1,17 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-shortlink:taotao-cloud-shortlink-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+    }
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-
-    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

@@ -21,11 +21,11 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**
- * TaoTaoCloudOpenApplication
+ * 开放平台中心
  *
  * @author shuigedeng
- * @version 2022.03
- * @since 2020/11/26 下午7:55
+ * @version 2023.04
+ * @since 2023-05-11 17:46:26
  */
 @TaoTaoCloudApplication
 public class TaoTaoCloudOpenPlatformApplication {

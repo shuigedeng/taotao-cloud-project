@@ -21,9 +21,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * TaoTaoCloudSyncApplication
- * <p>
- * 使用canal进行数据同步
+ * 数据分析中心
  *
  * @author shuigedeng
  * @version 2022.03
