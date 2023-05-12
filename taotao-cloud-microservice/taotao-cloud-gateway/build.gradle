@@ -41,7 +41,6 @@ dependencies {
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
 
-    //implementation "org.springdoc:springdoc-openapi:2.1.0"
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
 

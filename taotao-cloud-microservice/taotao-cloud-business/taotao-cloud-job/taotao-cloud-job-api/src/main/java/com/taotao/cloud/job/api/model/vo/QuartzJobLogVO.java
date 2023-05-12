@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz.param;
+package com.taotao.cloud.job.api.model.vo;
 
-import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDateTime;
+import lombok.Data;
 
-@Schema(title = "定时任务日志查询")
-public class QuartzJobLogQuery extends PageQuery {
+/** 任务执行日志 */
+@Data
+@Schema(title = "定时任务执行日志")
+public class QuartzJobLogVO {
+
+    @Schema(description = "处理器名称")
+    private String handlerName;
 
     @Schema(description = "处理器全限定名")
     private String className;
@@ -28,19 +34,18 @@ public class QuartzJobLogQuery extends PageQuery {
     @Schema(description = "是否执行成功")
     private Boolean success;
 
-    public String getClassName() {
-        return className;
-    }
+    @Schema(description = "错误信息")
+    private String errorMessage;
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
+    @Schema(description = "开始时间")
+    private LocalDateTime startTime;
 
-    public Boolean getSuccess() {
-        return success;
-    }
+    @Schema(description = "结束时间")
+    private LocalDateTime endTime;
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+    @Schema(description = "执行时长")
+    private Long duration;
+
+    @Schema(description = "创建时间")
+    private LocalDateTime createTime;
 }

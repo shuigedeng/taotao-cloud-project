@@ -16,7 +16,16 @@
 
 package com.taotao.cloud.job.biz.schedule.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.job.api.model.page.ScheduledJobLogPageQuery;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
+import com.taotao.cloud.job.biz.schedule.mapper.ScheduledJobLogMapper;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
+import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,10 +36,22 @@ import org.springframework.stereotype.Service;
  * @since 2023-05-09 15:17:29
  */
 @Service
-public class ScheduledJobLogServiceImpl implements ScheduledJobLogService {
+@AllArgsConstructor
+public class ScheduledJobLogServiceImpl extends ServiceImpl<ScheduledJobLogMapper, ScheduledJobLog> implements ScheduledJobLogService {
 
-    @Override
-    public Object taskList() {
-        return null;
-    }
+	private final ScheduledJobLogMapper scheduledJobLogMapper;
+
+	@Override
+	@Async
+	public void insertTaskLog(ScheduledJobLog log) {
+		scheduledJobLogMapper.insert(log);
+	}
+
+	@Override
+	public IPage<ScheduledJobLog> page(ScheduledJobLogPageQuery pageQuery) {
+		IPage<ScheduledJobLog> page = pageQuery.buildMpPage();
+		LambdaQueryWrapper<ScheduledJobLog> wrapper = new LambdaQueryWrapper<>();
+		wrapper.eq(StrUtil.isNotBlank(pageQuery.getTaskId()), ScheduledJobLog::getTaskId, pageQuery.getTaskId());
+		return scheduledJobLogMapper.selectPage(page, wrapper);
+	}
 }

@@ -22,7 +22,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
-    implementation "org.apache.pdfbox:pdfbox:2.0.27"
+    implementation "org.apache.pdfbox:pdfbox:2.0.28"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

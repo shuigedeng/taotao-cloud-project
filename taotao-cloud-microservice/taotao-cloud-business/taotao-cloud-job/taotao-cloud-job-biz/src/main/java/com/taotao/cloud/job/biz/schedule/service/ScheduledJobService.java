@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.job.biz.schedule.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.job.api.model.page.ScheduledJobPageQuery;
+import com.taotao.cloud.job.api.model.vo.ScheduledJobVO;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
-import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
-import com.taotao.cloud.job.biz.schedule.model.ScheduledJobDTO;
-import com.taotao.cloud.job.biz.schedule.model.ScheduledJobVO;
-
-import java.util.List;
+import com.taotao.cloud.job.api.model.dto.ScheduledJobDTO;
 
 /**
  * 计划工作服务
@@ -30,13 +30,7 @@ import java.util.List;
  * @version 2023.04
  * @since 2023-05-09 15:10:03
  */
-public interface ScheduledJobService {
-
-	/***
-	 *任务列表查询
-	 * @return o
-	 */
-	List<ScheduledJob> jobList();
+public interface ScheduledJobService extends IService<ScheduledJob> {
 
 	/**
 	 * 新增任务
@@ -91,7 +85,11 @@ public interface ScheduledJobService {
 	ScheduledJobVO getTaskById(String id);
 
 	/**
-	 * 任务日志
+	 * 页面
+	 *
+	 * @param pageQuery 页面查询
+	 * @return {@link IPage }<{@link ScheduledJob }>
+	 * @since 2023-05-12 10:47:15
 	 */
-	void insertTaskLog(ScheduledJobLog log);
+	IPage<ScheduledJob> page(ScheduledJobPageQuery pageQuery);
 }

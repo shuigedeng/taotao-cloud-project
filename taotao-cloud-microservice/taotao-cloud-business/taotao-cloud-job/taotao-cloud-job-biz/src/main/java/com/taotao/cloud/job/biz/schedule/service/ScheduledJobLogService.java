@@ -16,7 +16,14 @@
 
 package com.taotao.cloud.job.biz.schedule.service;
 
-public interface ScheduledJobLogService {
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.job.api.model.page.ScheduledJobLogPageQuery;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
 
-    Object taskList();
+public interface ScheduledJobLogService extends IService<ScheduledJobLog> {
+
+	void insertTaskLog(ScheduledJobLog log);
+
+	IPage<ScheduledJobLog> page(ScheduledJobLogPageQuery pageQuery);
 }

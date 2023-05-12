@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz.param;
+package com.taotao.cloud.job.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 /** 定时任务 */
+@Data
 @Schema(title = "定时任务")
 public class QuartzJobDTO {
 
@@ -51,84 +53,4 @@ public class QuartzJobDTO {
 
     @Schema(description = "是否并发  0：禁止  1：允许")
     private Integer concurrent;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getJobName() {
-        return jobName;
-    }
-
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public String getBeanName() {
-        return beanName;
-    }
-
-    public void setBeanName(String beanName) {
-        this.beanName = beanName;
-    }
-
-    public String getJobClassName() {
-        return jobClassName;
-    }
-
-    public void setJobClassName(String jobClassName) {
-        this.jobClassName = jobClassName;
-    }
-
-    public String getCronExpression() {
-        return cronExpression;
-    }
-
-    public void setCronExpression(String cronExpression) {
-        this.cronExpression = cronExpression;
-    }
-
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public String getParams() {
-        return params;
-    }
-
-    public void setParams(String params) {
-        this.params = params;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Integer getConcurrent() {
-        return concurrent;
-    }
-
-    public void setConcurrent(Integer concurrent) {
-        this.concurrent = concurrent;
-    }
 }

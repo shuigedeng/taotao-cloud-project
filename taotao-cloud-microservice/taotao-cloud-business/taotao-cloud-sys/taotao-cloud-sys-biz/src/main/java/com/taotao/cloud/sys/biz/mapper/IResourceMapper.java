@@ -45,11 +45,11 @@ public interface IResourceMapper extends BaseSuperMapper<Resource, Long> {
     List<Long> selectIdList(List<Long> pidList);
 
     /** 查询资源列表 */
-    default IPage<Resource> selectResourceList(Resource resource, PageQuery PageQuery) {
+    default IPage<Resource> selectResourceList(Resource resource, PageQuery pageQuery) {
         return this.selectPage(
                 new LambdaQueryWrapperX<Resource>()
                         .likeIfPresent(Resource::getName, resource.getName())
                         .eqIfPresent(Resource::getParentId, resource.getParentId()),
-                PageQuery);
+			pageQuery);
     }
 }

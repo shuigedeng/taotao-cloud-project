@@ -16,20 +16,20 @@
 
 package com.taotao.cloud.job.biz.quartz.service;
 
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLogEntity;
-import com.taotao.cloud.job.biz.quartz.param.QuartzJobLogQuery;
-import com.taotao.cloud.job.biz.quartz.vo.QuartzJobLogVO;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLog;
+import com.taotao.cloud.job.api.model.page.QuartzJobLogPageQuery;
 
 /** 定时任务日志 */
-public interface QuartzJobLogService {
+public interface QuartzJobLogService extends IService<QuartzJobLog> {
 
     /** 添加 */
-    public void add(QuartzJobLogEntity quartzJobLog);
+	void add(QuartzJobLog quartzJobLog);
 
     /** 分页 */
-    public PageResult<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery);
+	IPage<QuartzJobLog> page(QuartzJobLogPageQuery quartzJobLogPageQuery);
 
     /** 单条 */
-    public QuartzJobLogVO findById(Long id);
+	QuartzJobLog findById(Long id);
 }
