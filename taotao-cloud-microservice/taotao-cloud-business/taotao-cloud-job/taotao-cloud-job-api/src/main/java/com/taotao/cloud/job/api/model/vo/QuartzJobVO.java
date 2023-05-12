@@ -16,29 +16,32 @@
 
 package com.taotao.cloud.job.api.model.vo;
 
+//import com.taotao.cloud.job.quartz.enums.QuartzJobCode;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-/** 商品统计VO */
+/** 定时任务 */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Schema(title = "定时任务")
 public class QuartzJobVO {
 
-    @Schema(description = "店铺ID")
-    private String storeId;
+    /** 任务名称 */
+    private String name;
 
-    @Schema(description = "店铺名称")
-    private String storeName;
+    /** 任务类名 */
+    private String jobClassName;
 
-    @Schema(description = "销售数量")
-    private String num;
+    /** cron表达式 */
+    private String cron;
 
-    @Schema(description = "销售金额")
-    private BigDecimal price;
+    /** 参数 */
+    private String parameter;
+
+    /**
+     * 状态
+     */
+    private Integer state;
+
+    /** 备注 */
+    private String remark;
 }

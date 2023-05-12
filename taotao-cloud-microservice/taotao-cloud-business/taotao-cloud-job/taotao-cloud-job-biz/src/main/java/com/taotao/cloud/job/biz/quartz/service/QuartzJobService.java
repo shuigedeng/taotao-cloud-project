@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.job.biz.quartz.service;
 
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.job.api.model.vo.QuartzJobVO;
-import com.taotao.cloud.job.biz.quartz.entity.QuartzJobEntity;
-import com.taotao.cloud.job.biz.quartz.param.QuartzJobDTO;
-import com.taotao.cloud.job.biz.quartz.param.QuartzJobQuery;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
+import com.taotao.cloud.job.biz.quartz.entity.QuartzJob;
+import com.taotao.cloud.job.api.model.page.QuartzJobPageQuery;
 import org.quartz.SchedulerException;
 
 /**
@@ -30,7 +30,7 @@ import org.quartz.SchedulerException;
  * @version 2022.09
  * @since 2022-09-06 09:02:48
  */
-public interface QuartzJobService {
+public interface QuartzJobService extends IService<QuartzJob> {
 
     void init() throws SchedulerException;
 
@@ -116,9 +116,9 @@ public interface QuartzJobService {
      */
     void shutdownAllJobs();
 
-    QuartzJobEntity findById(Long id);
+    QuartzJob findById(Long id);
 
-    PageResult<QuartzJobVO> page(QuartzJobQuery quartzJobQuery);
+    IPage<QuartzJob> page(QuartzJobPageQuery quartzJobPageQuery);
 
     /** 判断是否是定时任务类 */
     String judgeJobClass(String jobClassName);

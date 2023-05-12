@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.schedule.model;
+package com.taotao.cloud.job.api.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 @Schema(title = "scheduled定时任务")

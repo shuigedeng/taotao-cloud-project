@@ -16,59 +16,52 @@
 
 package com.taotao.cloud.job.biz.quartz.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLogEntity;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.job.api.model.page.QuartzJobLogPageQuery;
+import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLog;
 import com.taotao.cloud.job.biz.quartz.mapper.QuartzJobLogMapper;
-import com.taotao.cloud.job.biz.quartz.param.QuartzJobLogQuery;
 import com.taotao.cloud.job.biz.quartz.service.QuartzJobLogService;
-import com.taotao.cloud.job.biz.quartz.vo.QuartzJobLogVO;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-/** 定时任务日志 */
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+/**
+ * 定时任务日志
+ */
 @Service
-public class QuartzJobLogServiceImpl implements QuartzJobLogService {
+public class QuartzJobLogServiceImpl extends ServiceImpl<QuartzJobLogMapper, QuartzJobLog> implements QuartzJobLogService {
 
-    private final QuartzJobLogMapper quartzJobLogMapper;
+	private final QuartzJobLogMapper quartzJobLogMapper;
 
-    public QuartzJobLogServiceImpl(QuartzJobLogMapper quartzJobLogMapper) {
-        this.quartzJobLogMapper = quartzJobLogMapper;
-    }
+	public QuartzJobLogServiceImpl(QuartzJobLogMapper quartzJobLogMapper) {
+		this.quartzJobLogMapper = quartzJobLogMapper;
+	}
 
-    @Override
-    @Async("asyncExecutor")
-    public void add(QuartzJobLogEntity quartzJobLog) {
-        quartzJobLog.setCreateTime(LocalDateTime.now());
-        quartzJobLogMapper.insert(quartzJobLog);
-    }
+	@Override
+	@Async("asyncExecutor")
+	public void add(QuartzJobLog quartzJobLog) {
+		quartzJobLog.setCreateTime(LocalDateTime.now());
+		quartzJobLogMapper.insert(quartzJobLog);
+	}
 
-    @Override
-    public PageResult<QuartzJobLogVO> page(QuartzJobLogQuery quartzJobLogQuery) {
+	@Override
+	public IPage<QuartzJobLog> page(QuartzJobLogPageQuery quartzJobLogPageQuery) {
+		LambdaQueryWrapper<QuartzJobLog> wrapper = new LambdaQueryWrapper<>();
+		wrapper.eq(QuartzJobLog::getClassName, quartzJobLogPageQuery.getClassName())
+			.eq(Objects.nonNull(quartzJobLogPageQuery.getSuccess()),
+				QuartzJobLog::getIsSuccess,
+				quartzJobLogPageQuery.getSuccess())
+			.orderByDesc(QuartzJobLog::getId);
 
-        LambdaQueryWrapper<QuartzJobLogEntity> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(QuartzJobLogEntity::getClassName, quartzJobLogQuery.getClassName())
-                .eq(
-                        Objects.nonNull(quartzJobLogQuery.getSuccess()),
-                        QuartzJobLogEntity::getIsSuccess,
-                        quartzJobLogQuery.getSuccess())
-                .orderByDesc(QuartzJobLogEntity::getId);
+		return this.quartzJobLogMapper.selectPage(quartzJobLogPageQuery.buildMpPage(), wrapper);
+	}
 
-        IPage<QuartzJobLogEntity> quartzLogIPage =
-                this.quartzJobLogMapper.selectPage(quartzJobLogQuery.buildMpPage(), wrapper);
-
-        return PageResult.convertMybatisPage(quartzLogIPage, QuartzJobLogVO.class);
-    }
-
-    @Override
-    public QuartzJobLogVO findById(Long id) {
-        QuartzJobLogVO vo = new QuartzJobLogVO();
-        QuartzJobLogEntity quartzJobLog = quartzJobLogMapper.selectById(id);
-        BeanUtil.copyProperties(quartzJobLog, vo);
-        return vo;
-    }
+	@Override
+	public QuartzJobLog findById(Long id) {
+		return quartzJobLogMapper.selectById(id);
+	}
 }

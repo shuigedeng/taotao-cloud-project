@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.api.model.dto;
+package com.taotao.cloud.job.api.model.page;
 
-import java.sql.Timestamp;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.taotao.cloud.common.model.PageQuery;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
+/**
+ * 定时任务
+ */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
-public class QuartzJobQueryCriteria {
+@Schema(title = "定时任务")
+public class ScheduledJobLogPageQuery extends PageQuery {
 
-    private String jobName;
+	@Schema(description = "任务名")
+	private String taskId;
 
-    private Boolean isSuccess;
-
-    private Boolean isPause;
-
-    private List<Timestamp> createTime;
 }

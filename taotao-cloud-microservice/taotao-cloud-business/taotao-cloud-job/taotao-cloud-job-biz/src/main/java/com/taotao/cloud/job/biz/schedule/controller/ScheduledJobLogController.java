@@ -16,11 +16,17 @@
 
 package com.taotao.cloud.job.biz.schedule.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.job.api.model.page.ScheduledJobLogPageQuery;
+import com.taotao.cloud.job.api.model.vo.ScheduledJobLogVO;
+import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
+import com.taotao.cloud.web.annotation.BusinessApi;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2023.04
  * @since 2023-05-09 15:20:36
  */
+@BusinessApi
 @AllArgsConstructor
 @Validated
 @RestController
@@ -41,12 +48,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "schedule任务管理日志API", description = "schedule任务管理日志API")
 public class ScheduledJobLogController {
 
-    private final ScheduledJobLogService scheduledJobLogService;
+	private final ScheduledJobLogService scheduledJobLogService;
 
-    @GetMapping("/list")
-    @RequestLogger
-    @Operation(summary = "分页查询schedule任务管理日志", description = "分页查询schedule任务管理日志")
-    public Object taskList() {
-        return scheduledJobLogService.taskList();
-    }
+	@GetMapping("/page")
+	@Operation(summary = "分页查询任务列表", description = "分页查询任务列表")
+	@RequestLogger
+	public Result<PageResult<ScheduledJobLogVO>> page(ScheduledJobLogPageQuery pageQuery) {
+		IPage<ScheduledJobLog> page = scheduledJobLogService.page(pageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, ScheduledJobLogVO.class));
+	}
 }

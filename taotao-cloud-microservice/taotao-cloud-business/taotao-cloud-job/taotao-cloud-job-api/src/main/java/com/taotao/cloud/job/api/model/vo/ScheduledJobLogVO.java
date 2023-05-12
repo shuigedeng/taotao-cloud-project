@@ -38,23 +38,56 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "字典查询对象")
-public class ScheduledJobVO implements Serializable {
+public class ScheduledJobLogVO implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4132785717179910025L;
 
+	// 任务名
 	@Schema(description = "任务名")
-	private String taskId;
+	private String name;
 
-	@Schema(description = "任务名")
-	private String time;
+	/*
+	目标字符串
+	格式bean.method(params)
+	String字符串类型，包含'、boolean布尔类型，等于true或者false
+	long长整形，包含L、double浮点类型，包含D、其他类型归类为整形
+	aa.aa('String',100L,20.20D)
+	*/
+	@Schema(description = "目标字符串")
+	private String invokeTarget;
 
-	// 执行状态（0正常 1失败）
-	@Schema(description = "任务名")
+	// 周期(month、week、day、hour、minute、secods)
+	@Schema(description = "周期(month、week、day、hour、minute、secods)")
+	private String cycle;
+
+	// cron表达式
+	@Schema(description = "cron表达式")
+	private String cronExpression;
+
+	// 执行策略(1手动，2-自动）
+	@Schema(description = "执行策略(1手动，2-自动）")
+	private Integer policy;
+
+	// 状态（0正常 1暂停）
+	@Schema(description = "状态（0正常 1暂停）")
 	private Integer status;
 
-	@Schema(description = "任务名")
-	private String exceptionInfo;
+	// 执行情况(1-执行中,2-已暂停)
+	@Schema(description = "执行情况(1-执行中,2-已暂停)")
+	private Integer situation;
+
+	// 上次执行时间
+	@Schema(description = "上次执行时间")
+	private Date lastRunTime;
+
+	// 下次执行时间
+	@Schema(description = "下次执行时间")
+	private Date nextRunTime;
+
+	// 备注
+	@Schema(description = "remark")
+	private String remark;
 
 	private List<String> next;
 

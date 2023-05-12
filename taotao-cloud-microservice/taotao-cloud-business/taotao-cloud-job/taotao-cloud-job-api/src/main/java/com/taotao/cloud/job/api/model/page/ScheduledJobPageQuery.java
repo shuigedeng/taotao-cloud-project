@@ -14,20 +14,24 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.api.model.dto;
+package com.taotao.cloud.job.api.model.page;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.taotao.cloud.common.model.PageQuery;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
+/** 定时任务 */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
-public class QuartzLogQueryCriteria {
+@Schema(title = "定时任务")
+public class ScheduledJobPageQuery extends PageQuery {
 
-    private String id;
+    @Schema(description = "主键")
+    private Long id;
+
+    @Schema(description = "任务名称")
+    private String jobName;
+
+
 }

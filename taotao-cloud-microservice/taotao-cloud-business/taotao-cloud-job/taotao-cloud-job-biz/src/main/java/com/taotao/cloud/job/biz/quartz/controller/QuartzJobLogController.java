@@ -16,11 +16,15 @@
 
 package com.taotao.cloud.job.biz.quartz.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.job.biz.quartz.param.QuartzJobLogQuery;
+import com.taotao.cloud.job.api.model.page.QuartzJobLogPageQuery;
+import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLog;
 import com.taotao.cloud.job.biz.quartz.service.QuartzJobLogService;
-import com.taotao.cloud.job.biz.quartz.vo.QuartzJobLogVO;
+import com.taotao.cloud.job.api.model.vo.QuartzJobLogVO;
+import com.taotao.cloud.web.annotation.BusinessApi;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -37,24 +41,27 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 2023.04
  * @since 2023-05-09 15:19:05
  */
+@BusinessApi
 @AllArgsConstructor
 @Validated
 @RestController
 @RequestMapping("/job/quartz/log")
-@Tag(name = "quartz任务管理日志API", description = "quartz任务管理日志API")
+@Tag(name = "quartz定时任务管理日志API", description = "quartz定时任务管理日志API")
 public class QuartzJobLogController {
 
 	private final QuartzJobLogService quartzJobLogService;
 
 	@GetMapping("/page")
 	@Operation(summary = "分页查询任务日志", description = "分页查询任务日志")
-	public Result<PageResult<QuartzJobLogVO>> page(QuartzJobLogQuery quartzJobLogQuery) {
-		return Result.success(quartzJobLogService.page(quartzJobLogQuery));
+	public Result<PageResult<QuartzJobLogVO>> page(QuartzJobLogPageQuery quartzJobLogPageQuery) {
+		IPage<QuartzJobLog> page = quartzJobLogService.page(quartzJobLogPageQuery);
+		return Result.success(PageResult.convertMybatisPage(page, QuartzJobLogVO.class));
 	}
 
 	@GetMapping("/{id}")
 	@Operation(summary = "查询单个任务日志", description = "查询单个任务日志")
 	public Result<QuartzJobLogVO> findById(@PathVariable Long id) {
-		return Result.success(quartzJobLogService.findById(id));
+		QuartzJobLog quartzJobLog = quartzJobLogService.findById(id);
+		return Result.success(BeanUtil.copyProperties(quartzJobLog, QuartzJobLogVO.class));
 	}
 }

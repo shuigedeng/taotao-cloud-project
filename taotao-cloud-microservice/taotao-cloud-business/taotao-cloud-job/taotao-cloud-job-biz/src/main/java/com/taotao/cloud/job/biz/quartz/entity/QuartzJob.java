@@ -34,10 +34,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = QuartzJobEntity.TABLE_NAME)
-@TableName(QuartzJobEntity.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = QuartzJobEntity.TABLE_NAME, comment = "Quartz任务表")
-public class QuartzJobEntity extends BaseSuperEntity<QuartzJobEntity, Long> {
+@Table(name = QuartzJob.TABLE_NAME)
+@TableName(QuartzJob.TABLE_NAME)
+@org.hibernate.annotations.Table(appliesTo = QuartzJob.TABLE_NAME, comment = "Quartz任务表")
+public class QuartzJob extends BaseSuperEntity<QuartzJob, Long> {
 
     public static final String TABLE_NAME = "tt_quartz_job";
 

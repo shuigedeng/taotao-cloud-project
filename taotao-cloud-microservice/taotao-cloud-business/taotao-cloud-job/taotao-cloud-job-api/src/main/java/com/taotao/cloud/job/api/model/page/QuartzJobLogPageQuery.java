@@ -14,36 +14,21 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.biz.quartz.vo;
+package com.taotao.cloud.job.api.model.page;
 
-import com.taotao.cloud.job.quartz.enums.QuartzJobCode;
+import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-/** 定时任务 */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@Schema(title = "定时任务")
-public class QuartzJobVO {
+@Schema(title = "定时任务日志查询")
+public class QuartzJobLogPageQuery extends PageQuery {
 
-    /** 任务名称 */
-    private String name;
+    @Schema(description = "处理器全限定名")
+    private String className;
 
-    /** 任务类名 */
-    private String jobClassName;
-
-    /** cron表达式 */
-    private String cron;
-
-    /** 参数 */
-    private String parameter;
-
-    /**
-     * 状态
-     *
-     * @see QuartzJobCode
-     */
-    private Integer state;
-
-    /** 备注 */
-    private String remark;
+    @Schema(description = "是否执行成功")
+    private Boolean success;
 }
