@@ -39,13 +39,13 @@ jobs:
           native-image-job-reports: 'true'
 
       #https://github.com/marketplace/actions/gradle-build-action
-      - name: Gradle BootJar taotao-cloud-job-biz
+      - name: Gradle BootJar taotao-cloud-log-biz
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 8.1
           #arguments: bootBuildImage
           arguments: nativeBuild
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-job/taotao-cloud-job-biz
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-log/taotao-cloud-log-biz
 
     #      - name: Publish Docker Image taotao-cloud-demo
     #        uses: elgohr/Publish-Docker-Github-Action@v4
