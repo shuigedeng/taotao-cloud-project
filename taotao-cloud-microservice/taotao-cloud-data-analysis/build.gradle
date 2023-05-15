@@ -32,7 +32,7 @@ dependencies {
     //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
     implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
     //https://search.maven.org/artifact/com.alibaba/druid-spring-boot-starter
-    implementation 'com.alibaba:druid-spring-boot-starter:1.2.17'
+    implementation 'com.alibaba:druid-spring-boot-starter:1.2.18'
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"

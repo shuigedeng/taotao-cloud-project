@@ -100,7 +100,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:0.9.5"
-    //implementation "com.alibaba:druid:1.2.17"
+    //implementation "com.alibaba:druid:1.2.18"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
