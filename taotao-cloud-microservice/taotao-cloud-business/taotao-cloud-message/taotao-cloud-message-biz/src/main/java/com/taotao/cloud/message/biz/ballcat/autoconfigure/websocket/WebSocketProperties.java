@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket;
 
-import com.hccake.ballcat.common.websocket.handler.ConcurrentWebSocketSessionOptions;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.ConcurrentWebSocketSessionOptions;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;

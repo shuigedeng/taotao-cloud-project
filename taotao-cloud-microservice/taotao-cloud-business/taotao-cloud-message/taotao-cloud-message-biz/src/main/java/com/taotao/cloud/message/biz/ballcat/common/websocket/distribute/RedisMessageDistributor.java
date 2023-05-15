@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.biz.ballcat.common.websocket.distribute;
 
-import com.hccake.ballcat.common.util.JsonUtils;
-import com.hccake.ballcat.common.websocket.session.WebSocketSessionStore;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.WebSocketSessionStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
@@ -22,7 +21,7 @@ public class RedisMessageDistributor extends AbstractMessageDistributor implemen
 	private final StringRedisTemplate stringRedisTemplate;
 
 	public RedisMessageDistributor(WebSocketSessionStore webSocketSessionStore,
-			StringRedisTemplate stringRedisTemplate) {
+								   StringRedisTemplate stringRedisTemplate) {
 		super(webSocketSessionStore);
 		this.stringRedisTemplate = stringRedisTemplate;
 	}

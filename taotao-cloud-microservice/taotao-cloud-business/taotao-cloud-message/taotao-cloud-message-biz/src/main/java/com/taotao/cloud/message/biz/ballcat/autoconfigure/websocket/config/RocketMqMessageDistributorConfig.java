@@ -1,10 +1,9 @@
 package com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config;
 
-import com.hccake.ballcat.autoconfigure.websocket.MessageDistributorTypeConstants;
-import com.hccake.ballcat.autoconfigure.websocket.WebSocketProperties;
-import com.hccake.ballcat.common.websocket.distribute.MessageDistributor;
-import com.hccake.ballcat.common.websocket.distribute.RocketmqMessageDistributor;
-import com.hccake.ballcat.common.websocket.session.WebSocketSessionStore;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.MessageDistributorTypeConstants;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.RocketmqMessageDistributor;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.WebSocketSessionStore;
 import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -19,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 0.9.0 2022年06月30日 14:11:34
  */
 @ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "message-distributor",
-		havingValue = MessageDistributorTypeConstants.ROCKETMQ)
+	havingValue = MessageDistributorTypeConstants.ROCKETMQ)
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 public class RocketMqMessageDistributorConfig {

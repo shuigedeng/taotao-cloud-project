@@ -1,12 +1,12 @@
 package com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config;
 
-import com.hccake.ballcat.autoconfigure.websocket.WebSocketProperties;
-import com.hccake.ballcat.common.websocket.handler.CustomWebSocketHandler;
-import com.hccake.ballcat.common.websocket.handler.PlanTextMessageHandler;
-import com.hccake.ballcat.common.websocket.session.DefaultWebSocketSessionStore;
-import com.hccake.ballcat.common.websocket.session.MapSessionWebSocketHandlerDecorator;
-import com.hccake.ballcat.common.websocket.session.SessionKeyGenerator;
-import com.hccake.ballcat.common.websocket.session.WebSocketSessionStore;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.WebSocketProperties;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.CustomWebSocketHandler;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.PlanTextMessageHandler;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.DefaultWebSocketSessionStore;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.MapSessionWebSocketHandlerDecorator;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.SessionKeyGenerator;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.WebSocketSessionStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

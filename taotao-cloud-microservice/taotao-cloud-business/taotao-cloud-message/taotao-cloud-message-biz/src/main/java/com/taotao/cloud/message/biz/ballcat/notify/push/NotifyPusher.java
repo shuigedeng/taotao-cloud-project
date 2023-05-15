@@ -1,8 +1,7 @@
 package com.taotao.cloud.message.biz.ballcat.notify.push;
 
-import com.hccake.ballcat.notify.enums.NotifyChannelEnum;
-import com.hccake.ballcat.notify.model.domain.NotifyInfo;
-import com.hccake.ballcat.system.model.entity.SysUser;
+
+import com.taotao.cloud.message.biz.ballcat.notify.enums.NotifyChannelEnum;
 
 import java.util.List;
 

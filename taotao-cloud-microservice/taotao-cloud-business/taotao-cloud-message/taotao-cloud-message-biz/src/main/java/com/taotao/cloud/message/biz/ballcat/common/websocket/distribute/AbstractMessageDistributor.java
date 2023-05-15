@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.ballcat.common.websocket.distribute;
 
 import cn.hutool.core.collection.CollUtil;
-import com.hccake.ballcat.common.websocket.WebSocketMessageSender;
-import com.hccake.ballcat.common.websocket.session.WebSocketSessionStore;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.WebSocketMessageSender;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.WebSocketSessionStore;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -25,7 +25,6 @@ public abstract class AbstractMessageDistributor implements MessageDistributor {
 	 * @param messageDO 消息实体
 	 */
 	protected void doSend(MessageDO messageDO) {
-
 		// 是否广播发送
 		Boolean needBroadcast = messageDO.getNeedBroadcast();
 

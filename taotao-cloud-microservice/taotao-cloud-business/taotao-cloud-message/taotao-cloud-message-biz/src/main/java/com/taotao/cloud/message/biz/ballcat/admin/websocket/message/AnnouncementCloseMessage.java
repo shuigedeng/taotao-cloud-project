@@ -1,6 +1,5 @@
 package com.taotao.cloud.message.biz.ballcat.admin.websocket.message;
 
-import com.hccake.ballcat.common.websocket.message.JsonWebSocketMessage;
 import lombok.Getter;
 import lombok.Setter;
 

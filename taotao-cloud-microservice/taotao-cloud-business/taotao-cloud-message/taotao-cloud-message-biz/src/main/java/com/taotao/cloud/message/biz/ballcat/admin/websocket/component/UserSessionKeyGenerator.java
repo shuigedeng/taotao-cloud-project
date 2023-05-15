@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.ballcat.admin.websocket.component;
 
-import com.hccake.ballcat.admin.websocket.constant.AdminWebSocketConstants;
-import com.hccake.ballcat.common.websocket.session.SessionKeyGenerator;
+import com.taotao.cloud.message.biz.ballcat.admin.websocket.constant.AdminWebSocketConstants;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.SessionKeyGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.socket.WebSocketSession;
 

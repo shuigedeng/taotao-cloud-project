@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.ballcat.common.websocket.handler;
 
-import com.hccake.ballcat.common.websocket.message.JsonWebSocketMessage;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.message.JsonWebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 /**

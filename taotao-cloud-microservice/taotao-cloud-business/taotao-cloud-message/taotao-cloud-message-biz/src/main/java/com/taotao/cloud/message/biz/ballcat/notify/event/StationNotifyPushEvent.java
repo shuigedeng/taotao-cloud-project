@@ -1,7 +1,6 @@
 package com.taotao.cloud.message.biz.ballcat.notify.event;
 
-import com.hccake.ballcat.notify.model.domain.NotifyInfo;
-import com.hccake.ballcat.system.model.entity.SysUser;
+import com.taotao.cloud.message.biz.ballcat.notify.model.domain.NotifyInfo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

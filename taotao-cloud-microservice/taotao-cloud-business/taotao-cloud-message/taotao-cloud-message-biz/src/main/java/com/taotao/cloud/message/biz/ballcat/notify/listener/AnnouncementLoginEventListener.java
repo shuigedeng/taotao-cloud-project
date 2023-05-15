@@ -1,13 +1,5 @@
 package com.taotao.cloud.message.biz.ballcat.notify.listener;
 
-import com.hccake.ballcat.notify.enums.NotifyChannelEnum;
-import com.hccake.ballcat.notify.model.entity.Announcement;
-import com.hccake.ballcat.notify.model.entity.UserAnnouncement;
-import com.hccake.ballcat.notify.recipient.RecipientHandler;
-import com.hccake.ballcat.notify.service.AnnouncementService;
-import com.hccake.ballcat.notify.service.UserAnnouncementService;
-import com.hccake.ballcat.common.security.userdetails.User;
-import com.hccake.ballcat.system.model.entity.SysUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

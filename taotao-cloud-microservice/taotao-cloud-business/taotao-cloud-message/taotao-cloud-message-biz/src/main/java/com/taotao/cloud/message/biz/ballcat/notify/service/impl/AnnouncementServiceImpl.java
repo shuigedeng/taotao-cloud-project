@@ -3,27 +3,20 @@ package com.taotao.cloud.message.biz.ballcat.notify.service.impl;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.excel.enums.BooleanEnum;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.hccake.ballcat.common.core.constant.enums.BooleanEnum;
-import com.hccake.ballcat.common.core.exception.BusinessException;
-import com.hccake.ballcat.common.model.domain.PageParam;
-import com.hccake.ballcat.common.model.domain.PageResult;
-import com.hccake.ballcat.common.model.result.BaseResultCode;
-import com.hccake.ballcat.common.model.result.SystemResultCode;
-import com.hccake.ballcat.file.service.FileService;
-import com.hccake.ballcat.notify.converter.AnnouncementConverter;
-import com.hccake.ballcat.notify.converter.NotifyInfoConverter;
-import com.hccake.ballcat.notify.enums.AnnouncementStatusEnum;
-import com.hccake.ballcat.notify.event.AnnouncementCloseEvent;
-import com.hccake.ballcat.notify.event.NotifyPublishEvent;
-import com.hccake.ballcat.notify.mapper.AnnouncementMapper;
-import com.hccake.ballcat.notify.model.domain.NotifyInfo;
-import com.hccake.ballcat.notify.model.dto.AnnouncementDTO;
-import com.hccake.ballcat.notify.model.entity.Announcement;
-import com.hccake.ballcat.notify.model.qo.AnnouncementQO;
-import com.hccake.ballcat.notify.model.vo.AnnouncementPageVO;
-import com.hccake.ballcat.notify.service.AnnouncementService;
-import com.hccake.extend.mybatis.plus.service.impl.ExtendServiceImpl;
+import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.message.biz.ballcat.notify.converter.AnnouncementConverter;
+import com.taotao.cloud.message.biz.ballcat.notify.converter.NotifyInfoConverter;
+import com.taotao.cloud.message.biz.ballcat.notify.enums.AnnouncementStatusEnum;
+import com.taotao.cloud.message.biz.ballcat.notify.event.AnnouncementCloseEvent;
+import com.taotao.cloud.message.biz.ballcat.notify.event.NotifyPublishEvent;
+import com.taotao.cloud.message.biz.ballcat.notify.mapper.AnnouncementMapper;
+import com.taotao.cloud.message.biz.ballcat.notify.model.domain.NotifyInfo;
+import com.taotao.cloud.message.biz.ballcat.notify.model.dto.AnnouncementDTO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.qo.AnnouncementQO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.vo.AnnouncementPageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -47,7 +40,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMapper, Announcement>
-		implements AnnouncementService {
+	implements AnnouncementService {
 
 	private final ApplicationEventPublisher publisher;
 
@@ -55,8 +48,9 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 根据QueryObject查询分页数据
+	 *
 	 * @param pageParam 分页参数
-	 * @param qo 查询参数对象
+	 * @param qo        查询参数对象
 	 * @return PageResult<AnnouncementVO> 分页数据
 	 */
 	@Override
@@ -66,6 +60,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 创建公告
+	 *
 	 * @param announcementDTO 公告信息
 	 * @return boolean
 	 */
@@ -86,6 +81,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 更新公告信息
+	 *
 	 * @param announcementDTO announcementDTO
 	 * @return boolean
 	 */
@@ -114,6 +110,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 发布公告信息
+	 *
 	 * @param announcementId 公告ID
 	 * @return boolean
 	 */
@@ -125,7 +122,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 			throw new BusinessException(SystemResultCode.BAD_REQUEST.getCode(), "不允许修改已经发布过的公告！");
 		}
 		if (BooleanEnum.TRUE.intValue().equals(announcement.getImmortal())
-				&& LocalDateTime.now().isAfter(announcement.getDeadline())) {
+			&& LocalDateTime.now().isAfter(announcement.getDeadline())) {
 			throw new BusinessException(SystemResultCode.BAD_REQUEST.getCode(), "公告失效时间必须迟于当前时间！");
 		}
 
@@ -143,6 +140,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 关闭公告信息
+	 *
 	 * @param announcementId 公告ID
 	 * @return boolean
 	 */
@@ -161,6 +159,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 批量上传公告图片
+	 *
 	 * @param files 图片文件
 	 * @return 上传后的图片相对路径集合
 	 */
@@ -169,13 +168,12 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 		List<String> objectNames = new ArrayList<>();
 		for (MultipartFile file : files) {
 			String objectName = "announcement/" + LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)
-					+ StrPool.SLASH + IdUtil.fastSimpleUUID() + StrPool.DOT
-					+ FileUtil.extName(file.getOriginalFilename());
+				+ StrPool.SLASH + IdUtil.fastSimpleUUID() + StrPool.DOT
+				+ FileUtil.extName(file.getOriginalFilename());
 			try {
 				objectName = fileService.upload(file.getInputStream(), objectName, file.getSize());
 				objectNames.add(objectName);
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				// TODO 删除无效文件
 				throw new BusinessException(BaseResultCode.FILE_UPLOAD_ERROR.getCode(), "图片上传失败！", e);
 			}
@@ -185,6 +183,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 当前用户未拉取过的发布中，且满足失效时间的公告信息
+	 *
 	 * @return List<Announcement>
 	 */
 	@Override
@@ -194,6 +193,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 获取用户拉取过的发布中，且满足失效时间的公告信息
+	 *
 	 * @param userId 用户id
 	 * @return List<Announcement>
 	 */
@@ -204,6 +204,7 @@ public class AnnouncementServiceImpl extends ExtendServiceImpl<AnnouncementMappe
 
 	/**
 	 * 公告发布事件
+	 *
 	 * @param announcement 公告信息
 	 */
 	private void onAnnouncementPublish(Announcement announcement) {

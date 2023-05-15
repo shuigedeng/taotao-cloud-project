@@ -1,8 +1,7 @@
 package com.taotao.cloud.message.biz.ballcat.admin.websocket.component;
 
-import com.hccake.ballcat.admin.websocket.constant.AdminWebSocketConstants;
-import com.hccake.ballcat.common.security.userdetails.User;
-import com.hccake.ballcat.common.security.util.SecurityUtils;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.message.biz.ballcat.admin.websocket.constant.AdminWebSocketConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;

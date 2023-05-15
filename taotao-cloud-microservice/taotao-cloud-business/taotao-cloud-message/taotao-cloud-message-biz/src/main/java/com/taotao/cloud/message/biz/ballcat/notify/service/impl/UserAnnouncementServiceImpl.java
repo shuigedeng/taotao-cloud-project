@@ -1,14 +1,12 @@
 package com.taotao.cloud.message.biz.ballcat.notify.service.impl;
 
-import com.hccake.ballcat.notify.enums.UserAnnouncementStateEnum;
-import com.hccake.ballcat.notify.mapper.UserAnnouncementMapper;
-import com.hccake.ballcat.notify.model.entity.UserAnnouncement;
-import com.hccake.ballcat.notify.model.qo.UserAnnouncementQO;
-import com.hccake.ballcat.notify.model.vo.UserAnnouncementPageVO;
-import com.hccake.ballcat.notify.service.UserAnnouncementService;
-import com.hccake.ballcat.common.model.domain.PageParam;
-import com.hccake.ballcat.common.model.domain.PageResult;
-import com.hccake.extend.mybatis.plus.service.impl.ExtendServiceImpl;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.message.biz.ballcat.notify.enums.UserAnnouncementStateEnum;
+import com.taotao.cloud.message.biz.ballcat.notify.mapper.UserAnnouncementMapper;
+import com.taotao.cloud.message.biz.ballcat.notify.model.entity.UserAnnouncement;
+import com.taotao.cloud.message.biz.ballcat.notify.model.qo.UserAnnouncementQO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.vo.UserAnnouncementPageVO;
+import com.taotao.cloud.message.biz.ballcat.notify.service.UserAnnouncementService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
