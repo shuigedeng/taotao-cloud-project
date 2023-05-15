@@ -1,33 +1,17 @@
 package com.taotao.cloud.message.biz.ballcat.notify.controller;
 
-import com.hccake.ballcat.common.log.operation.annotation.CreateOperationLogging;
-import com.hccake.ballcat.common.log.operation.annotation.DeleteOperationLogging;
-import com.hccake.ballcat.common.log.operation.annotation.UpdateOperationLogging;
-import com.hccake.ballcat.common.model.domain.PageParam;
-import com.hccake.ballcat.common.model.domain.PageResult;
-import com.hccake.ballcat.common.model.result.BaseResultCode;
-import com.hccake.ballcat.common.model.result.R;
-import com.hccake.ballcat.common.security.util.SecurityUtils;
-import com.hccake.ballcat.notify.model.dto.AnnouncementDTO;
-import com.hccake.ballcat.notify.model.entity.Announcement;
-import com.hccake.ballcat.notify.model.qo.AnnouncementQO;
-import com.hccake.ballcat.notify.model.vo.AnnouncementPageVO;
-import com.hccake.ballcat.notify.service.AnnouncementService;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.message.biz.ballcat.notify.model.dto.AnnouncementDTO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.qo.AnnouncementQO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.vo.AnnouncementPageVO;
+import com.taotao.cloud.message.biz.ballcat.notify.service.AnnouncementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -48,7 +32,8 @@ public class AnnouncementController {
 
 	/**
 	 * 分页查询
-	 * @param pageParam 分页对象
+	 *
+	 * @param pageParam      分页对象
 	 * @param announcementQO 公告信息查询对象
 	 * @return R 通用返回体
 	 */
@@ -56,12 +41,13 @@ public class AnnouncementController {
 	@PreAuthorize("@per.hasPermission('notify:announcement:read')")
 	@Operation(summary = "分页查询", description = "分页查询")
 	public R<PageResult<AnnouncementPageVO>> getAnnouncementPage(@Validated PageParam pageParam,
-			AnnouncementQO announcementQO) {
+																 AnnouncementQO announcementQO) {
 		return R.ok(announcementService.queryPage(pageParam, announcementQO));
 	}
 
 	/**
 	 * 新增公告信息
+	 *
 	 * @param announcementDTO 公告信息
 	 * @return R 通用返回体
 	 */
@@ -71,11 +57,12 @@ public class AnnouncementController {
 	@Operation(summary = "新增公告信息", description = "新增公告信息")
 	public R<Void> save(@Valid @RequestBody AnnouncementDTO announcementDTO) {
 		return announcementService.addAnnouncement(announcementDTO) ? R.ok()
-				: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "新增公告信息失败");
+			: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "新增公告信息失败");
 	}
 
 	/**
 	 * 修改公告信息
+	 *
 	 * @param announcementDTO 公告信息
 	 * @return R 通用返回体
 	 */
@@ -85,11 +72,12 @@ public class AnnouncementController {
 	@Operation(summary = "修改公告信息", description = "修改公告信息")
 	public R<Void> updateById(@Valid @RequestBody AnnouncementDTO announcementDTO) {
 		return announcementService.updateAnnouncement(announcementDTO) ? R.ok()
-				: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "修改公告信息失败");
+			: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "修改公告信息失败");
 	}
 
 	/**
 	 * 通过id删除公告信息
+	 *
 	 * @param id id
 	 * @return R 通用返回体
 	 */
@@ -99,11 +87,12 @@ public class AnnouncementController {
 	@Operation(summary = "通过id删除公告信息", description = "通过id删除公告信息")
 	public R<Void> removeById(@PathVariable("id") Long id) {
 		return announcementService.removeById(id) ? R.ok()
-				: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "通过id删除公告信息失败");
+			: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "通过id删除公告信息失败");
 	}
 
 	/**
 	 * 发布公告信息
+	 *
 	 * @return R 通用返回体
 	 */
 	@UpdateOperationLogging(msg = "发布公告信息")
@@ -112,11 +101,12 @@ public class AnnouncementController {
 	@Operation(summary = "发布公告信息", description = "发布公告信息")
 	public R<Void> enableAnnouncement(@PathVariable("announcementId") Long announcementId) {
 		return announcementService.publish(announcementId) ? R.ok()
-				: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "发布公告信息失败");
+			: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "发布公告信息失败");
 	}
 
 	/**
 	 * 关闭公告信息
+	 *
 	 * @return R 通用返回体
 	 */
 	@UpdateOperationLogging(msg = "关闭公告信息")
@@ -125,7 +115,7 @@ public class AnnouncementController {
 	@Operation(summary = "关闭公告信息", description = "关闭公告信息")
 	public R<Void> disableAnnouncement(@PathVariable("announcementId") Long announcementId) {
 		return announcementService.close(announcementId) ? R.ok()
-				: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "关闭公告信息失败");
+			: R.failed(BaseResultCode.UPDATE_DATABASE_ERROR, "关闭公告信息失败");
 	}
 
 	@UpdateOperationLogging(msg = "公告内容图片上传", recordParams = false)

@@ -1,11 +1,10 @@
 package com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config;
 
-import com.hccake.ballcat.autoconfigure.websocket.MessageDistributorTypeConstants;
-import com.hccake.ballcat.autoconfigure.websocket.WebSocketProperties;
-import com.hccake.ballcat.common.websocket.distribute.MessageDistributor;
-import com.hccake.ballcat.common.websocket.distribute.RedisMessageDistributor;
-import com.hccake.ballcat.common.websocket.distribute.RedisMessageListenerInitializer;
-import com.hccake.ballcat.common.websocket.session.WebSocketSessionStore;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.MessageDistributorTypeConstants;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.RedisMessageDistributor;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.RedisMessageListenerInitializer;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.WebSocketSessionStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -24,7 +23,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
  */
 @ConditionalOnClass(StringRedisTemplate.class)
 @ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "message-distributor",
-		havingValue = MessageDistributorTypeConstants.REDIS)
+	havingValue = MessageDistributorTypeConstants.REDIS)
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 public class RedisMessageDistributorConfig {
@@ -49,8 +48,8 @@ public class RedisMessageDistributorConfig {
 	@Bean
 	@ConditionalOnMissingBean
 	public RedisMessageListenerInitializer redisMessageListenerInitializer(
-			RedisMessageListenerContainer redisMessageListenerContainer,
-			RedisMessageDistributor redisWebsocketMessageListener) {
+		RedisMessageListenerContainer redisMessageListenerContainer,
+		RedisMessageDistributor redisWebsocketMessageListener) {
 		return new RedisMessageListenerInitializer(redisMessageListenerContainer, redisWebsocketMessageListener);
 	}
 

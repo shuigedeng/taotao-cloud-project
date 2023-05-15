@@ -1,12 +1,11 @@
 package com.taotao.cloud.message.biz.ballcat.notify.service;
 
-import com.hccake.ballcat.notify.model.dto.AnnouncementDTO;
-import com.hccake.ballcat.notify.model.entity.Announcement;
-import com.hccake.ballcat.notify.model.qo.AnnouncementQO;
-import com.hccake.ballcat.notify.model.vo.AnnouncementPageVO;
-import com.hccake.ballcat.common.model.domain.PageParam;
-import com.hccake.ballcat.common.model.domain.PageResult;
-import com.hccake.extend.mybatis.plus.service.ExtendService;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.message.biz.ballcat.notify.model.dto.AnnouncementDTO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.entity.Announcement;
+import com.taotao.cloud.message.biz.ballcat.notify.model.qo.AnnouncementQO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.vo.AnnouncementPageVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

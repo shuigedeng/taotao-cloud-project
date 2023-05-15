@@ -1,9 +1,8 @@
 package com.taotao.cloud.message.biz.ballcat.notify.push;
 
 import cn.hutool.core.collection.CollUtil;
-import com.hccake.ballcat.notify.model.domain.NotifyInfo;
-import com.hccake.ballcat.notify.recipient.RecipientHandler;
-import com.hccake.ballcat.system.model.entity.SysUser;
+import com.taotao.cloud.message.biz.ballcat.notify.model.domain.NotifyInfo;
+import com.taotao.cloud.message.biz.ballcat.notify.recipient.RecipientHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

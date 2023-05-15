@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.message.biz.websockt.original;
+package com.taotao.cloud.demo.websocket.original;
 
-import jakarta.websocket.OnClose;
-import jakarta.websocket.OnError;
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.OnOpen;
-import jakarta.websocket.Session;
+import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
-import java.io.IOException;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 @ServerEndpoint("/original/websocket")

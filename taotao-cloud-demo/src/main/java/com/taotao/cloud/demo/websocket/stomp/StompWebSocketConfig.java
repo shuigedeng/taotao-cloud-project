@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.message.biz.websockt.stomp;
+package com.taotao.cloud.demo.websocket.stomp;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

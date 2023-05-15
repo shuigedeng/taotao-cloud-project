@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.ballcat.notify.event;
 
-import com.hccake.ballcat.notify.model.domain.NotifyInfo;
+import com.taotao.cloud.message.biz.ballcat.notify.model.domain.NotifyInfo;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 

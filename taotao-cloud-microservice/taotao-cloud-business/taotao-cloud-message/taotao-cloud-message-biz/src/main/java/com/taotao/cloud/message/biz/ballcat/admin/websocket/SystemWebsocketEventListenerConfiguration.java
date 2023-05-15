@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.ballcat.admin.websocket;
 
-import com.hccake.ballcat.admin.websocket.listener.SystemWebsocketEventListener;
-import com.hccake.ballcat.common.websocket.distribute.MessageDistributor;
+import com.taotao.cloud.message.biz.ballcat.admin.websocket.listener.SystemWebsocketEventListener;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;

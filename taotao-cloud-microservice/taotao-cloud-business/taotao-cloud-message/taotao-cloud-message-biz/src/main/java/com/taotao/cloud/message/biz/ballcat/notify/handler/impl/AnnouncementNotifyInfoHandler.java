@@ -1,10 +1,9 @@
 package com.taotao.cloud.message.biz.ballcat.notify.handler.impl;
 
-import com.hccake.ballcat.notify.handler.AbstractNotifyInfoHandler;
-import com.hccake.ballcat.notify.model.domain.AnnouncementNotifyInfo;
-import com.hccake.ballcat.notify.model.entity.UserAnnouncement;
-import com.hccake.ballcat.notify.service.UserAnnouncementService;
-import com.hccake.ballcat.system.model.entity.SysUser;
+import com.taotao.cloud.message.biz.ballcat.notify.handler.AbstractNotifyInfoHandler;
+import com.taotao.cloud.message.biz.ballcat.notify.model.domain.AnnouncementNotifyInfo;
+import com.taotao.cloud.message.biz.ballcat.notify.model.entity.UserAnnouncement;
+import com.taotao.cloud.message.biz.ballcat.notify.service.UserAnnouncementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class AnnouncementNotifyInfoHandler
-		extends AbstractNotifyInfoHandler<AnnouncementNotifyInfo, AnnouncementPushMessage> {
+	extends AbstractNotifyInfoHandler<AnnouncementNotifyInfo, AnnouncementPushMessage> {
 
 	private final UserAnnouncementService userAnnouncementService;
 
@@ -30,7 +29,7 @@ public class AnnouncementNotifyInfoHandler
 		for (SysUser sysUser : userList) {
 			Integer userId = sysUser.getUserId();
 			UserAnnouncement userAnnouncement = userAnnouncementService.prodUserAnnouncement(userId,
-					announcementNotifyInfo.getId());
+				announcementNotifyInfo.getId());
 			userAnnouncements.add(userAnnouncement);
 		}
 		userAnnouncementService.saveBatch(userAnnouncements);

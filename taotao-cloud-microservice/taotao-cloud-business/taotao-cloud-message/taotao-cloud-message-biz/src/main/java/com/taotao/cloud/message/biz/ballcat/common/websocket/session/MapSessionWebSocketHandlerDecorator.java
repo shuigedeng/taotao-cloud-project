@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.ballcat.common.websocket.session;
 
-import com.hccake.ballcat.common.websocket.handler.ConcurrentWebSocketSessionOptions;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.ConcurrentWebSocketSessionOptions;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketSession;

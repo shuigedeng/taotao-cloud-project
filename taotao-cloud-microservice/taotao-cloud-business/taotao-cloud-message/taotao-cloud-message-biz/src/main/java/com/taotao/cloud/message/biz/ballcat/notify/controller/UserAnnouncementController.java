@@ -1,12 +1,10 @@
 package com.taotao.cloud.message.biz.ballcat.notify.controller;
 
-import com.hccake.ballcat.common.model.domain.PageParam;
-import com.hccake.ballcat.common.model.domain.PageResult;
-import com.hccake.ballcat.common.model.result.R;
-import com.hccake.ballcat.common.security.util.SecurityUtils;
-import com.hccake.ballcat.notify.model.qo.UserAnnouncementQO;
-import com.hccake.ballcat.notify.model.vo.UserAnnouncementPageVO;
-import com.hccake.ballcat.notify.service.UserAnnouncementService;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.message.biz.ballcat.notify.model.qo.UserAnnouncementQO;
+import com.taotao.cloud.message.biz.ballcat.notify.model.vo.UserAnnouncementPageVO;
+import com.taotao.cloud.message.biz.ballcat.notify.service.UserAnnouncementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +39,7 @@ public class UserAnnouncementController {
 	@PreAuthorize("@per.hasPermission('notify:userannouncement:read')")
 	@Operation(summary = "分页查询", description = "分页查询")
 	public R<PageResult<UserAnnouncementPageVO>> getUserAnnouncementPage(@Validated PageParam pageParam,
-			UserAnnouncementQO userAnnouncementQO) {
+																		 UserAnnouncementQO userAnnouncementQO) {
 		return R.ok(userAnnouncementService.queryPage(pageParam, userAnnouncementQO));
 	}
 

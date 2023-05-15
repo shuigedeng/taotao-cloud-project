@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.ballcat.admin.websocket;
 
-import com.hccake.ballcat.admin.websocket.component.UserAttributeHandshakeInterceptor;
-import com.hccake.ballcat.admin.websocket.component.UserSessionKeyGenerator;
-import com.hccake.ballcat.common.websocket.session.SessionKeyGenerator;
+import com.taotao.cloud.message.biz.ballcat.admin.websocket.component.UserAttributeHandshakeInterceptor;
+import com.taotao.cloud.message.biz.ballcat.admin.websocket.component.UserSessionKeyGenerator;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.session.SessionKeyGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

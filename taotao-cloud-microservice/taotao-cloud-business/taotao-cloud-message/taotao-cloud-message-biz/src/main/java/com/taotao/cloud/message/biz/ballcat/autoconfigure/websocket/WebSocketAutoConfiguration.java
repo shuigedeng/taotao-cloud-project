@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket;
 
-import com.hccake.ballcat.autoconfigure.websocket.config.LocalMessageDistributorConfig;
-import com.hccake.ballcat.autoconfigure.websocket.config.RocketMqMessageDistributorConfig;
-import com.hccake.ballcat.autoconfigure.websocket.config.RedisMessageDistributorConfig;
-import com.hccake.ballcat.autoconfigure.websocket.config.WebSocketHandlerConfig;
-import com.hccake.ballcat.common.websocket.handler.JsonMessageHandler;
-import com.hccake.ballcat.common.websocket.handler.PingJsonMessageHandler;
-import com.hccake.ballcat.common.websocket.holder.JsonMessageHandlerInitializer;
-import com.hccake.ballcat.common.websocket.message.JsonWebSocketMessage;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config.LocalMessageDistributorConfig;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config.RedisMessageDistributorConfig;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config.RocketMqMessageDistributorConfig;
+import com.taotao.cloud.message.biz.ballcat.autoconfigure.websocket.config.WebSocketHandlerConfig;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.JsonMessageHandler;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.PingJsonMessageHandler;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.holder.JsonMessageHandlerInitializer;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.message.JsonWebSocketMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -31,8 +31,8 @@ import java.util.List;
  * @author Yakir Hccake
  */
 @AutoConfiguration
-@Import({ WebSocketHandlerConfig.class, LocalMessageDistributorConfig.class, RedisMessageDistributorConfig.class,
-		RocketMqMessageDistributorConfig.class })
+@Import({WebSocketHandlerConfig.class, LocalMessageDistributorConfig.class, RedisMessageDistributorConfig.class,
+	RocketMqMessageDistributorConfig.class})
 @EnableWebSocket
 @RequiredArgsConstructor
 @EnableConfigurationProperties(WebSocketProperties.class)
@@ -43,8 +43,8 @@ public class WebSocketAutoConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public WebSocketConfigurer webSocketConfigurer(List<HandshakeInterceptor> handshakeInterceptor,
-			WebSocketHandler webSocketHandler,
-			@Autowired(required = false) SockJsServiceConfigurer sockJsServiceConfigurer) {
+												   WebSocketHandler webSocketHandler,
+												   @Autowired(required = false) SockJsServiceConfigurer sockJsServiceConfigurer) {
 		return registry -> {
 			WebSocketHandlerRegistration registration = registry
 				.addHandler(webSocketHandler, webSocketProperties.getPath())
@@ -71,24 +71,26 @@ public class WebSocketAutoConfiguration {
 
 	/**
 	 * 心跳处理器
+	 *
 	 * @return PingJsonMessageHandler
 	 */
 	@Bean
 	@ConditionalOnProperty(prefix = WebSocketProperties.PREFIX, name = "heartbeat", havingValue = "true",
-			matchIfMissing = true)
+		matchIfMissing = true)
 	public PingJsonMessageHandler pingJsonMessageHandler() {
 		return new PingJsonMessageHandler();
 	}
 
 	/**
 	 * 注册 JsonMessageHandlerInitializer 收集所有的 json 类型消息处理器
+	 *
 	 * @param jsonMessageHandlerList json 类型消息处理器
 	 * @return JsonMessageHandlerInitializer
 	 */
 	@Bean
 	@ConditionalOnMissingBean
 	public JsonMessageHandlerInitializer jsonMessageHandlerInitializer(
-			List<JsonMessageHandler<? extends JsonWebSocketMessage>> jsonMessageHandlerList) {
+		List<JsonMessageHandler<? extends JsonWebSocketMessage>> jsonMessageHandlerList) {
 		return new JsonMessageHandlerInitializer(jsonMessageHandlerList);
 	}
 

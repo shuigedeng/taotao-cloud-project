@@ -1,10 +1,8 @@
 package com.taotao.cloud.message.biz.ballcat.admin.websocket.listener;
 
-import com.hccake.ballcat.common.util.JsonUtils;
-import com.hccake.ballcat.common.websocket.distribute.MessageDO;
-import com.hccake.ballcat.common.websocket.distribute.MessageDistributor;
-import com.hccake.ballcat.system.event.DictChangeEvent;
-import com.hccake.ballcat.admin.websocket.message.DictChangeMessage;
+import com.taotao.cloud.message.biz.ballcat.admin.websocket.message.DictChangeMessage;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDO;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;

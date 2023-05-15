@@ -1,9 +1,7 @@
 package com.taotao.cloud.message.biz.ballcat.notify.push;
 
-import com.hccake.ballcat.notify.enums.NotifyChannelEnum;
-import com.hccake.ballcat.notify.event.StationNotifyPushEvent;
-import com.hccake.ballcat.notify.model.domain.NotifyInfo;
-import com.hccake.ballcat.system.model.entity.SysUser;
+import com.taotao.cloud.message.biz.ballcat.notify.enums.NotifyChannelEnum;
+import com.taotao.cloud.message.biz.ballcat.notify.event.StationNotifyPushEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
@@ -24,8 +22,9 @@ public class StationNotifyPusher implements NotifyPusher {
 
 	/**
 	 * 当前发布者对应的接收方式
-	 * @see NotifyChannelEnum
+	 *
 	 * @return 推送方式
+	 * @see NotifyChannelEnum
 	 */
 	@Override
 	public Integer notifyChannel() {

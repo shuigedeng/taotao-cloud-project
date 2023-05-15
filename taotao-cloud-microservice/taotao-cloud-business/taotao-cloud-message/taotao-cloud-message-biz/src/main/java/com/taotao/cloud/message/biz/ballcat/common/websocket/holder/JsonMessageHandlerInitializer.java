@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.ballcat.common.websocket.holder;
 
-import com.hccake.ballcat.common.websocket.handler.JsonMessageHandler;
-import com.hccake.ballcat.common.websocket.message.JsonWebSocketMessage;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.handler.JsonMessageHandler;
+import com.taotao.cloud.message.biz.ballcat.common.websocket.message.JsonWebSocketMessage;
 import lombok.RequiredArgsConstructor;
 
 import javax.annotation.PostConstruct;

@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.message.biz.websockt.original;
+package com.taotao.cloud.demo.websocket.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 /**
- * 基于原生注解
+ * 基于Spring 封装开发
  *
  * @author shuigedeng
  * @version 2022.07
@@ -28,10 +31,18 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
  */
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig {
+public class SpringWebSocketConfig implements WebSocketConfigurer {
 
-    // @Bean
-    // public ServerEndpointExporter serverEndpoint() {
-    //    return new ServerEndpointExporter();
-    // }
+    @Autowired
+    private AuthTextWebSocketHandler authTextWebSocketHandler;
+
+    @Autowired
+    private WebsocketInterceptor websocketInterceptor;
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(authTextWebSocketHandler, "/spring/websocket")
+                .addInterceptors(websocketInterceptor)
+                .setAllowedOrigins("*");
+    }
 }
