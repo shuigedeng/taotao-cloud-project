@@ -522,6 +522,15 @@ taotao:
       type: redis
     rabbitmq:
       enabled: false
+    websocket:
+      netty:
+        enabled: false
+      original:
+        enabled: false
+      spring:
+        enabled: false
+      stomp:
+        enabled: false
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
