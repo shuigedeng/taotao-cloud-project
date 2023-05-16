@@ -1,9 +1,8 @@
-package com.taotao.cloud.sys.biz.controller.server;
+package com.taotao.cloud.sys.api.model.vo.server;
 
 /**
  * 內存相关信息
  *
- * @author lijx
  * @since 2022/5/21 15:42
  */
 public class Mem {

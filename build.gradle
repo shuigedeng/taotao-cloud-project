@@ -117,7 +117,7 @@ plugins {
     // *******************************************第三方插件************************************************************
     //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
     //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
-    id "com.google.cloud.tools.jib" version "3.3.1"
+    id "com.google.cloud.tools.jib" version "3.3.2"
 
     //用于创建和管理外部进程的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
@@ -169,7 +169,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.9.21'
+    id 'org.graalvm.buildtools.native' version '0.9.22'
 }
 
 allprojects {

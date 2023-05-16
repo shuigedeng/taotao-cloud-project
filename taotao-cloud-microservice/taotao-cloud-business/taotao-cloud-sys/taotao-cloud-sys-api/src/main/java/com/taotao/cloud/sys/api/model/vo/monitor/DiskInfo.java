@@ -1,11 +1,9 @@
-package com.taotao.cloud.sys.biz.controller.dto;
+package com.taotao.cloud.sys.api.model.vo.monitor;
 
 import lombok.Data;
 
 /**
  * 系统文件相关信息
- *
- * @author ruoyi
  */
 @Data
 public class DiskInfo {

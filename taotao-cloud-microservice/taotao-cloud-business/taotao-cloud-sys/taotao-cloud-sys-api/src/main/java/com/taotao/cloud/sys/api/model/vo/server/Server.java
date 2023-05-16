@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.controller.server;
+package com.taotao.cloud.sys.api.model.vo.server;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -19,26 +19,35 @@ import java.util.Properties;
 /**
  * https://blog.csdn.net/weixin_43591980/article/details/116157814
  *
- * @author lijx
  * @since 2022/5/21 17:43
  */
 public class Server {
 
 	private static final int OSHI_WAIT_SECOND = 1000;
 
-	/** CPU相关信息 */
+	/**
+	 * CPU相关信息
+	 */
 	private Cpu cpu = new Cpu();
 
-	/** 內存相关信息 */
+	/**
+	 * 內存相关信息
+	 */
 	private Mem mem = new Mem();
 
-	/** JVM相关信息 */
+	/**
+	 * JVM相关信息
+	 */
 	private Jvm jvm = new Jvm();
 
-	/** 服务器相关信息 */
+	/**
+	 * 服务器相关信息
+	 */
 	private Sys sys = new Sys();
 
-	/** 磁盘相关信息 */
+	/**
+	 * 磁盘相关信息
+	 */
 	private List sysFiles = new LinkedList();
 
 	public Cpu getCpu() {
@@ -93,6 +102,7 @@ public class Server {
 
 	/**
 	 * 获取服务器主机相关信息
+	 *
 	 * @throws Exception
 	 */
 	public void copyTo() throws Exception {
@@ -126,7 +136,9 @@ public class Server {
 		setSysFiles(si.getOperatingSystem());
 	}
 
-	/** 设置CPU信息 */
+	/**
+	 * 设置CPU信息
+	 */
 	private void setCpuInfo(CentralProcessor processor) {
 
 		// CPU信息
@@ -168,7 +180,9 @@ public class Server {
 		cpu.setFree(idle); // CPU当前空闲率
 	}
 
-	/** 设置内存信息 */
+	/**
+	 * 设置内存信息
+	 */
 	private void setMemInfo(GlobalMemory memory) {
 
 		mem.setTotal(memory.getTotal()); // 总内存大小
@@ -178,7 +192,9 @@ public class Server {
 		mem.setFree(memory.getAvailable()); // 空闲内存大小
 	}
 
-	/** 设置服务器信息 */
+	/**
+	 * 设置服务器信息
+	 */
 	private void setSysInfo() throws UnknownHostException {
 
 		// 获取当前的系统属性
@@ -196,7 +212,9 @@ public class Server {
 		sys.setUserDir(props.getProperty("user.dir")); // 获取项目所在路径 F:\git\ruoyi\RuoYi-Vue
 	}
 
-	/** 设置Java虚拟机 */
+	/**
+	 * 设置Java虚拟机
+	 */
 	private void setJvmInfo() {
 
 		Properties props = System.getProperties();
@@ -210,10 +228,12 @@ public class Server {
 		jvm.setVersion(props.getProperty("java.version")); // jdk版本 1.8
 
 		jvm.setHome(props.getProperty("java.home")); // JDK安装路径 C:\Program
-														// Files\Java\jdk1.8.0_201\jre
+		// Files\Java\jdk1.8.0_201\jre
 	}
 
-	/** 设置磁盘信息 */
+	/**
+	 * 设置磁盘信息
+	 */
 	private void setSysFiles(OperatingSystem os) {
 
 		// 根据 操作系统(OS) 获取 FileSystem
@@ -222,7 +242,7 @@ public class Server {
 
 		// 根据 FileSystem 获取主机磁盘信息list集合
 
-		OSFileStore[] fsArray = fileSystem.getFileStores();
+		List<OSFileStore> fsArray = fileSystem.getFileStores();
 
 		for (OSFileStore fs : fsArray) {
 
@@ -254,6 +274,7 @@ public class Server {
 
 	/**
 	 * 字节转换
+	 *
 	 * @param size 字节大小
 	 * @return 转换后值
 	 */
@@ -269,22 +290,19 @@ public class Server {
 
 			return String.format("%.1f GB", (float) size / gb);
 
-		}
-		else if (size >= mb) {
+		} else if (size >= mb) {
 
 			float f = (float) size / mb;
 
 			return String.format(f > 100 ? "%.0f MB" : "%.1f MB", f);
 
-		}
-		else if (size >= kb) {
+		} else if (size >= kb) {
 
 			float f = (float) size / kb;
 
 			return String.format(f > 100 ? "%.0f KB" : "%.1f KB", f);
 
-		}
-		else {
+		} else {
 
 			return String.format("%d B", size);
 		}

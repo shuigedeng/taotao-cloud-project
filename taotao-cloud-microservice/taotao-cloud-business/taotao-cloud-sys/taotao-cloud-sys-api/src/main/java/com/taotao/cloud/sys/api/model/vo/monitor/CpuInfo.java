@@ -1,12 +1,10 @@
-package com.taotao.cloud.sys.biz.controller.dto;
+package com.taotao.cloud.sys.api.model.vo.monitor;
 
 import cn.hutool.core.util.NumberUtil;
 import lombok.Data;
 
 /**
  * CPU相关信息
- *
- * @author ruoyi
  */
 @Data
 public class CpuInfo {

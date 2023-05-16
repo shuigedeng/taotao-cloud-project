@@ -58,6 +58,7 @@ dependencies {
     //spring状态机 依赖使用的是springboot2.7现在不打开 https://github.com/spring-projects/spring-statemachine
     //https://docs.spring.io/spring-statemachine/docs/3.2.0/reference/
     //implementation('org.springframework.statemachine:spring-statemachine-starter')
+    //implementation 'org.springframework.statemachine:spring-statemachine-redis:1.2.9.RELEASE'
 }
 
 //dependencyManagement {

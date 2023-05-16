@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.controller.server;
+package com.taotao.cloud.sys.api.model.vo.server;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUnit;
@@ -10,7 +10,6 @@ import java.util.Date;
 /**
  * JVM相关信息
  *
- * @author lijx
  * @since 2022/5/21 15:41
  */
 public class Jvm {

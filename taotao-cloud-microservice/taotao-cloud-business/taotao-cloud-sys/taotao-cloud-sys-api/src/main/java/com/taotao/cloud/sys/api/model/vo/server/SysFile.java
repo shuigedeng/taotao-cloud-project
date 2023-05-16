@@ -1,9 +1,8 @@
-package com.taotao.cloud.sys.biz.controller.server;
+package com.taotao.cloud.sys.api.model.vo.server;
 
 /**
  * 系统文件相关信息系统文件相关信息实体类
  *
- * @author lijx
  * @since 2022/5/21 15:39
  */
 public class SysFile {
