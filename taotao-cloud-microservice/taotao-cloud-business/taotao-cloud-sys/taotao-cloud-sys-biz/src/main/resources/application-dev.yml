@@ -933,6 +933,15 @@ spring:
           order-input:
             consumer:
               txCommitRecovered: true
+  messages:
+    basename: "messages"               # ResourceBundle 名称，多个用，号隔开，默认是 messages
+    #basename: "ballcat-*"               # ResourceBundle 名称，多个用，号隔开，默认是 messages
+    #basename: "messages, validation"
+    fallback-to-system-locale: true     # 当找不到对应区域的语言时，是否回退到系统区域的语言，默认 true
+    encoding: 'utf-8'                    # ResourceBundle 的 charset
+    #cacheDuration: 						# ResourceBundle 加载后的过期时间（s），不设置则不过期，默认不过期
+    alwaysUseMessageFormat: false       # 是否始终应用MessageFormat规则，甚至不带参数地解析消息，默认false
+    useCodeAsDefaultMessage: false  #找不到对应的区域的语言（包括回退）时，直接返回 code 值，否则抛出异常, 默认flase
 
 taotao:
   cloud:
