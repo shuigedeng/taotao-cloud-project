@@ -1,11 +1,8 @@
-package com.taotao.cloud.sys.biz.controller.dto;
+package com.taotao.cloud.sys.api.model.vo.monitor;
 
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.NumberUtil;
-import com.agileboot.common.constant.Constants;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;
@@ -16,11 +13,13 @@ import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
 import oshi.util.Util;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
+
 /**
  * 服务器相关信息
  *
- * @author ruoyi
- * @author valarchie
  */
 @Data
 public class ServerInfo {
@@ -162,14 +161,14 @@ public class ServerInfo {
     public String convertFileSize(long size) {
         float castedSize = (float) size;
 
-        if (size >= Constants.GB) {
-            return String.format("%.1f GB", castedSize / Constants.GB);
+        if (size >= CommonConstant.GB) {
+            return String.format("%.1f GB", castedSize / CommonConstant.GB);
         }
 
-        if (size >= Constants.MB) {
-            return String.format("%.1f MB", castedSize / Constants.MB);
+        if (size >= CommonConstant.MB) {
+            return String.format("%.1f MB", castedSize / CommonConstant.MB);
         }
 
-        return String.format("%.1f KB", castedSize / Constants.KB);
+        return String.format("%.1f KB", castedSize / CommonConstant.KB);
     }
 }

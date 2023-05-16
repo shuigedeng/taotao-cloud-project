@@ -1,13 +1,11 @@
-package com.taotao.cloud.sys.biz.controller.dto;
+package com.taotao.cloud.sys.api.model.vo.monitor;
+
+import lombok.Data;
 
 import java.util.List;
 import java.util.Properties;
-import lombok.Data;
 
 
-/**
- * @author valarchie
- */
 @Data
 public class RedisCacheInfoDTO {
 

@@ -1,10 +1,8 @@
-package com.taotao.cloud.sys.biz.controller.server;
+package com.taotao.cloud.sys.api.model.vo.server;
 
 /**
  * CPU相关信息
  *
- * @author lijx
- * @since 2022/5/21 15:48
  */
 public class Cpu {
 

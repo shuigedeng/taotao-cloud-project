@@ -1,13 +1,11 @@
-package com.taotao.cloud.sys.biz.controller.dto;
+package com.taotao.cloud.sys.api.model.vo.monitor;
 
 import cn.hutool.core.util.NumberUtil;
-import com.agileboot.common.constant.Constants;
+import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
 
 /**
  * 內存相关信息
- *
- * @author valarchie
  */
 @Data
 public class MemoryInfo {
@@ -28,15 +26,15 @@ public class MemoryInfo {
     private double free;
 
     public double getTotal() {
-        return NumberUtil.div(total, Constants.GB, 2);
+        return NumberUtil.div(total, CommonConstant.GB, 2);
     }
 
     public double getUsed() {
-        return NumberUtil.div(used, Constants.GB, 2);
+        return NumberUtil.div(used, CommonConstant.GB, 2);
     }
 
     public double getFree() {
-        return NumberUtil.div(free, Constants.GB, 2);
+        return NumberUtil.div(free, CommonConstant.GB, 2);
     }
 
     public double getUsage() {

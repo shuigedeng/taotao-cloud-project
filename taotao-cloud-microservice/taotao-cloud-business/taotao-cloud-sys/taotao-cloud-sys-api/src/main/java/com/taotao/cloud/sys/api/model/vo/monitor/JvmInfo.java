@@ -1,16 +1,15 @@
-package com.taotao.cloud.sys.biz.controller.dto;
+package com.taotao.cloud.sys.api.model.vo.monitor;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
-import com.agileboot.common.constant.Constants;
-import java.lang.management.ManagementFactory;
+import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
+
+import java.lang.management.ManagementFactory;
 
 /**
  * JVM相关信息
- *
- * @author ruoyi
  */
 @Data
 public class JvmInfo {
@@ -41,19 +40,19 @@ public class JvmInfo {
     private String home;
 
     public double getTotal() {
-        return NumberUtil.div(total, Constants.MB, 2);
+        return NumberUtil.div(total, CommonConstant.MB, 2);
     }
 
     public double getMax() {
-        return NumberUtil.div(max, Constants.MB, 2);
+        return NumberUtil.div(max, CommonConstant.MB, 2);
     }
 
     public double getFree() {
-        return NumberUtil.div(free, Constants.MB, 2);
+        return NumberUtil.div(free, CommonConstant.MB, 2);
     }
 
     public double getUsed() {
-        return NumberUtil.div(total - free, Constants.MB, 2);
+        return NumberUtil.div(total - free, CommonConstant.MB, 2);
     }
 
     public double getUsage() {

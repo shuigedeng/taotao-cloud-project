@@ -1,9 +1,8 @@
-package com.taotao.cloud.sys.biz.controller.server;
+package com.taotao.cloud.sys.api.model.vo.server;
 
 /**
  * 主机系统相关信息实体类系统相关信息
  *
- * @author lijx
  * @since 2022/5/21 16:13
  */
 public class Sys {
