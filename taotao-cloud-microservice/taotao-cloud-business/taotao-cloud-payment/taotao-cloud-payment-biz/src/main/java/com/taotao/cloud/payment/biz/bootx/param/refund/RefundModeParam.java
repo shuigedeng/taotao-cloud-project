@@ -1,27 +1,13 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.param.refund;
 
-import com.taotao.cloud.payment.biz.bootx.dto.payment.RefundableInfo;
-import com.taotao.cloud.payment.biz.bootx.param.pay.PayModeParam;
+import cn.bootx.daxpay.code.pay.PayChannelCode;
+import cn.bootx.daxpay.dto.payment.RefundableInfo;
+import cn.bootx.daxpay.param.pay.PayModeParam;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.math.BigDecimal;
 
 /**
  * 退款方式参数
@@ -43,12 +29,18 @@ public class RefundModeParam {
     @Schema(description = "支付金额", required = true)
     private BigDecimal amount;
 
-    /** 转换成支付方式参数 */
+    /**
+     * 转换成支付方式参数
+     */
     public PayModeParam toPayModeParam() {
         return new PayModeParam().setPayChannel(getPayChannel()).setAmount(getAmount());
     }
-    /** 转换成退款方式记录对象 */
+
+    /**
+     * 转换成退款方式记录对象
+     */
     public RefundableInfo toRefundableInfo() {
         return new RefundableInfo().setPayChannel(getPayChannel()).setAmount(getAmount());
     }
+
 }

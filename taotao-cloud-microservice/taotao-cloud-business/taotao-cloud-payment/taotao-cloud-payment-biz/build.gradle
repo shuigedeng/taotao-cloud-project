@@ -5,10 +5,13 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-store:taotao-cloud-store-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+    }
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
 
     //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java

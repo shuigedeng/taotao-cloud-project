@@ -1,27 +1,17 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.entity;
 
+import cn.bootx.platform.common.core.annotation.BigField;
+import cn.bootx.platform.common.core.annotation.EncryptionField;
+import cn.bootx.platform.common.core.function.EntityBaseFunction;
+import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
+import cn.bootx.daxpay.core.paymodel.alipay.convert.AlipayConvert;
+import cn.bootx.daxpay.dto.paymodel.alipay.AlipayConfigDto;
+import cn.bootx.daxpay.param.paymodel.alipay.AlipayConfigParam;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.payment.biz.bootx.core.paymodel.alipay.convert.AlipayConvert;
-import com.taotao.cloud.payment.biz.bootx.dto.paymodel.alipay.AlipayConfigDto;
-import com.taotao.cloud.payment.biz.bootx.param.paymodel.alipay.AlipayConfigParam;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -47,7 +37,9 @@ public class AlipayConfig extends MpBaseEntity implements EntityBaseFunction<Ali
     /** 服务器异步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 */
     private String notifyUrl;
 
-    /** 页面跳转同步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 商户可以自定义同步跳转地址 */
+    /**
+     * 页面跳转同步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 商户可以自定义同步跳转地址
+     */
     private String returnUrl;
 
     /** 请求网关地址 */
@@ -87,15 +79,16 @@ public class AlipayConfig extends MpBaseEntity implements EntityBaseFunction<Ali
     private boolean sandbox;
 
     /** 超时配置 */
-    private String expireTime;
+    private Integer expireTime;
 
     /** 可用支付方式 */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String payWays;
 
     /** 是否启用 */
     private Boolean activity;
 
-    /** 状态 */
+    /** 状态 暂时没什么用 */
     private Integer state;
 
     /** 备注 */
@@ -117,4 +110,5 @@ public class AlipayConfig extends MpBaseEntity implements EntityBaseFunction<Ali
         }
         return convert;
     }
+
 }

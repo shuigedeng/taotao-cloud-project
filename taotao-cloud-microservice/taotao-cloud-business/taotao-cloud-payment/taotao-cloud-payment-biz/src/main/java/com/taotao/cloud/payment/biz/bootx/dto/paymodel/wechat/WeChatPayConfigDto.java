@@ -1,27 +1,15 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.dto.paymodel.wechat;
 
+import cn.bootx.platform.common.core.rest.dto.BaseDto;
+import cn.bootx.daxpay.code.paymodel.WeChatPayCode;
+import cn.bootx.platform.starter.data.perm.sensitive.SensitiveInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author xxm
@@ -36,53 +24,57 @@ public class WeChatPayConfigDto extends BaseDto implements Serializable {
     @Schema(description = "名称")
     private String name;
 
-    @Schema(description = "备注")
-    private String remark;
-
-    @Schema(description = "微信应用Id")
-    private String appId;
-
     @Schema(description = "微信商户号")
+    @SensitiveInfo
     private String mchId;
 
-    @Schema(description = "微信服务商应用编号")
-    private String slAppId;
+    @Schema(description = "微信应用appId")
+    @SensitiveInfo
+    private String appId;
 
-    @Schema(description = "微信服务商商户号")
-    private String slMchId;
+    /**
+     * @see WeChatPayCode#API_V2
+     */
+    @Schema(description = "api版本")
+    private String apiVersion;
 
-    @Schema(description = "同 apiKey 后续版本会舍弃")
-    private String partnerKey;
-
-    @Schema(description = "商户平台「API安全」中的 API 密钥")
-    private String apiKey;
+    @Schema(description = "商户平台「API安全」中的 APIv2 密钥")
+    @SensitiveInfo
+    private String apiKeyV2;
 
     @Schema(description = "商户平台「API安全」中的 APIv3 密钥")
-    private String apiKey3;
+    @SensitiveInfo
+    private String apiKeyV3;
+
+    @Schema(description = "APPID对应的接口密码，用于获取接口调用凭证access_token时使用")
+    @SensitiveInfo
+    private String appSecret;
+
+    @Schema(description = "API 证书中的 p12 文件id")
+    private Long p12;
+
+    @Schema(description = "API 证书中的 cert.pem 证书")
+    @SensitiveInfo(value = SensitiveInfo.SensitiveType.OTHER, front = 15)
+    private String certPem;
+
+    @Schema(description = "API 证书中的 key.pem 私钥")
+    @SensitiveInfo(value = SensitiveInfo.SensitiveType.OTHER, front = 15)
+    private String keyPem;
 
     @Schema(description = "应用域名，回调中会使用此参数")
     private String domain;
 
-    @Schema(description = "服务器异步通知页面路径")
+    @Schema(description = "服务器异步通知页面路径 通知url必须为直接可访问的url，不能携带参数。公网域名必须为https ")
     private String notifyUrl;
 
     @Schema(description = "页面跳转同步通知页面路径")
     private String returnUrl;
 
-    @Schema(description = "API 证书中的 p12")
-    private String certPath;
-
-    @Schema(description = "API 证书中的 key.pem")
-    private String keyPemPath;
-
-    @Schema(description = "API 证书中的 cert.pem")
-    private String certPemPath;
-
     @Schema(description = "是否沙箱环境")
     private boolean sandbox;
 
-    @Schema(description = "可用支付方式")
-    private String payWays;
+    @Schema(description = "超时时间(分钟)")
+    private Integer expireTime;
 
     @Schema(description = "可用支付方式")
     private List<String> payWayList;
@@ -92,4 +84,8 @@ public class WeChatPayConfigDto extends BaseDto implements Serializable {
 
     @Schema(description = "状态")
     private Integer state;
+
+    @Schema(description = "备注")
+    private String remark;
+
 }

@@ -1,38 +1,28 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.pay.service;
 
+import cn.bootx.daxpay.code.pay.PayStatusCode;
+import cn.bootx.daxpay.core.pay.builder.PayEventBuilder;
+import cn.bootx.daxpay.core.pay.builder.PaymentBuilder;
+import cn.bootx.daxpay.core.pay.factory.PayStrategyFactory;
+import cn.bootx.daxpay.core.pay.func.AbsPayStrategy;
+import cn.bootx.daxpay.core.pay.func.PayStrategyConsumer;
+import cn.bootx.daxpay.core.payment.entity.Payment;
+import cn.bootx.daxpay.core.payment.service.PaymentService;
+import cn.bootx.daxpay.exception.payment.PayFailureException;
+import cn.bootx.daxpay.exception.payment.PayNotExistedException;
+import cn.bootx.daxpay.exception.payment.PayUnsupportedMethodException;
+import cn.bootx.daxpay.mq.PaymentEventSender;
+import cn.bootx.daxpay.param.pay.PayParam;
 import cn.hutool.core.collection.CollectionUtil;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayStatusCode;
-import com.taotao.cloud.payment.biz.bootx.core.pay.builder.PaymentBuilder;
-import com.taotao.cloud.payment.biz.bootx.core.pay.factory.PayStrategyFactory;
-import com.taotao.cloud.payment.biz.bootx.core.pay.func.AbsPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.func.PayStrategyConsumer;
-import com.taotao.cloud.payment.biz.bootx.core.payment.dao.PaymentManager;
-import com.taotao.cloud.payment.biz.bootx.core.payment.entity.Payment;
-import com.taotao.cloud.payment.biz.bootx.exception.payment.PayFailureException;
-import com.taotao.cloud.payment.biz.bootx.exception.payment.PayUnsupportedMethodException;
-import com.taotao.cloud.payment.biz.bootx.param.pay.PayParam;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static cn.bootx.daxpay.code.pay.PayStatusCode.*;
 
 /**
  * 取消订单处理
@@ -44,31 +34,42 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class PayCancelService {
-    private final PaymentManager paymentManager;
+
     private final PaymentService paymentService;
 
-    /** 根据业务id取消支付记录 */
+    private final PaymentEventSender paymentEventSender;
+
+    /**
+     * 根据业务id取消支付记录
+     */
     @Transactional(rollbackFor = Exception.class)
     public void cancelByBusinessId(String businessId) {
-        Optional<Payment> paymentOptional =
-                Optional.ofNullable(paymentService.getAndCheckPaymentByBusinessId(businessId));
-        paymentOptional.ifPresent(this::cancelPayment);
-    }
-
-    /** 根据paymentId取消支付记录 */
-    @Transactional(rollbackFor = Exception.class)
-    public void cancelByPaymentId(Long paymentId) {
-        // 获取payment和paymentParam数据
-        Payment payment = paymentManager.findById(paymentId).orElseThrow(() -> new PayFailureException("未找到payment"));
+        Payment payment = paymentService.findByBusinessId(businessId)
+            .orElseThrow(() -> new PayFailureException("未找到支付单"));
         this.cancelPayment(payment);
     }
 
-    /** 取消支付记录 */
+    /**
+     * 根据paymentId取消支付记录
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void cancelByPaymentId(Long paymentId) {
+        Payment payment = paymentService.findById(paymentId).orElseThrow(() -> new PayFailureException("未找到支付单"));
+        this.cancelPayment(payment);
+    }
+
+    /**
+     * 取消支付记录
+     */
     private void cancelPayment(Payment payment) {
+        // 状态检查, 成功/退款/退款中 不处理
+        List<Integer> trades = Arrays.asList(TRADE_SUCCESS, TRADE_REFUNDING, TRADE_REFUNDED);
+        if (trades.contains(payment.getPayStatus())) {
+            throw new PayFailureException("支付已完成, 无法撤销");
+        }
 
         // 获取 paymentParam
         PayParam payParam = PaymentBuilder.buildPayParamByPayment(payment);
-        ;
 
         // 1.获取支付方式，通过工厂生成对应的策略组
         List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
@@ -87,35 +88,34 @@ public class PayCancelService {
             strategyList.forEach(AbsPayStrategy::doCancelHandler);
             // 取消订单
             paymentObj.setPayStatus(PayStatusCode.TRADE_CANCEL);
-            paymentManager.updateById(paymentObj);
+            paymentService.updateById(paymentObj);
         });
+
+        // 4. 获取支付记录信息
+        payment = paymentService.findById(payment.getId()).orElseThrow(PayNotExistedException::new);
+
+        // 5. 发布撤销事件
+        paymentEventSender.sendPayCancel(PayEventBuilder.buildPayCancel(payment));
     }
 
     /**
      * 处理方法
-     *
      * @param payment 支付记录
      * @param strategyList 支付策略
      * @param successCallback 成功操作
      */
-    private void doHandler(
-            Payment payment,
-            List<AbsPayStrategy> strategyList,
-            PayStrategyConsumer<List<AbsPayStrategy>, Payment> successCallback) {
+    private void doHandler(Payment payment, List<AbsPayStrategy> strategyList,
+                           PayStrategyConsumer<List<AbsPayStrategy>, Payment> successCallback) {
 
         try {
             // 执行
             successCallback.accept(strategyList, payment);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             // error事件的处理
-            this.errorHandler(payment, strategyList, e);
+            log.warn("取消订单失败");
             throw e;
         }
     }
 
-    /** 对Error的处理 */
-    private void errorHandler(Payment payment, List<AbsPayStrategy> strategyList, Exception e) {
-        // 待编写
-        log.warn("取消订单失败");
-    }
 }

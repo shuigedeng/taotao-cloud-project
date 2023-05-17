@@ -1,0 +1,188 @@
+<!--
+  ~ Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+  ~
+  ~ Dante Engine licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ <http://www.apache.org/licenses/LICENSE-2.0>
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  ~ Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+  ~
+  ~ 1.请不要删除和修改根目录下的LICENSE文件。
+  ~ 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
+  ~ 3.请保留源码和相关描述文件的项目出处，作者声明等。
+  ~ 4.分发源码时候，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
+  ~ 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
+  ~ 6.若您的项目无法满足以上几点，可申请商业授权
+  -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <title>授权登录</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/mdi__font/css/materialdesignicons.min.css" th:href="@{/webjars/mdi__font/css/materialdesignicons.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/webjars/quasar/dist/quasar.prod.css" th:href="@{/webjars/quasar/dist/quasar.prod.css}"/>
+</head>
+
+<body>
+<!-- example of injection point where you write your app template -->
+<div id="q-app">
+    <q-layout class="bg-grey-2">
+        <q-page-container>
+            <q-page padding class="flex justify-center items-start q-pa-none">
+                <q-list class="column items-center" style="min-width: 500px">
+                    <q-item>
+                        <img th:src="@{/herodotus/custom/images/logo.png}" height="240" width="320"/>
+                    </q-item>
+                    <q-item>
+                        <div class="text-h5 text-weight-bold">
+                            授权 [[${applicationName}]]
+                        </div>
+                    </q-item>
+                    <q-item>
+                        <q-card flat bordered style="min-width: 500px" >
+                            <q-form name="consent_form" method="post" th:action="@{${action}}">
+                                <q-card-section>
+                                    <q-list>
+                                        <q-item>
+                                            <q-item-section avatar>
+                                                <q-avatar rounded th:with="condition=${logo ne null}">
+                                                    <img th:if="${condition}" th:src="@{${logo}}"/>
+                                                    <img th:unless="${condition}" th:src="@{/herodotus/custom/images/boy-avatar.png}"/>
+                                                </q-avatar>
+                                            </q-item-section>
+
+                                            <q-item-section>
+                                                <q-item-label lines="1">
+                                                  <span class="text-weight-bold text-primary">[[${applicationName}]]</span>
+                                                </q-item-label>
+                                                <q-item-label lines="1">
+                                                    想要访问您的
+                                                    <span class="text-weight-bold">[[${principalName}]]</span>
+                                                    账户
+                                                </q-item-label>
+                                            </q-item-section>
+                                        </q-item>
+
+                                        <q-item v-if="code">
+                                            <q-item-section>
+                                                <q-banner rounded class="bg-orange text-white">
+                                                    您已经提供代码
+                                                    <span class="text-weight-bold"> {{code}}</span
+                                                    >。验证此代码是否与设备上显示内容匹配
+                                                </q-banner>
+                                            </q-item-section>
+                                        </q-item>
+
+                                        <q-item-label header>
+                                            上述应用程序请求以下权限。如果您同意，请予以授权。
+                                        </q-item-label>
+
+                                        <q-item>
+                                            <q-item-section>
+                                                <q-option-group name="scope" v-model="selectAuthorizeScopes" :options="authorizeScopesOptions" color="primary" type="checkbox" />
+                                            </q-item-section>
+                                        </q-item>
+
+                                        <template th:if="${not #sets.isEmpty(scopesPreviouslyAuthorized)}">
+                                          <q-item-label header>
+                                            您已向上述应用程序授予以下权限：
+                                          </q-item-label>
+
+                                          <q-item>
+                                            <q-item-section>
+                                              <q-option-group name="scope" v-model="selectPreviouslyAuthorizedScopes" :options="previouslyAuthorizedScopesOptions" color="primary" type="checkbox" />
+                                            </q-item-section>
+                                          </q-item>
+                                        </template>
+
+                                        <q-item-label header>
+                                            如果您不授权，请单击“取消”，将不会与应用程序共享任何信息。
+                                        </q-item-label>
+                                    </q-list>
+                                </q-card-section>
+                                <q-separator></q-separator>
+                                <q-card-section>
+                                    <q-list>
+                                        <q-item>
+                                            <q-item-section>
+                                                <div class="row justify-between q-gutter-md">
+                                                    <div class="col">
+                                                        <q-btn color="grey" label="取消" type="reset" class="full-width" />
+                                                    </div>
+                                                    <div class="col">
+                                                        <q-btn color="primary" label="授权" type="submit" class="full-width" />
+                                                    </div>
+                                                </div>
+                                            </q-item-section>
+                                        </q-item>
+                                    </q-list>
+                                </q-card-section>
+                                <q-card-section>
+                                    <q-list class="column items-center">
+                                        <div class="text-subtitle2">授权将重定向到</div>
+                                        <div class="text-subtitle2 text-weight-bold text-center q-mt-xs" style="width: 400px; word-break: break-all">
+                                            [[${redirectUri}]]
+                                        </div>
+                                    </q-list>
+                                </q-card-section>
+                                <input type="hidden" name="client_id" th:value="${clientId}">
+                                <input type="hidden" name="state" th:value="${state}">
+                                <input v-if="code" type="hidden" name="user_code" th:value="${userCode}">
+                            </q-form>
+                        </q-card>
+                    </q-item>
+                </q-list>
+            </q-page>
+        </q-page-container>
+    </q-layout>
+</div>
+
+<!-- Add the following at the end of your body tag -->
+<script type="text/javascript" src="/webjars/vue/dist/vue.global.prod.js" th:src="@{/webjars/vue/dist/vue.global.prod.js}"></script>
+<script type="text/javascript" src="/webjars/quasar/dist/quasar.umd.prod.js" th:src="@{/webjars/quasar/dist/quasar.umd.prod.js}"></script>
+<script type="text/javascript" src="/webjars/quasar/dist/icon-set/svg-mdi-v7.umd.prod.js"  th:src="@{/webjars/quasar/dist/icon-set/svg-mdi-v7.umd.prod.js}"></script>
+
+<script th:inline="javascript">
+    const app = Vue.createApp({
+        setup() {
+            const userCode = [[${userCode}]];
+            const scopesToAuthorize = [[${scopesToAuthorize}]]
+            const scopesPreviouslyAuthorized = [[${scopesPreviouslyAuthorized}]]
+            const selectedScopesPreviouslyAuthorized = scopesPreviouslyAuthorized.map(item => item.value);
+
+            const code = Vue.ref(userCode);
+            const authorizeScopesOptions = Vue.ref(scopesToAuthorize);
+            const selectAuthorizeScopes = Vue.ref([]);
+            const previouslyAuthorizedScopesOptions = Vue.ref(scopesPreviouslyAuthorized);
+            const selectPreviouslyAuthorizedScopes = Vue.ref(selectedScopesPreviouslyAuthorized);
+
+            return {
+                code,
+                authorizeScopesOptions,
+                selectAuthorizeScopes,
+                previouslyAuthorizedScopesOptions,
+                selectPreviouslyAuthorizedScopes
+            };
+        },
+    });
+
+    app.use(Quasar);
+    Quasar.iconSet.set(Quasar.iconSet.svgMdiV7);
+    app.mount("#q-app");
+</script>
+</body>
+</html>

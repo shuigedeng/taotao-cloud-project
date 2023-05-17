@@ -1,33 +1,13 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.pay.factory;
 
+import cn.bootx.daxpay.code.pay.PayChannelCode;
+import cn.bootx.daxpay.core.pay.func.AbsPayStrategy;
+import cn.bootx.daxpay.core.pay.strategy.*;
+import cn.bootx.daxpay.exception.payment.PayUnsupportedMethodException;
+import cn.bootx.daxpay.param.pay.PayModeParam;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayChannelCode;
-import com.taotao.cloud.payment.biz.bootx.core.pay.func.AbsPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.strategy.AliPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.strategy.CashPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.strategy.UnionPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.strategy.VoucherStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.strategy.WalletPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.strategy.WeChatPayStrategy;
-import com.taotao.cloud.payment.biz.bootx.exception.payment.PayUnsupportedMethodException;
-import com.taotao.cloud.payment.biz.bootx.param.pay.PayModeParam;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +24,6 @@ public class PayStrategyFactory {
 
     /**
      * 根据传入的支付通道创建策略
-     *
      * @param payModeParam 支付类型
      * @return 支付策略
      */
@@ -79,24 +58,27 @@ public class PayStrategyFactory {
             default:
                 throw new PayUnsupportedMethodException();
         }
-        //noinspection ConstantConditions
+        // noinspection ConstantConditions
         strategy.setPayMode(payModeParam);
         return strategy;
     }
 
-    /** 根据传入的支付类型批量创建策略, 异步支付在后面 */
+    /**
+     * 根据传入的支付类型批量创建策略, 异步支付在后面
+     */
     public static List<AbsPayStrategy> createDesc(List<PayModeParam> payModeParamList) {
         return create(payModeParamList, true);
     }
 
-    /** 根据传入的支付类型批量创建策略, 默认异步支付在前面 */
+    /**
+     * 根据传入的支付类型批量创建策略, 默认异步支付在前面
+     */
     public static List<AbsPayStrategy> create(List<PayModeParam> payModeParamList) {
         return create(payModeParamList, false);
     }
 
     /**
      * 根据传入的支付类型批量创建策略
-     *
      * @param payModeParamList 支付类型
      * @return 支付策略
      */
@@ -108,15 +90,15 @@ public class PayStrategyFactory {
 
         // 同步支付
         List<PayModeParam> syncPayModeParamList = payModeParamList.stream()
-                .filter(Objects::nonNull)
-                .filter(payModeParam -> !PayChannelCode.ASYNC_TYPE.contains(payModeParam.getPayChannel()))
-                .collect(Collectors.toList());
+            .filter(Objects::nonNull)
+            .filter(payModeParam -> !PayChannelCode.ASYNC_TYPE.contains(payModeParam.getPayChannel()))
+            .collect(Collectors.toList());
 
         // 异步支付
         List<PayModeParam> asyncPayModeParamList = payModeParamList.stream()
-                .filter(Objects::nonNull)
-                .filter(payModeParam -> PayChannelCode.ASYNC_TYPE.contains(payModeParam.getPayChannel()))
-                .collect(Collectors.toList());
+            .filter(Objects::nonNull)
+            .filter(payModeParam -> PayChannelCode.ASYNC_TYPE.contains(payModeParam.getPayChannel()))
+            .collect(Collectors.toList());
 
         List<PayModeParam> sortList = new ArrayList<>(payModeParamList.size());
 
@@ -124,7 +106,8 @@ public class PayStrategyFactory {
         if (description) {
             sortList.addAll(syncPayModeParamList);
             sortList.addAll(asyncPayModeParamList);
-        } else {
+        }
+        else {
             sortList.addAll(asyncPayModeParamList);
             sortList.addAll(syncPayModeParamList);
         }
@@ -133,4 +116,5 @@ public class PayStrategyFactory {
         sortList.stream().filter(Objects::nonNull).forEach(payMode -> list.add(create(payMode)));
         return list;
     }
+
 }

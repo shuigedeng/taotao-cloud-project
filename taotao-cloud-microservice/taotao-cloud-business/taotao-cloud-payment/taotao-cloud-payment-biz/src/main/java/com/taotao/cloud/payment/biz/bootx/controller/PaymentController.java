@@ -1,32 +1,22 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.controller;
 
-import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.payment.biz.bootx.core.payment.service.PaymentQueryService;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.PayChannelInfo;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.PaymentDto;
-import com.taotao.cloud.payment.biz.bootx.param.payment.PaymentQuery;
+import cn.bootx.platform.common.core.annotation.IgnoreAuth;
+import cn.bootx.platform.common.core.rest.PageResult;
+import cn.bootx.platform.common.core.rest.Res;
+import cn.bootx.platform.common.core.rest.ResResult;
+import cn.bootx.platform.common.core.rest.param.OrderParam;
+import cn.bootx.platform.common.core.rest.param.PageParam;
+import cn.bootx.platform.common.query.entity.QueryParams;
+import cn.bootx.daxpay.core.payment.service.PaymentQueryService;
+import cn.bootx.daxpay.dto.payment.PayChannelInfo;
+import cn.bootx.daxpay.dto.payment.PaymentDto;
+import cn.bootx.daxpay.param.payment.PaymentQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author xxm
@@ -37,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/payment")
 @RequiredArgsConstructor
 public class PaymentController {
+
     private final PaymentQueryService paymentQueryService;
 
     @Operation(summary = "根据id获取")
@@ -53,28 +44,24 @@ public class PaymentController {
 
     @Operation(summary = "分页查询")
     @GetMapping("/page")
-    public ResResult<PageResult<PaymentDto>> page(PageQuery PageQuery, PaymentQuery param, OrderParam orderParam) {
-        return Res.ok(paymentQueryService.page(PageQuery, param, orderParam));
+    public ResResult<PageResult<PaymentDto>> page(PageParam pageParam, PaymentQuery param, OrderParam orderParam) {
+        return Res.ok(paymentQueryService.page(pageParam, param, orderParam));
     }
 
     @Operation(summary = "分页查询(超级查询)")
     @PostMapping("/superPage")
-    public ResResult<PageResult<PaymentDto>> superPage(PageQuery PageQuery, @RequestBody QueryParams queryParams) {
-        return Res.ok(paymentQueryService.superPage(PageQuery, queryParams));
+    public ResResult<PageResult<PaymentDto>> superPage(PageParam pageParam, @RequestBody QueryParams queryParams) {
+        return Res.ok(paymentQueryService.superPage(pageParam, queryParams));
     }
 
-    @Operation(summary = "根据businessId获取列表")
-    @GetMapping("/findByBusinessId")
-    public ResResult<List<PaymentDto>> findByBusinessId(String businessId) {
-        return Res.ok(paymentQueryService.findByBusinessId(businessId));
-    }
-
-    @Operation(summary = "根据业务ID获取支付状态")
+    @IgnoreAuth
+    @Operation(summary = "根据业务ID获取支付状态`")
     @GetMapping("/findStatusByBusinessId")
     public ResResult<Integer> findStatusByBusinessId(String businessId) {
         return Res.ok(paymentQueryService.findStatusByBusinessId(businessId));
     }
 
+    @IgnoreAuth
     @Operation(summary = "根据businessId获取订单支付方式")
     @GetMapping("/findPayTypeInfoByBusinessId")
     public ResResult<List<PayChannelInfo>> findPayTypeInfoByBusinessId(String businessId) {
@@ -86,4 +73,5 @@ public class PaymentController {
     public ResResult<List<PayChannelInfo>> findPayTypeInfoById(Long id) {
         return Res.ok(paymentQueryService.findPayTypeInfoById(id));
     }
+
 }
