@@ -1,23 +1,10 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.controller;
 
-import com.taotao.cloud.payment.biz.bootx.core.aggregate.service.AggregateService;
-import com.taotao.cloud.payment.biz.bootx.param.cashier.CashierSinglePayParam;
+import cn.bootx.daxpay.core.aggregate.service.AggregateService;
+import cn.bootx.daxpay.param.cashier.CashierSinglePayParam;
+import cn.bootx.platform.common.core.annotation.IgnoreAuth;
+import cn.bootx.platform.common.core.rest.Res;
+import cn.bootx.platform.common.core.rest.ResResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -32,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author xxm
  * @date 2022/3/6
  */
+@IgnoreAuth
 @Tag(name = "聚合支付")
 @RestController
 @RequestMapping("/aggregate")
 @RequiredArgsConstructor
 public class AggregateController {
+
     private final AggregateService aggregateService;
 
     @Operation(summary = "创建聚合支付")
@@ -44,4 +33,5 @@ public class AggregateController {
     public ResResult<String> createAggregatePay(@RequestBody CashierSinglePayParam param) {
         return Res.ok(aggregateService.createAggregatePay(param));
     }
+
 }

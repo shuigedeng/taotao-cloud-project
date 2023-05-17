@@ -1,32 +1,17 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.refund.dao;
 
-import cn.bootx.common.core.rest.param.PageQuery;
-import cn.bootx.common.mybatisplus.base.MpBaseEntity;
-import cn.bootx.common.mybatisplus.impl.BaseManager;
-import cn.bootx.common.mybatisplus.util.MpUtil;
-import cn.bootx.payment.core.refund.entity.RefundRecord;
-import cn.bootx.payment.dto.refund.RefundRecordDto;
+import cn.bootx.platform.common.core.rest.param.PageParam;
+import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
+import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
+import cn.bootx.platform.common.mybatisplus.util.MpUtil;
+import cn.bootx.daxpay.core.refund.entity.RefundRecord;
+import cn.bootx.daxpay.dto.refund.RefundRecordDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+
+import java.util.Objects;
 
 /**
  * @author xxm
@@ -37,13 +22,13 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class RefundRecordManager extends BaseManager<RefundRecordMapper, RefundRecord> {
 
-    public Page<RefundRecord> page(PageQuery PageQuery, RefundRecordDto param) {
-        Page<RefundRecord> mpPage = MpUtil.getMpPage(PageQuery, RefundRecord.class);
-        return lambdaQuery()
-                .orderByDesc(MpBaseEntity::getId)
-                .like(Objects.nonNull(param.getPaymentId()), RefundRecord::getPaymentId, param.getPaymentId())
-                .like(Objects.nonNull(param.getBusinessId()), RefundRecord::getBusinessId, param.getBusinessId())
-                .like(Objects.nonNull(param.getTitle()), RefundRecord::getTitle, param.getTitle())
-                .page(mpPage);
+    public Page<RefundRecord> page(PageParam pageParam, RefundRecordDto param) {
+        Page<RefundRecord> mpPage = MpUtil.getMpPage(pageParam, RefundRecord.class);
+        return lambdaQuery().orderByDesc(MpIdEntity::getId)
+            .like(Objects.nonNull(param.getPaymentId()), RefundRecord::getPaymentId, param.getPaymentId())
+            .like(Objects.nonNull(param.getBusinessId()), RefundRecord::getBusinessId, param.getBusinessId())
+            .like(Objects.nonNull(param.getTitle()), RefundRecord::getTitle, param.getTitle())
+            .page(mpPage);
     }
+
 }

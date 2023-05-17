@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.code.paymodel;
 
 /**
@@ -24,13 +8,16 @@ package com.taotao.cloud.payment.biz.bootx.code.paymodel;
  */
 public interface WeChatPayCode {
 
-    // 认证类型
-    /** 公钥 */
-    int AUTH_TYPE_KEY = 1;
+    // 版本
+    String API_V2 = "api_v2";
 
-    /** 证书 */
-    int AUTH_TYPE_CART = 2;
+    String API_V3 = "api_v3";
 
+    // 请求参数
+    /** jsapi发起获取AuthCode时的重定向参数 */
+    String JSAPI_REDIRECT_URL = "JsapiRedirectUrl";
+
+    // 返回参数
     /** 二维码链接 */
     String CODE_URL = "code_url";
 
@@ -38,7 +25,7 @@ public interface WeChatPayCode {
     String MWEB_URL = "mweb_url";
 
     /** 预支付交易会话ID */
-    String PREPAY_ID = "prepayid";
+    String PREPAY_ID = "prepay_id";
 
     /** 返回状态码 */
     String RETURN_CODE = "return_code";
@@ -46,14 +33,20 @@ public interface WeChatPayCode {
     /** 返回信息 */
     String RETURN_MSG = "return_msg";
 
+    /** 返回错误代码(例如付款码返回的支付中状态就在这里面) */
+    String ERR_CODE = "err_code";
+
     /** 返回错误信息 */
     String ERR_CODE_DES = "err_code_des";
 
-    /** 业务结果 */
+    /** 业务结果(部分结果不在这个参数里, 例如付款码的响应码) */
     String RESULT_CODE = "result_code";
 
     /** 交易类型 */
     String TRADE_TYPE = "trade_type";
+
+    /** appid */
+    String APPID = "appid";
 
     /** 交易状态 */
     String TRADE_STATE = "trade_state";
@@ -61,24 +54,35 @@ public interface WeChatPayCode {
     /** 商户订单号 */
     String OUT_TRADE_NO = "out_trade_no";
 
-    /** 商户订单号 */
-    String ATTACH = "attach";
+    /** 微信交易单号 */
+    String TRANSACTION_ID = "transaction_id";
 
     // 交易状态
     /** 支付成功 */
     String TRADE_SUCCESS = "SUCCESS";
-    /** 转入退款 */
+
+    /** 支付失败 */
+    String TRADE_FAIL = "FAIL";
+
+    /** 退款 */
     String TRADE_REFUND = "REFUND";
+
     /** 未支付 */
     String TRADE_NOTPAY = "NOTPAY";
+
     /** 已关闭 */
     String TRADE_CLOSED = "CLOSED";
-    /** 已撤销(刷卡支付) */
-    String TRADE_REVOKED = "REVOKED";
-    /** 用户支付中 */
-    String TRADE_USERPAYING = "USERPAYING";
-    /** 支付失败 */
-    String TRADE_PAYERROR = "PAYERROR";
+
     /** 已接收，等待扣款 */
     String TRADE_ACCEPT = "ACCEPT";
+
+    /** 已撤销(刷卡支付) */
+    String TRADE_REVOKED = "REVOKED";
+
+    /** 用户支付中(刷卡支付) */
+    String TRADE_USERPAYING = "USERPAYING";
+
+    /** 支付失败(刷卡支付) */
+    String TRADE_PAYERROR = "PAYERROR";
+
 }

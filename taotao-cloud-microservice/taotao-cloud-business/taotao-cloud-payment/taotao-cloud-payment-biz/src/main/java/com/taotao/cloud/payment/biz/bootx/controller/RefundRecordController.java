@@ -1,21 +1,11 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.controller;
 
+import cn.bootx.platform.common.core.rest.PageResult;
+import cn.bootx.platform.common.core.rest.Res;
+import cn.bootx.platform.common.core.rest.ResResult;
+import cn.bootx.platform.common.core.rest.param.PageParam;
+import cn.bootx.daxpay.core.refund.service.RefundRecordService;
+import cn.bootx.daxpay.dto.refund.RefundRecordDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +29,8 @@ public class RefundRecordController {
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<RefundRecordDto>> page(PageQuery PageQuery, RefundRecordDto param) {
-        return Res.ok(refundRecordService.page(PageQuery, param));
+    public ResResult<PageResult<RefundRecordDto>> page(PageParam pageParam, RefundRecordDto param) {
+        return Res.ok(refundRecordService.page(pageParam, param));
     }
 
     @Operation(summary = "根据id查询")
@@ -48,4 +38,5 @@ public class RefundRecordController {
     public ResResult<RefundRecordDto> findById(Long id) {
         return Res.ok(refundRecordService.findById(id));
     }
+
 }

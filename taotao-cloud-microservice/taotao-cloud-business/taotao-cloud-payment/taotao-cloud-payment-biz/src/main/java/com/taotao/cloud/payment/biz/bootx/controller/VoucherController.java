@@ -1,33 +1,20 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.controller;
 
-import cn.hutool.db.PageResult;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.service.VoucherQueryService;
-import com.taotao.cloud.payment.biz.bootx.core.paymodel.voucher.service.VoucherService;
-import com.taotao.cloud.payment.biz.bootx.dto.paymodel.voucher.VoucherDto;
-import com.taotao.cloud.payment.biz.bootx.param.paymodel.voucher.VoucherGenerationParam;
-import com.taotao.cloud.payment.biz.bootx.param.paymodel.voucher.VoucherParam;
+import cn.bootx.platform.common.core.rest.PageResult;
+import cn.bootx.platform.common.core.rest.Res;
+import cn.bootx.platform.common.core.rest.ResResult;
+import cn.bootx.platform.common.core.rest.param.PageParam;
+import cn.bootx.daxpay.core.paymodel.voucher.service.VoucherQueryService;
+import cn.bootx.daxpay.core.paymodel.voucher.service.VoucherService;
+import cn.bootx.daxpay.dto.paymodel.voucher.VoucherDto;
+import cn.bootx.daxpay.param.paymodel.voucher.VoucherGenerationParam;
+import cn.bootx.daxpay.param.paymodel.voucher.VoucherParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author xxm
@@ -38,13 +25,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/voucher")
 @RequiredArgsConstructor
 public class VoucherController {
+
     private final VoucherService voucherService;
+
     private final VoucherQueryService voucherQueryService;
 
     @Operation(summary = "分页")
     @GetMapping("/page")
-    public ResResult<PageResult<VoucherDto>> page(PageQuery PageQuery, VoucherParam param) {
-        return Res.ok(voucherQueryService.page(PageQuery, param));
+    public ResResult<PageResult<VoucherDto>> page(PageParam pageParam, VoucherParam param) {
+        return Res.ok(voucherQueryService.page(pageParam, param));
     }
 
     @Operation(summary = "单条查询")
@@ -93,4 +82,5 @@ public class VoucherController {
         voucherService.unlockBatch(ids);
         return Res.ok();
     }
+
 }

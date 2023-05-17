@@ -1,37 +1,24 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.payment.entity;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONUtil;
+import cn.bootx.platform.common.core.annotation.BigField;
+import cn.bootx.platform.common.core.function.EntityBaseFunction;
+import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
+import cn.bootx.platform.common.mybatisplus.handler.JacksonRawTypeHandler;
+import cn.bootx.daxpay.code.pay.PayStatusCode;
+import cn.bootx.daxpay.core.payment.convert.PaymentConvert;
+import cn.bootx.daxpay.dto.payment.PayChannelInfo;
+import cn.bootx.daxpay.dto.payment.PaymentDto;
+import cn.bootx.daxpay.dto.payment.RefundableInfo;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.payment.biz.bootx.core.payment.convert.PaymentConvert;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.PayChannelInfo;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.PaymentDto;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.RefundableInfo;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 支付记录
@@ -43,7 +30,7 @@ import lombok.experimental.FieldNameConstants;
 @Data
 @FieldNameConstants
 @Accessors(chain = true)
-@TableName("pay_payment")
+@TableName(value = "pay_payment", autoResultMap = true)
 public class Payment extends MpBaseEntity implements EntityBaseFunction<PaymentDto> {
 
     /** 关联的业务id */
@@ -78,22 +65,23 @@ public class Payment extends MpBaseEntity implements EntityBaseFunction<PaymentD
 
     /**
      * 支付通道信息列表
-     *
      * @see PayChannelInfo
      */
-    private String payChannelInfo;
+    @TableField(typeHandler = JacksonRawTypeHandler.class)
+    @BigField
+    private List<PayChannelInfo> payChannelInfo;
 
     /**
      * 退款信息列表
-     *
      * @see RefundableInfo
      */
-    private String refundableInfo;
+    @TableField(typeHandler = JacksonRawTypeHandler.class)
+    @BigField
+    private List<RefundableInfo> refundableInfo;
 
     /**
      * 支付状态
-     *
-     * @see PayStatusCode
+     * @see PayStatusCode#TRADE_PROGRESS
      */
     private Integer payStatus;
 
@@ -103,7 +91,7 @@ public class Payment extends MpBaseEntity implements EntityBaseFunction<PaymentD
     /** 支付终端ip */
     private String clientIp;
 
-    /** 超时时间 */
+    /** 过期时间 */
     private LocalDateTime expiredTime;
 
     @Override
@@ -111,21 +99,4 @@ public class Payment extends MpBaseEntity implements EntityBaseFunction<PaymentD
         return PaymentConvert.CONVERT.convert(this);
     }
 
-    /** 获取支付通道 */
-    public List<PayChannelInfo> getPayChannelInfoList() {
-        if (StrUtil.isNotBlank(this.payChannelInfo)) {
-            JSONArray array = JSONUtil.parseArray(this.payChannelInfo);
-            return JSONUtil.toList(array, PayChannelInfo.class);
-        }
-        return new ArrayList<>(0);
-    }
-
-    /** 获取可退款信息列表 */
-    public List<RefundableInfo> getRefundableInfoList() {
-        if (StrUtil.isNotBlank(this.refundableInfo)) {
-            JSONArray array = JSONUtil.parseArray(this.refundableInfo);
-            return JSONUtil.toList(array, RefundableInfo.class);
-        }
-        return new ArrayList<>(0);
-    }
 }

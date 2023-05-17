@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.code.paymodel;
 
 /**
@@ -31,12 +15,18 @@ public interface AliPayCode {
     /** 证书 */
     int AUTH_TYPE_CART = 2;
 
+    // 渠道枚举
     /** 目前PC支付必填 */
     String FAST_INSTANT_TRADE_PAY = "FAST_INSTANT_TRADE_PAY";
+
     /** WAP支付必填 手机网站支付产品 */
-    String QUICK_WAP_PAY = "QUICK_WAP_PAY";
+    String QUICK_WAP_PAY = "QUICK_WAP_WAY";
+
     /** APP支付必填 APP支付产品 */
     String QUICK_MSECURITY_PAY = "QUICK_MSECURITY_PAY";
+
+    /** 付款码支付 */
+    String BAR_CODE = "bar_code";
 
     // 响应字段
     /** 支付状态 */
@@ -54,23 +44,32 @@ public interface AliPayCode {
     /** 支付宝流水号 */
     String TRADE_NO = "trade_no";
 
+    /** appId */
+    String APP_ID = "app_id";
+
     // 交易状态说明
     /** 交易创建，等待买家付款 */
     String PAYMENT_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+
     /** 未付款交易超时关闭，或支付完成后全额退款 */
     String PAYMENT_TRADE_CLOSED = "TRADE_CLOSED";
+
     /** 交易支付成功 */
     String PAYMENT_TRADE_SUCCESS = "TRADE_SUCCESS";
+
     /** 交易结束，不可退款 */
     String PAYMENT_TRADE_FINISHED = "TRADE_FINISHED";
 
     // 通知触发条件
     /** 交易完成 */
     String NOTIFY_TRADE_FINISHED = "TRADE_FINISHED";
+
     /** 支付成功 */
     String NOTIFY_TRADE_SUCCESS = "TRADE_SUCCESS";
+
     /** 交易创建,不触发通知 */
     String NOTIFY_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+
     /** 交易关闭 */
     String NOTIFY_TRADE_CLOSED = "TRADE_CLOSED";
 
@@ -83,4 +82,5 @@ public interface AliPayCode {
 
     // 网关返回码 支付进行中 order success pay inprocess
     String INPROCESS = "10003";
+
 }

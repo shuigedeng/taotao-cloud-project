@@ -1,34 +1,19 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.param.pay;
 
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayChannelCode;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayWayCode;
-import com.taotao.cloud.payment.biz.bootx.core.pay.convert.PayConvert;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.PayChannelInfo;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.RefundableInfo;
-import com.taotao.cloud.payment.biz.bootx.param.paymodel.alipay.AliPayParam;
-import com.taotao.cloud.payment.biz.bootx.param.paymodel.voucher.VoucherPayParam;
-import com.taotao.cloud.payment.biz.bootx.param.paymodel.wechat.WeChatPayParam;
+import cn.bootx.daxpay.code.pay.PayChannelCode;
+import cn.bootx.daxpay.code.pay.PayWayCode;
+import cn.bootx.daxpay.core.pay.convert.PayConvert;
+import cn.bootx.daxpay.dto.payment.PayChannelInfo;
+import cn.bootx.daxpay.dto.payment.RefundableInfo;
+import cn.bootx.daxpay.param.paymodel.alipay.AliPayParam;
+import cn.bootx.daxpay.param.paymodel.voucher.VoucherPayParam;
+import cn.bootx.daxpay.param.paymodel.wechat.WeChatPayParam;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import java.math.BigDecimal;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 不只是支付, 退款发起时也是用着参数
@@ -42,6 +27,7 @@ import lombok.experimental.Accessors;
 public class PayModeParam implements Serializable {
 
     private static final long serialVersionUID = -46959864485463681L;
+
     /**
      * @see PayChannelCode
      */
@@ -69,8 +55,11 @@ public class PayModeParam implements Serializable {
         return PayConvert.CONVERT.convert(this);
     }
 
-    /** 转换为可退款信息 */
+    /**
+     * 转换为可退款信息
+     */
     public RefundableInfo toRefundableInfo() {
         return new RefundableInfo().setPayChannel(getPayChannel()).setAmount(getAmount());
     }
+
 }

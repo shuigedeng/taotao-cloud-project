@@ -1,37 +1,26 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.service;
 
+import cn.bootx.platform.common.core.exception.DataNotExistException;
+import cn.bootx.platform.common.redis.RedisClient;
+import cn.bootx.daxpay.code.pay.PayChannelCode;
+import cn.bootx.daxpay.code.pay.PayStatusCode;
+import cn.bootx.daxpay.code.paymodel.WeChatPayCode;
+import cn.bootx.daxpay.core.notify.dao.PayNotifyRecordManager;
+import cn.bootx.daxpay.core.pay.func.AbsPayCallbackStrategy;
+import cn.bootx.daxpay.core.pay.service.PayCallbackService;
+import cn.bootx.daxpay.core.paymodel.wechat.dao.WeChatPayConfigManager;
+import cn.bootx.daxpay.core.paymodel.wechat.entity.WeChatPayConfig;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayChannelCode;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayStatusCode;
-import com.taotao.cloud.payment.biz.bootx.code.paymodel.WeChatPayCode;
-import com.taotao.cloud.payment.biz.bootx.core.notify.dao.PayNotifyRecordManager;
-import com.taotao.cloud.payment.biz.bootx.core.pay.func.AbsPayCallbackStrategy;
-import com.taotao.cloud.payment.biz.bootx.core.pay.service.PayCallbackService;
-import com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.dao.WeChatPayConfigManager;
-import com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.entity.WeChatPayConfig;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static cn.bootx.daxpay.code.paymodel.WeChatPayCode.APPID;
 
 /**
  * 微信支付回调
@@ -42,13 +31,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class WeChatPayCallbackService extends AbsPayCallbackStrategy {
+
     private final WeChatPayConfigManager weChatPayConfigManager;
 
-    public WeChatPayCallbackService(
-            RedisClient redisClient,
-            PayNotifyRecordManager payNotifyRecordManager,
-            PayCallbackService payCallbackService,
-            WeChatPayConfigManager weChatPayConfigManager) {
+    public WeChatPayCallbackService(RedisClient redisClient, PayNotifyRecordManager payNotifyRecordManager,
+                                    PayCallbackService payCallbackService, WeChatPayConfigManager weChatPayConfigManager) {
         super(redisClient, payNotifyRecordManager, payCallbackService);
         this.weChatPayConfigManager = weChatPayConfigManager;
     }
@@ -58,7 +45,9 @@ public class WeChatPayCallbackService extends AbsPayCallbackStrategy {
         return PayChannelCode.WECHAT;
     }
 
-    /** 获取支付单id */
+    /**
+     * 获取支付单id
+     */
     @Override
     public Long getPaymentId() {
         Map<String, String> params = PARAMS.get();
@@ -66,37 +55,41 @@ public class WeChatPayCallbackService extends AbsPayCallbackStrategy {
         return Long.valueOf(paymentId);
     }
 
-    /** 获取支付状态 */
+    /**
+     * 获取支付状态
+     */
     @Override
     public int getTradeStatus() {
         Map<String, String> params = PARAMS.get();
         if (WxPayKit.codeIsOk(params.get(WeChatPayCode.RESULT_CODE))) {
             return PayStatusCode.NOTIFY_TRADE_SUCCESS;
-        } else {
+        }
+        else {
             return PayStatusCode.NOTIFY_TRADE_FAIL;
         }
     }
 
-    /** 验证回调消息 */
+    /**
+     * 验证回调消息
+     */
     @Override
     public boolean verifyNotify() {
         Map<String, String> params = PARAMS.get();
         String callReq = JSONUtil.toJsonStr(params);
         log.info("微信发起回调 报文: {}", callReq);
-        String appId = params.get("appid");
+        String appId = params.get(APPID);
 
         if (StrUtil.isBlank(appId)) {
             log.warn("微信回调报文 appId 为空 {}", callReq);
             return false;
         }
-
-        WeChatPayConfig weChatPayConfig =
-                weChatPayConfigManager.findByAppId(appId).orElseThrow(DataNotExistException::new);
+        //
+        WeChatPayConfig weChatPayConfig = weChatPayConfigManager.findActivity().orElseThrow(DataNotExistException::new);
         if (weChatPayConfig == null) {
-            log.warn("微信回调报文 appId 不合法 {}", callReq);
+            log.warn("微信支付配置不存在: {}", callReq);
             return false;
         }
-        return WxPayKit.verifyNotify(params, weChatPayConfig.getApiKey(), SignType.HMACSHA256);
+        return WxPayKit.verifyNotify(params, weChatPayConfig.getApiKeyV2(), SignType.HMACSHA256, null);
     }
 
     @Override
@@ -106,4 +99,5 @@ public class WeChatPayCallbackService extends AbsPayCallbackStrategy {
         xml.put(WeChatPayCode.RETURN_MSG, "OK");
         return WxPayKit.toXml(xml);
     }
+
 }

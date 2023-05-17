@@ -1,36 +1,28 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.payment.service;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayChannelEnum;
-import com.taotao.cloud.payment.biz.bootx.code.pay.PayStatusCode;
-import com.taotao.cloud.payment.biz.bootx.core.payment.dao.PaymentManager;
-import com.taotao.cloud.payment.biz.bootx.core.payment.entity.Payment;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.RefundableInfo;
-import com.taotao.cloud.payment.biz.bootx.exception.payment.PayFailureException;
-import com.taotao.cloud.payment.biz.bootx.exception.payment.PayIsProcessingException;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
+import cn.bootx.platform.common.spring.exception.RetryableException;
+import cn.bootx.daxpay.code.pay.PayChannelEnum;
+import cn.bootx.daxpay.core.payment.dao.PaymentExpiredTimeRepository;
+import cn.bootx.daxpay.core.payment.dao.PaymentManager;
+import cn.bootx.daxpay.core.payment.entity.Payment;
+import cn.bootx.daxpay.dto.payment.RefundableInfo;
+import cn.bootx.daxpay.exception.payment.PayFailureException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import static cn.bootx.daxpay.code.pay.PayStatusCode.TRADE_PROGRESS;
 
 /**
  * 支付记录
@@ -42,43 +34,76 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
+
     private final PaymentManager paymentManager;
 
-    /** 校验支付状态，支付成功则返回，支付失败/支付进行中则抛出对应的异常 */
-    public Payment getAndCheckPaymentByBusinessId(String businessId) {
+    private final PaymentExpiredTimeRepository expiredTimeRepository;
 
-        // 根据订单查询支付记录
-        List<Payment> payments = paymentManager.findByBusinessIdNoCancelDesc(businessId);
-        if (!CollectionUtil.isEmpty(payments)) {
-            Payment payment = payments.get(0);
-
-            // 支付中 (非异步支付方式下)
-            if (payment.getPayStatus() == PayStatusCode.TRADE_PROGRESS) {
-                throw new PayIsProcessingException();
-            }
-
-            // 支付失败
-            List<Integer> trades = Arrays.asList(PayStatusCode.TRADE_FAIL, PayStatusCode.TRADE_CANCEL);
-            if (trades.contains(payment.getPayStatus())) {
-                throw new PayFailureException("支付失败或已经被撤销");
-            }
-
-            return payment;
-        }
-        return null;
+    /**
+     * 保存
+     */
+    public Payment save(Payment payment) {
+        return paymentManager.save(payment);
     }
 
-    /** 退款成功处理, 更新可退款信息 */
+    /**
+     * 更新支付记录
+     */
+    public Payment updateById(Payment payment) {
+        // 超时注册
+        this.registerExpiredTime(payment);
+        return paymentManager.updateById(payment);
+    }
+
+    /**
+     * 根据id查询
+     */
+    public Optional<Payment> findById(Serializable id) {
+        return paymentManager.findById(id);
+    }
+
+    /**
+     * 根据BusinessId查询
+     */
+    public Optional<Payment> findByBusinessId(String businessId) {
+        return paymentManager.findByBusinessId(businessId);
+    }
+
+    /**
+     * 退款成功处理, 更新可退款信息 不进行持久化
+     */
     public void updateRefundSuccess(Payment payment, BigDecimal amount, PayChannelEnum payChannelEnum) {
         // 删除旧有的退款记录, 替换退款完的新的
-        List<RefundableInfo> refundableInfos = payment.getRefundableInfoList();
+        List<RefundableInfo> refundableInfos = payment.getRefundableInfo();
         RefundableInfo refundableInfo = refundableInfos.stream()
-                .filter(o -> o.getPayChannel() == payChannelEnum.getNo())
-                .findFirst()
-                .orElseThrow(() -> new PayFailureException("数据不存在"));
+            .filter(o -> o.getPayChannel() == payChannelEnum.getNo())
+            .findFirst()
+            .orElseThrow(() -> new PayFailureException("数据不存在"));
         refundableInfos.remove(refundableInfo);
         refundableInfo.setAmount(refundableInfo.getAmount().subtract(amount));
         refundableInfos.add(refundableInfo);
-        payment.setRefundableInfo(JSONUtil.toJsonStr(refundableInfos));
+        payment.setRefundableInfo(refundableInfos);
     }
+
+    /**
+     * 支付单超时关闭事件注册, 失败重试3次, 间隔一秒
+     */
+    @Async("bigExecutor")
+    @Retryable(value = RetryableException.class)
+    public void registerExpiredTime(Payment payment) {
+        LocalDateTime expiredTime = payment.getExpiredTime();
+        // 支付中且有超时时间才会注册超时关闭时间
+        if (Objects.equals(payment.getPayStatus(), TRADE_PROGRESS) && Objects.nonNull(expiredTime)) {
+            try {
+                // 将过期时间添加到redis中, 往后延时一分钟
+                expiredTime = LocalDateTimeUtil.offset(expiredTime, 1, ChronoUnit.MINUTES);
+                expiredTimeRepository.store(payment.getId(), expiredTime);
+            }
+            catch (Exception e) {
+                log.error("注册支付单超时关闭失败");
+                throw new RetryableException();
+            }
+        }
+    }
+
 }

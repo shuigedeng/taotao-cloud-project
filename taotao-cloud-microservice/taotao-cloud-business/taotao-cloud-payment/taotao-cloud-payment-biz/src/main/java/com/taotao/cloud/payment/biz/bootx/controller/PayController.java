@@ -1,29 +1,14 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.controller;
 
-import com.taotao.cloud.payment.biz.bootx.core.pay.service.PayCancelService;
-import com.taotao.cloud.payment.biz.bootx.core.pay.service.PayRefundService;
-import com.taotao.cloud.payment.biz.bootx.core.pay.service.PayService;
-import com.taotao.cloud.payment.biz.bootx.core.pay.service.PaySyncService;
-import com.taotao.cloud.payment.biz.bootx.dto.pay.PayResult;
-import com.taotao.cloud.payment.biz.bootx.dto.payment.PaymentDto;
-import com.taotao.cloud.payment.biz.bootx.param.pay.PayParam;
-import com.taotao.cloud.payment.biz.bootx.param.refund.RefundParam;
+import cn.bootx.platform.common.core.rest.Res;
+import cn.bootx.platform.common.core.rest.ResResult;
+import cn.bootx.daxpay.core.pay.service.PayCancelService;
+import cn.bootx.daxpay.core.pay.service.PayRefundService;
+import cn.bootx.daxpay.core.pay.service.PayService;
+import cn.bootx.daxpay.core.pay.service.PaySyncService;
+import cn.bootx.daxpay.dto.pay.PayResult;
+import cn.bootx.daxpay.param.pay.PayParam;
+import cn.bootx.daxpay.param.refund.RefundParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,9 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/uni_pay")
 @AllArgsConstructor
 public class PayController {
+
     private final PayService payService;
+
     private final PayCancelService payCancelService;
+
     private final PayRefundService payRefundService;
+
     private final PaySyncService paySyncService;
 
     @Operation(summary = "支付")
@@ -69,8 +58,9 @@ public class PayController {
 
     @Operation(summary = "刷新指定业务id的支付单状态")
     @PostMapping("/syncByBusinessId")
-    public ResResult<PaymentDto> syncByBusinessId(@Parameter(description = "业务id") String businessId) {
-        return Res.ok(paySyncService.syncByBusinessId(businessId));
+    public ResResult<Void> syncByBusinessId(@Parameter(description = "业务id") String businessId) {
+        paySyncService.syncByBusinessId(businessId);
+        return Res.ok();
     }
 
     @Operation(summary = "退款")
@@ -86,4 +76,5 @@ public class PayController {
         payRefundService.refundByBusinessId(businessId);
         return Res.ok();
     }
+
 }

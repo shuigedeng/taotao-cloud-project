@@ -1,27 +1,18 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.dao;
 
+import cn.bootx.platform.common.core.rest.param.PageParam;
+import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
+import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
+import cn.bootx.platform.common.mybatisplus.util.MpUtil;
+import cn.bootx.daxpay.core.paymodel.wechat.entity.WeChatPayConfig;
+import cn.bootx.daxpay.param.paymodel.wechat.WeChatPayConfigParam;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.payment.biz.bootx.core.paymodel.wechat.entity.WeChatPayConfig;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 微信支付配置
@@ -33,21 +24,56 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class WeChatPayConfigManager extends BaseManager<WeChatPayConfigMapper, WeChatPayConfig> {
 
-    /** 获取启用的支付宝配置 */
-    public Optional<WeChatPayConfig> findEnable() {
-        return findByField(WeChatPayConfig::getActivity, Boolean.TRUE);
+    private Optional<WeChatPayConfig> weChatPayConfig;
+
+    @Override
+    public WeChatPayConfig saveOrUpdate(WeChatPayConfig entity) {
+        this.clearCache();
+        return super.saveOrUpdate(entity);
     }
 
-    public Optional<WeChatPayConfig> findByAppId(String appId) {
-        return findByField(WeChatPayConfig::getAppId, appId);
+    @Override
+    public WeChatPayConfig updateById(WeChatPayConfig weChatPayConfig) {
+        this.clearCache();
+        return super.updateById(weChatPayConfig);
     }
 
+    /**
+     * 获取启用的微信配置
+     */
+    public Optional<WeChatPayConfig> findActivity() {
+        if (Objects.isNull(weChatPayConfig)) {
+            weChatPayConfig = findByField(WeChatPayConfig::getActivity, Boolean.TRUE);
+        }
+        return weChatPayConfig;
+    }
+
+    /**
+     * 分页
+     */
+    public Page<WeChatPayConfig> page(PageParam pageParam, WeChatPayConfigParam param) {
+        Page<WeChatPayConfig> mpPage = MpUtil.getMpPage(pageParam, WeChatPayConfig.class);
+        return lambdaQuery().select(WeChatPayConfig.class, MpUtil::excludeBigField)
+            .like(StrUtil.isNotBlank(param.getName()), WeChatPayConfig::getName, param.getName())
+            .like(StrUtil.isNotBlank(param.getAppId()), WeChatPayConfig::getAppId, param.getAppId())
+            .like(StrUtil.isNotBlank(param.getAppId()), WeChatPayConfig::getMchId, param.getMchId())
+            .orderByDesc(MpIdEntity::getId)
+            .page(mpPage);
+    }
+
+    /**
+     * 清除所有的被启用的
+     */
     public void removeAllActivity() {
+        this.clearCache();
         lambdaUpdate().eq(WeChatPayConfig::getActivity, Boolean.TRUE).set(WeChatPayConfig::getActivity, Boolean.FALSE);
     }
 
-    public Page<WeChatPayConfig> page(PageQuery PageQuery) {
-        Page<WeChatPayConfig> mpPage = MpUtil.getMpPage(PageQuery, WeChatPayConfig.class);
-        return lambdaQuery().orderByDesc(MpBaseEntity::getId).page(mpPage);
+    /**
+     * 清除缓存
+     */
+    public void clearCache() {
+        weChatPayConfig = null;
     }
+
 }
