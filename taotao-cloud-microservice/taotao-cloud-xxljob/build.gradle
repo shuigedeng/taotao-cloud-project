@@ -20,7 +20,7 @@ dependencies {
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
     //https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
-    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2"
     implementation "mysql:mysql-connector-java"
     implementation "com.xuxueli:xxl-job-core"
 }
