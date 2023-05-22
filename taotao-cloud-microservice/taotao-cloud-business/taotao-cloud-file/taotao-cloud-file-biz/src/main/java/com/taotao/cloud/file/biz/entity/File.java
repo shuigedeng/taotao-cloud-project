@@ -20,9 +20,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -46,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = File.TABLE_NAME)
 @TableName(File.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = File.TABLE_NAME, comment = "文件表")
+//@jakarta.persistence.Table(appliesTo = File.TABLE_NAME, comment = "文件表")
 public class File extends BaseSuperEntity<File, Long> {
 
     public static final String TABLE_NAME = "tt_file";
