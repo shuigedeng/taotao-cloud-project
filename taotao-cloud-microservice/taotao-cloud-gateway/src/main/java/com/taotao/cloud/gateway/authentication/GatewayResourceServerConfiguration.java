@@ -30,8 +30,6 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
-import java.util.List;
-import java.util.Objects;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,6 +51,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 资源服务器配置
  *
@@ -63,164 +64,165 @@ import org.springframework.security.web.server.authorization.ServerAccessDeniedH
 @Configuration
 @EnableWebFluxSecurity
 @ConditionalOnProperty(
-        prefix = SecurityProperties.PREFIX,
-        name = "enabled",
-        havingValue = "true",
-        matchIfMissing = true)
+	prefix = SecurityProperties.PREFIX,
+	name = "enabled",
+	havingValue = "true",
+	matchIfMissing = true)
 public class GatewayResourceServerConfiguration {
 
-    @Autowired
-    private GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
+	@Autowired
+	private GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
 
-    @Autowired
-    private SecurityProperties securityProperties;
+	@Autowired
+	private SecurityProperties securityProperties;
 
-    @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+	@Bean
+	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 
-        ServerAuthenticationEntryPoint serverAuthenticationEntryPoint = (exchange, e) -> {
-            LogUtils.error(e, "user authentication error : {}", e.getMessage());
+		ServerAuthenticationEntryPoint serverAuthenticationEntryPoint = (exchange, e) -> {
+			LogUtils.error(e, "user authentication error : {}", e.getMessage());
 
-            if (e instanceof InvalidBearerTokenException) {
-                return ResponseUtils.fail(exchange, "无效的token");
-            }
+			if (e instanceof InvalidBearerTokenException) {
+				return ResponseUtils.fail(exchange, "无效的token");
+			}
 
-            if (e instanceof InvalidTokenException) {
-                return ResponseUtils.fail(exchange, e.getMessage());
-            }
+			if (e instanceof InvalidTokenException) {
+				return ResponseUtils.fail(exchange, e.getMessage());
+			}
 
-            return ResponseUtils.fail(exchange, ResultEnum.UNAUTHORIZED);
-        };
-        ServerAccessDeniedHandler serverAccessDeniedHandler = (exchange, e) -> {
-            LogUtils.error(e, "user access denied error : {}", e.getMessage());
-            return ResponseUtils.fail(exchange, ResultEnum.FORBIDDEN);
-        };
+			return ResponseUtils.fail(exchange, ResultEnum.UNAUTHORIZED);
+		};
+		ServerAccessDeniedHandler serverAccessDeniedHandler = (exchange, e) -> {
+			LogUtils.error(e, "user access denied error : {}", e.getMessage());
+			return ResponseUtils.fail(exchange, ResultEnum.FORBIDDEN);
+		};
 
-        // ServerBearerTokenAuthenticationConverter serverBearerTokenAuthenticationConverter =
-        //	new ServerBearerTokenAuthenticationConverter();
-        // serverBearerTokenAuthenticationConverter.setAllowUriQueryParameter(true);
+		// ServerBearerTokenAuthenticationConverter serverBearerTokenAuthenticationConverter =
+		//	new ServerBearerTokenAuthenticationConverter();
+		// serverBearerTokenAuthenticationConverter.setAllowUriQueryParameter(true);
 
-        // AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(
-        //	new CustomReactiveAuthenticationManager());
-        // authenticationWebFilter
-        //	.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
-        // authenticationWebFilter.setAuthenticationFailureHandler(
-        //	new ServerAuthenticationEntryPointFailureHandler(serverAuthenticationEntryPoint));
-        // authenticationWebFilter
-        //	.setAuthenticationSuccessHandler(new CustomServerAuthenticationSuccessHandler());
+		// AuthenticationWebFilter authenticationWebFilter = new AuthenticationWebFilter(
+		//	new CustomReactiveAuthenticationManager());
+		// authenticationWebFilter
+		//	.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
+		// authenticationWebFilter.setAuthenticationFailureHandler(
+		//	new ServerAuthenticationEntryPointFailureHandler(serverAuthenticationEntryPoint));
+		// authenticationWebFilter
+		//	.setAuthenticationSuccessHandler(new CustomServerAuthenticationSuccessHandler());
 
-        List<String> ignoreUrl = securityProperties.getIgnoreUrl();
+		List<String> ignoreUrl = securityProperties.getIgnoreUrl();
 
-        http.csrf()
-                .disable()
-                .httpBasic()
-                .disable()
-                .headers()
-                .frameOptions()
-                .disable()
-                .and()
-                .authorizeExchange()
-                .pathMatchers(ignoreUrl.toArray(new String[ignoreUrl.size()]))
-                .permitAll()
-                .pathMatchers(HttpMethod.OPTIONS)
-                .permitAll()
-                .matchers(EndpointRequest.toAnyEndpoint())
-                .permitAll()
-                .anyExchange()
-                .access(gatewayReactiveAuthorizationManager)
-                .and()
-                // .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
-                .exceptionHandling()
-                .authenticationEntryPoint(serverAuthenticationEntryPoint)
-                .accessDeniedHandler(serverAccessDeniedHandler)
-                .and()
-                .oauth2ResourceServer(oauth2ResourceServerCustomizer -> oauth2ResourceServerCustomizer
-                        .accessDeniedHandler(serverAccessDeniedHandler)
-                        .authenticationEntryPoint(serverAuthenticationEntryPoint)
-                        .bearerTokenConverter(exchange -> {
-                            ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver =
-                                    new ServerBearerTokenAuthenticationConverter();
-                            defaultBearerTokenResolver.setAllowUriQueryParameter(true);
-                            return defaultBearerTokenResolver.convert(exchange);
-                        })
-                        .jwt(jwt -> jwt.jwtDecoder(jwtDecoder())));
-        return http.build();
-    }
+		http.csrf(ServerHttpSecurity.CsrfSpec::disable)
+			.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+			.headers((headerCustomizer) -> {
+				headerCustomizer
+					.frameOptions(ServerHttpSecurity.HeaderSpec.FrameOptionsSpec::disable);
+			})
+			.authorizeExchange((authorizeExchangeCustomizer) -> {
+				authorizeExchangeCustomizer
+					.pathMatchers(ignoreUrl.toArray(new String[ignoreUrl.size()]))
+					.permitAll()
+					.pathMatchers(HttpMethod.OPTIONS)
+					.permitAll()
+					.matchers(EndpointRequest.toAnyEndpoint())
+					.permitAll()
+					.anyExchange()
+					.access(gatewayReactiveAuthorizationManager);
+			})
+			// .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+			.exceptionHandling((exceptionHandlingCustomizer) -> {
+				exceptionHandlingCustomizer
+					.authenticationEntryPoint(serverAuthenticationEntryPoint)
+					.accessDeniedHandler(serverAccessDeniedHandler);
+			})
+			.oauth2ResourceServer(oauth2ResourceServerCustomizer -> oauth2ResourceServerCustomizer
+				.accessDeniedHandler(serverAccessDeniedHandler)
+				.authenticationEntryPoint(serverAuthenticationEntryPoint)
+				.bearerTokenConverter(exchange -> {
+					ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver =
+						new ServerBearerTokenAuthenticationConverter();
+					defaultBearerTokenResolver.setAllowUriQueryParameter(true);
+					return defaultBearerTokenResolver.convert(exchange);
+				})
+				.jwt(jwt -> jwt.jwtDecoder(jwtDecoder()))
+			);
+		return http.build();
+	}
 
-    @Autowired(required = false)
-    private DiscoveryClient discoveryClient;
+	@Autowired(required = false)
+	private DiscoveryClient discoveryClient;
 
-    @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:#{null}}")
-    private String jwkSetUri;
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:#{null}}")
+	private String jwkSetUri;
 
-    @Bean
-    public ReactiveJwtDecoder jwtDecoder() {
-        if (Objects.nonNull(discoveryClient)) {
-            jwkSetUri = discoveryClient.getServices().stream()
-                    .filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
-                    .flatMap(s -> discoveryClient.getInstances(s).stream())
-                    .map(instance ->
-                            String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(), instance.getPort()))
-                    .findFirst()
-                    .orElse(jwkSetUri);
-        }
+	@Bean
+	public ReactiveJwtDecoder jwtDecoder() {
+		if (Objects.nonNull(discoveryClient)) {
+			jwkSetUri = discoveryClient.getServices().stream()
+				.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
+				.flatMap(s -> discoveryClient.getInstances(s).stream())
+				.map(instance ->
+					String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(), instance.getPort()))
+				.findFirst()
+				.orElse(jwkSetUri);
+		}
 
-        NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder.withJwkSetUri(
-                        FuncUtil.predicate(jwkSetUri, StrUtil::isBlank, "http://127.0.0.1:33336/oauth2/jwks"))
-                .jwsAlgorithm(SignatureAlgorithm.RS256)
-                .build();
+		NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder.withJwkSetUri(
+				FuncUtil.predicate(jwkSetUri, StrUtil::isBlank, "http://127.0.0.1:33336/oauth2/jwks"))
+			.jwsAlgorithm(SignatureAlgorithm.RS256)
+			.build();
 
-        // String issuerUri = null;
-        // Supplier<OAuth2TokenValidator<Jwt>> defaultValidator = (issuerUri != null)
-        //	? () -> JwtValidators.createDefaultWithIssuer(issuerUri) : JwtValidators::createDefault;
-        // nimbusReactiveJwtDecoder.setJwtValidator(defaultValidator.get());
+		// String issuerUri = null;
+		// Supplier<OAuth2TokenValidator<Jwt>> defaultValidator = (issuerUri != null)
+		//	? () -> JwtValidators.createDefaultWithIssuer(issuerUri) : JwtValidators::createDefault;
+		// nimbusReactiveJwtDecoder.setJwtValidator(defaultValidator.get());
 
-        nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-        return nimbusReactiveJwtDecoder;
+		nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
+		return nimbusReactiveJwtDecoder;
 
-        // return NimbusReactiveJwtDecoder
-        //	.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
-        //		"http://127.0.0.1:33336/oauth2/jwks"))
-        //	.build();
-    }
+		// return NimbusReactiveJwtDecoder
+		//	.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
+		//		"http://127.0.0.1:33336/oauth2/jwks"))
+		//	.build();
+	}
 
-    @Configuration
-    @ConditionalOnNacosDiscoveryEnabled
-    public static class NacosServiceListenerWithAuth implements InitializingBean {
+	@Configuration
+	@ConditionalOnNacosDiscoveryEnabled
+	public static class NacosServiceListenerWithAuth implements InitializingBean {
 
-        @Autowired
-        private NacosServiceManager nacosServiceManager;
+		@Autowired
+		private NacosServiceManager nacosServiceManager;
 
-        @Autowired
-        private NacosDiscoveryProperties properties;
+		@Autowired
+		private NacosDiscoveryProperties properties;
 
-        @Override
-        public void afterPropertiesSet() throws Exception {
-            nacosServiceManager
-                    .getNamingService()
-                    .subscribe(
-                            ServiceName.TAOTAO_CLOUD_AUTH,
-                            this.properties.getGroup(),
-                            List.of(this.properties.getClusterName()),
-                            event -> {
-                                if (event instanceof NamingEvent) {
-                                    List<Instance> instances = ((NamingEvent) event).getInstances();
-                                    if (instances.isEmpty()) {
-                                        return;
-                                    }
-                                    Instance instance = instances.get(0);
-                                    String jwkSetUri = String.format(
-                                            "http://%s:%s" + "/oauth2/jwks", instance.getIp(), instance.getPort());
+		@Override
+		public void afterPropertiesSet() throws Exception {
+			nacosServiceManager
+				.getNamingService()
+				.subscribe(
+					ServiceName.TAOTAO_CLOUD_AUTH,
+					this.properties.getGroup(),
+					List.of(this.properties.getClusterName()),
+					event -> {
+						if (event instanceof NamingEvent) {
+							List<Instance> instances = ((NamingEvent) event).getInstances();
+							if (instances.isEmpty()) {
+								return;
+							}
+							Instance instance = instances.get(0);
+							String jwkSetUri = String.format(
+								"http://%s:%s" + "/oauth2/jwks", instance.getIp(), instance.getPort());
 
-                                    NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder =
-                                            NimbusReactiveJwtDecoder.withJwkSetUri(jwkSetUri)
-                                                    .jwsAlgorithm(SignatureAlgorithm.RS256)
-                                                    .build();
-                                    nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-                                    ContextUtils.destroySingletonBean("reactiveJwtDecoder");
-                                    ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
-                                }
-                            });
-        }
-    }
+							NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder =
+								NimbusReactiveJwtDecoder.withJwkSetUri(jwkSetUri)
+									.jwsAlgorithm(SignatureAlgorithm.RS256)
+									.build();
+							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
+							ContextUtils.destroySingletonBean("reactiveJwtDecoder");
+							ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
+						}
+					});
+		}
+	}
 }
