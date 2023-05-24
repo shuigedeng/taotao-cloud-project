@@ -34,7 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientPropertiesRegistrationAdapter;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientPropertiesMapper;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
@@ -186,9 +186,8 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 		@Autowired(required = false) OAuth2ClientProperties properties) {
 		DelegateClientRegistrationRepository clientRegistrationRepository = new DelegateClientRegistrationRepository();
 		if (properties != null) {
-			List<ClientRegistration> registrations =
-				new ArrayList<>(OAuth2ClientPropertiesRegistrationAdapter.getClientRegistrations(properties)
-					.values());
+			Map<String, ClientRegistration> clientRegistrations = new OAuth2ClientPropertiesMapper(properties).asClientRegistrations();
+			List<ClientRegistration> registrations = new ArrayList<>(clientRegistrations.values());
 			registrations.forEach(clientRegistrationRepository::addClientRegistration);
 		}
 		return clientRegistrationRepository;
@@ -196,7 +195,8 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(
-		HttpSecurity http, DelegateClientRegistrationRepository delegateClientRegistrationRepository)
+		HttpSecurity http,
+		DelegateClientRegistrationRepository delegateClientRegistrationRepository)
 		throws Exception {
 		http.formLogin(formLoginConfigurer -> {
 				formLoginConfigurer
@@ -217,37 +217,42 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 			})
 			.logout((logoutCustomizer) -> {
 			})
-			.sessionManagement((sessionManagementCustomizer) -> {
-				sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+			.sessionManagement(sessionManagementCustomizer -> {
+				sessionManagementCustomizer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 			})
-			.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-				.requestMatchers(EndpointRequest.toAnyEndpoint())
-				.permitAll()
-				.requestMatchers(permitAllUrls)
-				.permitAll()
-				.requestMatchers("/webjars/**", "/user/login", "/login-error", "/index")
-				.permitAll()
-				.requestMatchers("/messages/**")
-				.access((authentication, object) -> {
-					// .access("hasAuthority('ADMIN')")
-					return null;
-				})
-				.anyRequest()
-				.authenticated())
+			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
+				authorizeHttpRequestsCustomizer
+					.requestMatchers(EndpointRequest.toAnyEndpoint())
+					.permitAll()
+					.requestMatchers(permitAllUrls)
+					.permitAll()
+					.requestMatchers("/webjars/**", "/user/login", "/login-error", "/index")
+					.permitAll()
+					.requestMatchers("/messages/**")
+					.access((authentication, object) -> {
+						// .access("hasAuthority('ADMIN')")
+						return null;
+					})
+					.anyRequest()
+					.authenticated();
+			})
 			// **************************************资源服务器配置***********************************************
-			.oauth2ResourceServer(oauth2ResourceServerCustomizer -> oauth2ResourceServerCustomizer
-				.accessDeniedHandler(accessDeniedHandler)
-				.authenticationEntryPoint(authenticationEntryPoint)
-				.bearerTokenResolver(bearerTokenResolver -> {
-					DefaultBearerTokenResolver defaultBearerTokenResolver = new DefaultBearerTokenResolver();
-					defaultBearerTokenResolver.setAllowFormEncodedBodyParameter(true);
-					defaultBearerTokenResolver.setAllowUriQueryParameter(true);
-					return defaultBearerTokenResolver.resolve(bearerTokenResolver);
-				})
-				.jwt(jwtCustomizer -> jwtCustomizer
-					.decoder(NimbusJwtDecoder.withJwkSetUri(jwkSetUri)
-						.build())
-					.jwtAuthenticationConverter(jwtAuthenticationConverter())))
+			.oauth2ResourceServer(oauth2ResourceServerCustomizer -> {
+				oauth2ResourceServerCustomizer
+					.accessDeniedHandler(accessDeniedHandler)
+					.authenticationEntryPoint(authenticationEntryPoint)
+					.bearerTokenResolver(bearerTokenResolver -> {
+						DefaultBearerTokenResolver defaultBearerTokenResolver = new DefaultBearerTokenResolver();
+						defaultBearerTokenResolver.setAllowFormEncodedBodyParameter(true);
+						defaultBearerTokenResolver.setAllowUriQueryParameter(true);
+						return defaultBearerTokenResolver.resolve(bearerTokenResolver);
+					})
+					.jwt(jwtCustomizer -> {
+						jwtCustomizer
+							.decoder(NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build())
+							.jwtAuthenticationConverter(jwtAuthenticationConverter());
+					});
+			})
 			// **************************************自定义登录配置***********************************************
 			.apply(new LoginFilterSecurityConfigurer<>())
 			// 用户+密码登录
@@ -306,14 +311,15 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 					.failureHandler(authenticationFailureHandler);
 			})
 			// 手机号码+短信登录
-			.phoneLogin(phoneLoginConfigurer ->
+			.phoneLogin(phoneLoginConfigurer -> {
 				// 验证码校验 1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 				phoneLoginConfigurer
 					// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
 					// 两个登录保持一致
 					.successHandler(authenticationSuccessHandler)
 					// 两个登录保持一致
-					.failureHandler(authenticationFailureHandler))
+					.failureHandler(authenticationFailureHandler);
+			})
 			// 微信公众号登录
 			.mpLogin(mpLoginConfigurer -> {
 				mpLoginConfigurer.mpUserDetailsService(new MpUserDetailsService() {
@@ -324,12 +330,14 @@ public class SystemSecurityConfiguration implements EnvironmentAware {
 				});
 			})
 			// 小程序登录 同时支持多个小程序
-			.miniAppLogin(miniAppLoginConfigurer -> miniAppLoginConfigurer
-				// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
-				// 两个登录保持一致
-				.successHandler(authenticationSuccessHandler)
-				// 两个登录保持一致
-				.failureHandler(authenticationFailureHandler))
+			.miniAppLogin(miniAppLoginConfigurer -> {
+				miniAppLoginConfigurer
+					// 生成JWT 返回  1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置
+					// 两个登录保持一致
+					.successHandler(authenticationSuccessHandler)
+					// 两个登录保持一致
+					.failureHandler(authenticationFailureHandler);
+			})
 			.and()
 			// **************************************oauth2登录配置***********************************************
 			.apply(new OAuth2ProviderConfigurer(delegateClientRegistrationRepository))
