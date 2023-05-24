@@ -4,19 +4,19 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/6.0.8-Spring-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/3.0.6-spring%20boot-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/2022.0.2-spring%20cloud-yellowgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/2022.0.0.0----RC2-spring%20cloud%20alibaba-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/1.11.2--2022.0.1-spring%20cloud%20tencent-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/4.1.91.Final-netty-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/6.0.3-spring%20security-brightgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/8.5.3-Elasticsearch-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/3.5.3.1-Mybatis%20Plus-yellow" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/4.1.0-knife4j-brightgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/Swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/3.20.1-redisson-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/5.8.18-hutool-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.0.9-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20boot-3.1.0-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud-2022.0.2-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0--------RC2-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.4--2022.0.1-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.92.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20security-6.1.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/elasticsearch-8.7.1-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/mybatis%20plus-3.5.3.1-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/knife4j-4.1.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.21.3-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-5.8.18-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -68,8 +68,8 @@ Requires:
 
 ```
 JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
-GRALE_VERSION >= 8.1
-IDEA_VERSION >= 2023.1
+GRALE_VERSION >= 8.1.1
+IDEA_VERSION >= 2023.1.2
 ```
 
 Gradle:
@@ -112,31 +112,31 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.8           
- Spring Boot          | 3.0.6           
+ Spring               | 6.0.9           
+ Spring Boot          | 3.1.0           
  Spring Cloud         | 2022.0.2        
  Spring Cloud Alibaba | 2022.0.0.0--RC2 
- Spring Cloud Tencent | 1.11.2-2022.0.1 
+ Spring Cloud Tencent | 1.11.4-2022.0.1 
  Seata                | 1.7.0-native-rc2
  Sentinel             | 1.8.6           
- Spring-kafka         | 6.0.5           
+ Spring-kafka         | 6.0.7           
  Roketmq              | 5.0.0           
- Spring Security      | 6.0.3           
+ Spring Security      | 6.1.0           
  Mybatis Plus         | 3.5.3.1         
  Hutool               | 5.8.18          
  Mysql                | 8.0.33          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
- Redisson             | 3.20.1          
+ Redisson             | 3.21.3          
  Lettuce              | 6.0.4.RELEASE   
- Elasticsearch        | 8.5.3           
+ Elasticsearch        | 8.7.1           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
  Guava                | 31.1-jre        
- Grpc                 | 1.54.1          
- Arthas               | 3.6.8           
- Dynamic-tp           | 1.1.2           
+ Grpc                 | 1.55.1          
+ Arthas               | 3.6.9           
+ Dynamic-tp           | 1.1.3           
  Elasticjob           | 3.0.3           
  Powerjob             | 4.3.2           
  Forest               | 1.5.31          

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.blazebit.persistence.CriteriaBuilderFactory;
-import com.blazebit.persistence.PagedList;
-import com.blazebit.persistence.querydsl.BlazeJPAQuery;
+//import com.blazebit.persistence.CriteriaBuilderFactory;
+//import com.blazebit.persistence.PagedList;
+//import com.blazebit.persistence.querydsl.BlazeJPAQuery;
 import com.google.common.collect.Lists;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
@@ -30,6 +30,7 @@ import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.data.jpa.model.SelectBooleanBuilder;
 import com.taotao.cloud.data.jpa.model.SelectBuilder;
+import com.taotao.cloud.data.mybatisplus.pagehelper.PagedList;
 import com.taotao.cloud.sys.api.model.page.DictPageQuery;
 import com.taotao.cloud.sys.api.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
@@ -74,7 +75,7 @@ public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, Dic
         implements IDictService {
 
     private final IDictItemService dictItemService;
-    private final CriteriaBuilderFactory criteriaBuilderFactory;
+//    private final CriteriaBuilderFactory criteriaBuilderFactory;
 
     private final QDict DICT = QDict.dict;
     private final OrderSpecifier<Integer> SORT_DESC = DICT.sortNum.desc();
@@ -265,19 +266,19 @@ public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, Dic
         System.out.println(dicts);
     }
 
-    public PagedList<Dict> testBlazeQuery(@NotNull Long deptId, Dict params, @NotNull Pageable page) {
-        // BooleanBuilder builder = SelectBuilder.booleanBuilder(params).getPredicate();
-        BooleanBuilder builder = SelectBuilder.booleanBuilder().getPredicate();
-        builder.and(DICT.id.eq(deptId));
-        return new BlazeJPAQuery<Dict>(cr().entityManager(), criteriaBuilderFactory)
-                .select(DICT)
-                .from(DICT)
-                .leftJoin(DICT)
-                .on(DICT.id.eq(DICT.id))
-                .where(builder)
-                .orderBy(DICT.id.desc())
-                .fetchPage((int) page.getOffset(), page.getPageSize());
-    }
+//    public PagedList<Dict> testBlazeQuery(@NotNull Long deptId, Dict params, @NotNull Pageable page) {
+//        // BooleanBuilder builder = SelectBuilder.booleanBuilder(params).getPredicate();
+//        BooleanBuilder builder = SelectBuilder.booleanBuilder().getPredicate();
+//        builder.and(DICT.id.eq(deptId));
+//        return new BlazeJPAQuery<Dict>(cr().entityManager(), criteriaBuilderFactory)
+//                .select(DICT)
+//                .from(DICT)
+//                .leftJoin(DICT)
+//                .on(DICT.id.eq(DICT.id))
+//                .where(builder)
+//                .orderBy(DICT.id.desc())
+//                .fetchPage((int) page.getOffset(), page.getPageSize());
+//    }
 
     public List<Dict> testBlazeQuery(Long projectId, Set<Long> ids, String name, Long limit) {
         if (Objects.isNull(projectId)) {
