@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.goods.biz.aop;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
+import lombok.AllArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,7 +26,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 /**
- * 订单操作日志
+ * 商品操作日志
  *
  * @author shuigedeng
  * @version 2022.04
@@ -32,11 +34,13 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
+@AllArgsConstructor
 public class GoodsOperationAspect {
 
-    @Autowired
-    private ApplicationEventPublisher publisher;
+    private final ApplicationEventPublisher publisher;
 
     @After("@annotation(com.taotao.cloud.goods.biz.aop.GoodsLogPoint)")
-    public void doAfter(JoinPoint joinPoint) {}
+    public void doAfter(JoinPoint joinPoint) {
+		LogUtils.info("");
+	}
 }

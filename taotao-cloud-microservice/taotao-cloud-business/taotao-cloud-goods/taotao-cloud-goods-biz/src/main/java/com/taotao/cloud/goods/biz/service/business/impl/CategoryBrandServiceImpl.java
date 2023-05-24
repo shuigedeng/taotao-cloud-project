@@ -44,28 +44,28 @@ public class CategoryBrandServiceImpl
 
     @Override
     public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {
-        return this.baseMapper.getCategoryBrandList(categoryId);
+        return im().getCategoryBrandList(categoryId);
     }
 
     @Override
     public boolean deleteByCategoryId(Long categoryId) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(CategoryBrand::getCategoryId, categoryId);
-        return this.baseMapper.delete(wrapper) > 0;
+        return im().delete(wrapper) > 0;
     }
 
     @Override
     public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
         wrapper.in(CategoryBrand::getBrandId, brandId);
-        return this.list(wrapper);
+        return list(wrapper);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
         // 删除分类品牌绑定信息
-        this.deleteByCategoryId(categoryId);
+        deleteByCategoryId(categoryId);
 
         // 绑定品牌信息
         if (!brandIds.isEmpty()) {

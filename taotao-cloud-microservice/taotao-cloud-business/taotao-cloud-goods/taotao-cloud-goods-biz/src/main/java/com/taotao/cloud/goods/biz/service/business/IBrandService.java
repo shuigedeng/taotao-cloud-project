@@ -47,7 +47,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 *
 	 * @param ids 品牌id
 	 */
-	boolean deleteBrands(List<String> ids);
+	boolean deleteBrands(List<Long> ids);
 
 	/**
 	 * 根据分类ID获取品牌列表
@@ -55,7 +55,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param categoryId 分类ID
 	 * @return 品牌列表
 	 */
-	List<Brand> getBrandsByCategory(String categoryId);
+	List<Brand> getBrandsByCategory(Long categoryId);
 
 	/**
 	 * 根据分类ID获取品牌列表
@@ -63,7 +63,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param categoryIds 分类ID
 	 * @return 品牌列表
 	 */
-	List<Map<String, Object>> getBrandsMapsByCategory(List<String> categoryIds, String columns);
+	List<Map<String, Object>> getBrandsMapsByCategory(List<Long> categoryIds, String columns);
 
 	/**
 	 * 添加品牌
@@ -88,5 +88,5 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param disable 是否不可用
 	 * @return 更新结果
 	 */
-	boolean brandDisable(String brandId, boolean disable);
+	boolean brandDisable(Long brandId, boolean disable);
 }
