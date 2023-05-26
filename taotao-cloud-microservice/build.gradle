@@ -50,7 +50,6 @@ subprojects {
         //https://search.maven.org/artifact/com.apifan.common/common-random/
         testImplementation("com.apifan.common:common-random:1.0.21")
 
-
         implementation "io.soabase.record-builder:record-builder-core"
         annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
 
