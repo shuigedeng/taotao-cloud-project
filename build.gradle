@@ -29,7 +29,7 @@ buildscript {
         querydslAptVersion = "5.0.0"
         mapstructProcessorVersion = "1.5.5.Final"
         lombokMapstructBindingVersion = "0.2.0"
-        lombokVersion = "1.18.26"
+        lombokVersion = "1.18.28"
         recordBuilderVersion = "36"
     }
 
@@ -163,7 +163,7 @@ plugins {
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
-    id "com.diffplug.spotless" version "6.18.0"
+    id "com.diffplug.spotless" version "6.19.0"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
