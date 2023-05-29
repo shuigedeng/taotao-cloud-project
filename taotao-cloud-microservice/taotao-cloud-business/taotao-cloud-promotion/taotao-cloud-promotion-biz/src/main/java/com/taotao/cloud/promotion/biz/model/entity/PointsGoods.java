@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = PointsGoods.TABLE_NAME)
 @TableName(PointsGoods.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = PointsGoods.TABLE_NAME, comment = "积分商品实体类")
+// @org.hibernate.annotations.Table(appliesTo = PointsGoods.TABLE_NAME, comment = "积分商品实体类")
 public class PointsGoods extends BasePromotions<PointsGoods, Long> {
 
     public static final String TABLE_NAME = "tt_points_goods";

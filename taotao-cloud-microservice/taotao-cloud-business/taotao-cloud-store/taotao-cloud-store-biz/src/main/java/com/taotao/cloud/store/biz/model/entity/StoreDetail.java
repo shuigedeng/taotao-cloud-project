@@ -51,7 +51,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = StoreDetail.TABLE_NAME)
 @TableName(StoreDetail.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-@org.hibernate.annotations.Table(appliesTo = StoreDetail.TABLE_NAME, comment = "店铺详细表")
+// @org.hibernate.annotations.Table(appliesTo = StoreDetail.TABLE_NAME, comment = "店铺详细表")
 public class StoreDetail extends BaseSuperEntity<StoreDetail, String> {
 
     public static final String TABLE_NAME = "tt_store_detail";

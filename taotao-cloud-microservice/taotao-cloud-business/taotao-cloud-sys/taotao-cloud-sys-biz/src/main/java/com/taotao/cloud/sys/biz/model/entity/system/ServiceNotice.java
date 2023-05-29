@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = ServiceNotice.TABLE_NAME)
 @TableName(ServiceNotice.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = ServiceNotice.TABLE_NAME, comment = "服务订阅消息表")
+// @org.hibernate.annotations.Table(appliesTo = ServiceNotice.TABLE_NAME, comment = "服务订阅消息表")
 public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
 
     public static final String TABLE_NAME = "tt_service_notice";

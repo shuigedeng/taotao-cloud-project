@@ -51,7 +51,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = Org.TABLE_NAME)
 @TableName(value = Org.TABLE_NAME, autoResultMap = true)
-@org.hibernate.annotations.Table(appliesTo = Org.TABLE_NAME, comment = "组织信息表")
+// @org.hibernate.annotations.Table(appliesTo = Org.TABLE_NAME, comment = "组织信息表")
 public class Org extends BaseSuperEntity<Org, Long> {
 
     public static final String TABLE_NAME = "tt_org";

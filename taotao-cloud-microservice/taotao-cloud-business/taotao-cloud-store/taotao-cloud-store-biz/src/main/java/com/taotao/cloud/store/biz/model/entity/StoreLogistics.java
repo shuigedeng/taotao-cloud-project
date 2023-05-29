@@ -43,7 +43,7 @@ import org.hibernate.Hibernate;
 @Table(name = StoreLogistics.TABLE_NAME)
 @TableName(StoreLogistics.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-@org.hibernate.annotations.Table(appliesTo = StoreLogistics.TABLE_NAME, comment = "店铺-物流公司设置表")
+// @org.hibernate.annotations.Table(appliesTo = StoreLogistics.TABLE_NAME, comment = "店铺-物流公司设置表")
 public class StoreLogistics extends BaseSuperEntity<StoreLogistics, String> {
 
     public static final String TABLE_NAME = "tt_store_logistics";

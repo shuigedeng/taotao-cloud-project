@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = SeckillApply.TABLE_NAME)
 @TableName(SeckillApply.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = SeckillApply.TABLE_NAME, comment = "秒杀活动申请实体类")
+// @org.hibernate.annotations.Table(appliesTo = SeckillApply.TABLE_NAME, comment = "秒杀活动申请实体类")
 public class SeckillApply extends BaseSuperEntity<SeckillApply, Long> {
 
     public static final String TABLE_NAME = "tt_seckill_apply";

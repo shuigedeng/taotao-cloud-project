@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = CategorySpecification.TABLE_NAME)
 @TableName(CategorySpecification.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = CategorySpecification.TABLE_NAME, comment = "商品分类规格关联表")
+// @org.hibernate.annotations.Table(appliesTo = CategorySpecification.TABLE_NAME, comment = "商品分类规格关联表")
 public class CategorySpecification extends SuperEntity<CategorySpecification, Long> {
 
     public static final String TABLE_NAME = "tt_category_specification";

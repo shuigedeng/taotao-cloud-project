@@ -57,7 +57,7 @@ import org.hibernate.Hibernate;
 @Table(name = Dict.TABLE_NAME)
 @TableName(Dict.TABLE_NAME)
 @EntityListeners({Dict.DictEntityListener.class})
-@org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
+// @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
 public class Dict extends BaseSuperEntity<Dict, Long> {
 
     public static final String TABLE_NAME = "tt_dict";

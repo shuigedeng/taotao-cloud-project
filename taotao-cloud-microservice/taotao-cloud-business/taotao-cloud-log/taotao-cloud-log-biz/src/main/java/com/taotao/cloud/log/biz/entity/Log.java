@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Log.TABLE_NAME)
 @TableName(Log.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Log.TABLE_NAME, comment = "日志表")
+// @org.hibernate.annotations.Table(appliesTo = Log.TABLE_NAME, comment = "日志表")
 public class Log extends BaseSuperEntity<Log, Long> {
 
     public static final String TABLE_NAME = "tt_log";

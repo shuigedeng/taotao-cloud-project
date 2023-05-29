@@ -44,7 +44,7 @@ import org.apache.commons.lang3.ArrayUtils;
 @Entity
 @Table(name = GenTable.TABLE_NAME)
 @TableName(GenTable.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = GenTable.TABLE_NAME, comment = "业务表")
+// @org.hibernate.annotations.Table(appliesTo = GenTable.TABLE_NAME, comment = "业务表")
 public class GenTable extends BaseSuperEntity<GenTable, Long> {
 
     public static final String TABLE_NAME = "tt_gen_table";

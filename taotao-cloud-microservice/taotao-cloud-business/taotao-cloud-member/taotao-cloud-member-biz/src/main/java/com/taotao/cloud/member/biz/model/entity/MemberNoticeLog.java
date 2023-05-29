@@ -43,7 +43,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberNoticeLog.TABLE_NAME)
 @TableName(MemberNoticeLog.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = MemberNoticeLog.TABLE_NAME, comment = "会员消息发送日志表")
+// @org.hibernate.annotations.Table(appliesTo = MemberNoticeLog.TABLE_NAME, comment = "会员消息发送日志表")
 public class MemberNoticeLog extends BaseSuperEntity<MemberNoticeLog, Long> {
 
     public static final String TABLE_NAME = "tt_member_notice_log";

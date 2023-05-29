@@ -39,7 +39,7 @@ import lombok.*;
 @Entity
 @Table(name = LoginLogDb.TABLE_NAME)
 @TableName(LoginLogDb.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = LoginLogDb.TABLE_NAME, comment = "app配置表")
+// @org.hibernate.annotations.Table(appliesTo = LoginLogDb.TABLE_NAME, comment = "app配置表")
 public class LoginLogDb extends BaseSuperEntity<LoginLogDb, Long> {
 
     public static final String TABLE_NAME = "tt_login_log";

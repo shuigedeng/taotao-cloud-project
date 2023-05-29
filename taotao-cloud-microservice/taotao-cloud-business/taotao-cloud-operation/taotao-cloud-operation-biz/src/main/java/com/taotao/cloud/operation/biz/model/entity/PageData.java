@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = PageData.TABLE_NAME)
 @TableName(PageData.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = PageData.TABLE_NAME, comment = "页面数据表")
+// @org.hibernate.annotations.Table(appliesTo = PageData.TABLE_NAME, comment = "页面数据表")
 public class PageData extends BaseSuperEntity<PageData, Long> {
 
     public static final String TABLE_NAME = "tt_page_data";

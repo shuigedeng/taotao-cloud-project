@@ -36,7 +36,7 @@ import lombok.ToString;
 @Entity
 @Table(name = QuartzJobLog.TABLE_NAME)
 @TableName(QuartzJobLog.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = QuartzJobLog.TABLE_NAME, comment = "Quartz任务日志表")
+// @org.hibernate.annotations.Table(appliesTo = QuartzJobLog.TABLE_NAME, comment = "Quartz任务日志表")
 public class QuartzJobLog extends BaseSuperEntity<QuartzJobLog, Long> {
 
     public static final String TABLE_NAME = "tt_quartz_job_log";

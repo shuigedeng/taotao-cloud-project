@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = OrderComplaintCommunication.TABLE_NAME)
 @TableName(OrderComplaintCommunication.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = OrderComplaintCommunication.TABLE_NAME, comment = "订单交易投诉通信表")
+// @org.hibernate.annotations.Table(appliesTo = OrderComplaintCommunication.TABLE_NAME, comment = "订单交易投诉通信表")
 public class OrderComplaintCommunication extends BaseSuperEntity<OrderComplaintCommunication, Long> {
 
     public static final String TABLE_NAME = "tt_order_complaint_communication";

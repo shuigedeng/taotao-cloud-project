@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = CategoryParameterGroup.TABLE_NAME)
 @TableName(CategoryParameterGroup.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = CategoryParameterGroup.TABLE_NAME, comment = "分类绑定参数组表")
+// @org.hibernate.annotations.Table(appliesTo = CategoryParameterGroup.TABLE_NAME, comment = "分类绑定参数组表")
 public class CategoryParameterGroup extends BaseSuperEntity<CategoryParameterGroup, Long> {
 
     public static final String TABLE_NAME = "tt_category_parameter_group";

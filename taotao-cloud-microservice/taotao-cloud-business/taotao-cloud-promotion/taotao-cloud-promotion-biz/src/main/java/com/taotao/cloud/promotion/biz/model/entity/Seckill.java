@@ -51,7 +51,7 @@ import org.springframework.beans.BeanUtils;
 @Entity
 @Table(name = Seckill.TABLE_NAME)
 @TableName(Seckill.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Seckill.TABLE_NAME, comment = "秒杀活动实体类")
+// @org.hibernate.annotations.Table(appliesTo = Seckill.TABLE_NAME, comment = "秒杀活动实体类")
 public class Seckill extends BasePromotions<Seckill, Long> {
 
     public static final String TABLE_NAME = "tt_seckill";

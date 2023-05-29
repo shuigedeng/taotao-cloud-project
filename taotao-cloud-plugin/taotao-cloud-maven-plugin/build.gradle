@@ -22,7 +22,7 @@ dependencies {
     implementation 'org.apache.maven:maven-model:3.9.1'
     implementation 'org.apache.maven:maven-plugin-api:3.9.1'
 
-    implementation "com.google.guava:guava:31.1-jre"
+    implementation "com.google.guava:guava:32.0.0-jre"
 
     compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.8.1'
 }

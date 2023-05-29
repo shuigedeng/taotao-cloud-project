@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @NoArgsConstructor
 @Entity
 @Table(name = "tt_cart")
-@org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "购物车表")
+// @org.hibernate.annotations.Table(appliesTo = "tt_cart", comment = "购物车表")
 public class Cart extends JpaSuperEntity<Long> {
 
     @Serial

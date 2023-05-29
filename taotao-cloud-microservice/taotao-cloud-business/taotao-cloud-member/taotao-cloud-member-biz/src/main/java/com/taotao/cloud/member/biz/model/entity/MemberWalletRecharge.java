@@ -45,7 +45,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberWalletRecharge.TABLE_NAME)
 @TableName(MemberWalletRecharge.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = MemberWalletRecharge.TABLE_NAME, comment = "预存款充值记录表")
+// @org.hibernate.annotations.Table(appliesTo = MemberWalletRecharge.TABLE_NAME, comment = "预存款充值记录表")
 public class MemberWalletRecharge extends BaseSuperEntity<MemberWalletRecharge, Long> {
 
     public static final String TABLE_NAME = "tt_member_wallet_recharge";
