@@ -77,7 +77,7 @@ dependencies {
 
     //百度人脸识别以及登录
     //https://search.maven.org/artifact/com.baidu.aip/java-sdk
-    implementation("com.baidu.aip:java-sdk:4.16.14") {
+    implementation("com.baidu.aip:java-sdk:4.16.16") {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"

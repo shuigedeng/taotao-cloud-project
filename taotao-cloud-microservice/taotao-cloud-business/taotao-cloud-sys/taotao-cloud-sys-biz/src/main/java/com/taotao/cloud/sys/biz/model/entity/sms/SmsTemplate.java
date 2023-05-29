@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = SmsTemplate.TABLE_NAME)
 @TableName(SmsTemplate.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = SmsTemplate.TABLE_NAME, comment = "短信模板表")
+// @org.hibernate.annotations.Table(appliesTo = SmsTemplate.TABLE_NAME, comment = "短信模板表")
 public class SmsTemplate extends BaseSuperEntity<SmsTemplate, Long> {
 
     public static final String TABLE_NAME = "tt_tt_sms_template";

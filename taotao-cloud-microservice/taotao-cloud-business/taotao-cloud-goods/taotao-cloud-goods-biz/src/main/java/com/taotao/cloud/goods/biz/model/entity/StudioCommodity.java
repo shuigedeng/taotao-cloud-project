@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = StudioCommodity.TABLE_NAME)
 @TableName(StudioCommodity.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = StudioCommodity.TABLE_NAME, comment = "直播间商品表")
+// @org.hibernate.annotations.Table(appliesTo = StudioCommodity.TABLE_NAME, comment = "直播间商品表")
 public class StudioCommodity extends BaseSuperEntity<StudioCommodity, Long> {
 
     public static final String TABLE_NAME = "tt_studio_commodity";

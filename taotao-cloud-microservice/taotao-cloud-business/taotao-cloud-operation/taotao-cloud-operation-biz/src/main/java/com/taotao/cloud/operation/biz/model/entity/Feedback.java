@@ -51,7 +51,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Feedback.TABLE_NAME)
 @TableName(Feedback.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Feedback.TABLE_NAME, comment = "意见反馈表")
+// @org.hibernate.annotations.Table(appliesTo = Feedback.TABLE_NAME, comment = "意见反馈表")
 public class Feedback extends BaseSuperEntity<Feedback, Long> {
 
     public static final String TABLE_NAME = "tt_feedback";

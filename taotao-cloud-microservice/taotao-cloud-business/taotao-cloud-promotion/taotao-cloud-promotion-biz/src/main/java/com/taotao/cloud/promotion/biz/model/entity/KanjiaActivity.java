@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = KanjiaActivity.TABLE_NAME)
 @TableName(KanjiaActivity.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = KanjiaActivity.TABLE_NAME, comment = "砍价活动参与实体类")
+// @org.hibernate.annotations.Table(appliesTo = KanjiaActivity.TABLE_NAME, comment = "砍价活动参与实体类")
 public class KanjiaActivity extends BaseSuperEntity<KanjiaActivity, Long> {
 
     public static final String TABLE_NAME = "tt_kanjia_activity";

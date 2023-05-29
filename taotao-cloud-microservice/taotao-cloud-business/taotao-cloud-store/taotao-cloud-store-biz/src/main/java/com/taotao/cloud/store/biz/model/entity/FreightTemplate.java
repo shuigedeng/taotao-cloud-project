@@ -50,7 +50,7 @@ import org.hibernate.Hibernate;
 @Table(name = FreightTemplate.TABLE_NAME)
 @TableName(FreightTemplate.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-@org.hibernate.annotations.Table(appliesTo = FreightTemplate.TABLE_NAME, comment = "运费模板表")
+// @org.hibernate.annotations.Table(appliesTo = FreightTemplate.TABLE_NAME, comment = "运费模板表")
 public class FreightTemplate extends BaseSuperEntity<FreightTemplate, String> {
 
     public static final String TABLE_NAME = "tt_freight_template";

@@ -44,7 +44,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberWithdrawApply.TABLE_NAME)
 @TableName(MemberWithdrawApply.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = MemberWithdrawApply.TABLE_NAME, comment = "会员提现申请表")
+// @org.hibernate.annotations.Table(appliesTo = MemberWithdrawApply.TABLE_NAME, comment = "会员提现申请表")
 public class MemberWithdrawApply extends BaseSuperEntity<MemberWithdrawApply, Long> {
 
     public static final String TABLE_NAME = "tt_member_withdraw_apply";

@@ -53,7 +53,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = PromotionGoods.TABLE_NAME)
 @TableName(PromotionGoods.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = PromotionGoods.TABLE_NAME, comment = "促销商品")
+// @org.hibernate.annotations.Table(appliesTo = PromotionGoods.TABLE_NAME, comment = "促销商品")
 public class PromotionGoods extends BaseSuperEntity<PromotionGoods, Long> {
 
     public static final String TABLE_NAME = "tt_promotion_goods";

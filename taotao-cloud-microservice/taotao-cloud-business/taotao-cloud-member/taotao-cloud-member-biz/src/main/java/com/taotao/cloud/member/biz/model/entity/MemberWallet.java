@@ -43,7 +43,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberWallet.TABLE_NAME)
 @TableName(MemberWallet.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = MemberWallet.TABLE_NAME, comment = "会员预存款表")
+// @org.hibernate.annotations.Table(appliesTo = MemberWallet.TABLE_NAME, comment = "会员预存款表")
 public class MemberWallet extends BaseSuperEntity<MemberWallet, Long> {
 
     public static final String TABLE_NAME = "tt_member_wallet";

@@ -29,7 +29,7 @@ import lombok.Builder;
  * @since 2020/5/2 11:17
  */
 @Table(name = "oauth_client_details")
-@org.hibernate.annotations.Table(appliesTo = "oauth_client_details", comment = "客户端表")
+// @org.hibernate.annotations.Table(appliesTo = "oauth_client_details", comment = "客户端表")
 public class Client extends JpaSuperEntity {
 
     /** 用于唯一标识每一个客户端(client) */

@@ -44,7 +44,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = RequestPath.TABLE_NAME)
 @TableName(RequestPath.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = RequestPath.TABLE_NAME, comment = "权限资源表(url请求)")
+// @org.hibernate.annotations.Table(appliesTo = RequestPath.TABLE_NAME, comment = "权限资源表(url请求)")
 public class RequestPath extends BaseSuperEntity<RequestPath, Long> {
 
     public static final String TABLE_NAME = "tt_request_path";

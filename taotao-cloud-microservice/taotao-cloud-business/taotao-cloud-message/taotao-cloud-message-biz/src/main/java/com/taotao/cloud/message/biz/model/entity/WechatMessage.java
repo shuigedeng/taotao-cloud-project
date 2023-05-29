@@ -39,7 +39,7 @@ import lombok.ToString;
 @Table(name = WechatMessage.TABLE_NAME)
 @TableName(WechatMessage.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-@org.hibernate.annotations.Table(appliesTo = WechatMessage.TABLE_NAME, comment = "微信消息表")
+// @org.hibernate.annotations.Table(appliesTo = WechatMessage.TABLE_NAME, comment = "微信消息表")
 public class WechatMessage extends BaseSuperEntity<WechatMessage, Long> {
 
     public static final String TABLE_NAME = "tt_wechat_message";

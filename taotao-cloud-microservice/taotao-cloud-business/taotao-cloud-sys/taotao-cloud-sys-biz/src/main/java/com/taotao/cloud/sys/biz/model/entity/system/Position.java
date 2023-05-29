@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Position.TABLE_NAME)
 @TableName(Position.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Position.TABLE_NAME, comment = "岗位表")
+// @org.hibernate.annotations.Table(appliesTo = Position.TABLE_NAME, comment = "岗位表")
 public class Position extends BaseSuperEntity<Position, Long> {
 
     public static final String TABLE_NAME = "tt_position";

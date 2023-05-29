@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = UserRelation.TABLE_NAME)
 @TableName(UserRelation.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = UserRelation.TABLE_NAME, comment = "用户-关系第三方表")
+// @org.hibernate.annotations.Table(appliesTo = UserRelation.TABLE_NAME, comment = "用户-关系第三方表")
 public class UserRelation extends SuperEntity<UserRelation, Long> {
 
     public static final String TABLE_NAME = "tt_user_relation";

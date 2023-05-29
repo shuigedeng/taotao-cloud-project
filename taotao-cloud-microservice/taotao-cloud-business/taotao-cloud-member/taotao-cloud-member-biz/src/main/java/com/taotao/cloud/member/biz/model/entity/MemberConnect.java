@@ -41,7 +41,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberConnect.TABLE_NAME)
 @TableName(MemberConnect.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = MemberConnect.TABLE_NAME, comment = "联合登陆表表")
+// @org.hibernate.annotations.Table(appliesTo = MemberConnect.TABLE_NAME, comment = "联合登陆表表")
 public class MemberConnect extends BaseSuperEntity<MemberConnect, Long> {
 
     public static final String TABLE_NAME = "tt_member_connect";

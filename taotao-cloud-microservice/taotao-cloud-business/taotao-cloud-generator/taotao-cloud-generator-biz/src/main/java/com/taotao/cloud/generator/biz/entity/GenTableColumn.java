@@ -39,7 +39,7 @@ import org.apache.ibatis.type.JdbcType;
 @Entity
 @Table(name = GenTableColumn.TABLE_NAME)
 @TableName(GenTableColumn.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = GenTableColumn.TABLE_NAME, comment = "代码生成业务字段表")
+// @org.hibernate.annotations.Table(appliesTo = GenTableColumn.TABLE_NAME, comment = "代码生成业务字段表")
 public class GenTableColumn extends BaseSuperEntity<GenTableColumn, Long> {
 
     public static final String TABLE_NAME = "tt_gen_table_column";

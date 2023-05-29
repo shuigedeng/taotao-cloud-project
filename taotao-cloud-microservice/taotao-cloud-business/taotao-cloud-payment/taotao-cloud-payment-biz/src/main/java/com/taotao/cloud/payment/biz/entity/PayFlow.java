@@ -32,7 +32,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "tt_pay_flow")
-@org.hibernate.annotations.Table(appliesTo = "tt_pay_flow", comment = "支付流水表")
+// @org.hibernate.annotations.Table(appliesTo = "tt_pay_flow", comment = "支付流水表")
 public class PayFlow extends JpaSuperEntity {
 
     private static final long serialVersionUID = 6887296988458221221L;

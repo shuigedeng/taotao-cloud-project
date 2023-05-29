@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Parameters.TABLE_NAME)
 @TableName(Parameters.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Parameters.TABLE_NAME, comment = "商品参数表")
+// @org.hibernate.annotations.Table(appliesTo = Parameters.TABLE_NAME, comment = "商品参数表")
 public class Parameters extends BaseSuperEntity<Parameters, Long> {
 
     public static final String TABLE_NAME = "tt_parameters";

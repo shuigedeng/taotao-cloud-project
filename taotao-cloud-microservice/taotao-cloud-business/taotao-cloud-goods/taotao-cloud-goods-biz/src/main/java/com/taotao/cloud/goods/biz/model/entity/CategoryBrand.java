@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = CategoryBrand.TABLE_NAME)
 @TableName(CategoryBrand.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = CategoryBrand.TABLE_NAME, comment = "商品分类品牌关联表")
+// @org.hibernate.annotations.Table(appliesTo = CategoryBrand.TABLE_NAME, comment = "商品分类品牌关联表")
 public class CategoryBrand extends SuperEntity<CategoryBrand, Long> {
 
     public static final String TABLE_NAME = "tt_category_brand";

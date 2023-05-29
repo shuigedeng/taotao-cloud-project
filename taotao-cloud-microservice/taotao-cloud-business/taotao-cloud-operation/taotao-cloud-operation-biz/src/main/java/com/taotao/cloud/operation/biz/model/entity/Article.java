@@ -52,7 +52,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Article.TABLE_NAME)
 @TableName(Article.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Article.TABLE_NAME, comment = "文章表")
+// @org.hibernate.annotations.Table(appliesTo = Article.TABLE_NAME, comment = "文章表")
 public class Article extends BaseSuperEntity<Article, Long> {
 
     public static final String TABLE_NAME = "tt_article";

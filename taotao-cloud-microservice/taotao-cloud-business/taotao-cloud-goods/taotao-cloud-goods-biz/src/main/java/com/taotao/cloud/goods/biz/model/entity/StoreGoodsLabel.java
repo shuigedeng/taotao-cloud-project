@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = StoreGoodsLabel.TABLE_NAME)
 @TableName(StoreGoodsLabel.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = StoreGoodsLabel.TABLE_NAME, comment = "店铺商品标签表")
+// @org.hibernate.annotations.Table(appliesTo = StoreGoodsLabel.TABLE_NAME, comment = "店铺商品标签表")
 public class StoreGoodsLabel extends BaseSuperEntity<StoreGoodsLabel, Long> {
 
     public static final String TABLE_NAME = "tt_store_goods_label";

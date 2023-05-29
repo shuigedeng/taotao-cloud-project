@@ -76,7 +76,7 @@ configurations {
 }
 
 mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
-description = "基于spring-cloud-gateway网关中心"
+description = "网关中心"
 archivesBaseName = 'taotao-cloud-gateway'
 
 //apache-shenyu网关中心配置

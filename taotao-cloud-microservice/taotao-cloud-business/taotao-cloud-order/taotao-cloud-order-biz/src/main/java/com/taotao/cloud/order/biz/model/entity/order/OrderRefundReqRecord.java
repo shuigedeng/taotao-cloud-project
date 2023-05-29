@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @TableName(OrderRefundReqRecord.TABLE_NAME)
 @Table(name = OrderRefundReqRecord.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = OrderRefundReqRecord.TABLE_NAME, comment = "售后退款操作记录表")
+// @org.hibernate.annotations.Table(appliesTo = OrderRefundReqRecord.TABLE_NAME, comment = "售后退款操作记录表")
 public class OrderRefundReqRecord extends BaseSuperEntity<OrderRefundReqRecord, Long> {
 
     public static final String TABLE_NAME = "order_refund_req_record";

@@ -65,7 +65,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Order.TABLE_NAME)
 @TableName(Order.TABLE_NAME)
-@org.hibernate.annotations.Table(appliesTo = Order.TABLE_NAME, comment = "订单表")
+// @org.hibernate.annotations.Table(appliesTo = Order.TABLE_NAME, comment = "订单表")
 public class Order extends BaseSuperEntity<Order, Long> {
 
     public static final String TABLE_NAME = "tt_order";
