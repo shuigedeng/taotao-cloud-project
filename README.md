@@ -6,7 +6,7 @@
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
   <img src="https://img.shields.io/badge/spring-6.0.9-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20boot-3.1.0-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20cloud-2022.0.2-yellowgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud-2022.0.3-yellowgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0--------RC2-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.4--2022.0.1-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/netty-4.1.92.Final-blue" alt="Downloads"/>
@@ -77,7 +77,7 @@ Gradle:
 ```
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.05"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2023.06"
   }
 }
 
@@ -92,7 +92,7 @@ Maven:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2023.05</version>
+      <version>2023.06</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -355,4 +355,5 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-cloud-starter-websocket-netty'
 +--- Project ':taotao-cloud-starter-xss'
 \--- Project ':taotao-cloud-starter-zookeeper'
+
 ```
