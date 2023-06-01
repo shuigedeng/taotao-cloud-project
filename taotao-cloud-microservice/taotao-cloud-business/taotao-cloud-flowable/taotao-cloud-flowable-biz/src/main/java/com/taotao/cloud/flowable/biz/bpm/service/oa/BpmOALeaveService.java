@@ -20,7 +20,7 @@ import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.oa.vo.BpmOALeaveCreateReqVO;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.oa.vo.BpmOALeavePageReqVO;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.oa.BpmOALeaveDO;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 请假申请 Service 接口

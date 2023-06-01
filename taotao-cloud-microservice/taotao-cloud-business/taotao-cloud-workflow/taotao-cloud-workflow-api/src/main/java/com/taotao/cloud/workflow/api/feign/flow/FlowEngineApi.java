@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.api.feign.flow;
 
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import jnpf.engine.entity.FlowEngineEntity;
 import jnpf.engine.model.flowengine.FlowAppPageModel;
 import jnpf.engine.model.flowengine.FlowPagination;

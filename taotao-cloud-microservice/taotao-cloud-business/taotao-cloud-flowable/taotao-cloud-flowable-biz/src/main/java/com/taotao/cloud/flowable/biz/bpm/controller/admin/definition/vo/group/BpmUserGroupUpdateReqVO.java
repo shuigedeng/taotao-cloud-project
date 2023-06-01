@@ -17,7 +17,7 @@
 package com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.group;
 
 import io.swagger.annotations.*;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @ApiModel("管理后台 - 用户组更新 Request VO")

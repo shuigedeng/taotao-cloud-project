@@ -22,7 +22,7 @@ import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.group.Bp
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.group.BpmUserGroupUpdateReqVO;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmUserGroupDO;
 import java.util.*;
-import javax.validation.*;
+import jakarta.validation.*;
 
 /**
  * 用户组 Service 接口

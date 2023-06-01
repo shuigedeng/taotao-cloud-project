@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.flowable.biz.bpm.framework.bpm.core.event;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.validation.annotation.Validated;

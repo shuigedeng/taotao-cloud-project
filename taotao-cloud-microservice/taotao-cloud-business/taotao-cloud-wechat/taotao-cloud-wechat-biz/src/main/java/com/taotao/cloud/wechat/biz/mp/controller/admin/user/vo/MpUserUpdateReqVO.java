@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.controller.admin.user.vo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @ApiModel("管理后台 - 公众号粉丝更新 Request VO")

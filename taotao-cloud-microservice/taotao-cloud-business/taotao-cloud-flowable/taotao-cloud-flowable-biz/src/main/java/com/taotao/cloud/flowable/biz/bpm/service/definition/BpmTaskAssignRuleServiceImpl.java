@@ -52,7 +52,7 @@ import com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior.script
 import com.taotao.cloud.flowable.biz.flowable.core.util.FlowableUtils;
 import java.util.*;
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.bpmn.model.UserTask;

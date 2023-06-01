@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.app.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import jnpf.base.ActionResult;
 import jnpf.base.vo.ListVO;
 import jnpf.base.vo.PaginationVO;

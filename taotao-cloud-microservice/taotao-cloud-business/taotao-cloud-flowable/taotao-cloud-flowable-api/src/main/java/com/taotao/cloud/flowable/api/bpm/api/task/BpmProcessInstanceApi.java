@@ -17,7 +17,6 @@
 package com.taotao.cloud.flowable.api.bpm.api.task;
 
 import com.taotao.cloud.flowable.api.bpm.api.task.dto.BpmProcessInstanceCreateReqDTO;
-import javax.validation.Valid;
 
 /**
  * 流程实例 Api 接口

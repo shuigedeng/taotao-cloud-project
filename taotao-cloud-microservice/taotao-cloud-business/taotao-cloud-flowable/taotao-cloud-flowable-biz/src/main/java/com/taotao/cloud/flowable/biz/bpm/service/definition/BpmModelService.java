@@ -18,7 +18,7 @@ package com.taotao.cloud.flowable.biz.bpm.service.definition;
 
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.bpm.controller.admin.definition.vo.model.*;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.flowable.bpmn.model.BpmnModel;
 
 /**

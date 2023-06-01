@@ -23,7 +23,7 @@ import cn.iocoder.yudao.module.bpm.controller.admin.task.vo.instance.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.flowable.engine.delegate.event.FlowableCancelledEvent;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.runtime.ProcessInstance;

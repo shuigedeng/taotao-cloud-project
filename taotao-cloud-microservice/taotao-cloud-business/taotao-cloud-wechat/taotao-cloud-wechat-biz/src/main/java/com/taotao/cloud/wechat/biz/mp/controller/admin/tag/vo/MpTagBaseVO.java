@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.mp.controller.admin.tag.vo;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 /**

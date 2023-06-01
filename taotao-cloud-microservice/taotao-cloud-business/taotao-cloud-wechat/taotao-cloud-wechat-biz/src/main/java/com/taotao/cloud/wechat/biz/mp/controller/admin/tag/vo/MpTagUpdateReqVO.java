@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.biz.mp.controller.admin.tag.vo;
 
 import io.swagger.annotations.*;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @ApiModel("管理后台 - 公众号标签更新 Request VO")

@@ -19,7 +19,7 @@ package com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @ApiModel("管理后台 - 流程定义 Response VO")

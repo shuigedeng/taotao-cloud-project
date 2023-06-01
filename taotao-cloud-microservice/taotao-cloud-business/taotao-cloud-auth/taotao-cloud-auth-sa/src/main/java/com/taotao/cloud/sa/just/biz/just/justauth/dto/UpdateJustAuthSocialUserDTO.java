@@ -17,8 +17,8 @@
 package com.taotao.cloud.sa.just.biz.just.justauth.dto;
 
 import io.swagger.annotations.ApiModel;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;

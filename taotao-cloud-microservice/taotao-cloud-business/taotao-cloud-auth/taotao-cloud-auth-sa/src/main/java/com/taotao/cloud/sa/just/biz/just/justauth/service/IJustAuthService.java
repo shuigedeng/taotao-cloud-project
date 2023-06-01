@@ -19,8 +19,8 @@ package com.taotao.cloud.sa.just.biz.just.justauth.service;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocial;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocialUser;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
