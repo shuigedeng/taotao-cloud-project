@@ -21,6 +21,13 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
+/**
+ * 反爬行动物属性
+ *
+ * @author shuigedeng
+ * @version 2023.06
+ * @since 2023-06-01 14:16:53
+ */
 @RefreshScope
 @ConfigurationProperties(prefix = AntiReptileProperties.PREFIX)
 public class AntiReptileProperties {
