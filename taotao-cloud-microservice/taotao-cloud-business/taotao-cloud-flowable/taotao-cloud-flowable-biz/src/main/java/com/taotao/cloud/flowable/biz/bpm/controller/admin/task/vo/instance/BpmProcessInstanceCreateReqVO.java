@@ -19,7 +19,7 @@ package com.taotao.cloud.flowable.biz.bpm.controller.admin.task.vo.instance;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Map;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @ApiModel("管理后台 - 流程实例的创建 Request VO")

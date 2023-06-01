@@ -37,7 +37,7 @@ import cn.iocoder.yudao.module.mp.service.material.MpMaterialService;
 import cn.iocoder.yudao.module.mp.service.message.bo.MpMessageSendOutReqBO;
 import cn.iocoder.yudao.module.mp.service.user.MpUserService;
 import javax.annotation.Resource;
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;

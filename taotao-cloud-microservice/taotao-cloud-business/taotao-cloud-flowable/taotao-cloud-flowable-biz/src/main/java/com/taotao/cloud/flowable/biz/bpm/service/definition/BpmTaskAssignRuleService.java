@@ -22,7 +22,7 @@ import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.rule.Bpm
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.definition.BpmTaskAssignRuleDO;
 import java.util.List;
 import java.util.Set;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.springframework.lang.Nullable;
 

@@ -27,7 +27,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmProcessDefini
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.ProcessDefinition;

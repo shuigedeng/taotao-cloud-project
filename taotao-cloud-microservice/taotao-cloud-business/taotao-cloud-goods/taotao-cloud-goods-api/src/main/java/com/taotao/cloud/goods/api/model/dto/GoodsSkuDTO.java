@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Max;
+import jakarta.validation.constraints.Max;
 import java.util.Date;
 
 /**

@@ -19,7 +19,6 @@ package com.taotao.cloud.flowable.biz.bpm.api.task;
 import cn.iocoder.yudao.module.bpm.api.task.dto.BpmProcessInstanceCreateReqDTO;
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmProcessInstanceService;
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 

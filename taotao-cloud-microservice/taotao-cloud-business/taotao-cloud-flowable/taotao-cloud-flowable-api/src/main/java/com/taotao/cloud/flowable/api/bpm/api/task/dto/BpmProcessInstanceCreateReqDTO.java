@@ -17,7 +17,6 @@
 package com.taotao.cloud.flowable.api.bpm.api.task.dto;
 
 import java.util.Map;
-import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 /**

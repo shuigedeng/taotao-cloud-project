@@ -41,7 +41,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.message.BpmMessageService;
 import java.time.LocalDateTime;
 import java.util.*;
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.TaskService;

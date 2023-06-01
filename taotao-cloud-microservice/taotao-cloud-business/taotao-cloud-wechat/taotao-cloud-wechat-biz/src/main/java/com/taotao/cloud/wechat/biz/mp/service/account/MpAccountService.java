@@ -25,7 +25,7 @@ import cn.iocoder.yudao.module.mp.controller.admin.account.vo.MpAccountPageReqVO
 import cn.iocoder.yudao.module.mp.controller.admin.account.vo.MpAccountUpdateReqVO;
 import cn.iocoder.yudao.module.mp.dal.dataobject.account.MpAccountDO;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 公众号账号 Service 接口

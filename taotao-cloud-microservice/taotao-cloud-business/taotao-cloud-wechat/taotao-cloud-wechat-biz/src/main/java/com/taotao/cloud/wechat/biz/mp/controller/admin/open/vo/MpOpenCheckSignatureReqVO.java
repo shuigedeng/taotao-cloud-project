@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.mp.controller.admin.open.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @ApiModel("管理后台 - 公众号校验签名 Request VO")

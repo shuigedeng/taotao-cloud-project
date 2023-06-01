@@ -22,7 +22,7 @@ import cn.iocoder.yudao.module.mp.controller.admin.tag.vo.MpTagPageReqVO;
 import cn.iocoder.yudao.module.mp.controller.admin.tag.vo.MpTagUpdateReqVO;
 import cn.iocoder.yudao.module.mp.dal.dataobject.tag.MpTagDO;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * 公众号标签 Service 接口

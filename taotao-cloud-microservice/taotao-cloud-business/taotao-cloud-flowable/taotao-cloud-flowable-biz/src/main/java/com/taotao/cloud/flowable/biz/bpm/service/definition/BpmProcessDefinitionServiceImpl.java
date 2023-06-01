@@ -40,7 +40,7 @@ import com.taotao.cloud.flowable.biz.bpm.service.definition.dto.BpmProcessDefini
 import com.taotao.cloud.flowable.biz.flowable.core.util.FlowableUtils;
 import java.util.*;
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.BpmnModel;

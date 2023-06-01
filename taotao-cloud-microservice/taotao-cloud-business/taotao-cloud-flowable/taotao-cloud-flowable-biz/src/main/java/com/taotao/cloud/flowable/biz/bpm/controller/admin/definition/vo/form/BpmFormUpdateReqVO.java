@@ -18,7 +18,7 @@ package com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.form;
 
 import io.swagger.annotations.*;
 import java.util.List;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @ApiModel("管理后台 - 动态表单更新 Request VO")

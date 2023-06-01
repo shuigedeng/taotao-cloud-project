@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.biz.app.model;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**

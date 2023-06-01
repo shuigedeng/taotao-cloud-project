@@ -547,15 +547,15 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
-        - id: json-grpc
-          uri: https://localhost:6565
-          #curl -XPOST 'https://localhost:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
-          metadata:
-            name: 测试grpc接口
-          predicates:
-            - Path=/json/**
-          filters:
-            - JSONToGRPCFilter
+        #- id: json-grpc
+        #  uri: https://localhost:6565
+        #  #curl -XPOST 'https://localhost:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
+        #  metadata:
+        #    name: 测试grpc接口
+        #  predicates:
+        #    - Path=/json/**
+        #  filters:
+        #    - JSONToGRPCFilter
         - id: taotao-cloud-message-websocket
           #uri: "ws://127.0.0.1:8081"
           uri: "lb:ws://taotao-cloud-message" #websocket配置，通过nacos注册中心调用serviceName使用方式2

@@ -25,7 +25,7 @@ import cn.iocoder.yudao.module.mp.dal.dataobject.material.MpMaterialDO;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import me.chanjar.weixin.common.api.WxConsts;
 
 /**

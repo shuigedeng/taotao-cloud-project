@@ -18,7 +18,7 @@ package com.taotao.cloud.wechat.biz.mp.framework.mp.core.util;
 
 import cn.hutool.core.util.StrUtil;
 import cn.iocoder.yudao.framework.common.util.validation.ValidationUtils;
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 
