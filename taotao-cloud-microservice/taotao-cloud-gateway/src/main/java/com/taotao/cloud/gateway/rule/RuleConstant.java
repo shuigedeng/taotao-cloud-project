@@ -18,6 +18,10 @@ package com.taotao.cloud.gateway.rule;
 
 /**
  * 规则常量
+ *
+ * @author shuigedeng
+ * @version 2023.06
+ * @since 2023-06-02 17:54:15
  */
 public class RuleConstant {
 

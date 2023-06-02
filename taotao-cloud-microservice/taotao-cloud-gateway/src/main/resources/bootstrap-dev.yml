@@ -47,6 +47,8 @@ spring:
         username: nacos
         password: nacos
         refresh-enabled: true
+        import-check:
+          enabled: false #禁用spring的配置导入检查
     sentinel:
       enabled: true
       eager: true
