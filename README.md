@@ -87,7 +87,7 @@ api "io.github.shuigedeng:taotao-cloud-starter-web"
 Maven:
 
 ```
-<dependentyManagement>
+<dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
@@ -97,7 +97,7 @@ Maven:
       <scope>import</scope>
     </dependency>
   </dependencies>
-</dependentyManagement>
+</dependencyManagement>
 
 
 <dependencies>
