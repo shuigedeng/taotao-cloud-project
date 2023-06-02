@@ -12,11 +12,11 @@ import cn.bootx.platform.daxpay.core.channel.voucher.entity.Voucher;
 import cn.bootx.platform.daxpay.core.channel.voucher.entity.VoucherLog;
 import cn.bootx.platform.daxpay.core.channel.voucher.entity.VoucherPayment;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
-import cn.bootx.platform.daxpay.param.pay.PayModeParam;
-import cn.bootx.platform.daxpay.param.paymodel.voucher.VoucherPayParam;
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutooljson.JSONException;
-import org.dromara.hutooljson.JSONUtil;
+import cn.bootx.platform.daxpay.param.pay.PayWayParam;
+import cn.bootx.platform.daxpay.param.channel.voucher.VoucherPayParam;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONException;
+import cn.hutool.json.JSONUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,11 +50,11 @@ public class VoucherPayService {
     /**
      * 获取并检查储值卡
      */
-    public List<Voucher> getAndCheckVoucher(PayModeParam payModeParam) {
+    public List<Voucher> getAndCheckVoucher(PayWayParam payWayParam) {
         VoucherPayParam voucherPayParam;
         try {
             // 储值卡参数验证
-            String extraParamsJson = payModeParam.getExtraParamsJson();
+            String extraParamsJson = payWayParam.getExtraParamsJson();
             if (StrUtil.isNotBlank(extraParamsJson)) {
                 voucherPayParam = JSONUtil.toBean(extraParamsJson, VoucherPayParam.class);
             }
@@ -78,7 +78,7 @@ public class VoucherPayService {
         }
         // 金额是否满足
         BigDecimal amount = vouchers.stream().map(Voucher::getBalance).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-        if (BigDecimalUtil.compareTo(amount, payModeParam.getAmount()) < 0) {
+        if (BigDecimalUtil.compareTo(amount, payWayParam.getAmount()) < 0) {
             throw new PayFailureException("储值卡余额不足");
         }
 
