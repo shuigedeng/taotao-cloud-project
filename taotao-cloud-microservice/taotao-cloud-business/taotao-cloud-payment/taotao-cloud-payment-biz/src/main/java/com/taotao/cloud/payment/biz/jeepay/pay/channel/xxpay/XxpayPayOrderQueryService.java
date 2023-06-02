@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.xxpay;
 
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolhttp.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrder;

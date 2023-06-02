@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.alipay;
 
-import cn.hutool.core.text.CharSequenceUtil;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.alipay.api.AlipayObject;
 import com.alipay.api.AlipayRequest;
 import com.alipay.api.domain.*;

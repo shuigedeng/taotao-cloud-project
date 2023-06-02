@@ -5,7 +5,7 @@ import cn.bootx.platform.daxpay.code.paymodel.AliPayCode;
 import cn.bootx.platform.daxpay.core.pay.local.AsyncRefundLocal;
 import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.AlipayTradeCancelModel;
 import com.alipay.api.domain.AlipayTradeRefundModel;

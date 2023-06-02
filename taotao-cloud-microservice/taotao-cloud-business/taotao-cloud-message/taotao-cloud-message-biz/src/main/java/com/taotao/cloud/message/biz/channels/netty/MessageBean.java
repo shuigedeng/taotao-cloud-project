@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.netty;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.exception.NacosException;

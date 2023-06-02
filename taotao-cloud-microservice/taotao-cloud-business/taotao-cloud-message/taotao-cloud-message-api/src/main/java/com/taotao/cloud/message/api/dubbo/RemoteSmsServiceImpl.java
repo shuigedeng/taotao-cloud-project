@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.api.dubbo;
 //
-// import cn.hutool.core.bean.BeanUtil;
+// import org.dromara.hutoolcore.bean.BeanUtil;
 // import com.ruoyi.common.core.exception.ServiceException;
 // import com.ruoyi.common.core.utils.SpringUtils;
 // import com.ruoyi.common.sms.config.properties.SmsProperties;

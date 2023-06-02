@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.mq;
 
-import cn.hutool.core.net.url.UrlBuilder;
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolcore.net.url.UrlBuilder;
+import org.dromara.hutoolhttp.HttpUtil;
 import com.taotao.cloud.payment.biz.jeepay.mq.model.PayOrderMchNotifyMQ;
 import com.taotao.cloud.payment.biz.jeepay.mq.vender.IMQSender;
 import com.taotao.cloud.payment.biz.jeepay.service.impl.MchNotifyRecordService;

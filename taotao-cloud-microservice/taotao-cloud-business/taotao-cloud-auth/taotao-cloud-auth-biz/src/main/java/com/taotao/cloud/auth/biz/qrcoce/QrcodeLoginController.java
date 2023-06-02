@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.qrcoce;
 
-import cn.hutool.extra.qrcode.QrCodeUtil;
+import org.dromara.hutoolextra.qrcode.QrCodeUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

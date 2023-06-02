@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.service;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.util.CaptchaUtils;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.idea.plugin.listener.document;
 
-import cn.hutool.core.util.URLUtil;
+import org.dromara.hutoolcore.util.URLUtil;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.ui.EditorTextField;

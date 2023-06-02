@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.handler;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDO;
 import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
 import com.taotao.cloud.message.biz.ballcat.common.websocket.message.JsonWebSocketMessage;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.weixin.utils;
 
-import cn.hutool.core.lang.UUID;
+import org.dromara.hutoolcore.lang.UUID;
 import java.io.*;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.convert;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 

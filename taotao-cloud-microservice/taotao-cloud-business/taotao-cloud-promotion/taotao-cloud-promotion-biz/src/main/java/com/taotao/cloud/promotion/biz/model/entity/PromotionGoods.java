@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.model.entity;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;

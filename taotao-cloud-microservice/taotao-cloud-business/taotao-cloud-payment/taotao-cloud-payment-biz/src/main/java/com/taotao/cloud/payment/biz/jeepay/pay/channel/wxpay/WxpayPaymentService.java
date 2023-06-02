@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.wxpay;
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.service.WxPayService;

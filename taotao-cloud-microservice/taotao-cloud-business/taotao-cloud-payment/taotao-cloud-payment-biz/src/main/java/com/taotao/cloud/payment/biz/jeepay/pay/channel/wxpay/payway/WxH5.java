@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.wxpay.payway;
 
-import cn.hutool.core.codec.Base64;
+import org.dromara.hutoolcore.codec.Base64;
 import com.github.binarywang.wxpay.bean.order.WxPayMwebOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants;

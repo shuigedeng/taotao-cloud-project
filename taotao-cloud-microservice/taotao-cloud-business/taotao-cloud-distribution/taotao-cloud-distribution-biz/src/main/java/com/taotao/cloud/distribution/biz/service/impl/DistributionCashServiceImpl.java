@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.biz.service.impl;
 
-import cn.hutool.core.util.PageUtil;
+import org.dromara.hutoolcore.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

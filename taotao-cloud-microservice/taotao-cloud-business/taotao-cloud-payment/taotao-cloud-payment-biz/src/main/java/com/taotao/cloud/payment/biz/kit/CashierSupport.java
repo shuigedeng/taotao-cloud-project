@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.feishu;
 
-import cn.hutool.http.ContentType;
-import cn.hutool.http.Header;
-import cn.hutool.http.HttpRequest;
+import org.dromara.hutoolhttp.ContentType;
+import org.dromara.hutoolhttp.Header;
+import org.dromara.hutoolhttp.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.SendAccountConstant;

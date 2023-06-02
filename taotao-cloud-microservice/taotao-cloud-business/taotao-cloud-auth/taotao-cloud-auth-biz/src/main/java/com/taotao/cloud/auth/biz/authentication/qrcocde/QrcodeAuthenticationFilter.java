@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.qrcocde;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;

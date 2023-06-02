@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.account.service;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.enums.LoginTypeEnum;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;

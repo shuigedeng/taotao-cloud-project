@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.common.web.controller;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

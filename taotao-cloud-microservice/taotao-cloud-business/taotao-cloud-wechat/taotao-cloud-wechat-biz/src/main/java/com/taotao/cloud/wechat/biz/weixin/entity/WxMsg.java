@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.weixin.entity;
 
-import cn.hutool.json.JSONObject;
+import org.dromara.hutooljson.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

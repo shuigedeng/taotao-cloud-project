@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.mp.framework.mp.core;
 
-import cn.hutool.core.lang.Assert;
+import org.dromara.hutoolcore.lang.Assert;
 import cn.iocoder.yudao.module.mp.dal.dataobject.account.MpAccountDO;
 import java.util.List;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;

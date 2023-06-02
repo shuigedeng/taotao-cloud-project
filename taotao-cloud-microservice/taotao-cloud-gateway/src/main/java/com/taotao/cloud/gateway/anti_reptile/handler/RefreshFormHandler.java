@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.anti_reptile.handler;
 
-import cn.hutool.http.HttpStatus;
+import org.dromara.hutoolhttp.HttpStatus;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.gateway.anti_reptile.ValidateFormService;
 import org.springframework.beans.factory.annotation.Autowired;

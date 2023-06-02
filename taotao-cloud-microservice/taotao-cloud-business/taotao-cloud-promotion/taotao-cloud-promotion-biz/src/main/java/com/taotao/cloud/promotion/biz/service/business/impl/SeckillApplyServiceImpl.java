@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.PageUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.date.DateTime;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
+import org.dromara.hutoolcore.util.PageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.management.compliance.listener;
 
-import cn.hutool.crypto.SecureUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
 import com.taotao.cloud.auth.biz.dante.authentication.stamp.SignInFailureLimitedStampManager;
 import com.taotao.cloud.auth.biz.dante.management.service.OAuth2ComplianceService;
 import jakarta.servlet.http.HttpServletRequest;

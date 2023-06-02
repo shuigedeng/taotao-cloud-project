@@ -27,9 +27,9 @@ package com.taotao.cloud.auth.biz.dante.core.utils;
 
 import cn.herodotus.engine.assistant.core.definition.constants.SymbolConstants;
 import cn.herodotus.engine.oauth2.core.exception.IllegalSymmetricKeyException;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.symmetric.AES;
+import org.dromara.hutoolcore.util.RandomUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
+import org.dromara.hutoolcrypto.symmetric.AES;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

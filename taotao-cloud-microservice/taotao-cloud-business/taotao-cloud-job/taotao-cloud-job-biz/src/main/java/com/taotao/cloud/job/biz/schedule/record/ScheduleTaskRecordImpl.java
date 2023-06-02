@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.biz.schedule.record;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;

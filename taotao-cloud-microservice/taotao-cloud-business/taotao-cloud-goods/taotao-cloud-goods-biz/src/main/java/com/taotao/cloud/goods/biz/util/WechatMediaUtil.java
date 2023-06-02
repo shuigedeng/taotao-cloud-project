@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.util;
 
-import cn.hutool.json.JSONObject;
+import org.dromara.hutooljson.JSONObject;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;

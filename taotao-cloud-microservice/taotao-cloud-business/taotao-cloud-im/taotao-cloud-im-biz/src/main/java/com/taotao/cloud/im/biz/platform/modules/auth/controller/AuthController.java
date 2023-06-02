@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.modules.auth.controller;
 
-import cn.hutool.core.lang.Dict;
+import org.dromara.hutoolcore.lang.Dict;
 import com.platform.common.aspectj.annotation.SubmitRepeat;
 import com.platform.common.exception.BaseException;
 import com.platform.common.shiro.ShiroLoginAuth;

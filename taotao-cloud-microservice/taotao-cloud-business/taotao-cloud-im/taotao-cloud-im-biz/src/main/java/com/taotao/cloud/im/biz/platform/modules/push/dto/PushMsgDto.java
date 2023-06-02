@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.modules.push.dto;
 
-import cn.hutool.core.lang.Dict;
+import org.dromara.hutoolcore.lang.Dict;
 import com.platform.modules.push.enums.PushClickTypeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;

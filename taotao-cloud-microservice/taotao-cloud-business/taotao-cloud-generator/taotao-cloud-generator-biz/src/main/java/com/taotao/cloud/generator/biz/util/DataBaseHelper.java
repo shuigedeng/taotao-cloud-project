@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import cn.hutool.core.convert.Convert;
+import org.dromara.hutoolcore.convert.Convert;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;

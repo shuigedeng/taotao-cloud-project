@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.alipay.payway;
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.request.AlipayTradeAppPayRequest;

@@ -17,8 +17,8 @@
 package com.taotao.cloud.wechat.biz.wechat.core.portal.service;
 
 import cn.bootx.common.core.exception.ValidationFailedException;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolcrypto.symmetric.SymmetricAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;

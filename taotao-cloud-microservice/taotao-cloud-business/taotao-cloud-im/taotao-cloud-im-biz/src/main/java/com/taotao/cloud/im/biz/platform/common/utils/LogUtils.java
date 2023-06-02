@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.im.biz.platform.common.utils;
 
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
+import org.dromara.hutoolcore.thread.ThreadUtil;
+import org.dromara.hutoolhttp.useragent.UserAgent;
+import org.dromara.hutoolhttp.useragent.UserAgentUtil;
 import com.platform.common.enums.YesOrNoEnum;
 import com.platform.common.utils.ip.AddressUtils;
 import com.platform.common.utils.ip.IpUtils;

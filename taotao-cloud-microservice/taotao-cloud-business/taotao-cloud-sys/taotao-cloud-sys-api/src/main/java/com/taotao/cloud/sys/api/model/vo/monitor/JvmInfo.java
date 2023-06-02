@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.api.model.vo.monitor;
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.NumberUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.util.NumberUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
 

@@ -9,7 +9,7 @@ import cn.bootx.platform.daxpay.param.paymodel.wallet.WalletPayParam;
 import cn.bootx.platform.iam.core.user.entity.UserInfo;
 import cn.bootx.platform.iam.param.user.UserInfoParam;
 import cn.bootx.platform.starter.auth.util.SecurityUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;

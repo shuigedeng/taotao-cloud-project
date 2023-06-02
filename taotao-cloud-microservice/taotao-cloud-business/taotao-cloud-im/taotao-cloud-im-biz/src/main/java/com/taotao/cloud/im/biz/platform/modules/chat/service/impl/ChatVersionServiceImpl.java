@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.platform.common.enums.YesOrNoEnum;
 import com.platform.common.version.VersionUtils;
 import com.platform.common.web.service.impl.BaseServiceImpl;

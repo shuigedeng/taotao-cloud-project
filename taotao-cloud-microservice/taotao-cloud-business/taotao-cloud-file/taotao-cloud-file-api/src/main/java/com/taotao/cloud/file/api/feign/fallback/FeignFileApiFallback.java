@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.file.api.feign.fallback;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.api.feign.IFeignFileApi;
 import com.taotao.cloud.file.api.feign.response.FeignFileResponse;

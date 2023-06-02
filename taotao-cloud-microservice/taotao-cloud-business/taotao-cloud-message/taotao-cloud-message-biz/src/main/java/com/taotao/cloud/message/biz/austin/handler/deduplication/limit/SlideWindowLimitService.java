@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import java.util.Collections;
 import java.util.HashSet;

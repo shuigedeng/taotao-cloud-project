@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.common.web.page;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;

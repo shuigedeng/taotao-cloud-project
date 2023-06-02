@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.management.dto;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.DurationDeserializer;

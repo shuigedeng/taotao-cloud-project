@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.generator.biz.controller;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.io.IoUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.io.IoUtil;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.generator.biz.entity.GenTable;
 import com.taotao.cloud.generator.biz.entity.GenTableColumn;

@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutooljson.JSONObject;
+import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;

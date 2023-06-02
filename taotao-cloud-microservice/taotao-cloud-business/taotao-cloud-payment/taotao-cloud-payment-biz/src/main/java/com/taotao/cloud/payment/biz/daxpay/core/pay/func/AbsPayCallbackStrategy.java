@@ -7,7 +7,7 @@ import cn.bootx.platform.daxpay.core.notify.dao.PayNotifyRecordManager;
 import cn.bootx.platform.daxpay.core.notify.entity.PayNotifyRecord;
 import cn.bootx.platform.daxpay.core.pay.result.PayCallbackResult;
 import cn.bootx.platform.daxpay.core.pay.service.PayCallbackService;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

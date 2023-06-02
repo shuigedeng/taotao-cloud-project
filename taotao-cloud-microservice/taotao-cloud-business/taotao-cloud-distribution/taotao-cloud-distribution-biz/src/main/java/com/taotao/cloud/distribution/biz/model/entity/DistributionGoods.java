@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.distribution.biz.model.entity;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONObject;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;

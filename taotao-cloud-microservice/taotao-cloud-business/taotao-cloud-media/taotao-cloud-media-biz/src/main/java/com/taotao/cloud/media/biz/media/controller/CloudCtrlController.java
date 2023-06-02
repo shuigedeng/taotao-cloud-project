@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.media.biz.media.controller;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.media.biz.media.ctrl.CameraCtrl;
 import com.taotao.cloud.media.biz.media.ctrl.CloudCode;
 import com.taotao.cloud.media.biz.media.ctrl.Control;

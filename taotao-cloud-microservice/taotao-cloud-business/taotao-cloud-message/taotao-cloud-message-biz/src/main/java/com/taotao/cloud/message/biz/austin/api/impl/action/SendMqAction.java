@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.api.impl.action;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;

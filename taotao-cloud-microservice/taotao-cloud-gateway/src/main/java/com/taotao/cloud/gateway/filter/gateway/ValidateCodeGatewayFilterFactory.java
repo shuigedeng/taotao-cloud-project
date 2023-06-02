@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.gateway;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.pending;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationRuleService;
 import com.taotao.cloud.message.biz.austin.handler.discard.DiscardMessageService;

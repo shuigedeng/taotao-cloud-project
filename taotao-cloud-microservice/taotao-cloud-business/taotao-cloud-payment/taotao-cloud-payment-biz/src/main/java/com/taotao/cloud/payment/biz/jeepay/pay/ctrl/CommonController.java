@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.ctrl;
 
-import cn.hutool.core.codec.Base64;
+import org.dromara.hutoolcore.codec.Base64;
 import com.taotao.cloud.payment.biz.jeepay.core.ctrls.AbstractCtrl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

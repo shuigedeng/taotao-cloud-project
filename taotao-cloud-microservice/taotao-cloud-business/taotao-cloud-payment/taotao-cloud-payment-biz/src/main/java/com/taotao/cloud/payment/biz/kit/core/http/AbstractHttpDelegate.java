@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.payment.biz.kit.core.http;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
-import cn.hutool.http.HttpUtil;
-import cn.hutool.http.ssl.SSLSocketFactoryBuilder;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolhttp.HttpRequest;
+import org.dromara.hutoolhttp.HttpResponse;
+import org.dromara.hutoolhttp.HttpUtil;
+import org.dromara.hutoolhttp.ssl.SSLSocketFactoryBuilder;
 import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
 import java.io.File;
 import java.io.FileInputStream;

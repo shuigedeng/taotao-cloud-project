@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.biz.schedule.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

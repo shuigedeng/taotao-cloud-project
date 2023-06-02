@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.taotao.cloud.common.model.BaseQuery;

@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.mp.service.statistics;
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.*;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import cn.iocoder.yudao.module.mp.framework.mp.core.MpServiceFactory;
 import java.time.LocalDateTime;
 import java.util.List;

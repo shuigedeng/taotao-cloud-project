@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.service.impl;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.text.StrPool;
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolcore.text.StrPool;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.alibaba.excel.enums.BooleanEnum;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.taotao.cloud.common.exception.BusinessException;

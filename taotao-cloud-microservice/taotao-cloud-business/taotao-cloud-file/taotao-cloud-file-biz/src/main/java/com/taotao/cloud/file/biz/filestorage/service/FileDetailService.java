@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.file.biz.filestorage.service;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;

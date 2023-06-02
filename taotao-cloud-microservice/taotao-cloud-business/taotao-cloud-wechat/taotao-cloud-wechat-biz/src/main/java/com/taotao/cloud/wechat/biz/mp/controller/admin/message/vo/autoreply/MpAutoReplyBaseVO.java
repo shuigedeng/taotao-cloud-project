@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.mp.controller.admin.message.vo.autoreply;
 
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import cn.iocoder.yudao.module.mp.dal.dataobject.message.MpMessageDO;
 import cn.iocoder.yudao.module.mp.enums.message.MpAutoReplyTypeEnum;
 import cn.iocoder.yudao.module.mp.framework.mp.core.util.MpUtils.*;

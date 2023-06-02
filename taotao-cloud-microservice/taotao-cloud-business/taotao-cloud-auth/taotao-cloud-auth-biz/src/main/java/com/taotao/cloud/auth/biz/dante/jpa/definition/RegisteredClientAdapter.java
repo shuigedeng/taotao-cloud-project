@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.jpa.definition;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.auth.biz.dante.core.definition.domain.RegisteredClientDetails;
 import com.taotao.cloud.auth.biz.dante.core.utils.OAuth2AuthorizationUtils;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;

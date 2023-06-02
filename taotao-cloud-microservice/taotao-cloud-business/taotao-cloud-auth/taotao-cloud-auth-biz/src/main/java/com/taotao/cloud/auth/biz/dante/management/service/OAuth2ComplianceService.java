@@ -25,9 +25,9 @@
 
 package com.taotao.cloud.auth.biz.dante.management.service;
 
-import cn.hutool.extra.servlet.JakartaServletUtil;
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
+import org.dromara.hutoolextra.servlet.JakartaServletUtil;
+import org.dromara.hutoolhttp.useragent.UserAgent;
+import org.dromara.hutoolhttp.useragent.UserAgentUtil;
 import com.google.common.net.HttpHeaders;
 import com.taotao.cloud.auth.biz.dante.management.entity.OAuth2Compliance;
 import com.taotao.cloud.auth.biz.dante.management.repository.OAuth2ComplianceRepository;

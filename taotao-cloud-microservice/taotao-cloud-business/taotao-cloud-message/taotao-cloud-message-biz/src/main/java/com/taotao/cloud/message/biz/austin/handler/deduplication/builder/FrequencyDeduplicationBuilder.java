@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.deduplication.builder;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
 import com.taotao.cloud.message.biz.austin.common.enums.DeduplicationType;

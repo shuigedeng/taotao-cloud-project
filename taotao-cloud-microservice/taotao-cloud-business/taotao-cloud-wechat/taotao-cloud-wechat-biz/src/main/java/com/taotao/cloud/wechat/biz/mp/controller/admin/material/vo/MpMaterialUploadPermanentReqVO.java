@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.mp.controller.admin.material.vo;
 
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

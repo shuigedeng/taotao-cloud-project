@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.im.biz.platform.modules.common.service.impl;
 
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.digest.HMac;
-import cn.hutool.crypto.digest.HmacAlgorithm;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.codec.Base64;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.util.ArrayUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolcrypto.digest.HMac;
+import org.dromara.hutoolcrypto.digest.HmacAlgorithm;
+import org.dromara.hutooljson.JSONUtil;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.shiro.ShiroUtils;
 import com.platform.common.utils.redis.RedisUtils;

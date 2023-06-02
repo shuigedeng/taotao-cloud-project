@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.receiver.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.LogParam;

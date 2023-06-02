@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit.plugin.alipay;
 
-import cn.hutool.http.HtmlUtil;
+import org.dromara.hutoolhttp.HtmlUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayRequest;

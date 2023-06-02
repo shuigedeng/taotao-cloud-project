@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.biz.platform.modules.collect.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.github.pagehelper.PageInfo;
 import com.platform.common.exception.BaseException;
 import com.platform.common.shiro.ShiroUtils;

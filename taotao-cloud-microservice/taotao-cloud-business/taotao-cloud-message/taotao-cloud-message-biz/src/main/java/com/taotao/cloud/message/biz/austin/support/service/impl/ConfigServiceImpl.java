@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.austin.support.service.impl;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.setting.dialect.Props;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolsetting.dialect.Props;
 import com.ctrip.framework.apollo.Config;
 import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
 import com.taotao.cloud.message.biz.austin.support.utils.NacosUtils;

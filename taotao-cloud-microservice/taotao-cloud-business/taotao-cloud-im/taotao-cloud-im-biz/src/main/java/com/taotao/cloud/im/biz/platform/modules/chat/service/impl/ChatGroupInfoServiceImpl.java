@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.enums.YesOrNoEnum;

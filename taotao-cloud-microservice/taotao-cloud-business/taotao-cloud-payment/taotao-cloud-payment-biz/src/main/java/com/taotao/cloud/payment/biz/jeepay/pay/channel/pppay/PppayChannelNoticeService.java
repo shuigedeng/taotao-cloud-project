@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.pppay;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONObject;
+import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.PayOrder;
 import com.taotao.cloud.payment.biz.jeepay.core.exception.ResponseException;

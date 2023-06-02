@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.austin.cron.xxl.utils;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;

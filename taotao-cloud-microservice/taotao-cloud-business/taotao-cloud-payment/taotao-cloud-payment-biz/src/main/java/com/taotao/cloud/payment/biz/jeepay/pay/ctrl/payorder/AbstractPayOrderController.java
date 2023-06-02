@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.ctrl.payorder;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.MchApp;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.MchInfo;

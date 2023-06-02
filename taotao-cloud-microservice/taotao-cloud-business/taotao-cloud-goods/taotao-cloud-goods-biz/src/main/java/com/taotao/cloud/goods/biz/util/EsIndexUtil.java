@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.util;
 
-import cn.hutool.core.util.ReflectUtil;
+import org.dromara.hutoolcore.util.ReflectUtil;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import java.lang.reflect.Field;
 import java.util.HashMap;

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;

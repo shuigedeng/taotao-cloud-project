@@ -16,19 +16,19 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.lang.PatternPool;
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.util.ReUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.qrcode.QrCodeUtil;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.codec.Base64;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.lang.PatternPool;
+import org.dromara.hutoolcore.thread.ThreadUtil;
+import org.dromara.hutoolcore.util.RandomUtil;
+import org.dromara.hutoolcore.util.ReUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolextra.qrcode.QrCodeUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.github.pagehelper.PageHelper;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.enums.YesOrNoEnum;

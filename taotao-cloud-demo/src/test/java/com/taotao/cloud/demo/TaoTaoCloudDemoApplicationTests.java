@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo;
 
-import cn.hutool.core.io.FileUtil;
+import org.dromara.hutoolcore.io.FileUtil;
 import com.taotao.cloud.oss.artislong.core.StandardOssClient;
 import com.taotao.cloud.oss.artislong.model.OssInfo;
 import java.time.LocalDateTime;

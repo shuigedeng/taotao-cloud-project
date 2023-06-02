@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import cn.hutool.core.map.MapUtil;
+import org.dromara.hutoolcore.map.MapUtil;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;

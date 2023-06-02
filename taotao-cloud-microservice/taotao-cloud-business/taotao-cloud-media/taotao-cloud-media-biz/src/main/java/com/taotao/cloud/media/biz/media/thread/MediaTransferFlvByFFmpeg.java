@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.biz.media.thread;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.ClientType;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;

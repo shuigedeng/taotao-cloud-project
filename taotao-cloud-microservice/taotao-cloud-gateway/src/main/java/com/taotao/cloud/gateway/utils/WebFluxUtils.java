@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.utils;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR;
 
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import com.taotao.cloud.gateway.filter.global.GlobalCacheRequestFilter;
 import java.net.URI;
 import java.nio.ByteBuffer;

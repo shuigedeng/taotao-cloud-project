@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.distribution.api.feign;
 
-import cn.hutool.core.date.DateTime;
+import org.dromara.hutoolcore.date.DateTime;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.distribution.api.feign.fallback.FeignDistributionOrderServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;

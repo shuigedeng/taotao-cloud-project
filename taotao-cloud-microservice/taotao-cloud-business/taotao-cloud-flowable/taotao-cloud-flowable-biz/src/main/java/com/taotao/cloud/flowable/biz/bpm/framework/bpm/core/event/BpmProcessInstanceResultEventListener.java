@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.flowable.biz.bpm.framework.bpm.core.event;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import org.springframework.context.ApplicationListener;
 
 /**

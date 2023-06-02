@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.promotion.biz.util; // package com.taotao.cloud.message.biz.util;
 //
-// import cn.hutool.http.HttpUtil;
-// import cn.hutool.json.JSONObject;
-// import cn.hutool.json.JSONUtil;
+// import org.dromara.hutoolhttp.HttpUtil;
+// import org.dromara.hutooljson.JSONObject;
+// import org.dromara.hutooljson.JSONUtil;
 // import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 // import com.taotao.cloud.common.enums.ClientTypeEnum;
 // import com.taotao.cloud.common.enums.ResultEnum;

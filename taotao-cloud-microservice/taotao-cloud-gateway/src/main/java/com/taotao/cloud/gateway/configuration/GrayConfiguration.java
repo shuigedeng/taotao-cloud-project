@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.configuration;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;

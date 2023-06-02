@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.austin.web.utils;
 
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.ReflectUtil;
+import org.dromara.hutoolcore.map.MapUtil;
+import org.dromara.hutoolcore.util.ReflectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import java.lang.reflect.Field;

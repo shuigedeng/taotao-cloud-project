@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.digest.HmacAlgorithm;
+import org.dromara.hutoolcore.codec.Base64;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolcore.util.CharsetUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
+import org.dromara.hutoolcrypto.digest.HmacAlgorithm;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.biz.kit.core.XmlHelper;
 import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;

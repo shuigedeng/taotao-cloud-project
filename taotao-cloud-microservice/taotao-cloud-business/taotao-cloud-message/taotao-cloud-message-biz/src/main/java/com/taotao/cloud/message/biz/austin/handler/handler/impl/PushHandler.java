@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.http.ContentType;
-import cn.hutool.http.Header;
-import cn.hutool.http.HttpRequest;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolhttp.ContentType;
+import org.dromara.hutoolhttp.Header;
+import org.dromara.hutoolhttp.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;

@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.message.biz.austin.web.utils;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.ReflectUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.map.MapUtil;
+import org.dromara.hutoolcore.util.ReflectUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;

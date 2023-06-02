@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;

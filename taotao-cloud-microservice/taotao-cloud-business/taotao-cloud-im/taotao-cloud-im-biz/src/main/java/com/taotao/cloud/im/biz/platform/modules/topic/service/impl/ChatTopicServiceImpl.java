@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.im.biz.platform.modules.topic.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.thread.ThreadUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.platform.common.constant.ApiConstant;

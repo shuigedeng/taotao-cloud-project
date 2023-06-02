@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.pppay;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.paypal.core.PayPalHttpClient;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.exceptions.HttpException;
@@ -99,7 +99,7 @@ public class PppayRefundService extends AbstractRefundService {
             response = client.execute(request);
         } catch (HttpException e) {
             String message = e.getMessage();
-            cn.hutool.json.JSONObject messageObj = JSONUtil.parseObj(message);
+            org.dromara.hutooljson.JSONObject messageObj = JSONUtil.parseObj(message);
             String issue = messageObj.getByPath("details[0].issue", String.class);
             String description = messageObj.getByPath("details[0].description", String.class);
             return ChannelRetMsg.confirmFail(issue, description);

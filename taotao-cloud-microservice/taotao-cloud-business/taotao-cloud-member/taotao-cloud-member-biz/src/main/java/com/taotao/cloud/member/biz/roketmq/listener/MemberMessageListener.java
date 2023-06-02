@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.roketmq.listener;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.model.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.biz.model.entity.Member;

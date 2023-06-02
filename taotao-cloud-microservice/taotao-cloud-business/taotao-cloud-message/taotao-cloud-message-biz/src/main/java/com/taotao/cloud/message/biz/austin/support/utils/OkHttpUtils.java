@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import cn.hutool.core.map.MapUtil;
+import org.dromara.hutoolcore.map.MapUtil;
 import com.google.common.base.Throwables;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;

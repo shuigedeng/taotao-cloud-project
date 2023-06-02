@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import cn.hutool.core.io.IoUtil;
+import org.dromara.hutoolcore.io.IoUtil;
 import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.FileOutputStream;

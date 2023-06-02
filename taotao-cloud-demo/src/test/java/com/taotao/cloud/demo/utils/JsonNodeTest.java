@@ -1,6 +1,6 @@
 package com.taotao.cloud.demo.utils;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import org.junit.Assert;

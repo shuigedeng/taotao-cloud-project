@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.goods.biz.model.entity;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.http.HtmlUtil;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
+import org.dromara.hutoolhttp.HtmlUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;

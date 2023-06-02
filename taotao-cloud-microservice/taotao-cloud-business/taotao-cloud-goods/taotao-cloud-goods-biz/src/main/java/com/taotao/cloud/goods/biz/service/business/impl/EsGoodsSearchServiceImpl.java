@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.goods.biz.service.business.impl;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.ArrayUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
+import org.dromara.hutoolcore.util.ArrayUtil;
 import com.alibaba.druid.util.StringUtils;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;

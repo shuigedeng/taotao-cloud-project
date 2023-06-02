@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.limit.LimitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

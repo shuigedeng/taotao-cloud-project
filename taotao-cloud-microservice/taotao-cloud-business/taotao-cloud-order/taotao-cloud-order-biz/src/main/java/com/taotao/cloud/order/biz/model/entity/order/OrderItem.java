@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.biz.model.entity.order;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;

@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.jpa.jackson2;
 
-import cn.hutool.core.util.ReflectUtil;
+import org.dromara.hutoolcore.util.ReflectUtil;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;

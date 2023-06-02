@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.common.shiro;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.platform.common.constant.HeadConstant;
 import com.platform.common.enums.ResultCodeEnum;
 import com.platform.common.exception.LoginException;

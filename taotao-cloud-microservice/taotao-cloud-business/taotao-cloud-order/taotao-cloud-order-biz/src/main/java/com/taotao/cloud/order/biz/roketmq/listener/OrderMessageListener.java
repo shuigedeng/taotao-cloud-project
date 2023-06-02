@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.roketmq.listener;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;

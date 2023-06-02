@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.log.biz.log.core.mongo.service;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.log.biz.log.core.mongo.convert.LogConvert;
 import com.taotao.cloud.log.biz.log.core.mongo.dao.LoginLogMongoRepository;

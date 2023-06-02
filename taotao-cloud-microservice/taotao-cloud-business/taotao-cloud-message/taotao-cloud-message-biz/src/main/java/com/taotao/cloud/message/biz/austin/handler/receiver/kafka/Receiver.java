@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
 import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;

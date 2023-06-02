@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.biz.platform.modules.shake.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.NumberUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.util.NumberUtil;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.exception.BaseException;
 import com.platform.common.shiro.ShiroUtils;

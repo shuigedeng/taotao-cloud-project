@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.google.common.base.Throwables;
 import java.util.HashMap;
 import java.util.List;

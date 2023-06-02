@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.wxpay.paywayV3;
 
-import cn.hutool.core.codec.Base64;
+import org.dromara.hutoolcore.codec.Base64;
 import com.alibaba.fastjson.JSONObject;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;

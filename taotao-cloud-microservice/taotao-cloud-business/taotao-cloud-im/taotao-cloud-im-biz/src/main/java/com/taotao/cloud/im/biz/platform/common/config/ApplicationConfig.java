@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.biz.platform.common.config;
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -39,7 +39,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 // 指定要扫描的Mapper类的包的路径
 @MapperScan({"com.platform.modules.**.dao"})
 // 扫描spring工具类
-@ComponentScan(basePackages = {"cn.hutool.extra.spring"})
+@ComponentScan(basePackages = {"org.dromara.hutoolextra.spring"})
 public class ApplicationConfig {
 
     /** 时区配置 */

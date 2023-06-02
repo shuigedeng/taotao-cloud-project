@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.biz.quartz.controller;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;

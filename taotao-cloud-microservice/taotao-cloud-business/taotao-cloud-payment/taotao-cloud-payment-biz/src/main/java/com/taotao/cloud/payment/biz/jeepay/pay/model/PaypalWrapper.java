@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.model;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONObject;
+import org.dromara.hutooljson.JSONUtil;
 import com.egzosn.pay.paypal.v2.bean.order.OrderRequest;
 import com.paypal.core.PayPalEnvironment;
 import com.paypal.core.PayPalHttpClient;
