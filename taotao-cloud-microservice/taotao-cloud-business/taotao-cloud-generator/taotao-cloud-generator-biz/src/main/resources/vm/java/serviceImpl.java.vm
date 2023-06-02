@@ -1,6 +1,6 @@
 package ${packageName}.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutool.core.bean.BeanUtil;
 import com.ruoyi.common.core.utils.StringUtils;
 #if($table.crud || $table.sub)
 import com.ruoyi.common.mybatis.core.page.PageQuery;
