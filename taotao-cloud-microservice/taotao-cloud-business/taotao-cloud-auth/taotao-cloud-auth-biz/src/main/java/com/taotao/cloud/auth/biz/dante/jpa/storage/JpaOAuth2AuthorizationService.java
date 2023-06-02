@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.jpa.storage;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.auth.biz.dante.core.utils.OAuth2AuthorizationUtils;
 import com.taotao.cloud.auth.biz.dante.jpa.entity.HerodotusAuthorization;
 import com.taotao.cloud.auth.biz.dante.jpa.jackson2.OAuth2JacksonProcessor;

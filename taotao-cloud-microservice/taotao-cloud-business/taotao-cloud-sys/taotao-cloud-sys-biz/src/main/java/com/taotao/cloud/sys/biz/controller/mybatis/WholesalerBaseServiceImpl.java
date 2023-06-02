@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.mybatis;
 
-import cn.hutool.core.date.StopWatch;
+import org.dromara.hutoolcore.date.StopWatch;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.time.LocalDateTime;
 import java.util.HashMap;

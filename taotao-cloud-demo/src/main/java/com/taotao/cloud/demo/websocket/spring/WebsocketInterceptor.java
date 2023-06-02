@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.demo.websocket.spring;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolhttp.HttpUtil;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;

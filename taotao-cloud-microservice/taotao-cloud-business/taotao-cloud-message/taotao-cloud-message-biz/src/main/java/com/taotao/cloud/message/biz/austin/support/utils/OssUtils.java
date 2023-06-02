@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;

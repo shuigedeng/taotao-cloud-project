@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
 import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationHolder;

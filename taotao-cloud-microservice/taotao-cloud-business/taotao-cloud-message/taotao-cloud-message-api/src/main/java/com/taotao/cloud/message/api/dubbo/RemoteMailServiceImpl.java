@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.api.dubbo;
 //
-// import cn.hutool.core.util.ArrayUtil;
+// import org.dromara.hutoolcore.util.ArrayUtil;
 // import com.ruoyi.common.core.exception.ServiceException;
 // import com.ruoyi.common.mail.utils.MailUtils;
 // import com.ruoyi.resource.api.RemoteMailService;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pig4cloud.plugin.excel.annotation.RequestExcel;
 import com.pig4cloud.plugin.excel.annotation.ResponseExcel;

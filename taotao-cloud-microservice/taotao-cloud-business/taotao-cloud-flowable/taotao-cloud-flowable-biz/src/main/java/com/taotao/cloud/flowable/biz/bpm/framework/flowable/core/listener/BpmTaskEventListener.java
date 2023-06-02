@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.listener;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.google.common.collect.ImmutableSet;
 import com.taotao.cloud.flowable.biz.bpm.dal.dataobject.task.BpmTaskExtDO;
 import com.taotao.cloud.flowable.biz.bpm.service.task.BpmActivityService;

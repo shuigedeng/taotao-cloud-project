@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.pending;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;

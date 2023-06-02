@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.api.model.vo.monitor;
 
-import cn.hutool.core.util.NumberUtil;
+import org.dromara.hutoolcore.util.NumberUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
 

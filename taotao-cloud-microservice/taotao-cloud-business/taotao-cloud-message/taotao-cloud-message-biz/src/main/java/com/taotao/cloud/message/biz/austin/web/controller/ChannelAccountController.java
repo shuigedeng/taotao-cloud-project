@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.web.controller;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;

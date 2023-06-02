@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.im.biz.platform.modules.push.utils;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.http.HttpUtil;
-import cn.hutool.http.Method;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
+import org.dromara.hutoolhttp.HttpUtil;
+import org.dromara.hutoolhttp.Method;
+import org.dromara.hutooljson.JSONObject;
+import org.dromara.hutooljson.JSONUtil;
 import com.platform.modules.push.config.PushConfig;
 import com.platform.modules.push.dto.PushMsgDto;
 import com.platform.modules.push.dto.PushTokenDto;

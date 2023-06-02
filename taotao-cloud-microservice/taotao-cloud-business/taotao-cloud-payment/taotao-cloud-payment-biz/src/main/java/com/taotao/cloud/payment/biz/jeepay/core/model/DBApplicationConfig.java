@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.core.model;
 
-import cn.hutool.core.util.URLUtil;
+import org.dromara.hutoolcore.util.URLUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.payment.biz.jeepay.core.utils.JeepayKit;
 import java.io.Serializable;

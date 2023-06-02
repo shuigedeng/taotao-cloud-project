@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.cron.config;
 
-import cn.hutool.core.thread.ExecutorBuilder;
+import org.dromara.hutoolcore.thread.ExecutorBuilder;
 import com.dtp.common.em.QueueTypeEnum;
 import com.dtp.common.em.RejectedTypeEnum;
 import com.dtp.core.thread.DtpExecutor;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;

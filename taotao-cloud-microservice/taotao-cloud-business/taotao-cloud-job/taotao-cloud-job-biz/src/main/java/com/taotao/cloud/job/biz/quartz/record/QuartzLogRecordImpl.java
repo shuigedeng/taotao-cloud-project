@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.biz.quartz.record;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLog;
 import com.taotao.cloud.job.biz.quartz.service.QuartzJobLogService;

@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.wechat;
 
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.io.file.FileReader;
-import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.http.ContentType;
-import cn.hutool.http.Header;
-import cn.hutool.http.HttpRequest;
+import org.dromara.hutoolcore.codec.Base64;
+import org.dromara.hutoolcore.io.file.FileReader;
+import org.dromara.hutoolcrypto.digest.DigestUtil;
+import org.dromara.hutoolhttp.ContentType;
+import org.dromara.hutoolhttp.Header;
+import org.dromara.hutoolhttp.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;

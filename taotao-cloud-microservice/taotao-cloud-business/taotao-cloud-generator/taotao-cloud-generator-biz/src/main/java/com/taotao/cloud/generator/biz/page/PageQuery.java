@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.generator.biz.page;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.io.Serializable;

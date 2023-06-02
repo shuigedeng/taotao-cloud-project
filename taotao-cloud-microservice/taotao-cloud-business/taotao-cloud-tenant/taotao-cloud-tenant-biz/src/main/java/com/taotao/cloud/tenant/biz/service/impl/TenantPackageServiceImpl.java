@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.tenant.biz.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.text.StrPool;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.text.StrPool;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.enums.GlobalStatusEnum;
 import com.taotao.cloud.tenant.api.model.dto.TenantPackageDTO;

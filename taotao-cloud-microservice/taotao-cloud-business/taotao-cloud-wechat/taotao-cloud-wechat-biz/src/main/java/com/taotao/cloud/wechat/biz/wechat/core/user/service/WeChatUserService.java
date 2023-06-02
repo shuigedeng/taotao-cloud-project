@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.biz.wechat.core.user.service;
 import cn.bootx.common.core.rest.param.PageQuery;
 import cn.bootx.common.core.util.LocalDateTimeUtil;
 import cn.bootx.starter.wechat.core.user.entity.WechatFans;
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.controller.business.manager; // package
                                                                   // com.taotao.cloud.message.biz.controller.manager;
 //
-// import cn.hutool.core.util.PageUtil;
+// import org.dromara.hutoolcore.util.PageUtil;
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.taotao.cloud.common.constant.CommonConstant;
 // import com.taotao.cloud.common.model.Result;

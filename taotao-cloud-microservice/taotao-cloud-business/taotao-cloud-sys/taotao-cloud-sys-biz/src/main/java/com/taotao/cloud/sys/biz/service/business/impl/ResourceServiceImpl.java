@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;

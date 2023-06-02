@@ -13,7 +13,7 @@ import cn.bootx.platform.iam.core.user.service.UserQueryService;
 import cn.bootx.platform.iam.dto.user.UserInfoDto;
 import cn.bootx.platform.iam.param.user.UserInfoParam;
 import cn.bootx.platform.starter.auth.util.SecurityUtil;
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

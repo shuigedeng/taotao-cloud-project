@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.config.i18n.provider;
 
-import cn.hutool.cache.impl.TimedCache;
-import cn.hutool.core.util.RandomUtil;
+import org.dromara.hutoolcache.impl.TimedCache;
+import org.dromara.hutoolcore.util.RandomUtil;
 import com.taotao.cloud.cache.redis.listener.AbstractMessageEventListener;
 import com.taotao.cloud.sys.api.constant.I18nRedisKeyConstants;
 import com.taotao.cloud.sys.api.model.dto.I18nDataUnique;

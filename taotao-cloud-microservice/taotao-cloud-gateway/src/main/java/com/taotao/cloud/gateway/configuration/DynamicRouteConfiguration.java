@@ -18,8 +18,8 @@ package com.taotao.cloud.gateway.configuration;
 
 import static org.springframework.cloud.loadbalancer.core.CachingServiceInstanceListSupplier.SERVICE_INSTANCE_CACHE_NAME;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;

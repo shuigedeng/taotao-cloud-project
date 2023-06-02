@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.util.ArrayUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

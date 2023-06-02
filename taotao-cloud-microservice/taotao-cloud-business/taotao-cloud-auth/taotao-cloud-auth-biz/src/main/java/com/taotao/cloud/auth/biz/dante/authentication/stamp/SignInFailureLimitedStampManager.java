@@ -29,7 +29,7 @@ import cn.herodotus.engine.cache.jetcache.stamp.AbstractCountStampManager;
 import cn.herodotus.engine.oauth2.authentication.dto.SignInErrorStatus;
 import cn.herodotus.engine.oauth2.core.constants.OAuth2Constants;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
-import cn.hutool.crypto.SecureUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

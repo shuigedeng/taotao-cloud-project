@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.mgr.ctrl.merchant;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.ApiCodeEnum;
 import com.taotao.cloud.payment.biz.jeepay.core.entity.MchApp;

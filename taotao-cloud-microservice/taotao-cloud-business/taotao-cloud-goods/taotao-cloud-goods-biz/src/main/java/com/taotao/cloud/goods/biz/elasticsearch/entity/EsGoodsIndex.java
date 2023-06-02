@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.elasticsearch.entity;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;

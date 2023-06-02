@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.member.biz.service.business.impl;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.lang.UUID;
-import cn.hutool.core.text.CharSequenceUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.lang.UUID;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;

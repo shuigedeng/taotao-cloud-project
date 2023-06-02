@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.authentication.provider;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
 import com.taotao.cloud.auth.biz.dante.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.dante.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.auth.biz.dante.core.definition.HerodotusGrantType;

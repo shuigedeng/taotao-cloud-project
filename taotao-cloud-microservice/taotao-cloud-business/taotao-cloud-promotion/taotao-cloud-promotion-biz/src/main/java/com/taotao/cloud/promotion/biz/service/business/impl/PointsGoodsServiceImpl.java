@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.text.CharSequenceUtil;
+import org.dromara.hutoolcore.map.MapUtil;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.core.utils;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
 import java.util.Date;
 import org.apache.commons.lang3.StringUtils;

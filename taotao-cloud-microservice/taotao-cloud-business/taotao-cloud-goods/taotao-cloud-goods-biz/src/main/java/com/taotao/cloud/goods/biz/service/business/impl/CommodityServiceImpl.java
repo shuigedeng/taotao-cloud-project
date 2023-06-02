@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.goods.biz.service.business.impl;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutooljson.JSONArray;
+import org.dromara.hutooljson.JSONObject;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;

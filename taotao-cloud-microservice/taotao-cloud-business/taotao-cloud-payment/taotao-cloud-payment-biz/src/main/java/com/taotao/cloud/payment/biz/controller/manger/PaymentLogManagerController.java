@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.controller.manger;
 
-import cn.hutool.core.util.PageUtil;
+import org.dromara.hutoolcore.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;

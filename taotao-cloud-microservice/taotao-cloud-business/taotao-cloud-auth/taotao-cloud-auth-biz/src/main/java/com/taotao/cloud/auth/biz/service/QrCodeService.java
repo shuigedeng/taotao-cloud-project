@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.service;
 
-import cn.hutool.core.img.ImgUtil;
-import cn.hutool.extra.qrcode.QrCodeUtil;
-import cn.hutool.extra.qrcode.QrConfig;
+import org.dromara.hutoolcore.img.ImgUtil;
+import org.dromara.hutoolextra.qrcode.QrCodeUtil;
+import org.dromara.hutoolextra.qrcode.QrConfig;
 import org.springframework.stereotype.Service;
 
 /**

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.modules.push.vo;
 
-import cn.hutool.core.lang.Dict;
+import org.dromara.hutoolcore.lang.Dict;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

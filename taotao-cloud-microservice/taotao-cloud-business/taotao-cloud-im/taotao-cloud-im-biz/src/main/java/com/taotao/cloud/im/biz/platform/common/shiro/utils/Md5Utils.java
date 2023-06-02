@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.biz.platform.common.shiro.utils;
 
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.crypto.SecureUtil;
+import org.dromara.hutoolcore.util.RandomUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 

@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.generator.api.constant.GenConstants;
 import com.taotao.cloud.generator.biz.entity.GenTable;

@@ -18,9 +18,9 @@ package com.taotao.cloud.gateway.filter.global;
 
 import static com.taotao.cloud.gateway.utils.WebFluxUtils.isJsonRequest;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HtmlUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolhttp.HtmlUtil;
 import com.taotao.cloud.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;

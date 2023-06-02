@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.common.utils.common.JsonUtils;

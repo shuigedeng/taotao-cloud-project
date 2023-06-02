@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.demo.controller;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.yungouos.springboot.demo.common.ApiResponse;
 import com.yungouos.springboot.demo.entity.Order;

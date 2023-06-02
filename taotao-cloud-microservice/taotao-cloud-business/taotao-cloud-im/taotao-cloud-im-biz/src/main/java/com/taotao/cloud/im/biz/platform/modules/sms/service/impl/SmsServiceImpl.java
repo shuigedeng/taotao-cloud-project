@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.im.biz.platform.modules.sms.service.impl;
 
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.lang.Validator;
-import cn.hutool.core.util.RandomUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.lang.Validator;
+import org.dromara.hutoolcore.util.RandomUtil;
 import com.platform.common.config.PlatformConfig;
 import com.platform.common.enums.YesOrNoEnum;
 import com.platform.common.exception.BaseException;

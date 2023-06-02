@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.message.biz.austin.web.service.impl;
 
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpRequest;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolhttp.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;

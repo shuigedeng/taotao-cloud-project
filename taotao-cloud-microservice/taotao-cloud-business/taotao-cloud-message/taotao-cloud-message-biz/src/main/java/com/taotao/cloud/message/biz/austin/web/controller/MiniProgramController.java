@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolhttp.HttpUtil;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;

@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.management.entity;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.google.common.base.MoreObjects;
 import com.taotao.cloud.auth.biz.dante.core.constants.OAuth2Constants;
 import com.taotao.cloud.auth.biz.dante.core.definition.domain.RegisteredClientDetails;

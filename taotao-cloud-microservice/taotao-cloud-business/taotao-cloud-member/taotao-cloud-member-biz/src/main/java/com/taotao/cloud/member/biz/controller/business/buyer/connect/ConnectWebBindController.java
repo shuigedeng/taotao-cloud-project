@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.business.buyer.connect;
 
-import cn.hutool.core.lang.UUID;
+import org.dromara.hutoolcore.lang.UUID;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;

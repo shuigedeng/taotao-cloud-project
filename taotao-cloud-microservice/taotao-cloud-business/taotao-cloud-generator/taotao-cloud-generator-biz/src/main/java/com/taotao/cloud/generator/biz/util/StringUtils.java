@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.lang.Validator;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.convert.Convert;
+import org.dromara.hutoolcore.lang.Validator;
+import org.dromara.hutoolcore.util.StrUtil;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;

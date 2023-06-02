@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.wechat;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;

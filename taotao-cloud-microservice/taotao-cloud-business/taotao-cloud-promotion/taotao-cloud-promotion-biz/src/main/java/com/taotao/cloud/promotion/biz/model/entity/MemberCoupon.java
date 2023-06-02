@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.promotion.biz.model.entity;
 
-import cn.hutool.core.date.DateField;
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateField;
+import org.dromara.hutoolcore.date.DateTime;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;

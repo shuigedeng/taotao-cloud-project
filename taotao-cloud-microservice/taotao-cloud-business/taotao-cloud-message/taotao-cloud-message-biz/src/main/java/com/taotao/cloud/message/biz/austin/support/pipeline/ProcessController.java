@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.austin.support.pipeline;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
 import com.taotao.cloud.message.biz.austin.support.exception.ProcessException;

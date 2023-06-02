@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.wechat.biz.weixin.interceptor;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.weixin.config.CommonConstants;
 import com.joolun.weixin.constant.ConfigConstant;

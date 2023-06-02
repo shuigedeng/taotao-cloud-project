@@ -1,6 +1,6 @@
 package com.taotao.cloud.idea.plugin.listener.action;
 
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import com.intellij.ui.EditorTextField;
 
 import java.awt.event.ActionEvent;

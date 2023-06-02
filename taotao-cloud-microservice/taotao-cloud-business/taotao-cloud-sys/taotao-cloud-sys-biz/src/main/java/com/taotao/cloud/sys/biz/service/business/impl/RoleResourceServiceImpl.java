@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.mapper.IRoleResourceMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QRoleResource;

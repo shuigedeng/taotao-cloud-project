@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.pay.channel.pppay.payway;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.paypal.http.HttpResponse;
 import com.paypal.http.exceptions.HttpException;
 import com.paypal.http.serializer.Json;
@@ -121,7 +121,7 @@ public class PpPc extends PppayPaymentService {
             response = paypalWrapper.getClient().execute(request);
         } catch (HttpException e) {
             String message = e.getMessage();
-            cn.hutool.json.JSONObject messageObj = JSONUtil.parseObj(message);
+            org.dromara.hutooljson.JSONObject messageObj = JSONUtil.parseObj(message);
             String issue = messageObj.getByPath("details[0].issue", String.class);
             String description = messageObj.getByPath("details[0].description", String.class);
             channelRetMsg.setChannelState(ChannelRetMsg.ChannelState.CONFIRM_FAIL);

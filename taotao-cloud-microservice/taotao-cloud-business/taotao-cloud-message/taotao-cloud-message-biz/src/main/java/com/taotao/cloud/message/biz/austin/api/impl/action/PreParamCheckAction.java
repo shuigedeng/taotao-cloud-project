@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.austin.api.impl.action;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.api.domain.MessageParam;
 import com.taotao.cloud.message.biz.austin.api.impl.domain.SendTaskModel;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;

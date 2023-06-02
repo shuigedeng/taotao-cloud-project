@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.weixin.handler;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.joolun.weixin.constant.ConfigConstant;
 import com.joolun.weixin.entity.WxAutoReply;

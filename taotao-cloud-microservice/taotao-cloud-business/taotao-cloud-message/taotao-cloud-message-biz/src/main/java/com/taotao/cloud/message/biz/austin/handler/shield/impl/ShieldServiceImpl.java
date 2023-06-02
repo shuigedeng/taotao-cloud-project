@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.shield.impl;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;

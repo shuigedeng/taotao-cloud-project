@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.core.ctrls;
 
-import cn.hutool.core.text.CharSequenceUtil;
+import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;

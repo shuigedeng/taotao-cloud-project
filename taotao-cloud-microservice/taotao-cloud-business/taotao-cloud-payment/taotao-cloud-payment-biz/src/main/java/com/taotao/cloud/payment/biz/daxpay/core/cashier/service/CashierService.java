@@ -22,7 +22,7 @@ import cn.bootx.platform.baseapi.core.parameter.dao.SystemParamManager;
 import cn.bootx.platform.baseapi.core.parameter.entity.SystemParameter;
 import cn.bootx.platform.common.core.util.BigDecimalUtil;
 import cn.bootx.platform.starter.auth.util.SecurityUtil;
-import cn.hutool.core.collection.CollUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.idea.plugin.listener.action;
 
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolhttp.HttpUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.intellij.ui.EditorTextField;
 import com.taotao.cloud.idea.plugin.notification.ToolkitNotifier;

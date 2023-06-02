@@ -16,18 +16,18 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.util.DesensitizedUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.extra.qrcode.QrCodeUtil;
-import cn.hutool.extra.qrcode.QrConfig;
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.codec.Base64;
+import org.dromara.hutoolcore.date.DateUtil;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.util.DesensitizedUtil;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolcore.util.NumberUtil;
+import org.dromara.hutoolcore.util.RandomUtil;
+import org.dromara.hutoolextra.qrcode.QrCodeUtil;
+import org.dromara.hutoolextra.qrcode.QrConfig;
+import org.dromara.hutoolhttp.HttpUtil;
 import com.platform.common.config.PlatformConfig;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.constant.HeadConstant;

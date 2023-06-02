@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.core.utils;
 
-import cn.hutool.crypto.SecureUtil;
+import org.dromara.hutoolcrypto.SecureUtil;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
 import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
 import java.io.UnsupportedEncodingException;

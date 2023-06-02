@@ -24,7 +24,7 @@ package com.taotao.cloud.media.biz.media.config; // package com.zj.config;
 // import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 // import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //
-// import cn.hutool.core.util.StrUtil;
+// import org.dromara.hutoolcore.util.StrUtil;
 //
 /// **
 // * 静态资源配置

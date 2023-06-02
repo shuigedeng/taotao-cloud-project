@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.platform.common.constant.HeadConstant;
 import com.platform.common.shiro.ShiroUtils;
 import com.platform.common.utils.ServletUtils;

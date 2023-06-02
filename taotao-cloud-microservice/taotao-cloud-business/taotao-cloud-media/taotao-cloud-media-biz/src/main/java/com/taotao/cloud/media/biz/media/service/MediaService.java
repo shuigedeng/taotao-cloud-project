@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.media.biz.media.service;
 
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.crypto.digest.MD5;
+import org.dromara.hutoolcore.thread.ThreadUtil;
+import org.dromara.hutoolcrypto.digest.MD5;
 import com.taotao.cloud.media.biz.media.common.ClientType;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.thread.MediaTransfer;

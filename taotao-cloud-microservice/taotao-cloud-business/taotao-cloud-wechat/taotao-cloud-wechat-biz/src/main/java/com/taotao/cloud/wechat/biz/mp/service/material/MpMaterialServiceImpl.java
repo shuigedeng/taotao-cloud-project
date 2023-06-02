@@ -19,10 +19,10 @@ package com.taotao.cloud.wechat.biz.mp.service.material;
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.yudao.module.mp.enums.ErrorCodeConstants.*;
 
-import cn.hutool.core.io.FileTypeUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.ObjUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.io.FileTypeUtil;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolcore.util.ObjUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.module.infra.api.file.FileApi;
 import cn.iocoder.yudao.module.mp.controller.admin.material.vo.MpMaterialPageReqVO;

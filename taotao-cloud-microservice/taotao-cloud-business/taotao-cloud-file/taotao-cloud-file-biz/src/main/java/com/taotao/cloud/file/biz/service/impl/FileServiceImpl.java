@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.file.biz.service.impl;
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.io.FileTypeUtil;
+import org.dromara.hutoolcore.date.DatePattern;
+import org.dromara.hutoolcore.io.FileTypeUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.SecurityUtils;

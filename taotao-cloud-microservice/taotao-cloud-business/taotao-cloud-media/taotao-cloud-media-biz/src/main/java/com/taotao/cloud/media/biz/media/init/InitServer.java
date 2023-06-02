@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.biz.media.init;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;

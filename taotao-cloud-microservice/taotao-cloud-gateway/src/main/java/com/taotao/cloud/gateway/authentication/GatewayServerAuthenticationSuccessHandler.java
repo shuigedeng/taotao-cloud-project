@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import cn.hutool.core.collection.CollectionUtil;
+import org.dromara.hutoolcore.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.SecurityUser;

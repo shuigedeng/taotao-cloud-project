@@ -16,7 +16,7 @@ import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.core.payment.service.PaymentService;
 import cn.bootx.platform.daxpay.mq.PaymentEventSender;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
-import cn.hutool.core.collection.CollectionUtil;
+import org.dromara.hutoolcore.collection.CollectionUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

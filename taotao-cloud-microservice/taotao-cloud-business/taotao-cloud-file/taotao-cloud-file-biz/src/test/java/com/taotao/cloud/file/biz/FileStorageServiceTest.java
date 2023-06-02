@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.file.biz;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.lang.Assert;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.lang.Assert;
 import com.taotao.cloud.oss.common.storage.FileInfo;
 import com.taotao.cloud.oss.common.storage.FileStorageService;
 import com.taotao.cloud.oss.common.storage.UploadPretreatment;

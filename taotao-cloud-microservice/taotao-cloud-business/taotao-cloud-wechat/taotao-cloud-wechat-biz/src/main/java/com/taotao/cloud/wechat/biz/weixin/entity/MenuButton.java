@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.biz.weixin.entity;
 
-import cn.hutool.json.JSONObject;
+import org.dromara.hutooljson.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.model.entity;
 
-import cn.hutool.http.HtmlUtil;
+import org.dromara.hutoolhttp.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.utils.lang.StringUtils;

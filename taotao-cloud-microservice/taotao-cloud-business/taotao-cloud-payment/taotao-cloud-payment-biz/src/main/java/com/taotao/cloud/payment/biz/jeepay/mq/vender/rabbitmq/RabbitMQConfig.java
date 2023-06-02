@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.mq.vender.rabbitmq;
 
-import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.ReflectUtil;
+import org.dromara.hutoolcore.util.ClassUtil;
+import org.dromara.hutoolcore.util.ReflectUtil;
 import com.jeequan.jeepay.components.mq.constant.MQSendTypeEnum;
 import com.jeequan.jeepay.components.mq.constant.MQVenderCS;
 import com.jeequan.jeepay.components.mq.model.AbstractMQ;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.api.feign.fallback;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.wechat.api.feign.IFeignDictApi;
 import com.taotao.cloud.wechat.api.feign.response.FeignDictResponse;

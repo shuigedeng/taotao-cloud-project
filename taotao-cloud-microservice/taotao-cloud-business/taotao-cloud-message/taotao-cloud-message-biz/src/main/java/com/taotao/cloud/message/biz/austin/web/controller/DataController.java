@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.web.controller;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.web.service.DataService;
 import com.taotao.cloud.message.biz.austin.web.vo.DataParam;
 import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;

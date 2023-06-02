@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolhttp.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;

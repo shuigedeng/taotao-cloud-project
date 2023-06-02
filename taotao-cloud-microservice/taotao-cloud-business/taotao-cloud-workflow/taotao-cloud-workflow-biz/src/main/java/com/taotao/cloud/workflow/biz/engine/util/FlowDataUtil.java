@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.api.vo.OrganizeEntity;
 import com.taotao.cloud.workflow.api.vo.PositionEntity;

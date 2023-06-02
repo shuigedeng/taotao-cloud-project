@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.kit.plugin.wechat;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.ContentType;
+import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutoolhttp.ContentType;
 import com.taotao.cloud.payment.biz.kit.core.PaymentHttpResponse;
 import com.taotao.cloud.payment.biz.kit.core.enums.RequestMethodEnums;
 import com.taotao.cloud.payment.biz.kit.core.kit.HttpKit;

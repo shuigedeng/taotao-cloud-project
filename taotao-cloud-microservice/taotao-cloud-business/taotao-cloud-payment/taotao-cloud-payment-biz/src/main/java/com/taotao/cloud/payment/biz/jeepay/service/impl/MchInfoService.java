@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.jeepay.service.impl;
 
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.RandomUtil;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolcore.util.RandomUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.ApiCodeEnum;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;

@@ -18,13 +18,13 @@ package com.taotao.cloud.generator.biz.service;
 
 import static com.taotao.cloud.common.constant.StrPool.UTF8;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.lang.Dict;
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.ObjectUtil;
+import org.dromara.hutoolcore.collection.CollUtil;
+import org.dromara.hutoolcore.io.FileUtil;
+import org.dromara.hutoolcore.io.IoUtil;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutoolcore.lang.Snowflake;
+import org.dromara.hutoolcore.util.IdUtil;
+import org.dromara.hutoolcore.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;

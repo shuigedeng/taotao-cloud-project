@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.jeepay.service.impl;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;

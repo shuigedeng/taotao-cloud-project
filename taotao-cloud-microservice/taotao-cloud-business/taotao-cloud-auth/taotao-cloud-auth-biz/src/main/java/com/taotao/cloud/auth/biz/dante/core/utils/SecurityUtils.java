@@ -26,8 +26,8 @@
 package com.taotao.cloud.auth.biz.dante.core.utils;
 
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
+import org.dromara.hutoolcore.bean.BeanUtil;
+import org.dromara.hutoolcore.bean.copier.CopyOptions;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

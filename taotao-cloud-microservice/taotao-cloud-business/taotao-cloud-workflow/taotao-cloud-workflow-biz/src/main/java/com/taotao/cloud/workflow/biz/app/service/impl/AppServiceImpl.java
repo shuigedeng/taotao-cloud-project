@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.app.service.impl;
 
-import cn.hutool.core.collection.ListUtil;
+import org.dromara.hutoolcore.collection.ListUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

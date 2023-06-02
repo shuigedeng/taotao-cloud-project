@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.front.controller;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.front.util.Constants;
 import com.taotao.cloud.front.util.CookieUtil;
 import com.taotao.cloud.front.util.ResponseBase;

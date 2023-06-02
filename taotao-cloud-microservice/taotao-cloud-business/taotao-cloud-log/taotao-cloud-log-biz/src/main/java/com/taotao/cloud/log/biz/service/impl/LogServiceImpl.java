@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.log.biz.service.impl;
 
-import cn.hutool.core.lang.Dict;
-import cn.hutool.json.JSONObject;
+import org.dromara.hutoolcore.lang.Dict;
+import org.dromara.hutooljson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;

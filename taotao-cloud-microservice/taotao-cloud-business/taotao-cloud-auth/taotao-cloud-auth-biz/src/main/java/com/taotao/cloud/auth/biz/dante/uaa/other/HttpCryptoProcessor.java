@@ -32,7 +32,7 @@ import cn.herodotus.engine.rest.core.constants.RestConstants;
 import cn.herodotus.engine.rest.core.definition.crypto.AsymmetricCryptoProcessor;
 import cn.herodotus.engine.rest.core.definition.crypto.SymmetricCryptoProcessor;
 import cn.herodotus.engine.rest.core.exception.SessionInvalidException;
-import cn.hutool.core.util.IdUtil;
+import org.dromara.hutoolcore.util.IdUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

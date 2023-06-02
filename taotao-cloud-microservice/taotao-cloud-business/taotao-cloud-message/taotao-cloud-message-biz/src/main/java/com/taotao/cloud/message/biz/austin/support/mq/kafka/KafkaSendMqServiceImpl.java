@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.support.mq.kafka;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
 import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
 import java.nio.charset.StandardCharsets;

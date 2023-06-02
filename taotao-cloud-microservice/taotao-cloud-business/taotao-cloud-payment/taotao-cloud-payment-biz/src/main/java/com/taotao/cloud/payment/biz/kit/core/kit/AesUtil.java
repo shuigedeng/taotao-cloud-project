@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
-import cn.hutool.core.codec.Base64;
+import org.dromara.hutoolcore.codec.Base64;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;

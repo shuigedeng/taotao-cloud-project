@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
-import cn.hutool.crypto.digest.DigestUtil;
+import org.dromara.hutoolcrypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

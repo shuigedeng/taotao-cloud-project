@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.domain;
 
-import cn.hutool.core.date.DateUtil;
+import org.dromara.hutoolcore.date.DateUtil;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.platform.common.enums.YesOrNoEnum;

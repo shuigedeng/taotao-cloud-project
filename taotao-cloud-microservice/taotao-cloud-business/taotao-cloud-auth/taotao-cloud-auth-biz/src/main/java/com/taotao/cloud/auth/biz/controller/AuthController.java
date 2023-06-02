@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.controller; // package com.taotao.cloud.auth.biz.controller;
 //
-// import cn.hutool.core.util.IdUtil;
-// import cn.hutool.crypto.asymmetric.KeyType;
-// import cn.hutool.crypto.asymmetric.RSA;
+// import org.dromara.hutoolcore.util.IdUtil;
+// import org.dromara.hutoolcrypto.asymmetric.KeyType;
+// import org.dromara.hutoolcrypto.asymmetric.RSA;
 // import com.wf.captcha.ArithmeticCaptcha;
 // import io.undertow.util.BadRequestException;
 // import java.util.HashMap;
