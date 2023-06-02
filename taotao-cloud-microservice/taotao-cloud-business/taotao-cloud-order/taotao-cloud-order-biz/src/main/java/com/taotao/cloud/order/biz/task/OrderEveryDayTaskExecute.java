@@ -166,7 +166,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
         if (!orderItems.isEmpty()) {
             // 获取订单货物ID
             List<Long> orderItemIdList =
-                    orderItems.stream().map(OrderItem::getId).collect(Collectors.toList());
+                    orderItems.stream().map(OrderItem::getId).toList();
 
             // 修改订单售后状态
             LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper = new LambdaUpdateWrapper<OrderItem>()
@@ -195,7 +195,7 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
         if (!orderItems.isEmpty()) {
             // 获取订单货物ID
             List<Long> orderItemIdList =
-                    orderItems.stream().map(OrderItem::getId).collect(Collectors.toList());
+                    orderItems.stream().map(OrderItem::getId).toList();
 
             // 修改订单投诉状态
             LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper = new LambdaUpdateWrapper<OrderItem>()

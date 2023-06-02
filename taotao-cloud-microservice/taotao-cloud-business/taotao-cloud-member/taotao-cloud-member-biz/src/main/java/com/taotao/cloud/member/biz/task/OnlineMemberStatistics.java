@@ -61,7 +61,7 @@ public class OnlineMemberStatistics implements EveryHourExecute {
         Calendar finalCalendar = calendar;
         onlineMemberVOS = onlineMemberVOS.stream()
                 .filter(onlineMemberVO -> onlineMemberVO.getDate().after(finalCalendar.getTime()))
-                .collect(Collectors.toList());
+                .toList();
 
         // 计入新数据
         calendar = Calendar.getInstance();
@@ -103,7 +103,7 @@ public class OnlineMemberStatistics implements EveryHourExecute {
 
         onlineMemberVOS = onlineMemberVOS.stream()
                 .filter(onlineMemberVO -> onlineMemberVO.getDate().after(calendar.getTime()))
-                .collect(Collectors.toList());
+                .toList();
         onlineMemberVOS.add(new OnlineMemberVO(time, num));
 
         // 写入缓存

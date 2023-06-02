@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.gateway.configuration;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
@@ -31,6 +30,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import org.apache.commons.lang3.ObjectUtils;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

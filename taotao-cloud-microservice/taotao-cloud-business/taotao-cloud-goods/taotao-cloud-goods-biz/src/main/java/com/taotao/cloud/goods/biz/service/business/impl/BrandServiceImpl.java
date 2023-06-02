@@ -168,7 +168,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
         // 分了商品绑定关系查询
         List<Goods> goods = goodsService.getByBrandIds(brandIds);
         if (!goods.isEmpty()) {
-            List<String> goodsNames = goods.stream().map(Goods::getGoodsName).collect(Collectors.toList());
+            List<String> goodsNames = goods.stream().map(Goods::getGoodsName).toList();
             throw new BusinessException(ResultEnum.BRAND_BIND_GOODS_ERROR.getCode(), JSONUtil.toJsonStr(goodsNames));
         }
     }

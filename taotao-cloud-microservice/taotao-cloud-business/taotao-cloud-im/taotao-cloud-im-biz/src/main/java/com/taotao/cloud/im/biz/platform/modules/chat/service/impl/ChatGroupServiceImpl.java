@@ -137,7 +137,7 @@ public class ChatGroupServiceImpl extends BaseServiceImpl<ChatGroup> implements 
         // 通知组员
         chatPushService.pushMsg(formatFrom(list, paramVo1), paramVo1, PushMsgTypeEnum.ALERT);
         // 通知群主
-        List<String> nickList = userList.stream().map(ChatUser::getNickName).collect(Collectors.toList());
+        List<String> nickList = userList.stream().map(ChatUser::getNickName).toList();
         String content = StrUtil.format(ApiConstant.NOTICE_GROUP_CREATE_MASTER, CollUtil.join(nickList, "、"));
         PushParamVo paramVo2 = new PushParamVo()
                 .setUserId(group.getId())
@@ -220,7 +220,7 @@ public class ChatGroupServiceImpl extends BaseServiceImpl<ChatGroup> implements 
         }
         // 通知
         ChatGroup group = getById(groupId);
-        List<String> nickList = newUserList.stream().map(ChatUser::getNickName).collect(Collectors.toList());
+        List<String> nickList = newUserList.stream().map(ChatUser::getNickName).toList();
         String content = StrUtil.format(ApiConstant.NOTICE_GROUP_JOIN, CollUtil.join(nickList, "、"));
         List<PushParamVo> pushParamList = queryPushParam(group, content);
         chatPushService.pushMsg(pushParamList, PushMsgTypeEnum.ALERT);
@@ -287,7 +287,7 @@ public class ChatGroupServiceImpl extends BaseServiceImpl<ChatGroup> implements 
             throw new BaseException("好友列表不能包含自己");
         }
         // 去重
-        list = list.stream().distinct().collect(Collectors.toList());
+        list = list.stream().distinct().toList();
         // 验证
         if (CollectionUtils.isEmpty(list)) {
             throw new BaseException("好友列表不能为空");
@@ -319,7 +319,7 @@ public class ChatGroupServiceImpl extends BaseServiceImpl<ChatGroup> implements 
         updPortrait(groupId);
         String groupName = formatGroupName(group.getId(), group.getName());
         // 群主
-        List<String> nickList = userList.stream().map(ChatUser::getNickName).collect(Collectors.toList());
+        List<String> nickList = userList.stream().map(ChatUser::getNickName).toList();
         PushParamVo paramVo1 = new PushParamVo()
                 .setUserId(group.getId())
                 .setNickName(groupName)
@@ -504,7 +504,7 @@ public class ChatGroupServiceImpl extends BaseServiceImpl<ChatGroup> implements 
                                 .setKicked(YesOrNoEnum.NO))
                         .stream()
                         .map(ChatGroupInfo::getGroupId)
-                        .collect(Collectors.toList());
+                        .toList();
         // 集合判空
         if (CollectionUtils.isEmpty(groupList)) {
             return dataList;
@@ -612,6 +612,6 @@ public class ChatGroupServiceImpl extends BaseServiceImpl<ChatGroup> implements 
         }
         return JSONUtil.toJsonStr(CollUtil.sub(newUserList, 0, GROUP_COUNT).stream()
                 .map(ChatUser::getPortrait)
-                .collect(Collectors.toList()));
+                .toList());
     }
 }

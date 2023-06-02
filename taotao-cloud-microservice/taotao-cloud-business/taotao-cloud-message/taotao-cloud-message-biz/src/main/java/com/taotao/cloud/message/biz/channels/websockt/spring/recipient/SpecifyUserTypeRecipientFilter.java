@@ -36,7 +36,7 @@ public class SpecifyUserTypeRecipientFilter implements RecipientFilter {
 	 */
 	@Override
 	public List<SysUser> filter(List<Object> filterCondition) {
-		List<Integer> userTypes = filterCondition.stream().map(Integer.class::cast).collect(Collectors.toList());
+		List<Integer> userTypes = filterCondition.stream().map(Integer.class::cast).toList();
 		return sysUserService.listByUserTypes(userTypes);
 	}
 

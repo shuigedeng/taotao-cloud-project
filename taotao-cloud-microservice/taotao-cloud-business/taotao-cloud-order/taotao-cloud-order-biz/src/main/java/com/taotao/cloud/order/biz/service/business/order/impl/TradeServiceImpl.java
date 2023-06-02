@@ -168,7 +168,7 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
         }
         List<String> ids = memberCouponDTOList.stream()
                 .map(e -> e.getMemberCoupon().getId())
-                .collect(Collectors.toList());
+                .toList();
         memberCouponApi.used(ids);
         memberCouponDTOList.forEach(
                 e -> couponApi.usedCoupon(e.getMemberCoupon().getCouponId(), 1));

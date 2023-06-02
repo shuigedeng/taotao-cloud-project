@@ -56,6 +56,6 @@ public class ScheduleTaskRecordImpl implements ScheduleTaskRecord {
 			.map(task -> {
 				return BeanUtil.copyProperties(task, ScheduledTask.class);
 			})
-			.collect(Collectors.toList());
+			.toList();
 	}
 }

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import org.dromara.hutoolcore.convert.Convert;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -24,6 +23,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.dromara.hutool.core.convert.Convert;
 
 /**
  * 数据库助手

@@ -69,7 +69,7 @@ public class OperateLogMongoService implements OperateLogService {
 
         Page<OperateLogMongo> page = repository.findAll(example, pageable);
         List<OperateLogDto> records =
-                page.getContent().stream().map(OperateLogMongo::toDto).collect(Collectors.toList());
+                page.getContent().stream().map(OperateLogMongo::toDto).toList();
 
         return PageResult.of(
                 page.getTotalElements(), 1, operateLogParam.getCurrentPage(), operateLogParam.getPageSize(), records);

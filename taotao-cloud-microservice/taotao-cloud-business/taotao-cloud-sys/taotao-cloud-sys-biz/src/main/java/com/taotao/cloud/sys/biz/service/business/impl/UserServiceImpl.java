@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -32,6 +31,7 @@ import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,7 +104,7 @@ public class UserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, Use
 				sysUserRole.setUserId(user.getId());
 				return sysUserRole;
 			})
-			.collect(Collectors.toList());
+			.toList();
 
 		userRelationService.saveBatch(userRoles);
 		return user;

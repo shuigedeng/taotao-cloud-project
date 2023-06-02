@@ -73,7 +73,7 @@ public class DistributionPriceRender implements ICartRenderStep {
                 .map(cartSkuVO -> {
                     return cartSkuVO.getGoodsSku().getId();
                 })
-                .collect(Collectors.toList());
+                .toList();
         // 是否包含分销商品
         List<DistributionGoods> distributionGoods = distributionGoodsService.distributionGoods(skuIds);
         if (distributionGoods != null && distributionGoods.size() > 0) {

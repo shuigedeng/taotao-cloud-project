@@ -98,7 +98,7 @@ public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo> imp
         // 查询所有成员
         List<ChatGroupInfo> infoList =
                 this.queryList(new ChatGroupInfo().setGroupId(groupId).setKicked(YesOrNoEnum.NO));
-        return infoList.stream().map(ChatGroupInfo::getUserId).collect(Collectors.toList());
+        return infoList.stream().map(ChatGroupInfo::getUserId).toList();
     }
 
     @Override
@@ -108,7 +108,7 @@ public class ChatGroupInfoServiceImpl extends BaseServiceImpl<ChatGroupInfo> imp
         if (!CollectionUtils.isEmpty(userList)) {
             dataList = dataList.stream()
                     .filter(data -> userList.contains(data.getUserId()))
-                    .collect(Collectors.toList());
+                    .toList();
         }
         return dataList;
     }

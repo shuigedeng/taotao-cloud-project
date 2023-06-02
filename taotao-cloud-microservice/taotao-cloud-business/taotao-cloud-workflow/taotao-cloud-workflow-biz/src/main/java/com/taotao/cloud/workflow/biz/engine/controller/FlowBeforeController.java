@@ -124,9 +124,9 @@ public class FlowBeforeController {
         List<FlowBeforeListVO> listVO = new LinkedList<>();
         List<FlowTaskListModel> records = data.getRecords();
         List<UserEntity> userList = serviceUtil.getUserName(
-                records.stream().map(FlowTaskListModel::getCreatorUserId).collect(Collectors.toList()));
+                records.stream().map(FlowTaskListModel::getCreatorUserId).toList());
         List<FlowEngineEntity> engineList = flowEngineService.getFlowList(
-                records.stream().map(FlowTaskListModel::getFlowId).collect(Collectors.toList()));
+                records.stream().map(FlowTaskListModel::getFlowId).toList());
 
         if (records.size() > 0) {
             for (FlowTaskListModel task : records) {

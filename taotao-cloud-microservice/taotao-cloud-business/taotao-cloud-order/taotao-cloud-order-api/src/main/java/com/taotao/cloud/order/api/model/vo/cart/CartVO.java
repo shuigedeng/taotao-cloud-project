@@ -87,7 +87,7 @@ public record CartVO(
     //  */
     // public List<CartSkuVO> getCheckedSkuList() {
     // 	if (skuList != null && !skuList.isEmpty()) {
-    // 		return skuList.stream().filter(CartSkuVO::getChecked).collect(Collectors.toList());
+    // 		return skuList.stream().filter(CartSkuVO::getChecked).toList();
     // 	}
     // 	return skuList;
     // }

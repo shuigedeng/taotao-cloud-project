@@ -109,7 +109,7 @@ public class FlowJsonUtil {
             List<String> list = flowTaskNodeList.stream()
                     .filter(t -> t.getSortCode() != null && t.getSortCode() < entity.getSortCode())
                     .map(FlowTaskNodeEntity::getNodeCode)
-                    .collect(Collectors.toList());
+                    .toList();
             list.removeAll(Arrays.asList(tepId));
             upList.addAll(list);
         }
@@ -126,7 +126,7 @@ public class FlowJsonUtil {
             List<String> list = flowTaskNodeList.stream()
                     .filter(t -> t.getSortCode() != null && t.getSortCode() > entity.getSortCode())
                     .map(FlowTaskNodeEntity::getNodeCode)
-                    .collect(Collectors.toList());
+                    .toList();
             list.removeAll(Arrays.asList(tepId));
             nextList.addAll(list);
         }
@@ -264,7 +264,7 @@ public class FlowJsonUtil {
                     customModel.setFlow(isFlow);
                     childNodeList.setConditionType(FlowCondition.INTERFLOW);
                     List<String> flowIdAll =
-                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).toList();
                     customModel.setFlowId(String.join(",", flowIdAll));
                 }
             }
@@ -328,7 +328,7 @@ public class FlowJsonUtil {
                     customModel.setFlow(isFlow);
                     childNodeList.setConditionType(FlowCondition.INTERFLOW);
                     List<String> flowIdAll =
-                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).toList();
                     customModel.setFlowId(String.join(",", flowIdAll));
                 }
             }
@@ -416,7 +416,7 @@ public class FlowJsonUtil {
                 if (isFlow) {
                     conditionList.setFlow(isFlow);
                     List<String> flowIdAll =
-                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).toList();
                     conditionList.setFlowId(String.join(",", flowIdAll));
                 }
             }
@@ -472,7 +472,7 @@ public class FlowJsonUtil {
                     customModel.setFlow(isFlow);
                     childNodeList.setConditionType(FlowCondition.INTERFLOW);
                     List<String> flowIdAll =
-                            conditionNodes.stream().map(ChildNode::getNodeId).collect(Collectors.toList());
+                            conditionNodes.stream().map(ChildNode::getNodeId).toList();
                     customModel.setFlowId(String.join(",", flowIdAll));
                 }
             }

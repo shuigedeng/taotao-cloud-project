@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pig4cloud.plugin.excel.annotation.RequestExcel;
 import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
@@ -18,6 +17,7 @@ import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -146,7 +146,7 @@ public class I18nDataController {
 		// 转换结构
 		List<I18nData> list = excelVos.stream()
 			.map(I18nDataConverter.INSTANCE::excelVoToPo)
-			.collect(Collectors.toList());
+			.toList();
 
 		// 跳过已有数据，返回已有数据列表
 //		if (importModeEnum == ImportModeEnum.SKIP_EXISTING) {
@@ -178,7 +178,7 @@ public class I18nDataController {
 			return new ArrayList<>();
 		}
 		// 转换为 excel vo 对象
-		return list.stream().map(I18nDataConverter.INSTANCE::poToExcelVo).collect(Collectors.toList());
+		return list.stream().map(I18nDataConverter.INSTANCE::poToExcelVo).toList();
 	}
 
 	/**

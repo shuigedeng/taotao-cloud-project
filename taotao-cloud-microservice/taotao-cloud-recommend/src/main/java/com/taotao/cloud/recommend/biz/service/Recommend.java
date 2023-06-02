@@ -41,7 +41,7 @@ public class Recommend {
         List<Integer> recommendations = UserCF.recommend(userId, data);
         return FileDataSource.getItemData().stream()
                 .filter(e -> recommendations.contains(e.getId()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -57,6 +57,6 @@ public class Recommend {
         List<Integer> recommendations = ItemCF.recommend(itemId, data);
         return FileDataSource.getItemData().stream()
                 .filter(e -> recommendations.contains(e.getId()))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.gateway.filter.gateway;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.constant.SecurityConstant;
 import com.taotao.cloud.common.exception.BaseException;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;

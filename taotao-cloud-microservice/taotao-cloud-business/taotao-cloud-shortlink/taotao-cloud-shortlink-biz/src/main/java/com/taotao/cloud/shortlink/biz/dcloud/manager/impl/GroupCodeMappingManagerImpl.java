@@ -104,7 +104,7 @@ public class GroupCodeMappingManagerImpl implements GroupCodeMappingManager {
         pageMap.put("total_record", groupCodeMappingDOPage.getTotal());
         pageMap.put("total_page", groupCodeMappingDOPage.getPages());
         pageMap.put("current_data", groupCodeMappingDOPage.getRecords()
-                .stream().map(obj -> beanProcess(obj)).collect(Collectors.toList()));
+                .stream().map(obj -> beanProcess(obj)).toList());
 
         return pageMap;
     }

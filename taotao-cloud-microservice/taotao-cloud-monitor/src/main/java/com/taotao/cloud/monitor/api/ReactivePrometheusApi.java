@@ -65,7 +65,7 @@ public class ReactivePrometheusApi {
                     labels.put("__taotao_prometheus_job", serviceId);
 
                     return instanceGrouped
-                            .collect(Collectors.toList())
+                            .toList()
                             .map(targets -> new TargetGroup(targets, labels));
                 });
     }

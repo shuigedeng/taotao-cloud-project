@@ -85,7 +85,7 @@ public class SecurityProperties {
         ApiProperties apiProperties = ContextUtils.getBean(ApiProperties.class, true);
         if (Objects.nonNull(apiProperties)) {
             String baseUri = apiProperties.getBaseUri();
-            ignoreUrl = ignoreUrl.stream().map(url -> baseUri + url).collect(Collectors.toList());
+            ignoreUrl = ignoreUrl.stream().map(url -> baseUri + url).toList();
             Collections.addAll(ignoreUrl, ENDPOINTS);
         }
     }

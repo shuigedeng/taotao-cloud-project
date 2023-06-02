@@ -247,7 +247,7 @@ public class UploadUtil {
                     if (keyWord != null && !StringUtils.isEmpty(keyWord)) {
                         data = data.stream()
                                 .filter(t -> t.getFileName().contains(keyWord))
-                                .collect(Collectors.toList());
+                                .toList();
                     }
                 }
                 break;
@@ -270,7 +270,7 @@ public class UploadUtil {
                     if (keyWord != null && !StringUtils.isEmpty(keyWord)) {
                         data = data.stream()
                                 .filter(t -> t.getFileName().contains(keyWord))
-                                .collect(Collectors.toList());
+                                .toList();
                     }
                 }
                 break;
@@ -293,7 +293,7 @@ public class UploadUtil {
                         || "pptx".equals(m.getFileType())
                         || "ppt".equals(m.getFileType())
                         || "pdf".equals(m.getFileType()))
-                .collect(Collectors.toList());
+                .toList();
         return data;
     }
 

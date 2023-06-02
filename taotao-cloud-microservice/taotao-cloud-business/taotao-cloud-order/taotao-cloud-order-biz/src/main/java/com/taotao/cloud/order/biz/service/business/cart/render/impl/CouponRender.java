@@ -127,7 +127,7 @@ public class CouponRender implements ICartRenderStep {
             return;
         }
         List<PriceDetailDTO> priceDetailDTOS =
-                filterSku.stream().map(CartSkuVO::getPriceDetailDTO).collect(Collectors.toList());
+                filterSku.stream().map(CartSkuVO::getPriceDetailDTO).toList();
 
         PriceDetailDTO totalPrice = new PriceDetailDTO();
         totalPrice.accumulationPriceDTO(priceDetailDTOS);
@@ -162,7 +162,7 @@ public class CouponRender implements ICartRenderStep {
         } else {
             filterSku = cartSkuVOS.stream()
                     .filter(cartSkuVO -> cartSkuVO.getStoreId().equals(memberCoupon.getStoreId()))
-                    .collect(Collectors.toList());
+                    .toList();
         }
         if (filterSku == null || filterSku.isEmpty()) {
             return Collections.emptyList();
@@ -177,7 +177,7 @@ public class CouponRender implements ICartRenderStep {
                         .filter(cartSkuVO -> memberCoupon
                                 .getScopeId()
                                 .contains(cartSkuVO.getGoodsSku().getId()))
-                        .collect(Collectors.toList());
+                        .toList();
                 break;
 
             case PORTION_SHOP_CATEGORY:
@@ -197,7 +197,7 @@ public class CouponRender implements ICartRenderStep {
                             String categoryId = categoryPath[categoryPath.length - 1];
                             return memberCoupon.getScopeId().contains(categoryId);
                         })
-                        .collect(Collectors.toList());
+                        .toList();
                 break;
             default:
                 return Collections.emptyList();
@@ -228,7 +228,7 @@ public class CouponRender implements ICartRenderStep {
                     }
                     return false;
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

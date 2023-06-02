@@ -52,7 +52,7 @@ public class FlowEngineVisibleServiceImpl extends ServiceImpl<FlowEngineVisibleM
         List<String> userList = new ArrayList<>();
         userList.add(userId);
         List<UserRelationEntity> list = serviceUtil.getListByUserIdAll(userList);
-        List<String> userRelationList = list.stream().map(u -> u.getObjectId()).collect(Collectors.toList());
+        List<String> userRelationList = list.stream().map(u -> u.getObjectId()).toList();
         userRelationList.add(userId);
         QueryWrapper<FlowEngineVisibleEntity> wrapper = new QueryWrapper<>();
         wrapper.lambda().in(FlowEngineVisibleEntity::getOperatorId, userRelationList);

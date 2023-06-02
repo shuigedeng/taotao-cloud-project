@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignDictApi;
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import io.seata.core.context.RootContext;
 import io.seata.core.exception.TransactionException;
 import io.seata.tm.api.GlobalTransactionContext;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

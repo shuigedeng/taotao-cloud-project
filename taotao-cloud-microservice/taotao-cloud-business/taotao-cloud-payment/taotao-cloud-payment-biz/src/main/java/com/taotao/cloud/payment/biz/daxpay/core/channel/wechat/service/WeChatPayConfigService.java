@@ -115,7 +115,7 @@ public class WeChatPayConfigService {
         return WeChatPayWay.getPayWays()
             .stream()
             .map(e -> new KeyValue(e.getCode(), e.getName()))
-            .collect(Collectors.toList());
+            .toList();
     }
 
 }

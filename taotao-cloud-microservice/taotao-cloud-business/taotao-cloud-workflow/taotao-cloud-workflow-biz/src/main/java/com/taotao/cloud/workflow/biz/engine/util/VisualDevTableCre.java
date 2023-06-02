@@ -150,7 +150,7 @@ public class VisualDevTableCre {
                     String tableModel = fieLdsModel.getTableModel();
                     List<FieLdsModel> fieldsList = fieLdsModel.getChildList().stream()
                             .map(t -> t.getFieLdsModel())
-                            .collect(Collectors.toList());
+                            .toList();
                     for (FieLdsModel tableFieLdsModel : fieldsList) {
                         this.fieldList(tableFieLdsModel, tableName, tableList);
                         tableNameAll.put(tableFieLdsModel.getVModel(), tableName);

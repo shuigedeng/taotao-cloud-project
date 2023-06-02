@@ -85,7 +85,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
         engine.setFormType(2);
         engine.setType(1);
         List<FlowEngineEntity> engineEntities = getList(engine);
-        List<String> id = engineEntities.stream().map(FlowEngineEntity::getId).collect(Collectors.toList());
+        List<String> id = engineEntities.stream().map(FlowEngineEntity::getId).toList();
         QueryWrapper<FlowEngineEntity> queryWrapper = new QueryWrapper<>();
         if (StrUtil.isNotEmpty(pagination.getKeyword())) {
             flag = true;
@@ -166,7 +166,7 @@ public class FlowEngineServiceImpl extends ServiceImpl<FlowEngineMapper, FlowEng
         UserInfo userInfo = userProvider.get();
         List<String> id = flowEngineVisibleService.getVisibleFlowList(userInfo.getUserId()).stream()
                 .map(FlowEngineVisibleEntity::getFlowId)
-                .collect(Collectors.toList());
+                .toList();
         List<FlowEngineEntity> flowFormTypeList = getFlowFormTypeList();
         List<String> formTypeId =
                 flowFormTypeList.stream().map(FlowEngineEntity::getId).toList();

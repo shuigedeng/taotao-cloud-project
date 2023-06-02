@@ -57,7 +57,7 @@ public class WeChatMediaService {
         WxMpMaterialService materialService = wxMpService.getMaterialService();
         val result = materialService.materialFileBatchGet(type, PageQuery.start(), PageQuery.getSize());
         //        val result = new WxMpMaterialFileBatchGetResult();
-        val items = result.getItems().stream().map(WeChatMediaDto::init).collect(Collectors.toList());
+        val items = result.getItems().stream().map(WeChatMediaDto::init).toList();
         PageResult<WeChatMediaDto> pageResult = new PageResult<>();
         pageResult
                 .setCurrent(PageQuery.getCurrent())

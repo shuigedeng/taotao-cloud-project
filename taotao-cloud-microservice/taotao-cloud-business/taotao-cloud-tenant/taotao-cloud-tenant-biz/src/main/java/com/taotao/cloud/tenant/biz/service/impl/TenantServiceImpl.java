@@ -76,7 +76,7 @@ public class TenantServiceImpl implements TenantService {
 
 	@Override
 	public List<Long> getTenantIds() {
-		return tenantManager.listTenant().stream().map(Tenant::getId).collect(Collectors.toList());
+		return tenantManager.listTenant().stream().map(Tenant::getId).toList();
 	}
 
 	@Transactional(rollbackFor = Exception.class)

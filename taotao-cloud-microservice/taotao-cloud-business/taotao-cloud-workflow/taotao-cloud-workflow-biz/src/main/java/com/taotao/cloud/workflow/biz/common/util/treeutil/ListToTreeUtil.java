@@ -49,7 +49,7 @@ public class ListToTreeUtil {
         List<TreeViewModel> treeList = new ArrayList<>();
         List<TreeViewModel> childNodeList = data.stream()
                 .filter(t -> String.valueOf(t.getParentId()).equals(parentId))
-                .collect(Collectors.toList());
+                .toList();
         for (TreeViewModel entity : childNodeList) {
             TreeViewModel model = new TreeViewModel();
             model.setId(entity.getId());
@@ -136,7 +136,7 @@ public class ListToTreeUtil {
     private static void getChildNodeList(
             List<TreeListModel> data, int level, String parentId, List<Object> treeGridList) {
         List<TreeListModel> childNodeList =
-                data.stream().filter(t -> t.getParentId().equals(parentId)).collect(Collectors.toList());
+                data.stream().filter(t -> t.getParentId().equals(parentId)).toList();
         if (childNodeList.size() > 0) {
             level++;
         }
@@ -230,7 +230,7 @@ public class ListToTreeUtil {
                 .filter(t -> JSONObject.parseObject(JSONObject.toJSONString(t))
                         .get(id)
                         .equals(json.getString(parentId)))
-                .collect(Collectors.toList());
+                .toList();
         dataAll.removeAll(data);
         for (int i = 0; i < data.size(); i++) {
             T entity = data.get(i);
@@ -263,7 +263,7 @@ public class ListToTreeUtil {
                 .filter(t -> JSONObject.parseObject(JSONObject.toJSONString(t))
                         .get(parentId)
                         .equals(fid))
-                .collect(Collectors.toList());
+                .toList();
         List<T> dataListAll = new ArrayList<>();
         CollectionUtils.addAll(dataListAll, dataAll);
         dataListAll.removeAll(data);
@@ -310,7 +310,7 @@ public class ListToTreeUtil {
                 .filter(t -> JSONObject.parseObject(JSONObject.toJSONString(t))
                         .get(parentId)
                         .equals(fid))
-                .collect(Collectors.toList());
+                .toList();
         dataAll.removeAll(data);
         for (int i = 0; i < data.size(); i++) {
             T entity = data.get(i);

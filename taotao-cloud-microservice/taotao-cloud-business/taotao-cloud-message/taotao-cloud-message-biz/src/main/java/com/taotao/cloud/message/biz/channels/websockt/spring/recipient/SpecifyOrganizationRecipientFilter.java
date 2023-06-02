@@ -36,7 +36,7 @@ public class SpecifyOrganizationRecipientFilter implements RecipientFilter {
 	 */
 	@Override
 	public List<SysUser> filter(List<Object> filterCondition) {
-		List<Integer> organizationIds = filterCondition.stream().map(Integer.class::cast).collect(Collectors.toList());
+		List<Integer> organizationIds = filterCondition.stream().map(Integer.class::cast).toList();
 		return sysUserService.listByOrganizationIds(organizationIds);
 	}
 

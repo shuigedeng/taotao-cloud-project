@@ -61,7 +61,7 @@ public class AnnouncementLoginEventListener {
 				.filter(x -> filterMatched(x, filterAttrs))
 				.map(Announcement::getId)
 				.map(id -> userAnnouncementService.prodUserAnnouncement(userId, id))
-				.collect(Collectors.toList());
+				.toList();
 			try {
 				userAnnouncementService.saveBatch(userAnnouncements);
 			}

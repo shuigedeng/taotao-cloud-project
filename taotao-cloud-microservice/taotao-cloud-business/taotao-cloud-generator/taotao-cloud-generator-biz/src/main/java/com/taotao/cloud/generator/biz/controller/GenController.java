@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.generator.biz.controller;
 
-import org.dromara.hutoolcore.convert.Convert;
-import org.dromara.hutoolcore.io.IoUtil;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.generator.biz.entity.GenTable;
 import com.taotao.cloud.generator.biz.entity.GenTableColumn;
@@ -30,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.io.IoUtil;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

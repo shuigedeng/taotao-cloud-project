@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
@@ -34,6 +33,7 @@ import com.taotao.cloud.sys.biz.service.business.IRoleService;
 import com.taotao.cloud.sys.biz.utils.TreeUtil;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -147,7 +147,7 @@ public class ResourceServiceImpl
 		//		// 此处还需要设置其他属性
 		//		.build())
 		//	.sorted(Comparator.comparingInt(MenuTreeVO::getSort))
-		//	.collect(Collectors.toList());
+		//	.toList();
 
 		// Long parent = parentId == null ? CommonConstant.MENU_TREE_ROOT_ID : parentId;
 		// return TreeUtil.build(menuTreeList, parent);

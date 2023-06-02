@@ -97,9 +97,9 @@ public class AppServiceImpl implements AppService {
         List<String> roles = roleApi.getAllRoleIdsByUserIdAndOrgId(userInfo.getUserId(), usersVO.getOrganizeId());
         List<RoleEntity> roleList = roleApi.getListByIds(roles);
         usersVO.setRoleName(
-                String.join("，", roleList.stream().map(RoleEntity::getFullName).collect(Collectors.toList())));
+                String.join("，", roleList.stream().map(RoleEntity::getFullName).toList()));
         usersVO.setRoleId(
-                String.join(".", roleList.stream().map(RoleEntity::getId).collect(Collectors.toList())));
+                String.join(".", roleList.stream().map(RoleEntity::getId).toList()));
         return usersVO;
     }
 
@@ -114,7 +114,7 @@ public class AppServiceImpl implements AppService {
                     : new ArrayList<>();
             List<String> positionName = positionApi.getPositionName(positionIds).stream()
                     .map(t -> t.getFullName())
-                    .collect(Collectors.toList());
+                    .toList();
             userInfoVO.setPositionName(String.join(",", positionName));
             OrganizeEntity info = organizeApi.getInfoById(entity.getOrganizeId());
             userInfoVO.setOrganizeName(info != null ? info.getFullName() : "");
@@ -140,21 +140,21 @@ public class AppServiceImpl implements AppService {
         List<String> positionList = data.stream()
                 .filter(m -> "Position".equals(m.getObjectType()))
                 .map(t -> t.getObjectId())
-                .collect(Collectors.toList());
+                .toList();
         Set<String> id = new LinkedHashSet<>();
         String[] position = StringUtil.isNotEmpty(userEntity.getPositionId())
                 ? userEntity.getPositionId().split(",")
                 : new String[] {};
         List<String> positions = positionList.stream()
                 .filter(t -> Arrays.asList(position).contains(t))
-                .collect(Collectors.toList());
+                .toList();
         id.addAll(positions);
         id.addAll(positionList);
         userInfo.setPositionIds(id.toArray(new String[id.size()]));
         if (!isAdmin) {
-            data = data.stream().filter(m -> "Role".equals(m.getObjectType())).collect(Collectors.toList());
+            data = data.stream().filter(m -> "Role".equals(m.getObjectType())).toList();
         }
-        List<String> roleList = data.stream().map(t -> t.getObjectId()).collect(Collectors.toList());
+        List<String> roleList = data.stream().map(t -> t.getObjectId()).toList();
         userInfo.setRoleIds(roleList);
     }
 
@@ -182,7 +182,7 @@ public class AppServiceImpl implements AppService {
         boolean b = userInfo.getIsAdministrator();
         List<String> subordinateIdsList = userApi.getListByManagerId(userInfo.getUserId()).stream()
                 .map(UserEntity::getId)
-                .collect(Collectors.toList());
+                .toList();
         userInfo.setSubordinateIds(subordinateIdsList);
         this.userInfo(userInfo, userInfo.getUserId(), b, userEntity);
         userInfo.setSubOrganizeIds(new String[] {});

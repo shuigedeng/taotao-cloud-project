@@ -18,8 +18,7 @@ package com.taotao.cloud.gateway.configuration;
 
 import static org.springframework.cloud.loadbalancer.core.CachingServiceInstanceListSupplier.SERVICE_INSTANCE_CACHE_NAME;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutool.core.collection.CollUtil;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
@@ -37,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.collection.ListUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -122,7 +123,7 @@ public class DynamicRouteConfiguration {
                                 + "get route definitions from nacos error info: {}",
                         e.getErrMsg());
             }
-            return Flux.fromIterable(CollUtil.newArrayList());
+            return Flux.fromIterable(ListUtil.empty());
         }
 
         private void addListener() {

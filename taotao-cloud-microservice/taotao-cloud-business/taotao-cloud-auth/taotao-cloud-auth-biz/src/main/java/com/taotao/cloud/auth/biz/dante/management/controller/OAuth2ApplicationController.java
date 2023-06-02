@@ -84,7 +84,7 @@ public class OAuth2ApplicationController extends BaseController<OAuth2Applicatio
 
 		Page<OAuth2Application> pages = applicationService.findByPage(pageNumber, pageSize);
 		if (ObjectUtils.isNotEmpty(pages) && CollectionUtils.isNotEmpty(pages.getContent())) {
-			List<OAuth2ApplicationDto> auth2Applications = pages.getContent().stream().map(this::toDto).collect(Collectors.toList());
+			List<OAuth2ApplicationDto> auth2Applications = pages.getContent().stream().map(this::toDto).toList();
 			return result(getPageInfoMap(auth2Applications, pages.getTotalPages(), pages.getTotalElements()));
 		}
 

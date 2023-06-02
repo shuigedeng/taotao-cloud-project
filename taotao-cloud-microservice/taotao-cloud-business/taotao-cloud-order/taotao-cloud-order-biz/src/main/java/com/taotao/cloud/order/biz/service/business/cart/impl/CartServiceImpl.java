@@ -336,7 +336,7 @@ public class CartServiceImpl implements ICartService {
             List<String> ids = tradeDTO.getSkuList().parallelStream()
                     .filter(i -> Boolean.TRUE.equals(i.getChecked()))
                     .map(i -> i.getGoodsSku().getId())
-                    .collect(Collectors.toList());
+                    .toList();
 
             List<EsGoodsIndex> esGoodsList = esGoodsSearchApi.getEsGoodsBySkuIds(ids);
             for (EsGoodsIndex esGoodsIndex : esGoodsList) {
@@ -345,7 +345,7 @@ public class CartServiceImpl implements ICartService {
                         List<String> couponIds = esGoodsIndex.getPromotionMap().keySet().parallelStream()
                                 .filter(i -> i.contains(PromotionTypeEnum.COUPON.name()))
                                 .map(i -> i.substring(i.lastIndexOf("-") + 1))
-                                .collect(Collectors.toList());
+                                .toList();
                         if (!couponIds.isEmpty()) {
                             List<MemberCoupon> currentGoodsCanUse = memberCouponApi.getCurrentGoodsCanUse(
                                     tradeDTO.getMemberId(), couponIds, totalPrice);
@@ -665,7 +665,7 @@ public class CartServiceImpl implements ICartService {
             // 分类路径是否包含
             return cartSkuVOS.stream()
                     .filter(i -> i.getGoodsSku().getCategoryPath().indexOf("," + memberCoupon.getScopeId() + ",") <= 0)
-                    .collect(Collectors.toList());
+                    .toList();
         } else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS.name())) {
             // 范围关联ID是否包含
             return cartSkuVOS.stream()
@@ -673,13 +673,13 @@ public class CartServiceImpl implements ICartService {
                                     .getScopeId()
                                     .indexOf("," + i.getGoodsSku().getId() + ",")
                             <= 0)
-                    .collect(Collectors.toList());
+                    .toList();
         } else if (memberCoupon.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_SHOP_CATEGORY.name())) {
             // 店铺分类路径是否包含
             return cartSkuVOS.stream()
                     .filter(i ->
                             i.getGoodsSku().getStoreCategoryPath().indexOf("," + memberCoupon.getScopeId() + ",") <= 0)
-                    .collect(Collectors.toList());
+                    .toList();
         }
         return new ArrayList<>();
     }

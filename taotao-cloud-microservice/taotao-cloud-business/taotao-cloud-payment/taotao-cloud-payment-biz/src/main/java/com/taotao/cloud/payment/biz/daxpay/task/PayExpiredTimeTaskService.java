@@ -33,7 +33,7 @@ public class PayExpiredTimeTaskService {
         List<Long> paymentIds = expiredTimeRepository.retrieveExpiredKeys(LocalDateTime.now())
             .stream()
             .map(Long::valueOf)
-            .collect(Collectors.toList());
+            .toList();
         if (CollUtil.isNotEmpty(paymentIds)) {
             expiredTimeRepository.removeKeys(paymentIds.stream().map(String::valueOf).toArray(String[]::new));
             paymentIds.forEach(paymentEventSender::sendPaymentExpiredTime);

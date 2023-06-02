@@ -69,12 +69,12 @@ public class AppMenuController {
         AuthorizeVO authorizeModel = authorizeApi.getAuthorize(true);
         List<ModuleModel> buttonListAll = authorizeModel.getModuleList().stream()
                 .filter(t -> "App".equals(t.getCategory()))
-                .collect(Collectors.toList());
+                .toList();
         List<ModuleModel> buttonList = buttonListAll;
         if (StringUtil.isNotEmpty(page.getKeyword())) {
             buttonList = buttonListAll.stream()
                     .filter(t -> t.getFullName().contains(page.getKeyword()))
-                    .collect(Collectors.toList());
+                    .toList();
         }
         List<UserMenuModel> list =
                 JsonUtil.getJsonToList(ListToTreeUtil.treeWhere(buttonList, buttonListAll), UserMenuModel.class);

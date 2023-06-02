@@ -113,7 +113,7 @@ public class AlipayConfigService {
         return AliPayWay.getPayWays()
             .stream()
             .map(e -> new KeyValue(e.getCode(), e.getName()))
-            .collect(Collectors.toList());
+            .toList();
     }
 
 }

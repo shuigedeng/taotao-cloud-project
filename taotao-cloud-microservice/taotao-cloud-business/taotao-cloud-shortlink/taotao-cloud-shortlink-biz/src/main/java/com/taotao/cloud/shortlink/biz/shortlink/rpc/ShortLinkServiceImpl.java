@@ -184,7 +184,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
                             .build();
                 })
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .toList();
 
         shortLinkManager.saveBatch(shortLinkList);
         log.info("create: size -> {}", shortLinkList.size());

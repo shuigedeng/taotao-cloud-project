@@ -95,25 +95,25 @@ public class WeChatTemplateService {
         // 微信公众号订阅模板
         List<WxMpTemplate> wxTemplates = templateMsgService.getAllPrivateTemplate().stream()
                 .filter(o -> StrUtil.isNotBlank(o.getPrimaryIndustry()))
-                .collect(Collectors.toList());
+                .toList();
         List<String> wxTemplateIds =
-                wxTemplates.stream().map(WxMpTemplate::getTemplateId).collect(Collectors.toList());
+                wxTemplates.stream().map(WxMpTemplate::getTemplateId).toList();
 
         // 系统中模板
         List<WeChatTemplate> weChatTemplates = weChatTemplateManager.findAll();
         List<String> weChatTemplatesIds =
-                weChatTemplates.stream().map(WeChatTemplate::getTemplateId).collect(Collectors.toList());
+                weChatTemplates.stream().map(WeChatTemplate::getTemplateId).toList();
 
         // 删除 本地有有,服务端没有
         List<Long> deleteIds = weChatTemplates.stream()
                 .filter(o -> !wxTemplateIds.contains(o.getTemplateId()))
                 .map(MpIdEntity::getId)
-                .collect(Collectors.toList());
+                .toList();
         // 新增 服务端有且本地没有
         List<WeChatTemplate> saveTemplate = wxTemplates.stream()
                 .filter(o -> !weChatTemplatesIds.contains(o.getTemplateId()))
                 .map(WeChatTemplate::init)
-                .collect(Collectors.toList());
+                .toList();
         weChatTemplateManager.saveAll(saveTemplate);
         weChatTemplateManager.deleteByIds(deleteIds);
         SecurityUtil.getCurrentUser()

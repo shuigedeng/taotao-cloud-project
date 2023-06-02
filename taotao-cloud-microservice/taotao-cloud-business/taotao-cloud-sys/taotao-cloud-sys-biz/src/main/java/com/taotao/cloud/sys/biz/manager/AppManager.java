@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.manager;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -28,6 +27,7 @@ import com.taotao.cloud.sys.biz.model.entity.app.App;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
 /**

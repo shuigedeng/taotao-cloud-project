@@ -110,7 +110,7 @@ public class FlowEngineController {
         IPage<FlowEngineEntity> entityPage = flowEngineService.getPageList(pagination);
         List<FlowEngineEntity> records = entityPage.getRecords();
         List<DictionaryDataEntity> dictionList = serviceUtil.getDictionName(
-                records.stream().map(FlowEngineEntity::getCategory).collect(Collectors.toList()));
+                records.stream().map(FlowEngineEntity::getCategory).toList());
         for (FlowEngineEntity entity : records) {
             DictionaryDataEntity dataEntity = dictionList.stream()
                     .filter(t -> t.getEnCode().equals(entity.getCategory()))

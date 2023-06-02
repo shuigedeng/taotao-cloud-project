@@ -238,7 +238,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 									(j.getScopeType().equals(PromotionsScopeTypeEnum.ALL.name()) && j.getStoreId().equals("0")) ||
 									(j.getScopeType().equals(PromotionsScopeTypeEnum.ALL.name()) && j.getStoreId().equals(esGoodsIndex.getStoreId())) ||
 									(j.getScopeType().equals(PromotionsScopeTypeEnum.PORTION_GOODS_CATEGORY.name()) && j.getScopeId().contains(goodsSku.getCategoryPath())))
-							.collect(Collectors.toList());
+							.toList();
 						if (CollUtil.isNotEmpty(promotionGoods)) {
 							esGoodsIndex.setPromotionMapJson(JSONUtil.toJsonStr(promotionApi.wrapperPromotionMapList(promotionGoods)));
 						}
@@ -620,7 +620,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(searchDTO, pageVO);
 
 			skuIds = esGoodsIndices.isEmpty() ? new ArrayList<>() :
-				esGoodsIndices.getContent().stream().map(SearchHit::getId).collect(Collectors.toList());
+				esGoodsIndices.getContent().stream().map(SearchHit::getId).toList();
 			if (skuIds.isEmpty()) {
 				break;
 			}

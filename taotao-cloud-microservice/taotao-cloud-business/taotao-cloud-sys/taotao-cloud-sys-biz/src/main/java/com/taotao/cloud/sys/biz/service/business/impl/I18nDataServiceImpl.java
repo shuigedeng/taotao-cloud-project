@@ -1,6 +1,5 @@
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
@@ -17,6 +16,7 @@ import com.taotao.cloud.sys.biz.model.entity.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

@@ -83,12 +83,12 @@ public class ManagerFileController {
             throw new BusinessException("文件不能为空");
         }
 
-        List<File> uploads = Arrays.stream(files).map(fileService::upload).collect(Collectors.toList());
+        List<File> uploads = Arrays.stream(files).map(fileService::upload).toList();
 
         if (!CollectionUtils.isEmpty(uploads)) {
             // List<UploadFileVO> result = uploads.stream().map(
             //		upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build())
-            //	.collect(Collectors.toList());
+            //	.toList();
             return Result.success(new ArrayList<>());
         }
 

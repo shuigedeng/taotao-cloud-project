@@ -145,7 +145,7 @@ public class TradeDTO implements Serializable {
     /** 过滤购物车中已选择的sku */
     public List<CartSkuVO> getCheckedSkuList() {
         if (skuList != null && !skuList.isEmpty()) {
-            return skuList.stream().filter(CartSkuVO::checked).collect(Collectors.toList());
+            return skuList.stream().filter(CartSkuVO::checked).toList();
         }
         return skuList;
     }

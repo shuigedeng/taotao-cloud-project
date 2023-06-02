@@ -39,7 +39,7 @@ public class DomainServiceImpl implements DomainService {
 
         customDomainList.addAll(officialDomainList);
 
-        return customDomainList.stream().map(obj-> beanProcess(obj)).collect(Collectors.toList());
+        return customDomainList.stream().map(obj-> beanProcess(obj)).toList();
     }
 
 

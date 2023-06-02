@@ -68,7 +68,7 @@ public class LoginLogMongoService implements LoginLogService {
 
         Page<LoginLogMongo> page = repository.findAll(example, pageable);
         List<LoginLogDto> records =
-                page.getContent().stream().map(LoginLogMongo::toDto).collect(Collectors.toList());
+                page.getContent().stream().map(LoginLogMongo::toDto).toList();
 
         return PageResult.of(
                 page.getTotalElements(), 1, loginLogParam.getCurrentPage(), loginLogParam.getPageSize(), records);

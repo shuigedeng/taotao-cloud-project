@@ -135,7 +135,7 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
                         .originUrl(shortLink.getOriginUrl())
                         .state(shortLink.getState())
                         .build())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public PageResult<ShortLinkDTO> pageShortLinkByCreateTime(ShortLinkTimePageRequest request) {
@@ -160,7 +160,7 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
                             .state(shortLink.getState())
                             .build();
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         PageResult<ShortLinkDTO> pageResult = new PageResult<>();
         pageResult.setPage(request.getPageNo());
@@ -192,7 +192,7 @@ public class ShortLinkManager extends ServiceImpl<ShortLinkMapper, ShortLink> {
                             .state(shortLink.getState())
                             .build();
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         PageResult<ShortLinkDTO> pageResult = new PageResult<>();
         pageResult.setPage(request.getPageNo());

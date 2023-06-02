@@ -49,7 +49,7 @@ public class SensitiveWordServiceImpl
                 sensitiveWordsList
 					.stream()
 					.map(SensitiveWord::getSensitiveWord)
-					.collect(Collectors.toList());
+					.toList();
 
         redisRepository.set(RedisConstant.SENSITIVE_WORDS_KEY, sensitiveWords);
     }

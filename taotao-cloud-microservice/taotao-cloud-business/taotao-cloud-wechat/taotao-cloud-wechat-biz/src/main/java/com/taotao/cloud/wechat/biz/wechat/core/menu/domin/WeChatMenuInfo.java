@@ -126,14 +126,14 @@ public class WeChatMenuInfo {
     public WxMenu toWxMenu() {
         WxMenu wxMenu = new WxMenu();
         List<WxMenuButton> collect =
-                this.getButtons().stream().map(this::toWxButton).collect(Collectors.toList());
+                this.getButtons().stream().map(this::toWxButton).toList();
         wxMenu.setButtons(collect);
         return wxMenu;
     }
 
     private WxMenuButton toWxButton(Button button) {
         List<WxMenuButton> subButtons =
-                button.getSubButtons().stream().map(this::toWxButton).collect(Collectors.toList());
+                button.getSubButtons().stream().map(this::toWxButton).toList();
         WxMenuButton wxMenuButton = new WxMenuButton();
         wxMenuButton.setType(button.getType());
         wxMenuButton.setName(button.getName());
@@ -152,7 +152,7 @@ public class WeChatMenuInfo {
         WeChatMenuInfo weChatMenuInfo = new WeChatMenuInfo();
         List<Button> buttons = wxMpMenu.getMenu().getButtons().stream()
                 .map(WeChatMenuInfo::initButton)
-                .collect(Collectors.toList());
+                .toList();
 
         weChatMenuInfo.setButtons(buttons);
         return weChatMenuInfo;
@@ -162,7 +162,7 @@ public class WeChatMenuInfo {
     private static Button initButton(WxMenuButton wxMenuButton) {
         List<Button> subButtons = wxMenuButton.getSubButtons().stream()
                 .map(WeChatMenuInfo::initButton)
-                .collect(Collectors.toList());
+                .toList();
         Button button = new Button();
         button.setType(wxMenuButton.getType());
         button.setName(wxMenuButton.getName());

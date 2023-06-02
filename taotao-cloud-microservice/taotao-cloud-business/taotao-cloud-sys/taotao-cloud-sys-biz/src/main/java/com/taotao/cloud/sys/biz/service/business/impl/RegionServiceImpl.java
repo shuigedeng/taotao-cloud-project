@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import org.dromara.hutoolcore.collection.CollectionUtil;
-import org.dromara.hutoolcore.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -42,6 +40,8 @@ import com.taotao.cloud.sys.biz.repository.inf.IRegionRepository;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -78,7 +78,7 @@ public class RegionServiceImpl
 		query.eq(Region::getParentId, parentId);
 		List<Region> sysRegions = getBaseMapper().selectList(query);
 		List<RegionParentVO> result = new ArrayList<>();
-		if (CollectionUtil.isNotEmpty(sysRegions)) {
+		if (CollUtil.isNotEmpty(sysRegions)) {
 			sysRegions.forEach(sysRegion -> {
 				RegionParentVO vo = new RegionParentVO(
 					sysRegion.getId(), sysRegion.getName(), sysRegion.getCode(), new ArrayList<>());
@@ -194,7 +194,7 @@ public class RegionServiceImpl
 		// 得到一级节点菜单列表
 		List<Region> sysRegions = getBaseMapper().selectList(wrapper);
 		List<RegionParentVO> vos = new ArrayList<>();
-		if (CollectionUtil.isNotEmpty(sysRegions)) {
+		if (CollUtil.isNotEmpty(sysRegions)) {
 			sysRegions.forEach(sysRegion -> {
 				RegionParentVO vo = new RegionParentVO(
 					sysRegion.getId(), sysRegion.getName(), sysRegion.getCode(), new ArrayList<>());
@@ -222,7 +222,7 @@ public class RegionServiceImpl
 				e.setValue(e.getId());
 				e.setTitle(e.getName());
 			})
-			.collect(Collectors.toList());
+			.toList();
 	}
 
 	public void findAllChild(RegionParentVO vo, int depth, int maxDepth) {
@@ -233,7 +233,7 @@ public class RegionServiceImpl
 		wrapper.eq(Region::getParentId, vo.getId());
 		List<Region> sysRegions = getBaseMapper().selectList(wrapper);
 		List<RegionParentVO> regions = new ArrayList<>();
-		if (CollectionUtil.isNotEmpty(sysRegions)) {
+		if (CollUtil.isNotEmpty(sysRegions)) {
 			sysRegions.forEach(sysRegion -> {
 				RegionParentVO region = new RegionParentVO(
 					sysRegion.getId(), sysRegion.getName(), sysRegion.getCode(), new ArrayList<>());

@@ -196,7 +196,7 @@ public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> impleme
                         if (wxMpUsers != null && !wxMpUsers.isEmpty()) {
                             List<WxUser> wxUsers = wxMpUsers.parallelStream()
                                     .map(item -> new WxUser(item, appid))
-                                    .collect(Collectors.toList());
+                                    .toList();
                             this.saveOrUpdateBatch(wxUsers);
                         }
                     });

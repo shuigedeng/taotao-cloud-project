@@ -46,7 +46,7 @@ public class TestController extends BaseController {
     public AjaxResult getRedis() {
         Set<String> keys = redisUtils.keys("*");
         return AjaxResult.success(
-                keys.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList()));
+                keys.stream().sorted(Comparator.naturalOrder()).toList());
     }
 
     /** 删除指定key */

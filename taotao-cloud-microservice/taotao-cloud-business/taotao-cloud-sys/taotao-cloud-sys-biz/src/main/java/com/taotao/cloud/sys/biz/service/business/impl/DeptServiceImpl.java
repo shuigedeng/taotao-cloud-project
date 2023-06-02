@@ -56,6 +56,6 @@ public class DeptServiceImpl extends BaseSuperServiceImpl<IDeptMapper, Dept, Dep
 				e.setValue(e.getId());
 				e.setTitle(e.getName());
 			})
-			.collect(Collectors.toList());
+			.toList();
 	}
 }

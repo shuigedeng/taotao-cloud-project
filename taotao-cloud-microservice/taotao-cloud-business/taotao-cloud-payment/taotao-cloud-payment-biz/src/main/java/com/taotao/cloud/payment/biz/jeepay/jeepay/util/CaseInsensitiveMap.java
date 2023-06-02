@@ -96,7 +96,7 @@ public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Map
 
     @Override
     public Collection<V> values() {
-        return this.store.values().stream().map(entry -> entry.getValue()).collect(Collectors.toList());
+        return this.store.values().stream().map(entry -> entry.getValue()).toList();
     }
 
     @Override

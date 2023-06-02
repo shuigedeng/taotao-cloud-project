@@ -138,7 +138,7 @@ public class CategoryServiceImpl
         List<String> arr = Arrays.asList(categories.clone());
         return categoryTree().stream()
                 .filter(item -> arr.contains(item.getId()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

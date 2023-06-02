@@ -182,7 +182,7 @@ public class FlowTaskOperatorServiceImpl extends ServiceImpl<FlowTaskOperatorMap
         UserInfo userInfo = userProvider.get();
         List<String> userList = flowDelegateService.getUser(userInfo.getUserId()).stream()
                 .map(FlowDelegateEntity::getCreatorUserId)
-                .collect(Collectors.toList());
+                .toList();
         userList.add(userInfo.getUserId());
         QueryWrapper<FlowTaskOperatorEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().in(FlowTaskOperatorEntity::getHandleId, userList);

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.mapper.IRoleResourceMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QRoleResource;
@@ -28,6 +27,7 @@ import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -58,7 +58,7 @@ public class RoleResourceServiceImpl
         //		.roleId(roleId)
         //		.resourceId(resourceId)
         //		.build())
-        //	.collect(Collectors.toList());
+        //	.toList();
         // cr().saveAll(collect);
 
         return true;

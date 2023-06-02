@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.taotao.cloud.common.model.BaseQuery;
@@ -46,6 +45,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -138,7 +139,7 @@ public class ManagerResourceController
     //	List<ResourceVO> collect = roles.stream()
     //		.filter(Objects::nonNull)
     //		.map(SysResourceUtil::copy)
-    //		.collect(Collectors.toList());
+    //		.toList();
     //	return Result.succeed(collect);
     // }
 

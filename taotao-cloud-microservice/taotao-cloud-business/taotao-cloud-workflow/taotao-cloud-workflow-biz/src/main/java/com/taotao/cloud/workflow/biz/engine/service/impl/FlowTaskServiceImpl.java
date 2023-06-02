@@ -206,7 +206,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         IPage<FlowTaskEntity> flowTaskEntityPage = this.page(page, queryWrapper);
         if (!flowTaskEntityPage.getRecords().isEmpty()) {
             List<String> ids =
-                    flowTaskEntityPage.getRecords().stream().map(m -> m.getId()).collect(Collectors.toList());
+                    flowTaskEntityPage.getRecords().stream().map(m -> m.getId()).toList();
             queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().in(FlowTaskEntity::getId, ids);
             // 排序
@@ -496,7 +496,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         List<String> userIdList = new ArrayList<>();
         userIdList.add(userId);
         List<UserRelationEntity> list = serviceUtil.getListByUserIdAll(userIdList);
-        List<String> userRelationList = list.stream().map(u -> u.getObjectId()).collect(Collectors.toList());
+        List<String> userRelationList = list.stream().map(u -> u.getObjectId()).toList();
         String[] objectId = (String.join(",", userRelationList) + "," + userId).split(",");
         // 传阅人员
         StringBuilder dbSql = new StringBuilder();
@@ -746,7 +746,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
     public List<FlowBatchModel> batchFlowSelector() {
         List<FlowTaskOperatorEntity> operatorList = flowTaskOperatorService.getBatchList();
         List<String> taskIdList =
-                operatorList.stream().map(FlowTaskOperatorEntity::getTaskId).collect(Collectors.toList());
+                operatorList.stream().map(FlowTaskOperatorEntity::getTaskId).toList();
         List<FlowTaskEntity> taskList = getOrderStaList(taskIdList);
         Map<String, List<FlowTaskEntity>> flowIdList = taskList.stream()
                 .filter(t -> ObjectUtil.isNotEmpty(t.getIsBatch()) && t.getIsBatch() == 1)
@@ -777,7 +777,7 @@ public class FlowTaskServiceImpl extends ServiceImpl<FlowTaskMapper, FlowTaskEnt
         }
         batchFlowList = batchFlowList.stream()
                 .sorted(Comparator.comparing(FlowBatchModel::getNum).reversed())
-                .collect(Collectors.toList());
+                .toList();
         return batchFlowList;
     }
 
