@@ -8,7 +8,7 @@ import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.core.channel.voucher.dao.VoucherPaymentManager;
 import cn.bootx.platform.daxpay.core.channel.voucher.entity.Voucher;
 import cn.bootx.platform.daxpay.core.channel.voucher.entity.VoucherPayment;
-import cn.bootx.platform.daxpay.param.pay.PayModeParam;
+import cn.bootx.platform.daxpay.param.pay.PayWayParam;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class VoucherPaymentService {
     /**
      * 添加支付记录
      */
-    public void savePayment(Payment payment, PayParam payParam, PayModeParam payMode, List<Voucher> vouchers) {
+    public void savePayment(Payment payment, PayParam payParam, PayWayParam payMode, List<Voucher> vouchers) {
         String voucherIds = vouchers.stream()
             .map(MpIdEntity::getId)
             .map(String::valueOf)
@@ -44,7 +44,6 @@ public class VoucherPaymentService {
 
         VoucherPayment walletPayment = new VoucherPayment().setVoucherIds(voucherIds);
         walletPayment.setPaymentId(payment.getId())
-            .setUserId(payment.getUserId())
             .setBusinessId(payParam.getBusinessId())
             .setAmount(payMode.getAmount())
             .setRefundableBalance(payMode.getAmount())

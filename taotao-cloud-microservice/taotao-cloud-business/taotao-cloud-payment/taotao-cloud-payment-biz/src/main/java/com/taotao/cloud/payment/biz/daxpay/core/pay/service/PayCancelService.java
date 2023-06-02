@@ -63,7 +63,7 @@ public class PayCancelService {
      */
     private void cancelPayment(Payment payment) {
         // 状态检查, 成功/退款/退款中 不处理
-        List<Integer> trades = Arrays.asList(TRADE_SUCCESS, TRADE_REFUNDING, TRADE_REFUNDED);
+        List<String> trades = Arrays.asList(TRADE_SUCCESS, TRADE_REFUNDING, TRADE_REFUNDED);
         if (trades.contains(payment.getPayStatus())) {
             throw new PayFailureException("支付已完成, 无法撤销");
         }
@@ -72,7 +72,7 @@ public class PayCancelService {
         PayParam payParam = PaymentBuilder.buildPayParamByPayment(payment);
 
         // 1.获取支付方式，通过工厂生成对应的策略组
-        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayWayList());
         if (CollectionUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
         }
@@ -105,7 +105,7 @@ public class PayCancelService {
      * @param successCallback 成功操作
      */
     private void doHandler(Payment payment, List<AbsPayStrategy> strategyList,
-                           PayStrategyConsumer<List<AbsPayStrategy>, Payment> successCallback) {
+            PayStrategyConsumer<List<AbsPayStrategy>, Payment> successCallback) {
 
         try {
             // 执行

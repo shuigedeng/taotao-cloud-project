@@ -7,10 +7,10 @@ import cn.bootx.platform.common.core.annotation.EncryptionField;
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.daxpay.core.channel.wechat.convert.WeChatConvert;
-import cn.bootx.platform.daxpay.dto.paymodel.wechat.WeChatPayConfigDto;
-import cn.bootx.platform.daxpay.param.paymodel.wechat.WeChatPayConfigParam;
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+import cn.bootx.platform.daxpay.dto.channel.wechat.WeChatPayConfigDto;
+import cn.bootx.platform.daxpay.param.channel.wechat.WeChatPayConfigParam;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -47,12 +47,12 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
     @DbColumn(comment = "微信应用appId")
     private String appId;
 
-//    /**
-//     * api版本
-//     * @see WeChatPayCode#API_V2
-//     */
-//    @DbColumn(comment = "api版本")
-//    private String apiVersion;
+    // /**
+    // * api版本
+    // * @see WeChatPayCode#API_V2
+    // */
+    // @DbColumn(comment = "api版本")
+    // private String apiVersion;
 
     /** 商户平台「API安全」中的 APIv2 密钥 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)

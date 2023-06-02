@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.core.channel.alipay.entity;
 
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.daxpay.core.channel.base.entity.BasePayment;
-import cn.bootx.platform.daxpay.dto.paymodel.alipay.AliPaymentDto;
-import org.dromara.hutoolcore.bean.BeanUtil;
+import cn.bootx.platform.daxpay.dto.channel.alipay.AliPaymentDto;
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

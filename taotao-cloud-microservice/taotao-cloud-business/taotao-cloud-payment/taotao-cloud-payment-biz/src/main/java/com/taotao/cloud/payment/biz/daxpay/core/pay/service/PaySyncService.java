@@ -12,10 +12,10 @@ import cn.bootx.platform.daxpay.core.payment.service.PaymentService;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
 import cn.bootx.platform.daxpay.exception.payment.PayUnsupportedMethodException;
 import cn.bootx.platform.daxpay.mq.PaymentEventSender;
-import cn.bootx.platform.daxpay.param.pay.PayModeParam;
+import cn.bootx.platform.daxpay.param.pay.PayWayParam;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
-import cn.bootx.platform.daxpay.util.PayModelUtil;
-import org.dromara.hutoolcore.collection.CollUtil;
+import cn.bootx.platform.daxpay.util.PayWaylUtil;
+import cn.hutool.core.collection.CollUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -69,7 +69,7 @@ public class PaySyncService {
     public void syncPayment(Payment payment) {
         PayParam payParam = PaymentBuilder.buildPayParamByPayment(payment);
         // 1.获取支付方式，通过工厂生成对应的策略组
-        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayWayList());
         if (CollUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
         }
@@ -80,11 +80,11 @@ public class PaySyncService {
         }
 
         // 3 拿到异步支付方法, 与支付网关进行同步
-        PayModeParam asyncPayMode = PayModelUtil.getAsyncPayModeParam(payParam);
+        PayWayParam asyncPayMode = PayWaylUtil.getAsyncPayModeParam(payParam);
         AbsPayStrategy syncPayStrategy = PayStrategyFactory.create(asyncPayMode);
         syncPayStrategy.initPayParam(payment, payParam);
         PaySyncResult paySyncResult = syncPayStrategy.doSyncPayStatusHandler();
-        int paySyncStatus = paySyncResult.getPaySyncStatus();
+        String paySyncStatus = paySyncResult.getPaySyncStatus();
 
         switch (paySyncStatus) {
             // 支付成功 支付宝退款时也是支付成功状态, 除非支付完成

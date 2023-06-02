@@ -1,28 +1,27 @@
 package com.taotao.cloud.payment.biz.daxpay.core.cashier.service;
 
-import cn.bootx.platform.daxpay.code.pay.PayChannelCode;
-import cn.bootx.platform.daxpay.code.pay.PayWayExtraCode;
+import cn.bootx.platform.baseapi.core.parameter.dao.SystemParamManager;
+import cn.bootx.platform.baseapi.core.parameter.entity.SystemParameter;
+import cn.bootx.platform.common.core.util.BigDecimalUtil;
+import cn.bootx.platform.daxpay.code.pay.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.pay.PayStatusCode;
-import cn.bootx.platform.daxpay.code.pay.PayWayCode;
+import cn.bootx.platform.daxpay.code.pay.PayWayEnum;
+import cn.bootx.platform.daxpay.code.pay.PayWayExtraCode;
 import cn.bootx.platform.daxpay.code.paymodel.WeChatPayCode;
 import cn.bootx.platform.daxpay.core.aggregate.entity.AggregatePayInfo;
 import cn.bootx.platform.daxpay.core.aggregate.service.AggregateService;
-import cn.bootx.platform.daxpay.core.pay.service.PayService;
 import cn.bootx.platform.daxpay.core.channel.wechat.dao.WeChatPayConfigManager;
 import cn.bootx.platform.daxpay.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.core.pay.service.PayService;
 import cn.bootx.platform.daxpay.dto.pay.PayResult;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
 import cn.bootx.platform.daxpay.exception.payment.PayUnsupportedMethodException;
 import cn.bootx.platform.daxpay.param.cashier.CashierCombinationPayParam;
 import cn.bootx.platform.daxpay.param.cashier.CashierSinglePayParam;
-import cn.bootx.platform.daxpay.param.pay.PayModeParam;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
-import cn.bootx.platform.daxpay.util.PayModelUtil;
-import cn.bootx.platform.baseapi.core.parameter.dao.SystemParamManager;
-import cn.bootx.platform.baseapi.core.parameter.entity.SystemParameter;
-import cn.bootx.platform.common.core.util.BigDecimalUtil;
-import cn.bootx.platform.starter.auth.util.SecurityUtil;
-import org.dromara.hutoolcore.collection.CollUtil;
+import cn.bootx.platform.daxpay.param.pay.PayWayParam;
+import cn.bootx.platform.daxpay.util.PayWaylUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
 import lombok.RequiredArgsConstructor;
@@ -63,12 +62,12 @@ public class CashierService {
     public PayResult singlePay(CashierSinglePayParam param) {
 
         // 如果是聚合支付,存在付款码时特殊处理(聚合扫码支付不用额外处理)
-        if (Objects.equals(PayChannelCode.AGGREGATION, param.getPayChannel())) {
-            int payChannel = aggregateService.getPayChannel(param.getAuthCode());
+        if (Objects.equals(PayChannelEnum.AGGREGATION.getCode(), param.getPayChannel())) {
+            String payChannel = aggregateService.getPayChannel(param.getAuthCode()).getCode();
             param.setPayChannel(payChannel);
         }
         // 构建支付方式参数
-        PayModeParam payModeParam = new PayModeParam().setPayChannel(param.getPayChannel())
+        PayWayParam payWayParam = new PayWayParam().setPayChannel(param.getPayChannel())
             .setPayWay(param.getPayWay())
             .setAmount(param.getAmount());
 
@@ -77,16 +76,15 @@ public class CashierService {
         map.put(PayWayExtraCode.AUTH_CODE, param.getAuthCode());
         map.put(PayWayExtraCode.OPEN_ID, param.getOpenId());
         map.put(PayWayExtraCode.VOUCHER_NO, param.getVoucherNo());
-        String extraParamsJson = PayModelUtil.buildExtraParamsJson(param.getPayChannel(), map);
-        payModeParam.setExtraParamsJson(extraParamsJson);
+        String extraParamsJson = PayWaylUtil.buildExtraParamsJson(param.getPayChannel(), map);
+        payWayParam.setExtraParamsJson(extraParamsJson);
 
         PayParam payParam = new PayParam().setTitle(param.getTitle())
             .setBusinessId(param.getBusinessId())
-            .setUserId(SecurityUtil.getUserIdOrDefaultId())
-            .setPayModeList(Collections.singletonList(payModeParam));
+            .setPayWayList(Collections.singletonList(payWayParam));
         PayResult payResult = payService.pay(payParam);
 
-        if (PayStatusCode.TRADE_REFUNDED == payResult.getPayStatus()) {
+        if (Objects.equals(PayStatusCode.TRADE_REFUNDED, payResult.getPayStatus())) {
             throw new PayFailureException("已经退款");
         }
         return payResult;
@@ -96,12 +94,13 @@ public class CashierService {
      * 扫码发起自动支付
      */
     public String aggregatePay(String key, String ua) {
-        CashierSinglePayParam cashierSinglePayParam = new CashierSinglePayParam().setPayWay(PayWayCode.QRCODE);
+        CashierSinglePayParam cashierSinglePayParam = new CashierSinglePayParam()
+            .setPayWay(PayWayEnum.QRCODE.getCode());
         // 判断是哪种支付方式
-        if (ua.contains(PayChannelCode.UA_ALI_PAY)) {
-            cashierSinglePayParam.setPayChannel(PayChannelCode.ALI);
+        if (ua.contains(PayChannelEnum.UA_ALI_PAY)) {
+            cashierSinglePayParam.setPayChannel(PayChannelEnum.ALI.getCode());
         }
-        else if (ua.contains(PayChannelCode.UA_WECHAT_PAY)) {
+        else if (ua.contains(PayChannelEnum.UA_WECHAT_PAY)) {
             // 跳转微信授权页面, 调用jsapi进行支付
             return this.wxJsapiAuth(key);
         }
@@ -146,8 +145,9 @@ public class CashierService {
         String openId = accessToken.getOpenId();
         AggregatePayInfo aggregatePayInfo = aggregateService.getAggregateInfo(state);
         // 构造微信API支付参数
-        CashierSinglePayParam cashierSinglePayParam = new CashierSinglePayParam().setPayChannel(PayChannelCode.WECHAT)
-            .setPayWay(PayWayCode.JSAPI)
+        CashierSinglePayParam cashierSinglePayParam = new CashierSinglePayParam()
+            .setPayChannel(PayChannelEnum.WECHAT.getCode())
+            .setPayWay(PayWayEnum.JSAPI.getCode())
             .setTitle(aggregatePayInfo.getTitle())
             .setAmount(aggregatePayInfo.getAmount())
             .setOpenId(openId)
@@ -175,7 +175,7 @@ public class CashierService {
      */
     public PayResult combinationPay(CashierCombinationPayParam param) {
         // 处理支付参数
-        List<PayModeParam> payModeList = param.getPayModeList();
+        List<PayWayParam> payModeList = param.getPayWayList();
         // 删除小于等于零的
         payModeList.removeIf(payModeParam -> BigDecimalUtil.compareTo(payModeParam.getAmount(), BigDecimal.ZERO) < 1);
         if (CollUtil.isEmpty(payModeList)) {
@@ -184,11 +184,10 @@ public class CashierService {
         // 发起支付
         PayParam payParam = new PayParam().setTitle(param.getTitle())
             .setBusinessId(param.getBusinessId())
-            .setUserId(SecurityUtil.getUserIdOrDefaultId())
-            .setPayModeList(param.getPayModeList());
+            .setPayWayList(param.getPayWayList());
         PayResult payResult = payService.pay(payParam);
 
-        if (PayStatusCode.TRADE_REFUNDED == payResult.getPayStatus()) {
+        if (Objects.equals(PayStatusCode.TRADE_REFUNDED, payResult.getPayStatus())) {
             throw new PayFailureException("已经退款");
         }
         return payResult;

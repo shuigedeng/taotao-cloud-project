@@ -9,16 +9,19 @@ import cn.bootx.platform.daxpay.core.merchant.dao.MchApplicationManager;
 import cn.bootx.platform.daxpay.core.merchant.entity.MchApplication;
 import cn.bootx.platform.daxpay.dto.merchant.MchApplicationDto;
 import cn.bootx.platform.daxpay.param.merchant.MchApplicationParam;
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.bean.copier.CopyOptions;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.util.IdUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * 商户应用
+ *
  * @author xxm
  * @date 2023-05-19
  */
@@ -26,53 +29,58 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MchApplicationService {
+
     private final MchApplicationManager mchApplicationManager;
+
+    private final MchAppPayConfigService appPayConfigService;
 
     /**
      * 添加
      */
-    public void add(MchApplicationParam param){
+    public void add(MchApplicationParam param) {
         MchApplication mchApplication = MchApplication.init(param);
+        mchApplication.setAppNo(IdUtil.getSnowflakeNextIdStr());
         mchApplicationManager.save(mchApplication);
     }
 
     /**
      * 修改
      */
-    public void update(MchApplicationParam param){
-        MchApplication mchApplication = mchApplicationManager.findById(param.getId()).orElseThrow(DataNotExistException::new);
-
-        BeanUtil.copyProperties(param,mchApplication, CopyOptions.create().ignoreNullValue());
+    public void update(MchApplicationParam param) {
+        MchApplication mchApplication = mchApplicationManager.findById(param.getId())
+            .orElseThrow(DataNotExistException::new);
+        BeanUtil.copyProperties(param, mchApplication, CopyOptions.create().ignoreNullValue());
         mchApplicationManager.updateById(mchApplication);
     }
 
     /**
      * 分页
      */
-    public PageResult<MchApplicationDto> page(PageParam pageParam,MchApplicationParam mchApplicationParam){
-        return MpUtil.convert2DtoPageResult(mchApplicationManager.page(pageParam,mchApplicationParam));
+    public PageResult<MchApplicationDto> page(PageParam pageParam, MchApplicationParam mchApplicationParam) {
+        return MpUtil.convert2DtoPageResult(mchApplicationManager.page(pageParam, mchApplicationParam));
     }
 
     /**
      * 获取单条
      */
-    public MchApplicationDto findById(Long id){
+    public MchApplicationDto findById(Long id) {
         return mchApplicationManager.findById(id).map(MchApplication::toDto).orElseThrow(DataNotExistException::new);
     }
 
     /**
      * 获取全部
      */
-    public List<MchApplicationDto> findAll(){
+    public List<MchApplicationDto> findAll() {
         return ResultConvertUtil.dtoListConvert(mchApplicationManager.findAll());
     }
 
     /**
      * 删除
      */
-    public void delete(Long id){
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Long id) {
+        appPayConfigService.deleteByAppId(id);
         mchApplicationManager.deleteById(id);
     }
-
 
 }

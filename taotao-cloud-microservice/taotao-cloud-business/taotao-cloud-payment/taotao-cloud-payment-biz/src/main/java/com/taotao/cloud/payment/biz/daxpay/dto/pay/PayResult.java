@@ -1,5 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.dto.pay;
 
+import cn.bootx.platform.daxpay.code.pay.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.pay.PayStatusCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -21,14 +22,17 @@ public class PayResult implements Serializable {
     @Schema(description = "是否是异步支付")
     private boolean asyncPayMode;
 
+    /**
+     * @see PayChannelEnum#getCode()
+     */
     @Schema(description = "异步支付通道")
-    private Integer asyncPayChannel;
+    private String asyncPayChannel;
 
     /**
      * @see PayStatusCode#TRADE_PROGRESS
      */
     @Schema(description = "支付状态")
-    private int payStatus;
+    private String payStatus;
 
     @Schema(description = "异步支付参数")
     private AsyncPayInfo asyncPayInfo;
