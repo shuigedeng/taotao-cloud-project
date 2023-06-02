@@ -3,7 +3,6 @@ package com.taotao.cloud.payment.biz.daxpay.core.channel.wechat.service;
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.common.spring.exception.RetryableException;
 import cn.bootx.platform.daxpay.code.pay.PayStatusCode;
-import cn.bootx.platform.daxpay.code.pay.PayWayCode;
 import cn.bootx.platform.daxpay.code.pay.PayWayEnum;
 import cn.bootx.platform.daxpay.code.paymodel.WeChatPayCode;
 import cn.bootx.platform.daxpay.code.paymodel.WeChatPayWay;
@@ -14,9 +13,9 @@ import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.core.channel.wechat.entity.WeChatPayConfig;
 import cn.bootx.platform.daxpay.dto.pay.AsyncPayInfo;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
-import cn.bootx.platform.daxpay.param.pay.PayModeParam;
-import cn.bootx.platform.daxpay.param.paymodel.wechat.WeChatPayParam;
-import cn.bootx.platform.daxpay.util.PayModelUtil;
+import cn.bootx.platform.daxpay.param.pay.PayWayParam;
+import cn.bootx.platform.daxpay.param.channel.wechat.WeChatPayParam;
+import cn.bootx.platform.daxpay.util.PayWaylUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.StrUtil;
@@ -58,13 +57,13 @@ public class WeChatPayService {
     /**
      * 校验
      */
-    public void validation(PayModeParam payModeParam, WeChatPayConfig weChatPayConfig) {
+    public void validation(PayWayParam payWayParam, WeChatPayConfig weChatPayConfig) {
         List<String> payWays = Optional.ofNullable(weChatPayConfig.getPayWays())
             .filter(StrUtil::isNotBlank)
             .map(s -> StrUtil.split(s, ','))
             .orElse(new ArrayList<>(1));
 
-        PayWayEnum payWayEnum = Optional.ofNullable(WeChatPayWay.findByNo(payModeParam.getPayWay()))
+        PayWayEnum payWayEnum = Optional.ofNullable(WeChatPayWay.findByCode(payWayParam.getPayWay()))
             .orElseThrow(() -> new PayFailureException("非法的微信支付类型"));
         if (!payWays.contains(payWayEnum.getCode())) {
             throw new PayFailureException("该微信支付方式不可用");
@@ -74,31 +73,32 @@ public class WeChatPayService {
     /**
      * 支付
      */
-    public void pay(BigDecimal amount, Payment payment, WeChatPayParam weChatPayParam, PayModeParam payModeParam,
-                    WeChatPayConfig weChatPayConfig) {
+    public void pay(BigDecimal amount, Payment payment, WeChatPayParam weChatPayParam, PayWayParam payWayParam,
+            WeChatPayConfig weChatPayConfig) {
         // 微信传入的是分, 将元转换为分
         String totalFee = String.valueOf(amount.multiply(new BigDecimal(100)).longValue());
         AsyncPayInfo asyncPayInfo = Optional.ofNullable(AsyncPayInfoLocal.get()).orElse(new AsyncPayInfo());
         String payBody = null;
+        PayWayEnum payWayEnum = PayWayEnum.findByCode(payWayParam.getPayWay());
 
         // wap支付
-        if (payModeParam.getPayWay() == PayWayCode.WAP) {
+        if (payWayEnum == PayWayEnum.WAP) {
             payBody = this.wapPay(totalFee, payment, weChatPayConfig);
         }
         // APP支付
-        else if (payModeParam.getPayWay() == PayWayCode.APP) {
+        else if (payWayEnum == PayWayEnum.APP) {
             payBody = this.appPay(totalFee, payment, weChatPayConfig);
         }
         // 微信公众号支付或者小程序支付
-        else if (payModeParam.getPayWay() == PayWayCode.JSAPI) {
+        else if (payWayEnum == PayWayEnum.JSAPI) {
             payBody = this.jsPay(totalFee, payment, weChatPayParam.getOpenId(), weChatPayConfig);
         }
         // 二维码支付
-        else if (payModeParam.getPayWay() == PayWayCode.QRCODE) {
+        else if (payWayEnum == PayWayEnum.QRCODE) {
             payBody = this.qrCodePay(totalFee, payment, weChatPayConfig);
         }
         // 付款码支付
-        else if (payModeParam.getPayWay() == PayWayCode.BARCODE) {
+        else if (payWayEnum == PayWayEnum.BARCODE) {
             String tradeNo = this.barCode(totalFee, payment, weChatPayParam.getAuthCode(), weChatPayConfig);
             asyncPayInfo.setTradeNo(tradeNo).setExpiredTime(false);
         }
@@ -222,16 +222,16 @@ public class WeChatPayService {
      * 构建参数
      */
     private UnifiedOrderModel.UnifiedOrderModelBuilder buildParams(String amount, Payment payment,
-                                                                   WeChatPayConfig weChatPayConfig, String tradeType) {
+            WeChatPayConfig weChatPayConfig, String tradeType) {
         // 过期时间
-        payment.setExpiredTime(PayModelUtil.getPaymentExpiredTime(weChatPayConfig.getExpireTime()));
+        payment.setExpiredTime(PayWaylUtil.getPaymentExpiredTime(weChatPayConfig.getExpireTime()));
         return UnifiedOrderModel.builder()
             .appid(weChatPayConfig.getAppId())
             .mch_id(weChatPayConfig.getMchId())
             .nonce_str(WxPayKit.generateStr())
             .time_start(LocalDateTimeUtil.format(LocalDateTime.now(), DatePattern.PURE_DATETIME_PATTERN))
             // 反正v2版本的超时时间无效
-            .time_expire(PayModelUtil.getWxExpiredTime(weChatPayConfig.getExpireTime()))
+            .time_expire(PayWaylUtil.getWxExpiredTime(weChatPayConfig.getExpireTime()))
             .body(payment.getTitle())
             .out_trade_no(String.valueOf(payment.getId()))
             .total_fee(amount)

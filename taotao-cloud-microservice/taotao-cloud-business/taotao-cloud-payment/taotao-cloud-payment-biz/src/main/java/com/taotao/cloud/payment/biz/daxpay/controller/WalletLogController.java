@@ -5,8 +5,8 @@ import cn.bootx.platform.common.core.rest.Res;
 import cn.bootx.platform.common.core.rest.ResResult;
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.daxpay.core.channel.wallet.service.WalletLogService;
-import cn.bootx.platform.daxpay.dto.paymodel.wallet.WalletLogDto;
-import cn.bootx.platform.daxpay.param.paymodel.wallet.WalletLogQueryParam;
+import cn.bootx.platform.daxpay.dto.channel.wallet.WalletLogDto;
+import cn.bootx.platform.daxpay.param.channel.wallet.WalletLogQueryParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -33,21 +33,21 @@ public class WalletLogController {
     @Operation(summary = "个人钱包日志")
     @PostMapping("/pageByPersonal")
     public ResResult<PageResult<WalletLogDto>> pageByPersonal(@ParameterObject PageParam pageParam,
-                                                              @ParameterObject WalletLogQueryParam param) {
+            @ParameterObject WalletLogQueryParam param) {
         return Res.ok(walletLogService.pageByPersonal(pageParam, param));
     }
 
     @Operation(summary = "查询钱包日志(分页)")
     @GetMapping("/page")
     public ResResult<PageResult<WalletLogDto>> page(@ParameterObject PageParam pageParam,
-                                                    @ParameterObject WalletLogQueryParam param) {
+            @ParameterObject WalletLogQueryParam param) {
         return Res.ok(walletLogService.page(pageParam, param));
     }
 
     @Operation(summary = "根据钱包id查询钱包日志(分页)")
     @GetMapping("/pageByWalletId")
     public ResResult<PageResult<WalletLogDto>> pageByWalletId(@ParameterObject PageParam pageParam,
-                                                              @ParameterObject WalletLogQueryParam param) {
+            @ParameterObject WalletLogQueryParam param) {
         return Res.ok(walletLogService.pageByWalletId(pageParam, param));
     }
 

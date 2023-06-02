@@ -11,9 +11,9 @@ import cn.bootx.platform.daxpay.core.payment.service.PaymentService;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
 import cn.bootx.platform.daxpay.exception.payment.PayUnsupportedMethodException;
 import cn.bootx.platform.daxpay.mq.PaymentEventSender;
-import cn.bootx.platform.daxpay.param.pay.PayModeParam;
+import cn.bootx.platform.daxpay.param.pay.PayWayParam;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
-import cn.bootx.platform.daxpay.util.PayModelUtil;
+import cn.bootx.platform.daxpay.util.PayWaylUtil;
 import cn.hutool.core.collection.CollUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +57,7 @@ public class PayExpiredTimeService {
         // 获取支付网关状态
         PayParam payParam = PaymentBuilder.buildPayParamByPayment(payment);
         // 1.获取支付方式，通过工厂生成对应的策略组
-        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayModeList());
+        List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payParam.getPayWayList());
         if (CollUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
         }
@@ -68,13 +68,13 @@ public class PayExpiredTimeService {
         }
 
         // 3 拿到异步支付方法, 与支付网关进行同步
-        PayModeParam asyncPayMode = PayModelUtil.getAsyncPayModeParam(payParam);
+        PayWayParam asyncPayMode = PayWaylUtil.getAsyncPayModeParam(payParam);
         AbsPayStrategy syncPayStrategy = PayStrategyFactory.create(asyncPayMode);
         syncPayStrategy.initPayParam(payment, payParam);
         PaySyncResult paySyncResult = syncPayStrategy.doSyncPayStatusHandler();
 
         // 4 对返回的支付网关各种状态进行处理
-        int paySyncStatus = paySyncResult.getPaySyncStatus();
+        String paySyncStatus = paySyncResult.getPaySyncStatus();
         switch (paySyncStatus) {
             // 成功状态
             case PaySyncStatus.TRADE_SUCCESS: {
@@ -172,7 +172,7 @@ public class PayExpiredTimeService {
      */
     private boolean check(Payment payment) {
         // 支付失败/撤销/退款不需要处理
-        List<Integer> trades = Arrays.asList(TRADE_FAIL, TRADE_CANCEL, TRADE_REFUNDING, TRADE_REFUNDED);
+        List<String> trades = Arrays.asList(TRADE_FAIL, TRADE_CANCEL, TRADE_REFUNDING, TRADE_REFUNDED);
         if (trades.contains(payment.getPayStatus())) {
             log.info("订单在超时撤销期间发生了操作, 需要人工介入处理");
             return false;
