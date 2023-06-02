@@ -58,7 +58,7 @@ public class MchAppPayConfigService {
                 result.setConfigId(config.getConfigId()).setState(config.getState());
             }
             return result;
-        }).collect(Collectors.toList());
+        }).toList();
     }
 
 }

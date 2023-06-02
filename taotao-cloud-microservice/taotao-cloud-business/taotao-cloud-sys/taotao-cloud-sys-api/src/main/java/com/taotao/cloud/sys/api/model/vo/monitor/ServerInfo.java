@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.api.model.vo.monitor;
 
-import org.dromara.hutoolcore.net.NetUtil;
-import org.dromara.hutoolcore.util.NumberUtil;
+import org.dromara.hutool.core.net.NetUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
+import org.dromara.hutool.core.math.NumberUtil;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.TickType;
 import oshi.hardware.GlobalMemory;
@@ -13,6 +13,7 @@ import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
 import oshi.util.Util;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -146,7 +147,7 @@ public class ServerInfo {
                 diskInfo.setUsage(NumberUtil.div(used * 100, total, 4));
             } else {
                 //Windows下如果有光驱（可能是虚拟光驱），total为0，不能做除数
-                diskInfo.setUsage(0);
+                diskInfo.setUsage(BigDecimal.valueOf(0));
             }
             diskInfos.add(diskInfo);
         }

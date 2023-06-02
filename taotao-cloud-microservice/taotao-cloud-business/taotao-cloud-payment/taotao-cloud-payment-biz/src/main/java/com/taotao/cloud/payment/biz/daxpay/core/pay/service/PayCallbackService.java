@@ -182,7 +182,7 @@ public class PayCallbackService {
             // 1.获取异步支付方式，通过工厂生成对应的策略组
             List<AbsPayStrategy> syncPaymentStrategyList = strategyList.stream()
                 .filter(paymentStrategy -> PayChannelEnum.ASYNC_TYPE_CODE.contains(paymentStrategy.getType()))
-                .collect(Collectors.toList());
+                .toList();
             // 执行成功方法
             successCallback.accept(syncPaymentStrategyList, payment);
         }

@@ -67,7 +67,7 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
         List<WxMpTemplate> wxMpTemplateList = wxService.getTemplateMsgService().getAllPrivateTemplate();
         List<MsgTemplate> templates = wxMpTemplateList.stream()
                 .map(item -> new MsgTemplate(item, appid))
-                .collect(Collectors.toList());
+                .toList();
         this.saveBatch(templates);
     }
 }

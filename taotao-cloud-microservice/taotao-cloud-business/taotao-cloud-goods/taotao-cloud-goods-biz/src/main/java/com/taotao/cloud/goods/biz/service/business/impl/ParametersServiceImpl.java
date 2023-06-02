@@ -83,7 +83,7 @@ public class ParametersServiceImpl
                 List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params, GoodsParamsDTO.class);
                 List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
                         .filter(i -> i.getGroupId() != null && i.getGroupId().equals(parameters.getGroupId()))
-                        .collect(Collectors.toList());
+                        .toList();
                 this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
                 this.goodsService.updateGoodsParams(
                         Convert.toLong(goods.get("id")), JSONUtil.toJsonStr(goodsParamsDTOS));

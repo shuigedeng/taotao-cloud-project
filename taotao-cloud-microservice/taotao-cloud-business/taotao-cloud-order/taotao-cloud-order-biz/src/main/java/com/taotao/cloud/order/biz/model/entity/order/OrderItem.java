@@ -182,12 +182,12 @@ public class OrderItem extends BaseSuperEntity<OrderItem, Long> {
             this.setPromotionType(CollUtil.join(
                     cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
                             .map(PromotionSkuVO::getPromotionType)
-                            .collect(Collectors.toList()),
+                            .toList(),
                     ","));
             this.setPromotionId(CollUtil.join(
                     cartSkuVO.getPriceDetailDTO().getJoinPromotion().stream()
                             .map(PromotionSkuVO::getActivityId)
-                            .collect(Collectors.toList()),
+                            .toList(),
                     ","));
         }
         this.setAfterSaleStatus(OrderItemAfterSaleStatusEnum.NEW.name());

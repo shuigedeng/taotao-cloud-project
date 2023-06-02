@@ -31,7 +31,7 @@ public class I18nMessageCreateListener {
 		List<I18nMessage> i18nMessages = event.getI18nMessages();
 		List<I18nData> list = i18nMessages.stream()
 			.map(I18nDataConverter.INSTANCE::messageToPo)
-			.collect(Collectors.toList());
+			.toList();
 		i18nDataService.saveBatch(list);
 	}
 

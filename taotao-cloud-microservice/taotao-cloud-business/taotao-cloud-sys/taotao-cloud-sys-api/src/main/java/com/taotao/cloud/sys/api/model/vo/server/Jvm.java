@@ -1,8 +1,9 @@
 package com.taotao.cloud.sys.api.model.vo.server;
 
-import org.dromara.hutoolcore.date.DatePattern;
-import org.dromara.hutoolcore.date.DateUnit;
-import org.dromara.hutoolcore.date.DateUtil;
+
+import org.dromara.hutool.core.date.DatePattern;
+import org.dromara.hutool.core.date.DateUnit;
+import org.dromara.hutool.core.date.DateUtil;
 
 import java.lang.management.ManagementFactory;
 import java.util.Date;

@@ -1,12 +1,12 @@
 package com.taotao.cloud.sys.biz.service.business;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.api.model.vo.monitor.OnlineUserInfo;
 import com.taotao.cloud.sys.api.model.vo.monitor.RedisCacheInfoDTO;
 import com.taotao.cloud.sys.api.model.vo.monitor.ServerInfo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.data.redis.connection.RedisServerCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.stereotype.Service;
@@ -63,7 +63,7 @@ public class MonitorApplicationService {
 //				StrUtil.isEmpty(userName) || userName.equals(o.getUserName())
 //			).filter(o ->
 //				StrUtil.isEmpty(ipaddr) || ipaddr.equals(o.getIpaddr())
-//			).collect(Collectors.toList());
+//			).toList();
 //
 //		Collections.reverse(filteredOnlineUsers);
 //		return filteredOnlineUsers;

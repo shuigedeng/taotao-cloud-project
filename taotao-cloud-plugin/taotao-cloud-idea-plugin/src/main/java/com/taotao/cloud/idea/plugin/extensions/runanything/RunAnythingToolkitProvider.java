@@ -41,7 +41,7 @@ public class RunAnythingToolkitProvider extends RunAnythingAnActionProvider<AnAc
 	private Collection<AnAction> createActions() {
 		return Arrays.stream(ToolkitCommand.values())
 			.map(ToolkitCommandAction::new)
-			.collect(Collectors.toList());
+			.toList();
 	}
 
 	@Override

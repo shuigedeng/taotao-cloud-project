@@ -1,12 +1,13 @@
 package com.taotao.cloud.sys.api.model.vo.monitor;
 
-import org.dromara.hutoolcore.date.DatePattern;
-import org.dromara.hutoolcore.date.DateUtil;
-import org.dromara.hutoolcore.util.NumberUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
+import org.dromara.hutool.core.date.DatePattern;
+import org.dromara.hutool.core.date.DateUtil;
+import org.dromara.hutool.core.math.NumberUtil;
 
 import java.lang.management.ManagementFactory;
+import java.math.BigDecimal;
 
 /**
  * JVM相关信息
@@ -39,23 +40,23 @@ public class JvmInfo {
      */
     private String home;
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return NumberUtil.div(total, CommonConstant.MB, 2);
     }
 
-    public double getMax() {
+    public BigDecimal getMax() {
         return NumberUtil.div(max, CommonConstant.MB, 2);
     }
 
-    public double getFree() {
+    public BigDecimal getFree() {
         return NumberUtil.div(free, CommonConstant.MB, 2);
     }
 
-    public double getUsed() {
+    public BigDecimal getUsed() {
         return NumberUtil.div(total - free, CommonConstant.MB, 2);
     }
 
-    public double getUsage() {
+    public BigDecimal getUsage() {
         return NumberUtil.div((total - free) * 100, total, 2);
     }
 
@@ -79,7 +80,7 @@ public class JvmInfo {
      */
     public String getRunTime() {
         return DateUtil.formatBetween(DateUtil.date(ManagementFactory.getRuntimeMXBean().getStartTime()),
-            DateUtil.date());
+            DateUtil.now());
     }
 
     /**

@@ -34,7 +34,7 @@ public class SmsNotifyPusher implements NotifyPusher {
 		List<String> phoneList = userList.stream()
 			.map(SysUser::getPhone)
 			.filter(StrUtil::isNotBlank)
-			.collect(Collectors.toList());
+			.toList();
 		// 短信文本去除 html 标签
 		String content = HtmlUtils.toText(notifyInfo.getContent());
 		// TODO 对接短信发送平台

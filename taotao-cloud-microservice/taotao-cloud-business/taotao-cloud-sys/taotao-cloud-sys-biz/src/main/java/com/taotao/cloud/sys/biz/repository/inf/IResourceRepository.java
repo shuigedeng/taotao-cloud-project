@@ -41,6 +41,6 @@ public interface IResourceRepository extends JpaRepository<Resource, Long> {
 			.stream()
 			.filter(Objects::nonNull)
 			.map(e -> e.get(0).getId())
-			.collect(Collectors.toList());
+			.toList();
 	}
 }

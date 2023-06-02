@@ -267,7 +267,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
                 ids = array.toList(Map.class)
 					.stream()
                         .map(i -> i.get("id").toString())
-                        .collect(Collectors.toList());
+                        .toList();
             }
             return memberApi.listFieldsByMemberIds("id,nick_name", ids);
         }

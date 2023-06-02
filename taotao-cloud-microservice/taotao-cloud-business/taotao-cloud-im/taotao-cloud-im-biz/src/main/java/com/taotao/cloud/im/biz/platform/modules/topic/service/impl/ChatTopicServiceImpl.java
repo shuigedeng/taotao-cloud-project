@@ -450,7 +450,7 @@ public class ChatTopicServiceImpl extends BaseServiceImpl<ChatTopic> implements 
     /** 是否点赞 */
     private YesOrNoEnum selfLike(List<TopicVo05> likeList) {
         Long userId = ShiroUtils.getUserId();
-        List<Long> userList = likeList.stream().map(TopicVo05::getUserId).collect(Collectors.toList());
+        List<Long> userList = likeList.stream().map(TopicVo05::getUserId).toList();
         return userList.contains(userId) ? YesOrNoEnum.YES : YesOrNoEnum.NO;
     }
 }

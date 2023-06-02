@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import org.dromara.hutoolcore.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.SecurityUser;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.WebFilterExchange;
@@ -55,7 +55,7 @@ public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenti
         //        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, clientId);
         headerValues.add(
                 CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER,
-                CollectionUtil.join(authentication.getAuthorities(), ","));
+                CollUtil.join(authentication.getAuthorities(), ","));
 
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpRequest serverHttpRequest = exchange.getRequest()

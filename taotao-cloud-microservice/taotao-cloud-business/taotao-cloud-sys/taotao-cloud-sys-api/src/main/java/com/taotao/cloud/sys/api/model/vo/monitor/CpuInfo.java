@@ -1,7 +1,9 @@
 package com.taotao.cloud.sys.api.model.vo.monitor;
 
-import org.dromara.hutoolcore.util.NumberUtil;
 import lombok.Data;
+import org.dromara.hutool.core.math.NumberUtil;
+
+import java.math.BigDecimal;
 
 /**
  * CPU相关信息
@@ -43,19 +45,19 @@ public class CpuInfo {
         return NumberUtil.round(total * 100, 2).doubleValue();
     }
 
-    public double getSys() {
+    public BigDecimal getSys() {
         return NumberUtil.div(sys * 100, total, 2);
     }
 
-    public double getUsed() {
+    public BigDecimal getUsed() {
         return NumberUtil.div(used * 100, total, 2);
     }
 
-    public double getWait() {
+    public BigDecimal getWait() {
         return NumberUtil.div(wait * 100, total, 2);
     }
 
-    public double getFree() {
+    public BigDecimal getFree() {
         return NumberUtil.div(free * 100, total, 2);
     }
 }

@@ -76,7 +76,7 @@ public class CartPriceRender implements ICartRenderStep {
                     .accumulationPriceDTO(cartVO.getCheckedSkuList().stream()
                             .filter(CartSkuVO::getChecked)
                             .map(CartSkuVO::getPriceDetailDTO)
-                            .collect(Collectors.toList()));
+                            .toList());
             List<Integer> skuNum = cartVO.getSkuList().stream()
                     .filter(CartSkuVO::getChecked)
                     .map(CartSkuVO::getNum)
@@ -97,6 +97,6 @@ public class CartPriceRender implements ICartRenderStep {
         tradeDTO.getPriceDetailDTO()
                 .accumulationPriceDTO(tradeDTO.getCartList().stream()
                         .map(CartVO::getPriceDetailDTO)
-                        .collect(Collectors.toList()));
+                        .toList());
     }
 }

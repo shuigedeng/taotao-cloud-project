@@ -111,7 +111,7 @@ public class DataVersionLogMongoService implements DataVersionLogService {
 
         Page<DataVersionLogMongo> page = repository.findAll(example, pageable);
         List<DataVersionLogDto> records =
-                page.getContent().stream().map(DataVersionLogMongo::toDto).collect(Collectors.toList());
+                page.getContent().stream().map(DataVersionLogMongo::toDto).toList();
 
         return PageResult.of(page.getTotalElements(), 1, param.getCurrentPage(), param.getPageSize(), records);
     }

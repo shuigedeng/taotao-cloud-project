@@ -44,7 +44,7 @@ public class MerchantInfoManager extends BaseManager<MerchantInfoMapper, Merchan
             .list()
             .stream()
             .map(mch -> new KeyValue(mch.getMchNo(), mch.getMchName()))
-            .collect(Collectors.toList());
+            .toList();
     }
 
 }

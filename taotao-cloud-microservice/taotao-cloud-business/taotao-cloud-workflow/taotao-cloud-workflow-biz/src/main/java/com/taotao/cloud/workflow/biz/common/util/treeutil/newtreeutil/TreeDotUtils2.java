@@ -65,7 +65,7 @@ public class TreeDotUtils2 {
         List<T> childTreeDotList = new ArrayList<>();
         List<T> data = tList.stream()
                 .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
-                .collect(Collectors.toList());
+                .toList();
         for (T t : data) {
             if (parentTreeDot.getId().equals(t.getParentId())) {
                 // 如果父ID是传递树点的ID，那么就是传递树点的子点

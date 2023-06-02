@@ -247,7 +247,7 @@ public class MinioUploadUtil {
      * @return
      */
     public List<String> getAllBuckets() throws Exception {
-        return minioClient.listBuckets().stream().map(Bucket::name).collect(Collectors.toList());
+        return minioClient.listBuckets().stream().map(Bucket::name).toList();
     }
 
     /**

@@ -136,7 +136,7 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
     public List<AppFlowListAllVO> getFlowList(FlowPagination pagination) {
         List<AppDataEntity> dataList = getList("1");
         List<String> objectId =
-                dataList.stream().map(AppDataEntity::getObjectId).collect(Collectors.toList());
+                dataList.stream().map(AppDataEntity::getObjectId).toList();
         FlowAppPageModel pageModel = flowEngineApi.getAppPageList(pagination);
         List<FlowEngineEntity> pageList = pageModel.getList();
         PaginationVO paginaModel = pageModel.getPaginationVO();
@@ -157,7 +157,7 @@ public class AppDataServiceImpl extends ServiceImpl<AppDataMapper, AppDataEntity
         List<ModuleModel> buttonList = authorizeModel.getModuleList();
         List<ModuleEntity> menuList = moduleApi.getList().stream()
                 .filter(t -> "App".equals(t.getCategory()) && t.getEnabledMark() == 1)
-                .collect(Collectors.toList());
+                .toList();
         List<UserMenuModel> list = new LinkedList<>();
         for (ModuleEntity module : menuList) {
             boolean count = buttonList.stream()

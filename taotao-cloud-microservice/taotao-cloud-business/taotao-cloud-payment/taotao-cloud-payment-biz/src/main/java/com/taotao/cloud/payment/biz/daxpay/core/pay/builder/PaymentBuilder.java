@@ -68,7 +68,7 @@ public class PaymentBuilder {
      */
     private List<PayChannelInfo> buildPayTypeInfo(List<PayWayParam> payWayParamList) {
         return CollectionUtil.isEmpty(payWayParamList) ? Collections.emptyList()
-                : payWayParamList.stream().map(PayWayParam::toPayTypeInfo).collect(Collectors.toList());
+                : payWayParamList.stream().map(PayWayParam::toPayTypeInfo).toList();
     }
 
     /**
@@ -76,7 +76,7 @@ public class PaymentBuilder {
      */
     private List<RefundableInfo> buildRefundableInfo(List<PayWayParam> payWayParamList) {
         return CollectionUtil.isEmpty(payWayParamList) ? Collections.emptyList()
-                : payWayParamList.stream().map(PayWayParam::toRefundableInfo).collect(Collectors.toList());
+                : payWayParamList.stream().map(PayWayParam::toRefundableInfo).toList();
     }
 
     /**
@@ -90,7 +90,7 @@ public class PaymentBuilder {
             .map(payTypeInfo -> new PayWayParam().setAmount(payTypeInfo.getAmount())
                 .setPayChannel(payTypeInfo.getPayChannel())
                 .setExtraParamsJson(payTypeInfo.getExtraParamsJson()))
-            .collect(Collectors.toList());
+            .toList();
         payParam.setPayWayList(payWayParams)
             .setBusinessId(payment.getBusinessId())
             .setTitle(payment.getTitle())
@@ -118,7 +118,7 @@ public class PaymentBuilder {
             // 设置异步支付参数
             List<PayChannelInfo> moneyPayTypeInfos = channelInfos.stream()
                 .filter(payTypeInfo -> PayChannelEnum.ASYNC_TYPE_CODE.contains(payTypeInfo.getPayChannel()))
-                .collect(Collectors.toList());
+                .toList();
             if (!CollUtil.isEmpty(moneyPayTypeInfos)) {
                 paymentResult.setAsyncPayInfo(AsyncPayInfoLocal.get());
             }

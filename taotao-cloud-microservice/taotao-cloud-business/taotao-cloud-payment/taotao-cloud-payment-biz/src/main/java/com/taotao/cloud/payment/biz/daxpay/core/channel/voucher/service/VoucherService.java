@@ -62,7 +62,7 @@ public class VoucherService {
                 .setAmount(voucher.getBalance())
                 .setVoucherId(voucher.getId())
                 .setVoucherNo(voucher.getCardNo()))
-            .collect(Collectors.toList());
+            .toList();
         voucherLogManager.saveAll(voucherLogs);
     }
 

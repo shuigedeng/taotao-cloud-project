@@ -123,7 +123,7 @@ public class CouponStoreController {
         List<String> filterIds = list
 			.stream()
 			.map(Coupon::getId)
-			.collect(Collectors.toList());
+			.toList();
         return couponService.removePromotions(filterIds)
                 ? Result.success()
                 : Result.error(ResultEnum.COUPON_DELETE_ERROR);
@@ -142,7 +142,7 @@ public class CouponStoreController {
                         .eq(Coupon::getStoreId, currentUser.getStoreId()))
                 .stream()
                 .map(Coupon::getId)
-                .collect(Collectors.toList());
+                .toList();
         if (couponService.updateStatus(couponIdList, startTime, endTime)) {
             return Result.success(ResultEnum.COUPON_EDIT_STATUS_SUCCESS);
         }

@@ -74,7 +74,7 @@ public interface BpmTaskConvert {
         if (null == source || source.isEmpty()) {
             return Collections.emptyList();
         }
-        return source.stream().map(e -> copy(e, target)).collect(Collectors.toList());
+        return source.stream().map(e -> copy(e, target)).toList();
     }
 
     default List<BpmTaskTodoPageItemRespVO> convertList1(

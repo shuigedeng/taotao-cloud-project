@@ -16,14 +16,15 @@
 
 package com.taotao.cloud.generator.biz.page;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.ObjectUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.util.ObjUtil;
 
 /**
  * 分页查询实体类
@@ -54,8 +55,8 @@ public class PageQuery implements Serializable {
     public static final int DEFAULT_PAGE_SIZE = Integer.MAX_VALUE;
 
     public <T> Page<T> build() {
-        Integer pageNum = ObjectUtil.defaultIfNull(getPageNum(), DEFAULT_PAGE_NUM);
-        Integer pageSize = ObjectUtil.defaultIfNull(getPageSize(), DEFAULT_PAGE_SIZE);
+        Integer pageNum = ObjUtil.defaultIfNull(getPageNum(), DEFAULT_PAGE_NUM);
+        Integer pageSize = ObjUtil.defaultIfNull(getPageSize(), DEFAULT_PAGE_SIZE);
         if (pageNum <= 0) {
             pageNum = DEFAULT_PAGE_NUM;
         }

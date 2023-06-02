@@ -257,7 +257,7 @@ public class FlowDataUtil {
                     .filter(t -> StrUtil.isNotEmpty(
                             t.getFormColumnModel().getFieLdsModel().getVModel()))
                     .map(t -> t.getFormColumnModel().getFieLdsModel().getVModel())
-                    .collect(Collectors.toList());
+                    .toList();
             String pKeyName = this.getKey(conn, mastTableName);
             // 主表数据
             String mastInfo = " select "
@@ -301,7 +301,7 @@ public class FlowDataUtil {
                 List<String> childFile = childList.getChildList().stream()
                         .filter(t -> StrUtil.isNotEmpty(t.getFieLdsModel().getVModel()))
                         .map(t -> t.getFieLdsModel().getVModel())
-                        .collect(Collectors.toList());
+                        .toList();
                 Optional<TableModel> first1 = tableList.stream()
                         .filter(t -> t.getTable().equals(tableName))
                         .findFirst();
@@ -361,7 +361,7 @@ public class FlowDataUtil {
                         .filter(t ->
                                 StrUtil.isNotEmpty(t.getFormMastTableModel().getField()))
                         .map(t -> t.getFormMastTableModel().getField())
-                        .collect(Collectors.toList());
+                        .toList();
                 String mastTableInfo = "select "
                         + String.join(",", field)
                         + " from "
@@ -661,7 +661,7 @@ public class FlowDataUtil {
             String tableModel = childListAll.getTableModel();
             List<FormColumnModel> childList = childListAll.getChildList().stream()
                     .filter(g -> StrUtil.isNotEmpty(g.getFieLdsModel().getVModel()))
-                    .collect(Collectors.toList());
+                    .toList();
             childMap.put(tableModel, childList);
             String tableName = childListAll.getTableName();
             Optional<TableModel> first = tableModelList.stream()
@@ -1092,7 +1092,7 @@ public class FlowDataUtil {
             String tableModel = childListAll.getTableModel();
             List<FormColumnModel> childList = childListAll.getChildList().stream()
                     .filter(g -> StrUtil.isNotEmpty(g.getFieLdsModel().getVModel()))
-                    .collect(Collectors.toList());
+                    .toList();
             childMap.put(tableModel, childList);
             String tableName = childListAll.getTableName();
             Optional<TableModel> first = tableModelList.stream()

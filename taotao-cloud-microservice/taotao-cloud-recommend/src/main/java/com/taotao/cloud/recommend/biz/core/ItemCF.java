@@ -48,6 +48,6 @@ public class ItemCF {
         return itemDisMap.entrySet().stream()
                 .filter(e -> e.getValue() == maxValue)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -119,7 +119,7 @@ public class WalletManager extends BaseManager<WalletMapper, Wallet> {
             .list()
             .stream()
             .map(Wallet::getUserId)
-            .collect(Collectors.toList());
+            .toList();
 
     }
 

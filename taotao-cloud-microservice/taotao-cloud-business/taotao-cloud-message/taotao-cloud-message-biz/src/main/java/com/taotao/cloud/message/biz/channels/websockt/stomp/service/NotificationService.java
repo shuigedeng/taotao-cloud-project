@@ -101,7 +101,7 @@ public class NotificationService extends BaseLayeredService<Notification, String
     private List<Notification> convertAnnouncementsToNotifications(String userId, List<Announcement> announcements) {
         return announcements.stream()
                 .map(announcement -> convertAnnouncementToNotification(userId, announcement))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private Notification convertAnnouncementToNotification(String userId, Announcement announcement) {

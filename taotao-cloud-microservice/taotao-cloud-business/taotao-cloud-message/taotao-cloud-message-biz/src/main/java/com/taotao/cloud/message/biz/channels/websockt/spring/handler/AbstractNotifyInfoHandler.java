@@ -38,7 +38,7 @@ public abstract class AbstractNotifyInfoHandler<T extends NotifyInfo, M extends 
 	public void handle(List<SysUser> userList, T notifyInfo) {
 		M message = createMessage(notifyInfo);
 		String msg = JsonUtils.toJson(message);
-		List<Object> sessionKeys = userList.stream().map(SysUser::getUserId).collect(Collectors.toList());
+		List<Object> sessionKeys = userList.stream().map(SysUser::getUserId).toList();
 		persistMessage(userList, notifyInfo);
 		MessageDO messageDO = new MessageDO().setMessageText(msg)
 			.setSessionKeys(sessionKeys)

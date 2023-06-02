@@ -1,8 +1,10 @@
 package com.taotao.cloud.sys.api.model.vo.monitor;
 
-import org.dromara.hutoolcore.util.NumberUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import lombok.Data;
+import org.dromara.hutool.core.math.NumberUtil;
+
+import java.math.BigDecimal;
 
 /**
  * 內存相关信息
@@ -25,19 +27,19 @@ public class MemoryInfo {
      */
     private double free;
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return NumberUtil.div(total, CommonConstant.GB, 2);
     }
 
-    public double getUsed() {
+    public BigDecimal getUsed() {
         return NumberUtil.div(used, CommonConstant.GB, 2);
     }
 
-    public double getFree() {
+    public BigDecimal getFree() {
         return NumberUtil.div(free, CommonConstant.GB, 2);
     }
 
-    public double getUsage() {
+    public BigDecimal getUsage() {
         return NumberUtil.div(used * 100, total, 2);
     }
 }

@@ -81,7 +81,7 @@ public class LinkGroupServiceImpl implements LinkGroupService {
             LinkGroupVO linkGroupVO = new LinkGroupVO();
             BeanUtils.copyProperties(obj, linkGroupVO);
             return linkGroupVO;
-        }).collect(Collectors.toList());
+        }).toList();
         return groupVOList;
     }
 

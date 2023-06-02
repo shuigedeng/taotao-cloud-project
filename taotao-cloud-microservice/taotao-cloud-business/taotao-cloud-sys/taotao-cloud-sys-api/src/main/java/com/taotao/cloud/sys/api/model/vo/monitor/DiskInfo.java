@@ -2,6 +2,8 @@ package com.taotao.cloud.sys.api.model.vo.monitor;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * 系统文件相关信息
  */
@@ -41,6 +43,6 @@ public class DiskInfo {
     /**
      * 资源的使用率
      */
-    private double usage;
+    private BigDecimal usage;
 
 }

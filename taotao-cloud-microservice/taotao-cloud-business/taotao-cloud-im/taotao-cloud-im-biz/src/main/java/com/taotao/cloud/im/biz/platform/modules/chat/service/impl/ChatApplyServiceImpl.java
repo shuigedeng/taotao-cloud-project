@@ -129,7 +129,7 @@ public class ChatApplyServiceImpl extends BaseServiceImpl<ChatApply> implements 
         // 查询
         List<ChatApply> dataList = queryList(new ChatApply().setToId(userId));
         // 获取申请人
-        List<Long> fromList = dataList.stream().map(ChatApply::getFromId).collect(Collectors.toList());
+        List<Long> fromList = dataList.stream().map(ChatApply::getFromId).toList();
         // 集合判空
         if (CollectionUtils.isEmpty(fromList)) {
             return new PageInfo();

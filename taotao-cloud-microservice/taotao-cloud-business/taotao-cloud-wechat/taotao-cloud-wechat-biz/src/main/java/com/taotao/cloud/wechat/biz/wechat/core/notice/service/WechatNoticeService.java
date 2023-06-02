@@ -63,7 +63,7 @@ public class WechatNoticeService {
 
         List<WxMpTemplateData> wxMpTemplateData = keyValues.stream()
                 .map(keyValue -> new WxMpTemplateData(keyValue.getKey(), keyValue.getValue()))
-                .collect(Collectors.toList());
+                .toList();
         message.setData(wxMpTemplateData);
         return templateMsgService.sendTemplateMsg(message);
     }

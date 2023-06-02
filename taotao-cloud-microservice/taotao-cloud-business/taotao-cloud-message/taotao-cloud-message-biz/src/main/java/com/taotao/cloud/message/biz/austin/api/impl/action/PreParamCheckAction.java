@@ -56,7 +56,7 @@ public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
         // 2.过滤 receiver=null 的messageParam
         List<MessageParam> resultMessageParamList = messageParamList.stream()
                 .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
-                .collect(Collectors.toList());
+                .toList();
         if (CollUtil.isEmpty(resultMessageParamList)) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
             return;

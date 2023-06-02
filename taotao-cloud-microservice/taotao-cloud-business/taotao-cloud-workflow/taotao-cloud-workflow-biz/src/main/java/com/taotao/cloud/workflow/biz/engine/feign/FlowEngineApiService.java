@@ -99,7 +99,7 @@ public class FlowEngineApiService implements FlowEngineApi {
     public ActionResult list(FlowPagination pagination) {
         List<FlowEngineEntity> list = flowEngineService.getPageList(pagination);
         List<DictionaryDataEntity> dictionList = serviceUtil.getDictionName(
-                list.stream().map(t -> t.getCategory()).collect(Collectors.toList()));
+                list.stream().map(t -> t.getCategory()).toList());
         for (FlowEngineEntity entity : list) {
             DictionaryDataEntity dataEntity = dictionList.stream()
                     .filter(t -> t.getEnCode().equals(entity.getCategory()))
@@ -160,7 +160,7 @@ public class FlowEngineApiService implements FlowEngineApi {
             // 主表数据
             List<FormAllModel> mast = formAllModel.stream()
                     .filter(t -> FormEnum.mast.getMessage().equals(t.getJnpfKey()))
-                    .collect(Collectors.toList());
+                    .toList();
             for (FormAllModel model : mast) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
                 String vmodel = fieLdsModel.getVModel();
@@ -193,7 +193,7 @@ public class FlowEngineApiService implements FlowEngineApi {
                         .getTaskList(id, FlowTaskEntity::getId, FlowTaskEntity::getFullName, FlowTaskEntity::getEnCode)
                         .stream()
                         .filter(t -> FlowTaskStatusEnum.Adopt.getCode().equals(t.getStatus()))
-                        .collect(Collectors.toList());
+                        .toList();
         List<FlowEngineSelectVO> vo = new ArrayList<>();
         for (FlowTaskEntity taskEntity : flowTaskList) {
             FlowEngineSelectVO selectVO = JsonUtil.getJsonToBean(taskEntity, FlowEngineSelectVO.class);

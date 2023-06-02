@@ -198,7 +198,7 @@ public class TreeUtil {
                     list.sort(Comparator.comparing(E::getSort));
                     child.setChildren(list);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // public static void main(String[] args) {
@@ -491,10 +491,10 @@ public class TreeUtil {
         // 				VideoVo videoVo = new VideoVo();
         // 				BeanUtils.copyProperties(item3, videoVo);
         // 				return videoVo;
-        // 			}).collect(Collectors.toList());
+        // 			}).toList();
         // 		chapterVo.setChildren(videoVoList);
         // 		return chapterVo;
-        // 	}).collect(Collectors.toList());
+        // 	}).toList();
         //
         // 	return chapterVoList;
         return null;

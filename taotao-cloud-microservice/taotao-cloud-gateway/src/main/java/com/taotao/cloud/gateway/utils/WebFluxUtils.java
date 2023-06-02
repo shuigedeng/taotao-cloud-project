@@ -18,7 +18,6 @@ package com.taotao.cloud.gateway.utils;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR;
 
-import org.dromara.hutoolcore.util.ObjectUtil;
 import com.taotao.cloud.gateway.filter.global.GlobalCacheRequestFilter;
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -28,6 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import org.apache.commons.lang3.StringUtils;
+import org.dromara.hutool.core.util.ObjUtil;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -92,7 +92,7 @@ public class WebFluxUtils {
      */
     public static String resolveBodyFromCacheRequest(ServerWebExchange exchange) {
         Object obj = exchange.getAttributes().get(ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR);
-        if (ObjectUtil.isNull(obj)) {
+        if (ObjUtil.isNull(obj)) {
             return null;
         }
         DataBuffer buffer = (DataBuffer) obj;

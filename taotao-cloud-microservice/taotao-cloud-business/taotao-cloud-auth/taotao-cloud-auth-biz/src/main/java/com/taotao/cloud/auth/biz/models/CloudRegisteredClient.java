@@ -101,7 +101,7 @@ package com.taotao.cloud.auth.biz.models; // package com.taotao.cloud.oauth2.biz
 // 	//	if (Objects.nonNull(clientAuthenticationMethods)
 // 	//		&& clientAuthenticationMethods.size() > 0) {
 // 	//		return clientAuthenticationMethods.stream().map(ClientAuthenticationMethod::new)
-// 	//			.collect(Collectors.toList());
+// 	//			.toList();
 // 	//	}
 // 	//	return Collections.emptyList();
 // 	//}

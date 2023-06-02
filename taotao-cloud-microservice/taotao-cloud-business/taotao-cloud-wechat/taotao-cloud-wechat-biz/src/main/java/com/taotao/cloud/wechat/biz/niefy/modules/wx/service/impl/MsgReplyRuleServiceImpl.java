@@ -113,7 +113,7 @@ public class MsgReplyRuleServiceImpl extends ServiceImpl<MsgReplyRuleMapper, Msg
                         || rule.getEffectTimeEnd().toLocalTime().isAfter(now)) // 检测是否在有效时段，effectTimeEnd为null则一直有效
                 .filter(rule -> isMatch(
                         exactMatch || rule.isExactMatch(), rule.getMatchValue().split(","), keywords)) // 检测是否符合匹配规则
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**

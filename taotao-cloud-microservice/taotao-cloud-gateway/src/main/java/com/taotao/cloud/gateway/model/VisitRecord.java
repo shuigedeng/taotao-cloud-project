@@ -1,8 +1,8 @@
 package com.taotao.cloud.gateway.model;
 
-import org.dromara.hutoolcore.net.Ipv4Util;
 import lombok.Data;
 import lombok.ToString;
+import org.dromara.hutool.core.net.Ipv4Util;
 
 import java.time.LocalDateTime;
 @Data

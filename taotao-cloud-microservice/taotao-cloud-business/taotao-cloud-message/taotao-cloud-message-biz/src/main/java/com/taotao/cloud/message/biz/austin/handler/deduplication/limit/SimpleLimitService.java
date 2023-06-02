@@ -51,7 +51,7 @@ public class SimpleLimitService extends AbstractLimitService {
         // redis数据隔离
         List<String> keys = deduplicationAllKey(service, taskInfo).stream()
                 .map(key -> LIMIT_TAG + key)
-                .collect(Collectors.toList());
+                .toList();
         Map<String, String> inRedisValue = redisUtils.mGet(keys);
 
         for (String receiver : taskInfo.getReceiver()) {

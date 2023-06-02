@@ -325,7 +325,7 @@ public class ChatFriendServiceImpl extends BaseServiceImpl<ChatFriend> implement
             // 过滤
             dataList = dataList.stream()
                     .filter(data -> data.getNickName().contains(param))
-                    .collect(Collectors.toList());
+                    .toList();
         }
         return dataList;
     }

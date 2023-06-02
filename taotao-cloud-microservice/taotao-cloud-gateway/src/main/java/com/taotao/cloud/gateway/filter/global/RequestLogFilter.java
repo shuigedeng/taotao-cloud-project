@@ -18,7 +18,6 @@ package com.taotao.cloud.gateway.filter.global;
 
 import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE_ID;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -26,6 +25,8 @@ import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

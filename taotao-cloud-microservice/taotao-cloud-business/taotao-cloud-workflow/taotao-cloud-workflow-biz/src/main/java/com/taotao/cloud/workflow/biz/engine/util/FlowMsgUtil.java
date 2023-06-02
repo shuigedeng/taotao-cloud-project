@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
@@ -528,7 +527,7 @@ public class FlowMsgUtil {
         List<String> userList =
                 flowDelegateService.getUser(null, taskEntity.getFlowId(), operator.getHandleId()).stream()
                         .map(t -> t.getFTouserid())
-                        .collect(Collectors.toList());
+                        .toList();
         List<FlowTaskOperatorEntity> taskOperatorList = new ArrayList<>();
         for (String user : userList) {
             FlowTaskOperatorEntity delegaOperator = JsonUtils.getJsonToBean(operator, FlowTaskOperatorEntity.class);

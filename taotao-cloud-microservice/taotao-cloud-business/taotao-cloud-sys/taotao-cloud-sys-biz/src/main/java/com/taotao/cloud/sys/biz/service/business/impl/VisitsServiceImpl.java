@@ -102,11 +102,11 @@ public class VisitsServiceImpl extends ServiceImpl<IVisitsMapper, Visits> implem
         //        List<Visits> list =
         // visitsRepository.findAllVisits(localDate.minusDays(6).toString(),localDate.plusDays(1).toString());
         //
-        // map.put("weekDays",list.stream().map(Visits::getWeekDay).collect(Collectors.toList()));
+        // map.put("weekDays",list.stream().map(Visits::getWeekDay).toList());
         //
-        // map.put("visitsData",list.stream().map(Visits::getPvCounts).collect(Collectors.toList()));
+        // map.put("visitsData",list.stream().map(Visits::getPvCounts).toList());
         //
-        // map.put("ipData",list.stream().map(Visits::getIpCounts).collect(Collectors.toList()));
+        // map.put("ipData",list.stream().map(Visits::getIpCounts).toList());
         return map;
     }
 }

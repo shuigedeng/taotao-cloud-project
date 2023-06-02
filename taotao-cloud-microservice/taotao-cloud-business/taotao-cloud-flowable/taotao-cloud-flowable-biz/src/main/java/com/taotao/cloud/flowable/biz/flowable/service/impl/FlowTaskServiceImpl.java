@@ -795,7 +795,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                 .includeProcessVariables()
                 .taskCandidateGroupIn(sysUser.getRoles().stream()
                         .map(role -> role.getRoleId().toString())
-                        .collect(Collectors.toList()))
+                        .toList())
                 .taskCandidateOrAssigned(sysUser.getUserId().toString())
                 .orderByTaskCreateTime()
                 .desc();

@@ -232,7 +232,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 获取下一审批人
         List<ChildNodeList> nextOperatorList = nodeListAll.stream()
                 .filter(t -> nodeList.contains(t.getCustom().getNodeId()))
-                .collect(Collectors.toList());
+                .toList();
         Map<String, List<String>> nodeIdAll = this.nextOperator(operatorList, nextOperatorList, flowTask, flowModel);
         // 审核人
         flowTaskOperatorService.create(operatorList);
@@ -360,7 +360,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskNodeEntity> flowTaskNodeAll = flowTaskNodeService.getList(flowTask.getId());
         List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeAll.stream()
                 .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                .collect(Collectors.toList());
+                .toList();
         // 当前节点
         Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
                 .filter(m -> m.getId().equals(operator.getTaskNodeId()))
@@ -405,7 +405,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 获取下一审批人
         List<FlowTaskNodeEntity> nextNode = taskNodeList.stream()
                 .filter(t -> taskNode.getNodeNext().contains(t.getNodeCode()))
-                .collect(Collectors.toList());
+                .toList();
         List<ChildNodeList> nextOperatorList = new ArrayList<>();
         List<FlowTaskNodeEntity> result = this.isNextAll(taskNodeList, nextNode, taskNode, flowModel);
         for (FlowTaskNodeEntity entity : result) {
@@ -505,7 +505,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskNodeEntity> flowTaskNodeAll = flowTaskNodeService.getList(flowTask.getId());
         List<FlowTaskNodeEntity> taskNodeList = flowTaskNodeAll.stream()
                 .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                .collect(Collectors.toList());
+                .toList();
         // 当前节点
         Optional<FlowTaskNodeEntity> first = taskNodeList.stream()
                 .filter(m -> m.getId().equals(operator.getTaskNodeId()))
@@ -659,7 +659,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     .filter(t -> list.contains(t.getNodeCode()))
                     .toList();
             List<String> rejectListAll =
-                    taskList.stream().map(FlowTaskNodeEntity::getId).collect(Collectors.toList());
+                    taskList.stream().map(FlowTaskNodeEntity::getId).toList();
             rejectNodeList.add(taskNode.getId());
             upAll(rejectNodeList, rejectListAll, taskNodeList);
         }
@@ -735,7 +735,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             // 撤回节点下一节点经办删除
             List<String> idAll = recallNextOperatorList.stream()
                     .map(FlowTaskOperatorEntity::getId)
-                    .collect(Collectors.toList());
+                    .toList();
             flowTaskOperatorService.updateTaskOperatorState(idAll);
             List<FlowTaskOperatorEntity> hanleOperatorList = flowTaskOperatorEntityList.stream()
                     .filter(x -> x.getTaskNodeId().equals(operatorRecord.getTaskNodeId())
@@ -782,7 +782,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> nextNodeList = flowTaskNodeEntityList.stream()
                 .filter(t -> t.getSortCode().equals(flowTaskNodeEntity.getSortCode() + 1))
                 .map(FlowTaskNodeEntity::getId)
-                .collect(Collectors.toList());
+                .toList();
         String handId = userInfo.getUserId();
         flowCandidatesService.delete(nextNodeList, handId, operatorRecord.getTaskOperatorId());
         // 删除经办记录
@@ -822,7 +822,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         // 修改经办记录状态
         List<FlowTaskOperatorRecordEntity> recordList = flowTaskOperatorRecordService.getList(flowTask.getId());
         List<String> recordListAll =
-                recordList.stream().map(FlowTaskOperatorRecordEntity::getId).collect(Collectors.toList());
+                recordList.stream().map(FlowTaskOperatorRecordEntity::getId).toList();
         flowTaskOperatorRecordService.updateStatus(recordListAll);
         // 更新当前节点
         flowTask.setThisStepId(start.getNodeCode());
@@ -898,7 +898,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             entity.setDraftData(null);
             entity.setHandleId(flowModel.getFreeApproverUserId());
             List<String> idAll =
-                    list.stream().map(FlowTaskOperatorEntity::getId).collect(Collectors.toList());
+                    list.stream().map(FlowTaskOperatorEntity::getId).toList();
             flowTaskOperatorService.deleteList(idAll);
             List<FlowTaskOperatorEntity> operatorList = new ArrayList<>();
             operatorList.add(entity);
@@ -1009,10 +1009,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 .toList();
         List<FlowTaskNodeEntity> taskNodeList = taskNodeAllList.stream()
                 .sorted(Comparator.comparing(FlowTaskNodeEntity::getSortCode))
-                .collect(Collectors.toList());
+                .toList();
         List<FlowTaskOperatorEntity> taskOperatorList = flowTaskOperatorService.getList(taskEntity.getId()).stream()
                 .filter(t -> FlowNodeEnum.Process.getCode().equals(t.getState()))
-                .collect(Collectors.toList());
+                .toList();
         List<FlowTaskOperatorRecordEntity> operatorRecordList =
                 flowTaskOperatorRecordService.getList(taskEntity.getId());
         boolean colorFlag = true;
@@ -1020,7 +1020,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskOperatorRecordModel> recordList = new ArrayList<>();
         List<String> userIdAll = operatorRecordList.stream()
                 .map(FlowTaskOperatorRecordEntity::getHandleId)
-                .collect(Collectors.toList());
+                .toList();
         userIdAll.addAll(operatorRecordList.stream()
                 .map(FlowTaskOperatorRecordEntity::getOperatorId)
                 .toList());
@@ -1090,7 +1090,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         .filter(t -> t.getNodeCode().equals(custom.getNodeId())
                                 && FlowNature.ParentId.equals(t.getParentId()))
                         .map(FlowTaskOperatorEntity::getHandleId)
-                        .collect(Collectors.toList());
+                        .toList();
                 List<UserEntity> userListAll = serviceUtil.getUserName(operatorUserList);
                 List<String> nameList = new ArrayList<>();
                 for (UserEntity operator : userListAll) {
@@ -1110,7 +1110,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     List<String> nameList = new ArrayList<>();
                     List<String> operatorUserList = operatorList.stream()
                             .map(FlowTaskOperatorEntity::getHandleId)
-                            .collect(Collectors.toList());
+                            .toList();
                     List<UserEntity> userListAll = serviceUtil.getUserName(operatorUserList);
                     for (UserEntity operator : userListAll) {
                         nameList.add(operator.getRealName() + "/" + operator.getAccount());
@@ -1182,10 +1182,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         Map<String, String> map = new HashMap<>();
         Map<String, List<FlowTaskOperatorRecordEntity>> operatorAll = new HashMap<>();
         if (FlowRecordListEnum.position.getCode().equals(category)) {
-            List<String> userId = userList.stream().map(UserEntity::getId).collect(Collectors.toList());
+            List<String> userId = userList.stream().map(UserEntity::getId).toList();
             List<UserRelationEntity> relationList = serviceUtil.getListByUserIdAll(userId);
             List<String> objectId =
-                    relationList.stream().map(UserRelationEntity::getObjectId).collect(Collectors.toList());
+                    relationList.stream().map(UserRelationEntity::getObjectId).toList();
             List<PositionEntity> positionListAll = serviceUtil.getPositionName(objectId);
             for (PositionEntity entity : positionListAll) {
                 map.put(entity.getId(), entity.getFullName());
@@ -1202,10 +1202,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 operatorAll.put(entity.getId(), operator);
             }
         } else if (FlowRecordListEnum.role.getCode().equals(category)) {
-            List<String> userId = userList.stream().map(UserEntity::getId).collect(Collectors.toList());
+            List<String> userId = userList.stream().map(UserEntity::getId).toList();
             List<UserRelationEntity> relationList = serviceUtil.getListByUserIdAll(userId);
             List<String> objectId =
-                    relationList.stream().map(UserRelationEntity::getObjectId).collect(Collectors.toList());
+                    relationList.stream().map(UserRelationEntity::getObjectId).toList();
             List<RoleEntity> roleListAll = serviceUtil.getListByIds(objectId);
             for (RoleEntity entity : roleListAll) {
                 map.put(entity.getId(), entity.getFullName());
@@ -1223,14 +1223,14 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             }
         } else if (FlowRecordListEnum.department.getCode().equals(category)) {
             List<String> organizeList =
-                    userList.stream().map(UserEntity::getOrganizeId).collect(Collectors.toList());
+                    userList.stream().map(UserEntity::getOrganizeId).toList();
             List<OrganizeEntity> organizeListAll = serviceUtil.getOrganizeName(organizeList);
             for (OrganizeEntity entity : organizeListAll) {
                 map.put(entity.getId(), entity.getFullName());
                 List<String> userAll = userList.stream()
                         .filter(t -> t.getOrganizeId().equals(entity.getId()))
                         .map(UserEntity::getId)
-                        .collect(Collectors.toList());
+                        .toList();
                 List<FlowTaskOperatorRecordEntity> operator = new LinkedList<>();
                 for (FlowTaskOperatorRecordEntity recordEntity : recordListAll) {
                     if (userAll.contains(recordEntity.getHandleId())) {
@@ -1323,7 +1323,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
             List<String> userId = listByObjectIdAll.stream()
                     .map(UserRelationEntity::getUserId)
-                    .collect(Collectors.toList());
+                    .toList();
             userId.addAll(properties.getApprovers());
             Pagination pagination = JsonUtils.getJsonToBean(flowCandidateModel, Pagination.class);
             List<UserEntity> userName = serviceUtil.getUserName(userId, pagination);
@@ -1422,7 +1422,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         }
         List<String> flowDelegateList = flowDelegateService.getUser(userInfo.getUserId(), flowId, userId).stream()
                 .map(FlowDelegateEntity::getFTouserid)
-                .collect(Collectors.toList());
+                .toList();
         flowDelegateList.add(userId);
         if (!flowDelegateList.contains(userInfo.getUserId())) {
             throw new WorkFlowException(MsgCode.WF123.get());
@@ -1698,7 +1698,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> nextNode = nodeList.stream()
                 .map(FlowTaskNodeEntity::getNodeNext)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                .toList();
         if (nextNode.size() > 0) {
             String nodes = String.join(",", nextNode);
             num++;
@@ -2042,7 +2042,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
                 List<String> userPosition = listByObjectIdAll.stream()
                         .map(UserRelationEntity::getUserId)
-                        .collect(Collectors.toList());
+                        .toList();
                 userIdAll.addAll(userPosition);
             }
             List<UserEntity> userAll = serviceUtil.getUserName(userIdAll);
@@ -2204,7 +2204,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                         flowTaskOperatorService.getList(taskNode.getTaskId()).stream()
                                 .filter(t -> t.getTaskNodeId().equals(taskNode.getId())
                                         && FlowNodeEnum.Process.getCode().equals(t.getState()))
-                                .collect(Collectors.toList());
+                                .toList();
                 double total = operatorList.stream()
                         .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
                         .count();
@@ -2255,7 +2255,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> idListAll = operatorList.stream()
                 .filter(t -> FlowNature.ParentId.equals(t.getParentId()))
                 .map(FlowTaskOperatorEntity::getId)
-                .collect(Collectors.toList());
+                .toList();
         List<String> childList = operatorList.stream()
                 .map(FlowTaskOperatorEntity::getParentId)
                 .filter(parentId -> !FlowNature.ParentId.equals(parentId))
@@ -2266,13 +2266,13 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<String> parentList = operatorList.stream()
                 .filter(t -> !FlowNature.ParentId.equals(t.getParentId()))
                 .map(FlowTaskOperatorEntity::getId)
-                .collect(Collectors.toList());
+                .toList();
         parentList.removeAll(childList);
         idAll.addAll(parentList);
         // 3.获取最后的审批人数据
         return operatorList.stream()
                 .filter(t -> idAll.contains(t.getId()) && completion.equals(t.getCompletion()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -2325,7 +2325,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         userAll.addAll(posList);
         List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(userAll);
         List<String> userPosition =
-                listByObjectIdAll.stream().map(UserRelationEntity::getUserId).collect(Collectors.toList());
+                listByObjectIdAll.stream().map(UserRelationEntity::getUserId).toList();
         userIdAll.addAll(userPosition);
         // 指定传阅人
         String[] copyIds = StrUtil.isNotEmpty(flowModel.getCopyIds())
@@ -2459,7 +2459,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                 if (taskNodeEntity != null) {
                     taskNodeList = nodeListAll.stream()
                             .filter(t -> t.getSortCode().equals(taskNodeEntity.getSortCode()))
-                            .collect(Collectors.toList());
+                            .toList();
                 }
                 result.addAll(taskNodeList);
                 thisStepAll.addAll(result);
@@ -2467,7 +2467,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             result = result.stream()
                     .sorted(Comparator.comparing(FlowTaskNodeEntity::getSortCode)
                             .reversed())
-                    .collect(Collectors.toList());
+                    .toList();
             boolean isChild = result.stream().anyMatch(t -> FlowNature.NodeSubFlow.equals(t.getNodeType()));
             if (isChild) {
                 throw new WorkFlowException(MsgCode.WF114.get());
@@ -2500,7 +2500,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         List<FlowTaskOperatorEntity> operatorList = flowTaskOperatorService.getList(taskNode.getTaskId()).stream()
                 .filter(t -> t.getTaskNodeId().equals(taskNode.getId())
                         && FlowNodeEnum.Process.getCode().equals(t.getState()))
-                .collect(Collectors.toList());
+                .toList();
         ChildNodeList nodeModel = JsonUtils.toObject(taskNode.getNodePropertyJson(), ChildNodeList.class);
         Properties properties = nodeModel.getProperties();
         long pass = 100 - properties.getCountersignRatio();
@@ -2658,10 +2658,10 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                             .filter(t -> properties.getNodeId().equals(t.getNodeCode())
                                     && FlowRecordEnum.audit.getCode().equals(t.getHandleStatus())
                                     && FlowNodeEnum.Process.getCode().equals(t.getStatus()))
-                            .collect(Collectors.toList());
+                            .toList();
             List<String> handleId = operatorUserList.stream()
                     .map(FlowTaskOperatorRecordEntity::getHandleId)
-                    .collect(Collectors.toList());
+                    .toList();
             userIdAll.addAll(handleId);
         }
         // 【服务】
@@ -2698,7 +2698,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
         list.addAll(roleList);
         List<UserRelationEntity> listByObjectIdAll = serviceUtil.getListByObjectIdAll(list);
         List<String> handleId =
-                listByObjectIdAll.stream().map(UserRelationEntity::getUserId).collect(Collectors.toList());
+                listByObjectIdAll.stream().map(UserRelationEntity::getUserId).toList();
         userIdAll.addAll(handleId);
         List<UserEntity> userList = serviceUtil.getUserName(userIdAll);
         if (userList.size() == 0) {
@@ -2887,7 +2887,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
             nextOperatorList.stream()
                     .filter(t -> t.getProperties().getProgress() != null)
                     .map(t -> t.getProperties().getProgress())
-                    .collect(Collectors.toList());
+                    .toList();
             delNodeList.addAll(nodeList);
             nextOperator.add(id);
             if (StrUtil.isNotEmpty(progress)) {

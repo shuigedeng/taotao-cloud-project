@@ -69,7 +69,7 @@ public class FlowCommentController {
         List<FlowCommentListVO> listVO = FlowTaskConvert.INSTANCE.convertComment(list);
 
         List<Long> userId =
-                list.stream().map(FlowCommentEntity::getCreatorUserId).collect(Collectors.toList());
+                list.stream().map(FlowCommentEntity::getCreatorUserId).toList();
         List<UserEntity> userName = serviceUtil.getUserName(userId);
         for (FlowCommentListVO commentModel : listVO) {
             UserEntity userEntity = userName.stream()

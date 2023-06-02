@@ -67,7 +67,7 @@ public class FullDiscountRender implements ICartRenderStep {
 
         // 店铺id集合
         List<String> storeIds =
-                tradeDTO.getCartList().stream().map(CartVO::getStoreId).collect(Collectors.toList());
+                tradeDTO.getCartList().stream().map(CartVO::getStoreId).toList();
         // 获取当前店铺进行到满减活动
         List<FullDiscountVO> fullDiscounts = fullDiscountService.currentPromotion(storeIds);
         if (fullDiscounts == null || fullDiscounts.isEmpty()) {
@@ -135,7 +135,7 @@ public class FullDiscountRender implements ICartRenderStep {
                 .filter(cartSkuVO -> {
                     return skuPriceDetail.containsKey(cartSkuVO.getGoodsSku().getId());
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         // 循环计算扣减金额
         cartSkuVOS.forEach(cartSkuVO -> {
@@ -168,7 +168,7 @@ public class FullDiscountRender implements ICartRenderStep {
         } else {
             List<String> collect = fullDiscount.getPromotionGoodsList().stream()
                     .map(PromotionGoods::getSkuId)
-                    .collect(Collectors.toList());
+                    .toList();
             // sku 集合判定
             for (CartSkuVO cartSkuVO : cartSkuVOS) {
                 // 如果参加满减，并且购物车选中状态 ，则记录商品sku

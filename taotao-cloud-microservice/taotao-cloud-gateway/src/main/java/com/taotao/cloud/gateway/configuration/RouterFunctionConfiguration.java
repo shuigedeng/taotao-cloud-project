@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.gateway.configuration;
 
-import org.dromara.hutoolhttp.HttpStatus;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.util.CaptchaUtils;
 import com.taotao.cloud.common.constant.RedisConstant;
@@ -39,6 +38,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.apache.commons.io.IOUtils;
+import org.dromara.hutool.http.meta.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.cloud.gateway.support.TimeoutException;

@@ -34,7 +34,7 @@ public class TreeDotUtils {
         CollectionUtils.addAll(list, tList);
         if (StringUtil.isNotEmpty(parentId)) {
             List<T> data =
-                    list.stream().filter(t -> parentId.equals(t.getParentId())).collect(Collectors.toList());
+                    list.stream().filter(t -> parentId.equals(t.getParentId())).toList();
             list.removeAll(data);
             for (int i = 0; i < data.size(); i++) {
                 T t = data.get(i);
@@ -109,7 +109,7 @@ public class TreeDotUtils {
         List<SumTree<T>> childTreeDotList = new ArrayList<>();
         List<T> data = tList.stream()
                 .filter(t -> parentTreeDot.getId().equals(t.getParentId()))
-                .collect(Collectors.toList());
+                .toList();
         for (T t : data) {
             if (parentTreeDot.getId().equals(t.getParentId())) {
                 // 如果父ID是传递树点的ID，那么就是传递树点的子点

@@ -65,9 +65,9 @@ public class FlowMonitorController {
     public Result<PageResult<FlowMonitorListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> list = flowTaskService.getMonitorList(paginationFlowTask);
         List<FlowEngineEntity> engineList = flowEngineService.getFlowList(
-                list.stream().map(FlowTaskEntity::getFlowId).collect(Collectors.toList()));
+                list.stream().map(FlowTaskEntity::getFlowId).toList());
         List<UserEntity> userList = serviceUtil.getUserName(
-                list.stream().map(FlowTaskEntity::getCreatorUserId).collect(Collectors.toList()));
+                list.stream().map(FlowTaskEntity::getCreatorUserId).toList());
 
         List<FlowMonitorListVO> listVO = new LinkedList<>();
         for (FlowTaskEntity taskEntity : list) {

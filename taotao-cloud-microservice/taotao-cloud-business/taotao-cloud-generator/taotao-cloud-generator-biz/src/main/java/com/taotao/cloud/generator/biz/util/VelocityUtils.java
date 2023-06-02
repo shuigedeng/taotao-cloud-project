@@ -16,10 +16,6 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.convert.Convert;
-import org.dromara.hutoolcore.lang.Dict;
-import org.dromara.hutoolcore.util.ObjectUtil;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.generator.api.constant.GenConstants;
 import com.taotao.cloud.generator.biz.entity.GenTable;
@@ -32,6 +28,10 @@ import java.util.Set;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.velocity.VelocityContext;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.map.Dict;
+import org.dromara.hutool.core.util.ObjUtil;
 
 /**
  * 模板工具类
@@ -241,7 +241,7 @@ public class VelocityUtils {
         List<GenTableColumn> columns = genTable.getColumns();
         GenTable subGenTable = genTable.getSubTable();
         HashSet<String> importList = new HashSet<>();
-        if (ObjectUtil.isNotNull(subGenTable)) {
+        if (ObjUtil.isNotNull(subGenTable)) {
             importList.add("java.util.List");
         }
         for (GenTableColumn column : columns) {
@@ -264,7 +264,7 @@ public class VelocityUtils {
         List<GenTableColumn> columns = genTable.getColumns();
         Set<String> dicts = new HashSet<>();
         addDicts(dicts, columns);
-        if (ObjectUtil.isNotNull(genTable.getSubTable())) {
+        if (ObjUtil.isNotNull(genTable.getSubTable())) {
             List<GenTableColumn> subColumns = genTable.getSubTable().getColumns();
             addDicts(dicts, subColumns);
         }
@@ -307,7 +307,7 @@ public class VelocityUtils {
      * @return 上级菜单ID字段
      */
     public static String getParentMenuId(Dict paramsObj) {
-        if (CollUtil.isNotEmpty(paramsObj)
+        if (ObjUtil.isNotEmpty(paramsObj)
                 && paramsObj.containsKey(GenConstants.PARENT_MENU_ID)
                 && StringUtils.isNotEmpty(paramsObj.getStr(GenConstants.PARENT_MENU_ID))) {
             return paramsObj.getStr(GenConstants.PARENT_MENU_ID);
@@ -335,7 +335,7 @@ public class VelocityUtils {
      * @return 树父编码
      */
     public static String getTreeParentCode(Dict paramsObj) {
-        if (CollUtil.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.TREE_PARENT_CODE)) {
+        if (ObjUtil.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.TREE_PARENT_CODE)) {
             return StringUtils.toCamelCase(paramsObj.getStr(GenConstants.TREE_PARENT_CODE));
         }
         return StringUtils.EMPTY;
@@ -348,7 +348,7 @@ public class VelocityUtils {
      * @return 树名称
      */
     public static String getTreeName(Dict paramsObj) {
-        if (CollUtil.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.TREE_NAME)) {
+        if (ObjUtil.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.TREE_NAME)) {
             return StringUtils.toCamelCase(paramsObj.getStr(GenConstants.TREE_NAME));
         }
         return StringUtils.EMPTY;

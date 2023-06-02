@@ -104,7 +104,7 @@ public class ChannelAccountController {
     public void deleteByIds(@PathVariable("id") String id) {
         if (StrUtil.isNotBlank(id)) {
             List<Long> idList =
-                    Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).collect(Collectors.toList());
+                    Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).toList();
             channelAccountService.deleteByIds(idList);
         }
     }

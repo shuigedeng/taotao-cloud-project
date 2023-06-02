@@ -50,10 +50,10 @@ public class UserCF {
         }
         // 最近邻用户看过电影列表
         List<Integer> neighborItems =
-                userMap.get(nearestUserId).stream().map(RelateDTO::getItemId).collect(Collectors.toList());
+                userMap.get(nearestUserId).stream().map(RelateDTO::getItemId).toList();
         // 指定用户看过电影列表
         List<Integer> userItems =
-                userMap.get(userId).stream().map(RelateDTO::getItemId).collect(Collectors.toList());
+                userMap.get(userId).stream().map(RelateDTO::getItemId).toList();
         // 找到最近邻看过，但是该用户没看过的电影
         neighborItems.removeAll(userItems);
         return neighborItems;

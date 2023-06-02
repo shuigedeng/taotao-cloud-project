@@ -18,13 +18,7 @@ package com.taotao.cloud.generator.biz.service;
 
 import static com.taotao.cloud.common.constant.StrPool.UTF8;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.io.FileUtil;
-import org.dromara.hutoolcore.io.IoUtil;
-import org.dromara.hutoolcore.lang.Dict;
-import org.dromara.hutoolcore.lang.Snowflake;
-import org.dromara.hutoolcore.util.IdUtil;
-import org.dromara.hutoolcore.util.ObjectUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
@@ -61,6 +55,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.data.id.IdUtil;
+import org.dromara.hutool.core.data.id.Snowflake;
+import org.dromara.hutool.core.io.file.FileUtil;
+import org.dromara.hutool.core.map.Dict;
+import org.dromara.hutool.core.io.IoUtil;
+import org.dromara.hutool.core.util.ObjUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -269,7 +270,7 @@ public class GenTableServiceImpl implements IGenTableService {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         generatorCode(tableName, zip);
-        IoUtil.close(zip);
+        IoUtil.closeQuietly(zip);
         return outputStream.toByteArray();
     }
 
@@ -383,7 +384,7 @@ public class GenTableServiceImpl implements IGenTableService {
         for (String tableName : tableNames) {
             generatorCode(tableName, zip);
         }
-        IoUtil.close(zip);
+        IoUtil.closeQuietly(zip);
         return outputStream.toByteArray();
     }
 
@@ -417,7 +418,7 @@ public class GenTableServiceImpl implements IGenTableService {
                 // 添加到zip
                 zip.putNextEntry(new ZipEntry(VelocityUtils.getFileName(template, table)));
                 IoUtil.write(zip, StandardCharsets.UTF_8, false, sw.toString());
-                IoUtil.close(sw);
+                IoUtil.closeQuietly(sw);
                 zip.flush();
                 zip.closeEntry();
             } catch (IOException e) {
@@ -464,7 +465,7 @@ public class GenTableServiceImpl implements IGenTableService {
                 break;
             }
         }
-        if (ObjectUtil.isNull(table.getPkColumn())) {
+        if (ObjUtil.isNull(table.getPkColumn())) {
             table.setPkColumn(table.getColumns().get(0));
         }
         if (GenConstants.TPL_SUB.equals(table.getTplCategory())) {
@@ -474,7 +475,7 @@ public class GenTableServiceImpl implements IGenTableService {
                     break;
                 }
             }
-            if (ObjectUtil.isNull(table.getSubTable().getPkColumn())) {
+            if (ObjUtil.isNull(table.getSubTable().getPkColumn())) {
                 table.getSubTable().setPkColumn(table.getSubTable().getColumns().get(0));
             }
         }

@@ -16,9 +16,7 @@
 
 package com.taotao.cloud.generator.biz.util;
 
-import org.dromara.hutoolcore.lang.Dict;
-import org.dromara.hutoolcore.util.ArrayUtil;
-import org.dromara.hutoolcore.util.ObjectUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.map.Dict;
 
 /**
  * JSON 工具类

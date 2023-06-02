@@ -133,7 +133,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 			List<String> skuIds = seckillApplyPage.getRecords()
 				.stream()
 				.map(SeckillApply::getSkuId)
-				.collect(Collectors.toList());
+				.toList();
 
 			// 循环获取 店铺/全平台 参与的促销商品库存进行填充
 			if (!skuIds.isEmpty()) {
@@ -174,7 +174,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 			seckillApplyList
 				.stream()
 				.map(SeckillApply::getSkuId)
-				.collect(Collectors.toList());
+				.toList();
 		List<SeckillApply> originList = new ArrayList<>();
 		List<PromotionGoods> promotionGoodsList = new ArrayList<>();
 		for (SeckillApplyVO seckillApply : seckillApplyList) {
@@ -209,7 +209,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 				promotionGoodsList
 					.stream()
 					.map(PromotionGoods::getSkuId)
-					.collect(Collectors.toList()));
+					.toList());
 			promotionGoodsService.deletePromotionGoods(searchParams);
 			// 初始化促销商品
 			PromotionTools.promotionGoodsInit(promotionGoodsList, seckill, PromotionTypeEnum.SECKILL);
@@ -338,7 +338,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 				.stream()
 				.filter(i -> i.getTimeLine().equals(startTimeline)
 					&& i.getPromotionApplyStatus().equals(PromotionsApplyStatusEnum.PASS.name()))
-				.collect(Collectors.toList());
+				.toList();
 			for (SeckillApply seckillApply : collect) {
 				GoodsSku goodsSku = goodsSkuApi.getGoodsSkuByIdFromCache(seckillApply.getSkuId());
 				if (goodsSku != null) {

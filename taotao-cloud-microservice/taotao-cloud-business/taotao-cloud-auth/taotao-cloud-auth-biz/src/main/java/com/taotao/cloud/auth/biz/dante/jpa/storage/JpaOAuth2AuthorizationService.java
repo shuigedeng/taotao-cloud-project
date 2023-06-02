@@ -117,7 +117,7 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
     public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
         List<HerodotusAuthorization> authorizations = this.herodotusAuthorizationService.findAvailableAuthorizations(registeredClientId, principalName);
         if (CollectionUtils.isNotEmpty(authorizations)) {
-            return authorizations.stream().map(this::toObject).collect(Collectors.toList());
+            return authorizations.stream().map(this::toObject).toList();
         }
 
         return new ArrayList<>();

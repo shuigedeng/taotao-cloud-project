@@ -71,7 +71,7 @@ public class FlowLaunchController {
     public Result<PageResult<FlowLaunchListVO>> list(PaginationFlowTask paginationFlowTask) {
         List<FlowTaskEntity> data = flowTaskService.getLaunchList(paginationFlowTask);
         List<FlowEngineEntity> engineList = flowEngineService.getFlowList(
-                data.stream().map(FlowTaskEntity::getFlowId).collect(Collectors.toList()));
+                data.stream().map(FlowTaskEntity::getFlowId).toList());
         List<FlowLaunchListVO> listVO = new LinkedList<>();
         for (FlowTaskEntity taskEntity : data) {
             // 用户名称赋值

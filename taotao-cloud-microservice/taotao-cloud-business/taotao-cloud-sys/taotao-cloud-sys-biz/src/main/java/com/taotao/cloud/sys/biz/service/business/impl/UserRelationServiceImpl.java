@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.taotao.cloud.sys.biz.mapper.IUserRelationMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QUserRelation;
@@ -25,6 +24,7 @@ import com.taotao.cloud.sys.biz.repository.cls.UserRelationRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRelationRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,7 +59,7 @@ public class UserRelationServiceImpl
 			.stream()
 			.map(roleId ->
 				UserRelation.builder().userId(userId).objectId(roleId).build())
-			.collect(Collectors.toList());
+			.toList();
 		cr().saveAll(collect);
 		return true;
 	}

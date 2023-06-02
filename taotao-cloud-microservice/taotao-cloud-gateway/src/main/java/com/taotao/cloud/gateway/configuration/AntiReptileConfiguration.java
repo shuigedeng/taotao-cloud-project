@@ -75,7 +75,7 @@ public class AntiReptileConfiguration {
     public RuleActuator ruleActuator(final List<AntiReptileRule> rules) {
         final List<AntiReptileRule> antiReptileRules = rules.stream()
                 .sorted(Comparator.comparingInt(AntiReptileRule::getOrder))
-                .collect(Collectors.toList());
+                .toList();
         return new RuleActuator(antiReptileRules);
     }
 

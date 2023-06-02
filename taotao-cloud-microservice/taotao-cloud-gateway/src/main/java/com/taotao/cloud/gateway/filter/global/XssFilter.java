@@ -18,13 +18,14 @@ package com.taotao.cloud.gateway.filter.global;
 
 import static com.taotao.cloud.gateway.utils.WebFluxUtils.isJsonRequest;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutoolhttp.HtmlUtil;
 import com.taotao.cloud.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.http.html.HtmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

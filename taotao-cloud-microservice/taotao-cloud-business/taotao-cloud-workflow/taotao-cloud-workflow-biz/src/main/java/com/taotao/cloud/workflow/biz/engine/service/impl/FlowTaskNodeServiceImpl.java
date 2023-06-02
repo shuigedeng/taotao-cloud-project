@@ -124,7 +124,7 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                                     JsonUtils.toObject(entity.getNodePropertyJson(), ChildNodeList.class);
                             // 添加指向下一节点的id
                             List<String> nextEndList =
-                                    endCount.stream().map(t -> t.getNodeCode()).collect(Collectors.toList());
+                                    endCount.stream().map(t -> t.getNodeCode()).toList();
                             nextEndList.remove(entity.getNodeCode());
                             // 赋值合流id和分流的id
                             modelList.getCustom().setInterflow(true);
@@ -139,7 +139,7 @@ public class FlowTaskNodeServiceImpl extends ServiceImpl<FlowTaskNodeMapper, Flo
                         // 添加指向下一节点的id
                         List<String> nextEndList = nextNum.stream()
                                 .map(FlowTaskNodeEntity::getNodeCode)
-                                .collect(Collectors.toList());
+                                .toList();
                         nextEndList.remove(entity.getNodeCode());
                         // 赋值合流id和分流的id
                         modelList.getCustom().setInterflowId(String.join(",", nextEndList));
