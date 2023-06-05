@@ -21,7 +21,7 @@ dependencies {
 
     //https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2"
-    implementation "mysql:mysql-connector-java"
+    implementation "com.mysql:mysql-connector-j"
     implementation "com.xuxueli:xxl-job-core"
 }
 
