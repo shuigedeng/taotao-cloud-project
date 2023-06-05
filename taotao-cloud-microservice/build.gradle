@@ -8,7 +8,8 @@ subprojects {
     apply from: rootProject.file('gradle/shadow.gradle')
     apply from: rootProject.file('gradle/graalvm.gradle')
 
-    task createProperties(dependsOn: processResources) {
+    tasks.register('createProperties') {
+        dependsOn processResources
         doLast {
             def fileDir = new File("$buildDir/resources/main");
             if (fileDir.exists() && fileDir.isDirectory()) {

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.data.mybatisplus.handler.typehandler.JacksonListTypeHandler;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.vladmihalcea.hibernate.type.json.JsonType;
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

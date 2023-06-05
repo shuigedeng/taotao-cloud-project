@@ -22,8 +22,7 @@ dependencies {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
 
-    //https://search.maven.org/artifact/org.apache.skywalking/apm-spring-cloud-gateway-3.x-plugin
-    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin:8.15.0'
+    implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin'
 
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"

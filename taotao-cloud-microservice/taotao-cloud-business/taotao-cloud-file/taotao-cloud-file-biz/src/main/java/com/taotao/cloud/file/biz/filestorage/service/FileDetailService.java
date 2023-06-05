@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.file.biz.filestorage.service;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.lang.Dict;
-import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +24,9 @@ import com.taotao.cloud.file.biz.filestorage.model.FileDetail;
 import com.taotao.cloud.oss.common.storage.FileInfo;
 import com.taotao.cloud.oss.common.storage.recorder.FileRecorder;
 import lombok.SneakyThrows;
+import org.dromara.hutool.core.bean.BeanUtil;
+import org.dromara.hutool.core.map.Dict;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Service;
 
 /** 用来将文件上传记录保存到数据库，这里使用了 MyBatis-Plus 和 Hutool 工具类 */
