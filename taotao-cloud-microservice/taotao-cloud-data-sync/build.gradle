@@ -43,7 +43,7 @@ dependencies {
     //implementation 'org.springframework.batch.extensions:spring-batch-elasticsearch:0.1.0-SNAPSHOT'
     //implementation 'org.springframework.batch.extensions:spring-batch-geode:0.1.0-SNAPSHOT'
 
-    implementation "mysql:mysql-connector-java"
+    implementation "com.mysql:mysql-connector-j"
     //implementation "com.baomidou:mybatis-plus-boot-starter"
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"

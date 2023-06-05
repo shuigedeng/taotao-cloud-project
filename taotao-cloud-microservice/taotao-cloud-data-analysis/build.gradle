@@ -27,7 +27,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
 
-    implementation "mysql:mysql-connector-java"
+    implementation "com.mysql:mysql-connector-j"
 
     //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
     implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3.1"
