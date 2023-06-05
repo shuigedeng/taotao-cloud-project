@@ -107,8 +107,8 @@ public class ServerInfo {
     private void fillSystemInfo() {
         Properties props = System.getProperties();
 
-        systemInfo.setComputerName(NetUtil.getLocalHostName());
-        systemInfo.setComputerIp(NetUtil.getLocalhost().getHostAddress());
+//        systemInfo.setComputerName(NetUtil.getLocalHostName());
+//        systemInfo.setComputerIp(NetUtil.getLocalhost().getHostAddress());
         systemInfo.setOsName(props.getProperty("os.name"));
         systemInfo.setOsArch(props.getProperty("os.arch"));
         systemInfo.setUserDir(props.getProperty("user.dir"));

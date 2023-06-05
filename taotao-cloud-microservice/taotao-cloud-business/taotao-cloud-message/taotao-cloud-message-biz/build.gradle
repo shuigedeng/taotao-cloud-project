@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.google.guava:guava:32.0.0-jre'
     implementation 'org.dromara.hutool:hutool-all'
-    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'mysql:mysql-connector-java'
 }
 
 mainClassName = "com.taotao.cloud.message.biz.TaoTaoCloudMessageApplication"
