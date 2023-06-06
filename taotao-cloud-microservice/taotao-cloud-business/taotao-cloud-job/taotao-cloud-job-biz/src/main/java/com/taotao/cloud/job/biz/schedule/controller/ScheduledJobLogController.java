@@ -23,6 +23,7 @@ import com.taotao.cloud.job.api.model.page.ScheduledJobLogPageQuery;
 import com.taotao.cloud.job.api.model.vo.ScheduledJobLogVO;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.web.annotation.BusinessApi;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,5 +57,14 @@ public class ScheduledJobLogController {
 	public Result<PageResult<ScheduledJobLogVO>> page(ScheduledJobLogPageQuery pageQuery) {
 		IPage<ScheduledJobLog> page = scheduledJobLogService.page(pageQuery);
 		return Result.success(PageResult.convertMybatisPage(page, ScheduledJobLogVO.class));
+	}
+
+	@GetMapping("/addTest")
+	@Operation(summary = "分页查询任务列表", description = "分页查询任务列表")
+	@RequestLogger
+	@NotAuth
+	public Result<Boolean> addTest(ScheduledJobLogPageQuery pageQuery) {
+		scheduledJobLogService.add();
+		return Result.success();
 	}
 }

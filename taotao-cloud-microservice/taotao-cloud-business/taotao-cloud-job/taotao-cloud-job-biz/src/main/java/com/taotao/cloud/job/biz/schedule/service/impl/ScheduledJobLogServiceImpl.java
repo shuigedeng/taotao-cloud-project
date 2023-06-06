@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.job.biz.schedule.service.impl;
 
-import org.dromara.hutoolcore.util.StrUtil;
+import org.dromara.hutool.core.text.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -27,6 +27,9 @@ import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 /**
  * 计划工作日志服务实现类
@@ -54,4 +57,21 @@ public class ScheduledJobLogServiceImpl extends ServiceImpl<ScheduledJobLogMappe
 		wrapper.eq(StrUtil.isNotBlank(pageQuery.getTaskId()), ScheduledJobLog::getTaskId, pageQuery.getTaskId());
 		return scheduledJobLogMapper.selectPage(page, wrapper);
 	}
+
+    @Override
+	@Transactional
+    public void add() {
+		ScheduledJobLog jobLog = new ScheduledJobLog();
+		jobLog.setTime("asdfasf");
+		jobLog.setExceptionInfo("asdfasf");
+		jobLog.setStatus(2);
+		jobLog.setTaskId("sdf");
+
+		jobLog.setId("1");
+		jobLog.setCreateTime(LocalDateTime.now());
+		jobLog.setUpdateTime(LocalDateTime.now());
+
+		this.save(jobLog);
+
+    }
 }

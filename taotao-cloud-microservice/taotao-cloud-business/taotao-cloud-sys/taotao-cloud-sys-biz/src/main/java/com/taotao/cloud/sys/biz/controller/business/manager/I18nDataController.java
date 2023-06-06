@@ -39,13 +39,6 @@ public class I18nDataController {
 
 	private final I18nDataService i18nDataService;
 
-	/**
-	 * 分页查询
-	 *
-	 * @param pageParam  分页参数
-	 * @param i18nDataQO 国际化信息查询对象
-	 * @return R 通用返回体
-	 */
 	@GetMapping("/page")
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:read')")
 	@Operation(summary = "分页查询", description = "分页查询")
@@ -54,12 +47,6 @@ public class I18nDataController {
 		return Result.success(PageResult.convertMybatisPage(page, I18nDataPageVO.class));
 	}
 
-	/**
-	 * 查询指定国际化标识的所有数据
-	 *
-	 * @param code 国际化标识
-	 * @return R 通用返回体
-	 */
 	@GetMapping("/list")
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:read')")
 	@Operation(summary = "查询指定国际化标识的所有数据", description = "查询指定国际化标识的所有数据")
@@ -67,13 +54,6 @@ public class I18nDataController {
 		return Result.success(i18nDataService.listByCode(code));
 	}
 
-	/**
-	 * 新增国际化信息
-	 *
-	 * @param i18nDataCreateDTO 国际化信息
-	 * @return R 通用返回体
-	 */
-	//@CreateOperationLogging(msg = "新增国际化信息")
 	@PostMapping
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:add')")
 	@Operation(summary = "新增国际化信息", description = "新增国际化信息")
@@ -93,13 +73,6 @@ public class I18nDataController {
 		return Result.success(true);
 	}
 
-	/**
-	 * 修改国际化信息
-	 *
-	 * @param i18nDataDTO 国际化信息
-	 * @return R 通用返回体
-	 */
-	//@UpdateOperationLogging(msg = "修改国际化信息")
 	@PutMapping
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:edit')")
 	@Operation(summary = "修改国际化信息", description = "修改国际化信息")
@@ -109,14 +82,6 @@ public class I18nDataController {
 		return Result.success(true);
 	}
 
-	/**
-	 * 通过id删除国际化信息
-	 *
-	 * @param code        code 唯一标识
-	 * @param languageTag 语言标签
-	 * @return R 通用返回体
-	 */
-	//@DeleteOperationLogging(msg = "通过id删除国际化信息")
 	@DeleteMapping
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:del')")
 	@Operation(summary = "通过id删除国际化信息", description = "通过id删除国际化信息")
@@ -126,11 +91,6 @@ public class I18nDataController {
 		return Result.success(true);
 	}
 
-	/**
-	 * 导入国际化信息
-	 *
-	 * @return R 通用返回体
-	 */
 	@PostMapping("/import")
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:import')")
 	@Operation(summary = "导入国际化信息", description = "导入国际化信息")
@@ -162,12 +122,6 @@ public class I18nDataController {
 		return Result.success(true);
 	}
 
-	/**
-	 * 导出国际化信息
-	 *
-	 * @param i18nDataQO 国际化信息查询对象
-	 * @return List<I18nDataExcelVO>
-	 */
 	@ResponseExcel(name = "国际化信息", i18nHeader = true)
 	@GetMapping("/export")
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:export')")
@@ -181,11 +135,6 @@ public class I18nDataController {
 		return list.stream().map(I18nDataConverter.INSTANCE::poToExcelVo).toList();
 	}
 
-	/**
-	 * 国际化 excel 模板
-	 *
-	 * @return List<I18nDataExcelVO>
-	 */
 	@ResponseExcel(name = "国际化信息模板", i18nHeader = true)
 	@GetMapping("/excel-template")
 	@PreAuthorize("@per.hasPermission('i18n:i18n-data:import')")

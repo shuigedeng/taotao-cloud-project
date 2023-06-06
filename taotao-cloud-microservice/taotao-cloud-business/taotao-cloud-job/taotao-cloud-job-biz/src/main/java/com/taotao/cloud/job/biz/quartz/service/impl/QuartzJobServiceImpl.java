@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.job.biz.quartz.service.impl;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.bean.copier.CopyOptions;
-import org.dromara.hutoolcore.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -32,6 +29,9 @@ import com.taotao.cloud.job.quartz.enums.QuartzJobCode;
 import com.taotao.cloud.job.quartz.exception.QuartzExecutionException;
 import com.taotao.cloud.job.quartz.utils.QuartzManager;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.bean.BeanUtil;
+import org.dromara.hutool.core.bean.copier.CopyOptions;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.springframework.stereotype.Service;
@@ -86,7 +86,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
 	public void updateJob(QuartzJobDTO quartzJobDTO) {
 		QuartzJob quartzJobEntity = quartzJobMapper.selectById(quartzJobDTO.getId());
 		BeanUtil.copyProperties(
-			quartzJobDTO, quartzJobEntity, CopyOptions.create().ignoreNullValue());
+			quartzJobDTO, quartzJobEntity, CopyOptions.of().ignoreNullValue());
 		quartzJobMapper.updateById(quartzJobEntity);
 
 		QuartzTask quartzJob = new QuartzTask();

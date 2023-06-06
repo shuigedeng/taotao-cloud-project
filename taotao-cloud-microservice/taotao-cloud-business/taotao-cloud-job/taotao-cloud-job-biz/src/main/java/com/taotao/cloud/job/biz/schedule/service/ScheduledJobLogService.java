@@ -26,4 +26,8 @@ public interface ScheduledJobLogService extends IService<ScheduledJobLog> {
 	void insertTaskLog(ScheduledJobLog log);
 
 	IPage<ScheduledJobLog> page(ScheduledJobLogPageQuery pageQuery);
+
+    void add();
+
+
 }
