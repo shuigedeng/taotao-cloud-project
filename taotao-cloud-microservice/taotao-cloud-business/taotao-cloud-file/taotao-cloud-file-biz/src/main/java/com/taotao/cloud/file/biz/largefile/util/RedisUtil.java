@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisKeyCommands;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
@@ -34,7 +35,7 @@ import org.springframework.util.CollectionUtils;
 @Component
 public final class RedisUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(RedisUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -46,7 +47,6 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param time 时间(秒)
-     * @return
      */
     public boolean expire(String key, long time) {
         try {
@@ -186,25 +186,21 @@ public final class RedisUtil {
      */
     public boolean setAsync(String key, Object value, long time, TimeUnit timeUnit) {
         SimpleAsyncExec simpleAsyncExec = SimpleAsyncExec.getInstance();
-        Boolean flag = simpleAsyncExec.exec(new Callable() {
-            @Override
-            public Boolean call() throws Exception {
-                try {
-                    if (time > 0) {
-                        redisTemplate.opsForValue().set(key, value, time, timeUnit);
-                    } else {
-                        set(key, value);
-                    }
-                    return true;
 
-                } catch (Exception e) {
-                    logger.error("set setAsync:" + e.getMessage(), e);
-                    return false;
-                }
-            }
-        });
+		return simpleAsyncExec.exec(() -> {
+			try {
+				if (time > 0) {
+					redisTemplate.opsForValue().set(key, value, time, timeUnit);
+				} else {
+					set(key, value);
+				}
+				return true;
 
-        return flag;
+			} catch (Exception e) {
+				logger.error("set setAsync:" + e.getMessage(), e);
+				return false;
+			}
+		});
     }
 
     /**
@@ -212,7 +208,6 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param delta 要增加几(大于0)
-     * @return
      */
     public long incr(String key, long delta) {
         if (delta < 0) {
@@ -226,7 +221,6 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param delta 要减少几(小于0)
-     * @return
      */
     public long decr(String key, long delta) {
         if (delta < 0) {
@@ -385,7 +379,6 @@ public final class RedisUtil {
      * @param key 键
      * @param item 项
      * @param by 要增加几(大于0)
-     * @return
      */
     public double hincr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, by);
@@ -397,7 +390,6 @@ public final class RedisUtil {
      * @param key 键
      * @param item 项
      * @param by 要减少记(小于0)
-     * @return
      */
     public double hdecr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, -by);
@@ -409,7 +401,6 @@ public final class RedisUtil {
      * 根据key获取Set中的所有值
      *
      * @param key 键
-     * @return
      */
     public Set<Object> sGet(String key) {
         try {
@@ -463,7 +454,9 @@ public final class RedisUtil {
     public long sSetAndTime(String key, long time, Object... values) {
         try {
             Long count = redisTemplate.opsForSet().add(key, values);
-            if (time > 0) expire(key, time);
+            if (time > 0) {
+				expire(key, time);
+			}
             return count;
         } catch (Exception e) {
             logger.error("set sSetAndTime:" + e.getMessage(), e);
@@ -475,7 +468,6 @@ public final class RedisUtil {
      * 获取set缓存的长度
      *
      * @param key 键
-     * @return
      */
     public long sGetSetSize(String key) {
         try {
@@ -495,8 +487,7 @@ public final class RedisUtil {
      */
     public long setRemove(String key, Object... values) {
         try {
-            Long count = redisTemplate.opsForSet().remove(key, values);
-            return count;
+			return redisTemplate.opsForSet().remove(key, values);
         } catch (Exception e) {
             logger.error("set setRemove:" + e.getMessage(), e);
             return 0;
@@ -509,8 +500,7 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param start 开始
-     * @param end 结束 0 到 -1代表所有值
-     * @return
+     * @param end 结束 0 到 -1 代表所有值
      */
     public List<Object> lGet(String key, long start, long end) {
         try {
@@ -525,7 +515,6 @@ public final class RedisUtil {
      * 获取list缓存的长度
      *
      * @param key 键
-     * @return
      */
     public long lGetListSize(String key) {
         try {
@@ -541,7 +530,6 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推；index<0时，-1，表尾，-2倒数第二个元素，依次类推
-     * @return
      */
     public Object lGetIndex(String key, long index) {
         try {
@@ -557,7 +545,6 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param value 值
-     * @return
      */
     public boolean lSet(String key, Object value) {
         try {
@@ -575,12 +562,13 @@ public final class RedisUtil {
      * @param key 键
      * @param value 值
      * @param time 时间(秒)
-     * @return
      */
     public boolean lSet(String key, Object value, long time) {
         try {
             redisTemplate.opsForList().rightPush(key, value);
-            if (time > 0) expire(key, time);
+            if (time > 0) {
+				expire(key, time);
+			}
             return true;
         } catch (Exception e) {
             logger.error("set lSet:" + e.getMessage(), e);
@@ -593,7 +581,6 @@ public final class RedisUtil {
      *
      * @param key 键
      * @param value 值
-     * @return
      */
     public boolean lSet(String key, List<Object> value) {
         try {
@@ -611,12 +598,13 @@ public final class RedisUtil {
      * @param key 键
      * @param value 值
      * @param time 时间(秒)
-     * @return
      */
     public boolean lSet(String key, List<Object> value, long time) {
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
-            if (time > 0) expire(key, time);
+            if (time > 0) {
+				expire(key, time);
+			}
             return true;
         } catch (Exception e) {
             logger.error("set lSet:" + e.getMessage(), e);
@@ -630,7 +618,6 @@ public final class RedisUtil {
      * @param key 键
      * @param index 索引
      * @param value 值
-     * @return
      */
     public boolean lUpdateIndex(String key, long index, Object value) {
         try {
@@ -652,8 +639,7 @@ public final class RedisUtil {
      */
     public long lRemove(String key, long count, Object value) {
         try {
-            Long remove = redisTemplate.opsForList().remove(key, count, value);
-            return remove;
+			return redisTemplate.opsForList().remove(key, count, value);
         } catch (Exception e) {
             logger.error("set lRemove:" + e.getMessage(), e);
             return 0;
@@ -670,7 +656,8 @@ public final class RedisUtil {
      */
     public void scan(String pattern, Consumer<byte[]> consumer) {
         redisTemplate.execute((RedisConnection connection) -> {
-            try (Cursor<byte[]> cursor = connection.scan(ScanOptions.scanOptions()
+			RedisKeyCommands redisKeyCommands = connection.keyCommands();
+			try (Cursor<byte[]> cursor = redisKeyCommands.scan(ScanOptions.scanOptions()
                     .count(Long.MAX_VALUE)
                     .match(pattern)
                     .build())) {
@@ -684,7 +671,6 @@ public final class RedisUtil {
      * 获取符合条件的key
      *
      * @param pattern 表达式
-     * @return
      */
     public List<String> keys(String pattern) {
         List<String> keys = new ArrayList<>();

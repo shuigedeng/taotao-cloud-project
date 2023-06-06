@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.job.biz.schedule.record;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
 import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
@@ -24,6 +23,7 @@ import com.taotao.cloud.job.biz.schedule.service.ScheduledJobService;
 import com.taotao.cloud.job.schedule.model.ScheduledTask;
 import com.taotao.cloud.job.schedule.task.ScheduleTaskRecord;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

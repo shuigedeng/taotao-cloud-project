@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.job.biz.quartz.record;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLog;
 import com.taotao.cloud.job.biz.quartz.service.QuartzJobLogService;
 import com.taotao.cloud.job.quartz.entity.QuartzTaskLog;
 import com.taotao.cloud.job.quartz.utils.QuartzLogRecord;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.stereotype.Component;
 
 @Component

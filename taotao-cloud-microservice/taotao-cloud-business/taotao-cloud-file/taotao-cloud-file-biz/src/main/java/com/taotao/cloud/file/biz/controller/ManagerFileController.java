@@ -23,6 +23,7 @@ import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.convert.FileConvert;
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.file.biz.service.IFileService;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -54,7 +55,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/sys/general/file")
+@RequestMapping("/file/manager")
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 
@@ -95,9 +96,10 @@ public class ManagerFileController {
         throw new BusinessException("文件上传失败");
     }
 
+	@NotAuth
     @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息")
     @RequestLogger
-    @PreAuthorize("hasAuthority('file:info:id')")
+    //@PreAuthorize("hasAuthority('file:info:id')")
     @GetMapping("/info/id/{id:[0-9]*}")
     public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
         File file = fileService.findFileById(id);

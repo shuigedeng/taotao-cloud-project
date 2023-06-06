@@ -47,7 +47,6 @@ public class AppController {
 
     private final AppService appService;
 
-    /** 分页 */
     @Operation(summary = "分页")
     @GetMapping(value = "/page")
     public Result<PageResult<AppDTO>> pageSysApp(AppPageDTO appPageDTO) {
@@ -55,7 +54,6 @@ public class AppController {
         return Result.success(PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
     }
 
-    /** 添加 */
     @Operation(summary = "添加")
     @PostMapping(value = "/add")
     public Result<Boolean> add(@RequestBody AppDTO appDTO) {
@@ -63,7 +61,6 @@ public class AppController {
         return Result.success(appService.addApp(appDTO));
     }
 
-    /** 修改 */
     @Operation(summary = "修改")
     @PostMapping(value = "/update")
     public Result<Boolean> update(@RequestBody AppDTO appDTO) {
@@ -71,21 +68,18 @@ public class AppController {
         return Result.success(appService.updateApp(appDTO));
     }
 
-    /** 删除 */
     @Operation(summary = "删除")
     @DeleteMapping(value = "/delete")
     public Result<Boolean> delete(Long id) {
         return Result.success(appService.deleteApp(id));
     }
 
-    /** 获取单条 */
     @Operation(summary = "获取单条")
     @GetMapping(value = "/findById")
     public Result<AppDTO> findById(Long id) {
         return Result.success(appService.findById(id));
     }
 
-    /** 获取全部 */
     @Operation(summary = "获取全部")
     @GetMapping(value = "/findAll")
     public Result<List<AppDTO>> findAll() {

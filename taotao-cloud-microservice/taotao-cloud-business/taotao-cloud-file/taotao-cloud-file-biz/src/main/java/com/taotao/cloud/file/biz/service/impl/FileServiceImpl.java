@@ -39,6 +39,7 @@ import org.dromara.hutool.core.date.DatePattern;
 import org.dromara.hutool.core.io.file.FileTypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -71,9 +72,35 @@ public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, Fil
     }
 
     @Override
+	@Transactional
     public File findFileById(Long id) {
-        Optional<File> optionalFile = ir().findById(id);
-        return optionalFile.orElseThrow(() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
+
+		// 添加文件
+		File file = File.builder()
+			.bizType("测试")
+			.type("sdfasdfsdf")
+			.contextType("xxxx")
+			.ext("")
+			.original("asdfasdf")
+			.url("asdfasf")
+			.name("sdfasf")
+			.length(80L)
+			.md5("sdfasdf")
+			.build();
+
+		try {
+			file.setCreateTime(LocalDateTime.now());
+			file.setUpdateTime(LocalDateTime.now());
+			file.setDataType("sfdasfd");
+			file.setCreateBy(56L);
+			file.setCreateName("Sdfasf");
+		} catch (Exception ignored) {
+		}
+		this.save(file);
+
+//        Optional<File> optionalFile = ir().findById(id);
+//        return optionalFile.orElseThrow(() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
+		return file;
     }
 
     @Override
