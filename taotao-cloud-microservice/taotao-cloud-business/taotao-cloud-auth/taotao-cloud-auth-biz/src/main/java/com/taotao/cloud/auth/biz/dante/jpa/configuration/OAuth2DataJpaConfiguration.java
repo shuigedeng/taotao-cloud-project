@@ -29,6 +29,8 @@ import com.taotao.cloud.auth.biz.dante.jpa.service.HerodotusAuthorizationConsent
 import com.taotao.cloud.auth.biz.dante.jpa.service.HerodotusAuthorizationService;
 import com.taotao.cloud.auth.biz.dante.jpa.service.HerodotusRegisteredClientService;
 import com.taotao.cloud.auth.biz.dante.jpa.storage.JpaRegisteredClientRepository;
+import com.taotao.cloud.auth.biz.jpa.service.authorization.JpaOAuth2AuthorizationService;
+import com.taotao.cloud.auth.biz.jpa.service.authorizationConsent.JpaOAuth2AuthorizationConsentService;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

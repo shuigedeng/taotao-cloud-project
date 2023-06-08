@@ -25,8 +25,8 @@
 
 package com.taotao.cloud.auth.biz.dante.authentication.form;
 
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
-import cn.herodotus.engine.oauth2.core.definition.details.FormLoginWebAuthenticationDetails;
+import com.taotao.cloud.auth.biz.dante.authentication.properties.OAuth2AuthenticationProperties;
+import com.taotao.cloud.auth.biz.dante.core.definition.details.FormLoginWebAuthenticationDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 

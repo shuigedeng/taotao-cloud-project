@@ -61,7 +61,7 @@ public class ManagerFileController {
 
     private final IFileService fileService;
 
-    @Operation(summary = "上传单个文件", description = "上传单个文件1111")
+    @Operation(summary = "上传单个文件", description = "上传单个文件111111111111")
     @RequestLogger
     @PreAuthorize("hasAuthority('file:upload')")
     @PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
@@ -97,7 +97,7 @@ public class ManagerFileController {
     }
 
 	@NotAuth
-    @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息")
+    @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息aaaaaaaaaaaaaaaaaaaaaaa")
     @RequestLogger
     //@PreAuthorize("hasAuthority('file:info:id')")
     @GetMapping("/info/id/{id:[0-9]*}")

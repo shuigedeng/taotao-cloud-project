@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title layout:fragment="title"></title>
+    <link rel="stylesheet" type="text/css" href="/webjars/mdi__font/css/materialdesignicons.min.css" th:href="@{/webjars/mdi__font/css/materialdesignicons.min.css}" />
+    <link rel="stylesheet" type="text/css" href="/webjars/quasar/dist/quasar.prod.css" th:href="@{/webjars/quasar/dist/quasar.prod.css}"/>
+</head>
+
+<body>
+<div id="q-app">
+    <q-layout class="bg-grey-4">
+        <q-page-container>
+            <q-page padding class="flex justify-center items-start">
+                <div class="column" style="min-width: 500px">
+                    <div class="col">
+                        <div class="row justify-center">
+                            <img th:src="@{/herodotus/custom/images/logo.png}" height="240" width="320"/>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <q-card flat bordered>
+                            <q-card-section >
+                                <div class="column q-gutter-lg q-mt-xs items-center" layout:fragment="content"></div>
+                            </q-card-section>
+                        </q-card>
+                    </div>
+                </div>
+            </q-page>
+        </q-page-container>
+    </q-layout>
+</div>
+
+<!-- Add the following at the end of your body tag -->
+<script type="text/javascript" src="/webjars/vue/dist/vue.global.prod.js" th:src="@{/webjars/vue/dist/vue.global.prod.js}"></script>
+<script type="text/javascript" src="/webjars/quasar/dist/quasar.umd.prod.js" th:src="@{/webjars/quasar/dist/quasar.umd.prod.js}"></script>
+<script type="text/javascript" src="/webjars/quasar/dist/icon-set/svg-mdi-v7.umd.prod.js"  th:src="@{/webjars/quasar/dist/icon-set/svg-mdi-v7.umd.prod.js}"></script>
+
+<th:block layout:fragment="script"></th:block>
+</body>
+</html>

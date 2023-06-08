@@ -25,10 +25,10 @@
 
 package com.taotao.cloud.auth.biz.dante.authentication.configuration;
 
-import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginUrlConfigurer;
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
-import cn.herodotus.engine.oauth2.authentication.stamp.LockedUserDetailsStampManager;
-import cn.herodotus.engine.oauth2.authentication.stamp.SignInFailureLimitedStampManager;
+import com.taotao.cloud.auth.biz.dante.authentication.form.OAuth2FormLoginUrlConfigurer;
+import com.taotao.cloud.auth.biz.dante.authentication.properties.OAuth2AuthenticationProperties;
+import com.taotao.cloud.auth.biz.dante.authentication.stamp.LockedUserDetailsStampManager;
+import com.taotao.cloud.auth.biz.dante.authentication.stamp.SignInFailureLimitedStampManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

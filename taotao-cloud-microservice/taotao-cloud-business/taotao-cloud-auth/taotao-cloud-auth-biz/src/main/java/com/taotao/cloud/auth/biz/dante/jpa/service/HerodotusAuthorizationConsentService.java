@@ -28,6 +28,8 @@ package com.taotao.cloud.auth.biz.dante.jpa.service;
 import com.taotao.cloud.auth.biz.dante.jpa.entity.HerodotusAuthorizationConsent;
 import com.taotao.cloud.auth.biz.dante.jpa.generator.HerodotusAuthorizationConsentId;
 import com.taotao.cloud.auth.biz.dante.jpa.repository.HerodotusAuthorizationConsentRepository;
+import com.taotao.cloud.data.jpa.base.service.JpaSuperService;
+import com.taotao.cloud.data.jpa.base.service.impl.JpaSuperServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,7 @@ import java.util.Optional;
  * @date : 2022/2/25 21:02
  */
 @Service
-public class HerodotusAuthorizationConsentService extends BaseService<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
+public class HerodotusAuthorizationConsentService extends JpaSuperServiceImpl<HerodotusAuthorizationConsentRepository, HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
 
     private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationConsentService.class);
 

@@ -25,9 +25,9 @@
 
 package com.taotao.cloud.auth.biz.dante.jpa.adapter;
 
-import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.auth.biz.dante.jpa.definition.AbstractRegisteredClientAdapter;
 import com.taotao.cloud.auth.biz.dante.jpa.entity.HerodotusRegisteredClient;
+import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;

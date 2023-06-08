@@ -25,9 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.authorization.processor;
 
-import cn.herodotus.engine.assistant.core.utils.ListUtils;
-import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
-import cn.herodotus.engine.rest.core.constants.WebResources;
+import com.taotao.cloud.auth.biz.dante.authorization.properties.OAuth2AuthorizationProperties;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 

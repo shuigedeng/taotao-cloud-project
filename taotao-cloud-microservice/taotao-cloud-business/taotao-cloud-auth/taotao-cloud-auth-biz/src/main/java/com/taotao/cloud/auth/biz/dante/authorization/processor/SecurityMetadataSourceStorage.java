@@ -25,13 +25,10 @@
 
 package com.taotao.cloud.auth.biz.dante.authorization.processor;
 
-import cn.herodotus.engine.cache.jetcache.utils.JetCacheUtils;
-import cn.herodotus.engine.oauth2.authorization.definition.HerodotusConfigAttribute;
-import cn.herodotus.engine.oauth2.authorization.definition.HerodotusRequest;
-import cn.herodotus.engine.oauth2.authorization.definition.HerodotusRequestMatcher;
-import cn.herodotus.engine.oauth2.core.constants.OAuth2Constants;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
+import com.taotao.cloud.auth.biz.dante.authorization.definition.HerodotusConfigAttribute;
+import com.taotao.cloud.auth.biz.dante.authorization.definition.HerodotusRequest;
+import com.taotao.cloud.auth.biz.dante.authorization.definition.HerodotusRequestMatcher;
+import com.taotao.cloud.auth.biz.dante.core.constants.OAuth2Constants;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
