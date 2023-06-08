@@ -25,7 +25,6 @@
 
 package com.taotao.cloud.auth.biz.dante.authentication.stamp;
 
-import org.dromara.hutoolcore.util.IdUtil;
 import com.taotao.cloud.auth.biz.dante.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.dante.core.constants.OAuth2Constants;
 

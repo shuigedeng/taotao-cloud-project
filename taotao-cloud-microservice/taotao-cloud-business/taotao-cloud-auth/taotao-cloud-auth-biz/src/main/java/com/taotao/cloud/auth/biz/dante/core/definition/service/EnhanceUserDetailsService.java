@@ -25,8 +25,7 @@
 
 package com.taotao.cloud.auth.biz.dante.core.definition.service;
 
-import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.auth.biz.dante.core.definition.domain.HerodotusUser;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -25,7 +25,6 @@
 
 package com.taotao.cloud.auth.biz.dante.jpa.definition;
 
-import org.dromara.hutoolcore.date.DateUtil;
 import com.taotao.cloud.auth.biz.dante.core.definition.domain.RegisteredClientDetails;
 import com.taotao.cloud.auth.biz.dante.core.utils.OAuth2AuthorizationUtils;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -43,39 +42,39 @@ import java.util.Set;
  */
 public interface RegisteredClientAdapter<T extends RegisteredClientDetails> {
 
-    Set<String> getScopes(T details);
+	Set<String> getScopes(T details);
 
-    ClientSettings getClientSettings(T details);
+	ClientSettings getClientSettings(T details);
 
-    TokenSettings getTokenSettings(T details);
+	TokenSettings getTokenSettings(T details);
 
-    default RegisteredClient toObject(T details) {
-        Set<String> clientScopes = getScopes(details);
-        ClientSettings clientSettings = getClientSettings(details);
-        TokenSettings tokenSettings = getTokenSettings(details);
+	default RegisteredClient toObject(T details) {
+		Set<String> clientScopes = getScopes(details);
+		ClientSettings clientSettings = getClientSettings(details);
+		TokenSettings tokenSettings = getTokenSettings(details);
 
-        Set<String> clientAuthenticationMethods = StringUtils.commaDelimitedListToSet(details.getClientAuthenticationMethods());
-        Set<String> authorizationGrantTypes = StringUtils.commaDelimitedListToSet(details.getAuthorizationGrantTypes());
-        Set<String> redirectUris = StringUtils.commaDelimitedListToSet(details.getRedirectUris());
-        Set<String> postLogoutRedirectUris = StringUtils.commaDelimitedListToSet(details.getPostLogoutRedirectUris());
+		Set<String> clientAuthenticationMethods = StringUtils.commaDelimitedListToSet(details.getClientAuthenticationMethods());
+		Set<String> authorizationGrantTypes = StringUtils.commaDelimitedListToSet(details.getAuthorizationGrantTypes());
+		Set<String> redirectUris = StringUtils.commaDelimitedListToSet(details.getRedirectUris());
+		Set<String> postLogoutRedirectUris = StringUtils.commaDelimitedListToSet(details.getPostLogoutRedirectUris());
 
-        return RegisteredClient.withId(details.getId())
-                .clientId(details.getClientId())
-                .clientIdIssuedAt(DateUtil.toInstant(details.getClientIdIssuedAt()))
-                .clientSecret(details.getClientSecret())
-                .clientSecretExpiresAt(DateUtil.toInstant(details.getClientSecretExpiresAt()))
-                .clientName(details.getClientName())
-                .clientAuthenticationMethods(authenticationMethods ->
-                        clientAuthenticationMethods.forEach(authenticationMethod ->
-                                authenticationMethods.add(OAuth2AuthorizationUtils.resolveClientAuthenticationMethod(authenticationMethod))))
-                .authorizationGrantTypes((grantTypes) ->
-                        authorizationGrantTypes.forEach(grantType ->
-                                grantTypes.add(OAuth2AuthorizationUtils.resolveAuthorizationGrantType(grantType))))
-                .redirectUris((uris) -> uris.addAll(redirectUris))
-                .postLogoutRedirectUris((uris) -> uris.addAll(postLogoutRedirectUris))
-                .scopes((scopes) -> scopes.addAll(clientScopes))
-                .clientSettings(clientSettings)
-                .tokenSettings(tokenSettings)
-                .build();
-    }
+		return RegisteredClient.withId(details.getId())
+			.clientId(details.getClientId())
+			.clientIdIssuedAt(DateUtil.toInstant(details.getClientIdIssuedAt()))
+			.clientSecret(details.getClientSecret())
+			.clientSecretExpiresAt(DateUtil.toInstant(details.getClientSecretExpiresAt()))
+			.clientName(details.getClientName())
+			.clientAuthenticationMethods(authenticationMethods ->
+				clientAuthenticationMethods.forEach(authenticationMethod ->
+					authenticationMethods.add(OAuth2AuthorizationUtils.resolveClientAuthenticationMethod(authenticationMethod))))
+			.authorizationGrantTypes((grantTypes) ->
+				authorizationGrantTypes.forEach(grantType ->
+					grantTypes.add(OAuth2AuthorizationUtils.resolveAuthorizationGrantType(grantType))))
+			.redirectUris((uris) -> uris.addAll(redirectUris))
+			.postLogoutRedirectUris((uris) -> uris.addAll(postLogoutRedirectUris))
+			.scopes((scopes) -> scopes.addAll(clientScopes))
+			.clientSettings(clientSettings)
+			.tokenSettings(tokenSettings)
+			.build();
+	}
 }

@@ -25,10 +25,8 @@
 
 package com.taotao.cloud.auth.biz.dante.authorization.listener;
 
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
-import cn.herodotus.engine.message.security.event.RemoteSecurityMetadataSyncEvent;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
-import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
+import com.taotao.cloud.auth.biz.dante.authorization.processor.SecurityMetadataSourceAnalyzer;
+import com.taotao.cloud.auth.biz.dante.core.definition.domain.SecurityAttribute;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

@@ -27,6 +27,8 @@ package com.taotao.cloud.auth.biz.dante.jpa.repository;
 
 import com.taotao.cloud.auth.biz.dante.jpa.entity.HerodotusAuthorizationConsent;
 import com.taotao.cloud.auth.biz.dante.jpa.generator.HerodotusAuthorizationConsentId;
+import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
+import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
 import jakarta.persistence.QueryHint;
 import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
@@ -39,7 +41,7 @@ import java.util.Optional;
  * @author : gengwei.zheng
  * @date : 2022/2/25 20:54
  */
-public interface HerodotusAuthorizationConsentRepository extends BaseRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
+public interface HerodotusAuthorizationConsentRepository extends JpaSuperRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
 
     /**
      * 根据 client id 和 principalName 查询 OAuth2 确认信息

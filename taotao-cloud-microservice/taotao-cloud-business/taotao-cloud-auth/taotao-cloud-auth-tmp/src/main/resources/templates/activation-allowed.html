@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{activation-layout}">
+<body>
+    <title layout:fragment="title">设备激活成功</title>
+
+    <div layout:fragment="content">
+        <div class="col">
+            <q-icon name="mdi-progress-check" color="green" size="100px"/>
+        </div>
+        <div class="col">
+            <div class="text-h5 text-weight-bolder">
+                祝贺你，一切就绪！
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-subtitle2">您的设备现在已连接。</div>
+        </div>
+    </div>
+
+    <th:block layout:fragment="script">
+        <script>
+            const app = Vue.createApp({
+                setup() {
+                    return {};
+                },
+            });
+
+            app.use(Quasar);
+            Quasar.iconSet.set(Quasar.iconSet.svgMdiV7);
+            app.mount("#q-app");
+        </script>
+    </th:block>
+</body>
+</html>

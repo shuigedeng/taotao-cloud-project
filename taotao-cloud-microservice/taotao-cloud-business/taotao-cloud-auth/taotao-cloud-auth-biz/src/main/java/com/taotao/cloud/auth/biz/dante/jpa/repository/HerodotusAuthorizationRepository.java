@@ -26,6 +26,7 @@
 package com.taotao.cloud.auth.biz.dante.jpa.repository;
 
 import com.taotao.cloud.auth.biz.dante.jpa.entity.HerodotusAuthorization;
+import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
 import jakarta.persistence.QueryHint;
 import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.Modifying;

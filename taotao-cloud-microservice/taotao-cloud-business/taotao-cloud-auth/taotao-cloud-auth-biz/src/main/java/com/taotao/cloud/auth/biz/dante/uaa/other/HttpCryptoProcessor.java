@@ -25,19 +25,12 @@
 
 package com.taotao.cloud.auth.biz.dante.uaa.other;
 
-import cn.herodotus.engine.assistant.core.domain.SecretKey;
-import cn.herodotus.engine.cache.core.exception.StampHasExpiredException;
-import cn.herodotus.engine.cache.jetcache.stamp.AbstractStampManager;
-import cn.herodotus.engine.rest.core.constants.RestConstants;
-import cn.herodotus.engine.rest.core.definition.crypto.AsymmetricCryptoProcessor;
-import cn.herodotus.engine.rest.core.definition.crypto.SymmetricCryptoProcessor;
-import cn.herodotus.engine.rest.core.exception.SessionInvalidException;
-import org.dromara.hutoolcore.util.IdUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.crypto.SecretKey;
 import java.time.Duration;
 
 /**
