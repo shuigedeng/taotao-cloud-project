@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.collections4.map.HashedMap;
+import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 
 import java.io.IOException;
@@ -50,8 +50,8 @@ public class ClientSettingsDeserializer extends JsonDeserializer<ClientSettings>
         ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
         JsonNode jsonNode = mapper.readTree(jsonParser);
 
-//        Map<String, Object> settings = JsonNodeUtils.findValue(jsonNode, "settings", JsonNodeUtils.STRING_OBJECT_MAP, mapper);
+        Map<String, Object> settings = JsonNodeUtils.findValue(jsonNode, "settings", JsonNodeUtils.STRING_OBJECT_MAP, mapper);
 
-        return ClientSettings.withSettings(new HashedMap<>()).build();
+        return ClientSettings.withSettings(settings).build();
     }
 }

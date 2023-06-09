@@ -240,9 +240,7 @@ public class AuthorizationServerConfiguration {
 
 	@Bean
 	public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties) throws NoSuchAlgorithmException {
-
 		OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
-
 		KeyPair keyPair = null;
 		if (jwk.getCertificate() == Certificate.CUSTOM) {
 			try {

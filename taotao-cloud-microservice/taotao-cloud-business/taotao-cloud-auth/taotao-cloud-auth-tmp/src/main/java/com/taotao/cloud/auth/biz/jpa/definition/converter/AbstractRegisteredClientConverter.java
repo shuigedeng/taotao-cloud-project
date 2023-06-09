@@ -23,33 +23,26 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.auth.biz.jpa.definition;
-
+package com.taotao.cloud.auth.biz.jpa.definition.converter;
 
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import com.taotao.cloud.security.springsecurity.core.definition.domain.RegisteredClientDetails;
-
-import java.util.Map;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 /**
- * <p>Description: 封装RegisteredClientAdapter 默认行为 </p>
+ * <p>Description: RegisteredClient 转换器</p>
  *
  * @author : gengwei.zheng
- * @date : 2023/5/12 23:54
+ * @date : 2023/5/12 23:07
  */
-public abstract class AbstractRegisteredClientAdapter<T extends RegisteredClientDetails> implements RegisteredClientAdapter<T>{
+public abstract class AbstractRegisteredClientConverter<S extends RegisteredClientDetails> extends AbstractOAuth2EntityConverter<S, RegisteredClient> implements RegisteredClientConverter<S>{
 
-    private final OAuth2JacksonProcessor jacksonProcessor;
-
-    public AbstractRegisteredClientAdapter() {
-        this.jacksonProcessor = new OAuth2JacksonProcessor();
+    public AbstractRegisteredClientConverter(OAuth2JacksonProcessor jacksonProcessor) {
+        super(jacksonProcessor);
     }
 
-    protected Map<String, Object> parseMap(String data) {
-        return jacksonProcessor.parseMap(data);
-    }
-
-    protected String writeMap(Map<String, Object> data) {
-        return jacksonProcessor.writeMap(data);
+    @Override
+    public RegisteredClient convert(S details) {
+        return RegisteredClientConverter.super.convert(details);
     }
 }

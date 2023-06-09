@@ -58,7 +58,38 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 //        }
 //
 //        throw new AccessIdentityVerificationFailedException("Access Identity Verification Failed!");
-		return null;
+//		SysSocialUser sysSocialUser = new SysSocialUser();
+		return new SocialUserDetails() {
+			@Override
+			public String getUuid() {
+				return "123";
+			}
+
+			@Override
+			public String getSource() {
+				return "gitee";
+			}
+
+			@Override
+			public String getPhoneNumber() {
+				return "1573044";
+			}
+
+			@Override
+			public String getAvatar() {
+				return "xxxxxxxxxx";
+			}
+
+			@Override
+			public String getUserName() {
+				return "hello";
+			}
+
+			@Override
+			public String getNickName() {
+				return "hello";
+			}
+		};
     }
 
     @Override
@@ -69,13 +100,43 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 //            return sysSocialUserService.findByUuidAndSource(uuid, source);
 //        }
 
-        return null;
+		return new SocialUserDetails() {
+			@Override
+			public String getUuid() {
+				return "123";
+			}
+
+			@Override
+			public String getSource() {
+				return "gitee";
+			}
+
+			@Override
+			public String getPhoneNumber() {
+				return "1573044";
+			}
+
+			@Override
+			public String getAvatar() {
+				return "xxxxxxxxxx";
+			}
+
+			@Override
+			public String getUserName() {
+				return "hello";
+			}
+
+			@Override
+			public String getNickName() {
+				return "hello";
+			}
+		};
     }
 
     @Override
     public HerodotusUser register(SocialUserDetails socialUserDetails) throws UsernameAlreadyExistsException {
 //        return sysUserService.registerUserDetails(socialUserDetails);
-		return null;
+		return new HerodotusUser();
     }
 
     @Override
@@ -105,7 +166,7 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 //            }
 //        }
 
-        return null;
+        return new HerodotusUser();
     }
 
     @Override
