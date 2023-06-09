@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * <http://www.apache.org/licenses/LICENSE-2.0>
+ * 
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
+ * 4.分发源码时候，请注明软件出处 
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 package com.taotao.cloud.auth.biz.authentication.provider;
@@ -124,7 +124,7 @@ public final class OAuth2AuthorizationCodeAuthenticationProvider extends Abstrac
                 authorization = OAuth2AuthenticationProviderUtils.invalidate(authorization, authorizationCode.getToken());
                 this.authorizationService.save(authorization);
 
-                log.warn("Invalidated authorization code used by registered client '{}'", registeredClient.getId());
+               log.info("Invalidated authorization code used by registered client '{}'", registeredClient.getId());
             }
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_GRANT);
         }
@@ -171,7 +171,7 @@ public final class OAuth2AuthorizationCodeAuthenticationProvider extends Abstrac
 
         this.authorizationService.save(authorization);
 
-        log.debug("[Herodotus] |- Authorization Code returning OAuth2AccessTokenAuthenticationToken.");
+       log.info("[Herodotus] |- Authorization Code returning OAuth2AccessTokenAuthenticationToken.");
 
         Map<String, Object> additionalParameters = idTokenAdditionalParameters(idToken);
 

@@ -25,8 +25,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.jackson2;
 
-import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.taotao.cloud.auth.biz.utils.Jackson2Constants;
 import com.taotao.cloud.security.springsecurity.core.definition.details.FormLoginWebAuthenticationDetails;
 import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
 import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
@@ -41,7 +41,7 @@ import org.springframework.security.jackson2.SecurityJackson2Modules;
 public class HerodotusJackson2Module extends SimpleModule {
 
     public HerodotusJackson2Module() {
-        super(HerodotusJackson2Module.class.getName(),new Version(2, 14, 2, null, null, null));
+        super(HerodotusJackson2Module.class.getName(), Jackson2Constants.VERSION);
     }
 
     @Override

@@ -45,23 +45,23 @@ import java.lang.reflect.Member;
  */
 public class HerodotusAuthorizationUuidGenerator extends AbstractUuidGenerator {
 
-	public HerodotusAuthorizationUuidGenerator(HerodotusAuthorizationUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
-		super(idMember);
-	}
+    public HerodotusAuthorizationUuidGenerator(HerodotusAuthorizationUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+        super(idMember);
+    }
 
-	@Override
-	public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    @Override
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
 
-		if (ObjectUtils.isEmpty(object)) {
-			throw new HibernateException(new NullPointerException());
-		}
+        if (ObjectUtils.isEmpty(object)) {
+            throw new HibernateException(new NullPointerException());
+        }
 
-		HerodotusAuthorization HerodotusAuthorization = (HerodotusAuthorization) object;
+        HerodotusAuthorization HerodotusAuthorization = (HerodotusAuthorization) object;
 
-		if (StringUtils.isEmpty(HerodotusAuthorization.getId())) {
-			return super.generate(session, object);
-		} else {
-			return HerodotusAuthorization.getId();
-		}
-	}
+        if (StringUtils.isEmpty(HerodotusAuthorization.getId())) {
+            return super.generate(session, object);
+        } else {
+            return HerodotusAuthorization.getId();
+        }
+    }
 }

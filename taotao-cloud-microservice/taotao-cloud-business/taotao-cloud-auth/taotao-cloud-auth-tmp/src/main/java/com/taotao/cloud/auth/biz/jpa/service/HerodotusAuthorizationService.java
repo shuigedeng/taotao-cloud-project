@@ -121,7 +121,7 @@ public class HerodotusAuthorizationService {
 		};
 
 		Optional<HerodotusAuthorization> result = this.herodotusAuthorizationRepository.findOne(specification);
-		log.debug("[Herodotus] |- HerodotusAuthorization Service findByDetection.");
+		log.trace("[Herodotus] |- HerodotusAuthorization Service findByDetection.");
 		return result;
 	}
 
@@ -146,8 +146,7 @@ public class HerodotusAuthorizationService {
 		return count;
 	}
 
-	public void saveOrUpdate(HerodotusAuthorization entity) {
-
+	public void saveAndFlush(HerodotusAuthorization entity) {
 		herodotusAuthorizationRepository.save(entity);
 	}
 

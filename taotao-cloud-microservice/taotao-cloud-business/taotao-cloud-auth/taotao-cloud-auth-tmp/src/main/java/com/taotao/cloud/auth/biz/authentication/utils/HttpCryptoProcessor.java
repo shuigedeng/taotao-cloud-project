@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * <http://www.apache.org/licenses/LICENSE-2.0>
+ * 
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
+ * 4.分发源码时候，请注明软件出处 
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
@@ -27,6 +27,12 @@ package com.taotao.cloud.auth.biz.authentication.utils;
 
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import com.taotao.cloud.auth.biz.utils.SessionInvalidException;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.cloud.captcha.support.core.definition.AbstractRenderer;
+import com.taotao.cloud.captcha.support.core.definition.domain.Metadata;
+import com.taotao.cloud.captcha.support.core.dto.Captcha;
+import com.taotao.cloud.captcha.support.core.dto.Verification;
+import com.taotao.cloud.security.springsecurity.core.utils.RestConstants;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.hutool.core.data.id.IdUtil;
@@ -41,7 +47,7 @@ import java.time.Duration;
  * @author : gengwei.zheng
  * @date : 2021/10/4 14:29
  */
-public class HttpCryptoProcessor {
+public class HttpCryptoProcessor extends AbstractRenderer {
 
 	private static final Logger log = LoggerFactory.getLogger(HttpCryptoProcessor.class);
 
@@ -49,43 +55,47 @@ public class HttpCryptoProcessor {
 
 	private final SymmetricCryptoProcessor symmetricCryptoProcessor;
 
-	public HttpCryptoProcessor(AsymmetricCryptoProcessor asymmetricCryptoProcessor, SymmetricCryptoProcessor symmetricCryptoProcessor) {
-//		super(RestConstants.CACHE_NAME_TOKEN_SECURE_KEY);
+	public HttpCryptoProcessor(RedisRepository redisRepository, AsymmetricCryptoProcessor asymmetricCryptoProcessor,SymmetricCryptoProcessor symmetricCryptoProcessor ) {
+		super(redisRepository, RestConstants.CACHE_NAME_TOKEN_SECURE_KEY);
+		this.asymmetricCryptoProcessor = asymmetricCryptoProcessor;
+		this.symmetricCryptoProcessor = symmetricCryptoProcessor;
+	}
+
+	public HttpCryptoProcessor(RedisRepository redisRepository, Duration expire, AsymmetricCryptoProcessor asymmetricCryptoProcessor,SymmetricCryptoProcessor symmetricCryptoProcessor) {
+		super(redisRepository, RestConstants.CACHE_NAME_TOKEN_SECURE_KEY, expire);
 		this.asymmetricCryptoProcessor = asymmetricCryptoProcessor;
 		this.symmetricCryptoProcessor = symmetricCryptoProcessor;
 	}
 
 	public String encrypt(String identity, String content)  {
-//		try {
-//			SecretKey secretKey = getSecretKey(identity);
-//			String result = symmetricCryptoProcessor.encrypt(content, secretKey.getSymmetricKey());
-//			log.debug("[Herodotus] |- Encrypt content from [{}] to [{}].", content, result);
-//			return result;
-//		} catch (StampHasExpiredException e) {
-//			log.warn("[Herodotus] |- Session has expired, need recreate.");
-//			throw new SessionInvalidException();
-//		} catch (Exception e) {
-//			log.warn("[Herodotus] |- Symmetric can not Encrypt content [{}], Skip!", content);
-//			return content;
-//		}
-		return null;
+		try {
+			SecretKey secretKey = getSecretKey(identity);
+			String result = symmetricCryptoProcessor.encrypt(content, secretKey.getSymmetricKey());
+			log.debug("[Herodotus] |- Encrypt content from [{}] to [{}].", content, result);
+			return result;
+		} catch (StampHasExpiredException e) {
+			log.warn("[Herodotus] |- Session has expired, need recreate.");
+			throw new SessionInvalidException();
+		} catch (Exception e) {
+			log.warn("[Herodotus] |- Symmetric can not Encrypt content [{}], Skip!", content);
+			return content;
+		}
 	}
 
 	public String decrypt(String identity, String content)  {
-//		try {
-//			SecretKey secretKey = getSecretKey(identity);
-//
-//			String result = symmetricCryptoProcessor.decrypt(content, secretKey.getSymmetricKey());
-//			log.debug("[Herodotus] |- Decrypt content from [{}] to [{}].", content, result);
-//			return result;
-//		} catch (StampHasExpiredException e) {
-//			log.warn("[Herodotus] |- Session has expired, need recreate.");
-//			throw new SessionInvalidException();
-//		} catch (Exception e) {
-//			log.warn("[Herodotus] |- Symmetric can not Decrypt content [{}], Skip!", content);
-//			return content;
-//		}
-		return null;
+		try {
+			SecretKey secretKey = getSecretKey(identity);
+
+			String result = symmetricCryptoProcessor.decrypt(content, secretKey.getSymmetricKey());
+			log.debug("[Herodotus] |- Decrypt content from [{}] to [{}].", content, result);
+			return result;
+		} catch (StampHasExpiredException e) {
+			log.warn("[Herodotus] |- Session has expired, need recreate.");
+			throw new SessionInvalidException();
+		} catch (Exception e) {
+			log.warn("[Herodotus] |- Symmetric can not Decrypt content [{}], Skip!", content);
+			return content;
+		}
 	}
 
 	/**
@@ -103,7 +113,31 @@ public class HttpCryptoProcessor {
 
 		// 根据Token的有效时间设置
 		Duration expire = getExpire(accessTokenValiditySeconds);
-//		return this.create(identity, expire);
+		return (SecretKey)this.create(identity, expire);
+	}
+
+
+
+
+
+
+	@Override
+	public Metadata draw() {
+		return null;
+	}
+
+	@Override
+	public Captcha getCapcha(String key) {
+		return null;
+	}
+
+	@Override
+	public boolean verify(Verification verification) {
+		return false;
+	}
+
+	@Override
+	public String getCategory() {
 		return null;
 	}
 

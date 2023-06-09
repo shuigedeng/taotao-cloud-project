@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * <http://www.apache.org/licenses/LICENSE-2.0>
+ *
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/herodotus/dante-engine>
+ * 4.分发源码时候，请注明软件出处
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
@@ -63,8 +63,7 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
 
     @Override
     public void onApplicationEvent(AbstractAuthenticationFailureEvent event) {
-
-        log.debug("[Herodotus] |- User sign in catch failure event : [{}].", event.getClass().getName());
+       log.info("[Herodotus] |- User sign in catch failure event : [{}].", event.getClass().getName());
 
         if (event instanceof AuthenticationFailureBadCredentialsEvent) {
             Authentication authentication = event.getAuthentication();
@@ -72,18 +71,14 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
             String username = null;
 
             if (authentication instanceof OAuth2AuthorizationGrantAuthenticationToken) {
-
-                log.debug("[Herodotus] |- Toke object in failure event  is OAuth2AuthorizationGrantAuthenticationToken");
-
+               log.info("[Herodotus] |- Toke object in failure event  is OAuth2AuthorizationGrantAuthenticationToken");
                 OAuth2AuthorizationGrantAuthenticationToken token = (OAuth2AuthorizationGrantAuthenticationToken) authentication;
                 Map<String, Object> params = token.getAdditionalParameters();
                 username = getPrincipal(params);
             }
 
             if (authentication instanceof UsernamePasswordAuthenticationToken) {
-
-                log.debug("[Herodotus] |- Toke object in failure event  is UsernamePasswordAuthenticationToken");
-
+               log.info("[Herodotus] |- Toke object in failure event  is UsernamePasswordAuthenticationToken");
                 UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
                 Object principal = token.getPrincipal();
                 if (principal instanceof String) {
@@ -92,16 +87,14 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
             }
 
             if (StringUtils.isNotBlank(username)) {
-
-                log.debug("[Herodotus] |- Parse the username in failure event is [{}].", username);
-
+               log.info("[Herodotus] |- Parse the username in failure event is [{}].", username);
                 int maxTimes = stampManager.getAuthenticationProperties().getSignInFailureLimited().getMaxTimes();
                 Duration expire = stampManager.getAuthenticationProperties().getSignInFailureLimited().getExpire();
                 try {
-//                    int times = stampManager.counting(username, maxTimes, expire, true, "AuthenticationFailureListener");
-//                    log.debug("[Herodotus] |- Sign in user input password error [{}] items", times);
+                    int times = stampManager.counting(username, maxTimes, expire, true, "AuthenticationFailureListener");
+                   log.info("[Herodotus] |- Sign in user input password error [{}] items", times);
                 } catch (Exception e) {
-                    log.warn("[Herodotus] |- User [{}] password error [{}] items, LOCK ACCOUNT!", username, maxTimes);
+                   log.info("[Herodotus] |- User [{}] password error [{}] items, LOCK ACCOUNT!", username, maxTimes);
                     accountStatusManager.lock(username);
                 }
             }

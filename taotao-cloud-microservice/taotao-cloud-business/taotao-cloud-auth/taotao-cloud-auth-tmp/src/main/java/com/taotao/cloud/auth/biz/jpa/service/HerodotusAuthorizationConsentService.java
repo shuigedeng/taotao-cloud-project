@@ -43,30 +43,30 @@ import java.util.Optional;
  * @date : 2022/2/25 21:02
  */
 @Service
-public class HerodotusAuthorizationConsentService  {
+public class HerodotusAuthorizationConsentService {
 
-    private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationConsentService.class);
+	private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationConsentService.class);
 
-    private final HerodotusAuthorizationConsentRepository authorizationConsentRepository;
+	private final HerodotusAuthorizationConsentRepository authorizationConsentRepository;
 
-    @Autowired
-    public HerodotusAuthorizationConsentService(HerodotusAuthorizationConsentRepository authorizationConsentRepository) {
-        this.authorizationConsentRepository = authorizationConsentRepository;
-    }
+	@Autowired
+	public HerodotusAuthorizationConsentService(HerodotusAuthorizationConsentRepository authorizationConsentRepository) {
+		this.authorizationConsentRepository = authorizationConsentRepository;
+	}
 
-    public Optional<HerodotusAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName) {
-        Optional<HerodotusAuthorizationConsent> result = this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(registeredClientId, principalName);
-        log.debug("[Herodotus] |- HerodotusAuthorizationConsent Service findByRegisteredClientIdAndPrincipalName.");
-        return result;
-    }
 
-    public void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName) {
-        this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(registeredClientId, principalName);
-        log.debug("[Herodotus] |- HerodotusAuthorizationConsent Service deleteByRegisteredClientIdAndPrincipalName.");
-    }
+	public Optional<HerodotusAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName) {
+		Optional<HerodotusAuthorizationConsent> result = this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(registeredClientId, principalName);
+		log.trace("[Herodotus] |- HerodotusAuthorizationConsent Service findByRegisteredClientIdAndPrincipalName.");
+		return result;
+	}
+
+	public void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName) {
+		this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(registeredClientId, principalName);
+		log.trace("[Herodotus] |- HerodotusAuthorizationConsent Service deleteByRegisteredClientIdAndPrincipalName.");
+	}
 
 	public void save(HerodotusAuthorizationConsent entity) {
-
 		authorizationConsentRepository.save(entity);
 	}
 }

@@ -1281,7 +1281,6 @@ auth:
       secret-key: xx
 
 
-
 herodotus:
   endpoint:
     uaa-service-name: dante-cloud-uaa
@@ -1300,7 +1299,7 @@ herodotus:
   oauth2:
     authentication:
       form-login:
-        category: JIGSAW
+        category: HUTOOL_GIF
     authorization:
       validate: local
       jwk:

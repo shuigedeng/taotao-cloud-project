@@ -45,21 +45,21 @@ import java.util.Optional;
 @Service
 public class HerodotusRegisteredClientService {
 
-    private static final Logger log = LoggerFactory.getLogger(HerodotusRegisteredClientService.class);
+	private static final Logger log = LoggerFactory.getLogger(HerodotusRegisteredClientService.class);
 
-    private final HerodotusRegisteredClientRepository registeredClientRepository;
+	private final HerodotusRegisteredClientRepository registeredClientRepository;
 
-    @Autowired
-    public HerodotusRegisteredClientService(HerodotusRegisteredClientRepository registeredClientRepository) {
-        this.registeredClientRepository = registeredClientRepository;
-    }
+	@Autowired
+	public HerodotusRegisteredClientService(HerodotusRegisteredClientRepository registeredClientRepository) {
+		this.registeredClientRepository = registeredClientRepository;
+	}
 
 
-    public Optional<HerodotusRegisteredClient> findByClientId(String clientId) {
-        Optional<HerodotusRegisteredClient> result = this.registeredClientRepository.findByClientId(clientId);
-        log.debug("[Herodotus] |- HerodotusRegisteredClient Service findByClientId.");
-        return result;
-    }
+	public Optional<HerodotusRegisteredClient> findByClientId(String clientId) {
+		Optional<HerodotusRegisteredClient> result = this.registeredClientRepository.findByClientId(clientId);
+		log.trace("[Herodotus] |- HerodotusRegisteredClient Service findByClientId.");
+		return result;
+	}
 
 	public void save(HerodotusRegisteredClient entity) {
 		registeredClientRepository.save(entity);

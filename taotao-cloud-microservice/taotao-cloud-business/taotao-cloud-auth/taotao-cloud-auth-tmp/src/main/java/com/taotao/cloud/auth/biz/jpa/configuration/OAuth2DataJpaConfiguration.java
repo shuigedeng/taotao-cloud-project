@@ -50,13 +50,13 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
  */
 @Configuration(proxyBeanMethods = false)
 //@EntityScan(basePackages = {
-//	"cn.herodotus.engine.oauth2.data.jpa.entity"
+//        "cn.herodotus.engine.oauth2.data.jpa.entity"
 //})
 //@EnableJpaRepositories(basePackages = {
-//	"cn.herodotus.engine.oauth2.data.jpa.repository",
+//        "cn.herodotus.engine.oauth2.data.jpa.repository",
 //})
 //@ComponentScan(basePackages = {
-//	"cn.herodotus.engine.oauth2.data.jpa.service",
+//        "cn.herodotus.engine.oauth2.data.jpa.service",
 //})
 public class OAuth2DataJpaConfiguration {
 

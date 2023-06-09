@@ -26,9 +26,17 @@
 package com.taotao.cloud.auth.biz.strategy;
 
 import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
 import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
 import com.taotao.cloud.security.springsecurity.core.definition.handler.SocialAuthenticationHandler;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>Description: UserDetail本地直联服务 </p>
@@ -38,25 +46,36 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class HerodotusLocalUserDetailsService extends AbstractStrategyUserDetailsService {
 
-//    private final SysUserService sysUserService;
-    private final SocialAuthenticationHandler socialAuthenticationHandler;
+	//    private final SysUserService sysUserService;
+	private final SocialAuthenticationHandler socialAuthenticationHandler;
 
-    public HerodotusLocalUserDetailsService(
+	public HerodotusLocalUserDetailsService(
 //		SysUserService sysUserService,
-											SocialAuthenticationHandler socialAuthenticationHandler) {
+		SocialAuthenticationHandler socialAuthenticationHandler) {
 //        this.sysUserService = sysUserService;
-        this.socialAuthenticationHandler = socialAuthenticationHandler;
-    }
+		this.socialAuthenticationHandler = socialAuthenticationHandler;
+	}
 
-    @Override
-    public HerodotusUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
+	@Override
+	public HerodotusUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
 //        SysUser sysUser = sysUserService.findByUserName(userName);
 //        return this.convertSysUser(sysUser, userName);
-		return null;
-    }
+		Collection<HerodotusGrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new HerodotusGrantedAuthority("manager.book.read"));
+		authorities.add(new HerodotusGrantedAuthority("manager.book.write"));
+		Set<String> roles = new HashSet<>();
+		roles.add("ROLE_A1");
+		roles.add("ROLE_A2");
+		// admin/123456
+		HerodotusUser user = new HerodotusUser("33e781c5-31e0-4ea4-8b02-1236bde9643", "admin",
+			"{bcrypt}$2a$10$lvjys/FAHAVmgXM.U1LtOOJ./C5SstExZCZ0Z5N7SeGZAue0JFtXC",
+			true, true, true, true,
+			authorities, roles, "", "");
+		return user;
+	}
 
-    @Override
-    public HerodotusUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal) {
-        return socialAuthenticationHandler.authentication(source, accessPrincipal);
-    }
+	@Override
+	public HerodotusUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal) {
+		return socialAuthenticationHandler.authentication(source, accessPrincipal);
+	}
 }

@@ -25,7 +25,6 @@
 
 package com.taotao.cloud.auth.biz.jpa.jackson2;
 
-import cn.hutool.core.util.ReflectUtil;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -36,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
 import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
 import org.apache.commons.collections4.CollectionUtils;
+import org.dromara.hutool.core.reflect.FieldUtil;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -72,8 +72,8 @@ public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserialize
 
         OAuth2ClientAuthenticationToken clientAuthenticationToken = new OAuth2ClientAuthenticationToken(registeredClient, clientAuthenticationMethod, credentials);
         if (CollectionUtils.isNotEmpty(authorities)) {
-            ReflectUtil.setFieldValue(clientAuthenticationToken, "authorities", authorities);
+            FieldUtil.setFieldValue(clientAuthenticationToken, "authorities", authorities);
         }
-		return clientAuthenticationToken;
+        return clientAuthenticationToken;
     }
 }

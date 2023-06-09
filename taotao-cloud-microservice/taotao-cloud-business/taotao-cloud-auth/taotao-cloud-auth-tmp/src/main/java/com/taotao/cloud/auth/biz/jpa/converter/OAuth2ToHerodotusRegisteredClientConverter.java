@@ -23,55 +23,36 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.auth.biz.jpa.adapter;
+package com.taotao.cloud.auth.biz.jpa.converter;
 
-import com.taotao.cloud.auth.biz.jpa.definition.AbstractRegisteredClientAdapter;
+import com.taotao.cloud.auth.biz.jpa.definition.converter.AbstractOAuth2EntityConverter;
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusRegisteredClient;
+import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
-import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
-import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
- * <p>Description: HerodotusRegisteredClient 转换适配器 </p>
+ * <p>Description: RegisteredClient 转 HerodotusRegisteredClient 转换器 </p>
  *
  * @author : gengwei.zheng
  * @date : 2023/5/12 23:56
  */
-public class HerodotusRegisteredClientAdapter extends AbstractRegisteredClientAdapter<HerodotusRegisteredClient> {
+public class OAuth2ToHerodotusRegisteredClientConverter extends AbstractOAuth2EntityConverter<RegisteredClient, HerodotusRegisteredClient> {
 
     private final PasswordEncoder passwordEncoder;
 
-    public HerodotusRegisteredClientAdapter(PasswordEncoder passwordEncoder) {
-        super();
+    public OAuth2ToHerodotusRegisteredClientConverter(OAuth2JacksonProcessor jacksonProcessor, PasswordEncoder passwordEncoder) {
+        super(jacksonProcessor);
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Set<String> getScopes(HerodotusRegisteredClient details) {
-        return StringUtils.commaDelimitedListToSet(details.getScopes());
-    }
-
-    @Override
-    public ClientSettings getClientSettings(HerodotusRegisteredClient details) {
-        Map<String, Object> clientSettingsMap = parseMap(details.getClientSettings());
-        return ClientSettings.withSettings(clientSettingsMap).build();
-    }
-
-    @Override
-    public TokenSettings getTokenSettings(HerodotusRegisteredClient details) {
-        Map<String, Object> tokenSettingsMap = parseMap(details.getTokenSettings());
-        return TokenSettings.withSettings(tokenSettingsMap).build();
-    }
-
-    public HerodotusRegisteredClient toEntity(RegisteredClient registeredClient) {
+    public HerodotusRegisteredClient convert(RegisteredClient registeredClient) {
         List<String> clientAuthenticationMethods = new ArrayList<>(registeredClient.getClientAuthenticationMethods().size());
         registeredClient.getClientAuthenticationMethods().forEach(clientAuthenticationMethod ->
                 clientAuthenticationMethods.add(clientAuthenticationMethod.getValue()));

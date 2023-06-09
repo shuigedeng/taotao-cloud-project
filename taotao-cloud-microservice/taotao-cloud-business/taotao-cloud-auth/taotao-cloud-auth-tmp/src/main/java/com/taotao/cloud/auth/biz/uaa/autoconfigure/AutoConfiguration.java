@@ -46,7 +46,7 @@ public class AutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Starter [Herodotus OAuth Starter] Auto Configure.");
+       log.info("[Herodotus] |- Starter [Herodotus OAuth Starter] Auto Configure.");
     }
 
     @Bean
