@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.service;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.auth.biz.exception.CloudAuthenticationException;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.util.CaptchaUtils;
@@ -25,6 +24,8 @@ import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.wf.captcha.ArithmeticCaptcha;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
+
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

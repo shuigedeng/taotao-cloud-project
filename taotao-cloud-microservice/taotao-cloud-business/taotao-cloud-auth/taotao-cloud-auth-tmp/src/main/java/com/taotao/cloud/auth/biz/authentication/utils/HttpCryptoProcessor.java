@@ -153,21 +153,19 @@ public class HttpCryptoProcessor extends AbstractRenderer {
 	}
 
 	private boolean isSessionValid(String identity) {
-//		return this.containKey(identity);
-		return false;
+		return this.containKey(identity);
 	}
 
 	private SecretKey getSecretKey(String identity)  {
-//		if (isSessionValid(identity)) {
-//			SecretKey secretKey = this.get(identity);
-//			if (ObjectUtils.isNotEmpty(secretKey)) {
-//				log.trace("[Herodotus] |- Decrypt Or Encrypt content use param identity [{}], cached identity is [{}].", identity, secretKey.getIdentity());
-//				return secretKey;
-//			}
-//		}
-//
-//		throw new StampHasExpiredException("SecretKey key is expired!");
-		return null;
+		if (isSessionValid(identity)) {
+			SecretKey secretKey = (SecretKey)this.get(identity);
+			if (ObjectUtils.isNotEmpty(secretKey)) {
+				log.trace("[Herodotus] |- Decrypt Or Encrypt content use param identity [{}], cached identity is [{}].", identity, secretKey.getIdentity());
+				return secretKey;
+			}
+		}
+
+		throw new StampHasExpiredException("SecretKey key is expired!");
 	}
 
 	private Duration getExpire(Duration accessTokenValiditySeconds) {

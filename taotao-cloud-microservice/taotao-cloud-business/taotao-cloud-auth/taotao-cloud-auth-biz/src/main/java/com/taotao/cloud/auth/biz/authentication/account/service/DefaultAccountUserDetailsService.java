@@ -16,12 +16,13 @@
 
 package com.taotao.cloud.auth.biz.authentication.account.service;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.enums.LoginTypeEnum;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import java.util.Set;
+
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
