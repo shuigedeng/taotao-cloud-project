@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.authentication.qrcocde;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;

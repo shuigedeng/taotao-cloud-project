@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.configuration;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.constant.StarterName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BaseException;
@@ -39,6 +38,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataIntegrityViolationException;

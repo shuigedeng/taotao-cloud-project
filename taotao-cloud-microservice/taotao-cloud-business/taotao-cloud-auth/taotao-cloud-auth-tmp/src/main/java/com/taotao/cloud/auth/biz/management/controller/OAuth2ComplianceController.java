@@ -27,6 +27,7 @@ package com.taotao.cloud.auth.biz.management.controller;
 
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
+import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -79,13 +80,12 @@ public class OAuth2ComplianceController  {
             @Parameter(name = "ip", description = "IP地址"),
     })
     @GetMapping("/condition")
-    public Result<Map<String, Object>> findByCondition(@NotBlank @RequestParam("pageNumber") Integer pageNumber,
-													   @NotBlank @RequestParam("pageSize") Integer pageSize,
-													   @RequestParam(value = "principalName", required = false) String principalName,
-													   @RequestParam(value = "clientId", required = false) String clientId,
-													   @RequestParam(value = "ip", required = false) String ip) {
+    public Result<PageResult<OAuth2Compliance>> findByCondition(@NotBlank @RequestParam("pageNumber") Integer pageNumber,
+											  @NotBlank @RequestParam("pageSize") Integer pageSize,
+											  @RequestParam(value = "principalName", required = false) String principalName,
+											  @RequestParam(value = "clientId", required = false) String clientId,
+											  @RequestParam(value = "ip", required = false) String ip) {
         Page<OAuth2Compliance> pages = complianceService.findByCondition(pageNumber, pageSize, principalName, clientId, ip);
-//        return Result.success(pages);
-		return null;
+        return Result.success(PageResult.convertJpaPage(pages, OAuth2Compliance.class));
     }
 }
