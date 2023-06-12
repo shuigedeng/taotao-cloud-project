@@ -1,7 +1,5 @@
 package com.taotao.cloud.promotion.biz.util;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
-import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.BasePromotionsSearchQuery;

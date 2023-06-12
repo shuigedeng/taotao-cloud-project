@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.goods.biz.util;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
-import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.goods.api.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;

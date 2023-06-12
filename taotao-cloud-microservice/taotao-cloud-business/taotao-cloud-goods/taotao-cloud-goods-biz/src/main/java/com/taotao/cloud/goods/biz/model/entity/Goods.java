@@ -16,10 +16,6 @@
 
 package com.taotao.cloud.goods.biz.model.entity;
 
-import org.dromara.hutoolcore.convert.Convert;
-import org.dromara.hutoolcore.text.CharSequenceUtil;
-import org.dromara.hutoolhttp.HtmlUtil;
-import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;

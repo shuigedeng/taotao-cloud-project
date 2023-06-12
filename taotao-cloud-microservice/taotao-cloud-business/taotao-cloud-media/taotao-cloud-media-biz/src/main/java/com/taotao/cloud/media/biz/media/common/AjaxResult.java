@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.media.biz.media.common;
 
-import org.dromara.hutoolcore.util.ObjectUtil;
-import org.dromara.hutoolhttp.HttpStatus;
+import cn.hutool.core.util.ObjectUtil;
+
 import java.util.HashMap;
 
 /** 操作消息提醒 */

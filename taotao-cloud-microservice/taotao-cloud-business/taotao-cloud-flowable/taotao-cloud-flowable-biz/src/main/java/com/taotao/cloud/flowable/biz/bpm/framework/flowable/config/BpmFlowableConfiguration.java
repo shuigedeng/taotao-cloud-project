@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.flowable.biz.bpm.framework.flowable.config;
 
-import org.dromara.hutoolcore.collection.ListUtil;
 import com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior.BpmActivityBehaviorFactory;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmTaskAssignRuleService;
 import org.flowable.common.engine.api.delegate.event.FlowableEventListener;

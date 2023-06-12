@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.goods.biz.task;
 //
-// import org.dromara.hutoolcore.convert.Convert;
 // import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 // import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 // import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;

@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutoolextra.mail.MailAccount;
-import org.dromara.hutoolextra.mail.MailUtil;
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.RateLimiter;
 import com.sun.mail.util.MailSSLSocketFactory;

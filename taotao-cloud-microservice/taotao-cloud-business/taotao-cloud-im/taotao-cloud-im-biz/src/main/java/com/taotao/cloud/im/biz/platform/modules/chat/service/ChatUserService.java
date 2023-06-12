@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service;
 
-import org.dromara.hutoolcore.lang.Dict;
 import com.platform.common.web.service.BaseService;
 import com.platform.modules.auth.vo.AuthVo01;
 import com.platform.modules.chat.domain.ChatUser;

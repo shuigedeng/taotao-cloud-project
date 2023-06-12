@@ -16,12 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import org.dromara.hutoolcore.lang.Dict;
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutoolhttp.HttpUtil;
-import org.dromara.hutooljson.JSONArray;
-import org.dromara.hutooljson.JSONObject;
-import org.dromara.hutooljson.JSONUtil;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.exception.BaseException;
 import com.platform.common.utils.redis.RedisUtils;

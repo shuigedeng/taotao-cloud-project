@@ -23,9 +23,6 @@ import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_DEFIN
 import static cn.iocoder.yudao.module.bpm.enums.ErrorCodeConstants.PROCESS_DEFINITION_NAME_NOT_MATCH;
 import static java.util.Collections.emptyList;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.ObjectUtil;
-import org.dromara.hutoolcore.util.StrUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.common.util.object.PageUtils;
 import com.taotao.cloud.flowable.biz.bpm.controller.admin.definition.vo.process.BpmProcessDefinitionListReqVO;

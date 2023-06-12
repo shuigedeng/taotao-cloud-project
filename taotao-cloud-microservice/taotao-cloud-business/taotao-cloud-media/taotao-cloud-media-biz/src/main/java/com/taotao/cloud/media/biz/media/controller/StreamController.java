@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.media.biz.media.controller;
 
-import org.dromara.hutoolcrypto.digest.MD5;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

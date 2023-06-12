@@ -16,10 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.common.service.impl;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.codec.Base64;
-import org.dromara.hutoolcore.io.file.FileNameUtil;
-import org.dromara.hutoolcore.util.StrUtil;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.exception.BaseException;
 import com.platform.common.upload.config.UploadFileConfig;

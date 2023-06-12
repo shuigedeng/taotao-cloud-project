@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.order.biz.service.business.cart.impl;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;

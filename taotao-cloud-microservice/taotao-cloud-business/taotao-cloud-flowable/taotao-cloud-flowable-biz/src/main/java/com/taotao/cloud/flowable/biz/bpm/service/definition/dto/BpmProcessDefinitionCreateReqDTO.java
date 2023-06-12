@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.flowable.biz.bpm.service.definition.dto;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
 import cn.iocoder.yudao.module.bpm.enums.definition.BpmModelFormTypeEnum;
 import java.util.List;
 import java.util.Objects;

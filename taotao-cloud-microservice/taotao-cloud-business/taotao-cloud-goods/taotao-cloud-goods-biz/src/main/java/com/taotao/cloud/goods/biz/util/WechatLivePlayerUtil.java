@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.goods.biz.util;
 
-import org.dromara.hutooljson.JSONObject;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.entity.Studio;
 import java.util.HashMap;

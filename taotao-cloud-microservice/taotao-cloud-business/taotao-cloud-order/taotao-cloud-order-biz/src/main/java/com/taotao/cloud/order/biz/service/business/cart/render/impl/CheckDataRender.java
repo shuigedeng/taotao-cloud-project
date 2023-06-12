@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.order.biz.service.business.cart.render.impl;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;

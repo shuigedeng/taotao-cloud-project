@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.order.biz.model.pojo;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;

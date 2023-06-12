@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.common.web.interceptor;
 
-import org.dromara.hutoolcore.util.CharsetUtil;
-import org.dromara.hutoolextra.servlet.ServletUtil;
-import org.dromara.hutooljson.JSONUtil;
 import com.platform.common.constant.HeadConstant;
 import com.platform.common.web.domain.AjaxResult;
 import jakarta.servlet.http.HttpServletRequest;

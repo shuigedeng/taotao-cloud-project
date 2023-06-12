@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.distribution.api.feign.fallback;
 
-import org.dromara.hutoolcore.date.DateTime;
 import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderApi;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
