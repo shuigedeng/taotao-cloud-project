@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.media.biz.opencv.base;
 
-import org.dromara.hutoolcore.util.NumberUtil;
 import com.google.zxing.Binarizer;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;

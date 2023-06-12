@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;

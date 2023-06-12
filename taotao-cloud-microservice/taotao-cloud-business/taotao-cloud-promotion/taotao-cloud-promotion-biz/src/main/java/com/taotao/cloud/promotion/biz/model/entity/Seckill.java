@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.promotion.biz.model.entity;
 
-import org.dromara.hutoolcore.date.DateField;
-import org.dromara.hutoolcore.date.DateTime;
-import org.dromara.hutoolcore.date.DateUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.promotion.api.model.vo.SeckillVO;
 import jakarta.persistence.Column;

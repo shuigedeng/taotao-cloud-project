@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import org.dromara.hutoolcore.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;

@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.goods.biz.model.entity;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
-import org.dromara.hutoolhttp.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.goods.api.enums.DraftGoodsSaveTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;

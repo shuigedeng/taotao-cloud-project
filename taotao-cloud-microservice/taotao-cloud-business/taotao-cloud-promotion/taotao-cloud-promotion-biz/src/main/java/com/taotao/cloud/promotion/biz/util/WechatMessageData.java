@@ -15,8 +15,6 @@
  */
 
 package com.taotao.cloud.promotion.biz.util; // package com.taotao.cloud.message.biz.util;
-//
-// import org.dromara.hutooljson.JSONUtil;
 // import lombok.Data;
 //
 // import java.util.HashMap;

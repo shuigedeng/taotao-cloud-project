@@ -16,11 +16,6 @@
 
 package com.taotao.cloud.message.biz.austin.cron.handler;
 
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutoolcrypto.SecureUtil;
-import org.dromara.hutoolhttp.ContentType;
-import org.dromara.hutoolhttp.Header;
-import org.dromara.hutoolhttp.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;

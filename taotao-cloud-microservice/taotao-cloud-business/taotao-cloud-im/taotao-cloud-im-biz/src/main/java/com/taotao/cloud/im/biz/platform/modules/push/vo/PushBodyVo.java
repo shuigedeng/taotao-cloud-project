@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.push.vo;
 
-import org.dromara.hutoolcore.date.DatePattern;
-import org.dromara.hutoolcore.date.DateUtil;
 import com.platform.modules.push.enums.PushBodyTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;

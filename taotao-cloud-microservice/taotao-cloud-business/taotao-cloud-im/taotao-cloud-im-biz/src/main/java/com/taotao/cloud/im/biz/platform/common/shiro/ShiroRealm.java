@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.common.shiro;
 
-import org.dromara.hutoolcore.date.DateUtil;
-import org.dromara.hutoolhttp.useragent.UserAgent;
-import org.dromara.hutoolhttp.useragent.UserAgentUtil;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.enums.ResultCodeEnum;
 import com.platform.common.enums.YesOrNoEnum;

@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.order.biz.model.entity.order;
 
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.ClientTypeEnum;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;

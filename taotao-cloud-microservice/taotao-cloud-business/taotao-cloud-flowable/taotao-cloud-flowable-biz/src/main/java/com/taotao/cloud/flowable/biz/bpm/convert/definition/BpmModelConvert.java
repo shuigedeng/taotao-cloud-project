@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.flowable.biz.bpm.convert.definition;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import cn.iocoder.yudao.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.yudao.framework.common.util.date.DateUtils;
 import cn.iocoder.yudao.framework.common.util.json.JsonUtils;

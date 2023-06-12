@@ -16,18 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.codec.Base64;
-import org.dromara.hutoolcore.date.DateUtil;
-import org.dromara.hutoolcore.io.FileUtil;
-import org.dromara.hutoolcore.lang.Dict;
-import org.dromara.hutoolcore.util.DesensitizedUtil;
-import org.dromara.hutoolcore.util.IdUtil;
-import org.dromara.hutoolcore.util.NumberUtil;
-import org.dromara.hutoolcore.util.RandomUtil;
-import org.dromara.hutoolextra.qrcode.QrCodeUtil;
-import org.dromara.hutoolextra.qrcode.QrConfig;
-import org.dromara.hutoolhttp.HttpUtil;
 import com.platform.common.config.PlatformConfig;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.constant.HeadConstant;

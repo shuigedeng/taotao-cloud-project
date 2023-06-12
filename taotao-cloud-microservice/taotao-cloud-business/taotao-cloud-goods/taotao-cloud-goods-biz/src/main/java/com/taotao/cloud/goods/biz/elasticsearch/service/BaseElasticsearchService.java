@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.goods.biz.elasticsearch.service;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;

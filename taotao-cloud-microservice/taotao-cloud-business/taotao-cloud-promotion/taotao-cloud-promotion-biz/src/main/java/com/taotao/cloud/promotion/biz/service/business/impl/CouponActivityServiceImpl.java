@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
-import org.dromara.hutooljson.JSONArray;
-import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;

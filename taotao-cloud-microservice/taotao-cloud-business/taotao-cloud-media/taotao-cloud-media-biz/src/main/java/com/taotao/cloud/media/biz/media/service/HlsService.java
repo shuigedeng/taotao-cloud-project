@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.media.biz.media.service;
 
-import org.dromara.hutoolcore.convert.Convert;
-import org.dromara.hutoolcore.io.IoUtil;
-import org.dromara.hutoolcrypto.digest.MD5;
 import com.taotao.cloud.media.biz.media.common.CacheMap;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.thread.MediaTransferHls;

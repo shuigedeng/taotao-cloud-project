@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.promotion.api.tools;
 
-import org.dromara.hutooljson.JSONObject;
-import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.promotion.api.model.vo.BasePromotionsVO;

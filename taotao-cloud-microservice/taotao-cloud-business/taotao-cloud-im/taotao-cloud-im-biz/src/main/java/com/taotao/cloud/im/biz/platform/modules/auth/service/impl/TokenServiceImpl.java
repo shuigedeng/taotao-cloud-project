@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.auth.service.impl;
 
-import org.dromara.hutoolcore.util.RandomUtil;
-import org.dromara.hutooljson.JSONUtil;
 import com.platform.common.config.PlatformConfig;
 import com.platform.common.constant.ApiConstant;
 import com.platform.common.shiro.ShiroUtils;

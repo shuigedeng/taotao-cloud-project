@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.log.biz.log.core.db.dao;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.data.mybatisplus.utils.BaseManager;
 import com.taotao.cloud.log.biz.log.core.db.entity.LoginLogDb;

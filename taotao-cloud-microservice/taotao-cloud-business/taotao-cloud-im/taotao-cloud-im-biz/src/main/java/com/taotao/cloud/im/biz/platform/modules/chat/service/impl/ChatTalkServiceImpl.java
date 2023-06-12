@@ -16,13 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.service.impl;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.lang.Console;
-import org.dromara.hutoolcore.util.IdUtil;
-import org.dromara.hutoolcore.util.NumberUtil;
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutooljson.JSONObject;
 import com.taotao.cloud.im.biz.platform.modules.chat.enums.FriendTypeEnum;
 import com.taotao.cloud.im.biz.platform.modules.chat.service.ChatTalkService;
 import com.taotao.cloud.im.biz.platform.modules.chat.service.ChatWeatherService;

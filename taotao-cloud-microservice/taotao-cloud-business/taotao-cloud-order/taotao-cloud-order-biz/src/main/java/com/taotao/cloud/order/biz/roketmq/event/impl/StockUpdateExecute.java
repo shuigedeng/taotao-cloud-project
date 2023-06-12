@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import org.dromara.hutoolcore.convert.Convert;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;

@@ -16,9 +16,6 @@
 
 package com.taotao.cloud.flowable.biz.bpm.framework.flowable.core.behavior;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.lang.Assert;
-import org.dromara.hutoolcore.util.RandomUtil;
 import com.taotao.cloud.flowable.biz.bpm.service.definition.BpmTaskAssignRuleService;
 import java.util.List;
 import java.util.Set;

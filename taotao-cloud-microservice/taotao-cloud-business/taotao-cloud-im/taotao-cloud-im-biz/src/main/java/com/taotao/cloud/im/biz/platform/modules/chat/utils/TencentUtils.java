@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.im.biz.platform.modules.chat.utils;
 
-import org.dromara.hutoolcore.util.NumberUtil;
-import org.dromara.hutoolcore.util.ReUtil;
 import com.platform.common.exception.BaseException;
 import com.platform.modules.chat.config.TencentConfig;
 import com.tencentcloudapi.common.Credential;

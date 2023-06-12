@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.flowable.api.bpm.enums.task;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

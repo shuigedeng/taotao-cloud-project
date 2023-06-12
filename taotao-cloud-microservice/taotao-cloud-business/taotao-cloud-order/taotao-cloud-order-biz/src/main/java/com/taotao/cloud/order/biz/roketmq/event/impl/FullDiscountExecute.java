@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutooljson.JSONUtil;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.UserEnum;

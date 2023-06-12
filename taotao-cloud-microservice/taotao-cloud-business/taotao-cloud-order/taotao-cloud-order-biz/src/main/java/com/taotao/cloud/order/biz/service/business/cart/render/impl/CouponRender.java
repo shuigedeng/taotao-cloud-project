@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.order.biz.service.business.cart.render.impl;
 
-import org.dromara.hutoolcore.text.CharSequenceUtil;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
