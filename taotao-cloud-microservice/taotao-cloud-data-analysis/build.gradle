@@ -50,7 +50,7 @@ dependencies {
     //https://search.maven.org/artifact/io.airlift/units
     implementation "io.airlift:units:1.8"
     //https://search.maven.org/artifact/com.google.guava/guava
-    implementation "com.google.guava:guava:32.0.0-jre"
+    implementation "com.google.guava:guava:32.0.1-jre"
     //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-annotations
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
 
