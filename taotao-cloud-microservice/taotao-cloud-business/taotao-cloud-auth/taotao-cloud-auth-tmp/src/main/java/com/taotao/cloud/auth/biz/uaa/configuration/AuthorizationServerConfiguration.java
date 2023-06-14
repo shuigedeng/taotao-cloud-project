@@ -133,7 +133,9 @@ public class AuthorizationServerConfiguration {
 		httpSecurity.apply(authorizationServerConfigurer);
 
 		OAuth2AuthenticationFailureResponseHandler errorResponseHandler = new OAuth2AuthenticationFailureResponseHandler();
-		authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
+		authorizationServerConfigurer.clientAuthentication(endpoint -> {
+			endpoint.errorResponseHandler(errorResponseHandler);
+		});
 		authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
 			endpoint.errorResponseHandler(errorResponseHandler);
 			endpoint.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
@@ -162,6 +164,7 @@ public class AuthorizationServerConfiguration {
 		});
 		authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
 		authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
+		//开启OpenId Connect 1.0相关端点
 		authorizationServerConfigurer.oidc(oidc -> {
 			oidc.clientRegistrationEndpoint(endpoint -> {
 				endpoint.errorResponseHandler(errorResponseHandler);
@@ -213,11 +216,10 @@ public class AuthorizationServerConfiguration {
 		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
 		authenticationManagerBuilder.authenticationEventPublisher(new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
 
-		// build() 方法会让以上所有的配置生效
 		SecurityFilterChain securityFilterChain = httpSecurity
 			.formLogin(formLoginUrlConfigurer::from)
 			.sessionManagement(Customizer.withDefaults())
-//			.addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
+			//.addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
 			.build();
 
 		// 增加新的、自定义 OAuth2 Granter

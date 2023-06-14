@@ -79,10 +79,14 @@ public class OAuth2FormLoginSecureConfigurer<H extends HttpSecurityBuilder<H>>
         provider.setUserDetailsService(userDetailsService);
         provider.setHideUserNotFoundExceptions(false);
 
-        httpSecurity
+		httpSecurity
                 .authenticationProvider(provider)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
+
+	public H httpSecurity(){
+		return getBuilder();
+	}
 
     private OAuth2AuthenticationProperties.FormLogin getFormLogin() {
         return authenticationProperties.getFormLogin();

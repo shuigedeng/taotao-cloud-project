@@ -25,7 +25,17 @@
 
 package com.taotao.cloud.auth.biz.uaa.configuration;
 
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
+import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGeneratorImpl;
+import com.taotao.cloud.auth.biz.authentication.authentication.LoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.authentication.fingerprint.service.FingerprintUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.authentication.gestures.service.GesturesUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.authentication.mp.service.MpUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service.OneClickUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.form.OAuth2FormLoginSecureConfigurer;
+import com.taotao.cloud.auth.biz.authentication.form.Oauth2FormPhoneLoginSecureConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusClientDetailsService;
@@ -55,13 +65,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FindByIndexNameSessionRepository;
-import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 /**
@@ -88,8 +99,14 @@ public class DefaultSecurityConfiguration {
 	) throws Exception {
 
 		log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
+
 		// 禁用CSRF 开启跨域
-		httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
+		httpSecurity
+			.anonymous(AbstractHttpConfigurer::disable)
+			.logout(AbstractHttpConfigurer::disable)
+			.sessionManagement(Customizer.withDefaults())
+			.csrf(AbstractHttpConfigurer::disable)
+			.cors(AbstractHttpConfigurer::disable);
 
 		// @formatter:off
         httpSecurity
@@ -98,16 +115,80 @@ public class DefaultSecurityConfiguration {
                         .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                         .anyRequest().access(securityAuthorizationManager))
-                .sessionManagement(Customizer.withDefaults())
                 .exceptionHandling(exceptions -> {
                     exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
                 })
                 .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
-                .apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory));
+			// **************************************自定义登录配置***********************************************
+			.apply(new LoginFilterSecurityConfigurer<>())
+			// 用户+密码登录
+			.accountLogin(accountLoginFilterConfigurerCustomizer -> {
+
+			})
+			// 用户+密码+验证码登录
+			.accountVerificationLogin(accountVerificationLoginFilterConfigurerCustomizer -> {
+			})
+			// 面部识别登录
+			.faceLogin(faceLoginFilterConfigurerCustomizer -> {
+			})
+			// 指纹登录
+			.fingerprintLogin(fingerprintLoginConfigurer -> {
+				fingerprintLoginConfigurer.fingerprintUserDetailsService(new FingerprintUserDetailsService() {
+					@Override
+					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 手势登录
+			.gesturesLogin(fingerprintLoginConfigurer -> {
+				fingerprintLoginConfigurer.gesturesUserDetailsService(new GesturesUserDetailsService() {
+					@Override
+					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 本机号码一键登录
+			.oneClickLogin(oneClickLoginConfigurer -> {
+				oneClickLoginConfigurer.oneClickUserDetailsService(new OneClickUserDetailsService() {
+					@Override
+					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 手机扫码登录
+			.qrcodeLogin(qrcodeLoginConfigurer -> {
+			})
+			// 手机号码+短信登录
+			.phoneLogin(phoneLoginConfigurer -> {
+			})
+			// 微信公众号登录
+			.mpLogin(mpLoginConfigurer -> {
+				mpLoginConfigurer.mpUserDetailsService(new MpUserDetailsService() {
+					@Override
+					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 小程序登录 同时支持多个小程序
+			.miniAppLogin(miniAppLoginConfigurer -> {
+			})
+			.and()
+			.apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory))
+			.httpSecurity()
+			.apply(new Oauth2FormPhoneLoginSecureConfigurer<>( authenticationProperties));
 
         // @formatter:on
 		return httpSecurity.build();
+	}
+
+	@Bean
+	public JwtTokenGenerator jwtTokenGenerator(JWKSource<SecurityContext> jwkSource) {
+		return new JwtTokenGeneratorImpl(jwkSource);
 	}
 
 	@Bean
@@ -139,12 +220,12 @@ public class DefaultSecurityConfiguration {
 	}
 
 	@Bean
-	public  FindByIndexNameSessionRepository redissonSessionRepository(RedissonClient redissonClient, ApplicationEventPublisher eventPublisher){
+	public FindByIndexNameSessionRepository redissonSessionRepository(RedissonClient redissonClient, ApplicationEventPublisher eventPublisher) {
 		return new RedissonSessionRepository(redissonClient, eventPublisher);
 	}
 
 	@Bean
-	public  SessionRegistry sessionRegistry(FindByIndexNameSessionRepository sessionRepository) {
+	public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository sessionRepository) {
 		return new SpringSessionBackedSessionRegistry<>(sessionRepository);
 	}
 
