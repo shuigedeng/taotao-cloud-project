@@ -53,8 +53,4 @@ public class SessionInvalidException  extends RuntimeException{
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
-//    @Override
-//    public Feedback getFeedback() {
-//        return FeedbackFactory.notAcceptable(RestErrorCodes.SESSION_INVALID, "Session已过期，请刷新再试");
-//    }
 }

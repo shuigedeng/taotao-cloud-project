@@ -25,6 +25,8 @@
 
 package com.taotao.cloud.auth.biz.jpa.service;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorization;
 import com.taotao.cloud.auth.biz.jpa.repository.HerodotusAuthorizationRepository;
 import jakarta.persistence.criteria.Predicate;
@@ -33,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -155,6 +158,14 @@ public class HerodotusAuthorizationService {
 	}
 
 	public HerodotusAuthorization findById(String id) {
-		return herodotusAuthorizationRepository.findById(id).get();
+		return herodotusAuthorizationRepository.findById(id).orElse(null);
+	}
+
+	public void updateAndFlush(HerodotusAuthorization entity) {
+		HerodotusAuthorization existingAuthorization = this.findById(entity.getId());
+		BeanUtil.copyProperties(entity, existingAuthorization, CopyOptions.create().ignoreNullValue());
+		//更新数据
+		herodotusAuthorizationRepository.updateBy(existingAuthorization);
+
 	}
 }

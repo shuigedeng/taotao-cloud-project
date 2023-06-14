@@ -119,12 +119,13 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
      *
      * @param defaultFailureUrl the failure URL, for example "/loginFailed.jsp".
      */
+	@Override
     public void setDefaultFailureUrl(String defaultFailureUrl) {
         Assert.isTrue(UrlUtils.isValidRedirectUrl(defaultFailureUrl),
                 () -> "'" + defaultFailureUrl + "' is not a valid redirect URL");
         this.defaultFailureUrl = defaultFailureUrl;
     }
-
+	@Override
     protected boolean isUseForward() {
         return this.forwardToDestination;
     }
@@ -133,6 +134,7 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
      * If set to <tt>true</tt>, performs a forward to the failure destination URL instead
      * of a redirect. Defaults to <tt>false</tt>.
      */
+	@Override
     public void setUseForward(boolean forwardToDestination) {
         this.forwardToDestination = forwardToDestination;
     }
@@ -140,18 +142,22 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
     /**
      * Allows overriding of the behaviour when redirecting to a target URL.
      */
+	@Override
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
 
+	@Override
     protected RedirectStrategy getRedirectStrategy() {
         return this.redirectStrategy;
     }
 
+	@Override
     protected boolean isAllowSessionCreation() {
         return this.allowSessionCreation;
     }
 
+	@Override
     public void setAllowSessionCreation(boolean allowSessionCreation) {
         this.allowSessionCreation = allowSessionCreation;
     }

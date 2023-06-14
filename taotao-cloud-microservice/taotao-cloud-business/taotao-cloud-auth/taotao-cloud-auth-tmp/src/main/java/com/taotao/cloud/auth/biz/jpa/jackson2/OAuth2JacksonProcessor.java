@@ -30,8 +30,10 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.log.LogMessage;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2AuthorizationServerJackson2Module;
+import org.springframework.util.ClassUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -55,11 +57,26 @@ public class OAuth2JacksonProcessor {
         ClassLoader classLoader = OAuth2JacksonProcessor.class.getClassLoader();
         List<Module> securityModules = SecurityJackson2Modules.getModules(classLoader);
 
+		Module module = loadAndGetInstance("com.taotao.cloud.auth.biz.jpa.jackson2.FormOAuth2PhoneLoginJackson2Module", classLoader);
+		securityModules.add(module);
+
         objectMapper.registerModules(securityModules);
         objectMapper.registerModules(new OAuth2AuthorizationServerJackson2Module());
         objectMapper.registerModules(new HerodotusJackson2Module());
         objectMapper.registerModules(new OAuth2TokenJackson2Module());
     }
+
+	private static Module loadAndGetInstance(String className, ClassLoader loader) {
+		try {
+			Class<? extends Module> securityModule = (Class<? extends Module>) ClassUtils.forName(className, loader);
+			if (securityModule != null) {
+				return securityModule.newInstance();
+			}
+		}
+		catch (Exception ex) {
+		}
+		return null;
+	}
 
     public Map<String, Object> parseMap(String data) {
         try {

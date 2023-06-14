@@ -80,9 +80,9 @@ public class CloudOAuth2AuthorizationService extends JdbcOAuth2AuthorizationServ
     @Override
     public OAuth2Authorization findById(String id) {
         OAuth2Authorization oAuth2Authorization = super.findById(id);
-        // if (Objects.isNull(oAuth2Authorization)) {
-        //	throw new UnsupportedOperationException("Find by ID is not supported...");
-        // }
+         if (Objects.isNull(oAuth2Authorization)) {
+        	throw new UnsupportedOperationException("Find by ID is not supported...");
+         }
         return oAuth2Authorization;
     }
 

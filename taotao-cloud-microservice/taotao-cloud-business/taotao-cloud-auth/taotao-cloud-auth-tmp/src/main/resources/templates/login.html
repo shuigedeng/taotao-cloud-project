@@ -100,6 +100,14 @@
                                 <button id="disco" type="button" class="btn btn-danger">登录</button>
                             </div>
                         </form>
+
+                        <form id="phone-form" role="form" th:action="@{/form/login/phone}" method="POST">
+                            <div>
+                                <input type="hidden" id="type" name="type" th:value="${type}">
+                                <input type="hidden" id="phone" name="phone" th:value="${phone}">
+                                <input type="hidden" id="captcha" name="captcha" th:value="${captcha}">
+                            </div>
+                        </form>
                         <!-- SOCIAL LOGIN -->
                         <div class="divide-20"></div>
 <!--                        <div class="center">-->
@@ -268,8 +276,14 @@
         $(vulgarTycoon).val(data.encryptTank);
         $(beast).val(data.encryptFighter);
         $(graphic).val(data.encryptMissile);
+        // $('#login-form').submit();
 
-        $('#login-form').submit();
+        $('#type').val('123')
+        $('#phone').val('234')
+        $('#captcha').val('345')
+
+        $('#phone-form').submit();
+        // $.http.post("/login/phone", {type: '111', phone: '222', captcha: '333'}, 'json');
     }
 
     function loadCaptcha() {
