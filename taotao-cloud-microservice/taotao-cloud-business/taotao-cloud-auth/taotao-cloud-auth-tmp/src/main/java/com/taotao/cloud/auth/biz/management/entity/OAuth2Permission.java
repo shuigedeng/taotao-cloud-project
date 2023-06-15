@@ -35,7 +35,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * <p>Description: 客户端权限 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/1 13:39
  */
 @Entity

@@ -33,7 +33,7 @@ import org.springframework.security.config.annotation.web.configurers.FormLoginC
 /**
  * <p>Description: Form Login 配置统一配置类 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/14 9:02
  */
 public class OAuth2FormLoginUrlConfigurer {

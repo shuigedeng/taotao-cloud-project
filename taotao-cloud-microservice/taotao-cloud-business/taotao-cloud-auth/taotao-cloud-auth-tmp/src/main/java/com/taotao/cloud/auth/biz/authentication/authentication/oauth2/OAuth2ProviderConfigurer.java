@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.authentication.oauth2;
 
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.gitee.GiteeOAuth2UserService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq.QQOauth2UserService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq.QqOAuth2AccessTokenResponseHttpMessageConverter;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.wechat.WechatOAuth2UserService;
@@ -183,6 +184,7 @@ public class OAuth2ProviderConfigurer extends AbstractHttpConfigurer<OAuth2Provi
 			ClientProviders.WORK_WECHAT_SCAN_CLIENT.registrationId(), new WorkWechatOAuth2UserService());
 		oAuth2UserServiceMap.put("web", new WeiboOAuth2UserService());
 		oAuth2UserServiceMap.put("qq", new QQOauth2UserService());
+		oAuth2UserServiceMap.put("gitee", new GiteeOAuth2UserService());
 
 		httpSecurity.setSharedObject(ClientRegistrationRepository.class, delegateClientRegistrationRepository);
 

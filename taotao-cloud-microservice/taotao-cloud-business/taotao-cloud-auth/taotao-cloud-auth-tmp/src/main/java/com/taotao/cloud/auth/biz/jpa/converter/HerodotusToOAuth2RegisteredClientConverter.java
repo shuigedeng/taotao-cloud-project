@@ -38,7 +38,7 @@ import java.util.Set;
 /**
  * <p>Description: HerodotusRegisteredClient 转 换适配器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/12 23:56
  */
 public class HerodotusToOAuth2RegisteredClientConverter extends AbstractRegisteredClientConverter<HerodotusRegisteredClient> {

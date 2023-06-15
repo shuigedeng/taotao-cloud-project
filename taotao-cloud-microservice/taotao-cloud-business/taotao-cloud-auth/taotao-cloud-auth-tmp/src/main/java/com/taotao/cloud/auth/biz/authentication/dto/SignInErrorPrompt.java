@@ -31,7 +31,7 @@ import jakarta.validation.constraints.NotBlank;
 /**
  * <p>Description: 登录提示信息 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/7/8 20:52
  */
 @Schema(title = "登录错误提示信息")

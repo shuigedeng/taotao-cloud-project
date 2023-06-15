@@ -41,7 +41,7 @@ import java.util.Map;
 /**
  * <p>Description: OAuth2 相关 Jackson 处理器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/4/29 16:05
  */
 public class OAuth2JacksonProcessor {

@@ -40,7 +40,7 @@ import java.time.Duration;
 /**
  * <p>Description: 锁定账户签章管理 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/8 21:27
  */
 public class LockedUserDetailsStampManager extends AbstractRenderer implements InitializingBean {

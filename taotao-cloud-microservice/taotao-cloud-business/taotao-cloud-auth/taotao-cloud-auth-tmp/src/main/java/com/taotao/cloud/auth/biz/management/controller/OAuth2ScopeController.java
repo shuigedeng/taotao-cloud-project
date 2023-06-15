@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 /**
  * <p> Description : OauthScopesController </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2020/3/25 17:10
  */
 @RestController

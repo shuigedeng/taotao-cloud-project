@@ -49,7 +49,7 @@ import java.util.Map;
 /**
  * <p>Description: 验证码Controller </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2021/12/12 10:44
  */
 @RestController

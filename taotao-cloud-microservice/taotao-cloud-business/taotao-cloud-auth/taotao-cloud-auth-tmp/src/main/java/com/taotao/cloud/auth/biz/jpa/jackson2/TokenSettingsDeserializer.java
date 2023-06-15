@@ -40,7 +40,7 @@ import java.util.Map;
 /**
  * <p>Description: TokenSettingsDeserializer </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/10/24 23:29
  */
 public class TokenSettingsDeserializer extends JsonDeserializer<TokenSettings> {

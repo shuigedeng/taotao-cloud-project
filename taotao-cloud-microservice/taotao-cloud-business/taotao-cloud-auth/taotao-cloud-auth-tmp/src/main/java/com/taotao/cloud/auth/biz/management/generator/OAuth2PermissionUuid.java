@@ -37,7 +37,7 @@ import static java.lang.annotation.ElementType.METHOD;
 /**
  * <p>Description: OAuth2AuthorityUuid </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/11/7 17:11
  */
 @IdGeneratorType(OAuth2PermissionUuidGenerator.class)

@@ -24,7 +24,7 @@ import java.util.*;
 /**
  * 微信授权的OAuth2User用户信息
  *
- * @author felord.cn
+ * 
  * @since 2021/8/12 17:37
  */
 public class WechatOAuth2User implements OAuth2User {

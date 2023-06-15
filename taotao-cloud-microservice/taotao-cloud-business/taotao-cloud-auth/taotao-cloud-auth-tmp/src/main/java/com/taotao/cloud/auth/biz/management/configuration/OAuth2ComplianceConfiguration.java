@@ -45,11 +45,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * <p>Description: OAuth2 应用安全合规配置 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/11 10:20
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnBean(AccountStatusChanger.class)
 public class OAuth2ComplianceConfiguration {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2ComplianceConfiguration.class);

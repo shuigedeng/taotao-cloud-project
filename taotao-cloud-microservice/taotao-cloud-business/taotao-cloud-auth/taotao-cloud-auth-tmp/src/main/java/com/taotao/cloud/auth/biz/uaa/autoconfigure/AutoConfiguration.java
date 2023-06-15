@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <p>Description: OAuth Starter 自动注入配置 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/17 13:43
  */
 @Configuration(proxyBeanMethods = false)

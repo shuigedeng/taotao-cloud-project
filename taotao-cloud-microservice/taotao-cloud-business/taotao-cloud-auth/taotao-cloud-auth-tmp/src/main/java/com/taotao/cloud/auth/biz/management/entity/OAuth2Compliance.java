@@ -36,7 +36,7 @@ import org.hibernate.annotations.UuidGenerator;
 /**
  * <p>Description: 用户操作审计 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/7 18:55
  */
 @Entity

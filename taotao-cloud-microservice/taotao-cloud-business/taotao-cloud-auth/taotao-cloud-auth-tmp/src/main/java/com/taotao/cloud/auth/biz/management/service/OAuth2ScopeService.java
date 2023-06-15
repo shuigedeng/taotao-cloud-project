@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * <p> Description : OauthScopeService </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2020/3/19 17:00
  */
 @Service

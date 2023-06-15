@@ -45,7 +45,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * <p>Description: OAuth2 Manager 模块配置 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/3/1 18:25
  */
 @Configuration(proxyBeanMethods = false)

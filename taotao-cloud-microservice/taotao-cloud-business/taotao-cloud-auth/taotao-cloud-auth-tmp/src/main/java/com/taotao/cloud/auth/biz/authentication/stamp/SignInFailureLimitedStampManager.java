@@ -41,7 +41,7 @@ import java.time.Duration;
 /**
  * <p>Description: 登录失败次数限制签章管理 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/6 23:36
  */
 public class SignInFailureLimitedStampManager extends AbstractCountStampManager implements InitializingBean {

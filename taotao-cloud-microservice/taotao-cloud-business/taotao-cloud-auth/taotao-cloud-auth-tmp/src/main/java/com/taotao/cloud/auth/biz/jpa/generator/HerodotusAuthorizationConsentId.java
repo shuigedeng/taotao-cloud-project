@@ -38,7 +38,7 @@ import java.io.Serializable;
  * 2. 有默认的public无参数的构造方法;
  * 3. 重写equals和hashCode方法。equals方法用于判断两个对象是否相同，
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/1/22 17:58
  */
 public class HerodotusAuthorizationConsentId implements Serializable {

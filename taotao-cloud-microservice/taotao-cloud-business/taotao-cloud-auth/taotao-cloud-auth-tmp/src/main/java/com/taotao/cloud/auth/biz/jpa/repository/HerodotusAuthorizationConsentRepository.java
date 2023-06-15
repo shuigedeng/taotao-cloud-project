@@ -37,7 +37,7 @@ import java.util.Optional;
 /**
  * <p>Description: HerodotusAuthorizationConsentRepository </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/25 20:54
  */
 public interface HerodotusAuthorizationConsentRepository extends BaseRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {

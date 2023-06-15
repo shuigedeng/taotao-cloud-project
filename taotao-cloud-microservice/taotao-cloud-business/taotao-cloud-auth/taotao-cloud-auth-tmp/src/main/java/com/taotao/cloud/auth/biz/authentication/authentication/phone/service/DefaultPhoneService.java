@@ -28,6 +28,6 @@ public class DefaultPhoneService implements PhoneService {
     @Override
     public boolean verifyCaptcha(String phone, String rawCode) {
         // 校验短信验证码
-        return true;
+        return false;
     }
 }

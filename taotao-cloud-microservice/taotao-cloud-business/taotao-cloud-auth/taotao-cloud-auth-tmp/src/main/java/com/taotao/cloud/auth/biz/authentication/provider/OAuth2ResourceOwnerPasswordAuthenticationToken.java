@@ -40,7 +40,7 @@ import java.util.Set;
 /**
  * <p>Description: 自定义密码模式认证Token </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/2/22 15:49
  */
 public class OAuth2ResourceOwnerPasswordAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {

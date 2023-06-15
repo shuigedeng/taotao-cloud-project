@@ -29,7 +29,7 @@ import java.util.function.Consumer;
  *
  * <p>client_id 变成 appid ，并追加锚点#wechat_redirect
  *
- * @author felord.cn
+ * 
  * @see DefaultOAuth2AuthorizationRequestResolver#setAuthorizationRequestCustomizer(Consumer)
  */
 public class OAuth2AuthorizationRequestCustomizer {

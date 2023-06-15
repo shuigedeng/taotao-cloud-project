@@ -37,7 +37,7 @@ import java.time.LocalDateTime;
 /**
  * <p>Description: OAuth2 认证信息 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/1/22 18:08
  */
 @Entity

@@ -769,11 +769,12 @@ spring:
             redirect-uri: https://xxx/login/oauth2/code/weibo
             scope: follow_app_official_microblog
           github:
-            client-id: xxxx
-            client-secret: xxxx
+            client-id: c51cb681f7045cc44e6f
+            client-secret: 2eeb2f180a05a82117d4276c788f3a2f276823c1
+            redirect-uri: http://1fe9ccce.cpolar.cn/login/oauth2/code/github
           gitee:
             provider: gitee
-            client-name: gitee
+            client-name: taotaocloud
             client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
             client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
             authorization-grant-type: authorization_code
@@ -802,7 +803,7 @@ spring:
           gitee:
             authorization-uri: https://gitee.com/oauth/authorize
             token-uri: https://gitee.com/oauth/token
-            user-name-attribute: id
+            user-name-attribute: login
             user-info-uri: https://gitee.com/api/v5/user
           qq:
             authorization-uri: https://graph.qq.com/oauth2.0/authorize
@@ -1292,7 +1293,7 @@ herodotus:
     authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize
     token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke
     token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect
-    jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks
+    jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
     oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register
     oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo

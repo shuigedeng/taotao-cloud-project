@@ -39,7 +39,7 @@ import java.util.function.Function;
 /**
  * <p>Description: TODO </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/10/15 11:58
  */
 public class HerodotusOidcUserInfoMapper implements Function<OidcUserInfoAuthenticationContext, OidcUserInfo> {

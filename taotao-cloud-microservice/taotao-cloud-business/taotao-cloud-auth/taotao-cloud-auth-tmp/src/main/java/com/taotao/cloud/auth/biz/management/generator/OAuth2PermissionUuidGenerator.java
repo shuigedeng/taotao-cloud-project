@@ -38,7 +38,7 @@ import java.lang.reflect.Member;
 /**
  * <p>Description: 使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/3/31 21:11
  */
 public class OAuth2PermissionUuidGenerator extends AbstractUuidGenerator {

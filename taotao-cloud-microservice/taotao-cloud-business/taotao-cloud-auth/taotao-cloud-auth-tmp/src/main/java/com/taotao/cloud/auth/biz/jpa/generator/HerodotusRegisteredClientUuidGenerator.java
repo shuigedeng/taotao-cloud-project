@@ -40,7 +40,7 @@ import java.lang.reflect.Member;
  * <p>
  * 指定ID生成器，解决实体ID无法手动设置问题。
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/1/22 17:50
  */
 public class HerodotusRegisteredClientUuidGenerator extends AbstractUuidGenerator {

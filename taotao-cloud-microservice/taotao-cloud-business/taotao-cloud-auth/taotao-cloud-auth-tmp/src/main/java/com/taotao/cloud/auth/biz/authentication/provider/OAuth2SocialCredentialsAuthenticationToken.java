@@ -40,7 +40,7 @@ import java.util.Set;
 /**
  * <p>Description: 自定义社会化登录认证Token </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/3/31 14:54
  */
 public class OAuth2SocialCredentialsAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {

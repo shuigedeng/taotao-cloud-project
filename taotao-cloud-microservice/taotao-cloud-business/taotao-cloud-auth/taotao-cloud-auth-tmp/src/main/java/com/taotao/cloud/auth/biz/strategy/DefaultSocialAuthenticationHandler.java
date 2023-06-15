@@ -35,7 +35,7 @@ import com.taotao.cloud.security.springsecurity.core.exception.UsernameAlreadyEx
 /**
  * <p>Description: 社交登录默认处理器。 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/1/26 23:44
  */
 public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthenticationHandler {

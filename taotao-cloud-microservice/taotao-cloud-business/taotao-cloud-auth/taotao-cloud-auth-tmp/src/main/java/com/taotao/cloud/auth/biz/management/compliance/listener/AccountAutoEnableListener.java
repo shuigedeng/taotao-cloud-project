@@ -40,7 +40,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * <p>Description: 账户锁定状态监听 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/8 11:11
  */
 public class AccountAutoEnableListener extends KeyExpirationEventMessageListener {

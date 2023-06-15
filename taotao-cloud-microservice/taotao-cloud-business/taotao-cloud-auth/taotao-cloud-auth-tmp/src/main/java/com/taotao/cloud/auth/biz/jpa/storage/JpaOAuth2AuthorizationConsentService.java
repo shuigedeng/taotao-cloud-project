@@ -39,7 +39,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * <p>Description: 基于 JPA 的 OAuth2 认证服务 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/2/25 22:15
  */
 public class JpaOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {

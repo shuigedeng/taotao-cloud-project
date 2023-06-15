@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: OAuth2Device 转 RegisteredClient 转换器 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/21 22:05
  */
 public class RegisteredClientToOAuth2DeviceConverter implements Converter<RegisteredClient, OAuth2Device> {

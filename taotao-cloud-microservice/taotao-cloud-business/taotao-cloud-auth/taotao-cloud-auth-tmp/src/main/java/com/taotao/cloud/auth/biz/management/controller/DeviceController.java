@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * <p>Description: 设备激活 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/3/24 17:09
  */
 @Controller

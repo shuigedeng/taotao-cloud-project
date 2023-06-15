@@ -37,7 +37,7 @@ import java.util.Objects;
 /**
  * <p>Description: OAuth2 客户端实体 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/1/22 17:18
  */
 @Entity

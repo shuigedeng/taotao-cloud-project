@@ -47,7 +47,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * 另一方面：会产生调用的循环。
  * 因此，最终考虑把这两个服务相关的代码，抽取至UPMS API，采用UAA直接访问数据库的方式。
  *
- * @author : gengwei.zheng
+ *
  * @date : 2019/11/25 11:02
  */
 public class HerodotusUserDetailsService implements EnhanceUserDetailsService {

@@ -41,7 +41,7 @@ import java.util.Set;
 /**
  * <p>Description: UserDetail本地直联服务 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2021/5/23 9:20
  */
 public class HerodotusLocalUserDetailsService extends AbstractStrategyUserDetailsService {

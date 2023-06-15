@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 /**
  * <p>Description: OAuth2ClientAuthenticationTokenMixin </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/10/24 16:45
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)

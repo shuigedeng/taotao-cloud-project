@@ -35,7 +35,7 @@ import java.util.Set;
 /**
  * <p>Description: OAuth2 Scope Dto </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/4/1 13:55
  */
 @Schema(name = "OAuth2 范围请求 Dto")

@@ -32,7 +32,7 @@ import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
 /**
  * <p>Description: OAuth2ApplicationRepository </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/3/1 18:05
  */
 public interface OAuth2ApplicationRepository extends BaseRepository<OAuth2Application, String> {

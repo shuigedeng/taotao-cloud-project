@@ -56,7 +56,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * 获取微信用户信息的服务接口
  *
- * @author felord.cn
+ * 
  * @since 2021 /8/12 17:45
  */
 public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {

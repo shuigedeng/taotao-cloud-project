@@ -32,7 +32,7 @@ import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
 /**
  * <p>Description: ActionAuditRepository </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/7 20:39
  */
 public interface OAuth2ComplianceRepository extends BaseRepository<OAuth2Compliance, String> {

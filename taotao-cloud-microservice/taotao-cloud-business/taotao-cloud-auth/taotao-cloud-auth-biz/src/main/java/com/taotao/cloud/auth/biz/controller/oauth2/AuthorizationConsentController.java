@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 自定义用户确认页
  *
- * @author felord.cn
+ * 
  */
 @Controller
 @AllArgsConstructor

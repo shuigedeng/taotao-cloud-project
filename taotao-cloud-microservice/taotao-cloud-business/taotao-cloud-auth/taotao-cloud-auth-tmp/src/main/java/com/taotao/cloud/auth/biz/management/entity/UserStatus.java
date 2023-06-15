@@ -31,7 +31,7 @@ import com.google.common.base.Objects;
 /**
  * <p>Description: 用户状态变更实体 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/10 16:15
  */
 public class UserStatus  {

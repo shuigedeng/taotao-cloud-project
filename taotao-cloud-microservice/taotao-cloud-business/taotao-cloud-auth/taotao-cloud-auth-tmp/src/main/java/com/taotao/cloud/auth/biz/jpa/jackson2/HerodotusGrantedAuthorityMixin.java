@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 /**
  * <p>Description: HerodotusGrantedAuthority Jackson2 Mixin </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/3/17 20:28
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)

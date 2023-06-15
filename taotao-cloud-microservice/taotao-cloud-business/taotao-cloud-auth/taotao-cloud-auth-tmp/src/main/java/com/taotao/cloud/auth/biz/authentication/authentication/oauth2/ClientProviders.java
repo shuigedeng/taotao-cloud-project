@@ -136,7 +136,7 @@ public enum ClientProviders {
                 parameters.clear();
                 parameters.putAll(linkedParameters);
             })),
-            authorizationCodeGrantRequest -> {
+		authorizationCodeGrantRequest -> {
                 String code = authorizationCodeGrantRequest
                         .getAuthorizationExchange()
                         .getAuthorizationResponse()

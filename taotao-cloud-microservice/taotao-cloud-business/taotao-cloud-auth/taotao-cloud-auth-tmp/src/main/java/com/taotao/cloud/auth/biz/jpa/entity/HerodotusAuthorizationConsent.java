@@ -36,7 +36,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * <p>Description: OAuth2 认证确认信息实体 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/1/22 17:55
  */
 @Entity

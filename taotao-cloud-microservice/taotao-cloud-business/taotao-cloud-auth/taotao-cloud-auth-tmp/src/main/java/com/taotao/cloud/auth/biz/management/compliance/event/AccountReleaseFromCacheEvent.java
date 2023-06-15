@@ -33,7 +33,7 @@ import java.time.Clock;
 /**
  * <p>Description: 从账户状态缓存中释放账号事件 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/14 14:26
  */
 public class AccountReleaseFromCacheEvent extends ApplicationEvent {

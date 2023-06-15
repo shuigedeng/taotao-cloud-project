@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 /**
  * <p>Description: RegisteredClientMixin </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/10/24 16:18
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)

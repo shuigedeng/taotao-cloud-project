@@ -28,7 +28,7 @@ package com.taotao.cloud.auth.biz.utils;
 /**
  * <p>Description: Session 不可用错误 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2021/10/4 16:46
  */
 public class SessionInvalidException  extends RuntimeException{

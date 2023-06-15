@@ -39,7 +39,7 @@ import java.io.IOException;
 /**
  * <p>Description: FormLoginWebAuthenticationDetailsDeserializer </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/14 11:48
  */
 public class FormLoginWebAuthenticationDetailsDeserializer extends JsonDeserializer<FormLoginWebAuthenticationDetails> {

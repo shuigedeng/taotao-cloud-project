@@ -36,7 +36,7 @@ import java.util.Optional;
 /**
  * <p>Description: HerodotusRegisteredClientRepository </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/25 21:05
  */
 public interface HerodotusRegisteredClientRepository extends BaseRepository<HerodotusRegisteredClient, String> {

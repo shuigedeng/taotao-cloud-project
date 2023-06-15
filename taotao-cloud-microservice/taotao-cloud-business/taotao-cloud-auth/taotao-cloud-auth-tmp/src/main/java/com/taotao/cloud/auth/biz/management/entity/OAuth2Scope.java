@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * <p> Description : Oauth Scope </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2020/3/19 14:15
  */
 @Entity

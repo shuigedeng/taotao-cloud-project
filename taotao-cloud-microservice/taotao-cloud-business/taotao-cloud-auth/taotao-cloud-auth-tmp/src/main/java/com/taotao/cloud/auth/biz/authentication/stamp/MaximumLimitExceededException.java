@@ -28,7 +28,7 @@ package com.taotao.cloud.auth.biz.authentication.stamp;
 /**
  * <p>Description: 超出最大数量限制 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/6 23:03
  */
 public class MaximumLimitExceededException extends RuntimeException {
