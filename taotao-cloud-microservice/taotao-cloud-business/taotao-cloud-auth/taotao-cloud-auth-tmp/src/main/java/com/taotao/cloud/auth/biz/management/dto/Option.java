@@ -32,7 +32,7 @@ import java.io.Serializable;
 /**
  * <p>Description: 前端选项基础格式 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/4/24 10:00
  */
 public class Option implements Serializable {

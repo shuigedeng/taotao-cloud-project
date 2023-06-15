@@ -34,7 +34,7 @@ import org.springframework.data.jpa.repository.Query;
 /**
  * <p>Description: OAuth2DeviceRepository </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/15 16:14
  */
 public interface OAuth2DeviceRepository extends BaseRepository<OAuth2Device, String> {

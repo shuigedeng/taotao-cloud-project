@@ -33,7 +33,7 @@ import java.lang.annotation.*;
 /**
  * <p>Description: 自动解锁用户账号条件注解 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/9 22:20
  */
 @Target({ElementType.TYPE, ElementType.METHOD})

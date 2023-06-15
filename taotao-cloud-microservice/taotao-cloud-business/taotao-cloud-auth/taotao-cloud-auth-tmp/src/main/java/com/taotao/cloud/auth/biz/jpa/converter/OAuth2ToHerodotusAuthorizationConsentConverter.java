@@ -37,7 +37,7 @@ import java.util.Set;
 /**
  * <p>Description: OAuth2AuthorizationConsent 转 HerodotusAuthorizationConsent 转换器</p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/21 21:05
  */
 public class OAuth2ToHerodotusAuthorizationConsentConverter implements Converter<OAuth2AuthorizationConsent, HerodotusAuthorizationConsent> {

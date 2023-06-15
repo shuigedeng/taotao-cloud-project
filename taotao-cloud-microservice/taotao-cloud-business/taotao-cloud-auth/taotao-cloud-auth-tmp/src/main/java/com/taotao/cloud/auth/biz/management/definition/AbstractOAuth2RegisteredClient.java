@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * <p>Description: 应用对象转 RegisteredClient 共性属性 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/21 17:46
  */
 @MappedSuperclass

@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
 /**
  * <p>Description: OAuth2PermissionService </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/4/1 13:53
  */
 @Service

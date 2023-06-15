@@ -39,7 +39,7 @@ import java.io.IOException;
 /**
  * <p>Description: HerodotusGrantedAuthority 反序列化 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/3/17 20:28
  */
 public class HerodotusGrantedAuthorityDeserializer extends JsonDeserializer<HerodotusGrantedAuthority> {

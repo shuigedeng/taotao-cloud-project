@@ -39,7 +39,7 @@ import java.util.Set;
 /**
  * <p>Description: 转换为 RegisteredClient 转换器定义</p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/21 20:36
  */
 public interface RegisteredClientConverter<S extends RegisteredClientDetails> extends Converter<S, RegisteredClient> {

@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * <p>Description: RegisteredClient 转 HerodotusRegisteredClient 转换器 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/12 23:56
  */
 public class OAuth2ToHerodotusRegisteredClientConverter extends AbstractOAuth2EntityConverter<RegisteredClient, HerodotusRegisteredClient> {

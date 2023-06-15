@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: OAuth2Application  </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/13 10:34
  */
 public abstract class AbstractOAuth2RegisteredClientConverter<T extends AbstractOAuth2RegisteredClient> implements RegisteredClientConverter<T> {

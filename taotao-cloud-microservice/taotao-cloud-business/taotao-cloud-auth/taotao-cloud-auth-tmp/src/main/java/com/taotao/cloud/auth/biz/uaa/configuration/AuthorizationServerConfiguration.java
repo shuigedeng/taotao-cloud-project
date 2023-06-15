@@ -99,7 +99,7 @@ import java.util.UUID;
  * 2. 默认的权限判断 {@link org.springframework.security.access.vote.AffirmativeBased}
  * 3. 模式决策 {@link org.springframework.security.authentication.ProviderManager}
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/12 20:57
  */
 @Configuration(proxyBeanMethods = false)

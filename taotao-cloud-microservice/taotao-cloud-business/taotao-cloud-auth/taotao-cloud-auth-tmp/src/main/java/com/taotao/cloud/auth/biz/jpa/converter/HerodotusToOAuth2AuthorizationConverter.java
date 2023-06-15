@@ -46,7 +46,7 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: HerodotusAuthorization 转 OAuth2Authorization 转换器 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/21 20:53
  */
 public class HerodotusToOAuth2AuthorizationConverter extends AbstractOAuth2EntityConverter<HerodotusAuthorization, OAuth2Authorization> {

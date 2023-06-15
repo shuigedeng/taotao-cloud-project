@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: 抽象的StrategyAuthorityDetailsService </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/1 19:09
  */
 public abstract class AbstractStrategyPermissionDetailsService implements StrategyPermissionDetailsService {

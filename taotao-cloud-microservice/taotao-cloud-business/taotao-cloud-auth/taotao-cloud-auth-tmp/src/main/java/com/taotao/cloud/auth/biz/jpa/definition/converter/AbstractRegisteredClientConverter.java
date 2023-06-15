@@ -32,7 +32,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * <p>Description: RegisteredClient 转换器</p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/12 23:07
  */
 public abstract class AbstractRegisteredClientConverter<S extends RegisteredClientDetails> extends AbstractOAuth2EntityConverter<S, RegisteredClient> implements RegisteredClientConverter<S>{

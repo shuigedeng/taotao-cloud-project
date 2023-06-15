@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * <p>Description: 封装RegisteredClientAdapter 默认行为 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/12 23:54
  */
 public abstract class AbstractOAuth2EntityConverter<S, T> implements Converter<S, T> {

@@ -37,7 +37,7 @@ import static java.lang.annotation.ElementType.METHOD;
 /**
  * <p>Description: HerodotusRegisteredClientUuid 注解 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/11/7 15:49
  */
 @IdGeneratorType(HerodotusRegisteredClientUuidGenerator.class)

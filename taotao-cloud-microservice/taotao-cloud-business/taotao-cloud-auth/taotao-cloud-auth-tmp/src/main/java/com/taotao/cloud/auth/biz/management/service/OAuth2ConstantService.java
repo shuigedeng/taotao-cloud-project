@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * <p>Description: OAuth2 常量服务 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/3/17 14:36
  */
 @Service

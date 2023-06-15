@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 /**
  * <p>Description: ClientAuthenticationMethodMixin </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/10/24 15:50
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)

@@ -28,7 +28,7 @@ package com.taotao.cloud.auth.biz.authentication.utils;
 /**
  * <p>Description: 对称加密算法 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/5/1 15:05
  */
 public interface SymmetricCryptoProcessor {

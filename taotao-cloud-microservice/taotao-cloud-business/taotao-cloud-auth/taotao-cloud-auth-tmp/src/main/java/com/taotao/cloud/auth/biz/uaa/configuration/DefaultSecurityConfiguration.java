@@ -29,10 +29,14 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGeneratorImpl;
+import com.taotao.cloud.auth.biz.authentication.authentication.LoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.authentication.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.authentication.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.authentication.mp.service.MpUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.DelegateClientRegistrationRepository;
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.OAuth2ProviderConfigurer;
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.Oauth2LoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service.OneClickUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.form.OAuth2FormLoginSecureConfigurer;
 import com.taotao.cloud.auth.biz.authentication.form.Oauth2FormPhoneLoginSecureConfigurer;
@@ -42,6 +46,9 @@ import com.taotao.cloud.auth.biz.management.processor.HerodotusClientDetailsServ
 import com.taotao.cloud.auth.biz.management.processor.HerodotusUserDetailsService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
+import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import com.taotao.cloud.security.springsecurity.authorization.processor.SecurityAuthorizationManager;
 import com.taotao.cloud.security.springsecurity.authorization.processor.SecurityMatcherConfigurer;
@@ -71,14 +78,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
+import org.springframework.util.Assert;
 
 /**
  * <p>Description: 默认安全配置 </p>
  *
- * @author : gengwei.zheng
  * @date : 2022/2/12 20:53
  */
 @EnableWebSecurity
@@ -95,7 +103,8 @@ public class DefaultSecurityConfiguration {
 		CaptchaRendererFactory captchaRendererFactory,
 		SecurityMatcherConfigurer securityMatcherConfigurer,
 		SecurityAuthorizationManager securityAuthorizationManager,
-		HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
+		HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+		DelegateClientRegistrationRepository delegateClientRegistrationRepository
 	) throws Exception {
 
 		log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
@@ -178,12 +187,39 @@ public class DefaultSecurityConfiguration {
 			.miniAppLogin(miniAppLoginConfigurer -> {
 			})
 			.and()
+			// **************************************oauth2登录配置***********************************************
+			.apply(new OAuth2ProviderConfigurer(delegateClientRegistrationRepository))
+			// 微信网页授权
+			.wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
+			// 企业微信登录
+			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
+			// 微信扫码登录
+			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
+			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer -> {
+				oauth2LoginConfigurer
+					.successHandler(authenticationSuccessHandler(httpSecurity))
+					// 认证失败后的处理器
+					.failureHandler((request, response, authException) -> {
+						LogUtils.error("用户认证失败", authException);
+						ResponseUtils.fail(response, authException.getMessage());
+					});
+			})
+			.and()
+			// **************************************oauth2表单登录配置***********************************************
 			.apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory))
 			.httpSecurity()
 			.apply(new Oauth2FormPhoneLoginSecureConfigurer<>( authenticationProperties));
 
         // @formatter:on
 		return httpSecurity.build();
+	}
+
+	private AuthenticationSuccessHandler authenticationSuccessHandler(HttpSecurity httpSecurity) {
+		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
+		JwtTokenGenerator jwtTokenGenerator = applicationContext.getBean(JwtTokenGenerator.class);
+		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
+
+		return new Oauth2LoginAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 
 	@Bean

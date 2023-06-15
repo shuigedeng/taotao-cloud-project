@@ -42,7 +42,7 @@ import com.taotao.cloud.security.springsecurity.core.jackson2.HerodotusUserDeser
  * <p>
  * See Also: UserDeserializer, CoreJackson2Module, SecurityJackson2Modules
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/17 21:57
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)

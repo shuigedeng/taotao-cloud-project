@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <p>Description: 分布式架构配置 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/1 21:26
  */
 @Configuration(proxyBeanMethods = false)

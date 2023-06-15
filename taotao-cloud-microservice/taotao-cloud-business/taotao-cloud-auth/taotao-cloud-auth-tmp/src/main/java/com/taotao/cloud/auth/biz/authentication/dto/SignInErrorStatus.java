@@ -29,7 +29,7 @@ package com.taotao.cloud.auth.biz.authentication.dto;
 /**
  * <p>Description: 用户错误状态信息 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/7/10 16:46
  */
 public class SignInErrorStatus {

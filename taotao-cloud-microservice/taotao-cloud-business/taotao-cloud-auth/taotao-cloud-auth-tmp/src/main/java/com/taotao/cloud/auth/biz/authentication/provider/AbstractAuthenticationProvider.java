@@ -56,7 +56,7 @@ import java.util.*;
  * <p>
  * 提取公共的通用认证基类，方便设置返回Token的信息设置
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/10/14 12:46
  */
 public abstract class AbstractAuthenticationProvider implements AuthenticationProvider {

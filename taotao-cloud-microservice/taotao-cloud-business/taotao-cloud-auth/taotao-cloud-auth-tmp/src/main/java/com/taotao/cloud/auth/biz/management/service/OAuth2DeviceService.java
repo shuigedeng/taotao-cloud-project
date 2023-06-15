@@ -47,7 +47,7 @@ import java.util.Set;
 /**
  * <p>Description: OAuth2DeviceService </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/15 16:36
  */
 @Service

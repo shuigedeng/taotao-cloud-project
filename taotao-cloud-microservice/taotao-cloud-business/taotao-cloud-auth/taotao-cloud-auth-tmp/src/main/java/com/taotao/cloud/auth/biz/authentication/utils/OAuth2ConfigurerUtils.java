@@ -53,7 +53,7 @@ import java.util.Map;
  * <p>
  * 代码内容与原包代码基本一致。
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/2/25 9:57
  */
 public final class OAuth2ConfigurerUtils {

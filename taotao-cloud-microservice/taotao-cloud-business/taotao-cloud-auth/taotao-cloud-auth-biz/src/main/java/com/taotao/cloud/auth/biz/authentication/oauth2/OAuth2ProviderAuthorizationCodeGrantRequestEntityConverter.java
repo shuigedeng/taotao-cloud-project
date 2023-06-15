@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 /**
  * 授权请求参数的请求参数封装工具类,扩展了{@link OAuth2AuthorizationCodeGrantRequestEntityConverter}
  *
- * @author felord.cn
+ * 
  * @see OAuth2AuthorizationCodeGrantRequestEntityConverter
  * @see Converter
  * @see OAuth2AuthorizationCodeGrantRequest

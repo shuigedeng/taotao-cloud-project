@@ -29,7 +29,7 @@ package com.taotao.cloud.auth.biz.authentication.utils;
 /**
  * <p>Description: Stamp签章 已过期错误 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2021/8/23 12:36
  */
 public class StampHasExpiredException extends RuntimeException {

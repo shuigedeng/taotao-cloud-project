@@ -41,7 +41,7 @@ import java.time.LocalDateTime;
 /**
  * <p>Description: 多实例共用 RegisteredClient属性 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/21 17:30
  */
 @MappedSuperclass

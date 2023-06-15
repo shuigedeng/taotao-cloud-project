@@ -44,7 +44,7 @@ import static org.dromara.hutool.core.text.StrPool.COMMA;
 /**
  * <p>Description: OAuth2Authorization 转 HerodotusAuthorization 转换器 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/21 20:57
  */
 public class OAuth2ToHerodotusAuthorizationConverter extends AbstractOAuth2EntityConverter<OAuth2Authorization, HerodotusAuthorization> {

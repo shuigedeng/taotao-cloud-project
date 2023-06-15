@@ -41,7 +41,7 @@ import java.util.Set;
 /**
  * <p>Description: 物联网设备管理 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/15 14:26
  */
 @Schema(name = "物联网设备")

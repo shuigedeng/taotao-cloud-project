@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: 客户端交互处理器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/1 15:21
  */
 public class HerodotusClientDetailsService implements EnhanceClientDetailsService {

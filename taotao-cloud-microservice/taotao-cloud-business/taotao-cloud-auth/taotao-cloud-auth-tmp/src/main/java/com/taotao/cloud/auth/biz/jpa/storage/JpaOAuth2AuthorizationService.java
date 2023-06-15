@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: 基于 JPA 的 OAuth2 认证服务 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/25 22:16
  */
 public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService {

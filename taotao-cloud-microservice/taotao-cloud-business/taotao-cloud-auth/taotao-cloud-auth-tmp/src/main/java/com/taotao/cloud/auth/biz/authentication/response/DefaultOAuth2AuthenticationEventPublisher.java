@@ -41,7 +41,7 @@ import org.springframework.security.oauth2.core.OAuth2Error;
  * <p>
  * 支持 OAuth2AuthenticationException 解析
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/9 13:47
  */
 public class DefaultOAuth2AuthenticationEventPublisher extends DefaultAuthenticationEventPublisher {

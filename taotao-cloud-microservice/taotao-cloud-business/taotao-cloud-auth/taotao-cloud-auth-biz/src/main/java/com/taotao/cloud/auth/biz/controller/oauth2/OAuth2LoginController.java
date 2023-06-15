@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 /**
  * The type OAuth2LoginController.
  *
- * @author felord.cn
+ * 
  * @since 1.0.0
  */
 @Controller

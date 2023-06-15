@@ -46,21 +46,11 @@ import org.springframework.context.annotation.Import;
  * <p>
  * {@link org.springframework.security.oauth2.jwt.JwtTimestampValidator}
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/2/26 12:35
  */
 @Configuration
 @Import({OAuth2DataJpaConfiguration.class, OAuth2AuthenticationConfiguration.class, OAuth2ComplianceConfiguration.class})
-//@EntityScan(basePackages = {
-//	"cn.herodotus.engine.oauth2.management.entity"
-//})
-//@EnableJpaRepositories(basePackages = {
-//	"cn.herodotus.engine.oauth2.management.repository",
-//})
-//@ComponentScan(basePackages = {
-//	"cn.herodotus.engine.oauth2.management.service",
-//	"cn.herodotus.engine.oauth2.management.controller",
-//})
 public class OAuth2ManagementConfiguration {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2ManagementConfiguration.class);

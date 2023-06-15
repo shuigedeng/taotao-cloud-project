@@ -50,7 +50,7 @@ import java.util.Map;
 /**
  * <p>Description: OAuth2ComplianceController </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/7/7 22:56
  */
 @RestController

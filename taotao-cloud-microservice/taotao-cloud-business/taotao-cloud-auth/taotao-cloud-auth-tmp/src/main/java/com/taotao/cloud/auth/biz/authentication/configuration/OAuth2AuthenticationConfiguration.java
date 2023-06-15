@@ -25,6 +25,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.configuration;
 
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.form.OAuth2FormLoginUrlConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampManager;
@@ -37,14 +38,21 @@ import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientPropertiesMapper;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Description: OAuth2 认证基础模块配置 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2023/5/13 15:40
  */
 @Configuration(proxyBeanMethods = false)
@@ -60,6 +68,17 @@ public class OAuth2AuthenticationConfiguration {
 
 	@Autowired
 	private RedisRepository redisRepository;
+
+	@Bean
+	DelegateClientRegistrationRepository delegateClientRegistrationRepository(OAuth2ClientProperties properties) {
+		DelegateClientRegistrationRepository clientRegistrationRepository = new DelegateClientRegistrationRepository();
+		if (properties != null) {
+			Map<String, ClientRegistration> clientRegistrations = new OAuth2ClientPropertiesMapper(properties).asClientRegistrations();
+			List<ClientRegistration> registrations = new ArrayList<>(clientRegistrations.values());
+			registrations.forEach(clientRegistrationRepository::addClientRegistration);
+		}
+		return clientRegistrationRepository;
+	}
 
 	@Bean
 	public HttpCryptoProcessor httpCryptoProcessor() {

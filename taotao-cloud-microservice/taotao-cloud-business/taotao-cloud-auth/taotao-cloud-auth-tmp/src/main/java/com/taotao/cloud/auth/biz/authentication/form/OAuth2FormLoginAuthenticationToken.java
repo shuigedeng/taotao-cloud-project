@@ -33,7 +33,7 @@ import java.util.Collection;
 /**
  * <p>Description: OAuth2 (Security) 表单登录 Token </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/12 10:24
  * @see UsernamePasswordAuthenticationToken
  */

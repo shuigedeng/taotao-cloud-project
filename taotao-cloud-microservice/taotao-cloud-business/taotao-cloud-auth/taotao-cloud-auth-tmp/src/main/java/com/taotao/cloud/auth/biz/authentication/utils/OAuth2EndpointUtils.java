@@ -47,7 +47,7 @@ import java.util.Map;
  * <p>
  * 代码内容与原包代码基本一致。
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/2/23 11:24
  */
 public class OAuth2EndpointUtils {

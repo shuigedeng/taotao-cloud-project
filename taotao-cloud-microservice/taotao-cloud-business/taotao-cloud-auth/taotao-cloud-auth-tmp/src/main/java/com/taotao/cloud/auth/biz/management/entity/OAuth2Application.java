@@ -46,7 +46,7 @@ import java.util.Set;
  * <p>
  * Spring Authorization Server 默认的 RegisteredClient 不便于扩展。增加该类用于存储标准 RegisteredClient 表结构以外的扩展信息。
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/3/1 16:45
  */
 @Schema(name = "OAuth2应用实体")

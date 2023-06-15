@@ -34,6 +34,11 @@ GET http://localhost:9800/oauth/authorize?client_id=third_client_1&client_secret
 
 
 ###
-GET http://localhost:9800/api/oauth2/authorization/github
-# 回调  GET http://localhost:9800/api/login/oauth2/code/github?code=feaea404324a8fbb96f3&state=9sXAoPfAa0qgpLgJGox73khQwFCcE6fEYkYes8DIOuQ%3D
+GET http://127.0.0.1:33337/oauth2/authorization/gitee
+# 回调  GET http://127.0.0.1:33337/login/oauth2/code/gitee?code=4d65c20d3bb91db5ea90e0509a51a129c601f7ee80284977b635bb99dba5321b&state=of6eQTbAubGtINnxNVsuu7zyEfjnjlfz7qe2uIAFHUU%3D
+
+
+###
+GET http://127.0.0.1:33337/oauth2/authorization/github
+# 回调  GET http://127.0.0.1:33337/login/oauth2/code/github?code=1ad7eb43032c79fadb8f&state=7X2neWrwO2CCpsfnlM0M6HCNnHupp75RCoW1nihFNHQ%3D
 

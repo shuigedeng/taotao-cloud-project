@@ -45,7 +45,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 /**
  * <p>Description: 登录成功事件监听 </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/7/7 20:58
  */
 public class AuthenticationSuccessListener implements ApplicationListener<AuthenticationSuccessEvent> {

@@ -45,7 +45,7 @@ import java.util.Set;
 /**
  * <p>Description: OAuth2ApplicationService </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/3/1 18:06
  */
 @Service

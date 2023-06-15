@@ -57,7 +57,7 @@ import java.util.Map;
 /**
  * <p>Description: 自定义 Security 认证成功处理器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/2/25 16:53
  */
 public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHandler {

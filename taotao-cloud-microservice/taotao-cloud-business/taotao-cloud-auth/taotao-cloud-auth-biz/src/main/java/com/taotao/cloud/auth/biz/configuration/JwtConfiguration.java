@@ -35,7 +35,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 /**
  * The Jwt configuration.
  *
- * @author felord.cn
+ * 
  * @since 1.0.0
  */
 @Configuration(proxyBeanMethods = false)

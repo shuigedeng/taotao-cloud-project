@@ -32,7 +32,7 @@ import org.springframework.context.ApplicationListener;
 /**
  * <p>Description: TODO </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/14 14:33
  */
 public class AccountReleaseFromCacheListener implements ApplicationListener<AccountReleaseFromCacheEvent> {

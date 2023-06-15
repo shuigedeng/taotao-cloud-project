@@ -50,7 +50,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * <p>
  * 扩展的OAuth2表单登录Provider，以支持表单登录的验证码
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/12 10:21
  * @see DaoAuthenticationProvider
  */

@@ -32,7 +32,7 @@ import jakarta.validation.constraints.NotNull;
 /**
  * <p>Description: OAuth2 HerodotusPermission Dto </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/1 13:55
  */
 @Schema(name = "OAuth2 权限请求 Dto")

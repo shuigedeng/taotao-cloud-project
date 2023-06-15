@@ -44,7 +44,7 @@ import java.io.IOException;
 /**
  * <p>Description: OAuth2 表单登录过滤器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/12 11:08
  */
 public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

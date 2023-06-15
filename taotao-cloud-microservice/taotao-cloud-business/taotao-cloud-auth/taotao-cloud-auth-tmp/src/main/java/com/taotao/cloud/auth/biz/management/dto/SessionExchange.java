@@ -32,7 +32,7 @@ import jakarta.validation.constraints.NotBlank;
 /**
  * <p>Description: 机要传递实体 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2021/10/2 16:29
  */
 @Schema(title = "机要传递实体")

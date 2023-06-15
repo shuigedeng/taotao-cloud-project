@@ -29,7 +29,7 @@ package com.taotao.cloud.auth.biz.management.compliance.event;
 /**
  * <p>Description: 用户状态变更服务 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/10 16:23
  */
 public interface AccountStatusChanger  {

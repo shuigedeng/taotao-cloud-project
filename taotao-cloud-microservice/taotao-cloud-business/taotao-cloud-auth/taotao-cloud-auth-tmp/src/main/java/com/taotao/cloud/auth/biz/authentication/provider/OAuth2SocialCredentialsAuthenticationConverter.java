@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: 社交认证 Converter </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/3/31 14:16
  */
 public class OAuth2SocialCredentialsAuthenticationConverter implements AuthenticationConverter {

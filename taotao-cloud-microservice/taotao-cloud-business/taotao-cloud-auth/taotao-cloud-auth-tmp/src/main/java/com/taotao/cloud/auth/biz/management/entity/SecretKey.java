@@ -34,7 +34,7 @@ import java.sql.Timestamp;
 /**
  * <p>Description: 秘钥缓存存储实体 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2021/9/30 18:17
  */
 public class SecretKey implements Serializable {

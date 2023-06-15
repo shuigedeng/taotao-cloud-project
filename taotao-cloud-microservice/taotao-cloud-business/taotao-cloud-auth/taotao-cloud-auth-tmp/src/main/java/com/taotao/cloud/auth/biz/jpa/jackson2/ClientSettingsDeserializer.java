@@ -40,7 +40,7 @@ import java.util.Map;
 /**
  * <p>Description: ClientSettingsDeserializer </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/10/24 23:18
  */
 public class ClientSettingsDeserializer extends JsonDeserializer<ClientSettings> {

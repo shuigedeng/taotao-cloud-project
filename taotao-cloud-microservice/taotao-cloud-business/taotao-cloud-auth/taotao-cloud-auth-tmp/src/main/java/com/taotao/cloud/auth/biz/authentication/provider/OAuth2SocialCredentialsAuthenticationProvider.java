@@ -64,7 +64,7 @@ import java.util.Set;
 /**
  * <p>Description: 社会化认证 Provider </p>
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/3/31 14:54
  */
 public class OAuth2SocialCredentialsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {

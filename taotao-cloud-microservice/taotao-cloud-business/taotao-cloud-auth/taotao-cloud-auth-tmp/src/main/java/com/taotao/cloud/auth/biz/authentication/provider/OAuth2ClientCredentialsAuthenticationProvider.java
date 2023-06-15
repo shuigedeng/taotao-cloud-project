@@ -53,7 +53,7 @@ import java.util.Set;
  * <p>
  * 用于支持 客户端权限验证 以及 支持 Refresh_Token
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/3/31 14:57
  */
 public class OAuth2ClientCredentialsAuthenticationProvider extends AbstractAuthenticationProvider {

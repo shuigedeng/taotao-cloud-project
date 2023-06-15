@@ -42,7 +42,7 @@ import java.io.IOException;
 /**
  * <p>Description: 设备验证成功后续逻辑处理器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/3 9:35
  */
 public class OAuth2DeviceVerificationResponseHandler extends SimpleUrlAuthenticationSuccessHandler {

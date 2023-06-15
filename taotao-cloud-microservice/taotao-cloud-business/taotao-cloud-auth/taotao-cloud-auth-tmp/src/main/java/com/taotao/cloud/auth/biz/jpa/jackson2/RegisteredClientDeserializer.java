@@ -46,7 +46,7 @@ import java.util.Set;
 /**
  * <p>Description: RegisteredClientDeserializer </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/10/24 15:11
  */
 public class RegisteredClientDeserializer extends JsonDeserializer<RegisteredClient> {

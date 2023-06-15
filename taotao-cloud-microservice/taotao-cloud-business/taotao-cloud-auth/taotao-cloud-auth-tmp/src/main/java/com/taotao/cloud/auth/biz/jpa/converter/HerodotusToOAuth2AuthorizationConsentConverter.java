@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: HerodotusAuthorizationConsent 转 OAuth2AuthorizationConsent 转换器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2023/5/21 21:03
  */
 public class HerodotusToOAuth2AuthorizationConsentConverter implements Converter<HerodotusAuthorizationConsent, OAuth2AuthorizationConsent> {

@@ -46,7 +46,7 @@ import java.util.Set;
 /**
  * <p>Description: OAuth2ClientAuthenticationTokenDeserializer </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/10/24 14:43
  */
 public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserializer<OAuth2ClientAuthenticationToken> {

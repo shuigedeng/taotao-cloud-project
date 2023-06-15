@@ -59,7 +59,7 @@ import java.util.Map;
  * <p>
  * 提取公共的用户通用基类，方便涉及用户校验的自定义认证模式使用
  *
- * @author : gengwei.zheng
+ *
  * @date : 2022/7/6 16:07
  * @see org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider
  */

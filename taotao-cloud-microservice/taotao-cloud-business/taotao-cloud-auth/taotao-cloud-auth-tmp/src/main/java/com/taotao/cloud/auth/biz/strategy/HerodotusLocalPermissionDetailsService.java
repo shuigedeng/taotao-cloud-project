@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * <p>Description: 本地权限服务 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/1 18:56
  */
 public class HerodotusLocalPermissionDetailsService extends AbstractStrategyPermissionDetailsService {

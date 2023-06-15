@@ -33,7 +33,7 @@ import org.springframework.security.authentication.AuthenticationDetailsSource;
 /**
  * <p>Description: 表单登录 Details 定义 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/4/12 10:41
  */
 public class OAuth2FormLoginWebAuthenticationDetailSource implements AuthenticationDetailsSource<HttpServletRequest, FormLoginWebAuthenticationDetails> {

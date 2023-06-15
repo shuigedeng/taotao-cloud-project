@@ -31,7 +31,7 @@ import com.taotao.cloud.auth.biz.management.compliance.event.AccountStatusChange
 /**
  * <p>Description: 用户状态变更处理器 </p>
  *
- * @author : gengwei.zheng
+ * 
  * @date : 2022/7/10 17:25
  */
 public class HerodotusAccountStatusChanger implements AccountStatusChanger {
