@@ -44,7 +44,6 @@ import org.springframework.stereotype.Service;
  * 
  * @date : 2022/7/8 19:25
  */
-@Service
 public class OAuth2AccountStatusManager {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2AccountStatusManager.class);
