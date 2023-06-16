@@ -1,0 +1,5 @@
+spring:
+  redis:
+    database: 11
+    host: localhost
+    port: 6379

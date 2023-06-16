@@ -18,11 +18,13 @@ package com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DefaultOneClickUserDetailsService implements OneClickUserDetailsService {
 
-    @Override
-    public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-        return null;
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
+	}
 }

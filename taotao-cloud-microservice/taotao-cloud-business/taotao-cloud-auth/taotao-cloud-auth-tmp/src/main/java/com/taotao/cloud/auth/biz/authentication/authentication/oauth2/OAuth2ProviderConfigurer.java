@@ -22,7 +22,7 @@ import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq.QQOauth
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq.QqOAuth2AccessTokenResponseHttpMessageConverter;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.wechat.WechatOAuth2UserService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.weibo.WeiboOAuth2UserService;
-import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.workwechat.WorkWechatOAuth2UserService;
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.wechatwork.WorkWechatOAuth2UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -20,6 +20,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +49,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test")
 public class MessagesController {
+
+	@Autowired
+	private JwtDecoder jwtDecoder;
 
     // @Autowired
     // private IFeignDictApi feignDictService;
@@ -88,9 +95,15 @@ public class MessagesController {
 	}
 
     @GetMapping(value = "/info")
-    public Result<Authentication> getUserInfo() {
+    public Object getUserInfo() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return Result.success(authentication);
+		Object principal = authentication.getPrincipal();
+
+		JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
+		String tokenValue = jwtAuthenticationToken.getToken().getTokenValue();
+		Jwt decode = jwtDecoder.decode(tokenValue);
+
+		return authentication.getPrincipal();
 	}
 
 }

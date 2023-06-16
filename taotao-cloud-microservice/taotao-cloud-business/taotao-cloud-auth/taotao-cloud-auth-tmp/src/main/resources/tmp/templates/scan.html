@@ -1,0 +1,42 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Scan</title>-->
+<!--</head>-->
+<!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--<body>-->
+<!--<div>-->
+<!--    <script th:inline="javascript">-->
+<!--        const uuid = [[${uuid}]];-->
+<!--        const userId = [[${userId}]];-->
+<!--        const valid =[[${valid}]];-->
+<!--        window.localStorage.setItem("once_token",[[${OTT}]].toString());-->
+<!--        // 扫码-->
+<!--        $(document).ready(function () {-->
+<!--            if (!valid) {-->
+<!--                alert("二维码已失效!");-->
+<!--            } else if (confirmAct()) {-->
+<!--                confirmLogin();-->
+<!--            }-->
+<!--        });-->
+
+<!--        // 确认按钮-->
+<!--        function confirmAct() {-->
+<!--            if (confirm('确认登录?')) {-->
+<!--                alert("登录成功");-->
+<!--                return true;-->
+<!--            }-->
+<!--            return false;-->
+<!--        }-->
+<!--        // 确认请求-->
+<!--        function confirmLogin() {-->
+<!--            $.ajax({-->
+<!--                url: "/login/confirm/" + uuid + "/" + userId,-->
+<!--                type: "get",-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

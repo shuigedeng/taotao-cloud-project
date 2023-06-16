@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: "Bookman Old Style", STSong, Helvetica, Tahoma, Arial, sans-serif
+        }
+    </style>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<body>
+<div>
+    <h1>欢迎访问</h1>
+    <div id="current_user" style="display: none"></div>
+    <div>
+        <a id="login" href="/login/getQrCodeImg">登录</a>
+    </div>
+    <script>
+        const access_token = window.localStorage.getItem("access_token");
+        if(access_token){
+            getUserMsg()
+        }
+        function getUserMsg() {
+            $.ajax({
+                headers: {
+                    "access_token": access_token
+                },
+                url: "/getUser",
+                type: "get",
+                success: function (response) {
+                    if (response["code"] !== "500") {
+                        document.getElementById("login").style.display = "none";
+                        document.getElementById("current_user").innerText = response["data"]["userName"];
+                        document.getElementById("current_user").style.display = "block";
+                    }
+                }
+            });
+        }
+    </script>
+</div>
+</body>
+</html>

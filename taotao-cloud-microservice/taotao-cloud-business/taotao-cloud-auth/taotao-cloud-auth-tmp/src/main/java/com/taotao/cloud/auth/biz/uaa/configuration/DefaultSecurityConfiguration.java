@@ -29,11 +29,10 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGeneratorImpl;
-import com.taotao.cloud.auth.biz.authentication.authentication.LoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.authentication.LoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.authentication.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.authentication.gestures.service.GesturesUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.authentication.mp.service.MpUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.authentication.wechatmp.service.WechatMpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.DelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.OAuth2ProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.Oauth2LoginAuthenticationSuccessHandler;
@@ -46,7 +45,6 @@ import com.taotao.cloud.auth.biz.management.processor.HerodotusClientDetailsServ
 import com.taotao.cloud.auth.biz.management.processor.HerodotusUserDetailsService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.authorization.customizer.HerodotusTokenStrategyConfigurer;
@@ -161,12 +159,7 @@ public class DefaultSecurityConfiguration {
 			})
 			// 本机号码一键登录
 			.oneClickLogin(oneClickLoginConfigurer -> {
-				oneClickLoginConfigurer.oneClickUserDetailsService(new OneClickUserDetailsService() {
-					@Override
-					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-						return null;
-					}
-				});
+
 			})
 			// 手机扫码登录
 			.qrcodeLogin(qrcodeLoginConfigurer -> {
@@ -175,8 +168,8 @@ public class DefaultSecurityConfiguration {
 			.phoneLogin(phoneLoginConfigurer -> {
 			})
 			// 微信公众号登录
-			.mpLogin(mpLoginConfigurer -> {
-				mpLoginConfigurer.mpUserDetailsService(new MpUserDetailsService() {
+			.wechatMpLogin(mpLoginConfigurer -> {
+				mpLoginConfigurer.mpUserDetailsService(new WechatMpUserDetailsService() {
 					@Override
 					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
 						return null;
@@ -184,7 +177,7 @@ public class DefaultSecurityConfiguration {
 				});
 			})
 			// 小程序登录 同时支持多个小程序
-			.miniAppLogin(miniAppLoginConfigurer -> {
+			.wechatMiniAppLogin(miniAppLoginConfigurer -> {
 			})
 			.and()
 			// **************************************oauth2登录配置***********************************************

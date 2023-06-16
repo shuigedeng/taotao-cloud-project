@@ -35,10 +35,13 @@ GET http://localhost:9800/oauth/authorize?client_id=third_client_1&client_secret
 
 ###
 GET http://127.0.0.1:33337/oauth2/authorization/gitee
-# 回调  GET http://127.0.0.1:33337/login/oauth2/code/gitee?code=4d65c20d3bb91db5ea90e0509a51a129c601f7ee80284977b635bb99dba5321b&state=of6eQTbAubGtINnxNVsuu7zyEfjnjlfz7qe2uIAFHUU%3D
+# 回调  GET http://127.0.0.1:33337/login/oauth2/code/gitee?code=3d0035d79d97772c0410b5efc9b2ed7b0ffa63bbe965a97b438e2b1733793d3c&state=9hMgjT0EFbpbSJogHOw8BYeDQX5xmh8hMQe7N1iXAmc%3D
 
 
 ###
 GET http://127.0.0.1:33337/oauth2/authorization/github
 # 回调  GET http://127.0.0.1:33337/login/oauth2/code/github?code=1ad7eb43032c79fadb8f&state=7X2neWrwO2CCpsfnlM0M6HCNnHupp75RCoW1nihFNHQ%3D
 
+###
+GET http://127.0.0.1:33337/oauth2/authorization/ttauth
+# 回调  GET http://127.0.0.1:33337/login/oauth2/code/ttauth?code=AP4fEveobx91ix3ByaSg15dqfBEoHmwXm4_ARs0jK5wW1emSoqFD0MSIFYQBBmImNd9AuXRno5oshRJcwRjBEftPMVMlt21M5Ogiox8z8ynkC6GVYlyXj9TEH6zyFIPy&state=UfUgHky7oOnLha37Lr4fmaNUV4hXdeDakVqpMNQ-evs%3D
