@@ -17,23 +17,20 @@
 package com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Data
 public class QQOAuth2User implements OAuth2User {
 
     // 统一赋予USER角色
-    private List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
-
-    private Map<String, Object> attributes;
+	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
+	private Map<String, Object> attributes = new HashMap<>();
+	private String nameAttributeKey;
 
     private String nickname;
 
@@ -63,23 +60,12 @@ public class QQOAuth2User implements OAuth2User {
 
     @Override
     public Map<String, Object> getAttributes() {
-        if (this.attributes == null) {
-            this.attributes = new HashMap<>();
-            this.attributes.put("nickname", this.getNickname());
-            this.attributes.put("figureUrl30", this.getFigureUrl30());
-            this.attributes.put("figureUrl50", this.getFigureUrl50());
-            this.attributes.put("figureUrl100", this.getFigureUrl100());
-            this.attributes.put("qqFigureUrl40", this.getQqFigureUrl40());
-            this.attributes.put("qqFigureUrl100", this.getQqFigureUrl100());
-            this.attributes.put("gender", this.getGender());
-            this.attributes.put("openId", this.getOpenId());
-        }
         return attributes;
     }
 
     @Override
     public String getName() {
-        return this.nickname;
+        return this.nameAttributeKey;
     }
 
 }

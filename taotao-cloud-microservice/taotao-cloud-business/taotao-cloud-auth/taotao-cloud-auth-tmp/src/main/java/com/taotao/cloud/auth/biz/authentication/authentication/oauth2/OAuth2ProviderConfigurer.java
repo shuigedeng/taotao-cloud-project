@@ -17,6 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.authentication.oauth2;
 
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.gitee.GiteeOAuth2UserService;
+import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.github.GithubOAuth2UserService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq.QQOauth2UserService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.qq.QqOAuth2AccessTokenResponseHttpMessageConverter;
 import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.wechat.WechatOAuth2UserService;
@@ -168,7 +169,11 @@ public class OAuth2ProviderConfigurer extends AbstractHttpConfigurer<OAuth2Provi
 			tokenResponseHttpMessageConverter,
 			// 解析qq的AccessToken响应信息转换器
 			new QqOAuth2AccessTokenResponseHttpMessageConverter(
-				MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, new MediaType("application", "*+json"))));
+				MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN,
+				new MediaType("application", "*+json"
+				)
+			)
+		));
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 
 		DefaultAuthorizationCodeTokenResponseClient tokenResponseClient =
@@ -185,6 +190,7 @@ public class OAuth2ProviderConfigurer extends AbstractHttpConfigurer<OAuth2Provi
 		oAuth2UserServiceMap.put("web", new WeiboOAuth2UserService());
 		oAuth2UserServiceMap.put("qq", new QQOauth2UserService());
 		oAuth2UserServiceMap.put("gitee", new GiteeOAuth2UserService());
+		oAuth2UserServiceMap.put("github", new GithubOAuth2UserService());
 
 		httpSecurity.setSharedObject(ClientRegistrationRepository.class, delegateClientRegistrationRepository);
 

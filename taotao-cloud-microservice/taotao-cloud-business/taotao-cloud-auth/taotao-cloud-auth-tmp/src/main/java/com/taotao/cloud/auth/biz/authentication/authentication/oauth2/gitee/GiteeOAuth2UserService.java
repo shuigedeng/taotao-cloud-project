@@ -20,6 +20,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -44,22 +45,29 @@ public class GiteeOAuth2UserService implements OAuth2UserService<OAuth2UserReque
 	}
 
 	@Override
-	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-		String access_token = userRequest.getAccessToken().getTokenValue();
-		System.out.println(access_token);
+	public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
+		ClientRegistration clientRegistration = oAuth2UserRequest.getClientRegistration();
+
+		String userNameAttributeName = clientRegistration
+			.getProviderDetails()
+			.getUserInfoEndpoint()
+			.getUserNameAttributeName();
+
+		String accessToken = oAuth2UserRequest.getAccessToken().getTokenValue();
 
 		Map<String, String> params = new HashMap<>();
-		params.put("access_token", access_token);
+		params.put("access_token", accessToken);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36");
 
 		HttpEntity<Object> entity = new HttpEntity<>(httpHeaders);
 
-		String url = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri() +
+		String url = oAuth2UserRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri() +
 			"?access_token={access_token}";
 
-		return restOperations.exchange(url, HttpMethod.GET, entity, GiteeOAuth2User.class, params).getBody();
-
+		GiteeOAuth2User giteeOAuth2User = restOperations.exchange(url, HttpMethod.GET, entity, GiteeOAuth2User.class, params).getBody();
+		giteeOAuth2User.setNameAttributeKey(userNameAttributeName);
+		return giteeOAuth2User;
 	}
 }

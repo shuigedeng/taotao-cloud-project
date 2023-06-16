@@ -17,6 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.authentication.oauth2.gitee;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,9 +25,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,6 +33,12 @@ public class GiteeOAuth2User implements OAuth2User, Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+	// 统一赋予USER角色
+	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
+	private Map<String, Object> attributes = new HashMap<>();
+	private String nameAttributeKey;
+
 
     private Integer id;
     private String login;
@@ -100,16 +105,16 @@ public class GiteeOAuth2User implements OAuth2User, Serializable {
 
     @Override
     public String getName() {
-        return name;
+        return nameAttributeKey;
     }
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+        return attributes;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 }

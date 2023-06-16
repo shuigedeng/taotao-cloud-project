@@ -101,8 +101,10 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                     null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
-        return getResponse(userRequest).getBody();
-    }
+		WechatOAuth2User wechatOAuth2User = getResponse(userRequest).getBody();
+		wechatOAuth2User.setNameAttributeKey(openid);
+		return wechatOAuth2User;
+	}
 
     /**
      * 获取微信用户信息借鉴{@link OAuth2AccessTokenResponseClient} <a
