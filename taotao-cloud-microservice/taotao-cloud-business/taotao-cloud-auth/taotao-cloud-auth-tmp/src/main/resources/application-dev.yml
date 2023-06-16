@@ -789,7 +789,19 @@ spring:
             redirect-uri: https://xxx/login/oauth2/code/qq
             scope: get_user_info
             client-authentication-method: post
+          ttauth:
+            client-id: 35026971d1fa406aaa150299d4f7bb39
+            client-secret: 07e2d86f2b0641c4bb03e512a3eb0eac
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8090/authorized
+            scope: message.read
         provider:
+          ttauth:
+            authorization-uri: http://127.0.0.1:33337/oauth2/authorize
+            token-uri: http://127.0.0.1:33337/oauth2/token
+            user-info-uri: http://127.0.0.1:33337/api/test/user
+            user-name-attribute: id
+            jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
             token-uri: https://www.googleapis.com/oauth2/v4/token

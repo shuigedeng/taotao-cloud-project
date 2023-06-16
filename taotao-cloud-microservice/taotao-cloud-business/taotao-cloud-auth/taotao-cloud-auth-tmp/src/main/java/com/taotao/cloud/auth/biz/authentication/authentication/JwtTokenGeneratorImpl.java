@@ -18,10 +18,12 @@ package com.taotao.cloud.auth.biz.authentication.authentication;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import io.jsonwebtoken.Header;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 
@@ -49,6 +51,7 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
 
 	@Override
 	public OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails) {
+		//使用HS256算法签名，PRIVATE_KEY为签名密钥 //生成签名密钥
 		JwsHeader jwsHeader = JwsHeader
 			.with(SignatureAlgorithm.RS256)
 			.type("JWT")
@@ -64,11 +67,54 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
 			.map(GrantedAuthority::getAuthority)
 			.collect(Collectors.toSet());
 
-		Instant expiresAt = issuedAt.plusSeconds(5 * 60);
+		Instant expiresAt = issuedAt.plusSeconds(5 * 60 * 60);
+		JwtClaimsSet claimsSet = JwtClaimsSet
+			.builder()
+			//签发者
+			.issuer("https://blog.taotaocloud.top/")
+			.subject(userDetails.getUsername())
+			//过期时间
+			.expiresAt(expiresAt)
+			.audience(Arrays.asList("client1", "client2"))
+			.issuedAt(issuedAt)
+			//自定义有效载荷部分
+			.claim("scope", scopes)
+			.build();
+
+		Jwt jwt = new NimbusJwtEncoder(jwkSource)
+			.encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
+
+		return OAuth2AccessTokenResponse
+			.withToken(jwt.getTokenValue())
+			.tokenType(OAuth2AccessToken.TokenType.BEARER)
+			.expiresIn(expiresAt.getEpochSecond())
+			.scopes(scopes)
+			.refreshToken(UUID.randomUUID().toString())
+			.build();
+	}
+
+	@Override
+	public OAuth2AccessTokenResponse socialTokenResponse(OAuth2User oAuth2User) {
+		JwsHeader jwsHeader = JwsHeader
+			.with(SignatureAlgorithm.RS256)
+			.type("JWT")
+			.build();
+
+		Instant issuedAt = Clock
+			.system(ZoneId.of("Asia/Shanghai"))
+			.instant();
+
+		Set<String> scopes = oAuth2User
+			.getAuthorities()
+			.stream()
+			.map(GrantedAuthority::getAuthority)
+			.collect(Collectors.toSet());
+
+		Instant expiresAt = issuedAt.plusSeconds(5 * 60 * 60);
 		JwtClaimsSet claimsSet = JwtClaimsSet
 			.builder()
 			.issuer("https://blog.taotaocloud.top/")
-			.subject(userDetails.getUsername())
+			.subject(oAuth2User.getName())
 			.expiresAt(expiresAt)
 			.audience(Arrays.asList("client1", "client2"))
 			.issuedAt(issuedAt)

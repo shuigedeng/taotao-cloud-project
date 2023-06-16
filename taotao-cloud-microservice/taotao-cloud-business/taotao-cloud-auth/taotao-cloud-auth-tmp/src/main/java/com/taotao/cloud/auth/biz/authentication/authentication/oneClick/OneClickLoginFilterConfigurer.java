@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.authentication.oneClick;
 
 import com.taotao.cloud.auth.biz.authentication.authentication.AbstractLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.authentication.LoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service.OneClickLoginService;
 import com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service.OneClickUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.authentication.LoginAuthenticationSuccessHandler;
@@ -29,16 +30,24 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
+/**
+ * 一键登录过滤器配置
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-16 14:51:54
+ */
 public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractLoginFilterConfigurer<
-                H, OneClickLoginFilterConfigurer<H>, OneClickAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
+                H, OneClickLoginFilterConfigurer<H>, OneClickLoginAuthenticationFilter, LoginFilterSecurityConfigurer<H>> {
 
     private OneClickUserDetailsService oneClickUserDetailsService;
-
+    private OneClickLoginService oneClickLoginService;
     private JwtTokenGenerator jwtTokenGenerator;
 
     public OneClickLoginFilterConfigurer(LoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(securityConfigurer, new OneClickAuthenticationFilter(), "/login/oneclick");
+        super(securityConfigurer, new OneClickLoginAuthenticationFilter(),
+			"/login/oneclick");
     }
 
     public OneClickLoginFilterConfigurer<H> oneClickUserDetailsService(
@@ -46,6 +55,12 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         this.oneClickUserDetailsService = oneClickUserDetailsService;
         return this;
     }
+
+	public OneClickLoginFilterConfigurer<H> oneClickLoginService(
+		OneClickLoginService oneClickLoginService) {
+		this.oneClickLoginService = oneClickLoginService;
+		return this;
+	}
 
     public OneClickLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
         this.jwtTokenGenerator = jwtTokenGenerator;
@@ -66,7 +81,12 @@ public class OneClickLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
                 : getBeanOrNull(applicationContext, OneClickUserDetailsService.class);
         Assert.notNull(oneClickUserDetailsService, "oneClickUserDetailsService is required");
 
-        return new OneClickAuthenticationProvider(oneClickUserDetailsService);
+		OneClickLoginService oneClickLoginService = this.oneClickLoginService != null
+			? this.oneClickLoginService
+			: getBeanOrNull(applicationContext, OneClickLoginService.class);
+		Assert.notNull(oneClickLoginService, "oneClickLoginService is required");
+
+        return new OneClickLoginAuthenticationProvider(oneClickUserDetailsService, oneClickLoginService);
     }
 
     @Override

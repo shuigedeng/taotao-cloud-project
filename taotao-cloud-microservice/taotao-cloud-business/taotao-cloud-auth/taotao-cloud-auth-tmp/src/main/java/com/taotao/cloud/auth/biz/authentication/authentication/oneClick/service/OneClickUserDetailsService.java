@@ -16,17 +16,12 @@
 
 package com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service;
 
+import com.taotao.cloud.auth.biz.authentication.authentication.UserDetailsRegisterService;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public interface OneClickUserDetailsService {
+public interface OneClickUserDetailsService  extends UserDetailsService, UserDetailsRegisterService {
 
-    /**
-     * load user by phone
-     *
-     * @param phone phone
-     * @return userDetails
-     * @throws UsernameNotFoundException not found user
-     */
-    UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException;
+
 }

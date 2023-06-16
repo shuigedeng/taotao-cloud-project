@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.authentication;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 /**
  * jwt token generator
@@ -25,8 +26,10 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenRespon
  * @author n1
  * @since 2021 /3/27 13:33
  */
-@FunctionalInterface
 public interface JwtTokenGenerator {
 
     OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails);
+
+
+    OAuth2AccessTokenResponse socialTokenResponse(OAuth2User oAuth2User);
 }

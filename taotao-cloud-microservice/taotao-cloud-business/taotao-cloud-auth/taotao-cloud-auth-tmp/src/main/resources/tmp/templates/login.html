@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: "Bookman Old Style", STSong, Helvetica, Tahoma, Arial, sans-serif
+        }
+    </style>
+</head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<body>
+<div>
+    <div>
+        <img th:src="'data:image/png;base64,' + ${QrCode}"/>
+<!--        <img src="/avatar.jpg" />-->
+
+    </div>
+    <div id="status"></div>
+
+    <script th:inline="javascript">
+        let stateTag = document.getElementById('status');
+        stateTag.innerText = "待扫描";
+        let uuid = [[${uuid}]];
+        let currentStatus = 0;
+        getQrStatus()
+
+        function getQrStatus() {
+            $.ajax({
+                type: "get",
+                url: "/login/getQrCodeStatus",
+                data: {
+                    uuid: uuid,
+                    currentStatus: currentStatus
+                },
+                success: function (response) {
+                    if (response["data"] != null) {
+                        // 如果未扫码则继续轮询
+                        currentStatus = response["data"]["status"];
+                        stateTag.innerText = response["data"]["message"];
+                        if (currentStatus === 0 || currentStatus === 1) {
+                            if(currentStatus === 1){
+                                $('img').attr('src', response["data"]["avatar"]);
+                                // $('img').attr('src', '/avatar.jpg');
+                            }
+                            getQrStatus();
+                        } else if (currentStatus === 2) {
+                            const token = response["data"]["access_token"];
+                            window.localStorage.setItem("access_token", token);
+                            window.location.href = "/index";
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+</div>
+</body>
+</html>

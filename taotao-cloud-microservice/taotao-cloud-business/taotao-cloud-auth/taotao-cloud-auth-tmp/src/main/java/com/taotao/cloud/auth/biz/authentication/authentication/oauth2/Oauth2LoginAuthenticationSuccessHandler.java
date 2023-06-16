@@ -24,6 +24,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
@@ -37,7 +38,7 @@ import java.io.IOException;
  */
 public class Oauth2LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	private JwtTokenGenerator jwtTokenGenerator;
+	private final JwtTokenGenerator jwtTokenGenerator;
 
 	public Oauth2LoginAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
 		this.jwtTokenGenerator = jwtTokenGenerator;
@@ -49,6 +50,6 @@ public class Oauth2LoginAuthenticationSuccessHandler implements AuthenticationSu
 		throws IOException, ServletException {
 
 		LogUtils.error("第三方用户认证成功", authentication);
-		ResponseUtils.success(response, jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
+		ResponseUtils.success(response, jwtTokenGenerator.socialTokenResponse((OAuth2User) authentication.getPrincipal()));
 	}
 }
