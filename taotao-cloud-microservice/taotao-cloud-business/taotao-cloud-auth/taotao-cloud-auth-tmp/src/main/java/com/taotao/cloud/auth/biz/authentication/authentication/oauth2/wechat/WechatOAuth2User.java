@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.auth.biz.authentication.authentication.oauth2.wechat;
 
+import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -23,13 +25,15 @@ import java.util.*;
 
 /**
  * 微信授权的OAuth2User用户信息
- *
- * 
- * @since 2021/8/12 17:37
  */
+@Data
 public class WechatOAuth2User implements OAuth2User {
 
-    private Set<GrantedAuthority> authorities;
+	// 统一赋予USER角色
+	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
+	private Map<String, Object> attributes = new HashMap<>();
+	private String nameAttributeKey;
+
     private String openid;
     private String nickname;
     private Integer sex;
@@ -43,7 +47,7 @@ public class WechatOAuth2User implements OAuth2User {
     @Override
     public Map<String, Object> getAttributes() {
         // todo 这里放一些有用的额外参数
-        return Collections.emptyMap();
+        return attributes;
     }
 
     @Override
@@ -55,82 +59,6 @@ public class WechatOAuth2User implements OAuth2User {
     @Override
     public String getName() {
         // todo 根据业务需要调整
-        return openid;
-    }
-
-    public void setAuthorities(Set<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getHeadimgurl() {
-        return headimgurl;
-    }
-
-    public void setHeadimgurl(String headimgurl) {
-        this.headimgurl = headimgurl;
-    }
-
-    public List<String> getPrivilege() {
-        return privilege;
-    }
-
-    public void setPrivilege(List<String> privilege) {
-        this.privilege = privilege;
-    }
-
-    public String getUnionid() {
-        return unionid;
-    }
-
-    public void setUnionid(String unionid) {
-        this.unionid = unionid;
+        return nameAttributeKey;
     }
 }

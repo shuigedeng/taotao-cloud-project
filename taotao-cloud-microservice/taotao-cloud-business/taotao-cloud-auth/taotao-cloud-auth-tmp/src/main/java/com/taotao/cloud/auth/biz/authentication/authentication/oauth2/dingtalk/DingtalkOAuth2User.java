@@ -14,47 +14,93 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.authentication.oauth2.workwechat;
+package com.taotao.cloud.auth.biz.authentication.authentication.oauth2.dingtalk;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 @Data
-public class WorkWechatOAuth2User implements OAuth2User {
+@EqualsAndHashCode(callSuper = false)
+public class DingtalkOAuth2User implements OAuth2User, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
 	// 统一赋予USER角色
 	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
 	private Map<String, Object> attributes = new HashMap<>();
 	private String nameAttributeKey;
 
-    private Integer errcode;
-    private String errmsg;
 
-    @JsonAlias("OpenId")
-    private String openId;
+	private String accessToken;
 
-    @JsonAlias("UserId")
-    private String userId;
+	/**
+	 * 所选企业corpId
+	 */
+	private String corpId;
+
+	/**
+	 * 超时时间
+	 */
+	private Long expireIn;
+
+	private String refreshToken;
+
+	/**
+	 * 头像url
+	 */
+	private String avatarUrl;
+
+	/**
+	 * 个人邮箱
+	 */
+	private String email;
+
+	/**
+	 * 手机号
+	 */
+	private String mobile;
+
+	/**
+	 * 昵称
+	 */
+	private String nick;
+
+	/**
+	 * openId
+	 */
+	private String openId;
+
+	/**
+	 * 手机号对应的国家号
+	 */
+	private String stateCode;
+
+	/**
+	 * unionId
+	 */
+	private String unionId;
+
+    @Override
+    public String getName() {
+        return nameAttributeKey;
+    }
 
     @Override
     public Map<String, Object> getAttributes() {
-        // todo 这里放一些有用的额外参数
         return attributes;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // todo 微信用户你想赋权的可以在这里或者set方法中实现。
-        return this.authorities;
-    }
-
-    @Override
-    public String getName() {
-        return Optional.ofNullable(userId).orElse(openId);
+        return authorities;
     }
 }

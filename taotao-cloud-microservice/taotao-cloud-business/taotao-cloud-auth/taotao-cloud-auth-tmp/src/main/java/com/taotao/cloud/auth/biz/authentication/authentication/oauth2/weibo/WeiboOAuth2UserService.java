@@ -16,11 +16,12 @@
 
 package com.taotao.cloud.auth.biz.authentication.authentication.oauth2.weibo;
 
-import jakarta.annotation.Resource;
+import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -28,28 +29,34 @@ import java.util.Map;
 
 public class WeiboOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    @Resource
-    private RestTemplate restTemplate;
+	private final RestOperations restOperations;
 
-    @Override
-    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
-        Map<String, Object> additionalParameters = oAuth2UserRequest.getAdditionalParameters();
-        String uid = additionalParameters.get("uid").toString();
+	public WeiboOAuth2UserService() {
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
+		this.restOperations = restTemplate;
+	}
 
-        String access_token = oAuth2UserRequest.getAccessToken().getTokenValue();
+	@Override
+	public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
+		Map<String, Object> additionalParameters = oAuth2UserRequest.getAdditionalParameters();
+		String uid = additionalParameters.get("uid").toString();
 
-        Map<String, String> params = new HashMap<>();
-        params.put("uid", uid);
-        params.put("access_token", access_token);
+		String accessToken = oAuth2UserRequest.getAccessToken().getTokenValue();
 
-        String baseUri = oAuth2UserRequest
-                .getClientRegistration()
-                .getProviderDetails()
-                .getUserInfoEndpoint()
-                .getUri();
-        String userInfoUri = baseUri + "?uid={uid}" + "&access_token={access_token}";
-        System.out.println(userInfoUri);
+		Map<String, String> params = new HashMap<>();
+		params.put("uid", uid);
+		params.put("access_token", accessToken);
 
-        return restTemplate.getForObject(userInfoUri, WeiboOAuth2User.class, params);
-    }
+		String baseUri = oAuth2UserRequest
+			.getClientRegistration()
+			.getProviderDetails()
+			.getUserInfoEndpoint()
+			.getUri();
+		String userInfoUri = baseUri + "?uid={uid}" + "&access_token={access_token}";
+
+		WeiboOAuth2User weiboOAuth2User = restOperations.getForObject(userInfoUri, WeiboOAuth2User.class, params);
+		weiboOAuth2User.setNameAttributeKey(weiboOAuth2User.getIdstr());
+		return weiboOAuth2User;
+	}
 }

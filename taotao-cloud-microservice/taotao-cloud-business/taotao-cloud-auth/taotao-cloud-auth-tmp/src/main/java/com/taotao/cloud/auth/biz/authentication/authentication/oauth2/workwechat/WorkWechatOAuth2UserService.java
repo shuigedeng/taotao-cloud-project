@@ -62,7 +62,8 @@ public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2User
     private static final String MISSING_CODE_ERROR = "missing_code_attribute";
     private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE = "invalid_user_info_response";
     private static final ParameterizedTypeReference<WorkWechatOAuth2User> OAUTH2_USER_OBJECT =
-            new ParameterizedTypeReference<WorkWechatOAuth2User>() {};
+		new ParameterizedTypeReference<>() {
+		};
     private final RestOperations restOperations;
 
     /** Instantiates a new Wechat o auth 2 user service. */

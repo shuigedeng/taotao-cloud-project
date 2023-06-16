@@ -25,13 +25,15 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -40,102 +42,113 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public class QQOauth2UserService extends DefaultOAuth2UserService {
+public class QQOauth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    private static final String QQ = "qq";
-    private static final String QQ_OPEN_ID_URL = "https://graph.qq.com/oauth2.0/me";
+	private static final String QQ_OPEN_ID_URL = "https://graph.qq.com/oauth2.0/me";
 
-    private final RestTemplate restTemplate = new RestTemplate();
+	private final RestOperations restOperations;
+	private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+	public QQOauth2UserService() {
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
+		this.restOperations = restTemplate;
+	}
 
-    @Override
-    public OAuth2User loadUser(OAuth2UserRequest userRequest) {
-        ClientRegistration clientRegistration = userRequest.getClientRegistration();
-        String registrationId = clientRegistration.getRegistrationId();
+	@Override
+	public OAuth2User loadUser(OAuth2UserRequest userRequest) {
+		ClientRegistration clientRegistration = userRequest.getClientRegistration();
+		String registrationId = clientRegistration.getRegistrationId();
 
-        // 获取qq用户信息的流程很奇葩需要我们自定义
-        if (QQ.equals(registrationId)) {
-            String tokenValue = userRequest.getAccessToken().getTokenValue();
-            // openId请求
-            RequestEntity<?> openIdRequest = RequestEntity.get(UriComponentsBuilder.fromUriString(QQ_OPEN_ID_URL)
-                            .queryParam("access_token", tokenValue)
-                            .build()
-                            .toUri())
-                    .build();
+		String tokenValue = userRequest.getAccessToken().getTokenValue();
+		// openId请求
+		RequestEntity<?> openIdRequest = RequestEntity.get(UriComponentsBuilder.fromUriString(QQ_OPEN_ID_URL)
+				.queryParam("access_token", tokenValue)
+				.build()
+				.toUri())
+			.build();
 
-            // openId响应
-            ResponseEntity<String> openIdResponse =
-                    restTemplate.exchange(openIdRequest, new ParameterizedTypeReference<String>() {});
+		// openId响应
+		ResponseEntity<String> openIdResponse =
+			restOperations.exchange(openIdRequest, new ParameterizedTypeReference<String>() {
+			});
 
-            LogUtils.info("qq的openId响应信息：{}", openIdResponse);
+		LogUtils.info("qq的openId响应信息：{}", openIdResponse);
 
-            // openId响应是类似callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} );这样的字符串
-            String openId = null;
-            try {
-                openId = extractQqOpenId(Objects.requireNonNull(openIdResponse.getBody()));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+		// openId响应是类似callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} );这样的字符串
+		String openId = null;
+		try {
+			openId = extractQqOpenId(Objects.requireNonNull(openIdResponse.getBody()));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 
-            // userInfo请求
-            RequestEntity<?> userInfoRequest = RequestEntity.get(UriComponentsBuilder.fromUriString(clientRegistration
-                                    .getProviderDetails()
-                                    .getUserInfoEndpoint()
-                                    .getUri())
-                            .queryParam("access_token", tokenValue)
-                            .queryParam("openid", openId)
-                            .queryParam("oauth_consumer_key", clientRegistration.getClientId())
-                            .build()
-                            .toUri())
-                    .build();
+		// userInfo请求
+		RequestEntity<?> userInfoRequest = RequestEntity.get(UriComponentsBuilder.fromUriString(clientRegistration
+					.getProviderDetails()
+					.getUserInfoEndpoint()
+					.getUri())
+				.queryParam("access_token", tokenValue)
+				.queryParam("openid", openId)
+				.queryParam("oauth_consumer_key", clientRegistration.getClientId())
+				.build()
+				.toUri())
+			.build();
 
-            // userInfo响应
-            ResponseEntity<String> userInfoResponse =
-                    restTemplate.exchange(userInfoRequest, new ParameterizedTypeReference<String>() {});
+		// userInfo响应
+		ResponseEntity<String> userInfoResponse =
+			restOperations.exchange(userInfoRequest, new ParameterizedTypeReference<String>() {
+			});
 
-            LogUtils.info("qq的userInfo响应信息：{}", userInfoResponse);
+		LogUtils.info("qq的userInfo响应信息：{}", userInfoResponse);
 
-            String userNameAttributeName = clientRegistration
-                    .getProviderDetails()
-                    .getUserInfoEndpoint()
-                    .getUserNameAttributeName();
-            Map<String, Object> userAttributes = null;
-            try {
-                userAttributes = extractQqUserInfo(Objects.requireNonNull(userInfoResponse.getBody()));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            Set<GrantedAuthority> authorities = new LinkedHashSet<>();
-            authorities.add(new OAuth2UserAuthority(userAttributes));
-            OAuth2AccessToken token = userRequest.getAccessToken();
-            for (String authority : token.getScopes()) {
-                authorities.add(new SimpleGrantedAuthority("SCOPE_" + authority));
-            }
-            return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
-        }
-        return super.loadUser(userRequest);
-    }
+		String userNameAttributeName = clientRegistration
+			.getProviderDetails()
+			.getUserInfoEndpoint()
+			.getUserNameAttributeName();
+		Map<String, Object> userAttributes = null;
+		try {
+			userAttributes = extractQqUserInfo(Objects.requireNonNull(userInfoResponse.getBody()));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		Set<GrantedAuthority> authorities = new LinkedHashSet<>();
+		authorities.add(new OAuth2UserAuthority(userAttributes));
+		OAuth2AccessToken token = userRequest.getAccessToken();
+		for (String authority : token.getScopes()) {
+			authorities.add(new SimpleGrantedAuthority("SCOPE_" + authority));
+		}
 
-    /**
-     * 提取qq的openId
-     *
-     * @param openIdResponse qq的openId响应字符串
-     * @return qq的openId
-     */
-    private String extractQqOpenId(String openIdResponse) throws JsonProcessingException {
-        String openId = openIdResponse.substring(openIdResponse.indexOf('(') + 1, openIdResponse.indexOf(')'));
-        Map<String, String> map = objectMapper.readValue(openId, new TypeReference<Map<String, String>>() {});
-        return map.get("openid");
-    }
+		QQOAuth2User qqoAuth2User = objectMapper.convertValue(userAttributes, QQOAuth2User.class);
+		qqoAuth2User.setAttributes(userAttributes);
+		qqoAuth2User.setAuthorities(authorities);
+		qqoAuth2User.setNameAttributeKey(userNameAttributeName);
 
-    /**
-     * 提取qq的用户信息
-     *
-     * @param userInfoResponse qq的用户信息响应字符串
-     * @return qq的用户信息
-     */
-    private Map<String, Object> extractQqUserInfo(String userInfoResponse) throws JsonProcessingException {
-        return objectMapper.readValue(userInfoResponse, new TypeReference<Map<String, Object>>() {});
-    }
+//		return new DefaultOAuth2User(authorities, userAttributes, userNameAttributeName);
+		return qqoAuth2User;
+	}
+
+	/**
+	 * 提取qq的openId
+	 *
+	 * @param openIdResponse qq的openId响应字符串
+	 * @return qq的openId
+	 */
+	private String extractQqOpenId(String openIdResponse) throws JsonProcessingException {
+		String openId = openIdResponse.substring(openIdResponse.indexOf('(') + 1, openIdResponse.indexOf(')'));
+		Map<String, String> map = objectMapper.readValue(openId, new TypeReference<>() {
+		});
+		return map.get("openid");
+	}
+
+	/**
+	 * 提取qq的用户信息
+	 *
+	 * @param userInfoResponse qq的用户信息响应字符串
+	 * @return qq的用户信息
+	 */
+	private Map<String, Object> extractQqUserInfo(String userInfoResponse) throws JsonProcessingException {
+		return objectMapper.readValue(userInfoResponse, new TypeReference<>() {
+		});
+	}
 }
