@@ -69,7 +69,7 @@ public class OAuth2AccountStatusManager {
 			return user.getUserId();
 		}
 
-		log.warn("[Herodotus] |- Can not found the userid for [{}]", username);
+		log.info("[Herodotus] |- Can not found the userid for [{}]", username);
 		return null;
 	}
 

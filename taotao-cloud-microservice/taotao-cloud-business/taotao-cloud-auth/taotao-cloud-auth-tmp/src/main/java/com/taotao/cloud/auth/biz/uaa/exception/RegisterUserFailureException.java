@@ -28,8 +28,6 @@ import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 
 /**
  * 注册用户失败
- * @author YongWu zheng
- * @version V1.0  Created by 2020/5/4 9:40
  */
 public class RegisterUserFailureException extends AbstractResponseJsonAuthenticationException {
 

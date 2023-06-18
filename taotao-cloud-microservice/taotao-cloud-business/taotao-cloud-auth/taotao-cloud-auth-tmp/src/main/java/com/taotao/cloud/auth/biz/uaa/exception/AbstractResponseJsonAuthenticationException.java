@@ -30,8 +30,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 
 /**
  * 继承此类后, 如果异常被 {@link SimpleUrlAuthenticationFailureHandler} 处理 Response 会返回 Json 数据
- * @author YongWu zheng
- * @version V1.0  Created by 2020/6/6 12:03
  */
 public abstract class AbstractResponseJsonAuthenticationException extends AuthenticationException {
     private static final long serialVersionUID = 2661098918363948470L;

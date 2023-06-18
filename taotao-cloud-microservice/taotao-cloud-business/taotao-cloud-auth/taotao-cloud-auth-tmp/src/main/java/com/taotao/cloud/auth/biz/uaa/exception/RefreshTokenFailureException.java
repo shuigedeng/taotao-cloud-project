@@ -28,8 +28,6 @@ import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 
 /**
  * refresh token failure exception
- * @author YongWu zheng
- * @version V2.0  Created by 2020/10/10 22:39
  */
 public class RefreshTokenFailureException extends AbstractResponseJsonAuthenticationException {
 

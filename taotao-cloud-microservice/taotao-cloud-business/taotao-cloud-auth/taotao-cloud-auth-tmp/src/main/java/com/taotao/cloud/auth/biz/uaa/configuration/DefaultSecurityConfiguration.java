@@ -27,26 +27,22 @@ package com.taotao.cloud.auth.biz.uaa.configuration;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.authentication.JwtTokenGeneratorImpl;
-import com.taotao.cloud.auth.biz.authentication.authentication.LoginFilterSecurityConfigurer;
-import com.taotao.cloud.auth.biz.authentication.authentication.fingerprint.service.FingerprintUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.authentication.gestures.service.GesturesUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.authentication.wechatmp.service.WechatMpUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.DelegateClientRegistrationRepository;
-import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.OAuth2ProviderConfigurer;
-import com.taotao.cloud.auth.biz.authentication.authentication.oauth2.Oauth2LoginAuthenticationSuccessHandler;
-import com.taotao.cloud.auth.biz.authentication.authentication.oneClick.service.OneClickUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.form.OAuth2FormLoginSecureConfigurer;
-import com.taotao.cloud.auth.biz.authentication.form.Oauth2FormPhoneLoginSecureConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JwtTokenGeneratorImpl;
+import com.taotao.cloud.auth.biz.authentication.login.extension.LoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginSecureConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.form.Oauth2FormPhoneLoginSecureConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.social.DelegateClientRegistrationRepository;
+import com.taotao.cloud.auth.biz.authentication.login.social.OAuth2ProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusClientDetailsService;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusUserDetailsService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import com.taotao.cloud.security.springsecurity.authorization.processor.SecurityAuthorizationManager;
 import com.taotao.cloud.security.springsecurity.authorization.processor.SecurityMatcherConfigurer;
@@ -54,14 +50,11 @@ import com.taotao.cloud.security.springsecurity.core.definition.service.ClientDe
 import com.taotao.cloud.security.springsecurity.core.definition.strategy.StrategyUserDetailsService;
 import com.taotao.cloud.security.springsecurity.core.response.HerodotusAccessDeniedHandler;
 import com.taotao.cloud.security.springsecurity.core.response.HerodotusAuthenticationEntryPoint;
-import org.redisson.api.RedissonClient;
-import org.redisson.spring.session.RedissonSessionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
@@ -76,11 +69,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
-import org.springframework.util.Assert;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -105,7 +97,7 @@ public class DefaultSecurityConfiguration {
 		DelegateClientRegistrationRepository delegateClientRegistrationRepository
 	) throws Exception {
 
-		log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
+		log.info("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
 
 		// 禁用CSRF 开启跨域
 		httpSecurity
@@ -117,27 +109,40 @@ public class DefaultSecurityConfiguration {
 
 		// @formatter:off
         httpSecurity
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
-                        .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
-                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                        .anyRequest().access(securityAuthorizationManager))
-                .exceptionHandling(exceptions -> {
-                    exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
-                    exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
-                })
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
+				authorizeHttpRequestsCustomizer
+					.requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
+					.requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
+					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+					.anyRequest().access(securityAuthorizationManager);
+			})
+			.exceptionHandling(exceptionHandlingCustomizer -> {
+				exceptionHandlingCustomizer.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+				exceptionHandlingCustomizer.accessDeniedHandler(new HerodotusAccessDeniedHandler());
+			})
+			.oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+			.logout(logoutCustomizer->{
+				logoutCustomizer.addLogoutHandler((request,response,authentication)-> {
+
+    })
+					.logoutSuccessHandler((request,response,authentication)-> {
+
+    })
+					.clearAuthentication(true);
+			})
 			// **************************************自定义登录配置***********************************************
 			.apply(new LoginFilterSecurityConfigurer<>())
 			// 用户+密码登录
-			.accountLogin(accountLoginFilterConfigurerCustomizer -> {
+			.accountLogin(accountLoginConfigurerCustomizer -> {
 
 			})
 			// 用户+密码+验证码登录
-			.accountVerificationLogin(accountVerificationLoginFilterConfigurerCustomizer -> {
+			.accountVerificationLogin(accountVerificationLoginConfigurerCustomizer -> {
+
 			})
 			// 面部识别登录
-			.faceLogin(faceLoginFilterConfigurerCustomizer -> {
+			.faceLogin(faceLoginConfigurerCustomizer -> {
+
 			})
 			// 指纹登录
 			.fingerprintLogin(fingerprintLoginConfigurer -> {
@@ -163,9 +168,11 @@ public class DefaultSecurityConfiguration {
 			})
 			// 手机扫码登录
 			.qrcodeLogin(qrcodeLoginConfigurer -> {
+
 			})
 			// 手机号码+短信登录
 			.phoneLogin(phoneLoginConfigurer -> {
+
 			})
 			// 微信公众号登录
 			.wechatMpLogin(mpLoginConfigurer -> {
@@ -178,8 +185,9 @@ public class DefaultSecurityConfiguration {
 			})
 			// 小程序登录 同时支持多个小程序
 			.wechatMiniAppLogin(miniAppLoginConfigurer -> {
+
 			})
-			.and()
+			.httpSecurity()
 			// **************************************oauth2登录配置***********************************************
 			.apply(new OAuth2ProviderConfigurer(delegateClientRegistrationRepository))
 			// 微信网页授权
@@ -188,16 +196,7 @@ public class DefaultSecurityConfiguration {
 			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
 			// 微信扫码登录
 			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
-			.oAuth2LoginConfigurerConsumer(oauth2LoginConfigurer -> {
-				oauth2LoginConfigurer
-					.successHandler(authenticationSuccessHandler(httpSecurity))
-					// 认证失败后的处理器
-					.failureHandler((request, response, authException) -> {
-						LogUtils.error("用户认证失败", authException);
-						ResponseUtils.fail(response, authException.getMessage());
-					});
-			})
-			.and()
+			.httpSecurity()
 			// **************************************oauth2表单登录配置***********************************************
 			.apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory))
 			.httpSecurity()
@@ -207,13 +206,6 @@ public class DefaultSecurityConfiguration {
 		return httpSecurity.build();
 	}
 
-	private AuthenticationSuccessHandler authenticationSuccessHandler(HttpSecurity httpSecurity) {
-		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
-		JwtTokenGenerator jwtTokenGenerator = applicationContext.getBean(JwtTokenGenerator.class);
-		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-
-		return new Oauth2LoginAuthenticationSuccessHandler(jwtTokenGenerator);
-	}
 
 	@Bean
 	public JwtTokenGenerator jwtTokenGenerator(JWKSource<SecurityContext> jwkSource) {
@@ -228,7 +220,7 @@ public class DefaultSecurityConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
-		log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
+		log.info("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
 		return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
 	}
 
@@ -236,7 +228,7 @@ public class DefaultSecurityConfiguration {
 	@ConditionalOnMissingBean
 	public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
 		HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(strategyUserDetailsService);
-		log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
+		log.info("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
 		return herodotusUserDetailsService;
 	}
 
@@ -244,17 +236,17 @@ public class DefaultSecurityConfiguration {
 	@ConditionalOnMissingBean
 	public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
 		HerodotusClientDetailsService herodotusClientDetailsService = new HerodotusClientDetailsService(applicationService);
-		log.debug("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
+		log.info("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
 		return herodotusClientDetailsService;
 	}
 
-	@Bean
-	public FindByIndexNameSessionRepository redissonSessionRepository(RedissonClient redissonClient, ApplicationEventPublisher eventPublisher) {
-		return new RedissonSessionRepository(redissonClient, eventPublisher);
-	}
+//	@Bean
+//	public FindByIndexNameSessionRepository redissonSessionRepository(RedissonClient redissonClient, ApplicationEventPublisher eventPublisher) {
+//		return new RedissonSessionRepository(redissonClient, eventPublisher);
+//	}
 
 	@Bean
-	public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository sessionRepository) {
+	public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
 		return new SpringSessionBackedSessionRegistry<>(sessionRepository);
 	}
 

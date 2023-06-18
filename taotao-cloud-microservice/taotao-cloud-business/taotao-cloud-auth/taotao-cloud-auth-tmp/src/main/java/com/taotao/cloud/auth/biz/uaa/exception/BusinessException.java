@@ -27,8 +27,6 @@ import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 
 /**
  * 业务异常
- * @author YongWu zheng
- * @version V2.0  Created by 2020.11.30 15:02
  */
 @SuppressWarnings("AlibabaAbstractClassShouldStartWithAbstractNaming")
 public abstract class BusinessException extends RuntimeException {

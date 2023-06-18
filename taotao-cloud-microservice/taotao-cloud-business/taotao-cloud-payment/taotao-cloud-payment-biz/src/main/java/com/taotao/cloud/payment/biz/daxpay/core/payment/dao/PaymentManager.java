@@ -8,7 +8,7 @@ import cn.bootx.platform.common.query.entity.QueryParams;
 import cn.bootx.platform.common.query.generator.QueryGenerator;
 import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.param.payment.PaymentQuery;
-import org.dromara.hutoolcore.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;

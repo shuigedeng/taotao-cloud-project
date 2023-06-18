@@ -52,7 +52,7 @@ public class AutoConfiguration {
     @Bean
     public AccountStatusChanger accountStatusChanger() {
         HerodotusAccountStatusChanger herodotusAccountStatusChanger = new HerodotusAccountStatusChanger();
-        log.trace("[Herodotus] |- Bean [Account Status Changer] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Account Status Changer] Auto Configure.");
         return herodotusAccountStatusChanger;
     }
 }

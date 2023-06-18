@@ -27,8 +27,6 @@ import org.springframework.http.HttpStatus;
 
 /**
  * 错误代码
- * @author YongWu zheng
- * @version V1.0  Created by 2020/5/30 12:49
  */
 @SuppressWarnings("AlibabaEnumConstantsMustHaveComment")
 public enum ErrorCodeEnum {

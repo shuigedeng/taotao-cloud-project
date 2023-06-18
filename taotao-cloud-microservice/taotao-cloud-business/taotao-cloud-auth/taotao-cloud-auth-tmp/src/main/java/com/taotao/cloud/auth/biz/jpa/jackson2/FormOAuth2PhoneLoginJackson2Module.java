@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.taotao.cloud.auth.biz.authentication.form.phone.Oauth2FormPhoneAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationToken;
 import org.springframework.security.jackson2.*;
 
 /**

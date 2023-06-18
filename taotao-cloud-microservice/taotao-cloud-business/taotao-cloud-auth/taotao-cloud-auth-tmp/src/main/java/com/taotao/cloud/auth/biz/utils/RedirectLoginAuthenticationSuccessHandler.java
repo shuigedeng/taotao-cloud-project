@@ -30,8 +30,6 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.Assert;
 
 /**
- * @author felord.cn
- * @since 1.0.0
  */
 public class RedirectLoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 

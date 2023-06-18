@@ -16,10 +16,10 @@ import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
 import cn.bootx.platform.daxpay.param.pay.PayWayParam;
 import cn.bootx.platform.daxpay.param.channel.wechat.WeChatPayParam;
 import cn.bootx.platform.daxpay.util.PayWaylUtil;
-import org.dromara.hutool.core.date.DatePattern;
-import org.dromara.hutool.core.net.NetUtil;
-import org.dromara.hutool.core.util.StrUtil;
-import org.dromara.hutool.extra.spring.SpringUtil;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.enums.TradeType;
 import com.ijpay.core.kit.WxPayKit;
@@ -169,8 +169,8 @@ public class WeChatPayService {
      */
     private String barCode(String amount, Payment payment, String authCode, WeChatPayConfig weChatPayConfig) {
         Map<String, String> params = MicroPayModel.builder()
-            .appid(weChatPayConfig.getAppId())
-            .mch_id(weChatPayConfig.getMchId())
+            .appid(weChatPayConfig.getWxAppId())
+            .mch_id(weChatPayConfig.getWxMchId())
             .nonce_str(WxPayKit.generateStr())
             .body(payment.getTitle())
             .auth_code(authCode)
@@ -226,8 +226,8 @@ public class WeChatPayService {
         // 过期时间
         payment.setExpiredTime(PayWaylUtil.getPaymentExpiredTime(weChatPayConfig.getExpireTime()));
         return UnifiedOrderModel.builder()
-            .appid(weChatPayConfig.getAppId())
-            .mch_id(weChatPayConfig.getMchId())
+            .appid(weChatPayConfig.getWxAppId())
+            .mch_id(weChatPayConfig.getWxMchId())
             .nonce_str(WxPayKit.generateStr())
             .time_start(LocalDateTimeUtil.format(LocalDateTime.now(), DatePattern.PURE_DATETIME_PATTERN))
             // 反正v2版本的超时时间无效

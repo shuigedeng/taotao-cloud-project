@@ -48,7 +48,7 @@ public class DistributedArchitectureConfiguration {
 
 	@PostConstruct
 	public void postConstruct() {
-		log.debug("[Herodotus] |- Module [Distributed Architecture] Auto Configure.");
+		log.info("[Herodotus] |- Module [Distributed Architecture] Auto Configure.");
 	}
 
 
@@ -57,7 +57,7 @@ public class DistributedArchitectureConfiguration {
 	public StrategyUserDetailsService herodotusLocalUserDetailsService(
 //		SysUserService sysUserService,
 		SocialAuthenticationHandler socialAuthenticationHandler) {
-		log.debug("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
+		log.info("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
 		return new HerodotusLocalUserDetailsService(socialAuthenticationHandler);
 	}
 
@@ -67,7 +67,7 @@ public class DistributedArchitectureConfiguration {
 //		SysPermissionService sysPermissionService
 	) {
 		HerodotusLocalPermissionDetailsService herodotusLocalPermissionDetailsService = new HerodotusLocalPermissionDetailsService();
-		log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
+		log.info("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
 		return herodotusLocalPermissionDetailsService;
 	}
 

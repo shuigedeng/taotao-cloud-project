@@ -10,8 +10,8 @@ import cn.bootx.platform.daxpay.core.merchant.dao.MerchantInfoManager;
 import cn.bootx.platform.daxpay.core.merchant.entity.MerchantInfo;
 import cn.bootx.platform.daxpay.dto.merchant.MerchantInfoDto;
 import cn.bootx.platform.daxpay.param.merchant.MerchantInfoParam;
-import org.dromara.hutoolcore.bean.BeanUtil;
-import org.dromara.hutoolcore.bean.copier.CopyOptions;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class MerchantInfoService {
      */
     public void add(MerchantInfoParam param) {
         MerchantInfo merchantInfo = MerchantInfo.init(param);
-        merchantInfo.setMchNo("M" + System.currentTimeMillis());
+        merchantInfo.setCode("M" + System.currentTimeMillis());
         merchantInfoManager.save(merchantInfo);
     }
 
