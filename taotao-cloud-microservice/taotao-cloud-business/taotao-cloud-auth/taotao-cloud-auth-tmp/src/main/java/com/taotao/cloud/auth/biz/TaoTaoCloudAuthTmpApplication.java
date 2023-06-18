@@ -33,6 +33,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 
 /**
  * TaoTaoCloudAuthBizApplication 默认url 作用
@@ -85,6 +86,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 	DefaultSecurityConfiguration.class,
 	AuthorizationServerConfiguration.class
 })
+@EnableRedisIndexedHttpSession
 public class TaoTaoCloudAuthTmpApplication {
 
 	public static void main(String[] args) {

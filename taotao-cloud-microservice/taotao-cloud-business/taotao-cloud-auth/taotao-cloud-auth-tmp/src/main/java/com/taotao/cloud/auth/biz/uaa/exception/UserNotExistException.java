@@ -28,9 +28,6 @@ import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 
 /**
  * 用户不存在异常
- * @author zhailiang
- * @author  YongWu zheng
- * @version V1.0  Created by 2020/5/2 15:28
  */
 
 public class UserNotExistException extends AbstractResponseJsonAuthenticationException {

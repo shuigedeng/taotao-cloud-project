@@ -7,8 +7,8 @@ import cn.bootx.platform.daxpay.core.channel.voucher.entity.Voucher;
 import cn.bootx.platform.daxpay.core.channel.voucher.entity.VoucherLog;
 import cn.bootx.platform.daxpay.param.channel.voucher.VoucherGenerationParam;
 import cn.bootx.platform.daxpay.param.channel.voucher.VoucherImportParam;
-import org.dromara.hutool.core.util.IdUtil;
-import org.dromara.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -62,7 +62,7 @@ public class VoucherService {
                 .setAmount(voucher.getBalance())
                 .setVoucherId(voucher.getId())
                 .setVoucherNo(voucher.getCardNo()))
-            .toList();
+            .collect(Collectors.toList());
         voucherLogManager.saveAll(voucherLogs);
     }
 

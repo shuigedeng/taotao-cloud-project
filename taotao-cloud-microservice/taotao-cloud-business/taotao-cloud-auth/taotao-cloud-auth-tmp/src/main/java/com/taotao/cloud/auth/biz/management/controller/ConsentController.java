@@ -52,7 +52,6 @@ import java.util.stream.Collectors;
 /**
  * OAuth2 授权确认页面 - controller
  *
- * @author gengwei.zheng
  * @date 2022-03-01
  * @see org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter
  */

@@ -11,9 +11,9 @@ import cn.bootx.platform.daxpay.param.pay.PayParam;
 import cn.bootx.platform.daxpay.param.channel.alipay.AliPayParam;
 import cn.bootx.platform.daxpay.param.channel.voucher.VoucherPayParam;
 import cn.bootx.platform.daxpay.param.channel.wechat.WeChatPayParam;
-import org.dromara.hutool.core.date.DatePattern;
-import org.dromara.hutool.core.util.StrUtil;
-import org.dromara.hutool.json.JSONUtil;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
@@ -58,7 +58,9 @@ public class PayWaylUtil {
      * 判断是否有异步支付
      */
     public boolean isNotSync(List<PayWayParam> payWayParams) {
-        return payWayParams.stream().map(PayWayParam::getPayChannel).noneMatch(PayChannelEnum.ASYNC_TYPE_CODE::contains);
+        return payWayParams.stream()
+            .map(PayWayParam::getPayChannel)
+            .noneMatch(PayChannelEnum.ASYNC_TYPE_CODE::contains);
     }
 
     /**
@@ -107,7 +109,7 @@ public class PayWaylUtil {
      */
     public void validationAmount(List<PayWayParam> payModeList) {
         for (PayWayParam payWayParam : payModeList) {
-            // 同时满足支付金额小于等于零
+            // 支付金额小于等于零
             if (BigDecimalUtil.compareTo(payWayParam.getAmount(), BigDecimal.ZERO) < 1) {
                 throw new PayAmountAbnormalException();
             }

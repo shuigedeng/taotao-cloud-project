@@ -22,10 +22,10 @@ import cn.bootx.platform.daxpay.param.pay.PayParam;
 import cn.bootx.platform.daxpay.param.refund.RefundModeParam;
 import cn.bootx.platform.daxpay.param.refund.RefundParam;
 import cn.bootx.platform.starter.auth.util.SecurityUtil;
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.collection.CollectionUtil;
-import org.dromara.hutoolextra.servlet.ServletUtil;
-import org.dromara.hutoolextra.spring.SpringUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.extra.servlet.ServletUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -82,7 +82,7 @@ public class PayRefundService {
         List<RefundModeParam> refundModeParams = payment.getRefundableInfo()
             .stream()
             .map(o -> new RefundModeParam().setPayChannel(o.getPayChannel()).setAmount(o.getAmount()))
-            .toList();
+            .collect(Collectors.toList());
         this.refundPayment(payment, refundModeParams);
 
     }
@@ -108,7 +108,7 @@ public class PayRefundService {
         // 1.获取退款参数方式，通过工厂生成对应的策略组
         List<PayWayParam> payWayParams = refundModeParams.stream()
             .map(RefundModeParam::toPayModeParam)
-            .toList();
+            .collect(Collectors.toList());
         List<AbsPayStrategy> paymentStrategyList = PayStrategyFactory.create(payWayParams);
         if (CollectionUtil.isEmpty(paymentStrategyList)) {
             throw new PayUnsupportedMethodException();
@@ -228,7 +228,7 @@ public class PayRefundService {
     public void saveRefund(Payment payment, BigDecimal amount, List<RefundModeParam> refundModeParams) {
         List<RefundableInfo> refundableInfos = refundModeParams.stream()
             .map(RefundModeParam::toRefundableInfo)
-            .toList();
+            .collect(Collectors.toList());
         HttpServletRequest request = WebServletUtil.getRequest();
         String ip = ServletUtil.getClientIP(request);
         RefundRecord refundRecord = new RefundRecord().setRefundRequestNo(AsyncRefundLocal.get())

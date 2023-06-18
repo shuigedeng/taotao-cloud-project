@@ -8,8 +8,8 @@ import cn.bootx.platform.daxpay.core.channel.wechat.entity.WeChatPayConfig;
 import cn.bootx.platform.daxpay.core.channel.wechat.entity.WeChatPayment;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
 import cn.bootx.platform.starter.file.service.FileUploadService;
-import org.dromara.hutoolcore.util.IdUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
 import com.ijpay.wxpay.WxPayApi;
@@ -45,8 +45,8 @@ public class WeChatPayCancelService {
     public void cancelRemote(Payment payment, WeChatPayConfig weChatPayConfig) {
         // 只有部分需要调用微信网关进行关闭
         Map<String, String> params = CloseOrderModel.builder()
-            .appid(weChatPayConfig.getAppId())
-            .mch_id(weChatPayConfig.getMchId())
+            .appid(weChatPayConfig.getWxAppId())
+            .mch_id(weChatPayConfig.getWxMchId())
             .out_trade_no(String.valueOf(payment.getId()))
             .nonce_str(WxPayKit.generateStr())
             .build()
@@ -66,8 +66,8 @@ public class WeChatPayCancelService {
         // 设置退款号
         AsyncRefundLocal.set(IdUtil.getSnowflakeNextIdStr());
         Map<String, String> params = RefundModel.builder()
-            .appid(weChatPayConfig.getAppId())
-            .mch_id(weChatPayConfig.getMchId())
+            .appid(weChatPayConfig.getWxAppId())
+            .mch_id(weChatPayConfig.getWxMchId())
             .out_trade_no(String.valueOf(payment.getId()))
             .out_refund_no(AsyncRefundLocal.get())
             .total_fee(totalFee)
@@ -79,7 +79,7 @@ public class WeChatPayCancelService {
         byte[] fileBytes = uploadService.getFileBytes(weChatPayConfig.getP12());
         ByteArrayInputStream inputStream = new ByteArrayInputStream(fileBytes);
         // 证书密码为 微信商户号
-        String xmlResult = WxPayApi.orderRefund(false, params, inputStream, weChatPayConfig.getMchId());
+        String xmlResult = WxPayApi.orderRefund(false, params, inputStream, weChatPayConfig.getWxMchId());
         Map<String, String> result = WxPayKit.xmlToMap(xmlResult);
         this.verifyErrorMsg(result);
     }

@@ -26,9 +26,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 /**
  * 处理认证失败的逻辑
  *
- * @author n1
- * @see AuthenticationException
- * @since 2021 /3/26 14:43
  */
 public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

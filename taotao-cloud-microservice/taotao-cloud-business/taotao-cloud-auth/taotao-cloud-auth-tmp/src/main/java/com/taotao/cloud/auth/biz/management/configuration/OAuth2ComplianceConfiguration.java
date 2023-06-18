@@ -55,13 +55,13 @@ public class OAuth2ComplianceConfiguration {
 
 	@PostConstruct
 	public void postConstruct() {
-		log.debug("[Herodotus] |- SDK [OAuth2 Compliance] Auto Configure.");
+		log.info("[Herodotus] |- SDK [OAuth2 Compliance] Auto Configure.");
 	}
 
 	@Bean
 	public OAuth2AccountStatusManager accountStatusManager(UserDetailsService userDetailsService, AccountStatusChanger accountStatusChanger, LockedUserDetailsStampManager lockedUserDetailsStampManager) {
 		OAuth2AccountStatusManager manager = new OAuth2AccountStatusManager(userDetailsService, accountStatusChanger, lockedUserDetailsStampManager);
-		log.trace("[Herodotus] |- Bean [OAuth2 Account Status Manager] Auto Configure.");
+		log.info("[Herodotus] |- Bean [OAuth2 Account Status Manager] Auto Configure.");
 		return manager;
 	}
 
@@ -69,7 +69,7 @@ public class OAuth2ComplianceConfiguration {
 	@ConditionalOnAutoUnlockUserAccount
 	public AccountAutoEnableListener accountLockStatusListener(RedisMessageListenerContainer redisMessageListenerContainer, OAuth2AccountStatusManager accountStatusManager) {
 		AccountAutoEnableListener listener = new AccountAutoEnableListener(redisMessageListenerContainer, accountStatusManager);
-		log.trace("[Herodotus] |- Bean [OAuth2 Account Lock Status Listener] Auto Configure.");
+		log.info("[Herodotus] |- Bean [OAuth2 Account Lock Status Listener] Auto Configure.");
 		return listener;
 	}
 
@@ -77,7 +77,7 @@ public class OAuth2ComplianceConfiguration {
 	@ConditionalOnMissingBean
 	public AuthenticationFailureListener authenticationFailureListener(SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusManager accountLockService) {
 		AuthenticationFailureListener listener = new AuthenticationFailureListener(stampManager, accountLockService);
-		log.trace("[Herodotus] |- Bean [OAuth2 Authentication Failure Listener] Auto Configure.");
+		log.info("[Herodotus] |- Bean [OAuth2 Authentication Failure Listener] Auto Configure.");
 		return listener;
 	}
 }

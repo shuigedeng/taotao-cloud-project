@@ -26,9 +26,6 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 /**
  * 访问被拒绝时的处理逻辑
  *
- * @author n1
- * @see AccessDeniedException
- * @since 2021 /3/26 14:39
  */
 public class SimpleAccessDeniedHandler implements AccessDeniedHandler {
 

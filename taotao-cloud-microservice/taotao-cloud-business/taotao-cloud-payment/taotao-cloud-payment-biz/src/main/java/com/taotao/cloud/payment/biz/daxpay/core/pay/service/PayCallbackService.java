@@ -16,7 +16,7 @@ import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.core.payment.service.PaymentService;
 import cn.bootx.platform.daxpay.mq.PaymentEventSender;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
-import org.dromara.hutoolcore.collection.CollectionUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,10 +44,11 @@ public class PayCallbackService {
 
     /**
      * 统一回调处理
-     * @see PayStatusCode
+     * @param appCode
      * @param tradeStatus 支付状态
+     * @see PayStatusCode
      */
-    public PayCallbackResult callback(Long paymentId, String tradeStatus, Map<String, String> map) {
+    public PayCallbackResult callback(String appCode, Long paymentId, String tradeStatus, Map<String, String> map) {
 
         // 获取payment和paymentParam数据
         Payment payment = paymentService.findById(paymentId).orElse(null);
@@ -182,7 +183,7 @@ public class PayCallbackService {
             // 1.获取异步支付方式，通过工厂生成对应的策略组
             List<AbsPayStrategy> syncPaymentStrategyList = strategyList.stream()
                 .filter(paymentStrategy -> PayChannelEnum.ASYNC_TYPE_CODE.contains(paymentStrategy.getType()))
-                .toList();
+                .collect(Collectors.toList());
             // 执行成功方法
             successCallback.accept(syncPaymentStrategyList, payment);
         }

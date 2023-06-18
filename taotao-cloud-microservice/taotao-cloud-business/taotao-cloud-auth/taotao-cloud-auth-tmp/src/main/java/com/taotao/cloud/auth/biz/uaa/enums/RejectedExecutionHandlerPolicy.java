@@ -28,8 +28,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 线程池拒绝策略枚举
- * @author YongWu zheng
- * @version V2.0  Created by 2020/10/15 12:44
  */
 @SuppressWarnings("unused")
 public enum RejectedExecutionHandlerPolicy {

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.param.channel.voucher;
 
 import cn.bootx.platform.daxpay.code.paymodel.VoucherCode;
-import org.dromara.hutoolcore.date.DatePattern;
+import cn.hutool.core.date.DatePattern;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;

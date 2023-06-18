@@ -10,9 +10,9 @@ import cn.bootx.platform.daxpay.dto.payment.PayChannelInfo;
 import cn.bootx.platform.daxpay.dto.payment.RefundableInfo;
 import cn.bootx.platform.daxpay.param.pay.PayWayParam;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.collection.CollectionUtil;
-import org.dromara.hutoolextra.servlet.ServletUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.extra.servlet.ServletUtil;
 import lombok.experimental.UtilityClass;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +41,8 @@ public class PaymentBuilder {
         String ip = ServletUtil.getClientIP(request);
         // 基础信息
         payment.setBusinessId(payParam.getBusinessId())
+            .setMchCode(payParam.getMchCode())
+            .setMchAppCode(payment.getMchAppCode())
             .setTitle(payParam.getTitle())
             .setDescription(payParam.getDescription());
 
@@ -68,7 +70,7 @@ public class PaymentBuilder {
      */
     private List<PayChannelInfo> buildPayTypeInfo(List<PayWayParam> payWayParamList) {
         return CollectionUtil.isEmpty(payWayParamList) ? Collections.emptyList()
-                : payWayParamList.stream().map(PayWayParam::toPayTypeInfo).toList();
+                : payWayParamList.stream().map(PayWayParam::toPayTypeInfo).collect(Collectors.toList());
     }
 
     /**
@@ -76,7 +78,7 @@ public class PaymentBuilder {
      */
     private List<RefundableInfo> buildRefundableInfo(List<PayWayParam> payWayParamList) {
         return CollectionUtil.isEmpty(payWayParamList) ? Collections.emptyList()
-                : payWayParamList.stream().map(PayWayParam::toRefundableInfo).toList();
+                : payWayParamList.stream().map(PayWayParam::toRefundableInfo).collect(Collectors.toList());
     }
 
     /**
@@ -90,7 +92,7 @@ public class PaymentBuilder {
             .map(payTypeInfo -> new PayWayParam().setAmount(payTypeInfo.getAmount())
                 .setPayChannel(payTypeInfo.getPayChannel())
                 .setExtraParamsJson(payTypeInfo.getExtraParamsJson()))
-            .toList();
+            .collect(Collectors.toList());
         payParam.setPayWayList(payWayParams)
             .setBusinessId(payment.getBusinessId())
             .setTitle(payment.getTitle())
@@ -118,7 +120,7 @@ public class PaymentBuilder {
             // 设置异步支付参数
             List<PayChannelInfo> moneyPayTypeInfos = channelInfos.stream()
                 .filter(payTypeInfo -> PayChannelEnum.ASYNC_TYPE_CODE.contains(payTypeInfo.getPayChannel()))
-                .toList();
+                .collect(Collectors.toList());
             if (!CollUtil.isEmpty(moneyPayTypeInfos)) {
                 paymentResult.setAsyncPayInfo(AsyncPayInfoLocal.get());
             }

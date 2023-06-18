@@ -5,8 +5,8 @@ import cn.bootx.platform.daxpay.core.pay.func.AbsPayStrategy;
 import cn.bootx.platform.daxpay.core.pay.strategy.*;
 import cn.bootx.platform.daxpay.exception.payment.PayUnsupportedMethodException;
 import cn.bootx.platform.daxpay.param.pay.PayWayParam;
-import org.dromara.hutool.core.collection.CollectionUtil;
-import org.dromara.hutool.extra.spring.SpringUtil;
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.extra.spring.SpringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,13 +93,13 @@ public class PayStrategyFactory {
         List<PayWayParam> syncPayWayParamList = payWayParamList.stream()
             .filter(Objects::nonNull)
             .filter(payModeParam -> !ASYNC_TYPE.contains(payModeParam.getPayChannel()))
-            .toList();
+            .collect(Collectors.toList());
 
         // 异步支付
         List<PayWayParam> asyncPayWayParamList = payWayParamList.stream()
             .filter(Objects::nonNull)
             .filter(payModeParam -> ASYNC_TYPE.contains(payModeParam.getPayChannel()))
-            .toList();
+            .collect(Collectors.toList());
 
         List<PayWayParam> sortList = new ArrayList<>(payWayParamList.size());
 

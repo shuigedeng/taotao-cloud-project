@@ -28,8 +28,6 @@ import org.springframework.security.core.AuthenticationException;
 
 /**
  * 第三方授权登录异常
- * @author YongWu zheng
- * @version V2.0  Created by 2020/11/7 0:07
  */
 public class Auth2Exception extends AuthenticationException {
 

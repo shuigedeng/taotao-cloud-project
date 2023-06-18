@@ -9,7 +9,7 @@ import cn.bootx.platform.daxpay.param.channel.wallet.WalletPayParam;
 import cn.bootx.platform.iam.core.user.entity.UserInfo;
 import cn.bootx.platform.iam.param.user.UserInfoParam;
 import cn.bootx.platform.starter.auth.util.SecurityUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
@@ -119,7 +119,7 @@ public class WalletManager extends BaseManager<WalletMapper, Wallet> {
             .list()
             .stream()
             .map(Wallet::getUserId)
-            .toList();
+            .collect(Collectors.toList());
 
     }
 

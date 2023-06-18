@@ -4,8 +4,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-//    implementation 'me.zhyd.oauth:JustAuth'
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-core"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
@@ -13,6 +11,7 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
@@ -29,6 +28,13 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+
+    implementation 'org.springframework.session:spring-session-data-redis:3.1.0'
+
+    implementation 'com.github.binarywang:weixin-java-mp:4.5.0'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.0'
+
+    //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
     //https://search.maven.org/artifact/org.webjars/jquery
     implementation "org.webjars:jquery:3.6.4"
@@ -58,6 +64,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-jdbc"
 
     implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation 'org.springframework.security:spring-security-crypto'
+    implementation "org.springframework.security:spring-security-oauth2-jose"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server

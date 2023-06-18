@@ -57,7 +57,7 @@ public class HerodotusRegisteredClientService {
 
 	public Optional<HerodotusRegisteredClient> findByClientId(String clientId) {
 		Optional<HerodotusRegisteredClient> result = this.registeredClientRepository.findByClientId(clientId);
-		log.trace("[Herodotus] |- HerodotusRegisteredClient Service findByClientId.");
+		log.info("[Herodotus] |- HerodotusRegisteredClient Service findByClientId.");
 		return result;
 	}
 

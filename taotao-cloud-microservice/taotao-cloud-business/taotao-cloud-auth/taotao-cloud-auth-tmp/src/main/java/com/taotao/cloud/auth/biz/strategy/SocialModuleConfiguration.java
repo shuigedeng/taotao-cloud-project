@@ -54,7 +54,7 @@ public class SocialModuleConfiguration {
     @ConditionalOnMissingBean
     public DefaultSocialAuthenticationHandler defaultSocialAuthenticationHandler() {
         DefaultSocialAuthenticationHandler defaultSocialAuthenticationHandler = new DefaultSocialAuthenticationHandler();
-        log.trace("[Herodotus] |- Bean [Default Social Authentication Handler] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Default Social Authentication Handler] Auto Configure.");
         return defaultSocialAuthenticationHandler;
     }
 }

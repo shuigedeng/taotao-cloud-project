@@ -1,6 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay;
 
-import org.dromara.hutoolcore.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
+import io.minio.credentials.MinioClientConfigProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.mybatis.spring.annotation.MapperScan;

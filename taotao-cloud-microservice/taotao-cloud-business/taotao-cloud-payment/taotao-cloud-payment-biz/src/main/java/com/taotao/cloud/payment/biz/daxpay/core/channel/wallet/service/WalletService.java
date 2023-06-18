@@ -69,7 +69,7 @@ public class WalletService {
             .map(userId -> new Wallet().setUserId(userId)
                 .setStatus(WalletCode.STATUS_NORMAL)
                 .setBalance(BigDecimal.ZERO))
-            .toList();
+            .collect(Collectors.toList());
         walletManager.saveAll(wallets);
         List<WalletLog> walletLogs = wallets.stream()
             .map(wallet -> new WalletLog().setWalletId(wallet.getId())
@@ -78,7 +78,7 @@ public class WalletService {
                 .setType(WalletCode.LOG_ACTIVE)
                 .setRemark("激活钱包")
                 .setOperationSource(WalletCode.OPERATION_SOURCE_USER))
-            .toList();
+            .collect(Collectors.toList());
         walletLogManager.saveAll(walletLogs);
     }
 

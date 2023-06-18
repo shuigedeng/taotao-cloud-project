@@ -11,9 +11,9 @@ import cn.bootx.platform.daxpay.core.pay.func.AbsPayCallbackStrategy;
 import cn.bootx.platform.daxpay.core.pay.service.PayCallbackService;
 import cn.bootx.platform.daxpay.core.channel.alipay.dao.AlipayConfigManager;
 import cn.bootx.platform.daxpay.core.channel.alipay.entity.AlipayConfig;
-import org.dromara.hutoolcore.util.CharsetUtil;
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutooljson.JSONUtil;
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayConstants;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -57,9 +57,13 @@ public class AliPayCallbackService extends AbsPayCallbackStrategy {
         return PayStatusCode.NOTIFY_TRADE_FAIL;
     }
 
+    /**
+     * 验证信息格式
+     * @param mchAppCode 商户应用编码
+     */
     @SneakyThrows
     @Override
-    public boolean verifyNotify() {
+    public boolean verifyNotify(String mchAppCode) {
         Map<String, String> params = PARAMS.get();
         String callReq = JSONUtil.toJsonStr(params);
         String appId = params.get(AliPayCode.APP_ID);
@@ -67,7 +71,8 @@ public class AliPayCallbackService extends AbsPayCallbackStrategy {
             log.error("支付宝回调报文 appId 为空 {}", callReq);
             return false;
         }
-        AlipayConfig alipayConfig = alipayConfigManager.findActivity().orElseThrow(DataNotExistException::new);
+        AlipayConfig alipayConfig = alipayConfigManager.findByMchAppCode(mchAppCode)
+            .orElseThrow(DataNotExistException::new);
         if (alipayConfig == null) {
             log.error("支付宝支付配置不存在: {}", callReq);
             return false;
