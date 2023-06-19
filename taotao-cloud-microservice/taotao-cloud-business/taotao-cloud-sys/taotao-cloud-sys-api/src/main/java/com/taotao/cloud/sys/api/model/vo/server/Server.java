@@ -48,7 +48,7 @@ public class Server {
 	/**
 	 * 磁盘相关信息
 	 */
-	private List sysFiles = new LinkedList();
+	private List<SysFile> sysFiles = new LinkedList<>();
 
 	public Cpu getCpu() {
 
@@ -90,20 +90,18 @@ public class Server {
 		this.sys = sys;
 	}
 
-	public List getSysFiles() {
+	public List<SysFile> getSysFiles() {
 
 		return sysFiles;
 	}
 
-	public void setSysFiles(List sysFiles) {
+	public void setSysFiles(List<SysFile> sysFiles) {
 
 		this.sysFiles = sysFiles;
 	}
 
 	/**
 	 * 获取服务器主机相关信息
-	 *
-	 * @throws Exception
 	 */
 	public void copyTo() throws Exception {
 
