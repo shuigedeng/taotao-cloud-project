@@ -19,16 +19,14 @@ package com.taotao.cloud.auth.biz.utils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+
+import java.io.IOException;
 
 /**
  * 处理认证失败的逻辑
  *
- * @author n1
- * @see AuthenticationException
- * @since 2021 /3/26 14:43
  */
 public class SimpleAuthenticationEntryPoint implements AuthenticationEntryPoint {
 

@@ -20,7 +20,6 @@ import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -29,9 +28,9 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
+
 /**
- * 
- * @since 1.0.0
  */
 public class RedirectLoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
