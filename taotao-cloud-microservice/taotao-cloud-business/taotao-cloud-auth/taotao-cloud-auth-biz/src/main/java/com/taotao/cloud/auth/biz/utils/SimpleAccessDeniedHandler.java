@@ -19,16 +19,14 @@ package com.taotao.cloud.auth.biz.utils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
+
+import java.io.IOException;
 
 /**
  * 访问被拒绝时的处理逻辑
  *
- * @author n1
- * @see AccessDeniedException
- * @since 2021 /3/26 14:39
  */
 public class SimpleAccessDeniedHandler implements AccessDeniedHandler {
 

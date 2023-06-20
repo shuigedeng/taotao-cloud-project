@@ -16,9 +16,20 @@
 
 package com.taotao.cloud.auth.biz.controller;
 
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +47,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test")
 public class MessagesController {
+
+	@Autowired
+	private JwtDecoder jwtDecoder;
 
     // @Autowired
     // private IFeignDictApi feignDictService;
@@ -58,4 +72,36 @@ public class MessagesController {
 
         return new String[] {"Message 1", "Message 2", "Message 3"};
     }
+
+	/**
+	 * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
+	 *
+	 * @param user OAuth2用户信息
+	 * @return OAuth2用户信息
+	 */
+	@Operation(summary = "获取当前认证的OAuth2用户信息", description = "获取当前认证的OAuth2用户信息")
+	@GetMapping("/user")
+	public Result<OAuth2User> user(@AuthenticationPrincipal OAuth2User user) {
+		return Result.success(user);
+	}
+
+	@Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
+	@GetMapping("/client")
+	public Result<OAuth2AuthorizedClient> client(
+		@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+		return Result.success(oAuth2AuthorizedClient);
+	}
+
+    @GetMapping(value = "/info")
+    public Object getUserInfo() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Object principal = authentication.getPrincipal();
+
+		JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
+		String tokenValue = jwtAuthenticationToken.getToken().getTokenValue();
+		Jwt decode = jwtDecoder.decode(tokenValue);
+
+		return authentication.getPrincipal();
+	}
+
 }

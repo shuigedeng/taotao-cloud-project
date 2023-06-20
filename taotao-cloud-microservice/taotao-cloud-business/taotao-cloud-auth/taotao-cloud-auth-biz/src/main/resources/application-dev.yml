@@ -550,11 +550,14 @@ spring:
     timeout-per-shutdown-phase: 30s
   thymeleaf:
     mode: HTML
-    prefix: classpath:/static/
+    prefix: classpath:/templates/
+    check-template-location: true
     suffix: .html
     encoding: UTF-8
     cache: false
     enabled: true
+    servlet:
+      content-type: text/html
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
@@ -573,6 +576,7 @@ spring:
     resources:
       # pro环境关闭
       add-mappings: true
+      static-locations: classpath:/static/
   mvc:
     servlet:
       load-on-startup: 1
@@ -592,11 +596,7 @@ spring:
       max-request-size: 200MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #url: jdbc:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
-    #driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:p6spy:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
-    #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:mysql://192.168.10.220:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true
+    url: jdbc:mysql://192.168.10.220:3306/taotao-cloud-auth-tmp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -616,25 +616,6 @@ spring:
       data-source-properties:
         cachePrepStmts: true
         prepStmtCacheSize: 250
-    dynamic:
-      enabled: false
-      datasource:
-        master:
-          type: com.zaxxer.hikari.HikariDataSource
-          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-          username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
-          password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
-          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-          hikari:
-            is-auto-commit: true
-            connection-timeout: 30000
-            idle-timeout: 25000
-            validation-timeout: 3000
-            max-lifetime: 50000
-            is-read-only: false
-            connection-test-query: SELECT 1
-            max-pool-size: 15
-            min-idle: 10
   jpa:
     database: mysql
     database-platform: mysql
@@ -759,8 +740,19 @@ spring:
       concurrency: 5
       ack-mode: manual_immediate
       missing-topics-fatal: false
+  session:
+    redis:
+      repository-type: indexed
   security:
     oauth2:
+      resourceserver:
+         jwt:
+            issuer-uri: ${herodotus.endpoint.issuer-uri}
+            jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+         opaquetoken:
+           client-id: 14a9cf797931430896ad13a6b1855611
+           client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
+           introspection-uri: http://192.168.10.220
       client:
         registration:
           google:
@@ -777,11 +769,12 @@ spring:
             redirect-uri: https://xxx/login/oauth2/code/weibo
             scope: follow_app_official_microblog
           github:
-            client-id: xxxx
-            client-secret: xxxx
+            client-id: c51cb681f7045cc44e6f
+            client-secret: 2eeb2f180a05a82117d4276c788f3a2f276823c1
+            redirect-uri: http://1fe9ccce.cpolar.cn/login/oauth2/code/github
           gitee:
             provider: gitee
-            client-name: gitee
+            client-name: taotaocloud
             client-id: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
             client-secret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
             authorization-grant-type: authorization_code
@@ -796,7 +789,19 @@ spring:
             redirect-uri: https://xxx/login/oauth2/code/qq
             scope: get_user_info
             client-authentication-method: post
+          ttauth:
+            client-id: 35026971d1fa406aaa150299d4f7bb39
+            client-secret: 07e2d86f2b0641c4bb03e512a3eb0eac
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8090/authorized
+            scope: message.read
         provider:
+          ttauth:
+            authorization-uri: http://127.0.0.1:33337/oauth2/authorize
+            token-uri: http://127.0.0.1:33337/oauth2/token
+            user-info-uri: http://127.0.0.1:33337/api/test/user
+            user-name-attribute: id
+            jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
             token-uri: https://www.googleapis.com/oauth2/v4/token
@@ -810,16 +815,16 @@ spring:
           gitee:
             authorization-uri: https://gitee.com/oauth/authorize
             token-uri: https://gitee.com/oauth/token
-            user-name-attribute: id
+            user-name-attribute: login
             user-info-uri: https://gitee.com/api/v5/user
           qq:
             authorization-uri: https://graph.qq.com/oauth2.0/authorize
             token-uri: https://graph.qq.com/oauth2.0/token
             user-info-uri: https://graph.qq.com/oauth2.0/me
             user-info-authentication-method: form
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
   cloud:
     openfeign:
       circuitbreaker: #如果 Spring Cloud CircuitBreaker 在 classpath 上，并且feign.circuitbreaker.enabled=true Feign 将使用断路器包装所有方法。
@@ -965,7 +970,7 @@ taotao:
           enabled: false
       jpa:
         enabled: true
-        packages: com.taotao.cloud.auth.biz.model.entity
+        packages: com.taotao.cloud.auth.biz.jpa.entity
         tenant:
           enabled: false
       shardingsphere:
@@ -1033,6 +1038,8 @@ taotao:
       enabled: true
     captcha:
       enabled: false
+      tmp:
+        enabled: true
     mail:
       enabled: false
     websocket:
@@ -1285,3 +1292,56 @@ auth:
       app-id: xx
       group-id: xx
       secret-key: xx
+
+
+herodotus:
+  endpoint:
+    uaa-service-name: dante-cloud-uaa
+    upms-service-name: dante-cloud-upms
+    gateway-service-uri: http://127.0.0.1:33337
+    uaa-service-uri: http://127.0.0.1:33337/
+    upms-service-uri: http://127.0.0.1:33337/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://127.0.0.1:33337/oauth2/token
+    authorization-uri: http://127.0.0.1:33337/oauth2/authorize
+    token-revocation-uri: http://127.0.0.1:33337/oauth2/revoke
+    token-introspection-uri: http://127.0.0.1:33337/oauth2/introspect
+    jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
+    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
+    oidc-client-registration-uri: http://127.0.0.1:33337/connect/register
+    oidc-user-info-uri: http://127.0.0.1:33337/userinfo
+  oauth2:
+    authentication:
+      form-login:
+        category: HUTOOL_GIF
+    authorization:
+      validate: local
+      jwk:
+        certificate: standard
+  access:
+    wxmpp:
+      enabled: true
+      use-redis: false
+      configs:
+        - app-id: sadfa
+          aes-key: asdf
+          token: asdlfsad
+          secret: Alsdflasd
+    wxapp:
+      enabled: true
+      default-app-id: asdfasdf
+      configs:
+        - aes-key: sldf
+          app-id: sdf
+          message-data-format: saldf
+          secret: saldf
+          token: asdlfasdf
+    justauth:
+      enabled: true
+      configs:
+        gitee:
+          clientId: 81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b
+          clientSecret: 6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6
+          redirectUri: http://1fe9ccce.cpolar.cn/login/oauth2/code/gitee
+          scopes:
+            - user_info
+
