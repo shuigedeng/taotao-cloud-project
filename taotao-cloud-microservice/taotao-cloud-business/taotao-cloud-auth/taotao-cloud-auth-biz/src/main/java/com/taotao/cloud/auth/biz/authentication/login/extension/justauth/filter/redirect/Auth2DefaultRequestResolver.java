@@ -23,7 +23,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.redirect;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.Auth2RequestHolder;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthRequestHolder;
 import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.auth.biz.uaa.exception.Auth2Exception;
 import com.taotao.cloud.security.justauth.justauth.request.Auth2DefaultRequest;
@@ -101,7 +101,7 @@ public final class Auth2DefaultRequestResolver implements Auth2AuthorizationRequ
 			return null;
 		}
 
-		final Auth2DefaultRequest auth2DefaultRequest = Auth2RequestHolder.getAuth2DefaultRequest(registrationId);
+		final Auth2DefaultRequest auth2DefaultRequest = JustAuthRequestHolder.getAuth2DefaultRequest(registrationId);
 		if (auth2DefaultRequest == null) {
 			throw new Auth2Exception(ErrorCodeEnum.AUTH2_PROVIDER_NOT_SUPPORT, registrationId);
 		}

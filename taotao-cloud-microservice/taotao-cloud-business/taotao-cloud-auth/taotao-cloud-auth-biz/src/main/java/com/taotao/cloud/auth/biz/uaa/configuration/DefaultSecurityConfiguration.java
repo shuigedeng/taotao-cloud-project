@@ -114,8 +114,8 @@ public class DefaultSecurityConfiguration {
 					.requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
 					.requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
 					.requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-
-					.anyRequest().access(securityAuthorizationManager);
+					.anyRequest()
+					.access(securityAuthorizationManager);
 			})
 			.exceptionHandling(exceptionHandlingCustomizer -> {
 				exceptionHandlingCustomizer.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());

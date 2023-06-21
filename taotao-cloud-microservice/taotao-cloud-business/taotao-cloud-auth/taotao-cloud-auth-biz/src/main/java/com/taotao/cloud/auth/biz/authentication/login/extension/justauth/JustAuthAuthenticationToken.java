@@ -40,7 +40,7 @@ import java.util.Collection;
  * @see Auth2DefaultRequest
  * @since 5.0
  */
-public class Auth2AuthenticationToken extends AbstractAuthenticationToken {
+public class JustAuthAuthenticationToken extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
@@ -55,9 +55,9 @@ public class Auth2AuthenticationToken extends AbstractAuthenticationToken {
 	 * @param authorities the authorities granted to the user
 	 * @param providerId  the providerId
 	 */
-	public Auth2AuthenticationToken(Object principal,
-									Collection<? extends GrantedAuthority> authorities,
-									String providerId) {
+	public JustAuthAuthenticationToken(Object principal,
+									   Collection<? extends GrantedAuthority> authorities,
+									   String providerId) {
 		super(authorities);
 		Assert.notNull(principal, "principal cannot be null");
 		Assert.hasText(providerId, "providerId cannot be empty");

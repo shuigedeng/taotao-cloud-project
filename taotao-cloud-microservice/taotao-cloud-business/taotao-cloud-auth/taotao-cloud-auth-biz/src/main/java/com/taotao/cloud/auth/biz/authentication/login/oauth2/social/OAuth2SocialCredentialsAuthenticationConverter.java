@@ -25,6 +25,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social;
 
+import com.taotao.cloud.auth.biz.authentication.login.oauth2.AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.AccountType;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
@@ -43,10 +44,7 @@ import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -55,12 +53,10 @@ import java.util.stream.Collectors;
  * 
  * @date : 2022/3/31 14:16
  */
-public class OAuth2SocialCredentialsAuthenticationConverter implements AuthenticationConverter {
-
-	private final HttpCryptoProcessor httpCryptoProcessor;
+public class OAuth2SocialCredentialsAuthenticationConverter extends AbstractAuthenticationConverter {
 
 	public OAuth2SocialCredentialsAuthenticationConverter(HttpCryptoProcessor httpCryptoProcessor) {
-		this.httpCryptoProcessor = httpCryptoProcessor;
+		super(httpCryptoProcessor);
 	}
 
 	@Override
@@ -70,6 +66,8 @@ public class OAuth2SocialCredentialsAuthenticationConverter implements Authentic
 		if (!HerodotusGrantType.SOCIAL.getValue().equals(grantType)) {
 			return null;
 		}
+
+		Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
 
 		MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
 
@@ -87,58 +85,35 @@ public class OAuth2SocialCredentialsAuthenticationConverter implements Authentic
 		// others (REQUIRED)
 		// TODO：2022-03-31 这里主要是作为参数的检查，社交登录内容比较多，后续根据实际情况添加
 		if (StringUtils.hasText(source)) {
-            AccountType accountType = AccountType.getAccountType(source);
-            if (ObjectUtils.isNotEmpty(accountType)) {
-                switch (accountType.getHandler()) {
-                    case AccountType.PHONE_NUMBER_HANDLER:
-                        OAuth2EndpointUtils.checkRequiredParameter(parameters, "mobile");
-                        OAuth2EndpointUtils.checkRequiredParameter(parameters, "code");
-                        break;
-                    case AccountType.WECHAT_MINI_APP_HANDLER:
-                        OAuth2EndpointUtils.checkRequiredParameter(parameters, "appId");
-                        OAuth2EndpointUtils.checkRequiredParameter(parameters, "sessionKey");
-                        OAuth2EndpointUtils.checkRequiredParameter(parameters, "encryptedData");
-                        OAuth2EndpointUtils.checkRequiredParameter(parameters, "iv");
-                        break;
-                    default:
-                        break;
-                }
-            }
-		}
-
-		Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
-		if (clientPrincipal == null) {
-			OAuth2EndpointUtils.throwError(
-				OAuth2ErrorCodes.INVALID_REQUEST,
-				OAuth2ErrorCodes.INVALID_CLIENT,
-				OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
+			AccountType accountType = AccountType.getAccountType(source);
+			if (ObjectUtils.isNotEmpty(accountType)) {
+				switch (accountType.getHandler()) {
+					case AccountType.PHONE_NUMBER_HANDLER:
+						OAuth2EndpointUtils.checkRequiredParameter(parameters, "mobile");
+						OAuth2EndpointUtils.checkRequiredParameter(parameters, "code");
+						break;
+					case AccountType.WECHAT_MINI_APP_HANDLER:
+						OAuth2EndpointUtils.checkRequiredParameter(parameters, "appId");
+						OAuth2EndpointUtils.checkRequiredParameter(parameters, "sessionKey");
+						OAuth2EndpointUtils.checkRequiredParameter(parameters, "encryptedData");
+						OAuth2EndpointUtils.checkRequiredParameter(parameters, "iv");
+						break;
+					default:
+						break;
+				}
+			}
 		}
 
 		String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
 
-		Map<String, Object> additionalParameters = parameters
-			.entrySet()
-			.stream()
-			.filter(e -> !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE) &&
-				!e.getKey().equals(OAuth2ParameterNames.SCOPE))
-			.collect(Collectors.toMap(Map.Entry::getKey, e -> parameterDecrypt(e.getValue().get(0), sessionId)));
+		Map<String, Object> additionalParameters = new HashMap<>();
+		parameters.forEach((key, value) -> {
+			if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) &&
+				!key.equals(OAuth2ParameterNames.SCOPE)) {
+				additionalParameters.put(key, (value.size() == 1) ? decrypt(sessionId, value.get(0)) : decrypt(sessionId, value));
+			}
+		});
 
 		return new OAuth2SocialCredentialsAuthenticationToken(clientPrincipal, requestedScopes, additionalParameters);
-	}
-
-	private Object parameterDecrypt(Object object, String sessionId) {
-		if (org.apache.commons.lang3.StringUtils.isNotBlank(sessionId)) {
-			if (ObjectUtils.isNotEmpty(object) && object instanceof String) {
-				try {
-					return httpCryptoProcessor.decrypt(sessionId, object.toString());
-				} catch (SessionInvalidException e) {
-					OAuth2EndpointUtils.throwError(
-						OAuth2ErrorKeys.SESSION_EXPIRED,
-						e.getMessage(),
-						OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
-				}
-			}
-		}
-		return object;
 	}
 }

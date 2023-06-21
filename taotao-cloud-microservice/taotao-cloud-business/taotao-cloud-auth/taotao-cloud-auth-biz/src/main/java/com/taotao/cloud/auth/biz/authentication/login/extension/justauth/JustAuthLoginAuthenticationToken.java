@@ -40,7 +40,7 @@ import java.util.Collections;
  * @see Auth2DefaultRequest
  * @since 2.0.0
  */
-public class Auth2LoginAuthenticationToken extends AbstractAuthenticationToken {
+public class JustAuthLoginAuthenticationToken extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
@@ -57,7 +57,7 @@ public class Auth2LoginAuthenticationToken extends AbstractAuthenticationToken {
 	 * @param auth2DefaultRequest the auth2DefaultRequest
 	 * @param request             the request
 	 */
-	public Auth2LoginAuthenticationToken(Auth2DefaultRequest auth2DefaultRequest, HttpServletRequest request) {
+	public JustAuthLoginAuthenticationToken(Auth2DefaultRequest auth2DefaultRequest, HttpServletRequest request) {
 		super(Collections.emptyList());
 		Assert.notNull(auth2DefaultRequest, "auth2DefaultRequest cannot be null");
 		Assert.notNull(request, "request cannot be null");

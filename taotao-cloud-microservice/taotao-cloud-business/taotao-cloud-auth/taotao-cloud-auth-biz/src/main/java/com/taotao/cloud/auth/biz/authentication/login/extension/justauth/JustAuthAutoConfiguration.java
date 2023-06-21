@@ -61,17 +61,17 @@ import static com.taotao.cloud.auth.biz.authentication.login.extension.justauth.
  * @version V2.0  Created by 2020/10/5 21:47
  */
 @SuppressWarnings({"AlibabaClassNamingShouldBeCamel"})
-@Configuration
 //@AutoConfigureAfter(value = {Auth2PropertiesAutoConfiguration.class})
+//@Configuration
 @Slf4j
-public class Auth2AutoConfiguration implements InitializingBean {
+public class JustAuthAutoConfiguration implements InitializingBean {
 
 	private final RepositoryProperties repositoryProperties;
 	private final Auth2Properties auth2Properties;
 	private final DataSource dataSource;
 
-	public Auth2AutoConfiguration(RepositoryProperties repositoryProperties, Auth2Properties auth2Properties,
-								  DataSource dataSource) {
+	public JustAuthAutoConfiguration(RepositoryProperties repositoryProperties, Auth2Properties auth2Properties,
+									 DataSource dataSource) {
 		this.repositoryProperties = repositoryProperties;
 		this.auth2Properties = auth2Properties;
 		this.dataSource = dataSource;
@@ -132,8 +132,8 @@ public class Auth2AutoConfiguration implements InitializingBean {
 	}
 
 	@Bean
-	public Auth2RequestHolder auth2RequestHolder() {
-		return Auth2RequestHolder.getInstance();
+	public JustAuthRequestHolder auth2RequestHolder() {
+		return JustAuthRequestHolder.getInstance();
 	}
 
 	@SuppressWarnings("AlibabaMethodTooLong")

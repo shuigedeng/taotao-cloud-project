@@ -102,22 +102,22 @@ public abstract class AbstractUserDetailsAuthenticationProvider extends Abstract
 		UserDetails user = retrieveUser(additionalParameters);
 
 		if (!user.isAccountNonLocked()) {
-			log.info("[Herodotus] |- Failed to authenticate since user account is locked");
+			log.debug("[Herodotus] |- Failed to authenticate since user account is locked");
 			throw new LockedException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.locked", "User account is locked"));
 		}
 		if (!user.isEnabled()) {
-			log.info("[Herodotus] |- Failed to authenticate since user account is disabled");
+			log.debug("[Herodotus] |- Failed to authenticate since user account is disabled");
 			throw new DisabledException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.disabled", "User is disabled"));
 		}
 		if (!user.isAccountNonExpired()) {
-			log.info("[Herodotus] |- Failed to authenticate since user account has expired");
+			log.debug("[Herodotus] |- Failed to authenticate since user account has expired");
 			throw new AccountExpiredException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.expired", "User account has expired"));
 		}
 
 		additionalAuthenticationChecks(user, additionalParameters);
 
 		if (!user.isCredentialsNonExpired()) {
-			log.info("[Herodotus] |- Failed to authenticate since user account credentials have expired");
+			log.debug("[Herodotus] |- Failed to authenticate since user account credentials have expired");
 			throw new CredentialsExpiredException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.credentialsExpired", "User credentials have expired"));
 		}
 
@@ -139,7 +139,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider extends Abstract
 						if (ObjectUtils.isNotEmpty(refreshToken)) {
 							authorization = OAuth2AuthenticationProviderUtils.invalidate(authorization, refreshToken.getToken());
 						}
-						log.info("[Herodotus] |- Sign in user [{}] with token id [{}] will be kicked out.", user.getUsername(), authorization.getId());
+						log.debug("[Herodotus] |- Sign in user [{}] with token id [{}] will be kicked out.", user.getUsername(), authorization.getId());
 						jpaOAuth2AuthorizationService.save(authorization);
 					});
 				}
@@ -175,3 +175,4 @@ public abstract class AbstractUserDetailsAuthenticationProvider extends Abstract
 		return authentication;
 	}
 }
+

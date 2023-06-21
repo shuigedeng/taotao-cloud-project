@@ -53,7 +53,7 @@ import java.lang.reflect.Method;
  * @version V2.0  Created by 2020.11.19 12:35
  */
 @Slf4j
-public class AuthDefaultRequestAdapter extends AuthDefaultRequest implements Auth2DefaultRequest {
+public class JustAuthDefaultRequestAdapter extends AuthDefaultRequest implements Auth2DefaultRequest {
 
 	private final String providerId;
 
@@ -66,9 +66,9 @@ public class AuthDefaultRequestAdapter extends AuthDefaultRequest implements Aut
 	 * @param source         {@link AuthDefaultRequest} 的 {@link AuthSource}
 	 * @param authStateCache {@link AuthDefaultRequest} 的 {@link AuthStateCache}
 	 */
-	public AuthDefaultRequestAdapter(AuthConfig config, AuthSource source, AuthStateCache authStateCache) {
+	public JustAuthDefaultRequestAdapter(AuthConfig config, AuthSource source, AuthStateCache authStateCache) {
 		super(config, source, authStateCache);
-		String providerId = Auth2RequestHolder.getProviderId(source);
+		String providerId = JustAuthRequestHolder.getProviderId(source);
 		if (org.springframework.util.StringUtils.hasText(providerId)) {
 			this.providerId = providerId;
 		} else {

@@ -61,12 +61,12 @@ import static java.util.Objects.isNull;
  * It will also obtain the user attributes of the End-User (Resource Owner) from the
  * UserInfo Endpoint using an {@link Auth2UserService}, which will create a
  * {@code Principal} in the form of an {@link AuthUser}. The {@code AuthUser} is then
- * associated to the {@link Auth2LoginAuthenticationToken} to complete the
+ * associated to the {@link JustAuthLoginAuthenticationToken} to complete the
  * authentication.
  *
  * @author Joe Grandja
  * @author YongWu zheng
- * @see Auth2AuthenticationToken
+ * @see JustAuthAuthenticationToken
  * @see Auth2UserService
  * @see <a target="_blank" href="https://tools.ietf.org/html/rfc6749#section-4.1">Section
  * 4.1 Authorization Code Grant Flow</a>
@@ -80,7 +80,7 @@ import static java.util.Objects.isNull;
  */
 @SuppressWarnings({"JavaDoc", "unused"})
 @Slf4j
-public class Auth2LoginAuthenticationProvider implements AuthenticationProvider {
+public class JustAuthLoginAuthenticationProvider implements AuthenticationProvider {
 
 	private final Auth2UserService userService;
 	private final UmsUserDetailsService umsUserDetailsService;
@@ -110,14 +110,14 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 	 * @param temporaryUserPassword                临时密码
 	 * @param authenticationToUserDetailsConverter authentication to user details converter
 	 */
-	public Auth2LoginAuthenticationProvider(Auth2UserService userService,
-											ConnectionService connectionService,
-											UmsUserDetailsService umsUserDetailsService,
-											ExecutorService updateConnectionTaskExecutor,
-											Boolean autoSignUp,
-											String temporaryUserAuthorities,
-											String temporaryUserPassword,
-											@Autowired(required = false)
+	public JustAuthLoginAuthenticationProvider(Auth2UserService userService,
+											   ConnectionService connectionService,
+											   UmsUserDetailsService umsUserDetailsService,
+											   ExecutorService updateConnectionTaskExecutor,
+											   Boolean autoSignUp,
+											   String temporaryUserAuthorities,
+											   String temporaryUserPassword,
+											   @Autowired(required = false)
 											AuthenticationToUserDetailsConverter authenticationToUserDetailsConverter) {
 		Assert.notNull(updateConnectionTaskExecutor, "updateConnectionTaskExecutor cannot be null");
 		Assert.notNull(userService, "userService cannot be null");
@@ -139,7 +139,7 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 	@SuppressWarnings("AlibabaMethodTooLong")
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		Auth2LoginAuthenticationToken loginToken = (Auth2LoginAuthenticationToken) authentication;
+		JustAuthLoginAuthenticationToken loginToken = (JustAuthLoginAuthenticationToken) authentication;
 		Auth2DefaultRequest auth2DefaultRequest = loginToken.getAuth2DefaultRequest();
 
 		//1 从第三方获取 Userinfo
@@ -275,7 +275,7 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 		// 认证成功后前置与后置检查
 		try {
 			preAuthenticationChecks.check(userDetails);
-			additionalAuthenticationChecks(userDetails, (Auth2LoginAuthenticationToken) authentication);
+			additionalAuthenticationChecks(userDetails, (JustAuthLoginAuthenticationToken) authentication);
 		} catch (AuthenticationException exception) {
 			if (cacheWasUsed) {
 				// There was a problem, so try again after checking
@@ -283,7 +283,7 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 				cacheWasUsed = false;
 				userDetails = umsUserDetailsService.loadUserByUserId(userDetails.getUsername());
 				preAuthenticationChecks.check(userDetails);
-				additionalAuthenticationChecks(userDetails, (Auth2LoginAuthenticationToken) authentication);
+				additionalAuthenticationChecks(userDetails, (JustAuthLoginAuthenticationToken) authentication);
 			} else {
 				throw exception;
 			}
@@ -297,11 +297,11 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 		}
 
 		// 7 创建成功认证 token 并返回
-		Auth2AuthenticationToken auth2AuthenticationToken = new Auth2AuthenticationToken(userDetails, userDetails.getAuthorities(),
+		JustAuthAuthenticationToken justAuthAuthenticationToken = new JustAuthAuthenticationToken(userDetails, userDetails.getAuthorities(),
 			providerId);
-		auth2AuthenticationToken.setDetails(loginToken.getDetails());
+		justAuthAuthenticationToken.setDetails(loginToken.getDetails());
 
-		return auth2AuthenticationToken;
+		return justAuthAuthenticationToken;
 	}
 
 	/**
@@ -356,7 +356,7 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 	 */
 	@SuppressWarnings("unused")
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
-												  Auth2LoginAuthenticationToken authentication) throws AuthenticationException {
+												  JustAuthLoginAuthenticationToken authentication) throws AuthenticationException {
 		// 第三方授权登录, 不需要对密码校验.
 	}
 
@@ -430,7 +430,7 @@ public class Auth2LoginAuthenticationProvider implements AuthenticationProvider 
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return Auth2LoginAuthenticationToken.class.isAssignableFrom(authentication);
+		return JustAuthLoginAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 
 }
