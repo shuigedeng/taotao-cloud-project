@@ -140,7 +140,7 @@ Maven:
  Elasticjob           | 3.0.3           
  Powerjob             | 4.3.2           
  Forest               | 1.5.31          
- Netty                | 4.1.93.Final
+ Netty                | 4.1.94.Final
 
 ## 6. 演示地址
 
