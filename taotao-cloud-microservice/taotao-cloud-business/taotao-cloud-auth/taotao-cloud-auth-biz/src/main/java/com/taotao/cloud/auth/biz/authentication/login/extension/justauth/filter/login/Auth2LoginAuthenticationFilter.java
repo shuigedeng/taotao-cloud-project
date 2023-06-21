@@ -1,7 +1,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.login;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.Auth2LoginAuthenticationToken;
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.Auth2RequestHolder;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthLoginAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthRequestHolder;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.redirect.Auth2DefaultRequestResolver;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.userdetails.TemporaryUser;
 import com.taotao.cloud.common.utils.common.JsonUtils;
@@ -104,7 +104,7 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
         String registrationId = this.authorizationRequestResolver.resolveRegistrationId(request);
         Auth2DefaultRequest auth2DefaultRequest = null;
         if (StringUtils.hasText(registrationId)) {
-            auth2DefaultRequest = Auth2RequestHolder.getAuth2DefaultRequest(registrationId);
+            auth2DefaultRequest = JustAuthRequestHolder.getAuth2DefaultRequest(registrationId);
         }
 
         if (auth2DefaultRequest == null) {
@@ -114,7 +114,7 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
 
-        Auth2LoginAuthenticationToken authenticationRequest = new Auth2LoginAuthenticationToken(auth2DefaultRequest, request);
+        JustAuthLoginAuthenticationToken authenticationRequest = new JustAuthLoginAuthenticationToken(auth2DefaultRequest, request);
 
         // Allow subclasses to set the "details" property
         setDetails(request, authenticationRequest);
@@ -182,7 +182,7 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
      * @param authRequest the auth request object that should have its details
      * set
      */
-    protected void setDetails(HttpServletRequest request, Auth2LoginAuthenticationToken authRequest) {
+    protected void setDetails(HttpServletRequest request, JustAuthLoginAuthenticationToken authRequest) {
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
     }
 

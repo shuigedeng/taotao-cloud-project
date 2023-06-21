@@ -59,10 +59,10 @@ import java.util.concurrent.ExecutorService;
  * 添加 OAuth2(JustAuth) 配置
  */
 @SuppressWarnings("jol")
-@Configuration
-@AutoConfigureAfter({Auth2AutoConfiguration.class})
-@Slf4j
-public class Auth2AutoConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>
+//@Configuration
+//@AutoConfigureAfter({JustAuthAutoConfiguration.class})
+//@Slf4j
+public class JustAuthAutoConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>
 	implements InitializingBean {
 
 	private final Auth2Properties auth2Properties;
@@ -88,14 +88,14 @@ public class Auth2AutoConfigurer extends SecurityConfigurerAdapter<DefaultSecuri
 	@Autowired(required = false)
 	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
 
-	public Auth2AutoConfigurer(Auth2Properties auth2Properties,
-							   UmsUserDetailsService umsUserDetailsService,
-							   Auth2UserService auth2UserService,
-							   ConnectionService connectionSignUp,
-							   @Qualifier("updateConnectionTaskExecutor") ExecutorService updateConnectionTaskExecutor,
-							   @Autowired(required = false)
+	public JustAuthAutoConfigurer(Auth2Properties auth2Properties,
+								  UmsUserDetailsService umsUserDetailsService,
+								  Auth2UserService auth2UserService,
+								  ConnectionService connectionSignUp,
+								  @Qualifier("updateConnectionTaskExecutor") ExecutorService updateConnectionTaskExecutor,
+								  @Autowired(required = false)
 							   RedisConnectionFactory redisConnectionFactory,
-							   @Autowired(required = false)
+								  @Autowired(required = false)
 							   AuthenticationToUserDetailsConverter authenticationToUserDetailsConverter) {
 		this.auth2Properties = auth2Properties;
 		this.umsUserDetailsService = umsUserDetailsService;
@@ -136,7 +136,7 @@ public class Auth2AutoConfigurer extends SecurityConfigurerAdapter<DefaultSecuri
 		http.addFilterAfter(postProcess(auth2LoginAuthenticationFilter), Auth2DefaultRequestRedirectFilter.class);
 
 		// 添加 provider
-		Auth2LoginAuthenticationProvider auth2LoginAuthenticationProvider = new Auth2LoginAuthenticationProvider(
+		JustAuthLoginAuthenticationProvider justAuthLoginAuthenticationProvider = new JustAuthLoginAuthenticationProvider(
 			auth2UserService, connectionSignUp, umsUserDetailsService,
 			updateConnectionTaskExecutor, auth2Properties.getAutoSignUp(), auth2Properties.getTemporaryUserAuthorities(),
 			auth2Properties.getTemporaryUserPassword(), authenticationToUserDetailsConverter);
@@ -151,7 +151,7 @@ public class Auth2AutoConfigurer extends SecurityConfigurerAdapter<DefaultSecuri
 			// 添加认证成功处理器
 			auth2LoginAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
 		}
-		http.authenticationProvider(postProcess(auth2LoginAuthenticationProvider));
+		http.authenticationProvider(postProcess(justAuthLoginAuthenticationProvider));
 
 	}
 

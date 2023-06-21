@@ -23,7 +23,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.repository.jdbc;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.Auth2RequestHolder;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthRequestHolder;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.entity.ConnectionKey;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.properties.RepositoryProperties;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.repository.UsersConnectionRepository;
@@ -446,7 +446,7 @@ public class Auth2JdbcUsersConnectionRepository implements UsersConnectionReposi
 	private MultiValueMap<String, ConnectionData> getConnectionMap(List<ConnectionData> connectionList) {
 		MultiValueMap<String, ConnectionData> connections = new LinkedMultiValueMap<>();
 
-		Collection<String> registeredProviderIds = Auth2RequestHolder.getValidProviderIds();
+		Collection<String> registeredProviderIds = JustAuthRequestHolder.getValidProviderIds();
 		for (String registeredProviderId : registeredProviderIds) {
 			connections.put(registeredProviderId, Collections.emptyList());
 		}

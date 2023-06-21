@@ -2,7 +2,7 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.deseri
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.Auth2AuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthAuthenticationToken;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.userdetails.TemporaryUser;
 import me.zhyd.oauth.model.AuthToken;
 import me.zhyd.oauth.model.AuthUser;
@@ -27,7 +27,7 @@ public class Auth2Jackson2Module extends SimpleModule {
 	@Override
 	public void setupModule(SetupContext context) {
 		SecurityJackson2Modules.enableDefaultTyping(context.getOwner());
-		context.setMixInAnnotations(Auth2AuthenticationToken.class,
+		context.setMixInAnnotations(JustAuthAuthenticationToken.class,
 			Auth2AuthenticationTokenJsonDeserializer.Auth2AuthenticationTokenMixin.class);
 		context.setMixInAnnotations(RememberMeAuthenticationToken.class,
 			RememberMeAuthenticationTokenJsonDeserializer.RememberMeAuthenticationTokenMixin.class);

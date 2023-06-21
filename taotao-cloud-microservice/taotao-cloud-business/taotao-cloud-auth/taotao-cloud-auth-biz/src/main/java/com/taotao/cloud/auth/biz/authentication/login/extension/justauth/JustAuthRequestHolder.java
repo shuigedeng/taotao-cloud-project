@@ -76,27 +76,27 @@ import static org.springframework.util.StringUtils.hasText;
  * @version V1.0  Created by 2020-10-06 18:09
  */
 @Slf4j
-public final class Auth2RequestHolder implements InitializingBean, ApplicationContextAware {
+public final class JustAuthRequestHolder implements InitializingBean, ApplicationContextAware {
 
-	private Auth2RequestHolder() {
+	private JustAuthRequestHolder() {
 	}
 
-	private volatile static Auth2RequestHolder INSTANCE;
+	private volatile static JustAuthRequestHolder INSTANCE;
 
 	/**
-	 * 获取单例模式 {@link Auth2RequestHolder}
+	 * 获取单例模式 {@link JustAuthRequestHolder}
 	 *
-	 * @return 返回  {@link Auth2RequestHolder}
+	 * @return 返回  {@link JustAuthRequestHolder}
 	 */
-	public static Auth2RequestHolder getInstance() {
+	public static JustAuthRequestHolder getInstance() {
 		if (nonNull(INSTANCE)) {
 			return INSTANCE;
 		}
-		synchronized (Auth2RequestHolder.class) {
+		synchronized (JustAuthRequestHolder.class) {
 			if (isNull(INSTANCE)) {
 				//noinspection UnnecessaryLocalVariable
-				final Auth2RequestHolder auth2RequestHolder = new Auth2RequestHolder();
-				INSTANCE = auth2RequestHolder;
+				final JustAuthRequestHolder justAuthRequestHolder = new JustAuthRequestHolder();
+				INSTANCE = justAuthRequestHolder;
 			}
 			return INSTANCE;
 		}
@@ -144,8 +144,8 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 	 * @param authCustomizeSource auth2 Customize Source
 	 */
 	public static synchronized void setAuthCustomizeSource(AuthCustomizeSource authCustomizeSource) {
-		if (Auth2RequestHolder.authCustomizeSource == null) {
-			Auth2RequestHolder.authCustomizeSource = authCustomizeSource;
+		if (JustAuthRequestHolder.authCustomizeSource == null) {
+			JustAuthRequestHolder.authCustomizeSource = authCustomizeSource;
 		}
 	}
 
@@ -155,8 +155,8 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 	 * @param authGitlabPrivateSource auth2 GitlabPrivate Source
 	 */
 	public static synchronized void setAuthGitlabPrivateSource(AuthGitlabPrivateSource authGitlabPrivateSource) {
-		if (Auth2RequestHolder.authGitlabPrivateSource == null) {
-			Auth2RequestHolder.authGitlabPrivateSource = authGitlabPrivateSource;
+		if (JustAuthRequestHolder.authGitlabPrivateSource == null) {
+			JustAuthRequestHolder.authGitlabPrivateSource = authGitlabPrivateSource;
 		}
 	}
 
@@ -214,7 +214,7 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 	public void afterPropertiesSet() throws Exception {
 
 		try {
-			Auth2RequestHolder.setAuthCustomizeSource(applicationContext.getBean(AuthCustomizeSource.class));
+			JustAuthRequestHolder.setAuthCustomizeSource(applicationContext.getBean(AuthCustomizeSource.class));
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) {
 				log.debug("没有自定义实现 {}", AuthCustomizeSource.class.getName());
@@ -222,7 +222,7 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 		}
 
 		try {
-			Auth2RequestHolder.setAuthGitlabPrivateSource(applicationContext.getBean(AuthGitlabPrivateSource.class));
+			JustAuthRequestHolder.setAuthGitlabPrivateSource(applicationContext.getBean(AuthGitlabPrivateSource.class));
 		} catch (Exception e) {
 			if (log.isDebugEnabled()) {
 				log.debug("没有自定义实现 {}", AuthGitlabPrivateSource.class.getName());
@@ -264,23 +264,23 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 					source = AuthDefaultSource.valueOf(join(FIELD_SEPARATOR, splits).toUpperCase());
 					SOURCE_PROVIDER_ID_MAP.put(source, providerId);
 				} catch (Exception e) {
-					if (Auth2RequestHolder.authCustomizeSource != null
-						&& getProviderIdBySource(Auth2RequestHolder.authCustomizeSource).equals(providerId)) {
-						source = Auth2RequestHolder.authCustomizeSource;
+					if (JustAuthRequestHolder.authCustomizeSource != null
+						&& getProviderIdBySource(JustAuthRequestHolder.authCustomizeSource).equals(providerId)) {
+						source = JustAuthRequestHolder.authCustomizeSource;
 						providerId = ((BaseAuth2Properties) baseProperties).getCustomizeProviderId();
 						// 重新设置 AuthCustomizeSource 的 name 字段的值, 比如 providerId = customUms, 那么 name = CUSTOM_UMS
 						Class<? extends AuthCustomizeSource> authCustomizeSourceClass =
-							Auth2RequestHolder.authCustomizeSource.getClass();
+							JustAuthRequestHolder.authCustomizeSource.getClass();
 						Field nameField = authCustomizeSourceClass.getSuperclass().getDeclaredField("name");
 						nameField.setAccessible(true);
-						nameField.set(Auth2RequestHolder.authCustomizeSource,
+						nameField.set(JustAuthRequestHolder.authCustomizeSource,
 							join(FIELD_SEPARATOR, splitByCharacterTypeCamelCase(providerId)).toUpperCase());
 
-						SOURCE_PROVIDER_ID_MAP.put(Auth2RequestHolder.authCustomizeSource, providerId);
-					} else if (Auth2RequestHolder.authGitlabPrivateSource != null
-						&& getProviderIdBySource(Auth2RequestHolder.authGitlabPrivateSource).equals(providerId)) {
-						source = Auth2RequestHolder.authGitlabPrivateSource;
-						SOURCE_PROVIDER_ID_MAP.put(Auth2RequestHolder.authCustomizeSource, providerId);
+						SOURCE_PROVIDER_ID_MAP.put(JustAuthRequestHolder.authCustomizeSource, providerId);
+					} else if (JustAuthRequestHolder.authGitlabPrivateSource != null
+						&& getProviderIdBySource(JustAuthRequestHolder.authGitlabPrivateSource).equals(providerId)) {
+						source = JustAuthRequestHolder.authGitlabPrivateSource;
+						SOURCE_PROVIDER_ID_MAP.put(JustAuthRequestHolder.authCustomizeSource, providerId);
 					}
 
 				}
@@ -512,12 +512,12 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 	 * @return {@link AuthDefaultRequest} 相对应的适配器
 	 */
 	@NonNull
-	private AuthDefaultRequestAdapter getAuthDefaultRequestAdapter(@NonNull AuthConfig config,
-																   @NonNull AuthSource source,
-																   @NonNull AuthStateCache authStateCache,
-																   @Nullable String alipayProxyHost,
-																   @Nullable Integer alipayProxyPort) throws ClassNotFoundException {
-		final AuthDefaultRequestAdapter adapter = new AuthDefaultRequestAdapter(config, source, authStateCache);
+	private JustAuthDefaultRequestAdapter getAuthDefaultRequestAdapter(@NonNull AuthConfig config,
+																	   @NonNull AuthSource source,
+																	   @NonNull AuthStateCache authStateCache,
+																	   @Nullable String alipayProxyHost,
+																	   @Nullable Integer alipayProxyPort) throws ClassNotFoundException {
+		final JustAuthDefaultRequestAdapter adapter = new JustAuthDefaultRequestAdapter(config, source, authStateCache);
 		Class<?>[] argumentTypes = new Class[]{AuthConfig.class, AuthStateCache.class};
 		Object[] arguments = new Object[]{config, authStateCache};
 		if (ALIPAY.equals(source) && hasText(alipayProxyHost) && nonNull(alipayProxyPort)) {
@@ -532,19 +532,19 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 
 	/**
 	 * 创建 {@code targetClass} 的代理对象, 主要是替换 {@link AuthDefaultRequest} 的 {@code getRealState(state)} 方法
-	 * 为 {@link AuthDefaultRequestAdapter#getRealState(String)} 方法.
+	 * 为 {@link JustAuthDefaultRequestAdapter#getRealState(String)} 方法.
 	 *
 	 * @param targetClass   代理的目标对象 Class, 必须是 {@link AuthDefaultRequest} 的子类 Class
 	 * @param argumentTypes 目标对象构造参数类型数组
 	 * @param arguments     目标对象构造参数值数组与 argumentTypes 一一对应
-	 * @param adapter       {@link AuthDefaultRequestAdapter}
+	 * @param adapter       {@link JustAuthDefaultRequestAdapter}
 	 * @return targetClass 的代理对象
 	 */
 	@NonNull
 	private AuthDefaultRequest createProxy(Class<?> targetClass,
 										   Class<?>[] argumentTypes,
 										   Object[] arguments,
-										   AuthDefaultRequestAdapter adapter) throws ClassNotFoundException {
+										   JustAuthDefaultRequestAdapter adapter) throws ClassNotFoundException {
 
 		if (!AuthDefaultRequest.class.isAssignableFrom(targetClass)) {
 			throw new ClassNotFoundException(targetClass.getName() + " 必须是 me.zhyd.oauth.request.AuthDefaultRequest 的子类");
@@ -554,7 +554,7 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 		enhancer.setSuperclass(targetClass);
 		enhancer.setCallback((MethodInterceptor) (target, method, args, methodProxy) -> {
 			// 替换 AuthDefaultRequest 的 getRealState(state) 方法为 AuthDefaultRequestAdapter 的 getRealState(state) 方法
-			if (target instanceof AuthDefaultRequest && !(target instanceof AuthDefaultRequestAdapter)
+			if (target instanceof AuthDefaultRequest && !(target instanceof JustAuthDefaultRequestAdapter)
 				&& "getRealState".equals(method.getName())) {
 				return adapter.getRealState((String) args[0]);
 			}
@@ -691,17 +691,17 @@ public final class Auth2RequestHolder implements InitializingBean, ApplicationCo
 	@NonNull
 	public static Class<?> getAuthRequestClassBySource(@NonNull AuthSource source) throws ClassNotFoundException {
 		if (source instanceof AuthCustomizeSource) {
-			if (Auth2RequestHolder.authCustomizeSource == null) {
+			if (JustAuthRequestHolder.authCustomizeSource == null) {
 				throw new RuntimeException("必须实现 top.dcenter.ums.security.core.oauth.justauth.source.AuthCustomizeSource 且注入 IOC 容器");
 			}
-			return Auth2RequestHolder.authCustomizeSource.getCustomizeRequestClass();
+			return JustAuthRequestHolder.authCustomizeSource.getCustomizeRequestClass();
 		}
 
 		if (source instanceof AuthGitlabPrivateSource) {
-			if (Auth2RequestHolder.authGitlabPrivateSource == null) {
+			if (JustAuthRequestHolder.authGitlabPrivateSource == null) {
 				throw new RuntimeException("必须实现 top.dcenter.ums.security.core.oauth.justauth.source.AuthCustomizeSource 且注入 IOC 容器");
 			}
-			return Auth2RequestHolder.authGitlabPrivateSource.getCustomizeRequestClass();
+			return JustAuthRequestHolder.authGitlabPrivateSource.getCustomizeRequestClass();
 		}
 
 		if (!(source instanceof AuthDefaultSource)) {

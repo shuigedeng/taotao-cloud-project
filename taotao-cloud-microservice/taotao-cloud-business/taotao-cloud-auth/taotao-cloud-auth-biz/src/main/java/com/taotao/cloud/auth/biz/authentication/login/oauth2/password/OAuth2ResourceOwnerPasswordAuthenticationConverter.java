@@ -25,6 +25,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.password;
 
+import com.taotao.cloud.auth.biz.authentication.login.oauth2.AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.auth.biz.utils.SessionInvalidException;
@@ -41,10 +42,7 @@ import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -56,74 +54,51 @@ import java.util.stream.Collectors;
  * 
  * @date : 2022/2/22 17:03
  */
-public final class OAuth2ResourceOwnerPasswordAuthenticationConverter implements AuthenticationConverter {
+public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends AbstractAuthenticationConverter {
 
-    private final HttpCryptoProcessor httpCryptoProcessor;
+	public OAuth2ResourceOwnerPasswordAuthenticationConverter(HttpCryptoProcessor httpCryptoProcessor) {
+		super(httpCryptoProcessor);
+	}
 
-    public OAuth2ResourceOwnerPasswordAuthenticationConverter(HttpCryptoProcessor httpCryptoProcessor) {
-        this.httpCryptoProcessor = httpCryptoProcessor;
-    }
+	@Nullable
+	@Override
+	public Authentication convert(HttpServletRequest request) {
+		// grant_type (REQUIRED)
+		String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
+		if (!HerodotusGrantType.PASSWORD.getValue().equals(grantType)) {
+			return null;
+		}
 
-    @Nullable
-    @Override
-    public Authentication convert(HttpServletRequest request) {
-        // grant_type (REQUIRED)
-        String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-        if (!HerodotusGrantType.PASSWORD.getValue().equals(grantType)) {
-            return null;
-        }
+		Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
 
-        MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
+		MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
 
-        // scope (OPTIONAL)
-        String scope = OAuth2EndpointUtils.checkOptionalParameter(parameters, OAuth2ParameterNames.SCOPE);
+		// scope (OPTIONAL)
+		String scope = OAuth2EndpointUtils.checkOptionalParameter(parameters, OAuth2ParameterNames.SCOPE);
 
-        Set<String> requestedScopes = null;
-        if (StringUtils.hasText(scope)) {
-            requestedScopes = new HashSet<>(
-                    Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
-        }
+		Set<String> requestedScopes = null;
+		if (StringUtils.hasText(scope)) {
+			requestedScopes = new HashSet<>(
+				Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
+		}
 
-        // username (REQUIRED)
-        OAuth2EndpointUtils.checkRequiredParameter(parameters, OAuth2ParameterNames.USERNAME);
+		// username (REQUIRED)
+		OAuth2EndpointUtils.checkRequiredParameter(parameters, OAuth2ParameterNames.USERNAME);
 
-        // password (REQUIRED)
-        OAuth2EndpointUtils.checkRequiredParameter(parameters, OAuth2ParameterNames.PASSWORD);
+		// password (REQUIRED)
+		OAuth2EndpointUtils.checkRequiredParameter(parameters, OAuth2ParameterNames.PASSWORD);
 
-        Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
-        if (clientPrincipal == null) {
-            OAuth2EndpointUtils.throwError(
-                    OAuth2ErrorKeys.INVALID_REQUEST,
-                    OAuth2ErrorKeys.INVALID_CLIENT,
-                    OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
-        }
+		String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
 
-        String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
+		Map<String, Object> additionalParameters = new HashMap<>();
+		parameters.forEach((key, value) -> {
+			if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) &&
+				!key.equals(OAuth2ParameterNames.SCOPE)) {
+				additionalParameters.put(key, (value.size() == 1) ? decrypt(sessionId, value.get(0)) : decrypt(sessionId, value));
+			}
+		});
 
-        Map<String, Object> additionalParameters = parameters
-                .entrySet()
-                .stream()
-                .filter(e -> !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE) &&
-                        !e.getKey().equals(OAuth2ParameterNames.SCOPE))
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> parameterDecrypt(e.getValue().get(0), sessionId)));
+		return new OAuth2ResourceOwnerPasswordAuthenticationToken(clientPrincipal, requestedScopes, additionalParameters);
 
-        return new OAuth2ResourceOwnerPasswordAuthenticationToken(clientPrincipal, requestedScopes, additionalParameters);
-
-    }
-
-    private Object parameterDecrypt(Object object, String sessionId) {
-        if (org.apache.commons.lang3.StringUtils.isNotBlank(sessionId)) {
-            if (ObjectUtils.isNotEmpty(object) && object instanceof String) {
-                try {
-                    return httpCryptoProcessor.decrypt(sessionId, object.toString());
-                } catch (SessionInvalidException e) {
-                    OAuth2EndpointUtils.throwError(
-                            OAuth2ErrorKeys.SESSION_EXPIRED,
-                            e.getMessage(),
-                            OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
-                }
-            }
-        }
-        return object;
-    }
+	}
 }

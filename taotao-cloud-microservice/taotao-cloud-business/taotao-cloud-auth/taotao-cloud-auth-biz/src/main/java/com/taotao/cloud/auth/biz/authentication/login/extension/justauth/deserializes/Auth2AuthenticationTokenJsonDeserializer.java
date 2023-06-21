@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.Auth2AuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthAuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,16 +47,16 @@ import java.util.Collection;
  * @author YongWu zheng
  * @version V2.0  Created by 2020/10/28 10:58
  */
-public class Auth2AuthenticationTokenJsonDeserializer extends StdDeserializer<Auth2AuthenticationToken> {
+public class Auth2AuthenticationTokenJsonDeserializer extends StdDeserializer<JustAuthAuthenticationToken> {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public Auth2AuthenticationTokenJsonDeserializer() {
-        super(Auth2AuthenticationToken.class);
+        super(JustAuthAuthenticationToken.class);
     }
 
     @Override
-    public Auth2AuthenticationToken deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public JustAuthAuthenticationToken deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 
         ObjectMapper mapper = (ObjectMapper) p.getCodec();
 
@@ -94,18 +94,18 @@ public class Auth2AuthenticationTokenJsonDeserializer extends StdDeserializer<Au
             throw new IOException(msg);
         }
 
-        final Auth2AuthenticationToken auth2AuthenticationToken =
-                new Auth2AuthenticationToken(principal,
+        final JustAuthAuthenticationToken justAuthAuthenticationToken =
+                new JustAuthAuthenticationToken(principal,
                                              tokenAuthorities,
                                              providerId);
 
         // 创建 details 对象
         if (!(detailsNode.isNull() || detailsNode.isMissingNode())) {
             WebAuthenticationDetails details = mapper.convertValue(detailsNode, new TypeReference<WebAuthenticationDetails>(){});
-            auth2AuthenticationToken.setDetails(details);
+            justAuthAuthenticationToken.setDetails(details);
         }
 
-        return auth2AuthenticationToken;
+        return justAuthAuthenticationToken;
 
     }
 
