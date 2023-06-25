@@ -72,12 +72,12 @@ buildscript {
         classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.14"
 
         //https://github.com/spring-io/spring-javaformat/
-        classpath("io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.39")
+        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.39"
 
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
-        classpath("com.guardsquare:proguard-gradle:7.3.2")
+        classpath "com.guardsquare:proguard-gradle:7.3.2"
     }
 }
 
@@ -129,11 +129,11 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
-    id "com.github.shalousun.smart-doc" version "2.7.0"
+    id "com.github.shalousun.smart-doc" version "2.7.1"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
-    id "org.owasp.dependencycheck" version "8.2.1"
+    id "org.owasp.dependencycheck" version "8.3.1"
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
@@ -169,7 +169,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.9.22'
+    id 'org.graalvm.buildtools.native' version '0.9.23'
 }
 
 allprojects {
