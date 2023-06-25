@@ -32,22 +32,16 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
-
+import  jakarta.activation.MimetypesFileTypeMap;
 /**
- * TaoTaoCloudAuthBizApplication 默认url 作用
+ * TaoTaoCloudAuthBizApplication
  *
  * <p>/oauth/authorize 授权端点
- *
  * <p>/oauth/token 令牌端点
- *
  * <p>/oauth/confirm_access 用户批准授权的端点
- *
  * <p>/oauth/error 用于渲染授权服务器的错误
- *
  * <p>/oauth/check_token 资源服务器解码access token
- *
  * <p>/oauth/jwks 当使用JWT的时候，暴露公钥的端点
- *
  * <p>
  *
  * <pre class="code">
@@ -113,7 +107,6 @@ public class TaoTaoCloudAuthApplication {
 		//   clientType：PC端，小程序端，APP端
 		//   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
 		//}
-
 
         SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }

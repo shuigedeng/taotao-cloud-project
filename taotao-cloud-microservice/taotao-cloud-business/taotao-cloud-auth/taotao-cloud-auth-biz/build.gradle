@@ -31,8 +31,8 @@ dependencies {
 
     implementation 'org.springframework.session:spring-session-data-redis:3.1.0'
 
-    implementation 'com.github.binarywang:weixin-java-mp:4.5.0'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.0'
+    implementation 'com.github.binarywang:weixin-java-mp:4.5.1.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.1.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -104,7 +104,7 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthTmpApplication"
+mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
 description = "认证中心"
 archivesBaseName = 'taotao-cloud-auth'
 
