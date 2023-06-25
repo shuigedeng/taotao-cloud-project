@@ -72,7 +72,6 @@ import  jakarta.activation.MimetypesFileTypeMap;
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @Import({
-	AutoConfiguration.class,
 	OAuth2AuthorizationConfiguration.class,
 	OAuth2ManagementConfiguration.class,
 	DefaultSecurityConfiguration.class,

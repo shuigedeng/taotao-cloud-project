@@ -106,7 +106,12 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 //		}
 
 		LogUtils.error("用户认证成功", authentication);
-		ResponseUtils.success(response, jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal()));
+		OAuth2AccessTokenResponse accessTokenResponse = jwtTokenGenerator.tokenResponse((UserDetails) authentication.getPrincipal());
+		ServletServerHttpResponse httpResponse = new ServletServerHttpResponse(response);
+
+		this.accessTokenHttpResponseConverter.write(accessTokenResponse, null, httpResponse);
+
+//		ResponseUtils.success(response, accessTokenResponse);
 	}
 
 	private void sendAccessTokenResponse(HttpServletRequest request, HttpServletResponse response,
