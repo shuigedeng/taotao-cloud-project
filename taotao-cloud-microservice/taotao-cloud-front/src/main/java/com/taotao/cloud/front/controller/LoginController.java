@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.front.controller;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.front.util.Constants;
 import com.taotao.cloud.front.util.CookieUtil;
 import com.taotao.cloud.front.util.ResponseBase;
@@ -26,6 +25,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.UUID;
+
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
