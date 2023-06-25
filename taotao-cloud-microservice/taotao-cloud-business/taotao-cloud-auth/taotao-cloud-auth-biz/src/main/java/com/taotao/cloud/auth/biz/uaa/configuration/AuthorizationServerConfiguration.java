@@ -216,7 +216,6 @@ public class AuthorizationServerConfiguration {
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 		// 仅拦截 OAuth2 Authorization Server 的相关 endpoint
 		httpSecurity
-
 			.securityMatcher(endpointsMatcher)
 			// 开启请求认证
 			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {

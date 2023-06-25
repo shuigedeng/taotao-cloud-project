@@ -26,7 +26,10 @@
 package com.taotao.cloud.auth.biz.management.response;
 
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
+import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
 import com.taotao.cloud.security.springsecurity.core.definition.domain.PrincipalDetails;
@@ -38,11 +41,20 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.GenericHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
+import org.springframework.security.oauth2.core.endpoint.DefaultMapOAuth2AccessTokenResponseConverter;
+import org.springframework.security.oauth2.core.endpoint.DefaultOAuth2AccessTokenResponseMapConverter;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
@@ -53,6 +65,8 @@ import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
 
 /**
  * <p>Description: 自定义 Security 认证成功处理器 </p>
@@ -116,8 +130,36 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
 
         OAuth2AccessTokenResponse accessTokenResponse = builder.build();
         ServletServerHttpResponse httpResponse = new ServletServerHttpResponse(response);
+
+		//this.write(request, response);
+		//
         this.accessTokenHttpResponseConverter.write(accessTokenResponse, null, httpResponse);
     }
+
+	private final GenericHttpMessageConverter<Object> jsonMessageConverter = new GsonHttpMessageConverter();
+	private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> accessTokenResponseConverter = new DefaultMapOAuth2AccessTokenResponseConverter();
+	private final Converter<OAuth2AccessTokenResponse, Map<String, Object>> accessTokenResponseParametersConverter = new DefaultOAuth2AccessTokenResponseMapConverter();
+
+	protected void write(
+		HttpServletRequest request,
+													 HttpServletResponse httpResponse ) throws HttpMessageNotReadableException {
+		try {
+			Map<String, Object> tokenResponseParameters = (Map<String, Object>) this.jsonMessageConverter
+				.read(STRING_OBJECT_MAP.getType(), null, new ServletServerHttpRequest(request));
+			OAuth2AccessTokenResponse tokenResponse =  this.accessTokenResponseConverter.convert(tokenResponseParameters);
+			Map<String, Object> tokenResponseData = this.accessTokenResponseParametersConverter
+				.convert(tokenResponse);
+			ResponseUtils.success(httpResponse, tokenResponseData);
+		}
+		catch (Exception ex) {
+			throw new HttpMessageNotReadableException(
+				"An error occurred reading the OAuth 2.0 Access Token Response: " + ex.getMessage(), ex,
+				new ServletServerHttpRequest(request));
+		}
+
+	}
+
+
 
     private boolean isHerodotusUserInfoPattern(String sessionId, Object details) {
         return StringUtils.isNotBlank(sessionId) && ObjectUtils.isNotEmpty(details) && details instanceof PrincipalDetails;
