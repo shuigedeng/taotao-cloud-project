@@ -20,14 +20,22 @@ import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 默认电话服务
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-25 17:06:29
+ */
 @Service
 public class DefaultPhoneService implements PhoneService {
+
     @Autowired
     private IFeignNoticeMessageApi feignNoticeMessageApi;
 
     @Override
     public boolean verifyCaptcha(String phone, String rawCode) {
         // 校验短信验证码
-        return true;
+        return false;
     }
 }
