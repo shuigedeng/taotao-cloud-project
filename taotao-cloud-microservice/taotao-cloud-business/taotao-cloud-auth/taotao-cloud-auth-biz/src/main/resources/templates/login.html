@@ -54,9 +54,12 @@
                     <div id="login-input" class="login-box">
                         <h2 class="bigintro">账号登录</h2>
                         <div class="divide-40"></div>
+
                         <div th:if="${message ne null}" class="alert alert-block alert-danger fade in">
                             <p th:inline="text">[[${message}]]</p>
                         </div>
+
+                        <p>[[${message}]]</p>
                         <form id="form" role="form">
                             <div class="form-group">
                                 <label for="tank">用户名</label>
@@ -276,13 +279,13 @@
         $(vulgarTycoon).val(data.encryptTank);
         $(beast).val(data.encryptFighter);
         $(graphic).val(data.encryptMissile);
-        // $('#login-form').submit();
+        $('#login-form').submit();
 
-        $('#type').val('123')
-        $('#phone').val('234')
-        $('#captcha').val('345')
-
-        $('#phone-form').submit();
+        // $('#type').val('123')
+        // $('#phone').val('234')
+        // $('#captcha').val('345')
+        //
+        // $('#phone-form').submit();
         // $.http.post("/login/phone", {type: '111', phone: '222', captcha: '333'}, 'json');
     }
 

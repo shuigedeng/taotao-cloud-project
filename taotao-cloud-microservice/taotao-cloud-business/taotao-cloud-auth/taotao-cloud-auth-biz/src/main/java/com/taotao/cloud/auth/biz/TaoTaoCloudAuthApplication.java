@@ -23,7 +23,6 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.security.springsecurity.authorization.configuration.OAuth2AuthorizationConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -32,7 +31,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
-import  jakarta.activation.MimetypesFileTypeMap;
+
 /**
  * TaoTaoCloudAuthBizApplication
  *
@@ -64,7 +63,7 @@ import  jakarta.activation.MimetypesFileTypeMap;
  * @version 2022.03
  * @since 2020/4/29 15:13
  */
-@EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity", "com.taotao.cloud.auth.biz.management.entity" })
+@EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity", "com.taotao.cloud.auth.biz.management.entity"})
 @EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"})
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
@@ -80,19 +79,18 @@ import  jakarta.activation.MimetypesFileTypeMap;
 @EnableRedisIndexedHttpSession
 public class TaoTaoCloudAuthApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-auth");
+	public static void main(String[] args) {
+		PropertyUtils.setDefaultProperty("taotao-cloud-auth");
 
-        /**
-         * @see LoginPlatformEnum
-         */
-        String s = "b端用户 -> 用户+密码登录 手机号码+短信登录 用户+密码+验证码登录";
+		/**
+		 * @see LoginPlatformEnum
+		 */
+		String s = "b端用户 -> 用户+密码登录 手机号码+短信登录 用户+密码+验证码登录";
 
-        String s1 =
-                "c端用户之pc端 -> 用户+密码登录 手机扫码登录 手机号码+短信登录 第三方登录(qq登录 微信登录 支付宝登录" + " github/gitee/weibo/抖音/钉钉/gitlab 等等)";
-        String s2 = "c端用户之小程序 -> 微信一键登录 手机号码+短信登录";
-        String s4 = "c端用户之微信公众号 -> 微信公众号登录";
-        String s3 = "c端用户之app -> 短信密码登录 本机号码一键登录(不需要密码) 手机号码+短信登录 指纹登录 面部识别登录 手势登录 第三方登录(qq登录 微信登录" + " 支付宝登录)";
+		String s1 = "c端用户之pc端 -> 用户+密码登录 手机扫码登录 手机号码+短信登录 第三方登录(qq登录 微信登录 支付宝登录 github/gitee/weibo/抖音/钉钉/gitlab 等等)";
+		String s2 = "c端用户之小程序 -> 微信一键登录 手机号码+短信登录";
+		String s4 = "c端用户之微信公众号 -> 微信公众号登录";
+		String s3 = "c端用户之app -> 短信密码登录 本机号码一键登录(不需要密码) 手机号码+短信登录 指纹登录 面部识别登录 手势登录 第三方登录(qq登录 微信登录 支付宝登录)";
 
 		//单端登录：PC端，APP端，小程序只能有一端登录
 		//双端登录：允许其中二个端登录
@@ -107,6 +105,6 @@ public class TaoTaoCloudAuthApplication {
 		//   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
 		//}
 
-        SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
-    }
+		SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
+	}
 }
