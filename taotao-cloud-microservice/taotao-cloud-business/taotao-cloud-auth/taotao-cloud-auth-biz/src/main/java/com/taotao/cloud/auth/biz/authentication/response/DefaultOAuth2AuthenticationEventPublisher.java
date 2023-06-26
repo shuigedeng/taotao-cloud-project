@@ -48,6 +48,7 @@ public class DefaultOAuth2AuthenticationEventPublisher extends DefaultAuthentica
 
     public DefaultOAuth2AuthenticationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         super(applicationEventPublisher);
+//		setAdditionalExceptionMappings();
     }
 
     @Override

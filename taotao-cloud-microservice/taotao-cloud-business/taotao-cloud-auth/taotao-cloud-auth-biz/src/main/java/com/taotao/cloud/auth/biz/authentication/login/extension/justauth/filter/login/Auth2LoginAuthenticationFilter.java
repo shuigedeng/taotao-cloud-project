@@ -143,14 +143,13 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
 
         // 自定义注册逻辑
         final Object principal = authResult.getPrincipal();
-        if (principal instanceof TemporaryUser && StringUtils.hasText(this.signUpUrl)) {
-            TemporaryUser temporaryUser = (TemporaryUser) principal;
-            String username = temporaryUser.getUsername();
+        if (principal instanceof TemporaryUser temporaryUser && StringUtils.hasText(this.signUpUrl)) {
+			String username = temporaryUser.getUsername();
             String key = TEMPORARY_USER_CACHE_KEY_PREFIX + username;
             if (nonNull(redisConnectionFactory)) {
                 // 存入 redis
                 try (RedisConnection connection = redisConnectionFactory.getConnection()) {
-                    connection.set(key.getBytes(StandardCharsets.UTF_8),
+                    connection.stringCommands().set(key.getBytes(StandardCharsets.UTF_8),
                                    JsonUtils.toJson(temporaryUser).getBytes(StandardCharsets.UTF_8),
                                    Expiration.from(86400L, TimeUnit.SECONDS),
                                    RedisStringCommands.SetOption.UPSERT);
@@ -163,7 +162,7 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
             this.redirectStrategy.sendRedirect(request, response,
                                                this.signUpUrl + "?"
                                                         + TEMPORARY_USERNAME_PARAM_NAME + "="
-                                                        + URLEncoder.encode(username, StandardCharsets.UTF_8.name()));
+                                                        + URLEncoder.encode(username, StandardCharsets.UTF_8));
 
             return;
         }

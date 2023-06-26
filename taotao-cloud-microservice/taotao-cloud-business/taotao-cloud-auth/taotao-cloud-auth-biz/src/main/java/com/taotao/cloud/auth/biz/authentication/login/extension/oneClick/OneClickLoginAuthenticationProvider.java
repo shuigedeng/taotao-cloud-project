@@ -68,7 +68,7 @@ public class OneClickLoginAuthenticationProvider implements AuthenticationProvid
 
 		UserDetails user;
 		try {
-			user = this.oneClickUserDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
+			user = this.oneClickUserDetailsService.loadUserByOneClick((String) authenticationToken.getPrincipal());
 		}
 		catch (UsernameNotFoundException e) {
 			user = null;
