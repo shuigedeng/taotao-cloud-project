@@ -16,14 +16,13 @@
 
 package com.taotao.cloud.file.biz.service.impl;
 
-import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.file.biz.mapper.IFileMapper;
-import com.taotao.cloud.file.biz.repository.FileRepository;
-import com.taotao.cloud.file.biz.repository.IFileRepository;
+import com.taotao.cloud.file.biz.repository.cls.FileRepository;
+import com.taotao.cloud.file.biz.repository.inf.IFileRepository;
 import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.oss.common.model.OssInfo;

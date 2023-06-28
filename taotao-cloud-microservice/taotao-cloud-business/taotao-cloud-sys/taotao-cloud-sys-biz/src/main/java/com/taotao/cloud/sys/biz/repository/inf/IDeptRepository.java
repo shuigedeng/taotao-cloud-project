@@ -34,12 +34,12 @@ public interface IDeptRepository extends JpaRepository<Dept, Long> {
     Dept findByVersionNot(Integer version);
 
     @Query(
-            """
+            value = """
 		select h from dept h where
 		h.userId=:#{#dept.userId} and
 		h.tabName=:#{#dept.tabName} and
 		h.headerName=:#{#dept.headerName}
-		""")
+		""", nativeQuery = true)
     Dept find(@Param("dept") Dept dept);
     //
     // @Query(value = """

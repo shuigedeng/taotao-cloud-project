@@ -30,8 +30,9 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.stereotype.Component;
 
-// @Component
+@Component
 public class TestThreadPoolManager implements BeanFactoryAware {
 
     // 用于从IOC里取对象
