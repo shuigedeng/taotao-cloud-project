@@ -16,7 +16,9 @@
 
 package com.taotao.cloud.sys.biz.test;
 
-// @Component
+import org.springframework.stereotype.Component;
+
+//@Component
 // @Scope("prototype")//spring 多例
 public class BusinessThread implements Runnable {
 

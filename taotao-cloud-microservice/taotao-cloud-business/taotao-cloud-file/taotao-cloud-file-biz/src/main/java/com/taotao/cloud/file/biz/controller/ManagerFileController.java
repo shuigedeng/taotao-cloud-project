@@ -59,53 +59,53 @@ import org.springframework.web.multipart.MultipartFile;
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 
-    private final IFileService fileService;
+//    private final IFileService fileService;
+//
+//    @Operation(summary = "上传单个文件", description = "上传单个文件111111111111")
+//    @RequestLogger
+//    @PreAuthorize("hasAuthority('file:upload')")
+//    @PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
+//    public Result<UploadFileVO> upload(
+//            @Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空") @RequestPart("file")
+//                    MultipartFile file) {
+//
+//        File upload = fileService.upload(file);
+//        UploadFileVO result =
+//                UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build();
+//        return Result.success(result);
+//    }
+//
+//    @Operation(summary = "上传多个文件", description = "上传多个文件")
+//    @RequestLogger
+//    @PreAuthorize("hasAuthority('file:multiple:upload')")
+//    @PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
+//    public Result<List<UploadFileVO>> uploadMultipleFiles(@RequestPart("files") MultipartFile[] files) {
+//        if (files.length == 0) {
+//            throw new BusinessException("文件不能为空");
+//        }
+//
+//        List<File> uploads = Arrays.stream(files).map(fileService::upload).toList();
+//
+//        if (!CollectionUtils.isEmpty(uploads)) {
+//            // List<UploadFileVO> result = uploads.stream().map(
+//            //		upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build())
+//            //	.toList();
+//            return Result.success(new ArrayList<>());
+//        }
+//
+//        throw new BusinessException("文件上传失败");
+//    }
 
-    @Operation(summary = "上传单个文件", description = "上传单个文件111111111111")
-    @RequestLogger
-    @PreAuthorize("hasAuthority('file:upload')")
-    @PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
-    public Result<UploadFileVO> upload(
-            @Parameter(description = "文件对象", required = true) @NotNull(message = "文件对象不能为空") @RequestPart("file")
-                    MultipartFile file) {
-
-        File upload = fileService.upload(file);
-        UploadFileVO result =
-                UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build();
-        return Result.success(result);
-    }
-
-    @Operation(summary = "上传多个文件", description = "上传多个文件")
-    @RequestLogger
-    @PreAuthorize("hasAuthority('file:multiple:upload')")
-    @PostMapping(value = "/multiple/upload", headers = "content-type=multipart/form-data")
-    public Result<List<UploadFileVO>> uploadMultipleFiles(@RequestPart("files") MultipartFile[] files) {
-        if (files.length == 0) {
-            throw new BusinessException("文件不能为空");
-        }
-
-        List<File> uploads = Arrays.stream(files).map(fileService::upload).toList();
-
-        if (!CollectionUtils.isEmpty(uploads)) {
-            // List<UploadFileVO> result = uploads.stream().map(
-            //		upload -> UploadFileVO.builder().id(upload.getId()).url(upload.getUrl()).build())
-            //	.toList();
-            return Result.success(new ArrayList<>());
-        }
-
-        throw new BusinessException("文件上传失败");
-    }
-
-	@NotAuth
-    @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息aaaaaaaaaaaaaaaaaaaaaaa")
-    @RequestLogger
-    //@PreAuthorize("hasAuthority('file:info:id')")
-    @GetMapping("/info/id/{id:[0-9]*}")
-    public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
-        File file = fileService.findFileById(id);
-        FileVO vo = FileConvert.INSTANCE.convert(file);
-        return Result.success(vo);
-    }
+//	@NotAuth
+//    @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息aaaaaaaaaaaaaaaaaaaaaaa")
+//    @RequestLogger
+//    //@PreAuthorize("hasAuthority('file:info:id')")
+//    @GetMapping("/info/id/{id:[0-9]*}")
+//    public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
+//        File file = fileService.findFileById(id);
+//        FileVO vo = FileConvert.INSTANCE.convert(file);
+//        return Result.success(vo);
+//    }
 
     //
     // @ApiOperation(value = "根据文件名删除oss上的文件", notes = "根据文件名删除oss上的文件")

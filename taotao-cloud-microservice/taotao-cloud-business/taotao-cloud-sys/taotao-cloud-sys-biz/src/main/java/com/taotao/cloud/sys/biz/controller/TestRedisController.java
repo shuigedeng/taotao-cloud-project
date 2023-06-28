@@ -75,7 +75,7 @@ public class TestRedisController {
      *
      * <p>在遇到缓存击穿问题时，我们可以在查询数据库之前，先判断一下缓存中是否已有数据，如果没有数据则使用Redis的单线程特性，先查询数据库然后将数据写入缓存中。
      */
-    @GetMapping("/user/{id}")
+    @GetMapping("/getUserById1/{id}")
     public User getUserById1(@PathVariable Long id) {
         // 先从缓存中获取值
         String userKey = "user_" + id.toString();
@@ -116,10 +116,10 @@ public class TestRedisController {
      *
      * <p>在遇到缓存雪崩时，我们可以使用两种方法：一种是将缓存过期时间分散开，即为不同的数据设置不同的过期时间；另一种是使用Redis的多级缓存架构，通过增加一层代理层来解决
      */
-    @Autowired
+    //@Autowired
     // private CacheManager ehCacheManager;
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/getUserById2/{id}")
     @Cacheable(value = "userCache", key = "#id")
     public User getUserById2(@PathVariable Long id) {
         // 先从Ehcache缓存中获取

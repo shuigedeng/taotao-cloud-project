@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.sys.api.grpc.DeviceFix;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * 系统管理中心

@@ -39,7 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/common/common/file")
 public class FileController {
 
-    @Autowired
+//    @Autowired
     private IFileService fileService;
 
     // @Autowired

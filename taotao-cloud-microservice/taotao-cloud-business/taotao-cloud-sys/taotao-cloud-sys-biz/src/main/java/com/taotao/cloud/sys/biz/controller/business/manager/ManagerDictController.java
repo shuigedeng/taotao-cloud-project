@@ -80,7 +80,7 @@ public class ManagerDictController
         return Result.fail("删除失败");
     }
 
-    @GetMapping("/list-code")
+    @GetMapping("/testMybatisQueryStructure")
     // @ApiOperation(value = "字典列表code查询", notes = "字典列表code查询")
     public Result<Dict> testMybatisQueryStructure(DictQuery dictQuery) {
         return Result.success(service().testMybatisQueryStructure(dictQuery));

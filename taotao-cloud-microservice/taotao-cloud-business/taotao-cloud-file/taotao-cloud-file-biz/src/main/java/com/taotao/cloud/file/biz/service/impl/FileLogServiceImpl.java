@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.file.biz;
+package com.taotao.cloud.file.biz.service.impl;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
-import org.springframework.boot.SpringApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import com.taotao.cloud.file.biz.entity.FileLog;
+import com.taotao.cloud.file.biz.mapper.IFileLogMapper;
+import com.taotao.cloud.file.biz.repository.cls.FileLogRepository;
+import com.taotao.cloud.file.biz.repository.inf.IFileLogRepository;
+import com.taotao.cloud.file.biz.service.IFileLogService;
+import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 
 /**
- * 文件应用程序
+ * 文件上传服务
  *
  * @author shuigedeng
- * @version 2023.04
- * @since 2023-05-09 14:52:09
+ * @version 2022.03
+ * @since 2020/11/12 17:43
  */
-//@EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository"})
-@TaoTaoCloudApplication
-public class TaoTaoCloudFileApplication {
+//@Service
+public class FileLogServiceImpl extends BaseSuperServiceImpl<IFileLogMapper, FileLog, FileLogRepository, IFileLogRepository, Long>
+        implements IFileLogService {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-file");
-
-        SpringApplication.run(TaoTaoCloudFileApplication.class, args);
-    }
 }

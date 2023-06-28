@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.file.biz.repository;
+package com.taotao.cloud.file.biz.service;
 
+import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.entity.File;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
- * CompanyMapper
+ * 文件服务信息
  *
  * @author shuigedeng
  * @version 2022.03
- * @since 2021/10/13 22:50
+ * @since 2020/11/12 21:26
  */
-public interface IFileRepository extends JpaRepository<File, Long> {}
+public interface IFileLogService {
+
+
+}
