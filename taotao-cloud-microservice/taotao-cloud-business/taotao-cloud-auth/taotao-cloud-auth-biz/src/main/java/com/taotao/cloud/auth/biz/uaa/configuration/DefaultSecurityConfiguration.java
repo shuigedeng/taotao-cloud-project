@@ -27,18 +27,18 @@ package com.taotao.cloud.auth.biz.uaa.configuration;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JwtTokenGeneratorImpl;
-import com.taotao.cloud.auth.biz.authentication.login.extension.LoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGeneratorImpl;
+import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginSecureConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.form.Oauth2FormPhoneLoginSecureConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.social.DelegateClientRegistrationRepository;
-import com.taotao.cloud.auth.biz.authentication.login.social.OAuth2ProviderConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
+import com.taotao.cloud.auth.biz.authentication.login.social.SocialProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.biz.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
+import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusClientDetailsService;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusUserDetailsService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
@@ -94,7 +94,7 @@ public class DefaultSecurityConfiguration {
 		SecurityMatcherConfigurer securityMatcherConfigurer,
 		SecurityAuthorizationManager securityAuthorizationManager,
 		HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-		DelegateClientRegistrationRepository delegateClientRegistrationRepository
+		SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository
 	) throws Exception {
 
 		log.info("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
@@ -132,7 +132,7 @@ public class DefaultSecurityConfiguration {
 					.clearAuthentication(true);
 			})
 			// **************************************自定义登录配置***********************************************
-			.apply(new LoginFilterSecurityConfigurer<>())
+			.apply(new ExtensionLoginFilterSecurityConfigurer<>())
 			// 用户+密码登录
 			.accountLogin(accountLoginConfigurerCustomizer -> {
 
@@ -149,7 +149,7 @@ public class DefaultSecurityConfiguration {
 			.fingerprintLogin(fingerprintLoginConfigurer -> {
 				fingerprintLoginConfigurer.fingerprintUserDetailsService(new FingerprintUserDetailsService() {
 					@Override
-					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+					public UserDetails loadUserByFingerprint(String username) throws UsernameNotFoundException {
 						return null;
 					}
 				});
@@ -190,7 +190,7 @@ public class DefaultSecurityConfiguration {
 			})
 			.httpSecurity()
 			// **************************************oauth2登录配置***********************************************
-			.apply(new OAuth2ProviderConfigurer(delegateClientRegistrationRepository))
+			.apply(new SocialProviderConfigurer(socialDelegateClientRegistrationRepository))
 			// 微信网页授权
 			.wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
 			// 企业微信登录

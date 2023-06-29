@@ -66,12 +66,13 @@ public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthent
         if (this.postOnly && !"POST".equals(request.getMethod())) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
-        OAuth2FormLoginAuthenticationToken authRequest = getAuthenticationToken(request);
+
+        OAuth2FormLoginAuthenticationToken oAuth2FormLoginAuthenticationToken = getAuthenticationToken(request);
 
         // Allow subclasses to set the "details" property
-        setDetails(request, authRequest);
+        setDetails(request, oAuth2FormLoginAuthenticationToken);
 
-        return this.getAuthenticationManager().authenticate(authRequest);
+        return this.getAuthenticationManager().authenticate(oAuth2FormLoginAuthenticationToken);
     }
 
     private OAuth2FormLoginAuthenticationToken getAuthenticationToken(
@@ -105,19 +106,4 @@ public class OAuth2FormLoginAuthenticationFilter extends UsernamePasswordAuthent
         this.postOnly = postOnly;
     }
 
-    /**
-     * 重写该方法，避免在日志Debug级别会输出错误信息的问题。
-     *
-     * @param request  请求
-     * @param response 响应
-     * @param failed   失败内容
-     * @throws IOException      IOException
-     * @throws ServletException ServletException
-     */
-    @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        SecurityContextHolder.clearContext();
-        getRememberMeServices().loginFail(request, response);
-        getFailureHandler().onAuthenticationFailure(request, response, failed);
-    }
 }

@@ -41,7 +41,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.OAuth2Social
 import com.taotao.cloud.auth.biz.authentication.oidc.HerodotusOidcUserInfoMapper;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.biz.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
+import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2ConfigurerUtils;
 import com.taotao.cloud.auth.biz.management.response.OAuth2AccessTokenResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OAuth2AuthenticationFailureResponseHandler;
@@ -233,7 +233,6 @@ public class AuthorizationServerConfiguration {
 		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
 		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
 		authenticationManagerBuilder.authenticationEventPublisher(new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
-
 
 		// 增加新的、自定义 OAuth2 Granter
 		OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);

@@ -25,25 +25,20 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.password;
 
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.AbstractAuthenticationConverter;
+import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
-import com.taotao.cloud.auth.biz.utils.SessionInvalidException;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2ErrorKeys;
 import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * <p>Description: 自定义密码模式认证转换器 </p>
@@ -54,7 +49,7 @@ import java.util.stream.Collectors;
  * 
  * @date : 2022/2/22 17:03
  */
-public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends AbstractAuthenticationConverter {
+public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends OAuth2AbstractAuthenticationConverter {
 
 	public OAuth2ResourceOwnerPasswordAuthenticationConverter(HttpCryptoProcessor httpCryptoProcessor) {
 		super(httpCryptoProcessor);

@@ -33,8 +33,9 @@ import org.springframework.security.authentication.AuthenticationDetailsSource;
 /**
  * <p>Description: 表单登录 Details 定义 </p>
  *
- * 
- * @date : 2022/4/12 10:41
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-29 16:37:57
  */
 public class OAuth2FormLoginWebAuthenticationDetailSource implements AuthenticationDetailsSource<HttpServletRequest, FormLoginWebAuthenticationDetails> {
 

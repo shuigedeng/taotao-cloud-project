@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppRequest;
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppRequest;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppSessionKeyCacheService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
 import org.springframework.context.MessageSource;

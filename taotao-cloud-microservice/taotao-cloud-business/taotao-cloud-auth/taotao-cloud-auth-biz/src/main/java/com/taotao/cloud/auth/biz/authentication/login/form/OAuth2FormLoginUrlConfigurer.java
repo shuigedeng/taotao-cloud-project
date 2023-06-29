@@ -33,8 +33,9 @@ import org.springframework.security.config.annotation.web.configurers.FormLoginC
 /**
  * <p>Description: Form Login 配置统一配置类 </p>
  *
- *
- * @date : 2023/5/14 9:02
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-29 16:38:41
  */
 public class OAuth2FormLoginUrlConfigurer {
 
@@ -53,6 +54,7 @@ public class OAuth2FormLoginUrlConfigurer {
         if (StringUtils.isNotBlank(getFormLogin().getFailureForwardUrl())) {
             configurer.failureForwardUrl(getFormLogin().getFailureForwardUrl());
         }
+
         if (StringUtils.isNotBlank(getFormLogin().getSuccessForwardUrl())) {
             configurer.successForwardUrl(getFormLogin().getSuccessForwardUrl());
         }

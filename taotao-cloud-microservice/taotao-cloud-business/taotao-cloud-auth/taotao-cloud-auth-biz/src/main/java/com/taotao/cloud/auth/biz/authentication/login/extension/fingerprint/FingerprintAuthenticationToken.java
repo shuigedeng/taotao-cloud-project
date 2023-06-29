@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint;
 
+import com.taotao.cloud.auth.biz.authentication.login.extension.account.AccountAuthenticationToken;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
@@ -27,18 +28,18 @@ public class FingerprintAuthenticationToken extends AbstractAuthenticationToken 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private final Object principal;
-    private String password;
+    private String fingerPrint;
 
     /**
      * 此构造函数用来初始化未授信凭据.
      *
      * @param principal the principal
-     * @param password the captcha
+     * @param fingerPrint the captcha
      */
-    public FingerprintAuthenticationToken(Object principal, String password) {
+    public FingerprintAuthenticationToken(Object principal, String fingerPrint) {
         super(null);
         this.principal = principal;
-        this.password = password;
+        this.fingerPrint = fingerPrint;
         setAuthenticated(false);
     }
 
@@ -46,21 +47,29 @@ public class FingerprintAuthenticationToken extends AbstractAuthenticationToken 
      * 此构造函数用来初始化授信凭据.
      *
      * @param principal the principal
-     * @param password the captcha
+     * @param fingerPrint the captcha
      * @param authorities the authorities
      */
     public FingerprintAuthenticationToken(
-            Object principal, String password, Collection<? extends GrantedAuthority> authorities) {
+            Object principal, String fingerPrint, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
-        this.password = password;
+        this.fingerPrint = fingerPrint;
         // must use super, as we override
         super.setAuthenticated(true);
     }
 
+	public static FingerprintAuthenticationToken unauthenticated(Object principal, String fingerPrint) {
+		return new FingerprintAuthenticationToken(principal, fingerPrint);
+	}
+
+	public static FingerprintAuthenticationToken authenticated( Object principal, String fingerPrint, Collection<? extends GrantedAuthority> authorities) {
+		return new FingerprintAuthenticationToken(principal, fingerPrint, authorities);
+	}
+
     @Override
     public Object getCredentials() {
-        return this.password;
+        return this.fingerPrint;
     }
 
     @Override
@@ -81,6 +90,14 @@ public class FingerprintAuthenticationToken extends AbstractAuthenticationToken 
     @Override
     public void eraseCredentials() {
         super.eraseCredentials();
-        password = null;
+		fingerPrint = null;
     }
+
+	public String getFingerPrint() {
+		return fingerPrint;
+	}
+
+	public void setFingerPrint(String fingerPrint) {
+		this.fingerPrint = fingerPrint;
+	}
 }

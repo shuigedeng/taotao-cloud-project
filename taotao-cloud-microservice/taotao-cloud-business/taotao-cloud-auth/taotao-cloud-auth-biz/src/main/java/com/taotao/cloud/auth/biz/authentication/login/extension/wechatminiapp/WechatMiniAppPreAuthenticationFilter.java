@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatLoginResponse;
-import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppClient;
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatLoginResponse;
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppClient;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppClientService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppSessionKeyCacheService;
 import com.taotao.cloud.common.model.Result;

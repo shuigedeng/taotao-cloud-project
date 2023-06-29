@@ -18,107 +18,220 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.accountVerifica
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.accountVerification.service.AccountVerificationService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.accountVerification.service.AccountVerificationUserDetailsService;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
+import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsChecker;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.cache.NullUserCache;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
 
-/** 用户名+短信+校验码 登录 */
+/**
+ * 用户名+短信+校验码 登录
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-29 14:13:50
+ */
 public class AccountVerificationAuthenticationProvider
-        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+	implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
-    private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-    private final AccountVerificationUserDetailsService accountVerificationUserDetailsService;
-    private final AccountVerificationService accountVerificationService;
-    private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
+	private volatile String userNotFoundEncodedPassword;
+	private final UserCache userCache = new NullUserCache();
+	private PasswordEncoder passwordEncoder;
+	private static final String USER_NOT_FOUND_PASSWORD = "userNotFoundPassword";
+	private final UserDetailsChecker preAuthenticationChecks = new DefaultPreAuthenticationChecks();
+	private UserDetailsChecker postAuthenticationChecks = new DefaultPostAuthenticationChecks();
 
-    public AccountVerificationAuthenticationProvider(
-            AccountVerificationUserDetailsService accountVerificationUserDetailsService,
-            AccountVerificationService accountVerificationService) {
-        this.accountVerificationUserDetailsService = accountVerificationUserDetailsService;
-        this.accountVerificationService = accountVerificationService;
-    }
+	private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+	private final AccountVerificationUserDetailsService accountVerificationUserDetailsService;
+	private final AccountVerificationService accountVerificationService;
+	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Assert.isInstanceOf(
-                AccountVerificationAuthenticationToken.class,
-                authentication,
-                () -> messages.getMessage(
-                        "AccountVerificationAuthenticationProvider.onlySupports",
-                        "Only AccountVerificationAuthenticationProvider is supported"));
+	public AccountVerificationAuthenticationProvider(
+		AccountVerificationUserDetailsService accountVerificationUserDetailsService,
+		AccountVerificationService accountVerificationService) {
+		this.accountVerificationUserDetailsService = accountVerificationUserDetailsService;
+		this.accountVerificationService = accountVerificationService;
+	}
 
-        AccountVerificationAuthenticationToken unAuthenticationToken =
-                (AccountVerificationAuthenticationToken) authentication;
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		String username = determineUsername(authentication);
+		boolean cacheWasUsed = true;
+		UserDetails user = this.userCache.getUserFromCache(username);
+		if (user == null) {
+			cacheWasUsed = false;
+			try {
+				user = retrieveUser(username, (AccountVerificationAuthenticationToken) authentication);
+			} catch (UsernameNotFoundException ex) {
+				LogUtils.error("Failed to find user '" + username + "'");
+				throw new BadCredentialsException("用户不存在");
+			}
+			Assert.notNull(user, "retrieveUser returned null - a violation of the interface contract");
+		}
+		try {
+			this.preAuthenticationChecks.check(user);
+			additionalAuthenticationChecks(user, (AccountVerificationAuthenticationToken) authentication);
+		} catch (AuthenticationException ex) {
+			if (!cacheWasUsed) {
+				throw ex;
+			}
+			// There was a problem, so try again after checking
+			// we're using latest data (i.e. not from the cache)
+			cacheWasUsed = false;
+			user = retrieveUser(username, (AccountVerificationAuthenticationToken) authentication);
+			this.preAuthenticationChecks.check(user);
+			additionalAuthenticationChecks(user, (AccountVerificationAuthenticationToken) authentication);
+		}
+		this.postAuthenticationChecks.check(user);
+		if (!cacheWasUsed) {
+			this.userCache.putUserInCache(user);
+		}
 
-        String username = unAuthenticationToken.getName();
-        String password = (String) unAuthenticationToken.getCredentials();
-        String verificationCode = unAuthenticationToken.getVerificationCode();
-        String type = unAuthenticationToken.getType();
+		return createSuccessAuthentication(user.getUsername(), authentication, user);
+	}
 
-        // 验证码校验
-        if (accountVerificationService.verifyCaptcha(verificationCode)) {
-            UserDetails userDetails =
-                    accountVerificationUserDetailsService.loadUserByUsername(username, password, type);
-            // 校验密码
-            // TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService
-            // 的实现中处理
-            return createSuccessAuthentication(authentication, userDetails);
-        } else {
-            throw new BadCredentialsException("verificationCode is not matched");
-        }
-    }
+	protected void additionalAuthenticationChecks(UserDetails userDetails,
+												  AccountVerificationAuthenticationToken accountVerificationAuthenticationToken) throws AuthenticationException {
+		if (accountVerificationAuthenticationToken.getCredentials() == null) {
+			LogUtils.error("Failed to authenticate since no credentials provided");
+			throw new BadCredentialsException("用户密码错误");
+		}
+		String presentedPassword = accountVerificationAuthenticationToken.getCredentials().toString();
+		if (!this.passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
+			LogUtils.error("Failed to authenticate since password does not match stored value");
+			throw new BadCredentialsException("用户密码错误");
+		}
+		String verificationCode = accountVerificationAuthenticationToken.getVerificationCode();
+		if (!accountVerificationService.verifyCaptcha(verificationCode)) {
+			throw new BadCredentialsException("校验错误");
+		}
+	}
 
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return AccountVerificationAuthenticationToken.class.isAssignableFrom(authentication);
-    }
+	protected final UserDetails retrieveUser(String username, AccountVerificationAuthenticationToken authentication)
+		throws AuthenticationException {
+		prepareTimingAttackProtection();
+		try {
+			UserDetails loadedUser = accountVerificationUserDetailsService.loadUserByUsername((String) authentication.getPrincipal(), authentication.getType());
+			if (loadedUser == null) {
+				throw new InternalAuthenticationServiceException("用户不存在");
+			}
+			return loadedUser;
+		} catch (UsernameNotFoundException ex) {
+			mitigateAgainstTimingAttack(authentication);
+			throw ex;
+		} catch (InternalAuthenticationServiceException ex) {
+			throw ex;
+		} catch (Exception ex) {
+			throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
+		}
+	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        Assert.notNull(accountVerificationUserDetailsService, "captchaUserDetailsService must not be null");
-        Assert.notNull(accountVerificationService, "captchaService must not be null");
-    }
+	private void prepareTimingAttackProtection() {
+		if (this.userNotFoundEncodedPassword == null) {
+			this.userNotFoundEncodedPassword = this.passwordEncoder.encode(USER_NOT_FOUND_PASSWORD);
+		}
+	}
 
-    @Override
-    public void setMessageSource(MessageSource messageSource) {
-        this.messages = new MessageSourceAccessor(messageSource);
-    }
+	private void mitigateAgainstTimingAttack(AccountVerificationAuthenticationToken authentication) {
+		if (authentication.getCredentials() != null) {
+			String presentedPassword = authentication.getCredentials().toString();
+			this.passwordEncoder.matches(presentedPassword, this.userNotFoundEncodedPassword);
+		}
+	}
 
-    /**
-     * 认证成功将非授信凭据转为授信凭据. 封装用户信息 角色信息。
-     *
-     * @param authentication the authentication
-     * @param user the user
-     * @return the authentication
-     */
-    protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
+	private String determineUsername(Authentication authentication) {
+		return (authentication.getPrincipal() == null) ? "NONE_PROVIDED" : authentication.getName();
+	}
 
-        Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return AccountVerificationAuthenticationToken.class.isAssignableFrom(authentication);
+	}
 
-        String type = "";
-        String verificationCode = "";
-        if (authentication instanceof AccountVerificationAuthenticationToken accountVerificationAuthenticationToken) {
-            type = accountVerificationAuthenticationToken.getType();
-            verificationCode = accountVerificationAuthenticationToken.getVerificationCode();
-        }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(accountVerificationUserDetailsService, "captchaUserDetailsService must not be null");
+		Assert.notNull(accountVerificationService, "captchaService must not be null");
+	}
 
-        AccountVerificationAuthenticationToken authenticationToken =
-                new AccountVerificationAuthenticationToken(user, null, verificationCode, type, authorities);
-        authenticationToken.setDetails(authentication.getDetails());
+	@Override
+	public void setMessageSource(MessageSource messageSource) {
+		this.messages = new MessageSourceAccessor(messageSource);
+	}
 
-        return authenticationToken;
-    }
+	/**
+	 * 认证成功将非授信凭据转为授信凭据. 封装用户信息 角色信息。
+	 *
+	 * @param authentication the authentication
+	 * @param userDetails    the user
+	 * @return the authentication
+	 */
+	protected Authentication createSuccessAuthentication(Object principal, Authentication authentication,
+														 UserDetails userDetails) {
+		Collection<? extends GrantedAuthority> authorities =
+			authoritiesMapper.mapAuthorities(userDetails.getAuthorities());
+
+		String type = "";
+		String verificationCode = "";
+		if (authentication instanceof AccountVerificationAuthenticationToken accountVerificationAuthenticationToken) {
+			type = accountVerificationAuthenticationToken.getType();
+			verificationCode = accountVerificationAuthenticationToken.getVerificationCode();
+		}
+
+		AccountVerificationAuthenticationToken accountVerificationAuthenticationToken =
+			new AccountVerificationAuthenticationToken(principal, null, verificationCode, type, authorities);
+		accountVerificationAuthenticationToken.setDetails(authentication.getDetails());
+
+		return accountVerificationAuthenticationToken;
+	}
+
+	private class DefaultPreAuthenticationChecks implements UserDetailsChecker {
+
+		@Override
+		public void check(UserDetails user) {
+			//用户是否被锁定
+			if (!user.isAccountNonLocked()) {
+				LogUtils.error("Failed to authenticate since user account is locked");
+				throw new LockedException("用户已被锁定");
+			}
+			//用户启用
+			if (!user.isEnabled()) {
+				LogUtils.error("Failed to authenticate since user account is disabled");
+				throw new DisabledException("用户未启用");
+			}
+			//账号是否过期
+			if (!user.isAccountNonExpired()) {
+				LogUtils.error("Failed to authenticate since user account has expired");
+				throw new AccountExpiredException("用户账号已过期");
+			}
+		}
+	}
+
+	private class DefaultPostAuthenticationChecks implements UserDetailsChecker {
+		@Override
+		public void check(UserDetails user) {
+			//用户密码是否过期
+			if (!user.isCredentialsNonExpired()) {
+				LogUtils.error("Failed to authenticate since user account credentials have expired");
+				throw new CredentialsExpiredException("用户账号已过期");
+			}
+		}
+
+	}
 }

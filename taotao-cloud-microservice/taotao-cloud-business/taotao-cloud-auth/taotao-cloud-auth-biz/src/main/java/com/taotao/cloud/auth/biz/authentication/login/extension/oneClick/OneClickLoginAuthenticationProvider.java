@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
-import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickJustAuthUserDetailsService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -39,11 +39,11 @@ public class OneClickLoginAuthenticationProvider implements AuthenticationProvid
 
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	private final OneClickUserDetailsService oneClickUserDetailsService;
+	private final OneClickJustAuthUserDetailsService oneClickUserDetailsService;
 	private final OneClickLoginService oneClickLoginService;
 
-	public OneClickLoginAuthenticationProvider(OneClickUserDetailsService oneClickUserDetailsService,
-											   OneClickLoginService oneClickLoginService) {
+	public OneClickLoginAuthenticationProvider(OneClickJustAuthUserDetailsService oneClickUserDetailsService,
+                                               OneClickLoginService oneClickLoginService) {
 		this.oneClickUserDetailsService = oneClickUserDetailsService;
 		this.oneClickLoginService = oneClickLoginService;
 	}

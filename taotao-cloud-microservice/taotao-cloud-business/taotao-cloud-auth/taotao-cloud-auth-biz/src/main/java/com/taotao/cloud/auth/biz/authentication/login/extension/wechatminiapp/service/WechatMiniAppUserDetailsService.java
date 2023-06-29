@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service;
 
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /** The interface Channel user details service. */

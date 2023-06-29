@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.UmsUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.service.Auth2UserService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.service.ConnectionService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.userdetails.TemporaryUser;
@@ -83,7 +82,7 @@ import static java.util.Objects.isNull;
 public class JustAuthLoginAuthenticationProvider implements AuthenticationProvider {
 
 	private final Auth2UserService userService;
-	private final UmsUserDetailsService umsUserDetailsService;
+	private final JustAuthUserDetailsService umsUserDetailsService;
 	private final ConnectionService connectionService;
 	private final ExecutorService updateConnectionTaskExecutor;
 	private final Boolean autoSignUp;
@@ -112,7 +111,7 @@ public class JustAuthLoginAuthenticationProvider implements AuthenticationProvid
 	 */
 	public JustAuthLoginAuthenticationProvider(Auth2UserService userService,
 											   ConnectionService connectionService,
-											   UmsUserDetailsService umsUserDetailsService,
+											   JustAuthUserDetailsService umsUserDetailsService,
 											   ExecutorService updateConnectionTaskExecutor,
 											   Boolean autoSignUp,
 											   String temporaryUserAuthorities,
@@ -349,7 +348,7 @@ public class JustAuthLoginAuthenticationProvider implements AuthenticationProvid
 	 *
 	 * @param userDetails    as retrieved from the
 	 *                       {@link ConnectionService#signUp(AuthUser, String, String)}} or
-	 *                       <code>UserCache</code> or {@link UmsUserDetailsService#loadUserByUserId(String)}
+	 *                       <code>UserCache</code> or {@link JustAuthUserDetailsService#loadUserByUserId(String)}
 	 * @param authentication the current request that needs to be authenticated
 	 * @throws AuthenticationException AuthenticationException if the userDetails could
 	 *                                 not be validated (generally an <code>AuthenticationServiceException</code>)

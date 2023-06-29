@@ -65,7 +65,7 @@ public class OAuth2ComplianceConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnAutoUnlockUserAccount
+	//@ConditionalOnAutoUnlockUserAccount
 	public AccountAutoEnableListener accountLockStatusListener(RedisMessageListenerContainer redisMessageListenerContainer, OAuth2AccountStatusManager accountStatusManager) {
 		AccountAutoEnableListener listener = new AccountAutoEnableListener(redisMessageListenerContainer, accountStatusManager);
 		log.info("[Herodotus] |- Bean [OAuth2 Account Lock Status Listener] Auto Configure.");

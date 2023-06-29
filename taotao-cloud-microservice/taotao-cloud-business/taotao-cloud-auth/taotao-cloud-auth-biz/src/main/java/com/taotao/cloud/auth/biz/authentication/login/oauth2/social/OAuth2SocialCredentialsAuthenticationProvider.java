@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social;
 
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.AbstractUserDetailsAuthenticationProvider;
+import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractUserDetailsAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
@@ -68,7 +68,7 @@ import java.util.Set;
  *
  * @date : 2022/3/31 14:54
  */
-public class OAuth2SocialCredentialsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+public class OAuth2SocialCredentialsAuthenticationProvider extends OAuth2AbstractUserDetailsAuthenticationProvider {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2SocialCredentialsAuthenticationProvider.class);
 	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";

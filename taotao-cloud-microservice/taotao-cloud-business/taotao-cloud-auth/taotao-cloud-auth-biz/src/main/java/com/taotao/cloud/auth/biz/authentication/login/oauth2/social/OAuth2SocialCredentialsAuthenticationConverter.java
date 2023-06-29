@@ -25,27 +25,22 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social;
 
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.AbstractAuthenticationConverter;
+import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.AccountType;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
-import com.taotao.cloud.auth.biz.utils.SessionInvalidException;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2ErrorKeys;
 import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * <p>Description: 社交认证 Converter </p>
@@ -53,7 +48,7 @@ import java.util.stream.Collectors;
  * 
  * @date : 2022/3/31 14:16
  */
-public class OAuth2SocialCredentialsAuthenticationConverter extends AbstractAuthenticationConverter {
+public class OAuth2SocialCredentialsAuthenticationConverter extends OAuth2AbstractAuthenticationConverter {
 
 	public OAuth2SocialCredentialsAuthenticationConverter(HttpCryptoProcessor httpCryptoProcessor) {
 		super(httpCryptoProcessor);

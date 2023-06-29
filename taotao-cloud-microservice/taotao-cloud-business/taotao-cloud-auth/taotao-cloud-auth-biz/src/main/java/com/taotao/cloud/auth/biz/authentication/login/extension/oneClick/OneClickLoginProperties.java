@@ -22,7 +22,7 @@
  */
 package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.UserDetailsRegisterService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthUserDetailsRegisterService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +31,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * 一键登录属性
@@ -62,7 +61,7 @@ public class OneClickLoginProperties {
 
     /**
      * 其他请求参数名称列表(包括请求头名称), 此参数会传递到 {@link OneClickLoginService#callback(String, Map)} 与
-     * {@link UserDetailsRegisterService#registerUser(String, Map)}; 默认为: 空
+     * {@link JustAuthUserDetailsRegisterService#registerUser(String, Map)}; 默认为: 空
      */
     private List<String> otherParamNames = new ArrayList<>();
 

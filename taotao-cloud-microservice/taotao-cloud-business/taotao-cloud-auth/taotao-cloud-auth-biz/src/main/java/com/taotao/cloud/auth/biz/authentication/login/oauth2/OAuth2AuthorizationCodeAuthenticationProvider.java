@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * 
+ *
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 
+ * 4.分发源码时候，请注明软件出处
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 package com.taotao.cloud.auth.biz.authentication.login.oauth2;
@@ -68,7 +68,7 @@ import java.util.Map;
  * @see <a target="_blank" href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.3">Section 4.1.3 Access Token Request</a>
  * @since 0.0.1
  */
-public final class OAuth2AuthorizationCodeAuthenticationProvider extends AbstractAuthenticationProvider {
+public final class OAuth2AuthorizationCodeAuthenticationProvider extends OAuth2AbstractAuthenticationProvider {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2AuthorizationCodeAuthenticationProvider.class);
 
