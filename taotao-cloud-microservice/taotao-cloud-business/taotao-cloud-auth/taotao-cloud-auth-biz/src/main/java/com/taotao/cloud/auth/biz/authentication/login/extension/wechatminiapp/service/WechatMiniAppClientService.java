@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service;
 
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppClient;
+
 @FunctionalInterface
 public interface WechatMiniAppClientService {
 

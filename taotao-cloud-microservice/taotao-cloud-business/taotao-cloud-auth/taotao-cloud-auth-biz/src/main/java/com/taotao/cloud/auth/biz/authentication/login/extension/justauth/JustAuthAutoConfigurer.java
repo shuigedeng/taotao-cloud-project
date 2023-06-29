@@ -23,7 +23,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.UmsUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.JsonRequestFilter;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.login.Auth2LoginAuthenticationFilter;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.redirect.Auth2DefaultRequestRedirectFilter;
@@ -33,12 +32,9 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.service
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.service.ConnectionService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.userdetails.converter.AuthenticationToUserDetailsConverter;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -66,7 +62,7 @@ public class JustAuthAutoConfigurer extends SecurityConfigurerAdapter<DefaultSec
 	implements InitializingBean {
 
 	private final Auth2Properties auth2Properties;
-	private final UmsUserDetailsService umsUserDetailsService;
+	private final JustAuthUserDetailsService umsUserDetailsService;
 	private final Auth2UserService auth2UserService;
 	private final ConnectionService connectionSignUp;
 	private final ExecutorService updateConnectionTaskExecutor;
@@ -89,7 +85,7 @@ public class JustAuthAutoConfigurer extends SecurityConfigurerAdapter<DefaultSec
 	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
 
 	public JustAuthAutoConfigurer(Auth2Properties auth2Properties,
-								  UmsUserDetailsService umsUserDetailsService,
+								  JustAuthUserDetailsService umsUserDetailsService,
 								  Auth2UserService auth2UserService,
 								  ConnectionService connectionSignUp,
 								  @Qualifier("updateConnectionTaskExecutor") ExecutorService updateConnectionTaskExecutor,

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.accountVerification;
 
-import com.taotao.cloud.common.enums.LoginTypeEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;
@@ -31,106 +30,48 @@ import org.springframework.util.Assert;
 
 public class AccountVerificationAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
-    public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
-    public static final String SPRING_SECURITY_FORM_VERIFICATION_CODE_KEY = "verification_code";
-    public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
+	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
+		new AntPathRequestMatcher("/login/account/verification", "POST");
 
-    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
-            new AntPathRequestMatcher("/login/account/verification", "POST");
+	private Converter<HttpServletRequest, AccountVerificationAuthenticationToken>
+		accountVerificationAuthenticationTokenConverter;
 
-    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-    private String verificationCodeParameter = SPRING_SECURITY_FORM_VERIFICATION_CODE_KEY;
-    /**
-     * @see LoginTypeEnum B_PC_ACCOUNT / C_PC_ACCOUNT
-     */
-    private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
+	private boolean postOnly = true;
 
-    private Converter<HttpServletRequest, AccountVerificationAuthenticationToken>
-            accountVerificationAuthenticationTokenConverter;
+	public AccountVerificationAuthenticationFilter() {
+		super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
+		this.accountVerificationAuthenticationTokenConverter = new AccountVerificationAuthenticationConverter();
+	}
 
-    private boolean postOnly = true;
+	public AccountVerificationAuthenticationFilter(AuthenticationManager authenticationManager) {
+		super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
+		this.accountVerificationAuthenticationTokenConverter = new AccountVerificationAuthenticationConverter();
+	}
 
-    public AccountVerificationAuthenticationFilter() {
-        super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
-        this.accountVerificationAuthenticationTokenConverter = defaultConverter();
-    }
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+		throws AuthenticationException {
+		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
+			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+		}
 
-    public AccountVerificationAuthenticationFilter(AuthenticationManager authenticationManager) {
-        super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
-        this.accountVerificationAuthenticationTokenConverter = defaultConverter();
-    }
+		AccountVerificationAuthenticationToken accountVerificationAuthenticationToken =
+			accountVerificationAuthenticationTokenConverter.convert(request);
+		// Allow subclasses to set the "details" property
+		setDetails(request, accountVerificationAuthenticationToken);
+		return this.getAuthenticationManager().authenticate(accountVerificationAuthenticationToken);
+	}
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
-        if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
-        }
+	protected void setDetails(HttpServletRequest request, AccountVerificationAuthenticationToken accountVerificationAuthenticationToken) {
+		accountVerificationAuthenticationToken.setDetails(this.authenticationDetailsSource.buildDetails(request));
+	}
 
-        AccountVerificationAuthenticationToken authRequest =
-                accountVerificationAuthenticationTokenConverter.convert(request);
-        // Allow subclasses to set the "details" property
-        setDetails(request, authRequest);
-        return this.getAuthenticationManager().authenticate(authRequest);
-    }
+	public void setConverter(Converter<HttpServletRequest, AccountVerificationAuthenticationToken> converter) {
+		Assert.notNull(converter, "Converter must not be null");
+		this.accountVerificationAuthenticationTokenConverter = converter;
+	}
 
-    private Converter<HttpServletRequest, AccountVerificationAuthenticationToken> defaultConverter() {
-        return request -> {
-            String username = request.getParameter(this.usernameParameter);
-            username = (username != null) ? username.trim() : "";
-
-            String passord = request.getParameter(this.passwordParameter);
-            passord = (passord != null) ? passord.trim() : "";
-
-            String verificationCode = request.getParameter(this.verificationCodeParameter);
-            verificationCode = (verificationCode != null) ? verificationCode.trim() : "";
-
-            String type = request.getParameter(this.typeParameter);
-            type = (type != null) ? type.trim() : "";
-
-            return new AccountVerificationAuthenticationToken(username, passord, verificationCode, type);
-        };
-    }
-
-    protected void setDetails(HttpServletRequest request, AccountVerificationAuthenticationToken authRequest) {
-        authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
-    }
-
-    public void setUsernameParameter(String usernameParameter) {
-        Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
-        this.usernameParameter = usernameParameter;
-    }
-
-    public void setPasswordParameter(String passwordParameter) {
-        Assert.hasText(passwordParameter, "Password parameter must not be empty or null");
-        this.passwordParameter = passwordParameter;
-    }
-
-    public void setVerificationCodeParameter(String verificationCodeParameter) {
-        Assert.hasText(verificationCodeParameter, "verificationCode parameter must not be empty or null");
-        this.verificationCodeParameter = verificationCodeParameter;
-    }
-
-    public void setConverter(Converter<HttpServletRequest, AccountVerificationAuthenticationToken> converter) {
-        Assert.notNull(converter, "Converter must not be null");
-        this.accountVerificationAuthenticationTokenConverter = converter;
-    }
-
-    public void setPostOnly(boolean postOnly) {
-        this.postOnly = postOnly;
-    }
-
-    public final String getUsernameParameter() {
-        return this.usernameParameter;
-    }
-
-    public String getPasswordParameter() {
-        return passwordParameter;
-    }
-
-    public String getVerificationCodeParameter() {
-        return verificationCodeParameter;
-    }
+	public void setPostOnly(boolean postOnly) {
+		this.postOnly = postOnly;
+	}
 }

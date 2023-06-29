@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.uaa.configuration;
 
-import com.taotao.cloud.auth.biz.authentication.login.social.DelegateMapOAuth2AccessTokenResponseConverter;
-import com.taotao.cloud.auth.biz.authentication.login.social.DelegateOAuth2RefreshTokenRequestEntityConverter;
+import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateMapOAuth2AccessTokenResponseConverter;
+import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateOAuth2RefreshTokenRequestEntityConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -57,7 +57,7 @@ public class OAuth2ClientManagerConfiguration {
 			new DefaultRefreshTokenTokenResponseClient();
 
 		defaultRefreshTokenTokenResponseClient.setRequestEntityConverter(
-			new DelegateOAuth2RefreshTokenRequestEntityConverter());
+			new SocialDelegateOAuth2RefreshTokenRequestEntityConverter());
 		OAuth2AccessTokenResponseHttpMessageConverter messageConverter =
 			new OAuth2AccessTokenResponseHttpMessageConverter();
 		// 微信返回的content-type 是 text-plain
@@ -65,7 +65,7 @@ public class OAuth2ClientManagerConfiguration {
 			MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, new MediaType("application", "*+json")));
 
 		// 兼容微信解析
-		messageConverter.setAccessTokenResponseConverter(new DelegateMapOAuth2AccessTokenResponseConverter());
+		messageConverter.setAccessTokenResponseConverter(new SocialDelegateMapOAuth2AccessTokenResponseConverter());
 
 		RestTemplate restTemplate = new RestTemplate(Arrays.asList(new FormHttpMessageConverter(), messageConverter));
 

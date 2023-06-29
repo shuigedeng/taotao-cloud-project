@@ -24,9 +24,8 @@ public interface FingerprintUserDetailsService {
     /**
      * load user by phone
      *
-     * @param phone phone
      * @return userDetails
      * @throws UsernameNotFoundException not found user
      */
-    UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException;
+    UserDetails loadUserByFingerprint(String username) throws UsernameNotFoundException;
 }

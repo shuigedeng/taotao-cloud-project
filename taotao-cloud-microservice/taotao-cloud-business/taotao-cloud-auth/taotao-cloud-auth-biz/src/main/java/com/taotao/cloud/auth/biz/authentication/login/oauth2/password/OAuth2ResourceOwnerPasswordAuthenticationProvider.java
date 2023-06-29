@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.password;
 
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.AbstractUserDetailsAuthenticationProvider;
+import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractUserDetailsAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
@@ -64,7 +64,7 @@ import java.util.Set;
  * 
  * @date : 2022/2/22 16:02
  */
-public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends OAuth2AbstractUserDetailsAuthenticationProvider {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2ResourceOwnerPasswordAuthenticationProvider.class);
 

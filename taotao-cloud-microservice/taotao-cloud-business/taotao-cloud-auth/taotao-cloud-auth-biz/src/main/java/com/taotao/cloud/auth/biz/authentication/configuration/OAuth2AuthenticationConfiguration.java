@@ -26,7 +26,7 @@
 package com.taotao.cloud.auth.biz.authentication.configuration;
 
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginUrlConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.social.DelegateClientRegistrationRepository;
+import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.processor.AESCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.processor.RSACryptoProcessor;
@@ -69,8 +69,8 @@ public class OAuth2AuthenticationConfiguration {
 	private RedisRepository redisRepository;
 
 	@Bean
-	DelegateClientRegistrationRepository delegateClientRegistrationRepository(OAuth2ClientProperties properties) {
-		DelegateClientRegistrationRepository clientRegistrationRepository = new DelegateClientRegistrationRepository();
+    public SocialDelegateClientRegistrationRepository delegateClientRegistrationRepository(OAuth2ClientProperties properties) {
+		SocialDelegateClientRegistrationRepository clientRegistrationRepository = new SocialDelegateClientRegistrationRepository();
 		if (properties != null) {
 			Map<String, ClientRegistration> clientRegistrations = new OAuth2ClientPropertiesMapper(properties).asClientRegistrations();
 			List<ClientRegistration> registrations = new ArrayList<>(clientRegistrations.values());

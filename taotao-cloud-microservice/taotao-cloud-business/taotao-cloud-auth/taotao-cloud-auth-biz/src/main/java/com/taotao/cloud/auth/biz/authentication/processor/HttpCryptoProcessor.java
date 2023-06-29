@@ -25,7 +25,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.processor;
 
-import com.taotao.cloud.auth.biz.authentication.utils.StampHasExpiredException;
+import com.taotao.cloud.auth.biz.authentication.exception.StampHasExpiredException;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import com.taotao.cloud.auth.biz.utils.SessionInvalidException;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;

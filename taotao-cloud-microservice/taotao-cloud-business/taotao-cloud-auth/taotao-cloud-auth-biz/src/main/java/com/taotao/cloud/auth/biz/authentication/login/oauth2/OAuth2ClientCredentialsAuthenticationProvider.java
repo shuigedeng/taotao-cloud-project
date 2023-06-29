@@ -57,10 +57,11 @@ import java.util.Set;
  * <p>
  * 用于支持 客户端权限验证 以及 支持 Refresh_Token
  *
- *
- * @date : 2022/3/31 14:57
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-29 16:45:04
  */
-public class OAuth2ClientCredentialsAuthenticationProvider extends AbstractAuthenticationProvider {
+public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2AbstractAuthenticationProvider {
 
 	private static final Logger log = LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
 

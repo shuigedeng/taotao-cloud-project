@@ -28,7 +28,6 @@ package com.taotao.cloud.auth.biz.authentication.login.form;
 import com.taotao.cloud.auth.biz.authentication.login.form.captcha.OAuth2FormLoginAuthenticationFilter;
 import com.taotao.cloud.auth.biz.authentication.login.form.captcha.OAuth2FormLoginAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.biz.authentication.response.OAuth2FormLoginAuthenticationFailureHandler;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,11 +39,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.context.SecurityContextRepository;
 
 /**
- * <p>Description: OAuth2 Form Login Configurer </p>
+ * <p>基于spring security 扩展表单登录方式(基于表单请求)</p>
  * <p>
  * 使用此种方式，相当于额外增加了一种表单登录方式。因此对原有的 http.formlogin进行的配置，对当前此种方式的配置并不生效。
  *
- * 
+ *
  * @date : 2022/4/12 13:29
  * @see org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer
  */
@@ -65,7 +64,6 @@ public class OAuth2FormLoginSecureConfigurer<H extends HttpSecurityBuilder<H>>
 
     @Override
     public void configure(H httpSecurity) throws Exception {
-
         AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
         SecurityContextRepository securityContextRepository = httpSecurity.getSharedObject(SecurityContextRepository.class);
 

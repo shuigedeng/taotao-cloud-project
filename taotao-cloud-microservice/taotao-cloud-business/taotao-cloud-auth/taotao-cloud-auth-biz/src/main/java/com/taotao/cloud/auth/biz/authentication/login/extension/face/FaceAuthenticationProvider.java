@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.face;
 
+import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceCheckService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceUserDetailsService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
@@ -37,11 +38,14 @@ import java.util.Collection;
 public class FaceAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-    private final FaceUserDetailsService faceUserDetailsService;
+    private FaceUserDetailsService faceUserDetailsService;
+    private FaceCheckService faceCheckService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public FaceAuthenticationProvider(FaceUserDetailsService faceUserDetailsService) {
+    public FaceAuthenticationProvider(FaceUserDetailsService faceUserDetailsService,
+									  FaceCheckService faceCheckService) {
         this.faceUserDetailsService = faceUserDetailsService;
+        this.faceCheckService = faceCheckService;
     }
 
     @Override
@@ -50,11 +54,10 @@ public class FaceAuthenticationProvider implements AuthenticationProvider, Initi
                 FaceAuthenticationToken.class,
                 authentication,
                 () -> messages.getMessage(
-                        "AccountVerificationAuthenticationProvider.onlySupports",
-                        "Only AccountVerificationAuthenticationProvider is supported"));
+                        "FaceAuthenticationProvider.onlySupports",
+                        "Only FaceAuthenticationProvider is supported"));
 
         FaceAuthenticationToken unAuthenticationToken = (FaceAuthenticationToken) authentication;
-
         String imgBase64 = (String) unAuthenticationToken.getPrincipal();
 
         // 验证码校验
@@ -87,7 +90,6 @@ public class FaceAuthenticationProvider implements AuthenticationProvider, Initi
      * @return the authentication
      */
     protected Authentication createSuccessAuthentication(Authentication authentication, UserDetails user) {
-
         Collection<? extends GrantedAuthority> authorities = authoritiesMapper.mapAuthorities(user.getAuthorities());
         FaceAuthenticationToken authenticationToken = new FaceAuthenticationToken(user, authorities);
         authenticationToken.setDetails(authentication.getDetails());

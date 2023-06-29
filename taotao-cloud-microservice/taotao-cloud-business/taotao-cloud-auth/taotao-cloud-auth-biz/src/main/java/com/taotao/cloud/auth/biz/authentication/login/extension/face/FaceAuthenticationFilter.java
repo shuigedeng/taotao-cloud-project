@@ -28,27 +28,28 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+/**
+ * 面对身份验证过滤器
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-29 14:31:01
+ */
 public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-
-    public static final String SPRING_SECURITY_FORM_IMAGE_BASE_64_KEY = "imgBase64";
 
     private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
             new AntPathRequestMatcher("/login/face", "POST");
-
-    private final String imgBase64Parameter = SPRING_SECURITY_FORM_IMAGE_BASE_64_KEY;
-
     private Converter<HttpServletRequest, FaceAuthenticationToken> accountVerificationAuthenticationTokenConverter;
-
     private boolean postOnly = true;
 
     public FaceAuthenticationFilter() {
         super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
-        this.accountVerificationAuthenticationTokenConverter = defaultConverter();
+        this.accountVerificationAuthenticationTokenConverter = new FaceAuthenticationConverter();
     }
 
     public FaceAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
-        this.accountVerificationAuthenticationTokenConverter = defaultConverter();
+        this.accountVerificationAuthenticationTokenConverter = new FaceAuthenticationConverter();
     }
 
     @Override
@@ -58,19 +59,10 @@ public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFi
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        FaceAuthenticationToken authRequest = accountVerificationAuthenticationTokenConverter.convert(request);
+        FaceAuthenticationToken faceAuthenticationToken = accountVerificationAuthenticationTokenConverter.convert(request);
         // Allow subclasses to set the "details" property
-        setDetails(request, authRequest);
-        return this.getAuthenticationManager().authenticate(authRequest);
-    }
-
-    private Converter<HttpServletRequest, FaceAuthenticationToken> defaultConverter() {
-        return request -> {
-            String imgBase64 = request.getParameter(this.imgBase64Parameter);
-            imgBase64 = (imgBase64 != null) ? imgBase64.trim() : "";
-
-            return new FaceAuthenticationToken(imgBase64);
-        };
+        setDetails(request, faceAuthenticationToken);
+        return this.getAuthenticationManager().authenticate(faceAuthenticationToken);
     }
 
     protected void setDetails(HttpServletRequest request, FaceAuthenticationToken authRequest) {

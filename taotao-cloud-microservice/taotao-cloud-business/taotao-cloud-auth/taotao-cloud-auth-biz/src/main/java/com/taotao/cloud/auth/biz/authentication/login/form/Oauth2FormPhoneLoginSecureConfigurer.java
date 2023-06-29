@@ -26,13 +26,10 @@
 package com.taotao.cloud.auth.biz.authentication.login.form;
 
 import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationFilter;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationProvider;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.DefaultOauth2FormOauth2FormPhoneService;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.DefaultOauth2FormOauth2FormPhoneUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationProviderOAuth2;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl.DefaultOauth2FormOauth2FormPhoneService;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl.DefaultOauth2FormOauth2FormPhoneUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.biz.authentication.response.OAuth2FormLoginAuthenticationFailureHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -44,14 +41,12 @@ import org.springframework.security.web.context.SecurityContextRepository;
  * <p>
  * 使用此种方式，相当于额外增加了一种表单登录方式。因此对原有的 http.formlogin进行的配置，对当前此种方式的配置并不生效。
  *
- *
- * @date : 2022/4/12 13:29
- * @see org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-06-29 16:38:04
  */
 public class Oauth2FormPhoneLoginSecureConfigurer<H extends HttpSecurityBuilder<H>>
 	extends AbstractHttpConfigurer<Oauth2FormPhoneLoginSecureConfigurer<H>, H> {
-
-	private static final Logger log = LoggerFactory.getLogger(Oauth2FormPhoneLoginSecureConfigurer.class);
 
 	private final OAuth2AuthenticationProperties authenticationProperties;
 
@@ -61,7 +56,6 @@ public class Oauth2FormPhoneLoginSecureConfigurer<H extends HttpSecurityBuilder<
 
 	@Override
 	public void configure(H httpSecurity) throws Exception {
-
 		AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
 		SecurityContextRepository securityContextRepository = httpSecurity.getSharedObject(SecurityContextRepository.class);
 
@@ -71,7 +65,7 @@ public class Oauth2FormPhoneLoginSecureConfigurer<H extends HttpSecurityBuilder<
 		filter.setAuthenticationFailureHandler(new OAuth2FormLoginAuthenticationFailureHandler(getFormLogin().getFailureForwardUrl()));
 		filter.setSecurityContextRepository(securityContextRepository);
 
-		Oauth2FormPhoneAuthenticationProvider provider = new Oauth2FormPhoneAuthenticationProvider(
+		Oauth2FormPhoneAuthenticationProviderOAuth2 provider = new Oauth2FormPhoneAuthenticationProviderOAuth2(
 			new DefaultOauth2FormOauth2FormPhoneUserDetailsService(),
 			new DefaultOauth2FormOauth2FormPhoneService());
 

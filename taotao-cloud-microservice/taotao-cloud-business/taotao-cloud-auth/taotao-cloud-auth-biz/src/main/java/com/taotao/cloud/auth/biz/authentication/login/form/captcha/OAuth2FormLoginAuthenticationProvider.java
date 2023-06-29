@@ -70,9 +70,7 @@ public class OAuth2FormLoginAuthenticationProvider extends DaoAuthenticationProv
         Object details = authentication.getDetails();
 
         if (ObjectUtils.isNotEmpty(details) && details instanceof FormLoginWebAuthenticationDetails formLoginWebAuthenticationDetails) {
-
             if (!formLoginWebAuthenticationDetails.getClosed()) {
-
                 String code = formLoginWebAuthenticationDetails.getCode();
                 String category = formLoginWebAuthenticationDetails.getCategory();
                 String identity = formLoginWebAuthenticationDetails.getIdentity();

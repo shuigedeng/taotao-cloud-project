@@ -24,14 +24,11 @@ import java.util.stream.Collectors;
 public abstract class AbstractTokenCustomizer {
 
     protected void appendAll(Map<String, Object> attributes, Authentication authentication, Set<String> authorizedScopes) {
-
         appendAuthorities(attributes, authentication);
         appendCommons(attributes, authentication, authorizedScopes);
-
     }
 
     protected void appendAuthorities(Map<String, Object> attributes, Authentication authentication) {
-
         if (CollectionUtils.isNotEmpty(authentication.getAuthorities())) {
             Set<String> authorities = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -59,7 +56,7 @@ public abstract class AbstractTokenCustomizer {
             }
         }
 
-        attributes.put("license", "Apache-2.0 Licensed | Copyright © 2020-2023 码 匠 君");
+        attributes.put("license", "Apache-2.0 Licensed | Copyright © 2020-2023 shuigedeng");
     }
 
     private void putUserInfo(Map<String, Object> attributes, HerodotusUser principal) {

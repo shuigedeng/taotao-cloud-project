@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppRequest;
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppRequest;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
