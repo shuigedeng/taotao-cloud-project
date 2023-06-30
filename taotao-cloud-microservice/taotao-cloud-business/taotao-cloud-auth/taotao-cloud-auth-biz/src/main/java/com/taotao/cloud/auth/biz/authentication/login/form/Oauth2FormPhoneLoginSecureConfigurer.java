@@ -25,8 +25,8 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.form;
 
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationFilter;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationProviderOAuth2;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneLoginAuthenticationFilter;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneLoginAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl.DefaultOauth2FormOauth2FormPhoneService;
 import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl.DefaultOauth2FormOauth2FormPhoneUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
@@ -59,13 +59,13 @@ public class Oauth2FormPhoneLoginSecureConfigurer<H extends HttpSecurityBuilder<
 		AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
 		SecurityContextRepository securityContextRepository = httpSecurity.getSharedObject(SecurityContextRepository.class);
 
-		Oauth2FormPhoneAuthenticationFilter filter = new Oauth2FormPhoneAuthenticationFilter(authenticationManager);
+		Oauth2FormPhoneLoginAuthenticationFilter filter = new Oauth2FormPhoneLoginAuthenticationFilter(authenticationManager);
 		filter.setAuthenticationDetailsSource(new OAuth2FormLoginWebAuthenticationDetailSource(authenticationProperties));
 
 		filter.setAuthenticationFailureHandler(new OAuth2FormLoginAuthenticationFailureHandler(getFormLogin().getFailureForwardUrl()));
 		filter.setSecurityContextRepository(securityContextRepository);
 
-		Oauth2FormPhoneAuthenticationProviderOAuth2 provider = new Oauth2FormPhoneAuthenticationProviderOAuth2(
+		Oauth2FormPhoneLoginAuthenticationProvider provider = new Oauth2FormPhoneLoginAuthenticationProvider(
 			new DefaultOauth2FormOauth2FormPhoneUserDetailsService(),
 			new DefaultOauth2FormOauth2FormPhoneService());
 

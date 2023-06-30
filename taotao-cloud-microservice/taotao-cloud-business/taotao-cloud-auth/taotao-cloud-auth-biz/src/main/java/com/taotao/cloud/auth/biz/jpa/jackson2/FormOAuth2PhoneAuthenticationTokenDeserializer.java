@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneLoginAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -44,7 +44,7 @@ import java.util.List;
  * @since 4.2
  * @see FormOAuth2PhoneAuthenticationTokenMixin
  */
-public class FormOAuth2PhoneAuthenticationTokenDeserializer extends JsonDeserializer<Oauth2FormPhoneAuthenticationToken> {
+public class FormOAuth2PhoneAuthenticationTokenDeserializer extends JsonDeserializer<Oauth2FormPhoneLoginAuthenticationToken> {
 
 	private static final TypeReference<List<GrantedAuthority>> GRANTED_AUTHORITY_LIST = new TypeReference<List<GrantedAuthority>>() {
 	};
@@ -62,7 +62,7 @@ public class FormOAuth2PhoneAuthenticationTokenDeserializer extends JsonDeserial
 	 * @throws JsonProcessingException if an error during JSON processing occurs
 	 */
 	@Override
-	public Oauth2FormPhoneAuthenticationToken deserialize(JsonParser jp, DeserializationContext ctxt)
+	public Oauth2FormPhoneLoginAuthenticationToken deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
 		ObjectMapper mapper = (ObjectMapper) jp.getCodec();
 		JsonNode jsonNode = mapper.readTree(jp);
@@ -80,9 +80,9 @@ public class FormOAuth2PhoneAuthenticationTokenDeserializer extends JsonDeserial
 		List<GrantedAuthority> authorities = mapper.readValue(readJsonNode(jsonNode, "authorities").traverse(mapper),
 				GRANTED_AUTHORITY_LIST);
 
-		Oauth2FormPhoneAuthenticationToken token = (!authenticated)
-				? Oauth2FormPhoneAuthenticationToken.unauthenticated(principal, captcha, type)
-				: Oauth2FormPhoneAuthenticationToken.authenticated(principal, captcha, type, authorities);
+		Oauth2FormPhoneLoginAuthenticationToken token = (!authenticated)
+				? Oauth2FormPhoneLoginAuthenticationToken.unauthenticated(principal, captcha, type)
+				: Oauth2FormPhoneLoginAuthenticationToken.authenticated(principal, captcha, type, authorities);
 		JsonNode detailsNode = readJsonNode(jsonNode, "details");
 		if (detailsNode.isNull() || detailsNode.isMissingNode()) {
 			token.setDetails(null);
