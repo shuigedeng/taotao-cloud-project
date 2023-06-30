@@ -17,13 +17,14 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.account.AccountExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.extension.accountVerification.AccountVerificationExtensionLoginFilterConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.captcha.CaptchaExtensionLoginFilterConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.email.EmailExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.face.FaceExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.FingerprintExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.GesturesExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.OneClickExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.extension.phone.PhoneExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.QrcodeExtensionLoginFilterConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.sms.SmsExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.WechatMiniAppExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.WechatMpExtensionLoginFilterConfigurer;
 import org.springframework.security.config.Customizer;
@@ -40,15 +41,37 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 	extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, H> {
 
 	private AccountExtensionLoginFilterConfigurer<H> accountLoginFilterConfigurer;
-	private AccountVerificationExtensionLoginFilterConfigurer<H> accountVerificationLoginFilterConfigurer;
+	private CaptchaExtensionLoginFilterConfigurer<H> captchaLoginFilterConfigurer;
+	private EmailExtensionLoginFilterConfigurer<H> emailLoginFilterConfigurer;
 	private FaceExtensionLoginFilterConfigurer<H> faceLoginFilterConfigurer;
 	private FingerprintExtensionLoginFilterConfigurer<H> fingerprintLoginFilterConfigurer;
 	private GesturesExtensionLoginFilterConfigurer<H> gesturesLoginFilterConfigurer;
 	private OneClickExtensionLoginFilterConfigurer<H> oneClickLoginFilterConfigurer;
 	private QrcodeExtensionLoginFilterConfigurer<H> qrcodeLoginFilterConfigurer;
-	private PhoneExtensionLoginFilterConfigurer<H> phoneLoginFilterConfigurer;
+	private SmsExtensionLoginFilterConfigurer<H> smsLoginFilterConfigurer;
 	private WechatMpExtensionLoginFilterConfigurer<H> wechatMpLoginFilterConfigurer;
 	private WechatMiniAppExtensionLoginFilterConfigurer<H> wechatMiniAppLoginFilterConfigurer;
+
+	/**
+	 * Captcha login captcha login filter configurer.
+	 *
+	 * @return the captcha login filter configurer
+	 */
+	public EmailExtensionLoginFilterConfigurer<H> emailLogin() {
+		return lazyInitEmailLoginFilterConfigurer();
+	}
+
+	/**
+	 * Captcha login login filter security configurer.
+	 *
+	 * @param emailLoginConfigurerCustomizer the captcha login filter configurer customizer
+	 * @return the login filter security configurer
+	 */
+	public ExtensionLoginFilterSecurityConfigurer<H> emailLogin(
+		Customizer<EmailExtensionLoginFilterConfigurer<H>> emailLoginConfigurerCustomizer) {
+		emailLoginConfigurerCustomizer.customize(lazyInitEmailLoginFilterConfigurer());
+		return this;
+	}
 
 	/**
 	 * Captcha login captcha login filter configurer.
@@ -203,22 +226,21 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 	 *
 	 * @return the captcha login filter configurer
 	 */
-	public AccountVerificationExtensionLoginFilterConfigurer<H> accountVerificationLogin() {
-		return lazyInitAccountVerificationLoginFilterConfigurer();
+	public CaptchaExtensionLoginFilterConfigurer<H> captchaLogin() {
+		return lazyInitCaptchaLoginFilterConfigurer();
 	}
 
 	/**
 	 * Captcha login login filter security configurer.
 	 *
-	 * @param accountVerificationLoginConfigurerCustomizer the captcha login filter configurer
+	 * @param captchaLoginConfigurerCustomizer the captcha login filter configurer
 	 *                                                     customizer
 	 * @return the login filter security configurer
 	 */
-	public ExtensionLoginFilterSecurityConfigurer<H> accountVerificationLogin(
-		Customizer<AccountVerificationExtensionLoginFilterConfigurer<H>>
-			accountVerificationLoginConfigurerCustomizer) {
-		accountVerificationLoginConfigurerCustomizer.customize(
-			lazyInitAccountVerificationLoginFilterConfigurer());
+	public ExtensionLoginFilterSecurityConfigurer<H> captchaLogin(
+		Customizer<CaptchaExtensionLoginFilterConfigurer<H>>
+			captchaLoginConfigurerCustomizer) {
+		captchaLoginConfigurerCustomizer.customize(lazyInitCaptchaLoginFilterConfigurer());
 		return this;
 	}
 
@@ -227,19 +249,19 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 	 *
 	 * @return the captcha login filter configurer
 	 */
-	public PhoneExtensionLoginFilterConfigurer<H> phoneLogin() {
-		return lazyInitPhoneLoginFilterConfigurer();
+	public SmsExtensionLoginFilterConfigurer<H> smsLogin() {
+		return lazyInitSmsLoginFilterConfigurer();
 	}
 
 	/**
 	 * Captcha login login filter security configurer.
 	 *
-	 * @param phoneLoginConfigurerCustomizer the captcha login filter configurer customizer
+	 * @param smsLoginConfigurerCustomizer the captcha login filter configurer customizer
 	 * @return the login filter security configurer
 	 */
-	public ExtensionLoginFilterSecurityConfigurer<H> phoneLogin(
-		Customizer<PhoneExtensionLoginFilterConfigurer<H>> phoneLoginConfigurerCustomizer) {
-		phoneLoginConfigurerCustomizer.customize(lazyInitPhoneLoginFilterConfigurer());
+	public ExtensionLoginFilterSecurityConfigurer<H> smsLogin(
+		Customizer<SmsExtensionLoginFilterConfigurer<H>> smsLoginConfigurerCustomizer) {
+		smsLoginConfigurerCustomizer.customize(lazyInitSmsLoginFilterConfigurer());
 		return this;
 	}
 
@@ -266,11 +288,14 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 
 	@Override
 	public void init(H builder) throws Exception {
+		if (emailLoginFilterConfigurer != null) {
+			emailLoginFilterConfigurer.init(builder);
+		}
 		if (accountLoginFilterConfigurer != null) {
 			accountLoginFilterConfigurer.init(builder);
 		}
-		if (accountVerificationLoginFilterConfigurer != null) {
-			accountVerificationLoginFilterConfigurer.init(builder);
+		if (captchaLoginFilterConfigurer != null) {
+			captchaLoginFilterConfigurer.init(builder);
 		}
 		if (faceLoginFilterConfigurer != null) {
 			faceLoginFilterConfigurer.init(builder);
@@ -290,8 +315,8 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 		if (qrcodeLoginFilterConfigurer != null) {
 			qrcodeLoginFilterConfigurer.init(builder);
 		}
-		if (phoneLoginFilterConfigurer != null) {
-			phoneLoginFilterConfigurer.init(builder);
+		if (smsLoginFilterConfigurer != null) {
+			smsLoginFilterConfigurer.init(builder);
 		}
 		if (wechatMiniAppLoginFilterConfigurer != null) {
 			wechatMiniAppLoginFilterConfigurer.init(builder);
@@ -300,11 +325,14 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 
 	@Override
 	public void configure(H builder) throws Exception {
+		if (emailLoginFilterConfigurer != null) {
+			emailLoginFilterConfigurer.configure(builder);
+		}
 		if (accountLoginFilterConfigurer != null) {
 			accountLoginFilterConfigurer.configure(builder);
 		}
-		if (accountVerificationLoginFilterConfigurer != null) {
-			accountVerificationLoginFilterConfigurer.configure(builder);
+		if (captchaLoginFilterConfigurer != null) {
+			captchaLoginFilterConfigurer.configure(builder);
 		}
 		if (faceLoginFilterConfigurer != null) {
 			faceLoginFilterConfigurer.configure(builder);
@@ -324,19 +352,26 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 		if (qrcodeLoginFilterConfigurer != null) {
 			qrcodeLoginFilterConfigurer.configure(builder);
 		}
-		if (phoneLoginFilterConfigurer != null) {
-			phoneLoginFilterConfigurer.configure(builder);
+		if (smsLoginFilterConfigurer != null) {
+			smsLoginFilterConfigurer.configure(builder);
 		}
 		if (wechatMiniAppLoginFilterConfigurer != null) {
 			wechatMiniAppLoginFilterConfigurer.configure(builder);
 		}
 	}
 
-	private PhoneExtensionLoginFilterConfigurer<H> lazyInitPhoneLoginFilterConfigurer() {
-		if (phoneLoginFilterConfigurer == null) {
-			this.phoneLoginFilterConfigurer = new PhoneExtensionLoginFilterConfigurer<>(this);
+	private EmailExtensionLoginFilterConfigurer<H> lazyInitEmailLoginFilterConfigurer() {
+		if (emailLoginFilterConfigurer == null) {
+			this.emailLoginFilterConfigurer = new EmailExtensionLoginFilterConfigurer<>(this);
 		}
-		return phoneLoginFilterConfigurer;
+		return emailLoginFilterConfigurer;
+	}
+
+	private SmsExtensionLoginFilterConfigurer<H> lazyInitSmsLoginFilterConfigurer() {
+		if (smsLoginFilterConfigurer == null) {
+			this.smsLoginFilterConfigurer = new SmsExtensionLoginFilterConfigurer<>(this);
+		}
+		return smsLoginFilterConfigurer;
 	}
 
 	private WechatMiniAppExtensionLoginFilterConfigurer<H> lazyInitMiniAppLoginFilterConfigurer() {
@@ -346,11 +381,11 @@ public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilde
 		return wechatMiniAppLoginFilterConfigurer;
 	}
 
-	private AccountVerificationExtensionLoginFilterConfigurer<H> lazyInitAccountVerificationLoginFilterConfigurer() {
-		if (accountVerificationLoginFilterConfigurer == null) {
-			this.accountVerificationLoginFilterConfigurer = new AccountVerificationExtensionLoginFilterConfigurer<>(this);
+	private CaptchaExtensionLoginFilterConfigurer<H> lazyInitCaptchaLoginFilterConfigurer() {
+		if (captchaLoginFilterConfigurer == null) {
+			this.captchaLoginFilterConfigurer = new CaptchaExtensionLoginFilterConfigurer<>(this);
 		}
-		return accountVerificationLoginFilterConfigurer;
+		return captchaLoginFilterConfigurer;
 	}
 
 	private AccountExtensionLoginFilterConfigurer<H> lazyInitAccountLoginFilterConfigurer() {

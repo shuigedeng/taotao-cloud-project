@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneAuthenticationToken;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneLoginAuthenticationToken;
 import org.springframework.security.jackson2.*;
 
 /**
@@ -49,7 +49,7 @@ public class FormOAuth2PhoneLoginJackson2Module extends SimpleModule {
 
 	@Override
 	public void setupModule(SetupContext context) {
-		context.setMixInAnnotations(Oauth2FormPhoneAuthenticationToken.class,
+		context.setMixInAnnotations(Oauth2FormPhoneLoginAuthenticationToken.class,
 				FormOAuth2PhoneAuthenticationTokenMixin.class);
 	}
 

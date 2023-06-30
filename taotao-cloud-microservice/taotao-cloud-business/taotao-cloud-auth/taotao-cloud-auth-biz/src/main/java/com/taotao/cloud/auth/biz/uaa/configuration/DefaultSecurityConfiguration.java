@@ -27,18 +27,18 @@ package com.taotao.cloud.auth.biz.uaa.configuration;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGeneratorImpl;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginSecureConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormCaptchaLoginSecureConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.form.Oauth2FormPhoneLoginSecureConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusClientDetailsService;
 import com.taotao.cloud.auth.biz.management.processor.HerodotusUserDetailsService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
@@ -137,8 +137,8 @@ public class DefaultSecurityConfiguration {
 			.accountLogin(accountLoginConfigurerCustomizer -> {
 
 			})
-			// 用户+密码+验证码登录
-			.accountVerificationLogin(accountVerificationLoginConfigurerCustomizer -> {
+			// 验证码登录
+			.captchaLogin(captchaLoginConfigurerCustomizer -> {
 
 			})
 			// 面部识别登录
@@ -171,8 +171,12 @@ public class DefaultSecurityConfiguration {
 			.qrcodeLogin(qrcodeLoginConfigurer -> {
 
 			})
-			// 手机号码+短信登录
-			.phoneLogin(phoneLoginConfigurer -> {
+			// 短信登录
+			.smsLogin(smsLoginConfigurerCustomizer -> {
+
+			})
+			// email登录
+			.emailLogin(emailLoginConfigurerCustomizer -> {
 
 			})
 			// 微信公众号登录
@@ -199,7 +203,7 @@ public class DefaultSecurityConfiguration {
 			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
 			.httpSecurity()
 			// **************************************oauth2表单登录配置***********************************************
-			.apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory))
+			.apply(new OAuth2FormCaptchaLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory))
 			.httpSecurity()
 			.apply(new Oauth2FormPhoneLoginSecureConfigurer<>( authenticationProperties));
 

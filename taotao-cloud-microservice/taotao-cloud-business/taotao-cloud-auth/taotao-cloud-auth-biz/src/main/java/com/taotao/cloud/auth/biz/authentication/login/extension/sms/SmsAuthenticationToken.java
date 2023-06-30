@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.extension.face;
+package com.taotao.cloud.auth.biz.authentication.login.extension.sms;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,21 +23,26 @@ import org.springframework.security.core.SpringSecurityCoreVersion;
 import java.io.Serial;
 import java.util.Collection;
 
-public class FaceAuthenticationToken extends AbstractAuthenticationToken {
+public class SmsAuthenticationToken extends AbstractAuthenticationToken {
 
     @Serial
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private final Object principal;
+    private String captcha;
+    private String type;
 
     /**
      * 此构造函数用来初始化未授信凭据.
      *
      * @param principal the principal
+     * @param captcha the captcha
      */
-    public FaceAuthenticationToken(Object principal) {
+    public SmsAuthenticationToken(Object principal, String captcha, String type) {
         super(null);
         this.principal = principal;
+        this.captcha = captcha;
+        this.type = type;
         setAuthenticated(false);
     }
 
@@ -45,27 +50,22 @@ public class FaceAuthenticationToken extends AbstractAuthenticationToken {
      * 此构造函数用来初始化授信凭据.
      *
      * @param principal the principal
+     * @param captcha the captcha
      * @param authorities the authorities
      */
-    public FaceAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
+    public SmsAuthenticationToken(
+            Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
+        this.captcha = captcha;
+        this.type = type;
         // must use super, as we override
         super.setAuthenticated(true);
     }
 
-	public static FaceAuthenticationToken unauthenticated(Object principal) {
-		return new FaceAuthenticationToken(principal);
-	}
-
-	public static FaceAuthenticationToken authenticated(Object principal,
-																	   Collection<? extends GrantedAuthority> authorities) {
-		return new FaceAuthenticationToken(principal, authorities);
-	}
-
-	@Override
+    @Override
     public Object getCredentials() {
-        return null;
+        return this.captcha;
     }
 
     @Override
@@ -83,8 +83,21 @@ public class FaceAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(false);
     }
 
+	public static SmsAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
+		return new SmsAuthenticationToken(principal, captcha, type);
+	}
+
+	public static SmsAuthenticationToken authenticated(Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
+		return new SmsAuthenticationToken(principal, captcha, type, authorities);
+	}
+
     @Override
     public void eraseCredentials() {
         super.eraseCredentials();
+        captcha = null;
+    }
+
+    public String getType() {
+        return type;
     }
 }
