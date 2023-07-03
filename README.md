@@ -69,7 +69,7 @@ Requires:
 ```
 JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
 GRALE_VERSION >= 8.2
-IDEA_VERSION >= 2023.1.2
+IDEA_VERSION >= 2023.1.3
 ```
 
 Gradle:
@@ -112,34 +112,34 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.9           
+ Spring               | 6.0.10           
  Spring Boot          | 3.1.1           
  Spring Cloud         | 2022.0.3        
  Spring Cloud Alibaba | 2022.0.0.0--RC2 
- Spring Cloud Tencent | 1.11.4-2022.0.1 
+ Spring Cloud Tencent | 1.11.7-2022.0.1 
  Seata                | 1.7.0-native-rc2
  Sentinel             | 1.8.6           
- Spring-kafka         | 6.0.7           
+ Spring-kafka         | 3.0.8           
  Roketmq              | 5.0.0           
  Spring Security      | 6.1.0           
  Mybatis Plus         | 3.5.3.1         
- Hutool               | 5.8.18          
+ Hutool               | 6.0.0-M4          
  Mysql                | 8.0.33          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
- Redisson             | 3.21.3          
+ Redisson             | 3.22.1         
  Lettuce              | 6.0.4.RELEASE   
  Elasticsearch        | 8.7.1           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
- Guava                | 31.1-jre        
- Grpc                 | 1.56.0          
+ Guava                | 32.1.1-jre        
+ Grpc                 | 1.56.1          
  Arthas               | 3.6.9           
  Dynamic-tp           | 1.1.3           
  Elasticjob           | 3.0.3           
- Powerjob             | 4.3.2           
- Forest               | 1.5.31          
+ Powerjob             | 4.3.3           
+ Forest               | 1.5.32          
  Netty                | 4.1.94.Final
 
 ## 6. 演示地址
