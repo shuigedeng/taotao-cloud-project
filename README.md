@@ -68,7 +68,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
-GRALE_VERSION >= 8.1.1
+GRALE_VERSION >= 8.2
 IDEA_VERSION >= 2023.1.2
 ```
 
