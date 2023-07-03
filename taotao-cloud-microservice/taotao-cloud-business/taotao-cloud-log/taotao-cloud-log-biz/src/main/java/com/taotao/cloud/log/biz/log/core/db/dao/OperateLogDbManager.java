@@ -23,6 +23,7 @@ import com.taotao.cloud.log.biz.log.param.OperateLogParam;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Service;
 
 /**

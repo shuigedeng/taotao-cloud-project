@@ -42,7 +42,7 @@ jobs:
       - name: Gradle BootJar taotao-cloud-log-biz
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 8.1
+          gradle-version: 8.2
           #arguments: bootBuildImage
           arguments: nativeBuild
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-log/taotao-cloud-log-biz
