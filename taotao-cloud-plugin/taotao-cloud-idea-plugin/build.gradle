@@ -1,7 +1,7 @@
 plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-    id "org.jetbrains.intellij" version "1.14.1"
+    id "org.jetbrains.intellij" version "1.14.2"
 }
 
 apply plugin: "java"
@@ -10,7 +10,7 @@ apply plugin: "org.jetbrains.intellij"
 dependencies {
     //testImplementation "junit:junit:4.13.2"
 
-    implementation "cn.hutool:hutool-http:5.8.19"
+    implementation "org.dromara.hutool:hutool-all:6.0.0-M4"
     implementation "com.google.zxing:core:3.5.1"
     implementation "com.google.zxing:javase:3.5.1"
 }
