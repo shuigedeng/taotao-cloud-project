@@ -18,14 +18,13 @@ package com.taotao.cloud.auth.biz.authentication.login.social.gitee;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,11 +33,10 @@ public class GiteeOAuth2User implements OAuth2User, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-	// 统一赋予USER角色
-	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
-	private Map<String, Object> attributes = new HashMap<>();
-	private String nameAttributeKey;
-
+    // 统一赋予USER角色
+    private Set<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+    private Map<String, Object> attributes = new HashMap<>();
+    private String nameAttributeKey;
 
     private Integer id;
     private String login;

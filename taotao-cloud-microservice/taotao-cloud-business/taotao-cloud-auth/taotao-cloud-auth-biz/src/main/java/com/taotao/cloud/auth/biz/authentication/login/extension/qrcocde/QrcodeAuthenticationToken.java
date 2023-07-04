@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde;
 
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-
-import java.util.Collection;
 
 public class QrcodeAuthenticationToken extends AbstractAuthenticationToken {
 

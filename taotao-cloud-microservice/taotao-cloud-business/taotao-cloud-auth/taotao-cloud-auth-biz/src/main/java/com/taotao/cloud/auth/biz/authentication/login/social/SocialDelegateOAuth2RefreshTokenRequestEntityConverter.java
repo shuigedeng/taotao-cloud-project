@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.login.social;
 
 import com.nimbusds.oauth2.sdk.GrantType;
 import com.taotao.cloud.auth.biz.authentication.login.social.wechat.WechatParameterNames;
+import java.net.URI;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.oauth2.client.endpoint.OAuth2RefreshTokenGrantRequest;
@@ -27,8 +28,6 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
 
 /**
  * 兼容微信登录 {@code

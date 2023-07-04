@@ -1,25 +1,19 @@
 /*
- * MIT License
- * Copyright (c) 2020-2029 YongWu zheng (dcenter.top and gitee.com/pcore and github.com/ZeroOrInfinity)
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.deserializes;
 
 import com.alibaba.fastjson.JSONObject;
@@ -32,11 +26,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import java.io.IOException;
 import me.zhyd.oauth.enums.AuthUserGender;
 import me.zhyd.oauth.model.AuthToken;
 import me.zhyd.oauth.model.AuthUser;
-
-import java.io.IOException;
 
 /**
  * AuthUser Jackson 反序列化
@@ -65,12 +58,11 @@ public class AuthUserJsonDeserializer extends StdDeserializer<AuthUser> {
         final String location = jsonNode.get("location").asText(null);
         final String email = jsonNode.get("email").asText(null);
         final String remark = jsonNode.get("remark").asText(null);
-        final AuthUserGender gender = mapper.convertValue(jsonNode.get("gender"),
-                                                          new TypeReference<AuthUserGender>(){});
+        final AuthUserGender gender =
+                mapper.convertValue(jsonNode.get("gender"), new TypeReference<AuthUserGender>() {});
         final String source = jsonNode.get("source").asText(null);
 
-        final AuthToken token = mapper.convertValue(jsonNode.get( "token"),
-                                                       new TypeReference<AuthToken>(){});
+        final AuthToken token = mapper.convertValue(jsonNode.get("token"), new TypeReference<AuthToken>() {});
 
         final JsonNode rawUserInfoNode = jsonNode.get("rawUserInfo");
         final String rawUserInfoString = mapper.writeValueAsString(rawUserInfoNode);
@@ -78,28 +70,34 @@ public class AuthUserJsonDeserializer extends StdDeserializer<AuthUser> {
         rawUserInfo.remove("@class");
 
         return AuthUser.builder()
-                       .uuid(uuid)
-                       .username(username)
-                       .nickname(nickname)
-                       .avatar(avatar)
-                       .blog(blog)
-                       .company(company)
-                       .location(location)
-                       .email(email)
-                       .remark(remark)
-                       .gender(gender)
-                       .source(source)
-                       .token(token)
-                       .rawUserInfo(rawUserInfo)
-                       .build();
-
+                .uuid(uuid)
+                .username(username)
+                .nickname(nickname)
+                .avatar(avatar)
+                .blog(blog)
+                .company(company)
+                .location(location)
+                .email(email)
+                .remark(remark)
+                .gender(gender)
+                .source(source)
+                .token(token)
+                .rawUserInfo(rawUserInfo)
+                .build();
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
-    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+    @JsonAutoDetect(
+            fieldVisibility = JsonAutoDetect.Visibility.ANY,
+            getterVisibility = JsonAutoDetect.Visibility.NONE,
+            isGetterVisibility = JsonAutoDetect.Visibility.NONE)
     @JsonDeserialize(using = AuthUserJsonDeserializer.class)
     public interface AuthUserMixin {}
+
     @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
-    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+    @JsonAutoDetect(
+            fieldVisibility = JsonAutoDetect.Visibility.ANY,
+            getterVisibility = JsonAutoDetect.Visibility.NONE,
+            isGetterVisibility = JsonAutoDetect.Visibility.NONE)
     public interface AuthTokenMixin {}
 }

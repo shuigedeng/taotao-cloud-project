@@ -17,11 +17,10 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service;
 
 import com.taotao.cloud.common.model.SecurityUser;
+import java.util.Set;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 public class DefaultQrcodeUserDetailsService implements QrcodeUserDetailsService {

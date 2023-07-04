@@ -1,4 +1,18 @@
-
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.auth.biz.jpa.converter;
 
@@ -14,10 +28,11 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: HerodotusAuthorizationConsent 转 OAuth2AuthorizationConsent 转换器 </p>
  *
- * 
+ *
  * @date : 2023/5/21 21:03
  */
-public class HerodotusToOAuth2AuthorizationConsentConverter implements Converter<HerodotusAuthorizationConsent, OAuth2AuthorizationConsent> {
+public class HerodotusToOAuth2AuthorizationConsentConverter
+        implements Converter<HerodotusAuthorizationConsent, OAuth2AuthorizationConsent> {
 
     private final RegisteredClientRepository registeredClientRepository;
 
@@ -30,12 +45,12 @@ public class HerodotusToOAuth2AuthorizationConsentConverter implements Converter
         String registeredClientId = authorizationConsent.getRegisteredClientId();
         RegisteredClient registeredClient = this.registeredClientRepository.findById(registeredClientId);
         if (registeredClient == null) {
-            throw new DataRetrievalFailureException(
-                    "The RegisteredClient with id '" + registeredClientId + "' was not found in the RegisteredClientRepository.");
+            throw new DataRetrievalFailureException("The RegisteredClient with id '" + registeredClientId
+                    + "' was not found in the RegisteredClientRepository.");
         }
 
-        OAuth2AuthorizationConsent.Builder builder = OAuth2AuthorizationConsent.withId(
-                registeredClientId, authorizationConsent.getPrincipalName());
+        OAuth2AuthorizationConsent.Builder builder =
+                OAuth2AuthorizationConsent.withId(registeredClientId, authorizationConsent.getPrincipalName());
         if (authorizationConsent.getAuthorities() != null) {
             for (String authority : StringUtils.commaDelimitedListToSet(authorizationConsent.getAuthorities())) {
                 builder.authority(new HerodotusGrantedAuthority(authority));

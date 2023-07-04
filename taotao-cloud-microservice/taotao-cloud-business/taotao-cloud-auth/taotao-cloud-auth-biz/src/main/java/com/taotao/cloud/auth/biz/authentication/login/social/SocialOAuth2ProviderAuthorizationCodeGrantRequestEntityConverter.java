@@ -16,19 +16,18 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
+import java.util.Arrays;
+import java.util.Objects;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequestEntityConverter;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 /**
  * 授权请求参数的请求参数封装工具类,扩展了{@link OAuth2AuthorizationCodeGrantRequestEntityConverter}
  *
- * 
+ *
  * @see OAuth2AuthorizationCodeGrantRequestEntityConverter
  * @see Converter
  * @see OAuth2AuthorizationCodeGrantRequest

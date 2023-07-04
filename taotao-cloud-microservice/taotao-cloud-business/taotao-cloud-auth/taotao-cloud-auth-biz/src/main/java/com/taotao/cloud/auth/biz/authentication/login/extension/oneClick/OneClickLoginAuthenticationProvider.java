@@ -16,8 +16,11 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
+import static java.util.Objects.nonNull;
+
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickJustAuthUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
+import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -30,23 +33,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.Assert;
 
-import java.util.Map;
-
-import static java.util.Objects.nonNull;
-
 /** 基于阿里云app手机号码一键登录 */
-public class OneClickLoginAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+public class OneClickLoginAuthenticationProvider
+        implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-	private final OneClickJustAuthUserDetailsService oneClickUserDetailsService;
-	private final OneClickLoginService oneClickLoginService;
+    private final OneClickJustAuthUserDetailsService oneClickUserDetailsService;
+    private final OneClickLoginService oneClickLoginService;
 
-	public OneClickLoginAuthenticationProvider(OneClickJustAuthUserDetailsService oneClickUserDetailsService,
-                                               OneClickLoginService oneClickLoginService) {
-		this.oneClickUserDetailsService = oneClickUserDetailsService;
-		this.oneClickLoginService = oneClickLoginService;
-	}
+    public OneClickLoginAuthenticationProvider(
+            OneClickJustAuthUserDetailsService oneClickUserDetailsService, OneClickLoginService oneClickLoginService) {
+        this.oneClickUserDetailsService = oneClickUserDetailsService;
+        this.oneClickLoginService = oneClickLoginService;
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -57,39 +57,36 @@ public class OneClickLoginAuthenticationProvider implements AuthenticationProvid
                         "AccountVerificationAuthenticationProvider.onlySupports",
                         "Only AccountVerificationAuthenticationProvider is supported"));
 
-		if (!supports(authentication.getClass())) {
-			return null;
-		}
-		OneClickLoginAuthenticationToken authenticationToken = (OneClickLoginAuthenticationToken) authentication;
+        if (!supports(authentication.getClass())) {
+            return null;
+        }
+        OneClickLoginAuthenticationToken authenticationToken = (OneClickLoginAuthenticationToken) authentication;
 
-		if (authentication.isAuthenticated()) {
-			return authentication;
-		}
+        if (authentication.isAuthenticated()) {
+            return authentication;
+        }
 
-		UserDetails user;
-		try {
-			user = this.oneClickUserDetailsService.loadUserByOneClick((String) authenticationToken.getPrincipal());
-		}
-		catch (UsernameNotFoundException e) {
-			user = null;
-		}
+        UserDetails user;
+        try {
+            user = this.oneClickUserDetailsService.loadUserByOneClick((String) authenticationToken.getPrincipal());
+        } catch (UsernameNotFoundException e) {
+            user = null;
+        }
 
-		Map<String, String> otherParamMap;
-		if (user == null) {
-			user = this.oneClickUserDetailsService.registerUser((String) authenticationToken.getPrincipal());
-		}
+        Map<String, String> otherParamMap;
+        if (user == null) {
+            user = this.oneClickUserDetailsService.registerUser((String) authenticationToken.getPrincipal());
+        }
 
-		// 一键登录的其他参数处理
-		otherParamMap = authenticationToken.getOtherParamMap();
-		if (nonNull(otherParamMap) && !otherParamMap.isEmpty()) {
-			this.oneClickLoginService.otherParamsHandler(user, otherParamMap);
-		}
-		OneClickLoginAuthenticationToken authenticationResult =
-			new OneClickLoginAuthenticationToken(user,
-				otherParamMap,
-				user.getAuthorities());
-		authenticationResult.setDetails(authenticationToken.getDetails());
-		return authenticationResult;
+        // 一键登录的其他参数处理
+        otherParamMap = authenticationToken.getOtherParamMap();
+        if (nonNull(otherParamMap) && !otherParamMap.isEmpty()) {
+            this.oneClickLoginService.otherParamsHandler(user, otherParamMap);
+        }
+        OneClickLoginAuthenticationToken authenticationResult =
+                new OneClickLoginAuthenticationToken(user, otherParamMap, user.getAuthorities());
+        authenticationResult.setDetails(authenticationToken.getDetails());
+        return authenticationResult;
     }
 
     @Override
@@ -106,6 +103,4 @@ public class OneClickLoginAuthenticationProvider implements AuthenticationProvid
     public void setMessageSource(MessageSource messageSource) {
         this.messages = new MessageSourceAccessor(messageSource);
     }
-
-
 }

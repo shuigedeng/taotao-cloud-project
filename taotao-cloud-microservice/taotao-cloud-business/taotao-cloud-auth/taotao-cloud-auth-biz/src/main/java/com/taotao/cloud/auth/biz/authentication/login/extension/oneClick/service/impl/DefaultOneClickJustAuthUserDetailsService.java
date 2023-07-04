@@ -23,10 +23,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DefaultOneClickJustAuthUserDetailsService implements OneClickJustAuthUserDetailsService {
-	@Override
-	public UserDetails loadUserByOneClick(String phone) throws UsernameNotFoundException {
-		return null;
-	}
+    @Override
+    public UserDetails loadUserByOneClick(String phone) throws UsernameNotFoundException {
+        return null;
+    }
 
     @Override
     public UserDetails registerUser(String principal) {

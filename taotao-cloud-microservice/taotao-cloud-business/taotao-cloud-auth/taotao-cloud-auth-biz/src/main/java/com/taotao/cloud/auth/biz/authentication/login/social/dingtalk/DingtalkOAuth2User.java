@@ -17,17 +17,16 @@
 package com.taotao.cloud.auth.biz.authentication.login.social.dingtalk;
 
 import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -36,60 +35,59 @@ public class DingtalkOAuth2User implements OAuth2User, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-	// 统一赋予USER角色
-	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
-	private Map<String, Object> attributes = new HashMap<>();
-	private String nameAttributeKey;
+    // 统一赋予USER角色
+    private Set<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+    private Map<String, Object> attributes = new HashMap<>();
+    private String nameAttributeKey;
 
+    private String accessToken;
 
-	private String accessToken;
+    /**
+     * 所选企业corpId
+     */
+    private String corpId;
 
-	/**
-	 * 所选企业corpId
-	 */
-	private String corpId;
+    /**
+     * 超时时间
+     */
+    private Long expireIn;
 
-	/**
-	 * 超时时间
-	 */
-	private Long expireIn;
+    private String refreshToken;
 
-	private String refreshToken;
+    /**
+     * 头像url
+     */
+    private String avatarUrl;
 
-	/**
-	 * 头像url
-	 */
-	private String avatarUrl;
+    /**
+     * 个人邮箱
+     */
+    private String email;
 
-	/**
-	 * 个人邮箱
-	 */
-	private String email;
+    /**
+     * 手机号
+     */
+    private String mobile;
 
-	/**
-	 * 手机号
-	 */
-	private String mobile;
+    /**
+     * 昵称
+     */
+    private String nick;
 
-	/**
-	 * 昵称
-	 */
-	private String nick;
+    /**
+     * openId
+     */
+    private String openId;
 
-	/**
-	 * openId
-	 */
-	private String openId;
+    /**
+     * 手机号对应的国家号
+     */
+    private String stateCode;
 
-	/**
-	 * 手机号对应的国家号
-	 */
-	private String stateCode;
-
-	/**
-	 * unionId
-	 */
-	private String unionId;
+    /**
+     * unionId
+     */
+    private String unionId;
 
     @Override
     public String getName() {

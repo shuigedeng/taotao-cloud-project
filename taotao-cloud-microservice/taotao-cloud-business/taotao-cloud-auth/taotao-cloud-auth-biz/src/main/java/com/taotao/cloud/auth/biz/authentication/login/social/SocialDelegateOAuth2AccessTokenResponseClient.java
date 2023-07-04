@@ -17,13 +17,12 @@
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
 import com.taotao.cloud.auth.biz.authentication.login.social.weibo.WeiboOAuth2AccessTokenResponseClient;
+import java.util.Collections;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.web.client.RestOperations;
-
-import java.util.Collections;
 
 public class SocialDelegateOAuth2AccessTokenResponseClient
         implements OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> {
@@ -58,8 +57,7 @@ public class SocialDelegateOAuth2AccessTokenResponseClient
         }
 
         if ("weibo".equals(registrationId)) {
-          return new WeiboOAuth2AccessTokenResponseClient(restOperations)
-			  .getTokenResponse(authorizationGrantRequest);
+            return new WeiboOAuth2AccessTokenResponseClient(restOperations).getTokenResponse(authorizationGrantRequest);
         }
 
         return delegate.getTokenResponse(authorizationGrantRequest);

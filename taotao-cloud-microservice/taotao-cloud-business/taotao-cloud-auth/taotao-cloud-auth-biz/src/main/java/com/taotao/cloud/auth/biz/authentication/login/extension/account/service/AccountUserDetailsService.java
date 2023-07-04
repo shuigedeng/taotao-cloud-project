@@ -21,13 +21,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface AccountUserDetailsService {
 
-	/**
-	 * load user by phone
-	 *
-	 * @param username username
-	 * @param type     type
-	 * @return userDetails
-	 * @throws UsernameNotFoundException not found user
-	 */
-	UserDetails loadUserByUsername(String username, String type) throws UsernameNotFoundException;
+    /**
+     * load user by phone
+     *
+     * @param username username
+     * @param type     type
+     * @return userDetails
+     * @throws UsernameNotFoundException not found user
+     */
+    UserDetails loadUserByUsername(String username, String type) throws UsernameNotFoundException;
 }

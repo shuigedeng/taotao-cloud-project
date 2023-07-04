@@ -59,7 +59,8 @@ public class FaceAuthenticationFilter extends AbstractAuthenticationProcessingFi
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        FaceAuthenticationToken faceAuthenticationToken = accountVerificationAuthenticationTokenConverter.convert(request);
+        FaceAuthenticationToken faceAuthenticationToken =
+                accountVerificationAuthenticationTokenConverter.convert(request);
         // Allow subclasses to set the "details" property
         setDetails(request, faceAuthenticationToken);
         return this.getAuthenticationManager().authenticate(faceAuthenticationToken);

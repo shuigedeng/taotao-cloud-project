@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.form.qrcode;
 
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-
-import java.util.Collection;
 
 public class Oauth2FormQrcodeAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -91,11 +90,12 @@ public class Oauth2FormQrcodeAuthenticationToken extends AbstractAuthenticationT
         return type;
     }
 
-	public static Oauth2FormQrcodeAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
-		return new Oauth2FormQrcodeAuthenticationToken(principal, captcha, type);
-	}
+    public static Oauth2FormQrcodeAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
+        return new Oauth2FormQrcodeAuthenticationToken(principal, captcha, type);
+    }
 
-	public static Oauth2FormQrcodeAuthenticationToken authenticated(Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
-		return new Oauth2FormQrcodeAuthenticationToken(principal, captcha, type, authorities);
-	}
+    public static Oauth2FormQrcodeAuthenticationToken authenticated(
+            Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
+        return new Oauth2FormQrcodeAuthenticationToken(principal, captcha, type, authorities);
+    }
 }

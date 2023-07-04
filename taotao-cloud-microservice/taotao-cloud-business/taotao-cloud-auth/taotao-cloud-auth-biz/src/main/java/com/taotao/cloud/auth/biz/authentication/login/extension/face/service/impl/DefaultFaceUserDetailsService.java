@@ -19,18 +19,17 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.face.service.im
 import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceUserDetailsService;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 @Service
 public class DefaultFaceUserDetailsService implements FaceUserDetailsService {
 
-//    @Autowired
-//    private FaceUtils faceUtils;
+    //    @Autowired
+    //    private FaceUtils faceUtils;
 
     @Autowired
     private IFeignMemberApi memberApi;
@@ -38,7 +37,7 @@ public class DefaultFaceUserDetailsService implements FaceUserDetailsService {
     @Override
     public UserDetails loadUserByImgBase64(String imgBase64) throws UsernameNotFoundException {
 
-//        Double aDouble = faceUtils.verifyUser(imgBase64);
+        //        Double aDouble = faceUtils.verifyUser(imgBase64);
 
         return SecurityUser.builder()
                 .account("admin")

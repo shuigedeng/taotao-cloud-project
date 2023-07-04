@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint;
 
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationFailureHandler;
@@ -32,57 +32,59 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
 public class FingerprintExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
-	extends AbstractExtensionLoginFilterConfigurer<H,
-	FingerprintExtensionLoginFilterConfigurer<H>, FingerprintAuthenticationFilter,
-	ExtensionLoginFilterSecurityConfigurer<H>> {
+        extends AbstractExtensionLoginFilterConfigurer<
+                H,
+                FingerprintExtensionLoginFilterConfigurer<H>,
+                FingerprintAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
-	private FingerprintUserDetailsService fingerprintUserDetailsService;
-	private JwtTokenGenerator jwtTokenGenerator;
+    private FingerprintUserDetailsService fingerprintUserDetailsService;
+    private JwtTokenGenerator jwtTokenGenerator;
 
-	public FingerprintExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new FingerprintAuthenticationFilter(), "/login/fingerprint");
-	}
+    public FingerprintExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
+        super(securityConfigurer, new FingerprintAuthenticationFilter(), "/login/fingerprint");
+    }
 
-	public FingerprintExtensionLoginFilterConfigurer<H> fingerprintUserDetailsService(
-		FingerprintUserDetailsService fingerprintUserDetailsService) {
-		this.fingerprintUserDetailsService = fingerprintUserDetailsService;
-		return this;
-	}
+    public FingerprintExtensionLoginFilterConfigurer<H> fingerprintUserDetailsService(
+            FingerprintUserDetailsService fingerprintUserDetailsService) {
+        this.fingerprintUserDetailsService = fingerprintUserDetailsService;
+        return this;
+    }
 
-	public FingerprintExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
-		this.jwtTokenGenerator = jwtTokenGenerator;
-		return this;
-	}
+    public FingerprintExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
+        this.jwtTokenGenerator = jwtTokenGenerator;
+        return this;
+    }
 
-	@Override
-	protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
-		return new AntPathRequestMatcher(loginProcessingUrl, "POST");
-	}
+    @Override
+    protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
+        return new AntPathRequestMatcher(loginProcessingUrl, "POST");
+    }
 
-	@Override
-	protected AuthenticationProvider authenticationProvider(H http) {
-		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+    @Override
+    protected AuthenticationProvider authenticationProvider(H http) {
+        ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-		FingerprintUserDetailsService fingerprintUserDetailsService = this.fingerprintUserDetailsService != null
-			? this.fingerprintUserDetailsService
-			: getBeanOrNull(applicationContext, FingerprintUserDetailsService.class);
-		Assert.notNull(fingerprintUserDetailsService, "fingerprintUserDetailsService is required");
+        FingerprintUserDetailsService fingerprintUserDetailsService = this.fingerprintUserDetailsService != null
+                ? this.fingerprintUserDetailsService
+                : getBeanOrNull(applicationContext, FingerprintUserDetailsService.class);
+        Assert.notNull(fingerprintUserDetailsService, "fingerprintUserDetailsService is required");
 
-		return new FingerprintAuthenticationProvider(fingerprintUserDetailsService);
-	}
+        return new FingerprintAuthenticationProvider(fingerprintUserDetailsService);
+    }
 
-	@Override
-	protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
-		if (this.jwtTokenGenerator == null) {
-			ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
-		}
-		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
-	}
+    @Override
+    protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
+        if (this.jwtTokenGenerator == null) {
+            ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+            jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
+        }
+        Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
+        return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
+    }
 
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return new JsonExtensionLoginAuthenticationFailureHandler();
-	}
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return new JsonExtensionLoginAuthenticationFailureHandler();
+    }
 }

@@ -18,17 +18,16 @@ package com.taotao.cloud.auth.biz.authentication.login.social.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,107 +36,106 @@ public class GithubOAuth2User implements OAuth2User, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-	// 统一赋予USER角色
-	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
-	private Map<String, Object> attributes = new HashMap<>();
-	private String nameAttributeKey;
+    // 统一赋予USER角色
+    private Set<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+    private Map<String, Object> attributes = new HashMap<>();
+    private String nameAttributeKey;
 
+    @JsonProperty("gists_url")
+    private String gistsUrl;
 
-	@JsonProperty("gists_url")
-	private String gistsUrl;
+    @JsonProperty("repos_url")
+    private String reposUrl;
 
-	@JsonProperty("repos_url")
-	private String reposUrl;
+    @JsonProperty("following_url")
+    private String followingUrl;
 
-	@JsonProperty("following_url")
-	private String followingUrl;
+    @JsonProperty("twitter_username")
+    private String twitterUsername;
 
-	@JsonProperty("twitter_username")
-	private String twitterUsername;
+    @JsonProperty("bio")
+    private String bio;
 
-	@JsonProperty("bio")
-	private String bio;
+    @JsonProperty("created_at")
+    private String createdAt;
 
-	@JsonProperty("created_at")
-	private String createdAt;
+    @JsonProperty("login")
+    private String login;
 
-	@JsonProperty("login")
-	private String login;
+    @JsonProperty("type")
+    private String type;
 
-	@JsonProperty("type")
-	private String type;
+    @JsonProperty("blog")
+    private String blog;
 
-	@JsonProperty("blog")
-	private String blog;
+    @JsonProperty("subscriptions_url")
+    private String subscriptionsUrl;
 
-	@JsonProperty("subscriptions_url")
-	private String subscriptionsUrl;
+    @JsonProperty("updated_at")
+    private String updatedAt;
 
-	@JsonProperty("updated_at")
-	private String updatedAt;
+    @JsonProperty("site_admin")
+    private boolean siteAdmin;
 
-	@JsonProperty("site_admin")
-	private boolean siteAdmin;
+    @JsonProperty("company")
+    private String company;
 
-	@JsonProperty("company")
-	private String company;
+    @JsonProperty("id")
+    private int id;
 
-	@JsonProperty("id")
-	private int id;
+    @JsonProperty("public_repos")
+    private int publicRepos;
 
-	@JsonProperty("public_repos")
-	private int publicRepos;
+    @JsonProperty("gravatar_id")
+    private String gravatarId;
 
-	@JsonProperty("gravatar_id")
-	private String gravatarId;
+    @JsonProperty("email")
+    private String email;
 
-	@JsonProperty("email")
-	private String email;
+    @JsonProperty("organizations_url")
+    private String organizationsUrl;
 
-	@JsonProperty("organizations_url")
-	private String organizationsUrl;
+    @JsonProperty("hireable")
+    private boolean hireable;
 
-	@JsonProperty("hireable")
-	private boolean hireable;
+    @JsonProperty("starred_url")
+    private String starredUrl;
 
-	@JsonProperty("starred_url")
-	private String starredUrl;
+    @JsonProperty("followers_url")
+    private String followersUrl;
 
-	@JsonProperty("followers_url")
-	private String followersUrl;
+    @JsonProperty("public_gists")
+    private int publicGists;
 
-	@JsonProperty("public_gists")
-	private int publicGists;
+    @JsonProperty("url")
+    private String url;
 
-	@JsonProperty("url")
-	private String url;
+    @JsonProperty("received_events_url")
+    private String receivedEventsUrl;
 
-	@JsonProperty("received_events_url")
-	private String receivedEventsUrl;
+    @JsonProperty("followers")
+    private int followers;
 
-	@JsonProperty("followers")
-	private int followers;
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
 
-	@JsonProperty("avatar_url")
-	private String avatarUrl;
+    @JsonProperty("events_url")
+    private String eventsUrl;
 
-	@JsonProperty("events_url")
-	private String eventsUrl;
+    @JsonProperty("html_url")
+    private String htmlUrl;
 
-	@JsonProperty("html_url")
-	private String htmlUrl;
+    @JsonProperty("following")
+    private int following;
 
-	@JsonProperty("following")
-	private int following;
+    @JsonProperty("name")
+    private String name;
 
-	@JsonProperty("name")
-	private String name;
+    @JsonProperty("location")
+    private String location;
 
-	@JsonProperty("location")
-	private String location;
-
-	@JsonProperty("node_id")
-	private String nodeId;
+    @JsonProperty("node_id")
+    private String nodeId;
 
     @Override
     public String getName() {
@@ -151,6 +149,6 @@ public class GithubOAuth2User implements OAuth2User, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.authorities;
+        return this.authorities;
     }
 }

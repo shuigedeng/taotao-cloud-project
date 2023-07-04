@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde;
 
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service.QrcodeService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service.QrcodeUserDetailsService;
 import com.taotao.cloud.common.utils.log.LogUtils;
@@ -35,7 +35,10 @@ import org.springframework.util.Assert;
 
 public class QrcodeExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, QrcodeExtensionLoginFilterConfigurer<H>, QrcodeAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                QrcodeExtensionLoginFilterConfigurer<H>,
+                QrcodeAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private QrcodeUserDetailsService qrcodeUserDetailsService;
     private QrcodeService qrcodeService;
@@ -45,7 +48,8 @@ public class QrcodeExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<
         super(securityConfigurer, new QrcodeAuthenticationFilter(), "/login/qrcode");
     }
 
-    public QrcodeExtensionLoginFilterConfigurer<H> accountUserDetailsService(QrcodeUserDetailsService qrcodeUserDetailsService) {
+    public QrcodeExtensionLoginFilterConfigurer<H> accountUserDetailsService(
+            QrcodeUserDetailsService qrcodeUserDetailsService) {
         this.qrcodeUserDetailsService = qrcodeUserDetailsService;
         return this;
     }
@@ -90,11 +94,12 @@ public class QrcodeExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<
         Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return (request, response, authException) -> {
-			LogUtils.error("用户认证失败", authException);
-			ResponseUtils.fail(response, authException.getMessage());
-		};
-	}
+
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return (request, response, authException) -> {
+            LogUtils.error("用户认证失败", authException);
+            ResponseUtils.fail(response, authException.getMessage());
+        };
+    }
 }

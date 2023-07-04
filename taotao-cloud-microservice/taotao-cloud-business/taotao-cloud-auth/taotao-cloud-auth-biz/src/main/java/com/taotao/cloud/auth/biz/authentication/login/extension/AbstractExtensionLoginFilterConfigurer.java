@@ -16,8 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension;
 
-import com.taotao.cloud.auth.biz.utils.SimpleAuthenticationEntryPoint;
+import com.taotao.cloud.security.springsecurity.core.response.SecurityAuthenticationEntryPoint;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collections;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
@@ -39,9 +41,6 @@ import org.springframework.security.web.util.matcher.*;
 import org.springframework.util.Assert;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * 认证过滤器{@link AbstractAuthenticationProcessingFilter}s
@@ -147,7 +146,7 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
     @Override
     public void init(H http) {
         updateAccessDefaults(http);
-        //updateAuthenticationDefaults();
+        // updateAuthenticationDefaults();
         registerDefaultAuthenticationEntryPoint(http);
 
         AuthenticationProvider authenticationProvider = authenticationProvider(http);
@@ -156,9 +155,9 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         if (this.successHandler == null) {
             successHandler(defaultSuccessHandler(http));
         }
-		if (this.failureHandler == null) {
-			failureHandler(defaultFailureHandler(http));
-		}
+        if (this.failureHandler == null) {
+            failureHandler(defaultFailureHandler(http));
+        }
     }
 
     protected abstract AuthenticationProvider authenticationProvider(H http);
@@ -169,13 +168,13 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
 
     protected final void updateAuthenticationDefaults() {
         if (this.failureHandler == null) {
-            failureHandler(new AuthenticationEntryPointFailureHandler(new SimpleAuthenticationEntryPoint()));
+            failureHandler(new AuthenticationEntryPointFailureHandler(new SecurityAuthenticationEntryPoint()));
         }
     }
 
     protected final void registerDefaultAuthenticationEntryPoint(H http) {
         if (authenticationEntryPoint != null) {
-            this.authenticationEntryPoint = new SimpleAuthenticationEntryPoint();
+            this.authenticationEntryPoint = new SecurityAuthenticationEntryPoint();
         }
         registerAuthenticationEntryPoint(http, this.authenticationEntryPoint);
     }
@@ -323,8 +322,7 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         @SuppressWarnings("unchecked")
         static void permitAll(
                 HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, RequestMatcher... requestMatchers) {
-			AuthorizeHttpRequestsConfigurer<?> configurer =
-                    http.getConfigurer(AuthorizeHttpRequestsConfigurer.class);
+            AuthorizeHttpRequestsConfigurer<?> configurer = http.getConfigurer(AuthorizeHttpRequestsConfigurer.class);
             Assert.state(configurer != null, "permitAll only works with HttpSecurity.authorizeRequests()");
             configurer.getRegistry().requestMatchers(requestMatchers).permitAll();
         }

@@ -19,47 +19,45 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.servic
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.mobtech.Auth;
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
 import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
-import com.taotao.cloud.auth.biz.uaa.exception.Auth2Exception;
+import com.taotao.cloud.auth.biz.exception.Auth2Exception;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import java.util.Map;
 import org.dromara.hutool.core.map.MapUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-
 @Service
 public class DefaultOneClickLoginService implements OneClickLoginService {
 
-	@Override
-	public String callback(String accessToken, Map<String, String> otherParamMap) {
+    @Override
+    public String callback(String accessToken, Map<String, String> otherParamMap) {
 
-		//todo 需要校验参数
-		String opToken = otherParamMap.get("opToken");
-		String operator = otherParamMap.get("operator");
+        // todo 需要校验参数
+        String opToken = otherParamMap.get("opToken");
+        String operator = otherParamMap.get("operator");
 
-		String phoneNumber = null;
-		try {
-			phoneNumber = Auth.getPhoneNumber(accessToken, opToken, operator);
-		} catch (Exception e) {
-			throw new Auth2Exception(ErrorCodeEnum.QUERY_MOBILE_FAILURE_OF_ONE_CLICK_LOGIN, accessToken);
-		}
+        String phoneNumber = null;
+        try {
+            phoneNumber = Auth.getPhoneNumber(accessToken, opToken, operator);
+        } catch (Exception e) {
+            throw new Auth2Exception(ErrorCodeEnum.QUERY_MOBILE_FAILURE_OF_ONE_CLICK_LOGIN, accessToken);
+        }
 
-		//noinspection ConstantConditions
-		if (StrUtil.isEmpty(phoneNumber)) {
-			throw new Auth2Exception(ErrorCodeEnum.QUERY_MOBILE_FAILURE_OF_ONE_CLICK_LOGIN, accessToken);
-		}
+        //noinspection ConstantConditions
+        if (StrUtil.isEmpty(phoneNumber)) {
+            throw new Auth2Exception(ErrorCodeEnum.QUERY_MOBILE_FAILURE_OF_ONE_CLICK_LOGIN, accessToken);
+        }
 
-		return phoneNumber;
+        return phoneNumber;
+    }
 
-	}
-
-	@Override
-	public void otherParamsHandler(UserDetails userDetails, Map<String, String> otherParamMap) {
-		if (MapUtil.isNotEmpty(otherParamMap) && !otherParamMap.isEmpty()) {
-			// handler otherParamMap
-			LogUtils.info("登录用户: {}", userDetails.getUsername());
-			LogUtils.info("登录时的其他请求参数: {}", otherParamMap.toString());
-		}
-	}
+    @Override
+    public void otherParamsHandler(UserDetails userDetails, Map<String, String> otherParamMap) {
+        if (MapUtil.isNotEmpty(otherParamMap) && !otherParamMap.isEmpty()) {
+            // handler otherParamMap
+            LogUtils.info("登录用户: {}", userDetails.getUsername());
+            LogUtils.info("登录时的其他请求参数: {}", otherParamMap.toString());
+        }
+    }
 }

@@ -16,17 +16,16 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.sms;
 
+import java.io.Serial;
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
-import java.io.Serial;
-import java.util.Collection;
-
 public class SmsAuthenticationToken extends AbstractAuthenticationToken {
 
     @Serial
-	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private final Object principal;
     private String captcha;
@@ -83,13 +82,14 @@ public class SmsAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(false);
     }
 
-	public static SmsAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
-		return new SmsAuthenticationToken(principal, captcha, type);
-	}
+    public static SmsAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
+        return new SmsAuthenticationToken(principal, captcha, type);
+    }
 
-	public static SmsAuthenticationToken authenticated(Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
-		return new SmsAuthenticationToken(principal, captcha, type, authorities);
-	}
+    public static SmsAuthenticationToken authenticated(
+            Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
+        return new SmsAuthenticationToken(principal, captcha, type, authorities);
+    }
 
     @Override
     public void eraseCredentials() {

@@ -18,13 +18,20 @@ package com.taotao.cloud.promotion.api.model.page;
 
 import com.taotao.cloud.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-/** 砍价活动参与实体类 */
+import java.io.Serial;
+import java.io.Serializable;
+
+import lombok.*;
+
+/**
+ * 砍价活动参与实体类
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-04 09:43:47
+ */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @AllArgsConstructor
@@ -32,7 +39,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "砍价活动参与记录查询对象")
 public class KanJiaActivityLogPageQuery extends PageQuery implements Serializable {
 
-    private static final long serialVersionUID = -1583030890805926292L;
+    @Serial
+	private static final long serialVersionUID = -1583030890805926292L;
 
     @Schema(description = "砍价发起活动id")
     private String kanJiaActivityId;

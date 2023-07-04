@@ -71,15 +71,16 @@ public class FingerprintAuthenticationFilter extends AbstractAuthenticationProce
         this.postOnly = postOnly;
     }
 
-	public Converter<HttpServletRequest, FingerprintAuthenticationToken> getFingerprintAuthenticationTokenConverter() {
-		return fingerprintAuthenticationTokenConverter;
-	}
+    public Converter<HttpServletRequest, FingerprintAuthenticationToken> getFingerprintAuthenticationTokenConverter() {
+        return fingerprintAuthenticationTokenConverter;
+    }
 
-	public void setFingerprintAuthenticationTokenConverter(Converter<HttpServletRequest, FingerprintAuthenticationToken> fingerprintAuthenticationTokenConverter) {
-		this.fingerprintAuthenticationTokenConverter = fingerprintAuthenticationTokenConverter;
-	}
+    public void setFingerprintAuthenticationTokenConverter(
+            Converter<HttpServletRequest, FingerprintAuthenticationToken> fingerprintAuthenticationTokenConverter) {
+        this.fingerprintAuthenticationTokenConverter = fingerprintAuthenticationTokenConverter;
+    }
 
-	public boolean isPostOnly() {
-		return postOnly;
-	}
+    public boolean isPostOnly() {
+        return postOnly;
+    }
 }

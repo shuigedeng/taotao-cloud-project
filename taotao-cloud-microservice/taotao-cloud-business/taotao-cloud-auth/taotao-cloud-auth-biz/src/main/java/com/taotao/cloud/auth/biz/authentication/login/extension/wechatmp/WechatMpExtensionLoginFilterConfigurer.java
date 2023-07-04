@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp;
 
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
@@ -34,7 +34,10 @@ import org.springframework.util.Assert;
 
 public class WechatMpExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, WechatMpExtensionLoginFilterConfigurer<H>, WechatMpAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                WechatMpExtensionLoginFilterConfigurer<H>,
+                WechatMpAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private WechatMpUserDetailsService wechatMpUserDetailsService;
 
@@ -44,7 +47,8 @@ public class WechatMpExtensionLoginFilterConfigurer<H extends HttpSecurityBuilde
         super(securityConfigurer, new WechatMpAuthenticationFilter(), "/login/mp");
     }
 
-    public WechatMpExtensionLoginFilterConfigurer<H> mpUserDetailsService(WechatMpUserDetailsService wechatMpUserDetailsService) {
+    public WechatMpExtensionLoginFilterConfigurer<H> mpUserDetailsService(
+            WechatMpUserDetailsService wechatMpUserDetailsService) {
         this.wechatMpUserDetailsService = wechatMpUserDetailsService;
         return this;
     }
@@ -80,11 +84,12 @@ public class WechatMpExtensionLoginFilterConfigurer<H extends HttpSecurityBuilde
         Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return (request, response, authException) -> {
-			LogUtils.error("用户认证失败", authException);
-			ResponseUtils.fail(response, authException.getMessage());
-		};
-	}
+
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return (request, response, authException) -> {
+            LogUtils.error("用户认证失败", authException);
+            ResponseUtils.fail(response, authException.getMessage());
+        };
+    }
 }

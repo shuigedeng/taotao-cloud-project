@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter.login;
+
+import static java.util.Objects.nonNull;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthLoginAuthenticationToken;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthRequestHolder;
@@ -10,6 +28,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -30,13 +52,6 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.Objects.nonNull;
 
 /**
  * An implementation of an {@link AbstractAuthenticationProcessingFilter} for OAuth 2.0
@@ -79,10 +94,11 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
      * @param redisConnectionFactory           redis connection factory
      * @since 5.1
      */
-    public Auth2LoginAuthenticationFilter(@NonNull String filterProcessesUrl, @Nullable String signUpUrl,
-                                          @Nullable AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource,
-                                          @Autowired(required = false)
-                                          @Nullable RedisConnectionFactory redisConnectionFactory) {
+    public Auth2LoginAuthenticationFilter(
+            @NonNull String filterProcessesUrl,
+            @Nullable String signUpUrl,
+            @Nullable AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource,
+            @Autowired(required = false) @Nullable RedisConnectionFactory redisConnectionFactory) {
         super(filterProcessesUrl + "/*");
         this.authorizationRequestResolver = new Auth2DefaultRequestResolver(filterProcessesUrl);
         this.signUpUrl = signUpUrl;
@@ -109,12 +125,15 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
 
         if (auth2DefaultRequest == null) {
 
-            OAuth2Error oauth2Error = new OAuth2Error(AUTHORIZATION_REQUEST_NOT_FOUND_ERROR_CODE,
-                                                      "Client Registration not found with Id: " + registrationId, null);
+            OAuth2Error oauth2Error = new OAuth2Error(
+                    AUTHORIZATION_REQUEST_NOT_FOUND_ERROR_CODE,
+                    "Client Registration not found with Id: " + registrationId,
+                    null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
 
-        JustAuthLoginAuthenticationToken authenticationRequest = new JustAuthLoginAuthenticationToken(auth2DefaultRequest, request);
+        JustAuthLoginAuthenticationToken authenticationRequest =
+                new JustAuthLoginAuthenticationToken(auth2DefaultRequest, request);
 
         // Allow subclasses to set the "details" property
         setDetails(request, authenticationRequest);
@@ -124,49 +143,50 @@ public class Auth2LoginAuthenticationFilter extends AbstractAuthenticationProces
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request,
-											HttpServletResponse response, FilterChain chain, Authentication authResult)
+    protected void successfulAuthentication(
+            HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("Authentication success. Updating SecurityContextHolder to contain: "
-                                 + authResult);
+            logger.debug("Authentication success. Updating SecurityContextHolder to contain: " + authResult);
         }
 
         SecurityContextHolder.getContext().setAuthentication(authResult);
 
         // Fire event
         if (this.eventPublisher != null) {
-            eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(
-                    authResult, this.getClass()));
+            eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(authResult, this.getClass()));
         }
 
         // 自定义注册逻辑
         final Object principal = authResult.getPrincipal();
         if (principal instanceof TemporaryUser temporaryUser && StringUtils.hasText(this.signUpUrl)) {
-			String username = temporaryUser.getUsername();
+            String username = temporaryUser.getUsername();
             String key = TEMPORARY_USER_CACHE_KEY_PREFIX + username;
             if (nonNull(redisConnectionFactory)) {
                 // 存入 redis
                 try (RedisConnection connection = redisConnectionFactory.getConnection()) {
-                    connection.stringCommands().set(key.getBytes(StandardCharsets.UTF_8),
-                                   JsonUtils.toJson(temporaryUser).getBytes(StandardCharsets.UTF_8),
-                                   Expiration.from(86400L, TimeUnit.SECONDS),
-                                   RedisStringCommands.SetOption.UPSERT);
+                    connection
+                            .stringCommands()
+                            .set(
+                                    key.getBytes(StandardCharsets.UTF_8),
+                                    JsonUtils.toJson(temporaryUser).getBytes(StandardCharsets.UTF_8),
+                                    Expiration.from(86400L, TimeUnit.SECONDS),
+                                    RedisStringCommands.SetOption.UPSERT);
                 }
-            }
-            else {
+            } else {
                 // 存入 session
                 request.getSession().setAttribute(key, temporaryUser);
             }
-            this.redirectStrategy.sendRedirect(request, response,
-                                               this.signUpUrl + "?"
-                                                        + TEMPORARY_USERNAME_PARAM_NAME + "="
-                                                        + URLEncoder.encode(username, StandardCharsets.UTF_8));
+            this.redirectStrategy.sendRedirect(
+                    request,
+                    response,
+                    this.signUpUrl + "?"
+                            + TEMPORARY_USERNAME_PARAM_NAME + "="
+                            + URLEncoder.encode(username, StandardCharsets.UTF_8));
 
             return;
-        }
-        else {
+        } else {
             getRememberMeServices().loginSuccess(request, response, authResult);
         }
 

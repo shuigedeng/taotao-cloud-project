@@ -61,7 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,7 +106,7 @@ public class CartServiceImpl implements ICartService {
     private TradeBuilder tradeBuilder;
 
     @Override
-    public Boolean add(String skuId, Integer num, String cartType, Boolean cover) {
+    public boolean add(String skuId, Integer num, String cartType, Boolean cover) {
         if (num <= 0) {
             throw new BusinessException(ResultEnum.CART_NUM_ERROR);
         }
@@ -220,7 +220,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean checked(String skuId, boolean checked) {
+    public boolean checked(String skuId, boolean checked) {
         TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
         List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
         for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -233,7 +233,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean checkedStore(String storeId, boolean checked) {
+    public boolean checkedStore(String storeId, boolean checked) {
         TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
         List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
         for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -246,7 +246,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean checkedAll(boolean checked) {
+    public boolean checkedAll(boolean checked) {
         TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
         List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
         for (CartSkuVO cartSkuVO : cartSkuVOS) {
@@ -257,7 +257,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean delete(String[] skuIds) {
+    public boolean delete(String[] skuIds) {
         TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
         List<CartSkuVO> cartSkuVOS = tradeDTO.getSkuList();
         List<CartSkuVO> deleteVos = new ArrayList<>();
@@ -274,7 +274,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean clean() {
+    public boolean clean() {
         redisRepository.del(this.getOriginKey(CartTypeEnum.CART));
         return true;
     }
@@ -303,7 +303,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean cleanChecked(CartTypeEnum way) {
+    public boolean cleanChecked(CartTypeEnum way) {
         if (way.equals(CartTypeEnum.CART)) {
             TradeDTO tradeDTO = this.readDTO(CartTypeEnum.CART);
             this.cleanChecked(tradeDTO);
@@ -314,7 +314,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean resetTradeDTO(TradeDTO tradeDTO) {
+    public boolean resetTradeDTO(TradeDTO tradeDTO) {
         redisRepository.set(this.getOriginKey(tradeDTO.getCartTypeEnum()), tradeDTO);
         return true;
     }
@@ -444,7 +444,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean shippingAddress(String shippingAddressId, String way) {
+    public boolean shippingAddress(String shippingAddressId, String way) {
 
         // 默认购物车
         CartTypeEnum cartTypeEnum = CartTypeEnum.CART;
@@ -460,7 +460,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean shippingReceipt(ReceiptVO receiptVO, String way) {
+    public boolean shippingReceipt(ReceiptVO receiptVO, String way) {
         CartTypeEnum cartTypeEnum = CartTypeEnum.CART;
         if (CharSequenceUtil.isNotEmpty(way)) {
             cartTypeEnum = CartTypeEnum.valueOf(way);
@@ -473,7 +473,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean shippingMethod(String storeId, String deliveryMethod, String way) {
+    public boolean shippingMethod(String storeId, String deliveryMethod, String way) {
         CartTypeEnum cartTypeEnum = CartTypeEnum.CART;
         if (CharSequenceUtil.isNotEmpty(way)) {
             cartTypeEnum = CartTypeEnum.valueOf(way);
@@ -512,7 +512,7 @@ public class CartServiceImpl implements ICartService {
     }
 
     @Override
-    public Boolean selectCoupon(String couponId, String way, boolean use) {
+    public boolean selectCoupon(String couponId, String way, boolean use) {
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
         // 获取购物车，然后重新写入优惠券
         CartTypeEnum cartTypeEnum = getCartType(way);

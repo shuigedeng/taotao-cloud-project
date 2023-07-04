@@ -17,6 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.gestures;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -30,8 +31,6 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
-
-import java.util.Collection;
 
 /** 手势 登录 */
 public class GesturesAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {

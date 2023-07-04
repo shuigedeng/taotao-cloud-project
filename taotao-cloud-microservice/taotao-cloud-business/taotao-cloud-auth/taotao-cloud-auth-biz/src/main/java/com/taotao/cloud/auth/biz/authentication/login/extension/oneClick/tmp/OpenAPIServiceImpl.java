@@ -29,11 +29,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenAPIServiceImpl implements IOpenAPIService {
 
-//    @Autowired
-//    private RedisUtil redisUtil;
-//
-//    @Resource
-//    private BaseCommonMapper baseCommonMapper;
+    //    @Autowired
+    //    private RedisUtil redisUtil;
+    //
+    //    @Resource
+    //    private BaseCommonMapper baseCommonMapper;
 
     /** 使用AK&SK初始化账号Client */
     public static com.aliyun.dypnsapi20170525.Client createClient(String accessKeyId, String accessKeySecret)
@@ -55,17 +55,18 @@ public class OpenAPIServiceImpl implements IOpenAPIService {
         try {
 
             // 从数据库查询获取短信全局配置数据，存在从缓存里取
-//            String accessKeyId = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
-//            String accessKeySecret = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET, request);
-//            if (StringUtils.isNoneEmpty(accessKeyId, accessKeySecret)) {
-//                client = createClient(accessKeyId, accessKeySecret);
-//                GetMobileRequest mobileRequest = new GetMobileRequest();
-//                mobileRequest.setAccessToken(accessToken);
-//                mobileRequest.setOutId(outId);
-//                response = client.getMobile(mobileRequest);
-//            } else {
-//                log.error("阿里云号码认证（一键登录）失败，获取系统配置秘钥为空!");
-//            }
+            //            String accessKeyId = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
+            //            String accessKeySecret = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET,
+            // request);
+            //            if (StringUtils.isNoneEmpty(accessKeyId, accessKeySecret)) {
+            //                client = createClient(accessKeyId, accessKeySecret);
+            //                GetMobileRequest mobileRequest = new GetMobileRequest();
+            //                mobileRequest.setAccessToken(accessToken);
+            //                mobileRequest.setOutId(outId);
+            //                response = client.getMobile(mobileRequest);
+            //            } else {
+            //                log.error("阿里云号码认证（一键登录）失败，获取系统配置秘钥为空!");
+            //            }
         } catch (Exception e) {
             log.error(response.body.getMessage());
         }
@@ -83,19 +84,20 @@ public class OpenAPIServiceImpl implements IOpenAPIService {
         VerifyMobileResponse verifyMobileResponse = new VerifyMobileResponse();
         try {
 
-//            // 从数据库查询获取短信全局配置数据，存在从缓存里取
-//            String accessKeyId = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
-//            String accessKeySecret = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET, request);
-//            if (StringUtils.isNoneEmpty(accessKeyId, accessKeySecret)) {
-//                client = createClient(accessKeyId, accessKeySecret);
-//                VerifyMobileRequest verifyMobileRequest = new VerifyMobileRequest();
-//                verifyMobileRequest.setAccessCode(accessCode);
-//                verifyMobileRequest.setPhoneNumber(phoneNumber);
-//                verifyMobileRequest.setOutId(outId);
-//                verifyMobileResponse = client.verifyMobile(verifyMobileRequest);
-//            } else {
-//                log.error("本机号码校验认证失败，获取系统配置短信秘钥信息为空");
-//            }
+            //            // 从数据库查询获取短信全局配置数据，存在从缓存里取
+            //            String accessKeyId = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_ID, request);
+            //            String accessKeySecret = this.selectConfigValueByKey(CommonConstant.SMS_ACCESS_KEY_SECRET,
+            // request);
+            //            if (StringUtils.isNoneEmpty(accessKeyId, accessKeySecret)) {
+            //                client = createClient(accessKeyId, accessKeySecret);
+            //                VerifyMobileRequest verifyMobileRequest = new VerifyMobileRequest();
+            //                verifyMobileRequest.setAccessCode(accessCode);
+            //                verifyMobileRequest.setPhoneNumber(phoneNumber);
+            //                verifyMobileRequest.setOutId(outId);
+            //                verifyMobileResponse = client.verifyMobile(verifyMobileRequest);
+            //            } else {
+            //                log.error("本机号码校验认证失败，获取系统配置短信秘钥信息为空");
+            //            }
 
         } catch (Exception e) {
             log.error(verifyMobileResponse.body.getMessage());
@@ -106,20 +108,20 @@ public class OpenAPIServiceImpl implements IOpenAPIService {
 
     @Override
     public String selectConfigValueByKey(String configKey, HttpServletRequest request) {
-//        Integer tenantId = GlobalWebSiteValue.getTenantId(request);
-//        String cacheConfigKey = "TENANT_ID_" + tenantId + "_" + configKey;
-//        // 如果缓存存在走缓存取
-//        String configValue = Convert.toStr(redisUtil.get(cacheConfigKey));
-//        if (StringUtils.isNotBlank(configValue)) {
-//            // log.info("短信秘钥缓存存在，从缓存获取~");
-//            return configValue;
-//        }
-//        SystemConfigDTO systemConfigDTO = baseCommonMapper.selectSystemConfigByConfigKey(configKey);
-//        if (ObjectUtil.isNotNull(systemConfigDTO)) {
-//            // 入缓存
-//            redisUtil.set(cacheConfigKey, systemConfigDTO.getConfigValue());
-//            return systemConfigDTO.getConfigValue();
-//        }
+        //        Integer tenantId = GlobalWebSiteValue.getTenantId(request);
+        //        String cacheConfigKey = "TENANT_ID_" + tenantId + "_" + configKey;
+        //        // 如果缓存存在走缓存取
+        //        String configValue = Convert.toStr(redisUtil.get(cacheConfigKey));
+        //        if (StringUtils.isNotBlank(configValue)) {
+        //            // log.info("短信秘钥缓存存在，从缓存获取~");
+        //            return configValue;
+        //        }
+        //        SystemConfigDTO systemConfigDTO = baseCommonMapper.selectSystemConfigByConfigKey(configKey);
+        //        if (ObjectUtil.isNotNull(systemConfigDTO)) {
+        //            // 入缓存
+        //            redisUtil.set(cacheConfigKey, systemConfigDTO.getConfigValue());
+        //            return systemConfigDTO.getConfigValue();
+        //        }
         return StringUtils.EMPTY;
     }
 }

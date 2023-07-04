@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.face;
 
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationFailureHandler;
@@ -33,66 +33,69 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
 public class FaceExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
-	extends AbstractExtensionLoginFilterConfigurer<
-	H, FaceExtensionLoginFilterConfigurer<H>, FaceAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+        extends AbstractExtensionLoginFilterConfigurer<
+                H,
+                FaceExtensionLoginFilterConfigurer<H>,
+                FaceAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
-	private FaceUserDetailsService faceUserDetailsService;
-	private FaceCheckService faceCheckService;
-	private JwtTokenGenerator jwtTokenGenerator;
+    private FaceUserDetailsService faceUserDetailsService;
+    private FaceCheckService faceCheckService;
+    private JwtTokenGenerator jwtTokenGenerator;
 
-	public FaceExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new FaceAuthenticationFilter(), "/login/face");
-	}
+    public FaceExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
+        super(securityConfigurer, new FaceAuthenticationFilter(), "/login/face");
+    }
 
-	public FaceExtensionLoginFilterConfigurer<H> faceUserDetailsService(FaceUserDetailsService faceUserDetailsService) {
-		this.faceUserDetailsService = faceUserDetailsService;
-		return this;
-	}
+    public FaceExtensionLoginFilterConfigurer<H> faceUserDetailsService(FaceUserDetailsService faceUserDetailsService) {
+        this.faceUserDetailsService = faceUserDetailsService;
+        return this;
+    }
 
-	public FaceExtensionLoginFilterConfigurer<H> faceCheckService(FaceCheckService faceCheckService) {
-		this.faceCheckService = faceCheckService;
-		return this;
-	}
+    public FaceExtensionLoginFilterConfigurer<H> faceCheckService(FaceCheckService faceCheckService) {
+        this.faceCheckService = faceCheckService;
+        return this;
+    }
 
-	public FaceExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
-		this.jwtTokenGenerator = jwtTokenGenerator;
-		return this;
-	}
+    public FaceExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
+        this.jwtTokenGenerator = jwtTokenGenerator;
+        return this;
+    }
 
-	@Override
-	protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
-		return new AntPathRequestMatcher(loginProcessingUrl, "POST");
-	}
+    @Override
+    protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
+        return new AntPathRequestMatcher(loginProcessingUrl, "POST");
+    }
 
-	@Override
-	protected AuthenticationProvider authenticationProvider(H http) {
-		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+    @Override
+    protected AuthenticationProvider authenticationProvider(H http) {
+        ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-		FaceUserDetailsService captchaUserDetailsService = this.faceUserDetailsService != null
-			? this.faceUserDetailsService
-			: getBeanOrNull(applicationContext, FaceUserDetailsService.class);
-		Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
+        FaceUserDetailsService captchaUserDetailsService = this.faceUserDetailsService != null
+                ? this.faceUserDetailsService
+                : getBeanOrNull(applicationContext, FaceUserDetailsService.class);
+        Assert.notNull(captchaUserDetailsService, "captchaUserDetailsService is required");
 
-		FaceCheckService faceCheckService = this.faceUserDetailsService != null
-			? this.faceCheckService
-			: getBeanOrNull(applicationContext, FaceCheckService.class);
-		Assert.notNull(captchaUserDetailsService, "faceCheckService is required");
+        FaceCheckService faceCheckService = this.faceUserDetailsService != null
+                ? this.faceCheckService
+                : getBeanOrNull(applicationContext, FaceCheckService.class);
+        Assert.notNull(captchaUserDetailsService, "faceCheckService is required");
 
-		return new FaceAuthenticationProvider(faceUserDetailsService, faceCheckService);
-	}
+        return new FaceAuthenticationProvider(faceUserDetailsService, faceCheckService);
+    }
 
-	@Override
-	protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
-		if (this.jwtTokenGenerator == null) {
-			ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
-		}
-		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
-	}
+    @Override
+    protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
+        if (this.jwtTokenGenerator == null) {
+            ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+            jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
+        }
+        Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
+        return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
+    }
 
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return new JsonExtensionLoginAuthenticationFailureHandler();
-	}
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return new JsonExtensionLoginAuthenticationFailureHandler();
+    }
 }

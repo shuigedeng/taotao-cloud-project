@@ -1,24 +1,17 @@
 /*
- * MIT License
- * Copyright (c) 2020-2029 YongWu zheng (dcenter.top and gitee.com/pcore and github.com/ZeroOrInfinity)
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.consts;
@@ -82,10 +75,8 @@ public class SecurityConstants {
      * 时所用的 key. <br>
      *     主要用于 {@code AuthenticationUtil#isPermitUri(HttpServletRequest, HttpSession, AntPathMatcher)}
      */
-    public static final String SERVLET_CONTEXT_AUTHORIZE_REQUESTS_MAP_KEY = "SERVLET_CONTEXT_AUTHORIZE_REQUESTS_MAP_KEY";
-
-
-
+    public static final String SERVLET_CONTEXT_AUTHORIZE_REQUESTS_MAP_KEY =
+            "SERVLET_CONTEXT_AUTHORIZE_REQUESTS_MAP_KEY";
 
     // =================== error相关 ===================
 
@@ -93,8 +84,6 @@ public class SecurityConstants {
      * 服务器内部错误信息
      */
     public static final String INTERNAL_SERVER_ERROR_MSG = "服务器开小差，请重试";
-
-
 
     // =================== 验证码相关 ===================
     /**
@@ -157,9 +146,7 @@ public class SecurityConstants {
      */
     public static final String DEFAULT_REQUEST_PARAM_CUSTOMIZE_CODE_NAME = "customizeCode";
 
-
     // =============== url 相关 ===============
-
 
     /**
      * uri 与 method 的分隔符. 用于 {@code top.dcenter.ums.security.core.properties.ClientProperties} <code>setPermitUrls(Set)
@@ -229,8 +216,6 @@ public class SecurityConstants {
      */
     public static final String HEADER_ACCEPT = "accept";
 
-
-
     // =================== Callback 相关 ===================
     /**
      * 对真实回调地址设置成KV键值对形式时的 key , 例如：回调地址(/auth/callback) -&#62; 加密前设置key(path=/auth/callback), key = path
@@ -246,9 +231,6 @@ public class SecurityConstants {
      */
     public static final int UUID_INTERCEPT_NUMBER = 20;
 
-
-
-
     // =================== 数据库相关 ===================
     /**
      * 查询表返回的结果集 ResultSet 的 COUNT(1) 索引
@@ -259,5 +241,4 @@ public class SecurityConstants {
      * 查询数据库名称
      */
     public static final String QUERY_DATABASE_NAME_SQL = "select database();";
-
 }

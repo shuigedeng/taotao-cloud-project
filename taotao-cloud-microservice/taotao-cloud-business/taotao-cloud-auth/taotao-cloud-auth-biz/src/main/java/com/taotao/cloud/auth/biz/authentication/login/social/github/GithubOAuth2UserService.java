@@ -17,32 +17,29 @@
 package com.taotao.cloud.auth.biz.authentication.login.social.github;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Map;
-
 public class GithubOAuth2UserService extends DefaultOAuth2UserService {
-	private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-	@Override
-	public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
-		ClientRegistration clientRegistration = oAuth2UserRequest.getClientRegistration();
-		String registrationId = clientRegistration.getRegistrationId();
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
+        ClientRegistration clientRegistration = oAuth2UserRequest.getClientRegistration();
+        String registrationId = clientRegistration.getRegistrationId();
 
-		OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
-		Map<String, Object> attributes = oAuth2User.getAttributes();
+        OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
+        Map<String, Object> attributes = oAuth2User.getAttributes();
 
-		String userNameAttributeName = clientRegistration
-			.getProviderDetails()
-			.getUserInfoEndpoint()
-			.getUserNameAttributeName();
+        String userNameAttributeName =
+                clientRegistration.getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
-		GithubOAuth2User githubOAuth2User = objectMapper.convertValue(attributes, GithubOAuth2User.class);
-		githubOAuth2User.setNameAttributeKey(userNameAttributeName);
-		return githubOAuth2User;
-	}
+        GithubOAuth2User githubOAuth2User = objectMapper.convertValue(attributes, GithubOAuth2User.class);
+        githubOAuth2User.setNameAttributeKey(userNameAttributeName);
+        return githubOAuth2User;
+    }
 }

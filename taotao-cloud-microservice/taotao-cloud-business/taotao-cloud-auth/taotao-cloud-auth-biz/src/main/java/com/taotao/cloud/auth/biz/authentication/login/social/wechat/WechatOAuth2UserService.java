@@ -16,6 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social.wechat;
 
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
@@ -45,15 +49,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.UnknownContentTypeException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-
 /**
  * 获取微信用户信息的服务接口
  *
- * 
+ *
  * @since 2021 /8/12 17:45
  */
 public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -101,10 +100,10 @@ public class WechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                     null);
             throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());
         }
-		WechatOAuth2User wechatOAuth2User = getResponse(userRequest).getBody();
-		wechatOAuth2User.setNameAttributeKey(openid);
-		return wechatOAuth2User;
-	}
+        WechatOAuth2User wechatOAuth2User = getResponse(userRequest).getBody();
+        wechatOAuth2User.setNameAttributeKey(openid);
+        return wechatOAuth2User;
+    }
 
     /**
      * 获取微信用户信息借鉴{@link OAuth2AccessTokenResponseClient} <a

@@ -18,19 +18,18 @@ package com.taotao.cloud.auth.biz.authentication.login.social.wechatwork;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
+import java.util.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.*;
-
 @Data
 public class WorkWechatOAuth2User implements OAuth2User {
 
-	// 统一赋予USER角色
-	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
-	private Map<String, Object> attributes = new HashMap<>();
-	private String nameAttributeKey;
+    // 统一赋予USER角色
+    private Set<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+    private Map<String, Object> attributes = new HashMap<>();
+    private String nameAttributeKey;
 
     private Integer errcode;
     private String errmsg;

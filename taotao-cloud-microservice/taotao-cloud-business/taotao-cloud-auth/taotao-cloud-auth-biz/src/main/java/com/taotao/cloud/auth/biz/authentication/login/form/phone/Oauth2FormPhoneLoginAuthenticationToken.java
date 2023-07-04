@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.form.phone;
 
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-
-import java.util.Collection;
 
 public class Oauth2FormPhoneLoginAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -91,11 +90,13 @@ public class Oauth2FormPhoneLoginAuthenticationToken extends AbstractAuthenticat
         return type;
     }
 
-	public static Oauth2FormPhoneLoginAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
-		return new Oauth2FormPhoneLoginAuthenticationToken(principal, captcha, type);
-	}
+    public static Oauth2FormPhoneLoginAuthenticationToken unauthenticated(
+            Object principal, String captcha, String type) {
+        return new Oauth2FormPhoneLoginAuthenticationToken(principal, captcha, type);
+    }
 
-	public static Oauth2FormPhoneLoginAuthenticationToken authenticated(Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
-		return new Oauth2FormPhoneLoginAuthenticationToken(principal, captcha, type, authorities);
-	}
+    public static Oauth2FormPhoneLoginAuthenticationToken authenticated(
+            Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
+        return new Oauth2FormPhoneLoginAuthenticationToken(principal, captcha, type, authorities);
+    }
 }

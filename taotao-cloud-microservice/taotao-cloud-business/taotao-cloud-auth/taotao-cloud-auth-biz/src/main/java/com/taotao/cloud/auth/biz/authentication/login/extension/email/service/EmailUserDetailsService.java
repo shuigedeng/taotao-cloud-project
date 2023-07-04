@@ -21,5 +21,5 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface EmailUserDetailsService {
 
-	UserDetails loadUserByEmail(String email)  throws UsernameNotFoundException;
+    UserDetails loadUserByEmail(String email) throws UsernameNotFoundException;
 }
