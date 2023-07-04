@@ -18,10 +18,11 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2;
 
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.auth.biz.management.processor.ClientDetailsService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import org.dromara.hutool.core.reflect.FieldUtil;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;

@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definit
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition.AccessResponse;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition.AccessUserDetails;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception.AccessIdentityVerificationFailedException;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 
 /**
  * <p>Description: 手机短信接入处理器 </p>

@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.biz.management.processor;
 
 import com.taotao.cloud.auth.biz.strategy.StrategyUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

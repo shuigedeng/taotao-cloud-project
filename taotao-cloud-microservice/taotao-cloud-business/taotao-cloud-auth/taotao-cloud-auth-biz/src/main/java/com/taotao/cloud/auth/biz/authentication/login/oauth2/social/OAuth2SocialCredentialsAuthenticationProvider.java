@@ -22,7 +22,7 @@ import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProvid
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import com.taotao.cloud.security.springsecurity.core.exception.SocialCredentialsParameterBindingFailedException;
 import java.security.Principal;
 import java.util.Map;

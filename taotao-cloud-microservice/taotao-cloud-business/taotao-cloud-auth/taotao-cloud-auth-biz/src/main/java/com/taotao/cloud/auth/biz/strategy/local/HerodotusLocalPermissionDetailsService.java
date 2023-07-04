@@ -27,7 +27,7 @@ package com.taotao.cloud.auth.biz.strategy.local;
 
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyPermissionDetailsService;
 import com.taotao.cloud.auth.biz.strategy.user.SysPermission;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusPermission;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;

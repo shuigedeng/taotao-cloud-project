@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.management.configuration.OAuth2ManagementConfig
 import com.taotao.cloud.auth.biz.uaa.configuration.AuthorizationServerConfiguration;
 import com.taotao.cloud.auth.biz.uaa.configuration.DefaultSecurityConfiguration;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.security.springsecurity.authorization.configuration.OAuth2AuthorizationConfiguration;
+import com.taotao.cloud.security.springsecurity.configuration.OAuth2AuthorizationConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -72,10 +72,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @Import({
-    OAuth2AuthorizationConfiguration.class,
-    OAuth2ManagementConfiguration.class,
-    DefaultSecurityConfiguration.class,
-    AuthorizationServerConfiguration.class
+    OAuth2AuthorizationConfiguration.class
 })
 @EnableRedisIndexedHttpSession
 public class TaoTaoCloudAuthApplication {

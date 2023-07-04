@@ -18,9 +18,9 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.taotao.cloud.auth.biz.utils.Jackson2Constants;
-import com.taotao.cloud.security.springsecurity.core.definition.details.FormLoginWebAuthenticationDetails;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.details.FormLoginWebAuthenticationDetails;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 
 /**

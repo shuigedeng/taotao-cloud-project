@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.management.compliance.listener;
 
 import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampManager;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.PrincipalDetails;
+import com.taotao.cloud.security.springsecurity.core.domain.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

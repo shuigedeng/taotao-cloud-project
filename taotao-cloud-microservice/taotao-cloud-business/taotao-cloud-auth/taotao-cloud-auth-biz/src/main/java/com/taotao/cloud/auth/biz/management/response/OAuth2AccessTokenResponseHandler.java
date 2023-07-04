@@ -23,7 +23,7 @@ import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.PrincipalDetails;
+import com.taotao.cloud.security.springsecurity.core.domain.PrincipalDetails;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

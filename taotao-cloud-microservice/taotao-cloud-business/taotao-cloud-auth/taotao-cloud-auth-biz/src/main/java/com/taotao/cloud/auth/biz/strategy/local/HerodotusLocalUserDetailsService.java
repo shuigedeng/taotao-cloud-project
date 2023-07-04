@@ -28,8 +28,8 @@ package com.taotao.cloud.auth.biz.strategy.local;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialAuthenticationHandler;
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyUserDetailsService;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**

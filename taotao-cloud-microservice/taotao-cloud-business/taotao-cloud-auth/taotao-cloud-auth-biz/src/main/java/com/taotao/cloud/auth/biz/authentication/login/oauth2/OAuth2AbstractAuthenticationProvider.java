@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2;
 
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import com.taotao.cloud.security.springsecurity.core.utils.PrincipalUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.form;
 
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.security.springsecurity.core.definition.details.FormLoginWebAuthenticationDetails;
+import com.taotao.cloud.security.springsecurity.core.details.FormLoginWebAuthenticationDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 

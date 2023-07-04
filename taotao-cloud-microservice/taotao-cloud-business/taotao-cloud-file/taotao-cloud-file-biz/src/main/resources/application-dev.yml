@@ -546,7 +546,13 @@ spring:
     oauth2:
       resourceserver:
         jwt:
+          issuer-uri: ${herodotus.endpoint.issuer-uri}
+          #jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
           jwk-set-uri: http://192.168.10.45:33336/oauth2/jwks
+        opaquetoken:
+          client-id: 14a9cf797931430896ad13a6b1855611
+          client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
+          introspection-uri: http://192.168.10.220
   cloud:
     openfeign:
       circuitbreaker: #如果 Spring Cloud CircuitBreaker 在 classpath 上，并且feign.circuitbreaker.enabled=true Feign 将使用断路器包装所有方法。
@@ -1013,3 +1019,28 @@ grpc:
   #  additional-listen-addresses:
   #    - 192.168.0.100:6767
   #  on-collision-prefer-shaded-netty: false
+
+
+herodotus:
+  endpoint:
+    uaa-service-name: dante-cloud-uaa
+    upms-service-name: dante-cloud-upms
+    gateway-service-uri: http://127.0.0.1:33337
+    uaa-service-uri: http://127.0.0.1:33337/
+    upms-service-uri: http://127.0.0.1:33337/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://127.0.0.1:33337/oauth2/token
+    authorization-uri: http://127.0.0.1:33337/oauth2/authorize
+    token-revocation-uri: http://127.0.0.1:33337/oauth2/revoke
+    token-introspection-uri: http://127.0.0.1:33337/oauth2/introspect
+    jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
+    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
+    oidc-client-registration-uri: http://127.0.0.1:33337/connect/register
+    oidc-user-info-uri: http://127.0.0.1:33337/userinfo
+  oauth2:
+    authentication:
+      form-login:
+        category: HUTOOL_GIF
+    authorization:
+      validate: local
+      jwk:
+        certificate: standard

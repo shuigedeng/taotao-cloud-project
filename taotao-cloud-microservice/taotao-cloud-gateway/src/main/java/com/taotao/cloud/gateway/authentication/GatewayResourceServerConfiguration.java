@@ -78,7 +78,6 @@ public class GatewayResourceServerConfiguration {
 
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-
 		ServerAuthenticationEntryPoint serverAuthenticationEntryPoint = (exchange, e) -> {
 			LogUtils.error(e, "user authentication error : {}", e.getMessage());
 
@@ -92,6 +91,7 @@ public class GatewayResourceServerConfiguration {
 
 			return ResponseUtils.fail(exchange, ResultEnum.UNAUTHORIZED);
 		};
+
 		ServerAccessDeniedHandler serverAccessDeniedHandler = (exchange, e) -> {
 			LogUtils.error(e, "user access denied error : {}", e.getMessage());
 			return ResponseUtils.fail(exchange, ResultEnum.FORBIDDEN);
@@ -135,16 +135,16 @@ public class GatewayResourceServerConfiguration {
 					.authenticationEntryPoint(serverAuthenticationEntryPoint)
 					.accessDeniedHandler(serverAccessDeniedHandler);
 			})
-			.oauth2ResourceServer(oauth2ResourceServerCustomizer -> oauth2ResourceServerCustomizer
-				.accessDeniedHandler(serverAccessDeniedHandler)
-				.authenticationEntryPoint(serverAuthenticationEntryPoint)
-				.bearerTokenConverter(exchange -> {
-					ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver =
-						new ServerBearerTokenAuthenticationConverter();
-					defaultBearerTokenResolver.setAllowUriQueryParameter(true);
-					return defaultBearerTokenResolver.convert(exchange);
-				})
-				.jwt(jwt -> jwt.jwtDecoder(jwtDecoder()))
+			.oauth2ResourceServer(oauth2ResourceServerCustomizer ->
+				oauth2ResourceServerCustomizer
+					.accessDeniedHandler(serverAccessDeniedHandler)
+					.authenticationEntryPoint(serverAuthenticationEntryPoint)
+					.bearerTokenConverter(exchange -> {
+						ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver = new ServerBearerTokenAuthenticationConverter();
+						defaultBearerTokenResolver.setAllowUriQueryParameter(true);
+						return defaultBearerTokenResolver.convert(exchange);
+					})
+					.jwt(jwt -> jwt.jwtDecoder(jwtDecoder()))
 			);
 		return http.build();
 	}

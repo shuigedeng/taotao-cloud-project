@@ -26,9 +26,9 @@
 package com.taotao.cloud.auth.biz.strategy.remote;
 
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
