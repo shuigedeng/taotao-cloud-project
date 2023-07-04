@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definit
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition.AccessResponse;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition.AccessUserDetails;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception.AccessIdentityVerificationFailedException;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthToken;

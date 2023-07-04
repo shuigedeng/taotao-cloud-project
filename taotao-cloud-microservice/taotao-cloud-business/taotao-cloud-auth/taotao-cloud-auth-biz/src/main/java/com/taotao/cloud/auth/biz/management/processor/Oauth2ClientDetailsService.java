@@ -20,10 +20,11 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 

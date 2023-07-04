@@ -22,7 +22,7 @@ import com.taotao.cloud.captcha.support.core.exception.CaptchaIsEmptyException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaMismatchException;
 import com.taotao.cloud.captcha.support.core.exception.CaptchaParameterIllegalException;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
-import com.taotao.cloud.security.springsecurity.core.definition.details.FormLoginWebAuthenticationDetails;
+import com.taotao.cloud.security.springsecurity.core.details.FormLoginWebAuthenticationDetails;
 import com.taotao.cloud.security.springsecurity.core.exception.OAuth2CaptchaArgumentIllegalException;
 import com.taotao.cloud.security.springsecurity.core.exception.OAuth2CaptchaHasExpiredException;
 import com.taotao.cloud.security.springsecurity.core.exception.OAuth2CaptchaIsEmptyException;

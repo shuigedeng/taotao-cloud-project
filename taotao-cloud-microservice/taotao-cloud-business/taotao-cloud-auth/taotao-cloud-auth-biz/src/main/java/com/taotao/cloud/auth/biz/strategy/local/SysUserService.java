@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.Ac
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialUserDetails;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

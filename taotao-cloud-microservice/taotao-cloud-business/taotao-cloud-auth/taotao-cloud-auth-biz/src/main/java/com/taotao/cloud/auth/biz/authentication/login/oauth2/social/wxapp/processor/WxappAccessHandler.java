@@ -26,7 +26,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definit
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition.AccessUserDetails;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception.AccessIdentityVerificationFailedException;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception.AccessPreProcessFailedException;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**

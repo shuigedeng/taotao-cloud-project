@@ -24,9 +24,10 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
 import java.io.IOException;
 import java.util.Set;
+
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.hutool.core.reflect.FieldUtil;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;

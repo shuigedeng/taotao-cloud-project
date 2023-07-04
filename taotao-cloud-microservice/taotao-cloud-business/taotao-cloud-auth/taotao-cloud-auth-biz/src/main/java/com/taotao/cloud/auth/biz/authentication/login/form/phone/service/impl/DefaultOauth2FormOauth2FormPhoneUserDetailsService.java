@@ -17,12 +17,13 @@
 package com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl;
 
 import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

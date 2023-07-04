@@ -752,7 +752,8 @@ spring:
          opaquetoken:
            client-id: 14a9cf797931430896ad13a6b1855611
            client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
-           introspection-uri: http://192.168.10.220
+           introspection-uri: http://192.168.10.220/oauth2/introspect
+           #introspection-uri: http://localhost:8080/oauth/check_token
       client:
         registration:
           google:

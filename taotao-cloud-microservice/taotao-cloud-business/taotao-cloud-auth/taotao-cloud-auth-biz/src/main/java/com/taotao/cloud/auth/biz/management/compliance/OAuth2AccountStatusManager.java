@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.management.compliance;
 import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampManager;
 import com.taotao.cloud.auth.biz.management.compliance.event.AccountStatusChanger;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

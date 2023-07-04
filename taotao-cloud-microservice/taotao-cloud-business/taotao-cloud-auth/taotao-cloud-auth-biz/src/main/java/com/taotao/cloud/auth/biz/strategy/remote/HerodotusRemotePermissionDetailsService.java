@@ -26,9 +26,7 @@
 package com.taotao.cloud.auth.biz.strategy.remote;
 
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyPermissionDetailsService;
-import com.taotao.cloud.auth.biz.strategy.user.SysPermission;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusPermission;
-import org.apache.commons.collections4.CollectionUtils;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +45,13 @@ public class HerodotusRemotePermissionDetailsService extends AbstractStrategyPer
 //        this.remoteAuthorityDetailsService = remoteAuthorityDetailsService;
 //    }
 
-    @Override
-    public List<HerodotusPermission> findAll() {
+	@Override
+	public List<HerodotusPermission> findAll() {
 //        Result<List<SysPermission>> result = remoteAuthorityDetailsService.findAll();
 //        List<SysPermission> authorities = result.getData();
 //        if (CollectionUtils.isNotEmpty(authorities)) {
 //            return toEntities(authorities);
 //        }
-        return new ArrayList<>();
-    }
+		return new ArrayList<>();
+	}
 }

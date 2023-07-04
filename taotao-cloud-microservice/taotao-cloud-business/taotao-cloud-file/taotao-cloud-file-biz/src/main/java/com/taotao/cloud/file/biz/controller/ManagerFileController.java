@@ -55,7 +55,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/file/manager")
+@RequestMapping("/xxxx")
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 
@@ -96,16 +96,12 @@ public class ManagerFileController {
 //        throw new BusinessException("文件上传失败");
 //    }
 
-//	@NotAuth
-//    @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息aaaaaaaaaaaaaaaaaaaaaaa")
-//    @RequestLogger
-//    //@PreAuthorize("hasAuthority('file:info:id')")
-//    @GetMapping("/info/id/{id:[0-9]*}")
-//    public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
-//        File file = fileService.findFileById(id);
-//        FileVO vo = FileConvert.INSTANCE.convert(file);
-//        return Result.success(vo);
-//    }
+    @Operation(summary = "根据id查询文件信息", description = "根据id查询文件信息aaaaaaaaaaaaaaaaaaaaaaa")
+    //@PreAuthorize("hasAuthority('file:info:id')")
+    @GetMapping("/info/id/{id:[0-9]*}")
+    public Result<FileVO> findFileById(@PathVariable(value = "id") Long id) {
+        return new Result<>();
+    }
 
     //
     // @ApiOperation(value = "根据文件名删除oss上的文件", notes = "根据文件名删除oss上的文件")

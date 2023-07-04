@@ -14,27 +14,20 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.strategy;
+package com.taotao.cloud.auth.biz.jwt;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
+/** 认证服务端配置 */
+//@EnableConfigurationProperties(
+//        value = {
+//            com.taotao.cloud.security.springsecurity.jwt.JwtProperties.class,
+//        })
+public class JwtConfiguration {
 
-import java.util.List;
-
-/**
- * <p>Description: 系统范围服务策略定义 </p>
- *
- * @author shuigedeng
- * @version 2023.07
- * @since 2023-07-04 10:05:54
- */
-public interface StrategyPermissionDetailsService {
-
-    /**
-     * 获取全部权限
-     *
-     * @return {@link List }<{@link HerodotusPermission }>
-     * @since 2023-07-04 10:05:54
-     */
-    List<HerodotusPermission> findAll();
+//    @Bean
+//    public com.taotao.cloud.security.springsecurity.jwt.TokenUtil getTokenUtil(JwtProperties authServerProperties) {
+//        return new TokenUtil(authServerProperties);
+//    }
 }

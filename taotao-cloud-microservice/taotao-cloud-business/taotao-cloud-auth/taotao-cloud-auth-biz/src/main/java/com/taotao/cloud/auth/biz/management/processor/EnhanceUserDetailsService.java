@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

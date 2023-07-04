@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-import com.taotao.cloud.security.springsecurity.core.definition.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**
@@ -29,23 +29,23 @@ import org.springframework.security.core.AuthenticationException;
  */
 public interface StrategyUserDetailsService {
 
-    /**
-     * 通过用户名找到用户详细信息
-     *
-     * @param userName 用户名
-     * @return {@link HerodotusUser }
-     * @since 2023-07-04 10:05:57
-     */
-    HerodotusUser findUserDetailsByUsername(String userName) throws AuthenticationException;
+	/**
+	 * 通过用户名找到用户详细信息
+	 *
+	 * @param userName 用户名
+	 * @return {@link HerodotusUser }
+	 * @since 2023-07-04 10:05:57
+	 */
+	HerodotusUser findUserDetailsByUsername(String userName) throws AuthenticationException;
 
-    /**
-     * 找到用户详细信息社会
-     *
-     * @param source          源
-     * @param accessPrincipal 访问主要
-     * @return {@link HerodotusUser }
-     * @since 2023-07-04 10:05:57
-     */
-    HerodotusUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal)
-            throws AuthenticationException;
+	/**
+	 * 找到用户详细信息社会
+	 *
+	 * @param source          源
+	 * @param accessPrincipal 访问主要
+	 * @return {@link HerodotusUser }
+	 * @since 2023-07-04 10:05:57
+	 */
+	HerodotusUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal)
+		throws AuthenticationException;
 }

@@ -27,8 +27,8 @@ package com.taotao.cloud.auth.biz.strategy.user;
 
 
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

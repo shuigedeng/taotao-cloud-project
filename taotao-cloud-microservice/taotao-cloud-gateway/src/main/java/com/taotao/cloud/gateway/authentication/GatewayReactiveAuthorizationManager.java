@@ -41,34 +41,34 @@ import reactor.core.publisher.Mono;
 @Component
 public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-    @Autowired
-    private RedisRepository redisRepository;
+	@Autowired
+	private RedisRepository redisRepository;
 
-    @Override
-    public Mono<AuthorizationDecision> check(
-            Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
-        return authentication
-                .map(auth -> {
-                    if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-                        Jwt jwt = jwtAuthenticationToken.getToken();
-                        String kid = (String) jwt.getHeaders().get("kid");
+	@Override
+	public Mono<AuthorizationDecision> check(Mono<Authentication> authentication,
+											 AuthorizationContext authorizationContext) {
+		return authentication
+			.map(auth -> {
+				if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+					Jwt jwt = jwtAuthenticationToken.getToken();
+					String kid = (String) jwt.getHeaders().get("kid");
 
-                        // 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
-                        Boolean hasKey = redisRepository.exists(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid);
-                        if (hasKey) {
-                            throw new InvalidTokenException("无效的token");
-                        }
-                    }
+					// 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
+					Boolean hasKey = redisRepository.exists(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid);
+					if (hasKey) {
+						throw new InvalidTokenException("无效的token");
+					}
+				}
 
-                    ServerWebExchange exchange = authorizationContext.getExchange();
-                    ServerHttpRequest request = exchange.getRequest();
+				ServerWebExchange exchange = authorizationContext.getExchange();
+				ServerHttpRequest request = exchange.getRequest();
 
-                    // 可在此处鉴权也可在各个微服务鉴权
-                    // boolean isPermission = super.hasPermission(auth, request.getMethodValue(),
-                    // request.getURI().getPath());
+				// 可在此处鉴权也可在各个微服务鉴权
+				// boolean isPermission = super.hasPermission(auth, request.getMethodValue(),
+				// request.getURI().getPath());
 
-                    return new AuthorizationDecision(true);
-                })
-                .defaultIfEmpty(new AuthorizationDecision(false));
-    }
+				return new AuthorizationDecision(true);
+			})
+			.defaultIfEmpty(new AuthorizationDecision(false));
+	}
 }

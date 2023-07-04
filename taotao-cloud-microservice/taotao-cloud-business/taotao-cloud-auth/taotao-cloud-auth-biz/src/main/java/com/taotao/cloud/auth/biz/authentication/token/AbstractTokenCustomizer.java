@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.token;
 
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

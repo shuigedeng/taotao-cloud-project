@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.converter;
 
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
-import com.taotao.cloud.security.springsecurity.core.definition.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
