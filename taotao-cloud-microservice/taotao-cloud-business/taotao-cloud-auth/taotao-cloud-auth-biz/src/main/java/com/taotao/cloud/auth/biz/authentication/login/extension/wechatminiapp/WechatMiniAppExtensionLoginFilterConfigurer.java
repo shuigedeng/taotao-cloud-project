@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp;
 
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppClientService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppSessionKeyCacheService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
@@ -37,7 +37,10 @@ import org.springframework.util.Assert;
 
 public class WechatMiniAppExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, WechatMiniAppExtensionLoginFilterConfigurer<H>, WechatMiniAppAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                WechatMiniAppExtensionLoginFilterConfigurer<H>,
+                WechatMiniAppAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private WechatMiniAppUserDetailsService wechatMiniAppUserDetailsService;
 
@@ -57,7 +60,8 @@ public class WechatMiniAppExtensionLoginFilterConfigurer<H extends HttpSecurityB
         return this;
     }
 
-    public WechatMiniAppExtensionLoginFilterConfigurer<H> miniAppClientService(WechatMiniAppClientService wechatMiniAppClientService) {
+    public WechatMiniAppExtensionLoginFilterConfigurer<H> miniAppClientService(
+            WechatMiniAppClientService wechatMiniAppClientService) {
         this.wechatMiniAppClientService = wechatMiniAppClientService;
         return this;
     }
@@ -85,12 +89,14 @@ public class WechatMiniAppExtensionLoginFilterConfigurer<H extends HttpSecurityB
                 ? this.wechatMiniAppClientService
                 : getBeanOrNull(applicationContext, WechatMiniAppClientService.class);
 
-        WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService = this.wechatMiniAppSessionKeyCacheService != null
-                ? this.wechatMiniAppSessionKeyCacheService
-                : getBeanOrNull(applicationContext, WechatMiniAppSessionKeyCacheService.class);
+        WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService =
+                this.wechatMiniAppSessionKeyCacheService != null
+                        ? this.wechatMiniAppSessionKeyCacheService
+                        : getBeanOrNull(applicationContext, WechatMiniAppSessionKeyCacheService.class);
 
         WechatMiniAppPreAuthenticationFilter wechatMiniAppPreAuthenticationFilter =
-                new WechatMiniAppPreAuthenticationFilter(wechatMiniAppClientService, wechatMiniAppSessionKeyCacheService);
+                new WechatMiniAppPreAuthenticationFilter(
+                        wechatMiniAppClientService, wechatMiniAppSessionKeyCacheService);
         http.addFilterBefore(postProcess(wechatMiniAppPreAuthenticationFilter), LogoutFilter.class);
     }
 
@@ -106,11 +112,13 @@ public class WechatMiniAppExtensionLoginFilterConfigurer<H extends HttpSecurityB
                 ? this.wechatMiniAppUserDetailsService
                 : getBeanOrNull(applicationContext, WechatMiniAppUserDetailsService.class);
 
-        WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService = this.wechatMiniAppSessionKeyCacheService != null
-                ? this.wechatMiniAppSessionKeyCacheService
-                : getBeanOrNull(applicationContext, WechatMiniAppSessionKeyCacheService.class);
+        WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService =
+                this.wechatMiniAppSessionKeyCacheService != null
+                        ? this.wechatMiniAppSessionKeyCacheService
+                        : getBeanOrNull(applicationContext, WechatMiniAppSessionKeyCacheService.class);
 
-        return new WechatMiniAppAuthenticationProvider(wechatMiniAppUserDetailsService, wechatMiniAppSessionKeyCacheService);
+        return new WechatMiniAppAuthenticationProvider(
+                wechatMiniAppUserDetailsService, wechatMiniAppSessionKeyCacheService);
     }
 
     @Override
@@ -122,11 +130,12 @@ public class WechatMiniAppExtensionLoginFilterConfigurer<H extends HttpSecurityB
         Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return (request, response, authException) -> {
-			LogUtils.error("用户认证失败", authException);
-			ResponseUtils.fail(response, authException.getMessage());
-		};
-	}
+
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return (request, response, authException) -> {
+            LogUtils.error("用户认证失败", authException);
+            ResponseUtils.fail(response, authException.getMessage());
+        };
+    }
 }

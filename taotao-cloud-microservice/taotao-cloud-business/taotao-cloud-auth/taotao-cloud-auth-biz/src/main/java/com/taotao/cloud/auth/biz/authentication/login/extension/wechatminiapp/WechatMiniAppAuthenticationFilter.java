@@ -21,6 +21,8 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.cl
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,9 +33,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 
 public class WechatMiniAppAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

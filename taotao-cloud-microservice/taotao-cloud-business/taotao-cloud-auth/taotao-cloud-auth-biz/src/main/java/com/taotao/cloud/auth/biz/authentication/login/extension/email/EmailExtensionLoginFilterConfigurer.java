@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.email;
 
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationFailureHandler;
@@ -34,67 +34,71 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
 public class EmailExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
-	extends AbstractExtensionLoginFilterConfigurer<
-	H, EmailExtensionLoginFilterConfigurer<H>, SmsAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+        extends AbstractExtensionLoginFilterConfigurer<
+                H,
+                EmailExtensionLoginFilterConfigurer<H>,
+                SmsAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
-	private EmailUserDetailsService emailUserDetailsService;
-	private EmailCheckService emailCheckService;
+    private EmailUserDetailsService emailUserDetailsService;
+    private EmailCheckService emailCheckService;
 
-	private JwtTokenGenerator jwtTokenGenerator;
+    private JwtTokenGenerator jwtTokenGenerator;
 
-	public EmailExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-		super(securityConfigurer, new SmsAuthenticationFilter(), "/login/phone");
-	}
+    public EmailExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
+        super(securityConfigurer, new SmsAuthenticationFilter(), "/login/phone");
+    }
 
-	public EmailExtensionLoginFilterConfigurer<H> emailUserDetailsService(EmailUserDetailsService emailUserDetailsService) {
-		this.emailUserDetailsService = emailUserDetailsService;
-		return this;
-	}
+    public EmailExtensionLoginFilterConfigurer<H> emailUserDetailsService(
+            EmailUserDetailsService emailUserDetailsService) {
+        this.emailUserDetailsService = emailUserDetailsService;
+        return this;
+    }
 
-	public EmailExtensionLoginFilterConfigurer<H> emailCheckService(EmailCheckService emailCheckService) {
-		this.emailCheckService = emailCheckService;
-		return this;
-	}
+    public EmailExtensionLoginFilterConfigurer<H> emailCheckService(EmailCheckService emailCheckService) {
+        this.emailCheckService = emailCheckService;
+        return this;
+    }
 
-	public EmailExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
-		this.jwtTokenGenerator = jwtTokenGenerator;
-		return this;
-	}
+    public EmailExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
+        this.jwtTokenGenerator = jwtTokenGenerator;
+        return this;
+    }
 
-	@Override
-	protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
-		return new AntPathRequestMatcher(loginProcessingUrl, "POST");
-	}
+    @Override
+    protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
+        return new AntPathRequestMatcher(loginProcessingUrl, "POST");
+    }
 
-	@Override
-	protected AuthenticationProvider authenticationProvider(H http) {
-		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+    @Override
+    protected AuthenticationProvider authenticationProvider(H http) {
+        ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
 
-		EmailUserDetailsService emailUserDetailsService = this.emailUserDetailsService != null
-			? this.emailUserDetailsService
-			: getBeanOrNull(applicationContext, EmailUserDetailsService.class);
-		Assert.notNull(emailUserDetailsService, "emailUserDetailsService is required");
+        EmailUserDetailsService emailUserDetailsService = this.emailUserDetailsService != null
+                ? this.emailUserDetailsService
+                : getBeanOrNull(applicationContext, EmailUserDetailsService.class);
+        Assert.notNull(emailUserDetailsService, "emailUserDetailsService is required");
 
-		EmailCheckService emailCheckService =
-			this.emailCheckService != null ? this.emailCheckService : getBeanOrNull(applicationContext, EmailCheckService.class);
-		Assert.notNull(emailCheckService, "emailCheckService is required");
+        EmailCheckService emailCheckService = this.emailCheckService != null
+                ? this.emailCheckService
+                : getBeanOrNull(applicationContext, EmailCheckService.class);
+        Assert.notNull(emailCheckService, "emailCheckService is required");
 
-		return new EmailAuthenticationProvider(emailUserDetailsService, emailCheckService);
-	}
+        return new EmailAuthenticationProvider(emailUserDetailsService, emailCheckService);
+    }
 
-	@Override
-	protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
-		if (this.jwtTokenGenerator == null) {
-			ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
-		}
-		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
-		return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
-	}
+    @Override
+    protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
+        if (this.jwtTokenGenerator == null) {
+            ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+            jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
+        }
+        Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
+        return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
+    }
 
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return new JsonExtensionLoginAuthenticationFailureHandler();
-	}
-
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return new JsonExtensionLoginAuthenticationFailureHandler();
+    }
 }

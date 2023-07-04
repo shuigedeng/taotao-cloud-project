@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,16 +37,16 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
  */
 public interface Auth2UserService {
 
-	/**
-	 * Returns an {@link AuthUser} after obtaining the user attributes of the End-User
-	 * from the UserInfo Endpoint.
-	 *
-	 * @param auth2Request the user OAuth2 request
-	 * @param request      HttpServletRequest
-	 * @return an {@link AuthUser}
-	 * @throws OAuth2AuthenticationException if an error occurs while attempting to obtain
-	 *                                       the user attributes from the UserInfo Endpoint
-	 */
-	AuthUser loadUser(Auth2DefaultRequest auth2Request, HttpServletRequest request) throws OAuth2AuthenticationException;
-
+    /**
+     * Returns an {@link AuthUser} after obtaining the user attributes of the End-User
+     * from the UserInfo Endpoint.
+     *
+     * @param auth2Request the user OAuth2 request
+     * @param request      HttpServletRequest
+     * @return an {@link AuthUser}
+     * @throws OAuth2AuthenticationException if an error occurs while attempting to obtain
+     *                                       the user attributes from the UserInfo Endpoint
+     */
+    AuthUser loadUser(Auth2DefaultRequest auth2Request, HttpServletRequest request)
+            throws OAuth2AuthenticationException;
 }

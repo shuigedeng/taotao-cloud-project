@@ -28,6 +28,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URI;
+import java.util.Objects;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -37,10 +40,6 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.io.IOException;
-import java.net.URI;
-import java.util.Objects;
 
 /** 小程序预授权 */
 public class WechatMiniAppPreAuthenticationFilter extends OncePerRequestFilter {
@@ -62,7 +61,8 @@ public class WechatMiniAppPreAuthenticationFilter extends OncePerRequestFilter {
      * @param wechatMiniAppSessionKeyCacheService the mini app session key cache
      */
     public WechatMiniAppPreAuthenticationFilter(
-            WechatMiniAppClientService wechatMiniAppClientService, WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService) {
+            WechatMiniAppClientService wechatMiniAppClientService,
+            WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService) {
         this.wechatMiniAppClientService = wechatMiniAppClientService;
         this.wechatMiniAppSessionKeyCacheService = wechatMiniAppSessionKeyCacheService;
         this.restOperations = new RestTemplate();
@@ -112,7 +112,8 @@ public class WechatMiniAppPreAuthenticationFilter extends OncePerRequestFilter {
      * @param jsCode jsCode
      * @return ObjectNode
      */
-    private WechatLoginResponse getResponse(WechatMiniAppClient wechatMiniAppClient, String jsCode) throws JsonProcessingException {
+    private WechatLoginResponse getResponse(WechatMiniAppClient wechatMiniAppClient, String jsCode)
+            throws JsonProcessingException {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("appid", wechatMiniAppClient.getAppId());
         queryParams.add("secret", wechatMiniAppClient.getSecret());

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
+import java.util.*;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -23,8 +24,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
-
-import java.util.*;
 
 public class SocialDelegatingOAuth2UserService<R extends OAuth2UserRequest, U extends OAuth2User>
         implements OAuth2UserService<R, U> {

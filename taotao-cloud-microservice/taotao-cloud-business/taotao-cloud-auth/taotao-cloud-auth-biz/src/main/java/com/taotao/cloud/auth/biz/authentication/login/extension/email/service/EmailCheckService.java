@@ -17,11 +17,11 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.email.service;
 
 public interface EmailCheckService {
-	/**
-	 * verify captcha
-	 *
-	 * @param email phone
-	 * @return isVerified
-	 */
-	boolean check(String email);
+    /**
+     * verify captcha
+     *
+     * @param email phone
+     * @return isVerified
+     */
+    boolean check(String email);
 }

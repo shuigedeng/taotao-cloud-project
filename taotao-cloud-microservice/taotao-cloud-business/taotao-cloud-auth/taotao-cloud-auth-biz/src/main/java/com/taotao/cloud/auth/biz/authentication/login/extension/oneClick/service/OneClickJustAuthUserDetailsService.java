@@ -16,20 +16,19 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthUserDetailsRegisterService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface OneClickJustAuthUserDetailsService {
 
-	/**
-	 * load user by phone
-	 *
-	 * @param phone phone
-	 * @return userDetails
-	 * @throws UsernameNotFoundException not found user
-	 */
-	UserDetails loadUserByOneClick(String phone) throws UsernameNotFoundException;
+    /**
+     * load user by phone
+     *
+     * @param phone phone
+     * @return userDetails
+     * @throws UsernameNotFoundException not found user
+     */
+    UserDetails loadUserByOneClick(String phone) throws UsernameNotFoundException;
 
-	UserDetails registerUser(String principal);
+    UserDetails registerUser(String principal);
 }

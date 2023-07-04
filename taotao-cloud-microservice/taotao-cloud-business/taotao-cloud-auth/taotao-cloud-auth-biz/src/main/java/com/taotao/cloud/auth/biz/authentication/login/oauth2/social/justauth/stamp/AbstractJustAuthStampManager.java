@@ -1,26 +1,17 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * 
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.justauth.stamp;
@@ -28,13 +19,12 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.justauth.st
 import com.taotao.cloud.auth.biz.authentication.stamp.MaximumLimitExceededException;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.support.core.definition.AbstractRenderer;
+import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.crypto.SecureUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-
-import java.time.Duration;
 
 /**
  * <p>Description: 计数类型的缓存 </p>
@@ -48,16 +38,15 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractJustAuthStampManager.class);
 
-	public AbstractJustAuthStampManager(RedisRepository redisRepository, String cacheName) {
-		super(redisRepository, cacheName);
-	}
+    public AbstractJustAuthStampManager(RedisRepository redisRepository, String cacheName) {
+        super(redisRepository, cacheName);
+    }
 
-	public AbstractJustAuthStampManager(RedisRepository redisRepository, String cacheName, Duration expire) {
-		super(redisRepository, cacheName, expire);
-	}
+    public AbstractJustAuthStampManager(RedisRepository redisRepository, String cacheName, Duration expire) {
+        super(redisRepository, cacheName, expire);
+    }
 
-
-	/**
+    /**
      * 在缓存有效期内进行计数
      *
      * @param identity 缓存 Key 的区分标识
@@ -92,7 +81,8 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
      * @return 当前错误次数
      * @throws MaximumLimitExceededException 超出最大限制次数错误
      */
-    public int counting(String identity, int maxTimes, Duration expire, String function) throws MaximumLimitExceededException {
+    public int counting(String identity, int maxTimes, Duration expire, String function)
+            throws MaximumLimitExceededException {
         return counting(identity, maxTimes, expire, false, function);
     }
 
@@ -106,7 +96,8 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
      * @return 当前错误次数
      * @throws MaximumLimitExceededException 超出最大限制次数错误
      */
-    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5) throws MaximumLimitExceededException {
+    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5)
+            throws MaximumLimitExceededException {
         return counting(identity, maxTimes, expire, useMd5, "AbstractCountStampManager");
     }
 
@@ -121,13 +112,14 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
      * @return 当前错误次数
      * @throws MaximumLimitExceededException 超出最大限制次数错误
      */
-    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5, String function) throws MaximumLimitExceededException {
+    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5, String function)
+            throws MaximumLimitExceededException {
         Assert.notNull(identity, "identity cannot be null");
 
         String key = useMd5 ? SecureUtil.md5(identity) : identity;
         String expireKey = key + "_expire";
 
-        Long index = (Long)get(key);
+        Long index = (Long) get(key);
 
         if (ObjectUtils.isEmpty(index)) {
             index = 0L;
@@ -159,7 +151,7 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
 
         long temp = index + 1L;
         int times = (int) temp;
-       log.info("[Herodotus] |- {} has been recorded [{}] times.", function, times);
+        log.info("{} has been recorded [{}] times.", function, times);
         return times;
     }
 
@@ -174,11 +166,11 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
      * @return 还剩余的过期时间 {@link Duration}
      */
     private Duration calculateRemainingTime(Duration configuredDuration, String expireKey, String function) {
-        Long begin = (Long)get(expireKey);
+        Long begin = (Long) get(expireKey);
         Long current = System.currentTimeMillis();
         long interval = current - begin;
 
-       log.info("[Herodotus] |- {} operation interval [{}] millis.", function, interval);
+        log.info("{} operation interval [{}] millis.", function, interval);
 
         Duration duration;
         if (!configuredDuration.isZero()) {
@@ -190,8 +182,8 @@ public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
         return duration;
     }
 
-	@Override
-	public Object get(String key) {
-		return super.get(key);
-	}
+    @Override
+    public Object get(String key) {
+        return super.get(key);
+    }
 }

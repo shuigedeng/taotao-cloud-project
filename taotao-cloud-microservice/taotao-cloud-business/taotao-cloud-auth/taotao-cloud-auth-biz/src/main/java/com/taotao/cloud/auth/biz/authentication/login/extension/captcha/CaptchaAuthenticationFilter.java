@@ -30,48 +30,47 @@ import org.springframework.util.Assert;
 
 public class CaptchaAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-	private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
-		new AntPathRequestMatcher("/login/captcha", "POST");
+    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
+            new AntPathRequestMatcher("/login/captcha", "POST");
 
-	private Converter<HttpServletRequest, CaptchaAuthenticationToken>
-		accountVerificationAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, CaptchaAuthenticationToken> accountVerificationAuthenticationTokenConverter;
 
-	private boolean postOnly = true;
+    private boolean postOnly = true;
 
-	public CaptchaAuthenticationFilter() {
-		super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
-		this.accountVerificationAuthenticationTokenConverter = new CaptchaAuthenticationConverter();
-	}
+    public CaptchaAuthenticationFilter() {
+        super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
+        this.accountVerificationAuthenticationTokenConverter = new CaptchaAuthenticationConverter();
+    }
 
-	public CaptchaAuthenticationFilter(AuthenticationManager authenticationManager) {
-		super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
-		this.accountVerificationAuthenticationTokenConverter = new CaptchaAuthenticationConverter();
-	}
+    public CaptchaAuthenticationFilter(AuthenticationManager authenticationManager) {
+        super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
+        this.accountVerificationAuthenticationTokenConverter = new CaptchaAuthenticationConverter();
+    }
 
-	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-		throws AuthenticationException {
-		if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
-			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
-		}
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException {
+        if (this.postOnly && !HttpMethod.POST.matches(request.getMethod())) {
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+        }
 
-		CaptchaAuthenticationToken captchaAuthenticationToken =
-			accountVerificationAuthenticationTokenConverter.convert(request);
-		// Allow subclasses to set the "details" property
-		setDetails(request, captchaAuthenticationToken);
-		return this.getAuthenticationManager().authenticate(captchaAuthenticationToken);
-	}
+        CaptchaAuthenticationToken captchaAuthenticationToken =
+                accountVerificationAuthenticationTokenConverter.convert(request);
+        // Allow subclasses to set the "details" property
+        setDetails(request, captchaAuthenticationToken);
+        return this.getAuthenticationManager().authenticate(captchaAuthenticationToken);
+    }
 
-	protected void setDetails(HttpServletRequest request, CaptchaAuthenticationToken captchaAuthenticationToken) {
-		captchaAuthenticationToken.setDetails(this.authenticationDetailsSource.buildDetails(request));
-	}
+    protected void setDetails(HttpServletRequest request, CaptchaAuthenticationToken captchaAuthenticationToken) {
+        captchaAuthenticationToken.setDetails(this.authenticationDetailsSource.buildDetails(request));
+    }
 
-	public void setConverter(Converter<HttpServletRequest, CaptchaAuthenticationToken> converter) {
-		Assert.notNull(converter, "Converter must not be null");
-		this.accountVerificationAuthenticationTokenConverter = converter;
-	}
+    public void setConverter(Converter<HttpServletRequest, CaptchaAuthenticationToken> converter) {
+        Assert.notNull(converter, "Converter must not be null");
+        this.accountVerificationAuthenticationTokenConverter = converter;
+    }
 
-	public void setPostOnly(boolean postOnly) {
-		this.postOnly = postOnly;
-	}
+    public void setPostOnly(boolean postOnly) {
+        this.postOnly = postOnly;
+    }
 }

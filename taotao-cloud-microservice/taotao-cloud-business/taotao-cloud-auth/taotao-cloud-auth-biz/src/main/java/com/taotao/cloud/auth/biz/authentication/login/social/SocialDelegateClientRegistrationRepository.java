@@ -16,12 +16,11 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 
 public class SocialDelegateClientRegistrationRepository implements ClientRegistrationRepository {
     private Function<String, ClientRegistration> delegate;

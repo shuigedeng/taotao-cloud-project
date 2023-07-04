@@ -18,22 +18,21 @@ package com.taotao.cloud.auth.biz.authentication.login.social.qq;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.taotao.cloud.auth.biz.authentication.utils.AuthorityUtils;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Data
 public class QQOAuth2User implements OAuth2User {
 
     // 统一赋予USER角色
-	private Set<GrantedAuthority> authorities =  AuthorityUtils.createAuthorityList("ROLE_USER");
-	private Map<String, Object> attributes = new HashMap<>();
-	private String nameAttributeKey;
+    private Set<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+    private Map<String, Object> attributes = new HashMap<>();
+    private String nameAttributeKey;
 
     private String nickname;
 
@@ -70,5 +69,4 @@ public class QQOAuth2User implements OAuth2User {
     public String getName() {
         return this.nameAttributeKey;
     }
-
 }

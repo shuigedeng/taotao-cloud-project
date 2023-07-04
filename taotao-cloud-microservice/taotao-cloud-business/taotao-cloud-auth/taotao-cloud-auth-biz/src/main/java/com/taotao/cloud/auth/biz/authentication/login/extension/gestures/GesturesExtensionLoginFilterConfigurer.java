@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.gestures;
 
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
@@ -34,7 +34,10 @@ import org.springframework.util.Assert;
 
 public class GesturesExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, GesturesExtensionLoginFilterConfigurer<H>, GesturesAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                GesturesExtensionLoginFilterConfigurer<H>,
+                GesturesAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private GesturesUserDetailsService gesturesUserDetailsService;
 
@@ -81,11 +84,12 @@ public class GesturesExtensionLoginFilterConfigurer<H extends HttpSecurityBuilde
         Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return (request, response, authException) -> {
-			LogUtils.error("用户认证失败", authException);
-			ResponseUtils.fail(response, authException.getMessage());
-		};
-	}
+
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return (request, response, authException) -> {
+            LogUtils.error("用户认证失败", authException);
+            ResponseUtils.fail(response, authException.getMessage());
+        };
+    }
 }

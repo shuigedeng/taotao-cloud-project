@@ -18,11 +18,11 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.captcha.service
 
 public interface CaptchaCheckService {
 
-	/**
-	 * verify captcha
-	 *
-	 * @param verificationCode phone
-	 * @return isVerified
-	 */
-	boolean verifyCaptcha(String verificationCode);
+    /**
+     * verify captcha
+     *
+     * @param verificationCode phone
+     * @return isVerified
+     */
+    boolean verifyCaptcha(String verificationCode);
 }

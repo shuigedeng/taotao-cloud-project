@@ -21,22 +21,17 @@ import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import java.util.Objects;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.Objects;
+
 /**
- * 规格项表规格项表
+ * 规格项表
  *
  * @author shuigedeng
  * @version 2022.04
  * @since 2022-04-20 16:59:38
- * @since 2020-02-18 15:18:56
  */
 @Getter
 @Setter
@@ -47,41 +42,47 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Specification.TABLE_NAME)
 @TableName(Specification.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Specification.TABLE_NAME, comment = "规格项表")
 public class Specification extends BaseSuperEntity<Specification, Long> {
 
-    public static final String TABLE_NAME = "tt_specification";
+	/**
+	 * 规格项表
+	 */
+	public static final String TABLE_NAME = "tt_specification";
 
-    /** 规格名称 */
-    @Column(name = "spec_name", columnDefinition = "varchar(255) not null comment '会员规格名称ID'")
-    private String specName;
+	/**
+	 * 规格名称
+	 */
+	@Column(name = "spec_name", columnDefinition = "varchar(255) not null comment '会员规格名称ID'")
+	private String specName;
 
-    /**
-     * 所属卖家 0属于平台
-     *
-     * <p>店铺自定义规格暂时废弃 2021-06-23 后续推出新配置方式
-     */
-    @Column(name = "store_id", columnDefinition = "bigint not null comment '所属卖家'")
-    private Long storeId;
+	/**
+	 * 所属卖家 0属于平台
+	 *
+	 * <p>店铺自定义规格暂时废弃 2021-06-23 后续推出新配置方式
+	 */
+	@Column(name = "store_id", columnDefinition = "bigint not null comment '所属卖家'")
+	private Long storeId;
 
-    /** 规格值名字, 《,》分割 */
-    @Column(name = "spec_value", columnDefinition = "varchar(1024) not null comment '规格值名字'")
-    private String specValue;
+	/**
+	 * 规格值名字, 《,》分割
+	 */
+	@Column(name = "spec_value", columnDefinition = "varchar(1024) not null comment '规格值名字'")
+	private String specValue;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-            return false;
-        }
-        Specification that = (Specification) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+			return false;
+		}
+		Specification that = (Specification) o;
+		return getId() != null && Objects.equals(getId(), that.getId());
+	}
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 }

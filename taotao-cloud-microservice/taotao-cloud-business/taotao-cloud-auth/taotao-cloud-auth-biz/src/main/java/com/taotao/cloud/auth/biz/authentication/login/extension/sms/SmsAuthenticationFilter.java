@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.sms;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.sms.SmsAuthenticationToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.convert.converter.Converter;

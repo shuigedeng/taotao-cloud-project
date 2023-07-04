@@ -17,6 +17,12 @@
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
 import com.taotao.cloud.auth.biz.authentication.login.social.wechat.WechatParameterNames;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.function.Consumer;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -32,18 +38,13 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.function.Consumer;
-
 /** The enum Client providers. */
 public enum SocialClientProviders {
     /** wechat-web-login */
     WECHAT_WEB_LOGIN_CLIENT(
-            "wechat-web-login", SocialClientProviders::oAuth2AuthorizationRequestConsumer, authorizationCodeGrantRequest -> {
+            "wechat-web-login",
+            SocialClientProviders::oAuth2AuthorizationRequestConsumer,
+            authorizationCodeGrantRequest -> {
                 ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();
                 HttpHeaders headers = getTokenRequestHeaders(clientRegistration);
 
@@ -136,7 +137,7 @@ public enum SocialClientProviders {
                 parameters.clear();
                 parameters.putAll(linkedParameters);
             })),
-		authorizationCodeGrantRequest -> {
+            authorizationCodeGrantRequest -> {
                 String code = authorizationCodeGrantRequest
                         .getAuthorizationExchange()
                         .getAuthorizationResponse()

@@ -21,12 +21,11 @@ import com.taotao.cloud.common.enums.LoginTypeEnum;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 public class DefaultSmsUserDetailsService implements SmsUserDetailsService {

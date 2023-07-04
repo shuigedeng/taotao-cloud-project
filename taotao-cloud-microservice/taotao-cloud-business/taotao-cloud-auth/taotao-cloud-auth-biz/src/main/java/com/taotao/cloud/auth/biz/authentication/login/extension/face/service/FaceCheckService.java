@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.face.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface FaceCheckService {

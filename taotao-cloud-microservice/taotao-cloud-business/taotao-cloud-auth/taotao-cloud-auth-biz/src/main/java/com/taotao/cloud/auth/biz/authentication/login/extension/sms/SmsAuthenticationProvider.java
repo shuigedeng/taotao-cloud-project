@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.sms;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsCheckCodeService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -33,8 +34,6 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /** 手机号码+短信 登录 */
 public class SmsAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
@@ -43,7 +42,8 @@ public class SmsAuthenticationProvider implements AuthenticationProvider, Initia
     private final SmsCheckCodeService smsCheckCodeService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public SmsAuthenticationProvider(SmsUserDetailsService smsUserDetailsService, SmsCheckCodeService smsCheckCodeService) {
+    public SmsAuthenticationProvider(
+            SmsUserDetailsService smsUserDetailsService, SmsCheckCodeService smsCheckCodeService) {
         this.smsUserDetailsService = smsUserDetailsService;
         this.smsCheckCodeService = smsCheckCodeService;
     }

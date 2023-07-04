@@ -24,14 +24,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DefaultFaceCheckService implements FaceCheckService {
-	@Autowired
-	private FaceUtils faceUtils;
+    @Autowired
+    private FaceUtils faceUtils;
 
-	@Override
-	public boolean check(String imgBash64) throws UsernameNotFoundException {
-		Double aDouble = faceUtils.verifyUser(imgBash64);
-		return false;
-
-	}
-
+    @Override
+    public boolean check(String imgBash64) throws UsernameNotFoundException {
+        Double aDouble = faceUtils.verifyUser(imgBash64);
+        return false;
+    }
 }

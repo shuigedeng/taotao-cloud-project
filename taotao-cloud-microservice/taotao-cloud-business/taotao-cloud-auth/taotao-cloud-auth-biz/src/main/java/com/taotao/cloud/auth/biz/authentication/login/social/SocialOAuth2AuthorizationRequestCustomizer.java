@@ -16,20 +16,19 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
-import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Consumer;
+import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
+import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 
 /**
  * customizer {@link OAuth2AuthorizationRequest}
  *
  * <p>client_id 变成 appid ，并追加锚点#wechat_redirect
  *
- * 
+ *
  * @see DefaultOAuth2AuthorizationRequestResolver#setAuthorizationRequestCustomizer(Consumer)
  */
 public class SocialOAuth2AuthorizationRequestCustomizer {

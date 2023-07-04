@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016 the original author or authors.
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,14 +43,13 @@ import org.springframework.security.jackson2.*;
 @SuppressWarnings("serial")
 public class FormOAuth2PhoneLoginJackson2Module extends SimpleModule {
 
-	public FormOAuth2PhoneLoginJackson2Module() {
-		super(FormOAuth2PhoneLoginJackson2Module.class.getName(), new Version(1, 0, 0, null, null, null));
-	}
+    public FormOAuth2PhoneLoginJackson2Module() {
+        super(FormOAuth2PhoneLoginJackson2Module.class.getName(), new Version(1, 0, 0, null, null, null));
+    }
 
-	@Override
-	public void setupModule(SetupContext context) {
-		context.setMixInAnnotations(Oauth2FormPhoneLoginAuthenticationToken.class,
-				FormOAuth2PhoneAuthenticationTokenMixin.class);
-	}
-
+    @Override
+    public void setupModule(SetupContext context) {
+        context.setMixInAnnotations(
+                Oauth2FormPhoneLoginAuthenticationToken.class, FormOAuth2PhoneAuthenticationTokenMixin.class);
+    }
 }

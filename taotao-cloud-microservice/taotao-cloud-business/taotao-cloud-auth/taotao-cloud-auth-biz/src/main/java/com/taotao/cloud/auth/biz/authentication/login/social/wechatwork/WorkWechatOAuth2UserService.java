@@ -16,6 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social.wechatwork;
 
+import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
@@ -45,15 +49,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.UnknownContentTypeException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-
 /**
  * 获取微信用户信息的服务接口
  *
- * 
+ *
  * @since 2021 /8/12 17:45
  */
 public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -62,8 +61,7 @@ public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2User
     private static final String MISSING_CODE_ERROR = "missing_code_attribute";
     private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE = "invalid_user_info_response";
     private static final ParameterizedTypeReference<WorkWechatOAuth2User> OAUTH2_USER_OBJECT =
-		new ParameterizedTypeReference<>() {
-		};
+            new ParameterizedTypeReference<>() {};
     private final RestOperations restOperations;
 
     /** Instantiates a new Wechat o auth 2 user service. */

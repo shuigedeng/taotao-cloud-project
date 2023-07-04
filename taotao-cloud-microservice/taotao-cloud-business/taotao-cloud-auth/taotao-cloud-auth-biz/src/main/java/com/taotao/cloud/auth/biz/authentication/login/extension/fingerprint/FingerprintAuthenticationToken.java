@@ -16,12 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.account.AccountAuthenticationToken;
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-
-import java.util.Collection;
 
 public class FingerprintAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -59,13 +57,14 @@ public class FingerprintAuthenticationToken extends AbstractAuthenticationToken 
         super.setAuthenticated(true);
     }
 
-	public static FingerprintAuthenticationToken unauthenticated(Object principal, String fingerPrint) {
-		return new FingerprintAuthenticationToken(principal, fingerPrint);
-	}
+    public static FingerprintAuthenticationToken unauthenticated(Object principal, String fingerPrint) {
+        return new FingerprintAuthenticationToken(principal, fingerPrint);
+    }
 
-	public static FingerprintAuthenticationToken authenticated( Object principal, String fingerPrint, Collection<? extends GrantedAuthority> authorities) {
-		return new FingerprintAuthenticationToken(principal, fingerPrint, authorities);
-	}
+    public static FingerprintAuthenticationToken authenticated(
+            Object principal, String fingerPrint, Collection<? extends GrantedAuthority> authorities) {
+        return new FingerprintAuthenticationToken(principal, fingerPrint, authorities);
+    }
 
     @Override
     public Object getCredentials() {
@@ -90,14 +89,14 @@ public class FingerprintAuthenticationToken extends AbstractAuthenticationToken 
     @Override
     public void eraseCredentials() {
         super.eraseCredentials();
-		fingerPrint = null;
+        fingerPrint = null;
     }
 
-	public String getFingerPrint() {
-		return fingerPrint;
-	}
+    public String getFingerPrint() {
+        return fingerPrint;
+    }
 
-	public void setFingerPrint(String fingerPrint) {
-		this.fingerPrint = fingerPrint;
-	}
+    public void setFingerPrint(String fingerPrint) {
+        this.fingerPrint = fingerPrint;
+    }
 }

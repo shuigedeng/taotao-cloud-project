@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.sms;
 
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationFailureHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
-import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsCheckCodeService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsUserDetailsService;
 import org.springframework.context.ApplicationContext;
@@ -34,7 +34,10 @@ import org.springframework.util.Assert;
 
 public class SmsExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, SmsExtensionLoginFilterConfigurer<H>, SmsAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                SmsExtensionLoginFilterConfigurer<H>,
+                SmsAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private SmsUserDetailsService smsUserDetailsService;
 
@@ -75,8 +78,9 @@ public class SmsExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
                 : getBeanOrNull(applicationContext, SmsUserDetailsService.class);
         Assert.notNull(smsUserDetailsService, "phoneUserDetailsService is required");
 
-        SmsCheckCodeService smsCheckCodeService =
-                this.smsCheckCodeService != null ? this.smsCheckCodeService : getBeanOrNull(applicationContext, SmsCheckCodeService.class);
+        SmsCheckCodeService smsCheckCodeService = this.smsCheckCodeService != null
+                ? this.smsCheckCodeService
+                : getBeanOrNull(applicationContext, SmsCheckCodeService.class);
         Assert.notNull(smsCheckCodeService, "phoneService is required");
 
         return new SmsAuthenticationProvider(smsUserDetailsService, smsCheckCodeService);
@@ -92,9 +96,8 @@ public class SmsExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
 
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return new JsonExtensionLoginAuthenticationFailureHandler();
-	}
-
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return new JsonExtensionLoginAuthenticationFailureHandler();
+    }
 }

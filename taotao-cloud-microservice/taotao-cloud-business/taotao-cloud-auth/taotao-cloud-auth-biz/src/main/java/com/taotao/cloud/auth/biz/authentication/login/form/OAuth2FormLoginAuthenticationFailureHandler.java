@@ -1,4 +1,18 @@
-
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.auth.biz.authentication.login.form;
 
@@ -9,6 +23,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -21,8 +36,6 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
-
-import java.io.IOException;
 
 /**
  * <p> Description : 表单登录失败处理器 </p>
@@ -40,15 +53,16 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
     private boolean allowSessionCreation = true;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-    public OAuth2FormLoginAuthenticationFailureHandler() {
-    }
+    public OAuth2FormLoginAuthenticationFailureHandler() {}
 
     public OAuth2FormLoginAuthenticationFailureHandler(String defaultFailureUrl) {
         setDefaultFailureUrl(defaultFailureUrl);
     }
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
+    public void onAuthenticationFailure(
+            HttpServletRequest request, HttpServletResponse response, AuthenticationException e)
+            throws IOException, ServletException {
         if (this.defaultFailureUrl == null) {
             if (this.logger.isTraceEnabled()) {
                 this.logger.trace("Sending 401 Unauthorized error since no failure URL is set");
@@ -66,13 +80,15 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
             errorMessage = result.getMessage();
         } else {
             errorMessage = e.getClass().getSimpleName();
-           log.info("[Herodotus] |- Form Login Authentication Failure Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", errorMessage);
+            log.info(
+                    "Form Login Authentication Failure Handler,  Can not find the exception name [{}] in dictionary, please do optimize ",
+                    errorMessage);
         }
 
         saveException(request, errorMessage);
 
         if (this.isUseForward()) {
-           log.info("Forwarding to " + this.defaultFailureUrl);
+            log.info("Forwarding to " + this.defaultFailureUrl);
             request.getRequestDispatcher(this.defaultFailureUrl).forward(request, response);
         } else {
             this.redirectStrategy.sendRedirect(request, response, this.defaultFailureUrl);
@@ -95,13 +111,15 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
      *
      * @param defaultFailureUrl the failure URL, for example "/loginFailed.jsp".
      */
-	@Override
+    @Override
     public void setDefaultFailureUrl(String defaultFailureUrl) {
-        Assert.isTrue(UrlUtils.isValidRedirectUrl(defaultFailureUrl),
+        Assert.isTrue(
+                UrlUtils.isValidRedirectUrl(defaultFailureUrl),
                 () -> "'" + defaultFailureUrl + "' is not a valid redirect URL");
         this.defaultFailureUrl = defaultFailureUrl;
     }
-	@Override
+
+    @Override
     protected boolean isUseForward() {
         return this.forwardToDestination;
     }
@@ -110,7 +128,7 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
      * If set to <tt>true</tt>, performs a forward to the failure destination URL instead
      * of a redirect. Defaults to <tt>false</tt>.
      */
-	@Override
+    @Override
     public void setUseForward(boolean forwardToDestination) {
         this.forwardToDestination = forwardToDestination;
     }
@@ -118,22 +136,22 @@ public class OAuth2FormLoginAuthenticationFailureHandler extends SimpleUrlAuthen
     /**
      * Allows overriding of the behaviour when redirecting to a target URL.
      */
-	@Override
+    @Override
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
 
-	@Override
+    @Override
     protected RedirectStrategy getRedirectStrategy() {
         return this.redirectStrategy;
     }
 
-	@Override
+    @Override
     protected boolean isAllowSessionCreation() {
         return this.allowSessionCreation;
     }
 
-	@Override
+    @Override
     public void setAllowSessionCreation(boolean allowSessionCreation) {
         this.allowSessionCreation = allowSessionCreation;
     }

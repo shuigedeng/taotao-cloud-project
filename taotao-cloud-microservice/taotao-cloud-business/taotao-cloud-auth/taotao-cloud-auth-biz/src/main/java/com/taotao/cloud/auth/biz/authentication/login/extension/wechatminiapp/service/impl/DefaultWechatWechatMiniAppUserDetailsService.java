@@ -17,19 +17,18 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.impl;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppRequest;
-import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppUserInfo;
+import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.WxUtils;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import java.util.Set;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 /** // 小程序用户 自动注册和检索 1 在此处配置 优先级最高 2 注册为Spring Bean 可以免配置 */
 @Service

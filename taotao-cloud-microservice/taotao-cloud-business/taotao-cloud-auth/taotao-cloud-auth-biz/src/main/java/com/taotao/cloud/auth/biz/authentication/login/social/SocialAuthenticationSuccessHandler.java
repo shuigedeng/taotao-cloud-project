@@ -16,17 +16,16 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import java.io.IOException;
 
 /**
  * LoginAuthenticationSuccessHandler
@@ -37,18 +36,19 @@ import java.io.IOException;
  */
 public class SocialAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	private final JwtTokenGenerator jwtTokenGenerator;
+    private final JwtTokenGenerator jwtTokenGenerator;
 
-	public SocialAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
-		this.jwtTokenGenerator = jwtTokenGenerator;
-	}
+    public SocialAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
+        this.jwtTokenGenerator = jwtTokenGenerator;
+    }
 
-	@Override
-	public void onAuthenticationSuccess(
-		HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-		throws IOException, ServletException {
+    @Override
+    public void onAuthenticationSuccess(
+            HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+            throws IOException, ServletException {
 
-		LogUtils.error("第三方用户认证成功", authentication);
-		ResponseUtils.success(response, jwtTokenGenerator.socialTokenResponse((OAuth2User) authentication.getPrincipal()));
-	}
+        LogUtils.error("第三方用户认证成功", authentication);
+        ResponseUtils.success(
+                response, jwtTokenGenerator.socialTokenResponse((OAuth2User) authentication.getPrincipal()));
+    }
 }

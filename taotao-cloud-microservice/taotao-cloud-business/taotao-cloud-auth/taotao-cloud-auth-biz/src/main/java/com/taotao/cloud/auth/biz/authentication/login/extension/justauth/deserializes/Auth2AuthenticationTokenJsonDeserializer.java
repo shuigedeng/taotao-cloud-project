@@ -1,25 +1,19 @@
 /*
- * MIT License
- * Copyright (c) 2020-2029 YongWu zheng (dcenter.top and gitee.com/pcore and github.com/ZeroOrInfinity)
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.deserializes;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -33,14 +27,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthAuthenticationToken;
+import java.io.IOException;
+import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-
-import java.io.IOException;
-import java.util.Collection;
 
 /**
  * Auth2AuthenticationToken Jackson 反序列化
@@ -63,9 +56,8 @@ public class Auth2AuthenticationTokenJsonDeserializer extends StdDeserializer<Ju
         final JsonNode jsonNode = mapper.readTree(p);
 
         // 获取 authorities
-        Collection<? extends GrantedAuthority> tokenAuthorities =
-                mapper.convertValue(jsonNode.get("authorities"),
-                                    new TypeReference<Collection<SimpleGrantedAuthority>>() {});
+        Collection<? extends GrantedAuthority> tokenAuthorities = mapper.convertValue(
+                jsonNode.get("authorities"), new TypeReference<Collection<SimpleGrantedAuthority>>() {});
 
         final String providerId = jsonNode.get("providerId").asText(null);
         final JsonNode detailsNode = jsonNode.get("details");
@@ -87,31 +79,31 @@ public class Auth2AuthenticationTokenJsonDeserializer extends StdDeserializer<Ju
             final Class<?> principalClass = Class.forName(principalClassName);
             final JavaType javaType = mapper.getTypeFactory().constructType(principalClass);
             principal = mapper.convertValue(principalNode, javaType);
-        }
-        catch (Exception e) {
-            final String msg = String.format("Auth2AuthenticationToken Jackson 反序列化错误: principal 反序列化错误: %s", principalNode.toString());
+        } catch (Exception e) {
+            final String msg = String.format(
+                    "Auth2AuthenticationToken Jackson 反序列化错误: principal 反序列化错误: %s", principalNode.toString());
             log.error(msg);
             throw new IOException(msg);
         }
 
         final JustAuthAuthenticationToken justAuthAuthenticationToken =
-                new JustAuthAuthenticationToken(principal,
-                                             tokenAuthorities,
-                                             providerId);
+                new JustAuthAuthenticationToken(principal, tokenAuthorities, providerId);
 
         // 创建 details 对象
         if (!(detailsNode.isNull() || detailsNode.isMissingNode())) {
-            WebAuthenticationDetails details = mapper.convertValue(detailsNode, new TypeReference<WebAuthenticationDetails>(){});
+            WebAuthenticationDetails details =
+                    mapper.convertValue(detailsNode, new TypeReference<WebAuthenticationDetails>() {});
             justAuthAuthenticationToken.setDetails(details);
         }
 
         return justAuthAuthenticationToken;
-
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
-    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+    @JsonAutoDetect(
+            fieldVisibility = JsonAutoDetect.Visibility.ANY,
+            getterVisibility = JsonAutoDetect.Visibility.NONE,
+            isGetterVisibility = JsonAutoDetect.Visibility.NONE)
     @JsonDeserialize(using = Auth2AuthenticationTokenJsonDeserializer.class)
     public interface Auth2AuthenticationTokenMixin {}
-
 }

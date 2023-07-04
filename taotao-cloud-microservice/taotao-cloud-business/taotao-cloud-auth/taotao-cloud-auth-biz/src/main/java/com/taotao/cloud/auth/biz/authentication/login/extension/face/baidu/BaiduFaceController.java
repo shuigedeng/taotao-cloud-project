@@ -19,14 +19,13 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.face.baidu;
 import com.taotao.cloud.common.utils.io.ResourceUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.File;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.File;
-import java.io.IOException;
 
 @Validated
 @Tag(name = "百度人脸识别API", description = "百度人脸识别API")

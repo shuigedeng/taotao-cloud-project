@@ -19,11 +19,10 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.tmp1;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class QrCodeLoginService {

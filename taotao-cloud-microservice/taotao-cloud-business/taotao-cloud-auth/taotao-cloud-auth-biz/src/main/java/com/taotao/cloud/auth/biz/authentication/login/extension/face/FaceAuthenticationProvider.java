@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.face;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceCheckService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -32,8 +33,6 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /** 百度人脸识别登录 */
 public class FaceAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 
@@ -42,8 +41,8 @@ public class FaceAuthenticationProvider implements AuthenticationProvider, Initi
     private FaceCheckService faceCheckService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public FaceAuthenticationProvider(FaceUserDetailsService faceUserDetailsService,
-									  FaceCheckService faceCheckService) {
+    public FaceAuthenticationProvider(
+            FaceUserDetailsService faceUserDetailsService, FaceCheckService faceCheckService) {
         this.faceUserDetailsService = faceUserDetailsService;
         this.faceCheckService = faceCheckService;
     }
@@ -54,8 +53,7 @@ public class FaceAuthenticationProvider implements AuthenticationProvider, Initi
                 FaceAuthenticationToken.class,
                 authentication,
                 () -> messages.getMessage(
-                        "FaceAuthenticationProvider.onlySupports",
-                        "Only FaceAuthenticationProvider is supported"));
+                        "FaceAuthenticationProvider.onlySupports", "Only FaceAuthenticationProvider is supported"));
 
         FaceAuthenticationToken unAuthenticationToken = (FaceAuthenticationToken) authentication;
         String imgBase64 = (String) unAuthenticationToken.getPrincipal();

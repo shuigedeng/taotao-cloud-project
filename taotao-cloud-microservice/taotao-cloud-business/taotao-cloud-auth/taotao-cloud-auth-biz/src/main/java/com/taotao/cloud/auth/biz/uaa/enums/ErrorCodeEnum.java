@@ -1,24 +1,17 @@
 /*
- * MIT License
- * Copyright (c) 2020-2029 YongWu zheng (dcenter.top and gitee.com/pcore and github.com/ZeroOrInfinity)
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.taotao.cloud.auth.biz.uaa.enums;
@@ -30,8 +23,6 @@ import org.springframework.http.HttpStatus;
  */
 @SuppressWarnings("AlibabaEnumConstantsMustHaveComment")
 public enum ErrorCodeEnum {
-
-
     LOGOUT_SUCCESS(0, "登出成功"),
 
     NOT_FOUND(404, "not found"),
@@ -96,12 +87,10 @@ public enum ErrorCodeEnum {
     DEL_PERMISSION_FAILURE(720, "删除权限失败"),
     PERMISSION_DENY(730, "您没有访问权限或未登录"),
 
-
     REDIRECT_URL_PARAMETER_ILLEGAL(800, "非法的回调地址"),
     REDIRECT_URL_PARAMETER_ERROR(801, "回调地址不正确"),
     TAMPER_WITH_REDIRECT_URL_PARAMETER(802, "回调参数被篡改"),
     ILLEGAL_ACCESS_URL_ERROR(803, "非法访问");
-
 
     /**
      * 错误代码

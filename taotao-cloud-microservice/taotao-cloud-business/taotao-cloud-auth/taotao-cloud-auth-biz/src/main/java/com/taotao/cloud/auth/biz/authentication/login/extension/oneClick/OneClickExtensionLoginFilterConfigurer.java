@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick;
 
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
-import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickJustAuthUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import org.springframework.context.ApplicationContext;
@@ -42,15 +42,17 @@ import org.springframework.util.Assert;
  */
 public class OneClickExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, OneClickExtensionLoginFilterConfigurer<H>, OneClickLoginAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                OneClickExtensionLoginFilterConfigurer<H>,
+                OneClickLoginAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private OneClickJustAuthUserDetailsService oneClickUserDetailsService;
     private OneClickLoginService oneClickLoginService;
     private JwtTokenGenerator jwtTokenGenerator;
 
     public OneClickExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(securityConfigurer, new OneClickLoginAuthenticationFilter(),
-			"/login/oneclick");
+        super(securityConfigurer, new OneClickLoginAuthenticationFilter(), "/login/oneclick");
     }
 
     public OneClickExtensionLoginFilterConfigurer<H> oneClickUserDetailsService(
@@ -59,11 +61,10 @@ public class OneClickExtensionLoginFilterConfigurer<H extends HttpSecurityBuilde
         return this;
     }
 
-	public OneClickExtensionLoginFilterConfigurer<H> oneClickLoginService(
-		OneClickLoginService oneClickLoginService) {
-		this.oneClickLoginService = oneClickLoginService;
-		return this;
-	}
+    public OneClickExtensionLoginFilterConfigurer<H> oneClickLoginService(OneClickLoginService oneClickLoginService) {
+        this.oneClickLoginService = oneClickLoginService;
+        return this;
+    }
 
     public OneClickExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
         this.jwtTokenGenerator = jwtTokenGenerator;
@@ -84,10 +85,10 @@ public class OneClickExtensionLoginFilterConfigurer<H extends HttpSecurityBuilde
                 : getBeanOrNull(applicationContext, OneClickJustAuthUserDetailsService.class);
         Assert.notNull(oneClickUserDetailsService, "oneClickUserDetailsService is required");
 
-		OneClickLoginService oneClickLoginService = this.oneClickLoginService != null
-			? this.oneClickLoginService
-			: getBeanOrNull(applicationContext, OneClickLoginService.class);
-		Assert.notNull(oneClickLoginService, "oneClickLoginService is required");
+        OneClickLoginService oneClickLoginService = this.oneClickLoginService != null
+                ? this.oneClickLoginService
+                : getBeanOrNull(applicationContext, OneClickLoginService.class);
+        Assert.notNull(oneClickLoginService, "oneClickLoginService is required");
 
         return new OneClickLoginAuthenticationProvider(oneClickUserDetailsService, oneClickLoginService);
     }
@@ -101,11 +102,12 @@ public class OneClickExtensionLoginFilterConfigurer<H extends HttpSecurityBuilde
         Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return (request, response, authException) -> {
-			LogUtils.error("用户认证失败", authException);
-			ResponseUtils.fail(response, authException.getMessage());
-		};
-	}
+
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return (request, response, authException) -> {
+            LogUtils.error("用户认证失败", authException);
+            ResponseUtils.fail(response, authException.getMessage());
+        };
+    }
 }

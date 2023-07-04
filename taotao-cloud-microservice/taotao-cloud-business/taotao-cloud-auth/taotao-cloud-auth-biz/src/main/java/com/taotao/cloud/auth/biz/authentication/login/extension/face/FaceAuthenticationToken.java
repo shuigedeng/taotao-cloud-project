@@ -16,17 +16,16 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.face;
 
+import java.io.Serial;
+import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
-import java.io.Serial;
-import java.util.Collection;
-
 public class FaceAuthenticationToken extends AbstractAuthenticationToken {
 
     @Serial
-	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private final Object principal;
 
@@ -54,16 +53,16 @@ public class FaceAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true);
     }
 
-	public static FaceAuthenticationToken unauthenticated(Object principal) {
-		return new FaceAuthenticationToken(principal);
-	}
+    public static FaceAuthenticationToken unauthenticated(Object principal) {
+        return new FaceAuthenticationToken(principal);
+    }
 
-	public static FaceAuthenticationToken authenticated(Object principal,
-																	   Collection<? extends GrantedAuthority> authorities) {
-		return new FaceAuthenticationToken(principal, authorities);
-	}
+    public static FaceAuthenticationToken authenticated(
+            Object principal, Collection<? extends GrantedAuthority> authorities) {
+        return new FaceAuthenticationToken(principal, authorities);
+    }
 
-	@Override
+    @Override
     public Object getCredentials() {
         return null;
     }

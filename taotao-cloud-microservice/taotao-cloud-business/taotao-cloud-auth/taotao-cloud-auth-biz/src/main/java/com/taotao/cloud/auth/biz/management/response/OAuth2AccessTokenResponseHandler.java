@@ -1,34 +1,25 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * 
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package com.taotao.cloud.auth.biz.management.response;
 
+import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
+
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
-import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
@@ -36,14 +27,16 @@ import com.taotao.cloud.security.springsecurity.core.definition.domain.Principal
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.http.HttpInputMessage;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.GenericHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -61,17 +54,10 @@ import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import java.io.IOException;
-import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
-
 /**
  * <p>Description: 自定义 Security 认证成功处理器 </p>
  *
- * 
+ *
  * @date : 2022/2/25 16:53
  */
 public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHandler {
@@ -88,9 +74,11 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(
+            HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+            throws IOException, ServletException {
 
-       log.info("[Herodotus] |- OAuth2 authentication success for [{}]", request.getRequestURI());
+        log.info("OAuth2 authentication success for [{}]", request.getRequestURI());
 
         OAuth2AccessTokenAuthenticationToken accessTokenAuthentication =
                 (OAuth2AccessTokenAuthenticationToken) authentication;
@@ -99,10 +87,9 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
         OAuth2RefreshToken refreshToken = accessTokenAuthentication.getRefreshToken();
         Map<String, Object> additionalParameters = accessTokenAuthentication.getAdditionalParameters();
 
-        OAuth2AccessTokenResponse.Builder builder =
-                OAuth2AccessTokenResponse.withToken(accessToken.getTokenValue())
-                        .tokenType(accessToken.getTokenType())
-                        .scopes(accessToken.getScopes());
+        OAuth2AccessTokenResponse.Builder builder = OAuth2AccessTokenResponse.withToken(accessToken.getTokenValue())
+                .tokenType(accessToken.getTokenType())
+                .scopes(accessToken.getScopes());
         if (accessToken.getIssuedAt() != null && accessToken.getExpiresAt() != null) {
             builder.expiresIn(ChronoUnit.SECONDS.between(accessToken.getIssuedAt(), accessToken.getExpiresAt()));
         }
@@ -124,48 +111,49 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
                 parameters.put(BaseConstants.OPEN_ID, encryptData);
                 builder.additionalParameters(parameters);
             } else {
-               log.info("[Herodotus] |- OAuth2 authentication can not get use info.");
+                log.info("OAuth2 authentication can not get use info.");
             }
         }
 
         OAuth2AccessTokenResponse accessTokenResponse = builder.build();
         ServletServerHttpResponse httpResponse = new ServletServerHttpResponse(response);
 
-		//this.write(request, response);
-		//
+        // this.write(request, response);
+        //
         this.accessTokenHttpResponseConverter.write(accessTokenResponse, null, httpResponse);
     }
 
-	private final GenericHttpMessageConverter<Object> jsonMessageConverter = new GsonHttpMessageConverter();
-	private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> accessTokenResponseConverter = new DefaultMapOAuth2AccessTokenResponseConverter();
-	private final Converter<OAuth2AccessTokenResponse, Map<String, Object>> accessTokenResponseParametersConverter = new DefaultOAuth2AccessTokenResponseMapConverter();
+    private final GenericHttpMessageConverter<Object> jsonMessageConverter = new GsonHttpMessageConverter();
+    private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> accessTokenResponseConverter =
+            new DefaultMapOAuth2AccessTokenResponseConverter();
+    private final Converter<OAuth2AccessTokenResponse, Map<String, Object>> accessTokenResponseParametersConverter =
+            new DefaultOAuth2AccessTokenResponseMapConverter();
 
-	protected void write(
-		HttpServletRequest request,
-													 HttpServletResponse httpResponse ) throws HttpMessageNotReadableException {
-		try {
-			Map<String, Object> tokenResponseParameters = (Map<String, Object>) this.jsonMessageConverter
-				.read(STRING_OBJECT_MAP.getType(), null, new ServletServerHttpRequest(request));
-			OAuth2AccessTokenResponse tokenResponse =  this.accessTokenResponseConverter.convert(tokenResponseParameters);
-			Map<String, Object> tokenResponseData = this.accessTokenResponseParametersConverter
-				.convert(tokenResponse);
-			ResponseUtils.success(httpResponse, tokenResponseData);
-		}
-		catch (Exception ex) {
-			throw new HttpMessageNotReadableException(
-				"An error occurred reading the OAuth 2.0 Access Token Response: " + ex.getMessage(), ex,
-				new ServletServerHttpRequest(request));
-		}
-
-	}
-
-
+    protected void write(HttpServletRequest request, HttpServletResponse httpResponse)
+            throws HttpMessageNotReadableException {
+        try {
+            Map<String, Object> tokenResponseParameters = (Map<String, Object>) this.jsonMessageConverter.read(
+                    STRING_OBJECT_MAP.getType(), null, new ServletServerHttpRequest(request));
+            OAuth2AccessTokenResponse tokenResponse =
+                    this.accessTokenResponseConverter.convert(tokenResponseParameters);
+            Map<String, Object> tokenResponseData = this.accessTokenResponseParametersConverter.convert(tokenResponse);
+            ResponseUtils.success(httpResponse, tokenResponseData);
+        } catch (Exception ex) {
+            throw new HttpMessageNotReadableException(
+                    "An error occurred reading the OAuth 2.0 Access Token Response: " + ex.getMessage(),
+                    ex,
+                    new ServletServerHttpRequest(request));
+        }
+    }
 
     private boolean isHerodotusUserInfoPattern(String sessionId, Object details) {
-        return StringUtils.isNotBlank(sessionId) && ObjectUtils.isNotEmpty(details) && details instanceof PrincipalDetails;
+        return StringUtils.isNotBlank(sessionId)
+                && ObjectUtils.isNotEmpty(details)
+                && details instanceof PrincipalDetails;
     }
 
     private boolean isOidcUserInfoPattern(Map<String, Object> additionalParameters) {
-        return MapUtils.isNotEmpty(additionalParameters) && additionalParameters.containsKey(OidcParameterNames.ID_TOKEN);
+        return MapUtils.isNotEmpty(additionalParameters)
+                && additionalParameters.containsKey(OidcParameterNames.ID_TOKEN);
     }
 }

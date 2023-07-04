@@ -116,23 +116,25 @@ public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthentica
         return this.captchaParameter;
     }
 
-	public String getTypeParameter() {
-		return typeParameter;
-	}
+    public String getTypeParameter() {
+        return typeParameter;
+    }
 
-	public void setTypeParameter(String typeParameter) {
-		this.typeParameter = typeParameter;
-	}
+    public void setTypeParameter(String typeParameter) {
+        this.typeParameter = typeParameter;
+    }
 
-	public Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> getPhoneAuthenticationTokenConverter() {
-		return phoneAuthenticationTokenConverter;
-	}
+    public Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken>
+            getPhoneAuthenticationTokenConverter() {
+        return phoneAuthenticationTokenConverter;
+    }
 
-	public void setPhoneAuthenticationTokenConverter(Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> phoneAuthenticationTokenConverter) {
-		this.phoneAuthenticationTokenConverter = phoneAuthenticationTokenConverter;
-	}
+    public void setPhoneAuthenticationTokenConverter(
+            Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> phoneAuthenticationTokenConverter) {
+        this.phoneAuthenticationTokenConverter = phoneAuthenticationTokenConverter;
+    }
 
-	public boolean isPostOnly() {
-		return postOnly;
-	}
+    public boolean isPostOnly() {
+        return postOnly;
+    }
 }

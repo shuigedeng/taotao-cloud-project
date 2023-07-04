@@ -19,6 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.login.form.phone;
 import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneService;
 import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractAuthenticationProvider;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -33,21 +34,21 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
-import java.util.Collection;
-
 /** 手机号码+短信 登录 */
-public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAuthenticationProvider implements  InitializingBean, MessageSourceAware {
+public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAuthenticationProvider
+        implements InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private final Oauth2FormPhoneUserDetailsService oauth2FormPhoneUserDetailsService;
     private final Oauth2FormPhoneService oauth2FormPhoneService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public Oauth2FormPhoneLoginAuthenticationProvider(Oauth2FormPhoneUserDetailsService oauth2FormPhoneUserDetailsService, Oauth2FormPhoneService oauth2FormPhoneService) {
+    public Oauth2FormPhoneLoginAuthenticationProvider(
+            Oauth2FormPhoneUserDetailsService oauth2FormPhoneUserDetailsService,
+            Oauth2FormPhoneService oauth2FormPhoneService) {
         this.oauth2FormPhoneUserDetailsService = oauth2FormPhoneUserDetailsService;
         this.oauth2FormPhoneService = oauth2FormPhoneService;
     }
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -57,7 +58,8 @@ public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAu
                 () -> messages.getMessage(
                         "CaptchaAuthenticationProvider.onlySupports", "Only CaptchaAuthenticationToken is supported"));
 
-        Oauth2FormPhoneLoginAuthenticationToken unAuthenticationToken = (Oauth2FormPhoneLoginAuthenticationToken) authentication;
+        Oauth2FormPhoneLoginAuthenticationToken unAuthenticationToken =
+                (Oauth2FormPhoneLoginAuthenticationToken) authentication;
 
         String phone = unAuthenticationToken.getName();
         String rawCode = (String) unAuthenticationToken.getCredentials();
@@ -108,7 +110,8 @@ public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAu
             captcha = (String) accountAuthenticationToken.getCredentials();
         }
 
-        Oauth2FormPhoneLoginAuthenticationToken authenticationToken = new Oauth2FormPhoneLoginAuthenticationToken(user, captcha, type, authorities);
+        Oauth2FormPhoneLoginAuthenticationToken authenticationToken =
+                new Oauth2FormPhoneLoginAuthenticationToken(user, captcha, type, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

@@ -1,31 +1,24 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
  *
- * Dante Engine licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * 
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Dante Engine 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 
- * 6.若您的项目无法满足以上几点，可申请商业授权
  */
+
 package com.taotao.cloud.auth.biz.authentication.utils;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import java.util.Map;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
@@ -44,8 +37,6 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
-
 /**
  * <p>Description: OAuth 2.0 Configurers 工具方法类</p>
  * <p>
@@ -53,16 +44,16 @@ import java.util.Map;
  * <p>
  * 代码内容与原包代码基本一致。
  *
- * 
+ *
  * @date : 2022/2/25 9:57
  */
 public final class OAuth2ConfigurerUtils {
 
-    private OAuth2ConfigurerUtils() {
-    }
+    private OAuth2ConfigurerUtils() {}
 
     public static RegisteredClientRepository getRegisteredClientRepository(HttpSecurity httpSecurity) {
-        RegisteredClientRepository registeredClientRepository = httpSecurity.getSharedObject(RegisteredClientRepository.class);
+        RegisteredClientRepository registeredClientRepository =
+                httpSecurity.getSharedObject(RegisteredClientRepository.class);
         if (registeredClientRepository == null) {
             registeredClientRepository = getBean(httpSecurity, RegisteredClientRepository.class);
             httpSecurity.setSharedObject(RegisteredClientRepository.class, registeredClientRepository);
@@ -71,7 +62,8 @@ public final class OAuth2ConfigurerUtils {
     }
 
     public static OAuth2AuthorizationService getAuthorizationService(HttpSecurity httpSecurity) {
-        OAuth2AuthorizationService authorizationService = httpSecurity.getSharedObject(OAuth2AuthorizationService.class);
+        OAuth2AuthorizationService authorizationService =
+                httpSecurity.getSharedObject(OAuth2AuthorizationService.class);
         if (authorizationService == null) {
             authorizationService = getOptionalBean(httpSecurity, OAuth2AuthorizationService.class);
             if (authorizationService == null) {
@@ -83,7 +75,8 @@ public final class OAuth2ConfigurerUtils {
     }
 
     public static OAuth2AuthorizationConsentService getAuthorizationConsentService(HttpSecurity httpSecurity) {
-        OAuth2AuthorizationConsentService authorizationConsentService = httpSecurity.getSharedObject(OAuth2AuthorizationConsentService.class);
+        OAuth2AuthorizationConsentService authorizationConsentService =
+                httpSecurity.getSharedObject(OAuth2AuthorizationConsentService.class);
         if (authorizationConsentService == null) {
             authorizationConsentService = getOptionalBean(httpSecurity, OAuth2AuthorizationConsentService.class);
             if (authorizationConsentService == null) {
@@ -96,13 +89,15 @@ public final class OAuth2ConfigurerUtils {
 
     @SuppressWarnings("unchecked")
     public static OAuth2TokenGenerator<? extends OAuth2Token> getTokenGenerator(HttpSecurity httpSecurity) {
-        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = httpSecurity.getSharedObject(OAuth2TokenGenerator.class);
+        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+                httpSecurity.getSharedObject(OAuth2TokenGenerator.class);
         if (tokenGenerator == null) {
             tokenGenerator = getOptionalBean(httpSecurity, OAuth2TokenGenerator.class);
             if (tokenGenerator == null) {
                 JwtGenerator jwtGenerator = getJwtGenerator(httpSecurity);
                 OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-                OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer = getAccessTokenCustomizer(httpSecurity);
+                OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer =
+                        getAccessTokenCustomizer(httpSecurity);
                 if (accessTokenCustomizer != null) {
                     accessTokenGenerator.setAccessTokenCustomizer(accessTokenCustomizer);
                 }
@@ -111,8 +106,7 @@ public final class OAuth2ConfigurerUtils {
                     tokenGenerator = new DelegatingOAuth2TokenGenerator(
                             jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
                 } else {
-                    tokenGenerator = new DelegatingOAuth2TokenGenerator(
-                            accessTokenGenerator, refreshTokenGenerator);
+                    tokenGenerator = new DelegatingOAuth2TokenGenerator(accessTokenGenerator, refreshTokenGenerator);
                 }
             }
             httpSecurity.setSharedObject(OAuth2TokenGenerator.class, tokenGenerator);
@@ -167,17 +161,20 @@ public final class OAuth2ConfigurerUtils {
     }
 
     private static OAuth2TokenCustomizer<JwtEncodingContext> getJwtCustomizer(HttpSecurity httpSecurity) {
-        ResolvableType type = ResolvableType.forClassWithGenerics(OAuth2TokenCustomizer.class, JwtEncodingContext.class);
+        ResolvableType type =
+                ResolvableType.forClassWithGenerics(OAuth2TokenCustomizer.class, JwtEncodingContext.class);
         return getOptionalBean(httpSecurity, type);
     }
 
     private static OAuth2TokenCustomizer<OAuth2TokenClaimsContext> getAccessTokenCustomizer(HttpSecurity httpSecurity) {
-        ResolvableType type = ResolvableType.forClassWithGenerics(OAuth2TokenCustomizer.class, OAuth2TokenClaimsContext.class);
+        ResolvableType type =
+                ResolvableType.forClassWithGenerics(OAuth2TokenCustomizer.class, OAuth2TokenClaimsContext.class);
         return getOptionalBean(httpSecurity, type);
     }
 
     public static AuthorizationServerSettings getAuthorizationServerSettings(HttpSecurity httpSecurity) {
-        AuthorizationServerSettings authorizationServerSettings = httpSecurity.getSharedObject(AuthorizationServerSettings.class);
+        AuthorizationServerSettings authorizationServerSettings =
+                httpSecurity.getSharedObject(AuthorizationServerSettings.class);
         if (authorizationServerSettings == null) {
             authorizationServerSettings = getBean(httpSecurity, AuthorizationServerSettings.class);
             httpSecurity.setSharedObject(AuthorizationServerSettings.class, authorizationServerSettings);
@@ -206,9 +203,11 @@ public final class OAuth2ConfigurerUtils {
         Map<String, T> beansMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(
                 httpSecurity.getSharedObject(ApplicationContext.class), type);
         if (beansMap.size() > 1) {
-            throw new NoUniqueBeanDefinitionException(type, beansMap.size(),
-                    "Expected single matching bean of type '" + type.getName() + "' but found " +
-                            beansMap.size() + ": " + StringUtils.collectionToCommaDelimitedString(beansMap.keySet()));
+            throw new NoUniqueBeanDefinitionException(
+                    type,
+                    beansMap.size(),
+                    "Expected single matching bean of type '" + type.getName() + "' but found " + beansMap.size() + ": "
+                            + StringUtils.collectionToCommaDelimitedString(beansMap.keySet()));
         }
         return (!beansMap.isEmpty() ? beansMap.values().iterator().next() : null);
     }
@@ -222,5 +221,4 @@ public final class OAuth2ConfigurerUtils {
         }
         return names.length == 1 ? (T) context.getBean(names[0]) : null;
     }
-
 }

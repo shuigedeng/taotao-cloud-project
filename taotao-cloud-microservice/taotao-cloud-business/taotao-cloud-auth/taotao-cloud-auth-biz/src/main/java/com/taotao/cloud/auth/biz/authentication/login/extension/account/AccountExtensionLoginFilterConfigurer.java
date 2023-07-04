@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.account;
 
-import com.taotao.cloud.auth.biz.authentication.jwt.JwtTokenGenerator;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.*;
 import com.taotao.cloud.auth.biz.authentication.login.extension.account.service.AccountUserDetailsService;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +37,10 @@ import org.springframework.util.Assert;
  */
 public class AccountExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
-								H, AccountExtensionLoginFilterConfigurer<H>, AccountAuthenticationFilter, ExtensionLoginFilterSecurityConfigurer<H>> {
+                H,
+                AccountExtensionLoginFilterConfigurer<H>,
+                AccountAuthenticationFilter,
+                ExtensionLoginFilterSecurityConfigurer<H>> {
 
     private AccountUserDetailsService accountUserDetailsService;
     private JwtTokenGenerator jwtTokenGenerator;
@@ -46,7 +49,8 @@ public class AccountExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder
         super(securityConfigurer, new AccountAuthenticationFilter(), "/login/account");
     }
 
-    public AccountExtensionLoginFilterConfigurer<H> accountUserDetailsService(AccountUserDetailsService accountUserDetailsService) {
+    public AccountExtensionLoginFilterConfigurer<H> accountUserDetailsService(
+            AccountUserDetailsService accountUserDetailsService) {
         this.accountUserDetailsService = accountUserDetailsService;
         return this;
     }
@@ -83,8 +87,8 @@ public class AccountExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder
         return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
     }
 
-	@Override
-	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-		return new JsonExtensionLoginAuthenticationFailureHandler();
-	}
+    @Override
+    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+        return new JsonExtensionLoginAuthenticationFailureHandler();
+    }
 }

@@ -16,13 +16,12 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
+import java.util.Map;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.endpoint.DefaultMapOAuth2AccessTokenResponseConverter;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-
-import java.util.Map;
 
 /** 兼容微信token接口返回转换的工具，扩展了{@link DefaultMapOAuth2AccessTokenResponseConverter} */
 public class SocialDelegateMapOAuth2AccessTokenResponseConverter

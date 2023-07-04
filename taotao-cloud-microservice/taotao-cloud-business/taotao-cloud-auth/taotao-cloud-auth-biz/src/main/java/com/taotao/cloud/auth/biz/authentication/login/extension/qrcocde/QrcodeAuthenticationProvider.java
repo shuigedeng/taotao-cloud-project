@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service.QrcodeService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service.QrcodeUserDetailsService;
+import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -31,8 +32,6 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
-
-import java.util.Collection;
 
 /** 用户+密码+认证码 登录 */
 public class QrcodeAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
