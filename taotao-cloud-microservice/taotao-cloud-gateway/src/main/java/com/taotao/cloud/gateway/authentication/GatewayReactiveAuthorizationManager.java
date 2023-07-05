@@ -18,9 +18,19 @@ package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
+import com.taotao.cloud.security.springsecurity.core.utils.WebUtils;
+import com.taotao.cloud.security.springsecurity.definition.SecurityConfigAttribute;
+import com.taotao.cloud.security.springsecurity.definition.SecurityRequest;
+import com.taotao.cloud.security.springsecurity.definition.SecurityRequestMatcher;
+import com.taotao.cloud.security.springsecurity.processor.SecurityMatcherConfigurer;
+import com.taotao.cloud.security.springsecurity.processor.SecurityMetadataSourceStorage;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
@@ -31,8 +41,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 权限认证管理器
+ * // 验证通过则返回：AuthorizationDecision(true)
+ *     // 验证失败则返回：AuthorizationDecision(false)
  *
  * @author shuigedeng
  * @version 2022.03
@@ -43,12 +59,63 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
 
 	@Autowired
 	private RedisRepository redisRepository;
+	@Autowired
+	private SecurityMatcherConfigurer securityMatcherConfigurer;
+	@Autowired
+	private SecurityMetadataSourceStorage securityMetadataSourceStorage;
 
 	@Override
 	public Mono<AuthorizationDecision> check(Mono<Authentication> authentication,
 											 AuthorizationContext authorizationContext) {
 		return authentication
 			.map(auth -> {
+				final ServerWebExchange serverWebExchange = authorizationContext.getExchange();
+
+				String url = serverWebExchange.getRequest().getPath().toString();
+				String method = serverWebExchange.getRequest().getMethod().name();
+
+				if (WebUtils.isPathMatch(securityMatcherConfigurer.getPermitAllList(), url)) {
+					LogUtils.info("Is white list resource : [{}], Passed!", url);
+					return new AuthorizationDecision(true);
+				}
+
+				if (WebUtils.isPathMatch(securityMatcherConfigurer.getHasAuthenticatedList(), url)) {
+					LogUtils.info("Is has authenticated resource : [{}]", url);
+					return new AuthorizationDecision(auth.isAuthenticated());
+				}
+
+				List<SecurityConfigAttribute> configAttributes = findConfigAttribute(url, method, serverWebExchange);
+				if (CollectionUtils.isEmpty(configAttributes)) {
+					LogUtils.info("NO PRIVILEGES : [{}].", url);
+
+					if (!securityMatcherConfigurer.getAuthorizationProperties().getStrict()) {
+						if (auth instanceof AnonymousAuthenticationToken anonymousAuthenticationToken) {
+							LogUtils.info("anonymousAuthenticationToken : {}", url);
+							return new AuthorizationDecision(false);
+						}
+
+						if (auth.isAuthenticated()) {
+							LogUtils.info("Request is authenticated: [{}].", url);
+							return new AuthorizationDecision(true);
+						}
+					}
+
+					return new AuthorizationDecision(false);
+				}
+
+				for (SecurityConfigAttribute configAttribute : configAttributes) {
+					//WebExpressionAuthorizationManager webExpressionAuthorizationManager =
+					//	new WebExpressionAuthorizationManager(configAttribute.getAttribute());
+					//AuthorizationDecision decision = webExpressionAuthorizationManager.check(auth, authorizationContext);
+					//if (decision.isGranted()) {
+					//	//LogUtils.info("Request [{}] is authorized!", object.getRequest().getRequestURI());
+					//	return decision;
+					//}
+				}
+
+				//return new AuthorizationDecision(false);
+
+
 				if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
 					Jwt jwt = jwtAuthenticationToken.getToken();
 					String kid = (String) jwt.getHeaders().get("kid");
@@ -70,5 +137,45 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
 				return new AuthorizationDecision(true);
 			})
 			.defaultIfEmpty(new AuthorizationDecision(false));
+	}
+
+
+	/**
+	 * 找到配置属性
+	 *
+	 * @param url     url
+	 * @param method  方法
+	 * @param request 请求
+	 * @return {@link List }<{@link SecurityConfigAttribute }>
+	 * @since 2023-07-04 10:00:31
+	 */
+	private List<SecurityConfigAttribute> findConfigAttribute(String url, String method, ServerWebExchange request) {
+		LogUtils.info("Current Request is : [{}] - [{}]", url, method);
+
+		List<SecurityConfigAttribute> configAttributes =
+			this.securityMetadataSourceStorage.getConfigAttribute(url, method);
+		if (CollectionUtils.isNotEmpty(configAttributes)) {
+			LogUtils.info("Get configAttributes from local storage for : [{}] - [{}]", url, method);
+			return configAttributes;
+		} else {
+			LinkedHashMap<SecurityRequest, List<SecurityConfigAttribute>> compatible =
+				this.securityMetadataSourceStorage.getCompatible();
+			if (MapUtils.isNotEmpty(compatible)) {
+				// 支持含有**通配符的路径搜索
+				for (Map.Entry<SecurityRequest, List<SecurityConfigAttribute>> entry : compatible.entrySet()) {
+					SecurityRequestMatcher requestMatcher = new SecurityRequestMatcher(entry.getKey());
+
+					SecurityRequest securityRequest = new SecurityRequest();
+
+					//todo 需要修改
+					//if (requestMatcher.matches(request)) {
+					//	LogUtils.info("Request match the wildcard [{}] - [{}]", entry.getKey(), entry.getValue());
+					//	return entry.getValue();
+					//}
+				}
+			}
+		}
+
+		return null;
 	}
 }

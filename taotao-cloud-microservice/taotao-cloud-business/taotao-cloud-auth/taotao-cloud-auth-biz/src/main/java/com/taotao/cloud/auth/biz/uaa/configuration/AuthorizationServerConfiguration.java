@@ -43,7 +43,7 @@ import com.taotao.cloud.common.utils.io.ResourceUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
 import com.taotao.cloud.security.springsecurity.core.enums.Certificate;
 import com.taotao.cloud.security.springsecurity.customizer.SecurityTokenStrategyConfigurer;
-import com.taotao.cloud.security.springsecurity.properties.EndpointProperties;
+import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2AuthorizationProperties;
 import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
@@ -272,6 +272,7 @@ public class AuthorizationServerConfiguration {
 		throws NoSuchAlgorithmException {
 		OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
 		KeyPair keyPair = null;
+
 		if (jwk.getCertificate() == Certificate.CUSTOM) {
 			try {
 				Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
@@ -284,7 +285,6 @@ public class AuthorizationServerConfiguration {
 			} catch (IOException e) {
 				log.error("Read custom certificate under resource folder error!", e);
 			}
-
 		} else {
 			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 			keyPairGenerator.initialize(2048);
@@ -324,7 +324,7 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
-	public AuthorizationServerSettings authorizationServerSettings(EndpointProperties endpointProperties) {
+	public AuthorizationServerSettings authorizationServerSettings(OAuth2EndpointProperties endpointProperties) {
 		return AuthorizationServerSettings.builder()
 			.issuer(endpointProperties.getIssuerUri())
 			.authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())

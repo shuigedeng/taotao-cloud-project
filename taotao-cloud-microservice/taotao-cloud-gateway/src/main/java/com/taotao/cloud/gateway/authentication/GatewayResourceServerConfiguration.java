@@ -16,43 +16,26 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
-import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
-import com.alibaba.cloud.nacos.NacosServiceManager;
-import com.alibaba.nacos.api.naming.listener.NamingEvent;
-import com.alibaba.nacos.api.naming.pojo.Instance;
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.support.function.FuncUtil;
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
-import org.dromara.hutool.core.text.StrUtil;
-import org.springframework.beans.factory.InitializingBean;
+import com.taotao.cloud.security.springsecurity.core.enums.Target;
+import com.taotao.cloud.security.springsecurity.properties.OAuth2AuthorizationProperties;
+import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
-import org.springframework.security.oauth2.jwt.JwtValidators;
-import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
-import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
+import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.server.authentication.ServerBearerTokenAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
-import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 资源服务器配置
@@ -72,31 +55,20 @@ public class GatewayResourceServerConfiguration {
 
 	@Autowired
 	private GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
-
 	@Autowired
 	private SecurityProperties securityProperties;
+	@Autowired
+	private OAuth2EndpointProperties endpointProperties;
+	@Autowired
+	private OAuth2ResourceServerProperties resourceServerProperties;
+	@Autowired
+	private ReactiveJwtDecoder jwtDecoder;
+	@Autowired
+	private OAuth2AuthorizationProperties authorizationProperties;
 
 	@Bean
-	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-		ServerAuthenticationEntryPoint serverAuthenticationEntryPoint = (exchange, e) -> {
-			LogUtils.error(e, "user authentication error : {}", e.getMessage());
-
-			if (e instanceof InvalidBearerTokenException) {
-				return ResponseUtils.fail(exchange, "无效的token");
-			}
-
-			if (e instanceof InvalidTokenException) {
-				return ResponseUtils.fail(exchange, e.getMessage());
-			}
-
-			return ResponseUtils.fail(exchange, ResultEnum.UNAUTHORIZED);
-		};
-
-		ServerAccessDeniedHandler serverAccessDeniedHandler = (exchange, e) -> {
-			LogUtils.error(e, "user access denied error : {}", e.getMessage());
-			return ResponseUtils.fail(exchange, ResultEnum.FORBIDDEN);
-		};
-
+	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http,
+															ReactiveJwtDecoder jwtDecoder) {
 		// ServerBearerTokenAuthenticationConverter serverBearerTokenAuthenticationConverter =
 		//	new ServerBearerTokenAuthenticationConverter();
 		// serverBearerTokenAuthenticationConverter.setAllowUriQueryParameter(true);
@@ -106,11 +78,9 @@ public class GatewayResourceServerConfiguration {
 		// authenticationWebFilter
 		//	.setServerAuthenticationConverter(serverBearerTokenAuthenticationConverter);
 		// authenticationWebFilter.setAuthenticationFailureHandler(
-		//	new ServerAuthenticationEntryPointFailureHandler(serverAuthenticationEntryPoint));
+		//	new ServerAuthenticationEntryPointFailureHandler(new JsonServerAuthenticationEntryPoint()));
 		// authenticationWebFilter
 		//	.setAuthenticationSuccessHandler(new CustomServerAuthenticationSuccessHandler());
-
-		List<String> ignoreUrl = securityProperties.getIgnoreUrl();
 
 		http.csrf(ServerHttpSecurity.CsrfSpec::disable)
 			.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
@@ -118,111 +88,83 @@ public class GatewayResourceServerConfiguration {
 				headerCustomizer
 					.frameOptions(ServerHttpSecurity.HeaderSpec.FrameOptionsSpec::disable);
 			})
-			.authorizeExchange((authorizeExchangeCustomizer) -> {
+			.csrf(ServerHttpSecurity.CsrfSpec::disable)
+			.formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+			.cors(ServerHttpSecurity.CorsSpec::disable)
+			.logout(ServerHttpSecurity.LogoutSpec::disable)
+
+			.authorizeExchange(authorizeExchangeCustomizer -> {
+				permitAllUrls(authorizeExchangeCustomizer);
+
 				authorizeExchangeCustomizer
-					.pathMatchers(ignoreUrl.toArray(new String[ignoreUrl.size()]))
-					.permitAll()
-					.pathMatchers(HttpMethod.OPTIONS)
-					.permitAll()
-					.matchers(EndpointRequest.toAnyEndpoint())
-					.permitAll()
 					.anyExchange()
 					.access(gatewayReactiveAuthorizationManager);
 			})
 			// .addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
 			.exceptionHandling((exceptionHandlingCustomizer) -> {
 				exceptionHandlingCustomizer
-					.authenticationEntryPoint(serverAuthenticationEntryPoint)
-					.accessDeniedHandler(serverAccessDeniedHandler);
+					.authenticationEntryPoint(new JsonServerAuthenticationEntryPoint())
+					.accessDeniedHandler(new JsonServerAccessDeniedHandler());
 			})
-			.oauth2ResourceServer(oauth2ResourceServerCustomizer ->
-				oauth2ResourceServerCustomizer
-					.accessDeniedHandler(serverAccessDeniedHandler)
-					.authenticationEntryPoint(serverAuthenticationEntryPoint)
-					.bearerTokenConverter(exchange -> {
-						ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver = new ServerBearerTokenAuthenticationConverter();
-						defaultBearerTokenResolver.setAllowUriQueryParameter(true);
-						return defaultBearerTokenResolver.convert(exchange);
-					})
-					.jwt(jwt -> jwt.jwtDecoder(jwtDecoder()))
-			);
+			.oauth2ResourceServer(this::from);
 		return http.build();
 	}
 
-	@Autowired(required = false)
-	private DiscoveryClient discoveryClient;
 
-	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri:#{null}}")
-	private String jwkSetUri;
+	public ServerHttpSecurity.OAuth2ResourceServerSpec from(ServerHttpSecurity.OAuth2ResourceServerSpec oAuth2ResourceServerSpec) {
+		if (isRemoteValidate()) {
+			ReactiveSecurityOpaqueTokenIntrospector opaqueTokenIntrospector =
+				new ReactiveSecurityOpaqueTokenIntrospector(endpointProperties, resourceServerProperties);
 
-	@Bean
-	public ReactiveJwtDecoder jwtDecoder() {
-		if (Objects.nonNull(discoveryClient)) {
-			jwkSetUri = discoveryClient.getServices().stream()
-				.filter(s -> s.contains(ServiceName.TAOTAO_CLOUD_AUTH))
-				.flatMap(s -> discoveryClient.getInstances(s).stream())
-				.map(instance ->
-					String.format("http://%s:%s" + "/oauth2/jwks", instance.getHost(), instance.getPort()))
-				.findFirst()
-				.orElse(jwkSetUri);
+			oAuth2ResourceServerSpec
+				.opaqueToken(opaqueTokenCustomizer -> {
+					opaqueTokenCustomizer.introspector(opaqueTokenIntrospector);
+				})
+				.accessDeniedHandler(new JsonServerAccessDeniedHandler())
+				.authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
+		} else {
+			oAuth2ResourceServerSpec
+				.jwt(jwtCustomizer -> {
+					jwtCustomizer
+						.jwtDecoder(this.jwtDecoder)
+						.jwtAuthenticationConverter(new ReactiveJwtAuthenticationConverter());
+					//.jwtAuthenticationConverter(jwtAuthenticationConverter());
+				})
+				.bearerTokenConverter(exchange -> {
+					ServerBearerTokenAuthenticationConverter defaultBearerTokenResolver = new ServerBearerTokenAuthenticationConverter();
+					defaultBearerTokenResolver.setAllowUriQueryParameter(true);
+					return defaultBearerTokenResolver.convert(exchange);
+				})
+				.accessDeniedHandler(new JsonServerAccessDeniedHandler())
+				.authenticationEntryPoint(new JsonServerAuthenticationEntryPoint());
 		}
-
-		NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder = NimbusReactiveJwtDecoder.withJwkSetUri(
-				FuncUtil.predicate(jwkSetUri, StrUtil::isBlank, "http://127.0.0.1:33336/oauth2/jwks"))
-			.jwsAlgorithm(SignatureAlgorithm.RS256)
-			.build();
-
-		// String issuerUri = null;
-		// Supplier<OAuth2TokenValidator<Jwt>> defaultValidator = (issuerUri != null)
-		//	? () -> JwtValidators.createDefaultWithIssuer(issuerUri) : JwtValidators::createDefault;
-		// nimbusReactiveJwtDecoder.setJwtValidator(defaultValidator.get());
-
-		nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-		return nimbusReactiveJwtDecoder;
-
-		// return NimbusReactiveJwtDecoder
-		//	.withJwkSetUri(FuncUtil.predicate(jwkSetUri, StrUtil::isBlank,
-		//		"http://127.0.0.1:33336/oauth2/jwks"))
-		//	.build();
+		return oAuth2ResourceServerSpec;
 	}
 
-	@Configuration
-	@ConditionalOnNacosDiscoveryEnabled
-	public static class NacosServiceListenerWithAuth implements InitializingBean {
-
-		@Autowired
-		private NacosServiceManager nacosServiceManager;
-
-		@Autowired
-		private NacosDiscoveryProperties properties;
-
-		@Override
-		public void afterPropertiesSet() throws Exception {
-			nacosServiceManager
-				.getNamingService()
-				.subscribe(
-					ServiceName.TAOTAO_CLOUD_AUTH,
-					this.properties.getGroup(),
-					List.of(this.properties.getClusterName()),
-					event -> {
-						if (event instanceof NamingEvent) {
-							List<Instance> instances = ((NamingEvent) event).getInstances();
-							if (instances.isEmpty()) {
-								return;
-							}
-							Instance instance = instances.get(0);
-							String jwkSetUri = String.format(
-								"http://%s:%s" + "/oauth2/jwks", instance.getIp(), instance.getPort());
-
-							NimbusReactiveJwtDecoder nimbusReactiveJwtDecoder =
-								NimbusReactiveJwtDecoder.withJwkSetUri(jwkSetUri)
-									.jwsAlgorithm(SignatureAlgorithm.RS256)
-									.build();
-							nimbusReactiveJwtDecoder.setJwtValidator(JwtValidators.createDefault());
-							ContextUtils.destroySingletonBean("reactiveJwtDecoder");
-							ContextUtils.registerSingletonBean("reactiveJwtDecoder", nimbusReactiveJwtDecoder);
-						}
-					});
-		}
+	/**
+	 * 远程验证
+	 *
+	 * @return boolean
+	 * @since 2023-07-04 09:58:49
+	 */
+	private boolean isRemoteValidate() {
+		return this.authorizationProperties.getValidate() == Target.REMOTE;
 	}
+
+	private void permitAllUrls(ServerHttpSecurity.AuthorizeExchangeSpec authorizeExchangeSpec) {
+		List<String> permitAllUrls = securityProperties.getIgnoreUrl();
+
+		permitAllUrls.forEach(url -> authorizeExchangeSpec.pathMatchers(url).permitAll());
+
+		authorizeExchangeSpec
+			.pathMatchers(permitAllUrls.toArray(new String[permitAllUrls.size()]))
+			.permitAll()
+			.pathMatchers(HttpMethod.OPTIONS)
+			.permitAll()
+			.matchers(EndpointRequest.toAnyEndpoint())
+			.permitAll();
+
+		LogUtils.info("permit all urls: {}", permitAllUrls.toString());
+	}
+
 }

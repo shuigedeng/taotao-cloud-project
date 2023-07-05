@@ -35,7 +35,12 @@ public class AccountAuthenticationToken extends AbstractAuthenticationToken {
     @Serial
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
+	//principal：能唯一标识用户身份的属性，一个用户可以有多个principal
+	//如登录的唯一标识，用户可以使用用户名或手机或邮箱进行登录，这些principal是让别人知道的
     private final Object principal;
+	//credential：凭证，用户才知道的，简单的说就是密码
+	//如：手机开锁，可以使用屏幕密码也可以使用人脸识别，屏幕密码和人脸是你个人（用户）才拥有的；
+	//principals 和 credentials 组合就是用户名 / 密码了。
     private String password;
     private String type;
 

@@ -20,6 +20,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -106,7 +108,7 @@ public class EmailAuthenticationFilter extends AbstractAuthenticationProcessingF
     private void checkEmailCode(String emailCode) {
         // 实际当中请从 Redis 中获取
         String verifyCode = "123456";
-        if (StringUtils.isEmpty(verifyCode)) {
+        if (StrUtil.isEmpty(verifyCode)) {
             throw new AuthenticationServiceException("请重新申请验证码!");
         }
         if (!verifyCode.equalsIgnoreCase(emailCode)) {

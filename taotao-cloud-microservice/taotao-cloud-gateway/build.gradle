@@ -6,6 +6,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-useragent"
 
+    implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
@@ -13,6 +15,7 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
     //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
     //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
+
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
 
@@ -23,14 +26,6 @@ dependencies {
     }
 
     implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin'
-
-//    implementation "org.springframework.boot:spring-boot-starter-security"
-//    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-//    implementation "org.springframework.security:spring-security-oauth2-jose"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
-    //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.31"
 
     implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
@@ -52,9 +47,9 @@ dependencies {
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"
     implementation "commons-fileupload:commons-fileupload:1.5"
-    implementation "commons-io:commons-io:2.12.0"
+    implementation "commons-io:commons-io:2.13.0"
 
-    implementation "org.webjars:webjars-locator-core:0.52"
+    implementation "org.webjars:webjars-locator-core:0.53"
 
     //网关限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-spring-gateway
     //implementation "com.eeeffff.limiter:ip-limiter-core-spring-gateway:1.1.3"

@@ -140,7 +140,7 @@ public class SysUserService {
             sysUser.setAvatar(avatar);
         }
 
-        sysUser.setPassword(SecurityUtils.encrypt("herodotus-cloud"));
+        sysUser.setPassword(SecurityUtils.encrypt("taotao-cloud"));
 
         return register(sysUser, AccountType.getAccountType(socialUserDetails.getSource()));
     }
