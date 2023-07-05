@@ -20,26 +20,42 @@ import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.SecurityUser;
 import org.dromara.hutool.core.collection.CollUtil;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * 认证成功处理类
+ * 登录认证成功处理类 (网关目前不支持登录 现在此类无用)
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/4/29 22:10
  */
+@Component
 public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenticationSuccessHandler {
 
     @Override
     public Mono<Void> onAuthenticationSuccess(WebFilterExchange webFilterExchange, Authentication authentication) {
+//		UserDetails user = (UserDetails) authentication.getPrincipal();
+//
+//		Map<String, Object> tokenInfo = new HashMap<>();
+//		tokenInfo.put("USER_NAME", user.getUsername());
+//		tokenInfo.put("AUTHORITIES", user.getAuthorities());
+//
+//		ServerHttpResponse response = exchange.getExchange().getResponse();
+//		exchange.getExchange().getRequest().mutate().header("X-AUTHENTICATION-TOKEN", JSONObject.toJSONString(tokenInfo));
+//
+//		ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<>(tokenInfo, HttpStatus.OK);
+//		return response.writeWith(Mono.just(response.bufferFactory().wrap(JSON.toJSONBytes(responseEntity))));
+
         MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
         Object principal = authentication.getPrincipal();
 

@@ -29,7 +29,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
-    implementation 'org.springframework.session:spring-session-data-redis:3.1.0'
+    implementation 'org.springframework.session:spring-session-data-redis:3.1.1'
 
     implementation 'com.github.binarywang:weixin-java-mp:4.5.1.B'
     implementation 'com.github.binarywang:weixin-java-miniapp:4.5.1.B'

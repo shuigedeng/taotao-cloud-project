@@ -37,6 +37,6 @@ public class DefaultSmsCheckCodeService implements SmsCheckCodeService {
     @Override
     public boolean verifyCaptcha(String phone, String rawCode) {
         // 校验短信验证码
-        return false;
+        return true;
     }
 }

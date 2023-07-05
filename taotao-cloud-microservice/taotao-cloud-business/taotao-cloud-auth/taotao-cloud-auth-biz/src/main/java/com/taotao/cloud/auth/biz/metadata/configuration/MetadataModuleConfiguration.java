@@ -23,34 +23,37 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.auth.biz.uaa.processor;
+package com.taotao.cloud.auth.biz.metadata.configuration;
 
-
-import com.taotao.cloud.auth.biz.management.compliance.event.AccountStatusChanger;
-import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.security.springsecurity.event.LocalChangeUserStatusEvent;
-import com.taotao.cloud.security.springsecurity.event.RemoteChangeUserStatusEvent;
-import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
- * <p>Description: 用户状态变更处理器 </p>
+ * <p>Description: UpmsRest配置类 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/7/10 17:25
+ * @date : 2021/1/5 11:58
  */
-public class HerodotusAccountStatusChanger implements AccountStatusChanger {
-    @Override
-    public String getDestinationServiceName() {
-        return "taotao-cloud-sys";
+@Configuration(proxyBeanMethods = false)
+//@ComponentScan(basePackages = {
+//        "cn.herodotus.dante.module.metadata.processor",
+//        "cn.herodotus.dante.module.metadata.listener",
+//})
+//@Import({
+//        SupplierUpmsRestConfiguration.class
+//})
+public class MetadataModuleConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(MetadataModuleConfiguration.class);
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- SDK [Metadata Module] Auto Configure.");
     }
 
-    @Override
-    public void postLocalProcess(UserStatus data) {
-        ContextUtils.getApplicationContext().publishEvent(new LocalChangeUserStatusEvent(data));
-    }
 
-    @Override
-    public void postRemoteProcess(String data, String originService, String destinationService) {
-		ContextUtils.getApplicationContext().publishEvent(new RemoteChangeUserStatusEvent(data));
-    }
 }

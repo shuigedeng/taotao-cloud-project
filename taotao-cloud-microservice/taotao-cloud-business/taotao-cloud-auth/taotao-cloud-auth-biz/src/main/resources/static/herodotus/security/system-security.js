@@ -1,12 +1,4 @@
-/*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
- *
- * Project Name: herodotus-cloud
- * Module Name: herodotus-engine-oauth
- * File Name: system-security.js
- * Author: gengwei.zheng
- * Date: 2021/05/08 07:24:08
- */
+
 
 $.SECURITY = {
     informations: function () {

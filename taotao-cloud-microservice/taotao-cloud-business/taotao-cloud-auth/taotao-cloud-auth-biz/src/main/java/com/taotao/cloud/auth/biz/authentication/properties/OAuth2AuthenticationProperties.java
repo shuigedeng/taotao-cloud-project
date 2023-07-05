@@ -34,6 +34,8 @@ import org.springframework.security.web.authentication.ui.DefaultLoginPageGenera
 @ConfigurationProperties(prefix = OAuth2Constants.PROPERTY_OAUTH2_AUTHENTICATION)
 public class OAuth2AuthenticationProperties {
 
+	public static final String PREFIX = "taotao.cloud.security.oauth2.authentication";
+
     /**
      * 开启登录失败限制
      */

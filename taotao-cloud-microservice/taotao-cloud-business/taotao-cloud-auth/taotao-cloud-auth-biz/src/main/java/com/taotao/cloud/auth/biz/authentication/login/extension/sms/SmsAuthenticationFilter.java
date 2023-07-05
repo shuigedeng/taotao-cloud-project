@@ -32,15 +32,15 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     public static final String SPRING_SECURITY_FORM_PHONE_KEY = "phone";
 
-    public static final String SPRING_SECURITY_FORM_CAPTCHA_KEY = "captcha";
+    public static final String SPRING_SECURITY_FORM_CODE_KEY = "code";
 
     public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
 
     private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
-            new AntPathRequestMatcher("/login/phone", "POST");
+            new AntPathRequestMatcher("/login/sms", "POST");
 
     private String phoneParameter = SPRING_SECURITY_FORM_PHONE_KEY;
-    private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
+    private String codeParameter = SPRING_SECURITY_FORM_CODE_KEY;
     private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
     private Converter<HttpServletRequest, SmsAuthenticationToken> captchaAuthenticationTokenConverter;
@@ -75,13 +75,13 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
             String phone = request.getParameter(this.phoneParameter);
             phone = (phone != null) ? phone.trim() : "";
 
-            String captcha = request.getParameter(this.captchaParameter);
-            captcha = (captcha != null) ? captcha.trim() : "";
+            String code = request.getParameter(this.codeParameter);
+			code = (code != null) ? code.trim() : "";
 
             String type = request.getParameter(this.typeParameter);
             type = (type != null) ? type.trim() : "";
 
-            return new SmsAuthenticationToken(phone, captcha, type);
+            return new SmsAuthenticationToken(phone, code, type);
         };
     }
 
@@ -94,9 +94,9 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
         this.phoneParameter = phoneParameter;
     }
 
-    public void setCaptchaParameter(String captchaParameter) {
-        Assert.hasText(captchaParameter, "Password parameter must not be empty or null");
-        this.captchaParameter = captchaParameter;
+    public void setCodeParameter(String codeParameter) {
+        Assert.hasText(codeParameter, "codeParameter must not be empty or null");
+        this.codeParameter = codeParameter;
     }
 
     public void setConverter(Converter<HttpServletRequest, SmsAuthenticationToken> converter) {
@@ -112,7 +112,7 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
         return this.phoneParameter;
     }
 
-    public final String getCaptchaParameter() {
-        return this.captchaParameter;
+    public final String getCodeParameter() {
+        return this.codeParameter;
     }
 }

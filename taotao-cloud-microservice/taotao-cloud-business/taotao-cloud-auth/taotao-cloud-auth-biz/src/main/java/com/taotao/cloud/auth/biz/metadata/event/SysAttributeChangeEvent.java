@@ -23,26 +23,26 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.auth.biz.management.compliance.event;
+package com.taotao.cloud.auth.biz.metadata.event;
 
-
+import com.taotao.cloud.auth.biz.strategy.user.SysAttribute;
 import com.taotao.cloud.security.springsecurity.event.LocalApplicationEvent;
 
 import java.time.Clock;
 
 /**
- * <p>Description: 从账户状态缓存中释放账号事件 </p>
+ * <p>Description: SysSecurityAttribute实体数据变更事件 </p>
  *
  * @author : gengwei.zheng
- * @date : 2023/5/14 14:26
+ * @date : 2021/8/4 22:18
  */
-public class AccountReleaseFromCacheEvent extends LocalApplicationEvent<String> {
+public class SysAttributeChangeEvent extends LocalApplicationEvent<SysAttribute> {
 
-	public AccountReleaseFromCacheEvent(String data) {
-		super(data);
-	}
+    public SysAttributeChangeEvent(SysAttribute data) {
+        super(data);
+    }
 
-	public AccountReleaseFromCacheEvent(String data, Clock clock) {
-		super(data, clock);
-	}
+    public SysAttributeChangeEvent(SysAttribute data, Clock clock) {
+        super(data, clock);
+    }
 }

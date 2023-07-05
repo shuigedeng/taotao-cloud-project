@@ -169,7 +169,7 @@ public class GrayConfiguration {
             return Mono.just(new EmptyResponse());
         }
 
-        private Request createRequest(ServerWebExchange exchange) {
+        private Request<HttpHeaders> createRequest(ServerWebExchange exchange) {
             HttpHeaders headers = exchange.getRequest().getHeaders();
             return new DefaultRequest<>(headers);
         }

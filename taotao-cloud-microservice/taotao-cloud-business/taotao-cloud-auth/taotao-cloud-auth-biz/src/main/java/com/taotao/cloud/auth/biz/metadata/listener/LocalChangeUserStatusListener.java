@@ -23,34 +23,44 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.auth.biz.uaa.processor;
+package com.taotao.cloud.auth.biz.metadata.listener;
 
-
-import com.taotao.cloud.auth.biz.management.compliance.event.AccountStatusChanger;
-import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
+import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
 import com.taotao.cloud.security.springsecurity.event.LocalChangeUserStatusEvent;
-import com.taotao.cloud.security.springsecurity.event.RemoteChangeUserStatusEvent;
 import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
+import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: 用户状态变更处理器 </p>
+ * <p>Description: 本地用户状态变更监听 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/7/10 17:25
+ * @date : 2022/7/10 17:59
  */
-public class HerodotusAccountStatusChanger implements AccountStatusChanger {
-    @Override
-    public String getDestinationServiceName() {
-        return "taotao-cloud-sys";
-    }
+@Component
+public class LocalChangeUserStatusListener implements ApplicationListener<LocalChangeUserStatusEvent> {
 
-    @Override
-    public void postLocalProcess(UserStatus data) {
-        ContextUtils.getApplicationContext().publishEvent(new LocalChangeUserStatusEvent(data));
-    }
+	private static final Logger log = LoggerFactory.getLogger(LocalChangeUserStatusListener.class);
+	private final SysUserService sysUserService;
 
-    @Override
-    public void postRemoteProcess(String data, String originService, String destinationService) {
-		ContextUtils.getApplicationContext().publishEvent(new RemoteChangeUserStatusEvent(data));
-    }
+	public LocalChangeUserStatusListener(SysUserService sysUserService) {
+		this.sysUserService = sysUserService;
+	}
+
+	@Override
+	public void onApplicationEvent(LocalChangeUserStatusEvent event) {
+		log.info("[Herodotus] |- Change user status gather LOCAL listener, response event!");
+
+		UserStatus userStatus = event.getData();
+		if (ObjectUtils.isNotEmpty(userStatus)) {
+			DataItemStatus dataItemStatus = DataItemStatus.valueOf(userStatus.getStatus());
+			if (ObjectUtils.isNotEmpty(dataItemStatus)) {
+				sysUserService.changeStatus(userStatus.getUserId(), dataItemStatus);
+			}
+		}
+	}
 }

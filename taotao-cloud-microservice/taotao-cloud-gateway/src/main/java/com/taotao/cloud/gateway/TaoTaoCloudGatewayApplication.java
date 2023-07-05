@@ -17,6 +17,7 @@
 package com.taotao.cloud.gateway;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -31,6 +32,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 2022.03
  * @since 2020/10/10 09:06
  */
+@EnableSecurityConfiguration
 @SpringBootApplication
 @EnableDiscoveryClient
 public class TaoTaoCloudGatewayApplication {
