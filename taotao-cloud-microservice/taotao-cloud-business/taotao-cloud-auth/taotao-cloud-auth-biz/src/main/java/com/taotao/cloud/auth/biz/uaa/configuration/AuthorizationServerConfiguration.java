@@ -162,11 +162,13 @@ public class AuthorizationServerConfiguration {
 				new OAuth2DeviceCodeAuthenticationConverter(),
 				new OAuth2DeviceAuthorizationRequestAuthenticationConverter(),
 				new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
-				new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
-			tokenEndpointCustomizer.accessTokenRequestConverter(authenticationConverter);
-			tokenEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-			tokenEndpointCustomizer.accessTokenResponseHandler(
-				new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
+				new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor))
+			);
+
+			tokenEndpointCustomizer
+				.accessTokenRequestConverter(authenticationConverter)
+				.errorResponseHandler(errorResponseHandler)
+				.accessTokenResponseHandler(new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
 		});
 		authorizationServerConfigurer.tokenIntrospectionEndpoint(tokenIntrospectionEndpointCustomizer -> {
 			tokenIntrospectionEndpointCustomizer.errorResponseHandler(errorResponseHandler);
@@ -190,6 +192,7 @@ public class AuthorizationServerConfiguration {
 		authorizationServerConfigurer.clientAuthentication(clientAuthenticationCustomizer -> {
 			// 客户端认证添加设备码的converter和provider
 			clientAuthenticationCustomizer
+				.errorResponseHandler(errorResponseHandler)
 				.authenticationConverter(deviceClientAuthenticationConverter)
 				.authenticationProvider(deviceClientAuthenticationProvider)
 				.errorResponseHandler(errorResponseHandler);
