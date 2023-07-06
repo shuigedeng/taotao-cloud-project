@@ -20,6 +20,8 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationConverter;
+import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginUrlConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AuthorizationCodeAuthenticationProvider;
@@ -66,6 +68,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
@@ -121,7 +124,9 @@ public class AuthorizationServerConfiguration {
 		OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
 		OAuth2AuthenticationProperties authenticationProperties,
 		OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
-		OidcClientRegistrationResponseHandler clientRegistrationResponseHandler)
+		OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
+		OAuth2EndpointProperties auth2EndpointProperties,
+		RegisteredClientRepository registeredClientRepository)
 		throws Exception {
 
 		log.info("Core [Authorization Server Security Filter Chain] Auto Configure.");
@@ -152,11 +157,24 @@ public class AuthorizationServerConfiguration {
 		authorizationServerConfigurer.tokenRevocationEndpoint(tokenRevocationEndpointCustomizer -> {
 			tokenRevocationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 		});
+
+		// 新建设备码converter和provider
+		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
+			new DeviceClientAuthenticationConverter(
+				auth2EndpointProperties.getDeviceAuthorizationEndpoint());
+		DeviceClientAuthenticationProvider deviceClientAuthenticationProvider =
+			new DeviceClientAuthenticationProvider(registeredClientRepository);
 		authorizationServerConfigurer.clientAuthentication(clientAuthenticationCustomizer -> {
+			// 客户端认证添加设备码的converter和provider
+			clientAuthenticationCustomizer
+				.authenticationConverter(deviceClientAuthenticationConverter)
+				.authenticationProvider(deviceClientAuthenticationProvider);
+
 			clientAuthenticationCustomizer.errorResponseHandler(errorResponseHandler);
 		});
 		authorizationServerConfigurer.authorizationEndpoint(authorizationEndpointCustomizer -> {
 			authorizationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
+
 			authorizationEndpointCustomizer.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
 		});
 		authorizationServerConfigurer.deviceAuthorizationEndpoint(deviceAuthorizationEndpointCustomizer -> {
@@ -324,19 +342,19 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
-	public AuthorizationServerSettings authorizationServerSettings(OAuth2EndpointProperties endpointProperties) {
+	public AuthorizationServerSettings authorizationServerSettings(OAuth2EndpointProperties auth2EndpointProperties) {
 		return AuthorizationServerSettings.builder()
-			.issuer(endpointProperties.getIssuerUri())
-			.authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
-			.deviceAuthorizationEndpoint(endpointProperties.getDeviceAuthorizationEndpoint())
-			.deviceVerificationEndpoint(endpointProperties.getDeviceVerificationEndpoint())
-			.tokenEndpoint(endpointProperties.getAccessTokenEndpoint())
-			.tokenIntrospectionEndpoint(endpointProperties.getTokenIntrospectionEndpoint())
-			.tokenRevocationEndpoint(endpointProperties.getTokenRevocationEndpoint())
-			.jwkSetEndpoint(endpointProperties.getJwkSetEndpoint())
-			.oidcLogoutEndpoint(endpointProperties.getOidcLogoutEndpoint())
-			.oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
-			.oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
+			.issuer(auth2EndpointProperties.getIssuerUri())
+			.authorizationEndpoint(auth2EndpointProperties.getAuthorizationEndpoint())
+			.deviceAuthorizationEndpoint(auth2EndpointProperties.getDeviceAuthorizationEndpoint())
+			.deviceVerificationEndpoint(auth2EndpointProperties.getDeviceVerificationEndpoint())
+			.tokenEndpoint(auth2EndpointProperties.getAccessTokenEndpoint())
+			.tokenIntrospectionEndpoint(auth2EndpointProperties.getTokenIntrospectionEndpoint())
+			.tokenRevocationEndpoint(auth2EndpointProperties.getTokenRevocationEndpoint())
+			.jwkSetEndpoint(auth2EndpointProperties.getJwkSetEndpoint())
+			.oidcLogoutEndpoint(auth2EndpointProperties.getOidcLogoutEndpoint())
+			.oidcUserInfoEndpoint(auth2EndpointProperties.getOidcUserInfoEndpoint())
+			.oidcClientRegistrationEndpoint(auth2EndpointProperties.getOidcClientRegistrationEndpoint())
 			.build();
 	}
 }
