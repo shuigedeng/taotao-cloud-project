@@ -41,13 +41,18 @@ import com.taotao.cloud.auth.biz.management.response.OAuth2AccessTokenResponseHa
 import com.taotao.cloud.auth.biz.management.response.OAuth2AuthenticationFailureResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OAuth2DeviceVerificationResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OidcClientRegistrationResponseHandler;
+import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.io.ResourceUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
 import com.taotao.cloud.security.springsecurity.core.enums.Certificate;
+import com.taotao.cloud.security.springsecurity.core.response.SecurityLoginUrlAuthenticationEntryPoint;
 import com.taotao.cloud.security.springsecurity.customizer.SecurityTokenStrategyConfigurer;
-import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2AuthorizationProperties;
+import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,17 +62,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
+import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationCodeRequestAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
@@ -78,17 +87,25 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.web.authentication.*;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationConverter;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.util.StringUtils;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -157,6 +174,12 @@ public class AuthorizationServerConfiguration {
 		authorizationServerConfigurer.tokenRevocationEndpoint(tokenRevocationEndpointCustomizer -> {
 			tokenRevocationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 		});
+		authorizationServerConfigurer.authorizationEndpoint(authorizationEndpointCustomizer -> {
+			authorizationEndpointCustomizer
+				.authorizationResponseHandler(this::sendAuthorizationResponse)
+				.errorResponseHandler(errorResponseHandler)
+				.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
+		});
 
 		// 新建设备码converter和provider
 		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
@@ -168,15 +191,10 @@ public class AuthorizationServerConfiguration {
 			// 客户端认证添加设备码的converter和provider
 			clientAuthenticationCustomizer
 				.authenticationConverter(deviceClientAuthenticationConverter)
-				.authenticationProvider(deviceClientAuthenticationProvider);
-
-			clientAuthenticationCustomizer.errorResponseHandler(errorResponseHandler);
+				.authenticationProvider(deviceClientAuthenticationProvider)
+				.errorResponseHandler(errorResponseHandler);
 		});
-		authorizationServerConfigurer.authorizationEndpoint(authorizationEndpointCustomizer -> {
-			authorizationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-
-			authorizationEndpointCustomizer.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
-		});
+		//开启设备请求相关端点
 		authorizationServerConfigurer.deviceAuthorizationEndpoint(deviceAuthorizationEndpointCustomizer -> {
 			deviceAuthorizationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 			deviceAuthorizationEndpointCustomizer.verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
@@ -186,13 +204,15 @@ public class AuthorizationServerConfiguration {
 			deviceVerificationEndpointCustomizer.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
 			deviceVerificationEndpointCustomizer.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
 		});
-
 		// 开启OpenId Connect 1.0相关端点
 		authorizationServerConfigurer.oidc(oidcCustomizer -> {
 			oidcCustomizer.clientRegistrationEndpoint(clientRegistrationEndpointCustomizer -> {
 				clientRegistrationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 				clientRegistrationEndpointCustomizer.clientRegistrationResponseHandler(
 					clientRegistrationResponseHandler);
+			});
+			oidcCustomizer.logoutEndpoint(logoutEndpointCustomizer -> {
+				//logoutEndpointCustomizer.logoutResponseHandler()
 			});
 			oidcCustomizer.userInfoEndpoint(userInfoEndpointCustomizer -> {
 				userInfoEndpointCustomizer.userInfoMapper(new HerodotusOidcUserInfoMapper());
@@ -278,12 +298,26 @@ public class AuthorizationServerConfiguration {
 		socialCredentialsAuthenticationProvider.setSessionRegistry(sessionRegistry);
 		httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
+		httpSecurity.exceptionHandling(exceptionHandlingCustomizer -> {
+			exceptionHandlingCustomizer.defaultAuthenticationEntryPointFor(
+				new SecurityLoginUrlAuthenticationEntryPoint("/login"),
+				createRequestMatcher()
+			);
+		});
+
 		return httpSecurity
 			.formLogin(formLoginUrlConfigurer::from)
 			.sessionManagement(Customizer.withDefaults())
 			// .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
 			.build();
 	}
+
+	private static RequestMatcher createRequestMatcher() {
+		MediaTypeRequestMatcher requestMatcher = new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
+		requestMatcher.setIgnoredMediaTypes(Set.of(MediaType.ALL));
+		return requestMatcher;
+	}
+
 
 	@Bean
 	public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties)
@@ -356,5 +390,34 @@ public class AuthorizationServerConfiguration {
 			.oidcUserInfoEndpoint(auth2EndpointProperties.getOidcUserInfoEndpoint())
 			.oidcClientRegistrationEndpoint(auth2EndpointProperties.getOidcClientRegistrationEndpoint())
 			.build();
+	}
+
+	private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+	private void sendAuthorizationResponse(HttpServletRequest request, HttpServletResponse response,
+										   Authentication authentication) throws IOException {
+		OAuth2AuthorizationCodeRequestAuthenticationToken authorizationCodeRequestAuthentication =
+			(OAuth2AuthorizationCodeRequestAuthenticationToken) authentication;
+		UriComponentsBuilder uriBuilder = UriComponentsBuilder
+			.fromUriString(authorizationCodeRequestAuthentication.getRedirectUri())
+			.queryParam(OAuth2ParameterNames.CODE, authorizationCodeRequestAuthentication.getAuthorizationCode().getTokenValue());
+		if (StringUtils.hasText(authorizationCodeRequestAuthentication.getState())) {
+			uriBuilder.queryParam(
+				OAuth2ParameterNames.STATE,
+				UriUtils.encode(authorizationCodeRequestAuthentication.getState(), StandardCharsets.UTF_8));
+		}
+		String redirectUri = uriBuilder.build(true).toUriString();
+
+		if (!isAjaxRequest(request)) {
+			// build(true) -> Components are explicitly encoded
+			this.redirectStrategy.sendRedirect(request, response, redirectUri);
+		}
+		ResponseUtils.success(response, Result.success(redirectUri));
+	}
+
+
+	public boolean isAjaxRequest(HttpServletRequest request) {
+		String requestedWith = request.getHeader("x-requested-with");
+		return "XMLHttpRequest".equalsIgnoreCase(requestedWith);
 	}
 }

@@ -44,7 +44,11 @@ public interface RegisteredClientConverter<S extends RegisteredClientDetails> ex
     default RegisteredClient convert(S details) {
         Set<String> clientScopes = getScopes(details);
         ClientSettings clientSettings = getClientSettings(details);
-        TokenSettings tokenSettings = getTokenSettings(details);
+
+		//客服端设置 设置用户需要确认授权
+		//ClientSettings build = ClientSettings.builder().requireAuthorizationConsent(false).build();
+
+		TokenSettings tokenSettings = getTokenSettings(details);
 
         Set<String> clientAuthenticationMethods =
                 StringUtils.commaDelimitedListToSet(details.getClientAuthenticationMethods());
