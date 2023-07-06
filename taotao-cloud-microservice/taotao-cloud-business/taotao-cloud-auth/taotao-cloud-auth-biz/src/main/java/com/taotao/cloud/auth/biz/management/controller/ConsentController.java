@@ -53,7 +53,7 @@ public class ConsentController {
     private final OAuth2ApplicationService applicationService;
     private final OAuth2AuthorizationConsentService authorizationConsentService;
     private final OAuth2ScopeService scopeService;
-    private final OAuth2EndpointProperties endpointProperties;
+    private final OAuth2EndpointProperties oAuth2EndpointProperties;
 
     private Map<String, OAuth2Scope> dictionaries;
 
@@ -61,11 +61,11 @@ public class ConsentController {
             OAuth2ApplicationService applicationService,
             OAuth2AuthorizationConsentService authorizationConsentService,
             OAuth2ScopeService scopeService,
-			OAuth2EndpointProperties endpointProperties) {
+			OAuth2EndpointProperties oAuth2EndpointProperties) {
         this.applicationService = applicationService;
         this.authorizationConsentService = authorizationConsentService;
         this.scopeService = scopeService;
-        this.endpointProperties = endpointProperties;
+        this.oAuth2EndpointProperties = oAuth2EndpointProperties;
         initDictionaries();
     }
 
@@ -127,9 +127,9 @@ public class ConsentController {
         model.addAttribute("logo", application.getLogo());
         model.addAttribute("redirectUri", redirectUris.iterator().next());
         model.addAttribute("userCode", userCode);
-        String action = endpointProperties.getAuthorizationEndpoint();
+        String action = oAuth2EndpointProperties.getAuthorizationEndpoint();
         if (StringUtils.hasText(userCode)) {
-            action = endpointProperties.getDeviceVerificationEndpoint();
+            action = oAuth2EndpointProperties.getDeviceVerificationEndpoint();
         }
         model.addAttribute("action", action);
         return "consent";

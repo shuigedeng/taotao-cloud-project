@@ -23,8 +23,8 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFi
 import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
-import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormCaptchaLoginSecureConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.form.Oauth2FormPhoneLoginSecureConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.form.captcha.OAuth2FormCaptchaLoginHttpConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneLoginHttpConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
@@ -187,10 +187,10 @@ public class DefaultSecurityConfiguration {
                 .wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
                 .httpSecurity()
                 // **************************************oauth2表单登录配置***********************************************
-                .apply(new OAuth2FormCaptchaLoginSecureConfigurer<>(
+                .apply(new OAuth2FormCaptchaLoginHttpConfigurer<>(
                         userDetailsService, authenticationProperties, captchaRendererFactory))
                 .httpSecurity()
-                .apply(new Oauth2FormPhoneLoginSecureConfigurer<>(authenticationProperties));
+                .apply(new Oauth2FormPhoneLoginHttpConfigurer<>(authenticationProperties));
 
         // @formatter:on
 		return httpSecurity.build();

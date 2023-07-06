@@ -28,6 +28,8 @@ public class DefaultOauth2FormOauth2FormPhoneService implements Oauth2FormPhoneS
 
     @Override
     public boolean verifyCaptcha(String phone, String rawCode) {
+
+
         // 校验短信验证码
         return true;
     }

@@ -40,6 +40,7 @@ import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
  */
 @FeignClient(
 	name = ServiceName.TAOTAO_CLOUD_SYS,
+	contextId = "IFeignDictApi",
 	fallbackFactory = FeignDictApiFallback.class)
 public interface IFeignDictApi {
 
@@ -56,7 +57,7 @@ public interface IFeignDictApi {
 			@Update(version = V2022_07, content = "主要修改了配置信息的接口查询", date = "2022-07-01 17:11:55"),
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
-	@FeignRetry
+	@FeignRetry(maxAttempt=  6, backoff = @FeignRetry.Backoff(delay = 500L, maxDelay = 20000L, multiplier = 4))
 	@FeignInner
 	@GetMapping("/sys/feign/dict/code")
 	FeignDictResponse findByCode(@RequestParam(value = "code") String code);
