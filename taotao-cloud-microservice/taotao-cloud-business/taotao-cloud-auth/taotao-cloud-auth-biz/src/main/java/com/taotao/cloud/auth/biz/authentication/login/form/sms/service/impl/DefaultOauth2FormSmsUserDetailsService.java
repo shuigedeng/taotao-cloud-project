@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl;
+package com.taotao.cloud.auth.biz.authentication.login.form.sms.service.impl;
 
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.sms.service.Oauth2FormSmsUserDetailsService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -29,7 +29,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefaultOauth2FormOauth2FormPhoneUserDetailsService implements Oauth2FormPhoneUserDetailsService {
+public class DefaultOauth2FormSmsUserDetailsService implements Oauth2FormSmsUserDetailsService {
 
     @Override
     public UserDetails loadUserByPhone(String phone, String type) throws UsernameNotFoundException {

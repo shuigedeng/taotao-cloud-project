@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl;
+package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service.impl;
 
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneService;
-import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service.QrcodeService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefaultOauth2FormOauth2FormPhoneService implements Oauth2FormPhoneService {
-    @Autowired
-    private IFeignNoticeMessageApi feignNoticeMessageApi;
+public class DefaultQrcodeService implements QrcodeService {
 
     @Override
-    public boolean verifyCaptcha(String phone, String rawCode) {
-
-
-        // 校验短信验证码
-        return true;
+    public boolean verifyQrcode(String qrcode) {
+        return false;
     }
 }

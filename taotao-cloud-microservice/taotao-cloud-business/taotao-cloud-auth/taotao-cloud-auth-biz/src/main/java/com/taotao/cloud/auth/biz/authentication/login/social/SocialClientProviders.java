@@ -40,7 +40,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 /** The enum Client providers. */
 public enum SocialClientProviders {
-    /** wechat-web-login */
+    /** 微信扫码登录 */
     WECHAT_WEB_LOGIN_CLIENT(
             "wechat-web-login",
             SocialClientProviders::oAuth2AuthorizationRequestConsumer,
@@ -111,7 +111,7 @@ public enum SocialClientProviders {
             }),
 
     /**
-     * The Work wechat scan client. <a
+     * 企业微信扫码登录. <a
      * href="https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRET">...</a>
      */
     WORK_WECHAT_SCAN_CLIENT(

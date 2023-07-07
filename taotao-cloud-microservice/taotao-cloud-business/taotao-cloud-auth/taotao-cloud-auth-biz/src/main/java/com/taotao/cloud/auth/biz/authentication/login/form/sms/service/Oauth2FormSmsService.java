@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.extension.qrcocde.service;
+package com.taotao.cloud.auth.biz.authentication.login.form.sms.service;
 
-import org.springframework.stereotype.Service;
+public interface Oauth2FormSmsService {
 
-@Service
-public class DefaultQrcodeService implements QrcodeService {
-
-    @Override
-    public boolean verifyQrcode(String qrcode) {
-        return false;
-    }
+    /**
+     * verify captcha
+     *
+     * @param phone phone
+     * @param rawCode rawCode
+     * @return isVerified
+     */
+    boolean verifyCaptcha(String phone, String rawCode);
 }

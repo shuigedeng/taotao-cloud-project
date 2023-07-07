@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone;
+package com.taotao.cloud.auth.biz.authentication.login.form.sms;
 
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneService;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.Oauth2FormPhoneUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.sms.service.Oauth2FormSmsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.sms.service.Oauth2FormSmsUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractAuthenticationProvider;
 import java.util.Collection;
 import org.springframework.beans.factory.InitializingBean;
@@ -35,39 +35,39 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 /** 手机号码+短信 登录 */
-public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAuthenticationProvider
+public class Oauth2FormSmsLoginAuthenticationProvider extends OAuth2AbstractAuthenticationProvider
         implements InitializingBean, MessageSourceAware {
 
     private final GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-    private final Oauth2FormPhoneUserDetailsService oauth2FormPhoneUserDetailsService;
-    private final Oauth2FormPhoneService oauth2FormPhoneService;
+    private final Oauth2FormSmsUserDetailsService oauth2FormSmsUserDetailsService;
+    private final Oauth2FormSmsService oauth2FormSmsService;
     private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
-    public Oauth2FormPhoneLoginAuthenticationProvider(
-            Oauth2FormPhoneUserDetailsService oauth2FormPhoneUserDetailsService,
-            Oauth2FormPhoneService oauth2FormPhoneService) {
-        this.oauth2FormPhoneUserDetailsService = oauth2FormPhoneUserDetailsService;
-        this.oauth2FormPhoneService = oauth2FormPhoneService;
+    public Oauth2FormSmsLoginAuthenticationProvider(
+            Oauth2FormSmsUserDetailsService oauth2FormSmsUserDetailsService,
+            Oauth2FormSmsService oauth2FormSmsService) {
+        this.oauth2FormSmsUserDetailsService = oauth2FormSmsUserDetailsService;
+        this.oauth2FormSmsService = oauth2FormSmsService;
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         Assert.isInstanceOf(
-                Oauth2FormPhoneLoginAuthenticationToken.class,
+                Oauth2FormSmsLoginAuthenticationToken.class,
                 authentication,
                 () -> messages.getMessage(
                         "CaptchaAuthenticationProvider.onlySupports", "Only CaptchaAuthenticationToken is supported"));
 
-        Oauth2FormPhoneLoginAuthenticationToken unAuthenticationToken =
-                (Oauth2FormPhoneLoginAuthenticationToken) authentication;
+        Oauth2FormSmsLoginAuthenticationToken unAuthenticationToken =
+                (Oauth2FormSmsLoginAuthenticationToken) authentication;
 
         String phone = unAuthenticationToken.getName();
         String rawCode = (String) unAuthenticationToken.getCredentials();
         String type = unAuthenticationToken.getType();
 
         // 验证码校验
-        if (oauth2FormPhoneService.verifyCaptcha(phone, rawCode)) {
-            UserDetails userDetails = oauth2FormPhoneUserDetailsService.loadUserByPhone(phone, type);
+        if (oauth2FormSmsService.verifyCaptcha(phone, rawCode)) {
+            UserDetails userDetails = oauth2FormSmsUserDetailsService.loadUserByPhone(phone, type);
             // TODO 此处省略对UserDetails 的可用性 是否过期  是否锁定 是否失效的检验  建议根据实际情况添加  或者在 UserDetailsService
             // 的实现中处理
             return createSuccessAuthentication(authentication, userDetails);
@@ -78,13 +78,13 @@ public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAu
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return Oauth2FormPhoneLoginAuthenticationToken.class.isAssignableFrom(authentication);
+        return Oauth2FormSmsLoginAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Assert.notNull(oauth2FormPhoneUserDetailsService, "phoneUserDetailsService must not be null");
-        Assert.notNull(oauth2FormPhoneService, "phoneService must not be null");
+        Assert.notNull(oauth2FormSmsUserDetailsService, "phoneUserDetailsService must not be null");
+        Assert.notNull(oauth2FormSmsService, "phoneService must not be null");
     }
 
     @Override
@@ -105,13 +105,13 @@ public class Oauth2FormPhoneLoginAuthenticationProvider extends OAuth2AbstractAu
 
         String type = "";
         String captcha = "";
-        if (authentication instanceof Oauth2FormPhoneLoginAuthenticationToken accountAuthenticationToken) {
+        if (authentication instanceof Oauth2FormSmsLoginAuthenticationToken accountAuthenticationToken) {
             type = accountAuthenticationToken.getType();
             captcha = (String) accountAuthenticationToken.getCredentials();
         }
 
-        Oauth2FormPhoneLoginAuthenticationToken authenticationToken =
-                new Oauth2FormPhoneLoginAuthenticationToken(user, captcha, type, authorities);
+        Oauth2FormSmsLoginAuthenticationToken authenticationToken =
+                new Oauth2FormSmsLoginAuthenticationToken(user, captcha, type, authorities);
         authenticationToken.setDetails(authentication.getDetails());
 
         return authenticationToken;

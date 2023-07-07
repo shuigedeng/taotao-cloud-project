@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone.service;
+package com.taotao.cloud.auth.biz.authentication.login.form.qrcode.service.impl;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.taotao.cloud.auth.biz.authentication.login.form.qrcode.service.OAuth2FormQrcodeService;
+import org.springframework.stereotype.Service;
 
-public interface Oauth2FormPhoneUserDetailsService {
+@Service
+public class DefaultOAuth2FormQrcodeService implements OAuth2FormQrcodeService {
 
-    /**
-     * load user by phone
-     *
-     * @param phone phone
-     * @return userDetails
-     * @throws UsernameNotFoundException not found user
-     */
-    UserDetails loadUserByPhone(String phone, String type) throws UsernameNotFoundException;
+    @Override
+    public boolean verifyQrcode(String qrcode) {
+        return false;
+    }
 }

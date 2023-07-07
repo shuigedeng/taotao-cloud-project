@@ -37,9 +37,6 @@ public class AccountAuthenticationConverter implements Converter<HttpServletRequ
 
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-    /**
-     * @see LoginTypeEnum B_PC_ACCOUNT / C_PC_ACCOUNT
-     */
     private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
     @Override

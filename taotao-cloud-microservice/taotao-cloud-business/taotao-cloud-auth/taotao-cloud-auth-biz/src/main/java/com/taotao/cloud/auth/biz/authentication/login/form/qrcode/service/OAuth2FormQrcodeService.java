@@ -14,16 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone.service;
+package com.taotao.cloud.auth.biz.authentication.login.form.qrcode.service;
 
-public interface Oauth2FormPhoneService {
+public interface OAuth2FormQrcodeService {
 
-    /**
-     * verify captcha
-     *
-     * @param phone phone
-     * @param rawCode rawCode
-     * @return isVerified
-     */
-    boolean verifyCaptcha(String phone, String rawCode);
+    boolean verifyQrcode(String qrcode);
 }

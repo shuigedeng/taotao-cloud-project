@@ -177,6 +177,32 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.18
 
+  fe:
+    image: apache/doris:2.0.0_alpha-fe-x86_64
+    hostname: fe
+    ports:
+      - "8030:8030"
+      - "9030:9030"
+    environment:
+      - FE_SERVERS=fe1:172.11.0.19:9010
+      - FE_ID=1
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.19
+  be:
+    image: apache/doris:2.0.0_alpha-be-x86_64
+    hostname: be
+    ports:
+      - "8040:8040"
+    environment:
+      - FE_SERVERS=fe1:172.11.0.19:9010
+      - BE_ADDR=172.11.0.20:9050
+    depends_on:
+      - fe
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.20
+
   #arthas:
   #  image: hengyunabc/arthas:latest
   #  container_name: pyroscope

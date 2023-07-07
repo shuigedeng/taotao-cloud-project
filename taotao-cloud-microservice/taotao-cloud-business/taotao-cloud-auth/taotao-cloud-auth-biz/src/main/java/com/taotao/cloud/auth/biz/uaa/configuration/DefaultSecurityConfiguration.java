@@ -24,7 +24,7 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.serv
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.form.captcha.OAuth2FormCaptchaLoginHttpConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.Oauth2FormPhoneLoginHttpConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.form.sms.Oauth2FormSmsLoginHttpConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialProviderConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
@@ -181,7 +181,7 @@ public class DefaultSecurityConfiguration {
                 .apply(new SocialProviderConfigurer(socialDelegateClientRegistrationRepository))
                 // 微信网页授权
                 .wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
-                // 企业微信登录
+                // 企业微信扫码登录
                 .workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
                 // 微信扫码登录
                 .wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
@@ -190,7 +190,7 @@ public class DefaultSecurityConfiguration {
                 .apply(new OAuth2FormCaptchaLoginHttpConfigurer<>(
                         userDetailsService, authenticationProperties, captchaRendererFactory))
                 .httpSecurity()
-                .apply(new Oauth2FormPhoneLoginHttpConfigurer<>(authenticationProperties));
+                .apply(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties));
 
         // @formatter:on
 		return httpSecurity.build();
