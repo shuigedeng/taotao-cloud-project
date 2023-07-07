@@ -28,11 +28,11 @@ public class ConfirmInterceptor implements HandlerInterceptor {
     private RedisRepository cacheStore;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-
         String onceToken = request.getHeader("once_token");
         if (StringUtils.isEmpty(onceToken)) {
             return false;
         }
+
         if (StringUtils.isNoneEmpty(onceToken)) {
             String onceTokenKey = CommonUtil.buildOnceTokenKey(onceToken);
             //            String allowedUri = (String) cacheStore.get(onceTokenKey);
@@ -48,6 +48,7 @@ public class ConfirmInterceptor implements HandlerInterceptor {
             if (!StringUtils.equals(uuidFromCache, uuidFromRequest)) {
                 throw new RuntimeException("非法的一次性 token");
             }
+
             // 一次性 token 检查完成后将其删除
             cacheStore.del(onceTokenKey);
         }

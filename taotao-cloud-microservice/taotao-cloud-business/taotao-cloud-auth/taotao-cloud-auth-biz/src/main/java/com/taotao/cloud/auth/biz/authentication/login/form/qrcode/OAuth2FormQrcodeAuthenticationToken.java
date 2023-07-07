@@ -14,32 +14,31 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone;
+package com.taotao.cloud.auth.biz.authentication.login.form.qrcode;
 
-import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
-public class Oauth2FormPhoneLoginAuthenticationToken extends AbstractAuthenticationToken {
+import java.util.Collection;
+
+public class OAuth2FormQrcodeAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     private final Object principal;
-    private String captcha;
-    private String type;
+    private String password;
 
     /**
      * 此构造函数用来初始化未授信凭据.
      *
      * @param principal the principal
-     * @param captcha the captcha
+     * @param password the captcha
      */
-    public Oauth2FormPhoneLoginAuthenticationToken(Object principal, String captcha, String type) {
+    public OAuth2FormQrcodeAuthenticationToken(Object principal, String password) {
         super(null);
         this.principal = principal;
-        this.captcha = captcha;
-        this.type = type;
+        this.password = password;
         setAuthenticated(false);
     }
 
@@ -47,22 +46,21 @@ public class Oauth2FormPhoneLoginAuthenticationToken extends AbstractAuthenticat
      * 此构造函数用来初始化授信凭据.
      *
      * @param principal the principal
-     * @param captcha the captcha
+     * @param password the captcha
      * @param authorities the authorities
      */
-    public Oauth2FormPhoneLoginAuthenticationToken(
-            Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
+    public OAuth2FormQrcodeAuthenticationToken(
+            Object principal, String password, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
-        this.captcha = captcha;
-        this.type = type;
+        this.password = password;
         // must use super, as we override
         super.setAuthenticated(true);
     }
 
     @Override
     public Object getCredentials() {
-        return this.captcha;
+        return this.password;
     }
 
     @Override
@@ -83,20 +81,6 @@ public class Oauth2FormPhoneLoginAuthenticationToken extends AbstractAuthenticat
     @Override
     public void eraseCredentials() {
         super.eraseCredentials();
-        captcha = null;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public static Oauth2FormPhoneLoginAuthenticationToken unauthenticated(
-            Object principal, String captcha, String type) {
-        return new Oauth2FormPhoneLoginAuthenticationToken(principal, captcha, type);
-    }
-
-    public static Oauth2FormPhoneLoginAuthenticationToken authenticated(
-            Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
-        return new Oauth2FormPhoneLoginAuthenticationToken(principal, captcha, type, authorities);
+        password = null;
     }
 }

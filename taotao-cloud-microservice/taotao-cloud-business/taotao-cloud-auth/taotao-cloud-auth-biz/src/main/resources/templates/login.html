@@ -284,9 +284,16 @@
         $('#type').val('123')
         $('#phone').val('234')
         $('#captcha').val('345')
-        //
-        $('#phone-form').submit();
-        // $.http.post("/login/phone", {type: '111', phone: '222', captcha: '333'}, 'json');
+
+        //$('#phone-form').submit();
+        $.http.post("/form/login/phone", {type: '111', phone: '222', captcha: '333'}, 'json')
+            .then(result => {
+                window.location.href = result.data;
+            })
+            .catch(error => {
+                console.log(result)
+                $.information.error(error);
+            });
     }
 
     function loadCaptcha() {

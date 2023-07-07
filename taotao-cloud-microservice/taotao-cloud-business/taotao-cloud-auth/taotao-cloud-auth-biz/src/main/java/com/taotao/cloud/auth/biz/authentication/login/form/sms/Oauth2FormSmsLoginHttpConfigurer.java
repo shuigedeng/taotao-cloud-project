@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone;
+package com.taotao.cloud.auth.biz.authentication.login.form.sms;
 
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginAuthenticationFailureHandler;
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginWebAuthenticationDetailSource;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl.DefaultOauth2FormOauth2FormPhoneService;
-import com.taotao.cloud.auth.biz.authentication.login.form.phone.service.impl.DefaultOauth2FormOauth2FormPhoneUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.sms.service.impl.DefaultOauth2FormSmsService;
+import com.taotao.cloud.auth.biz.authentication.login.form.sms.service.impl.DefaultOauth2FormSmsUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
@@ -36,12 +36,12 @@ import org.springframework.security.web.context.SecurityContextRepository;
  * @version 2023.04
  * @since 2023-06-29 16:38:04
  */
-public class Oauth2FormPhoneLoginHttpConfigurer<H extends HttpSecurityBuilder<H>>
-        extends AbstractHttpConfigurer<Oauth2FormPhoneLoginHttpConfigurer<H>, H> {
+public class Oauth2FormSmsLoginHttpConfigurer<H extends HttpSecurityBuilder<H>>
+        extends AbstractHttpConfigurer<Oauth2FormSmsLoginHttpConfigurer<H>, H> {
 
     private final OAuth2AuthenticationProperties authenticationProperties;
 
-    public Oauth2FormPhoneLoginHttpConfigurer(OAuth2AuthenticationProperties authenticationProperties) {
+    public Oauth2FormSmsLoginHttpConfigurer(OAuth2AuthenticationProperties authenticationProperties) {
         this.authenticationProperties = authenticationProperties;
     }
 
@@ -51,8 +51,8 @@ public class Oauth2FormPhoneLoginHttpConfigurer<H extends HttpSecurityBuilder<H>
         SecurityContextRepository securityContextRepository =
                 httpSecurity.getSharedObject(SecurityContextRepository.class);
 
-        Oauth2FormPhoneLoginAuthenticationFilter filter =
-                new Oauth2FormPhoneLoginAuthenticationFilter(authenticationManager);
+        Oauth2FormSmsLoginAuthenticationFilter filter =
+                new Oauth2FormSmsLoginAuthenticationFilter(authenticationManager);
         filter.setAuthenticationDetailsSource(
                 new OAuth2FormLoginWebAuthenticationDetailSource(authenticationProperties));
 
@@ -60,9 +60,9 @@ public class Oauth2FormPhoneLoginHttpConfigurer<H extends HttpSecurityBuilder<H>
                 new OAuth2FormLoginAuthenticationFailureHandler(getFormLogin().getFailureForwardUrl()));
         filter.setSecurityContextRepository(securityContextRepository);
 
-        Oauth2FormPhoneLoginAuthenticationProvider provider = new Oauth2FormPhoneLoginAuthenticationProvider(
-                new DefaultOauth2FormOauth2FormPhoneUserDetailsService(),
-                new DefaultOauth2FormOauth2FormPhoneService());
+        Oauth2FormSmsLoginAuthenticationProvider provider = new Oauth2FormSmsLoginAuthenticationProvider(
+                new DefaultOauth2FormSmsUserDetailsService(),
+                new DefaultOauth2FormSmsService());
 
         httpSecurity
                 .authenticationProvider(provider)

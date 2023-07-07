@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.qrcode;
+package com.taotao.cloud.auth.biz.authentication.login.form.sms;
 
 import java.util.Collection;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
-public class Oauth2FormQrcodeAuthenticationToken extends AbstractAuthenticationToken {
+public class Oauth2FormSmsLoginAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
@@ -35,7 +35,7 @@ public class Oauth2FormQrcodeAuthenticationToken extends AbstractAuthenticationT
      * @param principal the principal
      * @param captcha the captcha
      */
-    public Oauth2FormQrcodeAuthenticationToken(Object principal, String captcha, String type) {
+    public Oauth2FormSmsLoginAuthenticationToken(Object principal, String captcha, String type) {
         super(null);
         this.principal = principal;
         this.captcha = captcha;
@@ -50,7 +50,7 @@ public class Oauth2FormQrcodeAuthenticationToken extends AbstractAuthenticationT
      * @param captcha the captcha
      * @param authorities the authorities
      */
-    public Oauth2FormQrcodeAuthenticationToken(
+    public Oauth2FormSmsLoginAuthenticationToken(
             Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
@@ -90,12 +90,13 @@ public class Oauth2FormQrcodeAuthenticationToken extends AbstractAuthenticationT
         return type;
     }
 
-    public static Oauth2FormQrcodeAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
-        return new Oauth2FormQrcodeAuthenticationToken(principal, captcha, type);
+    public static Oauth2FormSmsLoginAuthenticationToken unauthenticated(
+            Object principal, String captcha, String type) {
+        return new Oauth2FormSmsLoginAuthenticationToken(principal, captcha, type);
     }
 
-    public static Oauth2FormQrcodeAuthenticationToken authenticated(
+    public static Oauth2FormSmsLoginAuthenticationToken authenticated(
             Object principal, String captcha, String type, Collection<? extends GrantedAuthority> authorities) {
-        return new Oauth2FormQrcodeAuthenticationToken(principal, captcha, type, authorities);
+        return new Oauth2FormSmsLoginAuthenticationToken(principal, captcha, type, authorities);
     }
 }

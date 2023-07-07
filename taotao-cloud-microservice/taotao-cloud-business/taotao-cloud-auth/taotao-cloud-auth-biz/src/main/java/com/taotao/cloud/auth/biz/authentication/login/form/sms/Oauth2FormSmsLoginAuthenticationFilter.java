@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.login.form.phone;
+package com.taotao.cloud.auth.biz.authentication.login.form.sms;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class Oauth2FormSmsLoginAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public static final String SPRING_SECURITY_FORM_PHONE_KEY = "phone";
 
@@ -43,16 +43,16 @@ public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthentica
     private String captchaParameter = SPRING_SECURITY_FORM_CAPTCHA_KEY;
     private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
-    private Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> phoneAuthenticationTokenConverter;
+    private Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken> phoneAuthenticationTokenConverter;
 
     private boolean postOnly = true;
 
-    public Oauth2FormPhoneLoginAuthenticationFilter() {
+    public Oauth2FormSmsLoginAuthenticationFilter() {
         super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
         this.phoneAuthenticationTokenConverter = defaultConverter();
     }
 
-    public Oauth2FormPhoneLoginAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public Oauth2FormSmsLoginAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(DEFAULT_ANT_PATH_REQUEST_MATCHER, authenticationManager);
         this.phoneAuthenticationTokenConverter = defaultConverter();
     }
@@ -64,13 +64,13 @@ public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthentica
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        Oauth2FormPhoneLoginAuthenticationToken authRequest = phoneAuthenticationTokenConverter.convert(request);
+        Oauth2FormSmsLoginAuthenticationToken authRequest = phoneAuthenticationTokenConverter.convert(request);
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
-    private Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> defaultConverter() {
+    private Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken> defaultConverter() {
         return request -> {
             String phone = request.getParameter(this.phoneParameter);
             phone = (phone != null) ? phone.trim() : "";
@@ -81,11 +81,11 @@ public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthentica
             String type = request.getParameter(this.typeParameter);
             type = (type != null) ? type.trim() : "";
 
-            return new Oauth2FormPhoneLoginAuthenticationToken(phone, captcha, type);
+            return new Oauth2FormSmsLoginAuthenticationToken(phone, captcha, type);
         };
     }
 
-    protected void setDetails(HttpServletRequest request, Oauth2FormPhoneLoginAuthenticationToken authRequest) {
+    protected void setDetails(HttpServletRequest request, Oauth2FormSmsLoginAuthenticationToken authRequest) {
         authRequest.setDetails(this.authenticationDetailsSource.buildDetails(request));
     }
 
@@ -99,7 +99,7 @@ public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthentica
         this.captchaParameter = captchaParameter;
     }
 
-    public void setConverter(Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> converter) {
+    public void setConverter(Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken> converter) {
         Assert.notNull(converter, "Converter must not be null");
         this.phoneAuthenticationTokenConverter = converter;
     }
@@ -124,13 +124,13 @@ public class Oauth2FormPhoneLoginAuthenticationFilter extends AbstractAuthentica
         this.typeParameter = typeParameter;
     }
 
-    public Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken>
+    public Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken>
             getPhoneAuthenticationTokenConverter() {
         return phoneAuthenticationTokenConverter;
     }
 
     public void setPhoneAuthenticationTokenConverter(
-            Converter<HttpServletRequest, Oauth2FormPhoneLoginAuthenticationToken> phoneAuthenticationTokenConverter) {
+            Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken> phoneAuthenticationTokenConverter) {
         this.phoneAuthenticationTokenConverter = phoneAuthenticationTokenConverter;
     }
 

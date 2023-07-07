@@ -415,7 +415,7 @@ public class AuthorizationServerConfiguration {
 			// build(true) -> Components are explicitly encoded
 			this.redirectStrategy.sendRedirect(request, response, redirectUri);
 		}
-		ResponseUtils.success(response, Result.success(redirectUri));
+		ResponseUtils.success(response, redirectUri);
 	}
 
 

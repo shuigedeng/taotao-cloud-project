@@ -1324,7 +1324,7 @@ auth:
       app-id: xx
       group-id: xx
       secret-key: xx
-
+      imageType: BASE64
 
 
 herodotus:
