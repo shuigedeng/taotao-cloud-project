@@ -27,8 +27,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * <p>Description: OAuth2 认证信息 </p>
  *
- *
- * @date : 2022/1/22 18:08
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:11:47
  */
 @Entity
 @Table(
@@ -44,383 +45,899 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
         region = OAuth2Constants.REGION_OAUTH2_AUTHORIZATION)
 public class HerodotusAuthorization extends AbstractEntity {
 
-    @Id
+	/**
+	 * id
+	 */
+	@Id
     @HerodotusAuthorizationUuid
     @Column(name = "id", nullable = false, length = 100)
     private String id;
 
-    @Column(name = "registered_client_id", nullable = false, length = 100)
+	/**
+	 * 注册客户端id
+	 */
+	@Column(name = "registered_client_id", nullable = false, length = 100)
     private String registeredClientId;
 
-    @Column(name = "principal_name", nullable = false, length = 200)
+	/**
+	 * 主体名称
+	 */
+	@Column(name = "principal_name", nullable = false, length = 200)
     private String principalName;
 
-    @Column(name = "authorization_grant_type", nullable = false, length = 100)
+	/**
+	 * 授权授权类型
+	 */
+	@Column(name = "authorization_grant_type", nullable = false, length = 100)
     private String authorizationGrantType;
 
-    @Column(name = "authorized_scopes", length = 1000)
+	/**
+	 * 授权范围
+	 */
+	@Column(name = "authorized_scopes", length = 1000)
     private String authorizedScopes;
 
-    @Column(name = "attributes", columnDefinition = "TEXT")
+	/**
+	 * 属性
+	 */
+	@Column(name = "attributes", columnDefinition = "TEXT")
     private String attributes;
 
-    @Column(name = "state", length = 500)
+	/**
+	 * 州
+	 */
+	@Column(name = "state", length = 500)
     private String state;
 
-    @Column(name = "authorization_code_value", columnDefinition = "TEXT")
+	/**
+	 * 授权代码值
+	 */
+	@Column(name = "authorization_code_value", columnDefinition = "TEXT")
     private String authorizationCodeValue;
 
-    @Column(name = "authorization_code_issued_at")
+	/**
+	 * 授权码发布于
+	 */
+	@Column(name = "authorization_code_issued_at")
     private LocalDateTime authorizationCodeIssuedAt;
 
-    @Column(name = "authorization_code_expires_at")
+	/**
+	 * 授权码在
+	 */
+	@Column(name = "authorization_code_expires_at")
     private LocalDateTime authorizationCodeExpiresAt;
 
-    @Column(name = "authorization_code_metadata", columnDefinition = "TEXT")
+	/**
+	 * 授权码元数据
+	 */
+	@Column(name = "authorization_code_metadata", columnDefinition = "TEXT")
     private String authorizationCodeMetadata;
 
-    @Column(name = "access_token_value", columnDefinition = "TEXT")
+	/**
+	 * 访问令牌值
+	 */
+	@Column(name = "access_token_value", columnDefinition = "TEXT")
     private String accessTokenValue;
 
-    @Column(name = "access_token_issued_at")
+	/**
+	 * 访问令牌在
+	 */
+	@Column(name = "access_token_issued_at")
     private LocalDateTime accessTokenIssuedAt;
 
-    @Column(name = "access_token_expires_at")
+	/**
+	 * 访问令牌在
+	 */
+	@Column(name = "access_token_expires_at")
     private LocalDateTime accessTokenExpiresAt;
 
-    @Column(name = "access_token_metadata", columnDefinition = "TEXT")
+	/**
+	 * 访问令牌元数据
+	 */
+	@Column(name = "access_token_metadata", columnDefinition = "TEXT")
     private String accessTokenMetadata;
 
-    @Column(name = "access_token_type", length = 100)
+	/**
+	 * 访问令牌类型
+	 */
+	@Column(name = "access_token_type", length = 100)
     private String accessTokenType;
 
-    @Column(name = "access_token_scopes", length = 1000)
+	/**
+	 * 访问令牌范围
+	 */
+	@Column(name = "access_token_scopes", length = 1000)
     private String accessTokenScopes;
 
-    @Column(name = "oidc_id_token_value", columnDefinition = "TEXT")
+	/**
+	 * oidc id令牌值
+	 */
+	@Column(name = "oidc_id_token_value", columnDefinition = "TEXT")
     private String oidcIdTokenValue;
 
-    @Column(name = "oidc_id_token_issued_at")
+	/**
+	 * oidc id令牌在
+	 */
+	@Column(name = "oidc_id_token_issued_at")
     private LocalDateTime oidcIdTokenIssuedAt;
 
-    @Column(name = "oidc_id_token_expires_at")
+	/**
+	 * oidc id令牌在
+	 */
+	@Column(name = "oidc_id_token_expires_at")
     private LocalDateTime oidcIdTokenExpiresAt;
 
-    @Column(name = "oidc_id_token_metadata", columnDefinition = "TEXT")
+	/**
+	 * oidc id令牌元数据
+	 */
+	@Column(name = "oidc_id_token_metadata", columnDefinition = "TEXT")
     private String oidcIdTokenMetadata;
 
-    @Column(name = "oidc_id_token_claims", length = 2000)
+	/**
+	 * oidc id令牌声明
+	 */
+	@Column(name = "oidc_id_token_claims", length = 2000)
     private String oidcIdTokenClaims;
 
-    @Column(name = "refresh_token_value", columnDefinition = "TEXT")
+	/**
+	 * 刷新令牌值
+	 */
+	@Column(name = "refresh_token_value", columnDefinition = "TEXT")
     private String refreshTokenValue;
 
-    @Column(name = "refresh_token_issued_at")
+	/**
+	 * 刷新在
+	 */
+	@Column(name = "refresh_token_issued_at")
     private LocalDateTime refreshTokenIssuedAt;
 
-    @Column(name = "refresh_token_expires_at")
+	/**
+	 * 刷新令牌在
+	 */
+	@Column(name = "refresh_token_expires_at")
     private LocalDateTime refreshTokenExpiresAt;
 
-    @Column(name = "refresh_token_metadata", columnDefinition = "TEXT")
+	/**
+	 * 刷新令牌元数据
+	 */
+	@Column(name = "refresh_token_metadata", columnDefinition = "TEXT")
     private String refreshTokenMetadata;
 
-    @Column(name = "user_code_value", columnDefinition = "TEXT")
+	/**
+	 * 用户代码值
+	 */
+	@Column(name = "user_code_value", columnDefinition = "TEXT")
     private String userCodeValue;
 
-    @Column(name = "user_code_issued_at")
+	/**
+	 * 用户代码发布于
+	 */
+	@Column(name = "user_code_issued_at")
     private LocalDateTime userCodeIssuedAt;
 
-    @Column(name = "user_code_expires_at")
+	/**
+	 * 用户代码在
+	 */
+	@Column(name = "user_code_expires_at")
     private LocalDateTime userCodeExpiresAt;
 
-    @Column(name = "user_code_metadata", columnDefinition = "TEXT")
+	/**
+	 * 用户代码元数据
+	 */
+	@Column(name = "user_code_metadata", columnDefinition = "TEXT")
     private String userCodeMetadata;
 
-    @Column(name = "device_code_value", columnDefinition = "TEXT")
+	/**
+	 * 设备代码值
+	 */
+	@Column(name = "device_code_value", columnDefinition = "TEXT")
     private String deviceCodeValue;
 
-    @Column(name = "device_code_issued_at")
+	/**
+	 * 设备代码发布于
+	 */
+	@Column(name = "device_code_issued_at")
     private LocalDateTime deviceCodeIssuedAt;
 
-    @Column(name = "device_code_expires_at")
+	/**
+	 * 设备代码在
+	 */
+	@Column(name = "device_code_expires_at")
     private LocalDateTime deviceCodeExpiresAt;
 
-    @Column(name = "device_code_metadata", columnDefinition = "TEXT")
+	/**
+	 * 设备代码元数据
+	 */
+	@Column(name = "device_code_metadata", columnDefinition = "TEXT")
     private String deviceCodeMetadata;
 
-    public String getId() {
+	/**
+	 * 获取id
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:47
+	 */
+	public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+	/**
+	 * 设置id
+	 *
+	 * @param id id
+	 * @since 2023-07-10 17:11:48
+	 */
+	public void setId(String id) {
         this.id = id;
     }
 
-    public String getRegisteredClientId() {
+	/**
+	 * 获取注册客户端id
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:48
+	 */
+	public String getRegisteredClientId() {
         return registeredClientId;
     }
 
-    public void setRegisteredClientId(String registeredClientId) {
+	/**
+	 * 设置注册客户端id
+	 *
+	 * @param registeredClientId 注册客户端id
+	 * @since 2023-07-10 17:11:48
+	 */
+	public void setRegisteredClientId(String registeredClientId) {
         this.registeredClientId = registeredClientId;
     }
 
-    public String getPrincipalName() {
+	/**
+	 * 获取主体名称
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:48
+	 */
+	public String getPrincipalName() {
         return principalName;
     }
 
-    public void setPrincipalName(String principalName) {
+	/**
+	 * 设置主体名称
+	 *
+	 * @param principalName 主体名称
+	 * @since 2023-07-10 17:11:49
+	 */
+	public void setPrincipalName(String principalName) {
         this.principalName = principalName;
     }
 
-    public String getAuthorizationGrantType() {
+	/**
+	 * 获取授权授予类型
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:49
+	 */
+	public String getAuthorizationGrantType() {
         return authorizationGrantType;
     }
 
-    public void setAuthorizationGrantType(String authorizationGrantType) {
+	/**
+	 * 设置授权授权类型
+	 *
+	 * @param authorizationGrantType 授权授权类型
+	 * @since 2023-07-10 17:11:50
+	 */
+	public void setAuthorizationGrantType(String authorizationGrantType) {
         this.authorizationGrantType = authorizationGrantType;
     }
 
-    public String getAuthorizedScopes() {
+	/**
+	 * 获取授权范围
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:50
+	 */
+	public String getAuthorizedScopes() {
         return authorizedScopes;
     }
 
-    public void setAuthorizedScopes(String authorizedScopes) {
+	/**
+	 * 设置授权范围
+	 *
+	 * @param authorizedScopes 授权范围
+	 * @since 2023-07-10 17:11:51
+	 */
+	public void setAuthorizedScopes(String authorizedScopes) {
         this.authorizedScopes = authorizedScopes;
     }
 
-    public String getAttributes() {
+	/**
+	 * 获取属性
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:51
+	 */
+	public String getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(String attributes) {
+	/**
+	 * 设置属性
+	 *
+	 * @param attributes 属性
+	 * @since 2023-07-10 17:11:52
+	 */
+	public void setAttributes(String attributes) {
         this.attributes = attributes;
     }
 
-    public String getState() {
+	/**
+	 * 获取状态
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:52
+	 */
+	public String getState() {
         return state;
     }
 
-    public void setState(String state) {
+	/**
+	 * 设置状态
+	 *
+	 * @param state 州
+	 * @since 2023-07-10 17:11:52
+	 */
+	public void setState(String state) {
         this.state = state;
     }
 
-    public String getAuthorizationCodeValue() {
+	/**
+	 * 获取授权代码值
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:53
+	 */
+	public String getAuthorizationCodeValue() {
         return authorizationCodeValue;
     }
 
-    public void setAuthorizationCodeValue(String authorizationCodeValue) {
+	/**
+	 * 设置授权代码值
+	 *
+	 * @param authorizationCodeValue 授权代码值
+	 * @since 2023-07-10 17:11:53
+	 */
+	public void setAuthorizationCodeValue(String authorizationCodeValue) {
         this.authorizationCodeValue = authorizationCodeValue;
     }
 
-    public LocalDateTime getAuthorizationCodeIssuedAt() {
+	/**
+	 * 获取授权码
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:11:54
+	 */
+	public LocalDateTime getAuthorizationCodeIssuedAt() {
         return authorizationCodeIssuedAt;
     }
 
-    public void setAuthorizationCodeIssuedAt(LocalDateTime authorizationCodeIssuedAt) {
+	/**
+	 * 设置在
+	 *
+	 * @param authorizationCodeIssuedAt 授权码发布于
+	 * @since 2023-07-10 17:11:55
+	 */
+	public void setAuthorizationCodeIssuedAt(LocalDateTime authorizationCodeIssuedAt) {
         this.authorizationCodeIssuedAt = authorizationCodeIssuedAt;
     }
 
-    public LocalDateTime getAuthorizationCodeExpiresAt() {
+	/**
+	 * 获取授权码过期时间为
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:11:55
+	 */
+	public LocalDateTime getAuthorizationCodeExpiresAt() {
         return authorizationCodeExpiresAt;
     }
 
-    public void setAuthorizationCodeExpiresAt(LocalDateTime authorizationCodeExpiresAt) {
+	/**
+	 * 设置授权代码在
+	 *
+	 * @param authorizationCodeExpiresAt 授权码在
+	 * @since 2023-07-10 17:11:56
+	 */
+	public void setAuthorizationCodeExpiresAt(LocalDateTime authorizationCodeExpiresAt) {
         this.authorizationCodeExpiresAt = authorizationCodeExpiresAt;
     }
 
-    public String getAuthorizationCodeMetadata() {
+	/**
+	 * 获取授权码元数据
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:56
+	 */
+	public String getAuthorizationCodeMetadata() {
         return authorizationCodeMetadata;
     }
 
-    public void setAuthorizationCodeMetadata(String authorizationCodeMetadata) {
+	/**
+	 * 设置授权码元数据
+	 *
+	 * @param authorizationCodeMetadata 授权码元数据
+	 * @since 2023-07-10 17:11:57
+	 */
+	public void setAuthorizationCodeMetadata(String authorizationCodeMetadata) {
         this.authorizationCodeMetadata = authorizationCodeMetadata;
     }
 
-    public String getAccessTokenValue() {
+	/**
+	 * 获取访问令牌值
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:11:57
+	 */
+	public String getAccessTokenValue() {
         return accessTokenValue;
     }
 
-    public void setAccessTokenValue(String accessTokenValue) {
+	/**
+	 * 设置访问令牌值
+	 *
+	 * @param accessTokenValue 访问令牌值
+	 * @since 2023-07-10 17:11:58
+	 */
+	public void setAccessTokenValue(String accessTokenValue) {
         this.accessTokenValue = accessTokenValue;
     }
 
-    public LocalDateTime getAccessTokenIssuedAt() {
+	/**
+	 * 获取访问令牌发布于
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:11:58
+	 */
+	public LocalDateTime getAccessTokenIssuedAt() {
         return accessTokenIssuedAt;
     }
 
-    public void setAccessTokenIssuedAt(LocalDateTime accessTokenIssuedAt) {
+	/**
+	 * 设置在
+	 *
+	 * @param accessTokenIssuedAt 访问令牌在
+	 * @since 2023-07-10 17:11:59
+	 */
+	public void setAccessTokenIssuedAt(LocalDateTime accessTokenIssuedAt) {
         this.accessTokenIssuedAt = accessTokenIssuedAt;
     }
 
-    public LocalDateTime getAccessTokenExpiresAt() {
+	/**
+	 * 获取访问令牌在
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:11:59
+	 */
+	public LocalDateTime getAccessTokenExpiresAt() {
         return accessTokenExpiresAt;
     }
 
-    public void setAccessTokenExpiresAt(LocalDateTime accessTokenExpiresAt) {
+	/**
+	 * 设置访问令牌在
+	 *
+	 * @param accessTokenExpiresAt 访问令牌在
+	 * @since 2023-07-10 17:12:00
+	 */
+	public void setAccessTokenExpiresAt(LocalDateTime accessTokenExpiresAt) {
         this.accessTokenExpiresAt = accessTokenExpiresAt;
     }
 
-    public String getAccessTokenMetadata() {
+	/**
+	 * 获取访问令牌元数据
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:01
+	 */
+	public String getAccessTokenMetadata() {
         return accessTokenMetadata;
     }
 
-    public void setAccessTokenMetadata(String accessTokenMetadata) {
+	/**
+	 * 设置访问令牌元数据
+	 *
+	 * @param accessTokenMetadata 访问令牌元数据
+	 * @since 2023-07-10 17:12:01
+	 */
+	public void setAccessTokenMetadata(String accessTokenMetadata) {
         this.accessTokenMetadata = accessTokenMetadata;
     }
 
-    public String getAccessTokenType() {
+	/**
+	 * 获取访问令牌类型
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:02
+	 */
+	public String getAccessTokenType() {
         return accessTokenType;
     }
 
-    public void setAccessTokenType(String accessTokenType) {
+	/**
+	 * 设置访问令牌类型
+	 *
+	 * @param accessTokenType 访问令牌类型
+	 * @since 2023-07-10 17:12:02
+	 */
+	public void setAccessTokenType(String accessTokenType) {
         this.accessTokenType = accessTokenType;
     }
 
-    public String getAccessTokenScopes() {
+	/**
+	 * 获取访问令牌范围
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:03
+	 */
+	public String getAccessTokenScopes() {
         return accessTokenScopes;
     }
 
-    public void setAccessTokenScopes(String accessTokenScopes) {
+	/**
+	 * 设置访问令牌范围
+	 *
+	 * @param accessTokenScopes 访问令牌范围
+	 * @since 2023-07-10 17:12:04
+	 */
+	public void setAccessTokenScopes(String accessTokenScopes) {
         this.accessTokenScopes = accessTokenScopes;
     }
 
-    public String getOidcIdTokenValue() {
+	/**
+	 * 获取oidc id令牌值
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:04
+	 */
+	public String getOidcIdTokenValue() {
         return oidcIdTokenValue;
     }
 
-    public void setOidcIdTokenValue(String oidcIdTokenValue) {
+	/**
+	 * 设置oidc id令牌值
+	 *
+	 * @param oidcIdTokenValue oidc id令牌值
+	 * @since 2023-07-10 17:12:05
+	 */
+	public void setOidcIdTokenValue(String oidcIdTokenValue) {
         this.oidcIdTokenValue = oidcIdTokenValue;
     }
 
-    public LocalDateTime getOidcIdTokenIssuedAt() {
+	/**
+	 * 获取oidc id令牌，发布时间为
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:05
+	 */
+	public LocalDateTime getOidcIdTokenIssuedAt() {
         return oidcIdTokenIssuedAt;
     }
 
-    public void setOidcIdTokenIssuedAt(LocalDateTime oidcIdTokenIssuedAt) {
+	/**
+	 * 设置oidc id令牌，在
+	 *
+	 * @param oidcIdTokenIssuedAt oidc id令牌在
+	 * @since 2023-07-10 17:12:06
+	 */
+	public void setOidcIdTokenIssuedAt(LocalDateTime oidcIdTokenIssuedAt) {
         this.oidcIdTokenIssuedAt = oidcIdTokenIssuedAt;
     }
 
-    public LocalDateTime getOidcIdTokenExpiresAt() {
+	/**
+	 * 获取oidc id令牌过期时间为
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:06
+	 */
+	public LocalDateTime getOidcIdTokenExpiresAt() {
         return oidcIdTokenExpiresAt;
     }
 
-    public void setOidcIdTokenExpiresAt(LocalDateTime oidcIdTokenExpiresAt) {
+	/**
+	 * 设置oidc id令牌在
+	 *
+	 * @param oidcIdTokenExpiresAt oidc id令牌在
+	 * @since 2023-07-10 17:12:07
+	 */
+	public void setOidcIdTokenExpiresAt(LocalDateTime oidcIdTokenExpiresAt) {
         this.oidcIdTokenExpiresAt = oidcIdTokenExpiresAt;
     }
 
-    public String getOidcIdTokenMetadata() {
+	/**
+	 * 获取oidc id令牌元数据
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:07
+	 */
+	public String getOidcIdTokenMetadata() {
         return oidcIdTokenMetadata;
     }
 
-    public void setOidcIdTokenMetadata(String oidcIdTokenMetadata) {
+	/**
+	 * 设置oidc id令牌元数据
+	 *
+	 * @param oidcIdTokenMetadata oidc id令牌元数据
+	 * @since 2023-07-10 17:12:08
+	 */
+	public void setOidcIdTokenMetadata(String oidcIdTokenMetadata) {
         this.oidcIdTokenMetadata = oidcIdTokenMetadata;
     }
 
-    public String getOidcIdTokenClaims() {
+	/**
+	 * 获取oidc id令牌声明
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:09
+	 */
+	public String getOidcIdTokenClaims() {
         return oidcIdTokenClaims;
     }
 
-    public void setOidcIdTokenClaims(String oidcIdTokenClaims) {
+	/**
+	 * 设置oidc id令牌声明
+	 *
+	 * @param oidcIdTokenClaims oidc id令牌声明
+	 * @since 2023-07-10 17:12:09
+	 */
+	public void setOidcIdTokenClaims(String oidcIdTokenClaims) {
         this.oidcIdTokenClaims = oidcIdTokenClaims;
     }
 
-    public String getRefreshTokenValue() {
+	/**
+	 * 获取刷新令牌值
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:10
+	 */
+	public String getRefreshTokenValue() {
         return refreshTokenValue;
     }
 
-    public void setRefreshTokenValue(String refreshTokenValue) {
+	/**
+	 * 设置刷新令牌值
+	 *
+	 * @param refreshTokenValue 刷新令牌值
+	 * @since 2023-07-10 17:12:11
+	 */
+	public void setRefreshTokenValue(String refreshTokenValue) {
         this.refreshTokenValue = refreshTokenValue;
     }
 
-    public LocalDateTime getRefreshTokenIssuedAt() {
+	/**
+	 * 获取在
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:11
+	 */
+	public LocalDateTime getRefreshTokenIssuedAt() {
         return refreshTokenIssuedAt;
     }
 
-    public void setRefreshTokenIssuedAt(LocalDateTime refreshTokenIssuedAt) {
+	/**
+	 * 设置在发出刷新令牌
+	 *
+	 * @param refreshTokenIssuedAt 刷新在
+	 * @since 2023-07-10 17:12:12
+	 */
+	public void setRefreshTokenIssuedAt(LocalDateTime refreshTokenIssuedAt) {
         this.refreshTokenIssuedAt = refreshTokenIssuedAt;
     }
 
-    public LocalDateTime getRefreshTokenExpiresAt() {
+	/**
+	 * 获取刷新令牌在
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:12
+	 */
+	public LocalDateTime getRefreshTokenExpiresAt() {
         return refreshTokenExpiresAt;
     }
 
-    public void setRefreshTokenExpiresAt(LocalDateTime refreshTokenExpiresAt) {
+	/**
+	 * 设置刷新令牌在
+	 *
+	 * @param refreshTokenExpiresAt 刷新令牌在
+	 * @since 2023-07-10 17:12:13
+	 */
+	public void setRefreshTokenExpiresAt(LocalDateTime refreshTokenExpiresAt) {
         this.refreshTokenExpiresAt = refreshTokenExpiresAt;
     }
 
-    public String getRefreshTokenMetadata() {
+	/**
+	 * 获取刷新令牌元数据
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:13
+	 */
+	public String getRefreshTokenMetadata() {
         return refreshTokenMetadata;
     }
 
-    public void setRefreshTokenMetadata(String refreshTokenMetadata) {
+	/**
+	 * 设置刷新令牌元数据
+	 *
+	 * @param refreshTokenMetadata 刷新令牌元数据
+	 * @since 2023-07-10 17:12:14
+	 */
+	public void setRefreshTokenMetadata(String refreshTokenMetadata) {
         this.refreshTokenMetadata = refreshTokenMetadata;
     }
 
-    public String getUserCodeValue() {
+	/**
+	 * 获取用户代码值
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:14
+	 */
+	public String getUserCodeValue() {
         return userCodeValue;
     }
 
-    public void setUserCodeValue(String userCodeValue) {
+	/**
+	 * 设置用户代码值
+	 *
+	 * @param userCodeValue 用户代码值
+	 * @since 2023-07-10 17:12:15
+	 */
+	public void setUserCodeValue(String userCodeValue) {
         this.userCodeValue = userCodeValue;
     }
 
-    public LocalDateTime getUserCodeIssuedAt() {
+	/**
+	 * 获取用户代码
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:15
+	 */
+	public LocalDateTime getUserCodeIssuedAt() {
         return userCodeIssuedAt;
     }
 
-    public void setUserCodeIssuedAt(LocalDateTime userCodeIssuedAt) {
+	/**
+	 * 设置在以下位置发布用户代码
+	 *
+	 * @param userCodeIssuedAt 用户代码发布于
+	 * @since 2023-07-10 17:12:16
+	 */
+	public void setUserCodeIssuedAt(LocalDateTime userCodeIssuedAt) {
         this.userCodeIssuedAt = userCodeIssuedAt;
     }
 
-    public LocalDateTime getUserCodeExpiresAt() {
+	/**
+	 * 获取用户代码过期时间为
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:16
+	 */
+	public LocalDateTime getUserCodeExpiresAt() {
         return userCodeExpiresAt;
     }
 
-    public void setUserCodeExpiresAt(LocalDateTime userCodeExpiresAt) {
+	/**
+	 * 设置用户代码在
+	 *
+	 * @param userCodeExpiresAt 用户代码在
+	 * @since 2023-07-10 17:12:17
+	 */
+	public void setUserCodeExpiresAt(LocalDateTime userCodeExpiresAt) {
         this.userCodeExpiresAt = userCodeExpiresAt;
     }
 
-    public String getUserCodeMetadata() {
+	/**
+	 * 获取用户代码元数据
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:18
+	 */
+	public String getUserCodeMetadata() {
         return userCodeMetadata;
     }
 
-    public void setUserCodeMetadata(String userCodeMetadata) {
+	/**
+	 * 设置用户代码元数据
+	 *
+	 * @param userCodeMetadata 用户代码元数据
+	 * @since 2023-07-10 17:12:18
+	 */
+	public void setUserCodeMetadata(String userCodeMetadata) {
         this.userCodeMetadata = userCodeMetadata;
     }
 
-    public String getDeviceCodeValue() {
+	/**
+	 * 获取设备代码值
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:19
+	 */
+	public String getDeviceCodeValue() {
         return deviceCodeValue;
     }
 
-    public void setDeviceCodeValue(String deviceCodeValue) {
+	/**
+	 * 设置设备代码值
+	 *
+	 * @param deviceCodeValue 设备代码值
+	 * @since 2023-07-10 17:12:19
+	 */
+	public void setDeviceCodeValue(String deviceCodeValue) {
         this.deviceCodeValue = deviceCodeValue;
     }
 
-    public LocalDateTime getDeviceCodeIssuedAt() {
+	/**
+	 * 获取设备代码
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:20
+	 */
+	public LocalDateTime getDeviceCodeIssuedAt() {
         return deviceCodeIssuedAt;
     }
 
-    public void setDeviceCodeIssuedAt(LocalDateTime deviceCodeIssuedAt) {
+	/**
+	 * 设置在以下位置发布设备代码
+	 *
+	 * @param deviceCodeIssuedAt 设备代码发布于
+	 * @since 2023-07-10 17:12:20
+	 */
+	public void setDeviceCodeIssuedAt(LocalDateTime deviceCodeIssuedAt) {
         this.deviceCodeIssuedAt = deviceCodeIssuedAt;
     }
 
-    public LocalDateTime getDeviceCodeExpiresAt() {
+	/**
+	 * 获取设备代码在
+	 *
+	 * @return {@link LocalDateTime }
+	 * @since 2023-07-10 17:12:21
+	 */
+	public LocalDateTime getDeviceCodeExpiresAt() {
         return deviceCodeExpiresAt;
     }
 
-    public void setDeviceCodeExpiresAt(LocalDateTime deviceCodeExpiresAt) {
+	/**
+	 * 设置设备代码在
+	 *
+	 * @param deviceCodeExpiresAt 设备代码在
+	 * @since 2023-07-10 17:12:21
+	 */
+	public void setDeviceCodeExpiresAt(LocalDateTime deviceCodeExpiresAt) {
         this.deviceCodeExpiresAt = deviceCodeExpiresAt;
     }
 
-    public String getDeviceCodeMetadata() {
+	/**
+	 * 获取设备代码元数据
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:22
+	 */
+	public String getDeviceCodeMetadata() {
         return deviceCodeMetadata;
     }
 
-    public void setDeviceCodeMetadata(String deviceCodeMetadata) {
+	/**
+	 * 设置设备代码元数据
+	 *
+	 * @param deviceCodeMetadata 设备代码元数据
+	 * @since 2023-07-10 17:12:23
+	 */
+	public void setDeviceCodeMetadata(String deviceCodeMetadata) {
         this.deviceCodeMetadata = deviceCodeMetadata;
     }
 
-    @Override
+	/**
+	 * 要字符串
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:23
+	 */
+	@Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)

@@ -14,33 +14,72 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.authentication.stamp;
+package com.taotao.cloud.auth.biz.exception;
 
 /**
  * <p>Description: 超出最大数量限制 </p>
  *
- *
- * @date : 2022/7/6 23:03
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:25:11
  */
 public class MaximumLimitExceededException extends RuntimeException {
 
-    public MaximumLimitExceededException() {
+	/**
+	 * 最大限制超过异常
+	 *
+	 * @return
+	 * @since 2023-07-10 17:25:11
+	 */
+	public MaximumLimitExceededException() {
         super();
     }
 
-    public MaximumLimitExceededException(String message) {
+	/**
+	 * 最大限制超过异常
+	 *
+	 * @param message 消息
+	 * @return
+	 * @since 2023-07-10 17:25:11
+	 */
+	public MaximumLimitExceededException(String message) {
         super(message);
     }
 
-    public MaximumLimitExceededException(String message, Throwable cause) {
+	/**
+	 * 最大限制超过异常
+	 *
+	 * @param message 消息
+	 * @param cause   原因
+	 * @return
+	 * @since 2023-07-10 17:25:12
+	 */
+	public MaximumLimitExceededException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public MaximumLimitExceededException(Throwable cause) {
+	/**
+	 * 最大限制超过异常
+	 *
+	 * @param cause 原因
+	 * @return
+	 * @since 2023-07-10 17:25:12
+	 */
+	public MaximumLimitExceededException(Throwable cause) {
         super(cause);
     }
 
-    protected MaximumLimitExceededException(
+	/**
+	 * 最大限制超过异常
+	 *
+	 * @param message            消息
+	 * @param cause              原因
+	 * @param enableSuppression  启用抑制
+	 * @param writableStackTrace 可写堆栈跟踪
+	 * @return
+	 * @since 2023-07-10 17:25:12
+	 */
+	protected MaximumLimitExceededException(
             String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }

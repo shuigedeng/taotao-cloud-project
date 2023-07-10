@@ -29,16 +29,26 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 /**
  * <p>Description: TODO </p>
  *
- *
- * @date : 2022/10/15 11:58
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:24:44
  */
 public class HerodotusOidcUserInfoMapper implements Function<OidcUserInfoAuthenticationContext, OidcUserInfo> {
 
-    private static final List<String> EMAIL_CLAIMS =
+	/**
+	 * 电子邮件索赔
+	 */
+	private static final List<String> EMAIL_CLAIMS =
             Arrays.asList(StandardClaimNames.EMAIL, StandardClaimNames.EMAIL_VERIFIED);
-    private static final List<String> PHONE_CLAIMS =
+	/**
+	 * 电话索赔
+	 */
+	private static final List<String> PHONE_CLAIMS =
             Arrays.asList(StandardClaimNames.PHONE_NUMBER, StandardClaimNames.PHONE_NUMBER_VERIFIED);
-    private static final List<String> PROFILE_CLAIMS = Arrays.asList(
+	/**
+	 * 个人资料索赔
+	 */
+	private static final List<String> PROFILE_CLAIMS = Arrays.asList(
             StandardClaimNames.NAME,
             StandardClaimNames.FAMILY_NAME,
             StandardClaimNames.GIVEN_NAME,
@@ -54,7 +64,14 @@ public class HerodotusOidcUserInfoMapper implements Function<OidcUserInfoAuthent
             StandardClaimNames.LOCALE,
             StandardClaimNames.UPDATED_AT);
 
-    @Override
+	/**
+	 * 应用
+	 *
+	 * @param authenticationContext 身份验证上下文
+	 * @return {@link OidcUserInfo }
+	 * @since 2023-07-10 17:24:44
+	 */
+	@Override
     public OidcUserInfo apply(OidcUserInfoAuthenticationContext authenticationContext) {
         OidcUserInfoAuthenticationToken authentication = authenticationContext.getAuthentication();
         if (authentication.getPrincipal() instanceof BearerTokenAuthentication) {
@@ -66,7 +83,14 @@ public class HerodotusOidcUserInfoMapper implements Function<OidcUserInfoAuthent
         }
     }
 
-    private static Map<String, Object> getClaims(Map<String, Object> claims) {
+	/**
+	 * 获得索赔
+	 *
+	 * @param claims 索赔
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2023-07-10 17:24:45
+	 */
+	private static Map<String, Object> getClaims(Map<String, Object> claims) {
         Set<String> needRemovedClaims = new HashSet<>(32);
         needRemovedClaims.add(BaseConstants.AUTHORITIES);
 

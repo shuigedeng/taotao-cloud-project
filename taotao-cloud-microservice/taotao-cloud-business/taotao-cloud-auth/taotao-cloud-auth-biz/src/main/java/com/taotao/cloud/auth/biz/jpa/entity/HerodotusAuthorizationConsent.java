@@ -27,8 +27,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * <p>Description: OAuth2 认证确认信息实体 </p>
  *
- *
- * @date : 2022/1/22 17:55
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:12:38
  */
 @Entity
 @Table(
@@ -44,42 +45,94 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
         region = OAuth2Constants.REGION_OAUTH2_AUTHORIZATION_CONSENT)
 public class HerodotusAuthorizationConsent extends AbstractEntity {
 
-    @Id
+	/**
+	 * 注册客户端id
+	 */
+	@Id
     @Column(name = "registered_client_id", nullable = false, length = 100)
     private String registeredClientId;
 
-    @Id
+	/**
+	 * 主体名称
+	 */
+	@Id
     @Column(name = "principal_name", nullable = false, length = 200)
     private String principalName;
 
-    @Column(name = "authorities", nullable = false, length = 1000)
+	/**
+	 * 当局
+	 */
+	@Column(name = "authorities", nullable = false, length = 1000)
     private String authorities;
 
-    public String getRegisteredClientId() {
+	/**
+	 * 获取注册客户端id
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:38
+	 */
+	public String getRegisteredClientId() {
         return registeredClientId;
     }
 
-    public void setRegisteredClientId(String registeredClientId) {
+	/**
+	 * 设置注册客户端id
+	 *
+	 * @param registeredClientId 注册客户端id
+	 * @since 2023-07-10 17:12:38
+	 */
+	public void setRegisteredClientId(String registeredClientId) {
         this.registeredClientId = registeredClientId;
     }
 
-    public String getPrincipalName() {
+	/**
+	 * 获取主体名称
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:38
+	 */
+	public String getPrincipalName() {
         return principalName;
     }
 
-    public void setPrincipalName(String principalName) {
+	/**
+	 * 设置主体名称
+	 *
+	 * @param principalName 主体名称
+	 * @since 2023-07-10 17:12:38
+	 */
+	public void setPrincipalName(String principalName) {
         this.principalName = principalName;
     }
 
-    public String getAuthorities() {
+	/**
+	 * 获得权威
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:38
+	 */
+	public String getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(String authorities) {
+	/**
+	 * 设置权限
+	 *
+	 * @param authorities 当局
+	 * @since 2023-07-10 17:12:39
+	 */
+	public void setAuthorities(String authorities) {
         this.authorities = authorities;
     }
 
-    @Override
+	/**
+	 * 等于
+	 *
+	 * @param o o
+	 * @return boolean
+	 * @since 2023-07-10 17:12:39
+	 */
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -92,12 +145,24 @@ public class HerodotusAuthorizationConsent extends AbstractEntity {
                 && Objects.equal(principalName, that.principalName);
     }
 
-    @Override
+	/**
+	 * 哈希码
+	 *
+	 * @return int
+	 * @since 2023-07-10 17:12:40
+	 */
+	@Override
     public int hashCode() {
         return Objects.hashCode(registeredClientId, principalName);
     }
 
-    @Override
+	/**
+	 * 要字符串
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:12:40
+	 */
+	@Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("registeredClientId", registeredClientId)

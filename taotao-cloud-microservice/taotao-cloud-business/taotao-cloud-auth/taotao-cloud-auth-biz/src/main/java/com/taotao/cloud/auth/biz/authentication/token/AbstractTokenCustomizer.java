@@ -35,18 +35,33 @@ import java.util.stream.Collectors;
  *
  * @author shuigedeng
  * @version 2023.07
- * @since 2023-07-04 10:34:36
+ * @since 2023-07-10 17:25:30
  */
 public abstract class AbstractTokenCustomizer {
 
-    protected void appendAll(Map<String, Object> attributes,
+	/**
+	 * 追加全部
+	 *
+	 * @param attributes       属性
+	 * @param authentication   身份验证
+	 * @param authorizedScopes 授权范围
+	 * @since 2023-07-10 17:25:30
+	 */
+	protected void appendAll(Map<String, Object> attributes,
 							 Authentication authentication,
 							 Set<String> authorizedScopes) {
         appendAuthorities(attributes, authentication);
         appendCommons(attributes, authentication, authorizedScopes);
     }
 
-    protected void appendAuthorities(Map<String, Object> attributes, Authentication authentication) {
+	/**
+	 * 附加权限
+	 *
+	 * @param attributes     属性
+	 * @param authentication 身份验证
+	 * @since 2023-07-10 17:25:31
+	 */
+	protected void appendAuthorities(Map<String, Object> attributes, Authentication authentication) {
         if (CollectionUtils.isNotEmpty(authentication.getAuthorities())) {
             Set<String> authorities = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -55,7 +70,15 @@ public abstract class AbstractTokenCustomizer {
         }
     }
 
-    protected void appendCommons(
+	/**
+	 * 追加公地
+	 *
+	 * @param attributes       属性
+	 * @param authentication   身份验证
+	 * @param authorizedScopes 授权范围
+	 * @since 2023-07-10 17:25:31
+	 */
+	protected void appendCommons(
             Map<String, Object> attributes, Authentication authentication, Set<String> authorizedScopes) {
 
         if (CollectionUtils.isNotEmpty(authorizedScopes)) {
@@ -78,7 +101,14 @@ public abstract class AbstractTokenCustomizer {
         attributes.put("license", "Apache-2.0 Licensed | Copyright © 2020-2023 shuigedeng");
     }
 
-    private void putUserInfo(Map<String, Object> attributes, HerodotusUser principal) {
+	/**
+	 * 放置用户信息
+	 *
+	 * @param attributes 属性
+	 * @param principal  校长
+	 * @since 2023-07-10 17:25:32
+	 */
+	private void putUserInfo(Map<String, Object> attributes, HerodotusUser principal) {
         attributes.put(BaseConstants.OPEN_ID, principal.getUserId());
         attributes.put(BaseConstants.ROLES, principal.getRoles());
         attributes.put(BaseConstants.AVATAR, principal.getAvatar());

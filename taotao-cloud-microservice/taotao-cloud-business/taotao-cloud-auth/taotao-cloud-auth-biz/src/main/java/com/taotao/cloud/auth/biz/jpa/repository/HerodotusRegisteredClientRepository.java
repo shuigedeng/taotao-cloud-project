@@ -26,17 +26,19 @@ import org.springframework.data.jpa.repository.QueryHints;
 /**
  * <p>Description: HerodotusRegisteredClientRepository </p>
  *
- *
- * @date : 2022/2/25 21:05
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:11:24
  */
 public interface HerodotusRegisteredClientRepository extends BaseRepository<HerodotusRegisteredClient, String> {
 
-    /**
-     * 根据 ClientId 查询 RegisteredClient
-     *
-     * @param clientId OAuth2 客户端ID
-     * @return OAuth2 客户端配置
-     */
-    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
+	/**
+	 * 根据 ClientId 查询 RegisteredClient
+	 *
+	 * @param clientId OAuth2 客户端ID
+	 * @return {@link Optional }<{@link HerodotusRegisteredClient }>
+	 * @since 2023-07-10 17:11:24
+	 */
+	@QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     Optional<HerodotusRegisteredClient> findByClientId(String clientId);
 }

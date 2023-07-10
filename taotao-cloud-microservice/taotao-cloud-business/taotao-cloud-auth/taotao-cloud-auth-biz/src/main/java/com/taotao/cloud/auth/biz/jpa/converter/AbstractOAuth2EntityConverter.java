@@ -23,8 +23,9 @@ import org.springframework.core.convert.converter.Converter;
 /**
  * <p>Description: 封装RegisteredClientAdapter 默认行为 </p>
  *
- *
- * @date : 2023/5/12 23:54
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:09:30
  */
 public abstract class AbstractOAuth2EntityConverter<S, T> implements Converter<S, T> {
 

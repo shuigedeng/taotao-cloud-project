@@ -36,21 +36,40 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: HerodotusAuthorization 转 OAuth2Authorization 转换器 </p>
  *
- *
- * @date : 2023/5/21 20:53
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:13:53
  */
 public class HerodotusToOAuth2AuthorizationConverter
         extends AbstractOAuth2EntityConverter<HerodotusAuthorization, OAuth2Authorization> {
 
-    private final RegisteredClientRepository registeredClientRepository;
+	/**
+	 * 注册客户端存储库
+	 */
+	private final RegisteredClientRepository registeredClientRepository;
 
-    public HerodotusToOAuth2AuthorizationConverter(
+	/**
+	 * 希罗多德到oauth2授权转换器
+	 *
+	 * @param jacksonProcessor           杰克逊处理器
+	 * @param registeredClientRepository 注册客户端存储库
+	 * @return
+	 * @since 2023-07-10 17:13:54
+	 */
+	public HerodotusToOAuth2AuthorizationConverter(
             OAuth2JacksonProcessor jacksonProcessor, RegisteredClientRepository registeredClientRepository) {
         super(jacksonProcessor);
         this.registeredClientRepository = registeredClientRepository;
     }
 
-    @Override
+	/**
+	 * 转换
+	 *
+	 * @param entity 实体
+	 * @return {@link OAuth2Authorization }
+	 * @since 2023-07-10 17:13:54
+	 */
+	@Override
     public OAuth2Authorization convert(HerodotusAuthorization entity) {
         RegisteredClient registeredClient = this.registeredClientRepository.findById(entity.getRegisteredClientId());
         if (registeredClient == null) {

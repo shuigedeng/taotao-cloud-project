@@ -30,50 +30,109 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * <p>Description: 锁定账户签章管理 </p>
  *
- *
- * @date : 2022/7/8 21:27
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:25:06
  */
 public class LockedUserDetailsStampManager extends AbstractRenderer implements InitializingBean {
-    private final OAuth2AuthenticationProperties authenticationProperties;
+	/**
+	 * 身份验证属性
+	 */
+	private final OAuth2AuthenticationProperties authenticationProperties;
 
-    public LockedUserDetailsStampManager(
+	/**
+	 * 锁定用户详细信息邮票管理器
+	 *
+	 * @param redisRepository          redis存储库
+	 * @param authenticationProperties 身份验证属性
+	 * @return
+	 * @since 2023-07-10 17:25:06
+	 */
+	public LockedUserDetailsStampManager(
             RedisRepository redisRepository, OAuth2AuthenticationProperties authenticationProperties) {
         super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL);
         this.authenticationProperties = authenticationProperties;
     }
 
-    public LockedUserDetailsStampManager(
+	/**
+	 * 锁定用户详细信息邮票管理器
+	 *
+	 * @param redisRepository          redis存储库
+	 * @param expire                   过期
+	 * @param authenticationProperties 身份验证属性
+	 * @return
+	 * @since 2023-07-10 17:25:06
+	 */
+	public LockedUserDetailsStampManager(
             RedisRepository redisRepository, Duration expire, OAuth2AuthenticationProperties authenticationProperties) {
         super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL, expire);
         this.authenticationProperties = authenticationProperties;
     }
 
-    @Override
+	/**
+	 * 下一枚邮票
+	 *
+	 * @param key 钥匙
+	 * @return {@link String }
+	 * @since 2023-07-10 17:25:06
+	 */
+	@Override
     public String nextStamp(String key) {
         return IdUtil.fastSimpleUUID();
     }
 
-    @Override
+	/**
+	 * 属性设置后
+	 *
+	 * @since 2023-07-10 17:25:06
+	 */
+	@Override
     public void afterPropertiesSet() throws Exception {
         super.setExpire(authenticationProperties.getSignInFailureLimited().getExpire());
     }
 
-    @Override
+	/**
+	 * 抽奖
+	 *
+	 * @return {@link Metadata }
+	 * @since 2023-07-10 17:25:07
+	 */
+	@Override
     public Metadata draw() {
         return null;
     }
 
-    @Override
+	/**
+	 * 获取capcha
+	 *
+	 * @param key 钥匙
+	 * @return {@link Captcha }
+	 * @since 2023-07-10 17:25:07
+	 */
+	@Override
     public Captcha getCapcha(String key) {
         return null;
     }
 
-    @Override
+	/**
+	 * 验证
+	 *
+	 * @param verification 验证
+	 * @return boolean
+	 * @since 2023-07-10 17:25:08
+	 */
+	@Override
     public boolean verify(Verification verification) {
         return false;
     }
 
-    @Override
+	/**
+	 * 获取类别
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:25:08
+	 */
+	@Override
     public String getCategory() {
         return null;
     }

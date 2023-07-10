@@ -23,8 +23,9 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * <p>Description: RegisteredClient 转换器</p>
  *
- *
- * @date : 2023/5/12 23:07
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:09:25
  */
 public abstract class AbstractRegisteredClientConverter<S extends RegisteredClientDetails>
         extends AbstractOAuth2EntityConverter<S, RegisteredClient> implements RegisteredClientConverter<S> {

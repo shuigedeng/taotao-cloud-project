@@ -17,11 +17,28 @@ import org.springframework.util.StringUtils;
 
 /**
  * 获取请求中参数转化为DeviceClientAuthenticationToken
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:23:48
  */
 public final class DeviceClientAuthenticationConverter implements AuthenticationConverter {
+	/**
+	 * 设备授权请求匹配器
+	 */
 	private final RequestMatcher deviceAuthorizationRequestMatcher;
+	/**
+	 * 设备访问令牌请求匹配器
+	 */
 	private final RequestMatcher deviceAccessTokenRequestMatcher;
 
+	/**
+	 * 设备客户端认证转换器
+	 *
+	 * @param deviceAuthorizationEndpointUri 设备授权端点uri
+	 * @return
+	 * @since 2023-07-10 17:23:49
+	 */
 	public DeviceClientAuthenticationConverter(String deviceAuthorizationEndpointUri) {
 		RequestMatcher clientIdParameterMatcher = request ->
 			request.getParameter(OAuth2ParameterNames.CLIENT_ID) != null;
@@ -35,6 +52,13 @@ public final class DeviceClientAuthenticationConverter implements Authentication
 				request.getParameter(OAuth2ParameterNames.CLIENT_ID) != null;
 	}
 
+	/**
+	 * 转换
+	 *
+	 * @param request 请求
+	 * @return {@link Authentication }
+	 * @since 2023-07-10 17:23:49
+	 */
 	@Nullable
 	@Override
 	public Authentication convert(HttpServletRequest request) {

@@ -27,9 +27,16 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: 基于Jpa 的 RegisteredClient服务 </p>
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:11:02
  */
 public class RedisRegisteredClientRepository extends JpaRegisteredClientRepository {
 
+	/**
+	 * 日志
+	 */
 	private static final Logger log = LoggerFactory.getLogger(RedisRegisteredClientRepository.class);
 
 	/**
@@ -41,12 +48,30 @@ public class RedisRegisteredClientRepository extends JpaRegisteredClientReposito
 	 */
 	public static final String REGISTERED_CLIENT_CLIENT_ID = ":registered_client:clientId:";
 
+	/**
+	 * 前缀
+	 */
 	public static final String PREFIX = "spring-authorization-server";
 
+	/**
+	 * 注册客户端超时
+	 */
 	public static final long REGISTERED_CLIENT_TIMEOUT = 300L;
 
+	/**
+	 * redis存储库
+	 */
 	private final RedisRepository redisRepository;
 
+	/**
+	 * redis注册客户端存储库
+	 *
+	 * @param herodotusRegisteredClientService 希罗多德注册客户服务
+	 * @param passwordEncoder                  密码编码器
+	 * @param redisRepository                  redis存储库
+	 * @return
+	 * @since 2023-07-10 17:11:03
+	 */
 	public RedisRegisteredClientRepository(HerodotusRegisteredClientService herodotusRegisteredClientService,
 										   PasswordEncoder passwordEncoder,
 										   RedisRepository redisRepository) {
@@ -54,6 +79,12 @@ public class RedisRegisteredClientRepository extends JpaRegisteredClientReposito
 		this.redisRepository = redisRepository;
 	}
 
+	/**
+	 * 保存
+	 *
+	 * @param registeredClient 注册客户
+	 * @since 2023-07-10 17:11:03
+	 */
 	@Override
 	public void save(RegisteredClient registeredClient) {
 		if (registeredClient != null) {
@@ -62,6 +93,13 @@ public class RedisRegisteredClientRepository extends JpaRegisteredClientReposito
 		}
 	}
 
+	/**
+	 * 按id查找
+	 *
+	 * @param id id
+	 * @return {@link RegisteredClient }
+	 * @since 2023-07-10 17:11:03
+	 */
 	@Override
 	public RegisteredClient findById(String id) {
 		RegisteredClient registeredClientByRedis = (RegisteredClient) redisRepository.opsForValue().get(PREFIX + REGISTERED_CLIENT_ID + id);
@@ -83,6 +121,13 @@ public class RedisRegisteredClientRepository extends JpaRegisteredClientReposito
 		return registeredClientResult;
 	}
 
+	/**
+	 * 按客户id查找
+	 *
+	 * @param clientId 客户端id
+	 * @return {@link RegisteredClient }
+	 * @since 2023-07-10 17:11:03
+	 */
 	@Override
 	public RegisteredClient findByClientId(String clientId) {
 		RegisteredClient registeredClientByRedis = (RegisteredClient) redisRepository.opsForValue().get(PREFIX + REGISTERED_CLIENT_CLIENT_ID + clientId);
@@ -106,6 +151,14 @@ public class RedisRegisteredClientRepository extends JpaRegisteredClientReposito
 	}
 
 
+	/**
+	 * 设置
+	 *
+	 * @param registeredClient 注册客户
+	 * @param timeout          超时
+	 * @param unit             单位
+	 * @since 2023-07-10 17:11:03
+	 */
 	public void set(RegisteredClient registeredClient, long timeout, TimeUnit unit) {
 		redisRepository.opsForValue().set(PREFIX + REGISTERED_CLIENT_ID + registeredClient.getId(), registeredClient, timeout, unit);
 		redisRepository.opsForValue().set(PREFIX + REGISTERED_CLIENT_CLIENT_ID + registeredClient.getClientId(), registeredClient, timeout, unit);

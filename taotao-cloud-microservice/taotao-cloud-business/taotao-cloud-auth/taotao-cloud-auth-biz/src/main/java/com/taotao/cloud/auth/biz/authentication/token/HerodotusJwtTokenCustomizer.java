@@ -36,13 +36,20 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
  * <p>
  * An OAuth2TokenCustomizer<JwtEncodingContext> declared with a generic type of JwtEncodingContext (implements OAuth2TokenContext) provides the ability to customize the headers and claims of a Jwt.
  *
- *
- * @date : 2022/2/23 22:17
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:25:35
  */
 public class HerodotusJwtTokenCustomizer extends AbstractTokenCustomizer
         implements OAuth2TokenCustomizer<JwtEncodingContext> {
 
-    @Override
+	/**
+	 * 自定义
+	 *
+	 * @param context 上下文
+	 * @since 2023-07-10 17:25:35
+	 */
+	@Override
     public void customize(JwtEncodingContext context) {
         AbstractAuthenticationToken token = null;
         Authentication clientAuthentication = SecurityContextHolder.getContext().getAuthentication();

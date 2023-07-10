@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.justauth.stamp;
 
-import com.taotao.cloud.auth.biz.authentication.stamp.MaximumLimitExceededException;
+import com.taotao.cloud.auth.biz.exception.MaximumLimitExceededException;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.support.core.definition.AbstractRenderer;
 import java.time.Duration;
