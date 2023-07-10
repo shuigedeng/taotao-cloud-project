@@ -28,17 +28,19 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
  *
  * <p>client_id 变成 appid ，并追加锚点#wechat_redirect
  *
- *
- * @see DefaultOAuth2AuthorizationRequestResolver#setAuthorizationRequestCustomizer(Consumer)
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:41:10
  */
 public class SocialOAuth2AuthorizationRequestCustomizer {
 
-    /**
-     * 授权请求参数定制
-     *
-     * @param builder the builder
-     */
-    public static void customize(OAuth2AuthorizationRequest.Builder builder) {
+	/**
+	 * 授权请求参数定制
+	 *
+	 * @param builder the builder
+	 * @since 2023-07-10 17:41:11
+	 */
+	public static void customize(OAuth2AuthorizationRequest.Builder builder) {
         builder.attributes(attributes -> Arrays.stream(SocialClientProviders.values())
                 .filter(clientProvider -> Objects.equals(
                         clientProvider.registrationId(), attributes.get(OAuth2ParameterNames.REGISTRATION_ID)))

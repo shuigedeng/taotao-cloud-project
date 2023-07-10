@@ -27,26 +27,28 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 /**
  * 授权请求参数的请求参数封装工具类,扩展了{@link OAuth2AuthorizationCodeGrantRequestEntityConverter}
  *
- *
- * @see OAuth2AuthorizationCodeGrantRequestEntityConverter
+ * @author shuigedeng
+ * @version 2023.07
  * @see Converter
- * @see OAuth2AuthorizationCodeGrantRequest
- * @see RequestEntity
- * @since 5.1
+ * @since 2023-07-10 17:41:19
  */
 public class SocialOAuth2ProviderAuthorizationCodeGrantRequestEntityConverter
         implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
 
-    private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter =
+	/**
+	 * 默认转换器
+	 */
+	private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter =
             new OAuth2AuthorizationCodeGrantRequestEntityConverter();
 
-    /**
-     * Returns the {@link RequestEntity} used for the Access Token Request.
-     *
-     * @param authorizationCodeGrantRequest the authorization code grant request
-     * @return the {@link RequestEntity} used for the Access Token Request
-     */
-    @Override
+	/**
+	 * Returns the {@link RequestEntity} used for the Access Token Request.
+	 *
+	 * @param authorizationCodeGrantRequest the authorization code grant request
+	 * @return {@link RequestEntity }<{@link ? }>
+	 * @since 2023-07-10 17:41:19
+	 */
+	@Override
     public RequestEntity<?> convert(OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
 
         ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();

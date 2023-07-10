@@ -49,26 +49,44 @@ import org.springframework.util.CollectionUtils;
  * 用于支持 客户端权限验证 以及 支持 Refresh_Token
  *
  * @author shuigedeng
- * @version 2023.04
- * @since 2023-06-29 16:45:04
+ * @version 2023.07
+ * @see OAuth2AbstractAuthenticationProvider
+ * @since 2023-07-10 17:39:52
  */
 public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2AbstractAuthenticationProvider {
 
-    private static final Logger log = LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
+	/**
+	 * 日志
+	 */
+	private static final Logger log = LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
 
-    private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
-    private final OAuth2AuthorizationService authorizationService;
-    private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
-    private final ClientDetailsService clientDetailsService;
+	/**
+	 * 错误uri
+	 */
+	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
+	/**
+	 * 授权服务
+	 */
+	private final OAuth2AuthorizationService authorizationService;
+	/**
+	 * 令牌生成器
+	 */
+	private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
+	/**
+	 * 客户详细信息服务
+	 */
+	private final ClientDetailsService clientDetailsService;
 
-    /**
-     * Constructs an {@code OAuth2ClientCredentialsAuthenticationProvider} using the provided parameters.
-     *
-     * @param authorizationService the authorization service
-     * @param tokenGenerator       the token generator
-     * @since 0.2.3
-     */
-    public OAuth2ClientCredentialsAuthenticationProvider(
+	/**
+	 * Constructs an {@code OAuth2ClientCredentialsAuthenticationProvider} using the provided parameters.
+	 *
+	 * @param authorizationService the authorization service
+	 * @param tokenGenerator       the token generator
+	 * @param clientDetailsService 客户详细信息服务
+	 * @return
+	 * @since 2023-07-10 17:39:52
+	 */
+	public OAuth2ClientCredentialsAuthenticationProvider(
             OAuth2AuthorizationService authorizationService,
             OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator,
             ClientDetailsService clientDetailsService) {
@@ -79,7 +97,14 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         this.clientDetailsService = clientDetailsService;
     }
 
-    @Override
+	/**
+	 * 验证
+	 *
+	 * @param authentication 身份验证
+	 * @return {@link Authentication }
+	 * @since 2023-07-10 17:39:52
+	 */
+	@Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         OAuth2ClientCredentialsAuthenticationToken clientCredentialsAuthentication =
                 (OAuth2ClientCredentialsAuthenticationToken) authentication;
@@ -134,7 +159,15 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken);
     }
 
-    @NotNull
+	/**
+	 * 获取字符串
+	 *
+	 * @param clientCredentialsAuthentication 客户端凭证认证
+	 * @param registeredClient                注册客户
+	 * @return {@link Set }<{@link String }>
+	 * @since 2023-07-10 17:39:53
+	 */
+	@NotNull
     private static Set<String> getStrings(
             OAuth2ClientCredentialsAuthenticationToken clientCredentialsAuthentication,
             RegisteredClient registeredClient) {
@@ -150,7 +183,14 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         return authorizedScopes;
     }
 
-    @Override
+	/**
+	 * 支持
+	 *
+	 * @param authentication 身份验证
+	 * @return boolean
+	 * @since 2023-07-10 17:39:53
+	 */
+	@Override
     public boolean supports(Class<?> authentication) {
         return OAuth2ClientCredentialsAuthenticationToken.class.isAssignableFrom(authentication);
     }

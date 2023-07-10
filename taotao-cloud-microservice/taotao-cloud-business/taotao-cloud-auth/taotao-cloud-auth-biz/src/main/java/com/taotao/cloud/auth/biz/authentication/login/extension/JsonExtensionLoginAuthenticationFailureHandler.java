@@ -32,8 +32,9 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
  * json处理程序扩展登录身份验证失败
  *
  * @author shuigedeng
- * @version 2023.04
- * @since 2023-06-29 13:27:22
+ * @version 2023.07
+ * @see AuthenticationFailureHandler
+ * @since 2023-07-10 17:42:49
  */
 public class JsonExtensionLoginAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override

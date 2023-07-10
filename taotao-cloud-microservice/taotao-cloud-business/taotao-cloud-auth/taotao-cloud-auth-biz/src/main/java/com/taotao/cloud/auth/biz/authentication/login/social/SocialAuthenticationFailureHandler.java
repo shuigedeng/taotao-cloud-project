@@ -35,12 +35,21 @@ import java.io.IOException;
  * LoginAuthenticationSuccessHandler
  *
  * @author shuigedeng
- * @version 2022.09
- * @since 2022-11-07 10:26
+ * @version 2023.07
+ * @see AuthenticationFailureHandler
+ * @since 2023-07-10 17:40:04
  */
 public class SocialAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
 
+	/**
+	 * 关于身份验证失败
+	 *
+	 * @param request       请求
+	 * @param response      响应
+	 * @param authException 授权例外
+	 * @since 2023-07-10 17:40:05
+	 */
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 										AuthenticationException authException) throws IOException, ServletException {

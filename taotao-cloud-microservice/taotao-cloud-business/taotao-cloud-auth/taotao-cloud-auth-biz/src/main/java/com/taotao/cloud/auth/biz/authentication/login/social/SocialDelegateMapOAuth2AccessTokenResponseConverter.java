@@ -23,14 +23,31 @@ import org.springframework.security.oauth2.core.endpoint.DefaultMapOAuth2AccessT
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 
-/** 兼容微信token接口返回转换的工具，扩展了{@link DefaultMapOAuth2AccessTokenResponseConverter} */
+/**
+ * 兼容微信token接口返回转换的工具，扩展了{@link DefaultMapOAuth2AccessTokenResponseConverter}
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @see Converter
+ * @since 2023-07-10 17:40:49
+ */
 public class SocialDelegateMapOAuth2AccessTokenResponseConverter
         implements Converter<Map<String, Object>, OAuth2AccessTokenResponse> {
 
-    private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> delegate =
+	/**
+	 * 委托
+	 */
+	private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> delegate =
             new DefaultMapOAuth2AccessTokenResponseConverter();
 
-    @Override
+	/**
+	 * 转换
+	 *
+	 * @param tokenResponseParameters 令牌响应参数
+	 * @return {@link OAuth2AccessTokenResponse }
+	 * @since 2023-07-10 17:40:50
+	 */
+	@Override
     public OAuth2AccessTokenResponse convert(Map<String, Object> tokenResponseParameters) {
         // 避免 token_type 空校验异常
         tokenResponseParameters.put(OAuth2ParameterNames.TOKEN_TYPE, OAuth2AccessToken.TokenType.BEARER.getValue());

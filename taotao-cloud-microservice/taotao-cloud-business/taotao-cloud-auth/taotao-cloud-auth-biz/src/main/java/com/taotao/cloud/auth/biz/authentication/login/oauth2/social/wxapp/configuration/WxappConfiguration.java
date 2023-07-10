@@ -17,7 +17,6 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.configuration;
 
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.AccountType;
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.annotation.ConditionalOnWxappEnabled;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.processor.WxappAccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.processor.WxappLogHandler;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.processor.WxappProcessor;
@@ -38,7 +37,6 @@ import org.springframework.context.annotation.Configuration;
  * @date : 2021/3/29 9:27
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnWxappEnabled
 @EnableConfigurationProperties(WxappProperties.class)
 public class WxappConfiguration {
 

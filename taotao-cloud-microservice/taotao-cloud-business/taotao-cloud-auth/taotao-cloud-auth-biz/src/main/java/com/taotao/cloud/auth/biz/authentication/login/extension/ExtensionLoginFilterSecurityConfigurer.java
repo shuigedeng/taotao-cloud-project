@@ -35,7 +35,10 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 /**
  * 基于spring security自定义扩展登录方式(基于json请求)
  *
- * @param <H> the type parameter
+ * @author shuigedeng
+ * @version 2023.07
+ * @see SecurityConfigurerAdapter
+ * @since 2023-07-10 17:42:42
  */
 public class ExtensionLoginFilterSecurityConfigurer<H extends HttpSecurityBuilder<H>>
         extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, H> {

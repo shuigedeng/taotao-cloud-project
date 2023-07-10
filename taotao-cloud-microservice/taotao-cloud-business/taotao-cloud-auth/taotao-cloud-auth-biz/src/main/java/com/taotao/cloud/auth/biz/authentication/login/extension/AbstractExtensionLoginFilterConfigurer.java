@@ -45,9 +45,10 @@ import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 /**
  * 认证过滤器{@link AbstractAuthenticationProcessingFilter}s
  *
- * @param <H>
- * @param <C>
- * @param <F>
+ * @author shuigedeng
+ * @version 2023.07
+ * @see AbstractHttpConfigurer
+ * @since 2023-07-10 17:41:35
  */
 public abstract class AbstractExtensionLoginFilterConfigurer<
                 H extends HttpSecurityBuilder<H>,
@@ -56,25 +57,61 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
                 A extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, H>>
         extends AbstractHttpConfigurer<AbstractExtensionLoginFilterConfigurer<H, C, F, A>, H> {
 
-    private final A configurerAdapter;
+	/**
+	 * 配置器适配器
+	 */
+	private final A configurerAdapter;
 
-    private F authFilter;
+	/**
+	 * 授权过滤器
+	 */
+	private F authFilter;
 
-    private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
+	/**
+	 * 身份验证详细信息来源
+	 */
+	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
 
-    private AuthenticationSuccessHandler successHandler;
+	/**
+	 * 成功处理程序
+	 */
+	private AuthenticationSuccessHandler successHandler;
 
-    private AuthenticationEntryPoint authenticationEntryPoint;
+	/**
+	 * 认证入口点
+	 */
+	private AuthenticationEntryPoint authenticationEntryPoint;
 
-    private String loginProcessingUrl;
+	/**
+	 * 登录处理url
+	 */
+	private String loginProcessingUrl;
 
-    private AuthenticationFailureHandler failureHandler;
+	/**
+	 * 故障处理程序
+	 */
+	private AuthenticationFailureHandler failureHandler;
 
-    private boolean permitAll;
+	/**
+	 * 允许所有
+	 */
+	private boolean permitAll;
 
-    private String failureUrl;
+	/**
+	 * 失效网址
+	 */
+	private String failureUrl;
 
-    public AbstractExtensionLoginFilterConfigurer(
+	/**
+	 * 抽象扩展登录过滤器配置程序
+	 *
+	 * @param configurerAdapter         配置器适配器
+	 * @param authenticationFilter      身份验证过滤器
+	 * @param defaultLoginProcessingUrl 默认登录处理url
+	 * @return
+	 * @since 2023-07-10 17:41:36
+	 */
+	public AbstractExtensionLoginFilterConfigurer(
             A configurerAdapter, F authenticationFilter, String defaultLoginProcessingUrl) {
         this.configurerAdapter = configurerAdapter;
         this.authFilter = authenticationFilter;
@@ -83,67 +120,156 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         }
     }
 
-    public final C defaultSuccessUrl(String defaultSuccessUrl) {
+	/**
+	 * 默认成功url
+	 *
+	 * @param defaultSuccessUrl 默认成功url
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:37
+	 */
+	public final C defaultSuccessUrl(String defaultSuccessUrl) {
         return defaultSuccessUrl(defaultSuccessUrl, false);
     }
 
-    public final C defaultSuccessUrl(String defaultSuccessUrl, boolean alwaysUse) {
+	/**
+	 * 默认成功url
+	 *
+	 * @param defaultSuccessUrl 默认成功url
+	 * @param alwaysUse         始终使用
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:37
+	 */
+	public final C defaultSuccessUrl(String defaultSuccessUrl, boolean alwaysUse) {
         SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
         handler.setDefaultTargetUrl(defaultSuccessUrl);
         handler.setAlwaysUseDefaultTargetUrl(alwaysUse);
         return successHandler(handler);
     }
 
-    public C loginProcessingUrl(String loginProcessingUrl) {
+	/**
+	 * 登录处理url
+	 *
+	 * @param loginProcessingUrl 登录处理url
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:37
+	 */
+	public C loginProcessingUrl(String loginProcessingUrl) {
         this.loginProcessingUrl = loginProcessingUrl;
         this.authFilter.setRequiresAuthenticationRequestMatcher(createLoginProcessingUrlMatcher(loginProcessingUrl));
         return getSelf();
     }
 
-    protected abstract RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl);
+	/**
+	 * 创建登录处理url匹配器
+	 *
+	 * @param loginProcessingUrl 登录处理url
+	 * @return {@link RequestMatcher }
+	 * @since 2023-07-10 17:41:38
+	 */
+	protected abstract RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl);
 
-    public final C authenticationDetailsSource(
+	/**
+	 * 身份验证详细信息来源
+	 *
+	 * @param authenticationDetailsSource 身份验证详细信息来源
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:38
+	 */
+	public final C authenticationDetailsSource(
             AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource) {
         this.authenticationDetailsSource = authenticationDetailsSource;
         return getSelf();
     }
 
-    public final C successHandler(AuthenticationSuccessHandler successHandler) {
+	/**
+	 * 成功处理程序
+	 *
+	 * @param successHandler 成功处理程序
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:38
+	 */
+	public final C successHandler(AuthenticationSuccessHandler successHandler) {
         this.successHandler = successHandler;
         return getSelf();
     }
 
-    public final C authenticationEntryPoint(AuthenticationEntryPoint authenticationEntryPoint) {
+	/**
+	 * 认证入口点
+	 *
+	 * @param authenticationEntryPoint 认证入口点
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:38
+	 */
+	public final C authenticationEntryPoint(AuthenticationEntryPoint authenticationEntryPoint) {
         this.authenticationEntryPoint = authenticationEntryPoint;
         return getSelf();
     }
 
-    public final C permitAll() {
+	/**
+	 * 允许所有
+	 *
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:39
+	 */
+	public final C permitAll() {
         return permitAll(true);
     }
 
-    public final C permitAll(boolean permitAll) {
+	/**
+	 * 允许所有
+	 *
+	 * @param permitAll 允许所有
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:39
+	 */
+	public final C permitAll(boolean permitAll) {
         this.permitAll = permitAll;
         return getSelf();
     }
 
-    public final C failureUrl(String authenticationFailureUrl) {
+	/**
+	 * 失效网址
+	 *
+	 * @param authenticationFailureUrl 认证失败url
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:39
+	 */
+	public final C failureUrl(String authenticationFailureUrl) {
         C result = failureHandler(new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
         this.failureUrl = authenticationFailureUrl;
         return result;
     }
 
-    public final C failureHandler(AuthenticationFailureHandler authenticationFailureHandler) {
+	/**
+	 * 故障处理程序
+	 *
+	 * @param authenticationFailureHandler 身份验证失败处理程序
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:40
+	 */
+	public final C failureHandler(AuthenticationFailureHandler authenticationFailureHandler) {
         this.failureUrl = null;
         this.failureHandler = authenticationFailureHandler;
         return getSelf();
     }
 
-    public A with() {
+	/**
+	 * 与
+	 *
+	 * @return {@link A }
+	 * @since 2023-07-10 17:41:40
+	 */
+	public A with() {
         return this.configurerAdapter;
     }
 
-    @Override
+	/**
+	 * init
+	 *
+	 * @param http http
+	 * @since 2023-07-10 17:41:40
+	 */
+	@Override
     public void init(H http) {
         updateAccessDefaults(http);
         // updateAuthenticationDefaults();
@@ -160,26 +286,65 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         }
     }
 
-    protected abstract AuthenticationProvider authenticationProvider(H http);
+	/**
+	 * 身份验证提供程序
+	 *
+	 * @param http http
+	 * @return {@link AuthenticationProvider }
+	 * @since 2023-07-10 17:41:40
+	 */
+	protected abstract AuthenticationProvider authenticationProvider(H http);
 
-    protected abstract AuthenticationSuccessHandler defaultSuccessHandler(H http);
+	/**
+	 * 默认成功处理程序
+	 *
+	 * @param http http
+	 * @return {@link AuthenticationSuccessHandler }
+	 * @since 2023-07-10 17:41:41
+	 */
+	protected abstract AuthenticationSuccessHandler defaultSuccessHandler(H http);
 
-    protected abstract AuthenticationFailureHandler defaultFailureHandler(H http);
+	/**
+	 * 默认故障处理程序
+	 *
+	 * @param http http
+	 * @return {@link AuthenticationFailureHandler }
+	 * @since 2023-07-10 17:41:41
+	 */
+	protected abstract AuthenticationFailureHandler defaultFailureHandler(H http);
 
-    protected final void updateAuthenticationDefaults() {
+	/**
+	 * 更新身份验证默认值
+	 *
+	 * @since 2023-07-10 17:41:41
+	 */
+	protected final void updateAuthenticationDefaults() {
         if (this.failureHandler == null) {
             failureHandler(new AuthenticationEntryPointFailureHandler(new SecurityAuthenticationEntryPoint()));
         }
     }
 
-    protected final void registerDefaultAuthenticationEntryPoint(H http) {
+	/**
+	 * 注册默认身份验证入口点
+	 *
+	 * @param http http
+	 * @since 2023-07-10 17:41:42
+	 */
+	protected final void registerDefaultAuthenticationEntryPoint(H http) {
         if (authenticationEntryPoint != null) {
             this.authenticationEntryPoint = new SecurityAuthenticationEntryPoint();
         }
         registerAuthenticationEntryPoint(http, this.authenticationEntryPoint);
     }
 
-    @SuppressWarnings("unchecked")
+	/**
+	 * 注册认证入口点
+	 *
+	 * @param http                     http
+	 * @param authenticationEntryPoint 认证入口点
+	 * @since 2023-07-10 17:41:42
+	 */
+	@SuppressWarnings("unchecked")
     protected final void registerAuthenticationEntryPoint(H http, AuthenticationEntryPoint authenticationEntryPoint) {
         ExceptionHandlingConfigurer<H> exceptionHandling = http.getConfigurer(ExceptionHandlingConfigurer.class);
         if (exceptionHandling == null) {
@@ -189,7 +354,14 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
                 postProcess(authenticationEntryPoint), getAuthenticationEntryPointMatcher(http));
     }
 
-    protected final RequestMatcher getAuthenticationEntryPointMatcher(H http) {
+	/**
+	 * 获取身份验证入口点匹配器
+	 *
+	 * @param http http
+	 * @return {@link RequestMatcher }
+	 * @since 2023-07-10 17:41:43
+	 */
+	protected final RequestMatcher getAuthenticationEntryPointMatcher(H http) {
         ContentNegotiationStrategy contentNegotiationStrategy = http.getSharedObject(ContentNegotiationStrategy.class);
         if (contentNegotiationStrategy == null) {
             contentNegotiationStrategy = new HeaderContentNegotiationStrategy();
@@ -207,7 +379,13 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         return new AndRequestMatcher(Arrays.asList(notXRequestedWith, mediaMatcher));
     }
 
-    @Override
+	/**
+	 * 配置
+	 *
+	 * @param http http
+	 * @since 2023-07-10 17:41:43
+	 */
+	@Override
     public void configure(H http) throws Exception {
         PortMapper portMapper = http.getSharedObject(PortMapper.class);
         if (portMapper != null && this.authenticationEntryPoint instanceof LoginUrlAuthenticationEntryPoint) {
@@ -241,7 +419,15 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         http.addFilterBefore(filter, LogoutFilter.class);
     }
 
-    public final <T> T getBeanOrNull(ApplicationContext applicationContext, Class<T> beanType) {
+	/**
+	 * 获取bean或null
+	 *
+	 * @param applicationContext 应用程序上下文
+	 * @param beanType           bean类型
+	 * @return {@link T }
+	 * @since 2023-07-10 17:41:44
+	 */
+	public final <T> T getBeanOrNull(ApplicationContext applicationContext, Class<T> beanType) {
         String[] beanNames = applicationContext.getBeanNamesForType(beanType);
         if (beanNames.length == 1) {
             return applicationContext.getBean(beanNames[0], beanType);
@@ -249,69 +435,105 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
         return null;
     }
 
-    /**
-     * Gets the Authentication Filter
-     *
-     * @return the Authentication Filter
-     */
-    protected final F getAuthenticationFilter() {
+	/**
+	 * Gets the Authentication Filter
+	 *
+	 * @return {@link F }
+	 * @since 2023-07-10 17:41:44
+	 */
+	protected final F getAuthenticationFilter() {
         return this.authFilter;
     }
 
-    /**
-     * Sets the Authentication Filter
-     *
-     * @param authFilter the Authentication Filter
-     */
-    protected final void setAuthenticationFilter(F authFilter) {
+	/**
+	 * Sets the Authentication Filter
+	 *
+	 * @param authFilter the Authentication Filter
+	 * @since 2023-07-10 17:41:44
+	 */
+	protected final void setAuthenticationFilter(F authFilter) {
         this.authFilter = authFilter;
     }
 
-    /**
-     * Gets the Authentication Entry Point
-     *
-     * @return the Authentication Entry Point
-     */
-    protected final AuthenticationEntryPoint getAuthenticationEntryPoint() {
+	/**
+	 * Gets the Authentication Entry Point
+	 *
+	 * @return {@link AuthenticationEntryPoint }
+	 * @since 2023-07-10 17:41:44
+	 */
+	protected final AuthenticationEntryPoint getAuthenticationEntryPoint() {
         return this.authenticationEntryPoint;
     }
 
-    /**
-     * Gets the URL to submit an authentication request to (i.e. where username/password must be
-     * submitted)
-     *
-     * @return the URL to submit an authentication request to
-     */
-    protected final String getLoginProcessingUrl() {
+	/**
+	 * Gets the URL to submit an authentication request to (i.e. where username/password must be
+	 * submitted)
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:41:44
+	 */
+	protected final String getLoginProcessingUrl() {
         return this.loginProcessingUrl;
     }
 
-    /**
-     * Gets the URL to send users to if authentication fails
-     *
-     * @return the URL to send users if authentication fails (e.g. "/login?error").
-     */
-    protected final String getFailureUrl() {
+	/**
+	 * Gets the URL to send users to if authentication fails
+	 *
+	 * @return {@link String }
+	 * @since 2023-07-10 17:41:44
+	 */
+	protected final String getFailureUrl() {
         return this.failureUrl;
     }
 
-    /** Updates the default values for access. */
-    protected final void updateAccessDefaults(H http) {
+	/**
+	 * Updates the default values for access.
+	 *
+	 * @param http http
+	 * @since 2023-07-10 17:41:44
+	 */
+	protected final void updateAccessDefaults(H http) {
         if (this.permitAll) {
             PermitAllSupport.permitAll(http, this.loginProcessingUrl, this.failureUrl);
         }
     }
 
-    @SuppressWarnings("unchecked")
+	/**
+	 * 获取自我
+	 *
+	 * @return {@link C }
+	 * @since 2023-07-10 17:41:44
+	 */
+	@SuppressWarnings("unchecked")
     private C getSelf() {
         return (C) this;
     }
 
-    static final class PermitAllSupport {
+	/**
+	 * 允许所有支持
+	 *
+	 * @author shuigedeng
+	 * @version 2023.07
+	 * @since 2023-07-10 17:41:45
+	 */
+	static final class PermitAllSupport {
 
-        private PermitAllSupport() {}
+		/**
+		 * 允许所有支持
+		 *
+		 * @return
+		 * @since 2023-07-10 17:41:45
+		 */
+		private PermitAllSupport() {}
 
-        private static void permitAll(HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, String... urls) {
+		/**
+		 * 允许所有
+		 *
+		 * @param http http
+		 * @param urls 网址
+		 * @since 2023-07-10 17:41:46
+		 */
+		private static void permitAll(HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, String... urls) {
             for (String url : urls) {
                 if (url != null) {
                     permitAll(http, new ExactUrlRequestMatcher(url));
@@ -319,7 +541,14 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
             }
         }
 
-        @SuppressWarnings("unchecked")
+		/**
+		 * 允许所有
+		 *
+		 * @param http            http
+		 * @param requestMatchers 请求匹配器
+		 * @since 2023-07-10 17:41:46
+		 */
+		@SuppressWarnings("unchecked")
         static void permitAll(
                 HttpSecurityBuilder<? extends HttpSecurityBuilder<?>> http, RequestMatcher... requestMatchers) {
             AuthorizeHttpRequestsConfigurer<?> configurer = http.getConfigurer(AuthorizeHttpRequestsConfigurer.class);
@@ -327,15 +556,37 @@ public abstract class AbstractExtensionLoginFilterConfigurer<
             configurer.getRegistry().requestMatchers(requestMatchers).permitAll();
         }
 
-        private static final class ExactUrlRequestMatcher implements RequestMatcher {
+		/**
+		 * 精确网址请求匹配器
+		 *
+		 * @author shuigedeng
+		 * @version 2023.07
+		 * @see RequestMatcher
+		 * @since 2023-07-10 17:41:46
+		 */
+		private static final class ExactUrlRequestMatcher implements RequestMatcher {
 
             private final String processUrl;
 
-            private ExactUrlRequestMatcher(String processUrl) {
+			/**
+			 * 精确网址请求匹配器
+			 *
+			 * @param processUrl 进程url
+			 * @return
+			 * @since 2023-07-10 17:41:47
+			 */
+			private ExactUrlRequestMatcher(String processUrl) {
                 this.processUrl = processUrl;
             }
 
-            @Override
+			/**
+			 * 匹配
+			 *
+			 * @param request 请求
+			 * @return boolean
+			 * @since 2023-07-10 17:41:47
+			 */
+			@Override
             public boolean matches(HttpServletRequest request) {
                 String uri = request.getRequestURI();
                 String query = request.getQueryString();
