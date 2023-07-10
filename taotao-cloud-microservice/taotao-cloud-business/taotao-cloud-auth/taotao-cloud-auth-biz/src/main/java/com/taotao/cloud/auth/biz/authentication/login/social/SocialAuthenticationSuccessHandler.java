@@ -34,18 +34,37 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * LoginAuthenticationSuccessHandler
  *
  * @author shuigedeng
- * @version 2022.09
- * @since 2022-11-07 10:26
+ * @version 2023.07
+ * @see AuthenticationSuccessHandler
+ * @since 2023-07-10 17:40:09
  */
 public class SocialAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final JwtTokenGenerator jwtTokenGenerator;
+	/**
+	 * jwt令牌生成器
+	 */
+	private final JwtTokenGenerator jwtTokenGenerator;
 
-    public SocialAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
+	/**
+	 * 社交身份验证成功处理程序
+	 *
+	 * @param jwtTokenGenerator jwt令牌生成器
+	 * @return
+	 * @since 2023-07-10 17:40:09
+	 */
+	public SocialAuthenticationSuccessHandler(JwtTokenGenerator jwtTokenGenerator) {
         this.jwtTokenGenerator = jwtTokenGenerator;
     }
 
-    @Override
+	/**
+	 * 关于身份验证成功
+	 *
+	 * @param request        请求
+	 * @param response       响应
+	 * @param authentication 身份验证
+	 * @since 2023-07-10 17:40:10
+	 */
+	@Override
     public void onAuthenticationSuccess(
             HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {

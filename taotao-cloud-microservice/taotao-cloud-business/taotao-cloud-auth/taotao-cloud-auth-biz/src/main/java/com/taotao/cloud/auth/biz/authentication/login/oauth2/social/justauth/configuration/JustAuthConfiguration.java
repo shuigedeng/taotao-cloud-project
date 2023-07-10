@@ -40,7 +40,6 @@ import org.springframework.context.annotation.Configuration;
  * @date : 2021/5/22 11:25
  */
 @Configuration(proxyBeanMethods = false)
-// @ConditionalOnJustAuthEnabled
 @EnableConfigurationProperties(JustAuthProperties.class)
 public class JustAuthConfiguration {
 

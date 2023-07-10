@@ -50,16 +50,32 @@ import org.springframework.util.CollectionUtils;
  * 提取公共的通用认证基类，方便设置返回Token的信息设置
  *
  * @author shuigedeng
- * @version 2023.04
- * @since 2023-06-29 16:45:33
+ * @version 2023.07
+ * @since 2023-07-10 17:36:28
  */
 public abstract class OAuth2AbstractAuthenticationProvider implements AuthenticationProvider {
 
-    private static final Logger log = LoggerFactory.getLogger(OAuth2AbstractAuthenticationProvider.class);
+	/**
+	 * 日志
+	 */
+	private static final Logger log = LoggerFactory.getLogger(OAuth2AbstractAuthenticationProvider.class);
 
-    private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
+	/**
+	 * id令牌令牌类型
+	 */
+	private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
 
-    protected OAuth2AccessToken createOAuth2AccessToken(
+	/**
+	 * 创建oauth2访问令牌
+	 *
+	 * @param tokenContextBuilder  令牌上下文生成器
+	 * @param authorizationBuilder 授权生成器
+	 * @param tokenGenerator       令牌生成器
+	 * @param errorUri             错误uri
+	 * @return {@link OAuth2AccessToken }
+	 * @since 2023-07-10 17:36:29
+	 */
+	protected OAuth2AccessToken createOAuth2AccessToken(
             DefaultOAuth2TokenContext.Builder tokenContextBuilder,
             OAuth2Authorization.Builder authorizationBuilder,
             OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator,
@@ -97,7 +113,19 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
         return accessToken;
     }
 
-    protected OAuth2RefreshToken creatOAuth2RefreshToken(
+	/**
+	 * 创建oauth2刷新令牌
+	 *
+	 * @param tokenContextBuilder  令牌上下文生成器
+	 * @param authorizationBuilder 授权生成器
+	 * @param tokenGenerator       令牌生成器
+	 * @param errorUri             错误uri
+	 * @param clientPrincipal      客户委托人
+	 * @param registeredClient     注册客户
+	 * @return {@link OAuth2RefreshToken }
+	 * @since 2023-07-10 17:36:30
+	 */
+	protected OAuth2RefreshToken creatOAuth2RefreshToken(
             DefaultOAuth2TokenContext.Builder tokenContextBuilder,
             OAuth2Authorization.Builder authorizationBuilder,
             OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator,
@@ -130,7 +158,20 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
         return refreshToken;
     }
 
-    protected OidcIdToken createOidcIdToken(
+	/**
+	 * 创建oidc id令牌
+	 *
+	 * @param principal            校长
+	 * @param sessionRegistry      会话注册表
+	 * @param tokenContextBuilder  令牌上下文生成器
+	 * @param authorizationBuilder 授权生成器
+	 * @param tokenGenerator       令牌生成器
+	 * @param errorUri             错误uri
+	 * @param requestedScopes      请求范围
+	 * @return {@link OidcIdToken }
+	 * @since 2023-07-10 17:36:31
+	 */
+	protected OidcIdToken createOidcIdToken(
             Authentication principal,
             SessionRegistry sessionRegistry,
             DefaultOAuth2TokenContext.Builder tokenContextBuilder,
@@ -191,7 +232,15 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
         return idToken;
     }
 
-    private SessionInformation getSessionInformation(Authentication principal, SessionRegistry sessionRegistry) {
+	/**
+	 * 获取会话信息
+	 *
+	 * @param principal       校长
+	 * @param sessionRegistry 会话注册表
+	 * @return {@link SessionInformation }
+	 * @since 2023-07-10 17:36:32
+	 */
+	private SessionInformation getSessionInformation(Authentication principal, SessionRegistry sessionRegistry) {
         SessionInformation sessionInformation = null;
         if (sessionRegistry != null) {
             List<SessionInformation> sessions = sessionRegistry.getAllSessions(principal.getPrincipal(), false);
@@ -208,13 +257,27 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
         return sessionInformation;
     }
 
-    private static String createHash(String value) throws NoSuchAlgorithmException {
+	/**
+	 * 创建哈希
+	 *
+	 * @param value 值
+	 * @return {@link String }
+	 * @since 2023-07-10 17:36:32
+	 */
+	private static String createHash(String value) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] digest = md.digest(value.getBytes(StandardCharsets.US_ASCII));
         return Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
     }
 
-    protected Map<String, Object> idTokenAdditionalParameters(OidcIdToken idToken) {
+	/**
+	 * id令牌附加参数
+	 *
+	 * @param idToken id令牌
+	 * @return {@link Map }<{@link String }, {@link Object }>
+	 * @since 2023-07-10 17:36:32
+	 */
+	protected Map<String, Object> idTokenAdditionalParameters(OidcIdToken idToken) {
         Map<String, Object> additionalParameters = Collections.emptyMap();
         if (idToken != null) {
             additionalParameters = new HashMap<>();
@@ -223,7 +286,15 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
         return additionalParameters;
     }
 
-    protected Set<String> validateScopes(Set<String> requestedScopes, RegisteredClient registeredClient) {
+	/**
+	 * 验证范围
+	 *
+	 * @param requestedScopes  请求范围
+	 * @param registeredClient 注册客户
+	 * @return {@link Set }<{@link String }>
+	 * @since 2023-07-10 17:36:33
+	 */
+	protected Set<String> validateScopes(Set<String> requestedScopes, RegisteredClient registeredClient) {
         Set<String> authorizedScopes = Collections.emptySet();
         if (!CollectionUtils.isEmpty(requestedScopes)) {
             for (String requestedScope : requestedScopes) {
@@ -236,7 +307,15 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
         return authorizedScopes;
     }
 
-    protected OAuth2AccessTokenAuthenticationToken createOAuth2AccessTokenAuthenticationToken(
+	/**
+	 * 创建oauth2访问令牌身份验证令牌
+	 *
+	 * @param source      来源
+	 * @param destination 目地
+	 * @return {@link OAuth2AccessTokenAuthenticationToken }
+	 * @since 2023-07-10 17:36:34
+	 */
+	protected OAuth2AccessTokenAuthenticationToken createOAuth2AccessTokenAuthenticationToken(
             Authentication source, OAuth2AccessTokenAuthenticationToken destination) {
         if (source instanceof UsernamePasswordAuthenticationToken) {
             if (source.getPrincipal() instanceof HerodotusUser user) {

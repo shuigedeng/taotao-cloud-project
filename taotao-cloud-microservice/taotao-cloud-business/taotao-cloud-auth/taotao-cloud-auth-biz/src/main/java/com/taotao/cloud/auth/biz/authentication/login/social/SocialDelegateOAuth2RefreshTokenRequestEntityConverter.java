@@ -32,15 +32,33 @@ import org.springframework.web.util.UriComponentsBuilder;
 /**
  * 兼容微信登录 {@code
  * https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN}
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @see Converter
+ * @since 2023-07-10 17:40:58
  */
 public class SocialDelegateOAuth2RefreshTokenRequestEntityConverter
         implements Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> {
 
-    private static final String REFRESH_TOKEN_ENDPOINT = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
-    private final Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> requestEntityConverter =
+	/**
+	 * 刷新令牌端点
+	 */
+	private static final String REFRESH_TOKEN_ENDPOINT = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+	/**
+	 * 请求实体转换器
+	 */
+	private final Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> requestEntityConverter =
             new OAuth2RefreshTokenGrantRequestEntityConverter();
 
-    @Override
+	/**
+	 * 转换
+	 *
+	 * @param source 来源
+	 * @return {@link RequestEntity }<{@link ? }>
+	 * @since 2023-07-10 17:40:58
+	 */
+	@Override
     public RequestEntity<?> convert(OAuth2RefreshTokenGrantRequest source) {
         ClientRegistration clientRegistration = source.getClientRegistration();
         if (SocialClientProviders.WECHAT_WEB_LOGIN_CLIENT.registrationId().equals(clientRegistration.getClientId())) {

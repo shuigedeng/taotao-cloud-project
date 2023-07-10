@@ -57,13 +57,20 @@ import java.util.function.Consumer;
  * 基于spring security oauth2 client 扩展第三方登录
  *
  * @author shuigedeng
- * @version 2023.04
- * @since 2023-06-29 17:23:16
+ * @version 2023.07
+ * @see AbstractHttpConfigurer
+ * @since 2023-07-10 17:41:23
  */
 public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProviderConfigurer, HttpSecurity> {
 
+	/**
+	 * 社会委托客户注册存储库
+	 */
 	private final SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository;
 
+	/**
+	 * o auth2登录配置器消费者
+	 */
 	private Consumer<OAuth2LoginConfigurer<HttpSecurity>> oAuth2LoginConfigurerConsumer =
 		oAuth2ProviderConfigurer -> {
 		};
@@ -72,6 +79,8 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 	 * Instantiates a new O auth 2 provider configurer.
 	 *
 	 * @param socialDelegateClientRegistrationRepository the delegate client registration repository
+	 * @return
+	 * @since 2023-07-10 17:41:23
 	 */
 	public SocialProviderConfigurer(
 		SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository) {
@@ -83,7 +92,8 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 	 *
 	 * @param appId  the app id
 	 * @param secret the secret
-	 * @return the o auth 2 provider configurer
+	 * @return {@link SocialProviderConfigurer }
+	 * @since 2023-07-10 17:41:23
 	 */
 	public SocialProviderConfigurer wechatWebclient(String appId, String secret) {
 		ClientRegistration clientRegistration = getBuilder(
@@ -105,7 +115,8 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 	 *
 	 * @param appId  the app id
 	 * @param secret the secret
-	 * @return the o auth 2 provider configurer
+	 * @return {@link SocialProviderConfigurer }
+	 * @since 2023-07-10 17:41:23
 	 */
 	public SocialProviderConfigurer wechatWebLoginclient(String appId, String secret) {
 		ClientRegistration clientRegistration = getBuilder(
@@ -128,7 +139,8 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 	 * @param corpId  the corp id
 	 * @param secret  the secret
 	 * @param agentId the agent id
-	 * @return the o auth 2 provider configurer
+	 * @return {@link SocialProviderConfigurer }
+	 * @since 2023-07-10 17:41:23
 	 */
 	public SocialProviderConfigurer workWechatWebLoginclient(String corpId, String secret, String agentId) {
 		ClientRegistration clientRegistration = getBuilder(
@@ -149,7 +161,8 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 	 * O auth 2 login configurer consumer o auth 2 provider configurer.
 	 *
 	 * @param oAuth2LoginConfigurerConsumer the o auth 2 login configurer consumer
-	 * @return the o auth 2 provider configurer
+	 * @return {@link SocialProviderConfigurer }
+	 * @since 2023-07-10 17:41:23
 	 */
 	public SocialProviderConfigurer oAuth2LoginConfigurerConsumer(
 		Consumer<OAuth2LoginConfigurer<HttpSecurity>> oAuth2LoginConfigurerConsumer) {
@@ -157,6 +170,14 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 		return this;
 	}
 
+	/**
+	 * 获取建设者
+	 *
+	 * @param registrationId 注册id
+	 * @param method         方法
+	 * @return {@link ClientRegistration.Builder }
+	 * @since 2023-07-10 17:41:24
+	 */
 	protected final ClientRegistration.Builder getBuilder(String registrationId, ClientAuthenticationMethod method) {
 		ClientRegistration.Builder builder = ClientRegistration.withRegistrationId(registrationId);
 		builder.clientAuthenticationMethod(method);
@@ -165,6 +186,12 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 		return builder;
 	}
 
+	/**
+	 * init
+	 *
+	 * @param httpSecurity http安全
+	 * @since 2023-07-10 17:41:24
+	 */
 	@Override
 	public void init(HttpSecurity httpSecurity) throws Exception {
 		OAuth2AccessTokenResponseHttpMessageConverter tokenResponseHttpMessageConverter =
@@ -236,6 +263,13 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 			});
 	}
 
+	/**
+	 * 身份验证成功处理程序
+	 *
+	 * @param httpSecurity http安全
+	 * @return {@link AuthenticationSuccessHandler }
+	 * @since 2023-07-10 17:41:25
+	 */
 	private AuthenticationSuccessHandler authenticationSuccessHandler(HttpSecurity httpSecurity) {
 		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
 		JwtTokenGenerator jwtTokenGenerator = applicationContext.getBean(JwtTokenGenerator.class);
@@ -244,10 +278,22 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 		return new SocialAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 
+	/**
+	 * 身份验证失败处理程序
+	 *
+	 * @return {@link AuthenticationFailureHandler }
+	 * @since 2023-07-10 17:41:25
+	 */
 	private AuthenticationFailureHandler authenticationFailureHandler() {
 		return new SocialAuthenticationFailureHandler();
 	}
 
+	/**
+	 * 配置
+	 *
+	 * @param httpSecurity http安全
+	 * @since 2023-07-10 17:41:26
+	 */
 	@Override
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		DefaultLoginPageGeneratingFilter loginPageGeneratingFilter =
@@ -267,6 +313,12 @@ public class SocialProviderConfigurer extends AbstractHttpConfigurer<SocialProvi
 		}
 	}
 
+	/**
+	 * http安全
+	 *
+	 * @return {@link HttpSecurity }
+	 * @since 2023-07-10 17:41:26
+	 */
 	public HttpSecurity httpSecurity() {
 		return getBuilder();
 	}
