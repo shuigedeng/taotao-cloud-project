@@ -20,7 +20,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
  * 现金支付
  *
  * @author xxm
- * @date 2021/6/23
+ * @since 2021/6/23
  */
 @Slf4j
 @Scope(SCOPE_PROTOTYPE)
@@ -66,15 +66,6 @@ public class CashPayStrategy extends AbsPayStrategy {
     @Override
     public void doCloseHandler() {
         cashService.close(this.getPayment().getId());
-    }
-
-    /**
-     * 退款
-     */
-    @Override
-    public void doRefundHandler() {
-        cashService.refund(this.getPayment().getId(), this.getPayWayParam().getAmount());
-        paymentService.updateRefundSuccess(this.getPayment(), this.getPayWayParam().getAmount(), PayChannelEnum.CASH);
     }
 
 }

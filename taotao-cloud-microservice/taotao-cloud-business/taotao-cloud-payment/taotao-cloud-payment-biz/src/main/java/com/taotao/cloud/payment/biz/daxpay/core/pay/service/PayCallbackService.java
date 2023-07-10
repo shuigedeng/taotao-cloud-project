@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * 支付回调处理
  *
  * @author xxm
- * @date 2021/2/27
+ * @since 2021/2/27
  */
 @Slf4j
 @Service
@@ -44,11 +44,10 @@ public class PayCallbackService {
 
     /**
      * 统一回调处理
-     * @param appCode
      * @param tradeStatus 支付状态
      * @see PayStatusCode
      */
-    public PayCallbackResult callback(String appCode, Long paymentId, String tradeStatus, Map<String, String> map) {
+    public PayCallbackResult callback(Long paymentId, String tradeStatus, Map<String, String> map) {
 
         // 获取payment和paymentParam数据
         Payment payment = paymentService.findById(paymentId).orElse(null);

@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 钱包支付参数
  *
  * @author xxm
- * @date 2020/12/8
+ * @since 2020/12/8
  */
 @Data
 @Accessors(chain = true)
@@ -21,5 +21,8 @@ public class WalletPayParam implements Serializable {
 
     @Schema(description = "钱包ID")
     private Long walletId;
+
+    @Schema(description = "用户ID")
+    private Long userId;
 
 }

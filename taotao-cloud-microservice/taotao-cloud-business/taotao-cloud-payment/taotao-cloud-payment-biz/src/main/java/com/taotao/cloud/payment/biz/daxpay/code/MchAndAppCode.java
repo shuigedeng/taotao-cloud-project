@@ -4,7 +4,7 @@ package com.taotao.cloud.payment.biz.daxpay.code;
  * 商户和应用相关编码
  *
  * @author xxm
- * @date 2023/6/12
+ * @since 2023/6/12
  */
 public interface MchAndAppCode {
 
@@ -34,5 +34,8 @@ public interface MchAndAppCode {
 
     /** 停用 */
     String PAY_CONFIG_STATE_FORBIDDEN = "forbidden";
+
+    /** 封禁 */
+    String PAY_CONFIG_STATE_BANNED = "banned";
 
 }

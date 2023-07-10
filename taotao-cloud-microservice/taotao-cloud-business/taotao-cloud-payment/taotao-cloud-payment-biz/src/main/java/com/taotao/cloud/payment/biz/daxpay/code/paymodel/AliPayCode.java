@@ -4,16 +4,16 @@ package com.taotao.cloud.payment.biz.daxpay.code.paymodel;
  * 支付宝支付参数
  *
  * @author xxm
- * @date 2021/2/27
+ * @since 2021/2/27
  */
 public interface AliPayCode {
 
     // 认证类型
     /** 公钥 */
-    int AUTH_TYPE_KEY = 1;
+    String AUTH_TYPE_KEY = "key";
 
     /** 证书 */
-    int AUTH_TYPE_CART = 2;
+    String AUTH_TYPE_CART = "cart";
 
     // 渠道枚举
     /** 目前PC支付必填 */

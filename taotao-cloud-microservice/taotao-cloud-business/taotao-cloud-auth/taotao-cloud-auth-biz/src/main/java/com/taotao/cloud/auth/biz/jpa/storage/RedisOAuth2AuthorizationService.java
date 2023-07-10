@@ -15,24 +15,16 @@
  */
 package com.taotao.cloud.auth.biz.jpa.storage;
 
+import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationService;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import org.springframework.lang.Nullable;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.OAuth2DeviceCode;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;
-import org.springframework.security.oauth2.core.OAuth2UserCode;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
-import org.springframework.security.oauth2.core.oidc.OidcIdToken;
-import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
-import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationCode;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
-import org.springframework.util.Assert;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,200 +38,135 @@ import java.util.concurrent.TimeUnit;
  * @see OAuth2AuthorizationService
  * @since 0.0.1
  */
-public final class RedisOAuth2AuthorizationService implements OAuth2AuthorizationService {
-	private RedisRepository redisRepository;
-
+public final class RedisOAuth2AuthorizationService extends JpaOAuth2AuthorizationService {
 
 	/**
-	 * Constructs an {@code InMemoryOAuth2AuthorizationService}.
+	 * 根据 id 查询时放入Redis中的部分 key
 	 */
-	public RedisOAuth2AuthorizationService(RedisRepository redisRepository) {
-		this(redisRepository, Collections.emptyList());
-	}
+	public static final String OAUTH2_AUTHORIZATION_ID = ":oauth2_authorization:id:";
 
 	/**
-	 * Constructs an {@code InMemoryOAuth2AuthorizationService} using the provided parameters.
-	 *
-	 * @param authorizations the authorization(s)
+	 * 根据 token类型、token 查询时放入Redis中的部分 key
 	 */
-	public RedisOAuth2AuthorizationService(RedisRepository redisRepository,OAuth2Authorization... authorizations) {
-		this(redisRepository, Arrays.asList(authorizations));
-	}
+	public static final String OAUTH2_AUTHORIZATION_TOKEN_TYPE = ":oauth2_authorization:tokenType:";
 
-	/**
-	 * Constructs an {@code InMemoryOAuth2AuthorizationService} using the provided parameters.
-	 *
-	 * @param authorizations the authorization(s)
-	 */
-	public RedisOAuth2AuthorizationService( RedisRepository redisRepository, List<OAuth2Authorization> authorizations) {
-		Assert.notNull(authorizations, "authorizations cannot be null");
+	public static final long AUTHORIZATION_TIMEOUT = 300L;
 
+	public static final String PREFIX = "spring-authorization-server";
+
+	private final RedisRepository redisRepository;
+
+	public RedisOAuth2AuthorizationService(HerodotusAuthorizationService herodotusAuthorizationService, RegisteredClientRepository registeredClientRepository, RedisRepository redisRepository) {
+		super(herodotusAuthorizationService, registeredClientRepository);
 		this.redisRepository = redisRepository;
-
-		authorizations.forEach(authorization -> {
-			Assert.notNull(authorization, "authorization cannot be null");
-
-			Object authorizationObj = this.redisRepository.get(authorization.getId());
-
-			Assert.isTrue(Objects.isNull(authorizationObj),
-				"The authorization must be unique. Found duplicate identifier: " + authorization.getId());
-
-			this.redisRepository.set(authorization.getId(), authorization);
-		});
 	}
+
 
 	@Override
 	public void save(OAuth2Authorization authorization) {
-		Assert.notNull(authorization, "authorization cannot be null");
-
-		//todo 此处代码可以优化
-
-		//if (isComplete(authorization)) {
-		//	this.authorizations.put(authorization.getId(), authorization);
-		//} else {
-		//	this.initializedAuthorizations.put(authorization.getId(), authorization);
-		//}
-
-		redisRepository.set(authorization.getId(), authorization);
-
-//		OAuth2RefreshToken oAuth2RefreshToken = authorization.getRefreshToken().getToken();
-//		long oAuth2RefreshTokenTimeOut = ChronoUnit.SECONDS.between(oAuth2RefreshToken.getIssuedAt(), oAuth2RefreshToken.getExpiresAt());
-//		redisRepository.getRedisTemplate().opsForValue().set(buildKey(OAuth2ParameterNames.REFRESH_TOKEN, oAuth2RefreshToken.getTokenValue()),
-//			authorization, oAuth2RefreshTokenTimeOut, TimeUnit.SECONDS);
-//
-//		OAuth2AccessToken oAuth2AccessToken = authorization.getAccessToken().getToken();
-//		long oAuth2AccessTokenTimeOut = ChronoUnit.SECONDS.between(oAuth2AccessToken.getIssuedAt(), oAuth2RefreshToken.getExpiresAt());
-//		redisRepository.getRedisTemplate().opsForValue().set(buildKey(OAuth2ParameterNames.ACCESS_TOKEN, oAuth2AccessToken.getTokenValue()),
-//			authorization, oAuth2AccessTokenTimeOut, TimeUnit.SECONDS);
+		if (authorization != null) {
+			set(authorization, AUTHORIZATION_TIMEOUT, TimeUnit.SECONDS);
+			super.save(authorization);
+		}
 	}
+
 
 	@Override
 	public void remove(OAuth2Authorization authorization) {
-		Assert.notNull(authorization, "authorization cannot be null");
-		//if (isComplete(authorization)) {
-		//	this.authorizations.remove(authorization.getId(), authorization);
-		//} else {
-		//	this.initializedAuthorizations.remove(authorization.getId(), authorization);
-		//}
+		if (authorization != null) {
+			redisRepository.del(PREFIX + OAUTH2_AUTHORIZATION_ID + authorization.getId());
 
-		redisRepository.del(authorization.getId());
+			OAuth2Authorization.Token<OAuth2AccessToken> accessToken = authorization.getAccessToken();
+			if (accessToken != null) {
+				OAuth2AccessToken token = accessToken.getToken();
+				String tokenValue = token.getTokenValue();
+				redisRepository.del(PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + OAuth2TokenType.ACCESS_TOKEN.getValue() + ":" + tokenValue);
+			}
+
+			OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken = authorization.getRefreshToken();
+			if (refreshToken != null) {
+				OAuth2RefreshToken token = refreshToken.getToken();
+				String tokenValue = token.getTokenValue();
+				redisRepository.del(PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + OAuth2TokenType.REFRESH_TOKEN.getValue() + ":" + tokenValue);
+			}
+
+			super.remove(authorization);
+		}
 	}
 
-	@Nullable
 	@Override
 	public OAuth2Authorization findById(String id) {
-		Assert.hasText(id, "id cannot be empty");
-		//OAuth2Authorization authorization = this.authorizations.get(id);
-		//return authorization != null ?
-		//	authorization :
-		//	this.initializedAuthorizations.get(id);
 
-		return (OAuth2Authorization)redisRepository.get(id);
+		OAuth2Authorization oauth2AuthorizationRedis = (OAuth2Authorization) redisRepository.opsForValue().get(PREFIX + OAUTH2_AUTHORIZATION_ID + id);
+
+		OAuth2Authorization oauth2AuthorizationResult;
+		OAuth2Authorization oauth2AuthorizationByDatabase;
+
+		if (oauth2AuthorizationRedis == null) {
+			oauth2AuthorizationByDatabase = super.findById(id);
+			LogUtils.debug("根据 id：{} 直接查询数据库中的授权：{}", id, oauth2AuthorizationByDatabase);
+
+			if (oauth2AuthorizationByDatabase != null) {
+				set(oauth2AuthorizationByDatabase, AUTHORIZATION_TIMEOUT, TimeUnit.SECONDS);
+			}
+
+			oauth2AuthorizationResult = oauth2AuthorizationByDatabase;
+		} else {
+			LogUtils.debug("根据 id：{} 直接查询Redis中的授权：{}", id, oauth2AuthorizationRedis);
+			oauth2AuthorizationResult = oauth2AuthorizationRedis;
+		}
+
+		return oauth2AuthorizationResult;
 	}
 
-	@Nullable
 	@Override
-	public OAuth2Authorization findByToken(String token, @Nullable OAuth2TokenType tokenType) {
-		Assert.hasText(token, "token cannot be empty");
-		//for (OAuth2Authorization authorization : this.authorizations.values()) {
-		//	if (hasToken(authorization, token, tokenType)) {
-		//		return authorization;
-		//	}
-		//}
-		//for (OAuth2Authorization authorization : this.initializedAuthorizations.values()) {
-		//	if (hasToken(authorization, token, tokenType)) {
-		//		return authorization;
-		//	}
-		//}
-		return null;
-	}
+	public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
+		assert tokenType != null;
+		String tokenTypeValue = tokenType.getValue();
 
-	private static boolean isComplete(OAuth2Authorization authorization) {
-		return authorization.getAccessToken() != null;
-	}
+		OAuth2Authorization oauth2AuthorizationByRedis = (OAuth2Authorization) redisRepository.opsForValue().get(PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + tokenTypeValue + ":" + token);
 
-	private static boolean hasToken(OAuth2Authorization authorization, String token, @Nullable OAuth2TokenType tokenType) {
-		if (tokenType == null) {
-			return matchesState(authorization, token) ||
-				matchesAuthorizationCode(authorization, token) ||
-				matchesAccessToken(authorization, token) ||
-				matchesIdToken(authorization, token) ||
-				matchesRefreshToken(authorization, token) ||
-				matchesDeviceCode(authorization, token) ||
-				matchesUserCode(authorization, token);
-		} else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
-			return matchesState(authorization, token);
-		} else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
-			return matchesAuthorizationCode(authorization, token);
-		} else if (OAuth2TokenType.ACCESS_TOKEN.equals(tokenType)) {
-			return matchesAccessToken(authorization, token);
-		} else if (OidcParameterNames.ID_TOKEN.equals(tokenType.getValue())) {
-			return matchesIdToken(authorization, token);
-		} else if (OAuth2TokenType.REFRESH_TOKEN.equals(tokenType)) {
-			return matchesRefreshToken(authorization, token);
-		} else if (OAuth2ParameterNames.DEVICE_CODE.equals(tokenType.getValue())) {
-			return matchesDeviceCode(authorization, token);
-		} else if (OAuth2ParameterNames.USER_CODE.equals(tokenType.getValue())) {
-			return matchesUserCode(authorization, token);
-		}
-		return false;
-	}
+		OAuth2Authorization oauth2AuthorizationResult;
+		OAuth2Authorization oauth2AuthorizationByDatabase;
 
-	private static boolean matchesState(OAuth2Authorization authorization, String token) {
-		return token.equals(authorization.getAttribute(OAuth2ParameterNames.STATE));
-	}
+		if (oauth2AuthorizationByRedis == null) {
+			oauth2AuthorizationByDatabase = super.findByToken(token, tokenType);
+			LogUtils.debug("根据 token：{}、tokenType：{} 直接查询数据库中的客户：{}", token, tokenType, oauth2AuthorizationByDatabase);
 
-	private static boolean matchesAuthorizationCode(OAuth2Authorization authorization, String token) {
-		OAuth2Authorization.Token<OAuth2AuthorizationCode> authorizationCode =
-			authorization.getToken(OAuth2AuthorizationCode.class);
-		return authorizationCode != null && authorizationCode.getToken().getTokenValue().equals(token);
-	}
+			if (oauth2AuthorizationByDatabase != null) {
+				set(oauth2AuthorizationByDatabase, AUTHORIZATION_TIMEOUT, TimeUnit.SECONDS);
+			}
 
-	private static boolean matchesAccessToken(OAuth2Authorization authorization, String token) {
-		OAuth2Authorization.Token<OAuth2AccessToken> accessToken =
-			authorization.getToken(OAuth2AccessToken.class);
-		return accessToken != null && accessToken.getToken().getTokenValue().equals(token);
-	}
-
-	private static boolean matchesRefreshToken(OAuth2Authorization authorization, String token) {
-		OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken =
-			authorization.getToken(OAuth2RefreshToken.class);
-		return refreshToken != null && refreshToken.getToken().getTokenValue().equals(token);
-	}
-
-	private static boolean matchesIdToken(OAuth2Authorization authorization, String token) {
-		OAuth2Authorization.Token<OidcIdToken> idToken =
-			authorization.getToken(OidcIdToken.class);
-		return idToken != null && idToken.getToken().getTokenValue().equals(token);
-	}
-
-	private static boolean matchesDeviceCode(OAuth2Authorization authorization, String token) {
-		OAuth2Authorization.Token<OAuth2DeviceCode> deviceCode =
-			authorization.getToken(OAuth2DeviceCode.class);
-		return deviceCode != null && deviceCode.getToken().getTokenValue().equals(token);
-	}
-
-	private static boolean matchesUserCode(OAuth2Authorization authorization, String token) {
-		OAuth2Authorization.Token<OAuth2UserCode> userCode =
-			authorization.getToken(OAuth2UserCode.class);
-		return userCode != null && userCode.getToken().getTokenValue().equals(token);
-	}
-
-	private static final class MaxSizeHashMap<K, V> extends LinkedHashMap<K, V> {
-		private final int maxSize;
-
-		private MaxSizeHashMap(int maxSize) {
-			this.maxSize = maxSize;
+			oauth2AuthorizationResult = oauth2AuthorizationByDatabase;
+		} else {
+			LogUtils.debug("根据 token：{}、tokenType：{} 直接查询Redis中的客户：{}", token, tokenType, oauth2AuthorizationByRedis);
+			oauth2AuthorizationResult = oauth2AuthorizationByRedis;
 		}
 
-		@Override
-		protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-			return size() > this.maxSize;
-		}
-
+		return oauth2AuthorizationResult;
 	}
 
-	private String buildKey(String key, String token) {
-		return key + ":" + token;
+
+	public void set(OAuth2Authorization authorization, long timeout, TimeUnit unit) {
+		redisRepository.opsForValue().set(PREFIX + OAUTH2_AUTHORIZATION_ID + authorization.getId(), authorization, timeout, unit);
+
+		OAuth2Authorization.Token<OAuth2AccessToken> accessToken = authorization.getAccessToken();
+		if (accessToken != null) {
+			OAuth2AccessToken token = accessToken.getToken();
+			if (token != null) {
+				String tokenValue = token.getTokenValue();
+				redisRepository.opsForValue().set(PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + OAuth2TokenType.ACCESS_TOKEN.getValue() + ":" + tokenValue, authorization, timeout, unit);
+			}
+		}
+
+		OAuth2Authorization.Token<OAuth2RefreshToken> refreshToken = authorization.getRefreshToken();
+		if (refreshToken != null) {
+			OAuth2RefreshToken token = refreshToken.getToken();
+			if (token != null) {
+				String tokenValue = token.getTokenValue();
+				redisRepository.opsForValue().set(PREFIX + OAUTH2_AUTHORIZATION_TOKEN_TYPE + OAuth2TokenType.REFRESH_TOKEN.getValue() + ":" + tokenValue, authorization, timeout, unit);
+			}
+		}
+
 	}
 }

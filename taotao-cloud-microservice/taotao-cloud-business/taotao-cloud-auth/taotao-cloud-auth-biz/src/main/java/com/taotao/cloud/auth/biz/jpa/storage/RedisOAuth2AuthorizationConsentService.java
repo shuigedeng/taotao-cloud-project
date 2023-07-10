@@ -15,16 +15,14 @@
  */
 package com.taotao.cloud.auth.biz.jpa.storage;
 
+import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationConsentService;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import org.springframework.lang.Nullable;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
-import org.springframework.util.Assert;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * An {@link OAuth2AuthorizationConsentService} that stores {@link OAuth2AuthorizationConsent}'s in-memory.
@@ -36,81 +34,76 @@ import java.util.Objects;
  * @see OAuth2AuthorizationConsentService
  * @since 0.1.2
  */
-public final class RedisOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
+public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2AuthorizationConsentService {
+
+	/**
+	 * 查询时放入Redis中的部分 key
+	 */
+	public static final String OAUTH2_AUTHORIZATION_CONSENT = ":oauth2_authorization_consent:";
+
+	public static final String PREFIX = "spring-authorization-server";
+
+	public static final long AUTHORIZATION_CONSENT_TIMEOUT = 300L;
 
 	private final RedisRepository redisRepository;
 
-	/**
-	 * Constructs an {@code InMemoryOAuth2AuthorizationConsentService}.
-	 */
-	public RedisOAuth2AuthorizationConsentService(RedisRepository redisRepository) {
-		this(redisRepository, Collections.emptyList());
-	}
-
-	/**
-	 * Constructs an {@code InMemoryOAuth2AuthorizationConsentService} using the provided parameters.
-	 *
-	 * @param authorizationConsents the authorization consent(s)
-	 */
-	public RedisOAuth2AuthorizationConsentService(RedisRepository redisRepository,
-												  OAuth2AuthorizationConsent... authorizationConsents) {
-		this(redisRepository, Arrays.asList(authorizationConsents));
-	}
-
-	/**
-	 * Constructs an {@code InMemoryOAuth2AuthorizationConsentService} using the provided parameters.
-	 *
-	 * @param authorizationConsents the authorization consent(s)
-	 */
-	public RedisOAuth2AuthorizationConsentService(RedisRepository redisRepository,
-												  List<OAuth2AuthorizationConsent> authorizationConsents) {
-		Assert.notNull(authorizationConsents, "authorizationConsents cannot be null");
+	public RedisOAuth2AuthorizationConsentService(HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,
+												  RegisteredClientRepository registeredClientRepository,
+												  RedisRepository redisRepository) {
+		super(herodotusAuthorizationConsentService, registeredClientRepository);
 		this.redisRepository = redisRepository;
-
-		authorizationConsents.forEach(authorizationConsent -> {
-			Assert.notNull(authorizationConsent, "authorizationConsent cannot be null");
-			int id = getId(authorizationConsent);
-			Object authorizationConsentObj = redisRepository.get(String.valueOf(id));
-
-			Assert.isTrue(Objects.isNull(authorizationConsentObj),
-				"The authorizationConsent must be unique. Found duplicate, with registered client id: ["
-					+ authorizationConsent.getRegisteredClientId()
-					+ "] and principal name: [" + authorizationConsent.getPrincipalName() + "]");
-
-			this.redisRepository.set(String.valueOf(id), authorizationConsent);
-		});
 	}
 
 	@Override
 	public void save(OAuth2AuthorizationConsent authorizationConsent) {
-		Assert.notNull(authorizationConsent, "authorizationConsent cannot be null");
-		int id = getId(authorizationConsent);
-		this.redisRepository.set(String.valueOf(id), authorizationConsent);
+		if (authorizationConsent != null) {
+			set(authorizationConsent, AUTHORIZATION_CONSENT_TIMEOUT, TimeUnit.SECONDS);
+			super.save(authorizationConsent);
+		}
 	}
 
 	@Override
 	public void remove(OAuth2AuthorizationConsent authorizationConsent) {
-		Assert.notNull(authorizationConsent, "authorizationConsent cannot be null");
-		int id = getId(authorizationConsent);
-		this.redisRepository.del(String.valueOf(id));
+		if (authorizationConsent != null) {
+			String registeredClientId = authorizationConsent.getRegisteredClientId();
+			String principalName = authorizationConsent.getPrincipalName();
+			redisRepository.del(principalName + OAUTH2_AUTHORIZATION_CONSENT + registeredClientId + ":" + principalName);
+			super.remove(authorizationConsent);
+		}
 	}
+
 
 	@Override
-	@Nullable
 	public OAuth2AuthorizationConsent findById(String registeredClientId, String principalName) {
-		Assert.hasText(registeredClientId, "registeredClientId cannot be empty");
-		Assert.hasText(principalName, "principalName cannot be empty");
-		int id = getId(registeredClientId, principalName);
-		Object authorizationConsentObj = redisRepository.get(String.valueOf(id));
-		return (OAuth2AuthorizationConsent) authorizationConsentObj;
+
+		OAuth2AuthorizationConsent oauth2AuthorizationConsentRedis = (OAuth2AuthorizationConsent) redisRepository.opsForValue().get(PREFIX + OAUTH2_AUTHORIZATION_CONSENT + registeredClientId  + ":"+ principalName);
+
+		OAuth2AuthorizationConsent oauth2AuthorizationResult;
+		OAuth2AuthorizationConsent oauth2AuthorizationByDatabase;
+
+		if (oauth2AuthorizationConsentRedis == null) {
+			oauth2AuthorizationByDatabase = super.findById(registeredClientId,
+				principalName);
+			LogUtils.debug("根据 registeredClientId：{}、principalName：{} 直接查询数据库中的授权：{}", registeredClientId, principalName,
+				oauth2AuthorizationByDatabase);
+			if (oauth2AuthorizationByDatabase != null) {
+				set(oauth2AuthorizationByDatabase, AUTHORIZATION_CONSENT_TIMEOUT, TimeUnit.SECONDS);
+			}
+			oauth2AuthorizationResult = oauth2AuthorizationByDatabase;
+		} else {
+			LogUtils.debug("根据 registeredClientId：{}、principalName：{} 直接查询Redis中的授权：{}", registeredClientId, principalName,
+				oauth2AuthorizationConsentRedis);
+			oauth2AuthorizationResult = oauth2AuthorizationConsentRedis;
+		}
+
+		return oauth2AuthorizationResult;
 	}
 
-	private static int getId(String registeredClientId, String principalName) {
-		return Objects.hash(registeredClientId, principalName);
-	}
+	public void set(OAuth2AuthorizationConsent authorizationConsent, long timeout, TimeUnit unit) {
+		String registeredClientId = authorizationConsent.getRegisteredClientId();
+		String principalName = authorizationConsent.getPrincipalName();
 
-	private static int getId(OAuth2AuthorizationConsent authorizationConsent) {
-		return getId(authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
+		redisRepository.opsForValue().set(PREFIX + OAUTH2_AUTHORIZATION_CONSENT + registeredClientId + ":"+ principalName , authorizationConsent, timeout, unit);
 	}
 
 }

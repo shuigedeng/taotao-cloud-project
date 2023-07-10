@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author xxm
- * @date 2022/3/14
+ * @since 2022/3/14
  */
 @Data
 @Accessors(chain = true)
@@ -37,9 +37,9 @@ public class VoucherGenerationParam {
     private LocalDateTime endTime;
 
     /**
-     * @see VoucherCode
+     * @see VoucherCode#STATUS_NORMAL
      */
     @Schema(description = "默认状态")
-    private Integer status;
+    private String status;
 
 }

@@ -2,7 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.param.refund;
 
 import cn.bootx.platform.daxpay.code.pay.PayChannelEnum;
 import cn.bootx.platform.daxpay.dto.payment.RefundableInfo;
-import cn.bootx.platform.daxpay.param.pay.PayWayParam;
+import cn.bootx.platform.daxpay.param.channel.voucher.VoucherRefundParam;
+import cn.bootx.platform.daxpay.param.channel.wallet.WalletRefundParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
  * 退款方式参数
  *
  * @author xxm
- * @date 2022/3/2
+ * @since 2022/3/2
  */
 @Data
 @Accessors(chain = true)
@@ -30,11 +31,12 @@ public class RefundModeParam {
     private BigDecimal amount;
 
     /**
-     * 转换成支付方式参数
+     * @see VoucherRefundParam
+     * @see WalletRefundParam
      */
-    public PayWayParam toPayModeParam() {
-        return new PayWayParam().setPayChannel(getPayChannel()).setAmount(getAmount());
-    }
+    @Schema(description = "扩展参数的json字符串")
+    private String extraParamsJson;
+
 
     /**
      * 转换成退款方式记录对象

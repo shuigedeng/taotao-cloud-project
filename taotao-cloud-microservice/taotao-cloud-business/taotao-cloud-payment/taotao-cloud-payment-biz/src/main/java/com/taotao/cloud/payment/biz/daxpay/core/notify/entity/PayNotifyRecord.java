@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  * 回调记录
  *
  * @author xxm
- * @date 2021/6/22
+ * @since 2021/6/22
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -33,6 +33,10 @@ public class PayNotifyRecord extends MpBaseEntity implements EntityBaseFunction<
     /** 支付记录id */
     @DbComment("支付记录id")
     private Long paymentId;
+
+    /** 商户编码 */
+    @DbComment("商户编码")
+    private String mchCode;
 
     /** 商户应用编码 */
     @DbComment("商户应用编码")

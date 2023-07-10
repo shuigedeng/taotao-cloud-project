@@ -4,43 +4,47 @@ package com.taotao.cloud.payment.biz.daxpay.code.paymodel;
  * 储值卡常量
  *
  * @author xxm
- * @date 2022/3/14
+ * @since 2022/3/14
  */
 public interface VoucherCode {
 
     /**
-     * 状态-启用
+     * 状态-正常
      */
-    int STATUS_NORMAL = 1;
+    String STATUS_NORMAL = "normal";
 
     /**
      * 状态-停用
      */
-    int STATUS_FORBIDDEN = 2;
+    String STATUS_FORBIDDEN = "forbidden";
 
     /**
      * 储值卡日志-开通
      */
-    int LOG_ACTIVE = 1;
+    String LOG_ACTIVE = "active";
 
     /**
-     * 储值卡日志-支付
+     * 储值卡日志-预冻结额度
      */
-    int LOG_PAY = 2;
+    String LOG_FREEZE_BALANCE = "freeze";
 
     /**
-     * 储值卡日志-退款
+     * 储值卡日志-扣减并解冻余额
      */
-    int LOG_CLOSE = 3;
+    String LOG_REDUCE_AND_UNFREEZE_BALANCE = "reduceAndUnfreeze";
 
     /**
-     * 储值卡日志-退款
+     * 储值卡日志-直接支付
      */
-    int LOG_REFUND = 4;
+    String LOG_PAY = "pay";
+    /**
+     * 储值卡日志-取消支付
+     */
+    String LOG_CLOSE_PAY = "closePay";
 
     /**
-     * 储值卡日志-Admin余额变动
+     * 储值卡日志-退款到本卡中
      */
-    int LOG_ADMIN_CHANGER = 4;
+    String LOG_REFUND_SELF = "refundSelf";
 
 }

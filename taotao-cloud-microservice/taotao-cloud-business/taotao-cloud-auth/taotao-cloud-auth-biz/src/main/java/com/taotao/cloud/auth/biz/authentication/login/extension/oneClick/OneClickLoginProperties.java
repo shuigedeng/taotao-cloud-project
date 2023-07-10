@@ -30,7 +30,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "taotao.cloud.auth.login.one-click-login")
+@ConfigurationProperties(prefix = "taotao.cloud.oauth2.extension.login.one-click-login")
 public class OneClickLoginProperties {
     /**
      * 默认的一键登录请求处理url

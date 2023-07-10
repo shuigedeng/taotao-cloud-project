@@ -12,12 +12,15 @@ import java.util.List;
  * 结算台发起支付参数
  *
  * @author xxm
- * @date 2022/2/23
+ * @since 2022/2/23
  */
 @Data
 @Accessors(chain = true)
 @Schema(title = "结算台组合支付参数")
 public class CashierCombinationPayParam {
+
+    @Schema(description = "商户编码")
+    private String mchCode;
 
     @Schema(description = "商户应用编码")
     private String mchAppCode;

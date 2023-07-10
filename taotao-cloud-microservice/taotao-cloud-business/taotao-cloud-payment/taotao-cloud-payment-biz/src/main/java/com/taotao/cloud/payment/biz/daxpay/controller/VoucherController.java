@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author xxm
- * @date 2022/3/14
+ * @since 2022/3/14
  */
 @Tag(name = "储值卡")
 @RestController
@@ -46,6 +46,12 @@ public class VoucherController {
     @GetMapping("/findByCardNo")
     public ResResult<VoucherDto> findByCardNo(String cardNo) {
         return Res.ok(voucherQueryService.findByCardNo(cardNo));
+    }
+
+    @Operation(summary = "获取并判断卡状态")
+    @GetMapping("/getAndJudgeVoucher")
+    public ResResult<VoucherDto> getAndJudgeVoucher(String cardNo) {
+        return Res.ok(voucherQueryService.getAndJudgeVoucher(cardNo));
     }
 
     @Operation(summary = "批量生成储值卡")

@@ -167,7 +167,6 @@ public class JustAuthLoginAuthenticationProvider implements AuthenticationProvid
                 }
 
                 try {
-                    //noinspection unchecked
                     principal = authenticationToUserDetailsConverter.convert(
                             (AbstractOAuth2TokenAuthenticationToken<OAuth2AccessToken>) authenticationToken);
                 } catch (IllegalArgumentException e) {

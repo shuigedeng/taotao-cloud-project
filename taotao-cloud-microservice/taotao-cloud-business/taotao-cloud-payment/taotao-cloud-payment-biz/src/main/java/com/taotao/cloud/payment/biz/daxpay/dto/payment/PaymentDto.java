@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author xxm
- * @date 2020/12/9
+ * @since 2020/12/9
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -28,7 +28,7 @@ public class PaymentDto extends BaseDto implements Serializable {
     private String businessId;
 
     @Schema(description = "商户编码")
-    private String mchNo;
+    private String mchCode;
 
     @Schema(description = "商户应用编码")
     private String mchAppNo;
@@ -42,6 +42,9 @@ public class PaymentDto extends BaseDto implements Serializable {
     @Schema(description = "是否是异步支付")
     private boolean asyncPayMode;
 
+    @Schema(description = "是否是组合支付")
+    private boolean combinationPayMode;
+
     /**
      * @see cn.bootx.platform.daxpay.code.pay.PayChannelEnum#ASYNC_TYPE_CODE
      */
@@ -52,7 +55,7 @@ public class PaymentDto extends BaseDto implements Serializable {
      * @see PayStatusCode
      */
     @Schema(description = "支付状态")
-    private int payStatus;
+    private String payStatus;
 
     @Schema(description = "金额")
     private BigDecimal amount;

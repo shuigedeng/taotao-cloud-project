@@ -24,7 +24,7 @@ import java.util.Optional;
  * 钱包支付操作
  *
  * @author xxm
- * @date 2021/2/27
+ * @since 2021/2/27
  */
 @Slf4j
 @Service
@@ -38,15 +38,14 @@ public class WalletPayService {
     private final WalletLogManager walletLogManager;
 
     /**
-     * 支付操作
+     * 支付前冻结余额
      * @param amount 付款金额
      * @param payment 支付记录
      * @param wallet 钱包
      */
-    public void pay(BigDecimal amount, Payment payment, Wallet wallet) {
-        // 扣减余额
-        int i = walletManager.reduceBalance(wallet.getId(), amount);
-
+    public void freezeBalance(BigDecimal amount, Payment payment, Wallet wallet) {
+        // 冻结余额
+        int i = walletManager.freezeBalance(wallet.getId(), amount);
         // 判断操作结果
         if (i < 1) {
             throw new WalletLackOfBalanceException();
@@ -56,15 +55,71 @@ public class WalletPayService {
             .setUserId(wallet.getUserId())
             .setPaymentId(payment.getId())
             .setAmount(amount)
-            .setType(WalletCode.LOG_PAY)
-            .setRemark(String.format("钱包支付金额 %.2f ", amount))
+            .setType(WalletCode.LOG_FREEZE_BALANCE)
+            .setRemark(String.format("钱包预冻结金额 %.2f ", amount))
             .setOperationSource(WalletCode.OPERATION_SOURCE_USER)
             .setBusinessId(payment.getBusinessId());
         walletLogManager.save(walletLog);
     }
 
     /**
-     * 取消支付并返还金额
+     * 支付成功, 进行扣款
+     */
+    public void paySuccess(Long paymentId){
+        // 钱包支付记录
+        walletPaymentManager.findByPaymentId(paymentId).ifPresent(walletPayment -> {
+            Optional<Wallet> walletOpt = walletManager.findById(walletPayment.getWalletId());
+            if (!walletOpt.isPresent()) {
+                log.error("钱包出现恶性问题,需要人工排查");
+                return;
+            }
+            Wallet wallet = walletOpt.get();
+            walletPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
+            walletPaymentManager.save(walletPayment);
+            // 支付余额
+            int i = walletManager.reduceAndUnfreezeBalance(wallet.getId(), walletPayment.getAmount());
+            // 判断操作结果
+            if (i < 1) {
+                throw new WalletLackOfBalanceException();
+            }
+            // 日志
+            WalletLog walletLog = new WalletLog().setWalletId(wallet.getId())
+                    .setUserId(wallet.getUserId())
+                    .setPaymentId(walletPayment.getPaymentId())
+                    .setAmount(walletPayment.getAmount())
+                    .setType(WalletCode.LOG_REDUCE_AND_UNFREEZE_BALANCE)
+                    .setRemark(String.format("钱包扣款金额 %.2f ", walletPayment.getAmount()))
+                    .setOperationSource(WalletCode.OPERATION_SOURCE_USER)
+                    .setBusinessId(walletPayment.getBusinessId());
+            walletLogManager.save(walletLog);
+        });
+    }
+
+    /**
+     * 直接进行支付
+     */
+    public void pay(BigDecimal amount, Payment payment, Wallet wallet){
+        // 直接扣减余额
+        int i = walletManager.reduceBalance(wallet.getId(), amount);
+
+        // 判断操作结果
+        if (i < 1) {
+            throw new WalletLackOfBalanceException();
+        }
+        // 日志
+        WalletLog walletLog = new WalletLog().setWalletId(wallet.getId())
+                .setUserId(wallet.getUserId())
+                .setPaymentId(payment.getId())
+                .setAmount(amount)
+                .setType(WalletCode.LOG_PAY)
+                .setRemark(String.format("钱包支付金额 %.2f ", amount))
+                .setOperationSource(WalletCode.OPERATION_SOURCE_USER)
+                .setBusinessId(payment.getBusinessId());
+        walletLogManager.save(walletLog);
+    }
+
+    /**
+     * 取消支付,解除冻结的额度, 只有在异步支付中才会发生取消操作
      */
     public void close(Long paymentId) {
         // 钱包支付记录
@@ -78,18 +133,17 @@ public class WalletPayService {
             walletPayment.setPayStatus(PayStatusCode.TRADE_CANCEL);
             walletPaymentManager.save(walletPayment);
 
-            // 金额返还
-            walletManager.increaseBalance(wallet.getId(), walletPayment.getAmount());
-
+                // 金额返还
+                walletManager.increaseBalance(wallet.getId(), walletPayment.getAmount());
             // 记录日志
             WalletLog walletLog = new WalletLog().setAmount(walletPayment.getAmount())
-                .setPaymentId(walletPayment.getPaymentId())
-                .setWalletId(wallet.getId())
-                .setUserId(wallet.getUserId())
-                .setType(WalletCode.LOG_PAY_CLOSE)
-                .setRemark(String.format("取消支付返回金额 %.2f ", walletPayment.getAmount()))
-                .setOperationSource(WalletCode.OPERATION_SOURCE_SYSTEM)
-                .setBusinessId(walletPayment.getBusinessId());
+                    .setPaymentId(walletPayment.getPaymentId())
+                    .setWalletId(wallet.getId())
+                    .setUserId(wallet.getUserId())
+                    .setType(WalletCode.LOG_CLOSE_PAY)
+                    .setRemark(String.format("取消支付金额 %.2f ", walletPayment.getAmount()))
+                    .setOperationSource(WalletCode.OPERATION_SOURCE_SYSTEM)
+                    .setBusinessId(walletPayment.getBusinessId());
             // save log
             walletLogManager.save(walletLog);
         });
