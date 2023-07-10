@@ -56,11 +56,11 @@ public class SmsAuthenticationProvider implements AuthenticationProvider, Initia
                 () -> messages.getMessage(
                         "CaptchaAuthenticationProvider.onlySupports", "Only CaptchaAuthenticationToken is supported"));
 
-        SmsAuthenticationToken unAuthenticationToken = (SmsAuthenticationToken) authentication;
+        SmsAuthenticationToken smsAuthenticationToken = (SmsAuthenticationToken) authentication;
 
-        String phone = unAuthenticationToken.getName();
-        String rawCode = (String) unAuthenticationToken.getCredentials();
-        String type = unAuthenticationToken.getType();
+        String phone = smsAuthenticationToken.getName();
+        String rawCode = (String) smsAuthenticationToken.getCredentials();
+        String type = smsAuthenticationToken.getType();
 
         // 验证码校验
         if (smsCheckCodeService.verifyCaptcha(phone, rawCode)) {

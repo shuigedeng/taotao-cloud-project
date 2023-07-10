@@ -35,6 +35,10 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * 兼容微信刷新token
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 11:43:29
  */
 @Configuration(proxyBeanMethods = false)
 public class OAuth2ClientManagerConfiguration {

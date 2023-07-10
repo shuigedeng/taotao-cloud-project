@@ -14,7 +14,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
  * 云闪付
  *
  * @author xxm
- * @date 2022/3/8
+ * @since 2022/3/8
  */
 @Slf4j
 @Scope(SCOPE_PROTOTYPE)
@@ -39,11 +39,6 @@ public class UnionPayStrategy extends AbsPayStrategy {
 
     @Override
     public void doCloseHandler() {
-
-    }
-
-    @Override
-    public void doRefundHandler() {
 
     }
 

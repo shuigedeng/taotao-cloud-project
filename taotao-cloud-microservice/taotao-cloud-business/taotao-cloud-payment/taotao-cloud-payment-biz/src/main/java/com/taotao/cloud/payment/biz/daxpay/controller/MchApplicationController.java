@@ -20,7 +20,7 @@ import java.util.List;
  * 商户应用
  *
  * @author xxm
- * @date 2023-05-23
+ * @since 2023-05-23
  */
 @Tag(name = "商户应用")
 @RestController
@@ -73,8 +73,8 @@ public class MchApplicationController {
 
     @Operation(summary = "关联支付配置列表")
     @GetMapping("/findAllConfig")
-    public ResResult<List<MchAppPayConfigResult>> findAllConfig(Long appId) {
-        return Res.ok(appPayConfigService.ListByAppId(appId));
+    public ResResult<List<MchAppPayConfigResult>> findAllConfig(String appCode) {
+        return Res.ok(appPayConfigService.ListByAppId(appCode));
     }
 
 }

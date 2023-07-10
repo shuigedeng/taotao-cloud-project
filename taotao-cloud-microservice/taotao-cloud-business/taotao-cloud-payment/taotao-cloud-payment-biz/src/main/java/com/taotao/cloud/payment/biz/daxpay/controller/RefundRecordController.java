@@ -4,7 +4,7 @@ import cn.bootx.platform.common.core.rest.PageResult;
 import cn.bootx.platform.common.core.rest.Res;
 import cn.bootx.platform.common.core.rest.ResResult;
 import cn.bootx.platform.common.core.rest.param.PageParam;
-import cn.bootx.platform.daxpay.core.refund.service.RefundRecordService;
+import cn.bootx.platform.daxpay.core.refund.record.service.RefundRecordService;
 import cn.bootx.platform.daxpay.dto.refund.RefundRecordDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 退款记录
  *
  * @author xxm
- * @date 2022/3/3
+ * @since 2022/3/3
  */
 @Tag(name = "退款记录")
 @RestController

@@ -4,7 +4,7 @@ package com.taotao.cloud.payment.biz.daxpay.code;
  * 错误码
  *
  * @author xxm
- * @date 2020/12/7
+ * @since 2020/12/7
  */
 public interface PaymentErrorCode {
 

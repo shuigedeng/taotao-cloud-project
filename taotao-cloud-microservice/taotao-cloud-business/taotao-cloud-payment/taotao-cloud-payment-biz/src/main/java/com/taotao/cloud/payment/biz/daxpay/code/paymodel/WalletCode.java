@@ -4,73 +4,70 @@ package com.taotao.cloud.payment.biz.daxpay.code.paymodel;
  * 钱包涉及到的常量
  *
  * @author xxm
- * @date 2020/12/8
+ * @since 2020/12/8
  */
 public interface WalletCode {
 
-    /**
-     * 系统操作
-     */
-    int OPERATION_SOURCE_SYSTEM = 1;
+    /* 操作类型 */
+    /** 系统操作 */
+    String OPERATION_SOURCE_SYSTEM = "system";
 
-    /**
-     * 管理员操作
-     */
-    int OPERATION_SOURCE_ADMIN = 2;
+    /** 管理员操作 */
+    String OPERATION_SOURCE_ADMIN = "admin";
 
-    /**
-     * 用户操作
-     */
-    int OPERATION_SOURCE_USER = 3;
+    /** 用户操作 */
+    String OPERATION_SOURCE_USER = "user";
 
-    /**
-     * 钱包状态-正常
-     */
-    int STATUS_NORMAL = 1;
+    /* 钱包状态 */
+    /** 钱包状态-正常 */
+    String STATUS_NORMAL = "normal";
 
-    /**
-     * 钱包状态-禁用
-     */
-    int STATUS_FORBIDDEN = 2;
+    /** 钱包状态-禁用 */
+    String STATUS_FORBIDDEN = "forbidden";
 
+    /* 日志类型 */
     /**
      * 钱包日志-开通
      */
-    int LOG_ACTIVE = 1;
+    String LOG_ACTIVE = "active";
 
     /**
-     * 钱包日志-主动充值
+     * 钱包日志-Admin操作余额变动
      */
-    int LOG_RECHARGE = 2;
+    String LOG_ADMIN_CHANGER = "adminChanger";
 
     /**
-     * 钱包日志-自动充值
+     * 钱包日志-预冻结额度
      */
-    int LOG_AUTO_RECHARGE = 3;
+    String LOG_FREEZE_BALANCE = "freeze";
 
     /**
-     * 钱包日志-Admin余额变动
+     * 钱包日志-解冻并扣减余额
      */
-    int LOG_ADMIN_CHANGER = 4;
+    String LOG_REDUCE_AND_UNFREEZE_BALANCE = "reduceAndUnfreeze";
 
     /**
-     * 钱包日志-支付
+     * 钱包日志-直接支付
      */
-    int LOG_PAY = 5;
-
+    String LOG_PAY = "pay";
     /**
-     * 钱包日志-系统扣除余额的日志
+     * 钱包日志-取消支付
      */
-    int LOG_SYSTEM_REDUCE_BALANCE = 6;
+    String LOG_CLOSE_PAY = "closePay";
 
     /**
      * 钱包日志-退款
      */
-    int LOG_REFUND = 7;
+    String LOG_REFUND = "refund";
 
     /**
-     * 钱包日志-取消支付返还
+     * 锁定钱包
      */
-    int LOG_PAY_CLOSE = 8;
+    String LOG_LOCK = "lock";
+
+    /**
+     * 解锁钱包
+     */
+    String LOG_UNLOCK = "unlock";
 
 }

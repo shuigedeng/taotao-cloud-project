@@ -16,7 +16,7 @@ import java.util.List;
  * 退款记录
  *
  * @author xxm
- * @date 2022/3/2
+ * @since 2022/3/2
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -58,7 +58,7 @@ public class RefundRecordDto extends BaseDto {
      * @see PayStatusCode#REFUND_PROCESS_FAIL
      */
     @Schema(description = "退款状态")
-    private int refundStatus;
+    private String refundStatus;
 
     @Schema(description = "错误码")
     private String errorCode;

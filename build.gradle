@@ -78,6 +78,10 @@ buildscript {
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
         classpath "com.guardsquare:proguard-gradle:7.3.2"
+
+        //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
+        //https://plugins.gradle.org/plugin/org.jetbrains.intellij
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.15.0"
     }
 }
 
@@ -129,7 +133,7 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
-    id "com.github.shalousun.smart-doc" version "2.7.1"
+    id "com.github.shalousun.smart-doc" version "2.7.2"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck

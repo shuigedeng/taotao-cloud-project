@@ -4,7 +4,7 @@ package com.taotao.cloud.payment.biz.daxpay.code.pay;
  * 支付状态
  *
  * @author xxm
- * @date 2021/3/1
+ * @since 2021/3/1
  */
 public interface PayStatusCode {
 
@@ -24,7 +24,7 @@ public interface PayStatusCode {
     /** 支付取消(超时/手动取消/订单已经关闭,撤销支付单) */
     String TRADE_CANCEL = "trade_cancel";
 
-    /** 退款中 */
+    /** 退款中(部分退款) */
     String TRADE_REFUNDING = "trade_refunding";
 
     /** 已退款 */

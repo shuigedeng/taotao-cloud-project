@@ -115,4 +115,24 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public final String getCodeParameter() {
         return this.codeParameter;
     }
+
+	public String getTypeParameter() {
+		return typeParameter;
+	}
+
+	public void setTypeParameter(String typeParameter) {
+		this.typeParameter = typeParameter;
+	}
+
+	public Converter<HttpServletRequest, SmsAuthenticationToken> getCaptchaAuthenticationTokenConverter() {
+		return captchaAuthenticationTokenConverter;
+	}
+
+	public void setCaptchaAuthenticationTokenConverter(Converter<HttpServletRequest, SmsAuthenticationToken> captchaAuthenticationTokenConverter) {
+		this.captchaAuthenticationTokenConverter = captchaAuthenticationTokenConverter;
+	}
+
+	public boolean isPostOnly() {
+		return postOnly;
+	}
 }

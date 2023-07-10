@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  * 商户应用
  *
  * @author xxm
- * @date 2023-05-19
+ * @since 2023-05-19
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -25,7 +25,7 @@ public class MchApplicationDto extends BaseDto {
     private String name;
 
     @Schema(description = "商户号")
-    private String mchNo;
+    private String mchCode;
 
     @Schema(description = "状态类型")
     private String state;

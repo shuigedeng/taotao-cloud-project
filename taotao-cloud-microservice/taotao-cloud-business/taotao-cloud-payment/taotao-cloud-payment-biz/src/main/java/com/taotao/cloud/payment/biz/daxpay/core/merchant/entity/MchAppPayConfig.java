@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  * 商户应用支付配置
  *
  * @author xxm
- * @date 2023-05-19
+ * @since 2023-05-19
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,8 +23,8 @@ import lombok.experimental.Accessors;
 public class MchAppPayConfig extends MpBaseEntity {
 
     /** 关联应用编码 */
-    @DbMySqlIndex(comment = "关联应用编码索引")
-    @DbColumn(comment = "关联应用编码")
+    @DbMySqlIndex(comment = "关联商户应用编码索引")
+    @DbColumn(comment = "关联商户应用编码")
     private String appCode;
 
     /** 关联配置ID */

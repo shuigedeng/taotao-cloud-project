@@ -1,3 +1,11 @@
+import com.taotao.cloud.sys.biz.controller.mybatis.WholesalerBase;
+import com.taotao.cloud.third.client.support.retrofit.model.Person;
+import lombok.SneakyThrows;
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.ArrayList;
+import java.util.List;
+
 ///*
 // * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
 // *
@@ -207,4 +215,92 @@
 //            mallOrders.clear();
 //        }
 //    }
+//
+//	/**
+//	 * mybatis的所谓流式查询，就是服务端程序查询数据的过程中，与远程数据库一直保持连接，不断的去数据库拉取数据，
+//	 * 提交事务并关闭sqlsession后，数据库连接断开，停止数据拉取，需要注意的是使用这种方式，需要自己手动维护sqlsession和事务的提交。
+//	 *
+//	 * @Mapper
+//	 * public interface PersonDao {
+//	 *     Cursor<Person> selectByCursor();
+//	 *     Integer queryCount();
+//	 *
+//	 * }
+//	 *
+//	 * <select id="selectByCursor" resultMap="personMap">
+//	 *     select * from sys_person order by id desc
+//	 * </select>
+//	 * <select id="queryCount" resultType="java.lang.Integer">
+//	 *     select count(*) from sys_person
+//	 * </select>
+//	 *
+//	 * @throws InterruptedException
+//	 */
+//	@Override
+//	public void getOneByAsync() throws InterruptedException {
+//		new Thread(new Runnable() {
+//			@SneakyThrows
+//			@Override
+//			public void run() {
+//				//使用sqlSessionFactory打开一个sqlSession，在没有读取完数据之前不要提交事务或关闭sqlSession
+//				log.info("----开启sqlSession");
+//				SqlSession sqlSession = sqlSessionFactory.openSession();
+//				try {
+//					//获取到指定mapper
+//					PersonDao mapper = sqlSession.getMapper(PersonDao.class);
+//					//调用指定mapper的方法，返回一个cursor
+//					Cursor<Person> cursor = mapper.selectByCursor();
+//					//查询数据总量
+//					Integer total = mapper.queryCount();
+//					//定义一个list，用来从cursor中读取数据，每读取够1000条的时候，开始处理这批数据；
+//					//当前批数据处理完之后，清空list，准备接收下一批次数据；直到大量的数据全部处理完；
+//					List<Person> personList = new ArrayList<>();
+//					int i = 0;
+//					if (cursor != null) {
+//						for (Person person : cursor) {
+//							if (personList.size() < 1000) {
+////                            log.info("----id:{},userName:{}", person.getId(), person.getUserName());
+//								personList.add(person);
+//							} else if (personList.size() == 1000) {
+//								++i;
+//								log.info("----{}、从cursor取数据达到1000条，开始处理数据", i);
+//								log.info("----处理数据中...");
+//								Thread.sleep(1000);//休眠1s模拟处理数据需要消耗的时间；
+//								log.info("----{}、从cursor中取出的1000条数据已经处理完毕", i);
+//								personList.clear();
+//								personList.add(person);
+//							}
+//							if (total == (cursor.getCurrentIndex() + 1)) {
+//								++i;
+//								log.info("----{}、从cursor取数据达到1000条，开始处理数据", i);
+//								log.info("----处理数据中...");
+//								Thread.sleep(1000);//休眠1s模拟处理数据需要消耗的时间；
+//								log.info("----{}、从cursor中取出的1000条数据已经处理完毕", i);
+//								personList.clear();
+//							}
+//						}
+//						if (cursor.isConsumed()) {
+//							log.info("----查询sql匹配中的数据已经消费完毕！");
+//						}
+//					}
+//					sqlSession.commit();
+//					log.info("----提交事务");
+//				}catch (Exception e){
+//					e.printStackTrace();
+//					sqlSession.rollback();
+//				}
+//				finally {
+//					if (sqlSession != null) {
+//						//全部数据读取并且做好其他业务操作之后，提交事务并关闭连接；
+//						sqlSession.close();
+//						log.info("----关闭sqlSession");
+//					}
+//				}
+//
+//			}
+//		}).start();
+//	}
+//
 //}
+
+

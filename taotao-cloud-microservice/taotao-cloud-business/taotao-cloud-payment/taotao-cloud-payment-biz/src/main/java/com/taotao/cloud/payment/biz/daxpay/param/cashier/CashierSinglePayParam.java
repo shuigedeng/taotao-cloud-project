@@ -10,12 +10,15 @@ import java.math.BigDecimal;
  * 结算台发起支付参数
  *
  * @author xxm
- * @date 2022/2/23
+ * @since 2022/2/23
  */
 @Data
 @Accessors(chain = true)
 @Schema(title = "结算台单支付参数")
 public class CashierSinglePayParam {
+
+    @Schema(description = "商户编码")
+    private String mchCode;
 
     @Schema(description = "商户应用编码")
     private String mchAppCode;
@@ -43,5 +46,8 @@ public class CashierSinglePayParam {
 
     @Schema(description = "储值卡")
     private String voucherNo;
+
+    @Schema(description = "钱包ID")
+    private String walletId;
 
 }

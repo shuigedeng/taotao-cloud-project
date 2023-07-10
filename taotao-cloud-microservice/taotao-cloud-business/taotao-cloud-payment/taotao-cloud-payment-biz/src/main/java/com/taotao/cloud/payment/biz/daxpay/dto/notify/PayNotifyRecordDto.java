@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author xxm
- * @date 2021/6/22
+ * @since 2021/6/22
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -28,10 +28,10 @@ public class PayNotifyRecordDto extends BaseDto implements Serializable {
     private String notifyInfo;
 
     @Schema(description = "支付通道")
-    private Integer payChannel;
+    private String payChannel;
 
     @Schema(description = "处理状态")
-    private Integer status;
+    private String status;
 
     @Schema(description = "提示信息")
     private String msg;

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author xxm
- * @date 2022/3/14
+ * @since 2022/3/14
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -42,9 +42,9 @@ public class VoucherDto extends BaseDto {
     private LocalDateTime endTime;
 
     /**
-     * @see VoucherCode
+     * @see VoucherCode#STATUS_FORBIDDEN
      */
     @Schema(description = "状态")
-    private Integer status;
+    private String status;
 
 }
