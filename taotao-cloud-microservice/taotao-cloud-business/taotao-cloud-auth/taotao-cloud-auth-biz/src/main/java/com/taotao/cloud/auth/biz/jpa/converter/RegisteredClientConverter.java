@@ -29,18 +29,47 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: 转换为 RegisteredClient 转换器定义</p>
  *
- *
- * @date : 2023/5/21 20:36
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:13:32
  */
 public interface RegisteredClientConverter<S extends RegisteredClientDetails> extends Converter<S, RegisteredClient> {
 
-    Set<String> getScopes(S details);
+	/**
+	 * 获取范围
+	 *
+	 * @param details 详细信息
+	 * @return {@link Set }<{@link String }>
+	 * @since 2023-07-10 17:13:33
+	 */
+	Set<String> getScopes(S details);
 
-    ClientSettings getClientSettings(S details);
+	/**
+	 * 获取客户端设置
+	 *
+	 * @param details 详细信息
+	 * @return {@link ClientSettings }
+	 * @since 2023-07-10 17:13:33
+	 */
+	ClientSettings getClientSettings(S details);
 
-    TokenSettings getTokenSettings(S details);
+	/**
+	 * 获取令牌设置
+	 *
+	 * @param details 详细信息
+	 * @return {@link TokenSettings }
+	 * @since 2023-07-10 17:13:33
+	 */
+	TokenSettings getTokenSettings(S details);
 
-    @Override
+	/**
+	 * 转换
+	 *
+	 * @param details 详细信息
+	 * @return {@link RegisteredClient }
+	 * @since 2023-07-10 17:13:33
+	 */
+	@Override
     default RegisteredClient convert(S details) {
         Set<String> clientScopes = getScopes(details);
         ClientSettings clientSettings = getClientSettings(details);

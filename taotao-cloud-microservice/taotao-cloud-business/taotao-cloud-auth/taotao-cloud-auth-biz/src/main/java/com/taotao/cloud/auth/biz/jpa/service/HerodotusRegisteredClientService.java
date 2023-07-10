@@ -29,34 +29,76 @@ import org.springframework.stereotype.Service;
  * <p>
  * 这里命名没有按照统一的习惯，主要是为了防止与 spring-authorization-server 已有类的同名而导致Bean注入失败
  *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:10:22
  */
 @Service
 public class HerodotusRegisteredClientService {
 
-    private static final Logger log = LoggerFactory.getLogger(HerodotusRegisteredClientService.class);
+	/**
+	 * 日志
+	 */
+	private static final Logger log = LoggerFactory.getLogger(HerodotusRegisteredClientService.class);
 
-    private final HerodotusRegisteredClientRepository registeredClientRepository;
+	/**
+	 * 注册客户端存储库
+	 */
+	private final HerodotusRegisteredClientRepository registeredClientRepository;
 
-    @Autowired
+	/**
+	 * 希罗多德注册客户服务
+	 *
+	 * @param registeredClientRepository 注册客户端存储库
+	 * @return
+	 * @since 2023-07-10 17:10:23
+	 */
+	@Autowired
     public HerodotusRegisteredClientService(HerodotusRegisteredClientRepository registeredClientRepository) {
         this.registeredClientRepository = registeredClientRepository;
     }
 
-    public Optional<HerodotusRegisteredClient> findByClientId(String clientId) {
+	/**
+	 * 按客户id查找
+	 *
+	 * @param clientId 客户端id
+	 * @return {@link Optional }<{@link HerodotusRegisteredClient }>
+	 * @since 2023-07-10 17:10:23
+	 */
+	public Optional<HerodotusRegisteredClient> findByClientId(String clientId) {
         Optional<HerodotusRegisteredClient> result = this.registeredClientRepository.findByClientId(clientId);
         log.info("HerodotusRegisteredClient Service findByClientId.");
         return result;
     }
 
-    public void save(HerodotusRegisteredClient entity) {
+	/**
+	 * 保存
+	 *
+	 * @param entity 实体
+	 * @since 2023-07-10 17:10:23
+	 */
+	public void save(HerodotusRegisteredClient entity) {
         registeredClientRepository.save(entity);
     }
 
-    public HerodotusRegisteredClient findById(String id) {
+	/**
+	 * 按id查找
+	 *
+	 * @param id id
+	 * @return {@link HerodotusRegisteredClient }
+	 * @since 2023-07-10 17:10:23
+	 */
+	public HerodotusRegisteredClient findById(String id) {
         return registeredClientRepository.findById(id).get();
     }
 
-    public void deleteById(String id) {
+	/**
+	 * 按id删除
+	 *
+	 * @param id id
+	 * @since 2023-07-10 17:10:23
+	 */
+	public void deleteById(String id) {
         registeredClientRepository.deleteById(id);
     }
 }

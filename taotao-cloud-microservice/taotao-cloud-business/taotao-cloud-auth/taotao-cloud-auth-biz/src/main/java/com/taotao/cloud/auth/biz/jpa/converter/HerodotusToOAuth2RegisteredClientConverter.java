@@ -27,28 +27,57 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: HerodotusRegisteredClient 转 换适配器 </p>
  *
- *
- * @date : 2023/5/12 23:56
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:13:50
  */
 public class HerodotusToOAuth2RegisteredClientConverter
         extends AbstractRegisteredClientConverter<HerodotusRegisteredClient> {
 
-    public HerodotusToOAuth2RegisteredClientConverter(OAuth2JacksonProcessor jacksonProcessor) {
+	/**
+	 * herodotus到oauth2注册客户端转换器
+	 *
+	 * @param jacksonProcessor 杰克逊处理器
+	 * @return
+	 * @since 2023-07-10 17:13:50
+	 */
+	public HerodotusToOAuth2RegisteredClientConverter(OAuth2JacksonProcessor jacksonProcessor) {
         super(jacksonProcessor);
     }
 
-    @Override
+	/**
+	 * 获取范围
+	 *
+	 * @param details 详细信息
+	 * @return {@link Set }<{@link String }>
+	 * @since 2023-07-10 17:13:50
+	 */
+	@Override
     public Set<String> getScopes(HerodotusRegisteredClient details) {
         return StringUtils.commaDelimitedListToSet(details.getScopes());
     }
 
-    @Override
+	/**
+	 * 获取客户端设置
+	 *
+	 * @param details 详细信息
+	 * @return {@link ClientSettings }
+	 * @since 2023-07-10 17:13:51
+	 */
+	@Override
     public ClientSettings getClientSettings(HerodotusRegisteredClient details) {
         Map<String, Object> clientSettingsMap = parseMap(details.getClientSettings());
         return ClientSettings.withSettings(clientSettingsMap).build();
     }
 
-    @Override
+	/**
+	 * 获取令牌设置
+	 *
+	 * @param details 详细信息
+	 * @return {@link TokenSettings }
+	 * @since 2023-07-10 17:13:51
+	 */
+	@Override
     public TokenSettings getTokenSettings(HerodotusRegisteredClient details) {
         Map<String, Object> tokenSettingsMap = parseMap(details.getTokenSettings());
         return TokenSettings.withSettings(tokenSettingsMap).build();

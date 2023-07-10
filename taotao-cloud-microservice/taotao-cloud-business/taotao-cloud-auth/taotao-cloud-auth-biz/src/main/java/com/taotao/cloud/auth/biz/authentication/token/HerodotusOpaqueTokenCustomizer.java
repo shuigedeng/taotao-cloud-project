@@ -34,13 +34,20 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
  * An {@link OAuth2TokenCustomizer} provides the ability to customize the attributes of an OAuth2Token, which are accessible in the provided {@link org.springframework.security.oauth2.server.authorization.token.OAuth2TokenContext}.
  * It is used by an {@link org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator} to let it customize the attributes of the OAuth2Token before it is generated.
  *
- *
- * @date : 2022/10/9 20:43
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:25:38
  */
 public class HerodotusOpaqueTokenCustomizer extends AbstractTokenCustomizer
         implements OAuth2TokenCustomizer<OAuth2TokenClaimsContext> {
 
-    @Override
+	/**
+	 * 自定义
+	 *
+	 * @param context 上下文
+	 * @since 2023-07-10 17:25:38
+	 */
+	@Override
     public void customize(OAuth2TokenClaimsContext context) {
         AbstractAuthenticationToken token = null;
         Authentication clientAuthentication = SecurityContextHolder.getContext().getAuthentication();

@@ -33,10 +33,9 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * <b>NOTE:</b> This implementation should ONLY be used during development/testing.
  *
- * @author Krisztian Toth
- * @author Joe Grandja
- * @see OAuth2AuthorizationService
- * @since 0.0.1
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:10:58
  */
 public final class RedisOAuth2AuthorizationService extends JpaOAuth2AuthorizationService {
 
@@ -50,18 +49,42 @@ public final class RedisOAuth2AuthorizationService extends JpaOAuth2Authorizatio
 	 */
 	public static final String OAUTH2_AUTHORIZATION_TOKEN_TYPE = ":oauth2_authorization:tokenType:";
 
+	/**
+	 * 授权超时
+	 */
 	public static final long AUTHORIZATION_TIMEOUT = 300L;
 
+	/**
+	 * 前缀
+	 */
 	public static final String PREFIX = "spring-authorization-server";
 
+	/**
+	 * redis存储库
+	 */
 	private final RedisRepository redisRepository;
 
+	/**
+	 * redis oauth2授权服务
+	 *
+	 * @param herodotusAuthorizationService 希罗多德授权服务
+	 * @param registeredClientRepository    注册客户端存储库
+	 * @param redisRepository               redis存储库
+	 * @return
+	 * @since 2023-07-10 17:10:59
+	 */
 	public RedisOAuth2AuthorizationService(HerodotusAuthorizationService herodotusAuthorizationService, RegisteredClientRepository registeredClientRepository, RedisRepository redisRepository) {
 		super(herodotusAuthorizationService, registeredClientRepository);
 		this.redisRepository = redisRepository;
 	}
 
 
+	/**
+	 * 保存
+	 *
+	 * @param authorization 授权
+	 * @since 2023-07-10 17:10:59
+	 */
 	@Override
 	public void save(OAuth2Authorization authorization) {
 		if (authorization != null) {
@@ -71,6 +94,12 @@ public final class RedisOAuth2AuthorizationService extends JpaOAuth2Authorizatio
 	}
 
 
+	/**
+	 * 移除
+	 *
+	 * @param authorization 授权
+	 * @since 2023-07-10 17:10:59
+	 */
 	@Override
 	public void remove(OAuth2Authorization authorization) {
 		if (authorization != null) {
@@ -94,6 +123,13 @@ public final class RedisOAuth2AuthorizationService extends JpaOAuth2Authorizatio
 		}
 	}
 
+	/**
+	 * 按id查找
+	 *
+	 * @param id id
+	 * @return {@link OAuth2Authorization }
+	 * @since 2023-07-10 17:10:59
+	 */
 	@Override
 	public OAuth2Authorization findById(String id) {
 
@@ -119,6 +155,14 @@ public final class RedisOAuth2AuthorizationService extends JpaOAuth2Authorizatio
 		return oauth2AuthorizationResult;
 	}
 
+	/**
+	 * 按令牌查找
+	 *
+	 * @param token     令牌
+	 * @param tokenType 令牌类型
+	 * @return {@link OAuth2Authorization }
+	 * @since 2023-07-10 17:10:59
+	 */
 	@Override
 	public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
 		assert tokenType != null;
@@ -147,6 +191,14 @@ public final class RedisOAuth2AuthorizationService extends JpaOAuth2Authorizatio
 	}
 
 
+	/**
+	 * 设置
+	 *
+	 * @param authorization 授权
+	 * @param timeout       超时
+	 * @param unit          单位
+	 * @since 2023-07-10 17:10:59
+	 */
 	public void set(OAuth2Authorization authorization, long timeout, TimeUnit unit) {
 		redisRepository.opsForValue().set(PREFIX + OAUTH2_AUTHORIZATION_ID + authorization.getId(), authorization, timeout, unit);
 

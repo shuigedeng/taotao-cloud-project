@@ -32,17 +32,39 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * <p>Description: 基于Jpa 的 RegisteredClient服务 </p>
  *
- *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:10:47
  */
 public class JpaRegisteredClientRepository implements RegisteredClientRepository {
 
-    private static final Logger log = LoggerFactory.getLogger(JpaRegisteredClientRepository.class);
+	/**
+	 * 日志
+	 */
+	private static final Logger log = LoggerFactory.getLogger(JpaRegisteredClientRepository.class);
 
-    private final HerodotusRegisteredClientService herodotusRegisteredClientService;
-    private final Converter<HerodotusRegisteredClient, RegisteredClient> herodotusToOAuth2Converter;
-    private final Converter<RegisteredClient, HerodotusRegisteredClient> oauth2ToHerodotusConverter;
+	/**
+	 * 希罗多德注册客户服务
+	 */
+	private final HerodotusRegisteredClientService herodotusRegisteredClientService;
+	/**
+	 * 希罗多德到oauth2转换器
+	 */
+	private final Converter<HerodotusRegisteredClient, RegisteredClient> herodotusToOAuth2Converter;
+	/**
+	 * oauth2到希罗多德转换器
+	 */
+	private final Converter<RegisteredClient, HerodotusRegisteredClient> oauth2ToHerodotusConverter;
 
-    public JpaRegisteredClientRepository(
+	/**
+	 * jpa注册客户端存储库
+	 *
+	 * @param herodotusRegisteredClientService 希罗多德注册客户服务
+	 * @param passwordEncoder                  密码编码器
+	 * @return
+	 * @since 2023-07-10 17:10:47
+	 */
+	public JpaRegisteredClientRepository(
             HerodotusRegisteredClientService herodotusRegisteredClientService, PasswordEncoder passwordEncoder) {
         this.herodotusRegisteredClientService = herodotusRegisteredClientService;
         OAuth2JacksonProcessor jacksonProcessor = new OAuth2JacksonProcessor();
@@ -51,13 +73,26 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
                 new OAuth2ToHerodotusRegisteredClientConverter(jacksonProcessor, passwordEncoder);
     }
 
-    @Override
+	/**
+	 * 保存
+	 *
+	 * @param registeredClient 注册客户
+	 * @since 2023-07-10 17:10:48
+	 */
+	@Override
     public void save(RegisteredClient registeredClient) {
         log.info("Jpa Registered Client Repository save entity.");
         this.herodotusRegisteredClientService.save(toEntity(registeredClient));
     }
 
-    @Override
+	/**
+	 * 按id查找
+	 *
+	 * @param id id
+	 * @return {@link RegisteredClient }
+	 * @since 2023-07-10 17:10:48
+	 */
+	@Override
     public RegisteredClient findById(String id) {
         log.info("Jpa Registered Client Repository findById.");
         HerodotusRegisteredClient herodotusRegisteredClient = this.herodotusRegisteredClientService.findById(id);
@@ -67,7 +102,14 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
         return null;
     }
 
-    @Override
+	/**
+	 * 按客户id查找
+	 *
+	 * @param clientId 客户端id
+	 * @return {@link RegisteredClient }
+	 * @since 2023-07-10 17:10:48
+	 */
+	@Override
     public RegisteredClient findByClientId(String clientId) {
         log.info("Jpa Registered Client Repository findByClientId.");
         return this.herodotusRegisteredClientService
@@ -76,16 +118,36 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
                 .orElse(null);
     }
 
-    public void remove(String id) {
+	/**
+	 * 移除
+	 *
+	 * @param id id
+	 * @since 2023-07-10 17:10:48
+	 */
+	public void remove(String id) {
         log.info("Jpa Registered Client Repository remove.");
         this.herodotusRegisteredClientService.deleteById(id);
     }
 
-    private RegisteredClient toObject(HerodotusRegisteredClient herodotusRegisteredClient) {
+	/**
+	 * 反对
+	 *
+	 * @param herodotusRegisteredClient 希罗多德注册客户
+	 * @return {@link RegisteredClient }
+	 * @since 2023-07-10 17:10:48
+	 */
+	private RegisteredClient toObject(HerodotusRegisteredClient herodotusRegisteredClient) {
         return herodotusToOAuth2Converter.convert(herodotusRegisteredClient);
     }
 
-    private HerodotusRegisteredClient toEntity(RegisteredClient registeredClient) {
+	/**
+	 * 对实体
+	 *
+	 * @param registeredClient 注册客户
+	 * @return {@link HerodotusRegisteredClient }
+	 * @since 2023-07-10 17:10:48
+	 */
+	private HerodotusRegisteredClient toEntity(RegisteredClient registeredClient) {
         return oauth2ToHerodotusConverter.convert(registeredClient);
     }
 }

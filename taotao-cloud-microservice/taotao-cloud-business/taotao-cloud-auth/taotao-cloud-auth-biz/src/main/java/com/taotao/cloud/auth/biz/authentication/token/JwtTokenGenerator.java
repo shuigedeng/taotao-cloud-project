@@ -23,10 +23,27 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 /**
  * jwt token generator
  *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:25:42
  */
 public interface JwtTokenGenerator {
 
-    OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails);
+	/**
+	 * 令牌响应
+	 *
+	 * @param userDetails 用户详细信息
+	 * @return {@link OAuth2AccessTokenResponse }
+	 * @since 2023-07-10 17:25:43
+	 */
+	OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails);
 
-    OAuth2AccessTokenResponse socialTokenResponse(OAuth2User oAuth2User);
+	/**
+	 * 社交令牌响应
+	 *
+	 * @param oAuth2User o auth2用户
+	 * @return {@link OAuth2AccessTokenResponse }
+	 * @since 2023-07-10 17:25:43
+	 */
+	OAuth2AccessTokenResponse socialTokenResponse(OAuth2User oAuth2User);
 }

@@ -30,9 +30,9 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * <b>NOTE:</b> This implementation should ONLY be used during development/testing.
  *
- * @author Daniel Garnier-Moiroux
- * @see OAuth2AuthorizationConsentService
- * @since 0.1.2
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:10:53
  */
 public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2AuthorizationConsentService {
 
@@ -41,12 +41,30 @@ public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2Autho
 	 */
 	public static final String OAUTH2_AUTHORIZATION_CONSENT = ":oauth2_authorization_consent:";
 
+	/**
+	 * 前缀
+	 */
 	public static final String PREFIX = "spring-authorization-server";
 
+	/**
+	 * 授权同意超时
+	 */
 	public static final long AUTHORIZATION_CONSENT_TIMEOUT = 300L;
 
+	/**
+	 * redis存储库
+	 */
 	private final RedisRepository redisRepository;
 
+	/**
+	 * redis oauth2授权同意服务
+	 *
+	 * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
+	 * @param registeredClientRepository           注册客户端存储库
+	 * @param redisRepository                      redis存储库
+	 * @return
+	 * @since 2023-07-10 17:10:53
+	 */
 	public RedisOAuth2AuthorizationConsentService(HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,
 												  RegisteredClientRepository registeredClientRepository,
 												  RedisRepository redisRepository) {
@@ -54,6 +72,12 @@ public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2Autho
 		this.redisRepository = redisRepository;
 	}
 
+	/**
+	 * 保存
+	 *
+	 * @param authorizationConsent 授权同意书
+	 * @since 2023-07-10 17:10:53
+	 */
 	@Override
 	public void save(OAuth2AuthorizationConsent authorizationConsent) {
 		if (authorizationConsent != null) {
@@ -62,6 +86,12 @@ public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2Autho
 		}
 	}
 
+	/**
+	 * 移除
+	 *
+	 * @param authorizationConsent 授权同意书
+	 * @since 2023-07-10 17:10:53
+	 */
 	@Override
 	public void remove(OAuth2AuthorizationConsent authorizationConsent) {
 		if (authorizationConsent != null) {
@@ -73,6 +103,14 @@ public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2Autho
 	}
 
 
+	/**
+	 * 按id查找
+	 *
+	 * @param registeredClientId 注册客户端id
+	 * @param principalName      主体名称
+	 * @return {@link OAuth2AuthorizationConsent }
+	 * @since 2023-07-10 17:10:53
+	 */
 	@Override
 	public OAuth2AuthorizationConsent findById(String registeredClientId, String principalName) {
 
@@ -99,6 +137,14 @@ public final class RedisOAuth2AuthorizationConsentService extends JpaOAuth2Autho
 		return oauth2AuthorizationResult;
 	}
 
+	/**
+	 * 设置
+	 *
+	 * @param authorizationConsent 授权同意书
+	 * @param timeout              超时
+	 * @param unit                 单位
+	 * @since 2023-07-10 17:10:54
+	 */
 	public void set(OAuth2AuthorizationConsent authorizationConsent, long timeout, TimeUnit unit) {
 		String registeredClientId = authorizationConsent.getRegisteredClientId();
 		String principalName = authorizationConsent.getPrincipalName();

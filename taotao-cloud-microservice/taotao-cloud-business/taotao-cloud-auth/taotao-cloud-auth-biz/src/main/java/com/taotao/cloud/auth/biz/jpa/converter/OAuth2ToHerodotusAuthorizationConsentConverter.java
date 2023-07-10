@@ -27,12 +27,20 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: OAuth2AuthorizationConsent 转 HerodotusAuthorizationConsent 转换器</p>
  *
- *
- * @date : 2023/5/21 21:05
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:13:47
  */
 public class OAuth2ToHerodotusAuthorizationConsentConverter
         implements Converter<OAuth2AuthorizationConsent, HerodotusAuthorizationConsent> {
-    @Override
+	/**
+	 * 转换
+	 *
+	 * @param authorizationConsent 授权同意书
+	 * @return {@link HerodotusAuthorizationConsent }
+	 * @since 2023-07-10 17:13:47
+	 */
+	@Override
     public HerodotusAuthorizationConsent convert(OAuth2AuthorizationConsent authorizationConsent) {
         HerodotusAuthorizationConsent entity = new HerodotusAuthorizationConsent();
         entity.setRegisteredClientId(authorizationConsent.getRegisteredClientId());

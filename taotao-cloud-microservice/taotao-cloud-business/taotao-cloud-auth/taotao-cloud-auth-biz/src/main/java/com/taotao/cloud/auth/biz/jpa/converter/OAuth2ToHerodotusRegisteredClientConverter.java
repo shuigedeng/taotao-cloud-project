@@ -28,21 +28,40 @@ import org.springframework.util.StringUtils;
 /**
  * <p>Description: RegisteredClient 转 HerodotusRegisteredClient 转换器 </p>
  *
- *
- * @date : 2023/5/12 23:56
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-07-10 17:13:37
  */
 public class OAuth2ToHerodotusRegisteredClientConverter
         extends AbstractOAuth2EntityConverter<RegisteredClient, HerodotusRegisteredClient> {
 
-    private final PasswordEncoder passwordEncoder;
+	/**
+	 * 密码编码器
+	 */
+	private final PasswordEncoder passwordEncoder;
 
-    public OAuth2ToHerodotusRegisteredClientConverter(
+	/**
+	 * oauth2到希罗多德注册客户端转换器
+	 *
+	 * @param jacksonProcessor 杰克逊处理器
+	 * @param passwordEncoder  密码编码器
+	 * @return
+	 * @since 2023-07-10 17:13:38
+	 */
+	public OAuth2ToHerodotusRegisteredClientConverter(
             OAuth2JacksonProcessor jacksonProcessor, PasswordEncoder passwordEncoder) {
         super(jacksonProcessor);
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+	/**
+	 * 转换
+	 *
+	 * @param registeredClient 注册客户
+	 * @return {@link HerodotusRegisteredClient }
+	 * @since 2023-07-10 17:13:38
+	 */
+	@Override
     public HerodotusRegisteredClient convert(RegisteredClient registeredClient) {
         List<String> clientAuthenticationMethods = new ArrayList<>(
                 registeredClient.getClientAuthenticationMethods().size());
@@ -77,7 +96,14 @@ public class OAuth2ToHerodotusRegisteredClientConverter
         return entity;
     }
 
-    private String encode(String value) {
+	/**
+	 * 编码
+	 *
+	 * @param value 值
+	 * @return {@link String }
+	 * @since 2023-07-10 17:13:39
+	 */
+	private String encode(String value) {
         if (value != null) {
             return this.passwordEncoder.encode(value);
         }
