@@ -3,33 +3,22 @@ apply plugin: "idea"
 apply plugin: "java"
 
 dependencies {
-    //implementation "org.apache.flink:flink-core:1.16.1"
-    //implementation "org.apache.flink:flink-java:1.16.1"
-    //implementation "org.apache.flink:flink-scala_2.12:1.16.1"
-    //implementation "org.apache.flink:flink-streaming-scala_2.12:1.16.1"
-//
-    //implementation "org.apache.flink:flink-clients_2.12:1.14.6"
-    //implementation "org.apache.flink:flink-runtime-web_2.12:1.14.6"
-    //implementation "org.apache.flink:flink-streaming-java_2.12:1.14.6"
-    //implementation "org.apache.flink:flink-connector-kafka_2.12:1.14.6"
-    //implementation 'org.apache.kafka:kafka_2.12:3.3.1'
+    implementation "org.apache.flink:flink-core:1.17.1"
+    implementation "org.apache.flink:flink-java:1.17.1"
+    implementation "org.apache.flink:flink-scala_2.12:1.17.1"
+    implementation "org.apache.flink:flink-clients:1.17.1"
+    implementation "org.apache.flink:flink-runtime-web:1.17.1"
+    implementation "org.apache.flink:flink-streaming-scala_2.12:1.17.1"
+    implementation "org.apache.flink:flink-streaming-java:1.17.1"
+    implementation "org.apache.flink:flink-csv:1.17.1"
+    implementation "org.apache.flink:flink-connector-kafka:1.17.1"
+    implementation "org.apache.flink:flink-statebackend-rocksdb:1.17.1"
+    implementation "org.apache.flink:flink-table-planner_2.12:1.17.1"
+    implementation "org.apache.flink:flink-table-api-java-bridge:1.17.1"
 
-    implementation "org.apache.flink:flink-core:1.17.0"
-    implementation "org.apache.flink:flink-java:1.17.0"
-    implementation "org.apache.flink:flink-scala_2.12:1.17.0"
-    implementation "org.apache.flink:flink-clients:1.17.0"
-    implementation "org.apache.flink:flink-runtime-web:1.17.0"
-    implementation "org.apache.flink:flink-streaming-scala_2.12:1.17.0"
-    implementation "org.apache.flink:flink-streaming-java:1.17.0"
-    implementation "org.apache.flink:flink-csv:1.17.0"
-    implementation "org.apache.flink:flink-connector-kafka:1.17.0"
-    implementation "org.apache.flink:flink-statebackend-rocksdb:1.17.0"
-    implementation "org.apache.flink:flink-table-planner_2.12:1.17.0"
-    implementation "org.apache.flink:flink-table-api-java-bridge:1.17.0"
-
-    implementation("org.apache.hudi:hudi-common:0.13.0")
-    implementation("org.apache.hudi:hudi-client:0.13.0")
-    implementation("org.apache.hudi:hudi-flink-client:0.13.0")
+    implementation("org.apache.hudi:hudi-common:0.13.1")
+    implementation("org.apache.hudi:hudi-client:0.13.1")
+    implementation("org.apache.hudi:hudi-flink-client:0.13.1")
 
     implementation 'org.slf4j:slf4j-api:2.0.7'
     implementation 'org.slf4j:slf4j-log4j12:2.0.7'
