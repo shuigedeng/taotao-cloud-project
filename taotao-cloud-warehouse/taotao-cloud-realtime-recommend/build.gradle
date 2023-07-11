@@ -1,23 +1,23 @@
 dependencies {
-    implementation "org.apache.hadoop:hadoop-common:3.3.5"
-    implementation "org.apache.hadoop:hadoop-hdfs:3.3.5"
-    implementation "org.apache.hadoop:hadoop-client:3.3.5"
+    implementation "org.apache.hadoop:hadoop-common:3.3.6"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.3.6"
+    implementation "org.apache.hadoop:hadoop-client:3.3.6"
 
     implementation "org.apache.mahout:mahout-examples:0.13.0"
     implementation "junit:junit:4.13.2"
 
-    implementation "org.springframework:spring-jdbc:6.0.7"
-    implementation "org.springframework:spring-core:6.0.7"
-    implementation "org.springframework:spring-context:6.0.7"
+    implementation "org.springframework:spring-jdbc:6.0.10"
+    implementation "org.springframework:spring-core:6.0.10"
+    implementation "org.springframework:spring-context:6.0.10"
 
     implementation "javassist:javassist:3.12.1.GA"
-    implementation "javax.servlet:servlet-api:2.5"
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation "commons-lang:commons-lang:2.6"
     implementation "net.sf.barcode4j:barcode4j:2.1"
-    implementation "org.jsoup:jsoup:1.15.3"
+    implementation "org.jsoup:jsoup:1.16.1"
     implementation 'io.netty:netty-all'
     implementation "org.apache.commons:commons-lang3:3.12.0"
-    implementation 'redis.clients:jedis:4.4.0-m2'
+    implementation 'redis.clients:jedis:4.4.3'
 
     //需要在自己本地安装jar包
     //compile "org.wltea.ik-analyzer:ik-analyzer:4.10.2"
