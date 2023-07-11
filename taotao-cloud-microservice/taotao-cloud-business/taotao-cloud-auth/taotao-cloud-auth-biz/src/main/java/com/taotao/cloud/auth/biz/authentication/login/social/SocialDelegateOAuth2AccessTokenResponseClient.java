@@ -35,24 +35,24 @@ import org.springframework.web.client.RestOperations;
 public class SocialDelegateOAuth2AccessTokenResponseClient
         implements OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> {
 
-	/**
-	 * 委托
-	 */
-	private final OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> delegate;
-	/**
-	 * 休息操作
-	 */
-	private final RestOperations restOperations;
+    /**
+     * 委托
+     */
+    private final OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> delegate;
+    /**
+     * 休息操作
+     */
+    private final RestOperations restOperations;
 
-	/**
-	 * 社交委托oauth2访问令牌响应客户端
-	 *
-	 * @param delegate       委托
-	 * @param restOperations 休息操作
-	 * @return
-	 * @since 2023-07-10 17:40:54
-	 */
-	public SocialDelegateOAuth2AccessTokenResponseClient(
+    /**
+     * 社交委托oauth2访问令牌响应客户端
+     *
+     * @param delegate       委托
+     * @param restOperations 休息操作
+     * @return
+     * @since 2023-07-10 17:40:54
+     */
+    public SocialDelegateOAuth2AccessTokenResponseClient(
             OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> delegate,
             RestOperations restOperations) {
         this.delegate = delegate;
@@ -60,14 +60,14 @@ public class SocialDelegateOAuth2AccessTokenResponseClient
         this.restOperations = restOperations;
     }
 
-	/**
-	 * 获取令牌响应
-	 *
-	 * @param authorizationGrantRequest 授权授予请求
-	 * @return {@link OAuth2AccessTokenResponse }
-	 * @since 2023-07-10 17:40:55
-	 */
-	@Override
+    /**
+     * 获取令牌响应
+     *
+     * @param authorizationGrantRequest 授权授予请求
+     * @return {@link OAuth2AccessTokenResponse }
+     * @since 2023-07-10 17:40:55
+     */
+    @Override
     public OAuth2AccessTokenResponse getTokenResponse(OAuth2AuthorizationCodeGrantRequest authorizationGrantRequest) {
         String registrationId =
                 authorizationGrantRequest.getClientRegistration().getRegistrationId();

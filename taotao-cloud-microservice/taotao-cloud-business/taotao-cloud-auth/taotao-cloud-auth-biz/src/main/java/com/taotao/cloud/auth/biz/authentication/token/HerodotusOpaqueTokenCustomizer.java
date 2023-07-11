@@ -41,13 +41,13 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 public class HerodotusOpaqueTokenCustomizer extends AbstractTokenCustomizer
         implements OAuth2TokenCustomizer<OAuth2TokenClaimsContext> {
 
-	/**
-	 * 自定义
-	 *
-	 * @param context 上下文
-	 * @since 2023-07-10 17:25:38
-	 */
-	@Override
+    /**
+     * 自定义
+     *
+     * @param context 上下文
+     * @since 2023-07-10 17:25:38
+     */
+    @Override
     public void customize(OAuth2TokenClaimsContext context) {
         AbstractAuthenticationToken token = null;
         Authentication clientAuthentication = SecurityContextHolder.getContext().getAuthentication();

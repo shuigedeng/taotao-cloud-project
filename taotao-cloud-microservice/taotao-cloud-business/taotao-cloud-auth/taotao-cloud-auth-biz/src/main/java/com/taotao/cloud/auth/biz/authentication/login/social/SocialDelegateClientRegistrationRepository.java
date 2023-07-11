@@ -31,33 +31,33 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
  * @since 2023-07-10 17:40:43
  */
 public class SocialDelegateClientRegistrationRepository implements ClientRegistrationRepository {
-	/**
-	 * 委托
-	 */
-	private Function<String, ClientRegistration> delegate;
-	/**
-	 * 客户注册地图
-	 */
-	private final Map<String, ClientRegistration> clientRegistrationMap = new HashMap<>();
+    /**
+     * 委托
+     */
+    private Function<String, ClientRegistration> delegate;
+    /**
+     * 客户注册地图
+     */
+    private final Map<String, ClientRegistration> clientRegistrationMap = new HashMap<>();
 
-	/**
-	 * 设置委托
-	 *
-	 * @param delegate 委托
-	 * @since 2023-07-10 17:40:44
-	 */
-	public void setDelegate(Function<String, ClientRegistration> delegate) {
+    /**
+     * 设置委托
+     *
+     * @param delegate 委托
+     * @since 2023-07-10 17:40:44
+     */
+    public void setDelegate(Function<String, ClientRegistration> delegate) {
         this.delegate = delegate;
     }
 
-	/**
-	 * 通过注册id查找
-	 *
-	 * @param registrationId 注册id
-	 * @return {@link ClientRegistration }
-	 * @since 2023-07-10 17:40:44
-	 */
-	@Override
+    /**
+     * 通过注册id查找
+     *
+     * @param registrationId 注册id
+     * @return {@link ClientRegistration }
+     * @since 2023-07-10 17:40:44
+     */
+    @Override
     public ClientRegistration findByRegistrationId(String registrationId) {
         if (clientRegistrationMap.containsKey(registrationId)) {
             return clientRegistrationMap.get(registrationId);
@@ -65,23 +65,23 @@ public class SocialDelegateClientRegistrationRepository implements ClientRegistr
         return delegate.apply(registrationId);
     }
 
-	/**
-	 * 获取客户注册地图
-	 *
-	 * @return {@link Map }<{@link String }, {@link ClientRegistration }>
-	 * @since 2023-07-10 17:40:44
-	 */
-	public Map<String, ClientRegistration> getClientRegistrationMap() {
+    /**
+     * 获取客户注册地图
+     *
+     * @return {@link Map }<{@link String }, {@link ClientRegistration }>
+     * @since 2023-07-10 17:40:44
+     */
+    public Map<String, ClientRegistration> getClientRegistrationMap() {
         return clientRegistrationMap;
     }
 
-	/**
-	 * 添加客户端注册
-	 *
-	 * @param clientRegistration 客户注册
-	 * @since 2023-07-10 17:40:45
-	 */
-	public void addClientRegistration(ClientRegistration clientRegistration) {
+    /**
+     * 添加客户端注册
+     *
+     * @param clientRegistration 客户注册
+     * @since 2023-07-10 17:40:45
+     */
+    public void addClientRegistration(ClientRegistration clientRegistration) {
         clientRegistrationMap.putIfAbsent(clientRegistration.getRegistrationId(), clientRegistration);
     }
 }

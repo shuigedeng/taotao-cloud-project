@@ -64,6 +64,7 @@ public class JustAuthAccessHandler implements AccessHandler {
                 .oauth_verifier(accessPrincipal.getOauth_verifier())
                 .build();
 
+        @SuppressWarnings("unchecked")
         AuthResponse<AuthUser> response = authRequest.login(authCallback);
         if (response.ok()) {
             AuthUser authUser = response.getData();

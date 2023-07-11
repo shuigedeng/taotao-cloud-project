@@ -43,201 +43,201 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
         region = OAuth2Constants.REGION_OAUTH2_REGISTERED_CLIENT)
 public class HerodotusRegisteredClient extends AbstractRegisteredClient {
 
-	/**
-	 * id
-	 */
-	@Id
+    /**
+     * id
+     */
+    @Id
     @HerodotusRegisteredClientUuid
     @Column(name = "id", nullable = false, length = 100)
     private String id;
 
-	/**
-	 * 客户端id
-	 */
-	@Column(name = "client_id", nullable = false, length = 100)
+    /**
+     * 客户端id
+     */
+    @Column(name = "client_id", nullable = false, length = 100)
     private String clientId;
 
-	/**
-	 * 客户秘密
-	 */
-	@Column(name = "client_secret", length = 200)
+    /**
+     * 客户秘密
+     */
+    @Column(name = "client_secret", length = 200)
     private String clientSecret;
 
-	/**
-	 * 客户名称
-	 */
-	@Column(name = "client_name", nullable = false, length = 200)
+    /**
+     * 客户名称
+     */
+    @Column(name = "client_name", nullable = false, length = 200)
     private String clientName;
 
-	/**
-	 * 范围
-	 */
-	@Column(name = "scopes", nullable = false, length = 1000)
+    /**
+     * 范围
+     */
+    @Column(name = "scopes", nullable = false, length = 1000)
     private String scopes;
 
-	/**
-	 * 客户端设置
-	 */
-	@Column(name = "client_settings", nullable = false, length = 2000)
+    /**
+     * 客户端设置
+     */
+    @Column(name = "client_settings", nullable = false, length = 2000)
     private String clientSettings;
 
-	/**
-	 * 令牌设置
-	 */
-	@Column(name = "token_settings", nullable = false, length = 2000)
+    /**
+     * 令牌设置
+     */
+    @Column(name = "token_settings", nullable = false, length = 2000)
     private String tokenSettings;
 
-	/**
-	 * 获取id
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:44
-	 */
-	@Override
+    /**
+     * 获取id
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:44
+     */
+    @Override
     public String getId() {
         return id;
     }
 
-	/**
-	 * 设置id
-	 *
-	 * @param id id
-	 * @since 2023-07-10 17:12:44
-	 */
-	public void setId(String id) {
+    /**
+     * 设置id
+     *
+     * @param id id
+     * @since 2023-07-10 17:12:44
+     */
+    public void setId(String id) {
         this.id = id;
     }
 
-	/**
-	 * 获取客户端id
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:45
-	 */
-	@Override
+    /**
+     * 获取客户端id
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:45
+     */
+    @Override
     public String getClientId() {
         return clientId;
     }
 
-	/**
-	 * 设置客户端id
-	 *
-	 * @param clientId 客户端id
-	 * @since 2023-07-10 17:12:45
-	 */
-	public void setClientId(String clientId) {
+    /**
+     * 设置客户端id
+     *
+     * @param clientId 客户端id
+     * @since 2023-07-10 17:12:45
+     */
+    public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 
-	/**
-	 * 获取客户秘密
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:45
-	 */
-	@Override
+    /**
+     * 获取客户秘密
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:45
+     */
+    @Override
     public String getClientSecret() {
         return clientSecret;
     }
 
-	/**
-	 * 设置客户端秘密
-	 *
-	 * @param clientSecret 客户秘密
-	 * @since 2023-07-10 17:12:46
-	 */
-	public void setClientSecret(String clientSecret) {
+    /**
+     * 设置客户端秘密
+     *
+     * @param clientSecret 客户秘密
+     * @since 2023-07-10 17:12:46
+     */
+    public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
     }
 
-	/**
-	 * 获取客户端名称
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:46
-	 */
-	public String getClientName() {
+    /**
+     * 获取客户端名称
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:46
+     */
+    public String getClientName() {
         return clientName;
     }
 
-	/**
-	 * 设置客户端名称
-	 *
-	 * @param clientName 客户名称
-	 * @since 2023-07-10 17:12:47
-	 */
-	public void setClientName(String clientName) {
+    /**
+     * 设置客户端名称
+     *
+     * @param clientName 客户名称
+     * @since 2023-07-10 17:12:47
+     */
+    public void setClientName(String clientName) {
         this.clientName = clientName;
     }
 
-	/**
-	 * 获取范围
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:47
-	 */
-	public String getScopes() {
+    /**
+     * 获取范围
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:47
+     */
+    public String getScopes() {
         return scopes;
     }
 
-	/**
-	 * 设置范围
-	 *
-	 * @param scopes 范围
-	 * @since 2023-07-10 17:12:48
-	 */
-	public void setScopes(String scopes) {
+    /**
+     * 设置范围
+     *
+     * @param scopes 范围
+     * @since 2023-07-10 17:12:48
+     */
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 
-	/**
-	 * 获取客户端设置
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:48
-	 */
-	public String getClientSettings() {
+    /**
+     * 获取客户端设置
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:48
+     */
+    public String getClientSettings() {
         return clientSettings;
     }
 
-	/**
-	 * 设置客户端设置
-	 *
-	 * @param clientSettings 客户端设置
-	 * @since 2023-07-10 17:12:49
-	 */
-	public void setClientSettings(String clientSettings) {
+    /**
+     * 设置客户端设置
+     *
+     * @param clientSettings 客户端设置
+     * @since 2023-07-10 17:12:49
+     */
+    public void setClientSettings(String clientSettings) {
         this.clientSettings = clientSettings;
     }
 
-	/**
-	 * 获取令牌设置
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:50
-	 */
-	public String getTokenSettings() {
+    /**
+     * 获取令牌设置
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:50
+     */
+    public String getTokenSettings() {
         return tokenSettings;
     }
 
-	/**
-	 * 设置令牌设置
-	 *
-	 * @param tokenSettings 令牌设置
-	 * @since 2023-07-10 17:12:50
-	 */
-	public void setTokenSettings(String tokenSettings) {
+    /**
+     * 设置令牌设置
+     *
+     * @param tokenSettings 令牌设置
+     * @since 2023-07-10 17:12:50
+     */
+    public void setTokenSettings(String tokenSettings) {
         this.tokenSettings = tokenSettings;
     }
 
-	/**
-	 * 等于
-	 *
-	 * @param o o
-	 * @return boolean
-	 * @since 2023-07-10 17:12:50
-	 */
-	@Override
+    /**
+     * 等于
+     *
+     * @param o o
+     * @return boolean
+     * @since 2023-07-10 17:12:50
+     */
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -249,24 +249,24 @@ public class HerodotusRegisteredClient extends AbstractRegisteredClient {
         return Objects.equals(id, that.id);
     }
 
-	/**
-	 * 哈希码
-	 *
-	 * @return int
-	 * @since 2023-07-10 17:12:50
-	 */
-	@Override
+    /**
+     * 哈希码
+     *
+     * @return int
+     * @since 2023-07-10 17:12:50
+     */
+    @Override
     public int hashCode() {
         return Objects.hash(id);
     }
 
-	/**
-	 * 要字符串
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:12:50
-	 */
-	@Override
+    /**
+     * 要字符串
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:12:50
+     */
+    @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)

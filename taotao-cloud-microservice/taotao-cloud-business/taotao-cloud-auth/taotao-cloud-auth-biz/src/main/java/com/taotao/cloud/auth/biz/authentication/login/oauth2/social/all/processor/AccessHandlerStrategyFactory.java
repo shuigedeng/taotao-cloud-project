@@ -22,10 +22,9 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definit
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition.AccessUserDetails;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception.AccessHandlerNotFoundException;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception.IllegalAccessArgumentException;
+import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

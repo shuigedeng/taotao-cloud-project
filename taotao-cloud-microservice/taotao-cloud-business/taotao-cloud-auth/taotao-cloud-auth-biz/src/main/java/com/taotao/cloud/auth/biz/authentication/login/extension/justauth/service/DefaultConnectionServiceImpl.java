@@ -25,9 +25,9 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.propert
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.repository.UsersConnectionRepository;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.repository.UsersConnectionTokenRepository;
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.repository.exception.UpdateConnectionException;
-import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.auth.biz.exception.RegisterUserFailureException;
 import com.taotao.cloud.auth.biz.exception.UnBindingException;
+import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.security.justauth.justauth.AuthTokenPo;
 import com.taotao.cloud.security.justauth.justauth.ConnectionData;

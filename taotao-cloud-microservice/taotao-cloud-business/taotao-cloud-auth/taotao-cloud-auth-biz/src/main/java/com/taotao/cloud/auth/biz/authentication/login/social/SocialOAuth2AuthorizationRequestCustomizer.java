@@ -18,8 +18,6 @@ package com.taotao.cloud.auth.biz.authentication.login.social;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.function.Consumer;
-import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 
@@ -34,13 +32,13 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
  */
 public class SocialOAuth2AuthorizationRequestCustomizer {
 
-	/**
-	 * 授权请求参数定制
-	 *
-	 * @param builder the builder
-	 * @since 2023-07-10 17:41:11
-	 */
-	public static void customize(OAuth2AuthorizationRequest.Builder builder) {
+    /**
+     * 授权请求参数定制
+     *
+     * @param builder the builder
+     * @since 2023-07-10 17:41:11
+     */
+    public static void customize(OAuth2AuthorizationRequest.Builder builder) {
         builder.attributes(attributes -> Arrays.stream(SocialClientProviders.values())
                 .filter(clientProvider -> Objects.equals(
                         clientProvider.registrationId(), attributes.get(OAuth2ParameterNames.REGISTRATION_ID)))

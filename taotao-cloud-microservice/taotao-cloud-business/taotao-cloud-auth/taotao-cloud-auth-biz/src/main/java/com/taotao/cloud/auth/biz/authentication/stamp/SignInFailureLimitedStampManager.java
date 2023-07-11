@@ -37,80 +37,80 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class SignInFailureLimitedStampManager extends AbstractCountStampManager implements InitializingBean {
 
-	/**
-	 * 身份验证属性
-	 */
-	private final OAuth2AuthenticationProperties authenticationProperties;
+    /**
+     * 身份验证属性
+     */
+    private final OAuth2AuthenticationProperties authenticationProperties;
 
-	/**
-	 * 登录失败有限邮票经理
-	 *
-	 * @param redisRepository          redis存储库
-	 * @param authenticationProperties 身份验证属性
-	 * @return
-	 * @since 2023-07-10 17:25:15
-	 */
-	public SignInFailureLimitedStampManager(
+    /**
+     * 登录失败有限邮票经理
+     *
+     * @param redisRepository          redis存储库
+     * @param authenticationProperties 身份验证属性
+     * @return
+     * @since 2023-07-10 17:25:15
+     */
+    public SignInFailureLimitedStampManager(
             RedisRepository redisRepository, OAuth2AuthenticationProperties authenticationProperties) {
         super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_SIGN_IN_FAILURE_LIMITED);
         this.authenticationProperties = authenticationProperties;
     }
 
-	/**
-	 * 登录失败有限邮票经理
-	 *
-	 * @param redisRepository          redis存储库
-	 * @param expire                   过期
-	 * @param authenticationProperties 身份验证属性
-	 * @return
-	 * @since 2023-07-10 17:25:15
-	 */
-	public SignInFailureLimitedStampManager(
+    /**
+     * 登录失败有限邮票经理
+     *
+     * @param redisRepository          redis存储库
+     * @param expire                   过期
+     * @param authenticationProperties 身份验证属性
+     * @return
+     * @since 2023-07-10 17:25:15
+     */
+    public SignInFailureLimitedStampManager(
             RedisRepository redisRepository, Duration expire, OAuth2AuthenticationProperties authenticationProperties) {
         super(redisRepository, OAuth2Constants.CACHE_NAME_TOKEN_SIGN_IN_FAILURE_LIMITED, expire);
         this.authenticationProperties = authenticationProperties;
     }
 
-	/**
-	 * 下一枚邮票
-	 *
-	 * @param key 钥匙
-	 * @return {@link Long }
-	 * @since 2023-07-10 17:25:15
-	 */
-	@Override
+    /**
+     * 下一枚邮票
+     *
+     * @param key 钥匙
+     * @return {@link Long }
+     * @since 2023-07-10 17:25:15
+     */
+    @Override
     public Long nextStamp(String key) {
         return 1L;
     }
 
-	/**
-	 * 属性设置后
-	 *
-	 * @since 2023-07-10 17:25:15
-	 */
-	@Override
+    /**
+     * 属性设置后
+     *
+     * @since 2023-07-10 17:25:15
+     */
+    @Override
     public void afterPropertiesSet() throws Exception {
         super.setExpire(authenticationProperties.getSignInFailureLimited().getExpire());
     }
 
-	/**
-	 * 获取身份验证属性
-	 *
-	 * @return {@link OAuth2AuthenticationProperties }
-	 * @since 2023-07-10 17:25:15
-	 */
-	public OAuth2AuthenticationProperties getAuthenticationProperties() {
+    /**
+     * 获取身份验证属性
+     *
+     * @return {@link OAuth2AuthenticationProperties }
+     * @since 2023-07-10 17:25:15
+     */
+    public OAuth2AuthenticationProperties getAuthenticationProperties() {
         return authenticationProperties;
     }
 
-	/**
-	 * 错误状态
-	 *
-	 * @param username 用户名
-	 * @return {@link SignInErrorStatus }
-	 * @since 2023-07-10 17:25:16
-	 */
-	public SignInErrorStatus errorStatus(String username) {
+    /**
+     * 错误状态
+     *
+     * @param username 用户名
+     * @return {@link SignInErrorStatus }
+     * @since 2023-07-10 17:25:16
+     */
+    public SignInErrorStatus errorStatus(String username) {
         int maxTimes = authenticationProperties.getSignInFailureLimited().getMaxTimes();
         Long storedTimes = (Long) get(SecureUtil.md5(username));
 
@@ -137,48 +137,48 @@ public class SignInFailureLimitedStampManager extends AbstractCountStampManager 
         return status;
     }
 
-	/**
-	 * 抽奖
-	 *
-	 * @return {@link Metadata }
-	 * @since 2023-07-10 17:25:16
-	 */
-	@Override
+    /**
+     * 抽奖
+     *
+     * @return {@link Metadata }
+     * @since 2023-07-10 17:25:16
+     */
+    @Override
     public Metadata draw() {
         return null;
     }
 
-	/**
-	 * 获取capcha
-	 *
-	 * @param key 钥匙
-	 * @return {@link Captcha }
-	 * @since 2023-07-10 17:25:16
-	 */
-	@Override
+    /**
+     * 获取capcha
+     *
+     * @param key 钥匙
+     * @return {@link Captcha }
+     * @since 2023-07-10 17:25:16
+     */
+    @Override
     public Captcha getCapcha(String key) {
         return null;
     }
 
-	/**
-	 * 验证
-	 *
-	 * @param verification 验证
-	 * @return boolean
-	 * @since 2023-07-10 17:25:16
-	 */
-	@Override
+    /**
+     * 验证
+     *
+     * @param verification 验证
+     * @return boolean
+     * @since 2023-07-10 17:25:16
+     */
+    @Override
     public boolean verify(Verification verification) {
         return false;
     }
 
-	/**
-	 * 获取类别
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:25:16
-	 */
-	@Override
+    /**
+     * 获取类别
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:25:16
+     */
+    @Override
     public String getCategory() {
         return null;
     }

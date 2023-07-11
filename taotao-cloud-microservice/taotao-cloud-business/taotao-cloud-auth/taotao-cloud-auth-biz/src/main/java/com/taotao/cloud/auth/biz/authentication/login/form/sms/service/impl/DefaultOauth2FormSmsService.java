@@ -29,7 +29,6 @@ public class DefaultOauth2FormSmsService implements Oauth2FormSmsService {
     @Override
     public boolean verifyCaptcha(String phone, String rawCode) {
 
-
         // 校验短信验证码
         return true;
     }

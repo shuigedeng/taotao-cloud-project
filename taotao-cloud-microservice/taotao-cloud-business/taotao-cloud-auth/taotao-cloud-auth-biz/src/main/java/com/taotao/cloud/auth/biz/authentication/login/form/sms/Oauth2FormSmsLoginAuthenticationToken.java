@@ -90,8 +90,7 @@ public class Oauth2FormSmsLoginAuthenticationToken extends AbstractAuthenticatio
         return type;
     }
 
-    public static Oauth2FormSmsLoginAuthenticationToken unauthenticated(
-            Object principal, String captcha, String type) {
+    public static Oauth2FormSmsLoginAuthenticationToken unauthenticated(Object principal, String captcha, String type) {
         return new Oauth2FormSmsLoginAuthenticationToken(principal, captcha, type);
     }
 

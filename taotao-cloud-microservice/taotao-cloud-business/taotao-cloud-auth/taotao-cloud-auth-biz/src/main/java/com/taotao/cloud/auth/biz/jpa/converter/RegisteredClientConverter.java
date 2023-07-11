@@ -35,49 +35,49 @@ import org.springframework.util.StringUtils;
  */
 public interface RegisteredClientConverter<S extends RegisteredClientDetails> extends Converter<S, RegisteredClient> {
 
-	/**
-	 * 获取范围
-	 *
-	 * @param details 详细信息
-	 * @return {@link Set }<{@link String }>
-	 * @since 2023-07-10 17:13:33
-	 */
-	Set<String> getScopes(S details);
+    /**
+     * 获取范围
+     *
+     * @param details 详细信息
+     * @return {@link Set }<{@link String }>
+     * @since 2023-07-10 17:13:33
+     */
+    Set<String> getScopes(S details);
 
-	/**
-	 * 获取客户端设置
-	 *
-	 * @param details 详细信息
-	 * @return {@link ClientSettings }
-	 * @since 2023-07-10 17:13:33
-	 */
-	ClientSettings getClientSettings(S details);
+    /**
+     * 获取客户端设置
+     *
+     * @param details 详细信息
+     * @return {@link ClientSettings }
+     * @since 2023-07-10 17:13:33
+     */
+    ClientSettings getClientSettings(S details);
 
-	/**
-	 * 获取令牌设置
-	 *
-	 * @param details 详细信息
-	 * @return {@link TokenSettings }
-	 * @since 2023-07-10 17:13:33
-	 */
-	TokenSettings getTokenSettings(S details);
+    /**
+     * 获取令牌设置
+     *
+     * @param details 详细信息
+     * @return {@link TokenSettings }
+     * @since 2023-07-10 17:13:33
+     */
+    TokenSettings getTokenSettings(S details);
 
-	/**
-	 * 转换
-	 *
-	 * @param details 详细信息
-	 * @return {@link RegisteredClient }
-	 * @since 2023-07-10 17:13:33
-	 */
-	@Override
+    /**
+     * 转换
+     *
+     * @param details 详细信息
+     * @return {@link RegisteredClient }
+     * @since 2023-07-10 17:13:33
+     */
+    @Override
     default RegisteredClient convert(S details) {
         Set<String> clientScopes = getScopes(details);
         ClientSettings clientSettings = getClientSettings(details);
 
-		//客服端设置 设置用户需要确认授权
-		//ClientSettings build = ClientSettings.builder().requireAuthorizationConsent(false).build();
+        // 客服端设置 设置用户需要确认授权
+        // ClientSettings build = ClientSettings.builder().requireAuthorizationConsent(false).build();
 
-		TokenSettings tokenSettings = getTokenSettings(details);
+        TokenSettings tokenSettings = getTokenSettings(details);
 
         Set<String> clientAuthenticationMethods =
                 StringUtils.commaDelimitedListToSet(details.getClientAuthenticationMethods());

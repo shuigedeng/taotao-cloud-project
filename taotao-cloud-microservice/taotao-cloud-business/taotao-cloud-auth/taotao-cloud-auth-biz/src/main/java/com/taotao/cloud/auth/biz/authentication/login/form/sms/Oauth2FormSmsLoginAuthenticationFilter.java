@@ -124,8 +124,7 @@ public class Oauth2FormSmsLoginAuthenticationFilter extends AbstractAuthenticati
         this.typeParameter = typeParameter;
     }
 
-    public Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken>
-            getPhoneAuthenticationTokenConverter() {
+    public Converter<HttpServletRequest, Oauth2FormSmsLoginAuthenticationToken> getPhoneAuthenticationTokenConverter() {
         return phoneAuthenticationTokenConverter;
     }
 

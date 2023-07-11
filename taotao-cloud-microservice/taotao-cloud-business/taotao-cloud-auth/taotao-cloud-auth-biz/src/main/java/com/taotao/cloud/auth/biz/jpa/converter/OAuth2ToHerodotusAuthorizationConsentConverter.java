@@ -33,14 +33,14 @@ import org.springframework.util.StringUtils;
  */
 public class OAuth2ToHerodotusAuthorizationConsentConverter
         implements Converter<OAuth2AuthorizationConsent, HerodotusAuthorizationConsent> {
-	/**
-	 * 转换
-	 *
-	 * @param authorizationConsent 授权同意书
-	 * @return {@link HerodotusAuthorizationConsent }
-	 * @since 2023-07-10 17:13:47
-	 */
-	@Override
+    /**
+     * 转换
+     *
+     * @param authorizationConsent 授权同意书
+     * @return {@link HerodotusAuthorizationConsent }
+     * @since 2023-07-10 17:13:47
+     */
+    @Override
     public HerodotusAuthorizationConsent convert(OAuth2AuthorizationConsent authorizationConsent) {
         HerodotusAuthorizationConsent entity = new HerodotusAuthorizationConsent();
         entity.setRegisteredClientId(authorizationConsent.getRegisteredClientId());

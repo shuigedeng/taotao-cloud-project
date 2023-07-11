@@ -1,15 +1,30 @@
-package com.taotao.cloud.auth.biz.uaa.processor.loginrisk;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.auth.biz.management.compliance.processor.loginrisk;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import lombok.Data;
 import org.dromara.hutool.core.map.MapUtil;
 import org.dromara.hutool.json.JSONUtil;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 异常时间登录风险实现
@@ -22,13 +37,14 @@ public class UnusualLoginRiskHandle extends AbstractLoginHandle {
         if (MapUtil.isNotEmpty(ruleMap)) {
             RiskRule loginTimeExe = ruleMap.get(2);
             if (loginTimeExe != null) {
-            // 将json转为异常时间对象
-                List<UnusualLoginTime> unusualLoginTimes = JSONUtil.toList(loginTimeExe.getUnusualLoginTime(), UnusualLoginTime.class);
+                // 将json转为异常时间对象
+                List<UnusualLoginTime> unusualLoginTimes =
+                        JSONUtil.toList(loginTimeExe.getUnusualLoginTime(), UnusualLoginTime.class);
                 Date now = new Date();
                 // 判断当前时间是周几
                 int dayOfWeek = DateUtil.dayOfWeek(now);
                 for (UnusualLoginTime unusualLoginTime : unusualLoginTimes) {
-                   // 如果当前的周数与配置的周数相等，那么判断当前的具体时间
+                    // 如果当前的周数与配置的周数相等，那么判断当前的具体时间
                     if (unusualLoginTime.getWeek() == dayOfWeek) {
                         DateTime startTime = DateUtil.parseTimeToday(unusualLoginTime.getStartTime());
                         DateTime endTime = DateUtil.parseTimeToday(unusualLoginTime.getEndTime());
@@ -41,7 +57,7 @@ public class UnusualLoginRiskHandle extends AbstractLoginHandle {
                 }
             }
         }
-        // 是否有下一个节点 ， 如果有，继续向下执行  
+        // 是否有下一个节点 ， 如果有，继续向下执行
         if (this.nextHandle != null) {
             this.nextHandle.filterRisk(filter, ruleMap, account);
         }

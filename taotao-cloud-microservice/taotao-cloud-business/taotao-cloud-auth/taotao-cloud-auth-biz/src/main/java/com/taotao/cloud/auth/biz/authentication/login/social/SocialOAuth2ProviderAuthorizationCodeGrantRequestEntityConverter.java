@@ -35,20 +35,20 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 public class SocialOAuth2ProviderAuthorizationCodeGrantRequestEntityConverter
         implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
 
-	/**
-	 * 默认转换器
-	 */
-	private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter =
+    /**
+     * 默认转换器
+     */
+    private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> defaultConverter =
             new OAuth2AuthorizationCodeGrantRequestEntityConverter();
 
-	/**
-	 * Returns the {@link RequestEntity} used for the Access Token Request.
-	 *
-	 * @param authorizationCodeGrantRequest the authorization code grant request
-	 * @return {@link RequestEntity }<{@link ? }>
-	 * @since 2023-07-10 17:41:19
-	 */
-	@Override
+    /**
+     * Returns the {@link RequestEntity} used for the Access Token Request.
+     *
+     * @param authorizationCodeGrantRequest the authorization code grant request
+     * @return {@link RequestEntity }<{@link ? }>
+     * @since 2023-07-10 17:41:19
+     */
+    @Override
     public RequestEntity<?> convert(OAuth2AuthorizationCodeGrantRequest authorizationCodeGrantRequest) {
 
         ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();

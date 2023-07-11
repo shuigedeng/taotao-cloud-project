@@ -38,37 +38,37 @@ import org.springframework.security.oauth2.core.OAuth2Error;
  */
 public class DefaultOAuth2AuthenticationEventPublisher extends DefaultAuthenticationEventPublisher {
 
-	/**
-	 * 默认oauth2身份验证事件发布者
-	 *
-	 * @param applicationEventPublisher 应用程序事件发布者
-	 * @return
-	 * @since 2023-07-10 17:24:35
-	 */
-	public DefaultOAuth2AuthenticationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+    /**
+     * 默认oauth2身份验证事件发布者
+     *
+     * @param applicationEventPublisher 应用程序事件发布者
+     * @return
+     * @since 2023-07-10 17:24:35
+     */
+    public DefaultOAuth2AuthenticationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         super(applicationEventPublisher);
     }
 
-	/**
-	 * 发布身份验证失败
-	 *
-	 * @param exception      异常
-	 * @param authentication 身份验证
-	 * @since 2023-07-10 17:24:35
-	 */
-	@Override
+    /**
+     * 发布身份验证失败
+     *
+     * @param exception      异常
+     * @param authentication 身份验证
+     * @since 2023-07-10 17:24:35
+     */
+    @Override
     public void publishAuthenticationFailure(AuthenticationException exception, Authentication authentication) {
         super.publishAuthenticationFailure(convert(exception), authentication);
     }
 
-	/**
-	 * 转换
-	 *
-	 * @param exception 异常
-	 * @return {@link AuthenticationException }
-	 * @since 2023-07-10 17:24:35
-	 */
-	private AuthenticationException convert(AuthenticationException exception) {
+    /**
+     * 转换
+     *
+     * @param exception 异常
+     * @return {@link AuthenticationException }
+     * @since 2023-07-10 17:24:35
+     */
+    private AuthenticationException convert(AuthenticationException exception) {
         if (exception instanceof OAuth2AuthenticationException authenticationException) {
             OAuth2Error error = authenticationException.getError();
 

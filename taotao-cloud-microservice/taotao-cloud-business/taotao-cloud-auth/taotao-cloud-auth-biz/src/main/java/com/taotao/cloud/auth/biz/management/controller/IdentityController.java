@@ -49,95 +49,95 @@ import org.springframework.web.bind.annotation.RestController;
 @Tags({@Tag(name = "OAuth2 认证服务器接口"), @Tag(name = "OAuth2 认证服务器开放接口"), @Tag(name = "OAuth2 身份认证辅助接口")})
 public class IdentityController {
 
-	private final Logger log = LoggerFactory.getLogger(IdentityController.class);
+    private final Logger log = LoggerFactory.getLogger(IdentityController.class);
 
-	private final InterfaceSecurityService interfaceSecurityService;
-	private final SignInFailureLimitedStampManager signInFailureLimitedStampManager;
+    private final InterfaceSecurityService interfaceSecurityService;
+    private final SignInFailureLimitedStampManager signInFailureLimitedStampManager;
 
-	public IdentityController(
-		InterfaceSecurityService interfaceSecurityService,
-		SignInFailureLimitedStampManager signInFailureLimitedStampManager) {
-		this.interfaceSecurityService = interfaceSecurityService;
-		this.signInFailureLimitedStampManager = signInFailureLimitedStampManager;
-	}
+    public IdentityController(
+            InterfaceSecurityService interfaceSecurityService,
+            SignInFailureLimitedStampManager signInFailureLimitedStampManager) {
+        this.interfaceSecurityService = interfaceSecurityService;
+        this.signInFailureLimitedStampManager = signInFailureLimitedStampManager;
+    }
 
-	@Operation(
-		summary = "获取后台加密公钥",
-		description = "根据未登录时的身份标识，在后台创建RSA公钥和私钥。身份标识为前端的唯一标识，如果为空，则在后台创建一个",
-		requestBody =
-		@io.swagger.v3.oas.annotations.parameters.RequestBody(
-			content = @Content(mediaType = "application/json")),
-		responses = {@ApiResponse(description = "自定义Session", content = @Content(mediaType = "application/json"))})
-	@Parameters({
-		@Parameter(
-			name = "sessionCreate",
-			required = true,
-			description = "Session创建请求参数",
-			schema = @Schema(implementation = SessionCreate.class)),
-	})
-	@PostMapping("/open/identity/session")
-	public Result<Session> codeToSession(@Validated @RequestBody SessionCreate sessionCreate) {
+    @Operation(
+            summary = "获取后台加密公钥",
+            description = "根据未登录时的身份标识，在后台创建RSA公钥和私钥。身份标识为前端的唯一标识，如果为空，则在后台创建一个",
+            requestBody =
+                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                            content = @Content(mediaType = "application/json")),
+            responses = {@ApiResponse(description = "自定义Session", content = @Content(mediaType = "application/json"))})
+    @Parameters({
+        @Parameter(
+                name = "sessionCreate",
+                required = true,
+                description = "Session创建请求参数",
+                schema = @Schema(implementation = SessionCreate.class)),
+    })
+    @PostMapping("/open/identity/session")
+    public Result<Session> codeToSession(@Validated @RequestBody SessionCreate sessionCreate) {
 
-		SecretKey secretKey = interfaceSecurityService.createSecretKey(
-			sessionCreate.getClientId(), sessionCreate.getClientSecret(), sessionCreate.getSessionId());
-		if (ObjectUtils.isNotEmpty(secretKey)) {
-			Session session = new Session();
-			session.setSessionId(secretKey.getIdentity());
-			session.setPublicKey(secretKey.getPublicKey());
-			session.setState(secretKey.getState());
+        SecretKey secretKey = interfaceSecurityService.createSecretKey(
+                sessionCreate.getClientId(), sessionCreate.getClientSecret(), sessionCreate.getSessionId());
+        if (ObjectUtils.isNotEmpty(secretKey)) {
+            Session session = new Session();
+            session.setSessionId(secretKey.getIdentity());
+            session.setPublicKey(secretKey.getPublicKey());
+            session.setState(secretKey.getState());
 
-			return Result.success(session);
-		}
+            return Result.success(session);
+        }
 
-		return null;
-		//        return Result.fail();
-	}
+        return null;
+        //        return Result.fail();
+    }
 
-	@Operation(
-		summary = "获取AES秘钥",
-		description = "用后台publicKey，加密前台publicKey，到后台换取AES秘钥",
-		requestBody =
-		@io.swagger.v3.oas.annotations.parameters.RequestBody(
-			content = @Content(mediaType = "application/json")),
-		responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
-	@Parameters({
-		@Parameter(
-			name = "sessionExchange",
-			required = true,
-			description = "秘钥交换",
-			schema = @Schema(implementation = SessionExchange.class)),
-	})
-	@PostMapping("/open/identity/exchange")
-	public Result<String> exchange(@Validated @RequestBody SessionExchange sessionExchange) {
+    @Operation(
+            summary = "获取AES秘钥",
+            description = "用后台publicKey，加密前台publicKey，到后台换取AES秘钥",
+            requestBody =
+                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                            content = @Content(mediaType = "application/json")),
+            responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
+    @Parameters({
+        @Parameter(
+                name = "sessionExchange",
+                required = true,
+                description = "秘钥交换",
+                schema = @Schema(implementation = SessionExchange.class)),
+    })
+    @PostMapping("/open/identity/exchange")
+    public Result<String> exchange(@Validated @RequestBody SessionExchange sessionExchange) {
 
-		String encryptedAesKey =
-			interfaceSecurityService.exchange(sessionExchange.getSessionId(), sessionExchange.getConfidential());
-		if (StringUtils.isNotEmpty(encryptedAesKey)) {
-			return Result.success(encryptedAesKey);
-		}
+        String encryptedAesKey =
+                interfaceSecurityService.exchange(sessionExchange.getSessionId(), sessionExchange.getConfidential());
+        if (StringUtils.isNotEmpty(encryptedAesKey)) {
+            return Result.success(encryptedAesKey);
+        }
 
-		return Result.fail();
-	}
+        return Result.fail();
+    }
 
-	//    @Crypto(responseEncrypt = false)
-	@Operation(
-		summary = "获取登录出错剩余次数",
-		description = "获取登录出错剩余次数",
-		requestBody =
-		@io.swagger.v3.oas.annotations.parameters.RequestBody(
-			content = @Content(mediaType = "application/json")),
-		responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
-	@Parameters({
-		@Parameter(
-			name = "signInErrorPrompt",
-			required = true,
-			description = "提示信息所需参数",
-			schema = @Schema(implementation = SignInErrorPrompt.class)),
-	})
-	@PostMapping("/open/identity/prompt")
-	public Result<SignInErrorStatus> prompt(@Validated @RequestBody SignInErrorPrompt signInErrorPrompt) {
-		SignInErrorStatus signInErrorStatus =
-			signInFailureLimitedStampManager.errorStatus(signInErrorPrompt.getUsername());
-		return Result.success(signInErrorStatus);
-	}
+    //    @Crypto(responseEncrypt = false)
+    @Operation(
+            summary = "获取登录出错剩余次数",
+            description = "获取登录出错剩余次数",
+            requestBody =
+                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                            content = @Content(mediaType = "application/json")),
+            responses = {@ApiResponse(description = "加密后的AES", content = @Content(mediaType = "application/json"))})
+    @Parameters({
+        @Parameter(
+                name = "signInErrorPrompt",
+                required = true,
+                description = "提示信息所需参数",
+                schema = @Schema(implementation = SignInErrorPrompt.class)),
+    })
+    @PostMapping("/open/identity/prompt")
+    public Result<SignInErrorStatus> prompt(@Validated @RequestBody SignInErrorPrompt signInErrorPrompt) {
+        SignInErrorStatus signInErrorStatus =
+                signInFailureLimitedStampManager.errorStatus(signInErrorPrompt.getUsername());
+        return Result.success(signInErrorStatus);
+    }
 }

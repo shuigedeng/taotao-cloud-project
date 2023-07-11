@@ -19,8 +19,8 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.filter
 import static org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames.STATE;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.justauth.JustAuthRequestHolder;
-import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.auth.biz.exception.Auth2Exception;
+import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.security.justauth.justauth.request.Auth2DefaultRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;

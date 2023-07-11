@@ -43,33 +43,33 @@ import org.springframework.util.StringUtils;
 public class HerodotusToOAuth2AuthorizationConverter
         extends AbstractOAuth2EntityConverter<HerodotusAuthorization, OAuth2Authorization> {
 
-	/**
-	 * 注册客户端存储库
-	 */
-	private final RegisteredClientRepository registeredClientRepository;
+    /**
+     * 注册客户端存储库
+     */
+    private final RegisteredClientRepository registeredClientRepository;
 
-	/**
-	 * 希罗多德到oauth2授权转换器
-	 *
-	 * @param jacksonProcessor           杰克逊处理器
-	 * @param registeredClientRepository 注册客户端存储库
-	 * @return
-	 * @since 2023-07-10 17:13:54
-	 */
-	public HerodotusToOAuth2AuthorizationConverter(
+    /**
+     * 希罗多德到oauth2授权转换器
+     *
+     * @param jacksonProcessor           杰克逊处理器
+     * @param registeredClientRepository 注册客户端存储库
+     * @return
+     * @since 2023-07-10 17:13:54
+     */
+    public HerodotusToOAuth2AuthorizationConverter(
             OAuth2JacksonProcessor jacksonProcessor, RegisteredClientRepository registeredClientRepository) {
         super(jacksonProcessor);
         this.registeredClientRepository = registeredClientRepository;
     }
 
-	/**
-	 * 转换
-	 *
-	 * @param entity 实体
-	 * @return {@link OAuth2Authorization }
-	 * @since 2023-07-10 17:13:54
-	 */
-	@Override
+    /**
+     * 转换
+     *
+     * @param entity 实体
+     * @return {@link OAuth2Authorization }
+     * @since 2023-07-10 17:13:54
+     */
+    @Override
     public OAuth2Authorization convert(HerodotusAuthorization entity) {
         RegisteredClient registeredClient = this.registeredClientRepository.findById(entity.getRegisteredClientId());
         if (registeredClient == null) {

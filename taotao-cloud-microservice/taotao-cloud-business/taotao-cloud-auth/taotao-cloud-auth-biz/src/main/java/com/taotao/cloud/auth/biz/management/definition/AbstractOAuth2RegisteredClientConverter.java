@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.management.definition;
 
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.converter.RegisteredClientConverter;
+import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.ObjectUtils;

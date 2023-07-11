@@ -61,8 +61,7 @@ public class Oauth2FormSmsLoginHttpConfigurer<H extends HttpSecurityBuilder<H>>
         filter.setSecurityContextRepository(securityContextRepository);
 
         Oauth2FormSmsLoginAuthenticationProvider provider = new Oauth2FormSmsLoginAuthenticationProvider(
-                new DefaultOauth2FormSmsUserDetailsService(),
-                new DefaultOauth2FormSmsService());
+                new DefaultOauth2FormSmsUserDetailsService(), new DefaultOauth2FormSmsService());
 
         httpSecurity
                 .authenticationProvider(provider)

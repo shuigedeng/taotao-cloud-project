@@ -16,9 +16,7 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-
 import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
-
 import java.util.List;
 
 /**

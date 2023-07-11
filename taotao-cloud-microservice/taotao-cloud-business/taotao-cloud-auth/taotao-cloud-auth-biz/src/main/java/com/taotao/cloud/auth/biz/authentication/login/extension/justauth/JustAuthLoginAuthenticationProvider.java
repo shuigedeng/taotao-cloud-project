@@ -167,8 +167,12 @@ public class JustAuthLoginAuthenticationProvider implements AuthenticationProvid
                 }
 
                 try {
+                    @SuppressWarnings({"unchecked"})
+                    AbstractOAuth2TokenAuthenticationToken<OAuth2AccessToken>
+                            auth2AccessTokenAbstractOAuth2TokenAuthenticationToken =
+                                    (AbstractOAuth2TokenAuthenticationToken<OAuth2AccessToken>) authenticationToken;
                     principal = authenticationToUserDetailsConverter.convert(
-                            (AbstractOAuth2TokenAuthenticationToken<OAuth2AccessToken>) authenticationToken);
+                            auth2AccessTokenAbstractOAuth2TokenAuthenticationToken);
                 } catch (IllegalArgumentException e) {
                     throw new InternalAuthenticationServiceException(
                             "AbstractOAuth2TokenAuthenticationToken convert to UserDetails error", e);

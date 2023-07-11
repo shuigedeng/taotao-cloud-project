@@ -41,7 +41,6 @@ import com.taotao.cloud.auth.biz.management.response.OAuth2AccessTokenResponseHa
 import com.taotao.cloud.auth.biz.management.response.OAuth2AuthenticationFailureResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OAuth2DeviceVerificationResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OidcClientRegistrationResponseHandler;
-import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.io.ResourceUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
@@ -53,6 +52,16 @@ import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointPropert
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.UUID;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,17 +106,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  * <p>Description: 认证服务器配置 </p>
  * <p>
@@ -122,305 +120,310 @@ import java.util.UUID;
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfiguration {
 
-	private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
 
-	@PostConstruct
-	public void postConstruct() {
-		log.info("SDK [OAuth2 Authorization Server] Auto Configure.");
-	}
+    @PostConstruct
+    public void postConstruct() {
+        log.info("SDK [OAuth2 Authorization Server] Auto Configure.");
+    }
 
-	@Bean
-	@Order(Ordered.HIGHEST_PRECEDENCE)
-	public SecurityFilterChain authorizationServerSecurityFilterChain(
-		HttpSecurity httpSecurity,
-		PasswordEncoder passwordEncoder,
-		UserDetailsService userDetailsService,
-		ClientDetailsService clientDetailsService,
-		HttpCryptoProcessor httpCryptoProcessor,
-		SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-		OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
-		OAuth2AuthenticationProperties authenticationProperties,
-		OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
-		OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
-		OAuth2EndpointProperties auth2EndpointProperties,
-		RegisteredClientRepository registeredClientRepository)
-		throws Exception {
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public SecurityFilterChain authorizationServerSecurityFilterChain(
+            HttpSecurity httpSecurity,
+            PasswordEncoder passwordEncoder,
+            UserDetailsService userDetailsService,
+            ClientDetailsService clientDetailsService,
+            HttpCryptoProcessor httpCryptoProcessor,
+            SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+            OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
+            OAuth2AuthenticationProperties authenticationProperties,
+            OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
+            OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
+            OAuth2EndpointProperties auth2EndpointProperties,
+            RegisteredClientRepository registeredClientRepository)
+            throws Exception {
 
-		log.info("Core [Authorization Server Security Filter Chain] Auto Configure.");
+        log.info("Core [Authorization Server Security Filter Chain] Auto Configure.");
 
-		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
-		httpSecurity.apply(authorizationServerConfigurer);
+        // 使用redis存储、读取登录的认证信息
+        // httpSecurity.securityContext(securityContextCustomizer -> {
+        //	securityContextCustomizer.securityContextRepository(redisSecurityContextRepository)
+        // });
 
-		OAuth2AuthenticationFailureResponseHandler errorResponseHandler =
-			new OAuth2AuthenticationFailureResponseHandler();
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
+        httpSecurity.apply(authorizationServerConfigurer);
 
-		authorizationServerConfigurer.tokenEndpoint(tokenEndpointCustomizer -> {
-			AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(Arrays.asList(
-				new OAuth2AuthorizationCodeAuthenticationConverter(),
-				new OAuth2RefreshTokenAuthenticationConverter(),
-				new OAuth2ClientCredentialsAuthenticationConverter(),
-				new OAuth2DeviceCodeAuthenticationConverter(),
-				new OAuth2DeviceAuthorizationRequestAuthenticationConverter(),
-				new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
-				new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor))
-			);
+        OAuth2AuthenticationFailureResponseHandler errorResponseHandler =
+                new OAuth2AuthenticationFailureResponseHandler();
 
-			tokenEndpointCustomizer
-				.accessTokenRequestConverter(authenticationConverter)
-				.errorResponseHandler(errorResponseHandler)
-				.accessTokenResponseHandler(new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
-		});
-		authorizationServerConfigurer.tokenIntrospectionEndpoint(tokenIntrospectionEndpointCustomizer -> {
-			tokenIntrospectionEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-		});
-		authorizationServerConfigurer.tokenRevocationEndpoint(tokenRevocationEndpointCustomizer -> {
-			tokenRevocationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-		});
-		authorizationServerConfigurer.authorizationEndpoint(authorizationEndpointCustomizer -> {
-			authorizationEndpointCustomizer
-				.authorizationResponseHandler(this::sendAuthorizationResponse)
-				.errorResponseHandler(errorResponseHandler)
-				.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
-		});
+        authorizationServerConfigurer.tokenEndpoint(tokenEndpointCustomizer -> {
+            AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(Arrays.asList(
+                    new OAuth2AuthorizationCodeAuthenticationConverter(),
+                    new OAuth2RefreshTokenAuthenticationConverter(),
+                    new OAuth2ClientCredentialsAuthenticationConverter(),
+                    new OAuth2DeviceCodeAuthenticationConverter(),
+                    new OAuth2DeviceAuthorizationRequestAuthenticationConverter(),
+                    new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
+                    new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
 
-		// 新建设备码converter和provider
-		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
-			new DeviceClientAuthenticationConverter(
-				auth2EndpointProperties.getDeviceAuthorizationEndpoint());
-		DeviceClientAuthenticationProvider deviceClientAuthenticationProvider =
-			new DeviceClientAuthenticationProvider(registeredClientRepository);
-		authorizationServerConfigurer.clientAuthentication(clientAuthenticationCustomizer -> {
-			// 客户端认证添加设备码的converter和provider
-			clientAuthenticationCustomizer
-				.errorResponseHandler(errorResponseHandler)
-				.authenticationConverter(deviceClientAuthenticationConverter)
-				.authenticationProvider(deviceClientAuthenticationProvider)
-				.errorResponseHandler(errorResponseHandler);
-		});
-		//开启设备请求相关端点
-		authorizationServerConfigurer.deviceAuthorizationEndpoint(deviceAuthorizationEndpointCustomizer -> {
-			deviceAuthorizationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-			deviceAuthorizationEndpointCustomizer.verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
-		});
-		authorizationServerConfigurer.deviceVerificationEndpoint(deviceVerificationEndpointCustomizer -> {
-			deviceVerificationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-			deviceVerificationEndpointCustomizer.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
-			deviceVerificationEndpointCustomizer.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
-		});
-		// 开启OpenId Connect 1.0相关端点
-		authorizationServerConfigurer.oidc(oidcCustomizer -> {
-			oidcCustomizer.clientRegistrationEndpoint(clientRegistrationEndpointCustomizer -> {
-				clientRegistrationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-				clientRegistrationEndpointCustomizer.clientRegistrationResponseHandler(
-					clientRegistrationResponseHandler);
-			});
-			oidcCustomizer.logoutEndpoint(logoutEndpointCustomizer -> {
-				//logoutEndpointCustomizer.logoutResponseHandler()
-			});
-			oidcCustomizer.userInfoEndpoint(userInfoEndpointCustomizer -> {
-				userInfoEndpointCustomizer.userInfoMapper(new HerodotusOidcUserInfoMapper());
-			});
-		});
+            tokenEndpointCustomizer
+                    .accessTokenRequestConverter(authenticationConverter)
+                    .errorResponseHandler(errorResponseHandler)
+                    .accessTokenResponseHandler(new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
+        });
+        authorizationServerConfigurer.tokenIntrospectionEndpoint(tokenIntrospectionEndpointCustomizer -> {
+            tokenIntrospectionEndpointCustomizer.errorResponseHandler(errorResponseHandler);
+        });
+        authorizationServerConfigurer.tokenRevocationEndpoint(tokenRevocationEndpointCustomizer -> {
+            tokenRevocationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
+        });
+        authorizationServerConfigurer.authorizationEndpoint(authorizationEndpointCustomizer -> {
+            authorizationEndpointCustomizer
+                    .authorizationResponseHandler(this::sendAuthorizationResponse)
+                    .errorResponseHandler(errorResponseHandler)
+                    .consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
+        });
 
-		SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
+        // 新建设备码converter和provider
+        DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
+                new DeviceClientAuthenticationConverter(auth2EndpointProperties.getDeviceAuthorizationEndpoint());
+        DeviceClientAuthenticationProvider deviceClientAuthenticationProvider =
+                new DeviceClientAuthenticationProvider(registeredClientRepository);
+        authorizationServerConfigurer.clientAuthentication(clientAuthenticationCustomizer -> {
+            // 客户端认证添加设备码的converter和provider
+            clientAuthenticationCustomizer
+                    .errorResponseHandler(errorResponseHandler)
+                    .authenticationConverter(deviceClientAuthenticationConverter)
+                    .authenticationProvider(deviceClientAuthenticationProvider)
+                    .errorResponseHandler(errorResponseHandler);
+        });
+        // 开启设备请求相关端点
+        authorizationServerConfigurer.deviceAuthorizationEndpoint(deviceAuthorizationEndpointCustomizer -> {
+            deviceAuthorizationEndpointCustomizer
+                    .errorResponseHandler(errorResponseHandler)
+                    .verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
+        });
+        authorizationServerConfigurer.deviceVerificationEndpoint(deviceVerificationEndpointCustomizer -> {
+            deviceVerificationEndpointCustomizer
+                    .errorResponseHandler(errorResponseHandler)
+                    .consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI)
+                    .deviceVerificationResponseHandler(deviceVerificationResponseHandler);
+        });
+        // 开启OpenId Connect 1.0相关端点
+        authorizationServerConfigurer.oidc(oidcCustomizer -> {
+            oidcCustomizer
+                    .clientRegistrationEndpoint(clientRegistrationEndpointCustomizer -> {
+                        clientRegistrationEndpointCustomizer
+                                .errorResponseHandler(errorResponseHandler)
+                                .clientRegistrationResponseHandler(clientRegistrationResponseHandler);
+                    })
+                    .logoutEndpoint(logoutEndpointCustomizer -> {
+                        // logoutEndpointCustomizer.logoutResponseHandler()
+                    })
+                    .userInfoEndpoint(userInfoEndpointCustomizer -> {
+                        userInfoEndpointCustomizer.userInfoMapper(new HerodotusOidcUserInfoMapper());
+                    });
+        });
 
-		// 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
-		authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public <O extends AuthenticationProvider> O postProcess(O object) {
-				OAuth2AuthorizationService authorizationService =
-					OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+        SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
 
-				if (org.springframework.security.oauth2.server.authorization.authentication
-					.OAuth2AuthorizationCodeAuthenticationProvider.class
-					.isAssignableFrom(object.getClass())) {
-					OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-						OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-					OAuth2AuthorizationCodeAuthenticationProvider provider =
-						new OAuth2AuthorizationCodeAuthenticationProvider(authorizationService, tokenGenerator);
-					provider.setSessionRegistry(sessionRegistry);
-					log.info("Custom OAuth2AuthorizationCodeAuthenticationProvider is in effect!");
-					return (O) provider;
-				}
+        // 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
+        authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public <O extends AuthenticationProvider> O postProcess(O object) {
+                OAuth2AuthorizationService authorizationService =
+                        OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
 
-				if (org.springframework.security.oauth2.server.authorization.authentication
-					.OAuth2ClientCredentialsAuthenticationProvider.class
-					.isAssignableFrom(object.getClass())) {
-					OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-						OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-					OAuth2ClientCredentialsAuthenticationProvider provider =
-						new OAuth2ClientCredentialsAuthenticationProvider(
-							authorizationService, tokenGenerator, clientDetailsService);
-					log.info("Custom OAuth2ClientCredentialsAuthenticationProvider is in effect!");
-					return (O) provider;
-				}
-				return object;
-			}
-		});
+                if (org.springframework.security.oauth2.server.authorization.authentication
+                        .OAuth2AuthorizationCodeAuthenticationProvider.class
+                        .isAssignableFrom(object.getClass())) {
+                    OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+                            OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+                    OAuth2AuthorizationCodeAuthenticationProvider provider =
+                            new OAuth2AuthorizationCodeAuthenticationProvider(authorizationService, tokenGenerator);
+                    provider.setSessionRegistry(sessionRegistry);
+                    log.info("Custom OAuth2AuthorizationCodeAuthenticationProvider is in effect!");
+                    return (O) provider;
+                }
 
-		RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
-		// 仅拦截 OAuth2 Authorization Server 的相关 endpoint
-		httpSecurity
-			.securityMatcher(endpointsMatcher)
-			// 开启请求认证
-			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
-				//				authorizeHttpRequestsCustomizer.requestMatchers("/oauth2/device_authorization").permitAll();
-				authorizeHttpRequestsCustomizer.anyRequest().authenticated();
-			})
-			// 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
-			.csrf(csrfCustomizer -> {
-				csrfCustomizer.ignoringRequestMatchers(endpointsMatcher);
-			})
-			.oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
+                if (org.springframework.security.oauth2.server.authorization.authentication
+                        .OAuth2ClientCredentialsAuthenticationProvider.class
+                        .isAssignableFrom(object.getClass())) {
+                    OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+                            OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+                    OAuth2ClientCredentialsAuthenticationProvider provider =
+                            new OAuth2ClientCredentialsAuthenticationProvider(
+                                    authorizationService, tokenGenerator, clientDetailsService);
+                    log.info("Custom OAuth2ClientCredentialsAuthenticationProvider is in effect!");
+                    return (O) provider;
+                }
+                return object;
+            }
+        });
 
-		// 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager
-		// 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
-		// 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
-		AuthenticationManagerBuilder authenticationManagerBuilder =
-			httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
-		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
-		authenticationManagerBuilder.authenticationEventPublisher(
-			new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
+        RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
+        // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
+        httpSecurity
+                .securityMatcher(endpointsMatcher)
+                // 开启请求认证
+                .authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
+                    authorizeHttpRequestsCustomizer.anyRequest().authenticated();
+                })
+                // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
+                .csrf(csrfCustomizer -> {
+                    csrfCustomizer.ignoringRequestMatchers(endpointsMatcher);
+                })
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
 
-		// 增加新的、自定义 OAuth2 Granter
-		OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
-		OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-			OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+        // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager
+        // 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
+        // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+        ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
+        authenticationManagerBuilder.authenticationEventPublisher(
+                new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
 
-		OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-			new OAuth2ResourceOwnerPasswordAuthenticationProvider(
-				authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
-		resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-		resourceOwnerPasswordAuthenticationProvider.setSessionRegistry(sessionRegistry);
-		httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
+        // 增加新的、自定义 OAuth2 Granter
+        OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+                OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 
-		OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
-			new OAuth2SocialCredentialsAuthenticationProvider(
-				authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
-		socialCredentialsAuthenticationProvider.setSessionRegistry(sessionRegistry);
-		httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
+        OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
+                new OAuth2ResourceOwnerPasswordAuthenticationProvider(
+                        authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
+        resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        resourceOwnerPasswordAuthenticationProvider.setSessionRegistry(sessionRegistry);
+        httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
 
-		httpSecurity.exceptionHandling(exceptionHandlingCustomizer -> {
-			exceptionHandlingCustomizer.defaultAuthenticationEntryPointFor(
-				new SecurityLoginUrlAuthenticationEntryPoint("/login"),
-				createRequestMatcher()
-			);
-		});
+        OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
+                new OAuth2SocialCredentialsAuthenticationProvider(
+                        authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
+        socialCredentialsAuthenticationProvider.setSessionRegistry(sessionRegistry);
+        httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
-		return httpSecurity
-			.formLogin(formLoginUrlConfigurer::from)
-			.sessionManagement(Customizer.withDefaults())
-			// .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
-			.build();
-	}
+        httpSecurity.exceptionHandling(exceptionHandlingCustomizer -> {
+            exceptionHandlingCustomizer.defaultAuthenticationEntryPointFor(
+                    new SecurityLoginUrlAuthenticationEntryPoint("/login"), createRequestMatcher());
+        });
 
-	private static RequestMatcher createRequestMatcher() {
-		MediaTypeRequestMatcher requestMatcher = new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
-		requestMatcher.setIgnoredMediaTypes(Set.of(MediaType.ALL));
-		return requestMatcher;
-	}
+        return httpSecurity
+                .formLogin(formLoginUrlConfigurer::from)
+                .sessionManagement(Customizer.withDefaults())
+                // .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
+                .build();
+    }
 
+    private static RequestMatcher createRequestMatcher() {
+        MediaTypeRequestMatcher requestMatcher = new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
+        requestMatcher.setIgnoredMediaTypes(Set.of(MediaType.ALL));
+        return requestMatcher;
+    }
 
-	@Bean
-	public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties)
-		throws NoSuchAlgorithmException {
-		OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
-		KeyPair keyPair = null;
+    @Bean
+    public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties)
+            throws NoSuchAlgorithmException {
+        OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
+        KeyPair keyPair = null;
 
-		if (jwk.getCertificate() == Certificate.CUSTOM) {
-			try {
-				Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
-				if (ArrayUtils.isNotEmpty(resource)) {
-					KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-						resource[0], jwk.getJksStorePassword().toCharArray());
-					keyPair = keyStoreKeyFactory.getKeyPair(
-						jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
-				}
-			} catch (IOException e) {
-				log.error("Read custom certificate under resource folder error!", e);
-			}
-		} else {
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-			keyPairGenerator.initialize(2048);
-			keyPair = keyPairGenerator.generateKeyPair();
-		}
+        if (jwk.getCertificate() == Certificate.CUSTOM) {
+            try {
+                Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
+                if (ArrayUtils.isNotEmpty(resource)) {
+                    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                            resource[0], jwk.getJksStorePassword().toCharArray());
+                    keyPair = keyStoreKeyFactory.getKeyPair(
+                            jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
+                }
+            } catch (IOException e) {
+                log.error("Read custom certificate under resource folder error!", e);
+            }
+        } else {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            keyPairGenerator.initialize(2048);
+            keyPair = keyPairGenerator.generateKeyPair();
+        }
 
-		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-		RSAKey rsaKey = new RSAKey.Builder(publicKey)
-			.privateKey(privateKey)
-			.keyID(UUID.randomUUID().toString())
-			.build();
-		JWKSet jwkSet = new JWKSet(rsaKey);
-		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-	}
+        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        RSAKey rsaKey = new RSAKey.Builder(publicKey)
+                .privateKey(privateKey)
+                .keyID(UUID.randomUUID().toString())
+                .build();
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+    }
 
-	/**
-	 * jwt 解码
-	 */
-	@Bean
-	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-	}
+    /**
+     * jwt 解码
+     */
+    @Bean
+    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+    }
 
-	@Bean
-	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
-		HerodotusJwtTokenCustomizer herodotusJwtTokenCustomizer = new HerodotusJwtTokenCustomizer();
-		log.info("Bean [OAuth2 Jwt Token Customizer] Auto Configure.");
-		return herodotusJwtTokenCustomizer;
-	}
+    @Bean
+    public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
+        HerodotusJwtTokenCustomizer herodotusJwtTokenCustomizer = new HerodotusJwtTokenCustomizer();
+        log.info("Bean [OAuth2 Jwt Token Customizer] Auto Configure.");
+        return herodotusJwtTokenCustomizer;
+    }
 
-	@Bean
-	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
-		HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
-		log.info("Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
-		return herodotusOpaqueTokenCustomizer;
-	}
+    @Bean
+    public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
+        HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
+        log.info("Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
+        return herodotusOpaqueTokenCustomizer;
+    }
 
-	@Bean
-	public AuthorizationServerSettings authorizationServerSettings(OAuth2EndpointProperties auth2EndpointProperties) {
-		return AuthorizationServerSettings.builder()
-			.issuer(auth2EndpointProperties.getIssuerUri())
-			.authorizationEndpoint(auth2EndpointProperties.getAuthorizationEndpoint())
-			.deviceAuthorizationEndpoint(auth2EndpointProperties.getDeviceAuthorizationEndpoint())
-			.deviceVerificationEndpoint(auth2EndpointProperties.getDeviceVerificationEndpoint())
-			.tokenEndpoint(auth2EndpointProperties.getAccessTokenEndpoint())
-			.tokenIntrospectionEndpoint(auth2EndpointProperties.getTokenIntrospectionEndpoint())
-			.tokenRevocationEndpoint(auth2EndpointProperties.getTokenRevocationEndpoint())
-			.jwkSetEndpoint(auth2EndpointProperties.getJwkSetEndpoint())
-			.oidcLogoutEndpoint(auth2EndpointProperties.getOidcLogoutEndpoint())
-			.oidcUserInfoEndpoint(auth2EndpointProperties.getOidcUserInfoEndpoint())
-			.oidcClientRegistrationEndpoint(auth2EndpointProperties.getOidcClientRegistrationEndpoint())
-			.build();
-	}
+    @Bean
+    public AuthorizationServerSettings authorizationServerSettings(OAuth2EndpointProperties auth2EndpointProperties) {
+        return AuthorizationServerSettings.builder()
+                .issuer(auth2EndpointProperties.getIssuerUri())
+                .authorizationEndpoint(auth2EndpointProperties.getAuthorizationEndpoint())
+                .deviceAuthorizationEndpoint(auth2EndpointProperties.getDeviceAuthorizationEndpoint())
+                .deviceVerificationEndpoint(auth2EndpointProperties.getDeviceVerificationEndpoint())
+                .tokenEndpoint(auth2EndpointProperties.getAccessTokenEndpoint())
+                .tokenIntrospectionEndpoint(auth2EndpointProperties.getTokenIntrospectionEndpoint())
+                .tokenRevocationEndpoint(auth2EndpointProperties.getTokenRevocationEndpoint())
+                .jwkSetEndpoint(auth2EndpointProperties.getJwkSetEndpoint())
+                .oidcLogoutEndpoint(auth2EndpointProperties.getOidcLogoutEndpoint())
+                .oidcUserInfoEndpoint(auth2EndpointProperties.getOidcUserInfoEndpoint())
+                .oidcClientRegistrationEndpoint(auth2EndpointProperties.getOidcClientRegistrationEndpoint())
+                .build();
+    }
 
-	private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-	private void sendAuthorizationResponse(HttpServletRequest request, HttpServletResponse response,
-										   Authentication authentication) throws IOException {
-		OAuth2AuthorizationCodeRequestAuthenticationToken authorizationCodeRequestAuthentication =
-			(OAuth2AuthorizationCodeRequestAuthenticationToken) authentication;
-		UriComponentsBuilder uriBuilder = UriComponentsBuilder
-			.fromUriString(authorizationCodeRequestAuthentication.getRedirectUri())
-			.queryParam(OAuth2ParameterNames.CODE, authorizationCodeRequestAuthentication.getAuthorizationCode().getTokenValue());
-		if (StringUtils.hasText(authorizationCodeRequestAuthentication.getState())) {
-			uriBuilder.queryParam(
-				OAuth2ParameterNames.STATE,
-				UriUtils.encode(authorizationCodeRequestAuthentication.getState(), StandardCharsets.UTF_8));
-		}
-		String redirectUri = uriBuilder.build(true).toUriString();
+    private void sendAuthorizationResponse(
+            HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+            throws IOException {
+        OAuth2AuthorizationCodeRequestAuthenticationToken authorizationCodeRequestAuthentication =
+                (OAuth2AuthorizationCodeRequestAuthenticationToken) authentication;
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(
+                        authorizationCodeRequestAuthentication.getRedirectUri())
+                .queryParam(
+                        OAuth2ParameterNames.CODE,
+                        authorizationCodeRequestAuthentication
+                                .getAuthorizationCode()
+                                .getTokenValue());
+        if (StringUtils.hasText(authorizationCodeRequestAuthentication.getState())) {
+            uriBuilder.queryParam(
+                    OAuth2ParameterNames.STATE,
+                    UriUtils.encode(authorizationCodeRequestAuthentication.getState(), StandardCharsets.UTF_8));
+        }
+        String redirectUri = uriBuilder.build(true).toUriString();
 
-		if (!isAjaxRequest(request)) {
-			// build(true) -> Components are explicitly encoded
-			this.redirectStrategy.sendRedirect(request, response, redirectUri);
-		}
-		ResponseUtils.success(response, redirectUri);
-	}
+        if (!isAjaxRequest(request)) {
+            this.redirectStrategy.sendRedirect(request, response, redirectUri);
+        }
+        ResponseUtils.success(response, redirectUri);
+    }
 
-
-	public boolean isAjaxRequest(HttpServletRequest request) {
-		String requestedWith = request.getHeader("x-requested-with");
-		return "XMLHttpRequest".equalsIgnoreCase(requestedWith);
-	}
+    public boolean isAjaxRequest(HttpServletRequest request) {
+        String requestedWith = request.getHeader("x-requested-with");
+        return "XMLHttpRequest".equalsIgnoreCase(requestedWith);
+    }
 }

@@ -133,13 +133,13 @@ public class JustAuthProcessor {
             case BAIDU:
                 return new AuthBaiduRequest(authConfig, this.getJustAuthStateRedisCache());
             case CSDN:
-                return new AuthCsdnRequest(authConfig, this.getJustAuthStateRedisCache());
+                // return new AuthCsdnRequest(authConfig, this.getJustAuthStateRedisCache());
             case CODING:
                 return new AuthCodingRequest(authConfig, this.getJustAuthStateRedisCache());
             case OSCHINA:
                 return new AuthOschinaRequest(authConfig, this.getJustAuthStateRedisCache());
             case ALIPAY:
-                return new AuthAlipayRequest(authConfig, this.getJustAuthStateRedisCache());
+                // return new AuthAlipayRequest(authConfig, this.getJustAuthStateRedisCache());
             case QQ:
                 return new AuthQqRequest(authConfig, this.getJustAuthStateRedisCache());
             case WECHAT_MP:

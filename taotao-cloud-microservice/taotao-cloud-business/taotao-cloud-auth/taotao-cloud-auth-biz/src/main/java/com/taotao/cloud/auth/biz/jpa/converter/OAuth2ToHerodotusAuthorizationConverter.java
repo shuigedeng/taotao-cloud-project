@@ -40,25 +40,25 @@ import org.springframework.util.StringUtils;
 public class OAuth2ToHerodotusAuthorizationConverter
         extends AbstractOAuth2EntityConverter<OAuth2Authorization, HerodotusAuthorization> {
 
-	/**
-	 * oauth2到希罗多德授权转换器
-	 *
-	 * @param jacksonProcessor 杰克逊处理器
-	 * @return
-	 * @since 2023-07-10 17:13:42
-	 */
-	public OAuth2ToHerodotusAuthorizationConverter(OAuth2JacksonProcessor jacksonProcessor) {
+    /**
+     * oauth2到希罗多德授权转换器
+     *
+     * @param jacksonProcessor 杰克逊处理器
+     * @return
+     * @since 2023-07-10 17:13:42
+     */
+    public OAuth2ToHerodotusAuthorizationConverter(OAuth2JacksonProcessor jacksonProcessor) {
         super(jacksonProcessor);
     }
 
-	/**
-	 * 转换
-	 *
-	 * @param authorization 授权
-	 * @return {@link HerodotusAuthorization }
-	 * @since 2023-07-10 17:13:42
-	 */
-	@Override
+    /**
+     * 转换
+     *
+     * @param authorization 授权
+     * @return {@link HerodotusAuthorization }
+     * @since 2023-07-10 17:13:42
+     */
+    @Override
     public HerodotusAuthorization convert(OAuth2Authorization authorization) {
         HerodotusAuthorization entity = new HerodotusAuthorization();
         entity.setId(authorization.getId());
@@ -129,17 +129,17 @@ public class OAuth2ToHerodotusAuthorizationConverter
         return entity;
     }
 
-	/**
-	 * 设置令牌值
-	 *
-	 * @param token              令牌
-	 * @param tokenValueConsumer 令牌价值消费者
-	 * @param issuedAtConsumer   在消费者处发行
-	 * @param expiresAtConsumer  在消费者处到期
-	 * @param metadataConsumer   元数据使用者
-	 * @since 2023-07-10 17:13:44
-	 */
-	private void setTokenValues(
+    /**
+     * 设置令牌值
+     *
+     * @param token              令牌
+     * @param tokenValueConsumer 令牌价值消费者
+     * @param issuedAtConsumer   在消费者处发行
+     * @param expiresAtConsumer  在消费者处到期
+     * @param metadataConsumer   元数据使用者
+     * @since 2023-07-10 17:13:44
+     */
+    private void setTokenValues(
             OAuth2Authorization.Token<?> token,
             Consumer<String> tokenValueConsumer,
             Consumer<LocalDateTime> issuedAtConsumer,

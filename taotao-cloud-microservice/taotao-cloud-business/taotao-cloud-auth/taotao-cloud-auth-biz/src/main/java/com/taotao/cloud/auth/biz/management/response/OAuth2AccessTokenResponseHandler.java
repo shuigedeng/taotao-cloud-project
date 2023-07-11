@@ -132,6 +132,7 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
     protected void write(HttpServletRequest request, HttpServletResponse httpResponse)
             throws HttpMessageNotReadableException {
         try {
+            @SuppressWarnings("unchecked")
             Map<String, Object> tokenResponseParameters = (Map<String, Object>) this.jsonMessageConverter.read(
                     STRING_OBJECT_MAP.getType(), null, new ServletServerHttpRequest(request));
             OAuth2AccessTokenResponse tokenResponse =

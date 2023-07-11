@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.sms;
 
-import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationFailureHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsCheckCodeService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;

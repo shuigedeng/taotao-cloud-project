@@ -34,20 +34,20 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 public class SocialDelegateMapOAuth2AccessTokenResponseConverter
         implements Converter<Map<String, Object>, OAuth2AccessTokenResponse> {
 
-	/**
-	 * 委托
-	 */
-	private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> delegate =
+    /**
+     * 委托
+     */
+    private final Converter<Map<String, Object>, OAuth2AccessTokenResponse> delegate =
             new DefaultMapOAuth2AccessTokenResponseConverter();
 
-	/**
-	 * 转换
-	 *
-	 * @param tokenResponseParameters 令牌响应参数
-	 * @return {@link OAuth2AccessTokenResponse }
-	 * @since 2023-07-10 17:40:50
-	 */
-	@Override
+    /**
+     * 转换
+     *
+     * @param tokenResponseParameters 令牌响应参数
+     * @return {@link OAuth2AccessTokenResponse }
+     * @since 2023-07-10 17:40:50
+     */
+    @Override
     public OAuth2AccessTokenResponse convert(Map<String, Object> tokenResponseParameters) {
         // 避免 token_type 空校验异常
         tokenResponseParameters.put(OAuth2ParameterNames.TOKEN_TYPE, OAuth2AccessToken.TokenType.BEARER.getValue());

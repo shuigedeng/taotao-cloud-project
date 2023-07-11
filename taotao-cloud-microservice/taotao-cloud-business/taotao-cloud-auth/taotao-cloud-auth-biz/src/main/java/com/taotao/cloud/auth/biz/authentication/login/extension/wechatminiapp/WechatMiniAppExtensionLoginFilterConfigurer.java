@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp;
 
-import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppClientService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppSessionKeyCacheService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import org.springframework.context.ApplicationContext;

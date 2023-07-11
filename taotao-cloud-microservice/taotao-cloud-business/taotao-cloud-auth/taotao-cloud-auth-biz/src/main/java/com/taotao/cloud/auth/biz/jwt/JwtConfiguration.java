@@ -16,18 +16,16 @@
 
 package com.taotao.cloud.auth.biz.jwt;
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-
 /** 认证服务端配置 */
-//@EnableConfigurationProperties(
+// @EnableConfigurationProperties(
 //        value = {
 //            com.taotao.cloud.security.springsecurity.jwt.JwtProperties.class,
 //        })
 public class JwtConfiguration {
 
-//    @Bean
-//    public com.taotao.cloud.security.springsecurity.jwt.TokenUtil getTokenUtil(JwtProperties authServerProperties) {
-//        return new TokenUtil(authServerProperties);
-//    }
+    //    @Bean
+    //    public com.taotao.cloud.security.springsecurity.jwt.TokenUtil getTokenUtil(JwtProperties authServerProperties)
+    // {
+    //        return new TokenUtil(authServerProperties);
+    //    }
 }

@@ -37,103 +37,103 @@ import org.springframework.util.Assert;
  */
 public abstract class AbstractCountStampManager extends AbstractRenderer {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(AbstractCountStampManager.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(AbstractCountStampManager.class);
 
-	/**
-	 * 抽象计数邮票管理器
-	 *
-	 * @param redisRepository redis存储库
-	 * @param cacheName       缓存名称
-	 * @return
-	 * @since 2023-07-10 17:25:03
-	 */
-	public AbstractCountStampManager(RedisRepository redisRepository, String cacheName) {
+    /**
+     * 抽象计数邮票管理器
+     *
+     * @param redisRepository redis存储库
+     * @param cacheName       缓存名称
+     * @return
+     * @since 2023-07-10 17:25:03
+     */
+    public AbstractCountStampManager(RedisRepository redisRepository, String cacheName) {
         super(redisRepository, cacheName);
     }
 
-	/**
-	 * 抽象计数邮票管理器
-	 *
-	 * @param redisRepository redis存储库
-	 * @param cacheName       缓存名称
-	 * @param expire          过期
-	 * @return
-	 * @since 2023-07-10 17:25:03
-	 */
-	public AbstractCountStampManager(RedisRepository redisRepository, String cacheName, Duration expire) {
+    /**
+     * 抽象计数邮票管理器
+     *
+     * @param redisRepository redis存储库
+     * @param cacheName       缓存名称
+     * @param expire          过期
+     * @return
+     * @since 2023-07-10 17:25:03
+     */
+    public AbstractCountStampManager(RedisRepository redisRepository, String cacheName, Duration expire) {
         super(redisRepository, cacheName, expire);
     }
 
-	/**
-	 * 在缓存有效期内进行计数
-	 *
-	 * @param identity 缓存 Key 的区分标识
-	 * @param maxTimes 允许的最大限制次数
-	 * @return int
-	 * @since 2023-07-10 17:25:03
-	 */
-	public int counting(String identity, int maxTimes) throws MaximumLimitExceededException {
+    /**
+     * 在缓存有效期内进行计数
+     *
+     * @param identity 缓存 Key 的区分标识
+     * @param maxTimes 允许的最大限制次数
+     * @return int
+     * @since 2023-07-10 17:25:03
+     */
+    public int counting(String identity, int maxTimes) throws MaximumLimitExceededException {
         return counting(identity, maxTimes, null);
     }
 
-	/**
-	 * 在缓存有效期内进行计数
-	 *
-	 * @param identity 缓存 Key 的区分标识
-	 * @param maxTimes 允许的最大限制次数
-	 * @param expire   过期时间
-	 * @return int
-	 * @since 2023-07-10 17:25:03
-	 */
-	public int counting(String identity, int maxTimes, Duration expire) throws MaximumLimitExceededException {
+    /**
+     * 在缓存有效期内进行计数
+     *
+     * @param identity 缓存 Key 的区分标识
+     * @param maxTimes 允许的最大限制次数
+     * @param expire   过期时间
+     * @return int
+     * @since 2023-07-10 17:25:03
+     */
+    public int counting(String identity, int maxTimes, Duration expire) throws MaximumLimitExceededException {
         return counting(identity, maxTimes, expire, false);
     }
 
-	/**
-	 * 在缓存有效期内进行计数
-	 *
-	 * @param identity 缓存 Key 的区分标识
-	 * @param maxTimes 允许的最大限制次数
-	 * @param expire   过期时间
-	 * @param function 用于在日志中区分是哪个功能在调用。
-	 * @return int
-	 * @since 2023-07-10 17:25:03
-	 */
-	public int counting(String identity, int maxTimes, Duration expire, String function)
+    /**
+     * 在缓存有效期内进行计数
+     *
+     * @param identity 缓存 Key 的区分标识
+     * @param maxTimes 允许的最大限制次数
+     * @param expire   过期时间
+     * @param function 用于在日志中区分是哪个功能在调用。
+     * @return int
+     * @since 2023-07-10 17:25:03
+     */
+    public int counting(String identity, int maxTimes, Duration expire, String function)
             throws MaximumLimitExceededException {
         return counting(identity, maxTimes, expire, false, function);
     }
 
-	/**
-	 * 在缓存有效期内进行计数
-	 *
-	 * @param identity 缓存 Key 的区分标识
-	 * @param maxTimes 允许的最大限制次数
-	 * @param expire   过期时间
-	 * @param useMd5   是否用 MD5 对区分标识进行混淆加密
-	 * @return int
-	 * @since 2023-07-10 17:25:03
-	 */
-	public int counting(String identity, int maxTimes, Duration expire, boolean useMd5)
+    /**
+     * 在缓存有效期内进行计数
+     *
+     * @param identity 缓存 Key 的区分标识
+     * @param maxTimes 允许的最大限制次数
+     * @param expire   过期时间
+     * @param useMd5   是否用 MD5 对区分标识进行混淆加密
+     * @return int
+     * @since 2023-07-10 17:25:03
+     */
+    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5)
             throws MaximumLimitExceededException {
         return counting(identity, maxTimes, expire, useMd5, "AbstractCountStampManager");
     }
 
-	/**
-	 * 在缓存有效期内进行计数
-	 *
-	 * @param identity 缓存 Key 的区分标识
-	 * @param maxTimes 允许的最大限制次数
-	 * @param expire   过期时间
-	 * @param useMd5   是否用 MD5 对区分标识进行混淆加密
-	 * @param function 用于在日志中区分是哪个功能在调用。
-	 * @return int
-	 * @since 2023-07-10 17:25:03
-	 */
-	public int counting(String identity, int maxTimes, Duration expire, boolean useMd5, String function)
+    /**
+     * 在缓存有效期内进行计数
+     *
+     * @param identity 缓存 Key 的区分标识
+     * @param maxTimes 允许的最大限制次数
+     * @param expire   过期时间
+     * @param useMd5   是否用 MD5 对区分标识进行混淆加密
+     * @param function 用于在日志中区分是哪个功能在调用。
+     * @return int
+     * @since 2023-07-10 17:25:03
+     */
+    public int counting(String identity, int maxTimes, Duration expire, boolean useMd5, String function)
             throws MaximumLimitExceededException {
         Assert.notNull(identity, "identity cannot be null");
 
@@ -176,19 +176,19 @@ public abstract class AbstractCountStampManager extends AbstractRenderer {
         return times;
     }
 
-	/**
-	 * 计算剩余过期时间
-	 * <p>
-	 * 每次create或者put，缓存的过期时间都会被覆盖。（注意：Jetcache put 方法的参数名：expireAfterWrite）。
-	 * 因为Jetcache没有Redis的incr之类的方法，那么每次放入Times值，都会更新过期时间，实际操作下来是变相的延长了过期时间。
-	 *
-	 * @param configuredDuration 注解上配置的、且可以正常解析的Duration值
-	 * @param expireKey          时间标记存储Key值。
-	 * @param function           函数
-	 * @return {@link Duration }
-	 * @since 2023-07-10 17:25:03
-	 */
-	private Duration calculateRemainingTime(Duration configuredDuration, String expireKey, String function) {
+    /**
+     * 计算剩余过期时间
+     * <p>
+     * 每次create或者put，缓存的过期时间都会被覆盖。（注意：Jetcache put 方法的参数名：expireAfterWrite）。
+     * 因为Jetcache没有Redis的incr之类的方法，那么每次放入Times值，都会更新过期时间，实际操作下来是变相的延长了过期时间。
+     *
+     * @param configuredDuration 注解上配置的、且可以正常解析的Duration值
+     * @param expireKey          时间标记存储Key值。
+     * @param function           函数
+     * @return {@link Duration }
+     * @since 2023-07-10 17:25:03
+     */
+    private Duration calculateRemainingTime(Duration configuredDuration, String expireKey, String function) {
         Long begin = (Long) get(expireKey);
         Long current = System.currentTimeMillis();
         long interval = current - begin;

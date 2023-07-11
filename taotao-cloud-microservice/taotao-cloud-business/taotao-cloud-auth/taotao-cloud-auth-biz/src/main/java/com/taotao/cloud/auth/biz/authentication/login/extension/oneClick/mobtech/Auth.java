@@ -80,7 +80,7 @@ public class Auth {
         String securityReq = JSON.toJSONString(data);
         OkHttpClient okHttpClient =
                 new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), securityReq);
+        RequestBody body = RequestBody.create(securityReq, MediaType.parse("application/json"));
         Request.Builder builder = new Request.Builder();
         if (!BaseUtils.isEmpty(headers)) {
             for (Map.Entry<String, String> entry : headers.entrySet()) {

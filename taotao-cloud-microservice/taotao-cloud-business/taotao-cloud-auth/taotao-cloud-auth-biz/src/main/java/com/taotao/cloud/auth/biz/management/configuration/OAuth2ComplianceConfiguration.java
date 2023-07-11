@@ -19,9 +19,10 @@ package com.taotao.cloud.auth.biz.management.configuration;
 import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampManager;
 import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampManager;
 import com.taotao.cloud.auth.biz.management.compliance.OAuth2AccountStatusManager;
-import com.taotao.cloud.auth.biz.management.compliance.event.AccountStatusChanger;
 import com.taotao.cloud.auth.biz.management.compliance.listener.AccountAutoEnableListener;
 import com.taotao.cloud.auth.biz.management.compliance.listener.AuthenticationFailureListener;
+import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
+import com.taotao.cloud.auth.biz.management.compliance.processor.changer.HerodotusAccountStatusChanger;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,13 @@ public class OAuth2ComplianceConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("SDK [OAuth2 Compliance] Auto Configure.");
+    }
+
+    @Bean
+    public AccountStatusChanger accountStatusChanger() {
+        HerodotusAccountStatusChanger herodotusAccountStatusChanger = new HerodotusAccountStatusChanger();
+        log.info("Bean [Account Status Changer] Auto Configure.");
+        return herodotusAccountStatusChanger;
     }
 
     @Bean
