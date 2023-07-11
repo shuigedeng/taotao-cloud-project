@@ -245,6 +245,7 @@ spring:
             name: 认证管理中心
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/auth/**
+            #- Header=Accept,.*;?version=1\.0(|;.*)         Accept: application/json, text/plain, */*?version=1.0
           filters:
             - RewritePath=/auth/(?<path>.*), /auth/$\{path}
             - StripPrefix=2

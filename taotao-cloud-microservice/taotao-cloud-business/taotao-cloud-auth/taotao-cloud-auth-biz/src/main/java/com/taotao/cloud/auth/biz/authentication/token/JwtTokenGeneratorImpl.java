@@ -79,12 +79,15 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
 
         Instant expiresAt = issuedAt.plusSeconds(5 * 60 * 60);
         JwtClaimsSet claimsSet = JwtClaimsSet.builder()
-                // 签发者
+                //JWT的签发主体
                 .issuer("https://blog.taotaocloud.top/")
+			    //JWT的所有者
                 .subject(userDetails.getUsername())
-                // 过期时间
+                //JWT的过期时间
                 .expiresAt(expiresAt)
+				//JWT的接收对象
                 .audience(Arrays.asList("client1", "client2"))
+				//JWT的签发时间
                 .issuedAt(issuedAt)
                 // 自定义有效载荷部分
                 .claim("scope", scopes)
@@ -92,7 +95,8 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
 
         Jwt jwt = new NimbusJwtEncoder(jwkSource).encode(JwtEncoderParameters.from(jwsHeader, claimsSet));
 
-        return OAuth2AccessTokenResponse.withToken(jwt.getTokenValue())
+        return OAuth2AccessTokenResponse
+				.withToken(jwt.getTokenValue())
                 .tokenType(OAuth2AccessToken.TokenType.BEARER)
                 .expiresIn(expiresAt.getEpochSecond())
                 .scopes(scopes)

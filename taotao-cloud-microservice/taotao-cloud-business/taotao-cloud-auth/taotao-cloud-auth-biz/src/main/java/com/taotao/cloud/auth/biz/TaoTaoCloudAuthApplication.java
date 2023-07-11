@@ -29,7 +29,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 
 /**
- * TaoTaoCloudAuthBizApplication
+ * TaoTaoCloudAuthApplication
  *
  * <p>/oauth/authorize 授权端点
  * <p>/oauth/token 令牌端点
