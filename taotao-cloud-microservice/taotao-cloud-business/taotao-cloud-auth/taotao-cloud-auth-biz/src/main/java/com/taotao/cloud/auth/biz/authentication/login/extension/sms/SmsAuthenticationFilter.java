@@ -76,7 +76,7 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
             phone = (phone != null) ? phone.trim() : "";
 
             String code = request.getParameter(this.codeParameter);
-			code = (code != null) ? code.trim() : "";
+            code = (code != null) ? code.trim() : "";
 
             String type = request.getParameter(this.typeParameter);
             type = (type != null) ? type.trim() : "";
@@ -116,23 +116,24 @@ public class SmsAuthenticationFilter extends AbstractAuthenticationProcessingFil
         return this.codeParameter;
     }
 
-	public String getTypeParameter() {
-		return typeParameter;
-	}
+    public String getTypeParameter() {
+        return typeParameter;
+    }
 
-	public void setTypeParameter(String typeParameter) {
-		this.typeParameter = typeParameter;
-	}
+    public void setTypeParameter(String typeParameter) {
+        this.typeParameter = typeParameter;
+    }
 
-	public Converter<HttpServletRequest, SmsAuthenticationToken> getCaptchaAuthenticationTokenConverter() {
-		return captchaAuthenticationTokenConverter;
-	}
+    public Converter<HttpServletRequest, SmsAuthenticationToken> getCaptchaAuthenticationTokenConverter() {
+        return captchaAuthenticationTokenConverter;
+    }
 
-	public void setCaptchaAuthenticationTokenConverter(Converter<HttpServletRequest, SmsAuthenticationToken> captchaAuthenticationTokenConverter) {
-		this.captchaAuthenticationTokenConverter = captchaAuthenticationTokenConverter;
-	}
+    public void setCaptchaAuthenticationTokenConverter(
+            Converter<HttpServletRequest, SmsAuthenticationToken> captchaAuthenticationTokenConverter) {
+        this.captchaAuthenticationTokenConverter = captchaAuthenticationTokenConverter;
+    }
 
-	public boolean isPostOnly() {
-		return postOnly;
-	}
+    public boolean isPostOnly() {
+        return postOnly;
+    }
 }

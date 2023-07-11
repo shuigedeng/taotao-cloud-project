@@ -43,30 +43,30 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 @Configuration(proxyBeanMethods = false)
 public class OAuth2DataJpaConfiguration {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(OAuth2DataJpaConfiguration.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(OAuth2DataJpaConfiguration.class);
 
-	/**
-	 * 后期构建
-	 *
-	 * @since 2023-07-10 17:14:04
-	 */
-	@PostConstruct
+    /**
+     * 后期构建
+     *
+     * @since 2023-07-10 17:14:04
+     */
+    @PostConstruct
     public void postConstruct() {
         log.info("SDK [OAuth2 Data JPA] Auto Configure.");
     }
 
-	/**
-	 * 注册客户端存储库
-	 *
-	 * @param herodotusRegisteredClientService 希罗多德注册客户服务
-	 * @param passwordEncoder                  密码编码器
-	 * @return {@link RegisteredClientRepository }
-	 * @since 2023-07-10 17:14:04
-	 */
-	@Bean
+    /**
+     * 注册客户端存储库
+     *
+     * @param herodotusRegisteredClientService 希罗多德注册客户服务
+     * @param passwordEncoder                  密码编码器
+     * @return {@link RegisteredClientRepository }
+     * @since 2023-07-10 17:14:04
+     */
+    @Bean
     @ConditionalOnMissingBean
     public RegisteredClientRepository registeredClientRepository(
             HerodotusRegisteredClientService herodotusRegisteredClientService, PasswordEncoder passwordEncoder) {
@@ -76,15 +76,15 @@ public class OAuth2DataJpaConfiguration {
         return jpaRegisteredClientRepository;
     }
 
-	/**
-	 * 授权服务
-	 *
-	 * @param herodotusAuthorizationService 希罗多德授权服务
-	 * @param registeredClientRepository    注册客户端存储库
-	 * @return {@link OAuth2AuthorizationService }
-	 * @since 2023-07-10 17:14:05
-	 */
-	@Bean
+    /**
+     * 授权服务
+     *
+     * @param herodotusAuthorizationService 希罗多德授权服务
+     * @param registeredClientRepository    注册客户端存储库
+     * @return {@link OAuth2AuthorizationService }
+     * @since 2023-07-10 17:14:05
+     */
+    @Bean
     @ConditionalOnMissingBean
     public OAuth2AuthorizationService authorizationService(
             HerodotusAuthorizationService herodotusAuthorizationService,
@@ -95,15 +95,15 @@ public class OAuth2DataJpaConfiguration {
         return jpaOAuth2AuthorizationService;
     }
 
-	/**
-	 * 授权同意服务
-	 *
-	 * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
-	 * @param registeredClientRepository           注册客户端存储库
-	 * @return {@link OAuth2AuthorizationConsentService }
-	 * @since 2023-07-10 17:14:05
-	 */
-	@Bean
+    /**
+     * 授权同意服务
+     *
+     * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
+     * @param registeredClientRepository           注册客户端存储库
+     * @return {@link OAuth2AuthorizationConsentService }
+     * @since 2023-07-10 17:14:05
+     */
+    @Bean
     @ConditionalOnMissingBean
     public OAuth2AuthorizationConsentService authorizationConsentService(
             HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,

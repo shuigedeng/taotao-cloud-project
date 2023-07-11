@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.definition;
 
-
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 
 /**

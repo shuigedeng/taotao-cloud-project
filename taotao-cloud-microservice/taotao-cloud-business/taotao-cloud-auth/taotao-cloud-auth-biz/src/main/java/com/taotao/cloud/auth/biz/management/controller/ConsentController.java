@@ -21,14 +21,12 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
-import com.taotao.cloud.core.properties.EndpointProperties;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.SymbolConstants;
+import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -61,7 +59,7 @@ public class ConsentController {
             OAuth2ApplicationService applicationService,
             OAuth2AuthorizationConsentService authorizationConsentService,
             OAuth2ScopeService scopeService,
-			OAuth2EndpointProperties oAuth2EndpointProperties) {
+            OAuth2EndpointProperties oAuth2EndpointProperties) {
         this.applicationService = applicationService;
         this.authorizationConsentService = authorizationConsentService;
         this.scopeService = scopeService;

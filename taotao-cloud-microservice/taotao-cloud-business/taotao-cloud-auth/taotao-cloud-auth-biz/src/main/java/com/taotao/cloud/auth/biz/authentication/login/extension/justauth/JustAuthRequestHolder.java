@@ -344,7 +344,7 @@ public final class JustAuthRequestHolder implements InitializingBean, Applicatio
                 break;
             case ALIPAY:
                 BaseAuth2Properties alipay = auth2Properties.getAlipay();
-                //config.setAlipayPublicKey(alipay.getAlipayPublicKey());
+                // config.setAlipayPublicKey(alipay.getAlipayPublicKey());
                 return this.getAuthDefaultRequestAdapter(
                         config, source, authStateCache, alipay.getProxyHost(), alipay.getProxyPort());
             case QQ:

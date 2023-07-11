@@ -43,13 +43,13 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 public class HerodotusJwtTokenCustomizer extends AbstractTokenCustomizer
         implements OAuth2TokenCustomizer<JwtEncodingContext> {
 
-	/**
-	 * 自定义
-	 *
-	 * @param context 上下文
-	 * @since 2023-07-10 17:25:35
-	 */
-	@Override
+    /**
+     * 自定义
+     *
+     * @param context 上下文
+     * @since 2023-07-10 17:25:35
+     */
+    @Override
     public void customize(JwtEncodingContext context) {
         AbstractAuthenticationToken token = null;
         Authentication clientAuthentication = SecurityContextHolder.getContext().getAuthentication();

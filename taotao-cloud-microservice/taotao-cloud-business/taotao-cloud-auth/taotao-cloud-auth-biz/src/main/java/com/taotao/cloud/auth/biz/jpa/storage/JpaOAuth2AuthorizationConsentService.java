@@ -36,33 +36,33 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
  */
 public class JpaOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationConsentService.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationConsentService.class);
 
-	/**
-	 * 希罗多德授权同意服务
-	 */
-	private final HerodotusAuthorizationConsentService herodotusAuthorizationConsentService;
-	/**
-	 * 希罗多德到oauth2转换器
-	 */
-	private final Converter<HerodotusAuthorizationConsent, OAuth2AuthorizationConsent> herodotusToOAuth2Converter;
-	/**
-	 * oauth2到herodotus转换器
-	 */
-	private final Converter<OAuth2AuthorizationConsent, HerodotusAuthorizationConsent> oauth2ToherodotusConverter;
+    /**
+     * 希罗多德授权同意服务
+     */
+    private final HerodotusAuthorizationConsentService herodotusAuthorizationConsentService;
+    /**
+     * 希罗多德到oauth2转换器
+     */
+    private final Converter<HerodotusAuthorizationConsent, OAuth2AuthorizationConsent> herodotusToOAuth2Converter;
+    /**
+     * oauth2到herodotus转换器
+     */
+    private final Converter<OAuth2AuthorizationConsent, HerodotusAuthorizationConsent> oauth2ToherodotusConverter;
 
-	/**
-	 * jpa oauth2授权同意服务
-	 *
-	 * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
-	 * @param registeredClientRepository           注册客户端存储库
-	 * @return
-	 * @since 2023-07-10 17:10:36
-	 */
-	public JpaOAuth2AuthorizationConsentService(
+    /**
+     * jpa oauth2授权同意服务
+     *
+     * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
+     * @param registeredClientRepository           注册客户端存储库
+     * @return
+     * @since 2023-07-10 17:10:36
+     */
+    public JpaOAuth2AuthorizationConsentService(
             HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,
             RegisteredClientRepository registeredClientRepository) {
         this.herodotusAuthorizationConsentService = herodotusAuthorizationConsentService;
@@ -71,40 +71,40 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
         this.oauth2ToherodotusConverter = new OAuth2ToHerodotusAuthorizationConsentConverter();
     }
 
-	/**
-	 * 保存
-	 *
-	 * @param authorizationConsent 授权同意书
-	 * @since 2023-07-10 17:10:36
-	 */
-	@Override
+    /**
+     * 保存
+     *
+     * @param authorizationConsent 授权同意书
+     * @since 2023-07-10 17:10:36
+     */
+    @Override
     public void save(OAuth2AuthorizationConsent authorizationConsent) {
         log.info("Jpa OAuth2 Authorization Consent Service save entity.");
         this.herodotusAuthorizationConsentService.save(toEntity(authorizationConsent));
     }
 
-	/**
-	 * 移除
-	 *
-	 * @param authorizationConsent 授权同意书
-	 * @since 2023-07-10 17:10:36
-	 */
-	@Override
+    /**
+     * 移除
+     *
+     * @param authorizationConsent 授权同意书
+     * @since 2023-07-10 17:10:36
+     */
+    @Override
     public void remove(OAuth2AuthorizationConsent authorizationConsent) {
         log.info("Jpa OAuth2 Authorization Consent Service remove entity.");
         this.herodotusAuthorizationConsentService.deleteByRegisteredClientIdAndPrincipalName(
                 authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
     }
 
-	/**
-	 * 按id查找
-	 *
-	 * @param registeredClientId 注册客户端id
-	 * @param principalName      主体名称
-	 * @return {@link OAuth2AuthorizationConsent }
-	 * @since 2023-07-10 17:10:36
-	 */
-	@Override
+    /**
+     * 按id查找
+     *
+     * @param registeredClientId 注册客户端id
+     * @param principalName      主体名称
+     * @return {@link OAuth2AuthorizationConsent }
+     * @since 2023-07-10 17:10:36
+     */
+    @Override
     public OAuth2AuthorizationConsent findById(String registeredClientId, String principalName) {
         log.info("Jpa OAuth2 Authorization Consent Service findById.");
         return this.herodotusAuthorizationConsentService
@@ -113,25 +113,25 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
                 .orElse(null);
     }
 
-	/**
-	 * 反对
-	 *
-	 * @param authorizationConsent 授权同意书
-	 * @return {@link OAuth2AuthorizationConsent }
-	 * @since 2023-07-10 17:10:37
-	 */
-	private OAuth2AuthorizationConsent toObject(HerodotusAuthorizationConsent authorizationConsent) {
+    /**
+     * 反对
+     *
+     * @param authorizationConsent 授权同意书
+     * @return {@link OAuth2AuthorizationConsent }
+     * @since 2023-07-10 17:10:37
+     */
+    private OAuth2AuthorizationConsent toObject(HerodotusAuthorizationConsent authorizationConsent) {
         return herodotusToOAuth2Converter.convert(authorizationConsent);
     }
 
-	/**
-	 * 对实体
-	 *
-	 * @param authorizationConsent 授权同意书
-	 * @return {@link HerodotusAuthorizationConsent }
-	 * @since 2023-07-10 17:10:37
-	 */
-	private HerodotusAuthorizationConsent toEntity(OAuth2AuthorizationConsent authorizationConsent) {
+    /**
+     * 对实体
+     *
+     * @param authorizationConsent 授权同意书
+     * @return {@link HerodotusAuthorizationConsent }
+     * @since 2023-07-10 17:10:37
+     */
+    private HerodotusAuthorizationConsent toEntity(OAuth2AuthorizationConsent authorizationConsent) {
         return oauth2ToherodotusConverter.convert(authorizationConsent);
     }
 }

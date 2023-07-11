@@ -25,61 +25,61 @@ package com.taotao.cloud.auth.biz.exception;
  */
 public class MaximumLimitExceededException extends RuntimeException {
 
-	/**
-	 * 最大限制超过异常
-	 *
-	 * @return
-	 * @since 2023-07-10 17:25:11
-	 */
-	public MaximumLimitExceededException() {
+    /**
+     * 最大限制超过异常
+     *
+     * @return
+     * @since 2023-07-10 17:25:11
+     */
+    public MaximumLimitExceededException() {
         super();
     }
 
-	/**
-	 * 最大限制超过异常
-	 *
-	 * @param message 消息
-	 * @return
-	 * @since 2023-07-10 17:25:11
-	 */
-	public MaximumLimitExceededException(String message) {
+    /**
+     * 最大限制超过异常
+     *
+     * @param message 消息
+     * @return
+     * @since 2023-07-10 17:25:11
+     */
+    public MaximumLimitExceededException(String message) {
         super(message);
     }
 
-	/**
-	 * 最大限制超过异常
-	 *
-	 * @param message 消息
-	 * @param cause   原因
-	 * @return
-	 * @since 2023-07-10 17:25:12
-	 */
-	public MaximumLimitExceededException(String message, Throwable cause) {
+    /**
+     * 最大限制超过异常
+     *
+     * @param message 消息
+     * @param cause   原因
+     * @return
+     * @since 2023-07-10 17:25:12
+     */
+    public MaximumLimitExceededException(String message, Throwable cause) {
         super(message, cause);
     }
 
-	/**
-	 * 最大限制超过异常
-	 *
-	 * @param cause 原因
-	 * @return
-	 * @since 2023-07-10 17:25:12
-	 */
-	public MaximumLimitExceededException(Throwable cause) {
+    /**
+     * 最大限制超过异常
+     *
+     * @param cause 原因
+     * @return
+     * @since 2023-07-10 17:25:12
+     */
+    public MaximumLimitExceededException(Throwable cause) {
         super(cause);
     }
 
-	/**
-	 * 最大限制超过异常
-	 *
-	 * @param message            消息
-	 * @param cause              原因
-	 * @param enableSuppression  启用抑制
-	 * @param writableStackTrace 可写堆栈跟踪
-	 * @return
-	 * @since 2023-07-10 17:25:12
-	 */
-	protected MaximumLimitExceededException(
+    /**
+     * 最大限制超过异常
+     *
+     * @param message            消息
+     * @param cause              原因
+     * @param enableSuppression  启用抑制
+     * @param writableStackTrace 可写堆栈跟踪
+     * @return
+     * @since 2023-07-10 17:25:12
+     */
+    protected MaximumLimitExceededException(
             String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }

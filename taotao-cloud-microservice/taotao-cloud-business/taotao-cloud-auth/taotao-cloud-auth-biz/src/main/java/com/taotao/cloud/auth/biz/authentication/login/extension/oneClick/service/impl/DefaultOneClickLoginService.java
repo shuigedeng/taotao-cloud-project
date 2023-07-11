@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.servic
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.mobtech.Auth;
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
-import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.auth.biz.exception.Auth2Exception;
+import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Map;
 import org.dromara.hutool.core.map.MapUtil;

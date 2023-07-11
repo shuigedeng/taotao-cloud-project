@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.justauth.service;
 
-import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.auth.biz.exception.RegisterUserFailureException;
+import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

@@ -48,33 +48,33 @@ import org.springframework.util.Assert;
  */
 public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationService.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(JpaOAuth2AuthorizationService.class);
 
-	/**
-	 * 希罗多德授权服务
-	 */
-	private final HerodotusAuthorizationService herodotusAuthorizationService;
-	/**
-	 * 希罗多德到oauth2转换器
-	 */
-	private final Converter<HerodotusAuthorization, OAuth2Authorization> herodotusToOAuth2Converter;
-	/**
-	 * oauth2到希罗多德转换器
-	 */
-	private final Converter<OAuth2Authorization, HerodotusAuthorization> oauth2ToHerodotusConverter;
+    /**
+     * 希罗多德授权服务
+     */
+    private final HerodotusAuthorizationService herodotusAuthorizationService;
+    /**
+     * 希罗多德到oauth2转换器
+     */
+    private final Converter<HerodotusAuthorization, OAuth2Authorization> herodotusToOAuth2Converter;
+    /**
+     * oauth2到希罗多德转换器
+     */
+    private final Converter<OAuth2Authorization, HerodotusAuthorization> oauth2ToHerodotusConverter;
 
-	/**
-	 * jpa oauth2授权服务
-	 *
-	 * @param herodotusAuthorizationService 希罗多德授权服务
-	 * @param registeredClientRepository    注册客户端存储库
-	 * @return
-	 * @since 2023-07-10 17:10:42
-	 */
-	public JpaOAuth2AuthorizationService(
+    /**
+     * jpa oauth2授权服务
+     *
+     * @param herodotusAuthorizationService 希罗多德授权服务
+     * @param registeredClientRepository    注册客户端存储库
+     * @return
+     * @since 2023-07-10 17:10:42
+     */
+    public JpaOAuth2AuthorizationService(
             HerodotusAuthorizationService herodotusAuthorizationService,
             RegisteredClientRepository registeredClientRepository) {
         this.herodotusAuthorizationService = herodotusAuthorizationService;
@@ -85,13 +85,13 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         this.oauth2ToHerodotusConverter = new OAuth2ToHerodotusAuthorizationConverter(jacksonProcessor);
     }
 
-	/**
-	 * 保存
-	 *
-	 * @param authorization 授权
-	 * @since 2023-07-10 17:10:42
-	 */
-	@Override
+    /**
+     * 保存
+     *
+     * @param authorization 授权
+     * @since 2023-07-10 17:10:42
+     */
+    @Override
     public void save(OAuth2Authorization authorization) {
         Assert.notNull(authorization, "authorization cannot be null");
         OAuth2Authorization existingAuthorization = this.findById(authorization.getId());
@@ -104,13 +104,13 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         log.info("Jpa OAuth2 Authorization Service save entity.");
     }
 
-	/**
-	 * 移除
-	 *
-	 * @param authorization 授权
-	 * @since 2023-07-10 17:10:42
-	 */
-	@Transactional
+    /**
+     * 移除
+     *
+     * @param authorization 授权
+     * @since 2023-07-10 17:10:42
+     */
+    @Transactional
     @Override
     public void remove(OAuth2Authorization authorization) {
         Assert.notNull(authorization, "authorization cannot be null");
@@ -121,14 +121,14 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         log.info("Jpa OAuth2 Authorization Service clear history token.");
     }
 
-	/**
-	 * 按id查找
-	 *
-	 * @param id id
-	 * @return {@link OAuth2Authorization }
-	 * @since 2023-07-10 17:10:42
-	 */
-	@Override
+    /**
+     * 按id查找
+     *
+     * @param id id
+     * @return {@link OAuth2Authorization }
+     * @since 2023-07-10 17:10:42
+     */
+    @Override
     public OAuth2Authorization findById(String id) {
         HerodotusAuthorization herodotusAuthorization = this.herodotusAuthorizationService.findById(id);
         if (ObjectUtils.isNotEmpty(herodotusAuthorization)) {
@@ -139,29 +139,29 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         }
     }
 
-	/**
-	 * 查找授权计数
-	 *
-	 * @param registeredClientId 注册客户端id
-	 * @param principalName      主体名称
-	 * @return int
-	 * @since 2023-07-10 17:10:42
-	 */
-	public int findAuthorizationCount(String registeredClientId, String principalName) {
+    /**
+     * 查找授权计数
+     *
+     * @param registeredClientId 注册客户端id
+     * @param principalName      主体名称
+     * @return int
+     * @since 2023-07-10 17:10:42
+     */
+    public int findAuthorizationCount(String registeredClientId, String principalName) {
         int count = this.herodotusAuthorizationService.findAuthorizationCount(registeredClientId, principalName);
         log.info("Jpa OAuth2 Authorization Service findAuthorizationCount.");
         return count;
     }
 
-	/**
-	 * 查找可用授权
-	 *
-	 * @param registeredClientId 注册客户端id
-	 * @param principalName      主体名称
-	 * @return {@link List }<{@link OAuth2Authorization }>
-	 * @since 2023-07-10 17:10:42
-	 */
-	public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
+    /**
+     * 查找可用授权
+     *
+     * @param registeredClientId 注册客户端id
+     * @param principalName      主体名称
+     * @return {@link List }<{@link OAuth2Authorization }>
+     * @since 2023-07-10 17:10:42
+     */
+    public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
         List<HerodotusAuthorization> authorizations =
                 this.herodotusAuthorizationService.findAvailableAuthorizations(registeredClientId, principalName);
         if (CollectionUtils.isNotEmpty(authorizations)) {
@@ -171,15 +171,15 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         return new ArrayList<>();
     }
 
-	/**
-	 * 按令牌查找
-	 *
-	 * @param token     令牌
-	 * @param tokenType 令牌类型
-	 * @return {@link OAuth2Authorization }
-	 * @since 2023-07-10 17:10:43
-	 */
-	@Override
+    /**
+     * 按令牌查找
+     *
+     * @param token     令牌
+     * @param tokenType 令牌类型
+     * @return {@link OAuth2Authorization }
+     * @since 2023-07-10 17:10:43
+     */
+    @Override
     public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
         Assert.hasText(token, "token cannot be empty");
 
@@ -210,25 +210,25 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         return result.map(this::toObject).orElse(null);
     }
 
-	/**
-	 * 反对
-	 *
-	 * @param entity 实体
-	 * @return {@link OAuth2Authorization }
-	 * @since 2023-07-10 17:10:43
-	 */
-	private OAuth2Authorization toObject(HerodotusAuthorization entity) {
+    /**
+     * 反对
+     *
+     * @param entity 实体
+     * @return {@link OAuth2Authorization }
+     * @since 2023-07-10 17:10:43
+     */
+    private OAuth2Authorization toObject(HerodotusAuthorization entity) {
         return herodotusToOAuth2Converter.convert(entity);
     }
 
-	/**
-	 * 对实体
-	 *
-	 * @param authorization 授权
-	 * @return {@link HerodotusAuthorization }
-	 * @since 2023-07-10 17:10:43
-	 */
-	private HerodotusAuthorization toEntity(OAuth2Authorization authorization) {
+    /**
+     * 对实体
+     *
+     * @param authorization 授权
+     * @return {@link HerodotusAuthorization }
+     * @since 2023-07-10 17:10:43
+     */
+    private HerodotusAuthorization toEntity(OAuth2Authorization authorization) {
         return oauth2ToHerodotusConverter.convert(authorization);
     }
 }

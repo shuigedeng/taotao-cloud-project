@@ -41,24 +41,24 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SocialDelegateOAuth2RefreshTokenRequestEntityConverter
         implements Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> {
 
-	/**
-	 * 刷新令牌端点
-	 */
-	private static final String REFRESH_TOKEN_ENDPOINT = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
-	/**
-	 * 请求实体转换器
-	 */
-	private final Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> requestEntityConverter =
+    /**
+     * 刷新令牌端点
+     */
+    private static final String REFRESH_TOKEN_ENDPOINT = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
+    /**
+     * 请求实体转换器
+     */
+    private final Converter<OAuth2RefreshTokenGrantRequest, RequestEntity<?>> requestEntityConverter =
             new OAuth2RefreshTokenGrantRequestEntityConverter();
 
-	/**
-	 * 转换
-	 *
-	 * @param source 来源
-	 * @return {@link RequestEntity }<{@link ? }>
-	 * @since 2023-07-10 17:40:58
-	 */
-	@Override
+    /**
+     * 转换
+     *
+     * @param source 来源
+     * @return {@link RequestEntity }<{@link ? }>
+     * @since 2023-07-10 17:40:58
+     */
+    @Override
     public RequestEntity<?> convert(OAuth2RefreshTokenGrantRequest source) {
         ClientRegistration clientRegistration = source.getClientRegistration();
         if (SocialClientProviders.WECHAT_WEB_LOGIN_CLIENT.registrationId().equals(clientRegistration.getClientId())) {

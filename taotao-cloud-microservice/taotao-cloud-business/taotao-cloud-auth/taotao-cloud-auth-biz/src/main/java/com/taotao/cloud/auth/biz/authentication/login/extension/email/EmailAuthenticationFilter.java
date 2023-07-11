@@ -20,7 +20,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
@@ -30,7 +29,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.util.StringUtils;
 
 public class EmailAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 

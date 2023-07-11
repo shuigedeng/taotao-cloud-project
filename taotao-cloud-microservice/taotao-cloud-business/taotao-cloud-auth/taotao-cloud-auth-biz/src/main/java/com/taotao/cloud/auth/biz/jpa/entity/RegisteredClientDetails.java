@@ -27,75 +27,75 @@ import java.time.LocalDateTime;
  */
 public interface RegisteredClientDetails {
 
-	/**
-	 * 得到id
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getId();
+    /**
+     * 得到id
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getId();
 
-	/**
-	 * 让客户机id
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getClientId();
+    /**
+     * 让客户机id
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getClientId();
 
-	/**
-	 * 在获得客户机id
-	 *
-	 * @return {@link LocalDateTime }
-	 * @since 2023-07-10 17:13:27
-	 */
-	LocalDateTime getClientIdIssuedAt();
+    /**
+     * 在获得客户机id
+     *
+     * @return {@link LocalDateTime }
+     * @since 2023-07-10 17:13:27
+     */
+    LocalDateTime getClientIdIssuedAt();
 
-	/**
-	 * 得到客户秘密
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getClientSecret();
+    /**
+     * 得到客户秘密
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getClientSecret();
 
-	/**
-	 * 得到客户秘密到期
-	 *
-	 * @return {@link LocalDateTime }
-	 * @since 2023-07-10 17:13:27
-	 */
-	LocalDateTime getClientSecretExpiresAt();
+    /**
+     * 得到客户秘密到期
+     *
+     * @return {@link LocalDateTime }
+     * @since 2023-07-10 17:13:27
+     */
+    LocalDateTime getClientSecretExpiresAt();
 
-	/**
-	 * 获取客户端身份验证方法
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getClientAuthenticationMethods();
+    /**
+     * 获取客户端身份验证方法
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getClientAuthenticationMethods();
 
-	/**
-	 * 得到授权授予类型
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getAuthorizationGrantTypes();
+    /**
+     * 得到授权授予类型
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getAuthorizationGrantTypes();
 
-	/**
-	 * 得到定向uri
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getRedirectUris();
+    /**
+     * 得到定向uri
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getRedirectUris();
 
-	/**
-	 * 得到后注销重定向uri
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:13:27
-	 */
-	String getPostLogoutRedirectUris();
+    /**
+     * 得到后注销重定向uri
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:13:27
+     */
+    String getPostLogoutRedirectUris();
 }

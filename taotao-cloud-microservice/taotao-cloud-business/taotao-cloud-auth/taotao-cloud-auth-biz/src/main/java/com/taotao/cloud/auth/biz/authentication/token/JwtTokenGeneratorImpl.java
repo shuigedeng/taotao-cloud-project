@@ -42,30 +42,30 @@ import org.springframework.security.oauth2.jwt.*;
  */
 public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
 
-	/**
-	 * jwk来源
-	 */
-	private final JWKSource<SecurityContext> jwkSource;
+    /**
+     * jwk来源
+     */
+    private final JWKSource<SecurityContext> jwkSource;
 
-	/**
-	 * jwt令牌发电机实现类
-	 *
-	 * @param jwkSource jwk来源
-	 * @return
-	 * @since 2023-07-10 17:25:47
-	 */
-	public JwtTokenGeneratorImpl(JWKSource<SecurityContext> jwkSource) {
+    /**
+     * jwt令牌发电机实现类
+     *
+     * @param jwkSource jwk来源
+     * @return
+     * @since 2023-07-10 17:25:47
+     */
+    public JwtTokenGeneratorImpl(JWKSource<SecurityContext> jwkSource) {
         this.jwkSource = jwkSource;
     }
 
-	/**
-	 * 令牌响应
-	 *
-	 * @param userDetails 用户详细信息
-	 * @return {@link OAuth2AccessTokenResponse }
-	 * @since 2023-07-10 17:25:47
-	 */
-	@Override
+    /**
+     * 令牌响应
+     *
+     * @param userDetails 用户详细信息
+     * @return {@link OAuth2AccessTokenResponse }
+     * @since 2023-07-10 17:25:47
+     */
+    @Override
     public OAuth2AccessTokenResponse tokenResponse(UserDetails userDetails) {
         // 使用HS256算法签名，PRIVATE_KEY为签名密钥 //生成签名密钥
         JwsHeader jwsHeader =
@@ -100,14 +100,14 @@ public class JwtTokenGeneratorImpl implements JwtTokenGenerator {
                 .build();
     }
 
-	/**
-	 * 社交令牌响应
-	 *
-	 * @param oAuth2User o auth2用户
-	 * @return {@link OAuth2AccessTokenResponse }
-	 * @since 2023-07-10 17:25:47
-	 */
-	@Override
+    /**
+     * 社交令牌响应
+     *
+     * @param oAuth2User o auth2用户
+     * @return {@link OAuth2AccessTokenResponse }
+     * @since 2023-07-10 17:25:47
+     */
+    @Override
     public OAuth2AccessTokenResponse socialTokenResponse(OAuth2User oAuth2User) {
         JwsHeader jwsHeader =
                 JwsHeader.with(SignatureAlgorithm.RS256).type("JWT").build();

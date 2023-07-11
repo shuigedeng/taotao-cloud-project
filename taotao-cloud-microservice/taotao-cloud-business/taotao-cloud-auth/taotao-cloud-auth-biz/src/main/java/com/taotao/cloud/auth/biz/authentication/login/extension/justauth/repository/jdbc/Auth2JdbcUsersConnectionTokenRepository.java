@@ -116,7 +116,7 @@ public class Auth2JdbcUsersConnectionTokenRepository implements UsersConnectionT
                 // 过期时间, 基于 1970-01-01T00:00:00Z, 无过期时间默认为 -1
                 authToken.getExpireTime());
         // 获取 id
-        Long id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID();", null, Long.class);
+        Long id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID();", Long.class);
         authToken.setId(id);
         return authToken;
     }

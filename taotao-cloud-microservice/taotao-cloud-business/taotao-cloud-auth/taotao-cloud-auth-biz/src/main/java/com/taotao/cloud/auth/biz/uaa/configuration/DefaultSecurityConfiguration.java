@@ -76,31 +76,61 @@ import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 @Configuration(proxyBeanMethods = false)
 public class DefaultSecurityConfiguration {
 
-	private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
 
-	@Bean
-	SecurityFilterChain defaultSecurityFilterChain(
-		HttpSecurity httpSecurity,
-		UserDetailsService userDetailsService,
-		OAuth2AuthenticationProperties authenticationProperties,
-		CaptchaRendererFactory captchaRendererFactory,
-		SecurityMatcherConfigurer securityMatcherConfigurer,
-		SecurityAuthorizationManager securityAuthorizationManager,
-		SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-		SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository)
-		throws Exception {
+    /// **
+    // * 跨域过滤器配置
+    // */
+    // @Bean
+    // public CorsFilter corsFilter() {
+    //	// 初始化cors配置对象
+    //	CorsConfiguration configuration = new CorsConfiguration();
+    //	// 设置允许跨域的域名,如果允许携带cookie的话,路径就不能写*号, *表示所有的域名都可以跨域访问
+    //	configuration.addAllowedOrigin("http://127.0.0.1:5173");
+    //	// 设置跨域访问可以携带cookie
+    //	configuration.setAllowCredentials(true);
+    //	// 允许所有的请求方法 ==> GET POST PUT Delete
+    //	configuration.addAllowedMethod("*");
+    //	// 允许携带任何头信息
+    //	configuration.addAllowedHeader("*");
+    //	// 初始化cors配置源对象
+    //	UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
+    //	// 给配置源对象设置过滤的参数
+    //	// 参数一: 过滤的路径 == > 所有的路径都要求校验是否跨域
+    //	// 参数二: 配置类
+    //	configurationSource.registerCorsConfiguration("/**", configuration);
+    //	// 返回配置好的过滤器
+    //	return new CorsFilter(configurationSource);
+    // }
 
-		log.info("Core [Default Security Filter Chain] Auto Configure.");
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(
+            HttpSecurity httpSecurity,
+            UserDetailsService userDetailsService,
+            OAuth2AuthenticationProperties authenticationProperties,
+            CaptchaRendererFactory captchaRendererFactory,
+            SecurityMatcherConfigurer securityMatcherConfigurer,
+            SecurityAuthorizationManager securityAuthorizationManager,
+            SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+            SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository)
+            throws Exception {
 
-		// 禁用CSRF 开启跨域
-		httpSecurity
-			.anonymous(AbstractHttpConfigurer::disable)
-			.logout(AbstractHttpConfigurer::disable)
-			.sessionManagement(Customizer.withDefaults())
-			.csrf(AbstractHttpConfigurer::disable)
-			.cors(AbstractHttpConfigurer::disable);
+        log.info("Core [Default Security Filter Chain] Auto Configure.");
 
-		// @formatter:off
+        // 添加跨域过滤器
+        // httpSecurity.addFilter(corsFilter());
+
+        // 使用redis存储、读取登录的认证信息
+        // httpSecurity.securityContext(context -> context.securityContextRepository(redisSecurityContextRepository));
+
+        // 禁用CSRF 开启跨域
+        httpSecurity
+                .anonymous(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
+                .sessionManagement(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable);
+
         httpSecurity
                 .authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
                     authorizeHttpRequestsCustomizer
@@ -114,8 +144,9 @@ public class DefaultSecurityConfiguration {
                             .access(securityAuthorizationManager);
                 })
                 .exceptionHandling(exceptionHandlingCustomizer -> {
-                    exceptionHandlingCustomizer.authenticationEntryPoint(new SecurityAuthenticationEntryPoint());
-                    exceptionHandlingCustomizer.accessDeniedHandler(new SecurityAccessDeniedHandler());
+                    exceptionHandlingCustomizer
+                            .authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
+                            .accessDeniedHandler(new SecurityAccessDeniedHandler());
                 })
                 .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
                 .logout(logoutCustomizer -> {
@@ -192,58 +223,50 @@ public class DefaultSecurityConfiguration {
                 .httpSecurity()
                 .apply(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties));
 
-        // @formatter:on
-		return httpSecurity.build();
-	}
+        return httpSecurity.build();
+    }
 
-	@Bean
-	public JwtTokenGenerator jwtTokenGenerator(JWKSource<SecurityContext> jwkSource) {
-		return new JwtTokenGeneratorImpl(jwkSource);
-	}
+    @Bean
+    public JwtTokenGenerator jwtTokenGenerator(JWKSource<SecurityContext> jwkSource) {
+        return new JwtTokenGeneratorImpl(jwkSource);
+    }
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
-	@Bean
-	@ConditionalOnMissingBean
-	public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
-		log.info("Bean [Authentication Event Publisher] Auto Configure.");
-		return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
-	}
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
+        log.info("Bean [Authentication Event Publisher] Auto Configure.");
+        return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
+    }
 
-	@Bean
-	@ConditionalOnMissingBean
-	public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
-		SecurityUserDetailsService securityUserDetailsService =
-			new SecurityUserDetailsService(strategyUserDetailsService);
-		log.info("Bean [Herodotus User Details Service] Auto Configure.");
-		return securityUserDetailsService;
-	}
+    @Bean
+    @ConditionalOnMissingBean
+    public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+        SecurityUserDetailsService securityUserDetailsService =
+                new SecurityUserDetailsService(strategyUserDetailsService);
+        log.info("Bean [Herodotus User Details Service] Auto Configure.");
+        return securityUserDetailsService;
+    }
 
-	@Bean
-	@ConditionalOnMissingBean
-	public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
-		Oauth2ClientDetailsService oauth2ClientDetailsService =
-			new Oauth2ClientDetailsService(applicationService);
-		log.info("Bean [Herodotus Client Details Service] Auto Configure.");
-		return oauth2ClientDetailsService;
-	}
+    @Bean
+    @ConditionalOnMissingBean
+    public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
+        Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(applicationService);
+        log.info("Bean [Herodotus Client Details Service] Auto Configure.");
+        return oauth2ClientDetailsService;
+    }
 
-	//	@Bean
-	//	public FindByIndexNameSessionRepository redissonSessionRepository(RedissonClient redissonClient,
-	// ApplicationEventPublisher eventPublisher) {
-	//		return new RedissonSessionRepository(redissonClient, eventPublisher);
-	//	}
+    @Bean
+    public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
+        return new SpringSessionBackedSessionRegistry<>(sessionRepository);
+    }
 
-	@Bean
-	public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
-		return new SpringSessionBackedSessionRegistry<>(sessionRepository);
-	}
-
-	@Bean
-	public HttpSessionEventPublisher httpSessionEventPublisher() {
-		return new HttpSessionEventPublisher();
-	}
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 }

@@ -19,8 +19,8 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.oneClick;
 import static java.util.Objects.nonNull;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.oneClick.service.OneClickLoginService;
-import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.auth.biz.exception.Auth2Exception;
+import com.taotao.cloud.auth.biz.uaa.enums.ErrorCodeEnum;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

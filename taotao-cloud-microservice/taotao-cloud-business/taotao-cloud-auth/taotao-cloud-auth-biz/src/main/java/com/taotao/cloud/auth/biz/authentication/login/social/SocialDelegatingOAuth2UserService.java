@@ -35,54 +35,54 @@ import org.springframework.util.CollectionUtils;
  */
 public class SocialDelegatingOAuth2UserService<R extends OAuth2UserRequest, U extends OAuth2User>
         implements OAuth2UserService<R, U> {
-	/**
-	 * 默认oauth2用户服务
-	 */
-	private final OAuth2UserService<OAuth2UserRequest, OAuth2User> defaultOAuth2UserService =
+    /**
+     * 默认oauth2用户服务
+     */
+    private final OAuth2UserService<OAuth2UserRequest, OAuth2User> defaultOAuth2UserService =
             new DefaultOAuth2UserService();
-	/**
-	 * 用户服务
-	 */
-	private final List<OAuth2UserService<R, U>> userServices;
-	/**
-	 * 用户服务地图
-	 */
-	private final Map<String, OAuth2UserService<R, U>> userServiceMap;
+    /**
+     * 用户服务
+     */
+    private final List<OAuth2UserService<R, U>> userServices;
+    /**
+     * 用户服务地图
+     */
+    private final Map<String, OAuth2UserService<R, U>> userServiceMap;
 
-	/**
-	 * Constructs a {@code DelegatingOAuth2UserService} using the provided parameters.
-	 *
-	 * @param userServices a
-	 * @return
-	 * @since 2023-07-10 17:41:04
-	 */
-	public SocialDelegatingOAuth2UserService(List<OAuth2UserService<R, U>> userServices) {
+    /**
+     * Constructs a {@code DelegatingOAuth2UserService} using the provided parameters.
+     *
+     * @param userServices a
+     * @return
+     * @since 2023-07-10 17:41:04
+     */
+    public SocialDelegatingOAuth2UserService(List<OAuth2UserService<R, U>> userServices) {
         Assert.notEmpty(userServices, "userServices cannot be empty");
         this.userServices = Collections.unmodifiableList(new ArrayList<>(userServices));
         this.userServiceMap = Collections.emptyMap();
     }
 
-	/**
-	 * Constructs a {@code DelegatingOAuth2UserService} using the provided parameters.
-	 *
-	 * @param userServiceMap a
-	 * @return
-	 * @since 2023-07-10 17:41:04
-	 */
-	public SocialDelegatingOAuth2UserService(Map<String, OAuth2UserService<R, U>> userServiceMap) {
+    /**
+     * Constructs a {@code DelegatingOAuth2UserService} using the provided parameters.
+     *
+     * @param userServiceMap a
+     * @return
+     * @since 2023-07-10 17:41:04
+     */
+    public SocialDelegatingOAuth2UserService(Map<String, OAuth2UserService<R, U>> userServiceMap) {
         Assert.notEmpty(userServiceMap, "userServiceMap cannot be empty");
         this.userServiceMap = Collections.unmodifiableMap(userServiceMap);
         this.userServices = Collections.emptyList();
     }
 
-	/**
-	 * 加载用户
-	 *
-	 * @param userRequest 用户请求
-	 * @return {@link U }
-	 * @since 2023-07-10 17:41:04
-	 */
-	@SuppressWarnings("unchecked")
+    /**
+     * 加载用户
+     *
+     * @param userRequest 用户请求
+     * @return {@link U }
+     * @since 2023-07-10 17:41:04
+     */
+    @SuppressWarnings("unchecked")
     @Override
     public U loadUser(R userRequest) throws OAuth2AuthenticationException {
         Assert.notNull(userRequest, "userRequest cannot be null");

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
-
 /**
  * <p>Description: 自定义客户端详情接口 </p>
  *
@@ -24,6 +23,4 @@ package com.taotao.cloud.auth.biz.management.processor;
  * @version 2023.07
  * @since 2023-07-04 10:05:37
  */
-public interface EnhanceClientDetailsService extends ClientDetailsService {
-
-}
+public interface EnhanceClientDetailsService extends ClientDetailsService {}

@@ -1,4 +1,18 @@
-
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.taotao.cloud.auth.biz.strategy;
 
@@ -28,51 +42,59 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class DistributedArchitectureConfiguration {
 
-	private static final Logger log = LoggerFactory.getLogger(DistributedArchitectureConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(DistributedArchitectureConfiguration.class);
 
-	@PostConstruct
-	public void postConstruct() {
-		log.debug("[Herodotus] |- Module [Distributed Architecture] Auto Configure.");
-	}
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Herodotus] |- Module [Distributed Architecture] Auto Configure.");
+    }
 
-	@Configuration(proxyBeanMethods = false)
-	@ConditionalOnProperty(prefix = "taotao.cloud.auth.local", name = "enabled", havingValue = "true")
-	static class DataAccessStrategyLocalConfiguration {
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnProperty(prefix = "taotao.cloud.auth.local", name = "enabled", havingValue = "true")
+    static class DataAccessStrategyLocalConfiguration {
 
-		@Bean
-		@ConditionalOnMissingBean
-		public StrategyUserDetailsService herodotusLocalUserDetailsService(SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
-			log.debug("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
-			return new HerodotusLocalUserDetailsService(sysUserService, socialAuthenticationHandler);
-		}
+        @Bean
+        @ConditionalOnMissingBean
+        public StrategyUserDetailsService herodotusLocalUserDetailsService(
+                SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
+            log.debug("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
+            return new HerodotusLocalUserDetailsService(sysUserService, socialAuthenticationHandler);
+        }
 
-		@Bean
-		@ConditionalOnMissingBean
-		public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(SysPermissionService sysPermissionService) {
-			HerodotusLocalPermissionDetailsService herodotusLocalPermissionDetailsService = new HerodotusLocalPermissionDetailsService(sysPermissionService);
-			log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
-			return herodotusLocalPermissionDetailsService;
-		}
-	}
+        @Bean
+        @ConditionalOnMissingBean
+        public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(
+                SysPermissionService sysPermissionService) {
+            HerodotusLocalPermissionDetailsService herodotusLocalPermissionDetailsService =
+                    new HerodotusLocalPermissionDetailsService(sysPermissionService);
+            log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
+            return herodotusLocalPermissionDetailsService;
+        }
+    }
 
-	// 默认使用feign方式
-	@Configuration(proxyBeanMethods = false)
-	@ConditionalOnProperty(prefix = "taotao.cloud.auth.remote", name = "enabled", havingValue = "true", matchIfMissing = true)
-	static class DataAccessStrategyRemoteConfiguration {
+    // 默认使用feign方式
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnProperty(
+            prefix = "taotao.cloud.auth.remote",
+            name = "enabled",
+            havingValue = "true",
+            matchIfMissing = true)
+    static class DataAccessStrategyRemoteConfiguration {
 
-		@Bean
-		@ConditionalOnMissingBean
-		public StrategyUserDetailsService herodotusRemoteUserDetailsService(IFeignUserApi userApi) {
-			log.debug("[Herodotus] |- Strategy [Remote User Details Service] Auto Configure.");
-			return new HerodotusRemoteUserDetailsService(userApi);
-		}
+        @Bean
+        @ConditionalOnMissingBean
+        public StrategyUserDetailsService herodotusRemoteUserDetailsService(IFeignUserApi userApi) {
+            log.debug("[Herodotus] |- Strategy [Remote User Details Service] Auto Configure.");
+            return new HerodotusRemoteUserDetailsService(userApi);
+        }
 
-		@Bean
-		@ConditionalOnMissingBean
-		public StrategyPermissionDetailsService herodotusRemotePermissionDetailsService() {
-			HerodotusRemotePermissionDetailsService herodotusRemotePermissionDetailsService = new HerodotusRemotePermissionDetailsService();
-			log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Auto Configure.");
-			return herodotusRemotePermissionDetailsService;
-		}
-	}
+        @Bean
+        @ConditionalOnMissingBean
+        public StrategyPermissionDetailsService herodotusRemotePermissionDetailsService() {
+            HerodotusRemotePermissionDetailsService herodotusRemotePermissionDetailsService =
+                    new HerodotusRemotePermissionDetailsService();
+            log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Auto Configure.");
+            return herodotusRemotePermissionDetailsService;
+        }
+    }
 }

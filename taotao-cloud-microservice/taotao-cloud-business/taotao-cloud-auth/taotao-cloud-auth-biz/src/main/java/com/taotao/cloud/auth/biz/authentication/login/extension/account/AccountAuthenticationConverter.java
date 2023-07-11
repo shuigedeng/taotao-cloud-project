@@ -17,7 +17,6 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.account;
 
 import com.taotao.cloud.auth.biz.authentication.utils.ExtensionLoginUtils;
-import com.taotao.cloud.common.enums.LoginTypeEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.Assert;

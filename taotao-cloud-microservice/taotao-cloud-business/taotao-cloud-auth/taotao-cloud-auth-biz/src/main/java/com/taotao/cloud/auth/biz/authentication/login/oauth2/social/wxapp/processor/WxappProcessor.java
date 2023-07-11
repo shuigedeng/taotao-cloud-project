@@ -189,6 +189,7 @@ public class WxappProcessor implements InitializingBean {
 
         WxMaPhoneNumberInfo wxMaPhoneNumberInfo;
         try {
+
             wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(sessionKey, encryptedData, iv);
             log.debug("Weixin Mini App get phone number successfully!");
             log.debug("WxMaPhoneNumberInfo : {}", wxMaPhoneNumberInfo.toString());

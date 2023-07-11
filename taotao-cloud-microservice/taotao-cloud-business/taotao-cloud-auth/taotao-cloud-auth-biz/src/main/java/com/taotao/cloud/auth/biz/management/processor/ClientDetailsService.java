@@ -16,9 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
-
 import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
-
 import java.util.Set;
 
 /**

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.account;
 
-import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.login.extension.*;
 import com.taotao.cloud.auth.biz.authentication.login.extension.account.service.AccountUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;

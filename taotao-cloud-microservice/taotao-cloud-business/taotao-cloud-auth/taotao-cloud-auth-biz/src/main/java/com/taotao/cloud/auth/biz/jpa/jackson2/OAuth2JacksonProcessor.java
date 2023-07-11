@@ -58,11 +58,10 @@ public class OAuth2JacksonProcessor {
 
     private static Module loadAndGetInstance(String className, ClassLoader loader) {
         try {
+            @SuppressWarnings("unchecked")
             Class<? extends Module> securityModule = (Class<? extends Module>) ClassUtils.forName(className, loader);
-            if (securityModule != null) {
-                return securityModule.newInstance();
-            }
-        } catch (Exception ex) {
+            return securityModule.getDeclaredConstructor().newInstance();
+        } catch (Exception ignored) {
         }
         return null;
     }

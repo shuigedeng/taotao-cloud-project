@@ -18,11 +18,10 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2;
 
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.auth.biz.management.processor.ClientDetailsService;
+import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import org.dromara.hutool.core.reflect.FieldUtil;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -55,38 +54,38 @@ import org.springframework.util.CollectionUtils;
  */
 public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2AbstractAuthenticationProvider {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(OAuth2ClientCredentialsAuthenticationProvider.class);
 
-	/**
-	 * 错误uri
-	 */
-	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
-	/**
-	 * 授权服务
-	 */
-	private final OAuth2AuthorizationService authorizationService;
-	/**
-	 * 令牌生成器
-	 */
-	private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
-	/**
-	 * 客户详细信息服务
-	 */
-	private final ClientDetailsService clientDetailsService;
+    /**
+     * 错误uri
+     */
+    private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
+    /**
+     * 授权服务
+     */
+    private final OAuth2AuthorizationService authorizationService;
+    /**
+     * 令牌生成器
+     */
+    private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
+    /**
+     * 客户详细信息服务
+     */
+    private final ClientDetailsService clientDetailsService;
 
-	/**
-	 * Constructs an {@code OAuth2ClientCredentialsAuthenticationProvider} using the provided parameters.
-	 *
-	 * @param authorizationService the authorization service
-	 * @param tokenGenerator       the token generator
-	 * @param clientDetailsService 客户详细信息服务
-	 * @return
-	 * @since 2023-07-10 17:39:52
-	 */
-	public OAuth2ClientCredentialsAuthenticationProvider(
+    /**
+     * Constructs an {@code OAuth2ClientCredentialsAuthenticationProvider} using the provided parameters.
+     *
+     * @param authorizationService the authorization service
+     * @param tokenGenerator       the token generator
+     * @param clientDetailsService 客户详细信息服务
+     * @return
+     * @since 2023-07-10 17:39:52
+     */
+    public OAuth2ClientCredentialsAuthenticationProvider(
             OAuth2AuthorizationService authorizationService,
             OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator,
             ClientDetailsService clientDetailsService) {
@@ -97,14 +96,14 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         this.clientDetailsService = clientDetailsService;
     }
 
-	/**
-	 * 验证
-	 *
-	 * @param authentication 身份验证
-	 * @return {@link Authentication }
-	 * @since 2023-07-10 17:39:52
-	 */
-	@Override
+    /**
+     * 验证
+     *
+     * @param authentication 身份验证
+     * @return {@link Authentication }
+     * @since 2023-07-10 17:39:52
+     */
+    @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         OAuth2ClientCredentialsAuthenticationToken clientCredentialsAuthentication =
                 (OAuth2ClientCredentialsAuthenticationToken) authentication;
@@ -159,15 +158,15 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken);
     }
 
-	/**
-	 * 获取字符串
-	 *
-	 * @param clientCredentialsAuthentication 客户端凭证认证
-	 * @param registeredClient                注册客户
-	 * @return {@link Set }<{@link String }>
-	 * @since 2023-07-10 17:39:53
-	 */
-	@NotNull
+    /**
+     * 获取字符串
+     *
+     * @param clientCredentialsAuthentication 客户端凭证认证
+     * @param registeredClient                注册客户
+     * @return {@link Set }<{@link String }>
+     * @since 2023-07-10 17:39:53
+     */
+    @NotNull
     private static Set<String> getStrings(
             OAuth2ClientCredentialsAuthenticationToken clientCredentialsAuthentication,
             RegisteredClient registeredClient) {
@@ -183,14 +182,14 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         return authorizedScopes;
     }
 
-	/**
-	 * 支持
-	 *
-	 * @param authentication 身份验证
-	 * @return boolean
-	 * @since 2023-07-10 17:39:53
-	 */
-	@Override
+    /**
+     * 支持
+     *
+     * @param authentication 身份验证
+     * @return boolean
+     * @since 2023-07-10 17:39:53
+     */
+    @Override
     public boolean supports(Class<?> authentication) {
         return OAuth2ClientCredentialsAuthenticationToken.class.isAssignableFrom(authentication);
     }

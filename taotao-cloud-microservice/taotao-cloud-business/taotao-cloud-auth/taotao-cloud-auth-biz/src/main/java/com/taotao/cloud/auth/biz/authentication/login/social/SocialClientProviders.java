@@ -46,10 +46,10 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @since 2023-07-10 17:40:14
  */
 public enum SocialClientProviders {
-	/**
-	 * 微信扫码登录
-	 */
-	WECHAT_WEB_LOGIN_CLIENT(
+    /**
+     * 微信扫码登录
+     */
+    WECHAT_WEB_LOGIN_CLIENT(
             "wechat-web-login",
             SocialClientProviders::oAuth2AuthorizationRequestConsumer,
             authorizationCodeGrantRequest -> {
@@ -80,10 +80,10 @@ public enum SocialClientProviders {
                         .toUri();
                 return RequestEntity.get(uri).headers(headers).build();
             }),
-	/**
-	 * 微信网页授权.
-	 */
-	WECHAT_WEB_CLIENT(
+    /**
+     * 微信网页授权.
+     */
+    WECHAT_WEB_CLIENT(
             "wechat-web", SocialClientProviders::oAuth2AuthorizationRequestConsumer, authorizationCodeGrantRequest -> {
                 ClientRegistration clientRegistration = authorizationCodeGrantRequest.getClientRegistration();
                 HttpHeaders headers = getTokenRequestHeaders(clientRegistration);
@@ -120,11 +120,11 @@ public enum SocialClientProviders {
                 return RequestEntity.get(uri).headers(headers).build();
             }),
 
-	/**
-	 * 企业微信扫码登录. <a
-	 * href="https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRET">...</a>
-	 */
-	WORK_WECHAT_SCAN_CLIENT(
+    /**
+     * 企业微信扫码登录. <a
+     * href="https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ID&corpsecret=SECRET">...</a>
+     */
+    WORK_WECHAT_SCAN_CLIENT(
             "work-wechat-scan",
             builder -> builder.attributes(attributes -> builder.parameters(parameters -> {
                 LinkedHashMap<String, Object> linkedParameters = new LinkedHashMap<>();
@@ -175,16 +175,16 @@ public enum SocialClientProviders {
     private final Consumer<OAuth2AuthorizationRequest.Builder> oAuth2AuthorizationRequestConsumer;
     private final Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> tokenUriConverter;
 
-	/**
-	 * 社交客户提供商
-	 *
-	 * @param registrationId                     注册id
-	 * @param oAuth2AuthorizationRequestConsumer o auth2授权请求使用者
-	 * @param tokenUriConverter                  令牌uri转换器
-	 * @return
-	 * @since 2023-07-10 17:40:15
-	 */
-	SocialClientProviders(
+    /**
+     * 社交客户提供商
+     *
+     * @param registrationId                     注册id
+     * @param oAuth2AuthorizationRequestConsumer o auth2授权请求使用者
+     * @param tokenUriConverter                  令牌uri转换器
+     * @return
+     * @since 2023-07-10 17:40:15
+     */
+    SocialClientProviders(
             String registrationId,
             Consumer<OAuth2AuthorizationRequest.Builder> oAuth2AuthorizationRequestConsumer,
             Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> tokenUriConverter) {
@@ -193,44 +193,44 @@ public enum SocialClientProviders {
         this.tokenUriConverter = tokenUriConverter;
     }
 
-	/**
-	 * Registration id string.
-	 *
-	 * @return {@link String }
-	 * @since 2023-07-10 17:40:15
-	 */
-	public String registrationId() {
+    /**
+     * Registration id string.
+     *
+     * @return {@link String }
+     * @since 2023-07-10 17:40:15
+     */
+    public String registrationId() {
         return registrationId;
     }
 
-	/**
-	 * Request consumer consumer.
-	 *
-	 * @return {@link Consumer }<{@link OAuth2AuthorizationRequest.Builder }>
-	 * @since 2023-07-10 17:40:15
-	 */
-	public Consumer<OAuth2AuthorizationRequest.Builder> requestConsumer() {
+    /**
+     * Request consumer consumer.
+     *
+     * @return {@link Consumer }<{@link OAuth2AuthorizationRequest.Builder }>
+     * @since 2023-07-10 17:40:15
+     */
+    public Consumer<OAuth2AuthorizationRequest.Builder> requestConsumer() {
         return oAuth2AuthorizationRequestConsumer;
     }
 
-	/**
-	 * Converter converter.
-	 *
-	 * @return {@link Converter }<{@link OAuth2AuthorizationCodeGrantRequest }, {@link RequestEntity }<{@link ? }>>
-	 * @since 2023-07-10 17:40:15
-	 */
-	public Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> converter() {
+    /**
+     * Converter converter.
+     *
+     * @return {@link Converter }<{@link OAuth2AuthorizationCodeGrantRequest }, {@link RequestEntity }<{@link ? }>>
+     * @since 2023-07-10 17:40:15
+     */
+    public Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> converter() {
         return tokenUriConverter;
     }
 
-	/**
-	 * Gets token request headers.
-	 *
-	 * @param clientRegistration the client registration
-	 * @return {@link HttpHeaders }
-	 * @since 2023-07-10 17:40:15
-	 */
-	static HttpHeaders getTokenRequestHeaders(ClientRegistration clientRegistration) {
+    /**
+     * Gets token request headers.
+     *
+     * @param clientRegistration the client registration
+     * @return {@link HttpHeaders }
+     * @since 2023-07-10 17:40:15
+     */
+    static HttpHeaders getTokenRequestHeaders(ClientRegistration clientRegistration) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(
                 Collections.singletonList(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")));
@@ -245,29 +245,29 @@ public enum SocialClientProviders {
         return headers;
     }
 
-	/**
-	 * 编码客户端凭据
-	 *
-	 * @param clientCredential 客户端凭证
-	 * @return {@link String }
-	 * @since 2023-07-10 17:40:16
-	 */
-	private static String encodeClientCredential(String clientCredential) {
+    /**
+     * 编码客户端凭据
+     *
+     * @param clientCredential 客户端凭证
+     * @return {@link String }
+     * @since 2023-07-10 17:40:16
+     */
+    private static String encodeClientCredential(String clientCredential) {
         return URLEncoder.encode(clientCredential, StandardCharsets.UTF_8);
     }
 
-	/**
-	 * 默认情况下Spring Security会生成授权链接： {@code
-	 * https://open.weixin.qq.com/connect/oauth2/authorize?response_type=code
-	 * &client_id=wxdf9033184b238e7f &scope=snsapi_userinfo
-	 * &state=5NDiQTMa9ykk7SNQ5-OIJDbIy9RLaEVzv3mdlj8TjuE%3D
-	 * &redirect_uri=https%3A%2F%2Fmov-h5-test.felord.cn} 缺少了微信协议要求的{@code #wechat_redirect}，同时
-	 * {@code client_id}应该替换为{@code app_id}
-	 *
-	 * @param builder the OAuth2AuthorizationRequest.builder
-	 * @since 2023-07-10 17:40:16
-	 */
-	private static void oAuth2AuthorizationRequestConsumer(OAuth2AuthorizationRequest.Builder builder) {
+    /**
+     * 默认情况下Spring Security会生成授权链接： {@code
+     * https://open.weixin.qq.com/connect/oauth2/authorize?response_type=code
+     * &client_id=wxdf9033184b238e7f &scope=snsapi_userinfo
+     * &state=5NDiQTMa9ykk7SNQ5-OIJDbIy9RLaEVzv3mdlj8TjuE%3D
+     * &redirect_uri=https%3A%2F%2Fmov-h5-test.felord.cn} 缺少了微信协议要求的{@code #wechat_redirect}，同时
+     * {@code client_id}应该替换为{@code app_id}
+     *
+     * @param builder the OAuth2AuthorizationRequest.builder
+     * @since 2023-07-10 17:40:16
+     */
+    private static void oAuth2AuthorizationRequestConsumer(OAuth2AuthorizationRequest.Builder builder) {
         builder.attributes(attributes -> builder.parameters(parameters -> {
             //   client_id replace into appid here
             LinkedHashMap<String, Object> linkedParameters = new LinkedHashMap<>();

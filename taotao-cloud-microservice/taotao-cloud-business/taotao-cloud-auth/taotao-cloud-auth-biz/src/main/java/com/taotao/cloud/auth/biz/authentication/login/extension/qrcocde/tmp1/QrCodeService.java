@@ -31,9 +31,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class QrCodeService {
 
-	public String qrcode() {
-		QrConfig config = QrConfig.create().setWidth(5).setHeight(5);
-		return QrCodeUtil.generateAsBase64(
-			"https://m.taotaocloud.top/#/pages/index/index", config, ImgUtil.IMAGE_TYPE_PNG);
-	}
+    public String qrcode() {
+        QrConfig config = QrConfig.create().setWidth(5).setHeight(5);
+        return QrCodeUtil.generateAsBase64(
+                "https://m.taotaocloud.top/#/pages/index/index", config, ImgUtil.IMAGE_TYPE_PNG);
+    }
 }

@@ -38,45 +38,43 @@ import org.springframework.security.web.context.SecurityContextRepository;
  * @see org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer
  */
 public class OAuth2FormQrcodeLoginHttpConfigurer<H extends HttpSecurityBuilder<H>>
-	extends AbstractHttpConfigurer<OAuth2FormQrcodeLoginHttpConfigurer<H>, H> {
+        extends AbstractHttpConfigurer<OAuth2FormQrcodeLoginHttpConfigurer<H>, H> {
 
-	private static final Logger log = LoggerFactory.getLogger(OAuth2FormQrcodeLoginHttpConfigurer.class);
+    private static final Logger log = LoggerFactory.getLogger(OAuth2FormQrcodeLoginHttpConfigurer.class);
 
-	private final OAuth2AuthenticationProperties authenticationProperties;
+    private final OAuth2AuthenticationProperties authenticationProperties;
 
-	public OAuth2FormQrcodeLoginHttpConfigurer(OAuth2AuthenticationProperties authenticationProperties) {
-		this.authenticationProperties = authenticationProperties;
-	}
+    public OAuth2FormQrcodeLoginHttpConfigurer(OAuth2AuthenticationProperties authenticationProperties) {
+        this.authenticationProperties = authenticationProperties;
+    }
 
-	@Override
-	public void configure(H httpSecurity) throws Exception {
-		AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
-		SecurityContextRepository securityContextRepository =
-			httpSecurity.getSharedObject(SecurityContextRepository.class);
+    @Override
+    public void configure(H httpSecurity) throws Exception {
+        AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
+        SecurityContextRepository securityContextRepository =
+                httpSecurity.getSharedObject(SecurityContextRepository.class);
 
-		OAuth2FormQrcodeAuthenticationFilter filter =
-			new OAuth2FormQrcodeAuthenticationFilter(authenticationManager);
-		filter.setAuthenticationDetailsSource(
-			new OAuth2FormLoginWebAuthenticationDetailSource(authenticationProperties));
+        OAuth2FormQrcodeAuthenticationFilter filter = new OAuth2FormQrcodeAuthenticationFilter(authenticationManager);
+        filter.setAuthenticationDetailsSource(
+                new OAuth2FormLoginWebAuthenticationDetailSource(authenticationProperties));
 
-		filter.setAuthenticationFailureHandler(
-			new OAuth2FormLoginAuthenticationFailureHandler(getFormLogin().getFailureForwardUrl()));
-		filter.setSecurityContextRepository(securityContextRepository);
+        filter.setAuthenticationFailureHandler(
+                new OAuth2FormLoginAuthenticationFailureHandler(getFormLogin().getFailureForwardUrl()));
+        filter.setSecurityContextRepository(securityContextRepository);
 
-		OAuth2FormQrcodeAuthenticationProvider provider = new OAuth2FormQrcodeAuthenticationProvider(
-			new DefaultOAuth2FormQrcodeService(),
-			new DefaultOAuth2FormQrcodeUserDetailsService());
+        OAuth2FormQrcodeAuthenticationProvider provider = new OAuth2FormQrcodeAuthenticationProvider(
+                new DefaultOAuth2FormQrcodeService(), new DefaultOAuth2FormQrcodeUserDetailsService());
 
-		httpSecurity
-			.authenticationProvider(provider)
-			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-	}
+        httpSecurity
+                .authenticationProvider(provider)
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+    }
 
-	public H httpSecurity() {
-		return getBuilder();
-	}
+    public H httpSecurity() {
+        return getBuilder();
+    }
 
-	private OAuth2AuthenticationProperties.FormLogin getFormLogin() {
-		return authenticationProperties.getFormLogin();
-	}
+    private OAuth2AuthenticationProperties.FormLogin getFormLogin() {
+        return authenticationProperties.getFormLogin();
+    }
 }

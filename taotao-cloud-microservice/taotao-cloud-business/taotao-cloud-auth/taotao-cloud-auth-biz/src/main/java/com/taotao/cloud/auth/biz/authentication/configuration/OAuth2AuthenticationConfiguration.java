@@ -50,35 +50,35 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 @EnableConfigurationProperties({OAuth2AuthenticationProperties.class})
 public class OAuth2AuthenticationConfiguration {
 
-	/**
-	 * 日志
-	 */
-	private static final Logger log = LoggerFactory.getLogger(OAuth2AuthenticationConfiguration.class);
+    /**
+     * 日志
+     */
+    private static final Logger log = LoggerFactory.getLogger(OAuth2AuthenticationConfiguration.class);
 
-	/**
-	 * 后期构建
-	 *
-	 * @since 2023-07-10 17:14:18
-	 */
-	@PostConstruct
+    /**
+     * 后期构建
+     *
+     * @since 2023-07-10 17:14:18
+     */
+    @PostConstruct
     public void postConstruct() {
         log.info("SDK [OAuth2 Authentication] Auto Configure.");
     }
 
-	/**
-	 * redis存储库
-	 */
-	@Autowired
+    /**
+     * redis存储库
+     */
+    @Autowired
     private RedisRepository redisRepository;
 
-	/**
-	 * 委托客户注册存储库
-	 *
-	 * @param properties 属性
-	 * @return {@link SocialDelegateClientRegistrationRepository }
-	 * @since 2023-07-10 17:14:19
-	 */
-	@Bean
+    /**
+     * 委托客户注册存储库
+     *
+     * @param properties 属性
+     * @return {@link SocialDelegateClientRegistrationRepository }
+     * @since 2023-07-10 17:14:19
+     */
+    @Bean
     public SocialDelegateClientRegistrationRepository delegateClientRegistrationRepository(
             OAuth2ClientProperties properties) {
         SocialDelegateClientRegistrationRepository clientRegistrationRepository =
@@ -92,25 +92,25 @@ public class OAuth2AuthenticationConfiguration {
         return clientRegistrationRepository;
     }
 
-	/**
-	 * http加密处理器
-	 *
-	 * @return {@link HttpCryptoProcessor }
-	 * @since 2023-07-10 17:14:19
-	 */
-	@Bean
+    /**
+     * http加密处理器
+     *
+     * @return {@link HttpCryptoProcessor }
+     * @since 2023-07-10 17:14:19
+     */
+    @Bean
     public HttpCryptoProcessor httpCryptoProcessor() {
         return new HttpCryptoProcessor(redisRepository, new RSACryptoProcessor(), new AESCryptoProcessor());
     }
 
-	/**
-	 * 锁定用户详细信息邮票管理器
-	 *
-	 * @param authenticationProperties 身份验证属性
-	 * @return {@link LockedUserDetailsStampManager }
-	 * @since 2023-07-10 17:14:20
-	 */
-	@Bean
+    /**
+     * 锁定用户详细信息邮票管理器
+     *
+     * @param authenticationProperties 身份验证属性
+     * @return {@link LockedUserDetailsStampManager }
+     * @since 2023-07-10 17:14:20
+     */
+    @Bean
     public LockedUserDetailsStampManager lockedUserDetailsStampManager(
             OAuth2AuthenticationProperties authenticationProperties) {
         LockedUserDetailsStampManager manager =
@@ -119,14 +119,14 @@ public class OAuth2AuthenticationConfiguration {
         return manager;
     }
 
-	/**
-	 * 登录失败有限邮票经理
-	 *
-	 * @param authenticationProperties 身份验证属性
-	 * @return {@link SignInFailureLimitedStampManager }
-	 * @since 2023-07-10 17:14:20
-	 */
-	@Bean
+    /**
+     * 登录失败有限邮票经理
+     *
+     * @param authenticationProperties 身份验证属性
+     * @return {@link SignInFailureLimitedStampManager }
+     * @since 2023-07-10 17:14:20
+     */
+    @Bean
     public SignInFailureLimitedStampManager signInFailureLimitedStampManager(
             OAuth2AuthenticationProperties authenticationProperties) {
         SignInFailureLimitedStampManager manager =
@@ -135,14 +135,14 @@ public class OAuth2AuthenticationConfiguration {
         return manager;
     }
 
-	/**
-	 * auth2表单登录参数配置器
-	 *
-	 * @param authenticationProperties 身份验证属性
-	 * @return {@link OAuth2FormLoginUrlConfigurer }
-	 * @since 2023-07-10 17:14:21
-	 */
-	@Bean
+    /**
+     * auth2表单登录参数配置器
+     *
+     * @param authenticationProperties 身份验证属性
+     * @return {@link OAuth2FormLoginUrlConfigurer }
+     * @since 2023-07-10 17:14:21
+     */
+    @Bean
     public OAuth2FormLoginUrlConfigurer auth2FormLoginParameterConfigurer(
             OAuth2AuthenticationProperties authenticationProperties) {
         OAuth2FormLoginUrlConfigurer configurer = new OAuth2FormLoginUrlConfigurer(authenticationProperties);
