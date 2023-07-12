@@ -1278,12 +1278,12 @@ springdoc:
   #    packages-to-scan: com.xiaominfo.knife4j.demo.web
 
 knife4j:
-  production: true
+  production: false
   enable: true
-  basic:
-    enable: true
-    username: admin
-    password: 123456
+  #basic:
+  #  enable: true
+  #  username: admin
+  #  password: 123456
   cors: false
   documents:
     - group: 1.2.x
