@@ -19,17 +19,20 @@ package com.taotao.cloud.auth.biz.uaa.configuration;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
+import com.taotao.cloud.auth.biz.authentication.filter.ExtensionAndOauth2LoginRefreshTokenFilter;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.form.captcha.OAuth2FormCaptchaLoginHttpConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.form.qrcode.OAuth2FormQrcodeLoginHttpConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.form.sms.Oauth2FormSmsLoginHttpConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
-import com.taotao.cloud.auth.biz.authentication.login.social.SocialProviderConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.social.SocialHttpConfigurer;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGeneratorImpl;
+import com.taotao.cloud.auth.biz.authentication.token.OAuth2AccessTokenStore;
 import com.taotao.cloud.auth.biz.management.processor.ClientDetailsService;
 import com.taotao.cloud.auth.biz.management.processor.Oauth2ClientDetailsService;
 import com.taotao.cloud.auth.biz.management.processor.SecurityUserDetailsService;
@@ -60,6 +63,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
@@ -76,197 +80,207 @@ import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 @Configuration(proxyBeanMethods = false)
 public class DefaultSecurityConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
+	private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
 
-    /// **
-    // * 跨域过滤器配置
-    // */
-    // @Bean
-    // public CorsFilter corsFilter() {
-    //	// 初始化cors配置对象
-    //	CorsConfiguration configuration = new CorsConfiguration();
-    //	// 设置允许跨域的域名,如果允许携带cookie的话,路径就不能写*号, *表示所有的域名都可以跨域访问
-    //	configuration.addAllowedOrigin("http://127.0.0.1:5173");
-    //	// 设置跨域访问可以携带cookie
-    //	configuration.setAllowCredentials(true);
-    //	// 允许所有的请求方法 ==> GET POST PUT Delete
-    //	configuration.addAllowedMethod("*");
-    //	// 允许携带任何头信息
-    //	configuration.addAllowedHeader("*");
-    //	// 初始化cors配置源对象
-    //	UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
-    //	// 给配置源对象设置过滤的参数
-    //	// 参数一: 过滤的路径 == > 所有的路径都要求校验是否跨域
-    //	// 参数二: 配置类
-    //	configurationSource.registerCorsConfiguration("/**", configuration);
-    //	// 返回配置好的过滤器
-    //	return new CorsFilter(configurationSource);
-    // }
+	/// **
+	// * 跨域过滤器配置
+	// */
+	// @Bean
+	// public CorsFilter corsFilter() {
+	//	// 初始化cors配置对象
+	//	CorsConfiguration configuration = new CorsConfiguration();
+	//	// 设置允许跨域的域名,如果允许携带cookie的话,路径就不能写*号, *表示所有的域名都可以跨域访问
+	//	configuration.addAllowedOrigin("http://127.0.0.1:5173");
+	//	// 设置跨域访问可以携带cookie
+	//	configuration.setAllowCredentials(true);
+	//	// 允许所有的请求方法 ==> GET POST PUT Delete
+	//	configuration.addAllowedMethod("*");
+	//	// 允许携带任何头信息
+	//	configuration.addAllowedHeader("*");
+	//	// 初始化cors配置源对象
+	//	UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
+	//	// 给配置源对象设置过滤的参数
+	//	// 参数一: 过滤的路径 == > 所有的路径都要求校验是否跨域
+	//	// 参数二: 配置类
+	//	configurationSource.registerCorsConfiguration("/**", configuration);
+	//	// 返回配置好的过滤器
+	//	return new CorsFilter(configurationSource);
+	// }
 
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChain(
-            HttpSecurity httpSecurity,
-            UserDetailsService userDetailsService,
-            OAuth2AuthenticationProperties authenticationProperties,
-            CaptchaRendererFactory captchaRendererFactory,
-            SecurityMatcherConfigurer securityMatcherConfigurer,
-            SecurityAuthorizationManager securityAuthorizationManager,
-            SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-            SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository)
-            throws Exception {
+	@Bean
+	SecurityFilterChain defaultSecurityFilterChain(
+		HttpSecurity httpSecurity,
+		UserDetailsService userDetailsService,
+		OAuth2AuthenticationProperties authenticationProperties,
+		CaptchaRendererFactory captchaRendererFactory,
+		SecurityMatcherConfigurer securityMatcherConfigurer,
+		SecurityAuthorizationManager securityAuthorizationManager,
+		SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+		SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository,
+		OAuth2AccessTokenStore oAuth2AccessTokenStore)
+		throws Exception {
 
-        log.info("Core [Default Security Filter Chain] Auto Configure.");
+		log.info("Core [Default Security Filter Chain] Auto Configure.");
 
-        // 添加跨域过滤器
-        // httpSecurity.addFilter(corsFilter());
+		// 添加跨域过滤器
+		// httpSecurity.addFilter(corsFilter());
 
-        // 使用redis存储、读取登录的认证信息
-        // httpSecurity.securityContext(context -> context.securityContextRepository(redisSecurityContextRepository));
+		// 使用redis存储、读取登录的认证信息
+		// httpSecurity.securityContext(context -> context.securityContextRepository(redisSecurityContextRepository));
 
-        // 禁用CSRF 开启跨域
-        httpSecurity
-                .anonymous(AbstractHttpConfigurer::disable)
-                .logout(AbstractHttpConfigurer::disable)
-                .sessionManagement(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable);
+		// 禁用CSRF 开启跨域
+		httpSecurity
+			.anonymous(AbstractHttpConfigurer::disable)
+			.logout(AbstractHttpConfigurer::disable)
+			.sessionManagement(Customizer.withDefaults())
+			.csrf(AbstractHttpConfigurer::disable)
+			.cors(AbstractHttpConfigurer::disable);
 
-        httpSecurity
-                .authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
-                    authorizeHttpRequestsCustomizer
-                            .requestMatchers(securityMatcherConfigurer.getPermitAllArray())
-                            .permitAll()
-                            .requestMatchers(securityMatcherConfigurer.getStaticResourceArray())
-                            .permitAll()
-                            .requestMatchers(EndpointRequest.toAnyEndpoint())
-                            .permitAll()
-                            .anyRequest()
-                            .access(securityAuthorizationManager);
-                })
-                .exceptionHandling(exceptionHandlingCustomizer -> {
-                    exceptionHandlingCustomizer
-                            .authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
-                            .accessDeniedHandler(new SecurityAccessDeniedHandler());
-                })
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
-                .logout(logoutCustomizer -> {
-                    logoutCustomizer
-                            .addLogoutHandler((request, response, authentication) -> {})
-                            .logoutSuccessHandler((request, response, authentication) -> {})
-                            .clearAuthentication(true);
-                })
-                // **************************************自定义登录配置***********************************************
-                .apply(new ExtensionLoginFilterSecurityConfigurer<>())
-                // 用户+密码登录
-                .accountLogin(accountLoginConfigurerCustomizer -> {})
+		httpSecurity
+			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
+				authorizeHttpRequestsCustomizer
+					.requestMatchers(securityMatcherConfigurer.getPermitAllArray())
+					.permitAll()
+					.requestMatchers(securityMatcherConfigurer.getStaticResourceArray())
+					.permitAll()
+					.requestMatchers(EndpointRequest.toAnyEndpoint())
+					.permitAll()
+					.anyRequest()
+					.access(securityAuthorizationManager);
+			})
+			.exceptionHandling(exceptionHandlingCustomizer -> {
+				exceptionHandlingCustomizer
+					.authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
+					.accessDeniedHandler(new SecurityAccessDeniedHandler());
+			})
+			.oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+			.logout(logoutCustomizer -> {
+				logoutCustomizer
+					.addLogoutHandler((request, response, authentication) -> {
+					})
+					.logoutSuccessHandler((request, response, authentication) -> {
+					})
+					.clearAuthentication(true);
+			})
+			// **************************************自定义登录配置***********************************************
+			.apply(new ExtensionLoginFilterSecurityConfigurer<>())
+			// 用户+密码登录
+			.accountLogin(accountLoginConfigurerCustomizer -> {
+			})
+			// 用户+密码+验证码登录
+			.captchaLogin(captchaLoginConfigurerCustomizer -> {
+			})
+			// 人脸识别登录
+			.faceLogin(faceLoginConfigurerCustomizer -> {
+			})
+			// 指纹登录
+			.fingerprintLogin(fingerprintLoginConfigurer -> {
+				fingerprintLoginConfigurer.fingerprintUserDetailsService(new FingerprintUserDetailsService() {
+					@Override
+					public UserDetails loadUserByFingerprint(String username) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 手势登录
+			.gesturesLogin(fingerprintLoginConfigurer -> {
+				fingerprintLoginConfigurer.gesturesUserDetailsService(new GesturesUserDetailsService() {
+					@Override
+					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 本机号码一键登录
+			.oneClickLogin(oneClickLoginConfigurer -> {
+			})
+			// 手机扫码登录
+			.qrcodeLogin(qrcodeLoginConfigurer -> {
+			})
+			// 短信登录
+			.smsLogin(smsLoginConfigurerCustomizer -> {
+			})
+			// email登录
+			.emailLogin(emailLoginConfigurerCustomizer -> {
+			})
+			// 微信公众号登录
+			.wechatMpLogin(mpLoginConfigurer -> {
+				mpLoginConfigurer.mpUserDetailsService(new WechatMpUserDetailsService() {
+					@Override
+					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
+						return null;
+					}
+				});
+			})
+			// 小程序登录 同时支持多个小程序
+			.wechatMiniAppLogin(miniAppLoginConfigurer -> {
+			})
+			.httpSecurity()
+			// **************************************oauth2 login登录配置***********************************************
+			.apply(new SocialHttpConfigurer(socialDelegateClientRegistrationRepository))
+			// 微信网页授权
+			.wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
+			// 企业微信扫码登录
+			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
+			// 微信扫码登录
+			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
+			// **************************************oauth2表单登录配置***********************************************
+			.httpSecurity()
+			.apply(new OAuth2FormCaptchaLoginHttpConfigurer<>(
+				userDetailsService,
+				authenticationProperties,
+				captchaRendererFactory))
+			.httpSecurity()
+			.apply(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties))
+			.httpSecurity()
+			.apply(new OAuth2FormQrcodeLoginHttpConfigurer<>(authenticationProperties));
 
-                // 验证码登录
-                .captchaLogin(captchaLoginConfigurerCustomizer -> {})
+		return httpSecurity
+			.addFilterAfter(new ExtensionAndOauth2LoginRefreshTokenFilter(oAuth2AccessTokenStore), LogoutFilter.class)
+			.build();
+	}
 
-                // 面部识别登录
-                .faceLogin(faceLoginConfigurerCustomizer -> {})
+	@Bean
+	public JwtTokenGenerator jwtTokenGenerator(JWKSource<SecurityContext> jwkSource) {
+		return new JwtTokenGeneratorImpl(jwkSource);
+	}
 
-                // 指纹登录
-                .fingerprintLogin(fingerprintLoginConfigurer -> {
-                    fingerprintLoginConfigurer.fingerprintUserDetailsService(new FingerprintUserDetailsService() {
-                        @Override
-                        public UserDetails loadUserByFingerprint(String username) throws UsernameNotFoundException {
-                            return null;
-                        }
-                    });
-                })
-                // 手势登录
-                .gesturesLogin(fingerprintLoginConfigurer -> {
-                    fingerprintLoginConfigurer.gesturesUserDetailsService(new GesturesUserDetailsService() {
-                        @Override
-                        public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-                            return null;
-                        }
-                    });
-                })
-                // 本机号码一键登录
-                .oneClickLogin(oneClickLoginConfigurer -> {})
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
 
-                // 手机扫码登录
-                .qrcodeLogin(qrcodeLoginConfigurer -> {})
+	@Bean
+	@ConditionalOnMissingBean
+	public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
+		log.info("Bean [Authentication Event Publisher] Auto Configure.");
+		return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
+	}
 
-                // 短信登录
-                .smsLogin(smsLoginConfigurerCustomizer -> {})
+	@Bean
+	@ConditionalOnMissingBean
+	public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+		SecurityUserDetailsService securityUserDetailsService =
+			new SecurityUserDetailsService(strategyUserDetailsService);
+		log.info("Bean [Herodotus User Details Service] Auto Configure.");
+		return securityUserDetailsService;
+	}
 
-                // email登录
-                .emailLogin(emailLoginConfigurerCustomizer -> {})
+	@Bean
+	@ConditionalOnMissingBean
+	public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
+		Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(applicationService);
+		log.info("Bean [Herodotus Client Details Service] Auto Configure.");
+		return oauth2ClientDetailsService;
+	}
 
-                // 微信公众号登录
-                .wechatMpLogin(mpLoginConfigurer -> {
-                    mpLoginConfigurer.mpUserDetailsService(new WechatMpUserDetailsService() {
-                        @Override
-                        public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-                            return null;
-                        }
-                    });
-                })
-                // 小程序登录 同时支持多个小程序
-                .wechatMiniAppLogin(miniAppLoginConfigurer -> {})
-                .httpSecurity()
-                // **************************************oauth2登录配置***********************************************
-                .apply(new SocialProviderConfigurer(socialDelegateClientRegistrationRepository))
-                // 微信网页授权
-                .wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
-                // 企业微信扫码登录
-                .workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
-                // 微信扫码登录
-                .wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
-                .httpSecurity()
-                // **************************************oauth2表单登录配置***********************************************
-                .apply(new OAuth2FormCaptchaLoginHttpConfigurer<>(
-                        userDetailsService, authenticationProperties, captchaRendererFactory))
-                .httpSecurity()
-                .apply(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties));
+	@Bean
+	public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
+		return new SpringSessionBackedSessionRegistry<>(sessionRepository);
+	}
 
-        return httpSecurity.build();
-    }
-
-    @Bean
-    public JwtTokenGenerator jwtTokenGenerator(JWKSource<SecurityContext> jwkSource) {
-        return new JwtTokenGeneratorImpl(jwkSource);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
-        log.info("Bean [Authentication Event Publisher] Auto Configure.");
-        return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
-        SecurityUserDetailsService securityUserDetailsService =
-                new SecurityUserDetailsService(strategyUserDetailsService);
-        log.info("Bean [Herodotus User Details Service] Auto Configure.");
-        return securityUserDetailsService;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
-        Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(applicationService);
-        log.info("Bean [Herodotus Client Details Service] Auto Configure.");
-        return oauth2ClientDetailsService;
-    }
-
-    @Bean
-    public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
-        return new SpringSessionBackedSessionRegistry<>(sessionRepository);
-    }
-
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
-    }
+	@Bean
+	public HttpSessionEventPublisher httpSessionEventPublisher() {
+		return new HttpSessionEventPublisher();
+	}
 }

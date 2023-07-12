@@ -71,4 +71,8 @@ public class Oauth2FormSmsLoginHttpConfigurer<H extends HttpSecurityBuilder<H>>
     private OAuth2AuthenticationProperties.FormLogin getFormLogin() {
         return authenticationProperties.getFormLogin();
     }
+
+	public H httpSecurity() {
+		return getBuilder();
+	}
 }
