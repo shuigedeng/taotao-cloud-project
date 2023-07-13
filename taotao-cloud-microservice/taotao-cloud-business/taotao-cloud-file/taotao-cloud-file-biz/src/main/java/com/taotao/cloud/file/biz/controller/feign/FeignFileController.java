@@ -27,6 +27,7 @@ import com.taotao.cloud.openfeign.annotation.FeignApi;
 import com.taotao.cloud.web.base.controller.BaseFeignController;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 @FeignApi
 @Validated
 @RestController
+@Tag(name = "FeignFileController", description = "FeignFileController")
 public class FeignFileController implements IFeignFileApi {
 
 
