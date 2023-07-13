@@ -24,23 +24,25 @@ import jakarta.validation.constraints.NotBlank;
  * EmailDTO
  *
  * @author shuigedeng
- * @version 2022.05
- * @since 2022-05-26 09:48
+ * @version 2023.07
+ * @see Record
+ * @since 2023-07-12 17:59:02
  */
 @RecordBuilder
 public record EmailDTO(
 
-        /** 收件人 */
-        @NotBlank(message = "收件人不能为空") String fromUser,
+	/* 收件人 */
+	@NotBlank(message = "收件人不能为空") String fromUser,
 
-        /** 邮件服务器SMTP地址 */
-        String host,
+	/* 邮件服务器SMTP地址 */
+	String host,
 
-        /** 密码 */
-        String pass,
+	/* 密码 */
+	String pass,
 
-        /** 端口 */
-        @Max(value = 200, message = "端口不能大于200") Integer port,
+	/* 端口 */
+	@Max(value = 200, message = "端口不能大于200") Integer port,
 
-        /** 发件者用户名 */
-        String user) {}
+	/* 发件者用户名 */
+	String user) {
+}

@@ -33,6 +33,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
+/**
+ * 电子邮件扩展登录过滤器配置程序
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @see AbstractExtensionLoginFilterConfigurer
+ * @since 2023-07-13 12:03:18
+ */
 public class EmailExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
         extends AbstractExtensionLoginFilterConfigurer<
                 H,
@@ -46,7 +54,7 @@ public class EmailExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H
     private JwtTokenGenerator jwtTokenGenerator;
 
     public EmailExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(securityConfigurer, new SmsAuthenticationFilter(), "/login/phone");
+        super(securityConfigurer, new SmsAuthenticationFilter(), "/login/email");
     }
 
     public EmailExtensionLoginFilterConfigurer<H> emailUserDetailsService(

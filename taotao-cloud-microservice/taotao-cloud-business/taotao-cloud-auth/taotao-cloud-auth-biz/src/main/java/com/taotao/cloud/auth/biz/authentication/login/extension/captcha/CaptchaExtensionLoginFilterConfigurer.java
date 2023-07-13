@@ -46,7 +46,7 @@ public class CaptchaExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder
     private JwtTokenGenerator jwtTokenGenerator;
 
     public CaptchaExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(securityConfigurer, new CaptchaAuthenticationFilter(), "/login/account/verification");
+        super(securityConfigurer, new CaptchaAuthenticationFilter(), "/login/captcha");
     }
 
     public CaptchaExtensionLoginFilterConfigurer<H> captchaUserDetailsService(

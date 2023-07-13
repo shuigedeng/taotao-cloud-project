@@ -37,7 +37,7 @@ import org.springframework.util.Assert;
 public class WechatMiniAppAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
-            new AntPathRequestMatcher("/login/miniapp", "POST");
+            new AntPathRequestMatcher("/login/wechat/miniapp", "POST");
     private final ObjectMapper om = new ObjectMapper();
     private Converter<HttpServletRequest, WechatMiniAppAuthenticationToken> miniAppAuthenticationTokenConverter;
     private boolean postOnly = true;

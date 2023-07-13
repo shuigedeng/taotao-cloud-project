@@ -17,6 +17,8 @@
 package com.taotao.cloud.goods.biz.service.dubbo;
 
 import com.taotao.cloud.goods.api.dubbo.IDubboGoodsRpc;
+import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
+import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.repository.cls.GoodsRepository;
@@ -36,8 +38,12 @@ import org.springframework.stereotype.Service;
 public class DubboUserServiceImpl
         extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
         implements IDubboGoodsRpc {
+	@Override
+	public DubboGoodsQueryResponse queryGoodsByParams(DubboGoodsQueryRequest request) {
+		return null;
+	}
 
-    // private final static QUser USER = QUser.user;
+	// private final static QUser USER = QUser.user;
     //
     // private final static String DEFAULT_PASSWORD = "123456";
     // private final static String DEFAULT_USERNAME = "admin";

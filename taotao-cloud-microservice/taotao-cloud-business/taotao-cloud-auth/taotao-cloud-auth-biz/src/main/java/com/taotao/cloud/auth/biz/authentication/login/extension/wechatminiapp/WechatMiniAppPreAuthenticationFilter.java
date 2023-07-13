@@ -41,14 +41,21 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/** 小程序预授权 */
+/**
+ * 小程序预授权
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @see OncePerRequestFilter
+ * @since 2023-07-13 12:05:00
+ */
 public class WechatMiniAppPreAuthenticationFilter extends OncePerRequestFilter {
 
     private static final String ENDPOINT = "https://api.weixin.qq.com/sns/jscode2session";
     private static final String MINI_CLIENT_KEY = "clientId";
     private static final String JS_CODE_KEY = "jsCode";
     private final RequestMatcher requiresAuthenticationRequestMatcher =
-            new AntPathRequestMatcher("/login/miniapp/preauth", "GET");
+            new AntPathRequestMatcher("/login/wechat/miniapp/preauth", "GET");
     private final ObjectMapper om = new ObjectMapper();
     private final WechatMiniAppClientService wechatMiniAppClientService;
     private final WechatMiniAppSessionKeyCacheService wechatMiniAppSessionKeyCacheService;

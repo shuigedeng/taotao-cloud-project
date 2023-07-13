@@ -16,6 +16,9 @@
 
 package com.taotao.cloud.goods.api.dubbo;
 
+import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
+import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
+
 /**
  * 后台部门表服务接口
  *
@@ -23,4 +26,7 @@ package com.taotao.cloud.goods.api.dubbo;
  * @version 2022.03
  * @since 2022-03-25 14:22:32
  */
-public interface IDubboGoodsRpc {}
+public interface IDubboGoodsRpc {
+
+	DubboGoodsQueryResponse queryGoodsByParams(DubboGoodsQueryRequest request);
+}
