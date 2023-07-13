@@ -78,7 +78,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param parentId 分类父ID
 	 * @return 所有的分类，父子关系
 	 */
-	List<CategoryVO> listAllChildren(String parentId);
+	List<CategoryVO> listAllChildren(Long parentId);
 
 	/**
 	 * 查询所有的分类，父子关系
