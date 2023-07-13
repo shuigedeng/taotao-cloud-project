@@ -28,13 +28,21 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+/**
+ * 微信mp认证过滤器
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @see AbstractAuthenticationProcessingFilter
+ * @since 2023-07-13 13:05:09
+ */
 public class WechatMpAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 
     private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER =
-            new AntPathRequestMatcher("/login/mp", "POST");
+            new AntPathRequestMatcher("/login/wechat/mp", "POST");
 
     private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;

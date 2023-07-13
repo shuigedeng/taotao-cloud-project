@@ -122,7 +122,7 @@ public class DefaultSecurityConfiguration {
 
 		log.info("Core [Default Security Filter Chain] Auto Configure.");
 
-		// 添加跨域过滤器
+		// 跨域过滤器一定要添加至security配置中，不然只注入ioc中对于security端点不生效！ 添加跨域过滤器
 		// httpSecurity.addFilter(corsFilter());
 
 		// 使用redis存储、读取登录的认证信息
@@ -251,14 +251,12 @@ public class DefaultSecurityConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
 		log.info("Bean [Authentication Event Publisher] Auto Configure.");
 		return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
 		SecurityUserDetailsService securityUserDetailsService =
 			new SecurityUserDetailsService(strategyUserDetailsService);
@@ -267,7 +265,6 @@ public class DefaultSecurityConfiguration {
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
 	public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
 		Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(applicationService);
 		log.info("Bean [Herodotus Client Details Service] Auto Configure.");

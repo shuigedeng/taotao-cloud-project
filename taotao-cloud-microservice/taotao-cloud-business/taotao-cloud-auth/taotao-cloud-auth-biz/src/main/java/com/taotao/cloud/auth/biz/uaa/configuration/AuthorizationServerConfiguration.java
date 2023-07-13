@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.uaa.configuration;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationConverter;
@@ -41,6 +42,7 @@ import com.taotao.cloud.auth.biz.management.response.OAuth2AccessTokenResponseHa
 import com.taotao.cloud.auth.biz.management.response.OAuth2AuthenticationFailureResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OAuth2DeviceVerificationResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OidcClientRegistrationResponseHandler;
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.io.ResourceUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
@@ -53,6 +55,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
+import org.dromara.hutool.core.util.ObjUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -103,6 +106,7 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
@@ -147,7 +151,7 @@ public class AuthorizationServerConfiguration {
 
 		log.info("Core [Authorization Server Security Filter Chain] Auto Configure.");
 
-		// 使用redis存储、读取登录的认证信息
+		// 实现授权码模式使用前后端分离的登录页面   使用redis存储、读取登录的认证信息
 		// httpSecurity.securityContext(securityContextCustomizer -> {
 		//	securityContextCustomizer.securityContextRepository(redisSecurityContextRepository)
 		// });
@@ -308,6 +312,7 @@ public class AuthorizationServerConfiguration {
 		httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
 		httpSecurity.exceptionHandling(exceptionHandlingCustomizer -> {
+			// 这里使用自定义的未登录处理，并设置登录地址为前端的登录地址
 			exceptionHandlingCustomizer.defaultAuthenticationEntryPointFor(
 				new SecurityLoginUrlAuthenticationEntryPoint("/login"), createRequestMatcher());
 		});
@@ -325,38 +330,56 @@ public class AuthorizationServerConfiguration {
 		return requestMatcher;
 	}
 
+	/**
+	 * jwk set缓存前缀
+	 */
+	public static final String AUTHORIZATION_JWS_PREFIX_KEY = "authorization_jws";
+
 	@Bean
-	public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties)
-		throws NoSuchAlgorithmException {
+	public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties,
+												RedisRepository redisRepository)
+		throws NoSuchAlgorithmException, ParseException {
 		OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
 		KeyPair keyPair = null;
 
-		if (jwk.getCertificate() == Certificate.CUSTOM) {
-			try {
-				Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
-				if (ArrayUtils.isNotEmpty(resource)) {
-					KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-						resource[0], jwk.getJksStorePassword().toCharArray());
-					keyPair = keyStoreKeyFactory.getKeyPair(
-						jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
+		// 持久化JWKSource，解决重启后无法解析AccessToken问题
+		Object jwkSetCache = redisRepository.get(AUTHORIZATION_JWS_PREFIX_KEY);
+		if (ObjUtil.isEmpty(jwkSetCache)) {
+			if (jwk.getCertificate() == Certificate.CUSTOM) {
+				try {
+					Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
+					if (ArrayUtils.isNotEmpty(resource)) {
+						KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+							resource[0], jwk.getJksStorePassword().toCharArray());
+						keyPair = keyStoreKeyFactory.getKeyPair(
+							jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
+					}
+				} catch (IOException e) {
+					log.error("Read custom certificate under resource folder error!", e);
 				}
-			} catch (IOException e) {
-				log.error("Read custom certificate under resource folder error!", e);
+			} else {
+				KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+				keyPairGenerator.initialize(2048);
+				keyPair = keyPairGenerator.generateKeyPair();
 			}
-		} else {
-			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-			keyPairGenerator.initialize(2048);
-			keyPair = keyPairGenerator.generateKeyPair();
-		}
 
-		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-		RSAKey rsaKey = new RSAKey.Builder(publicKey)
-			.privateKey(privateKey)
-			.keyID(UUID.randomUUID().toString())
-			.build();
-		JWKSet jwkSet = new JWKSet(rsaKey);
-		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+			RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+			RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+			RSAKey rsaKey = new RSAKey.Builder(publicKey)
+				.privateKey(privateKey)
+				.keyID(UUID.randomUUID().toString())
+				.build();
+			JWKSet jwkSet = new JWKSet(rsaKey);
+			// 转为json字符串
+			String jwkSetString = jwkSet.toString(Boolean.FALSE);
+			// 存入redis
+			redisRepository.set(AUTHORIZATION_JWS_PREFIX_KEY, jwkSetString);
+			return new ImmutableJWKSet<>(jwkSet);
+			//return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
+		}
+		// 解析存储的jws
+		JWKSet jwkSet = JWKSet.parse((String) jwkSetCache);
+		return new ImmutableJWKSet<>(jwkSet);
 	}
 
 	/**
