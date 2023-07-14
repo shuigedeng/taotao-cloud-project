@@ -1466,35 +1466,40 @@ knife4j:
     enableGroup: true
 
 grpc:
-  server:
-    port: 7052 #服务端端口
-    #in-process-name: test #自己的应用程序中调用自己的 grpc服务 使用 grpc 的 InProcessServer 来节省网络间开销
-    #security: #为了允许 grpc-server 使用 TLS 您必须使用以下选项来配置它：
-    #  enabled: true
-    #  certificateChain: file:certificates/server.crt
-    #  privateKey: file:certificates/server.key
-    #  privateKeyPassword: MyStrongPassword
-  client:
-    #inProcess:
-    #  address: in-process:test #这允许客户端在同一应用程序内使用以下配置连接到服务器：
-    grpc-server:
-      address: 'static://127.0.0.1:9898'
-    # 服务名（不同服务名可对应不同配置）
-    #grpc-sb-server:
-    #  # 服务端地址
-    #  address: 'static://127.0.0.1:9898'
-    #  # 是否开启保持连接（长连接）
-    #  enableKeepAlive: true
-    #  # 保持连接时长（默认20s）
-    #  keepAliveTimeout: 20s
-    #  # 没有RPC调用时是否保持连接（默认false，可禁用避免额外消耗CPU）
-    #  keepAliveWithoutCalls: false
-    #  # 客户端负载均衡策略(round_robin（默认）, pick_first)
-    #  defaultLoadBalancingPolicy: round_robin
-    #  # 通信类型
-    #  # plaintext | plaintext_upgrade | tls
-    #  # 明文通信且http/2 | 明文通信且升级http/1.1为http/2 | 使用TLS（ALPN/NPN）通信
-    #  negotiationType: plaintext
+  port: 6565
+  enableReflection: true
+  shutdownGrace: 30
+
+#grpc:
+#  server:
+#    port: 7052 #服务端端口
+#    #in-process-name: test #自己的应用程序中调用自己的 grpc服务 使用 grpc 的 InProcessServer 来节省网络间开销
+#    #security: #为了允许 grpc-server 使用 TLS 您必须使用以下选项来配置它：
+#    #  enabled: true
+#    #  certificateChain: file:certificates/server.crt
+#    #  privateKey: file:certificates/server.key
+#    #  privateKeyPassword: MyStrongPassword
+#  client:
+#    #inProcess:
+#    #  address: in-process:test #这允许客户端在同一应用程序内使用以下配置连接到服务器：
+#    grpc-server:
+#      address: 'static://127.0.0.1:9898'
+#    # 服务名（不同服务名可对应不同配置）
+#    #grpc-sb-server:
+#    #  # 服务端地址
+#    #  address: 'static://127.0.0.1:9898'
+#    #  # 是否开启保持连接（长连接）
+#    #  enableKeepAlive: true
+#    #  # 保持连接时长（默认20s）
+#    #  keepAliveTimeout: 20s
+#    #  # 没有RPC调用时是否保持连接（默认false，可禁用避免额外消耗CPU）
+#    #  keepAliveWithoutCalls: false
+#    #  # 客户端负载均衡策略(round_robin（默认）, pick_first)
+#    #  defaultLoadBalancingPolicy: round_robin
+#    #  # 通信类型
+#    #  # plaintext | plaintext_upgrade | tls
+#    #  # 明文通信且http/2 | 明文通信且升级http/1.1为http/2 | 使用TLS（ALPN/NPN）通信
+#    #  negotiationType: plaintext
 
 herodotus:
   endpoint:

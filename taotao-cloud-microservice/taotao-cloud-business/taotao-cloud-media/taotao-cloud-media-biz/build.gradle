@@ -14,18 +14,28 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
-
+    //开源OCR识别框架Tess4j
+    //https://tess4j.sourceforge.net/
+    //https://search.maven.org/artifact/net.sourceforge.tess4j/tess4j
     implementation "net.sourceforge.tess4j:tess4j:5.7.0"
     implementation "com.google.zxing:core:3.5.1"
     implementation "com.google.zxing:javase:3.5.1"
 
+    //官网文档地址：https://docs.opencv.org/4.6.0/df/d65/tutorial_table_of_content_introduction.html
+    //教程参考：https://www.w3cschool.cn/opencv/
+    //教程参考：https://www.yiibai.com/opencv/opencv_adding_text.html
+    //下载地址：https://opencv.org/releases/
     //implementation fileTree(dir: "src/main/resource/lib", includes: ["*.jar"])
+    //-Djava.library.path=-D:\WorkSpace\projectName\demo\lib\opencv_java460.dll
     implementation files("src/main/resources/lib/opencv-2413.jar")
+
     implementation files("src/main/resources/sdk/jna.jar")
     implementation files("src/main/resources/sdk/examples.jar")
 
     implementation "io.netty:netty-all"
 
+    //https://search.maven.org/artifact/org.bytedeco/javacv
+    //http://bytedeco.org
     implementation "org.bytedeco:javacv:1.5.9"
     implementation "org.bytedeco:ffmpeg:6.0-1.5.9:linux-x86_64"
 
