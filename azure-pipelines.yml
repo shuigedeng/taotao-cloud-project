@@ -28,6 +28,8 @@
 # of the Azure Pipelines web ui.
 #
 
+# azure pipelines 配置
+
 trigger:
   branches:
     include:

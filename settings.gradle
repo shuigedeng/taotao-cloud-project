@@ -29,6 +29,18 @@ pluginManagement {
     }
 }
 
+plugins {
+    //https://plugins.gradle.org/plugin/com.gradle.enterprise
+    id "com.gradle.enterprise" version "3.13.4"
+}
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+    }
+}
+
 rootProject.name = 'taotao-cloud-project'
 
 def oneLayerProjects = ['scala', 'netty', 'python', 'demo', 'node', 'go']
@@ -67,5 +79,11 @@ for (project in threeLayerProjects) {
                 }
             }
         }
+    }
+}
+
+gradle.settingsEvaluated {
+    if (JavaVersion.current() < JavaVersion.VERSION_17) {
+        throw new GradleException("This build requires JDK 17. It's currently ${JavaVersion.current()}. You can ignore this check by passing '-Dorg.gradle.ignoreBuildJavaVersionCheck'.")
     }
 }

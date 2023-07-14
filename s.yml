@@ -1,3 +1,5 @@
+# aliyun serverless 配置
+
 edition: 2023.05
 name: taotao-cloud-mall
 access: default

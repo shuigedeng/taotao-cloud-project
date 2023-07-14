@@ -26,7 +26,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 192.168.10.210:8848
+        server-addr: 192.168.10.220:8848
         metadata:
           version: ${taotaoCloudVersion}
           user.name: "admin"
@@ -39,7 +39,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 192.168.10.210:8848
+        server-addr: 192.168.10.220:8848
         namespace: taotao-cloud-dev
         file-extension: yml
         cluster-name: CQ
@@ -54,7 +54,7 @@ spring:
         #流控 名称随意
         flow:
           nacos:
-            server-addr: 192.168.10.210:8848
+            server-addr: 192.168.10.220:8848
             dataId: ${spring.application.name}-flow-rules
             namespace: taotao-cloud-sentinel
             username: nacos
@@ -66,7 +66,7 @@ spring:
         #熔断降级 名称随意
         degrade:
           nacos:
-            server-addr: 192.168.10.210:8848
+            server-addr: 192.168.10.220:8848
             dataId: ${spring.application.name}-degrade-rules
             namespace: taotao-cloud-sentinel
             username: nacos
@@ -77,7 +77,7 @@ spring:
         #系统规则 名称随意
         system:
           nacos:
-            server-addr: 192.168.10.210:8848
+            server-addr: 192.168.10.220:8848
             dataId: ${spring.application.name}-system-rules
             namespace: taotao-cloud-sentinel
             username: nacos
@@ -88,7 +88,7 @@ spring:
         #授权规则 名称随意
         authority:
           nacos:
-            server-addr: 192.168.10.210:8848
+            server-addr: 192.168.10.220:8848
             dataId: ${spring.application.name}-authority-rules
             namespace: taotao-cloud-sentinel
             username: nacos
@@ -99,7 +99,7 @@ spring:
         #参数规则 名称随意
         param-flow:
           nacos:
-            server-addr: 192.168.10.210:8848
+            server-addr: 192.168.10.220:8848
             dataId: ${spring.application.name}-param-flow-rules
             namespace: taotao-cloud-sentinel
             username: nacos
@@ -108,7 +108,7 @@ spring:
             data-type: json
             rule-type: param-flow
       transport:
-        dashboard: 192.168.10.210:8858
+        dashboard: 192.168.10.220:8858
         port: 8712
       metric:
         file-single-size: 1024 * 1024 * 50

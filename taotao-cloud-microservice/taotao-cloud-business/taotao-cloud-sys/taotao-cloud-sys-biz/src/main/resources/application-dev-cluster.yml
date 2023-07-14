@@ -47,7 +47,7 @@ jetcache:
 easy-es:
   enable: false
   # es连接地址+端口 格式必须为ip:port,如果是集群则可用逗号隔开
-  address: 192.168.10.210:9200
+  address: 192.168.10.220:9200
   # 默认为http
   schema: http
   #如果无账号密码则可不配置此行
@@ -128,7 +128,7 @@ redisson:
   dataValidTime: 1800000
   single_server_config:
     #服务器地址,必填ip:port
-    address: "192.168.10.210:6379"
+    address: "192.168.10.220:6379"
     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_minimum_idle_size: 1
     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -171,12 +171,12 @@ redisson:
   #  #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
   #  #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
   #  nodeAddresses:
-  #    - "192.168.10.210:6381"
-  #    - "192.168.10.210:6382"
-  #    - "192.168.10.210:6383"
-  #    - "192.168.10.210:6384"
-  #    - "192.168.10.210:6385"
-  #    - "192.168.10.210:6386"
+  #    - "192.168.10.220:6381"
+  #    - "192.168.10.220:6382"
+  #    - "192.168.10.220:6383"
+  #    - "192.168.10.220:6384"
+  #    - "192.168.10.220:6385"
+  #    - "192.168.10.220:6386"
   #  #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
   #  database: 1
   #  #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
@@ -191,7 +191,7 @@ elasticjob:
   #tracing:
   #  type: RDB
   reg-center:
-    server-lists: 192.168.10.210:2181
+    server-lists: 192.168.10.220:2181
     namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
@@ -258,7 +258,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.210:7777/ws
+  tunnel-server: ws://192.168.10.220:7777/ws
 
 dubbo:
   enabled: true
@@ -281,7 +281,7 @@ dubbo:
     shutwait: 3000
     dump-directory: ${user.home}/logs/${spring.application.name}/dubbo/
   registry:
-    address: nacos://192.168.10.210:8848
+    address: nacos://192.168.10.220:8848
     group: DUBBO_REGISTRY_GROUP
     cluster: CQ
     parameters:
@@ -362,14 +362,14 @@ dubbo:
     export-async: true
   monitor:
     id: ${spring.application.name}
-    address: 192.168.10.210:18080
+    address: 192.168.10.220:18080
     username: admin
     password: 123456
     group: taotao-cloud-dev
     version: ${taotaoCloudVersion}
   metadata-report:
     id: ${spring.application.name}
-    address: nacos://192.168.10.210:8848
+    address: nacos://192.168.10.220:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -378,7 +378,7 @@ dubbo:
       cluster-name: CQ
   config-center:
     id: ${spring.application.name}
-    address: nacos://192.168.10.210:8848
+    address: nacos://192.168.10.220:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -399,7 +399,7 @@ seata:
   data-source-proxy-mode: AT
   service:
     grouplist:
-      CQ: 192.168.10.210:8091
+      CQ: 192.168.10.220:8091
     # TC 集群（必须与seata-server保持一致）
     vgroupMapping:
       taotao_cloud_tx_group: CQ
@@ -411,7 +411,7 @@ seata:
     type: nacos
     nacos:
       namespace: 9dc5fed7-fcb3-4b27-b06b-a573e96a8706
-      server-addr: 192.168.10.210:8848
+      server-addr: 192.168.10.220:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -420,7 +420,7 @@ seata:
     type: nacos
     nacos:
       application: taotao-cloud-seata-server
-      server-addr: 192.168.10.210:8848
+      server-addr: 192.168.10.220:8848
       group: SEATA_GROUP
       namespace: 9dc5fed7-fcb3-4b27-b06b-a573e96a8706
       username: nacos
@@ -482,7 +482,7 @@ seata:
     enable-client-batch-send-request: true
 
 rocketmq:
-  name-server: http://192.168.10.210:9876
+  name-server: http://192.168.10.220:9876
   producer:
     # 组名称
     group: ${spring.application.name}
@@ -638,7 +638,7 @@ spring:
           dataSource:
             DS:
               driver: com.mysql.cj.jdbc.Driver
-              URL: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+              URL: jdbc:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
               username: root
               password: 123456
               maxConnections: 5
@@ -711,7 +711,7 @@ spring:
         enabled: true
   zipkin:
     enabled: true
-    base-url: http://192.168.10.210:9411/
+    base-url: http://192.168.10.220:9411/
     discoveryClientEnabled: false
     sender:
       type: WEB
@@ -722,9 +722,9 @@ spring:
     encoder: proto3
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
+    #    url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true
     #    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:p6spy:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: 123456
@@ -754,7 +754,7 @@ spring:
       datasource:
         master:
           type: com.zaxxer.hikari.HikariDataSource
-          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
           password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -810,7 +810,7 @@ spring:
     #    temp:
     #      use_jdbc_metadata_defaults: false
   redis:
-    host: 192.168.10.210
+    host: 192.168.10.220
     port: 6379
     #sentinel:
     #  master:
@@ -819,7 +819,7 @@ spring:
     password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
     connect-timeout: 60000
     #cluster:
-    #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
+    #  nodes: 192.168.10.220:6381,192.168.10.220:6382,192.168.10.220:6383,192.168.10.220:6384,192.168.10.220:6385,192.168.10.220:6386
     #  max-redirects: 3
     client-type: lettuce
     lettuce:
@@ -849,7 +849,7 @@ spring:
           # 客户端名称
           clientName: "taotao-cloud-redis-client"
           # 节点地址
-          address: "redis://192.168.10.210:6379"
+          address: "redis://192.168.10.220:6379"
           # 发布和订阅连接的最小空闲连接数
           subscriptionConnectionMinimumIdleSize: 1
           # 发布和订阅连接池大小
@@ -873,7 +873,7 @@ spring:
         # 配置看门狗的默认超时时间为30s，这里改为 10s
         lockWatchdogTimeout: 10000
   elasticsearch:
-    uris: http://192.168.10.210:9200
+    uris: http://192.168.10.220:9200
     password:
     username:
   data:
@@ -882,7 +882,7 @@ spring:
         enabled: true
     mongodb:
       #database: yapi
-      host: 192.168.10.210
+      host: 192.168.10.220
       port: 27017
       #username:
       #password:
@@ -891,7 +891,7 @@ spring:
       #慢查询最短时间,默认为1000毫秒
       slowTime: 2000
   rabbitmq:
-    host: 192.168.10.210
+    host: 192.168.10.220
     port: 5672
     username: root
     password: 123456
@@ -899,7 +899,7 @@ spring:
     #virtual-host: /
   kafka:
     enabled: true
-    bootstrap-servers: 192.168.10.210:9092
+    bootstrap-servers: 192.168.10.220:9092
     producer:
       retries: 1
       batch-size: 16384
@@ -947,7 +947,7 @@ spring:
         type: ZooKeeper
         props:
           namespace: taotao-cloud-shardingsphere
-          server-lists: 192.168.10.210:2181
+          server-lists: 192.168.10.220:2181
           retryIntervalMilliseconds: 500
           maxRetries: 3
           timeToLiveSeconds: 60
@@ -956,7 +956,7 @@ spring:
     datasource:
       names: ds-master-0,ds-slave-0-1,ds-slave-0-2,ds-master-1,ds-slave-1-1,ds-slave-1-2
       ds-master-0:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:3316/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3316/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
         username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -977,7 +977,7 @@ spring:
           cachePrepStmts: true
           prepStmtCacheSize: 250
       ds-slave-0-1:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:3326/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3326/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
         username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -998,7 +998,7 @@ spring:
           cachePrepStmts: true
           prepStmtCacheSize: 250
       ds-slave-0-2:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:3336/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3336/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
         username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -1019,7 +1019,7 @@ spring:
           cachePrepStmts: true
           prepStmtCacheSize: 250
       ds-master-1:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:3376/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3376/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
         username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -1040,7 +1040,7 @@ spring:
           cachePrepStmts: true
           prepStmtCacheSize: 250
       ds-slave-1-1:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:3386/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3386/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
         username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -1061,7 +1061,7 @@ spring:
           cachePrepStmts: true
           prepStmtCacheSize: 250
       ds-slave-1-2:
-        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.210}:3396/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+        jdbc-url: jdbc:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.220}:3396/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
         driver-class-name: com.mysql.cj.jdbc.Driver
         type: com.zaxxer.hikari.HikariDataSource
         username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
@@ -1201,7 +1201,7 @@ spring:
           binder: kafka
       rocketmq:
         binder:
-          name-server: 192.168.10.210:9876
+          name-server: 192.168.10.220:9876
           vip-channel-enabled: false
           group: demo
         #RocketMQSpecificPropertiesProvider
@@ -1230,7 +1230,7 @@ spring:
               sync: true
       rabbit:
         binder:
-          admin-addresses: 192.168.10.210:5672
+          admin-addresses: 192.168.10.220:5672
         bindings:
           sms-output:
             producer:
@@ -1250,7 +1250,7 @@ spring:
               #republish-to-dlq: true
       kafka:
         binder:
-          brokers: 192.168.10.210:9092
+          brokers: 192.168.10.220:9092
           auto-create-topics: true
         bindings:
           order-output:
@@ -1264,7 +1264,7 @@ taotao:
   cloud:
     zookeeper:
       enabled: true
-      connectString: 192.168.10.210:2181
+      connectString: 192.168.10.220:2181
     dozer:
       enabled: true
     sensitive:
