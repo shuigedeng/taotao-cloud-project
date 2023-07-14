@@ -49,7 +49,7 @@ powerjob:
     port: 27777
     protocol: akka
     app-name: ${spring.application.name}
-    server-address: 192.168.10.210:7700
+    server-address: 192.168.10.220:7700
     store-strategy: disk
     max-appended-wf-context-length: 8192
     max-result-length: 8192
@@ -62,7 +62,7 @@ elasticjob:
     type: RDB
     #data-source:
     #  type: com.zaxxer.hikari.HikariDataSource
-    #  url: jdbc:mysql://192.168.10.210:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #  url: jdbc:mysql://192.168.10.220:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     #  driver-class-name: com.mysql.cj.jdbc.Driver
     #  username: root
     #  password: 123456
@@ -83,7 +83,7 @@ elasticjob:
     #      cachePrepStmts: true
     #      prepStmtCacheSize: 250
   reg-center:
-    server-lists: 192.168.10.210:2181
+    server-lists: 192.168.10.220:2181
     namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
@@ -279,7 +279,7 @@ dubbo:
     export-async: true
   monitor:
     id: ${spring.application.name}
-    address: 192.168.10.210:18080
+    address: 192.168.10.220:18080
     username: admin
     password: 123456
     group: taotao-cloud-dev
@@ -670,7 +670,7 @@ spring:
       #  master:
       #  nodes:
       #cluster:
-      #  nodes: 192.168.10.210:6381,192.168.10.210:6382,192.168.10.210:6383,192.168.10.210:6384,192.168.10.210:6385,192.168.10.210:6386
+      #  nodes: 192.168.10.220:6381,192.168.10.220:6382,192.168.10.220:6383,192.168.10.220:6384,192.168.10.220:6385,192.168.10.220:6386
       #  max-redirects: 3
       client-type: lettuce
       lettuce:
@@ -816,7 +816,7 @@ spring:
           #dataSource:
           #  DS:
           #    driver: com.mysql.cj.jdbc.Driver
-          #    URL: jdbc:mysql://192.168.10.210:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          #    URL: jdbc:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           #    username: root
           #    password: 123456
           #    maxConnections: 5
@@ -1144,7 +1144,7 @@ management:
 #        enabled: true
 #  zipkin:
 #    enabled: true
-#    base-url: http://192.168.10.210:9411/
+#    base-url: http://192.168.10.220:9411/
 #    discoveryClientEnabled: false
 #    sender:
 #      type: WEB

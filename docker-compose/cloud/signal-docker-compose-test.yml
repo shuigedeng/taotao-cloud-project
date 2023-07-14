@@ -38,7 +38,7 @@ services:
         ipv4_address: 172.11.0.10
 
   redis:
-    image: redis:6.0-alpine
+    image: redis:7.0.12
     container_name: redis
     environment:
       TZ: Asia/Shanghai
@@ -51,36 +51,69 @@ services:
         ipv4_address: 172.11.0.12
 
   zookeeper:
-    image: zookeeper:3.6.3
+    image: docker.io/bitnami/zookeeper:3.8
     container_name: zookeeper
-    environment:
-      TZ: Asia/Shanghai
     restart: always
     ports:
       - "2181:2181"
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.13
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
   kafka:
-    image: wurstmeister/kafka:2.13-2.8.1
+    image: docker.io/bitnami/kafka:3.5
     container_name: kafka
     ports:
       - "9092:9092"
+      - "9093:9093"
     environment:
-      - KAFKA_ADVERTISED_HOST_NAME=172.11.0.14
-      - KAFKA_ZOOKEEPER_CONNECT=172.11.0.13:2181
+      ### 通用配置
+      # 允许使用kraft，即Kafka替代Zookeeper
+      - KAFKA_ENABLE_KRAFT=yes
+      # kafka角色，做broker，也要做controller
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      # 指定供外部使用的控制类请求信息
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      # 定义kafka服务端socket监听端口
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      # 定义安全协议
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      # 使用Kafka时的集群id，集群内的Kafka都要用这个id做初始化，生成一个UUID即可
+      - KAFKA_KRAFT_CLUSTER_ID=LelM2dIFQkiUFvXCEcqRWA
+      # 集群地址
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@172.11.0.14:9093
+      # 允许使用PLAINTEXT监听器，默认false，不建议在生产环境使用
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      # 设置broker最大内存，和初始内存
+      #- KAFKA_HEAP_OPTS=-Xmx512M -Xms256M
+      # 不允许自动创建主题
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
+      ### broker配置
+      # 定义外网访问地址（宿主机ip地址和端口）
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.220:9092
+      # broker.id，必须唯一
       - KAFKA_BROKER_ID=1
-      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.220:9092
-      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
-      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-      - KAFKA_HEAP_OPTS="-Xmx512M -Xms16M"
-      - TZ=Asia/Shanghai
+      - KAFKA_CFG_NODE_ID=1
     restart: always
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.14
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    restart: always
+    ports:
+      - "9091:8080"
+    environment:
+      # 集群名称
+      - KAFKA_CLUSTERS_0_NAME=local
+      # 集群地址
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.10.220:9092
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.15
 
   sentinel-dashboard:
     image: dreamkaylee/sentinel-dashboard:1.8.6
@@ -202,6 +235,8 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.20
+
+
 
   #arthas:
   #  image: hengyunabc/arthas:latest
