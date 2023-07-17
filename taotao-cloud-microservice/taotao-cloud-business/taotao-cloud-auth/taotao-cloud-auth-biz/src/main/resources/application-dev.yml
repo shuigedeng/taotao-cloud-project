@@ -335,7 +335,7 @@ seata:
     type: nacos
     nacos:
       namespace: taotao-cloud-seata
-      application: taotao-cloud-seata-server
+      application: seata-server
       server-addr: 192.168.10.220:8848
       group: SEATA_GROUP
       username: nacos
