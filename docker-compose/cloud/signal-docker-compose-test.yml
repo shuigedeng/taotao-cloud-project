@@ -124,22 +124,70 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.31
 
-  #powerjob-server:
-  #  image: tjqq/powerjob-server:latest
-  #  restart: always
-  #  container_name: powerjob-server
-  #  ports:
-  #    - "7700:7700"
-  #    - "10086:10086"
-  #  environment:
-  #    TZ: "Asia/Shanghai"
-  #    PARAMS: "--spring.profiles.active=product --spring.datasource.core.jdbc-url=jdbc:mysql://172.11.0.10:3306/powerjob-product?useUnicode=true&characterEncoding=UTF-8 --spring.datasource.core.username=root --spring.datasource.core.password=123456"
-  #  networks:
-  #    taotao-cluster-network:
-  #      ipv4_address: 172.11.0.52
+  rocketmq-nameserv:
+    image: apache/rocketmq:5.1.0
+    container_name: rocketmq-nameserv
+    ports:
+      - "9876:9876"
+    restart: always
+    privileged: true
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
+    command: [ "sh","mqnamesrv" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.35
+  rocketmq-broker:
+    image: apache/rocketmq:5.1.0
+    container_name: rocketmq-broker
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+    restart: always
+    privileged: true
+    volumes:
+      - /root/compose/rocketmq/broker.conf:/home/rocketmq/broker.conf
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      NAMESRV_ADDR: 172.11.0.35:9876
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
+    command: [ "sh","mqbroker","-c","/home/rocketmq/broker.conf", "autoCreateTopicEnable=true" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.36
+  rocketmq-dashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: rocketmq-dashboard
+    ports:
+      - "8082:8080"
+    restart: always
+    privileged: true
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=172.11.0.35:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.37
+
+  powerjob:
+    container_name: powerjob-server
+    image: powerjob/powerjob-server:latest
+    restart: always
+    environment:
+      JVMOPTIONS: "-Xmx512m"
+      PARAMS: "--spring.profiles.active=product --oms.mongodb.enable=false --spring.datasource.core.jdbc-url=jdbc:mysql://172.11.0.10:3306/powerjob-product?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai --spring.datasource.core.username=root --spring.datasource.core.password=123456"
+    ports:
+      - "7700:7700"
+      - "10086:10086"
+      - "10010:10010"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.52
 
   nacos:
-    image: nacos/nacos-server:v2.1.1
+    image: nacos/nacos-server:v2.2.3
     restart: always
     container_name: nacos
     privileged: true
@@ -158,13 +206,17 @@ services:
       MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
       JVM_XMS: 256m
       JVM_XMX: 512m
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_IDENTITY_KEY: example
+      NACOS_AUTH_IDENTITY_VALUE: bb
+      NACOS_AUTH_TOKEN: SecretKey01234567890123456789012345345678999987654901234567890123456789
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.16
 
   seata:
     container_name: seata
-    image: seataio/seata-server:1.6.1
+    image: seataio/seata-server:1.7.0
     restart: always
     ports:
       - "8091:8091"

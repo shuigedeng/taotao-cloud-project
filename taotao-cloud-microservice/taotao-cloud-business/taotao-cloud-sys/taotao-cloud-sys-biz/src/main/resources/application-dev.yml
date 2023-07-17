@@ -346,7 +346,7 @@ seata:
       group: SEATA_GROUP
       username: nacos
       password: nacos
-      cluster: CQ
+      cluster: SC
   client:
     rm:
       async-commit-buffer-limit: 10000       # 异步提交缓存队列长度（默认10000）
