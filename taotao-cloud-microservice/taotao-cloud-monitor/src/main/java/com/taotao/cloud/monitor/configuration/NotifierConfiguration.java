@@ -18,6 +18,7 @@ package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.date.DateUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.model.DingerSender;
@@ -27,15 +28,19 @@ import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent;
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Map;
+import de.codecentric.boot.admin.server.web.client.HttpHeadersProvider;
+import de.codecentric.boot.admin.server.web.client.InstanceExchangeFilterFunction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * NotifierConfiguration
@@ -48,100 +53,118 @@ import reactor.core.publisher.Mono;
 @AutoConfigureAfter(AdminServerAutoConfiguration.class)
 public class NotifierConfiguration {
 
-    @Bean
-    public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
-        return new DingDingNotifier(repository);
-    }
+	@Bean
+	public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
+		return new DingDingNotifier(repository);
+	}
 
-    public static class DingDingNotifier extends AbstractStatusChangeNotifier {
+	@Bean
+	public HttpHeadersProvider customHttpHeadersProvider() {
+		return (instance) -> {
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.add("X-CUSTOM", "My Custom Value");
+			return httpHeaders;
+		};
+	}
 
-        private final String[] ignoreChanges = new String[] {"UNKNOWN:UP", "DOWN:UP", "OFFLINE:UP"};
+	@Bean
+	public InstanceExchangeFilterFunction auditLog() {
+		return (instance, request, next) -> next.exchange(request).doOnSubscribe((s) -> {
+			if (HttpMethod.DELETE.equals(request.method()) || HttpMethod.POST.equals(request.method())) {
+				LogUtils.info("{} for {} on {}", request.method(), instance.getId(), request.url());
+			}
+		});
+	}
 
-        @Autowired
-        private DingerSender sender;
+	public static class DingDingNotifier extends AbstractStatusChangeNotifier {
 
-        public DingDingNotifier(InstanceRepository repository) {
-            super(repository);
-        }
+		private final String[] ignoreChanges = new String[]{"UNKNOWN:UP", "DOWN:UP", "OFFLINE:UP"};
 
-        @Override
-        protected boolean shouldNotify(InstanceEvent event, Instance instance) {
-            if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
-                return false;
-            } else {
-                String from = this.getLastStatus(event.getInstance());
-                String to = statusChange.getStatusInfo().getStatus();
-                return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
-                        && Arrays.binarySearch(this.ignoreChanges, "*:" + to) < 0
-                        && Arrays.binarySearch(this.ignoreChanges, from + ":*") < 0;
-            }
-        }
+		@Autowired
+		private DingerSender sender;
 
-        @Override
-        protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
-            String serviceName = instance.getRegistration().getName();
-            String serviceUrl = instance.getRegistration().getServiceUrl();
+		public DingDingNotifier(InstanceRepository repository) {
+			super(repository);
+		}
 
-            StringBuilder str = new StringBuilder();
-            str.append("taotaocloud微服务监控 \n");
-            str.append("[时间戳]: ")
-                    .append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT))
-                    .append("\n");
-            str.append("[服务名] : ").append(serviceName).append("\n");
-            str.append("[服务ip]: ").append(serviceUrl).append("\n");
+		@Override
+		protected boolean shouldNotify(InstanceEvent event, Instance instance) {
+			if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
+				return false;
+			} else {
+				String from = this.getLastStatus(event.getInstance());
+				String to = statusChange.getStatusInfo().getStatus();
+				return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
+					&& Arrays.binarySearch(this.ignoreChanges, "*:" + to) < 0
+					&& Arrays.binarySearch(this.ignoreChanges, from + ":*") < 0;
+			}
+		}
 
-            return Mono.fromRunnable(() -> {
-                if (event instanceof InstanceStatusChangedEvent) {
-                    String status =
-                            ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
-                    switch (status) {
-                            // 健康检查没通过
-                        case "DOWN" -> str.append("[服务状态]: ")
-                                .append(status)
-                                .append("(")
-                                .append("健康检未通过")
-                                .append(")")
-                                .append("\n");
+		@Override
+		protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
+			String serviceName = instance.getRegistration().getName();
+			String serviceUrl = instance.getRegistration().getServiceUrl();
 
-                            // 服务离线
-                        case "OFFLINE" -> str.append("[服务状态]: ")
-                                .append(status)
-                                .append("(")
-                                .append("服务离线")
-                                .append(")")
-                                .append("\n");
+			StringBuilder str = new StringBuilder();
+			str.append("taotaocloud微服务监控 \n");
+			str.append("[时间戳]: ")
+				.append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT))
+				.append("\n");
+			str.append("[服务名] : ").append(serviceName).append("\n");
+			str.append("[服务ip]: ").append(serviceUrl).append("\n");
 
-                            // 服务上线
-                        case "UP" -> str.append("[服务状态]: ")
-                                .append(status)
-                                .append("(")
-                                .append("服务上线")
-                                .append(")")
-                                .append("\n");
+			return Mono.fromRunnable(() -> {
+				if (event instanceof InstanceStatusChangedEvent) {
+					String status =
+						((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
+					switch (status) {
+						// 健康检查没通过
+						case "DOWN" -> str.append("[服务状态]: ")
+							.append(status)
+							.append("(")
+							.append("健康检未通过")
+							.append(")")
+							.append("\n");
 
-                            // 服务未知异常
-                        case "UNKNOWN" -> str.append("[服务状态]: ")
-                                .append(status)
-                                .append("(")
-                                .append("服务未知异常")
-                                .append(")")
-                                .append("\n");
+						// 服务离线
+						case "OFFLINE" -> str.append("[服务状态]: ")
+							.append(status)
+							.append("(")
+							.append("服务离线")
+							.append(")")
+							.append("\n");
 
-                        default -> str.append("[服务状态]: ")
-                                .append(status)
-                                .append("(")
-                                .append("服务未知异常")
-                                .append(")")
-                                .append("\n");
-                    }
+						// 服务上线
+						case "UP" -> str.append("[服务状态]: ")
+							.append(status)
+							.append("(")
+							.append("服务上线")
+							.append(")")
+							.append("\n");
 
-                    Map<String, Object> details =
-                            ((InstanceStatusChangedEvent) event).getStatusInfo().getDetails();
-                    str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
+						// 服务未知异常
+						case "UNKNOWN" -> str.append("[服务状态]: ")
+							.append(status)
+							.append("(")
+							.append("服务未知异常")
+							.append(")")
+							.append("\n");
 
-                    sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
-                }
-            });
-        }
-    }
+						default -> str.append("[服务状态]: ")
+							.append(status)
+							.append("(")
+							.append("服务未知异常")
+							.append(")")
+							.append("\n");
+					}
+
+					Map<String, Object> details =
+						((InstanceStatusChangedEvent) event).getStatusInfo().getDetails();
+					str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
+
+					sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
+				}
+			});
+		}
+	}
 }

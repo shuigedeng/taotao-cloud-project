@@ -116,7 +116,7 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT=172.11.0.13:2181
       - KAFKA_BROKER_ID=1
       - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.210:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.220:9092
       - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
       - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
@@ -184,7 +184,7 @@ services:
     environment:
       STORE_MODE: db
       SEATA_PORT: 8091
-      SEATA_IP: 192.168.10.210
+      SEATA_IP: 192.168.10.220
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
@@ -375,7 +375,7 @@ services:
     ports:
       - "19876:19876"
     environment:
-      JAVA_OPTS: -Dserver.port=19876 -Drocketmq.namesrv.addr=192.168.10.210:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+      JAVA_OPTS: -Dserver.port=19876 -Drocketmq.namesrv.addr=192.168.10.220:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.34
@@ -462,7 +462,7 @@ services:
     environment:
       - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-      - GRAYLOG_HTTP_EXTERNAL_URI=http://192.168.10.210:9009/ # 这里注意要改ip ip:port访问 admin/admin
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://192.168.10.220:9009/ # 这里注意要改ip ip:port访问 admin/admin
     #entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
     depends_on:
       - mongo
@@ -598,11 +598,11 @@ services:
     privileged: true
     environment:
       - TZ=Asia/Shanghai
-      - admin.registry.address=nacos://192.168.10.210:8848?namespace=taotao-cloud-dev
+      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
       - admin.registry.group=DUBBO_REGISTRY_GROUP
-      - admin.config-center=nacos://192.168.10.210:8848?namespace=taotao-cloud-dev
+      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
       - admin.config-center.group=DUBBO_REGISTRY_GROUP
-      - admin.metadata-report.address=nacos://192.168.10.210:8848?namespace=taotao-cloud-dev
+      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
       - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
       - admin.root.user.name=admin
       - admin.root.user.password=123456
@@ -636,7 +636,7 @@ services:
     ports:
       - "8087:80"
     environment:
-      - SERVICE_URL=http://192.168.10.210:8086
+      - SERVICE_URL=http://192.168.10.220:8086
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.50

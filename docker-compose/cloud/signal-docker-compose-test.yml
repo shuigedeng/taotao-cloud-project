@@ -289,6 +289,25 @@ services:
         ipv4_address: 172.11.0.20
 
 
+  dubbo-admin:
+    image: apache/dubbo-admin:0.5.0
+    container_name: dubbo-admin
+    ports:
+      - "18080:8080"
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
+      - admin.registry.group=DUBBO_REGISTRY_GROUP
+      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
+      - admin.config-center.group=DUBBO_REGISTRY_GROUP
+      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
+      - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
+      - admin.root.user.name=admin
+      - admin.root.user.password=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.48
 
   #arthas:
   #  image: hengyunabc/arthas:latest

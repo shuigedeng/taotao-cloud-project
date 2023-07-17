@@ -419,7 +419,7 @@ seata:
   registry:
     type: nacos
     nacos:
-      application: taotao-cloud-seata-server
+      application: seata-server
       server-addr: 192.168.10.220:8848
       group: SEATA_GROUP
       namespace: 9dc5fed7-fcb3-4b27-b06b-a573e96a8706
