@@ -1,14 +1,18 @@
 <!--https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html?from=jetbrains.org-->
 <idea-plugin>
 
+	<!-- 插件唯一id，不能和其他插件项目重复，所以推荐使用com.xxx.xxx的格式 插件不同版本之间不能更改，若没有指定，则与插件名称相同 -->
 	<id>com.taotao.cloud.idea.plugin</id>
+	<!-- 插件名称，别人在官方插件库搜索你的插件时使用的名称 -->
 	<name>TaoTaoToolKit</name>
+	<!-- 供应商主页和email-->
 	<vendor
 		email="981376577@qq.com"
 		url="https://taotaocloud.top">
 		taotao cloud
 	</vendor>
 
+	<!-- 插件的描述 -->
 	<description><![CDATA[
 		<h3>Tool sets commonly used by programmers</h3>
 		<ul>
@@ -34,6 +38,7 @@
 		</ul>
 	]]></description>
 
+	<!-- 插件版本变更信息，支持HTML标签；将展示在 settings | Plugins 对话框和插件仓库的Web页面 -->
 	<change-notes><![CDATA[
 		<h2>New plugin</h2>
 		<ul>
@@ -47,21 +52,88 @@
 		</ul>
 	]]></change-notes>
 
-	<!--	<description>-->
-	<!--		sql to es base64 sha taotao cloud idea plugin-->
-	<!--	</description>-->
-
-	<!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-		 on how to target different products -->
-	<!--	当前插件依赖的其他插件的id-->
+	<!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html on how to target different products -->
+	<!-- 当前插件依赖的其他插件的id  插件所依赖的其他插件的id-->
 	<depends>com.intellij.modules.lang</depends>
 	<depends>com.intellij.modules.platform</depends>
-	<!--	<depends>com.intellij.modules.java</depends>-->
-	<!--	<depends>com.intellij.properties</depends>-->
-	<!--	<depends>org.jetbrains.plugins.yaml</depends>-->
-	<!--	<depends>org.intellij.intelliLang</depends>-->
+	<!--<depends>com.intellij.modules.java</depends>-->
+	<!--<depends>com.intellij.properties</depends>-->
+	<!--<depends>org.jetbrains.plugins.yaml</depends>-->
+	<!--<depends>org.intellij.intelliLang</depends>-->
 
-	<!--	可以配置侧边的工具栏，例如maven所在的侧边栏 。-->
+
+	<!-- application components -->
+<!--	<application-components>-->
+<!--		<component>-->
+<!--			&lt;!&ndash; 组件接口 &ndash;&gt;-->
+<!--			<interface-class>com.plugin.demo.Component1Interface</interface-class>-->
+<!--			&lt;!&ndash; 组件的实现类 &ndash;&gt;-->
+<!--			<implementation-class>com.plugin.demo.impl.Component1Impl</implementation-class>-->
+<!--		</component>-->
+<!--	</application-components>-->
+
+	<!-- project components -->
+<!--	<project-components>-->
+<!--		<component>-->
+<!--			&lt;!&ndash; 接口和实现类相同 &ndash;&gt;-->
+<!--			<interface-class>com.plugin.demo.impl.Component2</interface-class>-->
+<!--		</component>-->
+<!--	</project-components>-->
+
+	<!-- module components -->
+<!--	<module-components>-->
+<!--		<component>-->
+<!--			<interface-class>com.plugin.demo.impl.Component3</interface-class>-->
+<!--		</component>-->
+<!--	</module-components>-->
+
+
+	<!-- Actions  配置动作(事件），每次点击都会重新初始化 -->
+<!--		<actions>-->
+<!--			&lt;!&ndash; 配置动作触发类，触发这个类时，在构造器里新建一个javax.swing.JPanel窗口，这样就完成一次idea和窗口的交互 &ndash;&gt;-->
+<!--			<action id="Code2TemplateAction" class="com.idea.plugin.action.InitAction"-->
+<!--				text="Code2Template" description="Code to Template">-->
+<!--				&lt;!&ndash; 配置菜单类别，ProjectViewPopupMenu：鼠标右键点击项目任意文件，触发窗口弹出 &ndash;&gt;-->
+<!--				<add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
+<!--			</action>-->
+
+<!--			<action id="Code2TemplatePopupAction" class="com.idea.plugin.action.PopupAction" text="Code2Template"-->
+<!--				description="Code to Template">-->
+<!--				&lt;!&ndash; 配置菜单类别，EditorPopupMenu：鼠标右键点击任意文件内容，触发窗口弹出 &ndash;&gt;-->
+<!--				<add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
+<!--			</action>-->
+
+<!--			<group id="MyPlugin.SampleMenu" text="Sample Menu" description="Sample menu">-->
+<!--				<add-to-group group-id="MainMenu" anchor="last"  />-->
+<!--				<action id="Myplugin.ActionDemo" class="Mypackage.ActionDemo" text="Text Boxes" description="A test menu item" />-->
+<!--			</group>-->
+
+<!--			<group id="MainMenuActionGroup" text="MainMenuActionGroup" description="MainMenuActionGroup" popup="true">-->
+<!--				<add-to-group group-id="MainMenu" anchor="after" relative-to-action="HelpMenu"/>-->
+<!--				<action id="OpenFile" class="com.plugin.demo.action.MainMenuOpenFileAction" text="Open"-->
+<!--						description="主菜单File下的Open子菜单"/>-->
+<!--				<separator/>-->
+<!--			</group>-->
+<!--			<group id="JavaNewProjectOrModuleGroup" text="一级菜单" popup="true">-->
+<!--				<add-to-group group-id="MainMenuActionGroup" anchor="before" relative-to-action="OpenFile"/>-->
+<!--				<action id="NewProject" class="com.intellij.ide.actions.NewProjectAction"/>-->
+<!--				<action id="ImportProject" class="com.intellij.ide.actions.ImportProjectAction"/>-->
+<!--				<action id="ProjectFromVersionControl"-->
+<!--						class="com.intellij.openapi.wm.impl.welcomeScreen.ProjectFromVersionControlAction"/>-->
+<!--				<separator/>-->
+<!--				<action id="NewModule" class="com.intellij.openapi.roots.ui.configuration.actions.NewModuleAction"/>-->
+<!--				<action id="ImportModule" class="com.intellij.ide.actions.ImportModuleAction"/>-->
+<!--			</group>-->
+<!--		</actions>-->
+
+
+	<!--	扩展点，即定义当前插件某功能可扩展的点，便于被其他插件依赖，并扩展当前插件不完善的功能-->
+	<!--	<extensionPoints>-->
+	<!--		<extensionPoint name="testExtensionPoint" beanClass="com.foo.impl.MyExtensionBean"/>-->
+	<!--	</extensionPoints>-->
+
+
+	<!-- 声明该插件对IDEA core或其他插件的扩展 可以配置侧边的工具栏，例如maven所在的侧边栏 。-->
 	<extensions defaultExtensionNs="com.intellij">
 		<applicationService serviceInterface="com.taotao.cloud.idea.plugin.service.CacheService"
 			serviceImplementation="com.taotao.cloud.idea.plugin.service.impl.CacheServiceImpl"/>'
@@ -71,25 +143,5 @@
 		<runAnything.executionProvider id="runAnythingExecutionProvider"
 			implementation="com.taotao.cloud.idea.plugin.extensions.runanything.RunAnythingToolkitProvider"/>
 	</extensions>
-
-	<!-- 配置动作(事件），每次点击都会重新初始化 -->
-	<!--	<actions>-->
-	<!--		&lt;!&ndash; 配置动作触发类，触发这个类时，在构造器里新建一个javax.swing.JPanel窗口，这样就完成一次idea和窗口的交互 &ndash;&gt;-->
-	<!--		<action id="Code2TemplateAction" class="com.idea.plugin.action.InitAction"-->
-	<!--			text="Code2Template" description="Code to Template">-->
-	<!--			&lt;!&ndash; 配置菜单类别，ProjectViewPopupMenu：鼠标右键点击项目任意文件，触发窗口弹出 &ndash;&gt;-->
-	<!--			<add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
-	<!--		</action>-->
-	<!--		<action id="Code2TemplatePopupAction" class="com.idea.plugin.action.PopupAction" text="Code2Template"-->
-	<!--			description="Code to Template">-->
-	<!--			&lt;!&ndash; 配置菜单类别，EditorPopupMenu：鼠标右键点击任意文件内容，触发窗口弹出 &ndash;&gt;-->
-	<!--			<add-to-group group-id="EditorPopupMenu" anchor="last"/>-->
-	<!--		</action>-->
-	<!--	</actions>-->
-
-	<!--	扩展点，即定义当前插件某功能可扩展的点，便于被其他插件依赖，并扩展当前插件不完善的功能-->
-	<!--	<extensionPoints>-->
-	<!--		<extensionPoint name="testExtensionPoint" beanClass="com.foo.impl.MyExtensionBean"/>-->
-	<!--	</extensionPoints>-->
 
 </idea-plugin>
