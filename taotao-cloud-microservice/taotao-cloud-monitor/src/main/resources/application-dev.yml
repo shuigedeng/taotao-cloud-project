@@ -22,6 +22,7 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 
+
 redisson:
   #在Redis节点里显示的客户端名称。
   client-name: ${spring.application.name}
