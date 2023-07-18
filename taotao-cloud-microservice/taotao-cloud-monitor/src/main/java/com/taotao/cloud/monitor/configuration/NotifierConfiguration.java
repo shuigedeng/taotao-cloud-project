@@ -89,6 +89,8 @@ public class NotifierConfiguration {
 
 		@Override
 		protected boolean shouldNotify(InstanceEvent event, Instance instance) {
+			LogUtils.info("微服务监控回调数据 shouldNotify event: {}, instance: {}", event, instance);
+
 			if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
 				return false;
 			} else {
@@ -161,6 +163,8 @@ public class NotifierConfiguration {
 					Map<String, Object> details =
 						((InstanceStatusChangedEvent) event).getStatusInfo().getDetails();
 					str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
+
+					LogUtils.info("微服务监控回调数据 event: {}, instance: {}, message: {}", event, instance, str);
 
 					sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
 				}
