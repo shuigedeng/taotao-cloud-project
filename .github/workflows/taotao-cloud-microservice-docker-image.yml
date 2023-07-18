@@ -6,7 +6,7 @@ on:
   push:
     paths:
       - 'taotao-cloud-microservice/**'
-    branches: [ dev ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
