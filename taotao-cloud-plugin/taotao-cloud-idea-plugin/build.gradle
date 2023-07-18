@@ -18,12 +18,14 @@ dependencies {
 //version "3.2022.15"
 
 // https://github.com/JetBrains/gradle-intellij-plugin
+// https://juejin.cn/post/7249380394456596535#heading-35
 intellij {
     // 插件名称
     pluginName = "TaoTaoToolKit"
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
-    //这里指定支持的IDE最小版本
+
+    //<!-- 插件版本 -->
     version = "2021.3"
     type = "IC"
 
@@ -41,6 +43,11 @@ patchPluginXml {
     //changeNotes = """
     //              TaoTaoToolKit-1.0.1
     //              """
+
+    //<!-- 插件兼容IDEA的最大和最小 build 号，两个属性可以任选一个或者同时使用
+    //官网详细介绍：http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html-->
+    //<idea-version since-build="3000" until-build="3999"/>
+
     //最低支持的版本 当前插件的起止 IDE 版本支持
     //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
     sinceBuild.set("213")
