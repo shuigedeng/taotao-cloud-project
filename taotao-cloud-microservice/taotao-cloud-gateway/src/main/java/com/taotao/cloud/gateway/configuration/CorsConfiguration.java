@@ -43,7 +43,7 @@ public class CorsConfiguration {
     public CorsWebFilter devCorsFilter() {
         org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+        config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.setMaxAge(18000L);
         config.addAllowedMethod("*");
