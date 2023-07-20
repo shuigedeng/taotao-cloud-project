@@ -36,29 +36,7 @@ subprojects {
     dependencies {
         developmentOnly "org.springframework.boot:spring-boot-devtools"
 
-        testImplementation "org.springframework.boot:spring-boot-starter-test"
-        testImplementation "org.testcontainers:junit-jupiter"
-        testImplementation 'io.projectreactor:reactor-test'
-        testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
-        testImplementation "org.springframework.boot:spring-boot-starter-web"
-
-        testImplementation "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2"
-        testImplementation "com.baomidou:mybatis-plus-boot-starter-test:3.5.3.1"
-        //testImplementation "org.springframework.security:spring-security-test:6.1.2"
-
-        //https://search.maven.org/artifact/org.jeasy/easy-random
-        testImplementation 'org.jeasy:easy-random:5.0.0'
-        //https://search.maven.org/artifact/com.github.javafaker/javafaker
-        testImplementation('com.github.javafaker:javafaker:1.0.2') {
-            exclude group: "org.yaml", module: "snakeyaml"
-        }
-
-        //https://github.com/yindz/common-random
-        //https://search.maven.org/artifact/com.apifan.common/common-random/
-        testImplementation "com.apifan.common:common-random:1.0.21"
-
-        implementation "io.soabase.record-builder:record-builder-core"
-        annotationProcessor "io.soabase.record-builder:record-builder-processor:${recordBuilderVersion}"
+        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test")
 
         implementation "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
