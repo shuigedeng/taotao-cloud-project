@@ -1,0 +1,5 @@
+subprojects {
+    dependencies {
+        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test")
+    }
+}
