@@ -124,7 +124,7 @@ Maven:
  Spring Security      | 6.1.0           
  Mybatis Plus         | 3.5.3.1         
  Hutool               | 6.0.0-M4          
- Mysql                | 8.0.33          
+ Mysql                | 8.1.0          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
