@@ -36,7 +36,10 @@ subprojects {
     dependencies {
         developmentOnly "org.springframework.boot:spring-boot-devtools"
 
-        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test")
+        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test"){
+            exclude group: "org.mybatis.spring.boot", module: "mybatis-spring-boot-starter-test"
+            exclude group: "com.baomidou", module: "mybatis-plus-boot-starter-test"
+        }
 
         implementation "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
