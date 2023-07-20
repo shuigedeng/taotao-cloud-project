@@ -798,8 +798,8 @@ spring:
           #jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
           jwk-set-uri: http://192.168.10.45:33336/oauth2/jwks
         opaquetoken:
-          client-id: 14a9cf797931430896ad13a6b1855611
-          client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
+          client-id: 25953fda237841689743a94871915661
+          client-secret: a667ed5606f44e159db062239ed5a838
           introspection-uri: http://192.168.10.220
   cloud:
     openfeign:
@@ -1237,10 +1237,7 @@ management:
       enabled: true
     rabbit:
       enabled: true
-  prometheus:
-    metrics:
-      export:
-        enabled: true
+
   zipkin:
     tracing:
       connect-timeout: 1
@@ -1250,6 +1247,23 @@ management:
     enabled: true
     sampling:
       probability: 1.0
+  observations:
+    http:
+      client:
+        requests:
+          name: taotao-request-name
+      server:
+        requests:
+          name: taotao-server-name
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  appoptics:
+    metrics:
+      export:
+        batch-size: 500
+
 #  sleuth:
 #    jdbc:
 #      # 为false时 datasource-proxy-spring-boot-starter会生效 程序启动时会卡着不动
