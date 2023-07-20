@@ -506,7 +506,7 @@ services:
 
   arthas:
     image: hengyunabc/arthas:latest
-    container_name: pyroscope
+    container_name: arthas
     restart: always
     ports:
       - "4040:4040"

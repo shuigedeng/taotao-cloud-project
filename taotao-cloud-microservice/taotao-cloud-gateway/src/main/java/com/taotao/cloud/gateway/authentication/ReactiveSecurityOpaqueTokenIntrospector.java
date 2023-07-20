@@ -314,6 +314,7 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
 
 		claims.computeIfPresent(BaseConstants.AUTHORITIES, (k, v) -> {
 			if (v instanceof ArrayList) {
+				@SuppressWarnings("unchecked")
 				List<String> values = (List<String>) v;
 				values.forEach(value -> authorities.add(new HerodotusGrantedAuthority(value)));
 			}

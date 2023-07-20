@@ -17,6 +17,7 @@
 package com.taotao.cloud.auth.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
@@ -97,6 +98,7 @@ public class TaoTaoCloudAuthApplication {
         //   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
         // }
 
-        SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
+        //SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }
 }

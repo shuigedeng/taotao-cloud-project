@@ -288,6 +288,20 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.20
 
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    restart: always
+    command: server /data --console-address ":9090"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.60
 
   dubbo-admin:
     image: apache/dubbo-admin:0.5.0
@@ -309,17 +323,17 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.48
 
-  #arthas:
-  #  image: hengyunabc/arthas:latest
-  #  container_name: pyroscope
-  #  restart: always
-  #  ports:
-  #    - "4040:4040"
-  #  command:
-  #    - "java -jar /opt/arthas/arthas-boot.jar"
-  #  networks:
-  #    taotao-cluster-network:
-  #      ipv4_address: 172.11.0.42
+  arthas:
+    image: hengyunabc/arthas:latest
+    container_name: arthas
+    restart: always
+    ports:
+      - "4040:4040"
+    command:
+      - "java -jar /opt/arthas/arthas-boot.jar"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.42
 
 networks:
   taotao-cluster-network:

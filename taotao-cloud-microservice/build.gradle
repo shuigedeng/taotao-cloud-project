@@ -34,11 +34,17 @@ subprojects {
     }
 
     dependencies {
+        developmentOnly "org.springframework.boot:spring-boot-devtools"
+
         testImplementation "org.springframework.boot:spring-boot-starter-test"
         testImplementation "org.testcontainers:junit-jupiter"
         testImplementation 'io.projectreactor:reactor-test'
         testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
         testImplementation "org.springframework.boot:spring-boot-starter-web"
+
+        testImplementation "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2"
+        testImplementation "com.baomidou:mybatis-plus-boot-starter-test:3.5.3.1"
+        //testImplementation "org.springframework.security:spring-security-test:6.1.2"
 
         //https://search.maven.org/artifact/org.jeasy/easy-random
         testImplementation 'org.jeasy:easy-random:5.0.0'

@@ -47,7 +47,6 @@ import com.taotao.cloud.security.springsecurity.processor.SecurityMatcherConfigu
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,9 +64,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -136,13 +139,29 @@ public class DefaultSecurityConfiguration {
 			.csrf(AbstractHttpConfigurer::disable)
 			.cors(AbstractHttpConfigurer::disable);
 
+
+		List<AntPathRequestMatcher> antPathRequestMatcherList = new ArrayList<>();
+		String[] permitAllArray = securityMatcherConfigurer.getPermitAllArray();
+		for (String s : permitAllArray) {
+			AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(s);
+			antPathRequestMatcherList.add(antPathRequestMatcher);
+		}
+		String[] staticResourceArray = securityMatcherConfigurer.getStaticResourceArray();
+		for (String s : staticResourceArray) {
+			AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(s);
+			antPathRequestMatcherList.add(antPathRequestMatcher);
+		}
+
+		AntPathRequestMatcher[] result = new AntPathRequestMatcher[antPathRequestMatcherList.size()];
+		antPathRequestMatcherList.toArray(result);
+
 		httpSecurity
 			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
 				authorizeHttpRequestsCustomizer
-					.requestMatchers(securityMatcherConfigurer.getPermitAllArray())
+					.requestMatchers(result)
 					.permitAll()
-					.requestMatchers(securityMatcherConfigurer.getStaticResourceArray())
-					.permitAll()
+					//.requestMatchers()
+					//.permitAll()
 					.requestMatchers(EndpointRequest.toAnyEndpoint())
 					.permitAll()
 					.anyRequest()

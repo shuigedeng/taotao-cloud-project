@@ -17,6 +17,7 @@
 package com.taotao.cloud.gateway;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,6 +42,7 @@ public class TaoTaoCloudGatewayApplication {
 
 		PropertyUtils.setDefaultProperty("taotao-cloud-gateway");
 
-		SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class).run( args);
 	}
 }
