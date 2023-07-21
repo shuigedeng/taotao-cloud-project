@@ -17,12 +17,18 @@
 package com.taotao.cloud.monitor.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * SecuritySecureConfig
@@ -35,9 +41,16 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfiguration {
 
 	private final String adminContextPath;
+	private final List<String> patterns;
 
 	public SecurityConfiguration(AdminServerProperties adminServerProperties) {
 		this.adminContextPath = adminServerProperties.getContextPath();
+		this.patterns = Arrays.asList(adminContextPath + "/assets/**",
+			adminContextPath + "/login",
+			"/actuator/**",
+			"/actuator",
+			"/instances",
+			"/instances/**");
 	}
 
 	@Bean
@@ -47,19 +60,11 @@ public class SecurityConfiguration {
 		successHandler.setTargetUrlParameter("redirectTo");
 		successHandler.setDefaultTargetUrl(adminContextPath + "/");
 
+
 		return http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
 				// 1.配置所有静态资源和登录页可以公开访问
-				authorizeHttpRequestsCustomizer.requestMatchers(adminContextPath + "/assets/**")
-					.permitAll()
-					.requestMatchers(adminContextPath + "/login")
-					.permitAll()
-					.requestMatchers("/actuator/**")
-					.permitAll()
-					.requestMatchers("/actuator")
-					.permitAll()
-					.requestMatchers("/instances")
-					.permitAll()
-					.requestMatchers("/instances/**")
+				authorizeHttpRequestsCustomizer
+					.requestMatchers(toRequestMatchers(this.patterns))
 					.permitAll()
 					.anyRequest()
 					.authenticated();
@@ -87,6 +92,16 @@ public class SecurityConfiguration {
 			.build();
 	}
 
+
+	public RequestMatcher[] toRequestMatchers(List<String> paths) {
+		if (CollectionUtils.isNotEmpty(paths)) {
+			List<AntPathRequestMatcher> matchers = paths.stream().map(AntPathRequestMatcher::new).toList();
+			RequestMatcher[] result = new RequestMatcher[matchers.size()];
+			return matchers.toArray(result);
+		} else {
+			return new RequestMatcher[]{};
+		}
+	}
 	// @Override
 	// protected void configure(HttpSecurity http) throws Exception {
 	//	SavedRequestAwareAuthenticationSuccessHandler successHandler = new

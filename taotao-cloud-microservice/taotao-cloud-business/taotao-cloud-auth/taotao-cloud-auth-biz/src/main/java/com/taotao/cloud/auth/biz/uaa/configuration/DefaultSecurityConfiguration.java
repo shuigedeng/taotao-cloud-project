@@ -139,29 +139,13 @@ public class DefaultSecurityConfiguration {
 			.csrf(AbstractHttpConfigurer::disable)
 			.cors(AbstractHttpConfigurer::disable);
 
-
-		List<AntPathRequestMatcher> antPathRequestMatcherList = new ArrayList<>();
-		String[] permitAllArray = securityMatcherConfigurer.getPermitAllArray();
-		for (String s : permitAllArray) {
-			AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(s);
-			antPathRequestMatcherList.add(antPathRequestMatcher);
-		}
-		String[] staticResourceArray = securityMatcherConfigurer.getStaticResourceArray();
-		for (String s : staticResourceArray) {
-			AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(s);
-			antPathRequestMatcherList.add(antPathRequestMatcher);
-		}
-
-		AntPathRequestMatcher[] result = new AntPathRequestMatcher[antPathRequestMatcherList.size()];
-		antPathRequestMatcherList.toArray(result);
-
 		httpSecurity
 			.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
 				authorizeHttpRequestsCustomizer
-					.requestMatchers(result)
+					.requestMatchers(securityMatcherConfigurer.getPermitAllArray())
 					.permitAll()
-					//.requestMatchers()
-					//.permitAll()
+					.requestMatchers(securityMatcherConfigurer.getStaticResourceArray())
+					.permitAll()
 					.requestMatchers(EndpointRequest.toAnyEndpoint())
 					.permitAll()
 					.anyRequest()
