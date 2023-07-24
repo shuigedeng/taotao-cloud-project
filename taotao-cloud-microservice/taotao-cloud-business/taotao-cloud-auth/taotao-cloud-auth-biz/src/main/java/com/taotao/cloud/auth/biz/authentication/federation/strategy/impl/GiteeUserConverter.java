@@ -1,11 +1,10 @@
 package com.taotao.cloud.auth.biz.authentication.federation.strategy.impl;
 
+import com.taotao.cloud.auth.biz.authentication.federation.Oauth2ThirdAccount;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
-import static com.example.constant.SecurityConstants.THIRD_LOGIN_GITEE;
 
 /**
  * 转换通过码云登录的用户信息
@@ -13,7 +12,10 @@ import static com.example.constant.SecurityConstants.THIRD_LOGIN_GITEE;
  */
 @Component(THIRD_LOGIN_GITEE)
 public class GiteeUserConverter implements Oauth2UserConverterStrategy {
-
+	/**
+	 * 三方登录类型——Gitee
+	 */
+	public static final String THIRD_LOGIN_GITEE = "gitee";
 
     @Override
     public Oauth2ThirdAccount convert(OAuth2User oAuth2User) {
