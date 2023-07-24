@@ -398,6 +398,13 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
+	public OAuth2TokenCustomizer<JwtEncodingContext> federatedIdentityIdTokenCustomizer() {
+		FederatedIdentityIdTokenCustomizer federatedIdentityIdTokenCustomizer = new FederatedIdentityIdTokenCustomizer();
+		log.info("Bean [OAuth2 federatedIdentityIdTokenCustomizer Token Customizer] Auto Configure.");
+		return federatedIdentityIdTokenCustomizer;
+	}
+
+	@Bean
 	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
 		HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
 		log.info("Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
