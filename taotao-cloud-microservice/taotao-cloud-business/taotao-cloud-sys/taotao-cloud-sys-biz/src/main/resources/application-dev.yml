@@ -648,21 +648,32 @@ spring:
     open-in-view: true
     generate-ddl: true
     hibernate:
+      #create：每次运行程序时，都会重新创建表，故而数据会丢失
+      #create-drop：每次运行程序时会先创建表结构，然后程序结束时清空表
+      #update：每次运行程序，没有表时会创建表，如果对象发生改变会更新表结构，原有数据不会清空，只会更新（推荐使用）
+      #validate：运行程序会校验数据于数据库的字段类型是否相同，字段不同会报错
+      #none：禁用DDL处理
       ddl-auto: update
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
     #properties:
     #  hibernate:
+    #    eclipselink.logging.level.sql: FINE
     #    format_sql: true
     #    hbm2ddl.auto: update
     #    dialect: org.hibernate.dialect.MySQL8Dialect
     #properties:
+    #  eclipselink:
+    #    logging:
+    #      level:
+    #        sql=FINE:
     #  javax:
     #    persistence:
     #      sharedCache:
     #        mode: ENABLE_SELECTIVE
     #  hibernate:
+    #    use_sql_comments: true
     #    dialect: mysql
     #    format_sql: false
     #    show_sql: false
