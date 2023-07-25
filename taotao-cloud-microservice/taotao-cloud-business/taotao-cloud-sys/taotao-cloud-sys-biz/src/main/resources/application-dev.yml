@@ -186,7 +186,6 @@ arthas:
   tunnel-server: ws://192.168.10.220:7777/ws
 
 dubbo:
-  enabled: true
   scan:
     base-packages: com.taotao.cloud.sys.biz.service.dubbo
   application:
@@ -275,7 +274,7 @@ dubbo:
     address: 192.168.10.220:18080
     username: admin
     password: 123456
-    group: taotao-cloud-dev
+    group: DUBBO_REGISTRY_GROUP
     version: ${taotaoCloudVersion}
   metadata-report:
     id: ${spring.application.name}
@@ -299,7 +298,11 @@ dubbo:
     default: true
     id: ${spring.application.name}
     port: 9091
-    enable-jvm-metrics: true
+    enable-threadpool: true
+    enable-registry: true
+    enable-metadata: true
+    enable-jvm: true
+    enable-rpc: true
     protocol: prometheus
     aggregation:
       enabled: true
@@ -313,6 +316,8 @@ dubbo:
         metricsPath: /test
       pushgateway:
         enabled: false
+    histogram:
+      enabled: true
 
 seata:
   enabled: true

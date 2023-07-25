@@ -312,11 +312,11 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # nacos config, add parameters to url like username=nacos&password=nacos
-      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
+      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
       - admin.registry.group=DUBBO_REGISTRY_GROUP
-      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
+      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
       - admin.config-center.group=DUBBO_REGISTRY_GROUP
-      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
+      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
       - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
       - admin.root.user.name=admin
       - admin.root.user.password=123456
