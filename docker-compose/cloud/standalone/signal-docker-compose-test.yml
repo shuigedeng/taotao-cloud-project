@@ -311,6 +311,7 @@ services:
     privileged: true
     environment:
       - TZ=Asia/Shanghai
+      # nacos config, add parameters to url like username=nacos&password=nacos
       - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev
       - admin.registry.group=DUBBO_REGISTRY_GROUP
       - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dev

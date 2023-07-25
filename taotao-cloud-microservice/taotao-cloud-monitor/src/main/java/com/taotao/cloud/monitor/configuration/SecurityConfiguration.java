@@ -21,6 +21,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -45,8 +46,8 @@ public class SecurityConfiguration {
 
 	public SecurityConfiguration(AdminServerProperties adminServerProperties) {
 		this.adminContextPath = adminServerProperties.getContextPath();
-		this.patterns = Arrays.asList(adminContextPath + "/assets/**",
-			adminContextPath + "/login",
+		this.patterns = Arrays.asList(this.adminContextPath + "/assets/**",
+			this.adminContextPath + "/login",
 			"/actuator/**",
 			"/actuator",
 			"/instances",
@@ -59,7 +60,6 @@ public class SecurityConfiguration {
 			new SavedRequestAwareAuthenticationSuccessHandler();
 		successHandler.setTargetUrlParameter("redirectTo");
 		successHandler.setDefaultTargetUrl(adminContextPath + "/");
-
 
 		return http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
 				// 1.配置所有静态资源和登录页可以公开访问
@@ -80,18 +80,17 @@ public class SecurityConfiguration {
 					.logoutUrl(adminContextPath + "/logout");
 			})
 			// 3.开启http basic支持，admin-client注册时需要使用
-			.httpBasic(httpBasicCustomizer -> {
-
-			})
+			.httpBasic(AbstractHttpConfigurer::disable)
 			.csrf(csrfCustomizer -> {
+				List<String> csrfPatterns = Arrays.asList(adminContextPath + "/instances", adminContextPath + "/actuator/**");
 				// 4.开启基于cookie的csrf保护
-				csrfCustomizer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+				csrfCustomizer
+					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 					// 5.忽略这些路径的csrf保护以便admin-client注册
-					.ignoringRequestMatchers(adminContextPath + "/instances", adminContextPath + "/actuator/**");
+					.ignoringRequestMatchers(toRequestMatchers(csrfPatterns));
 			})
 			.build();
 	}
-
 
 	public RequestMatcher[] toRequestMatchers(List<String> paths) {
 		if (CollectionUtils.isNotEmpty(paths)) {

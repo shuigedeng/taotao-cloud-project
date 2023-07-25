@@ -56,4 +56,4 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
-    de.codecentric.boot.admin.server: debug
+    #de.codecentric.boot.admin.server: debug

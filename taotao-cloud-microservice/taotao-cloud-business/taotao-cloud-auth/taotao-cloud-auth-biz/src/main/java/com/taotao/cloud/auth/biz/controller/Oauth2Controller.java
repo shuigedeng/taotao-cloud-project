@@ -122,7 +122,7 @@ public class Oauth2Controller {
     }
 
 	@ResponseBody
-	@GetMapping("/user")
+	@GetMapping("/userInfo")
 	public Oauth2UserinfoResult user(Principal principal) {
 		Oauth2UserinfoResult result = new Oauth2UserinfoResult();
 //		if (!(principal instanceof JwtAuthenticationToken jwtAuthenticationToken)) {
