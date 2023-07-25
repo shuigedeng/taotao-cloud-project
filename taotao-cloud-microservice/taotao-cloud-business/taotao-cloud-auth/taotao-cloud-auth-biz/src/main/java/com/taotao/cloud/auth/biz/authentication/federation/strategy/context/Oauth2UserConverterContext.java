@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 三方oauth2登录获取的用户信息转换处理
  */
-@Component
+//@Component
 @RequiredArgsConstructor
 public class Oauth2UserConverterContext {
 

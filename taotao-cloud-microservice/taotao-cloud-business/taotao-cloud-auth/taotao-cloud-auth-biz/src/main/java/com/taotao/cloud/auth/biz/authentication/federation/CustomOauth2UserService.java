@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 /**
  * 自定义三方oauth2登录获取用户信息服务
  */
-@Service
+//@Service
 @RequiredArgsConstructor
 public class CustomOauth2UserService extends DefaultOAuth2UserService {
 
