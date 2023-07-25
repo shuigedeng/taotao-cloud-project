@@ -26,6 +26,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.data.envers.repository.config.EnableEnversRepositories;
+import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 
@@ -60,9 +62,10 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * @version 2022.03
  * @since 2020/4/29 15:13
  */
+@EnableEnversRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"})
 @EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity", "com.taotao.cloud.auth.biz.management.entity"})
 @EnableJpaRepositories(
-        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"})
+        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"},repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
 @EnableDiscoveryClient

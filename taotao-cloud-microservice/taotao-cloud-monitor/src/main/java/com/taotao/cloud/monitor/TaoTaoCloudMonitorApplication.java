@@ -37,10 +37,12 @@ public class TaoTaoCloudMonitorApplication {
     public static void main(String[] args) {
         PropertyUtils.setDefaultProperty("taotao-cloud-monitor");
 
-        try {
-            SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
+		SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
+
+        //try {
+        //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
+        //} catch (Throwable e) {
+        //    e.printStackTrace();
+        //}
     }
 }

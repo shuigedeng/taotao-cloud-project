@@ -23,6 +23,8 @@ import com.taotao.cloud.data.jpa.tenant.AbstractEntity;
 import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RevisionNumber;
 
 /**
  * <p>Description: OAuth2 认证确认信息实体 </p>
@@ -32,6 +34,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @since 2023-07-10 17:12:38
  */
 @Entity
+@Audited
 @Table(
         name = "oauth2_authorization_consent",
         indexes = {
@@ -64,6 +67,11 @@ public class HerodotusAuthorizationConsent extends AbstractEntity {
      */
     @Column(name = "authorities", nullable = false, length = 1000)
     private String authorities;
+
+	@Version
+	@RevisionNumber
+	@Column(name = "version", columnDefinition = "int not null default 1 comment '版本号'")
+	private Long version = 1L;
 
     /**
      * 获取注册客户端id
@@ -170,4 +178,12 @@ public class HerodotusAuthorizationConsent extends AbstractEntity {
                 .add("authorities", authorities)
                 .toString();
     }
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 }

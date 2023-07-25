@@ -24,6 +24,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
+import com.taotao.cloud.auth.biz.authentication.federation.FederatedIdentityIdTokenCustomizer;
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginUrlConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AuthorizationCodeAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2ClientCredentialsAuthenticationProvider;
@@ -397,12 +398,12 @@ public class AuthorizationServerConfiguration {
 		return herodotusJwtTokenCustomizer;
 	}
 
-	@Bean
-	public OAuth2TokenCustomizer<JwtEncodingContext> federatedIdentityIdTokenCustomizer() {
-		FederatedIdentityIdTokenCustomizer federatedIdentityIdTokenCustomizer = new FederatedIdentityIdTokenCustomizer();
-		log.info("Bean [OAuth2 federatedIdentityIdTokenCustomizer Token Customizer] Auto Configure.");
-		return federatedIdentityIdTokenCustomizer;
-	}
+	//@Bean
+	//public OAuth2TokenCustomizer<JwtEncodingContext> federatedIdentityIdTokenCustomizer() {
+	//	FederatedIdentityIdTokenCustomizer federatedIdentityIdTokenCustomizer = new FederatedIdentityIdTokenCustomizer();
+	//	log.info("Bean [OAuth2 federatedIdentityIdTokenCustomizer Token Customizer] Auto Configure.");
+	//	return federatedIdentityIdTokenCustomizer;
+	//}
 
 	@Bean
 	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {

@@ -119,19 +119,40 @@ spring:
   boot:
     admin:
       notify:
-        mail:
+        #mail:
+        #  enabled: false
+        #  # 配置接收邮箱
+        #  to: 981376577@qq.com
+        #  # 转给其他人
+        #  #cc: 981376577@qq.com
+        #  # 配置发送邮箱
+        #  from: 981376577@qq.com
+        dingtalk:
           enabled: true
-          to: 981376577@qq.com
-          cc: 981376577@qq.com
-          from: Spring Boot Admin <981376577@qq.com>
+          secret: xxxx
+          webhook-url: 'https://oapi.dingtalk.com/robot/send?access_token=xxxx'
+          message: '服务告警: #{instance.registration.name} #{instance.id} is #{event.statusInfo.status}'
       ui:
-        title: taotao cloud
-  #mail:
-  #  host: smtp.qq.com
-  #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
-  #  port: 465
-  #  username: 981376577@qq.com
-  #  protocol: smtps
+        title: taotao cloud admin
+        theme:
+          color: '#14615A'
+  mail:
+    host: smtp.qq.com
+    port: 465
+    password: ${TAOTAO_CLOUD_MAIL_PASSWORD:xxx}
+    username: 981376577@qq.com
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          port: ${spring.mail.port}
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
   security:
     user:
       name: admin
@@ -299,4 +320,4 @@ logging:
     org.springframework.security: off
     org.springframework.security.oauth2: off
     org.springframework.boot.autoconfigure: off
-    de.codecentric.boot.admin.server: debug
+    #de.codecentric.boot.admin.server: debug
