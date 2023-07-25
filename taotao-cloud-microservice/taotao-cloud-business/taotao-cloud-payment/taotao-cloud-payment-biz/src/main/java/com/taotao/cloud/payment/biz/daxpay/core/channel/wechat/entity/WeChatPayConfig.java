@@ -1,12 +1,14 @@
 package com.taotao.cloud.payment.biz.daxpay.core.channel.wechat.entity;
 
 import cn.bootx.mybatis.table.modify.annotation.DbColumn;
-import cn.bootx.mybatis.table.modify.annotation.DbTable;
+import cn.bootx.mybatis.table.modify.mybatis.mysq.annotation.DbMySqlFieldType;
 import cn.bootx.mybatis.table.modify.mybatis.mysq.annotation.DbMySqlIndex;
+import cn.bootx.mybatis.table.modify.mybatis.mysq.constants.MySqlFieldTypeEnum;
 import cn.bootx.platform.common.core.annotation.BigField;
 import cn.bootx.platform.common.core.annotation.EncryptionField;
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
+import cn.bootx.platform.daxpay.code.paymodel.WeChatPayCode;
 import cn.bootx.platform.daxpay.core.channel.wechat.convert.WeChatConvert;
 import cn.bootx.platform.daxpay.dto.channel.wechat.WeChatPayConfigDto;
 import cn.bootx.platform.daxpay.param.channel.wechat.WeChatPayConfigParam;
@@ -27,7 +29,7 @@ import lombok.experimental.Accessors;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@DbTable(comment = "微信支付配置")
+//@DbTable(comment = "微信支付配置")
 @Accessors(chain = true)
 @TableName("pay_wechat_pay_config")
 public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<WeChatPayConfigDto> {
@@ -55,46 +57,40 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
     @DbColumn(comment = "微信应用appId")
     private String wxAppId;
 
+     /**
+     * api版本
+     * @see WeChatPayCode#API_V2
+     */
+     @DbColumn(comment = "api版本")
+     private String apiVersion;
+
     /** 商户平台「API安全」中的 APIv2 密钥 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
+    @BigField
     @EncryptionField
     @DbColumn(comment = "APIv2 密钥")
     private String apiKeyV2;
 
     /** 商户平台「API安全」中的 APIv3 密钥 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
+    @BigField
     @EncryptionField
     @DbColumn(comment = "APIv3 密钥")
     private String apiKeyV3;
 
     /** APPID对应的接口密码，用于获取微信公众号jsapi支付时使用 */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     @EncryptionField
     @DbColumn(comment = "APPID对应的接口密码")
     private String appSecret;
 
-    /** API 证书中的 p12 文件存储的 id */
-    @TableField(updateStrategy = FieldStrategy.IGNORED)
-    @EncryptionField
-    @DbColumn(comment = "API 证书中的 p12 文件存储的 id")
-    private Long p12;
-
-    /** API 证书中的 cert.pem 证书 */
+    /** API证书中p12证书Base64 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     @BigField
     @EncryptionField
-    @DbColumn(comment = "API 证书中的 cert.pem 证书 ")
-    private String certPem;
-
-    /** API 证书中的 key.pem 私钥 */
-    @TableField(updateStrategy = FieldStrategy.IGNORED)
-    @BigField
-    @EncryptionField
-    @DbColumn(comment = "API 证书中的 key.pem 私钥")
-    private String keyPem;
-
-    /** 应用域名，回调中会使用此参数 */
-    @DbColumn(comment = "应用域名")
-    private String domain;
+    @DbMySqlFieldType(MySqlFieldTypeEnum.LONGTEXT)
+    @DbColumn(comment = "API证书中p12证书Base64")
+    private String p12;
 
     /** 服务器异步通知页面路径 通知url必须为直接可访问的url，不能携带参数。公网域名必须为https */
     @DbColumn(comment = "异步通知页面")

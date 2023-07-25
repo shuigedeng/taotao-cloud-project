@@ -125,59 +125,59 @@ public class Oauth2Controller {
 	@GetMapping("/user")
 	public Oauth2UserinfoResult user(Principal principal) {
 		Oauth2UserinfoResult result = new Oauth2UserinfoResult();
-		if (!(principal instanceof JwtAuthenticationToken jwtAuthenticationToken)) {
-			return result;
-		}
-		// 获取jwt解析内容
-		Jwt token = jwtAuthenticationToken.getToken();
-		// 获取当前用户的账号
-		String account = token.getClaim(JwtClaimNames.SUB);
-		// 获取scope
-		List<String> scopes = token.getClaimAsStringList("scope");
-		List<String> claimAsStringList = token.getClaimAsStringList(SecurityConstants.AUTHORITIES_KEY);
-		if (!ObjUtil.isEmpty(claimAsStringList)) {
-			scopes = null;
-		}
-		LambdaQueryWrapper<Oauth2BasicUser> accountWrapper = Wrappers.lambdaQuery(Oauth2BasicUser.class)
-			.eq(Oauth2BasicUser::getAccount, account);
-		Oauth2BasicUser basicUser = basicUserService.getOne(accountWrapper);
-		if (basicUser != null) {
-			// 填充用户的权限信息
-			this.fillUserAuthority(claimAsStringList, basicUser, scopes);
-			BeanUtils.copyProperties(basicUser, result);
-			// 根据用户信息查询三方登录信息
-			LambdaQueryWrapper<Oauth2ThirdAccount> userIdWrapper =
-				Wrappers.lambdaQuery(Oauth2ThirdAccount.class)
-					.eq(Oauth2ThirdAccount::getUserId, basicUser.getId());
-			Oauth2ThirdAccount oauth2ThirdAccount = thirdAccountService.getOne(userIdWrapper);
-			if (oauth2ThirdAccount == null) {
-				return result;
-			}
-			result.setCredentials(oauth2ThirdAccount.getCredentials());
-			result.setThirdUsername(oauth2ThirdAccount.getThirdUsername());
-			result.setCredentialsExpiresAt(oauth2ThirdAccount.getCredentialsExpiresAt());
-			return result;
-		}
-		// 根据当前sub去三方登录表去查
-		LambdaQueryWrapper<Oauth2ThirdAccount> wrapper = Wrappers.lambdaQuery(Oauth2ThirdAccount.class)
-			.eq(Oauth2ThirdAccount::getThirdUsername, account)
-			.eq(Oauth2ThirdAccount::getType, token.getClaim("loginType"));
-		Oauth2ThirdAccount oauth2ThirdAccount = thirdAccountService.getOne(wrapper);
-		if (oauth2ThirdAccount == null) {
-			return result;
-		}
-		// 查到之后反查基础用户表
-		Oauth2BasicUser oauth2BasicUser = basicUserService.getById(oauth2ThirdAccount.getUserId());
-		BeanUtils.copyProperties(oauth2BasicUser, result);
-		// 填充用户的权限信息
-		this.fillUserAuthority(claimAsStringList, oauth2BasicUser, scopes);
-		// 复制基础用户信息
-		BeanUtils.copyProperties(oauth2BasicUser, result);
+//		if (!(principal instanceof JwtAuthenticationToken jwtAuthenticationToken)) {
+//			return result;
+//		}
+//		// 获取jwt解析内容
+//		Jwt token = jwtAuthenticationToken.getToken();
+//		// 获取当前用户的账号
+//		String account = token.getClaim(JwtClaimNames.SUB);
+//		// 获取scope
+//		List<String> scopes = token.getClaimAsStringList("scope");
+//		List<String> claimAsStringList = token.getClaimAsStringList(AUTHORITIES_KEY);
+//		if (!ObjUtil.isEmpty(claimAsStringList)) {
+//			scopes = null;
+//		}
+//		LambdaQueryWrapper<Oauth2BasicUser> accountWrapper = Wrappers.lambdaQuery(Oauth2BasicUser.class)
+//			.eq(Oauth2BasicUser::getAccount, account);
+//		Oauth2BasicUser basicUser = basicUserService.getOne(accountWrapper);
+//		if (basicUser != null) {
+//			// 填充用户的权限信息
+//			this.fillUserAuthority(claimAsStringList, basicUser, scopes);
+//			BeanUtils.copyProperties(basicUser, result);
+//			// 根据用户信息查询三方登录信息
+//			LambdaQueryWrapper<Oauth2ThirdAccount> userIdWrapper =
+//				Wrappers.lambdaQuery(Oauth2ThirdAccount.class)
+//					.eq(Oauth2ThirdAccount::getUserId, basicUser.getId());
+//			Oauth2ThirdAccount oauth2ThirdAccount = thirdAccountService.getOne(userIdWrapper);
+//			if (oauth2ThirdAccount == null) {
+//				return result;
+//			}
+//			result.setCredentials(oauth2ThirdAccount.getCredentials());
+//			result.setThirdUsername(oauth2ThirdAccount.getThirdUsername());
+//			result.setCredentialsExpiresAt(oauth2ThirdAccount.getCredentialsExpiresAt());
+//			return result;
+//		}
+//		// 根据当前sub去三方登录表去查
+//		LambdaQueryWrapper<Oauth2ThirdAccount> wrapper = Wrappers.lambdaQuery(Oauth2ThirdAccount.class)
+//			.eq(Oauth2ThirdAccount::getThirdUsername, account)
+//			.eq(Oauth2ThirdAccount::getType, token.getClaim("loginType"));
+//		Oauth2ThirdAccount oauth2ThirdAccount = thirdAccountService.getOne(wrapper);
+//		if (oauth2ThirdAccount == null) {
+//			return result;
+//		}
+//		// 查到之后反查基础用户表
+//		Oauth2BasicUser oauth2BasicUser = basicUserService.getById(oauth2ThirdAccount.getUserId());
+//		BeanUtils.copyProperties(oauth2BasicUser, result);
+//		// 填充用户的权限信息
+//		this.fillUserAuthority(claimAsStringList, oauth2BasicUser, scopes);
+//		// 复制基础用户信息
+//		BeanUtils.copyProperties(oauth2BasicUser, result);
 		// 设置三方用户信息
-		result.setLocation(oauth2ThirdAccount.getLocation());
-		result.setCredentials(oauth2ThirdAccount.getCredentials());
-		result.setThirdUsername(oauth2ThirdAccount.getThirdUsername());
-		result.setCredentialsExpiresAt(oauth2ThirdAccount.getCredentialsExpiresAt());
+//		result.setLocation(oauth2ThirdAccount.getLocation());
+//		result.setCredentials(oauth2ThirdAccount.getCredentials());
+//		result.setThirdUsername(oauth2ThirdAccount.getThirdUsername());
+//		result.setCredentialsExpiresAt(oauth2ThirdAccount.getCredentialsExpiresAt());
 		return result;
 	}
 }

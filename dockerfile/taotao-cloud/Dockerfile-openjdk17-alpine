@@ -1,0 +1,16 @@
+FROM alpine:3.18.0
+
+# 设置镜像仓库
+RUN echo http://mirrors.aliyun.com/alpine/v3.18/main/ > /etc/apk/repositories && \
+        echo http://mirrors.aliyun.com/alpine/v3.18/community/ >> /etc/apk/repositories
+
+# 安装openjdk-jre、汉字字体包、时间组件
+RUN apk add --no-cache openjdk17-jre ttf-dejavu fontconfig tzdata && \
+  			cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+  			echo "Asia/Shanghai" > /etc/timezone
+
+ # 删除临时文件和缓存
+RUN rm -rf /tmp/* /var/cache/apk/*
+
+# 设置环境变量
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk

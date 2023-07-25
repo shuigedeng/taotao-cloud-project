@@ -44,6 +44,7 @@ import org.springframework.security.oauth2.core.http.converter.OAuth2AccessToken
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
@@ -241,7 +242,7 @@ public class SocialHttpConfigurer extends AbstractHttpConfigurer<SocialHttpConfi
 				// 认证成功后的处理器
 				.successHandler(authenticationSuccessHandler(httpSecurity))
 				// 认证失败后的处理器
-				.failureHandler(authenticationFailureHandler())
+				.failureHandler(authenticationFailureHandler(httpSecurity))
 				// 授权端点配置
 				.authorizationEndpoint(authorizationEndpointCustomizer -> {
 					authorizationEndpointCustomizer.authorizationRequestResolver(resolver);
@@ -273,6 +274,10 @@ public class SocialHttpConfigurer extends AbstractHttpConfigurer<SocialHttpConfi
 		JwtTokenGenerator jwtTokenGenerator = applicationContext.getBean(JwtTokenGenerator.class);
 		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
 
+		//todo 此处需要判断 联合登录需要返回这个
+		//return new SavedRequestAwareAuthenticationSuccessHandler();
+
+		//todo 直接请求登录需要返回这个
 		return new SocialAuthenticationSuccessHandler(jwtTokenGenerator);
 	}
 
@@ -282,7 +287,7 @@ public class SocialHttpConfigurer extends AbstractHttpConfigurer<SocialHttpConfi
 	 * @return {@link AuthenticationFailureHandler }
 	 * @since 2023-07-10 17:41:25
 	 */
-	private AuthenticationFailureHandler authenticationFailureHandler() {
+	private AuthenticationFailureHandler authenticationFailureHandler(HttpSecurity httpSecurity) {
 		return new SocialAuthenticationFailureHandler();
 	}
 

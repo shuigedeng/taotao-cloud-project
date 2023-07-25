@@ -1,0 +1,34 @@
+### 使用示例命令
+
+# ```shell
+# # 打包镜像 -f:指定Dockerfile文件路径 --no-cache:构建镜像时不使用缓存
+# docker build -f Dockerfile -t "registry.cn-hangzhou.aliyuncs.com/zhengqingya/springboot" . --no-cache
+#
+# # 运行
+# docker run -d -p 3001:8080 -v /home/zhengqingya/app.log:/home/app.log --name springboot registry.cn-hangzhou.aliyuncs.com/zhengqingya/springboot
+#
+# # 删除旧容器
+# docker rm -f springboot
+#
+# # 删除旧镜像
+# docker rmi -f registry.cn-hangzhou.aliyuncs.com/zhengqingya/springboot
+# ```
+
+
+# jre基础环境
+FROM openjdk:8-jre-alpine
+
+# 维护者信息
+MAINTAINER zhengqingya
+
+# 添加jar包到容器中 -- tips: app.jar 和 Dockerfile 在同一级
+ADD app.jar /home/
+
+# 对外暴漏的端口号
+# [注：EXPOSE指令只是声明容器运行时提供的服务端口，给读者看有哪些端口，在运行时只会开启程序自身的端口！！]
+EXPOSE 8080
+
+# RUN🏃🏃
+CMD nohup java -jar /home/app.jar >> /home/app.log 2>&1 & \
+    echo "****** 查看日志..." & \
+    tail -f /home/app.log
