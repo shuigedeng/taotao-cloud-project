@@ -44,5 +44,23 @@ public class TaoTaoCloudGatewayApplication {
 
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class).run( args);
+
+
+		// 获取本地 ip 地址
+		//String ip = InetAddress.getLocalHost().getHostAddress();
+//
+		//// 获取服务配置文件，name、port、以及全局服务路径
+		//Environment env = applicationContext.getEnvironment();
+		//String name = env.getProperty("spring.application.name");
+		//String port = env.getProperty("server.port");
+		//String path = Optional.ofNullable(env.getProperty("server.servlet.context-path")).orElse("");
+//
+		//// 打印输出
+		//logger.info("\n----------------------------------------------------------\n\t" +
+		//	"Application " + name +" is running! Access URLs:\n\t" +
+		//	"Local 访问网址: \t\thttp://localhost:" + port + path + "\n\t" +
+		//	"External 访问网址: \thttp://" + ip + ":" + port + path + "\n\t" +
+		//	"----------------------------------------------------------");
+
 	}
 }
