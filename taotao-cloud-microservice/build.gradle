@@ -35,7 +35,7 @@ subprojects {
 
 
     dependencies {
-        developmentOnly "org.springframework.boot:spring-boot-devtools"
+        //developmentOnly "org.springframework.boot:spring-boot-devtools"
 
         testImplementation("io.github.shuigedeng:taotao-cloud-starter-test"){
             exclude group: "org.mybatis.spring.boot", module: "mybatis-spring-boot-starter-test"
