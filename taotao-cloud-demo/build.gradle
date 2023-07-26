@@ -42,7 +42,7 @@ dependencies {
 
 	implementation "org.mapstruct:mapstruct"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructProcessorVersion}"
-	annotationProcessor "no.entur.mapstruct.spi:protobuf-spi-impl:1.43"
+	annotationProcessor "no.entur.mapstruct.spi:protobuf-spi-impl:1.44"
 
 //        annotationProcessor "com.querydsl:querydsl-apt:${querydslAptVersion}:jpa"
 

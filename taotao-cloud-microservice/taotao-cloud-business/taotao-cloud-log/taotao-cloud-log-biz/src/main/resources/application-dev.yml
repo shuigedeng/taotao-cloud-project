@@ -866,7 +866,7 @@ taotao:
         driverlist: com.mysql.cj.jdbc.Driver
         database-dialect-date-format: yyyy-MM-dd HH:mm:ss
         appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
-        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.logp6spy
+        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
         remoteServiceName: p6spy-${spring.application.name}
     springdoc:
       enabled: true

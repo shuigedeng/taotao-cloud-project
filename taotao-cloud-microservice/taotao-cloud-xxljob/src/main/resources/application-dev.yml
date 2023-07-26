@@ -244,11 +244,12 @@ taotao:
   cloud:
     data:
       p6spy:
-        enabled: false
+        enabled: true
         dateformat: yyyy-MM-dd HH:mm:ss
         driverlist: com.mysql.cj.jdbc.Driver
         database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-        appender: com.p6spy.engine.spy.appender.FileLogger
+        appender: com.taotao.cloud.data.p6spy.logger.FileLogger
+        logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
         remoteServiceName: p6spy-${spring.application.name}
     core:
       enabled: true
