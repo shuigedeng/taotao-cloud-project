@@ -46,8 +46,8 @@ buildscript {
             allowInsecureProtocol = true
 
             credentials {
-                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
             }
             url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
         }
@@ -207,8 +207,8 @@ allprojects {
             allowInsecureProtocol = true
 
             credentials {
-                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
             }
             url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
         }
@@ -217,8 +217,8 @@ allprojects {
             allowInsecureProtocol = true
 
             credentials {
-                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
             }
             url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
         }
