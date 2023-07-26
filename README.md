@@ -4,19 +4,19 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/spring-6.0.9-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20boot-3.1.0-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.0.11-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20boot-3.1.2-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud-2022.0.3-yellowgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0--------RC2-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.4--2022.0.1-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.92.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20security-6.1.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0--RC2-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.8--2022.0.1-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.95.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20security-6.1.2-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.7.1-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis%20plus-3.5.3.1-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.1.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-3.21.3-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-5.8.18-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M4-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -69,7 +69,7 @@ Requires:
 ```
 JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
 GRALE_VERSION >= 8.2.1
-IDEA_VERSION >= 2023.1.3
+IDEA_VERSION >= 2023.2
 ```
 
 Gradle:
@@ -112,24 +112,24 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.10           
+ Spring               | 6.0.11           
  Spring Boot          | 3.1.2           
  Spring Cloud         | 2022.0.3        
- Spring Cloud Alibaba | 2022.0.0.0--RC2 
- Spring Cloud Tencent | 1.11.7-2022.0.1 
- Seata                | 1.7.0-native-rc2
+ Spring Cloud Alibaba | 2022.0.0.0-RC2 
+ Spring Cloud Tencent | 1.11.8-2022.0.1 
+ Seata                | 1.7.0
  Sentinel             | 1.8.6           
- Spring-kafka         | 3.0.8           
+ Spring-kafka         | 3.0.9         
  Roketmq              | 5.0.0           
- Spring Security      | 6.1.0           
+ Spring Security      | 6.1.2           
  Mybatis Plus         | 3.5.3.1         
  Hutool               | 6.0.0-M4          
  Mysql                | 8.1.0          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.1.0           
- Redisson             | 3.22.1         
- Lettuce              | 6.0.4.RELEASE   
+ Redisson             | 3.23.1         
+ Lettuce              | 6.0.5.RELEASE   
  Elasticsearch        | 8.7.1           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
@@ -172,7 +172,7 @@ Maven:
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
 * **主体框架**：采用最新的Spring Boot 3.1.2、Spring Cloud 2022.0.3、Spring Cloud Alibaba
-  2022.0.0.0--RC2 版本进行设计
+  2022.0.0.0-RC2 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
@@ -207,13 +207,13 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-demo -- demo模块
 │  ├─taotao-cloud-go -- go模块
 │  ├─taotao-cloud-microservice -- 微服务模块
+│  │  ├─taotao-cloud-bff-api  -- 基于bff架构的api模块
+│  │  ├─taotao-cloud-bff-graphql  -- 基于bff架构的graphql模块
 │  │  ├─taotao-cloud-business  -- 所有的业务模块
 │  │  ├─taotao-cloud-data-sync  -- 数据同步模块
 │  │  ├─taotao-cloud-data-analysis  -- 数据分析模块
 │  │  ├─taotao-cloud-front  -- 前端pc模块
 │  │  ├─taotao-cloud-gateway  -- 网关模块
-│  │  ├─taotao-cloud-gateway-shenyu  -- 基于shenyu网关模块
-│  │  ├─taotao-cloud-graphql  -- graphql模块
 │  │  ├─taotao-cloud-monitor  -- 监控模块
 │  │  ├─taotao-cloud-open-platform  -- 开放模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
@@ -223,7 +223,6 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-plugin -- 插件模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-scala -- scala模块
-│  ├─taotao-cloud-standlone -- 单项目模块
 │  ├─taotao-cloud-warehouse -- 数仓模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
 │  │  ├─taotao-cloud-offline-weblog -- 离线日志分析模块
