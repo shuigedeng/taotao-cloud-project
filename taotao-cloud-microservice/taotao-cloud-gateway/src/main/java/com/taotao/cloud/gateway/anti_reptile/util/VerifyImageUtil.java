@@ -19,6 +19,7 @@ package com.taotao.cloud.gateway.anti_reptile.util;
 import com.taotao.cloud.captcha.captcha.utils.CaptchaUtil;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
 import java.io.ByteArrayOutputStream;
+import java.time.Duration;
 import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +46,7 @@ public class VerifyImageUtil {
 
     public void saveVerifyCodeToRedis(VerifyImageDTO verifyImage) {
         RBucket<String> rBucket = redissonClient.getBucket(VERIFY_CODE_KEY + verifyImage.getVerifyId());
-        rBucket.set(verifyImage.getResult(), 60, TimeUnit.SECONDS);
+        rBucket.set(verifyImage.getResult(), Duration.ofSeconds(60L));
     }
 
     public void deleteVerifyCodeFromRedis(String verifyId) {

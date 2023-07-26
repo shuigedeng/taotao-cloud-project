@@ -79,7 +79,9 @@ dependencies {
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 
-    //developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    //implementation 'com.maciejwalkowiak.spring:spring-boot-startup-report:0.2.0'
+    //implementation "io.github.linyimin0812:spring-async-bean-starter:2.0.4"
+    //implementation "io.github.linyimin0812:spring-profiler-starter:2.0.4"
 
     //implementation "com.101tec:zkclient:0.11"
     //implementation "org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r"

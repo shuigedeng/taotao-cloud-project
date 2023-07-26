@@ -25,8 +25,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
-    //implementation 'com.maciejwalkowiak.spring:spring-boot-startup-report:0.2.0'
-
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     //implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
