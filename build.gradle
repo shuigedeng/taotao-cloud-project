@@ -52,6 +52,17 @@ buildscript {
             url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
         }
 
+        //阿里云新的仓库
+        maven {
+            allowInsecureProtocol = true
+
+            credentials {
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+            }
+            url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
+        }
+
         mavenCentral()
         gradlePluginPortal()
         maven { url "https://repo.spring.io/snapshot" }
@@ -213,14 +224,15 @@ allprojects {
             url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
         }
 
+        //阿里云新的仓库
         maven {
             allowInsecureProtocol = true
 
             credentials {
-                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
             }
-            url 'https://repo.rdc.aliyun.com/repository/136936-snapshot-hglDf2/'
+            url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
         }
 
         maven { url "https://repo.spring.io/snapshot" }
