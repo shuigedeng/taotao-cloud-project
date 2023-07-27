@@ -1,17 +1,29 @@
 apply plugin: 'pmd'
 
 pmd {
+    //PMD使用的JDK版本。有些规则可能会要求JDK的最低或者最高版本，具体要求参考Java Rules。
     //targetJdk = 17
+    // 是否将 PMD 结果输出到终端
     consoleOutput = true
+    //PMD 运行时使用的线程数。
     threads = 4
+    //如果出现了警告，是否允许继续构建，允许值为true|false。
     ignoreFailures = true
+    //停止构建前允许的最大失败次数。
+    //maxFailures = 3
+    //是否开启增量分析，允许值为true|false
     incrementalAnalysis = true
+    //报告生成的路径。
     reportsDir = file("$project.buildDir/code-analysis/pmdReportsDir")
     //https://github.com/pmd/pmd/releases
-    toolVersion = "6.55.0"                             // The version of PMD to use.
-    ruleSetFiles = files(rootProject.file('code-analysis/pmd/pmd.xml'))       // The location of the configuration file.
-    ruleSets = []                                      // Ignore the default rules. The ones this config
-    // uses are set with the ruleSetFiles property.
+    // 要使用的PMD版本
+    toolVersion = "6.55.0"
+    //要使用的自定义规则集文件路径，可以在files()中填多个路径。
+    ruleSetFiles = files(rootProject.file('code-analysis/pmd/pmd.xml'))
+    //跟ruleSetFiles的作用一样，不过只能填一个文件路径。
+    //ruleSetConfig = resources.text.fromFile("config/pmd/myRuleSet.xml")
+    // 规则优先级阈值，低于这个优先级则会被忽略 每个规则都有个优先级，是从 1 到 5 的整数，其中 1 是最高优先级
     rulesMinimumPriority = 5
-
+    // 使用的规则集配置文件路径 指定使用的规则集，默认值为["category/java/errorprone.xml"]。建议如果配置了ruleSetFiles或者ruleSetConfig，就将ruleSets配置为空（ruleSets = []），
+    //ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
 }
