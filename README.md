@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/spring-6.0.11-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20boot-3.1.2-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud-2022.0.3-yellowgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0--RC2-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.8--2022.0.1-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/netty-4.1.95.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20security-6.1.2-brightgreen" alt="Downloads"/>
@@ -115,7 +115,7 @@ Maven:
  Spring               | 6.0.11           
  Spring Boot          | 3.1.2           
  Spring Cloud         | 2022.0.3        
- Spring Cloud Alibaba | 2022.0.0.0-RC2 
+ Spring Cloud Alibaba | 2022.0.0.0 
  Spring Cloud Tencent | 1.11.8-2022.0.1 
  Seata                | 1.7.0
  Sentinel             | 1.8.6           
@@ -172,7 +172,7 @@ Maven:
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
 * **主体框架**：采用最新的Spring Boot 3.1.2、Spring Cloud 2022.0.3、Spring Cloud Alibaba
-  2022.0.0.0-RC2 版本进行设计
+  2022.0.0.0 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
