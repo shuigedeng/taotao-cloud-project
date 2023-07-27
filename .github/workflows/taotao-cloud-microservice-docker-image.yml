@@ -112,7 +112,7 @@ jobs:
         with:
           gradle-version: 8.2
           arguments: clean bootJar -x test
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-auth/taotao-cloud-auth-biz
 
       - name: Publish Docker Image taotao-cloud-auth
         uses: elgohr/Publish-Docker-Github-Action@v4
@@ -124,7 +124,7 @@ jobs:
           registry: registry.cn-hangzhou.aliyuncs.com
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-auth/taotao-cloud-auth-biz
+          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-auth/taotao-cloud-auth-biz
 
       - name: Gradle BootJar taotao-cloud-xxljob
         uses: gradle/gradle-build-action@v2
@@ -152,7 +152,7 @@ jobs:
         with:
           gradle-version: 8.2
           arguments: clean bootJar -x test
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-order/taotao-cloud-order-biz
 
       - name: Publish Docker Image taotao-cloud-order
         uses: elgohr/Publish-Docker-Github-Action@v4
@@ -164,7 +164,7 @@ jobs:
           registry: registry.cn-hangzhou.aliyuncs.com
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-order/taotao-cloud-order-biz
+          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-order/taotao-cloud-order-biz
 
       - name: Gradle BootJar taotao-cloud-sys
         uses: gradle/gradle-build-action@v2
@@ -172,7 +172,7 @@ jobs:
         with:
           gradle-version: 8.2
           arguments: clean bootJar -x test
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-sys/taotao-cloud-sys-biz
 
       - name: Publish Docker Image taotao-cloud-sys
         uses: elgohr/Publish-Docker-Github-Action@v4
@@ -184,7 +184,7 @@ jobs:
           registry: registry.cn-hangzhou.aliyuncs.com
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-sys/taotao-cloud-sys-biz
+          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-sys/taotao-cloud-sys-biz
 
       #- name: login to registry
       #  uses: docker/login-action@v1
