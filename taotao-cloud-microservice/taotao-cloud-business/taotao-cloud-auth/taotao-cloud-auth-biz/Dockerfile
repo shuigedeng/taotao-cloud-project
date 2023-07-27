@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-auth-biz-2023.08.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
 
 ARG BACKEND_SERVICE=192.168.10.200:11800
@@ -17,7 +17,7 @@ ARG APP_NAME=taotao-cloud-auth
 ARG APP_VERSION=2023.08
 ARG JAR=${APP_NAME}-${VERSION}
 ARG JAR_NAME=${JAR}.jar
-ARG APP_PORT=33336
+ARG APP_PORT=33337
 ARG PRROFILES=dev
 
 LABEL application_name=${APP_NAME}

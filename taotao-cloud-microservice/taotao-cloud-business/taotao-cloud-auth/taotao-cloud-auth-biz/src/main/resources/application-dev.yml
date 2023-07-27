@@ -830,7 +830,7 @@ spring:
             user-info-authentication-method: form
 #      resourceserver:
 #        jwt:
-#          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+#          jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
   cloud:
     openfeign:
       circuitbreaker: #如果 Spring Cloud CircuitBreaker 在 classpath 上，并且feign.circuitbreaker.enabled=true Feign 将使用断路器包装所有方法。
@@ -1315,7 +1315,7 @@ knife4j:
 
 jwk:
   set:
-    uri: http://127.0.0.1:33336/oauth2/jwks
+    uri: http://127.0.0.1:33337/oauth2/jwks
 
 auth:
   baidu:
