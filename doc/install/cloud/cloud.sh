@@ -17,7 +17,7 @@ function start_cloud() {
   # JMX_PORT -> 9999
   /root/script/kafka.sh start
   
-  # http -> 8848 http://192.168.10.200:8848/nacos  nacos/nacos
+  # http -> 8848 http://192.168.10.220:8848/nacos  nacos/nacos
   # tcp -> 9848 客户端gRPC请求服务端端口，用于客户端向服务端发起连接和请求
   # tcp -> 9849 服务端gRPC请求服务端端口，用于服务间同步等
   # tcp -> 7848 nacos集群通信，进行选举，检测等
@@ -26,32 +26,32 @@ function start_cloud() {
   # tcp -> 8091
   /root/script/seata.sh start
   
-  # tcp/http -> 8849 http://192.168.10.200:8849 sentinel/sentinel
+  # tcp/http -> 8849 http://192.168.10.220:8849 sentinel/sentinel
   /root/script/sentinel.sh start
   
-  # tcp/http -> 9411 http://192.168.10.200:9411
+  # tcp/http -> 9411 http://192.168.10.220:9411
   /root/script/zipkin.sh start
   
   # tcp -> 11800
-  # http -> 18080 http://192.168.10.200:28080
+  # http -> 18080 http://192.168.10.220:28080
   /root/script/skywalking.sh start
 
-  # tcp/http -> 5601 http://192.168.10.200:8081
+  # tcp/http -> 5601 http://192.168.10.220:8081
   /root/script/arthas.sh start
   
-  # tcp/http -> 9090 http://192.168.10.200:9090 http://192.168.10.200:9090/metrics
+  # tcp/http -> 9090 http://192.168.10.220:9090 http://192.168.10.220:9090/metrics
   /root/script/prometheus.sh start
   
-  # tcp/http -> 3000 http://192.168.10.200:3000 admin/admin
+  # tcp/http -> 3000 http://192.168.10.220:3000 admin/admin
   /root/script/grafana.sh start
 
-  # tcp/http -> 9200 http://192.168.10.200:9200
+  # tcp/http -> 9200 http://192.168.10.220:9200
   su - elasticsearch -c "/home/elasticsearch/elasticsearch.sh start"
 
-  # tcp/http -> 5601 http://192.168.10.200:5601
+  # tcp/http -> 5601 http://192.168.10.220:5601
   /root/script/kibana.sh start
 
-  # tcp/http -> 8089 http://192.168.10.200:8089
+  # tcp/http -> 8089 http://192.168.10.220:8089
   /root/script/canal.sh start
 
   pm2 start /opt/cloud/yapi/vendors/server/app.js -n yapi --max-memory-restart 500M

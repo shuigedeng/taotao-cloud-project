@@ -13,7 +13,7 @@ logging:
     logstash-appender:
       destination: 127.0.0.1:4560
     kafka-appender:
-      bootstrap-servers: 192.168.10.200:9092,192.168.10.200:9093,192.168.10.200:9094
+      bootstrap-servers: 192.168.10.220:9092,192.168.10.220:9093,192.168.10.220:9094
       topic: logback_to_logstash
 
 console:
@@ -30,7 +30,7 @@ seata:
     # support: nacos 、 consul 、 apollo 、 zk  、 etcd3
     type: nacos
     nacos:
-      server-addr: 192.168.10.200:8000
+      server-addr: 192.168.10.220:8000
       namespace: 2f271160-9db6-4a58-b076-d521bb7535a5
       group: SEATA_GROUP
       username: nacos
@@ -66,7 +66,7 @@ seata:
     preferred-networks: 30.240.*
     nacos:
       application: taotao-cloud-seata-server
-      server-addr: 192.168.10.200:8000
+      server-addr: 192.168.10.220:8000
       group: SEATA_GROUP
       namespace: 2f271160-9db6-4a58-b076-d521bb7535a5
       cluster: SC
@@ -142,7 +142,7 @@ seata:
       datasource: druid
       db-type: mysql
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://192.168.10.200:3306/taotao-cloud-seata-1.5.1?rewriteBatchedStatements=true
+      url: jdbc:mysql://192.168.10.220:3306/taotao-cloud-seata-1.5.1?rewriteBatchedStatements=true
       user: mysql
       password: mysql
       min-conn: 5

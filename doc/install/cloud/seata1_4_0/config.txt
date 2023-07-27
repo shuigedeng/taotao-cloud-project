@@ -14,8 +14,8 @@ transport.threadFactory.workerThreadSize=default
 transport.shutdown.wait=3
 # 修改为 taotao_cloud_tx_group
 service.vgroupMapping.taotao_cloud_tx_group=default
-# 修改为 192.168.10.200
-service.default.grouplist=192.168.10.200:8091
+# 修改为 192.168.10.220
+service.default.grouplist=192.168.10.220:8091
 service.enableDegrade=false
 service.disableGlobalTransaction=false
 client.rm.asyncCommitBufferLimit=10000
@@ -46,8 +46,8 @@ store.db.datasource=druid
 store.db.dbType=mysql
 # 修改为com.mysql.cj.jdbc.Driver
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-# 修改为192.168.10.200
-store.db.url=jdbc:mysql://192.168.10.200:3306/taotao-cloud-seata?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+# 修改为192.168.10.220
+store.db.url=jdbc:mysql://192.168.10.220:3306/taotao-cloud-seata?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
 # 修改为root
 store.db.user=root
 # 修改为password

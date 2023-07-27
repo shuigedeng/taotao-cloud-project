@@ -38,7 +38,7 @@
 
 	<property>
 		<name>hive.server2.thrift.bind.host</name>
-		<value>192.168.10.200</value>
+		<value>192.168.10.220</value>
 	</property>
 
 	<property>
@@ -53,7 +53,7 @@
 
 	<property>
 		<name>hive.metastore.uris</name>
-		<value>thrift://192.168.10.200:9083</value>
+		<value>thrift://192.168.10.220:9083</value>
 	</property>
 
 	<property>

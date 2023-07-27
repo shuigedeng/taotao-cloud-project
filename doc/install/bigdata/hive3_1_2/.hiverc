@@ -1,2 +1,2 @@
-add jar hdfs://192.168.10.200:8020/common/lib/json-serde-1.3.8-jar-with-dependencies.jar;
-add jar hdfs://192.168.10.200:8020/common/lib/json-udf-1.3.8-jar-with-dependencies.jar;
+add jar hdfs://192.168.10.220:8020/common/lib/json-serde-1.3.8-jar-with-dependencies.jar;
+add jar hdfs://192.168.10.220:8020/common/lib/json-udf-1.3.8-jar-with-dependencies.jar;

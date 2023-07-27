@@ -83,7 +83,7 @@ vim /opt/cloud/apache-skywalking-apm-bin/webapp/webapp.yml
 /opt/cloud/apache-skywalking-apm-bin/bin/webappService.sh
 
 启动bin目录下的startup.sh可以将collector和Web模块一起启动起来。
-http://192.168.10.200:8085进入SkyWalking UI
+http://192.168.10.220:8085进入SkyWalking UI
 
 
 # 9、探针配置（Agent）
