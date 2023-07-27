@@ -93,7 +93,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${APP_PRROFILES} \
-                  -javaagent:/pyroscope/agent/pyroscope.jar \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
