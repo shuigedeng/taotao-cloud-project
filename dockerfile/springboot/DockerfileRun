@@ -1,0 +1,1 @@
+docker run -d -p 33333:33333 --name gateway registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2023.08

@@ -18,6 +18,7 @@ ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33334
 ARG APP_PRROFILES=dev
 
+
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
