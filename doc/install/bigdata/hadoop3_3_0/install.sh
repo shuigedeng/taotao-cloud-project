@@ -31,7 +31,7 @@ yarn-site.xml
 	<!-- 设置日志聚集服务器地址 -->
 	<property>
 		<name>yarn.log.server.url</name>
-		<value>http://192.168.10.200:19888/jobhistory/logs</value>
+		<value>http://192.168.10.220:19888/jobhistory/logs</value>
 	</property>
 	<!-- 设置日志保留时间为 7 天 -->
 	<property>

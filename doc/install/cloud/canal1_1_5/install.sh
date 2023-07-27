@@ -226,7 +226,7 @@ canal.instance.global.spring.xml = classpath:spring/file-instance.xml
 #########                    Kafka                   #############
 ##################################################
 # 修改kafka
-kafka.bootstrap.servers = 192.168.10.200:9092
+kafka.bootstrap.servers = 192.168.10.220:9092
 kafka.acks = all
 kafka.compression.type = none
 kafka.batch.size = 16384
