@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-auth-biz-2023.08.jar ./
+ADD ./build/libs/taotao-cloud-auth-2023.08.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-auth-biz-2023.08.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-auth-2023.08.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
