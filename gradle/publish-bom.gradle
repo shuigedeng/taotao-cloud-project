@@ -18,6 +18,22 @@ publishing {
             }
         }
 
+        //新的仓库
+        maven {
+            name = "AliyunNew"
+            if (project.version.endsWith("-SNAPSHOT")) {
+                url = "https://packages.aliyun.com/maven/repository/2085441-snapshot-DjVIiu/"
+            } else {
+                url = "https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/"
+            }
+
+            allowInsecureProtocol = true
+            credentials {
+                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+            }
+        }
+
         maven {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/shuigedeng/taotao-cloud-project")
