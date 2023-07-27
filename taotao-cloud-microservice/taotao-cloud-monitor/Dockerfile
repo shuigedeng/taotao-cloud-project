@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2023.08.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
@@ -17,7 +17,6 @@ ARG APP_VERSION=2023.08
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33334
 ARG APP_PRROFILES=dev
-
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
@@ -35,9 +34,9 @@ ENV SKYWALKING_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
 # pyroscope 从env中获取配置数据
 ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
 ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.10.220:4040
-ENV PYROSCOPE_PROFILING_INTERVAL=10ms
-ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
-ENV PYROSCOPE_UPLOAD_INTERVAL=10s
+#ENV PYROSCOPE_PROFILING_INTERVAL=10ms
+#ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
+#ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-monitor"
 #ENV PYROSCOPE_AUTH_TOKEN=info
@@ -92,6 +91,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${APP_PRROFILES} \
+                  -javaagent:/pyroscope/agent/pyroscope.jar \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
