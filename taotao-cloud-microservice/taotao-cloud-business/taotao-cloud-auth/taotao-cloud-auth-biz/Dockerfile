@@ -12,10 +12,10 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
-ARG APP_NAME=taotao-cloud-gateway
+ARG APP_NAME=taotao-cloud-auth
 ARG APP_VERSION=2023.08
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
-ARG APP_PORT=33333
+ARG APP_PORT=33337
 ARG APP_PRROFILES=dev
 
 LABEL application_name=${APP_NAME}
