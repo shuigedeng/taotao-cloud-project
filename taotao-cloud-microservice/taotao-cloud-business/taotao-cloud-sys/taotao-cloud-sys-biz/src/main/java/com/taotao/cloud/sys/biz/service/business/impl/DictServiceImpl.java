@@ -79,12 +79,12 @@ public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, Dic
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Dict saveDict(Dict sysDict) {
-		String dictCode = sysDict.getDictCode();
+	public Dict saveDict(Dict dict) {
+		String dictCode = dict.getDictCode();
 		if (cr().existsByDictCode(dictCode)) {
 			throw new BusinessException(ResultEnum.DICT_CODE_REPEAT_ERROR);
 		}
-		return cr().saveAndFlush(sysDict);
+		return cr().saveAndFlush(dict);
 	}
 
 	@Override
@@ -242,9 +242,9 @@ public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, Dic
 	public Dict testMybatisQueryStructure(DictQuery dictQuery) {
 		DictDeptParams params = new DictDeptParams();
 		params.setIds(List.of(dictQuery.getDictId()));
-		List<DictDeptBO> dictDeptBOS = this.baseMapper.testMybatisQueryStructure(params);
-
-		return null;
+		List<DictDeptBO> dictDeptBos = this.baseMapper.testMybatisQueryStructure(params);
+		LogUtils.info(dictDeptBos.toString());
+		return new Dict();
 	}
 
 	// ****************************************************************

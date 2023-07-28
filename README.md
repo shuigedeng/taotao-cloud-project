@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/spring%20cloud-2022.0.3-yellowgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.8--2022.0.1-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.95.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.96.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20security-6.1.2-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.7.1-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis%20plus-3.5.3.1-yellow" alt="Downloads"/>
@@ -140,7 +140,7 @@ Maven:
  Elasticjob           | 3.0.3           
  Powerjob             | 4.3.3           
  Forest               | 1.5.32          
- Netty                | 4.1.95.Final
+ Netty                | 4.1.96.Final
 
 ## 6. 演示地址
 
