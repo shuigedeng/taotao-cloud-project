@@ -18,24 +18,18 @@ package com.taotao.cloud.auth.biz;
 
 import com.taotao.cloud.cache.redis.configuration.RedisDelayQueueAutoConfiguration;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.data.envers.repository.config.EnableEnversRepositories;
 import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
-
-import java.time.Duration;
 
 /**
  * TaoTaoCloudAuthApplication
@@ -71,10 +65,11 @@ import java.time.Duration;
 @EnableEnversRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"})
 @EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity", "com.taotao.cloud.auth.biz.management.entity"})
 @EnableJpaRepositories(
-        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"},repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
+        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"}, repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
 @EnableDiscoveryClient
+//todo 需要修改
 @SpringBootApplication(exclude = RedisDelayQueueAutoConfiguration.class)
 @ConfigurationPropertiesScan
 @EnableSecurityConfiguration
@@ -107,24 +102,9 @@ public class TaoTaoCloudAuthApplication {
         //   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
         // }
 
-        try {
-            new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
-        }catch (Throwable var12) {
-            if (var12 instanceof SpringApplication.AbandonedRunException) {
+        new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
 
-                var12.printStackTrace();
-                LogUtils.error(var12, "启动失败 ---------------- AbandonedRunException");
-
-                throw var12;
-            }
-
-            var12.printStackTrace();
-            LogUtils.error(var12, "启动失败 ---------------- Throwable");
-
-            throw new IllegalStateException(var12);
-        }
-
-		//SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
+        //SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }
 
 }
