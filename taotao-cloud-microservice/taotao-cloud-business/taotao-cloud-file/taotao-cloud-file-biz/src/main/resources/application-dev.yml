@@ -418,6 +418,8 @@ spring:
       data-source-properties:
         cachePrepStmts: true
         prepStmtCacheSize: 250
+    dynamic:
+      enabled: false
   jpa:
     database: mysql
     database-platform: mysql
@@ -666,8 +668,8 @@ taotao:
         interceptor:
           enabled: true
           pagination:
-            db-type: mysql
             enabled: true
+            db-type: mysql
             max-limit: 1000
             optimize-join: true
             overflow: true
@@ -679,8 +681,8 @@ taotao:
             enabled: true
           data-scope:
             enabled: true
-          multi-tenant-line:
-            enabled: true
+          multi-tenant:
+            enabled: false
           sql-log:
             enabled: true
           sql-collector:

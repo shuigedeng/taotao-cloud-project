@@ -18,6 +18,9 @@ package com.taotao.cloud.file.biz.mapper;
 
 import com.taotao.cloud.file.biz.entity.FileLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * IFileMapper
@@ -26,4 +29,10 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileLogMapper extends BaseSuperMapper<FileLog, Long> {}
+public interface IFileLogMapper extends BaseSuperMapper<FileLog, Long> {
+	@Select("""
+		select biz_type
+		from tt_file_log
+		""")
+	List<String> testQueryFileLog();
+}
