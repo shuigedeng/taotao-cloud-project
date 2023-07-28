@@ -1203,11 +1203,13 @@ logging:
       clean-history-on-start: true
       total-size-cap: 20GB
   level:
-    root: debug
+    root: info
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.auth.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
     net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
+    org.springframework.boot: error
+
     # hibernate log
     #org.hibernate.SQL: debug
     #org.hibernate.type: info
