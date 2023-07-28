@@ -110,11 +110,15 @@ public class TaoTaoCloudAuthApplication {
             startupSpringApplication .run(args);
         }catch (Throwable var12) {
             if (var12 instanceof SpringApplication.AbandonedRunException) {
+
+                var12.printStackTrace();
+                LogUtils.error(var12, "启动失败 ---------------- AbandonedRunException");
+
                 throw var12;
             }
 
             var12.printStackTrace();
-            LogUtils.error(var12, "启动失败");
+            LogUtils.error(var12, "启动失败 ---------------- Throwable");
 
             throw new IllegalStateException(var12);
         }
