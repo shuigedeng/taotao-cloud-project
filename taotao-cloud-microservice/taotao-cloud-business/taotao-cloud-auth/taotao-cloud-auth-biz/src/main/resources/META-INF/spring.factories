@@ -1,2 +1,0 @@
-org.springframework.context.ApplicationContextInitializer=\
-com.taotao.cloud.auth.biz.uaa.TmpConditionEvaluationReportLoggingListener
