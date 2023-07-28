@@ -18,6 +18,9 @@ package com.taotao.cloud.file.biz.mapper;
 
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * IFileMapper
@@ -27,10 +30,9 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @since 2021/10/13 22:50
  */
 public interface IFileMapper extends BaseSuperMapper<File, Long> {
-	@Select(
-		"""
-	select url
-	from tt_file
-	""")
+	@Select("""
+		select url
+		from tt_file
+		""")
 	List<String> testMybatisQueryStructure();
 }

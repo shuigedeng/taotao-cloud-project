@@ -1203,7 +1203,7 @@ logging:
       clean-history-on-start: true
       total-size-cap: 20GB
   level:
-    root: INFO
+    root: debug
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.auth.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
