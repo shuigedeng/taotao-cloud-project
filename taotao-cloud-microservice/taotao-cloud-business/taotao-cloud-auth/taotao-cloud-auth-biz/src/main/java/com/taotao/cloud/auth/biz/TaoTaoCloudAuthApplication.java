@@ -17,15 +17,18 @@
 package com.taotao.cloud.auth.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.envers.repository.config.EnableEnversRepositories;
 import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -73,7 +76,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @ConfigurationPropertiesScan
 @EnableSecurityConfiguration
 @EnableRedisIndexedHttpSession
-public class TaoTaoCloudAuthApplication {
+public class TaoTaoCloudAuthApplication implements SpringApplicationRunListener {
 
     public static void main(String[] args) {
         PropertyUtils.setDefaultProperty("taotao-cloud-auth");
@@ -105,4 +108,11 @@ public class TaoTaoCloudAuthApplication {
 
 		//SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }
+
+	@Override
+	public void failed(ConfigurableApplicationContext context, Throwable exception) {
+		exception.printStackTrace();
+
+		LogUtils.error(exception, "启动失败");
+	}
 }
