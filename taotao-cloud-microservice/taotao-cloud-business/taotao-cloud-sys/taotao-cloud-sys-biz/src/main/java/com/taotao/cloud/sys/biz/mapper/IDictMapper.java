@@ -37,12 +37,9 @@ public interface IDictMapper extends BaseSuperMapper<Dict, Long> {
             """
 		select dict.id as id,
 		dict.description as description,
-		dict.itemValue as itemValue,
-		dict.itemText as itemText,
-		dept.id as deptId,
-		dept.parentId as parentId
-		from tt_dict dict left join tt_dept dept on dict.id = dept.id
-		where dict.id in #{params.ids}
+		dict.dict_name as itemValue,
+		dict.dict_code as itemText
+		from tt_dict dict
 		""")
     List<DictDeptBO> testMybatisQueryStructure(@Param("params") DictDeptParams params);
 }

@@ -38,27 +38,27 @@ public interface IDictService extends BaseSuperService<Dict, Long> {
     /**
      * 添加字典
      *
-     * @param Dict Dict
+     * @param dict Dict
      * @return {@link Dict }
      * @since 2021-10-09 20:24:04
      */
-    Dict saveDict(Dict Dict);
+    Dict saveDict(Dict dict);
 
     /**
      * 查询所有字典集合
      *
-     * @return {@link List&lt;com.taotao.cloud.sys.biz.entity.Dict&gt; }
-     * @since 2021-10-09 20:24:23
+     * @return {@link List }<{@link Dict }>
+     * @since 2023-07-28 11:15:23
      */
     List<Dict> getAll();
 
     /**
      * 分页查询字典集合
      *
-     * @param page page
+     * @param page      page
      * @param pageQuery pageQuery
-     * @return {@link Page&lt;com.taotao.cloud.sys.biz.entity.Dict&gt; }
-     * @since 2021-10-09 20:24:46
+     * @return {@link Page }<{@link Dict }>
+     * @since 2023-07-28 11:15:34
      */
     Page<Dict> queryPage(Pageable page, DictPageQuery pageQuery);
 
@@ -71,6 +71,13 @@ public interface IDictService extends BaseSuperService<Dict, Long> {
      */
     Boolean removeById(Long id);
 
+    /**
+     * 更新
+     *
+     * @param dict 字典
+     * @return {@link Dict }
+     * @since 2023-07-28 11:15:40
+     */
     Dict update(Dict dict);
 
     /**

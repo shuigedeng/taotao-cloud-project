@@ -23,4 +23,5 @@ import lombok.Data;
 public class DictDeptParams {
 
     private List<Long> ids;
+    private Long id;
 }
