@@ -105,9 +105,9 @@ public class TaoTaoCloudAuthApplication {
         //   clientType：PC端，小程序端，APP端
         //   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
         // }
-        StartupSpringApplication startupSpringApplication = new StartupSpringApplication(TaoTaoCloudAuthApplication.class);
+
         try {
-            startupSpringApplication .run(args);
+            new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
         }catch (Throwable var12) {
             if (var12 instanceof SpringApplication.AbandonedRunException) {
 
