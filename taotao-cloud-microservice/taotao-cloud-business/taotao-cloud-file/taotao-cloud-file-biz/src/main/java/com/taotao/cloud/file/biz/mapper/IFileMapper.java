@@ -26,4 +26,11 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileMapper extends BaseSuperMapper<File, Long> {}
+public interface IFileMapper extends BaseSuperMapper<File, Long> {
+	@Select(
+		"""
+	select url
+	from tt_file
+	""")
+	List<String> testMybatisQueryStructure();
+}

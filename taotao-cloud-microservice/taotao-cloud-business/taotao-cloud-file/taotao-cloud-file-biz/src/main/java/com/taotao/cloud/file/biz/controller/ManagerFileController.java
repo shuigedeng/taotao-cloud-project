@@ -59,7 +59,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 
-//    private final IFileService fileService;
+    private final IFileService fileService;
 //
 //    @Operation(summary = "上传单个文件", description = "上传单个文件111111111111")
 //    @RequestLogger
@@ -103,6 +103,7 @@ public class ManagerFileController {
         return new Result<>();
     }
 
+
     //
     // @ApiOperation(value = "根据文件名删除oss上的文件", notes = "根据文件名删除oss上的文件")
     // @ApiImplicitParams({
@@ -141,5 +142,14 @@ public class ManagerFileController {
     // 		"attachment;filename=" + new String(objectName.getBytes(), StandardCharsets.ISO_8859_1));
     // 	fileUploadService.exportOssFile(response.getOutputStream(), objectName);
     // }
+
+	@NotAuth
+	@Operation(summary = "测试mybatis sql", description = "测试mybatis sql")
+	//@PreAuthorize("hasAuthority('file:info:id')")
+	@GetMapping("/testMybatisQueryStructure")
+	public Result<List<String>> testMybatisQueryStructure() {
+		List<String> result = fileService.testMybatisQueryStructure();
+		return Result.success(result);
+	}
 
 }

@@ -58,6 +58,11 @@ public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, Fil
     @Autowired
     private StandardOssClient standardOssClient;
 
+	@Override
+	public List<String> testMybatisQueryStructure(){
+		return this.baseMapper.testMybatisQueryStructure();
+	}
+
     @Override
     public File upload(MultipartFile file) {
         try {
