@@ -101,12 +101,7 @@ public class TaoTaoCloudAuthApplication {
         //   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
         // }
 
-		try {
-			new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
-		} catch (Throwable e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+		new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
 
 		//SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }

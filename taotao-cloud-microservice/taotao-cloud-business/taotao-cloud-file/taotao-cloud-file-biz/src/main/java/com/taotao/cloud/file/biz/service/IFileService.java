@@ -76,4 +76,5 @@ public interface IFileService {
     //  * @since 2020/9/9 11:23
     //  */
     // void exportOssFile(ServletOutputStream outputStream, String objectName);
+	List<String> testMybatisQueryStructure();
 }
