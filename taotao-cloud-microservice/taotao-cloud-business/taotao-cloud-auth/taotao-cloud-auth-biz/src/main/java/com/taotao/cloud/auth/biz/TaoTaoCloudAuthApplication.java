@@ -76,7 +76,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @ConfigurationPropertiesScan
 @EnableSecurityConfiguration
 @EnableRedisIndexedHttpSession
-public class TaoTaoCloudAuthApplication implements SpringApplicationRunListener {
+public class TaoTaoCloudAuthApplication {
 
     public static void main(String[] args) {
         PropertyUtils.setDefaultProperty("taotao-cloud-auth");
@@ -109,10 +109,4 @@ public class TaoTaoCloudAuthApplication implements SpringApplicationRunListener 
 		//SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }
 
-	@Override
-	public void failed(ConfigurableApplicationContext context, Throwable exception) {
-		exception.printStackTrace();
-
-		LogUtils.error(exception, "启动失败");
-	}
 }
