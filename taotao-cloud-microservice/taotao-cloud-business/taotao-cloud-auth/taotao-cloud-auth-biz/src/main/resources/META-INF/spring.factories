@@ -1,3 +1,0 @@
-# Startup Listeners
-org.springframework.boot.SpringApplicationRunListener=\
-com.taotao.cloud.auth.biz.uaa.MyApplicationRunListener

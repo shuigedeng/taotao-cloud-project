@@ -21,18 +21,20 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringApplicationRunListener;
+import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.data.envers.repository.config.EnableEnversRepositories;
 import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
+
+import java.time.Duration;
 
 /**
  * TaoTaoCloudAuthApplication
@@ -103,8 +105,19 @@ public class TaoTaoCloudAuthApplication {
         //   clientType：PC端，小程序端，APP端
         //   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
         // }
+        StartupSpringApplication startupSpringApplication = new StartupSpringApplication(TaoTaoCloudAuthApplication.class);
+        try {
+            startupSpringApplication .run(args);
+        }catch (Throwable var12) {
+            if (var12 instanceof SpringApplication.AbandonedRunException) {
+                throw var12;
+            }
 
-		new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
+            var12.printStackTrace();
+            LogUtils.error(var12, "启动失败");
+
+            throw new IllegalStateException(var12);
+        }
 
 		//SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
     }
