@@ -1208,7 +1208,6 @@ logging:
     com.taotao.cloud.auth.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
     net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
-
     # hibernate log
     #org.hibernate.SQL: debug
     #org.hibernate.type: info
