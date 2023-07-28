@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz;
 
+import com.taotao.cloud.cache.redis.configuration.RedisDelayQueueAutoConfiguration;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
@@ -74,7 +75,7 @@ import java.time.Duration;
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(exclude = RedisDelayQueueAutoConfiguration.class)
 @ConfigurationPropertiesScan
 @EnableSecurityConfiguration
 @EnableRedisIndexedHttpSession
