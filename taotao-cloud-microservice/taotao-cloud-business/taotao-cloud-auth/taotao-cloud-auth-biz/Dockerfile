@@ -74,6 +74,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:AsyncLogBufferSize=409600 \
                   -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
                   -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+                  -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
                   -verbose:gc \
                   -Dnetworkaddress.cache.ttl=10 \
                   -Djava.security.egd=file:/dev/./urandom \
@@ -97,8 +98,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -XX:+UseZGC \
                   -XX:ConcGCThreads=4 \
-                  -XX:ParallelGCThreads=20 \
-                  -XX:ParallelGCThreads=20 \
                   -XX:ZCollectionInterval=120 \
                   -XX:ZAllocationSpikeTolerance=5 \
                   ${DEBUG_OPTIONS} \
