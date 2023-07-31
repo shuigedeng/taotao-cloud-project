@@ -54,7 +54,6 @@ buildscript {
 
         //阿里云新的仓库
         maven {
-            allowInsecureProtocol = true
 
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
@@ -226,7 +225,6 @@ allprojects {
 
         //阿里云新的仓库
         maven {
-            allowInsecureProtocol = true
 
             credentials {
                 username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
