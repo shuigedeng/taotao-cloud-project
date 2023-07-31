@@ -95,8 +95,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PRROFILES} \
-                  ${DEBUG_OPTIONS} "
+                  -Dspring.profiles.active=${APP_PRROFILES} "
 
 USER root
 
