@@ -60,6 +60,11 @@ jobs:
           echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
           echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
+      - name: echo maven
+        run: |
+          echo "${{env.TAOTAO_CLOUD_MAVEN_USERNAME_NEW}}"
+          echo "${{env.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW}}"
+
       #- name: Build And Publish Dependencies To Local
       #  run: |
       #    cd ${{ github.workspace }}/taotao-cloud-dependencies
