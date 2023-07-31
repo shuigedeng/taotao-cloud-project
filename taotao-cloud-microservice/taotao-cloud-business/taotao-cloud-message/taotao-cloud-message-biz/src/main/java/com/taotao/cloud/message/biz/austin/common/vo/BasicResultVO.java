@@ -1,22 +1,6 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.common.vo;
 
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.enums.RespStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,20 +10,32 @@ import lombok.ToString;
  * @author zzb
  * @since 2021.11.17
  */
+
 @Getter
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public final class BasicResultVO<T> {
 
-    /** 响应状态 */
+    /**
+     * 响应状态
+     */
     private String status;
 
-    /** 响应编码 */
+    /**
+     * 响应编码
+     */
     private String msg;
 
-    /** 返回数据 */
+    /**
+     * 返回数据
+     */
     private T data;
+
+    public BasicResultVO(String status, String msg) {
+        this.status = status;
+        this.msg = msg;
+    }
 
     public BasicResultVO(RespStatusEnum status) {
         this(status, null);
@@ -64,8 +60,7 @@ public final class BasicResultVO<T> {
 
     /**
      * 自定义信息的成功响应
-     *
-     * <p>通常用作插入成功等并显示具体操作通知如: return BasicResultVO.success("发送信息成功")
+     * <p>通常用作插入成功等并显示具体操作通知如: return BasicResultVO.success("发送信息成功")</p>
      *
      * @param msg 信息
      * @return 自定义信息的成功响应
@@ -88,7 +83,11 @@ public final class BasicResultVO<T> {
      * @return 默认失败响应
      */
     public static <T> BasicResultVO<T> fail() {
-        return new BasicResultVO<>(RespStatusEnum.FAIL, RespStatusEnum.FAIL.getMsg(), null);
+        return new BasicResultVO<>(
+                RespStatusEnum.FAIL,
+                RespStatusEnum.FAIL.getMsg(),
+                null
+        );
     }
 
     /**
@@ -115,10 +114,11 @@ public final class BasicResultVO<T> {
      * 自定义状态和信息的失败响应
      *
      * @param status 状态
-     * @param msg 信息
+     * @param msg    信息
      * @return 自定义状态和信息的失败响应
      */
     public static <T> BasicResultVO<T> fail(RespStatusEnum status, String msg) {
         return new BasicResultVO<>(status, msg, null);
     }
+
 }

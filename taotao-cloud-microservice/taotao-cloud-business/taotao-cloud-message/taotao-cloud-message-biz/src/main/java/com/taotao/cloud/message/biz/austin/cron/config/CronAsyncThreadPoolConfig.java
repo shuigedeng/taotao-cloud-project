@@ -1,41 +1,32 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.cron.config;
 
-import org.dromara.hutoolcore.thread.ExecutorBuilder;
+import cn.hutool.core.thread.ExecutorBuilder;
 import com.dtp.common.em.QueueTypeEnum;
 import com.dtp.common.em.RejectedTypeEnum;
 import com.dtp.core.thread.DtpExecutor;
 import com.dtp.core.thread.ThreadPoolBuilder;
-import com.taotao.cloud.message.biz.austin.common.constant.ThreadPoolConstant;
+import com.java3y.austin.common.constant.ThreadPoolConstant;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author 3y 动态线程池配置。实际的具体配置以apollo的为准！实际的具体配置以apollo的为准！实际的具体配置以apollo的为准
+ * @author 3y
+ * 动态线程池配置。实际的具体配置以apollo的为准！实际的具体配置以apollo的为准！实际的具体配置以apollo的为准
  */
 public class CronAsyncThreadPoolConfig {
 
-    /** 接收到xxl-job请求的线程池名 */
+    /**
+     * 接收到xxl-job请求的线程池名
+     */
     public static final String EXECUTE_XXL_THREAD_POOL_NAME = "execute-xxl-thread-pool";
 
+
     /**
-     * 业务：消费pending队列实际的线程池 配置：核心线程可以被回收，当线程池无被引用且无核心线程数，应当被回收 动态线程池且被Spring管理：false
+     * 业务：消费pending队列实际的线程池
+     * 配置：核心线程可以被回收，当线程池无被引用且无核心线程数，应当被回收
+     * 动态线程池且被Spring管理：false
      *
      * @return
      */
@@ -50,8 +41,11 @@ public class CronAsyncThreadPoolConfig {
                 .build();
     }
 
+
     /**
-     * 业务：接收到xxl-job请求的线程池 配置：不丢弃消息，核心线程数不会随着keepAliveTime而减少(不会被回收) 动态线程池且被Spring管理：true
+     * 业务：接收到xxl-job请求的线程池
+     * 配置：不丢弃消息，核心线程数不会随着keepAliveTime而减少(不会被回收)
+     * 动态线程池且被Spring管理：true
      *
      * @return
      */
@@ -64,10 +58,8 @@ public class CronAsyncThreadPoolConfig {
                 .timeUnit(TimeUnit.SECONDS)
                 .rejectedExecutionHandler(RejectedTypeEnum.CALLER_RUNS_POLICY.getName())
                 .allowCoreThreadTimeOut(false)
-                .workQueue(
-                        QueueTypeEnum.VARIABLE_LINKED_BLOCKING_QUEUE.getName(),
-                        ThreadPoolConstant.COMMON_QUEUE_SIZE,
-                        false)
+                .workQueue(QueueTypeEnum.VARIABLE_LINKED_BLOCKING_QUEUE.getName(), ThreadPoolConstant.COMMON_QUEUE_SIZE, false)
                 .buildDynamic();
     }
+
 }

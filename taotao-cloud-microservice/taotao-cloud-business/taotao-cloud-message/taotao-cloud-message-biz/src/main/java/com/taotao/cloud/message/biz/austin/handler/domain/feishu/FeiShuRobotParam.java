@@ -1,30 +1,17 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.handler.domain.feishu;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+
 /**
- * @author 3y 飞书机器人 请求参数
+ * @author 3y
+ * 飞书机器人 请求参数
  */
 @NoArgsConstructor
 @Data
@@ -32,78 +19,110 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FeiShuRobotParam {
 
-    /** msgType */
+    /**
+     * msgType
+     */
     @JSONField(name = "msg_type")
     private String msgType;
-    /** content */
+    /**
+     * content
+     */
     @JSONField(name = "content")
     private ContentDTO content;
-    /** card */
+    /**
+     * card
+     */
     @JSONField(name = "card")
     private CardDTO card;
 
-    /** ContentDTO */
+    /**
+     * ContentDTO
+     */
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
     @Builder
     public static class ContentDTO {
-
-        /** text */
+        /**
+         * text
+         */
         @JSONField(name = "text")
         private String text;
-        /** post */
+        /**
+         * post
+         */
         @JSONField(name = "post")
         private PostDTO post;
-        /** shareChatId */
+        /**
+         * shareChatId
+         */
         @JSONField(name = "share_chat_id")
         private String shareChatId;
-        /** imageKey */
+        /**
+         * imageKey
+         */
         @JSONField(name = "image_key")
         private String imageKey;
 
-        /** PostDTO */
+        /**
+         * PostDTO
+         */
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
         @Builder
         public static class PostDTO {
-
-            /** zhCn */
+            /**
+             * zhCn
+             */
             @JSONField(name = "zh_cn")
             private ZhCnDTO zhCn;
 
-            /** ZhCnDTO */
+            /**
+             * ZhCnDTO
+             */
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
             @Builder
             public static class ZhCnDTO {
-
-                /** title */
+                /**
+                 * title
+                 */
                 @JSONField(name = "title")
                 private String title;
-                /** content */
+                /**
+                 * content
+                 */
                 @JSONField(name = "content")
                 private List<List<PostContentDTO>> content;
 
-                /** ContentDTO */
+                /**
+                 * ContentDTO
+                 */
                 @NoArgsConstructor
                 @Data
                 @AllArgsConstructor
                 @Builder
                 public static class PostContentDTO {
-
-                    /** tag */
+                    /**
+                     * tag
+                     */
                     @JSONField(name = "tag")
                     private String tag;
-                    /** text */
+                    /**
+                     * text
+                     */
                     @JSONField(name = "text")
                     private String text;
-                    /** href */
+                    /**
+                     * href
+                     */
                     @JSONField(name = "href")
                     private String href;
-                    /** userId */
+                    /**
+                     * userId
+                     */
                     @JSONField(name = "user_id")
                     private String userId;
                 }
@@ -111,126 +130,174 @@ public class FeiShuRobotParam {
         }
     }
 
-    /** CardDTO */
+    /**
+     * CardDTO
+     */
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
     @Builder
     public static class CardDTO {
-
-        /** config */
+        /**
+         * config
+         */
         @JSONField(name = "config")
         private ConfigDTO config;
-        /** elements */
+        /**
+         * elements
+         */
         @JSONField(name = "elements")
         private List<ElementsDTO> elements;
-        /** header */
+        /**
+         * header
+         */
         @JSONField(name = "header")
         private HeaderDTO header;
 
-        /** ConfigDTO */
+        /**
+         * ConfigDTO
+         */
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
         @Builder
         public static class ConfigDTO {
-
-            /** wideScreenMode */
+            /**
+             * wideScreenMode
+             */
             @JSONField(name = "wide_screen_mode")
             private Boolean wideScreenMode;
-            /** enableForward */
+            /**
+             * enableForward
+             */
             @JSONField(name = "enable_forward")
             private Boolean enableForward;
         }
 
-        /** HeaderDTO */
+        /**
+         * HeaderDTO
+         */
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
         @Builder
         public static class HeaderDTO {
-
-            /** title */
+            /**
+             * title
+             */
             @JSONField(name = "title")
             private TitleDTO title;
 
-            /** TitleDTO */
+            /**
+             * TitleDTO
+             */
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
             @Builder
             public static class TitleDTO {
-
-                /** content */
+                /**
+                 * content
+                 */
                 @JSONField(name = "content")
                 private String content;
-                /** tag */
+                /**
+                 * tag
+                 */
                 @JSONField(name = "tag")
                 private String tag;
             }
         }
 
-        /** ElementsDTO */
+        /**
+         * ElementsDTO
+         */
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
         @Builder
         public static class ElementsDTO {
-
-            /** tag */
+            /**
+             * tag
+             */
             @JSONField(name = "tag")
             private String tag;
-            /** text */
+            /**
+             * text
+             */
             @JSONField(name = "text")
             private TextDTO text;
-            /** actions */
+            /**
+             * actions
+             */
             @JSONField(name = "actions")
             private List<ActionsDTO> actions;
 
-            /** TextDTO */
+            /**
+             * TextDTO
+             */
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
             @Builder
             public static class TextDTO {
-
-                /** content */
+                /**
+                 * content
+                 */
                 @JSONField(name = "content")
                 private String content;
-                /** tag */
+                /**
+                 * tag
+                 */
                 @JSONField(name = "tag")
                 private String tag;
             }
 
-            /** ActionsDTO */
+            /**
+             * ActionsDTO
+             */
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
             @Builder
             public static class ActionsDTO {
-
-                /** tag */
+                /**
+                 * tag
+                 */
                 @JSONField(name = "tag")
                 private String tag;
-                /** text */
+                /**
+                 * text
+                 */
                 @JSONField(name = "text")
                 private TextDTO text;
-                /** url */
+                /**
+                 * url
+                 */
                 @JSONField(name = "url")
                 private String url;
-                /** type */
+                /**
+                 * type
+                 */
                 @JSONField(name = "type")
                 private String type;
 
-                /** TextDTO */
-                @NoArgsConstructor
-                @Data
-                public static class TextDTO {}
 
-                /** ValueDTO */
+                /**
+                 * TextDTO
+                 */
+                @NoArgsConstructor
+                @Data
+                public static class TextDTO {
+                }
+
+                /**
+                 * ValueDTO
+                 */
                 @Data
                 @NoArgsConstructor
-                public static class ValueDTO {}
+                public static class ValueDTO {
+                }
             }
         }
     }

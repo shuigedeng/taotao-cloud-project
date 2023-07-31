@@ -8,10 +8,10 @@ import cn.bootx.platform.daxpay.core.pay.func.AbsPayStrategy;
 import cn.bootx.platform.daxpay.core.pay.func.PayStrategyConsumer;
 import cn.bootx.platform.daxpay.core.payment.entity.Payment;
 import cn.bootx.platform.daxpay.core.payment.service.PaymentService;
+import cn.bootx.platform.daxpay.event.PayEventSender;
 import cn.bootx.platform.daxpay.exception.payment.PayFailureException;
 import cn.bootx.platform.daxpay.exception.payment.PayNotExistedException;
 import cn.bootx.platform.daxpay.exception.payment.PayUnsupportedMethodException;
-import cn.bootx.platform.daxpay.mq.PaymentEventSender;
 import cn.bootx.platform.daxpay.param.pay.PayParam;
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class PayCancelService {
 
     private final PaymentService paymentService;
 
-    private final PaymentEventSender paymentEventSender;
+    private final PayEventSender payEventSender;
 
     /**
      * 根据业务id取消支付记录
@@ -95,7 +95,7 @@ public class PayCancelService {
         payment = paymentService.findById(payment.getId()).orElseThrow(PayNotExistedException::new);
 
         // 5. 发布撤销事件
-        paymentEventSender.sendPayCancel(PayEventBuilder.buildPayCancel(payment));
+        payEventSender.sendPayCancel(PayEventBuilder.buildPayCancel(payment));
     }
 
     /**

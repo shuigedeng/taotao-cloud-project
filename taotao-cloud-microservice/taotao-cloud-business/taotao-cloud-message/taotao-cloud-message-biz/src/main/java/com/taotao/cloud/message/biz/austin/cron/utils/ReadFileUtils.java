@@ -1,40 +1,16 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.cron.utils;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.io.FileUtil;
-import org.dromara.hutoolcore.map.MapUtil;
-import org.dromara.hutoolcore.text.csv.CsvData;
-import org.dromara.hutoolcore.text.csv.CsvReadConfig;
-import org.dromara.hutoolcore.text.csv.CsvReader;
-import org.dromara.hutoolcore.text.csv.CsvRow;
-import org.dromara.hutoolcore.text.csv.CsvRowHandler;
-import org.dromara.hutoolcore.text.csv.CsvUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.csv.*;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.cron.csv.CountFileRowHandler;
-import com.taotao.cloud.message.biz.austin.cron.vo.CrowdInfoVo;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.java3y.austin.cron.csv.CountFileRowHandler;
+import com.java3y.austin.cron.vo.CrowdInfoVo;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.FileReader;
+import java.util.*;
 
 /**
  * 读取人群文件 工具类
@@ -45,7 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ReadFileUtils {
 
-    /** csv文件 存储 接收者 的列名 */
+    /**
+     * csv文件 存储 接收者 的列名
+     */
     public static final String RECEIVER_KEY = "userId";
 
     /**
@@ -57,10 +35,12 @@ public class ReadFileUtils {
     public static void getCsvRow(String path, CsvRowHandler csvRowHandler) {
         try {
             // 把首行当做是标题，获取reader
-            CsvReader reader = CsvUtil.getReader(new FileReader(path), new CsvReadConfig().setContainsHeader(true));
+            CsvReader reader = CsvUtil.getReader(new FileReader(path),
+                    new CsvReadConfig().setContainsHeader(true));
             reader.read(csvRowHandler);
         } catch (Exception e) {
             log.error("ReadFileUtils#getCsvRow fail!{}", Throwables.getStackTraceAsString(e));
+
         }
     }
 
@@ -73,7 +53,8 @@ public class ReadFileUtils {
     public static long countCsvRow(String path, CountFileRowHandler countFileRowHandler) {
         try {
             // 把首行当做是标题，获取reader
-            CsvReader reader = CsvUtil.getReader(new FileReader(path), new CsvReadConfig().setContainsHeader(true));
+            CsvReader reader = CsvUtil.getReader(new FileReader(path),
+                    new CsvReadConfig().setContainsHeader(true));
             reader.read(countFileRowHandler);
         } catch (Exception e) {
             log.error("ReadFileUtils#getCsvRow fail!{}", Throwables.getStackTraceAsString(e));
@@ -82,7 +63,8 @@ public class ReadFileUtils {
     }
 
     /**
-     * 从文件的每一行数据获取到params信息 [{key:value},{key:value}]
+     * 从文件的每一行数据获取到params信息
+     * [{key:value},{key:value}]
      *
      * @param fieldMap
      * @return
@@ -97,8 +79,12 @@ public class ReadFileUtils {
         return params;
     }
 
+
     /**
-     * 一次性读取csv文件整个内容 1. 获取第一行信息(id,paramsKey1,params2Key2)，第一列默认为接收者Id 2. 把文件信息塞进对象内 3. 把对象返回
+     * 一次性读取csv文件整个内容
+     * 1. 获取第一行信息(id,paramsKey1,params2Key2)，第一列默认为接收者Id
+     * 2. 把文件信息塞进对象内
+     * 3. 把对象返回
      *
      * @param path
      * @return
@@ -120,10 +106,7 @@ public class ReadFileUtils {
                     param.put(headerInfo.get(j), row.get(j));
                 }
 
-                result.add(CrowdInfoVo.builder()
-                        .receiver(CollUtil.getFirst(row.iterator()))
-                        .params(param)
-                        .build());
+                result.add(CrowdInfoVo.builder().receiver(CollUtil.getFirst(row.iterator())).params(param).build());
             }
 
         } catch (Exception e) {
@@ -131,4 +114,6 @@ public class ReadFileUtils {
         }
         return result;
     }
+
+
 }

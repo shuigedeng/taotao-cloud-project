@@ -1,65 +1,52 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.handler.script.impl;
 
-import org.dromara.hutoolcore.date.DatePattern;
-import org.dromara.hutoolcore.date.DateUtil;
-import org.dromara.hutoolcore.util.ArrayUtil;
-import org.dromara.hutoolcore.util.StrUtil;
-import org.dromara.hutoolhttp.Header;
-import org.dromara.hutoolhttp.HttpRequest;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.URLUtil;
+import cn.hutool.http.Header;
+import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
-import com.taotao.cloud.message.biz.austin.common.dto.account.sms.YunPianSmsAccount;
-import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
-import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
-import com.taotao.cloud.message.biz.austin.handler.domain.sms.YunPianSendResult;
-import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
-import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
-import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import lombok.extern.slf4j.Slf4j;
+import com.java3y.austin.common.constant.CommonConstant;
+import com.java3y.austin.common.dto.account.sms.YunPianSmsAccount;
+import com.java3y.austin.common.enums.SmsStatus;
+import com.java3y.austin.handler.domain.sms.SmsParam;
+import com.java3y.austin.handler.domain.sms.YunPianSendResult;
+import com.java3y.austin.handler.script.SmsScript;
+import com.java3y.austin.support.domain.SmsRecord;
+import com.java3y.austin.support.utils.AccountUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author 3y
- * @date 2022年5月23日 发送短信接入文档：https://www.yunpian.com/official/document/sms/zh_CN/domestic_list
+ * @date 2022年5月23日
+ * 发送短信接入文档：https://www.yunpian.com/official/document/sms/zh_CN/domestic_list
  */
-@Slf4j
 @Component("YunPianSmsScript")
 public class YunPianSmsScript implements SmsScript {
+
+    private static Logger log = LoggerFactory.getLogger(YunPianSmsScript.class);
 
     @Autowired
     private AccountUtils accountUtils;
 
+    private  static final String PARAMS_SPLIT_KEY = "{|}";
+
+    private  static final String PARAMS_KV_SPLIT_KEY = "{:}";
     @Override
     public List<SmsRecord> send(SmsParam smsParam) {
 
         try {
-            YunPianSmsAccount account = Objects.nonNull(smsParam.getSendAccountId())
-                    ? accountUtils.getAccountById(smsParam.getSendAccountId(), YunPianSmsAccount.class)
+            YunPianSmsAccount account = Objects.nonNull(smsParam.getSendAccountId()) ? accountUtils.getAccountById(smsParam.getSendAccountId(), YunPianSmsAccount.class)
                     : accountUtils.getSmsAccountByScriptName(smsParam.getScriptName(), YunPianSmsAccount.class);
             Map<String, Object> params = assembleParam(smsParam, account);
 
@@ -68,17 +55,14 @@ public class YunPianSmsScript implements SmsScript {
                     .header(Header.ACCEPT.getValue(), CommonConstant.CONTENT_TYPE_JSON)
                     .form(params)
                     .timeout(2000)
-                    .execute()
-                    .body();
+                    .execute().body();
             YunPianSendResult yunPianSendResult = JSON.parseObject(result, YunPianSendResult.class);
             return assembleSmsRecord(smsParam, yunPianSendResult, account);
         } catch (Exception e) {
-            log.error(
-                    "YunPianSmsScript#send fail:{},params:{}",
-                    Throwables.getStackTraceAsString(e),
-                    JSON.toJSONString(smsParam));
+            log.error("YunPianSmsScript#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
             return null;
         }
+
     }
 
     @Override
@@ -99,12 +83,12 @@ public class YunPianSmsScript implements SmsScript {
         params.put("apikey", account.getApikey());
         params.put("mobile", StringUtils.join(smsParam.getPhones(), StrUtil.C_COMMA));
         params.put("tpl_id", account.getTplId());
-        params.put("tpl_value", "");
+        params.put("tpl_value", getTplValue(smsParam));
         return params;
     }
 
-    private List<SmsRecord> assembleSmsRecord(
-            SmsParam smsParam, YunPianSendResult response, YunPianSmsAccount account) {
+
+    private List<SmsRecord> assembleSmsRecord(SmsParam smsParam, YunPianSendResult response, YunPianSmsAccount account) {
         if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getData())) {
             return null;
         }
@@ -132,4 +116,19 @@ public class YunPianSmsScript implements SmsScript {
 
         return smsRecordList;
     }
+
+
+    private String getTplValue(SmsParam smsParam) {
+        String tplValue = "";
+        if (StrUtil.isNotBlank(smsParam.getContent())) {
+            tplValue = StrUtil.split(smsParam.getContent(), PARAMS_SPLIT_KEY).stream().map(item -> {
+                List<String> kv = StrUtil.splitTrim(item, PARAMS_KV_SPLIT_KEY, 2);
+                return String.join("=", URLUtil.encodeQuery(kv.get(0)), URLUtil.encodeQuery(kv.get(1)));
+            }).collect(Collectors.joining("&"));
+        }
+        return tplValue;
+    }
+
+
 }
+

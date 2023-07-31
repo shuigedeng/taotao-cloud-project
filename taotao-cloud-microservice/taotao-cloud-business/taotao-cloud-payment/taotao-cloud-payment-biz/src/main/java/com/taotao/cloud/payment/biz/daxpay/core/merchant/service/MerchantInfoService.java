@@ -2,10 +2,11 @@ package com.taotao.cloud.payment.biz.daxpay.core.merchant.service;
 
 import cn.bootx.platform.common.core.exception.DataNotExistException;
 import cn.bootx.platform.common.core.rest.PageResult;
-import cn.bootx.platform.common.core.rest.dto.KeyValue;
+import cn.bootx.platform.common.core.rest.dto.LabelValue;
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.common.core.util.ResultConvertUtil;
 import cn.bootx.platform.common.mybatisplus.util.MpUtil;
+import cn.bootx.platform.daxpay.code.MchAndAppCode;
 import cn.bootx.platform.daxpay.core.merchant.dao.MerchantInfoManager;
 import cn.bootx.platform.daxpay.core.merchant.entity.MerchantInfo;
 import cn.bootx.platform.daxpay.dto.merchant.MerchantInfoDto;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 商户
@@ -73,8 +75,18 @@ public class MerchantInfoService {
     /**
      * 下拉框
      */
-    public List<KeyValue> dropdown() {
-        return merchantInfoManager.findDropdown();
+    public List<LabelValue> dropdown() {
+        return merchantInfoManager.findAll().stream()
+                .map(mch -> new LabelValue(mch.getName(),mch.getCode()))
+                .collect(Collectors.toList());
+    }
+    /**
+     * 下拉框(正常商户)
+     */
+    public List<LabelValue> dropdownNormal() {
+        return merchantInfoManager.findAllByState(MchAndAppCode.MCH_STATE_NORMAL).stream()
+                .map(mch -> new LabelValue(mch.getName(),mch.getCode()))
+                .collect(Collectors.toList());
     }
 
     /**

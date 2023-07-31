@@ -1,32 +1,17 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.support.pending;
 
-import org.dromara.hutoolcore.collection.CollUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
-import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
+import com.java3y.austin.support.config.SupportThreadPoolConfig;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.PostConstruct;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 延迟消费 阻塞队列-消费者和生产者实现
@@ -37,19 +22,29 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public abstract class AbstractLazyPending<T> {
 
-    /** 子类构造方法必须初始化该参数 */
+    /**
+     * 子类构造方法必须初始化该参数
+     */
     protected PendingParam<T> pendingParam;
 
-    /** 批量装载任务 */
+    /**
+     * 批量装载任务
+     */
     private List<T> tasks = new ArrayList<>();
 
-    /** 上次执行的时间 */
+    /**
+     * 上次执行的时间
+     */
     private Long lastHandleTime = System.currentTimeMillis();
 
-    /** 是否终止线程 */
+    /**
+     * 是否终止线程
+     */
     private volatile Boolean stop = false;
 
-    /** 单线程消费 阻塞队列的数据 */
+    /**
+     * 单线程消费 阻塞队列的数据
+     */
     @PostConstruct
     public void initConsumePending() {
         ExecutorService executorService = SupportThreadPoolConfig.getPendingSingleThreadPool();
@@ -59,6 +54,12 @@ public abstract class AbstractLazyPending<T> {
                     T obj = pendingParam.getQueue().poll(pendingParam.getTimeThreshold(), TimeUnit.MILLISECONDS);
                     if (null != obj) {
                         tasks.add(obj);
+                    }
+
+                    // 判断是否停止当前线程
+                    if (stop && CollUtil.isEmpty(tasks)) {
+                        executorService.shutdown();
+                        break;
                     }
 
                     // 处理条件：1. 数量超限 2. 时间超限
@@ -71,26 +72,24 @@ public abstract class AbstractLazyPending<T> {
                         pendingParam.getExecutorService().execute(() -> this.handle(taskRef));
                     }
 
-                    // 判断是否停止当前线程
-                    if (stop && CollUtil.isEmpty(tasks)) {
-                        executorService.shutdown();
-                        break;
-                    }
+
                 } catch (Exception e) {
                     log.error("Pending#initConsumePending failed:{}", Throwables.getStackTraceAsString(e));
                 }
             }
         });
+
     }
 
     /**
-     * 1. 数量超限 2. 时间超限
+     * 1. 数量超限
+     * 2. 时间超限
      *
      * @return
      */
     private boolean dataReady() {
-        return tasks.size() >= pendingParam.getNumThreshold()
-                || (System.currentTimeMillis() - lastHandleTime >= pendingParam.getTimeThreshold());
+        return tasks.size() >= pendingParam.getNumThreshold() ||
+                (System.currentTimeMillis() - lastHandleTime >= pendingParam.getTimeThreshold());
     }
 
     /**
@@ -128,4 +127,5 @@ public abstract class AbstractLazyPending<T> {
      * @param list
      */
     public abstract void doHandle(List<T> list);
+
 }

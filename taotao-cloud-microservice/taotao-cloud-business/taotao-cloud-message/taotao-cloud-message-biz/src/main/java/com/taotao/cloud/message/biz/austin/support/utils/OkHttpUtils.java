@@ -1,35 +1,15 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import org.dromara.hutoolcore.map.MapUtil;
+import cn.hutool.core.map.MapUtil;
 import com.google.common.base.Throwables;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author 3y
@@ -38,7 +18,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class OkHttpUtils {
-
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
 
@@ -55,10 +34,11 @@ public class OkHttpUtils {
         return doGet(url, null, null);
     }
 
+
     /**
      * get 请求
      *
-     * @param url 请求url地址
+     * @param url    请求url地址
      * @param params 请求参数 map
      * @return string
      */
@@ -69,7 +49,7 @@ public class OkHttpUtils {
     /**
      * get 请求
      *
-     * @param url 请求url地址
+     * @param url     请求url地址
      * @param headers 请求头字段 {k1, v1 k2, v2, ...}
      * @return string
      */
@@ -77,11 +57,12 @@ public class OkHttpUtils {
         return doGet(url, null, headers);
     }
 
+
     /**
      * get 请求
      *
-     * @param url 请求url地址
-     * @param params 请求参数 map
+     * @param url     请求url地址
+     * @param params  请求参数 map
      * @param headers 请求头字段 {k1, v1 k2, v2, ...}
      * @return string
      */
@@ -108,8 +89,8 @@ public class OkHttpUtils {
     /**
      * post 请求
      *
-     * @param url 请求url地址
-     * @param params 请求参数 map
+     * @param url     请求url地址
+     * @param params  请求参数 map
      * @param headers 请求头字段 {k1, v1 k2, v2, ...}
      * @return string
      */
@@ -129,6 +110,7 @@ public class OkHttpUtils {
         return execute(request);
     }
 
+
     /**
      * 获取request Builder
      *
@@ -145,10 +127,11 @@ public class OkHttpUtils {
         return builder;
     }
 
+
     /**
      * post 请求, 请求数据为 json 的字符串
      *
-     * @param url 请求url地址
+     * @param url  请求url地址
      * @param json 请求数据, json 字符串
      * @return string
      */
@@ -160,8 +143,8 @@ public class OkHttpUtils {
     /**
      * post 请求, 请求数据为 json 的字符串
      *
-     * @param url 请求url地址
-     * @param json 请求数据, json 字符串
+     * @param url     请求url地址
+     * @param json    请求数据, json 字符串
      * @param headers 请求头字段 {k1, v1 k2, v2, ...}
      * @return string
      */
@@ -182,6 +165,7 @@ public class OkHttpUtils {
         return executePost(url, xml, XML, null);
     }
 
+
     private String executePost(String url, String data, MediaType contentType, Map<String, String> headers) {
         RequestBody requestBody = RequestBody.create(data.getBytes(StandardCharsets.UTF_8), contentType);
         Request.Builder builder = getBuilderWithHeaders(headers);
@@ -200,4 +184,6 @@ public class OkHttpUtils {
         }
         return "";
     }
+
 }
+

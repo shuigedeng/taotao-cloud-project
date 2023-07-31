@@ -1,53 +1,35 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.web.utils;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.date.DatePattern;
-import org.dromara.hutoolcore.date.DateUtil;
-import org.dromara.hutoolcore.map.MapUtil;
-import org.dromara.hutoolcore.util.ReflectUtil;
-import org.dromara.hutoolcore.util.StrUtil;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
-import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
-import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
-import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
-import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
-import com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils;
-import com.taotao.cloud.message.biz.austin.web.vo.amis.CommonAmisVo;
-import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
-import com.taotao.cloud.message.biz.austin.web.vo.amis.SmsTimeLineVo;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.java3y.austin.common.enums.AnchorState;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.common.enums.EnumUtil;
+import com.java3y.austin.common.enums.SmsStatus;
+import com.java3y.austin.support.domain.ChannelAccount;
+import com.java3y.austin.support.domain.SmsRecord;
+import com.java3y.austin.support.utils.TaskInfoUtils;
+import com.java3y.austin.web.vo.amis.CommonAmisVo;
+import com.java3y.austin.web.vo.amis.EchartsVo;
+import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.subscribemsg.TemplateInfo;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- * 【该类的逻辑不用看，没有什么意义】 for Amis!!! amis框架在【表单】回显的时候，不支持嵌套动态语法!! 编写工具类将 List/Object 铺平成 Map 以及相关的格式
+ * 【该类的逻辑不用看，没有什么意义】
+ * for Amis!!! amis框架在【表单】回显的时候，不支持嵌套动态语法!!
+ * 编写工具类将 List/Object 铺平成 Map 以及相关的格式
  * https://baidu.gitee.io/amis/zh-CN/components/form/index#%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96
  *
  * @author 3y
@@ -56,26 +38,44 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 @Slf4j
 public class Convert4Amis {
 
-    /** 标识忽略 */
+
+    /**
+     * 标识忽略
+     */
     public static final int IGNORE_TG = 0;
-    /** 标识已读取到'$'字符 */
+    /**
+     * 标识已读取到'$'字符
+     */
     public static final int START_TG = 1;
-    /** 标识已读取到'{'字符 */
+    /**
+     * 标识已读取到'{'字符
+     */
     public static final int READ_TG = 2;
 
-    /** 需要打散的字段(将json字符串打散为一个一个字段返回） (主要是用于回显数据) */
+    /**
+     * 需要打散的字段(将json字符串打散为一个一个字段返回）
+     * (主要是用于回显数据)
+     */
     private static final List<String> FLAT_FIELD_NAME = Arrays.asList("msgContent");
 
-    /** 需要格式化为jsonArray返回的字段 (前端是一个JSONArray传递进来) */
+    /**
+     * 需要格式化为jsonArray返回的字段
+     * (前端是一个JSONArray传递进来)
+     */
     private static final List<String> PARSE_JSON_ARRAY = Arrays.asList("feedCards", "btns", "articles");
 
-    /** (前端是一个JSONObject传递进来，返回一个JSONArray回去) */
-    private static final List<String> PARSE_JSON_OBJ_TO_ARRAY =
-            Arrays.asList("officialAccountParam", "miniProgramParam");
+    /**
+     * (前端是一个JSONObject传递进来，返回一个JSONArray回去)
+     */
+    private static final List<String> PARSE_JSON_OBJ_TO_ARRAY = Arrays.asList("officialAccountParam", "miniProgramParam");
 
-    /** 钉钉工作消息OA实际的映射 */
+    /**
+     * 钉钉工作消息OA实际的映射
+     */
     private static final List<String> DING_DING_OA_FIELD = Arrays.asList("dingDingOaHead", "dingDingOaBody");
-    /** 钉钉OA字段名实际的映射 */
+    /**
+     * 钉钉OA字段名实际的映射
+     */
     private static final Map<String, String> DING_DING_OA_NAME_MAPPING = new HashMap<>();
 
     static {
@@ -104,8 +104,8 @@ public class Convert4Amis {
 
     /**
      * 将单个对象转换成Map(无嵌套)
-     *
-     * <p>主要兼容amis的回显(前端不用amis可忽略)
+     * <p>
+     * 主要兼容amis的回显(前端不用amis可忽略)
      *
      * @param obj
      * @return
@@ -118,17 +118,23 @@ public class Convert4Amis {
                 String fieldValue = (String) ReflectUtil.getFieldValue(obj, field);
                 JSONObject jsonObject = JSONObject.parseObject(fieldValue);
                 for (String key : jsonObject.keySet()) {
-                    /** 钉钉OA消息回显 */
+                    /**
+                     * 钉钉OA消息回显
+                     */
                     if (DING_DING_OA_FIELD.contains(key)) {
                         JSONObject object = jsonObject.getJSONObject(key);
                         for (String objKey : object.keySet()) {
                             result.put(DING_DING_OA_NAME_MAPPING.get(objKey), object.getString(objKey));
                         }
                     } else if (PARSE_JSON_ARRAY.contains(key)) {
-                        /** 部分字段是直接传入数组，把数组直接返回(用于回显) */
+                        /**
+                         * 部分字段是直接传入数组，把数组直接返回(用于回显)
+                         */
                         result.put(key, JSON.parseArray(jsonObject.getString(key)));
                     } else if (PARSE_JSON_OBJ_TO_ARRAY.contains(key)) {
-                        /** 部分字段是直接传入Obj，把数组直接返回(用于回显) */
+                        /**
+                         * 部分字段是直接传入Obj，把数组直接返回(用于回显)
+                         */
                         String value = "[" + jsonObject.getString(key) + "]";
                         result.put(key, JSON.parseArray(value));
                     } else {
@@ -143,8 +149,8 @@ public class Convert4Amis {
 
     /**
      * 【这个方法不用看】，纯粹为了适配amis前端
-     *
-     * <p>得到模板的参数 组装好 返回给前端展示
+     * <p>
+     * 得到模板的参数 组装好 返回给前端展示
      *
      * @param wxTemplateId
      * @param allPrivateTemplate
@@ -164,31 +170,31 @@ public class Convert4Amis {
                         .build();
                 List<CommonAmisVo.ColumnsDTO> columnsDtoS = new ArrayList<>();
                 for (String datum : data) {
-                    String name = datum.substring(datum.indexOf("{{") + 2, datum.indexOf("."));
-                    CommonAmisVo.ColumnsDTO.ColumnsDTOBuilder dtoBuilder = CommonAmisVo.ColumnsDTO.builder()
-                            .name(name)
-                            .type("input-text")
-                            .required(true)
-                            .quickEdit(true);
-                    if (datum.contains("first")) {
-                        dtoBuilder.label("名字");
-                    } else if (datum.contains("remark")) {
-                        dtoBuilder.label("备注");
-                    } else {
-                        dtoBuilder.label(datum.split("：")[0]);
+                    if (StrUtil.isNotEmpty(datum)) {
+                        String name = datum.substring(datum.indexOf("{{") + 2, datum.indexOf("."));
+                        CommonAmisVo.ColumnsDTO.ColumnsDTOBuilder dtoBuilder = CommonAmisVo.ColumnsDTO.builder().name(name).type("input-text").required(true).quickEdit(true);
+                        if (datum.contains("first")) {
+                            dtoBuilder.label("名字");
+                        } else if (datum.contains("remark")) {
+                            dtoBuilder.label("备注");
+                        } else {
+                            dtoBuilder.label(datum.split("：")[0]);
+                        }
+                        columnsDtoS.add(dtoBuilder.build());
                     }
-                    columnsDtoS.add(dtoBuilder.build());
                 }
                 officialAccountParam.setColumns(columnsDtoS);
+
             }
         }
         return officialAccountParam;
     }
 
+
     /**
      * 【这个方法不用看】，纯粹为了适配amis前端
-     *
-     * <p>获取占位符的参数
+     * <p>
+     * 获取占位符的参数
      *
      * @param msgContent
      * @return
@@ -209,13 +215,7 @@ public class Convert4Amis {
                 .build();
         List<CommonAmisVo.ColumnsDTO> columnsDtoS = new ArrayList<>();
         for (String param : placeholderList) {
-            CommonAmisVo.ColumnsDTO dto = CommonAmisVo.ColumnsDTO.builder()
-                    .name(param)
-                    .label(param)
-                    .type("input-text")
-                    .required(true)
-                    .quickEdit(true)
-                    .build();
+            CommonAmisVo.ColumnsDTO dto = CommonAmisVo.ColumnsDTO.builder().name(param).label(param).type("input-text").required(true).quickEdit(true).build();
             columnsDtoS.add(dto);
         }
         testParam.setColumns(columnsDtoS);
@@ -240,25 +240,23 @@ public class Convert4Amis {
             char c = textChars[m];
             textSofar.append(c);
             switch (c) {
-                case '{':
-                    {
-                        modeTg = START_TG;
+                case '{': {
+                    modeTg = START_TG;
+                    sb.append(c);
+                }
+                break;
+                case '$': {
+                    if (modeTg == START_TG) {
                         sb.append(c);
-                    }
-                    break;
-                case '$':
-                    {
-                        if (modeTg == START_TG) {
-                            sb.append(c);
-                            modeTg = READ_TG;
-                        } else {
-                            if (modeTg == READ_TG) {
-                                sb = new StringBuilder();
-                                modeTg = IGNORE_TG;
-                            }
+                        modeTg = READ_TG;
+                    } else {
+                        if (modeTg == READ_TG) {
+                            sb = new StringBuilder();
+                            modeTg = IGNORE_TG;
                         }
                     }
-                    break;
+                }
+                break;
                 case '}': {
                     if (modeTg == READ_TG) {
                         modeTg = IGNORE_TG;
@@ -285,16 +283,14 @@ public class Convert4Amis {
                 }
             }
         }
-        Set<String> result = placeholderList.stream()
-                .map(s -> s.replaceAll("\\{", "").replaceAll("\\$", "").replaceAll("\\}", ""))
-                .collect(Collectors.toSet());
+        Set<String> result = placeholderList.stream().map(s -> s.replaceAll("\\{", "").replaceAll("\\$", "").replaceAll("\\}", "")).collect(Collectors.toSet());
         return result;
     }
 
     /**
      * 【这个方法不用看】，纯粹为了适配amis前端
-     *
-     * <p>得到模板的参数 组装好 返回给前端展示
+     * <p>
+     * 得到模板的参数 组装好 返回给前端展示
      *
      * @param wxTemplateId
      * @param templateList
@@ -317,99 +313,74 @@ public class Convert4Amis {
                     String name = datum.substring(datum.indexOf("{{") + 2, datum.indexOf("."));
                     String label = datum.split(":")[0];
                     CommonAmisVo.ColumnsDTO columnsDTO = CommonAmisVo.ColumnsDTO.builder()
-                            .name(name)
-                            .type("input-text")
-                            .required(true)
-                            .quickEdit(true)
-                            .label(label)
-                            .build();
+                            .name(name).type("input-text").required(true).quickEdit(true).label(label).build();
                     columnsDtoS.add(columnsDTO);
                 }
                 officialAccountParam.setColumns(columnsDtoS);
+
             }
         }
         return officialAccountParam;
+
     }
 
     /**
      * 【这个方法不用看】，纯粹为了适配amis前端
-     *
-     * <p>1、得到微信服务号的【带参数】二维码返回给前端 2、让前端轮询请求 接口看是否已登录
+     * <p>
+     * 1、得到微信服务号的【带参数】二维码返回给前端
+     * 2、让前端轮询请求 接口看是否已登录
      *
      * @return
      */
     public static CommonAmisVo getWxMpQrCode(String url, String id) {
-        CommonAmisVo image = CommonAmisVo.builder()
-                .type("static-image")
-                .value(url)
-                .originalSrc(url)
-                .name("image")
-                .label("扫描关注")
-                .fixedSize(true)
-                .fixedSizeClassName(url)
-                .fixedSizeClassName("h-32")
-                .build();
+        CommonAmisVo image = CommonAmisVo.builder().type("static-image").value(url).originalSrc(url).name("image").label("扫描关注").fixedSize(true).fixedSizeClassName(url).fixedSizeClassName("h-32").build();
 
-        String requestAdaptor = "var openId = localStorage.getItem(\"openId\");\n"
-                + "if (openId != null && openId != 'null' && openId != '' && openId !=="
-                + " undefined) {\n"
-                + "    alert(\"已登录，你的ID是：\" + openId);\n"
-                + "    window.location.href = 'index.html';\n"
-                + "    return api;\n"
-                + "}";
+        String requestAdaptor = "var openId = localStorage.getItem(\"openId\");\n" +
+                "if (openId != null && openId != 'null' && openId != '' && openId !== undefined) {\n" +
+                "    alert(\"已登录，你的ID是：\" + openId);\n" +
+                "    window.location.href = 'index.html';\n" +
+                "    return api;\n" +
+                "}";
 
-        String adaptor = "if (payload.data != 'NO_LOGIN' && payload.status == '0') {\n"
-                + "    localStorage.setItem(\"openId\", payload.data.openId);\n"
-                + "    alert(\"扫码已登录成功，你的ID是：\" + payload.data.openId);\n"
-                + "    window.location.href = 'index.html';\n"
-                + "}\n"
-                + "return payload;";
 
-        CommonAmisVo service = CommonAmisVo.builder()
-                .type("service")
-                .api(CommonAmisVo.ApiDTO.builder()
-                        .url("${ls:backend_url}/officialAccount/check/login?sceneId=" + id)
-                        .adaptor(adaptor)
-                        .requestAdaptor(requestAdaptor)
-                        .build())
-                .interval(2000)
-                .silentPolling(true)
-                .build();
+        String adaptor = "if (payload.data != 'NO_LOGIN' && payload.status == '0') {\n" +
+                "    localStorage.setItem(\"openId\", payload.data.openId);\n" +
+                "    alert(\"扫码已登录成功，你的ID是：\" + payload.data.openId);\n" +
+                "    window.location.href = 'index.html';\n" +
+                "}\n" +
+                "return payload;";
 
-        return CommonAmisVo.builder()
-                .type("form")
-                .title("登录")
-                .mode("horizontal")
-                .body(Arrays.asList(image, service))
-                .build();
+
+        CommonAmisVo service = CommonAmisVo.builder().type("service")
+                .api(CommonAmisVo.ApiDTO.builder().url("${ls:backend_url}/officialAccount/check/login?sceneId=" + id)
+                        .adaptor(adaptor).requestAdaptor(requestAdaptor).build()).interval(2000).silentPolling(true).build();
+
+        return CommonAmisVo.builder().type("form").title("登录").mode("horizontal").body(Arrays.asList(image, service)).build();
     }
 
     /**
      * 【这个方法不用看】，纯粹为了适配amis前端
-     *
-     * <p>得到渠道账号信息，返回给前端做展示
+     * <p>
+     * 得到渠道账号信息，返回给前端做展示
      *
      * @return
      */
     public static List<CommonAmisVo> getChannelAccountVo(List<ChannelAccount> channelAccounts, Integer channelType) {
         List<CommonAmisVo> result = new ArrayList<>();
         if (ChannelType.SMS.getCode().equals(channelType)) {
-            CommonAmisVo commonAmisVo =
-                    CommonAmisVo.builder().label("AUTO").value("0").build();
+            CommonAmisVo commonAmisVo = CommonAmisVo.builder().label("AUTO").value("0").build();
             result.add(commonAmisVo);
         }
         for (ChannelAccount channelAccount : channelAccounts) {
-            CommonAmisVo commonAmisVo = CommonAmisVo.builder()
-                    .label(channelAccount.getName())
-                    .value(String.valueOf(channelAccount.getId()))
-                    .build();
+            CommonAmisVo commonAmisVo = CommonAmisVo.builder().label(channelAccount.getName()).value(String.valueOf(channelAccount.getId())).build();
             result.add(commonAmisVo);
         }
         return result;
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端 获取 EchartsVo
+     * 【这个方法不用看】，纯粹为了适配amis前端
+     * 获取 EchartsVo
      *
      * @param anchorResult
      * @param businessId
@@ -421,36 +392,28 @@ public class Convert4Amis {
         if (CollUtil.isNotEmpty(anchorResult)) {
             anchorResult = MapUtil.sort(anchorResult);
             for (Map.Entry<Object, Object> entry : anchorResult.entrySet()) {
-                String description = AnchorState.getDescriptionByCode(Integer.valueOf(String.valueOf(entry.getKey())));
+                String description = EnumUtil.getDescriptionByCode(Integer.valueOf(String.valueOf(entry.getKey())), AnchorState.class);
                 xAxisList.add(description);
                 actualData.add(Integer.valueOf(String.valueOf(entry.getValue())));
             }
         }
 
-        String title = "【"
-                + templateName
-                + "】在"
-                + DateUtil.format(
-                        DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))),
-                        DatePattern.CHINESE_DATE_FORMATTER)
-                + "的下发情况：";
+        String title = "【" + templateName + "】在" + DateUtil.format(DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))), DatePattern.CHINESE_DATE_FORMATTER) + "的下发情况：";
 
         return EchartsVo.builder()
                 .title(EchartsVo.TitleVO.builder().text(title).build())
                 .legend(EchartsVo.LegendVO.builder().data(Arrays.asList("人数")).build())
                 .xAxis(EchartsVo.XaxisVO.builder().data(xAxisList).build())
-                .series(Arrays.asList(EchartsVo.SeriesVO.builder()
-                        .name("人数")
-                        .type("bar")
-                        .data(actualData)
-                        .build()))
+                .series(Arrays.asList(EchartsVo.SeriesVO.builder().name("人数").type("bar").data(actualData).build()))
                 .yAxis(EchartsVo.YaxisVO.builder().build())
                 .tooltip(EchartsVo.TooltipVO.builder().build())
                 .build();
+
     }
 
     /**
-     * 【这个方法不用看】，纯粹为了适配amis前端 获取 SmsTimeLineVo
+     * 【这个方法不用看】，纯粹为了适配amis前端
+     * 获取 SmsTimeLineVo
      *
      * @return
      */
@@ -466,14 +429,12 @@ public class Convert4Amis {
                 if (smsRecord.getMessageTemplateId() > 0) {
                     itemsVO.setBusinessId(String.valueOf(smsRecord.getMessageTemplateId()));
                     itemsVO.setContent(smsRecord.getMsgContent());
-                    itemsVO.setSendType(SmsStatus.getDescriptionByStatus(smsRecord.getStatus()));
-                    itemsVO.setSendTime(DateUtil.format(
-                            new Date(Long.valueOf(smsRecord.getCreated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
+                    itemsVO.setSendType(EnumUtil.getDescriptionByCode(smsRecord.getStatus(), SmsStatus.class));
+                    itemsVO.setSendTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getCreated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
                 } else {
-                    itemsVO.setReceiveType(SmsStatus.getDescriptionByStatus(smsRecord.getStatus()));
+                    itemsVO.setReceiveType(EnumUtil.getDescriptionByCode(smsRecord.getStatus(), SmsStatus.class));
                     itemsVO.setReceiveContent(smsRecord.getReportContent());
-                    itemsVO.setReceiveTime(DateUtil.format(
-                            new Date(Long.valueOf(smsRecord.getUpdated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
+                    itemsVO.setReceiveTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getUpdated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
                 }
             }
             itemsVoS.add(itemsVO);

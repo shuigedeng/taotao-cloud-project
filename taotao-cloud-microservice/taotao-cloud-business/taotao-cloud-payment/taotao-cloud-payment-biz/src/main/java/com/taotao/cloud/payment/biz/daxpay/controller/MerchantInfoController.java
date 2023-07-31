@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.controller;
 import cn.bootx.platform.common.core.rest.PageResult;
 import cn.bootx.platform.common.core.rest.Res;
 import cn.bootx.platform.common.core.rest.ResResult;
-import cn.bootx.platform.common.core.rest.dto.KeyValue;
+import cn.bootx.platform.common.core.rest.dto.LabelValue;
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.daxpay.core.merchant.service.MerchantInfoService;
 import cn.bootx.platform.daxpay.dto.merchant.MerchantInfoDto;
@@ -43,10 +43,16 @@ public class MerchantInfoController {
         return Res.ok();
     }
 
-    @Operation(summary = "下拉列表")
+    @Operation(summary = "下拉列表(所有)")
     @GetMapping("/dropdown")
-    public ResResult<List<KeyValue>> dropdown() {
+    public ResResult<List<LabelValue>> dropdown() {
         return Res.ok(merchantInfoService.dropdown());
+    }
+
+    @Operation(summary = "下拉列表(可用状态的)")
+    @GetMapping("/dropdownNormal")
+    public ResResult<List<LabelValue>> dropdownNormal() {
+        return Res.ok(merchantInfoService.dropdownNormal());
     }
 
     @Operation(summary = "删除")

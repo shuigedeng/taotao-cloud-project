@@ -1,27 +1,12 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.common.domain;
 
-import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
-import java.util.Set;
+import com.java3y.austin.common.dto.model.ContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 /**
  * 发送任务信息
@@ -34,36 +19,70 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TaskInfo {
 
-    /** 消息模板Id */
+    /**
+     * 业务消息发送Id, 用于链路追踪, 若不存在, 则使用 messageId
+     */
+    private String bizId;
+
+    /**
+     * 消息唯一Id(数据追踪使用)
+     * 生成逻辑参考 TaskInfoUtils
+     */
+    private String messageId;
+
+    /**
+     * 消息模板Id
+     */
     private Long messageTemplateId;
 
-    /** 业务Id(数据追踪使用) 生成逻辑参考 TaskInfoUtils */
+    /**
+     * 业务Id(数据追踪使用)
+     * 生成逻辑参考 TaskInfoUtils
+     */
     private Long businessId;
 
-    /** 接收者 */
+    /**
+     * 接收者
+     */
     private Set<String> receiver;
 
-    /** 发送的Id类型 */
+    /**
+     * 发送的Id类型
+     */
     private Integer idType;
 
-    /** 发送渠道 */
+    /**
+     * 发送渠道
+     */
     private Integer sendChannel;
 
-    /** 模板类型 */
+    /**
+     * 模板类型
+     */
     private Integer templateType;
 
-    /** 消息类型 */
+    /**
+     * 消息类型
+     */
     private Integer msgType;
 
-    /** 屏蔽类型 */
+    /**
+     * 屏蔽类型
+     */
     private Integer shieldType;
 
     /**
-     * 发送文案模型 message_template表存储的content是JSON(所有内容都会塞进去) 不同的渠道要发送的内容不一样(比如发push会有img，而短信没有)
+     * 发送文案模型
+     * message_template表存储的content是JSON(所有内容都会塞进去)
+     * 不同的渠道要发送的内容不一样(比如发push会有img，而短信没有)
      * 所以会有ContentModel
      */
     private ContentModel contentModel;
 
-    /** 发送账号（邮件下可有多个发送账号、短信可有多个发送账号..） */
+    /**
+     * 发送账号（邮件下可有多个发送账号、短信可有多个发送账号..）
+     */
     private Integer sendAccount;
+
+
 }

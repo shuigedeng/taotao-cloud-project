@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.common.dto.model;
 
 import lombok.AllArgsConstructor;
@@ -22,8 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 3y 企业微信 应用消息
- *     https://developer.work.weixin.qq.com/document/path/90372#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89
+ * @author 3y
+ * 企业微信 应用消息
+ * https://developer.work.weixin.qq.com/document/path/90372#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89
  */
 @Data
 @Builder
@@ -31,25 +16,39 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EnterpriseWeChatContentModel extends ContentModel {
 
-    /** 下发企业微信消息的类型 */
+    /**
+     * 下发企业微信消息的类型
+     */
     private String sendType;
 
-    /** 文案 */
+    /**
+     * 文案
+     */
     private String content;
 
-    /** 图片媒体文件id */
+    /**
+     * 图片媒体文件id
+     */
     private String mediaId;
 
-    /** 标题 */
+    /**
+     * 标题
+     */
     private String title;
 
-    /** 描述 */
+    /**
+     * 描述
+     */
     private String description;
 
-    /** 链接 */
+    /**
+     * 链接
+     */
     private String url;
 
-    /** 按钮文案 */
+    /**
+     * 按钮文案
+     */
     private String btnTxt;
 
     /**
@@ -60,20 +59,22 @@ public class EnterpriseWeChatContentModel extends ContentModel {
 
     /**
      * 图文消息（mpnews）
-     * [{"title":"Title","thumb_media_id":"MEDIA_ID","author":"Author","content_source_url":"URL","content":"Content","digest":"Digest
-     * description"}]
+     * [{"title":"Title","thumb_media_id":"MEDIA_ID","author":"Author","content_source_url":"URL","content":"Content","digest":"Digest description"}]
      */
     private String mpNewsArticle;
 
-    /** 小程序 */
-    private String appId;
 
+    /**
+     * 小程序
+     */
+    private String appId;
     private String page;
     private Boolean emphasisFirstItem;
     private String contentItems;
 
+
     /**
-     * 其他消息类型：
-     * https://developer.work.weixin.qq.com/document/path/90372#%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF
+     *  其他消息类型： https://developer.work.weixin.qq.com/document/path/90372#%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF
      */
+
 }
