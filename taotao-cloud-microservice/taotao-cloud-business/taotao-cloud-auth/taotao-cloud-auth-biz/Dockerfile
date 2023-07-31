@@ -98,8 +98,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   ${DEBUG_OPTIONS} \
                   -Dspring.profiles.active=${APP_PRROFILES} "
 
-EXPOSE 8889
-
 USER root
 
 WORKDIR /root
@@ -124,6 +122,8 @@ RUN apk add libstdc++ --allow-untrusted
 VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
+
+EXPOSE 8889
 
 COPY --from=builder /root/dependencies/ ./
 RUN true
