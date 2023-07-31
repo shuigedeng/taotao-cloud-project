@@ -8,6 +8,7 @@ subprojects {
     apply from: rootProject.file('gradle/shadow.gradle')
     apply from: rootProject.file('gradle/graalvm.gradle')
 
+
     tasks.register('createProperties') {
         dependsOn processResources
         doLast {
