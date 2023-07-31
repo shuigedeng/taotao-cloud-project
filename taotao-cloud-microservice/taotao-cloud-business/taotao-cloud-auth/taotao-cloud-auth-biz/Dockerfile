@@ -44,7 +44,7 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LOG_FILE_PATH=/root/logs/pyrosope.log
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-ENV DEBUG_OPTIONS = " -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889  "
+ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889"
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
@@ -95,7 +95,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889 \
+                  ${DEBUG_OPTIONS} \
                   -Dspring.profiles.active=${APP_PRROFILES} "
 
 USER root
