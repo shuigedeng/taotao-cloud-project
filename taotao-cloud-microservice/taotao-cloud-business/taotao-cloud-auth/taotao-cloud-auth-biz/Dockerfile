@@ -95,6 +95,9 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${APP_PRROFILES} "
 
+EXPOSE 8889
+ENV DEBUG_OPTIONS = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889 -XDebug "
+
 USER root
 
 WORKDIR /root
@@ -131,4 +134,4 @@ RUN true
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher $DEBUG_OPTIONS

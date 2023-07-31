@@ -1,28 +1,8 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
-import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
-import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
-import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Optional;
-import javax.annotation.PostConstruct;
+import cn.hutool.core.util.StrUtil;
+import com.java3y.austin.handler.utils.GroupIdMappingUtils;
+import com.java3y.austin.support.constans.MessageQueuePipeline;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +14,12 @@ import org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProce
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 启动消费者
@@ -48,20 +34,27 @@ public class ReceiverStart {
 
     @Autowired
     private ApplicationContext context;
-
     @Autowired
     private ConsumerFactory consumerFactory;
 
-    /** receiver的消费方法常量 */
+    /**
+     * receiver的消费方法常量
+     */
     private static final String RECEIVER_METHOD_NAME = "Receiver.consumer";
 
-    /** 获取得到所有的groupId */
+    /**
+     * 获取得到所有的groupId
+     */
     private static List<String> groupIds = GroupIdMappingUtils.getAllGroupIds();
 
-    /** 下标(用于迭代groupIds位置) */
+    /**
+     * 下标(用于迭代groupIds位置)
+     */
     private static Integer index = 0;
 
-    /** 为每个渠道不同的消息类型 创建一个Receiver对象 */
+    /**
+     * 为每个渠道不同的消息类型 创建一个Receiver对象
+     */
     @PostConstruct
     public void init() {
         for (int i = 0; i < groupIds.size(); i++) {
@@ -69,13 +62,14 @@ public class ReceiverStart {
         }
     }
 
-    /** 给每个Receiver对象的consumer方法 @KafkaListener赋值相应的groupId */
+    /**
+     * 给每个Receiver对象的consumer方法 @KafkaListener赋值相应的groupId
+     */
     @Bean
     public static KafkaListenerAnnotationBeanPostProcessor.AnnotationEnhancer groupIdEnhancer() {
         return (attrs, element) -> {
             if (element instanceof Method) {
-                String name =
-                        ((Method) element).getDeclaringClass().getSimpleName() + "." + ((Method) element).getName();
+                String name = ((Method) element).getDeclaringClass().getSimpleName() + StrUtil.DOT + ((Method) element).getName();
                 if (RECEIVER_METHOD_NAME.equals(name)) {
                     attrs.put("groupId", groupIds.get(index++));
                 }
@@ -85,14 +79,14 @@ public class ReceiverStart {
     }
 
     /**
-     * 针对tag消息过滤 producer 将tag写进header里
+     * 针对tag消息过滤
+     * producer 将tag写进header里
      *
-     * @return
+     * @return true 消息将会被丢弃
      */
     @Bean
-    public ConcurrentKafkaListenerContainerFactory filterContainerFactory(
-            @Value("${austin.business.tagId.key}") String tagIdKey,
-            @Value("${austin.business.tagId.value}") String tagIdValue) {
+    public ConcurrentKafkaListenerContainerFactory filterContainerFactory(@Value("${austin.business.tagId.key}") String tagIdKey,
+                                                                          @Value("${austin.business.tagId.value}") String tagIdValue) {
         ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(consumerFactory);
         factory.setAckDiscarded(true);
@@ -100,14 +94,11 @@ public class ReceiverStart {
         factory.setRecordFilterStrategy(consumerRecord -> {
             if (Optional.ofNullable(consumerRecord.value()).isPresent()) {
                 for (Header header : consumerRecord.headers()) {
-                    if (header.key().equals(tagIdKey)
-                            && new String(header.value())
-                                    .equals(new String(tagIdValue.getBytes(StandardCharsets.UTF_8)))) {
+                    if (header.key().equals(tagIdKey) && new String(header.value()).equals(new String(tagIdValue.getBytes(StandardCharsets.UTF_8)))) {
                         return false;
                     }
                 }
             }
-            // 返回true将会被丢弃
             return true;
         });
         return factory;

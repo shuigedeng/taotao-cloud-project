@@ -1,27 +1,8 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import org.dromara.hutoolcore.collection.CollUtil;
+import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import com.java3y.austin.common.constant.CommonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
@@ -29,9 +10,15 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * @author 3y
- * @date 2021/12/10 对Redis的某些操作二次封装
+ * @date 2021/12/10
+ * 对Redis的某些操作二次封装
  */
 @Component
 @Slf4j
@@ -89,13 +76,15 @@ public class RedisUtils {
         return null;
     }
 
-    /** pipeline 设置 key-value 并设置过期时间 */
+    /**
+     * pipeline 设置 key-value 并设置过期时间
+     */
     public void pipelineSetEx(Map<String, String> keyValues, Long seconds) {
         try {
             redisTemplate.executePipelined((RedisCallback<String>) connection -> {
                 for (Map.Entry<String, String> entry : keyValues.entrySet()) {
-                    connection.setEx(
-                            entry.getKey().getBytes(), seconds, entry.getValue().getBytes());
+                    connection.setEx(entry.getKey().getBytes(), seconds,
+                            entry.getValue().getBytes());
                 }
                 return null;
             });
@@ -104,7 +93,10 @@ public class RedisUtils {
         }
     }
 
-    /** lpush 方法 并指定 过期时间 */
+
+    /**
+     * lpush 方法 并指定 过期时间
+     */
     public void lPush(String key, String value, Long seconds) {
         try {
             redisTemplate.executePipelined((RedisCallback<String>) connection -> {
@@ -117,7 +109,9 @@ public class RedisUtils {
         }
     }
 
-    /** lLen 方法 */
+    /**
+     * lLen 方法
+     */
     public Long lLen(String key) {
         try {
             return redisTemplate.opsForList().size(key);
@@ -127,7 +121,9 @@ public class RedisUtils {
         return 0L;
     }
 
-    /** lPop 方法 */
+    /**
+     * lPop 方法
+     */
     public String lPop(String key) {
         try {
             return redisTemplate.opsForList().leftPop(key);
@@ -141,14 +137,13 @@ public class RedisUtils {
      * pipeline 设置 key-value 并设置过期时间
      *
      * @param seconds 过期时间
-     * @param delta 自增的步长
+     * @param delta   自增的步长
      */
     public void pipelineHashIncrByEx(Map<String, String> keyValues, Long seconds, Long delta) {
         try {
             redisTemplate.executePipelined((RedisCallback<String>) connection -> {
                 for (Map.Entry<String, String> entry : keyValues.entrySet()) {
-                    connection.hIncrBy(
-                            entry.getKey().getBytes(), entry.getValue().getBytes(), delta);
+                    connection.hIncrBy(entry.getKey().getBytes(), entry.getValue().getBytes(), delta);
                     connection.expire(entry.getKey().getBytes(), seconds);
                 }
                 return null;
@@ -159,7 +154,11 @@ public class RedisUtils {
     }
 
     /**
-     * 执行指定的lua脚本返回执行结果 --KEYS[1]: 限流 key --ARGV[1]: 限流窗口 --ARGV[2]: 当前时间戳（作为score） --ARGV[3]: 阈值
+     * 执行指定的lua脚本返回执行结果
+     * --KEYS[1]: 限流 key
+     * --ARGV[1]: 限流窗口
+     * --ARGV[2]: 当前时间戳（作为score）
+     * --ARGV[3]: 阈值
      * --ARGV[4]: score 对应的唯一value
      *
      * @param redisScript
@@ -181,4 +180,6 @@ public class RedisUtils {
         }
         return false;
     }
+
+
 }

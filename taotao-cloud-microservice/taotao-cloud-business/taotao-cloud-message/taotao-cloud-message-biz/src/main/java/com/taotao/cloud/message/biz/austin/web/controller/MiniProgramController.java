@@ -1,34 +1,18 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.web.controller;
 
+
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import org.dromara.hutoolhttp.HttpUtil;
+import cn.hutool.http.HttpUtil;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
-import com.taotao.cloud.message.biz.austin.web.exception.CommonException;
-import com.taotao.cloud.message.biz.austin.web.utils.Convert4Amis;
-import com.taotao.cloud.message.biz.austin.web.vo.amis.CommonAmisVo;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.support.utils.AccountUtils;
+import com.java3y.austin.web.annotation.AustinAspect;
+import com.java3y.austin.web.annotation.AustinResult;
+import com.java3y.austin.web.exception.CommonException;
+import com.java3y.austin.web.utils.Convert4Amis;
+import com.java3y.austin.web.vo.amis.CommonAmisVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.subscribemsg.TemplateInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +21,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 微信服务号
  *
  * @author 3y
  */
 @Slf4j
-@AustinResult
+@AustinAspect
 @RestController
 @RequestMapping("/miniProgram")
 @Api("微信服务号")
@@ -54,16 +42,14 @@ public class MiniProgramController {
 
     @GetMapping("/template/list")
     @ApiOperation("/根据账号Id获取模板列表")
+    @AustinResult
     public List<CommonAmisVo> queryList(Integer id) {
         try {
             List<CommonAmisVo> result = new ArrayList<>();
             WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
             List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
             for (TemplateInfo templateInfo : templateList) {
-                CommonAmisVo commonAmisVo = CommonAmisVo.builder()
-                        .label(templateInfo.getTitle())
-                        .value(templateInfo.getPriTmplId())
-                        .build();
+                CommonAmisVo commonAmisVo = CommonAmisVo.builder().label(templateInfo.getTitle()).value(templateInfo.getPriTmplId()).build();
                 result.add(commonAmisVo);
             }
             return result;
@@ -71,6 +57,7 @@ public class MiniProgramController {
             log.error("MiniProgramController#queryList fail:{}", Throwables.getStackTraceAsString(e));
             throw new CommonException(RespStatusEnum.SERVICE_ERROR);
         }
+
     }
 
     /**
@@ -80,10 +67,13 @@ public class MiniProgramController {
      */
     @PostMapping("/detailTemplate")
     @ApiOperation("/根据账号Id和模板ID获取模板列表")
+    @AustinResult
     public CommonAmisVo queryDetailList(Integer id, String wxTemplateId) {
         if (Objects.isNull(id) || Objects.isNull(wxTemplateId)) {
-            throw new CommonException(RespStatusEnum.CLIENT_BAD_PARAMETERS);
+            log.info("id || wxTemplateId null! id:{},wxTemplateId:{}", id, wxTemplateId);
+            return CommonAmisVo.builder().build();
         }
+
         try {
             WxMaService wxMaService = accountUtils.getAccountById(id, WxMaService.class);
             List<TemplateInfo> templateList = wxMaService.getSubscribeService().getTemplateList();
@@ -96,21 +86,16 @@ public class MiniProgramController {
 
     /**
      * 登录凭证校验
-     *
-     * <p>临时给小程序登录使用，正常消息推送平台不会有此接口
+     * <p>
+     * 临时给小程序登录使用，正常消息推送平台不会有此接口
      *
      * @return
      */
     @GetMapping("/sync/openid")
     @ApiOperation("登录凭证校验")
     public String syncOpenId(String code, String appId, String secret) {
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid="
-                + appId
-                + "&secret="
-                + secret
-                + "&js_code="
-                + code
-                + "&grant_type=authorization_code";
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appId + "&secret=" + secret + "&js_code=" + code + "&grant_type=authorization_code";
         return HttpUtil.get(url);
     }
+
 }

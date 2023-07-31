@@ -1,29 +1,15 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.handler.flowcontrol;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.util.concurrent.RateLimiter;
-import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import javax.annotation.PostConstruct;
+import com.java3y.austin.common.constant.CommonConstant;
+import com.java3y.austin.common.domain.TaskInfo;
+import com.java3y.austin.common.enums.ChannelType;
+import com.java3y.austin.common.enums.EnumUtil;
+import com.java3y.austin.handler.enums.RateLimitStrategy;
+import com.java3y.austin.handler.flowcontrol.annotations.LocalRateLimit;
+import com.java3y.austin.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
@@ -31,6 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author 3y
@@ -72,19 +63,17 @@ public class FlowControlFactory implements ApplicationContextAware {
         }
         double costTime = flowControlService.flowControl(taskInfo, flowControlParam);
         if (costTime > 0) {
-            log.info(
-                    "consumer {} flow control time {}",
-                    ChannelType.getEnumByCode(taskInfo.getSendChannel()).getDescription(),
-                    costTime);
+            log.info("consumer {} flow control time {}",
+                    EnumUtil.getEnumByCode(taskInfo.getSendChannel(), ChannelType.class).getDescription(), costTime);
         }
     }
 
     /**
      * 得到限流值的配置
-     *
-     * <p>apollo配置样例 key：flowControl value：{"flow_control_40":1}
-     *
-     * <p>渠道枚举可看：com.taotao.cloud.message.biz.austin.common.enums.ChannelType
+     * <p>
+     * apollo配置样例     key：flowControl value：{"flow_control_40":1}
+     * <p>
+     * 渠道枚举可看：com.java3y.austin.common.enums.ChannelType
      *
      * @param channelCode
      */
@@ -104,7 +93,7 @@ public class FlowControlFactory implements ApplicationContextAware {
             if (service instanceof FlowControlService) {
                 LocalRateLimit localRateLimit = AopUtils.getTargetClass(service).getAnnotation(LocalRateLimit.class);
                 RateLimitStrategy rateLimitStrategy = localRateLimit.rateLimitStrategy();
-                // 通常情况下 实现的限流service与rateLimitStrategy一一对应
+                //通常情况下 实现的限流service与rateLimitStrategy一一对应
                 flowControlServiceMap.put(rateLimitStrategy, (FlowControlService) service);
             }
         });

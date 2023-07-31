@@ -1,11 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.core.notify.entity;
 
 import cn.bootx.mybatis.table.modify.annotation.DbComment;
-import cn.bootx.mybatis.table.modify.annotation.DbTable;
 import cn.bootx.mybatis.table.modify.mybatis.mysq.annotation.DbMySqlFieldType;
 import cn.bootx.mybatis.table.modify.mybatis.mysq.constants.MySqlFieldTypeEnum;
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
-import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
+import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
 import cn.bootx.platform.daxpay.code.pay.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.pay.PayStatusCode;
 import cn.bootx.platform.daxpay.core.notify.convert.PayNotifyConvert;
@@ -28,7 +27,7 @@ import java.time.LocalDateTime;
 //@DbTable(comment = "回调记录")
 @Accessors(chain = true)
 @TableName("pay_pay_notify_record")
-public class PayNotifyRecord extends MpBaseEntity implements EntityBaseFunction<PayNotifyRecordDto> {
+public class PayNotifyRecord extends MpCreateEntity implements EntityBaseFunction<PayNotifyRecordDto> {
 
     /** 支付记录id */
     @DbComment("支付记录id")

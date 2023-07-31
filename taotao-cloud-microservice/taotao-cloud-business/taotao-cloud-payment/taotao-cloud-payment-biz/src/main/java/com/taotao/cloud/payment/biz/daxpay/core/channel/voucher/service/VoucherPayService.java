@@ -59,8 +59,7 @@ public class VoucherPayService {
             String extraParamsJson = payWayParam.getExtraParamsJson();
             if (StrUtil.isNotBlank(extraParamsJson)) {
                 voucherPayParam = JSONUtil.toBean(extraParamsJson, VoucherPayParam.class);
-            }
-            else {
+            } else {
                 throw new PayFailureException("储值卡支付参数错误");
             }
         }
@@ -70,6 +69,8 @@ public class VoucherPayService {
 
         List<String> cardNoList = voucherPayParam.getCardNoList();
         List<Voucher> vouchers = voucherManager.findByCardNoList(cardNoList);
+
+
         // 判断是否有重复or无效的储值卡
         if (vouchers.size() != cardNoList.size()) {
             throw new PayFailureException("储值卡支付参数错误");
@@ -105,7 +106,7 @@ public class VoucherPayService {
                     .setPaymentId(payment.getId())
                     .setBusinessId(payment.getBusinessId())
                     .setType(VoucherCode.LOG_FREEZE_BALANCE)
-                    .setRemark(String.format("钱包预冻结金额 %.2f ", amount))
+                    .setRemark(String.format("预冻结金额 %.2f ", amount))
                     .setVoucherId(voucher.getId())
                     .setVoucherNo(voucher.getCardNo());
 
@@ -152,7 +153,7 @@ public class VoucherPayService {
                         .setPaymentId(voucherPayment.getPaymentId())
                         .setBusinessId(voucherPayment.getBusinessId())
                         .setType(VoucherCode.LOG_REDUCE_AND_UNFREEZE_BALANCE)
-                        .setRemark(String.format("钱包扣款金额 %.2f ", voucherPayment.getAmount()))
+                        .setRemark(String.format("扣款金额 %.2f ", voucherPayment.getAmount()))
                         .setVoucherId(voucher.getId())
                         .setAmount(voucher.getFreezeBalance())
                         .setVoucherNo(voucher.getCardNo());
@@ -164,7 +165,7 @@ public class VoucherPayService {
     }
 
     /**
-     * 直接支付
+     * 直接支付 (同步支付方式下)
      */
     @Transactional(rollbackFor = Exception.class)
     public List<VoucherRecord> pay(BigDecimal amount, Payment payment, List<Voucher> vouchers) {
@@ -181,7 +182,7 @@ public class VoucherPayService {
                     .setPaymentId(payment.getId())
                     .setBusinessId(payment.getBusinessId())
                     .setType(VoucherCode.LOG_PAY)
-                    .setRemark(String.format("钱包支付金额 %.2f ", amount))
+                    .setRemark(String.format("支付金额 %.2f ", amount))
                     .setVoucherId(voucher.getId())
                     .setVoucherNo(voucher.getCardNo());
 
@@ -272,9 +273,16 @@ public class VoucherPayService {
                 .map(VoucherRecord::getCardNo)
                 .collect(Collectors.toList());
         List<Voucher> vouchers = voucherManager.findByCardNoList(cardNoList);
+        // 如果未传入卡号, 默认退到最抗用的一张卡上
+        if (StrUtil.isBlank(refundVoucherNo)){
+            List<Voucher> sort = this.sort(vouchers);
+            refundVoucherNo = sort.get(sort.size()-1).getCardNo();
+        }
+
         // 筛选出来要进行退款的卡
+        String finalRefundVoucherNo = refundVoucherNo;
         Voucher voucher = vouchers.stream()
-                .filter(vr -> Objects.equals(vr.getCardNo(), refundVoucherNo))
+                .filter(vr -> Objects.equals(vr.getCardNo(), finalRefundVoucherNo))
                 .findFirst()
                 .orElseThrow(() -> new PayFailureException("退款卡号不存在"));
         // 将金额全部推到指定的卡上

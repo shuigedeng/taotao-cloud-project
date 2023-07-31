@@ -1,56 +1,39 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.handler.script.impl;
 
-import org.dromara.hutoolcore.date.DatePattern;
-import org.dromara.hutoolcore.date.DateUtil;
-import org.dromara.hutoolcore.util.ArrayUtil;
-import org.dromara.hutoolcore.util.IdUtil;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.taotao.cloud.message.biz.austin.common.dto.account.sms.TencentSmsAccount;
-import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
-import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
-import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
-import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
-import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
+import com.java3y.austin.common.dto.account.sms.TencentSmsAccount;
+import com.java3y.austin.common.enums.SmsStatus;
+import com.java3y.austin.handler.domain.sms.SmsParam;
+import com.java3y.austin.handler.script.SmsScript;
+import com.java3y.austin.support.domain.SmsRecord;
+import com.java3y.austin.support.utils.AccountUtils;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
-import com.tencentcloudapi.sms.v20210111.models.PullSmsSendStatus;
-import com.tencentcloudapi.sms.v20210111.models.PullSmsSendStatusRequest;
-import com.tencentcloudapi.sms.v20210111.models.PullSmsSendStatusResponse;
-import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
-import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
-import com.tencentcloudapi.sms.v20210111.models.SendStatus;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import com.tencentcloudapi.sms.v20210111.models.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
 /**
  * @author 3y
- * @date 2021/11/6 1. 发送短信接入文档：https://cloud.tencent.com/document/api/382/55981 2. 推荐直接使用SDK调用 3.
- *     推荐使用API Explorer 生成代码
+ * @date 2021/11/6
+ * 1. 发送短信接入文档：https://cloud.tencent.com/document/api/382/55981
+ * 2. 推荐直接使用SDK调用
+ * 3. 推荐使用API Explorer 生成代码
  */
+
 @Slf4j
 @Component("TencentSmsScript")
 public class TencentSmsScript implements SmsScript {
@@ -63,18 +46,14 @@ public class TencentSmsScript implements SmsScript {
     @Override
     public List<SmsRecord> send(SmsParam smsParam) {
         try {
-            TencentSmsAccount tencentSmsAccount = Objects.nonNull(smsParam.getSendAccountId())
-                    ? accountUtils.getAccountById(smsParam.getSendAccountId(), TencentSmsAccount.class)
+            TencentSmsAccount tencentSmsAccount = Objects.nonNull(smsParam.getSendAccountId()) ? accountUtils.getAccountById(smsParam.getSendAccountId(), TencentSmsAccount.class)
                     : accountUtils.getSmsAccountByScriptName(smsParam.getScriptName(), TencentSmsAccount.class);
             SmsClient client = init(tencentSmsAccount);
             SendSmsRequest request = assembleSendReq(smsParam, tencentSmsAccount);
             SendSmsResponse response = client.SendSms(request);
             return assembleSendSmsRecord(smsParam, response, tencentSmsAccount);
         } catch (Exception e) {
-            log.error(
-                    "TencentSmsScript#send fail:{},params:{}",
-                    Throwables.getStackTraceAsString(e),
-                    JSON.toJSONString(smsParam));
+            log.error("TencentSmsScript#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
             return null;
         }
     }
@@ -101,8 +80,7 @@ public class TencentSmsScript implements SmsScript {
      * @param tencentSmsAccount
      * @return
      */
-    private List<SmsRecord> assembleSendSmsRecord(
-            SmsParam smsParam, SendSmsResponse response, TencentSmsAccount tencentSmsAccount) {
+    private List<SmsRecord> assembleSendSmsRecord(SmsParam smsParam, SendSmsResponse response, TencentSmsAccount tencentSmsAccount) {
         if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getSendStatusSet())) {
             return null;
         }
@@ -112,10 +90,7 @@ public class TencentSmsScript implements SmsScript {
 
             // 腾讯返回的电话号有前缀，这里取巧直接翻转获取手机号
             String phone = new StringBuilder(new StringBuilder(sendStatus.getPhoneNumber())
-                            .reverse()
-                            .substring(0, PHONE_NUM))
-                    .reverse()
-                    .toString();
+                    .reverse().substring(0, PHONE_NUM)).reverse().toString();
 
             SmsRecord smsRecord = SmsRecord.builder()
                     .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
@@ -137,11 +112,12 @@ public class TencentSmsScript implements SmsScript {
         return smsRecordList;
     }
 
-    /** 组装发送短信参数 */
+    /**
+     * 组装发送短信参数
+     */
     private SendSmsRequest assembleSendReq(SmsParam smsParam, TencentSmsAccount account) {
         SendSmsRequest req = new SendSmsRequest();
-        String[] phoneNumberSet1 =
-                smsParam.getPhones().toArray(new String[smsParam.getPhones().size() - 1]);
+        String[] phoneNumberSet1 = smsParam.getPhones().toArray(new String[smsParam.getPhones().size() - 1]);
         req.setPhoneNumberSet(phoneNumberSet1);
         req.setSmsSdkAppId(account.getSmsSdkAppId());
         req.setSignName(account.getSignName());
@@ -176,9 +152,7 @@ public class TencentSmsScript implements SmsScript {
      */
     private List<SmsRecord> assemblePullSmsRecord(TencentSmsAccount account, PullSmsSendStatusResponse resp) {
         List<SmsRecord> smsRecordList = new ArrayList<>();
-        if (Objects.nonNull(resp)
-                && Objects.nonNull(resp.getPullSmsSendStatusSet())
-                && resp.getPullSmsSendStatusSet().length > 0) {
+        if (Objects.nonNull(resp) && Objects.nonNull(resp.getPullSmsSendStatusSet()) && resp.getPullSmsSendStatusSet().length > 0) {
             for (PullSmsSendStatus pullSmsSendStatus : resp.getPullSmsSendStatusSet()) {
                 SmsRecord smsRecord = SmsRecord.builder()
                         .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
@@ -189,10 +163,7 @@ public class TencentSmsScript implements SmsScript {
                         .msgContent("")
                         .seriesId(pullSmsSendStatus.getSerialNo())
                         .chargingNum(0)
-                        .status(
-                                "SUCCESS".equals(pullSmsSendStatus.getReportStatus())
-                                        ? SmsStatus.RECEIVE_SUCCESS.getCode()
-                                        : SmsStatus.RECEIVE_FAIL.getCode())
+                        .status("SUCCESS".equals(pullSmsSendStatus.getReportStatus()) ? SmsStatus.RECEIVE_SUCCESS.getCode() : SmsStatus.RECEIVE_FAIL.getCode())
                         .reportContent(pullSmsSendStatus.getDescription())
                         .updated(Math.toIntExact(pullSmsSendStatus.getUserReceiveTime()))
                         .created(Math.toIntExact(DateUtil.currentSeconds()))
@@ -215,4 +186,7 @@ public class TencentSmsScript implements SmsScript {
         req.setSmsSdkAppId(account.getSmsSdkAppId());
         return req;
     }
+
+
 }
+

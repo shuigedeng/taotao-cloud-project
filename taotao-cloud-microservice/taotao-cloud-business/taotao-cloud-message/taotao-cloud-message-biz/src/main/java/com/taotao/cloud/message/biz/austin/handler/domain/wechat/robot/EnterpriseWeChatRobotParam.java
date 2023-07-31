@@ -1,27 +1,12 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.handler.domain.wechat.robot;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * 企业微信自定义机器人 入参
@@ -35,67 +20,94 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EnterpriseWeChatRobotParam {
 
-    /** msgtype */
+    /**
+     * msgtype
+     */
     @JSONField(name = "msgtype")
     private String msgType;
-    /** text */
+    /**
+     * text
+     */
     @JSONField(name = "text")
     private TextDTO text;
-    /** markdown */
+    /**
+     * markdown
+     */
     @JSONField(name = "markdown")
     private MarkdownDTO markdown;
 
-    /** markdown */
+    /**
+     * markdown
+     */
     @JSONField(name = "image")
     private ImageDTO image;
-    /** news */
+    /**
+     * news
+     */
     @JSONField(name = "news")
     private NewsDTO news;
-    /** file */
+    /**
+     * file
+     */
     @JSONField(name = "file")
     private FileDTO file;
-    /** templateCard */
+    /**
+     * templateCard
+     */
     @JSONField(name = "template_card")
     private TemplateCardDTO templateCard;
 
-    /** TextDTO */
+    /**
+     * TextDTO
+     */
     @NoArgsConstructor
     @Data
     @Builder
     @AllArgsConstructor
     public static class TextDTO {
-
-        /** content */
+        /**
+         * content
+         */
         @JSONField(name = "content")
         private String content;
-        /** mentionedList */
+        /**
+         * mentionedList
+         */
         @JSONField(name = "mentioned_list")
         private List<String> mentionedList;
-        /** mentionedMobileList */
+        /**
+         * mentionedMobileList
+         */
         @JSONField(name = "mentioned_mobile_list")
         private List<String> mentionedMobileList;
     }
 
-    /** MarkdownDTO */
+    /**
+     * MarkdownDTO
+     */
     @NoArgsConstructor
     @Data
     @Builder
     @AllArgsConstructor
     public static class MarkdownDTO {
-
-        /** content */
+        /**
+         * content
+         */
         @JSONField(name = "content")
         private String content;
     }
 
-    /** ImageDTO */
+    /**
+     * ImageDTO
+     */
     @NoArgsConstructor
     @Data
     @Builder
     @AllArgsConstructor
     public static class ImageDTO {
-
-        /** base64 */
+        /**
+         * base64
+         */
         @JSONField(name = "base64")
         private String base64;
 
@@ -103,226 +115,321 @@ public class EnterpriseWeChatRobotParam {
         private String md5;
     }
 
-    /** NewsDTO */
+    /**
+     * NewsDTO
+     */
     @NoArgsConstructor
     @Data
     @Builder
     @AllArgsConstructor
     public static class NewsDTO {
-
-        /** articles */
+        /**
+         * articles
+         */
         @JSONField(name = "articles")
         private List<ArticlesDTO> articles;
 
-        /** ArticlesDTO */
+        /**
+         * ArticlesDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class ArticlesDTO {
-
-            /** title */
+            /**
+             * title
+             */
             @JSONField(name = "title")
             private String title;
-            /** description */
+            /**
+             * description
+             */
             @JSONField(name = "description")
             private String description;
-            /** url */
+            /**
+             * url
+             */
             @JSONField(name = "url")
             private String url;
-            /** picurl */
+            /**
+             * picurl
+             */
             @JSONField(name = "picurl")
             private String picurl;
         }
     }
 
-    /** FileDTO */
+    /**
+     * FileDTO
+     */
     @NoArgsConstructor
     @Data
     @Builder
     @AllArgsConstructor
     public static class FileDTO {
-
-        /** mediaId */
+        /**
+         * mediaId
+         */
         @JSONField(name = "media_id")
         private String mediaId;
     }
 
-    /** TemplateCardDTO */
+    /**
+     * TemplateCardDTO
+     */
     @NoArgsConstructor
     @Data
     @Builder
     @AllArgsConstructor
     public static class TemplateCardDTO {
-
-        /** cardType */
+        /**
+         * cardType
+         */
         @JSONField(name = "card_type")
         private String cardType;
-        /** source */
+        /**
+         * source
+         */
         @JSONField(name = "source")
         private SourceDTO source;
-        /** mainTitle */
+        /**
+         * mainTitle
+         */
         @JSONField(name = "main_title")
         private MainTitleDTO mainTitle;
-        /** emphasisContent */
+        /**
+         * emphasisContent
+         */
         @JSONField(name = "emphasis_content")
         private EmphasisContentDTO emphasisContent;
-        /** quoteArea */
+        /**
+         * quoteArea
+         */
         @JSONField(name = "quote_area")
         private QuoteAreaDTO quoteArea;
-        /** subTitleText */
+        /**
+         * subTitleText
+         */
         @JSONField(name = "sub_title_text")
         private String subTitleText;
-        /** horizontalContentList */
+        /**
+         * horizontalContentList
+         */
         @JSONField(name = "horizontal_content_list")
         private List<HorizontalContentListDTO> horizontalContentList;
-        /** jumpList */
+        /**
+         * jumpList
+         */
         @JSONField(name = "jump_list")
         private List<JumpListDTO> jumpList;
-        /** cardAction */
+        /**
+         * cardAction
+         */
         @JSONField(name = "card_action")
         private CardActionDTO cardAction;
 
-        /** SourceDTO */
+        /**
+         * SourceDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class SourceDTO {
-
-            /** iconUrl */
+            /**
+             * iconUrl
+             */
             @JSONField(name = "icon_url")
             private String iconUrl;
-            /** desc */
+            /**
+             * desc
+             */
             @JSONField(name = "desc")
             private String desc;
-            /** descColor */
+            /**
+             * descColor
+             */
             @JSONField(name = "desc_color")
             private Integer descColor;
         }
 
-        /** MainTitleDTO */
+        /**
+         * MainTitleDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class MainTitleDTO {
-
-            /** title */
+            /**
+             * title
+             */
             @JSONField(name = "title")
             private String title;
-            /** desc */
+            /**
+             * desc
+             */
             @JSONField(name = "desc")
             private String desc;
         }
 
-        /** EmphasisContentDTO */
+        /**
+         * EmphasisContentDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class EmphasisContentDTO {
-
-            /** title */
+            /**
+             * title
+             */
             @JSONField(name = "title")
             private String title;
-            /** desc */
+            /**
+             * desc
+             */
             @JSONField(name = "desc")
             private String desc;
         }
 
-        /** QuoteAreaDTO */
+        /**
+         * QuoteAreaDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class QuoteAreaDTO {
-
-            /** type */
+            /**
+             * type
+             */
             @JSONField(name = "type")
             private Integer type;
-            /** url */
+            /**
+             * url
+             */
             @JSONField(name = "url")
             private String url;
-            /** appid */
+            /**
+             * appid
+             */
             @JSONField(name = "appid")
             private String appid;
-            /** pagepath */
+            /**
+             * pagepath
+             */
             @JSONField(name = "pagepath")
             private String pagepath;
-            /** title */
+            /**
+             * title
+             */
             @JSONField(name = "title")
             private String title;
-            /** quoteText */
+            /**
+             * quoteText
+             */
             @JSONField(name = "quote_text")
             private String quoteText;
         }
 
-        /** CardActionDTO */
+        /**
+         * CardActionDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class CardActionDTO {
-
-            /** type */
+            /**
+             * type
+             */
             @JSONField(name = "type")
             private Integer type;
-            /** url */
+            /**
+             * url
+             */
             @JSONField(name = "url")
             private String url;
-            /** appid */
+            /**
+             * appid
+             */
             @JSONField(name = "appid")
             private String appid;
-            /** pagepath */
+            /**
+             * pagepath
+             */
             @JSONField(name = "pagepath")
             private String pagepath;
         }
 
-        /** HorizontalContentListDTO */
+        /**
+         * HorizontalContentListDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class HorizontalContentListDTO {
-
-            /** keyname */
+            /**
+             * keyname
+             */
             @JSONField(name = "keyname")
             private String keyname;
-            /** value */
+            /**
+             * value
+             */
             @JSONField(name = "value")
             private String value;
-            /** type */
+            /**
+             * type
+             */
             @JSONField(name = "type")
             private Integer type;
-            /** url */
+            /**
+             * url
+             */
             @JSONField(name = "url")
             private String url;
-            /** mediaId */
+            /**
+             * mediaId
+             */
             @JSONField(name = "media_id")
             private String mediaId;
         }
 
-        /** JumpListDTO */
+        /**
+         * JumpListDTO
+         */
         @NoArgsConstructor
         @Data
         @Builder
         @AllArgsConstructor
         public static class JumpListDTO {
-
-            /** type */
+            /**
+             * type
+             */
             @JSONField(name = "type")
             private Integer type;
-            /** url */
+            /**
+             * url
+             */
             @JSONField(name = "url")
             private String url;
-            /** title */
+            /**
+             * title
+             */
             @JSONField(name = "title")
             private String title;
-            /** appid */
+            /**
+             * appid
+             */
             @JSONField(name = "appid")
             private String appid;
-            /** pagepath */
+            /**
+             * pagepath
+             */
             @JSONField(name = "pagepath")
             private String pagepath;
         }

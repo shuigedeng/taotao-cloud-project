@@ -1,31 +1,17 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.support.pipeline;
 
-import org.dromara.hutoolcore.collection.CollUtil;
-import org.dromara.hutoolcore.util.StrUtil;
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
-import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.support.exception.ProcessException;
+
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.vo.BasicResultVO;
+import com.java3y.austin.support.exception.ProcessException;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 流程控制器
@@ -36,8 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class ProcessController {
 
-    /** 模板映射 */
+    /**
+     * 模板映射
+     */
     private Map<String, ProcessTemplate> templateConfig = null;
+
 
     /**
      * 执行责任链
@@ -47,16 +36,19 @@ public class ProcessController {
      */
     public ProcessContext process(ProcessContext context) {
 
-        /** 前置检查 */
+        /**
+         * 前置检查
+         */
         try {
             preCheck(context);
         } catch (ProcessException e) {
             return e.getProcessContext();
         }
 
-        /** 遍历流程节点 */
-        List<BusinessProcess> processList =
-                templateConfig.get(context.getCode()).getProcessList();
+        /**
+         * 遍历流程节点
+         */
+        List<BusinessProcess> processList = templateConfig.get(context.getCode()).getProcessList();
         for (BusinessProcess businessProcess : processList) {
             businessProcess.process(context);
             if (context.getNeedBreak()) {
@@ -65,6 +57,7 @@ public class ProcessController {
         }
         return context;
     }
+
 
     /**
      * 执行前检查，出错则抛出异常
@@ -100,5 +93,8 @@ public class ProcessController {
             context.setResponse(BasicResultVO.fail(RespStatusEnum.PROCESS_LIST_IS_NULL));
             throw new ProcessException(context);
         }
+
     }
+
+
 }

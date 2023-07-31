@@ -1,22 +1,7 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.web.exception;
 
-import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.java3y.austin.common.enums.RespStatusEnum;
+import lombok.Getter;
 
 /**
  * @author kl
@@ -24,9 +9,10 @@ import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
  * @description 通用异常
  * @date 2023/2/9 19:00
  */
+@Getter
 public class CommonException extends RuntimeException {
-
     private String code = RespStatusEnum.ERROR_400.getCode();
+    private RespStatusEnum respStatusEnum = null;
 
     public CommonException(String message) {
         super(message);
@@ -35,11 +21,18 @@ public class CommonException extends RuntimeException {
     public CommonException(RespStatusEnum respStatusEnum) {
         super(respStatusEnum.getMsg());
         this.code = respStatusEnum.getCode();
+        this.respStatusEnum = respStatusEnum;
     }
 
     public CommonException(String code, String message) {
         super(message);
         this.code = code;
+    }
+
+    public CommonException(String code, String message, RespStatusEnum respStatusEnum) {
+        super(message);
+        this.code = code;
+        this.respStatusEnum = respStatusEnum;
     }
 
     public CommonException(String message, Exception e) {
@@ -51,7 +44,4 @@ public class CommonException extends RuntimeException {
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
 }

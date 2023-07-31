@@ -1,24 +1,13 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.message.biz.austin.api.domain;
 
+import com.java3y.austin.common.domain.SimpleTaskInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.util.List;
+
 
 /**
  * 发送接口返回值
@@ -28,11 +17,20 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class SendResponse {
-
-    /** 响应状态 */
+    /**
+     * 响应状态
+     */
     private String code;
-
-    /** 响应编码 */
+    /**
+     * 响应编码
+     */
     private String msg;
+
+    /**
+     * 实际发送任务列表
+     */
+    private List<SimpleTaskInfo> data;
+
 }
