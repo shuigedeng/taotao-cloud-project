@@ -1,6 +1,6 @@
 # aliyun serverless 配置
 
-edition: 2023.05
+edition: 2023.09
 name: taotao-cloud-mall
 access: default
 vars:
