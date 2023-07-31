@@ -125,6 +125,8 @@ EXPOSE ${APP_PORT}
 
 EXPOSE 8889
 
+COPY ./build/libs/taotao-cloud-auth-2023.09.jar ./
+
 COPY --from=builder /root/dependencies/ ./
 RUN true
 COPY --from=builder /root/spring-boot-loader/ ./
@@ -136,4 +138,7 @@ RUN true
 
 HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+#ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+#ENTRYPOINT ["java","-jar","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005","taotao-cloud-auth-2023.09.jar"]
+ENTRYPOINT ["java","$JAVA_OPTIONS","-jar","-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889","taotao-cloud-auth-2023.09.jar"]
+
