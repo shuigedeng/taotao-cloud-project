@@ -44,6 +44,7 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LOG_FILE_PATH=/root/logs/pyrosope.log
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
+#是否开启远程调试
 ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889"
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
@@ -95,6 +96,13 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
+                  -XX:+UseZGC \
+                  -XX:ConcGCThreads=4 \
+                  -XX:ParallelGCThreads=20 \
+                  -XX:ParallelGCThreads=20 \
+                  -XX:ZCollectionInterval=120 \
+                  -XX:ZAllocationSpikeTolerance=5 \
+                  -XX:ZAllocationSpikeTolerance=5 \
                   ${DEBUG_OPTIONS} \
                   -Dspring.profiles.active=${APP_PRROFILES} "
 
@@ -123,6 +131,7 @@ VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
 
+#远程调试端口
 EXPOSE 8889
 
 COPY --from=builder /root/dependencies/ ./
