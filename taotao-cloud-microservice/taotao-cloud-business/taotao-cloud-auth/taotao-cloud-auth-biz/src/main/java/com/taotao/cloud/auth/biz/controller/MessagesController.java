@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.controller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,15 @@ public class MessagesController {
 
         return new String[] {"Message 1", "Message 2", "Message 3"};
     }
+
+	@Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
+	@GetMapping("/NotAuth/messages")
+	@NotAuth
+	public String[] getMessagesNotAuth() {
+		LogUtils.info("slfdlaskdf;lasjdf;lj NotAuth");
+
+		return new String[] {"Message 1", "Message 2", "Message 3"};
+	}
 
     /**
      * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
