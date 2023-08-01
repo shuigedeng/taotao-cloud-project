@@ -186,6 +186,6 @@ ADD ./build/libs/taotao-cloud-monitor-2023.09.jar ./
 
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-#ENTRYPOINT sleep 10; java ${ZGC_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2023.09.jar"]
-ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2023.09.jar
+#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2023.09.jar
