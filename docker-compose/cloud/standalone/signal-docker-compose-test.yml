@@ -331,6 +331,7 @@ services:
     ports:
       - "11800:11800"
       - "12800:12800"
+      - "9412:9412"
     environment:
       - TZ=Asia/Shanghai
     networks:
@@ -344,8 +345,8 @@ services:
       - "8080:8080"
     environment:
       - TZ=Asia/Shanghai
-      - SW_OAP_ADDRESS=http://172.11.0.61:12800
-      - SW_ZIPKIN_ADDRESS=http://172.11.0.61:9412
+      - SW_OAP_ADDRESS=http://192.168.10.220:12800
+      - SW_ZIPKIN_ADDRESS=http://192.168.10.220:9412
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.62
