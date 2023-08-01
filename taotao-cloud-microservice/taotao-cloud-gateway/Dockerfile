@@ -42,7 +42,6 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LOG_FILE_PATH=/root/logs/pyrosope.log
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
                   -XX:MaxDirectMemorySize=1024m \
@@ -50,12 +49,15 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:MaxMetaspaceSize=512m \
                   -XX:ReservedCodeCacheSize=256m \
                   -XX:+DisableExplicitGC \
+                  -XX:+UnlockDiagnosticVMOptions \
+                  -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
+                  -XX:GuaranteedSafepointInterval=0  \
+                  -XX:FlightRecorderOptions=maxchunksize=128m  \
                   -XX:+UseCountedLoopSafepoints \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
                   -XX:-OmitStackTraceInFastThrow \
-                  -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UnlockExperimentalVMOptions \
                   -XX:SurvivorRatio=8 \
                   -XX:+UseCompressedOops \
