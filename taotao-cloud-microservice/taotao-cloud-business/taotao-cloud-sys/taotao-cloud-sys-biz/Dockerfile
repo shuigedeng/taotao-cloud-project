@@ -49,21 +49,22 @@ ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-ENV JAVA_OPTIONS="-Xms2048m  \
-                  -Xmx2048m  \
-                  -Xmn1280m \
+ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
                   -XX:ReservedCodeCacheSize=256m \
                   -XX:+DisableExplicitGC \
+                  -XX:+UnlockDiagnosticVMOptions \
+                  -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
+                  -XX:GuaranteedSafepointInterval=0  \
+                  -XX:FlightRecorderOptions=maxchunksize=128m  \
                   -XX:+UseCountedLoopSafepoints \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
                   -XX:-OmitStackTraceInFastThrow \
-                  -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UnlockExperimentalVMOptions \
                   -XX:SurvivorRatio=8 \
                   -XX:+UseCompressedOops \
@@ -104,7 +105,7 @@ ENV JAVA_OPTIONS="-Xms2048m  \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  -Dskywalking.logging.file_name=skywalking.log \
                   -Dskywalking.logging.level=INFO \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
                   -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
@@ -300,7 +301,7 @@ ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLau
 #                  -javaagent:/skywalking/agent/skywalking-agent.jar \
 #                  -Dskywalking.agent.service_name=${APP_NAME} \
 #                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-#                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+#                  -Dskywalking.logging.file_name=skywalking.log \
 #                  -Dskywalking.logging.level=INFO \
 #                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
 #                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
@@ -388,7 +389,7 @@ ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLau
 #                  -javaagent:/skywalking/agent/skywalking-agent.jar \
 #                  -Dskywalking.agent.service_name=${APP_NAME} \
 #                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-#                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+#                  -Dskywalking.logging.file_name=skywalking.log \
 #                  -Dskywalking.logging.level=INFO \
 #                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
 #                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
