@@ -37,7 +37,7 @@ JAVA_OPTS="
 -javaagent:/opt/cloud/apache-skywalking-apm-bin/agent/skywalking-agent.jar
 -Dskywalking.agent.service_name=${APP_NAME}
 -Dskywalking.agent.authentication=taotao-cloud
--Dskywalking.logging.file_name=${APP_NAME}.skywalking.log
+-Dskywalking.logging.file_name=skywalking.log
 -Dskywalking.logging.level=INFO
 -Dskywalking.logging.dir=${JAR_PATH}
 -Dskywalking.collector.backend_service=192.168.10.200:11800

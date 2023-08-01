@@ -61,7 +61,7 @@ ENV JAVA_OPTIONS="-Xms512m \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dskywalking.agent.service_name=${APP_NAME} \
                   -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  -Dskywalking.logging.file_name=skywalking.log \
                   -Dskywalking.logging.level=INFO \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
                   -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
