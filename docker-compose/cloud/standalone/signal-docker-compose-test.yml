@@ -324,6 +324,32 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.48
 
+  skywalking-oap:
+    image: apache/skywalking-oap-server:9.5.0
+    container_name: skywalking-oap
+    restart: always
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.61
+  skywalking-ui:
+    image: apache/skywalking-ui:9.5.0
+    container_name: skywalking-ui
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - TZ=Asia/Shanghai
+      - SW_OAP_ADDRESS=http://172.11.0.61:12800
+      - SW_ZIPKIN_ADDRESS=http://172.11.0.61:9412
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.25
+
   arthas:
     image: hengyunabc/arthas:latest
     container_name: arthas
