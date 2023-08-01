@@ -351,6 +351,22 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.62
 
+  rabbitmq:
+    image: rabbitmq:3.12.2-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123456
+      - RABBITMQ_ERLANG_COOKIE=CURIOAPPLICATION
+      - RABBITMQ_NODENAME:rabbitmq
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.63
+
   arthas:
     image: hengyunabc/arthas:latest
     container_name: arthas
