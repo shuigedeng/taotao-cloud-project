@@ -41,8 +41,14 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-monitor"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
+ENV ZGC_OPTIONS = "-XX:+UseZGC \
+-XX:ConcGCThreads=2 \
+-XX:ZCollectionInterval=120 \
+-XX:ZAllocationSpikeTolerance=5 "
+
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
+                  ${ZGC_OPTIONS} \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
