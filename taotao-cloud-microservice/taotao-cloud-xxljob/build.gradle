@@ -29,6 +29,7 @@ mainClassName = "com.taotao.cloud.xxljob.TaoTaoCloudXxlJobApplication"
 description = "xxljob中心"
 archivesBaseName = 'taotao-cloud-xxljob'
 
+
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
