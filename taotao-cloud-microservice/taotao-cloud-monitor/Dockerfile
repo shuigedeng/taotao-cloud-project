@@ -88,7 +88,7 @@ ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
                   -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
                   -Dskywalking.logging.level=INFO \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                                   -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
+                  -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
@@ -182,6 +182,9 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
+ADD ./build/libs/taotao-cloud-monitor-2023.09.jar ./
+
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-ENTRYPOINT sleep 10; java ${ZGC_OPTIONS} org.springframework.boot.loader.JarLauncher
+#ENTRYPOINT sleep 10; java ${ZGC_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT ["java","$ZGC_OPTIONS","-jar","taotao-cloud-monitor-2023.09.jar"]
