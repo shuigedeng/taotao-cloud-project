@@ -99,14 +99,9 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} \
+                  ${DEBUG_OPTIONS} \
                   -Dspring.profiles.active=${APP_PRROFILES} "
-#在-Dspring.profiles.active上面加上开启远程debug ${DEBUG_OPTIONS} \
+#在-Dspring.profiles.active上面加上开启远程debug  ${DEBUG_OPTIONS} \  不能同时使用Dskywalking
 
 USER root
 
