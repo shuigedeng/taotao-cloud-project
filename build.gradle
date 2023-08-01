@@ -55,8 +55,8 @@ buildscript {
         //阿里云新的仓库
         maven {
             credentials {
-                username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
-                password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+                username '6034c82ea509123753002e76'
+                password 'JRATiwhy[365'
             }
             url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
         }
@@ -225,8 +225,8 @@ allprojects {
         //阿里云新的仓库
         maven {
             credentials {
-                username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
-                password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+                username '6034c82ea509123753002e76'
+                password 'JRATiwhy[365'
             }
             url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
         }
