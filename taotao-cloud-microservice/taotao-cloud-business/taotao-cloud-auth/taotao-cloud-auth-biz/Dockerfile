@@ -49,6 +49,10 @@ ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
+                  -XX:+UseZGC \
+                  -XX:ConcGCThreads=4 \
+                  -XX:ZCollectionInterval=120 \
+                  -XX:ZAllocationSpikeTolerance=5 \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -96,10 +100,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -XX:+UseZGC \
-                  -XX:ConcGCThreads=4 \
-                  -XX:ZCollectionInterval=120 \
-                  -XX:ZAllocationSpikeTolerance=5 \
                   ${DEBUG_OPTIONS} \
                   -Dspring.profiles.active=${APP_PRROFILES} "
 
