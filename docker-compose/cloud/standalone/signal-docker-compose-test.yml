@@ -348,7 +348,7 @@ services:
       - SW_ZIPKIN_ADDRESS=http://172.11.0.61:9412
     networks:
       taotao-cluster-network:
-        ipv4_address: 172.11.0.25
+        ipv4_address: 172.11.0.62
 
   arthas:
     image: hengyunabc/arthas:latest
