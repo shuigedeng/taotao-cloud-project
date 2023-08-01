@@ -8,30 +8,41 @@ RUN java -Djarmode=layertools -jar taotao-cloud-xxljob-2023.09.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
-ARG BACKEND_SERVICE=192.168.10.200:11800
-ARG AGENT_AUTHENTICATION=taotao-cloud
+ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
+ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-xxljob
 ARG APP_VERSION=2023.09
-ARG JAR=${APP_NAME}-${VERSION}
-ARG JAR_NAME=${JAR}.jar
+ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33335
-ARG PRROFILES=dev
-
+ARG APP_PRROFILES=dev
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
 
 ENV TZ=Asia/Shanghai
+#app
 ENV APP_NAME=${APP_NAME}
-ENV VERSION=${APP_VERSION}
-ENV JAR_NAME=${APP_NAME}-${VERSION}.jar
-ENV BACKEND_SERVICE=${BACKEND_SERVICE}
-ENV AGENT_AUTHENTICATION=${AGENT_AUTHENTICATION}
-ENV TAOTAO_CLOUD_MAIL_PASSWORD=${TAOTAO_CLOUD_MAIL_PASSWORD}
-ENV PRROFILES=${PRROFILES}
+ENV APP_VERSION=${APP_VERSION}
+ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
+ENV APP_PRROFILES=${APP_PRROFILES}
+#skywalking
+ENV SKYWALKING_BACKEND_SERVICE=${SKYWALKING_BACKEND_SERVICE}
+ENV SKYWALKING_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
+# pyroscope 从env中获取配置数据
+ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
+ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.10.220:4040
+ENV PYROSCOPE_PROFILING_INTERVAL=10ms
+ENV PYROSCOPE_FORMAT=jfr
+ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
+ENV PYROSCOPE_PROFILER_ALLOC=0
+ENV PYROSCOPE_PROFILER_LOCK=0
+ENV PYROSCOPE_UPLOAD_INTERVAL=10s
+ENV PYROSCOPE_LOG_LEVEL=info
+ENV PYROSCOPE_LOG_FILE_PATH=/root/logs/pyrosope.log
+#ENV PYROSCOPE_AUTH_TOKEN=info
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
