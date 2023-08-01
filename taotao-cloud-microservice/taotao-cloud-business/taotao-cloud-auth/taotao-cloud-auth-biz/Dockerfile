@@ -49,7 +49,10 @@ ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
-                  -XX:+UseZGC \
+                   -XX:+UseZGC \
+                  -XX:ConcGCThreads=4 \
+                  -XX:ZCollectionInterval=120 \
+                  -XX:ZAllocationSpikeTolerance=5 \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -57,7 +60,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+DisableExplicitGC \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
-                  -XX:+UseCountedLoopSafepoints \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
                   -XX:-OmitStackTraceInFastThrow \
                   -XX:+UnlockDiagnosticVMOptions \
