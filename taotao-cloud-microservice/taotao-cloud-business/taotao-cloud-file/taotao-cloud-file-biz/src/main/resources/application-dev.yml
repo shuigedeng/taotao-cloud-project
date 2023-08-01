@@ -1,5 +1,5 @@
 server:
-  port: 33337
+  port: 33339
   shutdown: graceful
   http2:
     enabled: true
@@ -1059,17 +1059,17 @@ herodotus:
   endpoint:
     uaa-service-name: dante-cloud-uaa
     upms-service-name: dante-cloud-upms
-    gateway-service-uri: http://127.0.0.1:33337
-    uaa-service-uri: http://127.0.0.1:33337/
-    upms-service-uri: http://127.0.0.1:33337/${herodotus.endpoint.upms-service-name}
-    access-token-uri: http://127.0.0.1:33337/oauth2/token
-    authorization-uri: http://127.0.0.1:33337/oauth2/authorize
-    token-revocation-uri: http://127.0.0.1:33337/oauth2/revoke
-    token-introspection-uri: http://127.0.0.1:33337/oauth2/introspect
-    jwk-set-uri: http://127.0.0.1:33337/oauth2/jwks
+    gateway-service-uri: http://127.0.0.1:33336
+    uaa-service-uri: http://127.0.0.1:33336/
+    upms-service-uri: http://127.0.0.1:33336/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://127.0.0.1:33336/oauth2/token
+    authorization-uri: http://127.0.0.1:33336/oauth2/authorize
+    token-revocation-uri: http://127.0.0.1:33336/oauth2/revoke
+    token-introspection-uri: http://127.0.0.1:33336/oauth2/introspect
+    jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-    oidc-client-registration-uri: http://127.0.0.1:33337/connect/register
-    oidc-user-info-uri: http://127.0.0.1:33337/userinfo
+    oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
+    oidc-user-info-uri: http://127.0.0.1:33336/userinfo
   oauth2:
     authentication:
       form-login:

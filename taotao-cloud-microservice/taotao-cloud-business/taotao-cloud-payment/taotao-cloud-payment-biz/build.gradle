@@ -25,8 +25,8 @@ dependencies {
     implementation "com.github.javen205:IJPay-All:2.9.7-17"
 
     //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
-    implementation "com.github.binarywang:weixin-java-pay:4.5.3.B"
-    implementation "com.github.binarywang:weixin-java-mp:4.5.3.B"
+    implementation "com.github.binarywang:weixin-java-pay:4.5.4.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.5.4.B"
 
     //https://search.maven.org/artifact/com.paypal.sdk/checkout-sdk
     implementation "com.paypal.sdk:checkout-sdk:2.0.0"
