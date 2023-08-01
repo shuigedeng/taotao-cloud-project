@@ -1016,6 +1016,34 @@ knife4j:
         service-name: mall-server         # 服务名
         order: 1         # 排序
 
+#knife4j:
+#  enable: true
+#  # 指定服务发现的模式聚合微服务文档
+#  strategy: discover
+#  discover：
+#  enable: true
+#  # 指定版本号(Swagger2|OpenAPI3)
+#  version : openapi3
+#  # 需要排除的微服务(eg:网关服务)
+#  excluded-services:
+#    - gateway-service
+#  # 各个聚合服务的个性化配置，key:注册中心中的服务名称，value：个性化配置
+#  service-config:
+#    user-service:
+#      # 排序
+#      order: 1
+#      # 前端显示名称
+#      group-name : 用户服务
+#      # 重新指定basePath，一般在OpenAPI3规范中需要
+#      context-path: /user
+#    order-service:
+#      # 排序
+#      order: 2
+#      # 前端显示名称
+#      group-name : 订单服务
+#      # 重新指定basePath，一般在OpenAPI3规范中需要
+#      context-path: /order
+
 springdoc:
   api-docs:
     enabled: true
