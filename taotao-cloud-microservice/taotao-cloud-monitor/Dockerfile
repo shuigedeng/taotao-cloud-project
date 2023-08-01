@@ -182,7 +182,7 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
-ADD ./build/libs/taotao-cloud-monitor-2023.09.jar ./
+#ADD ./build/libs/taotao-cloud-monitor-2023.09.jar ./
 
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
