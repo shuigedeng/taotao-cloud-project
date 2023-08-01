@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-auth-2023.09.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
@@ -44,7 +44,6 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LOG_FILE_PATH=/root/logs/pyrosope.log
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-#是否开启远程调试
 ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889"
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
@@ -124,7 +123,6 @@ VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
 
-#远程调试端口
 EXPOSE 8889
 
 COPY --from=builder /root/dependencies/ ./
