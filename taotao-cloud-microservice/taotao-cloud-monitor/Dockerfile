@@ -100,6 +100,8 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
+                  -XX:GuaranteedSafepointInterval=0  \
+                  -XX:FlightRecorderOptions=maxchunksize=128m  \
                   -XX:+UseCountedLoopSafepoints \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
                   -XX:-OmitStackTraceInFastThrow \
