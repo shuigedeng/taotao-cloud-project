@@ -54,10 +54,9 @@ buildscript {
 
         //阿里云新的仓库
         maven {
-
             credentials {
-                username = System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
-                password = System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+                username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+                password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
             }
             url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
         }

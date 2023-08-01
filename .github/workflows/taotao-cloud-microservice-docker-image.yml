@@ -65,6 +65,10 @@ jobs:
           echo "mavenUsernameNew=${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW}}" >> gradle.properties
           echo "mavenPasswordNew=${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW}}" >> gradle.properties
 
+      - name: cat gradle proerties
+        run: |
+          cat gradle.properties
+
       #- name: Build And Publish Dependencies To Local
       #  run: |
       #    cd ${{ github.workspace }}/taotao-cloud-dependencies
