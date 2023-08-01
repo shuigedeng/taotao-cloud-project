@@ -41,14 +41,57 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-monitor"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-ENV ZGC_OPTIONS = "-XX:+UseZGC \
--XX:ConcGCThreads=2 \
--XX:ZCollectionInterval=120 \
--XX:ZAllocationSpikeTolerance=5 "
+ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
+                  -XX:+UnlockExperimentalVMOptions  \
+                  -XX:-OmitStackTraceInFastThrow  \
+                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
+                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+                  -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
+                  -Dfile.encoding=UTF-8  \
+                  -Djava.security.egd=file:/dev/./urandom  \
+                  -Dnetworkaddress.cache.ttl=10  \
+                  -Xms2048m  \
+                  -Xmx2048m  \
+                  -Xmn1280m  \
+                  -Xss512k  \
+                  -XX:MaxDirectMemorySize=1024m  \
+                  -XX:MetaspaceSize=384m  \
+                  -XX:ReservedCodeCacheSize=256m  \
+                  -XX:+DisableExplicitGC  \
+                  -XX:+UseZGC  \
+                  -XX:-UseBiasedLocking  \
+                  -XX:GuaranteedSafepointInterval=0  \
+                  -XX:+UseCountedLoopSafepoints  \
+                  -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d  \
+                  -XX:FlightRecorderOptions=maxchunksize=128m  \
+                  --add-opens java.base/java.security=ALL-UNNAMED \
+                  --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
+                  --add-opens java.base/java.text=ALL-UNNAMED \
+                  --add-opens java.base/java.nio=ALL-UNNAMED \
+                  --add-opens java.base/jdk.internal.access=ALL-UNNAMED \
+                  --add-opens java.base/java.time=ALL-UNNAMED \
+                  --add-opens java.base/java.io=ALL-UNNAMED \
+                  --add-opens java.base/java.net=ALL-UNNAMED \
+                  --add-opens java.base/java.lang=ALL-UNNAMED \
+                  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+                  --add-opens java.base/java.util=ALL-UNNAMED \
+                  --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
+                  --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
+                  --add-opens java.base/sun.net=ALL-UNNAMED \
+                  --add-opens java.base/java.math=ALL-UNNAMED \
+                  --add-exports java.desktop/sun.awt=ALL-UNNAMED \
+                  --add-opens java.desktop/sun.awt=ALL-UNNAMED \
+                  -Dspring.profiles.active=${APP_PRROFILES} \
+                  -javaagent:/skywalking/agent/skywalking-agent.jar \
+                  -Dskywalking.agent.service_name=${APP_NAME} \
+                  -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
+                  -Dskywalking.logging.file_name=${APP_NAME}.skywalking.log \
+                  -Dskywalking.logging.level=INFO \
+                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+                                   -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
-                  ${ZGC_OPTIONS} \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -141,4 +184,4 @@ RUN true
 
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 10; java ${ZGC_OPTIONS} org.springframework.boot.loader.JarLauncher
