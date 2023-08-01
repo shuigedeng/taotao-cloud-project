@@ -97,6 +97,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:MaxMetaspaceSize=512m \
                   -XX:ReservedCodeCacheSize=256m \
                   -XX:+DisableExplicitGC \
+                  -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
                   -XX:+UseCountedLoopSafepoints \
