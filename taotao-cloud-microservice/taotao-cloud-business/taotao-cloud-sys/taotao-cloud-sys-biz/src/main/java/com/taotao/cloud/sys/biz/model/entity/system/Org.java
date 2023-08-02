@@ -34,7 +34,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 
 /**
  * 组织信息表
@@ -72,7 +74,11 @@ public class Org extends BaseSuperEntity<Org, Long> {
      * 备注
      * 设置了ResultMap为`mybatis-plus_Person`后就可以拿到正确的值. @ResultMap("mybatis-plus_Person") @Select("SELECT
      * * FROM person WHERE id=#{id}") Person selectOneById(int id);
+	 *
+	 * //pgsql json定义语句
+	 * @Column(name = "jsonb_content", columnDefinition = "jsonb")
      */
+	@JdbcTypeCode(SqlTypes.JSON)
     @Type(value = JsonType.class)
     @TableField(typeHandler = JacksonListTypeHandler.class)
     @Column(name = "id_tree", columnDefinition = "json null comment 'id树'")
