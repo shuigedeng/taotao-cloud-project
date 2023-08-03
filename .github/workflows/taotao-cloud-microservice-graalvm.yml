@@ -5,7 +5,7 @@ name: Microservice Docker graalvm Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
@@ -39,6 +39,11 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+
+      - name: write secrets maven username password
+        run: |
+          echo "mavenUsernameNew=${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW}}" >> gradle.properties
+          echo "mavenPasswordNew=${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW}}" >> gradle.properties
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: Gradle BootJar taotao-cloud-log-biz
