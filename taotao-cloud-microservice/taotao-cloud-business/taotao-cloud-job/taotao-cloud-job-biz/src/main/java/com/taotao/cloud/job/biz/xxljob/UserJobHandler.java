@@ -53,9 +53,16 @@ public class UserJobHandler {
 
     @XxlJob("TestJobHandler")
     public ReturnT<String> testJobHandler(String param) throws Exception {
+
+		long jobId = XxlJobHelper.getJobId();
+		String jobParam = XxlJobHelper.getJobParam();
+		long shardIndex = XxlJobHelper.getShardIndex();
+		long shardTotal = XxlJobHelper.getShardTotal();
+		String jobLogFileName = XxlJobHelper.getJobLogFileName();
+
         XxlJobHelper.log("XXL-JOB, successsssssssssss");
 
-        LogUtils.info("=============xxljob succcccccccccccccc");
+		LogUtils.info("=============xxljob succcccccccccccccc");
 
         return ReturnT.SUCCESS;
     }
