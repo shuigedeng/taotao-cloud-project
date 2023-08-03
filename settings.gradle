@@ -32,12 +32,58 @@ pluginManagement {
 plugins {
     //https://plugins.gradle.org/plugin/com.gradle.enterprise
     id "com.gradle.enterprise" version "3.14.1"
+
+    //id "com.gradle.enterprise" version "3.14.1"
 }
 
+import com.gradle.scan.plugin.PublishedBuildScan
+
 gradleEnterprise {
+    server = "https://gradle-enterprise.mycompany.com"
+    accessKey = "7w5kbqqjea4vonghohvuyra5bnvszop4asbqee3m3sm6dbjdudtq"
+
     buildScan {
+        publishAlways()
+        publishAlwaysIf(true)
+
+        uploadInBackground = false
+
         termsOfServiceUrl = "https://gradle.com/terms-of-service"
         termsOfServiceAgree = "yes"
+
+        tag System.getProperty("os.name")
+        link "VCS", "https://github.com/myorg/sample/tree/${System.getProperty("vcs.branch")}"
+        //value "Build Number", project.version
+
+        capture {
+            taskInputFiles = true
+
+            buildLogging = true
+            testLogging = true
+        }
+
+        //buildFinished { BuildResult result ->
+        //    if (result.failure) {
+        //        value "Failed with", result.failure.message
+        //    }
+
+        //    value "Disk usage (output dir)", buildDir.directorySize().toString()
+        //}
+
+        buildScanPublished { PublishedBuildScan scan ->
+            file("scan-journal.log") << "${new Date()} - ${scan.buildScanId} - ${scan.buildScanUri}\n"
+        }
+
+        background {
+            def commitId = "git rev-parse --verify HEAD".execute().text.trim()
+            value "Git Commit ID", commitId
+        }
+
+        obfuscation {
+            hostname { host -> host.collect { character -> Character.getNumericValue(character as char) }.join("-") }
+            username { name -> name.reverse() }
+            ipAddresses { addresses -> addresses.collect { address -> "0.0.0.0" } }
+        }
     }
 }
 
