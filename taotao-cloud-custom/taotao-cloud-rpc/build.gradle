@@ -22,7 +22,7 @@ dependencies {
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
     api 'ch.qos.logback:logback-classic:1.4.8'
-    api "com.google.guava:guava:32.1.1-jre"
+    api "com.google.guava:guava:32.1.2-jre"
 
     api "io.netty:netty-all:4.1.96.Final"
 

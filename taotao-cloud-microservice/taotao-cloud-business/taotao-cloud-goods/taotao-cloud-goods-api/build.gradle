@@ -31,7 +31,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.57.0"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.57.1"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact
