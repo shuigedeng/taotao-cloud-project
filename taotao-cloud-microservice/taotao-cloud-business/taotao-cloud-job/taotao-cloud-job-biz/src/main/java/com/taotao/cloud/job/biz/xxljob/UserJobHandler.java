@@ -60,9 +60,11 @@ public class UserJobHandler {
 		long shardTotal = XxlJobHelper.getShardTotal();
 		String jobLogFileName = XxlJobHelper.getJobLogFileName();
 
-        XxlJobHelper.log("XXL-JOB, successsssssssssss");
+        XxlJobHelper.log("XXL-JOB, successsssssssssss, jobId: {}, jobParam: {}, shardIndex:{}, shardTotal:{}, jobLogFileName:{}",
+			jobId, jobParam, shardIndex, shardTotal, jobLogFileName);
 
-		LogUtils.info("=============xxljob succcccccccccccccc");
+		LogUtils.info("=============xxljob succcccccccccccccc, jobId: {}, jobParam: {}, shardIndex:{}, shardTotal:{}, jobLogFileName:{}",
+			jobId, jobParam, shardIndex, shardTotal, jobLogFileName);
 
         return ReturnT.SUCCESS;
     }
