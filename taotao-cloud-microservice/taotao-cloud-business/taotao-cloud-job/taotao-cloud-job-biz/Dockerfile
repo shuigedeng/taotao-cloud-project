@@ -110,6 +110,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
 
 USER root
 
+
 WORKDIR /root
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
