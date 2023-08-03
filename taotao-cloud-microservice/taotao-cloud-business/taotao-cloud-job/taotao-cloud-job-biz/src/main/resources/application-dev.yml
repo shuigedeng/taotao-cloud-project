@@ -751,7 +751,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://192.168.10.45:33336/oauth2/jwks
+          issuer-uri: ${herodotus.endpoint.issuer-uri}
+          jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+          #audiences:
+          #  -
+          #jws-algorithms:
+          #  - RS256
+          #public-key-location: classpath:certificate/taotao-cloud.pub
+        opaquetoken:
+          client-id: 14a9cf797931430896ad13a6b1855611
+          client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
+          introspection-uri: http://192.168.10.220/oauth2/introspect
+          #introspection-uri: http://localhost:8080/oauth/check_token
   cloud:
     openfeign:
       micrometer:
@@ -1044,7 +1055,7 @@ taotao:
           port: 1114
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${user.home}/logs/xxl-job/${spring.application.name}
-          address: http://192.168.10.220:1114,http://192.168.10.220:1115
+          address: http://192.168.10.220:9110/xxl-job-admin/,http://192.168.10.220:9111/xxl-job-admin/
 mybatis-plus-join:
   banner: true
   sub-table-logic: true
@@ -1254,3 +1265,41 @@ knife4j:
     - name: 标题2
       locations: classpath:markdown1/*
       group: 用户模块
+
+herodotus:
+  endpoint:
+    uaa-service-name: dante-cloud-uaa
+    upms-service-name: dante-cloud-upms
+    gateway-service-uri: http://127.0.0.1:33336
+    uaa-service-uri: http://127.0.0.1:33336/
+    upms-service-uri: http://127.0.0.1:33336/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://127.0.0.1:33336/oauth2/token
+    authorization-uri: http://127.0.0.1:33336/oauth2/authorize
+    token-revocation-uri: http://127.0.0.1:33336/oauth2/revoke
+    token-introspection-uri: http://127.0.0.1:33336/oauth2/introspect
+    jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
+    oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
+    oidc-user-info-uri: http://127.0.0.1:33336/userinfo
+    #device-authorization-uri: http://127.0.0.1:33336/oauth2/device_authorization
+    #device-authorization-endpoint: http://127.0.0.1:33336/oauth2/device_authorization
+    #device-verification-uri: http://127.0.0.1:33336/oauth2/device_verification
+    #device-verification-endpoint: http://127.0.0.1:33336/oauth2/device_verification
+  oauth2:
+    authentication:
+      sign-in-endpoint-limited:
+        enabled: false
+        maximum: 1
+      sign-in-failure-limited:
+        enabled: true
+        auto-unlock: true
+        expire: 2h
+        max-times: 6
+      sign-in-kick-out-limited:
+        enabled: true
+      form-login:
+        category: HUTOOL_GIF
+    authorization:
+      validate: local
+      jwk:
+        certificate: standard

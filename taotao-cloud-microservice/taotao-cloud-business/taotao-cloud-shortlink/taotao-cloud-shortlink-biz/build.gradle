@@ -2,7 +2,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-shortlink:taotao-cloud-shortlink-api")
 
     implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot-starter"
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
