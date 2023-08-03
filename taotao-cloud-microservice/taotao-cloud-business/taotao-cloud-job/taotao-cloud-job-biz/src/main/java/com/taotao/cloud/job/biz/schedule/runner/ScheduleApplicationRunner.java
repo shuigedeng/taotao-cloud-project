@@ -38,6 +38,6 @@ public class ScheduleApplicationRunner implements ApplicationRunner {
         logger.info("==== 系统运行开始 ====");
 
         // 初始化任务
-        taskManager.initTask();
+        //taskManager.initTask();
     }
 }
