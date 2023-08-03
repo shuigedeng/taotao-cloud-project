@@ -1048,14 +1048,14 @@ taotao:
       xxl:
         enabled: true
         admin:
-          addresses:
+          addresses: http://192.168.10.220:9110/xxl-job-admin/,http://192.168.10.220:9111/xxl-job-admin/
         executor:
           appname: ${spring.application.name}
           ip:
           port: 1114
           access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
           log-path: ${user.home}/logs/xxl-job/${spring.application.name}
-          address: http://192.168.10.220:9110/xxl-job-admin/,http://192.168.10.220:9111/xxl-job-admin/
+
 mybatis-plus-join:
   banner: true
   sub-table-logic: true
