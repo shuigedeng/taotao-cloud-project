@@ -22,6 +22,7 @@ LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
 
+
 ENV TZ=Asia/Shanghai
 #app
 ENV APP_NAME=${APP_NAME}
