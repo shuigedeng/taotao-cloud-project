@@ -183,6 +183,10 @@ plugins {
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
     id 'org.graalvm.buildtools.native' version '0.9.23'
+
+    //https://github.com/kimichen13/mybatis-generator-plugin
+    //https://plugins.gradle.org/plugin/com.thinkimi.gradle.MybatisGenerator
+    id "com.qqviaja.gradle.MybatisGenerator" version "2.5"
 }
 
 allprojects {

@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.config.i18n.listener;
 
 import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
-import com.taotao.cloud.sys.biz.model.entity.I18nData;
+import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import com.taotao.cloud.web.i18n.I18nMessage;
 import com.taotao.cloud.web.i18n.I18nMessageCreateEvent;
@@ -10,7 +10,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * I18nMessage 创建事件的监听者

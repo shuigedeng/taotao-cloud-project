@@ -1,0 +1,93 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+	"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!--Mybatis Generator目前有5种运行模式，分别为：MyBatis3DynamicSql、MyBatis3Kotlin、MyBatis3、MyBatis3Simple、MyBatis3DynamicSqlV1。-->
+	<context id="dsql" targetRuntime="MyBatis3DynamicSql">
+		<property name="autoDelimitKeywords" value="true"/>
+		<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`"/>
+		<property name="javaFileEncoding" value="UTF-8"/>
+
+		<!--生成序列化方法-->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+		<!--生成tostring方法-->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+		<!--生成mapper.xml时覆盖原文件-->
+		<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+		<!--可以自定义生成model的代码注释-->
+<!--		<commentGenerator type="com.taotao.cloud.data.mybatisplus.mbg.CommentGenerator">-->
+		<commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">
+			<!-- 是否去除自动生成的注释 true：是 ：false:否 -->
+			<property name="suppressAllComments" value="true"/>
+			<property name="suppressDate" value="true"/>
+			<property name="addRemarkComments" value="true"/>
+		</commentGenerator>
+
+		<!--配置数据库连接-->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+						connectionURL="jdbc:mysql://192.168.10.220:3306/taotao-cloud-goods?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"
+						userId="root"
+						password="123456">
+			<!--解决mysql驱动升级到8.0后不生成指定数据库代码的问题-->
+			<property name="nullCatalogMeansCurrent" value="true"/>
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer， 为 true时把JDBC DECIMAL和 NUMERIC 类型解析为java.math.BigDecimal -->
+			<property name="forceBigDecimals" value="false"/>
+			<!--是否试用jdk8时间类-->
+			<property name="useJSR310Types" value="true"/>
+		</javaTypeResolver>
+
+		<!--指定生成model的路径-->
+		<javaModelGenerator
+			targetPackage="com.taotao.cloud.goods.biz.mbg"
+			targetProject="src/main/java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false"/>
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+
+		<!--指定生成mapper接口的的路径-->
+		<javaClientGenerator targetPackage="com.taotao.cloud.goods.biz.mbg"
+							 targetProject="src/main/java"
+							 type="ANNOTATEDMAPPER">
+			<property name="rootInterface" value="org.mybatis.dynamic.sql.util.mybatis3.CommonSelectMapper"/>
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<!--生成全部表tableName设为%-->
+		<!-- 指定数据库表 -->
+<!--		<table tableName="tt_%" >-->
+<!--			<generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>-->
+<!--			<domainObjectRenamingRule searchString="^tt_" replaceString=""/>-->
+<!--		</table>-->
+
+				<table tableName="tt_goods" domainObjectName="Goods">
+					<generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>
+				</table>
+
+		<!--		<table tableName="order" delimitIdentifiers="true" domainObjectName="OrderEntity">-->
+		<!--			<generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>-->
+		<!--			<columnOverride column="status"-->
+		<!--							javaType="cc.cc1234.core.domain.enums.OrderStatus"-->
+		<!--							typeHandler="cc.cc1234.dao.EnumOrdinalTypeHandler"/>-->
+		<!--		</table>-->
+		<!--		<table tableName="order_item" domainObjectName="OrderItemEntity">-->
+		<!--			<generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>-->
+		<!--		</table>-->
+
+
+		<!-- 指定数据库表
+          schema:数据库的schema,可以使用SQL通配符匹配。如果设置了该值，生成SQL的表名会变成如schema.tableName的形式。
+          domainObjectName:生成对象的基本名称。如果没有指定，MBG会自动根据表名来生成名称。
+          -->
+		<!--<table schema="" tableName="" domainObjectName=""/>-->
+	</context>
+</generatorConfiguration>
+
+

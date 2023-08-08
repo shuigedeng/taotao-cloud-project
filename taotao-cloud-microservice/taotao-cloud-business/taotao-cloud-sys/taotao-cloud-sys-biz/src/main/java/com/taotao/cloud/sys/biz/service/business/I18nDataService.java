@@ -4,11 +4,10 @@ package com.taotao.cloud.sys.biz.service.business;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
 import com.taotao.cloud.sys.api.model.dto.I18nDataDTO;
 import com.taotao.cloud.sys.api.model.query.I18nDataQO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataPageVO;
-import com.taotao.cloud.sys.biz.model.entity.I18nData;
+import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 
 import java.util.List;
 

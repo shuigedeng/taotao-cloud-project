@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.biz.model.entity;
+package com.taotao.cloud.sys.biz.model.entity.i18n;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
