@@ -1,0 +1,102 @@
+server:
+  http_listen_port: 9081
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://192.168.10.220:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
+  - job_name: access
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx-access-log
+          __path__: /logs/tmp.log
+    pipeline_stages:
+      - match:
+          selector: '{job="nginx-access-log"}'
+          stages:
+            - json:  # 日志为json格式 选择需要的字段
+                expressions:
+                  remote_addr:
+                  request_uri:
+                  verb:
+                  httpversion:
+                  response:
+                  body_bytes_sent:
+                  referrer:
+                  user_agent:
+                  http_x_forwarded_for:
+                  server_name:
+                  request_time:
+                  upstream_response_time:
+                  upstream_addr:
+                  realpath_root:
+                  cookie:
+                  nginx_version:
+                  scheme:
+                  time:
+            - labels:
+                remote_addr:
+                request_uri:
+                verb:
+                httpversion:
+                response:
+                body_bytes_sent:
+                referrer:
+                user_agent:
+                http_x_forwarded_for:
+                server_name:
+                request_time:
+                upstream_response_time:
+                upstream_addr:
+                realpath_root:
+                cookie:
+                nginx_version:
+                scheme:
+                time:
+            - timestamp:
+                format: '2006-01-02T15:04:05+08:00'
+                source:  time
+                location: Asia/Shanghai
+
+  - job_name: nginx-error
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx-error-log
+          __path__: /logs/error.log
+    pipeline_stages:
+      - match:
+          selector: '{job="nginx-error-log"}'
+          stages:
+            - regex:  # 使用正则选择要提取的字段
+                expression: '^(?P<timestamp>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?P<level>\S+)\] (?P<pid>\d+)#(?P<tid>\d+): \*(?P<cid>\d+) (?P<msg>.*) client: (?P<client_ip>[^,]+), server: (?P<server_name>[^,]+), request: "(?P<request_method>\S+) (?P<request_path>\S+) (?P<request_protocol>\S+)", upstream: "(?P<upstream>[^"]+)", host: "(?P<host>[^"]+)"$'
+            - labels:
+                level:
+                pid:
+                tid:
+                cid:
+                client_ip:
+                server_name:
+                request_method:
+                request_path:
+                request_protocol:
+                upstream:
+                host:
+            - timestamp:
+                format: "2006/01/02 15:04:05"
+                source: time  # 正则提取的字段
+                location: Asia/Shanghai

@@ -380,6 +380,79 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.63
 
+  loki:
+    container_name: loki
+    image: grafana/loki:latest
+    restart: always
+    volumes:
+      - /root/compose/loki:/etc/loki/
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/loki-config.yaml
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.70
+  promtail:
+    container_name: promtail
+    image: grafana/promtail:latest
+    restart: always
+    volumes:
+      - /root/compose/promtail:/etc/promtail/
+    environment:
+      - TZ=Asia/Shanghai
+      - LANG=zh_CN.UTF-8
+    ports:
+      - "9080:9080"
+    command: -config.file=/etc/promtail/promtail-config.yaml
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.71
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.72
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
+    volumes:
+      - /root/compose/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.73
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    restart: always
+    volumes:
+      - /root/compose/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9093:9093"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.74
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: always
+    ports:
+      - "9101:9100"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.75
+
   arthas:
     image: hengyunabc/arthas:latest
     container_name: arthas
