@@ -872,6 +872,9 @@ spring:
 
 taotao:
   cloud:
+    idgenerator:
+      enabled: true
+      type: redis
     dinger:
       enabled: true
       httpclient:

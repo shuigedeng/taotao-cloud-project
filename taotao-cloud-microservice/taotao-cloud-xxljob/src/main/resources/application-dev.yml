@@ -242,6 +242,9 @@ xxl:
 
 taotao:
   cloud:
+    idgenerator:
+      enabled: true
+      type: redis
     data:
       p6spy:
         enabled: true

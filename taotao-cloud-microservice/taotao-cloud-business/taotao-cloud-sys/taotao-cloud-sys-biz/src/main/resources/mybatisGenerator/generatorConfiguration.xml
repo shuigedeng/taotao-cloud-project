@@ -17,8 +17,8 @@
 		<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
 		<!--可以自定义生成model的代码注释-->
-<!--		<commentGenerator type="com.taotao.cloud.data.mybatisplus.mbg.CommentGenerator">-->
-		<commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">
+		<commentGenerator type="com.taotao.cloud.data.mybatisplus.mbg.CommentGenerator">
+<!--		<commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">-->
 			<!-- 是否去除自动生成的注释 true：是 ：false:否 -->
 			<property name="suppressAllComments" value="true"/>
 			<property name="suppressDate" value="true"/>
@@ -43,7 +43,7 @@
 
 		<!--指定生成model的路径-->
 		<javaModelGenerator
-			targetPackage="com.taotao.cloud.sys.biz.model.entity"
+			targetPackage="com.taotao.cloud.sys.biz.mbg"
 			targetProject="src/main/java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false"/>
@@ -52,7 +52,7 @@
 		</javaModelGenerator>
 
 		<!--指定生成mapper接口的的路径-->
-		<javaClientGenerator targetPackage="com.taotao.cloud.sys.biz.mapper"
+		<javaClientGenerator targetPackage="com.taotao.cloud.sys.biz.mbg"
 							 targetProject="src/main/java"
 							 type="ANNOTATEDMAPPER">
 			<property name="rootInterface" value="org.mybatis.dynamic.sql.util.mybatis3.CommonSelectMapper"/>
