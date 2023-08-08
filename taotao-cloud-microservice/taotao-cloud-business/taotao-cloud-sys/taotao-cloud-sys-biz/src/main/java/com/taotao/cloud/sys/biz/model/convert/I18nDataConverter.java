@@ -3,7 +3,7 @@ package com.taotao.cloud.sys.biz.model.convert;
 import com.taotao.cloud.sys.api.model.dto.I18nDataDTO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataExcelVO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataPageVO;
-import com.taotao.cloud.sys.biz.model.entity.I18nData;
+import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.web.i18n.I18nMessage;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

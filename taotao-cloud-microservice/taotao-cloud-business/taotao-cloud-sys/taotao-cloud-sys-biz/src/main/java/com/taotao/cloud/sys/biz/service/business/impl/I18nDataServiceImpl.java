@@ -12,7 +12,7 @@ import com.taotao.cloud.sys.api.model.query.I18nDataQO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataPageVO;
 import com.taotao.cloud.sys.biz.mapper.I18nDataMapper;
 import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
-import com.taotao.cloud.sys.biz.model.entity.I18nData;
+import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;

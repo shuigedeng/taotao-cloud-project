@@ -12,7 +12,7 @@ import com.taotao.cloud.sys.api.model.query.I18nDataQO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataExcelVO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataPageVO;
 import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
-import com.taotao.cloud.sys.biz.model.entity.I18nData;
+import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 国际化信息

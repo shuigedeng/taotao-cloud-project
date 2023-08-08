@@ -2,4 +2,6 @@ subprojects {
     dependencies {
         testImplementation("io.github.shuigedeng:taotao-cloud-starter-test")
     }
+
+    apply from: rootProject.file('gradle/mybatis-generator.gradle')
 }
