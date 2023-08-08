@@ -7,6 +7,7 @@ services:
   #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE ; SHOW SLAVE STATUS\G
   mysql8:
     hostname: mysql8
+    image: mysql:8.0
     environment:
       TZ: Asia/Shanghai
       MYSQL_ROOT_HOST: '%'
@@ -23,7 +24,6 @@ services:
       --explicit_defaults_for_timestamp=true
       --lower_case_table_names=1
       --expire-logs-days=7
-    image: mysql:8.0
     privileged: true
     logging:
       driver: "json-file"
@@ -49,6 +49,19 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.12
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.64
 
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.8
