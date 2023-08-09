@@ -78,7 +78,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.14"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.15"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.39"
@@ -150,7 +150,7 @@ plugins {
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
-    id "com.bmuschko.docker-spring-boot-application" version "9.3.1"
+    id "com.bmuschko.docker-spring-boot-application" version "9.3.2"
 
     //Gradle 插件，用于将所有依赖项和项目代码折叠到一个 Jar 文件中。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
@@ -182,7 +182,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.9.23'
+    id 'org.graalvm.buildtools.native' version '0.9.24'
 
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.thinkimi.gradle.MybatisGenerator

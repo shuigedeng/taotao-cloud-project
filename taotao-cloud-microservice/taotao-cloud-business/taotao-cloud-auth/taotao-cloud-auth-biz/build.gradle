@@ -4,34 +4,30 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-core"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
     implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybaits-plus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+
 
     implementation 'org.springframework.session:spring-session-data-redis:3.1.1'
 
@@ -83,8 +79,6 @@ dependencies {
     implementation "com.nimbusds:oauth2-oidc-sdk:10.12"
 
     implementation "org.apache.commons:commons-collections4"
-
-    implementation "com.baomidou:mybatis-plus-core"
 
     implementation "org.springframework:spring-webflux"
     implementation "io.projectreactor.netty:reactor-netty-http"
