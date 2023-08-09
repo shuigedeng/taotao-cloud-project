@@ -22,7 +22,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybaits-plus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus"
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
