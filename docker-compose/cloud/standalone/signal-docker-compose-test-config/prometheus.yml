@@ -1,0 +1,37 @@
+#全局配置 （如果有内部单独设定，会覆盖这个参数）
+global:
+  # 数据采集间隔
+  scrape_interval:     45s
+  # 告警检测间隔
+  evaluation_interval: 45s
+
+#告警插件定义。这里会设定alertmanager这个报警插件
+alerting:
+  alertmanagers:
+    - static_configs:
+        #- targets: ["192.168.80.86:9093"]
+
+# 告警规则。 按照设定参数进行扫描加载，用于自定义报警规则，其报警媒介和route路由由alertmanager插件实现
+rule_files:
+  # 这里匹配指定目录下所有的.rules文件
+  #- /prometheus/rules/*.yml
+
+# 采集配置。配置数据源，包含分组job_name以及具体target。又分为静态配置和服务发现
+scrape_configs:
+  # 可随意指定
+  - job_name: 'springboot'
+    # 多久采集一次数据
+    scrape_interval: 15s
+    # 采集时的超时时间
+    scrape_timeout: 10s
+    # 采集的路径
+    metrics_path: '/actuator/prometheus'
+    # 采集服务的地址，设置成Springboot应用所在服务器的具体地址
+    static_configs:
+      - targets: ['192.168.10.220:33334']
+  - job_name: 'liunx_node_exporter'
+    static_configs:
+      - targets: ['192.168.10.220:9100']
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['127.0.0.1:9090']

@@ -382,22 +382,24 @@ services:
 
   loki:
     container_name: loki
-    image: grafana/loki:latest
+    image: grafana/loki:2.8.3
     restart: always
+    privileged: true
     volumes:
-      - /root/compose/loki:/etc/loki/
+      - /root/compose/loki:/mnt/config
     environment:
       - TZ=Asia/Shanghai
       - LANG=zh_CN.UTF-8
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/loki-config.yaml
+    command: -config.file=/mnt/config/loki-config.yaml
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.70
   promtail:
     container_name: promtail
-    image: grafana/promtail:latest
+    image: grafana/promtail:2.8.3
+    privileged: true
     restart: always
     volumes:
       - /root/compose/promtail:/etc/promtail/
@@ -415,7 +417,19 @@ services:
     container_name: grafana
     restart: always
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=admin             #设置管理员用户名
+      - GF_SECURITY_ADMIN_PASSWORD=admin        #设置管理员密码
+#      - GF_USERS_ALLOW_SIGN_UP=false
+#      - GF_AUTH_ANONYMOUS_ENABLED=true
+#      - GF_EXPLORE_ENABLED=true
+#      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+#      - GF_AUTH_OAUTH_AUTO_LOGIN=true
+#      - GF_SMTP_ENABLED=true
+#      - GF_SMTP_HOST=smtp.exmail.qq.com:465     #设置SMTP发送信息
+#      - GF_SMTP_USER=98@qq.com
+#      - GF_SMTP_PASSWORD=123456
+#      - GF_SMTP_FROM_ADDRESS=test@qq.com
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel
     ports:
       - "3000:3000"
     networks:
@@ -428,7 +442,7 @@ services:
     volumes:
       - /root/compose/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
-      - "9090:9090"
+      - "19090:9090"
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.73
@@ -437,9 +451,10 @@ services:
     container_name: alertmanager
     restart: always
     volumes:
-      - /root/compose/prometheus/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - /root/compose/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
     ports:
-      - "9093:9093"
+      - "19093:9093"
+      - "19094:9094"
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.74
@@ -453,6 +468,19 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.75
 
+  pgsql:
+    image: postgres:latest
+    container_name: pgsql
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+      - ALLOW_IP_RANGE=0.0.0.0/0
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.80
   arthas:
     image: hengyunabc/arthas:latest
     container_name: arthas
