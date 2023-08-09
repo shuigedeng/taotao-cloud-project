@@ -7,19 +7,16 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-useragent"
     implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
+
     //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
     //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
-
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
 
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
