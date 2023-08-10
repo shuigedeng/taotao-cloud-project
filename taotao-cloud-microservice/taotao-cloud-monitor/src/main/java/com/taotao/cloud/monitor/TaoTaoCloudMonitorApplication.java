@@ -39,7 +39,6 @@ public class TaoTaoCloudMonitorApplication {
 
 		SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
 
-
         //try {
         //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
         //} catch (Throwable e) {
