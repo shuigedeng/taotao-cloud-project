@@ -22,7 +22,9 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
+    }
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
@@ -76,7 +78,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:9.31"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:10.12"
+    implementation "com.nimbusds:oauth2-oidc-sdk:10.13.2"
 
     implementation "org.apache.commons:commons-collections4"
 
