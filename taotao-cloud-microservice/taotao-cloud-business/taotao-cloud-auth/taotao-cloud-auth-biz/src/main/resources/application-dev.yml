@@ -596,14 +596,14 @@ spring:
       max-request-size: 200MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #url: jdbc:mysql://192.168.10.220:3306/taotao-cloud-auth-tmp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true
-    #driver-class-name: com.mysql.cj.jdbc.Driver
-    #username: root
-    #password: 123456
-    url: jdbc:postgresql://192.168.10.220:5432/taotao-cloud-auth-tmp?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowMultiQueries=true
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://192.168.10.220:3306/taotao-cloud-auth-tmp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+    #url: jdbc:postgresql://192.168.10.220:5432/taotao-cloud-auth-tmp?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowMultiQueries=true
+    #driver-class-name: org.postgresql.Driver
+    #username: root
+    #password: 123456
     hikari:
       auto-commit: true # 从池返回的连接的默认自动提交行为 默认true
       connection-timeout: 350000 # 客户端等待连接池的最大毫秒数
