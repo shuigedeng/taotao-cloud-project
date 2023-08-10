@@ -983,7 +983,7 @@ taotao:
         packages: com.taotao.cloud.auth.biz.jpa.entity
         tenant:
           enabled: false
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQLDialect
       shardingsphere:
         enabled: false
       mongodb:
