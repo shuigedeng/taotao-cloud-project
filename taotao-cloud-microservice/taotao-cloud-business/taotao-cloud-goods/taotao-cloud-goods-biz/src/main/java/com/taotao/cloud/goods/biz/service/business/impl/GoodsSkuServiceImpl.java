@@ -405,7 +405,7 @@ public class GoodsSkuServiceImpl
     @Override
     public GoodsSkuSpecGalleryVO getGoodsSkuVO(GoodsSku goodsSku) {
         // 初始化商品
-        GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO = GoodsSkuConvert.INSTANCE.convert(goodsSku);
+        GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO = GoodsSkuConvert.INSTANCE.convertGallery(goodsSku);
         // 获取规格信息
         JSONObject jsonObject = JSONUtil.parseObj(goodsSku.getSpecs());
         // 规格值信息

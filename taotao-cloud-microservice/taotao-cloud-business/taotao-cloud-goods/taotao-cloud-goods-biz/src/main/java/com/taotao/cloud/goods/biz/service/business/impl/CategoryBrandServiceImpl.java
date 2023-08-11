@@ -24,10 +24,11 @@ import com.taotao.cloud.goods.biz.repository.cls.CategoryBrandRepository;
 import com.taotao.cloud.goods.biz.repository.inf.ICategoryBrandRepository;
 import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 规格项业务层实现
@@ -39,7 +40,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CategoryBrandServiceImpl
         extends BaseSuperServiceImpl<
-                ICategoryBrandMapper, CategoryBrand, CategoryBrandRepository, ICategoryBrandRepository, Long>
+        ICategoryBrandMapper,
+        CategoryBrand,
+        CategoryBrandRepository,
+        ICategoryBrandRepository,
+        Long>
         implements ICategoryBrandService {
 
     @Override

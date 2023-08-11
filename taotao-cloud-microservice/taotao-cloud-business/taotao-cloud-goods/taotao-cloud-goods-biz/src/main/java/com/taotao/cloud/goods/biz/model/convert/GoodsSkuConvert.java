@@ -17,6 +17,7 @@
 package com.taotao.cloud.goods.biz.model.convert;
 
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -42,5 +43,7 @@ public interface GoodsSkuConvert {
      * @return {@link GoodsSkuSpecGalleryVO }
      * @since 2022-04-27 16:58:24
      */
-    GoodsSkuSpecGalleryVO convert(GoodsSku goodsSku);
+    GoodsSkuSpecGalleryVO convertGallery(GoodsSku goodsSku);
+
+    GoodsSkuVO convert(GoodsSku goodsSku);
 }

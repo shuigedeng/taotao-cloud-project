@@ -40,7 +40,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/** 买家端,会员收藏API */
+/**
+ * 买家端,会员收藏API
+ */
 @AllArgsConstructor
 @Validated
 @RestController
@@ -48,17 +50,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/member/buyer/member/collection")
 public class MemberCollectionController {
 
-    /** 会员商品收藏 */
+    /**
+     * 会员商品收藏
+     */
     private final IMemberGoodsCollectionService memberGoodsCollectionService;
-    /** 会员店铺 */
+    /**
+     * 会员店铺
+     */
     private final IFeignStoreCollectionApi feignStoreCollectionApi;
 
     @Operation(summary = "查询会员收藏列表", description = "查询会员收藏列表")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping("/{type}")
-    public Result<PageResult<StoreCollectionVO>> goodsListPage(
-            @Parameter(description = "类型", required = true) @PathVariable String type, @Validated PageQuery page) {
+    public Result<PageResult<StoreCollectionVO>> goodsListPage(@Parameter(description = "类型", required = true)
+                                                               @PathVariable String type,
+                                                               @Validated PageQuery page) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             IPage<GoodsCollectionVO> goodsCollectionPage = memberGoodsCollectionService.goodsCollection(page);
             return Result.success(PageResult.convertMybatisPage(goodsCollectionPage, StoreCollectionVO.class));
@@ -71,9 +78,11 @@ public class MemberCollectionController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @PostMapping("/{type}/{id}")
-    public Result<Boolean> addGoodsCollection(
-            @Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺") @PathVariable String type,
-            @Parameter(description = "id", required = true) @NotNull(message = "值不能为空") @PathVariable Long id) {
+    public Result<Boolean> addGoodsCollection(@Parameter(description = "类型", required = true, example = "GOODS:商品,STORE:店铺")
+                                              @PathVariable String type,
+                                              @Parameter(description = "id", required = true)
+                                              @NotNull(message = "值不能为空")
+                                              @PathVariable Long id) {
         if (MemberCollectionQueryConstants.GOODS.equals(type)) {
             return Result.success(memberGoodsCollectionService.addGoodsCollection(id));
         }

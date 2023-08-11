@@ -70,14 +70,16 @@ public class CategoryParameterGroupServiceImpl
         // 根据id查询参数组
         List<CategoryParameterGroup> groups = this.getCategoryGroup(categoryId);
         // 查询参数
-        List<Parameters> params = parametersService.list(new QueryWrapper<Parameters>().eq("category_id", categoryId));
+        List<Parameters> params = parametersService.queryParametersByCategoryId(categoryId);
         // 组合参数vo
         return convertParamList(groups, params);
     }
 
     @Override
     public List<CategoryParameterGroup> getCategoryGroup(Long categoryId) {
-        return this.list(new QueryWrapper<CategoryParameterGroup>().eq("category_id", categoryId));
+        QueryWrapper<CategoryParameterGroup> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("category_id", categoryId);
+        return this.list(queryWrapper);
     }
 
     @Override

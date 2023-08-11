@@ -31,15 +31,14 @@ import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.NotNull;
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 管理端-地区管理API
@@ -53,28 +52,38 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "管理端-地区管理API", description = "管理端-地区管理API")
 public class ManagerRegionController
         extends BaseSuperController<
-                IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
+        IRegionService, Region, Long, BaseQuery, RegionSaveDTO, RegionUpdateDTO, RegionQueryVO> {
 
-    @Operation(summary = "根据父id查询地区数据", description = "根据父id查询地区数据")
+    @Operation(
+            summary = "根据父id查询地区数据",
+            description = "根据父id查询地区数据",
+            parameters = {
+                    @Parameter(name = "parentId", description = "父id", required = true, example = "1111", in = ParameterIn.PATH)
+            })
     @RequestLogger
     @GetMapping("/parentId/{parentId}")
     @NotAuth
     // @PreAuthorize("hasAuthority('sys:region:info:parentId')")
-    public Result<List<RegionParentVO>> queryRegionByParentId(
-            @Parameter(description = "父id") @NotNull(message = "父id不能为空") @PathVariable(name = "parentId")
-                    Long parentId) {
+    public Result<List<RegionParentVO>> queryRegionByParentId(@NotBlank(message = "父id不能为空") @PathVariable(name = "parentId") Long parentId) {
         List<RegionParentVO> result = service().queryRegionByParentId(parentId);
         return Result.success(result);
     }
 
-    @Operation(summary = "树形结构查询", description = "树形结构查询")
+    @Operation(
+            summary = "树形结构查询",
+            description = "树形结构查询",
+            parameters = {
+                    @Parameter(name = "parentId", description = "父id", required = true, example = "1",
+                            schema = @Schema(defaultValue = "1", implementation = Long.class)),
+                    @Parameter(name = "depth", description = "深度", example = "1024",
+                            schema = @Schema(defaultValue = "1024", implementation = Integer.class)),
+            })
     @RequestLogger
     @GetMapping(value = "/tree")
     @NotAuth
     // @PreAuthorize("hasAuthority('sys:region:info:true')")
-    public Result<List<RegionParentVO>> tree(
-            @RequestParam(required = false, defaultValue = "1") Long parentId,
-            @RequestParam(required = false, defaultValue = "1024") Integer depth) {
+    public Result<List<RegionParentVO>> tree(@NotBlank(message = "父id不能为空") @RequestParam(required = false, defaultValue = "1") Long parentId,
+                                             @RequestParam(required = false, defaultValue = "1024") Integer depth) {
         List<RegionParentVO> result = service().tree(parentId, depth);
         return Result.success(result);
     }

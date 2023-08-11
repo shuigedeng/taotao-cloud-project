@@ -72,7 +72,7 @@ public class GoodsSellerController {
     /** 商品sku */
     private final IGoodsSkuService goodsSkuService;
     /** 店铺详情 */
-    private final IFeignStoreDetailApi storeDetailService;
+    private final IFeignStoreDetailApi storeDetailApi;
 
     @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
     @RequestLogger("分页获取商品列表")
@@ -105,7 +105,7 @@ public class GoodsSellerController {
     public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
         // 当前登录商家账号
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
-        StoreDetailVO storeDetail = storeDetailService.getStoreDetailVO(storeId);
+        StoreDetailVO storeDetail = storeDetailApi.getStoreDetailVO(storeId);
         // 库存预警数量
         Integer stockWarnNum = storeDetail.getStockWarning();
         goodsPageQuery.setStoreId(storeId);
