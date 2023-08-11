@@ -221,3 +221,55 @@ jobs:
       #    registry: registry.cn-hangzhou.aliyuncs.com
       #    username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
       #    password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+
+      - name: build success
+        if: ${{ success() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [Microservice Docker Image] Publish Docker success"
+              }
+            }
+
+      - name: build failure
+        if: ${{ failure() }}
+        uses: zcong1993/actions-ding@master
+        with:
+          dingToken: ${{ secrets.DING_TOKEN }}
+          secret: ${{ secrets.DING_SECRET }}
+          # body 内容 https://blog.csdn.net/lxw1844912514/article/details/125747327
+          body: |
+            {
+              "msgtype": "text",
+              "text": {
+                  "content": "taotao github action [Microservice Docker Image] Publish Docker failure"
+              }
+            }
+
+#      - name: build success
+#        if: ${{ success() }}
+#        uses: fifsky/dingtalk-action@master
+#        with:
+#          url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.TAOTAO_CLOUD_DINGTAOK_TOKEN }}
+#          type: markdown
+#          content: |
+#            # 💯👨‍💻 Success 🎉🎉🎉
+#            > [Microservice Starters Publish Aliyun] Publish Docker success
+#            > ^_^ from github action message
+#
+#      - name: build error
+#        if: ${{ error() }}
+#        uses: fifsky/dingtalk-action@master
+#        with:
+#          url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.TAOTAO_CLOUD_DINGTAOK_TOKEN }}
+#          type: markdown
+#          content: |
+#            # 💯👨‍💻 Error 🎉🎉🎉
+#            > [Microservice Starters Publish Aliyun] Publish Docker error
+#            > ^_^ from github action message
