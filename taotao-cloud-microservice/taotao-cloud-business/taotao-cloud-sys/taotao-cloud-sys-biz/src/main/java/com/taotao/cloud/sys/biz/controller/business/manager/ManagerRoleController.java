@@ -29,20 +29,18 @@ import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Set;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 管理端-角色管理API
@@ -58,43 +56,49 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagerRoleController
         extends BaseSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
-    @Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
+    @Operation(summary = "根据用户id获取角色列表",
+            description = "根据用户id获取角色列表",
+            parameters = {
+                    @Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH)
+            })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:role:info:userId')")
     @GetMapping("/userId/{userId}")
-    public Result<List<RoleQueryVO>> findRoleByUserId(
-            @Parameter(description = "用户id", required = true)
-                    @NotNull(message = "用户id不能为空")
-                    @PathVariable(name = "userId")
-                    Long userId) {
+    public Result<List<RoleQueryVO>> findRoleByUserId(@NotNull(message = "用户id不能为空") @PathVariable(name = "userId") Long userId) {
         List<RoleBO> roles = service().findRoleByUserIds(Set.of(userId));
         List<RoleQueryVO> result = RoleConvert.INSTANCE.convertListVO(roles);
         return success(result);
     }
 
-    @Operation(summary = "根据用户id列表获取角色列表", description = "根据用户id列表获取角色列表")
+    @Operation(summary = "根据用户id列表获取角色列表",
+            description = "后台页面-用户信息页面-根据用户id列表获取角色列表",
+            parameters = {
+                    @Parameter(name = "userIds", description = "用户id列表", required = true, example = "1,2,3")
+            })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:role:info:userIds')")
     @GetMapping("/userId")
-    public Result<List<RoleQueryVO>> findRoleByUserIds(
-            @Parameter(description = "用户id列表", required = true) @NotEmpty(message = "用户id列表不能为空") @RequestParam
-                    Set<Long> userIds) {
+    public Result<List<RoleQueryVO>> findRoleByUserIds(@NotEmpty(message = "用户id列表不能为空") @RequestParam Set<Long> userIds) {
         List<RoleBO> roles = service().findRoleByUserIds(userIds);
         List<RoleQueryVO> result = RoleConvert.INSTANCE.convertListVO(roles);
         return success(result);
     }
 
-    @Operation(summary = "根据角色id更新菜单信息(角色分配菜单)", description = "根据角色id更新菜单信息(角色分配菜单)")
+    @Operation(summary = "根据角色id更新菜单信息(角色分配菜单)",
+            description = "后台页面-用户信息页面-根据角色id更新菜单信息(角色分配菜单)",
+            parameters = {
+                    @Parameter(name = "roleId", description = "角色id", required = true, example = "1", in = ParameterIn.PATH),
+            },
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "菜单id列表",
+                    required = true,
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Set.class))}
+            ))
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:role:menu')")
     @PutMapping("/resources/{roleId}")
-    public Result<Boolean> saveRoleMenus(
-            @Parameter(description = "角色id", required = true)
-                    @NotNull(message = "角色id不能为空")
-                    @PathVariable(name = "roleId")
-                    Long roleId,
-            @Parameter(description = "菜单id列表", required = true) @NotEmpty(message = "菜单id列表不能为空") @RequestBody
-                    Set<Long> menuIds) {
+    public Result<Boolean> saveRoleMenus(@NotNull(message = "角色id不能为空") @PathVariable(name = "roleId") Long roleId,
+                                         @Validated @NotEmpty(message = "菜单id列表不能为空") @RequestBody Set<Long> menuIds) {
         return success(service().saveRoleMenus(roleId, menuIds));
     }
 }

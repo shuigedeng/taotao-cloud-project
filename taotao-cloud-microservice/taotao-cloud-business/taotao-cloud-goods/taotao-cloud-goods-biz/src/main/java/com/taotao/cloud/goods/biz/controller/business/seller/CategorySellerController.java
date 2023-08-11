@@ -54,7 +54,7 @@ public class CategorySellerController {
     /** 分类品牌服务 */
     private final ICategoryBrandService categoryBrandService;
     /** 店铺详情服务 */
-    private final IFeignStoreDetailApi storeDetailService;
+    private final IFeignStoreDetailApi storeDetailApi;
 
     @Operation(summary = "获取店铺经营的分类", description = "获取店铺经营的分类")
     @RequestLogger("获取店铺经营的分类")
@@ -63,8 +63,7 @@ public class CategorySellerController {
     public Result<List<CategoryTreeVO>> getListAll() {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         // 获取店铺经营范围
-        String goodsManagementCategory =
-                storeDetailService.getStoreDetailVO(storeId).getGoodsManagementCategory();
+        String goodsManagementCategory = storeDetailApi.getStoreDetailVO(storeId).getGoodsManagementCategory();
         return Result.success(this.categoryService.getStoreCategory(goodsManagementCategory.split(",")));
     }
 

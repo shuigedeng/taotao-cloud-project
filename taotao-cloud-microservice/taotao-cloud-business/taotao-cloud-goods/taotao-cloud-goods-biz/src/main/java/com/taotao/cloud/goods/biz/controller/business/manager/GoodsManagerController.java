@@ -25,6 +25,7 @@ import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsVO;
+import com.taotao.cloud.goods.biz.model.convert.GoodsSkuConvert;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
@@ -78,7 +79,7 @@ public class GoodsManagerController {
     @GetMapping(value = "/sku/page")
     public Result<PageResult<GoodsSkuVO>> getSkuByPage(@Validated GoodsPageQuery goodsPageQuery) {
         IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
-        return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+        return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuConvert.INSTANCE::convert));
     }
 
     @Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品")

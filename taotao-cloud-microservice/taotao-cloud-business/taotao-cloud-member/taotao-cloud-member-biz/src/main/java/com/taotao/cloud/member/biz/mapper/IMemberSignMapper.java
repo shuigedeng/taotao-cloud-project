@@ -33,8 +33,7 @@ public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
      * @param memberId 会员ID
      * @return 会员签到列表
      */
-    @Select(
-            """
+    @Select("""
 		SELECT *
 		FROM tt_member_sign
 		WHERE TO_DAYS( NOW( ) ) - TO_DAYS( create_time) = 1 and member_id = #{memberId}
@@ -61,8 +60,7 @@ public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
      * @param time 时间
      * @return 会员签到列表
      */
-    @Select(
-            """
+    @Select("""
 		SELECT *
 		FROM tt_member_sign
 		WHERE DATE_FORMAT(create_time,'%Y%m') = #{time} and member_id = #{memberId}

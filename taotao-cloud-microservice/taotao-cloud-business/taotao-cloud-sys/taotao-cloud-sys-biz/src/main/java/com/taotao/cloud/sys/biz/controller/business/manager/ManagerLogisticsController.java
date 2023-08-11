@@ -23,6 +23,8 @@ import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -48,13 +50,17 @@ public class ManagerLogisticsController {
 
     private final ILogisticsService logisticsService;
 
-    @Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息")
+    @Operation(
+            summary = "根据id查询物流公司信息",
+            description = "根据id查询物流公司信息",
+            parameters = {
+                    @Parameter(name = "id", description = "物流公司id", required = true, example = "1111", in = ParameterIn.PATH)
+            })
     @RequestLogger
     @PreAuthorize("hasAuthority('express:company:info:id')")
     @GetMapping("/info/id/{id:[0-9]*}")
     public Result<LogisticsVO> findExpressCompanyById(@PathVariable(value = "id") Long id) {
         LogisticsConfig logisticsConfig = logisticsService.findLogisticsById(id);
-        LogisticsVO vo = LogisticsConvert.INSTANCE.convert(logisticsConfig);
-        return Result.success(vo);
+        return Result.success(LogisticsConvert.INSTANCE.convert(logisticsConfig));
     }
 }

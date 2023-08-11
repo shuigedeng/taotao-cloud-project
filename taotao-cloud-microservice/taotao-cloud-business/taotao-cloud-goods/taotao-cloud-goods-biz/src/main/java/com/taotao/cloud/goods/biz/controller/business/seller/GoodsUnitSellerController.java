@@ -21,6 +21,7 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.goods.api.model.vo.GoodsUnitVO;
+import com.taotao.cloud.goods.biz.model.convert.GoodsUnitConvert;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -56,6 +57,6 @@ public class GoodsUnitSellerController {
     @GetMapping("/page")
     public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
         IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
-        return Result.success(PageResult.convertMybatisPage(page, GoodsUnitVO.class));
+        return Result.success(PageResult.convertMybatisPage(page, GoodsUnitConvert.INSTANCE::convert));
     }
 }

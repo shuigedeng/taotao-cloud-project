@@ -16,44 +16,33 @@
 
 package com.taotao.cloud.goods.biz.model.convert;
 
-import com.taotao.cloud.goods.api.model.dto.SpecificationDTO;
-import com.taotao.cloud.goods.api.model.vo.SpecificationVO;
-import com.taotao.cloud.goods.biz.model.entity.Specification;
-import java.util.List;
+import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.api.model.vo.GoodsUnitVO;
+import com.taotao.cloud.goods.biz.model.entity.Goods;
+import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 /**
- * ISpecificationMapStruct
+ * IGoodsSkuMapStruct
  *
  * @author shuigedeng
  * @version 2022.04
- * @since 2022-04-27 16:58:30
+ * @since 2022-04-27 16:58:21
  */
 @Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface SpecificationConvert {
+public interface GoodsUnitConvert {
 
     /** 实例 */
-    SpecificationConvert INSTANCE = Mappers.getMapper(SpecificationConvert.class);
+    GoodsUnitConvert INSTANCE = Mappers.getMapper(GoodsUnitConvert.class);
 
     /**
-     * 规范来规范vos
+     * 转换
      *
-     * @param specifications 规范
-     * @return {@link List }<{@link SpecificationVO }>
-     * @since 2022-04-27 16:58:30
+     * @param goodsUnit 货物单位
+     * @return {@link GoodsUnitVO }
+     * @since 2023-08-11 14:54:25
      */
-    List<SpecificationVO> convert(List<Specification> specifications);
-
-    SpecificationVO convert(Specification specification);
-
-    /**
-     * 规范dtoto规范
-     *
-     * @param specificationDTO 规范dto
-     * @return {@link Specification }
-     * @since 2022-04-27 16:58:30
-     */
-    Specification convert(SpecificationDTO specificationDTO);
+    GoodsUnitVO convert(GoodsUnit goodsUnit);
 }

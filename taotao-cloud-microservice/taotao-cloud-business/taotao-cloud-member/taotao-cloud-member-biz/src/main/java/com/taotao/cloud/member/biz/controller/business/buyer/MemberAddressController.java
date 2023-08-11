@@ -34,13 +34,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 买家端-会员地址API
@@ -64,16 +58,16 @@ public class MemberAddressController {
     @GetMapping
     public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
         IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page, SecurityUtils.getUserId());
-        return Result.success(PageResult.convertMybatisPage(memberAddressPage, MemberAddressVO.class));
+        return Result.success(PageResult.convertMybatisPage(memberAddressPage, MemberAddressConvert.INSTANCE::convert));
     }
 
     @Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址")
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @GetMapping(value = "/{id}")
-    public Result<MemberAddressVO> getShippingAddress(
-            @Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空") @PathVariable(value = "id")
-                    Long id) {
+    public Result<MemberAddressVO> getShippingAddress(@Parameter(description = "会员地址ID", required = true)
+                                                      @NotNull(message = "id不能为空")
+                                                      @PathVariable(value = "id") Long id) {
         MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
         return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
     }
@@ -104,7 +98,7 @@ public class MemberAddressController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @PutMapping
-    public Result<Boolean> editShippingAddress(@Valid MemberAddress shippingAddress) {
+    public Result<Boolean> editShippingAddress(@Valid @RequestBody MemberAddress shippingAddress) {
         return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
     }
 
@@ -112,9 +106,10 @@ public class MemberAddressController {
     @RequestLogger
     @PreAuthorize("@el.check('admin','timing:list')")
     @DeleteMapping(value = "/{id}")
-    public Result<Boolean> delShippingAddressById(
-            @Parameter(description = "会员地址ID", required = true) @NotNull(message = "id不能为空") @PathVariable(value = "id")
-                    Long id) {
+    public Result<Boolean> delShippingAddressById(@Parameter(description = "会员地址ID", required = true)
+                                                  @NotNull(message = "id不能为空")
+                                                  @PathVariable(value = "id")
+                                                  Long id) {
         return Result.success(memberAddressService.removeMemberAddress(id));
     }
 }

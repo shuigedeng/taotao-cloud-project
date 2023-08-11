@@ -202,7 +202,7 @@ public class RegionServiceImpl
 			});
 		}
 
-		if (vos.size() > 0) {
+		if (!vos.isEmpty()) {
 			vos.forEach(e -> findAllChild(e, 1, depth));
 		}
 		return vos;

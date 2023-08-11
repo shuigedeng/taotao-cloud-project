@@ -17,6 +17,7 @@
 package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
@@ -38,6 +39,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.text.CharSequenceUtil;
+import org.dromara.hutool.json.JSONUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,6 +98,13 @@ public class ParametersServiceImpl
                     destination, JSONUtil.toJsonStr(goodsIds), RocketmqSendCallbackBuilder.commonCallback());
         }
         return this.updateById(parameters);
+    }
+
+    @Override
+    public List<Parameters> queryParametersByCategoryId(Long categoryId) {
+        QueryWrapper<Parameters> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("category_id", categoryId);
+        return this.list(queryWrapper);
     }
 
     /**
