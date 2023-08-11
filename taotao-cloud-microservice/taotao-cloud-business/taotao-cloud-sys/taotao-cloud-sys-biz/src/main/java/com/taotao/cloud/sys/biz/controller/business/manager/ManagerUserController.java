@@ -35,9 +35,11 @@ import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -46,6 +48,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -65,15 +68,16 @@ import java.util.Set;
 public class ManagerUserController
 	extends BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
 
-	@Operation(summary = "根据手机号码查询用户是否存在",
-		description = "根据手机号码查询用户是否存在",
-		parameters = {
+	@Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
+			responses = {@ApiResponse(description = "是否成功", content = @Content(mediaType = "application/json"))})
+	@Parameters({
 			@Parameter(name = "phone", description = "手机号码", required = true, example = "15730445331", in = ParameterIn.PATH)
-		})
+	})
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:user:exists:phone')")
 	@GetMapping("/exists/phone/{phone}")
-	public Result<Boolean> existsByPhone(@NotBlank(message = "手机号码不能为空") @PathVariable(name = "phone") String phone) {
+	public Result<Boolean> existsByPhone(@NotBlank(message = "手机号码不能为空") @PathVariable String phone) {
 		return success(service().existsByPhone(phone));
 	}
 
@@ -89,16 +93,22 @@ public class ManagerUserController
 		return success(service().existsById(userId));
 	}
 
-	@Operation(summary = "重置密码",
-		description = "后台页面-用户信息页面-重置密码",
-		parameters = {
-			@Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH)
-		},
-		requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-			description = "重置密码DTO",
-			required = true,
-			content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RestPasswordUserDTO.class))}
-		))
+//	@Operation(summary = "重置密码",
+//		description = "后台页面-用户信息页面-重置密码",
+//		parameters = {
+//			@Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH)
+//		},
+//		requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+//			description = "重置密码DTO",
+//			required = true,
+//			content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RestPasswordUserDTO.class))}
+//		))
+	@Operation(summary = "重置密码", description = "后台页面-用户信息页面-重置密码",
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
+			responses = {@ApiResponse(description = "是否成功", content = @Content(mediaType = "application/json"))})
+	@Parameters({
+			@Parameter(name = "phone", description = "重置密码DTO", required = true,schema = @Schema(implementation = RestPasswordUserDTO.class))
+	})
 	@RequestLogger
 	@PreAuthorize("hasAuthority('sys:user:rest:password')")
 	@PostMapping("/rest/password/{userId}")
