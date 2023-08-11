@@ -994,7 +994,10 @@ sa-token:
 
 knife4j:
   gateway:
-    enabled: false     # 开区网关聚合文档 默认:/
+    basic:
+      enable: true
+      username: admin
+      password: 123456
     strategy: manual
     discover: # 服务发现
       enabled: true       # 开启服务发现 默认:true
@@ -1017,6 +1020,7 @@ knife4j:
         context-path: '/'         # context-path
         service-name: mall-server         # 服务名
         order: 1         # 排序
+
 
 #knife4j:
 #  enable: true

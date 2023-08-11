@@ -16,8 +16,8 @@
   "skipTransientField": true,//目前未实现
   "sortByTitle":false,//接口标题排序，默认为false,@since 1.8.7版本开始
   "showAuthor":true,//是否显示接口作者名称，默认是true,不想显示可关闭
-  "requestFieldToUnderline":true,//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7版本开始
-  "responseFieldToUnderline":true,//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7版本开始
+  "requestFieldToUnderline":false,//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7版本开始
+  "responseFieldToUnderline":false,//自动将驼峰入参字段在文档中转为下划线格式,//@since 1.8.7版本开始
   "inlineEnum":true,//设置为true会将枚举详情展示到参数表中，默认关闭，//@since 1.8.8版本开始
   "recursionLimit":7,//设置允许递归执行的次数用于避免一些对象解析卡主，默认是7，正常为3次以内，//@since 1.8.8版本开始
   "allInOneDocFileName":"index.html",//自定义设置输出文档名称, @since 1.9.0
@@ -25,7 +25,6 @@
   "responseExample":"true",//是否将响应示例展示在文档中，默认为true，@since 1.9.0
   "requestParamsTable": true, //@since 2.2.5,是否在文档中显示请求参数表，默认值为 true。
   "responseParamsTable": true, //@since 2.2.5,是否在文档中显示返回参数表，默认值为 true。
-  "urlSuffix":".do",//支持SpringMVC旧项目的url后缀,@since 2.1.0
   "displayActualType":false,//配置true会在注释栏自动显示泛型的真实类型短类名，
   "appToken": "c16931fa6590483fb7a4e85340fcbfef", //torna平台appToken,@since 2.0.9
   "isReplace":true, //torna 是否覆盖历史推送 @since 2.2.4
