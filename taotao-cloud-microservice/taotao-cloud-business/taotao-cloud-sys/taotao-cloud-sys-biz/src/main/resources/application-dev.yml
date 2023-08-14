@@ -1476,7 +1476,8 @@ gobrs:
           task-interrupt: true # 局部异常是否打断主流程 默认 false
 
 springdoc:
-  showActuator: true
+  showActuator: false
+  default-flat-param-object: true
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller

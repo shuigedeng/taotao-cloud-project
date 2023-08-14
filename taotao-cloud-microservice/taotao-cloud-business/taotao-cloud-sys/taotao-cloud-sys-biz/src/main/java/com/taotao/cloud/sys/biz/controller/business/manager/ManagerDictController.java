@@ -69,7 +69,7 @@ public class ManagerDictController
     //	@ApiImplicitParam(name = "ids", required = true, value = "多个用,号隔开", paramType = "form")
     // })
     public Result<?> del(@RequestParam String ids) {
-        Collection idsCollection = CollectionUtil.stringToCollection(ids);
+        Collection<?> idsCollection = CollectionUtil.stringToCollection(ids);
         if (service().removeByIds(idsCollection)) {
             // 批量删除字典列表的同时，也要删除字典项的内容
             for (Object obj : idsCollection) {

@@ -1,30 +1,10 @@
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.pig4cloud.plugin.excel.annotation.RequestExcel;
-import com.pig4cloud.plugin.excel.annotation.ResponseExcel;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.model.dto.I18nDataCreateDTO;
-import com.taotao.cloud.sys.api.model.dto.I18nDataDTO;
-import com.taotao.cloud.sys.api.model.query.I18nDataQO;
-import com.taotao.cloud.sys.api.model.vo.I18nDataExcelVO;
-import com.taotao.cloud.sys.api.model.vo.I18nDataPageVO;
-import com.taotao.cloud.sys.biz.model.convert.I18nDataConverter;
-import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;
 import com.taotao.cloud.sys.biz.service.business.I18nDataService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 国际化信息
@@ -34,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/i18n/i18n-data")
 @Tag(name = "国际化信息管理")
-public class I18nDataController {
+public class ManagerI18nDataController {
 
 	private final I18nDataService i18nDataService;
 

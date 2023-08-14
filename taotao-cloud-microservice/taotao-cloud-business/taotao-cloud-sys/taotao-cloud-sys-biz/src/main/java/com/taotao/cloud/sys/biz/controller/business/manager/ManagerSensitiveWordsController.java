@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sys/manager/sensitive/word")
 @Tag(name = "管理端-敏感词管理API", description = "管理端-敏感词管理API")
-public class SensitiveWordsController {
+public class ManagerSensitiveWordsController {
 
     private final ISensitiveWordService sensitiveWordService;
 

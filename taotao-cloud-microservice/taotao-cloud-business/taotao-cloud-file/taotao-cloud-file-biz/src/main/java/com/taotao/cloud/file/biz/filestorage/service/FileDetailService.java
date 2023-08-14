@@ -29,28 +29,34 @@ import org.dromara.hutool.core.map.Dict;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Service;
 
-/** 用来将文件上传记录保存到数据库，这里使用了 MyBatis-Plus 和 Hutool 工具类 */
+/**
+ * 用来将文件上传记录保存到数据库，这里使用了 MyBatis-Plus 和 Hutool 工具类
+ */
 @Service
 public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail> implements FileRecorder {
 
-    /** 保存文件信息到数据库 */
+    /**
+     * 保存文件信息到数据库
+     */
     @SneakyThrows
     @Override
-    public boolean record(FileInfo info) {
-        FileDetail detail = BeanUtil.copyProperties(info, FileDetail.class, "attr");
+    public boolean save(FileInfo fileInfo) {
+        FileDetail detail = BeanUtil.copyProperties(fileInfo, FileDetail.class, "attr");
 
         // 这是手动获 取附加属性字典 并转成 json 字符串，方便存储在数据库中
-        if (info.getAttr() != null) {
-            detail.setAttr(new ObjectMapper().writeValueAsString(info.getAttr()));
+        if (fileInfo.getAttr() != null) {
+            detail.setAttr(new ObjectMapper().writeValueAsString(fileInfo.getAttr()));
         }
         boolean b = save(detail);
         if (b) {
-            info.setId(detail.getId());
+            fileInfo.setId(detail.getId());
         }
         return b;
     }
 
-    /** 根据 url 查询文件信息 */
+    /**
+     * 根据 url 查询文件信息
+     */
     @SneakyThrows
     @Override
     public FileInfo getByUrl(String url) {
@@ -64,7 +70,9 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
         return info;
     }
 
-    /** 根据 url 删除文件信息 */
+    /**
+     * 根据 url 删除文件信息
+     */
     @Override
     public boolean delete(String url) {
         remove(new QueryWrapper<FileDetail>().eq(FileDetail.COL_URL, url));

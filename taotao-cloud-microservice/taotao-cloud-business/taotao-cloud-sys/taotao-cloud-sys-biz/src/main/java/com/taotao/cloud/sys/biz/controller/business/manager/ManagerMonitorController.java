@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/monitor")
 @RequiredArgsConstructor
-public class MonitorController {
+public class ManagerMonitorController {
 
 	@NonNull
 	private MonitorApplicationService monitorApplicationService;

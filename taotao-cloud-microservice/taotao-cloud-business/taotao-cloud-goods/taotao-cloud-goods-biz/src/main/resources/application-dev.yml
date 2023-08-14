@@ -1164,6 +1164,7 @@ logging:
     org.elasticsearch.client: debug
 
 springdoc:
+  default-flat-param-object: true
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
     - com.taotao.cloud.captcha.controller

@@ -968,6 +968,7 @@ taotao:
           /*/health/**,
           /health/**,
           /sys/**,
+          /file/**,
           /job/**,
       api:
         prefix: /api

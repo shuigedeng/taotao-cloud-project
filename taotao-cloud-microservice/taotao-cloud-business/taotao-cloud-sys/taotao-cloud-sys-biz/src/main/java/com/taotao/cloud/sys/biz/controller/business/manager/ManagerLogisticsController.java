@@ -24,6 +24,7 @@ import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -50,12 +51,10 @@ public class ManagerLogisticsController {
 
     private final ILogisticsService logisticsService;
 
-    @Operation(
-            summary = "根据id查询物流公司信息",
-            description = "根据id查询物流公司信息",
-            parameters = {
-                    @Parameter(name = "id", description = "物流公司id", required = true, example = "1111", in = ParameterIn.PATH)
-            })
+    @Operation(summary = "根据id查询物流公司信息", description = "根据id查询物流公司信息")
+    @Parameters({
+            @Parameter(name = "id", description = "物流公司id", required = true, example = "1111", in = ParameterIn.PATH)
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('express:company:info:id')")
     @GetMapping("/info/id/{id:[0-9]*}")
