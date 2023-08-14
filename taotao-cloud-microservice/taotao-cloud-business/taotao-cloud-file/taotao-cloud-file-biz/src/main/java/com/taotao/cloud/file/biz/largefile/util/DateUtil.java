@@ -627,9 +627,8 @@ public class DateUtil {
         Calendar c = Calendar.getInstance();
         c.setFirstDayOfWeek(firstDayOfWeek);
         c.setTime(date);
-        int weekOfYear = (int) Math.ceil(
+        return (int) Math.ceil(
                 (c.get(Calendar.DAY_OF_YEAR) + wholeDayOfWeek - getDayOfWeek(c.getTime())) / (double) wholeDayOfWeek);
-        return weekOfYear;
     }
 
     /**
@@ -653,8 +652,7 @@ public class DateUtil {
         Calendar c = Calendar.getInstance();
         c.setFirstDayOfWeek(firstDayOfWeek);
         c.setTime(date);
-        int whichWeek = c.get(Calendar.WEEK_OF_MONTH);
-        return whichWeek;
+        return c.get(Calendar.WEEK_OF_MONTH);
     }
 
     /**
@@ -713,8 +711,7 @@ public class DateUtil {
         Date date = c.getTime();
         Date startDate = getStartDate(date, DateType.MONTH_WEEK);
         Date endDate = getEndDate(date, DateType.MONTH_WEEK);
-        int days = getIntervalDays(startDate, endDate);
-        return days;
+        return getIntervalDays(startDate, endDate);
     }
 
     /**
@@ -828,13 +825,13 @@ public class DateUtil {
      * @param month
      * @return
      */
-    public static Date getDateBeforeMonth(Date d, int month) {
-        d = getDateFirstDayOfMonth(d.getYear() + 1900, d.getMonth() + 1, null);
-        Calendar now = Calendar.getInstance();
-        now.setTime(d);
-        now.set(Calendar.MONTH, now.get(Calendar.MONTH) - month);
-        return now.getTime();
-    }
+//    public static Date getDateBeforeMonth(Date d, int month) {
+//        d = getDateFirstDayOfMonth(d.getYear() + 1900, d.getMonth() + 1, null);
+//        Calendar now = Calendar.getInstance();
+//        now.setTime(d);
+//        now.set(Calendar.MONTH, now.get(Calendar.MONTH) - month);
+//        return now.getTime();
+//    }
 
     /**
      * 得到几个月后的时间
@@ -843,13 +840,13 @@ public class DateUtil {
      * @param month
      * @return
      */
-    public static Date getDateAfterMonth(Date d, int month) {
-        d = getDateFirstDayOfMonth(d.getYear() + 1900, d.getMonth() + 1, null);
-        Calendar now = Calendar.getInstance();
-        now.setTime(d);
-        now.set(Calendar.MONTH, now.get(Calendar.MONTH) + month);
-        return now.getTime();
-    }
+//    public static Date getDateAfterMonth(Date d, int month) {
+//        d = getDateFirstDayOfMonth(d.getYear() + 1900, d.getMonth() + 1, null);
+//        Calendar now = Calendar.getInstance();
+//        now.setTime(d);
+//        now.set(Calendar.MONTH, now.get(Calendar.MONTH) + month);
+//        return now.getTime();
+//    }
 
     public static String getFirstDayOfMonth(int year, int month, SimpleDateFormat sd) {
         if (sd == null) {
@@ -881,8 +878,7 @@ public class DateUtil {
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        Date date = calendar.getTime();
-        return date;
+        return calendar.getTime();
     }
 
     public static Date getFirstDayOfMonth(int year, int month) {
@@ -937,8 +933,7 @@ public class DateUtil {
         calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - past);
         Date day = calendar.getTime();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String startTime = format.format(day);
-        return startTime;
+        return format.format(day);
     }
 
     /**
@@ -949,7 +944,6 @@ public class DateUtil {
      * @return
      */
     public static String getMaxPastDateStr(int past, String customDate) {
-        String endTime = getPastDateStr(past, customDate) + " 23:59:59";
-        return endTime;
+        return getPastDateStr(past, customDate) + " 23:59:59";
     }
 }

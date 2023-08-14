@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/app")
 @RequiredArgsConstructor
-public class AppController {
+public class ManagerAppController {
 
     private final AppService appService;
 

@@ -86,39 +86,39 @@ archivesBaseName = 'taotao-cloud-gateway'
 //    api "org.springframework.boot:spring-boot-starter-actuator"
 //
 //    //https://search.maven.org/artifact/org.apache.shenyu/shenyu-spring-boot-starter-gateway
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-gateway:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-instance:2.5.1"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-gateway:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-instance:2.6.0"
 //
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-param-mapping:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-waf:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-ratelimiter:2.5.1"
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-hystrix:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-resilience4j:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sentinel:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-redirect:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-rewrite:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-request:2.5.1"
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sign:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-oauth2:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-jwt:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-modify-response:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cryptor:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-general-context:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-websocket:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-metrics:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cache:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-grpc:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-springcloud:2.5.1"
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-mock:2.5.1"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-param-mapping:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-waf:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-ratelimiter:2.6.0"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-hystrix:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-resilience4j:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sentinel:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-redirect:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-rewrite:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-request:2.6.0"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sign:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-oauth2:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-jwt:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-modify-response:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cryptor:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-general-context:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-websocket:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-metrics:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-cache:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-grpc:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-springcloud:2.6.0"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-mock:2.6.0"
 //
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-apache-dubbo:2.5.1"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-apache-dubbo:2.6.0"
 //    api "org.apache.dubbo:dubbo:3.2.0"
 //
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-tars:2.5.1"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-tars:2.6.0"
 //    //api "com.tencent.tars:tars-client:1.7.2"
 //
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sofa:2.5.1"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-sofa:2.6.0"
 //    //api("com.alipay.sofa:sofa-rpc-all:5.7.6") {
 //    //    exclude group: "net.jcip", module: "jcip-annotations"
 //    //}
@@ -131,7 +131,7 @@ archivesBaseName = 'taotao-cloud-gateway'
 //    //    exclude group: "org.springframework.cloud", module: "spring-cloud-starter-loadbalancer"
 //    //}
 //
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-motan:2.5.1"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-motan:2.6.0"
 //    //api "com.weibo:motan-core:${motan.version}"
 //    //api "com.weibo:motan-transport-netty4:${motan.version}"
 //    //api("com.weibo:motan-registry-zookeeper:${motan.version}") {
@@ -140,17 +140,17 @@ archivesBaseName = 'taotao-cloud-gateway'
 //    //}
 //    //api "com.weibo:motan-springsupport:${motan.version}"
 //
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-rocketmq:2.5.1"
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-kafka:2.5.1"
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-elasticsearch:2.5.1"
-//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-aliyun-sls:2.5.1"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-rocketmq:2.6.0"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-kafka:2.6.0"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-elasticsearch:2.6.0"
+//    //api "org.apache.shenyu:shenyu-spring-boot-starter-plugin-logging-aliyun-sls:2.6.0"
 //
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-zookeeper:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-websocket:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-http:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-nacos:2.5.1"
-//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-consul:2.5.1"
-//    api("org.apache.shenyu:shenyu-spring-boot-starter-sync-data-etcd:2.5.1") {
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-zookeeper:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-websocket:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-http:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-nacos:2.6.0"
+//    api "org.apache.shenyu:shenyu-spring-boot-starter-sync-data-consul:2.6.0"
+//    api("org.apache.shenyu:shenyu-spring-boot-starter-sync-data-etcd:2.6.0") {
 //        exclude group: "io.grpc", module: "grpc-grpclb"
 //        exclude group: "io.grpc", module: "grpc-netty"
 //    }

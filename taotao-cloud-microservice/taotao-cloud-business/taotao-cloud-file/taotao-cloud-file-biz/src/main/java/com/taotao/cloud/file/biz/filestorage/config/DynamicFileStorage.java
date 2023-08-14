@@ -25,19 +25,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class DynamicFileStorage {
 
-    @Autowired
-    private List<LocalFileStorage> list;
+//    @Autowired
+//    private List<LocalFileStorage> list;
+//
+//    public void add() {
+//        // TODO 读取数据库配置
+//        LocalFileStorage localFileStorage = new LocalFileStorage();
+//        localFileStorage.setPlatform("my-local-1"); // 平台名称
+//        localFileStorage.setBasePath("");
+//        localFileStorage.setDomain("");
+//        list.add(localFileStorage);
+//    }
 
-    public void add() {
-        // TODO 读取数据库配置
-        LocalFileStorage localFileStorage = new LocalFileStorage();
-        localFileStorage.setPlatform("my-local-1"); // 平台名称
-        localFileStorage.setBasePath("");
-        localFileStorage.setDomain("");
-        list.add(localFileStorage);
-    }
-
-    public void remove(String platform) {
-        for (LocalFileStorage localFileStorage : list) {}
-    }
+//    public void remove(String platform) {
+//        for (LocalFileStorage localFileStorage : list) {}
+//    }
 }

@@ -29,6 +29,7 @@ import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -56,11 +57,10 @@ import java.util.Set;
 public class ManagerRoleController
         extends BaseSuperController<IRoleService, Role, Long, BaseQuery, RoleSaveDTO, RoleUpdateDTO, RoleQueryVO> {
 
-    @Operation(summary = "根据用户id获取角色列表",
-            description = "根据用户id获取角色列表",
-            parameters = {
-                    @Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH)
-            })
+    @Operation(summary = "根据用户id获取角色列表", description = "根据用户id获取角色列表")
+    @Parameters({
+            @Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH)
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:role:info:userId')")
     @GetMapping("/userId/{userId}")
@@ -70,30 +70,23 @@ public class ManagerRoleController
         return success(result);
     }
 
-    @Operation(summary = "根据用户id列表获取角色列表",
-            description = "后台页面-用户信息页面-根据用户id列表获取角色列表",
-            parameters = {
-                    @Parameter(name = "userIds", description = "用户id列表", required = true, example = "1,2,3")
-            })
+    @Operation(summary = "根据用户id列表获取角色列表", description = "后台页面-用户信息页面-根据用户id列表获取角色列表")
+    @Parameters({
+            @Parameter(name = "userIds", description = "用户id列表", required = true, example = "1,2,3")
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:role:info:userIds')")
     @GetMapping("/userId")
-    public Result<List<RoleQueryVO>> findRoleByUserIds(@NotEmpty(message = "用户id列表不能为空") @RequestParam Set<Long> userIds) {
+    public Result<List<RoleQueryVO>> findRoleByUserIds(@NotEmpty(message = "用户id列表不能为空") @RequestParam("userIds") Set<Long> userIds) {
         List<RoleBO> roles = service().findRoleByUserIds(userIds);
         List<RoleQueryVO> result = RoleConvert.INSTANCE.convertListVO(roles);
         return success(result);
     }
 
-    @Operation(summary = "根据角色id更新菜单信息(角色分配菜单)",
-            description = "后台页面-用户信息页面-根据角色id更新菜单信息(角色分配菜单)",
-            parameters = {
-                    @Parameter(name = "roleId", description = "角色id", required = true, example = "1", in = ParameterIn.PATH),
-            },
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "菜单id列表",
-                    required = true,
-                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Set.class))}
-            ))
+    @Operation(summary = "根据角色id更新菜单信息(角色分配菜单)", description = "后台页面-用户信息页面-根据角色id更新菜单信息(角色分配菜单)")
+    @Parameters({
+            @Parameter(name = "roleId", description = "角色id", required = true, example = "1", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:role:menu')")
     @PutMapping("/resources/{roleId}")

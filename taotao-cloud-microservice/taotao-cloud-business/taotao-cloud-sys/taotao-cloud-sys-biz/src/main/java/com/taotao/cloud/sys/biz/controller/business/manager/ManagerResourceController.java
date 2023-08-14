@@ -36,6 +36,7 @@ import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,25 +70,23 @@ public class ManagerResourceController
 
     // ************************************************菜单*************************************************************
 
-    @Operation(summary = "根据角色id获取菜单列表",
-            description = "后台页面-用户信息页面-根据角色id获取菜单列表",
-            parameters = {
-                    @Parameter(name = "roleId", description = "角色id", required = true, example = "1", in = ParameterIn.PATH)
-            })
+    @Operation(summary = "根据角色id获取菜单列表", description = "后台页面-用户信息页面-根据角色id获取菜单列表")
+    @Parameters({
+            @Parameter(name = "roleId", description = "角色id", required = true, example = "1", in = ParameterIn.PATH)
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleId')")
     @SentinelResource(value = "findResourceByRoleId", blockHandler = "findResourceByRoleIdException")
     @GetMapping("/roleId/{roleId}")
-    public Result<List<MenuQueryVO>> getResourceByRoleId(@NotNull(message = "角色id不能为空") @PathVariable(value = "roleId") Long roleId) {
+    public Result<List<MenuQueryVO>> getResourceByRoleId(@NotNull(message = "角色id不能为空") @PathVariable Long roleId) {
         List<MenuBO> bos = service().findMenuByRoleIds(Set.of(roleId));
         return success(ResourceConvert.INSTANCE.convertListVO(bos));
     }
 
-    @Operation(summary = "根据角色id列表获取角色列表",
-            description = "后台页面-用户信息页面-根据角色id列表获取角色列表",
-            parameters = {
-                    @Parameter(name = "roleIds", description = "角色id列表", required = true, example = "1,2,3")
-            })
+    @Operation(summary = "根据角色id列表获取角色列表", description = "后台页面-用户信息页面-根据角色id列表获取角色列表")
+    @Parameters({
+            @Parameter(name = "roleIds", description = "角色id列表", required = true, example = "1,2,3")
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:roleIds')")
     @GetMapping("/roleIds")
@@ -96,11 +95,10 @@ public class ManagerResourceController
         return Result.success(ResourceConvert.INSTANCE.convertListVO(resources));
     }
 
-    @Operation(summary = "根据角色code获取菜单列表",
-            description = "后台页面-用户信息页面-根据角色code获取菜单列表",
-            parameters = {
-                    @Parameter(name = "code", description = "角色code", required = true, example = "1", in = ParameterIn.PATH)
-            })
+    @Operation(summary = "根据角色code获取菜单列表", description = "后台页面-用户信息页面-根据角色code获取菜单列表")
+    @Parameters({
+            @Parameter(name = "code", description = "角色code", required = true, example = "1", in = ParameterIn.PATH)
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:code')")
     @GetMapping("/code/{code}")
@@ -109,11 +107,10 @@ public class ManagerResourceController
         return Result.success(ResourceConvert.INSTANCE.convertListVO(resources));
     }
 
-    @Operation(summary = "根据角色code列表获取角色列表",
-            description = "后台页面-用户信息页面-根据角色code列表获取角色列表",
-            parameters = {
-                    @Parameter(name = "codes", description = "角色cde列表", required = true, example = "1,2,3")
-            })
+    @Operation(summary = "根据角色code列表获取角色列表", description = "后台页面-用户信息页面-根据角色code列表获取角色列表")
+    @Parameters({
+            @Parameter(name = "codes", description = "角色cde列表", required = true, example = "1,2,3")
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:codes')")
     @GetMapping("/codes")
@@ -149,11 +146,10 @@ public class ManagerResourceController
         return findResourceByCodes(roleCodes);
     }
 
-    @Operation(summary = "获取当前用户树形菜单列表",
-            description = "后台页面-用户信息页面-获取当前用户树形菜单列表",
-            parameters = {
-                    @Parameter(name = "parentId", description = "父id", required = false, example = "1")
-            })
+    @Operation(summary = "获取当前用户树形菜单列表", description = "后台页面-用户信息页面-获取当前用户树形菜单列表")
+    @Parameters({
+            @Parameter(name = "parentId", description = "父id", required = false, example = "1")
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:current:user:tree')")
     @GetMapping("/current/user/tree")
@@ -170,12 +166,11 @@ public class ManagerResourceController
         return Result.success(trees);
     }
 
-    @Operation(summary = "获取树形菜单集合",
-            description = "获取树形菜单集合 1.false-非懒加载，查询全部 " + "2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0",
-            parameters = {
-                    @Parameter(name = "lazy", description = "是否是延迟查询", required = false, example = "true,false"),
-                    @Parameter(name = "parentId", description = "父id", required = false, example = "1")
-            })
+    @Operation(summary = "获取树形菜单集合", description = "获取树形菜单集合 1.false-非懒加载，查询全部 " + "2.true-懒加载，根据parentId查询 2.1 父节点为空，则查询parentId=0")
+    @Parameters({
+            @Parameter(name = "lazy", description = "是否是延迟查询", required = false, example = "true,false"),
+            @Parameter(name = "parentId", description = "父id", required = false, example = "1")
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('sys:resource:info:tree')")
     @GetMapping("/tree")

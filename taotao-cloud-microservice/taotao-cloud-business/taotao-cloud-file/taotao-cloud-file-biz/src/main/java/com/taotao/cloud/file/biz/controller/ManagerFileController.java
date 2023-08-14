@@ -55,7 +55,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/xxxx")
+@RequestMapping("/file/manager")
 @Tag(name = "文件管理API", description = "文件管理API")
 public class ManagerFileController {
 

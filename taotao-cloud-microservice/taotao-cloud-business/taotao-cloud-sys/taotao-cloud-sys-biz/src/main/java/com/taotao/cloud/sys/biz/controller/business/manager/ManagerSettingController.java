@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "工具管理端-配置管理API", description = "工具管理端-配置管理API")
 @RequestMapping("/sys/tools/setting")
-public class SettingController {
+public class ManagerSettingController {
 
     private final ISettingService settingService;
 
