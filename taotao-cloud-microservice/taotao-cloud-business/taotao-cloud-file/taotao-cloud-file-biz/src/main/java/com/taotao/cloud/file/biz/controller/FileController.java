@@ -17,9 +17,11 @@
 package com.taotao.cloud.file.biz.controller;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
@@ -32,9 +34,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.slf4j.MDC;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -43,6 +47,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -207,15 +212,18 @@ public class FileController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             responses = {@ApiResponse(description = "application", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
     @PostMapping("/application")
-    public String hello(@RequestBody Student student) {
+    public String hello(@RequestBody Student student, HttpServletRequest httpServletRequest) {
 
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
+//		try {
+//			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			throw new RuntimeException(e);
+//		}
+        Map<String, String> allRequestHeaders = RequestUtils.getAllRequestHeaders(httpServletRequest);
+        Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
 
-		LogUtils.info("请求参数： student对象：{}", student);
+        MDC.put(CommonConstant.TAOTAO_CLOUD_TRACE_ID, "aaaaaaaaaa");
+        LogUtils.info("请求参数： student对象：{}", student);
         return "success" + student.getBirthDay();
     }
 

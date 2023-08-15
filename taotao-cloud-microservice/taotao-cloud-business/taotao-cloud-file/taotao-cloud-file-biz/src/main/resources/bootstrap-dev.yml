@@ -3,7 +3,7 @@ server:
   http2:
     enabled: true
   undertow:
-    buffer-size: 2048
+    buffer-size: 4096
     direct-buffers: true
 
 spring:

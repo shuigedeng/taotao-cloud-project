@@ -4,10 +4,10 @@ server:
   http2:
     enabled: true
   undertow:
-    buffer-size: 2048
+    buffer-size: 4096
     direct-buffers: true
     threads:
-      io: 16
+      io: 32
       worker: 256
     accesslog:
       dir: ${user.home}/logs/${spring.application.name}/undertow
@@ -607,6 +607,12 @@ spring:
       #  enabled: true
       enabled: true
 
+art:
+  xss:
+    enable: false
+    ignore-urls:
+      - /file/common/application
+
 taotao:
   cloud:
     sensitive:
@@ -624,7 +630,9 @@ taotao:
     retry:
       enabled: true
     xss:
-      enabled: true
+      enabled: false
+      ignore-paths:
+        - /file/common/application
     sign:
       enabled: true
     web:
