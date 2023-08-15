@@ -23,26 +23,37 @@ LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
 
+#****************************app****************************
 ENV TZ=Asia/Shanghai
-#app
 ENV APP_NAME=${APP_NAME}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ENV APP_PRROFILES=${APP_PRROFILES}
-#skywalking
-ENV SKYWALKING_BACKEND_SERVICE=${SKYWALKING_BACKEND_SERVICE}
-ENV SKYWALKING_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
-# pyroscope 从env中获取配置数据
+
+#****************************skywalking 从env中获取配置数据****************************
+ENV SW_AGENT_NAME=${APP_NAME}
+ENV SW_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
+ENV SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_BACKEND_SERVICE}
+ENV SW_AGENT_TRACE_IGNORE_PATH="Redisson/PING,/actuator/**,/admin/**"
+#日志数据的grpc服务器的主机
+ENV SW_GRPC_LOG_SERVER_HOST=192.168.10.220
+#日志数据的grpc服务器的端口
+ENV SW_GRPC_LOG_SERVER_PORT=11800
+#日志数据的最大大小
+ENV SW_GRPC_LOG_MAX_MESSAGE_SIZE=10485760
+#发送数据时将超时多长时间。单位是秒
+ENV SW_GRPC_LOG_GRPC_UPSTREAM_TIMEOUT=30
+ENV SW_LOGGING_LEVEL=INFO
+ENV SW_LOGGING_FILE_NAME=skywalking.log
+ENV SW_LOGGING_DIR=/root/logs/${APP_NAME}
+#****************************pyroscope 从env中获取配置数据****************************
 ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
 ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.10.220:4040
 ENV PYROSCOPE_PROFILING_INTERVAL=10ms
-ENV PYROSCOPE_FORMAT=jfr
 ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
-ENV PYROSCOPE_PROFILER_ALLOC=0
-ENV PYROSCOPE_PROFILER_LOCK=0
 ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
-ENV PYROSCOPE_LOG_FILE_PATH=/root/logs/pyrosope.log
+ENV PYROSCOPE_LABELS="APP=taotao-cloud-monitor"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
@@ -98,13 +109,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${APP_PRROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
-                  -Dskywalking.agent.service_name=${APP_NAME} \
-                  -Dskywalking.agent.authentication=${SKYWALKING_AGENT_AUTHENTICATION} \
-                  -Dskywalking.logging.file_name=skywalking.log \
-                  -Dskywalking.logging.level=INFO \
-                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
-                  -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
+                  -javaagent:/skywalking/agent/skywalking-agent.jar "
 
 USER root
 
