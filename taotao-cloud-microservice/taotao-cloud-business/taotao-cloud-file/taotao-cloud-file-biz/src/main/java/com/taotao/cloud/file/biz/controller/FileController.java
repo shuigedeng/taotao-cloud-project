@@ -208,7 +208,14 @@ public class FileController {
             responses = {@ApiResponse(description = "application", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
     @PostMapping("/application")
     public String hello(@RequestBody Student student) {
-        LogUtils.info("请求参数： student对象：{}", student);
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+
+		LogUtils.info("请求参数： student对象：{}", student);
         return "success" + student.getBirthDay();
     }
 
