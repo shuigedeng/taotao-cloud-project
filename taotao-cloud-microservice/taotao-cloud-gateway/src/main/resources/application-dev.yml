@@ -8,6 +8,8 @@ server:
     key-store: classpath:cert/SHA256withRSA_taotaocloud.top.jks
     key-store-type: JKS
     key-store-password: 1234
+  netty:
+    connection-timeout: 180000
 
 
 arthas:
@@ -645,6 +647,9 @@ spring:
           uri: lb://taotao-cloud-sys
           metadata:
             name: 系统管理中心
+            #每条路由超时
+            response-timeout: 200
+            connect-timeout: 200
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
           filters:
@@ -879,6 +884,9 @@ spring:
       #                redis-rate-limiter.burstCapacity: 5
       default-filters:
         - AddRequestHeader=X-Request-taotao-cloud, ${taotaoCloudVersion}
+      httpclient:
+        response-timeout: 5s
+        connect-timeout: 30000
 
 taotao:
   cloud:
