@@ -6,7 +6,7 @@ on:
   push:
     paths:
       - 'taotao-cloud-microservice/**'
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
     branches: [ master ]
 
@@ -214,6 +214,26 @@ jobs:
           buildoptions: "--compress --force-rm"
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-job/taotao-cloud-job-biz
+
+      - name: Gradle BootJar taotao-cloud-file
+        uses: gradle/gradle-build-action@v2
+        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-file') }}
+        with:
+          gradle-version: 8.2
+          arguments: clean bootJar -x test
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-file/taotao-cloud-file-biz
+
+      - name: Publish Docker Image taotao-cloud-file
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-file') }}
+        with:
+          name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-file
+          username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+          password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          buildoptions: "--compress --force-rm"
+          tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+          workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-file/taotao-cloud-file-biz
 
       #- name: login to registry
       #  uses: docker/login-action@v1
