@@ -18,11 +18,16 @@ package com.taotao.cloud.auth.biz.jpa.service;
 
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.repository.HerodotusAuthorizationConsentRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>Description: HerodotusAuthorizationConsentService </p>
@@ -96,5 +101,10 @@ public class HerodotusAuthorizationConsentService {
      */
     public void save(HerodotusAuthorizationConsent entity) {
         authorizationConsentRepository.save(entity);
+    }
+
+    public Page<HerodotusAuthorizationConsent> myPageQuery(String registeredClientId,
+                                                           String principalName){
+        return authorizationConsentRepository.myPageQuery(registeredClientId, principalName, PageRequest.of(0, 20));
     }
 }

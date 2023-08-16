@@ -19,6 +19,7 @@ package com.taotao.cloud.auth.biz;
 import com.taotao.cloud.cache.redis.configuration.RedisDelayQueueAutoConfiguration;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.cloud.data.jpa.extend.JpaExtendRepositoryFactoryBean;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -70,15 +71,15 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableEnversRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"})
 @EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity", "com.taotao.cloud.auth.biz.management.entity"})
 @EnableJpaRepositories(
-        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"}, repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
+        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"},
+	repositoryFactoryBeanClass = JpaExtendRepositoryFactoryBean.class)
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
 @EnableDiscoveryClient
-//todo 需要修改
-@SpringBootApplication(exclude = RedisDelayQueueAutoConfiguration.class)
 @ConfigurationPropertiesScan
 @EnableSecurityConfiguration
 @EnableRedisIndexedHttpSession
+@SpringBootApplication
 public class TaoTaoCloudAuthApplication {
 
     public static void main(String[] args) {
