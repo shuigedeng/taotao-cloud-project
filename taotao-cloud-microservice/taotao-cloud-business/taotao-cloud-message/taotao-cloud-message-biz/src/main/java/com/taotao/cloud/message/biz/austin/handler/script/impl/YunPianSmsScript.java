@@ -39,9 +39,10 @@ public class YunPianSmsScript implements SmsScript {
     @Autowired
     private AccountUtils accountUtils;
 
-    private  static final String PARAMS_SPLIT_KEY = "{|}";
+    private static final String PARAMS_SPLIT_KEY = "{|}";
 
-    private  static final String PARAMS_KV_SPLIT_KEY = "{:}";
+    private static final String PARAMS_KV_SPLIT_KEY = "{:}";
+
     @Override
     public List<SmsRecord> send(SmsParam smsParam) {
 

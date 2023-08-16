@@ -16,6 +16,9 @@
 
 package com.taotao.cloud.file.biz.controller;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.spi.LogbackServiceProvider;
+import ch.qos.logback.classic.util.LogbackMDCAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageResult;
@@ -38,13 +41,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.slf4j.MDC;
+import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.reflect.method.MethodUtil;
+import org.slf4j.*;
+import org.slf4j.spi.MDCAdapter;
+import org.slf4j.spi.SLF4JServiceProvider;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +77,7 @@ public class FileController {
 
     // @Autowired
     // private Cache cache;
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @NotAuth
     @Operation(summary = "文件上传", description = "文件上传",
@@ -212,19 +221,25 @@ public class FileController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             responses = {@ApiResponse(description = "application", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
     @PostMapping("/application")
-    public String hello(@RequestBody Student student, HttpServletRequest httpServletRequest) {
+    public Result<String> hello(@RequestBody Student student, HttpServletRequest httpServletRequest) {
 
-//		try {
-//			Thread.sleep(10000);
-//		} catch (InterruptedException e) {
-//			throw new RuntimeException(e);
-//		}
         Map<String, String> allRequestHeaders = RequestUtils.getAllRequestHeaders(httpServletRequest);
         Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
 
         MDC.put(CommonConstant.TAOTAO_CLOUD_TRACE_ID, "aaaaaaaaaa");
+
+        ILoggerFactory iLoggerFactory = LoggerFactory.getILoggerFactory();
+        if(iLoggerFactory instanceof LoggerContext loggerContext){
+            LogbackMDCAdapter mdcAdapter = loggerContext.getMDCAdapter();
+            Map copyOfContextMap1 = mdcAdapter.getCopyOfContextMap();
+            System.out.println("sdfasfd");
+        }
+
+
+        logger.info("当前线程logloglogloglog : {}",Thread.currentThread().getName());
+        LogUtils.info("当前线程 : {}",Thread.currentThread().getName());
         LogUtils.info("请求参数： student对象：{}", student);
-        return "success" + student.getBirthDay();
+        return Result.success("success" + student.getBirthDay());
     }
 
 //    @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
