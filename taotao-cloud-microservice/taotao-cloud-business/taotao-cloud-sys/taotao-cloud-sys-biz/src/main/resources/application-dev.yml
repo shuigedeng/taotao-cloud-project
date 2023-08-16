@@ -971,6 +971,9 @@ spring:
     alwaysUseMessageFormat: false       # 是否始终应用MessageFormat规则，甚至不带参数地解析消息，默认false
     useCodeAsDefaultMessage: false  #找不到对应的区域的语言（包括回退）时，直接返回 code 值，否则抛出异常, 默认flase
 
+art:
+  xss:
+    enable: false
 taotao:
   cloud:
     dinger:

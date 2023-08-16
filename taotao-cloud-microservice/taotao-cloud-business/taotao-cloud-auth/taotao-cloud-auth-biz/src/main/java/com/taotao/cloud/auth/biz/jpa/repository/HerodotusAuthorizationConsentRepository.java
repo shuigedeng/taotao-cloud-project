@@ -19,10 +19,16 @@ package com.taotao.cloud.auth.biz.jpa.repository;
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.generator.HerodotusAuthorizationConsentId;
 import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
+import com.taotao.cloud.data.jpa.extend.MyQuery;
 import jakarta.persistence.QueryHint;
+
+import java.util.List;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * <p>Description: HerodotusAuthorizationConsentRepository </p>
@@ -54,4 +60,14 @@ public interface HerodotusAuthorizationConsentRepository
      * @since 2023-07-10 17:11:17
      */
     void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName);
+
+    @MyQuery(value = """
+            select h
+            from HerodotusAuthorizationConsent h
+            where ?{ registeredClientId = :registeredClientId }
+            ?{ and principalName = :principalName }
+            """)
+    Page<HerodotusAuthorizationConsent> myPageQuery(@RequestParam("registeredClientId") String registeredClientId,
+                                                    @RequestParam("principalName") String principalName,
+                                                    PageRequest pageRequest);
 }
