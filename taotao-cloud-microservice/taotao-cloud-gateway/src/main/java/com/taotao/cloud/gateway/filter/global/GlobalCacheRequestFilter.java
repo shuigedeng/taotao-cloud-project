@@ -26,7 +26,9 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * 全局缓存获取body请求数据（解决流不能重复读取问题）
+ * 第二执行 全局缓存获取body请求数据 第二执行
+ * <p>
+ * （解决流不能重复读取问题）
  */
 @Component
 public class GlobalCacheRequestFilter implements GlobalFilter, Ordered {
@@ -48,6 +50,6 @@ public class GlobalCacheRequestFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE + 1;
+        return Ordered.HIGHEST_PRECEDENCE + 2;
     }
 }

@@ -27,7 +27,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.Objects;
 
-@Configuration
+//@Component
 @Slf4j
 public class ResponseEncryptFilter implements GlobalFilter, Ordered {
 

@@ -16,18 +16,14 @@
 
 package com.taotao.cloud.file.biz.controller;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.spi.LogbackServiceProvider;
-import ch.qos.logback.classic.util.LogbackMDCAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
+import com.taotao.cloud.web.annotation.BusinessApi;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -37,25 +33,18 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.dromara.hutool.core.reflect.method.MethodUtil;
-import org.slf4j.*;
-import org.slf4j.spi.MDCAdapter;
-import org.slf4j.spi.SLF4JServiceProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -66,6 +55,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author Chopper
  * @since 2020/11/26 15:41
  */
+@BusinessApi
 @Validated
 @RestController
 @Tag(name = "文件管理接口11111")
@@ -89,27 +79,22 @@ public class FileController {
     })
     @PostMapping(value = "/upload")
     public Result<UploadFileVO> upload(@NotNull(message = "类型不能为空") @RequestParam("type") Integer type,
-									   @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
+                                       @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
         return Result.success(fileService.uploadFile(String.valueOf(type), file));
     }
 
     @NotAuth
-    @Operation(summary = "给属性分配权限", description = "给属性分配权限，方便权限数据操作",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/x-www-form-urlencoded")),
-            responses = {@ApiResponse(description = "已保存数据", content = @Content(mediaType = "application/json"))})
+    @Operation(summary = "给属性分配权限", description = "给属性分配权限，方便权限数据操作")
     @Parameters({
             @Parameter(name = "attributeId", required = true, description = "attributeId"),
-            @Parameter(name = "permissions", required = true, description = "角色对象组成的数组")
     })
     @PutMapping("/xxxxxx")
     public Result<String> assign(@RequestParam(name = "attributeId") String attributeId,
-                                 @RequestParam(name = "permissions") String[] permissions) {
+                                 @Validated @NotEmpty(message = "权限不能为空") @RequestBody String[] permissions) {
         return Result.success("sdfasdf");
     }
 
-    @Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "后台页面-用户信息页面-根据用户id更新角色信息(用户分配角色)",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
-            responses = {@ApiResponse(description = "更新角色信息是否成功", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
+    @Operation(summary = "根据用户id更新角色信息(用户分配角色)", description = "后台页面-用户信息页面-根据用户id更新角色信息(用户分配角色)")
     @Parameters({
             @Parameter(name = "userId", description = "用户id", required = true, example = "123", in = ParameterIn.PATH),
     })
@@ -122,23 +107,19 @@ public class FileController {
     }
 
     @NotAuth
-    @Operation(summary = "给用户分配角色", description = "给用户分配角色",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/x-www-form-urlencoded")),
-            responses = {@ApiResponse(description = "已分配角色的用户数据", content = @Content(mediaType = "application/json"))})
+    @Operation(summary = "给用户分配角色", description = "给用户分配角色")
     @Parameters({
             @Parameter(name = "userId", required = true, description = "userId"),
             @Parameter(name = "roles", required = true, description = "角色对象组成的数组")
     })
-    @PutMapping("/sss")
+    @GetMapping("/sss")
     public Result<String> assign1111(@RequestParam(name = "userId") String userId,
                                      @RequestParam(name = "roles") List<String> roles) {
         return Result.success("sdfasdf");
     }
 
     @NotAuth
-    @Operation(summary = "helloParam", description = "helloParam",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_FORM_URLENCODED_VALUE)),
-            responses = {@ApiResponse(description = "helloParam", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
+    @Operation(summary = "helloParam", description = "helloParam")
     @Parameters({
             @Parameter(name = "name", required = true, description = "名称"),
             @Parameter(name = "age", required = true, description = "年龄"),
@@ -147,13 +128,13 @@ public class FileController {
             @Parameter(name = "plays2", required = true, description = "plays2玩家")
     })
     @GetMapping(value = "/helloParam")
-    public String hello(@RequestParam("name") String name,
+    public  Result<String> hello(@RequestParam("name") String name,
                         @RequestParam("age") Integer age,
                         @RequestParam("birthDay") @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime birthDay,
                         @RequestParam("plays") String[] plays,
                         @RequestParam("plays2") List<String> plays2) {
         LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, plays = {}, plays2 = {}", name, age, birthDay, plays, plays2);
-        return "success";
+        return Result.success("scesccc");
     }
 
     @NotAuth
@@ -161,9 +142,9 @@ public class FileController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
             responses = {@ApiResponse(description = "helloParam", content = @Content(mediaType = "application/json"))})
     @GetMapping(value = "/helloParam3")
-    public String hello(@Validated Page page) {
+    public  Result<String> hello(@Validated Page page) {
         LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, 分页参数：page = {}", "", "", "", page);
-        return "success";
+        return Result.success("scesccc");
     }
 
     @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
@@ -174,46 +155,26 @@ public class FileController {
         return Result.success(new PageResult<Integer>());
     }
 
-    @Operation(summary = "helloParam2", description = "helloParam2",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_FORM_URLENCODED_VALUE)),
-            responses = {@ApiResponse(description = "helloParam", content = @Content(mediaType = "application/json"))})
+    @Operation(summary = "helloParam2", description = "helloParam2")
     @NotAuth
     @GetMapping(value = "/helloParam2")
-    public String hello(Page page, Student student) {
+    public Result<String> hello(Page page, Student student) {
         LogUtils.info("请求对象参数： student = {}, 分页参数 = {}", student, page);
-        return "success";
-    }
-
-
-    @NotAuth
-    @Operation(summary = "form", description = "form",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
-            responses = {@ApiResponse(description = "form", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
-    @Parameters({
-            @Parameter(name = "name", required = true, description = "name"),
-            @Parameter(name = "age", required = true, description = "age"),
-            @Parameter(name = "birthDay", required = true, description = "birthDay"),
-    })
-    @PostMapping(value = "/form")
-    public String form(String name, Integer age, @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime birthDay) {
-        LogUtils.info("请求参数： name = {}, age = {}, time = {}", name, age, birthDay);
-        return "success";
+        return Result.success("scesccc");
     }
 
     @NotAuth
-    @Operation(summary = "form1", description = "form1",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
-            responses = {@ApiResponse(description = "form", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
-    @PostMapping(value = "/form1")
+    @Operation(summary = "form1", description = "form1")
+    @GetMapping(value = "/form1")
 //    @Parameters({
 //            @Parameter(name = "name", required = true, description = "name"),
 //            @Parameter(name = "age", required = true, description = "age"),
 //            @Parameter(name = "birthDay", required = true, description = "birthDay", schema = @Schema(implementation = LocalDateTime.class)),
 //            @Parameter(name = "plays", required = true, description = "plays"),
 //    })
-    public String form(Student student) {
+    public  Result<String> form(Student student) {
         LogUtils.info("obj请求参数： name = {}, age = {}", student.getName(), student.getAge());
-        return "success";
+        return Result.success("scesccc");
     }
 
     @NotAuth
@@ -221,23 +182,7 @@ public class FileController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = APPLICATION_JSON_VALUE)),
             responses = {@ApiResponse(description = "application", responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))})
     @PostMapping("/application")
-    public Result<String> hello(@RequestBody Student student, HttpServletRequest httpServletRequest) {
-
-        Map<String, String> allRequestHeaders = RequestUtils.getAllRequestHeaders(httpServletRequest);
-        Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
-
-        MDC.put(CommonConstant.TAOTAO_CLOUD_TRACE_ID, "aaaaaaaaaa");
-
-        ILoggerFactory iLoggerFactory = LoggerFactory.getILoggerFactory();
-        if(iLoggerFactory instanceof LoggerContext loggerContext){
-            LogbackMDCAdapter mdcAdapter = loggerContext.getMDCAdapter();
-            Map copyOfContextMap1 = mdcAdapter.getCopyOfContextMap();
-            System.out.println("sdfasfd");
-        }
-
-
-        logger.info("当前线程logloglogloglog : {}",Thread.currentThread().getName());
-        LogUtils.info("当前线程 : {}",Thread.currentThread().getName());
+    public Result<String> hello(@RequestBody Student student) {
         LogUtils.info("请求参数： student对象：{}", student);
         return Result.success("success" + student.getBirthDay());
     }

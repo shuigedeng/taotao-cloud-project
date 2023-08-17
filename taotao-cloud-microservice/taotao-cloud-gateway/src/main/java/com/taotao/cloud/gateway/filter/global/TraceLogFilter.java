@@ -30,7 +30,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * 生成日志链路追踪id
+ * 第四执行 生成日志链路追踪id
  *
  * @author shuigedeng
  * @version 2022.03
@@ -43,7 +43,7 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String traceId = IdGeneratorUtils.getIdStr();
-        TraceUtils.setMdcTraceId(traceId);
+        TraceUtils.setTraceId(traceId);
 
         ServerHttpRequest serverHttpRequest = exchange.getRequest()
                 .mutate()
@@ -56,6 +56,6 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 1;
+        return  Ordered.HIGHEST_PRECEDENCE + 4;
     }
 }

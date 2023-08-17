@@ -938,7 +938,7 @@ taotao:
           data-id:
           group-id:
       filter:
-        blacklist: false
+        blacklist: true
         gray: false
         log: true
         sign: false

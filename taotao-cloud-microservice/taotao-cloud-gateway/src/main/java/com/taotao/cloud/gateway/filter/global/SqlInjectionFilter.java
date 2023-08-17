@@ -45,7 +45,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * SQL 注入拦截过滤器
+ * 第九执行 SQL 注入拦截过滤器
  * <p>
  * 对xss字符集的转换会导致会第三方平台接入的接口出现一些列问题，尤其是需要参数签名验签的接口，因为参数的变化导致验签不成功
  * 对于第三方平台（尤其时强势的第三方），我们往往无法要求第三方按照我们的参数规则传递参数，这类的接口会包含sql注入的关键字 在请求重构过程，可能会改变参数的结构，会导致验签失败
@@ -60,8 +60,7 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
-        LogUtils.debug("Global SQL Injection Filter in use!");
+        LogUtils.info(" SQL 注入拦截过滤器!");
 
         ServerHttpRequest serverHttpRequest = exchange.getRequest();
         HttpMethod method = serverHttpRequest.getMethod();
@@ -204,6 +203,6 @@ public class SqlInjectionFilter implements GlobalFilter, Ordered {
      */
     @Override
     public int getOrder() {
-        return 2;
+        return Ordered.HIGHEST_PRECEDENCE + 9;
     }
 }
