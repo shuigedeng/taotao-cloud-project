@@ -16,6 +16,9 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -148,6 +151,7 @@ public class UserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, Use
 		return true;
 	}
 
+
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean updateUserRoles(Long userId, Set<Long> roleIds) {
@@ -183,4 +187,64 @@ public class UserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, Use
 	//    return true;
 	// }
 
+
+
+
+
+	@Override
+	public User registe(User user) {
+		this.baseMapper.insert(user);
+
+		String phone = this.decrypt(user.getPhone());
+		String phoneKeywords = this.phoneKeywords(phone);
+
+		this.baseMapper.insertPhoneKeyworkds(user.getId(),phoneKeywords);
+		return user;
+	}
+
+	@Override
+	public List<User> getPersonList(String phoneVal) {
+		if (phoneVal != null) {
+			return this.baseMapper.queryByPhoneEncrypt(this.encrypt(phoneVal));
+		}
+//		return this.personDao.queryList(phoneVal);
+		return new ArrayList<>();
+	}
+
+
+	private String phoneKeywords(String phone) {
+		String keywords = this.keywords(phone, 4);
+		System.out.println(keywords.length());
+		return keywords;
+	}
+	//分词组合加密
+	private String keywords(String word, int len) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < word.length(); i++) {
+            int end = i + len;
+			String sub1 = word.substring(i, end);
+			sb.append(this.encrypt(sub1));
+			if (end == word.length()) {
+				break;
+			}
+		}
+		return sb.toString();
+	}
+	public String encrypt(String val) {
+		//这里特别注意一下，对称加密是根据密钥进行加密和解密的，加密和解密的密钥是相同的，一旦泄漏，就无秘密可言，
+		//“fanfu-csdn”就是我自定义的密钥，这里仅作演示使用，实际业务中，这个密钥要以安全的方式存储；
+		byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.DES.getValue(), "fanfu-csdn".getBytes()).getEncoded();
+		SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.DES, key);
+		String encryptValue = aes.encryptBase64(val);
+		return encryptValue;
+	}
+
+	public String decrypt(String val) {
+		//这里特别注意一下，对称加密是根据密钥进行加密和解密的，加密和解密的密钥是相同的，一旦泄漏，就无秘密可言，
+		//“fanfu-csdn”就是我自定义的密钥，这里仅作演示使用，实际业务中，这个密钥要以安全的方式存储；
+		byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.DES.getValue(), "fanfu-csdn".getBytes()).getEncoded();
+		SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.DES, key);
+		String encryptValue = aes.decryptStr(val);
+		return encryptValue;
+	}
 }

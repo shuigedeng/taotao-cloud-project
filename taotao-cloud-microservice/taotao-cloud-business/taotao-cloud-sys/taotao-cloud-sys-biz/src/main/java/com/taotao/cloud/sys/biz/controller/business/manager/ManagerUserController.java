@@ -31,6 +31,7 @@ import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.biz.model.convert.UserConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
+import com.taotao.cloud.third.client.support.retrofit.model.Person;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +39,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
@@ -67,6 +67,22 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Tag(name = "管理端-用户管理API", description = "管理端-用户管理API")
 public class ManagerUserController
         extends BaseSuperController<IUserService, User, Long, BaseQuery, UserSaveDTO, UserUpdateDTO, UserQueryVO> {
+
+    //敏感字段加密、解密、脱敏
+    @PostMapping("/addUser")
+    public User add(@RequestBody User user) {
+        User result = service().registe(user);
+        return result;
+    }
+    //敏感字段模糊查询
+    @GetMapping("/fuzzyQuery")
+    public List<User> getPerson(String phoneVal) {
+        List<User> persons = service().getPersonList(phoneVal);
+        return persons;
+    }
+
+
+
 
     @Operation(summary = "根据手机号码查询用户是否存在", description = "根据手机号码查询用户是否存在")
     @Parameters({

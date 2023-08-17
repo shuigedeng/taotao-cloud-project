@@ -18,7 +18,10 @@ package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
+import com.taotao.cloud.third.client.support.retrofit.model.Person;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -84,4 +87,9 @@ public interface IUserService extends BaseSuperService<User, Long> {
      * @since 2021-10-09 20:49:40
      */
     Boolean existsById(Long id);
+
+    User registe(User user);
+
+    List<User> getPersonList(String phoneVal);
+
 }
