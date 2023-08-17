@@ -129,8 +129,8 @@ spring:
         #  from: 981376577@qq.com
         dingtalk:
           enabled: true
-          secret: xxxx
-          webhook-url: 'https://oapi.dingtalk.com/robot/send?access_token=xxxx'
+          secret: ${DINGDING_SECRET:xxx}
+          webhook-url: "https://oapi.dingtalk.com/robot/send?access_token=${DINGDING_TOKEN_ID:xxxx}"
           message: '服务告警: #{instance.registration.name} #{instance.id} is #{event.statusInfo.status}'
       ui:
         title: taotao cloud admin

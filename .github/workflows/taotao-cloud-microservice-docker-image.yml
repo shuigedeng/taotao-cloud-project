@@ -85,6 +85,9 @@ jobs:
 
       - name: Publish Docker Image taotao-cloud-monitor
         uses: elgohr/Publish-Docker-Github-Action@v4
+        env:
+          DINGDING_TOKEN_ID_ARG: ${{ secrets.DING_TOKEN }}
+          DINGDING_SECRET_ARG: ${{ secrets.DING_SECRET }}
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
         with:
           name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor
@@ -92,6 +95,7 @@ jobs:
           password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
           registry: registry.cn-hangzhou.aliyuncs.com
           buildoptions: "--compress --force-rm"
+          buildargs: DINGDING_SECRET_ARG,DINGDING_TOKEN_ID_ARG
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
 
