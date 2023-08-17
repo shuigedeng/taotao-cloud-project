@@ -363,6 +363,55 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.62
+#
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0
+#    container_name: elasticsearch
+#    restart: always
+#    ports:
+#      - 9200:9200
+#    environment:
+#      - "discovery.type=single-node" #单机模式启动
+#      - "TZ=Asia/Shanghai" # 设置时区
+#      - "bootstrap.memory_lock=true" #锁定物理内存地址，防止es内存被交换出去，也就是避免es使用swap交换分区，频繁的交换，会导致IOPS变高
+#      - "ES_JAVA_OPTS=-Xms1024m -Xmx2048m" # 设置jvm内存大小
+#      - "xpack.security.enabled=false" #禁用SSL加密访问
+#    volumes:
+#      - $PWD/elasticsearch/data:/usr/share/elasticsearch/data
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#  skywalking-oap-server:
+#    image: apache/skywalking-oap-server:9.4.0
+#    container_name: skywalking-oap-server
+#    depends_on:
+#      - elasticsearch
+#    links:
+#      - elasticsearch
+#    restart: always
+#    ports:
+#      - 11800:11800
+#      - 12800:12800
+#    environment:
+#      SW_CORE_RECORD_DATA_TTL: 7 #记录数据的有效期，单位天
+#      SW_CORE_METRICS_DATA_TTL: 7 #分析指标数据的有效期，单位天
+#      SW_STORAGE: elasticsearch  #指定存储为es，此参数可以传到skywalking中的配置
+#      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200 #指定es服务端口
+#      TZ: Asia/Shanghai
+#  skywalking-ui:
+#    image: apache/skywalking-ui:9.4.0
+#    container_name: skywalking-ui
+#    depends_on:
+#      - skywalking-oap-server
+#    links:
+#      - skywalking-oap-server
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    environment:
+#      SW_OAP_ADDRESS: http://skywalking-oap-server:12800
+#      TZ: Asia/Shanghai
 
   rabbitmq:
     image: rabbitmq:3.12.2-management

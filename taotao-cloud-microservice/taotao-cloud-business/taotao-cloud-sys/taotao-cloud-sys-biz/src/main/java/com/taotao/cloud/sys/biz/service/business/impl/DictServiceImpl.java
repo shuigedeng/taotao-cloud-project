@@ -28,6 +28,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.RandomUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.MdcUtils;
 import com.taotao.cloud.data.jpa.model.SelectBooleanBuilder;
 import com.taotao.cloud.data.jpa.model.SelectBuilder;
 import com.taotao.cloud.sys.api.model.page.DictPageQuery;
@@ -45,7 +46,6 @@ import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import org.slf4j.MDC;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
@@ -171,7 +171,7 @@ public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, Dic
 			.description("asyncsdflasjdfl")
 			.build();
 
-		Map<String, String> copyOfContextMap = MDC.getCopyOfContextMap();
+		Map<String, String> copyOfContextMap = MdcUtils.getCopyOfContextMap();
 
 		LogUtils.info("findAsyncByCode: {}", result);
 

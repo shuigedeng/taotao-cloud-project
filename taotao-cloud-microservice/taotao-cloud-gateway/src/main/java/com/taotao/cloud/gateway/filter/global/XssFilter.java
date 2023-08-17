@@ -18,6 +18,7 @@ package com.taotao.cloud.gateway.filter.global;
 
 import static com.taotao.cloud.gateway.utils.WebFluxUtils.isJsonRequest;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;
@@ -47,18 +48,19 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * 跨站脚本过滤器
+ * 第三执行 跨站脚本过滤器
  */
 @Component
-@ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
+//@ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
 public class XssFilter implements GlobalFilter, Ordered {
 
-    // 跨站脚本的 xss 配置，nacos自行添加
     @Autowired
     private XssProperties xss;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        LogUtils.info(" xss跨站脚本过滤器!");
+
         ServerHttpRequest request = exchange.getRequest();
         // GET DELETE 不过滤
         HttpMethod method = request.getMethod();
@@ -82,7 +84,7 @@ public class XssFilter implements GlobalFilter, Ordered {
     }
 
     private ServerHttpRequestDecorator requestDecorator(ServerWebExchange exchange) {
-        ServerHttpRequestDecorator serverHttpRequestDecorator = new ServerHttpRequestDecorator(exchange.getRequest()) {
+        return new ServerHttpRequestDecorator(exchange.getRequest()) {
             @Override
             public Flux<DataBuffer> getBody() {
                 Flux<DataBuffer> body = super.getBody();
@@ -115,12 +117,11 @@ public class XssFilter implements GlobalFilter, Ordered {
                 return httpHeaders;
             }
         };
-        return serverHttpRequestDecorator;
     }
 
     @Override
     public int getOrder() {
-        return -100;
+        return  Ordered.HIGHEST_PRECEDENCE + 3;
     }
 
     /**
@@ -147,7 +148,8 @@ public class XssFilter implements GlobalFilter, Ordered {
      *
      * @param pattern 匹配规则
      * @param url     需要匹配的url
-     * @return
+     * @return boolean
+     * @since 2023-08-17 11:41:58
      */
     public static boolean isMatch(String pattern, String url) {
         AntPathMatcher matcher = new AntPathMatcher();

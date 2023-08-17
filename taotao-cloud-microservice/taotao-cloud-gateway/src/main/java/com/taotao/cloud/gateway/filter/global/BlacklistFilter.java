@@ -17,9 +17,14 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -34,21 +39,20 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE_ID;
+
 /**
- * 黑名单过滤器
+ * 第一执行 黑名单过滤器
  *
  * @author shuigedeng
  * @version 2023.04
  * @since 2023-05-08 13:19:32
  */
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
-@ConditionalOnProperty(
-        prefix = FilterProperties.PREFIX,
-        name = "blacklist",
-        havingValue = "true",
-        matchIfMissing = true)
-public class BlacklistFilter implements WebFilter {
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "blacklist", havingValue = "true", matchIfMissing = true)
+public class BlacklistFilter implements GlobalFilter, Ordered {
 
     private final ISafeRuleService safeRuleService;
 
@@ -57,10 +61,10 @@ public class BlacklistFilter implements WebFilter {
     }
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 是否开启黑名单
         // 从redis里查询黑名单是否存在
-        LogUtils.debug("进入黑名单模式");
+        LogUtils.info("进入黑名单模式");
 
         // 检查黑名单
         Mono<Void> result = safeRuleService.filterBlackList(exchange);
@@ -83,6 +87,17 @@ public class BlacklistFilter implements WebFilter {
                 return Mono.empty();
             }
         }
-        return chain.filter(exchange);
+        return chain.filter(exchange).then(Mono.fromRunnable(() ->{
+            LogUtils.info("最终最终返回数据");
+
+            TraceUtils.removeTraceId();
+            LocaleContextHolder.resetLocaleContext();
+
+        }));
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.HIGHEST_PRECEDENCE + 1;
     }
 }

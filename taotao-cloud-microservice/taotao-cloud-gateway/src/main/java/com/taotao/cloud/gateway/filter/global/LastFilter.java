@@ -16,48 +16,47 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import java.util.Locale;
-
 import com.taotao.cloud.common.utils.log.LogUtils;
-import lombok.extern.slf4j.Slf4j;
+import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.context.i18n.SimpleLocaleContext;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
+import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE_ID;
+
 /**
- * 第五执行 全局国际化处理
+ * 最后执行 生成日志链路追踪id
  *
  * @author shuigedeng
- * @version 2023.07
- * @see GlobalFilter
- * @see Ordered
- * @since 2023-08-17 11:41:28
+ * @version 2022.03
+ * @since 2020/4/29 22:13
  */
 @Component
-public class GlobalI18nFilter implements GlobalFilter, Ordered {
+public class LastFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        LogUtils.info(" 全局国际化处理!");
+        TraceUtils.removeTraceId();
+        LocaleContextHolder.resetLocaleContext();
 
-        String language = exchange.getRequest().getHeaders().getFirst("content-language");
-        Locale locale = Locale.getDefault();
-        if (language != null && !language.isEmpty()) {
-            String[] split = language.split("_");
-            locale = new Locale(split[0], split[1]);
-        }
-        LocaleContextHolder.setLocaleContext(new SimpleLocaleContext(locale), true);
+        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+            LogUtils.info("最终-----返回数据");
 
-        return chain.filter(exchange);
+            Object traceId = exchange.getAttributes().get(TAOTAO_CLOUD_TRACE_ID);
+            if (Objects.nonNull(traceId) && traceId instanceof String trace) {
+                TraceUtils.setTraceId(trace);
+            }
+        }));
     }
 
     @Override
     public int getOrder() {
-        return  Ordered.HIGHEST_PRECEDENCE + 5;
+        return Ordered.LOWEST_PRECEDENCE;
     }
 }

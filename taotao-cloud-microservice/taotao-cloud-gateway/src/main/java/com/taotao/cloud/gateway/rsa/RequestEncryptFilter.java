@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
 import java.net.URI;
 
 
-@Configuration
+//@Component
 @Slf4j
 public class RequestEncryptFilter implements GlobalFilter, Ordered {
 

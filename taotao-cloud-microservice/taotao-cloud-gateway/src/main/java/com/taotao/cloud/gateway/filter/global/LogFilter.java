@@ -3,6 +3,7 @@ package com.taotao.cloud.gateway.filter.global;
 // AdaptCachedBodyGlobalFilter
 
 import com.alibaba.fastjson.JSON;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;
 import com.taotao.cloud.gateway.service.VisitRecordService;
 import jakarta.annotation.Resource;
@@ -18,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.codec.HttpMessageReader;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.server.HandlerStrategies;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -28,19 +30,19 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 /**
- * 日志过滤器
+ * 第七执行 日志过滤器
  *
  * @author shuigedeng
  * @version 2023.04
  * @since 2023-05-08 13:18:58
  */
-@Log4j2
+//@Component
 public class LogFilter implements GlobalFilter, Ordered {
 	private static final String START_TIME = "startTime";
 	private static final List<HttpMessageReader<?>> messageReaders = HandlerStrategies.withDefaults().messageReaders();
 
 	@Resource
-	VisitRecordService visitRecordService;
+	private VisitRecordService visitRecordService;
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -104,16 +106,14 @@ public class LogFilter implements GlobalFilter, Ordered {
 		long consumingTime = 0L;
 		if (startTime != null) {
 			consumingTime = System.currentTimeMillis() - startTime;
-			log.info(exchange.getRequest().getURI().getRawPath() + ": 耗时 " + consumingTime + "ms");
+			LogUtils.info(exchange.getRequest().getURI().getRawPath() + ": 耗时 " + consumingTime + "ms");
 		}
 		visitRecordService.add(exchange, consumingTime);
 	}
 
 
 	private Mono<Void> readBody(ServerWebExchange exchange, GatewayFilterChain chain, AccessRecord accessRecord) {
-
 		return DataBufferUtils.join(exchange.getRequest().getBody()).flatMap(dataBuffer -> {
-
 			byte[] bytes = new byte[dataBuffer.readableByteCount()];
 			dataBuffer.read(bytes);
 			DataBufferUtils.release(dataBuffer);
@@ -122,7 +122,6 @@ public class LogFilter implements GlobalFilter, Ordered {
 				DataBufferUtils.retain(buffer);
 				return Mono.just(buffer);
 			});
-
 
 			// 重写请求体,因为请求体数据只能被消费一次
 			ServerHttpRequest mutatedRequest = new ServerHttpRequestDecorator(exchange.getRequest()) {
@@ -139,15 +138,13 @@ public class LogFilter implements GlobalFilter, Ordered {
 				.doOnNext(objectValue -> {
 					accessRecord.setBody(objectValue);
 					visitRecordService.put(exchange, accessRecord);
-				}).then(
-					chain.filter(mutatedExchange)
-				);
+				}).then(chain.filter(mutatedExchange));
 		});
 	}
 
 	@Override
 	public int getOrder() {
-		return 2;
+		return Ordered.HIGHEST_PRECEDENCE + 7;
 	}
 
 

@@ -55,7 +55,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * 签名过滤器
+ * 第十执行 签名过滤器
  *
  * @author shuigedeng
  * @version 2023.04
@@ -230,7 +230,7 @@ public class SignFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return 80;
+        return Ordered.HIGHEST_PRECEDENCE + 10;
     }
 
     public static class MyCachedBodyOutputMessage extends CachedBodyOutputMessage {
