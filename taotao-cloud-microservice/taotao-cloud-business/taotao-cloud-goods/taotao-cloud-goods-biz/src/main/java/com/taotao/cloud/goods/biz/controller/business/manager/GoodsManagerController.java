@@ -32,6 +32,9 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
@@ -65,6 +68,9 @@ public class GoodsManagerController {
     private final IGoodsSkuService goodsSkuService;
 
     @Operation(summary = "分页获取", description = "分页获取")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("分页获取")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/page")
@@ -74,6 +80,9 @@ public class GoodsManagerController {
     }
 
     @Operation(summary = "分页获取商品列表", description = "分页获取商品列表")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("分页获取商品列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/sku/page")
@@ -83,6 +92,9 @@ public class GoodsManagerController {
     }
 
     @Operation(summary = "分页获取待审核商品", description = "分页获取待审核商品")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("分页获取待审核商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/auth/page")
@@ -93,6 +105,9 @@ public class GoodsManagerController {
     }
 
     @Operation(summary = "管理员下架商品", description = "管理员下架商品")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("管理员下架商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/{goodsId}/under")
@@ -103,6 +118,9 @@ public class GoodsManagerController {
     }
 
     @Operation(summary = "管理员审核商品", description = "管理员审核商品")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("管理员审核商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "{goodsIds}/auth")
@@ -112,6 +130,9 @@ public class GoodsManagerController {
     }
 
     @Operation(summary = "管理员上架商品", description = "管理员上架商品")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("管理员上架商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/{goodsId}/up")
@@ -120,6 +141,9 @@ public class GoodsManagerController {
     }
 
     @Operation(summary = "通过id获取商品详情", description = "通过id获取商品详情")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("通过id获取商品详情")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}")

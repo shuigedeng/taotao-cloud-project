@@ -33,8 +33,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +48,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -68,6 +69,36 @@ public class FileController {
     // @Autowired
     // private Cache cache;
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
+    @NotAuth
+    @Operation(summary = "批量删除", description = "批量删除")
+    @Parameters({
+            @Parameter(name = "ids", required = true, description = "id列表"),
+    })
+    @DeleteMapping("/11111/batch")
+    public Result<Boolean> delAllByIds(@Valid @NotNull(message = "id列表不能为空") @Size(min = 1, max = 3, message = "id个数只能在1至3个")
+                                       @RequestParam List<Long> ids) {
+        return Result.success(true);
+    }
+
+    @NotAuth
+    @Operation(summary = "更改规格", description = "更改规格")
+    @Parameters({
+            @Parameter(name = "id", required = true, description = "id", in = ParameterIn.PATH),
+    })
+    @PutMapping("/2222/{id}")
+    public Result<Boolean> update(@Valid @RequestBody Student specificationDTO,
+                                  @NotNull(message = "id不能为空") @PathVariable Long id) {
+        return Result.success(true);
+    }
+
+    @NotAuth
+    @Operation(summary = "更改规格222", description = "更改规格222")
+    @PutMapping("/33333")
+    public Result<Boolean> updateBatch(@Valid @RequestBody List<Student> specificationDTO) {
+        return Result.success(true);
+    }
+
 
     @NotAuth
     @Operation(summary = "文件上传", description = "文件上传",
@@ -128,11 +159,11 @@ public class FileController {
             @Parameter(name = "plays2", required = true, description = "plays2玩家")
     })
     @GetMapping(value = "/helloParam")
-    public  Result<String> hello(@RequestParam("name") String name,
-                        @RequestParam("age") Integer age,
-                        @RequestParam("birthDay") @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime birthDay,
-                        @RequestParam("plays") String[] plays,
-                        @RequestParam("plays2") List<String> plays2) {
+    public Result<String> hello(@RequestParam("name") String name,
+                                @RequestParam("age") Integer age,
+                                @RequestParam("birthDay") @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime birthDay,
+                                @RequestParam("plays") String[] plays,
+                                @RequestParam("plays2") List<String> plays2) {
         LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, plays = {}, plays2 = {}", name, age, birthDay, plays, plays2);
         return Result.success("scesccc");
     }
@@ -142,7 +173,7 @@ public class FileController {
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
             responses = {@ApiResponse(description = "helloParam", content = @Content(mediaType = "application/json"))})
     @GetMapping(value = "/helloParam3")
-    public  Result<String> hello(@Validated Page page) {
+    public Result<String> hello(@Validated Page page) {
         LogUtils.info("请求参数： name = {}, age = {}, birthDay = {}, 分页参数：page = {}", "", "", "", page);
         return Result.success("scesccc");
     }
@@ -172,7 +203,7 @@ public class FileController {
 //            @Parameter(name = "birthDay", required = true, description = "birthDay", schema = @Schema(implementation = LocalDateTime.class)),
 //            @Parameter(name = "plays", required = true, description = "plays"),
 //    })
-    public  Result<String> form(Student student) {
+    public Result<String> form(Student student) {
         LogUtils.info("obj请求参数： name = {}, age = {}", student.getName(), student.getAge());
         return Result.success("scesccc");
     }

@@ -24,7 +24,9 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
+import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -37,9 +39,12 @@ import com.taotao.cloud.goods.api.model.vo.SpecValueVO;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsAttribute;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.listener.GeneratorEsGoodsIndexEvent;
+import com.taotao.cloud.goods.biz.manager.GoodsManager;
+import com.taotao.cloud.goods.biz.manager.GoodsSkuManager;
 import com.taotao.cloud.goods.biz.mapper.IGoodsSkuMapper;
 import com.taotao.cloud.goods.biz.model.convert.GoodsSkuConvert;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
+import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.repository.cls.GoodsSkuRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IGoodsSkuRepository;
@@ -49,7 +54,6 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
-import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
@@ -60,6 +64,9 @@ import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
+import com.taotao.cloud.store.api.model.vo.StoreVO;
+import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
+import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -76,6 +83,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.dromara.dynamictp.common.util.StringUtil;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.map.MapUtil;
+import org.dromara.hutool.core.math.NumberUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.json.JSONObject;
+import org.dromara.hutool.json.JSONUtil;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,25 +107,25 @@ public class GoodsSkuServiceImpl
         extends BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long>
         implements IGoodsSkuService {
 
-    /** 缓存服务 */
-    private final RedisRepository redisRepository;
+    private final GoodsSkuManager goodsSkuManager;
+    private final GoodsManager goodsManager;
+
     /** 分类服务 */
     private final ICategoryService categoryService;
     /** 商品相册服务 */
     private final IGoodsGalleryService goodsGalleryService;
-    /** rocketMq服务 */
-    private final RocketMQTemplate rocketMQTemplate;
-    /** rocketMq配置 */
-    private final RocketmqCustomProperties rocketmqCustomProperties;
-    /** 会员评价服务 */
-    private final IFeignMemberEvaluationApi memberEvaluationApi;
     /** 商品服务 */
     private final IGoodsService goodsService;
     /** 商品索引服务 */
     private final IEsGoodsIndexService goodsIndexService;
 
+    /** 会员评价服务 */
+    private final IFeignMemberEvaluationApi memberEvaluationApi;
     /** 促销活动商品服务 */
     private final IFeignPromotionGoodsApi promotionGoodsApi;
+
+    /** 缓存服务 */
+    private final RedisRepository redisRepository;
     /** ApplicationEventPublisher */
     private final ApplicationEventPublisher applicationEventPublisher;
 
@@ -150,7 +164,7 @@ public class GoodsSkuServiceImpl
             // 删除旧索引
             for (GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO : goodsListByGoodsId) {
                 oldSkuIds.add(goodsSkuSpecGalleryVO.getId());
-                redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSkuSpecGalleryVO.getId()));
+                redisRepository.del(getCacheKeys(goodsSkuSpecGalleryVO.getId()));
             }
             goodsIndexService.deleteIndexByIds(oldSkuIds);
             this.removeByIds(oldSkuIds);
@@ -193,38 +207,38 @@ public class GoodsSkuServiceImpl
     @Transactional(rollbackFor = Exception.class)
     public boolean update(GoodsSku goodsSku) {
         this.updateById(goodsSku);
-        redisRepository.del(IGoodsSkuService.getCacheKeys(goodsSku.getId()));
-        redisRepository.set(IGoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
+        redisRepository.del(getCacheKeys(goodsSku.getId()));
+        redisRepository.set(getCacheKeys(goodsSku.getId()), goodsSku);
         return true;
     }
 
     @Override
     public boolean clearCache(Long skuId) {
-        redisRepository.del(IGoodsSkuService.getCacheKeys(skuId));
+        redisRepository.del(getCacheKeys(skuId));
         return true;
     }
 
     @Override
     public GoodsSku getGoodsSkuByIdFromCache(Long skuId) {
         // 获取缓存中的sku
-        GoodsSku goodsSku = (GoodsSku) redisRepository.get(IGoodsSkuService.getCacheKeys(skuId));
+        GoodsSku goodsSku = (GoodsSku) redisRepository.get(getCacheKeys(skuId));
         // 如果缓存中没有信息，则查询数据库，然后写入缓存
         if (goodsSku == null) {
             goodsSku = this.getById(skuId);
             if (goodsSku == null) {
                 return null;
             }
-            redisRepository.set(IGoodsSkuService.getCacheKeys(skuId), goodsSku);
+            redisRepository.set(getCacheKeys(skuId), goodsSku);
         }
 
         // 获取商品库存
-        Integer stock = (Integer) redisRepository.get(IGoodsSkuService.getStockCacheKey(skuId));
+        Integer stock = (Integer) redisRepository.get(getStockCacheKey(skuId));
 
         // 库存不为空,库存与缓存中不一致
         if (stock != null && !goodsSku.getQuantity().equals(stock)) {
             // 写入最新的库存信息
             goodsSku.setQuantity(stock);
-            redisRepository.set(IGoodsSkuService.getCacheKeys(goodsSku.getId()), goodsSku);
+            redisRepository.set(getCacheKeys(goodsSku.getId()), goodsSku);
         }
 
         return goodsSku;
@@ -311,7 +325,7 @@ public class GoodsSkuServiceImpl
         map.put("data", goodsSkuDetail);
 
         // 获取分类信息
-        long[] split = StringUtils.splitToLong(goodsSkuDetail.getCategoryPath(), ",");
+        long[] split = StringUtil.splitToLong(goodsSkuDetail.getCategoryPath(), ",");
         map.put(
                 "categoryName",
                 categoryService.getCategoryNameByIds(
@@ -351,8 +365,8 @@ public class GoodsSkuServiceImpl
         if (boolean.TRUE.equals(update)) {
             List<GoodsSku> goodsSkus = this.getGoodsSkuListByGoodsId(goods.getId());
             for (GoodsSku sku : goodsSkus) {
-                redisRepository.del(IGoodsSkuService.getCacheKeys(sku.getId()));
-                redisRepository.set(IGoodsSkuService.getCacheKeys(sku.getId()), sku);
+                redisRepository.del(getCacheKeys(sku.getId()));
+                redisRepository.set(getCacheKeys(sku.getId()), sku);
             }
             if (!goodsSkus.isEmpty()) {
                 generateEs(goods);
@@ -365,14 +379,14 @@ public class GoodsSkuServiceImpl
     public List<GoodsSku> getGoodsSkuByIdFromCache(List<Long> ids) {
         List<String> keys = new ArrayList<>();
         for (Long id : ids) {
-            keys.add(IGoodsSkuService.getCacheKeys(id));
+            keys.add(getCacheKeys(id));
         }
         List<GoodsSku> list = redisRepository.mGet(keys);
         if (list == null || list.isEmpty()) {
             list = new ArrayList<>();
             List<GoodsSku> goodsSkus = listByIds(ids);
             for (GoodsSku skus : goodsSkus) {
-                redisRepository.set(IGoodsSkuService.getCacheKeys(skus.getId()), skus);
+                redisRepository.set(getCacheKeys(skus.getId()), skus);
                 list.add(skus);
             }
         }
@@ -471,8 +485,8 @@ public class GoodsSkuServiceImpl
             if (update) {
                 redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsSku.getGoodsId());
             }
-            redisRepository.set(IGoodsSkuService.getCacheKeys(skuId), goodsSku);
-            redisRepository.set(IGoodsSkuService.getStockCacheKey(skuId), quantity);
+            redisRepository.set(getCacheKeys(skuId), goodsSku);
+            redisRepository.set(getStockCacheKey(skuId), quantity);
 
             // 更新商品库存
             List<GoodsSku> goodsSkus = new ArrayList<>();
@@ -484,7 +498,7 @@ public class GoodsSkuServiceImpl
 
     @Override
     public Integer getStock(Long skuId) {
-        String cacheKeys = IGoodsSkuService.getStockCacheKey(skuId);
+        String cacheKeys = getStockCacheKey(skuId);
         Integer stock = (Integer) redisRepository.get(cacheKeys);
         if (stock != null) {
             return stock;
@@ -555,11 +569,7 @@ public class GoodsSkuServiceImpl
                         .put("highPraiseNum", highPraiseNum)
                         .put("grade", grade)
                         .build());
-
-        String destination =
-                rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.UPDATE_GOODS_INDEX_FIELD.name();
-        rocketMQTemplate.asyncSend(
-                destination, JSONUtil.toJsonStr(updateIndexFieldsMap), RocketmqSendCallbackBuilder.commonCallback());
+        goodsSkuManager.sendUpdateIndexFieldsMap(updateIndexFieldsMap);
 
         // 修改商品的评价数量
         goodsService.updateGoodsCommentNum(goodsSku.getGoodsId());
@@ -614,7 +624,7 @@ public class GoodsSkuServiceImpl
             }
             goodsSku.setGoodsType(goods.getGoodsType());
             skus.add(goodsSku);
-            redisRepository.set(IGoodsSkuService.getStockCacheKey(goodsSku.getId()), goodsSku.getQuantity());
+            redisRepository.set(getStockCacheKey(goodsSku.getId()), goodsSku.getQuantity());
         }
         this.saveBatch(skus);
         return skus;
@@ -752,22 +762,72 @@ public class GoodsSkuServiceImpl
             esGoodsIndex.setAttrList(attributes);
         }
     }
+    /**
+     * 添加商品默认图片
+     *
+     * @param origin 图片
+     * @param goods 商品
+     */
+    private void setGoodsGalleryParam(String origin, Goods goods) {
+        GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(origin);
+        goods.setOriginal(goodsGallery.getOriginal());
+        goods.setSmall(goodsGallery.getSmall());
+        goods.setThumbnail(goodsGallery.getThumbnail());
+    }
 
     /**
-     * 根据商品分组商品sku及其规格信息
+     * 检查商品信息 如果商品是虚拟商品则无需配置配送模板 如果商品是实物商品需要配置配送模板 判断商品是否存在 判断商品是否需要审核 判断当前用户是否为店铺
      *
-     * @param goodsSkuSpecGalleryVOList 商品VO列表
-     * @return 分组后的商品sku及其规格信息
+     * @param goods 商品
      */
-    private List<GoodsSkuSpecVO> groupBySkuAndSpec(List<GoodsSkuSpecGalleryVO> goodsSkuSpecGalleryVOList) {
-        List<GoodsSkuSpecVO> skuSpecVOList = new ArrayList<>();
-        for (GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO : goodsSkuSpecGalleryVOList) {
-            GoodsSkuSpecVO specVO = new GoodsSkuSpecVO();
-            specVO.setSkuId(goodsSkuSpecGalleryVO.getId());
-            specVO.setSpecValues(goodsSkuSpecGalleryVO.getSpecList());
-            specVO.setQuantity(goodsSkuSpecGalleryVO.getQuantity());
-            skuSpecVOList.add(specVO);
+    public void checkGoods(Goods goods) {
+        // 判断商品类型
+        switch (goods.getGoodsType()) {
+            case "PHYSICAL_GOODS" -> {
+                if (Long.valueOf(0).equals(goods.getTemplateId())) {
+                    throw new BusinessException(ResultEnum.PHYSICAL_GOODS_NEED_TEMP);
+                }
+            }
+            case "VIRTUAL_GOODS" -> {
+                if (!Long.valueOf(0).equals(goods.getTemplateId())) {
+                    throw new BusinessException(ResultEnum.VIRTUAL_GOODS_NOT_NEED_TEMP);
+                }
+            }
+            default -> throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
         }
-        return skuSpecVOList;
+
+        // 检查商品是否存在--修改商品时使用
+        if (goods.getId() != null) {
+            this.checkExist(goods.getId());
+        } else {
+            // 评论次数
+            goods.setCommentNum(0);
+            // 购买次数
+            goods.setBuyCount(0);
+            // 购买次数
+            goods.setQuantity(0);
+            // 商品评分
+            goods.setGrade(BigDecimal.valueOf(100));
+        }
+
+        // 获取商品系统配置决定是否审核
+        GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
+        // 是否需要审核
+        goods.setAuthFlag(
+                boolean.TRUE.equals(goodsSetting.getGoodsCheck())
+                        ? GoodsAuthEnum.TOBEAUDITED.name()
+                        : GoodsAuthEnum.PASS.name());
+        // 判断当前用户是否为店铺
+        if (SecurityUtils.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
+            StoreVO storeDetail = storeApi.getStoreDetail();
+            if (storeDetail.getSelfOperated() != null) {
+                goods.setSelfOperated(storeDetail.getSelfOperated());
+            }
+            goods.setStoreId(storeDetail.getId());
+            goods.setStoreName(storeDetail.getStoreName());
+            goods.setSelfOperated(storeDetail.getSelfOperated());
+        } else {
+            throw new BusinessException(ResultEnum.STORE_NOT_LOGIN_ERROR);
+        }
     }
 }

@@ -22,6 +22,7 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ import java.util.List;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
+@Repository
 public interface IUserMapper extends BaseSuperMapper<User, Long> {
 
 

@@ -27,20 +27,19 @@ import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 管理端,商品规格接口
@@ -56,7 +55,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/goods/manager/spec")
 public class SpecificationManagerController {
 
-    /** 商品规格服务 */
+    /**
+     * 商品规格服务
+     */
     private final ISpecificationService specificationService;
 
     @Operation(summary = "获取所有可用规格", description = "获取所有可用规格")
@@ -72,7 +73,7 @@ public class SpecificationManagerController {
     @RequestLogger("搜索规格")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<PageResult<SpecificationVO>> page(SpecificationPageQuery specificationPageQuery) {
+    public Result<PageResult<SpecificationVO>> page(@Validated SpecificationPageQuery specificationPageQuery) {
         IPage<Specification> specificationPage = specificationService.getPage(specificationPageQuery);
         return Result.success(PageResult.convertMybatisPage(specificationPage, SpecificationConvert.INSTANCE::convert));
     }
@@ -87,10 +88,14 @@ public class SpecificationManagerController {
     }
 
     @Operation(summary = "更改规格", description = "更改规格")
+    @Parameters({
+            @Parameter(name = "id", required = true, description = "id", in = ParameterIn.PATH),
+    })
     @RequestLogger("更改规格")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO, @PathVariable Long id) {
+    public Result<Boolean> update(@Valid @RequestBody SpecificationDTO specificationDTO,
+                                  @PathVariable Long id) {
         Specification specification = SpecificationConvert.INSTANCE.convert(specificationDTO);
         specification.setId(id);
 
@@ -98,10 +103,14 @@ public class SpecificationManagerController {
     }
 
     @Operation(summary = "批量删除", description = "批量删除")
+    @Parameters({
+            @Parameter(name = "ids", required = true, description = "id列表,逗号连接", example = "1,2,3"),
+    })
     @RequestLogger("批量删除")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @DeleteMapping("/{ids}")
-    public Result<Boolean> delAllByIds(@PathVariable List<Long> ids) {
+    @DeleteMapping("/batch")
+    public Result<Boolean> delAllByIds(@Valid @NotNull(message = "id列表不能为空") @Size(min = 1, max = 3, message = "id个数只能在1至3个")
+                                           @RequestParam List<Long> ids) {
         return Result.success(specificationService.deleteSpecification(ids));
     }
 }

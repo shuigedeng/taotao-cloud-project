@@ -27,6 +27,9 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -66,6 +69,9 @@ public class CategoryManagerController {
     private final IGoodsService goodsService;
 
     @Operation(summary = "查询某分类下的全部子分类列表", description = "查询某分类下的全部子分类列表")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{parentId}/children/all")
@@ -75,6 +81,9 @@ public class CategoryManagerController {
     }
 
     @Operation(summary = "查询全部分类列表", description = "查询全部分类列表")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/children/all")
@@ -83,6 +92,9 @@ public class CategoryManagerController {
     }
 
     @Operation(summary = "添加商品分类", description = "添加商品分类")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
@@ -101,6 +113,9 @@ public class CategoryManagerController {
     }
 
     @Operation(summary = "修改商品分类", description = "修改商品分类")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping
@@ -113,6 +128,9 @@ public class CategoryManagerController {
     }
 
     @Operation(summary = "通过id删除分类", description = "通过id删除分类")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping(value = "/{id}")
@@ -133,6 +151,9 @@ public class CategoryManagerController {
     }
 
     @Operation(summary = "后台 禁用/启用 分类", description = "后台 禁用/启用 分类")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/disable/{id}")

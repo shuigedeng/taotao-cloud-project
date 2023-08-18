@@ -38,8 +38,13 @@ import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -78,7 +83,7 @@ public class GoodsSellerController {
     @RequestLogger("分页获取商品列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/page")
-    public Result<PageResult<GoodsVO>> getByPage(GoodsPageQuery goodsPageQuery) {
+    public Result<PageResult<GoodsVO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
         // 当前登录商家账号
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         goodsPageQuery.setStoreId(storeId);
@@ -90,7 +95,7 @@ public class GoodsSellerController {
     @RequestLogger("分页获取商品Sku列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/sku/page")
-    public Result<PageResult<GoodsSkuVO>> getSkuByPage(GoodsPageQuery goodsPageQuery) {
+    public Result<PageResult<GoodsSkuVO>> getSkuByPage(@Validated GoodsPageQuery goodsPageQuery) {
         // 当前登录商家账号
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         goodsPageQuery.setStoreId(storeId);
@@ -102,7 +107,7 @@ public class GoodsSellerController {
     @RequestLogger("分页获取库存告警商品列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/stock/warning")
-    public Result<StockWarningVO> getWarningStockByPage(GoodsPageQuery goodsPageQuery) {
+    public Result<StockWarningVO> getWarningStockByPage(@Validated GoodsPageQuery goodsPageQuery) {
         // 当前登录商家账号
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         StoreDetailVO storeDetail = storeDetailApi.getStoreDetailVO(storeId);
@@ -119,6 +124,9 @@ public class GoodsSellerController {
     }
 
     @Operation(summary = "通过id获取", description = "通过id获取")
+    @Parameters({
+            @Parameter(name = "goodsId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("通过id获取")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{goodsId}")
@@ -135,10 +143,13 @@ public class GoodsSellerController {
     }
 
     @Operation(summary = "修改商品", description = "修改商品")
+    @Parameters({
+            @Parameter(name = "goodsId", required = true, description = "商品ID", in = ParameterIn.PATH),
+    })
     @RequestLogger("修改商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/{goodsId}")
-    public Result<Boolean> update(@RequestBody GoodsOperationDTO goodsOperationDTO, @PathVariable Long goodsId) {
+    public Result<Boolean> update(@Validated @RequestBody GoodsOperationDTO goodsOperationDTO, @PathVariable Long goodsId) {
         return Result.success(goodsService.editGoods(goodsOperationDTO, goodsId));
     }
 
@@ -146,11 +157,12 @@ public class GoodsSellerController {
     @RequestLogger("下架商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/under")
-    public Result<Boolean> underGoods(@RequestParam List<Long> goodsId) {
+    public Result<Boolean> underGoods(@Validated @NotEmpty(message = "商品id不能为空") @RequestBody List<Long> goodsId) {
         return Result.success(goodsService.updateGoodsMarketAble(goodsId, GoodsStatusEnum.DOWN, "商家下架"));
     }
 
     @Operation(summary = "上架商品", description = "上架商品")
+
     @RequestLogger("上架商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/up")
@@ -162,19 +174,26 @@ public class GoodsSellerController {
     @RequestLogger("删除商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping
-    public Result<Boolean> deleteGoods(@RequestParam List<Long> goodsId) {
-        return Result.success(goodsService.deleteGoods(goodsId));
+    public Result<Boolean> deleteGoods(@Validated @NotEmpty(message = "商品信息不能为空") @RequestBody List<Long> goodsIds) {
+        return Result.success(goodsService.deleteGoods(goodsIds));
     }
 
     @Operation(summary = "设置商品运费模板", description = "设置商品运费模板")
+    @Parameters({
+            @Parameter(name = "templateId", required = true, description = "模板id", in = ParameterIn.PATH),
+    })
     @RequestLogger("设置商品运费模板")
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PostMapping(value = "/freight")
-    public Result<Boolean> freight(@RequestParam List<Long> goodsId, @RequestParam Long templateId) {
+    @PostMapping(value = "/freight/{templateId}")
+    public Result<Boolean> freight(@Validated @NotEmpty(message = "商品信息不能为空") @RequestBody List<Long> goodsId,
+                                   @PathVariable Long templateId) {
         return Result.success(goodsService.freight(goodsId, templateId));
     }
 
     @Operation(summary = "根据goodsId分页获取商品规格列表", description = "根据goodsId分页获取商品规格列表")
+    @Parameters({
+            @Parameter(name = "goodsId", required = true, description = "商品id", in = ParameterIn.PATH),
+    })
     @RequestLogger("根据goodsId分页获取商品规格列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/sku/{goodsId}/page")
@@ -189,7 +208,7 @@ public class GoodsSellerController {
     @RequestLogger("修改商品库存")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/stocks")
-    public Result<Boolean> updateStocks(@RequestBody List<GoodsSkuStockDTO> updateStockList) {
+    public Result<Boolean> updateStocks(@Validated @RequestBody List<GoodsSkuStockDTO> updateStockList) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         // 获取商品skuId集合
         List<Long> goodsSkuIds =

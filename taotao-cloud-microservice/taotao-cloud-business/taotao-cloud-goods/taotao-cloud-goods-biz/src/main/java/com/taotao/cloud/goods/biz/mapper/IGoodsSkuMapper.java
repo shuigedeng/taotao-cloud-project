@@ -21,6 +21,7 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 /**
  * 规格项数据处理层
@@ -29,6 +30,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:57:22
  */
+@Repository
 public interface IGoodsSkuMapper extends BaseSuperMapper<GoodsSku, Long> {
 
     /**

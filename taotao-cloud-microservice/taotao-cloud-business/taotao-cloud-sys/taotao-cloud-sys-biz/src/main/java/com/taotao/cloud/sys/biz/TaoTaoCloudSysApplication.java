@@ -47,7 +47,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
-// @ComponentScan(basePackages = {"com.taotao.cloud.sys.api.feign.fallback"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 

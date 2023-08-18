@@ -25,6 +25,8 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupServic
 import com.taotao.cloud.goods.biz.service.business.IParametersService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -58,6 +60,9 @@ public class CategoryParameterGroupManagerController {
     private final ICategoryParameterGroupService categoryParameterGroupService;
 
     @Operation(summary = "查询某分类下绑定的参数信息", description = "查询某分类下绑定的参数信息")
+    @io.swagger.v3.oas.annotations.Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
@@ -66,6 +71,9 @@ public class CategoryParameterGroupManagerController {
     }
 
     @Operation(summary = "保存数据", description = "保存数据")
+    @io.swagger.v3.oas.annotations.Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
@@ -74,6 +82,9 @@ public class CategoryParameterGroupManagerController {
     }
 
     @Operation(summary = "更新数据", description = "更新数据")
+    @io.swagger.v3.oas.annotations.Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping
@@ -82,6 +93,9 @@ public class CategoryParameterGroupManagerController {
     }
 
     @Operation(summary = "通过id删除参数组", description = "通过id删除参数组")
+    @io.swagger.v3.oas.annotations.Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping(value = "/{id}")

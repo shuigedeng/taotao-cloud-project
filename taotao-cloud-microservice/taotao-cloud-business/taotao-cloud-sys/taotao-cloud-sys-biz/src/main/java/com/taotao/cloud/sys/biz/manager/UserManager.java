@@ -17,16 +17,23 @@
 package com.taotao.cloud.sys.biz.manager;
 
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
+import com.taotao.cloud.sys.biz.model.entity.system.User;
+import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
+import com.taotao.cloud.web.annotation.Manager;
+import com.taotao.cloud.web.base.manager.BaseSuperManager;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
+/**
+ * 用户管理器
+ *
+ * @author shuigedeng
+ * @version 2023.07
+ * @since 2023-08-18 14:55:41
+ */
+@Manager
 @AllArgsConstructor
-public class UserManager {
-
-    private final IUserMapper userMapper;
-    private final IUserRepository userRepository;
+public class UserManager extends BaseSuperManager<User, Long, IUserMapper, UserRepository, IUserRepository> {
 
     // @Transactional(rollbackFor = Throwable.class)
     // public void upOrDown(DepartmentEntity departmentEntity ,DepartmentEntity swapEntity){

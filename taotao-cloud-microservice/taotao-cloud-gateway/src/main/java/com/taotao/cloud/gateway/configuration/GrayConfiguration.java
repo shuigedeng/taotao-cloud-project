@@ -19,16 +19,6 @@ package com.taotao.cloud.gateway.configuration;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
-import java.net.URI;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Set;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.ObjectProvider;
@@ -38,12 +28,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.DefaultRequest;
-import org.springframework.cloud.client.loadbalancer.DefaultResponse;
-import org.springframework.cloud.client.loadbalancer.EmptyResponse;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerUriTools;
-import org.springframework.cloud.client.loadbalancer.Request;
-import org.springframework.cloud.client.loadbalancer.Response;
+import org.springframework.cloud.client.loadbalancer.*;
 import org.springframework.cloud.gateway.config.GatewayLoadBalancerProperties;
 import org.springframework.cloud.gateway.config.GatewayReactiveLoadBalancerClientAutoConfiguration;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -59,8 +44,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.net.URI;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * 基于nacos元数据version灰度发布
@@ -363,7 +351,10 @@ public class GrayConfiguration {
                 nodes[index] = each.getKey();
                 weights[index++] = (weightAdder = weightAdder + each.getValue());
             }
-            return new WeightMeta<>((T[]) nodes, weights);
+
+            @SuppressWarnings("unchecked")
+            T[] data = (T[]) nodes;
+            return new WeightMeta<>(data, weights);
         }
     }
 }

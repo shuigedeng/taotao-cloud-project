@@ -24,6 +24,9 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -32,14 +35,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理端,商品计量单位接口
@@ -59,6 +55,9 @@ public class GoodsUnitManagerController {
     private final IGoodsUnitService goodsUnitService;
 
     @Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("分页获取商品计量单位")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/page")
@@ -68,6 +67,9 @@ public class GoodsUnitManagerController {
     }
 
     @Operation(summary = "获取商品计量单位", description = "获取商品计量单位")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("获取商品计量单位")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/{id}")
@@ -76,6 +78,9 @@ public class GoodsUnitManagerController {
     }
 
     @Operation(summary = "添加商品计量单位", description = "添加商品计量单位")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("添加商品计量单位")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
@@ -84,6 +89,9 @@ public class GoodsUnitManagerController {
     }
 
     @Operation(summary = "编辑商品计量单位", description = "编辑商品计量单位")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger("编辑商品计量单位")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
@@ -93,10 +101,13 @@ public class GoodsUnitManagerController {
     }
 
     @Operation(summary = "删除商品计量单位", description = "删除商品计量单位")
+    @Parameters({
+            @Parameter(name = "ids", required = true, description = "id列表,逗号连接", example = "1,2,3"),
+    })
     @RequestLogger("删除商品计量单位")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping("/{ids}")
-    public Result<Boolean> delete(@NotEmpty(message = "id不能为空") @PathVariable List<Long> ids) {
+    public Result<Boolean> delete(@NotEmpty(message = "id不能为空") @RequestParam List<Long> ids) {
         return Result.success(goodsUnitService.removeByIds(ids));
     }
 }
