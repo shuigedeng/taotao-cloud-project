@@ -46,9 +46,9 @@ dependencies {
     implementation "io.trino:trino-spi:420"
     implementation "io.trino:trino-main:420"
     //https://search.maven.org/artifact/io.airlift/slice
-    implementation "io.airlift:slice:0.45"
+    implementation "io.airlift:slice:2.1"
     //https://search.maven.org/artifact/io.airlift/units
-    implementation "io.airlift:units:1.9"
+    implementation "io.airlift:units:1.10"
     //https://search.maven.org/artifact/com.google.guava/guava
     implementation "com.google.guava:guava:32.1.2-jre"
     //https://search.maven.org/artifact/com.fasterxml.jackson.core/jackson-annotations

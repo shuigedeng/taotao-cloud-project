@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.file.biz;
 
+import cn.xuyanwu.spring.file.storage.spring.EnableFileStorage;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.oss.common.storage.configuration.EnableFileStorage;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * 文件应用程序

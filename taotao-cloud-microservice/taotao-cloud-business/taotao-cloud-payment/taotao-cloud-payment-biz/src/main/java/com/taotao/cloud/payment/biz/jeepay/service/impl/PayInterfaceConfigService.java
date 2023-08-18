@@ -1,39 +1,38 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
+ * <p>
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.payment.biz.jeepay.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.payment.biz.jeepay.core.constants.ApiCodeEnum;
-import com.taotao.cloud.payment.biz.jeepay.core.constants.CS;
-import com.taotao.cloud.payment.biz.jeepay.core.entity.MchApp;
-import com.taotao.cloud.payment.biz.jeepay.core.entity.MchInfo;
-import com.taotao.cloud.payment.biz.jeepay.core.entity.PayInterfaceConfig;
-import com.taotao.cloud.payment.biz.jeepay.core.entity.PayInterfaceDefine;
-import com.taotao.cloud.payment.biz.jeepay.core.exception.BizException;
-import com.taotao.cloud.payment.biz.jeepay.service.mapper.PayInterfaceConfigMapper;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.jeequan.jeepay.core.constants.ApiCodeEnum;
+import com.jeequan.jeepay.core.constants.CS;
+import com.jeequan.jeepay.core.entity.*;
+import com.jeequan.jeepay.core.exception.BizException;
+import com.jeequan.jeepay.service.mapper.PayInterfaceConfigMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
+ * <p>
  * 支付接口配置参数表 服务实现类
+ * </p>
  *
  * @author [mybatis plus generator]
  * @since 2021-04-27
@@ -51,18 +50,23 @@ public class PayInterfaceConfigService extends ServiceImpl<PayInterfaceConfigMap
     private MchAppService mchAppService;
 
     /**
-     * @Author: ZhuXiao @Description: 根据 账户类型、账户号、接口类型 获取支付参数配置 @Date: 17:20 2021/4/27
-     */
+     * @Author: ZhuXiao
+     * @Description: 根据 账户类型、账户号、接口类型 获取支付参数配置
+     * @Date: 17:20 2021/4/27
+    */
     public PayInterfaceConfig getByInfoIdAndIfCode(Byte infoType, String infoId, String ifCode) {
         return getOne(PayInterfaceConfig.gw()
                 .eq(PayInterfaceConfig::getInfoType, infoType)
                 .eq(PayInterfaceConfig::getInfoId, infoId)
-                .eq(PayInterfaceConfig::getIfCode, ifCode));
+                .eq(PayInterfaceConfig::getIfCode, ifCode)
+        );
     }
 
     /**
-     * @Author: ZhuXiao @Description: 根据 账户类型、账户号 获取支付参数配置列表 @Date: 14:19 2021/5/7
-     */
+     * @Author: ZhuXiao
+     * @Description: 根据 账户类型、账户号 获取支付参数配置列表
+     * @Date: 14:19 2021/5/7
+    */
     public List<PayInterfaceDefine> selectAllPayIfConfigListByIsvNo(Byte infoType, String infoId) {
 
         // 支付定义列表
@@ -88,10 +92,11 @@ public class PayInterfaceConfigService extends ServiceImpl<PayInterfaceConfigMap
         return defineList;
     }
 
+
     public List<PayInterfaceDefine> selectAllPayIfConfigListByAppId(String appId) {
 
         MchApp mchApp = mchAppService.getById(appId);
-        if (mchApp == null || mchApp.getState() != CS.YES) {
+        if (mchApp == null|| mchApp.getState() != CS.YES) {
             throw new BizException(ApiCodeEnum.SYS_OPERATION_FAIL_SELETE);
         }
         MchInfo mchInfo = mchInfoService.getById(mchApp.getMchNo());
@@ -148,14 +153,20 @@ public class PayInterfaceConfigService extends ServiceImpl<PayInterfaceConfigMap
         return defineList;
     }
 
-    /** 查询商户app使用已正确配置了通道信息 */
-    public boolean mchAppHasAvailableIfCode(String appId, String ifCode) {
 
-        return this.count(PayInterfaceConfig.gw()
+
+    /** 查询商户app使用已正确配置了通道信息 */
+    public boolean mchAppHasAvailableIfCode(String appId, String ifCode){
+
+        return this.count(
+                PayInterfaceConfig.gw()
                         .eq(PayInterfaceConfig::getIfCode, ifCode)
                         .eq(PayInterfaceConfig::getState, CS.PUB_USABLE)
                         .eq(PayInterfaceConfig::getInfoId, appId)
-                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP))
-                > 0;
+                        .eq(PayInterfaceConfig::getInfoType, CS.INFO_TYPE_MCH_APP)
+                ) > 0;
+
     }
+
+
 }

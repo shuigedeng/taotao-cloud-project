@@ -1356,7 +1356,17 @@ logging:
     com.taotao.cloud.sys.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
     net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
-    # hibernate log
+    org.springframework.core.log.LogAccessor: error
+    com.alibaba.nacos.common.utils.LoggerUtils: error
+    org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer: error
+    org.springframework.amqp.rabbit.connection: error
+    org.springframework.cloud.stream.binder.rabbit.provisioning.RabbitExchangeQueueProvisioner: error
+    org.apache.rocketmq.logging.Slf4jLoggerFactory: error
+    org.apache.rocketmq.client.consumer.store: error
+    org.apache.kafka.clients.consumer: error
+    org.apache.kafka.clients.Metadata: error
+    org.apache.kafka.common.utils.AppInfoParser: error
+    # hibernate log org.apache.kafka.clients.consumer
     #org.hibernate.SQL: debug
     #org.hibernate.type: info
     #org.hibernate.type.descriptor.sql.BasicBinder: trace
