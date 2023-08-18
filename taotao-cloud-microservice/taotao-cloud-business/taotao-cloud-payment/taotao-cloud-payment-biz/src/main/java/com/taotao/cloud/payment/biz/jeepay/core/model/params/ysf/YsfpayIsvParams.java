@@ -1,25 +1,24 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
+ * <p>
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.payment.biz.jeepay.core.model.params.ysf;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.payment.biz.jeepay.core.model.params.IsvParams;
-import com.taotao.cloud.payment.biz.jeepay.core.utils.StringKit;
+import com.jeequan.jeepay.core.model.params.IsvParams;
+import com.jeequan.jeepay.core.utils.StringKit;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,19 +35,19 @@ public class YsfpayIsvParams extends IsvParams {
     /** 是否沙箱环境 */
     private Byte sandbox;
 
-    /** serProvId * */
+    /** serProvId **/
     private String serProvId;
 
-    /** isvPrivateCertFile 证书 * */
+    /** isvPrivateCertFile 证书 **/
     private String isvPrivateCertFile;
 
-    /** isvPrivateCertPwd * */
+    /** isvPrivateCertPwd **/
     private String isvPrivateCertPwd;
 
-    /** ysfpayPublicKey * */
+    /** ysfpayPublicKey **/
     private String ysfpayPublicKey;
 
-    /** acqOrgCodeList 支付机构号 * */
+    /** acqOrgCodeList 支付机构号 **/
     private String acqOrgCode;
 
     @Override
@@ -63,4 +62,5 @@ public class YsfpayIsvParams extends IsvParams {
         }
         return ((JSONObject) JSON.toJSON(isvParams)).toJSONString();
     }
+
 }

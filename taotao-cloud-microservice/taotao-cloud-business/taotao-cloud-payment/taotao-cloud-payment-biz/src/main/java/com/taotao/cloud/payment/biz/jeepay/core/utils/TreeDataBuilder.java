@@ -1,23 +1,23 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
+ * <p>
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.payment.biz.jeepay.core.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,16 +32,16 @@ import java.util.List;
  *      2. 使用构造函数创建对象，参数为转换好的对象， 如果自定义字段key 则将字段名称一并传入；
  *      3. 使用buildTreeString() 或者 buildTreeObject() 生成所需对象；
  *
- *
- * @author terrfly
- * @site https://www.jeequan.com
- * @date 2019/12/8 06:37
- */
+*
+* @author terrfly
+* @site https://www.jeequan.com
+* @date 2019/12/8 06:37
+*/
 public class TreeDataBuilder {
 
-    /** 私有构造器 + 指定参数构造器 * */
-    private TreeDataBuilder() {}
 
+    /** 私有构造器 + 指定参数构造器 **/
+    private TreeDataBuilder(){}
     public TreeDataBuilder(Collection nodes) {
         super();
         this.nodes = nodes;
@@ -51,14 +51,13 @@ public class TreeDataBuilder {
         super();
         this.nodes = nodes;
         this.idName = idName;
-        this.sortName = idName; // 排序字段，按照idName
+        this.sortName = idName;  //排序字段，按照idName
         this.pidName = pidName;
         this.childrenName = childrenName;
     }
 
-    /** 自定义字段 + 排序标志 * */
-    public TreeDataBuilder(
-            Collection nodes, String idName, String pidName, String childrenName, String sortName, boolean isAscSort) {
+    /** 自定义字段 + 排序标志 **/
+    public TreeDataBuilder(Collection nodes, String idName, String pidName, String childrenName, String sortName, boolean isAscSort) {
         super();
         this.nodes = nodes;
         this.idName = idName;
@@ -68,7 +67,7 @@ public class TreeDataBuilder {
         this.isAscSort = isAscSort;
     }
 
-    /** 所有数据集合 * */
+    /** 所有数据集合 **/
     private Collection<JSONObject> nodes;
 
     /** 默认数据中的主键key */
@@ -77,13 +76,13 @@ public class TreeDataBuilder {
     /** 默认数据中的父级id的key */
     private String pidName = "pid";
 
-    /** 默认数据中的子类对象key */
+    /** 默认数据中的子类对象key   */
     private String childrenName = "children";
 
-    /** 排序字段， 默认按照ID排序 * */
+    /** 排序字段， 默认按照ID排序 **/
     private String sortName = idName;
 
-    /** 默认按照升序排序 * */
+    /** 默认按照升序排序 **/
     private boolean isAscSort = true;
 
     // 构建JSON树形结构
@@ -97,25 +96,25 @@ public class TreeDataBuilder {
     // 构建树形结构
     public List<JSONObject> buildTreeObject() {
 
-        // 定义待返回的对象
+        //定义待返回的对象
         List<JSONObject> resultNodes = new ArrayList<>();
 
-        // 获取所有的根节点 （考虑根节点有多个的情况， 将根节点单独处理）
+        //获取所有的根节点 （考虑根节点有多个的情况， 将根节点单独处理）
         List<JSONObject> rootNodes = getRootNodes();
 
-        listSort(rootNodes); // 排序
+        listSort(rootNodes); //排序
 
-        // 遍历根节点对象
+        //遍历根节点对象
         for (JSONObject rootNode : rootNodes) {
 
-            buildChildNodes(rootNode); // 递归查找子节点并设置
+            buildChildNodes(rootNode); //递归查找子节点并设置
 
-            resultNodes.add(rootNode); // 添加到对象信息
+            resultNodes.add(rootNode); //添加到对象信息
         }
         return resultNodes;
     }
 
-    /** 递归查找并赋值子节点 * */
+    /** 递归查找并赋值子节点 **/
     private void buildChildNodes(JSONObject node) {
         List<JSONObject> children = getChildNodes(node);
         if (!children.isEmpty()) {
@@ -123,7 +122,7 @@ public class TreeDataBuilder {
                 buildChildNodes(child);
             }
 
-            listSort(children); // 排序
+            listSort(children); //排序
             node.put(childrenName, children);
         }
     }
@@ -162,21 +161,23 @@ public class TreeDataBuilder {
         return rootNodes;
     }
 
-    /** 将list进行排序 */
-    private void listSort(List<JSONObject> list) {
+    /** 将list进行排序  */
+    private void listSort(List<JSONObject> list){
         Collections.sort(list, (o1, o2) -> {
+
             int result;
-            if (o1.get(sortName) instanceof Integer) {
+            if(o1.get(sortName) instanceof Integer){
                 result = o1.getInteger(sortName).compareTo(o2.getInteger(sortName));
-            } else {
+            }else{
                 result = o1.get(sortName).toString().compareTo(o2.get(sortName).toString());
             }
 
-            if (!isAscSort) { // 倒序， 取反数
+            if(!isAscSort){  //倒序， 取反数
                 return -result;
             }
 
             return result;
         });
     }
+
 }

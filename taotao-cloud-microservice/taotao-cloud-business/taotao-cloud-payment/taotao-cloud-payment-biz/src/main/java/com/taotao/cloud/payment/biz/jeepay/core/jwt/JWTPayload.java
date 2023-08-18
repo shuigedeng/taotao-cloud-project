@@ -1,25 +1,25 @@
 /*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Copyright (c) 2021-2031, 河北计全科技有限公司 (https://www.jeequan.com & jeequan@126.com).
+ * <p>
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.taotao.cloud.payment.biz.jeepay.core.jwt;
 
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.payment.biz.jeepay.core.model.security.JeeUserDetails;
-import java.util.Map;
+import com.jeequan.jeepay.core.model.security.JeeUserDetails;
 import lombok.Data;
+
+import java.util.Map;
 
 /*
 * JWT payload 载体
@@ -36,22 +36,24 @@ import lombok.Data;
 @Data
 public class JWTPayload {
 
-    private Long sysUserId; // 登录用户ID
-    private Long created; // 创建时间, 格式：13位时间戳
-    private String cacheKey; // redis保存的key
+    private Long sysUserId;       //登录用户ID
+    private Long created;         //创建时间, 格式：13位时间戳
+    private String cacheKey;      //redis保存的key
 
-    protected JWTPayload() {}
+    protected JWTPayload(){}
 
-    public JWTPayload(JeeUserDetails jeeUserDetails) {
+    public JWTPayload(JeeUserDetails jeeUserDetails){
 
         this.setSysUserId(jeeUserDetails.getSysUser().getSysUserId());
         this.setCreated(System.currentTimeMillis());
         this.setCacheKey(jeeUserDetails.getCacheKey());
     }
 
-    /** toMap * */
-    public Map<String, Object> toMap() {
-        JSONObject json = (JSONObject) JSONObject.toJSON(this);
+
+    /** toMap **/
+    public Map<String, Object> toMap(){
+        JSONObject json = (JSONObject)JSONObject.toJSON(this);
         return json.toJavaObject(Map.class);
     }
+
 }

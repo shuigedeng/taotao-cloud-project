@@ -343,7 +343,6 @@ seata:
 
 spring:
   file-storage: #文件存储配置，不使用的情况下可以不写
-    enabled: true
     default-platform: minio #默认使用的存储平台
     thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
     minio: # MinIO，由于 MinIO SDK 支持 AWS S3，其它兼容 AWS S3 协议的存储平台也都可配置在这里
@@ -822,20 +821,7 @@ taotao:
         #      part-size: 104857600
         #    client-config:
         #      connect-timeout: 5000
-    file-storage: #文件存储配置，不使用的情况下可以不写
-      enabled: true
-      default-platform: minio #默认使用的存储平台
-      thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
-      minio: # MinIO，由于 MinIO SDK 支持 AWS S3，其它兼容 AWS S3 协议的存储平台也都可配置在这里
-        - platform: minio # 存储平台标识
-          enable-storage: true  # 启用存储
-          access-key: xxx
-          secret-key: xxx
-          end-point: xxx
-          bucket-name: xxx
-          domain: xx/ # 访问域名，注意“/”结尾，例如：http://minio.abc.com/abc/
-          base-path: hy/ # 基础路径
-          
+
 mybatis-plus-join:
   banner: true
   sub-table-logic: true
