@@ -52,10 +52,10 @@ public class GoodsUnitSellerController {
     private final IGoodsUnitService goodsUnitService;
 
     @Operation(summary = "分页获取商品计量单位", description = "分页获取商品计量单位")
-    @RequestLogger("分页获取商品计量单位")
+    @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/page")
-    public Result<PageResult<GoodsUnitVO>> getByPage(PageQuery pageQuery) {
+    public Result<PageResult<GoodsUnitVO>> getByPage(@Validated PageQuery pageQuery) {
         IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
         return Result.success(PageResult.convertMybatisPage(page, GoodsUnitConvert.INSTANCE::convert));
     }

@@ -36,6 +36,7 @@ import com.taotao.cloud.goods.api.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.biz.manager.GoodsManager;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.goods.biz.model.convert.GoodsConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;
@@ -47,7 +48,6 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
-import com.taotao.cloud.goods.biz.util.QueryUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -63,6 +63,9 @@ import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.dromara.hutool.core.math.NumberUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.json.JSONUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,10 +82,11 @@ import java.util.Objects;
  * @version 2022.04
  * @since 2022-04-27 17:02:41
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
         implements IGoodsService {
+    private final GoodsManager goodsManager;
 
     /** 分类 */
     private final ICategoryService categoryService;
@@ -256,12 +260,12 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
 
     @Override
     public IPage<Goods> goodsQueryPage(GoodsPageQuery goodsPageQuery) {
-        return this.page(goodsPageQuery.buildMpPage(), QueryUtil.goodsQueryWrapper(goodsPageQuery));
+        return this.page(goodsPageQuery.buildMpPage(), goodsManager.goodsQueryWrapper(goodsPageQuery));
     }
 
     @Override
     public List<Goods> queryListByParams(GoodsPageQuery goodsPageQuery) {
-        return this.list(QueryUtil.goodsQueryWrapper(goodsPageQuery));
+        return this.list(goodsManager.goodsQueryWrapper(goodsPageQuery));
     }
 
     @Override
@@ -442,158 +446,5 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, 
                 .eq(Goods::getMarketEnable, GoodsStatusEnum.UPPER.name()));
     }
 
-    /**
-     * 发送删除es索引的信息
-     *
-     * @param goodsIds 商品id
-     */
-    private void deleteEsGoods(List<Long> goodsIds) {
-        // 商品删除消息
-        String destination = rocketmqCustomProperties.getGoodsTopic() + ":" + GoodsTagsEnum.GOODS_DELETE.name();
-        // 发送mq消息
-        rocketMQTemplate.asyncSend(
-                destination, JSONUtil.toJsonStr(goodsIds), RocketmqSendCallbackBuilder.commonCallback());
-    }
 
-    /**
-     * 添加商品默认图片
-     *
-     * @param origin 图片
-     * @param goods 商品
-     */
-    private void setGoodsGalleryParam(String origin, Goods goods) {
-        GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(origin);
-        goods.setOriginal(goodsGallery.getOriginal());
-        goods.setSmall(goodsGallery.getSmall());
-        goods.setThumbnail(goodsGallery.getThumbnail());
-    }
-
-    /**
-     * 检查商品信息 如果商品是虚拟商品则无需配置配送模板 如果商品是实物商品需要配置配送模板 判断商品是否存在 判断商品是否需要审核 判断当前用户是否为店铺
-     *
-     * @param goods 商品
-     */
-    private void checkGoods(Goods goods) {
-        // 判断商品类型
-        switch (goods.getGoodsType()) {
-            case "PHYSICAL_GOODS" -> {
-                if (Long.valueOf(0).equals(goods.getTemplateId())) {
-                    throw new BusinessException(ResultEnum.PHYSICAL_GOODS_NEED_TEMP);
-                }
-            }
-            case "VIRTUAL_GOODS" -> {
-                if (!Long.valueOf(0).equals(goods.getTemplateId())) {
-                    throw new BusinessException(ResultEnum.VIRTUAL_GOODS_NOT_NEED_TEMP);
-                }
-            }
-            default -> throw new BusinessException(ResultEnum.GOODS_TYPE_ERROR);
-        }
-
-        // 检查商品是否存在--修改商品时使用
-        if (goods.getId() != null) {
-            this.checkExist(goods.getId());
-        } else {
-            // 评论次数
-            goods.setCommentNum(0);
-            // 购买次数
-            goods.setBuyCount(0);
-            // 购买次数
-            goods.setQuantity(0);
-            // 商品评分
-            goods.setGrade(BigDecimal.valueOf(100));
-        }
-
-        // 获取商品系统配置决定是否审核
-        GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
-        // 是否需要审核
-        goods.setIsAuth(
-                boolean.TRUE.equals(goodsSetting.getGoodsCheck())
-                        ? GoodsAuthEnum.TOBEAUDITED.name()
-                        : GoodsAuthEnum.PASS.name());
-        // 判断当前用户是否为店铺
-        if (SecurityUtils.getCurrentUser().getType().equals(UserEnum.STORE.getCode())) {
-            StoreVO storeDetail = storeApi.getStoreDetail();
-            if (storeDetail.getSelfOperated() != null) {
-                goods.setSelfOperated(storeDetail.getSelfOperated());
-            }
-            goods.setStoreId(storeDetail.getId());
-            goods.setStoreName(storeDetail.getStoreName());
-            goods.setSelfOperated(storeDetail.getSelfOperated());
-        } else {
-            throw new BusinessException(ResultEnum.STORE_NOT_LOGIN_ERROR);
-        }
-    }
-
-    /**
-     * 判断商品是否存在
-     *
-     * @param goodsId 商品id
-     * @return 商品信息
-     */
-    private Goods checkExist(Long goodsId) {
-        Goods goods = getById(goodsId);
-        if (goods == null) {
-            LogUtils.error("商品ID为" + goodsId + "的商品不存在");
-            throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
-        }
-        return goods;
-    }
-
-    /**
-     * 获取UpdateWrapper（检查用户越权）
-     *
-     * @return updateWrapper
-     */
-    private LambdaUpdateWrapper<Goods> getUpdateWrapperByStoreAuthority() {
-        LambdaUpdateWrapper<Goods> updateWrapper = new LambdaUpdateWrapper<>();
-        SecurityUser authUser = this.checkStoreAuthority();
-        if (authUser != null) {
-            updateWrapper.eq(Goods::getStoreId, authUser.getStoreId());
-        }
-        return updateWrapper;
-    }
-
-    /**
-     * 检查当前登录的店铺
-     *
-     * @return 当前登录的店铺
-     */
-    private SecurityUser checkStoreAuthority() {
-        SecurityUser currentUser = SecurityUtils.getCurrentUser();
-        // 如果当前会员不为空，且为店铺角色
-        if (currentUser != null
-                && (currentUser.getType().equals(UserEnum.STORE.getCode()) && currentUser.getStoreId() != null)) {
-            return currentUser;
-        }
-        return null;
-    }
-
-    /**
-     * 检查当前登录的店铺
-     *
-     * @return 当前登录的店铺
-     */
-    private SecurityUser checkManagerAuthority() {
-        SecurityUser currentUser = SecurityUtils.getCurrentUser();
-        // 如果当前会员不为空，且为店铺角色
-        if (currentUser != null && (currentUser.getType().equals(UserEnum.MANAGER.getCode()))) {
-            return currentUser;
-        } else {
-            throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
-        }
-    }
-
-    /**
-     * 获取QueryWrapper（检查用户越权）
-     *
-     * @return queryWrapper
-     */
-    private LambdaQueryWrapper<Goods> getQueryWrapperByStoreAuthority() {
-        LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
-        SecurityUser authUser = this.checkStoreAuthority();
-        if (authUser != null) {
-            queryWrapper.eq(Goods::getStoreId, authUser.getStoreId());
-        }
-        return queryWrapper;
-    }
 }

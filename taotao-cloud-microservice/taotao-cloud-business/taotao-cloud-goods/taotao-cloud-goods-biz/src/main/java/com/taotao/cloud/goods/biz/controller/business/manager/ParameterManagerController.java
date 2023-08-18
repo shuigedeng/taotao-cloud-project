@@ -23,6 +23,8 @@ import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import com.taotao.cloud.goods.biz.service.business.IParametersService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -62,16 +64,23 @@ public class ParameterManagerController {
     }
 
     @Operation(summary = "编辑参数", description = "编辑参数")
+    @io.swagger.v3.oas.annotations.Parameters({
+            @Parameter(name = "id", required = true, description = "id", in = ParameterIn.PATH),
+    })
     @RequestLogger("编辑参数")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
-    public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO, @PathVariable Long id) {
+    public Result<Boolean> update(@Validated @RequestBody ParametersDTO parametersDTO,
+                                  @PathVariable Long id) {
         Parameters parameters = ParametersConvert.INSTANCE.convert(parametersDTO);
         parameters.setId(id);
         return Result.success(parametersService.updateParameter(parameters));
     }
 
     @Operation(summary = "根据id删除参数", description = "根据id删除参数")
+    @io.swagger.v3.oas.annotations.Parameters({
+            @Parameter(name = "id", required = true, description = "id", in = ParameterIn.PATH),
+    })
     @RequestLogger("根据id删除参数")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping(value = "/{id}")

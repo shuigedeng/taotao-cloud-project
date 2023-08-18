@@ -24,9 +24,10 @@ import com.taotao.cloud.goods.biz.repository.cls.CategorySpecificationRepository
 import com.taotao.cloud.goods.biz.repository.inf.ICategorySpecificationRepository;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 商品分类规格业务层实现
@@ -35,26 +36,25 @@ import org.springframework.stereotype.Service;
  * @version 2022.04
  * @since 2022-04-27 17:02:15
  */
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class CategorySpecificationServiceImpl
         extends BaseSuperServiceImpl<
-                ICategorySpecificationMapper,
-                CategorySpecification,
-                CategorySpecificationRepository,
-                ICategorySpecificationRepository,
-                Long>
+        ICategorySpecificationMapper,
+        CategorySpecification,
+        CategorySpecificationRepository,
+        ICategorySpecificationRepository,
+        Long>
         implements ICategorySpecificationService {
 
     @Override
     public List<Specification> getCategorySpecList(Long categoryId) {
-        return this.baseMapper.getCategorySpecList(categoryId);
+        return im().getCategorySpecList(categoryId);
     }
 
     @Override
     public boolean deleteByCategoryId(Long categoryId) {
-        return this.baseMapper.delete(new LambdaQueryWrapper<CategorySpecification>()
-                        .eq(CategorySpecification::getCategoryId, categoryId))
-                > 0;
+        return im().delete(new LambdaQueryWrapper<CategorySpecification>()
+                .eq(CategorySpecification::getCategoryId, categoryId)) > 0;
     }
 }

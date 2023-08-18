@@ -5,7 +5,7 @@ plugins {
     id "groovy-gradle-plugin"
     //https://plugins.gradle.org/docs/publish-plugin
     //https://plugins.gradle.org/plugin/com.gradle.plugin-publish
-    id "com.gradle.plugin-publish" version "1.2.0"
+    id "com.gradle.plugin-publish" version "1.2.1"
 }
 
 //发布到 https://plugins.gradle.org

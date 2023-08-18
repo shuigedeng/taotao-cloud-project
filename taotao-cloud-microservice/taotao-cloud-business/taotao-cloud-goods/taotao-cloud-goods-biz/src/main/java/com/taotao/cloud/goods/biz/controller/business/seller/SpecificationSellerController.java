@@ -23,6 +23,9 @@ import com.taotao.cloud.goods.biz.model.entity.Specification;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -51,7 +54,10 @@ public class SpecificationSellerController {
     private final ICategorySpecificationService categorySpecificationService;
 
     @Operation(summary = "获取分类规格", description = "获取分类规格")
-    @RequestLogger("获取分类规格")
+    @Parameters({
+            @Parameter(name = "categoryId", required = true, description = "分类id", in = ParameterIn.PATH),
+    })
+    @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
     public Result<List<SpecificationVO>> getSpecifications(@PathVariable Long categoryId) {

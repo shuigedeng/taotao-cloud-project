@@ -22,6 +22,9 @@ import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -54,6 +57,9 @@ public class CategorySpecificationManagerController {
     private final ISpecificationService specificationService;
 
     @Operation(summary = "查询某分类下绑定的规格信息", description = "查询某分类下绑定的规格信息")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
@@ -62,6 +68,9 @@ public class CategorySpecificationManagerController {
     }
 
     @Operation(summary = "查询某分类下绑定的规格信息,商品操作使用", description = "查询某分类下绑定的规格信息,商品操作使用")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/goods/{categoryId}")
@@ -70,6 +79,9 @@ public class CategorySpecificationManagerController {
     }
 
     @Operation(summary = "保存某分类下绑定的规格信息", description = "保存某分类下绑定的规格信息")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/{categoryId}")

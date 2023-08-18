@@ -19,6 +19,7 @@ package com.taotao.cloud.sys.biz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.taotao.cloud.sys.biz.model.entity.app.App;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * 系统应用表
@@ -26,5 +27,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author
  * @date 2022-09-12
  */
-@Mapper
+@Repository
 public interface AppMapper extends BaseMapper<App> {}

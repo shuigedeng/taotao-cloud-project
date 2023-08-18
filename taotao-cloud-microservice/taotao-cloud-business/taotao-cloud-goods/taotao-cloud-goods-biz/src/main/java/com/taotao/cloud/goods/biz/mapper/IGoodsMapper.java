@@ -26,6 +26,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
 /**
  * 规格项数据处理层
@@ -34,6 +35,8 @@ import org.apache.ibatis.annotations.Update;
  * @version 2022.04
  * @since 2022-04-27 16:56:00
  */
+//添加@Repository注解是为了引导IntelliJ IDEA作出正确的判断.
+@Repository
 public interface IGoodsMapper extends BaseSuperMapper<Goods, Long> {
 
     /**

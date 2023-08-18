@@ -28,6 +28,7 @@ import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -67,7 +68,7 @@ public interface HerodotusAuthorizationConsentRepository
             where ?{ registeredClientId = :registeredClientId }
             ?{ and principalName = :principalName }
             """)
-    Page<HerodotusAuthorizationConsent> myPageQuery(@RequestParam("registeredClientId") String registeredClientId,
-                                                    @RequestParam("principalName") String principalName,
+    Page<HerodotusAuthorizationConsent> myPageQuery(@Param("registeredClientId") String registeredClientId,
+                                                    @Param("principalName") String principalName,
                                                     PageRequest pageRequest);
 }

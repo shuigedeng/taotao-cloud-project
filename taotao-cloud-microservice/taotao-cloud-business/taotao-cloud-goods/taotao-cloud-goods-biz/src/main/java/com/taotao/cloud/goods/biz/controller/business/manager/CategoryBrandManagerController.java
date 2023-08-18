@@ -21,6 +21,9 @@ import com.taotao.cloud.goods.api.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
@@ -51,6 +54,9 @@ public class CategoryBrandManagerController {
     private final ICategoryBrandService categoryBrandService;
 
     @Operation(summary = "查询某分类下绑定的品牌信息", description = "查询某分类下绑定的品牌信息")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
@@ -60,6 +66,9 @@ public class CategoryBrandManagerController {
     }
 
     @Operation(summary = "保存某分类下绑定的品牌信息", description = "保存某分类下绑定的品牌信息")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping(value = "/{categoryId}/{categoryBrands}")

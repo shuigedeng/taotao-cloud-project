@@ -27,6 +27,9 @@ import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.goods.biz.service.business.IBrandService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
@@ -61,6 +64,9 @@ public class BrandManagerController {
     private final IBrandService brandService;
 
     @Operation(summary = "通过id获取", description = "通过id获取")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}")
@@ -70,6 +76,9 @@ public class BrandManagerController {
     }
 
     @Operation(summary = "获取所有可用品牌", description = "获取所有可用品牌")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/all/available")
@@ -79,6 +88,9 @@ public class BrandManagerController {
     }
 
     @Operation(summary = "分页获取", description = "分页获取")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/page")
@@ -88,6 +100,9 @@ public class BrandManagerController {
     }
 
     @Operation(summary = "新增品牌", description = "新增品牌")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PostMapping
@@ -96,6 +111,9 @@ public class BrandManagerController {
     }
 
     @Operation(summary = "更新品牌", description = "更新品牌")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping("/{id}")
@@ -105,6 +123,9 @@ public class BrandManagerController {
     }
 
     @Operation(summary = "后台禁用品牌", description = "后台禁用品牌")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/disable/{brandId}")
@@ -113,6 +134,9 @@ public class BrandManagerController {
     }
 
     @Operation(summary = "批量删除", description = "批量删除")
+    @Parameters({
+            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+    })
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @DeleteMapping(value = "/{ids}")
