@@ -152,6 +152,6 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD /healthcheck.sh || exit 1
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD /bin/sh /healthcheck.sh || exit 1
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher

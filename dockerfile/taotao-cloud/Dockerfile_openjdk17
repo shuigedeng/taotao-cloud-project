@@ -30,6 +30,8 @@ COPY ./pyroscope-agent /pyroscope/agent
 
 COPY ./healthcheck.sh /healthcheck.sh
 
+RUN chmod 755 /healthcheck.sh
+
 # docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font .
 
 # docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
