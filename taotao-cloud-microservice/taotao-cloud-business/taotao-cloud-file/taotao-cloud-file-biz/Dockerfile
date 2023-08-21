@@ -152,6 +152,10 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD /bin/sh /healthcheck.sh
+#interval: 30s #运行间隔时间(ms|s|m|h)(缺省为0s)
+#timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
+#retries: 3   #连续失败次数后报告不健康
+#start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
+HEALTHCHECK --start_period=60s --interval=10s --timeout=20s --retries=50 CMD /bin/sh /healthcheck.sh ${APP_PORT}
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
