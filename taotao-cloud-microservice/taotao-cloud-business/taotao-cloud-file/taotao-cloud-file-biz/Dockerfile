@@ -8,9 +8,9 @@ RUN java -Djarmode=layertools -jar taotao-cloud-file-2023.09.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 #使用healthcheck.sh
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font-test
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font-test
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
@@ -154,13 +154,14 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
+#docker inspect --format='{{json .State.Health}}' file
 #interval: 30s #运行间隔时间(ms|s|m|h)(缺省为0s)
 #timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
 #retries: 3   #连续失败次数后报告不健康
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-#HEALTHCHECK --start_period=60s --interval=10s --timeout=20s --retries=50 CMD /bin/sh /healthcheck.sh ${APP_PORT}
+HEALTHCHECK --start_period=60s --interval=10s --timeout=20s --retries=50 CMD /bin/sh /healthcheck.sh ${APP_PORT}
 
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
