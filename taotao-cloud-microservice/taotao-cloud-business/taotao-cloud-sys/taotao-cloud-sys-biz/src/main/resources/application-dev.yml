@@ -6,6 +6,9 @@ server:
   undertow:
     buffer-size: 2048 #每块buffer的空间大小,越小的空间被利用越充分，buffer会用于服务器连接的IO操作,类似netty的池化内存管理
     direct-buffers: true # 是否分配的直接内存
+    #max-http-post-size: -1B # HTTP POST请求最大的大小
+    max-cookies: 200 # 允许的最大 cookie 数量
+    max-headers: 100 # 允许的最大请求头数量
     threads:
       io: 16 # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
       worker: 256 # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
@@ -15,9 +18,6 @@ server:
       pattern: common # 日志格式
       prefix: "access_log." # 日志文件名前缀
       suffix: log # 日志文件名后缀
-    #max-http-post-size: -1B # HTTP POST请求最大的大小
-    max-cookies: 200 # 允许的最大 cookie 数量
-    max-headers: 100 # 允许的最大请求头数量
   servlet:
     application-display-name: ${spring.application.name}
     #context-path: sys

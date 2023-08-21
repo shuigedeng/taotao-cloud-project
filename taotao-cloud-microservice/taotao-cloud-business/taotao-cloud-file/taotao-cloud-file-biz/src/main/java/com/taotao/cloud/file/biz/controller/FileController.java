@@ -19,6 +19,7 @@ package com.taotao.cloud.file.biz.controller;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.common.model.ValidList;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.service.IFileService;
@@ -69,6 +70,13 @@ public class FileController {
     // @Autowired
     // private Cache cache;
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
+    @NotAuth
+    @Operation(summary = "测试校验", description = "测试校验")
+    @PostMapping("/qqqqqq/batch")
+    public Result<Boolean> qqqqqqBatch(@Valid @NotEmpty(message = "数据不能为空") @RequestBody ValidList<Student> ids) {
+        return Result.success(true);
+    }
 
     @NotAuth
     @Operation(summary = "批量删除", description = "批量删除")
@@ -238,15 +246,20 @@ public class FileController {
 
     @Data
     public static class Student {
-        @Schema(name = "name", title = "name", requiredMode = Schema.RequiredMode.REQUIRED)
+        @NotEmpty(message = "名称不能为空")
+        @Schema(name = "name", title = "名称")
         private String name;
-        @Schema(name = "age", type = "integer", title = "age", requiredMode = Schema.RequiredMode.REQUIRED)
+
+        @Schema(name = "age", type = "integer", title = "年龄")
         private Integer age;
-        @Schema(name = "birthDay", title = "birthDay", requiredMode = Schema.RequiredMode.REQUIRED, implementation = LocalDateTime.class)
+
+        @Schema(name = "birthDay", title = "生日")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime birthDay;
-        @Schema(name = "plays", title = "plays", requiredMode = Schema.RequiredMode.REQUIRED, implementation = List.class)
+
+        @NotEmpty(message = "plays数据不能为空")
+        @Schema(name = "plays", title = "plays数据")
         private List<String> plays;
 
     }
