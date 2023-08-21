@@ -530,6 +530,22 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.80
+
+  openresty:
+    image: openresty/openresty:alpine
+    container_name: openresty
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8000:80"
+    volumes:
+      - /root/compose/openresty/openresty-default.conf:/etc/nginx/conf.d/default.conf
+      - /root/compose/openresty/openresty-nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.100
+
   arthas:
     image: hengyunabc/arthas:latest
     container_name: arthas
