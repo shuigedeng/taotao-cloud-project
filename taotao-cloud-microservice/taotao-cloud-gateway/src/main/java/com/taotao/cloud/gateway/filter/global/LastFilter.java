@@ -17,11 +17,15 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.common.utils.servlet.TraceUtils;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -47,6 +51,10 @@ public class LastFilter implements GlobalFilter, Ordered {
 
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {
             LogUtils.info("最终-----返回数据");
+
+            ServerHttpResponse response = exchange.getResponse();
+            HttpHeaders httpHeaders = response.getHeaders();
+            ResponseUtils.addHeader(httpHeaders, "tid", TraceContext.traceId());
 
             Object traceId = exchange.getAttributes().get(TAOTAO_CLOUD_TRACE_ID);
             if (Objects.nonNull(traceId) && traceId instanceof String trace) {
