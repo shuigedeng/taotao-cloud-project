@@ -6,8 +6,8 @@
 
 function _main
 {
-  health_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/actuator/health")
-  api_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/v3/api-docs")
+  health_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$1/actuator/health")
+  api_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$1/v3/api-docs")
 
   [[ $health_status_code -eq 200 && $health_status_code -eq 200 ]] && exit 1
 
