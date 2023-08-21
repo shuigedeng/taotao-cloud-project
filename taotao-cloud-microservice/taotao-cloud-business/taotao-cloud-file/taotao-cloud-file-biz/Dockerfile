@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-file-2023.09.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font-test
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
@@ -25,6 +25,7 @@ LABEL org.opencontainers.image.authors=981376577@qq.com
 #****************************app****************************
 ENV TZ=Asia/Shanghai
 ENV APP_NAME=${APP_NAME}
+ENV APP_PORT=${APP_PORT}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ENV APP_PRROFILES=${APP_PRROFILES}
@@ -134,6 +135,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk update --allow-untrusted && apk add curl --allow-untrusted
 RUN apk add libstdc++ --allow-untrusted
 
+RUN chmod 755 /healthcheck.sh
+
 VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
@@ -149,6 +152,6 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD /healthcheck.sh || exit 1
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher

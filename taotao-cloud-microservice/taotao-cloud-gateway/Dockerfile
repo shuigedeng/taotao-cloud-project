@@ -23,6 +23,7 @@ LABEL org.opencontainers.image.authors=981376577@qq.com
 #****************************app****************************
 ENV TZ=Asia/Shanghai
 ENV APP_NAME=${APP_NAME}
+ENV APP_PORT=${APP_PORT}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ENV APP_PRROFILES=${APP_PRROFILES}

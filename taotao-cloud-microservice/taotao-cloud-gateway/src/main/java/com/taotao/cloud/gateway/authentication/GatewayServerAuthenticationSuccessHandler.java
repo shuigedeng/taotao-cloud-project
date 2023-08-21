@@ -68,7 +68,7 @@ public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenti
 
         //        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
         //        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
-        //        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_HEADER, clientId);
+        //        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_ID, clientId);
         headerValues.add(
                 CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER,
                 CollUtil.join(authentication.getAuthorities(), ","));

@@ -205,7 +205,7 @@ public class GrayConfiguration {
 
         private Response<ServiceInstance> getServiceInstanceResponseWithGray(
                 List<ServiceInstance> instances, HttpHeaders headers) {
-            String reqVersion = headers.getFirst(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION_HEADER);
+            String reqVersion = headers.getFirst(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION);
 
             // 根据版本进行分发
             if (StrUtil.isNotBlank(reqVersion)) {

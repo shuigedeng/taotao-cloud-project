@@ -20,10 +20,13 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
+import org.dromara.hutool.core.text.StrUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -40,22 +43,35 @@ import reactor.core.publisher.Mono;
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "trace", havingValue = "true", matchIfMissing = true)
 public class TraceLogFilter implements GlobalFilter, Ordered {
 
+    @Value("${taotaoCloudVersion:--}")
+    private String taotaoCloudVersion;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String traceId = IdGeneratorUtils.getIdStr();
         TraceUtils.setTraceId(traceId);
 
-        ServerHttpRequest serverHttpRequest = exchange.getRequest()
-                .mutate()
-                .headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_HEADER, traceId))
-                .build();
+        HttpHeaders headers = exchange.getRequest().getHeaders();
+        String version = headers.getFirst(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION);
+        String tenantId = headers.getFirst(CommonConstant.TAOTAO_CLOUD_TENANT_ID);
 
-        ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
-        return chain.filter(build);
+        ServerHttpRequest.Builder builder = exchange.getRequest()
+                .mutate()
+                .headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_ID, traceId));
+        if (StrUtil.isEmpty(version)) {
+            builder.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION, taotaoCloudVersion));
+        }
+        if (StrUtil.isEmpty(tenantId)) {
+            builder.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TENANT_ID, CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT));
+        }
+        ServerHttpRequest serverHttpRequest = builder.build();
+
+        ServerWebExchange serverWebExchange = exchange.mutate().request(serverHttpRequest).build();
+        return chain.filter(serverWebExchange);
     }
 
     @Override
     public int getOrder() {
-        return  Ordered.HIGHEST_PRECEDENCE + 4;
+        return Ordered.HIGHEST_PRECEDENCE + 4;
     }
 }
