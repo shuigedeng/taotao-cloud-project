@@ -134,8 +134,7 @@ RUN ls -l /etc/apk
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/
 #清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
-RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.14/main \
-       https://mirrors.ustc.edu.cn/alpine/v3.14/community' >/etc/apk/repositories
+RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.14/main' >/etc/apk/repositories
 
 RUN apk update --allow-untrusted && apk add curl --allow-untrusted
 RUN apk add libstdc++ --allow-untrusted
