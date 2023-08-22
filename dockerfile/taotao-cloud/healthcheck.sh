@@ -4,6 +4,10 @@
 
 # functions
 
+#docker health
+#0：成功;
+#1：失败;
+#2：保留值，不要使用
 function _main
 {
   health_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/actuator/health")
@@ -13,28 +17,13 @@ function _main
     api_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/v3/api-docs")
     echo $api_status_code
 
-  	[[ $health_status_code -eq 200 && $api_status_code -eq 200 ]] && exit 1
+  	[[ $health_status_code -eq 200 && $api_status_code -eq 200 ]] && exit 0
   else
-    [[ $health_status_code -eq 200 ]] && exit 1
+    [[ $health_status_code -eq 200 ]] && exit 0
   fi
 
-   exit 0
+   exit 1
 }
 
 # main
 _main "$@"
-
-
-
-
-##!/bin/sh
-#
-#curl -fs http://127.0.0.1:$APP_PORT/actuator/health
-#health_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/actuator/health")
-#echo $health_status_code
-#
-#curl -fs http://127.0.0.1:$APP_PORT/v3/api-docs
-#api_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/v3/api-docs")
-#echo $api_status_code
-#
-#echo success
