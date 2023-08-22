@@ -127,17 +127,13 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 
 RUN ls -l /etc/apk
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-#RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.7/main \
-#       https://mirrors.ustc.edu.cn/alpine/v3.7/community\
-#       https://mirrors.ustc.edu.cn/alpine/edge/main\
-#       https://mirrors.ustc.edu.cn/alpine/edge/community\
-#       https://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
+RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.14/main \
+       https://mirrors.ustc.edu.cn/alpine/v3.14/community' >/etc/apk/repositories
+
 RUN apk update --allow-untrusted && apk add curl --allow-untrusted
 RUN apk add libstdc++ --allow-untrusted
-
-RUN chmod 755 /healthcheck.sh
 
 VOLUME /root/logs
 
@@ -154,6 +150,7 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
+#docker inspect --format='{{json .State.Health}}' file
 #interval: 30s #运行间隔时间(ms|s|m|h)(缺省为0s)
 #timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
 #retries: 3   #连续失败次数后报告不健康
@@ -161,6 +158,5 @@ RUN true
 #HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
 HEALTHCHECK --interval=10s --timeout=20s --retries=50 CMD /bin/sh /healthcheck.sh
-
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
