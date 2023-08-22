@@ -246,6 +246,7 @@ spring:
           uri: lb://taotao-cloud-auth
           metadata:
             name: 认证管理中心
+            request_uri_prefix: auth
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/auth/**
             #- Header=Accept,.*;?version=1\.0(|;.*)         Accept: application/json, text/plain, */*?version=1.0
@@ -268,6 +269,7 @@ spring:
           uri: lb://taotao-cloud-customer
           metadata:
             name: 客服管理中心
+            request_uri_prefix: customer
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/customer/**
           filters:
@@ -310,6 +312,7 @@ spring:
           uri: lb://taotao-cloud-file
           metadata:
             name: 文件管理中心
+            request_uri_prefix: file
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/file/**
           filters:
@@ -373,6 +376,7 @@ spring:
           uri: lb://taotao-cloud-job
           metadata:
             name: 定时任务中心
+            request_uri_prefix: job
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/job/**
           filters:
@@ -650,6 +654,7 @@ spring:
             #每条路由超时
             response-timeout: 200
             connect-timeout: 200
+            request_uri_prefix: sys
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/sys/**
           filters:
@@ -662,6 +667,7 @@ spring:
           uri: lb://taotao-cloud-order
           metadata:
             name: 订单管理中心
+            request_uri_prefix: order
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/order/**
           filters:
@@ -967,17 +973,18 @@ taotao:
             oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
             oidc-user-info-uri: http://127.0.0.1:33336/userinfo
         enabled: true
-        ignore-url: >
-          /auth/captcha/code,
-          /auth/qrcode/code,
-          /auth/sms/phone,
-          /auth/oauth2/token,
-          /auth/oauth2/authorize,
-          /*/health/**,
-          /health/**,
-          /sys/**,
-          /file/**,
-          /job/**,
+        ignore-url:
+          - /auth/captcha/code
+          - /auth/qrcode/code
+          - /auth/sms/phone
+          - /auth/oauth2/token
+          - /auth/oauth2/authorize
+          - /*/health/**
+          - /*/request/gateway/test
+          - /health/**
+          - /sys/**
+          - /file/**
+          - /job/**
       api:
         prefix: /api
         version: v${taotaoCloudVersion}

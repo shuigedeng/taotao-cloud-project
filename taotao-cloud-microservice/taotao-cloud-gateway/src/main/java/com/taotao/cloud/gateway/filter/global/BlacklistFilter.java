@@ -87,8 +87,9 @@ public class BlacklistFilter implements GlobalFilter, Ordered {
                 return Mono.empty();
             }
         }
+
         return chain.filter(exchange).then(Mono.fromRunnable(() ->{
-            LogUtils.info("最终最终返回数据");
+            LogUtils.info("Response BlacklistFilter 最终最终返回数据");
 
             TraceUtils.removeTraceId();
             LocaleContextHolder.resetLocaleContext();

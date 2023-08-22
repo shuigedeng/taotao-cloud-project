@@ -1,7 +1,5 @@
 package com.taotao.cloud.gateway.filter.global;
 
-// AdaptCachedBodyGlobalFilter
-
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;
@@ -36,7 +34,7 @@ import java.util.List;
  * @version 2023.04
  * @since 2023-05-08 13:18:58
  */
-//@Component
+@Component
 public class LogFilter implements GlobalFilter, Ordered {
 	private static final String START_TIME = "startTime";
 	private static final List<HttpMessageReader<?>> messageReaders = HandlerStrategies.withDefaults().messageReaders();
