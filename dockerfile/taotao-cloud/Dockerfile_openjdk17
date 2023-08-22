@@ -26,6 +26,7 @@ RUN mkdir /skywalking
 RUN mkdir /pyroscope
 
 COPY ./skywalking-agent /skywalking/agent
+
 COPY ./pyroscope-agent /pyroscope/agent
 
 COPY ./healthcheck.sh /healthcheck.sh
