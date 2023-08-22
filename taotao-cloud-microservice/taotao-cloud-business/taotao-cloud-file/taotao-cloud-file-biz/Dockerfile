@@ -159,8 +159,8 @@ RUN true
 #timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
 #retries: 3   #连续失败次数后报告不健康
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
-#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=30 CMD /bin/sh /healthcheck.sh
+#HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=30 CMD /bin/sh /healthcheck.sh
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
