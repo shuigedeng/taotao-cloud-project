@@ -164,6 +164,7 @@ RUN true
 
 #HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD curl --fail http://localhost:$EXPORTER_PORT || bash -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
 
+
 #能让容器重启
 HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
 
