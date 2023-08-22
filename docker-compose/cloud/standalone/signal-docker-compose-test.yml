@@ -573,6 +573,21 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.200
+#    # 健康检查
+#    healthcheck:
+#      # mysqladmin -uroot -p123  ping -h127.0.0.1
+#      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+#      #      test: [ "CMD", "mysqladmin","-u","root","-p","123" ,"ping", "-h", "127.0.0.1" ]
+#      timeout: 45s
+#      interval: 10s
+#      retries: 10
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sS 127.0.0.1:11384/pacs/v2/dicom/echo || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
 
 networks:
   taotao-cluster-network:
