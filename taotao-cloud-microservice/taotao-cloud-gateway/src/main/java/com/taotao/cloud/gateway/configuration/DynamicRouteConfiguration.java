@@ -22,6 +22,7 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.client.naming.event.InstancesChangeEvent;
+import com.alibaba.nacos.common.notify.NotifyCenter;
 import com.alibaba.nacos.common.notify.listener.Subscriber;
 import com.alibaba.nacos.common.utils.JacksonUtils;
 import com.taotao.cloud.common.constant.CommonConstant;
@@ -33,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.collection.ListUtil;
 import org.dromara.hutool.core.text.StrUtil;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -106,6 +108,7 @@ public class DynamicRouteConfiguration {
 			this.publisher = publisher;
 			this.dynamicRouteProperties = dynamicRouteProperties;
 			this.nacosConfigProperties = nacosConfigProperties;
+
 			addListener();
 		}
 
@@ -259,34 +262,5 @@ public class DynamicRouteConfiguration {
 		}
 	}
 
-	/**
-	 * 一个集群中有某个服务突然下线，但是网关还是会去请求这个实例，所以线上就报错
-	 * <p>
-	 * Gateway中有个缓存 CachingRouteLocator ，而网关服务使用的是lb模式，服务在上线或者下线之后，未能及时刷新这个缓存 CachingRouteLocator
-	 * <p>
-	 * 监听 Nacos 实例刷新事件，一旦出现实例发生变化马上删除缓存。在删除负载均衡缓存后， Spring Cloud Gateway
-	 * 在处理请求时发现没有缓存会重新拉取一遍服务列表，这样之后都是用的是最新的服务列表了，也就达到了动态感知上下线的目的
-	 */
-	@Component
-	@Slf4j
-	public static class NacosInstancesChangeEventListener extends Subscriber<InstancesChangeEvent> {
 
-		@Resource
-		private CacheManager defaultLoadBalancerCacheManager;
-
-		@Override
-		public void onEvent(InstancesChangeEvent event) {
-			log.info("Spring Gateway 接收实例刷新事件：{}, 开始刷新缓存", JacksonUtils.toJson(event));
-			Cache cache = defaultLoadBalancerCacheManager.getCache(SERVICE_INSTANCE_CACHE_NAME);
-			if (cache != null) {
-				cache.evict(event.getServiceName());
-			}
-			log.info("Spring Gateway 实例刷新完成");
-		}
-
-		@Override
-		public Class<? extends com.alibaba.nacos.common.notify.Event> subscribeType() {
-			return InstancesChangeEvent.class;
-		}
-	}
 }

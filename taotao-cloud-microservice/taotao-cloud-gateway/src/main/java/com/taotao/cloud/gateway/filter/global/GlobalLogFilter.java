@@ -75,17 +75,18 @@ public class GlobalLogFilter implements GlobalFilter, Ordered {
         }
 
         exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
+
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {
             Long startTime = exchange.getAttribute(START_TIME);
             if (startTime != null) {
                 long executeTime = (System.currentTimeMillis() - startTime);
-                LogUtils.info("[PLUS]结束请求 => URL[{}],耗时:[{}]毫秒", url, executeTime);
+                LogUtils.info("Response GlobalLogFilter [PLUS]结束请求 => URL[{}],耗时:[{}]毫秒", url, executeTime);
             }
         }));
     }
 
     @Override
     public int getOrder() {
-        return Ordered.LOWEST_PRECEDENCE;
+        return  Ordered.HIGHEST_PRECEDENCE + 6;
     }
 }

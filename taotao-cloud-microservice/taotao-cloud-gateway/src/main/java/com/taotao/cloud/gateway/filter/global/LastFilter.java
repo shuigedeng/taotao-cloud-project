@@ -50,7 +50,7 @@ public class LastFilter implements GlobalFilter, Ordered {
         LocaleContextHolder.resetLocaleContext();
 
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-            LogUtils.info("最终-----返回数据");
+            LogUtils.info("Response LastFilter 最终-----返回数据");
 
             ServerHttpResponse response = exchange.getResponse();
             HttpHeaders httpHeaders = response.getHeaders();

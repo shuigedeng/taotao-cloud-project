@@ -201,7 +201,7 @@ public class VisitRecordService {
 
 	private void batchSave() {
 		log.debug("访问记录准备插入数据库，当前数据量：{}", visitCache.size());
-		if (visitCache.size() == 0) {
+		if (visitCache.isEmpty()) {
 			return;
 		}
 		// 构造新对象来存储数据，旧对象保存到数据库后不再使用
