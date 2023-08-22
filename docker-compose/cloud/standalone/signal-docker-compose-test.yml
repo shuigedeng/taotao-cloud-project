@@ -558,6 +558,8 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.42
 
+
+
   gateway:
     image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2023.09
     container_name: taotao-cloud-gateway
@@ -567,7 +569,7 @@ services:
     ports:
       - "33333:33333"
     volumes:
-      - /root/compose/taotao-cloud-gateway/:/root/
+      - /root/compose/taotao-cloud-gateway:/root/logs
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.200
