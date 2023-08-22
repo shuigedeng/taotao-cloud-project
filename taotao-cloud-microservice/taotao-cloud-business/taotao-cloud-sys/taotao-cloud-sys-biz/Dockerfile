@@ -21,6 +21,7 @@ ARG APP_VERSION=2023.09
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33337
 ARG APP_PRROFILES=dev
+ARG REQUEST_API_DOCS=1
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
@@ -29,9 +30,11 @@ LABEL org.opencontainers.image.authors=981376577@qq.com
 #****************************app****************************
 ENV TZ=Asia/Shanghai
 ENV APP_NAME=${APP_NAME}
+ENV APP_PORT=${APP_PORT}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ENV APP_PRROFILES=${APP_PRROFILES}
+ENV REQUEST_API_DOCS=${REQUEST_API_DOCS}
 #****************************skywalking 从env中获取配置数据****************************
 ENV SW_AGENT_NAME=${APP_NAME}
 ENV SW_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
@@ -128,17 +131,22 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
     && mkdir -p /root/logs/${APP_NAME} \
 	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
-RUN ls -l /etc/apk
-#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+#https://mirrors.aliyun.com/alpine/v3.14/main
+#https://mirrors.ustc.edu.cn/alpine/v3.14/main/
+#清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
+RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
+    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
+    && set -eux \
+    && apk update --allow-untrusted \
+    && apk add curl --allow-untrusted \
+    && apk add libstdc++ --allow-untrusted \
+    && apk add --no-cache --update fontconfig ttf-dejavu \
+    && apk add --no-cache --update tzdata
 
-#RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.7/main \
-#       https://mirrors.ustc.edu.cn/alpine/v3.7/community\
-#       https://mirrors.ustc.edu.cn/alpine/edge/main\
-#       https://mirrors.ustc.edu.cn/alpine/edge/community\
-#       https://mirrors.ustc.edu.cn/alpine/edge/testing' >/etc/apk/repositories
-RUN apk update --allow-untrusted && apk add curl --allow-untrusted
-RUN apk add libstdc++ --allow-untrusted
+# 添加 Arthas Toolkit
+#COPY --from=registry.cn-huhehaote.aliyuncs.com/jokerbai/arthas:latest /opt/arthas /opt/arthas
+# 添加 Skywalking Agent
+#COPY --from=registry.cn-huhehaote.aliyuncs.com/jokerbai/skywalking-agent-sidecar:8.1.0-es7 /usr/skywalking/agent /opt/skywalking/agent
 
 # RUN apk update && apk agdd libreoffice
 # RUN apk add --no-cache msttcorefonts-installer fontconfig
@@ -165,7 +173,14 @@ RUN true
 COPY --from=builder /root/application/ ./
 RUN true
 
-HEALTHCHECK --interval=120s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+#docker inspect --format='{{json .State.Health}}' file
+#interval: 30s #运行间隔时间(ms|s|m|h)(缺省为0s)
+#timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
+#retries: 3   #连续失败次数后报告不健康
+#start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
+#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+#使用healthcheck.sh
+HEALTHCHECK --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
 
