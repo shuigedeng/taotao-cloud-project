@@ -19,6 +19,7 @@ ARG APP_VERSION=2023.09
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33339
 ARG APP_PRROFILES=dev
+ARG REQUEST_API_DOCS=1
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
@@ -31,6 +32,7 @@ ENV APP_PORT=${APP_PORT}
 ENV APP_VERSION=${APP_VERSION}
 ENV APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ENV APP_PRROFILES=${APP_PRROFILES}
+ENV REQUEST_API_DOCS=${REQUEST_API_DOCS}
 #****************************skywalking 从env中获取配置数据****************************
 ENV SW_AGENT_NAME=${APP_NAME}
 ENV SW_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
@@ -129,6 +131,9 @@ RUN ls -l /etc/apk
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 #RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
+#https://mirrors.aliyun.com/alpine/v3.14/main
+#https://mirrors.ustc.edu.cn/alpine/v3.14/main/
+#清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
 RUN echo 'https://mirrors.ustc.edu.cn/alpine/v3.14/main \
        https://mirrors.ustc.edu.cn/alpine/v3.14/community' >/etc/apk/repositories
 

@@ -7,19 +7,24 @@
 function _main
 {
   health_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/actuator/health")
-  api_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/v3/api-docs")
-
   echo $health_status_code
-  echo $api_status_code
 
-  [[ $health_status_code -eq 200 && $api_status_code -eq 200 ]] && exit 1
+  if [[ $REQUEST_API_DOCS -eq 1 ]]; then
+    api_status_code=$(curl -s -o /dev/null -w "%{http_code}" -X GET "http://127.0.0.1:$APP_PORT/v3/api-docs")
+    echo $api_status_code
 
-  exit 0
+  	[[ $health_status_code -eq 200 && $api_status_code -eq 200 ]] && exit 1
+  else
+    [[ $health_status_code -eq 200 ]] && exit 1
+  fi
+
+   exit 0
 }
 
 # main
-
 _main "$@"
+
+
 
 
 ##!/bin/sh
