@@ -180,10 +180,20 @@ RUN true
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
 #HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
+
+#HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
 
+
+
+#JVM 包含多种不同类型的参数选项
+#-D 用来设置系统属性，属于标准选项
+#-X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关
+#-XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关
+#布尔类型的高级选项是起到功能的开关作用，不带参数。使用 + 启用功能，使用 - 禁用功能；对于带参数的高级选项，需要指定参数值
+#使用 java -XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal -version 命令可以查看 JVM 所有的选项
 
 
 #ENV JAVA_OPTIONS="
