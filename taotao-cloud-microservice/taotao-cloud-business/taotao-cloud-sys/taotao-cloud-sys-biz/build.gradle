@@ -16,7 +16,7 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-rxjava"
     implementation "io.github.shuigedeng:taotao-cloud-starter-laytpl"
     implementation "io.github.shuigedeng:taotao-cloud-starter-elk"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
+    //implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-office"
     implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"

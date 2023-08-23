@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.aop.execl;
 
-import com.alibaba.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.disruptor.util.StringUtils;
@@ -36,6 +35,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.dromara.hutool.core.thread.ThreadFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,7 +44,7 @@ import org.springframework.stereotype.Component;
 public class ExcelUploadAspect {
 
     public static ThreadFactory commonThreadFactory = new ThreadFactoryBuilder()
-            .setNameFormat("upload-pool-%d")
+            .setNamePrefix("upload-pool-%d")
             .setPriority(Thread.NORM_PRIORITY)
             .build();
 
