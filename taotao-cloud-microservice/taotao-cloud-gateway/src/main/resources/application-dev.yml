@@ -652,8 +652,8 @@ spring:
           metadata:
             name: 系统管理中心
             #每条路由超时
-            response-timeout: 200
-            connect-timeout: 200
+            connect-timeout: 5000
+            response-timeout: 5000
             request_uri_prefix: sys
           predicates:
             - Path=${taotao.cloud.gateway.api.base-uri}/sys/**

@@ -30,7 +30,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
-    implementation 'org.springframework.session:spring-session-data-redis:3.1.1'
+    implementation 'org.springframework.session:spring-session-data-redis:3.1.2'
 
     implementation 'com.github.binarywang:weixin-java-mp:4.5.4.B'
     implementation 'com.github.binarywang:weixin-java-miniapp:4.5.4.B'
@@ -70,7 +70,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
     //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
-    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.1.1'
+    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.1.2'
 
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
