@@ -57,6 +57,7 @@ public class RedisSecurityContextRepository implements SecurityContextRepository
     public static final String SECURITY_CONTEXT_PREFIX_KEY = "security_context:";
 
     @Override
+    @Deprecated
     public SecurityContext loadContext(HttpRequestResponseHolder requestResponseHolder) {
         //        HttpServletRequest request = requestResponseHolder.getRequest();
         //        return readSecurityContextFromRedis(request);
