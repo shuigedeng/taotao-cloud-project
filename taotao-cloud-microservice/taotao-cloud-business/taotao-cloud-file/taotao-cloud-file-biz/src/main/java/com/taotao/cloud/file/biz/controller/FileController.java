@@ -38,9 +38,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -60,16 +62,28 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @BusinessApi
 @Validated
 @RestController
+@AllArgsConstructor
 @Tag(name = "文件管理接口11111")
 @RequestMapping("/file/common")
 public class FileController {
 
-    //    @Autowired
-    private IFileService fileService;
+    private final IFileService fileService;
 
     // @Autowired
     // private Cache cache;
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
+    @NotAuth
+    @Operation(summary = "testSeata", description = "testSeata")
+    @PostMapping("/testSeata")
+    public Result<Boolean> testSeata() {
+        fileService.testSeata();
+
+        return Result.success(true);
+    }
+
+
+
+
 
     @NotAuth
     @Operation(summary = "测试校验", description = "测试校验")
@@ -119,7 +133,8 @@ public class FileController {
     @PostMapping(value = "/upload")
     public Result<UploadFileVO> upload(@NotNull(message = "类型不能为空") @RequestParam("type") Integer type,
                                        @NotNull(message = "文件不能为空") @RequestPart("file") MultipartFile file) {
-        return Result.success(fileService.uploadFile(String.valueOf(type), file));
+//        return Result.success(fileService.uploadFile(String.valueOf(type), file));
+        return null;
     }
 
     @NotAuth

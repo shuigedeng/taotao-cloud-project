@@ -17,30 +17,26 @@
 package com.taotao.cloud.file.biz.service.impl;
 
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.file.biz.mapper.IFileMapper;
 import com.taotao.cloud.file.biz.repository.cls.FileRepository;
 import com.taotao.cloud.file.biz.repository.inf.IFileRepository;
 import com.taotao.cloud.file.biz.service.IFileService;
+import com.taotao.cloud.job.api.feign.IFeignQuartzJobApi;
+import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
-import com.taotao.cloud.oss.common.model.OssInfo;
-import com.taotao.cloud.oss.common.model.UploadFileInfo;
-import com.taotao.cloud.oss.common.service.StandardOssClient;
-import com.taotao.cloud.oss.common.service.UploadFileService;
-import com.taotao.cloud.oss.common.util.FileUtil;
+import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
+import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
-import java.time.LocalDateTime;
-import java.util.Optional;
-
-import org.dromara.hutool.core.date.DatePattern;
-import org.dromara.hutool.core.io.file.FileTypeUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDateTime;
 import java.util.List;
+
 /**
  * 文件上传服务
  *
@@ -48,25 +44,85 @@ import java.util.List;
  * @version 2022.03
  * @since 2020/11/12 17:43
  */
+@AllArgsConstructor
 @Service
 public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, FileRepository, IFileRepository, Long>
         implements IFileService {
 
-    @Autowired
-    private UploadFileService uploadFileService;
+//    @Autowired
+//    private UploadFileService uploadFileService;
+//
+//    @Autowired
+//    private StandardOssClient standardOssClient;
 
-    @Autowired
-    private StandardOssClient standardOssClient;
+    private final TenantServiceApi tenantServiceApi;
+    private final IFeignQuartzJobApi feignQuartzJobApi;
 
-	@Override
-	public List<String> testMybatisQueryStructure(){
-		return this.baseMapper.testMybatisQueryStructure();
-	}
 
+    @Override
+    public boolean testSeata() {
+        File file = new File();
+        file.setId(1L);
+        file.setCreateTime(LocalDateTime.now());
+        file.setCreateBy(1L);
+        file.setUpdateTime(LocalDateTime.now());
+        file.setCreateBy(1L);
+        file.setVersion(1);
+        file.setDelFlag(false);
+        file.setCreateName("xxx");
+        file.setBizType("asdfasf");
+        file.setDataType("DOC");
+        file.setOriginal("sdfasf");
+        file.setUrl("sdfasdf");
+        file.setMd5("sdfasf");
+        file.setType("sadf");
+        file.setContextType("sdf");
+        file.setName("sdf");
+        file.setExt("sdfa");
+        file.setLength(50L);
+        baseMapper.insert(file);
+
+//        TenantDTO tenantDTO = new TenantDTO();
+//        tenantDTO.setId(1L);
+//        tenantDTO.setDelFlag(false);
+//        tenantDTO.setName("123");
+////        tenantDTO.setCreateTime(LocalDateTime.now());
+////        tenantDTO.setExpireTime(LocalDateTime.now());
+////        tenantDTO.setUpdateTime(LocalDateTime.now());
+//        tenantDTO.setStatus(1);
+//        tenantDTO.setAccountCount(1);
+//        tenantDTO.setPackageId(1L);
+//        tenantDTO.setPassword("sdfasf");
+//        tenantDTO.setTenantAdminId(1L);
+//        tenantDTO.setTenantAdminMobile("sdfsa");
+//        tenantDTO.setTenantAdminName("sdfsa");
+//        String s = tenantServiceApi.addTenantWithTestSeata(tenantDTO);
+//        System.out.println("=================================" + s);
+
+        QuartzJobDTO quartzJobDTO = new QuartzJobDTO();
+        quartzJobDTO.setId(1L);
+        quartzJobDTO.setJobName("demoJob");
+        quartzJobDTO.setConcurrent(0);
+        quartzJobDTO.setJobClassName("com.taotao.cloud.xx.job.demoJob");
+        quartzJobDTO.setRemark("demo");
+        quartzJobDTO.setParams("sdfasf");
+        quartzJobDTO.setGroupName("demoJobGroup");
+        quartzJobDTO.setCronExpression("0 0 0 0 0 0");
+        quartzJobDTO.setMethodName("handleMessage");
+        quartzJobDTO.setBeanName("demoJob");
+        feignQuartzJobApi.addQuartzJobDTOTestSeata(quartzJobDTO);
+
+        return true;
+    }
+
+    @Override
+    public List<String> testMybatisQueryStructure() {
+        return this.baseMapper.testMybatisQueryStructure();
+    }
     @Override
     public File upload(MultipartFile file) {
         try {
-            UploadFileInfo upload = uploadFileService.upload(file);
+//            UploadFileInfo upload = uploadFileService.upload(file);
 
             // 添加文件数据
             return new File();
@@ -76,67 +132,67 @@ public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, Fil
     }
 
     @Override
-	@Transactional
+    @Transactional
     public File findFileById(Long id) {
 
-		// 添加文件
-		File file = File.builder()
-			.bizType("测试")
-			.type("sdfasdfsdf")
-			.contextType("xxxx")
-			.ext("")
-			.original("asdfasdf")
-			.url("asdfasf")
-			.name("sdfasf")
-			.length(80L)
-			.md5("sdfasdf")
-			.build();
+        // 添加文件
+        File file = File.builder()
+                .bizType("测试")
+                .type("sdfasdfsdf")
+                .contextType("xxxx")
+                .ext("")
+                .original("asdfasdf")
+                .url("asdfasf")
+                .name("sdfasf")
+                .length(80L)
+                .md5("sdfasdf")
+                .build();
 
-		try {
-			file.setCreateTime(LocalDateTime.now());
-			file.setUpdateTime(LocalDateTime.now());
-			file.setDataType("sfdasfd");
-			file.setCreateBy(56L);
-			file.setCreateName("Sdfasf");
-		} catch (Exception ignored) {
-		}
-		this.save(file);
+        try {
+            file.setCreateTime(LocalDateTime.now());
+            file.setUpdateTime(LocalDateTime.now());
+            file.setDataType("sfdasfd");
+            file.setCreateBy(56L);
+            file.setCreateName("Sdfasf");
+        } catch (Exception ignored) {
+        }
+        this.save(file);
 
 //        Optional<File> optionalFile = ir().findById(id);
 //        return optionalFile.orElseThrow(() -> new BusinessException(ResultEnum.FILE_NOT_EXIST));
-		return file;
+        return file;
     }
 
     @Override
     public UploadFileVO uploadFile(String type, MultipartFile multipartFile) {
         // 上传文件
-        OssInfo ossInfo = standardOssClient.upLoadWithMultipartFile(multipartFile);
-
-        // 添加文件
-        File file = File.builder()
-                .bizType(type)
-                .type(Optional.of(ossInfo.getUploadFileInfo().getFileType()).get())
-                .contextType(multipartFile.getContentType())
-                .ext(FileUtil.getExtension(multipartFile))
-                .original(multipartFile.getOriginalFilename())
-                .url(ossInfo.getUrl())
-                .name(ossInfo.getName())
-                .length(ossInfo.getLength())
-                .md5(Optional.of(ossInfo.getUploadFileInfo().getFileMd5()).get())
-                .build();
-
-        try {
-            file.setCreateTime(LocalDateTime.parse(ossInfo.getCreateTime(), DatePattern.NORM_DATETIME_FORMATTER));
-            file.setUpdateTime(LocalDateTime.parse(ossInfo.getLastUpdateTime(), DatePattern.NORM_DATETIME_FORMATTER));
-            file.setDataType(FileTypeUtil.getType(multipartFile.getInputStream()));
-            file.setCreateBy(SecurityUtils.getCurrentUser().getUserId());
-            file.setCreateName(SecurityUtils.getCurrentUser().getUsername());
-        } catch (Exception ignored) {
-        }
-        file.setDelFlag(false);
-        this.save(file);
-
-        // 添加文件日志
+//        OssInfo ossInfo = standardOssClient.upLoadWithMultipartFile(multipartFile);
+//
+//        // 添加文件
+//        File file = File.builder()
+//                .bizType(type)
+//                .type(Optional.of(ossInfo.getUploadFileInfo().getFileType()).get())
+//                .contextType(multipartFile.getContentType())
+//                .ext(FileUtil.getExtension(multipartFile))
+//                .original(multipartFile.getOriginalFilename())
+//                .url(ossInfo.getUrl())
+//                .name(ossInfo.getName())
+//                .length(ossInfo.getLength())
+//                .md5(Optional.of(ossInfo.getUploadFileInfo().getFileMd5()).get())
+//                .build();
+//
+//        try {
+//            file.setCreateTime(LocalDateTime.parse(ossInfo.getCreateTime(), DatePattern.NORM_DATETIME_FORMATTER));
+//            file.setUpdateTime(LocalDateTime.parse(ossInfo.getLastUpdateTime(), DatePattern.NORM_DATETIME_FORMATTER));
+//            file.setDataType(FileTypeUtil.getType(multipartFile.getInputStream()));
+//            file.setCreateBy(SecurityUtils.getCurrentUser().getUserId());
+//            file.setCreateName(SecurityUtils.getCurrentUser().getUsername());
+//        } catch (Exception ignored) {
+//        }
+//        file.setDelFlag(false);
+//        this.save(file);
+//
+//        // 添加文件日志
         return null;
     }
     //

@@ -122,4 +122,7 @@ public interface QuartzJobService extends IService<QuartzJob> {
 
     /** 判断是否是定时任务类 */
     String judgeJobClass(String jobClassName);
+
+    boolean addQuartzJobDTOTestSeata(QuartzJobDTO quartzJobDTO);
+
 }

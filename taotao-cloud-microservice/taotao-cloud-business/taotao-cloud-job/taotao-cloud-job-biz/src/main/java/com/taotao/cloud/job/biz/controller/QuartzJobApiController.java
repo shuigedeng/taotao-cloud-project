@@ -14,26 +14,37 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.job.api.feign;
+package com.taotao.cloud.job.biz.controller;
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.job.api.feign.fallback.FeignQuartzJobFallbackImpl;
+import com.taotao.cloud.job.api.feign.IFeignQuartzJobApi;
 import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.taotao.cloud.job.biz.quartz.service.QuartzJobService;
+import com.taotao.cloud.openfeign.annotation.FeignApi;
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 远程调用订单模块
+ * 石英工作控制器
  *
  * @author shuigedeng
- * @since 2020/5/2 16:42
+ * @version 2023.04
+ * @since 2023-05-09 15:18:19
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_JOB, fallbackFactory = FeignQuartzJobFallbackImpl.class)
-public interface IFeignQuartzJobApi {
+@FeignApi
+@AllArgsConstructor
+@Validated
+@RestController
+@RequestMapping
+public class QuartzJobApiController implements IFeignQuartzJobApi {
 
-    @PostMapping("/job/addQuartzJobDTOTestSeata")
-    public Boolean addQuartzJobDTOTestSeata(@Validated @RequestBody QuartzJobDTO quartzJobDTO);
+    private final QuartzJobService quartzJobService;
+
+    @Override
+    public Boolean addQuartzJobDTOTestSeata(@RequestBody QuartzJobDTO quartzJobDTO) {
+        return quartzJobService.addQuartzJobDTOTestSeata(quartzJobDTO);
+    }
+
 }

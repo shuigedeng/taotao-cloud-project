@@ -16,7 +16,9 @@
 
 package com.taotao.cloud.tenant.api.feign.fallback;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
+import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -32,7 +34,15 @@ public class FeignTenantFallbackImpl implements FallbackFactory<TenantServiceApi
         return new TenantServiceApi() {
 
             @Override
-            public void validTenant(Long id) {}
+            public void validTenant(Long id) {
+                LogUtils.error("taotao-cloud-tenant  TenantServiceApi validTenant feign调用失败 ===============");
+            }
+
+            @Override
+            public String addTenantWithTestSeata(TenantDTO tenantDTO) {
+                LogUtils.error("taotao-cloud-tenant  TenantServiceApi addTenantWithTestSeata feign调用失败 ===============");
+                return "xxxxx";
+            }
         };
     }
 }

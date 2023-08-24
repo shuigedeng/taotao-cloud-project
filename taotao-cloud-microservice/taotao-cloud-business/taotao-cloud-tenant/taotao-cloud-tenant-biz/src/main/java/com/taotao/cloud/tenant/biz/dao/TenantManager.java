@@ -25,11 +25,13 @@ import com.taotao.cloud.tenant.biz.entity.Tenant;
 
 import java.util.List;
 import java.util.Objects;
+
+import com.taotao.cloud.web.annotation.Manager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@Manager
 @RequiredArgsConstructor
-@Component
 public class TenantManager {
 
     private final TenantMapper tenantMapper;

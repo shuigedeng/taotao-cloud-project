@@ -18,19 +18,15 @@ package com.taotao.cloud.tenant.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.tenant.api.feign.fallback.FeignTenantFallbackImpl;
+import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-/**
- * @author
- * @version 0.0.1
- * @date 2022-04-07 14:50
- */
-@FeignClient(
-	contextId = "tenantServiceApi",
-	value = ServiceName.TAOTAO_CLOUD_TENANT,
-	fallbackFactory = FeignTenantFallbackImpl.class)
+@FeignClient(value = ServiceName.TAOTAO_CLOUD_TENANT, fallbackFactory = FeignTenantFallbackImpl.class)
 public interface TenantServiceApi {
 
 	/**
@@ -38,6 +34,10 @@ public interface TenantServiceApi {
 	 *
 	 * @param id 租户id
 	 */
-	@GetMapping(value = "/tenant/validTenant/{id}")
-	void validTenant(@PathVariable("id") Long id);
+	@GetMapping(value = "/tenant/feign/validTenant/{id}")
+	public void validTenant(@PathVariable("id") Long id);
+
+
+	@PostMapping(value = "/tenant/feign/addTenantWithTestSeata")
+	public String addTenantWithTestSeata(@Validated @RequestBody TenantDTO tenantDTO);
 }
