@@ -271,9 +271,7 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 
         private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances) {
             if (instances.isEmpty()) {
-                if (log.isWarnEnabled()) {
-                    log.warn("No servers available for service: " + serviceId);
-                }
+                    LogUtils.warn("No servers available for service: " + serviceId);
                 return new EmptyResponse();
             }
             int index = ThreadLocalRandom.current().nextInt(instances.size());
