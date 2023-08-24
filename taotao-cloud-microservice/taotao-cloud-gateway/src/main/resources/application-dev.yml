@@ -220,7 +220,23 @@ spring:
     compatibility-verifier:
       enabled: false
     loadbalancer:
+      eager-load:
+        clients:
+          - taotao-cloud-file
       enabled: true
+      cache:
+        enabled: true
+        capacity: 256
+        ttl: 35s
+        #caffeine:
+        #  spec: taotao-cloud-client
+      nacos:
+        enabled: true
+      stats:
+        micrometer:
+          enabled: true
+      service-discovery:
+        timeout: 10s
     sentinel:
       app:
         type: 1
@@ -945,7 +961,7 @@ taotao:
           group-id:
       filter:
         blacklist: true
-        gray: false
+        gray: true
         log: true
         sign: false
         trace: true
