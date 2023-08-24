@@ -32,6 +32,7 @@ spring:
           version: ${taotaoCloudVersion}
           user.name: "admin"
           user.password: "123456"
+          weight: 100
         group: TAOTAO_CLOUD_GROUP
         namespace: taotao-cloud-dev
         username: nacos

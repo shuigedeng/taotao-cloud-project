@@ -1,9 +1,12 @@
 package com.taotao.cloud.file.biz.controller.async;
 
+import com.taotao.cloud.core.configuration.AsyncAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.ArrayList;
@@ -13,13 +16,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 //第一个请求/hello，会先将deferredResult存起来，前端页面是一直等待（转圈）状态。
 // 直到发第二个请求：setHelloToAll，所有的相关页面才会有响应。
-@Controller
-@RequestMapping("/async/controller")
+@RestController
+@RequestMapping("/file/async/hello")
 public class AsyncHelloController {
+
+	@Autowired
+	private AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
     private List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 
-    @ResponseBody
+
     @GetMapping("/hello")
     public DeferredResult<String> helloGet() throws Exception {
         DeferredResult<String> deferredResult = new DeferredResult<>();
@@ -29,7 +35,6 @@ public class AsyncHelloController {
         return deferredResult;
     }
 
-    @ResponseBody
     @GetMapping("/setHelloToAll")
     public void helloSet() throws Exception {
         // 让所有hold住的请求给与响应
@@ -39,7 +44,6 @@ public class AsyncHelloController {
 ////////////////////////////////
 
 	@RequestMapping(value = "/email/deferredResultReq", method = GET)
-	@ResponseBody
 	public DeferredResult<String> deferredResultReq () {
 		System.out.println("外部线程：" + Thread.currentThread().getName());
 		//设置超时时间
@@ -61,7 +65,7 @@ public class AsyncHelloController {
 			}
 		});
 
-		myThreadPoolTaskExecutor.execute(new Runnable() {
+		asyncThreadPoolTaskExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
 				//处理业务逻辑

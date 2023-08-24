@@ -19,16 +19,13 @@ package com.taotao.cloud.file.biz.controller.async;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
+import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.AsyncEvent;
 import jakarta.servlet.AsyncListener;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +34,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.context.request.async.WebAsyncTask;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+
 /**
  * 第一个请求/hello，会先将deferredResult存起来，前端页面是一直等待（转圈）状态。直到发第二个请求：setHelloToAll，所有的相关页面才会有响应。
  *
@@ -47,22 +51,23 @@ import org.springframework.web.context.request.async.WebAsyncTask;
  * 应用通过另外一个线程（可能是MQ消息、定时任务等）给DeferredResult#setResult值。然后SpringMVC会把这个请求再次派发给servlet容器；
  * DispatcherServlet再次被调用，然后处理后续的标准流程；
  * 通过上述流程可以发现：利用DeferredResult可实现一些长连接的功能，比如当某个操作是异步时，可以先保存对应的DeferredResult对象，当异步通知回来时，再找到这个DeferredResult对象，在setResult处理结果即可。从而提高性能。
- *
+ * <p>
  * 基于Spring实现异步请求
  * 基于Spring可以通过Callable、DeferredResult或者WebAsyncTask等方式实现异步请求。
  */
 @Validated
 @RestController
-@RequestMapping("/file/async/hello")
-public class AsyncController  {
+@RequestMapping("/file/async")
+public class AsyncController {
 
     @Autowired
     private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
     private final List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 
-    @ResponseBody
-    @GetMapping("/hello")
+    @NotAuth
+    @Operation(summary = "helloGet", description = "helloGet")
+    @GetMapping("/helloGet")
     public DeferredResult<String> helloGet() throws Exception {
         DeferredResult<String> deferredResult = new DeferredResult<>();
 
@@ -71,18 +76,30 @@ public class AsyncController  {
         return deferredResult;
     }
 
-    @ResponseBody
+    @NotAuth
+    @Operation(summary = "setHelloToAll", description = "setHelloToAll")
     @GetMapping("/setHelloToAll")
     public void helloSet() throws Exception {
         // 让所有hold住的请求给与响应
         deferredResultList.forEach(d -> d.setResult("say hello to all"));
     }
 
+    /*** 异步，不阻塞Tomcat的线程 ，提升Tomcat吞吐量***/
+    @NotAuth
+    @Operation(summary = "deferredResultasync", description = "deferredResultasync")
+    @RequestMapping("/deferredResultasync")
+    public DeferredResult<String> deferredResultasync() {
+        System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
+        DeferredResult<String> result = new DeferredResult<>();
+        CompletableFuture.supplyAsync(() -> "sdfsaf", asyncThreadPoolTaskExecutor)
+                .whenCompleteAsync((res, throwable) -> result.setResult(res));
+        return result;
+    }
+
     // *************************************************************
 
     /**
-     * @Async、WebAsyncTask、Callable、DeferredResult的区别
-     * 所在的包不同： @Async：org.springframework.scheduling.annotation;
+     * @Async、WebAsyncTask、Callable、DeferredResult的区别 所在的包不同： @Async：org.springframework.scheduling.annotation;
      * WebAsyncTask：org.springframework.web.context.request.async; Callable：java.util.concurrent；
      * DeferredResult：org.springframework.web.context.request.async;
      * 通过所在的包，我们应该隐隐约约感到一些区别，比如@Async是位于scheduling包中，而WebAsyncTask和DeferredResult是用于Web（Spring
@@ -94,11 +111,13 @@ public class AsyncController  {
      *
      * <p>DeferredResult使用方式与Callable类似，重点在于跨线程之间的通信。 @Async也是替换Runable的一种方式，可以代替我们自己创建线程。而且适用的范围更广，并不局限于Controller层，而可以是任何层的方法上。
      */
+    @NotAuth
+    @Operation(summary = "asyncTask", description = "asyncTask")
     @RequestMapping("/asyncTask")
     public void asyncTask(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("控制层线程:" + Thread.currentThread().getName());
         AsyncContext asyncContext = request.startAsync();
-		// 设置监听器:可设置其开始、完成、异常、超时等事件的回调处理
+        // 设置监听器:可设置其开始、完成、异常、超时等事件的回调处理
         asyncContext.addListener(new AsyncListener() {
             @Override
             public void onComplete(AsyncEvent asyncEvent) throws IOException {
@@ -124,7 +143,7 @@ public class AsyncController  {
                 System.out.println("异步线程开始");
             }
         });
-		//设置超时时间
+        //设置超时时间
         asyncContext.setTimeout(3000);
         asyncContext.start(() -> {
             try {
@@ -136,27 +155,21 @@ public class AsyncController  {
                 asyncContext.getResponse().setContentType("text/html;charset=UTF-8");
                 asyncContext.getResponse().getWriter().println("这是【异步】的请求返回: ");
             } catch (Exception e) {
-				System.out.println("异步处理发生异常：" + e.getMessage());
-			}
+                System.out.println("异步处理发生异常：" + e.getMessage());
+            }
 
             // 异步请求完成通知，所有任务完成了，才执行
             asyncContext.complete();
         });
-		//此时request的线程连接已经释放了
-		System.out.println("主线程：" + Thread.currentThread().getName());
+        //此时request的线程连接已经释放了
+        System.out.println("主线程：" + Thread.currentThread().getName());
     }
 
-    /*** 异步，不阻塞Tomcat的线程 ，提升Tomcat吞吐量***/
-    @RequestMapping("/async")
-    public DeferredResult<String> async() {
-        System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
-        DeferredResult<String> result = new DeferredResult<>();
-        CompletableFuture.supplyAsync(() -> service().async(), asyncThreadPoolTaskExecutor)
-                .whenCompleteAsync((res, throwable) -> result.setResult(res));
-        return result;
-    }
+
 
     /*** 异步，不阻塞Tomcat的线程 ，提升Tomcat吞吐量***/
+    @NotAuth
+    @Operation(summary = "callableTest1", description = "callableTest1")
     @RequestMapping("/callableTest1")
     public Callable<String> callableTest1() {
         System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
@@ -167,20 +180,24 @@ public class AsyncController  {
         return callable;
     }
 
-	@GetMapping("/callableTest2")
-	public Callable<String> callableTest2() {
-		System.out.println("主线程开始：" + Thread.currentThread().getName());
-		Callable<String> result = () -> {
-			System.out.println("副线程开始：" + Thread.currentThread().getName());
-			Thread.sleep(1000);
-			System.out.println("副线程返回：" + Thread.currentThread().getName());
-			return "success";
-		};
+    @NotAuth
+    @Operation(summary = "callableTest2", description = "callableTest2")
+    @GetMapping("/callableTest2")
+    public Callable<String> callableTest2() {
+        System.out.println("主线程开始：" + Thread.currentThread().getName());
+        Callable<String> result = () -> {
+            System.out.println("副线程开始：" + Thread.currentThread().getName());
+            Thread.sleep(1000);
+            System.out.println("副线程返回：" + Thread.currentThread().getName());
+            return "success";
+        };
 
-		System.out.println("主线程返回：" + Thread.currentThread().getName());
-		return result;
-	}
+        System.out.println("主线程返回：" + Thread.currentThread().getName());
+        return result;
+    }
 
+    @NotAuth
+    @Operation(summary = "webAsyncTask", description = "webAsyncTask")
     @GetMapping("/webAsyncTask")
     public WebAsyncTask<String> webAsyncTask() {
         LogUtils.info("外部线程：" + Thread.currentThread().getName());
