@@ -346,6 +346,28 @@ spring:
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
+        - id: taotao-cloud-tenant
+          uri: lb://taotao-cloud-tenant
+          metadata:
+            name: 租户管理中心
+            request_uri_prefix: tenant
+          predicates:
+            - Path=${taotao.cloud.gateway.api.base-uri}/tenant/**
+          filters:
+            - RewritePath=/tenant/(?<path>.*), /tenant/$\{path}
+            - StripPrefix=2
+            - RequestTime=true
+            - PreserveHostHeader
+            - SwaggerHeader
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/myfallback
         - id: taotao-cloud-flowable
           uri: lb://taotao-cloud-flowable
           metadata:
