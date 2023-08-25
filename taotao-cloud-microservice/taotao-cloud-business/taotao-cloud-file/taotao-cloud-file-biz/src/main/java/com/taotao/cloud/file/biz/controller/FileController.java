@@ -23,6 +23,7 @@ import com.taotao.cloud.common.model.ValidList;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.service.IFileService;
+import com.taotao.cloud.file.biz.service.ISeataTccService;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.web.annotation.BusinessApi;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -68,15 +69,25 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class FileController {
 
     private final IFileService fileService;
+    private final ISeataTccService seataTccService;
 
     // @Autowired
     // private Cache cache;
 
     @NotAuth
-    @Operation(summary = "testSeata", description = "testSeata")
-    @PostMapping("/testSeata")
-    public Result<Boolean> testSeata() {
+    @Operation(summary = "testATSeata", description = "testATSeata")
+    @PostMapping("/testATSeata")
+    public Result<Boolean> testATSeata() {
         fileService.testSeata();
+
+        return Result.success(true);
+    }
+
+    @NotAuth
+    @Operation(summary = "testTccSeata", description = "testTccSeata")
+    @PostMapping("/testTccSeata")
+    public Result<Boolean> testTccSeata() {
+        fileService.test(1L);
 
         return Result.success(true);
     }

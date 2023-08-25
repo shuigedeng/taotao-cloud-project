@@ -20,7 +20,6 @@ import com.taotao.cloud.openfeign.annotation.FeignApi;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.tenant.biz.service.TenantService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TenantApiController implements TenantServiceApi {
 
     private final TenantService tenantService;
+    private final ISeataTccService seataTccService;
 
     @Override
     public void validTenant(Long id) {
@@ -47,8 +47,10 @@ public class TenantApiController implements TenantServiceApi {
 
     @Override
     public String addTenantWithTestSeata(TenantDTO tenantDTO) {
-        tenantService.addSysTenant(tenantDTO);
+//            tenantService.addSysTenant(tenantDTO);
 
-        return "addTenantWithTestSeata success";
+        seataTccService.tryInsert(tenantDTO, tenantDTO.getId());
+
+        return "success";
     }
 }

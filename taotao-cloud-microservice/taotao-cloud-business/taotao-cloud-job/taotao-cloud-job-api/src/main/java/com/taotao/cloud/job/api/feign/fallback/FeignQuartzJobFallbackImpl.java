@@ -16,9 +16,11 @@
 
 package com.taotao.cloud.job.api.feign.fallback;
 
+import com.taotao.cloud.common.exception.FeignErrorException;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.api.feign.IFeignQuartzJobApi;
 import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
+import com.taotao.cloud.openfeign.exception.FeignBusinessErrorException;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -34,9 +36,9 @@ public class FeignQuartzJobFallbackImpl implements FallbackFactory<IFeignQuartzJ
         return new IFeignQuartzJobApi() {
             @Override
             public Boolean addQuartzJobDTOTestSeata(QuartzJobDTO quartzJobDTO) {
-                throwable.printStackTrace();
-                LogUtils.error(throwable,"taotao-cloud-job  IFeignQuartzJobApi addQuartzJobDTOTestSeata feign调用失败 ===============");
-                return false;
+                LogUtils.error(throwable, "taotao-cloud-job  IFeignQuartzJobApi addQuartzJobDTOTestSeata feign调用失败 ===============");
+
+                return null;
             }
         };
     }

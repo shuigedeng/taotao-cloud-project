@@ -80,4 +80,5 @@ public interface IFileService {
 
 	boolean testSeata();
 
+    void test(long fileId);
 }

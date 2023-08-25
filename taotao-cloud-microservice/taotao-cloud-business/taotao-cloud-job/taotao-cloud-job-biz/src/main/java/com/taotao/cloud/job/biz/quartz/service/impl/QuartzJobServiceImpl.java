@@ -226,6 +226,7 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobMapper, QuartzJob
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean addQuartzJobDTOTestSeata(QuartzJobDTO quartzJobDTO) {
         QuartzJob quartzJobEntity = BeanUtil.copyProperties(quartzJobDTO, QuartzJob.class);
         quartzJobEntity.setState(QuartzJobCode.STOP);

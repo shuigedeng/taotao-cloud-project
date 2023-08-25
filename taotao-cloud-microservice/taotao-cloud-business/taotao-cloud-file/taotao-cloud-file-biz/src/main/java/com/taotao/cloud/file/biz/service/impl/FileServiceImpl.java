@@ -23,12 +23,14 @@ import com.taotao.cloud.file.biz.mapper.IFileMapper;
 import com.taotao.cloud.file.biz.repository.cls.FileRepository;
 import com.taotao.cloud.file.biz.repository.inf.IFileRepository;
 import com.taotao.cloud.file.biz.service.IFileService;
+import com.taotao.cloud.file.biz.service.ISeataTccService;
 import com.taotao.cloud.job.api.feign.IFeignQuartzJobApi;
 import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.oss.common.exception.UploadFileException;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,9 +59,12 @@ public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, Fil
 
     private final TenantServiceApi tenantServiceApi;
     private final IFeignQuartzJobApi feignQuartzJobApi;
+    private final ISeataTccService seataTccService;
 
 
     @Override
+	@Transactional(rollbackFor = Exception.class)
+    @GlobalTransactional(rollbackFor = Exception.class)
     public boolean testSeata() {
         File file = new File();
         file.setId(1L);
@@ -82,23 +87,6 @@ public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, Fil
         file.setLength(50L);
         baseMapper.insert(file);
 
-//        TenantDTO tenantDTO = new TenantDTO();
-//        tenantDTO.setId(1L);
-//        tenantDTO.setDelFlag(false);
-//        tenantDTO.setName("123");
-////        tenantDTO.setCreateTime(LocalDateTime.now());
-////        tenantDTO.setExpireTime(LocalDateTime.now());
-////        tenantDTO.setUpdateTime(LocalDateTime.now());
-//        tenantDTO.setStatus(1);
-//        tenantDTO.setAccountCount(1);
-//        tenantDTO.setPackageId(1L);
-//        tenantDTO.setPassword("sdfasf");
-//        tenantDTO.setTenantAdminId(1L);
-//        tenantDTO.setTenantAdminMobile("sdfsa");
-//        tenantDTO.setTenantAdminName("sdfsa");
-//        String s = tenantServiceApi.addTenantWithTestSeata(tenantDTO);
-//        System.out.println("=================================" + s);
-
         QuartzJobDTO quartzJobDTO = new QuartzJobDTO();
         quartzJobDTO.setId(1L);
         quartzJobDTO.setJobName("demoJob");
@@ -110,9 +98,37 @@ public class FileServiceImpl extends BaseSuperServiceImpl<IFileMapper, File, Fil
         quartzJobDTO.setCronExpression("0 0 0 0 0 0");
         quartzJobDTO.setMethodName("handleMessage");
         quartzJobDTO.setBeanName("demoJob");
-        feignQuartzJobApi.addQuartzJobDTOTestSeata(quartzJobDTO);
+        Boolean result = feignQuartzJobApi.addQuartzJobDTOTestSeata(quartzJobDTO);
+        if(result == null){
+            throw new BusinessException(500, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        }
+
+        TenantDTO tenantDTO = new TenantDTO();
+        tenantDTO.setId(1L);
+        tenantDTO.setDelFlag(false);
+        tenantDTO.setName("123");
+        tenantDTO.setCreateTime(LocalDateTime.now());
+        tenantDTO.setExpireTime(LocalDateTime.now());
+        tenantDTO.setUpdateTime(LocalDateTime.now());
+        tenantDTO.setStatus(1);
+        tenantDTO.setAccountCount(1);
+        tenantDTO.setPackageId(1L);
+        tenantDTO.setPassword("sdfasf");
+        tenantDTO.setTenantAdminId(1L);
+        tenantDTO.setTenantAdminMobile("sdfsa");
+        tenantDTO.setTenantAdminName("sdfsa");
+        String s = tenantServiceApi.addTenantWithTestSeata(tenantDTO);
+        if(s == null){
+            throw new BusinessException(500, "qqqqqqqqq");
+        }
 
         return true;
+    }
+
+    @Override
+    @GlobalTransactional
+    public void test(long fileId) {
+        seataTccService.tryInsert(1L);
     }
 
     @Override

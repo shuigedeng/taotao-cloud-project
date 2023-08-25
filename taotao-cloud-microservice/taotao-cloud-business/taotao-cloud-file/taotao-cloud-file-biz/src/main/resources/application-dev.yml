@@ -603,7 +603,7 @@ spring:
       enabled: false
     loadbalancer:
       #nacos:
-      #  enabled: true
+      #  enabled: trueerfffffffffffffffffffffr
       enabled: true
 
 art:
