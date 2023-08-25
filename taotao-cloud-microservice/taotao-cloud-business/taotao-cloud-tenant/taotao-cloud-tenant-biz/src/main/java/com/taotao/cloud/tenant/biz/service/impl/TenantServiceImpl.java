@@ -78,8 +78,8 @@ public class TenantServiceImpl implements TenantService {
         return tenantManager.listTenant().stream().map(Tenant::getId).toList();
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean addSysTenant(TenantDTO tenant) {
         // 检查套餐信息
         //TenantPackage tenantPackage = tenantPackageService.validTenantPackage(tenant.getPackageId());

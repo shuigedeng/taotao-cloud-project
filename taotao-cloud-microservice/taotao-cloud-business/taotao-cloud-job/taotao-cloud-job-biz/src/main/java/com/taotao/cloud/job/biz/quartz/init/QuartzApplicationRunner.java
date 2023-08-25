@@ -40,11 +40,11 @@ public class QuartzApplicationRunner implements ApplicationRunner {
         logger.info("==== Quartz1ApplicationRunner 系统运行开始 ====");
 
         // 初始化任务
-        try {
-            quartzJobService.init();
-        } catch (SchedulerException e) {
-            LogUtils.error(e);
-            throw new RuntimeException(e);
-        }
+//        try {
+//            quartzJobService.init();
+//        } catch (SchedulerException e) {
+//            LogUtils.error(e);
+//            throw new RuntimeException(e);
+//        }
     }
 }

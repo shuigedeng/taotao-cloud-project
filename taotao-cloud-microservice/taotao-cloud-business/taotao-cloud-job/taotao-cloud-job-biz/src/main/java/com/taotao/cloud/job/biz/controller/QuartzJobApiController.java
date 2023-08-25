@@ -20,11 +20,15 @@ import com.taotao.cloud.job.api.feign.IFeignQuartzJobApi;
 import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.job.biz.quartz.service.QuartzJobService;
 import com.taotao.cloud.openfeign.annotation.FeignApi;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 石英工作控制器
@@ -41,10 +45,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class QuartzJobApiController implements IFeignQuartzJobApi {
 
     private final QuartzJobService quartzJobService;
+    private final ISeataTccService seataTccService;
 
     @Override
     public Boolean addQuartzJobDTOTestSeata(@RequestBody QuartzJobDTO quartzJobDTO) {
-        return quartzJobService.addQuartzJobDTOTestSeata(quartzJobDTO);
+//        quartzJobService.addQuartzJobDTOTestSeata(quartzJobDTO);
+
+        seataTccService.tryInsert(quartzJobDTO, quartzJobDTO.getId());
+
+        return true;
     }
 
 }

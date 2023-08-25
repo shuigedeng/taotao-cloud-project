@@ -41,7 +41,7 @@ public class FeignTenantFallbackImpl implements FallbackFactory<TenantServiceApi
             @Override
             public String addTenantWithTestSeata(TenantDTO tenantDTO) {
                 LogUtils.error("taotao-cloud-tenant  TenantServiceApi addTenantWithTestSeata feign调用失败 ===============");
-                return "xxxxx";
+                return null;
             }
         };
     }
