@@ -43,9 +43,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.3.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:3.24.0"
+    implementation "com.google.protobuf:protobuf-java:3.24.1"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:3.24.0"
+    implementation "com.google.protobuf:protobuf-java-util:3.24.1"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
@@ -69,7 +69,7 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
-    implementation 'com.github.oshi:oshi-core:6.4.4'
+    implementation 'com.github.oshi:oshi-core:6.4.5'
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-cloud-starter-apt")
