@@ -24,7 +24,7 @@ dependencies {
     api 'ch.qos.logback:logback-classic:1.4.8'
     api "com.google.guava:guava:32.1.2-jre"
 
-    api "io.netty:netty-all:4.1.96.Final"
+    api "io.netty:netty-all:4.1.97.Final"
 
     api "org.projectlombok:lombok:1.18.28"
     annotationProcessor "org.projectlombok:lombok:1.18.28"

@@ -44,7 +44,7 @@ import java.util.Map;
 public interface ISeataTccService {
 	String test(Long fileId);
 
-	@TwoPhaseBusinessAction(name = "tryInsert", commitMethod = "commitTcc", rollbackMethod = "cancel")
+	@TwoPhaseBusinessAction(name = "tryInsert", commitMethod = "commitTcc", rollbackMethod = "cancel", useTCCFence = true)
 	String tryInsert(@BusinessActionContextParameter(paramName = "fileId") Long fileId);
 
 	/**
