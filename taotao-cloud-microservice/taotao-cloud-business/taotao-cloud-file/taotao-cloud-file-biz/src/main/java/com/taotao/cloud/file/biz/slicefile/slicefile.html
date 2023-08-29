@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>JS分片上传示例</title>
+</head>
+<body>
+<input type="file" id="dataFile">
+    <input type="button" id="btn" value="点击上传" /><span id="spanUploading"></span>
+    <br>
+        <br>
+            <div><b>选择文件，点击上传：</b></div>
+            <div>文件共345KB，分4片，已上传1片</div>
+            <div>文件共345KB，分4片，已上传2片</div>
+            <div>文件共345KB，分4片，已上传3片</div>
+            <div>文件共345KB，分4片，已上传4片</div>
+            <div>文件分片已上传完成，正在合并</div>
+            <div>文件合并成功，上传成功</div>
+</body>
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    var uploading = $('#spanUploading');
+    function merge(uuid, fileName) {
+    uploading.html('文件分片已上传完成，正在合并');
+    $.ajax({
+    url: "http://localhost:28869/spider-api/file/merge",
+    type: "GET",
+    data: {uuid: uuid, newFileName: fileName},
+    async: true,
+    dataType:"json",
+    success: function (msg) {
+    if(msg === 200) {
+    uploading.html('文件合并成功，上传成功');
+}
+    else{
+    uploading.html('文件合并失败，上传失败');
+}
+}
+})
+}
+    // 生成uuid
+    function guid() {
+    return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0,
+    v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+});
+}
+    function PostFile(file,i, uuid){
+    var name = file.name,
+    size = file.size,
+    shardSize = 100 * 1024,//以100KB为一个分片,每个分片的大小
+    shardCount = Math.ceil(size / shardSize);//总片数
+    if(i >= shardCount){
+    merge(uuid, name);
+    return;
+}
+    if (uuid === null || uuid === undefined) {
+    uuid = guid();
+}
+    var start = i * shardSize;
+    var end = start + shardSize;
+    //将文件进行切片
+    var packet = file.slice(start, end);
+    uploading.html('文件共' + size/1024 +'KB，分'+shardCount+'片，已上传' + i + '片');
+    console.log([uuid, packet,name,size, shardCount, i]);
+    /*  构建form表单进行提交  */
+    var form = new FormData();
+    form.append("uuid", uuid);
+    form.append("data", packet);
+    form.append("totalSize", size);
+    form.append("total", shardCount);
+    form.append("index", i + 1);
+    $.ajax({
+    url: "http://localhost:28869/spider-api/file/upload/slice",
+    type: "POST",
+    data: form,
+    async: true,
+    dataType:"json",
+    processData: false, //告诉jquery不要对form进行处理
+    contentType: false, //指定为false才能形成正确的Content-Type
+    success: function (msg) {
+    if (msg === 200) {
+    form = '';
+    i++;
+    PostFile(file, i, uuid);
+} else if (msg === 500) {
+    uploading.html('第'+msg.i+'次，上传文件有误！');
+} else {
+    uploading.html('未知错误，上传失败');
+}
+}
+})
+}
+    $("#btn").bind('click',function(event) {
+    var file = $("#dataFile")[0].files[0];
+    PostFile(file,0);
+});
+</script>
+</html>
