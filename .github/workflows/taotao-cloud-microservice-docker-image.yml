@@ -11,16 +11,16 @@ on:
     branches: [ master ]
 
 env:
-  TAOTAO_CLOUD_OSSRH_USERNAME: ${{secrets.TAOTAO_CLOUD_OSSRH_USERNAME}}
-  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{secrets.TAOTAO_CLOUD_OSSRH_PASSWORD}}
-  TAOTAO_CLOUD_MAVEN_USERNAME: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME}}
-  TAOTAO_CLOUD_MAVEN_USERNAME_NEW: ${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW}}
-  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD}}
-  TAOTAO_CLOUD_MAVEN_PASSWORD_NEW: ${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW}}
-  TAOTAO_CLOUD_GITHUB_USERNAME: ${{secrets.TAOTAO_CLOUD_GITHUB_USERNAME}}
-  TAOTAO_CLOUD_GITHUB_TOKEN: ${{secrets.TAOTAO_CLOUD_GITHUB_TOKEN}}
-  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{secrets.TAOTAO_CLOUD_REGISTRY_USERNAME}}
-  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD}}
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{ secrets.TAOTAO_CLOUD_OSSRH_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME }}
+  TAOTAO_CLOUD_MAVEN_USERNAME_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{ secrets.TAOTAO_CLOUD_GITHUB_USERNAME }}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
   TAOTAO_CLOUD_VERSION: 2023.10
 
 jobs:
@@ -55,19 +55,23 @@ jobs:
         #  base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
       - name: Decode Signing Secret Key Ring File
         run: |
-          echo "${{secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE}}" > ~/secring.gpg.b64 && base64 -d ~/secring.gpg.b64 > ~/secring.gpg
-          echo "signing.keyId=${{secrets.TAOTAO_CLOUD_SIGNING_KEY_ID}}" >> gradle.properties
-          echo "signing.password=${{secrets.TAOTAO_CLOUD_SIGNING_PASSWORD}}" >> gradle.properties
+          echo "${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}" > ~/secring.gpg.b64 && base64 -d ~/secring.gpg.b64 > ~/secring.gpg
+          echo "signing.keyId=${{ secrets.TAOTAO_CLOUD_SIGNING_KEY_ID }}" >> gradle.properties
+          echo "signing.password=${{ secrets.TAOTAO_CLOUD_SIGNING_PASSWORD }}" >> gradle.properties
           echo "signing.secretKeyRingFile=$HOME/secring.gpg" >> gradle.properties
 
       - name: write secrets maven username password
         run: |
-          echo "mavenUsernameNew=${{secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW}}" >> gradle.properties
-          echo "mavenPasswordNew=${{secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW}}" >> gradle.properties
+          echo "mavenUsernameNew=${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}" >> gradle.properties
+          echo "mavenPasswordNew=${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}" >> gradle.properties
 
-      - name: cat gradle proerties
+      - name: echo gradle
         run: |
+          gradle -v
+          which gradle
+          env
           cat gradle.properties
+          echo ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }} | base64
 
       #- name: Build And Publish Dependencies To Local
       #  run: |

@@ -125,8 +125,8 @@ publishing {
 
             allowInsecureProtocol = true
             credentials {
-                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
-                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+                username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+                password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
             }
         }
 
