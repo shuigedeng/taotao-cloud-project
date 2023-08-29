@@ -109,13 +109,13 @@ spec: # 资源描述字段
               cpu: 100m #pod 占单核cpu 1/10
               memory: 100Mi #内存100M
         #hostPath 卷能将主机节点文件系统上的文件或目录挂载到你的 Pod 中。 虽然这不是大多数 Pod 须要的，可是它为一些应用程序提供了强大的逃生舱。
-        volumes:
-          - name: log-volume  #卷名称
-            hostPath: #卷类型详细见:https://kubernetes.io/zh/docs/concepts/storage/volumes/
-              path: /data/logs/prod/ops-nginx-api  #宿主机存在的目录路径
-              type: DirectoryOrCreate #若是在给定路径上什么都不存在，那么将根据须要建立空目录，权限设置为 0755，具备与 kubelet 相同的组和属主信息
-          - name: sidecar-sre  #
-            emptyDir: { } #emptyDir 卷的存储介质（磁盘、SSD 等）是由保存 kubelet 数据的根目录 （一般是 /var/lib/kubelet）的文件系统的介质肯定。
+        #volumes:
+        #  - name: log-volume  #卷名称
+        #    hostPath: #卷类型详细见:https://kubernetes.io/zh/docs/concepts/storage/volumes/
+        #      path: /data/logs/prod/ops-nginx-api  #宿主机存在的目录路径
+        #      type: DirectoryOrCreate #若是在给定路径上什么都不存在，那么将根据须要建立空目录，权限设置为 0755，具备与 kubelet 相同的组和属主信息
+        #  - name: sidecar-sre  #
+        #    emptyDir: { } #emptyDir 卷的存储介质（磁盘、SSD 等）是由保存 kubelet 数据的根目录 （一般是 /var/lib/kubelet）的文件系统的介质肯定。
 
       containers:
         - name: taotao-cloud-sys # 容器的名字
