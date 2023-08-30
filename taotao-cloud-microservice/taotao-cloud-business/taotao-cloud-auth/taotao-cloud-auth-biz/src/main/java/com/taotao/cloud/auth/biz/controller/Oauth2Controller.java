@@ -83,14 +83,14 @@ public class Oauth2Controller {
      * @param oAuth2AuthorizedClient OAuth2客户端信息
      * @return OAuth2客户端信息
      */
-    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
-    // @RequestLogger
-    @PreAuthorize("hasAuthority('express:company:info:id')")
-    @GetMapping("/client")
-    public Result<OAuth2AuthorizedClient> user(
-            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-        return Result.success(oAuth2AuthorizedClient);
-    }
+//    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
+//    // @RequestLogger
+//    @PreAuthorize("hasAuthority('express:company:info:id')")
+//    @GetMapping("/client")
+//    public Result<OAuth2AuthorizedClient> user(
+//            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+//        return Result.success(oAuth2AuthorizedClient);
+//    }
 
     @Operation(summary = "退出系统", description = "退出系统")
     // @RequestLogger
