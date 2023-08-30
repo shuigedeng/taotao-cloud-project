@@ -111,12 +111,12 @@ public class MessagesController {
         return Result.success(user);
     }
 
-    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
-    @GetMapping("/client")
-    public Result<OAuth2AuthorizedClient> client(
-            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
-        return Result.success(oAuth2AuthorizedClient);
-    }
+//    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
+//    @GetMapping("/client")
+//    public Result<OAuth2AuthorizedClient> client(
+//            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
+//        return Result.success(oAuth2AuthorizedClient);
+//    }
 
     @GetMapping(value = "/info")
     public Object getUserInfo() {
