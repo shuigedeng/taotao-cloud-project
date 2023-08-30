@@ -10,7 +10,6 @@ RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2023.10.jar extract
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
-
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-monitor
@@ -22,8 +21,8 @@ ARG DINGDING_TOKEN_ID_ARG=xxxxxx
 ARG DINGDING_SECRET_ARG=xxxxxx
 ARG REQUEST_API_DOCS=1
 
-LABEL application_name=${APP_NAME}
-LABEL application_version=${APP_VERSION}
+LABEL application.name=${APP_NAME}
+LABEL application.version=${APP_VERSION}
 LABEL org.opencontainers.image.authors=981376577@qq.com
 
 #****************************app****************************
