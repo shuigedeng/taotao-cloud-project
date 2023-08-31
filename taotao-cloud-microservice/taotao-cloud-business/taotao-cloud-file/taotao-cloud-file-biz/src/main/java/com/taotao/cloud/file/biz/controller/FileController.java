@@ -22,6 +22,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.model.ValidList;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
+import com.taotao.cloud.file.biz.properties.TestProperties;
 import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.cloud.file.biz.service.ISeataTccService;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
@@ -70,6 +71,7 @@ public class FileController {
 
     private final IFileService fileService;
     private final ISeataTccService seataTccService;
+    private final TestProperties testProperties;
 
     // @Autowired
     // private Cache cache;
@@ -77,10 +79,10 @@ public class FileController {
     @NotAuth
     @Operation(summary = "testATSeata", description = "testATSeata")
     @PostMapping("/testATSeata")
-    public Result<Boolean> testATSeata() {
-        fileService.testSeata();
-
-        return Result.success(true);
+    public Result<Integer> testATSeata() {
+//        fileService.testSeata();
+        Integer signInFailureLimited = testProperties.getSignInFailureLimited();
+        return Result.success(signInFailureLimited);
     }
 
     @NotAuth

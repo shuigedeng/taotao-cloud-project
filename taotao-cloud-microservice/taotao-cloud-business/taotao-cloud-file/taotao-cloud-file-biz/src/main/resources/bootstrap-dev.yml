@@ -47,7 +47,7 @@ spring:
         password: nacos
         group: TAOTAO_CLOUD_GROUP
         file-extension: yml
-        cluster-name: CQ
+        #cluster-name: CQ
         refresh-enabled: true
         #使用nacos配置中心配置 dynamic-tp-nacos-cloud-demo-dtp-dev.yml
         #extension-configs:
@@ -127,9 +127,9 @@ spring:
         switch-pid: false
 
 logging:
-  file:
-    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
-    path: ${user.home}/logs/${spring.application.name}/
+#  file:
+#    name: ${user.home}/logs/${spring.application.name}/${spring.application.name}.all.log
+#    path: ${user.home}/logs/${spring.application.name}/
   logback:
     rollingpolicy:
       max-file-size: 10GB
