@@ -18,6 +18,7 @@ package com.taotao.cloud.file.biz;
 
 import cn.xuyanwu.spring.file.storage.spring.EnableFileStorage;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.file.biz.properties.TestProperties;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -30,7 +31,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @since 2023-05-09 14:52:09
  */
 //@EnableJpaRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository"})
-@EnableConfigurationProperties
+@EnableConfigurationProperties({TestProperties.class})
 @TaoTaoCloudApplication
 @EnableFileStorage
 public class TaoTaoCloudFileApplication {
