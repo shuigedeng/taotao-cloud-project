@@ -49,6 +49,23 @@ spring:
         refresh-enabled: true
         import-check:
           enabled: false #禁用spring的配置导入检查
+        ## 要在各应⽤之间共享⼀个配置，请使⽤上⾯的 shared-configs 用于共享的配置文件
+        #shared-configs:
+        #  - data-id: common-mysql.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #  - data-id: common-redis.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #  - data-id: common-base.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        ## 如果要在特定范围内（⽐如某个应⽤上）覆盖某个共享dataId上的特定属性，请使⽤ extension-config 常规配置文件
+        ## 优先级大于 shared-configs，在 shared-configs 之后加载
+        #extension-configs:
+        #  - data-id: nacos-config-advanced.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #    refresh: true
+        #  - data-id: nacos-config-base.yaml
+        #    group: SPRING_CLOUD_EXAMPLE_GROUP
+        #    refresh: true
     sentinel:
       enabled: true
       eager: true
