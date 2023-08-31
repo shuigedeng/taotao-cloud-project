@@ -78,7 +78,7 @@ public class FileController {
 
     @NotAuth
     @Operation(summary = "testATSeata", description = "testATSeata")
-    @PostMapping("/testATSeata")
+    @GetMapping("/testATSeata")
     public Result<Integer> testATSeata() {
 //        fileService.testSeata();
         Integer signInFailureLimited = testProperties.getSignInFailureLimited();
