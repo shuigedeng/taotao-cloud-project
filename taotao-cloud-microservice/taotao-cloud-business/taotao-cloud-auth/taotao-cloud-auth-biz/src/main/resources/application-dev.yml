@@ -747,6 +747,7 @@ spring:
   session:
     redis:
       repository-type: indexed
+    timeout: 2h
   security:
     oauth2:
       resourceserver:
