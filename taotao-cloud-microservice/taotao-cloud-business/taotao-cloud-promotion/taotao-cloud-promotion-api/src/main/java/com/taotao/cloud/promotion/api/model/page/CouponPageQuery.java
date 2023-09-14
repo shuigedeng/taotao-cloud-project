@@ -29,13 +29,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /** 优惠券查询通用类 */
 @Setter
 @Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true, fluent = false)
 public class CouponPageQuery extends BasePromotionsSearchQuery implements Serializable {
 
     @Serial

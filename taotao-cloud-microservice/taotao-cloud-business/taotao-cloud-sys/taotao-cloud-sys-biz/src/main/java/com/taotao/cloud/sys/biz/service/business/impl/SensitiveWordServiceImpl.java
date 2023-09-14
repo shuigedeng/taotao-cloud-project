@@ -45,6 +45,11 @@ public class SensitiveWordServiceImpl
         if (sensitiveWordsList == null || sensitiveWordsList.isEmpty()) {
             return;
         }
+		new SensitiveWord()
+			.setSensitiveWord("afd")
+			.setCreateBy(1L)
+			.setDelFlag(false)
+			.setId(1L);
         List<String> sensitiveWords =
                 sensitiveWordsList
 					.stream()
