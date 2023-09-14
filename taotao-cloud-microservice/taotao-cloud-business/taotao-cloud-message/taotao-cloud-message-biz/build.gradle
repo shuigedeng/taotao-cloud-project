@@ -2,22 +2,25 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
     implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-sms-aliyun"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sms-tencentv3"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
-
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
+    }
 
     implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.3'
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
@@ -49,6 +52,14 @@ dependencies {
     implementation 'com.google.guava:guava:32.1.2-jre'
     implementation 'org.dromara.hutool:hutool-all'
     implementation 'com.mysql:mysql-connector-j'
+
+    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
 mainClassName = "com.taotao.cloud.message.biz.TaoTaoCloudMessageApplication"
