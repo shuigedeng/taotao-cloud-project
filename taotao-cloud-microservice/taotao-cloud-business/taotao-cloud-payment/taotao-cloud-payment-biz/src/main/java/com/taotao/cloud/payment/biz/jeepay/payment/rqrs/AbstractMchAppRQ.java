@@ -26,7 +26,7 @@ import javax.validation.constraints.NotBlank;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/16 10:30
+* @since 2021/6/16 10:30
 */
 @Data
 public class AbstractMchAppRQ extends AbstractRQ {

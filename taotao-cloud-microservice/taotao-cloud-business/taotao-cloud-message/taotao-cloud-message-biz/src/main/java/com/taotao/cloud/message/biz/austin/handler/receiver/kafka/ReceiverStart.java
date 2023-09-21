@@ -25,7 +25,7 @@ import java.util.Optional;
  * 启动消费者
  *
  * @author 3y
- * @date 2021/12/4
+ * @since 2021/12/4
  */
 @Service
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)

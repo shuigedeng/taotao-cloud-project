@@ -30,7 +30,7 @@ import me.chanjar.weixin.mp.bean.menu.WxMpMenu;
  * 微信自定义菜单
  *
  * @author xxm
- * @date 2022/8/8
+ * @since 2022/8/8
  */
 @Data
 @Accessors(chain = true)

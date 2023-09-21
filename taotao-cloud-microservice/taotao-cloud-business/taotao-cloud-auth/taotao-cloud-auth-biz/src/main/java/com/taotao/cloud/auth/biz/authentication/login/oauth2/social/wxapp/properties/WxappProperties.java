@@ -27,7 +27,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * <p>Description: 微信小程序配置属性 </p>
  *
  *
- * @date : 2021/3/26 17:27
+ * @since : 2021/3/26 17:27
  */
 @ConfigurationProperties(prefix = AccessConstants.PROPERTY_ACCESS_WXAPP)
 public class WxappProperties implements Serializable {

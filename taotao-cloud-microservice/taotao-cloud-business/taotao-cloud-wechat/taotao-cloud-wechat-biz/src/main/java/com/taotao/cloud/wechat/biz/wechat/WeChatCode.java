@@ -20,7 +20,7 @@ package com.taotao.cloud.wechat.biz.wechat;
  * 微信编码
  *
  * @author xxm
- * @date 2022/8/5
+ * @since 2022/8/5
  */
 public interface WeChatCode {
 

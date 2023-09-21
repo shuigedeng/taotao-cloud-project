@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * <p>Description: 微信小程序Log处理器 </p>
  *
  *
- * @date : 2021/4/7 12:44
+ * @since : 2021/4/7 12:44
  */
 public class WxappLogHandler implements WxMaMessageHandler {
 

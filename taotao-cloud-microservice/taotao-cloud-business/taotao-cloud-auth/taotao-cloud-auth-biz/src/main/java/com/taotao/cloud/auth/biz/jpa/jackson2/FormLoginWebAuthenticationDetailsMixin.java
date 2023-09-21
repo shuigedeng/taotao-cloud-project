@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * <p>Description: FormLoginWebAuthenticationDetailsMixin </p>
  *
  *
- * @date : 2022/4/14 11:03
+ * @since : 2022/4/14 11:03
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonDeserialize(using = FormLoginWebAuthenticationDetailsDeserializer.class)

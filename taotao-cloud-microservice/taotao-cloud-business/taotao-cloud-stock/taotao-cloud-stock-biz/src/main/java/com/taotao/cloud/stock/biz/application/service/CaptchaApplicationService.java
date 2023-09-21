@@ -22,7 +22,7 @@ import java.awt.image.BufferedImage;
  * 验证码应用服务
  *
  * @author shuigedeng
- * @date 2021-06-23
+ * @since 2021-06-23
  */
 public interface CaptchaApplicationService {
 

@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.authentication.processor;
  * <p>Description: 对称加密算法 </p>
  *
  *
- * @date : 2022/5/1 15:05
+ * @since : 2022/5/1 15:05
  */
 public interface SymmetricCryptoProcessor {
 

@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * @author xzcawl
- * @date 23-04-21 10:53:32
+ * @since 23-04-21 10:53:32
  */
 @Component
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.RABBIT_MQ)

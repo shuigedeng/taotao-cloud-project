@@ -35,7 +35,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * <p>Description: 微信公众号核心服务 </p>
  *
  *
- * @date : 2021/5/27 20:25
+ * @since : 2021/5/27 20:25
  */
 public class WxmppProcessor implements InitializingBean {
 

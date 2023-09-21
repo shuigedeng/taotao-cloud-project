@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author pangxiaoyu
  * @site https://www.jeequan.com
- * @date 2021-06-07 07:15
+ * @since 2021-06-07 07:15
  */
 @Api(tags = "订单管理（退款类）")
 @RestController
@@ -51,7 +51,7 @@ public class RefundOrderController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:15
+     * @since: 2021/6/7 16:15
      * @describe: 退款订单信息列表
      */
     @ApiOperation("退款订单信息列表")
@@ -82,7 +82,7 @@ public class RefundOrderController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:15
+     * @since: 2021/6/7 16:15
      * @describe: 退款订单信息
      */
     @ApiOperation("退款订单信息详情")

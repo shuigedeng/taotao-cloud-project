@@ -23,7 +23,7 @@ import com.taotao.cloud.stock.biz.domain.model.log.Log;
  * 日志-Repository接口
  *
  * @author shuigedeng
- * @date 2021-02-02
+ * @since 2021-02-02
  */
 public interface LogRepository {
 

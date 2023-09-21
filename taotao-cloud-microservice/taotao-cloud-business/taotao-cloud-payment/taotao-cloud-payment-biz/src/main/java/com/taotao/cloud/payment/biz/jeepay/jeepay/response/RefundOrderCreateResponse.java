@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.model.RefundOrderCreateResMode
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-18 09:00
+ * @since 2021-06-18 09:00
  */
 public class RefundOrderCreateResponse extends JeepayResponse {
 

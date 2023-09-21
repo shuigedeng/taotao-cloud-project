@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.interfaces.assembler;
  * 日志Assembler
  *
  * @author shuigedeng
- * @date 2021-06-21
+ * @since 2021-06-21
  */
 public class LogDTOAssembler {
 

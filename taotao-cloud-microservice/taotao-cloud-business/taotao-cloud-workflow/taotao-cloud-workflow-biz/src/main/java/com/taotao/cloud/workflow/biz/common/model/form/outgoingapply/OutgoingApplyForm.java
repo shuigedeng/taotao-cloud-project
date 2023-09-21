@@ -23,7 +23,7 @@ import java.util.Map;
 import lombok.Data;
 
 /**
- * @date 2021/3/15 8:46
+ * @since 2021/3/15 8:46
  */
 @Data
 public class OutgoingApplyForm {

@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author jmdhappy
  * @site https://www.jeequan.com
- * @date 2021/9/10 21:51
+ * @since 2021/9/10 21:51
  */
 @Data
 public class XxpayNormalMchParams extends NormalMchParams {

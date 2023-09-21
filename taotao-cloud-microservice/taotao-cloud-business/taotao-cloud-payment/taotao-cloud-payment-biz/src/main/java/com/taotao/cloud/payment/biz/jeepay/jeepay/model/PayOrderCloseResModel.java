@@ -21,7 +21,7 @@ package com.taotao.cloud.payment.biz.jeepay.jeepay.model;
  *
  * @author xiaoyu
  * @site https://www.jeequan.com
- * @date 2022/1/25 9:55
+ * @since 2022/1/25 9:55
  */
 public class PayOrderCloseResModel extends JeepayObject {
 

@@ -22,7 +22,7 @@ import java.util.List;
  * 角色应用服务接口
  *
  * @author shuigedeng
- * @date 2021-02-17
+ * @since 2021-02-17
  */
 public interface RoleApplicationService {
 

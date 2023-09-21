@@ -33,7 +33,7 @@ import me.chanjar.weixin.common.util.http.ResponseHandler;
  * 消息撤回请求执行器.
  *
  * @author xxm
- * @date 2022/7/23
+ * @since 2022/7/23
  */
 public class RecallNoticeRequestExecutor implements RequestExecutor<WxError, String> {
 

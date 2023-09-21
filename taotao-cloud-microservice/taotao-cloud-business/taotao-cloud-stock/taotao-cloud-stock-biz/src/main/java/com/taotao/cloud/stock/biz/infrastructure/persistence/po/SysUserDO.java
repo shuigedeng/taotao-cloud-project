@@ -24,7 +24,7 @@ import lombok.Data;
  * 用户DO
  *
  * @author shuigedeng
- * @date 2021-02-09
+ * @since 2021-02-09
  */
 @Data
 @TableName("sys_user")

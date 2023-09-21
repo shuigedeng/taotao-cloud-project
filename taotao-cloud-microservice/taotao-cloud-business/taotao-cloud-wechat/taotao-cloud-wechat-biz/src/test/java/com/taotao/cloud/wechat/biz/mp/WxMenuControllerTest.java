@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
  * 菜单测试.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-08-19
+ * @since 2020-08-19
  */
 public class WxMenuControllerTest extends BaseControllerTest {
 

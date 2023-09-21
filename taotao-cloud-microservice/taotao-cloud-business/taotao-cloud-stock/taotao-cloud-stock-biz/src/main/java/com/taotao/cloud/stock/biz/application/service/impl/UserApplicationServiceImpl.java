@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 用户应用服务实现类
  *
  * @author shuigedeng
- * @date 2021-02-09
+ * @since 2021-02-09
  */
 @Service
 public class UserApplicationServiceImpl implements UserApplicationService {

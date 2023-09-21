@@ -33,7 +33,7 @@ import org.dromara.hutool.core.data.id.IdUtil;
  * <p>Description: 应用对象转 RegisteredClient 共性属性 </p>
  *
  *
- * @date : 2023/5/21 17:46
+ * @since : 2023/5/21 17:46
  */
 @MappedSuperclass
 public abstract class AbstractOAuth2RegisteredClient extends AbstractRegisteredClient {

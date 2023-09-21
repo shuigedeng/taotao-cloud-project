@@ -31,7 +31,7 @@ import org.mapstruct.factory.Mappers;
  * 日志转换
  *
  * @author shuigedeng
- * @date 2021/8/12
+ * @since 2021/8/12
  */
 @Mapper
 public interface LogConvert {

@@ -38,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>Description: OAuth2DeviceService </p>
  *
  *
- * @date : 2023/5/15 16:36
+ * @since : 2023/5/15 16:36
  */
 @Service
 public class OAuth2DeviceService {

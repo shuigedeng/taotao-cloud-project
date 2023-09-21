@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 微信公众号粉丝
  *
  * @author xxm
- * @date 2022-07-16
+ * @since 2022-07-16
  */
 @Mapper
 public interface WechatFansMapper extends BaseMapper<WechatFans> {}

@@ -26,7 +26,7 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author xxm
- * @date 2022/7/17
+ * @since 2022/7/17
  */
 @Mapper
 public interface WeChatTemplateConvert {

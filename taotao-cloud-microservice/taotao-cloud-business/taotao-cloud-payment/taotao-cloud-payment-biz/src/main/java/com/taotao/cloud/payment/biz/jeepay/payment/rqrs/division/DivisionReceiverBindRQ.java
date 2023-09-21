@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/8/25 09:21
+* @since 2021/8/25 09:21
 */
 @Data
 public class DivisionReceiverBindRQ extends AbstractMchAppRQ {

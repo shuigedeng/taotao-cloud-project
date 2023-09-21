@@ -21,7 +21,7 @@ package com.taotao.cloud.payment.biz.jeepay.jeepay.exception;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:31
+ * @since 2021-06-08 11:31
  */
 public class APIConnectionException extends JeepayException {
 

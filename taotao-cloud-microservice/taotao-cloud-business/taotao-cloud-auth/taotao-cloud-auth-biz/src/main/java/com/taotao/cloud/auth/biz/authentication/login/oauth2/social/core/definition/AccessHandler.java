@@ -22,7 +22,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
  * <p>Description: 外部应用接入处理器 </p>
  *
  *
- * @date : 2022/1/25 16:20
+ * @since : 2022/1/25 16:20
  */
 public interface AccessHandler {
 

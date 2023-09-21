@@ -24,7 +24,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * 企业微信配置
  *
  * @author xxm
- * @date 2022/7/22
+ * @since 2022/7/22
  */
 @Getter
 @Setter

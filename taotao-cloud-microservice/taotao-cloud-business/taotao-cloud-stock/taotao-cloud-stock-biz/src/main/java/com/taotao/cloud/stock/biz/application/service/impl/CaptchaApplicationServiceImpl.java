@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 验证码应用服务实现类
  *
  * @author shuigedeng
- * @date 2021-06-23
+ * @since 2021-06-23
  */
 @Service
 public class CaptchaApplicationServiceImpl implements CaptchaApplicationService {

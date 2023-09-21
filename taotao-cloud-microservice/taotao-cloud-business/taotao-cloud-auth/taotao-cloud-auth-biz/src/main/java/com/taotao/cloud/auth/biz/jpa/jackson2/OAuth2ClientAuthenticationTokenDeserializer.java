@@ -37,7 +37,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
  * <p>Description: OAuth2ClientAuthenticationTokenDeserializer </p>
  *
  *
- * @date : 2022/10/24 14:43
+ * @since : 2022/10/24 14:43
  */
 public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserializer<OAuth2ClientAuthenticationToken> {
 

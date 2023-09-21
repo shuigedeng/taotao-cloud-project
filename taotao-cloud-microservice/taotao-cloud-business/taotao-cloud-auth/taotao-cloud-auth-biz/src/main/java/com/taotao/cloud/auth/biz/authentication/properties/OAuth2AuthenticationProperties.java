@@ -29,7 +29,7 @@ import org.springframework.security.web.authentication.ui.DefaultLoginPageGenera
  * <p>Description: OAuth2 合规性配置参数 </p>
  *
  *
- * @date : 2022/7/7 0:16
+ * @since : 2022/7/7 0:16
  */
 @ConfigurationProperties(prefix = OAuth2Constants.PROPERTY_OAUTH2_AUTHENTICATION)
 public class OAuth2AuthenticationProperties {

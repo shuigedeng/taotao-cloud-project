@@ -30,7 +30,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * 数据版本日志
  *
  * @author shuigedeng
- * @date 2022/1/10
+ * @since 2022/1/10
  */
 @Data
 @FieldNameConstants

@@ -20,7 +20,7 @@ package com.taotao.cloud.payment.biz.jeepay.components.mq.constant;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/23 16:50
+* @since 2021/7/23 16:50
 */
 public class MQVenderCS {
 

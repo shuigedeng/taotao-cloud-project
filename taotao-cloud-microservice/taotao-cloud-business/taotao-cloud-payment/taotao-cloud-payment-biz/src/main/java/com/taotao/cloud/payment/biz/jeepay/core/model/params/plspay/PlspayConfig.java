@@ -22,7 +22,7 @@ import lombok.Data;
  *
  * @author yurong
  * @site https://www.jeequan.com
- * @date 2022/8/11 14:32
+ * @since 2022/8/11 14:32
  */
 @Data
 public class PlspayConfig {

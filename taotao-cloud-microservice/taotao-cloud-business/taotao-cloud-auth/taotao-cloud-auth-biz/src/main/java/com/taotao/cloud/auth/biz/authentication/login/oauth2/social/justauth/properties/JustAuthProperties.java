@@ -26,7 +26,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * <p>Description: 用于支持JustAuth第三方登录的配置 </p>
  *
  *
- * @date : 2021/5/16 10:24
+ * @since : 2021/5/16 10:24
  */
 @ConfigurationProperties(prefix = AccessConstants.PROPERTY_ACCESS_JUSTAUTH)
 public class JustAuthProperties {

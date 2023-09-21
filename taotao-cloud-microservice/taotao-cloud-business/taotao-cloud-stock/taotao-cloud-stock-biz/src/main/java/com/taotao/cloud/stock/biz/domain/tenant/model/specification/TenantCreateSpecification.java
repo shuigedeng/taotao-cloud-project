@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.domain.tenant.model.specification;
  * 租户创建Specification
  *
  * @author shuigedeng
- * @date 2021-03-29
+ * @since 2021-03-29
  */
 public class TenantCreateSpecification extends AbstractSpecification<Tenant> {
 

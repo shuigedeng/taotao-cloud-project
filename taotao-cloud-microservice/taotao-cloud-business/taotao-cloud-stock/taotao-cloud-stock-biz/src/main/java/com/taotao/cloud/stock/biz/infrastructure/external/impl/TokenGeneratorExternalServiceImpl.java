@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  * 生成Token外部实现类
  *
  * @author shuigedeng
- * @date 2021-04-23
+ * @since 2021-04-23
  */
 @Component
 public class TokenGeneratorExternalServiceImpl implements TokenGeneratorExternalService {

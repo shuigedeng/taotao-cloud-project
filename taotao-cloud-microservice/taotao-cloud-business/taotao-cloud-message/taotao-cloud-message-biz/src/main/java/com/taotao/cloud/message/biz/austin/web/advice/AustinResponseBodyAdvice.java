@@ -15,7 +15,7 @@ import java.util.Objects;
  * @author kl
  * @version 1.0.0
  * @description 统一返回结构
- * @date 2023/2/9 19:00
+ * @since 2023/2/9 19:00
  */
 @ControllerAdvice(basePackages = "com.java3y.austin.web.controller")
 public class AustinResponseBodyAdvice implements ResponseBodyAdvice<Object> {

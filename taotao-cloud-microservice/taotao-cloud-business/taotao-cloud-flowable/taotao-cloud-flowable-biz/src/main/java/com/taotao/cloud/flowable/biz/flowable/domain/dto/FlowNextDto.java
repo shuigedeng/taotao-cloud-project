@@ -23,7 +23,7 @@ import lombok.Data;
  * 动态人员、组
  *
  * @author Tony
- * @date 2021/4/17 22:59
+ * @since 2021/4/17 22:59
  */
 @Data
 public class FlowNextDto implements Serializable {

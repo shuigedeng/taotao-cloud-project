@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author pangxiaoyu
  * @site https://www.jeequan.com
- * @date 2021-06-07 07:15
+ * @since 2021-06-07 07:15
  */
 @Api(tags = "订单管理（通知类）")
 @RestController
@@ -56,7 +56,7 @@ public class MchNotifyController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 商户通知列表
      */
     @ApiOperation("查询商户通知列表")
@@ -119,7 +119,7 @@ public class MchNotifyController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 商户通知信息
      */
     @ApiOperation("通知信息详情")

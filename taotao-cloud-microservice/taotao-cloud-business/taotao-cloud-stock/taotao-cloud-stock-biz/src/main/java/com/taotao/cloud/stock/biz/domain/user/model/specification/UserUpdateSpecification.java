@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.domain.user.model.specification;
  * 用户修改Specification
  *
  * @author shuigedeng
- * @date 2021-02-27
+ * @since 2021-02-27
  */
 public class UserUpdateSpecification extends AbstractSpecification<User> {
 

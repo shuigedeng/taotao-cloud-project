@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 身份验证应用服务实现类
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 @DubboService
 public class AuthenticationServiceImpl implements AuthenticationService {

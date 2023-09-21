@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author 3y
- * @date 2021/11/4
+ * @since 2021/11/4
  */
 @Configuration
 public class OkHttpConfiguration {

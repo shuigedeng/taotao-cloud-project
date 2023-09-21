@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.exception;
  * <p>Description: Session 不可用错误 </p>
  *
  *
- * @date : 2021/10/4 16:46
+ * @since : 2021/10/4 16:46
  */
 public class SessionInvalidException extends RuntimeException {
 

@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @ClassName: JustAuthFeign @Description: JustAuthFeign前端控制器
  *
- * @date 2019年5月18日 下午4:03:58
+ * @since 2019年5月18日 下午4:03:58
  */
 @Slf4j
 @Service

@@ -24,7 +24,7 @@ import lombok.Data;
  * 注册租户Command
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Data
 @ApiModel(value = "注册租户", description = "注册租户")

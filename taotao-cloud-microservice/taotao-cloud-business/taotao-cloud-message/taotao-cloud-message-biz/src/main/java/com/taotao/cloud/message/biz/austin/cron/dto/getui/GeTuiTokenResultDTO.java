@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 3y
- * @date 2022/5/8
+ * @since 2022/5/8
  *     <p>https://docs.getui.com/getui/server/rest_v2/token/
  */
 @NoArgsConstructor

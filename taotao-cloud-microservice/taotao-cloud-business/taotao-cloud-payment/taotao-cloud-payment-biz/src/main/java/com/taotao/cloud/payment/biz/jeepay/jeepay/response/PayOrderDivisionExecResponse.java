@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.model.PayOrderDivisionExecResM
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/27 10:22
+ * @since 2021/8/27 10:22
  */
 public class PayOrderDivisionExecResponse extends JeepayResponse {
 

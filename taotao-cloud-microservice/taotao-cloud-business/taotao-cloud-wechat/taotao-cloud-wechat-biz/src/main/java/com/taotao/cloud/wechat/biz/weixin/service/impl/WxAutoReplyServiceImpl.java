@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
  * 消息自动回复
  *
  * @author www.joolun.com
- * @date 2019-04-18 15:40:39
+ * @since 2019-04-18 15:40:39
  */
 @Service
 public class WxAutoReplyServiceImpl extends ServiceImpl<WxAutoReplyMapper, WxAutoReply> implements WxAutoReplyService {}

@@ -39,7 +39,7 @@ import org.springframework.beans.factory.InitializingBean;
  * <p>Description: 微信小程序核心基础代码 </p>
  *
  *
- * @date : 2021/5/27 20:29
+ * @since : 2021/5/27 20:29
  */
 public class WxappProcessor implements InitializingBean {
 

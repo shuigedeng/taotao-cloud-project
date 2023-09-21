@@ -34,7 +34,7 @@ import java.io.File;
 *
 * @author zx
 * @site https://www.jeequan.com
-* @date 2022/12/30 10:18
+* @since 2022/12/30 10:18
 */
 public abstract class AbstractTransferNoticeService implements ITransferNoticeService {
 

@@ -31,7 +31,7 @@ import org.springframework.util.Assert;
  * <p>Description: 自定义社会化登录认证Token </p>
  *
  *
- * @date : 2022/3/31 14:54
+ * @since : 2022/3/31 14:54
  */
 public class OAuth2SocialCredentialsAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {
 

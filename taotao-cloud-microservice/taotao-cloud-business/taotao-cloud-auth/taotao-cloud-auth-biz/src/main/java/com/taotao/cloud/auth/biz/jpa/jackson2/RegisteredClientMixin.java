@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * <p>Description: RegisteredClientMixin </p>
  *
  *
- * @date : 2022/10/24 16:18
+ * @since : 2022/10/24 16:18
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonDeserialize(using = RegisteredClientDeserializer.class)

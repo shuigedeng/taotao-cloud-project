@@ -23,7 +23,7 @@ import lombok.Data;
  *
  * @author jmdhappy
  * @site https://www.jeequan.com
- * @date 2021/12/1 19:57
+ * @since 2021/12/1 19:57
  */
 @Data
 public class UpBarOrderRS extends CommonPayDataRS {

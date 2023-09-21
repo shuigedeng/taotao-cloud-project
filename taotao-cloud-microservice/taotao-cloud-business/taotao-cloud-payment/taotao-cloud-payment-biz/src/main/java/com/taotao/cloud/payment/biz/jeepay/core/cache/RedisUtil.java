@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/5/24 17:58
+* @since 2021/5/24 17:58
 */
 public class RedisUtil {
 

@@ -22,7 +22,7 @@ import org.apache.commons.lang.StringUtils;
  * 权限类型
  *
  * @author shuigedeng
- * @date 2021-02-08
+ * @since 2021-02-08
  */
 public enum PermissionTypeEnum implements ValueObject<PermissionTypeEnum> {
 

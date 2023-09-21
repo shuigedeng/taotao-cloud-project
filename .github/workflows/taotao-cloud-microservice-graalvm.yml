@@ -34,11 +34,17 @@ jobs:
       #https://github.com/marketplace/actions/github-action-for-graalvm
       - uses: graalvm/setup-graalvm@v1
         with:
-          version: '22.3.2'
-          java-version: '17'
-          components: 'native-image'
+          java-version: '21'
+          distribution: 'graalvm'
           github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           native-image-job-reports: 'true'
+
+      - name: Example step
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
 
       - name: write secrets maven username password
         run: |
@@ -76,7 +82,7 @@ jobs:
     #  - uses: graalvm/setup-graalvm@v1
     #    with:
     #      version: '22.3.2'
-    #      java-version: '17'
+    #      java-version: '21'
     #      components: 'native-image'
     #      github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
     #      native-image-job-reports: 'true'

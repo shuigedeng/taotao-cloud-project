@@ -39,7 +39,7 @@ import java.util.Date;
  *
  * @author pangxiaoyu
  * @site https://www.jeequan.com
- * @date 2021/6/8 18:11
+ * @since 2021/6/8 18:11
  */
 @Service("ysfpayPaymentByAliJsapiService") //Service Name需保持全局唯一性
 public class AliJsapi extends YsfpayPaymentService {

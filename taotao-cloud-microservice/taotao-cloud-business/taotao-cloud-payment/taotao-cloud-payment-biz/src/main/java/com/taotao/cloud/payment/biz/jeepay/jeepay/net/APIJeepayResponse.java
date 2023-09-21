@@ -21,7 +21,7 @@ package com.taotao.cloud.payment.biz.jeepay.jeepay.net;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:00
+ * @since 2021-06-08 11:00
  */
 public class APIJeepayResponse {
 

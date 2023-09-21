@@ -23,7 +23,7 @@ import com.taotao.cloud.stock.biz.domain.model.log.LogId;
  * 日志实体
  *
  * @author shuigedeng
- * @date 2021-02-02
+ * @since 2021-02-02
  */
 public class Log implements Entity<Log> {
 

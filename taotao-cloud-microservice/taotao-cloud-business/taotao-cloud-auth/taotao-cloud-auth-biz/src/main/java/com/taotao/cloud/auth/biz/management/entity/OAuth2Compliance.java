@@ -28,7 +28,7 @@ import org.hibernate.annotations.UuidGenerator;
  * <p>Description: 用户操作审计 </p>
  *
  *
- * @date : 2022/7/7 18:55
+ * @since : 2022/7/7 18:55
  */
 @Entity
 @Table(

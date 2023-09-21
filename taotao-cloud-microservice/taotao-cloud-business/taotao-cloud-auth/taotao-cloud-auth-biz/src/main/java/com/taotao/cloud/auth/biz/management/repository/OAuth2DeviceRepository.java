@@ -26,7 +26,7 @@ import org.springframework.data.jpa.repository.Query;
  * <p>Description: OAuth2DeviceRepository </p>
  *
  *
- * @date : 2023/5/15 16:14
+ * @since : 2023/5/15 16:14
  */
 public interface OAuth2DeviceRepository extends BaseRepository<OAuth2Device, String> {
 

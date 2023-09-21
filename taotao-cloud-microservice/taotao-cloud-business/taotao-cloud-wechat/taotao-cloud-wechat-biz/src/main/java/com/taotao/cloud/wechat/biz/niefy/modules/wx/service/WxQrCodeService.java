@@ -29,7 +29,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpQrCodeTicket;
  *
  * @author niefy
  * @email niefy@qq.com
- * @date 2020-01-02 11:11:55
+ * @since 2020-01-02 11:11:55
  */
 public interface WxQrCodeService extends IService<WxQrCode> {
     /**

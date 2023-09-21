@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 注册Controller
  *
  * @author shuigedeng
- * @date 2021-02-13
+ * @since 2021-02-13
  */
 @Api(tags = "注册")
 @RestController

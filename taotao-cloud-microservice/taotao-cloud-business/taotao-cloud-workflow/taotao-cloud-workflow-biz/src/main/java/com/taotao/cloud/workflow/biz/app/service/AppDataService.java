@@ -29,7 +29,7 @@ import jnpf.model.AppFlowListAllVO;
  * @author JNPF开发平台组
  * @version V3.1.0
  * @copyright 引迈信息技术有限公司
- * @date 2021-08-08
+ * @since 2021-08-08
  */
 public interface AppDataService extends IService<AppDataEntity> {
 

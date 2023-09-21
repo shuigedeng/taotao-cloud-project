@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.except
  * <p>Description: 非法的外部访问参数类型错误 </p>
  *
  *
- * @date : 2022/1/26 12:02
+ * @since : 2022/1/26 12:02
  */
 public class IllegalAccessSourceException extends RuntimeException {
 

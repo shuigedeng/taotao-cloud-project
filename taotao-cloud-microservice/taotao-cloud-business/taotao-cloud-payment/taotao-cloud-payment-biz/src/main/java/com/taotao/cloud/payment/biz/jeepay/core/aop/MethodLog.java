@@ -22,7 +22,7 @@ import java.lang.annotation.*;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 18:00
+* @since 2021/6/8 18:00
 */
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

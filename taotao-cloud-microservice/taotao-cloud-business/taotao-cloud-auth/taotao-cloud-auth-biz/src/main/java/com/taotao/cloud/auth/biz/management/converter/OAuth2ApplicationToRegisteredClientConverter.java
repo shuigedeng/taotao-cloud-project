@@ -23,7 +23,7 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
  * <p>Description: OAuth2Application 转 RegisteredClient 转换器 </p>
  *
  *
- * @date : 2023/5/21 19:04
+ * @since : 2023/5/21 19:04
  */
 public class OAuth2ApplicationToRegisteredClientConverter
         extends AbstractOAuth2RegisteredClientConverter<OAuth2Application> {}

@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  * 这里的泛型使用了 Long 主要是为了兼顾存储 System.currentTimeMillis()。否则类型不一致，还要建两个 Stamp
  *
  *
- * @date : 2022/7/6 22:59
+ * @since : 2022/7/6 22:59
  */
 public abstract class AbstractJustAuthStampManager extends AbstractRenderer {
 

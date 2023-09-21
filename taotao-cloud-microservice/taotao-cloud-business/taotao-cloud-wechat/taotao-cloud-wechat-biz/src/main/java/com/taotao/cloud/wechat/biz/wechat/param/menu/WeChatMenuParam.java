@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
  * 微信自定义菜单
  *
  * @author xxm
- * @date 2022-08-08
+ * @since 2022-08-08
  */
 @Data
 @Schema(title = "微信自定义菜单")

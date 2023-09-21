@@ -21,7 +21,7 @@ import lombok.Getter;
 * oss 服务枚举值
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/12 10:48
+* @since 2021/7/12 10:48
 */
 @Getter
 public enum OssServiceTypeEnum {

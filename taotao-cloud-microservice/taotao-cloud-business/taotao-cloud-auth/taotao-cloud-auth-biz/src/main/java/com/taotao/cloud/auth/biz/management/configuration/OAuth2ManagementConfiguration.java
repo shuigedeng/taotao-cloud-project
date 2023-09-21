@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Import;
  * <p>
  * {@link org.springframework.security.oauth2.jwt.JwtTimestampValidator}
  *
- * @date : 2022/2/26 12:35
+ * @since : 2022/2/26 12:35
  */
 @Configuration
 @Import({OAuth2DataJpaConfiguration.class, OAuth2AuthenticationConfiguration.class, OAuth2ComplianceConfiguration.class

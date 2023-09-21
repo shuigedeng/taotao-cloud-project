@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author niefy
  * @email niefy@qq.com
- * @date 2020-03-07 13:55:23
+ * @since 2020-03-07 13:55:23
  */
 @RestController
 @RequestMapping("/manage/wxUser")

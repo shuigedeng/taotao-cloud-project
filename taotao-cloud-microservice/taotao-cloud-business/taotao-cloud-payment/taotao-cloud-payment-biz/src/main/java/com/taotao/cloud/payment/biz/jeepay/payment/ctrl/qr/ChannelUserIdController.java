@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:27
+* @since 2021/6/8 17:27
 */
 @RestController
 @RequestMapping("/api/channelUserId")

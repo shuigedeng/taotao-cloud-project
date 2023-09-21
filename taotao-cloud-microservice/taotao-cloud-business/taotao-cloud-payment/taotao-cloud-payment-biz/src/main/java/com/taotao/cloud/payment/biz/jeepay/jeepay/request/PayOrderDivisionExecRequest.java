@@ -25,7 +25,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.response.PayOrderDivisionExecR
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/27 10:19
+ * @since 2021/8/27 10:19
  */
 public class PayOrderDivisionExecRequest implements JeepayRequest<PayOrderDivisionExecResponse> {
 

@@ -32,7 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author xxm
- * @date 2022/8/9
+ * @since 2022/8/9
  */
 @Tag(name = "微信素材管理")
 @RestController

@@ -31,7 +31,7 @@ import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
  * 指定ID生成器，解决实体ID无法手动设置问题。
  *
  *
- * @date : 2022/11/7 15:39
+ * @since : 2022/11/7 15:39
  */
 public class HerodotusAuthorizationUuidGenerator extends AbstractUuidGenerator {
 

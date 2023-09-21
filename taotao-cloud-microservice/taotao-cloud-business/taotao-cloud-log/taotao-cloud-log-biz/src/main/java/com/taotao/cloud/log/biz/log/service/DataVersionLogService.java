@@ -23,7 +23,7 @@ import com.taotao.cloud.log.biz.log.param.DataVersionLogParam;
 /**
  * 数据版本日志
  * @author shuigedeng
- * @date 2022/1/10
+ * @since 2022/1/10
  */
 public interface DataVersionLogService {
     /**

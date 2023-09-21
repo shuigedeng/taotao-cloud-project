@@ -29,7 +29,7 @@ import com.taotao.cloud.stock.biz.domain.user.model.vo.Password;
  * 账号
  *
  * @author shuigedeng
- * @date 2021-02-21
+ * @since 2021-02-21
  */
 public class Account implements Entity<Account> {
 

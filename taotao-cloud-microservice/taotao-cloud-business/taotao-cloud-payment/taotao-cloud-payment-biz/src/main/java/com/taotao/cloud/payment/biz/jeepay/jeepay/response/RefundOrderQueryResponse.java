@@ -23,7 +23,7 @@ import com.jeequan.jeepay.model.RefundOrderQueryResModel;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-18 12:00
+ * @since 2021-06-18 12:00
  */
 public class RefundOrderQueryResponse extends JeepayResponse {
 

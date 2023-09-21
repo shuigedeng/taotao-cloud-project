@@ -23,7 +23,7 @@ import lombok.Data;
  * 用户Token DO
  *
  * @author shuigedeng
- * @date 2021-02-09
+ * @since 2021-02-09
  */
 @Data
 @TableName("sys_account")

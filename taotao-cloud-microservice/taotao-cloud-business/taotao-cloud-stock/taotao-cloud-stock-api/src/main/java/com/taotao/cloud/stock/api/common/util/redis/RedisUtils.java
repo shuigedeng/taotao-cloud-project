@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  * Redis工具类
  *
  * @author shuigedeng
- * @date 2021-01-23
+ * @since 2021-01-23
  */
 @Component
 public class RedisUtils {

@@ -29,7 +29,7 @@ import lombok.*;
  * 登录日志
  *
  * @author shuigedeng
- * @date 2021/8/12
+ * @since 2021/8/12
  */
 @NoArgsConstructor
 @AllArgsConstructor

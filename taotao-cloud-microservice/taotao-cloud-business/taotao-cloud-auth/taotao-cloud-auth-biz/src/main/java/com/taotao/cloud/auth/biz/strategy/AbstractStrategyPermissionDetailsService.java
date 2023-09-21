@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * <p>Description: 抽象的StrategyAuthorityDetailsService </p>
  *
- * @date : 2022/4/1 19:09
+ * @since : 2022/4/1 19:09
  */
 public abstract class AbstractStrategyPermissionDetailsService implements StrategyPermissionDetailsService {
 

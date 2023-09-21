@@ -55,7 +55,7 @@ import java.util.Set;
  *
  * @author pangxiaoyu
  * @site https://www.jeequan.com
- * @date 2021-06-07 07:15
+ * @since 2021-06-07 07:15
  */
 @Api(tags = "商户基本信息管理")
 @RestController
@@ -69,7 +69,7 @@ public class MchInfoController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 商户信息列表
      */
     @ApiOperation("查询商户列表")
@@ -112,7 +112,7 @@ public class MchInfoController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 新增商户信息
      */
     @ApiOperation("新增商户信息")
@@ -148,7 +148,7 @@ public class MchInfoController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 删除商户信息
      */
     @ApiOperation("删除商户信息")
@@ -172,7 +172,7 @@ public class MchInfoController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 更新商户信息
      */
     @ApiOperation("更新商户信息")
@@ -243,7 +243,7 @@ public class MchInfoController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:14
+     * @since: 2021/6/7 16:14
      * @describe: 查询商户信息
      */
     @ApiOperation("查询商户信息")

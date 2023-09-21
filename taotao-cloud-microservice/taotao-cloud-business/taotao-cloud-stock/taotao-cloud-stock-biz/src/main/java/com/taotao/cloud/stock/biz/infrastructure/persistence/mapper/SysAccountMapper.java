@@ -22,7 +22,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 账号Mapper
  *
  * @author shuigedeng
- * @date 2021-02-10
+ * @since 2021-02-10
  */
 @Mapper
 public interface SysAccountMapper extends BaseSuperMapper<SysAccountDO> {}

@@ -26,7 +26,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.response.TransferOrderCreateRe
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/13 16:26
+ * @since 2021/8/13 16:26
  */
 public class TransferOrderCreateRequest implements JeepayRequest<TransferOrderCreateResponse> {
 

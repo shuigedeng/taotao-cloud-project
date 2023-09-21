@@ -33,7 +33,7 @@ import me.chanjar.weixin.common.util.http.ResponseHandler;
  * 机器人文件素材上传
  *
  * @author xxm
- * @date 2022/7/23
+ * @since 2022/7/23
  */
 public class RobotMediaFileUploadRequestExecutor implements RequestExecutor<WxMediaUploadResult, UploadMedia> {
 

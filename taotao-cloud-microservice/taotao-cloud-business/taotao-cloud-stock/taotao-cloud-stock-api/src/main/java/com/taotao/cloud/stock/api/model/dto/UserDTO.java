@@ -25,7 +25,7 @@ import lombok.Data;
  * 用户DTO
  *
  * @author shuigedeng
- * @date 2021-02-23
+ * @since 2021-02-23
  */
 @Data
 public class UserDTO implements Serializable {

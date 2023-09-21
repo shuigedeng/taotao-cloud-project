@@ -22,7 +22,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author xxm
- * @date 2022/7/17
+ * @since 2022/7/17
  */
 @Mapper
 public interface WeChatTemplateMapper extends BaseMapper<WeChatTemplate> {}

@@ -56,7 +56,7 @@ import org.springframework.web.bind.support.WebRequestDataBinder;
  * <p>Description: 社会化认证 Provider </p>
  *
  *
- * @date : 2022/3/31 14:54
+ * @since : 2022/3/31 14:54
  */
 public class OAuth2SocialCredentialsAuthenticationProvider extends OAuth2AbstractUserDetailsAuthenticationProvider {
 

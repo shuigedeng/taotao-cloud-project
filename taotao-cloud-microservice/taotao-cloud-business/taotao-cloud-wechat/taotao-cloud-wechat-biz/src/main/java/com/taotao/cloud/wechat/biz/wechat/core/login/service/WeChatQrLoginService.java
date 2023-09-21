@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
  * 扫码事件
  *
  * @author xxm
- * @date 2022/8/4
+ * @since 2022/8/4
  */
 @Slf4j
 @Service

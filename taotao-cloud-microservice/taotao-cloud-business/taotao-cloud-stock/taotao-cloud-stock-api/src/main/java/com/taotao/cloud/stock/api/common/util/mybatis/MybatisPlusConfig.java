@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Bean;
  * mybatis-plus配置
  *
  * @author shuigedeng
- * @date 2021-01-25
+ * @since 2021-01-25
  */
 @AutoConfiguration
 public class MybatisPlusConfig {

@@ -7,7 +7,7 @@ import java.util.function.Function;
  * @author kl
  * @version 1.0.0
  * @description ConcurrentHashMap util
- * @date 2023/2/6 10:01
+ * @since 2023/2/6 10:01
  */
 public class ConcurrentHashMapUtils {
 

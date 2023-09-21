@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
  * 新增关注订阅消息
  *
  * @author xxm
- * @date 2022/7/16
+ * @since 2022/7/16
  */
 @Slf4j
 @Component

@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:00
+ * @since 2021-06-08 11:00
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.FIELD})

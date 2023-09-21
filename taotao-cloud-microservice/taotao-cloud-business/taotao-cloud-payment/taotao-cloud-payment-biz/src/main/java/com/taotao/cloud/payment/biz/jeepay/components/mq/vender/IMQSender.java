@@ -22,7 +22,7 @@ import com.jeequan.jeepay.components.mq.model.AbstractMQ;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/21 16:09
+* @since 2021/7/21 16:09
 */
 public interface IMQSender {
 

@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSONObject;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/6/8 16:33
+ * @since 2021/6/8 16:33
  * @modify ZhuXiao
  */
 public abstract class IsvParams {

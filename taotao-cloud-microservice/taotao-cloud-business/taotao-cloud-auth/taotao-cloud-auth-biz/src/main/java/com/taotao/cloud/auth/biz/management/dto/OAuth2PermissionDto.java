@@ -24,7 +24,7 @@ import jakarta.validation.constraints.NotNull;
  * <p>Description: OAuth2 HerodotusPermission Dto </p>
  *
  *
- * @date : 2022/4/1 13:55
+ * @since : 2022/4/1 13:55
  */
 @Schema(name = "OAuth2 权限请求 Dto")
 public class OAuth2PermissionDto {

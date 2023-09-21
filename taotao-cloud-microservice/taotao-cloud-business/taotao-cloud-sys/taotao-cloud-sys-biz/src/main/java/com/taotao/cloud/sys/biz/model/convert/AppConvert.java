@@ -26,7 +26,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * @author
  * @version 0.0.1
- * @date 2022/11/23 00:45
+ * @since 2022/11/23 00:45
  */
 @Mapper
 public interface AppConvert {

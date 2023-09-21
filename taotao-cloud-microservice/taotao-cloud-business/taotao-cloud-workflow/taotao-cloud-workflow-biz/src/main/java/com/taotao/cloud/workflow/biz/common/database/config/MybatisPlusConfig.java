@@ -67,7 +67,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * MybatisPlus配置类
  *
- * @date 2021/3/16 8:53
+ * @since 2021/3/16 8:53
  */
 @Slf4j
 @Configuration

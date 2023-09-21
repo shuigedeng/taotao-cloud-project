@@ -24,7 +24,7 @@ import lombok.Data;
  * 权限Command
  *
  * @author shuigedeng
- * @date 2021-02-18
+ * @since 2021-02-18
  */
 @Data
 @ApiModel(value = "权限", description = "权限")

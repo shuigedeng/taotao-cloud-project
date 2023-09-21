@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 微信
  *
  * @author xxm
- * @date 2022/8/4
+ * @since 2022/8/4
  */
 @IgnoreAuth
 @Tag(name = "微信扫码登录")

@@ -32,7 +32,7 @@ import org.springframework.stereotype.Repository;
  * 企业微信机器人配置
  *
  * @author bootx
- * @date 2022-07-23
+ * @since 2022-07-23
  */
 @Repository
 @RequiredArgsConstructor

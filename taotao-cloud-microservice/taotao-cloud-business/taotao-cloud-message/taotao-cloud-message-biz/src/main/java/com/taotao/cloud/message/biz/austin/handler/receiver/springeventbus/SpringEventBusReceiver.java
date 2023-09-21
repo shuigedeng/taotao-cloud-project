@@ -14,7 +14,7 @@ import java.util.List;
  * 描述：
  *
  * @author tony
- * @date 2023/2/6 11:18
+ * @since 2023/2/6 11:18
  */
 @Component
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.SPRING_EVENT_BUS)

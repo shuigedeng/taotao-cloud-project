@@ -21,7 +21,7 @@ package com.taotao.cloud.payment.biz.jeepay.jeepay.model;
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/16 16:08
+ * @since 2021/8/16 16:08
  */
 public class TransferOrderQueryResModel extends JeepayObject {
 

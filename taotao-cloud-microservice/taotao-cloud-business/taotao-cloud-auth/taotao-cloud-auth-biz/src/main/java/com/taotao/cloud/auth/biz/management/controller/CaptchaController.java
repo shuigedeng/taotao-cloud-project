@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.*;
  * <p>Description: 验证码Controller </p>
  *
  *
- * @date : 2021/12/12 10:44
+ * @since : 2021/12/12 10:44
  */
 @RestController
 @RequestMapping("/open/captcha")

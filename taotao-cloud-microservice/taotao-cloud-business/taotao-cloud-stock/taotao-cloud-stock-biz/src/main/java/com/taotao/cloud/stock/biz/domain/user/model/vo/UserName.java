@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * 用户名
  *
  * @author shuigedeng
- * @date 2021-02-08
+ * @since 2021-02-08
  */
 public class UserName implements ValueObject<UserName> {
 

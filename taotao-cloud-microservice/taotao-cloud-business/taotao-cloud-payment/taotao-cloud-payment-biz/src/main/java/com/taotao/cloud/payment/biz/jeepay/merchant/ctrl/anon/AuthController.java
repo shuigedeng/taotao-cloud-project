@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021-04-27 15:50
+ * @since 2021-04-27 15:50
  */
 @Api(tags = "认证模块")
 @RestController

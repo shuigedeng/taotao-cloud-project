@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
  * 微信配置
  *
  * @author xxm
- * @date 2022/7/15
+ * @since 2022/7/15
  */
 @Configuration
 @RequiredArgsConstructor

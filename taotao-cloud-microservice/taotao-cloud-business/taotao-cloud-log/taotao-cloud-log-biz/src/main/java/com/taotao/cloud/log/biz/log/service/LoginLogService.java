@@ -23,7 +23,7 @@ import com.taotao.cloud.log.biz.log.param.LoginLogParam;
 /**
  * 登陆日志
  * @author shuigedeng
- * @date 2021/12/2
+ * @since 2021/12/2
  */
 public interface LoginLogService {
 

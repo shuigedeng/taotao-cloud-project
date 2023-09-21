@@ -23,7 +23,7 @@ import me.zhyd.oauth.request.AuthDefaultRequest;
  * 扩展的自定义 source
  *
  * @author yangkai.shen
- * @date Created in 2019/10/9 14:14
+ * @since Created in 2019/10/9 14:14
  */
 public enum ExtendSource implements AuthSource {
 

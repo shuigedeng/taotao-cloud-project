@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * 用户查询服务实现类
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 @Service
 public class UserQueryServiceImpl implements UserQueryService {

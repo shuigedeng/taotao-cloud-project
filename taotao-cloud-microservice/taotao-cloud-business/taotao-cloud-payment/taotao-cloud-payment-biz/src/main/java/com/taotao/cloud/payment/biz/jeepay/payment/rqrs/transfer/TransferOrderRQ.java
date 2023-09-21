@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/8/10 11:31
+* @since 2021/8/10 11:31
 */
 @Data
 public class TransferOrderRQ extends AbstractMchAppRQ {

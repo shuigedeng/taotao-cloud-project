@@ -20,7 +20,7 @@ package com.taotao.cloud.payment.biz.jeepay.components.mq.vender;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/21 16:09
+* @since 2021/7/21 16:09
 */
 public interface IMQMsgReceiver {
 

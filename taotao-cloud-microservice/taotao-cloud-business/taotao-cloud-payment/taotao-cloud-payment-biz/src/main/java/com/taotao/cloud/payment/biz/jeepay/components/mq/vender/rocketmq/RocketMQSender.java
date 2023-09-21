@@ -33,7 +33,7 @@ import java.util.TreeMap;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/7/26 11:52
+ * @since 2021/7/26 11:52
  */
 @Component
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.ROCKET_MQ)

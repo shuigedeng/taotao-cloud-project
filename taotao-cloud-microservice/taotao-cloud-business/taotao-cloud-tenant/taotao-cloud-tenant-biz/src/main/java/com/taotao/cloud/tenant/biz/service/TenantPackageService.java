@@ -27,7 +27,7 @@ import java.util.List;
  * 租户套餐表
  *
  * @author
- * @date 2022-10-01
+ * @since 2022-10-01
  */
 public interface TenantPackageService {
 

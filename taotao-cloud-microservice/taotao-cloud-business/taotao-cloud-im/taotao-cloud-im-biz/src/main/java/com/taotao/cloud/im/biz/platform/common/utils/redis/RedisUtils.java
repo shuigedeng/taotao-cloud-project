@@ -34,7 +34,7 @@ import org.springframework.util.StringUtils;
  *
  * @author WangFan
  * @version 1.1 (GitHub文档: https://github.com/whvcse/RedisUtil )
- * @date 2018-02-24 下午03:09:50
+ * @since 2018-02-24 下午03:09:50
  */
 @Component
 public class RedisUtils {

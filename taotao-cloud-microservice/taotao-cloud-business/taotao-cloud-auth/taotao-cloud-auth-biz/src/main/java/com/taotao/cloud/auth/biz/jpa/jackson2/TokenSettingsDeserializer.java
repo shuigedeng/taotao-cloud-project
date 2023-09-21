@@ -31,7 +31,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
  * <p>Description: TokenSettingsDeserializer </p>
  *
  *
- * @date : 2022/10/24 23:29
+ * @since : 2022/10/24 23:29
  */
 public class TokenSettingsDeserializer extends JsonDeserializer<TokenSettings> {
 

@@ -24,7 +24,7 @@ import org.springframework.security.core.GrantedAuthority;
  * <p>Description: OAuth2 (Security) 表单登录 Token </p>
  *
  *
- * @date : 2022/4/12 10:24
+ * @since : 2022/4/12 10:24
  * @see UsernamePasswordAuthenticationToken
  */
 public class OAuth2FormCaptchaLoginAuthenticationToken extends UsernamePasswordAuthenticationToken {

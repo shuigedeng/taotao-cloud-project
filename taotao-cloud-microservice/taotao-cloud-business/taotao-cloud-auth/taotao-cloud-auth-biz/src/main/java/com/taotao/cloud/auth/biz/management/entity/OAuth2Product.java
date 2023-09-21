@@ -28,7 +28,7 @@ import org.hibernate.annotations.UuidGenerator;
  * <p>Description: 物联网产品 </p>
  *
  *
- * @date : 2023/5/15 14:26
+ * @since : 2023/5/15 14:26
  */
 @Schema(name = "物联网产品")
 @Entity

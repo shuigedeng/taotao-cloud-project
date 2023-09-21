@@ -28,7 +28,7 @@ import org.apache.commons.lang.StringUtils;
  * 查询参数
  *
  * @author shuigedeng
- * @date 2021-02-02
+ * @since 2021-02-02
  */
 public class Query<T> {
 

@@ -25,7 +25,7 @@ import org.apache.ibatis.annotations.Mapper;
  *
  * @author niefy
  * @email niefy@qq.com
- * @date 2020-01-02 11:11:55
+ * @since 2020-01-02 11:11:55
  */
 @Mapper
 @CacheNamespace(flushInterval = 300000L) // 缓存五分钟过期

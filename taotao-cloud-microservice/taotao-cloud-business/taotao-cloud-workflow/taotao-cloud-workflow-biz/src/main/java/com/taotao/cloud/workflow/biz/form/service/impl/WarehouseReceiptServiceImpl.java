@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 /**
  * 入库申请单
  *
- * @date 2019年9月29日 上午9:18
+ * @since 2019年9月29日 上午9:18
  */
 @Service
 public class WarehouseReceiptServiceImpl extends ServiceImpl<WarehouseReceiptMapper, WarehouseReceiptEntity>

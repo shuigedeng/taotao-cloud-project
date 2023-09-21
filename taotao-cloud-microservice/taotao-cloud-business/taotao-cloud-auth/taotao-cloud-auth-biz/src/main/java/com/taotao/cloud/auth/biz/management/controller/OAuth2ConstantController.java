@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Description: OAuth2 常量 Controller </p>
  *
  *
- * @date : 2022/3/17 15:00
+ * @since : 2022/3/17 15:00
  */
 @RestController
 @RequestMapping("/authorize/constant")

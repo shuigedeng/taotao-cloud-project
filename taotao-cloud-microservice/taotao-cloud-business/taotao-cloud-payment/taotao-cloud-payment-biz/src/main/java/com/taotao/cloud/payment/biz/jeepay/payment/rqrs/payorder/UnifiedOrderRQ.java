@@ -35,7 +35,7 @@ import javax.validation.constraints.NotNull;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:33
+* @since 2021/6/8 17:33
 */
 @Data
 public class UnifiedOrderRQ extends AbstractMchAppRQ {

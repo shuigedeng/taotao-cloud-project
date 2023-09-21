@@ -28,7 +28,7 @@ import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
  * 公众号账号
  *
  * @author niefy
- * @date 2020-06-17 13:56:51
+ * @since 2020-06-17 13:56:51
  */
 @Data
 @TableName("wx_account")

@@ -23,7 +23,7 @@ import org.springframework.context.ApplicationEvent;
  * 微信扫码关注事件
  *
  * @author xxm
- * @date 2022/8/4
+ * @since 2022/8/4
  */
 @Getter
 public class WeChatQrScanEvent extends ApplicationEvent {

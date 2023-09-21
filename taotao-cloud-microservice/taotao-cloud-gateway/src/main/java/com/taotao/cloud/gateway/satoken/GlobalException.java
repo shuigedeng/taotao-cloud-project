@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
  * @title: GlobalException
  * @projectName meta
  * @description: 拦截全局异常类
- * @date 2022/8/19 15:39
+ * @since 2022/8/19 15:39
  */
 @Configuration
 public class GlobalException {

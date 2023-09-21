@@ -23,7 +23,7 @@ import org.testng.annotations.BeforeTest;
  * 公共测试方法和参数.
  *
  * @author Binary Wang
- * @date 2019-06-14
+ * @since 2019-06-14
  */
 public abstract class BaseControllerTest {
     private static final String ROOT_URL = "http://127.0.0.1:8080/";

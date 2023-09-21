@@ -25,7 +25,7 @@ import org.springframework.context.ApplicationEvent;
  * JustAuth 接收到 Callback以后，统一走系统 /oauth/token 接口获取 Token
  *
  *
- * @date : 2022/1/26 14:35
+ * @since : 2022/1/26 14:35
  */
 public class AutomaticSignInEvent extends ApplicationEvent {
 

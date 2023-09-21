@@ -39,7 +39,7 @@ import org.springframework.util.MultiValueMap;
 /**
  * <p>Description: 认证失败处理器 </p>
  *
- * @date : 2022/2/19 20:48
+ * @since : 2022/2/19 20:48
  */
 public class OAuth2AuthenticationFailureResponseHandler implements AuthenticationFailureHandler {
 

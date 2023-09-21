@@ -31,7 +31,7 @@ import lombok.Data;
  * 自动回复规则
  *
  * @author Nifury
- * @date 2017-11-1
+ * @since 2017-11-1
  */
 @Data
 @TableName("wx_msg_reply_rule")

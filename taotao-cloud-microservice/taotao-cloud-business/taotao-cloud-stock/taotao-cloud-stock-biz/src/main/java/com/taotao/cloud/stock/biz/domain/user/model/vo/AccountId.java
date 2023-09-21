@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * 账号ID
  *
  * @author shuigedeng
- * @date 2021-02-08
+ * @since 2021-02-08
  */
 public class AccountId implements ValueObject<AccountId> {
 

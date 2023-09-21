@@ -25,7 +25,7 @@ import java.io.Serializable;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 16:49
+* @since 2021/6/8 16:49
 */
 public class BaseModel<T> implements Serializable{
 

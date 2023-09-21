@@ -29,7 +29,7 @@ import java.nio.charset.Charset;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:00
+ * @since 2021-06-08 11:00
  */
 public class StreamUtils {
     private static final int DEFAULT_BUF_SIZE = 1024;

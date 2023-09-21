@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
  * 微信接受文本消息处理
  *
  * @author xxm
- * @date 2022/7/16
+ * @since 2022/7/16
  */
 @Slf4j
 @Component

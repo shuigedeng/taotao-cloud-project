@@ -20,7 +20,7 @@ package com.taotao.cloud.flowable.biz.flowable.common.constant;
  * 流程常量信息
  *
  * @author Tony
- * @date 2021/4/17 22:46
+ * @since 2021/4/17 22:46
  */
 public class ProcessConstants {
 

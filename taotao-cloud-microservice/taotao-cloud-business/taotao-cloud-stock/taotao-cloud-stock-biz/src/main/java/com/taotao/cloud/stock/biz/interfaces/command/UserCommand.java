@@ -25,7 +25,7 @@ import lombok.Data;
  * 用户Command
  *
  * @author shuigedeng
- * @date 2021-02-20
+ * @since 2021-02-20
  */
 @Data
 @ApiModel(value = "用户", description = "用户")

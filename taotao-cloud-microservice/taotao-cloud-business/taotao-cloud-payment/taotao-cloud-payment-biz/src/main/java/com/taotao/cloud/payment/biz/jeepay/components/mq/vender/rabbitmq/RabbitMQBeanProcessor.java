@@ -38,7 +38,7 @@ import java.util.Map;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/23 16:27
+* @since 2021/7/23 16:27
 */
 @Configuration
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.RABBIT_MQ)

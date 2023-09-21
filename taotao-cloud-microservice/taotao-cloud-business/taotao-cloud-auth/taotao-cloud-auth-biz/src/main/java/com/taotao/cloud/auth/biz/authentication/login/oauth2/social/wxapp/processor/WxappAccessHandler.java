@@ -33,7 +33,7 @@ import org.apache.commons.lang3.ObjectUtils;
  * <p>Description: 微信小程序接入处理器 </p>
  *
  *
- * @date : 2022/1/26 10:56
+ * @since : 2022/1/26 10:56
  */
 public class WxappAccessHandler implements AccessHandler {
 

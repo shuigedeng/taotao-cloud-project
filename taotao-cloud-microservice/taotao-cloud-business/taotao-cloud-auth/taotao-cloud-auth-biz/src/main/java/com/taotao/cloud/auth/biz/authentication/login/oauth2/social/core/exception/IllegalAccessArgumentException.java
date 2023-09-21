@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.except
  * <p>Description: 非法的访问参数错误 </p>
  *
  *
- * @date : 2022/1/26 12:02
+ * @since : 2022/1/26 12:02
  */
 public class IllegalAccessArgumentException extends RuntimeException {
 

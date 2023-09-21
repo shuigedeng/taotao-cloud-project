@@ -25,7 +25,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * <p>Description: 微信公众号属性配置 </p>
  *
  *
- * @date : 2021/4/7 13:17
+ * @since : 2021/4/7 13:17
  */
 @ConfigurationProperties(prefix = AccessConstants.PROPERTY_ACCESS_WXMPP)
 public class WxmppProperties {

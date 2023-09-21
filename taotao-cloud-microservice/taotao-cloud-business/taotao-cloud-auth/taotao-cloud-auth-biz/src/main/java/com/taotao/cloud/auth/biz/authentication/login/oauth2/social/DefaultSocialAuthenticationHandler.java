@@ -39,7 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <p>Description: 社交登录默认处理器。 </p>
  *
  *
- * @date : 2022/1/26 23:44
+ * @since : 2022/1/26 23:44
  */
 public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthenticationHandler {
 

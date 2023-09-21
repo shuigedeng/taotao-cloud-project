@@ -29,7 +29,7 @@ import java.io.Serializable;
  * 3. 重写equals和hashCode方法。equals方法用于判断两个对象是否相同，
  *
  *
- * @date : 2022/1/22 17:58
+ * @since : 2022/1/22 17:58
  */
 public class HerodotusAuthorizationConsentId implements Serializable {
 

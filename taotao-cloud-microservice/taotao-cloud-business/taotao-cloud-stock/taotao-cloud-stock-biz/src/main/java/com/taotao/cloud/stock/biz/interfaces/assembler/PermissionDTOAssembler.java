@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
  * Assembler class for the Permission.
  *
  * @author shuigedeng
- * @date 2021-02-17
+ * @since 2021-02-17
  */
 public class PermissionDTOAssembler {
 

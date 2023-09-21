@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * @date 2022/6/18
+ * @since 2022/6/18
  */
 public interface IJustAuthService {
 

@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.except
  * <p>Description: Access 配置错误 </p>
  *
  *
- * @date : 2022/9/2 18:02
+ * @since : 2022/9/2 18:02
  */
 public class AccessConfigErrorException extends RuntimeException {
 

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * https://developer.work.weixin.qq.com/document/path/91770#%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B
  *
  * @author 3y
- * @date 2022/12/26
+ * @since 2022/12/26
  */
 @NoArgsConstructor
 @Data

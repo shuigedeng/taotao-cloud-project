@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 租户应用服务实现类
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Service
 public class TenantApplicationServiceImpl implements TenantApplicationService {

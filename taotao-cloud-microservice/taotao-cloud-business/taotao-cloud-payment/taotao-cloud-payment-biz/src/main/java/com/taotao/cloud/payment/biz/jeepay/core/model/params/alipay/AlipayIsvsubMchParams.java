@@ -23,7 +23,7 @@ import lombok.Data;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/6/8 16:33
+ * @since 2021/6/8 16:33
  */
 @Data
 public class AlipayIsvsubMchParams  extends IsvsubMchParams {

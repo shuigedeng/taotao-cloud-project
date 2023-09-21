@@ -34,7 +34,7 @@ import java.util.Map;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:29
+* @since 2021/6/8 17:29
 */
 @Data
 public class MchAppConfigContext {

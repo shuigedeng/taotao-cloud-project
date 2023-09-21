@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
  * 微信消息模板
  *
  * @author xxm
- * @date 2022-08-03
+ * @since 2022-08-03
  */
 @Data
 @Schema(title = "微信消息模板")

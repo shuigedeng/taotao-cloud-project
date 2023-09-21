@@ -23,7 +23,7 @@ import jakarta.validation.constraints.NotBlank;
  * <p>Description: 微信小程序登录请求实体 </p>
  *
  *
- * @date : 2022/1/26 14:44
+ * @since : 2022/1/26 14:44
  */
 @Schema(name = "微信小程序登录请求实体", title = "根据code和appid返回微信小程序session信息")
 public class WxappProfile {

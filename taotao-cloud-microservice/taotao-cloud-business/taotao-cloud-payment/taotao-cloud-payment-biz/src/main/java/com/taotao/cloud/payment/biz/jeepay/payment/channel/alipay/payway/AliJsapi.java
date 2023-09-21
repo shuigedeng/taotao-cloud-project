@@ -40,7 +40,7 @@ import org.springframework.stereotype.Service;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/6/8 17:20
+ * @since 2021/6/8 17:20
  */
 @Service("alipayPaymentByJsapiService") //Service Name需保持全局唯一性
 public class AliJsapi extends AlipayPaymentService {

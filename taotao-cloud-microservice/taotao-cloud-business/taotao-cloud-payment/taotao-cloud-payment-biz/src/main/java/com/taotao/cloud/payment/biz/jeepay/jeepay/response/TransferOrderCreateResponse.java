@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.model.TransferOrderCreateResMo
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/13 16:25
+ * @since 2021/8/13 16:25
  */
 public class TransferOrderCreateResponse extends JeepayResponse {
 

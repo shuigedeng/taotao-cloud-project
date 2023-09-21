@@ -21,7 +21,7 @@ package com.taotao.cloud.payment.biz.jeepay.jeepay.model;
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/25 10:36
+ * @since 2021/8/25 10:36
  */
 public class DivisionReceiverBindReqModel extends JeepayObject {
 
