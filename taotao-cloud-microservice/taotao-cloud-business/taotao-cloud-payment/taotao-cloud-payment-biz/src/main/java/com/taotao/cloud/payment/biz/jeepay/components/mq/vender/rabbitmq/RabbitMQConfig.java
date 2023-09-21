@@ -38,7 +38,7 @@ import java.util.Set;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/23 16:33
+* @since 2021/7/23 16:33
 */
 @Component
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.RABBIT_MQ)

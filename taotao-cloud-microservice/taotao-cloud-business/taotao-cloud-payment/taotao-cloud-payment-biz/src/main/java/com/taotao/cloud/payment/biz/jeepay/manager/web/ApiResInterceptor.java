@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:12
+* @since 2021/6/8 17:12
 */
 @Component
 public class ApiResInterceptor implements HandlerInterceptor {

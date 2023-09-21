@@ -22,7 +22,7 @@ import com.taotao.cloud.security.springsecurity.core.constants.ErrorCodes;
  * <p>Description: Access 模块错误代码 </p>
  *
  *
- * @date : 2022/9/2 17:50
+ * @since : 2022/9/2 17:50
  */
 public interface AccessErrorCodes extends ErrorCodes {
 

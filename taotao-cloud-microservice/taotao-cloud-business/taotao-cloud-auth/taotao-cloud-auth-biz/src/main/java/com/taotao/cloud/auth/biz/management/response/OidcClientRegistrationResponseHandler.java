@@ -37,7 +37,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * <p>Description: 客户端自动注册成功后续逻辑处理器 </p>
  *
  *
- * @date : 2023/5/23 17:37
+ * @since : 2023/5/23 17:37
  */
 public class OidcClientRegistrationResponseHandler implements AuthenticationSuccessHandler {
 

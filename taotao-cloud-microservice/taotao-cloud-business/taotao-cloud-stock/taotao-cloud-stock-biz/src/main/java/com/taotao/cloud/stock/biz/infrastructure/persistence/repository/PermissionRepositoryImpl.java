@@ -29,7 +29,7 @@ import org.springframework.stereotype.Repository;
  * 权限-Repository实现类
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Repository
 public class PermissionRepositoryImpl extends ServiceImpl<SysPermissionMapper, SysPermissionDO>

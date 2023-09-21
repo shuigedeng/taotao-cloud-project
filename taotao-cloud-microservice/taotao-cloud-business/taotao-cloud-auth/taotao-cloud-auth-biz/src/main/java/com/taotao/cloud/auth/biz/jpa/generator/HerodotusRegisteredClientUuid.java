@@ -28,7 +28,7 @@ import org.hibernate.annotations.IdGeneratorType;
  * <p>Description: HerodotusRegisteredClientUuid 注解 </p>
  *
  *
- * @date : 2022/11/7 15:49
+ * @since : 2022/11/7 15:49
  */
 @IdGeneratorType(HerodotusRegisteredClientUuidGenerator.class)
 @Retention(RetentionPolicy.RUNTIME)

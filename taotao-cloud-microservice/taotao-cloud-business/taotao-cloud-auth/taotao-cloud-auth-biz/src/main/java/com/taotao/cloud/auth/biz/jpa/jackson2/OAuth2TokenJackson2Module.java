@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
  * <p>Description: 自定义 OAutho2 Module </p>
  *
  *
- * @date : 2022/10/24 15:51
+ * @since : 2022/10/24 15:51
  */
 public class OAuth2TokenJackson2Module extends SimpleModule {
 

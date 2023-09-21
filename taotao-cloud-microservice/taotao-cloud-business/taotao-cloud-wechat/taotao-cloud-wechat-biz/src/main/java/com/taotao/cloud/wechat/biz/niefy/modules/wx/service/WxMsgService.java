@@ -25,7 +25,7 @@ import java.util.Map;
  * 微信消息
  *
  * @author niefy
- * @date 2020-05-14 17:28:34
+ * @since 2020-05-14 17:28:34
  */
 public interface WxMsgService extends IService<WxMsg> {
     /**

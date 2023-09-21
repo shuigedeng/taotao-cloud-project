@@ -26,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 16:31
+* @since 2021/6/8 16:31
 */
 @Getter
 public class ResponseException extends RuntimeException{

@@ -23,7 +23,7 @@ import com.jeequan.jeepay.core.model.security.JeeUserDetails;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/5/24 09:06
+* @since 2021/5/24 09:06
 */
 public class ITokenService {
 

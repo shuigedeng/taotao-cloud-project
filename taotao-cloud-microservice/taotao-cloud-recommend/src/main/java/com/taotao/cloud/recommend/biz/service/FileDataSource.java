@@ -38,7 +38,7 @@ public class FileDataSource {
      *
      * @Return {@link List<RelateDTO>}
      *
-     * @date 2020年07月31日 16:53:40
+     * @since 2020年07月31日 16:53:40
      */
     public static List<RelateDTO> getData() {
         folderPath = Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k"))
@@ -69,7 +69,7 @@ public class FileDataSource {
      *
      * @Return {@link List<UserDTO>}
      *
-     * @date 2020年07月31日 16:54:51
+     * @since 2020年07月31日 16:54:51
      */
     public static List<UserDTO> getUserData() {
         folderPath = Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k"))
@@ -102,7 +102,7 @@ public class FileDataSource {
      *
      * @Return {@link List<ItemDTO>}
      *
-     * @date 2020年07月31日 16:54:22
+     * @since 2020年07月31日 16:54:22
      */
     public static List<ItemDTO> getItemData() {
         folderPath = Objects.requireNonNull(FileDataSource.class.getResource("/ml-100k"))

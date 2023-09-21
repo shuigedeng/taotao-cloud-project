@@ -22,7 +22,7 @@ import lombok.Data;
  * imageManager
  *
  * @author www.joolun.com
- * @date 2019-03-23 21:26:35
+ * @since 2019-03-23 21:26:35
  */
 @Data
 public class ImageManager {

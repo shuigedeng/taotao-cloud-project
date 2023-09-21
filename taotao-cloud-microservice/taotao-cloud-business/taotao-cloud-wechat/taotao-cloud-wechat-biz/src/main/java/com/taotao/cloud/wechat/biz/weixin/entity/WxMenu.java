@@ -33,7 +33,7 @@ import org.apache.ibatis.type.JdbcType;
  * 自定义菜单
  *
  * @author www.joolun.com
- * @date 2019-03-27 16:52:10
+ * @since 2019-03-27 16:52:10
  */
 @Data
 @TableName("wx_menu")

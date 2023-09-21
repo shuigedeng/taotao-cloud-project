@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.model.DivisionReceiverBindResM
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/25 10:35
+ * @since 2021/8/25 10:35
  */
 public class DivisionReceiverBindResponse extends JeepayResponse {
 

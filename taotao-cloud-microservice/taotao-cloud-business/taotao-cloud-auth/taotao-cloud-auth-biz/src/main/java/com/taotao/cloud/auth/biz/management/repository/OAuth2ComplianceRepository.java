@@ -23,6 +23,6 @@ import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
  * <p>Description: ActionAuditRepository </p>
  *
  *
- * @date : 2022/7/7 20:39
+ * @since : 2022/7/7 20:39
  */
 public interface OAuth2ComplianceRepository extends BaseRepository<OAuth2Compliance, String> {}

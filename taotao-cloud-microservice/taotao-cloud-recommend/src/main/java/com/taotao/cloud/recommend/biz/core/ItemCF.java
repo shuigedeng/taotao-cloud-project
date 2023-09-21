@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  *
  *
  * @version 1.0
- * @date 2020/7/31$ 15:21$
+ * @since 2020/7/31$ 15:21$
  * @since JDK1.8
  */
 public class ItemCF {
@@ -36,7 +36,7 @@ public class ItemCF {
      * @param itemId 当前电影id
      * @param list 用户电影评分数据
      * @return {@link List<Integer>}
-     * @date 2023年02月02日 14:51:42
+     * @since 2023年02月02日 14:51:42
      */
     public static List<Integer> recommend(Integer itemId, List<RelateDTO> list) {
         // 按物品分组

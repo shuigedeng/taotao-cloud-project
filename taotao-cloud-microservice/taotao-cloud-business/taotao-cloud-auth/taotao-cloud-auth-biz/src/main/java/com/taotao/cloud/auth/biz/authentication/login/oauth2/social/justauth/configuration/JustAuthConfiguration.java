@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
  * 仅在存在herodotus.platform.social.justauth.configs配置的情况下才注入
  *
  *
- * @date : 2021/5/22 11:25
+ * @since : 2021/5/22 11:25
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(JustAuthProperties.class)

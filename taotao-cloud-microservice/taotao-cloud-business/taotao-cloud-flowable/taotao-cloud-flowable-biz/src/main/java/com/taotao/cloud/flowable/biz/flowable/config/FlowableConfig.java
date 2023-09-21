@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
  * 流程id生成处理
  *
  * @author Tony
- * @date 2022-12-26 10:24
+ * @since 2022-12-26 10:24
  */
 @Configuration
 public class FlowableConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {

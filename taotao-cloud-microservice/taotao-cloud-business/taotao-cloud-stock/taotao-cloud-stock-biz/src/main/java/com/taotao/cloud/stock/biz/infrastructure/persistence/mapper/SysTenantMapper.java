@@ -25,7 +25,7 @@ import org.apache.ibatis.annotations.Param;
  * 租户Mapper
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Mapper
 public interface SysTenantMapper extends BaseSuperMapper<SysTenantDO> {

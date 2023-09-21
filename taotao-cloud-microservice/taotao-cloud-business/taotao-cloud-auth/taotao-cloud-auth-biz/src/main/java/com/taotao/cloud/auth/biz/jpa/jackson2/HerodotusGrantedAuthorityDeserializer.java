@@ -30,7 +30,7 @@ import java.io.IOException;
  * <p>Description: HerodotusGrantedAuthority 反序列化 </p>
  *
  *
- * @date : 2022/3/17 20:28
+ * @since : 2022/3/17 20:28
  */
 public class HerodotusGrantedAuthorityDeserializer extends JsonDeserializer<HerodotusGrantedAuthority> {
     @Override

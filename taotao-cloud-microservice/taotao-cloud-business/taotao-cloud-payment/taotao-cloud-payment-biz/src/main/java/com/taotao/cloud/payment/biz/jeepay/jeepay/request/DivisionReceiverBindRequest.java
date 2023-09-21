@@ -25,7 +25,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.response.DivisionReceiverBindR
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/25 10:34
+ * @since 2021/8/25 10:34
  */
 public class DivisionReceiverBindRequest implements JeepayRequest<DivisionReceiverBindResponse> {
 

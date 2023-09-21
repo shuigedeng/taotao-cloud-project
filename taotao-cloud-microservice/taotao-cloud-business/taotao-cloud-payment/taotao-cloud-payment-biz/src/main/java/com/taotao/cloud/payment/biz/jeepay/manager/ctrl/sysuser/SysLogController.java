@@ -45,7 +45,7 @@ import java.util.List;
  *
  * @author pangxiaoyu
  * @site https://www.jeequan.com
- * @date 2021-06-07 07:15
+ * @since 2021-06-07 07:15
  */
 @Api(tags = "系统管理（系统日志）")
 @RestController
@@ -57,7 +57,7 @@ public class SysLogController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:15
+     * @since: 2021/6/7 16:15
      * @describe: 日志记录列表
      */
     @ApiOperation("系统日志列表")
@@ -102,7 +102,7 @@ public class SysLogController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:16
+     * @since: 2021/6/7 16:16
      * @describe: 查看日志信息
      */
     @ApiOperation("系统日志详情")
@@ -122,7 +122,7 @@ public class SysLogController extends CommonCtrl {
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 16:16
+     * @since: 2021/6/7 16:16
      * @describe: 删除日志信息
      */
     @ApiOperation("删除日志信息")

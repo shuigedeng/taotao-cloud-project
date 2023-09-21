@@ -23,7 +23,7 @@ import lombok.Data;
 
 /**
  * @author sunql
- * @date 2022年05月06日 9:56
+ * @since 2022年05月06日 9:56
  *     <p>服务号参数
  */
 @Data

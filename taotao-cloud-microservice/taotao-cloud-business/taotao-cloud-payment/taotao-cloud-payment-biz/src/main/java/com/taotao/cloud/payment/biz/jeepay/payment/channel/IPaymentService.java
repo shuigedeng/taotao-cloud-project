@@ -25,7 +25,7 @@ import com.jeequan.jeepay.pay.model.MchAppConfigContext;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/5/8 15:13
+* @since 2021/5/8 15:13
 */
 public interface IPaymentService {
 

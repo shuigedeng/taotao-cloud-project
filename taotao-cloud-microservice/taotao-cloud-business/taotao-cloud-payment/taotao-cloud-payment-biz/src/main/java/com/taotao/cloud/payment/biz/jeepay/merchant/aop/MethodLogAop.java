@@ -50,7 +50,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @author terrfly
  * @modify pangxiaoyu
  * @site https://www.jeequan.com
- * @date 2021-04-27 15:50
+ * @since 2021-04-27 15:50
  */
 @Component
 @Aspect
@@ -106,7 +106,7 @@ public class MethodLogAop{
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 14:04
+     * @since: 2021/6/7 14:04
      * @describe: 记录异常操作请求信息
      */
     @AfterThrowing(pointcut = "methodCachePointcut()", throwing="e")
@@ -138,7 +138,7 @@ public class MethodLogAop{
 
     /**
      * @author: pangxiaoyu
-     * @date: 2021/6/7 14:12
+     * @since: 2021/6/7 14:12
      * @describe: 日志基本信息 公共方法
      */
     private void setBaseLogInfo(JoinPoint joinPoint, SysLog sysLog, JeeUserDetails userDetails) throws Exception {

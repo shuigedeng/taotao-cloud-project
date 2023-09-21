@@ -23,7 +23,7 @@ import lombok.experimental.UtilityClass;
  * 微信工具类
  *
  * @author xxm
- * @date 2022/8/5
+ * @since 2022/8/5
  */
 @UtilityClass
 public class WeChatUtil {

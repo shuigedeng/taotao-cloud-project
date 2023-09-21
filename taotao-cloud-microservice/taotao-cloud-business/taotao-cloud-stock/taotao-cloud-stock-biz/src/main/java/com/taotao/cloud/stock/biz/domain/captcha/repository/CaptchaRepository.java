@@ -25,7 +25,7 @@ import com.taotao.cloud.stock.biz.domain.model.captcha.Uuid;
  * 验证码Repository
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 public interface CaptchaRepository {
 

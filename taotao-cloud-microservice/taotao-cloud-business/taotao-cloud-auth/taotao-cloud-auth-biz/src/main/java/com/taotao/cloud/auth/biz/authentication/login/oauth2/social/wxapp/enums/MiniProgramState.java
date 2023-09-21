@@ -22,7 +22,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.enums
  * developer为开发版；trial为体验版；formal为正式版；默认为正式版
  *
  *
- * @date : 2021/4/9 16:09
+ * @since : 2021/4/9 16:09
  */
 public enum MiniProgramState {
 

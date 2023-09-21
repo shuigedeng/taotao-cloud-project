@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
  * 菜单点击事件
  *
  * @author xxm
- * @date 2022/7/16
+ * @since 2022/7/16
  */
 @Slf4j
 @Component

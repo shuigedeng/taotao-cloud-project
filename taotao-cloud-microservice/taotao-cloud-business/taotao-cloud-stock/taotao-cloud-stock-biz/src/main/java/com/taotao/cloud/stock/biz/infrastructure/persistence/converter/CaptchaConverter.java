@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.converter;
  * 验证码转换类
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 public class CaptchaConverter {
 

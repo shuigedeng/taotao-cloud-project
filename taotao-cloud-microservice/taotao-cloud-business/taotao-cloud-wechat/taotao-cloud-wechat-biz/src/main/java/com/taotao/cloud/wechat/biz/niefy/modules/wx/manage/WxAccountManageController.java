@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
  * 公众号账号
  *
  * @author niefy
- * @date 2020-06-17 13:56:51
+ * @since 2020-06-17 13:56:51
  */
 @RestController
 @RequestMapping("/manage/wxAccount")

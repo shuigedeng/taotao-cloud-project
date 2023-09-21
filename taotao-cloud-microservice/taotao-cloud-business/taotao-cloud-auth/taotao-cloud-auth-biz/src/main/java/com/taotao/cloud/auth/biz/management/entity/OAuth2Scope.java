@@ -33,7 +33,7 @@ import org.hibernate.annotations.UuidGenerator;
  * <p> Description : Oauth Scope </p>
  *
  *
- * @date : 2020/3/19 14:15
+ * @since : 2020/3/19 14:15
  */
 @Entity
 @Table(

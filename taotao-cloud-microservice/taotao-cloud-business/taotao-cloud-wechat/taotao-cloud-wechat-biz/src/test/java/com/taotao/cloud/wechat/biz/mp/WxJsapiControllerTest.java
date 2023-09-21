@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
  * jsapi 测试.
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-04-25
+ * @since 2020-04-25
  */
 @Test
 public class WxJsapiControllerTest extends BaseControllerTest {

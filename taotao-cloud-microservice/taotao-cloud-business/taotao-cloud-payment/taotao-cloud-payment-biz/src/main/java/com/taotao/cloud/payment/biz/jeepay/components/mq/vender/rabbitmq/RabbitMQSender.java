@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/7/23 16:52
+ * @since 2021/7/23 16:52
  */
 @Component
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.RABBIT_MQ)

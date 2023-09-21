@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 租户-Repository实现类
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Repository
 public class TenantRepositoryImpl extends ServiceImpl<SysTenantMapper, SysTenantDO>

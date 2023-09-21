@@ -12,7 +12,7 @@ import com.ruoyi.common.core.web.domain.BaseEntity;
  * ${subTable.functionName}对象 ${subTableName}
  * 
  * @author ${author}
- * @date ${datetime}
+ * @since ${datetime}
  */
 public class ${subClassName} extends BaseEntity
 {

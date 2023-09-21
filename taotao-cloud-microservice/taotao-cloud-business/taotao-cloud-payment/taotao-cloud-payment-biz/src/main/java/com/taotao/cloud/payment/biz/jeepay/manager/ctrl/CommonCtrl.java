@@ -26,7 +26,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:09
+* @since 2021/6/8 17:09
 */
 public abstract class CommonCtrl extends AbstractCtrl {
 

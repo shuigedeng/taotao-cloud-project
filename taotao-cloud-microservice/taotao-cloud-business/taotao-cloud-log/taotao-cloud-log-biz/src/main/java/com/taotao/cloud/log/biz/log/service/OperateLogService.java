@@ -23,7 +23,7 @@ import com.taotao.cloud.log.biz.log.param.OperateLogParam;
 /**
  * 操作日志
  * @author shuigedeng
- * @date 2021/8/12
+ * @since 2021/8/12
  */
 public interface OperateLogService {
 

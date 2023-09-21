@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/5/8 15:14
+* @since 2021/5/8 15:14
 */
 public interface IChannelNoticeService {
 

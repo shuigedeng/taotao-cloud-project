@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 微信自定义菜单
  *
  * @author xxm
- * @date 2022-08-08
+ * @since 2022-08-08
  */
 @Mapper
 public interface WeChatMenuMapper extends BaseMapper<WeChatMenu> {}

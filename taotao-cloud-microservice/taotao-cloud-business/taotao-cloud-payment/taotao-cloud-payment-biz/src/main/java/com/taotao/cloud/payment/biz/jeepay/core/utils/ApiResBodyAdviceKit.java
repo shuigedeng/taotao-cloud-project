@@ -32,7 +32,7 @@ import java.util.Collection;
  *         比如 model为 {id:1, ext:{abc:222}}  则自动转换为： {id:1, abc:222}
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 16:49
+* @since 2021/6/8 16:49
 */
 public class ApiResBodyAdviceKit {
 

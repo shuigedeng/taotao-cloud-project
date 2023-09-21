@@ -25,7 +25,7 @@ import java.util.Map;
  * 租户注册服务
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 public class TenantRegisterService {
 

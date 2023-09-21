@@ -24,7 +24,7 @@ import me.zhyd.oauth.enums.AuthUserGender;
  * <p>Description: 外部程序接入返回用户信息 </p>
  *
  *
- * @date : 2022/1/25 16:46
+ * @since : 2022/1/25 16:46
  */
 public class AccessUserDetails {
 

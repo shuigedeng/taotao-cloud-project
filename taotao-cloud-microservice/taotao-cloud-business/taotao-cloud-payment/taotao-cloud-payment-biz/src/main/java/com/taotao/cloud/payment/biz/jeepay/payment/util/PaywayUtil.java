@@ -23,7 +23,7 @@ import com.jeequan.jeepay.pay.channel.IPaymentService;
 * 支付方式动态调用Utils
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:46
+* @since 2021/6/8 17:46
 */
 public class PaywayUtil {
 

@@ -31,10 +31,10 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v3
 
-      - name: Setup Jdk 17
+      - name: Setup Jdk 21
         uses: actions/setup-java@v2
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'adopt'
           server-id: github
 

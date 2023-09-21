@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
  * 微信公众号粉丝
  *
  * @author xxm
- * @date 2022-07-16
+ * @since 2022-07-16
  */
 @Data
 @Schema(title = "微信公众号粉丝")

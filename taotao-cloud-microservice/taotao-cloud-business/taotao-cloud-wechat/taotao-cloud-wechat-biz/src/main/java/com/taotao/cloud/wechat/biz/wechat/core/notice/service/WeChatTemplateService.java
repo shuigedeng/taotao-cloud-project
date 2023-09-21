@@ -48,7 +48,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 微信消息模板
  *
  * @author xxm
- * @date 2022/7/15
+ * @since 2022/7/15
  */
 @Slf4j
 @Service

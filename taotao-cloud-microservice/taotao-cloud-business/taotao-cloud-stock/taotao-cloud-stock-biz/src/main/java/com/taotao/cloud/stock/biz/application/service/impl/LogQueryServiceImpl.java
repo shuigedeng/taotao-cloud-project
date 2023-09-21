@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * 系统日志查询服务实现类
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 @Service
 public class LogQueryServiceImpl implements LogQueryService {

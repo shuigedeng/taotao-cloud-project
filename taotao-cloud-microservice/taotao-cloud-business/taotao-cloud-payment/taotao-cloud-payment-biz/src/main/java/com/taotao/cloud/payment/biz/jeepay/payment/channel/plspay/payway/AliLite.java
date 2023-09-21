@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  *
  * @author yr
  * @site https://www.jeequan.com
- * @date 2022/8/17 17:24
+ * @since 2022/8/17 17:24
  */
 @Service("plspayPaymentByAliLiteService") //Service Name需保持全局唯一性
 public class AliLite extends PlspayPaymentService {

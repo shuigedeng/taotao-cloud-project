@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Description: 微信小程序平台认证 </p>
  *
  *
- * @date : 2021/5/28 11:40
+ * @since : 2021/5/28 11:40
  */
 @RestController
 @Tag(name = "微信小程序平台认证接口")

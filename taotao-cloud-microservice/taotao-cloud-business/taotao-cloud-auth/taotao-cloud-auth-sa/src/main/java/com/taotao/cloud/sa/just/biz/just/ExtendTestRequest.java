@@ -30,7 +30,7 @@ import me.zhyd.oauth.request.AuthDefaultRequest;
  * 测试用自定义扩展的第三方request
  *
  * @author yangkai.shen
- * @date Created in 2019/10/9 14:19
+ * @since Created in 2019/10/9 14:19
  */
 public class ExtendTestRequest extends AuthDefaultRequest {
 

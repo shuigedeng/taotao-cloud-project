@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Description: 社交登录第三方系统返回的Redirect Url </p>
  *
  *
- * @date : 2021/5/28 11:35
+ * @since : 2021/5/28 11:35
  */
 @RestController
 @Tag(name = "社交登录Redirect Url")

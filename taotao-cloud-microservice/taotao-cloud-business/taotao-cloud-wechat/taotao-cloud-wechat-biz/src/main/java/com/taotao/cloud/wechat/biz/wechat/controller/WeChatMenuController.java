@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.*;
  * 微信菜单管理
  *
  * @author xxm
- * @date 2022/8/6
+ * @since 2022/8/6
  */
 @Tag(name = "微信菜单管理")
 @RestController

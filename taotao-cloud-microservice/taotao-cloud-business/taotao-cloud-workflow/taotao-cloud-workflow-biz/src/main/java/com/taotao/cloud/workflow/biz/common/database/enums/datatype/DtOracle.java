@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.common.database.enums.datatype;
 /**
  * 类功能
  *
- * @date 2021/10/25
+ * @since 2021/10/25
  */
 public enum DtOracle implements DtInterface {
     /** */

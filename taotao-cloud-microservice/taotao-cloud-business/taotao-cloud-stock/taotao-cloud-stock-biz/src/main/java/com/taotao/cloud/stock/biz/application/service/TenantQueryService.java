@@ -22,7 +22,7 @@ import java.util.Map;
  * 租户查询服务接口
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 public interface TenantQueryService {
 

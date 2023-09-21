@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * uuid
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 public class Uuid implements ValueObject<Uuid> {
 

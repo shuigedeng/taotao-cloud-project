@@ -37,7 +37,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/8/13 18:57
+ * @since 2021/8/13 18:57
  */
 @ServerEndpoint("/api/anon/ws/channelUserId/{appId}/{cid}")
 @Component

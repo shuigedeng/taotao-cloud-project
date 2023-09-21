@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  * <p>Description: OAuth2PermissionService </p>
  *
  *
- * @date : 2022/4/1 13:53
+ * @since : 2022/4/1 13:53
  */
 @Service
 public class OAuth2PermissionService {

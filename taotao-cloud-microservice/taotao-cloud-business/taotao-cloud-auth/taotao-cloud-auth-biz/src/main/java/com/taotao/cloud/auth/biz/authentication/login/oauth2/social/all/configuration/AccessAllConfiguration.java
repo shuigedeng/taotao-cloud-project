@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Import;
  * <p>Description: Access 业务模块配置 </p>
  *
  *
- * @date : 2022/1/26 14:59
+ * @since : 2022/1/26 14:59
  */
 @Configuration(proxyBeanMethods = false)
 @Import({JustAuthConfiguration.class, WxappConfiguration.class, WxmppConfiguration.class})

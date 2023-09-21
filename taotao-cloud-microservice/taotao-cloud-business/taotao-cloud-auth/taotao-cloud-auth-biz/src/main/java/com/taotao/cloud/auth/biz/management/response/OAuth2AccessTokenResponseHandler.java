@@ -58,7 +58,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * <p>Description: 自定义 Security 认证成功处理器 </p>
  *
  *
- * @date : 2022/2/25 16:53
+ * @since : 2022/2/25 16:53
  */
 public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHandler {
 

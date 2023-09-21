@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * @author Nifury
- * @date 2017-9-27
+ * @since 2017-9-27
  */
 @Service
 public class WxUserServiceImpl extends ServiceImpl<WxUserMapper, WxUser> implements WxUserService {

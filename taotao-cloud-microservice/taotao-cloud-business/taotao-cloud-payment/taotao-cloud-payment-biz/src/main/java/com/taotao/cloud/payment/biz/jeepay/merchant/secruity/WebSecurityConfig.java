@@ -41,7 +41,7 @@ import org.springframework.web.filter.CorsFilter;
  *
  * @author terrfly
  * @site https://www.jeequan.com
- * @date 2021/6/8 17:11
+ * @since 2021/6/8 17:11
  */
 @Configuration
 @EnableWebSecurity

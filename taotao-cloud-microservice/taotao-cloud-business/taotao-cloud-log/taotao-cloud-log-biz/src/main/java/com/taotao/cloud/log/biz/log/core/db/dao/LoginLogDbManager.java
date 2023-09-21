@@ -29,7 +29,7 @@ import org.springframework.stereotype.Repository;
  * 登录日志
  *
  * @author shuigedeng
- * @date 2021/8/12
+ * @since 2021/8/12
  */
 @Slf4j
 @Repository

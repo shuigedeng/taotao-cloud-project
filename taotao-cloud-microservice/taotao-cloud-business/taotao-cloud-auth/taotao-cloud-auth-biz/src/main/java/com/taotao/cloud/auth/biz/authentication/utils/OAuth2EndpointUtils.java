@@ -38,7 +38,7 @@ import org.springframework.util.StringUtils;
  * 代码内容与原包代码基本一致。
  *
  *
- * @date : 2022/2/23 11:24
+ * @since : 2022/2/23 11:24
  */
 public class OAuth2EndpointUtils {
 

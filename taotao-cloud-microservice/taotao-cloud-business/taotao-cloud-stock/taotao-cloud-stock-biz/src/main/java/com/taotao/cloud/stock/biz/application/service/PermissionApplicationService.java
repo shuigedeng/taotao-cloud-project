@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.application.service;
  * 权限应用服务接口
  *
  * @author shuigedeng
- * @date 2021-02-17
+ * @since 2021-02-17
  */
 public interface PermissionApplicationService {
 

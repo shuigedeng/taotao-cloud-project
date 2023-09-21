@@ -31,7 +31,7 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
  * <p>Description: ClientSettingsDeserializer </p>
  *
  *
- * @date : 2022/10/24 23:18
+ * @since : 2022/10/24 23:18
  */
 public class ClientSettingsDeserializer extends JsonDeserializer<ClientSettings> {
 

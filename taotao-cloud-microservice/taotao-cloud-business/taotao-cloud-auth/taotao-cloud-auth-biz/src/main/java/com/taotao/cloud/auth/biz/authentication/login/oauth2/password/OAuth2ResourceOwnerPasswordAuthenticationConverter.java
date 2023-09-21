@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
  * 主要用途是从请求中获取参数，并拼装Token类
  *
  *
- * @date : 2022/2/22 17:03
+ * @since : 2022/2/22 17:03
  */
 public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends OAuth2AbstractAuthenticationConverter {
 

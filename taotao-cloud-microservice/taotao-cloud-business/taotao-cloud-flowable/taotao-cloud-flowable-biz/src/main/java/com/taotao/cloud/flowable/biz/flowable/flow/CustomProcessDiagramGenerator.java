@@ -25,7 +25,7 @@ import org.flowable.image.impl.DefaultProcessDiagramGenerator;
 
 /**
  * @author Tony
- * @date 2021/4/5 0:31
+ * @since 2021/4/5 0:31
  */
 public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerator {
     @Override

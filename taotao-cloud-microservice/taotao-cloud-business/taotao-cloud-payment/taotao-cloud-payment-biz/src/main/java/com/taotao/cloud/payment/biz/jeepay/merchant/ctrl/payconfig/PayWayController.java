@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author zhuxiao
  * @site https://www.jeequan.com
- * @date 2021-04-27 15:50
+ * @since 2021-04-27 15:50
  */
 @Api(tags = "支付方式配置")
 @RestController

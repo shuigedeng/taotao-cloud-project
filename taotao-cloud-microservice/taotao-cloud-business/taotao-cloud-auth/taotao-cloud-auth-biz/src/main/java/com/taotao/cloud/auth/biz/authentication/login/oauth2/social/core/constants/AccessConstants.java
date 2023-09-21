@@ -22,7 +22,7 @@ import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
  * <p>Description: 接入模块常量 </p>
  *
  *
- * @date : 2022/1/25 15:27
+ * @since : 2022/1/25 15:27
  */
 public interface AccessConstants extends BaseConstants {
 

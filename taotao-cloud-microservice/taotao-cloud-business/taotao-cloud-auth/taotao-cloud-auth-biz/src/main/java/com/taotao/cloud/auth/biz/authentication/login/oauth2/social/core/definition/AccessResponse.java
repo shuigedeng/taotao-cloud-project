@@ -22,7 +22,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
  * <p>Description: 外部接入预操作统一返回实体 </p>
  *
  *
- * @date : 2022/1/25 16:35
+ * @since : 2022/1/25 16:35
  */
 public class AccessResponse {
 

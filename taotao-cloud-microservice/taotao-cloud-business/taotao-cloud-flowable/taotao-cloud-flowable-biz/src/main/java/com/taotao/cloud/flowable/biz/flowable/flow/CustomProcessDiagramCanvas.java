@@ -36,7 +36,7 @@ import org.flowable.image.util.ReflectUtil;
 
 /**
  * @author Tony
- * @date 2021/4/4 23:58
+ * @since 2021/4/4 23:58
  */
 public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
     // 定义走过流程连线颜色为绿色

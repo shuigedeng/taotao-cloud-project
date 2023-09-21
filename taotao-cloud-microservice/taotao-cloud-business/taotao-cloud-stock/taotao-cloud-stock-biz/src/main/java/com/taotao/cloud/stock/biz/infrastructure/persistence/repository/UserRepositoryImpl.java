@@ -29,7 +29,7 @@ import org.springframework.stereotype.Repository;
  * 用户-Repository实现类
  *
  * @author shuigedeng
- * @date 2021-02-02
+ * @since 2021-02-02
  */
 @Repository
 public class UserRepositoryImpl extends ServiceImpl<SysUserMapper, SysUserDO>

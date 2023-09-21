@@ -27,7 +27,7 @@ import java.util.List;
  * 微信消息
  *
  * @author www.joolun.com
- * @date 2019-05-28 16:12:10
+ * @since 2019-05-28 16:12:10
  */
 public interface WxMsgService extends IService<WxMsg> {
 

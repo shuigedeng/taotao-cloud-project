@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.model.PayOrderCreateResModel;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:00
+ * @since 2021-06-08 11:00
  */
 public class PayOrderCreateResponse extends JeepayResponse {
 

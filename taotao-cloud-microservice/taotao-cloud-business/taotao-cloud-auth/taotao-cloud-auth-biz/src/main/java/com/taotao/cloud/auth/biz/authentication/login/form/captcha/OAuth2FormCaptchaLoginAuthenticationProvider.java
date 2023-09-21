@@ -42,7 +42,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 扩展的OAuth2表单登录Provider，以支持表单登录的验证码
  *
  *
- * @date : 2022/4/12 10:21
+ * @since : 2022/4/12 10:21
  * @see DaoAuthenticationProvider
  */
 public class OAuth2FormCaptchaLoginAuthenticationProvider extends DaoAuthenticationProvider {

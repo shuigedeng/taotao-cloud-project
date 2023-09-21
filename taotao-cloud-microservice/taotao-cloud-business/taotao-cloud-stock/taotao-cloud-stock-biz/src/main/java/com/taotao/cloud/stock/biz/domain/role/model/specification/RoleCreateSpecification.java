@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.domain.role.model.specification;
  * 角色创建Specification
  *
  * @author shuigedeng
- * @date 2021-02-20
+ * @since 2021-02-20
  */
 public class RoleCreateSpecification extends AbstractSpecification<Role> {
 

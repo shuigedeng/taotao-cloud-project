@@ -38,7 +38,7 @@ import org.springframework.stereotype.Service;
  * 微信用户相关接口 (获取不到详细信息了)
  *
  * @author xxm
- * @date 2022/7/15
+ * @since 2022/7/15
  */
 @Slf4j
 @Service

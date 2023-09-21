@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:00
+ * @since 2021-06-08 11:00
  */
 public class CaseInsensitiveMap<V> extends AbstractMap<String, V> implements Map<String, V>, Cloneable, Serializable {
 

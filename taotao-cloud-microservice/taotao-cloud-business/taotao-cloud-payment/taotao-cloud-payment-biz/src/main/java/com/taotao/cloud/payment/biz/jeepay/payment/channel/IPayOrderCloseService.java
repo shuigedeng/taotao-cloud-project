@@ -24,7 +24,7 @@ import com.jeequan.jeepay.pay.rqrs.msg.ChannelRetMsg;
  *
  * @author xiaoyu
  * @site https://www.jeequan.com
- * @date 2022/1/24 17:23
+ * @since 2022/1/24 17:23
  */
 public interface IPayOrderCloseService {
 

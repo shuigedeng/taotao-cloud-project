@@ -36,7 +36,7 @@ import org.springframework.util.StringUtils;
  * <p>Description: 社交认证 Converter </p>
  *
  *
- * @date : 2022/3/31 14:16
+ * @since : 2022/3/31 14:16
  */
 public class OAuth2SocialCredentialsAuthenticationConverter extends OAuth2AbstractAuthenticationConverter {
 

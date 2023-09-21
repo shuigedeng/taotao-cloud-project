@@ -13,7 +13,7 @@ import java.util.Map;
  * 初始化支付宝小程序 单例
  *
  * @author 丁新东
- * @date 2022-12-07
+ * @since 2022-12-07
  */
 public class AlipayClientSingleton {
 

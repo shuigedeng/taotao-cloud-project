@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.model.PayOrderCloseResModel;
  *
  * @author xiaoyu
  * @site https://www.jeequan.com
- * @date 2022/1/25 9:56
+ * @since 2022/1/25 9:56
  */
 public class PayOrderCloseResponse extends JeepayResponse {
 

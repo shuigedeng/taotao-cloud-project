@@ -29,7 +29,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:12
+* @since 2021/6/8 17:12
 */
 @ControllerAdvice
 public class ApiResBodyAdvice implements ResponseBodyAdvice {

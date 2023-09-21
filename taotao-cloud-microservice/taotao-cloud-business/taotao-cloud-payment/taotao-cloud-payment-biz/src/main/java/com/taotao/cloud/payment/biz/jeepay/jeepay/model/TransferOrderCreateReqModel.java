@@ -23,7 +23,7 @@ import com.taotao.cloud.payment.biz.jeepay.jeepay.ApiField;
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/13 16:08
+ * @since 2021/8/13 16:08
  */
 public class TransferOrderCreateReqModel extends JeepayObject {
 

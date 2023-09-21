@@ -26,7 +26,7 @@ import com.jeequan.jeepay.pay.rqrs.refund.RefundOrderRQ;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/17 9:35
+* @since 2021/6/17 9:35
 */
 public interface IRefundService {
 

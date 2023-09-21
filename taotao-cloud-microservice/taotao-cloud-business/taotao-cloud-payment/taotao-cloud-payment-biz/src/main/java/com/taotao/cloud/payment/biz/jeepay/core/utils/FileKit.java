@@ -23,7 +23,7 @@ import com.jeequan.jeepay.core.exception.BizException;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 16:50
+* @since 2021/6/8 16:50
 */
 public class FileKit {
 

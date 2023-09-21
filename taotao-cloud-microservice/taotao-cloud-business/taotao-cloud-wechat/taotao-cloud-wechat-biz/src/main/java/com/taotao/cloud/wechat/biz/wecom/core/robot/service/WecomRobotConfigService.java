@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
  * 企业微信机器人配置
  *
  * @author bootx
- * @date 2022-07-23
+ * @since 2022-07-23
  */
 @Slf4j
 @Service

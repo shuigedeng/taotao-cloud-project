@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.exception;
  * <p>Description: Stamp签章 已过期错误 </p>
  *
  *
- * @date : 2021/8/23 12:36
+ * @since : 2021/8/23 12:36
  */
 public class StampHasExpiredException extends RuntimeException {
 

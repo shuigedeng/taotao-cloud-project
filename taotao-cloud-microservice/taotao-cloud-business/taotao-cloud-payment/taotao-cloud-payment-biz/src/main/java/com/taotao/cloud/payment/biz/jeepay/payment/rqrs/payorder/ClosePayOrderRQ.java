@@ -23,7 +23,7 @@ import lombok.Data;
  *
  * @author xiaoyu
  * @site https://www.jeequan.com
- * @date 2022/1/25 9:16
+ * @since 2022/1/25 9:16
  */
 @Data
 public class ClosePayOrderRQ extends AbstractMchAppRQ {

@@ -34,7 +34,7 @@ import org.springframework.util.StringUtils;
  * 微信粉丝
  *
  * @author Nifury
- * @date 2017-9-27
+ * @since 2017-9-27
  */
 @Data
 @TableName("wx_user")

@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author xxm
- * @date 2022/7/16
+ * @since 2022/7/16
  */
 @Tag(name = "微信模板消息")
 @RestController

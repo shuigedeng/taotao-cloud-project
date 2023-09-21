@@ -26,7 +26,7 @@ import lombok.Data;
  * 系统验证码DO
  *
  * @author shuigedeng
- * @date 2021-02-02
+ * @since 2021-02-02
  */
 @Data
 @TableName("sys_captcha")

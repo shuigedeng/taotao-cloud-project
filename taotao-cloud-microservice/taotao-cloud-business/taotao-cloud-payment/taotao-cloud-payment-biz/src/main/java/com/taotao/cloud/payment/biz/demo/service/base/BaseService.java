@@ -153,7 +153,7 @@ public abstract class BaseService<T> {
      * 批量修改
      *
      * @author YunGouOS
-     * @date 2020年1月13日 下午6:37:09
+     * @since 2020年1月13日 下午6:37:09
      */
     public Integer updateByIds(Class<T> clazz, T record, String property, List<Object> values) {
         Example example = new Example(clazz);
@@ -203,7 +203,7 @@ public abstract class BaseService<T> {
      * 查询指定条件的数量
      *
      * @author YunGouOS
-     * @date 2019年2月20日 下午6:52:14
+     * @since 2019年2月20日 下午6:52:14
      */
     public Integer selectCount(T record) {
         return mapper.selectCount(record);

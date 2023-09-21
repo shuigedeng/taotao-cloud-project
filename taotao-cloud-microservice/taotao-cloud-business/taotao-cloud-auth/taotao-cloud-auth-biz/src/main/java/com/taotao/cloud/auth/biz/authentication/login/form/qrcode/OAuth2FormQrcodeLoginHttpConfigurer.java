@@ -34,7 +34,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
  * <p>
  * 使用此种方式，相当于额外增加了一种表单登录方式。因此对原有的 http.formlogin进行的配置，对当前此种方式的配置并不生效。
  *
- * @date : 2022/4/12 13:29
+ * @since : 2022/4/12 13:29
  * @see org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer
  */
 public class OAuth2FormQrcodeLoginHttpConfigurer<H extends HttpSecurityBuilder<H>>

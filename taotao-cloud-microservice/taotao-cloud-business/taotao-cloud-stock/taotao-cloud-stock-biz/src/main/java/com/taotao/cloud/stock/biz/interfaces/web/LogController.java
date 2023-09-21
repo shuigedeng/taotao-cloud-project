@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 系统日志Controller
  *
  * @author shuigedeng
- * @date 2021-02-04
+ * @since 2021-02-04
  */
 @Api(tags = "日志管理")
 @RestController

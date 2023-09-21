@@ -25,7 +25,7 @@ import org.springframework.beans.BeanUtils;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:40
+* @since 2021/6/8 17:40
 */
 @Data
 public class QueryPayOrderRS extends AbstractRS {

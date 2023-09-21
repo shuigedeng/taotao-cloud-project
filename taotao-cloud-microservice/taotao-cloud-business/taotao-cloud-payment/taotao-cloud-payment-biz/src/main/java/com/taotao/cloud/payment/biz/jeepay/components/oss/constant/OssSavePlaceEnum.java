@@ -19,7 +19,7 @@ package com.taotao.cloud.payment.biz.jeepay.components.oss.constant;
 * oss 存储位置
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/12 10:48
+* @since 2021/7/12 10:48
 */
 public enum OssSavePlaceEnum {
 

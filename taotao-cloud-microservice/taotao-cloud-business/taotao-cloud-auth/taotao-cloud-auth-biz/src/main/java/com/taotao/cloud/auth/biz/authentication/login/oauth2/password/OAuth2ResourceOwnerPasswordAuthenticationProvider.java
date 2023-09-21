@@ -52,7 +52,7 @@ import org.springframework.util.Assert;
  * <p>Description: 自定义 OAuth2 密码模式认证 Provider </p>
  *
  *
- * @date : 2022/2/22 16:02
+ * @since : 2022/2/22 16:02
  */
 public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends OAuth2AbstractUserDetailsAuthenticationProvider {
 

@@ -84,7 +84,7 @@ public class CoreMath {
      * @param ys y集合
      * @Return {@link double}
      *
-     * @date 2020年07月31日 17:03:20
+     * @since 2020年07月31日 17:03:20
      */
     public static double getRelate(List<Integer> xs, List<Integer> ys) {
         int n = xs.size();

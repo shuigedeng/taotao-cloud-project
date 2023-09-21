@@ -23,7 +23,7 @@ import org.apache.commons.lang.Validate;
  * 邮箱
  *
  * @author shuigedeng
- * @date 2021-02-08
+ * @since 2021-02-08
  */
 public final class Email implements ValueObject<Email> {
 

@@ -21,7 +21,7 @@ package com.taotao.cloud.payment.biz.jeepay.jeepay.model;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-18 10:00
+ * @since 2021-06-18 10:00
  */
 public class RefundOrderQueryReqModel extends JeepayObject {
 

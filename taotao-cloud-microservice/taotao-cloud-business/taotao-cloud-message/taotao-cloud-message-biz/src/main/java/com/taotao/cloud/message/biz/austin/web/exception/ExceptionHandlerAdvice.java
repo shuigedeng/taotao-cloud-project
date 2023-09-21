@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author kl
  * @version 1.0.0
  * @description 拦截异常统一返回
- * @date 2023/2/9 19:03
+ * @since 2023/2/9 19:03
  */
 @ControllerAdvice(basePackages = "com.java3y.austin.web.controller")
 @ResponseBody

@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
  * 操作日志
  *
  * @author shuigedeng
- * @date 2021/8/12
+ * @since 2021/8/12
  */
 @EqualsAndHashCode(callSuper = false)
 @Data

@@ -32,7 +32,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * <p>Description: 微信公众号配置 </p>
  *
  *
- * @date : 2021/4/7 13:25
+ * @since : 2021/4/7 13:25
  */
 @Configuration(proxyBeanMethods = false)
 // @ConditionalOnWxmppEnabled

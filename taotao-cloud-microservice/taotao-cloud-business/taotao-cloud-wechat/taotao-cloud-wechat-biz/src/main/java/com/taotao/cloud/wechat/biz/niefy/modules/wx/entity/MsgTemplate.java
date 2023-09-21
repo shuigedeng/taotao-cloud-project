@@ -32,7 +32,7 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
  * 模板消息模板
  *
  * @author Nifury
- * @date 2017-9-27
+ * @since 2017-9-27
  */
 @Data
 @TableName("wx_msg_template")

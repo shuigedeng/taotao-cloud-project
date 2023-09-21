@@ -10,7 +10,7 @@ javadoc {
         author true
         version true
         title project.name
-        links "https://docs.oracle.com/en/java/javase/17/docs/api"
+        links "https://docs.oracle.com/en/java/javase/21/docs/api"
     }
 
     options.addStringOption('Xdoclint:none', '-quiet')
@@ -66,7 +66,7 @@ jar {
                 'Built-By': 'shuigedeng',
                 'Automatic-Module-Name': project.name.replace("-", "."),
                 'Implementation-URL': "https://github.com/shuigedeng/taotao-cloud-project",
-                'Build-Jdk-Spec': JavaVersion.VERSION_17.toString(),
+                'Build-Jdk-Spec': JavaVersion.VERSION_21.toString(),
                 'Bundle-DocURL': 'https://github.com/shuigedeng/taotao-cloud-project',
                 'Built-Gradle': gradle.gradleVersion,
                 'Build-OS': System.getProperty("os.name"),

@@ -35,7 +35,7 @@ import java.io.InputStream;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:08
+* @since 2021/6/8 17:08
 */
 @Controller
 public class StaticController extends CommonCtrl {

@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  * 租户编码
  *
  * @author shuigedeng
- * @date 2021-02-08
+ * @since 2021-02-08
  */
 public class TenantCode implements ValueObject<TenantCode> {
 

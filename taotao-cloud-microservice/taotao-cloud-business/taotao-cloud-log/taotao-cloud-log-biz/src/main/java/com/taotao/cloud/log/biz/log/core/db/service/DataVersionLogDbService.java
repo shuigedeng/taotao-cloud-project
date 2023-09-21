@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 数据版本日志数据库实现
  *
  * @author shuigedeng
- * @date 2022/1/10
+ * @since 2022/1/10
  */
 @Slf4j
 @Service

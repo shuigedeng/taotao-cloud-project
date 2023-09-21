@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.infrastructure.persistence.converter;
  * 租户Converter
  *
  * @author shuigedeng
- * @date 2021-02-15
+ * @since 2021-02-15
  */
 public class TenantConverter {
 

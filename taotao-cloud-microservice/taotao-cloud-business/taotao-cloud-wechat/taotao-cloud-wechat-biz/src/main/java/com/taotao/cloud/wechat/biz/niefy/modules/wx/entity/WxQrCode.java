@@ -28,7 +28,7 @@ import lombok.Data;
  *
  * @author niefy
  * @email niefy@qq.com
- * @date 2020-01-02 11:11:55
+ * @since 2020-01-02 11:11:55
  */
 @Data
 @TableName("wx_qr_code")

@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
  *
  * @author yr
  * @site https://www.jeequan.com
- * @date 2022/8/17 14:46
+ * @since 2022/8/17 14:46
  */
 @Service("plspayPaymentByAliWapService") //Service Name需保持全局唯一性
 public class AliWap extends PlspayPaymentService {

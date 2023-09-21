@@ -23,7 +23,7 @@ import lombok.Data;
  * 角色DO
  *
  * @author shuigedeng
- * @date 2021-02-15
+ * @since 2021-02-15
  */
 @Data
 @TableName("sys_role")

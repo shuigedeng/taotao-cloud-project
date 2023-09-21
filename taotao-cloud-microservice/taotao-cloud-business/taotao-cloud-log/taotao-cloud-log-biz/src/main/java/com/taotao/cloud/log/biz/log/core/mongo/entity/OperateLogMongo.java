@@ -27,7 +27,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  *
  * @author shuigedeng
- * @date 2021/12/2
+ * @since 2021/12/2
  */
 @Data
 @Accessors(chain = true)

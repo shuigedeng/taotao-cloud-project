@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * 租户id
  *
  * @author shuigedeng
- * @date 2021-02-09
+ * @since 2021-02-09
  */
 public class TenantId implements ValueObject<TenantId> {
 

@@ -20,7 +20,7 @@ package com.taotao.cloud.payment.biz.jeepay.core.constants;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/5/24 17:07
+* @since 2021/5/24 17:07
 */
 public enum ApiCodeEnum{
 

@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Description: OAuth2DeviceController </p>
  *
  *
- * @date : 2023/5/15 16:58
+ * @since : 2023/5/15 16:58
  */
 @RestController
 @RequestMapping("/authorize/device")

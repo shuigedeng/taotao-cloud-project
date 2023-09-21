@@ -23,7 +23,7 @@ import lombok.Data;
  *
  * @author zhuxiao
  * @site https://www.jeequan.com
- * @date 2021/6/8 18:02
+ * @since 2021/6/8 18:02
  */
 @Data
 public class WxpayIsvsubMchParams extends IsvsubMchParams {

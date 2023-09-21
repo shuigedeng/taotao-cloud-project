@@ -25,7 +25,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
  * 微信用户
  *
  * @author www.joolun.com
- * @date 2019-03-25 15:39:39
+ * @since 2019-03-25 15:39:39
  */
 public interface WxUserService extends IService<WxUser> {
 

@@ -23,7 +23,7 @@ import java.math.BigDecimal;
  *
  * @author terrfly
  * @site https://www.jeepay.vip
- * @date 2021/8/25 10:38
+ * @since 2021/8/25 10:38
  */
 public class DivisionReceiverBindResModel extends JeepayObject {
 

@@ -31,7 +31,7 @@ import java.util.Map;
  *
  * @author jmdhappy
  * @site https://www.jeepay.vip
- * @date 2021-06-08 11:00
+ * @since 2021-06-08 11:00
  */
 public class HttpURLConnectionClient extends HttpClient {
 

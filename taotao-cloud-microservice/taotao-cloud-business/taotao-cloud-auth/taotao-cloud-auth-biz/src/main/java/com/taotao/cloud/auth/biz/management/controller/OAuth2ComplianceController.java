@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Description: OAuth2ComplianceController </p>
  *
  *
- * @date : 2022/7/7 22:56
+ * @since : 2022/7/7 22:56
  */
 @RestController
 @RequestMapping("/authorize/compliance")

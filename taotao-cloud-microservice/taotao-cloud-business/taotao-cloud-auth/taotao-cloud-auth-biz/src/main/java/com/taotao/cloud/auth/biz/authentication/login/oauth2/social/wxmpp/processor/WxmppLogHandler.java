@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
  * <p>Description: 微信公众号日志处理 </p>
  *
  *
- * @date : 2021/4/7 13:26
+ * @since : 2021/4/7 13:26
  */
 @Component
 public class WxmppLogHandler implements WxMpMessageHandler {

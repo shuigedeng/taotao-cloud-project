@@ -22,6 +22,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 /**
  * mongo持久化方式
  * @author shuigedeng
- * @date 2022/1/10
+ * @since 2022/1/10
  */
 public interface DataVersionLogMongoRepository extends MongoRepository<DataVersionLogMongo, Long> {}

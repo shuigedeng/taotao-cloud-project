@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ：JNPF开发平台组
  * @version: V3.1.0
  * @copyright 引迈信息技术有限公司
- * @date ：2022/3/31 11:26
+ * @since ：2022/3/31 11:26
  */
 @Api(tags = "获取APP版本号", value = "AppVersion")
 @RestController

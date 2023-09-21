@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * <p>Description: ClientAuthenticationMethodMixin </p>
  *
  *
- * @date : 2022/10/24 15:50
+ * @since : 2022/10/24 15:50
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonAutoDetect(

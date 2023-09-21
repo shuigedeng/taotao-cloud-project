@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * OAuth2 授权确认页面 - controller
  *
- * @date 2022-03-01
+ * @since 2022-03-01
  * @see org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter
  */
 @Controller

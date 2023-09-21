@@ -27,7 +27,7 @@ import java.util.Map;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2023/3/29 15:50
+* @since 2023/3/29 15:50
 */
 @Data
 public class DivisionChannelNotifyModel {

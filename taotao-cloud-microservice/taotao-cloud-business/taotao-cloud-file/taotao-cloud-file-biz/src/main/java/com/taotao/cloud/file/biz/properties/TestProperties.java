@@ -31,7 +31,7 @@ import java.time.Duration;
  * <p>Description: OAuth2 合规性配置参数 </p>
  *
  *
- * @date : 2022/7/7 0:16
+ * @since : 2022/7/7 0:16
  */
 @ConfigurationProperties(prefix = TestProperties.PREFIX)
 public class TestProperties {

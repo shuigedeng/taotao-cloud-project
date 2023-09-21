@@ -26,7 +26,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
  * <p>Description: 手机短信接入处理器 </p>
  *
  *
- * @date : 2022/1/26 11:46
+ * @since : 2022/1/26 11:46
  */
 public class PhoneNumberAccessHandler implements AccessHandler {
 

@@ -20,7 +20,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.except
  * <p>Description: 接入身份认证错误 </p>
  *
  *
- * @date : 2022/1/26 10:54
+ * @since : 2022/1/26 10:54
  */
 public class AccessIdentityVerificationFailedException extends RuntimeException {
 

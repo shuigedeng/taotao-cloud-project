@@ -23,7 +23,7 @@ import com.jeequan.jeepay.pay.rqrs.AbstractRS;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 17:45
+* @since 2021/6/8 17:45
 */
 public class ApiResBuilder {
 

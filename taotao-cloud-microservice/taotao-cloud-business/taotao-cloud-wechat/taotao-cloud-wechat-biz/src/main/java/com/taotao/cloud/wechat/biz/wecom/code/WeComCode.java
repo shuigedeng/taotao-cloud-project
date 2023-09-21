@@ -20,7 +20,7 @@ package com.taotao.cloud.wechat.biz.wecom.code;
  * 企微常量
  *
  * @author xxm
- * @date 2022/7/23
+ * @since 2022/7/23
  */
 public interface WeComCode {
     /* 请求地址 */

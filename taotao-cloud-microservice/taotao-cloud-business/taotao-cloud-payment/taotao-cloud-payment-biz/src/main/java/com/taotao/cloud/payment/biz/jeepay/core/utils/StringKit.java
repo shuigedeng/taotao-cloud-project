@@ -28,7 +28,7 @@ import java.util.UUID;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/6/8 16:58
+* @since 2021/6/8 16:58
 */
 public class StringKit {
 

@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  * <p>Description: 社会化登录用户服务 </p>
  *
  *
- * @date : 2021/5/16 16:29
+ * @since : 2021/5/16 16:29
  */
 @Service
 public class SysSocialUserService {

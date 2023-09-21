@@ -27,7 +27,7 @@ import com.taotao.cloud.stock.biz.domain.tenant.model.vo.TenantName;
  * 租户实体
  *
  * @author shuigedeng
- * @date 2021-02-08
+ * @since 2021-02-08
  */
 public class Tenant implements Entity<Tenant> {
 

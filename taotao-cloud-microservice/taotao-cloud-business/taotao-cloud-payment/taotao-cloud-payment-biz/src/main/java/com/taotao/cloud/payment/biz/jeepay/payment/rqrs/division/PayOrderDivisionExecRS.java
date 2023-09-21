@@ -23,7 +23,7 @@ import lombok.Data;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/8/26 17:20
+* @since 2021/8/26 17:20
 */
 @Data
 public class PayOrderDivisionExecRS extends AbstractRS {

@@ -26,7 +26,7 @@ import lombok.Data;
 /**
  * 行政赏罚单
  *
- * @date 2021/3/15 8:46
+ * @since 2021/3/15 8:46
  */
 @Data
 public class RewardPunishmentForm {

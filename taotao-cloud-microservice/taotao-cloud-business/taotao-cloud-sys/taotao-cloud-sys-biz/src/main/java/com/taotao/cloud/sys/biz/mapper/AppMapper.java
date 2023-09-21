@@ -25,7 +25,7 @@ import org.springframework.stereotype.Repository;
  * 系统应用表
  *
  * @author
- * @date 2022-09-12
+ * @since 2022-09-12
  */
 @Repository
 public interface AppMapper extends BaseMapper<App> {}

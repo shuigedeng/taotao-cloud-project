@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.*;
  * <p> Description : OauthScopesController </p>
  *
  *
- * @date : 2020/3/25 17:10
+ * @since : 2020/3/25 17:10
  */
 @RestController
 @RequestMapping("/authorize/scope")

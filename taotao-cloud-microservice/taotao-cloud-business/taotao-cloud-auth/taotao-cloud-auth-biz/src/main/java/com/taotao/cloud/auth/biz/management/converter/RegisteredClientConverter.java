@@ -30,7 +30,7 @@ import org.springframework.util.StringUtils;
  * <p>Description: 转换为 RegisteredClient 转换器定义</p>
  *
  *
- * @date : 2023/5/21 20:36
+ * @since : 2023/5/21 20:36
  */
 public interface RegisteredClientConverter<S extends RegisteredClientDetails> extends Converter<S, RegisteredClient> {
 

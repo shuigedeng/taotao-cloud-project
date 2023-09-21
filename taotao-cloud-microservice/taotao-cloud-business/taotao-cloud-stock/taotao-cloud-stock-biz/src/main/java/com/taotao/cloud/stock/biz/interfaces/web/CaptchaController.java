@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 验证码Controller
  *
  * @author shuigedeng
- * @date 2021-06-23
+ * @since 2021-06-23
  */
 @Api(tags = "验证码管理")
 @RestController

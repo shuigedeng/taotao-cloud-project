@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
  * <p>Description: UPMS 社交配置 </p>
  *
  *
- * @date : 2022/2/2 17:05
+ * @since : 2022/2/2 17:05
  */
 @Configuration(proxyBeanMethods = false)
 public class SocialModuleConfiguration {

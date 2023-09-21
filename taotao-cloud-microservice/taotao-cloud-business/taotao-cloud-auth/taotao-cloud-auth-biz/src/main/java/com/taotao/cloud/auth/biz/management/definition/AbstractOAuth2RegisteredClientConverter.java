@@ -32,7 +32,7 @@ import org.springframework.util.StringUtils;
  * <p>Description: OAuth2Application  </p>
  *
  *
- * @date : 2023/5/13 10:34
+ * @since : 2023/5/13 10:34
  */
 public abstract class AbstractOAuth2RegisteredClientConverter<T extends AbstractOAuth2RegisteredClient>
         implements RegisteredClientConverter<T> {

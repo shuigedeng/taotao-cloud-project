@@ -23,7 +23,7 @@ import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
  * <p>Description: OAuth2ApplicationRepository </p>
  *
  *
- * @date : 2022/3/1 18:05
+ * @since : 2022/3/1 18:05
  */
 public interface OAuth2ApplicationRepository extends BaseRepository<OAuth2Application, String> {
 

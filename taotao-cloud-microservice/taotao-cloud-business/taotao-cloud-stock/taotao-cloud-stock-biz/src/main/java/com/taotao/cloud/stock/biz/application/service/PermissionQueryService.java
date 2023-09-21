@@ -23,7 +23,7 @@ import java.util.Set;
  * 权限查询服务接口
  *
  * @author shuigedeng
- * @date 2021-05-10
+ * @since 2021-05-10
  */
 public interface PermissionQueryService {
 

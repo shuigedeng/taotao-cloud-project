@@ -30,7 +30,7 @@ import lombok.Setter;
  * 系统应用表
  *
  * @author
- * @date 2022-09-12
+ * @since 2022-09-12
  */
 @NoArgsConstructor
 @AllArgsConstructor

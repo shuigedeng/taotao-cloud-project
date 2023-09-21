@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * <p> Description : OauthScopeService </p>
  *
  *
- * @date : 2020/3/19 17:00
+ * @since : 2020/3/19 17:00
  */
 @Service
 public class OAuth2ScopeService {

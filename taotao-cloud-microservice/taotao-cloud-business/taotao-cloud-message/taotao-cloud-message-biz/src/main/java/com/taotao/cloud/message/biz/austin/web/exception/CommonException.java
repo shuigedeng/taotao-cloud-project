@@ -7,7 +7,7 @@ import lombok.Getter;
  * @author kl
  * @version 1.0.0
  * @description 通用异常
- * @date 2023/2/9 19:00
+ * @since 2023/2/9 19:00
  */
 @Getter
 public class CommonException extends RuntimeException {

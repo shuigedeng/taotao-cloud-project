@@ -28,7 +28,7 @@ import org.hibernate.annotations.IdGeneratorType;
  * <p>Description: OAuth2AuthorityUuid </p>
  *
  *
- * @date : 2022/11/7 17:11
+ * @since : 2022/11/7 17:11
  */
 @IdGeneratorType(OAuth2PermissionUuidGenerator.class)
 @Retention(RetentionPolicy.RUNTIME)

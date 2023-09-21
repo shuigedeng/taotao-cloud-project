@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 /**
  *
  * @author shuigedeng
- * @date 2022/1/10
+ * @since 2022/1/10
  */
 @Data
 @Accessors(chain = true)

@@ -24,7 +24,7 @@ import lombok.Data;
  * 权限DTO
  *
  * @author shuigedeng
- * @date 2021-02-17
+ * @since 2021-02-17
  */
 @Data
 public class PermissionDTO implements Serializable {

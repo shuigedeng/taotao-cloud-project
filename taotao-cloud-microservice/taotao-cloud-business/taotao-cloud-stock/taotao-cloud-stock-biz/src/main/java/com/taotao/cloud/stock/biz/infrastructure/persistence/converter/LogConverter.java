@@ -22,7 +22,7 @@ import com.taotao.cloud.stock.biz.infrastructure.persistence.po.SysLogDO;
  * 日志转换类
  *
  * @author shuigedeng
- * @date 2021-02-02
+ * @since 2021-02-02
  */
 public class LogConverter {
 

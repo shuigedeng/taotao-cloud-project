@@ -24,7 +24,7 @@ import java.util.List;
  * <p> Description : OauthScopeRepository </p>
  *
  *
- * @date : 2020/3/19 16:57
+ * @since : 2020/3/19 16:57
  */
 public interface OAuth2ScopeRepository extends BaseRepository<OAuth2Scope, String> {
 

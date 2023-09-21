@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
  * <p>Description: 微信小程序后配置 </p>
  *
  *
- * @date : 2021/3/29 9:27
+ * @since : 2021/3/29 9:27
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(WxappProperties.class)

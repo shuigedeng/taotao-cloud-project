@@ -25,7 +25,7 @@ import org.apache.ibatis.annotations.Param;
  * 权限Mapper
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Mapper
 public interface SysPermissionMapper extends BaseSuperMapper<SysPermissionDO> {

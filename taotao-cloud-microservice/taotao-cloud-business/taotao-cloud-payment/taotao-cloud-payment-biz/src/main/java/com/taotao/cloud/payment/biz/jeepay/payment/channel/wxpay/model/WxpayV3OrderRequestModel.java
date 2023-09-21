@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 * 微信V3支付请求参数类
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2022/4/25 11:52
+* @since 2022/4/25 11:52
 */
 @Data
 @Accessors(chain = true)

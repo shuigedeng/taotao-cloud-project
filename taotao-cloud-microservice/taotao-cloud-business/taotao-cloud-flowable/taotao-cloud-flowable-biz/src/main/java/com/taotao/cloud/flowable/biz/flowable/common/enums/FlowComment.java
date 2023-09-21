@@ -20,7 +20,7 @@ package com.taotao.cloud.flowable.biz.flowable.common.enums;
  * 流程意见类型
  *
  * @author Tony
- * @date 2021/4/19
+ * @since 2021/4/19
  */
 public enum FlowComment {
 

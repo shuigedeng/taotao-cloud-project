@@ -31,7 +31,7 @@ import org.springframework.stereotype.Repository;
  * 微信公众号粉丝
  *
  * @author xxm
- * @date 2022-07-16
+ * @since 2022-07-16
  */
 @Repository
 @RequiredArgsConstructor

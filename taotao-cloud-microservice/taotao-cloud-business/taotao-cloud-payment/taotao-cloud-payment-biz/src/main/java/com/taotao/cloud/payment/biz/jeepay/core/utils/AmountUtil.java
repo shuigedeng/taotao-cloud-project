@@ -22,7 +22,7 @@ import java.text.FieldPosition;
 /**
  * @Description: 金额工具类
  * @author dingzhiwei jmdhappy@126.com
- * @date 2017-07-05
+ * @since 2017-07-05
  * @version V1.0
  * @Copyright: www.xxpay.org
  */
@@ -124,7 +124,7 @@ public class AmountUtil {
     *
     * @author terrfly
     * @site https://www.jeequan.com
-    * @date 2021/8/20 14:53
+    * @since 2021/8/20 14:53
     *  @param amount 订单金额  （保持与数据库的格式一致 ，单位：分）
     * @param rate 费率   （保持与数据库的格式一致 ，真实费率值，如费率为0.55%，则传入 0.0055）
     */
@@ -137,7 +137,7 @@ public class AmountUtil {
      *
      * @author terrfly
      * @site https://www.jeequan.com
-     * @date 2021/8/20 14:53
+     * @since 2021/8/20 14:53
      * @param amount 订单金额  （保持与数据库的格式一致 ，单位：分）
      * @param rate 费率   （保持与数据库的格式一致 ，真实费率值，如费率为0.55%，则传入 0.0055）
      * @param mode 模式 参考：BigDecimal.ROUND_HALF_UP(四舍五入)   BigDecimal.ROUND_FLOOR（向下取整）

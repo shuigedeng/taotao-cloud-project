@@ -26,7 +26,7 @@ import org.springframework.beans.factory.InitializingBean;
  * <p>Description: 自定义JustAuth State Cache </p>
  *
  *
- * @date : 2021/5/22 10:22
+ * @since : 2021/5/22 10:22
  */
 public class JustAuthStateStampManager implements AuthStateCache, InitializingBean {
     private JustAuthProperties justAuthProperties;

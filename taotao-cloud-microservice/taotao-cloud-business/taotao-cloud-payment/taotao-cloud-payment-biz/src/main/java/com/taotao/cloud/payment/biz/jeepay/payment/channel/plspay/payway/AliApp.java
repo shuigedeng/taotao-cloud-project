@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
  *
  * @author yr
  * @site https://www.jeequan.com
- * @date 2022/8/6 16:20
+ * @since 2022/8/6 16:20
  */
 @Service("plspayPaymentByAliAppService") //Service Name需保持全局唯一性
 public class AliApp extends PlspayPaymentService {

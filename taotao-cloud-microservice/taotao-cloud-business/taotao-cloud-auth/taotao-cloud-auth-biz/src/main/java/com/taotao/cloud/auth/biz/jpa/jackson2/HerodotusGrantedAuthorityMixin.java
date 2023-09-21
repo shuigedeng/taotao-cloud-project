@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * <p>Description: HerodotusGrantedAuthority Jackson2 Mixin </p>
  *
  *
- * @date : 2022/3/17 20:28
+ * @since : 2022/3/17 20:28
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 @JsonDeserialize(using = HerodotusGrantedAuthorityDeserializer.class)

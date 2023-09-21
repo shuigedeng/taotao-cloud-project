@@ -20,7 +20,7 @@ package com.taotao.cloud.stock.biz.domain.captcha.external;
  * 验证码校验服务
  *
  * @author shuigedeng
- * @date 2021-05-11
+ * @since 2021-05-11
  */
 public class CaptchaValidateService {
 

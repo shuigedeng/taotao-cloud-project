@@ -24,7 +24,7 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * @author shuigedeng
- * @date 2022/1/10
+ * @since 2022/1/10
  */
 @Mapper
 public interface DataVersionLogDbMapper extends BaseMapper<DataVersionLogDb> {

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Description: OAuth2ProductController </p>
  *
  *
- * @date : 2023/5/15 16:37
+ * @since : 2023/5/15 16:37
  */
 @RestController
 @RequestMapping("/authorize/product")

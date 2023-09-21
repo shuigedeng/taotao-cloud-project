@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 *
 * @author terrfly
 * @site https://www.jeequan.com
-* @date 2021/7/23 16:51
+* @since 2021/7/23 16:51
 */
 @Component
 @ConditionalOnProperty(name = MQVenderCS.YML_VENDER_KEY, havingValue = MQVenderCS.ACTIVE_MQ)

@@ -23,7 +23,7 @@ import java.util.LinkedList;
 /**
  * 达梦模型
  *
- * @date 2021/10/06
+ * @since 2021/10/06
  */
 public class DbDM extends DbBase {
 

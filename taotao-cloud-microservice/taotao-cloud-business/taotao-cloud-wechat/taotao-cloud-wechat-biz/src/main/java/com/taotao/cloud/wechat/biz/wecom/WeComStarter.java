@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 企业微信
  *
  * @author xxm
- * @date 2022/7/22
+ * @since 2022/7/22
  */
 @ComponentScan
 @ConfigurationPropertiesScan

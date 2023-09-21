@@ -26,7 +26,7 @@ import org.apache.ibatis.annotations.Param;
  * 角色Mapper
  *
  * @author shuigedeng
- * @date 2021-02-14
+ * @since 2021-02-14
  */
 @Mapper
 public interface SysRoleMapper extends BaseSuperMapper<SysRoleDO> {
