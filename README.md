@@ -113,7 +113,7 @@ Maven:
  依赖                   | 版本              
 ----------------------|-----------------
  Spring               | 6.0.11           
- Spring Boot          | 3.1.3           
+ Spring Boot          | 3.1.4           
  Spring Cloud         | 2022.0.4        
  Spring Cloud Alibaba | 2022.0.0.0 
  Spring Cloud Tencent | 1.11.8-2022.0.1 
@@ -171,7 +171,7 @@ Maven:
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.1.3、Spring Cloud 2022.0.4、Spring Cloud Alibaba
+* **主体框架**：采用最新的Spring Boot 3.1.4、Spring Cloud 2022.0.4、Spring Cloud Alibaba
   2022.0.0.0 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
