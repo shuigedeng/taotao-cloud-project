@@ -5,7 +5,7 @@ name: Microservice Docker graalvm Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
@@ -58,7 +58,7 @@ jobs:
           gradle-version: 8.3
           #arguments: bootBuildImage
           arguments: nativeBuild
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-log/taotao-cloud-log-biz
+          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-file/taotao-cloud-file-biz
 
     #      - name: Publish Docker Image taotao-cloud-demo
     #        uses: elgohr/Publish-Docker-Github-Action@v4
