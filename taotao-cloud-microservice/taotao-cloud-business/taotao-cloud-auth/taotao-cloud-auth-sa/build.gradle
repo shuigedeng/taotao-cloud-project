@@ -35,10 +35,10 @@ dependencies {
 
     // Sa-Token-OAuth2.0 模块
     //https://search.maven.org/artifact/cn.dev33/sa-token-oauth2
-    implementation "cn.dev33:sa-token-oauth2:1.35.0.RC"
+    implementation "cn.dev33:sa-token-oauth2:1.36.0"
     //Sa-Token 插件：整合SSO
     //https://search.maven.org/artifact/cn.dev33/sa-token-sso
-    implementation "cn.dev33:sa-token-sso:1.35.0.RC"
+    implementation "cn.dev33:sa-token-sso:1.36.0"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

@@ -6,8 +6,6 @@ ADD ./build/libs/taotao-cloud-auth-2023.10.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-auth-2023.10.jar extract
 
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
@@ -120,9 +118,9 @@ USER root
 WORKDIR /root
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
-	  && echo $TZ > /etc/timezone \
+	&& echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
+	&& touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/

@@ -21,9 +21,13 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud-project**(taotao云平台) 是一款企业级微服务架构的云服务平台 遵循SpringBoot编程思想，高度模块化和可配置化。具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。目前支持Docker、k8s等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
-仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发)
-**仓库代码中不涉及公司任何业务代码**
+`taotao-cloud-project` (taotao云平台) 基于jdk21, 采用最新的SpringCloud Alibaba 2022.0.0、SpringCloud 2022.0.4、SpringBoot 3.1.4、SpringSecurity 6.1.4、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+
+具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
+
+目前支持Docker、k8s等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
+
+仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
 主要包括如下几部分
 
@@ -67,9 +71,9 @@
 Requires:
 
 ```
-JAVA_VERSION >= 17 (推荐使用graalvm-22.3)
+JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.3
-IDEA_VERSION >= 2023.2
+IDEA_VERSION >= 2023.2.2
 ```
 
 Gradle:
@@ -112,35 +116,35 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.0.11           
+ Spring               | 6.0.12           
  Spring Boot          | 3.1.4           
  Spring Cloud         | 2022.0.4        
  Spring Cloud Alibaba | 2022.0.0.0 
- Spring Cloud Tencent | 1.11.8-2022.0.1 
+ Spring Cloud Tencent | 1.11.9-2022.0.4 
  Seata                | 1.7.0
  Sentinel             | 1.8.6           
- Spring-kafka         | 3.0.9         
+ Spring-kafka         | 3.0.11         
  Roketmq              | 5.0.0           
- Spring Security      | 6.1.2           
- Mybatis Plus         | 3.5.3.1         
- Hutool               | 6.0.0-M5          
+ Spring Security      | 6.1.4           
+ Mybatis Plus         | 3.5.3.2         
+ Hutool               | 6.0.0-M6          
  Mysql                | 8.1.0          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
- Knife4j              | 4.1.0           
- Redisson             | 3.23.2         
- Lettuce              | 6.0.5.RELEASE   
+ Knife4j              | 4.3.0           
+ Redisson             | 3.23.5         
+ Lettuce              | 6.0.6.RELEASE   
  Elasticsearch        | 8.7.1           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
- Guava                | 32.1.1-jre        
- Grpc                 | 1.57.1          
+ Guava                | 32.1.2-jre        
+ Grpc                 | 1.58.0          
  Arthas               | 3.6.9           
  Dynamic-tp           | 1.1.3           
  Elasticjob           | 3.0.3           
  Powerjob             | 4.3.3           
  Forest               | 1.5.32          
- Netty                | 4.1.97.Final
+ Netty                | 4.1.98.Final
 
 ## 6. 演示地址
 
@@ -171,10 +175,9 @@ Maven:
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.1.4、Spring Cloud 2022.0.4、Spring Cloud Alibaba
-  2022.0.0.0 版本进行设计
+* **主体框架**：采用最新的Spring Boot 3.1.4、Spring Cloud 2022.0.4、Spring Cloud Alibaba 2022.0.0.0 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
-* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布
+* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
 * **日志分析**：集成kafka、elk、prometheus、loki等实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
 * **分布式事务**：集成spring cloud alibaba seata分布式事务处理
@@ -187,8 +190,8 @@ Maven:
 * **消息中心**：集成消息中间件RocketMQ、kafka，对业务进行异步处理
 * **业务分离**：采用前后端分离的框架设计，前端采用react antd、taro脚手架快速开放
 * **多租户功能**：集成Mybatis Plus、jpa,实现saas多租户功能
-* **容器化支持**: Docker、Kubernetes、Rancher2 支持
-* **webflux**支持: lambda、stream api、webflux 的生产实践
+* **容器化支持**: 提供对常见容器化支持 Docker、docker-compose、Kubernetes、Rancher2支持
+* **webflux支持**: lambda、stream api、webflux 的生产实践
 * **开放平台**: 提供应用管理，方便第三方系统接入，**支持多租户(应用隔离)**
 * **组件化**: 引入组件化的思想实现高内聚低耦合并且高度可配置化
 * **代码规范**: 注重代码规范，严格控制包依赖

@@ -1,0 +1,84 @@
+FROM alpine:3.18.3
+
+LABEL maintainer=taotao981376577@qq.com
+
+# 设置环境变量
+ENV TZ=Asia/Shanghai
+ENV LANG=zh_CN.UTF-8
+ENV LANGUAGE=zh_CN.UTF-8
+ENV JAVA_VERSION=21
+ENV JAVA_HOME=/usr/java/openjdk-21
+ENV LD_LIBRARY_PATH=/usr/lib:/usr/java/openjdk-21/lib
+ENV PATH=/usr/java/openjdk-21/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# 设置时间组件
+RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
+	&& echo $TZ > /etc/timezone
+
+# 设置镜像仓库 安装其他组件，字体包
+#https://mirrors.aliyun.com/alpine/v3.14/main
+#https://mirrors.ustc.edu.cn/alpine/v3.14/main/
+#清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
+RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
+    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
+    && set -eux \
+    && apk update --allow-untrusted \
+    && apk add gzip --allow-untrusted \
+    && apk add tar --allow-untrusted \
+    && apk add binutils --allow-untrusted \
+    && apk add curl --allow-untrusted \
+    && apk add openssl --allow-untrusted \
+    && apk add libstdc++ --allow-untrusted \
+    && apk add --no-cache --update freetype-dev fontconfig ttf-dejavu \
+    && apk add --no-cache --update tzdata wget
+
+RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so \
+    && ln -s /lib/libuuid.so.1 /usr/lib/libuuid.so.1 \
+    && ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1 # buildkit
+
+# 安装openjdk21 从openjdk镜像copy https://jdk.java.net/21/
+RUN /bin/sh -c set -eux;   \
+    && downloadUrl='https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz'  \
+    && downloadSha256='a30c454a9bef8f46d5f1bf3122830014a8fbe7ac03b5f8729bc3add4b92a1d0a')  \
+    && curl -fL -o openjdk.tgz "$downloadUrl"; echo "$downloadSha256 *openjdk.tgz" | sha256sum --strict --check -;  \
+    && mkdir -p "$JAVA_HOME"; tar --extract --file openjdk.tgz --directory "$JAVA_HOME" --strip-components 1 --no-same-owner ;  \
+    && rm openjdk.tgz*;  \
+    && rm -rf "$JAVA_HOME/lib/security/cacerts";  \
+    && ln -sT /etc/pki/ca-trust/extracted/java/cacerts "$JAVA_HOME/lib/security/cacerts";  \
+    && ln -sfT "$JAVA_HOME" /usr/java/default; ln -sfT "$JAVA_HOME" /usr/java/latest;  \
+    && for bin in "$JAVA_HOME/bin/"*;  \
+    && do  \
+    &&   base="$(basename "$bin")"; [ ! -e "/usr/bin/$base" ]; \
+    &&   alternatives --install "/usr/bin/$base" "$base" "$bin" 20000;  \
+    && done;  \
+    && java -Xshare:dump; fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))' | jshell -s -)"; [ "$fileEncoding" = 'UTF-8' ];  \
+    && rm -rf ~/.java;  \
+    && javac --version;  \
+    && java --version \
+
+USER root
+
+# 添加skywalking agent
+#RUN mkdir /skywalking
+#RUN wget https://dlcdn.apache.org/skywalking/java-agent/9.0.0/apache-skywalking-java-agent-9.0.0.tgz \
+#    && tar apache-skywalking-java-agent-9.0.0.tgz -C /skywalking/agent \
+#    && rm -rf apache-skywalking-java-agent-9.0.0.tgz
+## 添加pyroscope agent
+##wget https://github.com/grafana/pyroscope-java/releases/download/v0.12.1/pyroscope.jar
+#RUN mkdir -p /pyroscope/agent
+#RUN wget https://github.com/grafana/pyroscope-java/releases/download/v0.12.1/pyroscope.jar \
+#    && cp pyroscope.jar /skywalking/agent \
+#    && rm -rf pyroscope.jar
+
+#wget https://dlcdn.apache.org/skywalking/java-agent/9.0.0/apache-skywalking-java-agent-9.0.0.tgz
+RUN mkdir /skywalking
+#wget https://github.com/grafana/pyroscope-java/releases/download/v0.11.5/pyroscope.jar
+RUN mkdir /pyroscope
+COPY ./skywalking-agent /skywalking/agent
+COPY ./pyroscope-agent /pyroscope/agent
+
+ # 删除临时文件和缓存
+RUN rm -rf /tmp/* /var/cache/apk/*
+
+# docker build -t FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk:21 .
+# docker push registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk:21
