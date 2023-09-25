@@ -41,14 +41,14 @@
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署,
+- **saas商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署,
   使用**github action
   CI/CD**持续集成, 前后端均使用**kubernetes**部署，
   各个API独立, 管理前端使用**vue3 ant-design-vue**开发, 移动端使用**taro taro-ui**开发, **
   系统全端全部代码开源**
 
 
-- **前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**
+- **sass商城多端前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**
   为主的多端合一框架。
 
 
@@ -120,7 +120,7 @@ Maven:
  Spring Boot          | 3.1.4           
  Spring Cloud         | 2022.0.4        
  Spring Cloud Alibaba | 2022.0.0.0 
- Spring Cloud Tencent | 1.11.9-2022.0.4 
+ Spring Cloud Tencent | 1.12.1-2022.0.4 
  Seata                | 1.7.0
  Sentinel             | 1.8.6           
  Spring-kafka         | 3.0.11         

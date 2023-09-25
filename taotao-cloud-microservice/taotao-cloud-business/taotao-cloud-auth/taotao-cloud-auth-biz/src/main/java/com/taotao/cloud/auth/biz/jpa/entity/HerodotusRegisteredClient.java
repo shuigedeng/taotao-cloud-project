@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.entity;
 
 import com.google.common.base.MoreObjects;
-import com.taotao.cloud.auth.biz.jpa.generator.HerodotusRegisteredClientUuid;
+import com.taotao.cloud.auth.biz.jpa.generator.HerodotusRegisteredClientUuidGenerator;
 import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
 import jakarta.persistence.*;
 import java.util.Objects;
@@ -47,7 +47,7 @@ public class HerodotusRegisteredClient extends AbstractRegisteredClient {
      * id
      */
     @Id
-    @HerodotusRegisteredClientUuid
+    @HerodotusRegisteredClientUuidGenerator
     @Column(name = "id", nullable = false, length = 100)
     private String id;
 

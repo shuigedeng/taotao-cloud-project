@@ -119,6 +119,9 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.12.0'
+            force 'org.bouncycastle:bcprov-jdk18on:1.76'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.76'
+            force 'org.bouncycastle:bcutil-jdk18on:1.76'
         }
 
         //exclude group: "log4j", module: "log4j"
@@ -129,5 +132,8 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
+        exclude group: "org.bouncycastle", module: "bcpkix-jdk15on"
+        exclude group: "org.bouncycastle", module: "bcutil-jdk15on"
     }
 }
