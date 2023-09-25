@@ -19,15 +19,14 @@ package com.taotao.cloud.auth.biz.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.MissingNode;
+
 import java.time.Instant;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * <p>Description: This class is a straight copy from Spring Authorization Server.</p>
- *
- *
- * @since : 2022/10/24 15:31
  */
 public class JsonNodeUtils {
 
@@ -70,4 +69,8 @@ public class JsonNodeUtils {
         JsonNode value = jsonNode.findValue(fieldName);
         return (value != null && value.isObject()) ? value : null;
     }
+
+	public static JsonNode readJsonNode(JsonNode jsonNode, String field) {
+		return jsonNode.has(field) ? jsonNode.get(field) : MissingNode.getInstance();
+	}
 }
