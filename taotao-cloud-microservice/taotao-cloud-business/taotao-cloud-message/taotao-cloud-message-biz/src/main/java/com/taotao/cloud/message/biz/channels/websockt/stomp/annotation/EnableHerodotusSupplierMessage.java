@@ -23,18 +23,22 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.message.biz.channels.websockt.stomp.repository;
+package com.taotao.cloud.message.biz.channels.websockt.stomp.annotation;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.supplier.message.entity.DialogueDetail;
+import cn.herodotus.engine.supplier.message.configuration.SupplierMessageConfiguration;
+import org.springframework.context.annotation.Import;
+
+import java.lang.annotation.*;
 
 /**
- * <p>Description: PersonalDialogueDetailRepository </p>
+ * <p>Description: 开启 Supplier Message </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/12/7 22:06
+ * @date : 2021/11/8 11:36
  */
-public interface DialogueDetailRepository extends BaseRepository<DialogueDetail, String> {
-
-    void deleteAllByDialogueId(String dialogueId);
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Import(SupplierMessageConfiguration.class)
+public @interface EnableHerodotusSupplierMessage {
 }
