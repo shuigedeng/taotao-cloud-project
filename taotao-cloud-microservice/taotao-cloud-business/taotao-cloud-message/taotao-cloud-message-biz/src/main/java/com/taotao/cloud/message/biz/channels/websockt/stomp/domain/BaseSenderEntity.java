@@ -23,50 +23,55 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.message.biz.channels.websockt.stomp.service;
+package com.taotao.cloud.message.biz.channels.websockt.stomp.domain;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.data.core.service.BaseService;
-import cn.herodotus.engine.supplier.message.entity.PullStamp;
-import cn.herodotus.engine.supplier.message.repository.PullStampRepository;
-import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
+import cn.herodotus.engine.data.core.entity.BaseEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 
 /**
- * <p>Description: MessagePullStampService </p>
+ * <p>Description: 基础发送者实体 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/12/7 22:10
+ * @date : 2022/12/16 22:30
  */
-@Service
-public class PullStampService extends BaseService<PullStamp, String> {
+@MappedSuperclass
+public abstract class BaseSenderEntity extends BaseEntity {
 
-    private final PullStampRepository pullStampRepository;
+    @Schema(name = "发送人ID")
+    @Column(name = "sender_id", length = 64)
+    private String senderId;
 
-    public PullStampService(PullStampRepository pullStampRepository) {
-        this.pullStampRepository = pullStampRepository;
+    @Schema(name = "发送人名称", title = "冗余信息，增加该字段减少重复查询")
+    @Column(name = "sender_name", length = 50)
+    private String senderName;
+
+    @Schema(name = "发送人头像")
+    @Column(name = "sender_avatar", length = 1000)
+    private String senderAvatar;
+
+    public String getSenderId() {
+        return senderId;
     }
 
-    @Override
-    public BaseRepository<PullStamp, String> getRepository() {
-        return pullStampRepository;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public PullStamp findByUserId(String userId) {
-        return pullStampRepository.findByUserId(userId).orElse(null);
+    public String getSenderName() {
+        return senderName;
     }
 
-    public PullStamp getPullStamp(String userId) {
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
 
-        PullStamp stamp = findByUserId(userId);
-        if (ObjectUtils.isEmpty(stamp)) {
-            stamp = new PullStamp();
-            stamp.setUserId(userId);
-        }
-        stamp.setLatestPullTime(new Date());
+    public String getSenderAvatar() {
+        return senderAvatar;
+    }
 
-        return this.save(stamp);
+    public void setSenderAvatar(String senderAvatar) {
+        this.senderAvatar = senderAvatar;
     }
 }

@@ -23,18 +23,40 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package com.taotao.cloud.message.biz.channels.websockt.stomp.repository;
+package com.taotao.cloud.message.biz.channels.websockt.stomp.configuration;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.supplier.message.entity.DialogueDetail;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * <p>Description: PersonalDialogueDetailRepository </p>
+ * <p>Description: 消息互动 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/12/7 22:06
+ * @date : 2022/12/6 21:29
  */
-public interface DialogueDetailRepository extends BaseRepository<DialogueDetail, String> {
+@Configuration(proxyBeanMethods = false)
+@EntityScan(basePackages = {
+        "cn.herodotus.engine.supplier.message.entity"
+})
+@EnableJpaRepositories(basePackages = {
+        "cn.herodotus.engine.supplier.message.repository",
+})
+@ComponentScan(basePackages = {
+        "cn.herodotus.engine.supplier.message.service",
+        "cn.herodotus.engine.supplier.message.controller",
+        "cn.herodotus.engine.supplier.message.listener",
+})
+public class SupplierMessageConfiguration {
 
-    void deleteAllByDialogueId(String dialogueId);
+    private static final Logger log = LoggerFactory.getLogger(SupplierMessageConfiguration.class);
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Herodotus] |- SDK [Supplier Message] Auto Configure.");
+    }
 }
