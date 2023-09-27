@@ -33,7 +33,7 @@ dependencies {
     implementation "com.github.binarywang:weixin-java-mp:4.5.5.B"
 
     implementation 'com.ctrip.framework.apollo:apollo-client-config-data:2.1.0'
-    implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.1.3'
+    implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.1.4'
 
 //    implementation 'org.apache.flink:flink-connector-rabbitmq:1.15.1'
 //    implementation "org.apache.flink:flink-connector-kafka_2.11:1.14.3"

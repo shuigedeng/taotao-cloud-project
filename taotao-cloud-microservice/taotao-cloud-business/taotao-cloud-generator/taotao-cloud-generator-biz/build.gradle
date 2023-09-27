@@ -21,7 +21,7 @@ dependencies {
     //https://search.maven.org/artifact/com.baomidou/mybatis-plus-generator
     implementation "com.baomidou:mybatis-plus-generator:3.5.3.2"
     //https://search.maven.org/artifact/net.maku/maku-generator-boot-starter
-    implementation 'net.maku:maku-generator-boot-starter:3.0.2'
+    implementation 'net.maku:maku-generator-boot-starter:3.0.3'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
