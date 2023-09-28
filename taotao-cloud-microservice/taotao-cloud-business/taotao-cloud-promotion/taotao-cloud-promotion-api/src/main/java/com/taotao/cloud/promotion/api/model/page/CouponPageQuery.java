@@ -63,8 +63,8 @@ public class CouponPageQuery extends BasePromotionsSearchQuery implements Serial
     /**
      * @see PromotionsScopeTypeEnum
      */
-    @Schema(description = "关联范围类型")
-    private String scopeType;
+//    @Schema(description = "关联范围类型")
+//    private String scopeType;
 
     @Schema(description = "范围关联的id")
     private String scopeId;

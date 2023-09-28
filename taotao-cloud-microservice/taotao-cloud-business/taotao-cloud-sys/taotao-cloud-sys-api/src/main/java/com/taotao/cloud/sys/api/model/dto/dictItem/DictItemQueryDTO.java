@@ -46,23 +46,23 @@ public class DictItemQueryDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    @Schema(description = "字典id", required = true)
+    @Schema(description = "字典id", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "字典id不能为空")
     private Long dictId;
 
-    @Schema(description = "字典项文本", required = true)
+    @Schema(description = "字典项文本", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "字典项文本不能为空")
     @Size(max = 1000, message = "字典项文本不能超过1000个字符")
     private String itemText;
 
-    @Schema(description = "字典项值", required = true)
+    @Schema(description = "字典项值", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "字典项值不能为空")
     private String itemValue;
 
     @Schema(description = "描述")
     private String description;
 
-    @Schema(description = "字典状态 1不启用 2启用", required = true)
+    @Schema(description = "字典状态 1不启用 2启用", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "字典状态不能为空")
     // @IntEnums(value = {1; 2})
     private Integer status;

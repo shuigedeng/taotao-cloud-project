@@ -30,7 +30,7 @@ dependencies {
     implementation("org.apache.phoenix:phoenix-spark:5.0.0-HBase-2.0") {
         exclude group: "org.glassfish", module: "javax.el"
     }
-    implementation 'redis.clients:jedis:4.4.3'
+    implementation 'redis.clients:jedis:4.4.5'
     implementation("ru.yandex.clickhouse:clickhouse-jdbc:0.3.2") {
         exclude group: "com.fasterxml.jackson.core", module: "jackson-databind"
         exclude group: "com.fasterxml.jackson.core", module: "jackson-core"

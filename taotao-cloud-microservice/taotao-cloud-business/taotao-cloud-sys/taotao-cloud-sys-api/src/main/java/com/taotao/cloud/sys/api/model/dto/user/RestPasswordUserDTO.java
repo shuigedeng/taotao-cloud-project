@@ -46,16 +46,16 @@ public class RestPasswordUserDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    @Schema(description = "手机号", required = true)
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "手机号不能为空")
     @Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码不正确")
     private String phone;
 
-    @Schema(description = "原密码", required = true)
+    @Schema(description = "原密码", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "原密码不能为空")
     private String oldPassword;
 
-    @Schema(description = "新密码", required = true)
+    @Schema(description = "新密码", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "新密码不能为空")
     @Length(min = 6, max = 128, message = "密码长度不能小于6位")
     private String newPassword;

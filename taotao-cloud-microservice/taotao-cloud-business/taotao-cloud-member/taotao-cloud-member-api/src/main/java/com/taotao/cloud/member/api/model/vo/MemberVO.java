@@ -62,7 +62,7 @@ public class MemberVO implements Serializable {
     @Schema(description = "会员地址")
     private String region;
 
-    @Schema(description = "手机号码", required = true)
+    @Schema(description = "手机号码", requiredMode = Schema.RequiredMode.REQUIRED)
     // @Sensitive(strategy = SensitiveStrategy.PHONE)
     private String mobile;
 

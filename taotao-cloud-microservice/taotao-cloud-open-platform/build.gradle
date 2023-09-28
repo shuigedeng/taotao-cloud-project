@@ -24,7 +24,7 @@ dependencies {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
 
-    implementation "org.apache.pdfbox:pdfbox:2.0.28"
+    implementation "org.apache.pdfbox:pdfbox:3.0.0"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"

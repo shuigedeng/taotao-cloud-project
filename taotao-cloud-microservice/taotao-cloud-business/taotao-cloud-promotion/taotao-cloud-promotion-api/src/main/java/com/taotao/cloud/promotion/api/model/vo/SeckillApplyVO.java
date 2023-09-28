@@ -38,7 +38,7 @@ public class SeckillApplyVO implements Serializable {
 
     private Long id;
 
-    @Schema(description = "活动id", required = true)
+    @Schema(description = "活动id", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long seckillId;
 
     @Schema(description = "时刻")

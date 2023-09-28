@@ -20,6 +20,8 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.distribution.api.feign.fallback.FeignDistributionOrderServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 
+import java.time.LocalDateTime;
+
 /**
  * 远程调用订单模块
  *
@@ -39,7 +41,7 @@ public interface IFeignDistributionOrderApi {
     void cancelOrder(String orderSn);
 
     // 计算分销提佣
-    void rebate(String name, DateTime dateTime);
+    void rebate(String name, LocalDateTime dateTime);
 
     /**
      * new LambdaUpdateWrapper<DistributionOrder>()
