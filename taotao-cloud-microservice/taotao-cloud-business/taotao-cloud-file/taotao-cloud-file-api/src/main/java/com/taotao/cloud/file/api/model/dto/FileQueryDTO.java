@@ -45,12 +45,12 @@ public class FileQueryDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    @Schema(description = "字典名称", required = true)
+    @Schema(description = "字典名称", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "字典名称不能为空")
     @Size(max = 10, message = "字典名称不能超过10个字符")
     private String dictName;
 
-    @Schema(description = "字典编码", required = true)
+    @Schema(description = "字典编码", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "字典编码不能为空")
     @Size(max = 10, message = "字典编码不能超过10个字符")
     private String dictCode;

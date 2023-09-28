@@ -39,12 +39,12 @@ public class KanjiaActivityGoodsOperationDTO implements Serializable {
     private static final long serialVersionUID = -1378599087650538592L;
 
     @Min(message = "活动开始时间不能为空", value = 0)
-    @Schema(description = "活动开始时间", required = true)
+    @Schema(description = "活动开始时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
 
     @Min(message = "活动结束时间不能为空", value = 0)
-    @Schema(description = "活动结束时间", required = true)
+    @Schema(description = "活动结束时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
 

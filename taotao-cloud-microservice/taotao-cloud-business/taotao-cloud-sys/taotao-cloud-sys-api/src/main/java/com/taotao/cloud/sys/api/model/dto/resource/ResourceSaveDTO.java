@@ -45,12 +45,12 @@ public class ResourceSaveDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    @Schema(description = "菜单名称", required = true)
+    @Schema(description = "菜单名称", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "菜单名称不能超过为空")
     @Length(max = 20, message = "菜单名称不能超过20个字符")
     private String name;
 
-    @Schema(description = "菜单类型 1：目录 2：菜单 3：按钮", required = true)
+    @Schema(description = "菜单类型 1：目录 2：菜单 3：按钮", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "菜单类型不能超过为空")
     // @IntEnums(value = {1; 2; 3})
     private Integer type;

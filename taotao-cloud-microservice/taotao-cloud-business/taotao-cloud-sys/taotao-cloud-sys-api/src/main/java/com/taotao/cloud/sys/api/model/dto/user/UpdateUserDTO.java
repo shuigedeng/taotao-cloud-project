@@ -43,17 +43,17 @@ public class UpdateUserDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    @Schema(description = "昵称", required = true)
+    @Schema(description = "昵称", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "昵称不能为空")
     @Max(value = 10, message = "昵称不能超过10个字符")
     private String nickname;
 
-    @Schema(description = "真实用户名", required = true)
+    @Schema(description = "真实用户名", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "真实用户名不能为空")
     @Max(value = 10, message = "真实用户名不能超过10个字符")
     private String username;
 
-    @Schema(description = "手机号", required = true)
+    @Schema(description = "手机号", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "真实用户名不能为空")
     @Pattern(regexp = "^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$", message = "手机号码不正确")
     private String phone;

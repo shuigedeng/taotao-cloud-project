@@ -38,9 +38,9 @@ public class RepeatCheckDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    @Schema(description = "字段值 邮箱 手机号 用户名", required = true)
+    @Schema(description = "字段值 邮箱 手机号 用户名", requiredMode = Schema.RequiredMode.REQUIRED)
     private String fieldVal;
 
-    @Schema(description = "指用户id 主要作用编辑情况过滤自己的校验", required = true)
+    @Schema(description = "指用户id 主要作用编辑情况过滤自己的校验", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer dataId;
 }

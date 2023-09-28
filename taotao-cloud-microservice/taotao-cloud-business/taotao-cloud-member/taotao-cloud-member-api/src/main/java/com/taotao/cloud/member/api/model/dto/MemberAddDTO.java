@@ -53,7 +53,7 @@ public class MemberAddDTO implements Serializable {
     private String password;
 
     @NotEmpty(message = "手机号码不能为空")
-    @Schema(description = "手机号码", required = true)
+    @Schema(description = "手机号码", requiredMode = Schema.RequiredMode.REQUIRED)
     @Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
     private String mobile;
 }

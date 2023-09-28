@@ -48,7 +48,7 @@ public class ManagerMemberEditDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = -7605952923416404638L;
 
-    @Schema(description = "会员用户名,用户名不能进行修改", required = true)
+    @Schema(description = "会员用户名,用户名不能进行修改", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "会员用户名不能为空")
     private String username;
 

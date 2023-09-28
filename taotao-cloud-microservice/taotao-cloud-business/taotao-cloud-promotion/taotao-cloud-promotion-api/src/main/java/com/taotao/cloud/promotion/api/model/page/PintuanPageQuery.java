@@ -40,7 +40,7 @@ public class PintuanPageQuery extends BasePromotionsSearchQuery {
     private String storeName;
 
     @NotEmpty(message = "活动名称不能为空")
-    @Schema(description = "活动名称", required = true)
+    @Schema(description = "活动名称", requiredMode = Schema.RequiredMode.REQUIRED)
     private String promotionName;
 
     // @Override
