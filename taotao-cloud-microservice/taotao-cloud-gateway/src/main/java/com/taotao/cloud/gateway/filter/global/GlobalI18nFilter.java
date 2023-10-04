@@ -49,7 +49,7 @@ public class GlobalI18nFilter implements GlobalFilter, Ordered {
         Locale locale = Locale.getDefault();
         if (language != null && !language.isEmpty()) {
             String[] split = language.split("_");
-            locale = new Locale(split[0], split[1]);
+            locale = Locale.of(split[0], split[1]);
         }
         LocaleContextHolder.setLocaleContext(new SimpleLocaleContext(locale), true);
 

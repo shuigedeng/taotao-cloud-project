@@ -23,8 +23,8 @@ import org.slf4j.LoggerFactory;
 public class SimpleAsyncExec {
 
     private static final SimpleAsyncExec inst = new SimpleAsyncExec();
-    private ExecutorService executor = Executors.newFixedThreadPool(5);
-    private static Logger logger = LoggerFactory.getLogger(SimpleAsyncExec.class);
+    private final ExecutorService executor = Executors.newFixedThreadPool(5);
+    private static final Logger logger = LoggerFactory.getLogger(SimpleAsyncExec.class);
 
     public static SimpleAsyncExec getInstance() {
         return inst;
