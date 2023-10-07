@@ -1,6 +1,6 @@
-# Contributing to Nacos
+# Contributing to taotao-cloud
 
-Welcome to Nacos! This document is a guideline about how to contribute to Nacos.
+Welcome to taotao-cloud! This document is a guideline about how to contribute to taotao-cloud.
 
 If you find something incorrect or missing, please leave comments / suggestions.
 
@@ -12,22 +12,22 @@ Please make sure to read and observe our [Code of Conduct](./CODE_OF_CONDUCT.md)
 
 ## Contributing
 
-Nacos welcome new participants of any role, including user, contributor, committer and PMC.
+taotao-cloud welcome new participants of any role, including user, contributor, committer and PMC.
 
 ![](http://acm-public.oss-cn-hangzhou.aliyuncs.com/contributor_definition.png)
 
 
-We encourage newcomers actively joining in Nacos projects and involving from user roles to committer roles, and even PMC roles. In order to accomplish this, new comers needs to actively contribute in Nacos project. The following paragraph introduce how to contribute in Nacos way.
+We encourage newcomers actively joining in taotao-cloud projects and involving from user roles to committer roles, and even PMC roles. In order to accomplish this, new comers needs to actively contribute in taotao-cloud project. The following paragraph introduce how to contribute in taotao-cloud way.
 
 #### Open / pickup an issue for preparation
 
-If you find a typo in a document, find a bug in code or want new features, or want to give suggestions, you can [open an issue on GitHub](https://github.com/alibaba/Nacos/issues/new) to report it.
+If you find a typo in a document, find a bug in code or want new features, or want to give suggestions, you can [open an issue on GitHub](https://github.com/alibaba/taotao-cloud/issues/new) to report it.
 
 If you just want to contribute directly you can choose the issue below.
 
--   [Contribution Welcome](https://github.com/alibaba/nacos/labels/contribution%20welcome): Heavily needed issue, but currently short of hand.
+-   [Contribution Welcome](https://github.com/alibaba/taotao-cloud/labels/contribution%20welcome): Heavily needed issue, but currently short of hand.
     
--   [good first issue](https://github.com/alibaba/nacos/labels/good%20first%20issue): Good for newcomers, newcomers can pick up one for warm-up.
+-   [good first issue](https://github.com/alibaba/taotao-cloud/labels/good%20first%20issue): Good for newcomers, newcomers can pick up one for warm-up.
     
 
 We strongly value documentation and integration with other projects such as Spring Cloud, Kubernetes, Dubbo, etc. We are very glad to work on any issue for these aspects.
@@ -106,7 +106,7 @@ Generally speaking, contribute 8 non-trivial patches and get at least three diff
 -   ability to write good code (last but certainly not least)
     
 
-A current committer nominates you by slacking the team on the Nacos issue with the label "nomination"
+A current committer nominates you by slacking the team on the taotao-cloud issue with the label "nomination"
 
 -   your first and last name
     
