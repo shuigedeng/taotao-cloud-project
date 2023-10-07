@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.taotao.cloud.gradle.plugin;
 
 import org.gradle.api.Plugin;
@@ -30,6 +31,8 @@ public class TaoTaoCloudPlugin implements Plugin<Project> {
 	@Override
 	public void apply(Project project) {
 		String name = project.getName();
+		Object version = project.getVersion();
+
 		if (name.contains("starter")) {
 			// System.out.println(project.getName());
 		}
