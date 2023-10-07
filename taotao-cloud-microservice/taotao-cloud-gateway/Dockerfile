@@ -64,6 +64,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+DisableExplicitGC \
                   -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UseZGC  \
+                  -XX:+ZGenerational  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
                   -XX:GuaranteedSafepointInterval=0  \
