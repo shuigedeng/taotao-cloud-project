@@ -95,7 +95,6 @@ stages:
       branch:
         include:
           - master
-          - dev
       event:
         include:
           - push
