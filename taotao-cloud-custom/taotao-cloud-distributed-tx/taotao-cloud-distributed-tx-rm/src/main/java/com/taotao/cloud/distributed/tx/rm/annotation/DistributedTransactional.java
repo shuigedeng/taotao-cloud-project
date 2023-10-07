@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedTransactional {
 
+
 	// 标识当前是全局事务的开启者
 	boolean isStart() default false;
 
