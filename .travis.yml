@@ -38,4 +38,5 @@ env:
 
 install: skip
 
-script: mvn clean install -DskipTests -q -Pitests
+#script: mvn clean install -DskipTests -q -Pitests
+script: gradle
