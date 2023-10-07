@@ -46,7 +46,7 @@
 //		disruptorTemplate.publishEvent(envent);
 //	}
 //
-//	@Scheduled(fixedDelay = 1000000)
+//	@Scheduled(fixedDelay = 10000000)
 //	public void send2() {
 //		DisruptorBindEvent envent = new DisruptorBindEvent(this, "message" + Math.random());
 //		envent.setEvent("Event-Output");
