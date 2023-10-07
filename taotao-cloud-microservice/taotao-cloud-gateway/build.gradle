@@ -76,6 +76,7 @@ mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
 description = "网关中心"
 archivesBaseName = 'taotao-cloud-gateway'
 
+
 //apache-shenyu网关中心配置
 //dependencies {
 //    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
