@@ -59,7 +59,6 @@ ips = open('c:\\000000_0.ips')
 file = ips.read()
 ips = file.split('\n')
 
-
 #
 # morning=datetime.datetime.strptime('2013-09-18 00:00:00','%Y-%m-%d %H:%M:%S')
 # evening=datetime.datetime.strptime('2013-09-18 23:59:59','%Y-%m-%d %H:%M:%S')
