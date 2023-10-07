@@ -588,7 +588,6 @@ services:
       retries: 3
       start_period: 40s
 
-
 networks:
   taotao-cluster-network:
     external: true
