@@ -21,11 +21,11 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.3、jdk21, 采用最新的SpringCloud Alibaba 2022.0.0、SpringCloud 2022.0.4、SpringBoot 3.1.4、SpringSecurity 6.1.4、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.4、jdk21, 采用最新的SpringCloud Alibaba 2022.0.0、SpringCloud 2022.0.4、SpringBoot 3.1.4、SpringSecurity 6.1.4、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
-目前支持Docker、k8s、ci/cd等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
+目前支持docker、docker-compose、k8s、github/jenkins ci/cd等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
 
 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
@@ -72,7 +72,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
-GRALE_VERSION >= 8.3
+GRALE_VERSION >= 8.4
 IDEA_VERSION >= 2023.2.2
 ```
 
