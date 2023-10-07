@@ -1,7 +1,7 @@
 # aliyun serverless 配置
 
 edition: 2023.11
-name: taotao-cloud-mall
+name: taotao-cloud-microservice
 access: default
 vars:
   region: cn-hangzhou
@@ -14,14 +14,14 @@ services:
       region: ${vars.region}
       # Define the AlibabaCloud FunctionCompute Service.
       service:
-        name: mall-admin
+        name: taotao-cloud-file
         internetAccess: true
         # Let the serverless-devs create a shared logstore automatically.
         # All FC services share the same logstore.
         logConfig: auto
       # Define the AlibabaCloud FunctionCompute Function.
       function:
-        name: mall-admin
+        name: taotao-cloud-file
         description: The mall project based on SpringBoot+MyBatis.
         caPort: 8080
         memorySize: 3072
