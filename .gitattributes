@@ -1,6 +1,7 @@
 # Auto detect text files and perform LF normalization
 *        text=auto
 
+
 *.cs     text diff=csharp eol=lf
 *.java   text diff=java eol=lf
 *.html   text diff=html eol=lf
