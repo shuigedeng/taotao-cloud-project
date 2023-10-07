@@ -98,7 +98,7 @@ buildscript {
 
         //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
         //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.15.0"
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.16.0"
     }
 }
 
