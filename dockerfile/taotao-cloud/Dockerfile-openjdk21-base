@@ -1,6 +1,6 @@
 FROM alpine:3.18.3
 
-LABEL maintainer=taotao981376577@qq.com
+LABEL maintainer=981376577@qq.com
 
 # 设置环境变量
 ENV TZ=Asia/Shanghai
