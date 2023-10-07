@@ -48,8 +48,7 @@ public class CustomDataGenerator {
 			}
 		}
 		JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
-		Dataset<Row> df = spark.sqlContext().read().json(jsc.parallelize(datas, 2));
-		return df;
+        return spark.sqlContext().read().json(jsc.parallelize(datas, 2));
 	}
 
 	public static Dataset<Row> getCustomDataset(int num, OpType opType, int age, String location,
