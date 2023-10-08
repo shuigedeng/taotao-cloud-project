@@ -201,6 +201,12 @@ allprojects {
     version project.taotaoCloudVersion
     group project.taotaoCloudGroup
 
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
     /* 指定jdk版本 */
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
