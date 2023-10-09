@@ -16,9 +16,9 @@ dependencies {
     implementation "org.apache.flink:flink-table-planner_2.12:1.17.1"
     implementation "org.apache.flink:flink-table-api-java-bridge:1.17.1"
 
-    implementation("org.apache.hudi:hudi-common:0.13.1")
-    implementation("org.apache.hudi:hudi-client:0.13.1")
-    implementation("org.apache.hudi:hudi-flink-client:0.13.1")
+    implementation("org.apache.hudi:hudi-common:0.14.0")
+    implementation("org.apache.hudi:hudi-client:0.14.0")
+    implementation("org.apache.hudi:hudi-flink-client:0.14.0")
 
     implementation 'org.slf4j:slf4j-api:2.0.9'
     implementation 'org.slf4j:slf4j-log4j12:2.0.9'
