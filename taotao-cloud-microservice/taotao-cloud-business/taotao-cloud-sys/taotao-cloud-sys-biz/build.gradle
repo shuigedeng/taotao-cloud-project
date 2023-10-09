@@ -41,7 +41,7 @@ dependencies {
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
     //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    implementation "com.googlecode.aviator:aviator:5.3.3"
+    implementation "com.googlecode.aviator:aviator:5.4.1"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
     implementation "com.google.protobuf:protobuf-java:3.24.4"
@@ -107,7 +107,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:0.9.5"
-    //implementation "com.alibaba:druid:1.2.18"
+    //implementation "com.alibaba:druid:1.2.20"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
