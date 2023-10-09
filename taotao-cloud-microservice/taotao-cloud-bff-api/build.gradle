@@ -1,4 +1,9 @@
+var apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
+        .findAll {it -> it.name.endsWith("-api")}
+
 dependencies {
+    implementation apiProjects
+
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"

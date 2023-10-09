@@ -52,7 +52,7 @@ ENV PYROSCOPE_PROFILING_INTERVAL=10ms
 ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
 ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
-ENV PYROSCOPE_LABELS="APP=taotao-cloud-monitor"
+ENV PYROSCOPE_LABELS="APP=taotao-cloud-auth"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
 ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889"

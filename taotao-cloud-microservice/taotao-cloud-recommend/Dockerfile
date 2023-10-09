@@ -2,24 +2,20 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-file-2023.11.jar ./
+ADD ./build/libs/taotao-cloud-recommend-2023.11.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-file-2023.11.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-recommend-2023.11.jar extract
 
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
-#使用healthcheck.sh
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
-ARG APP_NAME=taotao-cloud-file
+ARG APP_NAME=taotao-cloud-recommend
 ARG APP_VERSION=2023.11
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
-ARG APP_PORT=33339
+ARG APP_PORT=33333
 ARG APP_PRROFILES=dev
-ARG REQUEST_API_DOCS=1
+ARG REQUEST_API_DOCS=0
 
 LABEL application_name=${APP_NAME}
 LABEL application_version=${APP_VERSION}
@@ -56,10 +52,8 @@ ENV PYROSCOPE_PROFILING_INTERVAL=10ms
 ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
 ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
-ENV PYROSCOPE_LABELS="APP=taotao-cloud-file"
+ENV PYROSCOPE_LABELS="APP=taotao-cloud-recommend"
 #ENV PYROSCOPE_AUTH_TOKEN=info
-
-ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889"
 
 ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -Xss512k \
@@ -70,6 +64,7 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+DisableExplicitGC \
                   -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UseZGC  \
+                  -XX:+ZGenerational  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:-UseBiasedLocking \
                   -XX:GuaranteedSafepointInterval=0  \
@@ -113,10 +108,8 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-opens java.base/java.math=ALL-UNNAMED \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar \
                   -Dspring.profiles.active=${APP_PRROFILES} \
                   -javaagent:/skywalking/agent/skywalking-agent.jar "
-#在-Dspring.profiles.active上面加上开启远程debug  ${DEBUG_OPTIONS} \  不能同时使用Dskywalking
 
 USER root
 
@@ -143,8 +136,6 @@ VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
 
-EXPOSE 8889
-
 COPY --from=builder /root/dependencies/ ./
 RUN true
 COPY --from=builder /root/spring-boot-loader/ ./
@@ -159,14 +150,10 @@ RUN true
 #timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
 #retries: 3   #连续失败次数后报告不健康
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
+#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-#HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=30 CMD /bin/sh /healthcheck.sh
-
-#HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD curl --fail http://localhost:$EXPORTER_PORT || bash -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
-
-
-#能让容器重启
 HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
 
+#HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
