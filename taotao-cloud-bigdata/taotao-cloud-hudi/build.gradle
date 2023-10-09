@@ -22,10 +22,10 @@ dependencies {
 
     implementation "org.elasticsearch:elasticsearch-spark-30_2.13:8.10.2"
 
-    implementation("org.apache.hudi:hudi-common:0.13.1")
-    implementation("org.apache.hudi:hudi-client:0.13.1")
-    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.13.1")
-    implementation("org.apache.hudi:hudi-spark3.3-bundle_2.12:0.13.1")
+    implementation("org.apache.hudi:hudi-common:0.14.0")
+    implementation("org.apache.hudi:hudi-client:0.14.0")
+    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:0.14.0")
+    implementation("org.apache.hudi:hudi-spark3.3-bundle_2.12:0.14.0")
 
     implementation("org.apache.hadoop:hadoop-common:3.3.6")
     implementation("org.apache.hadoop:hadoop-client:3.3.6")
