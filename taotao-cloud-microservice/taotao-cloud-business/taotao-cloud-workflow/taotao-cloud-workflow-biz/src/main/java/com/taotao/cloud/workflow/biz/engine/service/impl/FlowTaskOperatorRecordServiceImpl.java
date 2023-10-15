@@ -19,6 +19,7 @@ package com.taotao.cloud.workflow.biz.engine.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.taotao.cloud.workflow.biz.common.util.RandomUtil;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorRecordEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowRecordEnum;
@@ -48,7 +49,7 @@ public class FlowTaskOperatorRecordServiceImpl
     public List<FlowTaskOperatorRecordEntity> getRecordList(String taskId, List<Integer> handleStatus) {
         QueryWrapper<FlowTaskOperatorRecordEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskId, taskId);
-        if (handleStatus.size() > 0) {
+        if (!handleStatus.isEmpty()) {
             queryWrapper.lambda().in(FlowTaskOperatorRecordEntity::getHandleStatus, handleStatus);
         }
         queryWrapper.lambda().orderByDesc(FlowTaskOperatorRecordEntity::getHandleTime);
@@ -83,7 +84,7 @@ public class FlowTaskOperatorRecordServiceImpl
 
     @Override
     public void updateStatus(Set<String> taskNodeId, String taskId) {
-        if (taskNodeId.size() > 0) {
+        if (!taskNodeId.isEmpty()) {
             UpdateWrapper<FlowTaskOperatorRecordEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().in(FlowTaskOperatorRecordEntity::getTaskNodeId, taskNodeId);
             updateWrapper.lambda().eq(FlowTaskOperatorRecordEntity::getTaskId, taskId);
@@ -105,7 +106,7 @@ public class FlowTaskOperatorRecordServiceImpl
 
     @Override
     public void updateStatus(List<String> idAll) {
-        if (idAll.size() > 0) {
+        if (!idAll.isEmpty()) {
             UpdateWrapper<FlowTaskOperatorRecordEntity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.lambda().in(FlowTaskOperatorRecordEntity::getId, idAll);
             updateWrapper.lambda().set(FlowTaskOperatorRecordEntity::getStatus, FlowRecordEnum.revoke.getCode());
