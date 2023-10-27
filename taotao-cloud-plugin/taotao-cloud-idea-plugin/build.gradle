@@ -26,7 +26,7 @@ intellij {
     //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
 
     //<!-- 插件版本 -->
-    version = "2021.3"
+    version = "2023.2"
     type = "IC"
 
     // 各种版本去这里找
@@ -50,10 +50,10 @@ patchPluginXml {
 
     //最低支持的版本 当前插件的起止 IDE 版本支持
     //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
-    sinceBuild.set("213")
+    sinceBuild.set("232")
 
     //最高支持的版本，不能不设置，不设置是默认为 project.version
-    untilBuild.set("223.*")
+    untilBuild.set("232.*")
 }
 
 // https://plugins.jetbrains.com/docs/intellij/plugin-signing.html

@@ -146,11 +146,11 @@ plugins {
 
     //此插件在构建期间生成 json OpenAPI 描述
     // https://plugins.gradle.org/plugin/org.springdoc.openapi-gradle-plugin
-    id "org.springdoc.openapi-gradle-plugin" version "1.7.0"
+    id "org.springdoc.openapi-gradle-plugin" version "1.8.0"
 
     //smart-doc gradle 插件
-    // https://plugins.gradle.org/plugin/com.github.shalousun.smart-doc
-    id "com.github.shalousun.smart-doc" version "2.7.7"
+    // https://plugins.gradle.org/plugin/com.ly.smart-doc
+    id "com.ly.smart-doc" version "3.0.0"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
@@ -190,7 +190,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.9.27'
+    id 'org.graalvm.buildtools.native' version '0.9.28'
 
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.qqviaja.gradle.MybatisGenerator

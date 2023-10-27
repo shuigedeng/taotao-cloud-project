@@ -38,7 +38,7 @@ subprojects {
 
         testImplementation("io.github.shuigedeng:taotao-cloud-starter-test"){
             exclude group: "org.mybatis.spring.boot", module: "mybatis-spring-boot-starter-test"
-            exclude group: "com.baomidou", module: "mybatis-plus-boot-starter-test"
+            exclude group: "com.baomidou", module: "mybatis-plus-spring-boot3-starter-test"
         }
 
         implementation "org.projectlombok:lombok"

@@ -16,7 +16,6 @@ server:
     application-display-name: ${spring.application.name}
     #context-path: sys
 
-
 jasypt:
   encryptor:
     password: ${TAOTAO_CLOUD_ENCRYPTOR_PASSWORD:taotao-cloud}     # 指定加密密钥，生产环境请放到启动参数里面  -Djasypt.encryptor.password=your-secret

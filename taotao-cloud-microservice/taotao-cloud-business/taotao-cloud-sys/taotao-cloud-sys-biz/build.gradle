@@ -122,6 +122,15 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
+
+        //implementation('com.alibaba:fastjson'){
+        //    version{
+        //        strictly("1.2.12")
+        //    }
+        //}
+        //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
+        //implementation 'com.alibaba:fastjson:1.2.29!!!'
+
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.10.1'
@@ -136,6 +145,26 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "commons-logging", module: "commons-logging"
     }
+}
+
+// 构建 zip 压缩包，包含启动脚本 bin 目录和 配置文件 conf 目录
+task packageZip(type: Zip) {
+    archiveFileName = "${project.name}-${project.version}.zip"
+    destinationDirectory = file("${project.buildDir}")
+
+    from("${project.projectDir}/src/main/bin") {
+        into "bin"
+    }
+    from("${project.buildDir}/resources/main/conf") {
+        into "conf"
+    }
+
+    from("${project.buildDir}/libs/${project.name}-${project.version}.jar") {
+        into "lib"
+    }
+    // 表示此任务的运行依赖其它 子任务。
+    dependsOn bootJar
+    dependsOn build
 }
 
 //nativeBuild {
