@@ -231,6 +231,37 @@ spring:
   #      name: admin
   #      password: 123456
   datasource:
+    dynamic:
+      # 指定默认数据源
+      primary: mysql
+      # true：找不到数据源报错
+      strict: false
+      datasource:
+        mysql:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+          username: root
+          password: 111
+        mysql-master:
+          url: jdbc:mysql://ip:3306/test?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&useAffectedRows=true&serverTimezone=Asia/Shanghai
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: 账号
+          password: 密码
+        mysql-slave:
+          url: jdbc:mysql://ip:3306/test1?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&useAffectedRows=true&serverTimezone=Asia/Shanghai
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: 账号
+          password: 密码
+        pgsql:
+          driver-class-name: org.postgresql.Driver
+          url: jdbc:postgresql://localhost:5432/postgres
+          username: postgres
+          password: 111
+        doris:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://<doris-server-ip>:9030/example_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&nuLlCatalogMeansCurrent=true
+          username: root
+          password: 111
     #mysql主数据源，可关联mybatis
     mysql:
       url: jdbc:mysql://127.0.0.1:3306/aip?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&rewriteBatchedStatements=true
@@ -403,6 +434,7 @@ mybatis-plus:
       update-strategy: not_null
       where-strategy: not_empty
   configuration:
+    #驼峰形式显示
     map-underscore-to-camel-case: true
     cache-enabled: false
     # 日志打印参数class

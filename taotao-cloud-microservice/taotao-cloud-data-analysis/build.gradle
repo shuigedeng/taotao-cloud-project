@@ -1,51 +1,35 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-common"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
-
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
-    //implementation "org.springframework.boot:spring-boot-starter-security"
-    //implementation "org.springframework.boot:spring-boot-starter-mail"
-
-    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
-
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-disruptor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
-    implementation "org.springframework.boot:spring-boot-autoconfigure"
 
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-aop"
-    implementation "org.springframework.boot:spring-boot-starter-json"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
+    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-data-jdbc"
-
-    implementation "com.mysql:mysql-connector-j"
-
-    //https://search.maven.org/artifact/com.baomidou/mybatis-plus-boot-starter
-    implementation "com.baomidou:mybatis-plus-boot-starter:3.5.3.2"
-    //https://search.maven.org/artifact/com.alibaba/druid-spring-boot-starter
-    implementation 'com.alibaba:druid-spring-boot-starter:1.2.20'
-    implementation 'com.alibaba:druid-spring-boot-3-starter:1.2.20'
+    //https://search.maven.org/artifact/ru.yandex.clickhouse/clickhouse-jdbc
+    implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
+    //https://search.maven.org/artifact/io.trino/trino-jdbc
+    implementation "io.trino:trino-jdbc:429"
+    implementation "io.trino:trino-spi:429"
+    implementation "io.trino:trino-main:429"
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
     //implementation "org.antlr:antlr4-runtime:4.11.1"
 
-    //https://search.maven.org/artifact/ru.yandex.clickhouse/clickhouse-jdbc
-    implementation "ru.yandex.clickhouse:clickhouse-jdbc:0.3.2"
-
-    //https://search.maven.org/artifact/io.trino/trino-jdbc
-    implementation "io.trino:trino-jdbc:427"
-    implementation "io.trino:trino-spi:427"
-    implementation "io.trino:trino-main:427"
     //https://search.maven.org/artifact/io.airlift/slice
     implementation "io.airlift:slice:2.2"
     //https://search.maven.org/artifact/io.airlift/units
@@ -64,13 +48,13 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-configurations {
-    compile.exclude group: "org.springframework.security.oauth", module: "spring-security-oauth2"
-    compile.exclude group: "org.slf4j", module: "slf4j-log4j12"
-    compile.exclude group: "org.springframework.security", module: "spring-security-core"
-}
+//configurations {
+//    compile.exclude group: "org.springframework.security.oauth", module: "spring-security-oauth2"
+//    compile.exclude group: "org.slf4j", module: "slf4j-log4j12"
+//    compile.exclude group: "org.springframework.security", module: "spring-security-core"
+//}
 
-mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
+mainClassName = "com.taotao.cloud.data.analysis.TaoTaoCloudDataAnalysisApplication"
 description = "数据分析中心"
-archivesBaseName = 'taotao-cloud-sync'
+archivesBaseName = 'taotao-cloud-data-analysis'
 
