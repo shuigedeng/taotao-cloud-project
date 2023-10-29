@@ -56,7 +56,12 @@
 	<!-- 当前插件依赖的其他插件的id  插件所依赖的其他插件的id-->
 	<depends>com.intellij.modules.lang</depends>
 	<depends>com.intellij.modules.platform</depends>
-	<!--<depends>com.intellij.modules.java</depends>-->
+	<depends>com.intellij.java</depends>
+	<depends>com.intellij.database</depends>
+	<depends>com.intellij.spring</depends>
+	<depends>com.intellij.spring.boot</depends>
+	<depends>org.jetbrains.plugins.yaml</depends>
+	<depends>org.intellij.intelliLang</depends>
 	<!--<depends>com.intellij.properties</depends>-->
 	<!--<depends>org.jetbrains.plugins.yaml</depends>-->
 	<!--<depends>org.intellij.intelliLang</depends>-->
@@ -143,5 +148,22 @@
 		<runAnything.executionProvider id="runAnythingExecutionProvider"
 			implementation="com.taotao.cloud.idea.plugin.extensions.runanything.RunAnythingToolkitProvider"/>
 	</extensions>
+
+	<actions>
+		<group id="com.taotao.cloud.idea.plugin.converter.generate.group" popup="true">
+			<separator/>
+			<!-- Add your actions here -->
+			<action id="com.taotao.cloud.idea.plugin.converter.action.generator" class="com.taotao.cloud.idea.plugin.converter.action.ConvertGeneratorAction" text="Smart Converter" description="Smart Converter">
+				<keyboard-shortcut keymap="$default" first-keystroke="shift meta N"/>
+			</action>
+			<add-to-group group-id="GenerateGroup" anchor="last"/>
+		</group>
+	</actions>
+
+	<actions>
+		<action id="genCopyMethod" class="com.taotao.cloud.idea.plugin.actions.BeanConvertAction" text="genCopyMethod" description="genCopyMethod">
+			<add-to-group group-id="GenerateGroup" anchor="last"/>
+		</action>
+	</actions>
 
 </idea-plugin>

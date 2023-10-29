@@ -27,7 +27,7 @@ intellij {
 
     //<!-- 插件版本 -->
     version = "2023.2"
-    type = "IC"
+    type = "IU"
 
     // 各种版本去这里找
     // https://www.jetbrains.com/intellij-repository/releases
@@ -37,6 +37,13 @@ intellij {
     // 其中191.0表示2019.1月发布的版本，0表示无限大的版本
     updateSinceUntilBuild = false
     downloadSources = true
+
+    plugins = ['com.intellij.java',
+               'com.intellij.database' ,
+               'com.intellij.spring' ,
+               'com.intellij.spring.boot' ,
+               'org.jetbrains.plugins.yaml' ,
+               'org.intellij.intelliLang']
 }
 
 patchPluginXml {
