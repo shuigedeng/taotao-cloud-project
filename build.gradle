@@ -94,7 +94,7 @@ buildscript {
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
-        classpath "com.guardsquare:proguard-gradle:7.3.2"
+        classpath "com.guardsquare:proguard-gradle:7.4.0"
 
         //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
         //https://plugins.gradle.org/plugin/org.jetbrains.intellij

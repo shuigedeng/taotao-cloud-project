@@ -36,7 +36,7 @@ dependencies {
     implementation 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
 
     //https://search.maven.org/artifact/org.springframework.amqp/spring-amqp
-    implementation "org.springframework.amqp:spring-amqp:3.0.9"
+    implementation "org.springframework.amqp:spring-amqp:3.0.10"
 
     //松鼠状态机 https://github.com/hekailiang/squirrel
     //https://search.maven.org/artifact/org.squirrelframework/squirrel-foundation
