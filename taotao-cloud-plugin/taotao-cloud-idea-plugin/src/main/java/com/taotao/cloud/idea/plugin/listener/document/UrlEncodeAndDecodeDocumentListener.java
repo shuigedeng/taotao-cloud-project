@@ -1,11 +1,14 @@
 package com.taotao.cloud.idea.plugin.listener.document;
 
-import org.dromara.hutoolcore.util.URLUtil;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.ui.EditorTextField;
+import com.intellij.util.io.URLUtil;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import org.apache.commons.lang3.StringUtils;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 public class UrlEncodeAndDecodeDocumentListener implements DocumentListener {
 
@@ -28,9 +31,9 @@ public class UrlEncodeAndDecodeDocumentListener implements DocumentListener {
 		}
 		String result;
 		if (ToolkitCommand.URLEncode.equals(command)) {
-			result = URLUtil.encode(text);
+			result = URLEncoder.encode(text);
 		} else {
-			result = URLUtil.decode(text);
+			result = URLDecoder.decode(text);
 		}
 		this.resultTextField.setText(result);
 	}

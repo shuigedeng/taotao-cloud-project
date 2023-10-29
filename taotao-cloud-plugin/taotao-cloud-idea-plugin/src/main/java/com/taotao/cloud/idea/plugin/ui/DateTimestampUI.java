@@ -1,6 +1,5 @@
 package com.taotao.cloud.idea.plugin.ui;
 
-import org.dromara.hutoolcore.date.DateTime;
 import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.EditorSettings;
 import com.intellij.openapi.fileTypes.FileTypes;
@@ -12,6 +11,8 @@ import com.intellij.ui.LanguageTextField;
 import com.taotao.cloud.idea.plugin.domain.ToolkitCommand;
 import com.taotao.cloud.idea.plugin.listener.action.CopyContentActionListener;
 import com.taotao.cloud.idea.plugin.listener.document.DateTimestampDocumentListener;
+import org.dromara.hutool.core.date.DateTime;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 

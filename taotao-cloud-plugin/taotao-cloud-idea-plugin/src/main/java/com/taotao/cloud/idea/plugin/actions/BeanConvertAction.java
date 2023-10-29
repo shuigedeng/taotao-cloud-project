@@ -1,4 +1,4 @@
-package com.taotao.cloud.idea.plugin;
+package com.taotao.cloud.idea.plugin.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -10,7 +10,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
-import com.intellij.psi.impl.source.PsiClassImpl;
 import com.intellij.psi.impl.source.PsiClassReferenceType;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -37,9 +36,6 @@ public class BeanConvertAction extends AnAction {
 		});
 	}
 
-	//((PsiClassReferenceType) returnClassType).getParameters()[0]
-//    ((PsiClassReferenceType) returnType).resolve().getAllFields()[3].getType().getCanonicalText():T
-//            ((PsiClassReferenceType) returnType).getReference().getTypeParameters()[0].getInternalCanonicalText()  UserVO全拼
 	private void beanConvert(PsiMethod psiMethod) {
 		PsiType returnType = psiMethod.getReturnType();
 		if (returnType == null) {
@@ -360,7 +356,7 @@ public class BeanConvertAction extends AnAction {
 		if (elementAt == null) {
 			return null;
 		}
-		return PsiTreeUtil.getParentOfType(elementAt, GeneratePsiMethod.class);
+		return PsiTreeUtil.getParentOfType(elementAt, PsiMethod.class);
 	}
 
 	private PsiElement getPsiElement(AnActionEvent e) {
