@@ -31,7 +31,6 @@ import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.biz.model.convert.UserConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import com.taotao.cloud.third.client.support.retrofit.model.Person;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

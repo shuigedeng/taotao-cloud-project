@@ -57,7 +57,7 @@ public class PromotionPriceUtil {
         }
 
         // 计算总金额
-        BigDecimal totalPrice = 0D;
+        BigDecimal totalPrice = BigDecimal.ZERO;
         for (BigDecimal value : skuPromotionDetail.values()) {
             totalPrice = CurrencyUtils.add(totalPrice, value);
         }
@@ -93,7 +93,7 @@ public class PromotionPriceUtil {
         Integer count = skuPromotionDetail.size();
 
         // 已优惠金额
-        BigDecimal deducted = 0D;
+        BigDecimal deducted = BigDecimal.ZERO;
         for (String skuId : skuPromotionDetail.keySet()) {
             // 获取对应商品进行计算
             for (CartSkuVO cartSkuVO : skuVOList) {
@@ -101,7 +101,7 @@ public class PromotionPriceUtil {
                     count--;
 
                     // sku 优惠金额
-                    BigDecimal skuDiscountPrice = 0d;
+                    BigDecimal skuDiscountPrice = BigDecimal.ZERO;
                     // 非最后一个商品，则按照比例计算
                     if (count > 0) {
                         // 商品金额占比
