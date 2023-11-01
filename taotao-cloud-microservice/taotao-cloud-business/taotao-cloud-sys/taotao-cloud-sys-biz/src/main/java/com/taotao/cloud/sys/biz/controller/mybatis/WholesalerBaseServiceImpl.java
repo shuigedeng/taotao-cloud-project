@@ -1,5 +1,4 @@
 import com.taotao.cloud.sys.biz.controller.mybatis.WholesalerBase;
-import com.taotao.cloud.third.client.support.retrofit.model.Person;
 import lombok.SneakyThrows;
 import org.apache.ibatis.session.SqlSession;
 

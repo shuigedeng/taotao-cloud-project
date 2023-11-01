@@ -69,11 +69,11 @@ public class CartPriceRender implements ICartRenderStep {
      */
     void buildCartPrice(TradeDTO tradeDTO) {
         // 购物车列表
-        List<CartVO> cartVOS = tradeDTO.getCartList();
+        List<CartVO> cartVos = tradeDTO.getCartList();
 
-        cartVOS.forEach(cartVO -> {
-            cartVO.getPriceDetailDTO()
-                    .accumulationPriceDTO(cartVO.getCheckedSkuList().stream()
+		cartVos.forEach(cartVo -> {
+			cartVo.getPriceDetailDTO()
+                    .accumulationPriceDTO(cartVo.getCheckedSkuList().stream()
                             .filter(CartSkuVO::getChecked)
                             .map(CartSkuVO::getPriceDetailDTO)
                             .toList());
