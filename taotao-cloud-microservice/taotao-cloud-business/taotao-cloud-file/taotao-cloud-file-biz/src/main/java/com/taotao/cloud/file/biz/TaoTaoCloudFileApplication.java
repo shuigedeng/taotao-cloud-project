@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.file.biz;
 
-import cn.xuyanwu.spring.file.storage.spring.EnableFileStorage;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.file.biz.properties.TestProperties;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.dromara.x.file.storage.spring.EnableFileStorage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 

@@ -3,14 +3,14 @@ package com.taotao.cloud.file.biz.filestorage.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
-import cn.xuyanwu.spring.file.storage.FileInfo;
-import cn.xuyanwu.spring.file.storage.recorder.FileRecorder;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.file.biz.filestorage.mapper.FileDetailMapper;
 import com.taotao.cloud.file.biz.filestorage.model.FileDetail;
 import lombok.SneakyThrows;
+import org.dromara.x.file.storage.core.FileInfo;
+import org.dromara.x.file.storage.core.recorder.FileRecorder;
 import org.springframework.stereotype.Service;
 
 /**
