@@ -1,12 +1,12 @@
 package com.taotao.cloud.file.biz.filestorage.aspect;
 
 import cn.hutool.core.util.ArrayUtil;
-import cn.xuyanwu.spring.file.storage.FileInfo;
-import cn.xuyanwu.spring.file.storage.UploadPretreatment;
-import cn.xuyanwu.spring.file.storage.aspect.*;
-import cn.xuyanwu.spring.file.storage.platform.FileStorage;
-import cn.xuyanwu.spring.file.storage.recorder.FileRecorder;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.x.file.storage.core.FileInfo;
+import org.dromara.x.file.storage.core.UploadPretreatment;
+import org.dromara.x.file.storage.core.aspect.*;
+import org.dromara.x.file.storage.core.platform.FileStorage;
+import org.dromara.x.file.storage.core.recorder.FileRecorder;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -24,7 +24,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
 	 * 上传，成功返回文件信息，失败返回 null
 	 */
 	@Override
-	public FileInfo uploadAround(UploadAspectChain chain,FileInfo fileInfo,UploadPretreatment pre,FileStorage fileStorage,FileRecorder fileRecorder) {
+	public FileInfo uploadAround(UploadAspectChain chain, FileInfo fileInfo, UploadPretreatment pre, FileStorage fileStorage, FileRecorder fileRecorder) {
 		log.info("上传文件 before -> {}",fileInfo);
 		fileInfo = chain.next(fileInfo,pre,fileStorage,fileRecorder);
 		log.info("上传文件 after -> {}",fileInfo);
@@ -35,7 +35,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
 	 * 删除文件，成功返回 true
 	 */
 	@Override
-	public boolean deleteAround(DeleteAspectChain chain,FileInfo fileInfo,FileStorage fileStorage,FileRecorder fileRecorder) {
+	public boolean deleteAround(DeleteAspectChain chain, FileInfo fileInfo, FileStorage fileStorage, FileRecorder fileRecorder) {
 		log.info("删除文件 before -> {}",fileInfo);
 		boolean res = chain.next(fileInfo,fileStorage,fileRecorder);
 		log.info("删除文件 after -> {}",res);
@@ -46,7 +46,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
 	 * 文件是否存在
 	 */
 	@Override
-	public boolean existsAround(ExistsAspectChain chain,FileInfo fileInfo,FileStorage fileStorage) {
+	public boolean existsAround(ExistsAspectChain chain, FileInfo fileInfo, FileStorage fileStorage) {
 		log.info("文件是否存在 before -> {}",fileInfo);
 		boolean res = chain.next(fileInfo,fileStorage);
 		log.info("文件是否存在 after -> {}",res);
@@ -57,7 +57,7 @@ public class LogFileStorageAspect implements FileStorageAspect {
 	 * 下载文件
 	 */
 	@Override
-	public void downloadAround(DownloadAspectChain chain,FileInfo fileInfo,FileStorage fileStorage,Consumer<InputStream> consumer) {
+	public void downloadAround(DownloadAspectChain chain, FileInfo fileInfo, FileStorage fileStorage, Consumer<InputStream> consumer) {
 		log.info("下载文件 before -> {}",fileInfo);
 		chain.next(fileInfo,fileStorage,consumer);
 		log.info("下载文件 after -> {}",fileInfo);
