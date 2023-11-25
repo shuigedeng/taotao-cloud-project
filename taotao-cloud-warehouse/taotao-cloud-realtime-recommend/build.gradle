@@ -16,7 +16,7 @@ dependencies {
     implementation "net.sf.barcode4j:barcode4j:2.1"
     implementation "org.jsoup:jsoup:1.16.1"
     implementation 'io.netty:netty-all'
-    implementation "org.apache.commons:commons-lang3:3.13.0"
+    implementation "org.apache.commons:commons-lang3:3.14.0"
     implementation 'redis.clients:jedis:4.4.5'
 
     //需要在自己本地安装jar包
