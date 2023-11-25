@@ -30,10 +30,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
 
-    implementation 'org.springframework.session:spring-session-data-redis:3.1.2'
+    implementation 'org.springframework.session:spring-session-data-redis:3.2.0'
 
-    implementation 'com.github.binarywang:weixin-java-mp:4.5.5.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.5.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.5.6.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.6.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -42,7 +42,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/bootstrap
     implementation "org.webjars:bootstrap:5.3.2"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
-    implementation "org.webjars:webjars-locator-core:0.54"
+    implementation "org.webjars:webjars-locator-core:0.55"
     implementation 'org.webjars:animate.css:3.7.2'
     implementation 'org.webjars:font-awesome:6.4.2'
     implementation 'org.webjars:jquery-backstretch:2.1.16'
@@ -72,15 +72,14 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-jose"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    //https://search.maven.org/artifact/org.springframework.security/spring-security-oauth2-authorization-server
-    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.1.3'
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
 
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.37"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.37.1"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:11.5"
+    implementation "com.nimbusds:oauth2-oidc-sdk:11.6"
 
     implementation "org.apache.commons:commons-collections4"
 

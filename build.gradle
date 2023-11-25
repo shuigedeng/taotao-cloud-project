@@ -25,7 +25,7 @@ buildscript {
         taotaoCloudVersion = version
         taotaoCloudGroup = "io.github.shuigedeng"
 
-        springBootVersion = "3.1.5"
+        springBootVersion = "3.2.0"
         querydslAptVersion = "5.0.0"
         mapstructProcessorVersion = "1.6.0.Beta1"
         lombokMapstructBindingVersion = "0.2.0"
@@ -154,7 +154,7 @@ plugins {
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
-    id "org.owasp.dependencycheck" version "8.4.2"
+    id "org.owasp.dependencycheck" version "9.0.0"
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
@@ -172,7 +172,7 @@ plugins {
     // 我们对 Spring 平台和第三方库持固执己见的看法，
     // 大多数 Spring Boot 应用程序只需要很少的 Spring 配置
     //https://plugins.gradle.org/plugin/org.springframework.boot
-    id "org.springframework.boot" version "3.1.5"
+    id "org.springframework.boot" version "3.2.0"
 
     //一个 Gradle 插件，提供类似 Maven 的依赖管理功能
     //https://plugins.gradle.org/plugin/io.spring.dependency-management

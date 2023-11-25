@@ -44,9 +44,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.4.1"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:3.25.0"
+    implementation "com.google.protobuf:protobuf-java:3.25.1"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:3.25.0"
+    implementation "com.google.protobuf:protobuf-java-util:3.25.1"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
@@ -65,12 +65,12 @@ dependencies {
     implementation 'org.apache.velocity:velocity-engine-core:2.3'
 
     //https://search.maven.org/artifact/org.freemarker/freemarker
-    implementation 'org.freemarker:freemarker:2.3.32'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
 
-    implementation 'com.github.oshi:oshi-core:6.4.6'
+    implementation 'com.github.oshi:oshi-core:6.4.7'
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-cloud-starter-apt")

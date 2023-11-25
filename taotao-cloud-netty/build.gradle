@@ -5,8 +5,8 @@ apply plugin: "com.google.protobuf"
 dependencies {
     implementation(
             "io.netty:netty-all",
-            "com.google.protobuf:protobuf-java:3.25.0",
-            "com.google.protobuf:protobuf-java-util:3.25.0",
+            "com.google.protobuf:protobuf-java:3.25.1",
+            "com.google.protobuf:protobuf-java-util:3.25.1",
             "org.apache.thrift:libthrift:0.19.0",
             "io.grpc:grpc-netty:1.59.0",
             "io.grpc:grpc-protobuf:1.59.0",
@@ -24,7 +24,7 @@ protobuf {
     //指定protoc编译器位置 在 protoc 模块下，可以指定多个配置，但是会以最后一个配置为准。
     protoc {
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:3.25.0"
+        artifact = "com.google.protobuf:protoc:3.25.1"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
