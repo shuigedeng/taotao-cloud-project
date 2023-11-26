@@ -22,6 +22,7 @@ import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfigu
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import reactor.netty.ReactorNetty;
 
 /**
  * 网关系统中心
@@ -41,6 +42,10 @@ public class TaoTaoCloudGatewayApplication {
 	public static void main(String[] args) {
 
 		PropertyUtils.setDefaultProperty("taotao-cloud-gateway");
+
+		//可以减少connection timed错误 可以提升20%左右的qpc
+		System.setProperty(ReactorNetty.IO_SELECT_COUNT, "1");
+		//System.setProperty(ReactorNetty.IO_WORKER_COUNT, "1");
 
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class).run( args);
