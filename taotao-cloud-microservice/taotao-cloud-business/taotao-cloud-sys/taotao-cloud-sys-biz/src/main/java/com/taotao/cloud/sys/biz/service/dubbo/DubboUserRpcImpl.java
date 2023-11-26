@@ -38,7 +38,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboUserRpc.class, validation = "true")
-public class DubboUserRpcImpl extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+public class DubboUserRpcImpl extends BaseSuperServiceImpl< User, Long,IUserMapper, UserRepository, IUserRepository>
         implements IDubboUserRpc {
 
     private static final QUser USER = QUser.user;

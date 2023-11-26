@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
  * @since 1.0
  */
 @Service
-public class DeptServiceImpl extends BaseSuperServiceImpl<IDeptMapper, Dept, DeptRepository, IDeptRepository, Long>
+public class DeptServiceImpl extends BaseSuperServiceImpl< Dept, Long,IDeptMapper, DeptRepository, IDeptRepository>
 	implements IDeptService {
 
 	@Override

@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.QueryRewriter;
@@ -28,7 +29,7 @@ import org.springframework.data.jpa.repository.QueryRewriter;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IDictRepository extends JpaRepository<Dict, Long>, QueryRewriter {
+public interface IDictRepository extends BaseInterfaceSuperRepository<Dict, Long>, QueryRewriter {
 
 	@Override
 	default String rewrite(String query, Sort sort) {

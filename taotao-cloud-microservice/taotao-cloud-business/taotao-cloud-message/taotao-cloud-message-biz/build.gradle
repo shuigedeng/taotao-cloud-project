@@ -26,7 +26,7 @@ dependencies {
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    implementation 'com.alipay.sdk:alipay-sdk-java:4.38.90.ALL'
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.38.149.ALL'
 
     implementation "com.github.binarywang:weixin-java-cp:4.5.6.B"
     implementation "com.github.binarywang:weixin-java-miniapp:4.5.6.B"
@@ -36,19 +36,19 @@ dependencies {
     implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.1.5'
 
 //    implementation 'org.apache.flink:flink-connector-rabbitmq:1.15.1'
-//    implementation "org.apache.flink:flink-connector-kafka_2.11:1.14.3"
+//    implementation "org.apache.flink:flink-connector-kafka_2.11:3.0.1-1.18"
 //    implementation "org.apache.flink:flink-clients_2.11:1.14.3"
 //    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
 //    implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
     implementation "com.xuxueli:xxl-job-core:2.4.0"
-    implementation 'de.siegmar:logback-gelf:4.0.2'
+    implementation 'de.siegmar:logback-gelf:5.0.0'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'com.sun.mail:javax.mail:1.6.2'
-    implementation 'cn.monitor4all:log-record-starter:1.5.0'
+    implementation 'cn.monitor4all:log-record-starter:1.5.1'
     implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.2.12'
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:4.0.11'
     implementation "com.alibaba.fastjson2:fastjson2:2.0.42"
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'com.google.guava:guava:32.1.3-jre'
     implementation 'org.dromara.hutool:hutool-all'
     implementation 'com.mysql:mysql-connector-j'

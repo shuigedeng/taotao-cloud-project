@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @DubboService(interfaceClass = IDubboRegionRpc.class, validation = "true")
 public class DubboRegionRpcImpl
-        extends BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
+        extends BaseSuperServiceImpl< Region, Long,IRegionMapper, RegionRepository, IRegionRepository>
         implements IDubboRegionRpc {
 
     private final OkHttpService okHttpService;

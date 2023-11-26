@@ -27,9 +27,9 @@ import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.BaseSuperController;
 import com.taotao.cloud.web.utils.CollectionUtil;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Collection;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,7 +64,7 @@ public class ManagerDictController
     }
 
     @PostMapping("/del")
-    @ApiOperation(value = "字典删除", notes = "字典删除")
+    @Operation(summary= "字典删除")
     // @ApiImplicitParams({
     //	@ApiImplicitParam(name = "ids", required = true, value = "多个用,号隔开", paramType = "form")
     // })

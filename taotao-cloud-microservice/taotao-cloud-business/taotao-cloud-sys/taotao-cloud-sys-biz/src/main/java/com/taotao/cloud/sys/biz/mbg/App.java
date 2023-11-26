@@ -1,7 +1,6 @@
 package com.taotao.cloud.sys.biz.mbg;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Generated;
 import java.io.Serializable;
 import java.time.LocalDateTime;

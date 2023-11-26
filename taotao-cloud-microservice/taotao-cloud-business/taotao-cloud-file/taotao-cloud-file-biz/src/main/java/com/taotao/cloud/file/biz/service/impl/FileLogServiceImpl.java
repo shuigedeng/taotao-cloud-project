@@ -31,7 +31,7 @@ import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
  * @since 2020/11/12 17:43
  */
 //@Service
-public class FileLogServiceImpl extends BaseSuperServiceImpl<IFileLogMapper, FileLog, FileLogRepository, IFileLogRepository, Long>
+public class FileLogServiceImpl extends BaseSuperServiceImpl< FileLog, Long, IFileLogMapper,FileLogRepository, IFileLogRepository>
         implements IFileLogService {
 
 }

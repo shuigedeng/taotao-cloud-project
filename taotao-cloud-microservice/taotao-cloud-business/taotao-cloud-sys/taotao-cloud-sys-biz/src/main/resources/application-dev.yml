@@ -403,6 +403,12 @@ rocketmq:
     #secret-key:    # 阿里云购买的rocketmq
 
 spring:
+  threads:
+    virtual:
+      #1.Tomcat将使用虚拟线程来处理HTTP请求。这意味着处理Web请求的应用程序代码（例如控制器中的方法）将在虚拟线程上运行。
+      #2.调用@Async方法时，SpringMVC的异步请求处理和SpringWebFlux的阻塞执行支持现在将利用虚拟线程
+      #3.标记有@Scheduled的方法将在虚拟线程上运行
+      enabled: true
   config:
     activate:
       on-profile: dev

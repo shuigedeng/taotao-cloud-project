@@ -18,6 +18,7 @@ package com.taotao.cloud.file.biz.repository.inf;
 
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.file.biz.entity.FileLog;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -27,4 +28,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IFileLogRepository extends JpaRepository<FileLog, Long> {}
+public interface IFileLogRepository extends BaseInterfaceSuperRepository<FileLog, Long> {}

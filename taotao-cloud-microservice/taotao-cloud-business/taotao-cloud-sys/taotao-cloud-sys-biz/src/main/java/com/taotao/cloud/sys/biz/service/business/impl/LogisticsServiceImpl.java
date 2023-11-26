@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class LogisticsServiceImpl
-        extends BaseSuperServiceImpl<ILogisticsMapper, LogisticsConfig, LogisticsRepository, ILogisticsRepository, Long>
+        extends BaseSuperServiceImpl<LogisticsConfig, Long, ILogisticsMapper, LogisticsRepository, ILogisticsRepository>
         implements ILogisticsService {
 
     @Override

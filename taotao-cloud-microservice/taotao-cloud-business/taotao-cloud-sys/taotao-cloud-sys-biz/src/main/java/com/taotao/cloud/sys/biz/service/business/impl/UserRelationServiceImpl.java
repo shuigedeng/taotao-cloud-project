@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserRelationServiceImpl
 	extends BaseSuperServiceImpl<
-	IUserRelationMapper, UserRelation, UserRelationRepository, IUserRelationRepository, Long>
+	 UserRelation, Long, IUserRelationMapper,UserRelationRepository, IUserRelationRepository>
 	implements IUserRelationService {
 
 	private static final QUserRelation USER_RELATION = QUserRelation.userRelation;

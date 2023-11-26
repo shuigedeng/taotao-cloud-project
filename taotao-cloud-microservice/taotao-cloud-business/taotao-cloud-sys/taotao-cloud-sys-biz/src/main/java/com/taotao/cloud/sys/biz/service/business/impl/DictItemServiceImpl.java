@@ -47,7 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class DictItemServiceImpl
-        extends BaseSuperServiceImpl<IDictItemMapper, DictItem, DictItemRepository, IDictItemRepository, Long>
+        extends BaseSuperServiceImpl< DictItem, Long,IDictItemMapper, DictItemRepository, IDictItemRepository>
         implements IDictItemService {
 
     private static final QDictItem DICT_ITEM = QDictItem.dictItem;

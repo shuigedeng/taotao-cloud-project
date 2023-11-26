@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,7 +29,7 @@ import org.springframework.data.repository.query.Param;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IDeptRepository extends JpaRepository<Dept, Long> {
+public interface IDeptRepository extends BaseInterfaceSuperRepository<Dept, Long> {
 
     @Query("select d from Dept d where d.version <> ?1")
     Dept findByVersionNot(Integer version);

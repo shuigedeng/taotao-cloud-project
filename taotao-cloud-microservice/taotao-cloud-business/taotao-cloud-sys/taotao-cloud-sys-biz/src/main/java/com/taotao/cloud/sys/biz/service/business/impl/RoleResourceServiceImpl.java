@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class RoleResourceServiceImpl
         extends BaseSuperServiceImpl<
-                IRoleResourceMapper, RoleResource, RoleResourceRepository, IRoleResourceRepository, Long>
+                 RoleResource, Long,IRoleResourceMapper, RoleResourceRepository, IRoleResourceRepository>
         implements IRoleResourceService {
 
     private static final QRoleResource ROLE_RESOURCE = QRoleResource.roleResource;

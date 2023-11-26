@@ -18,7 +18,8 @@ package com.taotao.cloud.sys.biz.controller;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import org.apache.pulsar.shade.io.swagger.annotations.Api;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value = "TestRediscontroller", description = "测试redis")
+@Tag(name = "管理端-TestRediscontroller", description = "管理端-测试redis")
 public class TestRedisController {
 
     @Autowired
