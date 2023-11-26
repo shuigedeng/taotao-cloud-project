@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.repository;
 
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.generator.HerodotusAuthorizationConsentId;
-import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
+import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import com.taotao.cloud.data.jpa.extend.MyQuery;
 import jakarta.persistence.QueryHint;
 
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2023-07-10 17:11:17
  */
 public interface HerodotusAuthorizationConsentRepository
-        extends BaseRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
+        extends JpaInterfaceSuperRepository<HerodotusAuthorizationConsent, HerodotusAuthorizationConsentId> {
 
     /**
      * 根据 client id 和 principalName 查询 OAuth2 确认信息

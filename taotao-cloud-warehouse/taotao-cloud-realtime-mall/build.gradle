@@ -7,7 +7,7 @@ dependencies {
     implementation "org.apache.flink:flink-streaming-scala_2.12:1.18.0"
     implementation "org.apache.flink:flink-streaming-java:1.18.0"
     implementation "org.apache.flink:flink-csv:1.18.0"
-    implementation "org.apache.flink:flink-connector-kafka:1.18.0"
+    implementation "org.apache.flink:flink-connector-kafka:3.0.1-1.18"
     implementation "org.apache.flink:flink-statebackend-rocksdb:1.18.0"
     implementation "org.apache.flink:flink-table-planner_2.12:1.18.0"
     implementation "org.apache.flink:flink-table-api-java-bridge:1.18.0"

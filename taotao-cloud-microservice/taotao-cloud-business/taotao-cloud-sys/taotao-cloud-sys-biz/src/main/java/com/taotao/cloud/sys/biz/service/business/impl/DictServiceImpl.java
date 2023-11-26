@@ -67,7 +67,7 @@ import java.util.concurrent.Future;
  */
 @AllArgsConstructor
 @Service
-public class DictServiceImpl extends BaseSuperServiceImpl<IDictMapper, Dict, DictRepository, IDictRepository, Long>
+public class DictServiceImpl extends BaseSuperServiceImpl< Dict, Long,IDictMapper, DictRepository, IDictRepository>
 	implements IDictService {
 
 	private final IDictItemService dictItemService;

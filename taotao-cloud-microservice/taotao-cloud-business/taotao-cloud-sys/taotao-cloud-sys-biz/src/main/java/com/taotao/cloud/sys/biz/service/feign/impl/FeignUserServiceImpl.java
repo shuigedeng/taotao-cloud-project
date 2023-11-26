@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class FeignUserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+public class FeignUserServiceImpl extends BaseSuperServiceImpl< User, Long, IUserMapper,UserRepository, IUserRepository>
         implements IFeignUserService {
 
     private final IUserService userService;

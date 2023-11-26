@@ -17,6 +17,7 @@ dependencies {
 
 //version "3.2022.15"
 
+// 配置开发过程中运行的 IDEA 沙盒信息
 // https://github.com/JetBrains/gradle-intellij-plugin
 // https://juejin.cn/post/7249380394456596535#heading-35
 intellij {
@@ -25,8 +26,9 @@ intellij {
     //沙箱目录位置，用于保存IDEA的设置，默认在build文件下面，防止clean，放在根目录下。
     //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
 
-    //<!-- 插件版本 -->
-    version = "2023.2"
+    // IDEA 的版本
+    version = "2023.2.5"
+    // 这里 IU 是指付费版, 也可以选择 IC 对应社区版
     type = "IU"
 
     // 各种版本去这里找
@@ -38,6 +40,8 @@ intellij {
     updateSinceUntilBuild = false
     downloadSources = true
 
+    // 用到的插件
+    // plugins.set(listOf())
     plugins = ['com.intellij.java',
                'com.intellij.database' ,
                'com.intellij.spring' ,
@@ -55,10 +59,11 @@ patchPluginXml {
     //官网详细介绍：http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html-->
     //<idea-version since-build="3000" until-build="3999"/>
 
+    // 设置插件兼容的版本
+
     //最低支持的版本 当前插件的起止 IDE 版本支持
     //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
-    sinceBuild.set("232")
-
+    sinceBuild.set("222")
     //最高支持的版本，不能不设置，不设置是默认为 project.version
     untilBuild.set("232.*")
 }

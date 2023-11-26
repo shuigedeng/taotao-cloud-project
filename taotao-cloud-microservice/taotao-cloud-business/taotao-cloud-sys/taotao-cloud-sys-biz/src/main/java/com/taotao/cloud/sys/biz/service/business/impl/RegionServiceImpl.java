@@ -58,7 +58,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class RegionServiceImpl
-	extends BaseSuperServiceImpl<IRegionMapper, Region, RegionRepository, IRegionRepository, Long>
+	extends BaseSuperServiceImpl< Region, Long, IRegionMapper,RegionRepository, IRegionRepository>
 	implements IRegionService {
 
 	private final OkHttpService okHttpService;

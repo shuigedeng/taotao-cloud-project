@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -26,4 +27,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IRoleRepository extends JpaRepository<Role, Long> {}
+public interface IRoleRepository extends BaseInterfaceSuperRepository<Role, Long> {}

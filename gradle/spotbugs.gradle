@@ -11,12 +11,12 @@ spotbugs {
     showProgress = true
     //SpotBugs按严重程度高到低将Bug分为了三个等级P1、P2和P3，reportLevel属性指明达到哪个等级的Bug才需要展示在报告里面，
     //它可配置值对应有HIGH、MEDIUM、LOW和DEFAULT，它们定义在Confidence.groovy中。默认值是DEFAULT等同于MEDIUM，意思是要达到P2级别，那就意味着低级别的P3 Bug将被忽略
-    reportLevel = 'default'
+    //reportLevel = 'default'
     //reports配置报告的类型，有html、xml、sarif和text四种，配置在SpotBugsTask中（比如spotbugsMain {}），再往里一层可配置的属性不是很多，参考SpotBugsReport
     //reportsDir = file("$buildDir/reports/spotbugs")
     //effort是配置代码检测预期的级别，级别由低到高分别为min、less、more、max，级别越高计算成本越高，花费的时间也就越长，
     //在这个文档Effort里面有表格清晰的列出了这几个级别分别包含了哪些检查内容。effort的默认值是default，等同于more
-    effort = 'default'
+    //effort = 'default'
     //这两个属性可以分别指定使用（visitors）和禁用（omitVisitors）检查器，一个检查器会包含一个或者多个Bug descriptions中提到的检查项，
     //所以这两个属性配置的目的和includeFilter和excludeFilter是一样的，让我们可以为项目做定制化，只是从检查器的维度进行配置。
     //在Detectors中将Spotbugs所有的检查器都列出来了，在不配置的情况下，Standard detectors中列出来的默认使用，Disabled detectors中列出来的默认禁用。

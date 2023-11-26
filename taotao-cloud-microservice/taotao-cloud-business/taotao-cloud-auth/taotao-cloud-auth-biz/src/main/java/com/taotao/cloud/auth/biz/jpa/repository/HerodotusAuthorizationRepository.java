@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.repository;
 
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorization;
-import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
+import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import jakarta.persistence.QueryHint;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 2023.07
  * @since 2023-07-10 17:11:21
  */
-public interface HerodotusAuthorizationRepository extends BaseRepository<HerodotusAuthorization, String> {
+public interface HerodotusAuthorizationRepository extends JpaInterfaceSuperRepository<HerodotusAuthorization, String> {
 
     /**
      * 根据 State 查询 OAuth2 认证信息

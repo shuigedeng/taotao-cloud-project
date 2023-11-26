@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class UserServiceImpl extends BaseSuperServiceImpl<IUserMapper, User, UserRepository, IUserRepository, Long>
+public class UserServiceImpl extends BaseSuperServiceImpl< User, Long,IUserMapper, UserRepository, IUserRepository>
 	implements IUserService {
 
 	private static final QUser USER = QUser.user;

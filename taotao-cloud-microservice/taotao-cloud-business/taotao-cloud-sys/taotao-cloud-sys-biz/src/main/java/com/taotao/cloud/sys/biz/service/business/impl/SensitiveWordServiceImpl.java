@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class SensitiveWordServiceImpl
         extends BaseSuperServiceImpl<
-                ISensitiveWordMapper, SensitiveWord, SensitiveWordRepository, ISensitiveWordRepository, Long>
+                 SensitiveWord, Long, ISensitiveWordMapper,SensitiveWordRepository, ISensitiveWordRepository>
         implements ISensitiveWordService {
 
     private final RedisRepository redisRepository;

@@ -14,8 +14,8 @@ dependencies {
         exclude group: 'io.netty', module: 'netty-transport'
     }
     //json 转换工具
-    api 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
-    api 'com.fasterxml.jackson.core:jackson-core:2.15.3'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
+    api 'com.fasterxml.jackson.core:jackson-core:2.16.0'
     //kryo 序列化 工具
     api 'com.esotericsoftware:kryo:5.5.0'
     //hessian 序列化 工具

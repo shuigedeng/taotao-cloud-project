@@ -64,13 +64,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -229,14 +225,13 @@ public class DefaultSecurityConfiguration {
 			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
 			// **************************************oauth2表单登录配置***********************************************
 			.httpSecurity()
-			.apply(new OAuth2FormCaptchaLoginHttpConfigurer<>(
-				userDetailsService,
-				authenticationProperties,
-				captchaRendererFactory))
-			.httpSecurity()
-			.apply(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties))
-			.httpSecurity()
-			.apply(new OAuth2FormQrcodeLoginHttpConfigurer<>(authenticationProperties));
+			.with(new OAuth2FormCaptchaLoginHttpConfigurer<>(
+					userDetailsService, authenticationProperties, captchaRendererFactory),
+				Customizer.withDefaults())
+			.with(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties),
+				Customizer.withDefaults())
+			.with(new OAuth2FormQrcodeLoginHttpConfigurer<>(authenticationProperties),
+				Customizer.withDefaults());
 
 		return httpSecurity
 			.addFilterAfter(new ExtensionAndOauth2LoginRefreshTokenFilter(oAuth2AccessTokenStore), LogoutFilter.class)

@@ -17,6 +17,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IResourceRepository extends JpaRepository<Resource, Long> {
+public interface IResourceRepository extends BaseInterfaceSuperRepository<Resource, Long> {
 
 	public List<Resource> searchByComponent(String component);
 

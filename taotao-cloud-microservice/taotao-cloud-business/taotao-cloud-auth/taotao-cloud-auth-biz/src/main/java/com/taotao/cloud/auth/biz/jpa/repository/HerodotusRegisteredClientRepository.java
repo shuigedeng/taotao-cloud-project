@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.repository;
 
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusRegisteredClient;
-import com.taotao.cloud.data.jpa.base.repository.BaseRepository;
+import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;
@@ -30,7 +30,7 @@ import org.springframework.data.jpa.repository.QueryHints;
  * @version 2023.07
  * @since 2023-07-10 17:11:24
  */
-public interface HerodotusRegisteredClientRepository extends BaseRepository<HerodotusRegisteredClient, String> {
+public interface HerodotusRegisteredClientRepository extends JpaInterfaceSuperRepository<HerodotusRegisteredClient, String> {
 
     /**
      * 根据 ClientId 查询 RegisteredClient

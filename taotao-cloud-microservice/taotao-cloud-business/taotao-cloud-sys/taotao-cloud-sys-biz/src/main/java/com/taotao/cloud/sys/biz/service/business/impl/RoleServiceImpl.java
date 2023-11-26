@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @AllArgsConstructor
-public class RoleServiceImpl extends BaseSuperServiceImpl<IRoleMapper, Role, RoleRepository, IRoleRepository, Long>
+public class RoleServiceImpl extends BaseSuperServiceImpl<Role, Long,IRoleMapper,  RoleRepository, IRoleRepository>
         implements IRoleService {
 
     private static final QRole SYS_ROLE = QRole.role;

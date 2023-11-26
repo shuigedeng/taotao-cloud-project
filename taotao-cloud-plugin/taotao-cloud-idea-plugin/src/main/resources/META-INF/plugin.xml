@@ -161,8 +161,13 @@
 	</actions>
 
 	<actions>
+		<!-- 定义 id, 对应类和显示的文本 -->
 		<action id="genCopyMethod" class="com.taotao.cloud.idea.plugin.actions.BeanConvertAction" text="genCopyMethod" description="genCopyMethod">
+			<!-- 添加到编辑器菜单的第一项 -->
 			<add-to-group group-id="GenerateGroup" anchor="last"/>
+
+			<!-- 可通过 ctrl + H 快捷键触发 -->
+			<!-- <keyboard-shortcut keymap="$default" first-keystroke="ctrl H"/> -->
 		</action>
 	</actions>
 

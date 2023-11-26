@@ -6,7 +6,6 @@ import com.taotao.cloud.sys.api.model.vo.monitor.RedisCacheInfoDTO;
 import com.taotao.cloud.sys.api.model.vo.monitor.ServerInfo;
 import com.taotao.cloud.sys.api.model.vo.server.Server;
 import com.taotao.cloud.sys.biz.service.business.MonitorApplicationService;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.NonNull;
@@ -72,7 +71,7 @@ public class ManagerMonitorController {
 //	}
 
 	//***********************
-	@ApiOperation(value = "查询服务器监控信息")
+	@Operation(summary = "查询服务器监控信息")
 	@GetMapping
 //	@SaCheckPermission("upms:sysserver:get")
 	public Result<Server> getServerInfo111() throws Exception {
