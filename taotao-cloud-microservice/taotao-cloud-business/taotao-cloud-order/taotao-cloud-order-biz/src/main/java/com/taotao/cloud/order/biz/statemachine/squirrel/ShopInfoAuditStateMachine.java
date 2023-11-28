@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.squirrel;
+package com.taotao.cloud.order.biz.statemachine.squirrel;
 
 import org.springframework.context.ApplicationContext;
-import org.squirrelframework.foundation.fsm.annotation.State;
-import org.squirrelframework.foundation.fsm.annotation.StateMachineParameters;
-import org.squirrelframework.foundation.fsm.annotation.States;
-import org.squirrelframework.foundation.fsm.annotation.Transit;
-import org.squirrelframework.foundation.fsm.annotation.Transitions;
+import org.squirrelframework.foundation.fsm.annotation.*;
 import org.squirrelframework.foundation.fsm.impl.AbstractUntypedStateMachine;
 
 /** 店铺审核状态机 */

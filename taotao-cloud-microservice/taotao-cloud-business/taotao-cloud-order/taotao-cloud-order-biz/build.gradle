@@ -48,6 +48,7 @@ dependencies {
     //https://search.maven.org/artifact/org.squirrelframework/squirrel-foundation
     implementation 'org.squirrelframework:squirrel-foundation:0.3.10'
 
+    //cola状态机
     implementation 'com.alibaba.cola:cola-component-statemachine:4.3.2'
 
     //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter

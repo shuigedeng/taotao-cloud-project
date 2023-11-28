@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.squirrel;
+package com.taotao.cloud.order.biz.statemachine.squirrel;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.transaction.annotation.Transactional;
-import org.squirrelframework.foundation.fsm.StateMachine;
-import org.squirrelframework.foundation.fsm.StateMachineBuilder;
-import org.squirrelframework.foundation.fsm.StateMachineBuilderFactory;
-import org.squirrelframework.foundation.fsm.UntypedStateMachine;
-import org.squirrelframework.foundation.fsm.UntypedStateMachineBuilder;
+import org.squirrelframework.foundation.fsm.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /** StateMachineBuilder实例 */
 public class StateMachineEngine<T extends UntypedStateMachine, S, E, C> implements ApplicationContextAware {

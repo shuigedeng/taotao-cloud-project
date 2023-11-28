@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.squirrel;
+package com.taotao.cloud.order.biz.statemachine.squirrel;
 // 店铺审核事件
 public enum ShopInfoAuditEvent {
     SUBMIT, // 提交

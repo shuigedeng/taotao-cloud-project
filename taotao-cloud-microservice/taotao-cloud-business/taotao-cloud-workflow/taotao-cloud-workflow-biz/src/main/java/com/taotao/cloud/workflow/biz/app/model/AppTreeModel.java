@@ -20,9 +20,9 @@ import jnpf.util.treeutil.SumTree;
 import lombok.Data;
 
 /**
- * @author JNPF开发平台组
+ * @author 
  * @version V3.1.0
- * @copyright 引迈信息技术有限公司
+ * @copyright 
  */
 @Data
 public class AppTreeModel extends SumTree {
