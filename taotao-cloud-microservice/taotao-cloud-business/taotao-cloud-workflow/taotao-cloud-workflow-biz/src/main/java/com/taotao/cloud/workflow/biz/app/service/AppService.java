@@ -22,9 +22,9 @@ import jnpf.model.AppUsersVO;
 /**
  * app用户信息
  *
- * @author JNPF开发平台组
+ * @author 
  * @version V3.1.0
- * @copyright 引迈信息技术有限公司
+ * @copyright 
  * @since 2021-08-08
  */
 public interface AppService {

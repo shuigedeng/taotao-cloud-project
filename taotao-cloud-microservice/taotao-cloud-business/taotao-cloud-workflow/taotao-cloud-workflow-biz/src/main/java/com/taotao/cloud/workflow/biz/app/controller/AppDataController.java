@@ -43,9 +43,9 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * app常用数据
  *
- * @author JNPF开发平台组
+ * @author 
  * @version V3.1.0
- * @copyright 引迈信息技术有限公司（https://www.jnpfsoft.com）
+ * @copyright （）
  * @since 2021-07-08
  */
 @Api(tags = "app常用数据", value = "data")

@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * api接口
  *
- * @author JNPF开发平台组
+ * @author 
  * @version V3.1.0
- * @copyright 引迈信息技术有限公司（https://www.jnpfsoft.com）
+ * @copyright （）
  * @since 2021/3/15 11:55
  */
 // @FeignClient(name = FeignName.WORKFLOW_SERVER_NAME , fallback = FlowEngineApiFallback.class, path

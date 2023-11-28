@@ -42,9 +42,9 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * app应用
  *
- * @author JNPF开发平台组
+ * @author 
  * @version V3.1.0
- * @copyright 引迈信息技术有限公司（https://www.jnpfsoft.com）
+ * @copyright （）
  * @since 2021-07-08
  */
 @Api(tags = "app应用", value = "Menu")
