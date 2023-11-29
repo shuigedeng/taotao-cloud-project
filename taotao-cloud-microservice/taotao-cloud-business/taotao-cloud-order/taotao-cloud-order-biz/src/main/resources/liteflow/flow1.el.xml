@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow>
+    <chain name="mainChain">
+        THEN(
+            checkCmp, slotInitCmp, priceStepInitCmp,
+            promotionConvertCmp, memberDiscountCmp,
+            promotionChain, couponCmp,
+            SWITCH(postageCondCmp).to(postageCmp, overseaPostageCmp),
+            priceResultCmp, stepPrintCmp
+        );
+    </chain>
+</flow>
