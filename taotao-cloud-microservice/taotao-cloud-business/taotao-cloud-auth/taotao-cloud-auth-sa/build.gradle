@@ -46,4 +46,37 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-description = "认证中心api"
+mainClassName = "com.taotao.cloud.sa.biz.TaoTaoCloudSaJustApplication"
+description = "基于sa认证中心"
+archivesBaseName = 'taotao-cloud-sajust'
+
+bootJar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            //force "org.codehaus.groovy:groovy:4.0.0"
+            force 'org.antlr:antlr4:4.12.0'
+            force 'org.bouncycastle:bcprov-jdk18on:1.76'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.76'
+            force 'org.bouncycastle:bcutil-jdk18on:1.76'
+        }
+
+        //exclude group: "log4j", module: "log4j"
+        //exclude group: "log4j", module: "slf4j-simple"
+        //exclude group: "org.slf4j", module: "slf4j-log4j12"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
+        exclude group: "org.bouncycastle", module: "bcpkix-jdk15on"
+        exclude group: "org.bouncycastle", module: "bcutil-jdk15on"
+    }
+}
