@@ -4,24 +4,24 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/spring-6.0.11-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20boot-3.1.2-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.1-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.2.0-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud-2022.0.4-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20cloud%20tencent-1.11.8--2022.0.1-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.96.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20security-6.1.2-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_tencent-1.12.4--2022.0.4-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.101.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.2.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.7.1-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/mybatis%20plus-3.5.3.1-yellow" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/knife4j-4.1.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/mybatis_plus-3.5.4.1-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/knife4j-4.3.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-3.23.2-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M4-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M8-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.4、jdk21, 采用最新的SpringCloud Alibaba 2022.0.0、SpringCloud 2022.0.4、SpringBoot 3.2.0、SpringSecurity 6.2.0、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, graalvm21, 采用最新的spring 6.1.1、SpringBoot 3.2.0、SpringCloud 2022.0.4、SpringSecurity 6.2.0、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
@@ -72,7 +72,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
-GRALE_VERSION >= 8.4
+GRALE_VERSION >= 8.5
 IDEA_VERSION >= 2023.3
 ```
 
@@ -120,7 +120,8 @@ Maven:
  Spring Boot          | 3.2.0           
  Spring Cloud         | 2022.0.4        
  Spring Cloud Alibaba | 2022.0.0.0 
- Spring Cloud Tencent | 1.12.1-2022.0.4 
+ Spring Cloud Tencent | 1.12.4-2022.0.4 
+ Spring Cloud huawei  | 1.11.3-2022.0.x
  Seata                | 2.0.0
  Sentinel             | 1.8.6           
  Spring-kafka         | 3.1.0         
@@ -138,9 +139,9 @@ Maven:
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
  Guava                | 32.1.3-jre        
- Grpc                 | 1.58.0          
+ Grpc                 | 1.59.0          
  Arthas               | 3.6.9           
- Dynamic-tp           | 1.1.3           
+ Dynamic-tp           | 1.1.5           
  Elasticjob           | 3.0.3           
  Powerjob             | 4.3.6           
  Forest               | 1.5.32          
