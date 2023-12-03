@@ -47,7 +47,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.member.biz.TaoTaoCloudMemberApplication"
-description = "会员中心"
+description = "会员中心biz"
 archivesBaseName = 'taotao-cloud-member'
 
 configurations {

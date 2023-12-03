@@ -26,7 +26,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.distribution.biz.TaoTaoCloudDistributionApplication"
-description = "营销/分销中心"
+description = "营销/分销中心biz"
 archivesBaseName = 'taotao-cloud-distribution'
 
 configurations {

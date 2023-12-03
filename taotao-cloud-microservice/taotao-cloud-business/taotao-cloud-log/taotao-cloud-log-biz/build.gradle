@@ -30,7 +30,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.log.biz.TaoTaoCloudLogApplication"
-description = "日志中心"
+description = "日志中心biz"
 archivesBaseName = 'taotao-cloud-log'
 
 configurations {
