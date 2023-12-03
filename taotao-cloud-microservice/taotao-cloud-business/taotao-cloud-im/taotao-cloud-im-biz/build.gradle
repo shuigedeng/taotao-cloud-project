@@ -32,7 +32,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.im.biz.TaoTaoCloudImApplication"
-description = "im中心"
+description = "im中心biz"
 archivesBaseName = 'taotao-cloud-im'
 
 configurations {

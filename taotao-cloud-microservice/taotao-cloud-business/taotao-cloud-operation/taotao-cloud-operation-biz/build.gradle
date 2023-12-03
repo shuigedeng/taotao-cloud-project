@@ -23,7 +23,7 @@ dependencies {
 }
 
 mainClassName = "com.taotao.cloud.operation.biz.TaoTaoCloudOperationApplication"
-description = "运营中心"
+description = "运营中心biz"
 archivesBaseName = 'taotao-cloud-operation'
 
 configurations {

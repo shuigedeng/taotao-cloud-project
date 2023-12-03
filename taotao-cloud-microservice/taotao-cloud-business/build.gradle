@@ -5,3 +5,6 @@ subprojects {
 
     apply from: rootProject.file('gradle/mybatis-generator.gradle')
 }
+
+description = "业务中心"
+
