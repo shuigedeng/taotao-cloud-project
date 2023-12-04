@@ -47,7 +47,7 @@ dependencies {
     implementation "org.apache.commons:commons-pool2"
     implementation "org.apache.commons:commons-lang3"
     implementation "commons-fileupload:commons-fileupload:1.5"
-    implementation "commons-io:commons-io:2.15.0"
+    implementation "commons-io:commons-io:2.15.1"
 
     implementation "org.webjars:webjars-locator-core:0.55"
 
