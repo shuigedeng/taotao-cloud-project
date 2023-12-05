@@ -50,7 +50,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StoreGoodsLabelServiceImpl
         extends BaseSuperServiceImpl<
-                IStoreGoodsLabelMapper, StoreGoodsLabel, StoreGoodsLabelRepository, IStoreGoodsLabelRepository, Long>
+                StoreGoodsLabel, Long, IStoreGoodsLabelMapper, StoreGoodsLabelRepository, IStoreGoodsLabelRepository>
         implements IStoreGoodsLabelService {
 
     /** 缓存 */

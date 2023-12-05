@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class FeignOrderServiceImpl
-        extends BaseSuperServiceImpl<IOrderMapper, Order, OrderRepository, IOrderRepository, Long>
+        extends BaseSuperServiceImpl<Order, Long,IOrderMapper,  OrderRepository, IOrderRepository>
         implements IFeignOrderService {
 
     @Autowired

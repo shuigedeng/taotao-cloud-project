@@ -84,7 +84,7 @@ import java.util.Objects;
  */
 @Service
 @AllArgsConstructor
-public class GoodsServiceImpl extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
+public class GoodsServiceImpl extends BaseSuperServiceImpl< Goods, Long,IGoodsMapper, GoodsRepository, IGoodsRepository>
         implements IGoodsService {
     private final GoodsManager goodsManager;
 

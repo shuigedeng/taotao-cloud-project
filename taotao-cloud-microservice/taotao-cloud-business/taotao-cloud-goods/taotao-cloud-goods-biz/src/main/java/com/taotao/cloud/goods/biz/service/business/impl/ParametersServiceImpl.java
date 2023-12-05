@@ -55,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class ParametersServiceImpl
-        extends BaseSuperServiceImpl<IParametersMapper, Parameters, ParametersRepository, IParametersRepository, Long>
+        extends BaseSuperServiceImpl<Parameters, Long,IParametersMapper,  ParametersRepository, IParametersRepository>
         implements IParametersService {
 
     /** 商品服务 */
