@@ -46,7 +46,7 @@ public class StoreMessageManagerController {
     @Operation(summary = "多条件分页获取", description = "多条件分页获取")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping
+    @GetMapping("/page")
     public Result<PageResult<StoreMessageVO>> getByCondition(
             StoreMessageQueryVO storeMessageQueryVO, PageQuery PageQuery) {
         IPage<StoreMessageVO> page = storeMessageService.getPage(storeMessageQueryVO, PageQuery);

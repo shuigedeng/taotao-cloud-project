@@ -54,7 +54,7 @@ public class BillManagerController {
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/{id}")
     public Result<Bill> get(@Parameter(description = "结算单ID") @PathVariable @NotNull String id) {
         return Result.success(billService.getById(id));
     }
@@ -62,7 +62,7 @@ public class BillManagerController {
     @Operation(summary = "获取结算单分页", description = "获取结算单分页")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/getByPage")
+    @GetMapping(value = "/page")
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billSearchParams) {
         IPage<BillListVO> billListVOIPage = billService.billPage(billSearchParams);
         return Result.success(PageResult.convertMybatisPage(billListVOIPage, BillListVO.class));
@@ -71,12 +71,12 @@ public class BillManagerController {
     @Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/{id}/getStoreFlow")
+    @GetMapping(value = "store-flow/{id}")
     public Result<PageResult<StoreFlowVO>> getStoreFlow(
             @Parameter(description = "结算单ID") @PathVariable String id,
             @Parameter(description = "流水类型:PAY、REFUND") String flowType,
-            PageQuery PageQuery) {
-        IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
+            PageQuery pageQuery) {
+        IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, pageQuery);
         return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
     }
 
@@ -85,7 +85,6 @@ public class BillManagerController {
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping(value = "/pay/{id}")
     public Result<Boolean> pay(@Parameter(description = "结算单ID") @PathVariable String id) {
-
         return Result.success(billService.complete(id));
     }
 }

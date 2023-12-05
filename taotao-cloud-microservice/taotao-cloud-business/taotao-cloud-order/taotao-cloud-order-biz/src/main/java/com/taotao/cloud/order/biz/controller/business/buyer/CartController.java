@@ -84,7 +84,7 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon/num")
-	public Result<Long> cartCouponNum(String way) {
+	public Result<Long> cartCouponNum(@RequestParam String way) {
 		return Result.success(this.cartService.getCanUseCoupon(CartTypeEnum.valueOf(way)));
 	}
 
@@ -176,15 +176,16 @@ public class CartController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/coupon")
-	public Result<Boolean> selectCoupon(
-		String way, @NotNull(message = "优惠券id不能为空") String memberCouponId, boolean used) {
+	public Result<Boolean> selectCoupon(String way,
+										@NotNull(message = "优惠券id不能为空") String memberCouponId,
+										boolean used) {
 		return Result.success(this.cartService.selectCoupon(memberCouponId, way, used));
 	}
 
 	@Operation(summary = "创建交易", description = "创建交易")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@PostMapping(value = "/trade", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/trade")
 	public Result<Trade> crateTrade(@RequestBody TradeDTO tradeDTO) {
 		// 读取选中的列表
 		return Result.success(this.cartService.createTrade(tradeDTO));

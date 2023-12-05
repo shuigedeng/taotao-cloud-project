@@ -33,5 +33,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsWordsServiceImpl
-        extends BaseSuperServiceImpl<IGoodsWordsMapper, GoodsWords, GoodsWordsRepository, IGoodsWordsRepository, Long>
+        extends BaseSuperServiceImpl< GoodsWords, Long, IGoodsWordsMapper,GoodsWordsRepository, IGoodsWordsRepository>
         implements IGoodsWordsService {}

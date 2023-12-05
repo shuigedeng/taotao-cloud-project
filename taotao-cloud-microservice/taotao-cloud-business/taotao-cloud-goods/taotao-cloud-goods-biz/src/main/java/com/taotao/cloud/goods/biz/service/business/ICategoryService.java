@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.goods.biz.service.business;
 
-import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.api.model.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +44,10 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	/**
 	 * 获取分类
 	 *
-	 * @param id
-	 * @return
+	 * @param id 分类id
+	 * @return com.taotao.cloud.goods.biz.model.entity.Category
+	 * @author shuigedeng
+	 * @since 2023-12-05 15:19
 	 */
 	Category getCategoryById(String id);
 

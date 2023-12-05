@@ -56,6 +56,6 @@ public interface IFeignStoreDetailApi {
     @GetMapping(value = "/getStoreOtherVO")
     StoreOtherVO getStoreOtherVO(String id);
 
-    @GetMapping(value = "/getStoreDetailVOByMemberId")
-    StoreDetailVO getStoreDetailVOByMemberId(Long userId);
+    @GetMapping(value = "/getStoreDetailByMemberId")
+    StoreDetailVO getStoreDetailByMemberId(Long userId);
 }

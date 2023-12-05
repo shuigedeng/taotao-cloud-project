@@ -40,6 +40,7 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @AllArgsConstructor
-public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, BrandRepository, IBrandRepository, Long>
+public class BrandServiceImpl extends BaseSuperServiceImpl<Brand, Long, IBrandMapper, BrandRepository, IBrandRepository>
         implements IBrandService {
 
     /** 分类品牌绑定服务 */
@@ -83,7 +84,12 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
         return new ArrayList<>();
     }
 
-    @Override
+	@Override
+	public List<Map<String, Object>> getBrandsMapsByCategory(List<Long> categoryIds, String columns) {
+		return null;
+	}
+
+	@Override
     public List<Brand> getBrandsByCategorys(Long categoryIds) {
         // Map<String,  List<Brand>> map = this.baseMapper.selectBrandsByCategorysAsMap(categoryIds)
 
@@ -141,7 +147,12 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<IBrandMapper, Brand, 
         return this.list(lambdaQueryWrapper);
     }
 
-    @Override
+	@Override
+	public IPage<Brand> getBrandsByPage(BrandPageDTO page) {
+		return null;
+	}
+
+	@Override
     public boolean deleteBrands(List<Long> ids) {
         checkBind(ids);
         return this.removeByIds(ids);
