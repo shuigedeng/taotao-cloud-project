@@ -52,7 +52,7 @@ public class MemberEvaluationStoreController {
     @Operation(summary = "分页获取会员评论列表", description = "分页获取会员评论列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping
+    @GetMapping("/page")
     public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
         evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationApi.queryPage(evaluationPageQuery);
@@ -62,7 +62,7 @@ public class MemberEvaluationStoreController {
     @Operation(summary = "通过id获取", description = "通过id获取")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/{id}")
     public Result<MemberEvaluationVO> get(@PathVariable Long id) {
         return Result.success(OperationalJudgment.judgment(memberEvaluationApi.queryById(id)));
     }

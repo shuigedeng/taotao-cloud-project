@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.generator.biz.mbg;
 
+import org.dromara.hutool.core.collection.CollUtil;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
@@ -25,6 +26,7 @@ import org.mybatis.generator.internal.DefaultCommentGenerator;
 import org.mybatis.generator.internal.util.StringUtility;
 
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * 自定义注释生成器
@@ -94,6 +96,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
             compilationUnit.addImportedType(new FullyQualifiedJavaType(JSON_FORMAT));
         }
     }
+
 
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {

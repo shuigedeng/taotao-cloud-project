@@ -16,17 +16,15 @@
 
 package com.taotao.cloud.goods.biz.aop;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * 订单日志注解
  *
- * <pre class="code">
+ * <pre>
+ * {@code
  *  @OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn = "#orderSn")
+ * }
  * </pre>
  *
  * @author shuigedeng
@@ -38,9 +36,13 @@ import java.lang.annotation.Target;
 @Documented
 public @interface GoodsLogPoint {
 
-    /** 日志名称 */
-    String description();
+	/**
+	 * 日志名称
+	 */
+	String description();
 
-    /** 订单编号 */
-    String orderSn();
+	/**
+	 * 订单编号
+	 */
+	String orderSn();
 }

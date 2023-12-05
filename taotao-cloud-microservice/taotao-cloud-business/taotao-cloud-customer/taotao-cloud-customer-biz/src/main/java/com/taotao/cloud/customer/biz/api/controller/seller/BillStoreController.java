@@ -63,7 +63,7 @@ public class BillStoreController {
     @Operation(summary = "获取结算单分页", description = "获取结算单分页")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/getByPage")
+    @GetMapping(value = "/page")
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billPageQuery) {
         billPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<BillListVO> billListVOIPage = billService.billPage(billPageQuery);
@@ -73,7 +73,7 @@ public class BillStoreController {
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/{id}")
     public Result<Bill> get(@PathVariable String id) {
         return Result.success(OperationalJudgment.judgment(billService.getById(id)));
     }
@@ -81,7 +81,7 @@ public class BillStoreController {
     @Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/{id}/getStoreFlow")
+    @GetMapping(value = "/store-flow/{id}")
     public Result<PageResult<StoreFlowVO>> getStoreFlow(
             @PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
@@ -92,7 +92,7 @@ public class BillStoreController {
     @Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/{id}/getDistributionFlow")
+    @GetMapping(value = "/distribution-flow/{id}")
     public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
         IPage<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);

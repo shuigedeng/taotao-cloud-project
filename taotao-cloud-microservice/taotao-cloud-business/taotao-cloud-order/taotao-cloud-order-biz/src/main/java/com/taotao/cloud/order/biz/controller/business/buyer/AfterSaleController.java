@@ -99,7 +99,7 @@ public class AfterSaleController {
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
-	@GetMapping(value = "/applyAfterSaleInfo/{sn}")
+	@GetMapping(value = "/apply-aftersale-info/{sn}")
 	public Result<AfterSaleApplyVO> applyAfterSaleInfo(@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		return Result.success(afterSaleService.getAfterSaleVO(sn));
 	}

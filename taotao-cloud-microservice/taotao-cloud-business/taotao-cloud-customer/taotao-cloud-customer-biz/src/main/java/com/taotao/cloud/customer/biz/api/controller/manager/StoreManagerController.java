@@ -38,12 +38,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理端,店铺管理接口
@@ -74,7 +69,7 @@ public class StoreManagerController {
     @Operation(summary = "获取店铺分页列表", description = "获取店铺分页列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping
+    @GetMapping("/page")
     public Result<PageResult<StoreVO>> getByPage(StorePageQuery storePageQuery) {
         IPage<StoreVO> storeVOIPage = storeService.findByConditionPage(storePageQuery);
         return Result.success(PageResult.convertMybatisPage(storeVOIPage, StoreVO.class));
@@ -83,7 +78,7 @@ public class StoreManagerController {
     @Operation(summary = "获取店铺详情", description = "获取店铺详情")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/get/detail/{storeId}")
+    @GetMapping(value = "/detail/{storeId}")
     public Result<StoreDetailVO> detail(@PathVariable String storeId) {
         return Result.success(storeDetailService.getStoreDetailVO(storeId));
     }
@@ -91,16 +86,16 @@ public class StoreManagerController {
     @Operation(summary = "添加店铺", description = "添加店铺")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PostMapping(value = "/add")
-    public Result<Store> add(@Valid AdminStoreApplyDTO adminStoreApplyDTO) {
+    @PostMapping
+    public Result<Store> add(@Valid @RequestBody AdminStoreApplyDTO adminStoreApplyDTO) {
         return Result.success(storeService.add(adminStoreApplyDTO));
     }
 
     @Operation(summary = "编辑店铺", description = "编辑店铺")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @PutMapping(value = "/edit/{id}")
-    public Result<Store> edit(@PathVariable String id, @Valid StoreEditDTO storeEditDTO) {
+    @PutMapping(value = "/{id}")
+    public Result<Store> edit(@PathVariable String id, @Valid @RequestBody  StoreEditDTO storeEditDTO) {
         storeEditDTO.setStoreId(id);
         return Result.success(storeService.edit(storeEditDTO));
     }
@@ -134,7 +129,7 @@ public class StoreManagerController {
     @Operation(summary = "查询一级分类列表", description = "查询一级分类列表")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/managementCategory/{storeId}")
+    @GetMapping(value = "/management-category/{storeId}")
     public Result<List<StoreManagementCategoryVO>> firstCategory(@PathVariable String storeId) {
         return Result.success(this.storeDetailService.goodsManagementCategory(storeId));
     }
@@ -142,7 +137,7 @@ public class StoreManagerController {
     @Operation(summary = "根据会员id查询店铺信息", description = "根据会员id查询店铺信息")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping("/{memberId}/member")
+    @GetMapping("/member/{memberId}")
     public Result<Store> getByMemberId(@Valid @PathVariable String memberId) {
         List<Store> list = storeService.list(new QueryWrapper<Store>().eq("member_id", memberId));
         if (list.size() > 0) {

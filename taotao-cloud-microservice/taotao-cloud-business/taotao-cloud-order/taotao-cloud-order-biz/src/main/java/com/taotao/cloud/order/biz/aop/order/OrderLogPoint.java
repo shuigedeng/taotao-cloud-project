@@ -19,8 +19,12 @@ package com.taotao.cloud.order.biz.aop.order;
 import java.lang.annotation.*;
 
 /**
- * 订单日志注解 @OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn =
- * "#orderSn")
+ * 订单日志注解
+ * <pre>
+ * {@code
+ *   @OrderLogPoint(description = "'订单['+#orderSn+']修改价格，修改后价格为['+#orderPrice+']'", orderSn = "#orderSn")
+ * }
+ * </pre>
  *
  * @author shuigedeng
  * @version 2022.04
@@ -31,9 +35,13 @@ import java.lang.annotation.*;
 @Documented
 public @interface OrderLogPoint {
 
-    /** 日志名称 */
-    String description();
+	/**
+	 * 日志名称
+	 */
+	String description();
 
-    /** 订单编号 */
-    String orderSn();
+	/**
+	 * 订单编号
+	 */
+	String orderSn();
 }

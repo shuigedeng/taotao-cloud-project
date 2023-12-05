@@ -16,14 +16,16 @@
 
 package com.taotao.cloud.order.biz.aop.aftersale;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
- * 售后日志注解 @AfterSaleLogPoint(sn = "#rvt.sn", description = "'售后申请:售后编号['+#rvt.sn+']'")
+ * 售后日志注解
+ * <pre>
+ * {@code
+ * //使用方式
+ * @AfterSaleLogPoint(sn = "#rvt.sn", description = "'售后申请:售后编号['+#rvt.sn+']'")
+ * }
+ * </pre>
  *
  * @author shuigedeng
  * @version 2022.04
@@ -34,9 +36,13 @@ import java.lang.annotation.Target;
 @Documented
 public @interface AfterSaleLogPoint {
 
-    /** 日志名称 */
-    String description();
+	/**
+	 * 日志名称
+	 */
+	String description();
 
-    /** 售后SN */
-    String sn();
+	/**
+	 * 售后SN
+	 */
+	String sn();
 }

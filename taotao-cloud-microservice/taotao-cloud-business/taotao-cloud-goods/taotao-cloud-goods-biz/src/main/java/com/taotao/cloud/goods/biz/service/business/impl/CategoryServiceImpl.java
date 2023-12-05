@@ -39,10 +39,7 @@ import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
@@ -62,7 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @CacheConfig(cacheNames = "{category}")
 public class CategoryServiceImpl
-        extends BaseSuperServiceImpl<ICategoryMapper, Category, CategorytRepository, ICategoryRepository, Long>
+        extends BaseSuperServiceImpl< Category, Long, ICategoryMapper,CategorytRepository, ICategoryRepository>
         implements ICategoryService {
 
     private static final String DELETE_FLAG_COLUMN = "delete_flag";
@@ -98,7 +95,27 @@ public class CategoryServiceImpl
         return this.list(wrapper);
     }
 
-    @Override
+	@Override
+	public List<Category> dbList(String parentId) {
+		return null;
+	}
+
+	@Override
+	public Category getCategoryById(String id) {
+		return null;
+	}
+
+	@Override
+	public List<Category> listByIdsOrderByLevel(List<String> ids) {
+		return null;
+	}
+
+	@Override
+	public List<Map<String, Object>> listMapsByIdsOrderByLevel(List<String> ids, String columns) {
+		return null;
+	}
+
+	@Override
     public List<CategoryTreeVO> categoryTree() {
         // 获取缓存数据
         List<CategoryTreeVO> categoryTreeVOList = redisRepository.lGet(
@@ -185,7 +202,12 @@ public class CategoryServiceImpl
         return categoryTreeVOList;
     }
 
-    @Override
+	@Override
+	public List<String> getCategoryNameByIds(List<String> ids) {
+		return null;
+	}
+
+	@Override
     @SuppressWarnings("unchecked")
     public List<String> getCategoryNameByIds(List<Long> ids) {
         List<String> categoryName = new ArrayList<>();
@@ -275,7 +297,17 @@ public class CategoryServiceImpl
         return true;
     }
 
-    @Override
+	@Override
+	public void delete(String id) {
+
+	}
+
+	@Override
+	public void updateCategoryStatus(String categoryId, boolean enableOperations) {
+
+	}
+
+	@Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delete(Long id) {
         this.removeById(id);
