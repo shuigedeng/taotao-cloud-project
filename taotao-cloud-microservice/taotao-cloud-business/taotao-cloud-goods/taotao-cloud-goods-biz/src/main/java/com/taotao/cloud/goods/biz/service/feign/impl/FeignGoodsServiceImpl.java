@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class FeignGoodsServiceImpl
-        extends BaseSuperServiceImpl<IGoodsMapper, Goods, GoodsRepository, IGoodsRepository, Long>
+        extends BaseSuperServiceImpl<Goods, Long,IGoodsMapper,  GoodsRepository, IGoodsRepository>
         implements IFeignGoodsService {
 
     @Override

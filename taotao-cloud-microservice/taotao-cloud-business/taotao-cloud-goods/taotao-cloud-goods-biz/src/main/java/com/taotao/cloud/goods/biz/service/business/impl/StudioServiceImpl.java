@@ -66,7 +66,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class StudioServiceImpl
-        extends BaseSuperServiceImpl<IStudioMapper, Studio, StudioRepository, IStudioRepository, Long>
+        extends BaseSuperServiceImpl< Studio, Long, IStudioMapper,StudioRepository, IStudioRepository>
         implements IStudioService {
 
     @Autowired

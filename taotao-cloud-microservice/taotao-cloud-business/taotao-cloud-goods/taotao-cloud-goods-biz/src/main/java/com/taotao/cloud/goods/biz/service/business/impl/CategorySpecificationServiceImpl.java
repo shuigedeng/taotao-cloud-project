@@ -39,22 +39,22 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CategorySpecificationServiceImpl
-        extends BaseSuperServiceImpl<
-        ICategorySpecificationMapper,
-        CategorySpecification,
-        CategorySpecificationRepository,
-        ICategorySpecificationRepository,
-        Long>
-        implements ICategorySpecificationService {
+	extends BaseSuperServiceImpl<
+	CategorySpecification,
+	Long,
+	ICategorySpecificationMapper,
+	CategorySpecificationRepository,
+	ICategorySpecificationRepository>
+	implements ICategorySpecificationService {
 
-    @Override
-    public List<Specification> getCategorySpecList(Long categoryId) {
-        return im().getCategorySpecList(categoryId);
-    }
+	@Override
+	public List<Specification> getCategorySpecList(Long categoryId) {
+		return im().getCategorySpecList(categoryId);
+	}
 
-    @Override
-    public boolean deleteByCategoryId(Long categoryId) {
-        return im().delete(new LambdaQueryWrapper<CategorySpecification>()
-                .eq(CategorySpecification::getCategoryId, categoryId)) > 0;
-    }
+	@Override
+	public boolean deleteByCategoryId(Long categoryId) {
+		return im().delete(new LambdaQueryWrapper<CategorySpecification>()
+			.eq(CategorySpecification::getCategoryId, categoryId)) > 0;
+	}
 }

@@ -53,7 +53,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class DraftGoodsServiceImpl
-        extends BaseSuperServiceImpl<IDraftGoodsMapper, DraftGoods, DraftGoodsRepository, IDraftGoodsRepository, Long>
+        extends BaseSuperServiceImpl<DraftGoods, Long,IDraftGoodsMapper,  DraftGoodsRepository, IDraftGoodsRepository>
         implements IDraftGoodsService {
 
     /** 分类 */

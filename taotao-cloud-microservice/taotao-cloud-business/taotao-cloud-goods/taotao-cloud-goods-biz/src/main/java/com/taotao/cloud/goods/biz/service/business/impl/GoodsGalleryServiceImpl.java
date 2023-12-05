@@ -45,8 +45,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class GoodsGalleryServiceImpl
-        extends BaseSuperServiceImpl<
-                IGoodsGalleryMapper, GoodsGallery, GoodsGalleryRepository, IGoodsGalleryRepository, Long>
+        extends BaseSuperServiceImpl<GoodsGallery, Long,IGoodsGalleryMapper, GoodsGalleryRepository, IGoodsGalleryRepository>
         implements IGoodsGalleryService {
 
     /** 设置 */

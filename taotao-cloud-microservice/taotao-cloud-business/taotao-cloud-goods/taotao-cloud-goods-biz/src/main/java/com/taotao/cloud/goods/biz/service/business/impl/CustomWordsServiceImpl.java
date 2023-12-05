@@ -46,8 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CustomWordsServiceImpl
-        extends BaseSuperServiceImpl<
-                ICustomWordsMapper, CustomWords, CustomWordsRepository, ICustomWordsRepository, Long>
+        extends BaseSuperServiceImpl<CustomWords, Long,ICustomWordsMapper, CustomWordsRepository, ICustomWordsRepository>
         implements ICustomWordsService {
 
     @Override

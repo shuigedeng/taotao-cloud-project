@@ -38,49 +38,47 @@ import java.util.List;
  * @since 2022-04-27 17:01:32
  */
 @Service
-public class CategoryBrandServiceImpl
-        extends BaseSuperServiceImpl<
-        ICategoryBrandMapper,
-        CategoryBrand,
-        CategoryBrandRepository,
-        ICategoryBrandRepository,
-        Long>
-        implements ICategoryBrandService {
+public class CategoryBrandServiceImpl extends BaseSuperServiceImpl<
+	CategoryBrand,
+	Long,
+	ICategoryBrandMapper,
+	CategoryBrandRepository,
+	ICategoryBrandRepository> implements ICategoryBrandService {
 
-    @Override
-    public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {
-        return im().getCategoryBrandList(categoryId);
-    }
+	@Override
+	public List<CategoryBrandVO> getCategoryBrandList(Long categoryId) {
+		return im().getCategoryBrandList(categoryId);
+	}
 
-    @Override
-    public boolean deleteByCategoryId(Long categoryId) {
-        LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
-        wrapper.in(CategoryBrand::getCategoryId, categoryId);
-        return im().delete(wrapper) > 0;
-    }
+	@Override
+	public boolean deleteByCategoryId(Long categoryId) {
+		LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(CategoryBrand::getCategoryId, categoryId);
+		return im().delete(wrapper) > 0;
+	}
 
-    @Override
-    public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
-        LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
-        wrapper.in(CategoryBrand::getBrandId, brandId);
-        return list(wrapper);
-    }
+	@Override
+	public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
+		LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(CategoryBrand::getBrandId, brandId);
+		return list(wrapper);
+	}
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
-        // 删除分类品牌绑定信息
-        deleteByCategoryId(categoryId);
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public boolean saveCategoryBrandList(Long categoryId, List<Long> brandIds) {
+		// 删除分类品牌绑定信息
+		deleteByCategoryId(categoryId);
 
-        // 绑定品牌信息
-        if (!brandIds.isEmpty()) {
-            List<CategoryBrand> categoryBrands = new ArrayList<>();
-            for (Long brandId : brandIds) {
-                categoryBrands.add(new CategoryBrand(categoryId, brandId));
-            }
-            this.saveBatch(categoryBrands);
-        }
+		// 绑定品牌信息
+		if (!brandIds.isEmpty()) {
+			List<CategoryBrand> categoryBrands = new ArrayList<>();
+			for (Long brandId : brandIds) {
+				categoryBrands.add(new CategoryBrand(categoryId, brandId));
+			}
+			this.saveBatch(categoryBrands);
+		}
 
-        return true;
-    }
+		return true;
+	}
 }

@@ -49,7 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SpecificationServiceImpl
         extends BaseSuperServiceImpl<
-                ISpecificationMapper, Specification, SpecificationRepository, ISpecificationRepository, Long>
+                 Specification, Long,ISpecificationMapper, SpecificationRepository, ISpecificationRepository>
         implements ISpecificationService {
 
     /** 分类-规格绑定服务 */

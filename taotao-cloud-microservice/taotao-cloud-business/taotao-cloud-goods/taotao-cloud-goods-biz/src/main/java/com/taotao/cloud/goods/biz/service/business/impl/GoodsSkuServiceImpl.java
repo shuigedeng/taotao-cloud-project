@@ -104,7 +104,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl
-        extends BaseSuperServiceImpl<IGoodsSkuMapper, GoodsSku, GoodsSkuRepository, IGoodsSkuRepository, Long>
+        extends BaseSuperServiceImpl<GoodsSku, Long, IGoodsSkuMapper, GoodsSkuRepository, IGoodsSkuRepository>
         implements IGoodsSkuService {
 
     private final GoodsSkuManager goodsSkuManager;

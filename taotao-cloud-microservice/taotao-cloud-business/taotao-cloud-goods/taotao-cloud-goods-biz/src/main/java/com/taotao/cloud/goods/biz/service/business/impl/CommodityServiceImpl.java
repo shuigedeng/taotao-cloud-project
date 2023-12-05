@@ -53,7 +53,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class CommodityServiceImpl
-        extends BaseSuperServiceImpl<ICommodityMapper, Commodity, CommodityRepository, ICommodityRepository, Long>
+        extends BaseSuperServiceImpl<Commodity, Long, ICommodityMapper, CommodityRepository, ICommodityRepository>
         implements ICommodityService {
 
     private final WechatLivePlayerUtil wechatLivePlayerUtil;
