@@ -94,4 +94,25 @@ public class CommentGenerator extends DefaultCommentGenerator {
             compilationUnit.addImportedType(new FullyQualifiedJavaType(JSON_FORMAT));
         }
     }
+
+	@Override
+	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
+		if (!addRemarkComments || CollUtil.isEmpty(imports)) return;
+		long count = imports.stream()
+			.filter(item -> API_MODEL_PROPERTY_FULL_CLASS_NAME.equals(item.getFullyQualifiedName()))
+			.count();
+		if (count <= 0L) {
+			return;
+		}
+		String remarks = introspectedColumn.getRemarks();
+		//根据参数和备注信息判断是否添加备注信息
+		if (StringUtility.stringHasValue(remarks)) {
+			//数据库中特殊字符需要转义
+			if (remarks.contains("\"")) {
+				remarks = remarks.replace("\"", "'");
+			}
+			//给model的字段添加swagger注解
+			field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
+		}
+	}
 }

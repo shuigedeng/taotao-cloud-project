@@ -17,8 +17,8 @@
 		<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
 		<!--可以自定义生成model的代码注释-->
-<!--		<commentGenerator type="com.taotao.cloud.data.mybatisplus.mbg.CommentGenerator">-->
-		<commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">
+		<commentGenerator type="com.taotao.cloud.generator.biz.mbg.CommentGenerator">
+<!--		<commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">-->
 			<!-- 是否去除自动生成的注释 true：是 ：false:否 -->
 			<property name="suppressAllComments" value="true"/>
 			<property name="suppressDate" value="true"/>
@@ -27,7 +27,7 @@
 
 		<!--配置数据库连接-->
 		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-						connectionURL="jdbc:mysql://192.168.10.220:3306/taotao-cloud-goods?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"
+						connectionURL="jdbc:mysql://192.168.10.220:3306/taotao-cloud-sys?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai&amp;useSSL=false"
 						userId="root"
 						password="123456">
 			<!--解决mysql驱动升级到8.0后不生成指定数据库代码的问题-->
@@ -43,7 +43,7 @@
 
 		<!--指定生成model的路径-->
 		<javaModelGenerator
-			targetPackage="com.taotao.cloud.goods.biz.mbg"
+			targetPackage="com.taotao.cloud.generator.biz.mbg.model"
 			targetProject="src/main/java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false"/>
@@ -52,7 +52,7 @@
 		</javaModelGenerator>
 
 		<!--指定生成mapper接口的的路径-->
-		<javaClientGenerator targetPackage="com.taotao.cloud.goods.biz.mbg"
+		<javaClientGenerator targetPackage="com.taotao.cloud.generator.biz.mbg.mapper"
 							 targetProject="src/main/java"
 							 type="ANNOTATEDMAPPER">
 			<property name="rootInterface" value="org.mybatis.dynamic.sql.util.mybatis3.CommonSelectMapper"/>
@@ -67,7 +67,7 @@
 <!--			<domainObjectRenamingRule searchString="^tt_" replaceString=""/>-->
 <!--		</table>-->
 
-				<table tableName="tt_goods" domainObjectName="Goods">
+				<table tableName="tt_app" domainObjectName="App">
 					<generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>
 				</table>
 
