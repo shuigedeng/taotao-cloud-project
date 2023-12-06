@@ -6,7 +6,7 @@ dependencies {
     compileOnly "io.github.shuigedeng:taotao-cloud-starter-office"
     compileOnly "io.seata:seata-all"
 
-    compileOnly 'com.github.oshi:oshi-core:6.4.6'
+    compileOnly 'com.github.oshi:oshi-core:6.4.8'
 
     compileOnly "io.github.shuigedeng:taotao-cloud-starter-grpc"
 
@@ -34,7 +34,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.59.1"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.60.0"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact
