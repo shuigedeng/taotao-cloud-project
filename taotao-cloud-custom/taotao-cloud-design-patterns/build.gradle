@@ -1,0 +1,9 @@
+dependencies {
+
+    implementation 'io.netty:netty-all'
+    implementation 'com.alibaba.fastjson2:fastjson2'
+    implementation "org.dromara.hutool:hutool-all:6.0.0-M8"
+
+    implementation "org.projectlombok:lombok:1.18.30"
+    annotationProcessor "org.projectlombok:lombok:1.18.30"
+}
