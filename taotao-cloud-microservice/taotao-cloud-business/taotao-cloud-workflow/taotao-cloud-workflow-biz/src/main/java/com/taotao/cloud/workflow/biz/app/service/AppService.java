@@ -16,15 +16,15 @@
 
 package com.taotao.cloud.workflow.biz.app.service;
 
-import jnpf.model.AppUserInfoVO;
-import jnpf.model.AppUsersVO;
+import taotao.cloud.workflow.biz.model.AppUserInfoVO;
+import taotao.cloud.workflow.biz.model.AppUsersVO;
 
 /**
  * app用户信息
  *
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021-08-08
  */
 public interface AppService {

@@ -68,7 +68,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.0'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.1'
 
     implementation 'com.github.oshi:oshi-core:6.4.8'
 

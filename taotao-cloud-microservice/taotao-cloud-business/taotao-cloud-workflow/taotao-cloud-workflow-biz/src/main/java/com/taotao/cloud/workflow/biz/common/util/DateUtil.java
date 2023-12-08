@@ -745,7 +745,6 @@ public class DateUtil {
      * @param startDate 开始日期
      * @param endDate 结束日期
      * @return
-     * @author jqlin
      */
     public static boolean isEffectiveDate(Date startDate, Date endDate) {
         if (startDate == null || endDate == null) {

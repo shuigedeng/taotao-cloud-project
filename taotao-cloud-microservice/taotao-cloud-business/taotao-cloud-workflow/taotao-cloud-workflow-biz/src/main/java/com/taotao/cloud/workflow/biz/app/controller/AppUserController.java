@@ -18,10 +18,10 @@ package com.taotao.cloud.workflow.biz.app.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import jnpf.base.ActionResult;
-import jnpf.model.AppUserInfoVO;
-import jnpf.model.AppUsersVO;
-import jnpf.service.AppService;
+import taotao.cloud.workflow.biz.base.ActionResult;
+import taotao.cloud.workflow.biz.model.AppUserInfoVO;
+import taotao.cloud.workflow.biz.model.AppUsersVO;
+import taotao.cloud.workflow.biz.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
  * 用户信息
  *
  * @author 
- * @version V3.1.0
- * @copyright （）
+ * 
+ * 
  * @since 2021-07-08
  */
 @Api(tags = "app用户信息", value = "User")

@@ -16,15 +16,15 @@
 
 package com.taotao.cloud.workflow.api.feign.app.fallback;
 
-import jnpf.app.AppApi;
+import taotao.cloud.workflow.biz.app.AppApi;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * api接口
  *
  * @author 
- * @version V3.1.0
- * @copyright （）
+ * 
+ * 
  * @since 2021/3/15 11:55
  */
 // @Component

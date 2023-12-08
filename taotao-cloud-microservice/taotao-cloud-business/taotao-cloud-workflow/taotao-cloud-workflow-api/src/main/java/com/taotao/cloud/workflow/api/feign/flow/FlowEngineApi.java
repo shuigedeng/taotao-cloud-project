@@ -18,10 +18,10 @@ package com.taotao.cloud.workflow.api.feign.flow;
 
 import java.util.List;
 import jakarta.validation.Valid;
-import jnpf.engine.entity.FlowEngineEntity;
-import jnpf.engine.model.flowengine.FlowAppPageModel;
-import jnpf.engine.model.flowengine.FlowPagination;
-import jnpf.exception.WorkFlowException;
+import taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import taotao.cloud.workflow.biz.engine.model.flowengine.FlowAppPageModel;
+import taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
+import taotao.cloud.workflow.biz.exception.WorkFlowException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestBody;
  * api接口
  *
  * @author 
- * @version V3.1.0
- * @copyright （）
+ * 
+ * 
  * @since 2021/3/15 11:55
  */
 // @FeignClient(name = FeignName.WORKFLOW_SERVER_NAME , fallback = FlowEngineApiFallback.class, path

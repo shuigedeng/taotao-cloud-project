@@ -17,14 +17,14 @@
 package com.taotao.cloud.workflow.biz.app.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import jnpf.entity.AppDataEntity;
+import taotao.cloud.workflow.biz.entity.AppDataEntity;
 
 /**
  * app常用数据
  *
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021-08-08
  */
 public interface AppDataMapper extends BaseMapper<AppDataEntity> {}
