@@ -32,8 +32,8 @@ dependencies {
 
     implementation 'org.springframework.session:spring-session-data-redis:3.2.0'
 
-    implementation 'com.github.binarywang:weixin-java-mp:4.5.6.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.6.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.5.8.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.8.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -49,10 +49,10 @@ dependencies {
     implementation 'org.webjars:uniform:2.1.2-1'
     implementation "org.webjars.npm:mdi__font:7.3.67"
     implementation 'org.webjars.npm:quasar:2.12.6'
-    implementation("org.webjars.npm:vue:3.3.6") {
+    implementation("org.webjars.npm:vue:3.3.9") {
         exclude group: "org.webjars.npm", module: "babel__parser"
     }
-    implementation 'org.webjars.npm:babel__parser:8.0.0-alpha.4'
+    implementation 'org.webjars.npm:babel__parser:7.23.0'
 
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
@@ -89,7 +89,7 @@ dependencies {
 
     //百度人脸识别以及登录
     //https://search.maven.org/artifact/com.baidu.aip/java-sdk
-    implementation("com.baidu.aip:java-sdk:4.16.16") {
+    implementation("com.baidu.aip:java-sdk:4.16.17") {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"

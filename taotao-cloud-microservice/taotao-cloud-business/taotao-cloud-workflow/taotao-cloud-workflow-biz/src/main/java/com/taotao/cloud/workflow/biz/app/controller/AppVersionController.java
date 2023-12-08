@@ -19,10 +19,10 @@ package com.taotao.cloud.workflow.biz.app.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.Map;
-import jnpf.base.ActionResult;
-import jnpf.base.SysConfigApi;
-import jnpf.model.BaseSystemInfo;
-import jnpf.util.NoDataSourceBind;
+import taotao.cloud.workflow.biz.base.ActionResult;
+import taotao.cloud.workflow.biz.base.SysConfigApi;
+import taotao.cloud.workflow.biz.model.BaseSystemInfo;
+import taotao.cloud.workflow.biz.util.NoDataSourceBind;
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author ：
  * @version: V3.1.0
- * @copyright 
+ *  
  * @since ：2022/3/31 11:26
  */
 @Api(tags = "获取APP版本号", value = "AppVersion")

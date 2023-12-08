@@ -203,7 +203,6 @@ public class FileUtil {
      * 删除空文件夹、空的子文件夹
      *
      * @param file
-     * @author cielo
      */
     public static void deleteEmptyDirectory(File file) {
         if (file != null && file.exists() && file.isDirectory()) {

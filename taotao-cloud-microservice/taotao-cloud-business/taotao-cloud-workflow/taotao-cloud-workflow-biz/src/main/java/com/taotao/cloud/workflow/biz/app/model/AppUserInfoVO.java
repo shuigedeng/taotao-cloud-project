@@ -21,8 +21,8 @@ import lombok.Data;
 
 /**
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021/3/12 15:31
  */
 @Data

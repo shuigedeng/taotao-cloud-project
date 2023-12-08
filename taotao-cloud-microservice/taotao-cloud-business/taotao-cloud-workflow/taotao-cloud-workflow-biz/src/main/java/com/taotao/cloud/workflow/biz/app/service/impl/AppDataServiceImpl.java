@@ -23,28 +23,28 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import jnpf.base.ModuleApi;
-import jnpf.base.UserInfo;
-import jnpf.base.entity.ModuleEntity;
-import jnpf.base.model.module.ModuleModel;
-import jnpf.base.vo.PaginationVO;
-import jnpf.engine.FlowEngineApi;
-import jnpf.engine.entity.FlowEngineEntity;
-import jnpf.engine.model.flowengine.FlowAppPageModel;
-import jnpf.engine.model.flowengine.FlowPagination;
-import jnpf.entity.AppDataEntity;
-import jnpf.mapper.AppDataMapper;
-import jnpf.model.AppDataListAllVO;
-import jnpf.model.AppFlowListAllVO;
-import jnpf.model.UserMenuModel;
-import jnpf.permission.AuthorizeApi;
-import jnpf.permission.model.authorize.AuthorizeVO;
-import jnpf.service.AppDataService;
-import jnpf.util.JsonUtil;
-import jnpf.util.RandomUtil;
-import jnpf.util.UserProvider;
-import jnpf.util.treeutil.SumTree;
-import jnpf.util.treeutil.TreeDotUtils;
+import taotao.cloud.workflow.biz.base.ModuleApi;
+import taotao.cloud.workflow.biz.base.UserInfo;
+import taotao.cloud.workflow.biz.base.entity.ModuleEntity;
+import taotao.cloud.workflow.biz.base.model.module.ModuleModel;
+import taotao.cloud.workflow.biz.base.vo.PaginationVO;
+import taotao.cloud.workflow.biz.engine.FlowEngineApi;
+import taotao.cloud.workflow.biz.engine.entity.FlowEngineEntity;
+import taotao.cloud.workflow.biz.engine.model.flowengine.FlowAppPageModel;
+import taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
+import taotao.cloud.workflow.biz.entity.AppDataEntity;
+import taotao.cloud.workflow.biz.mapper.AppDataMapper;
+import taotao.cloud.workflow.biz.model.AppDataListAllVO;
+import taotao.cloud.workflow.biz.model.AppFlowListAllVO;
+import taotao.cloud.workflow.biz.model.UserMenuModel;
+import taotao.cloud.workflow.biz.permission.AuthorizeApi;
+import taotao.cloud.workflow.biz.permission.model.authorize.AuthorizeVO;
+import taotao.cloud.workflow.biz.service.AppDataService;
+import taotao.cloud.workflow.biz.util.JsonUtil;
+import taotao.cloud.workflow.biz.util.RandomUtil;
+import taotao.cloud.workflow.biz.util.UserProvider;
+import taotao.cloud.workflow.biz.util.treeutil.SumTree;
+import taotao.cloud.workflow.biz.util.treeutil.TreeDotUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +52,8 @@ import org.springframework.stereotype.Service;
  * app常用数据
  *
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021-08-08
  */
 @Service

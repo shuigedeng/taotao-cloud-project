@@ -86,7 +86,6 @@ public class TreeDotUtils {
      *
      * @param tList
      * @param id 点ID
-     * @return java.lang.Boolean @MethosName isTreeDotExist @Author xiaowd @Date 2020/4/22 9:50
      */
     private static <T extends SumTree> Boolean isTreeDotExist(List<T> tList, String id) {
         for (T t : tList) {
@@ -102,8 +101,6 @@ public class TreeDotUtils {
      *
      * @param parentTreeDot 父点
      * @param tList
-     * @return java.util.List<cn.eshore.common.entity.Tree < T>> @MethosName
-     *     getChildTreeList @Author xiaowd @Date 2020/4/22 10:02
      */
     private static <T extends SumTree> List<SumTree<T>> getChildTreeDotList(SumTree<T> parentTreeDot, List<T> tList) {
         List<SumTree<T>> childTreeDotList = new ArrayList<>();
@@ -125,7 +122,6 @@ public class TreeDotUtils {
      *
      * @param t
      * @param tList
-     * @return pri.xiaowd.layui.pojo.TreeDot<T> @MethosName getTreeDotByT @Author xiaowd @Date
      *     2020/5/4 22:17
      */
     private static <T extends SumTree> SumTree<T> getTreeDotByT(T t, List<T> tList) {

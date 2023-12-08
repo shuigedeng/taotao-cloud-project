@@ -18,17 +18,17 @@ package com.taotao.cloud.workflow.biz.app.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
-import jnpf.engine.model.flowengine.FlowPagination;
-import jnpf.entity.AppDataEntity;
-import jnpf.model.AppDataListAllVO;
-import jnpf.model.AppFlowListAllVO;
+import taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
+import taotao.cloud.workflow.biz.entity.AppDataEntity;
+import taotao.cloud.workflow.biz.model.AppDataListAllVO;
+import taotao.cloud.workflow.biz.model.AppFlowListAllVO;
 
 /**
  * app常用数据
  *
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021-08-08
  */
 public interface AppDataService extends IService<AppDataEntity> {

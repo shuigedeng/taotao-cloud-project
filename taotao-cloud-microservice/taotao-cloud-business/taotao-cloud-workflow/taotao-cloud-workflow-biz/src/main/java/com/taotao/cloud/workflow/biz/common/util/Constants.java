@@ -19,7 +19,6 @@ package com.taotao.cloud.workflow.biz.common.util;
 /**
  * 通用常量信息
  *
- * @author workflow
  */
 public class Constants {
 

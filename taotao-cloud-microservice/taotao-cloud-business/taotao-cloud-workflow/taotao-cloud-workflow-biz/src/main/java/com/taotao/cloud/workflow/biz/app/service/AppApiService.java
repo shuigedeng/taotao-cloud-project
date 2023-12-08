@@ -20,17 +20,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import jakarta.validation.Valid;
-import jnpf.app.AppApi;
-import jnpf.base.ActionResult;
-import jnpf.base.vo.ListVO;
-import jnpf.base.vo.PaginationVO;
-import jnpf.engine.model.flowengine.FlowPagination;
-import jnpf.entity.AppDataEntity;
-import jnpf.model.AppDataCrForm;
-import jnpf.model.AppDataListAllVO;
-import jnpf.model.AppDataListVO;
-import jnpf.model.AppFlowListAllVO;
-import jnpf.util.JsonUtil;
+import taotao.cloud.workflow.biz.app.AppApi;
+import taotao.cloud.workflow.biz.base.ActionResult;
+import taotao.cloud.workflow.biz.base.vo.ListVO;
+import taotao.cloud.workflow.biz.base.vo.PaginationVO;
+import taotao.cloud.workflow.biz.engine.model.flowengine.FlowPagination;
+import taotao.cloud.workflow.biz.entity.AppDataEntity;
+import taotao.cloud.workflow.biz.model.AppDataCrForm;
+import taotao.cloud.workflow.biz.model.AppDataListAllVO;
+import taotao.cloud.workflow.biz.model.AppDataListVO;
+import taotao.cloud.workflow.biz.model.AppFlowListAllVO;
+import taotao.cloud.workflow.biz.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,8 +43,8 @@ import org.springframework.web.bind.annotation.RequestBody;
  * app常用数据
  *
  * @author 
- * @version V3.1.0
- * @copyright （）
+ * 
+ * 
  * @since 2021-07-08
  */
 @Api(tags = "app常用数据", value = "data")

@@ -24,8 +24,8 @@ import lombok.Data;
  * 用户
  *
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021-08-08
  */
 @Data

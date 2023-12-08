@@ -36,8 +36,6 @@ import org.apache.ibatis.session.RowBounds;
 /**
  * Master-slave Separation Plugin with mybatis
  *
- * @author TaoYu
- * @since 2.5.1
  */
 @Intercepts({
     @Signature(

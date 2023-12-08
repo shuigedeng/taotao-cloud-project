@@ -159,15 +159,15 @@ public class FlowEngineApiService implements FlowEngineApi {
             FormCloumnUtil.recursionForm(recursionForm, formAllModel);
             // 主表数据
             List<FormAllModel> mast = formAllModel.stream()
-                    .filter(t -> FormEnum.mast.getMessage().equals(t.getJnpfKey()))
+                    .filter(t -> FormEnum.mast.getMessage().equals(t.getWorkflowKey()))
                     .toList();
             for (FormAllModel model : mast) {
                 FieLdsModel fieLdsModel = model.getFormColumnModel().getFieLdsModel();
                 String vmodel = fieLdsModel.getVModel();
-                String jnpfKey = fieLdsModel.getConfig().getJnpfKey();
+                String workflowKey = fieLdsModel.getConfig().getWorkflowKey();
                 if (StringUtil.isNotEmpty(vmodel)
-                        && !JnpfKeyConsts.RELATIONFORM.equals(jnpfKey)
-                        && !JnpfKeyConsts.RELATIONFLOW.equals(jnpfKey)) {
+                        && !WorkflowKeyConsts.RELATIONFORM.equals(workflowKey)
+                        && !WorkflowKeyConsts.RELATIONFLOW.equals(workflowKey)) {
                     FormDataField formDataField = new FormDataField();
                     formDataField.setLabel(fieLdsModel.getConfig().getLabel());
                     formDataField.setVModel(fieLdsModel.getVModel());

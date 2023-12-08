@@ -218,7 +218,6 @@ public class ReflectionUtil {
      *
      * @param obj 传入对象
      * @return
-     * @author Lin Chenglin 2013-4-9
      */
     public static String toString(final Object obj) {
         if (obj == null) {

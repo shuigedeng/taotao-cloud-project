@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.workflow.biz.app.model;
 
-import jnpf.util.treeutil.SumTree;
+import taotao.cloud.workflow.biz.util.treeutil.SumTree;
 import lombok.Data;
 
 /**
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  */
 @Data
 public class AppTreeModel extends SumTree {

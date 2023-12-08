@@ -25,14 +25,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import jnpf.base.UserInfo;
-import jnpf.model.AppPositionVO;
-import jnpf.model.AppUserInfoVO;
-import jnpf.model.AppUsersVO;
-import jnpf.permission.*;
-import jnpf.permission.entity.*;
-import jnpf.service.AppService;
-import jnpf.util.*;
+import taotao.cloud.workflow.biz.base.UserInfo;
+import taotao.cloud.workflow.biz.model.AppPositionVO;
+import taotao.cloud.workflow.biz.model.AppUserInfoVO;
+import taotao.cloud.workflow.biz.model.AppUsersVO;
+import taotao.cloud.workflow.biz.permission.*;
+import taotao.cloud.workflow.biz.permission.entity.*;
+import taotao.cloud.workflow.biz.service.AppService;
+import taotao.cloud.workflow.biz.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +40,8 @@ import org.springframework.stereotype.Service;
  * app用户信息
  *
  * @author 
- * @version V3.1.0
- * @copyright 
+ * 
+ *  
  * @since 2021-08-08
  */
 @Service
