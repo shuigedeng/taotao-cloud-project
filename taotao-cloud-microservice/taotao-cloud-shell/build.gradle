@@ -11,6 +11,10 @@ dependencies {
 
     implementation 'org.springframework.shell:spring-shell-starter:3.1.6'
 
+    //，jcommander 是一个只有几十 kb 的 Java 命令行参数解析工具，可以通过注解的方式快速实现命令行参数解析。
+    //https://search.maven.org/artifact/com.beust/jcommander
+    implementation 'com.beust:jcommander:1.82'
+
     //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
     implementation "com.github.whvcse:easy-captcha:1.6.2"
     implementation "jakarta.servlet:jakarta.servlet-api"
