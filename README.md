@@ -149,6 +149,7 @@ Maven:
 
 ## 6. 演示地址
 
+* TaotaoCloud脚手架：[https://start.taotaocloud.top/](https://start.taotaocloud.top/)
 * 文档地址：[https://docs.taotaocloud.top](https://docs.taotaocloud.top)
 * 博客地址: [https://blog.taotaocloud.top](https://blog.taotaocloud.top)
 * 代码质量检测结果地址: [https://qodana.taotaocloud.top](https://qodana.taotaocloud.top) (带宽有限,
