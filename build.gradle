@@ -306,6 +306,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
                 cacheDynamicVersionsFor 0, "seconds"
             }
         }
+
         compileOnly {
             extendsFrom annotationProcessor
         }
