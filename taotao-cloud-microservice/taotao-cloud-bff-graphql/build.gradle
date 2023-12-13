@@ -1,3 +1,7 @@
+plugins {
+    id 'com.netflix.dgs.codegen' version '6.0.3'
+}
+
 var apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
         .findAll {it -> it.name.endsWith("-api")}
 
@@ -20,6 +24,7 @@ dependencies {
     }
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
+    testImplementation 'org.springframework.graphql:spring-graphql-test'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
@@ -49,3 +54,9 @@ dependencies {
 mainClassName = "com.taotao.cloud.bff.graphql.TaoTaoCloudBffGraphqlApplication"
 description = "bff graphql中心"
 archivesBaseName = 'taotao-cloud-bff-graphql'
+
+generateJava {
+    schemaPaths = ["${projectDir}/src/main/resources/graphql-client"]
+    packageName = 'com.example.demo.codegen'
+    generateClient = true
+}
