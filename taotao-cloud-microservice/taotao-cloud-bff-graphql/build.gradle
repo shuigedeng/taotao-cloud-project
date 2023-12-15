@@ -1,5 +1,5 @@
 plugins {
-    id 'com.netflix.dgs.codegen' version '6.0.3'
+    id 'com.netflix.dgs.codegen' version '6.1.1'
 }
 
 var apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
@@ -24,7 +24,7 @@ dependencies {
     }
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
-    testImplementation 'org.springframework.graphql:spring-graphql-test'
+    testImplementation 'org.springframework.graphql:spring-graphql-test:1.2.4'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
