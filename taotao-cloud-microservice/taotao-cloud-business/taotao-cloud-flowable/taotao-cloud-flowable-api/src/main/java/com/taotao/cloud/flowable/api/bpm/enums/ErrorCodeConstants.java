@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.flowable.api.bpm.enums;
 
-import cn.iocoder.yudao.framework.common.exception.ErrorCode;
+import cn.iocoder.yudao.framework.common.exception .ErrorCode;
 
 /**
  * 工作流 错误码枚举类
