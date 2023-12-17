@@ -1,6 +1,6 @@
-plugins {
-    id 'com.netflix.dgs.codegen' version '6.1.1'
-}
+//plugins {
+//    id 'com.netflix.dgs.codegen' version '6.1.1'
+//}
 
 var apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
         .findAll {it -> it.name.endsWith("-api")}
@@ -55,8 +55,8 @@ mainClassName = "com.taotao.cloud.bff.graphql.TaoTaoCloudBffGraphqlApplication"
 description = "bff graphql中心"
 archivesBaseName = 'taotao-cloud-bff-graphql'
 
-generateJava {
-    schemaPaths = ["${projectDir}/src/main/resources/graphql-client"]
-    packageName = 'com.example.demo.codegen'
-    generateClient = true
-}
+//generateJava {
+//    schemaPaths = ["${projectDir}/src/main/resources/graphql-client"]
+//    packageName = 'com.example.demo.codegen'
+//    generateClient = true
+//}
