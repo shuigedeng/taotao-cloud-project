@@ -1284,9 +1284,6 @@ management:
       show-details: ALWAYS
     shutdown:
       enabled: true
-  metrics:
-    tags:
-      application: ${spring.application.name}
   health:
     mail:
       enabled: false
@@ -1294,7 +1291,6 @@ management:
       enabled: true
     rabbit:
       enabled: true
-
   zipkin:
     tracing:
       connect-timeout: 1
@@ -1312,6 +1308,8 @@ management:
       server:
         requests:
           name: taotao-server-name
+    key-values:
+      application: ${spring.application.name}
   prometheus:
     metrics:
       export:
