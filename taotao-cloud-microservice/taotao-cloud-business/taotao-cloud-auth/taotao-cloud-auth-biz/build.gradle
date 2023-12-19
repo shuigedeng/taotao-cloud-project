@@ -32,8 +32,8 @@ dependencies {
 
     implementation 'org.springframework.session:spring-session-data-redis:3.2.0'
 
-    implementation 'com.github.binarywang:weixin-java-mp:4.5.8.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.8.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.5.9.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.5.9.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -77,9 +77,9 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.37.2"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.37.3"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:11.7"
+    implementation "com.nimbusds:oauth2-oidc-sdk:11.8"
 
     implementation "org.apache.commons:commons-collections4"
 
