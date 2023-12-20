@@ -1,0 +1,3 @@
+dependencies {
+    implementation 'org.apache.hive:hive-exec:2.3.5'
+}

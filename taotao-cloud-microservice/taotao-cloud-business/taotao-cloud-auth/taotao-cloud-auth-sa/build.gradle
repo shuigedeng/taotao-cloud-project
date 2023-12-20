@@ -62,9 +62,9 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.12.0'
-            force 'org.bouncycastle:bcprov-jdk18on:1.76'
-            force 'org.bouncycastle:bcpkix-jdk18on:1.76'
-            force 'org.bouncycastle:bcutil-jdk18on:1.76'
+            force 'org.bouncycastle:bcprov-jdk18on:1.77'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.77'
+            force 'org.bouncycastle:bcutil-jdk18on:1.77'
         }
 
         //exclude group: "log4j", module: "log4j"
