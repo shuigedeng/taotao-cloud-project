@@ -1,4 +1,12 @@
 dependencies {
-    compileOnly 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.3'
-    compileOnly 'org.apache.seatunnel:seatunnel-api:2.3.3'
+    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.3'
+    implementation 'org.apache.seatunnel:seatunnel-api:2.3.3'
+
+    implementation 'cn.hutool:hutool-all:5.8.23'
+
+    //https://search.maven.org/artifact/com.google.auto.service/auto-service
+    compileOnly "com.google.auto.service:auto-service:1.1.1"
+    compileOnly 'com.google.auto.service:auto-service-annotations:1.1.1'
+    //https://search.maven.org/artifact/com.google.auto.service/auto-service
+    annotationProcessor "com.google.auto.service:auto-service:1.1.1"
 }
