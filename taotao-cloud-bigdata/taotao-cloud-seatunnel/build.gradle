@@ -1,0 +1,4 @@
+dependencies {
+    compileOnly 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.3'
+    compileOnly 'org.apache.seatunnel:seatunnel-api:2.3.3'
+}
