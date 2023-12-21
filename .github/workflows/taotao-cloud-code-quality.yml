@@ -7,7 +7,6 @@ on:
       - master
       - 'releases/*'
 
-
 jobs:
   qodana:
     runs-on: ubuntu-latest
@@ -19,7 +18,7 @@ jobs:
           fetch-depth: 0
 
       - name: Qodana Scan
-        uses: JetBrains/qodana-action@v5.1.0
+        uses: JetBrains/qodana-action@v2023.2
         with:
           #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results
