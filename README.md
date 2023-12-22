@@ -21,7 +21,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, graalvm21, 采用最新的spring 6.1.1、SpringBoot 3.2.0、SpringCloud 2022.0.4、SpringSecurity 6.2.0、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, graalvm21, 采用最新的spring 6.1.1、SpringBoot 3.2.1、SpringCloud 2022.0.4、SpringSecurity 6.2.0、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
@@ -117,7 +117,7 @@ Maven:
  依赖                   | 版本              
 ----------------------|-----------------
  Spring               | 6.1.1           
- Spring Boot          | 3.2.0           
+ Spring Boot          | 3.2.1           
  Spring Cloud         | 2022.0.4        
  Spring Cloud Alibaba | 2022.0.0.0 
  Spring Cloud Tencent | 1.12.4-2022.0.4 
@@ -177,7 +177,7 @@ Maven:
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.2.0、Spring Cloud 2022.0.4、Spring Cloud Alibaba 2022.0.0.0 版本进行设计
+* **主体框架**：采用最新的Spring Boot 3.2.1、Spring Cloud 2022.0.4、Spring Cloud Alibaba 2022.0.0.0 版本进行设计
 * **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等
 * **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
