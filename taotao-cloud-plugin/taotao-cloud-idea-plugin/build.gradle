@@ -10,7 +10,7 @@ apply plugin: "org.jetbrains.intellij"
 dependencies {
     //testImplementation "junit:junit:4.13.2"
 
-    implementation "org.dromara.hutool:hutool-all:6.0.0-M8"
+    implementation "org.dromara.hutool:hutool-all:6.0.0-M9"
     implementation "com.google.zxing:core:3.5.2"
     implementation "com.google.zxing:javase:3.5.2"
 }
