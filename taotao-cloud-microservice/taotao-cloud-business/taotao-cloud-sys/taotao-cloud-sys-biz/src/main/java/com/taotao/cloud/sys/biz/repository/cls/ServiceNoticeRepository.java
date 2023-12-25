@@ -19,6 +19,7 @@ package com.taotao.cloud.sys.biz.repository.cls;
 import com.taotao.cloud.sys.biz.model.entity.system.ServiceNotice;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -30,8 +31,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ServiceNoticeRepository extends BaseClassSuperRepository<ServiceNotice, Long> {
+	@PersistenceContext
+	private EntityManager em;
 
-    public ServiceNoticeRepository(EntityManager em) {
-        super(ServiceNotice.class, em);
-    }
+	public ServiceNoticeRepository(EntityManager em) {
+		super(ServiceNotice.class, em);
+	}
 }
