@@ -20,8 +20,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-batch'
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:6.2.0'
-    implementation 'org.springframework.integration:spring-integration-jdbc:6.2.0'
+    implementation 'org.springframework.integration:spring-integration-core:6.2.1'
+    implementation 'org.springframework.integration:spring-integration-jdbc:6.2.1'
 
     //以下依赖使用的是springboot2.7先不打开 https://github.com/spring-projects/spring-batch-extensions
     //implementation 'org.springframework.batch.extensions:spring-batch-excel:0.1.1'
