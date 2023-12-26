@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.task;
+package com.taotao.cloud.job.biz.task;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsApi;
 import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
-import java.util.Calendar;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /** 会员数据统计 */
 @Component

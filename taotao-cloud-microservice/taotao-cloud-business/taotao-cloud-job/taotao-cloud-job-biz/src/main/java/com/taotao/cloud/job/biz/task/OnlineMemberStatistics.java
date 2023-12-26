@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.task;
+package com.taotao.cloud.job.biz.task;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.job.xxl.timetask.EveryHourExecute;
 import com.taotao.cloud.report.api.model.vo.OnlineMemberVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /** 实时在线人数统计 */
 @Component

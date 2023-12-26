@@ -887,7 +887,7 @@ spring:
       auto-offset-reset: latest
       # 是否自动提交偏移量，默认值是true，为了避免出现重复数据和数据丢失，可以把它设置为false，然后手动提交偏移量
       enable-auto-commit: false
-      max-poll-records: 500 #单次拉取消息的最大条数
+      #max-poll-records: 500 #单次拉取消息的最大条数
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       #key-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

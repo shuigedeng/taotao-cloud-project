@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.task;
+package com.taotao.cloud.job.biz.task;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
