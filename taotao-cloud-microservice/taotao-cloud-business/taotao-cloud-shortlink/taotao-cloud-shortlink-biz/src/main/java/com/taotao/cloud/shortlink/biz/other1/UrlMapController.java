@@ -1,83 +1,45 @@
 package com.taotao.cloud.shortlink.biz.other1;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Optional;
+import java.util.Map;
 
-/**
- * @ClassName UrlMapService
- * @Description
- * @Version 1.0.0
- * @Author bobochang
- * @Date 2023/08/29
- */
-@Service
-@Slf4j
-public class UrlMapServiceImpl implements UrlMapService {
-	/**
-	 * UrlMap 接口注入
-	 */
+@RestController
+@RequestMapping("/urlmap")
+public class UrlMapController {
+
+	private static final String DOMAIN = "http://127.0.0.1:8888/urlmap/";
+
 	@Autowired
-	private UrlMapDao urlMapDao;
-	/**
-	 * 缓存对象注入
-	 */
-	private LoadingCache<String, String> loadingCache;
-
-	@PostConstruct
-	public void init() {
-		CacheLoader<String, String> cacheLoader = new CacheLoader<>() {
-			@Override
-			public String load(String shortKey) {
-				long id = Base62Utils.shortKeyToId(shortKey);
-				log.info("Loading cache {}", shortKey);
-				return urlMapDao.findById(id).map(UrlMap::getLongUrl).orElse(null);
-			}
-		};
-
-		loadingCache = CacheBuilder.newBuilder()
-			// 设置最大缓存大小
-			.maximumSize(100000)
-			.build(cacheLoader);
-	}
+	private UrlMapService urlMapService;
 
 	/**
-	 * 为长链接创建对应的键值
+	 * 前端传入一个长链接,后端根据长链接生成对应的短链接键值,并且将短链接键值接入到对应的 url 后面
 	 *
-	 * @param longUrl 需要进行短链接 key 编码的长链接
-	 * @return 短链接的键值
+	 * @param longUrl 对应的长链接 http://localhost:8888/urlmap/shorten?longUrl="www.baidu.com"
+	 * @return 对应生成的短链接 http://127.0.0.1:8888/000001
 	 */
-	@Override
-	public String encode(String longUrl) {
-		UrlMap urlMap = urlMapDao.findFirstByLongUrl(longUrl);
-
-		if (urlMap == null) {
-			urlMap = urlMapDao.save(UrlMap.builder()
-				.longUrl(longUrl)
-				.expireTime(Instant.now().plus(30, ChronoUnit.DAYS))
-				.build()
-			);
-			log.info("create urlMap:{}", urlMap);
+	@PostMapping("/shorten")
+	public ResponseResult<Map> shorten(@RequestParam("longUrl") String longUrl) {
+		//非空检验,避免传入空的长链接参数导致错误
+		if (longUrl == null) {
+			throw new RuntimeException("Link parameter exception: The passed long link parameter is abnormal.");
 		}
-		return Base62Utils.idToShortKey(urlMap.getId());
+
+		String encode = urlMapService.encode(longUrl);
+		return ResultUtils.success(Map.of("shortKey", encode, "shortUrl", DOMAIN + encode));
 	}
 
-	/**
-	 * 短链接重定向开发
-	 *
-	 * @param shortKey 需要进行解码的短链接 Key 值
-	 * @return 对应的长链接
-	 */
-	@Override
-	public Optional<String> decode(String shortKey) {
-		return Optional.ofNullable(loadingCache.getUnchecked(shortKey));
+	@GetMapping("/{shortKey}")
+	public RedirectView redirect(@PathVariable("shortKey") String shortKey) {
+		return urlMapService.decode(shortKey).map(RedirectView::new)
+			.orElse(new RedirectView(DOMAIN + "/sorry"));
 	}
+
+	@GetMapping("/sorry")
+	public String sorry() {
+		return "抱歉，未找到页面！";
+	}
+
 }

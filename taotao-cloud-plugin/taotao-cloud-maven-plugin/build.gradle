@@ -18,13 +18,13 @@ plugins {
 apply plugin: "io.freefair.maven-plugin"
 
 dependencies {
-    implementation 'org.apache.maven:maven-core:3.9.4'
-    implementation 'org.apache.maven:maven-model:3.9.4'
-    implementation 'org.apache.maven:maven-plugin-api:3.9.4'
+    implementation 'org.apache.maven:maven-core:3.9.6'
+    implementation 'org.apache.maven:maven-model:3.9.6'
+    implementation 'org.apache.maven:maven-plugin-api:3.9.6'
 
     implementation "com.google.guava:guava:33.0.0-jre"
 
-    compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.9.0'
+    compileOnly 'org.apache.maven.plugin-tools:maven-plugin-annotations:3.10.2'
 }
 
 //apply plugin: "de.benediktritter.maven-plugin-development"
