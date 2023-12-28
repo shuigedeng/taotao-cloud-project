@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: taotao-cloud-sys-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-sys
+  APPLICATION_NAME: "taotao-cloud-sys"
   APPLICATION_VERSION: '2024.01'
 ---
 apiVersion: v1

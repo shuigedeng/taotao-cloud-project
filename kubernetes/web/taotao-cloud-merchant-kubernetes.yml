@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: taotao-cloud-merchant-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-merchant
+  APPLICATION_NAME: "taotao-cloud-merchant"
   APPLICATION_VERSION: '2024.01'
 ---
 apiVersion: v1

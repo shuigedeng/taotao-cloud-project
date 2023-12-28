@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: taotao-cloud-open-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-open
+  APPLICATION_NAME: "taotao-cloud-open"
   APPLICATION_VERSION: '2024.01'
 ---
 apiVersion: v1
