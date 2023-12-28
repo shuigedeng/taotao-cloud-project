@@ -37,24 +37,26 @@ RUN ln -s /usr/lib/libfontconfig.so.1 /usr/lib/libfontconfig.so \
     && ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1 # buildkit
 
 # 安装openjdk21 从openjdk镜像copy https://jdk.java.net/21/
-RUN /bin/sh -c set -eux;   \
+RUN echo 'sdfasf'   \
+    && set -eux   \
     && downloadUrl='https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz'  \
-    && downloadSha256='a30c454a9bef8f46d5f1bf3122830014a8fbe7ac03b5f8729bc3add4b92a1d0a')  \
-    && curl -fL -o openjdk.tgz "$downloadUrl"; echo "$downloadSha256 *openjdk.tgz" | sha256sum --strict --check -;  \
-    && mkdir -p "$JAVA_HOME"; tar --extract --file openjdk.tgz --directory "$JAVA_HOME" --strip-components 1 --no-same-owner ;  \
-    && rm openjdk.tgz*;  \
-    && rm -rf "$JAVA_HOME/lib/security/cacerts";  \
-    && ln -sT /etc/pki/ca-trust/extracted/java/cacerts "$JAVA_HOME/lib/security/cacerts";  \
-    && ln -sfT "$JAVA_HOME" /usr/java/default; ln -sfT "$JAVA_HOME" /usr/java/latest;  \
-    && for bin in "$JAVA_HOME/bin/"*;  \
+    && downloadSha256='a30c454a9bef8f46d5f1bf3122830014a8fbe7ac03b5f8729bc3add4b92a1d0a'  \
+    && curl -fL -o openjdk.tgz "$downloadUrl"; echo "$downloadSha256 *openjdk.tgz" | sha256sum --strict --check -  \
+    && mkdir -p "$JAVA_HOME"; tar --extract --file openjdk.tgz --directory "$JAVA_HOME" --strip-components 1 --no-same-owner   \
+    && rm openjdk.tgz*  \
+    && rm -rf "$JAVA_HOME/lib/security/cacerts"  \
+    && ln -sT /etc/pki/ca-trust/extracted/java/cacerts "$JAVA_HOME/lib/security/cacerts"  \
+    && ln -sfT "$JAVA_HOME" /usr/java/default; ln -sfT "$JAVA_HOME" /usr/java/latest  \
+    && for bin in "$JAVA_HOME/bin/"*  \
     && do  \
-    &&   base="$(basename "$bin")"; [ ! -e "/usr/bin/$base" ]; \
-    &&   alternatives --install "/usr/bin/$base" "$base" "$bin" 20000;  \
-    && done;  \
-    && java -Xshare:dump; fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))' | jshell -s -)"; [ "$fileEncoding" = 'UTF-8' ];  \
-    && rm -rf ~/.java;  \
-    && javac --version;  \
-    && java --version \
+    &&   base="$(basename "$bin")" \
+    &&	 [ ! -e "/usr/bin/$base" ] \
+    &&   alternatives --install "/usr/bin/$base" "$base" "$bin" 20000  \
+    && done  \
+    && java -Xshare:dump; fileEncoding="$(echo 'System.out.println(System.getProperty("file.encoding"))' | jshell -s -)"; [ "$fileEncoding" = 'UTF-8' ]  \
+    && rm -rf ~/.java  \
+    && javac --version  \
+    && java --version 
 
 USER root
 

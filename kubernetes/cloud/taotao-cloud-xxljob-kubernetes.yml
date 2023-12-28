@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: taotao-cloud-xxljob-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-xxljob
+  APPLICATION_NAME: "taotao-cloud-xxljob"
   APPLICATION_VERSION: '2024.01'
 ---
 apiVersion: v1

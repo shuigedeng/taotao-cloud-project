@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: taotao-cloud-order-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-order
+  APPLICATION_NAME: "taotao-cloud-order"
   APPLICATION_VERSION: '2024.01'
 ---
 apiVersion: v1
