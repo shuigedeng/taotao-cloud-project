@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "packageManager": "pnpm@8.6.6",
+  "devDependencies": {
+    "mkdirp": "~3"
+  },
+  "scripts": {
+    "build": "echo Building frontend",
+    "check": "echo Checking frontend && pnpm run lint && pnpm run test",
+    "clean": "echo Cleaning frontend",
+    "lint": "echo Linting frontend",
+    "test": "echo Testing frontend"
+  }
+}
