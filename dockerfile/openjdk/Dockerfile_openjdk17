@@ -29,7 +29,7 @@ COPY ./skywalking-agent /skywalking/agent
 
 COPY ./pyroscope-agent /pyroscope/agent
 
-COPY ./healthcheck.sh /healthcheck.sh
+COPY ../taotao-cloud/healthcheck.sh /healthcheck.sh
 
 RUN chmod 755 /healthcheck.sh
 

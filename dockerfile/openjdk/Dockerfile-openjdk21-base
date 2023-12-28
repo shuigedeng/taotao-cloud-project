@@ -77,7 +77,7 @@ RUN mkdir /pyroscope
 COPY ./skywalking-agent /skywalking/agent
 COPY ./pyroscope-agent /pyroscope/agent
 
- # 删除临时文件和缓存
+# 删除临时文件和缓存
 RUN rm -rf /tmp/* /var/cache/apk/*
 
 # docker build -t FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk:21 .
