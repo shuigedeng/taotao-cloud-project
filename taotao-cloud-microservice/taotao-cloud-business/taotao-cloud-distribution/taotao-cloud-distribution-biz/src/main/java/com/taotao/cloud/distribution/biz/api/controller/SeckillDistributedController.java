@@ -85,7 +85,7 @@ public class SeckillDistributedController {
             Long seckillCount = seckillService.getSeckillCount(seckillId);
             LOGGER.info("一共秒杀出{}件商品", seckillCount);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -109,7 +109,7 @@ public class SeckillDistributedController {
             Long seckillCount = seckillService.getSeckillCount(seckillId);
             LOGGER.info("一共秒杀出{}件商品", seckillCount);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -139,7 +139,7 @@ public class SeckillDistributedController {
             Long seckillCount = seckillService.getSeckillCount(seckillId);
             LOGGER.info("一共秒杀出{}件商品", seckillCount);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -168,7 +168,7 @@ public class SeckillDistributedController {
             Long seckillCount = seckillService.getSeckillCount(seckillId);
             LOGGER.info("一共秒杀出{}件商品", seckillCount);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -198,7 +198,7 @@ public class SeckillDistributedController {
             Long seckillCount = seckillService.getSeckillCount(seckillId);
             LOGGER.info("一共秒杀出{}件商品", seckillCount);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -233,7 +233,7 @@ public class SeckillDistributedController {
             Long secKillCount = seckillService.getSeckillCount(secKillId);
             LOGGER.info("一共秒杀出{}件商品", secKillCount);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }

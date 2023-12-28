@@ -36,11 +36,11 @@ public class EServiceCondition extends AsyncTask<Object, Boolean> {
 
     @Override
     public Boolean task(Object o, TaskSupport support) {
-        //        System.out.println("EServiceCondition Begin");
+        //        LogUtils.info("EServiceCondition Begin");
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
-        //        System.out.println("EServiceCondition Finish");
+        //        LogUtils.info("EServiceCondition Finish");
         return true;
     }
 }

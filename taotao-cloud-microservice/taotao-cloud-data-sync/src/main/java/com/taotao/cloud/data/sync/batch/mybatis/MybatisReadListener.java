@@ -42,7 +42,7 @@ public class MybatisReadListener implements ItemReadListener<BlogInfo> {
         try {
             logger.info(format("%s%n", ex.getMessage()));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

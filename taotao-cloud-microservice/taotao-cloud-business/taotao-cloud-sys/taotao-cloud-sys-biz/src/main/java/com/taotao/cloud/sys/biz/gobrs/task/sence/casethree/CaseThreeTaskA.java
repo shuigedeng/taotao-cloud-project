@@ -31,13 +31,13 @@ public class CaseThreeTaskA extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("A任务执行");
+        LogUtils.info("A任务执行");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
-        System.out.println("A任务执行完成");
+        LogUtils.info("A任务执行完成");
         return "AResult";
     }
 }

@@ -314,7 +314,7 @@ public class TemporaryUser implements UserDetails, CredentialsContainer {
      *     .roles("USER")
      *     .build();
      * // outputs {bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG
-     * System.out.println(user.getPassword());
+     * LogUtils.info(user.getPassword());
      * </code>
      * </pre>
      * <p>
@@ -334,7 +334,7 @@ public class TemporaryUser implements UserDetails, CredentialsContainer {
      * PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
      * // outputs {bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG
      * // remember the password that is printed out and use in the next step
-     * System.out.println(encoder.encode("password"));
+     * LogUtils.info(encoder.encode("password"));
      * </code>
      * </pre>
      *

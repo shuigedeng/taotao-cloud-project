@@ -224,7 +224,7 @@ public class ResourceServiceImpl
 	//
 	//		Thread.sleep(3000);
 	//	} catch (InterruptedException e) {
-	//		e.printStackTrace();
+	//		LogUtils.error(e);
 	//	}
 	//
 	//	LogUtil.info("MenuById *********************************");

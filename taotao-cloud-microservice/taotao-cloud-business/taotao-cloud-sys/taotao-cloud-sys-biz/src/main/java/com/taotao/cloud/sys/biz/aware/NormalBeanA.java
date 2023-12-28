@@ -28,12 +28,12 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class NormalBeanA implements BeanNameAware, InitializingBean, DisposableBean {
     public NormalBeanA() {
-        System.out.println("NormalBean constructor");
+        LogUtils.info("NormalBean constructor");
     }
 
     @Override
     public void setBeanName(String name) {
-        System.out.println("[BeanNameAware] " + name);
+        LogUtils.info("[BeanNameAware] " + name);
     }
 
     /**
@@ -47,7 +47,7 @@ public class NormalBeanA implements BeanNameAware, InitializingBean, DisposableB
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("[InitializingBean] NormalBeanA");
+        LogUtils.info("[InitializingBean] NormalBeanA");
     }
 
     /**
@@ -57,7 +57,7 @@ public class NormalBeanA implements BeanNameAware, InitializingBean, DisposableB
      */
     @Override
     public void destroy() throws Exception {
-        System.out.println("[DisposableBean] NormalBeanA");
+        LogUtils.info("[DisposableBean] NormalBeanA");
     }
 
     /**
@@ -67,6 +67,6 @@ public class NormalBeanA implements BeanNameAware, InitializingBean, DisposableB
      */
     @PostConstruct
     public void init() {
-        System.out.println("[PostConstruct] NormalBeanA");
+        LogUtils.info("[PostConstruct] NormalBeanA");
     }
 }

@@ -61,7 +61,7 @@ public class UploadController {
 			}
 		} catch (Exception ex) {
 			log.error("异常", ex);
-			System.out.println(ex.getMessage());
+			LogUtils.info(ex.getMessage());
 			return "500";
 		}
 	}

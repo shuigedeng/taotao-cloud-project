@@ -75,7 +75,7 @@ public class BuyerDictController extends BaseBusinessController<IDictService, Di
         //	producerService.sendStringMsg();
         //	producerService.sendClassMsg();
         // } catch (PulsarClientException e) {
-        //	e.printStackTrace();
+        //	LogUtils.error(e);
         // }
 
         Dict byCode = service().findByCode(code);

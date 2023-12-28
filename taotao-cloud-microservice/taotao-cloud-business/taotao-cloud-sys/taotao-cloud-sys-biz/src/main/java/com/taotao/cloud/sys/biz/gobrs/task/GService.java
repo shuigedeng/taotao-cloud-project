@@ -43,11 +43,11 @@ public class GService extends AsyncTask {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("GService Begin");
+            LogUtils.info("GService Begin");
             Thread.sleep(100);
-            System.out.println("GService Finish");
+            LogUtils.info("GService Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;

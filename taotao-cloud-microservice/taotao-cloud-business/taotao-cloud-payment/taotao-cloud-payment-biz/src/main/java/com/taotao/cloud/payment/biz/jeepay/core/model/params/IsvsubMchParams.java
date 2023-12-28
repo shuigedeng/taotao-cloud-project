@@ -32,7 +32,7 @@ public abstract class IsvsubMchParams {
         try {
             return (IsvsubMchParams)JSONObject.parseObject(paramsStr, Class.forName(IsvsubMchParams.class.getPackage().getName() +"."+ ifCode +"."+ StrUtil.upperFirst(ifCode) +"IsvsubMchParams"));
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

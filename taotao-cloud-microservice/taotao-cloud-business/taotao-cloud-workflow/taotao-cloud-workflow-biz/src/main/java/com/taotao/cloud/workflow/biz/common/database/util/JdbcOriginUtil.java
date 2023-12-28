@@ -113,7 +113,7 @@ public class JdbcOriginUtil {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -125,7 +125,7 @@ public class JdbcOriginUtil {
                 return rs2.getString("COLUMN_NAME");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return "";
     }
@@ -158,7 +158,7 @@ public class JdbcOriginUtil {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -171,7 +171,7 @@ public class JdbcOriginUtil {
             }
             mapList.add(map);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

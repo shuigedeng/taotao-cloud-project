@@ -54,7 +54,7 @@ public class EmailConfigServiceImpl extends ServiceImpl<IEmailConfigMapper, Emai
         //        emailConfig.setPass(EncryptUtils.desEncrypt(emailConfig.getPass()));
         //    }
         // } catch (Exception e) {
-        //    e.printStackTrace();
+        //    LogUtils.error(e);
         // }
         // this.save(emailConfig);
         return true;

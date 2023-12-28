@@ -87,7 +87,7 @@ public class FeignFileController implements IFeignFileApi {
 			.build();
 		File file = FileGrpcServiceGrpc.newBlockingStub(channel)
 			.searchFile(ConditionsRequest.newBuilder().setId("112").build());
-		System.out.println(file);
+		LogUtils.info(file);
 
 		return FeignFileResponse.builder().description("sdfasdfsa").dictCode("sfd").build();
 	}

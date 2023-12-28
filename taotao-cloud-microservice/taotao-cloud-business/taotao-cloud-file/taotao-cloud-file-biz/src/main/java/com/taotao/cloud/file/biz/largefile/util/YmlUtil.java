@@ -74,6 +74,6 @@ public class YmlUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getValue("hello.desc"));
+        LogUtils.info(getValue("hello.desc"));
     }
 }

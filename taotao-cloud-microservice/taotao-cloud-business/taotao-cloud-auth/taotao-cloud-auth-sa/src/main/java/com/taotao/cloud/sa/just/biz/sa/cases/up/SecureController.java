@@ -36,13 +36,13 @@ public class SecureController {
     @RequestMapping("digest")
     public SaResult digest() {
         // md5加密
-        System.out.println(SaSecureUtil.md5("123456"));
+        LogUtils.info(SaSecureUtil.md5("123456"));
 
         // sha1加密
-        System.out.println(SaSecureUtil.sha1("123456"));
+        LogUtils.info(SaSecureUtil.sha1("123456"));
 
         // sha256加密
-        System.out.println(SaSecureUtil.sha256("123456"));
+        LogUtils.info(SaSecureUtil.sha256("123456"));
 
         return SaResult.ok();
     }
@@ -56,11 +56,11 @@ public class SecureController {
 
         // 加密
         String ciphertext = SaSecureUtil.aesEncrypt(key, text);
-        System.out.println("AES加密后：" + ciphertext);
+        LogUtils.info("AES加密后：" + ciphertext);
 
         // 解密
         String text2 = SaSecureUtil.aesDecrypt(key, ciphertext);
-        System.out.println("AES解密后：" + text2);
+        LogUtils.info("AES解密后：" + text2);
 
         return SaResult.ok();
     }
@@ -79,11 +79,11 @@ public class SecureController {
 
         // 使用公钥加密
         String ciphertext = SaSecureUtil.rsaEncryptByPublic(publicKey, text);
-        System.out.println("公钥加密后：" + ciphertext);
+        LogUtils.info("公钥加密后：" + ciphertext);
 
         // 使用私钥解密
         String text2 = SaSecureUtil.rsaDecryptByPrivate(privateKey, ciphertext);
-        System.out.println("私钥解密后：" + text2);
+        LogUtils.info("私钥解密后：" + text2);
 
         return SaResult.ok();
     }
@@ -96,11 +96,11 @@ public class SecureController {
 
         // 使用Base64编码
         String base64Text = SaBase64Util.encode(text);
-        System.out.println("Base64编码后：" + base64Text);
+        LogUtils.info("Base64编码后：" + base64Text);
 
         // 使用Base64解码
         String text2 = SaBase64Util.decode(base64Text);
-        System.out.println("Base64解码后：" + text2);
+        LogUtils.info("Base64解码后：" + text2);
 
         return SaResult.ok();
     }

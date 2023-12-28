@@ -74,7 +74,7 @@ public class RedPacketService implements IRedPacketService {
                 redisUtil.incr(redPacketId + "-num", 1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             // 释放锁
             if (res) {
@@ -123,7 +123,7 @@ public class RedPacketService implements IRedPacketService {
                 return Result.error("手慢了，红包派完了");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             // 释放锁
             if (res) {

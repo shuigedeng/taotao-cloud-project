@@ -88,7 +88,7 @@ public class MediaServer {
             ChannelFuture future = bootstrap.bind(socketAddress).sync();
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             // 关闭主线程组
             bossGroup.shutdownGracefully();

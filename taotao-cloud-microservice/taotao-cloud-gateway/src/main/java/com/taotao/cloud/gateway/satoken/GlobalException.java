@@ -34,8 +34,8 @@ public class GlobalException {
     //	public ResultJsonUtil<Object> handlerException(Exception e) {
     //
     //		// 打印堆栈，以供调试
-    ////        System.out.println("全局异常---------------");
-    //		e.printStackTrace();
+    ////        LogUtils.info("全局异常---------------");
+    //		LogUtils.error(e);
     //
     //		// 不同异常返回不同状态码
     //		ResultJsonUtil<Object> re = null;

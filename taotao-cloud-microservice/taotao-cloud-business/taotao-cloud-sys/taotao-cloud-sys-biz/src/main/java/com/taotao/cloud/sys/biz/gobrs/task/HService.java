@@ -43,11 +43,11 @@ public class HService extends AsyncTask<Object, Object> {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("HService Begin");
+            LogUtils.info("HService Begin");
             Thread.sleep(100);
-            System.out.println("HService Finish");
+            LogUtils.info("HService Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;

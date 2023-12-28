@@ -28,7 +28,7 @@ public class IdWorkerTest {
     public void nextId() {
         for (int i = 0; i < 10; i++) {
             long id = idWorker.generate();
-            System.out.println("生成id为:" + id);
+            LogUtils.info("生成id为:" + id);
         }
     }
 }

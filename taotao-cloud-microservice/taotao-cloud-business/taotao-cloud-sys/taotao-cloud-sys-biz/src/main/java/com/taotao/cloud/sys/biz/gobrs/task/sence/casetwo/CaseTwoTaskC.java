@@ -31,7 +31,7 @@ public class CaseTwoTaskC extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("C任务执行");
+        LogUtils.info("C任务执行");
         return "CResult";
     }
 }

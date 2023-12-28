@@ -696,7 +696,7 @@ public class DateUtil {
         c.setFirstDayOfWeek(firstDayOfWeek);
 
         /*
-         * c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH)); c.set(Calendar.MONTH, month - 1); System.out.println(c.getTime()); // 这一行难道可以刷新设置月份后的时间
+         * c.set(Calendar.DAY_OF_MONTH, c.getActualMinimum(Calendar.DAY_OF_MONTH)); c.set(Calendar.MONTH, month - 1); LogUtils.info(c.getTime()); // 这一行难道可以刷新设置月份后的时间
          * c.set(Calendar.YEAR, year);
          */
         c.setTime(strToDate(dateStr, "yyyy-M"));
@@ -736,7 +736,7 @@ public class DateUtil {
         try {
             str = sf.format(d);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return str;
     }
@@ -757,7 +757,7 @@ public class DateUtil {
         try {
             d = yyyy_mm_ddFormat.parse(str);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return d;
     }
@@ -786,7 +786,7 @@ public class DateUtil {
             sd = new SimpleDateFormat("yyyy-MM-dd");
         }
         String dateStr = sd.format(date);
-        // System.out.println("*******得到明天的日期*******" + dateStr);
+        // LogUtils.info("*******得到明天的日期*******" + dateStr);
         return dateStr;
     }
 
@@ -913,7 +913,7 @@ public class DateUtil {
             SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             return sdf.parse(time);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         return null;

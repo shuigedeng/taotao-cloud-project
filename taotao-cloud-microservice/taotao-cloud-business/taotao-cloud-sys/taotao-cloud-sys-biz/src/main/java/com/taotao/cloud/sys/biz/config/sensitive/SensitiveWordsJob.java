@@ -58,7 +58,7 @@ package com.taotao.cloud.sys.biz.config.sensitive;
 //		//		SensitiveWordsJob.code = integer;
 //		//	}
 //		//} catch (InterruptedException | ExecutionException e) {
-//		//	e.printStackTrace();
+//		//	LogUtils.error(e);
 //		//}
 //
 //	}

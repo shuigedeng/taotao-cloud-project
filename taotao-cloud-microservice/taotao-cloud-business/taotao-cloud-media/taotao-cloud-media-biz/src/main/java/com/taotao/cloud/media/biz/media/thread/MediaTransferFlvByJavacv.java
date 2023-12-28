@@ -152,7 +152,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
         } catch (Exception e) {
             MediaService.cameras.remove(cameraDto.getMediaKey());
             LogUtils.error("\r\n{}\r\n启动拉流器失败，网络超时或视频源不可用", cameraDto.getUrl());
-            //			e.printStackTrace();
+            //			LogUtils.error(e);
         }
         return grabberStatus = false;
     }
@@ -214,7 +214,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
                     return true;
                 }
                 LogUtils.error("\r\n{}\r\n切换转码模式失败", cameraDto.getUrl());
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
         return recorderStatus = false;
@@ -251,11 +251,11 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
             grabber.flush();
         } catch (Exception e) {
             LogUtils.info("清空拉流器缓存失败", e);
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         if (header == null) {
             header = bos.toByteArray();
-            //				System.out.println(HexUtil.encodeHexStr(header));
+            //				LogUtils.info(HexUtil.encodeHexStr(header));
             bos.reset();
         }
 
@@ -296,7 +296,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
                         videoTS = 1000 * (System.currentTimeMillis() - startTime);
                         // 判断时间偏移
                         if (videoTS > recorder.getTimestamp()) {
-                            // System.out.println("矫正时间戳: " + videoTS + " : " +
+                            // LogUtils.info("矫正时间戳: " + videoTS + " : " +
                             // recorder.getTimestamp() + "
                             // -> "
                             // + (videoTS - recorder.getTimestamp()));
@@ -323,7 +323,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
                         videoTS = 1000 * (System.currentTimeMillis() - startTime);
                         // 判断时间偏移
                         if (videoTS > recorder.getTimestamp()) {
-                            // System.out.println("矫正时间戳: " + videoTS + " : " +
+                            // LogUtils.info("矫正时间戳: " + videoTS + " : " +
                             // recorder.getTimestamp() + "
                             // -> "
                             // + (videoTS - recorder.getTimestamp()));
@@ -355,11 +355,11 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
             grabber.close();
             bos.close();
         } catch (org.bytedeco.javacv.FrameRecorder.Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             closeMedia();
         }
@@ -533,7 +533,7 @@ public class MediaTransferFlvByJavacv extends MediaTransfer implements Runnable 
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
             // 启动录制器失败
             timeout += 50;

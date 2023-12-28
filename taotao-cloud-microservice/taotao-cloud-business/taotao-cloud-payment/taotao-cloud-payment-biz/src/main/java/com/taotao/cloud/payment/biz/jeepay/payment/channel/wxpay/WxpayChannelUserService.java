@@ -89,7 +89,7 @@ public class WxpayChannelUserService implements IChannelUserService {
             WxServiceWrapper wxServiceWrapper = configContextQueryService.getWxServiceWrapper(mchAppConfigContext);
             return wxServiceWrapper.getWxMpService().getOAuth2Service().getAccessToken(code).getOpenId();
         } catch (WxErrorException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return null;
         }
     }

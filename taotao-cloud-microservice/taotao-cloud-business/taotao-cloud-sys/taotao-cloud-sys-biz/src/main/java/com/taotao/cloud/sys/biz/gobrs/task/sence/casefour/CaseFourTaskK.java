@@ -31,7 +31,7 @@ public class CaseFourTaskK extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("K任务执行");
+        LogUtils.info("K任务执行");
         return "KResult";
     }
 }

@@ -45,7 +45,7 @@ public class CService extends AsyncTask<String, Integer> {
     @Override
     public Integer task(String o, TaskSupport support) {
         try {
-            System.out.println("CService Begin");
+            LogUtils.info("CService Begin");
             // 获取 所依赖的父任务的结果
             Integer rt = getResult(support);
             String result = getResult(support, AService.class, String.class);
@@ -56,9 +56,9 @@ public class CService extends AsyncTask<String, Integer> {
                 i1 += i1;
             }
 
-            System.out.println("CService Finish");
+            LogUtils.info("CService Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

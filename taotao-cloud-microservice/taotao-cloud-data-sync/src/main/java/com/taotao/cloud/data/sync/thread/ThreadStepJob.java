@@ -34,7 +34,7 @@ public class ThreadStepJob {
 	@Bean
 	public FlatFileItemReader<User> userItemReader() {
 
-		System.out.println(Thread.currentThread());
+		LogUtils.info(Thread.currentThread());
 
 		FlatFileItemReader<User> reader = new FlatFileItemReaderBuilder<User>()
 			.name("userItemReader")

@@ -43,14 +43,14 @@ public class CaseTimeoutTaskC extends AsyncTask<Object, Object> {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("CaseTimeoutTaskC Begin");
+            LogUtils.info("CaseTimeoutTaskC Begin");
             Thread.sleep(2000);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("CaseTimeoutTaskC Finish");
+            LogUtils.info("CaseTimeoutTaskC Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

@@ -49,7 +49,7 @@ public class ShortUrlControllerTest {
     public void test() throws Exception {
         UrlRequest url = new UrlRequest();
         url.setLongUrl("https://blog.csdn.net/linsongbin1/article/details/83574619");
-        System.out.println(url.getLongUrl().length());
+        LogUtils.info(url.getLongUrl().length());
 
         MvcResult mvcResult = mockMvc.perform(post("/shortUrlServer/getShortUrl")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -57,7 +57,7 @@ public class ShortUrlControllerTest {
                 .andReturn();
 
         // shortUrl = mvcResult.getResponse().getContentType().
-        System.out.println(mvcResult.getResponse().getContentAsString());
+        LogUtils.info(mvcResult.getResponse().getContentAsString());
     }
 
     @Test
@@ -65,12 +65,12 @@ public class ShortUrlControllerTest {
     public void testShort() throws Exception {
         UrlRequest url = new UrlRequest();
         url.setShortUrl("http://t.cn/eRKFcl9M");
-        System.out.println(url.getShortUrl().length());
+        LogUtils.info(url.getShortUrl().length());
 
         MvcResult mvcResult = mockMvc.perform(get("/shortUrlServer/getLongUrl")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(url)))
                 .andReturn();
-        System.out.println(mvcResult.getResponse().getContentAsString());
+        LogUtils.info(mvcResult.getResponse().getContentAsString());
     }
 }

@@ -41,14 +41,14 @@ public class RePayTest {
         // 微信转账
         RePayBiz rePayBiz = Finance.rePayWxPay(
                 merchant_id, out_trade_no, account, account_name, money, desc, mch_id, notify_url, key);
-        System.out.println(rePayBiz.toString());
+        LogUtils.info(rePayBiz.toString());
 
         // 支付宝转账
         account = "收款支付宝账户";
         account_name = "支付宝姓名";
         RePayBiz payAliPay = Finance.rePayAliPay(
                 merchant_id, out_trade_no, account, account_name, money, desc, mch_id, notify_url, key);
-        System.out.println(payAliPay.toString());
+        LogUtils.info(payAliPay.toString());
 
         account = "银行卡号";
         account_name = "银行卡姓名";
@@ -71,10 +71,10 @@ public class RePayTest {
                 app_id,
                 notify_url,
                 key);
-        System.out.println(rePayBank.toString());
+        LogUtils.info(rePayBank.toString());
 
         // 查询转账结果
         rePayBiz = Finance.getRePayInfo(out_trade_no, merchant_id, key);
-        System.out.println(rePayBiz.toString());
+        LogUtils.info(rePayBiz.toString());
     }
 }

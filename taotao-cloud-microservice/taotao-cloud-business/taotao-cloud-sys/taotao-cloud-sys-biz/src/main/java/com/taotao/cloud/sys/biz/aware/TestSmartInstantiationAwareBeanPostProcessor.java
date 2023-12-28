@@ -31,19 +31,19 @@ public class TestSmartInstantiationAwareBeanPostProcessor implements SmartInstan
 
     @Override
     public Class<?> predictBeanType(Class<?> beanClass, String beanName) throws BeansException {
-        System.out.println("[TestSmartInstantiationAwareBeanPostProcessor] predictBeanType " + beanName);
+        LogUtils.info("[TestSmartInstantiationAwareBeanPostProcessor] predictBeanType " + beanName);
         return beanClass;
     }
 
     @Override
     public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName) throws BeansException {
-        System.out.println("[TestSmartInstantiationAwareBeanPostProcessor] determineCandidateConstructors " + beanName);
+        LogUtils.info("[TestSmartInstantiationAwareBeanPostProcessor] determineCandidateConstructors " + beanName);
         return null;
     }
 
     @Override
     public Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
-        System.out.println("[TestSmartInstantiationAwareBeanPostProcessor] getEarlyBeanReference " + beanName);
+        LogUtils.info("[TestSmartInstantiationAwareBeanPostProcessor] getEarlyBeanReference " + beanName);
         return bean;
     }
 }

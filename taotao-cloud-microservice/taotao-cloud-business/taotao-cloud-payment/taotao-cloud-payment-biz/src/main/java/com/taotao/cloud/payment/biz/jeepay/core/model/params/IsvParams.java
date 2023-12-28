@@ -33,7 +33,7 @@ public abstract class IsvParams {
         try {
             return (IsvParams)JSONObject.parseObject(paramsStr, Class.forName(IsvParams.class.getPackage().getName() +"."+ ifCode +"."+ StrUtil.upperFirst(ifCode) +"IsvParams"));
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

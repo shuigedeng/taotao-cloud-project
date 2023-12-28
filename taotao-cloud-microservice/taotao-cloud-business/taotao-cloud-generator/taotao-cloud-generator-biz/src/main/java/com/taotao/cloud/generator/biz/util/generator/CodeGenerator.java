@@ -72,7 +72,7 @@ public class CodeGenerator {
                     consumer.customFile(customFile);
 
                     consumer.beforeOutputFile((tableInfo, objectMap) -> {
-                        System.out.println(
+                        LogUtils.info(
                                 "tableInfo: " + tableInfo.getEntityName() + " objectMap: " + objectMap.size());
                     });
                 })

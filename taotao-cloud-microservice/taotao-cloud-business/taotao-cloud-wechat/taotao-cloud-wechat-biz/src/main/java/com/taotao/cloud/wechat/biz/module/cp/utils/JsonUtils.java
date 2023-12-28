@@ -36,7 +36,7 @@ public class JsonUtils {
         try {
             return JSON.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         return null;

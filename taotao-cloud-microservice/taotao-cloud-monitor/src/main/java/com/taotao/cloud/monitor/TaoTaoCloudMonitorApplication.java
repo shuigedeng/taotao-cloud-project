@@ -43,7 +43,7 @@ public class TaoTaoCloudMonitorApplication {
         //try {
         //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
         //} catch (Throwable e) {
-        //    e.printStackTrace();
+        //    LogUtils.error(e);
         //}
     }
 }

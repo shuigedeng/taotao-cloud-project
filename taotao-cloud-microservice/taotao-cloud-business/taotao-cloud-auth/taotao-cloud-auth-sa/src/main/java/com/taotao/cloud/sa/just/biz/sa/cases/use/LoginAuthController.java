@@ -75,16 +75,16 @@ public class LoginAuthController {
         // 需要注意的是，StpUtil.getLoginId() 自带登录校验效果
         // 也就是说如果在未登录的情况下调用这句代码，框架就会抛出 `NotLoginException` 异常，效果和 StpUtil.checkLogin() 是一样的
         Object userId = StpUtil.getLoginId();
-        System.out.println("当前登录的账号id是：" + userId);
+        LogUtils.info("当前登录的账号id是：" + userId);
 
         // 如果不希望 StpUtil.getLoginId() 触发登录校验效果，可以填入一个默认值
         // 如果会话未登录，则返回这个默认值，如果会话已登录，将正常返回登录的账号id
         Object userId2 = StpUtil.getLoginId(0);
-        System.out.println("当前登录的账号id是：" + userId2);
+        LogUtils.info("当前登录的账号id是：" + userId2);
 
         // 或者使其在未登录的时候返回 null
         Object userId3 = StpUtil.getLoginIdDefaultNull();
-        System.out.println("当前登录的账号id是：" + userId3);
+        LogUtils.info("当前登录的账号id是：" + userId3);
 
         // 类型转换：
         // StpUtil.getLoginId() 返回的是 Object 类型，你可以使用以下方法指定其返回的类型
@@ -94,7 +94,7 @@ public class LoginAuthController {
 
         // 疑问：数据基本类型不是有八个吗，为什么只封装以上三种类型的转换？
         // 因为大多数项目都是拿 int、long 或 String 声明 UserId 的类型的，实在没见过哪个项目用 double、float、boolean 之类来声明 UserId
-        System.out.println("当前登录的账号id是：" + userId4 + " --- " + userId5 + " --- " + userId6);
+        LogUtils.info("当前登录的账号id是：" + userId4 + " --- " + userId5 + " --- " + userId6);
 
         // 返回给前端
         return SaResult.ok("当前客户端登录的账号id是：" + userId);
@@ -105,7 +105,7 @@ public class LoginAuthController {
     public SaResult tokenInfo() {
         // TokenName 是 Token 名称的意思，此值也决定了前端提交 Token 时应该使用的参数名称
         String tokenName = StpUtil.getTokenName();
-        System.out.println("前端提交 Token 时应该使用的参数名称：" + tokenName);
+        LogUtils.info("前端提交 Token 时应该使用的参数名称：" + tokenName);
 
         // 使用 StpUtil.getTokenValue() 获取前端提交的 Token 值
         // 框架默认前端可以从以下三个途径中提交 Token：
@@ -115,20 +115,20 @@ public class LoginAuthController {
         // 读取顺序为： Query 参数 --> Header头 -- > Cookie
         // 以上三个地方都读取不到 Token 信息的话，则视为前端没有提交 Token
         String tokenValue = StpUtil.getTokenValue();
-        System.out.println("前端提交的Token值为：" + tokenValue);
+        LogUtils.info("前端提交的Token值为：" + tokenValue);
 
         // TokenInfo 包含了此 Token 的大多数信息
         SaTokenInfo info = StpUtil.getTokenInfo();
-        System.out.println("Token 名称：" + info.getTokenName());
-        System.out.println("Token 值：" + info.getTokenValue());
-        System.out.println("当前是否登录：" + info.getIsLogin());
-        System.out.println("当前登录的账号id：" + info.getLoginId());
-        System.out.println("当前登录账号的类型：" + info.getLoginType());
-        System.out.println("当前登录客户端的设备类型：" + info.getLoginDevice());
-        System.out.println("当前 Token 的剩余有效期：" + info.getTokenTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
-        System.out.println("当前 Token 的剩余临时有效期：" + info.getTokenActivityTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
-        System.out.println("当前 User-Session 的剩余有效期" + info.getSessionTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
-        System.out.println("当前 Token-Session 的剩余有效期" + info.getTokenSessionTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
+        LogUtils.info("Token 名称：" + info.getTokenName());
+        LogUtils.info("Token 值：" + info.getTokenValue());
+        LogUtils.info("当前是否登录：" + info.getIsLogin());
+        LogUtils.info("当前登录的账号id：" + info.getLoginId());
+        LogUtils.info("当前登录账号的类型：" + info.getLoginType());
+        LogUtils.info("当前登录客户端的设备类型：" + info.getLoginDevice());
+        LogUtils.info("当前 Token 的剩余有效期：" + info.getTokenTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
+        LogUtils.info("当前 Token 的剩余临时有效期：" + info.getTokenActivityTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
+        LogUtils.info("当前 User-Session 的剩余有效期" + info.getSessionTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
+        LogUtils.info("当前 Token-Session 的剩余有效期" + info.getTokenSessionTimeout()); // 单位：秒，-1代表永久有效，-2代表值不存在
 
         // 返回给前端
         return SaResult.data(StpUtil.getTokenInfo());
@@ -145,7 +145,7 @@ public class LoginAuthController {
 
         // StpUtil.logout() 在未登录时也是可以调用成功的，
         // 也就是说，无论客户端有没有登录，执行完 StpUtil.logout() 后，都会处于未登录状态
-        System.out.println("当前是否处于登录状态：" + StpUtil.isLogin());
+        LogUtils.info("当前是否处于登录状态：" + StpUtil.isLogin());
 
         // 返回给前端
         return SaResult.ok("退出登录成功");

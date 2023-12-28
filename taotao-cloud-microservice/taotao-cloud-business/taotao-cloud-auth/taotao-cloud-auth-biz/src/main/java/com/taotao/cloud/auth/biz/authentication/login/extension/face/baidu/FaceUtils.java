@@ -19,6 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.face.baidu;
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.face.MatchRequest;
 import com.baidu.aip.util.Base64Util;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import jakarta.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,7 +68,7 @@ public class FaceUtils {
         String encode = Base64Util.encode(bytes);
         /** 参数1：Base64字符串或者图片的url 参数2：图片形式 字符串（BASE64，URL） 参数3：hashMap中的基本参数配置（null:使用默认配置） */
         JSONObject res = client.detect(encode, "BASE64", null);
-        System.out.println(res.toString(2)); // 以JSON的展开形式打印响应的信息
+        LogUtils.info(res.toString(2)); // 以JSON的展开形式打印响应的信息
         // error_code对应的值为0，则表示成功
         return res.getInt("error_code") == 0;
     }
@@ -86,7 +87,7 @@ public class FaceUtils {
         String image = Base64Util.encode(bytes);
         String imageType = "BASE64";
         JSONObject result = client.addUser(image, imageType, properties.getGroupId(), userId, options);
-        System.out.println(result.toString(2));
+        LogUtils.info(result.toString(2));
         String msg = result.getString("error_msg");
         // 通用的看error_code，对应的值为0，则表示成功
         return result.getInt("error_code") == 0;
@@ -114,7 +115,7 @@ public class FaceUtils {
         requests.add(req2);
         // 向百度智能云发起比较图片的请求
         JSONObject match = client.match(requests);
-        System.out.println(match.toString(2));
+        LogUtils.info(match.toString(2));
         // 获取两张图片的相似度
         double similarity = match.getJSONObject("result").getDouble("score");
         // 自己定义 相似度 高于多少为同一人 (百度自身推荐值80)
@@ -135,9 +136,9 @@ public class FaceUtils {
         // 传入可选参数调用接口
         HashMap<String, Object> options = new HashMap<String, Object>();
         JSONObject res = client.search(imgBash64, "BASE64", "user_01", options);
-        System.out.println(res.toString(2));
-        System.out.println(res.getJSONObject("result"));
-        System.out.println(res.getJSONObject("result").getJSONArray("user_list"));
+        LogUtils.info(res.toString(2));
+        LogUtils.info(res.getJSONObject("result"));
+        LogUtils.info(res.getJSONObject("result").getJSONArray("user_list"));
         JSONObject user = (JSONObject)
                 res.getJSONObject("result").getJSONArray("user_list").get(0);
 
@@ -168,7 +169,7 @@ public class FaceUtils {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+				LogUtils.error(e);
                 return false;
             }
         }

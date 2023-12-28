@@ -129,7 +129,7 @@ public class FlowDefinitionController extends BaseController {
                 ImageIO.write(image, "png", os);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             try {
                 if (os != null) {
@@ -137,7 +137,7 @@ public class FlowDefinitionController extends BaseController {
                     os.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
     }

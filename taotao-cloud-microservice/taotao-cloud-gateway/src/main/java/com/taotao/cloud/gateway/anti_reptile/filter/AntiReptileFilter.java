@@ -67,8 +67,8 @@ public class AntiReptileFilter implements WebFilter, ApplicationContextAware {
             byte[] bytes = FileCopyUtils.copyToByteArray(classPathResource.getInputStream());
             this.antiReptileForm = new String(bytes, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            System.out.println("反爬虫验证模板加载失败！");
-            e.printStackTrace();
+            LogUtils.info("反爬虫验证模板加载失败！");
+            LogUtils.error(e);
         }
 
         // this.actuator = ctx.getBean(RuleActuator.class);

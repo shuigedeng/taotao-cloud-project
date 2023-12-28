@@ -45,14 +45,14 @@ public class WxApiTest {
          */
         String type = "mp-base";
         String oauthUrl = WxApi.getWxOauthUrl(mch_id, callback_url, type, params, key);
-        System.out.println(oauthUrl);
+        LogUtils.info(oauthUrl);
 
         String code = "9F6501CA055545259E20D2301EB3AFD9";
         WxOauthInfo wxOauthInfo = WxApi.getWxOauthInfo(mch_id, code, key);
-        System.out.println(wxOauthInfo);
+        LogUtils.info(wxOauthInfo);
 
         WxWebLoginBiz wxWebLoginBiz = WxApi.getWebLogin(mch_id, callback_url, params, key);
 
-        System.out.println(wxWebLoginBiz.toString());
+        LogUtils.info(wxWebLoginBiz.toString());
     }
 }

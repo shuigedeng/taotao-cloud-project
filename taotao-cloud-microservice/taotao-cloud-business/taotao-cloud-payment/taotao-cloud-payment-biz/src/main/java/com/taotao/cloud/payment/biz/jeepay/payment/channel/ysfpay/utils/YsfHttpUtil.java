@@ -141,21 +141,21 @@ public class YsfHttpUtil {
 					in.close();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 			try {
 				if (out != null) {
 					out.close();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 			try {
 				if (http != null) {
 					http.disconnect();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 		}
 	}
@@ -184,21 +184,21 @@ public class YsfHttpUtil {
 					in.close();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 			try {
 				if (out != null) {
 					out.close();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 			try {
 				if (http != null) {
 					http.disconnect();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 		}
 	}
@@ -390,7 +390,7 @@ public class YsfHttpUtil {
 				Path path = Paths.get(fileName);
 				contentType = Files.probeContentType(path);
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 			if (contentType == null || contentType.isEmpty()) {
 				contentType = new MimetypesFileTypeMap().getContentType(fileName);

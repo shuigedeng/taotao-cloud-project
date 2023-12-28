@@ -51,7 +51,7 @@ public class DownUtil {
             @Cleanup ServletOutputStream outputStream = response.getOutputStream();
             workbook.write(outputStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -91,7 +91,7 @@ public class DownUtil {
             }
             os.flush();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -138,7 +138,7 @@ public class DownUtil {
             }
             os.flush();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return false;
         }
         return true;

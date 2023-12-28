@@ -99,13 +99,13 @@ public class SeqKit {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(genTransferId());
-		System.out.println(genRefundOrderId());
+		LogUtils.info(genTransferId());
+		LogUtils.info(genRefundOrderId());
 		Thread.sleep(1000);
-		System.out.println(genMhoOrderId());
-		System.out.println(genTransferId());
+		LogUtils.info(genMhoOrderId());
+		LogUtils.info(genTransferId());
 		Thread.sleep(1000);
-		System.out.println(genDivisionBatchId());
+		LogUtils.info(genDivisionBatchId());
 	}
 
 }

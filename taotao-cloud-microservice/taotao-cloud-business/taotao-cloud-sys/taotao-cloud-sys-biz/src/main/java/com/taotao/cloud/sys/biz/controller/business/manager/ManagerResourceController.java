@@ -224,7 +224,7 @@ public class ManagerResourceController
     // }
 
     public Result<Boolean> testSeataException(BlockException e) {
-        e.printStackTrace();
+        LogUtils.error(e);
         LogUtils.error(" 该接口已经被限流啦", e);
         return Result.fail("该接口已经被限流啦");
     }

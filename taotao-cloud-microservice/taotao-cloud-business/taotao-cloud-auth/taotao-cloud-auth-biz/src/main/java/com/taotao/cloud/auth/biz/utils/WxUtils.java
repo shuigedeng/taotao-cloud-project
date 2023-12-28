@@ -54,7 +54,7 @@ public class WxUtils {
             byte[] bytes = cipher.doFinal(encryptDataByte);
             decryptString = new String(bytes);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         return decryptString;

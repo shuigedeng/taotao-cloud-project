@@ -36,11 +36,11 @@ public class OrderTest {
         /** 查询订单 */
         try {
             PayOrder payOrder = SystemOrder.getOrderInfoByOutTradeNo("Y194506551713811", mch_id, key);
-            System.out.println("查询系统订单返回结果：" + payOrder);
+            LogUtils.info("查询系统订单返回结果：" + payOrder);
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

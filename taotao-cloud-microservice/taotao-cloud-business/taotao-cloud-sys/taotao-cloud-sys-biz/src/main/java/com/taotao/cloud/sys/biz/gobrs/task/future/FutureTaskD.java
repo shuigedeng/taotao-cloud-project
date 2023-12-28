@@ -41,12 +41,12 @@ public class FutureTaskD extends AsyncTask {
     @SneakyThrows
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("FutureTaskD Begin");
+        LogUtils.info("FutureTaskD Begin");
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
         Thread.sleep(20000);
-        System.out.println("FutureTaskD Finish");
+        LogUtils.info("FutureTaskD Finish");
         return null;
     }
 

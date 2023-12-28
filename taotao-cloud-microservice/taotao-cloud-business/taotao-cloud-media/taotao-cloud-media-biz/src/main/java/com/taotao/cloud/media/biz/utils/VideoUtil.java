@@ -78,7 +78,7 @@ public class VideoUtil {
             // log.warn("[视频截图][耗时:{}]",DateUtil.conversion(System.currentTimeMillis()-fr));
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return false;
         } finally {
             try {
@@ -141,7 +141,7 @@ public class VideoUtil {
             }
             return result;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return false;
         }
     }

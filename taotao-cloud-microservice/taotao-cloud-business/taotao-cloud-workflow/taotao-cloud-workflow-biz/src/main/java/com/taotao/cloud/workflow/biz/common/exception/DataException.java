@@ -56,7 +56,7 @@ public class DataException extends Exception {
         try {
             conn.rollback();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

@@ -31,7 +31,7 @@ public class BroadcastProcessorDemo implements BroadcastProcessor {
 
     @Override
     public ProcessResult preProcess(TaskContext context) throws Exception {
-        System.out.println("===== BroadcastProcessorDemo#preProcess ======");
+        LogUtils.info("===== BroadcastProcessorDemo#preProcess ======");
         context.getOmsLogger().info("BroadcastProcessorDemo#preProcess, current host: {}", NetUtils.getLocalHost());
         if ("rootFailed".equals(context.getJobParams())) {
             return new ProcessResult(false, "console need failed");
@@ -43,7 +43,7 @@ public class BroadcastProcessorDemo implements BroadcastProcessor {
     @Override
     public ProcessResult process(TaskContext taskContext) throws Exception {
         OmsLogger logger = taskContext.getOmsLogger();
-        System.out.println("===== BroadcastProcessorDemo#process ======");
+        LogUtils.info("===== BroadcastProcessorDemo#process ======");
         logger.info("BroadcastProcessorDemo#process, current host: {}", NetUtils.getLocalHost());
         long sleepTime = 1000;
         try {
@@ -57,7 +57,7 @@ public class BroadcastProcessorDemo implements BroadcastProcessor {
 
     @Override
     public ProcessResult postProcess(TaskContext context, List<TaskResult> taskResults) throws Exception {
-        System.out.println("===== BroadcastProcessorDemo#postProcess ======");
+        LogUtils.info("===== BroadcastProcessorDemo#postProcess ======");
         context.getOmsLogger()
                 .info(
                         "BroadcastProcessorDemo#postProcess, current host: {}, taskResult: {}",

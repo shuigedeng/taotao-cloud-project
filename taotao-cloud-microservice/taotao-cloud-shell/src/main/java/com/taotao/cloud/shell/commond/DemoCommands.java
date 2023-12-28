@@ -41,9 +41,9 @@ public class DemoCommands {
                 stringBuffer.append(line);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return stringBuffer.toString();
     }

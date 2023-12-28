@@ -41,21 +41,21 @@ public class OrderConsumer {
     @SendTo(Processor.OUTPUT)
     public Message<?> test(Message<String> message) {
         String payload = message.getPayload();
-        System.out.println("order Consumer" + payload);
+        LogUtils.info("order Consumer" + payload);
 
         return MessageBuilder.fromMessage(message).build();
     }
 
     // @StreamListener(value=TaoTaoCloudSink.ORDER_MESSAGE_INPUT)
     // public void in(String in, @Header(KafkaHeaders.CONSUMER) Consumer<?, ?> consumer) {
-    //	System.out.println(in);
+    //	LogUtils.info(in);
     //	consumer.pause(Collections.singleton(new TopicPartition("myTopic", 0)));
     // }
 
     @Bean
     public ApplicationListener<ListenerContainerIdleEvent> idleListener() {
         return event -> {
-            System.out.println(event);
+            LogUtils.info(event);
             if (event.getConsumer().paused().size() > 0) {
                 event.getConsumer().resume(event.getConsumer().paused());
             }

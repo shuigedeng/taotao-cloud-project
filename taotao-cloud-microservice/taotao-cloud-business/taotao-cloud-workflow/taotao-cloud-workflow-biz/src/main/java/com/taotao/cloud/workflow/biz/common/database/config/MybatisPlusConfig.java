@@ -128,7 +128,7 @@ public class MybatisPlusConfig {
             // 不指定会动态生效 多数据源不能指定数据库类型
             interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return interceptor;
     }

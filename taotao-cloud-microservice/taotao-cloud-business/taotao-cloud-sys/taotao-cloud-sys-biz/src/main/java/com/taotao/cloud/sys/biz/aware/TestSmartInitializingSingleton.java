@@ -27,6 +27,6 @@ import org.springframework.beans.factory.SmartInitializingSingleton;
 public class TestSmartInitializingSingleton implements SmartInitializingSingleton {
     @Override
     public void afterSingletonsInstantiated() {
-        System.out.println("[TestSmartInitializingSingleton]");
+        LogUtils.info("[TestSmartInitializingSingleton]");
     }
 }

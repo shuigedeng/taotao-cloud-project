@@ -42,12 +42,12 @@ public class BServiceCondition extends AsyncTask {
     @Override
     public AnyConditionResult<Boolean> task(Object o, TaskSupport support) {
         AnyConditionResultBuilder<Boolean> builder = AnyConditionResult.builder();
-        System.out.println("BServiceCondition Begin");
+        LogUtils.info("BServiceCondition Begin");
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
-        //        System.out.println(1 / 0);
-        System.out.println("BServiceCondition Finish");
+        //        LogUtils.info(1 / 0);
+        LogUtils.info("BServiceCondition Finish");
         return builder.result(false).build();
     }
 }

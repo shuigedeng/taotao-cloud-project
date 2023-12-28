@@ -215,11 +215,11 @@ public class CardController extends BaseController {
                 RectComp rc = new RectComp(rm);
                 rectCompList.add(rc);
             }
-            // System.out.println(no+"size="+rectCompList.size());
+            // LogUtils.info(no+"size="+rectCompList.size());
             Collections.sort(rectCompList);
             // for(int t = 0;t<rectCompList.size();t++){
             // RectComp rect = rectCompList.get(t);
-            // System.out.println(rect.getRm().area() + "--------" + rect.getRm().x);
+            // LogUtils.info(rect.getRm().area() + "--------" + rect.getRm().x);
             // if (rect.getRm().area() < 300) {// 小于300的pass，完美填图的话是≈1500
             // continue;
             // }
@@ -235,7 +235,7 @@ public class CardController extends BaseController {
             // }
             // 因为已经按面积排序了，所以取第一个面积最大的轮廓即可
             RectComp rect = rectCompList.get(0);
-            System.out.println(rect.getRm().area() + "--------" + rect.getRm().x);
+            LogUtils.info(rect.getRm().area() + "--------" + rect.getRm().x);
             if (rect.getRm().area() > 300) { // 小于300的pass，说明未填写，完美填图的话是≈1500
                 if (rect.getRm().x < 68) {
                     listenAnswer.put(Integer.valueOf(no), "A");

@@ -61,7 +61,7 @@ public class AliPayServiceImpl implements AliPayService {
             map.put("url", url);
             map.put("orderNo", order.getOrderNo());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return map;
     }
@@ -102,7 +102,7 @@ public class AliPayServiceImpl implements AliPayService {
             map.put("url", aliPayH5Biz.getUrl());
             map.put("orderNo", order.getOrderNo());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return map;
     }

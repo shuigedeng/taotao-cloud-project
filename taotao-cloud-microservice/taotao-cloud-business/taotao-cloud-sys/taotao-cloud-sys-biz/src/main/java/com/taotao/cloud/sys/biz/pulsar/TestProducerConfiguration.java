@@ -58,7 +58,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //		@PulsarConsumer(topic = "my-topic", clazz = MyMsg.class)
 //		void consume(MyMsg msg) {
 //			// TODO process your message
-//			System.out.println(msg.getData());
+//			LogUtils.info(msg.getData());
 //		}
 //	}
 //
@@ -71,7 +71,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //			subscriptionName = "my-subscription")
 //		public void consumeString(Messages<MyMsg> msgs) {
 //			msgs.forEach((msg) -> {
-//				System.out.println(msg);
+//				LogUtils.info(msg);
 //			});
 //		}
 //
@@ -87,7 +87,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //		public List<MessageId> consumeString(Messages<MyMsg> msgs) {
 //			List<MessageId> ackList = new ArrayList<>();
 //			msgs.forEach((msg) -> {
-//				System.out.println(msg);
+//				LogUtils.info(msg);
 //				ackList.add(msg.getMessageId());
 //			});
 //			return ackList;
@@ -107,7 +107,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //			List<MessageId> ackList = new ArrayList<>();
 //			msgs.forEach((msg) -> {
 //				try {
-//					System.out.println(msg);
+//					LogUtils.info(msg);
 //					ackList.add(msg.getMessageId());
 //				} catch (Exception ex) {
 //					System.err.println(ex.getMessage());

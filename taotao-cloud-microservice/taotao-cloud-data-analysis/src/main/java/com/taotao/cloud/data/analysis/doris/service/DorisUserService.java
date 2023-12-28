@@ -31,7 +31,7 @@ public class DorisUserService extends ClickHouseJdbcBaseDaoImpl {
 
     public void testUseJdbcTemplate() {
         getJdbcTemplate().query("select * from user", rs -> {
-            System.out.println(rs);
+            LogUtils.info(rs);
         });
     }
 
@@ -41,7 +41,7 @@ public class DorisUserService extends ClickHouseJdbcBaseDaoImpl {
         CkUser user = new CkUser();
         Integer flag = userMapper.insertUser(user);
 
-        System.out.println("dslfkajsldflsdfk");
+        LogUtils.info("dslfkajsldflsdfk");
         return userList;
     }
 }

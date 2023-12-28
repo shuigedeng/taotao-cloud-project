@@ -43,12 +43,12 @@ public class CaseTimeoutTaskB extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("CaseTimeoutTaskB Begin");
+        LogUtils.info("CaseTimeoutTaskB Begin");
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
-        //        System.out.println(1 / 0);
-        System.out.println("CaseTimeoutTaskB Finish");
+        //        LogUtils.info(1 / 0);
+        LogUtils.info("CaseTimeoutTaskB Finish");
         return null;
     }
 

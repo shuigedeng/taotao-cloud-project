@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class PriceCheckHandler extends AbstractCheckHandler {
     @Override
     public Result handle(ProductVO param) {
-        System.out.println("价格校验 Handler 开始...");
+        LogUtils.info("价格校验 Handler 开始...");
 
         // 非法价格校验
         boolean illegalPrice = param.getPrice().compareTo(BigDecimal.ZERO) <= 0;
@@ -36,7 +36,7 @@ public class PriceCheckHandler extends AbstractCheckHandler {
         }
         // 其他校验逻辑...
 
-        System.out.println("价格校验 Handler 通过...");
+        LogUtils.info("价格校验 Handler 通过...");
 
         // 执行下一个处理器
         return super.next(param);

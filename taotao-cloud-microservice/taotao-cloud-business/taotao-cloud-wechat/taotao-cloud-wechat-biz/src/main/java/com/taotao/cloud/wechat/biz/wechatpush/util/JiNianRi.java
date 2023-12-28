@@ -34,7 +34,7 @@ public class JiNianRi {
             long time = simpleDateFormat.parse(date).getTime() - System.currentTimeMillis();
             day = (int) (time / 86400000L);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return day;
     }
@@ -52,7 +52,7 @@ public class JiNianRi {
                     System.currentTimeMillis() - simpleDateFormat.parse(date).getTime();
             day = (int) (time / 86400000L);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return day;
     }
@@ -74,6 +74,6 @@ public class JiNianRi {
     }
 
     public static void main(String[] args) {
-        //        System.out.println(getJieHun());
+        //        LogUtils.info(getJieHun());
     }
 }

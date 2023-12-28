@@ -114,7 +114,7 @@ public class Oauth2Controller {
 
                 return Result.success(true);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
 

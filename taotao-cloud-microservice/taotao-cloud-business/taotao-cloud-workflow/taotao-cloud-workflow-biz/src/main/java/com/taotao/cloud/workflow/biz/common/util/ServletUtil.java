@@ -51,7 +51,7 @@ public class ServletUtil {
             String str = new String(bytes, 0, nTotalRead, Constants.UTF_8);
             return str;
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return "";
         }
     }
@@ -132,7 +132,7 @@ public class ServletUtil {
             response.setCharacterEncoding(Constants.UTF_8);
             response.getWriter().print(string);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

@@ -39,7 +39,7 @@ public class ToolUtils {
             Date data1 = sdf.parse(time);
             data = simpleDateFormat.format(data1);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return data;
     }
@@ -53,7 +53,7 @@ public class ToolUtils {
             Date data1 = sdf.parse(time);
             data = simpleDateFormat.format(data1);
         } catch (ParseException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return data;
     }

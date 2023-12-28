@@ -46,7 +46,7 @@ public class OmsLogPerformanceTester implements BasicProcessor {
         for (long i = 0; i < times; i++) {
             for (long j = 0; j < BATCH; j++) {
                 long index = i * BATCH + j;
-                System.out.println("send index: " + index);
+                LogUtils.info("send index: " + index);
 
                 omsLogger.info("testing omsLogger's performance, current index is {}.", index);
             }

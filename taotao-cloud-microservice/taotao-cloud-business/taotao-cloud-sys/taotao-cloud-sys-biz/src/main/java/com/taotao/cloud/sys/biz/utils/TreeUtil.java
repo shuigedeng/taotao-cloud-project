@@ -214,7 +214,7 @@ public class TreeUtil {
     //		String user = "root";
     //		String password = "123456";
     //		conn = DriverManager.getConnection(url, user, password);
-    //		System.out.println(conn);
+    //		LogUtils.info(conn);
     //
     //		//3、获取数据库操作对象（statement专门执行sql语句）
     //		stmt = conn.createStatement();
@@ -244,7 +244,7 @@ public class TreeUtil {
     //		//5、处理查询结果集
     //		//插入语句，暂时不需要查询
     //	} catch (SQLException e) {
-    //		e.printStackTrace();
+    //		LogUtils.error(e);
     //	} finally {
     //		//6、释放资源
     //		//为了保证资源一定释放，在finally语句块中关闭资源

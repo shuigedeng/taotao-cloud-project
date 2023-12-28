@@ -107,10 +107,10 @@ public class JeepayKit {
             byte[] digestData = md.digest(data);
             return toHex(digestData);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return null;
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return null;
         }
     }

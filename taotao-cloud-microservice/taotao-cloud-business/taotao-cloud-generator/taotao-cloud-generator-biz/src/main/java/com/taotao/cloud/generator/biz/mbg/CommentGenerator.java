@@ -62,7 +62,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
             }
             // A 给model的字段添加swagger注解
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
-            System.out.println(field.getType());
+            LogUtils.info(field.getType());
         }
 
         // B 给时间字段规定格式

@@ -107,7 +107,7 @@ public class MediaConvert extends Thread {
             grabber.start();
             grabberStatus = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         // 推流器
@@ -146,7 +146,7 @@ public class MediaConvert extends Thread {
 
         if (header == null) {
             header = bos.toByteArray();
-            //			System.out.println(HexUtil.encodeHexStr(header));
+            //			LogUtils.info(HexUtil.encodeHexStr(header));
             bos.reset();
         }
 
@@ -182,7 +182,7 @@ public class MediaConvert extends Thread {
                     videoTS = 1000 * (System.currentTimeMillis() - startTime);
                     // 判断时间偏移
                     if (videoTS > recorder.getTimestamp()) {
-                        //					System.out.println("矫正时间戳: " + videoTS + " : " +
+                        //					LogUtils.info("矫正时间戳: " + videoTS + " : " +
                         // recorder.getTimestamp() + " -> "
                         //							+ (videoTS - recorder.getTimestamp()));
                         recorder.setTimestamp((videoTS));
@@ -221,11 +221,11 @@ public class MediaConvert extends Thread {
                     Thread.sleep(500);
                 } catch (InterruptedException e1) {
                 }
-                //				e.printStackTrace();
+                //				LogUtils.error(e);
             } catch (org.bytedeco.javacv.FrameRecorder.Exception e) {
                 //				runing = false;
                 LogUtils.info("\r\n{}\r\n录制器出现异常。。。", cameraDto.getUrl());
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
 
@@ -235,11 +235,11 @@ public class MediaConvert extends Thread {
             grabber.close();
             bos.close();
         } catch (org.bytedeco.javacv.FrameRecorder.Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             runing = false;
         }
@@ -271,7 +271,7 @@ public class MediaConvert extends Thread {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
             // 启动录制器失败
             timeout += 100;
@@ -350,7 +350,7 @@ public class MediaConvert extends Thread {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
 
             // 启动录制器失败

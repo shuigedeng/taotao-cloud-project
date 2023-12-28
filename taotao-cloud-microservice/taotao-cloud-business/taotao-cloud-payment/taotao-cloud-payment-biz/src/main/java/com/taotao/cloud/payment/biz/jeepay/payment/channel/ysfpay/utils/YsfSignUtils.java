@@ -275,7 +275,7 @@ public class YsfSignUtils {
                 try {
                     fis.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }

@@ -61,7 +61,7 @@ public class GobrsService {
         stopWatch.start();
         AsyncResult resp = gobrsAsync.go("general", () -> params);
         stopWatch.stop();
-        System.out.println(stopWatch.getTotalTimeMillis());
+        LogUtils.info(stopWatch.getTotalTimeMillis());
         return resp;
     }
 

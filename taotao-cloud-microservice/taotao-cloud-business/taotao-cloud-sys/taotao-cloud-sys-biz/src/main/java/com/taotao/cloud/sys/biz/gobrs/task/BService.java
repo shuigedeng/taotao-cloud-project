@@ -43,12 +43,12 @@ public class BService extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("BService Begin");
+        LogUtils.info("BService Begin");
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
-        //        System.out.println(1 / 0);
-        System.out.println("BService Finish");
+        //        LogUtils.info(1 / 0);
+        LogUtils.info("BService Finish");
         return null;
     }
 

@@ -129,7 +129,7 @@ public class DbTableFieldModel extends JdbcGetMod {
                     .setAllowNull(allowNull)
                     .setPrimaryKey(primaryKey);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

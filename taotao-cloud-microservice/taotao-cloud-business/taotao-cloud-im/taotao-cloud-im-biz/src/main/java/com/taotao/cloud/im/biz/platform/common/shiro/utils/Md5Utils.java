@@ -75,8 +75,8 @@ public class Md5Utils {
 
     public static void main(String[] args) {
         String pass1 = credentials("0192023a7bbd73250516f069df18b500", "hwyl");
-        System.out.println(pass1);
+        LogUtils.info(pass1);
         String pass2 = SecureUtil.md5("123456");
-        System.out.println(pass2);
+        LogUtils.info(pass2);
     }
 }

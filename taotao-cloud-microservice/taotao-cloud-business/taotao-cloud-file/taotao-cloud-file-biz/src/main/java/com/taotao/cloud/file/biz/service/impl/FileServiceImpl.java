@@ -217,7 +217,7 @@ public class FileServiceImpl extends BaseSuperServiceImpl< File, Long,IFileMappe
     // 	try {
     // 		ossClient.deleteObject(ossConfig.getBucketName(), objectName);
     // 	} catch (OSSException | ClientException e) {
-    // 		e.printStackTrace();
+    // 		LogUtils.error(e);
     // 		return new Result<>(ResultEnum.ERROR.getCode(), "删除文件失败");
     // 	}
     // 	return new Result<>();
@@ -251,7 +251,7 @@ public class FileServiceImpl extends BaseSuperServiceImpl< File, Long,IFileMappe
     // 		out.close();
     // 		in.close();
     // 	} catch (IOException e) {
-    // 		e.printStackTrace();
+    // 		LogUtils.error(e);
     // 	}
     // }
 

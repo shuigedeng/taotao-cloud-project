@@ -41,7 +41,7 @@ public class FutureTaskC extends AsyncTask<String, Integer> {
     @Override
     public Integer task(String o, TaskSupport support) {
         try {
-            System.out.println("FutureTaskC Begin");
+            LogUtils.info("FutureTaskC Begin");
 
             /** 获取 非父任务的返回结果 此处 可能获取不到 */
             String result = getResult(support, FutureTaskA.class, String.class);
@@ -55,9 +55,9 @@ public class FutureTaskC extends AsyncTask<String, Integer> {
             //
             // try {
             //	result = aFutureTask.get();
-            //	System.out.println(result);
+            //	LogUtils.info(result);
             // } catch (ExecutionException e) {
-            //	e.printStackTrace();
+            //	LogUtils.error(e);
             // }
             /// **
             // *  也可以直接使用该该方法获取值
@@ -66,9 +66,9 @@ public class FutureTaskC extends AsyncTask<String, Integer> {
             // String.class,
             //	1000, TimeUnit.MILLISECONDS);
 
-            System.out.println("FutureTaskC Finish");
+            LogUtils.info("FutureTaskC Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

@@ -57,7 +57,7 @@ public class ExcelTest {
             OutputStream outputStream = null;
             try {
                 long startTime = System.currentTimeMillis();
-                System.out.println("导出开始时间:" + startTime);
+                LogUtils.info("导出开始时间:" + startTime);
 
                 outputStream = response.getOutputStream();
                 WriteWorkbook writeWorkbook = new WriteWorkbook();
@@ -147,18 +147,18 @@ public class ExcelTest {
                 outputStream.flush();
                 // 导出时间结束
                 long endTime = System.currentTimeMillis();
-                System.out.println("导出结束时间:" + endTime + "ms");
-                System.out.println("导出所用时间:" + (endTime - startTime) / 1000 + "秒");
+                LogUtils.info("导出结束时间:" + endTime + "ms");
+                LogUtils.info("导出所用时间:" + (endTime - startTime) / 1000 + "秒");
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             } catch (IOException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             } finally {
                 if (outputStream != null) {
                     try {
                         outputStream.close();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        LogUtils.error(e);
                     }
                 }
             }
@@ -170,12 +170,12 @@ public class ExcelTest {
                 "D:\\StudyWorkspace\\JavaWorkspace\\java_project_workspace\\idea_projects\\SpringBootProjects\\easyexcel\\exportFile\\excel300w.xlsx";
         // 记录开始读取Excel时间,也是导入程序开始时间
         long startReadTime = System.currentTimeMillis();
-        System.out.println("------开始读取Excel的Sheet时间(包括导入数据过程):" + startReadTime + "ms------");
+        LogUtils.info("------开始读取Excel的Sheet时间(包括导入数据过程):" + startReadTime + "ms------");
         // 读取所有Sheet的数据.每次读完一个Sheet就会调用这个方法
         // EasyExcel.read(fileName, new EasyExceGeneralDatalListener(actResultLogService2))
         //	.doReadAll();
         long endReadTime = System.currentTimeMillis();
-        System.out.println("------结束读取Excel的Sheet时间(包括导入数据过程):" + endReadTime + "ms------");
+        LogUtils.info("------结束读取Excel的Sheet时间(包括导入数据过程):" + endReadTime + "ms------");
     }
 
     // 事件监听
@@ -245,7 +245,7 @@ public class ExcelTest {
                 pro.load(JDBCDruidUtils.class.getClassLoader().getResourceAsStream("druid.properties"));
                 dataSource = DruidDataSourceFactory.createDataSource(pro);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
 
@@ -268,14 +268,14 @@ public class ExcelTest {
                 try {
                     connection.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }
@@ -294,7 +294,7 @@ public class ExcelTest {
                 try {
                     resultSet.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }
@@ -327,7 +327,7 @@ public class ExcelTest {
         PreparedStatement ps = null;
         try {
             long startTime = System.currentTimeMillis();
-            System.out.println(dataList.size() + "条,开始导入到数据库时间:" + startTime + "ms");
+            LogUtils.info(dataList.size() + "条,开始导入到数据库时间:" + startTime + "ms");
             conn = JDBCDruidUtils.getConnection();
             // 控制事务:默认不提交
             conn.setAutoCommit(false);
@@ -356,12 +356,12 @@ public class ExcelTest {
             // 手动提交事务
             conn.commit();
             long endTime = System.currentTimeMillis();
-            System.out.println(dataList.size() + "条,结束导入到数据库时间:" + endTime + "ms");
-            System.out.println(dataList.size() + "条,导入用时:" + (endTime - startTime) + "ms");
+            LogUtils.info(dataList.size() + "条,结束导入到数据库时间:" + endTime + "ms");
+            LogUtils.info(dataList.size() + "条,导入用时:" + (endTime - startTime) + "ms");
             result.put("success", "1111");
         } catch (Exception e) {
             result.put("exception", "0000");
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             // 关连接
             JDBCDruidUtils.close(conn, ps);

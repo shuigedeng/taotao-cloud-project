@@ -48,7 +48,7 @@ public class PinYinUtil {
                 }
             }
         } catch (BadHanyuPinyinOutputFormatCombination e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return output;
     }
@@ -76,7 +76,7 @@ public class PinYinUtil {
                         pybf.append(temp[0].charAt(0));
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             } else {
                 pybf.append(arr[i]);
@@ -106,7 +106,7 @@ public class PinYinUtil {
                         pybf.append(temp);
                     }
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             } else {
                 pybf.append(arr[i]);

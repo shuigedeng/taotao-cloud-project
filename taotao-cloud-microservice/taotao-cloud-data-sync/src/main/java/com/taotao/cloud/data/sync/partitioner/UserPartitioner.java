@@ -24,7 +24,7 @@ public class UserPartitioner implements Partitioner {
 			try {
 				value.putString("file", resource.getURL().toExternalForm());
 			} catch (IOException e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 			start += range;
 			end += range;

@@ -44,14 +44,14 @@ public class AServiceCondition extends AsyncTask {
     public AnyConditionResult<Boolean> task(Object o, TaskSupport support) {
         AnyConditionResultBuilder<Boolean> builder = AnyConditionResult.builder();
         try {
-            System.out.println("AServiceCondition Begin");
+            LogUtils.info("AServiceCondition Begin");
             Thread.sleep(300);
             for (int i1 = 0; i1 < sums; i1++) {
                 i1 += i1;
             }
-            System.out.println("AServiceCondition Finish");
+            LogUtils.info("AServiceCondition Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return builder.result(false).build();
         }
         return builder.result(true).build();

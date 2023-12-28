@@ -41,12 +41,12 @@ public class InterruptTaskD extends AsyncTask {
     @SneakyThrows
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("InterruptTaskD Begin");
+        LogUtils.info("InterruptTaskD Begin");
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
         Thread.sleep(20000);
-        System.out.println("InterruptTaskD Finish");
+        LogUtils.info("InterruptTaskD Finish");
         return null;
     }
 

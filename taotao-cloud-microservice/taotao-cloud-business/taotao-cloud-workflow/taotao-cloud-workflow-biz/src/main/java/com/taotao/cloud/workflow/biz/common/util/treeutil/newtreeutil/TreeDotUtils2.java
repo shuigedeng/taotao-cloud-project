@@ -55,7 +55,7 @@ public class TreeDotUtils2 {
             BeanUtils.copyProperties(t, s);
             return s;
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

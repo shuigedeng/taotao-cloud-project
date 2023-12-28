@@ -47,7 +47,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
         // 给个提示
         String tips = "Web-Socket 连接成功，sid=" + session.getId() + "，userId=" + userId;
-        System.out.println(tips);
+        LogUtils.info(tips);
         sendMessage(session, tips);
     }
 
@@ -60,13 +60,13 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
         // 给个提示
         String tips = "Web-Socket 连接关闭，sid=" + session.getId() + "，userId=" + userId;
-        System.out.println(tips);
+        LogUtils.info(tips);
     }
 
     // 收到消息
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
-        System.out.println("sid为：" + session.getId() + "，发来：" + message);
+        LogUtils.info("sid为：" + session.getId() + "，发来：" + message);
     }
 
     // -----------
@@ -74,7 +74,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     // 向指定客户端推送消息
     public static void sendMessage(WebSocketSession session, String message) {
         try {
-            System.out.println("向sid为：" + session.getId() + "，发送：" + message);
+            LogUtils.info("向sid为：" + session.getId() + "，发送：" + message);
             session.sendMessage(new TextMessage(message));
         } catch (IOException e) {
             throw new RuntimeException(e);

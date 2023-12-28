@@ -29,7 +29,7 @@ public class WorkJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) {
-        System.out.println("进入调度");
+        LogUtils.info("进入调度");
         JobDataMap dataMap = context.getMergedJobDataMap();
         FlowModel model = dataMap.get("model") != null ? (FlowModel) dataMap.get("model") : null;
         String type = dataMap.getString("type");

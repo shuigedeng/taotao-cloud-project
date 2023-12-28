@@ -216,7 +216,7 @@ public class FlowTaskController {
                 ImageIO.write(image, "png", os);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             try {
                 if (os != null) {
@@ -224,7 +224,7 @@ public class FlowTaskController {
                     os.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
     }

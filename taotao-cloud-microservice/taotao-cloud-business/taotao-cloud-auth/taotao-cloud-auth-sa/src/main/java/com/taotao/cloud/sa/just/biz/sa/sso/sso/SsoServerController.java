@@ -68,10 +68,10 @@ public class SsoServerController {
         // sso.setSendHttp(url -> {
         //	try {
         //		// 发起 http 请求
-        //		System.out.println("------ 发起请求：" + url);
+        //		LogUtils.info("------ 发起请求：" + url);
         //		return Forest.get(url).executeAsString();
         //	} catch (Exception e) {
-        //		e.printStackTrace();
+        //		LogUtils.error(e);
         //		return null;
         //	}
         // });

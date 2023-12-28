@@ -42,7 +42,7 @@ public class DefaultWechatWechatMiniAppUserDetailsService implements WechatMiniA
 
     @Override
     public UserDetails register(WechatMiniAppRequest request, String sessionKey) {
-        System.out.println(request);
+        LogUtils.info(request);
 
         String signature = DigestUtils.sha1Hex(request.getRawData() + sessionKey);
         if (!request.getSignature().equals(signature)) {
@@ -57,7 +57,7 @@ public class DefaultWechatWechatMiniAppUserDetailsService implements WechatMiniA
         WechatMiniAppUserInfo wechatMiniAppUserInfo = JsonUtils.toObject(decrypt, WechatMiniAppUserInfo.class);
         wechatMiniAppUserInfo.setSessionKey(sessionKey);
 
-        System.out.println(wechatMiniAppUserInfo);
+        LogUtils.info(wechatMiniAppUserInfo);
 
         // 调用数据库 微信小程序用户注册
 
@@ -80,8 +80,8 @@ public class DefaultWechatWechatMiniAppUserDetailsService implements WechatMiniA
 
     @Override
     public UserDetails loadByOpenId(String clientId, String openId) {
-        System.out.println(clientId);
-        System.out.println(openId);
+        LogUtils.info(clientId);
+        LogUtils.info(openId);
 
         // 模拟 根据openid 查询 小程序用户信息
         return null;

@@ -511,14 +511,14 @@ public class HttpUtil {
         ////                + encode
         //                , "POST", s1, "bearer
         // eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJzaW5nbGVMb2dpbiI6IjEiLCJleHAiOjE2NDY0MjEwMDYsImp0aSI6Ijg4ZDFmMzY5LWRlYzQtNDI2Ny1iNjlkLTMwMzFjNWYzMGU3YyIsImNsaWVudF9pZCI6ImFkbWluIiwidG9rZW4iOiJsb2dpbl90b2tlbl8yNjk0NDc5Nzk0ODI0ODYyMTMifQ.G0cmAtOJxC9k6SoUyc-aS4Q-Us8xE-D5ojpa-1DXmoQRqTvKb7BCYThwrMglNY53c24Qk8HvOBvivzgsfB7Dhtm9CxhK89mDqf_tK34OjHkvH95_mdstItCcKm6uwFa02AsfZRIVoa_d1cYInLCcEDK7Q9pKS9QqkYJCUVxHjeZgD430JaX_wdhtSyTqqA59-OWslTpHSDji4keQcz5Y-Vw1k4jquzNWvBn1BX6HIAnksGpApTZ9uyVB2I5gPKqIs8Z3rHEun2rbQPkwbxZBUrAvKz2pbu74q8LMi2i7HdHxj9lTV2mwbFZURt1K_WH8xt-tfz4LYnaoHz8sQ_VXEA");
-        //        System.out.println(jsonObject);
+        //        LogUtils.info(jsonObject);
         boolean get = httpCronRequest(
                 "http://192.168.20.128:30000/api/scheduletask",
                 "GET",
                 null,
                 "bearer"
                         + " eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJzaW5nbGVMb2dpbiI6IjEiLCJleHAiOjE2NDY4MzU2MTEsImp0aSI6ImQ2MTVhZDEyLWI0NmItNDgwOC04YmI2LWNhZTY2Y2QyZDVhYSIsImNsaWVudF9pZCI6ImFkbWluIiwidG9rZW4iOiJsb2dpbl90b2tlbl8yNzExODY5NTgxMTIyNjExMjUifQ.E-sPzi1dFoNh-q-cVHn3jti6cxDm1y2fiH8UVYtAYcsoFwZSvx6oubkUefB7xkE9VhCh_syGLbuYhZvRrUAtY-YfH0GG_sNIQXXrzjjieEtpynyBeCGjjZ2U46InjJhOXDMW9FMQS1VSuIx_Z5FuKV93M7kZcAO4ZxhxYcG1_3R4zscxx2hed8ChQvVWf8nbcnuZBUYffan26Y4Fecvi6b0yGrQE_Tmu1D0TjBnsJ5SugRcA_9IxDHIA2H8NfI4tVmeWMVqvNomjBzJaxWZkuXsA-CTzGUvaz9wpRfskh6qTrpnnNpc5p7KsCfkV_Se6KCvfnmD4eNJ27zRvHg1WJA");
-        System.out.println(get);
+        LogUtils.info(get);
     }
 
     /**
@@ -585,7 +585,7 @@ public class HttpUtil {
                 log.error("获取异常," + e.getMessage());
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return falg;
     }

@@ -119,7 +119,7 @@ public class CommonBizUtil {
 
     public static void main(String[] args) {
         long l = murmurHash32("/origin/userId=12");
-        System.out.println(l);
+        LogUtils.info(l);
     }
 
     private CommonBizUtil() {}

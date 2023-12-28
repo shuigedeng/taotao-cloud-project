@@ -42,7 +42,7 @@ public class MyAnnoEventListener {
 
     @InsertListenPoint
     public void onEventInsertData(CanalMsg canalMsg, CanalEntry.RowChange rowChange) {
-        System.out.println("======================注解方式（新增数据操作）==========================");
+        LogUtils.info("======================注解方式（新增数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {
             String sql = "use " + canalMsg.getSchemaName() + ";\n";
@@ -56,14 +56,14 @@ public class MyAnnoEventListener {
             sql += "INSERT INTO " + canalMsg.getTableName() + "(" + colums.substring(0, colums.length() - 1)
                     + ") VALUES(" + values.substring(0, values.length() - 1)
                     + ");";
-            System.out.println(sql);
+            LogUtils.info(sql);
         }
-        System.out.println("\n======================================================");
+        LogUtils.info("\n======================================================");
     }
 
     @UpdateListenPoint
     public void onEventUpdateData(CanalMsg canalMsg, CanalEntry.RowChange rowChange) {
-        System.out.println("======================注解方式（更新数据操作）==========================");
+        LogUtils.info("======================注解方式（更新数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {
 
@@ -79,14 +79,14 @@ public class MyAnnoEventListener {
             });
             sql += "UPDATE " + canalMsg.getTableName() + " SET " + updates.substring(0, updates.length() - 1)
                     + " WHERE " + conditions;
-            System.out.println(sql);
+            LogUtils.info(sql);
         }
-        System.out.println("\n======================================================");
+        LogUtils.info("\n======================================================");
     }
 
     @DeleteListenPoint
     public void onEventDeleteData(CanalEntry.RowChange rowChange, CanalMsg canalMsg) {
-        System.out.println("======================注解方式（删除数据操作）==========================");
+        LogUtils.info("======================注解方式（删除数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {
 
@@ -105,37 +105,37 @@ public class MyAnnoEventListener {
                 }
 
                 sql += idKey + " =" + idValue + ";";
-                System.out.println(sql);
+                LogUtils.info(sql);
             }
-            System.out.println("\n======================================================");
+            LogUtils.info("\n======================================================");
         }
     }
 
     @CreateTableListenPoint
     public void onEventCreateTable(CanalEntry.RowChange rowChange) {
-        System.out.println("======================注解方式（创建表操作）==========================");
-        System.out.println("use " + rowChange.getDdlSchemaName() + ";\n" + rowChange.getSql());
-        System.out.println("\n======================================================");
+        LogUtils.info("======================注解方式（创建表操作）==========================");
+        LogUtils.info("use " + rowChange.getDdlSchemaName() + ";\n" + rowChange.getSql());
+        LogUtils.info("\n======================================================");
     }
 
     @DropTableListenPoint
     public void onEventDropTable(CanalEntry.RowChange rowChange) {
-        System.out.println("======================注解方式（删除表操作）==========================");
-        System.out.println("use " + rowChange.getDdlSchemaName() + ";\n" + rowChange.getSql());
-        System.out.println("\n======================================================");
+        LogUtils.info("======================注解方式（删除表操作）==========================");
+        LogUtils.info("use " + rowChange.getDdlSchemaName() + ";\n" + rowChange.getSql());
+        LogUtils.info("\n======================================================");
     }
 
     @AlertTableListenPoint
     public void onEventAlertTable(CanalEntry.RowChange rowChange) {
-        System.out.println("======================注解方式（修改表信息操作）==========================");
-        System.out.println("use " + rowChange.getDdlSchemaName() + ";\n" + rowChange.getSql());
-        System.out.println("\n======================================================");
+        LogUtils.info("======================注解方式（修改表信息操作）==========================");
+        LogUtils.info("use " + rowChange.getDdlSchemaName() + ";\n" + rowChange.getSql());
+        LogUtils.info("\n======================================================");
     }
 
     @CreateIndexListenPoint
     public void onEventCreateIndex(CanalMsg canalMsg, CanalEntry.RowChange rowChange) {
-        System.out.println("======================注解方式（创建索引操作）==========================");
-        System.out.println("use " + canalMsg.getSchemaName() + ";\n" + rowChange.getSql());
-        System.out.println("\n======================================================");
+        LogUtils.info("======================注解方式（创建索引操作）==========================");
+        LogUtils.info("use " + canalMsg.getSchemaName() + ";\n" + rowChange.getSql());
+        LogUtils.info("\n======================================================");
     }
 }

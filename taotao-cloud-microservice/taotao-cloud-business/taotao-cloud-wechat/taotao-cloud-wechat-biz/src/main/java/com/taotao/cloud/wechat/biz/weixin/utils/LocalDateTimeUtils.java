@@ -104,6 +104,6 @@ public class LocalDateTimeUtils {
 
     public static void main(String[] args) {
         long timeStamp = 1382694957000l;
-        System.out.println(timestamToDatetime(timeStamp));
+        LogUtils.info(timestamToDatetime(timeStamp));
     }
 }

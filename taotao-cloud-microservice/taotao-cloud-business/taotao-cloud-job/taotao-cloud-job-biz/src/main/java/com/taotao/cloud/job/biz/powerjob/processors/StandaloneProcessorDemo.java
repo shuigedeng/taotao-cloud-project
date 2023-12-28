@@ -42,8 +42,8 @@ public class StandaloneProcessorDemo implements BasicProcessor {
             omsLogger.error("oh~it seems that we have an exception~", e);
         }
 
-        System.out.println("================ StandaloneProcessorDemo#process ================");
-        System.out.println(context.getJobParams());
+        LogUtils.info("================ StandaloneProcessorDemo#process ================");
+        LogUtils.info(context.getJobParams());
         // 根据控制台参数判断是否成功
         boolean success = !"failed".equals(context.getJobParams());
         omsLogger.info("StandaloneProcessorDemo finished process,success: .", success);

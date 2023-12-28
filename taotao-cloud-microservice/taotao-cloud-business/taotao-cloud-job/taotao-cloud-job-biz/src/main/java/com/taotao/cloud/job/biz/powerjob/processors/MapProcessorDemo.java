@@ -42,13 +42,13 @@ public class MapProcessorDemo implements MapProcessor {
     @Override
     public ProcessResult process(TaskContext context) throws Exception {
 
-        System.out.println("============== MapProcessorDemo#process ==============");
-        System.out.println("isRootTask:" + isRootTask());
-        System.out.println("taskContext:" + JsonUtils.toJSONString(context));
-        System.out.println(mysteryService.hasaki());
+        LogUtils.info("============== MapProcessorDemo#process ==============");
+        LogUtils.info("isRootTask:" + isRootTask());
+        LogUtils.info("taskContext:" + JsonUtils.toJSONString(context));
+        LogUtils.info(mysteryService.hasaki());
 
         if (isRootTask()) {
-            System.out.println("==== MAP ====");
+            LogUtils.info("==== MAP ====");
             List<SubTask> subTasks = Lists.newLinkedList();
             for (int j = 0; j < BATCH_NUM; j++) {
                 SubTask subTask = new SubTask();
@@ -63,16 +63,16 @@ public class MapProcessorDemo implements MapProcessor {
             return new ProcessResult(true, "map successfully");
         } else {
 
-            System.out.println("==== PROCESS ====");
+            LogUtils.info("==== PROCESS ====");
             SubTask subTask = (SubTask) context.getSubTask();
             for (Integer itemId : subTask.getItemIds()) {
                 if (Thread.interrupted()) {
                     // 任务被中断
-                    System.out.println(
+                    LogUtils.info(
                             "job has been stop! so stop to process subTask:" + subTask.getSiteId() + "=>" + itemId);
                     break;
                 }
-                System.out.println("processing subTask: " + subTask.getSiteId() + "=>" + itemId);
+                LogUtils.info("processing subTask: " + subTask.getSiteId() + "=>" + itemId);
                 int max = Integer.MAX_VALUE >> 4;
                 for (int i = 0; ; i++) {
                     // 模拟耗时操作

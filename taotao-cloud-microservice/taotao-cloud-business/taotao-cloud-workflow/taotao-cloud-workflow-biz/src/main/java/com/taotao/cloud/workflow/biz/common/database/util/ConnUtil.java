@@ -92,7 +92,7 @@ public class ConnUtil {
             Integer port = dsd.getPort() == null ? Integer.parseInt(db.getDefaultPort()) : dsd.getPort();
             return DbBase.BaseCommon.getDbBaseConnUrl(db, dsd.getPrepareUrl(), host, port, dbName, dbSchema);
         } catch (DataException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }
@@ -116,7 +116,7 @@ public class ConnUtil {
                 Class.forName(driver);
                 return DriverManager.getConnection(url, userName, password);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
                 throw DataException.errorLink(e.getMessage());
             }
         }

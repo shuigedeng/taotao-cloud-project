@@ -59,9 +59,9 @@ public class HlsController {
                 hlsService.processTs(mediaKey, tsname, request.getInputStream());
             }
         } catch (IORuntimeException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 

@@ -131,7 +131,7 @@ public class LogServiceImpl extends ServiceImpl<ILogMapper, Log> implements ILog
                 assert argValues != null;
                 username = new JSONObject(argValues[0]).get("username").toString();
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
         log.setLocation(StringUtils.getCityInfo(log.getIp()));

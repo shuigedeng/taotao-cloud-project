@@ -163,7 +163,7 @@ public class CloudCtrlController {
                         camera.getUsername(),
                         camera.getPassword());
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
     }

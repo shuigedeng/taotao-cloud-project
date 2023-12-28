@@ -42,7 +42,7 @@ public class SingleWriterService implements ItemWriter<String> {
         List<? extends String> messages = chunk.getItems();
         for (String message : messages) {
             logger.info("Writing data: " + message);
-            System.out.println("Writing data:111111 " + message);
+            LogUtils.info("Writing data:111111 " + message);
         }
     }
 }

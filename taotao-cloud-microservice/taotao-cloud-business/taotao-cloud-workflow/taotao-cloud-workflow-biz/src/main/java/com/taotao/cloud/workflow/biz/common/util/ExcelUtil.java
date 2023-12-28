@@ -48,7 +48,7 @@ public class ExcelUtil {
         try {
             list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return list;
     }
@@ -74,7 +74,7 @@ public class ExcelUtil {
         try {
             list = ExcelImportUtil.importExcel(file, pojoClass, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return list;
     }
@@ -99,7 +99,7 @@ public class ExcelUtil {
             @Cleanup InputStream inputStream = file.getInputStream();
             list = ExcelImportUtil.importExcel(inputStream, pojoClass, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return list;
     }

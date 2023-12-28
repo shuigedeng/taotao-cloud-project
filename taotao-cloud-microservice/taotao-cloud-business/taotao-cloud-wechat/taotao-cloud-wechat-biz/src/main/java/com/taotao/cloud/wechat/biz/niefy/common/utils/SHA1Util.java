@@ -42,7 +42,7 @@ public class SHA1Util {
             }
             return new String(str);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return null;
         }
     }

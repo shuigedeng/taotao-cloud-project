@@ -44,15 +44,15 @@ public class EService extends AsyncTask<Object, Object> {
     public Object task(Object o, TaskSupport support) {
 
         try {
-            System.out.println("EService Begin");
+            LogUtils.info("EService Begin");
             Thread.sleep(600);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("EService Finish");
+            LogUtils.info("EService Finish");
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

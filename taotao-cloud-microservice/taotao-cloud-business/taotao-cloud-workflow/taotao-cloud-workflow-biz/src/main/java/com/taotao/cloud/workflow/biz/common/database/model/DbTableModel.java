@@ -78,7 +78,7 @@ public class DbTableModel extends JdbcGetMod {
                     .setSum(sum)
                     .setSize(size);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

@@ -45,7 +45,7 @@ public class XSSEscape {
             emptyPolicy = Policy.getInstance(inputStream);
             inputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 

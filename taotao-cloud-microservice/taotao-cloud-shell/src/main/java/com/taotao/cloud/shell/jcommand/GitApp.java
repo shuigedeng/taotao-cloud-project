@@ -20,19 +20,19 @@ public class GitApp {
             return;
         }
         if (gitCommandOptions.isVersion()) {
-            System.out.println("git version 2.24.3 (Apple Git-128)");
+            LogUtils.info("git version 2.24.3 (Apple Git-128)");
             return;
         }
         if (gitCommandOptions.getCloneUrl() != null) {
-            System.out.println("clone " + gitCommandOptions.getCloneUrl());
+            LogUtils.info("clone " + gitCommandOptions.getCloneUrl());
         }
         String parsedCommand = commander.getParsedCommand();
         if ("commit".equals(parsedCommand)) {
-            System.out.println(commandCommit.getComment());
+            LogUtils.info(commandCommit.getComment());
         }
         if ("add".equals(parsedCommand)) {
             for (String file : commandAdd.getFiles()) {
-                System.out.println("暂存文件：" + file);
+                LogUtils.info("暂存文件：" + file);
             }
         }
     }

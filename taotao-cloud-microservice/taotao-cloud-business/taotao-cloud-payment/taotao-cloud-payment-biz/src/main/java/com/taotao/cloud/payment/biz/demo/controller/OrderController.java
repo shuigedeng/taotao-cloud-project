@@ -53,7 +53,7 @@ public class OrderController {
             }
             response = ApiResponse.success("查询成功", true);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return response;
     }

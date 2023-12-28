@@ -167,7 +167,7 @@ public class DefaultIdWorker implements IdWorker {
                 id = id % (maxDatacenterId + 1);
             }
         } catch (Exception e) {
-            System.out.println(" getDatacenterId: " + e.getMessage());
+            LogUtils.info(" getDatacenterId: " + e.getMessage());
         }
         return id;
     }

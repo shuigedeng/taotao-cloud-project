@@ -35,11 +35,11 @@ public class AppendWorkflowContextTester implements BasicProcessor {
 
         Map<String, String> workflowContext = context.getWorkflowContext().fetchWorkflowContext();
         String originValue = workflowContext.get(WorkflowContextConstant.CONTEXT_INIT_PARAMS_KEY);
-        System.out.println("======= AppendWorkflowContextTester#start =======");
-        System.out.println("current instance id : " + context.getInstanceId());
-        System.out.println("current workflow context : " + workflowContext);
-        System.out.println("current job param : " + context.getJobParams());
-        System.out.println("initParam of workflow context : " + originValue);
+        LogUtils.info("======= AppendWorkflowContextTester#start =======");
+        LogUtils.info("current instance id : " + context.getInstanceId());
+        LogUtils.info("current workflow context : " + workflowContext);
+        LogUtils.info("current job param : " + context.getJobParams());
+        LogUtils.info("initParam of workflow context : " + originValue);
         int num = 0;
         try {
             num = Integer.parseInt(originValue);
@@ -47,7 +47,7 @@ public class AppendWorkflowContextTester implements BasicProcessor {
             // ignore
         }
         context.getWorkflowContext().appendData2WfContext(WorkflowContextConstant.CONTEXT_INIT_PARAMS_KEY, num + 1);
-        System.out.println("======= AppendWorkflowContextTester#end =======");
+        LogUtils.info("======= AppendWorkflowContextTester#end =======");
         if (FAIL_CODE.equals(context.getJobParams())) {
             return new ProcessResult(false, "Failed!");
         }

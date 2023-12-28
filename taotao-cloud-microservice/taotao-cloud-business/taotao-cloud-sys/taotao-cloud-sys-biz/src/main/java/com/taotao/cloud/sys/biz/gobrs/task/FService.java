@@ -43,14 +43,14 @@ public class FService extends AsyncTask<Object, Object> {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("FService Begin");
+            LogUtils.info("FService Begin");
             Thread.sleep(2000);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("FService Finish");
+            LogUtils.info("FService Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

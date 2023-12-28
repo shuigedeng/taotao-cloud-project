@@ -218,7 +218,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
             outputData();
             listenClient();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return this;
     }
@@ -248,7 +248,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
                         if (header == null) {
                             header = bos.toByteArray();
                             //
-                            //	System.out.println(HexUtil.encodeHexStr(header));
+                            //	LogUtils.info(HexUtil.encodeHexStr(header));
                             bos.reset();
                             continue;
                         }
@@ -280,7 +280,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
                     //					e1.printStackTrace();
                     //					超时关闭
                 } catch (IOException e) {
-                    //					e.printStackTrace();
+                    //					LogUtils.error(e);
                 } finally {
                     MediaService.cameras.remove(cameraDto.getMediaKey());
                     running = false;
@@ -388,13 +388,13 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 } finally {
                     try {
                         running = false;
                         in.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LogUtils.error(e);
                     }
                 }
             }
@@ -417,13 +417,13 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 } finally {
                     try {
                         running = false;
                         err.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LogUtils.error(e);
                     }
                 }
             }
@@ -449,7 +449,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
             tcpServer.setSoTimeout(10000);
             return sb.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         new RuntimeException("无法启用端口");
         return "";
@@ -583,7 +583,7 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
             // 启动录制器失败
             timeout += 50;
@@ -595,8 +595,8 @@ public class MediaTransferFlvByFFmpeg extends MediaTransfer {
 
     public static void main(String[] args) throws Exception {
         //		ServerSocket serverSocket = new ServerSocket(0, 1, InetAddress.getLoopbackAddress());
-        //		System.out.println(serverSocket.getLocalPort());
-        //		System.out.println(serverSocket.getInetAddress().getHostAddress());
+        //		LogUtils.info(serverSocket.getLocalPort());
+        //		LogUtils.info(serverSocket.getInetAddress().getHostAddress());
 
         MediaTransferFlvByFFmpeg.atPath()
                 .addArgument("-i")

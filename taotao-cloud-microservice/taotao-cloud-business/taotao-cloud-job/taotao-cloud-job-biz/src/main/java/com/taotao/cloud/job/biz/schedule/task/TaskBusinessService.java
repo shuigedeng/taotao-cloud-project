@@ -40,7 +40,7 @@ public class TaskBusinessService {
 
             logger.info("======执行业务代码 --- this is 完成 ======");
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

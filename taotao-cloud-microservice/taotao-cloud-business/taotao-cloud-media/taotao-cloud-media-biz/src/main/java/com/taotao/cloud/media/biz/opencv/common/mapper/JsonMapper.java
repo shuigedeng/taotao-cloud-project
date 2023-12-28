@@ -268,16 +268,16 @@ public class JsonMapper extends ObjectMapper {
     //	map.put("open", true);
     //	list.add(map);
     //	String json = JsonMapper.toJsonString(list);
-    //	System.out.println(json);
+    //	LogUtils.info(json);
     //	Map<String, Object> map2 = JsonMapper
     //			.fromJsonString(
     //					"{extendS1:{title:'站牌号',sort:1,type:'text',maxlength:0,maxlength:30}, "
     //							+ "extendS2:{title:'规模分类',sort:2,type:'dict',dictType:'scope_category'}}",
     //					Map.class);
-    //	System.out.println(map2);
+    //	LogUtils.info(map2);
     //
     //	String aaString = "返回值";
-    //	System.out.println(JsonMapper.toJsonString(aaString));
+    //	LogUtils.info(JsonMapper.toJsonString(aaString));
     // }
 
 }

@@ -104,7 +104,7 @@ public class AliPayController {
             // 支付宝交易号
             String tradeNo = new String(
                     request.getParameter("trade_no").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-            System.out.println("商户订单号" + outTradeNo + "  " + "第三方交易号" + tradeNo);
+            LogUtils.info("商户订单号" + outTradeNo + "  " + "第三方交易号" + tradeNo);
 
             // 根据业务需要返回数据，这里统一返回OK
             return Result.success(true);

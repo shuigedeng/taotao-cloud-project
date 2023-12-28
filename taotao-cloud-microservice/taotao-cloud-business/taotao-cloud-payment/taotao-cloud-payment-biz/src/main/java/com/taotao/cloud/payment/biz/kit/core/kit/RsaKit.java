@@ -71,8 +71,8 @@ public class RsaKit {
         map.put("publicKey", publicKeyStr);
         map.put("privateKey", privateKeyStr);
 
-        System.out.println("公钥\r\n" + publicKeyStr);
-        System.out.println("私钥\r\n" + privateKeyStr);
+        LogUtils.info("公钥\r\n" + publicKeyStr);
+        LogUtils.info("私钥\r\n" + privateKeyStr);
         return map;
     }
 
@@ -353,20 +353,20 @@ public class RsaKit {
         String content = "我是,I am ";
         String encrypt = encryptByPublicKey(content, publicKey);
         String decrypt = decryptByPrivateKey(encrypt, privateKey);
-        System.out.println("加密之后：" + encrypt);
-        System.out.println("解密之后：" + decrypt);
+        LogUtils.info("加密之后：" + encrypt);
+        LogUtils.info("解密之后：" + decrypt);
 
-        System.out.println("======华丽的分割线=========");
+        LogUtils.info("======华丽的分割线=========");
 
         content = "我是,I am ";
         encrypt = encryptByPublicKeyByWx(content, publicKey);
         decrypt = decryptByPrivateKeyByWx(encrypt, privateKey);
-        System.out.println("加密之后：" + encrypt);
-        System.out.println("解密之后：" + decrypt);
+        LogUtils.info("加密之后：" + encrypt);
+        LogUtils.info("解密之后：" + decrypt);
 
         // OPPO
         String sign = encryptByPrivateKey(content, privateKey);
-        System.out.println("加密之后：" + sign);
-        System.out.println(checkByPublicKey(content, sign, publicKey));
+        LogUtils.info("加密之后：" + sign);
+        LogUtils.info(checkByPublicKey(content, sign, publicKey));
     }
 }

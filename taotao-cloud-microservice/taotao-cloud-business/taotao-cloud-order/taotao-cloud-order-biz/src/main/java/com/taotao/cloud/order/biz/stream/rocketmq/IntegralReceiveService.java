@@ -51,7 +51,7 @@ package com.taotao.cloud.order.biz.stream.rocketmq; /// *
 //			throw new RuntimeException("积分服务器挂了");
 //		}
 //
-//		System.out.println("============收到订单信息，增加积分:" + message);
+//		LogUtils.info("============收到订单信息，增加积分:" + message);
 //	}
 //
 //	/**

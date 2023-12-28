@@ -12,7 +12,7 @@ public class ConditionServiceImpl implements ConditionService {
 	@Override
 	public Condition<AuditContext> passOrRejectCondition() {
 		return context -> {
-			System.out.println(1);
+			LogUtils.info(1);
 			return true;
 		};
 	}
@@ -20,7 +20,7 @@ public class ConditionServiceImpl implements ConditionService {
 	@Override
 	public Condition<AuditContext> doneCondition() {
 		return context -> {
-			System.out.println(1);
+			LogUtils.info(1);
 			return true;
 		};
 	}

@@ -56,7 +56,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
-        System.out.println("++++++++++++++++++ login token: " + token);
+        LogUtils.info("++++++++++++++++++ login token: " + token);
 
         if (StrUtil.isNotEmpty(token)) {
             response.sendRedirect(INDEX);

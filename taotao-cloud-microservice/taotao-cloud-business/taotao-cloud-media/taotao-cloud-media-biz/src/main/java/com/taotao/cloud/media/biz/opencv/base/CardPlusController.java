@@ -166,7 +166,7 @@ public class CardPlusController extends BaseController {
         logger.info("去除红色基础上进行二值化======" + destPath);
         String redvalue = StringUtils.split(blue_red_thresh, ",")[0];
         String bluevalue = StringUtils.split(blue_red_thresh, ",")[1];
-        System.out.println(bluevalue + "			" + redvalue);
+        LogUtils.info(bluevalue + "			" + redvalue);
         TreeMap<Integer, String> resultMap = new TreeMap<Integer, String>();
         StringBuffer resultValue = new StringBuffer();
         for (int no = 0; no < listx.size(); no++) {
@@ -181,15 +181,15 @@ public class CardPlusController extends BaseController {
                 // Mat selectdst = new Mat(select.rows(), select.cols(), select.type());
                 // Imgproc.threshold(select, selectdst, 170, 255, Imgproc.THRESH_BINARY);
 
-                // System.out.println("rectx.x,
+                // LogUtils.info("rectx.x,
                 // recty.y=="+rectx.x+","+recty.y+"rectx.width,recty.height=="+rectx.width+","+recty.height);
                 BigDecimal p100 =
                         Core.countNonZero(selectdst) * 100 / (selectdst.size().area());
                 String que_answer = getQA(no, an);
                 Integer que = Integer.valueOf(que_answer.split("_")[0]);
                 String answer = que_answer.split("_")[1];
-                // System.out.println(Core.countNonZero(selectdst) + "/" + selectdst.size().area());
-                System.out.println(que_answer + ":			" + p100);
+                // LogUtils.info(Core.countNonZero(selectdst) + "/" + selectdst.size().area());
+                LogUtils.info(que_answer + ":			" + p100);
 
                 if (p100 >= Integer.valueOf(bluevalue)) { // 蓝色
                     Core.rectangle(
@@ -241,7 +241,7 @@ public class CardPlusController extends BaseController {
         Highgui.imwrite(destPath, sourceMat);
         logger.info("框选填图区域，绿色为选项，蓝色为填图，红色为临界======" + destPath);
         long t2 = new Date().getTime();
-        System.out.println(t2 - t1);
+        LogUtils.info(t2 - t1);
 
         // logger.info("输出最终结果：" + resultValue.toString());
 
@@ -265,12 +265,12 @@ public class CardPlusController extends BaseController {
         // 创建画布
         int histImgRows = 600;
         int histImgCols = 1300;
-        System.out.println("---------" + histSize.get(0, 0)[0]);
+        LogUtils.info("---------" + histSize.get(0, 0)[0]);
         int colStep = (int) Math.floor(histImgCols / histSize.get(0, 0)[0]); // 舍去小数，不能四舍五入，有可能列宽不够
         Mat histImg = new Mat(histImgRows, histImgCols, CvType.CV_8UC3, new Scalar(255, 255, 255)); // 重新建一张图片，绘制直方图
 
         int max = (int) minmaxLoc.maxVal;
-        System.out.println("--------" + max);
+        LogUtils.info("--------" + max);
         BigDecimal bin_u = (BigDecimal) (histImgRows - 20) / max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度，因为画直方图的时候上移了20像素，要减去
         int kedu = 0;
         for (int i = 1; kedu <= minmaxLoc.maxVal; i++) {
@@ -280,7 +280,7 @@ public class CardPlusController extends BaseController {
         }
 
         for (int i = 0; i < histSize.get(0, 0)[0]; i++) { // 画出每一个灰度级分量的比例，注意OpenCV将Mat最左上角的点作为坐标原点
-            // System.out.println(i + ":=====" + histogramOfGray.get(i, 0)[0]);
+            // LogUtils.info(i + ":=====" + histogramOfGray.get(i, 0)[0]);
             Core.rectangle(
                     histImg,
                     new Point(colStep * i, histImgRows - 20),

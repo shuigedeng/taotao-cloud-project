@@ -51,7 +51,7 @@ public class QrcodeLoginController {
             // 网址：http://hutool.mydoc.io/
             QrCodeUtil.generate(uuid, 300, 300, "jpg", response.getOutputStream());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

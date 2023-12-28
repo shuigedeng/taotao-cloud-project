@@ -28,11 +28,11 @@ public class NullValueCheckHandler extends AbstractCheckHandler {
 
     @Override
     public Result handle(ProductVO param) {
-        System.out.println("空值校验 Handler 开始...");
+        LogUtils.info("空值校验 Handler 开始...");
 
         // 降级：如果配置了降级，则跳过此处理器，执行下一个处理器
         if (super.getConfig().getDown()) {
-            System.out.println("空值校验 Handler 已降级，跳过空值校验 Handler...");
+            LogUtils.info("空值校验 Handler 已降级，跳过空值校验 Handler...");
             return super.next(param);
         }
 
@@ -53,7 +53,7 @@ public class NullValueCheckHandler extends AbstractCheckHandler {
             return Result.failure(ErrorCode.PARAM_STOCK_NULL_ERROR);
         }
 
-        System.out.println("空值校验 Handler 通过...");
+        LogUtils.info("空值校验 Handler 通过...");
 
         // 执行下一个处理器
         return super.next(param);

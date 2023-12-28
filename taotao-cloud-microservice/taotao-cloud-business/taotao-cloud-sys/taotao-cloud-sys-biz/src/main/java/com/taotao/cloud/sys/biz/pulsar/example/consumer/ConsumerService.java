@@ -30,13 +30,13 @@ package com.taotao.cloud.sys.biz.pulsar.example.consumer;
 //
 //	@PulsarConsumer(topic = Topics.STRING, clazz = String.class)
 //	public void consumeString(String message) {
-//		System.out.println(message);
+//		LogUtils.info(message);
 //		stringReceived.set(true);
 //	}
 //
 //	@PulsarConsumer(topic = Topics.CLASS, clazz = MyMsg.class)
 //	public void consumeClass(MyMsg message) {
-//		System.out.println(message.getData());
+//		LogUtils.info(message.getData());
 //		classReceived.set(true);
 //	}
 // }

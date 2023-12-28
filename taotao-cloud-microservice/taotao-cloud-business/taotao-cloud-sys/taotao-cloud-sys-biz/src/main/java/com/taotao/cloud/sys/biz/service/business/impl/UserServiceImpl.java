@@ -214,7 +214,7 @@ public class UserServiceImpl extends BaseSuperServiceImpl< User, Long,IUserMappe
 
 	private String phoneKeywords(String phone) {
 		String keywords = this.keywords(phone, 4);
-		System.out.println(keywords.length());
+		LogUtils.info(keywords.length());
 		return keywords;
 	}
 	//分词组合加密

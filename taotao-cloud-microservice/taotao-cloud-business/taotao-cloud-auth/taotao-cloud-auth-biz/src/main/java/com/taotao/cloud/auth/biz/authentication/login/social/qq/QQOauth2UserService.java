@@ -77,7 +77,7 @@ public class QQOauth2UserService implements OAuth2UserService<OAuth2UserRequest,
         try {
             openId = extractQqOpenId(Objects.requireNonNull(openIdResponse.getBody()));
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         // userInfo请求
@@ -104,7 +104,7 @@ public class QQOauth2UserService implements OAuth2UserService<OAuth2UserRequest,
         try {
             userAttributes = extractQqUserInfo(Objects.requireNonNull(userInfoResponse.getBody()));
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
         authorities.add(new OAuth2UserAuthority(userAttributes));

@@ -67,7 +67,7 @@ public abstract class BaseController {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -108,7 +108,7 @@ public abstract class BaseController {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 

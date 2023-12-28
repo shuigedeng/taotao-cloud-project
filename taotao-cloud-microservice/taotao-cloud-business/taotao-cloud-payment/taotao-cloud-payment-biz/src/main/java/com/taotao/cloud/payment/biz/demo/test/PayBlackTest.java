@@ -30,9 +30,9 @@ public class PayBlackTest {
         String key = "微信支付支付密钥";
         String account = "一般是openid或支付宝buyer_id";
         PayBlack.create(mchId, account, "羊毛党", "2021-06-25 11:10:23", key);
-        System.out.println("黑名单添加成功");
+        LogUtils.info("黑名单添加成功");
 
         boolean check = PayBlack.check(mchId, account, key);
-        System.out.println("是否黑名单：" + check);
+        LogUtils.info("是否黑名单：" + check);
     }
 }

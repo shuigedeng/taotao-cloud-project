@@ -61,7 +61,7 @@ public class MsgHandler extends AbstractHandler {
                         .build();
             }
         } catch (WxErrorException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         // TODO 组装回复消息

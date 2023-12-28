@@ -63,7 +63,7 @@ public class Cs1DbJobHandler {
                                     // cs1DbService.tableOperation(tableName);
                                     Thread.sleep(10000);
                                 } catch (Exception e) {
-                                    e.printStackTrace();
+                                    LogUtils.error(e);
                                 } finally {
                                     latch.countDown();
                                 }
@@ -74,7 +74,7 @@ public class Cs1DbJobHandler {
             latch.await();
             return ReturnT.SUCCESS;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return ReturnT.FAIL;
         }
     }

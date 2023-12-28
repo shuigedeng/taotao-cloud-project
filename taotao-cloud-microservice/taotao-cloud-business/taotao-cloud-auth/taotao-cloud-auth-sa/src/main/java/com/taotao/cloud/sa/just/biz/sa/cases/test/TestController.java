@@ -32,14 +32,14 @@ public class TestController {
     // 测试   浏览器访问： http://localhost:8081/test/test
     @RequestMapping("test")
     public SaResult test() {
-        System.out.println("------------进来了");
+        LogUtils.info("------------进来了");
         return SaResult.ok();
     }
 
     // 测试   浏览器访问： http://localhost:8081/test/test2
     @RequestMapping("test2")
     public SaResult test2() {
-        System.out.println("------------进来了");
+        LogUtils.info("------------进来了");
         return SaResult.ok();
     }
 }

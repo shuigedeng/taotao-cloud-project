@@ -167,7 +167,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //            this.fateAgentService.saveOrUpDateBatchEntity(fateAgents);
 //
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            LogUtils.error(e);
 //        } finally {
 //            // 处理完每批数据后后将临时清空
 //            size1 = 0;
@@ -255,7 +255,7 @@ package com.taotao.cloud.sys.biz.controller.mybatis;
 //            });
 //            this.fateRecordService.saveOrUpDateBatchEntity(fateRecords);
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            LogUtils.error(e);
 //        } finally {
 //            // 处理完每批数据后后将临时清空
 //            size2 = 0;

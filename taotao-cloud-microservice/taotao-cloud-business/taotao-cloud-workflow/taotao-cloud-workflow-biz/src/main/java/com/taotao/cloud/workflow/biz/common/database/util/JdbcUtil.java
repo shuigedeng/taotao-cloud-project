@@ -200,7 +200,7 @@ public class JdbcUtil {
         try {
             selectSql = sqlArray[0];
             // 方便测试打印到控制台
-            System.out.println("列表sql语句为:" + selectSql);
+            LogUtils.info("列表sql语句为:" + selectSql);
             statementDTO.setPrepareSql(selectSql);
             List<?> resultData = query(statementDTO, jdbcDTO).getData();
             pageModel.setDataList(resultData);
@@ -250,7 +250,7 @@ public class JdbcUtil {
                     //                        dataObject =
                     // HtmlUtils.htmlEscape(String.valueOf(dataObject),CharsetKit.UTF_8);
                     //                    }
-                    System.out.println(dataObject);
+                    LogUtils.info(dataObject);
                     statement.setObject(i + 1, dataObject);
                 }
             }
@@ -272,7 +272,7 @@ public class JdbcUtil {
                 result.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             // 关闭PreparedStatement
             try {
@@ -280,7 +280,7 @@ public class JdbcUtil {
                     pps.close();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
     }

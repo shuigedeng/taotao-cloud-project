@@ -46,7 +46,7 @@ public class QqOAuth2AccessTokenResponseHttpMessageConverter extends OAuth2Acces
         try {
             response = StreamUtils.copyToString(inputMessage.getBody(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         LogUtils.info("qq的AccessToken响应信息：{}", response);
