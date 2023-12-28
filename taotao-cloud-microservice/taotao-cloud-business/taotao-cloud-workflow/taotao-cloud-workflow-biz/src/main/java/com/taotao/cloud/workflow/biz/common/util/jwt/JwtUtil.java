@@ -81,6 +81,6 @@ public class JwtUtil {
         String test = getRealToken(
                 "Bearer"
                         + " eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiIxNDEwMDEiLCJzY29wZSI6WyJhbGwiXSwiZXhwIjoxNjA5MDA5NDQxLCJhdXRob3JpdGllcyI6WyJhYSJdLCJqdGkiOiIxYWNkYTI4MS0yYTUxLTRmZGYtYmRlYy03OWFkNmI5NzZmODEiLCJjbGllbnRfaWQiOiJhZG1pbiIsInRva2VuIjoibG9naW5fdG9rZW5fMDNhNDEyNTgwOGU5NGVhYjhlY2I3MzM4OTQ2ZjJhMzgifQ.b1LJ5dWQeI0it7JPP0vAm56Ns-2l-zpi768Z2KhdAODLWyfO640jIz02dNixfnw0_2hgBwqj9Y-1NIMVEZmRPMoRhIOwh6qw4p8b05k8Y3M2KXhdYaQTaw9ZkpR-TFRuVf8_v2bUaUjmnulXRffV3iVAYmcZcXHBrv0938_oJJEIKHmjtlbbOCaKIf6IEPCwmFci8gLCnld6FnVIytg9rMD85AsagwLHs_dNaNavEg3-s5Fi9jov7L2_h940aHPvtwBiCNpPkFIA-hmYb7-ChETmx8yFN3TnJbNX4-wpQ_dJlaNnHTtbt8ztNr-ugXbKGqfkZzWPxn-anqeSjyBUAA");
-        System.out.println(test);
+        LogUtils.info(test);
     }
 }

@@ -31,7 +31,7 @@ public class CaseThreeTaskF extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("F任务执行");
+        LogUtils.info("F任务执行");
         return "FResult";
     }
 }

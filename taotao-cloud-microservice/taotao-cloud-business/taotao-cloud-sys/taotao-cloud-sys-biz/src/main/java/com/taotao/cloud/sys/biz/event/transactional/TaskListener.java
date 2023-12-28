@@ -25,7 +25,7 @@ import java.util.Objects;
  *             @Override
  *             public void afterCommit() {
  *
- *                 System.out.println("事务提交后执行 ===== ");
+ *                 LogUtils.info("事务提交后执行 ===== ");
  *
  *             }
  *         });
@@ -64,7 +64,7 @@ public class TaskListener {
 		classes=TaskEvent.class,
 		fallbackExecution = true)
     public void taskHandler(TaskEvent taskEvent) {
-        System.out.println("=============> start taskHandler：" + Thread.currentThread().threadId() + ", name : " + Thread.currentThread().getName());
+        LogUtils.info("=============> start taskHandler：" + Thread.currentThread().threadId() + ", name : " + Thread.currentThread().getName());
         if (Objects.nonNull(taskEvent)) {
             taskEvent.getSource().run();
         }

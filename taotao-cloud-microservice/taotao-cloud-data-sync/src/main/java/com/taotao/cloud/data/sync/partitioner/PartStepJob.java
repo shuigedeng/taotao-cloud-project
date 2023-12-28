@@ -92,7 +92,7 @@ public class PartStepJob {
 		try {
 			handler.afterPropertiesSet();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogUtils.error(e);
 		}
 		return handler;
 	}

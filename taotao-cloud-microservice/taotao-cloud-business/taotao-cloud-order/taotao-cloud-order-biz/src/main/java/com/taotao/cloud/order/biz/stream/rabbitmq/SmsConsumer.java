@@ -30,6 +30,6 @@ public class SmsConsumer {
     @StreamListener(value = TaoTaoCloudSink.SMS_MESSAGE_INPUT)
     public void test(Message<String> message) {
         String payload = message.getPayload();
-        System.out.println("sms Consumer" + payload);
+        LogUtils.info("sms Consumer" + payload);
     }
 }

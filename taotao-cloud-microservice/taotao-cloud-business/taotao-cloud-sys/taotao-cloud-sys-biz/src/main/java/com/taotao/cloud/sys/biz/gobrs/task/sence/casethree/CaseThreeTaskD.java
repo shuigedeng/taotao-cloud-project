@@ -31,7 +31,7 @@ public class CaseThreeTaskD extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("D任务执行");
+        LogUtils.info("D任务执行");
         return "DResult";
     }
 }

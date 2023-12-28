@@ -35,7 +35,7 @@ public class OpenCVUtil {
         // Mat 转byte数组
         BufferedImage originalB = toBufferedImage(mat);
         long time3 = new Date().getTime();
-        System.out.println("保存读取方法2转=" + (time3 - time1));
+        LogUtils.info("保存读取方法2转=" + (time3 - time1));
         return originalB;
         // ImageIO.write(originalB, "jpg", new File("D:\\test\\testImge\\ws2.jpg"));
     }
@@ -47,8 +47,8 @@ public class OpenCVUtil {
         Mat mat1 = new Mat();
         mat1.get(0, 0, return_buff);
         long time3 = new Date().getTime();
-        System.out.println(mat.total() * mat.channels());
-        System.out.println("保存读取方法2转=" + (time3 - time1));
+        LogUtils.info(mat.total() * mat.channels());
+        LogUtils.info("保存读取方法2转=" + (time3 - time1));
         return return_buff;
     }
 
@@ -57,8 +57,8 @@ public class OpenCVUtil {
         MatOfByte mob = new MatOfByte();
         Highgui.imencode(".jpg", mat, mob);
         long time3 = new Date().getTime();
-        // System.out.println(mat.total() * mat.channels());
-        System.out.println("Mat转byte[] 耗时=" + (time3 - time1));
+        // LogUtils.info(mat.total() * mat.channels());
+        LogUtils.info("Mat转byte[] 耗时=" + (time3 - time1));
         return mob.toArray();
     }
 

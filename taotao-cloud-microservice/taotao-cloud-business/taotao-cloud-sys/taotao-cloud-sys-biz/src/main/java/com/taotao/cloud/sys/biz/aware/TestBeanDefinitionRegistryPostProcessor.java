@@ -25,11 +25,11 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 public class TestBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        System.out.println("[BeanDefinitionRegistryPostProcessor] postProcessBeanDefinitionRegistry");
+        LogUtils.info("[BeanDefinitionRegistryPostProcessor] postProcessBeanDefinitionRegistry");
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("[BeanDefinitionRegistryPostProcessor] postProcessBeanFactory");
+        LogUtils.info("[BeanDefinitionRegistryPostProcessor] postProcessBeanFactory");
     }
 }

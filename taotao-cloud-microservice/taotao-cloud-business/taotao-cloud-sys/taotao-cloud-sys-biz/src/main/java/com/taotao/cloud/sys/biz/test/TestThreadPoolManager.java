@@ -63,7 +63,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
     final RejectedExecutionHandler handler = (r, executor) -> {
         // 订单加入到缓冲队列
         msgQueue.offer(((BusinessThread) r).getAcceptStr());
-        System.out.println("系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
+        LogUtils.info("系统任务太忙了,把此订单交给(调度线程池)逐一处理，订单号：" + ((BusinessThread) r).getAcceptStr());
     };
 
     /** 创建线程池 */
@@ -77,7 +77,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
 
     /** 将任务加入订单线程池 */
     public void addOrders(String orderId) {
-        System.out.println("此订单准备添加到线程池，订单号：" + orderId);
+        LogUtils.info("此订单准备添加到线程池，订单号：" + orderId);
         // 验证当前进入的订单是否已经存在
         if (cacheMap.get(orderId) == null) {
             cacheMap.put(orderId, new Object());
@@ -99,7 +99,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
                         String orderId = (String) msgQueue.poll();
                         BusinessThread businessThread = new BusinessThread(orderId);
                         threadPool.execute(businessThread);
-                        System.out.println("(调度线程池)缓冲队列出现订单业务，重新添加到线程池，订单号：" + orderId);
+                        LogUtils.info("(调度线程池)缓冲队列出现订单业务，重新添加到线程池，订单号：" + orderId);
                     }
                 }
             },
@@ -115,7 +115,7 @@ public class TestThreadPoolManager implements BeanFactoryAware {
     /** 终止订单线程池+调度线程池 */
     public void shutdown() {
         // true表示如果定时任务在执行，立即中止，false则等待任务结束后再停止
-        System.out.println("终止订单线程池+调度线程池：" + scheduledFuture.cancel(false));
+        LogUtils.info("终止订单线程池+调度线程池：" + scheduledFuture.cancel(false));
         scheduler.shutdown();
         threadPool.shutdown();
     }

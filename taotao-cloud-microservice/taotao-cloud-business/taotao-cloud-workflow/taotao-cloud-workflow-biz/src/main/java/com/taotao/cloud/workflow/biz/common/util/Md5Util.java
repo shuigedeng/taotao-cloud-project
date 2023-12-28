@@ -36,7 +36,7 @@ public class Md5Util {
         try {
             messagedigest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -70,7 +70,7 @@ public class Md5Util {
         try {
             messagedigest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         if (StringUtil.isEmpty(str)) {
             return "";

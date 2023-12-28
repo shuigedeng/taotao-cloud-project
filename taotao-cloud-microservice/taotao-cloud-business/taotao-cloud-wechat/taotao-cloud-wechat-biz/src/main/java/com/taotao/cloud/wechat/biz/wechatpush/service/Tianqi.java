@@ -43,7 +43,7 @@ public class Tianqi {
                 today = arr.getJSONObject(0);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return today;
     }

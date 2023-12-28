@@ -52,7 +52,7 @@ public class AliPayController {
             Map<String, Object> map = aliPayService.nativePay(body, money);
             response = ApiResponse.success("支付宝下单成功", map);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return response;
     }
@@ -75,7 +75,7 @@ public class AliPayController {
             Map<String, Object> map = aliPayService.mobilePay(body, money);
             response = ApiResponse.success("支付宝下单成功", map);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return response;
     }

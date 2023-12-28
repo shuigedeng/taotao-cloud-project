@@ -28,7 +28,7 @@ public class TestFactoryBean implements FactoryBean<TestFactoryInnerBean> {
 
     @Override
     public TestFactoryBean.TestFactoryInnerBean getObject() throws Exception {
-        System.out.println("[FactoryBean] getObject");
+        LogUtils.info("[FactoryBean] getObject");
         return new TestFactoryBean.TestFactoryInnerBean();
     }
 

@@ -41,7 +41,7 @@ public class InterruptTaskC extends AsyncTask<String, Integer> {
     @Override
     public Integer task(String o, TaskSupport support) {
         try {
-            System.out.println("InterruptTaskC Begin");
+            LogUtils.info("InterruptTaskC Begin");
             // 获取 所依赖的父任务的结果
             Integer rt = getResult(support);
             String result = getResult(support, InterruptTaskA.class, String.class);
@@ -52,9 +52,9 @@ public class InterruptTaskC extends AsyncTask<String, Integer> {
                 i1 += i1;
             }
 
-            System.out.println("InterruptTaskC Finish");
+            LogUtils.info("InterruptTaskC Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

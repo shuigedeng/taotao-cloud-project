@@ -41,7 +41,7 @@ package com.taotao.cloud.sys.biz.config.redis.delegate;
 //			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
 //			logService.save(log);
 //		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
+//			LogUtils.error(e);
 //		}
 //	}
 // }

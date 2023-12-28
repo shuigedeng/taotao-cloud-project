@@ -30,13 +30,13 @@ public class GenUtils {
         StringKeyGenerator authorizationCodeGenerator =
                 new Base64StringKeyGenerator(Base64.getUrlEncoder().withoutPadding(), 96);
         String codeVerifier = authorizationCodeGenerator.generateKey();
-        System.out.println(codeVerifier);
-        System.out.println(codeVerifier.length());
+        LogUtils.info(codeVerifier);
+        LogUtils.info(codeVerifier.length());
         // 加密并再次编码
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] digest = md.digest(codeVerifier.getBytes(StandardCharsets.US_ASCII));
         String codeChallenge = Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
-        System.out.println(codeChallenge);
+        LogUtils.info(codeChallenge);
         return codeChallenge;
     }
 
@@ -52,7 +52,7 @@ public class GenUtils {
         md.update(bytes,0,bytes.length);
         byte[] digest = md.digest();
         String challenge = Base64.getEncoder().encodeToString(digest);
-        System.out.println(challenge);
+        LogUtils.info(challenge);
         return challenge;
     }*/
 

@@ -313,15 +313,15 @@ public class CodeImgUtil {
             hints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
             Result result = new MultiFormatReader().decode(binaryBitmap, hints);// 对图像进行解码
             JSONObject content = JSON.parseObject(result.getText());
-            System.out.println("图片中内容：  ");
-            System.out.println("author： " + content.getString("author"));
-            System.out.println("zxing：  " + content.getString("zxing"));
-            System.out.println("图片中格式：  ");
-            System.out.println("encode： " + result.getBarcodeFormat());
+            LogUtils.info("图片中内容：  ");
+            LogUtils.info("author： " + content.getString("author"));
+            LogUtils.info("zxing：  " + content.getString("zxing"));
+            LogUtils.info("图片中格式：  ");
+            LogUtils.info("encode： " + result.getBarcodeFormat());
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (NotFoundException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 

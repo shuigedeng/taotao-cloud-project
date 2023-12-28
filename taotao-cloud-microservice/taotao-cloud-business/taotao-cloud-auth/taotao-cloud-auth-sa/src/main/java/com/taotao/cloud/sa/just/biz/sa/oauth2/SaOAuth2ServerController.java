@@ -42,7 +42,7 @@ public class SaOAuth2ServerController {
     // 处理所有OAuth相关请求
     @RequestMapping("/oauth2/*")
     public Object request() {
-        System.out.println("------- 进入请求: " + SaHolder.getRequest().getUrl());
+        LogUtils.info("------- 进入请求: " + SaHolder.getRequest().getUrl());
         return SaOAuth2Handle.serverRequest();
     }
 
@@ -76,7 +76,7 @@ public class SaOAuth2ServerController {
     // 全局异常拦截
     @ExceptionHandler
     public SaResult handlerException(Exception e) {
-        e.printStackTrace();
+        LogUtils.error(e);
         return SaResult.error(e.getMessage());
     }
 
@@ -88,7 +88,7 @@ public class SaOAuth2ServerController {
         // 获取 Access-Token 对应的账号id
         String accessToken = SaHolder.getRequest().getParamNotNull("access_token");
         Object loginId = SaOAuth2Util.getLoginIdByAccessToken(accessToken);
-        System.out.println("-------- 此Access-Token对应的账号id: " + loginId);
+        LogUtils.info("-------- 此Access-Token对应的账号id: " + loginId);
 
         // 校验 Access-Token 是否具有权限: userinfo
         SaOAuth2Util.checkScope(accessToken, "userinfo");

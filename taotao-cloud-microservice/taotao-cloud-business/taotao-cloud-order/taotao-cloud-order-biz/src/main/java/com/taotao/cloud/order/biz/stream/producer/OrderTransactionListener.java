@@ -46,7 +46,7 @@ public class OrderTransactionListener implements RocketMQLocalTransactionListene
         // try {
         // 	order = JSONObject.parseObject(new String((byte[]) message.getPayload()), Order.class);
         // } catch (Exception e) {
-        // 	e.printStackTrace();
+        // 	LogUtils.error(e);
         // }
         //
         //

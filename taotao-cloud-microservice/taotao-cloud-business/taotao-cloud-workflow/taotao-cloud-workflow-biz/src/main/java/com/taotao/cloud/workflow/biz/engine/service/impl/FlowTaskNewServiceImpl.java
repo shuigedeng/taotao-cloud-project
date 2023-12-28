@@ -2741,7 +2741,7 @@ public class FlowTaskNewServiceImpl implements FlowTaskNewService {
                     billNo = serviceUtil.getBillNumber(ruleKey);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
         flowModel.setFormData(data);

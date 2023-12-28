@@ -204,11 +204,11 @@ public class NettyWebSocket {
 //					// webSocketMap.get(userId).sendMessage("你想干什么");
 //				}
 				// }else{
-				// System.out.println("请求的userId:"+message+"不在该服务器上");
+				// LogUtils.info("请求的userId:"+message+"不在该服务器上");
 				// 否则不在这个服务器上，发送到mysql或者redis
 				// }
 			} catch (Exception e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 		}
 	}
@@ -222,7 +222,7 @@ public class NettyWebSocket {
 	@OnBinary
 	public void onBinary(Session session, byte[] bytes) {
 		for (byte b : bytes) {
-			System.out.println(b);
+			LogUtils.info(b);
 		}
 		session.sendBinary(bytes);
 	}
@@ -350,7 +350,7 @@ public class NettyWebSocket {
 				userIdWebSocketMap.get(chat.getUserId().toString()).sendMessage(JSONObject.toJSONString(chats));
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogUtils.error(e);
 			LogUtils.error(e);
 		}
 	}
@@ -362,7 +362,7 @@ public class NettyWebSocket {
 				userIdWebSocketMap.get(userId).sendMessage(message);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			LogUtils.error(e);
 			LogUtils.error(e);
 		}
 	}

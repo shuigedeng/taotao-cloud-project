@@ -103,11 +103,11 @@ public class Pusher {
         templateMessage.addData(new WxMpTemplateData("beizhu", beizhu, "#FF0000"));
 
         try {
-            System.out.println(templateMessage.toJson());
-            System.out.println(wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage));
+            LogUtils.info(templateMessage.toJson());
+            LogUtils.info(wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage));
         } catch (Exception e) {
-            System.out.println("推送失败：" + e.getMessage());
-            e.printStackTrace();
+            LogUtils.info("推送失败：" + e.getMessage());
+            LogUtils.error(e);
         }
     }
 }

@@ -41,14 +41,14 @@ public class FutureTaskB extends AsyncTask {
     public String task(Object o, TaskSupport support) {
 
         try {
-            System.out.println("FutureTaskB Begin");
+            LogUtils.info("FutureTaskB Begin");
             Thread.sleep(300);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("FutureTaskB Finish");
+            LogUtils.info("FutureTaskB Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return "result";
     }

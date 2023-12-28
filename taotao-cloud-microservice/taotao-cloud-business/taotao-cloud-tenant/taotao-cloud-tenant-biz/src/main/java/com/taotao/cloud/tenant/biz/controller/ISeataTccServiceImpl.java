@@ -23,7 +23,7 @@ public class ISeataTccServiceImpl implements ISeataTccService {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public String tryInsert(@BusinessActionContextParameter(paramName = "tenantDTO") TenantDTO tenantDTO,
                             @BusinessActionContextParameter(paramName = "tenantId") Long tenantId) {
-        System.out.println("try------------------> xid = " + RootContext.getXID());
+        LogUtils.info("try------------------> xid = " + RootContext.getXID());
 
         Tenant tenantDO = TenantConvert.INSTANCE.convert(tenantDTO);
         tenantMapper.insert(tenantDO);
@@ -34,7 +34,7 @@ public class ISeataTccServiceImpl implements ISeataTccService {
 
     @Override
     public boolean commitTcc(BusinessActionContext context) {
-        System.out.println("xid = " + context.getXid() + "提交成功");
+        LogUtils.info("xid = " + context.getXid() + "提交成功");
         return true;
     }
 
@@ -49,7 +49,7 @@ public class ISeataTccServiceImpl implements ISeataTccService {
         lambdaQueryWrapper.eq(Tenant::getId, tenantId);
         tenantMapper.delete(lambdaQueryWrapper);
 
-        System.out.println("xid = " + context.getXid() + "进行回滚操作");
+        LogUtils.info("xid = " + context.getXid() + "进行回滚操作");
         return true;
     }
 

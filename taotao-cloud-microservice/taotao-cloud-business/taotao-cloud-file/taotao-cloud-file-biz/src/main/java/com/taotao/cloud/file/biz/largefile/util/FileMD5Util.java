@@ -49,7 +49,7 @@ public class FileMD5Util {
                 value = "0" + value;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             FileUtil.close(in, byteBuffer);
         }
@@ -79,6 +79,6 @@ public class FileMD5Util {
         File file = new File(filePath);
         String md5 = FileMD5Util.getFileMD5(file);
         long end = System.currentTimeMillis();
-        System.out.println("cost:" + (end - start) + "ms, md5:" + md5);
+        LogUtils.info("cost:" + (end - start) + "ms, md5:" + md5);
     }
 }

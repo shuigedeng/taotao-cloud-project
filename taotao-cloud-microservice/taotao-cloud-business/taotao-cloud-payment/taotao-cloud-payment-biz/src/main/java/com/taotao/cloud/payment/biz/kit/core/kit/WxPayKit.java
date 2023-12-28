@@ -707,7 +707,7 @@ public class WxPayKit {
         // 获取平台证书序列号
         X509Certificate certificate = PayKit.getCertificate(inputStream);
         String serialNumber = certificate.getSerialNumber().toString(16).toUpperCase();
-        System.out.println(serialNumber);
+        LogUtils.info(serialNumber);
         // 验证证书序列号
         if (serialNumber.equals(serialNo)) {
             boolean verifySignature =

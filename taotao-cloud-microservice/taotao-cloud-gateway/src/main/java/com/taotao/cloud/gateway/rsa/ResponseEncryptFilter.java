@@ -82,7 +82,7 @@ public class ResponseEncryptFilter implements GlobalFilter, Ordered {
                         DataBufferUtils.release(join);
                         // 流转为字符串
                         String responseData = new String(content, Charsets.UTF_8);
-                        System.out.println(responseData);
+                        LogUtils.info(responseData);
 
                         Map map = JSON.parseObject(responseData);
                         //处理返回的数据

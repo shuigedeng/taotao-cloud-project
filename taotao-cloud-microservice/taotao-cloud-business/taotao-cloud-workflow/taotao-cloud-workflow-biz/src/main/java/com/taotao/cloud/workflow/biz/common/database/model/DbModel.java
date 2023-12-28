@@ -40,7 +40,7 @@ public class DbModel {
             // jdbc连接的url
             this.url = databaseMetaData.getURL();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 

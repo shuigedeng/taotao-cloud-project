@@ -52,7 +52,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("付款码支付结果：" + codePayBiz.toString());
+            LogUtils.info("付款码支付结果：" + codePayBiz.toString());
 
             /** 扫码支付 返回二维码连接 */
             result = WxPay.nativePay(
@@ -69,7 +69,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("扫码支付 结果：" + result);
+            LogUtils.info("扫码支付 结果：" + result);
 
             /** 公众号支付 返回JSSDK需要的jspackage */
             String jspackage = WxPay.jsapiPay(
@@ -86,7 +86,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("公众号支付结果：" + jspackage);
+            LogUtils.info("公众号支付结果：" + jspackage);
 
             /** 收银台支付 返回收银台支付地址，跳转到该地址即可 */
             String cashierPayUrl = WxPay.cashierPay(
@@ -102,7 +102,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("收银台支付结果：" + cashierPayUrl);
+            LogUtils.info("收银台支付结果：" + cashierPayUrl);
 
             /** 小程序支付 不是真正的下单，组装参数。拿到参数后使用小程序的前端将参数传递给支付收银小程序 */
             JSONObject minAppPay = WxPay.minAppPay(
@@ -118,7 +118,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("小程序支付结果：" + minAppPay.toJSONString());
+            LogUtils.info("小程序支付结果：" + minAppPay.toJSONString());
 
             /** 小程序支付，真正的下单，返回小程序支付所需参数 */
             minAppPay = WxPay.minAppPaySend(
@@ -134,7 +134,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("小程序支付结果：" + minAppPay.toJSONString());
+            LogUtils.info("小程序支付结果：" + minAppPay.toJSONString());
 
             /** 微信刷脸支付 */
             FacePayBiz facePayBiz = WxPay.facePay(
@@ -151,12 +151,12 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("刷脸支付结果：" + facePayBiz);
+            LogUtils.info("刷脸支付结果：" + facePayBiz);
 
             /** 微信刷脸支付SDK模式凭证 */
             FacePayAuthInfoBiz facePayAuthInfo =
                     WxPay.getFacePayAuthInfo(mchId, "门店ID", "门店名称", "刷脸支付信息", "设备ID", null, null, key);
-            System.out.println("刷脸支付凭证：" + facePayAuthInfo);
+            LogUtils.info("刷脸支付凭证：" + facePayAuthInfo);
 
             /** 微信h5支付 */
             String h5payResult = WxPay.H5Pay(
@@ -172,7 +172,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("微信H5支付结果：" + h5payResult);
+            LogUtils.info("微信H5支付结果：" + h5payResult);
 
             /** 微信APP支付 */
             JSONObject appPayParams = WxPay.appPay(
@@ -188,7 +188,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("微信APP支付结果：" + appPayParams.toJSONString());
+            LogUtils.info("微信APP支付结果：" + appPayParams.toJSONString());
 
             /** QQ小程序支付，不是真正的下单，组装参数。拿到参数后使用小程序的前端将参数传递给支付收银小程序 */
             JSONObject qqPayParams = WxPay.qqPayParams(
@@ -205,7 +205,7 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("QQ小程序支付结果：" + qqPayParams.toJSONString());
+            LogUtils.info("QQ小程序支付结果：" + qqPayParams.toJSONString());
 
             /** QQ小程序支付，真正的下单，返回小程序支付所需参数 */
             QqPayBiz qqPayBiz = WxPay.qqPay(
@@ -223,36 +223,36 @@ public class WxPayTest {
                     null,
                     null,
                     key);
-            System.out.println("QQ小程序支付结果：" + qqPayBiz.toString());
+            LogUtils.info("QQ小程序支付结果：" + qqPayBiz.toString());
 
             /** 查询刷卡支付结果 */
             CodePayBiz codePayBiz2 = WxPay.getCodePayResult("1556267522899", mchId, key);
-            System.out.println("微信刷卡支付结果：" + codePayBiz2.toString());
+            LogUtils.info("微信刷卡支付结果：" + codePayBiz2.toString());
 
             /** 订单退款 */
             RefundOrder refundOrder = WxPay.orderRefund("1556267522899", mchId, "0.1", null, "退款描述", null, key);
-            System.out.println("订单退款结果：" + refundOrder.toString());
+            LogUtils.info("订单退款结果：" + refundOrder.toString());
 
             /** 查询退款结果 */
             RefundSearch refundSearch = WxPay.getRefundResult("R17200911248111", mchId, key);
-            System.out.println("查询退款结果：" + refundSearch.toString());
+            LogUtils.info("查询退款结果：" + refundSearch.toString());
 
             /** 关闭订单 */
             String closeOrder = WxPay.closeOrder("R17200911248111", mchId, key);
-            System.out.println("关闭订单结果：" + closeOrder);
+            LogUtils.info("关闭订单结果：" + closeOrder);
 
             /** 撤销订单 */
             String reverseOrder = WxPay.reverseOrder("R17200911248111", mchId, key);
-            System.out.println("撤销订单结果：" + closeOrder);
+            LogUtils.info("撤销订单结果：" + closeOrder);
 
             /** 下载对账单 正常直接通过getUrl获取到excel地址到浏览器访问下载即可 也可以通过getList获取到对账单的数据流集成到业务系统中 */
             WxDownloadBillBiz downloadBillBiz = WxPay.downloadBill(mchId, "2020-01-29", null, null, key);
-            System.out.println("对账单excel地址：" + downloadBillBiz.getUrl());
-            System.out.println("对账单数据：" + downloadBillBiz.getList().toString());
-            System.out.println("对账单统计数据：" + downloadBillBiz.getTotal().toString());
+            LogUtils.info("对账单excel地址：" + downloadBillBiz.getUrl());
+            LogUtils.info("对账单数据：" + downloadBillBiz.getList().toString());
+            LogUtils.info("对账单统计数据：" + downloadBillBiz.getTotal().toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

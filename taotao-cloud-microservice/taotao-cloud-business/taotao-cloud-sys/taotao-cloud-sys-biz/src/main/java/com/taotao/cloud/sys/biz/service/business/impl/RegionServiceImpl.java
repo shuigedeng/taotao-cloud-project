@@ -300,9 +300,9 @@ public class RegionServiceImpl
 	// public static void main(String[] args) throws IllegalAccessException {
 	//	String signUrl = SignUtils.sign(AMAP_SECURITY_KEY, syncUrl);
 	//	String request = HttpUtils.request(signUrl, "GET");
-	//	System.out.println("slfdjsldf");
+	//	LogUtils.info("slfdjsldf");
 	//	List<Region> regions = initData(request);
-	//	System.out.println("lsdfsldf");
+	//	LogUtils.info("lsdfsldf");
 	// }
 
 	/**

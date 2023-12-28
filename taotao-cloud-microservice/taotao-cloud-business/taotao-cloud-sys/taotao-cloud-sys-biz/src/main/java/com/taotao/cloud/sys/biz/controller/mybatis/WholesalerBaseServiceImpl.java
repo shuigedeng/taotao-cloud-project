@@ -62,7 +62,7 @@ import java.util.List;
 //                log.info("base-->{}", base);
 //            } catch (Exception e) {
 //                log.error("XX发生错误,原因 = {}", e.getMessage());
-//                e.printStackTrace();
+//                LogUtils.error(e);
 //            }
 //        });
 //    }
@@ -111,7 +111,7 @@ import java.util.List;
 //                    sqlSession.getMapper(WholesalerBaseMapper.class).scan();
 //            cursors.forEach(base -> {
 //                // 业务需求
-//                System.out.println("base = " + base);
+//                LogUtils.info("base = " + base);
 //            });
 //        }
 //    }
@@ -124,10 +124,10 @@ import java.util.List;
 //            try (Cursor<WholesalerBase> cursor = this.baseMapper.scan()) {
 //                cursor.forEach(base -> {
 //                    // 需求代码
-//                    System.out.println("base = " + base);
+//                    LogUtils.info("base = " + base);
 //                });
 //            } catch (Exception e) {
-//                e.printStackTrace();
+//                LogUtils.error(e);
 //            }
 //            return null;
 //        });
@@ -139,7 +139,7 @@ import java.util.List;
 //        try (Cursor<WholesalerBase> cursor = this.baseMapper.scan()) {
 //            cursor.forEach(System.out::println);
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            LogUtils.error(e);
 //        }
 //    }
 //
@@ -153,7 +153,7 @@ import java.util.List;
 //        Map<String, String> pocMiddleIdOrgMap = new HashMap<>();
 //        // this.pocBaseInfoMapper.getPocBaseInfoList(codes, (resultContext) -> {
 //        //	PocBaseInfo resultObject = resultContext.getResultObject();
-//        //	System.out.println(JSONUtil.toJsonStr(resultObject));
+//        //	LogUtils.info(JSONUtil.toJsonStr(resultObject));
 //        //	pocMiddleIdList.add(resultObject.getPocMiddleId());
 //        //	pocMiddleIdOrgMap.put(resultObject.getPocMiddleId(), resultObject.getOrgCode());
 //        //	if (pocMiddleIdList.size() == num) {
@@ -163,7 +163,7 @@ import java.util.List;
 //        // });
 //        stopWatch.stop();
 //        // 测试进行时间
-//        System.out.println(stopWatch.prettyPrint());
+//        LogUtils.info(stopWatch.prettyPrint());
 //    }
 //
 //    // 这是每批处理的大小
@@ -178,7 +178,7 @@ import java.util.List;
 //            @Override
 //            public void handleResult(ResultContext<? extends TblMallOrder> resultContext) {
 //                TblMallOrder tblMallOrder = resultContext.getResultObject();
-//                System.out.println(tblMallOrder);
+//                LogUtils.info(tblMallOrder);
 //            }
 //        });
 //    }
@@ -189,7 +189,7 @@ import java.util.List;
 //            @Override
 //            public void handleResult(ResultContext<? extends TblMallOrder> resultContext) {
 //                TblMallOrder tblMallOrder = resultContext.getResultObject();
-//                System.out.println(tblMallOrder);
+//                LogUtils.info(tblMallOrder);
 //                // 你可以看自己的项目需要分批进行处理或者单个处理，这里以分批处理为例
 //                mallOrders.add(tblMallOrder);
 //                size++;
@@ -207,7 +207,7 @@ import java.util.List;
 //        try {
 //            // 在这里可以对你获取到的批量结果数据进行需要的业务处理
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            LogUtils.error(e);
 //        } finally {
 //            // 处理完每批数据后后将临时清空
 //            size = 0;
@@ -285,7 +285,7 @@ import java.util.List;
 //					sqlSession.commit();
 //					log.info("----提交事务");
 //				}catch (Exception e){
-//					e.printStackTrace();
+//					LogUtils.error(e);
 //					sqlSession.rollback();
 //				}
 //				finally {

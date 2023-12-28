@@ -90,7 +90,7 @@ public class CacheMap<K, V> extends AbstractMap<K, V> {
                     }
                     Thread.sleep(cacheTimeout);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }

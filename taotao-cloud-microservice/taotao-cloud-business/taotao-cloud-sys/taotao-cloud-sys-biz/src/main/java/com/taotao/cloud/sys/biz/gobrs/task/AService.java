@@ -46,12 +46,12 @@ public class AService extends AsyncTask {
     @Override
     public String task(Object o, TaskSupport support) {
 
-        System.out.println("AService Begin");
+        LogUtils.info("AService Begin");
         Thread.sleep(300);
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
-        System.out.println("AService Finish");
+        LogUtils.info("AService Finish");
         return "result";
     }
 

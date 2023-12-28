@@ -48,14 +48,14 @@ public class ServerListenerHandler extends SimpleChannelInboundHandler<TextWebSo
              * 心跳包的处理
              * */
 
-            System.out.println("收到来自channel 为["+channel+"]的心跳包"+dataContent);
+            LogUtils.info("收到来自channel 为["+channel+"]的心跳包"+dataContent);
             channel.writeAndFlush(
                     new TextWebSocketFrame(
                             JsonUtils.objectToJson(R.ok("返回心跳包").
                                     put("type", MessageActionEnum.KEEPALIVE.type))
                     )
             );
-            System.out.println("已返回消息");
+            LogUtils.info("已返回消息");
 
         }
 
@@ -80,7 +80,7 @@ public class ServerListenerHandler extends SimpleChannelInboundHandler<TextWebSo
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        causLogUtils.error(e);
         //发生了异常后关闭连接，同时从channelgroup移除
         ctx.channel().close();
         removeUserId(ctx);

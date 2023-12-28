@@ -37,7 +37,7 @@ public class RealInsertOptoin extends InsertOption {
 
     @Override
     public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
-        System.out.println("======================接口方式（新增数据操作）==========================");
+        LogUtils.info("======================接口方式（新增数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {
 
@@ -51,10 +51,10 @@ public class RealInsertOptoin extends InsertOption {
 
             sql += "INSERT INTO " + tableName + "(" + colums.substring(0, colums.length() - 1) + ") VALUES("
                     + values.substring(0, values.length() - 1) + ");";
-            System.out.println(sql);
+            LogUtils.info(sql);
             // mapper.doOption(sql);
 
         }
-        System.out.println("\n======================================================");
+        LogUtils.info("\n======================================================");
     }
 }

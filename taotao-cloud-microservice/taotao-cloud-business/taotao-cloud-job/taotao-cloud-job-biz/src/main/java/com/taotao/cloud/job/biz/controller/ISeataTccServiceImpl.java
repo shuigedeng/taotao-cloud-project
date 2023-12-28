@@ -24,7 +24,7 @@ public class ISeataTccServiceImpl implements ISeataTccService {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public String tryInsert(@BusinessActionContextParameter(paramName = "quartzJobDTO") QuartzJobDTO quartzJobDTO,
                             @BusinessActionContextParameter(paramName = "jobId") Long jobId) {
-        System.out.println("try------------------> xid = " + RootContext.getXID());
+        LogUtils.info("try------------------> xid = " + RootContext.getXID());
 
         QuartzJob quartzJobEntity = BeanUtil.copyProperties(quartzJobDTO, QuartzJob.class);
         quartzJobEntity.setState(QuartzJobCode.STOP);
@@ -37,7 +37,7 @@ public class ISeataTccServiceImpl implements ISeataTccService {
 
     @Override
     public boolean commitTcc(BusinessActionContext context) {
-        System.out.println("xid = " + context.getXid() + "提交成功");
+        LogUtils.info("xid = " + context.getXid() + "提交成功");
         return true;
     }
 
@@ -52,7 +52,7 @@ public class ISeataTccServiceImpl implements ISeataTccService {
         lambdaQueryWrapper.eq(QuartzJob::getId, jobId);
         quartzJobMapper.delete(lambdaQueryWrapper);
 
-        System.out.println("xid = " + context.getXid() + "进行回滚操作");
+        LogUtils.info("xid = " + context.getXid() + "进行回滚操作");
         return true;
     }
 

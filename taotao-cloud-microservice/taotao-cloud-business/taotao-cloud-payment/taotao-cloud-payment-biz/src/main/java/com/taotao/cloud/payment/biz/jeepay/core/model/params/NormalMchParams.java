@@ -32,7 +32,7 @@ public abstract class NormalMchParams {
         try {
             return (NormalMchParams)JSONObject.parseObject(paramsStr, Class.forName(NormalMchParams.class.getPackage().getName() +"."+ ifCode +"."+ StrUtil.upperFirst(ifCode) +"NormalMchParams"));
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

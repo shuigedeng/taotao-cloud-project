@@ -41,7 +41,7 @@ public class WxJsapiController {
     public String getJsapiTicket(@PathVariable String appid) throws WxErrorException {
         final WxJsapiSignature jsapiSignature =
                 this.wxService.switchoverTo(appid).createJsapiSignature("111");
-        System.out.println(jsapiSignature);
+        LogUtils.info(jsapiSignature);
         return this.wxService.getJsapiTicket(true);
     }
 }

@@ -47,7 +47,7 @@ public class CServiceCondition extends AsyncTask<String, AnyConditionResult<Stri
     public AnyConditionResult<String> task(String o, TaskSupport support) {
         AnyConditionResultBuilder<String> builder = AnyConditionResult.builder();
 
-        System.out.println("CServiceCondition Begin");
+        LogUtils.info("CServiceCondition Begin");
         /** 获取 所依赖的父任务的结果 */
         String result = getResult(support, AServiceCondition.class, String.class);
 
@@ -68,7 +68,7 @@ public class CServiceCondition extends AsyncTask<String, AnyConditionResult<Stri
         for (int i1 = 0; i1 < i; i1++) {
             i1 += i1;
         }
-        System.out.println("CServiceCondition Finish");
+        LogUtils.info("CServiceCondition Finish");
         return builder.build();
     }
 

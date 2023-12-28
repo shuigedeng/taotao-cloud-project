@@ -55,7 +55,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //		public void subscribe() {
 //			myFluxConsumer
 //				.asSimpleFlux()
-//				.subscribe(msg -> System.out.println(msg.getData()));
+//				.subscribe(msg -> LogUtils.info(msg.getData()));
 //		}
 //	}
 //
@@ -72,7 +72,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //					try {
 //						final MyMsg myMsg = (MyMsg) msg.getMessage().getValue();
 //
-//						System.out.println(myMsg.getData());
+//						LogUtils.info(myMsg.getData());
 //
 //						// you need to acknowledge the message manually on finished job
 //						msg.getConsumer().acknowledge(msg.getMessage());

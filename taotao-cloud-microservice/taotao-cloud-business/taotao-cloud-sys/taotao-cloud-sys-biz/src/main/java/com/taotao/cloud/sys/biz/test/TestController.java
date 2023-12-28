@@ -57,7 +57,7 @@ public class TestController {
         testThreadPoolManager.shutdown();
 
         Queue q = testThreadPoolManager.getMsgQueue();
-        System.out.println("关闭了线程服务，还有未处理的信息条数：" + q.size());
+        LogUtils.info("关闭了线程服务，还有未处理的信息条数：" + q.size());
         return "Test ThreadPoolExecutor start";
     }
 }

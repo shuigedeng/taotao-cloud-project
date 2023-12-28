@@ -49,7 +49,7 @@ public class WordUtil {
             document.write(stream);
             stream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 

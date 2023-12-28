@@ -61,11 +61,11 @@ public class CreateHtmlServiceImpl implements ICreateHtmlService {
         }
         for (Future<String> fs : resultList) {
             try {
-                System.out.println(fs.get()); // 打印各个线任务执行的结果，调用future.get() 阻塞主线程，获取异步任务的返回结果
+                LogUtils.info(fs.get()); // 打印各个线任务执行的结果，调用future.get() 阻塞主线程，获取异步任务的返回结果
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             } catch (ExecutionException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
         return Result.ok();

@@ -475,7 +475,7 @@ public class FileUtil extends FileUtils {
 			}
 			bis.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogUtils.error(e);
 		}
 		return charset;
 	}
@@ -533,7 +533,7 @@ public class FileUtil extends FileUtils {
 			// });
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogUtils.error(e);
 		}
 	}
 

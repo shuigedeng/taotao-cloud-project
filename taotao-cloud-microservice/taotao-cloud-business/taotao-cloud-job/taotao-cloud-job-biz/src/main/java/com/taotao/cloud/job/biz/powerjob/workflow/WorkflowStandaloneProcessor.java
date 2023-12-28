@@ -32,13 +32,13 @@ public class WorkflowStandaloneProcessor implements BasicProcessor {
     public ProcessResult process(TaskContext context) throws Exception {
         OmsLogger logger = context.getOmsLogger();
         logger.info("current:" + context.getJobParams());
-        System.out.println("jobParams: " + context.getJobParams());
-        System.out.println("currentContext:" + JSON.toJSONString(context));
+        LogUtils.info("jobParams: " + context.getJobParams());
+        LogUtils.info("currentContext:" + JSON.toJSONString(context));
 
         // 尝试获取上游任务
         Map<String, String> workflowContext = context.getWorkflowContext().fetchWorkflowContext();
-        System.out.println("工作流上下文数据：");
-        System.out.println(workflowContext);
+        LogUtils.info("工作流上下文数据：");
+        LogUtils.info(workflowContext);
 
         return new ProcessResult(true, context.getJobId() + " process successfully.");
     }

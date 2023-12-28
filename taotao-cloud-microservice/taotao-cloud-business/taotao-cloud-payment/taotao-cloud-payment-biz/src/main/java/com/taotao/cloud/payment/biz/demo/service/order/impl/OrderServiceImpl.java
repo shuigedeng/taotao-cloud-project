@@ -42,7 +42,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
                 throw new Exception("订单保存失败");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return order;
     }
@@ -55,7 +55,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
             orderWhere.setOrderNo(orderNo);
             order = super.selectOne(orderWhere);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return null;
         }
         return order;
@@ -83,7 +83,7 @@ public class OrderServiceImpl extends BaseService<Order> implements OrderService
             super.updateSelective(orderData, example);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return false;
     }

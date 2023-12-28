@@ -43,32 +43,32 @@ public class UaRule extends AbstractRule {
         DeviceType deviceType = userAgent.getOperatingSystem().getDeviceType();
 
         if (DeviceType.UNKNOWN.equals(deviceType)) {
-            System.out.println(
+            LogUtils.info(
                     "Intercepted request, uri: " + requestUrl + " Unknown device, User-Agent: " + userAgent.toString());
             return true;
         } else if (OperatingSystem.UNKNOWN.equals(os)
                 || OperatingSystem.UNKNOWN_MOBILE.equals(os)
                 || OperatingSystem.UNKNOWN_TABLET.equals(os)) {
-            System.out.println("Intercepted request, uri: " + requestUrl + " Unknown OperatingSystem, User-Agent: "
+            LogUtils.info("Intercepted request, uri: " + requestUrl + " Unknown OperatingSystem, User-Agent: "
                     + userAgent.toString());
             return true;
         }
 
         if (!uaRule.isAllowedLinux() && (OperatingSystem.LINUX.equals(osGroup) || OperatingSystem.LINUX.equals(os))) {
-            System.out.println("Intercepted request, uri: " + requestUrl + " Not Allowed Linux request, User-Agent: "
+            LogUtils.info("Intercepted request, uri: " + requestUrl + " Not Allowed Linux request, User-Agent: "
                     + userAgent.toString());
             return true;
         }
 
         if (!uaRule.isAllowedMobile()
                 && (DeviceType.MOBILE.equals(deviceType) || DeviceType.TABLET.equals(deviceType))) {
-            System.out.println("Intercepted request, uri: " + requestUrl
+            LogUtils.info("Intercepted request, uri: " + requestUrl
                     + " Not Allowed Mobile Device request, User-Agent: " + userAgent.toString());
             return true;
         }
 
         if (!uaRule.isAllowedPc() && DeviceType.COMPUTER.equals(deviceType)) {
-            System.out.println("Intercepted request, uri: " + requestUrl + " Not Allowed PC request, User-Agent: "
+            LogUtils.info("Intercepted request, uri: " + requestUrl + " Not Allowed PC request, User-Agent: "
                     + userAgent.toString());
             return true;
         }
@@ -77,13 +77,13 @@ public class UaRule extends AbstractRule {
                 && (DeviceType.DMR.equals(deviceType)
                         || DeviceType.GAME_CONSOLE.equals(deviceType)
                         || DeviceType.WEARABLE.equals(deviceType))) {
-            System.out.println("Intercepted request, uri: " + requestUrl
+            LogUtils.info("Intercepted request, uri: " + requestUrl
                     + " Not Allowed Iot Device request, User-Agent: " + userAgent.toString());
             return true;
         }
 
         if (!uaRule.isAllowedProxy() && OperatingSystem.PROXY.equals(os)) {
-            System.out.println("Intercepted request, uri: " + requestUrl + " Not Allowed Proxy request, User-Agent: "
+            LogUtils.info("Intercepted request, uri: " + requestUrl + " Not Allowed Proxy request, User-Agent: "
                     + userAgent.toString());
             return true;
         }

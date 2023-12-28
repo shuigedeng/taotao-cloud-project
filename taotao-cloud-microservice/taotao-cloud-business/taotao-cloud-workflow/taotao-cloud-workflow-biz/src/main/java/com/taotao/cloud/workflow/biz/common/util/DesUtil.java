@@ -56,7 +56,7 @@ public class DesUtil {
             byte[] resBytes = charset == null ? res.getBytes() : res.getBytes(charset);
             return base64(md.digest(resBytes));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }
@@ -84,7 +84,7 @@ public class DesUtil {
             byte[] result = mac.doFinal(res.getBytes());
             return base64(result);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }
@@ -126,7 +126,7 @@ public class DesUtil {
                 return new String(cipher.doFinal(parseHexStr2Byte(res)));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

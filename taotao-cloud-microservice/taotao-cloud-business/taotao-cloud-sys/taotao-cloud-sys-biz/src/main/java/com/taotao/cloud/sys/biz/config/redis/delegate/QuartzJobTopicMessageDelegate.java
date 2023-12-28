@@ -32,7 +32,7 @@ package com.taotao.cloud.sys.biz.config.redis.delegate;
 //	//private IQuartzJobService quartzJobService;
 //	//
 //	//public void addJob(String message) {
-//	//	System.out.println("addJob=====================" + message);
+//	//	LogUtils.info("addJob=====================" + message);
 //	//}
 //	//
 //	//public void deleteJob(String message) {

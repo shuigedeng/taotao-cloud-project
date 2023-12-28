@@ -56,12 +56,12 @@ public class CorsFilter implements Filter {
 
         // 如果是预检请求，直接返回
         if (OPTIONS.equals(request.getMethod())) {
-            System.out.println("=======================浏览器发来了OPTIONS预检请求==========");
+            LogUtils.info("=======================浏览器发来了OPTIONS预检请求==========");
             response.getWriter().print("");
             return;
         }
 
-        // System.out.println("*********************************过滤器被使用**************************");
+        // LogUtils.info("*********************************过滤器被使用**************************");
         chain.doFilter(req, res);
     }
 

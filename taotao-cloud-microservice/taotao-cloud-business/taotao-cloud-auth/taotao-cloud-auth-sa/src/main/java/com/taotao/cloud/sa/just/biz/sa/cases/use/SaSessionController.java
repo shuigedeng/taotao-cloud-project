@@ -73,7 +73,7 @@ public class SaSessionController {
          */
 
         List<Object> list = Arrays.asList(name, name2, age, age2, age3, age4, age5, age6);
-        System.out.println(list);
+        LogUtils.info(list);
 
         return SaResult.data(list);
     }
@@ -106,7 +106,7 @@ public class SaSessionController {
 
         // 一样可以自由的存值写值
         roleSession.set("nnn", "lalala");
-        System.out.println(roleSession.get("nnn"));
+        LogUtils.info(roleSession.get("nnn"));
 
         // 返回
         return SaResult.ok();

@@ -81,11 +81,11 @@ public class PageController extends BaseController {
     // Tesseract instance = new Tesseract(); // JNA Interface Mapping
     // instance.setLanguage("chi_sim");
     // String result = instance.doOCR(imageFile);
-    // System.out.println("result=====" + result);
+    // LogUtils.info("result=====" + result);
     // long t2 = new Date().getTime();
-    // System.out.println((t2 - t1));
+    // LogUtils.info((t2 - t1));
     // } catch (TesseractException e) {
-    // e.printStackTrace();
+    // LogUtils.error(e);
     // }
     // }
 
@@ -104,7 +104,7 @@ public class PageController extends BaseController {
             result = instance.doOCR(file);
             logger.info("result====={}", result);
         } catch (TesseractException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return result;
     }
@@ -117,7 +117,7 @@ public class PageController extends BaseController {
      */
     public String getPageNoByContours(String filePath) {
         Mat source = Highgui.imread(filePath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
-        System.out.println("row" + source.rows() + " col " + source.cols());
+        LogUtils.info("row" + source.rows() + " col " + source.cols());
         // 二值化反转
         Mat bininv = new Mat(source.rows(), source.cols(), source.type());
         Imgproc.threshold(source, bininv, 170, 255, Imgproc.THRESH_BINARY_INV);
@@ -136,7 +136,7 @@ public class PageController extends BaseController {
             // 获取轮廓面积
             BigDecimal contArea = Math.abs(Imgproc.contourArea(mop, false));
             Rect r = Imgproc.boundingRect(mop);
-            System.out.println("轮廓面积：" + contArea);
+            LogUtils.info("轮廓面积：" + contArea);
             if (contArea > 1200) { // 此处是根据轮廓面积
                 // 红线画出识别的轮廓
                 Core.rectangle(
@@ -147,7 +147,7 @@ public class PageController extends BaseController {
 
         String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "page0.png";
         Highgui.imwrite(destPath, image);
-        System.out.println("页码为：" + pageSize);
+        LogUtils.info("页码为：" + pageSize);
         return pageSize + "";
     }
 
@@ -186,7 +186,7 @@ public class PageController extends BaseController {
                 new Point(matchLoc.x + matchtemp.cols(), matchLoc.y + matchtemp.rows()),
                 new Scalar(0),
                 2);
-        System.out.println(matchLoc.x + "   " + matchLoc.y);
+        LogUtils.info(matchLoc.x + "   " + matchLoc.y);
         pageSize = getPage(matchLoc.x) + "";
         String destPath = Constants.PATH + Constants.DEST_IMAGE_PATH + "page1.png";
         Highgui.imwrite(destPath, pageimage);
@@ -216,8 +216,8 @@ public class PageController extends BaseController {
     //	BigDecimal result1 = Imgproc.matchShapes(contours1.get(0), contours2.get(0),
     //		Imgproc.CV_CONTOURS_MATCH_I1, 0);
     //	BigDecimal result2 = Imgproc.matchShapes(mat1, mat2, Imgproc.CV_CONTOURS_MATCH_I1, 0);
-    //	System.out.println(result1);
-    //	System.out.println(result2);
+    //	LogUtils.info(result1);
+    //	LogUtils.info(result2);
     // }
 
     private static MatOfPoint getSimMark(String path) {

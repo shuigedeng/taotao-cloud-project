@@ -105,7 +105,7 @@ public class MediaTransferHls extends MediaTransfer {
             dealStream(process);
         } catch (IOException e) {
             running = false;
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -146,13 +146,13 @@ public class MediaTransferHls extends MediaTransfer {
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 } finally {
                     try {
                         running = false;
                         in.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LogUtils.error(e);
                     }
                 }
             }
@@ -174,13 +174,13 @@ public class MediaTransferHls extends MediaTransfer {
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 } finally {
                     try {
                         running = false;
                         err.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LogUtils.error(e);
                     }
                 }
             }

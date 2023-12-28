@@ -86,8 +86,8 @@ public class DateTimeZoneUtil implements Serializable {
     public static void main(String[] args) throws Exception {
         String timeZone = dateToTimeZone(System.currentTimeMillis() + 1000 * 60 * 3);
         String timeZone2 = dateToTimeZone(new Date());
-        System.out.println(timeZone + " " + timeZone2);
+        LogUtils.info(timeZone + " " + timeZone2);
         String date = timeZoneDateToStr(timeZone);
-        System.out.println(date);
+        LogUtils.info(date);
     }
 }

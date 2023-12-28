@@ -41,7 +41,7 @@ public class DataVersionLogTopicMessageDelegate {
             Log log = JsonUtils.MAPPER.readValue(message, Log.class);
             logService.save(log);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

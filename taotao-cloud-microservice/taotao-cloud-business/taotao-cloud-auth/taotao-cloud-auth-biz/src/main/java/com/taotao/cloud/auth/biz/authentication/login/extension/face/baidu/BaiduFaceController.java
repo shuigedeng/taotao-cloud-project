@@ -42,10 +42,10 @@ public class BaiduFaceController {
             // 文件上传的地址
             String upPath = ResourceUtils.getURL("classpath:").getPath() + "static\\photo";
             // 用于查看路径是否正确
-            System.out.println(upPath);
+            LogUtils.info(upPath);
             // 图片名称
             String fileName = userName + System.currentTimeMillis() + ".png";
-            System.out.println(upPath + "\\" + fileName);
+            LogUtils.info(upPath + "\\" + fileName);
             File file = new File(upPath + "\\" + fileName);
 
             // 往自己demo数据库里插入一条用户数据

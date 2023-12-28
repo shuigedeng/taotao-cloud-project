@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     // 全局异常拦截
     @ExceptionHandler
     public SaResult handlerException(Exception e) {
-        e.printStackTrace();
+        LogUtils.error(e);
         return SaResult.error(e.getMessage());
     }
 }

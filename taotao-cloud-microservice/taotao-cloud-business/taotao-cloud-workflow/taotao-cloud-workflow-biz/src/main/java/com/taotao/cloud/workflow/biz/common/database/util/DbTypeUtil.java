@@ -44,7 +44,7 @@ public class DbTypeUtil {
         try {
             return getDb(conn.getMetaData().getURL());
         } catch (SQLException | DataException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }
@@ -80,7 +80,7 @@ public class DbTypeUtil {
         try {
             dataSourDbEncode = getEncode(dataSourceDTO);
         } catch (DataException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return encode.equals(dataSourDbEncode);
     }

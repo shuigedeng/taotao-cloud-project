@@ -37,7 +37,7 @@ public class OssUtils {
     public static void main(String[] args) throws UnsupportedEncodingException {
         // upload();
         String s = getFileUrl("FmnBLE4QtkwlErXIAh9pYS029GZk");
-        System.out.println(s);
+        LogUtils.info(s);
     }
 
     private static void upload() {
@@ -64,8 +64,8 @@ public class OssUtils {
             Response response = uploadManager.put(localFilePath, key, upToken);
             DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
             // 解析上传成功的结果
-            System.out.println(putRet.key);
-            System.out.println(putRet.hash);
+            LogUtils.info(putRet.key);
+            LogUtils.info(putRet.hash);
         } catch (QiniuException ex) {
             Response r = ex.response;
             System.err.println(r.toString());
@@ -82,7 +82,7 @@ public class OssUtils {
         String domainOfBucket = "http://devtools.qiniu.com/austin3y";
         String encodedFileName = URLEncoder.encode(fileName, "utf-8").replace("+", "%20");
         String finalUrl = String.format("%s/%s", domainOfBucket, encodedFileName);
-        System.out.println(finalUrl);
+        LogUtils.info(finalUrl);
         return finalUrl;
     }
 }

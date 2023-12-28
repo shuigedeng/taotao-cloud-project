@@ -38,9 +38,9 @@ public class CaseRetryTaskB extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("CaseRetryTaskB Begin");
-        System.out.println(1 / 0);
-        System.out.println("CaseRetryTaskB End");
+        LogUtils.info("CaseRetryTaskB Begin");
+        LogUtils.info(1 / 0);
+        LogUtils.info("CaseRetryTaskB End");
         return "AResult";
     }
 }

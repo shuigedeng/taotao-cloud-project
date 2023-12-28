@@ -44,14 +44,14 @@ public class DService extends AsyncTask<Object, Object> {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("DService Begin");
+            LogUtils.info("DService Begin");
             Thread.sleep(200);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("DService Finish");
+            LogUtils.info("DService Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

@@ -26,7 +26,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //
 //	@Override
 //	public Message beforeConsume(Consumer<Object> consumer, Message<Object> message) {
-//		System.out.println("do something");
+//		LogUtils.info("do something");
 //		return super.beforeConsume(consumer, message);
 //	}
 // }

@@ -42,8 +42,8 @@ public class CallBackController {
             @RequestParam Map<String, String> data, HttpServletRequest request, HttpServletResponse response) {
         try {
 
-            System.out.println("接受到支付结果回调");
-            System.out.println(data.toString());
+            LogUtils.info("接受到支付结果回调");
+            LogUtils.info(data.toString());
 
             String payChannel = data.get("payChannel");
 
@@ -63,7 +63,7 @@ public class CallBackController {
 
             boolean sign = PaySignUtil.checkNotifySign(request, key);
 
-            System.out.println("签名验证：" + sign);
+            LogUtils.info("签名验证：" + sign);
 
             if (!sign) {
                 return "sign fail";
@@ -86,7 +86,7 @@ public class CallBackController {
             out.print("SUCCESS");
             return null;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         return null;

@@ -89,7 +89,7 @@ public class AsyncController {
     @Operation(summary = "deferredResultasync", description = "deferredResultasync")
     @RequestMapping("/deferredResultasync")
     public DeferredResult<String> deferredResultasync() {
-        System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
+        LogUtils.info(" 当前线程 外部 " + Thread.currentThread().getName());
         DeferredResult<String> result = new DeferredResult<>();
         CompletableFuture.supplyAsync(() -> "sdfsaf", asyncThreadPoolTaskExecutor)
                 .whenCompleteAsync((res, throwable) -> result.setResult(res));
@@ -115,39 +115,39 @@ public class AsyncController {
     @Operation(summary = "asyncTask", description = "asyncTask")
     @RequestMapping("/asyncTask")
     public void asyncTask(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("控制层线程:" + Thread.currentThread().getName());
+        LogUtils.info("控制层线程:" + Thread.currentThread().getName());
         AsyncContext asyncContext = request.startAsync();
         // 设置监听器:可设置其开始、完成、异常、超时等事件的回调处理
         asyncContext.addListener(new AsyncListener() {
             @Override
             public void onComplete(AsyncEvent asyncEvent) throws IOException {
                 // 异步执行完毕时
-                System.out.println("异步执行完毕");
+                LogUtils.info("异步执行完毕");
             }
 
             @Override
             public void onTimeout(AsyncEvent asyncEvent) throws IOException {
                 // 异步线程执行超时
-                System.out.println("异步线程执行超时");
+                LogUtils.info("异步线程执行超时");
             }
 
             @Override
             public void onError(AsyncEvent asyncEvent) throws IOException {
                 // 异步线程出错时
-                System.out.println("异步线程出错");
+                LogUtils.info("异步线程出错");
             }
 
             @Override
             public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
                 // 异步线程开始时
-                System.out.println("异步线程开始");
+                LogUtils.info("异步线程开始");
             }
         });
         //设置超时时间
         asyncContext.setTimeout(3000);
         asyncContext.start(() -> {
             try {
-                System.out.println("异步执行线程:" + Thread.currentThread().getName());
+                LogUtils.info("异步执行线程:" + Thread.currentThread().getName());
                 // String str = piceaService.task2();
                 Thread.sleep(1000);
 
@@ -155,14 +155,14 @@ public class AsyncController {
                 asyncContext.getResponse().setContentType("text/html;charset=UTF-8");
                 asyncContext.getResponse().getWriter().println("这是【异步】的请求返回: ");
             } catch (Exception e) {
-                System.out.println("异步处理发生异常：" + e.getMessage());
+                LogUtils.info("异步处理发生异常：" + e.getMessage());
             }
 
             // 异步请求完成通知，所有任务完成了，才执行
             asyncContext.complete();
         });
         //此时request的线程连接已经释放了
-        System.out.println("主线程：" + Thread.currentThread().getName());
+        LogUtils.info("主线程：" + Thread.currentThread().getName());
     }
 
 
@@ -172,9 +172,9 @@ public class AsyncController {
     @Operation(summary = "callableTest1", description = "callableTest1")
     @RequestMapping("/callableTest1")
     public Callable<String> callableTest1() {
-        System.out.println(" 当前线程 外部 " + Thread.currentThread().getName());
+        LogUtils.info(" 当前线程 外部 " + Thread.currentThread().getName());
         Callable<String> callable = () -> {
-            System.out.println(" 当前线程 内部 " + Thread.currentThread().getName());
+            LogUtils.info(" 当前线程 内部 " + Thread.currentThread().getName());
             return "success";
         };
         return callable;
@@ -184,15 +184,15 @@ public class AsyncController {
     @Operation(summary = "callableTest2", description = "callableTest2")
     @GetMapping("/callableTest2")
     public Callable<String> callableTest2() {
-        System.out.println("主线程开始：" + Thread.currentThread().getName());
+        LogUtils.info("主线程开始：" + Thread.currentThread().getName());
         Callable<String> result = () -> {
-            System.out.println("副线程开始：" + Thread.currentThread().getName());
+            LogUtils.info("副线程开始：" + Thread.currentThread().getName());
             Thread.sleep(1000);
-            System.out.println("副线程返回：" + Thread.currentThread().getName());
+            LogUtils.info("副线程返回：" + Thread.currentThread().getName());
             return "success";
         };
 
-        System.out.println("主线程返回：" + Thread.currentThread().getName());
+        LogUtils.info("主线程返回：" + Thread.currentThread().getName());
         return result;
     }
 

@@ -38,9 +38,9 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
 
         OmsLogger omsLogger = context.getOmsLogger();
 
-        System.out.println("============== TestMapReduceProcessor#process ==============");
-        System.out.println("isRootTask:" + isRootTask());
-        System.out.println("taskContext:" + JsonUtils.toJSONString(context));
+        LogUtils.info("============== TestMapReduceProcessor#process ==============");
+        LogUtils.info("isRootTask:" + isRootTask());
+        LogUtils.info("taskContext:" + JsonUtils.toJSONString(context));
 
         // 根据控制台参数获取MR批次及子任务大小
         final JSONObject jobParams = JSONObject.parseObject(context.getJobParams());
@@ -49,7 +49,7 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
         Integer batchNum = (Integer) jobParams.getOrDefault("batchNum", 10);
 
         if (isRootTask()) {
-            System.out.println("==== MAP ====");
+            LogUtils.info("==== MAP ====");
             omsLogger.info("[DemoMRProcessor] start root task~");
             List<TestSubTask> subTasks = Lists.newLinkedList();
             for (int j = 0; j < batchNum; j++) {
@@ -63,9 +63,9 @@ public class MapReduceProcessorDemo implements MapReduceProcessor {
             omsLogger.info("[DemoMRProcessor] map success~");
             return new ProcessResult(true, "MAP_SUCCESS");
         } else {
-            System.out.println("==== NORMAL_PROCESS ====");
+            LogUtils.info("==== NORMAL_PROCESS ====");
             omsLogger.info("[DemoMRProcessor] process subTask: {}.", JSON.toJSONString(context.getSubTask()));
-            System.out.println("subTask: " + JsonUtils.toJSONString(context.getSubTask()));
+            LogUtils.info("subTask: " + JsonUtils.toJSONString(context.getSubTask()));
             Thread.sleep(1000);
             if (context.getCurrentRetryTimes() == 0) {
                 return new ProcessResult(false, "FIRST_FAILED");

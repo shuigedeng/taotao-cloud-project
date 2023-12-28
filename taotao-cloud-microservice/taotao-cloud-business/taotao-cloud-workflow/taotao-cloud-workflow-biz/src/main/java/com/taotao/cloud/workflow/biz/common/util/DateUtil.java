@@ -685,7 +685,7 @@ public class DateUtil {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             date = formatter.parse(str);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            LogUtils.info(e.getMessage());
             return date;
         }
         return date;
@@ -1025,7 +1025,7 @@ public class DateUtil {
             date = myFormatter.parse(date1);
             mydate = myFormatter.parse(date2);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         long day = 0L;
         if (date != null) {
@@ -1459,7 +1459,7 @@ public class DateUtil {
         try {
             cronExpression = new CronExpression(cron);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            LogUtils.info(e.getMessage());
             return crons;
         }
         Date date = cronExpression.getNextValidTimeAfter(dates);
@@ -1488,7 +1488,7 @@ public class DateUtil {
         try {
             cronExpression = new CronExpression(cron);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            LogUtils.info(e.getMessage());
             return crons;
         }
         Date date = cronExpression.getNextValidTimeAfter(dates);

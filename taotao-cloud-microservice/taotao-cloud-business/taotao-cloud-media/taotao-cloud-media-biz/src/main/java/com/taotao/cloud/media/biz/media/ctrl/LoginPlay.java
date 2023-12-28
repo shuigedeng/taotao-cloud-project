@@ -115,7 +115,7 @@ public class LoginPlay {
         // 设备是否支持IP通道, true为不支持
         if (!bRet) {
             for (int iChannum = 0; iChannum < m_strDeviceInfo.byChanNum; iChannum++) {
-                System.out.println("通道号: " + iChannum + m_strDeviceInfo.byStartChan);
+                LogUtils.info("通道号: " + iChannum + m_strDeviceInfo.byStartChan);
             }
             if (m_strDeviceInfo.byChanNum > 0) {
                 return Integer.valueOf(0 + m_strDeviceInfo.byStartChan);

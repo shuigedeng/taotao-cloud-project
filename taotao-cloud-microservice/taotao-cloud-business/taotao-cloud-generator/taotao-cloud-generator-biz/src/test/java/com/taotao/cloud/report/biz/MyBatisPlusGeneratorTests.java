@@ -105,7 +105,7 @@ class MyBatisPlusGeneratorTests {
 
         } catch (Exception e) {
             System.err.println("输入数据库序号不正确");
-            e.printStackTrace();
+            LogUtils.error(e);
             main(args);
             return;
         }
@@ -133,12 +133,12 @@ class MyBatisPlusGeneratorTests {
                         "resource-services-parent" + fileSeparator + "wechat-miniprogram",
                         "cloud.xuxiaowei.next.wechatminiprogram"));
 
-        System.out.println("项目文件夹：" + userDir);
+        LogUtils.info("项目文件夹：" + userDir);
 
-        System.out.println("模块列表：");
+        LogUtils.info("模块列表：");
         for (int i = 0; i < moduleList.size(); i++) {
             Module module = moduleList.get(i);
-            System.out.println("序号：" + i + "：" + module.getModuleFolder() + "：" + module.getPackageName());
+            LogUtils.info("序号：" + i + "：" + module.getModuleFolder() + "：" + module.getPackageName());
         }
 
         int moduleNumber = scannerInt("请输入模块名序号？");
@@ -154,8 +154,8 @@ class MyBatisPlusGeneratorTests {
         String javaDir = mainFolder + fileSeparator + "java";
         String xmlDir = mainFolder + fileSeparator + "resources" + fileSeparator + "mapper" + fileSeparator + xmlFolder;
 
-        System.out.println("java 输出目录：" + javaDir);
-        System.out.println("xml 输出目录：" + xmlDir);
+        LogUtils.info("java 输出目录：" + javaDir);
+        LogUtils.info("xml 输出目录：" + xmlDir);
 
         FastAutoGenerator.create(dataSourceConfig)
                 // 全局配置
@@ -217,7 +217,7 @@ class MyBatisPlusGeneratorTests {
      */
     private static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(("请输入" + tip + "："));
+        LogUtils.info(("请输入" + tip + "："));
         if (scanner.hasNext()) {
             String ipt = scanner.next();
             if (StringUtils.isNotBlank(ipt)) {
@@ -232,7 +232,7 @@ class MyBatisPlusGeneratorTests {
      */
     private static int scannerInt(String tip) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(("请输入" + tip + "："));
+        LogUtils.info(("请输入" + tip + "："));
         if (scanner.hasNext()) {
             return scanner.nextInt();
         }

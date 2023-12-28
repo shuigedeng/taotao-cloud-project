@@ -41,7 +41,7 @@ public class CaiHongPi {
                 str = jsonObject.getJSONArray("newslist").getJSONObject(0).getString("content");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return str;
     }
@@ -61,7 +61,7 @@ public class CaiHongPi {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -71,7 +71,7 @@ public class CaiHongPi {
     }
 
     public static void main(String[] args) {
-        System.out.println(getJinJu());
-        //        System.out.println(getCaiHongPi());
+        LogUtils.info(getJinJu());
+        //        LogUtils.info(getCaiHongPi());
     }
 }

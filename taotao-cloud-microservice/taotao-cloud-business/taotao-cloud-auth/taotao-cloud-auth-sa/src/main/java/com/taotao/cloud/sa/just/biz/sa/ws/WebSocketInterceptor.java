@@ -39,11 +39,11 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
             WebSocketHandler handler,
             Map<String, Object> attr) {
 
-        System.out.println("---- 握手之前触发 " + StpUtil.getTokenValue());
+        LogUtils.info("---- 握手之前触发 " + StpUtil.getTokenValue());
 
         // 未登录情况下拒绝握手
         if (!StpUtil.isLogin()) {
-            System.out.println("---- 未授权客户端，连接失败");
+            LogUtils.info("---- 未授权客户端，连接失败");
             return false;
         }
 
@@ -56,6 +56,6 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
     @Override
     public void afterHandshake(
             ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
-        System.out.println("---- 握手之后触发 ");
+        LogUtils.info("---- 握手之后触发 ");
     }
 }

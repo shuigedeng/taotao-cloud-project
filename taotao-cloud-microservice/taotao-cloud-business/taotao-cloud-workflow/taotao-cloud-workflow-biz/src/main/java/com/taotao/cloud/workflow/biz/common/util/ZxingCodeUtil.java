@@ -55,7 +55,7 @@ public class ZxingCodeUtil {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(message, BarcodeFormat.CODE_128, width, height, hints);
             return toBufferedImage(bitMatrix);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }
@@ -111,7 +111,7 @@ public class ZxingCodeUtil {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return image;
     }
@@ -153,7 +153,7 @@ public class ZxingCodeUtil {
             image.flush();
             return image;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }
@@ -218,7 +218,7 @@ public class ZxingCodeUtil {
                 image.flush();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return image;
     }

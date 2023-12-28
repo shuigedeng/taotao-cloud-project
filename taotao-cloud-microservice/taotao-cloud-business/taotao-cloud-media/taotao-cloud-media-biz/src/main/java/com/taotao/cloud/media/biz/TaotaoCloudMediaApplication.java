@@ -33,7 +33,7 @@ public class TaotaoCloudMediaApplication {
         for (int i = 0; i < args.length; i++) {
             if ("-jsonPath".equals(args[i])) {
                 //                audio = true;
-                System.out.println(args[i + 1]);
+                LogUtils.info(args[i + 1]);
             }
         }
 

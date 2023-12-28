@@ -54,7 +54,7 @@ public class WxPayController {
 
             response = ApiResponse.success("下单成功", map);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return response;
     }

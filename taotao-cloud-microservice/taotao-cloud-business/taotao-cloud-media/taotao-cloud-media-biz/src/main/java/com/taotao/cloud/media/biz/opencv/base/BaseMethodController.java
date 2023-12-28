@@ -115,8 +115,8 @@ public class BaseMethodController extends BaseController {
         // String filename = imagefile.substring(imagefile.lastIndexOf("/"), imagefile.length());
         // String filename_end = filename.substring(filename.lastIndexOf("."), filename.length());
         // String filename_pre = filename.substring(0, filename.lastIndexOf("."));
-        // System.out.println(filename_pre);
-        // System.out.println(filename_end);
+        // LogUtils.info(filename_pre);
+        // LogUtils.info(filename_end);
         // filename = filename_pre + "_" + binaryType + "_" + thresh + "_" + maxval + "_" +
         // filename_end;
 
@@ -138,7 +138,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -206,7 +206,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -280,7 +280,7 @@ public class BaseMethodController extends BaseController {
         try {
             MultiFormatReader formatReader = new MultiFormatReader();
             // if (!file.exists()) {
-            // System.out.println("nofile");
+            // LogUtils.info("nofile");
             // return;
             // }
             // BufferedImage image = ImageIO.read(file);
@@ -300,7 +300,7 @@ public class BaseMethodController extends BaseController {
             sbuffer.append("二维码文本内容 = " + result.getText() + "\n");
             resultText = sbuffer.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return resultText;
     }
@@ -332,7 +332,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -372,7 +372,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -422,7 +422,7 @@ public class BaseMethodController extends BaseController {
             mask = new Mat(source.rows() + 2, source.cols() + 2, source.type()); // 延展图像
         }
 
-        System.out.println(g_nNewMaskVal << 8);
+        LogUtils.info(g_nNewMaskVal << 8);
 
         int flags = g_nConnectivity | (g_nNewMaskVal << 8) | g_nFillMode;
 
@@ -446,7 +446,7 @@ public class BaseMethodController extends BaseController {
                 renderImage(response, imgebyte);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -478,7 +478,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -525,7 +525,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -592,7 +592,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -615,7 +615,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -652,7 +652,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(source1);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -685,7 +685,7 @@ public class BaseMethodController extends BaseController {
                 param2,
                 minRadius,
                 maxRadius); // 霍夫变换检测圆
-        System.out.println("----------------" + circleMat.cols());
+        LogUtils.info("----------------" + circleMat.cols());
         int cols = circleMat.cols();
         // Point anchor01 = new Point();
         if (cols > 0) {
@@ -704,7 +704,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(source1);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -777,7 +777,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -832,7 +832,7 @@ public class BaseMethodController extends BaseController {
         Mat hierarchy = new Mat(source.rows(), source.cols(), CvType.CV_8UC1, new Scalar(0));
         Vector<MatOfPoint> contours = new Vector<MatOfPoint>();
         Imgproc.findContours(source, contours, hierarchy, mode, method, new Point());
-        System.out.println(contours.size());
+        LogUtils.info(contours.size());
         logger.info("轮廓数量为：{}，当前请求要展现第{}个轮廓", contours.size(), contourNum);
         // contourNum因为轮廓计数是从0开始
         if (contourNum == -1 || (contourNum + 1) > contours.size()) {
@@ -844,7 +844,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(destination);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -868,7 +868,7 @@ public class BaseMethodController extends BaseController {
         Mat source = Highgui.imread(sourcePath, Highgui.CV_LOAD_IMAGE_COLOR);
         // Mat destination = new Mat(source.rows(), source.cols(), source.type());
         // String templateimage = Constants.SOURCE_IMAGE_PATH + "/template.png";
-        // System.out.println(templateimage);
+        // LogUtils.info(templateimage);
         // Mat matchtemp = Highgui.imread(templateimage);
         // 优化代码，模板图像直接通过前端截取或取得，而不是写死，此处用到了OpenCV的截取图像功能
         logger.info("{},{},{},{}", x1, y1, width, height);
@@ -933,7 +933,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(source);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -977,7 +977,7 @@ public class BaseMethodController extends BaseController {
         Mat histImg = new Mat(histImgRows, histImgCols, CvType.CV_8UC3, new Scalar(255, 255, 255)); // 重新建一张图片，绘制直方图
 
         int max = (int) minmaxLoc.maxVal;
-        System.out.println("max--------" + max);
+        LogUtils.info("max--------" + max);
         BigDecimal bin_u = (BigDecimal) (histImg.height() - 20) / max; // max: 最高条的像素个数，则 bin_u 为单个像素的高度
         int kedu = 0;
         for (int i = 1; kedu <= minmaxLoc.maxVal; i++) {
@@ -998,7 +998,7 @@ public class BaseMethodController extends BaseController {
             }
         }
 
-        System.out.println("灰度级:" + histSize.get(0, 0)[0]);
+        LogUtils.info("灰度级:" + histSize.get(0, 0)[0]);
         for (int i = 0; i < histSize.get(0, 0)[0]; i++) { // 画出每一个灰度级分量的比例，注意OpenCV将Mat最左上角的点作为坐标原点
             Core.rectangle(
                     histImg,
@@ -1037,7 +1037,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(histImg);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -1182,7 +1182,7 @@ public class BaseMethodController extends BaseController {
         Mat dst = source.clone();
         // 缩放比例
         BigDecimal ratio = NumberUtil.div(500, orign.height());
-        System.out.println("----------" + ratio);
+        LogUtils.info("----------" + ratio);
         BigDecimal width = ratio * orign.width();
         Imgproc.resize(source, dst, new Size(width, 500));
         // 灰度化,加载为灰度图显示
@@ -1215,7 +1215,7 @@ public class BaseMethodController extends BaseController {
             if (approx.rows() == 4) {
                 // 通过reshape函数将4个点取出来（4行2列的矩阵）
                 Mat points = approx.reshape(2, 4);
-                System.out.println(points.dump());
+                LogUtils.info(points.dump());
                 BigDecimal[] point1 = points.get(0, 0);
                 BigDecimal[] point2 = points.get(1, 0);
                 BigDecimal[] point3 = points.get(2, 0);
@@ -1226,9 +1226,9 @@ public class BaseMethodController extends BaseController {
                 listPoint.add(new Point(point3[0] / ratio, point3[1] / ratio));
                 listPoint.add(new Point(point4[0] / ratio, point4[1] / ratio));
                 for (Point d : listPoint) {
-                    System.out.println(d);
+                    LogUtils.info(d);
                 }
-                System.out.println("######################");
+                LogUtils.info("######################");
                 break;
             }
         }
@@ -1242,7 +1242,7 @@ public class BaseMethodController extends BaseController {
             byte[] imgebyte = OpenCVUtil.covertMat2Byte1(resullt);
             renderImage(response, imgebyte);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -1258,7 +1258,7 @@ public class BaseMethodController extends BaseController {
         // 获得点的顺序
         List<Point> newOrderList = orderPoints(listPoint);
         for (Point point : newOrderList) {
-            System.out.println(point);
+            LogUtils.info(point);
         }
         // 计算新图像的宽度，它将是右下角和左下角x坐标之间或右上角和左上角x坐标之间的最大距离
         // 此处的顺序别搞错0,1,2,3依次是左上[0]，右上[1]，右下[2]，左下[3]
@@ -1277,8 +1277,8 @@ public class BaseMethodController extends BaseController {
                 Math.sqrt(Math.pow(rightTop.x - rightBottom.x, 2) + Math.pow(rightTop.y - rightBottom.y, 2));
         BigDecimal heightB = Math.sqrt(Math.pow(leftTop.x - leftBottom.x, 2) + Math.pow(leftTop.y - leftBottom.y, 2));
         int maxHeight = Math.max((int) heightA, (int) heightB);
-        System.out.println("宽度：" + maxWidth);
-        System.out.println("高度：" + maxHeight);
+        LogUtils.info("宽度：" + maxWidth);
+        LogUtils.info("高度：" + maxHeight);
         // 现在我们指定目标图像的尺寸，构造目标点集以获得图像的“鸟瞰图”（即自上而下的视图），
         // 再次指定左上角，右上角的点，右下角和左下角的顺序
         Point dstPoint1 = new Point(0, 0);

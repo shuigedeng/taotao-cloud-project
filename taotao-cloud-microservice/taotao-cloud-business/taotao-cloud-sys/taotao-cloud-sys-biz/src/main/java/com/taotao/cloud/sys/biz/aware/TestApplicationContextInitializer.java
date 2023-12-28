@@ -29,6 +29,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class TestApplicationContextInitializer implements ApplicationContextInitializer {
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        System.out.println("[ApplicationContextInitializer]");
+        LogUtils.info("[ApplicationContextInitializer]");
     }
 }

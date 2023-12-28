@@ -31,7 +31,7 @@ public class CaseFiveTaskB extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("B任务执行");
+        LogUtils.info("B任务执行");
         return "BResult";
     }
 }

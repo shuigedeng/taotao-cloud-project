@@ -38,7 +38,7 @@ public class WithdrawJobHandler {
 
         for (int i = 0; i < 5; i++) {
             XxlJobHelper.log("beat at:" + i);
-            System.out.println("XXL-JOB测试-----" + i);
+            LogUtils.info("XXL-JOB测试-----" + i);
             TimeUnit.SECONDS.sleep(2);
         }
         return ReturnT.SUCCESS;

@@ -238,7 +238,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             //            }
             return AjaxResult.success("流程启动成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return AjaxResult.error("流程启动错误");
         }
     }

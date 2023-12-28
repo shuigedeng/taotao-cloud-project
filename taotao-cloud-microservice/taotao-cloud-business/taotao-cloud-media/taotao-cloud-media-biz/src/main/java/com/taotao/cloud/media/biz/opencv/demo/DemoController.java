@@ -43,7 +43,7 @@ public class DemoController extends BaseController {
     @RequestMapping(value = "detectFace")
     public void detectFace(HttpServletResponse response, HttpServletRequest request, String url) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        System.out.println("===========java.library.path:" + System.getProperty("java.library.path"));
+        LogUtils.info("===========java.library.path:" + System.getProperty("java.library.path"));
         logger.info("\nRunning DetectFaceDemo");
         String resourcePath =
                 getClass().getResource("/lbpcascade_frontalface.xml").getPath().substring(1);
@@ -69,17 +69,17 @@ public class DemoController extends BaseController {
 
         // Save the visualized detection.
         String filename = url.substring(url.lastIndexOf("/"), url.length());
-        System.out.println(String.format("Writing %s", Constants.PATH + Constants.DEST_IMAGE_PATH + filename));
+        LogUtils.info(String.format("Writing %s", Constants.PATH + Constants.DEST_IMAGE_PATH + filename));
         Highgui.imwrite(Constants.PATH + Constants.DEST_IMAGE_PATH + filename, image);
         renderString(response, Constants.SUCCESS);
     }
 
     // public static void main(String[] args) {
-    //	System.out.println("Hello, OpenCV");
+    //	LogUtils.info("Hello, OpenCV");
     //	// Load the native library.
     //	System.loadLibrary("opencv_java2413");
     //	System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-    //	System.out.println(
+    //	LogUtils.info(
     //		"===========java.library.path:" + System.getProperty("java.library.path"));
     //
     // }

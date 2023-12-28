@@ -90,7 +90,7 @@ package com.taotao.cloud.data.sync.batch.mybatis; // package com.taotao.cloud.da
 //	public MyBatisCursorItemReader<BlogInfo> itemReader(
 //			@Value("#{jobParameters[authorId]}") String authorId) {
 //
-//		System.out.println("开始查询数据库");
+//		LogUtils.info("开始查询数据库");
 //
 //		MyBatisCursorItemReader<BlogInfo> reader = new MyBatisCursorItemReader<>();
 //		reader.setQueryId("com.example.batchdemo.mapper.BlogMapper.queryInfoById");

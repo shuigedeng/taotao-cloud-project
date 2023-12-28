@@ -95,7 +95,7 @@ public class RedPacketController {
                     Integer.parseInt(redisUtil.getValue(redPacketId + "-money").toString());
             LOGGER.info("剩余金额：{}", restMoney);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -145,7 +145,7 @@ public class RedPacketController {
                     Integer.parseInt(redisUtil.getValue(redPacketId + "-money").toString());
             LOGGER.info("剩余金额：{}", restMoney);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }
@@ -194,7 +194,7 @@ public class RedPacketController {
                     Integer.parseInt(redisUtil.getValue(redPacketId + "-money").toString());
             LOGGER.info("剩余金额：{}", restMoney);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return Result.ok();
     }

@@ -11,13 +11,13 @@ public class MyScript implements Script.Command {
 	@ShellMethod("Read and execute commands from a file.")
 	public void script() {
 		// 实现自定义逻辑
-		System.out.println("override default script command");
+		LogUtils.info("override default script command");
 	}
 
 	// 指定被覆盖的内置命令分组为“Built-In Commands”
 	// @ShellMethod(value = "Read and execute commands from a file.", group = "Built-In Commands")
 	// public void script() {
-	// 	System.out.println("override default script command");
+	// 	LogUtils.info("override default script command");
 	// }
 
 }

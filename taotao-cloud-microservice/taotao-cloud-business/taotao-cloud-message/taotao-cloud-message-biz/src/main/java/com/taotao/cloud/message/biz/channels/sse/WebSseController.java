@@ -68,7 +68,7 @@ public class WebSseController {
 		SseEmitter sseEmitter = new SseEmitter(180000L);
 		Chater chater = WebSSEUser.getChater(userName);
 		sseEmitter.onTimeout(() -> chater.setSseEmitter(null));
-		sseEmitter.onCompletion(() -> System.out.println("完成！！！"));
+		sseEmitter.onCompletion(() -> LogUtils.info("完成！！！"));
 		chater.setSseEmitter(sseEmitter);
 		return sseEmitter;
 	}
@@ -125,7 +125,7 @@ public class WebSseController {
 				chater.addMsg(messageDTO);
 			} catch (IOException e) {
 				logger.error("文件原名:{}", myfile.getOriginalFilename(), e);
-				e.printStackTrace();
+				LogUtils.error(e);
 				count++;
 				continue;
 			}

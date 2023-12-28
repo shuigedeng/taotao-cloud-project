@@ -47,7 +47,7 @@ public class IndexController {
     @RequestMapping("")
     public String index(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String token = CookieUtil.getUid(request, Constants.COOKIE_MEMBER_TOKEN);
-        System.out.println(">>>>>>>>>>>>>>> index token: " + token);
+        LogUtils.info(">>>>>>>>>>>>>>> index token: " + token);
 
         // if (StrUtil.isEmpty(token)) {
         // 	response.sendRedirect("/login");

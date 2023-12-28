@@ -73,7 +73,7 @@ public class Auth {
     //            byte[] decode = DES.decode(Base64Utils.decode(res.getBytes()), appSecret.getBytes());
     //            jsonObject.put("res", JSONObject.parseObject(new String(decode)));
     //        }
-    //        System.out.println(jsonObject);
+    //        LogUtils.info(jsonObject);
     //    }
 
     public static String postRequestNoSecurity(String url, Map<String, String> headers, Object data) throws Exception {

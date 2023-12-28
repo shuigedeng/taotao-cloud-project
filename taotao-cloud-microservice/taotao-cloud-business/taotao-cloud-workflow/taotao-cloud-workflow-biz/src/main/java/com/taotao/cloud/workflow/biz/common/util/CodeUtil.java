@@ -89,7 +89,7 @@ public class CodeUtil {
             }
             session.removeAttribute(RANDOMCODEKEY);
             session.setAttribute(RANDOMCODEKEY, randomString);
-            System.out.println("后台代码" + randomString);
+            LogUtils.info("后台代码" + randomString);
             g.dispose();
             @Cleanup ServletOutputStream outputStream = response.getOutputStream();
             // 将内存中的图片通过流动形式输出到客户端

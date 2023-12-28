@@ -51,7 +51,7 @@ public class MybatisWriteListener implements ItemWriteListener<BlogInfo> {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
 
         ItemWriteListener.super.onWriteError(exception, items);

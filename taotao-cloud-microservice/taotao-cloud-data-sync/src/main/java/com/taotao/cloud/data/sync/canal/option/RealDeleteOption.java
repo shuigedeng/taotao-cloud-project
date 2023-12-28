@@ -34,7 +34,7 @@ public class RealDeleteOption extends DeleteOption {
 
     @Override
     public void doOption(String destination, String schemaName, String tableName, CanalEntry.RowChange rowChange) {
-        System.out.println("======================接口方式（删除数据操作）==========================");
+        LogUtils.info("======================接口方式（删除数据操作）==========================");
         List<CanalEntry.RowData> rowDatasList = rowChange.getRowDatasList();
         for (CanalEntry.RowData rowData : rowDatasList) {
             if (!CollectionUtils.isEmpty(rowData.getBeforeColumnsList())) {
@@ -53,9 +53,9 @@ public class RealDeleteOption extends DeleteOption {
 
                 sql += idKey + " =" + idValue + ";";
 
-                System.out.println(sql);
+                LogUtils.info(sql);
             }
-            System.out.println("\n======================================================");
+            LogUtils.info("\n======================================================");
         }
     }
 }

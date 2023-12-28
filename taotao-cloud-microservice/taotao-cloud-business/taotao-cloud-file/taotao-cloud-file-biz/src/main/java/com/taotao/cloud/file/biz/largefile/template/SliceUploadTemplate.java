@@ -80,7 +80,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
         try {
             accessConfFile = new RandomAccessFile(confFile, "rw");
             // 把该分段标记为 true 表示完成
-            System.out.println("set part " + param.getChunk() + " complete");
+            LogUtils.info("set part " + param.getChunk() + " complete");
             // 创建conf文件文件长度为总分片数，每上传一个分块即向conf文件中写入一个127，那么没上传的位置就是默认0,已上传的就是Byte.MAX_VALUE 127
             accessConfFile.setLength(param.getChunks());
             accessConfFile.seek(param.getChunk());
@@ -92,7 +92,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
             for (int i = 0; i < completeList.length && isComplete == Byte.MAX_VALUE; i++) {
                 // 与运算, 如果有部分没有完成则 isComplete 不是 Byte.MAX_VALUE
                 isComplete = (byte) (isComplete & completeList[i]);
-                System.out.println("check part " + i + " complete?:" + completeList[i]);
+                LogUtils.info("check part " + i + " complete?:" + completeList[i]);
             }
 
         } catch (IOException e) {
@@ -135,7 +135,7 @@ public abstract class SliceUploadTemplate implements SliceUploadStrategy {
 
             fileUploadDTO = renameFile(tmpFile, fileName);
             if (fileUploadDTO.isUploadComplete()) {
-                System.out.println("upload complete !!" + fileUploadDTO.isUploadComplete() + " name=" + fileName);
+                LogUtils.info("upload complete !!" + fileUploadDTO.isUploadComplete() + " name=" + fileName);
                 // TODO 保存文件信息到数据库
 
             }

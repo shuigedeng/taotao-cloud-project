@@ -147,7 +147,7 @@ public class OdcShellTest {
 	 */
 	@ShellMethod(value = "必须链接后才能执行的方法", group = "其他组")
 	public String download() {
-		System.out.println("123");
+		LogUtils.info("123");
 		return "123";
 	}
 

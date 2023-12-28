@@ -95,7 +95,7 @@ public class FlowDataUtil {
             try {
                 conn = ConnUtil.getConn(link);
             } catch (DataException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         } else {
             String tenId = "";
@@ -107,7 +107,7 @@ public class FlowDataUtil {
             try {
                 conn = ConnUtil.getConn(dataSourceUtil, tenId);
             } catch (DataException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         }
         if (conn == null) {
@@ -1466,7 +1466,7 @@ public class FlowDataUtil {
             }
         } catch (SQLException e) {
             conn.rollback();
-            System.out.println("sql语句异常：" + e.getMessage());
+            LogUtils.info("sql语句异常：" + e.getMessage());
             throw new SQLException(e.getMessage());
         }
     }

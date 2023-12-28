@@ -72,11 +72,11 @@ public class RedissonDelayApplication {
             @Header(RedissonHeaders.EXPECTED_DELAY_MILLIS) long expectedDelayMillis,
             @Header(value = "my_header", required = false, defaultValue = "test") String myHeader,
             @Payload CarLbsDto carLbsDto) {
-        System.out.println(messageId);
-        System.out.println(queue);
-        System.out.println(myHeader);
+        LogUtils.info(messageId);
+        LogUtils.info(queue);
+        LogUtils.info(myHeader);
         long actualDelay = System.currentTimeMillis() - (sendTimestamp + expectedDelayMillis);
-        System.out.println("receive " + carLbsDto + ", delayed " + actualDelay + " millis");
+        LogUtils.info("receive " + carLbsDto + ", delayed " + actualDelay + " millis");
     }
 
     @Data

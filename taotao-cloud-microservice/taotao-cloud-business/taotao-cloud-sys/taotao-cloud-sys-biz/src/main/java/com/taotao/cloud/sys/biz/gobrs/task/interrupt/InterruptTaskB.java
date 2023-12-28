@@ -40,16 +40,16 @@ public class InterruptTaskB extends AsyncTask<Object, Object> {
     @Override
     public Object task(Object o, TaskSupport support) {
         try {
-            System.out.println("InterruptTaskB Begin");
+            LogUtils.info("InterruptTaskB Begin");
             Thread.sleep(200);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println(1 / 0);
-            System.out.println("InterruptTaskB Finish");
+            LogUtils.info(1 / 0);
+            LogUtils.info("InterruptTaskB Finish");
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

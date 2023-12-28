@@ -142,7 +142,7 @@ public class SqlMySQL extends SqlBase {
                         fieldModel.getPrimaryKey(),
                         new DbMySQL());
             } catch (DataException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
             String column = HtmlUtils.htmlEscape(String.valueOf(fieldModel.getField()), CharsetKit.UTF_8);
             String preparedSql =

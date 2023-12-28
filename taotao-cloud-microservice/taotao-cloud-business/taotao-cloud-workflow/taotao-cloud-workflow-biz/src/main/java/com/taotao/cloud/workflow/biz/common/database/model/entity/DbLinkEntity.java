@@ -86,7 +86,7 @@ public class DbLinkEntity extends DataSourceUtil implements DataSourceMod {
         try {
             return convertDTO(dbName, 2);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return null;
     }

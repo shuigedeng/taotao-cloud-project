@@ -133,9 +133,9 @@ public class InitServer implements CommandLineRunner {
         //			FFmpegFrameGrabber.tryLoad();
         //			FFmpegFrameRecorder.tryLoad();
         //		} catch (org.bytedeco.javacv.FrameGrabber.Exception e) {
-        //			e.printStackTrace();
+        //			LogUtils.error(e);
         //		} catch (org.bytedeco.javacv.FrameRecorder.Exception e) {
-        //			e.printStackTrace();
+        //			LogUtils.error(e);
         //		}
 
         /** 初始化ffmpeg路径 */

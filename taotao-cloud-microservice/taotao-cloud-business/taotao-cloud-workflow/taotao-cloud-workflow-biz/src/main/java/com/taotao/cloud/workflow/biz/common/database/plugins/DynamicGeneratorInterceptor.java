@@ -82,7 +82,7 @@ public class DynamicGeneratorInterceptor extends DynamicDataSourceAnnotationInte
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return methodInvocation.proceed();
     }

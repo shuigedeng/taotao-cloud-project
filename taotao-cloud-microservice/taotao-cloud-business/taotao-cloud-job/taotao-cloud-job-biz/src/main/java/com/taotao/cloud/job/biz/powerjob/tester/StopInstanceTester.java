@@ -29,7 +29,7 @@ public class StopInstanceTester implements BasicProcessor {
     public ProcessResult process(TaskContext context) throws Exception {
         int i = 0;
         while (true) {
-            System.out.println(i++);
+            LogUtils.info(i++);
             Thread.sleep(1000 * 10);
         }
     }

@@ -29,7 +29,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 public class TestBeanFactoryAware implements BeanFactoryAware {
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("[TestBeanFactoryAware] "
+        LogUtils.info("[TestBeanFactoryAware] "
                 + beanFactory.getBean(TestBeanFactoryAware.class).getClass().getSimpleName());
     }
 }

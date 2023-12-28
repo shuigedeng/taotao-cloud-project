@@ -64,7 +64,7 @@ public class AliPayTest {
                     null,
                     hbFqBiz,
                     key);
-            System.out.println(aliPayCodePayBiz.toString());
+            LogUtils.info(aliPayCodePayBiz.toString());
 
             // 支付宝扫码支付
             result = AliPay.nativePay(
@@ -80,7 +80,7 @@ public class AliPayTest {
                     null,
                     hbFqBiz,
                     key);
-            System.out.println("支付宝扫码支付返回结果：" + result);
+            LogUtils.info("支付宝扫码支付返回结果：" + result);
 
             // 支付宝wap支付
             result = AliPay.wapPay(
@@ -95,7 +95,7 @@ public class AliPayTest {
                     null,
                     hbFqBiz,
                     key);
-            System.out.println("支付宝wap支付返回结果：" + result);
+            LogUtils.info("支付宝wap支付返回结果：" + result);
 
             String buyer_id = "支付宝买家唯一编号，通过支付宝授权接口获取";
 
@@ -113,7 +113,7 @@ public class AliPayTest {
                     null,
                     hbFqBiz,
                     key);
-            System.out.println("支付宝JS支付返回结果：" + aliPayJsPayBiz.toString());
+            LogUtils.info("支付宝JS支付返回结果：" + aliPayJsPayBiz.toString());
 
             // 支付宝H5支付
             AliPayH5Biz aliPayH5Biz = AliPay.h5Pay(
@@ -130,9 +130,9 @@ public class AliPayTest {
                     hbFqBiz,
                     key);
             // form表单需要自行输出跳转
-            System.out.println("支付宝H5支付返回form表单：" + aliPayH5Biz.getForm());
+            LogUtils.info("支付宝H5支付返回form表单：" + aliPayH5Biz.getForm());
             // url直接重定向访问即可
-            System.out.println("支付宝H5支付返回url：" + aliPayH5Biz.getUrl());
+            LogUtils.info("支付宝H5支付返回url：" + aliPayH5Biz.getUrl());
 
             // 支付宝appPay支付
             String appPay = AliPay.appPay(
@@ -147,7 +147,7 @@ public class AliPayTest {
                     null,
                     hbFqBiz,
                     key);
-            System.out.println("支付宝APP支付返回结果：" + appPay);
+            LogUtils.info("支付宝APP支付返回结果：" + appPay);
 
             // 电脑网站支付
             AliPayWebPayBiz aliPayWebPayBiz = AliPay.webPay(
@@ -164,28 +164,28 @@ public class AliPayTest {
                     hbFqBiz,
                     key);
             // form表单需要自行输出跳转
-            System.out.println("支付宝电脑网站支付返回form表单：" + aliPayWebPayBiz.getForm());
+            LogUtils.info("支付宝电脑网站支付返回form表单：" + aliPayWebPayBiz.getForm());
             // url直接重定向访问即可
-            System.out.println("支付宝电脑网站支付返回url：" + aliPayWebPayBiz.getUrl());
+            LogUtils.info("支付宝电脑网站支付返回url：" + aliPayWebPayBiz.getUrl());
 
             // 发起退款
             RefundOrder orderRefund = AliPay.orderRefund("Y194506551713811", mch_id, "0.01", null, "测试退款", null, key);
-            System.out.println("支付宝发起退款返回结果：" + orderRefund.toString());
+            LogUtils.info("支付宝发起退款返回结果：" + orderRefund.toString());
 
             // 退款查询
             RefundSearch refundSearch = AliPay.getRefundResult("R09441868126739", mch_id, key);
-            System.out.println("支付宝退款结果查询返回结果：" + refundSearch.toString());
+            LogUtils.info("支付宝退款结果查询返回结果：" + refundSearch.toString());
 
             // 关闭订单
             String closeOrder = AliPay.closeOrder("Y194506551713811", mch_id, key);
-            System.out.println("支付宝关闭订单结果：" + closeOrder);
+            LogUtils.info("支付宝关闭订单结果：" + closeOrder);
 
             // 撤销订单
             AliPayReverseOrderBiz aliPayReverseOrderBiz = AliPay.reverseOrder("Y194506551713811", mch_id, key);
-            System.out.println("支付宝撤销订单结果：" + aliPayReverseOrderBiz.toString());
+            LogUtils.info("支付宝撤销订单结果：" + aliPayReverseOrderBiz.toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

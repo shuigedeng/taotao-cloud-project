@@ -137,7 +137,7 @@ public class MybatisInterceptor implements Interceptor {
                         field.setAccessible(false);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }
@@ -159,7 +159,7 @@ public class MybatisInterceptor implements Interceptor {
         try {
             userId = UserContext.getUserId();
         } catch (Exception e) {
-            // e.printStackTrace();
+            // LogUtils.error(e);
             userId = null;
         }
         return userId;

@@ -129,7 +129,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
             runtimeService.startProcessInstanceById(procDefId, variables);
             return AjaxResult.success("流程启动成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return AjaxResult.error("流程启动错误");
         }
     }

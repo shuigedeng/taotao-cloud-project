@@ -33,13 +33,13 @@ public class SpringFileUtils {
                 out.write(ss[i]);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } finally {
             if (Objects.nonNull(out)) {
                 try {
                     out.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }

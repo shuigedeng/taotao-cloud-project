@@ -47,11 +47,11 @@ public class JurAuthController {
     public SaResult getPermission() {
         // 查询权限信息 ，如果当前会话未登录，会返回一个空集合
         List<String> permissionList = StpUtil.getPermissionList();
-        System.out.println("当前登录账号拥有的所有权限：" + permissionList);
+        LogUtils.info("当前登录账号拥有的所有权限：" + permissionList);
 
         // 查询角色信息 ，如果当前会话未登录，会返回一个空集合
         List<String> roleList = StpUtil.getRoleList();
-        System.out.println("当前登录账号拥有的所有角色：" + roleList);
+        LogUtils.info("当前登录账号拥有的所有角色：" + roleList);
 
         // 返回给前端
         return SaResult.ok().set("roleList", roleList).set("permissionList", permissionList);

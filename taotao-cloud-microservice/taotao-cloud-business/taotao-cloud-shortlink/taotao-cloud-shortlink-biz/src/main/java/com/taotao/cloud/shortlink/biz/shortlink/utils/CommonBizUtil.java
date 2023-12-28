@@ -115,9 +115,9 @@ public class CommonBizUtil {
 
     public static void main(String[] args) {
         //        long hashCode = murmurHash32("/origin/userId=12");
-        //        System.out.println(hashCode);
+        //        LogUtils.info(hashCode);
         //
-        //        System.out.println(encodeToBase62(hashCode));
-        System.out.println(encodeToBase62OutOrder(1000000000L));
+        //        LogUtils.info(encodeToBase62(hashCode));
+        LogUtils.info(encodeToBase62OutOrder(1000000000L));
     }
 }

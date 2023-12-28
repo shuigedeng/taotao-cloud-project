@@ -93,7 +93,7 @@ public class ConnUtil2 {
                 Class.forName(driverClass);
                 conn[0] = DriverManager.getConnection(url, userName, password);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
                 throw new DataException(e.getMessage());
             }
             return "jdbc连接成功";

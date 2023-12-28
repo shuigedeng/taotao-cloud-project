@@ -207,7 +207,7 @@ public class FlowJsonUtil {
         try {
             flag = (Boolean) scriptEngine.eval(expression.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LogUtils.info(e.getMessage());
         }
         return flag;
     }

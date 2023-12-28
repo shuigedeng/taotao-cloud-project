@@ -49,7 +49,7 @@ public class MD5Util {
             }
             return new String(str);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             return null;
         }
     }

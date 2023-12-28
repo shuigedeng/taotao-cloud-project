@@ -26,9 +26,9 @@ public class EmailConsumer {
 
     @StreamListener(TaoTaoCloudSink.EMAIL_MESSAGE_INPUT)
     public void onMessage(@Payload String message) {
-        // System.out.println(
+        // LogUtils.info(
         //	"[onMessage][线程编号:{} 消息内容：{}]" + Thread.currentThread().getId() + message);
-        System.out.println("email Consumer" + message);
+        LogUtils.info("email Consumer" + message);
     }
 
     // @StreamListener(MySink.TREK_INPUT)

@@ -148,12 +148,12 @@ public class MinioUploadUtil {
                 }
                 os.flush();
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             } finally {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         } catch (Exception e) {
@@ -163,7 +163,7 @@ public class MinioUploadUtil {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LogUtils.error(e);
                 }
             }
         }
@@ -197,7 +197,7 @@ public class MinioUploadUtil {
             // 强制将缓存区的数据进行输出
             outputStream.flush();
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -235,7 +235,7 @@ public class MinioUploadUtil {
                     GetObjectArgs.builder().bucket(bucketName).object(fileName).build());
             return stream;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             log.info(e.getMessage());
             return null;
         }
@@ -271,7 +271,7 @@ public class MinioUploadUtil {
             minioClient.removeObject(
                     RemoveObjectArgs.builder().bucket(bucketName).object(name).build());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             isOK = false;
         }
         return isOK;
@@ -288,7 +288,7 @@ public class MinioUploadUtil {
         try {
             isExist = minioClient.bucketExists(getBucketExistsArgs(name));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return isExist;
     }
@@ -304,7 +304,7 @@ public class MinioUploadUtil {
             minioClient.bucketExists(getBucketExistsArgs(name));
             minioClient.makeBucket(getMakeBucketArgs(name));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -330,7 +330,7 @@ public class MinioUploadUtil {
             uploadFile(multipartFile, bucketName, objectName + ".zip");
             flag = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return flag;
     }
@@ -351,7 +351,7 @@ public class MinioUploadUtil {
                     .build());
             FileUtil.writeFile(stream, filePath, objectName);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             log.info(e.getMessage());
         }
     }
@@ -421,7 +421,7 @@ public class MinioUploadUtil {
                     .object(copyToObjectName)
                     .build());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -471,7 +471,7 @@ public class MinioUploadUtil {
                     .build());
             FileUtil.write(stream, filePath, objectName);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             log.info(e.getMessage());
         }
     }

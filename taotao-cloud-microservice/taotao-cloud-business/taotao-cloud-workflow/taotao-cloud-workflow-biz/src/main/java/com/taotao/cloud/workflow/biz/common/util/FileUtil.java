@@ -98,7 +98,7 @@ public class FileUtil {
                 boolean b = subfile.createNewFile();
                 return b;
             } catch (IOException e) {
-                e.printStackTrace();
+                LogUtils.error(e);
             }
         } else {
             return true;
@@ -260,7 +260,7 @@ public class FileUtil {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -286,7 +286,7 @@ public class FileUtil {
             raf.write(strcontent.getBytes());
             raf.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -305,7 +305,7 @@ public class FileUtil {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 
@@ -329,7 +329,7 @@ public class FileUtil {
                 sb.append("\n");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return sb.toString();
     }
@@ -636,7 +636,7 @@ public class FileUtil {
                     try {
                         zos.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LogUtils.error(e);
                     }
                 }
             }
@@ -811,7 +811,7 @@ public class FileUtil {
             os.close();
             fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         MultipartFile multipartFile = new CommonsMultipartFile(item);
         return multipartFile;

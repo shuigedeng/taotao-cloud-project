@@ -20,7 +20,7 @@ public class DownloadProcessor {
             response.getWriter().write(record.toString()); // 如果是要写入csv,需要重写toString,属性通过","分割
             response.getWriter().write("\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

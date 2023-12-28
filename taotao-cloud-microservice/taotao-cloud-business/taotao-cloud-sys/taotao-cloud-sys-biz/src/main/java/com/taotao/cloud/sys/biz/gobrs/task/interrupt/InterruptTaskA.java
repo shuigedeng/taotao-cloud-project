@@ -41,14 +41,14 @@ public class InterruptTaskA extends AsyncTask {
     public String task(Object o, TaskSupport support) {
 
         try {
-            System.out.println("InterruptTaskA Begin");
+            LogUtils.info("InterruptTaskA Begin");
             Thread.sleep(300);
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            System.out.println("InterruptTaskA Finish");
+            LogUtils.info("InterruptTaskA Finish");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return "result";
     }

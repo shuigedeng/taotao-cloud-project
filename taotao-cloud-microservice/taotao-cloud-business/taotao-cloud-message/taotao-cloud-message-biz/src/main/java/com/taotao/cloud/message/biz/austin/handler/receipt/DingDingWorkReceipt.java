@@ -59,7 +59,7 @@ public class DingDingWorkReceipt {
         //                req.setTaskId(456L);
         //                OapiMessageCorpconversationGetsendresultResponse rsp = client.execute(req,
         // accessToken);
-        //                System.out.println(rsp.getBody());
+        //                LogUtils.info(rsp.getBody());
         //            }
         //        } catch (Exception e) {
         //            log.error("DingDingWorkReceipt#pull");

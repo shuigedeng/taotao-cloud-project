@@ -150,7 +150,7 @@ package com.taotao.cloud.gateway.filter.gateway;
 //                                 GrpcSslContexts.forClient().trustManager(trustAllCerts[0])
 //                                         .build()).negotiationType(TLS).build();
 //             } catch (SSLException e) {
-//                 e.printStackTrace();
+//                 LogUtils.error(e);
 //             }
 //             throw new RuntimeException();
 //         }

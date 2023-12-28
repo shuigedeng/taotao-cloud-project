@@ -55,11 +55,11 @@ public class DbDM extends DbBase {
     //                    Integer sum = DbDM.getSum(dmConn, tm.getTable());
     //                    tm.setSum(sum);
     //                } catch (DataException e) {
-    //                    e.printStackTrace();
+    //                    LogUtils.error(e);
     //                }
     //            });
     //        } catch (Exception e) {
-    //            e.printStackTrace();
+    //            LogUtils.error(e);
     //        }
     //    }
     //

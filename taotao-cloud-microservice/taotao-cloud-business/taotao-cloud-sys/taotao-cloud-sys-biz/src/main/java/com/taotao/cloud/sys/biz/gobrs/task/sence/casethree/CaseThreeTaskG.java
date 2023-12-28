@@ -31,7 +31,7 @@ public class CaseThreeTaskG extends AsyncTask {
 
     @Override
     public Object task(Object o, TaskSupport support) {
-        System.out.println("G任务执行");
+        LogUtils.info("G任务执行");
         return "GResult";
     }
 }

@@ -38,9 +38,9 @@ public class MergePayTest {
                     null,
                     null,
                     key);
-            System.out.println(url);
+            LogUtils.info(url);
         } catch (PayException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
     }
 }

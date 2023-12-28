@@ -58,9 +58,9 @@ public class WxPayServiceImpl implements WxPayService {
             map.put("url", result);
             map.put("orderNo", order.getOrderNo());
         } catch (PayException e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
         }
         return map;
     }

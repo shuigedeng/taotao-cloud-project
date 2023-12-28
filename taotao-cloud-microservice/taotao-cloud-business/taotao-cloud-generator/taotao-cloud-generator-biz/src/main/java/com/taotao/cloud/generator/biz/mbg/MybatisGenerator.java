@@ -49,7 +49,7 @@ public class MybatisGenerator {
         myBatisGenerator.generate(null);
         // 输出警告信息
         for (String warning : warnings) {
-            System.out.println(warning);
+            LogUtils.info(warning);
         }
     }
 }

@@ -38,7 +38,7 @@ public class SmsNotifyPusher implements NotifyPusher {
 		// 短信文本去除 html 标签
 		String content = HtmlUtils.toText(notifyInfo.getContent());
 		// TODO 对接短信发送平台
-		System.out.println("短信推送");
+		LogUtils.info("短信推送");
 	}
 
 }

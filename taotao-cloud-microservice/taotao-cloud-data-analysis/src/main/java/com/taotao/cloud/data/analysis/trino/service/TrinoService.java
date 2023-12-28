@@ -24,7 +24,7 @@ public class TrinoService extends TrinoJdbcBaseDaoImpl {
 
     public void testUseJdbcTemplate() {
         getJdbcTemplate().query("select * from trino_user", rs -> {
-            System.out.println(rs);
+            LogUtils.info(rs);
         });
     }
 }

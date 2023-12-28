@@ -121,7 +121,7 @@ public class MyMasterSlaveAutoRoutingPlugin implements Interceptor {
                             druidDataSource.setDriverClassName(
                                     DbTypeUtil.getDriver(model.getDbType()).getDriver());
                         } catch (DataException e) {
-                            e.printStackTrace();
+                            LogUtils.error(e);
                         }
 
                         // 只需要将主库存起来

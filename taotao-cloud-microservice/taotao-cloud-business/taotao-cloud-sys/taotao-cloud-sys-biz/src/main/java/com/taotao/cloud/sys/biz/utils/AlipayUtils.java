@@ -42,7 +42,7 @@ public class AlipayUtils {
     public String getOrderCode() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int a = (int) (Math.random() * 9000.0D) + 1000;
-        System.out.println(a);
+        LogUtils.info(a);
         Date date = new Date();
         String str = sdf.format(date);
         String[] split = str.split("-");

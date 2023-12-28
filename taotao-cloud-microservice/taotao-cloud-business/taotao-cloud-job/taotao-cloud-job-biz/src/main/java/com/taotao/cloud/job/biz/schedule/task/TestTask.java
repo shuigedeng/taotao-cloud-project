@@ -71,6 +71,6 @@ public class TestTask {
     // @Scheduled(cron = "1 * * * * ?")
     @SchedulerLock(name = "synchronousSchedule")
     public void synchronousSchedule() {
-        System.out.println("Start run schedule to synchronous data:" + new Date());
+        LogUtils.info("Start run schedule to synchronous data:" + new Date());
     }
 }

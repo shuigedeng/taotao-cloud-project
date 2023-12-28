@@ -81,7 +81,7 @@ public class Card2Controller extends BaseController {
             long t2 = new Date().getTime();
             logger.info("===耗时" + (t2 - t1));
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.error(e);
             logger.error("答题卡识别异常！", e);
         }
     }

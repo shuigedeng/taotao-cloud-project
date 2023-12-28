@@ -19,7 +19,7 @@ public class Chater {
 			try {
 				sseEmitter.send(msgItem);
 			} catch (IOException e) {
-				e.printStackTrace();
+				LogUtils.error(e);
 			}
 		}
 	}

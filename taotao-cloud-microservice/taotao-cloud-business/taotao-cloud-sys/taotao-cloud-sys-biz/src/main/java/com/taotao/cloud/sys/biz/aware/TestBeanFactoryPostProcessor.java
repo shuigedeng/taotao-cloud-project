@@ -24,6 +24,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 public class TestBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("[BeanFactoryPostProcessor]");
+        LogUtils.info("[BeanFactoryPostProcessor]");
     }
 }

@@ -28,7 +28,7 @@ package com.taotao.cloud.sys.biz.pulsar;
 //	@Override
 //	public Message beforeSend(Producer producer, Message message) {
 //		super.beforeSend(producer, message);
-//		System.out.println("do something");
+//		LogUtils.info("do something");
 //		return message;
 //	}
 //

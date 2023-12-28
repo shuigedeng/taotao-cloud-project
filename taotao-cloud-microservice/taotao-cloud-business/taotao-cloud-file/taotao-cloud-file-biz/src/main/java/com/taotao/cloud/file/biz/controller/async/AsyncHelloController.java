@@ -45,7 +45,7 @@ public class AsyncHelloController {
 
 	@RequestMapping(value = "/email/deferredResultReq", method = GET)
 	public DeferredResult<String> deferredResultReq () {
-		System.out.println("外部线程：" + Thread.currentThread().getName());
+		LogUtils.info("外部线程：" + Thread.currentThread().getName());
 		//设置超时时间
 		DeferredResult<String> result = new DeferredResult<String>(60*1000L);
 
@@ -53,7 +53,7 @@ public class AsyncHelloController {
 		result.onTimeout(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("DeferredResult超时");
+				LogUtils.info("DeferredResult超时");
 				result.setResult("超时了!");
 			}
 		});
@@ -61,7 +61,7 @@ public class AsyncHelloController {
 			@Override
 			public void run() {
 				//完成后
-				System.out.println("调用完成");
+				LogUtils.info("调用完成");
 			}
 		});
 
@@ -69,7 +69,7 @@ public class AsyncHelloController {
 			@Override
 			public void run() {
 				//处理业务逻辑
-				System.out.println("内部线程：" + Thread.currentThread().getName());
+				LogUtils.info("内部线程：" + Thread.currentThread().getName());
 				//返回结果
 				result.setResult("DeferredResult!!");
 			}

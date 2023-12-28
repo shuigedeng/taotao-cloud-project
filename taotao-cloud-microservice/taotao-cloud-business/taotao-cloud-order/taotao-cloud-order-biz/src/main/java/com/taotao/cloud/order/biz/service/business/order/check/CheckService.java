@@ -68,7 +68,7 @@ public class CheckService {
         // 责任链：执行处理器链路
         Result executeChainResult = HandlerClient.executeChain(handler, param);
         if (!executeChainResult.isSuccess()) {
-            System.out.println("创建商品 失败...");
+            LogUtils.info("创建商品 失败...");
             return executeChainResult;
         }
 
@@ -122,7 +122,7 @@ public class CheckService {
     }
 
     private Result saveProduct(ProductVO param) {
-        System.out.println("保存商品 成功...");
+        LogUtils.info("保存商品 成功...");
         return Result.success(param);
     }
 }
