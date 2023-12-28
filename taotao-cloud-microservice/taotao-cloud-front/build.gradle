@@ -1,32 +1,34 @@
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-    }
-    implementation "org.springframework.boot:spring-boot-starter-undertow"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
-    }
-
-    //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
-    implementation "com.github.whvcse:easy-captcha:1.6.2"
-    implementation "jakarta.servlet:jakarta.servlet-api"
-
-    implementation "org.springframework.boot:spring-boot-autoconfigure"
-
-    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
-    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
-
-    implementation "org.dromara.hutool:hutool-all"
-    implementation "io.netty:netty-all"
-
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
-    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
-}
-
-mainClassName = "com.taotao.cloud.front.TaoTaoCloudPortalApplication"
-description = "前端PC中心"
-archivesBaseName = 'taotao-cloud-front'
+//
+//
+//dependencies {
+//    implementation("org.springframework.boot:spring-boot-starter-web") {
+//        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+//    }
+//    implementation "org.springframework.boot:spring-boot-starter-undertow"
+//    implementation "org.springframework.boot:spring-boot-starter-actuator"
+//    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+//    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+//        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
+//    }
+//
+//    //https://search.maven.org/artifact/com.github.whvcse/easy-captcha
+//    implementation "com.github.whvcse:easy-captcha:1.6.2"
+//    implementation "jakarta.servlet:jakarta.servlet-api"
+//
+//    implementation "org.springframework.boot:spring-boot-autoconfigure"
+//
+//    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+//    //implementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+//
+//    implementation "org.dromara.hutool:hutool-all"
+//    implementation "io.netty:netty-all"
+//
+//    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+//    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+//    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+//    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+//}
+//
+//mainClassName = "com.taotao.cloud.front.TaoTaoCloudPortalApplication"
+//description = "前端PC中心"
+//archivesBaseName = 'taotao-cloud-front'
