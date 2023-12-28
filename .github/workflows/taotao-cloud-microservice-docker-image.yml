@@ -53,12 +53,12 @@ jobs:
           java --version
           native-image --version
 
-#      - name: Cache Gradle Packages
-#        uses: actions/cache@v3
-#        with:
-#          path: ~/.gradle/caches
-#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-#          restore-keys: ${{ runner.os }}-gradle
+      - name: Cache Gradle Packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
 
       - name: Show Github
         run: echo "$GITHUB_CONTEXT"
@@ -101,7 +101,6 @@ jobs:
           gradle-version: 8.5
           arguments: clean bootJar
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
-
       - name: Publish Docker Image taotao-cloud-monitor
         uses: elgohr/Publish-Docker-Github-Action@v4
         env:
@@ -117,6 +116,21 @@ jobs:
           buildargs: DINGDING_SECRET_ARG,DINGDING_TOKEN_ID_ARG
           tags: "${{env.TAOTAO_CLOUD_VERSION}}"
           workdir: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
+      - name: Ssh To server To execute taotao-cloud-monitor script
+        #uses: fifsky/ssh-action@master
+        uses: appleboy/ssh-action@master
+        with:
+          #command: |
+          #  cd /develop/work/education-back-server
+          #  sh start.sh
+          host: ${{secrets.SERVER_HOST}}
+          username: ${{secrets.SERVER_USERNAME}}
+          port: ${{secrets.SERVER_PORT }}
+          #key: ${{secrets.SERVER_PRIVATE_KEY}}
+          password: ${{secrets.SERVER_PASSWORD}}
+          script:
+            sh /develop/work/taotao-cloud/taotao-cloud-monitor-start.sh
+            # sh start.sh
 
       - name: Gradle BootJar taotao-cloud-gateway
         uses: gradle/gradle-build-action@v2
