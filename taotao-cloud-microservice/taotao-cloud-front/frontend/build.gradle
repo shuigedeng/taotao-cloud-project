@@ -1,5 +1,11 @@
 plugins {
+    //https://github.com/node-gradle/gradle-node-plugin
+    //https://plugins.gradle.org/plugin/com.github.node-gradle.node
     id "com.github.node-gradle.node" version "7.0.1"
+
+    //https://github.com/siouan/frontend-gradle-plugin.git
+    //https://siouan.github.io/frontend-gradle-plugin/
+    //https://plugins.gradle.org/plugin/org.siouan.frontend-jdk17
     id "org.siouan.frontend-jdk17" version "8.0.0"
 }
 
@@ -14,30 +20,30 @@ frontend {
     verboseModeEnabled.set(true)
 }
 
-tasks.named<InstallFrontendTask>("installFrontend") {
-    var ciPlatformPresent = providers.environmentVariable("CI").isPresent()
-    var lockFilePath = "${projectDir}/pnpm-lock.yaml"
-    val retainedMetadataFileNames: Set<String>
-    if (ciPlatformPresent) {
-        retainedMetadataFileNames = setOf(lockFilePath)
-    } else {
-        // The naive configuration below allows to skip the task if the last successful execution did not change neither
-        // the package.json file, nor the pnpm-lock.yaml file, nor the node_modules directory. Any other scenario where
-        // for example the lock file is regenerated will lead to another execution before the task is "up-to-date"
-        // because the lock file is both an input and an output of the task.
-        retainedMetadataFileNames = mutableSetOf("${projectDir}/package.json")
-        if (Files.exists(Path(lockFilePath))) {
-            retainedMetadataFileNames.add(lockFilePath)
-        }
-        outputs.file(lockFilePath).withPropertyName("lockFile")
-    }
-    inputs.files(retainedMetadataFileNames).withPropertyName("metadataFiles")
-    outputs.dir("${projectDir}/node_modules").withPropertyName("nodeModulesDirectory")
-}
+//task installFrontend(type: InstallFrontendTask){
+//    var ciPlatformPresent = providers.environmentVariable("CI").isPresent()
+//    var lockFilePath = "${projectDir}/pnpm-lock.yaml"
+//    val retainedMetadataFileNames: Set<String>
+//    if (ciPlatformPresent) {
+//        retainedMetadataFileNames = setOf(lockFilePath)
+//    } else {
+//        // The naive configuration below allows to skip the task if the last successful execution did not change neither
+//        // the package.json file, nor the pnpm-lock.yaml file, nor the node_modules directory. Any other scenario where
+//        // for example the lock file is regenerated will lead to another execution before the task is "up-to-date"
+//        // because the lock file is both an input and an output of the task.
+//        retainedMetadataFileNames = mutableSetOf("${projectDir}/package.json")
+//        if (Files.exists(Path(lockFilePath))) {
+//            retainedMetadataFileNames.add(lockFilePath)
+//        }
+//        outputs.file(lockFilePath).withPropertyName("lockFile")
+//    }
+//    inputs.files(retainedMetadataFileNames).withPropertyName("metadataFiles")
+//    outputs.dir("${projectDir}/node_modules").withPropertyName("nodeModulesDirectory")
+//}
 
 
-//import org.siouan.frontendgradleplugin.infrastructure.gradle.ResolvePackageManagerTask
-//import org.siouan.frontendgradleplugin.infrastructure.gradle.RunPnpm
+import org.siouan.frontendgradleplugin.infrastructure.gradle.ResolvePackageManagerTask
+import org.siouan.frontendgradleplugin.infrastructure.gradle.RunPnpm
 //
 //plugins {
 //    id("org.siouan.frontend-jdk17")
@@ -60,3 +66,11 @@ tasks.named<InstallFrontendTask>("installFrontend") {
 //tasks.named<Task>("build") {
 //    dependsOn("pnpm8Version")
 //}
+
+task pnpm8Version(type: RunPnpm){
+    dependsOn("installPackageManager")
+    script.set("--version")
+    script.set("--registry https://registry.npmmirror.com")
+}
+
+build.dependsOn pnpm8Version
