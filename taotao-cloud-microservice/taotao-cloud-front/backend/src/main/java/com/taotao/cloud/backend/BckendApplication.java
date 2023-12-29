@@ -1,14 +1,12 @@
-package com.example.springboot;
-
-import java.util.Arrays;
+package com.taotao.cloud.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class BckendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(BckendApplication.class, args);
     }
 }
