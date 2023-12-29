@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.gobrs.task.interrupt;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
@@ -45,7 +45,7 @@ public class InterruptTaskB extends AsyncTask<Object, Object> {
             for (int i1 = 0; i1 < i; i1++) {
                 i1 += i1;
             }
-            LogUtils.info(1 / 0);
+            LogUtils.info("",1 / 0);
             LogUtils.info("InterruptTaskB Finish");
 
         } catch (InterruptedException e) {

@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.test;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
