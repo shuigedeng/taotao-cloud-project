@@ -39,7 +39,7 @@ public class CaseRetryTaskB extends AsyncTask {
     @Override
     public Object task(Object o, TaskSupport support) {
         LogUtils.info("CaseRetryTaskB Begin");
-        LogUtils.info(1 / 0);
+        LogUtils.info("",1 / 0);
         LogUtils.info("CaseRetryTaskB End");
         return "AResult";
     }
