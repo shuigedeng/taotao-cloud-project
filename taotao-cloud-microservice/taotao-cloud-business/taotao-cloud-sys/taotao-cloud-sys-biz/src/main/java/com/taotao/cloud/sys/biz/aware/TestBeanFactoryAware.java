@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.sys.biz.aware;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;

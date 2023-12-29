@@ -21,7 +21,7 @@ import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 /**
  * The type A service.
  *

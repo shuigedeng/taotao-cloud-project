@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.aware;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.aware.TestFactoryBean.TestFactoryInnerBean;
 import org.springframework.beans.factory.FactoryBean;
 

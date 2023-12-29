@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.gobrs.service;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.gobrs.async.core.GobrsAsync;
 import com.gobrs.async.core.common.domain.AsyncResult;
 import com.gobrs.async.core.engine.RuleThermalLoad;
@@ -61,7 +61,7 @@ public class GobrsService {
         stopWatch.start();
         AsyncResult resp = gobrsAsync.go("general", () -> params);
         stopWatch.stop();
-        LogUtils.info(stopWatch.getTotalTimeMillis());
+        LogUtils.info("millis: {}",stopWatch.getTotalTimeMillis());
         return resp;
     }
 

@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 /**
  * UserServiceImpl
  *
@@ -214,7 +214,7 @@ public class UserServiceImpl extends BaseSuperServiceImpl< User, Long,IUserMappe
 
 	private String phoneKeywords(String phone) {
 		String keywords = this.keywords(phone, 4);
-		LogUtils.info(keywords.length());
+		LogUtils.info("",keywords.length());
 		return keywords;
 	}
 	//分词组合加密

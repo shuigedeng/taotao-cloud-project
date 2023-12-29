@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.utils;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -42,7 +42,6 @@ public class AlipayUtils {
     public String getOrderCode() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int a = (int) (Math.random() * 9000.0D) + 1000;
-        LogUtils.info(a);
         Date date = new Date();
         String str = sdf.format(date);
         String[] split = str.split("-");

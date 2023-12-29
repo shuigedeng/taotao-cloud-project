@@ -259,7 +259,7 @@ public class DictServiceImpl extends BaseSuperServiceImpl< Dict, Long,IDictMappe
 		}
 		List<Dict> dicts =
 			cr().jpaQueryFactory().selectFrom(DICT).where(builder).fetch();
-		LogUtils.info(dicts);
+		LogUtils.info("dicts: {}",dicts);
 	}
 
 	public PagedList<Dict> testBlazeQuery(@NotNull Long deptId, Dict params, @NotNull Pageable page) {

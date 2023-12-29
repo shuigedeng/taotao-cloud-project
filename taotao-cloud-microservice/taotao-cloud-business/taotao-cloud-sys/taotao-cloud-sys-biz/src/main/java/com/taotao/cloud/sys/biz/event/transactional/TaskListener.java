@@ -8,7 +8,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.Objects;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 /**
  * {@snippet:
  *        @Autowired

@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.test;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 
 //@Component

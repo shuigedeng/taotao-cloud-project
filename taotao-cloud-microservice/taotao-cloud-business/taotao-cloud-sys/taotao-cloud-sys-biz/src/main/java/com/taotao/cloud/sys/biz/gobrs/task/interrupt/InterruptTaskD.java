@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.gobrs.task.interrupt;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
