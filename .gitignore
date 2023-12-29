@@ -41,10 +41,21 @@ mvnw.cmd
 help.md
 
 /node_modules/
-/dist/
+/pnpm-lock.yaml/
+/*/pnpm-lock.yaml/
+**/pnpm-lock.yaml
+/node/
+/*/node/
+**/node
 /build/
 /*/build/
 **/build
+/dist/
+/*/dist/
+**/dist
+/.frontend-gradle-plugin/
+/*/.frontend-gradle-plugin/
+**/.frontend-gradle-plugin
 **/.idea
 **/out
 
