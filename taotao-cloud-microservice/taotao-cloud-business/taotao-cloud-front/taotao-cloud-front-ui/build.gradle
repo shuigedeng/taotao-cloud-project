@@ -20,52 +20,8 @@ frontend {
     verboseModeEnabled.set(true)
 }
 
-//task installFrontend(type: InstallFrontendTask){
-//    var ciPlatformPresent = providers.environmentVariable("CI").isPresent()
-//    var lockFilePath = "${projectDir}/pnpm-lock.yaml"
-//    val retainedMetadataFileNames: Set<String>
-//    if (ciPlatformPresent) {
-//        retainedMetadataFileNames = setOf(lockFilePath)
-//    } else {
-//        // The naive configuration below allows to skip the task if the last successful execution did not change neither
-//        // the package.json file, nor the pnpm-lock.yaml file, nor the node_modules directory. Any other scenario where
-//        // for example the lock file is regenerated will lead to another execution before the task is "up-to-date"
-//        // because the lock file is both an input and an output of the task.
-//        retainedMetadataFileNames = mutableSetOf("${projectDir}/package.json")
-//        if (Files.exists(Path(lockFilePath))) {
-//            retainedMetadataFileNames.add(lockFilePath)
-//        }
-//        outputs.file(lockFilePath).withPropertyName("lockFile")
-//    }
-//    inputs.files(retainedMetadataFileNames).withPropertyName("metadataFiles")
-//    outputs.dir("${projectDir}/node_modules").withPropertyName("nodeModulesDirectory")
-//}
-
-
 import org.siouan.frontendgradleplugin.infrastructure.gradle.ResolvePackageManagerTask
 import org.siouan.frontendgradleplugin.infrastructure.gradle.RunPnpm
-//
-//plugins {
-//    id("org.siouan.frontend-jdk17")
-//}
-//
-//frontend {
-//    nodeDistributionProvided.set(true)
-//    nodeInstallDirectory.set(file(rootProject.ext.get("nodeInstallDirectory")!!))
-//}
-//
-//tasks.named<ResolvePackageManagerTask>("resolvePackageManager") {
-//    dependsOn(":node-subproject:installNode")
-//}
-//
-//tasks.register<RunPnpm>("pnpm8Version") {
-//    dependsOn("installPackageManager")
-//    script.set("--version")
-//}
-//
-//tasks.named<Task>("build") {
-//    dependsOn("pnpm8Version")
-//}
 
 task pnpm8Version(type: RunPnpm){
     dependsOn("installPackageManager")
