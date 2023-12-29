@@ -12,7 +12,7 @@ dependencies {
 		exclude group: "org.yaml", module: "snakeyaml"
 	}
 	//	api "io.github.shuigedeng:taotao-cloud-starter-dingtalk")
-//	api "io.github.shuigedeng:taotao-cloud-starter-disruptor")
+//	api "io.github.shuigedeng:taotao-cloud-starter-eventbus")
 	implementation "io.github.shuigedeng:taotao-cloud-starter-rxjava"
 	implementation "io.github.shuigedeng:taotao-cloud-starter-oss-minio"
 	implementation "io.github.shuigedeng:taotao-cloud-starter-websocket-netty"
