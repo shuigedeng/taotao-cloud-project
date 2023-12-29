@@ -113,6 +113,7 @@ def excludedName(file){
             && file.name != "config"
             && file.name != "public"
             && file.name != "node"
+            && file.name != "node_modules"
             && file.name != ".frontend-gradle-plugin"
 }
 
