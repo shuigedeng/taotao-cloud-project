@@ -27,20 +27,21 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.backend.BckendApplication"
+mainClassName = "com.taotao.cloud.front.TaoTaoCloudPortalApplication"
 description = "前端PC中心"
-archivesBaseName = 'taotao-cloud-backend'
+archivesBaseName = 'taotao-cloud-front'
+
 
 task processFrontendResources(type: Copy) {
     // Directory containing the artifacts produced by the frontend project
-    var frontendProjectBuildDir = project(":taotao-cloud-microservice:taotao-cloud-front:frontend").getProjectDir()
+    var frontendProjectBuildDir = project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-front:taotao-cloud-front-ui").getProjectDir()
     println(frontendProjectBuildDir)
     var frontendBuildDir = file("${frontendProjectBuildDir}/dist")
     var frontendResourcesDir = file("${buildDir}/resources/main/static")
 
     //group = "Frontend"
     //description = "Process frontend resources"
-    dependsOn(":taotao-cloud-microservice:taotao-cloud-front:frontend:assembleFrontend")
+    dependsOn(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-front:taotao-cloud-front-ui:assembleFrontend")
 
     from(frontendBuildDir)
     into(frontendResourcesDir)
