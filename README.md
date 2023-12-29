@@ -316,7 +316,7 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-cloud-starter-crypto'
 +--- Project ':taotao-cloud-starter-data'
 +--- Project ':taotao-cloud-starter-dingtalk'
-+--- Project ':taotao-cloud-starter-disruptor'
++--- Project ':taotao-cloud-starter-eventbus'
 +--- Project ':taotao-cloud-starter-dubbo'
 +--- Project ':taotao-cloud-starter-elk'
 +--- Project ':taotao-cloud-starter-encrypt'
