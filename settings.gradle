@@ -104,19 +104,31 @@ for (project in twoLayerProjects) {
     }
 }
 
+def excludedName(file){
+    return file.name != "build"
+            && file.name != "src"
+            && file.name != "out"
+            && file.name != "bin"
+            && file.name != "arthas-output"
+            && file.name != "config"
+            && file.name != "public"
+            && file.name != "node"
+            && file.name != ".frontend-gradle-plugin"
+}
+
 def threeLayerProjects = ['microservice', 'warehouse', 'custom']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
-        if (directory.name != "build" && directory.name != "out" && directory.name != "src" && directory.name != "bin" && directory.name != "arthas-output") {
+        if (excludedName(directory)) {
             include "${dir}:${directory.name}"
 
             directory.eachDir { it ->
-                if (it.name != "build" && it.name != "src" && it.name != "out" && it.name != "bin" && it.name != "arthas-output") {
+                if (excludedName(it)) {
                     include "${dir}:${directory.name}:${it.name}"
 
                     it.eachDir { four ->
-                        if (four.name != "build" && four.name != "src" && four.name != "out" && four.name != "bin" && four.name != "arthas-output") {
+                        if (excludedName(four)) {
                             include "${dir}:${directory.name}:${it.name}:${four.name}"
                         }
                     }
