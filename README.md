@@ -4,24 +4,24 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/spring-6.1.1-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-3.2.0-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring%20cloud-2022.0.4-yellowgree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.2-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.2.1-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud-2023.0.0-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-1.12.4--2022.0.4-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.101.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.2.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.104.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.2.01-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.7.1-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/mybatis_plus-3.5.4.1-yellow" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/knife4j-4.3.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/mybatis_plus-3.5.5-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/knife4j-4.4.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.23.2-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M8-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.25.2-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M9-green" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, graalvm21, 采用最新的spring 6.1.1、SpringBoot 3.2.1、SpringCloud 2022.0.4、SpringSecurity 6.2.0、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, 支持graalvm21, 采用最新的spring 6.1.2、SpringBoot 3.2.1、SpringCloud 2023.0.0、SpringSecurity 6.2.1、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
@@ -116,36 +116,36 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.1.1           
+ Spring               | 6.1.2           
  Spring Boot          | 3.2.1           
- Spring Cloud         | 2022.0.4        
+ Spring Cloud         | 2023.0.0        
  Spring Cloud Alibaba | 2022.0.0.0 
  Spring Cloud Tencent | 1.12.4-2022.0.4 
- Spring Cloud huawei  | 1.11.3-2022.0.x
+ Spring Cloud huawei  | 1.11.5-2022.0.x
  Seata                | 2.0.0
  Sentinel             | 1.8.6           
- Spring-kafka         | 3.1.0         
+ Spring-kafka         | 3.1.1         
  Roketmq              | 5.0.0           
- Spring Security      | 6.2.0           
- Mybatis Plus         | 3.5.4.1         
- Hutool               | 6.0.0-M8         
+ Spring Security      | 6.2.1           
+ Mybatis Plus         | 3.5.5         
+ Hutool               | 6.0.0-M9         
  Mysql                | 8.2.0          
  Querydsl             | 5.0.0           
  Swagger              | 3.0.0           
- Knife4j              | 4.3.0           
- Redisson             | 3.23.5         
+ Knife4j              | 4.4.0           
+ Redisson             | 3.25.2         
  Lettuce              | 6.0.6.RELEASE   
  Elasticsearch        | 8.7.1           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
- Guava                | 32.1.3-jre        
- Grpc                 | 1.59.0          
- Arthas               | 3.6.9           
- Dynamic-tp           | 1.1.5           
- Elasticjob           | 3.0.3           
+ Guava                | 33.0.0-jre       
+ Grpc                 | 1.60.1          
+ Arthas               | 3.7.1           
+ Dynamic-tp           | 1.1.6.1-3.x           
+ Elasticjob           | 3.0.4           
  Powerjob             | 4.3.6           
  Forest               | 1.5.32          
- Netty                | 4.1.101.Final
+ Netty                | 4.1.104.Final
 
 ## 6. 演示地址
 
@@ -176,23 +176,32 @@ Maven:
 
 ## 7. 功能特点
 
-* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求**
-* **主体框架**：采用最新的Spring Boot 3.2.1、Spring Cloud 2022.0.4、Spring Cloud Alibaba 2022.0.0.0 版本进行设计
-* **统一注册**：支持Nacos作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
-* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等
-* **业务监控**：利用Spring Boot admin 监控各个独立服务的运行状态
-* **日志分析**：集成kafka、elk、prometheus、loki等实时监控日志(请求日志、系统日志、数据变更日志、用户日志)
-* **分布式事务**：集成spring cloud alibaba seata分布式事务处理
-* **业务熔断**：采用spring cloud alibaba Sentinel实现业务熔断处理，避免服务之间出现雪崩
-* **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成skywalking、sleuth、zipkin链路监控
-* **分布式任务**：集成xxl-job、powerjob、quartz等分布式定时任务处理
-* **内部调用**：集成了Feign和Dubbo以及grpc等模式支持内部调用，并且可以实现无缝切换
+* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
+* **主体框架**：采用最新的`Spring Boot 3.2.1`、`Spring Cloud 2023.0.0`、`Spring Cloud Alibaba 2022.0.0.0` 版本进行设计
+* **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
+* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、支持支付宝、钉钉、码云、GitHub、GitLab、QQ、微信、企业微信、微博等第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等 优化Spring Security内部实现 ,实现API调用的统一出口和权限认证授权中心
+* **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
+* **日志分析**：集成`kafka、elk、prometheus、loki`等实时监控日志(请求日志、系统日志、数据变更日志、用户日志) 提供完善的企业微服务流量监控，日志监控能力
+* **分布式事务**：集成`spring cloud alibaba seata`分布式事务处理
+* **mvc封装**：通用的 Controller、Service、Mapper、全局异常、全局序列化、反序列化规则，请求头传递、调用日志、灰度、统一配置编码解码规则等，AOP方式优雅记录操作日志、优雅缓存解决方案、防缓存击穿
+* **业务熔断**：采用`spring cloud alibaba Sentinel`实现业务熔断处理，避免服务之间出现雪崩
+* **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成`skywalking、sleuth、zipkin`链路监控
+* **分布式任务**：集成`xxl-job、powerjob、quartz`等分布式定时任务处理
+* **内部调用**：集成了`Feign`和`Dubbo`以及`grpc`等模式支持内部调用，并且可以实现无缝切换
 * **身份注入**：通过注解的方式，实现用户登录信息的快速注入
-* **在线文档**：通过接入Knife4j，实现在线API文档的查看与调试
-* **消息中心**：集成消息中间件RocketMQ、kafka，对业务进行异步处理
-* **业务分离**：采用前后端分离的框架设计，前端采用react antd、taro脚手架快速开放
-* **多租户功能**：集成Mybatis Plus、jpa,实现saas多租户功能
-* **容器化支持**: 提供对常见容器化支持 Docker、docker-compose、Kubernetes、Rancher2支持
+* **网关支持**：支持流量控制、拉黑名单、过滤请求、灰度发布方案、防重复提交、命中缓存降级访问、网关统一鉴权等
+* **在线文档**：通过接入`Knife4j`，实现在线API文档的查看与调试，对swagger、knife4j二次封装，实现配置即文档
+* **业务监控**：利用`Spring Boot Admin`来监控各个独立Service的运行状态。
+* **代码生成**：基于`Mybatis-plus-generator`自动生成代码，提升开发效率，使用代码生成器可以一键生成 Java、Vue 前后端代码、SQL 脚本、接口文档，支持单表、树表、主子表；
+* **消息中心**：集成消息中间件`RocketMQ、kafka`，对业务进行异步处理
+* **实时通信**：实时通信，采用 Spring WebSocket 实现，内置 Token 身份校验，支持 WebSocket 集群
+* **业务分离**：采用前后端分离的框架设计，前端采用`react antd、taro`脚手架快速开放
+* **多租户功能**：集成`Mybatis Plus`、`jpa`,实现saas多租户功能 可自定义每个租户的权限，提供透明化的多租户底层封装
+* **前端支持**：采用 `taro` 方案，一份代码多终端适配，同时支持 APP、小程序、H5！
+* **前后端流水线支持**：包含基于github、 GitLab Runner 的 kubernetes（k8s）、Docker、Shell 等执行器执行 CI/CD 流水线进行自动构建、制作 Docker 镜像、发布
+* **工作流功能**：工作流使用 `Flowable`，支持动态表单、在线设计流程、会签 / 或签、多种任务分配方式
+* **短信和oss支持**：集成阿里云、腾讯云等短信渠道，集成 `MinIO`、阿里云、腾讯云、七牛云等云存储服务
+* **容器化支持**: 提供对常见容器化支持 `Docker、docker-compose、Kubernetes、Rancher2`支持 完善的微服务部署方案
 * **webflux支持**: lambda、stream api、webflux 的生产实践
 * **开放平台**: 提供应用管理，方便第三方系统接入，**支持多租户(应用隔离)**
 * **组件化**: 引入组件化的思想实现高内聚低耦合并且高度可配置化
@@ -206,8 +215,10 @@ Maven:
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
 │  ├─taotao-cloud-custom -- 自定义模块
+│  │  ├─taotao-cloud-sign-partterns  -- 设计模式
 │  │  ├─taotao-cloud-distributed-tx  -- 手写分布式事务
 │  │  ├─taotao-cloud-rpc  -- 手写rpc框架
+│  │  ├─taotao-cloud-raft  -- raft实现
 │  │  ├─taotao-cloud-storm  -- 手写storm
 │  ├─taotao-cloud-demo -- demo模块
 │  ├─taotao-cloud-go -- go模块
@@ -224,7 +235,6 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-xxljob  -- xxl-job模块
 │  ├─taotao-cloud-netty -- netty模块
-│  ├─taotao-cloud-node -- node模块
 │  ├─taotao-cloud-plugin -- 插件模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-scala -- scala模块

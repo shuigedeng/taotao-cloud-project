@@ -13,10 +13,11 @@ jobs:
     if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-qodana') }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      #https://github.com/marketplace/actions/qodana-scan
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2023.2
         with:
@@ -28,6 +29,7 @@ jobs:
         with:
           sarif_file: ${{ github.workspace }}/qodana/results/qodana.sarif.json
 
+      #https://github.com/marketplace/actions/github-pages-action
       - name: Deploy To GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -35,6 +37,7 @@ jobs:
           publish_dir: ${{ github.workspace }}/qodana/results/report
           destination_dir: ./
 
+      #https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy To Server
         uses: easingthemes/ssh-deploy@main
         env:
