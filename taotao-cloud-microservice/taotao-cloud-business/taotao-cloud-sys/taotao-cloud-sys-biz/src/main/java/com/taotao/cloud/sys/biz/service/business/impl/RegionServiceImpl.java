@@ -28,7 +28,6 @@ import com.taotao.cloud.common.utils.common.OrikaUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.secure.SignUtils;
 import com.taotao.cloud.core.configuration.OkhttpAutoConfiguration.OkHttpService;
-import com.taotao.cloud.disruptor.util.StringUtils;
 import com.taotao.cloud.sys.api.model.vo.region.RegionParentVO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.api.model.vo.region.RegionVO;
@@ -257,11 +256,11 @@ public class RegionServiceImpl
 			String signUrl = SignUtils.sign(AMAP_SECURITY_KEY, syncUrl);
 			if (Objects.nonNull(okHttpService)) {
 				jsonString = okHttpService
-					.url(StringUtils.isBlank(url) ? signUrl : url)
+					.url(StrUtil.isBlank(url) ? signUrl : url)
 					.get()
 					.sync();
 			} else {
-				jsonString = HttpRequest.get(StringUtils.isBlank(url) ? signUrl : url)
+				jsonString = HttpRequest.get(StrUtil.isBlank(url) ? signUrl : url)
 					.useConsoleLog()
 					.executeAsync()
 					.join()

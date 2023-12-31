@@ -18,7 +18,6 @@ package com.taotao.cloud.sys.biz.aop.execl;
 
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.disruptor.util.StringUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -35,6 +34,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.core.thread.ThreadFactoryBuilder;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +76,7 @@ public class ExcelUploadAspect {
             try {
                 String errorMessage = (String) pjp.proceed();
                 // 没有异常直接成功
-                if (StringUtils.isEmpty(errorMessage)) {
+                if (StrUtil.isEmpty(errorMessage)) {
                     // 成功，写入数据库，具体不展开了
                     // writeSuccessToDB(batchNo);
                 } else {

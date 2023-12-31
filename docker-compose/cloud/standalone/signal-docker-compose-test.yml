@@ -561,7 +561,7 @@ services:
 
 
   gateway:
-    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.01
+    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.02
     container_name: taotao-cloud-gateway
     restart: always
     environment:
