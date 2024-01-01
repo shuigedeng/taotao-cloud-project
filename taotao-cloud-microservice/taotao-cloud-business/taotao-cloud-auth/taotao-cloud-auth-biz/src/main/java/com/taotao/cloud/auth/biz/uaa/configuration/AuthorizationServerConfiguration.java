@@ -158,7 +158,7 @@ public class AuthorizationServerConfiguration {
 		// });
 
 		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
-		httpSecurity.apply(authorizationServerConfigurer);
+		httpSecurity.with(authorizationServerConfigurer,Customizer.withDefaults() );
 
 		OAuth2AuthenticationFailureResponseHandler errorResponseHandler =
 			new OAuth2AuthenticationFailureResponseHandler();

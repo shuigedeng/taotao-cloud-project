@@ -25,7 +25,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 @Validated
 @Tag(name = "二维码扫码登录API", description = "二维码扫码登录API")
 @RestController

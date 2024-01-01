@@ -1,22 +1,53 @@
-Please do not create a Pull Request without creating an issue first.
+### 一、内容说明（相关的Issue）
 
-## What is the purpose of the change
 
-XXXXX
 
-## Brief changelog
+### 二、建议测试周期和提测地址
+建议测试完成时间：xxxx.xx.xx  
+投产上线时间：xxxx.xx.xx  
+提测地址：CI环境/压测环境  
+测试账号：
 
-XX
+### 三、变更内容
+* 3.1 关联PR列表
 
-## Verifying this change
+* 3.2 数据库和部署说明
+    1. 常规更新
+    2. 重启unicorn
+    3. 重启sidekiq
+    4. 迁移任务：是否有迁移任务，没有写 "无"
+    5. rake脚本：`bundle exec xxx RAILS_ENV = production`；没有写 "无"
 
-XXXX
+* 3.4 其他技术优化内容（做了什么，变更了什么）
+    - 重构了 xxxx 代码
+    - xxxx 算法优化
 
-Follow this checklist to help us incorporate your contribution quickly and easily:
 
-* [ ] Make sure there is a Github issue filed for the change (usually before you start working on it). Trivial changes like typos do not require a Github issue. Your pull request should address just this issue, without pulling in other changes - one PR resolves one issue.
-* [ ] Format the pull request title like `[ISSUE #123] Fix UnknownException when host config not exist`. Each commit in the pull request should have a meaningful subject line and body.
-* [ ] Write a pull request description that is detailed enough to understand what the pull request does, how, and why.
-* [ ] Write necessary unit-test to verify your logic correction, more mock a little better when cross module dependency exist. If the new feature or significant change is committed, please remember to add integration-test in [test module](https://github.com/alibaba/nacos/tree/master/test).
-* [ ] Run `mvn -B clean package apache-rat:check findbugs:findbugs -Dmaven.test.skip=true` to make sure basic checks pass. Run `mvn clean install -DskipITs` to make sure unit-test pass. Run `mvn clean test-compile failsafe:integration-test`  to make sure integration-test pass.
+* 3.5 废弃通知（什么字段、方法弃用？）
+
+
+
+* 3.6  后向不兼容变更（是否有无法向后兼容的变更？）
+
+
+
+### 四、研发自测点（自测哪些？冒烟用例全部自测？）
+自测测试结论：
+
+
+### 五、测试关注点（需要提醒QA重点关注的、可能会忽略的地方）
+检查点：
+
+| 需求名称 | 是否影响xx公共模块 | 是否需要xx功能 | 需求升级是否依赖其他子产品 |
+|------|------------|----------|---------------|
+| xxx  | 否          | 需要       | 不需要           |
+|      |            |          |               |
+
+接口测试：
+
+性能测试：
+
+并发测试：
+
+其他：
 

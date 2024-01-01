@@ -1,0 +1,50 @@
+name: Bug 反馈
+description: 当你中发现了一个 Bug，导致应用崩溃或抛出异常，或者有一个组件存在问题，或者某些地方看起来不对劲。
+title: "[Bug]: "
+labels: ["bug"]
+body:
+- type: markdown
+  attributes:
+  value: |
+  感谢对项目的支持与关注。在提出问题之前，请确保您已查看相关开发或使用文档：
+  - https://blog.taotaocloud.top/
+- type: checkboxes
+  attributes:
+  label: 这个问题是否已经存在？
+  options:
+  - label: 我已经搜索过现有的问题 (https://github.com/shuigedeng/taotao-cloud-project/issues)
+  required: true
+- type: textarea
+  attributes:
+  label: 如何复现
+  description: 请详细告诉我们如何复现你遇到的问题，如涉及代码，可提供一个最小代码示例，并使用反引号```附上它
+  placeholder: |
+  1. ...
+  2. ...
+  3. ...
+  validations:
+  required: true
+- type: textarea
+  attributes:
+  label: 预期结果
+  description: 请告诉我们你预期会发生什么。
+  validations:
+  required: true
+- type: textarea
+  attributes:
+  label: 实际结果
+  description: 请告诉我们实际发生了什么。
+  validations:
+  required: true
+- type: textarea
+  attributes:
+  label: 截图或视频
+  description: 如果可以的话，上传任何关于 bug 的截图。
+  value: |
+  [在这里上传图片]
+- type: textarea
+  attributes:
+  label: 代码版本
+  description: 请准确说明你当前使用的代码版本，具体版本信息参见pom.xml。
+  validations:
+  required: true

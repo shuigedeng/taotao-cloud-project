@@ -1,28 +1,43 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
----
-
-<!-- Here is for bug reports and feature requests ONLY! 
-
-If you're looking for help, please check our mail list、WeChat group and the Gitter room.
-
-Please try to use English to describe your issue, or at least provide a snippet of English translation.
-我们鼓励使用英文，如果不能直接使用，可以使用翻译软件，您仍旧可以保留中文原文。
--->
-
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
-
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+name: 功能建议
+description: 对本项目提出一个功能建议
+title: "[功能建议]: "
+labels: ["enhancement"]
+body:
+- type: markdown
+  attributes:
+  value: |
+  感谢提出功能建议，我们将仔细考虑！
+- type: textarea
+  id: related-problem
+  attributes:
+  label: 你的功能建议是否和某个问题相关？
+  description: 清晰并简洁地描述问题是什么，例如，当我...时，我总是感到困扰。
+  validations:
+  required: false
+- type: textarea
+  id: desired-solution
+  attributes:
+  label: 你希望看到什么解决方案？
+  description: 清晰并简洁地描述你希望发生的事情。
+  validations:
+  required: true
+- type: textarea
+  id: alternatives
+  attributes:
+  label: 你考虑过哪些替代方案？
+  description: 清晰并简洁地描述你考虑过的任何替代解决方案或功能。
+  validations:
+  required: false
+- type: textarea
+  id: additional-context
+  attributes:
+  label: 你有其他上下文或截图吗？
+  description: 在此处添加有关功能请求的任何其他上下文或截图。
+  validations:
+  required: false
+- type: checkboxes
+  attributes:
+  label: 意向参与贡献
+  options:
+  - label: 我有意向参与具体功能的开发实现并将代码贡献回到上游社区
+  required: false

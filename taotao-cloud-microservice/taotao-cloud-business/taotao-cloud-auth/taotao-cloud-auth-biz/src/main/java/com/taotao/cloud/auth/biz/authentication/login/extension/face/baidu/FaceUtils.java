@@ -32,7 +32,7 @@ import java.util.HashMap;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 @Component
 public class FaceUtils {
 
@@ -137,8 +137,8 @@ public class FaceUtils {
         HashMap<String, Object> options = new HashMap<String, Object>();
         JSONObject res = client.search(imgBash64, "BASE64", "user_01", options);
         LogUtils.info(res.toString(2));
-        LogUtils.info(res.getJSONObject("result"));
-        LogUtils.info(res.getJSONObject("result").getJSONArray("user_list"));
+        LogUtils.info("result: {}",res.getJSONObject("result"));
+        LogUtils.info("user_list: {}",res.getJSONObject("result").getJSONArray("user_list"));
         JSONObject user = (JSONObject)
                 res.getJSONObject("result").getJSONArray("user_list").get(0);
 

@@ -41,7 +41,7 @@ dependencies {
 //    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
 //    implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
     implementation "com.xuxueli:xxl-job-core:2.4.0"
-    implementation 'de.siegmar:logback-gelf:5.0.0'
+    implementation 'de.siegmar:logback-gelf:5.0.1'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'cn.monitor4all:log-record-starter:1.5.1'

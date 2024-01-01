@@ -26,7 +26,7 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.util.Map;
 import java.util.Objects;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 //@Component
 @Slf4j
 public class ResponseEncryptFilter implements GlobalFilter, Ordered {

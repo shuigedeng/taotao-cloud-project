@@ -26,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 @Validated
 @Tag(name = "百度人脸识别API", description = "百度人脸识别API")
 @RestController

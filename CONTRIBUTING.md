@@ -1,124 +1,25 @@
-# Contributing to taotao-cloud
+## 代码贡献
+欢迎各路英雄好汉参与taotao-cloud-project代码贡献，期待您的加入！Fork本仓库 新建 feat_xxx_环境_时间（如 feat_dev_20230116） 分支提交代码，新建Pull Request！我觉得没问题就会合并到主干分支，你也就成为正式贡献者啦！
 
-Welcome to taotao-cloud! This document is a guideline about how to contribute to taotao-cloud.
+## RESTFul代码风格
+- url路径名词均为复数
+- 响应结果必须使用JSON
+- url结尾不应该包含斜杠'/'
+- API必须有版本的概念，v1，v2，v3
+- url中大小写不敏感，不要出现大写字母
+- 使用-而不是使用_做URL路径中字符串连接（脊柱命名法）
+- 使用Token令牌来做用户身份的校验与权限分级，而不是Cookie
+- 使用动词表示增删改查， GET查询，POST新增，PUT更新，DELETE删除
+- HTTP状态码，在REST中都有特定的意义：200，201，202，204，400，401，403，500。比如401表示用户身份认证失败，403表示没有操作资源的权限
 
-If you find something incorrect or missing, please leave comments / suggestions.
-
-## Before you get started
-
-### Code of Conduct
-
-Please make sure to read and observe our [Code of Conduct](./CODE_OF_CONDUCT.md).
-
-## Contributing
-
-taotao-cloud welcome new participants of any role, including user, contributor, committer and PMC.
-
-![](http://acm-public.oss-cn-hangzhou.aliyuncs.com/contributor_definition.png)
-
-
-We encourage newcomers actively joining in taotao-cloud projects and involving from user roles to committer roles, and even PMC roles. In order to accomplish this, new comers needs to actively contribute in taotao-cloud project. The following paragraph introduce how to contribute in taotao-cloud way.
-
-#### Open / pickup an issue for preparation
-
-If you find a typo in a document, find a bug in code or want new features, or want to give suggestions, you can [open an issue on GitHub](https://github.com/alibaba/taotao-cloud/issues/new) to report it.
-
-If you just want to contribute directly you can choose the issue below.
-
--   [Contribution Welcome](https://github.com/alibaba/taotao-cloud/labels/contribution%20welcome): Heavily needed issue, but currently short of hand.
-    
--   [good first issue](https://github.com/alibaba/taotao-cloud/labels/good%20first%20issue): Good for newcomers, newcomers can pick up one for warm-up.
-    
-
-We strongly value documentation and integration with other projects such as Spring Cloud, Kubernetes, Dubbo, etc. We are very glad to work on any issue for these aspects.
-
-Please note that any PR must be associated with a valid issue. Otherwise, the PR will be rejected.
-
-#### Begin your contribution
-
-Now if you want to contribute, please create a new pull request.
-
-We use the `develop` branch as the development branch, which indicates that this is an unstable branch.
-
-Furthermore, our branching model complies with [https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/). We strongly suggest new comers walk through the above article before creating PR.
-
-Now, if you are ready to create PR, here is the workflow for contributors:
-
-1.  Fork to your own
-    
-2.  Clone fork to a local repository
-    
-3.  Create a new branch and work on it
-    
-4.  Keep your branch in sync
-    
-5.  Commit your changes (make sure your commit message is concise)
-    
-6.  Push your commits to your forked repository
-    
-7.  Create a pull request to **develop** branch.
-    
-
-When creating pull request:
-
-1.  Please follow [the pull request template](./.github/PULL_REQUEST_TEMPLATE.md).
-    
-2.  Please create the request to **develop** branch.
-    
-3.  Please make sure the PR has a corresponding issue.
-    
-4.  If your PR contains large changes, e.g. component refactor or new components, please write detailed documents about its design and usage.
-    
-5.  Note that a single PR should not be too large. If heavy changes are required, it's better to separate the changes to a few individual PRs.
-    
-6.  After creating a PR, one or more reviewers will be assigned to the pull request.
-    
-7.  Before merging a PR, squash any fix review feedback, typo, merged and rebased sorts of commits. The final commit message should be clear and concise.
-    
-
-If your PR contains large changes, e.g. component refactor or new components, please write detailed documents about its design and usage.
-
-### Code review guidance
-
-Committers will rotate reviewing the code to make sure all the PR will be reviewed timely and by at least one committer before merge. If we aren't doing our job (sometimes we drop things). And as always, we welcome volunteers for code review.
-
-Some principles:
-
--   Readability - Important code should be well-documented. API should have Javadoc. Code style should be complied with the existing one.
-    
--   Elegance: New functions, classes or components should be well-designed.
-    
--   Testability - 80% of the new code should be covered by unit test cases.
-    
--   Maintainability - Comply with our [PMD spec](style/codeStyle.md), and 3-month-frequency update should be maintained at least.
-    
-
-### Now how about try become a committer?
-
-Generally speaking, contribute 8 non-trivial patches and get at least three different people to review them (you'll need three people to support you). Then ask someone to nominate you. You're demonstrating your:
-
--   at least 8 PR and the associated issues to the project,
-    
--   ability to collaborate with the team,
-    
--   understanding of the projects' code base and coding style, and
-    
--   ability to write good code (last but certainly not least)
-    
-
-A current committer nominates you by slacking the team on the taotao-cloud issue with the label "nomination"
-
--   your first and last name
-    
--   a link to your Git profile
-    
--   an explanation of why you should be a committer,
-    
--   Elaborate on the top 3 PR and the associated issues the nominator has worked with you that can demonstrate your ability.
-    
-
-Two other committers need to second your nomination. If no one objects in 5 working days (China), you're a committer. If anyone objects or wants more information, the committers discuss and usually come to a consensus (within the 5 working days). If issues cannot be resolved, there's a vote among current committers.
-
-![](http://acm-public.oss-cn-hangzhou.aliyuncs.com/nomination_process.png)
-
-In the worst case, this can drag out for two weeks. Keep contributing! Even in the rare cases where a nomination fails, the objection is usually something easy to address like "more patches" or "not enough people are familiar with this person's work."
+## 提交规范
+- fix：修改bug
+- test：添加或修改测试用例
+- feat：新功能(feature)
+- docs：文档(documentation)
+- chore：构建过程或辅助工具的变动
+- style：格式(不影响代码运行的改动)
+- refactor：重构(即不是新增功能,也不是修改bug的代码变动)
+- build：构建系统或者包依赖更新
+- revert：回滚代码
+- ci：脚本文件配置

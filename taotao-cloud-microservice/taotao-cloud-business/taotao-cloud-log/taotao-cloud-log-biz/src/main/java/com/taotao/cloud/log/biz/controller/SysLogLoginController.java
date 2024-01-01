@@ -25,7 +25,6 @@ import com.taotao.cloud.log.biz.service.SysLogLoginService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
 import lombok.AllArgsConstructor;
-import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,7 +64,7 @@ public class SysLogLoginController {
      * @return Response
      */
     @GetMapping("/{id}")
-    @ApiOperation(value = "通过id查询", notes = "通过id查询")
+    //@ApiOperation(value = "通过id查询", notes = "通过id查询")
     public Result<SysLogLogin> getById(@PathVariable Integer id) {
         return Result.success(sysLogLoginService.getById(id));
     }

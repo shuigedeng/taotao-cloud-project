@@ -1,28 +1,19 @@
-<!-- Here is for bug reports and feature requests ONLY! 
+# 版本信息 （必填）：
+当前使用的版本（必填）：3.1.X 或其它
+JDK 版本(必填) : JDK 21 一定写明至具体的小版本号
+使用的数据库及版本(必填)： PostgreSQL X or MySQL 5.X / 8.X
 
-If you're looking for help, please check our mail list、WeChat group and the Gitter room.
+# 问题描述：
 
-Please try to use English to describe your issue, or at least provide a snippet of English translation.
-我们鼓励使用英文，如果不能直接使用，可以使用翻译软件，您仍旧可以保留中文原文。
--->
+# 报错截图
 
-## Issue Description
+# 日志信息
 
-Type: *bug report* or *feature request*
-
-### Describe what happened (or what feature you want)
-
-
-### Describe what you expected to happen
-
-
-### How to reproduce it (as minimally and precisely as possible)
-
-1. 
-2. 
-3. 
-
-### Tell us your environment
-
-
-### Anything else we need to know?
+# 重现步骤
+1. 出错前自己做了哪些操作及具体步骤，包括修改了哪些地方、是否编译代码等
+2. 访问了什么接口？
+3. 传递什么参数？
+4. 后端控制台报了什么错？
+5. 前端控制台报了什么错？
+6. 原来用的什么版本？现在升级到了什么版本？
+7. 启动报错还是运行报错？ 运行报错是调用了那个接口？

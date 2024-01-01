@@ -22,6 +22,7 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.se
 import com.taotao.cloud.auth.biz.utils.WxUtils;
 import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class DefaultWechatWechatMiniAppUserDetailsService implements WechatMiniA
 
     @Override
     public UserDetails register(WechatMiniAppRequest request, String sessionKey) {
-        LogUtils.info(request);
+        LogUtils.info("WechatMiniAppRequest: {}",request);
 
         String signature = DigestUtils.sha1Hex(request.getRawData() + sessionKey);
         if (!request.getSignature().equals(signature)) {
@@ -57,7 +58,7 @@ public class DefaultWechatWechatMiniAppUserDetailsService implements WechatMiniA
         WechatMiniAppUserInfo wechatMiniAppUserInfo = JsonUtils.toObject(decrypt, WechatMiniAppUserInfo.class);
         wechatMiniAppUserInfo.setSessionKey(sessionKey);
 
-        LogUtils.info(wechatMiniAppUserInfo);
+        LogUtils.info("wechatMiniAppUserInfo: {}",wechatMiniAppUserInfo);
 
         // 调用数据库 微信小程序用户注册
 

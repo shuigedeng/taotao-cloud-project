@@ -70,7 +70,7 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.1'
 
-    implementation 'com.github.oshi:oshi-core:6.4.8'
+    implementation 'com.github.oshi:oshi-core:6.4.10'
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-cloud-starter-apt")
