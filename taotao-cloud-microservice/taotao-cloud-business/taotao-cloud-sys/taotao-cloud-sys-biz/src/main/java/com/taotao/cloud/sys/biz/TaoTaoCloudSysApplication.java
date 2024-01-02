@@ -63,6 +63,8 @@ public class TaoTaoCloudSysApplication {
 	public static void main(String[] args) {
 		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
 
-		new StartupSpringApplication(TaoTaoCloudSysApplication.class).run(args);
+		new StartupSpringApplication(TaoTaoCloudSysApplication.class)
+			.setDefaultBanner()
+			.run(args);
 	}
 }
