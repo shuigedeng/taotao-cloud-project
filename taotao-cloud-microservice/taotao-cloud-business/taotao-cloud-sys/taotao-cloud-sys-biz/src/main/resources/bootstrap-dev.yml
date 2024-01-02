@@ -15,7 +15,7 @@ spring:
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
-    banner-mode: off
+    banner-mode: console
     register-shutdown-hook: true
   application:
     name: taotao-cloud-sys
