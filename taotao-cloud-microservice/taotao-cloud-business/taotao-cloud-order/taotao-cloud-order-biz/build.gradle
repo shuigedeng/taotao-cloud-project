@@ -50,17 +50,6 @@ dependencies {
     implementation 'io.github.memorydoc:gobrs-async-trace-plugin:1.3.1-RELEASE'
     implementation 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
 
-    //状态机
-    //松鼠状态机 https://github.com/hekailiang/squirrel
-    //https://search.maven.org/artifact/org.squirrelframework/squirrel-foundation
-    implementation 'org.squirrelframework:squirrel-foundation:0.3.10'
-    //cola状态机
-    implementation 'com.alibaba.cola:cola-component-statemachine:4.3.2'
-    //spring状态机 依赖使用的是springboot2.7现在不打开 https://github.com/spring-projects/spring-statemachine
-    //https://docs.spring.io/spring-statemachine/docs/3.2.1/reference/
-    //implementation('org.springframework.statemachine:spring-statemachine-starter')
-    //implementation 'org.springframework.statemachine:spring-statemachine-redis:1.2.9.RELEASE'
-
     //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
     implementation "cn.afterturn:easypoi-spring-boot-starter:4.4.0"
     implementation "cn.afterturn:easypoi-base:4.4.0"
