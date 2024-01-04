@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.taotao.cloud.core.properties.EndpointProperties;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
