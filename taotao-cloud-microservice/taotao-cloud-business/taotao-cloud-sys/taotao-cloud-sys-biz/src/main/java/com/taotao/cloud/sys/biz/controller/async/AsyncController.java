@@ -28,7 +28,6 @@ package com.taotao.cloud.sys.biz.controller.async;
  * 通过上述流程可以发现：利用DeferredResult可实现一些长连接的功能，比如当某个操作是异步时，可以先保存对应的DeferredResult对象，当异步通知回来时，再找到这个DeferredResult对象，在setResult处理结果即可。从而提高性能。
  */
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.core.configuration.AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.sys.biz.service.feign.IFeignDictService;
@@ -44,6 +43,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +61,9 @@ public class AsyncController extends BaseFeignController<IDictService, Dict, Lon
     @Autowired
     private IFeignDictService feignDictService;
 
-    @Autowired
-    private AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
+	@Autowired
+	@Qualifier("asyncThreadPoolTaskExecutor")
+	private ThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
     private final List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 
