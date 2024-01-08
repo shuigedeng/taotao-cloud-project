@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.data.mybatisplus.query.LambdaQueryWrapperX;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.sys.api.model.dto.I18nDataDTO;
 import com.taotao.cloud.sys.api.model.query.I18nDataQO;
 import com.taotao.cloud.sys.api.model.vo.I18nDataPageVO;
@@ -30,7 +31,7 @@ public interface I18nDataMapper extends BaseMapper<I18nData> {
 	 * @return PageResult<I18nDataPageVO> VO分页数据
 	 */
 	default IPage<I18nDataPageVO> queryPage(PageQuery pageParam, I18nDataQO qo) {
-		IPage<I18nData> page = pageParam.buildMpPage();
+		IPage<I18nData> page = MpUtils.buildMpPage(pageParam);
 		Wrapper<I18nData> wrapper = buildQueryWrapper(qo);
 		this.selectPage(page, wrapper);
 		return page.convert(I18nDataConverter.INSTANCE::poToPageVo);

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.feign;
 
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
@@ -47,12 +47,12 @@ public class FeignUserController extends BaseFeignController<IUserService, User,
     }
 
     @Override
-    public SecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
+    public BaseSecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
         return null;
     }
 
     @Override
-    public SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
+    public BaseSecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
         return null;
     }
 }

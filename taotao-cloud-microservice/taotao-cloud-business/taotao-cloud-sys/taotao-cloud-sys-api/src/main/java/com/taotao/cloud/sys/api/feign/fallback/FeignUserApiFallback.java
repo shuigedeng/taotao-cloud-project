@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
@@ -39,7 +39,7 @@ public class FeignUserApiFallback implements FallbackFactory<IFeignUserApi> {
             }
 
             @Override
-            public SecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
+            public BaseSecurityUser getUserInfoBySocial(String providerId, int providerUserId) {
                 LogUtils.error(
                         "调用getUserInfoBySocial异常：providerId: {}, providerUserId: {}",
                         throwable,
@@ -49,7 +49,7 @@ public class FeignUserApiFallback implements FallbackFactory<IFeignUserApi> {
             }
 
             @Override
-            public SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
+            public BaseSecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
                 LogUtils.error(
                         "调用getUserInfoBySocial异常：nicknameOrUserNameOrPhoneOrEmail: {}",
                         nicknameOrUserNameOrPhoneOrEmail);

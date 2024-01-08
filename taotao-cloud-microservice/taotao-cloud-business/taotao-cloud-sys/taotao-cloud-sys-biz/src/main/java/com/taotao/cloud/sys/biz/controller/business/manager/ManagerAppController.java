@@ -18,6 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
 import com.taotao.cloud.sys.api.model.dto.app.AppPageDTO;
 import com.taotao.cloud.sys.biz.service.business.AppService;
@@ -51,7 +52,7 @@ public class ManagerAppController {
     @GetMapping(value = "/page")
     public Result<PageResult<AppDTO>> pageSysApp(AppPageDTO appPageDTO) {
         // Validator.validateParam(appPageDTO, ValidationGroups.query.class);
-        return Result.success(PageResult.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
+        return Result.success(MpUtils.convertMybatisPage(appService.pageApp(appPageDTO), AppDTO.class));
     }
 
     @Operation(summary = "添加")

@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign;
 
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.openfeign.annotation.ApiInfo;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
@@ -76,7 +76,7 @@ public interface IFeignUserApi {
 	@GetMapping(
 		value = "/sys/feign/user/info/social/{social}",
 		headers = {"from=in"})
-	SecurityUser getUserInfoBySocial(
+	BaseSecurityUser getUserInfoBySocial(
 		@RequestParam("providerId") String providerId, @RequestParam("providerUserId") int providerUserId);
 
 	/**
@@ -93,5 +93,5 @@ public interface IFeignUserApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(value = "/sys/feign/info/security")
-	SecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
+	BaseSecurityUser getSysSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 }
