@@ -1,6 +1,7 @@
 apply plugin: "scala"
 apply plugin: "java"
 apply plugin: "idea"
+apply plugin: "com.github.johnrengelman.shadow"
 
 //sourceSets {
 //    main {
@@ -15,6 +16,10 @@ apply plugin: "idea"
 //        }
 //    }
 //}
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation("org.apache.spark:spark-core_2.13:3.5.0")
@@ -41,9 +46,38 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.3.6"
     implementation "org.apache.hadoop:hadoop-hdfs:3.3.6"
 
-    implementation 'org.scala-lang:scala-library:2.13.12'
-    implementation 'org.scala-lang:scala-reflect:2.13.12'
+    implementation "org.scala-lang:scala-library:2.12.18"
+    implementation "org.scala-lang:scala-compiler:2.12.18"
+    implementation "org.scala-lang:scala-reflect:2.12.18"
 
     implementation 'org.slf4j:slf4j-api:2.0.10'
     implementation 'org.slf4j:slf4j-log4j12:2.0.10'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': "com.example.Main"
+    }
+    from sourceSets.main.output
+    dependsOn configurations.runtimeClasspath
+}
+
+shadowJar {
+    mergeServiceFiles()
+    archiveClassifier = null
+
+    //transform(Log4j2PluginsCacheFileTransformer)
+    //version = 1.0
+    manifest {
+        attributes(
+                "Main-Class": "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
+        )
+    }
+    zip64 true
+    //dependencies {
+    //    exclude(dependency("xml-apis:xml-apis:.*"))
+    //    exclude(dependency("xerces:xercesImpl:.*"))
+    //    exclude(dependency("org.apache.avro:avro:1.7.*"))
+    //    exclude(dependency{ it.moduleGroup == "xml-apis" })
+    //}
 }

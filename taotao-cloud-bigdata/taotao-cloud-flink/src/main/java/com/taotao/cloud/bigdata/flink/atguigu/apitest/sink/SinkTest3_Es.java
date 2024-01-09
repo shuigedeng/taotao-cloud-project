@@ -6,12 +6,12 @@ import java.util.HashMap;
 import org.apache.flink.api.common.functions.RuntimeContext;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.elasticsearch.ElasticsearchSinkFunction;
-import org.apache.flink.streaming.connectors.elasticsearch.RequestIndexer;
-import org.apache.flink.streaming.connectors.elasticsearch6.ElasticsearchSink;
 import org.apache.http.HttpHost;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.client.Requests;
+// import org.apache.flink.streaming.connectors.elasticsearch.ElasticsearchSinkFunction;
+// import org.apache.flink.streaming.connectors.elasticsearch.RequestIndexer;
+// import org.apache.flink.streaming.connectors.elasticsearch6.ElasticsearchSink;
+// import org.elasticsearch.action.index.IndexRequest;
+// import org.elasticsearch.client.Requests;
 
 
 public class SinkTest3_Es {
@@ -32,29 +32,29 @@ public class SinkTest3_Es {
         ArrayList<HttpHost> httpHosts = new ArrayList<>();
         httpHosts.add(new HttpHost("localhost", 9200));
 
-        dataStream.addSink(new ElasticsearchSink.Builder<SensorReading>(httpHosts, new MyEsSinkFunction()).build());
+        // dataStream.addSink(new ElasticsearchSink.Builder<SensorReading>(httpHosts, new MyEsSinkFunction()).build());
 
         env.execute();
     }
 
     // 实现自定义的ES写入操作
-    public static class MyEsSinkFunction implements ElasticsearchSinkFunction<SensorReading>{
-        @Override
-        public void process(SensorReading element, RuntimeContext ctx, RequestIndexer indexer) {
-            // 定义写入的数据source
-            HashMap<String, String> dataSource = new HashMap<>();
-            dataSource.put("id", element.getId());
-            dataSource.put("temp", element.getTemperature().toString());
-            dataSource.put("ts", element.getTimestamp().toString());
-
-            // 创建请求，作为向es发起的写入命令
-            IndexRequest indexRequest = Requests.indexRequest()
-                    .index("sensor")
-                    .type("readingdata")
-                    .source(dataSource);
-
-            // 用index发送请求
-            indexer.add(indexRequest);
-        }
-    }
+    // public static class MyEsSinkFunction implements ElasticsearchSinkFunction<SensorReading>{
+    //     @Override
+    //     public void process(SensorReading element, RuntimeContext ctx, RequestIndexer indexer) {
+    //         // 定义写入的数据source
+    //         HashMap<String, String> dataSource = new HashMap<>();
+    //         dataSource.put("id", element.getId());
+    //         dataSource.put("temp", element.getTemperature().toString());
+    //         dataSource.put("ts", element.getTimestamp().toString());
+	//
+    //         // 创建请求，作为向es发起的写入命令
+    //         IndexRequest indexRequest = Requests.indexRequest()
+    //                 .index("sensor")
+    //                 .type("readingdata")
+    //                 .source(dataSource);
+	//
+    //         // 用index发送请求
+    //         indexer.add(indexRequest);
+    //     }
+    // }
 }

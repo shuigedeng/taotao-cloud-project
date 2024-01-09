@@ -3,7 +3,7 @@ package com.taotao.cloud.bigdata.flink.atguigu.apitest.source;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
+// import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
 
 import java.util.Properties;
 
@@ -23,10 +23,10 @@ public class SourceTest3_Kafka {
         properties.setProperty("auto.offset.reset", "latest");
 
         // 从文件读取数据
-        DataStream<String> dataStream = env.addSource( new FlinkKafkaConsumer011<String>("sensor", new SimpleStringSchema(), properties));
-
-        // 打印输出
-        dataStream.print();
+        // DataStream<String> dataStream = env.addSource( new FlinkKafkaConsumer011<String>("sensor", new SimpleStringSchema(), properties));
+		//
+        // // 打印输出
+        // dataStream.print();
 
         env.execute();
     }
