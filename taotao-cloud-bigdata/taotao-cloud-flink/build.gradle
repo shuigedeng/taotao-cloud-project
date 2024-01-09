@@ -119,9 +119,9 @@ task fatJar(type: Jar, dependsOn: jar) {
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    from configurations.runtimeClasspath.filter { !it.path.endsWith('.pom') }.asFileTree.files.collect {
-        zipTree(it)
-    }
+//    from configurations.runtimeClasspath.filter { !it.path.endsWith('.pom') }.asFileTree.files.collect {
+//        zipTree(it)
+//    }
 }
 
 task customFatJar(type: Jar) {
@@ -169,3 +169,19 @@ shadowJar {
     //}
     //archiveFileName = "test-${version}.jar"
 }
+
+task packageZip(type: Zip) {
+    archiveFileName = "${project.name}-${project.version}.zip"
+    destinationDirectory = file("${project.buildDir}/result")
+
+    from("${project.projectDir}/distribution") {
+        into "distribution"
+    }
+
+    from("${project.buildDir}/libs/${project.name}-${project.version}.jar") {
+        into "targert"
+    }
+
+    dependsOn customFatJar
+}
+
