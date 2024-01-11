@@ -5,8 +5,8 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-eventbus"

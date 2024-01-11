@@ -12,8 +12,8 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-huawei"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-seata"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-eventbus"
@@ -107,7 +107,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:0.9.5"
-    //implementation "com.alibaba:druid:1.2.20"
+    //implementation "com.alibaba:druid:1.2.21"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}

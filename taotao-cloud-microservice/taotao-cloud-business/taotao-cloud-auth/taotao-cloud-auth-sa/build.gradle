@@ -15,7 +15,7 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-zookeeper"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
@@ -24,8 +24,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'

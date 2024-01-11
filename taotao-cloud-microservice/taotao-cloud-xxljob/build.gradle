@@ -8,8 +8,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
     implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-skywalking"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-tracing-micrometer"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 
     implementation "org.springframework.boot:spring-boot-starter-web"
