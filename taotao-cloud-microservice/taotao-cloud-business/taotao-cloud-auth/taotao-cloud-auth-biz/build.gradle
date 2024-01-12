@@ -49,7 +49,7 @@ dependencies {
     implementation 'org.webjars:uniform:2.1.2-1'
     implementation "org.webjars.npm:mdi__font:7.3.67"
     implementation 'org.webjars.npm:quasar:2.14.0'
-    implementation("org.webjars.npm:vue:3.4.3") {
+    implementation("org.webjars.npm:vue:3.4.8") {
         exclude group: "org.webjars.npm", module: "babel__parser"
     }
     implementation 'org.webjars.npm:babel__parser:7.23.6'
@@ -79,7 +79,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     implementation "com.nimbusds:nimbus-jose-jwt:9.37.3"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:11.9"
+    implementation "com.nimbusds:oauth2-oidc-sdk:11.9.1"
 
     implementation "org.apache.commons:commons-collections4"
 

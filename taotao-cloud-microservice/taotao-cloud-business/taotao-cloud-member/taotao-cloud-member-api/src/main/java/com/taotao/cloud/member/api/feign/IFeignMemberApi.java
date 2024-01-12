@@ -17,8 +17,8 @@
 package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberApiFallback;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import java.util.List;
@@ -46,7 +46,7 @@ public interface IFeignMemberApi {
      * @since 2020/4/29 17:48
      */
     @GetMapping(value = "/member/feign/info/security")
-    SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
+	BaseSecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail);
 
     /**
      * 根据id查询会员信息

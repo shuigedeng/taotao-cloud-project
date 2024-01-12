@@ -17,8 +17,9 @@
 package com.taotao.cloud.auth.biz.authentication.login.form.qrcode.service.impl;
 
 import com.taotao.cloud.auth.biz.authentication.login.form.qrcode.service.OAuth2FormQrcodeUserDetailsService;
-import com.taotao.cloud.common.model.SecurityUser;
 import java.util.Set;
+
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

@@ -25,6 +25,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
     implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
     implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"

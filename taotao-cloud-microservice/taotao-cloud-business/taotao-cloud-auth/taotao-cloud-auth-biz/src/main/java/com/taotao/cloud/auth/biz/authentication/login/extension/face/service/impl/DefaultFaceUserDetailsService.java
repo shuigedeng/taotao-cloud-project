@@ -17,9 +17,10 @@
 package com.taotao.cloud.auth.biz.authentication.login.extension.face.service.impl;
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceUserDetailsService;
-import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import java.util.Set;
+
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

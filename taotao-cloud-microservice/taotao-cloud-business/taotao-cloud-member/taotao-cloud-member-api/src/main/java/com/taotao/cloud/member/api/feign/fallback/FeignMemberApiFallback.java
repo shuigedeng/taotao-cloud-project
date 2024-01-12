@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.api.feign.fallback;
 
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import java.util.List;
@@ -37,7 +37,7 @@ public class FeignMemberApiFallback implements FallbackFactory<IFeignMemberApi> 
         return new IFeignMemberApi() {
 
             @Override
-            public SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
+            public BaseSecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
                 return null;
             }
 

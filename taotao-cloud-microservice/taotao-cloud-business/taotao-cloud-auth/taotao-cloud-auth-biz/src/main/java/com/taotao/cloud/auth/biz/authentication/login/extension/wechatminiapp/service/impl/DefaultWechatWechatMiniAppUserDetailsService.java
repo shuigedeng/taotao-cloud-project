@@ -20,10 +20,10 @@ import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.cl
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.client.WechatMiniAppUserInfo;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
 import com.taotao.cloud.auth.biz.utils.WxUtils;
-import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import java.util.Set;
 import org.apache.commons.codec.digest.DigestUtils;

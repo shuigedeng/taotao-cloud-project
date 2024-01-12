@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.imp
 
 import com.taotao.cloud.auth.biz.authentication.login.extension.sms.service.SmsUserDetailsService;
 import com.taotao.cloud.common.enums.LoginTypeEnum;
-import com.taotao.cloud.common.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;

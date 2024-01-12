@@ -20,6 +20,7 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.data.jpa.utils.JpaUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -80,6 +81,6 @@ public class OAuth2ComplianceController {
             @RequestParam(value = "ip", required = false) String ip) {
         Page<OAuth2Compliance> pages =
                 complianceService.findByCondition(pageNumber, pageSize, principalName, clientId, ip);
-        return Result.success(PageResult.convertJpaPage(pages, OAuth2Compliance.class));
+        return Result.success(JpaUtils.convertJpaPage(pages, OAuth2Compliance.class));
     }
 }
