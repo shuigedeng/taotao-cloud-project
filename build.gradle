@@ -86,10 +86,10 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.4"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.6"
 
         //https://github.com/spring-io/spring-javaformat/
-        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.40"
+        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.41"
 
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
@@ -195,6 +195,11 @@ plugins {
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.qqviaja.gradle.MybatisGenerator
     id "com.qqviaja.gradle.MybatisGenerator" version "2.5"
+
+    //https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
+    //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.20"
+
 }
 
 allprojects {

@@ -8,6 +8,7 @@ repositories {
     mavenCentral()
 }
 
+https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/configuration/overview/
 dependencies {
     implementation "org.apache.flink:flink-core:1.18.0"
     // flinksql本地运行需要的依赖
@@ -152,9 +153,9 @@ shadowJar {
     }
 
     //dependencies {
-    //    exclude(dependency("xml-apis:xml-apis:.*"))
-    //    exclude(dependency("xerces:xercesImpl:.*"))
-    //    exclude(dependency("org.apache.avro:avro:1.7.*"))
+    //    exclude(dependency("org.apache.flink:force-shading:.*"))
+    //    exclude(dependency("com.google.code.findbugs:jsr305:.*"))
+    //    exclude(dependency("org.slf4j:slf4j-api:*"))
     //    exclude(dependency{ it.moduleGroup == "xml-apis" })
     //}
 
