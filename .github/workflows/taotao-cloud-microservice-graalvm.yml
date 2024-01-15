@@ -60,16 +60,16 @@ jobs:
           arguments: nativeBuild
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-auth/taotao-cloud-auth-biz
 
-    #      - name: Publish Docker Image taotao-cloud-demo
-    #        uses: elgohr/Publish-Docker-Github-Action@v4
-    #        with:
-    #          name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-demo
-    #          username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
-    #          password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
-    #          registry: registry.cn-hangzhou.aliyuncs.com
-    #          buildoptions: "--compress --force-rm"
-    #          tags: "${{env.TAOTAO_CLOUD_VERSION}}"
-    #          #dockerfile: MyDockerFileName
+      #- name: Publish Docker Image taotao-cloud-demo
+      #  uses: elgohr/Publish-Docker-Github-Action@v4
+      #  with:
+      #    name: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-demo
+      #    username: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+      #    password: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+      #    registry: registry.cn-hangzhou.aliyuncs.com
+      #    buildoptions: "--compress --force-rm"
+      #    tags: "${{env.TAOTAO_CLOUD_VERSION}}"
+      #    #dockerfile: MyDockerFileName
 
     #name: demo graalvm on ${{ matrix.os }}
     #runs-on: ${{ matrix.os }}
@@ -93,7 +93,6 @@ jobs:
     #      arguments: nativeBuild
     #      #build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
 
-
       - name: build success
         if: ${{ success() }}
         uses: zcong1993/actions-ding@master
@@ -105,7 +104,7 @@ jobs:
             {
               "msgtype": "text",
               "text": {
-                  "content": "taotao github action [Microservice Docker graalvm Image] Publish Docker success"
+                  "content": "taotao github action [taotao-cloud-microservice-graalvm] publish docker image success"
               }
             }
 
@@ -120,7 +119,7 @@ jobs:
             {
               "msgtype": "text",
               "text": {
-                  "content": "taotao github action [Microservice Docker graalvm Image] Publish Docker failure"
+                  "content": "taotao github action [taotao-cloud-microservice-graalvm] publish docker image failure"
               }
             }
 

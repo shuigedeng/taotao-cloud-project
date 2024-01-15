@@ -26,18 +26,18 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
+    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
         uses: actions/checkout@v4
 
-#      - name: Setup Jdk 21
-#        uses: actions/setup-java@v2
-#        with:
-#          java-version: '21'
-#          distribution: 'adopt'
-#          server-id: github
+      #- name: Setup Jdk 21
+      #  uses: actions/setup-java@v2
+      #  with:
+      #    java-version: '21'
+      #    distribution: 'adopt'
+      #    server-id: github
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
       - uses: graalvm/setup-graalvm@v1
@@ -69,7 +69,7 @@ jobs:
           MESSAGE_IS_TRUE: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
           MESSAGES: ${{ github.event.head_commit.message }}
 
-        #  base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
+      # base64 secring.gpg > secring.gpg.b64  SIGNING_SECRET_KEY_RING_FILE -> secring.gpg.b64
       - name: Decode Signing Secret Key Ring File
         run: |
           echo "${{ secrets.TAOTAO_CLOUD_SIGNING_SECRET_KEY_RING_FILE }}" > ~/secring.gpg.b64 && base64 -d ~/secring.gpg.b64 > ~/secring.gpg
@@ -82,13 +82,13 @@ jobs:
           echo "mavenUsernameNew=${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}" >> gradle.properties
           echo "mavenPasswordNew=${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}" >> gradle.properties
 
-#      - name: echo gradle
-#        run: |
-#          gradle -v
-#          which gradle
-#          env
-#          cat gradle.properties
-#          echo ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }} | base64
+      #- name: echo gradle
+      #  run: |
+      #    gradle -v
+      #    which gradle
+      #    env
+      #    cat gradle.properties
+      #    echo ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }} | base64
 
       #- name: Build And Publish Dependencies To Local
       #  run: |
@@ -288,7 +288,7 @@ jobs:
             {
               "msgtype": "text",
               "text": {
-                  "content": "taotao github action [Microservice Docker Image] Publish Docker success"
+                  "content": "taotao github action [taotao-cloud-microservice-docker-image] publish docker image success"
               }
             }
 
@@ -304,7 +304,7 @@ jobs:
             {
               "msgtype": "text",
               "text": {
-                  "content": "taotao github action [Microservice Docker Image] Publish Docker failure"
+                  "content": "taotao github action [taotao-cloud-microservice-docker-image] publish docker image failure"
               }
             }
 
