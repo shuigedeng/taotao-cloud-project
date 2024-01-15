@@ -30,8 +30,19 @@ subprojects {
         }
     }
 
-    classes {
+    //gradle build -x test -Pprofile=dev
+    //gradle -x test clean bootJar -Pprofile=dev
+    tasks.register('expandProperties') {
         dependsOn createProperties
+        doLast {
+            filesMatching("*.yml"){
+                expand(project.properties)
+            }
+        }
+    }
+
+    classes {
+        dependsOn expandProperties
     }
 
     dependencies {
