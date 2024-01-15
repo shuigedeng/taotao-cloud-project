@@ -30,6 +30,8 @@ subprojects {
         }
     }
 
+    //多项目分环境打包
+    //gradle构建过程中的默认任务processResources，重写
     //gradle build -x test -Pprofile=dev
     //gradle -x test clean bootJar -Pprofile=dev
     tasks.register('expandProperties') {

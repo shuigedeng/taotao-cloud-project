@@ -50,10 +50,6 @@ mainClassName = "com.taotao.cloud.sa.biz.TaoTaoCloudSaJustApplication"
 description = "sa认证中心biz"
 archivesBaseName = 'taotao-cloud-sajust'
 
-bootJar {
-    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
-}
-
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"

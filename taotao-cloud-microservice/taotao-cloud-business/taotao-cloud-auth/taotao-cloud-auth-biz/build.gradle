@@ -109,10 +109,6 @@ mainClassName = "com.taotao.cloud.auth.biz.TaoTaoCloudAuthApplication"
 description = "认证中心biz"
 archivesBaseName = 'taotao-cloud-auth'
 
-bootJar {
-    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
-}
-
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
