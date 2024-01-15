@@ -6,7 +6,8 @@ dependencies {
     compileOnly "io.github.shuigedeng:taotao-cloud-starter-office"
     compileOnly "io.seata:seata-all"
 
-    compileOnly 'com.github.oshi:oshi-core:6.4.10'
+    //https://central.sonatype.com/artifact/com.github.oshi/oshi-core
+    compileOnly 'com.github.oshi:oshi-core:6.4.11'
 
     compileOnly "io.github.shuigedeng:taotao-cloud-starter-grpc"
 

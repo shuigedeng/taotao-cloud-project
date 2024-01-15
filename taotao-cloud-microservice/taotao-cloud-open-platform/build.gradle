@@ -22,6 +22,7 @@ dependencies {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
 
+    //https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox
     implementation "org.apache.pdfbox:pdfbox:3.0.1"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
