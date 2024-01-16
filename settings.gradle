@@ -87,6 +87,22 @@ gradleEnterprise {
 
 rootProject.name = 'taotao-cloud-project'
 
+dependencyResolutionManagement {
+    //repositories {
+    //    // 使用阿里云 镜像仓库
+    //    maven {url = URI("https://maven.aliyun.com/nexus/content/groups/public/") }
+    //    //中黔私库
+    //    maven { url = URI("https://code.zqfae.com/zqfae-repo/repository/zqfae-repo/") }
+    //    mavenCentral()
+    //}
+    // 统一依赖库定义
+    versionCatalogs {
+        create("projectLibs"){
+            from(files("./gradle/libs.versions.toml"))
+        }
+    }
+}
+
 def oneLayerProjects = ['scala', 'netty', 'python', 'demo', 'node', 'go']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"

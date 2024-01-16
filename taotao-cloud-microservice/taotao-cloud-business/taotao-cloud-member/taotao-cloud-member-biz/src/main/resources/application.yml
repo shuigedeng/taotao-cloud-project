@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: @activeProfile@
 #  config:
 #    activate:
 #      on-profile: dev

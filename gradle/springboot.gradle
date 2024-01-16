@@ -18,6 +18,18 @@ task copyJar(type: Copy) {
     into "$buildDir\\libs\\lib"
 }
 
+application {
+    //指定应用程序的入口点（主类）
+    //mainClass = project.mainClassName
+    //自定义应用程序的启动脚本和默认JVM参数。
+    //applicationDefaultJvmArgs = ['-Xmx512m', '-Dmyapp.mode=prod']
+    //applicationDistribution.from(fileTree('src/main/scripts'))
+    //配置应用程序的资源文件和图标。
+    //icon = 'src/main/resources/app-icon.ico'
+    //defaultJvmArgs = ['-Dmyapp.env=prod']
+    //executableDir = 'custom_bin_dir'
+}
+
 bootJar {
     // 排除所有的jar
     //excludes = ["*.jar"]

@@ -2,7 +2,7 @@ spring:
   application:
     name: dax-pay
   profiles:
-    active: dev
+    active: @activeProfile@
   config:
     use-legacy-processing: true
   servlet:

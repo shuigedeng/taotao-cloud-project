@@ -1,3 +1,20 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+
+def getProperty(String key, String defaultValue) {
+    def keyValue = findProperty(key) ?: System.getenv(key)
+    if (keyValue != null) {
+        return keyValue;
+    }
+    // 加载根路径自定义配置属性
+    Properties envProps = new Properties()
+    envProps.load(new FileInputStream("${rootProject.projectDir.absolutePath}${File.separator}env${File.separator}env.properties"))
+
+    keyValue = envProps.getProperty(key, defaultValue)
+    println("打包profile环境==============" + keyValue)
+    return keyValue
+}
+
 subprojects {
     apply from: rootProject.file('gradle/springboot.gradle')
     apply from: rootProject.file('gradle/smart-doc.gradle')
@@ -8,6 +25,29 @@ subprojects {
     apply from: rootProject.file('gradle/shadow.gradle')
     apply from: rootProject.file('gradle/graalvm.gradle')
     apply from: rootProject.file('gradle/swagger.gradle')
+
+    //多项目分环境打包
+    //gradle构建过程中的默认任务processResources，重写
+    //gradle build -x test -Pprofile=dev
+    //gradle -x test clean bootJar -Pprofile=dev
+    processResources {
+        doFirst {
+            //过滤器会将用 @var@ 包裹的变量，替换为指定的值。
+            filter ReplaceTokens, tokens: [activeProfile: getProperty("profile", "dev")]
+
+
+            //${profile}变量
+            //filesMatching("**/*.yml"){
+            //    expand(project.properties)
+            //}
+
+            //inputs.property('version', version)
+
+            //filesMatching("**/version.properties") {
+            //    expand version: version
+            //}
+        }
+    }
 
     tasks.register('createProperties') {
         dependsOn processResources
@@ -30,28 +70,31 @@ subprojects {
         }
     }
 
-    //多项目分环境打包
-    //gradle构建过程中的默认任务processResources，重写
-    //gradle build -x test -Pprofile=dev
-    //gradle -x test clean bootJar -Pprofile=dev
-    tasks.register('expandProperties') {
-        dependsOn createProperties
-        doLast {
-            filesMatching("*.yml"){
-                expand(project.properties)
-            }
-        }
+    classes {
+        dependsOn 'createProperties'
     }
 
-    classes {
-        dependsOn expandProperties
+    task bootJarTest {
+        dependsOn 'clean'
+        doFirst {
+            System.setProperty("profile", "test")
+        }
+        finalizedBy("bootJar")
+    }
+
+    task bootJarProduction {
+        dependsOn 'clean'
+        doFirst {
+            System.setProperty("profile", "prod")
+        }
+        finalizedBy("bootJar")
     }
 
     dependencies {
         //developmentOnly "org.springframework.boot:spring-boot-devtools"
         //developmentOnly "org.springframework.boot:spring-boot-docker-compose"
 
-        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test"){
+        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test") {
             exclude group: "org.mybatis.spring.boot", module: "mybatis-spring-boot-starter-test"
             exclude group: "com.baomidou", module: "mybatis-plus-spring-boot3-starter-test"
         }

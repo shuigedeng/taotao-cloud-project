@@ -101,7 +101,7 @@ jobs:
         if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
         with:
           gradle-version: 8.5
-          arguments: clean bootJar
+          arguments: clean bootJar -x test -Pprofile=dev
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-monitor
       #https://github.com/marketplace/actions/publish-docker
       - name: Publish Docker Image taotao-cloud-monitor

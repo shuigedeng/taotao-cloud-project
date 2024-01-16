@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import java.io.FileInputStream
+import java.util.*
+
 /*
     buildscript代码块中的声明是gradle脚本自身需要的资源。
     可以声明的资源包括依赖项、第三方插件、maven仓库地址等。
@@ -202,11 +205,34 @@ plugins {
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.20"
 
+    //alias(projectLibs.plugins.springboot)
+    //alias(projectLibs.plugins.kotlin.jvm)
+    //alias(projectLibs.plugins.kotlin.spring)
+    //alias(projectLibs.plugins.docker)
 }
+
+// 定义库引用
+//var pLibs = projectLibs
 
 allprojects {
     version project.taotaoCloudVersion
     group project.taotaoCloudGroup
+
+    // 全部项目有基础插件kotlin jvm/spring
+    //apply {
+    //    plugin(pLibs.plugins.kotlin.jvm.get().pluginId)
+    //    plugin(pLibs.plugins.kotlin.spring.get().pluginId)
+    //}
+    // 统一group和version
+    //group = "com.terra.ns.imp"
+    //version = pLibs.versions.imp.service.get()
+    //java.sourceCompatibility = JavaVersion.VERSION_17
+
+    //dependencies {
+    //    // bom 管理着一组依赖的版本，各模块按需引入其中的依赖即可，由bom统一约束着版本，
+    //    // spring boot bom
+    //    implementation(platform(pLibs.spring.boot))
+    //}
 
     java {
         toolchain {
@@ -283,7 +309,6 @@ allprojects {
         maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
-
 
 def excludeSubProjects = ['taotao-cloud-maven-plugin', 'taotao-cloud-idea-plugin', 'taotao-cloud-gradle-plugin']
 configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { project ->
