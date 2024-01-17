@@ -25,18 +25,12 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
     implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-statemachine"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-statemachine"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-flowengine"
     implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
-
-    //LiteFlow是一个非常强大的现代化的规则引擎框架，融合了编排特性和规则引擎的所有特性
-    //https://liteflow.cc/pages/df6982/
-    implementation 'com.yomahub:liteflow-spring-boot-starter:2.11.3'
-    implementation 'com.yomahub:liteflow-rule-nacos:2.11.3'
-    implementation 'com.yomahub:liteflow-script-aviator:2.11.3'
-    implementation 'com.yomahub:liteflow-script-java:2.11.3'
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
     //https://code.google.com/p/aviator/

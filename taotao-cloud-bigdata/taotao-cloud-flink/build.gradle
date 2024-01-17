@@ -78,7 +78,7 @@ dependencies {
     implementation 'org.apache.hadoop:hadoop-hdfs:3.3.6'
     //implementation 'org.apache.flink:flink-shaded-hadoop-2-uber:3.3.6'
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
-    //testImplementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
+    implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
 
 
     implementation("org.apache.hudi:hudi-common:0.14.1")
