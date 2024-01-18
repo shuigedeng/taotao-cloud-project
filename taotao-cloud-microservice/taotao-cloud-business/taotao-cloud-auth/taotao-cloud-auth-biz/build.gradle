@@ -49,7 +49,7 @@ dependencies {
     implementation 'org.webjars:uniform:2.1.2-1'
     implementation "org.webjars.npm:mdi__font:7.3.67"
     implementation 'org.webjars.npm:quasar:2.14.0'
-    implementation("org.webjars.npm:vue:3.4.14") {
+    implementation("org.webjars.npm:vue:3.4.7") {
         exclude group: "org.webjars.npm", module: "babel__parser"
     }
     implementation 'org.webjars.npm:babel__parser:7.23.6'
