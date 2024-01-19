@@ -64,6 +64,6 @@ public class OrderLogController {
     @GetMapping(value = "/page")
     public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
         IPage<OrderLog> orderLogPage = orderLogService.pageQuery(orderLogPageQuery);
-        return Result.success(PageResult.convertMybatisPage(orderLogPage, OrderLogVO.class));
+        return Result.success(MpUtils.convertMybatisPage(orderLogPage, OrderLogVO.class));
     }
 }

@@ -19,9 +19,7 @@ package com.taotao.cloud.order.biz.controller.business.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintCommunicationDTO;
 import com.taotao.cloud.order.api.model.dto.order.OrderComplaintDTO;
@@ -32,7 +30,10 @@ import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintService;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -83,7 +84,7 @@ public class OrderComplaintController {
     @GetMapping("/page")
     public Result<PageResult<OrderComplaintBaseVO>> get(@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
         IPage<OrderComplaint> orderComplainByPage = orderComplaintService.pageQuery(orderComplaintPageQuery);
-        return Result.success(PageResult.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
+        return Result.success(MpUtils.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
     }
 
     @Operation(summary = "添加交易投诉", description = "添加交易投诉")

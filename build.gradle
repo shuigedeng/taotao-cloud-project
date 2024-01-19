@@ -103,7 +103,7 @@ buildscript {
 
         //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
         //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.16.1"
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.0"
     }
 }
 
@@ -159,7 +159,7 @@ plugins {
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
-    id "org.owasp.dependencycheck" version "9.0.8"
+    id "org.owasp.dependencycheck" version "9.0.9"
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
@@ -189,7 +189,7 @@ plugins {
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
-    id "com.diffplug.spotless" version "6.23.3"
+    id "com.diffplug.spotless" version "6.24.0"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
     id "com.gorylenko.gradle-git-properties" version "2.4.1"

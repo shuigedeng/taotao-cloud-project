@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.web.utils.OperationalJudgment;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.model.vo.order.StoreFlowVO;
@@ -67,7 +67,7 @@ public class BillStoreController {
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billPageQuery) {
         billPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<BillListVO> billListVOIPage = billService.billPage(billPageQuery);
-        return Result.success(PageResult.convertMybatisPage(billListVOIPage, BillListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(billListVOIPage, BillListVO.class));
     }
 
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")

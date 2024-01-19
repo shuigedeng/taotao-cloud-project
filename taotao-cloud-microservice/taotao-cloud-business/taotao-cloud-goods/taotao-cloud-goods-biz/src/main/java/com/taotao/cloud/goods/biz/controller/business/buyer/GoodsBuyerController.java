@@ -104,7 +104,7 @@ public class GoodsBuyerController {
     @GetMapping("/page")
     public Result<PageResult<GoodsVO>> getByPage(@Validated GoodsPageQuery goodsPageQuery) {
         IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
-        return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
+        return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsVO.class));
     }
 
     @Operation(summary = "从ES中获取商品信息", description = "从ES中获取商品信息")

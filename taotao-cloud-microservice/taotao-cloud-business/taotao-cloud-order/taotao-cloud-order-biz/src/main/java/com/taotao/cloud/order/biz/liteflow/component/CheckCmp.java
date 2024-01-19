@@ -1,6 +1,5 @@
-package com.yomahub.liteflow.example.component;
+package com.taotao.cloud.order.biz.liteflow.component;
 
-import com.yomahub.liteflow.core.NodeComponent;
 import com.yomahub.liteflow.example.bean.PriceCalcReqVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

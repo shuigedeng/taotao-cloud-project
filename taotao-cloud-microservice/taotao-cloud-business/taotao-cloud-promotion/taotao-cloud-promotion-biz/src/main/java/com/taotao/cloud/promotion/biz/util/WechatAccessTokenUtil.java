@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.biz.util; // package com.taotao.cloud.message.biz.util;
 // import com.google.gson.Gson;
-// import com.taotao.cloud.common.enums.CachePrefix;
+// 
 // import com.taotao.cloud.common.enums.ClientTypeEnum;
 // import com.taotao.cloud.common.enums.ResultEnum;
 // import com.taotao.cloud.common.exception.BusinessException;

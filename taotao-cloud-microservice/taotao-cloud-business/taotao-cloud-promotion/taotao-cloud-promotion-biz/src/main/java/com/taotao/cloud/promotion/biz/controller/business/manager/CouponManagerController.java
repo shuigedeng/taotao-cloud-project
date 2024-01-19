@@ -22,7 +22,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.CouponVO;
 import com.taotao.cloud.promotion.biz.model.entity.Coupon;

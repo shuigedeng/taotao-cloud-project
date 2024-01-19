@@ -19,7 +19,7 @@ package com.taotao.cloud.distribution.biz.api.controller.seller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.distribution.api.model.query.DistributionGoodsPageQuery;
 import com.taotao.cloud.distribution.api.model.vo.DistributionGoodsVO;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;

@@ -118,7 +118,7 @@ public class FlowEngineController {
                     .orElse(null);
             entity.setCategory(dataEntity != null ? dataEntity.getFullName() : "");
         }
-        return Result.success(PageResult.convertMybatisPage(entityPage, FlowPageListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(entityPage, FlowPageListVO.class));
     }
 
     @Operation(summary = "获取流程设计列表", description = "获取流程设计列表")

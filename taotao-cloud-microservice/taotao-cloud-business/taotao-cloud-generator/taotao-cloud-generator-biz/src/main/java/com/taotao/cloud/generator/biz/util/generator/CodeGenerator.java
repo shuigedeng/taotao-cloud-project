@@ -26,6 +26,8 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import com.baomidou.mybatisplus.generator.fill.Property;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
+import com.taotao.cloud.common.utils.log.LogUtils;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

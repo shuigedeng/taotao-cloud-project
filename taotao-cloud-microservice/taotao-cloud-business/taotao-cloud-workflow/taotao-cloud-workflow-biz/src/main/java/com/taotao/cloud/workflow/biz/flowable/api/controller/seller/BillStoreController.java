@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.web.utils.OperationalJudgment;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
@@ -67,7 +67,7 @@ public class BillStoreController {
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billPageQuery) {
         billPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<BillListVO> billListVOIPage = billService.billPage(billPageQuery);
-        return Result.success(PageResult.convertMybatisPage(billListVOIPage, BillListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(billListVOIPage, BillListVO.class));
     }
 
     @Operation(summary = "通过id获取结算单", description = "通过id获取结算单")
@@ -86,7 +86,7 @@ public class BillStoreController {
             @PathVariable String id, @Parameter(description = "流水类型:PAY、REFUND") String flowType, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
         IPage<StoreFlowVO> storeFlow = storeFlowApi.getStoreFlow(id, flowType, PageQuery);
-        return Result.success(PageResult.convertMybatisPage(storeFlow, StoreFlowVO.class));
+        return Result.success(MpUtils.convertMybatisPage(storeFlow, StoreFlowVO.class));
     }
 
     @Operation(summary = "获取商家分销订单流水分页", description = "获取商家分销订单流水分页")
@@ -96,7 +96,7 @@ public class BillStoreController {
     public Result<PageResult<StoreFlowVO>> getDistributionFlow(@PathVariable String id, PageQuery PageQuery) {
         OperationalJudgment.judgment(billService.getById(id));
         IPage<StoreFlowVO> distributionFlow = storeFlowApi.getDistributionFlow(id, PageQuery);
-        return Result.success(PageResult.convertMybatisPage(distributionFlow, StoreFlowVO.class));
+        return Result.success(MpUtils.convertMybatisPage(distributionFlow, StoreFlowVO.class));
     }
 
     @Operation(summary = "核对结算单", description = "核对结算单")

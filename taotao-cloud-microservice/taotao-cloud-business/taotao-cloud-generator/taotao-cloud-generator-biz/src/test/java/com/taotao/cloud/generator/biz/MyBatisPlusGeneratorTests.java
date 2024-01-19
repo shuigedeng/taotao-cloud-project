@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.report.biz;
+package com.taotao.cloud.generator.biz;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
@@ -25,15 +25,17 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * MyBatis Plus Generator

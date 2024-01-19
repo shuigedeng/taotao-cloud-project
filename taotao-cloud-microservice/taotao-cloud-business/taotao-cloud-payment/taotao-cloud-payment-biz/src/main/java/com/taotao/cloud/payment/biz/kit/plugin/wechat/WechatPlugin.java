@@ -24,7 +24,7 @@ import org.dromara.hutooljson.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.CachePrefix;
+
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;

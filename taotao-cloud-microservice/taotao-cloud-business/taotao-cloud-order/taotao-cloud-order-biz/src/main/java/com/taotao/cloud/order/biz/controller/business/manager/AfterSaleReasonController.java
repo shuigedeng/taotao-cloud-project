@@ -73,7 +73,7 @@ public class AfterSaleReasonController {
     public Result<PageResult<AfterSaleReasonVO>> getByPage(
             @Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
         IPage<AfterSaleReason> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQuery);
-        return Result.success(PageResult.convertMybatisPage(page, AfterSaleReasonVO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, AfterSaleReasonVO.class));
     }
 
     @Operation(summary = "添加售后原因", description = "添加售后原因")

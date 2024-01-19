@@ -1,4 +1,4 @@
-package com.yomahub.liteflow.example.component;
+package com.taotao.cloud.order.biz.liteflow.component;
 
 import cn.hutool.core.collection.ListUtil;
 import com.yomahub.liteflow.core.NodeComponent;

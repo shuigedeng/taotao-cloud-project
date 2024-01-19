@@ -54,6 +54,6 @@ public class ReceiptController {
     @GetMapping("/tree")
     public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery receiptPageQuery) {
         IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(receiptPageQuery);
-        return Result.success(PageResult.convertMybatisPage(page, OrderReceiptDTO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
     }
 }

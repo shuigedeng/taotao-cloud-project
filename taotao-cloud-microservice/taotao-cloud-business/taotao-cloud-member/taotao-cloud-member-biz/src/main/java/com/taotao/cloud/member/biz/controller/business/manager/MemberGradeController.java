@@ -69,7 +69,7 @@ public class MemberGradeController {
     @GetMapping(value = "/page")
     public Result<PageResult<MemberGradeVO>> queryPage(PageQuery pageQuery) {
         IPage<MemberGrade> memberGradePage = memberGradeService.queryPage(pageQuery);
-        return Result.success(PageResult.convertMybatisPage(memberGradePage, MemberGradeVO.class));
+        return Result.success(MpUtils.convertMybatisPage(memberGradePage, MemberGradeVO.class));
     }
 
     @Operation(summary = "添加会员等级", description = "添加会员等级")

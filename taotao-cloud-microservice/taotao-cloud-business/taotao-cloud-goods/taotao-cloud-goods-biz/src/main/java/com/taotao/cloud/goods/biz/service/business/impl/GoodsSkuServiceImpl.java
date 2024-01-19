@@ -21,12 +21,12 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.CachePrefix;
+
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;

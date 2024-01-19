@@ -145,7 +145,7 @@ Maven:
  Elasticjob           | 3.0.4           
  Powerjob             | 4.3.6           
  Forest               | 1.5.32          
- Netty                | 4.1.104.Final
+ Netty                | 4.1.105.Final
 
 ## 6. 演示地址
 

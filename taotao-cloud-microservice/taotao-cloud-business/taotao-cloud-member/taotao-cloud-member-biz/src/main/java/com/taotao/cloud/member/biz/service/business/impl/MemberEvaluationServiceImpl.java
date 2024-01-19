@@ -27,7 +27,7 @@ import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.support.tuple.Tuple2;
 import com.taotao.cloud.common.support.tuple.Tuple3;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;

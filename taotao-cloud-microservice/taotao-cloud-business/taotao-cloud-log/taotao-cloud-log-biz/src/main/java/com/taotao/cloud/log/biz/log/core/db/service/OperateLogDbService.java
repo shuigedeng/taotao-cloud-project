@@ -62,7 +62,7 @@ public class OperateLogDbService implements OperateLogService {
      */
     @Override
     public PageResult<OperateLogDto> page(OperateLogParam operateLogParam) {
-        return PageResult.convertMybatisPage(operateLogManager.page(operateLogParam), OperateLogDto.class);
+        return MpUtils.convertMybatisPage(operateLogManager.page(operateLogParam), OperateLogDto.class);
     }
 
     /**

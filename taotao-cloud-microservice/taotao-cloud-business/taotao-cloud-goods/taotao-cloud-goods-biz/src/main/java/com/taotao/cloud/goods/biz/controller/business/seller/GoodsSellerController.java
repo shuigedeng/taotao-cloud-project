@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsSkuStockDTO;
@@ -88,7 +88,7 @@ public class GoodsSellerController {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         goodsPageQuery.setStoreId(storeId);
         IPage<Goods> goodsPage = goodsService.goodsQueryPage(goodsPageQuery);
-        return Result.success(PageResult.convertMybatisPage(goodsPage, GoodsVO.class));
+        return Result.success(MpUtils.convertMybatisPage(goodsPage, GoodsVO.class));
     }
 
     @Operation(summary = "分页获取商品Sku列表", description = "分页获取商品Sku列表")
@@ -100,7 +100,7 @@ public class GoodsSellerController {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         goodsPageQuery.setStoreId(storeId);
         IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
-        return Result.success(PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+        return Result.success(MpUtils.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
     }
 
     @Operation(summary = "分页获取库存告警商品列表", description = "分页获取库存告警商品列表")
@@ -119,7 +119,7 @@ public class GoodsSellerController {
         // 商品SKU列表
         IPage<GoodsSku> goodsSkuPage = goodsSkuService.goodsSkuQueryPage(goodsPageQuery);
         StockWarningVO stockWarning =
-                new StockWarningVO(stockWarnNum, PageResult.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
+                new StockWarningVO(stockWarnNum, MpUtils.convertMybatisPage(goodsSkuPage, GoodsSkuVO.class));
         return Result.success(stockWarning);
     }
 

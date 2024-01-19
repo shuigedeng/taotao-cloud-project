@@ -68,7 +68,7 @@ public class ScheduledJobController {
 	@RequestLogger
 	public Result<PageResult<ScheduledJobVO>> page(ScheduledJobPageQuery pageQuery) {
 		IPage<ScheduledJob> page = scheduledJobService.page(pageQuery);
-		return Result.success(PageResult.convertMybatisPage(page, ScheduledJobVO.class));
+		return Result.success(MpUtils.convertMybatisPage(page, ScheduledJobVO.class));
 	}
 
 	@PostMapping("/job")

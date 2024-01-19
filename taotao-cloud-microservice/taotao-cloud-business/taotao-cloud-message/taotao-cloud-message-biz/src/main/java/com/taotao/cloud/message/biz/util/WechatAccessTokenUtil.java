@@ -19,7 +19,7 @@ package com.taotao.cloud.message.biz.util; // package com.taotao.cloud.message.b
 // import org.dromara.hutoolhttp.HttpUtil;
 // import org.dromara.hutooljson.JSONObject;
 // import com.google.gson.Gson;
-// import com.taotao.cloud.common.enums.CachePrefix;
+// 
 // import com.taotao.cloud.common.enums.ClientTypeEnum;
 // import com.taotao.cloud.common.enums.ResultEnum;
 // import com.taotao.cloud.common.exception.BusinessException;

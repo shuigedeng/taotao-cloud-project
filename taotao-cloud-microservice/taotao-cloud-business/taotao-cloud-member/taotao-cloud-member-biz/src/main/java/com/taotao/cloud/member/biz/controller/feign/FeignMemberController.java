@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.service.business.IMemberService;

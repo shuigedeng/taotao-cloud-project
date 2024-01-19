@@ -62,7 +62,7 @@ public class LoginLogDbService implements LoginLogService {
      */
     @Override
     public PageResult<LoginLogDto> page(LoginLogParam loginLogParam) {
-        return PageResult.convertMybatisPage(loginLogManager.page(loginLogParam), LoginLogDto.class);
+        return MpUtils.convertMybatisPage(loginLogManager.page(loginLogParam), LoginLogDto.class);
     }
 
     /**

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.generator.biz.mbg;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -62,7 +63,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
             }
             // A 给model的字段添加swagger注解
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
-            LogUtils.info(field.getType());
+            LogUtils.info(String.valueOf(field.getType()));
         }
 
         // B 给时间字段规定格式

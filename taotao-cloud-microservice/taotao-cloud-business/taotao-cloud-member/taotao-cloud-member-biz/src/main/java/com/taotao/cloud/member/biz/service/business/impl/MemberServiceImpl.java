@@ -23,13 +23,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.CachePrefix;
+
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.CookieUtils;

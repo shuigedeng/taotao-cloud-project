@@ -18,7 +18,7 @@ package com.taotao.cloud.log.biz.log.core.mongo.service;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.log.biz.log.core.mongo.dao.DataVersionLogMongoRepository;
 import com.taotao.cloud.log.biz.log.core.mongo.entity.DataVersionLogMongo;
 import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;

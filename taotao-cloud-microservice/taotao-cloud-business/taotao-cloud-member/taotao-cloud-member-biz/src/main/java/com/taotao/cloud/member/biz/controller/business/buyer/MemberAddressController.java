@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.model.convert.MemberAddressConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
@@ -58,7 +58,7 @@ public class MemberAddressController {
     @GetMapping
     public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
         IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page, SecurityUtils.getUserId());
-        return Result.success(PageResult.convertMybatisPage(memberAddressPage, MemberAddressConvert.INSTANCE::convert));
+        return Result.success(MpUtils.convertMybatisPage(memberAddressPage, MemberAddressConvert.INSTANCE::convert));
     }
 
     @Operation(summary = "根据ID获取会员收件地址", description = "根据ID获取会员收件地址")

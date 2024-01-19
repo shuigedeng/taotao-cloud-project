@@ -55,7 +55,7 @@ public class QuartzJobLogController {
 	@Operation(summary = "分页查询任务日志", description = "分页查询任务日志")
 	public Result<PageResult<QuartzJobLogVO>> page(QuartzJobLogPageQuery quartzJobLogPageQuery) {
 		IPage<QuartzJobLog> page = quartzJobLogService.page(quartzJobLogPageQuery);
-		return Result.success(PageResult.convertMybatisPage(page, QuartzJobLogVO.class));
+		return Result.success(MpUtils.convertMybatisPage(page, QuartzJobLogVO.class));
 	}
 
 	@GetMapping("/{id}")

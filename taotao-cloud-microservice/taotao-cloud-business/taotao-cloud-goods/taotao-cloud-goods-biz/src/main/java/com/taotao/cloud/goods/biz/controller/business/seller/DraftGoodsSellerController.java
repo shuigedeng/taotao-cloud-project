@@ -21,7 +21,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.api.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.api.model.vo.DraftGoodsSkuParamsVO;
@@ -67,7 +67,7 @@ public class DraftGoodsSellerController {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         draftGoodsPageQuery.setStoreId(storeId);
         IPage<DraftGoods> draftGoods = draftGoodsService.draftGoodsQueryPage(draftGoodsPageQuery);
-        return Result.success(PageResult.convertMybatisPage(draftGoods, DraftGoodsVO.class));
+        return Result.success(MpUtils.convertMybatisPage(draftGoods, DraftGoodsVO.class));
     }
 
     @Operation(summary = "获取草稿商品", description = "获取草稿商品")

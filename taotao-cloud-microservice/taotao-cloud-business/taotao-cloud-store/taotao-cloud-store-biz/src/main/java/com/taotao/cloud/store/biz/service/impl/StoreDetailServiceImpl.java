@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignCategoryApi;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
 import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;

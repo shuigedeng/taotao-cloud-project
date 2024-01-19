@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.stock.api.common.util.validator.group;
+package com.taotao.cloud.generator.biz;
 
-/**
- * 更新数据 Group
- *
- * @author shuigedeng
- */
-public interface UpdateGroup {}
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class TaoTaoCloudGeneratorApplicationTests {
+
+    @Test
+    void contextLoads() {}
+}

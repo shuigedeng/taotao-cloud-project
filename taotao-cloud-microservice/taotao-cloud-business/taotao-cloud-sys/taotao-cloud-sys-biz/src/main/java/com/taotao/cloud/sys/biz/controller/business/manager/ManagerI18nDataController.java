@@ -23,7 +23,7 @@ public class ManagerI18nDataController {
 //	@Operation(summary = "分页查询", description = "分页查询")
 //	public Result<PageResult<I18nDataPageVO>> getI18nDataPage(@Validated PageQuery pageParam, I18nDataQO i18nDataQO) {
 //		IPage<I18nDataPageVO> page = i18nDataService.queryPage(pageParam, i18nDataQO);
-//		return Result.success(PageResult.convertMybatisPage(page, I18nDataPageVO.class));
+//		return Result.success(MpUtils.convertMybatisPage(page, I18nDataPageVO.class));
 //	}
 //
 //	@GetMapping("/list")

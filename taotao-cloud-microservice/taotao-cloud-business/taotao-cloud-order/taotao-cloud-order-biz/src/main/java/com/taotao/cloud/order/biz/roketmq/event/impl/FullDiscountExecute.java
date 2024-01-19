@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.CachePrefix;
+
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;

@@ -21,16 +21,17 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
@@ -71,7 +72,7 @@ public class OrderController {
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
         orderPageQuery.setMemberId(currentUser.getUserId());
         IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
-        return Result.success(PageResult.convertMybatisPage(page, OrderSimpleVO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, OrderSimpleVO.class));
     }
 
     @Operation(summary = "订单明细", description = "订单明细")

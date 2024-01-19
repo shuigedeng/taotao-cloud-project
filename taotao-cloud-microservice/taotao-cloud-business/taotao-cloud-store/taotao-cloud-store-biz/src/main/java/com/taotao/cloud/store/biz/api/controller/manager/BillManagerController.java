@@ -67,7 +67,7 @@ public class BillManagerController {
     @GetMapping(value = "/getByPage")
     public Result<PageResult<BillListVO>> getByPage(BillPageQuery billSearchParams) {
         IPage<BillListVO> billListVOIPage = billService.billPage(billSearchParams);
-        return Result.success(PageResult.convertMybatisPage(billListVOIPage, BillListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(billListVOIPage, BillListVO.class));
     }
 
     @Operation(summary = "获取商家结算单流水分页", description = "获取商家结算单流水分页")

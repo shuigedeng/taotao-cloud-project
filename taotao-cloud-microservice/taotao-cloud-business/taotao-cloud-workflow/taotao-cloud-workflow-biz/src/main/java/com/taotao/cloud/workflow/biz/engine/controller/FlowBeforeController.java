@@ -21,7 +21,7 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.workflow.api.vo.UserEntity;
 import com.taotao.cloud.workflow.biz.common.base.vo.PaginationVO;
@@ -154,7 +154,7 @@ public class FlowBeforeController {
                 listVO.add(vo);
             }
         }
-        return Result.success(PageResult.convertMybatisPage(data, FlowBeforeListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(data, FlowBeforeListVO.class));
     }
 
     @Operation(summary = "获取待我审批信息", description = "获取待我审批信息")

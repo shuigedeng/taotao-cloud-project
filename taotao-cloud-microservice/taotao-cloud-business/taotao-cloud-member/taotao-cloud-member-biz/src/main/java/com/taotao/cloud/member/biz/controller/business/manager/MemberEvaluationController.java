@@ -67,7 +67,7 @@ public class MemberEvaluationController {
     @PreAuthorize("@el.check('admin','timing:list')")
     public Result<PageResult<MemberEvaluationListVO>> queryPage(EvaluationPageQuery evaluationPageQuery) {
         IPage<MemberEvaluation> memberEvaluationPage = memberEvaluationService.queryPage(evaluationPageQuery);
-        return Result.success(PageResult.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(memberEvaluationPage, MemberEvaluationListVO.class));
     }
 
     @Operation(summary = "修改评价状态", description = "修改评价状态")

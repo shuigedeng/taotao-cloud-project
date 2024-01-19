@@ -24,7 +24,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lambda.StreamUtils;
 import com.taotao.cloud.generator.api.constant.GenConstants;
 import com.taotao.cloud.generator.biz.entity.GenTable;
@@ -395,7 +395,7 @@ public class GenTableServiceImpl implements IGenTableService {
         Snowflake snowflake = IdUtil.getSnowflake();
         List<Long> menuIds = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            menuIds.add(snowflake.nextId());
+            menuIds.add(snowflake.next());
         }
         table.setMenuIds(menuIds);
         // 设置主子表信息

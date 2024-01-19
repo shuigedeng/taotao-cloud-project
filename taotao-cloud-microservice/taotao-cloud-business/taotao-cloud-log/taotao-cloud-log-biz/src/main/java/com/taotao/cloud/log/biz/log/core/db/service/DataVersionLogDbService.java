@@ -18,7 +18,7 @@ package com.taotao.cloud.log.biz.log.core.db.service;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.log.biz.log.core.db.dao.DataVersionLogDbManager;
 import com.taotao.cloud.log.biz.log.core.db.entity.DataVersionLogDb;
 import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
@@ -88,7 +88,7 @@ public class DataVersionLogDbService implements DataVersionLogService {
      */
     @Override
     public PageResult<DataVersionLogDto> page(DataVersionLogParam param) {
-        return PageResult.convertMybatisPage(manager.page(param), DataVersionLogDto.class);
+        return MpUtils.convertMybatisPage(manager.page(param), DataVersionLogDto.class);
     }
 
     /**

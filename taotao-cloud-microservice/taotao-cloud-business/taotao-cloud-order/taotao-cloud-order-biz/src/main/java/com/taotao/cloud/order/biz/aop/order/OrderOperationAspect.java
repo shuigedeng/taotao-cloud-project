@@ -17,14 +17,15 @@
 package com.taotao.cloud.order.biz.aop.order;
 
 import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.spel.SpelUtils;
 import com.taotao.cloud.order.biz.event.order.OrderLogEvent;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

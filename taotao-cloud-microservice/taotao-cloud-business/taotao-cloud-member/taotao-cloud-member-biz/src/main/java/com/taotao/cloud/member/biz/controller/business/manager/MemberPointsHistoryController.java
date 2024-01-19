@@ -55,7 +55,7 @@ public class MemberPointsHistoryController {
     public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(MemberPointHistoryPageQuery pageQuery) {
         IPage<MemberPointsHistory> page = memberPointsHistoryService.memberPointsHistoryPageQuery(
                 pageQuery.getPageParm(), pageQuery.getMemberId(), pageQuery.getMemberName());
-        return Result.success(PageResult.convertMybatisPage(page, MemberPointsHistoryPageVO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, MemberPointsHistoryPageVO.class));
     }
 
     @Operation(summary = "获取会员积分", description = "获取会员积分")

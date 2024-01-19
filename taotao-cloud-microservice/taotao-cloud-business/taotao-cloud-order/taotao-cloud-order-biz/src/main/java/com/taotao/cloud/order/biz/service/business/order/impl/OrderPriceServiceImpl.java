@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.service.business.order.impl;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.model.dto.order.PriceDetailDTO;

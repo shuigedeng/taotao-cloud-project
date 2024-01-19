@@ -19,7 +19,7 @@ package com.taotao.cloud.im.biz.service.impl; // package com.taotao.cloud.wechat
 // import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 // import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 // import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-// import com.taotao.cloud.common.enums.CachePrefix;
+// 
 // import com.taotao.cloud.common.enums.ClientTypeEnum;
 // import com.taotao.cloud.common.enums.ResultEnum;
 // import com.taotao.cloud.common.exception.BusinessException;

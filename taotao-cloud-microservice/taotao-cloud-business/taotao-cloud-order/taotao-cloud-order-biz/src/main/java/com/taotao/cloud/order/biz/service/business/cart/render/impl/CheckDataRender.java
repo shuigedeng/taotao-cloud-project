@@ -40,7 +40,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.apache.shardingsphere.distsql.parser.autogen.CommonDistSQLStatementParser.UserContext;
 import org.springframework.stereotype.Service;
 
 /**

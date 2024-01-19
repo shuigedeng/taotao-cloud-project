@@ -77,7 +77,7 @@ public class StoreManagerController {
     @GetMapping
     public Result<PageResult<StoreVO>> getByPage(StorePageQuery storePageQuery) {
         IPage<StoreVO> storeVOIPage = storeService.findByConditionPage(storePageQuery);
-        return Result.success(PageResult.convertMybatisPage(storeVOIPage, StoreVO.class));
+        return Result.success(MpUtils.convertMybatisPage(storeVOIPage, StoreVO.class));
     }
 
     @Operation(summary = "获取店铺详情", description = "获取店铺详情")

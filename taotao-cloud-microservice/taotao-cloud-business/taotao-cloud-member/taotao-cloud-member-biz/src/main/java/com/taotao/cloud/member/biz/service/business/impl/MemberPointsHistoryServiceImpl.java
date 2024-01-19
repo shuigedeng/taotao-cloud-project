@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.mapper.IMemberPointsHistoryMapper;

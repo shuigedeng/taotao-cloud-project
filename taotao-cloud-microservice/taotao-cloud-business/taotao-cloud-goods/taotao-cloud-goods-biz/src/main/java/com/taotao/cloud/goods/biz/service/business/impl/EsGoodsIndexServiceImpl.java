@@ -16,11 +16,12 @@
 
 package com.taotao.cloud.goods.biz.service.business.impl;
 
+import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.ReflectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.CachePrefix;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
@@ -47,8 +48,11 @@ import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.vo.BasePromotionsVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
-import de.danielbechler.diff.category.CategoryService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.text.CharSequenceUtil;
+import org.dromara.hutool.json.JSONObject;
+import org.dromara.hutool.json.JSONUtil;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.update.UpdateRequest;
@@ -62,9 +66,7 @@ import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.elasticsearch.script.Script;
 import org.elasticsearch.script.ScriptType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.client.erhlc.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchPage;
@@ -76,6 +78,9 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static com.taotao.cloud.common.enums.CachePrefixEnum.INIT_INDEX_FLAG;
+import static com.taotao.cloud.common.enums.CachePrefixEnum.INIT_INDEX_PROCESS;
 
 /**
  * 商品索引业务层实现
@@ -135,19 +140,19 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	@Override
 	public void init() {
 		// 获取索引任务标识
-		boolean flag = (boolean) cache.get(CachePrefix.INIT_INDEX_FLAG.getPrefix());
+		boolean flag = (boolean) cache.get(INIT_INDEX_FLAG.getPrefix());
 		// 为空则默认写入没有任务
-		if (flag == null) {
-			cache.set(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
+		if (flag) {
+			cache.set(INIT_INDEX_FLAG.getPrefix(), false);
 		}
 		// 有正在初始化的任务，则提示异常
-		if (boolean.TRUE.equals(flag)) {
+		if (TRUE.equals(flag)) {
 			throw new RuntimeException("索引正在生成");
 		}
 
 		// 初始化标识
-		cache.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), null);
-		cache.setExpire(CachePrefix.INIT_INDEX_FLAG.getPrefix(), true, 10L, TimeUnit.MINUTES);
+		cache.set(INIT_INDEX_PROCESS.getPrefix(), null);
+		cache.setExpire(INIT_INDEX_FLAG.getPrefix(), true, 10L, TimeUnit.MINUTES);
 
 		ThreadUtil.execAsync(() -> {
 			try {
@@ -157,7 +162,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 				skuQueryWrapper.eq("gs.delete_flag", false);
 				skuQueryWrapper.gt("gs.quantity", 0);
 
-				Map<String, Long> resultMap = (Map<String, Long>) cache.get(CachePrefix.INIT_INDEX_PROCESS.getPrefix());
+				Map<String, Long> resultMap = (Map<String, Long>) cache.get(INIT_INDEX_PROCESS.getPrefix());
 
 				if (CollUtil.isEmpty(resultMap)) {
 					QueryWrapper<GoodsSku> skuCountQueryWrapper = new QueryWrapper<>();
@@ -170,7 +175,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					resultMap.put(KEY_FAIL, 0L);
 					resultMap.put(KEY_PROCESSED, 0L);
 					resultMap.put("total", this.goodsSkuService.count(skuCountQueryWrapper));
-					cache.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
+					cache.set(INIT_INDEX_PROCESS.getPrefix(), resultMap);
 				}
 
 				for (int i = 1; ; i++) {
@@ -238,7 +243,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 						esGoodsIndices.add(esGoodsIndex);
 						// 库存锁是在redis做的，所以生成索引，同时更新一下redis中的库存数量
-						//CachePrefix.SKU_STOCK.getPrefix() + id;
+						// SKU_STOCK.getPrefix() + id;
 						cache.set("aaa", goodsSku.getQuantity());
 					}
 
@@ -246,14 +251,14 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					this.initIndex(esGoodsIndices, i == 1);
 				}
 
-				cache.set(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
+				cache.set(INIT_INDEX_FLAG.getPrefix(), false);
 
 				// 初始化商品索引
 			} catch (Exception e) {
 				LogUtils.error("商品索引生成异常：", e);
 				// 如果出现异常，则将进行中的任务标识取消掉，打印日志
-				cache.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), null);
-				cache.set(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
+				cache.set(INIT_INDEX_PROCESS.getPrefix(), null);
+				cache.set(INIT_INDEX_FLAG.getPrefix(), false);
 			}
 		});
 
@@ -261,12 +266,12 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 	@Override
 	public Map<String, Long> getProgress() {
-		Map<String, Long> map = (Map<String, Long>) cache.get(CachePrefix.INIT_INDEX_PROCESS.getPrefix());
+		Map<String, Long> map = (Map<String, Long>) cache.get(INIT_INDEX_PROCESS.getPrefix());
 		if (map == null) {
 			return Collections.emptyMap();
 		}
-		boolean flag = (boolean) cache.get(CachePrefix.INIT_INDEX_FLAG.getPrefix());
-		map.put("flag", boolean.TRUE.equals(flag) ? 1L : 0L);
+		boolean flag = (boolean) cache.get(INIT_INDEX_FLAG.getPrefix());
+		map.put("flag", TRUE.equals(flag) ? 1L : 0L);
 		return map;
 	}
 
@@ -483,8 +488,8 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	public void initIndex(List<EsGoodsIndex> goodsIndexList, boolean regeneratorIndex) {
 		if (goodsIndexList == null || goodsIndexList.isEmpty()) {
 			// 初始化标识
-			cache.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), null);
-			cache.set(CachePrefix.INIT_INDEX_FLAG.getPrefix(), false);
+			cache.set(INIT_INDEX_PROCESS.getPrefix(), null);
+			cache.set(INIT_INDEX_FLAG.getPrefix(), false);
 			return;
 		}
 		// 索引名称拼接
@@ -503,7 +508,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			this.createIndexRequest(indexName);
 		}
 
-		Map<String, Long> resultMap = (Map<String, Long>) cache.get(CachePrefix.INIT_INDEX_PROCESS.getPrefix());
+		Map<String, Long> resultMap = (Map<String, Long>) cache.get(INIT_INDEX_PROCESS.getPrefix());
 		if (!goodsIndexList.isEmpty()) {
 			for (EsGoodsIndex goodsIndex : goodsIndexList) {
 				try {
@@ -515,10 +520,10 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					resultMap.put(KEY_FAIL, resultMap.get(KEY_FAIL) + 1);
 				}
 				resultMap.put(KEY_PROCESSED, resultMap.get(KEY_PROCESSED) + 1);
-				cache.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
+				cache.set(INIT_INDEX_PROCESS.getPrefix(), resultMap);
 			}
 		}
-		cache.set(CachePrefix.INIT_INDEX_PROCESS.getPrefix(), resultMap);
+		cache.set(INIT_INDEX_PROCESS.getPrefix(), resultMap);
 	}
 
 	@Override

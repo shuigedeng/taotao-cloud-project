@@ -58,7 +58,7 @@ public class QuartzJobController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	public Result<PageResult<QuartzJobVO>> page(QuartzJobPageQuery quartzJobPageQuery) {
 		IPage<QuartzJob> page = quartzJobService.page(quartzJobPageQuery);
-		return Result.success(PageResult.convertMybatisPage(page, QuartzJobVO.class));
+		return Result.success(MpUtils.convertMybatisPage(page, QuartzJobVO.class));
 	}
 
 	@PostMapping("/job")

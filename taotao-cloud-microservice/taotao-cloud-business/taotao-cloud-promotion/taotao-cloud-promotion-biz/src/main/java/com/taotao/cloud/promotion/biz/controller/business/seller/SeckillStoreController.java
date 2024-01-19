@@ -18,7 +18,7 @@ package com.taotao.cloud.promotion.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.promotion.api.model.page.SeckillPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.SeckillApplyVO;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;

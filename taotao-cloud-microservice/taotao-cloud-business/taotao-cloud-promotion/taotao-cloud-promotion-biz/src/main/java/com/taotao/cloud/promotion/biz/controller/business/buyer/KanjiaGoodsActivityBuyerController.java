@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
@@ -87,7 +87,7 @@ public class KanjiaGoodsActivityBuyerController {
 		pageQuery.setStartTime(System.currentTimeMillis());
 		pageQuery.setEndTime(System.currentTimeMillis());
 		IPage<KanjiaActivityGoodsBO> kanjiaGoodsPage = kanJiaActivityGoodsService.kanjiaGoodsPage(pageQuery, pageQuery.getPageParm());
-		return Result.success(PageResult.convertMybatisPage(kanjiaGoodsPage, KanjiaActivityGoodsListVO.class));
+		return Result.success(MpUtils.convertMybatisPage(kanjiaGoodsPage, KanjiaActivityGoodsListVO.class));
 	}
 
 	@RequestLogger
@@ -115,7 +115,7 @@ public class KanjiaGoodsActivityBuyerController {
 	public Result<PageResult<KanjiaActivityLogVO>> getKanjiaActivityLog(
 		KanJiaActivityLogPageQuery pageQuery) {
 		IPage<KanjiaActivityLog> page = kanJiaActivityLogService.getForPage(pageQuery, pageQuery.getPageParm());
-		return Result.success(PageResult.convertMybatisPage(page, KanjiaActivityLogVO.class));
+		return Result.success(MpUtils.convertMybatisPage(page, KanjiaActivityLogVO.class));
 	}
 
 	@RequestLogger

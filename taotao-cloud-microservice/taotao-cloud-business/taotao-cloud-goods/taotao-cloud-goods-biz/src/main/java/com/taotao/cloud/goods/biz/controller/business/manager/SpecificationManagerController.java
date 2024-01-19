@@ -75,7 +75,7 @@ public class SpecificationManagerController {
     @GetMapping
     public Result<PageResult<SpecificationVO>> page(@Validated SpecificationPageQuery specificationPageQuery) {
         IPage<Specification> specificationPage = specificationService.getPage(specificationPageQuery);
-        return Result.success(PageResult.convertMybatisPage(specificationPage, SpecificationConvert.INSTANCE::convert));
+        return Result.success(MpUtils.convertMybatisPage(specificationPage, SpecificationConvert.INSTANCE::convert));
     }
 
     @Operation(summary = "保存规格", description = "保存规格")

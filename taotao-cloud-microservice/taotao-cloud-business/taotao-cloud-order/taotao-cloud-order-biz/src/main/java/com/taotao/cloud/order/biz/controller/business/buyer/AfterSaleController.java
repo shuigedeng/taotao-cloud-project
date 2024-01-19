@@ -19,8 +19,7 @@ package com.taotao.cloud.order.biz.controller.business.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.order.api.dto.aftersale.AfterSaleDTOBuilder;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
@@ -38,6 +37,7 @@ import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleReasonSer
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
@@ -93,7 +93,7 @@ public class AfterSaleController {
 	@GetMapping(value = "/page")
 	public Result<PageResult<AfterSaleVO>> pageQuery(@Validated AfterSalePageQuery afterSalePageQuery) {
 		IPage<AfterSale> afterSalePages = afterSaleService.pageQuery(afterSalePageQuery);
-		return Result.success(PageResult.convertMybatisPage(afterSalePages, AfterSaleVO.class));
+		return Result.success(MpUtils.convertMybatisPage(afterSalePages, AfterSaleVO.class));
 	}
 
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息")

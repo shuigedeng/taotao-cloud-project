@@ -63,7 +63,7 @@ public class MemberController {
     @GetMapping
     public Result<PageResult<MemberVO>> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
         IPage<Member> memberPage = memberService.pageQuery(memberSearchPageQuery);
-        return Result.success(PageResult.convertMybatisPage(memberPage, MemberVO.class));
+        return Result.success(MpUtils.convertMybatisPage(memberPage, MemberVO.class));
     }
 
     @Operation(summary = "通过ID获取会员信息", description = "通过ID获取会员信息")

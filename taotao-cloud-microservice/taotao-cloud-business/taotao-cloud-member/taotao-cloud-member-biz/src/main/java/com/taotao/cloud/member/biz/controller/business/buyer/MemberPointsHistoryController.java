@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryPageVO;
 import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
@@ -51,7 +51,7 @@ public class MemberPointsHistoryController {
     @GetMapping(value = "/page")
     public Result<PageResult<MemberPointsHistoryPageVO>> getByPage(PageQuery page) {
         IPage<MemberPointsHistory> memberPointsHistoryPage = memberPointsHistoryService.pageQuery(page);
-        return Result.success(PageResult.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
+        return Result.success(MpUtils.convertMybatisPage(memberPointsHistoryPage, MemberPointsHistoryPageVO.class));
     }
 
     @Operation(summary = "获取当前会员积分", description = "获取当前会员积分")

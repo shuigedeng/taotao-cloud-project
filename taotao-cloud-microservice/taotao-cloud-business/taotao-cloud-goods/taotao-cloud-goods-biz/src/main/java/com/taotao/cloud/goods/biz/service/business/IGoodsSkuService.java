@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.service.business;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.enums.CachePrefix;
+
 import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsSkuDTO;
 import com.taotao.cloud.goods.api.model.dto.GoodsSkuStockDTO;

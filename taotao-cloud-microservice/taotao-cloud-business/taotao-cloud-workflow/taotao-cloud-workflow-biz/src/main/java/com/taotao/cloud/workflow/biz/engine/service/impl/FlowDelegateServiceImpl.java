@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.workflow.biz.common.base.Pagination;
 import com.taotao.cloud.workflow.biz.common.util.DateUtil;
 import com.taotao.cloud.workflow.biz.common.util.RandomUtil;

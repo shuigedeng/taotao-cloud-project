@@ -65,7 +65,7 @@ public class AfterSaleController {
     @GetMapping(value = "/page")
     public Result<PageResult<AfterSaleVO>> pageQuery(AfterSalePageQuery searchParams) {
         IPage<AfterSale> page = afterSaleService.pageQuery(searchParams);
-        return Result.success(PageResult.convertMybatisPage(page, AfterSaleVO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, AfterSaleVO.class));
     }
 
     @Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表")

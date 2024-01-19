@@ -19,16 +19,17 @@ package com.taotao.cloud.order.biz.controller.business.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.biz.model.convert.AfterSaleConvert;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.cloud.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
@@ -77,7 +78,7 @@ public class AfterSaleController {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         searchParams.setStoreId(storeId);
         IPage<AfterSale> page = afterSaleService.pageQuery(searchParams);
-        return Result.success(PageResult.convertMybatisPage(page, AfterSaleVO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, AfterSaleVO.class));
     }
 
     @Operation(summary = "获取导出售后服务列表列表", description = "获取导出售后服务列表列表")

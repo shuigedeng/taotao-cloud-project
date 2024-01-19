@@ -76,7 +76,7 @@ public class TenantPackageController {
 	@Operation(summary = "分页查询租户套餐信息")
 	@GetMapping(value = "/page")
 	public Result<PageResult<TenantPackageDTO>> pageTenantPackage(TenantPackagePageDTO tenantPackagePageDTO) {
-		return Result.success(PageResult.convertMybatisPage(
+		return Result.success(MpUtils.convertMybatisPage(
 			tenantPackageService.pageTenantPackage(tenantPackagePageDTO), TenantPackageDTO.class));
 	}
 }

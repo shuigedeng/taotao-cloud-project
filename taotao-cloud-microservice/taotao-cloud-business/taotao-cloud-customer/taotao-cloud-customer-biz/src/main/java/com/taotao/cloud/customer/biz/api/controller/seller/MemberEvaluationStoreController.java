@@ -19,8 +19,8 @@ package com.taotao.cloud.customer.biz.api.controller.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.web.utils.OperationalJudgment;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import com.taotao.cloud.member.api.query.EvaluationPageQuery;
 import com.taotao.cloud.member.api.vo.MemberEvaluationListVO;
@@ -56,7 +56,7 @@ public class MemberEvaluationStoreController {
     public Result<PageResult<MemberEvaluationListVO>> getByPage(EvaluationPageQuery evaluationPageQuery) {
         evaluationPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         IPage<MemberEvaluationListVO> memberEvaluationListVOIPage = memberEvaluationApi.queryPage(evaluationPageQuery);
-        return Result.success(PageResult.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
+        return Result.success(MpUtils.convertMybatisPage(memberEvaluationListVOIPage, MemberEvaluationListVO.class));
     }
 
     @Operation(summary = "通过id获取", description = "通过id获取")

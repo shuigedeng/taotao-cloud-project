@@ -19,9 +19,9 @@ package com.taotao.cloud.promotion.biz.controller.business.buyer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.SecurityUser;
-import com.taotao.cloud.common.utils.common.OperationalJudgment;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.cloud.web.utils.OperationalJudgment;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
@@ -73,7 +73,7 @@ public class CouponBuyerController {
 		queryParam.setGetType(CouponGetEnum.FREE.name());
 
 		IPage<CouponVO> couponVOIPage = couponService.pageVOFindAll(queryParam, queryParam.getPageParm());
-		return Result.success(PageResult.convertMybatisPage(couponVOIPage, CouponVO.class));
+		return Result.success(MpUtils.convertMybatisPage(couponVOIPage, CouponVO.class));
 	}
 
 	@RequestLogger
@@ -84,7 +84,7 @@ public class CouponBuyerController {
 		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
 		// param.setMemberId(currentUser.getId());
 		IPage<MemberCoupon> memberCoupons = memberCouponService.getMemberCoupons(param, param.getPageParm());
-		return Result.success(PageResult.convertMybatisPage(memberCoupons, MemberCouponVO.class));
+		return Result.success(MpUtils.convertMybatisPage(memberCoupons, MemberCouponVO.class));
 	}
 
 	@RequestLogger
@@ -95,7 +95,7 @@ public class CouponBuyerController {
 		SecurityUser currentUser = Objects.requireNonNull(SecurityUtils.getCurrentUser());
 		// param.setMemberId(currentUser.getId());
 		IPage<MemberCoupon> memberCoupons = memberCouponService.getMemberCouponsByCanUse(param, totalPrice, param.getPageParm());
-		return Result.success(PageResult.convertMybatisPage(memberCoupons, MemberCouponVO.class));
+		return Result.success(MpUtils.convertMybatisPage(memberCoupons, MemberCouponVO.class));
 	}
 
 	@RequestLogger

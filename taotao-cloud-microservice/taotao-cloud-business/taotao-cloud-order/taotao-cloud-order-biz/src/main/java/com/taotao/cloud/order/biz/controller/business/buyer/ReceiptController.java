@@ -66,7 +66,7 @@ public class ReceiptController {
     @GetMapping("/page")
     public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery searchParams) {
         IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(searchParams);
-        return Result.success(PageResult.convertMybatisPage(page, OrderReceiptDTO.class));
+        return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
     }
 
     @Operation(summary = "保存发票信息", description = "保存发票信息")

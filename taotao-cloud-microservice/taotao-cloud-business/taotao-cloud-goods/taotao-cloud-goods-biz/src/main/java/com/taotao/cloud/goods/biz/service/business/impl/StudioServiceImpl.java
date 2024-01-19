@@ -25,7 +25,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
 import com.taotao.cloud.goods.api.model.vo.CommodityVO;

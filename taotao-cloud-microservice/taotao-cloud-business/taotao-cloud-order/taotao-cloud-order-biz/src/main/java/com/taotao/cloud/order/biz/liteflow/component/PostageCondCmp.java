@@ -1,4 +1,4 @@
-package com.yomahub.liteflow.example.component;
+package com.taotao.cloud.order.biz.liteflow.component;
 
 import com.yomahub.liteflow.core.NodeSwitchComponent;
 import com.yomahub.liteflow.example.slot.PriceContext;

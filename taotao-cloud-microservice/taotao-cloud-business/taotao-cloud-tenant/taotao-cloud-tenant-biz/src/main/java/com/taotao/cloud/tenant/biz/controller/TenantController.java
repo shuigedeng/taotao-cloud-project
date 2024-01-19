@@ -94,6 +94,6 @@ public class TenantController {
 	@Operation(summary = "分页查询租户列表")
 	@GetMapping(value = "/page")
 	public Result<PageResult<TenantDTO>> pageSysTenant(TenantPageDTO pageDTO) {
-		return Result.success(PageResult.convertMybatisPage(tenantService.pageSysTenant(pageDTO), TenantDTO.class));
+		return Result.success(MpUtils.convertMybatisPage(tenantService.pageSysTenant(pageDTO), TenantDTO.class));
 	}
 }

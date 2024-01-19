@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.utils.common.SecurityUtils;
+import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.mapper.IFootprintMapper;
