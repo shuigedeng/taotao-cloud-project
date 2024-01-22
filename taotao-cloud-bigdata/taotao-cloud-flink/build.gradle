@@ -28,7 +28,8 @@ dependencies {
     implementation "org.apache.flink:flink-table-planner_2.12:1.18.0"
     implementation 'org.apache.flink:flink-sql-gateway-api:1.18.0'
 
-    implementation 'org.apache.flink:flink-cep:1.18.0'
+    //使用alibaba 动态cep
+    //implementation 'org.apache.flink:flink-cep:1.18.0'
     implementation "org.apache.flink:flink-csv:1.18.0"
     implementation 'org.apache.flink:flink-parquet:1.18.0'
     implementation 'org.apache.parquet:parquet-avro:1.13.1'
@@ -98,6 +99,10 @@ dependencies {
     implementation "org.scala-lang:scala-library:2.12.18"
     implementation "org.scala-lang:scala-compiler:2.12.18"
     implementation "org.scala-lang:scala-reflect:2.12.18"
+
+    //implementation 'com.alibaba.ververica:flink-cep:1.15-vvr-6.0.4'
+    implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
+    implementation 'com.googlecode.aviator:aviator:5.3.1'
 }
 
 configurations {
