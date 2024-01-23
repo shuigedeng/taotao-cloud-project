@@ -1,6 +1,6 @@
 package com.taotao.cloud.bigdata.realtime.mall.app.func;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.bigdata.realtime.mall.bean.TableProcess;
 import com.taotao.cloud.bigdata.realtime.mall.common.GmallConfig;
 import com.taotao.cloud.bigdata.realtime.mall.utils.MySQLUtil;

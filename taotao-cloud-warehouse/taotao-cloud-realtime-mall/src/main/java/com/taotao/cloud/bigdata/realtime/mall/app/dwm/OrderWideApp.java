@@ -1,7 +1,7 @@
 package com.taotao.cloud.bigdata.realtime.mall.app.dwm;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.bigdata.realtime.mall.app.func.DimAsyncFunction;
 import com.taotao.cloud.bigdata.realtime.mall.bean.OrderDetail;
 import com.taotao.cloud.bigdata.realtime.mall.bean.OrderInfo;

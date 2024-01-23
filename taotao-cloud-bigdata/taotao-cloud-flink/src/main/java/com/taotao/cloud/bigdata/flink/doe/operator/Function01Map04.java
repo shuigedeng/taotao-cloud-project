@@ -1,7 +1,6 @@
 package com.taotao.cloud.bigdata.flink.doe.operator;
 
 
-import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.bigdata.flink.doe.beans.HeroBean;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeinfo.TypeInformation;

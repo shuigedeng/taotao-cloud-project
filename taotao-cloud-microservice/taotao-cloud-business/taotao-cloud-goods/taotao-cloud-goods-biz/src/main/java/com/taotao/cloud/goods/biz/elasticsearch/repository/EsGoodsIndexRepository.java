@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.biz.elasticsearch.repository;
 
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * 商品索引
@@ -26,4 +27,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @version 2022.04
  * @since 2022-04-25 16:27:45
  */
+@Repository
 public interface EsGoodsIndexRepository extends ElasticsearchRepository<EsGoodsIndex, Long> {}

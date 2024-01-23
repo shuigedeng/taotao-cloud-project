@@ -16,9 +16,11 @@
 
 package com.taotao.cloud.goods.biz.service.business;
 
+import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.api.model.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,14 @@ import java.util.Map;
  * @since 2022-04-27 16:59:28
  */
 public interface ICategoryService extends BaseSuperService<Category, Long> {
+
+	List<Category> childrenList(Long parentId);
+
+	Category getCategoryById(Long id);
+
+	boolean delete(Long id);
+
+	boolean updateCategoryStatus(Long categoryId, boolean enableOperations);
 
 	/**
 	 * 管理端获取所有分类
@@ -57,7 +67,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param ids 分类ID集合
 	 * @return 商品分类列表
 	 */
-	List<Category> listByIdsOrderByLevel(List<String> ids);
+	List<Category> listByIdsOrderByLevel(List<Long> ids);
 
 	/**
 	 * 根据分类id集合获取所有分类根据层级排序
@@ -72,7 +82,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 *
 	 * @return 分类树
 	 */
-	List<CategoryVO> categoryTree();
+	List<CategoryTreeVO> categoryTree();
 
 	/**
 	 * 查询所有的分类，父子关系
@@ -80,7 +90,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param parentId 分类父ID
 	 * @return 所有的分类，父子关系
 	 */
-	List<CategoryVO> listAllChildren(Long parentId);
+	List<CategoryTreeVO> listAllChildren(Long parentId);
 
 	/**
 	 * 查询所有的分类，父子关系
@@ -88,7 +98,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 *
 	 * @return 所有的分类，父子关系
 	 */
-	List<CategoryVO> listAllChildren();
+	List<CategoryTreeVO> listAllChildren();
 
 	/**
 	 * 获取指定分类的分类名称
@@ -96,7 +106,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param ids 指定分类id集合
 	 * @return 分类名称集合
 	 */
-	List<String> getCategoryNameByIds(List<String> ids);
+	List<String> getCategoryNameByIds(List<Long> ids);
 
 	/**
 	 * 获取商品分类list
@@ -120,7 +130,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param category 商品分类信息
 	 * @return 修改结果
 	 */
-	void updateCategory(Category category);
+	boolean updateCategory(Category category);
 
 	/**
 	 * 批量删除分类
@@ -143,7 +153,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param categories 经营范围
 	 * @return 分类VO列表
 	 */
-	List<CategoryVO> getStoreCategory(String[] categories);
+	List<CategoryTreeVO> getStoreCategory(String[] categories);
 
 	/**
 	 * 获取一级分类列表

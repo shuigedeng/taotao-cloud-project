@@ -26,7 +26,7 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2021.10
  * @since 2021-10-09 20:32:36
  */
-public interface IFeignGoodsService extends BaseSuperService<Goods, Long> {
+public interface IFeignGoodsService {
 
     <T> T test123(T t);
 }

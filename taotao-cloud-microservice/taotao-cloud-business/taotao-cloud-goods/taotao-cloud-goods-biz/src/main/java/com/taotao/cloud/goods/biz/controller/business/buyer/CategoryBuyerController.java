@@ -24,10 +24,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +33,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 买家端,商品分类接口
@@ -50,17 +50,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/goods/buyer/category")
 public class CategoryBuyerController {
 
-    /** 商品分类 */
-    private final ICategoryService categoryService;
+	/**
+	 * 商品分类
+	 */
+	private final ICategoryService categoryService;
 
-    @RequestLogger
-    @Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")
-    @Parameters({
-            @Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
-    })
-    @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/{parentId}")
-    public Result<List<CategoryTreeVO>> list( @NotNull(message = "父ID不能为空") @PathVariable Long parentId) {
-        return Result.success(categoryService.listAllChildren(parentId));
-    }
+	@RequestLogger
+	@Operation(summary = "根据父id获取商品分类列表", description = "根据父id获取商品分类列表")
+	@Parameters({
+		@Parameter(name = "parentId", required = true, description = "父ID 0-最上级id", in = ParameterIn.PATH),
+	})
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/{parentId}")
+	public Result<List<CategoryTreeVO>> list(@NotNull(message = "父ID不能为空") @PathVariable Long parentId) {
+		return Result.success(categoryService.listAllChildren(parentId));
+	}
 }

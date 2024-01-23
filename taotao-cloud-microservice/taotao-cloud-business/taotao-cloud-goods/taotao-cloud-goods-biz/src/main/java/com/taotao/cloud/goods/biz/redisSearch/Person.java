@@ -44,9 +44,9 @@ public class Person {
     private Point homeLoc;
 
     // Nest indexed object
-    @Indexed
-    @NonNull
-    private Address address;
+    // @Indexed
+    // @NonNull
+    // private Address address;
 
     @Indexed
     @NonNull

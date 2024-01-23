@@ -19,7 +19,9 @@ package com.taotao.cloud.goods.biz.repository.cls;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class GoodsUnitRepository extends BaseClassSuperRepository<GoodsUnit, Long> {
 
     public GoodsUnitRepository(EntityManager em) {

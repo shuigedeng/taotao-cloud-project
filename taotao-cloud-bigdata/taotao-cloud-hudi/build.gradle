@@ -61,6 +61,8 @@ dependencies {
     implementation "org.scala-lang:scala-library:2.12.18"
     implementation "org.scala-lang:scala-compiler:2.12.18"
     implementation "org.scala-lang:scala-reflect:2.12.18"
+
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.45"
 }
 
 configurations {

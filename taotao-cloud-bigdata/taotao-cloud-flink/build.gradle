@@ -103,6 +103,8 @@ dependencies {
     //implementation 'com.alibaba.ververica:flink-cep:1.15-vvr-6.0.4'
     implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.3.1'
+
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.45"
 }
 
 configurations {

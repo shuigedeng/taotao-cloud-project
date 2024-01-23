@@ -22,7 +22,6 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
@@ -35,6 +34,7 @@ import com.taotao.cloud.goods.biz.repository.inf.ICategoryRepository;
 import com.taotao.cloud.goods.biz.service.business.*;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.text.CharSequenceUtil;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -43,6 +43,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
+
+import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY;
+import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 
 /**
  * 商品分类业务层实现
@@ -109,11 +112,6 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 	}
 
 	@Override
-	public List<Category> listByIdsOrderByLevel(List<String> ids) {
-		return null;
-	}
-
-	@Override
 	public List<Map<String, Object>> listMapsByIdsOrderByLevel(List<String> ids, String columns) {
 		return null;
 	}
@@ -122,7 +120,7 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 	public List<CategoryTreeVO> categoryTree() {
 		// 获取缓存数据
 		List<CategoryTreeVO> categoryTreeVOList = redisRepository.lGet(
-			CachePrefix.CATEGORY.getPrefix(), 0L, redisRepository.lGetListSize(CachePrefix.CATEGORY.getPrefix()));
+			CATEGORY.getPrefix(), 0L, redisRepository.lGetListSize(CATEGORY.getPrefix()));
 		if (categoryTreeVOList != null) {
 			return categoryTreeVOList;
 		}
@@ -146,8 +144,8 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 		categoryTreeVOList.sort(Comparator.comparing(CategoryTreeVO::getSortOrder));
 
 		if (!categoryTreeVOList.isEmpty()) {
-			redisRepository.lSet(CachePrefix.CATEGORY.getPrefix(), categoryTreeVOList);
-			redisRepository.lSet(CachePrefix.CATEGORY_ARRAY.getPrefix(), list);
+			redisRepository.lSet(CATEGORY.getPrefix(), categoryTreeVOList);
+			redisRepository.lSet(CATEGORY_ARRAY.getPrefix(), list);
 		}
 		return categoryTreeVOList;
 	}
@@ -187,7 +185,6 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 
 	@Override
 	public List<CategoryTreeVO> listAllChildren() {
-
 		// 获取全部分类
 		List<Category> list = this.list();
 
@@ -206,19 +203,14 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 	}
 
 	@Override
-	public List<String> getCategoryNameByIds(List<String> ids) {
-		return null;
-	}
-
-	@Override
 	@SuppressWarnings("unchecked")
 	public List<String> getCategoryNameByIds(List<Long> ids) {
 		List<String> categoryName = new ArrayList<>();
-		List<Category> categoryVOList = (List<Category>) redisRepository.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
+		List<Category> categoryVOList = (List<Category>) redisRepository.get(CATEGORY_ARRAY.getPrefix());
 		// 如果缓存中为空，则重新获取缓存
 		if (categoryVOList == null) {
 			categoryTree();
-			categoryVOList = (List<Category>) redisRepository.get(CachePrefix.CATEGORY_ARRAY.getPrefix());
+			categoryVOList = (List<Category>) redisRepository.get(CATEGORY_ARRAY.getPrefix());
 		}
 
 		// 还为空的话，直接返回
@@ -423,6 +415,6 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<Category, Long, IC
 	 * 清除缓存
 	 */
 	private void removeCache() {
-		redisRepository.del(CachePrefix.CATEGORY.getPrefix());
+		redisRepository.del(CATEGORY.getPrefix());
 	}
 }

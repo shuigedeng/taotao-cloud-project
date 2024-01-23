@@ -19,7 +19,9 @@ package com.taotao.cloud.goods.biz.repository.cls;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CategoryBrandRepository extends BaseClassSuperRepository<CategoryBrand, Long> {
 
     public CategoryBrandRepository(EntityManager em) {

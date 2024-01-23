@@ -22,15 +22,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /** 品牌VO */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "品牌VO")
-public class BrandVO {
+public class BrandVO implements Serializable {
 
-    private static final long serialVersionUID = 3829199991161122317L;
+    @Serial
+	private static final long serialVersionUID = 3829199991161122317L;
 
     @Schema(description = "id")
     private String id;

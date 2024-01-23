@@ -1,6 +1,7 @@
 package com.taotao.cloud.bigdata.realtime.mall.app.func;
 
-import com.alibaba.fastjson.JSONObject;
+
+import com.alibaba.fastjson2.JSONObject;
 
 /**
  *

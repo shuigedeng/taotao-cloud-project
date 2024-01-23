@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,12 +90,12 @@ public class ProductController {
 
             applyFilters(stream, gender, category);
 
-            List<Product> products = stream
-                    .filter(Product$.SENTENCE_EMBEDDING.knn(K, product.getSentenceEmbedding())) //
-                    .sorted(Product$._SENTENCE_EMBEDDING_SCORE) //
-                    .limit(K) //
-                    .collect(Collectors.toList());
-
+            // List<Product> products = stream
+            //         .filter(Product$.SENTENCE_EMBEDDING.knn(K, product.getSentenceEmbedding())) //
+            //         .sorted(Product$._SENTENCE_EMBEDDING_SCORE) //
+            //         .limit(K) //
+            //         .collect(Collectors.toList());
+			List<Product> products = new ArrayList<>();
             setModelProperties(model, products, skip, gender, category);
         } else {
             logger.warn("🔎 vss :: There is no product with id {}", id);
@@ -120,12 +121,12 @@ public class ProductController {
 
             applyFilters(stream, gender, category);
 
-            List<Product> products = stream
-                    .filter(Product$.IMAGE_EMBEDDING.knn(K, product.getImageEmbedding())) //
-                    .sorted(Product$._IMAGE_EMBEDDING_SCORE) //
-                    .limit(K) //
-                    .collect(Collectors.toList());
-
+            // List<Product> products = stream
+            //         .filter(Product$.IMAGE_EMBEDDING.knn(K, product.getImageEmbedding())) //
+            //         .sorted(Product$._IMAGE_EMBEDDING_SCORE) //
+            //         .limit(K) //
+            //         .collect(Collectors.toList());
+			List<Product> products = new ArrayList<>();
             setModelProperties(model, products, skip, gender, category);
         } else {
             logger.warn("🔎 vss :: There is no product with id {}", id);
@@ -182,13 +183,13 @@ public class ProductController {
 
     private SearchStream<Product> applyFilters(SearchStream<Product> stream, Optional<String> gender, Optional<String> category) {
 
-        if (gender.isPresent() && !gender.get().equalsIgnoreCase("all")) {
-            stream.filter(Product$.GENDER.eq(gender.get()));
-        }
-
-        if (category.isPresent() && !category.get().equalsIgnoreCase("all")) {
-            stream.filter(Product$.MASTER_CATEGORY.eq(category.get()));
-        }
+        // if (gender.isPresent() && !gender.get().equalsIgnoreCase("all")) {
+        //     stream.filter(GENDER.eq(gender.get()));
+        // }
+		//
+        // if (category.isPresent() && !category.get().equalsIgnoreCase("all")) {
+        //     stream.filter(Product$.MASTER_CATEGORY.eq(category.get()));
+        // }
 
         return stream;
     }

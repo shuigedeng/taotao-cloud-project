@@ -19,10 +19,11 @@ package com.taotao.cloud.goods.biz.model.convert;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.vo.BrandVO;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * BrandMapStruct
@@ -34,33 +35,35 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BrandConvert {
 
-    /** 实例 */
-    BrandConvert INSTANCE = Mappers.getMapper(BrandConvert.class);
+	/**
+	 * 实例
+	 */
+	BrandConvert INSTANCE = Mappers.getMapper(BrandConvert.class);
 
-    /**
-     * 品牌,品牌签证官
-     *
-     * @param brand 品牌
-     * @return {@link BrandVO }
-     * @since 2022-04-27 16:57:56
-     */
-    BrandVO convert(Brand brand);
+	/**
+	 * 品牌,品牌签证官
+	 *
+	 * @param brand 品牌
+	 * @return {@link BrandVO }
+	 * @since 2022-04-27 16:57:56
+	 */
+	BrandVO convert(Brand brand);
 
-    /**
-     * 品牌品牌vos
-     *
-     * @param brands 品牌
-     * @return {@link List }<{@link BrandVO }>
-     * @since 2022-04-27 16:57:56
-     */
-    List<BrandVO> convert(List<Brand> brands);
+	/**
+	 * 品牌品牌vos
+	 *
+	 * @param brands 品牌
+	 * @return {@link List }<{@link BrandVO }>
+	 * @since 2022-04-27 16:57:56
+	 */
+	List<BrandVO> convert(List<Brand> brands);
 
-    /**
-     * 品牌dtoto品牌
-     *
-     * @param brandDTO 品牌dto
-     * @return {@link Brand }
-     * @since 2022-04-27 16:57:56
-     */
-    Brand convert(BrandDTO brandDTO);
+	/**
+	 * 品牌dtoto品牌
+	 *
+	 * @param brandDTO 品牌dto
+	 * @return {@link Brand }
+	 * @since 2022-04-27 16:57:56
+	 */
+	Brand convert(BrandDTO brandDTO);
 }

@@ -1,6 +1,6 @@
 package com.taotao.cloud.bigdata.realtime.mall.app.func;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.bigdata.realtime.mall.utils.DimUtil;
 import com.taotao.cloud.bigdata.realtime.mall.utils.ThreadPoolUtil;
 import java.util.Arrays;
