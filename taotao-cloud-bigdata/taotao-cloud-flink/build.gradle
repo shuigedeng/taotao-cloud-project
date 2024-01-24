@@ -45,6 +45,7 @@ dependencies {
     implementation 'org.apache.flink:flink-connector-mongodb:1.0.2-1.17'
     implementation 'org.apache.flink:flink-connector-pulsar:4.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-files:1.18.0'
+    implementation 'org.apache.flink:flink-connector-datagen:1.18.0'
     implementation 'org.apache.doris:flink-doris-connector-1.17:1.5.0-SNAPSHOT'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-table-planner-blink_2.12:1.13.6"
@@ -87,7 +88,7 @@ dependencies {
     implementation("org.apache.hudi:hudi-flink-client:0.14.1")
     //implementation("org.apache.hudi:hudi-flink1.18-bundle:1.0.0-beta1")
 
-    implementation("org.apache.paimon:paimon-flink-1.17:0.6.0-incubating")
+    implementation("org.apache.paimon:paimon-flink-1.18:0.6.0-incubating")
     implementation("org.apache.paimon:paimon-flink-action:0.6.0-incubating")
     implementation("org.apache.paimon:paimon-hive:0.6.0-incubating")
     implementation("org.apache.paimon:paimon-hive-catalog:0.6.0-incubating")
