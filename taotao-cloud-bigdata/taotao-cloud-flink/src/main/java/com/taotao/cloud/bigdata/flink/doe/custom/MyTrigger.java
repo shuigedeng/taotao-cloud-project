@@ -45,7 +45,8 @@ public class MyTrigger extends Trigger {
         ctx.deleteEventTimeTimer(window.maxTimestamp());
     }
 
-    public boolean canMerge() {
+    @Override
+	public boolean canMerge() {
         return true;
     }
 

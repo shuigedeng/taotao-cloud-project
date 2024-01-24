@@ -24,6 +24,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.biz.mapper.IBrandMapper;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.json.JSONUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -69,7 +71,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<Brand, Long, IBrandMa
         LambdaQueryWrapper<Brand> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.like(StringUtils.isNotBlank(page.getName()),Brand::getName, page.getName());
 
-        return this.page(page.buildMpPage(), queryWrapper);
+        return this.page(MpUtils.buildMpPage(page), queryWrapper);
     }
 
     @Override
@@ -148,7 +150,7 @@ public class BrandServiceImpl extends BaseSuperServiceImpl<Brand, Long, IBrandMa
     }
 
 	@Override
-	public IPage<Brand> getBrandsByPage(BrandPageDTO page) {
+	public IPage<Brand> getBrandsByPage(BrandPageQuery page) {
 		return null;
 	}
 

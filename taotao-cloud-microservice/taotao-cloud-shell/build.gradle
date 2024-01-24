@@ -10,7 +10,7 @@ dependencies {
     }
 
     //https://central.sonatype.com/artifact/org.springframework.shell/spring-shell-starter
-    implementation 'org.springframework.shell:spring-shell-starter:3.2.0'
+    implementation 'org.springframework.shell:spring-shell-starter:3.2.1'
 
     //，jcommander 是一个只有几十 kb 的 Java 命令行参数解析工具，可以通过注解的方式快速实现命令行参数解析。
     //https://search.maven.org/artifact/com.beust/jcommander
@@ -34,6 +34,6 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }
 
-mainClassName = "com.taotao.cloud.front.TaoTaoCloudPortalApplication"
-description = "前端PC中心"
-archivesBaseName = 'taotao-cloud-front'
+mainClassName = "com.taotao.cloud.shell.TaoTaoCloudShellApplication"
+description = "shell中心"
+archivesBaseName = 'taotao-cloud-shell'

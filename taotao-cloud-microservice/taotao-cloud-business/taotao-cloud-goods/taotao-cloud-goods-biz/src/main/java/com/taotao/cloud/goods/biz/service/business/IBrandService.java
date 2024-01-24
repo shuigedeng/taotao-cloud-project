@@ -19,9 +19,9 @@ package com.taotao.cloud.goods.biz.service.business;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.api.model.dto.BrandDTO;
 import com.taotao.cloud.goods.api.model.page.BrandPageQuery;
-import com.taotao.cloud.goods.api.model.vo.BrandVO;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
 import com.taotao.cloud.web.base.service.BaseSuperService;
+
 import java.util.List;
 import java.util.Map;
 
@@ -34,13 +34,18 @@ import java.util.Map;
  */
 public interface IBrandService extends BaseSuperService<Brand, Long> {
 
+	IPage<Brand> brandsQueryPage(BrandPageQuery page);
 	/**
 	 * 根据条件分页获取品牌列表
 	 *
 	 * @param page 条件参数
 	 * @return 品牌列表
 	 */
-	IPage<Brand> getBrandsByPage(BrandPageDTO page);
+	IPage<Brand> getBrandsByPage(BrandPageQuery page);
+
+	List<Brand> getBrandsByCategorys(Long categoryIds);
+
+	List<Brand> getAllAvailable();
 
 	/**
 	 * 删除品牌
