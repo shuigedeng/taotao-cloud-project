@@ -1,0 +1,6 @@
+
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-application")
+}
+

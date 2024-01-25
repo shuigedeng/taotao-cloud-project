@@ -60,11 +60,11 @@
 
 ## 2. spring cloud 微服务架构图
 
-![mark](./snapshot/architecture.jpg)
+![mark](doc/snapshot/architecture.jpg)
 
 ## 3. spring cloud 微服务分层图
 
-![mark](./snapshot/springcloud微服务分层图.png)
+![mark](doc/snapshot/springcloud微服务分层图.png)
 
 ## 4. dependencies
 
@@ -172,7 +172,7 @@ Maven:
 
 | <center>移动端 ReactNative</center>                                                                                                                                                                                                                                                         | <center>小程序</center>     | <center>H5</center>                               |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|---------------------------------------------------|
-| 安卓：[滔滔商城.apk](https://github.com/wuba/Taro-Mortgage-Calculator/raw/e0c432bdc6096a08d9020542e7ce401861026bfa/app-arm64-v8a-release.apk.1.zip) <br> IOS：[滔滔商城.app](https://github.com/wuba/Taro-Mortgage-Calculator/raw/a67459bc6667b0478978621482d33103d04e7538/taroDemo.app.zip)(目前暂不可用) | ![](snapshot/qrcode.png) | ![](snapshot/h5.png)<br>https://m.taotaocloud.top |
+| 安卓：[滔滔商城.apk](https://github.com/wuba/Taro-Mortgage-Calculator/raw/e0c432bdc6096a08d9020542e7ce401861026bfa/app-arm64-v8a-release.apk.1.zip) <br> IOS：[滔滔商城.app](https://github.com/wuba/Taro-Mortgage-Calculator/raw/a67459bc6667b0478978621482d33103d04e7538/taroDemo.app.zip)(目前暂不可用) | ![](doc/snapshot/qrcode.png) | ![](doc/snapshot/h5.png)<br>https://m.taotaocloud.top |
 
 ## 7. 功能特点
 
@@ -270,28 +270,28 @@ taotao-cloud-project -- 父项目
 
 <table>
     <tr>
-        <td><img alt="调度任务中心" src="snapshot/project/1.png"/></td>
-        <td><img alt="nacos服务注册" src="snapshot/project/2.png"/></td>
+        <td><img alt="调度任务中心" src="doc/snapshot/project/1.png"/></td>
+        <td><img alt="nacos服务注册" src="doc/snapshot/project/2.png"/></td>
     </tr>
 	<tr>
-        <td><img alt="granfana页面" src="snapshot/project/3.png"/></td>
-        <td><img alt="prometheus页面" src="snapshot/project/4.png"/></td>
+        <td><img alt="granfana页面" src="doc/snapshot/project/3.png"/></td>
+        <td><img alt="prometheus页面" src="doc/snapshot/project/4.png"/></td>
     </tr>
 	<tr>
-        <td><img alt="skywalking页面" src="snapshot/project/5.png"/></td>
-        <td><img alt="sentinel页面" src="snapshot/project/6.png"/></td>
+        <td><img alt="skywalking页面" src="doc/snapshot/project/5.png"/></td>
+        <td><img alt="sentinel页面" src="doc/snapshot/project/6.png"/></td>
     </tr>
     <tr>
-        <td><img alt="kibana页面" src="snapshot/project/7.png"/></td>
-        <td><img alt="zipkin页面" src="snapshot/project/8.png"/></td>
+        <td><img alt="kibana页面" src="doc/snapshot/project/7.png"/></td>
+        <td><img alt="zipkin页面" src="doc/snapshot/project/8.png"/></td>
     </tr>
     <tr>
-        <td><img alt="springadmin页面" src="snapshot/project/9.png"/></td>
-        <td><img alt="knife4j页面" src="snapshot/project/10.png"/></td>
+        <td><img alt="springadmin页面" src="doc/snapshot/project/9.png"/></td>
+        <td><img alt="knife4j页面" src="doc/snapshot/project/10.png"/></td>
     </tr>
     <tr>
-        <td><img alt="swagger页面" src="snapshot/project/11.png"/></td>
-        <td><img alt="arthas页面" src="snapshot/project/12.png"/></td>
+        <td><img alt="swagger页面" src="doc/snapshot/project/11.png"/></td>
+        <td><img alt="arthas页面" src="doc/snapshot/project/12.png"/></td>
     </tr>
 
 [comment]: <> (    <tr>)

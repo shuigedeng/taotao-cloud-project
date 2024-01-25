@@ -1,0 +1,127 @@
+server:
+  port: 80
+
+dubbo:
+  application:
+    name: short.link.web
+  consumer:
+    check: false
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
+    cycle-report: true
+    password: ''
+    retry-period: 3000
+    retry-times: 100
+    username: ''
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+#  scan:
+#    basePackages: com.practice.springboot.dubbo.provider.service
+
+spring:
+  application:
+    name: short.link.web
+  rabbitmq:
+    first:
+      virtual-host: vir_host_1
+    host: 127.0.0.1
+    password: Zc123456
+    port: 5672
+  redis:
+    host: 127.0.0.1
+    password: Zc123456
+    #    pool:
+    #      max-active: 20
+    #      max-idle: 10
+    #      min-idle: 5
+    port: 6379
+
+# xxl配置信息
+xxl:
+  job:
+    accessToken: ''
+    admin:
+      addresses: http://127.0.0.1:9001/xxl-job-admin
+    executor:
+      address: ''
+      appname: short-link-platform
+      ip: ''
+      port: 9999
+      logpath: ~/data0/xxl-job-log
+      logretentiondays: 7
+
+server:
+  port: 8889
+
+dubbo:
+  application:
+    name: short.link.service
+  consumer:
+    check: false
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
+    cycle-report: true
+    password: ''
+    retry-period: 3000
+    retry-times: 100
+    username: ''
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+#  scan:
+#    basePackages: com.practice.springboot.dubbo.provider.service
+
+mybatis-plus:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  #  type-aliases-package: com.practice.springboot.dubbo.provider.model.po
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+spring:
+  application:
+    name: short.link.service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+    password: Zc123456
+    url: jdbc:mysql://localhost:3306/Test?serverTimezone=UTC&useSSL=false
+    username: root
+  rabbitmq:
+    first:
+      virtual-host: vir_host_1
+    host: 127.0.0.1
+    password: Zc123456
+    port: 5672
+  redis:
+    host: 127.0.0.1
+    password: Zc123456
+    connectionMinimumIdleSize: 20
+    idleConnectionTimeout: 60000
+    connectionPoolSize: 60
+    #    pool:
+    #      max-active: 20
+    #      max-idle: 10
+    #      min-idle: 5
+    port: 6379
+
+# xxl配置信息
+xxl:
+  job:
+    accessToken: ''
+    admin:
+      addresses: http://127.0.0.1:9001/xxl-job-admin
+    executor:
+      address: ''
+      appname: short-link-platform
+      ip: ''
+      port: 9999
+      logpath: ~/data0/xxl-job-log
+      logretentiondays: 7
+

@@ -1,0 +1,11 @@
+//util
+//client
+//领域对象进行业务校验，所以需要依赖client模块：
+//
+//BizException
+//ErrorCodeBizEnum
+
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-infrastructure")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-integration")
+}

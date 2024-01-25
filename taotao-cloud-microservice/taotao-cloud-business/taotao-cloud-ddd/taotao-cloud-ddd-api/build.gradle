@@ -1,0 +1,7 @@
+
+description = "ddd中心api"
+
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-application")
+}

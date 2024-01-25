@@ -1,0 +1,225 @@
+apply plugin: "scala"
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "idea"
+apply plugin: "com.github.johnrengelman.shadow"
+
+repositories {
+    mavenCentral()
+}
+
+//https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/configuration/overview/
+dependencies {
+    // flinksql本地运行需要的依赖
+    implementation "org.apache.flink:flink-core:1.18.0"
+    implementation "org.apache.flink:flink-clients:1.18.0"
+    implementation "org.apache.flink:flink-java:1.18.0"
+    implementation "org.apache.flink:flink-streaming-java:1.18.0"
+    implementation "org.apache.flink:flink-scala_2.12:1.18.0"
+    implementation "org.apache.flink:flink-streaming-scala_2.12:1.18.0"
+    //状态后端管理器
+    implementation "org.apache.flink:flink-statebackend-rocksdb:1.18.0"
+    //flink本地运行时 提供的web功能
+    implementation "org.apache.flink:flink-runtime-web:1.18.0"
+
+    //flink sql
+    implementation 'org.apache.flink:flink-table-api-java:1.18.0'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:1.18.0'
+    implementation "org.apache.flink:flink-table-planner_2.12:1.18.0"
+    implementation 'org.apache.flink:flink-sql-gateway-api:1.18.0'
+
+    //使用alibaba 动态cep
+    //implementation 'org.apache.flink:flink-cep:1.18.0'
+    implementation "org.apache.flink:flink-csv:1.18.0"
+    implementation 'org.apache.flink:flink-parquet:1.18.0'
+    implementation 'org.apache.parquet:parquet-avro:1.13.1'
+    implementation 'org.apache.flink:flink-avro:1.18.0'
+    implementation 'org.apache.flink:flink-json:1.18.0'
+    implementation 'org.apache.flink:flink-format-common:1.18.0'
+
+    //flink连接器
+    implementation "org.apache.flink:flink-connector-kafka:3.0.2-1.18"
+    implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
+    implementation 'org.apache.flink:flink-connector-jdbc:3.1.1-1.17'
+    implementation 'org.apache.flink:flink-connector-hive_2.12:1.18.0'
+    implementation 'org.apache.flink:flink-connector-mongodb:1.0.2-1.17'
+    implementation 'org.apache.flink:flink-connector-pulsar:4.0.0-1.17'
+    implementation 'org.apache.flink:flink-connector-files:1.18.0'
+    implementation 'org.apache.flink:flink-connector-datagen:1.18.0'
+    implementation 'org.apache.doris:flink-doris-connector-1.17:1.5.0-SNAPSHOT'
+    //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
+    //implementation "org.apache.flink:flink-table-planner-blink_2.12:1.13.6"
+    //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
+    implementation "org.apache.flink:flink-sql-connector-kafka:3.0.2-1.18"
+    implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
+    implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.18.0'
+    implementation 'org.apache.flink:flink-sql-connector-mongodb:1.0.2-1.17'
+    implementation 'org.apache.flink:flink-sql-connector-pulsar:4.0.0-1.17'
+
+    //flink cdc
+    implementation 'com.ververica:flink-connector-mysql-cdc:3.0.0'
+    implementation 'com.ververica:flink-connector-mongodb-cdc:3.0.0'
+    implementation 'com.ververica:flink-connector-postgres-cdc:3.0.0'
+    implementation 'com.ververica:flink-connector-tidb-cdc:3.0.0'
+    implementation 'com.ververica:flink-sql-connector-mysql-cdc:3.0.0'
+    implementation 'com.ververica:flink-sql-connector-mongodb-cdc:3.0.0'
+    implementation 'com.ververica:flink-sql-connector-postgres-cdc:3.0.0'
+    implementation 'com.ververica:flink-sql-connector-tidb-cdc:3.0.0'
+    //基于 Flink CDC 3.0 https://ververica.github.io/flink-cdc-connectors/release-3.0/content/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/mysql-doris-pipeline-tutorial-zh.html
+    implementation 'com.ververica:flink-cdc-connectors:3.0.0'
+    implementation 'com.ververica:flink-cdc-pipeline-connector-doris:3.0.0'
+    implementation 'com.ververica:flink-cdc-pipeline-connector-mysql:3.0.0'
+    implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.0'
+
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'redis.clients:jedis:5.1.0'
+    implementation 'org.apache.hive:hive-exec:3.1.3'
+
+    implementation 'org.apache.hadoop:hadoop-common:3.3.6'
+    implementation 'org.apache.hadoop:hadoop-client:3.3.6'
+    implementation 'org.apache.hadoop:hadoop-hdfs:3.3.6'
+    //implementation 'org.apache.flink:flink-shaded-hadoop-2-uber:3.3.6'
+    // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
+    //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
+
+
+    implementation("org.apache.hudi:hudi-common:0.14.1")
+    implementation("org.apache.hudi:hudi-client:0.14.1")
+    implementation("org.apache.hudi:hudi-flink-client:0.14.1")
+    //implementation("org.apache.hudi:hudi-flink1.18-bundle:1.0.0-beta1")
+
+    implementation("org.apache.paimon:paimon-flink-1.18:0.6.0-incubating")
+    implementation("org.apache.paimon:paimon-flink-action:0.6.0-incubating")
+    implementation("org.apache.paimon:paimon-hive:0.6.0-incubating")
+    implementation("org.apache.paimon:paimon-hive-catalog:0.6.0-incubating")
+
+    implementation 'org.apache.commons:commons-compress:1.25.0'
+    implementation 'org.slf4j:slf4j-api:2.0.11'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.11'
+
+    implementation "org.scala-lang:scala-library:2.12.18"
+    implementation "org.scala-lang:scala-compiler:2.12.18"
+    implementation "org.scala-lang:scala-reflect:2.12.18"
+
+    //implementation 'com.alibaba.ververica:flink-cep:1.15-vvr-6.0.4'
+    implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
+    implementation 'com.googlecode.aviator:aviator:5.3.1'
+
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.45"
+}
+
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        resolutionStrategy {
+            force 'org.glassfish:javax.el:3.0.0'
+        }
+    }
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.additionalParameters = ['-unchecked', '-deprecation']
+}
+
+jar {
+    //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
+    //archivesBaseName = 'Example'//基本的文件名
+    //文件夹大于65535个，需要开启zip64
+    //zip64=true
+
+    manifest {
+        attributes 'Main-Class': "com.taotao.cloud.bigdata.flink.JStreamWordCount"
+    }
+    //from sourceSets.main.output
+    //dependsOn configurations.runtimeClasspath
+
+    //gradle 处理重复文件，include 最后一个重复文件“胜出”的默认策略。
+    //duplicatesStrategy = 'include' // <<---- addition
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    //打包依赖包
+    //from {
+    //    (configurations.runtimeClasspath).collect {
+    //        it.isDirectory() ? it : zipTree(it)
+    //    }
+    //}
+    //into('lib') { // 将第三方jar放入 lib目录中
+    //    from configurations.compile
+    //}
+}
+
+task fatJar(type: Jar, dependsOn: jar) {
+    zip64=true
+    manifest {
+        attributes 'Main-Class': "com.taotao.cloud.bigdata.flink.JStreamWordCount"
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+//    from configurations.runtimeClasspath.filter { !it.path.endsWith('.pom') }.asFileTree.files.collect {
+//        zipTree(it)
+//    }
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.taotao.cloud.bigdata.flink.JStreamWordCount'
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.filter {
+            it.name.endsWith('.jar')
+        }
+    }
+    with jar
+}
+
+mainClassName = "com.taotao.cloud.bigdata.flink.JStreamWordCount"
+shadowJar {
+    zip64 true
+    mergeServiceFiles()
+    archiveClassifier = null
+
+    //transform(Log4j2PluginsCacheFileTransformer)
+    //version = 1.0
+    manifest {
+        attributes(
+                "Main-Class": "com.taotao.cloud.bigdata.flink.JStreamWordCount"
+        )
+    }
+
+    //dependencies {
+    //    exclude(dependency("org.apache.flink:force-shading:.*"))
+    //    exclude(dependency("com.google.code.findbugs:jsr305:.*"))
+    //    exclude(dependency("org.slf4j:slf4j-api:*"))
+    //    exclude(dependency{ it.moduleGroup == "xml-apis" })
+    //}
+
+    // creates the spring boot shaded jar
+    //import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
+    //append 'META-INF/spring.handlers'
+    //append 'META-INF/spring.schemas'
+    //append 'META-INF/spring.tooling'
+    //transform(PropertiesFileTransformer) {
+    //    paths = ['META-INF/spring.factories' ]
+    //    mergeStrategy = "append"
+    //}
+    //archiveFileName = "test-${version}.jar"
+}
+
+task packageZip(type: Zip) {
+    archiveFileName = "${project.name}-${project.version}.zip"
+    destinationDirectory = file("${project.buildDir}/result")
+
+    from("${project.projectDir}/distribution") {
+        into "distribution"
+    }
+
+    from("${project.buildDir}/libs/${project.name}-${project.version}.jar") {
+        into "targert"
+    }
+
+    dependsOn customFatJar
+}
+

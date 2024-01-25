@@ -75,6 +75,7 @@ shadowJar {
                 "Main-Class": "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
         )
     }
+
     zip64 true
     //dependencies {
     //    exclude(dependency("xml-apis:xml-apis:.*"))
