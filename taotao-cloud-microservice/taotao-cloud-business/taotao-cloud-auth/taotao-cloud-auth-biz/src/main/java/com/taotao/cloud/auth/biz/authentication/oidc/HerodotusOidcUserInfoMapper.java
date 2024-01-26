@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.server.resource.authentication.Bearer
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
 /**
- * <p>Description: TODO </p>
+ * <p>TODO </p>
  *
  * @author shuigedeng
  * @version 2023.07

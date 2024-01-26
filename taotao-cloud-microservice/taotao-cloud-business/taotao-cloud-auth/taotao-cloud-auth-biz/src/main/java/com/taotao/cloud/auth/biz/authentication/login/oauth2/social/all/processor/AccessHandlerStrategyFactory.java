@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>Description: Access Handler 工厂 </p>
+ * <p>Access Handler 工厂 </p>
  * <p>
  * 通过该工厂模式，对接入的常规操作进行封装。避免导入引用各个组件，导致耦合性增大
  * <p>

@@ -17,7 +17,6 @@
 package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
 import java.util.List;
-
 import lombok.Data;
 
 /**
@@ -30,12 +29,18 @@ import lombok.Data;
 @Data
 public class EsGoodsRelatedInfo {
 
-    /** 分类集合 */
-    List<SelectorOptions> categories;
+	/**
+	 * 分类集合
+	 */
+	List<SelectorOptions> categories;
 
-    /** 品牌集合 */
-    List<SelectorOptions> brands;
+	/**
+	 * 品牌集合
+	 */
+	List<SelectorOptions> brands;
 
-    /** 参数集合 */
-    List<ParamOptions> paramOptions;
+	/**
+	 * 参数集合
+	 */
+	List<ParamOptions> paramOptions;
 }

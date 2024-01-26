@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 
 /**
- * <p>Description: 自定义 OAutho2 Module </p>
+ * <p>自定义 OAutho2 Module </p>
  *
  *
  * @since : 2022/10/24 15:51

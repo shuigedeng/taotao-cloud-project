@@ -29,7 +29,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 物联网设备管理 </p>
+ * <p>物联网设备管理 </p>
  *
  *
  * @since : 2023/5/15 14:26

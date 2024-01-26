@@ -24,7 +24,7 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * <p>Description: 微信小程序配置属性 </p>
+ * <p>微信小程序配置属性 </p>
  *
  *
  * @since : 2021/3/26 17:27

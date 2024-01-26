@@ -27,7 +27,7 @@ import com.taotao.cloud.security.springsecurity.core.details.FormLoginWebAuthent
 import java.io.IOException;
 
 /**
- * <p>Description: FormLoginWebAuthenticationDetailsDeserializer </p>
+ * <p>FormLoginWebAuthenticationDetailsDeserializer </p>
  *
  *
  * @since : 2022/4/14 11:48

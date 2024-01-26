@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 自定义密码模式认证Token </p>
+ * <p>自定义密码模式认证Token </p>
  *
  *
  * @since : 2022/2/22 15:49

@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.jpa.entity;
 import java.time.LocalDateTime;
 
 /**
- * <p>Description: RegisteredClient 属性定义 </p>
+ * <p>RegisteredClient 属性定义 </p>
  *
  * @author shuigedeng
  * @version 2023.07

@@ -23,7 +23,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.excepti
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 
 /**
- * <p>Description: 手机短信接入处理器 </p>
+ * <p>手机短信接入处理器 </p>
  *
  *
  * @since : 2022/1/26 11:46

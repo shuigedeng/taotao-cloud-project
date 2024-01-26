@@ -27,7 +27,7 @@ import org.hibernate.envers.Audited;
 import org.hibernate.envers.RevisionNumber;
 
 /**
- * <p>Description: OAuth2 认证确认信息实体 </p>
+ * <p>OAuth2 认证确认信息实体 </p>
  *
  * @author shuigedeng
  * @version 2023.07

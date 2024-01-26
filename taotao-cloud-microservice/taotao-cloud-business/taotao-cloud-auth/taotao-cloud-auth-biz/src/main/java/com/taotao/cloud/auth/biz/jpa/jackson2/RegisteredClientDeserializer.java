@@ -34,7 +34,7 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 
 /**
- * <p>Description: RegisteredClientDeserializer </p>
+ * <p>RegisteredClientDeserializer </p>
  *
  *
  * @since : 2022/10/24 15:11

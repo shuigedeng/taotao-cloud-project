@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 计数类型的缓存 </p>
+ * <p>计数类型的缓存 </p>
  * <p>
  * 这里的泛型使用了 Long 主要是为了兼顾存储 System.currentTimeMillis()。否则类型不一致，还要建两个 Stamp
  *

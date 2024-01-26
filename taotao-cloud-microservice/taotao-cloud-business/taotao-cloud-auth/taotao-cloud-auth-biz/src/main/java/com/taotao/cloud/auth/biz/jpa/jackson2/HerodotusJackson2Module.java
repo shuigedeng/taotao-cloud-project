@@ -24,7 +24,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 
 /**
- * <p>Description: 自定义 User Details Module </p>
+ * <p>自定义 User Details Module </p>
  *
  *
  * @since : 2022/2/17 23:39

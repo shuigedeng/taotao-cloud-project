@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <p>Description: OAuth2 Scope Dto </p>
+ * <p>OAuth2 Scope Dto </p>
  *
  *
  * @since : 2022/4/1 13:55

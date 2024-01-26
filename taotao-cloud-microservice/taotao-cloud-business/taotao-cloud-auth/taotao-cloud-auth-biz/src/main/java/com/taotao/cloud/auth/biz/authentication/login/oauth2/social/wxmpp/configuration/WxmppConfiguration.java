@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
- * <p>Description: 微信公众号配置 </p>
+ * <p>微信公众号配置 </p>
  *
  *
  * @since : 2021/4/7 13:25

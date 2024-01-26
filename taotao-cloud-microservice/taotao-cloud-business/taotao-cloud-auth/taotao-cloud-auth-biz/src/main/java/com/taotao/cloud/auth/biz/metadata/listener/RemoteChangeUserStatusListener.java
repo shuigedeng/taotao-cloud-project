@@ -29,7 +29,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: 远程用户状态变更监听 </p>
+ * <p>远程用户状态变更监听 </p>
  *
  */
 @Component

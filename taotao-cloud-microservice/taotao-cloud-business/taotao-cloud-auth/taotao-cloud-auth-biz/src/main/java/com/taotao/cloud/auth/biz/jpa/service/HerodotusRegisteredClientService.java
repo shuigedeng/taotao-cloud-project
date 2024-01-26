@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: HerodotusRegisteredClientService </p>
+ * <p>HerodotusRegisteredClientService </p>
  * <p>
  * 这里命名没有按照统一的习惯，主要是为了防止与 spring-authorization-server 已有类的同名而导致Bean注入失败
  *

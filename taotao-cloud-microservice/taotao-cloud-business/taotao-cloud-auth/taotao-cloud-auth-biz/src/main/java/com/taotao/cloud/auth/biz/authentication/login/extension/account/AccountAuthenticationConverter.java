@@ -29,48 +29,58 @@ import org.springframework.util.MultiValueMap;
  * @version 2023.04
  * @since 2023-06-29 13:07:23
  */
-public class AccountAuthenticationConverter implements Converter<HttpServletRequest, AccountAuthenticationToken> {
-    public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
-    public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
-    public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
+public class AccountAuthenticationConverter implements
+	Converter<HttpServletRequest, AccountAuthenticationToken> {
 
-    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-    private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
+	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
+	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
+	public static final String SPRING_SECURITY_FORM_TYPE_KEY = "type";
 
-    @Override
-    public AccountAuthenticationToken convert(HttpServletRequest request) {
-        MultiValueMap<String, String> parameters = ExtensionLoginUtils.getParameters(request);
+	private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
+	private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
+	private String typeParameter = SPRING_SECURITY_FORM_TYPE_KEY;
 
-        // username (REQUIRED)
-        ExtensionLoginUtils.checkRequiredParameter(parameters, usernameParameter);
-        // password (REQUIRED)
-        ExtensionLoginUtils.checkRequiredParameter(parameters, passwordParameter);
-        // type (REQUIRED)
-        ExtensionLoginUtils.checkRequiredParameter(parameters, typeParameter);
+	@Override
+	public AccountAuthenticationToken convert(HttpServletRequest request) {
+		MultiValueMap<String, String> parameters = ExtensionLoginUtils.getParameters(request);
 
-        String username = request.getParameter(this.usernameParameter);
-        String password = request.getParameter(this.passwordParameter);
-        String type = request.getParameter(this.typeParameter);
+		// username (REQUIRED)
+		ExtensionLoginUtils.checkRequiredParameter(parameters, usernameParameter);
+		// password (REQUIRED)
+		ExtensionLoginUtils.checkRequiredParameter(parameters, passwordParameter);
+		// type (REQUIRED)
+		ExtensionLoginUtils.checkRequiredParameter(parameters, typeParameter);
 
-        return AccountAuthenticationToken.unauthenticated(username, password, type);
-    }
+		String username = request.getParameter(this.usernameParameter);
+		String password = request.getParameter(this.passwordParameter);
+		String type = request.getParameter(this.typeParameter);
 
-    public void setUsernameParameter(String usernameParameter) {
-        Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
-        this.usernameParameter = usernameParameter;
-    }
+		return AccountAuthenticationToken.unauthenticated(username, password, type);
+	}
 
-    public void setPasswordParameter(String passwordParameter) {
-        Assert.hasText(passwordParameter, "Password parameter must not be empty or null");
-        this.passwordParameter = passwordParameter;
-    }
+	public void setUsernameParameter(String usernameParameter) {
+		Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
+		this.usernameParameter = usernameParameter;
+	}
 
-    public final String getUsernameParameter() {
-        return this.usernameParameter;
-    }
+	public void setPasswordParameter(String passwordParameter) {
+		Assert.hasText(passwordParameter, "Password parameter must not be empty or null");
+		this.passwordParameter = passwordParameter;
+	}
 
-    public String getPasswordParameter() {
-        return passwordParameter;
-    }
+	public final String getUsernameParameter() {
+		return this.usernameParameter;
+	}
+
+	public String getPasswordParameter() {
+		return passwordParameter;
+	}
+
+	public String getTypeParameter() {
+		return typeParameter;
+	}
+
+	public void setTypeParameter(String typeParameter) {
+		this.typeParameter = typeParameter;
+	}
 }

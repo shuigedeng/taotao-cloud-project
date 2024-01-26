@@ -36,7 +36,7 @@ import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 import java.lang.reflect.Member;
 
 /**
- * <p>Description: OAuth2Authorization Id 生成器 </p>
+ * <p>OAuth2Authorization Id 生成器 </p>
  * <p>
  * 指定ID生成器，解决实体ID无法手动设置问题。
  *

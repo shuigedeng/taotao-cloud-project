@@ -29,7 +29,7 @@ import org.dromara.hutool.crypto.SecureUtil;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <p>Description: 登录失败次数限制签章管理 </p>
+ * <p>登录失败次数限制签章管理 </p>
  *
  * @author shuigedeng
  * @version 2023.07

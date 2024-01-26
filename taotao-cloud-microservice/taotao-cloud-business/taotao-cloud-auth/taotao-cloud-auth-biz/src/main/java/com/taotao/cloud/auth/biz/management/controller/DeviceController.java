@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * <p>Description: 设备激活 </p>
+ * <p>设备激活 </p>
  *
  *
  * @since : 2023/3/24 17:09

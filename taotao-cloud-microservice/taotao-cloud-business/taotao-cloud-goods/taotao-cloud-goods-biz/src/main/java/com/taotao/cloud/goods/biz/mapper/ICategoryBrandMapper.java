@@ -32,18 +32,17 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface ICategoryBrandMapper extends BaseSuperMapper<CategoryBrand, Long> {
 
-    /**
-     * 根据分类id查分类绑定品牌
-     *
-     * @param categoryId 分类id
-     * @return {@link List }<{@link CategoryBrandVO }>
-     * @since 2022-04-27 16:55:23
-     */
-    @Select(
-            """
+	/**
+	 * 根据分类id查分类绑定品牌
+	 *
+	 * @param categoryId 分类id
+	 * @return {@link List }<{@link CategoryBrandVO }>
+	 * @since 2022-04-27 16:55:23
+	 */
+	@Select("""
 		SELECT b.id,b.name,b.logo
 		FROM tt_brand b INNER join tt_category_brand cb on b.id = cb.brand_id and cb.category_id = #{categoryId}
 		where b.delete_flag = 0
 		""")
-    List<CategoryBrandVO> getCategoryBrandList(@Param(value = "categoryId") Long categoryId);
+	List<CategoryBrandVO> getCategoryBrandList(@Param(value = "categoryId") Long categoryId);
 }

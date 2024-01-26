@@ -21,7 +21,7 @@ import com.taotao.cloud.security.springsecurity.event.LocalApplicationEvent;
 import java.time.Clock;
 
 /**
- * <p>Description: SysSecurityAttribute实体数据变更事件 </p>
+ * <p>SysSecurityAttribute实体数据变更事件 </p>
  *
  */
 public class SysAttributeChangeEvent extends LocalApplicationEvent<SysAttribute> {

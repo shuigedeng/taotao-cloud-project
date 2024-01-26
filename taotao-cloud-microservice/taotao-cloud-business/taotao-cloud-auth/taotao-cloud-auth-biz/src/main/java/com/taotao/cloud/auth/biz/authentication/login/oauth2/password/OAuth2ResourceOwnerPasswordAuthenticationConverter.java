@@ -31,7 +31,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: 自定义密码模式认证转换器 </p>
+ * <p>自定义密码模式认证转换器 </p>
  * <p>
  * {@code AuthenticationConverter} 类似于以前的 {@code AbstractTokenGranter}
  * 主要用途是从请求中获取参数，并拼装Token类

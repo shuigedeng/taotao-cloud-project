@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.server.authorization.token.JwtEncodin
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 
 /**
- * <p>Description: 自定义 TokenCustomizer </p>
+ * <p>自定义 TokenCustomizer </p>
  * <p>
  * 用于自定义的 Herodotus User Details 解析。如果使用 Security 默认的 <code>org.springframework.security.core.userdetails.User</code> 则不需要使用该类
  * <p>

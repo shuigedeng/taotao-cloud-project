@@ -134,6 +134,7 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.10.1'
+            force 'net.minidev:json-smart:2.5.0'
         }
 
         //exclude group: "log4j", module: "log4j"

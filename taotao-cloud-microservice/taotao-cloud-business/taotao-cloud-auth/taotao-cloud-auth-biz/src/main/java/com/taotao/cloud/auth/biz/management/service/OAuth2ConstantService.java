@@ -23,7 +23,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: OAuth2 常量服务 </p>
+ * <p>OAuth2 常量服务 </p>
  *
  *
  * @since : 2022/3/17 14:36

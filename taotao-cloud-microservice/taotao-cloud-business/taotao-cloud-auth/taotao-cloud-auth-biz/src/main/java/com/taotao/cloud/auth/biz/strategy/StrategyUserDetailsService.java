@@ -21,7 +21,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Description: 系统用户服务策略定义 </p>
+ * <p>系统用户服务策略定义 </p>
  *
  * @author shuigedeng
  * @version 2023.07

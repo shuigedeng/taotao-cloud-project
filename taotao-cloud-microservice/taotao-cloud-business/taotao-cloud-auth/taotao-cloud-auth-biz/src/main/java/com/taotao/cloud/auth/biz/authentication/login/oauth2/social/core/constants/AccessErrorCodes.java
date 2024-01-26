@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.consta
 import com.taotao.cloud.security.springsecurity.core.constants.ErrorCodes;
 
 /**
- * <p>Description: Access 模块错误代码 </p>
+ * <p>Access 模块错误代码 </p>
  *
  *
  * @since : 2022/9/2 17:50

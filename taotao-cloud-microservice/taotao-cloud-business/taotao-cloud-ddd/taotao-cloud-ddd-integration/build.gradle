@@ -1,4 +1,14 @@
-//依赖于各个api
+
+/**
+ * 这一层是一个适配层，主要负责外部系统和内部业务系统的适配，这一层的主要作用就是外部系统和内部系统的适配和协议转换。
+ */
+/**
+ * Repository实现类中需要将接口入参中的DO对象转换为PO对象后再调用数据库存储。
+ * Repository和聚合的关系是一对一的关系。一个Repository有唯一的对应的聚合。
+ * 如果Repository中需要开始事务可以在Repository实现类中开启事务。
+ * Rpc层最好是对外部接口的出参和入参定义一个防腐层对象，命名统一以DTO结尾。
+ */
+//本层调用外部服务，转换外部DTO成为本项目可以理解对象。
 
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")

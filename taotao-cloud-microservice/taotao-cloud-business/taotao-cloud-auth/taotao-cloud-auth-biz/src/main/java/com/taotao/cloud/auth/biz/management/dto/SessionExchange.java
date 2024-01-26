@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * <p>Description: 机要传递实体 </p>
+ * <p>机要传递实体 </p>
  *
  *
  * @since : 2021/10/2 16:29

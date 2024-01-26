@@ -39,56 +39,59 @@ import org.springframework.util.StringUtils;
  * @since 2023-07-10 17:23:48
  */
 public final class DeviceClientAuthenticationConverter implements AuthenticationConverter {
-    /**
-     * 设备授权请求匹配器
-     */
-    private final RequestMatcher deviceAuthorizationRequestMatcher;
-    /**
-     * 设备访问令牌请求匹配器
-     */
-    private final RequestMatcher deviceAccessTokenRequestMatcher;
 
-    /**
-     * 设备客户端认证转换器
-     *
-     * @param deviceAuthorizationEndpointUri 设备授权端点uri
-     * @return
-     * @since 2023-07-10 17:23:49
-     */
-    public DeviceClientAuthenticationConverter(String deviceAuthorizationEndpointUri) {
-        RequestMatcher clientIdParameterMatcher =
-                request -> request.getParameter(OAuth2ParameterNames.CLIENT_ID) != null;
-        this.deviceAuthorizationRequestMatcher = new AndRequestMatcher(
-                new AntPathRequestMatcher(deviceAuthorizationEndpointUri, HttpMethod.POST.name()),
-                clientIdParameterMatcher);
-        this.deviceAccessTokenRequestMatcher = request -> AuthorizationGrantType.DEVICE_CODE
-                        .getValue()
-                        .equals(request.getParameter(OAuth2ParameterNames.GRANT_TYPE))
-                && request.getParameter(OAuth2ParameterNames.DEVICE_CODE) != null
-                && request.getParameter(OAuth2ParameterNames.CLIENT_ID) != null;
-    }
+	/**
+	 * 设备授权请求匹配器
+	 */
+	private final RequestMatcher deviceAuthorizationRequestMatcher;
+	/**
+	 * 设备访问令牌请求匹配器
+	 */
+	private final RequestMatcher deviceAccessTokenRequestMatcher;
 
-    /**
-     * 转换
-     *
-     * @param request 请求
-     * @return {@link Authentication }
-     * @since 2023-07-10 17:23:49
-     */
-    @Nullable
-    @Override
-    public Authentication convert(HttpServletRequest request) {
-        if (!this.deviceAuthorizationRequestMatcher.matches(request)
-                && !this.deviceAccessTokenRequestMatcher.matches(request)) {
-            return null;
-        }
+	/**
+	 * 设备客户端认证转换器
+	 *
+	 * @param deviceAuthorizationEndpointUri 设备授权端点uri
+	 * @return
+	 * @since 2023-07-10 17:23:49
+	 */
+	public DeviceClientAuthenticationConverter(String deviceAuthorizationEndpointUri) {
+		RequestMatcher clientIdParameterMatcher =
+			request -> request.getParameter(OAuth2ParameterNames.CLIENT_ID) != null;
+		this.deviceAuthorizationRequestMatcher = new AndRequestMatcher(
+			new AntPathRequestMatcher(deviceAuthorizationEndpointUri, HttpMethod.POST.name()),
+			clientIdParameterMatcher);
+		this.deviceAccessTokenRequestMatcher = request -> AuthorizationGrantType.DEVICE_CODE
+			.getValue()
+			.equals(request.getParameter(OAuth2ParameterNames.GRANT_TYPE))
+			&& request.getParameter(OAuth2ParameterNames.DEVICE_CODE) != null
+			&& request.getParameter(OAuth2ParameterNames.CLIENT_ID) != null;
+	}
 
-        // client_id (REQUIRED)
-        String clientId = request.getParameter(OAuth2ParameterNames.CLIENT_ID);
-        if (!StringUtils.hasText(clientId) || request.getParameterValues(OAuth2ParameterNames.CLIENT_ID).length != 1) {
-            throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_REQUEST);
-        }
+	/**
+	 * 转换
+	 *
+	 * @param request 请求
+	 * @return {@link Authentication }
+	 * @since 2023-07-10 17:23:49
+	 */
+	@Nullable
+	@Override
+	public Authentication convert(HttpServletRequest request) {
+		if (!this.deviceAuthorizationRequestMatcher.matches(request)
+			&& !this.deviceAccessTokenRequestMatcher.matches(request)) {
+			return null;
+		}
 
-        return new DeviceClientAuthenticationToken(clientId, ClientAuthenticationMethod.NONE, null, null);
-    }
+		// client_id (REQUIRED)
+		String clientId = request.getParameter(OAuth2ParameterNames.CLIENT_ID);
+		if (!StringUtils.hasText(clientId)
+			|| request.getParameterValues(OAuth2ParameterNames.CLIENT_ID).length != 1) {
+			throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_REQUEST);
+		}
+
+		return new DeviceClientAuthenticationToken(clientId, ClientAuthenticationMethod.NONE, null,
+			null);
+	}
 }

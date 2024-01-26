@@ -26,7 +26,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 
 /**
- * <p>Description: Utility methods for the OAuth 2.0 AuthenticationProvider's. </p>
+ * <p>Utility methods for the OAuth 2.0 AuthenticationProvider's. </p>
  *
  *
  * @since : 2022/3/31 15:01

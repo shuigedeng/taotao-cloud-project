@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz;
 
-import com.taotao.cloud.cache.redis.configuration.RedisDelayQueueAutoConfiguration;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.data.jpa.extend.JpaExtendRepositoryFactoryBean;
@@ -28,7 +27,6 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.envers.repository.config.EnableEnversRepositories;
-import org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 
@@ -58,20 +56,23 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * --add-exports java.desktop/sun.awt=ALL-UNNAMED
  * --add-exports java.desktop/sun.font=ALL-UNNAMED
  * </pre>
- *
- *
- //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=message.read&redirect_uri=http%3A%2F%2F127.0.0.1%3A8090%2Fauthorized
- //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile&state=46ge_TeI-dHuAnyv67nVmCcAmFgCVSZAqjTi9Om-1aA=&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Fdante-cloud-upms%2Fopen%2Fauthorized&code_challenge=KJlktPdfHdPPenXDN3HARjV6pzM7ljfHs-L-bFao3zM&code_challenge_method=S256
- //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile,read-user-by-page&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Fdante-cloud-upms%2Fopen%2Fauthorized&code_challenge=GMBkW4F_Ap4Us75TZ7nDhSUd87HXAt7cLMG-R_2VGwE&code_challenge_method=S256
+ * <p>
+ * <p>
+ * //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=message.read&redirect_uri=http%3A%2F%2F127.0.0.1%3A8090%2Fauthorized
+ * //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile&state=46ge_TeI-dHuAnyv67nVmCcAmFgCVSZAqjTi9Om-1aA=&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Fdante-cloud-upms%2Fopen%2Fauthorized&code_challenge=KJlktPdfHdPPenXDN3HARjV6pzM7ljfHs-L-bFao3zM&code_challenge_method=S256
+ * //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile,read-user-by-page&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Fdante-cloud-upms%2Fopen%2Fauthorized&code_challenge=GMBkW4F_Ap4Us75TZ7nDhSUd87HXAt7cLMG-R_2VGwE&code_challenge_method=S256
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/4/29 15:13
  */
-@EnableEnversRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"})
-@EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity", "com.taotao.cloud.auth.biz.management.entity"})
+@EnableEnversRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository",
+	"com.taotao.cloud.auth.biz.management.repository"})
+@EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity",
+	"com.taotao.cloud.auth.biz.management.entity"})
 @EnableJpaRepositories(
-        basePackages = {"com.taotao.cloud.auth.biz.jpa.repository", "com.taotao.cloud.auth.biz.management.repository"},
+	basePackages = {"com.taotao.cloud.auth.biz.jpa.repository",
+		"com.taotao.cloud.auth.biz.management.repository"},
 	repositoryFactoryBeanClass = JpaExtendRepositoryFactoryBean.class)
 @EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
 @EnableEncryptableProperties
@@ -82,35 +83,35 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication
 public class TaoTaoCloudAuthApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-auth");
+	public static void main(String[] args) {
+		PropertyUtils.setDefaultProperty("taotao-cloud-auth");
 
-        /**
-         * @see LoginPlatformEnum
-         */
-        String s = "b端用户 -> 用户+密码登录 手机号码+短信登录 用户+密码+验证码登录";
+		/**
+		 * @see LoginPlatformEnum
+		 */
+		String s = "b端用户 -> 用户+密码登录 手机号码+短信登录 用户+密码+验证码登录";
 
-        String s1 = "c端用户之pc端 -> 用户+密码登录 手机扫码登录 手机号码+短信登录 第三方登录(qq登录 微信登录 支付宝登录 github/gitee/weibo/抖音/钉钉/gitlab 等等)";
-        String s2 = "c端用户之小程序 -> 微信一键登录 手机号码+短信登录";
-        String s4 = "c端用户之微信公众号 -> 微信公众号登录";
-        String s3 = "c端用户之app -> 短信密码登录 本机号码一键登录(不需要密码) 手机号码+短信登录 指纹登录 面部识别登录 手势登录 第三方登录(qq登录 微信登录 支付宝登录)";
+		String s1 = "c端用户之pc端 -> 用户+密码登录 手机扫码登录 手机号码+短信登录 第三方登录(qq登录 微信登录 支付宝登录 github/gitee/weibo/抖音/钉钉/gitlab 等等)";
+		String s2 = "c端用户之小程序 -> 微信一键登录 手机号码+短信登录";
+		String s4 = "c端用户之微信公众号 -> 微信公众号登录";
+		String s3 = "c端用户之app -> 短信密码登录 本机号码一键登录(不需要密码) 手机号码+短信登录 指纹登录 面部识别登录 手势登录 第三方登录(qq登录 微信登录 支付宝登录)";
 
-        // 单端登录：PC端，APP端，小程序只能有一端登录
-        // 双端登录：允许其中二个端登录
-        // 三端登录：三个端都可以同时登录
+		// 单端登录：PC端，APP端，小程序只能有一端登录
+		// 双端登录：允许其中二个端登录
+		// 三端登录：三个端都可以同时登录
 
-        // 对于三端可以同时登录就很简单，但是现在有个限制，就是app端只能登录一次，不能同时登录，
-        // 也就是我一个手机登录了APP，另外一个手机登录的话，之前登录的APP端就要强制下线
+		// 对于三端可以同时登录就很简单，但是现在有个限制，就是app端只能登录一次，不能同时登录，
+		// 也就是我一个手机登录了APP，另外一个手机登录的话，之前登录的APP端就要强制下线
 
-        // {
-        //   userId：用户的id
-        //   clientType：PC端，小程序端，APP端
-        //   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
-        // }
+		// {
+		//   userId：用户的id
+		//   clientType：PC端，小程序端，APP端
+		//   imei：就是设备的唯一编号(对于PC端这个值就是ip地址，其余的就是手机设备的一个唯一编号)
+		// }
 
-        new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
+		new StartupSpringApplication(TaoTaoCloudAuthApplication.class).run(args);
 
-        //SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
-    }
+		//SpringApplication.run(TaoTaoCloudAuthApplication.class, args);
+	}
 
 }

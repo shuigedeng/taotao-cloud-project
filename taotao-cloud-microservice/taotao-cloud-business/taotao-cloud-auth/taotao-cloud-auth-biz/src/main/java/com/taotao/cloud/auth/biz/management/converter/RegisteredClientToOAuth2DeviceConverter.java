@@ -37,7 +37,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: OAuth2Device 转 RegisteredClient 转换器 </p>
+ * <p>OAuth2Device 转 RegisteredClient 转换器 </p>
  *
  *
  */

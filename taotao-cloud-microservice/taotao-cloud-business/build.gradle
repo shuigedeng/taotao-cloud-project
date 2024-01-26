@@ -114,4 +114,15 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
 
 }
 
+tasks.register('spotlessJavaAll') {
+    def subprojectList = subprojects.findAll { it.name.endsWith("-sys-biz") }
+
+    subprojectList.forEach {subp-> {
+        def tasks = subp.getTasksByName("spotlessJava", false)
+        dependsOn tasks.iterator().next()
+    }}
+
+    println("spotlessJavaAll==============================")
+}
+
 

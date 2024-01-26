@@ -26,7 +26,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: SysSecurityAttribute变更事件监听 </p>
+ * <p>SysSecurityAttribute变更事件监听 </p>
  *
  */
 @Component

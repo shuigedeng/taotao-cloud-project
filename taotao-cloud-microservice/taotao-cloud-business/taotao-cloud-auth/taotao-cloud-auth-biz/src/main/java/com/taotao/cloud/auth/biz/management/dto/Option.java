@@ -20,7 +20,7 @@ import com.google.common.base.MoreObjects;
 import java.io.Serializable;
 
 /**
- * <p>Description: 前端选项基础格式 </p>
+ * <p>前端选项基础格式 </p>
  *
  *
  * @since : 2023/4/24 10:00

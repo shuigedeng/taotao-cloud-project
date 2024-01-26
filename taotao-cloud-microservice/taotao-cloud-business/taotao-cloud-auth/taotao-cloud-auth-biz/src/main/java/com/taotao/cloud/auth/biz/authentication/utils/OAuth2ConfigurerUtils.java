@@ -38,7 +38,7 @@ import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: OAuth 2.0 Configurers 工具方法类</p>
+ * <p>OAuth 2.0 Configurers 工具方法类</p>
  * <p>
  * 新版 spring-security-oauth2-authorization-server 很多代码都是“包”级可访问的，外部无法使用。为了方便扩展将其提取出来，便于使用。
  * <p>

@@ -53,7 +53,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.support.WebRequestDataBinder;
 
 /**
- * <p>Description: 社会化认证 Provider </p>
+ * <p>社会化认证 Provider </p>
  *
  *
  * @since : 2022/3/31 14:54

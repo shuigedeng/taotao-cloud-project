@@ -33,7 +33,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: 社交认证 Converter </p>
+ * <p>社交认证 Converter </p>
  *
  *
  * @since : 2022/3/31 14:16

@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
 import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
 
 /**
- * <p>Description: ActionAuditRepository </p>
+ * <p>ActionAuditRepository </p>
  *
  *
  * @since : 2022/7/7 20:39

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.api.model.dto;
 
 /**
- * <p>Description: 用户错误状态信息 </p>
+ * <p>用户错误状态信息 </p>
  *
  */
 public class SignInErrorStatus {

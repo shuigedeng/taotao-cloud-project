@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * <p>Description: FormLoginWebAuthenticationDetailsMixin </p>
+ * <p>FormLoginWebAuthenticationDetailsMixin </p>
  *
  *
  * @since : 2022/4/14 11:03

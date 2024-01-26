@@ -28,7 +28,7 @@ import java.util.Set;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * <p>Description: UserDetail远程调用服务 </p>
+ * <p>UserDetail远程调用服务 </p>
  *
  */
 public class HerodotusRemoteUserDetailsService extends AbstractStrategyUserDetailsService {

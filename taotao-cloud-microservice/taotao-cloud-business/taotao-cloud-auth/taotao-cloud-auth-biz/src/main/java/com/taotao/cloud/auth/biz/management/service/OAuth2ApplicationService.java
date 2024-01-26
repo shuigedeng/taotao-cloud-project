@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * <p>Description: OAuth2ApplicationService </p>
+ * <p>OAuth2ApplicationService </p>
  *
  *
  * @since : 2022/3/1 18:06

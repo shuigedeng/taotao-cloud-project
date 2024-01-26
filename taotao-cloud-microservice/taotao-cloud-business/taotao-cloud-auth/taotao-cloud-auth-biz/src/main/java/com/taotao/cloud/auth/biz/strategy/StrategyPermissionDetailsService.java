@@ -20,7 +20,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
 import java.util.List;
 
 /**
- * <p>Description: 系统范围服务策略定义 </p>
+ * <p>系统范围服务策略定义 </p>
  *
  * @author shuigedeng
  * @version 2023.07

@@ -35,7 +35,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationGrantAuthenticationToken;
 
 /**
- * <p>Description: 登出成功监听 </p>
+ * <p>登出成功监听 </p>
  *
  */
 public class AuthenticationFailureListener implements ApplicationListener<AbstractAuthenticationFailureEvent> {

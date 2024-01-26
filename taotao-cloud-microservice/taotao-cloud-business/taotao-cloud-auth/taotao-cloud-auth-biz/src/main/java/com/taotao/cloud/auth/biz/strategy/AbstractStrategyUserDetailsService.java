@@ -24,7 +24,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * <p>Description: 抽象StrategyUserDetailsService，提取公共方法 </p>
+ * <p>抽象StrategyUserDetailsService，提取公共方法 </p>
  *
  * @since : 2022/2/17 11:23
  */

@@ -39,46 +39,48 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IGoodsMapper extends BaseSuperMapper<Goods, Long> {
 
-    /**
-     * 根据店铺ID获取商品ID列表
-     *
-     * @param storeId 店铺ID
-     * @return {@link List }<{@link Long }>
-     * @since 2022-04-27 16:56:00
-     */
-    @Select("""
+	/**
+	 * 根据店铺ID获取商品ID列表
+	 *
+	 * @param storeId 店铺ID
+	 * @return {@link List }<{@link Long }>
+	 * @since 2022-04-27 16:56:00
+	 */
+	@Select("""
 		SELECT id
 		FROM tt_goods
 		WHERE store_id = #{storeId}
 		""")
-    List<Long> getGoodsIdByStoreId(@Param("storeId") Long storeId);
+	List<Long> getGoodsIdByStoreId(@Param("storeId") Long storeId);
 
-    /**
-     * 添加商品评价数量
-     *
-     * @param commentNum 评价数量
-     * @param goodsId 商品ID
-     * @since 2022-04-27 16:56:00
-     */
-    @Update("""
+	/**
+	 * 添加商品评价数量
+	 *
+	 * @param commentNum 评价数量
+	 * @param goodsId    商品ID
+	 * @since 2022-04-27 16:56:00
+	 */
+	@Update("""
 		UPDATE tt_goods
 		SET comment_num = comment_num + #{commentNum}
 		WHERE id = #{goodsId}
 		""")
-    void addGoodsCommentNum(@Param("commentNum") Integer commentNum, @Param("goodsId") Long goodsId);
+	void addGoodsCommentNum(@Param("commentNum") Integer commentNum,
+		@Param("goodsId") Long goodsId);
 
-    /**
-     * 查询商品VO分页
-     *
-     * @param page 分页
-     * @param queryWrapper 查询条件
-     * @return {@link IPage }<{@link GoodsSkuParamsVO }>
-     * @since 2022-04-27 16:56:00
-     */
-    @Select("""
+	/**
+	 * 查询商品VO分页
+	 *
+	 * @param page         分页
+	 * @param queryWrapper 查询条件
+	 * @return {@link IPage }<{@link GoodsSkuParamsVO }>
+	 * @since 2022-04-27 16:56:00
+	 */
+	@Select("""
 		select g.*
 		from tt_goods as g
 		""")
-    IPage<GoodsSkuParamsVO> queryByParams(
-            IPage<GoodsSkuParamsVO> page, @Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
+	IPage<GoodsSkuParamsVO> queryByParams(
+		IPage<GoodsSkuParamsVO> page,
+		@Param(Constants.WRAPPER) Wrapper<GoodsSkuParamsVO> queryWrapper);
 }

@@ -25,7 +25,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 部门信息 </p>
+ * <p>部门信息 </p>
  *
  */
 @Schema(title = "部门")

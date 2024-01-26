@@ -25,15 +25,14 @@
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
-目前支持docker、docker-compose、k8s、github/jenkins ci/cd等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
+目前支持Shell、Docker、Docker-compose、K8s、Github/Genkins ci/cd等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
 
 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
 主要包括如下几部分
 
-- **大数据模块** 集成基于**hadoop、hive**的日志数据处理和分析, 用户行为分析、推荐系统, **flink、spark
-  streaming**离线/流式计算,
-  **tidb、doris**离线数据仓库, **apache hudi**数据湖, **presto**计算框架等大数据处理
+- **大数据模块** 集成基于**hadoop、hive、dolphinscheduler**的离线批量日志数据处理和分析, 用户行为分析、推荐系统, **flink、flink cdc、flink cep、spark
+  streaming、presto、seatunnel**流式处理计算框架, **tidb、doris**离线数据仓库, **hudi、paimon**数据湖等大数据处理
 
 
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成,
@@ -55,7 +54,7 @@
 - **python模块** 主要是集成了基于**django**的web开发, 基于**scrapy**爬虫开发, **homeassistant**
   家庭自动化框架原理的分析
 
-总之基于**spring cloud alibaba**的微服务架构 **spark hive hudi flink**
+总之基于**spring cloud alibaba**的微服务架构 **hadoop hive flink spark hive**
 等大数据处理实践。旨在提供技术框架的基础能力的封装，减少开发工作，只关注业务
 
 ## 2. spring cloud 微服务架构图

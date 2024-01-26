@@ -32,7 +32,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
- * <p>Description: 微信公众号核心服务 </p>
+ * <p>微信公众号核心服务 </p>
  *
  *
  * @since : 2021/5/27 20:25

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: OAuth2ProductController </p>
+ * <p>OAuth2ProductController </p>
  *
  *
  * @since : 2023/5/15 16:37

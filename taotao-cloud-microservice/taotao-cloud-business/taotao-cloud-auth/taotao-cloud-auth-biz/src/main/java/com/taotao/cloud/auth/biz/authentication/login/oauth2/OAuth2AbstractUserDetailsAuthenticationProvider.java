@@ -45,7 +45,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 抽象的用户认证Provider </p>
+ * <p>抽象的用户认证Provider </p>
  * <p>
  * 提取公共的用户通用基类，方便涉及用户校验的自定义认证模式使用
  *

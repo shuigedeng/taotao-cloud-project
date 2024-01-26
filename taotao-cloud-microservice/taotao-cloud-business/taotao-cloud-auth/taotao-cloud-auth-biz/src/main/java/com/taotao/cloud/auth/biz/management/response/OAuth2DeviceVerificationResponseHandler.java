@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 /**
- * <p>Description: 设备验证成功后续逻辑处理器 </p>
+ * <p>设备验证成功后续逻辑处理器 </p>
  *
  *
  * @since : 2023/5/3 9:35

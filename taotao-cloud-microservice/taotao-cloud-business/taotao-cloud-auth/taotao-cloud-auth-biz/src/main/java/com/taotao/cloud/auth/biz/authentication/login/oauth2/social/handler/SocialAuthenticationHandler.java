@@ -21,7 +21,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Description: 社交登录处理器 </p>
+ * <p>社交登录处理器 </p>
  *
  * @author shuigedeng
  * @version 2023.07

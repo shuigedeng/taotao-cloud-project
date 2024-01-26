@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * <p>Description: Access 业务模块配置 </p>
+ * <p>Access 业务模块配置 </p>
  *
  *
  * @since : 2022/1/26 14:59

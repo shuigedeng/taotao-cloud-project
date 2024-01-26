@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception;
 
 /**
- * <p>Description: 非法的外部访问参数类型错误 </p>
+ * <p>非法的外部访问参数类型错误 </p>
  *
  *
  * @since : 2022/1/26 12:02

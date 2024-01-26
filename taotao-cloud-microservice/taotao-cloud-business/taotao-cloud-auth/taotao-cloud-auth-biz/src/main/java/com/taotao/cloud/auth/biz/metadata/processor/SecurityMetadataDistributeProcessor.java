@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: SecurityMetadata数据处理器 </p>
+ * <p>SecurityMetadata数据处理器 </p>
  *
  */
 @Component

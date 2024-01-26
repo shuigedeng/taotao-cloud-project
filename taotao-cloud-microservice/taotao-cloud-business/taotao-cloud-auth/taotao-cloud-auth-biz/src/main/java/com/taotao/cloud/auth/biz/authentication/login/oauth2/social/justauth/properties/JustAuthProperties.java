@@ -23,7 +23,7 @@ import me.zhyd.oauth.config.AuthConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * <p>Description: 用于支持JustAuth第三方登录的配置 </p>
+ * <p>用于支持JustAuth第三方登录的配置 </p>
  *
  *
  * @since : 2021/5/16 10:24

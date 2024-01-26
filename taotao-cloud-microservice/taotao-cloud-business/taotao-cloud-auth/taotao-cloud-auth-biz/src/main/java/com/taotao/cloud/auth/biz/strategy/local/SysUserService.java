@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: SysUserService </p>
+ * <p>SysUserService </p>
  *
  *
  * @since : 2019/11/9 10:03

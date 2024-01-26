@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * <p>Description: OAuth2 认证信息 </p>
+ * <p>OAuth2 认证信息 </p>
  *
  * @author shuigedeng
  * @version 2023.07

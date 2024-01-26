@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>Description: UPMS 社交配置 </p>
+ * <p>UPMS 社交配置 </p>
  *
  *
  * @since : 2022/2/2 17:05

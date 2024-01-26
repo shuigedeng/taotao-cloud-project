@@ -18,8 +18,6 @@ package com.taotao.cloud.auth.biz.jpa.service;
 
 import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.repository.HerodotusAuthorizationConsentRepository;
-
-import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * <p>Description: HerodotusAuthorizationConsentService </p>
+ * <p>HerodotusAuthorizationConsentService </p>
  * <p>
  * 这里命名没有按照统一的习惯，主要是为了防止与 spring-authorization-server 已有类的同名而导致Bean注入失败
  *
@@ -41,70 +38,74 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 public class HerodotusAuthorizationConsentService {
 
-    /**
-     * 日志
-     */
-    private static final Logger log = LoggerFactory.getLogger(HerodotusAuthorizationConsentService.class);
+	/**
+	 * 日志
+	 */
+	private static final Logger log = LoggerFactory.getLogger(
+		HerodotusAuthorizationConsentService.class);
 
-    /**
-     * 授权同意存储库
-     */
-    private final HerodotusAuthorizationConsentRepository authorizationConsentRepository;
+	/**
+	 * 授权同意存储库
+	 */
+	private final HerodotusAuthorizationConsentRepository authorizationConsentRepository;
 
-    /**
-     * 希罗多德授权同意服务
-     *
-     * @param authorizationConsentRepository 授权同意存储库
-     * @since 2023-07-10 17:09:45
-     */
-    @Autowired
-    public HerodotusAuthorizationConsentService(
-            HerodotusAuthorizationConsentRepository authorizationConsentRepository) {
-        this.authorizationConsentRepository = authorizationConsentRepository;
-    }
+	/**
+	 * 希罗多德授权同意服务
+	 *
+	 * @param authorizationConsentRepository 授权同意存储库
+	 * @since 2023-07-10 17:09:45
+	 */
+	@Autowired
+	public HerodotusAuthorizationConsentService(
+		HerodotusAuthorizationConsentRepository authorizationConsentRepository) {
+		this.authorizationConsentRepository = authorizationConsentRepository;
+	}
 
-    /**
-     * 按注册客户端id和主体名称查找
-     *
-     * @param registeredClientId 注册客户端id
-     * @param principalName      主体名称
-     * @return {@link Optional }<{@link HerodotusAuthorizationConsent }>
-     * @since 2023-07-10 17:09:46
-     */
-    public Optional<HerodotusAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
-            String registeredClientId, String principalName) {
-        Optional<HerodotusAuthorizationConsent> result =
-                this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(
-                        registeredClientId, principalName);
-        log.info("HerodotusAuthorizationConsent Service findByRegisteredClientIdAndPrincipalName.");
-        return result;
-    }
+	/**
+	 * 按注册客户端id和主体名称查找
+	 *
+	 * @param registeredClientId 注册客户端id
+	 * @param principalName      主体名称
+	 * @return {@link Optional }<{@link HerodotusAuthorizationConsent }>
+	 * @since 2023-07-10 17:09:46
+	 */
+	public Optional<HerodotusAuthorizationConsent> findByRegisteredClientIdAndPrincipalName(
+		String registeredClientId, String principalName) {
+		Optional<HerodotusAuthorizationConsent> result =
+			this.authorizationConsentRepository.findByRegisteredClientIdAndPrincipalName(
+				registeredClientId, principalName);
+		log.info("HerodotusAuthorizationConsent Service findByRegisteredClientIdAndPrincipalName.");
+		return result;
+	}
 
-    /**
-     * 通过注册客户端id和主体名称删除
-     *
-     * @param registeredClientId 注册客户端id
-     * @param principalName      主体名称
-     * @since 2023-07-10 17:09:47
-     */
-    public void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName) {
-        this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(
-                registeredClientId, principalName);
-        log.info("HerodotusAuthorizationConsent Service deleteByRegisteredClientIdAndPrincipalName.");
-    }
+	/**
+	 * 通过注册客户端id和主体名称删除
+	 *
+	 * @param registeredClientId 注册客户端id
+	 * @param principalName      主体名称
+	 * @since 2023-07-10 17:09:47
+	 */
+	public void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId,
+		String principalName) {
+		this.authorizationConsentRepository.deleteByRegisteredClientIdAndPrincipalName(
+			registeredClientId, principalName);
+		log.info(
+			"HerodotusAuthorizationConsent Service deleteByRegisteredClientIdAndPrincipalName.");
+	}
 
-    /**
-     * 保存
-     *
-     * @param entity 实体
-     * @since 2023-07-10 17:09:47
-     */
-    public void save(HerodotusAuthorizationConsent entity) {
-        authorizationConsentRepository.save(entity);
-    }
+	/**
+	 * 保存
+	 *
+	 * @param entity 实体
+	 * @since 2023-07-10 17:09:47
+	 */
+	public void save(HerodotusAuthorizationConsent entity) {
+		authorizationConsentRepository.save(entity);
+	}
 
-    public Page<HerodotusAuthorizationConsent> myPageQuery(String registeredClientId,
-                                                           String principalName){
-        return authorizationConsentRepository.myPageQuery(registeredClientId, principalName, PageRequest.of(0, 20));
-    }
+	public Page<HerodotusAuthorizationConsent> myPageQuery(String registeredClientId,
+		String principalName) {
+		return authorizationConsentRepository.myPageQuery(registeredClientId, principalName,
+			PageRequest.of(0, 20));
+	}
 }

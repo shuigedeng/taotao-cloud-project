@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * <p>Description: 登录提示信息 </p>
+ * <p>登录提示信息 </p>
  *
  */
 @Schema(title = "登录错误提示信息")

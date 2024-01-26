@@ -24,7 +24,6 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.device.DeviceClientAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
-import com.taotao.cloud.auth.biz.authentication.federation.FederatedIdentityIdTokenCustomizer;
 import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginUrlConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AuthorizationCodeAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2ClientCredentialsAuthenticationProvider;
@@ -55,6 +54,17 @@ import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointPropert
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.UUID;
 import org.apache.commons.lang3.ArrayUtils;
 import org.dromara.hutool.core.util.ObjUtil;
 import org.slf4j.Logger;
@@ -88,7 +98,12 @@ import org.springframework.security.oauth2.server.authorization.token.JwtEncodin
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import org.springframework.security.oauth2.server.authorization.web.authentication.*;
+import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2DeviceAuthorizationRequestAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2DeviceCodeAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -100,24 +115,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.UUID;
-
 /**
- * <p>Description: 认证服务器配置 </p>
+ * <p>认证服务器配置 </p>
  * <p>
- * 1. 权限核心处理 {@link org.springframework.security.web.access.intercept.FilterSecurityInterceptor}
- * 2. 默认的权限判断 {@link org.springframework.security.access.vote.AffirmativeBased}
- * 3. 模式决策 {@link org.springframework.security.authentication.ProviderManager}
+ * 1. 权限核心处理 {@link org.springframework.security.web.access.intercept.FilterSecurityInterceptor} 2.
+ * 默认的权限判断 {@link org.springframework.security.access.vote.AffirmativeBased} 3. 模式决策
+ * {@link org.springframework.security.authentication.ProviderManager}
  *
  * @author shuigedeng
  * @version 2023.07
@@ -126,7 +129,8 @@ import java.util.UUID;
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfiguration {
 
-	private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
+	private static final Logger log = LoggerFactory.getLogger(
+		AuthorizationServerConfiguration.class);
 
 	@PostConstruct
 	public void postConstruct() {
@@ -158,29 +162,32 @@ public class AuthorizationServerConfiguration {
 		// });
 
 		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
-		httpSecurity.with(authorizationServerConfigurer,Customizer.withDefaults() );
+		httpSecurity.with(authorizationServerConfigurer, Customizer.withDefaults());
 
 		OAuth2AuthenticationFailureResponseHandler errorResponseHandler =
 			new OAuth2AuthenticationFailureResponseHandler();
 
 		authorizationServerConfigurer.tokenEndpoint(tokenEndpointCustomizer -> {
-			AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(Arrays.asList(
-				new OAuth2AuthorizationCodeAuthenticationConverter(),
-				new OAuth2RefreshTokenAuthenticationConverter(),
-				new OAuth2ClientCredentialsAuthenticationConverter(),
-				new OAuth2DeviceCodeAuthenticationConverter(),
-				new OAuth2DeviceAuthorizationRequestAuthenticationConverter(),
-				new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
-				new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
+			AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
+				Arrays.asList(
+					new OAuth2AuthorizationCodeAuthenticationConverter(),
+					new OAuth2RefreshTokenAuthenticationConverter(),
+					new OAuth2ClientCredentialsAuthenticationConverter(),
+					new OAuth2DeviceCodeAuthenticationConverter(),
+					new OAuth2DeviceAuthorizationRequestAuthenticationConverter(),
+					new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
+					new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
 
 			tokenEndpointCustomizer
 				.accessTokenRequestConverter(authenticationConverter)
 				.errorResponseHandler(errorResponseHandler)
-				.accessTokenResponseHandler(new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
+				.accessTokenResponseHandler(
+					new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
 		});
-		authorizationServerConfigurer.tokenIntrospectionEndpoint(tokenIntrospectionEndpointCustomizer -> {
-			tokenIntrospectionEndpointCustomizer.errorResponseHandler(errorResponseHandler);
-		});
+		authorizationServerConfigurer.tokenIntrospectionEndpoint(
+			tokenIntrospectionEndpointCustomizer -> {
+				tokenIntrospectionEndpointCustomizer.errorResponseHandler(errorResponseHandler);
+			});
 		authorizationServerConfigurer.tokenRevocationEndpoint(tokenRevocationEndpointCustomizer -> {
 			tokenRevocationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 		});
@@ -193,7 +200,8 @@ public class AuthorizationServerConfiguration {
 
 		// 新建设备码converter和provider
 		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter =
-			new DeviceClientAuthenticationConverter(auth2EndpointProperties.getDeviceAuthorizationEndpoint());
+			new DeviceClientAuthenticationConverter(
+				auth2EndpointProperties.getDeviceAuthorizationEndpoint());
 		DeviceClientAuthenticationProvider deviceClientAuthenticationProvider =
 			new DeviceClientAuthenticationProvider(registeredClientRepository);
 		authorizationServerConfigurer.clientAuthentication(clientAuthenticationCustomizer -> {
@@ -205,17 +213,19 @@ public class AuthorizationServerConfiguration {
 				.errorResponseHandler(errorResponseHandler);
 		});
 		// 开启设备请求相关端点
-		authorizationServerConfigurer.deviceAuthorizationEndpoint(deviceAuthorizationEndpointCustomizer -> {
-			deviceAuthorizationEndpointCustomizer
-				.errorResponseHandler(errorResponseHandler)
-				.verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
-		});
-		authorizationServerConfigurer.deviceVerificationEndpoint(deviceVerificationEndpointCustomizer -> {
-			deviceVerificationEndpointCustomizer
-				.errorResponseHandler(errorResponseHandler)
-				.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI)
-				.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
-		});
+		authorizationServerConfigurer.deviceAuthorizationEndpoint(
+			deviceAuthorizationEndpointCustomizer -> {
+				deviceAuthorizationEndpointCustomizer
+					.errorResponseHandler(errorResponseHandler)
+					.verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
+			});
+		authorizationServerConfigurer.deviceVerificationEndpoint(
+			deviceVerificationEndpointCustomizer -> {
+				deviceVerificationEndpointCustomizer
+					.errorResponseHandler(errorResponseHandler)
+					.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI)
+					.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
+			});
 		// 开启OpenId Connect 1.0相关端点
 		authorizationServerConfigurer.oidc(oidcCustomizer -> {
 			oidcCustomizer
@@ -232,44 +242,49 @@ public class AuthorizationServerConfiguration {
 				});
 		});
 
-		SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
+		SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity,
+			SessionRegistry.class);
 
 		// 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
-		authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public <O extends AuthenticationProvider> O postProcess(O object) {
-				OAuth2AuthorizationService authorizationService =
-					OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+		authorizationServerConfigurer.withObjectPostProcessor(
+			new ObjectPostProcessor<AuthenticationProvider>() {
+				@SuppressWarnings("unchecked")
+				@Override
+				public <O extends AuthenticationProvider> O postProcess(O object) {
+					OAuth2AuthorizationService authorizationService =
+						OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
 
-				//自定义(重写)OAuth2AuthorizationCodeAuthenticationProvider
-				if (org.springframework.security.oauth2.server.authorization.authentication
-					.OAuth2AuthorizationCodeAuthenticationProvider.class
-					.isAssignableFrom(object.getClass())) {
-					OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-						OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-					OAuth2AuthorizationCodeAuthenticationProvider provider =
-						new OAuth2AuthorizationCodeAuthenticationProvider(authorizationService, tokenGenerator);
-					provider.setSessionRegistry(sessionRegistry);
-					log.info("Custom OAuth2AuthorizationCodeAuthenticationProvider is in effect!");
-					return (O) provider;
-				}
+					//自定义(重写)OAuth2AuthorizationCodeAuthenticationProvider
+					if (org.springframework.security.oauth2.server.authorization.authentication
+						.OAuth2AuthorizationCodeAuthenticationProvider.class
+						.isAssignableFrom(object.getClass())) {
+						OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+							OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+						OAuth2AuthorizationCodeAuthenticationProvider provider =
+							new OAuth2AuthorizationCodeAuthenticationProvider(authorizationService,
+								tokenGenerator);
+						provider.setSessionRegistry(sessionRegistry);
+						log.info(
+							"Custom OAuth2AuthorizationCodeAuthenticationProvider is in effect!");
+						return (O) provider;
+					}
 
-				//自定义(重写)OAuth2ClientCredentialsAuthenticationProvider
-				if (org.springframework.security.oauth2.server.authorization.authentication
-					.OAuth2ClientCredentialsAuthenticationProvider.class
-					.isAssignableFrom(object.getClass())) {
-					OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
-						OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-					OAuth2ClientCredentialsAuthenticationProvider provider =
-						new OAuth2ClientCredentialsAuthenticationProvider(
-							authorizationService, tokenGenerator, clientDetailsService);
-					log.info("Custom OAuth2ClientCredentialsAuthenticationProvider is in effect!");
-					return (O) provider;
+					//自定义(重写)OAuth2ClientCredentialsAuthenticationProvider
+					if (org.springframework.security.oauth2.server.authorization.authentication
+						.OAuth2ClientCredentialsAuthenticationProvider.class
+						.isAssignableFrom(object.getClass())) {
+						OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
+							OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+						OAuth2ClientCredentialsAuthenticationProvider provider =
+							new OAuth2ClientCredentialsAuthenticationProvider(
+								authorizationService, tokenGenerator, clientDetailsService);
+						log.info(
+							"Custom OAuth2ClientCredentialsAuthenticationProvider is in effect!");
+						return (O) provider;
+					}
+					return object;
 				}
-				return object;
-			}
-		});
+			});
 
 		RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 		// 仅拦截 OAuth2 Authorization Server 的相关 endpoint
@@ -290,12 +305,14 @@ public class AuthorizationServerConfiguration {
 		// 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
 		AuthenticationManagerBuilder authenticationManagerBuilder =
 			httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
-		ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
+		ApplicationContext applicationContext = httpSecurity.getSharedObject(
+			ApplicationContext.class);
 		authenticationManagerBuilder.authenticationEventPublisher(
 			new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
 
 		// 增加新的、自定义 OAuth2 Granter
-		OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+		OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(
+			httpSecurity);
 		OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =
 			OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 
@@ -337,8 +354,9 @@ public class AuthorizationServerConfiguration {
 	public static final String AUTHORIZATION_JWS_PREFIX_KEY = "authorization_jws";
 
 	@Bean
-	public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties,
-												RedisRepository redisRepository)
+	public JWKSource<SecurityContext> jwkSource(
+		OAuth2AuthorizationProperties authorizationProperties,
+		RedisRepository redisRepository)
 		throws NoSuchAlgorithmException, ParseException {
 		OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
 		KeyPair keyPair = null;
@@ -355,10 +373,12 @@ public class AuthorizationServerConfiguration {
 						keyPair = keyStoreKeyFactory.getKeyPair(
 							jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
 					}
-				} catch (IOException e) {
+				}
+				catch (IOException e) {
 					log.error("Read custom certificate under resource folder error!", e);
 				}
-			} else {
+			}
+			else {
 				KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 				keyPairGenerator.initialize(2048);
 				keyPair = keyPairGenerator.generateKeyPair();
@@ -413,7 +433,8 @@ public class AuthorizationServerConfiguration {
 	}
 
 	@Bean
-	public AuthorizationServerSettings authorizationServerSettings(OAuth2EndpointProperties auth2EndpointProperties) {
+	public AuthorizationServerSettings authorizationServerSettings(
+		OAuth2EndpointProperties auth2EndpointProperties) {
 		return AuthorizationServerSettings.builder()
 			.issuer(auth2EndpointProperties.getIssuerUri())
 			.authorizationEndpoint(auth2EndpointProperties.getAuthorizationEndpoint())
@@ -425,7 +446,8 @@ public class AuthorizationServerConfiguration {
 			.jwkSetEndpoint(auth2EndpointProperties.getJwkSetEndpoint())
 			.oidcLogoutEndpoint(auth2EndpointProperties.getOidcLogoutEndpoint())
 			.oidcUserInfoEndpoint(auth2EndpointProperties.getOidcUserInfoEndpoint())
-			.oidcClientRegistrationEndpoint(auth2EndpointProperties.getOidcClientRegistrationEndpoint())
+			.oidcClientRegistrationEndpoint(
+				auth2EndpointProperties.getOidcClientRegistrationEndpoint())
 			.build();
 	}
 
@@ -445,7 +467,8 @@ public class AuthorizationServerConfiguration {
 		if (StringUtils.hasText(authorizationCodeRequestAuthentication.getState())) {
 			uriBuilder.queryParam(
 				OAuth2ParameterNames.STATE,
-				UriUtils.encode(authorizationCodeRequestAuthentication.getState(), StandardCharsets.UTF_8));
+				UriUtils.encode(authorizationCodeRequestAuthentication.getState(),
+					StandardCharsets.UTF_8));
 		}
 		String redirectUri = uriBuilder.build(true).toUriString();
 

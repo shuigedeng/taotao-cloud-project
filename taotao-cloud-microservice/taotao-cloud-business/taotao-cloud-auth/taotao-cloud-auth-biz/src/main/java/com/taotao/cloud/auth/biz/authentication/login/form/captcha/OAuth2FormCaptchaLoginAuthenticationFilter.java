@@ -29,68 +29,74 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * <p>Description: OAuth2 表单登录过滤器 </p>
- *
+ * <p>OAuth2 表单登录过滤器 </p>
  *
  * @since : 2022/4/12 11:08
  */
-public class OAuth2FormCaptchaLoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class OAuth2FormCaptchaLoginAuthenticationFilter extends
+	UsernamePasswordAuthenticationFilter {
 
-    private boolean postOnly = true;
+	private boolean postOnly = true;
 
-    private static final Logger log = LoggerFactory.getLogger(OAuth2FormCaptchaLoginAuthenticationFilter.class);
+	private static final Logger log = LoggerFactory.getLogger(
+		OAuth2FormCaptchaLoginAuthenticationFilter.class);
 
-    public OAuth2FormCaptchaLoginAuthenticationFilter() {
-        super();
-    }
+	public OAuth2FormCaptchaLoginAuthenticationFilter() {
+		super();
+	}
 
-    public OAuth2FormCaptchaLoginAuthenticationFilter(AuthenticationManager authenticationManager) {
-        super(authenticationManager);
-    }
+	public OAuth2FormCaptchaLoginAuthenticationFilter(AuthenticationManager authenticationManager) {
+		super(authenticationManager);
+	}
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
-        if (this.postOnly && !"POST".equals(request.getMethod())) {
-            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
-        }
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request,
+		HttpServletResponse response)
+		throws AuthenticationException {
+		if (this.postOnly && !"POST".equals(request.getMethod())) {
+			throw new AuthenticationServiceException(
+				"Authentication method not supported: " + request.getMethod());
+		}
 
-        OAuth2FormCaptchaLoginAuthenticationToken oAuth2FormCaptchaLoginAuthenticationToken =
-                getAuthenticationToken(request);
+		OAuth2FormCaptchaLoginAuthenticationToken oAuth2FormCaptchaLoginAuthenticationToken =
+			getAuthenticationToken(request);
 
-        // Allow subclasses to set the "details" property
-        setDetails(request, oAuth2FormCaptchaLoginAuthenticationToken);
+		// Allow subclasses to set the "details" property
+		setDetails(request, oAuth2FormCaptchaLoginAuthenticationToken);
 
-        return this.getAuthenticationManager().authenticate(oAuth2FormCaptchaLoginAuthenticationToken);
-    }
+		return this.getAuthenticationManager()
+			.authenticate(oAuth2FormCaptchaLoginAuthenticationToken);
+	}
 
-    private OAuth2FormCaptchaLoginAuthenticationToken getAuthenticationToken(HttpServletRequest request) {
+	private OAuth2FormCaptchaLoginAuthenticationToken getAuthenticationToken(
+		HttpServletRequest request) {
 
-        String username = obtainUsername(request);
-        String password = obtainPassword(request);
-        String key = request.getParameter("symmetric");
+		String username = obtainUsername(request);
+		String password = obtainPassword(request);
+		String key = request.getParameter("symmetric");
 
-        if (StringUtils.isBlank(username)) {
-            username = "";
-        }
+		if (StringUtils.isBlank(username)) {
+			username = "";
+		}
 
-        if (StringUtils.isBlank(password)) {
-            password = "";
-        }
+		if (StringUtils.isBlank(password)) {
+			password = "";
+		}
 
-        if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
-            username = SymmetricUtils.decrypt(username, byteKey);
-            password = SymmetricUtils.decrypt(password, byteKey);
-            log.info("Decrypt Username is : [{}], Password is : [{}]", username, password);
-        }
+		if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(username)
+			&& StringUtils.isNotBlank(password)) {
+			byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
+			username = SymmetricUtils.decrypt(username, byteKey);
+			password = SymmetricUtils.decrypt(password, byteKey);
+			log.info("Decrypt Username is : [{}], Password is : [{}]", username, password);
+		}
 
-        return new OAuth2FormCaptchaLoginAuthenticationToken(username, password);
-    }
+		return new OAuth2FormCaptchaLoginAuthenticationToken(username, password);
+	}
 
-    @Override
-    public void setPostOnly(boolean postOnly) {
-        super.setPostOnly(postOnly);
-        this.postOnly = postOnly;
-    }
+	@Override
+	public void setPostOnly(boolean postOnly) {
+		super.setPostOnly(postOnly);
+		this.postOnly = postOnly;
+	}
 }

@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 import org.hibernate.annotations.IdGeneratorType;
 
 /**
- * <p>Description: OAuth2AuthorityUuid </p>
+ * <p>OAuth2AuthorityUuid </p>
  *
  *
  * @since : 2022/11/7 17:11

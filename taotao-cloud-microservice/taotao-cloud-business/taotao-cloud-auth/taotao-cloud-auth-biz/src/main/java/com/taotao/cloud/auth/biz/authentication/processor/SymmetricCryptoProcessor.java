@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.processor;
 
 /**
- * <p>Description: 对称加密算法 </p>
+ * <p>对称加密算法 </p>
  *
  *
  * @since : 2022/5/1 15:05

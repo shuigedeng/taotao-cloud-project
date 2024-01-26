@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.management.definition.AbstractOAuth2RegisteredC
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 
 /**
- * <p>Description: OAuth2Application 转 RegisteredClient 转换器 </p>
+ * <p>OAuth2Application 转 RegisteredClient 转换器 </p>
  *
  *
  * @since : 2023/5/21 19:04

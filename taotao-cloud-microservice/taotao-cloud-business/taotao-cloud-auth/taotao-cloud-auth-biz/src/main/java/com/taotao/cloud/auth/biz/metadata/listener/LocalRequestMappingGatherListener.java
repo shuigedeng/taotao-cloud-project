@@ -28,7 +28,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: 本地RequestMapping收集监听 </p>
+ * <p>本地RequestMapping收集监听 </p>
  * <p>
  * 主要在单体式架构，以及 UUA 服务自身使用
  *

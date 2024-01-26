@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
 
 /**
- * <p>Description: OAuth2ApplicationRepository </p>
+ * <p>OAuth2ApplicationRepository </p>
  *
  *
  * @since : 2022/3/1 18:05

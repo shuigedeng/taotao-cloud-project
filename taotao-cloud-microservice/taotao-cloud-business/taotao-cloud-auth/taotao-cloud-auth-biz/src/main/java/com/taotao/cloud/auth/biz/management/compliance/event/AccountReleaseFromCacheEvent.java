@@ -20,7 +20,7 @@ import com.taotao.cloud.security.springsecurity.event.LocalApplicationEvent;
 import java.time.Clock;
 
 /**
- * <p>Description: 从账户状态缓存中释放账号事件 </p>
+ * <p>从账户状态缓存中释放账号事件 </p>
  *
  */
 public class AccountReleaseFromCacheEvent extends LocalApplicationEvent<String> {

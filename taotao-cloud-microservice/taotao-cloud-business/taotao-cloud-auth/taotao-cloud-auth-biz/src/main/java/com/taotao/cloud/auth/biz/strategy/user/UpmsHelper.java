@@ -27,7 +27,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * <p>Description: 实体转换帮助类 </p>
+ * <p>实体转换帮助类 </p>
  */
 public class UpmsHelper {
 

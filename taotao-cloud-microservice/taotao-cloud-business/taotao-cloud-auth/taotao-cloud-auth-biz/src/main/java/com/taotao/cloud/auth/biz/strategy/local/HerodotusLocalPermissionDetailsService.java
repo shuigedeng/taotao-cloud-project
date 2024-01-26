@@ -24,7 +24,7 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 
 /**
- * <p>Description: 本地权限服务 </p>
+ * <p>本地权限服务 </p>
  *
  */
 public class HerodotusLocalPermissionDetailsService extends AbstractStrategyPermissionDetailsService {

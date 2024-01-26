@@ -28,7 +28,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 社会化登录用户 </p>
+ * <p>社会化登录用户 </p>
  *
  */
 @Schema(title = "社会化登录用户")

@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: 微信公众号日志处理 </p>
+ * <p>微信公众号日志处理 </p>
  *
  *
  * @since : 2021/4/7 13:26

@@ -21,7 +21,7 @@ import java.util.Map;
 import org.springframework.core.convert.converter.Converter;
 
 /**
- * <p>Description: 封装RegisteredClientAdapter 默认行为 </p>
+ * <p>封装RegisteredClientAdapter 默认行为 </p>
  *
  * @author shuigedeng
  * @version 2023.07

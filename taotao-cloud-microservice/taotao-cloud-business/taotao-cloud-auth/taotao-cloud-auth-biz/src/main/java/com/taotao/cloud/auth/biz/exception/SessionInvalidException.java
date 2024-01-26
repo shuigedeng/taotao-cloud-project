@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.exception;
 
 /**
- * <p>Description: Session 不可用错误 </p>
+ * <p>Session 不可用错误 </p>
  *
  *
  * @since : 2021/10/4 16:46

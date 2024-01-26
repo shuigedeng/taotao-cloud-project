@@ -30,7 +30,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * <p>Description: 微信小程序接入处理器 </p>
+ * <p>微信小程序接入处理器 </p>
  *
  *
  * @since : 2022/1/26 10:56

@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.biz.uaa.configuration;
 
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateMapOAuth2AccessTokenResponseConverter;
 import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateOAuth2RefreshTokenRequestEntityConverter;
+import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -31,8 +32,6 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedCli
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
 
 /**
  * 兼容微信刷新token
@@ -56,7 +55,8 @@ public class OAuth2ClientManagerConfiguration {
 		ClientRegistrationRepository clientRegistrationRepository,
 		OAuth2AuthorizedClientRepository authorizedClientRepository) {
 		DefaultOAuth2AuthorizedClientManager authorizedClientManager =
-			new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository, authorizedClientRepository);
+			new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository,
+				authorizedClientRepository);
 		DefaultRefreshTokenTokenResponseClient defaultRefreshTokenTokenResponseClient =
 			new DefaultRefreshTokenTokenResponseClient();
 
@@ -66,23 +66,28 @@ public class OAuth2ClientManagerConfiguration {
 			new OAuth2AccessTokenResponseHttpMessageConverter();
 		// 微信返回的content-type 是 text-plain
 		messageConverter.setSupportedMediaTypes(Arrays.asList(
-			MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN, new MediaType("application", "*+json")));
+			MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN,
+			new MediaType("application", "*+json")));
 
 		// 兼容微信解析
-		messageConverter.setAccessTokenResponseConverter(new SocialDelegateMapOAuth2AccessTokenResponseConverter());
+		messageConverter.setAccessTokenResponseConverter(
+			new SocialDelegateMapOAuth2AccessTokenResponseConverter());
 
-		RestTemplate restTemplate = new RestTemplate(Arrays.asList(new FormHttpMessageConverter(), messageConverter));
+		RestTemplate restTemplate = new RestTemplate(
+			Arrays.asList(new FormHttpMessageConverter(), messageConverter));
 
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 		defaultRefreshTokenTokenResponseClient.setRestOperations(restTemplate);
 
-		authorizedClientManager.setAuthorizedClientProvider(OAuth2AuthorizedClientProviderBuilder.builder()
-			.authorizationCode()
-			.refreshToken((refreshTokenGrantBuilder) -> {
-				refreshTokenGrantBuilder.accessTokenResponseClient(defaultRefreshTokenTokenResponseClient);
-			})
-			.clientCredentials()
-			.build());
+		authorizedClientManager.setAuthorizedClientProvider(
+			OAuth2AuthorizedClientProviderBuilder.builder()
+				.authorizationCode()
+				.refreshToken((refreshTokenGrantBuilder) -> {
+					refreshTokenGrantBuilder.accessTokenResponseClient(
+						defaultRefreshTokenTokenResponseClient);
+				})
+				.clientCredentials()
+				.build());
 		return authorizedClientManager;
 	}
 }

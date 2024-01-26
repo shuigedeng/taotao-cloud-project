@@ -25,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 用户操作审计 </p>
+ * <p>用户操作审计 </p>
  *
  *
  * @since : 2022/7/7 18:55

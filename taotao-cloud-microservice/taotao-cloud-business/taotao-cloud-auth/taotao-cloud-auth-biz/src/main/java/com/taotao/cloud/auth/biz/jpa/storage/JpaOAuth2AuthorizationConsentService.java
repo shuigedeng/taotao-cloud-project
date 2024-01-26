@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
 /**
- * <p>Description: 基于 JPA 的 OAuth2 认证服务 </p>
+ * <p>基于 JPA 的 OAuth2 认证服务 </p>
  *
  * @author shuigedeng
  * @version 2023.07

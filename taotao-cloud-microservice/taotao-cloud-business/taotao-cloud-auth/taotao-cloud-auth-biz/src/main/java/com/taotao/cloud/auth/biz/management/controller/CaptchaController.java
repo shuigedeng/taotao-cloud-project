@@ -37,7 +37,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>Description: 验证码Controller </p>
+ * <p>验证码Controller </p>
  *
  *
  * @since : 2021/12/12 10:44

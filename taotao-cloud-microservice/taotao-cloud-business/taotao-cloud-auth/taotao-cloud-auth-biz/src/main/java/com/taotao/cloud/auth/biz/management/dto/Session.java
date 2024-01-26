@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.management.dto;
 import com.google.common.base.MoreObjects;
 
 /**
- * <p>Description: Session响应实体 </p>
+ * <p>Session响应实体 </p>
  *
  *
  * @since : 2021/10/2 11:42

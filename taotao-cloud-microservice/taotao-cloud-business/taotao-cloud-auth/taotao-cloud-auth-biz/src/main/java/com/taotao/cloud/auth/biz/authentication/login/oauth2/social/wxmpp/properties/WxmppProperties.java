@@ -22,7 +22,7 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * <p>Description: 微信公众号属性配置 </p>
+ * <p>微信公众号属性配置 </p>
  *
  *
  * @since : 2021/4/7 13:17

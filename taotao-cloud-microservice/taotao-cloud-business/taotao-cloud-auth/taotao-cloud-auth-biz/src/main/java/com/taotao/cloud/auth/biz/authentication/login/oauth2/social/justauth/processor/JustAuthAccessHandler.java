@@ -29,7 +29,7 @@ import me.zhyd.oauth.request.AuthRequest;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * <p>Description: JustAuth 接入处理器 </p>
+ * <p>JustAuth 接入处理器 </p>
  *
  *
  * @since : 2022/1/25 17:45

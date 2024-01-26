@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 
 /**
- * <p>Description: 抽象的认证 Converter </p>
+ * <p>抽象的认证 Converter </p>
  */
 public abstract class OAuth2AbstractAuthenticationConverter implements AuthenticationConverter {
 

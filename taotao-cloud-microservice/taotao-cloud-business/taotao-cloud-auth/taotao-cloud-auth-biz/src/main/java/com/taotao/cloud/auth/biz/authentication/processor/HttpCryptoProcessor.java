@@ -33,7 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>Description: 接口加密解密处理器 </p>
+ * <p>接口加密解密处理器 </p>
  *
  *
  * @since : 2021/10/4 14:29

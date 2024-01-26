@@ -37,7 +37,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.util.MultiValueMap;
 
 /**
- * <p>Description: 认证失败处理器 </p>
+ * <p>认证失败处理器 </p>
  *
  * @since : 2022/2/19 20:48
  */

@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: OAuth2AuthorizationConsent 转 HerodotusAuthorizationConsent 转换器</p>
+ * <p>OAuth2AuthorizationConsent 转 HerodotusAuthorizationConsent 转换器</p>
  *
  * @author shuigedeng
  * @version 2023.07

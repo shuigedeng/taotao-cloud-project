@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
 /**
- * <p>Description: 基于Jpa 的 RegisteredClient服务 </p>
+ * <p>基于Jpa 的 RegisteredClient服务 </p>
  *
  * @author shuigedeng
  * @version 2023.07

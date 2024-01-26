@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * <p>Description: 抽象的StrategyAuthorityDetailsService </p>
+ * <p>抽象的StrategyAuthorityDetailsService </p>
  *
  * @since : 2022/4/1 19:09
  */

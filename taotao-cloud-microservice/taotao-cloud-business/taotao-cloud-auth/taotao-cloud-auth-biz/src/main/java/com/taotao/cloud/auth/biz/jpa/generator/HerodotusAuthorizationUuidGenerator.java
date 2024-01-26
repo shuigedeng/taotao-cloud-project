@@ -35,7 +35,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: HerodotusAuthorizationUuid 注解 </p>
+ * <p>HerodotusAuthorizationUuid 注解 </p>
  *
  */
 @IdGeneratorType(HerodotusAuthorizationUuidGeneratorType.class)

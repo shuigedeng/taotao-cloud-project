@@ -28,7 +28,7 @@ import java.util.Map;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 
 /**
- * <p>Description: ClientSettingsDeserializer </p>
+ * <p>ClientSettingsDeserializer </p>
  *
  *
  * @since : 2022/10/24 23:18

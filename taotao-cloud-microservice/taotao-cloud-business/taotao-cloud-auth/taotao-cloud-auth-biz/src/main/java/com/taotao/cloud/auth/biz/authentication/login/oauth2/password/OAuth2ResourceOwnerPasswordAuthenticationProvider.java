@@ -49,7 +49,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 自定义 OAuth2 密码模式认证 Provider </p>
+ * <p>自定义 OAuth2 密码模式认证 Provider </p>
  *
  *
  * @since : 2022/2/22 16:02

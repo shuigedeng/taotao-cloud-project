@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.taotao.cloud.security.springsecurity.core.jackson2.SecurityUserDeserializer;
 
 /**
- * <p>Description: 自定义 UserDetails Mixin </p>
+ * <p>自定义 UserDetails Mixin </p>
  * <p>
  * This mixin class helps in serialize/deserialize {@link org.springframework.security.core.userdetails.User}. This class also register a custom deserializer UserDeserializer to deserialize User object successfully. In order to use this mixin you need to register two more mixin classes in your ObjectMapper configuration.
  * SimpleGrantedAuthorityMixin

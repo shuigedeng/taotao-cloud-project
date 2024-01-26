@@ -32,7 +32,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: OAuth2 应用 </p>
+ * <p>OAuth2 应用 </p>
  * <p>
  * Spring Authorization Server 默认的 RegisteredClient 不便于扩展。增加该类用于存储标准 RegisteredClient 表结构以外的扩展信息。
  *

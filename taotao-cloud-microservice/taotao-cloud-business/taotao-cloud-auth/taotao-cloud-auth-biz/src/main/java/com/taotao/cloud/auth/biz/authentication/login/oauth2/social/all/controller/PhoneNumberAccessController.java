@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: 手机验证码登录 </p>
+ * <p>手机验证码登录 </p>
  *
  *
  * @since : 2021/5/28 11:39

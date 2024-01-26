@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.processor;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 
 /**
- * <p>Description: 非对称加密 </p>
+ * <p>非对称加密 </p>
  *
  *
  * @since : 2022/5/1 15:06

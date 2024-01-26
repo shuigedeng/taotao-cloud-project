@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * <p>Description: OAuth2DeviceService </p>
+ * <p>OAuth2DeviceService </p>
  *
  *
  * @since : 2023/5/15 16:36

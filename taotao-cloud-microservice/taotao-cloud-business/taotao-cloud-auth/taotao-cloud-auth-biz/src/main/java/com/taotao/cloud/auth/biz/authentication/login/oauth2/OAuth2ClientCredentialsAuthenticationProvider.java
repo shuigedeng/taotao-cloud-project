@@ -43,7 +43,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 /**
- * <p>Description: 扩展的 OAuth2ClientCredentialsAuthenticationProvider</p>
+ * <p>扩展的 OAuth2ClientCredentialsAuthenticationProvider</p>
  * <p>
  * 用于支持 客户端权限验证 以及 支持 Refresh_Token
  *

@@ -26,7 +26,7 @@ import org.springframework.security.web.authentication.rememberme.AbstractRememb
 import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 
 /**
- * <p>Description: OAuth2 合规性配置参数 </p>
+ * <p>OAuth2 合规性配置参数 </p>
  *
  *
  * @since : 2022/7/7 0:16

@@ -34,7 +34,7 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 /**
- * <p>Description: OAuth2ClientAuthenticationTokenDeserializer </p>
+ * <p>OAuth2ClientAuthenticationTokenDeserializer </p>
  *
  *
  * @since : 2022/10/24 14:43

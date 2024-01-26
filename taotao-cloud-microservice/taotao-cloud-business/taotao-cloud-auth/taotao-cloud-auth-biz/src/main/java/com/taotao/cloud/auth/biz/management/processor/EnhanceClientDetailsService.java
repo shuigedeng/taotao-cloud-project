@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.management.processor;
 
 /**
- * <p>Description: 自定义客户端详情接口 </p>
+ * <p>自定义客户端详情接口 </p>
  *
  * @author shuigedeng
  * @version 2023.07

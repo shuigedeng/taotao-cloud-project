@@ -21,7 +21,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * <p>Description: OAuth2 (Security) 表单登录 Token </p>
+ * <p>OAuth2 (Security) 表单登录 Token </p>
  *
  *
  * @since : 2022/4/12 10:24

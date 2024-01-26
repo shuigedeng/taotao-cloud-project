@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.utils;
 import com.fasterxml.jackson.core.Version;
 
 /**
- * <p>Description: Jackson2 用到的常量值 </p>
+ * <p>Jackson2 用到的常量值 </p>
  *
  * @since : 2023/4/28 14:39
  */

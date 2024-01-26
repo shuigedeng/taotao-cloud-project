@@ -120,6 +120,10 @@ configurations {
             force 'org.bouncycastle:bcprov-jdk18on:1.77'
             force 'org.bouncycastle:bcpkix-jdk18on:1.77'
             force 'org.bouncycastle:bcutil-jdk18on:1.77'
+            force 'org.webjars.npm:csstype:3.1.3'
+            force 'org.webjars.npm:postcss:8.4.33'
+            force 'org.webjars.npm:nanoid:4.0.2'
+            force 'net.minidev:json-smart:2.5.0'
         }
 
         //exclude group: "log4j", module: "log4j"

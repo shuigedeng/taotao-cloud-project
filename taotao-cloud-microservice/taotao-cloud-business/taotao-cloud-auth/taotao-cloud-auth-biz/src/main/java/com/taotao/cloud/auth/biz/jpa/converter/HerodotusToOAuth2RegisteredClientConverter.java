@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: HerodotusRegisteredClient 转 换适配器 </p>
+ * <p>HerodotusRegisteredClient 转 换适配器 </p>
  *
  * @author shuigedeng
  * @version 2023.07

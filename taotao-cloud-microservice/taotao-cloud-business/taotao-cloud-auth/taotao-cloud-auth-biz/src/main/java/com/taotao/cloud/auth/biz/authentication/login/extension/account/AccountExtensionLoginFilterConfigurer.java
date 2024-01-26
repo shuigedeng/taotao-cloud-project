@@ -16,7 +16,10 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.extension.account;
 
-import com.taotao.cloud.auth.biz.authentication.login.extension.*;
+import com.taotao.cloud.auth.biz.authentication.login.extension.AbstractExtensionLoginFilterConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationFailureHandler;
+import com.taotao.cloud.auth.biz.authentication.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.biz.authentication.login.extension.account.service.AccountUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import org.springframework.context.ApplicationContext;
@@ -36,59 +39,61 @@ import org.springframework.util.Assert;
  * @since 2023-06-29 13:57:50
  */
 public class AccountExtensionLoginFilterConfigurer<H extends HttpSecurityBuilder<H>>
-        extends AbstractExtensionLoginFilterConfigurer<
-                H,
-                AccountExtensionLoginFilterConfigurer<H>,
-                AccountAuthenticationFilter,
-                ExtensionLoginFilterSecurityConfigurer<H>> {
+	extends AbstractExtensionLoginFilterConfigurer<
+	H,
+	AccountExtensionLoginFilterConfigurer<H>,
+	AccountAuthenticationFilter,
+	ExtensionLoginFilterSecurityConfigurer<H>> {
 
-    private AccountUserDetailsService accountUserDetailsService;
-    private JwtTokenGenerator jwtTokenGenerator;
+	private AccountUserDetailsService accountUserDetailsService;
+	private JwtTokenGenerator jwtTokenGenerator;
 
-    public AccountExtensionLoginFilterConfigurer(ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
-        super(securityConfigurer, new AccountAuthenticationFilter(), "/login/account");
-    }
+	public AccountExtensionLoginFilterConfigurer(
+		ExtensionLoginFilterSecurityConfigurer<H> securityConfigurer) {
+		super(securityConfigurer, new AccountAuthenticationFilter(), "/login/account");
+	}
 
-    public AccountExtensionLoginFilterConfigurer<H> accountUserDetailsService(
-            AccountUserDetailsService accountUserDetailsService) {
-        this.accountUserDetailsService = accountUserDetailsService;
-        return this;
-    }
+	public AccountExtensionLoginFilterConfigurer<H> accountUserDetailsService(
+		AccountUserDetailsService accountUserDetailsService) {
+		this.accountUserDetailsService = accountUserDetailsService;
+		return this;
+	}
 
-    public AccountExtensionLoginFilterConfigurer<H> jwtTokenGenerator(JwtTokenGenerator jwtTokenGenerator) {
-        this.jwtTokenGenerator = jwtTokenGenerator;
-        return this;
-    }
+	public AccountExtensionLoginFilterConfigurer<H> jwtTokenGenerator(
+		JwtTokenGenerator jwtTokenGenerator) {
+		this.jwtTokenGenerator = jwtTokenGenerator;
+		return this;
+	}
 
-    @Override
-    protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
-        return new AntPathRequestMatcher(loginProcessingUrl, "POST");
-    }
+	@Override
+	protected RequestMatcher createLoginProcessingUrlMatcher(String loginProcessingUrl) {
+		return new AntPathRequestMatcher(loginProcessingUrl, "POST");
+	}
 
-    @Override
-    protected AuthenticationProvider authenticationProvider(H http) {
-        ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-        AccountUserDetailsService accountUserDetailsService = this.accountUserDetailsService != null
-                ? this.accountUserDetailsService
-                : getBeanOrNull(applicationContext, AccountUserDetailsService.class);
-        Assert.notNull(accountUserDetailsService, "accountUserDetailsService is required");
+	@Override
+	protected AuthenticationProvider authenticationProvider(H http) {
+		ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+		AccountUserDetailsService accountUserDetailsService = this.accountUserDetailsService != null
+			? this.accountUserDetailsService
+			: getBeanOrNull(applicationContext, AccountUserDetailsService.class);
+		Assert.notNull(accountUserDetailsService, "accountUserDetailsService is required");
 
-        return new AccountAuthenticationProvider(accountUserDetailsService);
-    }
+		return new AccountAuthenticationProvider(accountUserDetailsService);
+	}
 
-    @Override
-    protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
-        if (this.jwtTokenGenerator == null) {
-            ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
-            jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
-        }
-        Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
+	@Override
+	protected AuthenticationSuccessHandler defaultSuccessHandler(H http) {
+		if (this.jwtTokenGenerator == null) {
+			ApplicationContext applicationContext = http.getSharedObject(ApplicationContext.class);
+			jwtTokenGenerator = getBeanOrNull(applicationContext, JwtTokenGenerator.class);
+		}
+		Assert.notNull(jwtTokenGenerator, "jwtTokenGenerator is required");
 
-        return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
-    }
+		return new JsonExtensionLoginAuthenticationSuccessHandler(jwtTokenGenerator);
+	}
 
-    @Override
-    protected AuthenticationFailureHandler defaultFailureHandler(H http) {
-        return new JsonExtensionLoginAuthenticationFailureHandler();
-    }
+	@Override
+	protected AuthenticationFailureHandler defaultFailureHandler(H http) {
+		return new JsonExtensionLoginAuthenticationFailureHandler();
+	}
 }

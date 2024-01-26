@@ -34,7 +34,7 @@ import org.springframework.security.oauth2.server.authorization.oidc.http.conver
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
- * <p>Description: 客户端自动注册成功后续逻辑处理器 </p>
+ * <p>客户端自动注册成功后续逻辑处理器 </p>
  *
  *
  * @since : 2023/5/23 17:37

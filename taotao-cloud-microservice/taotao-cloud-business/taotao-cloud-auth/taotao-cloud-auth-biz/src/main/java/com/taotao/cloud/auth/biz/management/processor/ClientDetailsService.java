@@ -20,7 +20,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuth
 import java.util.Set;
 
 /**
- * <p>Description: 客户端操作基础接口 </p>
+ * <p>客户端操作基础接口 </p>
  *
  * @author shuigedeng
  * @version 2023.07

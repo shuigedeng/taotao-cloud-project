@@ -30,7 +30,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: SecurityMetadata远程变更事件监听 </p>
+ * <p>SecurityMetadata远程变更事件监听 </p>
  *
  */
 @Component

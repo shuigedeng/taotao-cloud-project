@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.wxapp.enums;
 
 /**
- * <p>Description: 跳转小程序类型 </p>
+ * <p>跳转小程序类型 </p>
  * <p>
  * developer为开发版；trial为体验版；formal为正式版；默认为正式版
  *

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.social;
 
+import com.taotao.cloud.auth.biz.authentication.login.form.captcha.OAuth2FormCaptchaLoginHttpConfigurer;
 import com.taotao.cloud.auth.biz.authentication.login.social.gitee.GiteeOAuth2UserService;
 import com.taotao.cloud.auth.biz.authentication.login.social.github.GithubOAuth2UserService;
 import com.taotao.cloud.auth.biz.authentication.login.social.qq.QQOauth2UserService;
@@ -27,6 +28,7 @@ import com.taotao.cloud.auth.biz.authentication.token.JwtTokenGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.client.OAuth2LoginConfigurer;

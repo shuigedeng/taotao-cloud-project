@@ -26,7 +26,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * <p>Description: 系统安全属性实体 </p>
+ * <p>系统安全属性实体 </p>
  *
  */
 @Schema(title = "系统安全属性数据")

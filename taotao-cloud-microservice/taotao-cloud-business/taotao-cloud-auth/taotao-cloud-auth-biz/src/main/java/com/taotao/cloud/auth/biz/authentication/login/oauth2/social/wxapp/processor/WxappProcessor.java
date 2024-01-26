@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <p>Description: 微信小程序核心基础代码 </p>
+ * <p>微信小程序核心基础代码 </p>
  *
  *
  * @since : 2021/5/27 20:29

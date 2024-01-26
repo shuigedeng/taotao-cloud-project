@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 
 /**
- * <p>Description: TokenCustomizer 通用处理 </p>
+ * <p>TokenCustomizer 通用处理 </p>
  *
  * @author shuigedeng
  * @version 2023.07

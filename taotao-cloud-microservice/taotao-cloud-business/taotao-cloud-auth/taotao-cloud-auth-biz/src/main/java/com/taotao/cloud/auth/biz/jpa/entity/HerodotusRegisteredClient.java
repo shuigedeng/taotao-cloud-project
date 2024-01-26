@@ -24,7 +24,7 @@ import java.util.Objects;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * <p>Description: OAuth2 客户端实体 </p>
+ * <p>OAuth2 客户端实体 </p>
  *
  * @author shuigedeng
  * @version 2023.07

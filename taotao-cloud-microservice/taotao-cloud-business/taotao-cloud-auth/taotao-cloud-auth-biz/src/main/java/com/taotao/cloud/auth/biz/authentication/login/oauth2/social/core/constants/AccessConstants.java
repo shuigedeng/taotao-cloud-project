@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.consta
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 
 /**
- * <p>Description: 接入模块常量 </p>
+ * <p>接入模块常量 </p>
  *
  *
  * @since : 2022/1/25 15:27

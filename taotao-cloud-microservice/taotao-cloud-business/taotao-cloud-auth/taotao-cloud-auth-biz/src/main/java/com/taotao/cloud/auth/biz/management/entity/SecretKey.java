@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * <p>Description: 秘钥缓存存储实体 </p>
+ * <p>秘钥缓存存储实体 </p>
  *
  *
  * @since : 2021/9/30 18:17

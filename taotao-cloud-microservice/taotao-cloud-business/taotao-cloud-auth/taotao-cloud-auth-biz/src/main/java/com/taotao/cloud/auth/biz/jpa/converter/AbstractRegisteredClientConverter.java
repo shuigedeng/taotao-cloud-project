@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 /**
- * <p>Description: RegisteredClient 转换器</p>
+ * <p>RegisteredClient 转换器</p>
  *
  * @author shuigedeng
  * @version 2023.07

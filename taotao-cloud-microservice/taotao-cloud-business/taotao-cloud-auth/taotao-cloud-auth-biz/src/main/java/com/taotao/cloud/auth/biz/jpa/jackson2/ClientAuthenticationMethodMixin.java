@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * <p>Description: ClientAuthenticationMethodMixin </p>
+ * <p>ClientAuthenticationMethodMixin </p>
  *
  *
  * @since : 2022/10/24 15:50

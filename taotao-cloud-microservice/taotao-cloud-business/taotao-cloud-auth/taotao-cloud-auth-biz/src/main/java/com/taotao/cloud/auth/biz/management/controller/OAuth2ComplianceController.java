@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: OAuth2ComplianceController </p>
+ * <p>OAuth2ComplianceController </p>
  *
  *
  * @since : 2022/7/7 22:56

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception;
 
 /**
- * <p>Description: 接入预操作失败错误 </p>
+ * <p>接入预操作失败错误 </p>
  *
  *
  * @since : 2022/1/26 11:10

@@ -40,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 基于 JPA 的 OAuth2 认证服务 </p>
+ * <p>基于 JPA 的 OAuth2 认证服务 </p>
  *
  * @author shuigedeng
  * @version 2023.07

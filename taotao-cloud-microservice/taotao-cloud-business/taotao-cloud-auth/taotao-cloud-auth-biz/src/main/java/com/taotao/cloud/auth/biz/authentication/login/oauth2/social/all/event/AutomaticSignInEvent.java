@@ -20,7 +20,7 @@ import java.util.Map;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * <p>Description: 自动登录事件 </p>
+ * <p>自动登录事件 </p>
  * <p>
  * JustAuth 接收到 Callback以后，统一走系统 /oauth/token 接口获取 Token
  *

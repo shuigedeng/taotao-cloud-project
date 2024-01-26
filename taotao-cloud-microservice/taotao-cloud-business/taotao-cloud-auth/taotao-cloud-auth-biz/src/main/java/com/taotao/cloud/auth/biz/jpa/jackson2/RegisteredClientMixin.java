@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * <p>Description: RegisteredClientMixin </p>
+ * <p>RegisteredClientMixin </p>
  *
  *
  * @since : 2022/10/24 16:18

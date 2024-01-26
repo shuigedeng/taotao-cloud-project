@@ -25,7 +25,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: RequestMapping存储服务 </p>
+ * <p>RequestMapping存储服务 </p>
  *
  */
 @Component

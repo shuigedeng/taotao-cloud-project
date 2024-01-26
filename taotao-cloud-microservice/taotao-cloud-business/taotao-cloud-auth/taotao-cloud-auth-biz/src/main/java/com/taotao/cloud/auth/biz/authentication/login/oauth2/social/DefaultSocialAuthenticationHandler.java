@@ -36,7 +36,7 @@ import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>Description: 社交登录默认处理器。 </p>
+ * <p>社交登录默认处理器。 </p>
  *
  *
  * @since : 2022/1/26 23:44

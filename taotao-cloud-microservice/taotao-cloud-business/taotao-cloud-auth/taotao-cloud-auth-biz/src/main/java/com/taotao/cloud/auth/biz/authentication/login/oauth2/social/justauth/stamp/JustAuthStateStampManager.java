@@ -23,7 +23,7 @@ import me.zhyd.oauth.cache.AuthStateCache;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <p>Description: 自定义JustAuth State Cache </p>
+ * <p>自定义JustAuth State Cache </p>
  *
  *
  * @since : 2021/5/22 10:22

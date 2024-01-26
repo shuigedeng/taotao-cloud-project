@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * <p>Description: 账户锁定处理服务 </p>
+ * <p>账户锁定处理服务 </p>
  */
 public class OAuth2AccountStatusManager {
 

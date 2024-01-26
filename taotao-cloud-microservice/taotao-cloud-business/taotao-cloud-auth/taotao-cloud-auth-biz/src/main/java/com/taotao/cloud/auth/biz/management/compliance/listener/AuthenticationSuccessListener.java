@@ -34,7 +34,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
- * <p>Description: 登录成功事件监听 </p>
+ * <p>登录成功事件监听 </p>
  *
  */
 public class AuthenticationSuccessListener implements ApplicationListener<AuthenticationSuccessEvent> {

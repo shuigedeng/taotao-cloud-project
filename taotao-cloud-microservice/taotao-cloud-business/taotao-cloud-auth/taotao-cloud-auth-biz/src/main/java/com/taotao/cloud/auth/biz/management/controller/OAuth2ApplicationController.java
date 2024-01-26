@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: OAuth2应用管理接口 </p>
+ * <p>OAuth2应用管理接口 </p>
  *
  *
  * @since : 2022/3/1 18:52

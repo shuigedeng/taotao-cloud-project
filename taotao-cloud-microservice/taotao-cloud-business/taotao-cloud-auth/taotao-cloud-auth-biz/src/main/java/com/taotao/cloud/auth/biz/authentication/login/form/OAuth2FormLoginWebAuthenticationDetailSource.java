@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 
 /**
- * <p>Description: 表单登录 Details 定义 </p>
+ * <p>表单登录 Details 定义 </p>
  *
  * @author shuigedeng
  * @version 2023.04

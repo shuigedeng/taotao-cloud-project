@@ -31,14 +31,14 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface AppConvert {
 
-    AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
+	AppConvert INSTANCE = Mappers.getMapper(AppConvert.class);
 
-    Page<AppDTO> convertPage(Page<App> appDO);
+	Page<AppDTO> convertPage(Page<App> appDO);
 
-    List<AppDTO> convertList(List<App> app);
+	List<AppDTO> convertList(List<App> app);
 
-    AppDTO convert(App app);
+	AppDTO convert(App app);
 
-    App convert(AppDTO appDTO);
+	App convert(AppDTO appDTO);
 
 }

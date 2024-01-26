@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: 请求加密服务 </p>
+ * <p>请求加密服务 </p>
  *
  *
  * @since : 2021/9/30 18:08

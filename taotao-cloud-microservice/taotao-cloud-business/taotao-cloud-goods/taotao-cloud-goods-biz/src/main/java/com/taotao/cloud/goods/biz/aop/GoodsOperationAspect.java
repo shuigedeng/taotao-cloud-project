@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
@@ -37,10 +36,10 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class GoodsOperationAspect {
 
-    private final ApplicationEventPublisher publisher;
+	private final ApplicationEventPublisher publisher;
 
-    @After("@annotation(com.taotao.cloud.goods.biz.aop.GoodsLogPoint)")
-    public void doAfter(JoinPoint joinPoint) {
+	@After("@annotation(com.taotao.cloud.goods.biz.aop.GoodsLogPoint)")
+	public void doAfter(JoinPoint joinPoint) {
 		LogUtils.info("");
 	}
 }

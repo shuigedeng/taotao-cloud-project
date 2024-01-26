@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * <p>Description: OAuth2 Manager 模块配置 </p>
+ * <p>OAuth2 Manager 模块配置 </p>
  * <p>
  * {@link org.springframework.security.oauth2.jwt.JwtTimestampValidator}
  *

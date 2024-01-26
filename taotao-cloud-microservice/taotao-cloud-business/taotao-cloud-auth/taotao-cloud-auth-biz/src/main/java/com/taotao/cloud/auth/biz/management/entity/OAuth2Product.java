@@ -25,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 物联网产品 </p>
+ * <p>物联网产品 </p>
  *
  *
  * @since : 2023/5/15 14:26

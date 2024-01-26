@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2A
 import org.springframework.util.ClassUtils;
 
 /**
- * <p>Description: OAuth2 相关 Jackson 处理器 </p>
+ * <p>OAuth2 相关 Jackson 处理器 </p>
  *
  *
  * @since : 2023/4/29 16:05

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: OAuth2 认证管理接口 </p>
+ * <p>OAuth2 认证管理接口 </p>
  *
  *
  * @since : 2022/3/1 18:52

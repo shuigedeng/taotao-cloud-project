@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>Description: This class is a straight copy from Spring Authorization Server.</p>
+ * <p>This class is a straight copy from Spring Authorization Server.</p>
  */
 public class JsonNodeUtils {
 

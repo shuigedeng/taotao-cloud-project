@@ -23,7 +23,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 系统权限实体 </p>
+ * <p>系统权限实体 </p>
  *
  */
 @Schema(name = "系统权限")

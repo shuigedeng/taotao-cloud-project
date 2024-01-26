@@ -33,7 +33,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>Description: 分布式架构配置 </p>
+ * <p>分布式架构配置 </p>
  *
  * @author shuigedeng
  * @version 2023.07

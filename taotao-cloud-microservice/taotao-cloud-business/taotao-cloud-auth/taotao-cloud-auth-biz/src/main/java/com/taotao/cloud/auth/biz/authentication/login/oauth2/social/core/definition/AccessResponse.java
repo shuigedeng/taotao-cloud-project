@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.defini
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 
 /**
- * <p>Description: 外部接入预操作统一返回实体 </p>
+ * <p>外部接入预操作统一返回实体 </p>
  *
  *
  * @since : 2022/1/25 16:35

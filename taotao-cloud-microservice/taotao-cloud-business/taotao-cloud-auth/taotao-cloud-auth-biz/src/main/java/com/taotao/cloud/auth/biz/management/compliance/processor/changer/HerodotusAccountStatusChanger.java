@@ -22,7 +22,7 @@ import com.taotao.cloud.security.springsecurity.event.RemoteChangeUserStatusEven
 import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
 
 /**
- * <p>Description: 用户状态变更处理器 </p>
+ * <p>用户状态变更处理器 </p>
  *
  */
 public class HerodotusAccountStatusChanger implements AccountStatusChanger {

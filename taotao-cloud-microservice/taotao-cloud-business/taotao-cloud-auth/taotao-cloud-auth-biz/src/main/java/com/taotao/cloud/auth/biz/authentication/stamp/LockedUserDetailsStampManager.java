@@ -28,7 +28,7 @@ import org.dromara.hutool.core.data.id.IdUtil;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <p>Description: 锁定账户签章管理 </p>
+ * <p>锁定账户签章管理 </p>
  *
  * @author shuigedeng
  * @version 2023.07

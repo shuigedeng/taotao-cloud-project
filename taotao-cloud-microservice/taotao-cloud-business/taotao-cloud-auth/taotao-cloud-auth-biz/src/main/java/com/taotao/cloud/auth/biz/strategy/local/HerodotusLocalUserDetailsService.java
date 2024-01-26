@@ -24,7 +24,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
- * <p>Description: UserDetail本地直联服务 </p>
+ * <p>UserDetail本地直联服务 </p>
  *
  */
 public class HerodotusLocalUserDetailsService extends AbstractStrategyUserDetailsService {

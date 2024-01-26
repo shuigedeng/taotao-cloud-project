@@ -28,31 +28,32 @@ import org.springframework.data.redis.listener.KeyExpirationEventMessageListener
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
 /**
- * <p>Description: 账户锁定状态监听 </p>
- *
+ * <p>账户锁定状态监听 </p>
  */
 public class AccountAutoEnableListener extends KeyExpirationEventMessageListener {
 
-    private static final Logger log = LoggerFactory.getLogger(AccountAutoEnableListener.class);
+	private static final Logger log = LoggerFactory.getLogger(AccountAutoEnableListener.class);
 
-    private final OAuth2AccountStatusManager accountStatusManager;
+	private final OAuth2AccountStatusManager accountStatusManager;
 
-    public AccountAutoEnableListener(
-            RedisMessageListenerContainer listenerContainer, OAuth2AccountStatusManager accountStatusManager) {
-        super(listenerContainer);
-        this.accountStatusManager = accountStatusManager;
-    }
+	public AccountAutoEnableListener(
+		RedisMessageListenerContainer listenerContainer,
+		OAuth2AccountStatusManager accountStatusManager) {
+		super(listenerContainer);
+		this.accountStatusManager = accountStatusManager;
+	}
 
-    @Override
-    public void onMessage(Message message, byte[] pattern) {
-        String key = new String(message.getBody(), StandardCharsets.UTF_8);
-        if (StringUtils.contains(key, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL)) {
-            String userId = StringUtils.substringAfterLast(key, SymbolConstants.COLON);
-            log.info("[Herodotus] |- Parse the user [{}] at expired redis cache key [{}]", userId, key);
-            if (StringUtils.isNotBlank(userId)) {
-                log.debug("[Herodotus] |- Automatically unlock user account [{}]", userId);
-                accountStatusManager.enable(userId);
-            }
-        }
-    }
+	@Override
+	public void onMessage(Message message, byte[] pattern) {
+		String key = new String(message.getBody(), StandardCharsets.UTF_8);
+		if (StringUtils.contains(key, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL)) {
+			String userId = StringUtils.substringAfterLast(key, SymbolConstants.COLON);
+			log.info("[Herodotus] |- Parse the user [{}] at expired redis cache key [{}]", userId,
+				key);
+			if (StringUtils.isNotBlank(userId)) {
+				log.debug("[Herodotus] |- Automatically unlock user account [{}]", userId);
+				accountStatusManager.enable(userId);
+			}
+		}
+	}
 }

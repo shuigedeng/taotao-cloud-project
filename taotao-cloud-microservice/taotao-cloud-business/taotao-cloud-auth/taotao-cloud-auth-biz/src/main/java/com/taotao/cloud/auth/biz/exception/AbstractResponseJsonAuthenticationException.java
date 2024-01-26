@@ -25,31 +25,33 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
  * 继承此类后, 如果异常被 {@link SimpleUrlAuthenticationFailureHandler} 处理 Response 会返回 Json 数据
  */
 public abstract class AbstractResponseJsonAuthenticationException extends AuthenticationException {
-    private static final long serialVersionUID = 2661098918363948470L;
 
-    @Getter
-    protected ErrorCodeEnum errorCodeEnum;
+	private static final long serialVersionUID = 2661098918363948470L;
 
-    @Getter
-    protected Object data;
-    /**
-     * 可以是用户名, userId, sessionId 等表示用户唯一的属性
-     */
-    @Getter
-    protected String uid;
+	@Getter
+	protected ErrorCodeEnum errorCodeEnum;
 
-    public AbstractResponseJsonAuthenticationException(
-            ErrorCodeEnum errorCodeEnum, Throwable t, Object data, String uid) {
-        super(errorCodeEnum.getMsg(), t);
-        this.errorCodeEnum = errorCodeEnum;
-        this.data = data;
-        this.uid = uid;
-    }
+	@Getter
+	protected Object data;
+	/**
+	 * 可以是用户名, userId, sessionId 等表示用户唯一的属性
+	 */
+	@Getter
+	protected String uid;
 
-    public AbstractResponseJsonAuthenticationException(ErrorCodeEnum errorCodeEnum, Object data, String uid) {
-        super(errorCodeEnum.getMsg());
-        this.errorCodeEnum = errorCodeEnum;
-        this.data = data;
-        this.uid = uid;
-    }
+	public AbstractResponseJsonAuthenticationException(
+		ErrorCodeEnum errorCodeEnum, Throwable t, Object data, String uid) {
+		super(errorCodeEnum.getMsg(), t);
+		this.errorCodeEnum = errorCodeEnum;
+		this.data = data;
+		this.uid = uid;
+	}
+
+	public AbstractResponseJsonAuthenticationException(ErrorCodeEnum errorCodeEnum, Object data,
+		String uid) {
+		super(errorCodeEnum.getMsg());
+		this.errorCodeEnum = errorCodeEnum;
+		this.data = data;
+		this.uid = uid;
+	}
 }

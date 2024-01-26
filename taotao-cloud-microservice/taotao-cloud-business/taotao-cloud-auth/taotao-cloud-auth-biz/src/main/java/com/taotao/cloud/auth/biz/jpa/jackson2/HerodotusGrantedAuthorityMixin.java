@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * <p>Description: HerodotusGrantedAuthority Jackson2 Mixin </p>
+ * <p>HerodotusGrantedAuthority Jackson2 Mixin </p>
  *
  *
  * @since : 2022/3/17 20:28

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * <p>Description: TokenSettingsMixin </p>
+ * <p>TokenSettingsMixin </p>
  *
  *
  * @since : 2022/10/24 23:36

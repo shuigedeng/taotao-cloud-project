@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.exception;
 
 /**
- * <p>Description: 接入身份认证错误 </p>
+ * <p>接入身份认证错误 </p>
  *
  *
  * @since : 2022/1/26 10:54

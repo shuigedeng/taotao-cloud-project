@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.management.repository.OAuth2ProductRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: OAuth2ProductService </p>
+ * <p>OAuth2ProductService </p>
  *
  *
  * @since : 2023/5/15 16:33

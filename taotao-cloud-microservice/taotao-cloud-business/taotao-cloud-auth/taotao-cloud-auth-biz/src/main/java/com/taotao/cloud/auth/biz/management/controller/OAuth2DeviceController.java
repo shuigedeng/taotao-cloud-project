@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: OAuth2DeviceController </p>
+ * <p>OAuth2DeviceController </p>
  *
  *
  * @since : 2023/5/15 16:58

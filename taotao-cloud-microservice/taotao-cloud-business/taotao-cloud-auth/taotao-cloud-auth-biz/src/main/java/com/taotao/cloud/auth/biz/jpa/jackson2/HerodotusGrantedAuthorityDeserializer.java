@@ -27,7 +27,7 @@ import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuth
 import java.io.IOException;
 
 /**
- * <p>Description: HerodotusGrantedAuthority 反序列化 </p>
+ * <p>HerodotusGrantedAuthority 反序列化 </p>
  *
  *
  * @since : 2022/3/17 20:28

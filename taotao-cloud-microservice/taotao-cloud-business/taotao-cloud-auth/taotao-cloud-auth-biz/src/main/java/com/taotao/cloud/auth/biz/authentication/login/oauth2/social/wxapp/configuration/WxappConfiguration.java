@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>Description: 微信小程序后配置 </p>
+ * <p>微信小程序后配置 </p>
  *
  *
  * @since : 2021/3/29 9:27

@@ -32,97 +32,100 @@ import org.springframework.util.Assert;
  */
 public class AccountAuthenticationToken extends AbstractAuthenticationToken {
 
-    @Serial
-    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+	@Serial
+	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
-    // principal：能唯一标识用户身份的属性，一个用户可以有多个principal
-    // 如登录的唯一标识，用户可以使用用户名或手机或邮箱进行登录，这些principal是让别人知道的
-    private final Object principal;
-    // credential：凭证，用户才知道的，简单的说就是密码
-    // 如：手机开锁，可以使用屏幕密码也可以使用人脸识别，屏幕密码和人脸是你个人（用户）才拥有的；
-    // principals 和 credentials 组合就是用户名 / 密码了。
-    private String password;
-    private String type;
+	// principal：能唯一标识用户身份的属性，一个用户可以有多个principal
+	// 如登录的唯一标识，用户可以使用用户名或手机或邮箱进行登录，这些principal是让别人知道的
+	private final Object principal;
+	// credential：凭证，用户才知道的，简单的说就是密码
+	// 如：手机开锁，可以使用屏幕密码也可以使用人脸识别，屏幕密码和人脸是你个人（用户）才拥有的；
+	// principals 和 credentials 组合就是用户名 / 密码了。
+	private String password;
+	private String type;
 
-    /**
-     * 此构造函数用来初始化未授信凭据.
-     *
-     * @param principal the principal
-     * @param password  the captcha
-     */
-    public AccountAuthenticationToken(Object principal, String password, String type) {
-        super(null);
-        this.principal = principal;
-        this.password = password;
-        this.type = type;
+	/**
+	 * 此构造函数用来初始化未授信凭据.
+	 *
+	 * @param principal the principal
+	 * @param password  the captcha
+	 */
+	public AccountAuthenticationToken(Object principal, String password, String type) {
+		super(null);
+		this.principal = principal;
+		this.password = password;
+		this.type = type;
 
-        setAuthenticated(false);
-    }
+		setAuthenticated(false);
+	}
 
-    /**
-     * 此构造函数用来初始化授信凭据.
-     *
-     * @param principal   the principal
-     * @param password    the captcha
-     * @param authorities the authorities
-     */
-    public AccountAuthenticationToken(
-            Object principal, String password, String type, Collection<? extends GrantedAuthority> authorities) {
-        super(authorities);
-        this.principal = principal;
-        this.password = password;
-        this.type = type;
+	/**
+	 * 此构造函数用来初始化授信凭据.
+	 *
+	 * @param principal   the principal
+	 * @param password    the captcha
+	 * @param authorities the authorities
+	 */
+	public AccountAuthenticationToken(
+		Object principal, String password, String type,
+		Collection<? extends GrantedAuthority> authorities) {
+		super(authorities);
+		this.principal = principal;
+		this.password = password;
+		this.type = type;
 
-        // must use super, as we override
-        super.setAuthenticated(true);
-    }
+		// must use super, as we override
+		super.setAuthenticated(true);
+	}
 
-    public static AccountAuthenticationToken unauthenticated(Object principal, String password, String type) {
-        return new AccountAuthenticationToken(principal, password, type);
-    }
+	public static AccountAuthenticationToken unauthenticated(Object principal, String password,
+		String type) {
+		return new AccountAuthenticationToken(principal, password, type);
+	}
 
-    public static AccountAuthenticationToken authenticated(
-            Object principal, String password, String type, Collection<? extends GrantedAuthority> authorities) {
-        return new AccountAuthenticationToken(principal, password, type, authorities);
-    }
+	public static AccountAuthenticationToken authenticated(
+		Object principal, String password, String type,
+		Collection<? extends GrantedAuthority> authorities) {
+		return new AccountAuthenticationToken(principal, password, type, authorities);
+	}
 
-    @Override
-    public Object getCredentials() {
-        return this.password;
-    }
+	@Override
+	public Object getCredentials() {
+		return this.password;
+	}
 
-    @Override
-    public Object getPrincipal() {
-        return this.principal;
-    }
+	@Override
+	public Object getPrincipal() {
+		return this.principal;
+	}
 
-    @Override
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        Assert.isTrue(
-                !isAuthenticated,
-                "Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead");
-        super.setAuthenticated(false);
-    }
+	@Override
+	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+		Assert.isTrue(
+			!isAuthenticated,
+			"Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead");
+		super.setAuthenticated(false);
+	}
 
-    @Override
-    public void eraseCredentials() {
-        super.eraseCredentials();
-        this.password = null;
-    }
+	@Override
+	public void eraseCredentials() {
+		super.eraseCredentials();
+		this.password = null;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 }

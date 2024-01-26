@@ -36,7 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
 /**
- * <p>Description: Security 登录控制器 </p>
+ * <p>Security 登录控制器 </p>
  *
  *
  * @since : 2022/3/21 19:52

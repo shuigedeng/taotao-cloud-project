@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Description: 远程权限服务 </p>
+ * <p>远程权限服务 </p>
  *
  */
 public class HerodotusRemotePermissionDetailsService extends AbstractStrategyPermissionDetailsService {

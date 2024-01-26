@@ -28,7 +28,7 @@ import java.util.Map;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 
 /**
- * <p>Description: TokenSettingsDeserializer </p>
+ * <p>TokenSettingsDeserializer </p>
  *
  *
  * @since : 2022/10/24 23:29

@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.strategy.user.SysSocialUser;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: 社会化登录用户服务 </p>
+ * <p>社会化登录用户服务 </p>
  *
  *
  * @since : 2021/5/16 16:29

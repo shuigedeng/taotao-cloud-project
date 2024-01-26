@@ -25,7 +25,7 @@ import java.util.Objects;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * <p>Description: 客户端权限 </p>
+ * <p>客户端权限 </p>
  *
  *
  * @since : 2022/4/1 13:39

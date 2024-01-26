@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.exception;
 
 /**
- * <p>Description: 超出最大数量限制 </p>
+ * <p>超出最大数量限制 </p>
  *
  * @author shuigedeng
  * @version 2023.07

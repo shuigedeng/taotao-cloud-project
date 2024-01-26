@@ -36,29 +36,41 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @NoArgsConstructor
 public class EsGoodsAttribute implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 4018042777559970062L;
+	@Serial
+	private static final long serialVersionUID = 4018042777559970062L;
 
-    /** 属性参数：0->规格；1->参数 */
-    @Field(type = FieldType.Integer)
-    private Integer type;
+	/**
+	 * 属性参数：0->规格；1->参数
+	 */
+	@Field(type = FieldType.Integer)
+	private Integer type;
 
-    /** 属性名称 */
-    private String nameId;
+	/**
+	 * 属性名称
+	 */
+	private String nameId;
 
-    /** 属性名称 */
-    @Field(type = FieldType.Text)
-    private String name;
+	/**
+	 * 属性名称
+	 */
+	@Field(type = FieldType.Text)
+	private String name;
 
-    /** 属性值 */
-    @Field(type = FieldType.Text)
-    private String valueId;
+	/**
+	 * 属性值
+	 */
+	@Field(type = FieldType.Text)
+	private String valueId;
 
-    /** 属性值 */
-    @Field(type = FieldType.Text)
-    private String value;
+	/**
+	 * 属性值
+	 */
+	@Field(type = FieldType.Text)
+	private String value;
 
-    /** 排序 */
-    @Field(type = FieldType.Integer)
-    private Integer sort;
+	/**
+	 * 排序
+	 */
+	@Field(type = FieldType.Integer)
+	private Integer sort;
 }

@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import me.zhyd.oauth.enums.AuthUserGender;
 
 /**
- * <p>Description: 外部程序接入返回用户信息 </p>
+ * <p>外部程序接入返回用户信息 </p>
  *
  *
  * @since : 2022/1/25 16:46

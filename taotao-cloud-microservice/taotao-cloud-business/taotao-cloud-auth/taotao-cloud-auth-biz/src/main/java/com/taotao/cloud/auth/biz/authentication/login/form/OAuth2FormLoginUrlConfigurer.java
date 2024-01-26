@@ -22,7 +22,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 
 /**
- * <p>Description: Form Login 配置统一配置类 </p>
+ * <p>Form Login 配置统一配置类 </p>
  *
  * @author shuigedeng
  * @version 2023.04

@@ -21,6 +21,11 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.biz.authentication.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.biz.authentication.filter.ExtensionAndOauth2LoginRefreshTokenFilter;
 import com.taotao.cloud.auth.biz.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
+import com.taotao.cloud.auth.biz.authentication.login.extension.account.service.AccountUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.captcha.service.CaptchaCheckService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.captcha.service.CaptchaUserDetailsService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceCheckService;
+import com.taotao.cloud.auth.biz.authentication.login.extension.face.service.FaceUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.auth.biz.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
@@ -69,7 +74,7 @@ import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 /**
- * <p>Description: 默认安全配置 </p>
+ * <p>默认安全配置 </p>
  *
  * @author shuigedeng
  * @version 2023.07
@@ -119,7 +124,7 @@ public class DefaultSecurityConfiguration {
 		OAuth2AccessTokenStore oAuth2AccessTokenStore)
 		throws Exception {
 
-		log.info("Core [Default Security Filter Chain] Auto Configure.");
+		log.info("[Default Security Filter Chain] Auto Configure.");
 
 		// 跨域过滤器一定要添加至security配置中，不然只注入ioc中对于security端点不生效！ 添加跨域过滤器
 		// httpSecurity.addFilter(corsFilter());
@@ -162,69 +167,116 @@ public class DefaultSecurityConfiguration {
 					.clearAuthentication(true);
 			})
 			// **************************************自定义登录配置***********************************************
-			.apply(new ExtensionLoginFilterSecurityConfigurer<>())
-			// 用户+密码登录
-			.accountLogin(accountLoginConfigurerCustomizer -> {
+			.with(new ExtensionLoginFilterSecurityConfigurer<>(), (customizer) -> {
+				// 用户+密码登录
+				customizer
+					.accountLogin(accountLoginConfigurerCustomizer -> {
+						accountLoginConfigurerCustomizer.accountUserDetailsService(
+							new AccountUserDetailsService() {
+								@Override
+								public UserDetails loadUserByUsername(String username, String type)
+									throws UsernameNotFoundException {
+									return null;
+								}
+							});
+					})
+					// 用户+密码+验证码登录
+					.captchaLogin(captchaLoginConfigurerCustomizer -> {
+						captchaLoginConfigurerCustomizer.captchaCheckService(
+								new CaptchaCheckService() {
+									@Override
+									public boolean verifyCaptcha(String verificationCode) {
+										return false;
+									}
+								})
+							.captchaUserDetailsService(new CaptchaUserDetailsService() {
+								@Override
+								public UserDetails loadUserByUsername(String username, String type)
+									throws UsernameNotFoundException {
+									return null;
+								}
+							});
+					})
+					// 人脸识别登录
+					.faceLogin(faceLoginConfigurerCustomizer -> {
+						faceLoginConfigurerCustomizer.faceCheckService(new FaceCheckService() {
+								@Override
+								public boolean check(String imgBase64)
+									throws UsernameNotFoundException {
+									return false;
+								}
+							})
+							.faceUserDetailsService(new FaceUserDetailsService() {
+								@Override
+								public UserDetails loadUserByImgBase64(String imgBase64)
+									throws UsernameNotFoundException {
+									return null;
+								}
+							});
+					})
+					// 指纹登录
+					.fingerprintLogin(fingerprintLoginConfigurer -> {
+						fingerprintLoginConfigurer.fingerprintUserDetailsService(
+							new FingerprintUserDetailsService() {
+								@Override
+								public UserDetails loadUserByFingerprint(String username)
+									throws UsernameNotFoundException {
+									return null;
+								}
+							});
+					})
+					// 手势登录
+					.gesturesLogin(fingerprintLoginConfigurer -> {
+						fingerprintLoginConfigurer.gesturesUserDetailsService(
+							new GesturesUserDetailsService() {
+								@Override
+								public UserDetails loadUserByPhone(String phone)
+									throws UsernameNotFoundException {
+									return null;
+								}
+							});
+					})
+					// 本机号码一键登录
+					.oneClickLogin(oneClickLoginConfigurer -> {
+					})
+					// 手机扫码登录
+					.qrcodeLogin(qrcodeLoginConfigurer -> {
+					})
+					// 短信登录
+					.smsLogin(smsLoginConfigurerCustomizer -> {
+					})
+					// email登录
+					.emailLogin(emailLoginConfigurerCustomizer -> {
+					})
+					// 微信公众号登录
+					.wechatMpLogin(mpLoginConfigurer -> {
+						mpLoginConfigurer.mpUserDetailsService(new WechatMpUserDetailsService() {
+							@Override
+							public UserDetails loadUserByPhone(String phone)
+								throws UsernameNotFoundException {
+								return null;
+							}
+						});
+					})
+					// 小程序登录 同时支持多个小程序
+					.wechatMiniAppLogin(miniAppLoginConfigurer -> {
+					});
 			})
-			// 用户+密码+验证码登录
-			.captchaLogin(captchaLoginConfigurerCustomizer -> {
-			})
-			// 人脸识别登录
-			.faceLogin(faceLoginConfigurerCustomizer -> {
-			})
-			// 指纹登录
-			.fingerprintLogin(fingerprintLoginConfigurer -> {
-				fingerprintLoginConfigurer.fingerprintUserDetailsService(new FingerprintUserDetailsService() {
-					@Override
-					public UserDetails loadUserByFingerprint(String username) throws UsernameNotFoundException {
-						return null;
-					}
-				});
-			})
-			// 手势登录
-			.gesturesLogin(fingerprintLoginConfigurer -> {
-				fingerprintLoginConfigurer.gesturesUserDetailsService(new GesturesUserDetailsService() {
-					@Override
-					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-						return null;
-					}
-				});
-			})
-			// 本机号码一键登录
-			.oneClickLogin(oneClickLoginConfigurer -> {
-			})
-			// 手机扫码登录
-			.qrcodeLogin(qrcodeLoginConfigurer -> {
-			})
-			// 短信登录
-			.smsLogin(smsLoginConfigurerCustomizer -> {
-			})
-			// email登录
-			.emailLogin(emailLoginConfigurerCustomizer -> {
-			})
-			// 微信公众号登录
-			.wechatMpLogin(mpLoginConfigurer -> {
-				mpLoginConfigurer.mpUserDetailsService(new WechatMpUserDetailsService() {
-					@Override
-					public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-						return null;
-					}
-				});
-			})
-			// 小程序登录 同时支持多个小程序
-			.wechatMiniAppLogin(miniAppLoginConfigurer -> {
-			})
-			.httpSecurity()
 			// **************************************oauth2 login登录配置***********************************************
-			.apply(new SocialHttpConfigurer(socialDelegateClientRegistrationRepository))
-			// 微信网页授权
-			.wechatWebclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
-			// 企业微信扫码登录
-			.workWechatWebLoginclient("wwa70dc5b6e56936e1", "nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8", "1000005")
-			// 微信扫码登录
-			.wechatWebLoginclient("wxcd395c35c45eb823", "75f9a12c82bd24ecac0d37bf1156c749")
+			.with(new SocialHttpConfigurer(socialDelegateClientRegistrationRepository),
+				(customizer) -> {
+					// 微信网页授权
+					customizer.wechatWebclient("wxcd395c35c45eb823",
+							"75f9a12c82bd24ecac0d37bf1156c749")
+						// 企业微信扫码登录
+						.workWechatWebLoginclient("wwa70dc5b6e56936e1",
+							"nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8",
+							"1000005")
+						// 微信扫码登录
+						.wechatWebLoginclient("wxcd395c35c45eb823",
+							"75f9a12c82bd24ecac0d37bf1156c749");
+				})
 			// **************************************oauth2表单登录配置***********************************************
-			.httpSecurity()
 			.with(new OAuth2FormCaptchaLoginHttpConfigurer<>(
 					userDetailsService, authenticationProperties, captchaRendererFactory),
 				Customizer.withDefaults())
@@ -234,7 +286,8 @@ public class DefaultSecurityConfiguration {
 				Customizer.withDefaults());
 
 		return httpSecurity
-			.addFilterAfter(new ExtensionAndOauth2LoginRefreshTokenFilter(oAuth2AccessTokenStore), LogoutFilter.class)
+			.addFilterAfter(new ExtensionAndOauth2LoginRefreshTokenFilter(oAuth2AccessTokenStore),
+				LogoutFilter.class)
 			.build();
 	}
 
@@ -249,13 +302,15 @@ public class DefaultSecurityConfiguration {
 	}
 
 	@Bean
-	public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
+	public AuthenticationEventPublisher authenticationEventPublisher(
+		ApplicationContext applicationContext) {
 		log.info("Bean [Authentication Event Publisher] Auto Configure.");
 		return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
 	}
 
 	@Bean
-	public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+	public UserDetailsService userDetailsService(
+		StrategyUserDetailsService strategyUserDetailsService) {
 		SecurityUserDetailsService securityUserDetailsService =
 			new SecurityUserDetailsService(strategyUserDetailsService);
 		log.info("Bean [Herodotus User Details Service] Auto Configure.");
@@ -264,13 +319,15 @@ public class DefaultSecurityConfiguration {
 
 	@Bean
 	public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
-		Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(applicationService);
+		Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(
+			applicationService);
 		log.info("Bean [Herodotus Client Details Service] Auto Configure.");
 		return oauth2ClientDetailsService;
 	}
 
 	@Bean
-	public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
+	public SessionRegistry sessionRegistry(
+		FindByIndexNameSessionRepository<? extends Session> sessionRepository) {
 		return new SpringSessionBackedSessionRegistry<>(sessionRepository);
 	}
 

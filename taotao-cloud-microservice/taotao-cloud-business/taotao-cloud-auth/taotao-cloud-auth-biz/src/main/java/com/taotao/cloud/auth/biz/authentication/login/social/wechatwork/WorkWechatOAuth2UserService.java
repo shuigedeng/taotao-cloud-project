@@ -135,7 +135,7 @@ public class WorkWechatOAuth2UserService implements OAuth2UserService<OAuth2User
             errorDetails.append("UserInfo Uri: ").append(userInfoUri);
             errorDetails.append(", Error Code: ").append(oauth2Error.getErrorCode());
             if (oauth2Error.getDescription() != null) {
-                errorDetails.append(", Error Description: ").append(oauth2Error.getDescription());
+                errorDetails.append(", Error ").append(oauth2Error.getDescription());
             }
             errorDetails.append("]");
             oauth2Error = new OAuth2Error(

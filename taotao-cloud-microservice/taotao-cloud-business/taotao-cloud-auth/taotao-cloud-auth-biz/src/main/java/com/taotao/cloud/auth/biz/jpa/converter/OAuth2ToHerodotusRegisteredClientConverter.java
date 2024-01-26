@@ -26,7 +26,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: RegisteredClient 转 HerodotusRegisteredClient 转换器 </p>
+ * <p>RegisteredClient 转 HerodotusRegisteredClient 转换器 </p>
  *
  * @author shuigedeng
  * @version 2023.07

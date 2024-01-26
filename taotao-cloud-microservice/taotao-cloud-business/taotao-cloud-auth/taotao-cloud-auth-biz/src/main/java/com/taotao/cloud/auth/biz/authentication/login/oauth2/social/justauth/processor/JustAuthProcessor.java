@@ -32,7 +32,7 @@ import org.dromara.hutool.core.util.EnumUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * <p>Description: JustAuth请求的生成器 </p>
+ * <p>JustAuth请求的生成器 </p>
  *
  *
  * @since : 2021/5/22 11:23

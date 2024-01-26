@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.biz.management.compliance.event.AccountReleaseFromC
 import org.springframework.context.ApplicationListener;
 
 /**
- * <p>Description: TODO </p>
+ * <p>TODO </p>
  *
  */
 public class AccountReleaseFromCacheListener implements ApplicationListener<AccountReleaseFromCacheEvent> {

@@ -9,8 +9,9 @@ plugins {
     id "org.siouan.frontend-jdk17" version "8.0.0"
 }
 
-import java.nio.file.Files
-import org.siouan.frontendgradleplugin.infrastructure.gradle.InstallFrontendTask
+mainClassName = ""
+
+import org.siouan.frontendgradleplugin.infrastructure.gradle.RunPnpm
 
 frontend {
     nodeVersion.set("18.17.1")
@@ -19,9 +20,6 @@ frontend {
     checkScript.set("run check")
     verboseModeEnabled.set(true)
 }
-
-import org.siouan.frontendgradleplugin.infrastructure.gradle.ResolvePackageManagerTask
-import org.siouan.frontendgradleplugin.infrastructure.gradle.RunPnpm
 
 task pnpm8Version(type: RunPnpm){
     dependsOn("installPackageManager")

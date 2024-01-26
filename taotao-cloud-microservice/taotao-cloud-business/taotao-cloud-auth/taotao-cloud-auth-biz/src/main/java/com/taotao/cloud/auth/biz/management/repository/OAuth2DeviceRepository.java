@@ -23,7 +23,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 /**
- * <p>Description: OAuth2DeviceRepository </p>
+ * <p>OAuth2DeviceRepository </p>
  *
  *
  * @since : 2023/5/15 16:14

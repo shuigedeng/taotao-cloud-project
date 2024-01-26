@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.exception;
 
 /**
- * <p>Description: Stamp签章 已过期错误 </p>
+ * <p>Stamp签章 已过期错误 </p>
  *
  *
  * @since : 2021/8/23 12:36

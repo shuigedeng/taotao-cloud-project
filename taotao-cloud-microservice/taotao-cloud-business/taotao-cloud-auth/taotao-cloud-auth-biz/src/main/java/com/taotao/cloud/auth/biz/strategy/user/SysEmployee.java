@@ -33,7 +33,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
 
 /**
- * <p>Description: 人员信息 </p>
+ * <p>人员信息 </p>
  *
  */
 @Schema(title = "人员")

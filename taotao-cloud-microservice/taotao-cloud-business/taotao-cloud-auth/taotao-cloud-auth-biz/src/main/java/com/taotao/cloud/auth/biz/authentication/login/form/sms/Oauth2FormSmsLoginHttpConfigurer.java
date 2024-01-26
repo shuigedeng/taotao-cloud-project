@@ -28,7 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.context.SecurityContextRepository;
 
 /**
- * <p>Description: OAuth2 Form Login Configurer </p>
+ * <p>OAuth2 Form Login Configurer </p>
  * <p>
  * 使用此种方式，相当于额外增加了一种表单登录方式。因此对原有的 http.formlogin进行的配置，对当前此种方式的配置并不生效。
  *

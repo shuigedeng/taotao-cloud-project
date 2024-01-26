@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler;
 
 /**
- * <p>Description: 社交登录用户信息详情 </p>
+ * <p>社交登录用户信息详情 </p>
  *
  * @author shuigedeng
  * @version 2023.07

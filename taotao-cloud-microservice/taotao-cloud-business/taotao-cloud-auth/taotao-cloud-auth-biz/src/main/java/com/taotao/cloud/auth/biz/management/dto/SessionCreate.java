@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * <p>Description: 加密创建请求 </p>
+ * <p>加密创建请求 </p>
  *
  *
  * @since : 2021/10/1 15:19

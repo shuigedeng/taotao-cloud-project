@@ -37,7 +37,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * <p>Description: OAuth2 (Security) 表单登录 Provider </p>
+ * <p>OAuth2 (Security) 表单登录 Provider </p>
  * <p>
  * 扩展的OAuth2表单登录Provider，以支持表单登录的验证码
  *

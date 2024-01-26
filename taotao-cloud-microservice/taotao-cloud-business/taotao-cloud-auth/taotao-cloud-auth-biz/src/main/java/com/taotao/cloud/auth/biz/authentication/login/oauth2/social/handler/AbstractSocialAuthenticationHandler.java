@@ -24,7 +24,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Description: 抽象的社交登录处理器 </p>
+ * <p>抽象的社交登录处理器 </p>
  * <p>
  * 实现社交登录和手机号码登录的主要流程逻辑
  *

@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>Description: 社交登录第三方系统返回的Redirect Url </p>
+ * <p>社交登录第三方系统返回的Redirect Url </p>
  *
  *
  * @since : 2021/5/28 11:35

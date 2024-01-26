@@ -3,11 +3,11 @@ apply plugin: 'com.diffplug.spotless'
 spotless {
     // optional: limit format enforcement to just the files changed by this feature branch
     //ratchetFrom 'origin/main'
-//
+
     //format 'misc', {
     //    // define the files to apply `misc` to
     //    target '*.gradle', '*.md', '.gitignore'
-//
+
     //    // define the steps to apply to those files
     //    trimTrailingWhitespace()
     //    indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
@@ -16,7 +16,7 @@ spotless {
 
     java {
         //// don't need to set target, it is inferred from java
-//
+
         //// fix formatting of type annotations
         //formatAnnotations()
         //// make sure every file has the following copyright header.

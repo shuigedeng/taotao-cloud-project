@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 import org.springframework.util.Assert;
 
 /**
- * <p>Description: 自定义社会化登录认证Token </p>
+ * <p>自定义社会化登录认证Token </p>
  *
  *
  * @since : 2022/3/31 14:54

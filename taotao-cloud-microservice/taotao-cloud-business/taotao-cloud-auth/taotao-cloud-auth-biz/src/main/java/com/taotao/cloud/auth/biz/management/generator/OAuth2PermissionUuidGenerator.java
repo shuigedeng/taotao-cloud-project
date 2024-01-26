@@ -26,7 +26,7 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
 /**
- * <p>Description: 使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键 </p>
+ * <p>使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键 </p>
  *
  *
  * @since : 2022/3/31 21:11

@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.core.defini
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 
 /**
- * <p>Description: 外部应用接入处理器 </p>
+ * <p>外部应用接入处理器 </p>
  *
  *
  * @since : 2022/1/25 16:20

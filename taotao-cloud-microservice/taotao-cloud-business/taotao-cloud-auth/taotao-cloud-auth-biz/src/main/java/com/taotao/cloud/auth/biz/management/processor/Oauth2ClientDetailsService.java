@@ -28,7 +28,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
- * <p>Description: 客户端交互处理器 </p>
+ * <p>客户端交互处理器 </p>
  *
  * @author shuigedeng
  * @version 2023.07

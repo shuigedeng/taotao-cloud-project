@@ -33,7 +33,7 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * <p>Description: OAuth2 应用安全合规配置 </p>
+ * <p>OAuth2 应用安全合规配置 </p>
  *
  * @author shuigedeng
  * @version 2023.07
@@ -42,47 +42,50 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration(proxyBeanMethods = false)
 public class OAuth2ComplianceConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(OAuth2ComplianceConfiguration.class);
+	private static final Logger log = LoggerFactory.getLogger(OAuth2ComplianceConfiguration.class);
 
-    @PostConstruct
-    public void postConstruct() {
-        log.info("SDK [OAuth2 Compliance] Auto Configure.");
-    }
+	@PostConstruct
+	public void postConstruct() {
+		log.info("SDK [OAuth2 Compliance] Auto Configure.");
+	}
 
-    @Bean
-    public AccountStatusChanger accountStatusChanger() {
-        HerodotusAccountStatusChanger herodotusAccountStatusChanger = new HerodotusAccountStatusChanger();
-        log.info("Bean [Account Status Changer] Auto Configure.");
-        return herodotusAccountStatusChanger;
-    }
+	@Bean
+	public AccountStatusChanger accountStatusChanger() {
+		HerodotusAccountStatusChanger herodotusAccountStatusChanger = new HerodotusAccountStatusChanger();
+		log.info("Bean [Account Status Changer] Auto Configure.");
+		return herodotusAccountStatusChanger;
+	}
 
-    @Bean
-    public OAuth2AccountStatusManager accountStatusManager(
-            UserDetailsService userDetailsService,
-            AccountStatusChanger accountStatusChanger,
-            LockedUserDetailsStampManager lockedUserDetailsStampManager) {
-        OAuth2AccountStatusManager manager =
-                new OAuth2AccountStatusManager(userDetailsService, accountStatusChanger, lockedUserDetailsStampManager);
-        log.info("Bean [OAuth2 Account Status Manager] Auto Configure.");
-        return manager;
-    }
+	@Bean
+	public OAuth2AccountStatusManager accountStatusManager(
+		UserDetailsService userDetailsService,
+		AccountStatusChanger accountStatusChanger,
+		LockedUserDetailsStampManager lockedUserDetailsStampManager) {
+		OAuth2AccountStatusManager manager =
+			new OAuth2AccountStatusManager(userDetailsService, accountStatusChanger,
+				lockedUserDetailsStampManager);
+		log.info("Bean [OAuth2 Account Status Manager] Auto Configure.");
+		return manager;
+	}
 
-    @Bean
-    public AccountAutoEnableListener accountLockStatusListener(
-            RedisMessageListenerContainer redisMessageListenerContainer,
-            OAuth2AccountStatusManager accountStatusManager) {
-        AccountAutoEnableListener listener =
-                new AccountAutoEnableListener(redisMessageListenerContainer, accountStatusManager);
-        log.info("Bean [OAuth2 Account Lock Status Listener] Auto Configure.");
-        return listener;
-    }
+	@Bean
+	public AccountAutoEnableListener accountLockStatusListener(
+		RedisMessageListenerContainer redisMessageListenerContainer,
+		OAuth2AccountStatusManager accountStatusManager) {
+		AccountAutoEnableListener listener =
+			new AccountAutoEnableListener(redisMessageListenerContainer, accountStatusManager);
+		log.info("Bean [OAuth2 Account Lock Status Listener] Auto Configure.");
+		return listener;
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    public AuthenticationFailureListener authenticationFailureListener(
-            SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusManager accountLockService) {
-        AuthenticationFailureListener listener = new AuthenticationFailureListener(stampManager, accountLockService);
-        log.info("Bean [OAuth2 Authentication Failure Listener] Auto Configure.");
-        return listener;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	public AuthenticationFailureListener authenticationFailureListener(
+		SignInFailureLimitedStampManager stampManager,
+		OAuth2AccountStatusManager accountLockService) {
+		AuthenticationFailureListener listener = new AuthenticationFailureListener(stampManager,
+			accountLockService);
+		log.info("Bean [OAuth2 Authentication Failure Listener] Auto Configure.");
+		return listener;
+	}
 }

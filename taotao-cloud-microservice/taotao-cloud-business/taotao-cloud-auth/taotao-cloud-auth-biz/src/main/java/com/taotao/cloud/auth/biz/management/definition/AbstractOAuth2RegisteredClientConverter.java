@@ -29,7 +29,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: OAuth2Application  </p>
+ * <p>OAuth2Application  </p>
  *
  *
  * @since : 2023/5/13 10:34

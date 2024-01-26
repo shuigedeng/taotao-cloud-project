@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.server.authorization.settings.TokenSe
 import org.springframework.util.StringUtils;
 
 /**
- * <p>Description: 转换为 RegisteredClient 转换器定义</p>
+ * <p>转换为 RegisteredClient 转换器定义</p>
  *
  *
  * @since : 2023/5/21 20:36

@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>Description: JustAuth配置 </p>
+ * <p>JustAuth配置 </p>
  * <p>
  * 仅在存在herodotus.platform.social.justauth.configs配置的情况下才注入
  *
