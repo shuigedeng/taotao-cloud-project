@@ -25,7 +25,12 @@ import org.apache.flink.configuration.RestOptions;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
+import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.windowing.assigners.DynamicEventTimeSessionWindows;
+import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows;
+import org.apache.flink.streaming.api.windowing.assigners.SessionWindowTimeGapExtractor;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
 /**
@@ -56,6 +61,19 @@ public class JBatchWordCount {
 				}
 			}
 		});
+
+		KeyedStream<String, String> keyedBy = dso.keyBy(new KeySelector<String, String>() {
+			@Override
+			public String getKey(String value) throws Exception {
+				return value;
+			}
+		});
+		WindowedStream<String, String, TimeWindow> window = keyedBy.window(EventTimeSessionWindows.withDynamicGap(new SessionWindowTimeGapExtractor<String>() {
+			@Override
+			public long extract(String s) {
+				return 0;
+			}
+		}));
 
 		DataStream<Tuple2<String, Integer>> dst = dso
 			.map(new MapFunction<String, Tuple2<String, Integer>>() {

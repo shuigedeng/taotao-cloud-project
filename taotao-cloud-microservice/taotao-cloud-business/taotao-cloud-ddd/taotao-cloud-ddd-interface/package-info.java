@@ -12,7 +12,7 @@ package com.taotao.cloud.ddd.interfaces;
 // 接口返回值缓存类的逻辑，可以放在这个模块中实现，因为这个动作不包含业务逻辑。
 
 /**
- * |--- adapter                     -- 适配器层 应用与外部应用交互适配
+ * |--- interface                     -- 适配器层 应用与外部应用交互适配
  * |      |--- controller           -- 控制器层，API中的接口的实现
  * |      |       |--- assembler    -- 装配器，DTO和领域模型的转换
  * |      |       |--- impl         -- 协议层中接口的实现

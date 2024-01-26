@@ -51,7 +51,6 @@ public class WindowsFunctions03 {
                 return orderBean;
             }
         });
-
         // 对数据进行分组  按照城市
         KeyedStream<OrdersBean, String> keyed = beans.keyBy(new KeySelector<OrdersBean, String>() {
             @Override
