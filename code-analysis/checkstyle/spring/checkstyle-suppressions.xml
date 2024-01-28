@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+		"-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+		"https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<suppressions>
+	<suppress files="org.bson.types.ObjectId" checks="[a-zA-Z0-9]*" />
+	<suppress files="com.alibaba.excel.*.*\.java" checks="[a-zA-Z0-9]*" />
+
+	<suppress files="org.ballcat.easyexcel.application.ExcelTestApplication" checks="HideUtilityClassConstructorCheck" />
+	<suppress files="org.ballcat.autoconfigure.web.accesslog.TestApplication" checks="HideUtilityClassConstructorCheck" />
+	<suppress files="org.ballcat.pay.wx.domain.DefaultWxDomain" checks="FinalClassCheck" />
+	<suppress files="org.ballcat.autoconfigure.redis.RedisKeyEventAutoConfiguration" checks="HideUtilityClassConstructorCheck" />
+</suppressions>
