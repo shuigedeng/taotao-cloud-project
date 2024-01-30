@@ -18,11 +18,11 @@ package com.taotao.cloud.gateway.utils;
 
 import com.alibaba.fastjson2.JSON;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import jakarta.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
-import javax.xml.bind.DatatypeConverter;
 
 public class ReqDedupHelper {
 

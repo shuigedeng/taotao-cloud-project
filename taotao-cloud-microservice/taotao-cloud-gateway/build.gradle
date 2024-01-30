@@ -64,6 +64,10 @@ dependencies {
 
 configurations {
     all {
+        resolutionStrategy {
+            force 'net.minidev:json-smart:2.5.0'
+        }
+
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
@@ -71,6 +75,7 @@ configurations {
         exclude group: "com.querydsl", module: "querydsl-apt"
     }
 }
+
 
 mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
 description = "网关中心"
