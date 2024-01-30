@@ -26,8 +26,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-graphql"
     testImplementation 'org.springframework.graphql:spring-graphql-test:1.2.4'
 
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 

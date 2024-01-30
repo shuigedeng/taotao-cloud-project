@@ -4,10 +4,6 @@ apply plugin: 'application'
 apply plugin: "idea"
 apply plugin: "com.github.johnrengelman.shadow"
 
-repositories {
-    mavenCentral()
-}
-
 //https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/configuration/overview/
 dependencies {
     // flinksql本地运行需要的依赖
@@ -24,12 +20,14 @@ dependencies {
 
     //flink sql
     implementation 'org.apache.flink:flink-table-api-java:1.18.0'
+    implementation 'org.apache.flink:flink-table-runtime:1.18.0'
     implementation 'org.apache.flink:flink-table-api-java-bridge:1.18.0'
     implementation "org.apache.flink:flink-table-planner_2.12:1.18.0"
+    implementation "org.apache.flink:flink-table-planner-loader:1.18.0"
     implementation 'org.apache.flink:flink-sql-gateway-api:1.18.0'
 
     //使用alibaba 动态cep
-    //implementation 'org.apache.flink:flink-cep:1.18.0'
+    implementation 'org.apache.flink:flink-cep:1.18.0'
     implementation "org.apache.flink:flink-csv:1.18.0"
     implementation 'org.apache.flink:flink-parquet:1.18.0'
     implementation 'org.apache.parquet:parquet-avro:1.13.1'
@@ -48,7 +46,6 @@ dependencies {
     implementation 'org.apache.flink:flink-connector-datagen:1.18.0'
     implementation 'org.apache.doris:flink-doris-connector-1.17:1.5.0-SNAPSHOT'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
-    //implementation "org.apache.flink:flink-table-planner-blink_2.12:1.13.6"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
     implementation "org.apache.flink:flink-sql-connector-kafka:3.0.2-1.18"
     implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
@@ -82,7 +79,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
 
-
     implementation("org.apache.hudi:hudi-common:0.14.1")
     implementation("org.apache.hudi:hudi-client:0.14.1")
     implementation("org.apache.hudi:hudi-flink-client:0.14.1")
@@ -102,10 +98,10 @@ dependencies {
     implementation "org.scala-lang:scala-reflect:2.12.18"
 
     //implementation 'com.alibaba.ververica:flink-cep:1.15-vvr-6.0.4'
-    implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
+    //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.3.1'
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.45"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.46"
 }
 
 configurations {

@@ -1,10 +1,9 @@
 package com.taotao.cloud.bigdata.flink.cep.dynamic;
 
-import org.apache.flink.cep.functions.PatternProcessFunction;
-import org.apache.flink.util.Collector;
-
 import java.util.List;
 import java.util.Map;
+import org.apache.flink.cep.functions.PatternProcessFunction;
+import org.apache.flink.util.Collector;
 
 public class DemoPatternProcessFunction<IN> extends PatternProcessFunction<IN, String> {
     String id;

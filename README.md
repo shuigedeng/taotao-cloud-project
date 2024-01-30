@@ -4,24 +4,24 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/spring-6.1.2-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-3.2.1-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.3-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.2.2-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2023.0.0-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring%20cloud%20alibaba-2022.0.0.0-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-1.12.4--2022.0.4-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.104.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.2.01-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.106.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.2.1-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.7.1-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.5-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.4.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.25.2-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M9-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.26.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M10-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, 支持graalvm21, 采用最新的spring 6.1.2、SpringBoot 3.2.1、SpringCloud 2023.0.0、SpringSecurity 6.2.1、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.5、jdk21, 支持graalvm21, 采用最新的spring 6.1.3、SpringBoot 3.2.2、SpringCloud 2023.0.0、SpringSecurity 6.2.1、Nacos 2.2、Mybatis-Plus 3.5、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
@@ -115,25 +115,25 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.1.2           
- Spring Boot          | 3.2.1           
+ Spring               | 6.1.3           
+ Spring Boot          | 3.2.2           
  Spring Cloud         | 2023.0.0        
  Spring Cloud Alibaba | 2022.0.0.0 
  Spring Cloud Tencent | 1.12.4-2022.0.4 
- Spring Cloud huawei  | 1.11.5-2022.0.x
+ Spring Cloud huawei  | 1.11.6-2023.0.x
  Seata                | 2.0.0
- Sentinel             | 1.8.6           
+ Sentinel             | 1.8.7           
  Spring-kafka         | 3.1.1         
  Roketmq              | 5.0.0           
  Spring Security      | 6.2.1           
  Mybatis Plus         | 3.5.5         
- Hutool               | 6.0.0-M9         
- Mysql                | 8.2.0          
- Querydsl             | 5.0.0           
+ Hutool               | 6.0.0-M10         
+ Mysql                | 8.3.0          
+ Querydsl             | 5.1.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.4.0           
- Redisson             | 3.25.2         
- Lettuce              | 6.0.6.RELEASE   
+ Redisson             | 3.26.0         
+ Lettuce              | 6.3.1.RELEASE   
  Elasticsearch        | 8.7.1           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
@@ -144,7 +144,7 @@ Maven:
  Elasticjob           | 3.0.4           
  Powerjob             | 4.3.6           
  Forest               | 1.5.32          
- Netty                | 4.1.105.Final
+ Netty                | 4.1.106.Final
 
 ## 6. 演示地址
 
@@ -176,7 +176,7 @@ Maven:
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
-* **主体框架**：采用最新的`Spring Boot 3.2.1`、`Spring Cloud 2023.0.0`、`Spring Cloud Alibaba 2022.0.0.0` 版本进行设计
+* **主体框架**：采用最新的`Spring Boot 3.2.2`、`Spring Cloud 2023.0.0`、`Spring Cloud Alibaba 2022.0.0.0` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、支持支付宝、钉钉、码云、GitHub、GitLab、QQ、微信、企业微信、微博等第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等 优化Spring Security内部实现 ,实现API调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
@@ -218,22 +218,17 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-distributed-tx  -- 手写分布式事务
 │  │  ├─taotao-cloud-rpc  -- 手写rpc框架
 │  │  ├─taotao-cloud-raft  -- raft实现
-│  │  ├─taotao-cloud-storm  -- 手写storm
-│  ├─taotao-cloud-demo -- demo模块
-│  ├─taotao-cloud-go -- go模块
 │  ├─taotao-cloud-microservice -- 微服务模块
 │  │  ├─taotao-cloud-bff-api  -- 基于bff架构的api模块
 │  │  ├─taotao-cloud-bff-graphql  -- 基于bff架构的graphql模块
 │  │  ├─taotao-cloud-business  -- 所有的业务模块
 │  │  ├─taotao-cloud-data-sync  -- 数据同步模块
 │  │  ├─taotao-cloud-data-analysis  -- 数据分析模块
-│  │  ├─taotao-cloud-front  -- 前端pc模块
 │  │  ├─taotao-cloud-gateway  -- 网关模块
 │  │  ├─taotao-cloud-monitor  -- 监控模块
-│  │  ├─taotao-cloud-open-platform  -- 开放模块
+│  │  ├─taotao-cloud-open-platform  -- 开放平台模块
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-xxljob  -- xxl-job模块
-│  ├─taotao-cloud-netty -- netty模块
 │  ├─taotao-cloud-plugin -- 插件模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-scala -- scala模块
@@ -315,14 +310,13 @@ taotao-cloud-project -- 父项目
 ```
 +--- Project ':taotao-cloud-dependencies'
 +--- Project ':taotao-cloud-starter-agent'
-+--- Project ':taotao-cloud-starter-alibaba'
 +--- Project ':taotao-cloud-starter-apt'
 +--- Project ':taotao-cloud-starter-cache'
 +--- Project ':taotao-cloud-starter-canal'
 +--- Project ':taotao-cloud-starter-captcha'
 +--- Project ':taotao-cloud-starter-common'
 +--- Project ':taotao-cloud-starter-core'
-+--- Project ':taotao-cloud-starter-crypto'
++--- Project ':taotao-cloud-starter-bootstrap'
 +--- Project ':taotao-cloud-starter-data'
 +--- Project ':taotao-cloud-starter-dingtalk'
 +--- Project ':taotao-cloud-starter-eventbus'
@@ -355,9 +349,7 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-cloud-starter-rxjava'
 +--- Project ':taotao-cloud-starter-security'
 +--- Project ':taotao-cloud-starter-sensitive'
-+--- Project ':taotao-cloud-starter-sign'
 +--- Project ':taotao-cloud-starter-sms'
-+--- Project ':taotao-cloud-starter-spi'
 +--- Project ':taotao-cloud-starter-springdoc'
 +--- Project ':taotao-cloud-starter-third-client'
 +--- Project ':taotao-cloud-starter-threadpool'

@@ -17,6 +17,8 @@
 package com.taotao.cloud.monitor.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
+import java.util.Arrays;
+import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,9 +30,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * SecuritySecureConfig
  *
@@ -41,96 +40,96 @@ import java.util.List;
 @Configuration
 public class SecurityConfiguration {
 
-	private final String adminContextPath;
-	private final List<String> patterns;
+    private final String adminContextPath;
+    private final List<String> patterns;
 
-	public SecurityConfiguration(AdminServerProperties adminServerProperties) {
-		this.adminContextPath = adminServerProperties.getContextPath();
-		this.patterns = Arrays.asList(this.adminContextPath + "/assets/**",
-			this.adminContextPath + "/login",
-			"/actuator/**",
-			"/actuator",
-			"/instances",
-			"/instances/**");
-	}
+    public SecurityConfiguration(AdminServerProperties adminServerProperties) {
+        this.adminContextPath = adminServerProperties.getContextPath();
+        this.patterns = Arrays.asList(
+                this.adminContextPath + "/assets/**",
+                this.adminContextPath + "/login",
+                "/actuator/**",
+                "/actuator",
+                "/instances",
+                "/instances/**");
+    }
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		SavedRequestAwareAuthenticationSuccessHandler successHandler =
-			new SavedRequestAwareAuthenticationSuccessHandler();
-		successHandler.setTargetUrlParameter("redirectTo");
-		successHandler.setDefaultTargetUrl(adminContextPath + "/");
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        SavedRequestAwareAuthenticationSuccessHandler successHandler =
+                new SavedRequestAwareAuthenticationSuccessHandler();
+        successHandler.setTargetUrlParameter("redirectTo");
+        successHandler.setDefaultTargetUrl(adminContextPath + "/");
 
-		return http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
-				// 1.配置所有静态资源和登录页可以公开访问
-				authorizeHttpRequestsCustomizer
-					.requestMatchers(toRequestMatchers(this.patterns))
-					.permitAll()
-					.anyRequest()
-					.authenticated();
-			})
-			// 2.配置登录和登出路径
-			.formLogin(formLoginCustomizer -> {
-				formLoginCustomizer
-					.loginPage(adminContextPath + "/login")
-					.successHandler(successHandler);
-			})
-			.logout(logoutCustomizer -> {
-				logoutCustomizer
-					.logoutUrl(adminContextPath + "/logout");
-			})
-			// 3.开启http basic支持，admin-client注册时需要使用
-			.httpBasic(AbstractHttpConfigurer::disable)
-			.csrf(csrfCustomizer -> {
-				List<String> csrfPatterns = Arrays.asList(adminContextPath + "/instances", adminContextPath + "/actuator/**");
-				// 4.开启基于cookie的csrf保护
-				csrfCustomizer
-					.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-					// 5.忽略这些路径的csrf保护以便admin-client注册
-					.ignoringRequestMatchers(toRequestMatchers(csrfPatterns));
-			})
-			.build();
-	}
+        return http.authorizeHttpRequests(authorizeHttpRequestsCustomizer -> {
+                    // 1.配置所有静态资源和登录页可以公开访问
+                    authorizeHttpRequestsCustomizer
+                            .requestMatchers(toRequestMatchers(this.patterns))
+                            .permitAll()
+                            .anyRequest()
+                            .authenticated();
+                })
+                // 2.配置登录和登出路径
+                .formLogin(formLoginCustomizer -> {
+                    formLoginCustomizer.loginPage(adminContextPath + "/login").successHandler(successHandler);
+                })
+                .logout(logoutCustomizer -> {
+                    logoutCustomizer.logoutUrl(adminContextPath + "/logout");
+                })
+                // 3.开启http basic支持，admin-client注册时需要使用
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .csrf(csrfCustomizer -> {
+                    List<String> csrfPatterns =
+                            Arrays.asList(adminContextPath + "/instances", adminContextPath + "/actuator/**");
+                    // 4.开启基于cookie的csrf保护
+                    csrfCustomizer
+                            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                            // 5.忽略这些路径的csrf保护以便admin-client注册
+                            .ignoringRequestMatchers(toRequestMatchers(csrfPatterns));
+                })
+                .build();
+    }
 
-	public RequestMatcher[] toRequestMatchers(List<String> paths) {
-		if (CollectionUtils.isNotEmpty(paths)) {
-			List<AntPathRequestMatcher> matchers = paths.stream().map(AntPathRequestMatcher::new).toList();
-			RequestMatcher[] result = new RequestMatcher[matchers.size()];
-			return matchers.toArray(result);
-		} else {
-			return new RequestMatcher[]{};
-		}
-	}
-	// @Override
-	// protected void configure(HttpSecurity http) throws Exception {
-	//	SavedRequestAwareAuthenticationSuccessHandler successHandler = new
-	// SavedRequestAwareAuthenticationSuccessHandler();
-	//	successHandler.setTargetUrlParameter("redirectTo");
-	//	successHandler.setDefaultTargetUrl(adminContextPath + "/");
-	//	http.authorizeRequests()
-	//		//1.配置所有静态资源和登录页可以公开访问
-	//		.antMatchers(adminContextPath + "/assets/**").permitAll()
-	//		.antMatchers(adminContextPath + "/login").permitAll()
-	//		.antMatchers("/actuator/**").permitAll()
-	//		.antMatchers("/actuator").permitAll()
-	//		.antMatchers("/instances").permitAll()
-	//		.antMatchers("/instances/**").permitAll()
-	//		.anyRequest().authenticated()
-	//		.and()
-	//		//2.配置登录和登出路径
-	//		.formLogin().loginPage(adminContextPath + "/login")
-	//		.successHandler(successHandler)
-	//		.and()
-	//		.logout().logoutUrl(adminContextPath + "/logout").and()
-	//		//3.开启http basic支持，admin-client注册时需要使用
-	//		.httpBasic().and()
-	//		.csrf()
-	//		//4.开启基于cookie的csrf保护
-	//		.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-	//		//5.忽略这些路径的csrf保护以便admin-client注册
-	//		.ignoringAntMatchers(
-	//			adminContextPath + "/instances",
-	//			adminContextPath + "/actuator/**"
-	//		);
-	// }
+    public RequestMatcher[] toRequestMatchers(List<String> paths) {
+        if (CollectionUtils.isNotEmpty(paths)) {
+            List<AntPathRequestMatcher> matchers =
+                    paths.stream().map(AntPathRequestMatcher::new).toList();
+            RequestMatcher[] result = new RequestMatcher[matchers.size()];
+            return matchers.toArray(result);
+        } else {
+            return new RequestMatcher[] {};
+        }
+    }
+    // @Override
+    // protected void configure(HttpSecurity http) throws Exception {
+    //	SavedRequestAwareAuthenticationSuccessHandler successHandler = new
+    // SavedRequestAwareAuthenticationSuccessHandler();
+    //	successHandler.setTargetUrlParameter("redirectTo");
+    //	successHandler.setDefaultTargetUrl(adminContextPath + "/");
+    //	http.authorizeRequests()
+    //		//1.配置所有静态资源和登录页可以公开访问
+    //		.antMatchers(adminContextPath + "/assets/**").permitAll()
+    //		.antMatchers(adminContextPath + "/login").permitAll()
+    //		.antMatchers("/actuator/**").permitAll()
+    //		.antMatchers("/actuator").permitAll()
+    //		.antMatchers("/instances").permitAll()
+    //		.antMatchers("/instances/**").permitAll()
+    //		.anyRequest().authenticated()
+    //		.and()
+    //		//2.配置登录和登出路径
+    //		.formLogin().loginPage(adminContextPath + "/login")
+    //		.successHandler(successHandler)
+    //		.and()
+    //		.logout().logoutUrl(adminContextPath + "/logout").and()
+    //		//3.开启http basic支持，admin-client注册时需要使用
+    //		.httpBasic().and()
+    //		.csrf()
+    //		//4.开启基于cookie的csrf保护
+    //		.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+    //		//5.忽略这些路径的csrf保护以便admin-client注册
+    //		.ignoringAntMatchers(
+    //			adminContextPath + "/instances",
+    //			adminContextPath + "/actuator/**"
+    //		);
+    // }
 }

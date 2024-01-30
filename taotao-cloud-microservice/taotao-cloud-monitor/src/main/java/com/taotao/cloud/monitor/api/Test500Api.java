@@ -17,15 +17,9 @@
 package com.taotao.cloud.monitor.api;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.monitor.model.AlertMessage;
 import com.taotao.cloud.monitor.model.TargetGroup;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * prometheus http sd
@@ -40,8 +34,7 @@ public class Test500Api {
 
     @GetMapping("/api")
     public List<TargetGroup> getList() {
-		LogUtils.error(new RuntimeException("测试500失败================="), "测试500失败");
+        LogUtils.error(new RuntimeException("测试500失败================="), "测试500失败");
         throw new RuntimeException("测试500失败");
     }
-
 }

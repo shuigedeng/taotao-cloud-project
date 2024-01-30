@@ -47,7 +47,7 @@ dependencies {
     implementation 'cn.monitor4all:log-record-starter:1.5.1'
     implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.2.12'
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:4.0.11'
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.45"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.46"
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'com.google.guava:guava:33.0.0-jre'
     implementation 'org.dromara.hutool:hutool-all'
@@ -56,8 +56,8 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.1'
 
-    annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-    api "com.querydsl:querydsl-jpa:5.0.0:jakarta"
+    annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 }

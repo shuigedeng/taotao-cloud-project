@@ -53,7 +53,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.11'
     implementation 'org.slf4j:slf4j-log4j12:2.0.11'
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.45"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.46"
 }
 
 jar {

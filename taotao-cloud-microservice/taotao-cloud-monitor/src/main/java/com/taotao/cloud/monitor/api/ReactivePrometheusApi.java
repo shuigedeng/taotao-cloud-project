@@ -18,15 +18,14 @@ package com.taotao.cloud.monitor.api;
 
 import com.taotao.cloud.monitor.model.AlertMessage;
 import com.taotao.cloud.monitor.model.TargetGroup;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * prometheus http sd
@@ -39,36 +38,34 @@ import java.util.Map;
 @RequestMapping("/actuator/prometheus/reactive")
 public class ReactivePrometheusApi {
 
-	private final ReactiveDiscoveryClient discoveryClient;
-	private final ApplicationEventPublisher eventPublisher;
+    private final ReactiveDiscoveryClient discoveryClient;
+    private final ApplicationEventPublisher eventPublisher;
 
-	public ReactivePrometheusApi(ReactiveDiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
-		this.discoveryClient = discoveryClient;
-		this.eventPublisher = eventPublisher;
-	}
+    public ReactivePrometheusApi(ReactiveDiscoveryClient discoveryClient, ApplicationEventPublisher eventPublisher) {
+        this.discoveryClient = discoveryClient;
+        this.eventPublisher = eventPublisher;
+    }
 
-	@GetMapping("/sd")
-	public Flux<TargetGroup> getList() {
-		return discoveryClient
-			.getServices()
-			.flatMap(discoveryClient::getInstances)
-			.groupBy(
-				ServiceInstance::getServiceId,
-				(instance) -> String.format("%s:%d", instance.getHost(), instance.getPort()))
-			.flatMap(instanceGrouped -> {
-				Map<String, String> labels = new HashMap<>(2);
-				String serviceId = instanceGrouped.key();
-				labels.put("__taotao_prometheus_job", serviceId);
+    @GetMapping("/sd")
+    public Flux<TargetGroup> getList() {
+        return discoveryClient
+                .getServices()
+                .flatMap(discoveryClient::getInstances)
+                .groupBy(
+                        ServiceInstance::getServiceId,
+                        (instance) -> String.format("%s:%d", instance.getHost(), instance.getPort()))
+                .flatMap(instanceGrouped -> {
+                    Map<String, String> labels = new HashMap<>(2);
+                    String serviceId = instanceGrouped.key();
+                    labels.put("__taotao_prometheus_job", serviceId);
 
-				return instanceGrouped
-					.collectList()
-					.map(targets -> new TargetGroup(targets, labels));
-			});
-	}
+                    return instanceGrouped.collectList().map(targets -> new TargetGroup(targets, labels));
+                });
+    }
 
-	@PostMapping("/alerts")
-	public ResponseEntity<Object> postAlerts(@RequestBody AlertMessage message) {
-		eventPublisher.publishEvent(message);
-		return ResponseEntity.ok().build();
-	}
+    @PostMapping("/alerts")
+    public ResponseEntity<Object> postAlerts(@RequestBody AlertMessage message) {
+        eventPublisher.publishEvent(message);
+        return ResponseEntity.ok().build();
+    }
 }

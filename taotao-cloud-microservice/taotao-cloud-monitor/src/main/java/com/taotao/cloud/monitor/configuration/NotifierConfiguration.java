@@ -30,6 +30,9 @@ import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
 import de.codecentric.boot.admin.server.web.client.HttpHeadersProvider;
 import de.codecentric.boot.admin.server.web.client.InstanceExchangeFilterFunction;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
@@ -37,10 +40,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import reactor.core.publisher.Mono;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Map;
 
 /**
  * NotifierConfiguration
@@ -53,122 +52,122 @@ import java.util.Map;
 @AutoConfigureAfter(AdminServerAutoConfiguration.class)
 public class NotifierConfiguration {
 
-	@Bean
-	public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
-		return new DingDingNotifier(repository);
-	}
+    @Bean
+    public DingDingNotifier dingDingNotifier(InstanceRepository repository) {
+        return new DingDingNotifier(repository);
+    }
 
-	@Bean
-	public HttpHeadersProvider customHttpHeadersProvider() {
-		return (instance) -> {
-			HttpHeaders httpHeaders = new HttpHeaders();
-			httpHeaders.add("X-CUSTOM", "My Custom Value");
-			return httpHeaders;
-		};
-	}
+    @Bean
+    public HttpHeadersProvider customHttpHeadersProvider() {
+        return (instance) -> {
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("X-CUSTOM", "My Custom Value");
+            return httpHeaders;
+        };
+    }
 
-	@Bean
-	public InstanceExchangeFilterFunction auditLog() {
-		return (instance, request, next) -> next.exchange(request).doOnSubscribe((s) -> {
-			if (HttpMethod.DELETE.equals(request.method()) || HttpMethod.POST.equals(request.method())) {
-				LogUtils.info("{} for {} on {}", request.method(), instance.getId(), request.url());
-			}
-		});
-	}
+    @Bean
+    public InstanceExchangeFilterFunction auditLog() {
+        return (instance, request, next) -> next.exchange(request).doOnSubscribe((s) -> {
+            if (HttpMethod.DELETE.equals(request.method()) || HttpMethod.POST.equals(request.method())) {
+                LogUtils.info("{} for {} on {}", request.method(), instance.getId(), request.url());
+            }
+        });
+    }
 
-	public static class DingDingNotifier extends AbstractStatusChangeNotifier {
+    public static class DingDingNotifier extends AbstractStatusChangeNotifier {
 
-		private final String[] ignoreChanges = new String[]{"UNKNOWN:UP", "DOWN:UP", "OFFLINE:UP"};
+        private final String[] ignoreChanges = new String[] {"UNKNOWN:UP", "DOWN:UP", "OFFLINE:UP"};
 
-		@Autowired
-		private DingerSender sender;
+        @Autowired
+        private DingerSender sender;
 
-		public DingDingNotifier(InstanceRepository repository) {
-			super(repository);
-		}
+        public DingDingNotifier(InstanceRepository repository) {
+            super(repository);
+        }
 
-		@Override
-		protected boolean shouldNotify(InstanceEvent event, Instance instance) {
-			LogUtils.info("微服务监控回调数据 shouldNotify event: {}, instance: {}", event, instance);
+        @Override
+        protected boolean shouldNotify(InstanceEvent event, Instance instance) {
+            LogUtils.info("微服务监控回调数据 shouldNotify event: {}, instance: {}", event, instance);
 
-			if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
-				return false;
-			} else {
-				String from = this.getLastStatus(event.getInstance());
-				String to = statusChange.getStatusInfo().getStatus();
-				return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
-					&& Arrays.binarySearch(this.ignoreChanges, "*:" + to) < 0
-					&& Arrays.binarySearch(this.ignoreChanges, from + ":*") < 0;
-			}
-		}
+            if (!(event instanceof InstanceStatusChangedEvent statusChange)) {
+                return false;
+            } else {
+                String from = this.getLastStatus(event.getInstance());
+                String to = statusChange.getStatusInfo().getStatus();
+                return Arrays.binarySearch(this.ignoreChanges, from + ":" + to) < 0
+                        && Arrays.binarySearch(this.ignoreChanges, "*:" + to) < 0
+                        && Arrays.binarySearch(this.ignoreChanges, from + ":*") < 0;
+            }
+        }
 
-		@Override
-		protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
-			String serviceName = instance.getRegistration().getName();
-			String serviceUrl = instance.getRegistration().getServiceUrl();
+        @Override
+        protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
+            String serviceName = instance.getRegistration().getName();
+            String serviceUrl = instance.getRegistration().getServiceUrl();
 
-			StringBuilder str = new StringBuilder();
-			str.append("taotaocloud微服务监控 \n");
-			str.append("[时间戳]: ")
-				.append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT))
-				.append("\n");
-			str.append("[服务名] : ").append(serviceName).append("\n");
-			str.append("[服务ip]: ").append(serviceUrl).append("\n");
+            StringBuilder str = new StringBuilder();
+            str.append("taotaocloud微服务监控 \n");
+            str.append("[时间戳]: ")
+                    .append(DateUtils.format(LocalDateTime.now(), DateUtils.DEFAULT_DATE_TIME_FORMAT))
+                    .append("\n");
+            str.append("[服务名] : ").append(serviceName).append("\n");
+            str.append("[服务ip]: ").append(serviceUrl).append("\n");
 
-			return Mono.fromRunnable(() -> {
-				if (event instanceof InstanceStatusChangedEvent) {
-					String status =
-						((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
-					switch (status) {
-						// 健康检查没通过
-						case "DOWN" -> str.append("[服务状态]: ")
-							.append(status)
-							.append("(")
-							.append("健康检未通过")
-							.append(")")
-							.append("\n");
+            return Mono.fromRunnable(() -> {
+                if (event instanceof InstanceStatusChangedEvent) {
+                    String status =
+                            ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
+                    switch (status) {
+                            // 健康检查没通过
+                        case "DOWN" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("健康检未通过")
+                                .append(")")
+                                .append("\n");
 
-						// 服务离线
-						case "OFFLINE" -> str.append("[服务状态]: ")
-							.append(status)
-							.append("(")
-							.append("服务离线")
-							.append(")")
-							.append("\n");
+                            // 服务离线
+                        case "OFFLINE" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务离线")
+                                .append(")")
+                                .append("\n");
 
-						// 服务上线
-						case "UP" -> str.append("[服务状态]: ")
-							.append(status)
-							.append("(")
-							.append("服务上线")
-							.append(")")
-							.append("\n");
+                            // 服务上线
+                        case "UP" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务上线")
+                                .append(")")
+                                .append("\n");
 
-						// 服务未知异常
-						case "UNKNOWN" -> str.append("[服务状态]: ")
-							.append(status)
-							.append("(")
-							.append("服务未知异常")
-							.append(")")
-							.append("\n");
+                            // 服务未知异常
+                        case "UNKNOWN" -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务未知异常")
+                                .append(")")
+                                .append("\n");
 
-						default -> str.append("[服务状态]: ")
-							.append(status)
-							.append("(")
-							.append("服务未知异常")
-							.append(")")
-							.append("\n");
-					}
+                        default -> str.append("[服务状态]: ")
+                                .append(status)
+                                .append("(")
+                                .append("服务未知异常")
+                                .append(")")
+                                .append("\n");
+                    }
 
-					Map<String, Object> details =
-						((InstanceStatusChangedEvent) event).getStatusInfo().getDetails();
-					str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
+                    Map<String, Object> details =
+                            ((InstanceStatusChangedEvent) event).getStatusInfo().getDetails();
+                    str.append("[服务详情]: ").append(JsonUtils.toJSONString(details));
 
-					LogUtils.info("微服务监控回调数据 event: {}, instance: {}, message: {}", event, instance, str);
+                    LogUtils.info("微服务监控回调数据 event: {}, instance: {}, message: {}", event, instance, str);
 
-					sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
-				}
-			});
-		}
-	}
+                    sender.send(MessageSubType.TEXT, DingerRequest.request(str.toString()));
+                }
+            });
+        }
+    }
 }

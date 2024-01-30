@@ -18,6 +18,19 @@
 
 package org.apache.flink.cep.dynamic.operator;
 
+import static org.apache.flink.cep.operator.CepOperator.PATTERN_MATCHED_TIMES_METRIC_NAME;
+import static org.apache.flink.cep.operator.CepOperator.PATTERN_MATCHING_AVG_TIME_METRIC_NAME;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.functions.util.FunctionUtils;
@@ -64,23 +77,8 @@ import org.apache.flink.streaming.runtime.tasks.StreamTask;
 import org.apache.flink.util.FlinkRuntimeException;
 import org.apache.flink.util.OutputTag;
 import org.apache.flink.util.Preconditions;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.PriorityQueue;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
-
-import static org.apache.flink.cep.operator.CepOperator.PATTERN_MATCHED_TIMES_METRIC_NAME;
-import static org.apache.flink.cep.operator.CepOperator.PATTERN_MATCHING_AVG_TIME_METRIC_NAME;
 
 /**
  * Pattern processor operator for a keyed input stream. For each key, the operator creates multiple
