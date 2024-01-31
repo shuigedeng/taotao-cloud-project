@@ -13,10 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import java.io.FileInputStream
-import java.util.*
-
 /*
     buildscript代码块中的声明是gradle脚本自身需要的资源。
     可以声明的资源包括依赖项、第三方插件、maven仓库地址等。
@@ -91,7 +87,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.6"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.7"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.41"

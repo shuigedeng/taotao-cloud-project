@@ -11,7 +11,7 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-application")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-interface")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-adapter")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-domain")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-integration")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-ddd:taotao-cloud-ddd-infrastructure")
