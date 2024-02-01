@@ -2,18 +2,18 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-monitor-2024.02.jar ./
+ADD ./build/libs/taotao-cloud-monitor-2024.03.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.02.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.03.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
-ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
+ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-monitor
-ARG APP_VERSION=2024.02
+ARG APP_VERSION=2024.03
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33334
 ARG APP_PRROFILES=dev
@@ -42,7 +42,7 @@ ENV SW_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
 ENV SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_BACKEND_SERVICE}
 ENV SW_AGENT_TRACE_IGNORE_PATH="Redisson/PING,/actuator/**,/admin/**"
 #日志数据的grpc服务器的主机
-ENV SW_GRPC_LOG_SERVER_HOST=192.168.10.220
+ENV SW_GRPC_LOG_SERVER_HOST=127.0.0.1
 #日志数据的grpc服务器的端口
 ENV SW_GRPC_LOG_SERVER_PORT=11800
 #日志数据的最大大小
@@ -54,7 +54,7 @@ ENV SW_LOGGING_FILE_NAME=skywalking.log
 ENV SW_LOGGING_DIR=/root/logs/${APP_NAME}
 #****************************pyroscope 从env中获取配置数据****************************
 ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
-ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.10.220:4040
+ENV PYROSCOPE_SERVER_ADDRESS=http://127.0.0.1:4040
 ENV PYROSCOPE_PROFILING_INTERVAL=10ms
 ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
 ENV PYROSCOPE_UPLOAD_INTERVAL=10s
@@ -211,6 +211,6 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.02.jar"]
-#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.02.jar
+#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.03.jar"]
+#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.03.jar
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
