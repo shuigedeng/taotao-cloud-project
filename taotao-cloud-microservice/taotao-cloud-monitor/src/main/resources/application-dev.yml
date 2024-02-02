@@ -303,6 +303,8 @@ management:
     metrics:
       export:
         enabled: true
+        #pushgateway:
+        #  base-url:
   zipkin:
     tracing:
       connect-timeout: 1
@@ -312,6 +314,21 @@ management:
     enabled: true
     sampling:
       probability: 1.0
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
+        enabled: true
+        headers:
+          version: 2024
+        batch-size: 10000
+        connect-timeout: 10s
+    tracing:
+      compression: none
+      endpoint: http://localhost:4318/v1/metrics
+      timeout: 10s
+      headers:
+        version: 111
 
 logging:
   file:
