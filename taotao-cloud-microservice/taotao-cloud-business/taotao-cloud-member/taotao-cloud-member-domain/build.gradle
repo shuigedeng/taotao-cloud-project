@@ -1,6 +1,6 @@
 
 /**
- * DDD: domain 领域层
+ * DDD: domain 领域层 这一层就是最为核心的业务逻辑层， 这一层不包含任何和技术相关的内容，只包含业务逻辑。
  * 领域层主要负责表达业务概念,业务状态信息和业务规则。
  * Domain层是整个系统的核心层,几乎全部的业务逻辑会在该层实现。
  * 领域模型层主要包含以下的内容:
@@ -11,8 +11,7 @@
  * 聚合是指一组具有内聚关系的相关对象的集合,每个聚合都有一个root和boundary
  * 工厂(Factories): 创建复杂对象,隐藏创建细节
  * 仓储(Repository): 提供查找和持久化对象的方法
- */
-/**
+ *
  * |--- domain                      -- 领域层
  * |      |--- model                -- 领域对象
  * |      |       |--- aggregate    -- 聚合
@@ -27,10 +26,7 @@
  * |      |--- extension            -- 扩展点
  * |      |       |--- impl        -- 扩展点实现
  */
-/**
- * Enterprise Business Rules: 这一层就是最为核心的业务逻辑层，
- * 这一层不包含任何和技术相关的内容，只包含业务逻辑。
- */
+
 /**
  * DomainService命名统一以Service为后缀。
  * Entity实体类的命名不用后缀。 值对象类的定义统一以VO结尾。
@@ -57,12 +53,6 @@
  * 并且可以增加流控、监控、日志、权限，分布式锁，相较于领域层功能更为丰富。
  */
 
-//util
-//client
-//领域对象进行业务校验，所以需要依赖client模块：
-//
-//BizException
-//ErrorCodeBizEnum
 
 dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-infrastructure")
