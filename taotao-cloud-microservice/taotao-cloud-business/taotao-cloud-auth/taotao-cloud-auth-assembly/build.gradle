@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-application")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-adapter")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-integration")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-infrastructure")
+}
+

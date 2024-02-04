@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-application")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-adapter")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-integration")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-infrastructure")
+}
+

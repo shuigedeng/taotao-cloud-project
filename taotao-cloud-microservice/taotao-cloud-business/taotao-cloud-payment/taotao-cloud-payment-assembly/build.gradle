@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-application")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-adapter")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-integration")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-infrastructure")
+}
+

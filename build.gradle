@@ -312,7 +312,6 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
     apply plugin: 'java-library'
     apply plugin: 'idea'
 
-    apply plugin: "com.taotao.cloud.plugin"
     apply plugin: "org.owasp.dependencycheck"
 
     apply from: rootProject.file('gradle/jacoco.gradle')

@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-application")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-adapter")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-integration")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-infrastructure")
+}
+

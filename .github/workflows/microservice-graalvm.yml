@@ -55,7 +55,7 @@ jobs:
       - name: Gradle BootJar taotao-cloud-auth-biz
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 8.5
+          gradle-version: 8.6
           #arguments: bootBuildImage
           arguments: nativeBuild
           build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-auth/taotao-cloud-auth-biz
