@@ -155,6 +155,20 @@ for (project in threeLayerProjects) {
     }
 }
 
+//buildCache{
+//    local{
+//        enable = true
+//          directory = new File(rootDir, 'build-cache')
+//        removeUnusedEntriesAfterDays = 30
+//       其中directory设置的是目录，removeUnusedEntriesAfterDays是多长时间后清除未使用的缓存
+//    }
+//    remote(HttpBuildCache){
+//        url = 'http://example.com/cache'
+//        enable = true
+//        push = true
+//    }
+//}
+
 gradle.settingsEvaluated {
     if (JavaVersion.current() < JavaVersion.VERSION_21) {
         throw new GradleException("This build requires JDK 21. It's currently ${JavaVersion.current()}. You can ignore this check by passing '-Dorg.gradle.ignoreBuildJavaVersionCheck'.")
