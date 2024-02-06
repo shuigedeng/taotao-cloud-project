@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.integration.order;
+package com.taotao.cloud.sys.integration.dict.vo;
 
-public class a {}
+import lombok.Data;
+
+@Data
+public class UserContactVO {
+
+    private String mobile;
+}

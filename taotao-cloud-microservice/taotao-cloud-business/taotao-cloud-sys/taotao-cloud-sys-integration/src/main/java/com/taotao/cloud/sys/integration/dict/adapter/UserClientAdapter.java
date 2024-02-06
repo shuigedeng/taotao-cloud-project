@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.integration.user.adapter;
+package com.taotao.cloud.sys.integration.dict.adapter;
 
-import com.taotao.cloud.member.integration.user.vo.UserAddressVO;
-import com.taotao.cloud.member.integration.user.vo.UserBaseInfoVO;
-import com.taotao.cloud.member.integration.user.vo.UserContactVO;
 import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.integration.dict.vo.UserBaseInfoVO;
 import org.springframework.stereotype.Component;
 
 @Component

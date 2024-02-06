@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.integration.user.vo;
+package com.taotao.cloud.sys.integration.user.vo;
 
+import lombok.Data;
+
+@Data
 public class UserAddressVO {
 
     private String cityCode;

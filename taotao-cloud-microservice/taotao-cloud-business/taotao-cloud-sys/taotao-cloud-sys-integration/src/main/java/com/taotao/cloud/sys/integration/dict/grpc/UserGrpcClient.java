@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.integration.user.grpc;
+package com.taotao.cloud.sys.integration.dict.grpc;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.protobuf.ByteString;

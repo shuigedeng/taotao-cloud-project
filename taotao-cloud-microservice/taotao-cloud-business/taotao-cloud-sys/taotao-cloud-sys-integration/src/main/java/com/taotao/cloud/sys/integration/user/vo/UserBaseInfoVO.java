@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.integration.user.vo;
+package com.taotao.cloud.sys.integration.user.vo;
 
-public class UserContactVO {
+import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+import lombok.Data;
 
-    private String mobile;
+@Data
+public class UserBaseInfoVO {
+
+    private UserQueryVO userQueryVO;
+    private DubboDictResponse dict;
 }

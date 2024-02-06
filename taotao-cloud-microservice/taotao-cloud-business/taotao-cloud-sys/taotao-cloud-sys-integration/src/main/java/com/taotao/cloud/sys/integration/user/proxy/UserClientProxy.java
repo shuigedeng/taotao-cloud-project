@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.integration.user.proxy;
+package com.taotao.cloud.sys.integration.user.proxy;
 
-import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClient;
-import com.taotao.cloud.member.integration.user.adapter.UserClientAdapter;
-import com.taotao.cloud.member.integration.user.grpc.UserGrpcClient;
-import com.taotao.cloud.member.integration.user.vo.UserBaseInfoVO;
 import com.taotao.cloud.sys.api.dubbo.IDubboDictRpc;
 import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import com.taotao.cloud.sys.api.grpc.HelloReply;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.integration.user.adapter.UserClientAdapter;
+import com.taotao.cloud.sys.integration.user.grpc.UserGrpcClient;
+import com.taotao.cloud.sys.integration.user.vo.UserBaseInfoVO;
 import jakarta.annotation.Resource;
 import org.openjdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Component;
