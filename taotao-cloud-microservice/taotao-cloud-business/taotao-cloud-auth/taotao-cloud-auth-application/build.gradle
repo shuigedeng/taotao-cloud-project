@@ -17,4 +17,5 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-domain")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-infrastructure")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-common")
 }

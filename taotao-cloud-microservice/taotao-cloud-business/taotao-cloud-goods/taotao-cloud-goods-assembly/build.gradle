@@ -5,5 +5,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-domain")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-integration")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-infrastructure")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-common")
 }
 

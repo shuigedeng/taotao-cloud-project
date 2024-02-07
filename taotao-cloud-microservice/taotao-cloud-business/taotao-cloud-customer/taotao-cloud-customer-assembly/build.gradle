@@ -1,9 +1,0 @@
-dependencies {
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-api")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-application")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-adapter")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-domain")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-integration")
-    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-infrastructure")
-}
-

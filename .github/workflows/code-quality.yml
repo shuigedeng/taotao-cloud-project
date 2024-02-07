@@ -20,7 +20,7 @@ jobs:
 
       #https://github.com/marketplace/actions/qodana-scan
       - name: Qodana Scan
-        uses: JetBrains/qodana-action@v2023.2
+        uses: JetBrains/qodana-action@v2023.3
         with:
           #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results

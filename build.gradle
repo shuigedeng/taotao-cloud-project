@@ -95,11 +95,11 @@ buildscript {
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
-        classpath "com.guardsquare:proguard-gradle:7.4.1"
+        classpath "com.guardsquare:proguard-gradle:7.4.2"
 
         //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
         //https://plugins.gradle.org/plugin/org.jetbrains.intellij
-        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.0"
+        classpath "org.jetbrains.intellij.plugins:gradle-intellij-plugin:1.17.1"
     }
 }
 
@@ -191,7 +191,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.1"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.9.28'
+    id 'org.graalvm.buildtools.native' version '0.10.0'
 
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.qqviaja.gradle.MybatisGenerator
