@@ -20,8 +20,8 @@ dependencies {
 
     // 如果保存检查点到hdfs上，需要引入此依赖
     implementation "org.apache.hadoop:hadoop-client:3.3.6"
-    implementation 'org.slf4j:slf4j-api:2.0.11'
-    implementation 'org.slf4j:slf4j-log4j12:2.0.11'
+    implementation 'org.slf4j:slf4j-api:2.0.12'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.12'
     implementation "org.apache.logging.log4j:log4j-to-slf4j:2.19.0"
 
     implementation "commons-beanutils:commons-beanutils:1.9.4"

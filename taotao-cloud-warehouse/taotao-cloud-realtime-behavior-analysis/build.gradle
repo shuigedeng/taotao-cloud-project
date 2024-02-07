@@ -21,8 +21,8 @@ dependencies {
     implementation("org.apache.hudi:hudi-client:0.14.0")
     implementation("org.apache.hudi:hudi-flink-client:0.14.0")
 
-    implementation 'org.slf4j:slf4j-api:2.0.11'
-    implementation 'org.slf4j:slf4j-log4j12:2.0.11'
+    implementation 'org.slf4j:slf4j-api:2.0.12'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.12'
 
 }
 
