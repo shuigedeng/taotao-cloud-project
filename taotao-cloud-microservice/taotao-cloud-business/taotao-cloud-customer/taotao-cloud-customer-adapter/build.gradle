@@ -1,0 +1,46 @@
+
+/**
+ * facade服务实现可以作为RPC提供服务，controller则作为本项目HTTP接口提供服务，供前端调用。
+ * controller需要注意HTTP相关特性，敏感信息例如登陆用户ID不能依赖前端传递，
+ * 登陆后前端会在请求头带一个登陆用户信息，服务端需要从请求头中获取并解析。
+ *
+ * Interface Adapters层：这一层是一个适配层，
+ * 这一层中需要将出入参的DTO和业务层的VO/DO对象进行转换。
+ * 这一层不要包含任何的业务逻辑，只包含参数转换和业务无关的校验逻辑。
+ * 接口返回值缓存类的逻辑，可以放在这个模块中实现，因为这个动作不包含业务逻辑。
+ *
+ * DDD: interfaces 用户界面层（或表示层）  最顶层
+ * 负责向用户显示信息和解释用户命令
+ * 请求应用层以获取用户所需要展现的数据(比如获取首页的商品数据)
+ * 发送命令给应用层要求其执行某个用户命令(实现某个业务逻辑,比如用户要进行转账)
+ * 用户界面层应该包含以下的内容:
+ * 数据传输对象(Data Transfer Object): DTO也常被称作值对象，VO,实质上与领域层的VO并不相同
+ * DTO是数据传输的载体,内部不应该存在任何业务逻辑,通过DTO把内部的领域对象与外界隔离。
+ * 装配(Assembler): 实现DTO与领域对象之间的相互转换,数据交换,因此Assembler几乎总是同DTO一起出现。
+ * 表面,门面(Facade): Facade的用意在于为远程客户端提供粗粒度的调用接口
+ * 它的主要工作就是将一个用户请求委派给一个或多个Service进行处理,也就是我们常说的Controller。
+ * 通常也会在这层做JSR303参数校验
+ *
+ * |--- Adapters层                     -- 适配器层 应用与外部应用交互适配
+ * |      |--- controller           -- 控制器层，API中的接口的实现
+ * |      |       |--- assembler    -- 装配器，DTO和领域模型的转换
+ * |      |       |--- impl         -- 协议层中接口的实现
+ * |      |--- repository           -- 仓储层
+ * |      |       |--- assembler    -- 装配器，PO和领域模型的转换
+ * |      |       |--- impl         -- 领域层中仓储接口的实现
+ * |      |--- rpc                  -- RPC层,Domain层中port中依赖的外部的接口实现，调用远程RPC接口
+ * |      |--- task                 -- 任务，主要是调度任务的适配器
+ */
+
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-api")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-application")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-domain")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-infrastructure")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-common")
+}
+
+
+
+

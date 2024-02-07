@@ -1,0 +1,21 @@
+
+/**
+ * DDD: application 应用层
+ * Application Business Rules: 应用业务规则层，可以理解为用例层，这一层表示整个应用可以提供哪些用例级别的功能和服务。这一层也是对第4层中的核心业务规则的编排层。
+ * 相对于领域层,应用层是很薄的一层,应用层定义了软件要完成的任务,要尽量简单.
+ * 它不包含任务业务规则或知识, 为下一层的领域对象协助任务、委托工作。
+ * 它没有反映业务情况的状态,但它可以具有反映用户或程序的某个任务的进展状态。
+ * 对外 为展现层提供各种应用功能(service)。
+ * 对内 调用领域层（领域对象或领域服务）完成各种业务逻辑任务
+ * 这一层也很适合写一些任务处理,日志监控
+ *
+ * 关注横向维度聚合领域服务，引出一种新对象称为聚合对象。因为本层需要聚合多个维度，
+ * 所以需要通过聚合对象聚合多领域属性，例如提交订单需要聚合商品、物流、优惠券多个领域。
+ **/
+
+dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-domain")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-infrastructure")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-common")
+}
