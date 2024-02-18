@@ -17,7 +17,7 @@
 			<#elseif field.formType == 'select'>
 				<#if field.formDict??>
 					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-						<fast-select v-model="dataForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}"></fast-select>
+						<fast-select v-model="dataForm.${field.attrName}" dictPO-type="${field.formDict}" placeholder="${field.fieldComment!}"></fast-select>
 					</el-form-item>
 				<#else>
 					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
@@ -29,7 +29,7 @@
 			<#elseif field.formType == 'radio'>
 				<#if field.formDict??>
 					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-						<fast-radio-group v-model="dataForm.${field.attrName}" dict-type="${field.formDict}"></fast-radio-group>
+						<fast-radio-group v-model="dataForm.${field.attrName}" dictPO-type="${field.formDict}"></fast-radio-group>
 					</el-form-item>
 				<#else>
 					<el-form-item label="${field.fieldComment!}" prop="${field.attrName}">

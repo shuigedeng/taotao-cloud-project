@@ -1,4 +1,4 @@
-GET http://127.0.0.1:9700/dict/item/page
+GET http://127.0.0.1:9700/dictPO/item/page
 
 
 ###

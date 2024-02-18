@@ -35,11 +35,11 @@ public interface IDictMapper extends BaseSuperMapper<Dict, Long> {
 
     @Select(
             """
-		select dict.id as id,
-		dict.description as description,
-		dict.dict_name as itemValue,
-		dict.dict_code as itemText
-		from tt_dict dict
+		select dictPO.id as id,
+		dictPO.description as description,
+		dictPO.dict_name as itemValue,
+		dictPO.dict_code as itemText
+		from tt_dict dictPO
 		""")
     List<DictDeptBO> testMybatisQueryStructure(@Param("params") DictDeptParams params);
 }

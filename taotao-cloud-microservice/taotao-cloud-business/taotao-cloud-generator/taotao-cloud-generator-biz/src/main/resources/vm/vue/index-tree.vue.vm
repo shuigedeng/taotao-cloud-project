@@ -24,10 +24,10 @@
       <el-form-item label="${comment}" prop="${column.javaField}">
         <el-select v-model="queryParams.${column.javaField}" placeholder="请选择${comment}" clearable>
           <el-option
-            v-for="dict in dict.type.${dictType}"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
+            v-for="dictPO in dictPO.type.${dictType}"
+            :key="dictPO.value"
+            :label="dictPO.label"
+            :value="dictPO.value"
           />
         </el-select>
       </el-form-item>
@@ -124,9 +124,9 @@
       <el-table-column label="${comment}" align="center" prop="${javaField}">
         <template slot-scope="scope">
 #if($column.htmlType == "checkbox")
-          <dict-tag :options="dict.type.${column.dictType}" :value="scope.row.${javaField} ? scope.row.${javaField}.split(',') : []"/>
+          <dictPO-tag :options="dictPO.type.${column.dictType}" :value="scope.row.${javaField} ? scope.row.${javaField}.split(',') : []"/>
 #else
-          <dict-tag :options="dict.type.${column.dictType}" :value="scope.row.${javaField}"/>
+          <dictPO-tag :options="dictPO.type.${column.dictType}" :value="scope.row.${javaField}"/>
 #end
         </template>
       </el-table-column>
@@ -202,13 +202,13 @@
         <el-form-item label="${comment}" prop="${field}">
           <el-select v-model="form.${field}" placeholder="请选择${comment}">
             <el-option
-              v-for="dict in dict.type.${dictType}"
-              :key="dict.value"
-              :label="dict.label"
+              v-for="dictPO in dictPO.type.${dictType}"
+              :key="dictPO.value"
+              :label="dictPO.label"
 #if($column.javaType == "Integer" || $column.javaType == "Long")
-              :value="parseInt(dict.value)"
+              :value="parseInt(dictPO.value)"
 #else
-              :value="dict.value"
+              :value="dictPO.value"
 #end
             ></el-option>
           </el-select>
@@ -223,10 +223,10 @@
         <el-form-item label="${comment}" prop="${field}">
           <el-checkbox-group v-model="form.${field}">
             <el-checkbox
-              v-for="dict in dict.type.${dictType}"
-              :key="dict.value"
-              :label="dict.value">
-              {{dict.label}}
+              v-for="dictPO in dictPO.type.${dictType}"
+              :key="dictPO.value"
+              :label="dictPO.value">
+              {{dictPO.label}}
             </el-checkbox>
           </el-checkbox-group>
         </el-form-item>
@@ -240,14 +240,14 @@
         <el-form-item label="${comment}" prop="${field}">
           <el-radio-group v-model="form.${field}">
             <el-radio
-              v-for="dict in dict.type.${dictType}"
-              :key="dict.value"
+              v-for="dictPO in dictPO.type.${dictType}"
+              :key="dictPO.value"
 #if($column.javaType == "Integer" || $column.javaType == "Long")
-              :label="parseInt(dict.value)"
+              :label="parseInt(dictPO.value)"
 #else
-              :label="dict.value"
+              :label="dictPO.value"
 #end
-            >{{dict.label}}</el-radio>
+            >{{dictPO.label}}</el-radio>
           </el-radio-group>
         </el-form-item>
 #elseif($column.htmlType == "radio" && $dictType)

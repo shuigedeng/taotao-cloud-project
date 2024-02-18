@@ -36,12 +36,12 @@ public interface IDeptRepository extends BaseInterfaceSuperRepository<Dept, Long
 
     @Query(
             value = """
-		select h from dept h where
-		h.userId=:#{#dept.userId} and
-		h.tabName=:#{#dept.tabName} and
-		h.headerName=:#{#dept.headerName}
+		select h from deptPO h where
+		h.userId=:#{#deptPO.userId} and
+		h.tabName=:#{#deptPO.tabName} and
+		h.headerName=:#{#deptPO.headerName}
 		""", nativeQuery = true)
-    Dept find(@Param("dept") Dept dept);
+    Dept find(@Param("deptPO") Dept deptPO);
     //
     // @Query(value = """
     //	  select m.* from mining_area as m

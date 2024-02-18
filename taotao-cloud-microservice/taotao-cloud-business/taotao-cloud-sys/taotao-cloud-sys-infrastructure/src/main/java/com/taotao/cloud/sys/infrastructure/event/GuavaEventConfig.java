@@ -1,4 +1,4 @@
-package com.taotao.cloud.member.infratructure.event;
+package com.taotao.cloud.sys.infrastructure.event;
 
 public class GuavaEventConfig {
 

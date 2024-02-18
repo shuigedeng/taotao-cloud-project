@@ -7,7 +7,7 @@
 			  <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}"></el-input>
 			<#elseif field.queryFormType == 'select'>
 			  <#if field.formDict??>
-			  <fast-select v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" clearable></fast-select>
+			  <fast-select v-model="state.queryForm.${field.attrName}" dictPO-type="${field.formDict}" placeholder="${field.fieldComment!}" clearable></fast-select>
 			  <#else>
 			  <el-select v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}">
 				<el-option label="选择" value="0"></el-option>
@@ -15,7 +15,7 @@
 			  </#if>
 			<#elseif field.queryFormType == 'radio'>
 			  <#if field.formDict??>
-			  <fast-radio-group v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}"></fast-radio-group>
+			  <fast-radio-group v-model="state.queryForm.${field.attrName}" dictPO-type="${field.formDict}"></fast-radio-group>
 			  <#else>
 			  <el-radio-group v-model="state.queryForm.${field.attrName}">
 				<el-radio :label="0">单选</el-radio>
@@ -52,7 +52,7 @@
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 	    <#list gridList as field>
 		  <#if field.formDict??>
-			<fast-table-column prop="${field.attrName}" label="${field.fieldComment!}" dict-type="${field.formDict}"></fast-table-column>
+			<fast-table-column prop="${field.attrName}" label="${field.fieldComment!}" dictPO-type="${field.formDict}"></fast-table-column>
 		  <#else>
 			<el-table-column prop="${field.attrName}" label="${field.fieldComment!}" header-align="center" align="center"></el-table-column>
 		  </#if>

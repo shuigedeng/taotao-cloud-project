@@ -1,7 +1,8 @@
 package com.taotao.cloud.sys.adapter.assembler;
 
 /**
- * 装配(Assembler): 实现DTO与领域对象之间的相互转换,数据交换,因此Assembler几乎总是同DTO一起出现。
+ * 装配(Assembler): 实现DTO与领域对象之间的相互转换,数据交换,
+ * 因此Assembler几乎总是同DTO一起出现。
  * 可通过实现此接口完成多种自定义装配转换方式
  */
 @FunctionalInterface
