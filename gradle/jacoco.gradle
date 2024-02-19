@@ -17,9 +17,9 @@ jacocoTestReport {
         csv.required = true
         html.required = true
 
-        xml.destination file("${buildDir}/code-analysis/jacoco/coverage-reports/jacoco.xml")
-        csv.destination file("${buildDir}/code-analysis/jacoco/coverage-reports/jacoco.csv")
-        html.destination file("${buildDir}/code-analysis/jacoco/coverage-reports/html")
+        xml.outputLocation = file("${buildDir}/code-analysis/jacoco/coverage-reports/jacoco.xml")
+        csv.outputLocation = file("${buildDir}/code-analysis/jacoco/coverage-reports/jacoco.csv")
+        html.outputLocation = file("${buildDir}/code-analysis/jacoco/coverage-reports/html")
     }
 }
 tasks.check.dependsOn jacocoTestReport

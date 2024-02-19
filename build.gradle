@@ -231,14 +231,14 @@ allprojects {
     //}
 
     java {
+        /* 指定jdk版本 */
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+
         toolchain {
             languageVersion = JavaLanguageVersion.of(21)
         }
     }
-
-    /* 指定jdk版本 */
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
 
     /* java编译的时候缺省状态下会因为中文字符而失败 */
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
