@@ -14,16 +14,6 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.infrastructure.util;
+package com.taotao.cloud.sys.application.event.listener;
 
-
-/**
- * 查询跑龙套
- *
- * @author shuigedeng
- * @version 2023.01
- * @since 2023-02-01 14:05:22
- */
-public class QueryUtils {
-
-}
+public class DictCreateListener {}

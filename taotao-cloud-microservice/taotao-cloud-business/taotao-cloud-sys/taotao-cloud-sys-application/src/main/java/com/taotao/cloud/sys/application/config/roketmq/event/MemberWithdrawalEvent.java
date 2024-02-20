@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.infrastructure.util;
+package com.taotao.cloud.sys.application.config.roketmq.event;
 
+import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
 
-/**
- * 查询跑龙套
- *
- * @author shuigedeng
- * @version 2023.01
- * @since 2023-02-01 14:05:22
- */
-public class QueryUtils {
+/** 会员提现消息 */
+public interface MemberWithdrawalEvent {
 
+    /**
+     * 会员提现
+     *
+     * @param memberWithdrawalMessage 提现对象
+     */
+    void memberWithdrawal(MemberWithdrawalMessage memberWithdrawalMessage);
 }

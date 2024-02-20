@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.application.converter;
 
-import com.taotao.cloud.sys.application.command.dict.DictListQry;
+import com.taotao.cloud.sys.application.command.dict.dto.DictListQry;
+import com.taotao.cloud.sys.application.command.dict.dto.clientobject.DictCO;
 import com.taotao.cloud.sys.domain.dict.entity.Dict;
-import com.taotao.cloud.sys.infrastructure.persistent.dict.po.DictPO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -37,4 +37,7 @@ public interface DictConvert {
     DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
 
 	Dict convert(DictListQry dict);
+	DictCO convert(Dict dict);
+
+
 }

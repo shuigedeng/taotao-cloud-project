@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.infrastructure.util;
+package com.taotao.cloud.sys.application.config.roketmq.event;
 
+import com.taotao.cloud.member.api.model.dto.MemberPointMessageDTO;
 
-/**
- * 查询跑龙套
- *
- * @author shuigedeng
- * @version 2023.01
- * @since 2023-02-01 14:05:22
- */
-public class QueryUtils {
+/** 会员积分改变消息 */
+public interface MemberPointChangeEvent {
 
+    /**
+     * 会员积分改变消息
+     *
+     * @param memberPointMessageDTO 会员积分消息
+     */
+    void memberPointChange(MemberPointMessageDTO memberPointMessageDTO);
 }

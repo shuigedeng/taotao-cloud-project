@@ -16,9 +16,22 @@ javadoc {
     options.addStringOption('Xdoclint:none', '-quiet')
     options.addStringOption('encoding', 'UTF-8')
     options.addStringOption('charSet', 'UTF-8')
+    options.addBooleanOption('-enable-preview', true)
+    options.addStringOption('-release', '21')
+
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
 
 gradle.projectsEvaluated {
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += "--enable-preview"
+    }
+    tasks.withType(JavaExec).configureEach {
+        jvmArgs += "--enable-preview"
+    }
+
     tasks.withType(JavaCompile) {
         options.compilerArgs += [
                 '-Xlint:unchecked',

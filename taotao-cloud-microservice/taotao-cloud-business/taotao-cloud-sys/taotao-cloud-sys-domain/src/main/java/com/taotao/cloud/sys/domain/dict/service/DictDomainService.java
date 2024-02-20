@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.sys.domain.dict.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.sys.domain.dict.entity.Dict;
 
@@ -60,6 +61,6 @@ public interface DictDomainService {
 	 * @param pageQuery 分页参数
 	 * @return 字典列表
 	 */
-	Datas<Dict> list(Dict dict, PageQuery pageQuery);
+	IPage<Dict> list(Dict dict, PageQuery pageQuery);
 
 }

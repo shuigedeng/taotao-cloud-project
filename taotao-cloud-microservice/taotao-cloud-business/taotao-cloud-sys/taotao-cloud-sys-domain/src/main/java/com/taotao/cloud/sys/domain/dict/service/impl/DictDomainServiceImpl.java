@@ -1,5 +1,6 @@
 package com.taotao.cloud.sys.domain.dict.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.sys.domain.dict.entity.Dict;
 import com.taotao.cloud.sys.domain.dict.repository.DictRepository;
@@ -30,7 +31,7 @@ public class DictDomainServiceImpl implements DictDomainService {
 	}
 
 	@Override
-	public Datas<Dict> list(Dict dict, PageQuery pageQuery) {
+	public IPage<Dict> list(Dict dict, PageQuery pageQuery) {
 		return dictRepository.list(dict, pageQuery);
 	}
 }

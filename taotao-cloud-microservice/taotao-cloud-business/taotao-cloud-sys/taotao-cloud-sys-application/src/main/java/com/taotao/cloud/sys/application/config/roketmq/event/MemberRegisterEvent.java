@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.infrastructure.util;
+package com.taotao.cloud.sys.application.config.roketmq.event;
 
+import com.taotao.cloud.member.biz.model.entity.Member;
 
-/**
- * 查询跑龙套
- *
- * @author shuigedeng
- * @version 2023.01
- * @since 2023-02-01 14:05:22
- */
-public class QueryUtils {
+/** 会员注册消息 */
+public interface MemberRegisterEvent {
 
+    /**
+     * 会员注册
+     *
+     * @param member 会员
+     */
+    void memberRegister(Member member);
 }

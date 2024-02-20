@@ -240,6 +240,20 @@ allprojects {
         }
     }
 
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += "--enable-preview"
+    }
+    tasks.withType(Test).configureEach {
+        jvmArgs += "--enable-preview"
+    }
+    tasks.withType(JavaExec).configureEach {
+        jvmArgs += "--enable-preview"
+    }
+    javadoc.options {
+        addBooleanOption('-enable-preview', true)
+        addStringOption('-release', '21')
+    }
+
     /* java编译的时候缺省状态下会因为中文字符而失败 */
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
 

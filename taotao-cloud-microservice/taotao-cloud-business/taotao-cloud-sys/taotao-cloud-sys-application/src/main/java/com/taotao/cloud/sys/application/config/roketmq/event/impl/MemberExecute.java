@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.infrastructure.util;
+package com.taotao.cloud.sys.application.config.roketmq.event.impl;
 
+import com.taotao.cloud.member.biz.model.entity.Member;
+import com.taotao.cloud.member.biz.roketmq.event.MemberLoginEvent;
+import com.taotao.cloud.member.biz.service.business.IMemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-/**
- * 查询跑龙套
- *
- * @author shuigedeng
- * @version 2023.01
- * @since 2023-02-01 14:05:22
- */
-public class QueryUtils {
+/** 会员自身业务 */
+@Service
+public class MemberExecute implements MemberLoginEvent {
 
+    @Autowired
+    private IMemberService memberService;
+
+    @Override
+    public void memberLogin(Member member) {
+        memberService.updateMemberLoginTime(member.getId());
+    }
 }
