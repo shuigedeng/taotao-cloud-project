@@ -34,16 +34,17 @@ public class DictFacade  implements IFeignDictApi {
 	@Limit(key = "limitTest", period = 10, count = 3)
 	@SentinelResource("findByCode")
 	public FeignDictResponse findByCode(@RequestParam(value = "code") String code) {
-		if ("sd".equals(code)) {
-			throw new BusinessException("我出错了");
-			// try {
-			//	Thread.sleep(100000000000L);
-			// } catch (InterruptedException e) {
-			//	throw new RuntimeException(e);
-			// }
-		}
-		Dict dict = service().findByCode(code);
-		return DictConvert.INSTANCE.convert(dict);
+//		if ("sd".equals(code)) {
+//			throw new BusinessException("我出错了");
+//			// try {
+//			//	Thread.sleep(100000000000L);
+//			// } catch (InterruptedException e) {
+//			//	throw new RuntimeException(e);
+//			// }
+//		}
+//		Dict dict = service().findByCode(code);
+//		return DictConvert.INSTANCE.convert(dict);
+		return null;
 	}
 
 	@Override
@@ -62,18 +63,18 @@ public class DictFacade  implements IFeignDictApi {
 	@GetMapping("/test")
 	public FeignDictResponse test(@RequestParam(value = "id") String id) {
 		LogUtils.info("sldfkslfdjalsdfkjalsfdjl");
-		Dict dict = service().findByCode(id);
-
-		Future<Dict> asyncByCode = service().findAsyncByCode(id);
-
-		Dict dict1;
-		try {
-			dict1 = asyncByCode.get();
-		} catch (InterruptedException | ExecutionException e) {
-			throw new RuntimeException(e);
-		}
-
-		LogUtils.info("我在等待你");
+//		Dict dict = service().findByCode(id);
+//
+//		Future<Dict> asyncByCode = service().findAsyncByCode(id);
+//
+//		Dict dict1;
+//		try {
+//			dict1 = asyncByCode.get();
+//		} catch (InterruptedException | ExecutionException e) {
+//			throw new RuntimeException(e);
+//		}
+//
+//		LogUtils.info("我在等待你");
 
 		return null;
 		// return IDictMapStruct.INSTANCE.dictToFeignDictRes(dict);

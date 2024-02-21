@@ -38,6 +38,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-domain")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-infrastructure")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-common")
 }
 
 
