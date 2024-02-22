@@ -1,0 +1,20 @@
+/**
+ * 这一层是一个适配层，主要负责外部系统和内部业务系统的适配，这一层的主要作用就是外部系统和内部系统的适配和协议转换。
+ *
+ * 本层调用外部服务，转换外部DTO成为本项目可以理解对象。
+ */
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-common")
+
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-store:taotao-cloud-store-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-promotion:taotao-cloud-promotion-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-operation:taotao-cloud-operation-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-distribution:taotao-cloud-distribution-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
+//    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-stock:taotao-cloud-stock-api")
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+}

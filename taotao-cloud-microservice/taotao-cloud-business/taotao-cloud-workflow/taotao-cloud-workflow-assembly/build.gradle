@@ -1,0 +1,10 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-application")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-adapter")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-integration")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-infrastructure")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-common")
+}
+

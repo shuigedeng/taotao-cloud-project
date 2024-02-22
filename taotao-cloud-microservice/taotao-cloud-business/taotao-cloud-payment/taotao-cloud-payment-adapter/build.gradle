@@ -38,6 +38,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-domain")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-infrastructure")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-common")
 }
 
 

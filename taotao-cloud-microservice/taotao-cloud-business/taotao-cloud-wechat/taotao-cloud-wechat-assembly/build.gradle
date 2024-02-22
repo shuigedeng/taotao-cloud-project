@@ -1,0 +1,10 @@
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-api")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-application")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-adapter")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-domain")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-integration")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-infrastructure")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-common")
+}
+

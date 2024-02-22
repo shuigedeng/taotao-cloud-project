@@ -5,5 +5,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-domain")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-integration")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-infrastructure")
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-common")
 }
 

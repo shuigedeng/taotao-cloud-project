@@ -17,4 +17,5 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-domain")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-infrastructure")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-common")
 }
