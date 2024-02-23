@@ -103,7 +103,7 @@ dependencyResolutionManagement {
     }
 }
 
-def oneLayerProjects = ['scala', 'netty', 'python', 'demo', 'node', 'go']
+def oneLayerProjects = ['scala', 'python']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }

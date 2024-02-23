@@ -72,11 +72,7 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-jose"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    //todo 此处升级高版本后不需要排除
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-authorization-server") {
-        exclude group: "org.springframework.security", module: "spring-security-oauth2-authorization-server"
-    }
-    implementation "org.springframework.security:spring-security-oauth2-authorization-server:1.2.2"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
 
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
