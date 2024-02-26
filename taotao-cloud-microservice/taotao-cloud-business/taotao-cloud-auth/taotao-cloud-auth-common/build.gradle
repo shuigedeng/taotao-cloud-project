@@ -2,4 +2,5 @@ description = "系统中心api"
 
 dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-common"
+    api "io.github.shuigedeng:taotao-cloud-starter-ddd"
 }

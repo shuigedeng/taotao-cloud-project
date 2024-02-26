@@ -10,6 +10,6 @@ dependencies {
         exclude group: "org.eclipse.jetty.aggregate", module: "*"
     }
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.46"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.47"
 }
 

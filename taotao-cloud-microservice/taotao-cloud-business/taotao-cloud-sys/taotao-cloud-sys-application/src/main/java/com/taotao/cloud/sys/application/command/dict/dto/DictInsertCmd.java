@@ -18,7 +18,7 @@
 package com.taotao.cloud.sys.application.command.dict.dto;
 
 import com.taotao.cloud.common.model.CommonCommand;
-import com.taotao.cloud.sys.application.command.dict.dto.clientobject.DictCO;
+import com.taotao.cloud.sys.application.command.dict.dto.com.taotao.cloud.payment.biz.daxpay.single.admin.DictCO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
