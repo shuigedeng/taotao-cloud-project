@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.sys.infrastructure.persistent.dept.converter;
 
+import com.taotao.cloud.sys.domain.dept.entity.DeptEntity;
+import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -28,9 +30,12 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-28 13:39:18
  */
 @Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface DeptConvert {
+public interface DeptConvertor {
 
-    /** 实例 */
-    DeptConvert INSTANCE = Mappers.getMapper(DeptConvert.class);
+	/**
+	 * 实例
+	 */
+	DeptConvertor INSTANCE = Mappers.getMapper(DeptConvertor.class);
 
+	public DeptPO convert(DeptEntity deptEntity);
 }

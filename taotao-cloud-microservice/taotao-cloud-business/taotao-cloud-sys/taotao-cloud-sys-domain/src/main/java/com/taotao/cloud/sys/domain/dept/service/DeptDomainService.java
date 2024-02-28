@@ -16,51 +16,29 @@
 
 package com.taotao.cloud.sys.domain.dept.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.sys.domain.dept.entity.DeptEntity;
 
 public interface DeptDomainService {
 
 	/**
-	 * 新增字典.
+	 * 新增部门.
 	 *
-	 * @param deptEntity 字典对象
-	 * @return 新增结果
+	 * @param dept 部门对象
 	 */
-	Boolean insert(DeptEntity deptEntity);
+	void create(DeptEntity dept);
 
 	/**
-	 * 修改字典.
+	 * 修改部门.
 	 *
-	 * @param deptEntity 字典对象
-	 * @return 修改结果
+	 * @param dept 部门对象
 	 */
-	Boolean update(DeptEntity deptEntity);
+	void modify(DeptEntity dept);
 
 	/**
-	 * 根据ID查看字典.
+	 * 根据ID删除部门.
 	 *
-	 * @param id ID
-	 * @return 字典
+	 * @param ids IDS
 	 */
-	DeptEntity getById(Long id);
-
-	/**
-	 * 根据ID删除字典.
-	 *
-	 * @param id ID
-	 * @return 删除结果
-	 */
-	Boolean deleteById(Long id);
-
-	/**
-	 * 查询字典列表.
-	 *
-	 * @param deptEntity      字典对象
-	 * @param pageQuery 分页参数
-	 * @return 字典列表
-	 */
-	IPage<DeptEntity> list(DeptEntity deptEntity, PageQuery pageQuery);
+	void remove(Long[] ids);
 
 }

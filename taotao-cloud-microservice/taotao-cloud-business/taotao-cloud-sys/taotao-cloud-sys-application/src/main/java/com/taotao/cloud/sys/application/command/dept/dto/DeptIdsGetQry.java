@@ -7,16 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "DeptDeleteCmd", description = "删除部门命令请求")
-public class DeptDeleteCmd extends CommonCommand {
+@Schema(name = "DeptIdsGetQry", description = "查看部门IDS命令请求")
+public class DeptIdsGetQry extends CommonCommand {
 
-	@Schema(name = "id", description = "ID")
-	private Long id;
+	@Schema(name = "roleId", description = "角色ID")
+	private Long roleId;
 
 }

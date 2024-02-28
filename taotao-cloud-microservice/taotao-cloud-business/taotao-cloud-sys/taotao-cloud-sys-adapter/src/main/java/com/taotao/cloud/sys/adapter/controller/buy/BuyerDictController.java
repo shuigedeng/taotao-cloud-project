@@ -17,10 +17,7 @@
 package com.taotao.cloud.sys.adapter.controller.buy;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
-import com.taotao.cloud.sys.api.model.query.DictQuery;
-import com.taotao.cloud.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -46,37 +43,38 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "pc端-字典API", description = "pc端-字典API")
 public class BuyerDictController {
 
-    // @Autowired
-    // private ProducerService producerService;
+	// @Autowired
+	// private ProducerService producerService;
 
-    @NotAuth
-    @GetMapping("/add/{type}")
-    @Operation( summary="通过code查询所有字典列表")
-    public Result<Boolean> add(@PathVariable String type) throws SQLIntegrityConstraintViolationException {
-        return Result.success(true);
-    }
-
-    @NotAuth
-    @GetMapping("/add1")
-    @Operation(summary="通过code查询所有字典列表")
-    public Result<Boolean> add1() {
+	@NotAuth
+	@GetMapping("/add/{type}")
+	@Operation(summary = "通过code查询所有字典列表")
+	public Result<Boolean> add(@PathVariable String type)
+		throws SQLIntegrityConstraintViolationException {
 		return Result.success(true);
-    }
+	}
 
-    @GetMapping("/test/codexxxxx")
-    @Operation(summary="通过code查询所有字典列表")
-    public Result<Boolean> testCode(@RequestParam String code) {
-        // try {
-        //	producerService.sendStringMsg();
-        //	producerService.sendClassMsg();
-        // } catch (PulsarClientException e) {
-        //	LogUtils.error(e);
-        // }
+	@NotAuth
+	@GetMapping("/add1")
+	@Operation(summary = "通过code查询所有字典列表")
+	public Result<Boolean> add1() {
+		return Result.success(true);
+	}
+
+	@GetMapping("/test/codexxxxx")
+	@Operation(summary = "通过code查询所有字典列表")
+	public Result<Boolean> testCode(@RequestParam String code) {
+		// try {
+		//	producerService.sendStringMsg();
+		//	producerService.sendClassMsg();
+		// } catch (PulsarClientException e) {
+		//	LogUtils.error(e);
+		// }
 
 //        Dict byCode = service().findByCode(code);
 //        LogUtils.info(String.valueOf(byCode));
-        return Result.success(true);
-    }
+		return Result.success(true);
+	}
 
 //    @NotAuth
 //    @GetMapping("/testMybatisQueryStructure")
