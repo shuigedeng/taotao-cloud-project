@@ -305,6 +305,9 @@ management:
         enabled: true
         #pushgateway:
         #  base-url:
+  wavefront:
+    api-token: xxxxxxxxxxxxxxxx
+    api-token-type: wavefront_api_token
   zipkin:
     tracing:
       connect-timeout: 1

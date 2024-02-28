@@ -42,7 +42,7 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         //指定protoc运行插件
         plugins {
             grpc {
-                artifact = "io.grpc:protoc-gen-grpc-java:1.61.1"
+                artifact = "io.grpc:protoc-gen-grpc-java:1.62.2"
             }
             //javalite {
             //    // The codegen for lite comes as a separate artifact
