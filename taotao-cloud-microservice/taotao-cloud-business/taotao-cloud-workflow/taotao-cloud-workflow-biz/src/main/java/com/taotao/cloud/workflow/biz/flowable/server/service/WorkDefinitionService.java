@@ -22,7 +22,7 @@ import org.laokou.flowable.client.vo.DefinitionVO;
 import org.laokou.flowable.client.vo.PageVO;
 
 /**
- * @author laokou
+ *
  */
 public interface WorkDefinitionService {
 

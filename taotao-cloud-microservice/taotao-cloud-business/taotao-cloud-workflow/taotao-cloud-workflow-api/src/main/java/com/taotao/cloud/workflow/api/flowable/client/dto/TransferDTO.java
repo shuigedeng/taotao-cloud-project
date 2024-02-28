@@ -23,7 +23,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * @author laokou
+ *
  */
 @Data
 public class TransferDTO extends ResolveDTO implements Serializable {

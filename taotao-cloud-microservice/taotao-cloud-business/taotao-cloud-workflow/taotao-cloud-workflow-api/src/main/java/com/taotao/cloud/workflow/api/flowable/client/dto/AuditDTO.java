@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * @author laokou
+ * 
  */
 @Data
 public class AuditDTO implements Serializable {

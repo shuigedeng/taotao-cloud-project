@@ -21,7 +21,7 @@ import lombok.Data;
 import java.io.Serial;
 
 /**
- * @author laokou
+ * 
  */
 @Data
 public class DelegateDTO extends TransferDTO {

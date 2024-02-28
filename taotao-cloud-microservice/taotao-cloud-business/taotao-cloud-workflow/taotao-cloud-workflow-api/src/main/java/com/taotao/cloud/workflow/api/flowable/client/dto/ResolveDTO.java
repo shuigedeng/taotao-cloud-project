@@ -22,7 +22,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author laokou
+ * 
  */
 @Data
 public class ResolveDTO implements Serializable {

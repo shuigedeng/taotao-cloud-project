@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author laokou
+ *
  */
 @Data
 public class TaskVO implements Serializable {

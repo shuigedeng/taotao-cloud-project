@@ -23,7 +23,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * @author laokou
+ * 
  */
 @Data
 public class DefinitionDTO implements Serializable {

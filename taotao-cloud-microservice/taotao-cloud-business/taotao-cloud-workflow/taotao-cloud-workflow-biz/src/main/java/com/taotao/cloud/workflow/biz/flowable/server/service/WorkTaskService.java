@@ -23,7 +23,7 @@ import org.laokou.flowable.client.vo.PageVO;
 import org.laokou.flowable.client.vo.TaskVO;
 
 /**
- * @author laokou
+ *
  */
 public interface WorkTaskService {
 

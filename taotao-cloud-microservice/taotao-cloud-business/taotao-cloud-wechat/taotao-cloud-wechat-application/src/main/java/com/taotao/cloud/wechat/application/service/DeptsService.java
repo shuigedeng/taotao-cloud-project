@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 部门管理.
  *
- * @author laokou
+ *
  */
 public interface DeptsService {
 

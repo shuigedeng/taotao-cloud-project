@@ -36,7 +36,7 @@ import org.flowable.image.util.ReflectUtil;
 import org.laokou.common.core.utils.BigDecimalUtil;
 
 /**
- * @author laokou
+ *
  */
 public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
 

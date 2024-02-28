@@ -24,7 +24,7 @@ import org.laokou.flowable.client.vo.TaskVO;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author laokou
+ *
  */
 @Mapper
 @Repository

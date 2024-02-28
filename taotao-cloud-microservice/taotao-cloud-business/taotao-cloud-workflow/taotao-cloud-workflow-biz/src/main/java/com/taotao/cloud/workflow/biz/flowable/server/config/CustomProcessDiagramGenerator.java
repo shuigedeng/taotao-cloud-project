@@ -28,7 +28,7 @@ import org.flowable.image.impl.DefaultProcessDiagramGenerator;
 import org.laokou.common.core.utils.BigDecimalUtil;
 
 /**
- * @author laokou
+ * 
  */
 public class CustomProcessDiagramGenerator extends DefaultProcessDiagramGenerator {
     @Override

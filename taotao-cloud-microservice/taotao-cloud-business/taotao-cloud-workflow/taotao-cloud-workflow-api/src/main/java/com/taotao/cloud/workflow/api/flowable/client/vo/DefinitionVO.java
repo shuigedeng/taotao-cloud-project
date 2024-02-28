@@ -22,7 +22,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * @author laokou
+ *
  */
 @Data
 public class DefinitionVO implements Serializable {
