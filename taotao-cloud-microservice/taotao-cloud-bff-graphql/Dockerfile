@@ -2,16 +2,16 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-bff-graphql-2024.03.jar ./
+ADD ./build/libs/taotao-cloud-bff-graphql-2024.04.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-bff-graphql-2024.03.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-bff-graphql-2024.04.jar extract
 
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:skywalking8.16.0-pyroscope0.11.5-jre-font
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.10.220:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-bff-graphql
-ARG APP_VERSION=2024.03
+ARG APP_VERSION=2024.04
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33333
 ARG APP_PRROFILES=dev
