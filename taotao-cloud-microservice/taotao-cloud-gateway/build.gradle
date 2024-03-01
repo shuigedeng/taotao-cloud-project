@@ -66,6 +66,12 @@ configurations {
     all {
         resolutionStrategy {
             force 'net.minidev:json-smart:2.5.0'
+
+            //todo 临时处理 用高版本有问题
+            force 'io.zipkin.reporter2:zipkin-sender-urlconnection:2.16.3'
+            force 'io.zipkin.zipkin2:zipkin:2.23.2'
+            force 'io.zipkin.reporter2:zipkin-reporter:2.16.3'
+            force 'io.opentelemetry:opentelemetry-exporter-zipkin:1.31.0'
         }
 
         exclude group: "org.springframework", module: "spring-webmvc"
@@ -73,9 +79,9 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
         exclude group: "com.querydsl", module: "querydsl-apt"
+        exclude group: "commons-logging", module: "commons-logging"
     }
 }
-
 
 mainClassName = "com.taotao.cloud.gateway.TaoTaoCloudGatewayApplication"
 description = "网关中心"

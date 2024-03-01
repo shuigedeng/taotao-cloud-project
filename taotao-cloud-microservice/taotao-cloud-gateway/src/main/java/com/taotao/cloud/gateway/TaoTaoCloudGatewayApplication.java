@@ -19,7 +19,6 @@ package com.taotao.cloud.gateway;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import reactor.netty.ReactorNetty;
@@ -29,6 +28,9 @@ import reactor.netty.ReactorNetty;
  *
  * <p>http://127.0.0.1:33333/swagger-ui.html</p>
  * <p>http://127.0.0.1:33333/doc.html</p>
+ * <p>
+ *
+ * 启动问题查找 org.springframework.context.support.AbstractApplicationContext.refresh方法
  *
  * @author shuigedeng
  * @version 2022.03
@@ -48,8 +50,7 @@ public class TaoTaoCloudGatewayApplication {
 		//System.setProperty(ReactorNetty.IO_WORKER_COUNT, "1");
 
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
-		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class).run( args);
-
+		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class).run(args);
 
 		// 获取本地 ip 地址
 		//String ip = InetAddress.getLocalHost().getHostAddress();
