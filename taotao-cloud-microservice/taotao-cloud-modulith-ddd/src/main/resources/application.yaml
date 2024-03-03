@@ -1,0 +1,5 @@
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    defer-datasource-initialization: true

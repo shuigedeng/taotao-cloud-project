@@ -67,7 +67,9 @@ spring:
         #    group: SPRING_CLOUD_EXAMPLE_GROUP
         #    refresh: true
     sentinel:
+      #Sentinel自动化配置是否生效
       enabled: true
+      #是否提前触发 Sentinel 初始化
       eager: true
       datasource:
         #流控 名称随意
@@ -127,21 +129,47 @@ spring:
             data-type: json
             rule-type: param-flow
       transport:
+        #Sentinel 控制台地址（可以配置host:port,这样就不用单独配置port）
         dashboard: 127.0.0.1:8858
+        #应用与Sentinel控制台交互的端口，应用本地会起一个该端口占用的HttpServer（可以不配置）
         port: 8712
+        #应用与Sentinel控制台的心跳间隔时间
+        heartbeatIntervalMs: 5000
+        #此配置的客户端IP将被注册到 Sentinel Server 端
+        #clientIp:
       metric:
+        #Sentinel metric 单个文件的大小
         file-single-size: 1024 * 1024 * 50
+        #Sentinel metric 总文件数量
         file-total-count: 10
+        #metric文件字符集
+        #charset: 	UTF-8
       flow:
+        #github.com/alibaba/Sen… %E5%86%B7%E5%90%AF%E5%8A%A8[冷启动因子]
         cold-factor: 3
       log:
+        #Sentinel 日志文件所在的目录
         dir: ${user.home}/logs/${spring.application.name}/sentinel
+        #Sentinel 日志文件名是否需要带上pid
         switch-pid: false
       scg:
         fallback:
+          #Spring Cloud Gateway 熔断后的响应模式(选择 redirect or response)
           mode: response
+          #Spring Cloud Gateway 响应模式为 'response' 模式对应的响应码
           response-status: 200
+          #Spring Cloud Gateway 响应模式为 'response' 模式对应的响应内容
           response-body: "{'data': null, 'code': 500,'message': '访问频繁,进入系统熔断'}"
+          #Spring Cloud Gateway 响应模式为 'response' 模式对应的 content-type
+          #content-type: application/json
+      #filter:
+        #Enable to instance CommonFilter
+        #enabled: true
+        #数据类型是数组。表示Servlet Filter的url pattern集合
+        #url-patterns: 	/*
+        #Servlet Filter的加载顺序。Starter内部会构造这个filter
+        #order: Integer.MIN_VALUE
+
 
 logging:
   file:
