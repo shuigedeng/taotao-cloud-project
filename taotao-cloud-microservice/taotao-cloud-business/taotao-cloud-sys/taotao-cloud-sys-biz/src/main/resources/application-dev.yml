@@ -634,18 +634,18 @@ spring:
     username: root
     password: 123456
     hikari:
-      auto-commit: true # 从池返回的连接的默认自动提交行为 默认true
-      connection-timeout: 350000 # 客户端等待连接池的最大毫秒数
-      idle-timeout: 180000 # 允许连接在连接池中空闲的最大时间（毫秒）
+      auto-commit: true # 从池返回的连接的默认自动提交行为 默认true 是否自动提交，默认true
+      connection-timeout: 350000 # 客户端等待连接池的最大毫秒数 从连接池获取连接的超时时间，默认30s
+      idle-timeout: 180000 # 允许连接在连接池中空闲的最大时间（毫秒） 连接空闲时间，当最小连接数 < 最大连接数生效。默认10min
       login-timeout: 5
-      validation-timeout: 3000   # 连接测试活动的最大时间量
-      max-lifetime: 1800000  # 池中关闭连接后的最长生命周期
-      read-only: false
-      connection-test-query: SELECT 1
-      maximum-pool-size: 200
-      minimum-idle: 10
+      validation-timeout: 3000   # 连接测试活动的最大时间量 检验连接是否有效的超时时间，默认5s
+      max-lifetime: 1800000  # 池中关闭连接后的最长生命周期 连接最大存活时间，默认30min。需要小于数据库wait_timeout，超过这个时间未使用连接都会关闭。
+      read-only: false #是否只读，默认false
+      connection-test-query: SELECT 1 #检测连接是否可用的sql,如果为空使用ping，否则使用这个sql
+      maximum-pool-size: 200 #最大连接数，默认10
+      minimum-idle: 10 #//最小连接数，默认10
       pool-name: DatebookHikariCP
-      register-mbeans: true
+      register-mbeans: true #是否注册MBean
       data-source-properties:
         cachePrepStmts: true
         prepStmtCacheSize: 250

@@ -4,7 +4,7 @@ import com.taotao.cloud.modulith.borrow.application.CirculationDesk;
 import com.taotao.cloud.modulith.borrow.application.HoldDto;
 import com.taotao.cloud.modulith.borrow.domain.Book;
 import com.taotao.cloud.modulith.borrow.domain.Hold;
-import example.borrow.domain.Patron.PatronId;
+import com.taotao.cloud.modulith.borrow.domain.Patron.PatronId;
 import java.time.LocalDate;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

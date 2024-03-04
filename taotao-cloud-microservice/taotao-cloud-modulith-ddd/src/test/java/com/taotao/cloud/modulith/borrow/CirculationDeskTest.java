@@ -1,16 +1,16 @@
 package com.taotao.cloud.modulith.borrow;
 
-import static example.borrow.domain.Book.BookStatus.AVAILABLE;
-import static example.borrow.domain.Book.BookStatus.ON_HOLD;
-
-import example.borrow.application.CirculationDesk;
-import example.borrow.domain.Book;
-import example.borrow.domain.BookPlacedOnHold;
-import example.borrow.domain.BookRepository;
-import example.borrow.domain.Hold;
-import example.borrow.domain.HoldEventPublisher;
-import example.borrow.domain.HoldRepository;
-import example.borrow.domain.Patron.PatronId;
+import static com.taotao.cloud.modulith.borrow.domain.Book.BookStatus.AVAILABLE;
+import static com.taotao.cloud.modulith.borrow.domain.Book.BookStatus.ON_HOLD;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.taotao.cloud.modulith.borrow.application.CirculationDesk;
+import com.taotao.cloud.modulith.borrow.domain.Book;
+import com.taotao.cloud.modulith.borrow.domain.BookPlacedOnHold;
+import com.taotao.cloud.modulith.borrow.domain.BookRepository;
+import com.taotao.cloud.modulith.borrow.domain.Hold;
+import com.taotao.cloud.modulith.borrow.domain.HoldEventPublisher;
+import com.taotao.cloud.modulith.borrow.domain.HoldRepository;
+import com.taotao.cloud.modulith.borrow.domain.Patron.PatronId;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;

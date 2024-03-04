@@ -2,7 +2,6 @@ package com.taotao.cloud.modulith.catalog.ui;
 
 import com.taotao.cloud.modulith.catalog.application.BookDto;
 import com.taotao.cloud.modulith.catalog.application.CatalogManagement;
-import example.catalog.domain.CatalogBook.Barcode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

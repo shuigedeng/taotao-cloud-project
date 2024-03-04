@@ -46,7 +46,6 @@ dependencies {
     implementation 'org.jmolecules.integrations:jmolecules-jpa:0.19.0'
     implementation 'org.jmolecules.integrations:jmolecules-spring:0.19.0'
     implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.19.0'
-    implementation 'org.jmolecules.integrations:jmolecules-spring-data-jpa:0.19.0'
     testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.19.0'
     testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.19.0'
 

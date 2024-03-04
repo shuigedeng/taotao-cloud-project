@@ -1,6 +1,6 @@
 package com.taotao.cloud.modulith.borrow.domain;
 
-import example.borrow.domain.Patron.PatronId;
+import com.taotao.cloud.modulith.borrow.domain.Patron.PatronId;
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.function.UnaryOperator;

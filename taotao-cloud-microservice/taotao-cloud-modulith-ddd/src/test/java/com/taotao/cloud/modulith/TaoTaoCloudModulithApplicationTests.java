@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
 
-class SpringModulithTests {
+class TaoTaoCloudModulithApplicationTests {
 
-    ApplicationModules modules = ApplicationModules.of(LibraryApplication.class);
+    ApplicationModules modules = ApplicationModules.of(TaoTaoCloudModulithApplication.class);
 
     @Test
     void verifyPackageConformity() {

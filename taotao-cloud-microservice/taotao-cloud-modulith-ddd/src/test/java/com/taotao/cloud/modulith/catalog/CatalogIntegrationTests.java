@@ -1,8 +1,11 @@
 package com.taotao.cloud.modulith.catalog;
 
-import example.catalog.application.CatalogManagement;
-import example.catalog.domain.CatalogBook.Barcode;
-import example.catalog.domain.CatalogRepository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.taotao.cloud.modulith.catalog.application.CatalogManagement;
+import com.taotao.cloud.modulith.catalog.domain.CatalogBook.Barcode;
+import com.taotao.cloud.modulith.catalog.domain.CatalogRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.modulith.test.ApplicationModuleTest;
@@ -21,10 +24,10 @@ class CatalogIntegrationTests {
     }
 
     @Autowired
-    CatalogManagement books;
+	CatalogManagement books;
 
     @Autowired
-    CatalogRepository repository;
+	CatalogRepository repository;
 
     @Test
     void shouldAddBookToInventory(Scenario scenario) {
