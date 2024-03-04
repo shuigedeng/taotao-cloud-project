@@ -29,12 +29,12 @@ public class CatalogBook {
 
     private String title;
 
-    @Embedded
+    //@Embedded
     private Barcode catalogNumber;
 
     private String isbn;
 
-    @Embedded
+    //@Embedded
     @AttributeOverride(name = "name", column = @Column(name = "author"))
     private Author author;
 

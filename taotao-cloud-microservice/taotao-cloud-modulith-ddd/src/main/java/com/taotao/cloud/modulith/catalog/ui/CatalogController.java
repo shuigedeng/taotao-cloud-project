@@ -2,6 +2,7 @@ package com.taotao.cloud.modulith.catalog.ui;
 
 import com.taotao.cloud.modulith.catalog.application.BookDto;
 import com.taotao.cloud.modulith.catalog.application.CatalogManagement;
+import com.taotao.cloud.modulith.catalog.domain.CatalogBook.Barcode;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ class CatalogController {
 
     @PostMapping("/catalog/books")
     ResponseEntity<BookDto> addBookToInventory(@RequestBody AddBookRequest request) {
-        var bookDto = books.addToCatalog(request.title(), new Barcode(request.catalogNumber()), request.isbn(), request.author());
+		BookDto bookDto = books.addToCatalog(request.title(), new Barcode(request.catalogNumber()), request.isbn(), request.author());
         return ResponseEntity.ok(bookDto);
     }
 

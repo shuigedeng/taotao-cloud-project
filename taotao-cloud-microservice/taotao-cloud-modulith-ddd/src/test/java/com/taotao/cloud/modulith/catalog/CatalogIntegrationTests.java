@@ -3,9 +3,11 @@ package com.taotao.cloud.modulith.catalog;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.taotao.cloud.modulith.catalog.application.BookDto;
 import com.taotao.cloud.modulith.catalog.application.CatalogManagement;
 import com.taotao.cloud.modulith.catalog.domain.CatalogBook.Barcode;
 import com.taotao.cloud.modulith.catalog.domain.CatalogRepository;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.modulith.test.ApplicationModuleTest;
@@ -45,7 +47,7 @@ class CatalogIntegrationTests {
 
     @Test
     void shouldListBooks() {
-        var issuedBooks = books.fetchBooks();
+		List<BookDto> issuedBooks = books.fetchBooks();
         assertThat(issuedBooks).hasSizeBetween(3, 4);
     }
 }

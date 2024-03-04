@@ -48,7 +48,7 @@ class CirculationDeskIT {
 
 	@Test
 	void patronCanPlaceHold(Scenario scenario) {
-		var command = new Hold.PlaceHold(new Book.Barcode("13268510"), LocalDate.now(),
+		Hold.PlaceHold command = new Hold.PlaceHold(new Book.Barcode("13268510"), LocalDate.now(),
 			new PatronId(UUID.randomUUID()));
 		scenario.stimulate(() -> circulationDesk.placeHold(command))
 			.andWaitForEventOfType(BookPlacedOnHold.class)
@@ -58,7 +58,7 @@ class CirculationDeskIT {
 
 	@Test
 	void bookStatusIsUpdatedWhenPlacedOnHold(Scenario scenario) {
-		var event = new BookPlacedOnHold(UUID.randomUUID(), "64321704", LocalDate.now());
+		BookPlacedOnHold event = new BookPlacedOnHold(UUID.randomUUID(), "64321704", LocalDate.now());
 		scenario.publish(() -> event)
 			.customize(it -> it.atMost(Duration.ofMillis(200)))
 			.andWaitForStateChange(() -> books.findByBarcode("64321704"))

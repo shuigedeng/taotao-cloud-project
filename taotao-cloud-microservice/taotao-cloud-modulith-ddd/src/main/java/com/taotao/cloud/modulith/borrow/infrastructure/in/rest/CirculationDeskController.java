@@ -21,22 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CirculationDeskController {
 
-    private final CirculationDesk circulationDesk;
+	private final CirculationDesk circulationDesk;
 
-    @PostMapping("/borrow/holds")
-    ResponseEntity<HoldDto> holdBook(@RequestBody HoldRequest request) {
-        var command = new Hold.PlaceHold(new Book.Barcode(request.barcode()), LocalDate.now(), new PatronId(request.patronId()));
-        var holdDto = circulationDesk.placeHold(command);
-        return ResponseEntity.ok(holdDto);
-    }
+	@PostMapping("/borrow/holds")
+	ResponseEntity<HoldDto> holdBook(@RequestBody HoldRequest request) {
+		Hold.PlaceHold command = new Hold.PlaceHold(new Book.Barcode(request.barcode()),
+			LocalDate.now(), new PatronId(request.patronId()));
+		HoldDto holdDto = circulationDesk.placeHold(command);
+		return ResponseEntity.ok(holdDto);
+	}
 
-    @GetMapping("/borrow/holds/{id}")
-    ResponseEntity<HoldDto> viewSingleHold(@PathVariable("id") UUID holdId) {
-        return circulationDesk.locate(holdId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+	@GetMapping("/borrow/holds/{id}")
+	ResponseEntity<HoldDto> viewSingleHold(@PathVariable("id") UUID holdId) {
+		return circulationDesk.locate(holdId)
+			.map(ResponseEntity::ok)
+			.orElse(ResponseEntity.notFound().build());
+	}
 
-    record HoldRequest(String barcode, UUID patronId) {
-    }
+	record HoldRequest(String barcode, UUID patronId) {
+
+	}
 }

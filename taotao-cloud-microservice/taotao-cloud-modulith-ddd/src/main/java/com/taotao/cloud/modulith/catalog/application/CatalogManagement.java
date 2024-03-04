@@ -25,8 +25,8 @@ public class CatalogManagement {
      * Add a new book to the library.
      */
     public BookDto addToCatalog(String title, CatalogBook.Barcode catalogNumber, String isbn, String authorName) {
-        var book = new CatalogBook(title, catalogNumber, isbn, new CatalogBook.Author(authorName));
-        var dto = mapper.toDto(catalogRepository.save(book));
+		CatalogBook book = new CatalogBook(title, catalogNumber, isbn, new CatalogBook.Author(authorName));
+		BookDto dto = mapper.toDto(catalogRepository.save(book));
         events.publishEvent(new BookAddedToCatalog(dto.title(), dto.catalogNumber().barcode(), dto.isbn(), dto.author().name()));
         return dto;
     }

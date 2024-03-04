@@ -4,6 +4,7 @@ import static com.taotao.cloud.modulith.borrow.domain.Book.BookStatus.AVAILABLE;
 import static com.taotao.cloud.modulith.borrow.domain.Book.BookStatus.ON_HOLD;
 import static org.assertj.core.api.Assertions.assertThat;
 import com.taotao.cloud.modulith.borrow.application.CirculationDesk;
+import com.taotao.cloud.modulith.borrow.application.HoldDto;
 import com.taotao.cloud.modulith.borrow.domain.Book;
 import com.taotao.cloud.modulith.borrow.domain.BookPlacedOnHold;
 import com.taotao.cloud.modulith.borrow.domain.BookRepository;
@@ -38,19 +39,19 @@ class CirculationDeskTest {
 
     @Test
     void patronCanPlaceHold() {
-        var command = new Hold.PlaceHold(new Book.Barcode("12345"), LocalDate.now(), new PatronId(UUID.randomUUID()));
-        var holdDto = circulationDesk.placeHold(command);
+		Hold.PlaceHold command = new Hold.PlaceHold(new Book.Barcode("12345"), LocalDate.now(), new PatronId(UUID.randomUUID()));
+		HoldDto holdDto = circulationDesk.placeHold(command);
         assertThat(holdDto.getBookBarcode()).isEqualTo("12345");
         assertThat(holdDto.getDateOfHold()).isNotNull();
     }
 
     @Test
     void bookStatusUpdatedWhenPlacedOnHold() {
-        var command = new Hold.PlaceHold(new Book.Barcode("12345"), LocalDate.now(), new PatronId(UUID.randomUUID()));
-        var hold = Hold.placeHold(command);
+		Hold.PlaceHold command = new Hold.PlaceHold(new Book.Barcode("12345"), LocalDate.now(), new PatronId(UUID.randomUUID()));
+		Hold hold = Hold.placeHold(command);
         circulationDesk.handle(new BookPlacedOnHold(hold.getId().id(), hold.getOnBook().barcode(), hold.getDateOfHold()));
         //noinspection OptionalGetWithoutIsPresent
-        var book = bookRepository.findByBarcode("12345").get();
+		Book book = bookRepository.findByBarcode("12345").get();
         assertThat(book.getStatus()).isEqualTo(ON_HOLD);
     }
 
