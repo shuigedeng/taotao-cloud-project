@@ -33,7 +33,7 @@
 ## Fire up our Spring Boot Native app by default
 #CMD [ "sh", "-c", "./spring-native-demo -Dserver.port=$PORT" ]
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64 as builder
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64 as builder
 
 WORKDIR /root
 
@@ -42,8 +42,8 @@ ADD ./build/libs/taotao-clouddata-analysis-2024.04.jar ./
 RUN java -Djarmode=layertools -jar taotao-clouddata-analysis-2024.04.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk17:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:9.1.0
 
 ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud

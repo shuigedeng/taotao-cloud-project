@@ -62,9 +62,9 @@ USER root
 
 # 添加skywalking agent
 #RUN mkdir /skywalking
-#RUN wget https://dlcdn.apache.org/skywalking/java-agent/9.0.0/apache-skywalking-java-agent-9.0.0.tgz \
-#    && tar apache-skywalking-java-agent-9.0.0.tgz -C /skywalking/agent \
-#    && rm -rf apache-skywalking-java-agent-9.0.0.tgz
+#RUN wget https://dlcdn.apache.org/skywalking/java-agent/9.1.0/apache-skywalking-java-agent-9.1.0.tgz \
+#    && tar apache-skywalking-java-agent-9.1.0.tgz -C /skywalking/agent \
+#    && rm -rf apache-skywalking-java-agent-9.1.0.tgz
 ## 添加pyroscope agent
 ##wget https://github.com/grafana/pyroscope-java/releases/download/v0.12.1/pyroscope.jar
 #RUN mkdir -p /pyroscope/agent
@@ -74,7 +74,7 @@ USER root
 
 #wget https://dlcdn.apache.org/skywalking/java-agent/9.0.0/apache-skywalking-java-agent-9.0.0.tgz
 RUN mkdir /skywalking
-#wget https://github.com/grafana/pyroscope-java/releases/download/v0.11.5/pyroscope.jar
+#wget https://github.com/grafana/pyroscope-java/releases/download/v0.13.0/pyroscope.jar
 RUN mkdir /pyroscope
 COPY ./skywalking-agent /skywalking/agent
 COPY ./pyroscope-agent /pyroscope/agent

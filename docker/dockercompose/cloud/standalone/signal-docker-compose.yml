@@ -143,7 +143,7 @@ services:
         ipv4_address: 172.11.0.15
 
   nacos:
-    image: nacos/nacos-server:v2.1.1
+    image: nacos/nacos-server:v2.3.0
     restart: always
     container_name: nacos
     privileged: true
@@ -158,7 +158,7 @@ services:
       MYSQL_SERVICE_PORT: 3306
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.1
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.3.0
       MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
       JVM_XMS: 256m
       JVM_XMX: 512m
@@ -172,7 +172,7 @@ services:
 
   seata:
     container_name: seata
-    image: seataio/seata-server:1.5.1
+    image: seataio/seata-server:2.0.0
     restart: always
     ports:
       - "8091:8091"
@@ -313,7 +313,7 @@ services:
         ipv4_address: 172.11.0.30
 
   sentinel-dashboard:
-    image: dreamkaylee/sentinel-dashboard:1.8.5
+    image: dreamkaylee/sentinel-dashboard:1.8.7
     container_name: sentinel-dashboard
     ports:
       - "8858:8858"
@@ -322,7 +322,7 @@ services:
         ipv4_address: 172.11.0.31
 
   rocketmq-namesrv:
-    image: apache/rocketmq:4.9.4
+    image: apache/rocketmq:5.1.0
     container_name: rocketmq-namesrv
     restart: always
     ports:
@@ -337,7 +337,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.32
   rocketmq-broker:
-    image: apache/rocketmq:4.9.4
+    image: apache/rocketmq:5.1.0
     container_name: rocketmq-broker
     restart: always
     ports:
@@ -355,7 +355,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.33
   rocketmq-broker1:
-    image: apache/rocketmq:4.9.4
+    image: apache/rocketmq:5.1.0
     container_name: rocketmq-broker1
     restart: always
     ports:
@@ -364,7 +364,7 @@ services:
       - "20912:10912"
     environment:
       JAVA_OPT_EXT: -server -Xms512M -Xmx512M -Xmn256m
-    command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.4/conf/broker.conf
+    command: sh mqbroker -c /home/rocketmq/rocketmq-5.1.0/conf/broker.conf
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.100
@@ -517,7 +517,7 @@ services:
         ipv4_address: 172.11.0.42
 
   canal-server:
-    image: canal/canal-server:v1.1.6
+    image: canal/canal-server:v1.1.7
     container_name: canal-server
     ports:
       - "11111:11111"
@@ -540,7 +540,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.43
   canal-admin:
-    image: canal/canal-admin:v1.1.6
+    image: canal/canal-admin:v1.1.7
     container_name: canal-admin
     ports:
       - "8089:8089"

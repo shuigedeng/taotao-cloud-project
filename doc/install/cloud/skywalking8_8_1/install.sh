@@ -6,10 +6,10 @@ cd /opt/soft/
 
 
 # 1、官网下载skywalking服务端
-wget https://mirrors.bfsu.edu.cn/apache/skywalking/8.8.1/apache-skywalking-apm-8.8.1.tar.gz
+wget https://mirrors.bfsu.edu.cn/apache/skywalking/9.1.0/apache-skywalking-apm-9.1.0.tar.gz
 
 # 2、上传解压 3、重命名文件夹
-tar -zxvf apache-skywalking-apm-8.8.1.tar.gz -C /opt/cloud
+tar -zxvf apache-skywalking-apm-9.1.0.tar.gz -C /opt/cloud
 
 cd /opt/cloud/apache-skywalking-apm-bin
 

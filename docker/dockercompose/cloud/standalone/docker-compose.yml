@@ -109,7 +109,7 @@ services:
 
   # nacos cluster
   nacos1:
-    image: nacos/nacos-server:v2.1.0
+    image: nacos/nacos-server:v2.3.0
     restart: always
     hostname: nacos1
     container_name: nacos1
@@ -129,14 +129,14 @@ services:
       MYSQL_SERVICE_PORT: 3306
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.0
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.3.0
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.16
   nacos2:
-    image: nacos/nacos-server:v2.1.0
+    image: nacos/nacos-server:v2.3.0
     restart: always
     hostname: nacos2
     container_name: nacos2
@@ -156,14 +156,14 @@ services:
       MYSQL_SERVICE_PORT: 3306
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.0
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.3.0
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
   nacos3:
-    image: nacos/nacos-server:v2.1.0
+    image: nacos/nacos-server:v2.3.0
     restart: always
     hostname: nacos3
     container_name: nacos3
@@ -183,7 +183,7 @@ services:
       MYSQL_SERVICE_PORT: 3306
       MYSQL_SERVICE_USER: root
       MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.1.0
+      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos-2.3.0
       JVM_XMS: 256m
       JVM_XMX: 512m
     networks:
@@ -208,7 +208,7 @@ services:
   # seata cluster
   seata1:
     container_name: seata1
-    image: seataio/seata-server:1.5.1
+    image: seataio/seata-server:2.0.0
     restart: always
     ports:
       - "8091:8091"
@@ -223,7 +223,7 @@ services:
         ipv4_address: 172.11.0.20
   seata2:
     container_name: seata2
-    image: seataio/seata-server:1.5.1
+    image: seataio/seata-server:2.0.0
     restart: always
     ports:
       - "8092:8092"
@@ -238,7 +238,7 @@ services:
         ipv4_address: 172.11.0.21
   seata3:
     container_name: seata3
-    image: seataio/seata-server:1.5.1
+    image: seataio/seata-server:2.0.0
     restart: always
     ports:
       - "8093:8093"

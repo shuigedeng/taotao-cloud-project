@@ -9,7 +9,7 @@ RUN mkdir /skywalking
 
 COPY ./skywalking-agent /skywalking/agent
 
-#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:8.8.1 .
+#docker build -t registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:9.1.0 .
 
 
 # jre17 带字体
