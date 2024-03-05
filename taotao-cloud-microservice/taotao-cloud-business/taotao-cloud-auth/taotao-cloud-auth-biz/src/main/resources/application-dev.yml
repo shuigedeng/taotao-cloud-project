@@ -752,8 +752,8 @@ spring:
     oauth2:
       resourceserver:
          jwt:
-            issuer-uri: ${herodotus.endpoint.issuer-uri}
-            jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+            issuer-uri: ${ttc.endpoint.issuer-uri}
+            jwk-set-uri: ${ttc.endpoint.jwk-set-uri}
             #audiences:
             #  -
             #jws-algorithms:
@@ -1065,13 +1065,13 @@ taotao:
           upms-service-name: dante-cloud-upms
           gateway-service-uri: http://127.0.0.1:33336
           uaa-service-uri: http://127.0.0.1:33336/
-          upms-service-uri: http://127.0.0.1:33336/${herodotus.endpoint.upms-service-name}
+          upms-service-uri: http://127.0.0.1:33336/${ttc.endpoint.upms-service-name}
           access-token-uri: http://127.0.0.1:33336/oauth2/token
           authorization-uri: http://127.0.0.1:33336/oauth2/authorize
           token-revocation-uri: http://127.0.0.1:33336/oauth2/revoke
           token-introspection-uri: http://127.0.0.1:33336/oauth2/introspect
           jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
-          issuer-uri: ${herodotus.endpoint.uaa-service-uri}
+          issuer-uri: ${ttc.endpoint.uaa-service-uri}
           oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
           oidc-user-info-uri: http://127.0.0.1:33336/userinfo
           #device-authorization-uri: http://127.0.0.1:33336/oauth2/device_authorization
@@ -1334,19 +1334,19 @@ auth:
       imageType: BASE64
 
 
-herodotus:
+ttc:
   endpoint:
     uaa-service-name: dante-cloud-uaa
     upms-service-name: dante-cloud-upms
     gateway-service-uri: http://127.0.0.1:33336
     uaa-service-uri: http://127.0.0.1:33336/
-    upms-service-uri: http://127.0.0.1:33336/${herodotus.endpoint.upms-service-name}
+    upms-service-uri: http://127.0.0.1:33336/${ttc.endpoint.upms-service-name}
     access-token-uri: http://127.0.0.1:33336/oauth2/token
     authorization-uri: http://127.0.0.1:33336/oauth2/authorize
     token-revocation-uri: http://127.0.0.1:33336/oauth2/revoke
     token-introspection-uri: http://127.0.0.1:33336/oauth2/introspect
     jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
-    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
+    issuer-uri: ${ttc.endpoint.uaa-service-uri}
     oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
     oidc-user-info-uri: http://127.0.0.1:33336/userinfo
     #device-authorization-uri: http://127.0.0.1:33336/oauth2/device_authorization

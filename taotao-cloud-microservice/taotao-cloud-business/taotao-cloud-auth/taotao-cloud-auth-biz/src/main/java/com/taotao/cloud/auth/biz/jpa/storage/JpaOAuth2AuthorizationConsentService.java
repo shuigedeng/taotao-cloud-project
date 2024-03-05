@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.converter.HerodotusToOAuth2AuthorizationConsentConverter;
-import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToHerodotusAuthorizationConsentConverter;
-import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationConsentService;
+import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2AuthorizationConsentConverter;
+import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToTtcAuthorizationConsentConverter;
+import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorizationConsent;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
@@ -44,31 +44,31 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     /**
      * 希罗多德授权同意服务
      */
-    private final HerodotusAuthorizationConsentService herodotusAuthorizationConsentService;
+    private final TtcAuthorizationConsentService ttcAuthorizationConsentService;
     /**
      * 希罗多德到oauth2转换器
      */
-    private final Converter<HerodotusAuthorizationConsent, OAuth2AuthorizationConsent> herodotusToOAuth2Converter;
+    private final Converter<TtcAuthorizationConsent, OAuth2AuthorizationConsent> ttcToOAuth2Converter;
     /**
-     * oauth2到herodotus转换器
+     * oauth2到ttc转换器
      */
-    private final Converter<OAuth2AuthorizationConsent, HerodotusAuthorizationConsent> oauth2ToherodotusConverter;
+    private final Converter<OAuth2AuthorizationConsent, TtcAuthorizationConsent> oauth2ToTtcConverter;
 
     /**
      * jpa oauth2授权同意服务
      *
-     * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
+     * @param ttcAuthorizationConsentService 希罗多德授权同意服务
      * @param registeredClientRepository           注册客户端存储库
      * @return
      * @since 2023-07-10 17:10:36
      */
     public JpaOAuth2AuthorizationConsentService(
-            HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,
+            TtcAuthorizationConsentService ttcAuthorizationConsentService,
             RegisteredClientRepository registeredClientRepository) {
-        this.herodotusAuthorizationConsentService = herodotusAuthorizationConsentService;
-        this.herodotusToOAuth2Converter =
-                new HerodotusToOAuth2AuthorizationConsentConverter(registeredClientRepository);
-        this.oauth2ToherodotusConverter = new OAuth2ToHerodotusAuthorizationConsentConverter();
+        this.ttcAuthorizationConsentService = ttcAuthorizationConsentService;
+        this.ttcToOAuth2Converter =
+                new TtcToOAuth2AuthorizationConsentConverter(registeredClientRepository);
+        this.oauth2ToTtcConverter = new OAuth2ToTtcAuthorizationConsentConverter();
     }
 
     /**
@@ -80,7 +80,7 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     @Override
     public void save(OAuth2AuthorizationConsent authorizationConsent) {
         log.info("Jpa OAuth2 Authorization Consent Service save entity.");
-        this.herodotusAuthorizationConsentService.save(toEntity(authorizationConsent));
+        this.ttcAuthorizationConsentService.save(toEntity(authorizationConsent));
     }
 
     /**
@@ -92,7 +92,7 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     @Override
     public void remove(OAuth2AuthorizationConsent authorizationConsent) {
         log.info("Jpa OAuth2 Authorization Consent Service remove entity.");
-        this.herodotusAuthorizationConsentService.deleteByRegisteredClientIdAndPrincipalName(
+        this.ttcAuthorizationConsentService.deleteByRegisteredClientIdAndPrincipalName(
                 authorizationConsent.getRegisteredClientId(), authorizationConsent.getPrincipalName());
     }
 
@@ -107,7 +107,7 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
     @Override
     public OAuth2AuthorizationConsent findById(String registeredClientId, String principalName) {
         log.info("Jpa OAuth2 Authorization Consent Service findById.");
-        return this.herodotusAuthorizationConsentService
+        return this.ttcAuthorizationConsentService
                 .findByRegisteredClientIdAndPrincipalName(registeredClientId, principalName)
                 .map(this::toObject)
                 .orElse(null);
@@ -120,18 +120,18 @@ public class JpaOAuth2AuthorizationConsentService implements OAuth2Authorization
      * @return {@link OAuth2AuthorizationConsent }
      * @since 2023-07-10 17:10:37
      */
-    private OAuth2AuthorizationConsent toObject(HerodotusAuthorizationConsent authorizationConsent) {
-        return herodotusToOAuth2Converter.convert(authorizationConsent);
+    private OAuth2AuthorizationConsent toObject(TtcAuthorizationConsent authorizationConsent) {
+        return ttcToOAuth2Converter.convert(authorizationConsent);
     }
 
     /**
      * 对实体
      *
      * @param authorizationConsent 授权同意书
-     * @return {@link HerodotusAuthorizationConsent }
+     * @return {@link TtcAuthorizationConsent }
      * @since 2023-07-10 17:10:37
      */
-    private HerodotusAuthorizationConsent toEntity(OAuth2AuthorizationConsent authorizationConsent) {
-        return oauth2ToherodotusConverter.convert(authorizationConsent);
+    private TtcAuthorizationConsent toEntity(OAuth2AuthorizationConsent authorizationConsent) {
+        return oauth2ToTtcConverter.convert(authorizationConsent);
     }
 }

@@ -47,10 +47,10 @@ public class RemoteChangeUserStatusListener implements ApplicationListener<Remot
     @Override
     public void onApplicationEvent(RemoteChangeUserStatusEvent event) {
 
-        log.info("[Herodotus] |- Request mapping gather REMOTE listener, response event!");
+        log.info(" Request mapping gather REMOTE listener, response event!");
 
         String data = event.getData();
-        log.debug("[Herodotus] |- Fetch data [{}]", data);
+        log.debug(" Fetch data [{}]", data);
         if (ObjectUtils.isNotEmpty(data)) {
             UserStatus userStatus = JsonUtils.toObject(data, UserStatus.class);
             if (ObjectUtils.isNotEmpty(userStatus)) {

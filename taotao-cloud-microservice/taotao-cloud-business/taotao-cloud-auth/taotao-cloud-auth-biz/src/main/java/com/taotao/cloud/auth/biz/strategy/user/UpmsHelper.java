@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.biz.strategy.user;
 
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -31,16 +31,16 @@ import org.apache.commons.lang3.ObjectUtils;
  */
 public class UpmsHelper {
 
-    public static HerodotusUser convertSysUserToHerodotusUser(SysUser sysUser) {
-        Set<HerodotusGrantedAuthority> authorities = new HashSet<>();
+    public static TtcUser convertSysUserToTtcUser(SysUser sysUser) {
+        Set<TtcGrantedAuthority> authorities = new HashSet<>();
         Set<String> roles = new HashSet<>();
         for (SysRole sysRole : sysUser.getRoles()) {
             roles.add(sysRole.getRoleCode());
-            authorities.add(new HerodotusGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
+            authorities.add(new TtcGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
             Set<SysPermission> sysPermissions = sysRole.getPermissions();
             if (CollectionUtils.isNotEmpty(sysPermissions)) {
                 sysPermissions.forEach(sysAuthority ->
-                        authorities.add(new HerodotusGrantedAuthority((sysAuthority.getPermissionCode()))));
+                        authorities.add(new TtcGrantedAuthority((sysAuthority.getPermissionCode()))));
             }
         }
 
@@ -48,7 +48,7 @@ public class UpmsHelper {
                 ? sysUser.getEmployee().getEmployeeId()
                 : null;
 
-        return new HerodotusUser(
+        return new TtcUser(
                 sysUser.getUserId(),
                 sysUser.getUserName(),
                 sysUser.getPassword(),

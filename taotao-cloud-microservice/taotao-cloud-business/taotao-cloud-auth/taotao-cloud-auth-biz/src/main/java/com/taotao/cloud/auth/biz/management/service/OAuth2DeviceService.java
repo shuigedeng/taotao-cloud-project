@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.service;
 
-import com.taotao.cloud.auth.biz.jpa.repository.HerodotusRegisteredClientRepository;
+import com.taotao.cloud.auth.biz.jpa.repository.TtcRegisteredClientRepository;
 import com.taotao.cloud.auth.biz.management.converter.OAuth2DeviceToRegisteredClientConverter;
 import com.taotao.cloud.auth.biz.management.converter.RegisteredClientToOAuth2DeviceConverter;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Device;
@@ -46,18 +46,18 @@ public class OAuth2DeviceService {
     private static final Logger log = LoggerFactory.getLogger(OAuth2ApplicationService.class);
 
     private final RegisteredClientRepository registeredClientRepository;
-    private final HerodotusRegisteredClientRepository herodotusRegisteredClientRepository;
+    private final TtcRegisteredClientRepository ttcRegisteredClientRepository;
     private final OAuth2DeviceRepository deviceRepository;
     private final Converter<OAuth2Device, RegisteredClient> oauth2DeviceToRegisteredClientConverter;
     private final Converter<RegisteredClient, OAuth2Device> registeredClientToOAuth2DeviceConverter;
 
     public OAuth2DeviceService(
             RegisteredClientRepository registeredClientRepository,
-            HerodotusRegisteredClientRepository herodotusRegisteredClientRepository,
+            TtcRegisteredClientRepository ttcRegisteredClientRepository,
             OAuth2DeviceRepository deviceRepository,
             OAuth2ScopeService scopeService) {
         this.registeredClientRepository = registeredClientRepository;
-        this.herodotusRegisteredClientRepository = herodotusRegisteredClientRepository;
+        this.ttcRegisteredClientRepository = ttcRegisteredClientRepository;
         this.deviceRepository = deviceRepository;
         this.oauth2DeviceToRegisteredClientConverter = new OAuth2DeviceToRegisteredClientConverter();
         this.registeredClientToOAuth2DeviceConverter = new RegisteredClientToOAuth2DeviceConverter(scopeService);
@@ -78,7 +78,7 @@ public class OAuth2DeviceService {
     @Transactional(rollbackFor = RuntimeException.class)
     public void deleteById(String id) {
         deviceRepository.deleteById(id);
-        herodotusRegisteredClientRepository.deleteById(id);
+        ttcRegisteredClientRepository.deleteById(id);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)

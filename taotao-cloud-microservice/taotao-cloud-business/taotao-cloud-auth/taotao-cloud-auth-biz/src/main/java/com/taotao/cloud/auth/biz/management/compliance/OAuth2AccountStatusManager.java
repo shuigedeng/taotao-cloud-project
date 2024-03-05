@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampMana
 import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -54,12 +54,12 @@ public class OAuth2AccountStatusManager {
 
     private String getUserId(String username) {
         EnhanceUserDetailsService enhanceUserDetailsService = getUserDetailsService();
-        HerodotusUser user = enhanceUserDetailsService.loadHerodotusUserByUsername(username);
+        TtcUser user = enhanceUserDetailsService.loadTtcUserByUsername(username);
         if (ObjectUtils.isNotEmpty(user)) {
             return user.getUserId();
         }
 
-        log.warn("[Herodotus] |- Can not found the userid for [{}]", username);
+        log.warn(" Can not found the userid for [{}]", username);
         return null;
     }
 
@@ -68,7 +68,7 @@ public class OAuth2AccountStatusManager {
         if (ObjectUtils.isNotEmpty(userId)) {
             accountStatusChanger.process(new UserStatus(userId, DataItemStatus.LOCKING.name()));
             lockedUserDetailsStampManager.put(userId, username);
-            log.info("[Herodotus] |- User count [{}] has been locked, and record into cache!", username);
+            log.info(" User count [{}] has been locked, and record into cache!", username);
         }
     }
 
@@ -84,7 +84,7 @@ public class OAuth2AccountStatusManager {
             String value = (String) lockedUserDetailsStampManager.get(userId);
             if (StringUtils.isNotEmpty(value)) {
                 this.lockedUserDetailsStampManager.delete(userId);
-                log.info("[Herodotus] |- User count [{}] locked info has been release!", username);
+                log.info(" User count [{}] locked info has been release!", username);
             }
         }
     }

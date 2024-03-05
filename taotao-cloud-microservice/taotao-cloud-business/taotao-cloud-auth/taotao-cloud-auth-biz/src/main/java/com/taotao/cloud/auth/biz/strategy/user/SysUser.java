@@ -125,7 +125,7 @@ public class SysUser {
      * SysUser 和 SysEmploye 为双向一对一关系，SysUser 为维护端。
      * <p>
      * 存在一个问题，SysUser新增操作没有问题，修改操作就会抛出
-     * InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : cn.herodotus.cloud.upms.logic.entity.system.SysUser.employee -> cn.herodotus.cloud.upms.logic.entity.hr.SysEmployee; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing
+     * InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : cn.ttc.cloud.upms.logic.entity.system.SysUser.employee -> cn.ttc.cloud.upms.logic.entity.hr.SysEmployee; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing
      * <p>
      * 最初以为是 JPA @OneToOne 相关配置不对或者是 JPA save()方法的问题，以及 Hibernate 对象在Session是否是游离状态等几方面问题，尝试解决的好久都没有解决。
      * <p>

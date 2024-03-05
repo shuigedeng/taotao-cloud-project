@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.service;
 
-import com.taotao.cloud.auth.biz.jpa.repository.HerodotusRegisteredClientRepository;
+import com.taotao.cloud.auth.biz.jpa.repository.TtcRegisteredClientRepository;
 import com.taotao.cloud.auth.biz.management.converter.OAuth2ApplicationToRegisteredClientConverter;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
@@ -44,16 +44,16 @@ public class OAuth2ApplicationService {
     private static final Logger log = LoggerFactory.getLogger(OAuth2ApplicationService.class);
 
     private final RegisteredClientRepository registeredClientRepository;
-    private final HerodotusRegisteredClientRepository herodotusRegisteredClientRepository;
+    private final TtcRegisteredClientRepository ttcRegisteredClientRepository;
     private final OAuth2ApplicationRepository applicationRepository;
     private final Converter<OAuth2Application, RegisteredClient> objectConverter;
 
     public OAuth2ApplicationService(
             RegisteredClientRepository registeredClientRepository,
-            HerodotusRegisteredClientRepository herodotusRegisteredClientRepository,
+            TtcRegisteredClientRepository ttcRegisteredClientRepository,
             OAuth2ApplicationRepository applicationRepository) {
         this.registeredClientRepository = registeredClientRepository;
-        this.herodotusRegisteredClientRepository = herodotusRegisteredClientRepository;
+        this.ttcRegisteredClientRepository = ttcRegisteredClientRepository;
         this.applicationRepository = applicationRepository;
         this.objectConverter = new OAuth2ApplicationToRegisteredClientConverter();
     }
@@ -73,7 +73,7 @@ public class OAuth2ApplicationService {
     @Transactional(rollbackFor = RuntimeException.class)
     public void deleteById(String id) {
         applicationRepository.deleteById(id);
-        herodotusRegisteredClientRepository.deleteById(id);
+        ttcRegisteredClientRepository.deleteById(id);
     }
 
     @Transactional(rollbackFor = RuntimeException.class)

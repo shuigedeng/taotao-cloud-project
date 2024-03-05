@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.converter.HerodotusToOAuth2RegisteredClientConverter;
-import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToHerodotusRegisteredClientConverter;
-import com.taotao.cloud.auth.biz.jpa.entity.HerodotusRegisteredClient;
+import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2RegisteredClientConverter;
+import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToTtcRegisteredClientConverter;
+import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusRegisteredClientService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcRegisteredClientService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,31 +46,31 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     /**
      * 希罗多德注册客户服务
      */
-    private final HerodotusRegisteredClientService herodotusRegisteredClientService;
+    private final TtcRegisteredClientService ttcRegisteredClientService;
     /**
      * 希罗多德到oauth2转换器
      */
-    private final Converter<HerodotusRegisteredClient, RegisteredClient> herodotusToOAuth2Converter;
+    private final Converter<TtcRegisteredClient, RegisteredClient> ttcToOAuth2Converter;
     /**
      * oauth2到希罗多德转换器
      */
-    private final Converter<RegisteredClient, HerodotusRegisteredClient> oauth2ToHerodotusConverter;
+    private final Converter<RegisteredClient, TtcRegisteredClient> oauth2ToTtcConverter;
 
     /**
      * jpa注册客户端存储库
      *
-     * @param herodotusRegisteredClientService 希罗多德注册客户服务
+     * @param ttcRegisteredClientService 希罗多德注册客户服务
      * @param passwordEncoder                  密码编码器
      * @return
      * @since 2023-07-10 17:10:47
      */
     public JpaRegisteredClientRepository(
-            HerodotusRegisteredClientService herodotusRegisteredClientService, PasswordEncoder passwordEncoder) {
-        this.herodotusRegisteredClientService = herodotusRegisteredClientService;
+            TtcRegisteredClientService ttcRegisteredClientService, PasswordEncoder passwordEncoder) {
+        this.ttcRegisteredClientService = ttcRegisteredClientService;
         OAuth2JacksonProcessor jacksonProcessor = new OAuth2JacksonProcessor();
-        this.herodotusToOAuth2Converter = new HerodotusToOAuth2RegisteredClientConverter(jacksonProcessor);
-        this.oauth2ToHerodotusConverter =
-                new OAuth2ToHerodotusRegisteredClientConverter(jacksonProcessor, passwordEncoder);
+        this.ttcToOAuth2Converter = new TtcToOAuth2RegisteredClientConverter(jacksonProcessor);
+        this.oauth2ToTtcConverter =
+                new OAuth2ToTtcRegisteredClientConverter(jacksonProcessor, passwordEncoder);
     }
 
     /**
@@ -82,7 +82,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     @Override
     public void save(RegisteredClient registeredClient) {
         log.info("Jpa Registered Client Repository save entity.");
-        this.herodotusRegisteredClientService.save(toEntity(registeredClient));
+        this.ttcRegisteredClientService.save(toEntity(registeredClient));
     }
 
     /**
@@ -95,9 +95,9 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     @Override
     public RegisteredClient findById(String id) {
         log.info("Jpa Registered Client Repository findById.");
-        HerodotusRegisteredClient herodotusRegisteredClient = this.herodotusRegisteredClientService.findById(id);
-        if (ObjectUtils.isNotEmpty(herodotusRegisteredClient)) {
-            return toObject(herodotusRegisteredClient);
+        TtcRegisteredClient ttcRegisteredClient = this.ttcRegisteredClientService.findById(id);
+        if (ObjectUtils.isNotEmpty(ttcRegisteredClient)) {
+            return toObject(ttcRegisteredClient);
         }
         return null;
     }
@@ -112,7 +112,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
     @Override
     public RegisteredClient findByClientId(String clientId) {
         log.info("Jpa Registered Client Repository findByClientId.");
-        return this.herodotusRegisteredClientService
+        return this.ttcRegisteredClientService
                 .findByClientId(clientId)
                 .map(this::toObject)
                 .orElse(null);
@@ -126,28 +126,28 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
      */
     public void remove(String id) {
         log.info("Jpa Registered Client Repository remove.");
-        this.herodotusRegisteredClientService.deleteById(id);
+        this.ttcRegisteredClientService.deleteById(id);
     }
 
     /**
      * 反对
      *
-     * @param herodotusRegisteredClient 希罗多德注册客户
+     * @param ttcRegisteredClient 希罗多德注册客户
      * @return {@link RegisteredClient }
      * @since 2023-07-10 17:10:48
      */
-    private RegisteredClient toObject(HerodotusRegisteredClient herodotusRegisteredClient) {
-        return herodotusToOAuth2Converter.convert(herodotusRegisteredClient);
+    private RegisteredClient toObject(TtcRegisteredClient ttcRegisteredClient) {
+        return ttcToOAuth2Converter.convert(ttcRegisteredClient);
     }
 
     /**
      * 对实体
      *
      * @param registeredClient 注册客户
-     * @return {@link HerodotusRegisteredClient }
+     * @return {@link TtcRegisteredClient }
      * @since 2023-07-10 17:10:48
      */
-    private HerodotusRegisteredClient toEntity(RegisteredClient registeredClient) {
-        return oauth2ToHerodotusConverter.convert(registeredClient);
+    private TtcRegisteredClient toEntity(RegisteredClient registeredClient) {
+        return oauth2ToTtcConverter.convert(registeredClient);
     }
 }

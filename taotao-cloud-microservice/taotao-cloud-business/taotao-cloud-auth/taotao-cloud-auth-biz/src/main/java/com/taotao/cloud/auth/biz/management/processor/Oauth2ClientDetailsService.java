@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,17 +43,17 @@ public class Oauth2ClientDetailsService implements EnhanceClientDetailsService {
     }
 
     @Override
-    public Set<HerodotusGrantedAuthority> findAuthoritiesById(String clientId) {
+    public Set<TtcGrantedAuthority> findAuthoritiesById(String clientId) {
         OAuth2Application application = applicationService.findByClientId(clientId);
         if (ObjectUtils.isNotEmpty(application)) {
             Set<OAuth2Scope> scopes = application.getScopes();
-            Set<HerodotusGrantedAuthority> result = new HashSet<>();
+            Set<TtcGrantedAuthority> result = new HashSet<>();
             if (CollectionUtils.isNotEmpty(scopes)) {
                 for (OAuth2Scope scope : scopes) {
                     Set<OAuth2Permission> permissions = scope.getPermissions();
                     if (CollectionUtils.isNotEmpty(permissions)) {
-                        Set<HerodotusGrantedAuthority> grantedAuthorities = permissions.stream()
-                                .map(item -> new HerodotusGrantedAuthority(item.getPermissionCode()))
+                        Set<TtcGrantedAuthority> grantedAuthorities = permissions.stream()
+                                .map(item -> new TtcGrantedAuthority(item.getPermissionCode()))
                                 .collect(Collectors.toSet());
                         result.addAll(grantedAuthorities);
                     }

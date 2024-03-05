@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.management.processor;
 
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,8 +49,8 @@ public interface EnhanceUserDetailsService extends UserDetailsService {
 	 * 系统用户名
 	 *
 	 * @param username 用户账号
-	 * @return {@link HerodotusUser }
+	 * @return {@link TtcUser }
 	 * @since 2023-07-04 10:05:41
 	 */
-	HerodotusUser loadHerodotusUserByUsername(String username) throws UsernameNotFoundException;
+	TtcUser loadTtcUserByUsername(String username) throws UsernameNotFoundException;
 }

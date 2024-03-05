@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcPermission;
 import java.util.List;
 
 /**
@@ -31,8 +31,8 @@ public interface StrategyPermissionDetailsService {
     /**
      * 获取全部权限
      *
-     * @return {@link List }<{@link HerodotusPermission }>
+     * @return {@link List }<{@link TtcPermission }>
      * @since 2023-07-04 10:05:54
      */
-    List<HerodotusPermission> findAll();
+    List<TtcPermission> findAll();
 }

@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractAuthe
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
-import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
+import com.taotao.cloud.security.springsecurity.core.definition.TtcGrantType;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 import org.springframework.lang.Nullable;
@@ -50,7 +50,7 @@ public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends OA
     public Authentication convert(HttpServletRequest request) {
         // grant_type (REQUIRED)
         String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-        if (!HerodotusGrantType.PASSWORD.getValue().equals(grantType)) {
+        if (!TtcGrantType.PASSWORD.getValue().equals(grantType)) {
             return null;
         }
 
@@ -72,7 +72,7 @@ public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends OA
         // password (REQUIRED)
         OAuth2EndpointUtils.checkRequiredParameter(parameters, OAuth2ParameterNames.PASSWORD);
 
-        String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
+        String sessionId = request.getHeader(HttpHeaders.X_TTC_SESSION);
 
         Map<String, Object> additionalParameters = new HashMap<>();
         parameters.forEach((key, value) -> {

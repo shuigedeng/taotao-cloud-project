@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import java.util.Set;
 
 /**
@@ -32,8 +32,8 @@ public interface ClientDetailsService {
      * 根据客户端ID获取客户端权限
      *
      * @param clientId 客户端ID
-     * @return {@link Set }<{@link HerodotusGrantedAuthority }>
+     * @return {@link Set }<{@link TtcGrantedAuthority }>
      * @since 2023-07-04 10:05:31
      */
-    Set<HerodotusGrantedAuthority> findAuthoritiesById(String clientId);
+    Set<TtcGrantedAuthority> findAuthoritiesById(String clientId);
 }

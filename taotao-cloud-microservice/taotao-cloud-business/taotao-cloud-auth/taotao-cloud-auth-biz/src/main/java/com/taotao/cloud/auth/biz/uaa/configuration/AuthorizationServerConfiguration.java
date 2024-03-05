@@ -31,11 +31,11 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.password.OAuth2Reso
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.OAuth2SocialCredentialsAuthenticationConverter;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.OAuth2SocialCredentialsAuthenticationProvider;
-import com.taotao.cloud.auth.biz.authentication.oidc.HerodotusOidcUserInfoMapper;
+import com.taotao.cloud.auth.biz.authentication.oidc.TtcOidcUserInfoMapper;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.biz.authentication.token.HerodotusJwtTokenCustomizer;
-import com.taotao.cloud.auth.biz.authentication.token.HerodotusOpaqueTokenCustomizer;
+import com.taotao.cloud.auth.biz.authentication.token.TtcJwtTokenCustomizer;
+import com.taotao.cloud.auth.biz.authentication.token.TtcOpaqueTokenCustomizer;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2ConfigurerUtils;
 import com.taotao.cloud.auth.biz.management.processor.ClientDetailsService;
 import com.taotao.cloud.auth.biz.management.response.OAuth2AccessTokenResponseHandler;
@@ -145,7 +145,7 @@ public class AuthorizationServerConfiguration {
 		UserDetailsService userDetailsService,
 		ClientDetailsService clientDetailsService,
 		HttpCryptoProcessor httpCryptoProcessor,
-		SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+		SecurityTokenStrategyConfigurer ttcTokenStrategyConfigurer,
 		OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
 		OAuth2AuthenticationProperties authenticationProperties,
 		OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
@@ -238,7 +238,7 @@ public class AuthorizationServerConfiguration {
 					// logoutEndpointCustomizer.logoutResponseHandler()
 				})
 				.userInfoEndpoint(userInfoEndpointCustomizer -> {
-					userInfoEndpointCustomizer.userInfoMapper(new HerodotusOidcUserInfoMapper());
+					userInfoEndpointCustomizer.userInfoMapper(new TtcOidcUserInfoMapper());
 				});
 		});
 
@@ -298,7 +298,7 @@ public class AuthorizationServerConfiguration {
 			.csrf(csrfCustomizer -> {
 				csrfCustomizer.ignoringRequestMatchers(endpointsMatcher);
 			})
-			.oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
+			.oauth2ResourceServer(ttcTokenStrategyConfigurer::from);
 
 		// 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager
 		// 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
@@ -413,9 +413,9 @@ public class AuthorizationServerConfiguration {
 
 	@Bean
 	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
-		HerodotusJwtTokenCustomizer herodotusJwtTokenCustomizer = new HerodotusJwtTokenCustomizer();
+		TtcJwtTokenCustomizer ttcJwtTokenCustomizer = new TtcJwtTokenCustomizer();
 		log.info("Bean [OAuth2 Jwt Token Customizer] Auto Configure.");
-		return herodotusJwtTokenCustomizer;
+		return ttcJwtTokenCustomizer;
 	}
 
 	//@Bean
@@ -427,9 +427,9 @@ public class AuthorizationServerConfiguration {
 
 	@Bean
 	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
-		HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
+		TtcOpaqueTokenCustomizer ttcOpaqueTokenCustomizer = new TtcOpaqueTokenCustomizer();
 		log.info("Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
-		return herodotusOpaqueTokenCustomizer;
+		return ttcOpaqueTokenCustomizer;
 	}
 
 	@Bean

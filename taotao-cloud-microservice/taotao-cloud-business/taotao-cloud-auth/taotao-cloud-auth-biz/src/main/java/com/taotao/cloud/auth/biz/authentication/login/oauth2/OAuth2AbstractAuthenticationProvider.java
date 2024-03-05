@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.login.oauth2;
 
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.core.utils.PrincipalUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -318,7 +318,7 @@ public abstract class OAuth2AbstractAuthenticationProvider implements Authentica
     protected OAuth2AccessTokenAuthenticationToken createOAuth2AccessTokenAuthenticationToken(
             Authentication source, OAuth2AccessTokenAuthenticationToken destination) {
         if (source instanceof UsernamePasswordAuthenticationToken) {
-            if (source.getPrincipal() instanceof HerodotusUser user) {
+            if (source.getPrincipal() instanceof TtcUser user) {
                 destination.setDetails(PrincipalUtils.toPrincipalDetails(user));
             }
         }

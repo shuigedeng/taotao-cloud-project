@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.biz.authentication.login.form.sms.service.impl;
 
 import com.taotao.cloud.auth.biz.authentication.login.form.sms.service.Oauth2FormSmsUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,14 +33,14 @@ public class DefaultOauth2FormSmsUserDetailsService implements Oauth2FormSmsUser
     @Override
     public UserDetails loadUserByPhone(String phone, String type) throws UsernameNotFoundException {
 
-        Collection<HerodotusGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new HerodotusGrantedAuthority("manager.book.read1111"));
-        authorities.add(new HerodotusGrantedAuthority("manager.book.write1111"));
+        Collection<TtcGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new TtcGrantedAuthority("manager.book.read1111"));
+        authorities.add(new TtcGrantedAuthority("manager.book.write1111"));
         Set<String> roles = new HashSet<>();
         roles.add("ROLE_A1");
         roles.add("ROLE_A2");
         // admin/123456
-        HerodotusUser user = new HerodotusUser(
+        TtcUser user = new TtcUser(
                 "33e781c5-31e0-4ea4-8b02-1236bde9643",
                 "admin",
                 "{bcrypt}$2a$10$lvjys/FAHAVmgXM.U1LtOOJ./C5SstExZCZ0Z5N7SeGZAue0JFtXC",

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.token;
 
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -84,14 +84,14 @@ public abstract class AbstractTokenCustomizer {
         }
 
         if (authentication instanceof UsernamePasswordAuthenticationToken) {
-            HerodotusUser principal = (HerodotusUser) authentication.getPrincipal();
+            TtcUser principal = (TtcUser) authentication.getPrincipal();
             putUserInfo(attributes, principal);
         }
 
         if (authentication instanceof OAuth2AccessTokenAuthenticationToken) {
             Object details = authentication.getDetails();
-            if (ObjectUtils.isNotEmpty(details) && details instanceof HerodotusUser) {
-                HerodotusUser principal = (HerodotusUser) details;
+            if (ObjectUtils.isNotEmpty(details) && details instanceof TtcUser) {
+                TtcUser principal = (TtcUser) details;
                 putUserInfo(attributes, principal);
             }
         }
@@ -106,7 +106,7 @@ public abstract class AbstractTokenCustomizer {
      * @param principal  校长
      * @since 2023-07-10 17:25:32
      */
-    private void putUserInfo(Map<String, Object> attributes, HerodotusUser principal) {
+    private void putUserInfo(Map<String, Object> attributes, TtcUser principal) {
         attributes.put(BaseConstants.OPEN_ID, principal.getUserId());
         attributes.put(BaseConstants.ROLES, principal.getRoles());
         attributes.put(BaseConstants.AVATAR, principal.getAvatar());

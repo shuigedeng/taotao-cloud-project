@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import java.io.IOException;
 import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,8 +41,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
  */
 public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserializer<OAuth2ClientAuthenticationToken> {
 
-    private static final TypeReference<Set<HerodotusGrantedAuthority>> HERODOTUS_GRANTED_AUTHORITY_SET =
-            new TypeReference<Set<HerodotusGrantedAuthority>>() {};
+    private static final TypeReference<Set<TtcGrantedAuthority>> TTC_GRANTED_AUTHORITY_SET =
+            new TypeReference<Set<TtcGrantedAuthority>>() {};
 
     @Override
     public OAuth2ClientAuthenticationToken deserialize(JsonParser jsonParser, DeserializationContext context)
@@ -55,8 +55,8 @@ public class OAuth2ClientAuthenticationTokenDeserializer extends JsonDeserialize
 
     private OAuth2ClientAuthenticationToken deserialize(JsonParser parser, ObjectMapper mapper, JsonNode root)
             throws IOException {
-        Set<HerodotusGrantedAuthority> authorities =
-                JsonNodeUtils.findValue(root, "authorities", HERODOTUS_GRANTED_AUTHORITY_SET, mapper);
+        Set<TtcGrantedAuthority> authorities =
+                JsonNodeUtils.findValue(root, "authorities", TTC_GRANTED_AUTHORITY_SET, mapper);
         RegisteredClient registeredClient =
                 JsonNodeUtils.findValue(root, "registeredClient", new TypeReference<RegisteredClient>() {}, mapper);
         String credentials = JsonNodeUtils.findStringValue(root, "credentials");

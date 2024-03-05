@@ -48,10 +48,10 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
     @Override
     public void onApplicationEvent(RemoteRequestMappingGatherEvent event) {
 
-        log.info("[Herodotus] |- Request mapping gather REMOTE listener, response event!");
+        log.info(" Request mapping gather REMOTE listener, response event!");
 
         String requestMapping = event.getData();
-        log.debug("[Herodotus] |- Fetch data [{}]", requestMapping);
+        log.debug(" Fetch data [{}]", requestMapping);
         if (ObjectUtils.isNotEmpty(requestMapping)) {
             List<RequestMapping> requestMappings = JsonUtils.toList(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {

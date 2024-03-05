@@ -53,7 +53,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Authen
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
 
-        log.debug("[Herodotus] |- Authentication Success Listener!");
+        log.debug(" Authentication Success Listener!");
 
         Authentication authentication = event.getAuthentication();
 
@@ -81,7 +81,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Authen
                     }
                 }
             } else {
-                log.warn("[Herodotus] |- Can not get request and username, skip!");
+                log.warn(" Can not get request and username, skip!");
             }
         }
     }

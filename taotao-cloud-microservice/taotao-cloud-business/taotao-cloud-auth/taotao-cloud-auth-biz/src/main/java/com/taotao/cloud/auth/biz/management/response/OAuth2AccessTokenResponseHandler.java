@@ -104,9 +104,9 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
 			builder.additionalParameters(additionalParameters);
 		}
 		else {
-			String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
+			String sessionId = request.getHeader(HttpHeaders.X_TTC_SESSION);
 			Object details = authentication.getDetails();
-			if (isHerodotusUserInfoPattern(sessionId, details)) {
+			if (isTtcUserInfoPattern(sessionId, details)) {
 				PrincipalDetails authenticationDetails = (PrincipalDetails) details;
 				String data = JsonUtils.toJson(authenticationDetails);
 				String encryptData = httpCryptoProcessor.encrypt(sessionId, data);
@@ -153,7 +153,7 @@ public class OAuth2AccessTokenResponseHandler implements AuthenticationSuccessHa
 		}
 	}
 
-	private boolean isHerodotusUserInfoPattern(String sessionId, Object details) {
+	private boolean isTtcUserInfoPattern(String sessionId, Object details) {
 		return StringUtils.isNotBlank(sessionId)
 			&& ObjectUtils.isNotEmpty(details)
 			&& details instanceof PrincipalDetails;

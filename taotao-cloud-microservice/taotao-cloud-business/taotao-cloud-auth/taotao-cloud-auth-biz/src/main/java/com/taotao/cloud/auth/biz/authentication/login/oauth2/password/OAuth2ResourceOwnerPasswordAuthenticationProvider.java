@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.OAuth2AbstractUserD
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
+import com.taotao.cloud.security.springsecurity.core.definition.TtcGrantType;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Set;
@@ -123,7 +123,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends OAuth2Abs
                         resourceOwnerPasswordAuthentication);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-        if (!registeredClient.getAuthorizationGrantTypes().contains(HerodotusGrantType.PASSWORD)) {
+        if (!registeredClient.getAuthorizationGrantTypes().contains(TtcGrantType.PASSWORD)) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
@@ -136,7 +136,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends OAuth2Abs
 
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
                 .principalName(principal.getName())
-                .authorizationGrantType(HerodotusGrantType.PASSWORD)
+                .authorizationGrantType(TtcGrantType.PASSWORD)
                 .authorizedScopes(authorizedScopes)
                 .attribute(Principal.class.getName(), principal);
 
@@ -147,7 +147,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends OAuth2Abs
                 .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                 .authorizedScopes(authorizedScopes)
                 .tokenType(OAuth2TokenType.ACCESS_TOKEN)
-                .authorizationGrantType(HerodotusGrantType.PASSWORD)
+                .authorizationGrantType(TtcGrantType.PASSWORD)
                 .authorizationGrant(resourceOwnerPasswordAuthentication);
         // @formatter:on
 

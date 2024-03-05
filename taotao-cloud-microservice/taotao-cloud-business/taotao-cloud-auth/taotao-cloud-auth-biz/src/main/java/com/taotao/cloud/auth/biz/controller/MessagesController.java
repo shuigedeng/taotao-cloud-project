@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.controller;
 
-import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorizationConsent;
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationConsentService;
+import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorizationConsent;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
@@ -28,8 +28,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -38,8 +36,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * MessagesController
@@ -57,13 +53,13 @@ public class MessagesController {
     @Autowired
     private JwtDecoder jwtDecoder;
     @Autowired
-    private HerodotusAuthorizationConsentService herodotusAuthorizationConsentService;
+    private TtcAuthorizationConsentService ttcAuthorizationConsentService;
 
     @Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
     @GetMapping("/NotAuth/myPageQuery")
     @NotAuth
     public Result<String> myPageQuery() {
-        Page<HerodotusAuthorizationConsent> herodotusAuthorizationConsents = herodotusAuthorizationConsentService.myPageQuery(null, null);
+        Page<TtcAuthorizationConsent> ttcAuthorizationConsents = ttcAuthorizationConsentService.myPageQuery(null, null);
 
         return Result.success("sadfasdf");
     }

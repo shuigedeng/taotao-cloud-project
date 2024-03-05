@@ -52,7 +52,7 @@ public class OAuth2JacksonProcessor {
 
         objectMapper.registerModules(securityModules);
         objectMapper.registerModules(new OAuth2AuthorizationServerJackson2Module());
-        objectMapper.registerModules(new HerodotusJackson2Module());
+        objectMapper.registerModules(new TtcJackson2Module());
         objectMapper.registerModules(new OAuth2TokenJackson2Module());
     }
 

@@ -76,7 +76,7 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
     public void postRequestMappings(List<RequestMapping> requestMappings) {
         //		List<SysInterface> storedInterfaces = sysInterfaceService.storeRequestMappings(requestMappings);
         //		if (CollectionUtils.isNotEmpty(storedInterfaces)) {
-        //			log.debug("[Herodotus] |- [5] Request mapping store success, start to merge security metadata!");
+        //			log.debug(" [5] Request mapping store success, start to merge security metadata!");
         //
         //			List<SysInterface> sysInterfaces = sysInterfaceService.findAllocatable();
         //
@@ -84,15 +84,15 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
         //				List<SysAttribute> elements = this.convertSysInterfacesToSysAttributes(sysInterfaces);
         //				List<SysAttribute> result = sysAttributeService.saveAllAndFlush(elements);
         //				if (CollectionUtils.isNotEmpty(result)) {
-        //					log.debug("[Herodotus] |- Merge security attribute SUCCESS and FINISHED!");
+        //					log.debug(" Merge security attribute SUCCESS and FINISHED!");
         //				} else {
-        //					log.error("[Herodotus] |- Merge Security attribute failed!, Please Check!");
+        //					log.error(" Merge Security attribute failed!, Please Check!");
         //				}
         //			} else {
-        //				log.debug("[Herodotus] |- No security attribute requires merge, SKIP!");
+        //				log.debug(" No security attribute requires merge, SKIP!");
         //			}
         //
-        //			log.debug("[Herodotus] |- [6] Synchronization current permissions to every service!");
+        //			log.debug(" [6] Synchronization current permissions to every service!");
         //
         //			List<SysAttribute> sysAttributes = sysAttributeService.findAll();
         //			this.postGroupProcess(sysAttributes);
@@ -104,7 +104,7 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
             Map<String, List<SecurityAttribute>> grouped = sysAttributes.stream()
                     .map(this::convertSysAttributeToSecurityAttribute)
                     .collect(Collectors.groupingBy(SecurityAttribute::getServiceId));
-            log.debug("[Herodotus] |- Grouping SysInterface and distribute to every server.");
+            log.debug(" Grouping SysInterface and distribute to every server.");
             grouped.forEach(this::postProcess);
         }
     }

@@ -43,11 +43,11 @@ public class SysAttributeChangeListener implements ApplicationListener<SysAttrib
     @Override
     public void onApplicationEvent(SysAttributeChangeEvent event) {
 
-        log.debug("[Herodotus] |- SysAttribute Change Listener, response event!");
+        log.debug(" SysAttribute Change Listener, response event!");
 
         SysAttribute sysAttribute = event.getData();
         if (ObjectUtils.isNotEmpty(sysAttribute)) {
-            log.debug("[Herodotus] |- Got SysAttribute, start to process SysAttribute change.");
+            log.debug(" Got SysAttribute, start to process SysAttribute change.");
             securityMetadataDistributeProcessor.distributeChangedSecurityAttribute(sysAttribute);
         }
     }

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +34,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Tags({@Tag(name = "OAuth2 认证服务接口"), @Tag(name = "OAuth2 认证管理接口")})
 public class OAuth2AuthorizationController {
 
-    private final HerodotusAuthorizationService herodotusAuthorizationService;
+    private final TtcAuthorizationService ttcAuthorizationService;
 
     @Autowired
-    public OAuth2AuthorizationController(HerodotusAuthorizationService herodotusAuthorizationService) {
-        this.herodotusAuthorizationService = herodotusAuthorizationService;
+    public OAuth2AuthorizationController(TtcAuthorizationService ttcAuthorizationService) {
+        this.ttcAuthorizationService = ttcAuthorizationService;
     }
 
     //    @Override
-    //    public WriteableService<HerodotusAuthorization, String> getWriteableService() {
-    //        return this.herodotusAuthorizationService;
+    //    public WriteableService<TtcAuthorization, String> getWriteableService() {
+    //        return this.ttcAuthorizationService;
     //    }
 }

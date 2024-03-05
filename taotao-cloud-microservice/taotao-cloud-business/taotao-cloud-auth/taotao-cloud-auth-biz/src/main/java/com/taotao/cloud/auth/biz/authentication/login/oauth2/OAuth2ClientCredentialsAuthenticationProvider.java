@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.authentication.login.oauth2;
 
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.auth.biz.management.processor.ClientDetailsService;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -122,7 +122,7 @@ public class OAuth2ClientCredentialsAuthenticationProvider extends OAuth2Abstrac
         // Default to configured scopes
         Set<String> authorizedScopes = getStrings(clientCredentialsAuthentication, registeredClient);
 
-        Set<HerodotusGrantedAuthority> authorities =
+        Set<TtcGrantedAuthority> authorities =
                 clientDetailsService.findAuthoritiesById(registeredClient.getClientId());
         if (org.apache.commons.collections4.CollectionUtils.isNotEmpty(authorities)) {
             FieldUtil.setFieldValue(clientPrincipal, "authorities", authorities);

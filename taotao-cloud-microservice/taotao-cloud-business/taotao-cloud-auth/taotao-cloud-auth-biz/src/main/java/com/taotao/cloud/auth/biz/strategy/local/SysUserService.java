@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.Ac
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialUserDetails;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -115,7 +115,7 @@ public class SysUserService {
                 return userName;
             }
         } else {
-            return "Herodotus" + IdUtil.nanoId(6);
+            return "Ttc" + IdUtil.nanoId(6);
         }
     }
 
@@ -145,9 +145,9 @@ public class SysUserService {
         return register(sysUser, AccountType.getAccountType(socialUserDetails.getSource()));
     }
 
-    public HerodotusUser registerUserDetails(SocialUserDetails socialUserDetails) {
+    public TtcUser registerUserDetails(SocialUserDetails socialUserDetails) {
         SysUser newSysUser = register(socialUserDetails);
-        //		return UpmsHelper.convertSysUserToHerodotusUser(newSysUser);
+        //		return UpmsHelper.convertSysUserToTtcUser(newSysUser);
         return null;
     }
 

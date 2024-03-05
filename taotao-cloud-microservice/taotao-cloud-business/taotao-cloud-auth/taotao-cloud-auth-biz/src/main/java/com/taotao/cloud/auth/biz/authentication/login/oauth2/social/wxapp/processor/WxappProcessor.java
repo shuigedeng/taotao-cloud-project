@@ -84,7 +84,7 @@ public class WxappProcessor implements InitializingBean {
                 })
                 .collect(Collectors.toMap(s -> s.getWxMaConfig().getAppid(), a -> a));
 
-        log.info("Bean [herodotus Weixin Mini App] Auto Configure.");
+        log.info("Bean  Weixin Mini App] Auto Configure.");
     }
 
     private WxMaMessageRouter newRouter(WxMaService wxMaService) {
@@ -111,8 +111,8 @@ public class WxappProcessor implements InitializingBean {
         String appId = wxappProperties.getDefaultAppId();
         if (StringUtils.isBlank(appId)) {
             log.error(
-                    "Must set [herodotus.platform.social.wxapp.default-app-id] property, or use getWxMaService(String appid)!");
-            throw new IllegalArgumentException("Must set [herodotus.platform.social.wxapp.default-app-id] property");
+                    "Must set .platform.social.wxapp.default-app-id] property, or use getWxMaService(String appid)!");
+            throw new IllegalArgumentException("Must set .platform.social.wxapp.default-app-id] property");
         }
         return this.getWxMaService(appId);
     }

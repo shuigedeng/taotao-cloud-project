@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.strategy;
 
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import com.taotao.cloud.auth.biz.strategy.user.UpmsHelper;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,11 +30,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public abstract class AbstractStrategyUserDetailsService implements StrategyUserDetailsService {
 
-    protected HerodotusUser convertSysUser(SysUser sysUser, String userName) throws AuthenticationException {
+    protected TtcUser convertSysUser(SysUser sysUser, String userName) throws AuthenticationException {
         if (ObjectUtils.isEmpty(sysUser)) {
             throw new UsernameNotFoundException("系统用户 " + userName + " 不存在!");
         }
 
-        return UpmsHelper.convertSysUserToHerodotusUser(sysUser);
+        return UpmsHelper.convertSysUserToTtcUser(sysUser);
     }
 }

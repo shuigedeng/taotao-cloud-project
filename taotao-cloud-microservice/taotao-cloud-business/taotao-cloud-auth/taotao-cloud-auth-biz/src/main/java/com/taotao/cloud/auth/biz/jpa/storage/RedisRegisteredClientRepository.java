@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusRegisteredClientService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcRegisteredClientService;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
@@ -63,17 +63,17 @@ public class RedisRegisteredClientRepository extends JpaRegisteredClientReposito
 	/**
 	 * redis注册客户端存储库
 	 *
-	 * @param herodotusRegisteredClientService 希罗多德注册客户服务
+	 * @param ttcRegisteredClientService 希罗多德注册客户服务
 	 * @param passwordEncoder                  密码编码器
 	 * @param redisRepository                  redis存储库
 	 * @return
 	 * @since 2023-07-10 17:11:03
 	 */
 	public RedisRegisteredClientRepository(
-		HerodotusRegisteredClientService herodotusRegisteredClientService,
+		TtcRegisteredClientService ttcRegisteredClientService,
 		PasswordEncoder passwordEncoder,
 		RedisRepository redisRepository) {
-		super(herodotusRegisteredClientService, passwordEncoder);
+		super(ttcRegisteredClientService, passwordEncoder);
 		this.redisRepository = redisRepository;
 	}
 

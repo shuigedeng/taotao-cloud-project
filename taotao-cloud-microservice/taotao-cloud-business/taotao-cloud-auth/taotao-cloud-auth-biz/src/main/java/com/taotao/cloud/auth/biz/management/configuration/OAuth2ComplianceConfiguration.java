@@ -22,7 +22,7 @@ import com.taotao.cloud.auth.biz.management.compliance.OAuth2AccountStatusManage
 import com.taotao.cloud.auth.biz.management.compliance.listener.AccountAutoEnableListener;
 import com.taotao.cloud.auth.biz.management.compliance.listener.AuthenticationFailureListener;
 import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
-import com.taotao.cloud.auth.biz.management.compliance.processor.changer.HerodotusAccountStatusChanger;
+import com.taotao.cloud.auth.biz.management.compliance.processor.changer.TtcAccountStatusChanger;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,9 +51,9 @@ public class OAuth2ComplianceConfiguration {
 
 	@Bean
 	public AccountStatusChanger accountStatusChanger() {
-		HerodotusAccountStatusChanger herodotusAccountStatusChanger = new HerodotusAccountStatusChanger();
+		TtcAccountStatusChanger ttcAccountStatusChanger = new TtcAccountStatusChanger();
 		log.info("Bean [Account Status Changer] Auto Configure.");
-		return herodotusAccountStatusChanger;
+		return ttcAccountStatusChanger;
 	}
 
 	@Bean

@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * <p>OAuth2 HerodotusPermission Dto </p>
+ * <p>OAuth2 TtcPermission Dto </p>
  *
  *
  * @since : 2022/4/1 13:55

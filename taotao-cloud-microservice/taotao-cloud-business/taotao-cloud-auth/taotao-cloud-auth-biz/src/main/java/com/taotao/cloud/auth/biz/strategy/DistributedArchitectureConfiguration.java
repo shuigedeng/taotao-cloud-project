@@ -17,12 +17,12 @@
 package com.taotao.cloud.auth.biz.strategy;
 
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialAuthenticationHandler;
-import com.taotao.cloud.auth.biz.strategy.local.HerodotusLocalPermissionDetailsService;
-import com.taotao.cloud.auth.biz.strategy.local.HerodotusLocalUserDetailsService;
+import com.taotao.cloud.auth.biz.strategy.local.LocalPermissionDetailsService;
+import com.taotao.cloud.auth.biz.strategy.local.LocalUserDetailsService;
 import com.taotao.cloud.auth.biz.strategy.local.SysPermissionService;
 import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
-import com.taotao.cloud.auth.biz.strategy.remote.HerodotusRemotePermissionDetailsService;
-import com.taotao.cloud.auth.biz.strategy.remote.HerodotusRemoteUserDetailsService;
+import com.taotao.cloud.auth.biz.strategy.remote.RemotePermissionDetailsService;
+import com.taotao.cloud.auth.biz.strategy.remote.RemoteUserDetailsService;
 import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -46,7 +46,7 @@ public class DistributedArchitectureConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Module [Distributed Architecture] Auto Configure.");
+        log.debug(" Module [Distributed Architecture] Auto Configure.");
     }
 
     @Configuration(proxyBeanMethods = false)
@@ -55,20 +55,20 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyUserDetailsService herodotusLocalUserDetailsService(
+        public StrategyUserDetailsService localUserDetailsService(
                 SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
-            log.debug("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
-            return new HerodotusLocalUserDetailsService(sysUserService, socialAuthenticationHandler);
+            log.debug(" Strategy [Local User Details Service] Auto Configure.");
+            return new LocalUserDetailsService(sysUserService, socialAuthenticationHandler);
         }
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(
+        public StrategyPermissionDetailsService localPermissionDetailsService(
                 SysPermissionService sysPermissionService) {
-            HerodotusLocalPermissionDetailsService herodotusLocalPermissionDetailsService =
-                    new HerodotusLocalPermissionDetailsService(sysPermissionService);
-            log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
-            return herodotusLocalPermissionDetailsService;
+            LocalPermissionDetailsService localPermissionDetailsService =
+                    new LocalPermissionDetailsService(sysPermissionService);
+            log.debug(" Strategy [Local Permission Details Service] Auto Configure.");
+            return localPermissionDetailsService;
         }
     }
 
@@ -83,18 +83,18 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyUserDetailsService herodotusRemoteUserDetailsService(IFeignUserApi userApi) {
-            log.debug("[Herodotus] |- Strategy [Remote User Details Service] Auto Configure.");
-            return new HerodotusRemoteUserDetailsService(userApi);
+        public StrategyUserDetailsService remoteUserDetailsService(IFeignUserApi userApi) {
+            log.debug(" Strategy [Remote User Details Service] Auto Configure.");
+            return new RemoteUserDetailsService(userApi);
         }
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyPermissionDetailsService herodotusRemotePermissionDetailsService() {
-            HerodotusRemotePermissionDetailsService herodotusRemotePermissionDetailsService =
-                    new HerodotusRemotePermissionDetailsService();
-            log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Auto Configure.");
-            return herodotusRemotePermissionDetailsService;
+        public StrategyPermissionDetailsService remotePermissionDetailsService() {
+            RemotePermissionDetailsService remotePermissionDetailsService =
+                    new RemotePermissionDetailsService();
+            log.debug(" Strategy [Remote Permission Details Service] Auto Configure.");
+            return remotePermissionDetailsService;
         }
     }
 }

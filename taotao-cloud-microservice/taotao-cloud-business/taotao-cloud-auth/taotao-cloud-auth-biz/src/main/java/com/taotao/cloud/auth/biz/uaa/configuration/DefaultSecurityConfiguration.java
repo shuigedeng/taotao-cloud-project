@@ -119,7 +119,7 @@ public class DefaultSecurityConfiguration {
 		CaptchaRendererFactory captchaRendererFactory,
 		SecurityMatcherConfigurer securityMatcherConfigurer,
 		SecurityAuthorizationManager securityAuthorizationManager,
-		SecurityTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+		SecurityTokenStrategyConfigurer ttcTokenStrategyConfigurer,
 		SocialDelegateClientRegistrationRepository socialDelegateClientRegistrationRepository,
 		OAuth2AccessTokenStore oAuth2AccessTokenStore)
 		throws Exception {
@@ -157,7 +157,7 @@ public class DefaultSecurityConfiguration {
 					.authenticationEntryPoint(new SecurityAuthenticationEntryPoint())
 					.accessDeniedHandler(new SecurityAccessDeniedHandler());
 			})
-			.oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+			.oauth2ResourceServer(ttcTokenStrategyConfigurer::from)
 			.logout(logoutCustomizer -> {
 				logoutCustomizer
 					.addLogoutHandler((request, response, authentication) -> {
@@ -313,7 +313,7 @@ public class DefaultSecurityConfiguration {
 		StrategyUserDetailsService strategyUserDetailsService) {
 		SecurityUserDetailsService securityUserDetailsService =
 			new SecurityUserDetailsService(strategyUserDetailsService);
-		log.info("Bean [Herodotus User Details Service] Auto Configure.");
+		log.info("Bean  User Details Service] Auto Configure.");
 		return securityUserDetailsService;
 	}
 
@@ -321,7 +321,7 @@ public class DefaultSecurityConfiguration {
 	public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
 		Oauth2ClientDetailsService oauth2ClientDetailsService = new Oauth2ClientDetailsService(
 			applicationService);
-		log.info("Bean [Herodotus Client Details Service] Auto Configure.");
+		log.info("Bean  Client Details Service] Auto Configure.");
 		return oauth2ClientDetailsService;
 	}
 

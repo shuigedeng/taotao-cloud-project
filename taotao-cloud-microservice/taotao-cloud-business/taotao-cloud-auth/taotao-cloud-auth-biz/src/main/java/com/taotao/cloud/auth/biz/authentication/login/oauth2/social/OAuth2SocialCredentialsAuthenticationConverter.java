@@ -22,7 +22,7 @@ import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
-import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
+import com.taotao.cloud.security.springsecurity.core.definition.TtcGrantType;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 import org.apache.commons.lang3.ObjectUtils;
@@ -48,7 +48,7 @@ public class OAuth2SocialCredentialsAuthenticationConverter extends OAuth2Abstra
     public Authentication convert(HttpServletRequest request) {
         // grant_type (REQUIRED)
         String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-        if (!HerodotusGrantType.SOCIAL.getValue().equals(grantType)) {
+        if (!TtcGrantType.SOCIAL.getValue().equals(grantType)) {
             return null;
         }
 
@@ -88,7 +88,7 @@ public class OAuth2SocialCredentialsAuthenticationConverter extends OAuth2Abstra
             }
         }
 
-        String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
+        String sessionId = request.getHeader(HttpHeaders.X_TTC_SESSION);
 
         Map<String, Object> additionalParameters = new HashMap<>();
         parameters.forEach((key, value) -> {

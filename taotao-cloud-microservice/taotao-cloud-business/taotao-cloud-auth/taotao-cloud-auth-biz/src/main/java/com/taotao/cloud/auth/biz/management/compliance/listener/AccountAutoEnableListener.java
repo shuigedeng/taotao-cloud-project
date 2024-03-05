@@ -48,10 +48,10 @@ public class AccountAutoEnableListener extends KeyExpirationEventMessageListener
 		String key = new String(message.getBody(), StandardCharsets.UTF_8);
 		if (StringUtils.contains(key, OAuth2Constants.CACHE_NAME_TOKEN_LOCKED_USER_DETAIL)) {
 			String userId = StringUtils.substringAfterLast(key, SymbolConstants.COLON);
-			log.info("[Herodotus] |- Parse the user [{}] at expired redis cache key [{}]", userId,
+			log.info(" Parse the user [{}] at expired redis cache key [{}]", userId,
 				key);
 			if (StringUtils.isNotBlank(userId)) {
-				log.debug("[Herodotus] |- Automatically unlock user account [{}]", userId);
+				log.debug(" Automatically unlock user account [{}]", userId);
 				accountStatusManager.enable(userId);
 			}
 		}

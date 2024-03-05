@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler;
 
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**
@@ -39,8 +39,8 @@ public interface SocialAuthenticationHandler {
      *
      * @param source          社交登录提供者分类
      * @param accessPrincipal 社交登录所需要的信息
-     * @return {@link HerodotusUser }
+     * @return {@link TtcUser }
      * @since 2023-07-04 10:05:20
      */
-    HerodotusUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException;
+    TtcUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException;
 }

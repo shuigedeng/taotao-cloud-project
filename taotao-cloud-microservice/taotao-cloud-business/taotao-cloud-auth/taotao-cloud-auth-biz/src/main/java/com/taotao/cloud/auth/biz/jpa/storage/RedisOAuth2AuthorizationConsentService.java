@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationConsentService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.concurrent.TimeUnit;
@@ -61,17 +61,17 @@ public final class RedisOAuth2AuthorizationConsentService extends
 	/**
 	 * redis oauth2授权同意服务
 	 *
-	 * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
+	 * @param ttcAuthorizationConsentService 希罗多德授权同意服务
 	 * @param registeredClientRepository           注册客户端存储库
 	 * @param redisRepository                      redis存储库
 	 * @return
 	 * @since 2023-07-10 17:10:53
 	 */
 	public RedisOAuth2AuthorizationConsentService(
-		HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,
+		TtcAuthorizationConsentService ttcAuthorizationConsentService,
 		RegisteredClientRepository registeredClientRepository,
 		RedisRepository redisRepository) {
-		super(herodotusAuthorizationConsentService, registeredClientRepository);
+		super(ttcAuthorizationConsentService, registeredClientRepository);
 		this.redisRepository = redisRepository;
 	}
 

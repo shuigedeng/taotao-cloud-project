@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.jpa.configuration;
 
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationConsentService;
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationService;
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusRegisteredClientService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationConsentService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcRegisteredClientService;
 import com.taotao.cloud.auth.biz.jpa.storage.JpaOAuth2AuthorizationConsentService;
 import com.taotao.cloud.auth.biz.jpa.storage.JpaOAuth2AuthorizationService;
 import com.taotao.cloud.auth.biz.jpa.storage.JpaRegisteredClientRepository;
@@ -61,7 +61,7 @@ public class OAuth2DataJpaConfiguration {
 	/**
 	 * 注册客户端存储库
 	 *
-	 * @param herodotusRegisteredClientService 希罗多德注册客户服务
+	 * @param ttcRegisteredClientService 希罗多德注册客户服务
 	 * @param passwordEncoder                  密码编码器
 	 * @return {@link RegisteredClientRepository }
 	 * @since 2023-07-10 17:14:04
@@ -69,10 +69,10 @@ public class OAuth2DataJpaConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public RegisteredClientRepository registeredClientRepository(
-		HerodotusRegisteredClientService herodotusRegisteredClientService,
+		TtcRegisteredClientService ttcRegisteredClientService,
 		PasswordEncoder passwordEncoder) {
 		JpaRegisteredClientRepository jpaRegisteredClientRepository =
-			new JpaRegisteredClientRepository(herodotusRegisteredClientService, passwordEncoder);
+			new JpaRegisteredClientRepository(ttcRegisteredClientService, passwordEncoder);
 		log.info("Bean [Jpa Registered Client Repository] Auto Configure.");
 		return jpaRegisteredClientRepository;
 	}
@@ -80,7 +80,7 @@ public class OAuth2DataJpaConfiguration {
 	/**
 	 * 授权服务
 	 *
-	 * @param herodotusAuthorizationService 希罗多德授权服务
+	 * @param ttcAuthorizationService 希罗多德授权服务
 	 * @param registeredClientRepository    注册客户端存储库
 	 * @return {@link OAuth2AuthorizationService }
 	 * @since 2023-07-10 17:14:05
@@ -88,10 +88,10 @@ public class OAuth2DataJpaConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public OAuth2AuthorizationService authorizationService(
-		HerodotusAuthorizationService herodotusAuthorizationService,
+		TtcAuthorizationService ttcAuthorizationService,
 		RegisteredClientRepository registeredClientRepository) {
 		JpaOAuth2AuthorizationService jpaOAuth2AuthorizationService =
-			new JpaOAuth2AuthorizationService(herodotusAuthorizationService,
+			new JpaOAuth2AuthorizationService(ttcAuthorizationService,
 				registeredClientRepository);
 		log.info("Bean [Jpa OAuth2 Authorization Service] Auto Configure.");
 		return jpaOAuth2AuthorizationService;
@@ -100,7 +100,7 @@ public class OAuth2DataJpaConfiguration {
 	/**
 	 * 授权同意服务
 	 *
-	 * @param herodotusAuthorizationConsentService 希罗多德授权同意服务
+	 * @param ttcAuthorizationConsentService 希罗多德授权同意服务
 	 * @param registeredClientRepository           注册客户端存储库
 	 * @return {@link OAuth2AuthorizationConsentService }
 	 * @since 2023-07-10 17:14:05
@@ -108,11 +108,11 @@ public class OAuth2DataJpaConfiguration {
 	@Bean
 	@ConditionalOnMissingBean
 	public OAuth2AuthorizationConsentService authorizationConsentService(
-		HerodotusAuthorizationConsentService herodotusAuthorizationConsentService,
+		TtcAuthorizationConsentService ttcAuthorizationConsentService,
 		RegisteredClientRepository registeredClientRepository) {
 		JpaOAuth2AuthorizationConsentService jpaOAuth2AuthorizationConsentService =
 			new JpaOAuth2AuthorizationConsentService(
-				herodotusAuthorizationConsentService, registeredClientRepository);
+				ttcAuthorizationConsentService, registeredClientRepository);
 		log.info("Bean [Jpa OAuth2 Authorization Consent Service] Auto Configure.");
 		return jpaOAuth2AuthorizationConsentService;
 	}

@@ -27,7 +27,7 @@ import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
 import com.taotao.cloud.auth.biz.strategy.user.SysSocialUser;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.core.exception.SocialCredentialsParameterBindingFailedException;
 import com.taotao.cloud.security.springsecurity.core.exception.UsernameAlreadyExistsException;
 import org.apache.commons.lang3.ObjectUtils;
@@ -79,7 +79,7 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
     }
 
     @Override
-    public HerodotusUser register(SocialUserDetails socialUserDetails) throws UsernameAlreadyExistsException {
+    public TtcUser register(SocialUserDetails socialUserDetails) throws UsernameAlreadyExistsException {
         return sysUserService.registerUserDetails(socialUserDetails);
     }
 
@@ -95,15 +95,15 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
     }
 
     @Override
-    public void additionalRegisterOperation(HerodotusUser herodotusUserDetails, SocialUserDetails socialUserDetails) {}
+    public void additionalRegisterOperation(TtcUser TtcUserDetails, SocialUserDetails socialUserDetails) {}
 
     @Override
-    public HerodotusUser signIn(SocialUserDetails socialUserDetails) {
+    public TtcUser signIn(SocialUserDetails socialUserDetails) {
         if (socialUserDetails instanceof SysSocialUser) {
             SysSocialUser sysSocialUser = (SysSocialUser) socialUserDetails;
             SysUser sysUser = sysSocialUser.getUsers().stream().findFirst().orElse(null);
             if (ObjectUtils.isNotEmpty(sysUser)) {
-                //				return UpmsHelper.convertSysUserToHerodotusUser(sysUser);
+                //				return UpmsHelper.convertSysUserToTtcUser(sysUser);
                 return null;
             } else {
                 return null;
@@ -115,7 +115,7 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 
     @Override
     public void additionalSignInOperation(
-            HerodotusUser herodotusUserDetails,
+            TtcUser TtcUserDetails,
             SocialUserDetails newSocialUserDetails,
             SocialUserDetails oldSocialUserDetails) {
         if (newSocialUserDetails instanceof SysSocialUser newSysSocialUser

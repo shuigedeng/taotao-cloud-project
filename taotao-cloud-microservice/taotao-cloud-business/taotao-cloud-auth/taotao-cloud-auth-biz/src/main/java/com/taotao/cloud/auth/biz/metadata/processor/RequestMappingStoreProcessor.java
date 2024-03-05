@@ -42,7 +42,7 @@ public class RequestMappingStoreProcessor {
 
     @Async
     public void postProcess(List<RequestMapping> requestMappings) {
-        log.debug("[Herodotus] |- [4] Async store request mapping process BEGIN!");
+        log.debug(" [4] Async store request mapping process BEGIN!");
         securityMetadataDistributeProcessor.postRequestMappings(requestMappings);
     }
 }

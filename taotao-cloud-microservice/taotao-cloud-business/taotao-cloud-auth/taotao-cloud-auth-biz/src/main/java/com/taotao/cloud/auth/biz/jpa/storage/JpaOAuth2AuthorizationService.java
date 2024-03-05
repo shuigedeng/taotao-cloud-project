@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.auth.biz.jpa.storage;
 
-import com.taotao.cloud.auth.biz.jpa.converter.HerodotusToOAuth2AuthorizationConverter;
-import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToHerodotusAuthorizationConverter;
-import com.taotao.cloud.auth.biz.jpa.entity.HerodotusAuthorization;
+import com.taotao.cloud.auth.biz.jpa.converter.TtcToOAuth2AuthorizationConverter;
+import com.taotao.cloud.auth.biz.jpa.converter.OAuth2ToTtcAuthorizationConverter;
+import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorization;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
-import com.taotao.cloud.auth.biz.jpa.service.HerodotusAuthorizationService;
+import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,33 +56,33 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
     /**
      * 希罗多德授权服务
      */
-    private final HerodotusAuthorizationService herodotusAuthorizationService;
+    private final TtcAuthorizationService ttcAuthorizationService;
     /**
      * 希罗多德到oauth2转换器
      */
-    private final Converter<HerodotusAuthorization, OAuth2Authorization> herodotusToOAuth2Converter;
+    private final Converter<TtcAuthorization, OAuth2Authorization> ttcToOAuth2Converter;
     /**
      * oauth2到希罗多德转换器
      */
-    private final Converter<OAuth2Authorization, HerodotusAuthorization> oauth2ToHerodotusConverter;
+    private final Converter<OAuth2Authorization, TtcAuthorization> oauth2ToTtcConverter;
 
     /**
      * jpa oauth2授权服务
      *
-     * @param herodotusAuthorizationService 希罗多德授权服务
+     * @param ttcAuthorizationService 希罗多德授权服务
      * @param registeredClientRepository    注册客户端存储库
      * @return
      * @since 2023-07-10 17:10:42
      */
     public JpaOAuth2AuthorizationService(
-            HerodotusAuthorizationService herodotusAuthorizationService,
+            TtcAuthorizationService ttcAuthorizationService,
             RegisteredClientRepository registeredClientRepository) {
-        this.herodotusAuthorizationService = herodotusAuthorizationService;
+        this.ttcAuthorizationService = ttcAuthorizationService;
 
         OAuth2JacksonProcessor jacksonProcessor = new OAuth2JacksonProcessor();
-        this.herodotusToOAuth2Converter =
-                new HerodotusToOAuth2AuthorizationConverter(jacksonProcessor, registeredClientRepository);
-        this.oauth2ToHerodotusConverter = new OAuth2ToHerodotusAuthorizationConverter(jacksonProcessor);
+        this.ttcToOAuth2Converter =
+                new TtcToOAuth2AuthorizationConverter(jacksonProcessor, registeredClientRepository);
+        this.oauth2ToTtcConverter = new OAuth2ToTtcAuthorizationConverter(jacksonProcessor);
     }
 
     /**
@@ -96,9 +96,9 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
         Assert.notNull(authorization, "authorization cannot be null");
         OAuth2Authorization existingAuthorization = this.findById(authorization.getId());
         if (existingAuthorization == null) {
-            this.herodotusAuthorizationService.saveAndFlush(toEntity(authorization));
+            this.ttcAuthorizationService.saveAndFlush(toEntity(authorization));
         } else {
-            this.herodotusAuthorizationService.updateAndFlush(toEntity(authorization));
+            this.ttcAuthorizationService.updateAndFlush(toEntity(authorization));
         }
 
         log.info("Jpa OAuth2 Authorization Service save entity.");
@@ -114,10 +114,10 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
     @Override
     public void remove(OAuth2Authorization authorization) {
         Assert.notNull(authorization, "authorization cannot be null");
-        this.herodotusAuthorizationService.deleteById(authorization.getId());
+        this.ttcAuthorizationService.deleteById(authorization.getId());
         log.info("Jpa OAuth2 Authorization Service remove entity.");
         // TODO： 后期还是考虑改为异步任务的形式，先临时放在这里。
-        this.herodotusAuthorizationService.clearHistoryToken();
+        this.ttcAuthorizationService.clearHistoryToken();
         log.info("Jpa OAuth2 Authorization Service clear history token.");
     }
 
@@ -130,10 +130,10 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      */
     @Override
     public OAuth2Authorization findById(String id) {
-        HerodotusAuthorization herodotusAuthorization = this.herodotusAuthorizationService.findById(id);
-        if (ObjectUtils.isNotEmpty(herodotusAuthorization)) {
+        TtcAuthorization ttcAuthorization = this.ttcAuthorizationService.findById(id);
+        if (ObjectUtils.isNotEmpty(ttcAuthorization)) {
             log.info("Jpa OAuth2 Authorization Service findById.");
-            return toObject(herodotusAuthorization);
+            return toObject(ttcAuthorization);
         } else {
             return null;
         }
@@ -148,7 +148,7 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      * @since 2023-07-10 17:10:42
      */
     public int findAuthorizationCount(String registeredClientId, String principalName) {
-        int count = this.herodotusAuthorizationService.findAuthorizationCount(registeredClientId, principalName);
+        int count = this.ttcAuthorizationService.findAuthorizationCount(registeredClientId, principalName);
         log.info("Jpa OAuth2 Authorization Service findAuthorizationCount.");
         return count;
     }
@@ -162,8 +162,8 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      * @since 2023-07-10 17:10:42
      */
     public List<OAuth2Authorization> findAvailableAuthorizations(String registeredClientId, String principalName) {
-        List<HerodotusAuthorization> authorizations =
-                this.herodotusAuthorizationService.findAvailableAuthorizations(registeredClientId, principalName);
+        List<TtcAuthorization> authorizations =
+                this.ttcAuthorizationService.findAvailableAuthorizations(registeredClientId, principalName);
         if (CollectionUtils.isNotEmpty(authorizations)) {
             return authorizations.stream().map(this::toObject).collect(Collectors.toList());
         }
@@ -183,25 +183,25 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
     public OAuth2Authorization findByToken(String token, OAuth2TokenType tokenType) {
         Assert.hasText(token, "token cannot be empty");
 
-        Optional<HerodotusAuthorization> result;
+        Optional<TtcAuthorization> result;
         if (tokenType == null) {
-            result = this.herodotusAuthorizationService
+            result = this.ttcAuthorizationService
                     .findByStateOrAuthorizationCodeValueOrAccessTokenValueOrRefreshTokenValueOrOidcIdTokenValueOrUserCodeValueOrDeviceCodeValue(
                             token);
         } else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByState(token);
+            result = this.ttcAuthorizationService.findByState(token);
         } else if (OAuth2ParameterNames.CODE.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByAuthorizationCode(token);
+            result = this.ttcAuthorizationService.findByAuthorizationCode(token);
         } else if (OAuth2ParameterNames.ACCESS_TOKEN.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByAccessToken(token);
+            result = this.ttcAuthorizationService.findByAccessToken(token);
         } else if (OAuth2ParameterNames.REFRESH_TOKEN.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByRefreshToken(token);
+            result = this.ttcAuthorizationService.findByRefreshToken(token);
         } else if (OidcParameterNames.ID_TOKEN.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByOidcIdTokenValue(token);
+            result = this.ttcAuthorizationService.findByOidcIdTokenValue(token);
         } else if (OAuth2ParameterNames.USER_CODE.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByUserCodeValue(token);
+            result = this.ttcAuthorizationService.findByUserCodeValue(token);
         } else if (OAuth2ParameterNames.DEVICE_CODE.equals(tokenType.getValue())) {
-            result = this.herodotusAuthorizationService.findByDeviceCodeValue(token);
+            result = this.ttcAuthorizationService.findByDeviceCodeValue(token);
         } else {
             result = Optional.empty();
         }
@@ -217,18 +217,18 @@ public class JpaOAuth2AuthorizationService implements OAuth2AuthorizationService
      * @return {@link OAuth2Authorization }
      * @since 2023-07-10 17:10:43
      */
-    private OAuth2Authorization toObject(HerodotusAuthorization entity) {
-        return herodotusToOAuth2Converter.convert(entity);
+    private OAuth2Authorization toObject(TtcAuthorization entity) {
+        return ttcToOAuth2Converter.convert(entity);
     }
 
     /**
      * 对实体
      *
      * @param authorization 授权
-     * @return {@link HerodotusAuthorization }
+     * @return {@link TtcAuthorization }
      * @since 2023-07-10 17:10:43
      */
-    private HerodotusAuthorization toEntity(OAuth2Authorization authorization) {
-        return oauth2ToHerodotusConverter.convert(authorization);
+    private TtcAuthorization toEntity(OAuth2Authorization authorization) {
+        return oauth2ToTtcConverter.convert(authorization);
     }
 }

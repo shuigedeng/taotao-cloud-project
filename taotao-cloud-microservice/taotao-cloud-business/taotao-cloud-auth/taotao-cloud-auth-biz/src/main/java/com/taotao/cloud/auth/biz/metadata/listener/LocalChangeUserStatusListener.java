@@ -42,7 +42,7 @@ public class LocalChangeUserStatusListener implements
 
 	@Override
 	public void onApplicationEvent(LocalChangeUserStatusEvent event) {
-		log.info("[Herodotus] |- Change user status gather LOCAL listener, response event!");
+		log.info(" Change user status gather LOCAL listener, response event!");
 
 		UserStatus userStatus = event.getData();
 		if (ObjectUtils.isNotEmpty(userStatus)) {

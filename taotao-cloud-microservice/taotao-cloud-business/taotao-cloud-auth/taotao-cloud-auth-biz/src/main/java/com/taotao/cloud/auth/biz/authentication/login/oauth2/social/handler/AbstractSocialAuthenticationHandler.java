@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler;
 
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.core.exception.SocialCredentialsUserBindingFailedException;
 import com.taotao.cloud.security.springsecurity.core.exception.UsernameAlreadyExistsException;
 import org.apache.commons.lang3.ObjectUtils;
@@ -59,10 +59,10 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      * 根据社交用户提供的一些信息，进行系统用户的注册
      *
      * @param socialUserDetails {@link SocialUserDetails}
-     * @return {@link HerodotusUser }
+     * @return {@link TtcUser }
      * @since 2023-07-04 10:04:30
      */
-    public abstract HerodotusUser register(SocialUserDetails socialUserDetails) throws UsernameAlreadyExistsException;
+    public abstract TtcUser register(SocialUserDetails socialUserDetails) throws UsernameAlreadyExistsException;
 
     /**
      * 系统用户与社交用户绑定操作
@@ -78,11 +78,11 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      * 随着系统业务复杂度的增加，系统用户注册成功之后，也许还会进行其它额外的操作，来补充新用户的相关信息。
      * 所以提供一个方法，方便进行新用户其它业务信息的操作。建议采用是异步操作。
      *
-     * @param herodotusUser     系统用户信息
+     * @param TtcUser     系统用户信息
      * @param socialUserDetails 社交登录过程中，第三方系统返回的新信息
      * @since 2023-07-04 10:04:30
      */
-    public abstract void additionalRegisterOperation(HerodotusUser herodotusUser, SocialUserDetails socialUserDetails);
+    public abstract void additionalRegisterOperation(TtcUser TtcUser, SocialUserDetails socialUserDetails);
 
     /**
      * 系统用户注册
@@ -90,21 +90,21 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      * 根据社交用户提供的一些信息，进行系统用户的注册
      *
      * @param socialUserDetails {@link SocialUserDetails}
-     * @return {@link HerodotusUser }
+     * @return {@link TtcUser }
      * @since 2023-07-04 10:04:30
      */
-    public abstract HerodotusUser signIn(SocialUserDetails socialUserDetails);
+    public abstract TtcUser signIn(SocialUserDetails socialUserDetails);
 
     /**
      * 社交用户登录后，附加的其它操作
      *
-     * @param herodotusUser        系统用户信息
+     * @param TtcUser        系统用户信息
      * @param newSocialUserDetails 社交登录过程中，第三方系统返回的新信息
      * @param oldSocialUserDetails 系统中已经存在的社交用户信息
      * @since 2023-07-04 10:04:30
      */
     public abstract void additionalSignInOperation(
-            HerodotusUser herodotusUser,
+            TtcUser TtcUser,
             SocialUserDetails newSocialUserDetails,
             SocialUserDetails oldSocialUserDetails);
 
@@ -118,23 +118,23 @@ public abstract class AbstractSocialAuthenticationHandler implements SocialAuthe
      *
      * @param source          社交登录提供者分类
      * @param accessPrincipal 社交登录所需要的信息
-     * @return {@link HerodotusUser }
+     * @return {@link TtcUser }
      * @since 2023-07-04 10:04:30
      */
     @Override
-    public HerodotusUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException {
+    public TtcUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException {
         SocialUserDetails newSocialUserDetails = this.identity(source, accessPrincipal);
         SocialUserDetails oldSocialUserDetails = this.isUserExist(newSocialUserDetails);
 
         if (ObjectUtils.isEmpty(oldSocialUserDetails)) {
-            HerodotusUser herodotusUser = this.register(newSocialUserDetails);
-            this.binding(herodotusUser.getUserId(), newSocialUserDetails);
-            this.additionalRegisterOperation(herodotusUser, newSocialUserDetails);
-            return herodotusUser;
+            TtcUser TtcUser = this.register(newSocialUserDetails);
+            this.binding(TtcUser.getUserId(), newSocialUserDetails);
+            this.additionalRegisterOperation(TtcUser, newSocialUserDetails);
+            return TtcUser;
         } else {
-            HerodotusUser herodotusUser = this.signIn(oldSocialUserDetails);
-            this.additionalSignInOperation(herodotusUser, newSocialUserDetails, oldSocialUserDetails);
-            return herodotusUser;
+            TtcUser TtcUser = this.signIn(oldSocialUserDetails);
+            this.additionalSignInOperation(TtcUser, newSocialUserDetails, oldSocialUserDetails);
+            return TtcUser;
         }
     }
 }

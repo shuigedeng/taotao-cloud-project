@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationP
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
-import com.taotao.cloud.security.springsecurity.core.definition.HerodotusGrantType;
+import com.taotao.cloud.security.springsecurity.core.definition.TtcGrantType;
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import com.taotao.cloud.security.springsecurity.core.exception.SocialCredentialsParameterBindingFailedException;
 import java.security.Principal;
@@ -116,7 +116,7 @@ public class OAuth2SocialCredentialsAuthenticationProvider extends OAuth2Abstrac
                         socialCredentialsAuthentication);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-        if (!registeredClient.getAuthorizationGrantTypes().contains(HerodotusGrantType.SOCIAL)) {
+        if (!registeredClient.getAuthorizationGrantTypes().contains(TtcGrantType.SOCIAL)) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
@@ -128,7 +128,7 @@ public class OAuth2SocialCredentialsAuthenticationProvider extends OAuth2Abstrac
 
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
                 .principalName(principal.getName())
-                .authorizationGrantType(HerodotusGrantType.SOCIAL)
+                .authorizationGrantType(TtcGrantType.SOCIAL)
                 .authorizedScopes(authorizedScopes)
                 .attribute(Principal.class.getName(), principal);
 
@@ -138,7 +138,7 @@ public class OAuth2SocialCredentialsAuthenticationProvider extends OAuth2Abstrac
                 .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                 .authorizedScopes(authorizedScopes)
                 .tokenType(OAuth2TokenType.ACCESS_TOKEN)
-                .authorizationGrantType(HerodotusGrantType.SOCIAL)
+                .authorizationGrantType(TtcGrantType.SOCIAL)
                 .authorizationGrant(socialCredentialsAuthentication);
 
         // ----- Access token -----

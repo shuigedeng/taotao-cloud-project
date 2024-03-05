@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.management.processor;
 
 import com.taotao.cloud.auth.biz.strategy.StrategyUserDetailsService;
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusUser;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,21 +54,21 @@ public class SecurityUserDetailsService implements EnhanceUserDetailsService {
     @Override
     public UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal)
             throws UsernameNotFoundException {
-        HerodotusUser herodotusUser = strategyUserDetailsService.findUserDetailsBySocial(
+        TtcUser TtcUser = strategyUserDetailsService.findUserDetailsBySocial(
                 StringUtils.toRootUpperCase(source), accessPrincipal);
-        log.info("UserDetailsService loaded social user : [{}]", herodotusUser.getUsername());
-        return herodotusUser;
+        log.info("UserDetailsService loaded social user : [{}]", TtcUser.getUsername());
+        return TtcUser;
     }
 
     @Override
-    public HerodotusUser loadHerodotusUserByUsername(String username) throws UsernameNotFoundException {
-        HerodotusUser herodotusUser = strategyUserDetailsService.findUserDetailsByUsername(username);
+    public TtcUser loadTtcUserByUsername(String username) throws UsernameNotFoundException {
+        TtcUser TtcUser = strategyUserDetailsService.findUserDetailsByUsername(username);
         log.info("UserDetailsService loaded user : [{}]", username);
-        return herodotusUser;
+        return TtcUser;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return loadHerodotusUserByUsername(username);
+        return loadTtcUserByUsername(username);
     }
 }

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.strategy;
 
 import com.taotao.cloud.auth.biz.strategy.user.SysPermission;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusPermission;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcPermission;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,15 +28,15 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractStrategyPermissionDetailsService implements StrategyPermissionDetailsService {
 
-    protected List<HerodotusPermission> toEntities(List<SysPermission> permissions) {
+    protected List<TtcPermission> toEntities(List<SysPermission> permissions) {
         return permissions.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    protected HerodotusPermission toEntity(SysPermission object) {
-        HerodotusPermission herodotusPermission = new HerodotusPermission();
-        herodotusPermission.setPermissionId(object.getPermissionId());
-        herodotusPermission.setPermissionCode(object.getPermissionCode());
-        herodotusPermission.setPermissionName(object.getPermissionName());
-        return herodotusPermission;
+    protected TtcPermission toEntity(SysPermission object) {
+        TtcPermission ttcPermission = new TtcPermission();
+		ttcPermission.setPermissionId(object.getPermissionId());
+		ttcPermission.setPermissionCode(object.getPermissionCode());
+		ttcPermission.setPermissionName(object.getPermissionName());
+        return ttcPermission;
     }
 }
