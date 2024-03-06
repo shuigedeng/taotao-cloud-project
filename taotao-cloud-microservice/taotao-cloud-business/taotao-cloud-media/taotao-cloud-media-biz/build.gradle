@@ -23,7 +23,7 @@ dependencies {
     implementation "com.google.zxing:core:3.5.3"
     implementation "com.google.zxing:javase:3.5.3"
 
-    //官网文档地址：https://docs.opencv.org/4.6.0/df/d65/tutorial_table_of_content_introduction.html
+    //官网文档地址：https://docs.opencv.org/4.9.0/df/d65/tutorial_table_of_content_introduction.html
     //教程参考：https://www.w3cschool.cn/opencv/
     //教程参考：https://www.yiibai.com/opencv/opencv_adding_text.html
     //下载地址：https://opencv.org/releases/
@@ -38,8 +38,8 @@ dependencies {
 
     //https://search.maven.org/artifact/org.bytedeco/javacv
     //http://bytedeco.org
-    implementation "org.bytedeco:javacv:1.5.9"
-    implementation "org.bytedeco:ffmpeg:6.0-1.5.9:linux-x86_64"
+    implementation "org.bytedeco:javacv:1.5.10"
+    implementation "org.bytedeco:ffmpeg:6.1.1-1.5.10:linux-x86_64"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

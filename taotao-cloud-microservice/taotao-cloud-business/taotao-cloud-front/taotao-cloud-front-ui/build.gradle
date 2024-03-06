@@ -1,7 +1,7 @@
 plugins {
     //https://github.com/node-gradle/gradle-node-plugin
     //https://plugins.gradle.org/plugin/com.github.node-gradle.node
-    id "com.github.node-gradle.node" version "7.0.1"
+    id "com.github.node-gradle.node" version "7.0.2"
 
     //https://github.com/siouan/frontend-gradle-plugin.git
     //https://siouan.github.io/frontend-gradle-plugin/
