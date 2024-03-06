@@ -103,7 +103,7 @@ dependencies {
     implementation("org.apache.paimon:paimon-codegen-loader:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-filesystems:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-flink-1.18:0.7.0-incubating")
-    implementation("org.apache.paimon:paimon-flink-cdc:7.0-incubating")
+    implementation("org.apache.paimon:paimon-flink-cdc:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-flink-action:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-hive:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-hive-catalog:0.7.0-incubating")
