@@ -22,7 +22,7 @@ dependencies {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
 
-    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.2.3'
+    implementation 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.0'
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }

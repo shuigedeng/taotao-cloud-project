@@ -83,15 +83,34 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'
 
-    implementation("org.apache.hudi:hudi-common:0.14.1")
-    implementation("org.apache.hudi:hudi-client:0.14.1")
-    implementation("org.apache.hudi:hudi-flink-client:0.14.1")
-    //implementation("org.apache.hudi:hudi-flink1.18-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-common:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-client:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-flink-client:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-flink1.18-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-datahub-sync-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-hadoop-mr-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-hive-sync-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-kafka-connect-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-metaserver-server-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-presto-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-trino-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-timeline-server-bundle:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-utilities-bundle_2.12:1.0.0-beta1")
+    implementation("org.apache.hudi:hudi-utilities-slim-bundle_2.12:1.0.0-beta1")
 
+    implementation("org.apache.paimon:paimon-format:0.7.0-incubating")
+    implementation("org.apache.paimon:paimon-codegen:0.7.0-incubating")
+    implementation("org.apache.paimon:paimon-codegen-loader:0.7.0-incubating")
+    implementation("org.apache.paimon:paimon-filesystems:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-flink-1.18:0.7.0-incubating")
+    implementation("org.apache.paimon:paimon-flink-cdc.7.0-incubating")
     implementation("org.apache.paimon:paimon-flink-action:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-hive:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-hive-catalog:0.7.0-incubating")
+    implementation("org.apache.paimon:paimon-hive-connector-3.1:0.7.0-incubating")
+    implementation("org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.6.0-incubating")
+    implementation("org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.6.0-incubating")
+    implementation("org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.6.0-incubating")
 
     implementation 'org.apache.commons:commons-compress:1.25.0'
     implementation 'org.slf4j:slf4j-api:2.0.12'
