@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.param.pay;
+package com.taotao.cloud.payment.biz.daxpay.single.core.param.pay;
 
 import cn.bootx.platform.daxpay.param.PaymentCommonParam;
 import cn.bootx.platform.daxpay.param.channel.AliPayParam;
@@ -8,8 +8,6 @@ import cn.bootx.platform.daxpay.param.channel.WeChatPayParam;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 简单退款参数，只可以用于非组合的支付订单
@@ -44,7 +42,6 @@ public class SimpleRefundParam extends PaymentCommonParam {
 
 
     @Schema(description = "退款金额")
-    @NotNull(message = "退款金额不可为空")
     private Integer amount;
 
     /**

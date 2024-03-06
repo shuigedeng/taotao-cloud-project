@@ -1,14 +1,14 @@
-package cn.bootx.platform.daxpay.result.pay;
+package com.taotao.cloud.payment.biz.daxpay.single.core.result.pay;
 
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.RefundSyncStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PaySyncStatusEnum;
+import cn.bootx.platform.daxpay.code.RefundSyncStatusEnum;
+import cn.bootx.platform.daxpay.code.PaySyncStatusEnum;
 import cn.bootx.platform.daxpay.result.CommonResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import static com.taotao.cloud.payment.biz.daxpay.single.core.code.PaySyncStatusEnum.FAIL;
+import static cn.bootx.platform.daxpay.code.PaySyncStatusEnum.FAIL;
 
 /**
  * 支付单同步结果

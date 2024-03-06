@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.net;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.response.DaxPayResult;
+import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
 import cn.hutool.core.date.DateUtil;
 import lombok.Getter;
 import lombok.Setter;

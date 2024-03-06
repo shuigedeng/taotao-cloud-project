@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.net;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.SignTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.response.DaxPayResult;
-import com.taotao.cloud.payment.biz.daxpay.sdk.util.PaySignUtil;
+import cn.bootx.platform.daxpay.sdk.code.SignTypeEnum;
+import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
+import cn.bootx.platform.daxpay.sdk.util.PaySignUtil;
 import cn.hutool.http.*;
 import cn.hutool.json.JSONUtil;
 import lombok.experimental.UtilityClass;

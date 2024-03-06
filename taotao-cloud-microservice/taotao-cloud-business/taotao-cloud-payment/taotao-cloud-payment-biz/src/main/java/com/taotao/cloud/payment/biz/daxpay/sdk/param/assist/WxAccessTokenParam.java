@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.param.assist;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.model.assist.WxAccessTokenModel;
-import com.taotao.cloud.payment.biz.daxpay.sdk.net.DaxPayRequest;
-import com.taotao.cloud.payment.biz.daxpay.sdk.response.DaxPayResult;
+import cn.bootx.platform.daxpay.sdk.model.assist.WxAccessTokenModel;
+import cn.bootx.platform.daxpay.sdk.net.DaxPayRequest;
+import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.json.JSONUtil;
 import lombok.Getter;

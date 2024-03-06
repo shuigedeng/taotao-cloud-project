@@ -1,6 +1,6 @@
-package cn.bootx.platform.daxpay.result.order;
+package com.taotao.cloud.payment.biz.daxpay.single.core.result.order;
 
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.RefundStatusEnum;
+import cn.bootx.platform.daxpay.code.RefundStatusEnum;
 import cn.bootx.platform.daxpay.serializer.LocalDateTimeToTimestampSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;

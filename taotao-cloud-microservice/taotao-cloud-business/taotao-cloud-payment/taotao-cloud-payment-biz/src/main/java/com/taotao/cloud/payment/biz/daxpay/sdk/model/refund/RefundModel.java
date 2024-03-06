@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.refund;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.RefundStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.net.DaxPayResponseModel;
+import cn.bootx.platform.daxpay.sdk.code.RefundStatusEnum;
+import cn.bootx.platform.daxpay.sdk.net.DaxPayResponseModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

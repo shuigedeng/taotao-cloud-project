@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.param.assist;
+package com.taotao.cloud.payment.biz.daxpay.single.core.param.assist;
 
 import cn.bootx.platform.daxpay.param.PaymentCommonParam;
 import io.swagger.v3.oas.annotations.media.Schema;

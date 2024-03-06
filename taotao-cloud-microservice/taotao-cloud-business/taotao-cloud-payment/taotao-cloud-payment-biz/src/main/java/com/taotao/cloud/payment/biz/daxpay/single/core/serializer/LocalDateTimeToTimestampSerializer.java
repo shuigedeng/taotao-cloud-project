@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.serializer;
+package com.taotao.cloud.payment.biz.daxpay.single.core.serializer;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import com.fasterxml.jackson.core.JsonGenerator;

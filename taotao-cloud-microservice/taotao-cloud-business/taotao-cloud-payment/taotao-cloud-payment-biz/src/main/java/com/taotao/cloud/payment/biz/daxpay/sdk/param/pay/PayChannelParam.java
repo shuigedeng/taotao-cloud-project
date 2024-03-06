@@ -1,12 +1,12 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.param.pay;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.ChannelParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.AliPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.VoucherPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.WalletPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.WeChatPayParam;
+import cn.bootx.platform.daxpay.sdk.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.sdk.code.PayWayEnum;
+import cn.bootx.platform.daxpay.sdk.param.ChannelParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.AliPayParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.VoucherPayParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.WalletPayParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.WeChatPayParam;
 import lombok.Getter;
 import lombok.Setter;
 

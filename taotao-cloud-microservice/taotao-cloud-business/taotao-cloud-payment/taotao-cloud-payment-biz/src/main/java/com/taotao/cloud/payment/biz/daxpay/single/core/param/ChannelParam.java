@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.param;
+package com.taotao.cloud.payment.biz.daxpay.single.core.param;
 
 /**
  * 通道支付参数标识接口

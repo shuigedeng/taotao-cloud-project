@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.util;
+package com.taotao.cloud.payment.biz.daxpay.single.core.util;
 
 import cn.bootx.platform.daxpay.result.DaxResult;
 import lombok.experimental.UtilityClass;

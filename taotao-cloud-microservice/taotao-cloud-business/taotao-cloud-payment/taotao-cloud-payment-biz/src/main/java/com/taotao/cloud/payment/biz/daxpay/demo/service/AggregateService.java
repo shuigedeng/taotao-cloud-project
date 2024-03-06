@@ -3,19 +3,21 @@ package com.taotao.cloud.payment.biz.daxpay.demo.service;
 import cn.bootx.platform.common.core.exception.BizException;
 import cn.bootx.platform.common.redis.RedisClient;
 import cn.bootx.platform.common.spring.util.WebServletUtil;
-import com.taotao.cloud.payment.biz.daxpay.demo.configuration.DaxPayDemoProperties;
-import com.taotao.cloud.payment.biz.daxpay.demo.domain.AggregatePayInfo;
-import com.taotao.cloud.payment.biz.daxpay.demo.param.AggregateSimplePayParam;
-import com.taotao.cloud.payment.biz.daxpay.demo.result.PayOrderResult;
-import com.taotao.cloud.payment.biz.daxpay.demo.result.WxJsapiSignResult;
+import cn.bootx.platform.daxpay.demo.configuration.DaxPayDemoProperties;
+import cn.bootx.platform.daxpay.demo.domain.AggregatePayInfo;
+import cn.bootx.platform.daxpay.demo.param.AggregateSimplePayParam;
+import cn.bootx.platform.daxpay.demo.result.PayOrderResult;
+import cn.bootx.platform.daxpay.demo.result.WxJsapiSignResult;
 import cn.bootx.platform.daxpay.sdk.code.AggregatePayEnum;
 import cn.bootx.platform.daxpay.sdk.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.sdk.code.PayWayEnum;
 import cn.bootx.platform.daxpay.sdk.model.assist.WxAccessTokenModel;
 import cn.bootx.platform.daxpay.sdk.model.assist.WxAuthUrlModel;
 import cn.bootx.platform.daxpay.sdk.model.pay.PayOrderModel;
+import cn.bootx.platform.daxpay.sdk.net.DaxPayKit;
 import cn.bootx.platform.daxpay.sdk.param.assist.WxAccessTokenParam;
 import cn.bootx.platform.daxpay.sdk.param.assist.WxAuthUrlParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.BarCodePayParam;
 import cn.bootx.platform.daxpay.sdk.param.channel.WeChatPayParam;
 import cn.bootx.platform.daxpay.sdk.param.pay.SimplePayParam;
 import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
@@ -25,7 +27,6 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.json.JSONUtil;
-import com.taotao.cloud.payment.biz.daxpay.sdk.net.DaxPayKit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -217,6 +218,9 @@ public class AggregateService {
         simplePayParam.setAmount(amount);
         simplePayParam.setChannel(payChannel.getCode());
         simplePayParam.setPayWay(PayWayEnum.BARCODE.getCode());
+        BarCodePayParam barCodePayParam = new BarCodePayParam();
+        barCodePayParam.setAuthCode(param.getAuthCode());
+        simplePayParam.setChannelParam(barCodePayParam);
 
         String ip = Optional.ofNullable(WebServletUtil.getRequest())
                 .map(ServletUtil::getClientIP)
@@ -256,7 +260,6 @@ public class AggregateService {
             throw new BizException("不支持的支付方式");
         }
     }
-
 
     /**
      * 获取微信OpenId

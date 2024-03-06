@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.result;
+package com.taotao.cloud.payment.biz.daxpay.single.core.result;
 
 import cn.bootx.platform.common.core.code.CommonCode;
 import cn.bootx.platform.common.core.rest.ResResult;

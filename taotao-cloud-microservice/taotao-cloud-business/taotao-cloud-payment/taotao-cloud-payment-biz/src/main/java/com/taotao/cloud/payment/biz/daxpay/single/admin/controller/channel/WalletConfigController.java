@@ -1,6 +1,11 @@
 package com.taotao.cloud.payment.biz.daxpay.single.admin.controller.channel;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.service.WalletConfigService;
+import cn.bootx.platform.common.core.rest.Res;
+import cn.bootx.platform.common.core.rest.ResResult;
+import cn.bootx.platform.common.core.rest.dto.LabelValue;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.service.WalletConfigService;
+import cn.bootx.platform.daxpay.service.dto.channel.wallet.WalletConfigDto;
+import cn.bootx.platform.daxpay.service.param.channel.wechat.WalletConfigParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

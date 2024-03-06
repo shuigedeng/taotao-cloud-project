@@ -1,7 +1,7 @@
-package cn.bootx.platform.daxpay.exception.pay;
+package com.taotao.cloud.payment.biz.daxpay.single.core.exception.pay;
 
 import cn.bootx.platform.common.core.exception.BizException;
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.DaxPayErrorCode;
+import cn.bootx.platform.daxpay.code.DaxPayErrorCode;
 
 /**
  * 付款错误

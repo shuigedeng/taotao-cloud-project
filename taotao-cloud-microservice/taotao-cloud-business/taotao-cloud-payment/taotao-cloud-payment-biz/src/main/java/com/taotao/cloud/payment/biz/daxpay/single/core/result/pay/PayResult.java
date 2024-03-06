@@ -1,7 +1,7 @@
-package cn.bootx.platform.daxpay.result.pay;
+package com.taotao.cloud.payment.biz.daxpay.single.core.result.pay;
 
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayStatusEnum;
+import cn.bootx.platform.daxpay.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.code.PayStatusEnum;
 import cn.bootx.platform.daxpay.result.CommonResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

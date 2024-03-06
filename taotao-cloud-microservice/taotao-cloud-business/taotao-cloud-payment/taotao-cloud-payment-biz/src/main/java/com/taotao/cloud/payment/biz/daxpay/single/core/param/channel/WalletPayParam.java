@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.param.channel;
+package com.taotao.cloud.payment.biz.daxpay.single.core.param.channel;
 
 import cn.bootx.platform.daxpay.param.ChannelParam;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.pay;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayStatusEnum;
+import cn.bootx.platform.daxpay.sdk.code.PayStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

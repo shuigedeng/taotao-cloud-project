@@ -1,15 +1,15 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.param.pay;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.model.pay.PayOrderModel;
-import com.taotao.cloud.payment.biz.daxpay.sdk.net.DaxPayRequest;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.ChannelParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.AliPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.VoucherPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.WalletPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.channel.WeChatPayParam;
-import com.taotao.cloud.payment.biz.daxpay.sdk.response.DaxPayResult;
+import cn.bootx.platform.daxpay.sdk.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.sdk.code.PayWayEnum;
+import cn.bootx.platform.daxpay.sdk.model.pay.PayOrderModel;
+import cn.bootx.platform.daxpay.sdk.net.DaxPayRequest;
+import cn.bootx.platform.daxpay.sdk.param.ChannelParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.AliPayParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.VoucherPayParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.WalletPayParam;
+import cn.bootx.platform.daxpay.sdk.param.channel.WeChatPayParam;
+import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.json.JSONUtil;
 import lombok.Getter;

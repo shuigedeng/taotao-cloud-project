@@ -1,6 +1,6 @@
-package cn.bootx.platform.daxpay.entity;
+package com.taotao.cloud.payment.biz.daxpay.single.core.entity;
 
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

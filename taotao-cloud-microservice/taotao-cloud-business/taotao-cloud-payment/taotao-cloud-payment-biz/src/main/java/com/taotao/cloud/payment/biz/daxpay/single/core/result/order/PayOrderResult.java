@@ -1,7 +1,7 @@
-package cn.bootx.platform.daxpay.result.order;
+package com.taotao.cloud.payment.biz.daxpay.single.core.result.order;
 
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayStatusEnum;
+import cn.bootx.platform.daxpay.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.code.PayStatusEnum;
 import cn.bootx.platform.daxpay.result.CommonResult;
 import cn.bootx.platform.daxpay.serializer.LocalDateTimeToTimestampSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

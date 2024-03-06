@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.param.channel;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.param.ChannelParam;
+import cn.bootx.platform.daxpay.sdk.param.ChannelParam;
 import lombok.Getter;
 import lombok.Setter;
 

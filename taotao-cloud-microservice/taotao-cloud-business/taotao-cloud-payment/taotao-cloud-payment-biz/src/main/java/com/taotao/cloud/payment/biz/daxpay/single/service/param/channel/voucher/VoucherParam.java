@@ -1,6 +1,6 @@
-package com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.voucher;
+package cn.bootx.platform.daxpay.service.param.channel.voucher;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.VoucherCode;
+import cn.bootx.platform.daxpay.service.code.VoucherCode;
 import cn.hutool.core.date.DatePattern;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

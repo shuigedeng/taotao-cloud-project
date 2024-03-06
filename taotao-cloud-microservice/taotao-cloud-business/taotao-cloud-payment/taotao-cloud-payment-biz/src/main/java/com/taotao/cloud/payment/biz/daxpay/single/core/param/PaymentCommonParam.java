@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.param;
+package com.taotao.cloud.payment.biz.daxpay.single.core.param;
 
 import cn.bootx.platform.daxpay.serializer.TimestampToLocalDateTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.param.refund;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.sdk.code.PayChannelEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.net;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.SignTypeEnum;
+import cn.bootx.platform.daxpay.sdk.code.SignTypeEnum;
 import lombok.Builder;
 import lombok.Getter;
 

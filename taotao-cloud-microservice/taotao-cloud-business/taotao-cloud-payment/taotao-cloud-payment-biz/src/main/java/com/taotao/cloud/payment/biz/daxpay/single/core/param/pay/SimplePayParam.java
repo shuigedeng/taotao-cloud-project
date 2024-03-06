@@ -1,7 +1,7 @@
-package cn.bootx.platform.daxpay.param.pay;
+package com.taotao.cloud.payment.biz.daxpay.single.core.param.pay;
 
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.PayWayEnum;
+import cn.bootx.platform.daxpay.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.code.PayWayEnum;
 import cn.bootx.platform.daxpay.param.PaymentCommonParam;
 import cn.bootx.platform.daxpay.param.channel.AliPayParam;
 import cn.bootx.platform.daxpay.param.channel.VoucherPayParam;

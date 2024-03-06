@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.util;
+package com.taotao.cloud.payment.biz.daxpay.single.core.util;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.hutool.core.util.ClassUtil;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.taotao.cloud.payment.biz.daxpay.single.core.code.DaxPayCode.FIELD_SIGN;
+import static cn.bootx.platform.daxpay.code.DaxPayCode.FIELD_SIGN;
 
 /**
  * 如果需要进行签名,

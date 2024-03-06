@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.model.notice;
 
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.sdk.code.PayWayEnum;
+import cn.bootx.platform.daxpay.sdk.code.PayChannelEnum;
+import cn.bootx.platform.daxpay.sdk.code.PayWayEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

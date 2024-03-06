@@ -2,9 +2,9 @@ package com.taotao.cloud.payment.biz.daxpay.demo.service;
 
 import cn.bootx.platform.common.core.exception.BizException;
 import cn.bootx.platform.common.spring.util.WebServletUtil;
-import com.taotao.cloud.payment.biz.daxpay.demo.configuration.DaxPayDemoProperties;
-import com.taotao.cloud.payment.biz.daxpay.demo.param.CashierSimplePayParam;
-import com.taotao.cloud.payment.biz.daxpay.demo.result.PayOrderResult;
+import cn.bootx.platform.daxpay.demo.configuration.DaxPayDemoProperties;
+import cn.bootx.platform.daxpay.demo.param.CashierSimplePayParam;
+import cn.bootx.platform.daxpay.demo.result.PayOrderResult;
 import cn.bootx.platform.daxpay.sdk.code.AggregatePayEnum;
 import cn.bootx.platform.daxpay.sdk.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.sdk.code.PayStatusEnum;

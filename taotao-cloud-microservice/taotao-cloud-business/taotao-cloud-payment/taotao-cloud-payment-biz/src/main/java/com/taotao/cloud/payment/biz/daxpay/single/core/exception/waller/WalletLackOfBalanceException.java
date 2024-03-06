@@ -1,7 +1,7 @@
-package cn.bootx.platform.daxpay.exception.waller;
+package com.taotao.cloud.payment.biz.daxpay.single.core.exception.waller;
 
 import cn.bootx.platform.common.core.exception.BizException;
-import com.taotao.cloud.payment.biz.daxpay.single.core.code.DaxPayErrorCode;
+import cn.bootx.platform.daxpay.code.DaxPayErrorCode;
 
 /**
  * 余额不足异常
