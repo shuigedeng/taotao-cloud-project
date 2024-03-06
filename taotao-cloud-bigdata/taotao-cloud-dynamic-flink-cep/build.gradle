@@ -7,7 +7,7 @@ dependencies {
 
     testImplementation 'org.slf4j:slf4j-api:2.0.0'
     testImplementation 'mysql:mysql-connector-java:8.0.28'
-    testImplementation 'org.apache.flink:flink-connector-kafka:${flink.version}'
+    testImplementation 'org.apache.flink:flink-connector-kafka:1.15.0'
     testImplementation 'org.apache.kafka:kafka-clients:2.4.1'
     testImplementation 'commons-cli:commons-cli:1.5.0'
 }
