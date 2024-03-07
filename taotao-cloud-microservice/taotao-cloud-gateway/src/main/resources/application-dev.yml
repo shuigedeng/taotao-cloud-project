@@ -1075,6 +1075,42 @@ knife4j:
         service-name: mall-server         # 服务名
         order: 1         # 排序
 
+# 配置断路器
+resilience4j:
+  circuitbreaker:
+    configs:
+      # 默认断路器配置
+      default:
+        # 断路器方式 计数的方式
+        sliding-window-type: count_based
+        # 统计数量周期
+        sliding-window-size: 6
+        # 最小统计数量
+        minimum-number-of-calls: 6
+        # 阈值 百分比
+        failure-rate-threshold: 50
+        #熔断时长 秒
+        wait-duration-in-open-state: 10s
+        # 需要开启半开状态来测试
+        automatic-transition-from-open-to-half-open-enabled: true
+        # 半开测试访问请求数量
+        permitted-number-of-calls-in-half-open-state: 2
+        # 计数的异常
+        record-exceptions:
+          - java.lang.Exception
+    instances:
+      cloud-product:
+        base-config: default
+  ratelimiter:
+    configs:
+      # 默认每秒只能通过1个请求
+      default:
+        limit-for-period: 10
+        limit-refresh-period: 1s
+        timeout-duration: 1
+    instances:
+      cloud-product:
+        base-config: default
 
 #knife4j:
 #  enable: true

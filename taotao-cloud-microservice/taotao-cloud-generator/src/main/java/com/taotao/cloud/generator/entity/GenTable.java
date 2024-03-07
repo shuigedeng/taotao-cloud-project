@@ -19,7 +19,6 @@ package com.taotao.cloud.generator.entity;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.generator.api.constant.GenConstants;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

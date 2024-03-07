@@ -1,5 +1,8 @@
 package com.taotao.cloud.generator.mbg;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -7,11 +10,8 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.internal.DefaultCommentGenerator;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Properties;
-
 public class MySQLCommentGenerator extends DefaultCommentGenerator {
+
 	private final Properties properties;
 
 	public MySQLCommentGenerator() {
@@ -20,7 +20,7 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 
 	@Override
 	public void addConfigurationProperties(Properties properties) {
-// 获取自定义的 properties
+	// 获取自定义的 properties
 		this.properties.putAll(properties);
 	}
 
@@ -28,7 +28,8 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 	 * 重写给实体类加的注释
 	 */
 	@Override
-	public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+	public void addModelClassComment(TopLevelClass topLevelClass,
+		IntrospectedTable introspectedTable) {
 		String author = properties.getProperty("author");
 		String dateFormat = properties.getProperty("dateFormat", "yyyy-MM-dd");
 		SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormat);
@@ -46,7 +47,8 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 	 * 重写给实体类字段加的注释
 	 */
 	@Override
-	public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+	public void addFieldComment(Field field, IntrospectedTable introspectedTable,
+		IntrospectedColumn introspectedColumn) {
 // 获取列注释
 		String remarks = introspectedColumn.getRemarks();
 		field.addJavaDocLine("/**");
@@ -58,7 +60,8 @@ public class MySQLCommentGenerator extends DefaultCommentGenerator {
 	 * 重写给实体类get方法加的注释
 	 */
 	@Override
-	public void addGetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+	public void addGetterComment(Method method, IntrospectedTable introspectedTable,
+		IntrospectedColumn introspectedColumn) {
 // 获取表注释
 		String remarks = introspectedColumn.getRemarks();
 		method.addJavaDocLine("/**");

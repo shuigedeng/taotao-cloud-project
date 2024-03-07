@@ -36,6 +36,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
+    implementation "io.github.resilience4j:resilience4j-ratelimiter:2.2.0"
 
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
