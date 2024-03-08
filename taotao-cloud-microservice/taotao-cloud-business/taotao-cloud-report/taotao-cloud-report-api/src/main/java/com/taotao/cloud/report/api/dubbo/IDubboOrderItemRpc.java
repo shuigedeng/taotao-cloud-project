@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.report.api.dubbo;
 
+import com.taotao.cloud.report.api.dubbo.response.OrderBO;
+
 /**
  * IDubboOrderService
  *
@@ -25,12 +27,12 @@ package com.taotao.cloud.report.api.dubbo;
  */
 public interface IDubboOrderItemRpc {
 
-    /**
-     * 查询
-     *
-     * @param id id
-     * @return {@link OrderBO }
-     * @since 2022-04-28 09:21:25
-     */
-    OrderBO query(Long id);
+	/**
+	 * 查询
+	 *
+	 * @param id id
+	 * @return {@link OrderBO }
+	 * @since 2022-04-28 09:21:25
+	 */
+	OrderBO query(Long id);
 }

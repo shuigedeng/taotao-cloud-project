@@ -28,30 +28,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 // @Component
 @Slf4j
 public class FlowEngineApiFallback implements FlowEngineApi {
-
-    @Override
-    public TableModels tableCre(TableCreModels tableCreModels) {
-        return new TableModels();
-    }
-
-    @Override
-    public void create(@Valid FlowEngineEntity flowEngineEntity) {}
-
-    @Override
-    public FlowEngineEntity getInfoByID(String id) {
-        return null;
-    }
-
-    @Override
-    public void updateByID(@PathVariable("id") String id, @RequestBody FlowEngineEntity flowEngineEntity) {}
-
-    @Override
-    public FlowAppPageModel getAppPageList(FlowPagination pagination) {
-        return new FlowAppPageModel();
-    }
-
-    @Override
-    public List<FlowEngineEntity> getFlowList(List<String> id) {
-        return new ArrayList<>();
-    }
+//
+//    @Override
+//    public TableModels tableCre(TableCreModels tableCreModels) {
+//        return new TableModels();
+//    }
+//
+//    @Override
+//    public void create(@Valid FlowEngineEntity flowEngineEntity) {}
+//
+//    @Override
+//    public FlowEngineEntity getInfoByID(String id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public void updateByID(@PathVariable("id") String id, @RequestBody FlowEngineEntity flowEngineEntity) {}
+//
+//    @Override
+//    public FlowAppPageModel getAppPageList(FlowPagination pagination) {
+//        return new FlowAppPageModel();
+//    }
+//
+//    @Override
+//    public List<FlowEngineEntity> getFlowList(List<String> id) {
+//        return new ArrayList<>();
+//    }
 }

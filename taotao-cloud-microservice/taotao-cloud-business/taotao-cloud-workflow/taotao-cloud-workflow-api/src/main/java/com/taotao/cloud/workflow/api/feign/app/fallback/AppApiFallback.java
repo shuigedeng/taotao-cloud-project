@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.api.feign.app.fallback;
 
-import taotao.cloud.workflow.biz.app.AppApi;
+import com.taotao.cloud.workflow.api.feign.app.AppApi;
 import lombok.extern.slf4j.Slf4j;
 
 /**

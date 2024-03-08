@@ -16,10 +16,12 @@
 
 package com.taotao.cloud.wechat.api.feign.fallback;
 
-import org.dromara.hutoolcore.util.StrUtil;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.wechat.api.feign.IFeignDictApi;
 import com.taotao.cloud.wechat.api.feign.response.FeignDictResponse;
+import io.seata.core.context.RootContext;
+import io.seata.tm.api.GlobalTransactionContext;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.transaction.TransactionException;
 
@@ -41,7 +43,7 @@ public class FeignDictApiFallback implements FallbackFactory<IFeignDictApi> {
                 if (StrUtil.isNotBlank(RootContext.getXID())) {
                     try {
                         GlobalTransactionContext.reload(RootContext.getXID()).rollback();
-                    } catch (TransactionException e) {
+                    } catch (TransactionException | io.seata.core.exception.TransactionException e) {
                         LogUtils.error(e);
                     }
                 }
