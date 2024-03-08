@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
-import com.taotao.cloud.security.springsecurity.core.domain.HerodotusGrantedAuthority;
+import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -315,7 +315,7 @@ public class ReactiveSecurityOpaqueTokenIntrospector implements ReactiveOpaqueTo
 			if (v instanceof ArrayList) {
 				@SuppressWarnings("unchecked")
 				List<String> values = (List<String>) v;
-				values.forEach(value -> authorities.add(new HerodotusGrantedAuthority(value)));
+				values.forEach(value -> authorities.add(new TtcGrantedAuthority(value)));
 			}
 			return v;
 		});
