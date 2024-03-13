@@ -21,6 +21,8 @@ import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.sys.api.grpc.DeviceFix;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
@@ -57,6 +59,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
+@ComponentScan(basePackages = {
+	"com.taotao.cloud.sys.biz.repository.cls"
+} )
+@EnableFeignClients(basePackages = {"com.taotao.cloud.sys.api.feign"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 

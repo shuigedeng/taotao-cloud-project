@@ -54,8 +54,8 @@ import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
 @RequestMapping("/sys/tools/email")
 public class EmailController {
 
-	private final RedisDelayQueue redisDelayQueue;
-	private final RedissonTemplate redissonTemplate;
+//	private final RedisDelayQueue redisDelayQueue;
+//	private final RedissonTemplate redissonTemplate;
 	private final IEmailConfigService emailService;
 
 	@ApiInfo(

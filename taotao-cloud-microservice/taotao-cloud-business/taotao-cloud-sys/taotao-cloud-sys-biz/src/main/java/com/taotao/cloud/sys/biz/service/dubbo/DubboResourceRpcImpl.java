@@ -45,7 +45,7 @@ public class DubboResourceRpcImpl
         extends BaseSuperServiceImpl< Resource, Long, IResourceMapper,ResourceRepository, IResourceRepository>
         implements IDubboResourceRpc {
 
-    private final IRoleService roleService;
+//    private final IRoleService roleService;
 
     private static final QResource RESOURCE = QResource.resource;
 

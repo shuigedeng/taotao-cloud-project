@@ -87,6 +87,7 @@ public final class OAuth2ConfigurerUtils {
         return authorizationConsentService;
     }
 
+	//Token生成器
     @SuppressWarnings("unchecked")
     public static OAuth2TokenGenerator<? extends OAuth2Token> getTokenGenerator(HttpSecurity httpSecurity) {
         OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator =

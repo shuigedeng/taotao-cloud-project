@@ -46,5 +46,5 @@ public class DubboUserRpcImpl extends BaseSuperServiceImpl< User, Long,IUserMapp
     private static final String DEFAULT_PASSWORD = "123456";
     private static final String DEFAULT_USERNAME = "admin";
 
-    private final IUserRelationService userRoleService;
+//    private final IUserRelationService userRoleService;
 }

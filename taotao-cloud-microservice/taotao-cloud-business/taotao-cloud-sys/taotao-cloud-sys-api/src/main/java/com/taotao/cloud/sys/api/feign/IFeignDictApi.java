@@ -40,7 +40,6 @@ import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
  */
 @FeignClient(
 	name = ServiceName.TAOTAO_CLOUD_SYS,
-	contextId = "IFeignDictApi",
 	fallbackFactory = FeignDictApiFallback.class)
 public interface IFeignDictApi {
 

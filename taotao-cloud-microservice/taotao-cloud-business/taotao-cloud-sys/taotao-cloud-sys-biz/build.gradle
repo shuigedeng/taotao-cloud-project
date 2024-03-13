@@ -151,6 +151,9 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "io.zipkin.brave", module: "brave"
+        exclude group: "io.zipkin.reporter2", module: "zipkin-reporter-brave"
+        exclude group: "io.micrometer", module: "micrometer-tracing-bridge-brave"
     }
 }
 

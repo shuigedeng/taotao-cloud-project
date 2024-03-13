@@ -43,5 +43,5 @@ public class DubboRoleRpcImpl extends BaseSuperServiceImpl< Role, Long,IRoleMapp
 
     private static final QRole ROLE = QRole.role;
 
-    private final IRoleResourceService roleResourceService;
+//    private final IRoleResourceService roleResourceService;
 }

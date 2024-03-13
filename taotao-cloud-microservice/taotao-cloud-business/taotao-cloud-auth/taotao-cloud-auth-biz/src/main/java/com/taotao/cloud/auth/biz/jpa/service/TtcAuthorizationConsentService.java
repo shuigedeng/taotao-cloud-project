@@ -103,9 +103,9 @@ public class TtcAuthorizationConsentService {
 		authorizationConsentRepository.save(entity);
 	}
 
-	public Page<TtcAuthorizationConsent> myPageQuery(String registeredClientId,
-		String principalName) {
-		return authorizationConsentRepository.myPageQuery(registeredClientId, principalName,
-			PageRequest.of(0, 20));
-	}
+//	public Page<TtcAuthorizationConsent> myPageQuery(String registeredClientId,
+//		String principalName) {
+//		return authorizationConsentRepository.myPageQuery(registeredClientId, principalName,
+//			PageRequest.of(0, 20));
+//	}
 }

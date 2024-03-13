@@ -61,14 +61,14 @@ public interface TtcAuthorizationConsentRepository
 	void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId,
 		String principalName);
 
-	@MyQuery(value = """
-		select h
-		from TtcAuthorizationConsent h
-		where ?{ registeredClientId = :registeredClientId }
-		?{ and principalName = :principalName }
-		""")
-	Page<TtcAuthorizationConsent> myPageQuery(
-		@Param("registeredClientId") String registeredClientId,
-		@Param("principalName") String principalName,
-		PageRequest pageRequest);
+//	@MyQuery(value = """
+//		select h
+//		from TtcAuthorizationConsent h
+//		where ?{ registeredClientId = :registeredClientId }
+//		?{ and principalName = :principalName }
+//		""")
+//	Page<TtcAuthorizationConsent> myPageQuery(
+//		@Param("registeredClientId") String registeredClientId,
+//		@Param("principalName") String principalName,
+//		PageRequest pageRequest);
 }

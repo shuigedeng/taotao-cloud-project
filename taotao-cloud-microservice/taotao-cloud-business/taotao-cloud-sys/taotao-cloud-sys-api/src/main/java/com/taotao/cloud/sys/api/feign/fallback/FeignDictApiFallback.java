@@ -40,13 +40,13 @@ public class FeignDictApiFallback implements FallbackFactory<IFeignDictApi> {
             @Override
             public FeignDictResponse findByCode(String code) {
 
-                if (StrUtil.isNotBlank(RootContext.getXID())) {
-                    try {
-                        GlobalTransactionContext.reload(RootContext.getXID()).rollback();
-                    } catch (TransactionException e) {
-                        LogUtils.error(e);
-                    }
-                }
+//                if (StrUtil.isNotBlank(RootContext.getXID())) {
+//                    try {
+//                        GlobalTransactionContext.reload(RootContext.getXID()).rollback();
+//                    } catch (TransactionException e) {
+//                        LogUtils.error(e);
+//                    }
+//                }
 
                 return null;
             }

@@ -55,14 +55,14 @@ public class MessagesController {
     @Autowired
     private TtcAuthorizationConsentService ttcAuthorizationConsentService;
 
-    @Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
-    @GetMapping("/NotAuth/myPageQuery")
-    @NotAuth
-    public Result<String> myPageQuery() {
-        Page<TtcAuthorizationConsent> ttcAuthorizationConsents = ttcAuthorizationConsentService.myPageQuery(null, null);
-
-        return Result.success("sadfasdf");
-    }
+//    @Operation(summary = "测试消息NotAuth", description = "测试消息NotAuth")
+//    @GetMapping("/NotAuth/myPageQuery")
+//    @NotAuth
+//    public Result<String> myPageQuery() {
+//        Page<TtcAuthorizationConsent> ttcAuthorizationConsents = ttcAuthorizationConsentService.myPageQuery(null, null);
+//
+//        return Result.success("sadfasdf");
+//    }
 
     // @Autowired
     // private IFeignDictApi feignDictService;

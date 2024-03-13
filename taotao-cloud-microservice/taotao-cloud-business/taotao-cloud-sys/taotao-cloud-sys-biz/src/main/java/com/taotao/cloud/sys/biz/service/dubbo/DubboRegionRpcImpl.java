@@ -42,6 +42,6 @@ public class DubboRegionRpcImpl
         extends BaseSuperServiceImpl< Region, Long,IRegionMapper, RegionRepository, IRegionRepository>
         implements IDubboRegionRpc {
 
-    private final OkHttpService okHttpService;
-    private final RedisRepository redisRepository;
+//    private final OkHttpService okHttpService;
+//    private final RedisRepository redisRepository;
 }

@@ -411,6 +411,7 @@ public class AuthorizationServerConfiguration {
 		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
 	}
 
+	//jwt Token定制器
 	@Bean
 	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
 		TtcJwtTokenCustomizer ttcJwtTokenCustomizer = new TtcJwtTokenCustomizer();
@@ -425,6 +426,7 @@ public class AuthorizationServerConfiguration {
 	//	return federatedIdentityIdTokenCustomizer;
 	//}
 
+	//opaqueToken定制器
 	@Bean
 	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
 		TtcOpaqueTokenCustomizer ttcOpaqueTokenCustomizer = new TtcOpaqueTokenCustomizer();
