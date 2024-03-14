@@ -59,7 +59,7 @@
 
 ## 2. spring cloud 微服务架构图
 
-![mark](doc/snapshot/xxx.png)
+![mark](doc/snapshot/springcloud微服务架构图.png)
 
 ## 3. spring cloud 微服务分层图
 

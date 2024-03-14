@@ -1,7 +1,7 @@
 dependencies {
 
     //https://search.maven.org/artifact/io.trino/trino-jdbc
-    implementation "io.trino:trino-jdbc:439"
-    implementation "io.trino:trino-spi:439"
-    implementation "io.trino:trino-main:439"
+    implementation "io.trino:trino-jdbc:440"
+    implementation "io.trino:trino-spi:440"
+    implementation "io.trino:trino-main:440"
 }

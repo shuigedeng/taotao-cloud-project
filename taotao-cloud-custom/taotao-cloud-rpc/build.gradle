@@ -1,14 +1,14 @@
 dependencies {
-    api('com.alibaba.nacos:nacos-client:2.2.4') {
+    api('com.alibaba.nacos:nacos-client:2.3.1') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
     //作为 包验证，防止修改
     api 'commons-codec:commons-codec:1.16.1'
     // redis 分布式锁
-    api 'redis.clients:jedis:5.1.0'
+    api 'redis.clients:jedis:5.1.2'
     //Lettuce Redis客户端
-    api('io.lettuce:lettuce-core:6.3.0.RELEASE') {
+    api('io.lettuce:lettuce-core:6.3.2.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'
         exclude group: 'io.netty', module: 'netty-common'
         exclude group: 'io.netty', module: 'netty-transport'
@@ -21,7 +21,7 @@ dependencies {
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.4.11'
+    api 'ch.qos.logback:logback-classic:1.5.3'
     api "com.google.guava:guava:33.0.0-jre"
 
     api "io.netty:netty-all:4.1.107.Final"

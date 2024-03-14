@@ -6,18 +6,18 @@ dependencies {
     implementation "org.apache.mahout:mahout-examples:0.13.0"
     implementation "junit:junit:4.13.2"
 
-    implementation "org.springframework:spring-jdbc:6.0.13"
-    implementation "org.springframework:spring-core:6.0.13"
-    implementation "org.springframework:spring-context:6.0.13"
+    implementation "org.springframework:spring-jdbc:6.1.4"
+    implementation "org.springframework:spring-core:6.1.4"
+    implementation "org.springframework:spring-context:6.1.4"
 
     implementation "javassist:javassist:3.12.1.GA"
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation "commons-lang:commons-lang:2.6"
     implementation "net.sf.barcode4j:barcode4j:2.1"
-    implementation "org.jsoup:jsoup:1.16.1"
+    implementation "org.jsoup:jsoup:1.17.2"
     implementation 'io.netty:netty-all'
     implementation "org.apache.commons:commons-lang3:3.14.0"
-    implementation 'redis.clients:jedis:4.4.5'
+    implementation 'redis.clients:jedis:5.1.2'
 
     //需要在自己本地安装jar包
     //compile "org.wltea.ik-analyzer:ik-analyzer:4.10.2"

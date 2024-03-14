@@ -3,12 +3,12 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-api:2.0.12'
     implementation 'org.slf4j:slf4j-api:2.0.12'
-    implementation('com.alipay.sofa:bolt:1.6.6') {
+    implementation('com.alipay.sofa:bolt:1.6.7') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
     implementation 'com.alibaba:fastjson:2.0.47'
     implementation 'com.alipay.sofa:hessian:4.0.4'
-    implementation "redis.clients:jedis:4.4.5"
+    implementation "redis.clients:jedis:5.1.2"
     implementation 'com.google.guava:guava:33.0.0-jre'
     implementation 'org.rocksdb:rocksdbjni:5.17.2'
 
