@@ -11,7 +11,7 @@ import com.taotao.cloud.sys.infrastructure.persistent.dept.converter.DeptConvert
 import com.taotao.cloud.sys.infrastructure.persistent.dept.mapper.DeptMapper;
 import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
 import com.taotao.cloud.sys.infrastructure.persistent.dept.repository.cls.DeptRepository;
-import com.taotao.cloud.sys.infrastructure.persistent.deptPO.repository.inf.IDeptRepository;
+import com.taotao.cloud.sys.infrastructure.persistent.dept.repository.inf.IDeptRepository;
 import java.util.Arrays;
 import java.util.List;
 import lombok.AllArgsConstructor;

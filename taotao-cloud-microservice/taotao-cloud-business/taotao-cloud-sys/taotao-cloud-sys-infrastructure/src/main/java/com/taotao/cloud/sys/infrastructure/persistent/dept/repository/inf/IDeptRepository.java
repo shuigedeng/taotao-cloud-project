@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.infrastructure.persistent.deptPO.repository.inf;
+package com.taotao.cloud.sys.infrastructure.persistent.dept.repository.inf;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
 import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;

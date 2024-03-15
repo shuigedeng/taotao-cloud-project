@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member;
+package com.taotao.cloud.auth;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TaoTaoCloudMemberApplicationTests {
+class TaoTaoCloudAuthDDDApplicationTests {
 }

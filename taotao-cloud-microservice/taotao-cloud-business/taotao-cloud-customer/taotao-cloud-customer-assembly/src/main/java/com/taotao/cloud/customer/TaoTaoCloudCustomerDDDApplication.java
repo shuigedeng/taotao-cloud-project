@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys;
+package com.taotao.cloud.customer;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
@@ -55,11 +55,11 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
  * @since 2020/11/30 下午3:33
  */
 @TaoTaoCloudApplication
-public class TaoTaoCloudSysDDDApplication {
+public class TaoTaoCloudCustomerDDDApplication {
 
 	public static void main(String[] args) {
 		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
-		new StartupSpringApplication(TaoTaoCloudSysDDDApplication.class)
+		new StartupSpringApplication(TaoTaoCloudCustomerDDDApplication.class)
 			.setDefaultBanner()
 			.run(args);
 	}

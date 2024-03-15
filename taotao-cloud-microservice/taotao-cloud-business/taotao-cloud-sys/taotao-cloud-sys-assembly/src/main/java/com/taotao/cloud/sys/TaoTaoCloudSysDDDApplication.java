@@ -18,7 +18,12 @@ package com.taotao.cloud.sys;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.cloud.data.jpa.extend.JpaExtendRepositoryFactoryBean;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * 系统管理中心
@@ -54,11 +59,19 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
+@MapperScan(basePackages = {"com.taotao.cloud.sys.infrastructure.persistent.*.mapper"})
+@EnableJpaRepositories(
+	basePackages = {"com.taotao.cloud.sys.infrastructure.persistent.*.repository.inf"},
+	repositoryFactoryBeanClass = JpaExtendRepositoryFactoryBean.class)
+//@ComponentScan(basePackages = {
+//	"com.taotao.cloud.sys.biz.repository.cls"
+//} )
+@EnableFeignClients(basePackages = {"com.taotao.cloud.sys.api.feign"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
+		PropertyUtils.setDefaultProperty("taotao-cloud-sys-ddd");
 		new StartupSpringApplication(TaoTaoCloudSysDDDApplication.class)
 			.setDefaultBanner()
 			.run(args);

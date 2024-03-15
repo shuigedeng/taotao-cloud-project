@@ -137,7 +137,7 @@ Maven:
  Elasticsearch        | 8.11.4           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
- Guava                | 33.0.0-jre       
+ Guava                | 33.1.0-jre       
  Grpc                 | 1.62.2          
  Arthas               | 3.7.2           
  Dynamic-tp           | 1.1.6.1-3.x           
