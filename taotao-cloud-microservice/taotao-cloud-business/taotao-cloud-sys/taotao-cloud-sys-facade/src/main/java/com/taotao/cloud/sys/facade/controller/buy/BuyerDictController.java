@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.adapter.controller.buy;
+package com.taotao.cloud.sys.facade.controller.buy;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;

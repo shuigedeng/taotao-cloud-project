@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.adapter.facade;
+package com.taotao.cloud.sys.facade.facade;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;

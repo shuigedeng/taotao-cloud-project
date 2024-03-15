@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.adapter.dubbo;
+package com.taotao.cloud.sys.facade.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.IDubboDictRpc;
 import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;

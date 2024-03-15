@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.adapter.controller.seller;
+package com.taotao.cloud.sys.facade.controller.seller;
 
 import com.taotao.cloud.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;

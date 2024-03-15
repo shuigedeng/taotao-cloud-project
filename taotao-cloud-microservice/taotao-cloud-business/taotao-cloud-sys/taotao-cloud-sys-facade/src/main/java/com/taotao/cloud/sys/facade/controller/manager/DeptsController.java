@@ -1,5 +1,5 @@
 
-package com.taotao.cloud.sys.adapter.controller.manager;
+package com.taotao.cloud.sys.facade.controller.manager;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.application.command.dept.dto.DeptCreateCmd;

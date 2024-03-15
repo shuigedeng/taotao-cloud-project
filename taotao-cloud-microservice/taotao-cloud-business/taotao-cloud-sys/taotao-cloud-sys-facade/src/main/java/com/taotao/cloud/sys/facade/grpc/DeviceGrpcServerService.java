@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.adapter.grpc;
+package com.taotao.cloud.sys.facade.grpc;
 
 import com.taotao.cloud.sys.api.grpc.BooleanReply;
 import com.taotao.cloud.sys.api.grpc.DeviceFix;
