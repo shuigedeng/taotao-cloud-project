@@ -31,7 +31,7 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         protoc {
             //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
             //直接使用Maven Central上已经编译好的protoc编译器，
-            artifact = "com.google.protobuf:protoc:3.25.3"
+            artifact = "com.google.protobuf:protoc:4.26.0"
             //指定本地已经安装的protoc编译器
             //path = '/usr/local/bin/protoc'
         }

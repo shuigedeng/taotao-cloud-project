@@ -5,5 +5,5 @@ dependencies {
     implementation "com.alibaba.fastjson2:fastjson2:2.0.47"
     implementation "com.alibaba.fastjson2:fastjson2-extension-spring6:2.0.47"
     implementation "com.mysql:mysql-connector-j"
-    implementation "com.alibaba:druid:1.2.21"
+    implementation "com.alibaba:druid:1.2.22"
 }
