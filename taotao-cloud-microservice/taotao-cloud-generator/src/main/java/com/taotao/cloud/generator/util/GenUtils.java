@@ -1,5 +1,7 @@
 package com.taotao.cloud.generator.util;
 
+import com.taotao.cloud.generator.config.GenConfig;
+import com.taotao.cloud.generator.config.GenConstants;
 import java.util.Arrays;
 import org.apache.commons.lang3.RegExUtils;
 import com.taotao.cloud.generator.entity.GenTable;
@@ -23,7 +25,7 @@ public class GenUtils
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
         genTable.setFunctionName(replaceText(genTable.getTableComment()));
         genTable.setFunctionAuthor(GenConfig.getAuthor());
-        genTable.setCreateBy(operName);
+//        genTable.setCreateBy(operName);
     }
 
     /**
@@ -34,7 +36,7 @@ public class GenUtils
         String dataType = getDbType(column.getColumnType());
         String columnName = column.getColumnName();
         column.setTableId(table.getTableId());
-        column.setCreateBy(table.getCreateBy());
+//        column.setCreateBy(table.getCreateBy());
         // 设置java字段名
         column.setJavaField(StringUtils.toCamelCase(columnName));
         // 设置默认类型

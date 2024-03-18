@@ -1,5 +1,6 @@
 package com.taotao.cloud.generator.service;
 
+import com.taotao.cloud.generator.entity.GenTable;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +17,8 @@ public interface IGenTableService {
 	 * @param genTable 业务信息
 	 * @return 业务集合
 	 */
-	public List<com.taotao.cloud.generator.entity.GenTable> selectGenTableList(
-		com.taotao.cloud.generator.entity.GenTable genTable);
+	public List<GenTable> selectGenTableList(
+		GenTable genTable);
 
 	/**
 	 * 查询据库列表
@@ -25,8 +26,7 @@ public interface IGenTableService {
 	 * @param genTable 业务信息
 	 * @return 数据库表集合
 	 */
-	public List<com.taotao.cloud.generator.entity.GenTable> selectDbTableList(
-		com.taotao.cloud.generator.entity.GenTable genTable);
+	public List<GenTable> selectDbTableList(GenTable genTable);
 
 	/**
 	 * 查询据库列表
@@ -34,7 +34,7 @@ public interface IGenTableService {
 	 * @param tableNames 表名称组
 	 * @return 数据库表集合
 	 */
-	public List<com.taotao.cloud.generator.entity.GenTable> selectDbTableListByNames(
+	public List<GenTable> selectDbTableListByNames(
 		String[] tableNames);
 
 	/**
@@ -42,7 +42,7 @@ public interface IGenTableService {
 	 *
 	 * @return 表信息集合
 	 */
-	public List<com.taotao.cloud.generator.entity.GenTable> selectGenTableAll();
+	public List<GenTable> selectGenTableAll();
 
 	/**
 	 * 查询业务信息
@@ -50,7 +50,7 @@ public interface IGenTableService {
 	 * @param id 业务ID
 	 * @return 业务信息
 	 */
-	public com.taotao.cloud.generator.entity.GenTable selectGenTableById(Long id);
+	public GenTable selectGenTableById(Long id);
 
 	/**
 	 * 修改业务
@@ -58,7 +58,7 @@ public interface IGenTableService {
 	 * @param genTable 业务信息
 	 * @return 结果
 	 */
-	public void updateGenTable(com.taotao.cloud.generator.entity.GenTable genTable);
+	public void updateGenTable(GenTable genTable);
 
 	/**
 	 * 删除业务信息
@@ -82,7 +82,7 @@ public interface IGenTableService {
 	 * @param tableList 导入表列表
 	 * @param operName  操作人员
 	 */
-	public void importGenTable(List<com.taotao.cloud.generator.entity.GenTable> tableList,
+	public void importGenTable(List<GenTable> tableList,
 		String operName);
 
 	/**
@@ -128,5 +128,5 @@ public interface IGenTableService {
 	 *
 	 * @param genTable 业务信息
 	 */
-	public void validateEdit(com.taotao.cloud.generator.entity.GenTable genTable);
+	public void validateEdit(GenTable genTable);
 }

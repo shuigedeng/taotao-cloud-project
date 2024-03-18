@@ -1,5 +1,6 @@
 package com.taotao.cloud.generator.service;
 
+import com.taotao.cloud.generator.entity.GenTableColumn;
 import java.util.List;
 
 /**
@@ -15,8 +16,7 @@ public interface IGenTableColumnService
      * @param genTableColumn 业务字段信息
      * @return 业务字段集合
      */
-    public List<com.taotao.cloud.generator.entity.GenTableColumn> selectGenTableColumnListByTableId(
-		com.taotao.cloud.generator.entity.GenTableColumn genTableColumn);
+    public List<GenTableColumn> selectGenTableColumnListByTableId(GenTableColumn genTableColumn);
 
     /**
      * 新增业务字段
@@ -24,7 +24,7 @@ public interface IGenTableColumnService
      * @param genTableColumn 业务字段信息
      * @return 结果
      */
-    public int insertGenTableColumn(com.taotao.cloud.generator.entity.GenTableColumn genTableColumn);
+    public int insertGenTableColumn(GenTableColumn genTableColumn);
 
     /**
      * 修改业务字段
@@ -32,7 +32,7 @@ public interface IGenTableColumnService
      * @param genTableColumn 业务字段信息
      * @return 结果
      */
-    public int updateGenTableColumn(com.taotao.cloud.generator.entity.GenTableColumn genTableColumn);
+    public int updateGenTableColumn(GenTableColumn genTableColumn);
 
     /**
      * 删除业务字段信息

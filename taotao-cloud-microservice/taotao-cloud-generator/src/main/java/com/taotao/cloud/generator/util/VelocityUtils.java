@@ -1,5 +1,8 @@
 package com.taotao.cloud.generator.util;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.taotao.cloud.generator.config.GenConfig;
+import com.taotao.cloud.generator.config.GenConstants;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +10,7 @@ import org.apache.velocity.VelocityContext;
 import com.alibaba.fastjson.JSONObject;
 import com.taotao.cloud.generator.entity.GenTable;
 import com.taotao.cloud.generator.entity.GenTableColumn;
+import org.dromara.hutool.core.date.DateUtil;
 
 public class VelocityUtils
 {
@@ -46,7 +50,7 @@ public class VelocityUtils
         velocityContext.put("basePackage", getPackagePrefix(packageName));
         velocityContext.put("packageName", packageName);
         velocityContext.put("author", genTable.getFunctionAuthor());
-        velocityContext.put("datetime", DateUtils.getDate());
+//        velocityContext.put("datetime", DateUtil.getDate());
         velocityContext.put("pkColumn", genTable.getPkColumn());
         velocityContext.put("importList", getImportList(genTable));
         velocityContext.put("permissionPrefix", getPermissionPrefix(moduleName, businessName));
@@ -259,7 +263,7 @@ public class VelocityUtils
         List<GenTableColumn> columns = genTable.getColumns();
         GenTable subGenTable = genTable.getSubTable();
         HashSet<String> importList = new HashSet<String>();
-        if (StringUtils.isNotNull(subGenTable))
+        if (ObjectUtil.isNotNull(subGenTable))
         {
             importList.add("java.util.List");
         }
@@ -298,7 +302,7 @@ public class VelocityUtils
      */
     public static String getParentMenuId(JSONObject paramsObj)
     {
-        if (StringUtils.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.PARENT_MENU_ID)
+        if (ObjectUtil.isNotEmpty(paramsObj) && paramsObj.containsKey(GenConstants.PARENT_MENU_ID)
                 && StringUtils.isNotEmpty(paramsObj.getString(GenConstants.PARENT_MENU_ID)))
         {
             return paramsObj.getString(GenConstants.PARENT_MENU_ID);
