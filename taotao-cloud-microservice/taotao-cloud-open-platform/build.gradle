@@ -23,7 +23,7 @@ dependencies {
     }
 
     //https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox
-    implementation "org.apache.pdfbox:pdfbox:3.0.1"
+    implementation "org.apache.pdfbox:pdfbox:3.0.2"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

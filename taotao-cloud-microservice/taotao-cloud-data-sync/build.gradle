@@ -20,14 +20,11 @@ dependencies {
     implementation 'org.springframework.integration:spring-integration-jdbc:6.2.2'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
-    implementation 'org.springframework.boot:spring-boot-starter-batch'
 
-    //以下依赖使用的是springboot2.7先不打开 https://github.com/spring-projects/spring-batch-extensions
-    //implementation 'org.springframework.batch.extensions:spring-batch-excel:0.1.1'
-    //implementation 'org.springframework.batch.extensions:spring-batch-bigquery:0.1.0'
-    //implementation 'org.springframework.batch.extensions:spring-batch-neo4j:0.1.0'
-    //implementation 'org.springframework.batch.extensions:spring-batch-elasticsearch:0.1.0-SNAPSHOT'
-    //implementation 'org.springframework.batch.extensions:spring-batch-geode:0.1.0-SNAPSHOT'
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'org.springframework.batch:spring-batch-infrastructure:5.1.1'
+    implementation 'org.springframework.batch:spring-batch-integration:5.1.1'
+    testImplementation 'org.springframework.batch:spring-batch-test:5.1.1'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
@@ -36,49 +33,49 @@ dependencies {
 
     //**********************************************************************************
     // flinksql本地运行需要的依赖
-    implementation "org.apache.flink:flink-core:1.18.1"
-    implementation "org.apache.flink:flink-clients:1.18.1"
-    implementation "org.apache.flink:flink-java:1.18.1"
-    implementation "org.apache.flink:flink-streaming-java:1.18.1"
-    implementation "org.apache.flink:flink-scala_2.12:1.18.1"
-    implementation "org.apache.flink:flink-streaming-scala_2.12:1.18.1"
+    implementation "org.apache.flink:flink-core:1.19.0"
+    implementation "org.apache.flink:flink-clients:1.19.0"
+    implementation "org.apache.flink:flink-java:1.19.0"
+    implementation "org.apache.flink:flink-streaming-java:1.19.0"
+    implementation "org.apache.flink:flink-scala_2.12:1.19.0"
+    implementation "org.apache.flink:flink-streaming-scala_2.12:1.19.0"
     //状态后端管理器
-    implementation "org.apache.flink:flink-statebackend-rocksdb:1.18.1"
+    implementation "org.apache.flink:flink-statebackend-rocksdb:1.19.0"
     //flink本地运行时 提供的web功能
-    implementation "org.apache.flink:flink-runtime-web:1.18.1"
+    implementation "org.apache.flink:flink-runtime-web:1.19.0"
 
     //flink sql
-    implementation 'org.apache.flink:flink-table-api-java:1.18.1'
-    implementation 'org.apache.flink:flink-table-runtime:1.18.1'
-    implementation 'org.apache.flink:flink-table-api-java-bridge:1.18.1'
-    implementation "org.apache.flink:flink-table-planner_2.12:1.18.1"
-    implementation "org.apache.flink:flink-table-planner-loader:1.18.1"
-    implementation 'org.apache.flink:flink-sql-gateway-api:1.18.1'
+    implementation 'org.apache.flink:flink-table-api-java:1.19.0'
+    implementation 'org.apache.flink:flink-table-runtime:1.19.0'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:1.19.0'
+    implementation "org.apache.flink:flink-table-planner_2.12:1.19.0"
+    implementation "org.apache.flink:flink-table-planner-loader:1.19.0"
+    implementation 'org.apache.flink:flink-sql-gateway-api:1.19.0'
 
     //使用alibaba 动态cep
-    implementation 'org.apache.flink:flink-cep:1.18.1'
-    implementation "org.apache.flink:flink-csv:1.18.1"
-    implementation 'org.apache.flink:flink-parquet:1.18.1'
+    implementation 'org.apache.flink:flink-cep:1.19.0'
+    implementation "org.apache.flink:flink-csv:1.19.0"
+    implementation 'org.apache.flink:flink-parquet:1.19.0'
     implementation 'org.apache.parquet:parquet-avro:1.13.1'
-    implementation 'org.apache.flink:flink-avro:1.18.1'
-    implementation 'org.apache.flink:flink-json:1.18.1'
-    implementation 'org.apache.flink:flink-format-common:1.18.1'
+    implementation 'org.apache.flink:flink-avro:1.19.0'
+    implementation 'org.apache.flink:flink-json:1.19.0'
+    implementation 'org.apache.flink:flink-format-common:1.19.0'
 
     //flink连接器
+    implementation 'org.apache.flink:flink-connector-datagen:1.19.0'
+    implementation 'org.apache.flink:flink-connector-files:1.19.0'
+    implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.19.0'
     implementation "org.apache.flink:flink-connector-kafka:3.1.0-1.18"
     implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc:3.1.2-1.18'
     implementation 'org.apache.flink:flink-connector-hive_2.12:1.18.1'
     implementation 'org.apache.flink:flink-connector-mongodb:1.1.0-1.18'
     implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
-    implementation 'org.apache.flink:flink-connector-files:1.18.1'
-    implementation 'org.apache.flink:flink-connector-datagen:1.18.1'
     implementation 'org.apache.doris:flink-doris-connector-1.18:1.5.2'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
     implementation "org.apache.flink:flink-sql-connector-kafka:3.1.0-1.18"
     implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
-    implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.18.1'
     implementation 'org.apache.flink:flink-sql-connector-mongodb:1.1.0-1.18'
     implementation 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
 
@@ -137,7 +134,7 @@ dependencies {
     implementation("org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.6.0-incubating")
     implementation("org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.6.0-incubating")
 
-    implementation 'org.apache.commons:commons-compress:1.25.0'
+    implementation 'org.apache.commons:commons-compress:1.26.1'
     implementation 'org.slf4j:slf4j-api:2.0.12'
     implementation 'org.slf4j:slf4j-log4j12:2.0.12'
 
