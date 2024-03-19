@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.biz.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import java.util.List;
 import org.mapstruct.Mapper;

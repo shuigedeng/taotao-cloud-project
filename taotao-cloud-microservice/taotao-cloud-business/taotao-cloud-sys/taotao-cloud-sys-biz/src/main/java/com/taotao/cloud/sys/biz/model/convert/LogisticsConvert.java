@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
+import com.taotao.cloud.sys.biz.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

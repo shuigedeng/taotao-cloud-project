@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.sys.api.model.dto.app.AppDTO;
+import com.taotao.cloud.sys.biz.model.dto.app.AppDTO;
 import com.taotao.cloud.sys.biz.model.entity.app.App;
 import java.util.List;
 import org.mapstruct.Mapper;

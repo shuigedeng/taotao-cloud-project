@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
-import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
+import com.taotao.cloud.sys.biz.model.vo.setting.SettingVO;
 import com.taotao.cloud.sys.biz.model.entity.setting.Setting;
 import com.taotao.cloud.sys.biz.service.business.ISettingService;
 import io.swagger.v3.oas.annotations.tags.Tag;

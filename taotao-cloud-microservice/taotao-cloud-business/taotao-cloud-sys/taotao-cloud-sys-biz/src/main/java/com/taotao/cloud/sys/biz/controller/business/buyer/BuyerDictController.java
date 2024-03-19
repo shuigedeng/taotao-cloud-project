@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.controller.business.buyer;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
-import com.taotao.cloud.sys.api.model.query.DictQuery;
+import com.taotao.cloud.sys.biz.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.cloud.web.base.controller.BaseBusinessController;

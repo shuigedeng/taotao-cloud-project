@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.model.vo.dept.DeptTreeVO;
+import com.taotao.cloud.sys.biz.model.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import java.util.List;
 import org.mapstruct.Mapper;

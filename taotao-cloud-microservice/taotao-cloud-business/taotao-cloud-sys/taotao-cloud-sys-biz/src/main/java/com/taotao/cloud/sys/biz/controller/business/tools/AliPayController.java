@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.enums.AliPayStatusEnum;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
-import com.taotao.cloud.sys.api.model.vo.alipay.TradeVO;
+import com.taotao.cloud.sys.biz.model.vo.alipay.TradeVO;
 import com.taotao.cloud.sys.biz.model.entity.config.AlipayConfig;
 import com.taotao.cloud.sys.biz.service.business.IAlipayConfigService;
 import com.taotao.cloud.sys.biz.utils.AlipayUtils;

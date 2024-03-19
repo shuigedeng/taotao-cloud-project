@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.sys.api.model.vo.region.RegionParentVO;
-import com.taotao.cloud.sys.api.model.vo.region.RegionTreeVO;
-import com.taotao.cloud.sys.api.model.vo.region.RegionVO;
+import com.taotao.cloud.sys.biz.model.vo.region.RegionParentVO;
+import com.taotao.cloud.sys.biz.model.vo.region.RegionTreeVO;
+import com.taotao.cloud.sys.biz.model.vo.region.RegionVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;

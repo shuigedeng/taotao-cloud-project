@@ -22,7 +22,7 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.sys.api.model.dto.user.RestPasswordUserDTO;
+import com.taotao.cloud.sys.biz.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.manager.UserManager;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.QUser;

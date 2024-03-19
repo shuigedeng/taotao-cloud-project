@@ -1,9 +1,9 @@
 package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.sys.api.model.vo.monitor.OnlineUserInfo;
-import com.taotao.cloud.sys.api.model.vo.monitor.RedisCacheInfoDTO;
-import com.taotao.cloud.sys.api.model.vo.monitor.ServerInfo;
+import com.taotao.cloud.sys.biz.model.vo.monitor.OnlineUserInfo;
+import com.taotao.cloud.sys.biz.model.vo.monitor.RedisCacheInfoDTO;
+import com.taotao.cloud.sys.biz.model.vo.monitor.ServerInfo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.dromara.hutool.core.text.StrUtil;

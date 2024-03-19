@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.IFeignRoleApi;
-import com.taotao.cloud.sys.api.model.vo.role.RoleQueryVO;
+import com.taotao.cloud.sys.api.feign.response.FeignRoleQueryResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -33,7 +33,7 @@ public class FeignRoleApiFallback implements FallbackFactory<IFeignRoleApi> {
     public IFeignRoleApi create(Throwable throwable) {
         return new IFeignRoleApi() {
             @Override
-            public List<RoleQueryVO> findRoleByUserId(Long userId) {
+            public List<FeignRoleQueryResponse> findRoleByUserId(Long userId) {
                 LogUtils.error("调用findUserInfoByUsername异常：{}", throwable, userId);
                 return null;
             }

@@ -23,7 +23,7 @@ import com.taotao.cloud.openfeign.annotation.ApiInfo;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
 import com.taotao.cloud.sys.api.feign.fallback.FeignUserApiFallback;
-import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.api.feign.response.FeignUserQueryResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,7 +57,7 @@ public interface IFeignUserApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(value = "/sys/feign/user/info/username")
-	UserQueryVO findUserInfoByUsername(@RequestParam(value = "username") String username);
+	FeignUserQueryResponse findUserInfoByUsername(@RequestParam(value = "username") String username);
 
 	/**
 	 * 通过第三方查询用户包括角色权限等

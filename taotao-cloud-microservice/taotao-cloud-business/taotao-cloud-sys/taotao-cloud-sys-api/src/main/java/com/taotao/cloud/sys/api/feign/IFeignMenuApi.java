@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.sys.api.feign.fallback.FeignMenuApiFallback;
-import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.api.feign.response.FeignMenuQueryResponse;
 import java.util.List;
 import java.util.Set;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -46,5 +46,5 @@ public interface IFeignMenuApi {
      * @since 2020/10/21 15:24
      */
     @GetMapping("/sys/feign/menu/info/codes")
-    List<MenuQueryVO> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
+    List<FeignMenuQueryResponse> findResourceByCodes(@RequestParam(value = "codes") Set<String> codes);
 }

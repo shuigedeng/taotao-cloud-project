@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.sys.api.model.dto.dictItem.DictItemDTO;
-import com.taotao.cloud.sys.api.model.page.DictItemPageQuery;
-import com.taotao.cloud.sys.api.model.query.DictItemQuery;
+import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemDTO;
+import com.taotao.cloud.sys.biz.model.page.DictItemPageQuery;
+import com.taotao.cloud.sys.biz.model.query.DictItemQuery;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;

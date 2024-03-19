@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.model.dto.user.UserQueryDTO;
-import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
-import com.taotao.cloud.sys.api.model.vo.user.UserRegisterVO;
+import com.taotao.cloud.sys.biz.model.dto.user.UserQueryDTO;
+import com.taotao.cloud.sys.biz.model.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.biz.model.vo.user.UserRegisterVO;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import java.util.List;
 import org.mapstruct.Mapper;

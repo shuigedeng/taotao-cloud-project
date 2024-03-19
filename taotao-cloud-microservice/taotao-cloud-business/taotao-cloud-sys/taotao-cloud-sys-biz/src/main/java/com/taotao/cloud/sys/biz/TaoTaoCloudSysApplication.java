@@ -62,7 +62,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {
 	"com.taotao.cloud.sys.biz.repository.cls"
 } )
-//@EnableFeignClients(basePackages = {"com.taotao.cloud.sys.api.feign"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysApplication {
 

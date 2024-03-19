@@ -18,7 +18,7 @@
 //
 //import com.taotao.cloud.common.model.BaseSecurityUser;
 //import com.taotao.cloud.sys.api.feign.IFeignUserApi;
-//import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+//import com.taotao.cloud.sys.biz.model.vo.user.UserQueryVO;
 //import com.taotao.cloud.sys.biz.model.entity.system.User;
 //import com.taotao.cloud.sys.biz.service.business.IUserService;
 //import com.taotao.cloud.sys.biz.service.feign.IFeignUserService;

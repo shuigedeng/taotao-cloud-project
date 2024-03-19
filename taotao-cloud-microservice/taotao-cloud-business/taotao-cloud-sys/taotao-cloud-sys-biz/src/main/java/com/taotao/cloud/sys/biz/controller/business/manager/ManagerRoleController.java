@@ -18,9 +18,9 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.BaseQuery;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.sys.api.model.dto.role.RoleSaveDTO;
-import com.taotao.cloud.sys.api.model.dto.role.RoleUpdateDTO;
-import com.taotao.cloud.sys.api.model.vo.role.RoleQueryVO;
+import com.taotao.cloud.sys.biz.model.dto.role.RoleSaveDTO;
+import com.taotao.cloud.sys.biz.model.dto.role.RoleUpdateDTO;
+import com.taotao.cloud.sys.biz.model.vo.role.RoleQueryVO;
 import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;

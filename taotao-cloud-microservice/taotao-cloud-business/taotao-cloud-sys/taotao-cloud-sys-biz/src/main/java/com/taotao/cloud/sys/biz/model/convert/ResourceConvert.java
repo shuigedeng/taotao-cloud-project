@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.model.convert;
 
 import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
-import com.taotao.cloud.sys.api.model.vo.menu.MenuQueryVO;
-import com.taotao.cloud.sys.api.model.vo.menu.MenuTreeVO;
+import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
+import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import java.util.List;
