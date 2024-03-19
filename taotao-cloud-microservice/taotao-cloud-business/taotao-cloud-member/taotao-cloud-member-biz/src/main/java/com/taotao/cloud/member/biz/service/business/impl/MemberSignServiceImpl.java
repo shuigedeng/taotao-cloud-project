@@ -22,7 +22,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.model.vo.MemberSignVO;
+import com.taotao.cloud.member.sys.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.mapper.IMemberSignMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberSign;
 import com.taotao.cloud.member.biz.service.business.IMemberService;

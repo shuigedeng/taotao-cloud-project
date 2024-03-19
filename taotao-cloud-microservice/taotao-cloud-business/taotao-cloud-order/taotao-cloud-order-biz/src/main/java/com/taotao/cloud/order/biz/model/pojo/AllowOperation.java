@@ -20,7 +20,7 @@ import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.model.vo.order.OrderSimpleVO;
+import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

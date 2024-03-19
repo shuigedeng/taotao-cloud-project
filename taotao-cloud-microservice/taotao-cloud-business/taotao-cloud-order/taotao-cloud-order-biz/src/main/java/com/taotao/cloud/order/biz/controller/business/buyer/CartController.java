@@ -18,8 +18,8 @@ package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.model.dto.trade.TradeDTO;
-import com.taotao.cloud.order.api.model.vo.order.ReceiptVO;
+import com.taotao.cloud.order.sys.model.dto.trade.TradeDTO;
+import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
 import com.taotao.cloud.order.biz.service.business.cart.ICartService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
-import com.taotao.cloud.order.api.model.message.OrderMessage;
+import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;

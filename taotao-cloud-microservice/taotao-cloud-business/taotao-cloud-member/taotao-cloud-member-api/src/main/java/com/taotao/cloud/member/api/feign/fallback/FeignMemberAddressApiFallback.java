@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.member.api.feign.IFeignMemberAddressApi;
-import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
+import com.taotao.cloud.member.api.feign.response.FeignMemberAddressResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -33,7 +33,7 @@ public class FeignMemberAddressApiFallback implements FallbackFactory<IFeignMemb
     public IFeignMemberAddressApi create(Throwable throwable) {
         return new IFeignMemberAddressApi() {
             @Override
-            public MemberAddressVO getById(String shippingAddressId) {
+            public FeignMemberAddressResponse getById(String shippingAddressId) {
                 return null;
             }
         };

@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.service.business;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.sys.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
 
 /**

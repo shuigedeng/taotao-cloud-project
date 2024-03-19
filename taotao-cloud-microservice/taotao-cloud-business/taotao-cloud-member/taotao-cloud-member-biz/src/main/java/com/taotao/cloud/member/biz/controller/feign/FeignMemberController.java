@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.member.api.feign.IFeignMemberApi;
-import com.taotao.cloud.member.api.model.vo.MemberVO;
+import com.taotao.cloud.member.api.feign.response.FeignMemberResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
+import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Map;
@@ -38,45 +38,45 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "内部调用端-会员API", description = "内部调用端-会员API")
 public class FeignMemberController implements IFeignMemberApi {
 
-    private final IMemberService memberService;
+	private final IMemberService memberService;
 
-    @Override
-    public SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
-        return null;
-    }
+	@Override
+	public SecurityUser getMemberSecurityUser(String nicknameOrUserNameOrPhoneOrEmail) {
+		return null;
+	}
 
-    @Override
-    public MemberVO findMemberById(Long id) {
-        return null;
-    }
+	@Override
+	public FeignMemberResponse findMemberById(Long id) {
+		return null;
+	}
 
-    @Override
-    public Boolean updateMemberPoint(Long payPoint, String name, Long memberId, String s) {
-        return null;
-    }
+	@Override
+	public Boolean updateMemberPoint(Long payPoint, String name, Long memberId, String s) {
+		return null;
+	}
 
-    @Override
-    public MemberVO findByUsername(String username) {
-        return null;
-    }
+	@Override
+	public FeignMemberResponse findByUsername(String username) {
+		return null;
+	}
 
-    @Override
-    public MemberVO getById(Long memberId) {
-        return null;
-    }
+	@Override
+	public FeignMemberResponse getById(Long memberId) {
+		return null;
+	}
 
-    @Override
-    public Boolean update(Long memberId, Long storeId) {
-        return null;
-    }
+	@Override
+	public Boolean update(Long memberId, Long storeId) {
+		return null;
+	}
 
-    @Override
-    public Boolean updateById(MemberVO member) {
-        return null;
-    }
+	@Override
+	public Boolean updateById(FeignMemberResponse member) {
+		return null;
+	}
 
-    @Override
-    public List<Map<String, Object>> listFieldsByMemberIds(String s, List<String> ids) {
-        return null;
-    }
+	@Override
+	public List<Map<String, Object>> listFieldsByMemberIds(String s, List<String> ids) {
+		return null;
+	}
 }

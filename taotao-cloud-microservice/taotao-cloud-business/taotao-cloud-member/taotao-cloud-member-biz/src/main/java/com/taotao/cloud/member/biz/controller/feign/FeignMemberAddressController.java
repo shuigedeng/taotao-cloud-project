@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.controller.feign;
 
 import com.taotao.cloud.member.api.feign.IFeignMemberAddressApi;
-import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
+import com.taotao.cloud.member.api.feign.response.FeignMemberAddressResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class FeignMemberAddressController implements IFeignMemberAddressApi {
     private final IMemberService memberService;
 
     @Override
-    public MemberAddressVO getById(String shippingAddressId) {
+    public FeignMemberAddressResponse getById(String shippingAddressId) {
         return null;
     }
 }

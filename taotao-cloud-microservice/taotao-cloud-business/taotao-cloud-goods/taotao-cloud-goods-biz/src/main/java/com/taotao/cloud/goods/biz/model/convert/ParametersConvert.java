@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.biz.model.convert;
 
-import com.taotao.cloud.goods.api.model.dto.ParametersDTO;
-import com.taotao.cloud.goods.api.model.vo.ParametersVO;
+import com.taotao.cloud.goods.biz.model.dto.ParametersDTO;
+import com.taotao.cloud.goods.biz.model.vo.ParametersVO;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import java.util.List;
 import org.mapstruct.Mapper;

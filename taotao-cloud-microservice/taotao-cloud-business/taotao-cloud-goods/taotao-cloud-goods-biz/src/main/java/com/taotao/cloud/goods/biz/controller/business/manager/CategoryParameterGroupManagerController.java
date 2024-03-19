@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.model.vo.ParameterGroupVO;
+import com.taotao.cloud.goods.biz.model.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupService;

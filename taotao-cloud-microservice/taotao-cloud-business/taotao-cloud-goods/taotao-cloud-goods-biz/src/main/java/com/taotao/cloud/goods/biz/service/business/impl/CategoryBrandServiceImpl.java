@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.goods.api.model.vo.CategoryBrandVO;
+import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.mapper.ICategoryBrandMapper;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.repository.cls.CategoryBrandRepository;

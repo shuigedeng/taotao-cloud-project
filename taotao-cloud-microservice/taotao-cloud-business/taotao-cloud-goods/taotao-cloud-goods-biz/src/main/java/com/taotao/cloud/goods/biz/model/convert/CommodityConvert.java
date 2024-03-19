@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.model.convert;
 
-import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
+import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import java.util.List;
 import org.mapstruct.Builder;

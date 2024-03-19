@@ -18,7 +18,7 @@ package com.taotao.cloud.order.biz.service.business.aftersale;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.model.page.aftersale.AfterSaleReasonPageQuery;
+import com.taotao.cloud.order.sys.model.page.aftersale.AfterSaleReasonPageQuery;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleReason;
 import java.util.List;
 

@@ -18,7 +18,7 @@ package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberWalletApiFallback;
-import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
+import com.taotao.cloud.member.api.feign.request.FeignMemberWalletUpdateRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface IFeignMemberWalletApi {
 
     @GetMapping(value = "/member/feign/wallet/increase")
-    boolean increase(@RequestParam MemberWalletUpdateDTO memberWalletUpdateDTO);
+    boolean increase(@RequestParam FeignMemberWalletUpdateRequest memberWalletUpdateDTO);
 
     @GetMapping(value = "/member/feign/recharge/save")
     boolean save(@RequestParam Long id, @RequestParam String username);

@@ -23,7 +23,7 @@ import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
+import com.taotao.cloud.goods.biz.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

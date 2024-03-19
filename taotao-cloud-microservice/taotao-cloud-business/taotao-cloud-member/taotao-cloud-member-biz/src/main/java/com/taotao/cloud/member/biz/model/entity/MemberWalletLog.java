@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
-import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
+import com.taotao.cloud.member.sys.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

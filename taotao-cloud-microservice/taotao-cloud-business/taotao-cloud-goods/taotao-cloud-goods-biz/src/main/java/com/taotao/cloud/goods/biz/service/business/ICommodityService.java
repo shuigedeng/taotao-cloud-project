@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
+import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;

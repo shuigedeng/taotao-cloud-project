@@ -21,7 +21,7 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
+import com.taotao.cloud.member.sys.model.vo.MemberAddressVO;
 import com.taotao.cloud.member.biz.model.convert.MemberAddressConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.business.IMemberAddressService;

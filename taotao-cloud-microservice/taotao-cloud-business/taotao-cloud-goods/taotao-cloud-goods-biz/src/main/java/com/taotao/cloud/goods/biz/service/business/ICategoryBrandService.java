@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.service.business;
 
-import com.taotao.cloud.goods.api.model.vo.CategoryBrandVO;
+import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;

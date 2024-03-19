@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.model.convert;
 
-import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
+import com.taotao.cloud.member.sys.model.vo.MemberEvaluationVO;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

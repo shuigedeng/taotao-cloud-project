@@ -17,6 +17,7 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.request.FeignMemberWalletUpdateRequest;
 import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -33,7 +34,7 @@ public class FeignMemberWalletApiFallback implements FallbackFactory<IFeignMembe
     public IFeignMemberWalletApi create(Throwable throwable) {
         return new IFeignMemberWalletApi() {
             @Override
-            public boolean increase(MemberWalletUpdateDTO memberWalletUpdateDTO) {
+            public boolean increase(FeignMemberWalletUpdateRequest memberWalletUpdateDTO) {
                 return false;
             }
 

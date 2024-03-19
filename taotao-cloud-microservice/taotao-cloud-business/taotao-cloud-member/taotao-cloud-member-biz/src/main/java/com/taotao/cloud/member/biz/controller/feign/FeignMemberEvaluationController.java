@@ -18,11 +18,11 @@ package com.taotao.cloud.member.biz.controller.feign;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
-import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
-import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
-import com.taotao.cloud.member.api.model.vo.MemberEvaluationListVO;
-import com.taotao.cloud.member.api.model.vo.MemberEvaluationVO;
-import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
+import com.taotao.cloud.member.api.feign.request.FeignEvaluationPageQueryRequest;
+import com.taotao.cloud.member.api.feign.request.FeignMemberEvaluationRequest;
+import com.taotao.cloud.member.api.feign.response.FeignMemberEvaluationListResponse;
+import com.taotao.cloud.member.api.feign.response.FeignMemberEvaluationResponse;
+import com.taotao.cloud.member.api.feign.response.FeignStoreRatingResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -44,43 +44,45 @@ public class FeignMemberEvaluationController implements IFeignMemberEvaluationAp
 
     private final IMemberService memberService;
 
-    @Override
-    public Long count(Long goodsId, String name) {
-        return null;
-    }
+	@Override
+	public Long count(Long goodsId, String name) {
+		return null;
+	}
 
-    @Override
-    public Long getEvaluationCount(EvaluationPageQuery queryParams) {
-        return null;
-    }
+	@Override
+	public Long getEvaluationCount(FeignEvaluationPageQueryRequest queryParams) {
+		return null;
+	}
 
-    @Override
-    public List<Map<String, Object>> memberEvaluationNum() {
-        return null;
-    }
+	@Override
+	public List<Map<String, Object>> memberEvaluationNum() {
+		return null;
+	}
 
-    @Override
-    public Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO, boolean b) {
-        return null;
-    }
+	@Override
+	public Boolean addMemberEvaluation(FeignMemberEvaluationRequest memberEvaluationDTO,
+		boolean b) {
+		return null;
+	}
 
-    @Override
-    public StoreRatingVO getStoreRatingVO(Long id, String name) {
-        return null;
-    }
+	@Override
+	public FeignStoreRatingResponse getStoreRatingVO(Long id, String name) {
+		return null;
+	}
 
-    @Override
-    public MemberEvaluationVO queryById(Long id) {
-        return null;
-    }
+	@Override
+	public FeignMemberEvaluationResponse queryById(Long id) {
+		return null;
+	}
 
-    @Override
-    public boolean reply(Long id, String reply, String replyImage) {
-        return false;
-    }
+	@Override
+	public boolean reply(Long id, String reply, String replyImage) {
+		return false;
+	}
 
-    @Override
-    public PageResult<MemberEvaluationListVO> queryPage(EvaluationPageQuery evaluationPageQuery) {
-        return null;
-    }
+	@Override
+	public PageResult<FeignMemberEvaluationListResponse> queryPage(
+		FeignEvaluationPageQueryRequest evaluationPageQuery) {
+		return null;
+	}
 }

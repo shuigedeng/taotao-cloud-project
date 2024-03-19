@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
+import com.taotao.cloud.member.sys.model.page.EvaluationPageQuery;
 import java.util.Objects;
 
 /**

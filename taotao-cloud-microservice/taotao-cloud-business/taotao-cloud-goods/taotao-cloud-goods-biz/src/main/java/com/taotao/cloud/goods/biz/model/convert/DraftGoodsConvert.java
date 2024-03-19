@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.model.convert;
 
-import com.taotao.cloud.goods.api.model.dto.DraftGoodsSkuParamsDTO;
+import com.taotao.cloud.goods.biz.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

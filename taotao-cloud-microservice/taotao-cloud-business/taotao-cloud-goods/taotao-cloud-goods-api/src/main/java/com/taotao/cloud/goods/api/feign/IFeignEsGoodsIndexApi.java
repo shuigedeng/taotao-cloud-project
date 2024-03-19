@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.FeignCategoryApiFallback;
-import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
+import com.taotao.cloud.goods.api.feign.response.FeignEsGoodsIndexResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,14 +31,14 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-        contextId = "IFeignEsGoodsIndexService",
-        value = ServiceName.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = FeignCategoryApiFallback.class)
+	contextId = "IFeignEsGoodsIndexService",
+	value = ServiceName.TAOTAO_CLOUD_GOODS,
+	fallbackFactory = FeignCategoryApiFallback.class)
 public interface IFeignEsGoodsIndexApi {
 
-    @GetMapping(value = "/product/info/id/{id:[0-9]*}")
-    List<EsGoodsIndexVO> getEsGoodsBySkuIds(List<String> skuIdList);
+	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
+	List<FeignEsGoodsIndexResponse> getEsGoodsBySkuIds(List<String> skuIdList);
 
-    @PostMapping(value = "/product/info/id/{id:[0-9]*}")
-    Boolean cleanInvalidPromotion();
+	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	Boolean cleanInvalidPromotion();
 }

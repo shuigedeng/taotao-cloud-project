@@ -20,12 +20,12 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-import com.taotao.cloud.goods.api.model.dto.GoodsOperationDTO;
-import com.taotao.cloud.goods.api.model.dto.GoodsSkuDTO;
-import com.taotao.cloud.goods.api.model.dto.GoodsSkuStockDTO;
-import com.taotao.cloud.goods.api.model.page.GoodsPageQuery;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.biz.model.dto.GoodsOperationDTO;
+import com.taotao.cloud.goods.biz.model.dto.GoodsSkuDTO;
+import com.taotao.cloud.goods.biz.model.dto.GoodsSkuStockDTO;
+import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
+import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.biz.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.web.base.service.BaseSuperService;

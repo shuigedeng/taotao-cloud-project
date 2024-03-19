@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.goods.api.model.vo.CommoditySkuVO;
+import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;

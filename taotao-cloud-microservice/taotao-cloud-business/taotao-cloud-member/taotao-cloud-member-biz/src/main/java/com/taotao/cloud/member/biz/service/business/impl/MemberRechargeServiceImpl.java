@@ -26,7 +26,7 @@ import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
-import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
+import com.taotao.cloud.member.sys.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.biz.mapper.IMemberRechargeMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
 import com.taotao.cloud.member.biz.service.business.IMemberRechargeService;

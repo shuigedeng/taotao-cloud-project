@@ -21,7 +21,7 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.constant.MemberCollectionQueryConstants;
-import com.taotao.cloud.member.api.model.vo.GoodsCollectionVO;
+import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.service.business.IMemberGoodsCollectionService;
 import com.taotao.cloud.store.api.feign.IFeignStoreCollectionApi;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;

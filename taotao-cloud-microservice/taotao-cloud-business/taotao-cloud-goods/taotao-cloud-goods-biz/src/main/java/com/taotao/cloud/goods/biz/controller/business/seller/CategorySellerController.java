@@ -18,8 +18,8 @@ package com.taotao.cloud.goods.biz.controller.business.seller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.model.vo.CategoryBrandVO;
-import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
+import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
 import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;

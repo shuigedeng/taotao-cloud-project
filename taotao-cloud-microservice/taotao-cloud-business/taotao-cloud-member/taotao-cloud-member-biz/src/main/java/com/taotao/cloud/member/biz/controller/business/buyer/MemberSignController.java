@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.model.vo.MemberSignVO;
+import com.taotao.cloud.member.sys.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.service.business.IMemberSignService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

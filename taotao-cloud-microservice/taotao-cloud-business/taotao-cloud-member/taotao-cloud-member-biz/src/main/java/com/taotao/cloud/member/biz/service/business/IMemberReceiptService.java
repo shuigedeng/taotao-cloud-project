@@ -18,8 +18,8 @@ package com.taotao.cloud.member.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.api.model.page.MemberReceiptPageQuery;
-import com.taotao.cloud.member.api.model.vo.MemberReceiptAddVO;
+import com.taotao.cloud.member.sys.model.page.MemberReceiptPageQuery;
+import com.taotao.cloud.member.sys.model.vo.MemberReceiptAddVO;
 import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
 
 /** 会员发票业务层 */

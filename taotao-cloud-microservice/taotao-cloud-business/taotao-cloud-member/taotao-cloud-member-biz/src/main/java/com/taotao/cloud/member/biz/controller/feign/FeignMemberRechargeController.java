@@ -17,12 +17,14 @@
 package com.taotao.cloud.member.biz.controller.feign;
 
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
-import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
+import com.taotao.cloud.member.api.feign.response.FeignMemberRechargeResponse;
+import com.taotao.cloud.member.sys.model.vo.MemberRechargeVO;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.date.DateTime;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,17 +47,17 @@ public class FeignMemberRechargeController implements IFeignMemberRechargeApi {
     }
 
     @Override
-    public MemberRechargeVO getRecharge(String sn) {
+    public FeignMemberRechargeResponse getRecharge(String sn) {
         return null;
     }
 
     @Override
-    public MemberRechargeVO recharge(BigDecimal price) {
+    public FeignMemberRechargeResponse recharge(BigDecimal price) {
         return null;
     }
 
     @Override
-    public List<MemberRechargeVO> list(DateTime dateTime) {
+    public List<FeignMemberRechargeResponse> list(DateTime dateTime) {
         return null;
     }
 

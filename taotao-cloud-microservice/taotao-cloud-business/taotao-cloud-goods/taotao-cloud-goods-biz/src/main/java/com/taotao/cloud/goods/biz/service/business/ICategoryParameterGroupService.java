@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.service.business;
 
-import com.taotao.cloud.goods.api.model.vo.ParameterGroupVO;
+import com.taotao.cloud.goods.biz.model.vo.ParameterGroupVO;
 import com.taotao.cloud.goods.biz.model.entity.CategoryParameterGroup;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 

@@ -23,7 +23,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.goods.api.model.vo.CustomWordsVO;
+import com.taotao.cloud.goods.biz.model.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.mapper.ICustomWordsMapper;
 import com.taotao.cloud.goods.biz.model.convert.CustomWordsConvert;
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;

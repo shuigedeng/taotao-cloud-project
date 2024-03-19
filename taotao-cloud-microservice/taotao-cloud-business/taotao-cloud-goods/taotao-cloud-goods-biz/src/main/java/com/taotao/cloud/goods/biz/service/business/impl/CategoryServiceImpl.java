@@ -25,7 +25,7 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;
 import com.taotao.cloud.goods.biz.model.entity.Category;

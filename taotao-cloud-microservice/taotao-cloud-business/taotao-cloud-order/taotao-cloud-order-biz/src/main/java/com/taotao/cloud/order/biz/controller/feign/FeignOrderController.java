@@ -17,9 +17,9 @@
 package com.taotao.cloud.order.biz.controller.feign;
 
 import com.taotao.cloud.order.api.feign.IFeignOrderApi;
-import com.taotao.cloud.order.api.model.dto.order_info.OrderSaveDTO;
-import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
-import com.taotao.cloud.order.api.model.vo.order.OrderVO;
+import com.taotao.cloud.order.sys.model.dto.order_info.OrderSaveDTO;
+import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
+import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;

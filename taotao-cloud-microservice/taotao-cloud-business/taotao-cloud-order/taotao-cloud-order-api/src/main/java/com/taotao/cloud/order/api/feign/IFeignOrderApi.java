@@ -22,9 +22,8 @@ import com.taotao.cloud.openfeign.annotation.ApiInfo;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderApiFallback;
-import com.taotao.cloud.order.api.model.dto.order_info.OrderSaveDTO;
-import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
-import com.taotao.cloud.order.api.model.vo.order.OrderVO;
+import com.taotao.cloud.order.api.feign.request.FeignOrderSaveRequest;
+import com.taotao.cloud.order.api.feign.response.FeignOrderResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +51,7 @@ public interface IFeignOrderApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(value = "/order/feign/info/{code}")
-	OrderVO findOrderInfoByCode(@PathVariable("code") String code);
+	FeignOrderResponse findOrderInfoByCode(@PathVariable("code") String code);
 
 	@ApiInfo(
 		create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
@@ -61,7 +60,7 @@ public interface IFeignOrderApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@PostMapping(value = "/order/feign/saveOrder")
-	OrderVO saveOrder(@RequestBody OrderSaveDTO orderDTO);
+	FeignOrderResponse saveOrder(@RequestBody FeignOrderSaveRequest orderDTO);
 
 	@ApiInfo(
 		create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
@@ -88,7 +87,7 @@ public interface IFeignOrderApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(value = "/order/feign/getBySn")
-	OrderVO getBySn(String sn);
+	FeignOrderResponse getBySn(String sn);
 
 	@ApiInfo(
 		create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),
@@ -97,5 +96,5 @@ public interface IFeignOrderApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(value = "/order/feign/getByTradeSn")
-	List<OrderVO> getByTradeSn(String sn);
+	List<FeignOrderResponse> getByTradeSn(String sn);
 }

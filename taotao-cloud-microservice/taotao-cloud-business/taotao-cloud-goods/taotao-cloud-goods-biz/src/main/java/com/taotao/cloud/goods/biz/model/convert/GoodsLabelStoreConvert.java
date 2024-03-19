@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.biz.model.convert;
 
-import com.taotao.cloud.goods.api.model.dto.StoreGoodsLabelDTO;
-import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelInfoVO;
+import com.taotao.cloud.goods.biz.model.dto.StoreGoodsLabelDTO;
+import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelInfoVO;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

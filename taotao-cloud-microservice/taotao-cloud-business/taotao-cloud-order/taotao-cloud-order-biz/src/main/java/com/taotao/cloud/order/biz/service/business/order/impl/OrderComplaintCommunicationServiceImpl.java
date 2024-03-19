@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.service.business.order.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.api.model.page.order.OrderComplaintCommunicationPageQuery;
+import com.taotao.cloud.order.sys.model.page.order.OrderComplaintCommunicationPageQuery;
 import com.taotao.cloud.order.biz.mapper.order.IOrderComplainCommunicationMapper;
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
 import com.taotao.cloud.order.biz.service.business.order.IOrderComplaintCommunicationService;

@@ -22,7 +22,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.model.vo.MemberGradeVO;
+import com.taotao.cloud.member.sys.model.vo.MemberGradeVO;
 import com.taotao.cloud.member.biz.model.convert.MemberGradeConvert;
 import com.taotao.cloud.member.biz.model.entity.MemberGrade;
 import com.taotao.cloud.member.biz.service.business.IMemberGradeService;

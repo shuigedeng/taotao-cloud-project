@@ -18,9 +18,9 @@ package com.taotao.cloud.order.biz.service.business.aftersale;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.api.model.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
-import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleApplyVO;
+import com.taotao.cloud.order.sys.model.dto.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;

@@ -25,7 +25,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
+import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.mapper.IStoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.repository.cls.StoreGoodsLabelRepository;

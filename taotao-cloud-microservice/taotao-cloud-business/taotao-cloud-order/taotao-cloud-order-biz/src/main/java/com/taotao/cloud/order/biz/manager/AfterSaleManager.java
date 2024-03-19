@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.order.api.model.page.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.biz.mapper.aftersale.IAfterSaleMapper;
 import com.taotao.cloud.web.annotation.Manager;
 import com.taotao.cloud.web.base.manager.BaseManager;

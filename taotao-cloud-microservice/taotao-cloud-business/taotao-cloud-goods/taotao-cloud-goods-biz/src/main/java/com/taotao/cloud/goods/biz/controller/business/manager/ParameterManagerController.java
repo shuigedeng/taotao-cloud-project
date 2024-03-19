@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.model.dto.ParametersDTO;
+import com.taotao.cloud.goods.biz.model.dto.ParametersDTO;
 import com.taotao.cloud.goods.biz.model.convert.ParametersConvert;
 import com.taotao.cloud.goods.biz.model.entity.Parameters;
 import com.taotao.cloud.goods.biz.service.business.IParametersService;

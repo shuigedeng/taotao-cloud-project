@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.common.enums.SwitchEnum;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
+import com.taotao.cloud.member.sys.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;

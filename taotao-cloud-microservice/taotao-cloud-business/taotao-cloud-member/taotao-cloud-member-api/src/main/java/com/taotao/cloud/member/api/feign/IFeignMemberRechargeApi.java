@@ -18,7 +18,7 @@ package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.FeignMemberRechargeApiFallback;
-import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
+import com.taotao.cloud.member.api.feign.response.FeignMemberRechargeResponse;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -41,10 +41,10 @@ public interface IFeignMemberRechargeApi {
     Boolean paySuccess(@RequestParam String sn, @RequestParam String receivableNo, @RequestParam String paymentMethod);
 
     @GetMapping(value = "/member/feign/recharge/getRecharge")
-    MemberRechargeVO getRecharge(@RequestParam String sn);
+	FeignMemberRechargeResponse getRecharge(@RequestParam String sn);
 
     @GetMapping(value = "/member/feign/recharge/recharge")
-    MemberRechargeVO recharge(@RequestParam BigDecimal price);
+	FeignMemberRechargeResponse recharge(@RequestParam BigDecimal price);
 
     /**
      * LambdaQueryWrapper<Recharge> queryWrapper = new LambdaQueryWrapper<>();
@@ -54,7 +54,7 @@ public interface IFeignMemberRechargeApi {
      * @return
      */
     @GetMapping(value = "/member/feign/recharge/list")
-    List<MemberRechargeVO> list(@RequestParam DateTime dateTime);
+    List<FeignMemberRechargeResponse> list(@RequestParam DateTime dateTime);
 
     @GetMapping(value = "/member/feign/recharge/rechargeOrderCancel")
     Boolean rechargeOrderCancel(@RequestParam String sn);

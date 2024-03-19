@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.api.model.vo.MemberPointsHistoryVO;
+import com.taotao.cloud.member.sys.model.vo.MemberPointsHistoryVO;
 import com.taotao.cloud.member.biz.mapper.IMemberPointsHistoryMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.biz.service.business;
 
-import com.taotao.cloud.goods.api.model.dto.HotWordsDTO;
-import com.taotao.cloud.goods.api.model.page.EsGoodsSearchQuery;
+import com.taotao.cloud.goods.biz.model.dto.HotWordsDTO;
+import com.taotao.cloud.goods.biz.model.page.EsGoodsSearchQuery;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsRelatedInfo;
 import java.util.List;

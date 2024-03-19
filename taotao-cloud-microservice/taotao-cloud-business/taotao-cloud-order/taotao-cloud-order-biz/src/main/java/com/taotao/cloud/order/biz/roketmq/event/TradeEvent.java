@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.roketmq.event;
 
-import com.taotao.cloud.order.api.model.dto.cart.TradeDTO;
+import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 
 /**
  * 订单创建消息

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.biz.model.convert;
 
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuVO;
+import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
+import com.taotao.cloud.goods.biz.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

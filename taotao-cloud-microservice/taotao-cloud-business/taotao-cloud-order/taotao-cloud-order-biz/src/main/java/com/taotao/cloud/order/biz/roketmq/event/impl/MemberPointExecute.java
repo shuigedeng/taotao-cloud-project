@@ -23,7 +23,7 @@ import com.taotao.cloud.member.api.feign.IFeignMemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
-import com.taotao.cloud.order.api.model.message.OrderMessage;
+import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;

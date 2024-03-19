@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.roketmq.event;
 
-import com.taotao.cloud.order.api.model.message.OrderMessage;
+import com.taotao.cloud.order.sys.model.message.OrderMessage;
 
 /**
  * 订单状态改变事件
