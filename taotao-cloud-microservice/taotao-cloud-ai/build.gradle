@@ -1,0 +1,94 @@
+dependencies {
+    implementation "io.github.shuigedeng:taotao-cloud-starter-eventbus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rabbitmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-laytpl"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-elk"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-office"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
+    }
+
+    //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
+    //https://code.google.com/p/aviator/
+    //http://code.google.com/p/aviator/wiki/User_Guide_zh
+    //https://search.maven.org/artifact/com.googlecode.aviator/aviator
+    implementation "com.googlecode.aviator:aviator:5.4.1"
+
+    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
+    implementation "com.google.protobuf:protobuf-java:3.25.3"
+    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
+    implementation "com.google.protobuf:protobuf-java-util:3.25.3"
+    //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
+    //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+
+    //https://search.maven.org/artifact/io.protostuff/protostuff-core
+    implementation "io.protostuff:protostuff-core:1.8.0"
+    //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
+    implementation "io.protostuff:protostuff-runtime:1.8.0"
+
+    //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
+    implementation 'org.apache.velocity:velocity-engine-core:2.3'
+
+    //https://search.maven.org/artifact/org.freemarker/freemarker
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+
+    implementation 'com.github.oshi:oshi-core:6.5.0'
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+
+    implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
+    implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-azure-vector-store-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-chroma-store-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-milvus-store-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-neo4j-store-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-pinecone-store-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-postgresml-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-qdrant-store-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-stability-ai-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-vertex-ai-palm2-spring-boot-starter'
+//    implementation 'org.springframework.ai:spring-ai-weaviate-store-spring-boot-starter'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+mainClassName = "com.taotao.cloud.ai.TaoTaoCloudAiApplication"
+description = "ai中心"
+archivesBaseName = 'taotao-cloud-ai'
+
+configurations {
+    all {
+        resolutionStrategy {
+            //todo 临时处理 用高版本有问题
+            force 'io.zipkin.reporter2:zipkin-sender-urlconnection:2.16.3'
+            force 'io.zipkin.zipkin2:zipkin:2.23.2'
+            force 'io.zipkin.reporter2:zipkin-reporter:2.16.3'
+            force 'io.opentelemetry:opentelemetry-exporter-zipkin:1.31.0'
+        }
+
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+        exclude group: "com.querydsl", module: "querydsl-apt"
+        exclude group: "commons-logging", module: "commons-logging"
+    }
+}
