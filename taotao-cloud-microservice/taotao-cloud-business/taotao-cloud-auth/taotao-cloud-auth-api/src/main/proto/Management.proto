@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.taotao.cloud.auth.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.auth.api.grpc";
+option java_outer_classname = "CaptchaProto";
+//option objc_class_prefix = "HLW";
+
+service CaptchaService {
+    rpc create (CaptchaRequest) returns (CaptchaResponse){}
+}
+
+message CaptchaRequest {
+    string id = 1;
+}
+
+message CaptchaResponse {
+    string identity = 1;
+    string category = 2;
+}
+
+message BooleanReply {
+    bool reply = 1;
+}
+
+message ObjectReply {
+    bool reply = 1;
+}
+
+enum OperateType {
+  Addition = 0;
+  Division = 1;
+  Multiplication = 2;
+  Subtraction = 3;
+}

@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.application.configuration;
+package com.taotao.cloud.auth.application.config.configuration;
 
 import com.taotao.cloud.auth.application.login.form.OAuth2FormLoginUrlConfigurer;
 import com.taotao.cloud.auth.application.login.social.SocialDelegateClientRegistrationRepository;
-import com.taotao.cloud.auth.application.processor.AESCryptoProcessor;
-import com.taotao.cloud.auth.application.processor.HttpCryptoProcessor;
-import com.taotao.cloud.auth.application.processor.RSACryptoProcessor;
-import com.taotao.cloud.auth.application.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.application.stamp.LockedUserDetailsStampManager;
-import com.taotao.cloud.auth.application.stamp.SignInFailureLimitedStampManager;
+import com.taotao.cloud.auth.infrastructure.processor.AESCryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.processor.HttpCryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.processor.RSACryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;
+import com.taotao.cloud.auth.infrastructure.stamp.LockedUserDetailsStampManager;
+import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;

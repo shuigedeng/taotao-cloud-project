@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package com.taotao.cloud.auth.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.auth.api.grpc";
+option java_outer_classname = "Oauth2ServiceProto";
+//option objc_class_prefix = "HLW";
+
+service Oauth2Service {
+  rpc loginByWechat (Oauth2Request) returns (Oauth2Response){}
+  rpc loginByQQ (Oauth2Request) returns (BooleanReply){}
+}
+
+message Oauth2Request {
+  string id = 1;
+}
+
+message Oauth2Response {
+  string id = 1;
+  string serialNum = 2;
+  string userNum = 3;
+  int32  status = 4;
+  int32  type = 5;
+  string address = 6;
+  string createtime = 7;
+  string updatetime = 8;
+}
+
+message BooleanReply {
+  bool reply = 1;
+}
+
+message ObjectReply {
+  bool reply = 1;
+}
+
+enum OperateType {
+  Addition = 0;
+  Division = 1;
+  Multiplication = 2;
+  Subtraction = 3;
+}

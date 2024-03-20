@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.configuration;
+package com.taotao.cloud.auth.application.config.configuration;
 
-import com.taotao.cloud.auth.application.stamp.LockedUserDetailsStampManager;
-import com.taotao.cloud.auth.application.stamp.SignInFailureLimitedStampManager;
-import com.taotao.cloud.auth.biz.management.compliance.OAuth2AccountStatusManager;
-import com.taotao.cloud.auth.biz.management.compliance.listener.AccountAutoEnableListener;
-import com.taotao.cloud.auth.biz.management.compliance.listener.AuthenticationFailureListener;
-import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
-import com.taotao.cloud.auth.biz.management.compliance.processor.changer.TtcAccountStatusChanger;
+import com.taotao.cloud.auth.infrastructure.compliance.OAuth2AccountStatusManager;
+import com.taotao.cloud.auth.infrastructure.compliance.listener.AccountAutoEnableListener;
+import com.taotao.cloud.auth.infrastructure.compliance.listener.AuthenticationFailureListener;
+import com.taotao.cloud.auth.infrastructure.compliance.processor.changer.AccountStatusChanger;
+import com.taotao.cloud.auth.infrastructure.compliance.processor.changer.TtcAccountStatusChanger;
+import com.taotao.cloud.auth.infrastructure.stamp.LockedUserDetailsStampManager;
+import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

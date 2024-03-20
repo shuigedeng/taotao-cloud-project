@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.configuration;
+package com.taotao.cloud.auth.application.config.configuration;
 
-import com.taotao.cloud.auth.application.configuration.OAuth2AuthenticationConfiguration;
-import com.taotao.cloud.auth.application.stamp.SignInFailureLimitedStampManager;
-import com.taotao.cloud.auth.biz.jpa.configuration.OAuth2DataJpaConfiguration;
-import com.taotao.cloud.auth.biz.management.compliance.listener.AuthenticationSuccessListener;
-import com.taotao.cloud.auth.biz.management.response.OAuth2DeviceVerificationResponseHandler;
-import com.taotao.cloud.auth.biz.management.response.OidcClientRegistrationResponseHandler;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
-import com.taotao.cloud.auth.biz.management.service.OAuth2DeviceService;
+import com.taotao.cloud.auth.application.service.OAuth2ComplianceService;
+import com.taotao.cloud.auth.application.service.OAuth2DeviceService;
+import com.taotao.cloud.auth.infrastructure.compliance.listener.AuthenticationSuccessListener;
+import com.taotao.cloud.auth.infrastructure.response.OAuth2DeviceVerificationResponseHandler;
+import com.taotao.cloud.auth.infrastructure.response.OidcClientRegistrationResponseHandler;
+import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
