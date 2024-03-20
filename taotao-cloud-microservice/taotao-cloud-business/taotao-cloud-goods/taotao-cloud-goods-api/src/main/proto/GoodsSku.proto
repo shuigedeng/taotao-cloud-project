@@ -1,19 +1,18 @@
 syntax = "proto3";
 
-package com.taotao.cloud.sys.api.grpc;
+package com.taotao.cloud.goods.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.goods.api.grpc";
-option java_outer_classname = "DeviceFixProto";
+option java_outer_classname = "GoodsSkuProto";
 //option objc_class_prefix = "HLW";
 
 // The device service definition.
-service DeviceFixService {
+service GoodsSkuService {
     // Sends a message
-    rpc insertDeviceFix (DeviceFix) returns (BooleanReply){}
-    rpc updateDeviceFix (DeviceFix) returns (BooleanReply){}
-    rpc searchDeviceFix (ConditionsRequest) returns (DeviceFix){}
-    rpc deleteDeviceFix (ConditionsRequest) returns (BooleanReply){}
+    rpc updateGoodsStuck (DeviceFix) returns (BooleanReply){}
+    rpc updateBatchById (DeviceFix) returns (BooleanReply){}
+    rpc getGoodsSkuByIdFromCache (ConditionsRequest) returns (BooleanReply){}
 }
 
 // The request message .
