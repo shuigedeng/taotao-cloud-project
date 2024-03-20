@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
-import com.taotao.cloud.auth.biz.management.dto.OAuth2PermissionDto;
-import com.taotao.cloud.auth.biz.management.dto.OAuth2ScopeDto;
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
 import com.taotao.cloud.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

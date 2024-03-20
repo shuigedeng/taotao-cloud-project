@@ -187,7 +187,7 @@ arthas:
 
 dubbo:
   scan:
-    base-packages: com.taotao.cloud.sys.biz.service.dubbo
+    base-packages: com.taotao.cloud.auth.biz.service.dubbo
   application:
     name: ${spring.application.name}     #当前应用名称
     compiler: javassist     #Java字节码编译器，用于动态类的生成，可选：jdk或javassist
@@ -1238,7 +1238,7 @@ taotao:
             size: 1000
       jpa:
         enabled: true
-        packages: com.taotao.cloud.sys.biz.model.entity
+        packages: com.taotao.cloud.auth.biz.model.entity
         tenant:
           enabled: false
       shardingsphere:
@@ -1348,7 +1348,7 @@ mybatis-plus-join:
   sub-table-logic: true
 
 mybatis-plus:
-  typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity  #实体扫描 多个package用户逗号或者分号分割
+  typeAliasesPackage: com.taotao.cloud.auth.biz.model.entity  #实体扫描 多个package用户逗号或者分号分割
   mapperLocations: classpath:mapper/*.xml # mapper xml 地址
   global-config:
     banner: true # 关闭mp3.0自带的banner
@@ -1477,7 +1477,7 @@ logging:
   level:
     root: INFO
     org.apache.zookeeper.ZooKeeper: info
-    com.taotao.cloud.sys.api.feign: debug
+    com.taotao.cloud.auth.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
     net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener: debug
     org.springframework.core.log.LogAccessor: error

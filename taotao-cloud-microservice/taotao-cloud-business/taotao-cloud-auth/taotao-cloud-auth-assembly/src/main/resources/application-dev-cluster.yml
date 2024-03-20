@@ -195,7 +195,7 @@ elasticjob:
     namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
-      elastic-job-class: com.taotao.cloud.sys.biz.task.elastic.TaoTaoSimpleJob
+      elastic-job-class: com.taotao.cloud.auth.biz.task.elastic.TaoTaoSimpleJob
       jobBootstrapBeanName: taoTaoSimpleBootstrapJob
       cron: 0 0/30 * * * ?
       timeZone: GMT+08:00
@@ -228,7 +228,7 @@ elasticjob:
           bcc:
           debug: false
     taotao-cloud-data-flow-job:
-      elastic-job-class: com.taotao.cloud.sys.biz.task.elastic.TaoTaoDataflowJob
+      elastic-job-class: com.taotao.cloud.auth.biz.task.elastic.TaoTaoDataflowJob
       jobBootstrapBeanName: taoTaoDataflowBootstrapJob
       cron: 0 0/30 * * * ?
       timeZone: GMT+08:00
@@ -263,7 +263,7 @@ arthas:
 dubbo:
   enabled: true
   scan:
-    base-packages: com.taotao.cloud.sys.biz.service.dubbo
+    base-packages: com.taotao.cloud.auth.biz.service.dubbo
   application:
     #当前应用名称
     name: ${spring.application.name}
@@ -1408,7 +1408,7 @@ taotao:
           enabled: false
       jpa:
         enabled: true
-        packages: com.taotao.cloud.sys.biz.model.entity
+        packages: com.taotao.cloud.auth.biz.model.entity
         tenant:
           enabled: false
     core:
@@ -1450,7 +1450,7 @@ taotao:
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割
-  typeAliasesPackage: com.taotao.cloud.sys.biz.model.entity
+  typeAliasesPackage: com.taotao.cloud.auth.biz.model.entity
   # mapper xml 地址
   mapperLocations: classpath:mapper/*.xml
   global-config:
@@ -1566,7 +1566,7 @@ logging:
   level:
     root: INFO
     org.apache.zookeeper.ZooKeeper: info
-    com.taotao.cloud.sys.api.feign: debug
+    com.taotao.cloud.auth.api.feign: debug
     #kafka.server.KafkaConfig: info
     #org.I0Itec.zkclient: info
     #kafka.admin.AdminClient.AdminConfig: info

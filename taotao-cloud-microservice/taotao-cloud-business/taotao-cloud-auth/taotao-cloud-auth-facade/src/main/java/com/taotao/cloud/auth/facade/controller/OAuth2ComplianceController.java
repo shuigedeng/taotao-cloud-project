@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.jpa.utils.JpaUtils;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.sys.adapter.facade;
+package com.taotao.cloud.auth.adapter.facade;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.cloud.common.exception.BusinessException;
@@ -7,8 +7,8 @@ import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.ratelimit.annotation.GuavaLimit;
 import com.taotao.cloud.ratelimit.annotation.Limit;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
-import com.taotao.cloud.sys.api.feign.IFeignDictApi;
-import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
+import com.taotao.cloud.auth.api.feign.IFeignDictApi;
+import com.taotao.cloud.auth.api.feign.response.FeignDictResponse;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.yomahub.tlog.core.annotation.TLogAspect;
 import io.swagger.v3.oas.annotations.Operation;

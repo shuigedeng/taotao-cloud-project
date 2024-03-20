@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
 import com.taotao.cloud.captcha.support.core.dto.Captcha;
 import com.taotao.cloud.captcha.support.core.dto.Verification;

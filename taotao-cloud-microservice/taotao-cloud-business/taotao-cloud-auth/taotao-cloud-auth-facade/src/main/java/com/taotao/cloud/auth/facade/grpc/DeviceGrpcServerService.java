@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.adapter.grpc;
+package com.taotao.cloud.auth.adapter.grpc;
 
-import com.taotao.cloud.sys.api.grpc.BooleanReply;
-import com.taotao.cloud.sys.api.grpc.DeviceFix;
-import com.taotao.cloud.sys.api.grpc.DeviceFixServiceGrpc;
+import com.taotao.cloud.auth.api.grpc.BooleanReply;
+import com.taotao.cloud.auth.api.grpc.DeviceFix;
+import com.taotao.cloud.auth.api.grpc.DeviceFixServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;

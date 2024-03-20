@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.SymbolConstants;

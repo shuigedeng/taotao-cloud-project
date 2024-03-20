@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
-import com.taotao.cloud.auth.biz.management.service.OAuth2ProductService;
+import com.taotao.cloud.auth.application.service.OAuth2ProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.web.bind.annotation.RequestMapping;

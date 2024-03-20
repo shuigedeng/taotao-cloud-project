@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.adapter.dubbo;
+package com.taotao.cloud.auth.adapter.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.IDubboDictRpc;
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.auth.api.dubbo.IDubboDictRpc;
+import com.taotao.cloud.auth.api.dubbo.response.DubboDictResponse;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;

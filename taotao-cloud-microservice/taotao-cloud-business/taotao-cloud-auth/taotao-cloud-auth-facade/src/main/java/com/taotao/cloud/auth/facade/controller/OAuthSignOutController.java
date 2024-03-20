@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
-import com.taotao.cloud.auth.biz.management.compliance.event.AccountReleaseFromCacheEvent;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ComplianceService;
+import com.taotao.cloud.auth.application.service.OAuth2ComplianceService;
+import com.taotao.cloud.auth.infrastructure.compliance.event.AccountReleaseFromCacheEvent;
 import com.taotao.cloud.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

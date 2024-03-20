@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
 import com.alibaba.nacos.api.model.v2.Result;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ConstantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;

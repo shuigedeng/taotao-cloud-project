@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.biz.management.controller;
+package com.taotao.cloud.auth.facade.controller;
 
-import com.taotao.cloud.auth.biz.management.dto.Option;
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
-import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
-import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
+import com.taotao.cloud.auth.application.service.OAuth2ApplicationService;
+import com.taotao.cloud.auth.application.service.OAuth2ScopeService;
+import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Application;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.SymbolConstants;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
