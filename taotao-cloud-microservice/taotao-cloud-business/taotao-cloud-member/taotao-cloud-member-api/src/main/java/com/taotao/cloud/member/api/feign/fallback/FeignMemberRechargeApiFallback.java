@@ -18,7 +18,6 @@ package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
 import com.taotao.cloud.member.api.feign.response.FeignMemberRechargeResponse;
-import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import java.math.BigDecimal;
 import java.util.List;
 

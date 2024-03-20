@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.application.config.aop.member;
+package com.taotao.cloud.member.application.config.aop.member;
 
+import com.taotao.cloud.member.biz.service.business.IMemberService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -33,11 +34,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberLogAspect {
 
-//    @Autowired
-//    private IMemberService memberService;
-//
-//    @After("@annotation(com.taotao.cloud.member.biz.aop.member.MemberLogPoint)")
-//    public void doAfter(JoinPoint pjp) {
-//        // todo 需要实现
-//    }
+    @Autowired
+    private IMemberService memberService;
+
+    @After("@annotation(com.taotao.cloud.member.biz.aop.member.MemberLogPoint)")
+    public void doAfter(JoinPoint pjp) {
+        // todo 需要实现
+    }
 }

@@ -26,7 +26,6 @@ import com.taotao.cloud.cache.redis.delay.message.QueueMessageBuilder;
 import com.taotao.cloud.cache.redis.delay.message.RedissonHeaders;
 import com.taotao.cloud.cache.redis.delay.message.RedissonMessage;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.Map;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;

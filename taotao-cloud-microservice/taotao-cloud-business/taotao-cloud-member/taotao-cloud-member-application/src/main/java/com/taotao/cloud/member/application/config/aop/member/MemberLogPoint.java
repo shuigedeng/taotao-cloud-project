@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.application.config.aop.member;
+package com.taotao.cloud.member.application.config.aop.member;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
