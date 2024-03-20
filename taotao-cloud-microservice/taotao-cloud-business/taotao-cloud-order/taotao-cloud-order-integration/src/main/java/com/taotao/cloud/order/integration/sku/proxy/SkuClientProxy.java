@@ -20,8 +20,8 @@ import com.taotao.cloud.goods.api.dubbo.IDubboGoodsRpc;
 import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
 import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.response.FeignGoodsSkuSpecGalleryResponse;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.integration.sku.adapter.SkuClientAdapter;
 import com.taotao.cloud.order.integration.sku.grpc.SkuGrpcClient;
 import com.taotao.cloud.order.integration.sku.vo.SkuVO;
@@ -42,9 +42,10 @@ public class SkuClientProxy {
 	private IDubboGoodsRpc goodsRpc;
 
 	// 查询用户
-	public SkuVO getUserInfo(Long  skuId) {
-		GoodsSkuSpecGalleryVO user = goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
-		DubboGoodsQueryResponse goodsQueryResponse = goodsRpc.queryGoodsByParams(new DubboGoodsQueryRequest());
+	public SkuVO getUserInfo(Long skuId) {
+		FeignGoodsSkuSpecGalleryResponse user = goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
+		DubboGoodsQueryResponse goodsQueryResponse = goodsRpc.queryGoodsByParams(
+			new DubboGoodsQueryRequest());
 
 		HelloReply helloReply = skuGrpcClient.sayHello("");
 

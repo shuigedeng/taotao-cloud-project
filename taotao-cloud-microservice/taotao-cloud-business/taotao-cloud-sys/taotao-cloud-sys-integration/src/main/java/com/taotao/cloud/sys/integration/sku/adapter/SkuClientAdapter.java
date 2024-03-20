@@ -17,15 +17,15 @@
 package com.taotao.cloud.sys.integration.sku.adapter;
 
 import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
+import com.taotao.cloud.goods.api.feign.response.FeignGoodsSkuSpecGalleryResponse;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
-import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.sys.integration.sku.vo.SkuVO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SkuClientAdapter {
 
-	public SkuVO convert(GoodsSkuSpecGalleryVO user,
+	public SkuVO convert(FeignGoodsSkuSpecGalleryResponse user,
 		DubboGoodsQueryResponse goodsQueryResponse, HelloReply helloReply) {
 		// 基础信息
 		SkuVO skuVO = new SkuVO();
