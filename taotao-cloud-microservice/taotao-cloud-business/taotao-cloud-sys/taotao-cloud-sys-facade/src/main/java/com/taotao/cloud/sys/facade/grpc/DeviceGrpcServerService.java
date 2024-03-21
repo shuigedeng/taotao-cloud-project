@@ -16,36 +16,34 @@
 
 package com.taotao.cloud.sys.facade.grpc;
 
-import com.taotao.cloud.sys.api.grpc.BooleanReply;
-import com.taotao.cloud.sys.api.grpc.DeviceFix;
-import com.taotao.cloud.sys.api.grpc.DeviceFixServiceGrpc;
+import com.taotao.cloud.sys.api.grpc.DictRequest;
+import com.taotao.cloud.sys.api.grpc.DictResponse;
+import com.taotao.cloud.sys.api.grpc.DictServiceGrpc;
+import com.taotao.cloud.sys.api.grpc.DictTestRequest;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
 
 @Slf4j
 @GRpcService
-public class DeviceGrpcServerService extends DeviceFixServiceGrpc.DeviceFixServiceImplBase {
+public class DeviceGrpcServerService extends DictServiceGrpc.DictServiceImplBase {
 
 	// @Autowired
 	// private IDevicesFixService deviceService;
 
 	@Override
-	public void insertDeviceFix(DeviceFix request, StreamObserver<BooleanReply> responseObserver) {
-		// DevicesFix deviceFix = DevicesFix.builder().id(request.getId())
-		//	.serialNum(request.getSerialNum())
-		//	.address(request.getAddress())
-		//	.createtime(DateUtil.toDate(request.getCreatetime(), DatePattern.TIMESTAMP))
-		//	.updatetime(DateUtil.toDate(request.getUpdatetime(), DatePattern.TIMESTAMP))
-		//	.userNum(request.getUserNum())
-		//	.status(request.getStatus())
-		//	.type(request.getType())
-		//	.build();
-		// log.info(deviceFix.toString());
-		// boolean replyTag = deviceService.insert(deviceFix);
+	public void findByCode(DictRequest request, StreamObserver<DictResponse> responseObserver) {
+		super.findByCode(request, responseObserver);
+
+		log.info("findByCode:{}", request.toString());
 		boolean replyTag = false;
-		BooleanReply reply = BooleanReply.newBuilder().setReply(replyTag).build();
+		DictResponse reply = DictResponse.newBuilder().setId(1).build();
 		responseObserver.onNext(reply);
 		responseObserver.onCompleted();
+	}
+
+	@Override
+	public void test(DictTestRequest request, StreamObserver<DictResponse> responseObserver) {
+		super.test(request, responseObserver);
 	}
 }

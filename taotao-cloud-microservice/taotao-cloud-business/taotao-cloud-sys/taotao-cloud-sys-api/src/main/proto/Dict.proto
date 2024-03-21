@@ -1,43 +1,38 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/type.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
+
 package com.taotao.cloud.sys.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.sys.api.grpc";
-option java_outer_classname = "DeviceFixProto";
+option java_outer_classname = "DictServiceProto";
 //option objc_class_prefix = "HLW";
 
-// The device service definition.
-service DeviceFixService {
-    // Sends a message
-    rpc insertDeviceFix (DeviceFix) returns (BooleanReply){}
-    rpc updateDeviceFix (DeviceFix) returns (BooleanReply){}
-    rpc searchDeviceFix (ConditionsRequest) returns (DeviceFix){}
-    rpc deleteDeviceFix (ConditionsRequest) returns (BooleanReply){}
+service DictService {
+  rpc findByCode (DictRequest) returns (DictResponse){}
+  rpc test (DictTestRequest) returns (DictResponse){}
 }
 
-// The request message .
-message ConditionsRequest {
-    string id = 1;
+message DictRequest {
+  string code = 1;
 }
 
-message DeviceFix {
-    string id = 1;
-    string serialNum = 2;
-    string userNum = 3;
-    int32  status = 4;
-    int32  type = 5;
-    string address = 6;
-    string createtime = 7;
-    string updatetime = 8;
+message DictResponse {
+  int64 id = 1;
+  string dictName = 2;
+  string dictCode = 3;
+  string description = 4;
+  int32 sortNum = 5;
+  string remark = 6;
 }
 
-// The response message
-message BooleanReply {
-    bool reply = 1;
-}
-
-// The response message
-message ObjectReply {
-    bool reply = 1;
+message DictTestRequest {
+  bool reply = 1;
 }
