@@ -28,7 +28,7 @@ buildscript {
         querydslAptVersion = "5.1.0"
         mapstructProcessorVersion = "1.6.0.Beta1"
         lombokMapstructBindingVersion = "0.2.0"
-        lombokVersion = "1.18.30"
+        lombokVersion = "1.18.32"
         recordBuilderVersion = "41"
     }
 

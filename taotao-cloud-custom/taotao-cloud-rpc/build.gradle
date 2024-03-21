@@ -26,8 +26,8 @@ dependencies {
 
     api "io.netty:netty-all:4.1.107.Final"
 
-    api "org.projectlombok:lombok:1.18.30"
-    annotationProcessor "org.projectlombok:lombok:1.18.30"
+    api "org.projectlombok:lombok:1.18.32"
+    annotationProcessor "org.projectlombok:lombok:1.18.32"
 
 
     testImplementation "junit:junit:4.13.2"
