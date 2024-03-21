@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.facade.grpc;
 
 import com.taotao.cloud.sys.api.grpc.DictRequest;
 import com.taotao.cloud.sys.api.grpc.DictResponse;
-import com.taotao.cloud.sys.api.grpc.DictServiceGrpc;
+import com.taotao.cloud.sys.api.grpc.DictServiceGrpc.DictServiceImplBase;
 import com.taotao.cloud.sys.api.grpc.DictTestRequest;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ import org.lognet.springboot.grpc.GRpcService;
 
 @Slf4j
 @GRpcService
-public class DeviceGrpcServerService extends DictServiceGrpc.DictServiceImplBase {
+public class DictServiceGrpc extends DictServiceImplBase {
 
 	// @Autowired
 	// private IDevicesFixService deviceService;

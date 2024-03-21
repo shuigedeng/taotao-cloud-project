@@ -21,7 +21,6 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.support.thread.MDCThreadPoolExecutor;
 import com.taotao.cloud.common.support.thread.ThreadPoolFactory;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.sys.api.grpc.DeviceFix;
 import com.taotao.cloud.sys.biz.config.redis.delegate.SensitiveWordsTopicMessageDelegate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -85,14 +84,14 @@ public class RedisListenerConfig {
 		return redisTemplate;
 	}
 
-	public void testProto(RedisTemplate<String, byte[]> protoRedisTemplate) throws InvalidProtocolBufferException {
-		DeviceFix deviceFix = DeviceFix.newBuilder().setType(1).setAddress("aaa").build();
-		protoRedisTemplate.opsForValue().set("deviceFix_prot0"+ deviceFix.getType(), deviceFix.toByteArray());
-
-		byte[] bytes = protoRedisTemplate.opsForValue().get("deviceFix_prot0" + deviceFix.getType());
-		DeviceFix deviceFix1 = DeviceFix.parseFrom(bytes);
-
-	}
+//	public void testProto(RedisTemplate<String, byte[]> protoRedisTemplate) throws InvalidProtocolBufferException {
+//		DeviceFix deviceFix = DeviceFix.newBuilder().setType(1).setAddress("aaa").build();
+//		protoRedisTemplate.opsForValue().set("deviceFix_prot0"+ deviceFix.getType(), deviceFix.toByteArray());
+//
+//		byte[] bytes = protoRedisTemplate.opsForValue().get("deviceFix_prot0" + deviceFix.getType());
+//		DeviceFix deviceFix1 = DeviceFix.parseFrom(bytes);
+//
+//	}
 
     @Bean
     @Primary
