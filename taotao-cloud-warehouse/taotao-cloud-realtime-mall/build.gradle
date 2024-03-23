@@ -129,7 +129,7 @@ dependencies {
         exclude group: "org.glassfish", module: "javax.el"
     }
     implementation 'redis.clients:jedis:5.1.2'
-    implementation "com.clickhouse:clickhouse-jdbc:0.6.0-patch1"
+    implementation "com.clickhouse:clickhouse-jdbc:0.6.0-patch2"
 
     implementation "com.janeluo:ikanalyzer:2012_u6"
 
