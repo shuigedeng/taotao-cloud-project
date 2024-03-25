@@ -87,7 +87,7 @@ http://192.168.10.220:8085进入SkyWalking UI
 
 
 # 9、探针配置（Agent）
-vim skywalking8.6.0/agent/config/agent.config
+vim skywalking9.1.0/agent/config/agent.config
 修改项目名字、日志打印级别、skywalking的服务地址
 
 # 10、客户端启动Agent

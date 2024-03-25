@@ -129,7 +129,7 @@ services:
         ipv4_address: 172.11.0.15
 
   sentinel-dashboard:
-    image: dreamkaylee/sentinel-dashboard:1.8.6
+    image: dreamkaylee/sentinel-dashboard:1.8.7
     container_name: sentinel-dashboard
     ports:
       - "8858:8858"
