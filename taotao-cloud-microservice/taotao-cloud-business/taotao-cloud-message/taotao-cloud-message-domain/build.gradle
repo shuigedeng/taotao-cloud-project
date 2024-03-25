@@ -100,7 +100,7 @@ dependencies {
     api 'cn.monitor4all:log-record-springboot3-starter:1.6.1:1.6.1'
     api 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
     api 'com.tencentcloudapi:tencentcloud-sdk-java:4.0.11'
-    api "com.alibaba.fastjson2:fastjson2:2.0.47"
+    api "com.alibaba.fastjson2:fastjson2:2.0.48"
     api 'com.squareup.okhttp3:okhttp:4.12.0'
     api 'com.google.guava:guava:33.1.0-jre'
     api 'org.dromara.hutool:hutool-all'
