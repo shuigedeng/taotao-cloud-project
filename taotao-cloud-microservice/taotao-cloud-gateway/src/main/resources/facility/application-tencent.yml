@@ -787,7 +787,7 @@
 #      #                #令牌桶的容量，允许在一秒钟内完成的最大请求数
 #      #                redis-rate-limiter.burstCapacity: 5
 #      default-filters:
-#        - AddRequestHeader=X-Request-taotao-cloud, ${taotaoCloudVersion}
+#        - AddRequestHeader=X-Request-taotao-cloud, ${ttcVersion}
 #
 #taotao:
 #  cloud:
@@ -830,7 +830,7 @@
 #          /sys/**,
 #      api:
 #        prefix: /api
-#        version: v${taotaoCloudVersion}
+#        version: v${ttcVersion}
 #        base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
 #    logger:
 #      enabled: true

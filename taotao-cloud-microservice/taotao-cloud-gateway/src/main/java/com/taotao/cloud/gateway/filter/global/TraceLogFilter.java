@@ -43,8 +43,8 @@ import reactor.core.publisher.Mono;
 @ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "trace", havingValue = "true", matchIfMissing = true)
 public class TraceLogFilter implements GlobalFilter, Ordered {
 
-    @Value("${taotaoCloudVersion:--}")
-    private String taotaoCloudVersion;
+    @Value("${ttcVersion:--}")
+    private String ttcVersion;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -59,7 +59,7 @@ public class TraceLogFilter implements GlobalFilter, Ordered {
                 .mutate()
                 .headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TRACE_ID, traceId));
         if (StrUtil.isEmpty(version)) {
-            builder.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION, taotaoCloudVersion));
+            builder.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION, ttcVersion));
         }
         if (StrUtil.isEmpty(tenantId)) {
             builder.headers(h -> h.add(CommonConstant.TAOTAO_CLOUD_TENANT_ID, CommonConstant.TAOTAO_CLOUD_TENANT_ID_DEFAULT));

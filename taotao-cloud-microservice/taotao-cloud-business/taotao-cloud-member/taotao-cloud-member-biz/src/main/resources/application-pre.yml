@@ -208,7 +208,7 @@ dubbo:
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}
-    #version: ${taotaoCloudVersion}
+    #version: ${ttcVersion}
     #owner: taotao-cloud
     #organization: taotao-cloud
     #metadata-type: local
@@ -225,7 +225,7 @@ dubbo:
     #password:
     #port:
     #protocol:
-    #version: ${taotaoCloudVersion}
+    #version: ${ttcVersion}
     #check: true
     #register: true
     #weight: 10
@@ -238,11 +238,11 @@ dubbo:
     base-packages: com.taotao.cloud.member.biz.service.impl
   provider:
     loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
   consumer:
     check: false
     loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
   #module:
   #  name: ${spring.application.name}
   #monitor:
@@ -929,7 +929,7 @@ taotao:
     openapi:
       enabled: true
       group: ${spring.applicaion.name}
-      version: ${taotaoCloudVersion}
+      version: ${ttcVersion}
       title: 系统管理模块
     mongodb:
       enabled: true

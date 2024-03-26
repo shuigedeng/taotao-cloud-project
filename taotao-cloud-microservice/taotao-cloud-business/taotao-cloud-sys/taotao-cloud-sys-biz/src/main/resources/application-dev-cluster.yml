@@ -268,7 +268,7 @@ dubbo:
     #当前应用名称
     name: ${spring.application.name}
     compiler: javassist
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     owner: 981376577
     organization: taotao-cloud
     architecture: china
@@ -291,7 +291,7 @@ dubbo:
     username: nacos
     password: nacos
     protocol: dubbo
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     check: false
     register: true
     weight: 10
@@ -310,7 +310,7 @@ dubbo:
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
   provider:
     timeout: 3000
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     threads: 500
     group: taotao-cloud-dev
     #延时注册服务（毫秒）
@@ -327,7 +327,7 @@ dubbo:
     check: false
     timeout: 3000
     loadbalance: shortestresponse
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     threads: 100
     retries: 3
     async: true
@@ -354,7 +354,7 @@ dubbo:
         enabled: true
   module:
     name: ${spring.application.name}
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     owner: 981376577
     organization: taotao-cloud
     background: false
@@ -366,7 +366,7 @@ dubbo:
     username: admin
     password: 123456
     group: taotao-cloud-dev
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
   metadata-report:
     id: ${spring.application.name}
     address: nacos://127.0.0.1:8848
@@ -1333,7 +1333,7 @@ taotao:
     springdoc:
       enabled: true
       group: ${spring.applicaion.name}
-      version: ${taotaoCloudVersion}
+      version: ${ttcVersion}
       title: 系统管理模块
     mongodb:
       enabled: true

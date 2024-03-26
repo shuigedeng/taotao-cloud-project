@@ -21,8 +21,8 @@
 */
 buildscript {
     ext {
-        taotaoCloudVersion = version
-        taotaoCloudGroup = "io.github.shuigedeng"
+        ttcVersion = version
+        ttcGroup = "io.github.shuigedeng"
 
         springBootVersion = "3.2.4"
         querydslAptVersion = "5.1.0"
@@ -211,8 +211,8 @@ plugins {
 //var pLibs = projectLibs
 
 allprojects {
-    version project.taotaoCloudVersion
-    group project.taotaoCloudGroup
+    version project.ttcVersion
+    group project.ttcGroup
 
     // 全部项目有基础插件kotlin jvm/spring
     //apply {
@@ -339,7 +339,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
     apply from: rootProject.file('gradle/git.gradle')
 
     dependencies {
-        implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$taotaoCloudVersion")
+        implementation platform("io.github.shuigedeng:taotao-cloud-dependencies:$ttcVersion")
     }
 
     configurations {

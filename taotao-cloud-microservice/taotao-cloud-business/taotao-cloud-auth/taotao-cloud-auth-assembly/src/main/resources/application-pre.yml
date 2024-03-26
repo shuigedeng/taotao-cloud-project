@@ -265,7 +265,7 @@ dubbo:
   application:
     id: ${spring.application.name}
     name: ${spring.application.name}
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     owner: 981376577
     architecture: china
     organization: taotao-cloud
@@ -288,7 +288,7 @@ dubbo:
     username: nacos
     password: nacos
     protocol: dubbo
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     check: false
     register: true
     weight: 10
@@ -309,7 +309,7 @@ dubbo:
   provider:
     timeout: 300000
     loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     threads: 500
     #retries: -1
     #delay: 3000 #延时注册服务（毫秒）
@@ -317,7 +317,7 @@ dubbo:
     check: false
     timeout: 300000
     loadbalance: roundrobin
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     threads: 100
   #module:
   #  name: ${spring.application.name}
@@ -1198,7 +1198,7 @@ taotao:
     springdoc:
       enabled: true
       group: ${spring.applicaion.name}
-      version: ${taotaoCloudVersion}
+      version: ${ttcVersion}
       title: 系统管理模块
     mongodb:
       enabled: true

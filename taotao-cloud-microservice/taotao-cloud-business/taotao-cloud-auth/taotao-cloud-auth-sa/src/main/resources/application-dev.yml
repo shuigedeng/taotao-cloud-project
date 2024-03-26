@@ -154,7 +154,7 @@ dubbo:
     name: ${spring.application.name}
     #Java字节码编译器，用于动态类的生成，可选：jdk或javassist
     compiler: javassist
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     owner: 981376577
     architecture: china
     organization: taotao-cloud
@@ -178,7 +178,7 @@ dubbo:
     username: nacos
     password: nacos
     protocol: dubbo
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     check: false
     register: true
     weight: 10
@@ -198,7 +198,7 @@ dubbo:
     threads: 200
   provider:
     timeout: 3000
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     threads: 500
     group: taotao-cloud-sys-dev
     #延时注册服务（毫秒）
@@ -215,7 +215,7 @@ dubbo:
     check: false
     timeout: 3000
     loadbalance: shortestresponse
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     threads: 100
     retries: 3
     async: true
@@ -228,7 +228,7 @@ dubbo:
     group: taotao-cloud-dev
   module:
     name: ${spring.application.name}
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
     owner: 981376577
     organization: taotao-cloud
     background: false
@@ -240,7 +240,7 @@ dubbo:
     username: admin
     password: 123456
     group: taotao-cloud-dev
-    version: ${taotaoCloudVersion}
+    version: ${ttcVersion}
   metadata-report:
     id: ${spring.application.name}
     address: nacos://192.168.10.220:8848
@@ -506,7 +506,7 @@ taotao:
     springdoc:
       enabled: true
       group: ${spring.application.name}
-      version: ${taotaoCloudVersion}
+      version: ${ttcVersion}
       title: 认证中心模块
       packages-to-scan:
         - com.taotao.cloud.auth.biz.controller

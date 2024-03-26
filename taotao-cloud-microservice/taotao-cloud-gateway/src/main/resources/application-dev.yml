@@ -927,7 +927,7 @@ spring:
       #                #令牌桶的容量，允许在一秒钟内完成的最大请求数
       #                redis-rate-limiter.burstCapacity: 5
       default-filters:
-        - AddRequestHeader=X-Request-taotao-cloud, ${taotaoCloudVersion}
+        - AddRequestHeader=X-Request-taotao-cloud, ${ttcVersion}
       httpclient:
         response-timeout: 5s
         connect-timeout: 30000
@@ -1025,7 +1025,7 @@ taotao:
           - /job/**
       api:
         prefix: /api
-        version: v${taotaoCloudVersion}
+        version: v${ttcVersion}
         base-uri: ${taotao.cloud.gateway.api.prefix}/${taotao.cloud.gateway.api.version}
 
 tlog:
