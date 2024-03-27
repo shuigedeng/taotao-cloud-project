@@ -213,7 +213,7 @@ public class GrayReactiveLoadBalancerClientFilter extends ReactiveLoadBalancerCl
 
         private Response<ServiceInstance> getServiceInstanceResponseWithGray(List<ServiceInstance> instances,
                                                                              HttpHeaders headers) {
-            String reqVersion = headers.getFirst(CommonConstant.TAOTAO_CLOUD_REQUEST_VERSION);
+            String reqVersion = headers.getFirst(CommonConstant.TTC_REQUEST_VERSION);
             if (instances.isEmpty()) {
                 return getServiceInstanceEmptyResponse();
             }

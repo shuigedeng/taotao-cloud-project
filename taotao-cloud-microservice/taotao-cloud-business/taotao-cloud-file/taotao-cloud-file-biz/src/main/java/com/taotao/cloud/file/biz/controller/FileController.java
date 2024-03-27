@@ -129,7 +129,7 @@ public class FileController {
 
     @NotAuth
     @Operation(summary = "更改规格222", description = "更改规格222")
-    @PutMapping("/33333")
+    @PutMapping("/33334")
     public Result<Boolean> updateBatch(@Valid @RequestBody List<Student> specificationDTO) {
         return Result.success(true);
     }

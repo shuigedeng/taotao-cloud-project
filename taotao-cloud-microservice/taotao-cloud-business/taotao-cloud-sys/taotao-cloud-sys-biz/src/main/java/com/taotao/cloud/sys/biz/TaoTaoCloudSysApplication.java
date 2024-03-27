@@ -16,9 +16,10 @@
 
 package com.taotao.cloud.sys.biz;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -58,12 +59,17 @@ import org.springframework.context.annotation.ComponentScan;
 	"com.taotao.cloud.sys.biz.repository.cls"
 })
 @TaoTaoCloudApplication
-public class TaoTaoCloudSysApplication {
+public class TaoTaoCloudSysApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(TaoTaoCloudSysApplication.class);
+	}
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-sys");
 		new StartupSpringApplication(TaoTaoCloudSysApplication.class)
 			.setTtcBanner()
+			.setTtcApplicationProperty("taotao-cloud-sys")
 			.run(args);
 	}
 }

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE_ID;
+import static com.taotao.cloud.common.constant.CommonConstant.TTC_TRACE_ID;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.JsonUtils;
@@ -52,7 +52,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String requestUrl = exchange.getRequest().getURI().getRawPath();
-        String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TAOTAO_CLOUD_TRACE_ID);
+        String traceId = exchange.getRequest().getHeaders().getFirst(CommonConstant.TTC_TRACE_ID);
         if (StrUtil.isBlank(traceId)) {
             traceId = TraceUtils.getTraceId();
         }
@@ -74,7 +74,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
         LogUtils.info(beforeReqLog.toString(), beforeReqArgs.toArray());
 
         exchange.getAttributes().put(START_TIME, System.currentTimeMillis());
-        exchange.getAttributes().put(TAOTAO_CLOUD_TRACE_ID, traceId);
+        exchange.getAttributes().put(TTC_TRACE_ID, traceId);
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {
             ServerHttpResponse response = exchange.getResponse();
             HttpHeaders httpHeaders = response.getHeaders();
@@ -90,7 +90,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
             responseLog.append("===> requestMethod: {}, requestUrl: {}, traceId: {}, executeTime: {}\n");
             responseArgs.add(requestMethod);
             responseArgs.add(requestUrl);
-            responseArgs.add(exchange.getAttribute(TAOTAO_CLOUD_TRACE_ID));
+            responseArgs.add(exchange.getAttribute(TTC_TRACE_ID));
             responseArgs.add(executeTime + "ms");
 
             String httpHeader = JsonUtils.toJSONString(httpHeaders);
@@ -100,7 +100,7 @@ public class RequestLogFilter implements GlobalFilter, Ordered {
             LogUtils.info(responseLog.toString(), responseArgs.toArray());
 
             exchange.getAttributes().remove(START_TIME);
-            exchange.getAttributes().remove(TAOTAO_CLOUD_TRACE_ID);
+            exchange.getAttributes().remove(TTC_TRACE_ID);
         }));
     }
 

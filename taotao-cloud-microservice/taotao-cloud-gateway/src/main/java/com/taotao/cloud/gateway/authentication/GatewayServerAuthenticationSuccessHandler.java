@@ -61,16 +61,16 @@ public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenti
 
         if (principal instanceof SecurityUser) {
             SecurityUser user = (SecurityUser) authentication.getPrincipal();
-            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_ID_HEADER, String.valueOf(user.getUserId()));
-            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_HEADER, JSON.toJSONString(user));
-            headerValues.add(CommonConstant.TAOTAO_CLOUD_USER_NAME_HEADER, user.getUsername());
+            headerValues.add(CommonConstant.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
+            headerValues.add(CommonConstant.TTC_USER_HEADER, JSON.toJSONString(user));
+            headerValues.add(CommonConstant.TTC_USER_NAME_HEADER, user.getUsername());
         }
 
         //        OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
         //        String clientId = oauth2Authentication.getOAuth2Request().getClientId();
-        //        headerValues.add(CommonConstant.TAOTAO_CLOUD_TENANT_ID, clientId);
+        //        headerValues.add(CommonConstant.TTC_TENANT_ID, clientId);
         headerValues.add(
-                CommonConstant.TAOTAO_CLOUD_USER_ROLE_HEADER,
+                CommonConstant.TTC_USER_ROLE_HEADER,
                 CollUtil.join(authentication.getAuthorities(), ","));
 
         ServerWebExchange exchange = webFilterExchange.getExchange();

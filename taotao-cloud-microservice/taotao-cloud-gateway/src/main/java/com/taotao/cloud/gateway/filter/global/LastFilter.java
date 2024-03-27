@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE_ID;
+import static com.taotao.cloud.common.constant.CommonConstant.TTC_TRACE_ID;
 
 /**
  * 最后执行 生成日志链路追踪id
@@ -56,7 +56,7 @@ public class LastFilter implements GlobalFilter, Ordered {
             HttpHeaders httpHeaders = response.getHeaders();
             ResponseUtils.addHeader(httpHeaders, "tid", TraceContext.traceId());
 
-            Object traceId = exchange.getAttributes().get(TAOTAO_CLOUD_TRACE_ID);
+            Object traceId = exchange.getAttributes().get(TTC_TRACE_ID);
             if (Objects.nonNull(traceId) && traceId instanceof String trace) {
                 TraceUtils.setTraceId(trace);
             }

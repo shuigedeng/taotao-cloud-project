@@ -41,8 +41,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-import static com.taotao.cloud.common.constant.CommonConstant.TAOTAO_CLOUD_TRACE_ID;
-
 /**
  * 第一执行 黑名单过滤器
  *

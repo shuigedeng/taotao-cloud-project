@@ -43,14 +43,15 @@ public class TaoTaoCloudGatewayApplication {
 
 	public static void main(String[] args) {
 
-		PropertyUtils.setDefaultProperty("taotao-cloud-gateway");
-
 		//可以减少connection timed错误 可以提升20%左右的qpc
 		System.setProperty(ReactorNetty.IO_SELECT_COUNT, "1");
 		//System.setProperty(ReactorNetty.IO_WORKER_COUNT, "1");
 
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
-		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class).run(args);
+		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class)
+			.setTtcBanner()
+			.setTtcApplicationProperty("taotao-cloud-gateway")
+			.run(args);
 
 		// 获取本地 ip 地址
 		//String ip = InetAddress.getLocalHost().getHostAddress();
