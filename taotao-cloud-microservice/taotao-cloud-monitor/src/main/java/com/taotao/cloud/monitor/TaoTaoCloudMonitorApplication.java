@@ -37,7 +37,9 @@ public class TaoTaoCloudMonitorApplication {
 	public static void main(String[] args) {
 		new StartupSpringApplication(TaoTaoCloudMonitorApplication.class)
 			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-monitor")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 

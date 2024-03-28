@@ -17,6 +17,7 @@
 package com.taotao.cloud.xxljob;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,8 +38,15 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class TaoTaoCloudXxlJobApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-xxljob");
+        //PropertyUtils.setDefaultProperty("taotao-cloud-xxljob");
 
-        SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
+        //SpringApplication.run(TaoTaoCloudXxlJobApplication.class, args);
+
+		new StartupSpringApplication(TaoTaoCloudXxlJobApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-xxljob")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
     }
 }

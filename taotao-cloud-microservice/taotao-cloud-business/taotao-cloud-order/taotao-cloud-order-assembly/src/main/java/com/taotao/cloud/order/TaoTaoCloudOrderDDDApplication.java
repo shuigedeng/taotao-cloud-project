@@ -58,9 +58,11 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 public class TaoTaoCloudOrderDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
 		new StartupSpringApplication(TaoTaoCloudOrderDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-order-ddd")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

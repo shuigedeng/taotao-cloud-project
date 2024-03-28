@@ -17,6 +17,7 @@
 package com.taotao.cloud.generator;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import net.maku.generator.autoconfigure.GeneratorAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
@@ -36,8 +37,11 @@ import org.springframework.context.annotation.Import;
 public class TaoTaoCloudGeneratorApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-generator");
-
-        SpringApplication.run(TaoTaoCloudGeneratorApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudGeneratorApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-generator")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
     }
 }

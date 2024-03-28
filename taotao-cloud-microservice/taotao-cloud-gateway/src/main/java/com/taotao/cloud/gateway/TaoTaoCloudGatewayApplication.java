@@ -50,7 +50,9 @@ public class TaoTaoCloudGatewayApplication {
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class)
 			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-gateway")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 
 		// 获取本地 ip 地址
