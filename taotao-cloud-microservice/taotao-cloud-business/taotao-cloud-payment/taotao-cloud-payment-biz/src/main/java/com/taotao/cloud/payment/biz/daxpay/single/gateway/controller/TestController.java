@@ -54,8 +54,8 @@ public class TestController {
     @Operation(summary = "微信回调测试")
     @GetMapping(value = {"/wxcs/","wxcs"})
     public String wxcs(){
-
         return "ok";
     }
+
 
 }

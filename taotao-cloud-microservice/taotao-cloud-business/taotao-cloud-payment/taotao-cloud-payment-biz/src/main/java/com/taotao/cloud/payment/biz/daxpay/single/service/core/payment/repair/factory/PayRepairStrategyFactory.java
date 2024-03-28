@@ -1,9 +1,9 @@
-package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.factory;
+package cn.bootx.platform.daxpay.service.core.payment.repair.factory;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayUnsupportedMethodException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.strategy.pay.*;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsPayRepairStrategy;
+import cn.bootx.platform.daxpay.service.core.payment.repair.strategy.pay.*;
+import cn.bootx.platform.daxpay.service.func.AbsPayRepairStrategy;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import lombok.experimental.UtilityClass;

@@ -69,7 +69,9 @@ public class TaoTaoCloudSysApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		new StartupSpringApplication(TaoTaoCloudSysApplication.class)
 			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
 			.setTtcApplicationProperty("taotao-cloud-sys")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }
