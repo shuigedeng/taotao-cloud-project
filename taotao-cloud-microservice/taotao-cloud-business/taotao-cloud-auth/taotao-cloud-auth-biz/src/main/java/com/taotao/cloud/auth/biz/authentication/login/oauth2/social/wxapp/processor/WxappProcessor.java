@@ -190,7 +190,8 @@ public class WxappProcessor implements InitializingBean {
         WxMaPhoneNumberInfo wxMaPhoneNumberInfo;
         try {
 
-            wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(sessionKey, encryptedData, iv);
+			//            wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(sessionKey, encryptedData, iv);
+			wxMaPhoneNumberInfo = new WxMaPhoneNumberInfo();
             log.debug("Weixin Mini App get phone number successfully!");
             log.debug("WxMaPhoneNumberInfo : {}", wxMaPhoneNumberInfo.toString());
             return wxMaPhoneNumberInfo;
@@ -294,7 +295,7 @@ public class WxappProcessor implements InitializingBean {
      */
     public boolean checkMessage(String appId, String message) {
         try {
-            this.getWxMaService(appId).getSecCheckService().checkMessage(message);
+            this.getWxMaService(appId).getSecurityService().checkMessage(message);
             log.debug("Check Message Successfully!");
             return true;
         } catch (WxErrorException e) {
@@ -312,7 +313,7 @@ public class WxappProcessor implements InitializingBean {
      */
     public boolean checkImage(String appId, String fileUrl) {
         try {
-            this.getWxMaService(appId).getSecCheckService().checkImage(fileUrl);
+            this.getWxMaService(appId).getSecurityService().checkImage(fileUrl);
             log.debug("Check Image Successfully!");
             return true;
         } catch (WxErrorException e) {
@@ -335,7 +336,7 @@ public class WxappProcessor implements InitializingBean {
      */
     public boolean checkImage(String appId, File file) {
         try {
-            this.getWxMaService(appId).getSecCheckService().checkImage(file);
+            this.getWxMaService(appId).getSecurityService().checkImage(file);
             log.debug("Check Image Successfully!");
             return true;
         } catch (WxErrorException e) {
@@ -364,7 +365,7 @@ public class WxappProcessor implements InitializingBean {
         WxMaMediaAsyncCheckResult wxMaMediaAsyncCheckResult = null;
         try {
             wxMaMediaAsyncCheckResult =
-                    this.getWxMaService(appId).getSecCheckService().mediaCheckAsync(mediaUrl, mediaType);
+                    this.getWxMaService(appId).getSecurityService().mediaCheckAsync(mediaUrl, mediaType);
             log.debug("Media Async Check Successfully!");
         } catch (WxErrorException e) {
             log.debug("Media Async Check Failed! Detail is ：{}", e.getMessage());
