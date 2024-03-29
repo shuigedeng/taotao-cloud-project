@@ -31,13 +31,3 @@ message BooleanReply {
   bool reply = 1;
 }
 
-message ObjectReply {
-  bool reply = 1;
-}
-
-enum OperateType {
-  Addition = 0;
-  Division = 1;
-  Multiplication = 2;
-  Subtraction = 3;
-}

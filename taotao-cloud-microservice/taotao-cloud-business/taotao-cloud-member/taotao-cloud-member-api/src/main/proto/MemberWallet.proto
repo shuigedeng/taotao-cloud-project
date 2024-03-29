@@ -1,43 +1,21 @@
 syntax = "proto3";
 
-package com.taotao.cloud.sys.api.grpc;
+package com.taotao.cloud.member.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.member.api.grpc";
-option java_outer_classname = "DeviceFixProto";
+option java_outer_classname = "MemberWalletServiceProto";
 //option objc_class_prefix = "HLW";
 
-// The device service definition.
-service DeviceFixService {
-    // Sends a message
-    rpc insertDeviceFix (DeviceFix) returns (BooleanReply){}
-    rpc updateDeviceFix (DeviceFix) returns (BooleanReply){}
-    rpc searchDeviceFix (ConditionsRequest) returns (DeviceFix){}
-    rpc deleteDeviceFix (ConditionsRequest) returns (BooleanReply){}
+service MemberWalletService {
+  rpc insertDeviceFix (MemberWalletRequest) returns (MemberWalletResponse){}
 }
 
-// The request message .
-message ConditionsRequest {
-    string id = 1;
+message MemberWalletRequest {
+  string id = 1;
 }
 
-message DeviceFix {
-    string id = 1;
-    string serialNum = 2;
-    string userNum = 3;
-    int32  status = 4;
-    int32  type = 5;
-    string address = 6;
-    string createtime = 7;
-    string updatetime = 8;
+message MemberWalletResponse {
+  bool reply = 1;
 }
 
-// The response message
-message BooleanReply {
-    bool reply = 1;
-}
-
-// The response message
-message ObjectReply {
-    bool reply = 1;
-}

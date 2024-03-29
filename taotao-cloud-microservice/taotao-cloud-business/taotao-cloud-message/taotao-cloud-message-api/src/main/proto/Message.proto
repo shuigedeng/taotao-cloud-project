@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package com.taotao.cloud.message.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.message.api.grpc";
+option java_outer_classname = "MessageServiceProto";
+//option objc_class_prefix = "HLW";
+
+service MessageService {
+  rpc insertMessage (MessageRequest) returns (MessageResponse){}
+}
+
+message MessageRequest {
+  string id = 1;
+}
+
+message MessageResponse {
+  string id = 1;
+  string serialNum = 2;
+  string userNum = 3;
+  int32  status = 4;
+  int32  type = 5;
+  string address = 6;
+  string createtime = 7;
+  string updatetime = 8;
+}
