@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.application.login.social;
 
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.auth.application.filter;
 
-import com.taotao.cloud.auth.infrastructure.token.OAuth2AccessTokenStore;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.OAuth2AccessTokenStore;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -40,9 +40,9 @@ import com.taotao.cloud.auth.application.service.impl.Oauth2ClientDetailsService
 import com.taotao.cloud.auth.application.service.impl.SecurityUserDetailsService;
 import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.infrastructure.strategy.StrategyUserDetailsService;
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGeneratorImpl;
-import com.taotao.cloud.auth.infrastructure.token.OAuth2AccessTokenStore;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGeneratorImpl;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.OAuth2AccessTokenStore;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
 import com.taotao.cloud.security.springsecurity.core.response.SecurityAccessDeniedHandler;
 import com.taotao.cloud.security.springsecurity.core.response.SecurityAuthenticationEntryPoint;

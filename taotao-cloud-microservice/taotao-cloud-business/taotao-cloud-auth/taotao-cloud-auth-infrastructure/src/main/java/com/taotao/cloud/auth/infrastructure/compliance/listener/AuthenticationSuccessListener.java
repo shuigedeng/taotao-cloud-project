@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.compliance.listener;
 
+import com.taotao.cloud.auth.infrastructure.oauth2.stamp.SignInFailureLimitedStampManager;
 import com.taotao.cloud.security.springsecurity.core.domain.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
@@ -39,11 +40,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Authen
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationSuccessListener.class);
 
-    private final com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager stampManager;
+    private final SignInFailureLimitedStampManager stampManager;
     private final OAuth2ComplianceService complianceService;
 
     public AuthenticationSuccessListener(
-            com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager stampManager, OAuth2ComplianceService complianceService) {
+            SignInFailureLimitedStampManager stampManager, OAuth2ComplianceService complianceService) {
         this.stampManager = stampManager;
         this.complianceService = complianceService;
     }

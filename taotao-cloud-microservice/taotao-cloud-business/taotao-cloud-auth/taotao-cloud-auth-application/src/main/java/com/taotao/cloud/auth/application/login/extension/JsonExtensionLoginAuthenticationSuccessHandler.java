@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.application.login.extension;
 
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
-import com.taotao.cloud.auth.infrastructure.token.OAuth2AccessTokenStore;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.OAuth2AccessTokenStore;
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import jakarta.servlet.ServletException;
@@ -39,7 +39,6 @@ import org.springframework.util.CollectionUtils;
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * LoginAuthenticationSuccessHandler

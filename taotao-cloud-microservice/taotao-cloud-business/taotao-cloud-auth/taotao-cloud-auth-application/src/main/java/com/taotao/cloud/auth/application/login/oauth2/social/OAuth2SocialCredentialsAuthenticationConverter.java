@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.application.login.oauth2.social;
 
 import com.taotao.cloud.auth.application.login.oauth2.OAuth2AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.application.login.oauth2.social.all.enums.AccountType;
-import com.taotao.cloud.auth.infrastructure.processor.HttpCryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.oauth2.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;

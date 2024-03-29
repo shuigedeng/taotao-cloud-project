@@ -21,8 +21,8 @@ import com.taotao.cloud.auth.infrastructure.compliance.listener.AccountAutoEnabl
 import com.taotao.cloud.auth.infrastructure.compliance.listener.AuthenticationFailureListener;
 import com.taotao.cloud.auth.infrastructure.compliance.processor.changer.AccountStatusChanger;
 import com.taotao.cloud.auth.infrastructure.compliance.processor.changer.TtcAccountStatusChanger;
-import com.taotao.cloud.auth.infrastructure.stamp.LockedUserDetailsStampManager;
-import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
+import com.taotao.cloud.auth.infrastructure.oauth2.stamp.LockedUserDetailsStampManager;
+import com.taotao.cloud.auth.infrastructure.oauth2.stamp.SignInFailureLimitedStampManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

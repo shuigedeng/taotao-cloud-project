@@ -23,7 +23,7 @@ import com.taotao.cloud.auth.application.login.extension.JsonExtensionLoginAuthe
 import com.taotao.cloud.auth.application.login.extension.email.service.EmailCheckService;
 import com.taotao.cloud.auth.application.login.extension.email.service.EmailUserDetailsService;
 import com.taotao.cloud.auth.application.login.extension.sms.SmsAuthenticationFilter;
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;

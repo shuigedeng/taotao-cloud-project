@@ -17,6 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.compliance;
 
 import com.taotao.cloud.auth.infrastructure.compliance.processor.changer.AccountStatusChanger;
+import com.taotao.cloud.auth.infrastructure.oauth2.stamp.LockedUserDetailsStampManager;
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
 import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
@@ -35,12 +36,12 @@ public class OAuth2AccountStatusManager {
 
 	private final UserDetailsService userDetailsService;
 	private final AccountStatusChanger accountStatusChanger;
-	private final com.taotao.cloud.auth.infrastructure.stamp.LockedUserDetailsStampManager lockedUserDetailsStampManager;
+	private final LockedUserDetailsStampManager lockedUserDetailsStampManager;
 
 	public OAuth2AccountStatusManager(
 		UserDetailsService userDetailsService,
 		AccountStatusChanger accountStatusChanger,
-		com.taotao.cloud.auth.infrastructure.stamp.LockedUserDetailsStampManager lockedUserDetailsStampManager) {
+		LockedUserDetailsStampManager lockedUserDetailsStampManager) {
 		this.userDetailsService = userDetailsService;
 		this.lockedUserDetailsStampManager = lockedUserDetailsStampManager;
 		this.accountStatusChanger = accountStatusChanger;

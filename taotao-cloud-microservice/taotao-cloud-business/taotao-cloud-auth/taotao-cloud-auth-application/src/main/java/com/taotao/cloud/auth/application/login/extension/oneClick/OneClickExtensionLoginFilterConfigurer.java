@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.application.login.extension.ExtensionLoginFilterSec
 import com.taotao.cloud.auth.application.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.application.login.extension.oneClick.service.OneClickJustAuthUserDetailsService;
 import com.taotao.cloud.auth.application.login.extension.oneClick.service.OneClickLoginService;
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import org.springframework.context.ApplicationContext;

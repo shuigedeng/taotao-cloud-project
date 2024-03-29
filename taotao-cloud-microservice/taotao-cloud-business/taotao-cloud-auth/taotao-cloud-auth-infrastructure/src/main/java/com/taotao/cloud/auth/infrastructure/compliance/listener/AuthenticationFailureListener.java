@@ -18,6 +18,7 @@ package com.taotao.cloud.auth.infrastructure.compliance.listener;
 
 import com.taotao.cloud.auth.common.execption.MaximumLimitExceededException;
 import com.taotao.cloud.auth.infrastructure.compliance.OAuth2AccountStatusManager;
+import com.taotao.cloud.auth.infrastructure.oauth2.stamp.SignInFailureLimitedStampManager;
 import java.time.Duration;
 import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
@@ -41,11 +42,11 @@ public class AuthenticationFailureListener implements ApplicationListener<Abstra
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationFailureListener.class);
 
-    private final com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager stampManager;
+    private final SignInFailureLimitedStampManager stampManager;
     private final OAuth2AccountStatusManager accountStatusManager;
 
     public AuthenticationFailureListener(
-            com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusManager accountStatusManager) {
+            SignInFailureLimitedStampManager stampManager, OAuth2AccountStatusManager accountStatusManager) {
         this.stampManager = stampManager;
         this.accountStatusManager = accountStatusManager;
     }

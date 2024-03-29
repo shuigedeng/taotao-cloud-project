@@ -22,7 +22,7 @@ import com.taotao.cloud.auth.application.login.extension.JsonExtensionLoginAuthe
 import com.taotao.cloud.auth.application.login.extension.JsonExtensionLoginAuthenticationSuccessHandler;
 import com.taotao.cloud.auth.application.login.extension.captcha.service.CaptchaCheckService;
 import com.taotao.cloud.auth.application.login.extension.captcha.service.CaptchaUserDetailsService;
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.application.login.oauth2.password;
 
 import com.taotao.cloud.auth.application.login.oauth2.OAuth2AbstractAuthenticationConverter;
-import com.taotao.cloud.auth.infrastructure.processor.HttpCryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.oauth2.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
 import com.taotao.cloud.security.springsecurity.core.definition.TtcGrantType;

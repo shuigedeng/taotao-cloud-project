@@ -22,7 +22,7 @@ import com.taotao.cloud.auth.application.login.extension.JsonExtensionLoginAuthe
 import com.taotao.cloud.auth.application.login.extension.wechatminiapp.service.WechatMiniAppClientService;
 import com.taotao.cloud.auth.application.login.extension.wechatminiapp.service.WechatMiniAppSessionKeyCacheService;
 import com.taotao.cloud.auth.application.login.extension.wechatminiapp.service.WechatMiniAppUserDetailsService;
-import com.taotao.cloud.auth.infrastructure.token.JwtTokenGenerator;
+import com.taotao.cloud.auth.infrastructure.oauth2.token.JwtTokenGenerator;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.ResponseUtils;
 import org.springframework.context.ApplicationContext;
