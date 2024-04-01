@@ -116,6 +116,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
 /**
+ * https://java.cunzaima.cn//spring-authorization-server-1.2.2-zh/core-model-components.html
+ *
  * <p>认证服务器配置 </p>
  * <p>
  * 1. 权限核心处理 {@link org.springframework.security.web.access.intercept.FilterSecurityInterceptor} 2.
@@ -167,6 +169,37 @@ public class AuthorizationServerConfiguration {
 		OAuth2AuthenticationFailureResponseHandler errorResponseHandler =
 			new OAuth2AuthenticationFailureResponseHandler();
 
+		//用于管理新建和现有客户端的RegisteredClientRepository（必需）
+		//authorizationServerConfigurer.registeredClientRepository(registeredClientRepository);
+
+		//用于管理新建和现有授权的OAuth2AuthorizationService。
+		//authorizationServerConfigurer.authorizationService()
+
+		//用于管理新建和现有授权同意的OAuth2AuthorizationConsentService。
+		//authorizationServerConfigurer.authorizationConsentService()
+
+		//用于自定义配置OAuth2授权服务器的AuthorizationServerSettings（必需）
+		//authorizationServerConfigurer.authorizationServerSettings()
+
+		//用于生成OAuth2授权服务器支持的令牌的OAuth2TokenGenerator。
+		//authorizationServerConfigurer.tokenGenerator()
+
+		//用于OAuth2授权服务器元数据端点的配置器。
+		//authorizationServerConfigurer.authorizationServerMetadataEndpoint()
+
+		//用于OpenID Connect 1.0提供者配置端点的配置器。。
+		//authorizationServerConfigurer.providerConfigurationEndpoint()
+
+		//用于OpenID Connect 1.0注销端点的配置器。
+		//authorizationServerConfigurer.logoutEndpoint()
+
+		//用于OpenID Connect 1.0用户信息端点的配置器。
+		//authorizationServerConfigurer.userInfoEndpoint()
+
+		//用于OpenID Connect 1.0客户端注册端点的配置器。
+		//authorizationServerConfigurer.clientRegistrationEndpoint()
+
+		//用于OAuth2令牌端点的配置器。
 		authorizationServerConfigurer.tokenEndpoint(tokenEndpointCustomizer -> {
 			AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
 				Arrays.asList(
@@ -184,13 +217,19 @@ public class AuthorizationServerConfiguration {
 				.accessTokenResponseHandler(
 					new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
 		});
+
+		//用于OAuth2令牌内省端点的配置器
 		authorizationServerConfigurer.tokenIntrospectionEndpoint(
 			tokenIntrospectionEndpointCustomizer -> {
 				tokenIntrospectionEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 			});
+
+		//用于OAuth2令牌撤销端点的配置器。
 		authorizationServerConfigurer.tokenRevocationEndpoint(tokenRevocationEndpointCustomizer -> {
 			tokenRevocationEndpointCustomizer.errorResponseHandler(errorResponseHandler);
 		});
+
+		// 用于OAuth2授权端点的配置器。
 		authorizationServerConfigurer.authorizationEndpoint(authorizationEndpointCustomizer -> {
 			authorizationEndpointCustomizer
 				.authorizationResponseHandler(this::sendAuthorizationResponse)
@@ -204,6 +243,8 @@ public class AuthorizationServerConfiguration {
 				auth2EndpointProperties.getDeviceAuthorizationEndpoint());
 		DeviceClientAuthenticationProvider deviceClientAuthenticationProvider =
 			new DeviceClientAuthenticationProvider(registeredClientRepository);
+
+		//用于配置OAuth2客户端认证的配置器。
 		authorizationServerConfigurer.clientAuthentication(clientAuthenticationCustomizer -> {
 			// 客户端认证添加设备码的converter和provider
 			clientAuthenticationCustomizer
@@ -212,13 +253,16 @@ public class AuthorizationServerConfiguration {
 				.authenticationProvider(deviceClientAuthenticationProvider)
 				.errorResponseHandler(errorResponseHandler);
 		});
-		// 开启设备请求相关端点
+
+		// 用于OAuth2设备授权端点的配置器。 开启设备请求相关端点
 		authorizationServerConfigurer.deviceAuthorizationEndpoint(
 			deviceAuthorizationEndpointCustomizer -> {
 				deviceAuthorizationEndpointCustomizer
 					.errorResponseHandler(errorResponseHandler)
 					.verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
 			});
+
+		//用于OAuth2设备验证端点的配置器。
 		authorizationServerConfigurer.deviceVerificationEndpoint(
 			deviceVerificationEndpointCustomizer -> {
 				deviceVerificationEndpointCustomizer
@@ -226,6 +270,7 @@ public class AuthorizationServerConfiguration {
 					.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI)
 					.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
 			});
+
 		// 开启OpenId Connect 1.0相关端点
 		authorizationServerConfigurer.oidc(oidcCustomizer -> {
 			oidcCustomizer
