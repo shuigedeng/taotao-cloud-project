@@ -4,18 +4,18 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/spring-6.1.4-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-3.2.3-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud-2023.0.0-yellowgree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.5-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.2.4-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud-2023.0.1-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.0.0--RC1-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_tencent-1.13.0--2023.0.0--SNAPSHOT-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.107.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.2.2-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_tencent-1.13.1--2023.0.0-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.108.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.2.3-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.11.4-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.5-yellow" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/knife4j-4.4.0-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.27.1-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.27.2-lightgrey" alt="Downloads"/>
   <img src="https://img.shields.io/badge/hutool-6.0.0--M11-gree" alt="Downloads"/>
 </p>
 
@@ -25,7 +25,7 @@
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
-目前支持Shell、Docker、Docker-compose、K8s、Github/Genkins ci/cd等多种部署方式，实现RBAC权限。 遵循阿里代码规范，代码简洁、架构清晰，适合作为基础框架使用。
+目前支持Shell、Docker、Docker-compose、K8s、Github/Genkins ci/cd等多种部署方式，实现RBAC权限。 遵循阿里代码规范，采用restful设计风格及DDD(领域驱动设计)思想，代码简洁、架构清晰，非常适合作为基础框架使用。基于DDD（领域驱动设计）的轻量级快速开发框架，致力于企业技术架构的可沉淀和可传承，解决复杂业务场景的扩展问题
 
 仓库的目的: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
@@ -72,7 +72,7 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.7
-IDEA_VERSION >= 2023.3
+IDEA_VERSION >= 2023.4
 ```
 
 Gradle:
@@ -115,32 +115,32 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.1.4           
+ Spring               | 6.1.5           
  Spring Boot          | 3.2.4           
- Spring Cloud         | 2023.0.0        
+ Spring Cloud         | 2023.0.1        
  Spring Cloud Alibaba | 2023.0.0.0-RC1
- Spring Cloud Tencent | 1.13.0-2023.0.0-SNAPSHOT 
+ Spring Cloud Tencent | 1.13.1-2023.0.0
  Spring Cloud huawei  | 1.11.6-2023.0.x
  Seata                | 2.0.0
  Sentinel             | 1.8.7           
- Spring-kafka         | 3.2.0         
+ Spring-kafka         | 3.1.3         
  Roketmq              | 5.0.0           
- Spring Security      | 6.2.2           
+ Spring Security      | 6.2.3           
  Mybatis Plus         | 3.5.5         
  Hutool               | 6.0.0-M11         
  Mysql                | 8.3.0          
  Querydsl             | 5.1.0           
  Swagger              | 3.0.0           
- Knife4j              | 4.4.0           
- Redisson             | 3.27.1         
+ Knife4j              | 4.5.0           
+ Redisson             | 3.27.2         
  Lettuce              | 6.3.1.RELEASE   
- Elasticsearch        | 8.11.4           
+ Elasticsearch        | 8.11.5           
  Xxl-job              | 2.4.0           
  EasyCaptcha          | 1.6.2           
  Guava                | 33.1.0-jre       
  Grpc                 | 1.62.2          
  Arthas               | 3.7.2           
- Dynamic-tp           | 1.1.6.1-3.x           
+ Dynamic-tp           | 1.1.7-3.x           
  Elasticjob           | 3.0.4           
  Powerjob             | 4.3.6           
  Forest               | 1.5.36          
