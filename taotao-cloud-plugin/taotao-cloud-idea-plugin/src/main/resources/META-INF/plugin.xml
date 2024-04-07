@@ -149,16 +149,16 @@
 			implementation="com.taotao.cloud.idea.plugin.extensions.runanything.RunAnythingToolkitProvider"/>
 	</extensions>
 
-	<actions>
-		<group id="com.taotao.cloud.idea.plugin.converter.generate.group" popup="true">
-			<separator/>
-			<!-- Add your actions here -->
-			<action id="com.taotao.cloud.idea.plugin.converter.action.generator" class="com.taotao.cloud.idea.plugin.converter.action.ConvertGeneratorAction" text="Smart Converter" description="Smart Converter">
-				<keyboard-shortcut keymap="$default" first-keystroke="shift meta N"/>
-			</action>
-			<add-to-group group-id="GenerateGroup" anchor="last"/>
-		</group>
-	</actions>
+<!--	<actions>-->
+<!--		<group id="com.taotao.cloud.idea.plugin.converter.generate.group" popup="true">-->
+<!--			<separator/>-->
+<!--			&lt;!&ndash; Add your actions here &ndash;&gt;-->
+<!--			<action id="com.taotao.cloud.idea.plugin.converter.action.generator" class="com.taotao.cloud.idea.plugin.converter.action.ConvertGeneratorAction" text="Smart Converter" description="Smart Converter">-->
+<!--				<keyboard-shortcut keymap="$default" first-keystroke="shift meta N"/>-->
+<!--			</action>-->
+<!--			<add-to-group group-id="GenerateGroup" anchor="last"/>-->
+<!--		</group>-->
+<!--	</actions>-->
 
 	<actions>
 		<!-- 定义 id, 对应类和显示的文本 -->
