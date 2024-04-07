@@ -18,7 +18,18 @@ package com.taotao.cloud.auth;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.cloud.data.jpa.extend.JpaExtendRepositoryFactoryBean;
+import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.data.envers.repository.config.EnableEnversRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 
 /**
  * 系统管理中心
@@ -54,13 +65,29 @@ import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
-@TaoTaoCloudApplication
+@EnableEnversRepositories(basePackages = {"com.taotao.cloud.auth.biz.jpa.repository",
+	"com.taotao.cloud.auth.biz.management.repository"})
+@EntityScan(basePackages = {"com.taotao.cloud.auth.biz.jpa.entity",
+	"com.taotao.cloud.auth.biz.management.entity"})
+@EnableJpaRepositories(
+	basePackages = {"com.taotao.cloud.auth.biz.jpa.repository",
+		"com.taotao.cloud.auth.biz.management.repository"},
+	repositoryFactoryBeanClass = JpaExtendRepositoryFactoryBean.class)
+@EnableFeignClients(basePackages = {"com.taotao.cloud.*.api.feign"})
+@EnableEncryptableProperties
+@EnableDiscoveryClient
+@ConfigurationPropertiesScan
+@EnableSecurityConfiguration
+@EnableRedisIndexedHttpSession
+@SpringBootApplication
 public class TaoTaoCloudAuthDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-auth-ddd");
 		new StartupSpringApplication(TaoTaoCloudAuthDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-auth-ddd")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

@@ -31,30 +31,31 @@ pluginManagement {
 
 plugins {
     //https://plugins.gradle.org/plugin/com.gradle.enterprise
-    id "com.gradle.enterprise" version "3.16.2"
+    id "com.gradle.develocity" version "3.17"
 }
 
 import com.gradle.scan.plugin.PublishedBuildScan
 
-gradleEnterprise {
+develocity {
     server = "https://gradle-enterprise.mycompany.com"
+    allowUntrustedServer = true
     accessKey = "7w5kbqqjea4vonghohvuyra5bnvszop4asbqee3m3sm6dbjdudtq"
 
     buildScan {
-        publishAlways()
-        publishAlwaysIf(true)
+        //publishAlways()
+        publishing.onlyIf { true }
 
         uploadInBackground = false
 
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
+        termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+        termsOfUseUrl = "yes"
 
         tag System.getProperty("os.name")
         link "VCS", "https://github.com/myorg/sample/tree/${System.getProperty("vcs.branch")}"
         //value "Build Number", project.version
 
         capture {
-            taskInputFiles = true
+            fileFingerprints = true
 
             buildLogging = true
             testLogging = true
@@ -84,6 +85,7 @@ gradleEnterprise {
         }
     }
 }
+
 
 rootProject.name = 'taotao-cloud-project'
 

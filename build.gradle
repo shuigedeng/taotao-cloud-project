@@ -139,7 +139,7 @@ plugins {
     // *******************************************第三方插件************************************************************
     //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
     //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
-    id "com.google.cloud.tools.jib" version "3.4.1"
+    id "com.google.cloud.tools.jib" version "3.4.2"
 
     //用于创建和管理外部进程的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
@@ -151,11 +151,11 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.ly.smart-doc
-    id "com.ly.smart-doc" version "3.0.2.1"
+    id "com.ly.smart-doc" version "3.0.3"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
-    id "org.owasp.dependencycheck" version "9.0.10"
+    id "org.owasp.dependencycheck" version "9.1.0"
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
