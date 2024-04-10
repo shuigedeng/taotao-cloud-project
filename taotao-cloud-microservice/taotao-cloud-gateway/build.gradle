@@ -66,7 +66,7 @@ dependencies {
 configurations {
     all {
         resolutionStrategy {
-            force 'net.minidev:json-smart:2.5.0'
+            force 'net.minidev:json-smart:2.5.1'
 
             //todo 临时处理 用高版本有问题
             force 'io.zipkin.reporter2:zipkin-sender-urlconnection:2.16.3'

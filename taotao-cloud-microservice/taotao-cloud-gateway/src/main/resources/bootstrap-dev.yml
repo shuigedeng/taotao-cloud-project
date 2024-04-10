@@ -38,7 +38,7 @@ spring:
         cluster-name: CQ
         naming-load-cache-at-start: false
       config:
-        enabled: true
+        enabled: false
         server-addr: 127.0.0.1:8848
         namespace: taotao-cloud-dev
         file-extension: yml

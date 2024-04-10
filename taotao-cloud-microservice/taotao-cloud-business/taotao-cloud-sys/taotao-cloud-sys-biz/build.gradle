@@ -134,7 +134,7 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.13.1'
-            force 'net.minidev:json-smart:2.5.0'
+            force 'net.minidev:json-smart:2.5.1'
 
             //todo 临时处理 用高版本有问题
             force 'io.zipkin.reporter2:zipkin-sender-urlconnection:2.16.3'

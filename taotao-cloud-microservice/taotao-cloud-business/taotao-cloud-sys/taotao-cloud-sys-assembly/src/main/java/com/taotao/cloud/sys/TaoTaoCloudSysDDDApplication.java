@@ -66,14 +66,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //@ComponentScan(basePackages = {
 //	"com.taotao.cloud.sys.biz.repository.cls"
 //} )
-@EnableFeignClients(basePackages = {"com.taotao.cloud.sys.api.feign"})
+//@EnableFeignClients(basePackages = {"com.taotao.cloud.sys.api.feign"})
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-sys-ddd");
 		new StartupSpringApplication(TaoTaoCloudSysDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-sys-ddd")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

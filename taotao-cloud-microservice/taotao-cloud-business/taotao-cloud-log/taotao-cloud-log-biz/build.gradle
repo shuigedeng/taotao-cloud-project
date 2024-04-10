@@ -41,6 +41,12 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.13.1'
+
+            //todo 临时处理 用高版本有问题
+            force 'io.zipkin.reporter2:zipkin-sender-urlconnection:2.16.3'
+            force 'io.zipkin.zipkin2:zipkin:2.23.2'
+            force 'io.zipkin.reporter2:zipkin-reporter:2.16.3'
+            force 'io.opentelemetry:opentelemetry-exporter-zipkin:1.31.0'
         }
 
         //exclude group: "log4j", module: "log4j"
