@@ -50,7 +50,7 @@
 #spring-admin = "3.1.8"
 #nimbusds-jwt = "9.35"
 #rocket-starter = "2.2.3"
-#jsqlparser = "4.6"
+#jsqlparser = "4.9"
 #lettucemod = "3.7.3"
 #minio = "8.5.7"
 #dnsjava = "3.5.3"

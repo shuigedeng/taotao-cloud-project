@@ -20,6 +20,7 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
+import com.taotao.cloud.gateway.skywalking.SkywalkingUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -60,6 +61,9 @@ public class BlacklistFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+
+		//SkywalkingUtil.putTidIntoMdc(exchange);
+
         // 是否开启黑名单
         // 从redis里查询黑名单是否存在
         LogUtils.info("进入黑名单模式");
@@ -87,6 +91,8 @@ public class BlacklistFilter implements GlobalFilter, Ordered {
         }
 
         return chain.filter(exchange).then(Mono.fromRunnable(() ->{
+			//SkywalkingUtil.putTidIntoMdc(exchange);
+
             LogUtils.info("Response BlacklistFilter 最终最终返回数据");
 
             TraceUtils.removeTraceId();

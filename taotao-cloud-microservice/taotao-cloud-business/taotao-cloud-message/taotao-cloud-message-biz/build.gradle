@@ -26,7 +26,7 @@ dependencies {
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    implementation 'com.alipay.sdk:alipay-sdk-java:4.38.170.ALL'
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.39.19.ALL'
 
     implementation "com.github.binarywang:weixin-java-cp:4.6.1.B"
     implementation "com.github.binarywang:weixin-java-miniapp:4.6.1.B"
@@ -73,7 +73,7 @@ configurations {
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
-            force 'org.antlr:antlr4:4.12.0'
+            force 'org.antlr:antlr4:4.13.1'
         }
 
         //exclude group: "log4j", module: "log4j"

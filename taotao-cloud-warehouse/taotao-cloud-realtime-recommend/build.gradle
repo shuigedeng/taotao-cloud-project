@@ -1,7 +1,7 @@
 dependencies {
-    implementation "org.apache.hadoop:hadoop-common:3.3.6"
-    implementation "org.apache.hadoop:hadoop-hdfs:3.3.6"
-    implementation "org.apache.hadoop:hadoop-client:3.3.6"
+    implementation "org.apache.hadoop:hadoop-common:3.4.0"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.4.0"
+    implementation "org.apache.hadoop:hadoop-client:3.4.0"
 
     implementation "org.apache.mahout:mahout-examples:0.13.0"
     implementation "junit:junit:4.13.2"

@@ -211,3 +211,4 @@ logging:
     #org.springframework.security.oauth2: off
     #org.springframework.boot.autoconfigure: off
     #org.elasticsearch.client: debug
+  config: classpath:logback-spring.xml

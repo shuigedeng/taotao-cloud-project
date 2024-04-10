@@ -41,10 +41,10 @@ dependencies {
         exclude group: "org.scala-lang", module: "scala-library"
     }
 
-    implementation "org.apache.hadoop:hadoop-common:3.3.6"
-    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.3.6"
-    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.3.6"
-    implementation "org.apache.hadoop:hadoop-hdfs:3.3.6"
+    implementation "org.apache.hadoop:hadoop-common:3.4.0"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-core:3.4.0"
+    implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.4.0"
+    implementation "org.apache.hadoop:hadoop-hdfs:3.4.0"
 
     implementation "org.scala-lang:scala-library:2.12.18"
     implementation "org.scala-lang:scala-compiler:2.12.18"
