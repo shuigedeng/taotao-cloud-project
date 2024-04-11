@@ -19,6 +19,7 @@ package com.taotao.cloud.xxljob;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -31,6 +32,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @version 2022.03
  * @since 2020/11/26 下午7:55
  */
+@MapperScan("com.taotao.cloud.xxljob.dao")
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableEncryptableProperties
 @EnableDiscoveryClient

@@ -4,7 +4,10 @@ apply plugin: "com.github.johnrengelman.shadow"
 //import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 
 repositories {
-    mavenCentral()
+    maven {
+        allowInsecureProtocol = true
+        url 'https://build.shibboleth.net/nexus/content/groups/public'
+    }
 }
 
 dependencies {

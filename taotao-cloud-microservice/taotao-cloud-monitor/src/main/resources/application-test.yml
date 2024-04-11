@@ -5,6 +5,12 @@ server:
   undertow:
     buffer-size: 2048
     direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
+    accesslog:
+      dir: ${user.home}/logs/${spring.application.name}/undertow
+      enabled: true
   #servlet:
   #  context-path: /xxl-job-admin
 

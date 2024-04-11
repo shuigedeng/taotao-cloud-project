@@ -9,7 +9,7 @@ server:
       io: 16
       worker: 256
     accesslog:
-      dir: ${user.home}/logs/undertow
+      dir: ${user.home}/logs/${spring.application.name}/undertow
       enabled: true
   servlet:
     application-display-name: ${spring.application.name}

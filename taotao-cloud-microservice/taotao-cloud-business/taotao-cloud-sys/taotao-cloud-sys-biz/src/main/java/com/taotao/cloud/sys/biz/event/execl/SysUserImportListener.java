@@ -20,8 +20,8 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.office.utils.easyexcel.core.ExcelListener;
-import com.taotao.cloud.office.utils.easyexcel.core.ExcelResult;
+import com.taotao.cloud.office.easyexcel.other4.core.ExcelListener;
+import com.taotao.cloud.office.easyexcel.other4.core.ExcelResult;
 import com.taotao.cloud.sys.biz.model.excel.imports.UserImport;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
 import java.util.List;
@@ -43,7 +43,8 @@ import lombok.extern.slf4j.Slf4j;
  * @author Lion Li
  */
 @Slf4j
-public class SysUserImportListener extends AnalysisEventListener<UserImport> implements ExcelListener<UserImport> {
+public class SysUserImportListener extends AnalysisEventListener<UserImport> implements
+	ExcelListener<UserImport> {
 
     private final IUserService userService;
 
