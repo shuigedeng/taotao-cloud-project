@@ -28,8 +28,8 @@ public class ToolkitCommandAction extends AnAction {
 		toolkitCommandService.execute(this.command, e.getDataContext());
 	}
 
-	@Override
-	public String getTemplateText() {
-		return this.command.getCommand();
-	}
+//	@Override
+//	public String getTemplateText() {
+//		return this.command.getCommand();
+//	}
 }
