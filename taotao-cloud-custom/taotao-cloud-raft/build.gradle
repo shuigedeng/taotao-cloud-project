@@ -1,12 +1,12 @@
 dependencies {
     testImplementation "junit:junit:4.13.2"
 
-    implementation 'org.slf4j:slf4j-api:2.0.12'
-    implementation 'org.slf4j:slf4j-api:2.0.12'
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'org.slf4j:slf4j-api:2.0.13'
     implementation('com.alipay.sofa:bolt:1.6.7') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
-    implementation 'com.alibaba:fastjson:2.0.48'
+    implementation 'com.alibaba:fastjson:2.0.49'
     implementation 'com.alipay.sofa:hessian:4.0.4'
     implementation "redis.clients:jedis:5.1.2"
     implementation 'com.google.guava:guava:33.1.0-jre'
