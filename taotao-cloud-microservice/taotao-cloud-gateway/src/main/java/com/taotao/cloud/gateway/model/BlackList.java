@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.gateway.rule;
+package com.taotao.cloud.gateway.model;
 
 import java.util.Objects;
 

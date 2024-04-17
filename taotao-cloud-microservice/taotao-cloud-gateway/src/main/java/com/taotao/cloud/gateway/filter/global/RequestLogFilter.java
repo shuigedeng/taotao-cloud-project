@@ -44,7 +44,7 @@ import reactor.core.publisher.Mono;
  * @since 2020-7-16
  */
 @Component
-@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "log", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "requestLog", havingValue = "true", matchIfMissing = true)
 public class RequestLogFilter implements GlobalFilter, Ordered {
 
     private static final String START_TIME = "start_time";

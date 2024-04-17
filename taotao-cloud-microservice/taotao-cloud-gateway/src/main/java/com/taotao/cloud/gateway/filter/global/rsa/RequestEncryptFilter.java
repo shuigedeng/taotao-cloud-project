@@ -1,4 +1,4 @@
-package com.taotao.cloud.gateway.rsa;
+package com.taotao.cloud.gateway.filter.global.rsa;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.taotao.cloud.common.utils.secure.RSAUtils;
@@ -7,7 +7,6 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.filter.factory.rewrite.CachedBodyOutputMessage;
 import org.springframework.cloud.gateway.support.BodyInserterContext;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;

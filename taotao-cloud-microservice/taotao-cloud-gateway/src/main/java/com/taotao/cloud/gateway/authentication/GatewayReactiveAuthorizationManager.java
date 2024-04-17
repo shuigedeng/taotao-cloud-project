@@ -26,9 +26,12 @@ import com.taotao.cloud.security.springsecurity.definition.SecurityRequest;
 import com.taotao.cloud.security.springsecurity.definition.SecurityRequestMatcher;
 import com.taotao.cloud.security.springsecurity.processor.SecurityMatcherConfigurer;
 import com.taotao.cloud.security.springsecurity.processor.SecurityMetadataSourceStorage;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import lombok.AllArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -41,32 +44,25 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * 权限认证管理器
- * // 验证通过则返回：AuthorizationDecision(true)
- *     // 验证失败则返回：AuthorizationDecision(false)
+ * 权限认证管理器 // 验证通过则返回：AuthorizationDecision(true) // 验证失败则返回：AuthorizationDecision(false)
  *
  * @author shuigedeng
  * @version 2022.03
  * @since 2020/4/29 22:10
  */
 @Component
-public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+@AllArgsConstructor
+public class GatewayReactiveAuthorizationManager implements
+	ReactiveAuthorizationManager<AuthorizationContext> {
 
-	@Autowired
-	private RedisRepository redisRepository;
-	@Autowired
-	private SecurityMatcherConfigurer securityMatcherConfigurer;
-	@Autowired
-	private SecurityMetadataSourceStorage securityMetadataSourceStorage;
+	private final RedisRepository redisRepository;
+	private final SecurityMatcherConfigurer securityMatcherConfigurer;
+	private final SecurityMetadataSourceStorage securityMetadataSourceStorage;
 
 	@Override
 	public Mono<AuthorizationDecision> check(Mono<Authentication> authentication,
-											 AuthorizationContext authorizationContext) {
+		AuthorizationContext authorizationContext) {
 		return authentication
 			.map(auth -> {
 				final ServerWebExchange serverWebExchange = authorizationContext.getExchange();
@@ -79,12 +75,14 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
 					return new AuthorizationDecision(true);
 				}
 
-				if (WebUtils.isPathMatch(securityMatcherConfigurer.getHasAuthenticatedList(), url)) {
+				if (WebUtils.isPathMatch(securityMatcherConfigurer.getHasAuthenticatedList(),
+					url)) {
 					LogUtils.info("Is has authenticated resource : [{}]", url);
 					return new AuthorizationDecision(auth.isAuthenticated());
 				}
 
-				List<SecurityConfigAttribute> configAttributes = findConfigAttribute(url, method, serverWebExchange);
+				List<SecurityConfigAttribute> configAttributes = findConfigAttribute(url, method,
+					serverWebExchange);
 				if (CollectionUtils.isEmpty(configAttributes)) {
 					LogUtils.info("NO PRIVILEGES : [{}].", url);
 
@@ -115,13 +113,13 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
 
 				//return new AuthorizationDecision(false);
 
-
 				if (auth instanceof JwtAuthenticationToken jwtAuthenticationToken) {
 					Jwt jwt = jwtAuthenticationToken.getToken();
 					String kid = (String) jwt.getHeaders().get("kid");
 
 					// 判断kid是否存在 存在表示令牌不能使用 即:用户已退出
-					Boolean hasKey = redisRepository.exists(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid);
+					Boolean hasKey = redisRepository.exists(
+						RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid);
 					if (hasKey) {
 						throw new InvalidTokenException("无效的token");
 					}
@@ -149,7 +147,8 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
 	 * @return {@link List }<{@link SecurityConfigAttribute }>
 	 * @since 2023-07-04 10:00:31
 	 */
-	private List<SecurityConfigAttribute> findConfigAttribute(String url, String method, ServerWebExchange request) {
+	private List<SecurityConfigAttribute> findConfigAttribute(String url, String method,
+		ServerWebExchange request) {
 		LogUtils.info("Current Request is : [{}] - [{}]", url, method);
 
 		List<SecurityConfigAttribute> configAttributes =
@@ -157,13 +156,15 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
 		if (CollectionUtils.isNotEmpty(configAttributes)) {
 			LogUtils.info("Get configAttributes from local storage for : [{}] - [{}]", url, method);
 			return configAttributes;
-		} else {
+		}
+		else {
 			LinkedHashMap<SecurityRequest, List<SecurityConfigAttribute>> compatible =
 				this.securityMetadataSourceStorage.getCompatible();
 			if (MapUtils.isNotEmpty(compatible)) {
 				// 支持含有**通配符的路径搜索
 				for (Map.Entry<SecurityRequest, List<SecurityConfigAttribute>> entry : compatible.entrySet()) {
-					SecurityRequestMatcher requestMatcher = new SecurityRequestMatcher(entry.getKey());
+					SecurityRequestMatcher requestMatcher = new SecurityRequestMatcher(
+						entry.getKey());
 
 					SecurityRequest securityRequest = new SecurityRequest();
 

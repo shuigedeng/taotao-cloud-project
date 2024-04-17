@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.gateway.configuration;
 
+import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.gateway.service.IRuleCacheService;
 import com.taotao.cloud.gateway.service.impl.RuleCacheServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
 public class RuleConfiguration {
 
     @Bean
-    public IRuleCacheService ruleCacheService() {
-        return new RuleCacheServiceImpl();
+    public IRuleCacheService ruleCacheService(RedisRepository redisRepository) {
+        return new RuleCacheServiceImpl(redisRepository);
     }
 }

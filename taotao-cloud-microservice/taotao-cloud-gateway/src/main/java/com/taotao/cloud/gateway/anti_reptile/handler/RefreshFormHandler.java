@@ -18,8 +18,8 @@ package com.taotao.cloud.gateway.anti_reptile.handler;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.gateway.anti_reptile.ValidateFormService;
+import lombok.AllArgsConstructor;
 import org.dromara.hutool.http.meta.HttpStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.HandlerFunction;
@@ -27,10 +27,10 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+@AllArgsConstructor
 public class RefreshFormHandler implements HandlerFunction<ServerResponse> {
 
-    @Autowired
-    private ValidateFormService validateFormService;
+    private final ValidateFormService validateFormService;
 
     @Override
     public Mono<ServerResponse> handle(ServerRequest request) {

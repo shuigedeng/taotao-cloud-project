@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.service;
 
-import com.taotao.cloud.gateway.rule.BlackList;
+import com.taotao.cloud.gateway.model.BlackList;
 import java.util.Set;
 
 /**

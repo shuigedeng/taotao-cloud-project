@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -70,10 +69,13 @@ public class SignFilter implements GlobalFilter, Ordered {
 
     private static final String ERROR_MESSAGE = "拒绝服务";
 
-    @Autowired
-    private RedisRepository redisRepository;
+    private final RedisRepository redisRepository;
 
-    @Override
+	public SignFilter(RedisRepository redisRepository) {
+		this.redisRepository = redisRepository;
+	}
+
+	@Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         LogUtils.info("访问地址：" + request.getURI());

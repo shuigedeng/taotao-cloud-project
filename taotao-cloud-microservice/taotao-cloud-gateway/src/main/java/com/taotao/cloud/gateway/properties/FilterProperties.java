@@ -37,6 +37,16 @@ public class FilterProperties {
      */
     private Boolean trace = true;
 
+	/**
+	 * 是否开启日志打印
+	 */
+	private Boolean globalLog = false;
+
+	/**
+	 * 是否开启日志打印
+	 */
+	private Boolean requestLog = false;
+
     /**
      * 是否开启日志打印
      */
@@ -96,4 +106,20 @@ public class FilterProperties {
     public void setSign(Boolean sign) {
         this.sign = sign;
     }
+
+	public Boolean getGlobalLog() {
+		return globalLog;
+	}
+
+	public void setGlobalLog(Boolean globalLog) {
+		this.globalLog = globalLog;
+	}
+
+	public Boolean getRequestLog() {
+		return requestLog;
+	}
+
+	public void setRequestLog(Boolean requestLog) {
+		this.requestLog = requestLog;
+	}
 }

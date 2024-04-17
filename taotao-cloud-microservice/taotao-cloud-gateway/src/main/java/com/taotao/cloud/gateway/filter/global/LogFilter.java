@@ -3,9 +3,11 @@ package com.taotao.cloud.gateway.filter.global;
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;
+import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.VisitRecordService;
-import jakarta.annotation.Resource;
-import lombok.extern.log4j.Log4j2;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -25,8 +27,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 /**
  * 第七执行 日志过滤器
  *
@@ -35,12 +35,15 @@ import java.util.List;
  * @since 2023-05-08 13:18:58
  */
 @Component
+@AllArgsConstructor
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "log", havingValue = "true", matchIfMissing = true)
 public class LogFilter implements GlobalFilter, Ordered {
-	private static final String START_TIME = "startTime";
-	private static final List<HttpMessageReader<?>> messageReaders = HandlerStrategies.withDefaults().messageReaders();
 
-	@Resource
-	private VisitRecordService visitRecordService;
+	private static final String START_TIME = "startTime";
+	private static final List<HttpMessageReader<?>> messageReaders = HandlerStrategies.withDefaults()
+		.messageReaders();
+
+	private final VisitRecordService visitRecordService;
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -64,7 +67,8 @@ public class LogFilter implements GlobalFilter, Ordered {
 				// 保存请求参数
 				accessRecord.setFormData(JSON.toJSONString(formData));
 			}
-		} else if (method == HttpMethod.POST) {
+		}
+		else if (method == HttpMethod.POST) {
 			MediaType contentType = headers.getContentType();
 			if (contentType != null) {
 				Mono<Void> voidMono = null;
@@ -104,13 +108,15 @@ public class LogFilter implements GlobalFilter, Ordered {
 		long consumingTime = 0L;
 		if (startTime != null) {
 			consumingTime = System.currentTimeMillis() - startTime;
-			LogUtils.info(exchange.getRequest().getURI().getRawPath() + ": 耗时 " + consumingTime + "ms");
+			LogUtils.info(
+				exchange.getRequest().getURI().getRawPath() + ": 耗时 " + consumingTime + "ms");
 		}
 		visitRecordService.add(exchange, consumingTime);
 	}
 
 
-	private Mono<Void> readBody(ServerWebExchange exchange, GatewayFilterChain chain, AccessRecord accessRecord) {
+	private Mono<Void> readBody(ServerWebExchange exchange, GatewayFilterChain chain,
+		AccessRecord accessRecord) {
 		return DataBufferUtils.join(exchange.getRequest().getBody()).flatMap(dataBuffer -> {
 			byte[] bytes = new byte[dataBuffer.readableByteCount()];
 			dataBuffer.read(bytes);
@@ -122,7 +128,8 @@ public class LogFilter implements GlobalFilter, Ordered {
 			});
 
 			// 重写请求体,因为请求体数据只能被消费一次
-			ServerHttpRequest mutatedRequest = new ServerHttpRequestDecorator(exchange.getRequest()) {
+			ServerHttpRequest mutatedRequest = new ServerHttpRequestDecorator(
+				exchange.getRequest()) {
 				@Override
 				public Flux<DataBuffer> getBody() {
 					return cachedFlux;

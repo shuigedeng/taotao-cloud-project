@@ -21,25 +21,18 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.client.naming.event.InstancesChangeEvent;
-import com.alibaba.nacos.common.notify.NotifyCenter;
-import com.alibaba.nacos.common.notify.listener.Subscriber;
-import com.alibaba.nacos.common.utils.JacksonUtils;
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.DynamicRouteProperties;
-import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.collection.ListUtil;
 import org.dromara.hutool.core.text.StrUtil;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
@@ -52,12 +45,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executor;
-
-import static org.springframework.cloud.loadbalancer.core.CachingServiceInstanceListSupplier.SERVICE_INSTANCE_CACHE_NAME;
 
 /**
  * 基于nacos动态路由配置
@@ -84,7 +71,8 @@ public class DynamicRouteConfiguration {
 			ApplicationEventPublisher publisher,
 			NacosConfigProperties nacosConfigProperties,
 			DynamicRouteProperties dynamicRouteProperties) {
-			return new NacosRouteDefinitionRepository(publisher, nacosConfigProperties, dynamicRouteProperties);
+			return new NacosRouteDefinitionRepository(publisher, nacosConfigProperties,
+				dynamicRouteProperties);
 		}
 	}
 
@@ -117,10 +105,12 @@ public class DynamicRouteConfiguration {
 			try {
 				String content = NacosFactory.createConfigService(
 						nacosConfigProperties.assembleConfigServiceProperties())
-					.getConfig(dynamicRouteProperties.getDataId(), dynamicRouteProperties.getGroupId(), 5000);
+					.getConfig(dynamicRouteProperties.getDataId(),
+						dynamicRouteProperties.getGroupId(), 5000);
 				List<RouteDefinition> routeDefinitions = getListByStr(content);
 				return Flux.fromIterable(routeDefinitions);
-			} catch (NacosException e) {
+			}
+			catch (NacosException e) {
 				LogUtils.error(
 					e,
 					PropertyUtils.getProperty(CommonConstant.SPRING_APP_NAME_KEY)
@@ -132,7 +122,8 @@ public class DynamicRouteConfiguration {
 
 		private void addListener() {
 			try {
-				NacosFactory.createConfigService(nacosConfigProperties.assembleConfigServiceProperties())
+				NacosFactory.createConfigService(
+						nacosConfigProperties.assembleConfigServiceProperties())
 					.addListener(
 						dynamicRouteProperties.getDataId(),
 						dynamicRouteProperties.getGroupId(),
@@ -147,7 +138,8 @@ public class DynamicRouteConfiguration {
 								publisher.publishEvent(new RefreshRoutesEvent(this));
 							}
 						});
-			} catch (NacosException e) {
+			}
+			catch (NacosException e) {
 				LogUtils.error("nacos addListener error", e);
 			}
 		}
@@ -177,17 +169,21 @@ public class DynamicRouteConfiguration {
 	@Component
 	public static class DynamicRouteComponent implements ApplicationEventPublisherAware {
 
-		@Autowired
-		private RouteDefinitionWriter routeDefinitionWriter;
+		private final RouteDefinitionWriter routeDefinitionWriter;
 
-		@Autowired
-		private RouteDefinitionLocator routeDefinitionLocator;
+		private final RouteDefinitionLocator routeDefinitionLocator;
 
-		@Autowired
 		private ApplicationEventPublisher publisher;
 
+		public DynamicRouteComponent(RouteDefinitionWriter routeDefinitionWriter,
+			RouteDefinitionLocator routeDefinitionLocator) {
+			this.routeDefinitionWriter = routeDefinitionWriter;
+			this.routeDefinitionLocator = routeDefinitionLocator;
+		}
+
 		@Override
-		public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+		public void setApplicationEventPublisher(
+			ApplicationEventPublisher applicationEventPublisher) {
 			this.publisher = applicationEventPublisher;
 		}
 
@@ -202,7 +198,8 @@ public class DynamicRouteConfiguration {
 				this.routeDefinitionWriter.delete(Mono.just(id)).subscribe();
 				this.publisher.publishEvent(new RefreshRoutesEvent(this));
 				return "delete success";
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return "delete fail";
 			}
 		}
@@ -236,7 +233,8 @@ public class DynamicRouteConfiguration {
 			try {
 				LogUtils.info("gateway update route {}", definition);
 				this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return "update fail,not find route  routeId: " + definition.getId();
 			}
 
@@ -244,7 +242,8 @@ public class DynamicRouteConfiguration {
 				routeDefinitionWriter.save(Mono.just(definition)).subscribe();
 				this.publisher.publishEvent(new RefreshRoutesEvent(this));
 				return "success";
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return "update route fail";
 			}
 		}

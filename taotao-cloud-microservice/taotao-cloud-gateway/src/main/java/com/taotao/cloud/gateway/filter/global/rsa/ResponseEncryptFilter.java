@@ -1,4 +1,4 @@
-package com.taotao.cloud.gateway.rsa;
+package com.taotao.cloud.gateway.filter.global.rsa;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Charsets;
@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;

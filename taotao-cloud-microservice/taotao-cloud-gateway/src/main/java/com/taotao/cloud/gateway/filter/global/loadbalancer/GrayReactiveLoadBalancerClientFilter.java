@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.gateway.loadbalancer;
+package com.taotao.cloud.gateway.filter.global.loadbalancer;
 
 import com.taotao.cloud.common.constant.CommonConstant;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.ServiceInstance;

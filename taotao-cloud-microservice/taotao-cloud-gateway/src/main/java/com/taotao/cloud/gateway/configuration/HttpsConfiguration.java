@@ -19,7 +19,7 @@ package com.taotao.cloud.gateway.configuration;
 import com.taotao.cloud.gateway.properties.HttpsProperties;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
@@ -34,14 +34,12 @@ import org.springframework.http.server.reactive.HttpHandler;
  * @since 2020/4/29 22:11
  */
 @Configuration
+@AllArgsConstructor
 @ConditionalOnProperty(prefix = HttpsProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = false)
 public class HttpsConfiguration {
 
-    @Resource
-    private HttpHandler httpHandler;
-
-    @Resource
-    private WebServer webServer;
+    private final HttpHandler httpHandler;
+    private final WebServer webServer;
 
     @PostConstruct
     public void start(HttpsProperties httpsProperties) {

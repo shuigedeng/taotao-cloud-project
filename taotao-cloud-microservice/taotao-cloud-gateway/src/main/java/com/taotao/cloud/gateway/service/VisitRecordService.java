@@ -4,7 +4,15 @@ package com.taotao.cloud.gateway.service;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;
-import jakarta.annotation.Resource;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.thread.ThreadFactoryBuilder;
 import org.jetbrains.annotations.Nullable;
@@ -16,26 +24,21 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ServerWebExchange;
 
-import java.net.InetSocketAddress;
-import java.net.URI;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 /**
  * 访问服务
  */
 @Slf4j
 @Service
 public class VisitRecordService {
+
+	private final VisitLogService visitLogService;
+
 	// 自定义的一个标识
 	private final String attributeKey = "visitRecord";
 
-	public VisitRecordService() {
+	public VisitRecordService(VisitLogService visitLogService) {
+		this.visitLogService = visitLogService;
+
 		this.shutdownHook();
 	}
 
@@ -100,8 +103,7 @@ public class VisitRecordService {
 	}
 
 	/**
-	 * 将访问信息存入 ServerWebExchange 当中，将会与当前请求关联起来，
-	 * 以便于后续在任何地方均可获得
+	 * 将访问信息存入 ServerWebExchange 当中，将会与当前请求关联起来， 以便于后续在任何地方均可获得
 	 *
 	 * @param exchange    gateway访问合同
 	 * @param visitRecord 访问信息
@@ -145,8 +147,7 @@ public class VisitRecordService {
 	}
 
 	/**
-	 * 缓存，在插入数据库前先存入此。
-	 * 为防止数据被重复插入，故使用Set，但不能确保100%不会被重复存储。
+	 * 缓存，在插入数据库前先存入此。 为防止数据被重复插入，故使用Set，但不能确保100%不会被重复存储。
 	 */
 	private HashSet<AccessRecord> visitCache = new HashSet<>();
 
@@ -155,9 +156,11 @@ public class VisitRecordService {
 	 */
 	private volatile boolean taskFinish = true;
 
-	private final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNamePrefix("visit-record-").build();
+	private final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNamePrefix(
+		"visit-record-").build();
 
-	private final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 3, 15, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+	private final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 3, 15, TimeUnit.SECONDS,
+		new ArrayBlockingQueue<>(10), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
 
 	private void doTask() {
@@ -174,9 +177,11 @@ public class VisitRecordService {
 							}
 							// 批量保存
 							batchSave();
-						} catch (InterruptedException e) {
+						}
+						catch (InterruptedException e) {
 							log.error("睡眠时发生了异常: {}", e.getMessage());
-						} finally {
+						}
+						finally {
 							// 任务执行完毕后修改标志位
 							taskFinish = true;
 						}
@@ -186,8 +191,6 @@ public class VisitRecordService {
 		}
 	}
 
-	@Resource
-	VisitLogService visitLogService;
 
 	/**
 	 * 单次批量插入的数据量
@@ -211,7 +214,8 @@ public class VisitRecordService {
 		try {
 			// 批量保存
 			isSave = visitLogService.saveBatch(oldCache, BATCH_SIZE);
-		} finally {
+		}
+		finally {
 			if (!isSave) {
 				// 如果插入失败，则重新添加所有数据
 				visitCache.addAll(oldCache);

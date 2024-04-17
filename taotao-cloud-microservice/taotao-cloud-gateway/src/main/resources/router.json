@@ -1,7 +1,7 @@
 [
   {
-    "id": "laokou-auth",
-    "uri": "lb://laokou-auth",
+    "id": "ttc-auth",
+    "uri": "lb://ttc-auth",
     "predicates": [
       {
         "name": "Path",
@@ -44,8 +44,8 @@
     "order": 999
   },
   {
-    "id": "laokou-admin",
-    "uri": "lb://laokou-admin",
+    "id": "ttc-admin",
+    "uri": "lb://ttc-admin",
     "predicates": [
       {
         "name": "Path",
@@ -118,8 +118,8 @@
     "order": 999
   },
   {
-    "id": "laokou-im",
-    "uri": "lb://laokou-im",
+    "id": "ttc-im",
+    "uri": "lb://ttc-im",
     "predicates": [
       {
         "name": "Path",
@@ -162,8 +162,8 @@
     "order": 999
   },
   {
-    "id": "laokou-oss",
-    "uri": "lb://laokou-oss",
+    "id": "ttc-oss",
+    "uri": "lb://ttc-oss",
     "predicates": [
       {
         "name": "Path",

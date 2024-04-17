@@ -21,7 +21,8 @@ import com.taotao.cloud.gateway.properties.SecurityProperties;
 import com.taotao.cloud.security.springsecurity.core.enums.Target;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2AuthorizationProperties;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
@@ -34,8 +35,6 @@ import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.server.authentication.ServerBearerTokenAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-
-import java.util.List;
 
 /**
  * 资源服务器配置
@@ -51,20 +50,15 @@ import java.util.List;
 	name = "enabled",
 	havingValue = "true",
 	matchIfMissing = true)
+@AllArgsConstructor
 public class GatewayResourceServerConfiguration {
 
-	@Autowired
-	private GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
-	@Autowired
-	private SecurityProperties securityProperties;
-	@Autowired
-	private OAuth2EndpointProperties endpointProperties;
-	@Autowired
-	private OAuth2ResourceServerProperties resourceServerProperties;
-	@Autowired
-	private ReactiveJwtDecoder jwtDecoder;
-	@Autowired
-	private OAuth2AuthorizationProperties authorizationProperties;
+	private final GatewayReactiveAuthorizationManager gatewayReactiveAuthorizationManager;
+	private final SecurityProperties securityProperties;
+	private final OAuth2EndpointProperties endpointProperties;
+	private final OAuth2ResourceServerProperties resourceServerProperties;
+	private final ReactiveJwtDecoder jwtDecoder;
+	private final OAuth2AuthorizationProperties authorizationProperties;
 
 	@Bean
 	public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http,

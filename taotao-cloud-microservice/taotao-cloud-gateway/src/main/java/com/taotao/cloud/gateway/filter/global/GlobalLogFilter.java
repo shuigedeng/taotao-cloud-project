@@ -18,9 +18,11 @@ package com.taotao.cloud.gateway.filter.global;
 
 import com.taotao.cloud.common.utils.common.JsonUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.map.MapUtil;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -42,19 +44,13 @@ import reactor.core.publisher.Mono;
  * @since 2023-08-17 11:41:33
  */
 @Component
+@ConditionalOnProperty(prefix = FilterProperties.PREFIX, name = "globalLog", havingValue = "true", matchIfMissing = true)
 public class GlobalLogFilter implements GlobalFilter, Ordered {
-
-    // @Autowired
-    // private CustomGatewayProperties customGatewayProperties;
 
     private static final String START_TIME = "startTime";
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        // if (!customGatewayProperties.getRequestLog()) {
-        //    return chain.filter(exchange);
-        // }
-
         ServerHttpRequest request = exchange.getRequest();
         String requestUrl = exchange.getRequest().getURI().getRawPath();
         //String path = WebFluxUtils.getOriginalRequestUrl(exchange);

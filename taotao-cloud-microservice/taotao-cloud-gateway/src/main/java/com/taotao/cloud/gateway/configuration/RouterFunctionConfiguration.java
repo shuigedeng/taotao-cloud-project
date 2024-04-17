@@ -30,24 +30,6 @@ import com.taotao.cloud.gateway.properties.ApiProperties;
 import com.taotao.cloud.monitor.collect.HealthCheckProvider;
 import com.taotao.cloud.monitor.model.Report;
 import com.wf.captcha.ArithmeticCaptcha;
-import org.apache.commons.io.IOUtils;
-import org.dromara.hutool.http.meta.HttpStatus;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
-import org.springframework.cloud.gateway.support.TimeoutException;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.server.*;
-import reactor.core.publisher.Mono;
-
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -55,6 +37,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.dromara.hutool.http.meta.HttpStatus;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
+import org.springframework.cloud.gateway.support.TimeoutException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.server.HandlerFunction;
+import org.springframework.web.reactive.function.server.RequestPredicates;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.RouterFunctions;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Mono;
 
 /**
  * 特殊路由配置信息
@@ -64,6 +66,7 @@ import java.util.Optional;
  * @since 2020/4/29 22:11
  */
 @Configuration
+@AllArgsConstructor
 public class RouterFunctionConfiguration {
 
 	private static final String FALLBACK = "/fallback";
@@ -71,11 +74,8 @@ public class RouterFunctionConfiguration {
 	private static final String FAVICON = "/favicon.ico";
 	private static final String HEALTH_REPORT = "/health/report";
 
-	@Autowired(required = false)
-	private RefreshFormHandler refreshFormHandler;
-
-	@Autowired(required = false)
-	ValidateFormHandler validateFormHandler;
+	private final ObjectProvider<RefreshFormHandler> refreshFormHandlerObjectProvider;
+	private final ObjectProvider<ValidateFormHandler> validateFormHandlerObjectProvider;
 
 	//当识别到路径为特定路径时，直接转发到对应的runtime上处理即可解决。
 //	@Bean
@@ -110,20 +110,21 @@ public class RouterFunctionConfiguration {
 			.andRoute(
 				RequestPredicates.GET(HEALTH_REPORT).and(RequestPredicates.accept(MediaType.ALL)),
 				healthReportHandler)
-			.andRoute(RequestPredicates.GET("/k8s").and(RequestPredicates.accept(MediaType.ALL)), k8sHandler);
+			.andRoute(RequestPredicates.GET("/k8s").and(RequestPredicates.accept(MediaType.ALL)),
+				k8sHandler);
 
-		if (Objects.nonNull(validateFormHandler)) {
+		refreshFormHandlerObjectProvider.ifAvailable((validateFormHandler) -> {
 			routerFunction.andRoute(
 				RequestPredicates.GET(AntiReptileConsts.VALIDATE_REQUEST_URI)
 					.and(RequestPredicates.accept(MediaType.ALL)),
 				validateFormHandler);
-		}
-		if (Objects.nonNull(refreshFormHandler)) {
+		});
+		validateFormHandlerObjectProvider.ifAvailable((refreshFormHandler) -> {
 			routerFunction.andRoute(
 				RequestPredicates.GET(AntiReptileConsts.REFRESH_REQUEST_URI)
 					.and(RequestPredicates.accept(MediaType.ALL)),
 				refreshFormHandler);
-		}
+		});
 
 		return routerFunction;
 	}
@@ -143,7 +144,8 @@ public class RouterFunctionConfiguration {
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest serverRequest) {
 			String originalUris =
-				serverRequest.exchange().getAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
+				serverRequest.exchange()
+					.getAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
 			Optional<InetSocketAddress> socketAddress = serverRequest.remoteAddress();
 
 			Exception exception = serverRequest
@@ -151,9 +153,11 @@ public class RouterFunctionConfiguration {
 				.getAttribute(ServerWebExchangeUtils.CIRCUITBREAKER_EXECUTION_EXCEPTION_ATTR);
 			if (exception instanceof TimeoutException) {
 				LogUtils.error("服务超时", exception);
-			} else if (exception != null && exception.getMessage() != null) {
+			}
+			else if (exception != null && exception.getMessage() != null) {
 				LogUtils.error("服务错误" + exception.getMessage(), exception);
-			} else {
+			}
+			else {
 				LogUtils.error("服务错误", exception);
 			}
 
@@ -180,7 +184,8 @@ public class RouterFunctionConfiguration {
 				String serialize = JsonUtils.toJSONString(message);
 				message.append(serialize);
 			}
-			Object requestBody = request.exchange().getAttribute(ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR);
+			Object requestBody = request.exchange()
+				.getAttribute(ServerWebExchangeUtils.CACHED_REQUEST_BODY_ATTR);
 			if (Objects.nonNull(requestBody)) {
 				message.append(" 请求body: ");
 				message.append(requestBody);
@@ -208,7 +213,8 @@ public class RouterFunctionConfiguration {
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.bodyValue(hostName);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
@@ -242,12 +248,14 @@ public class RouterFunctionConfiguration {
 				MultiValueMap<String, String> params = request.queryParams();
 				String t = params.getFirst(PARAM_T);
 
-				redisRepository.setExpire(RedisConstant.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(), 120);
+				redisRepository.setExpire(RedisConstant.CAPTCHA_KEY_PREFIX + t, text.toLowerCase(),
+					120);
 
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.bodyValue(Result.success(captcha.toBase64()));
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
@@ -276,7 +284,8 @@ public class RouterFunctionConfiguration {
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.IMAGE_PNG)
 					.bodyValue(bytes);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));
@@ -293,19 +302,22 @@ public class RouterFunctionConfiguration {
 				String uri = request.uri().getPath();
 
 				String html;
-				HealthCheckProvider healthProvider = ContextUtils.getBean(HealthCheckProvider.class, true);
+				HealthCheckProvider healthProvider = ContextUtils.getBean(HealthCheckProvider.class,
+					true);
 				if (Objects.nonNull(healthProvider) && uri.startsWith(HEALTH_REPORT)) {
 
 					boolean isAnalyse = !"false"
 						.equalsIgnoreCase(request.queryParam("isAnalyse").orElse("false"));
 
 					Report report = healthProvider.getReport(isAnalyse);
-					MediaType mediaType = request.headers().contentType().orElse(MediaType.TEXT_PLAIN);
+					MediaType mediaType = request.headers().contentType()
+						.orElse(MediaType.TEXT_PLAIN);
 					if (mediaType.includes(MediaType.APPLICATION_JSON)) {
 						return ServerResponse.status(HttpStatus.HTTP_OK)
 							.contentType(MediaType.APPLICATION_JSON)
 							.bodyValue(Result.success(report.toJson()));
-					} else {
+					}
+					else {
 						html = report.toHtml()
 							.replace("\r\n", "<br/>")
 							.replace("\n", "<br/>")
@@ -313,7 +325,8 @@ public class RouterFunctionConfiguration {
 							.replace("/r", "\r");
 						html = "dump信息:<a href='/health/dump/'>查看</a><br/>" + html;
 					}
-				} else {
+				}
+				else {
 					html = "请配置taotao.cloud.monitor.enabled=true,taotao.cloud.monitor.check.enabled=true";
 				}
 
@@ -321,7 +334,8 @@ public class RouterFunctionConfiguration {
 					.contentType(MediaType.TEXT_HTML)
 					.header("content-type", "text/html;charset=UTF-8")
 					.bodyValue(html.getBytes(StandardCharsets.UTF_8));
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				return ServerResponse.status(HttpStatus.HTTP_OK)
 					.contentType(MediaType.APPLICATION_JSON)
 					.body(BodyInserters.fromValue(Result.fail("服务异常,请稍后重试")));

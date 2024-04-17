@@ -1,4 +1,4 @@
-package com.taotao.cloud.gateway.rsa;
+package com.taotao.cloud.gateway.filter.global.rsa;
 
 public class RSAConstant {
     //私钥

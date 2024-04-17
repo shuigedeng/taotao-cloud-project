@@ -24,10 +24,10 @@ import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.http.html.HtmlUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -48,14 +48,36 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
+ * Gatewayfilter 实现方式上，有两种过滤器； AbstractGatewayFilterFactory  GlobalFilter
+ *
+ * 1）局部过滤器：通过 spring.cloud.gateway.routes.filters 配置在具体路由下，只作用在当前路由上；自带的过滤器都可以配置或者自定义按照自带过滤器的方式。如果配置
+ *
+ * 2）全局过滤器：不需要在配置文件中配置，作用在所有的路由上；实现 GlobalFilter 接口即可。
+ * spring.cloud.gateway.default-filters 上会对所有路由生效也算是全局的过滤器；但是这些过滤器的实现上都是要实现GatewayFilterFactory接口。
+ *
+ *
+ * GlobalFilter WebFilter 区别
+ * 应用范围：GlobalFilter是全局的，应用于所有的路由；而WebFilter可以应用于特定的路由或请求路径。
+ *
+ * 灵活性：由于WebFilter可以根据条件来决定是否应用过滤器，因此它比GlobalFilter更加灵活。
+ *
+ * 使用方式：在使用上，你需要根据具体的需求选择适合的过滤器类型，并在过滤器中定义相应的过滤逻辑。
+ *
+ * 使用场景
+ * 当你需要执行一些全局的操作，比如日志记录、异常处理等时，可以使用GlobalFilter。
+ *
+ * 当你需要根据特定的路由或请求路径执行不同的过滤逻辑时，可以使用WebFilter。
+ *
+ * 无论你选择使用GlobalFilter还是WebFilter，都需要确保正确地实现过滤逻辑，并在Spring Cloud Gateway的配置中正确配置它们。
+ *
  * 第三执行 跨站脚本过滤器
  */
 @Component
+@AllArgsConstructor
 //@ConditionalOnProperty(value = "security.xss.enabled", havingValue = "true")
 public class XssFilter implements GlobalFilter, Ordered {
 
-    @Autowired
-    private XssProperties xss;
+    private final XssProperties xss;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
