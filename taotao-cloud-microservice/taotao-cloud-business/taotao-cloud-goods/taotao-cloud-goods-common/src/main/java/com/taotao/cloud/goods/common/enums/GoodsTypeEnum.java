@@ -14,28 +14,33 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.ai.api;
-
-import com.taotao.cloud.common.utils.log.LogUtils;
-import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+package com.taotao.cloud.goods.common.enums;
 
 /**
- * prometheus http sd
+ * app类型 安卓 IOS
  *
  * @author shuigedeng
- * @version 2021.9
- * @since 2021-09-02 20:01:42
+ * @version 2022.04
+ * @since 2022-04-25 16:47:12
  */
-@RestController
-@RequestMapping("/test")
-public class Test500Api {
+public enum GoodsTypeEnum {
 
-    @GetMapping("/api")
-    public List<String> getList() {
-        LogUtils.error(new RuntimeException("测试500失败================="), "测试500失败");
-        throw new RuntimeException("测试500失败");
+    /** IOS */
+    IOS("IOS"),
+    /** 安卓 */
+    ANDROID("安卓");
+
+    private final String description;
+
+    GoodsTypeEnum(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String description() {
+        return this.description;
     }
 }
