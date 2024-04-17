@@ -26,6 +26,7 @@ import com.taotao.cloud.canal.annotation.DropTableListenPoint;
 import com.taotao.cloud.canal.annotation.InsertListenPoint;
 import com.taotao.cloud.canal.annotation.UpdateListenPoint;
 import com.taotao.cloud.canal.model.CanalMsg;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 import org.springframework.util.CollectionUtils;
 

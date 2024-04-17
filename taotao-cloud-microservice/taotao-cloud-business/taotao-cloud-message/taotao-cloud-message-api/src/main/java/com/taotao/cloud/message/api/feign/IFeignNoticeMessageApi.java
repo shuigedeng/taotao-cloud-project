@@ -18,7 +18,7 @@ package com.taotao.cloud.message.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageApiFallback;
-import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
+import com.taotao.cloud.message.api.feign.request.FeignNoticeMessageRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -31,29 +31,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(value = ServiceName.TAOTAO_CLOUD_MESSAGE, fallbackFactory = FeignNoticeMessageApiFallback.class)
 public interface IFeignNoticeMessageApi {
 
-    @GetMapping(value = "/noticeMessage/sms")
-    void noticeMessage(NoticeMessageDTO noticeMessageDTO);
+	@GetMapping(value = "/noticeMessage/sms")
+	void noticeMessage(FeignNoticeMessageRequest noticeMessageDTO);
 
-    @GetMapping(value = "/message/sms")
-    boolean sendSms();
+	@GetMapping(value = "/message/sms")
+	boolean sendSms();
 
-    /**
-     * 站内信
-     *
-     * @return
-     */
-    @GetMapping(value = "/message/message")
-    boolean sendMessage();
+	/**
+	 * 站内信
+	 *
+	 * @return
+	 */
+	@GetMapping(value = "/message/message")
+	boolean sendMessage();
 
-    @GetMapping(value = "/message/dingtalk")
-    boolean sendDingtalk();
+	@GetMapping(value = "/message/dingtalk")
+	boolean sendDingtalk();
 
-    @GetMapping(value = "/message/wechat")
-    boolean sendWechat();
+	@GetMapping(value = "/message/wechat")
+	boolean sendWechat();
 
-    @GetMapping(value = "/message/email")
-    boolean sendEmail();
+	@GetMapping(value = "/message/email")
+	boolean sendEmail();
 
-    @GetMapping(value = "/message/store")
-    boolean sendStoreMessage();
+	@GetMapping(value = "/message/store")
+	boolean sendStoreMessage();
 }

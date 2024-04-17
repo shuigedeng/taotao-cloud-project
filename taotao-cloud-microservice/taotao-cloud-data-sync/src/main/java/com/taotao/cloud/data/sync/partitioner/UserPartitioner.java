@@ -1,5 +1,7 @@
 package com.taotao.cloud.data.sync.partitioner;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
+import java.io.IOException;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.core.io.ClassPathResource;

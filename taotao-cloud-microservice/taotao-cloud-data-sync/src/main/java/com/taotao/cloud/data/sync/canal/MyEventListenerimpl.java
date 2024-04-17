@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.data.sync.canal;
 
-import com.taotao.cloud.canal.abstracts.DeleteOption;
-import com.taotao.cloud.canal.abstracts.InsertOption;
-import com.taotao.cloud.canal.abstracts.UpdateOption;
-import com.taotao.cloud.canal.model.DealCanalEventListener;
+import com.taotao.cloud.canal.listener.DealCanalEventListener;
+import com.taotao.cloud.canal.option.DeleteOption;
+import com.taotao.cloud.canal.option.InsertOption;
+import com.taotao.cloud.canal.option.UpdateOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -34,11 +34,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyEventListenerimpl extends DealCanalEventListener {
 
-    @Autowired
-    public MyEventListenerimpl(
-            @Qualifier("realInsertOptoin") InsertOption insertOption,
-            @Qualifier("realDeleteOption") DeleteOption deleteOption,
-            @Qualifier("realUpdateOption") UpdateOption updateOption) {
-        super(insertOption, deleteOption, updateOption);
-    }
+	@Autowired
+	public MyEventListenerimpl(
+		@Qualifier("realInsertOptoin") InsertOption insertOption,
+		@Qualifier("realDeleteOption") DeleteOption deleteOption,
+		@Qualifier("realUpdateOption") UpdateOption updateOption) {
+		super(insertOption, deleteOption, updateOption);
+	}
 }

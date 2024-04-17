@@ -17,23 +17,23 @@
 package com.taotao.cloud.order.api.feign;
 
 
+import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_07;
+import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
+
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.openfeign.annotation.ApiInfo;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderApiFallback;
 import com.taotao.cloud.order.api.feign.request.FeignOrderSaveRequest;
+import com.taotao.cloud.order.api.feign.response.FeignOrderDetailResponse;
 import com.taotao.cloud.order.api.feign.response.FeignOrderResponse;
+import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
-
-import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_07;
-import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
 
 /**
  * 远程调用订单模块
@@ -69,7 +69,7 @@ public interface IFeignOrderApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping(value = "/order/feign/queryDetail")
-	OrderDetailVO queryDetail(String sn);
+	FeignOrderDetailResponse queryDetail(String sn);
 
 	@ApiInfo(
 		create = @Create(version = V2022_07, date = "2022-07-01 17:11:55"),

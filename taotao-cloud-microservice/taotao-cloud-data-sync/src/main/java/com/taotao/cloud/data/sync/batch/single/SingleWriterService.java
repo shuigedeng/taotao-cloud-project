@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.data.sync.batch.single;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

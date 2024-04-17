@@ -1,8 +1,14 @@
 package com.taotao.cloud.data.sync.parallel;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.FlowBuilder;
+import org.springframework.batch.core.job.flow.Flow;
+import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -13,24 +19,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
 /**
  * 并行步骤，指的是某2个或者多个步骤同时执行。比如下图
- *
+ * <p>
  * 流程从步骤1执行，然后执行步骤2， 步骤3，当步骤2/3执行结束之后，在执行步骤4.
- *
+ * <p>
  * 设想一种场景，当读取2个或者多个互不关联的文件时，可以多个文件同时读取，这个就是并行步骤。
- *
+ * <p>
  * 需求：现有user-parallel.txt, user-parallel.json 2个文件将它们中数据读入内存
- *
+ * <p>
  * 1：jsonItemReader() flatItemReader() 定义2个读入操作，分别读json格式跟普通文本格式
- *
- * 2：parallelJob() 配置job，需要指定并行的flow步骤，先是parallelFlow1然后是parallelFlow2 ， 2个步骤间使用 .split(new SimpleAsyncTaskExecutor()) 隔开，表示线程池开启2个线程，分别处理parallelFlow1， parallelFlow2 2个步骤。
+ * <p>
+ * 2：parallelJob() 配置job，需要指定并行的flow步骤，先是parallelFlow1然后是parallelFlow2 ， 2个步骤间使用 .split(new
+ * SimpleAsyncTaskExecutor()) 隔开，表示线程池开启2个线程，分别处理parallelFlow1， parallelFlow2 2个步骤。
  */
 @SpringBootApplication
 @EnableBatchProcessing
 public class ParallelStepJob {
+
 	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
 	@Autowired
@@ -65,9 +74,10 @@ public class ParallelStepJob {
 	public ItemWriter<User> itemWriter() {
 		return new ItemWriter<User>() {
 			@Override
-			public void write(List<? extends User> items) throws Exception {
+			public void write(Chunk<? extends User> items) throws Exception {
 				items.forEach(System.err::println);
 			}
+
 		};
 	}
 
@@ -103,7 +113,6 @@ public class ParallelStepJob {
 			.split(new SimpleAsyncTaskExecutor())
 			.add(parallelFlow1)
 			.build();
-
 
 		return jobBuilderFactory.get("parallel-step-job")
 			.start(parallelFlow2)

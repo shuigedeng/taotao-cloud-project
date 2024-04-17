@@ -17,7 +17,8 @@
 package com.taotao.cloud.data.sync.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.abstracts.DeleteOption;
+import com.taotao.cloud.canal.option.DeleteOption;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;

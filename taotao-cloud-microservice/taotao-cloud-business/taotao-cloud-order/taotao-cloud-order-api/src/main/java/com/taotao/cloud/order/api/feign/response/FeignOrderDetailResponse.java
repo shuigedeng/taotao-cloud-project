@@ -53,11 +53,11 @@ public record FeignOrderDetailResponse(
 	/** 支付类型 */
 	String paymentMethodValue,
 
-	/** 发票 */
-	ReceiptVO receipt,
-
-	/** 获取订单日志 */
-	List<OrderLogVO> orderLogs,
+//	/** 发票 */
+//	ReceiptVO receipt,
+//
+//	/** 获取订单日志 */
+//	List<OrderLogVO> orderLogs,
 	@Schema(description = "价格详情") String priceDetail)
 	implements Serializable {
 

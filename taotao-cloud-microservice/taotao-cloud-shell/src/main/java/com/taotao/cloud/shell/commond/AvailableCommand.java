@@ -1,11 +1,10 @@
 package com.taotao.cloud.shell.commond;
 
+import jakarta.validation.constraints.Size;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
-
-import javax.validation.constraints.Size;
 
 /**
  * 对参数进行校验

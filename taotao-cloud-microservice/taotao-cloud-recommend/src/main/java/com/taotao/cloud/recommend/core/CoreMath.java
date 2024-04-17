@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.recommend.core;
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.recommend.dto.RelateDTO;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
-import org.assertj.core.util.Lists;
 
 /**
  * 核心算法

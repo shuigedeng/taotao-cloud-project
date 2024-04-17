@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.api.feign.fallback;
 
 import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
-import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
+import com.taotao.cloud.message.api.feign.request.FeignNoticeMessageRequest;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -33,7 +33,7 @@ public class FeignNoticeMessageApiFallback implements FallbackFactory<IFeignNoti
         return new IFeignNoticeMessageApi() {
 
             @Override
-            public void noticeMessage(NoticeMessageDTO noticeMessageDTO) {}
+            public void noticeMessage(FeignNoticeMessageRequest noticeMessageDTO) {}
 
             @Override
             public boolean sendSms() {

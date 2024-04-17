@@ -1,8 +1,12 @@
 package com.taotao.cloud.data.sync.thread;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
 /**
@@ -19,13 +24,16 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
  * <p>
  * 分5个块处理user-thread.txt文件
  * <p>
- * 1：userItemReader() 加上saveState(false) Spring Batch 提供大部分的ItemReader是有状态的，作业重启基本通过状态来确定作业停止位置，而在多线程环境中，如果对象维护状态被多个线程访问，可能存在线程间状态相互覆盖问题。所以设置为false表示关闭状态，但这也意味着作业不能重启了。
+ * 1：userItemReader() 加上saveState(false) Spring Batch
+ * 提供大部分的ItemReader是有状态的，作业重启基本通过状态来确定作业停止位置，而在多线程环境中，如果对象维护状态被多个线程访问，可能存在线程间状态相互覆盖问题。所以设置为false表示关闭状态，但这也意味着作业不能重启了。
  * <p>
- * 2：step() 方法加上 .taskExecutor(new SimpleAsyncTaskExecutor()) 为作业步骤添加了多线程处理能力，以块为单位，一个块一个线程，观察上面的结果，很明显能看出输出的顺序是乱序的。改变 job 的名字再执行，会发现输出数据每次都不一样。
+ * 2：step() 方法加上 .taskExecutor(new SimpleAsyncTaskExecutor())
+ * 为作业步骤添加了多线程处理能力，以块为单位，一个块一个线程，观察上面的结果，很明显能看出输出的顺序是乱序的。改变 job 的名字再执行，会发现输出数据每次都不一样。
  */
 @SpringBootApplication
 @EnableBatchProcessing
 public class ThreadStepJob {
+
 	@Autowired
 	private JobBuilderFactory jobBuilderFactory;
 	@Autowired
@@ -34,7 +42,7 @@ public class ThreadStepJob {
 	@Bean
 	public FlatFileItemReader<User> userItemReader() {
 
-		LogUtils.info(Thread.currentThread());
+		LogUtils.info(String.valueOf(Thread.currentThread()));
 
 		FlatFileItemReader<User> reader = new FlatFileItemReaderBuilder<User>()
 			.name("userItemReader")
@@ -52,7 +60,7 @@ public class ThreadStepJob {
 	public ItemWriter<User> itemWriter() {
 		return new ItemWriter<User>() {
 			@Override
-			public void write(List<? extends User> items) throws Exception {
+			public void write(Chunk<? extends User> items) throws Exception {
 				items.forEach(System.err::println);
 			}
 		};

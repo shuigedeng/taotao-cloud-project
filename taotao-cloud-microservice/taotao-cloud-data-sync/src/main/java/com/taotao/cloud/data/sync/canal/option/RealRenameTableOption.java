@@ -17,7 +17,8 @@
 package com.taotao.cloud.data.sync.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.abstracts.RenameTableOption;
+import com.taotao.cloud.canal.option.RenameTableOption;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 
 /**

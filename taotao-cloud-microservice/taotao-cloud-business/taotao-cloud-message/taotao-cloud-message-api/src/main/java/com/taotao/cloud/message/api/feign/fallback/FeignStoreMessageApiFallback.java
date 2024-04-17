@@ -19,7 +19,7 @@ package com.taotao.cloud.message.api.feign.fallback;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.message.api.feign.IFeignStoreMessageApi;
-import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
+import com.taotao.cloud.message.api.feign.response.FeignStoreMessageResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -35,7 +35,7 @@ public class FeignStoreMessageApiFallback implements FallbackFactory<IFeignStore
         return new IFeignStoreMessageApi() {
 
             @Override
-            public PageResult<StoreMessageVO> getPage(PageQuery PageQuery) {
+            public PageResult<FeignStoreMessageResponse> getPage(PageQuery PageQuery) {
                 return null;
             }
         };

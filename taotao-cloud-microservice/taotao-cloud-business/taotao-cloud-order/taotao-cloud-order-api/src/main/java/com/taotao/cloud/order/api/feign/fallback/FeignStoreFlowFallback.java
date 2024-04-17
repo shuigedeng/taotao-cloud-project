@@ -16,10 +16,11 @@
 
 package com.taotao.cloud.order.api.feign.fallback;
 
-import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
-import com.taotao.cloud.order.api.feign.request.FeignOrderItemSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderItemResponse;
+import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.common.model.PageResult;
+import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
+import com.taotao.cloud.order.api.feign.response.FeingStoreFlowResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -28,33 +29,27 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignOrderItemApiFallback implements FallbackFactory<IFeignOrderItemApi> {
+public class FeignStoreFlowFallback implements FallbackFactory<IFeignStoreFlowApi> {
 
 	@Override
-	public IFeignOrderItemApi create(Throwable throwable) {
-		return new IFeignOrderItemApi() {
+	public IFeignStoreFlowApi create(Throwable throwable) {
+		return new IFeignStoreFlowApi() {
+
+
 			@Override
-			public Boolean saveOrderItem(FeignOrderItemSaveRequest orderItemSaveDTO) {
+			public FeignTradeResponse getBySn(String sn) {
 				return null;
 			}
 
 			@Override
-			public Boolean updateById(FeignOrderItemSaveRequest orderItem) {
+			public PageResult<FeingStoreFlowResponse> getStoreFlow(String id, String flowType,
+				PageQuery PageQuery) {
 				return null;
 			}
 
 			@Override
-			public FeignOrderItemResponse getByOrderSnAndSkuId(String orderSn, String skuId) {
-				return null;
-			}
-
-			@Override
-			public FeignOrderItemResponse getBySn(String orderItemSn) {
-				return null;
-			}
-
-			@Override
-			public Boolean updateCommentStatus(String sn, CommentStatusEnum finished) {
+			public PageResult<FeingStoreFlowResponse> getDistributionFlow(String id,
+				PageQuery PageQuery) {
 				return null;
 			}
 		};

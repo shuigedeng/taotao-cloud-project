@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.recommend.service;
 
+import com.google.common.collect.Lists;
 import com.taotao.cloud.recommend.dto.ItemDTO;
 import com.taotao.cloud.recommend.dto.RelateDTO;
 import com.taotao.cloud.recommend.dto.UserDTO;
@@ -28,7 +29,6 @@ import java.util.List;
 import java.util.Objects;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.util.Lists;
 
 @Data
 @Slf4j
