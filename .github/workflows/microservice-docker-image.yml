@@ -26,7 +26,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
+    #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
