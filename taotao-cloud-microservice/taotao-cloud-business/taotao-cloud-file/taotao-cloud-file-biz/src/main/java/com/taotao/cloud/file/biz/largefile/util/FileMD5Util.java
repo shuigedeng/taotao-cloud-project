@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.file.biz.largefile.util;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;

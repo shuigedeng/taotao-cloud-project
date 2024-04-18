@@ -18,6 +18,7 @@ package com.taotao.cloud.log.biz.config.redis.delegate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.log.biz.entity.Log;
 import com.taotao.cloud.log.biz.service.ILogService;
 import org.springframework.beans.factory.annotation.Autowired;

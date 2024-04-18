@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.file.biz.largefile.util;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.biz.largefile.enu.DateType;
 import java.sql.Timestamp;
 import java.text.DateFormat;

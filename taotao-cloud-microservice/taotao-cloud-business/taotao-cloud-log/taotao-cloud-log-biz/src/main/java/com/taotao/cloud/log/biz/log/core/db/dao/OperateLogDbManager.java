@@ -18,6 +18,7 @@ package com.taotao.cloud.log.biz.log.core.db.dao;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.data.mybatisplus.utils.BaseManager;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.log.biz.log.core.db.entity.OperateLogDb;
 import com.taotao.cloud.log.biz.log.param.OperateLogParam;
 import java.util.Objects;
@@ -52,6 +53,6 @@ public class OperateLogDbManager extends BaseManager<OperateLogDbMapper, Operate
                         OperateLogDb::getBusinessType,
                         operateLogParam.getBusinessType())
                 .orderByDesc(OperateLogDb::getOperateTime)
-                .page(operateLogParam.buildMpPage());
+                .page(MpUtils.buildMpPage(operateLogParam));
     }
 }

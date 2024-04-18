@@ -11,6 +11,7 @@ import com.taotao.cloud.file.biz.filestorage.model.FileDetail;
 import lombok.SneakyThrows;
 import org.dromara.x.file.storage.core.FileInfo;
 import org.dromara.x.file.storage.core.recorder.FileRecorder;
+import org.dromara.x.file.storage.core.upload.FilePartInfo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,6 +40,11 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
 		return b;
 	}
 
+	@Override
+	public void update(FileInfo fileInfo) {
+
+	}
+
 	/**
 	 * 根据 url 查询文件信息
 	 */
@@ -62,6 +68,16 @@ public class FileDetailService extends ServiceImpl<FileDetailMapper, FileDetail>
 	public boolean delete(String url) {
 		remove(new QueryWrapper<FileDetail>().eq(FileDetail.COL_URL,url));
 		return true;
+	}
+
+	@Override
+	public void saveFilePart(FilePartInfo filePartInfo) {
+
+	}
+
+	@Override
+	public void deleteFilePartByUploadId(String s) {
+
 	}
 }
 

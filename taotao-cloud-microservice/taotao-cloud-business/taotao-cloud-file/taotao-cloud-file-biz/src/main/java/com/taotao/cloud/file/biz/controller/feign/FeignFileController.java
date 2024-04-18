@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.file.biz.controller.feign;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.api.feign.IFeignFileApi;
 import com.taotao.cloud.file.api.feign.response.FeignFileResponse;
 import com.taotao.cloud.file.api.grpc.ConditionsRequest;
@@ -87,7 +88,7 @@ public class FeignFileController implements IFeignFileApi {
 			.build();
 		File file = FileGrpcServiceGrpc.newBlockingStub(channel)
 			.searchFile(ConditionsRequest.newBuilder().setId("112").build());
-		LogUtils.info(file);
+		LogUtils.info(file.toString());
 
 		return FeignFileResponse.builder().description("sdfasdfsa").dictCode("sfd").build();
 	}

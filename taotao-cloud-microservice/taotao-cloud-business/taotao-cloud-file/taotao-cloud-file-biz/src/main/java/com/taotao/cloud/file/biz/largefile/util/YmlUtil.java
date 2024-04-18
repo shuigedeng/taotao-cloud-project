@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.file.biz.largefile.util;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class YmlUtil {
         return getValue(key);
     }
 
-    public static void main(String[] args) {
-        LogUtils.info(getValue("hello.desc"));
-    }
+//    public static void main(String[] args) {
+//        LogUtils.info(getValue("hello.desc"));
+//    }
 }

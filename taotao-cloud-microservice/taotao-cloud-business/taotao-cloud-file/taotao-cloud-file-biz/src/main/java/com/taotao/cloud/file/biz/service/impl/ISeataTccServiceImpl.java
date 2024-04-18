@@ -2,6 +2,7 @@ package com.taotao.cloud.file.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.file.biz.mapper.IFileMapper;
 import com.taotao.cloud.file.biz.service.ISeataTccService;

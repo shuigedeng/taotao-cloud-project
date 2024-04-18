@@ -113,7 +113,7 @@ public class RedisListenerConfig {
                 2000,
                 TimeUnit.SECONDS,
                 new SynchronousQueue<>(),
-                new ThreadPoolFactory("taotao-cloud-redis-listener-executor"));
+                new ThreadPoolFactory("ttc-sys-redis-listener-executor"));
         container.setTaskExecutor(executor);
 
         Map<MessageListenerAdapter, Collection<? extends Topic>> listeners = new HashMap<>();

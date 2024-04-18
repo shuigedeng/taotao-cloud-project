@@ -305,7 +305,7 @@ dubbo:
     #status: server
     payload: 83886080
     threadpool: fixed
-    threadname: taotao-cloud-dubbo-executor
+    threadname: ttc-sys-dubbo-executor
     threads: 200
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/access.log
   provider:
@@ -322,7 +322,7 @@ dubbo:
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/provider.log
     owner: 981376577
     threadpool: fixed
-    threadname: taotao-cloud-dubbo-provider-executor
+    threadname: ttc-sys-dubbo-provider-executor
   consumer:
     check: false
     timeout: 3000
@@ -650,7 +650,7 @@ spring:
             threadCount: 25
             # 设置线程的优先级（最大为java.lang.Thread.MAX_PRIORITY 10，最小为Thread.MIN_PRIORITY 1，默认为5）
             threadPriority: 5
-            threadNamePrefix: taotao-cloud-quartz-executor
+            threadNamePrefix: ttc-sys-quartz-executor
             # 指定线程池实现类，对调度器提供固定大小的线程池
             class: org.quartz.simpl.SimpleThreadPool
             threadsInheritContextClassLoaderOfInitializingThread: true
@@ -847,7 +847,7 @@ spring:
           # 单个连接最大订阅数量
           subscriptionsPerConnection: 5
           # 客户端名称
-          clientName: "taotao-cloud-redis-client"
+          clientName: "ttc-sys-redis-client"
           # 节点地址
           address: "redis://127.0.0.1:6379"
           # 发布和订阅连接的最小空闲连接数

@@ -304,7 +304,7 @@ dubbo:
     status: server
     payload: 83886080
     threadpool: fixed
-    threadname: taotao-cloud-dubbo-executor
+    threadname: ttc-sys-dubbo-executor
     threads: 200
   provider:
     timeout: 300000
@@ -580,7 +580,7 @@ spring:
             threadCount: 25
             # 设置线程的优先级（最大为java.lang.Thread.MAX_PRIORITY 10，最小为Thread.MIN_PRIORITY 1，默认为5）
             threadPriority: 5
-            threadNamePrefix: taotao-cloud-quartz-executor
+            threadNamePrefix: ttc-sys-quartz-executor
             # 指定线程池实现类，对调度器提供固定大小的线程池
             class: org.quartz.simpl.SimpleThreadPool
             threadsInheritContextClassLoaderOfInitializingThread: true

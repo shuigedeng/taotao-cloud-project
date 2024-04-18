@@ -17,6 +17,7 @@
 package com.taotao.cloud.log.biz.log.core.db.dao;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.data.mybatisplus.utils.BaseManager;
+import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.log.biz.log.core.db.entity.DataVersionLogDb;
 import com.taotao.cloud.log.biz.log.param.DataVersionLogParam;
 import java.util.Objects;
@@ -57,6 +58,6 @@ public class DataVersionLogDbManager extends BaseManager<DataVersionLogDbMapper,
                 .like(StrUtil.isNotBlank(param.getTableName()), DataVersionLogDb::getTableName, param.getTableName())
                 .like(StrUtil.isNotBlank(param.getDataId()), DataVersionLogDb::getDataId, param.getDataId())
                 .eq(Objects.nonNull(param.getVersion()), DataVersionLogDb::getVersion, param.getVersion())
-                .page(param.buildMpPage());
+                .page( MpUtils.buildMpPage(param));
     }
 }

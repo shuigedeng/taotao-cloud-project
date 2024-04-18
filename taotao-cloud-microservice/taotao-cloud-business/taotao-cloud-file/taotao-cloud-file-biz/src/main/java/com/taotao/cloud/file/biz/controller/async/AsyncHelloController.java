@@ -1,7 +1,10 @@
 package com.taotao.cloud.file.biz.controller.async;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.core.configuration.AsyncAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +24,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class AsyncHelloController {
 
 	@Autowired
-	private AsyncAutoConfiguration.AsyncThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
+	@Qualifier("asyncThreadPoolTaskExecutor")
+	private ThreadPoolTaskExecutor asyncThreadPoolTaskExecutor;
 
     private List<DeferredResult<String>> deferredResultList = new ArrayList<>();
 

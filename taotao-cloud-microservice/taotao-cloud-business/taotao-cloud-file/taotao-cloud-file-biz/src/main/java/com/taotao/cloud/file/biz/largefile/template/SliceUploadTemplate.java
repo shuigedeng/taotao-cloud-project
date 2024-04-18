@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.file.biz.largefile.template;
 
+import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.file.biz.largefile.constant.FileConstant;
 import com.taotao.cloud.file.biz.largefile.po.FileUpload;
 import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;

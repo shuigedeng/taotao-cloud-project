@@ -61,13 +61,10 @@ public class DataVersionLogDb extends BaseSuperEntity<DataVersionLogDb, Long> {
     private String changeContent;
 
     @Schema(description = "数据版本")
-    private Integer version;
+    private Integer dataVersion;
 
     @Schema(description = "创建者ID")
     private Long creator;
-
-    @Schema(description = "创建时间")
-    private LocalDateTime createTime;
 
     public DataVersionLogDto toDto() {
         return LogConvert.CONVERT.convert(this);
