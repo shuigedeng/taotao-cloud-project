@@ -2,13 +2,12 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.s
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayCloseService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayRecordService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao.PayChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsPayRepairStrategy;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayCloseService;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayRecordService;
+import cn.bootx.platform.daxpay.service.func.AbsPayRepairStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
@@ -32,8 +31,6 @@ public class WeChatPayRepairStrategy extends AbsPayRepairStrategy {
 
     private final WeChatPayConfigService weChatPayConfigService;
 
-    private final PayChannelOrderManager payChannelOrderManager;
-
     private final WeChatPayRecordService weChatPayRecordService;
 
     private WeChatPayConfig weChatPayConfig;
@@ -44,6 +41,14 @@ public class WeChatPayRepairStrategy extends AbsPayRepairStrategy {
     @Override
     public PayChannelEnum getChannel() {
         return PayChannelEnum.WECHAT;
+    }
+
+    /**
+     * 等待支付处理
+     */
+    @Override
+    public void doWaitPayHandler(){
+        this.getChannelOrder().setPayTime(null).setStatus(PayStatusEnum.PROGRESS.getCode());
     }
 
     /**
@@ -64,7 +69,6 @@ public class WeChatPayRepairStrategy extends AbsPayRepairStrategy {
                 .getFinishTime();
         this.getChannelOrder().setStatus(PayStatusEnum.SUCCESS.getCode())
                 .setPayTime(payTime);
-        payChannelOrderManager.updateById(this.getChannelOrder());
         // 保存流水记录
         weChatPayRecordService.pay(this.getOrder(), this.getChannelOrder());
     }

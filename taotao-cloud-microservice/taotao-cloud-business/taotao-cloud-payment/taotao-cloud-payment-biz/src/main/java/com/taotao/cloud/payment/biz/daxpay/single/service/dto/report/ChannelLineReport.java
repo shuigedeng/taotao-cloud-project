@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.dto.report;
+package com.taotao.cloud.payment.biz.daxpay.single.service.dto.report;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

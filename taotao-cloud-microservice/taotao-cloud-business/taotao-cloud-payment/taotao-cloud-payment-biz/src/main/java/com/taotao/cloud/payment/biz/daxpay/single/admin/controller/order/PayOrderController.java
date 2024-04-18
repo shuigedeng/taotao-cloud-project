@@ -7,14 +7,17 @@ import cn.bootx.platform.common.core.rest.ResResult;
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.daxpay.param.pay.PayCloseParam;
 import cn.bootx.platform.daxpay.param.pay.PaySyncParam;
+import cn.bootx.platform.daxpay.param.pay.allocation.AllocationStartParam;
 import cn.bootx.platform.daxpay.result.pay.SyncResult;
 import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
 import cn.bootx.platform.daxpay.service.core.order.pay.service.PayChannelOrderService;
 import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderExtraService;
 import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderQueryService;
+import cn.bootx.platform.daxpay.service.core.payment.allocation.service.AllocationService;
 import cn.bootx.platform.daxpay.service.core.payment.close.service.PayCloseService;
 import cn.bootx.platform.daxpay.service.core.payment.sync.service.PaySyncService;
 import cn.bootx.platform.daxpay.service.dto.order.pay.PayChannelOrderDto;
+import cn.bootx.platform.daxpay.service.dto.order.pay.PayOrderDetailDto;
 import cn.bootx.platform.daxpay.service.dto.order.pay.PayOrderDto;
 import cn.bootx.platform.daxpay.service.dto.order.pay.PayOrderExtraDto;
 import cn.bootx.platform.daxpay.service.param.order.PayOrderQuery;
@@ -44,6 +47,7 @@ public class PayOrderController {
 
     private final PayCloseService PayCloseService;
     private final PaySyncService paySyncService;
+    private final AllocationService allocationService;
 
     @Operation(summary = "分页查询")
     @GetMapping("/page")
@@ -59,6 +63,18 @@ public class PayOrderController {
                 .orElseThrow(() -> new DataNotExistException("支付订单不存在"));
         return Res.ok(order);
     }
+    @Operation(summary = "查询订单详情")
+    @GetMapping("/findByOrderNo")
+    public ResResult<PayOrderDetailDto> findByOrderNo(String orderNo){
+        PayOrderDto order = queryService.findByOrderNo(orderNo)
+                .map(PayOrder::toDto)
+                .orElseThrow(() -> new DataNotExistException("支付订单不存在"));
+        PayOrderDetailDto detailDto=new PayOrderDetailDto();
+        detailDto.setPayOrder(order);
+        detailDto.setPayOrderExtra(payOrderExtraService.findById(order.getId()).toDto());
+        detailDto.setPayChannelOrder(payChannelOrderService.findAllByPaymentId(orderNo));
+        return Res.ok(detailDto);
+    }
 
     @Operation(summary = "查询支付订单扩展信息")
     @GetMapping("/getExtraById")
@@ -68,8 +84,8 @@ public class PayOrderController {
 
     @Operation(summary = "查询支付订单关联支付通道订单")
     @GetMapping("/listByChannel")
-    public ResResult<List<PayChannelOrderDto>> listByChannel(Long paymentId){
-        return Res.ok(payChannelOrderService.findAllByPaymentId(paymentId));
+    public ResResult<List<PayChannelOrderDto>> listByChannel(String orderNo){
+        return Res.ok(payChannelOrderService.findAllByPaymentId(orderNo));
     }
     @Operation(summary = "查询支付通道订单详情")
     @GetMapping("/getChannel")
@@ -91,6 +107,15 @@ public class PayOrderController {
         PayCloseParam param = new PayCloseParam();
         param.setPaymentId(id);
         PayCloseService.close(param);
+        return Res.ok();
+    }
+
+    @Operation(summary = "发起分账")
+    @PostMapping("/allocation")
+    public ResResult<Void> allocation(Long id){
+        AllocationStartParam param = new AllocationStartParam();
+        param.setPaymentId(id);
+        allocationService.allocation(param);
         return Res.ok();
     }
 }

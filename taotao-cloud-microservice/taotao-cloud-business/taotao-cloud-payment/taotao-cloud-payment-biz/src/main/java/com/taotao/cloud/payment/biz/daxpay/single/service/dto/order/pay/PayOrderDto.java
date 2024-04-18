@@ -3,6 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.dto.order.pay;
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
+import cn.bootx.platform.daxpay.code.AllocationOrderStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +25,10 @@ public class PayOrderDto extends BaseDto {
     @Schema(description = "关联的业务号")
     private String businessNo;
 
+    /** 支付网关订单号 */
+    @Schema(description = "支付网关订单号")
+    private String orderNo;
+
     /** 标题 */
     @Schema(description = "标题")
     private String title;
@@ -35,6 +40,10 @@ public class PayOrderDto extends BaseDto {
     /** 是否是组合支付 */
     @Schema(description = "是否是组合支付")
     private boolean combinationPay;
+
+    /** 是否需要分账 */
+    @Schema(description = "是否需要分账")
+    private boolean allocation;
 
     /**
      * 异步支付通道
@@ -63,6 +72,13 @@ public class PayOrderDto extends BaseDto {
      */
     @Schema(description = "支付状态")
     private String status;
+
+    /**
+     * 分账状态
+     * @see AllocationOrderStatusEnum
+     */
+    @Schema(description = "分账状态")
+    private String allocationStatus;
 
     /** 支付时间 */
     @Schema(description = "支付时间")

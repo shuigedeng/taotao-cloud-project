@@ -2,10 +2,10 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.handler;
 
 import cn.bootx.platform.common.core.exception.DataNotExistException;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.annotation.PaymentApi;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.dao.PayApiConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.PayApiConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service.PayApiConfigService;
+import cn.bootx.platform.daxpay.service.annotation.PaymentApi;
+import cn.bootx.platform.daxpay.service.core.system.config.dao.PayApiConfigManager;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.PayApiConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.service.PayApiConfigService;
 import cn.bootx.platform.starter.auth.service.RouterCheck;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -2,9 +2,9 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.util;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.param.channel.WalletPayParam;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayWayExtraCode;
+import cn.bootx.platform.daxpay.service.code.PayWayExtraCode;
 import cn.bootx.platform.daxpay.param.channel.AliPayParam;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wechat.WeChatPayParam;
+import cn.bootx.platform.daxpay.service.param.channel.wechat.WeChatPayParam;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
