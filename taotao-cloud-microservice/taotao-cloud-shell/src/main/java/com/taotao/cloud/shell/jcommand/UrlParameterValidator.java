@@ -1,6 +1,9 @@
 package com.taotao.cloud.shell.jcommand;
 
+import com.beust.jcommander.IParameterValidator;
+import com.beust.jcommander.ParameterException;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 public class UrlParameterValidator implements IParameterValidator {
     @Override

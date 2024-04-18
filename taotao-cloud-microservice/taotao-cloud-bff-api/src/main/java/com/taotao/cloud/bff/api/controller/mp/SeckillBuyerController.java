@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.bff.api.controller.mp;
 
+import com.taotao.cloud.bff.api.service.app.ISeckillApplyService;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.promotion.api.model.vo.SeckillGoodsVO;
 import com.taotao.cloud.promotion.api.model.vo.SeckillTimelineVO;
-import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

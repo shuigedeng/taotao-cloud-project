@@ -1,6 +1,11 @@
 package com.taotao.cloud.shell.commond;
 
 import jakarta.validation.constraints.Size;
+import java.io.File;
+import org.eclipse.jgit.api.CloneCommand;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Ref;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellCommandGroup;
@@ -8,7 +13,6 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
-import java.sql.Ref;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,19 +30,19 @@ import java.util.List;
 @ShellCommandGroup("分组的命令")
 public class OdcShellTest {
 
-	@Autowired
-	private NodeService nodeService;
-
-	/**
-	 * 基础的命令
-	 *
-	 * @return
-	 */
-	@ShellMethod(value = "输入两个整数，获取相加结果")
-	//    @ShellMethod("输入两个整数，获取相加结果")
-	public List<Node> findAll() {
-		return nodeService.findAll();
-	}
+//	@Autowired
+//	private NodeService nodeService;
+//
+//	/**
+//	 * 基础的命令
+//	 *
+//	 * @return
+//	 */
+//	@ShellMethod(value = "输入两个整数，获取相加结果")
+//	//    @ShellMethod("输入两个整数，获取相加结果")
+//	public List<Node> findAll() {
+//		return nodeService.findAll();
+//	}
 
 	/**
 	 * 基础的命令
@@ -147,7 +151,7 @@ public class OdcShellTest {
 	 */
 	@ShellMethod(value = "必须链接后才能执行的方法", group = "其他组")
 	public String download() {
-		LogUtils.info("123");
+		//LogUtils.info("123");
 		return "123";
 	}
 
@@ -171,8 +175,9 @@ public class OdcShellTest {
 			Collection<Ref> refList = Git.lsRemoteRepository().setRemote(url).call();
 			List<String> branchnameList = new ArrayList<>(4);
 			for (Ref ref : refList) {
+				// 须要进行筛选
 				String refName = ref.getName();
-				if (refName.startsWith("refs/heads/")) {                       // 须要进行筛选
+				if (refName.startsWith("refs/heads/")) {
 					String branchName = refName.replace("refs/heads/", "");
 					branchnameList.add(branchName);
 				}

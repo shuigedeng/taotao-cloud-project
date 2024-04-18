@@ -1,5 +1,8 @@
 package com.taotao.cloud.shell.jcommand;
 
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.Parameters;
+
 /**
  * git commit -m "desc"
  */

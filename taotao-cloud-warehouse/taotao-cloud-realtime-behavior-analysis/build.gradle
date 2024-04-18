@@ -105,7 +105,7 @@ dependencies {
     implementation("org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.6.0-incubating")
     implementation("org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.6.0-incubating")
 
-    implementation 'org.apache.commons:commons-compress:1.25.0'
+    implementation 'org.apache.commons:commons-compress:1.26.1'
     implementation 'org.slf4j:slf4j-api:2.0.13'
     implementation 'org.slf4j:slf4j-log4j12:2.0.13'
 

@@ -1,5 +1,7 @@
 package com.taotao.cloud.shell.jcommand;
 
+import com.beust.jcommander.JCommander;
+
 public class GitApp {
 
     public static void main(String[] args) {
@@ -20,19 +22,19 @@ public class GitApp {
             return;
         }
         if (gitCommandOptions.isVersion()) {
-            LogUtils.info("git version 2.24.3 (Apple Git-128)");
+            //LogUtils.info("git version 2.24.3 (Apple Git-128)");
             return;
         }
         if (gitCommandOptions.getCloneUrl() != null) {
-            LogUtils.info("clone " + gitCommandOptions.getCloneUrl());
+			//LogUtils.info("clone " + gitCommandOptions.getCloneUrl());
         }
         String parsedCommand = commander.getParsedCommand();
         if ("commit".equals(parsedCommand)) {
-            LogUtils.info(commandCommit.getComment());
+			// LogUtils.info(commandCommit.getComment());
         }
         if ("add".equals(parsedCommand)) {
             for (String file : commandAdd.getFiles()) {
-                LogUtils.info("暂存文件：" + file);
+				//LogUtils.info("暂存文件：" + file);
             }
         }
     }

@@ -140,7 +140,7 @@ spring:
     banner-mode: off
     register-shutdown-hook: true
   application:
-    name: taotao-cloud-xxljob
+    name: taotao-cloud-bff-graphql
   data:
     redis:
       host: 192.168.10.220
@@ -305,21 +305,6 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
-
-xxl:
-  job:
-    login:
-      username: admin
-      password: 123456
-    accessToken: f4snMzv6qazC0kxc1A8l51rK0ksJLs
-    i18n: zh_CN
-    #触发池
-    triggerpool:
-      fast:
-        max: 200
-      slow:
-        max: 100
-    logretentiondays: 30
 
 
 taotao:
