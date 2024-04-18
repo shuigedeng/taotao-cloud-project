@@ -27,7 +27,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
+    if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-docker-image') }}
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
@@ -102,7 +102,7 @@ jobs:
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: Gradle BootJar taotao-cloud-monitor
-        #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
+        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
         run: gradle -p taotao-cloud-microservice/taotao-cloud-monitor clean bootJar -x test -Pprofile=dev
 #      #https://github.com/marketplace/actions/publish-docker
 #      - name: Publish Docker Image taotao-cloud-monitor
@@ -137,9 +137,9 @@ jobs:
 #            sh /develop/work/taotao-cloud/taotao-cloud-monitor-start.sh
 #            # sh start.sh
 #
-#      - name: Gradle BootJar taotao-cloud-gateway
-#        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
-#        run: gradle -p taotao-cloud-microservice/taotao-cloud-gateway clean bootJar -x test -Pprofile=dev
+      - name: Gradle BootJar taotao-cloud-gateway
+        if: #${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
+        run: gradle -p taotao-cloud-microservice/taotao-cloud-gateway clean bootJar -x test -Pprofile=dev
 #      - name: Publish Docker Image taotao-cloud-gateway
 #        uses: elgohr/Publish-Docker-Github-Action@v5
 #        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-gateway') }}
