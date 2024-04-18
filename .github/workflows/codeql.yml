@@ -1,3 +1,5 @@
+# 静态代码分析工具 语义代码分析引擎，它可以扫描发现代码库中的漏洞
+
 # For most projects, this workflow file will not need changing; you simply need
 # to commit it to your repository.
 #
@@ -13,7 +15,7 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ dev ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]

@@ -1,3 +1,4 @@
+# 构建graalvm docker images
 #### https://github.com/marketplace?type=actions
 #### https://github.com/sdras/awesome-actions
 
@@ -39,6 +40,11 @@ jobs:
           github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
           native-image-job-reports: 'true'
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.3.0
+        with:
+          gradle-version: 8.7
+
       - name: Example step
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
@@ -51,14 +57,9 @@ jobs:
           echo "mavenUsernameNew=${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}" >> gradle.properties
           echo "mavenPasswordNew=${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}" >> gradle.properties
 
-      #https://github.com/marketplace/actions/gradle-build-action
+      #https://github.com/marketplace/actions/gradle-build-action  bootBuildImage
       - name: Gradle BootJar taotao-cloud-auth-biz
-        uses: gradle/actions/setup-gradle@v3.3.0
-        with:
-          gradle-version: 8.7
-          #arguments: bootBuildImage
-          arguments: nativeBuild
-          build-root-directory: ${{ github.workspace }}/taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-auth/taotao-cloud-auth-biz
+        run: gradle -p taotao-cloud-microservice/taotao-cloud-business/taotao-cloud-auth/taotao-cloud-auth-biz nativeBuild
 
       #- name: Publish Docker Image taotao-cloud-demo
       #  uses: elgohr/Publish-Docker-Github-Action@v4

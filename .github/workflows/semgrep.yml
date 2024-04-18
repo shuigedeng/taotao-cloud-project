@@ -1,10 +1,12 @@
+# 是一个快速、开源的静态分析工具，用于在编辑、提交和 CI 时查找错误并执行代码标准
+
 name: Semgrep
 on:
   workflow_dispatch: {}
   pull_request: {}
   push:
     branches:
-      - main
+      - dev
       - master
     paths:
       - .github/workflows/semgrep.yml
