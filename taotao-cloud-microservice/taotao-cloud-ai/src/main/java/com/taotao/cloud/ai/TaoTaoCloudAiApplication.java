@@ -33,6 +33,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudAiApplication {
 
     public static void main(String[] args) {
+
 		new StartupSpringApplication(TaoTaoCloudAiApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
