@@ -41,6 +41,7 @@ public class TaoTaoCloudAiApplication {
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 
+
         // try {
         //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);
         // } catch (Throwable e) {

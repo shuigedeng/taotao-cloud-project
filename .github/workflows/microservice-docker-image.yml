@@ -101,7 +101,7 @@ jobs:
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: Gradle BootJar taotao-cloud-monitor
-        if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
+        #if: ${{ contains(github.event.head_commit.message, 'taotao-cloud-monitor') }}
         run: ./gradlew :taotao-cloud-microservice:taotao-cloud-monitor:clean bootJar -x test -Pprofile=dev
 #      #https://github.com/marketplace/actions/publish-docker
 #      - name: Publish Docker Image taotao-cloud-monitor
