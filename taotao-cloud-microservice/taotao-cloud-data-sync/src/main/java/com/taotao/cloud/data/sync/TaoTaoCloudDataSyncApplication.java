@@ -17,6 +17,7 @@
 package com.taotao.cloud.data.sync;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -33,8 +34,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TaoTaoCloudDataSyncApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-data-sync");
+		new StartupSpringApplication(TaoTaoCloudDataSyncApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-data-sync")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
 
-        SpringApplication.run(TaoTaoCloudDataSyncApplication.class, args);
-    }
+	}
 }

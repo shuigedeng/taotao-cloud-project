@@ -17,6 +17,7 @@
 package com.taotao.cloud.bff.api;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
@@ -24,8 +25,12 @@ import org.springframework.boot.SpringApplication;
 public class TaoTaoCloudBffApiApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-bff-api");
 
-        SpringApplication.run(TaoTaoCloudBffApiApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudBffApiApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-bff-api")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
     }
 }

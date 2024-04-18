@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.bff.graphql;
 
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -38,6 +39,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TaoTaoCloudBffGraphqlApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaoTaoCloudBffGraphqlApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudBffGraphqlApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-bff-graphql")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
     }
 }

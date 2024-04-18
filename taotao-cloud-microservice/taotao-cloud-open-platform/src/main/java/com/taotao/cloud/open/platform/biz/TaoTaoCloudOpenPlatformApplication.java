@@ -17,6 +17,7 @@
 package com.taotao.cloud.open.platform.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
@@ -31,8 +32,11 @@ import org.springframework.boot.SpringApplication;
 public class TaoTaoCloudOpenPlatformApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-open-platform");
-
-        SpringApplication.run(TaoTaoCloudOpenPlatformApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudOpenPlatformApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-open-platform")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
     }
 }

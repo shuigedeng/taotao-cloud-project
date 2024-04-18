@@ -17,12 +17,13 @@
 package com.taotao.cloud.ai;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * 监控系统中心
+ * ai系统中心
  *
  * @author shuigedeng
  * @version 2022.03
@@ -32,9 +33,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class TaoTaoCloudAiApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-ai");
-
-        SpringApplication.run(TaoTaoCloudAiApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudAiApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-ai")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
 
         // try {
         //    SpringApplication.run(TaoTaoCloudMonitorApplication.class, args);

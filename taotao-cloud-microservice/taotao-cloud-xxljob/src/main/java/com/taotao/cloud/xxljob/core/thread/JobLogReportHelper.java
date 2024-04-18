@@ -1,30 +1,15 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.taotao.cloud.xxljob.core.thread;
 
 import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
 import com.taotao.cloud.xxljob.core.model.XxlJobLogReport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * job log report helper
@@ -35,15 +20,14 @@ public class JobLogReportHelper {
     private static Logger logger = LoggerFactory.getLogger(JobLogReportHelper.class);
 
     private static JobLogReportHelper instance = new JobLogReportHelper();
-
-    public static JobLogReportHelper getInstance() {
+    public static JobLogReportHelper getInstance(){
         return instance;
     }
 
+
     private Thread logrThread;
     private volatile boolean toStop = false;
-
-    public void start() {
+    public void start(){
         logrThread = new Thread(new Runnable() {
 
             @Override
@@ -51,6 +35,7 @@ public class JobLogReportHelper {
 
                 // last clean log time
                 long lastCleanLogTime = 0;
+
 
                 while (!toStop) {
 
@@ -83,19 +68,11 @@ public class JobLogReportHelper {
                             xxlJobLogReport.setSucCount(0);
                             xxlJobLogReport.setFailCount(0);
 
-                            Map<String, Object> triggerCountMap = XxlJobAdminConfig.getAdminConfig()
-                                    .getXxlJobLogDao()
-                                    .findLogReport(todayFrom, todayTo);
-                            if (triggerCountMap != null && triggerCountMap.size() > 0) {
-                                int triggerDayCount = triggerCountMap.containsKey("triggerDayCount")
-                                        ? Integer.valueOf(String.valueOf(triggerCountMap.get("triggerDayCount")))
-                                        : 0;
-                                int triggerDayCountRunning = triggerCountMap.containsKey("triggerDayCountRunning")
-                                        ? Integer.valueOf(String.valueOf(triggerCountMap.get("triggerDayCountRunning")))
-                                        : 0;
-                                int triggerDayCountSuc = triggerCountMap.containsKey("triggerDayCountSuc")
-                                        ? Integer.valueOf(String.valueOf(triggerCountMap.get("triggerDayCountSuc")))
-                                        : 0;
+                            Map<String, Object> triggerCountMap = XxlJobAdminConfig.getAdminConfig().getXxlJobLogDao().findLogReport(todayFrom, todayTo);
+                            if (triggerCountMap!=null && triggerCountMap.size()>0) {
+                                int triggerDayCount = triggerCountMap.containsKey("triggerDayCount")?Integer.valueOf(String.valueOf(triggerCountMap.get("triggerDayCount"))):0;
+                                int triggerDayCountRunning = triggerCountMap.containsKey("triggerDayCountRunning")?Integer.valueOf(String.valueOf(triggerCountMap.get("triggerDayCountRunning"))):0;
+                                int triggerDayCountSuc = triggerCountMap.containsKey("triggerDayCountSuc")?Integer.valueOf(String.valueOf(triggerCountMap.get("triggerDayCountSuc"))):0;
                                 int triggerDayCountFail = triggerDayCount - triggerDayCountRunning - triggerDayCountSuc;
 
                                 xxlJobLogReport.setRunningCount(triggerDayCountRunning);
@@ -104,13 +81,9 @@ public class JobLogReportHelper {
                             }
 
                             // do refresh
-                            int ret = XxlJobAdminConfig.getAdminConfig()
-                                    .getXxlJobLogReportDao()
-                                    .update(xxlJobLogReport);
+                            int ret = XxlJobAdminConfig.getAdminConfig().getXxlJobLogReportDao().update(xxlJobLogReport);
                             if (ret < 1) {
-                                XxlJobAdminConfig.getAdminConfig()
-                                        .getXxlJobLogReportDao()
-                                        .save(xxlJobLogReport);
+                                XxlJobAdminConfig.getAdminConfig().getXxlJobLogReportDao().save(xxlJobLogReport);
                             }
                         }
 
@@ -121,14 +94,12 @@ public class JobLogReportHelper {
                     }
 
                     // 2、log-clean: switch open & once each day
-                    if (XxlJobAdminConfig.getAdminConfig().getLogretentiondays() > 0
-                            && System.currentTimeMillis() - lastCleanLogTime > 24 * 60 * 60 * 1000) {
+                    if (XxlJobAdminConfig.getAdminConfig().getLogretentiondays()>0
+                            && System.currentTimeMillis() - lastCleanLogTime > 24*60*60*1000) {
 
                         // expire-time
                         Calendar expiredDay = Calendar.getInstance();
-                        expiredDay.add(
-                                Calendar.DAY_OF_MONTH,
-                                -1 * XxlJobAdminConfig.getAdminConfig().getLogretentiondays());
+                        expiredDay.add(Calendar.DAY_OF_MONTH, -1 * XxlJobAdminConfig.getAdminConfig().getLogretentiondays());
                         expiredDay.set(Calendar.HOUR_OF_DAY, 0);
                         expiredDay.set(Calendar.MINUTE, 0);
                         expiredDay.set(Calendar.SECOND, 0);
@@ -138,15 +109,11 @@ public class JobLogReportHelper {
                         // clean expired log
                         List<Long> logIds = null;
                         do {
-                            logIds = XxlJobAdminConfig.getAdminConfig()
-                                    .getXxlJobLogDao()
-                                    .findClearLogIds(0, 0, clearBeforeTime, 0, 1000);
-                            if (logIds != null && logIds.size() > 0) {
-                                XxlJobAdminConfig.getAdminConfig()
-                                        .getXxlJobLogDao()
-                                        .clearLog(logIds);
+                            logIds = XxlJobAdminConfig.getAdminConfig().getXxlJobLogDao().findClearLogIds(0, 0, clearBeforeTime, 0, 1000);
+                            if (logIds!=null && logIds.size()>0) {
+                                XxlJobAdminConfig.getAdminConfig().getXxlJobLogDao().clearLog(logIds);
                             }
-                        } while (logIds != null && logIds.size() > 0);
+                        } while (logIds!=null && logIds.size()>0);
 
                         // update clean time
                         lastCleanLogTime = System.currentTimeMillis();
@@ -159,9 +126,11 @@ public class JobLogReportHelper {
                             logger.error(e.getMessage(), e);
                         }
                     }
+
                 }
 
                 logger.info(">>>>>>>>>>> xxl-job, job log report thread stop");
+
             }
         });
         logrThread.setDaemon(true);
@@ -169,7 +138,7 @@ public class JobLogReportHelper {
         logrThread.start();
     }
 
-    public void toStop() {
+    public void toStop(){
         toStop = true;
         // interrupt and wait
         logrThread.interrupt();
@@ -179,4 +148,5 @@ public class JobLogReportHelper {
             logger.error(e.getMessage(), e);
         }
     }
+
 }

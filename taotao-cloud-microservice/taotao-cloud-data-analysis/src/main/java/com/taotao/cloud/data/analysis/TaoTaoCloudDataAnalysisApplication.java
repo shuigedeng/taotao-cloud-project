@@ -17,6 +17,7 @@
 package com.taotao.cloud.data.analysis;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -31,8 +32,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TaoTaoCloudDataAnalysisApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-data-analysis");
+		new StartupSpringApplication(TaoTaoCloudDataAnalysisApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-data-analysis")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
 
-        SpringApplication.run(TaoTaoCloudDataAnalysisApplication.class, args);
-    }
+	}
 }

@@ -1,58 +1,42 @@
-/*
- * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.schedule;
+package com.taotao.cloud.xxljob.core.old;//package com.taotao.cloud.xxljob.core.schedule;
 //
-// import com.xxl.job.admin.core.conf.XxlJobAdminConfig;
-// import com.xxl.job.admin.core.jobbean.RemoteHttpJobBean;
-// import com.xxl.job.admin.core.model.XxlJobInfo;
-// import com.xxl.job.admin.core.thread.JobFailMonitorHelper;
-// import com.xxl.job.admin.core.thread.JobRegistryMonitorHelper;
-// import com.xxl.job.admin.core.thread.JobTriggerPoolHelper;
-// import com.xxl.job.admin.core.util.I18nUtil;
-// import com.xxl.job.core.biz.AdminBiz;
-// import com.xxl.job.core.biz.ExecutorBiz;
-// import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
-// import com.xxl.rpc.remoting.invoker.XxlRpcInvokerFactory;
-// import com.xxl.rpc.remoting.invoker.call.CallType;
-// import com.xxl.rpc.remoting.invoker.reference.XxlRpcReferenceBean;
-// import com.xxl.rpc.remoting.invoker.route.LoadBalance;
-// import com.xxl.rpc.remoting.net.NetEnum;
-// import com.xxl.rpc.remoting.net.impl.servlet.server.ServletServerHandler;
-// import com.xxl.rpc.remoting.provider.XxlRpcProviderFactory;
-// import com.xxl.rpc.serialize.Serializer;
-// import org.quartz.*;
-// import org.quartz.Trigger.TriggerState;
-// import org.quartz.impl.triggers.CronTriggerImpl;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
-// import org.springframework.util.Assert;
+//import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
+//import com.taotao.cloud.xxljob.core.jobbean.RemoteHttpJobBean;
+//import com.taotao.cloud.xxljob.core.model.XxlJobInfo;
+//import com.taotao.cloud.xxljob.core.thread.JobFailMonitorHelper;
+//import com.taotao.cloud.xxljob.core.thread.JobRegistryMonitorHelper;
+//import com.taotao.cloud.xxljob.core.thread.JobTriggerPoolHelper;
+//import com.taotao.cloud.xxljob.core.util.I18nUtil;
+//import com.xxl.job.core.biz.AdminBiz;
+//import com.xxl.job.core.biz.ExecutorBiz;
+//import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
+//import com.xxl.rpc.remoting.invoker.XxlRpcInvokerFactory;
+//import com.xxl.rpc.remoting.invoker.call.CallType;
+//import com.xxl.rpc.remoting.invoker.reference.XxlRpcReferenceBean;
+//import com.xxl.rpc.remoting.invoker.route.LoadBalance;
+//import com.xxl.rpc.remoting.net.NetEnum;
+//import com.xxl.rpc.remoting.net.impl.servlet.server.ServletServerHandler;
+//import com.xxl.rpc.remoting.provider.XxlRpcProviderFactory;
+//import com.xxl.rpc.serialize.Serializer;
+//import org.quartz.*;
+//import org.quartz.Trigger.TriggerState;
+//import org.quartz.impl.triggers.CronTriggerImpl;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.springframework.util.Assert;
 //
-// import jakarta.servlet.ServletException;
-// import jakarta.servlet.http.HttpServletRequest;
-// import jakarta.servlet.http.HttpServletResponse;
-// import java.io.IOException;
-// import java.util.Date;
-// import java.util.concurrent.ConcurrentHashMap;
+//import javax.servlet.ServletException;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import java.io.IOException;
+//import java.util.Date;
+//import java.util.concurrent.ConcurrentHashMap;
 //
-/// **
+///**
 // * base quartz scheduler util
 // * @author xuxueli 2015-12-19 16:13:53
 // */
-// public final class XxlJobDynamicScheduler {
+//public final class XxlJobDynamicScheduler {
 //    private static final Logger logger = LoggerFactory.getLogger(XxlJobDynamicScheduler_old.class);
 //
 //    // ---------------------- param ----------------------
@@ -124,8 +108,7 @@ package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.sche
 //                null);
 //
 //        // add services
-//        xxlRpcProviderFactory.addService(AdminBiz.class.getName(), null,
-// XxlJobAdminConfig.getAdminConfig().getAdminBiz());
+//        xxlRpcProviderFactory.addService(AdminBiz.class.getName(), null, XxlJobAdminConfig.getAdminConfig().getAdminBiz());
 //
 //        // servlet handler
 //        servletServerHandler = new ServletServerHandler(xxlRpcProviderFactory);
@@ -133,15 +116,13 @@ package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.sche
 //    private void stopRpcProvider() throws Exception {
 //        XxlRpcInvokerFactory.getInstance().stop();
 //    }
-//    public static void invokeAdminService(HttpServletRequest request, HttpServletResponse response) throws
-// IOException, ServletException {
+//    public static void invokeAdminService(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 //        servletServerHandler.handle(null, request, response);
 //    }
 //
 //
 //    // ---------------------- executor-client ----------------------
-//    private static ConcurrentHashMap<String, ExecutorBiz> executorBizRepository = new ConcurrentHashMap<String,
-// ExecutorBiz>();
+//    private static ConcurrentHashMap<String, ExecutorBiz> executorBizRepository = new ConcurrentHashMap<String, ExecutorBiz>();
 //    public static ExecutorBiz getExecutorBiz(String address) throws Exception {
 //        // valid
 //        if (address==null || address.trim().length()==0) {
@@ -231,11 +212,8 @@ package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.sche
 //        }
 //
 //        // 3、corn trigger
-//        CronScheduleBuilder cronScheduleBuilder =
-// CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();   //
-// withMisfireHandlingInstructionDoNothing 忽略掉调度终止过程中忽略的调度
-//        CronTrigger cronTrigger =
-// TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(cronScheduleBuilder).build();
+//        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();   // withMisfireHandlingInstructionDoNothing 忽略掉调度终止过程中忽略的调度
+//        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withSchedule(cronScheduleBuilder).build();
 //
 //        // 4、job detail
 //		Class<? extends Job> jobClass_ = RemoteHttpJobBean.class;   // Class.forName(jobInfo.getJobClass());
@@ -250,8 +228,7 @@ package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.sche
 //        // 5、schedule job
 //        Date date = scheduler.scheduleJob(jobDetail, cronTrigger);
 //
-//        logger.info(">>>>>>>>>>> addJob success(quartz), jobDetail:{}, cronTrigger:{}, date:{}", jobDetail,
-// cronTrigger, date);
+//        logger.info(">>>>>>>>>>> addJob success(quartz), jobDetail:{}, cronTrigger:{}, date:{}", jobDetail, cronTrigger, date);
 //        return true;
 //    }
 //
@@ -305,10 +282,8 @@ package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.sche
 //        }
 //
 //        // 4、new cron trigger
-//        CronScheduleBuilder cronScheduleBuilder =
-// CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();
-//        oldTrigger =
-// oldTrigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(cronScheduleBuilder).build();
+//        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();
+//        oldTrigger = oldTrigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(cronScheduleBuilder).build();
 //
 //        // 5、rescheduleJob
 //        scheduler.rescheduleJob(triggerKey, oldTrigger);
@@ -435,4 +410,4 @@ package com.taotao.cloud.xxljob.core.old; // package com.xxl.job.admin.core.sche
 //        return jobList;
 //    }*/
 //
-// }
+//}

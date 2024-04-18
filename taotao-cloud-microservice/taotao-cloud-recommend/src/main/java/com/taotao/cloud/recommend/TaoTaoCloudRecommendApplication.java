@@ -18,6 +18,7 @@ package com.taotao.cloud.recommend;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.core.startup.StartupSpringApplication;
 import com.taotao.cloud.recommend.dto.ItemDTO;
 import com.taotao.cloud.recommend.service.Recommend;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
@@ -35,9 +36,12 @@ import org.springframework.boot.SpringApplication;
 public class TaoTaoCloudRecommendApplication {
 
     public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-recommend");
-
-        SpringApplication.run(TaoTaoCloudRecommendApplication.class, args);
+		new StartupSpringApplication(TaoTaoCloudRecommendApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-recommend")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
 
         LogUtils.info("------基于用户协同过滤推荐---------------下列电影");
         List<ItemDTO> itemList = Recommend.userCfRecommend(2);
