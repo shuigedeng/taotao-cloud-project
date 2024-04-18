@@ -53,7 +53,7 @@ jobs:
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: Gradle BootJar taotao-cloud-auth-biz
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3.3.0
         with:
           gradle-version: 8.7
           #arguments: bootBuildImage
@@ -87,7 +87,7 @@ jobs:
     #      github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
     #      native-image-job-reports: 'true'
     #  - name: Gradle BootJar taotao-cloud-monitor
-    #    uses: gradle/gradle-build-action@v2
+    #    uses: gradle/actions/setup-gradle@v3.3.0
     #    with:
     #      gradle-version: 7.6
     #      arguments: nativeBuild
