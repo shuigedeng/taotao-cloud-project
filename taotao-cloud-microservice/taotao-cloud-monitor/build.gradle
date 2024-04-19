@@ -1,4 +1,5 @@
 dependencies {
+    implementation "io.github.shuigedeng:taotao-cloud-starter-bootstrap"
     implementation "io.github.shuigedeng:taotao-cloud-starter-core"
     implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
@@ -6,6 +7,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
     implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-monitor"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-metrics"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mail"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
