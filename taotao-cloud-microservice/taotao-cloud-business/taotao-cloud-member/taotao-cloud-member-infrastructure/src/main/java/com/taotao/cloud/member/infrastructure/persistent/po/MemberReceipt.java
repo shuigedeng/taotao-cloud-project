@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.model.entity;
+package com.taotao.cloud.member.infrastructure.persistent.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;

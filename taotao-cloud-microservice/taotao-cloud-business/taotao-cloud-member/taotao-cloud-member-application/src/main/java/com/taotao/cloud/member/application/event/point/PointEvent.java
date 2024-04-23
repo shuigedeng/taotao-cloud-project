@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.event.point;
+package com.taotao.cloud.member.application.event.point;
 
 import org.springframework.context.ApplicationEvent;
 

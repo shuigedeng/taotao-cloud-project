@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.application.event.roketmq.handler.impl;
+package com.taotao.cloud.member.application.event.roketmq.handler.impl;
 
 import com.taotao.cloud.sys.application.event.roketmq.handler.MemberRegisterEventHandler;
 import org.springframework.stereotype.Service;

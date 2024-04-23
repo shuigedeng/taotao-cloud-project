@@ -17,6 +17,9 @@
 package com.taotao.cloud.open.platform;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.open.platform.openapiclient.FileApiTest;
+import com.taotao.cloud.open.platform.openapiclient.UserApiTest;
+import com.taotao.cloud.open.platform.openapiclient.UserApiTest2;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

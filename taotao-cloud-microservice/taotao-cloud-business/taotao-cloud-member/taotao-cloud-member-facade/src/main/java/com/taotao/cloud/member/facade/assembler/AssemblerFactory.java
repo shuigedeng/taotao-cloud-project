@@ -1,6 +1,5 @@
 package com.taotao.cloud.member.facade.assembler;
 
-import com.taotao.cloud.member.adapter.assembler.Assembler;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -14,7 +13,7 @@ public class AssemblerFactory {
      * @param source    S对象
      * @param target    T对象
      */
-    public <S, T> void assemble(com.taotao.cloud.member.adapter.assembler.Assembler<S, T> assembler, S source, T target) {
+    public <S, T> void assemble(Assembler<S, T> assembler, S source, T target) {
         assembler.assemble(source, target);
     }
 

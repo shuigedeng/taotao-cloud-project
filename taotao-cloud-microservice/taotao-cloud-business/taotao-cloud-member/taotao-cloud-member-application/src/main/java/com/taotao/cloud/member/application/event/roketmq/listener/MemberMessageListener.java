@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.application.event.roketmq.listener;
+package com.taotao.cloud.member.application.event.roketmq.listener;
 
 import java.util.List;
 import org.apache.rocketmq.common.message.MessageExt;

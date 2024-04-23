@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.application.event.listener;
+package com.taotao.cloud.member.application.event.listener;
 
 public class DictCreateListener {}

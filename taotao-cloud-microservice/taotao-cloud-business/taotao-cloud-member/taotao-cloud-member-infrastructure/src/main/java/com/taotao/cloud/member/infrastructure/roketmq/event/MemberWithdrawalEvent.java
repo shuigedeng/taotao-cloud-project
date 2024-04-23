@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.roketmq.event;
+package com.taotao.cloud.member.infrastructure.roketmq.event;
 
 import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
 

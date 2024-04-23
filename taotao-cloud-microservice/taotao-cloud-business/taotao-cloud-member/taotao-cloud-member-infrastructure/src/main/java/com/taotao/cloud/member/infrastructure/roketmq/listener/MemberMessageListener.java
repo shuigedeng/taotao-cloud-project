@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.roketmq.listener;
+package com.taotao.cloud.member.infrastructure.roketmq.listener;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.sys.model.dto.MemberPointMessageDTO;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.mapper;
+package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberRecharge;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 会员签到数据处理层 */

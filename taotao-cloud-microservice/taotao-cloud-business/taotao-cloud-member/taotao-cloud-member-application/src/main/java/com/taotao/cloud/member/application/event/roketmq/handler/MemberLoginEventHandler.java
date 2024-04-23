@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.sys.application.event.roketmq.handler;
+package com.taotao.cloud.member.application.event.roketmq.handler;
 
 
 /** 会员登录消息 */

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.mapper;
+package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPointsHistory;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Select;
 

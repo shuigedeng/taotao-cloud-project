@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.mapper;
+package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.member.biz.model.entity.MemberNoticeLog;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 会员消息数据处理层 */

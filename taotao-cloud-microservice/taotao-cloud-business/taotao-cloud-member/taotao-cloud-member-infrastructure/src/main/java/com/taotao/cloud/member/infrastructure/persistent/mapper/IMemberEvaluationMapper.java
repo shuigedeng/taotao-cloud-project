@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.biz.mapper;
+package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.sys.model.vo.StoreRatingVO;
-import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluation;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import java.util.Map;
