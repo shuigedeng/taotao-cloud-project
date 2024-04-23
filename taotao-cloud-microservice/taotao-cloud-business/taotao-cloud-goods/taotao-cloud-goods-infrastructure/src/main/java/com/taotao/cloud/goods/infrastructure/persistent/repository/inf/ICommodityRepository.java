@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.repository.inf;
+package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.biz.model.entity.Commodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.Commodity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICommodityRepository extends JpaRepository<Commodity, Long> {}

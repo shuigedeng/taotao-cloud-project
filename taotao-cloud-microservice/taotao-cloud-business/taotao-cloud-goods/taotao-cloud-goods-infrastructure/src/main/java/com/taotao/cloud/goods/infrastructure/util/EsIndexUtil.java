@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.util;
+package com.taotao.cloud.goods.infrastructure.util;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;

@@ -18,8 +18,6 @@ package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
-import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
 import java.util.List;
 
 /**

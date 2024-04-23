@@ -18,10 +18,6 @@ package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
-import com.taotao.cloud.member.sys.model.dto.MemberEvaluationDTO;
-import com.taotao.cloud.member.sys.model.page.EvaluationPageQuery;
-import com.taotao.cloud.member.sys.model.vo.EvaluationNumberVO;
 
 /**
  * 会员商品评价业务层

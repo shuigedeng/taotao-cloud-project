@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.application.service.impl;
 
-import com.taotao.cloud.member.biz.service.business.IMemberPlatformService;
+import com.taotao.cloud.member.application.service.IMemberPlatformService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,9 +27,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberPlatformServiceImpl implements IMemberPlatformService {
-    // private final MemberPlatformSuperRepository memberPlatformRepository;
-    //
-    // public MemberPlatformServiceImpl(MemberPlatformSuperRepository memberPlatformRepository) {
-    // 	this.memberPlatformRepository = memberPlatformRepository;
-    // }
+	// private final MemberPlatformSuperRepository memberPlatformRepository;
+	//
+	// public MemberPlatformServiceImpl(MemberPlatformSuperRepository memberPlatformRepository) {
+	// 	this.memberPlatformRepository = memberPlatformRepository;
+	// }
 }

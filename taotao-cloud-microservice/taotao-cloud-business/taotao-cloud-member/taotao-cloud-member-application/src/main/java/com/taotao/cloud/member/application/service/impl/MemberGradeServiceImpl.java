@@ -19,9 +19,9 @@ package com.taotao.cloud.member.application.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.member.biz.mapper.IMemberGradeMapper;
-import com.taotao.cloud.member.biz.model.entity.MemberGrade;
-import com.taotao.cloud.member.biz.service.business.IMemberGradeService;
+import com.taotao.cloud.member.application.service.IMemberGradeService;
+import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberGradeMapper;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberGrade;
 import org.springframework.stereotype.Service;
 
 /**

@@ -20,14 +20,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.api.enums.SendTypeEnum;
-import com.taotao.cloud.member.biz.mapper.IMemberNoticeSenterMapper;
-import com.taotao.cloud.member.biz.model.entity.Member;
-import com.taotao.cloud.member.biz.model.entity.MemberNotice;
-import com.taotao.cloud.member.biz.model.entity.MemberNoticeSenter;
-import com.taotao.cloud.member.biz.service.business.IMemberNoticeSenterService;
-import com.taotao.cloud.member.biz.service.business.IMemberNoticeService;
-import com.taotao.cloud.member.biz.service.business.IMemberService;
+import com.taotao.cloud.member.application.service.IMemberNoticeSenterService;
+import com.taotao.cloud.member.application.service.IMemberNoticeService;
+import com.taotao.cloud.member.application.service.IMemberService;
+import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberNoticeSenterMapper;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNotice;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeSenter;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,63 +33,72 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-/** 会员消息业务层实现 */
+/**
+ * 会员消息业务层实现
+ */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public class MemberNoticeSenterServiceImpl extends ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenter>
-        implements IMemberNoticeSenterService {
+public class MemberNoticeSenterServiceImpl extends
+	ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenter>
+	implements IMemberNoticeSenterService {
 
-    /** 会员 */
-    @Autowired
-    private IMemberService memberService;
-    /** 会员站内信 */
-    @Autowired
-    private IMemberNoticeService memberNoticeService;
+	/**
+	 * 会员
+	 */
+	@Autowired
+	private IMemberService memberService;
+	/**
+	 * 会员站内信
+	 */
+	@Autowired
+	private IMemberNoticeService memberNoticeService;
 
-    @Override
-    public boolean customSave(MemberNoticeSenter memberNoticeSenter) {
-        if (this.saveOrUpdate(memberNoticeSenter)) {
-            List<MemberNotice> memberNotices = new ArrayList<>();
-            // 如果是选中会员发送
-            if (memberNoticeSenter.getSendType().equals(SendTypeEnum.SELECT.name())) {
-                // 判定消息是否有效
-                if (!StringUtils.isEmpty(memberNoticeSenter.getMemberIds())) {
-                    String[] ids = memberNoticeSenter.getMemberIds().split(",");
-                    MemberNotice memberNotice;
-                    for (String id : ids) {
-                        memberNotice = new MemberNotice();
-                        memberNotice.setRead(false);
-                        memberNotice.setContent(memberNoticeSenter.getContent());
-                        memberNotice.setMemberId(Long.valueOf(id));
-                        memberNotice.setTitle(memberNoticeSenter.getTitle());
-                        memberNotices.add(memberNotice);
-                    }
-                } else {
-                    return true;
-                }
-            } // 否则是全部会员发送
-            else {
-                List<Member> members = memberService.list();
-                MemberNotice memberNotice;
-                for (Member member : members) {
-                    memberNotice = new MemberNotice();
-                    memberNotice.setRead(false);
-                    memberNotice.setContent(memberNoticeSenter.getContent());
-                    memberNotice.setMemberId(member.getId());
-                    memberNotice.setTitle(memberNoticeSenter.getTitle());
-                    memberNotices.add(memberNotice);
-                }
-            }
-            // 防止没有会员导致报错
-            if (memberNotices.size() > 0) {
-                // 批量保存
-                if (memberNoticeService.saveBatch(memberNotices)) {
-                    return true;
-                } else {
-                    throw new BusinessException(ResultEnum.NOTICE_SEND_ERROR);
-                }
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean customSave(MemberNoticeSenter memberNoticeSenter) {
+		if (this.saveOrUpdate(memberNoticeSenter)) {
+			List<MemberNotice> memberNotices = new ArrayList<>();
+			// 如果是选中会员发送
+			if (memberNoticeSenter.getSendType().equals(SendTypeEnum.SELECT.name())) {
+				// 判定消息是否有效
+				if (!StringUtils.isEmpty(memberNoticeSenter.getMemberIds())) {
+					String[] ids = memberNoticeSenter.getMemberIds().split(",");
+					MemberNotice memberNotice;
+					for (String id : ids) {
+						memberNotice = new MemberNotice();
+						memberNotice.setRead(false);
+						memberNotice.setContent(memberNoticeSenter.getContent());
+						memberNotice.setMemberId(Long.valueOf(id));
+						memberNotice.setTitle(memberNoticeSenter.getTitle());
+						memberNotices.add(memberNotice);
+					}
+				}
+				else {
+					return true;
+				}
+			} // 否则是全部会员发送
+			else {
+				List<Member> members = memberService.list();
+				MemberNotice memberNotice;
+				for (Member member : members) {
+					memberNotice = new MemberNotice();
+					memberNotice.setRead(false);
+					memberNotice.setContent(memberNoticeSenter.getContent());
+					memberNotice.setMemberId(member.getId());
+					memberNotice.setTitle(memberNoticeSenter.getTitle());
+					memberNotices.add(memberNotice);
+				}
+			}
+			// 防止没有会员导致报错
+			if (memberNotices.size() > 0) {
+				// 批量保存
+				if (memberNoticeService.saveBatch(memberNotices)) {
+					return true;
+				}
+				else {
+					throw new BusinessException(ResultEnum.NOTICE_SEND_ERROR);
+				}
+			}
+		}
+		return true;
+	}
 }

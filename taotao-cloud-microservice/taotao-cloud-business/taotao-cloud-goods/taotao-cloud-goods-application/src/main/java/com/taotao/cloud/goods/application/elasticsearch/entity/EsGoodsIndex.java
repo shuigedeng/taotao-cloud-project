@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch.entity;
+package com.taotao.cloud.goods.application.elasticsearch.entity;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;

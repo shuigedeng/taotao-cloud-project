@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.repository.inf;
+package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.biz.model.entity.CustomWords;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWords;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICustomWordsRepository extends JpaRepository<CustomWords, Long> {}

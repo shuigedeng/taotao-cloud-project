@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.repository.inf;
+package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.biz.model.entity.Category;
+import com.taotao.cloud.goods.infrastructure.persistent.po.Category;
 import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 
 public interface ICategoryRepository extends BaseInterfaceSuperRepository<Category, Long> {}

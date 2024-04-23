@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.application.converter;
 
-import com.taotao.cloud.member.facade.model.vo.MemberAddressVO;
+import com.taotao.cloud.member.application.command.address.dto.clientobject.MemberAddressCO;
 import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddress;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -37,5 +37,5 @@ public interface MemberAddressConvert {
 	 */
 	MemberAddressConvert INSTANCE = Mappers.getMapper(MemberAddressConvert.class);
 
-	MemberAddressVO convert(MemberAddress memberAddress);
+	MemberAddressCO convert(MemberAddress memberAddress);
 }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.mapper;
+package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsUnit;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**

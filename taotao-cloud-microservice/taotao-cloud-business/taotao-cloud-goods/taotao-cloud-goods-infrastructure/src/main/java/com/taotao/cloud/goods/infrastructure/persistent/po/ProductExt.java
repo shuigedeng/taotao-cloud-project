@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.model.entity; // package com.taotao.cloud.goods.biz.entity;
+package com.taotao.cloud.goods.infrastructure.persistent.po; // package com.taotao.cloud.goods.biz.entity;
 //
 //
 // import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;

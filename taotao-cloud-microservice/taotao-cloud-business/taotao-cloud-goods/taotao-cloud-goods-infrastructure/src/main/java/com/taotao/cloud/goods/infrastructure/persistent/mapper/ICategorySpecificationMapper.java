@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.mapper;
+package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
-import com.taotao.cloud.goods.biz.model.entity.Specification;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecification;
+import com.taotao.cloud.goods.infrastructure.persistent.po.Specification;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

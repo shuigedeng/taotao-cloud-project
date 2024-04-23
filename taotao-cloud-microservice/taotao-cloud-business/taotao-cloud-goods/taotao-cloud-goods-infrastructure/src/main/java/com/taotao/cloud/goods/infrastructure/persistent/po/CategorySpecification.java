@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.model.entity;
+package com.taotao.cloud.goods.infrastructure.persistent.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.web.base.entity.SuperEntity;

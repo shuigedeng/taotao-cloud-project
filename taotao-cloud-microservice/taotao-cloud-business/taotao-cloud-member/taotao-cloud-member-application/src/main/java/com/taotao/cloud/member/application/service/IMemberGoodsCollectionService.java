@@ -19,8 +19,6 @@ package com.taotao.cloud.member.application.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;
-import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
 import java.util.List;
 
 /**

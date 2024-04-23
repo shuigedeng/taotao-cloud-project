@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.util;
+package com.taotao.cloud.goods.infrastructure.util;
 
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
 import com.taotao.cloud.goods.biz.model.entity.Studio;

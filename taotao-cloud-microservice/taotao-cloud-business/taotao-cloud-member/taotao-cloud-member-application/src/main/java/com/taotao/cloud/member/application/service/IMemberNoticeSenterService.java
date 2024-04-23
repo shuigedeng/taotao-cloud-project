@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.biz.model.entity.MemberNoticeSenter;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeSenter;
 
 /** 会员消息业务层 */
 public interface IMemberNoticeSenterService extends IService<MemberNoticeSenter> {

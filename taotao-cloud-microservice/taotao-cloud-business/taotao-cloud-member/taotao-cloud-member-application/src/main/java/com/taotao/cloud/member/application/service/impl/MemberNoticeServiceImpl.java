@@ -17,9 +17,9 @@
 package com.taotao.cloud.member.application.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.member.biz.mapper.IMemberNoticeMapper;
-import com.taotao.cloud.member.biz.model.entity.MemberNotice;
-import com.taotao.cloud.member.biz.service.business.IMemberNoticeService;
+import com.taotao.cloud.member.application.service.IMemberNoticeService;
+import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberNoticeMapper;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNotice;
 import org.springframework.stereotype.Service;
 
 /**

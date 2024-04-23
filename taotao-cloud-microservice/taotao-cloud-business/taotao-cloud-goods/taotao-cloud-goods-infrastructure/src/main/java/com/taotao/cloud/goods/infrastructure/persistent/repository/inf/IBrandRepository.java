@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.repository.inf;
+package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.biz.model.entity.Brand;
+import com.taotao.cloud.goods.infrastructure.persistent.po.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IBrandRepository extends JpaRepository<Brand, Long> {}

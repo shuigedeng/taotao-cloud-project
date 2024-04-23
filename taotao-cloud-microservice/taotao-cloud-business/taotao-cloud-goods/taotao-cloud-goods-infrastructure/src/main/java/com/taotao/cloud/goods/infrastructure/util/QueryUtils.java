@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.infratructure.util;
+package com.taotao.cloud.goods.infrastructure.util;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import java.util.Objects;
 
 /**

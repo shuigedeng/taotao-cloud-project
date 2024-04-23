@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.repository.cls;
+package com.taotao.cloud.goods.infrastructure.persistent.repository.cls;
 
-import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

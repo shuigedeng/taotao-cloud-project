@@ -21,9 +21,10 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.member.application.command.address.dto.clientobject.MemberAddressCO;
+import com.taotao.cloud.member.application.converter.MemberAddressConvert;
 import com.taotao.cloud.member.application.service.IMemberAddressService;
-import com.taotao.cloud.member.facade.model.convert.MemberAddressConvert;
-import com.taotao.cloud.member.facade.model.vo.MemberAddressVO;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddress;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,7 +64,7 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
-	public Result<PageResult<MemberAddressVO>> page(@Validated PageQuery page) {
+	public Result<PageResult<MemberAddressCO>> page(@Validated PageQuery page) {
 		IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page,
 			SecurityUtils.getUserId());
 		return Result.success(
@@ -74,7 +75,7 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/{id}")
-	public Result<MemberAddressVO> getShippingAddress(
+	public Result<MemberAddressCO> getShippingAddress(
 		@Parameter(description = "会员地址ID", required = true)
 		@NotNull(message = "id不能为空")
 		@PathVariable(value = "id") Long id) {
@@ -86,7 +87,7 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/default")
-	public Result<MemberAddressVO> getDefaultShippingAddress() {
+	public Result<MemberAddressCO> getDefaultShippingAddress() {
 		MemberAddress memberAddress = memberAddressService.getDefaultMemberAddress();
 		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
 	}

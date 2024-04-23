@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.repository.inf;
+package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IGoodsSkuRepository extends JpaRepository<GoodsSku, Long> {}

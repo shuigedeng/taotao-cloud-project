@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch.pojo;
+package com.taotao.cloud.goods.application.elasticsearch.pojo;
 
 /**
  * elasticsearch 索引后缀

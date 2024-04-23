@@ -18,9 +18,7 @@ package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.biz.model.entity.MemberReceipt;
-import com.taotao.cloud.member.sys.model.page.MemberReceiptPageQuery;
-import com.taotao.cloud.member.sys.model.vo.MemberReceiptAddVO;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberReceipt;
 
 /** 会员发票业务层 */
 public interface IMemberReceiptService extends IService<MemberReceipt> {

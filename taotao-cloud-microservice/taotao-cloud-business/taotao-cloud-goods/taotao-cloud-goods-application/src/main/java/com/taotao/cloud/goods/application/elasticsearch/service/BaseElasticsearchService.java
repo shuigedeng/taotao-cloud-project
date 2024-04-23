@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch.service;
+package com.taotao.cloud.goods.application.elasticsearch.service;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.io.IOException;

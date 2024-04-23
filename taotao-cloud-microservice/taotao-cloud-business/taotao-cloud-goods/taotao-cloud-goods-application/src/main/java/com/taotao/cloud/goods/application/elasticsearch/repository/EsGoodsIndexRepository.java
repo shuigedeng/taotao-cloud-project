@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.elasticsearch.repository;
+package com.taotao.cloud.goods.application.elasticsearch.repository;
 
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
