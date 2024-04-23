@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.cls.trade;
+package com.taotao.cloud.order.infrastructure.persistent.repository.cls.trade;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.mapper.order;
+package com.taotao.cloud.order.infrastructure.persistent.mapper.order;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaint;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 订单投诉数据处理层 */

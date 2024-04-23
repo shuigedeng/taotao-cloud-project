@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.cls.purchase;
+package com.taotao.cloud.order.infrastructure.persistent.repository.cls.purchase;
 
-import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrder;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 

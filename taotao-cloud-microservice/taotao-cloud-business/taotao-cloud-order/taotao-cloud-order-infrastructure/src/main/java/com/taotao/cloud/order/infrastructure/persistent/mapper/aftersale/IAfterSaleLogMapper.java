@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.mapper.aftersale;
+package com.taotao.cloud.order.infrastructure.persistent.mapper.aftersale;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 

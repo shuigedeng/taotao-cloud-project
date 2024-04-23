@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.inf.order;
+package com.taotao.cloud.order.infrastructure.persistent.repository.inf.order;
 
-import com.taotao.cloud.order.biz.model.entity.order.Receipt;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.Receipt;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /** 发票数据处理层 */

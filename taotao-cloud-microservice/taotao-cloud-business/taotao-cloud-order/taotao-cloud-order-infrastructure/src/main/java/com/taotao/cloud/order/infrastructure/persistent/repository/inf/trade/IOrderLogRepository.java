@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.inf.trade;
+package com.taotao.cloud.order.infrastructure.persistent.repository.inf.trade;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /** 订单日志数据处理层 */

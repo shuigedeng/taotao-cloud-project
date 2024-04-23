@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.mapper.order;
+package com.taotao.cloud.order.infrastructure.persistent.mapper.order;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
 import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
-import com.taotao.cloud.order.biz.model.entity.order.Receipt;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.Receipt;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

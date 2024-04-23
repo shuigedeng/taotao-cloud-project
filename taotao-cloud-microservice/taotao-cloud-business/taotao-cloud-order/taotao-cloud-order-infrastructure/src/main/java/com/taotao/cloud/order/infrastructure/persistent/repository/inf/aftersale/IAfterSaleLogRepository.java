@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.inf.aftersale;
+package com.taotao.cloud.order.infrastructure.persistent.repository.inf.aftersale;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

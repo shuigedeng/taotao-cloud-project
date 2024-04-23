@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.model.entity.cart;
+package com.taotao.cloud.order.infrastructure.persistent.po.cart;
 
 import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
 import jakarta.persistence.Column;

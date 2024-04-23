@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.inf;
+package com.taotao.cloud.order.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderItemBack;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemBack;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

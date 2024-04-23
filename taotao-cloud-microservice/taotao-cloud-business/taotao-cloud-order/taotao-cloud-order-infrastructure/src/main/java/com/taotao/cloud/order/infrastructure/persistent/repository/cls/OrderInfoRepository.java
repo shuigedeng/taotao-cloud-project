@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.cls;
+package com.taotao.cloud.order.infrastructure.persistent.repository.cls;
 
 import com.taotao.cloud.order.biz.entity.QOrderInfo;
-import com.taotao.cloud.order.biz.model.entity.order.OrderInfo;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderInfo;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

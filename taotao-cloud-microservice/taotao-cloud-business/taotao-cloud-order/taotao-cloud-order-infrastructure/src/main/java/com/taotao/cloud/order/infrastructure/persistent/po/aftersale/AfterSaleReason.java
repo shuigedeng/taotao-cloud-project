@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.model.entity.aftersale;
+package com.taotao.cloud.order.infrastructure.persistent.po.aftersale;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;

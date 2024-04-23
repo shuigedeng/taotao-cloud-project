@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.repository.cls.aftersale;
+package com.taotao.cloud.order.infrastructure.persistent.repository.cls.aftersale;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLog;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 

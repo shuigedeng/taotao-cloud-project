@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.model.entity.order;
+package com.taotao.cloud.order.infrastructure.persistent.po.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;

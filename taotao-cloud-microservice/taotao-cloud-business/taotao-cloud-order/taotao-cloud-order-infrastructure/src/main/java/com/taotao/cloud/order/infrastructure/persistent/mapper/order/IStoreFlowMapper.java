@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.mapper.order;
+package com.taotao.cloud.order.infrastructure.persistent.mapper.order;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlow;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;

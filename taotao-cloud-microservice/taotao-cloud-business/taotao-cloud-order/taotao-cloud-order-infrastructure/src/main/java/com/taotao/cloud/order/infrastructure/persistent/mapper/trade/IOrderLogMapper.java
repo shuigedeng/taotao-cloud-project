@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.mapper.trade;
+package com.taotao.cloud.order.infrastructure.persistent.mapper.trade;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 订单日志数据处理层 */

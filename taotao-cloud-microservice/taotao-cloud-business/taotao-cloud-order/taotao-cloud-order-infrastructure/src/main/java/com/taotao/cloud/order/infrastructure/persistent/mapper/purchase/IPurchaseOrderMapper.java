@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.mapper.purchase;
+package com.taotao.cloud.order.infrastructure.persistent.mapper.purchase;
 
-import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrder;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 采购单数据处理层 */
