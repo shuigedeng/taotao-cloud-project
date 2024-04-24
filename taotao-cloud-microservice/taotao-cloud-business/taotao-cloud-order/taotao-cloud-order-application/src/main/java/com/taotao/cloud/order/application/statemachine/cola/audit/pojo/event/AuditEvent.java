@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.event;
+package com.taotao.cloud.order.application.statemachine.cola.audit.pojo.event;
 
 import java.util.EnumSet;
 import java.util.Map;

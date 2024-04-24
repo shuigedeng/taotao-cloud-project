@@ -17,8 +17,7 @@
 package com.taotao.cloud.order.application.service.order.check.handler;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.biz.service.business.order.check.ErrorCode;
-import com.taotao.cloud.order.biz.service.business.order.check.ProductVO;
+import com.taotao.cloud.order.application.service.order.check.ProductVO;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
 

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.utils;
 
-import com.taotao.cloud.auth.common.execption.IllegalParameterExtensionLoginException;
+import com.taotao.cloud.auth.infrastructure.execption.IllegalParameterExtensionLoginException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;

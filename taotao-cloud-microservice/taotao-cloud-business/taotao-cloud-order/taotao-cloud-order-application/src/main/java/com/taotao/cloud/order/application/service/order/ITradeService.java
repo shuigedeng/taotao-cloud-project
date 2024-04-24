@@ -17,8 +17,7 @@
 package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.biz.model.entity.order.Trade;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.Trade;
 
 /**
  * 交易业务层

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream;
+package com.taotao.cloud.order.application.stream;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import java.util.function.Consumer;

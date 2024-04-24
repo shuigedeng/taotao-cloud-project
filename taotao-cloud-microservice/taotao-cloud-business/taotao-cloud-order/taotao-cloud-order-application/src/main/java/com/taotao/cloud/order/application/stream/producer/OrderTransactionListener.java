@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.producer;
+package com.taotao.cloud.order.application.stream.producer;
 
 import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;

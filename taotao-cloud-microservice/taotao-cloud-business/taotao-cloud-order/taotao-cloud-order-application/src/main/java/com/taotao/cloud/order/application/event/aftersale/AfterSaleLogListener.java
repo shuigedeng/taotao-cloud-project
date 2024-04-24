@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.event.aftersale;
+package com.taotao.cloud.order.application.event.aftersale;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
-import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleLogService;
+import com.taotao.cloud.order.application.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.application.service.business.aftersale.IAfterSaleLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;

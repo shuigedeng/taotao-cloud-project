@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.aftersale;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLog;
 import java.util.List;
 
 /**

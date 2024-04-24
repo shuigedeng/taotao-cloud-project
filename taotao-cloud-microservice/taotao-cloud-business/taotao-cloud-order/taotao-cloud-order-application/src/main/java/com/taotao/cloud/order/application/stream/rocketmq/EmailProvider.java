@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.rocketmq;
+package com.taotao.cloud.order.application.stream.rocketmq;
 
 import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSource;
 import org.springframework.beans.factory.annotation.Autowired;

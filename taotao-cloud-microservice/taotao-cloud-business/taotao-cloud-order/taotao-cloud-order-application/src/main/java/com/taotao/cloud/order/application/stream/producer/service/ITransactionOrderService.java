@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.producer.service;
+package com.taotao.cloud.order.application.stream.producer.service;
 
 /** 订单事务消息 */
 public interface ITransactionOrderService {

@@ -16,14 +16,8 @@
 
 package com.taotao.cloud.order.application.service.cart.render.impl;
 
-import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
-import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.sys.model.dto.order.PriceDetailDTO;
-import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;
-import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.service.business.cart.render.ICartRenderStep;
-import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
+import com.taotao.cloud.order.application.service.cart.render.ICartRenderStep;
+import de.danielbechler.diff.category.CategoryService;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.AllArgsConstructor;

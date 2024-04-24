@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.producer.service.impl;
+package com.taotao.cloud.order.application.stream.producer.service.impl;
 
 import com.taotao.cloud.mq.pulsar.constant.MessageConstant;
-import com.taotao.cloud.order.biz.stream.producer.service.ISmsService;
+import com.taotao.cloud.order.application.stream.producer.service.ISmsService;
 import lombok.AllArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;

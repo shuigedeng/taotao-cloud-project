@@ -1,12 +1,12 @@
-package com.taotao.cloud.order.biz.statemachine.cola.order.config;
+package com.taotao.cloud.order.application.statemachine.cola.order.config;
 
 import com.alibaba.cola.statemachine.StateMachine;
 import com.alibaba.cola.statemachine.builder.StateMachineBuilder;
 import com.alibaba.cola.statemachine.builder.StateMachineBuilderFactory;
-import com.taotao.cloud.order.biz.statemachine.cola.order.entity.Order;
-import com.taotao.cloud.order.biz.statemachine.cola.order.enums.OrderEvent;
-import com.taotao.cloud.order.biz.statemachine.cola.order.enums.OrderStatus;
-import com.taotao.cloud.order.biz.statemachine.cola.service.OrderService;
+import com.taotao.cloud.order.application.statemachine.cola.order.entity.Order;
+import com.taotao.cloud.order.application.statemachine.cola.order.enums.OrderEvent;
+import com.taotao.cloud.order.application.statemachine.cola.order.enums.OrderStatus;
+import com.taotao.cloud.order.application.statemachine.cola.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

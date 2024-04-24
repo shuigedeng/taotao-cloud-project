@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.application.login.oauth2;
 
-import com.taotao.cloud.auth.application.service.impl.ClientDetailsService;
+import com.taotao.cloud.auth.application.service.ClientDetailsService;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import java.util.Collections;

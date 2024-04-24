@@ -19,8 +19,8 @@ package com.taotao.cloud.order.application.config.aop.aftersale;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.spel.SpelUtils;
-import com.taotao.cloud.order.biz.event.aftersale.AfterSaleLogEvent;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.application.event.aftersale.AfterSaleLogEvent;
+import com.taotao.cloud.order.application.model.entity.aftersale.AfterSaleLog;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +50,7 @@ public class AfterSaleOperationAspect {
 
     @AfterReturning(
             returning = "rvt",
-            pointcut = "@annotation(com.taotao.cloud.order.biz.aop.aftersale.AfterSaleLogPoint)")
+            pointcut = "@annotation(com.taotao.cloud.order.application.aop.aftersale.AfterSaleLogPoint)")
     public void afterReturning(JoinPoint joinPoint, Object rvt) {
         try {
             SecurityUser securityUser = SecurityUtils.getCurrentUser();

@@ -20,9 +20,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
-import com.taotao.cloud.order.biz.service.business.order.IReceiptService;
-import com.taotao.cloud.order.sys.model.dto.order.OrderReceiptDTO;
-import com.taotao.cloud.order.sys.model.page.order.ReceiptPageQuery;
+import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
+import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
+import com.taotao.cloud.order.application.service.order.IReceiptService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,14 +47,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/manager/receipt")
 public class ReceiptController {
 
-    private final IReceiptService receiptService;
+	private final IReceiptService receiptService;
 
-    @Operation(summary = "获取发票分页信息", description = "获取发票分页信息")
-    @RequestLogger
-    @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping("/tree")
-    public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery receiptPageQuery) {
-        IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(receiptPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
-    }
+	@Operation(summary = "获取发票分页信息", description = "获取发票分页信息")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping("/tree")
+	public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery receiptPageQuery) {
+		IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(receiptPageQuery);
+		return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
+	}
 }

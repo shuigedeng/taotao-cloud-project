@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.roketmq.event.impl;
+package com.taotao.cloud.order.infrastructure.roketmq.event.impl;
 
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
-import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.infrastructure.roketmq.event.TradeEvent;
+import com.taotao.cloud.order.infrastructure.service.business.order.ITradeService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;

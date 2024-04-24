@@ -31,7 +31,7 @@ import com.taotao.cloud.auth.application.login.oauth2.password.OAuth2ResourceOwn
 import com.taotao.cloud.auth.application.login.oauth2.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.taotao.cloud.auth.application.login.oauth2.social.OAuth2SocialCredentialsAuthenticationConverter;
 import com.taotao.cloud.auth.application.login.oauth2.social.OAuth2SocialCredentialsAuthenticationProvider;
-import com.taotao.cloud.auth.application.service.impl.ClientDetailsService;
+import com.taotao.cloud.auth.application.service.ClientDetailsService;
 import com.taotao.cloud.auth.infrastructure.oauth2.oidc.TtcOidcUserInfoMapper;
 import com.taotao.cloud.auth.infrastructure.oauth2.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;

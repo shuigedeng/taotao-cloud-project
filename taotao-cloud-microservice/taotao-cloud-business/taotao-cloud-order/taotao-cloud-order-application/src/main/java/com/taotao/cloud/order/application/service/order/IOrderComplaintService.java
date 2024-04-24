@@ -18,12 +18,12 @@ package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.sys.model.dto.order.OrderComplaintDTO;
-import com.taotao.cloud.order.sys.model.dto.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.sys.model.dto.order.StoreAppealDTO;
-import com.taotao.cloud.order.sys.model.page.order.OrderComplaintPageQuery;
-import com.taotao.cloud.order.sys.model.vo.order.OrderComplaintVO;
-import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
+import com.taotao.cloud.order.application.command.order.OrderComplaintDTO;
+import com.taotao.cloud.order.application.command.order.OrderComplaintOperationDTO;
+import com.taotao.cloud.order.application.command.order.OrderComplaintPageQuery;
+import com.taotao.cloud.order.application.command.order.OrderComplaintVO;
+import com.taotao.cloud.order.application.command.order.StoreAppealDTO;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaint;
 
 /**
  * 交易投诉业务层

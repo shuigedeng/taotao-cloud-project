@@ -35,7 +35,7 @@ import com.taotao.cloud.auth.application.login.form.sms.Oauth2FormSmsLoginHttpCo
 import com.taotao.cloud.auth.application.login.social.SocialDelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.application.login.social.SocialHttpConfigurer;
 import com.taotao.cloud.auth.application.service.OAuth2ApplicationService;
-import com.taotao.cloud.auth.application.service.impl.ClientDetailsService;
+import com.taotao.cloud.auth.application.service.ClientDetailsService;
 import com.taotao.cloud.auth.application.service.impl.Oauth2ClientDetailsService;
 import com.taotao.cloud.auth.application.service.impl.SecurityUserDetailsService;
 import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;

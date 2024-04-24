@@ -19,8 +19,6 @@ package com.taotao.cloud.order.application.service.cart.render.util;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

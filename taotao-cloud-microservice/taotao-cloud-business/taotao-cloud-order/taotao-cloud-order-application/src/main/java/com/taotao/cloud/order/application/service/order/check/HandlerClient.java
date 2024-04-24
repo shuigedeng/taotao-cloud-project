@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.order.check;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.biz.service.business.order.check.handler.AbstractCheckHandler;
+import com.taotao.cloud.order.application.service.order.check.handler.AbstractCheckHandler;
 
 /** 责任链模式之客户端 */
 public class HandlerClient {

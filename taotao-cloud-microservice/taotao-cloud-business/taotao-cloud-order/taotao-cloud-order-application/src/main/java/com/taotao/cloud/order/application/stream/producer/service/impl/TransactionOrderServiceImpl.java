@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.producer.service.impl;
+package com.taotao.cloud.order.application.stream.producer.service.impl;
 
-import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.stream.producer.service.ITransactionOrderService;
+import com.taotao.cloud.order.application.model.entity.order.Order;
+import com.taotao.cloud.order.application.stream.producer.service.ITransactionOrderService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;

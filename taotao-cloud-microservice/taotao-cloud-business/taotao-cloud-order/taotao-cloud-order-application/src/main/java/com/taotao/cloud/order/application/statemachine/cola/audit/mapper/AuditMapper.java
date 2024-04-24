@@ -1,7 +1,7 @@
-package com.taotao.cloud.order.biz.statemachine.cola.audit.mapper;
+package com.taotao.cloud.order.application.statemachine.cola.audit.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.domain.AuditDO;
+import com.taotao.cloud.order.application.statemachine.cola.audit.pojo.domain.AuditDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

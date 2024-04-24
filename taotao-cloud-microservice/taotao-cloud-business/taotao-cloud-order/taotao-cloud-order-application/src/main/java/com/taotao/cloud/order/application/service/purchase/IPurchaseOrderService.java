@@ -18,7 +18,7 @@ package com.taotao.cloud.order.application.service.purchase;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.biz.model.entity.purchase.PurchaseOrder;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrder;
 
 /**
  * 采购单业务层

@@ -26,25 +26,11 @@ import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
-import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
-import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.sys.model.page.distribution.DistributionPageQuery;
-import com.taotao.cloud.order.sys.model.page.order.StoreFlowPageQuery;
-import com.taotao.cloud.order.sys.model.page.store.StorePageQuery;
-import com.taotao.cloud.order.biz.mapper.order.IStoreFlowMapper;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.cloud.order.biz.model.entity.order.OrderItem;
-import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
-import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.order.IStoreFlowService;
-import com.taotao.cloud.payment.api.feign.IFeignRefundLogApi;
-import com.taotao.cloud.store.api.feign.IFeignBillApi;
-import com.taotao.cloud.store.api.model.vo.BillVO;
-import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
-import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
+import com.taotao.cloud.order.application.service.order.IOrderItemService;
+import com.taotao.cloud.order.application.service.order.IOrderService;
+import com.taotao.cloud.order.application.service.order.IStoreFlowService;
+import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IStoreFlowMapper;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlow;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,7 +46,8 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlow> implements IStoreFlowService {
+public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlow> implements
+	IStoreFlowService {
 
     /** 订单 */
     private final IOrderService orderService;

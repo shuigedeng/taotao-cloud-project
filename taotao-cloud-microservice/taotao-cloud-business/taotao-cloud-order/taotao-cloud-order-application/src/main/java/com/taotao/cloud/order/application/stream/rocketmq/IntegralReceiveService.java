@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.rocketmq; /// *
+package com.taotao.cloud.order.application.stream.rocketmq; /// *
 // * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ package com.taotao.cloud.order.biz.stream.rocketmq; /// *
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-// package com.taotao.cloud.order.biz.rocketmq;
+// package com.taotao.cloud.order.application.rocketmq;
 //
 // import org.springframework.cloud.stream.annotation.StreamListener;
 // import org.springframework.messaging.Message;

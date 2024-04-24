@@ -33,80 +33,87 @@ import org.springframework.util.StringUtils;
  * @since 2023-07-10 17:13:37
  */
 public class OAuth2ToTtcRegisteredClientConverter
-        extends AbstractOAuth2EntityConverter<RegisteredClient, TtcRegisteredClient> {
+	extends AbstractOAuth2EntityConverter<RegisteredClient, TtcRegisteredClient> {
 
-    /**
-     * 密码编码器
-     */
-    private final PasswordEncoder passwordEncoder;
+	/**
+	 * 密码编码器
+	 */
+	private final PasswordEncoder passwordEncoder;
 
-    /**
-     * oauth2到希罗多德注册客户端转换器
-     *
-     * @param jacksonProcessor 杰克逊处理器
-     * @param passwordEncoder  密码编码器
-     * @return
-     * @since 2023-07-10 17:13:38
-     */
-    public OAuth2ToTtcRegisteredClientConverter(
-            OAuth2JacksonProcessor jacksonProcessor, PasswordEncoder passwordEncoder) {
-        super(jacksonProcessor);
-        this.passwordEncoder = passwordEncoder;
-    }
+	/**
+	 * oauth2到希罗多德注册客户端转换器
+	 *
+	 * @param jacksonProcessor 杰克逊处理器
+	 * @param passwordEncoder  密码编码器
+	 * @return
+	 * @since 2023-07-10 17:13:38
+	 */
+	public OAuth2ToTtcRegisteredClientConverter(
+		OAuth2JacksonProcessor jacksonProcessor, PasswordEncoder passwordEncoder) {
+		super(jacksonProcessor);
+		this.passwordEncoder = passwordEncoder;
+	}
 
-    /**
-     * 转换
-     *
-     * @param registeredClient 注册客户
-     * @return {@link TtcRegisteredClient }
-     * @since 2023-07-10 17:13:38
-     */
-    @Override
-    public TtcRegisteredClient convert(RegisteredClient registeredClient) {
-        List<String> clientAuthenticationMethods = new ArrayList<>(
-                registeredClient.getClientAuthenticationMethods().size());
-        registeredClient
-                .getClientAuthenticationMethods()
-                .forEach(clientAuthenticationMethod ->
-                        clientAuthenticationMethods.add(clientAuthenticationMethod.getValue()));
+	/**
+	 * 转换
+	 *
+	 * @param registeredClient 注册客户
+	 * @return {@link TtcRegisteredClient }
+	 * @since 2023-07-10 17:13:38
+	 */
+	@Override
+	public TtcRegisteredClient convert(RegisteredClient registeredClient) {
+		List<String> clientAuthenticationMethods = new ArrayList<>(
+			registeredClient.getClientAuthenticationMethods().size());
+		registeredClient
+			.getClientAuthenticationMethods()
+			.forEach(clientAuthenticationMethod ->
+				clientAuthenticationMethods.add(clientAuthenticationMethod.getValue()));
 
-        List<String> authorizationGrantTypes =
-                new ArrayList<>(registeredClient.getAuthorizationGrantTypes().size());
-        registeredClient
-                .getAuthorizationGrantTypes()
-                .forEach(authorizationGrantType -> authorizationGrantTypes.add(authorizationGrantType.getValue()));
+		List<String> authorizationGrantTypes =
+			new ArrayList<>(registeredClient.getAuthorizationGrantTypes().size());
+		registeredClient
+			.getAuthorizationGrantTypes()
+			.forEach(authorizationGrantType -> authorizationGrantTypes.add(
+				authorizationGrantType.getValue()));
 
-        TtcRegisteredClient entity = new TtcRegisteredClient();
-        entity.setId(registeredClient.getId());
-        entity.setClientId(registeredClient.getClientId());
-        entity.setClientIdIssuedAt(DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
-        entity.setClientSecret(encode(registeredClient.getClientSecret()));
-        entity.setClientSecretExpiresAt(DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
-        entity.setClientName(registeredClient.getClientName());
-        entity.setClientAuthenticationMethods(
-                StringUtils.collectionToCommaDelimitedString(clientAuthenticationMethods));
-        entity.setAuthorizationGrantTypes(StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
-        entity.setRedirectUris(StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
-        entity.setPostLogoutRedirectUris(
-                StringUtils.collectionToCommaDelimitedString(registeredClient.getPostLogoutRedirectUris()));
-        entity.setScopes(StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
-        entity.setClientSettings(writeMap(registeredClient.getClientSettings().getSettings()));
-        entity.setTokenSettings(writeMap(registeredClient.getTokenSettings().getSettings()));
+		TtcRegisteredClient entity = new TtcRegisteredClient();
+		entity.setId(registeredClient.getId());
+		entity.setClientId(registeredClient.getClientId());
+		entity.setClientIdIssuedAt(
+			DateUtil.toLocalDateTime(registeredClient.getClientIdIssuedAt()));
+		entity.setClientSecret(encode(registeredClient.getClientSecret()));
+		entity.setClientSecretExpiresAt(
+			DateUtil.toLocalDateTime(registeredClient.getClientSecretExpiresAt()));
+		entity.setClientName(registeredClient.getClientName());
+		entity.setClientAuthenticationMethods(
+			StringUtils.collectionToCommaDelimitedString(clientAuthenticationMethods));
+		entity.setAuthorizationGrantTypes(
+			StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
+		entity.setRedirectUris(
+			StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
+		entity.setPostLogoutRedirectUris(
+			StringUtils.collectionToCommaDelimitedString(
+				registeredClient.getPostLogoutRedirectUris()));
+		entity.setScopes(
+			StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
+		entity.setClientSettings(writeMap(registeredClient.getClientSettings().getSettings()));
+		entity.setTokenSettings(writeMap(registeredClient.getTokenSettings().getSettings()));
 
-        return entity;
-    }
+		return entity;
+	}
 
-    /**
-     * 编码
-     *
-     * @param value 值
-     * @return {@link String }
-     * @since 2023-07-10 17:13:39
-     */
-    private String encode(String value) {
-        if (value != null) {
-            return this.passwordEncoder.encode(value);
-        }
-        return null;
-    }
+	/**
+	 * 编码
+	 *
+	 * @param value 值
+	 * @return {@link String }
+	 * @since 2023-07-10 17:13:39
+	 */
+	private String encode(String value) {
+		if (value != null) {
+			return this.passwordEncoder.encode(value);
+		}
+		return null;
+	}
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.kafka;
+package com.taotao.cloud.order.application.stream.kafka;
 
 import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSink;
 import io.micrometer.core.instrument.MeterRegistry;

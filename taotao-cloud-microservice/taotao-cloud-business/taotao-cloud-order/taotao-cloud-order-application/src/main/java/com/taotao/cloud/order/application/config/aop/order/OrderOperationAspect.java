@@ -19,8 +19,8 @@ package com.taotao.cloud.order.application.config.aop.order;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.spel.SpelUtils;
-import com.taotao.cloud.order.biz.event.order.OrderLogEvent;
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
+import com.taotao.cloud.order.application.event.order.OrderLogEvent;
+import com.taotao.cloud.order.application.model.entity.order.OrderLog;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +48,7 @@ public class OrderOperationAspect {
     @Autowired
     private ApplicationEventPublisher publisher;
 
-    @After("@annotation(com.taotao.cloud.order.biz.aop.order.OrderLogPoint)")
+    @After("@annotation(com.taotao.cloud.order.application.aop.order.OrderLogPoint)")
     public void doAfter(JoinPoint joinPoint) {
         try {
             SecurityUser securityUser = SecurityUtils.getCurrentUserWithNull();

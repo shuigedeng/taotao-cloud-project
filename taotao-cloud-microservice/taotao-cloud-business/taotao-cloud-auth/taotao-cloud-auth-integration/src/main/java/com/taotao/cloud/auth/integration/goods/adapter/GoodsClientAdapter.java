@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.integration.goods.adapter;
 
-import com.taotao.cloud.auth.integration.goods.vo.GoodsVO;
 import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
+import com.taotao.cloud.order.integration.goods.vo.GoodsVO;
 import org.springframework.stereotype.Component;
 
 @Component

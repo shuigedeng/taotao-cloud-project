@@ -20,10 +20,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
-import com.taotao.cloud.order.sys.model.page.order.OrderLogPageQuery;
-import com.taotao.cloud.order.sys.model.vo.order.OrderLogVO;
+import com.taotao.cloud.order.application.command.order.OrderLogPageQuery;
+import com.taotao.cloud.order.application.command.order.OrderLogVO;
+import com.taotao.cloud.order.application.service.trade.IOrderLogService;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -49,22 +49,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/manager/order/log")
 public class OrderLogController {
 
-    private final IOrderLogService orderLogService;
+	private final IOrderLogService orderLogService;
 
-    @Operation(summary = "通过id获取", description = "通过id获取")
-    @RequestLogger
-    @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/{id}")
-    public Result<OrderLog> get(@PathVariable String id) {
-        return Result.success(orderLogService.getById(id));
-    }
+	@Operation(summary = "通过id获取", description = "通过id获取")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/{id}")
+	public Result<OrderLog> get(@PathVariable String id) {
+		return Result.success(orderLogService.getById(id));
+	}
 
-    @Operation(summary = "分页获取", description = "分页获取")
-    @RequestLogger
-    @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/page")
-    public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
-        IPage<OrderLog> orderLogPage = orderLogService.pageQuery(orderLogPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(orderLogPage, OrderLogVO.class));
-    }
+	@Operation(summary = "分页获取", description = "分页获取")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/page")
+	public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
+		IPage<OrderLog> orderLogPage = orderLogService.pageQuery(orderLogPageQuery);
+		return Result.success(MpUtils.convertMybatisPage(orderLogPage, OrderLogVO.class));
+	}
 }

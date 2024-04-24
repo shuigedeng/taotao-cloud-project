@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.converter;
 
 import com.taotao.cloud.order.sys.model.dto.order.OrderComplaintDTO;
-import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
+import com.taotao.cloud.order.application.model.entity.order.OrderComplaint;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

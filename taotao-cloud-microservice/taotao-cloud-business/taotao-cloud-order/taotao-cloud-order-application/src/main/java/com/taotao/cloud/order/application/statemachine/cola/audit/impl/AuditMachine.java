@@ -1,13 +1,13 @@
-package com.taotao.cloud.order.biz.statemachine.cola.audit.impl;
+package com.taotao.cloud.order.application.statemachine.cola.audit.impl;
 
 import com.alibaba.cola.statemachine.StateMachine;
 import com.alibaba.cola.statemachine.builder.StateMachineBuilder;
 import com.alibaba.cola.statemachine.builder.StateMachineBuilderFactory;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.factory.StateMachineStrategy;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.enums.StateMachineEnum;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.event.AuditEvent;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.state.AuditState;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.service.ConditionService;
+import com.taotao.cloud.order.application.statemachine.cola.audit.factory.StateMachineStrategy;
+import com.taotao.cloud.order.application.statemachine.cola.audit.pojo.enums.StateMachineEnum;
+import com.taotao.cloud.order.application.statemachine.cola.audit.pojo.event.AuditEvent;
+import com.taotao.cloud.order.application.statemachine.cola.audit.pojo.state.AuditState;
+import com.taotao.cloud.order.application.statemachine.cola.audit.service.ConditionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

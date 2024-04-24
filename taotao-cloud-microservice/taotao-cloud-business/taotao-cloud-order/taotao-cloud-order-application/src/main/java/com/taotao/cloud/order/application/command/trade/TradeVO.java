@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.application.command.trade;
 
-import com.taotao.cloud.order.biz.model.vo.cart.CartVO;
-import com.taotao.cloud.order.biz.model.vo.cart.PriceDetailVO;
+import com.taotao.cloud.order.application.model.vo.cart.CartVO;
+import com.taotao.cloud.order.application.model.vo.cart.PriceDetailVO;
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

@@ -19,14 +19,10 @@ package com.taotao.cloud.auth.infrastructure.persistent.authorizaon.repository;
 import com.taotao.cloud.auth.infrastructure.persistent.authorizaon.generator.TtcAuthorizationConsentId;
 import com.taotao.cloud.auth.infrastructure.persistent.authorizaon.po.TtcAuthorizationConsent;
 import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
-import com.taotao.cloud.data.jpa.extend.MyQuery;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.QueryHints;
-import org.springframework.data.repository.query.Param;
 
 /**
  * <p>TtcAuthorizationConsentRepository </p>

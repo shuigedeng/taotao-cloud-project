@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.biz.liteflow.component;
+package com.taotao.cloud.order.application.liteflow.component;
 
 import com.yomahub.liteflow.core.NodeComponent;
 import com.yomahub.liteflow.example.bean.PriceStepVO;

@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.task;
+package com.taotao.cloud.order.application.task;
 
-import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
-import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
-import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
-import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.producer.service;
+package com.taotao.cloud.order.application.stream.producer.service;
 
 /** 发送短消息业务类 */
 public interface ISmsService {

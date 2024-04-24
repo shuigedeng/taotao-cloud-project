@@ -17,9 +17,9 @@
 package com.taotao.cloud.order.facade.controller.seller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
-import com.taotao.cloud.order.biz.service.business.order.IOrderService;
-import com.taotao.cloud.order.biz.service.business.trade.IOrderLogService;
+import com.taotao.cloud.order.application.service.order.IOrderService;
+import com.taotao.cloud.order.application.service.trade.IOrderLogService;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,16 +47,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order/seller/order/log")
 public class OrderLogController {
 
-    private final IOrderLogService orderLogService;
+	private final IOrderLogService orderLogService;
 
-    private final IOrderService orderService;
+	private final IOrderService orderService;
 
-    @Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志")
-    @RequestLogger
-    @PreAuthorize("hasAuthority('dept:tree:data')")
-    @GetMapping(value = "/{orderSn}")
-    public Result<List<OrderLog>> get(@PathVariable String orderSn) {
-        OperationalJudgment.judgment(orderService.getBySn(orderSn));
-        return Result.success(orderLogService.getOrderLog(orderSn));
-    }
+	@Operation(summary = "通过订单编号获取订单日志", description = "通过订单编号获取订单日志")
+	@RequestLogger
+	@PreAuthorize("hasAuthority('dept:tree:data')")
+	@GetMapping(value = "/{orderSn}")
+	public Result<List<OrderLog>> get(@PathVariable String orderSn) {
+		OperationalJudgment.judgment(orderService.getBySn(orderSn));
+		return Result.success(orderLogService.getOrderLog(orderSn));
+	}
 }

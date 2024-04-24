@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.roketmq.listener;
+package com.taotao.cloud.order.infrastructure.roketmq.listener;
 
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
-import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
-import com.taotao.cloud.order.biz.roketmq.event.TradeEvent;
+import com.taotao.cloud.order.infrastructure.roketmq.event.OrderStatusChangeEvent;
+import com.taotao.cloud.order.infrastructure.roketmq.event.TradeEvent;
 import java.util.List;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;

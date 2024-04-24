@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.statemachine.squirrel;
+package com.taotao.cloud.order.application.statemachine.squirrel;
 
 public class ShopInfoAuditStatusUpdateParam {}

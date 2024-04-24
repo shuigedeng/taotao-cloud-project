@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.roketmq.event.impl;
+package com.taotao.cloud.order.infrastructure.roketmq.event.impl;
 
 import com.taotao.cloud.distribution.api.enums.DistributionOrderStatusEnum;
 import com.taotao.cloud.distribution.api.feign.IFeignDistributionOrderApi;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
-import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
+import com.taotao.cloud.order.infrastructure.model.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.roketmq.event.AfterSaleStatusChangeEvent;
+import com.taotao.cloud.order.infrastructure.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

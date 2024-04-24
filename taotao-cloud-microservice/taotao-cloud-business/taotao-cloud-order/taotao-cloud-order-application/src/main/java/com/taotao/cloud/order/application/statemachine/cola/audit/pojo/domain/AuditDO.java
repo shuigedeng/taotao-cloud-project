@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.domain;
+package com.taotao.cloud.order.application.statemachine.cola.audit.pojo.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

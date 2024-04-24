@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls;
 
-import com.taotao.cloud.order.biz.entity.QOrderInfo;
+import com.taotao.cloud.order.infrastructure.entity.QOrderInfo;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderInfo;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;

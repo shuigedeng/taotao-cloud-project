@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.statemachine.squirrel;
+package com.taotao.cloud.order.application.statemachine.squirrel;
 
 import org.springframework.context.ApplicationContext;
 import org.squirrelframework.foundation.fsm.annotation.*;

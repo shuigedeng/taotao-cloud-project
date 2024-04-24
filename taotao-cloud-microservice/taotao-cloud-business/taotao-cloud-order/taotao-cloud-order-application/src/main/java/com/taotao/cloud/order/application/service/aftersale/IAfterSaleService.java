@@ -18,12 +18,10 @@ package com.taotao.cloud.order.application.service.aftersale;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.sys.model.dto.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.sys.model.page.aftersale.AfterSalePageQuery;
-import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
+import com.taotao.cloud.order.application.command.aftersale.AfterSaleApplyVO;
+import com.taotao.cloud.order.application.command.aftersale.AfterSaleDTO;
+import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

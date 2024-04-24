@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.rocketmq;
+package com.taotao.cloud.order.application.stream.rocketmq;
 
 import com.taotao.cloud.rocketmq.channel.TaoTaoCloudSink;
 import org.springframework.cloud.stream.annotation.StreamListener;

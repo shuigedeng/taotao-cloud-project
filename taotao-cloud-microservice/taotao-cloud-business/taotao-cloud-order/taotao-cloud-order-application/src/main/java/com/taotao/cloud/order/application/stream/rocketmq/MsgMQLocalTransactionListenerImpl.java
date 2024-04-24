@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.rocketmq; // package com.taotao.cloud.order.biz.rocketmq;
+package com.taotao.cloud.order.application.stream.rocketmq; // package com.taotao.cloud.order.application.rocketmq;
 //
 // import com.taotao.cloud.common.utils.JsonUtil;
 //

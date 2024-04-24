@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.stream.pulsar;
+package com.taotao.cloud.order.application.stream.pulsar;
 
 import io.github.majusko.pulsar.consumer.ConsumerAggregator;
 import io.github.majusko.pulsar.producer.ProducerFactory;

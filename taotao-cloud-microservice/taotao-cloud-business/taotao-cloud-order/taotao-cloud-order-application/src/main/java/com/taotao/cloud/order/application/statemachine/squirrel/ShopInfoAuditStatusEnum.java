@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.statemachine.squirrel;
+package com.taotao.cloud.order.application.statemachine.squirrel;
 // 店铺审核状态
 public enum ShopInfoAuditStatusEnum {
     audit(0, "待审核"),

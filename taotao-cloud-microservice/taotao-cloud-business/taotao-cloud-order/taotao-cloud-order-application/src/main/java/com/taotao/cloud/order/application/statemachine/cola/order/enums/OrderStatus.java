@@ -1,4 +1,4 @@
-package com.taotao.cloud.order.biz.statemachine.cola.order.enums;
+package com.taotao.cloud.order.application.statemachine.cola.order.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

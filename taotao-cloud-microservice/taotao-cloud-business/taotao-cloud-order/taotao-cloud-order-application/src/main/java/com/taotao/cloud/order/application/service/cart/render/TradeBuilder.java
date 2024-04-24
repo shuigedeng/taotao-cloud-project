@@ -17,12 +17,7 @@
 package com.taotao.cloud.order.application.service.cart.render;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
-import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
-import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
-import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.order.biz.service.business.cart.ICartService;
-import com.taotao.cloud.order.biz.service.business.order.ITradeService;
+import com.taotao.cloud.order.application.service.order.ITradeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,9 @@
-package com.taotao.cloud.order.biz.statemachine.cola.audit.factory;
+package com.taotao.cloud.order.application.statemachine.cola.audit.factory;
 
 import com.alibaba.cola.statemachine.StateMachine;
 import com.alibaba.cola.statemachine.StateMachineFactory;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.enums.StateMachineEnum;
-import com.taotao.cloud.order.biz.statemachine.cola.audit.pojo.state.AuditState;
+import com.taotao.cloud.order.application.statemachine.cola.audit.pojo.enums.StateMachineEnum;
+import com.taotao.cloud.order.application.statemachine.cola.audit.pojo.state.AuditState;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

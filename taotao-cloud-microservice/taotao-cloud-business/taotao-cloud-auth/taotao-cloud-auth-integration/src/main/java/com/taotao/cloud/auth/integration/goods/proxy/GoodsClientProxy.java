@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.auth.integration.goods.proxy;
 
-import com.taotao.cloud.auth.integration.goods.adapter.GoodsClientAdapter;
-import com.taotao.cloud.auth.integration.goods.grpc.GoodsGrpcClient;
-import com.taotao.cloud.auth.integration.goods.vo.GoodsVO;
 import com.taotao.cloud.goods.api.dubbo.IDubboGoodsRpc;
 import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
 import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
 import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
+import com.taotao.cloud.order.integration.goods.adapter.GoodsClientAdapter;
+import com.taotao.cloud.order.integration.goods.grpc.GoodsGrpcClient;
+import com.taotao.cloud.order.integration.goods.vo.GoodsVO;
 import jakarta.annotation.Resource;
 import org.openjdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Component;

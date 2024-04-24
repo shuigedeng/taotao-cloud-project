@@ -1,6 +1,6 @@
-package com.taotao.cloud.order.biz.statemachine.cola.order.entity;
+package com.taotao.cloud.order.application.statemachine.cola.order.entity;
 
-import com.taotao.cloud.order.biz.statemachine.cola.order.enums.OrderStatus;
+import com.taotao.cloud.order.application.statemachine.cola.order.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

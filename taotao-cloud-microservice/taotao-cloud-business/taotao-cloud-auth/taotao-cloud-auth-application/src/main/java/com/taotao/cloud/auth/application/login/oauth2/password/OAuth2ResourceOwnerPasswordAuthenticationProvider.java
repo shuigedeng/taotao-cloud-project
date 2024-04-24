@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.application.login.oauth2.password;
 
 import com.taotao.cloud.auth.application.login.oauth2.OAuth2AbstractUserDetailsAuthenticationProvider;
-import com.taotao.cloud.auth.application.service.impl.EnhanceUserDetailsService;
+import com.taotao.cloud.auth.application.service.EnhanceUserDetailsService;
 import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2AuthenticationProviderUtils;
 import com.taotao.cloud.security.springsecurity.core.definition.TtcGrantType;

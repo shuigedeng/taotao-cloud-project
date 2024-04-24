@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.roketmq.event;
+package com.taotao.cloud.order.infrastructure.roketmq.event;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.model.entity.aftersale.AfterSale;
 
 /**
  * 售后单改变状态

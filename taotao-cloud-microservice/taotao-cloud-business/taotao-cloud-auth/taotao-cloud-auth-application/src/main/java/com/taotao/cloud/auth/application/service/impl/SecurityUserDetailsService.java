@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.auth.application.service.impl;
 
+import com.taotao.cloud.auth.application.service.EnhanceUserDetailsService;
+import com.taotao.cloud.auth.infrastructure.strategy.StrategyUserDetailsService;
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import org.apache.commons.lang3.StringUtils;

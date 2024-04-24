@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.event.aftersale;
+package com.taotao.cloud.order.application.event.aftersale;
 
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.application.model.entity.aftersale.AfterSaleLog;
 import org.springframework.context.ApplicationEvent;
 
 /**

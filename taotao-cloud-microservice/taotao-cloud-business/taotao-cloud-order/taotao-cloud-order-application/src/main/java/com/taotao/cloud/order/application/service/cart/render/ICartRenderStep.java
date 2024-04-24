@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.order.application.service.cart.render;
 
-import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
-import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 
 /**
  * 购物车渲染

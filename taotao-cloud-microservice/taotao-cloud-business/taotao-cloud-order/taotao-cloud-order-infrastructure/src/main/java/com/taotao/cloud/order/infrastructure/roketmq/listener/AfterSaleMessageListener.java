@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.roketmq.listener;
+package com.taotao.cloud.order.infrastructure.roketmq.listener;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
-import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
+import com.taotao.cloud.order.infrastructure.model.entity.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.roketmq.event.AfterSaleStatusChangeEvent;
 import java.util.List;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;

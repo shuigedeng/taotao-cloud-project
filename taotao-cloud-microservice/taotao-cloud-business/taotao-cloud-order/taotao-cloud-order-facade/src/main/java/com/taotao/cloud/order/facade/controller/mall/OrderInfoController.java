@@ -29,7 +29,7 @@ package com.taotao.cloud.order.facade.controller.mall; // /*
 //  * See the License for the specific language governing permissions and
 //  * limitations under the License.
 //  */
-// package com.taotao.cloud.order.biz.controller;
+// package com.taotao.cloud.order.application.controller;
 //
 // import com.taotao.cloud.common.model.BaseQuery;
 // import com.taotao.cloud.common.model.Result;
@@ -38,8 +38,8 @@ package com.taotao.cloud.order.facade.controller.mall; // /*
 // import com.taotao.cloud.order.api.dto.order_info.OrderSaveDTO;
 // import com.taotao.cloud.order.api.dto.order_info.OrderUpdateDTO;
 // import com.taotao.cloud.order.api.vo.order_info.OrderVO;
-// import com.taotao.cloud.order.biz.entity.order.OrderInfo;
-// import com.taotao.cloud.order.biz.service.IOrderInfoService;
+// import com.taotao.cloud.order.application.entity.order.OrderInfo;
+// import com.taotao.cloud.order.application.service.IOrderInfoService;
 // import com.taotao.cloud.web.base.controller.SuperController;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.Parameter;

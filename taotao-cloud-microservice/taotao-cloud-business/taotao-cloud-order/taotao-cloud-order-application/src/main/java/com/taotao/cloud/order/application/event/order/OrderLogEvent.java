@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.order.biz.event.order;
+package com.taotao.cloud.order.application.event.order;
 
-import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
+import com.taotao.cloud.order.application.model.entity.order.OrderLog;
 import org.springframework.context.ApplicationEvent;
 
 /**

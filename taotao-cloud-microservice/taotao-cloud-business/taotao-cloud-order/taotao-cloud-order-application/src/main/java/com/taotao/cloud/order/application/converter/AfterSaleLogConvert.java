@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.converter;
 
 import com.taotao.cloud.order.sys.model.vo.aftersale.AfterSaleLogVO;
-import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.application.model.entity.aftersale.AfterSaleLog;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

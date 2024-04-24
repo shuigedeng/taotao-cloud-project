@@ -32,26 +32,27 @@ import org.springframework.util.StringUtils;
  * @since 2023-07-10 17:13:47
  */
 public class OAuth2ToTtcAuthorizationConsentConverter
-        implements Converter<OAuth2AuthorizationConsent, TtcAuthorizationConsent> {
-    /**
-     * 转换
-     *
-     * @param authorizationConsent 授权同意书
-     * @return {@link TtcAuthorizationConsent }
-     * @since 2023-07-10 17:13:47
-     */
-    @Override
-    public TtcAuthorizationConsent convert(OAuth2AuthorizationConsent authorizationConsent) {
-        TtcAuthorizationConsent entity = new TtcAuthorizationConsent();
-        entity.setRegisteredClientId(authorizationConsent.getRegisteredClientId());
-        entity.setPrincipalName(authorizationConsent.getPrincipalName());
+	implements Converter<OAuth2AuthorizationConsent, TtcAuthorizationConsent> {
 
-        Set<String> authorities = new HashSet<>();
-        for (GrantedAuthority authority : authorizationConsent.getAuthorities()) {
-            authorities.add(authority.getAuthority());
-        }
-        entity.setAuthorities(StringUtils.collectionToCommaDelimitedString(authorities));
+	/**
+	 * 转换
+	 *
+	 * @param authorizationConsent 授权同意书
+	 * @return {@link TtcAuthorizationConsent }
+	 * @since 2023-07-10 17:13:47
+	 */
+	@Override
+	public TtcAuthorizationConsent convert(OAuth2AuthorizationConsent authorizationConsent) {
+		TtcAuthorizationConsent entity = new TtcAuthorizationConsent();
+		entity.setRegisteredClientId(authorizationConsent.getRegisteredClientId());
+		entity.setPrincipalName(authorizationConsent.getPrincipalName());
 
-        return entity;
-    }
+		Set<String> authorities = new HashSet<>();
+		for (GrantedAuthority authority : authorizationConsent.getAuthorities()) {
+			authorities.add(authority.getAuthority());
+		}
+		entity.setAuthorities(StringUtils.collectionToCommaDelimitedString(authorities));
+
+		return entity;
+	}
 }

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.command.trade;
 
 import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.order.biz.model.dto.cart.StoreRemarkDTO;
+import com.taotao.cloud.order.application.model.dto.cart.StoreRemarkDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;
