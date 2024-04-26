@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.infrastructure.persistent.management.po;
 
 import com.google.common.base.MoreObjects;
 import com.taotao.cloud.data.jpa.tenant.BaseEntity;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
+import com.taotao.cloud.security.springsecurity.constants.OAuth2Constants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

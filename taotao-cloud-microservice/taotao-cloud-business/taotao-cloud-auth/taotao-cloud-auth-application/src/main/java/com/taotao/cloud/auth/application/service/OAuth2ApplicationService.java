@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.application.service;
 
-import com.taotao.cloud.auth.application.converter.OAuth2ApplicationToRegisteredClientConverter;
-import com.taotao.cloud.auth.infrastructure.persistent.authorizaon.repository.TtcRegisteredClientRepository;
+import com.taotao.cloud.auth.infrastructure.authorization.converter.OAuth2ApplicationToRegisteredClientConverter;
+import com.taotao.cloud.auth.infrastructure.persistent.authorization.repository.TtcRegisteredClientRepository;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Application;
 import com.taotao.cloud.auth.infrastructure.persistent.management.repository.OAuth2ApplicationRepository;
 import java.util.HashSet;

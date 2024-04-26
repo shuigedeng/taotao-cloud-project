@@ -19,9 +19,9 @@ package com.taotao.cloud.auth.application.config.configuration;
 import com.taotao.cloud.auth.application.service.impl.TtcAuthorizationConsentService;
 import com.taotao.cloud.auth.application.service.impl.TtcAuthorizationService;
 import com.taotao.cloud.auth.application.service.impl.TtcRegisteredClientService;
-import com.taotao.cloud.auth.infrastructure.persistent.authorizaon.storage.JpaOAuth2AuthorizationConsentService;
-import com.taotao.cloud.auth.infrastructure.persistent.authorizaon.storage.JpaOAuth2AuthorizationService;
-import com.taotao.cloud.auth.infrastructure.persistent.authorizaon.storage.JpaRegisteredClientRepository;
+import com.taotao.cloud.auth.infrastructure.authentication.service.JpaOAuth2AuthorizationConsentService;
+import com.taotao.cloud.auth.infrastructure.authentication.service.JpaOAuth2AuthorizationService;
+import com.taotao.cloud.auth.infrastructure.authentication.service.JpaRegisteredClientRepository;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +62,7 @@ public class OAuth2DataJpaConfiguration {
 	 * 注册客户端存储库
 	 *
 	 * @param ttcRegisteredClientService 希罗多德注册客户服务
-	 * @param passwordEncoder                  密码编码器
+	 * @param passwordEncoder            密码编码器
 	 * @return {@link RegisteredClientRepository }
 	 * @since 2023-07-10 17:14:04
 	 */
@@ -80,8 +80,8 @@ public class OAuth2DataJpaConfiguration {
 	/**
 	 * 授权服务
 	 *
-	 * @param ttcAuthorizationService 希罗多德授权服务
-	 * @param registeredClientRepository    注册客户端存储库
+	 * @param ttcAuthorizationService    希罗多德授权服务
+	 * @param registeredClientRepository 注册客户端存储库
 	 * @return {@link OAuth2AuthorizationService }
 	 * @since 2023-07-10 17:14:05
 	 */
@@ -101,7 +101,7 @@ public class OAuth2DataJpaConfiguration {
 	 * 授权同意服务
 	 *
 	 * @param ttcAuthorizationConsentService 希罗多德授权同意服务
-	 * @param registeredClientRepository           注册客户端存储库
+	 * @param registeredClientRepository     注册客户端存储库
 	 * @return {@link OAuth2AuthorizationConsentService }
 	 * @since 2023-07-10 17:14:05
 	 */

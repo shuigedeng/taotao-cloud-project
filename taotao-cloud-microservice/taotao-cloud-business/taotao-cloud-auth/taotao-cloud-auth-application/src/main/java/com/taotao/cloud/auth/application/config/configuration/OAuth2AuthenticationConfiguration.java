@@ -16,15 +16,14 @@
 
 package com.taotao.cloud.auth.application.config.configuration;
 
-import com.taotao.cloud.auth.application.login.form.OAuth2FormLoginUrlConfigurer;
-import com.taotao.cloud.auth.application.login.social.SocialDelegateClientRegistrationRepository;
-import com.taotao.cloud.auth.infrastructure.oauth2.processor.AESCryptoProcessor;
-import com.taotao.cloud.auth.infrastructure.oauth2.processor.HttpCryptoProcessor;
-import com.taotao.cloud.auth.infrastructure.oauth2.processor.RSACryptoProcessor;
-import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.auth.infrastructure.oauth2.stamp.LockedUserDetailsStampManager;
-import com.taotao.cloud.auth.infrastructure.oauth2.stamp.SignInFailureLimitedStampManager;
+import com.taotao.cloud.auth.infrastructure.crypto.AESCryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.crypto.RSACryptoProcessor;
+import com.taotao.cloud.auth.infrastructure.stamp.LockedUserDetailsStampManager;
+import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.cloud.security.springsecurity.authentication.login.form.OAuth2FormLoginUrlConfigurer;
+import com.taotao.cloud.security.springsecurity.authentication.login.social.SocialDelegateClientRegistrationRepository;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;

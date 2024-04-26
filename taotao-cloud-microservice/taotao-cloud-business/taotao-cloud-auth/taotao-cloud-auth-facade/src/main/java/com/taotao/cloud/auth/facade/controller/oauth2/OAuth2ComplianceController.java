@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.auth.facade.controller.oauth2;
 
+import com.taotao.cloud.auth.application.service.OAuth2ComplianceService;
+import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Compliance;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.jpa.utils.JpaUtils;

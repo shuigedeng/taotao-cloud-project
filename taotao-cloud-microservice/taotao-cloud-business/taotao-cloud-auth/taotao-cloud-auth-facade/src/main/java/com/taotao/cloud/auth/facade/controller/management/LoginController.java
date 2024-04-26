@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.auth.facade.controller.management;
 
-import com.taotao.cloud.security.springsecurity.core.utils.SymmetricUtils;
-import com.taotao.cloud.security.springsecurity.core.utils.WebUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.util.Collections;

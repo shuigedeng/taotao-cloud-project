@@ -18,13 +18,10 @@ package com.taotao.cloud.auth.facade.controller.oauth2;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.auth.biz.authentication.federation.Oauth2ThirdAccount;
-import com.taotao.cloud.auth.biz.authentication.federation.Oauth2UserinfoResult;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.exception.BaseException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 

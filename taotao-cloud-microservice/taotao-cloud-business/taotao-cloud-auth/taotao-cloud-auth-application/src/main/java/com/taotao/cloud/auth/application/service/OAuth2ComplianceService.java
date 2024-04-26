@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.application.service;
 
+import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.google.common.net.HttpHeaders;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Compliance;
 import com.taotao.cloud.auth.infrastructure.persistent.management.repository.OAuth2ComplianceRepository;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.http.server.servlet.JakartaServletUtil;
 import org.dromara.hutool.http.useragent.UserAgent;
 import org.dromara.hutool.http.useragent.UserAgentUtil;
 import org.slf4j.Logger;

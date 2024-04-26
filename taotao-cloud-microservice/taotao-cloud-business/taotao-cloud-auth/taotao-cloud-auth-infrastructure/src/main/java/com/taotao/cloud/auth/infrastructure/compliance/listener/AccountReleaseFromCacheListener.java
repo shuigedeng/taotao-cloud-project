@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.infrastructure.compliance.listener;
 
-import com.taotao.cloud.auth.infrastructure.compliance.OAuth2AccountStatusManager;
 import com.taotao.cloud.auth.infrastructure.compliance.event.AccountReleaseFromCacheEvent;
+import com.taotao.cloud.security.springsecurity.authentication.compliance.OAuth2AccountStatusManager;
 import org.springframework.context.ApplicationListener;
 
 /**

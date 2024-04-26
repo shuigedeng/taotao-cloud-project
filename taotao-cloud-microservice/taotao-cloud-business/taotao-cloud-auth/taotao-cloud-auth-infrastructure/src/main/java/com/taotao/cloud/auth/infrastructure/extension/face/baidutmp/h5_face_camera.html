@@ -1,0 +1,137 @@
+<template>
+    <div>
+        <el-row>
+            <el-col :span="12">
+                <el-row type="flex" class="row-bg" justify="center" style="text-align:center;margin-top:200px">
+                    <el-col :span="12">
+                        <el-button type="primary" @click="login">人脸登录</el-button>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-button type="success" @click="register">人脸注册</el-button>
+                    </el-col>
+                </el-row>
+            </el-col>
+
+            <el-col :span="12">
+                <b>{{ tips }}</b>
+                <div>
+                    <video id="video" width="500px" height="500px" autoplay="autoplay"></video>
+                    <canvas id="canvas" width="500px" height="500px" style="display: none;"></canvas>
+                </div>
+            </el-col>
+        </el-row>
+    </div>
+</template>
+
+<script>
+  import {login, register} from '@/api/face'
+
+  export default {
+        name: 'Index',
+        data() {
+            return {
+                tips: '',
+                mediaStreamTrack: null
+            }
+        },
+        methods: {
+            /**
+             * 打开摄像头
+             */
+            openMedia(tag) {
+                const that = this
+                that.tips = '正在打开摄像头'
+                const constraints = { video: { width: 500, height: 500 }, audio: false }
+                // 获得video摄像头区域
+                const video = document.getElementById('video')
+                /**
+                 * H5新媒体接口:navigator.mediaDevices.getUserMedia()
+                 * 1.提示用户是否允许媒体输入,(媒体输入主要包括相机,视频采集设备,屏幕共享服务,麦克风,A/D转换器等)
+                 * 2.返回一个Promise对象
+                 * 3.如果用户同意使用权限,则会将MediaStream对象作为resolve()的参数传给then()
+                 * 4.如果用户拒绝使用权限,或者请求的媒体资源不可用,则会将 PermissionDeniedError 作为 reject()的参数传给catch()
+                 */
+                const promise = navigator.mediaDevices.getUserMedia(constraints)
+                promise.then((mediaStream) => {
+                    that.mediaStreamTrack = typeof mediaStream.stop === 'function' ? mediaStream : mediaStream.getTracks()[0]
+                    video.srcObject = mediaStream
+                    video.play()
+                    that.tips = '请正视摄像头'
+                    setTimeout(() => that.photograph(tag), 2000)
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+
+            /**
+             * 关闭摄像头
+             */
+            closeMedia() {
+                if (this.mediaStreamTrack) {
+                    this.mediaStreamTrack.stop()
+                    this.openOrCloseVideo(true)
+                    this.tips = '操作成功'
+                }
+            },
+
+            /**
+             * 视频框是否隐藏
+             * @param val
+             */
+            openOrCloseVideo(val) {
+                if (val) {
+                    document.getElementById('video').style.display = 'none'
+                } else {
+                    document.getElementById('video').style.display = 'block'
+                }
+            },
+
+            /**
+             * 登录事件
+             */
+            login() {
+                this.openOrCloseVideo(false)
+                this.openMedia(1)
+            },
+
+            /**
+             * 注册事件
+             */
+            register() {
+                this.openOrCloseVideo(false)
+                this.openMedia(2)
+            },
+
+            /**
+             * 拍照进行注册、登录
+             */
+            photograph(tag) {
+                // 获得Canvas对象
+                const video = document.getElementById('video')
+                const canvas = document.getElementById('canvas')
+                const ctx = canvas.getContext('2d')
+                ctx.drawImage(video, 0, 0, 500, 500)
+                // 从画布上获取照片数据
+                const img = document.getElementById('canvas').toDataURL()
+                this.tips = '正在识别'
+                const data = { 'imagebast64': img }
+                if (tag === 1) {
+                    login(data).then(res => {
+                        console.log('进行登录')
+                        console.log(res)
+                    }).finally(() => this.closeMedia())
+                } else if (tag === 2) {
+                    console.log('进行注册')
+                    register(data).then(res => {
+                        console.log(res)
+                    }).finally(() => this.closeMedia())
+                }
+            }
+
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

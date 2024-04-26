@@ -18,10 +18,10 @@ package com.taotao.cloud.auth.application.config.configuration;
 
 import com.taotao.cloud.auth.application.service.OAuth2ComplianceService;
 import com.taotao.cloud.auth.application.service.OAuth2DeviceService;
+import com.taotao.cloud.auth.infrastructure.authentication.response.OAuth2DeviceVerificationResponseHandler;
+import com.taotao.cloud.auth.infrastructure.authentication.response.OidcClientRegistrationResponseHandler;
 import com.taotao.cloud.auth.infrastructure.compliance.listener.AuthenticationSuccessListener;
-import com.taotao.cloud.auth.infrastructure.oauth2.response.OAuth2DeviceVerificationResponseHandler;
-import com.taotao.cloud.auth.infrastructure.oauth2.response.OidcClientRegistrationResponseHandler;
-import com.taotao.cloud.auth.infrastructure.oauth2.stamp.SignInFailureLimitedStampManager;
+import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,44 +38,47 @@ import org.springframework.context.annotation.Import;
  * @since : 2022/2/26 12:35
  */
 @Configuration
-@Import({OAuth2DataJpaConfiguration.class, OAuth2AuthenticationConfiguration.class, OAuth2ComplianceConfiguration.class
+@Import({OAuth2DataJpaConfiguration.class, OAuth2AuthenticationConfiguration.class,
+	OAuth2ComplianceConfiguration.class
 })
 public class OAuth2ManagementConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(OAuth2ManagementConfiguration.class);
+	private static final Logger log = LoggerFactory.getLogger(OAuth2ManagementConfiguration.class);
 
-    @PostConstruct
-    public void postConstruct() {
-        log.info("Module [OAuth2 Management] Auto Configure.");
-    }
+	@PostConstruct
+	public void postConstruct() {
+		log.info("Module [OAuth2 Management] Auto Configure.");
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    public AuthenticationSuccessListener authenticationSuccessListener(
-            SignInFailureLimitedStampManager stampManager,
-            OAuth2ComplianceService complianceService,
-            OAuth2DeviceService deviceService) {
-        AuthenticationSuccessListener listener = new AuthenticationSuccessListener(stampManager, complianceService);
-        log.info("Bean [OAuth2 Authentication Success Listener] Auto Configure.");
-        return listener;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	public AuthenticationSuccessListener authenticationSuccessListener(
+		SignInFailureLimitedStampManager stampManager,
+		OAuth2ComplianceService complianceService,
+		OAuth2DeviceService deviceService) {
+		AuthenticationSuccessListener listener = new AuthenticationSuccessListener(stampManager,
+			complianceService);
+		log.info("Bean [OAuth2 Authentication Success Listener] Auto Configure.");
+		return listener;
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    public OAuth2DeviceVerificationResponseHandler oauth2DeviceVerificationResponseHandler(
-            OAuth2DeviceService oauth2DeviceService) {
-        OAuth2DeviceVerificationResponseHandler handler =
-                new OAuth2DeviceVerificationResponseHandler(oauth2DeviceService);
-        log.info("Bean [OAuth2 Device Verification Response Handler] Auto Configure.");
-        return handler;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	public OAuth2DeviceVerificationResponseHandler oauth2DeviceVerificationResponseHandler(
+		OAuth2DeviceService oauth2DeviceService) {
+		OAuth2DeviceVerificationResponseHandler handler =
+			new OAuth2DeviceVerificationResponseHandler(oauth2DeviceService);
+		log.info("Bean [OAuth2 Device Verification Response Handler] Auto Configure.");
+		return handler;
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    public OidcClientRegistrationResponseHandler oidcClientRegistrationResponseHandler(
-            OAuth2DeviceService oauth2DeviceService) {
-        OidcClientRegistrationResponseHandler handler = new OidcClientRegistrationResponseHandler(oauth2DeviceService);
-        log.info("Bean [Oidc Client Registration Response Handler] Auto Configure.");
-        return handler;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	public OidcClientRegistrationResponseHandler oidcClientRegistrationResponseHandler(
+		OAuth2DeviceService oauth2DeviceService) {
+		OidcClientRegistrationResponseHandler handler = new OidcClientRegistrationResponseHandler(
+			oauth2DeviceService);
+		log.info("Bean [Oidc Client Registration Response Handler] Auto Configure.");
+		return handler;
+	}
 }

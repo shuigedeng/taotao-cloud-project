@@ -20,7 +20,8 @@ import com.taotao.cloud.auth.application.service.EnhanceClientDetailsService;
 import com.taotao.cloud.auth.application.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Application;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Permission;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
+import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Scope;
+import com.taotao.cloud.security.springsecurity.core.authority.TtcGrantedAuthority;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,32 +37,32 @@ import org.apache.commons.lang3.ObjectUtils;
  */
 public class Oauth2ClientDetailsService implements EnhanceClientDetailsService {
 
-    private final OAuth2ApplicationService applicationService;
+	private final OAuth2ApplicationService applicationService;
 
-    public Oauth2ClientDetailsService(OAuth2ApplicationService applicationService) {
-        this.applicationService = applicationService;
-    }
+	public Oauth2ClientDetailsService(OAuth2ApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 
-    @Override
-    public Set<TtcGrantedAuthority> findAuthoritiesById(String clientId) {
-        OAuth2Application application = applicationService.findByClientId(clientId);
-        if (ObjectUtils.isNotEmpty(application)) {
-            Set<OAuth2Scope> scopes = application.getScopes();
-            Set<TtcGrantedAuthority> result = new HashSet<>();
-            if (CollectionUtils.isNotEmpty(scopes)) {
-                for (OAuth2Scope scope : scopes) {
-                    Set<OAuth2Permission> permissions = scope.getPermissions();
-                    if (CollectionUtils.isNotEmpty(permissions)) {
-                        Set<TtcGrantedAuthority> grantedAuthorities = permissions.stream()
-                                .map(item -> new TtcGrantedAuthority(item.getPermissionCode()))
-                                .collect(Collectors.toSet());
-                        result.addAll(grantedAuthorities);
-                    }
-                }
-            }
-            return result;
-        }
+	@Override
+	public Set<TtcGrantedAuthority> findAuthoritiesById(String clientId) {
+		OAuth2Application application = applicationService.findByClientId(clientId);
+		if (ObjectUtils.isNotEmpty(application)) {
+			Set<OAuth2Scope> scopes = application.getScopes();
+			Set<TtcGrantedAuthority> result = new HashSet<>();
+			if (CollectionUtils.isNotEmpty(scopes)) {
+				for (OAuth2Scope scope : scopes) {
+					Set<OAuth2Permission> permissions = scope.getPermissions();
+					if (CollectionUtils.isNotEmpty(permissions)) {
+						Set<TtcGrantedAuthority> grantedAuthorities = permissions.stream()
+							.map(item -> new TtcGrantedAuthority(item.getPermissionCode()))
+							.collect(Collectors.toSet());
+						result.addAll(grantedAuthorities);
+					}
+				}
+			}
+			return result;
+		}
 
-        return new HashSet<>();
-    }
+		return new HashSet<>();
+	}
 }

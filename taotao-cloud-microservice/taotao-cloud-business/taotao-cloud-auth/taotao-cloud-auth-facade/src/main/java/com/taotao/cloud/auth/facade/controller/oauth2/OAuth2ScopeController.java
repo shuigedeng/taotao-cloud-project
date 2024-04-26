@@ -16,6 +16,9 @@
 
 package com.taotao.cloud.auth.facade.controller.oauth2;
 
+import com.taotao.cloud.auth.application.service.OAuth2ScopeService;
+import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Permission;
+import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Scope;
 import com.taotao.cloud.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,11 +34,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p> Description : OauthScopesController </p>
- *
  *
  * @since : 2020/3/25 17:10
  */
@@ -44,84 +51,85 @@ import org.springframework.web.bind.annotation.*;
 @Tags({@Tag(name = "OAuth2 认证服务接口"), @Tag(name = "OAuth2 权限范围管理接口")})
 public class OAuth2ScopeController {
 
-    private final OAuth2ScopeService scopeService;
+	private final OAuth2ScopeService scopeService;
 
-    @Autowired
-    public OAuth2ScopeController(OAuth2ScopeService scopeService) {
-        this.scopeService = scopeService;
-    }
+	@Autowired
+	public OAuth2ScopeController(OAuth2ScopeService scopeService) {
+		this.scopeService = scopeService;
+	}
 
-    @Operation(
-            summary = "给Scope分配权限",
-            description = "给Scope分配权限",
-            responses = {
-                @ApiResponse(
-                        description = "查询到的角色",
-                        content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = OAuth2ScopeDto.class))),
-            })
-    @Parameters({
-        @Parameter(name = "scope", required = true, description = "范围请求参数"),
-    })
-    @PostMapping("/assigned")
-    public Result<OAuth2Scope> assigned(@RequestBody OAuth2ScopeDto scope) {
+	@Operation(
+		summary = "给Scope分配权限",
+		description = "给Scope分配权限",
+		responses = {
+			@ApiResponse(
+				description = "查询到的角色",
+				content =
+				@Content(
+					mediaType = "application/json",
+					schema = @Schema(implementation = OAuth2ScopeDto.class))),
+		})
+	@Parameters({
+		@Parameter(name = "scope", required = true, description = "范围请求参数"),
+	})
+	@PostMapping("/assigned")
+	public Result<OAuth2Scope> assigned(@RequestBody OAuth2ScopeDto scope) {
 
-        Set<OAuth2Permission> permissions = new HashSet<>();
-        if (CollectionUtils.isNotEmpty(scope.getPermissions())) {
-            permissions = scope.getPermissions().stream().map(this::toEntity).collect(Collectors.toSet());
-        }
+		Set<OAuth2Permission> permissions = new HashSet<>();
+		if (CollectionUtils.isNotEmpty(scope.getPermissions())) {
+			permissions = scope.getPermissions().stream().map(this::toEntity)
+				.collect(Collectors.toSet());
+		}
 
-        OAuth2Scope result = scopeService.assigned(scope.getScopeId(), permissions);
-        return Result.success(result);
-    }
+		OAuth2Scope result = scopeService.assigned(scope.getScopeId(), permissions);
+		return Result.success(result);
+	}
 
-    //	@AccessLimited
-    @Operation(
-            summary = "获取全部范围",
-            description = "获取全部范围",
-            responses = {
-                @ApiResponse(
-                        description = "全部数据列表",
-                        content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = Result.class))),
-                @ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
-                @ApiResponse(responseCode = "500", description = "查询失败")
-            })
-    @GetMapping("/list")
-    public Result<List<OAuth2Scope>> findAll() {
-        List<OAuth2Scope> oAuth2Scopes = scopeService.findAll();
-        return Result.success(oAuth2Scopes);
-    }
+	//	@AccessLimited
+	@Operation(
+		summary = "获取全部范围",
+		description = "获取全部范围",
+		responses = {
+			@ApiResponse(
+				description = "全部数据列表",
+				content =
+				@Content(
+					mediaType = "application/json",
+					schema = @Schema(implementation = Result.class))),
+			@ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
+			@ApiResponse(responseCode = "500", description = "查询失败")
+		})
+	@GetMapping("/list")
+	public Result<List<OAuth2Scope>> findAll() {
+		List<OAuth2Scope> oAuth2Scopes = scopeService.findAll();
+		return Result.success(oAuth2Scopes);
+	}
 
-    //	@AccessLimited
-    @Operation(
-            summary = "根据范围代码查询应用范围",
-            description = "根据范围代码查询应用范围",
-            responses = {
-                @ApiResponse(
-                        description = "查询到的应用范围",
-                        content =
-                                @Content(
-                                        mediaType = "application/json",
-                                        schema = @Schema(implementation = OAuth2Scope.class))),
-                @ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
-                @ApiResponse(responseCode = "500", description = "查询失败")
-            })
-    @GetMapping("/{scopeCode}")
-    public Result<OAuth2Scope> findByUserName(@PathVariable("scopeCode") String scopeCode) {
-        OAuth2Scope scope = scopeService.findByScopeCode(scopeCode);
-        return Result.success(scope);
-    }
+	//	@AccessLimited
+	@Operation(
+		summary = "根据范围代码查询应用范围",
+		description = "根据范围代码查询应用范围",
+		responses = {
+			@ApiResponse(
+				description = "查询到的应用范围",
+				content =
+				@Content(
+					mediaType = "application/json",
+					schema = @Schema(implementation = OAuth2Scope.class))),
+			@ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
+			@ApiResponse(responseCode = "500", description = "查询失败")
+		})
+	@GetMapping("/{scopeCode}")
+	public Result<OAuth2Scope> findByUserName(@PathVariable("scopeCode") String scopeCode) {
+		OAuth2Scope scope = scopeService.findByScopeCode(scopeCode);
+		return Result.success(scope);
+	}
 
-    private OAuth2Permission toEntity(OAuth2PermissionDto dto) {
-        OAuth2Permission entity = new OAuth2Permission();
-        entity.setPermissionId(dto.getPermissionId());
-        entity.setPermissionCode(dto.getPermissionCode());
-        entity.setPermissionName(dto.getPermissionName());
-        return entity;
-    }
+	private OAuth2Permission toEntity(OAuth2PermissionDto dto) {
+		OAuth2Permission entity = new OAuth2Permission();
+		entity.setPermissionId(dto.getPermissionId());
+		entity.setPermissionCode(dto.getPermissionCode());
+		entity.setPermissionName(dto.getPermissionName());
+		return entity;
+	}
 }
