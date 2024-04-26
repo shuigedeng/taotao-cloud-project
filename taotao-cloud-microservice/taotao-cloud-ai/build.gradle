@@ -48,6 +48,8 @@ dependencies {
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
+
     //引入PDF解析器
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
     //使用OpenAI
