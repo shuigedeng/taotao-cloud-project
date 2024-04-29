@@ -16,6 +16,10 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxapp.configuration;
 
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.enums.AccountType;
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxapp.processor.WxappAccessHandler;
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxapp.processor.WxappLogHandler;
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxapp.processor.WxappProcessor;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxapp.properties.WxappProperties;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -29,36 +33,35 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <p>微信小程序后配置 </p>
  *
- *
  * @since : 2021/3/29 9:27
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(WxappProperties.class)
 public class WxappConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(WxappConfiguration.class);
+	private static final Logger log = LoggerFactory.getLogger(WxappConfiguration.class);
 
-    @PostConstruct
-    public void init() {
-        log.debug("SDK [Access Wxapp] Auto Configure.");
-    }
+	@PostConstruct
+	public void init() {
+		log.debug("SDK [Access Wxapp] Auto Configure.");
+	}
 
-    @Bean
-    @ConditionalOnMissingBean
-    public WxappProcessor wxappProcessor(WxappProperties wxappProperties) {
-        WxappProcessor wxappProcessor = new WxappProcessor();
-        wxappProcessor.setWxappProperties(wxappProperties);
-        wxappProcessor.setWxappLogHandler(new WxappLogHandler());
-        log.trace("Bean [Wxapp Processor] Auto Configure.");
-        return wxappProcessor;
-    }
+	@Bean
+	@ConditionalOnMissingBean
+	public WxappProcessor wxappProcessor(WxappProperties wxappProperties) {
+		WxappProcessor wxappProcessor = new WxappProcessor();
+		wxappProcessor.setWxappProperties(wxappProperties);
+		wxappProcessor.setWxappLogHandler(new WxappLogHandler());
+		log.trace("Bean [Wxapp Processor] Auto Configure.");
+		return wxappProcessor;
+	}
 
-    @Bean(AccountType.WECHAT_MINI_APP_HANDLER)
-    @ConditionalOnBean(WxappProcessor.class)
-    @ConditionalOnMissingBean
-    public WxappAccessHandler wxappAccessHandler(WxappProcessor wxappProcessor) {
-        WxappAccessHandler wxappAccessHandler = new WxappAccessHandler(wxappProcessor);
-        log.debug("Bean [Wxapp Access Handler] Auto Configure.");
-        return wxappAccessHandler;
-    }
+	@Bean(AccountType.WECHAT_MINI_APP_HANDLER)
+	@ConditionalOnBean(WxappProcessor.class)
+	@ConditionalOnMissingBean
+	public WxappAccessHandler wxappAccessHandler(WxappProcessor wxappProcessor) {
+		WxappAccessHandler wxappAccessHandler = new WxappAccessHandler(wxappProcessor);
+		log.debug("Bean [Wxapp Access Handler] Auto Configure.");
+		return wxappAccessHandler;
+	}
 }

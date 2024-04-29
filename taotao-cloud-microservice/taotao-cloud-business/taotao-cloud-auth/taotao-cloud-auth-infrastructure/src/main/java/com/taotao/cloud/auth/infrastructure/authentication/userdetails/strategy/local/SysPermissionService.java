@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.local;
 
-import com.taotao.cloud.auth.infrastructure.strategy.user.SysPermission;
+import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysPermission;
 import java.util.List;
 import org.springframework.stereotype.Service;
 

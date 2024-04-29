@@ -16,9 +16,8 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.local;
 
-import com.taotao.cloud.auth.infrastructure.strategy.AbstractStrategyPermissionDetailsService;
-import com.taotao.cloud.auth.infrastructure.strategy.user.SysPermission;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcPermission;
+import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.AbstractStrategyPermissionDetailsService;
+import com.taotao.cloud.security.springsecurity.core.TtcPermission;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;

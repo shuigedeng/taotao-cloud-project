@@ -20,7 +20,9 @@ import com.taotao.cloud.auth.infrastructure.authentication.extension.OAuth2Abstr
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.enums.AccountType;
 import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2EndpointUtils;
+import com.taotao.cloud.security.springsecurity.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.constants.HttpHeaders;
+import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,7 +52,7 @@ public class OAuth2SocialCredentialsAuthenticationConverter extends
 	public Authentication convert(HttpServletRequest request) {
 		// grant_type (REQUIRED)
 		String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-		if (!TtcGrantType.SOCIAL.getValue().equals(grantType)) {
+		if (!TtcAuthorizationGrantType.SOCIAL.getValue().equals(grantType)) {
 			return null;
 		}
 

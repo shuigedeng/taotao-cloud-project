@@ -17,6 +17,10 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.password;
 
 import com.taotao.cloud.auth.infrastructure.authentication.extension.OAuth2AbstractUserDetailsAuthenticationProvider;
+import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;
+import com.taotao.cloud.auth.infrastructure.utils.OAuth2AuthenticationProviderUtils;
+import com.taotao.cloud.security.springsecurity.core.userdetails.EnhanceUserDetailsService;
+import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Set;
@@ -124,7 +128,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends
                         resourceOwnerPasswordAuthentication);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-        if (!registeredClient.getAuthorizationGrantTypes().contains(TtcGrantType.PASSWORD)) {
+        if (!registeredClient.getAuthorizationGrantTypes().contains(TtcAuthorizationGrantType.PASSWORD)) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
@@ -137,7 +141,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends
 
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
                 .principalName(principal.getName())
-                .authorizationGrantType(TtcGrantType.PASSWORD)
+                .authorizationGrantType(TtcAuthorizationGrantType.PASSWORD)
                 .authorizedScopes(authorizedScopes)
                 .attribute(Principal.class.getName(), principal);
 
@@ -148,7 +152,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationProvider extends
                 .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                 .authorizedScopes(authorizedScopes)
                 .tokenType(OAuth2TokenType.ACCESS_TOKEN)
-                .authorizationGrantType(TtcGrantType.PASSWORD)
+                .authorizationGrantType(TtcAuthorizationGrantType.PASSWORD)
                 .authorizationGrant(resourceOwnerPasswordAuthentication);
         // @formatter:on
 

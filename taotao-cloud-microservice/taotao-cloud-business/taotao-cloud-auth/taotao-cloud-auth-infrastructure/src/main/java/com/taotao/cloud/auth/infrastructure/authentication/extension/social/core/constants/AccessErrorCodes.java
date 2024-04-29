@@ -17,6 +17,8 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.constants;
 
 
+import com.taotao.cloud.security.springsecurity.constants.ErrorCodes;
+
 /**
  * <p>Access 模块错误代码 </p>
  *

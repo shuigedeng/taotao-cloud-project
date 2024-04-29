@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.properties;
 
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.constants.AccessConstants;
 import java.time.Duration;
 import java.util.Map;
 import me.zhyd.oauth.config.AuthConfig;

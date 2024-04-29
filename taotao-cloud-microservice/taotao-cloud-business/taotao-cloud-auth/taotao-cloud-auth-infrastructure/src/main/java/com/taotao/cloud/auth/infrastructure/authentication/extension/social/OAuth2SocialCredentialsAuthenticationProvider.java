@@ -17,10 +17,13 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social;
 
 import com.taotao.cloud.auth.infrastructure.authentication.extension.OAuth2AbstractUserDetailsAuthenticationProvider;
-import com.taotao.cloud.auth.infrastructure.authentication.userdetails.EnhanceUserDetailsService;
+import com.taotao.cloud.auth.infrastructure.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2AuthenticationProviderUtils;
+import com.taotao.cloud.security.springsecurity.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.userdetails.EnhanceUserDetailsService;
 import com.taotao.cloud.security.springsecurity.exception.SocialCredentialsParameterBindingFailedException;
+import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Set;
@@ -126,7 +129,7 @@ public class OAuth2SocialCredentialsAuthenticationProvider extends
 				socialCredentialsAuthentication);
 		RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
-		if (!registeredClient.getAuthorizationGrantTypes().contains(TtcGrantType.SOCIAL)) {
+		if (!registeredClient.getAuthorizationGrantTypes().contains(TtcAuthorizationGrantType.SOCIAL)) {
 			throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
 		}
 
@@ -140,7 +143,7 @@ public class OAuth2SocialCredentialsAuthenticationProvider extends
 		OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(
 				registeredClient)
 			.principalName(principal.getName())
-			.authorizationGrantType(TtcGrantType.SOCIAL)
+			.authorizationGrantType(TtcAuthorizationGrantType.SOCIAL)
 			.authorizedScopes(authorizedScopes)
 			.attribute(Principal.class.getName(), principal);
 
@@ -150,7 +153,7 @@ public class OAuth2SocialCredentialsAuthenticationProvider extends
 			.authorizationServerContext(AuthorizationServerContextHolder.getContext())
 			.authorizedScopes(authorizedScopes)
 			.tokenType(OAuth2TokenType.ACCESS_TOKEN)
-			.authorizationGrantType(TtcGrantType.SOCIAL)
+			.authorizationGrantType(TtcAuthorizationGrantType.SOCIAL)
 			.authorizationGrant(socialCredentialsAuthentication);
 
 		// ----- Access token -----

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.oidc;
 
+import com.taotao.cloud.security.springsecurity.constants.BaseConstants;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;

@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.handler;
 
+import com.taotao.cloud.security.springsecurity.core.AccessPrincipal;
+import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**
@@ -27,18 +29,17 @@ import org.springframework.security.core.AuthenticationException;
  */
 public interface SocialAuthenticationHandler {
 
-    /**
-     * 社交登录
-     * <p>
-     * 1. 首先在第三方系统进行认证，或者手机号码、扫码认证。返回认证后的信息
-     * 2. 根据认证返回的信息，在系统中查询是否有对应的用户信息。
-     * 2.1. 如果有对应的信息，根据需要更新社交用户的信息，然后返回系统用户信息，进行登录。
-     * 2.2. 如果没有对应信息，就先进行用户的注册，然后进行社交用户和系统用户的绑定。
-     *
-     * @param source          社交登录提供者分类
-     * @param accessPrincipal 社交登录所需要的信息
-     * @return {@link TtcUser }
-     * @since 2023-07-04 10:05:20
-     */
-    TtcUser authentication(String source, AccessPrincipal accessPrincipal) throws AuthenticationException;
+	/**
+	 * 社交登录
+	 * <p>
+	 * 1. 首先在第三方系统进行认证，或者手机号码、扫码认证。返回认证后的信息 2. 根据认证返回的信息，在系统中查询是否有对应的用户信息。 2.1.
+	 * 如果有对应的信息，根据需要更新社交用户的信息，然后返回系统用户信息，进行登录。 2.2. 如果没有对应信息，就先进行用户的注册，然后进行社交用户和系统用户的绑定。
+	 *
+	 * @param source          社交登录提供者分类
+	 * @param accessPrincipal 社交登录所需要的信息
+	 * @return {@link TtcUser }
+	 * @since 2023-07-04 10:05:20
+	 */
+	TtcUser authentication(String source, AccessPrincipal accessPrincipal)
+		throws AuthenticationException;
 }

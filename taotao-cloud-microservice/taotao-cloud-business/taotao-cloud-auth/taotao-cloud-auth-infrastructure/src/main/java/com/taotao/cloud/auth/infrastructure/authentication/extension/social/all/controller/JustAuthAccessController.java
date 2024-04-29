@@ -17,6 +17,8 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.event.AutomaticSignInEvent;
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.processor.JustAuthProcessor;
 import com.taotao.cloud.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,7 +41,6 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * <p>社交登录第三方系统返回的Redirect Url </p>
  *
- *
  * @since : 2021/5/28 11:35
  */
 @RestController
@@ -47,32 +48,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class JustAuthAccessController {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+	@Autowired
+	private ApplicationContext applicationContext;
 
-    @Autowired
-    private JustAuthProcessor justAuthProcessor;
+	@Autowired
+	private JustAuthProcessor justAuthProcessor;
 
-    @Operation(summary = "社交登录redirect url地址", description = "社交登录标准模式的redirect url地址，获取第三方登录返回的code")
-    @Parameters({
-        @Parameter(name = "source", required = true, description = "社交登录的类型，具体指定是哪一个第三方系统", in = ParameterIn.PATH),
-    })
-    @RequestMapping("/open/identity/social/{source}")
-    public void callback(@PathVariable("source") String source, AuthCallback callback) {
-        if (StringUtils.isNotBlank(source) && BeanUtil.isNotEmpty(callback)) {
-            Map<String, Object> params = ImmutableMap.of("source", source, "callback", callback);
-            applicationContext.publishEvent(new AutomaticSignInEvent(params));
-        }
-    }
+	@Operation(summary = "社交登录redirect url地址", description = "社交登录标准模式的redirect url地址，获取第三方登录返回的code")
+	@Parameters({
+		@Parameter(name = "source", required = true, description = "社交登录的类型，具体指定是哪一个第三方系统", in = ParameterIn.PATH),
+	})
+	@RequestMapping("/open/identity/social/{source}")
+	public void callback(@PathVariable("source") String source, AuthCallback callback) {
+		if (StringUtils.isNotBlank(source) && BeanUtil.isNotEmpty(callback)) {
+			Map<String, Object> params = ImmutableMap.of("source", source, "callback", callback);
+			applicationContext.publishEvent(new AutomaticSignInEvent(params));
+		}
+	}
 
-    @Operation(summary = "获取社交登录列表", description = "根据后台已配置社交登录信息，返回可用的社交登录控制列表")
-    @GetMapping("/open/identity/sources")
-    public Result<Map<String, String>> list() {
-        Map<String, String> list = justAuthProcessor.getAuthorizeUrls();
-        if (MapUtils.isNotEmpty(list)) {
-            return Result.success(list);
-        } else {
-            return Result.success(new HashMap<>());
-        }
-    }
+	@Operation(summary = "获取社交登录列表", description = "根据后台已配置社交登录信息，返回可用的社交登录控制列表")
+	@GetMapping("/open/identity/sources")
+	public Result<Map<String, String>> list() {
+		Map<String, String> list = justAuthProcessor.getAuthorizeUrls();
+		if (MapUtils.isNotEmpty(list)) {
+			return Result.success(list);
+		}
+		else {
+			return Result.success(new HashMap<>());
+		}
+	}
 }

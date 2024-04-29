@@ -16,6 +16,9 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social;
 
+import static com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType.SOCIAL;
+
+import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -40,7 +43,7 @@ public class OAuth2SocialCredentialsAuthenticationToken extends
 		Authentication clientPrincipal,
 		@Nullable Set<String> scopes,
 		@Nullable Map<String, Object> additionalParameters) {
-		super(TtcGrantType.SOCIAL, clientPrincipal, additionalParameters);
+		super(TtcAuthorizationGrantType.SOCIAL, clientPrincipal, additionalParameters);
 		Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");
 		this.scopes = Collections.unmodifiableSet(
 			CollectionUtils.isNotEmpty(scopes) ? new HashSet<>(scopes) : Collections.emptySet());

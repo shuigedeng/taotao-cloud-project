@@ -19,6 +19,7 @@ package com.taotao.cloud.auth.infrastructure.authentication.extension.social.jus
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.enums.AccountType;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.processor.JustAuthAccessHandler;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.processor.JustAuthProcessor;
+import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.properties.JustAuthProperties;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.stamp.JustAuthStateStampManager;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import jakarta.annotation.PostConstruct;

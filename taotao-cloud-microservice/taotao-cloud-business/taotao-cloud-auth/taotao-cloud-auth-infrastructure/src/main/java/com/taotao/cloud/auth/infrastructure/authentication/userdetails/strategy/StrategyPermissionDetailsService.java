@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy;
 
+import com.taotao.cloud.security.springsecurity.core.TtcPermission;
 import java.util.List;
 
 /**
@@ -27,11 +28,11 @@ import java.util.List;
  */
 public interface StrategyPermissionDetailsService {
 
-    /**
-     * 获取全部权限
-     *
-     * @return {@link List }<{@link TtcPermission }>
-     * @since 2023-07-04 10:05:54
-     */
-    List<TtcPermission> findAll();
+	/**
+	 * 获取全部权限
+	 *
+	 * @return {@link List }<{@link TtcPermission }>
+	 * @since 2023-07-04 10:05:54
+	 */
+	List<TtcPermission> findAll();
 }

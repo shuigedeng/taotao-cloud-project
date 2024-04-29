@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampMana
 import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
 import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
+import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
 import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

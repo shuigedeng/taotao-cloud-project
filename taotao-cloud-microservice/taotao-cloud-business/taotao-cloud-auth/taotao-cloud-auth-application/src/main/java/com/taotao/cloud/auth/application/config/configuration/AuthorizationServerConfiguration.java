@@ -34,8 +34,8 @@ import com.taotao.cloud.auth.infrastructure.authentication.response.OAuth2Access
 import com.taotao.cloud.auth.infrastructure.authentication.response.OAuth2AuthenticationFailureResponseHandler;
 import com.taotao.cloud.auth.infrastructure.authentication.response.OAuth2DeviceVerificationResponseHandler;
 import com.taotao.cloud.auth.infrastructure.authentication.response.OidcClientRegistrationResponseHandler;
-import com.taotao.cloud.auth.infrastructure.authentication.token.TtcJwtTokenCustomizer;
-import com.taotao.cloud.auth.infrastructure.authentication.token.TtcOpaqueTokenCustomizer;
+import com.taotao.cloud.auth.infrastructure.authorization.token.TtcJwtTokenCustomizer;
+import com.taotao.cloud.auth.infrastructure.authorization.token.TtcOpaqueTokenCustomizer;
 import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2ConfigurerUtils;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;

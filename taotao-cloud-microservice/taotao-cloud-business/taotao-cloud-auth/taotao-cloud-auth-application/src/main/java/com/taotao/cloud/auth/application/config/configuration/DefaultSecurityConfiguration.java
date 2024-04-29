@@ -20,12 +20,12 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.taotao.cloud.auth.application.event.DefaultOAuth2AuthenticationEventPublisher;
 import com.taotao.cloud.auth.application.service.ClientDetailsService;
-import com.taotao.cloud.auth.application.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.application.service.impl.Oauth2ClientDetailsService;
-import com.taotao.cloud.auth.infrastructure.authentication.filter.ExtensionAndOauth2LoginRefreshTokenFilter;
-import com.taotao.cloud.auth.infrastructure.authentication.userdetails.SecurityUserDetailsService;
+import com.taotao.cloud.auth.infrastructure.authentication.service.OAuth2ApplicationService;
+import com.taotao.cloud.auth.infrastructure.authentication.userdetails.TtcUserDetailsService;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.StrategyUserDetailsService;
 import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
+import com.taotao.cloud.security.springsecurity.authentication.filter.ExtensionLoginRefreshTokenFilter;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.account.service.AccountUserDetailsService;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.captcha.service.CaptchaCheckService;
@@ -35,17 +35,15 @@ import com.taotao.cloud.security.springsecurity.authentication.login.extension.f
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.fingerprint.service.FingerprintUserDetailsService;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.gestures.service.GesturesUserDetailsService;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.wechatmp.service.WechatMpUserDetailsService;
-import com.taotao.cloud.security.springsecurity.authentication.login.form.captcha.OAuth2FormCaptchaLoginHttpConfigurer;
-import com.taotao.cloud.security.springsecurity.authentication.login.form.qrcode.OAuth2FormQrcodeLoginHttpConfigurer;
-import com.taotao.cloud.security.springsecurity.authentication.login.form.sms.Oauth2FormSmsLoginHttpConfigurer;
+import com.taotao.cloud.security.springsecurity.authentication.login.form.FormLoginFilterSecurityConfigurer;
+import com.taotao.cloud.security.springsecurity.authentication.login.justauth.JustAuthLoginFilterSecurityConfigurer;
 import com.taotao.cloud.security.springsecurity.authentication.login.social.SocialDelegateClientRegistrationRepository;
-import com.taotao.cloud.security.springsecurity.authentication.login.social.SocialHttpConfigurer;
-import com.taotao.cloud.security.springsecurity.authentication.response.SecurityAccessDeniedHandler;
-import com.taotao.cloud.security.springsecurity.authentication.response.SecurityAuthenticationEntryPoint;
+import com.taotao.cloud.security.springsecurity.authentication.login.social.SocialLoginFilterSecurityConfigurer;
 import com.taotao.cloud.security.springsecurity.authorization.SecurityAuthorizationManager;
 import com.taotao.cloud.security.springsecurity.authorization.SecurityMatcherConfigurer;
 import com.taotao.cloud.security.springsecurity.oauth2.token.JwtTokenGenerator;
 import com.taotao.cloud.security.springsecurity.oauth2.token.JwtTokenGeneratorImpl;
+import com.taotao.cloud.security.springsecurity.oauth2.token.OAuth2AccessTokenStore;
 import com.taotao.cloud.security.springsecurity.oauth2.token1.SecurityTokenStrategyConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -261,30 +259,37 @@ public class DefaultSecurityConfiguration {
 					});
 			})
 			// **************************************oauth2 login登录配置***********************************************
-			.with(new SocialHttpConfigurer(socialDelegateClientRegistrationRepository),
+			.with(new SocialLoginFilterSecurityConfigurer<>(),
 				(customizer) -> {
 					// 微信网页授权
-					customizer.wechatWebclient("wxcd395c35c45eb823",
+					customizer.wechatWebClient("wxcd395c35c45eb823",
 							"75f9a12c82bd24ecac0d37bf1156c749")
 						// 企业微信扫码登录
-						.workWechatWebLoginclient("wwa70dc5b6e56936e1",
+						.workWechatWebLoginClient("wwa70dc5b6e56936e1",
 							"nvzGI4Alp3xxxxxxZUc3TtPtKbnfTEets5W8",
 							"1000005")
 						// 微信扫码登录
-						.wechatWebLoginclient("wxcd395c35c45eb823",
+						.wechatWebLoginClient("wxcd395c35c45eb823",
 							"75f9a12c82bd24ecac0d37bf1156c749");
 				})
-			// **************************************oauth2表单登录配置***********************************************
-			.with(new OAuth2FormCaptchaLoginHttpConfigurer<>(
-					userDetailsService, authenticationProperties, captchaRendererFactory),
-				Customizer.withDefaults())
-			.with(new Oauth2FormSmsLoginHttpConfigurer<>(authenticationProperties),
-				Customizer.withDefaults())
-			.with(new OAuth2FormQrcodeLoginHttpConfigurer<>(authenticationProperties),
-				Customizer.withDefaults());
+			// **************************************第三方登录配置***********************************************
+			.with(new JustAuthLoginFilterSecurityConfigurer<>(), (customizer) -> {
+				customizer
+					.justAuthUserDetailsService()
+					.auth2UserService();
+			})
+			// **************************************表单登录配置***********************************************
+			.with(new FormLoginFilterSecurityConfigurer<>(),
+				(customizer) -> {
+					customizer
+						.formSmsLogin(formSmsLoginHttpConfigurerCustomizer -> {
+						})
+						.formQrcodeLogin(formQrcodeLoginHttpConfigurerCustomizer -> {
+						});
+				});
 
 		return httpSecurity
-			.addFilterAfter(new ExtensionAndOauth2LoginRefreshTokenFilter(oAuth2AccessTokenStore),
+			.addFilterAfter(new ExtensionLoginRefreshTokenFilter(oAuth2AccessTokenStore),
 				LogoutFilter.class)
 			.build();
 	}
@@ -309,10 +314,10 @@ public class DefaultSecurityConfiguration {
 	@Bean
 	public UserDetailsService userDetailsService(
 		StrategyUserDetailsService strategyUserDetailsService) {
-		SecurityUserDetailsService securityUserDetailsService =
-			new SecurityUserDetailsService(strategyUserDetailsService);
+		TtcUserDetailsService ttcUserDetailsService =
+			new TtcUserDetailsService(strategyUserDetailsService);
 		log.info("Bean  User Details Service] Auto Configure.");
-		return securityUserDetailsService;
+		return ttcUserDetailsService;
 	}
 
 	@Bean

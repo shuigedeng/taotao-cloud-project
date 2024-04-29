@@ -16,8 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy;
 
-import com.taotao.cloud.auth.infrastructure.strategy.user.SysPermission;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcPermission;
+import com.taotao.cloud.security.springsecurity.core.TtcPermission;
 import java.util.List;
 import java.util.stream.Collectors;
 

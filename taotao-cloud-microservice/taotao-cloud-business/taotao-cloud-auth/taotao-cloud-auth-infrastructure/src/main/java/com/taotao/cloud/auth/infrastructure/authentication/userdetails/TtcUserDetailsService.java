@@ -42,13 +42,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @version 2023.07
  * @since 2023-07-04 10:52:09
  */
-public class SecurityUserDetailsService implements EnhanceUserDetailsService {
+public class TtcUserDetailsService implements EnhanceUserDetailsService {
 
-    private static final Logger log = LoggerFactory.getLogger(SecurityUserDetailsService.class);
+    private static final Logger log = LoggerFactory.getLogger(TtcUserDetailsService.class);
 
     private final StrategyUserDetailsService strategyUserDetailsService;
 
-    public SecurityUserDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+    public TtcUserDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
         this.strategyUserDetailsService = strategyUserDetailsService;
     }
 

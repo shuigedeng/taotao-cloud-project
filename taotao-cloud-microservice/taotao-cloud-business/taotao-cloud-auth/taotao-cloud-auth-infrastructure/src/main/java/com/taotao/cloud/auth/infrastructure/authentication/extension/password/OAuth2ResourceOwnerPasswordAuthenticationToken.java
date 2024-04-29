@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.password;
 
+import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class OAuth2ResourceOwnerPasswordAuthenticationToken extends OAuth2Author
             Authentication clientPrincipal,
             @Nullable Set<String> scopes,
             @Nullable Map<String, Object> additionalParameters) {
-        super(TtcGrantType.PASSWORD, clientPrincipal, additionalParameters);
+        super(TtcAuthorizationGrantType.PASSWORD, clientPrincipal, additionalParameters);
         Assert.notNull(clientPrincipal, "clientPrincipal cannot be null");
         this.scopes = Collections.unmodifiableSet(
                 CollectionUtils.isNotEmpty(scopes) ? new HashSet<>(scopes) : Collections.emptySet());

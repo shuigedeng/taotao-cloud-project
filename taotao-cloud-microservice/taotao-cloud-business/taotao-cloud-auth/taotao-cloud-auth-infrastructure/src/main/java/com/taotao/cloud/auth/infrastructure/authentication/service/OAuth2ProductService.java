@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.application.service;
+package com.taotao.cloud.auth.infrastructure.authentication.service;
 
 import com.taotao.cloud.auth.infrastructure.persistent.management.repository.OAuth2ProductRepository;
 import org.springframework.stereotype.Service;

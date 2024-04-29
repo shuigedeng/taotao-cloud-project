@@ -15,7 +15,6 @@ server:
   servlet:
     application-display-name: ${spring.application.name}
     #context-path: sys
-
 decorator:
   datasource:
     enabled: true
@@ -833,7 +832,11 @@ spring:
             token-uri: https://graph.qq.com/oauth2.0/token
             user-info-uri: https://graph.qq.com/oauth2.0/me
             user-info-authentication-method: form
-#      resourceserver:
+      authorizationserver:
+        endpoint:
+          oidc:
+            user-info-uri:
+  #      resourceserver:
 #        jwt:
 #          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
   cloud:

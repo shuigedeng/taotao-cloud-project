@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.application.service;
+package com.taotao.cloud.auth.infrastructure.authentication.service;
 
 import com.taotao.cloud.security.springsecurity.enums.ApplicationType;
 import com.taotao.cloud.security.springsecurity.enums.AuthenticationMethod;

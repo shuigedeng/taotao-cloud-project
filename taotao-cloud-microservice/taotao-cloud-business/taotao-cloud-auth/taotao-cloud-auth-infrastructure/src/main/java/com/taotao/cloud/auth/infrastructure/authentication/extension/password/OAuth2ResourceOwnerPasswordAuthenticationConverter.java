@@ -16,10 +16,13 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.password;
 
+import static com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType.PASSWORD;
+
 import com.taotao.cloud.auth.infrastructure.authentication.extension.OAuth2AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2EndpointUtils;
 import com.taotao.cloud.security.springsecurity.constants.HttpHeaders;
+import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,7 +58,7 @@ public final class OAuth2ResourceOwnerPasswordAuthenticationConverter extends
     public Authentication convert(HttpServletRequest request) {
         // grant_type (REQUIRED)
         String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-        if (!TtcGrantType.PASSWORD.getValue().equals(grantType)) {
+        if (!TtcAuthorizationGrantType.PASSWORD.getValue().equals(grantType)) {
             return null;
         }
 

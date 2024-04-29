@@ -1,6 +1,7 @@
 package com.taotao.cloud.auth.infrastructure.authentication.federation.strategy.impl;
 
 import com.taotao.cloud.auth.infrastructure.authentication.federation.Oauth2ThirdAccount;
+import com.taotao.cloud.auth.infrastructure.authentication.federation.strategy.Oauth2UserConverterStrategy;
 import java.util.Map;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;

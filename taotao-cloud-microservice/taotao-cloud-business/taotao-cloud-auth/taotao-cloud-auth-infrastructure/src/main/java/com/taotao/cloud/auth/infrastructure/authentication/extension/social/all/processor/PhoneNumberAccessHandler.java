@@ -26,53 +26,52 @@ import com.taotao.cloud.security.springsecurity.core.AccessPrincipal;
 /**
  * <p>手机短信接入处理器 </p>
  *
- *
  * @since : 2022/1/26 11:46
  */
 public class PhoneNumberAccessHandler implements AccessHandler {
 
-    //	private final VerificationCodeStampManager verificationCodeStampManager;
-    //	private final SmsSendStrategyFactory smsSendStrategyFactory;
-    //
-    //	public PhoneNumberAccessHandler(VerificationCodeStampManager verificationCodeStampManager, SmsSendStrategyFactory
-    // smsSendStrategyFactory) {
-    //		this.verificationCodeStampManager = verificationCodeStampManager;
-    //		this.smsSendStrategyFactory = smsSendStrategyFactory;
-    //	}
+	//	private final VerificationCodeStampManager verificationCodeStampManager;
+	//	private final SmsSendStrategyFactory smsSendStrategyFactory;
+	//
+	//	public PhoneNumberAccessHandler(VerificationCodeStampManager verificationCodeStampManager, SmsSendStrategyFactory
+	// smsSendStrategyFactory) {
+	//		this.verificationCodeStampManager = verificationCodeStampManager;
+	//		this.smsSendStrategyFactory = smsSendStrategyFactory;
+	//	}
 
-    @Override
-    public AccessResponse preProcess(String core, String... params) {
-        //		String code = verificationCodeStampManager.create(core);
-        //		boolean result;
-        //		if (verificationCodeStampManager.getSandbox()) {
-        //			result = true;
-        //		} else {
-        //			Template template = new Template();
-        //			template.setType(verificationCodeStampManager.getVerificationCodeTemplateId());
-        //			template.setParams(ImmutableMap.of(BaseConstants.CODE, code));
-        //			result = smsSendStrategyFactory.send(template, core);
-        //		}
+	@Override
+	public AccessResponse preProcess(String core, String... params) {
+		//		String code = verificationCodeStampManager.create(core);
+		//		boolean result;
+		//		if (verificationCodeStampManager.getSandbox()) {
+		//			result = true;
+		//		} else {
+		//			Template template = new Template();
+		//			template.setType(verificationCodeStampManager.getVerificationCodeTemplateId());
+		//			template.setParams(ImmutableMap.of(BaseConstants.CODE, code));
+		//			result = smsSendStrategyFactory.send(template, core);
+		//		}
 
-        AccessResponse accessResponse = new AccessResponse();
-        accessResponse.setSuccess(true);
-        return accessResponse;
-    }
+		AccessResponse accessResponse = new AccessResponse();
+		accessResponse.setSuccess(true);
+		return accessResponse;
+	}
 
-    @Override
-    public AccessUserDetails loadUserDetails(String source, AccessPrincipal accessPrincipal) {
-        //		boolean isCodeOk = verificationCodeStampManager.check(accessPrincipal.getMobile(),
-        // accessPrincipal.getCode());
-        //		if (isCodeOk) {
-        //			AccessUserDetails accessUserDetails = new AccessUserDetails();
-        //			accessUserDetails.setUuid(accessPrincipal.getMobile());
-        //			accessUserDetails.setPhoneNumber(accessPrincipal.getMobile());
-        //			accessUserDetails.setUserName(accessPrincipal.getMobile());
-        //			accessUserDetails.setSource(source);
-        //
-        //			verificationCodeStampManager.delete(accessPrincipal.getMobile());
-        //			return accessUserDetails;
-        //		}
+	@Override
+	public AccessUserDetails loadUserDetails(String source, AccessPrincipal accessPrincipal) {
+		//		boolean isCodeOk = verificationCodeStampManager.check(accessPrincipal.getMobile(),
+		// accessPrincipal.getCode());
+		//		if (isCodeOk) {
+		//			AccessUserDetails accessUserDetails = new AccessUserDetails();
+		//			accessUserDetails.setUuid(accessPrincipal.getMobile());
+		//			accessUserDetails.setPhoneNumber(accessPrincipal.getMobile());
+		//			accessUserDetails.setUserName(accessPrincipal.getMobile());
+		//			accessUserDetails.setSource(source);
+		//
+		//			verificationCodeStampManager.delete(accessPrincipal.getMobile());
+		//			return accessUserDetails;
+		//		}
 
-        throw new AccessIdentityVerificationFailedException("Phone Verification Code Error!");
-    }
+		throw new AccessIdentityVerificationFailedException("Phone Verification Code Error!");
+	}
 }

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.local;
 
-import com.taotao.cloud.auth.infrastructure.strategy.user.SysSocialUser;
+import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysSocialUser;
 import org.springframework.stereotype.Service;
 
 /**

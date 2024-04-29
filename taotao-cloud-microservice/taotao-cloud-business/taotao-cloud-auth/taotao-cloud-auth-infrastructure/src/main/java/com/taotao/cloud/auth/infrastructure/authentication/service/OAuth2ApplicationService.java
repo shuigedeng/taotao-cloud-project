@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.application.service;
+package com.taotao.cloud.auth.infrastructure.authentication.service;
 
 import com.taotao.cloud.auth.infrastructure.authorization.converter.OAuth2ApplicationToRegisteredClientConverter;
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.repository.TtcRegisteredClientRepository;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Application;
+import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Scope;
 import com.taotao.cloud.auth.infrastructure.persistent.management.repository.OAuth2ApplicationRepository;
 import java.util.HashSet;
 import java.util.Set;

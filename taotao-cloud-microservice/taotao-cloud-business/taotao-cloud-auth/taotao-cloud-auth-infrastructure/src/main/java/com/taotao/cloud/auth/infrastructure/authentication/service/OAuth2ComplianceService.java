@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.application.service;
+package com.taotao.cloud.auth.infrastructure.authentication.service;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.google.common.net.HttpHeaders;
