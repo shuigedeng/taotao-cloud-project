@@ -2,9 +2,9 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.enti
 
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.ClientNoticeSendTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.convert.ClientNoticeConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.notice.ClientNoticeRecordDto;
+import cn.bootx.platform.daxpay.service.code.ClientNoticeSendTypeEnum;
+import cn.bootx.platform.daxpay.service.core.task.notice.convert.ClientNoticeConvert;
+import cn.bootx.platform.daxpay.service.dto.record.notice.ClientNoticeRecordDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -41,7 +41,7 @@ public class ClientNoticeRecord extends MpCreateEntity implements EntityBaseFunc
      * @see ClientNoticeSendTypeEnum
      */
     @DbColumn(comment = "发送类型")
-    private String type;
+    private String sendType;
 
     /** 错误信息 */
     @DbColumn(comment = "错误信息")

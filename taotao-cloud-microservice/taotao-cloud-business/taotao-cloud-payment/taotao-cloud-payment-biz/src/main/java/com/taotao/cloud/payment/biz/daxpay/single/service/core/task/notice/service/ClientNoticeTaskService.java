@@ -4,15 +4,15 @@ import cn.bootx.platform.common.core.exception.DataNotExistException;
 import cn.bootx.platform.common.core.rest.PageResult;
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.common.mybatisplus.util.MpUtil;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.entity.ClientNoticeRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.entity.ClientNoticeTask;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.notice.service.ClientNoticeService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.dao.ClientNoticeRecordManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.dao.ClientNoticeTaskManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.notice.ClientNoticeRecordDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.notice.ClientNoticeTaskDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.record.ClientNoticeRecordQuery;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.record.ClientNoticeTaskQuery;
+import cn.bootx.platform.daxpay.service.core.task.notice.entity.ClientNoticeRecord;
+import cn.bootx.platform.daxpay.service.core.task.notice.entity.ClientNoticeTask;
+import cn.bootx.platform.daxpay.service.core.payment.notice.service.ClientNoticeService;
+import cn.bootx.platform.daxpay.service.core.task.notice.dao.ClientNoticeRecordManager;
+import cn.bootx.platform.daxpay.service.core.task.notice.dao.ClientNoticeTaskManager;
+import cn.bootx.platform.daxpay.service.dto.record.notice.ClientNoticeRecordDto;
+import cn.bootx.platform.daxpay.service.dto.record.notice.ClientNoticeTaskDto;
+import cn.bootx.platform.daxpay.service.param.record.ClientNoticeRecordQuery;
+import cn.bootx.platform.daxpay.service.param.record.ClientNoticeTaskQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,8 +36,14 @@ public class ClientNoticeTaskService {
 
     /**
      * 手动触发消息发送
+     * 1. 手动触发消息发送次数不会变更
+     * 2. 会记录发送历史
+     * 3. 不受次数限制, 也不受状态控制. 任务完成与否都可以推送
      */
     public void sendData(Long taskId){
+        ClientNoticeTask task = taskManager.findById(taskId)
+                .orElseThrow(() -> new DataNotExistException("任务不存在"));
+        clientNoticeService.sendDataByManual(task);
     }
 
     /**

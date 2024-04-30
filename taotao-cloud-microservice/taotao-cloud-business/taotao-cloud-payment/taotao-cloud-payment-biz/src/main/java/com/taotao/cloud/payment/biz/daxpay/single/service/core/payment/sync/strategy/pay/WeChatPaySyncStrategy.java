@@ -1,11 +1,11 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.strategy.pay;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPaySyncService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.result.PayGatewaySyncResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsPaySyncStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPaySyncService;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.PaySyncResult;
+import cn.bootx.platform.daxpay.service.func.AbsPaySyncStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -40,7 +40,7 @@ public class WeChatPaySyncStrategy extends AbsPaySyncStrategy {
      * 异步支付单与支付网关进行状态比对
      */
     @Override
-    public PayGatewaySyncResult doSyncStatus() {
+    public PaySyncResult doSyncStatus() {
         // 检查并获取微信支付配置
         this.initWeChatPayConfig();
         return weChatPaySyncService.syncPayStatus(this.getOrder(), this.weChatPayConfig);

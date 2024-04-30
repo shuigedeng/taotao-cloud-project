@@ -34,8 +34,9 @@ public class AliReconcileBillDetail extends MpIdEntity {
     @DbColumn(comment = "商品名称")
     private String subject;
     @Alias("创建时间")
-    @DbColumn(comment = "完成时间")
+    @DbColumn(comment = "创建时间")
     private String createTime;
+    /** yyyy-MM-dd HH:mm:ss */
     @Alias("完成时间")
     @DbColumn(comment = "完成时间")
     private String endTime;

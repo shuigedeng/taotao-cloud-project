@@ -1,15 +1,18 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.service;
 
+import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao.PayOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.pay.service.PayExpiredTimeService;
+import cn.bootx.platform.daxpay.service.core.order.pay.dao.PayOrderManager;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.payment.pay.service.PayExpiredTimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 支付订单服务
@@ -28,12 +31,19 @@ public class PayOrderService {
     private final List<String> ORDER_FINISH = Arrays.asList(PayStatusEnum.CLOSE.getCode(), PayStatusEnum.SUCCESS.getCode());
 
     /**
+     * 查询
+     */
+    public Optional<PayOrder> findById(Long id){
+        return payOrderManager.findById(id);
+    }
+
+    /**
      * 新增
      */
     public void save(PayOrder payOrder){
         payOrderManager.save(payOrder);
-        // 异步支付需要添加订单超时任务记录
-        if (payOrder.isAsyncPay()){
+        // TODO 钱包支付不需要注册超时任务
+        if (Objects.equals(payOrder.getChannel(), PayChannelEnum.WALLET.getCode())){
             expiredTimeService.registerExpiredTime(payOrder);
         }
     }
@@ -43,9 +53,13 @@ public class PayOrderService {
      */
     public void updateById(PayOrder payOrder){
         // 如果是异步支付且支付订单完成, 需要删除订单超时任务记录
-        if (payOrder.isAsyncPay() && ORDER_FINISH.contains(payOrder.getStatus())){
+        if (ORDER_FINISH.contains(payOrder.getStatus())){
             expiredTimeService.cancelExpiredTime(payOrder.getId());
         }
         payOrderManager.updateById(payOrder);
     }
+
+    /**
+     * 关闭
+     */
 }

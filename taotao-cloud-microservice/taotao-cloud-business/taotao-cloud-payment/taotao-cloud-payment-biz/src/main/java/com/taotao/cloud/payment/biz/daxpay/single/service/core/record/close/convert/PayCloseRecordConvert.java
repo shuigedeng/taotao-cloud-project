@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.close.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.close.entity.PayCloseRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.close.PayCloseRecordDto;
+import cn.bootx.platform.daxpay.service.core.record.close.entity.PayCloseRecord;
+import cn.bootx.platform.daxpay.service.dto.record.close.PayCloseRecordDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

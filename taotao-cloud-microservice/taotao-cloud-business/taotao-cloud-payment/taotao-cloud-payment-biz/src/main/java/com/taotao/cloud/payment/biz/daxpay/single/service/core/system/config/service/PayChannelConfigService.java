@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service;
 
 import cn.bootx.platform.common.core.exception.DataNotExistException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.dao.PayChannelConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.PayChannelConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.system.config.PayChannelConfigDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.system.payinfo.PayChannelInfoParam;
+import cn.bootx.platform.daxpay.service.core.system.config.dao.PayChannelConfigManager;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.PayChannelConfig;
+import cn.bootx.platform.daxpay.service.dto.system.config.PayChannelConfigDto;
+import cn.bootx.platform.daxpay.service.param.system.payinfo.PayChannelInfoParam;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import lombok.RequiredArgsConstructor;

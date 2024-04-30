@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.transfer.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.transfer.dao;
 
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
 import cn.bootx.platform.daxpay.service.core.order.transfer.entity.TransferOrder;

@@ -2,14 +2,14 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.callback
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayCallbackStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayRepairWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.CallbackLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.service.PayOrderQueryService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.result.PayRepairResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.service.PayRepairService;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairWayEnum;
+import cn.bootx.platform.daxpay.service.common.context.CallbackLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderQueryService;
+import cn.bootx.platform.daxpay.service.core.payment.repair.result.PayRepairResult;
+import cn.bootx.platform.daxpay.service.core.payment.repair.service.PayRepairService;
 import com.baomidou.lock.LockInfo;
 import com.baomidou.lock.LockTemplate;
 import lombok.RequiredArgsConstructor;
@@ -42,25 +42,25 @@ public class PayCallbackService {
     public void payCallback() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         // 加锁
-        LockInfo lock = lockTemplate.lock("callback:payment:" + callbackInfo.getOrderId());
+        LockInfo lock = lockTemplate.lock("callback:payment:" + callbackInfo.getTradeNo(),10000, 200);
         if (Objects.isNull(lock)){
             callbackInfo.setCallbackStatus(PayCallbackStatusEnum.IGNORE).setMsg("回调正在处理中，忽略本次回调请求");
-            log.warn("订单号: {} 回调正在处理中，忽略本次回调请求", callbackInfo.getOrderId());
+            log.warn("订单号: {} 回调正在处理中，忽略本次回调请求", callbackInfo.getTradeNo());
             return;
         }
         try {
             // 获取支付单
-            PayOrder payOrder = payOrderQueryService.findById(callbackInfo.getOrderId()).orElse(null);
+            PayOrder payOrder = payOrderQueryService.findByOrderNo(callbackInfo.getTradeNo()).orElse(null);
             // 本地支付单不存在,记录回调记录, TODO 需要补单或进行退款
             if (Objects.isNull(payOrder)) {
                 callbackInfo.setCallbackStatus(PayCallbackStatusEnum.NOT_FOUND).setMsg("支付单不存在,记录回调记录");
                 return;
             }
             // 设置订单关联网关订单号
-            payOrder.setGatewayOrderNo(callbackInfo.getGatewayOrderNo());
+            payOrder.setOutOrderNo(callbackInfo.getOutTradeNo());
 
             // 成功状态
-            if (Objects.equals(PayCallbackStatusEnum.SUCCESS.getCode(), callbackInfo.getGatewayStatus())) {
+            if (Objects.equals(PayCallbackStatusEnum.SUCCESS.getCode(), callbackInfo.getOutStatus())) {
                 // 支付成功处理
                 this.success(payOrder);
             } else {
@@ -97,7 +97,7 @@ public class PayCallbackService {
         PaymentContextLocal.get().getRepairInfo().setFinishTime(callbackInfo.getFinishTime());
         // 执行支付完成修复逻辑
         PayRepairResult repair = payRepairService.repair(payOrder, PayRepairWayEnum.PAY_SUCCESS);
-        callbackInfo.setPayRepairNo(repair.getRepairNo());
+        callbackInfo.setRepairNo(repair.getRepairNo());
     }
 
     /**
@@ -117,7 +117,7 @@ public class PayCallbackService {
         }
         // 执行支付关闭修复逻辑
         PayRepairResult repair = payRepairService.repair(payOrder, PayRepairWayEnum.CLOSE_LOCAL);
-        callbackInfo.setPayRepairNo(repair.getRepairNo());
+        callbackInfo.setRepairNo(repair.getRepairNo());
     }
 
 }

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.param.allocation.group;
+package com.taotao.cloud.payment.biz.daxpay.single.service.param.allocation.group;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

@@ -29,11 +29,21 @@ public class WeChatPayConfigParam {
     @DbColumn(comment = "是否启用")
     private Boolean enable;
 
+    @Schema(description = "是否支付分账")
+    private Boolean allocation;
+
+    @Schema(description = "支付限额")
+    private Integer singleLimit;
+
     @Schema(description = "异步通知地址")
     private String notifyUrl;
 
-    @Schema(description ="同步通知地址")
+    @Schema(description = "同步通知地址")
     private String returnUrl;
+
+    /** 接口版本, 使用v2还是v3接口 */
+    @Schema(description = "接口版本")
+    private String apiVersion;
 
     @Schema(description = "商户平台「API安全」中的 APIv2 密钥")
     private String apiKeyV2;

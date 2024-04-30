@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.allocation.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.allocation.dao;
 
 import cn.bootx.platform.daxpay.service.core.order.allocation.entity.AllocationOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

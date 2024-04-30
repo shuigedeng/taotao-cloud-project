@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  *
@@ -21,44 +20,47 @@ import java.util.List;
 @Schema(title = "退款通知消息")
 public class RefundNoticeResult {
 
-    @Schema(description = "退款ID")
-    private Long refundId;
-
+    /** 退款号 */
     @Schema(description = "退款号")
     private String refundNo;
 
-    @Schema(description = "是否含有异步通道")
-    private boolean asyncPay;
+    /** 商户退款号 */
+    @Schema(description = "商户退款号")
+    private String bizRefundNo;
 
     /**
-     * @see PayChannelEnum#ASYNC_TYPE_CODE
+     * 支付通道
+     * @see PayChannelEnum
      */
-    @Schema(description = "异步通道")
-    private String asyncChannel;
+    @Schema(description = "支付通道")
+    private String channel;
 
+    /** 退款金额 */
     @Schema(description = "退款金额")
     private Integer amount;
 
-    @Schema(description = "退款通道信息")
-    private List<RefundChannelResult> refundChannels;
-
     /**
+     * 退款状态
      * @see RefundStatusEnum
      */
     @Schema(description = "退款状态")
     private String status;
 
+    /** 退款成功时间 */
     @Schema(description = "退款成功时间")
     @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
-    private LocalDateTime refundTime;
+    private LocalDateTime finishTime;
 
+    /** 退款创建时间 */
     @Schema(description = "退款创建时间")
     @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
     private LocalDateTime createTime;
 
+    /** 商户扩展参数,回调时会原样返回 */
     @Schema(description = "商户扩展参数,回调时会原样返回")
     private String attach;
 
+    /** 签名 */
     @Schema(description = "签名")
     private String sign;
 }

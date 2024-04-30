@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.service;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.daxpay.code.ReconcileTradeEnum;

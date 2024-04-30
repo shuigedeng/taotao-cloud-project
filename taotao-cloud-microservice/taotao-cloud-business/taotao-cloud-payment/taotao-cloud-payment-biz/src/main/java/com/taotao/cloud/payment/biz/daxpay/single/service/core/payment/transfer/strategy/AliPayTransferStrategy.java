@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.transfer.strategy;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.transfer.strategy;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;

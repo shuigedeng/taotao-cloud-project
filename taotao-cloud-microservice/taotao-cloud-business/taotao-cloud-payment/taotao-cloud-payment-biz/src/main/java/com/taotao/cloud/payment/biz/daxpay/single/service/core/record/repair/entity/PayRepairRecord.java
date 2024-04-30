@@ -3,12 +3,12 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.en
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PaymentTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayRepairSourceEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayRepairWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.RefundRepairWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.convert.PayRepairRecordConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.repair.PayRepairRecordDto;
+import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairSourceEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairWayEnum;
+import cn.bootx.platform.daxpay.service.code.RefundRepairWayEnum;
+import cn.bootx.platform.daxpay.service.core.record.repair.convert.PayRepairRecordConvert;
+import cn.bootx.platform.daxpay.service.dto.record.repair.PayRepairRecordDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -37,13 +37,13 @@ public class PayRepairRecord extends MpCreateEntity implements EntityBaseFunctio
 
     /** 支付ID/退款ID */
     @DbColumn(comment = "本地订单ID")
-    private Long orderId;
+    private Long tradeId;
 
     /**
-     * 本地业务号, 支付业务号/退款号
+     * 本地交易号, 支付号/退款号
      */
     @DbColumn(comment = "本地业务号")
-    private String orderNo;
+    private String tradeNo;
 
     /**
      * 修复类型 支付修复/退款修复
@@ -67,9 +67,9 @@ public class PayRepairRecord extends MpCreateEntity implements EntityBaseFunctio
     @DbColumn(comment = "修复方式")
     private String repairWay;
 
-    /** 修复的异步通道 */
-    @DbColumn(comment = "修复的异步通道")
-    private String asyncChannel;
+    /** 修复的通道 */
+    @DbColumn(comment = "修复的通道")
+    private String channel;
 
     /**
      * 修复前状态

@@ -3,8 +3,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.e
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.common.mybatisplus.handler.StringListTypeHandler;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.convert.WalletConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wallet.WalletConfigDto;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.convert.WalletConvert;
+import cn.bootx.platform.daxpay.service.dto.channel.wallet.WalletConfigDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import cn.bootx.table.modify.mysql.annotation.DbMySqlFieldType;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.wechat.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service;
 
 import cn.bootx.platform.daxpay.code.AllocationReceiverTypeEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;

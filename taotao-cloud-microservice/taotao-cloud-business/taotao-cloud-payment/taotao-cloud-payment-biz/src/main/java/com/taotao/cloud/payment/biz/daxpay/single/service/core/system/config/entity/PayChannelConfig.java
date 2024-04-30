@@ -2,9 +2,9 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.en
 
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.convert.PayChannelConfigConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.system.config.PayChannelConfigDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.system.payinfo.PayChannelInfoParam;
+import cn.bootx.platform.daxpay.service.core.system.config.convert.PayChannelConfigConvert;
+import cn.bootx.platform.daxpay.service.dto.system.config.PayChannelConfigDto;
+import cn.bootx.platform.daxpay.service.param.system.payinfo.PayChannelInfoParam;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;

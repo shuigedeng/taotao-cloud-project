@@ -3,12 +3,12 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.s
 import cn.bootx.platform.common.core.exception.DataNotExistException;
 import cn.bootx.platform.common.core.rest.dto.LabelValue;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.WeChatPayWay;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.dao.WeChatPayConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.code.WeChatPayWay;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.dao.WeChatPayConfigManager;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service.PayChannelConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wechat.WeChatPayConfigParam;
+import cn.bootx.platform.daxpay.service.core.system.config.service.PayChannelConfigService;
+import cn.bootx.platform.daxpay.service.param.channel.wechat.WeChatPayConfigParam;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import lombok.RequiredArgsConstructor;
@@ -63,7 +63,7 @@ public class WeChatPayConfigService {
     public WeChatPayConfig getAndCheckConfig(){
         WeChatPayConfig weChatPayConfig = getConfig();
         if (!weChatPayConfig.getEnable()){
-            throw new PayFailureException("微信支付配置未启用");
+            throw new PayFailureException("微信支付未启用");
         }
         return weChatPayConfig;
     }

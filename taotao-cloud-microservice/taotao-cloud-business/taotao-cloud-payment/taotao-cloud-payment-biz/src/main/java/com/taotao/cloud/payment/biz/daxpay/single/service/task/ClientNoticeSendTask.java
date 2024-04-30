@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.task;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.notice.service.ClientNoticeService;
+import cn.bootx.platform.daxpay.service.core.payment.notice.service.ClientNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;

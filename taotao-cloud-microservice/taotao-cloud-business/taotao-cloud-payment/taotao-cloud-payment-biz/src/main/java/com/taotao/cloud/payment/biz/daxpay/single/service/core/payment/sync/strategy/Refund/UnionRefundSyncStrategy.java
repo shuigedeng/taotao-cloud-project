@@ -1,11 +1,11 @@
-package cn.bootx.platform.daxpay.service.core.payment.sync.strategy.Refund;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.strategy.Refund;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PaySyncStatusEnum;
 import cn.bootx.platform.daxpay.service.core.channel.union.entity.UnionPayConfig;
 import cn.bootx.platform.daxpay.service.core.channel.union.service.UnionPayConfigService;
 import cn.bootx.platform.daxpay.service.core.channel.union.service.UnionPaySyncService;
-import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundGatewaySyncResult;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundSyncResult;
 import cn.bootx.platform.daxpay.service.func.AbsRefundSyncStrategy;
 import cn.bootx.platform.daxpay.service.sdk.union.api.UnionPayKit;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class UnionRefundSyncStrategy extends AbsRefundSyncStrategy {
      * @see PaySyncStatusEnum
      */
     @Override
-    public RefundGatewaySyncResult doSyncStatus() {
+    public RefundSyncResult doSyncStatus() {
         UnionPayConfig config = unionPayConfigService.getConfig();
         UnionPayKit unionPayKit = unionPayConfigService.initPayService(config);
         return unionPaySyncService.syncRefundStatus(this.getRefundOrder(),unionPayKit);

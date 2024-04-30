@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.report.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.report.dao;
 
 import cn.bootx.platform.daxpay.service.core.report.entity.ChannelOrderLine;
 import cn.bootx.platform.daxpay.service.param.report.CockpitReportQuery;

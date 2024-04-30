@@ -2,11 +2,11 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.str
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PaySyncStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service.AliPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service.AliPaySyncService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.result.RefundGatewaySyncResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundSyncStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.service.AliPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.service.AliPaySyncService;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundSyncResult;
+import cn.bootx.platform.daxpay.service.func.AbsRefundSyncStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -41,7 +41,7 @@ public class AliRefundSyncStrategy extends AbsRefundSyncStrategy {
      * @see PaySyncStatusEnum
      */
     @Override
-    public RefundGatewaySyncResult doSyncStatus() {
+    public RefundSyncResult doSyncStatus() {
         AliPayConfig config = alipayConfigService.getConfig();
         alipayConfigService.initConfig(config);
         return aliPaySyncService.syncRefundStatus(this.getRefundOrder());

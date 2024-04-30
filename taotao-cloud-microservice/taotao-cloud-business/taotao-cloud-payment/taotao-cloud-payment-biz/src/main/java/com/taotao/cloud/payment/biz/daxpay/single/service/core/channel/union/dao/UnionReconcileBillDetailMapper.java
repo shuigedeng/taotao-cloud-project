@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.dao;
 
 import cn.bootx.platform.daxpay.service.core.channel.union.entity.UnionReconcileBillDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

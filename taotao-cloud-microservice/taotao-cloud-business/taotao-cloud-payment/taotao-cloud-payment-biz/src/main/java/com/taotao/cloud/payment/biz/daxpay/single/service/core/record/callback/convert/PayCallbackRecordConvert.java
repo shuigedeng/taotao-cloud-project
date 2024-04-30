@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.callback.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.callback.entity.PayCallbackRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.callback.PayCallbackRecordDto;
+import cn.bootx.platform.daxpay.service.core.record.callback.entity.PayCallbackRecord;
+import cn.bootx.platform.daxpay.service.dto.record.callback.PayCallbackRecordDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

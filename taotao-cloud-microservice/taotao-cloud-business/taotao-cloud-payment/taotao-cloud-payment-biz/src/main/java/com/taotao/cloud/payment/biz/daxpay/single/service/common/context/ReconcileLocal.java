@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.common.context;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.reconcile.entity.PayReconcileDetail;
+import cn.bootx.platform.daxpay.service.core.order.reconcile.entity.ReconcileDetail;
+import cn.bootx.platform.daxpay.service.core.order.reconcile.entity.ReconcileOrder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -16,11 +16,10 @@ import java.util.List;
 @Accessors(chain = true)
 public class ReconcileLocal {
 
+    /** 对账订单 */
+    private ReconcileOrder reconcileOrder;
+
     /** 通用支付对账记录 */
-    private List<PayReconcileDetail> reconcileDetails;
-
-
-    /** 支付完成时间 从支付网关中获取 */
-    private LocalDateTime payTime;
+    private List<ReconcileDetail> reconcileDetails;
 
 }

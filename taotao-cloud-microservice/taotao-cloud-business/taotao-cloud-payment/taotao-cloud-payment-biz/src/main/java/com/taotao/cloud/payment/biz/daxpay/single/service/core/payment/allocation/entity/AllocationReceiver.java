@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.entity;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.entity;
 
 import cn.bootx.platform.common.core.annotation.EncryptionField;
 import cn.bootx.platform.common.core.function.EntityBaseFunction;

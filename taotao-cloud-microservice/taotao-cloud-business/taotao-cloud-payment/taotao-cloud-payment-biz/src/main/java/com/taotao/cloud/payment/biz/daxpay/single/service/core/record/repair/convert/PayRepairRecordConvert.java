@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.entity.PayRepairRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.repair.PayRepairRecordDto;
+import cn.bootx.platform.daxpay.service.core.record.repair.entity.PayRepairRecord;
+import cn.bootx.platform.daxpay.service.dto.record.repair.PayRepairRecordDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

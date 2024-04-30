@@ -2,12 +2,12 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.s
 
 import cn.bootx.platform.common.core.exception.BizException;
 import cn.bootx.platform.common.core.exception.DataNotExistException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.WalletCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.dao.WalletManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.Wallet;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wallet.CreateWalletParam;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wallet.WalletRechargeParam;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wallet.WalleteeDductParam;
+import cn.bootx.platform.daxpay.service.code.WalletCode;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.dao.WalletManager;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.Wallet;
+import cn.bootx.platform.daxpay.service.param.channel.wallet.CreateWalletParam;
+import cn.bootx.platform.daxpay.service.param.channel.wallet.WalletRechargeParam;
+import cn.bootx.platform.daxpay.service.param.channel.wallet.WalleteeDductParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class WalletService {
     private final WalletManager walletManager;
-    private final WalletRecordService walletRecordService;
 
     /**
      * 创建钱包操作，默认为启用状态， 不传输余额则默认为0
@@ -80,7 +79,6 @@ public class WalletService {
         }
         wallet.setBalance(wallet.getBalance() + param.getAmount());
         walletManager.updateById(wallet);
-        walletRecordService.recharge(wallet, param.getAmount());
     }
 
     /**
@@ -100,6 +98,5 @@ public class WalletService {
         }
         wallet.setBalance(wallet.getBalance() - param.getAmount());
         walletManager.updateById(wallet);
-        walletRecordService.deduct(wallet, param.getAmount());
     }
 }

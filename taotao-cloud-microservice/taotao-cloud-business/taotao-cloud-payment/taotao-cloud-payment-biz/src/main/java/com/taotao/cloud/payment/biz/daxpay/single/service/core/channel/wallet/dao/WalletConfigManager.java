@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.dao;
 
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.WalletConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.WalletConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;

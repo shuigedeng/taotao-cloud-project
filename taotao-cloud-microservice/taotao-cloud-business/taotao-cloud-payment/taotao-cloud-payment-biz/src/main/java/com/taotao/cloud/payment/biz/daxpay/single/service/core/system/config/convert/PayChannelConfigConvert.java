@@ -1,8 +1,8 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.PayChannelConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.system.config.PayChannelConfigDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.system.payinfo.PayChannelInfoParam;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.PayChannelConfig;
+import cn.bootx.platform.daxpay.service.dto.system.config.PayChannelConfigDto;
+import cn.bootx.platform.daxpay.service.param.system.payinfo.PayChannelInfoParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

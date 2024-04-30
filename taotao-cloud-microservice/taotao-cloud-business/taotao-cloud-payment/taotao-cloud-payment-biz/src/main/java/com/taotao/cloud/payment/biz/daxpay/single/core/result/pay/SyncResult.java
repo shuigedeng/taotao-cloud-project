@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.core.result.pay;
 import cn.bootx.platform.daxpay.code.AllocationOrderStatusEnum;
 import cn.bootx.platform.daxpay.code.RefundSyncStatusEnum;
 import cn.bootx.platform.daxpay.code.PaySyncStatusEnum;
-import cn.bootx.platform.daxpay.result.CommonResult;
+import cn.bootx.platform.daxpay.result.PaymentCommonResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ import static cn.bootx.platform.daxpay.code.PaySyncStatusEnum.FAIL;
 @Data
 @Accessors(chain = true)
 @Schema(title = "同步结果")
-public class SyncResult extends CommonResult {
+public class SyncResult extends PaymentCommonResult {
 
     /**
      * 支付网关同步状态
@@ -32,9 +32,9 @@ public class SyncResult extends CommonResult {
     private String gatewayStatus = FAIL.getCode();
 
     @Schema(description = "是否进行了修复")
-    private boolean repair;
+    private Boolean repair;
 
     @Schema(description = "修复号")
-    private String repairOrderNo;
+    private String repairNo;
 
 }

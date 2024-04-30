@@ -3,11 +3,11 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.s
 import cn.bootx.platform.common.core.exception.DataNotExistException;
 import cn.bootx.platform.common.core.rest.dto.LabelValue;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.WalletPayWay;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.dao.WalletConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.WalletConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service.PayChannelConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wechat.WalletConfigParam;
+import cn.bootx.platform.daxpay.service.code.WalletPayWay;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.dao.WalletConfigManager;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.WalletConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.service.PayChannelConfigService;
+import cn.bootx.platform.daxpay.service.param.channel.wechat.WalletConfigParam;
 import cn.hutool.core.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

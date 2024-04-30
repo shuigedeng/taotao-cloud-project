@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.alipay.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service;
 
 import cn.bootx.platform.common.core.function.CollectorsFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
@@ -46,8 +46,8 @@ public class AliPayAllocationService {
     public void allocation(AllocationOrder allocationOrder, List<AllocationOrderDetail> orderDetails){
         // 分账主体参数
         AlipayTradeOrderSettleModel model = new AlipayTradeOrderSettleModel();
-        model.setOutRequestNo(String.valueOf(allocationOrder.getOrderNo()));
-        model.setTradeNo(allocationOrder.getGatewayPayOrderNo());
+        model.setOutRequestNo(allocationOrder.getOrderNo());
+        model.setTradeNo(allocationOrder.getOutOrderNo());
         model.setRoyaltyMode(AliPayCode.ALLOC_ASYNC);
 
         // 分账子参数 根据Id排序
@@ -65,7 +65,7 @@ public class AliPayAllocationService {
         AlipayTradeOrderSettleResponse response = AliPayApi.tradeOrderSettleToResponse(model);
         // 需要写入到分账订单中
         String settleNo = response.getSettleNo();
-        PaymentContextLocal.get().getAllocationInfo().setGatewayNo(settleNo);
+        PaymentContextLocal.get().getAllocationInfo().setOutAllocationNo(settleNo);
         this.verifyErrorMsg(response);
     }
 
@@ -77,7 +77,7 @@ public class AliPayAllocationService {
         // 分账主体参数
         AlipayTradeOrderSettleModel model = new AlipayTradeOrderSettleModel();
         model.setOutRequestNo(String.valueOf(allocationOrder.getOrderNo()));
-        model.setTradeNo(allocationOrder.getGatewayPayOrderNo());
+        model.setTradeNo(allocationOrder.getOutOrderNo());
         model.setRoyaltyMode(AliPayCode.ALLOC_ASYNC);
         // 分账完结参数
         SettleExtendParams extendParams = new SettleExtendParams();
@@ -105,7 +105,7 @@ public class AliPayAllocationService {
     @SneakyThrows
     public void sync(AllocationOrder allocationOrder, List<AllocationOrderDetail> allocationOrderDetails){
         AlipayTradeOrderSettleQueryModel model = new AlipayTradeOrderSettleQueryModel();
-        model.setTradeNo(allocationOrder.getGatewayPayOrderNo());
+        model.setTradeNo(allocationOrder.getOutOrderNo());
         model.setOutRequestNo(allocationOrder.getOrderNo());
         AlipayTradeOrderSettleQueryRequest request = new AlipayTradeOrderSettleQueryRequest();
         request.setBizModel(model);

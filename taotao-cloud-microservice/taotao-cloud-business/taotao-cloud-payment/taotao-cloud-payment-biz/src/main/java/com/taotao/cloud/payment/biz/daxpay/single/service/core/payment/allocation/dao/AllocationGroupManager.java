@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.dao;
 
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
@@ -43,7 +43,7 @@ public class AllocationGroupManager extends BaseManager<AllocationGroupMapper,Al
     /**
      * 获取默认分账组
      */
-    public Optional<AllocationGroup> findDefaultGroup(String asyncChannel) {
-       return findByField(AllocationGroup::getChannel,asyncChannel);
+    public Optional<AllocationGroup> findDefaultGroup(String channel) {
+       return findByField(AllocationGroup::getChannel,channel);
     }
 }

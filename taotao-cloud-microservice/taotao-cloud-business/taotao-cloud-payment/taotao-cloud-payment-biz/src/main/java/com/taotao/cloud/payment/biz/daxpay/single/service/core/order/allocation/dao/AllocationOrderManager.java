@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.allocation.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.allocation.dao;
 
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
@@ -29,6 +29,13 @@ public class AllocationOrderManager extends BaseManager<AllocationOrderMapper, A
      */
     public Optional<AllocationOrder> findByAllocationNo(String allocationNo){
         return findByField(AllocationOrder::getAllocationNo, allocationNo);
+    }
+
+    /**
+     * 根据商户分账号查询
+     */
+    public Optional<AllocationOrder> findByBizAllocationNo(String bizAllocationNo){
+        return findByField(AllocationOrder::getBizAllocationNo, bizAllocationNo);
     }
 
     /**

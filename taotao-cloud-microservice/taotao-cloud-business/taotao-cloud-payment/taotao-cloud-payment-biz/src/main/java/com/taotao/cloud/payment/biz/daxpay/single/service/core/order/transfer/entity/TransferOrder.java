@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.transfer.entity;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.transfer.entity;
 
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;

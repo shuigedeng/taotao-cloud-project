@@ -3,9 +3,10 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.common.s
 import cn.bootx.platform.daxpay.code.PaySignTypeEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
 import cn.bootx.platform.daxpay.param.PaymentCommonParam;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.ApiInfoLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.PlatformLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.result.PaymentCommonResult;
+import cn.bootx.platform.daxpay.service.common.context.ApiInfoLocal;
+import cn.bootx.platform.daxpay.service.common.context.PlatformLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
 import cn.bootx.platform.daxpay.util.PaySignUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class PaymentSignService {
     private final PaymentAssistService paymentAssistService;;
 
     /**
-     * 签名
+     * 入参签名校验
      */
     public void verifySign(PaymentCommonParam param) {
         // 先触发上下文的初始化
@@ -55,4 +56,19 @@ public class PaymentSignService {
         }
     }
 
+    /**
+     * 对对象进行签名
+     */
+    public void sign(PaymentCommonResult result) {
+        PlatformLocal platformInfo = PaymentContextLocal.get()
+                .getPlatformInfo();
+        String signType = platformInfo.getSignType();
+        if (Objects.equals(PaySignTypeEnum.HMAC_SHA256.getCode(), signType)){
+            result.setSign(PaySignUtil.hmacSha256Sign(result, platformInfo.getSignSecret()));
+        } else if (Objects.equals(PaySignTypeEnum.MD5.getCode(), signType)){
+            result.setSign(PaySignUtil.md5Sign(result, platformInfo.getSignSecret()));
+        } else {
+            throw new PayFailureException("未获取到签名方式，请检查");
+        }
+    }
 }

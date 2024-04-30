@@ -25,6 +25,9 @@ public interface AliPayCode {
     /** APP支付必填 APP支付产品 */
     String QUICK_MSECURITY_PAY = "QUICK_MSECURITY_PAY";
 
+    /** 询余额账户类型 */
+    String QUERY_ACCOUNT_TYPE = "ACCTRANS_ACCOUNT";
+
     /** 付款码支付 */
     String BAR_CODE = "bar_code";
 
@@ -38,7 +41,7 @@ public interface AliPayCode {
     /** 对交易或商品的描述(在没有公用回传参数的时候, 这个作为公用回传参数) */
     String BODY = "body";
 
-    /** 外部支付订单号 */
+    /** 外部支付订单号 - 商户订单号 */
     String OUT_TRADE_NO = "out_trade_no";
 
     /** 支付流水号 */
@@ -95,4 +98,22 @@ public interface AliPayCode {
     // 网关返回码 支付进行中 order success pay inprocess
     String INPROCESS = "10003";
 
+    /* 分账相关 */
+    /** 分账接收方不存在 */
+    String USER_NOT_EXIST = "USER_NOT_EXIST";
+
+    /** 分账金额超过最大可分账金额 */
+    String ALLOC_AMOUNT_VALIDATE_ERROR = "ACQ.ALLOC_AMOUNT_VALIDATE_ERROR";
+
+    /** 分账 进行中 */
+    String ALLOC_PROCESSING = "PROCESSING";
+    /** 分账 成功 */
+    String ALLOC_SUCCESS = "SUCCESS";
+    /** 分账 失败 */
+    String ALLOC_FAIL = "FAIL";
+
+    /** 异步分账 */
+    String ALLOC_ASYNC = "ASYNC";
+    /** 同步分账 */
+    String ALLOC_SYNC = "SYNC";
 }

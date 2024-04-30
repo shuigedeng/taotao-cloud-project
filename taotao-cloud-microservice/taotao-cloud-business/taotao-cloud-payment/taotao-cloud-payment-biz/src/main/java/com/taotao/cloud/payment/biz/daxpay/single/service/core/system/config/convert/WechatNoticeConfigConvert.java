@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.WechatNoticeConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.system.config.WechatNoticeConfigDto;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.WechatNoticeConfig;
+import cn.bootx.platform.daxpay.service.dto.system.config.WechatNoticeConfigDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

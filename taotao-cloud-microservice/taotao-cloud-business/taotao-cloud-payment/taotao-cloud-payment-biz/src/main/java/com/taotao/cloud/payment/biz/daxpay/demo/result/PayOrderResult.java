@@ -13,26 +13,20 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PayOrderResult {
-    /** 支付ID */
-    private Long paymentId;
 
-    /** 是否是异步支付 */
-    private boolean asyncPay;
+    /** 商户订单号 */
+    private String bizOrderNo;
 
-    /**
-     * 异步支付通道
-     * @see PayChannelEnum
-     */
-    private String asyncChannel;
-
-
-    /** 支付参数体(通常用于发起异步支付的参数) */
-    private String payBody;
+    /** 订单号 */
+    private String orderNo;
 
     /**
      * 支付状态
      * @see PayStatusEnum
      */
     private String status;
+
+    /** 支付参数体(通常用于发起支付的参数) */
+    private String payBody;
 
 }

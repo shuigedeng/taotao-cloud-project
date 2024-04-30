@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.close.strategy;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayCloseService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsPayCloseStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayCloseService;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayConfigService;
+import cn.bootx.platform.daxpay.service.func.AbsPayCloseStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;

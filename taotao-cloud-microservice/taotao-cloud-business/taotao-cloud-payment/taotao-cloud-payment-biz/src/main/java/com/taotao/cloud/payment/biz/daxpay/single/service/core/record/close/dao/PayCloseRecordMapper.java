@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.close.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.close.entity.PayCloseRecord;
+import cn.bootx.platform.daxpay.service.core.record.close.entity.PayCloseRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -3,10 +3,10 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.callback.
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayCallbackStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PaymentTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.callback.convert.PayCallbackRecordConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.callback.PayCallbackRecordDto;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
+import cn.bootx.platform.daxpay.service.core.record.callback.convert.PayCallbackRecordConvert;
+import cn.bootx.platform.daxpay.service.dto.record.callback.PayCallbackRecordDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import cn.bootx.table.modify.mysql.annotation.DbMySqlFieldType;
@@ -29,13 +29,13 @@ import lombok.experimental.Accessors;
 @TableName("pay_callback_record")
 public class PayCallbackRecord extends MpCreateEntity implements EntityBaseFunction<PayCallbackRecordDto> {
 
-    /** 本地订单id */
-    @DbColumn(comment = "本地订单id")
-    private Long orderId;
+    /** 本地交易号 */
+    @DbColumn(comment = "本地交易号")
+    private String tradeNo;
 
-    /** 支付网关订单号 */
-    @DbColumn(comment = "支付网关订单号")
-    private String gatewayOrderNo;
+    /** 外部交易号 */
+    @DbColumn(comment = "外部交易号")
+    private String outTradeNo;
 
     /**
      * 支付通道
@@ -63,8 +63,13 @@ public class PayCallbackRecord extends MpCreateEntity implements EntityBaseFunct
     private String status;
 
 
+    /** 修复号 */
     @Schema(description = "修复号")
     private String repairOrderNo;
+
+    /** 错误码 */
+    @DbColumn(comment = "错误码")
+    private String errorCode;
 
     /** 提示信息 */
     @DbColumn(comment = "提示信息")

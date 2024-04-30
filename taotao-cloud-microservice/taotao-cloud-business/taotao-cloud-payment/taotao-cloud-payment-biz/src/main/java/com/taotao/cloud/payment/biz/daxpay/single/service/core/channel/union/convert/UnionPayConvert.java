@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.entity.UnionPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.union.UnionPayConfigDto;
+import cn.bootx.platform.daxpay.service.core.channel.union.entity.UnionPayConfig;
+import cn.bootx.platform.daxpay.service.dto.channel.union.UnionPayConfigDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

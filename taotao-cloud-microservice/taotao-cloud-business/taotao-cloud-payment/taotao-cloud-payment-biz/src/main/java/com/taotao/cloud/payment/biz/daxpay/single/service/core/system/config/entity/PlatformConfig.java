@@ -3,8 +3,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.en
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.daxpay.code.PaySignTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.convert.PlatformConfigConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.system.config.PlatformConfigDto;
+import cn.bootx.platform.daxpay.service.core.system.config.convert.PlatformConfigConvert;
+import cn.bootx.platform.daxpay.service.dto.system.config.PlatformConfigDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -39,12 +39,14 @@ public class PlatformConfig extends MpBaseEntity implements EntityBaseFunction<P
     @DbColumn(comment = "支付通知地址")
     private String notifyUrl;
 
-    @DbColumn(comment = "同步支付通知地址")
+    @DbColumn(comment = "同步支付跳转地址")
     private String returnUrl;
+
+    @DbColumn(comment = "支付限额")
+    private Integer limitAmount;
 
     @DbColumn(comment = "订单默认超时时间(分钟)")
     private Integer orderTimeout;
-
 
     /**
      * 转换

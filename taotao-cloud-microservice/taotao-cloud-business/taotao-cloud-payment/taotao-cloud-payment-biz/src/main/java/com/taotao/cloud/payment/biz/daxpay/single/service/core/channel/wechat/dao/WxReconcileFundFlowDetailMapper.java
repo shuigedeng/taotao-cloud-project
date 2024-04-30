@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WxReconcileFundFlowDetail;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WxReconcileFundFlowDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

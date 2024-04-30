@@ -1,19 +1,13 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.refund.strategy;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import cn.bootx.platform.daxpay.code.RefundStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayRecordService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WechatRefundService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.service.PayChannelOrderService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WechatPayRefundService;
+import cn.bootx.platform.daxpay.service.func.AbsRefundStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
@@ -29,11 +23,7 @@ public class WeChatRefundStrategy extends AbsRefundStrategy {
 
     private final WeChatPayConfigService weChatPayConfigService;
 
-    private final WechatRefundService wechatRefundService;
-
-    private final WeChatPayRecordService weChatPayRecordService;
-
-    private final PayChannelOrderService payChannelOrderService;
+    private final WechatPayRefundService wechatPayRefundService;
 
     private WeChatPayConfig weChatPayConfig;
 
@@ -61,25 +51,7 @@ public class WeChatRefundStrategy extends AbsRefundStrategy {
      */
     @Override
     public void doRefundHandler() {
-        wechatRefundService.refund(this.getRefundOrder(), this.getRefundChannelParam().getAmount(), this.getPayChannelOrder(), this.weChatPayConfig);
+        wechatPayRefundService.refund(this.getRefundOrder(), this.weChatPayConfig);
     }
 
-    /**
-     * 退款发起成功操作
-     */
-    @Override
-    public void doSuccessHandler() {
-        // 更新退款订单数据状态
-        RefundStatusEnum refundStatusEnum = PaymentContextLocal.get()
-                .getRefundInfo()
-                .getStatus();
-        this.getRefundChannelOrder().setStatus(refundStatusEnum.getCode());
-
-        // 更新支付通道订单中的属性
-        payChannelOrderService.updateAsyncPayRefund(this.getPayChannelOrder(), this.getRefundChannelOrder());
-        // 如果退款完成, 保存流水记录
-        if (Objects.equals(RefundStatusEnum.SUCCESS.getCode(), refundStatusEnum.getCode())) {
-            weChatPayRecordService.refund(this.getRefundOrder(), this.getRefundChannelOrder());
-        }
-    }
 }

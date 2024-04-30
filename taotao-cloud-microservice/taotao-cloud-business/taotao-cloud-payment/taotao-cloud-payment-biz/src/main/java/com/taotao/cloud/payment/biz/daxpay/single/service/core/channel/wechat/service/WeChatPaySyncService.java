@@ -1,15 +1,16 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
-import cn.bootx.platform.daxpay.code.RefundSyncStatusEnum;
 import cn.bootx.platform.daxpay.code.PaySyncStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.WeChatPayCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.result.PayGatewaySyncResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.result.RefundGatewaySyncResult;
+import cn.bootx.platform.daxpay.code.RefundSyncStatusEnum;
+import cn.bootx.platform.daxpay.service.code.WeChatPayCode;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.PaySyncResult;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundSyncResult;
 import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
@@ -24,7 +25,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.taotao.cloud.payment.biz.daxpay.single.service.code.WeChatPayCode.TRANSACTION_ID;
+import static cn.bootx.platform.daxpay.service.code.WeChatPayCode.TRANSACTION_ID;
 
 /**
  * 微信支付同步服务
@@ -40,13 +41,13 @@ public class WeChatPaySyncService {
     /**
      * 支付信息查询
      */
-    public PayGatewaySyncResult syncPayStatus(PayOrder order, WeChatPayConfig weChatPayConfig) {
-        PayGatewaySyncResult syncResult = new PayGatewaySyncResult().setSyncStatus(PaySyncStatusEnum.FAIL);
+    public PaySyncResult syncPayStatus(PayOrder order, WeChatPayConfig weChatPayConfig) {
+        PaySyncResult syncResult = new PaySyncResult().setSyncStatus(PaySyncStatusEnum.FAIL);
         Map<String, String> params = OrderQueryModel.builder()
                 .appid(weChatPayConfig.getWxAppId())
                 .mch_id(weChatPayConfig.getWxMchId())
                 .nonce_str(WxPayKit.generateStr())
-                .out_trade_no(String.valueOf(order.getId()))
+                .out_trade_no(order.getOrderNo())
                 .build()
                 .createSign(weChatPayConfig.getApiKeyV2(), SignType.HMACSHA256);
         try {
@@ -66,7 +67,7 @@ public class WeChatPaySyncService {
             }
 
             // 设置微信支付网关订单号
-            syncResult.setGatewayOrderNo(result.get(TRANSACTION_ID));
+            syncResult.setOutOrderNo(result.get(TRANSACTION_ID));
             // 查询到订单的状态
             String tradeStatus = result.get(WeChatPayCode.TRADE_STATE);
             // 支付完成
@@ -102,14 +103,14 @@ public class WeChatPaySyncService {
     /**
      * 退款信息查询
      */
-    public RefundGatewaySyncResult syncRefundStatus(RefundOrder refundOrder, WeChatPayConfig weChatPayConfig){
-        RefundGatewaySyncResult syncResult = new RefundGatewaySyncResult();
+    public RefundSyncResult syncRefundStatus(RefundOrder refundOrder, WeChatPayConfig weChatPayConfig){
+        RefundSyncResult syncResult = new RefundSyncResult();
         Map<String, String> params = RefundQueryModel.builder()
                 .appid(weChatPayConfig.getWxAppId())
                 .mch_id(weChatPayConfig.getWxMchId())
                 .nonce_str(WxPayKit.generateStr())
-                // 使用退款单号查询, 只返回当前这条, 如果使用支付订单号查询,
-                .out_refund_no(String.valueOf(refundOrder.getId()))
+                // 使用退款单号查询, 只返回当前这条, 如果使用支付订单号查询,返回所有相关的
+                .out_refund_no(refundOrder.getRefundNo())
                 .build()
                 .createSign(weChatPayConfig.getApiKeyV2(), SignType.HMACSHA256);
 
@@ -119,25 +120,41 @@ public class WeChatPaySyncService {
             syncResult.setSyncInfo(JSONUtil.toJsonStr(result));
 
             // 设置微信支付网关订单号
-            syncResult.setGatewayOrderNo(result.get(WeChatPayCode.REFUND_ID));
+            syncResult.setOutRefundNo(result.get(WeChatPayCode.REFUND_ID));
             // 状态
             String tradeStatus = result.get(WeChatPayCode.REFUND_STATUS);
             // 退款成功
             if (Objects.equals(tradeStatus, WeChatPayCode.REFUND_SUCCESS)) {
                 String timeEnd = result.get(WeChatPayCode.REFUND_SUCCESS_TIME);
                 LocalDateTime time = LocalDateTimeUtil.parse(timeEnd, DatePattern.NORM_DATETIME_PATTERN);
-                return syncResult.setRefundTime(time).setSyncStatus(RefundSyncStatusEnum.SUCCESS);
+                return syncResult.setFinishTime(time).setSyncStatus(RefundSyncStatusEnum.SUCCESS);
             }
             // 退款中
             if (Objects.equals(tradeStatus, WeChatPayCode.REFUND_PROCESSING)) {
                 return syncResult.setSyncStatus(RefundSyncStatusEnum.PROGRESS);
             }
-            return syncResult.setSyncStatus(RefundSyncStatusEnum.FAIL);
+            String errorMsg = this.getErrorMsg(result);
+            return syncResult.setSyncStatus(RefundSyncStatusEnum.FAIL).setErrorMsg(errorMsg);
         } catch (Exception e) {
             log.error("查询退款订单失败:", e);
             syncResult.setSyncStatus(RefundSyncStatusEnum.PROGRESS).setErrorMsg(e.getMessage());
         }
         return syncResult;
+    }
 
+    /**
+     * 验证错误信息
+     */
+    private String getErrorMsg(Map<String, String> result) {
+        String returnCode = result.get(WeChatPayCode.RETURN_CODE);
+        String resultCode = result.get(WeChatPayCode.RESULT_CODE);
+        if (!WxPayKit.codeIsOk(returnCode) || !WxPayKit.codeIsOk(resultCode)) {
+            String errorMsg = result.get(WeChatPayCode.ERR_CODE_DES);
+            if (StrUtil.isBlank(errorMsg)) {
+                errorMsg = result.get(WeChatPayCode.RETURN_MSG);
+            }
+            return errorMsg;
+        }
+        return null;
     }
 }

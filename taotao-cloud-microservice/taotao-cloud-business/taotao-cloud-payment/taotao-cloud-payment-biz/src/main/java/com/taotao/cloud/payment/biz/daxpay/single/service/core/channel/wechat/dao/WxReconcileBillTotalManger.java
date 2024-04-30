@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.dao;
 
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WxReconcileBillTotal;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WxReconcileBillTotal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;

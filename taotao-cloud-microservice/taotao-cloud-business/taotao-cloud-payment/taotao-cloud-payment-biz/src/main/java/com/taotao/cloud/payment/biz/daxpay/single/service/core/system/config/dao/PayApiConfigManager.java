@@ -2,7 +2,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.da
 
 import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.PayApiConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.PayApiConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;

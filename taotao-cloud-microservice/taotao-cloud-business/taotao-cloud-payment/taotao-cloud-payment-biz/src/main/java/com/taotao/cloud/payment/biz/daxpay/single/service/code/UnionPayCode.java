@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.code;
+package com.taotao.cloud.payment.biz.daxpay.single.service.code;
 
 import com.egzosn.pay.union.bean.SDKConstants;
 

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.report.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.report.service;
 
 import cn.bootx.platform.common.core.function.CollectorsFunction;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;

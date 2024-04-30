@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.entity.PayRepairRecord;
+import cn.bootx.platform.daxpay.service.core.record.repair.entity.PayRepairRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

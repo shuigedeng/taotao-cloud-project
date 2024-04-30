@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrderExtra;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrderExtra;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,18 +1,29 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.func;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.reconcile.entity.PayReconcileOrder;
+import cn.bootx.platform.daxpay.service.core.order.reconcile.entity.ReconcileDetail;
+import cn.bootx.platform.daxpay.service.core.order.reconcile.entity.ReconcileOrder;
+import cn.bootx.platform.daxpay.service.core.payment.reconcile.domain.GeneralReconcileRecord;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * 支付对账策略
  * @author xxm
  * @since 2024/1/18
  */
+@Setter
 @Getter
 public abstract class AbsReconcileStrategy implements PayStrategy {
 
     /** 对账订单 */
-    private PayReconcileOrder recordOrder;
+    private ReconcileOrder recordOrder;
+
+    /** 对账订单明细 */
+    private List<ReconcileDetail> reconcileDetails;
 
     /**
      * 对账前处理, 主要是初始化支付SDK配置
@@ -21,11 +32,9 @@ public abstract class AbsReconcileStrategy implements PayStrategy {
     }
 
     /**
-     * 初始化参数
+     * 上传对账单解析并保存
      */
-    public void initParam(PayReconcileOrder recordOrder){
-        this.recordOrder = recordOrder;
-    }
+    public abstract void upload(MultipartFile file);
 
     /**
      * 下载对账单到本地进行保存
@@ -33,13 +42,8 @@ public abstract class AbsReconcileStrategy implements PayStrategy {
     public abstract void downAndSave();
 
     /**
-     * 比对生成对账差异单
-     * 1. 远程有, 本地无  补单(追加回订单/记录差异表)
-     * 2. 远程无, 本地有  记录差错表
-     * 3. 远程有, 本地有, 但状态不一致
+     * 获取通用对账对象, 将流水记录转换为对账对象
      */
-    public void offsetting(){
-
-    }
+    public abstract List<GeneralReconcileRecord> getGeneralReconcileRecord();
 
 }

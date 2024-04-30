@@ -1,24 +1,19 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.notice.service;
 
 import cn.bootx.platform.common.core.exception.RepetitiveOperationException;
-import cn.bootx.platform.common.core.util.CollUtil;
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.common.redis.RedisClient;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.ClientNoticeSendTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao.PayChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao.PayOrderExtraManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrderExtra;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundOrderExtraManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrderExtra;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.dao.ClientNoticeTaskManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.entity.ClientNoticeRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.entity.ClientNoticeTask;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.service.ClientNoticeRecordService;
+import cn.bootx.platform.daxpay.service.code.ClientNoticeSendTypeEnum;
+import cn.bootx.platform.daxpay.service.core.order.pay.dao.PayOrderExtraManager;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrderExtra;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderExtraManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrderExtra;
+import cn.bootx.platform.daxpay.service.core.task.notice.dao.ClientNoticeTaskManager;
+import cn.bootx.platform.daxpay.service.core.task.notice.entity.ClientNoticeRecord;
+import cn.bootx.platform.daxpay.service.core.task.notice.entity.ClientNoticeTask;
+import cn.bootx.platform.daxpay.service.core.task.notice.service.ClientNoticeRecordService;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.HttpResponse;
@@ -45,10 +40,6 @@ import java.util.*;
 public class ClientNoticeService {
 
     private final PayOrderExtraManager payOrderExtraManager;
-
-    private final PayChannelOrderManager payChannelOrderManager;
-
-    private final RefundChannelOrderManager refundChannelOrderManager;
 
     private final RefundOrderExtraManager refundOrderExtraManager;
 
@@ -93,10 +84,9 @@ public class ClientNoticeService {
      * 注册支付消息通知任务
      * @param order 支付订单
      * @param orderExtra 支付订单扩展信息
-     * @param channelOrders 支付通道订单
      */
     @Async("bigExecutor")
-    public void registerPayNotice(PayOrder order, PayOrderExtra orderExtra, List<PayChannelOrder> channelOrders) {
+    public void registerPayNotice(PayOrder order, PayOrderExtra orderExtra) {
         // 支付订单扩展信息为空则进行查询
         if (Objects.isNull(orderExtra)){
             Optional<PayOrderExtra> extraOpt =  payOrderExtraManager.findById(order.getId());
@@ -112,16 +102,13 @@ public class ClientNoticeService {
             return;
         }
 
-        // 通道支付订单为空则进行查询
-        if (CollUtil.isEmpty(channelOrders)){
-            channelOrders = payChannelOrderManager.findAllByPaymentId(order.getId());
-        }
         // 创建通知任务并保存
-        ClientNoticeTask task = clientNoticeAssistService.buildPayTask(order, orderExtra, channelOrders);
+        ClientNoticeTask task = clientNoticeAssistService.buildPayTask(order, orderExtra);
         try {
             taskManager.save(task);
         } catch (Exception e) {
             log.error("注册支付消息通知任务失败，数据错误，订单ID：{}",order.getId());
+            log.error("错误内容",e);
             throw new RuntimeException(e);
         }
         // 同时触发一次通知, 如果成功发送, 任务结束
@@ -132,10 +119,9 @@ public class ClientNoticeService {
      * 注册退款消息通知任务
      * @param order 退款订单
      * @param orderExtra 退款订单扩展信息
-     * @param channelOrders 退款通道订单
      */
     @Async("bigExecutor")
-    public void registerRefundNotice(RefundOrder order, RefundOrderExtra orderExtra, List<RefundChannelOrder> channelOrders) {
+    public void registerRefundNotice(RefundOrder order, RefundOrderExtra orderExtra) {
         // 退款订单扩展信息为空则进行查询
         if (Objects.isNull(orderExtra)){
             Optional<RefundOrderExtra> extraOpt =  refundOrderExtraManager.findById(order.getId());
@@ -151,12 +137,8 @@ public class ClientNoticeService {
             return;
         }
 
-        // 通道退款订单为空则进行查询
-        if (CollUtil.isEmpty(channelOrders)){
-            channelOrders = refundChannelOrderManager.findAllByRefundId(order.getId());
-        }
         // 创建通知任务并保存
-        ClientNoticeTask task = clientNoticeAssistService.buildRefundTask(order, orderExtra, channelOrders);
+        ClientNoticeTask task = clientNoticeAssistService.buildRefundTask(order, orderExtra);
         try {
             taskManager.save(task);
         } catch (Exception e) {
@@ -189,7 +171,7 @@ public class ClientNoticeService {
     private void run(Long taskId){
         LocalDateTime now = LocalDateTime.now();
         // 开启分布式锁
-        LockInfo lock = lockTemplate.lock(KEY + ":" + taskId,2000, 50);
+        LockInfo lock = lockTemplate.lock(KEY + ":" + taskId,10000, 200);
         if (Objects.isNull(lock)){
             throw new RepetitiveOperationException("支付同步处理中，请勿重复操作");
         }
@@ -219,7 +201,7 @@ public class ClientNoticeService {
         // 创建记录
         ClientNoticeRecord record = new ClientNoticeRecord()
                 .setTaskId(task.getId())
-                .setType(ClientNoticeSendTypeEnum.AUTO.getType())
+                .setSendType(ClientNoticeSendTypeEnum.AUTO.getType())
                 .setReqCount(task.getSendCount()+1);
         String body = null;
         try {
@@ -239,6 +221,46 @@ public class ClientNoticeService {
             record.setSuccess(true);
         } else {
             this.failHandler(task,now);
+            // 如果响应地址不为空, 将错误响应写到记录中
+            if (Objects.nonNull(body)){
+                // 预防返回值过长, 只保留100位
+                record.setErrorMsg(StrUtil.sub(body,0,100));
+            }
+        }
+        // 保存请求记录
+        recordService.save(record);
+    }
+
+    /**
+     * 发送通知数据, 手动触发,
+     */
+    public void sendDataByManual(ClientNoticeTask task){
+        LocalDateTime now = LocalDateTime.now();
+        // 创建记录
+        ClientNoticeRecord record = new ClientNoticeRecord()
+                .setTaskId(task.getId())
+                .setSendType(ClientNoticeSendTypeEnum.MANUAL.getType());
+        String body = null;
+        try {
+            HttpResponse execute = HttpUtil.createPost(task.getUrl())
+                    .body(task.getContent(), ContentType.JSON.getValue())
+                    .timeout(5000)
+                    .execute();
+            body = execute.body();
+        } catch (Exception e) {
+            log.error("发送通知失败，数据错误，任务ID：{}",task.getOrderId());
+            log.error("错误内容",e);
+            record.setErrorMsg(e.getMessage());
+        }
+        // 如果响应值等于SUCCESS, 说明发送成功
+        if (Objects.equals(body, "SUCCESS")){
+            record.setSuccess(true);
+            // 如果任务不是成功状态, 修改为成功状态
+            if (!task.isSuccess()){
+                task.setLatestTime(now).setSuccess(true);
+                taskManager.updateById(task);
+            }
+        } else {
             // 如果响应地址不为空, 将错误响应写到记录中
             if (Objects.nonNull(body)){
                 // 预防返回值过长, 只保留100位

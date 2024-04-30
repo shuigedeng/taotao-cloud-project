@@ -1,11 +1,13 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.AliPayRecordTypeEnum;
+import cn.bootx.platform.daxpay.service.code.AliPayRecordTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * 微信支付记录
@@ -40,5 +42,9 @@ public class WeChatPayRecordDto extends BaseDto {
     /** 网关订单号 */
     @Schema(description = "网关订单号")
     private String gatewayOrderNo;
+
+    /** 网关完成时间 */
+    @Schema(description = "网关完成时间")
+    private LocalDateTime gatewayTime;
 
 }

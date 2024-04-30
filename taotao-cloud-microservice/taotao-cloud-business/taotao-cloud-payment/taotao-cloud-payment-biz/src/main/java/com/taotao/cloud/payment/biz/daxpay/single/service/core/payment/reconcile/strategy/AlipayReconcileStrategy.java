@@ -2,15 +2,21 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.reconcil
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service.AliPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service.AliPayReconcileService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsReconcileStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.service.AliPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.service.AliPayReconcileService;
+import cn.bootx.platform.daxpay.service.core.payment.reconcile.domain.GeneralReconcileRecord;
+import cn.bootx.platform.daxpay.service.func.AbsReconcileStrategy;
 import cn.hutool.core.date.DatePattern;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
@@ -29,9 +35,6 @@ public class AlipayReconcileStrategy extends AbsReconcileStrategy {
 
     private final AliPayConfigService configService;
 
-    private AliPayConfig config;
-
-
     /**
      * 策略标识
      *
@@ -47,8 +50,17 @@ public class AlipayReconcileStrategy extends AbsReconcileStrategy {
      */
     @Override
     public void doBeforeHandler() {
-        this.config = configService.getConfig();
-        configService.initConfig(this.config);
+        AliPayConfig config = configService.getConfig();
+        configService.initConfig(config);
+    }
+
+    /**
+     * 上传对账单解析并保存
+     */
+    @SneakyThrows
+    @Override
+    public void upload(MultipartFile file) {
+        reconcileService.upload(file.getBytes());
     }
 
     /**
@@ -57,6 +69,18 @@ public class AlipayReconcileStrategy extends AbsReconcileStrategy {
     @Override
     public void downAndSave() {
         String date = LocalDateTimeUtil.format(this.getRecordOrder().getDate(), DatePattern.NORM_DATE_PATTERN);
-        reconcileService.downAndSave(date,this.getRecordOrder().getId());
+        reconcileService.downAndSave(date);
+    }
+
+    /**
+     * 获取通用对账对象, 将流水记录转换为对账对象
+     */
+    @Override
+    public List<GeneralReconcileRecord> getGeneralReconcileRecord() {
+        // 查询流水
+        LocalDateTime localDateTime = LocalDateTimeUtil.date2DateTime(this.getRecordOrder().getDate());
+        LocalDateTime start = LocalDateTimeUtil.beginOfDay(localDateTime);
+        LocalDateTime end = LocalDateTimeUtil.endOfDay(localDateTime);
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.notice;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.ClientNoticeTypeEnum;
+import cn.bootx.platform.daxpay.service.code.ClientNoticeTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,7 +29,13 @@ public class ClientNoticeTaskDto extends BaseDto {
      * @see ClientNoticeTypeEnum
      */
     @Schema(description = "回调类型")
-    private String type;
+    private String noticeType;
+
+    /**
+     * 订单状态
+     */
+    @Schema(description = "订单状态")
+    private String orderStatus;
 
     /** 消息内容 */
     @Schema(description = "消息内容")

@@ -1,12 +1,16 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service;
 
+import cn.bootx.platform.common.core.exception.BizException;
+import cn.bootx.platform.common.core.exception.DataNotExistException;
+import cn.bootx.platform.common.core.rest.dto.LabelValue;
+import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.AliPayCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.AliPayWay;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.dao.AliPayConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service.PayChannelConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.alipay.AliPayConfigParam;
+import cn.bootx.platform.daxpay.service.code.AliPayCode;
+import cn.bootx.platform.daxpay.service.code.AliPayWay;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.dao.AliPayConfigManager;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.service.PayChannelConfigService;
+import cn.bootx.platform.daxpay.service.param.channel.alipay.AliPayConfigParam;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.util.CharsetUtil;
@@ -75,7 +79,7 @@ public class AliPayConfigService {
     public AliPayConfig getAndCheckConfig() {
         AliPayConfig alipayConfig = this.getConfig();
         if (!alipayConfig.getEnable()){
-            throw new PayFailureException("支付宝支付方式未启用");
+            throw new PayFailureException("支付宝支付未启用");
         }
         return alipayConfig;
     }

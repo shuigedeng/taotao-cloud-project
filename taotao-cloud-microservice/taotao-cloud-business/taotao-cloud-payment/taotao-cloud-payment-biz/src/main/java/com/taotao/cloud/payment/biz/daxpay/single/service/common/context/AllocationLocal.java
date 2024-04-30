@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.common.context;
+package com.taotao.cloud.payment.biz.daxpay.single.service.common.context;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -12,6 +12,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class AllocationLocal {
 
-    /** 网关分账号 */
-    private String gatewayNo;
+    /** 三方系统分账号 */
+    private String outAllocationNo;
 }

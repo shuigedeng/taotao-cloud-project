@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.func;
+package com.taotao.cloud.payment.biz.daxpay.single.service.func;
 
 import cn.bootx.platform.daxpay.service.core.order.allocation.entity.AllocationOrder;
 import cn.bootx.platform.daxpay.service.core.order.allocation.entity.AllocationOrderDetail;

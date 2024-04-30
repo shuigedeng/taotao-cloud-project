@@ -1,10 +1,9 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.service;
 
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
 import cn.bootx.platform.daxpay.service.code.UnionPayCode;
 import cn.bootx.platform.daxpay.service.common.context.RefundLocal;
 import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
-import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayChannelOrder;
 import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
 import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
 import cn.bootx.platform.daxpay.service.sdk.union.api.UnionPayKit;
@@ -29,22 +28,22 @@ public class UnionPayRefundService {
     /**
      * 退款方法
      */
-    public void refund(RefundOrder refundOrder, PayOrder payOrder, int amount, PayChannelOrder channelOrder, UnionPayKit unionPayKit) {
+    public void refund(RefundOrder refundOrder, UnionPayKit unionPayKit) {
 
         // 金额转换
-        BigDecimal refundAmount = BigDecimal.valueOf(amount * 0.01);
-        BigDecimal orderAmount = BigDecimal.valueOf(channelOrder.getAmount() * 0.01);
+        BigDecimal refundAmount = BigDecimal.valueOf(refundOrder.getAmount() * 0.01);
+        BigDecimal orderAmount = BigDecimal.valueOf(refundOrder.getOrderAmount() * 0.01);
 
         UnionRefundOrder unionRefundOrder = new UnionRefundOrder();
-        unionRefundOrder.setRefundNo(String.valueOf(refundOrder.getId()));
-        unionRefundOrder.setTradeNo(String.valueOf(payOrder.getGatewayOrderNo()));
+        unionRefundOrder.setRefundNo(refundOrder.getRefundNo());
+        unionRefundOrder.setTradeNo(refundOrder.getOutOrderNo());
         unionRefundOrder.setRefundAmount(refundAmount);
         unionRefundOrder.setTotalAmount(orderAmount);
         UnionRefundResult refund = unionPayKit.refund(unionRefundOrder);
 
-        String gatewayNo = (String) refund.getAttr(UnionPayCode.QUERY_ID);
+        String outRefundNo = (String) refund.getAttr(UnionPayCode.QUERY_ID);
         // 云闪付退款是否成功需要查询状态, 所以设置为退款中状态
         RefundLocal refundInfo = PaymentContextLocal.get().getRefundInfo();
-        refundInfo.setStatus(RefundStatusEnum.PROGRESS).setGatewayOrderNo(gatewayNo);
+        refundInfo.setStatus(RefundStatusEnum.PROGRESS).setOutRefundNo(outRefundNo);
     }
 }

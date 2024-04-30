@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.param.order;
+package com.taotao.cloud.payment.biz.daxpay.single.service.param.order;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

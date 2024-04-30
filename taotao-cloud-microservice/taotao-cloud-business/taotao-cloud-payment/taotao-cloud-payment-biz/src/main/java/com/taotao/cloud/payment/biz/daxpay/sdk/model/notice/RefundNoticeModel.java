@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
  * 退款通知消息
@@ -18,26 +18,20 @@ import java.util.List;
 @ToString
 public class RefundNoticeModel {
 
-    /** 退款ID */
-    private Long refundId;
-
     /** 退款号 */
     private String refundNo;
 
-    /** 是否含有异步通道 */
-    private boolean asyncPay;
+    /** 商户退款号 */
+    private String bizRefundNo;
 
     /**
-     * 异步通道
+     * 支付通道
      * @see PayChannelEnum
      */
-    private String asyncChannel;
+    private String channel;
 
     /** 退款金额 */
     private Integer amount;
-
-    /** 退款通道信息 */
-    private List<RefundChannelModel> refundChannels;
 
     /**
      * 退款状态
@@ -46,7 +40,7 @@ public class RefundNoticeModel {
     private String status;
 
     /** 退款成功时间 */
-    private Long refundTime;
+    private Long finishTime;
 
     /** 退款创建时间 */
     private Long createTime;

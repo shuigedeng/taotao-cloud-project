@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.dao;
 
-import com.taotao.cloud.data.mybatisplus.utils.BaseManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
+import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

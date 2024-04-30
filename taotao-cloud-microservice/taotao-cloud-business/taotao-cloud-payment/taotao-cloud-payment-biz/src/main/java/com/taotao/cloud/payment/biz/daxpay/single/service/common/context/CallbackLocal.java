@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.common.context;
 
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayCallbackStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PaymentTypeEnum;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -23,20 +23,25 @@ public class CallbackLocal {
     /** 回调参数内容 */
     private Map<String, String> callbackParam = new HashMap<>();
 
-    /** 本地订单ID */
-    private Long orderId;
+    /** 交易号 */
+    private String tradeNo;
 
     /**
-     * 第三方支付平台订单号
+     * 第三方支付平台交易号
      */
-    private String gatewayOrderNo;
+    private String outTradeNo;
 
     /**
-     * 网关返回状态
+     * 通道
+     */
+    private String channel;
+
+    /**
+     * 三方支付系统返回状态
      * @see PayStatusEnum 支付状态
      * @see RefundStatusEnum 退款状态
      */
-    private String gatewayStatus;
+    private String outStatus;
 
     /** 金额(元) */
     private String amount;
@@ -45,7 +50,7 @@ public class CallbackLocal {
     private LocalDateTime finishTime;
 
     /** 修复号 */
-    private String payRepairNo;
+    private String repairNo;
 
     /** 回调类型 */
     private PaymentTypeEnum callbackType;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.sdk.union.bean;
+package com.taotao.cloud.payment.biz.daxpay.single.service.sdk.union.bean;
 
 import com.egzosn.pay.common.bean.RefundOrder;
 

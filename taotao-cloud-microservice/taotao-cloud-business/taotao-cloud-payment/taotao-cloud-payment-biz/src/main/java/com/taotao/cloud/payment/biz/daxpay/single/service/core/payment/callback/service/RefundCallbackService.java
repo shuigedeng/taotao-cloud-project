@@ -1,14 +1,14 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.callback.service;
 
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayCallbackStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.RefundRepairWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.CallbackLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.result.RefundRepairResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.service.RefundRepairService;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.RefundRepairWayEnum;
+import cn.bootx.platform.daxpay.service.common.context.CallbackLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.core.payment.repair.result.RefundRepairResult;
+import cn.bootx.platform.daxpay.service.core.payment.repair.service.RefundRepairService;
 import com.baomidou.lock.LockInfo;
 import com.baomidou.lock.LockTemplate;
 import lombok.RequiredArgsConstructor;
@@ -39,15 +39,15 @@ public class RefundCallbackService {
 
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         // 加锁
-        LockInfo lock = lockTemplate.lock("callback:refund:" + callbackInfo.getOrderId());
+        LockInfo lock = lockTemplate.lock("callback:refund:" + callbackInfo.getTradeNo(),10000, 200);
         if (Objects.isNull(lock)){
             callbackInfo.setCallbackStatus(PayCallbackStatusEnum.IGNORE).setMsg("回调正在处理中，忽略本次回调请求");
-            log.warn("订单号: {} 回调正在处理中，忽略本次回调请求", callbackInfo.getOrderId());
+            log.warn("订单号: {} 回调正在处理中，忽略本次回调请求", callbackInfo.getTradeNo());
             return;
         }
         try {
             // 获取退款单
-            RefundOrder refundOrder = refundOrderManager.findById(callbackInfo.getOrderId()).orElse(null);
+            RefundOrder refundOrder = refundOrderManager.findByRefundNo(callbackInfo.getTradeNo()).orElse(null);
             // 退款单不存在,记录回调记录
             if (Objects.isNull(refundOrder)) {
                 callbackInfo.setCallbackStatus(PayCallbackStatusEnum.NOT_FOUND).setMsg("退款单不存在,记录回调记录");
@@ -60,14 +60,13 @@ public class RefundCallbackService {
             }
 
             // 退款成功还是失败
-            if (Objects.equals(RefundStatusEnum.SUCCESS.getCode(), callbackInfo.getGatewayStatus())) {
+            if (Objects.equals(RefundStatusEnum.SUCCESS.getCode(), callbackInfo.getOutStatus())) {
                 PaymentContextLocal.get().getRepairInfo().setFinishTime(callbackInfo.getFinishTime());
                 RefundRepairResult repair = reflectionService.repair(refundOrder, RefundRepairWayEnum.REFUND_SUCCESS);
-                callbackInfo.setPayRepairNo(repair.getRepairNo());
+                callbackInfo.setRepairNo(repair.getRepairNo());
             }  else {
-                // 设置退款订单完成时间
                 RefundRepairResult repair = reflectionService.repair(refundOrder, RefundRepairWayEnum.REFUND_FAIL);
-                callbackInfo.setPayRepairNo(repair.getRepairNo());
+                callbackInfo.setRepairNo(repair.getRepairNo());
             }
 
         } finally {

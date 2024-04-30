@@ -16,15 +16,12 @@ import lombok.ToString;
 @ToString
 public class RefundModel extends DaxPayResponseModel {
 
-    /** 退款ID */
-    private Long refundId;
-
-    /** 退款号, 如果请求时未传, 默认为退款ID */
+    /** 退款号 */
     private String refundNo;
 
-    /**
-     * 退款状态
-     * @see RefundStatusEnum
-     */
+    /** 商户退款号 */
+    private String bizRefundNo;
+
+    /** 退款状态 */
     private String status;
 }

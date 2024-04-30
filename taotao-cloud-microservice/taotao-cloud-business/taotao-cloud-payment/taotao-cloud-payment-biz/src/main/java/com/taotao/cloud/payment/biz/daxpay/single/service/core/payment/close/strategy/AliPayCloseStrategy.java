@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.close.strategy;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service.AliPayCloseService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service.AliPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsPayCloseStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.service.AliPayCloseService;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.service.AliPayConfigService;
+import cn.bootx.platform.daxpay.service.func.AbsPayCloseStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;

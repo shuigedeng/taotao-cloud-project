@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.reconcile.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.reconcile.dao;
 
 import cn.bootx.platform.daxpay.service.core.order.reconcile.entity.ReconcileOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

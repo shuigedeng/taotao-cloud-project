@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.func;
+package com.taotao.cloud.payment.biz.daxpay.single.service.func;
 
 import cn.bootx.platform.daxpay.service.core.payment.allocation.entity.AllocationReceiver;
 import lombok.Getter;

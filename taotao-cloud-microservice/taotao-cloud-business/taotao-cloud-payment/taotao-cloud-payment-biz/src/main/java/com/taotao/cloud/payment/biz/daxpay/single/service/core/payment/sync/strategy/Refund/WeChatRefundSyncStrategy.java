@@ -1,11 +1,11 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.strategy.Refund;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPayConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service.WeChatPaySyncService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.result.RefundGatewaySyncResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundSyncStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.service.WeChatPaySyncService;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundSyncResult;
+import cn.bootx.platform.daxpay.service.func.AbsRefundSyncStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class WeChatRefundSyncStrategy extends AbsRefundSyncStrategy {
      * 异步支付单与支付网关进行状态比对后的结果
      */
     @Override
-    public RefundGatewaySyncResult doSyncStatus() {
+    public RefundSyncResult doSyncStatus() {
         WeChatPayConfig config = weChatPayConfigService.getConfig();
         return weChatPaySyncService.syncRefundStatus(this.getRefundOrder(), config);
     }

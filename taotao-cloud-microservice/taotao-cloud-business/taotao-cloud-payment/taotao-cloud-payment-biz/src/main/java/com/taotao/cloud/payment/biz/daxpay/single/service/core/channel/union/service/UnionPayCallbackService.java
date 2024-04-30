@@ -1,15 +1,19 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.service;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairSourceEnum;
 import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
 import cn.bootx.platform.daxpay.service.code.UnionPayCode;
 import cn.bootx.platform.daxpay.service.common.context.CallbackLocal;
 import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
 import cn.bootx.platform.daxpay.service.core.channel.union.entity.UnionPayConfig;
-import cn.bootx.platform.daxpay.service.func.AbsCallbackStrategy;
+import cn.bootx.platform.daxpay.service.core.payment.callback.service.PayCallbackService;
+import cn.bootx.platform.daxpay.service.core.payment.callback.service.RefundCallbackService;
+import cn.bootx.platform.daxpay.service.core.record.callback.service.PayCallbackRecordService;
 import cn.bootx.platform.daxpay.service.sdk.union.api.UnionPayKit;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.thread.ThreadUtil;
@@ -20,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Map;
@@ -35,15 +38,62 @@ import static cn.bootx.platform.daxpay.service.code.UnionPayCode.*;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UnionPayCallbackService extends AbsCallbackStrategy {
+public class UnionPayCallbackService {
 
-    @Resource
-    private UnionPayConfigService unionPayConfigService;
+    private final UnionPayConfigService unionPayConfigService;
+
+    private final PayCallbackRecordService callbackService;
+
+    private final PayCallbackService payCallbackService;
+
+    private final RefundCallbackService refundCallbackService;
+
+    /**
+     * 回调处理入口
+     */
+    public String callback(Map<String, String> params){
+        CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
+        try {
+            // 将参数写入到上下文中
+            callbackInfo.getCallbackParam().putAll(params);
+
+            // 判断并保存回调类型
+            PaymentTypeEnum callbackType = this.getCallbackType();
+            callbackInfo.setCallbackType(callbackType)
+                    .setChannel(PayChannelEnum.UNION_PAY.getCode());
+
+            // 验证消息
+            if (!this.verifyNotify()) {
+                callbackInfo.setCallbackStatus(PayCallbackStatusEnum.FAIL).setMsg("验证信息格式不通过");
+                // 消息有问题, 保存记录并返回
+                callbackService.saveCallbackRecord();
+                return null;
+            }
+            // 提前设置订单修复的来源
+            PaymentContextLocal.get().getRepairInfo().setSource(PayRepairSourceEnum.CALLBACK);
+
+            if (callbackType == PaymentTypeEnum.PAY){
+                // 解析支付数据并放处理
+                this.resolvePayData();
+                payCallbackService.payCallback();
+            } else {
+                // 解析退款数据并放处理
+                this.resolveRefundData();
+                refundCallbackService.refundCallback();
+            }
+            callbackService.saveCallbackRecord();
+            return this.getReturnMsg();
+        } catch (Exception e) {
+            log.error("回调处理失败", e);
+            callbackInfo.setCallbackStatus(PayCallbackStatusEnum.FAIL).setMsg("回调处理失败: "+e.getMessage());
+            callbackService.saveCallbackRecord();
+            throw e;
+        }
+    }
 
     /**
      * 验证信息格式
      */
-    @Override
     public boolean verifyNotify() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> params = callbackInfo.getCallbackParam();
@@ -64,7 +114,6 @@ public class UnionPayCallbackService extends AbsCallbackStrategy {
      *
      * @see PaymentTypeEnum
      */
-    @Override
     public PaymentTypeEnum getCallbackType() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> params = callbackInfo.getCallbackParam();
@@ -79,20 +128,19 @@ public class UnionPayCallbackService extends AbsCallbackStrategy {
     /**
      * 解析支付回调数据并放到上下文中
      */
-    @Override
     public void resolvePayData() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> callbackParam = callbackInfo.getCallbackParam();
 
-        // 网关订单号
-        callbackInfo.setGatewayOrderNo(callbackParam.get(QUERY_ID));
-        // 支付订单ID
-        callbackInfo.setOrderId(Long.valueOf(callbackParam.get(ORDER_ID)));
+        // 网关支付号
+        callbackInfo.setOutTradeNo(callbackParam.get(QUERY_ID));
+        // 支付号
+        callbackInfo.setTradeNo(callbackParam.get(ORDER_ID));
         // 支付结果
         String resultCode = callbackParam.get(UnionPayCode.RESP_CODE);
         PayStatusEnum payStatus = UnionPayCode.RESP_SUCCESS.equals(resultCode) ? PayStatusEnum.SUCCESS : PayStatusEnum.FAIL;
-
-        callbackInfo.setGatewayStatus(payStatus.getCode());
+        // 支付状态
+        callbackInfo.setOutStatus(payStatus.getCode());
         // 支付金额
         callbackInfo.setAmount(callbackParam.get(UnionPayCode.TXN_AMT));
         String timeEnd = callbackParam.get(TXN_TIME);
@@ -107,24 +155,22 @@ public class UnionPayCallbackService extends AbsCallbackStrategy {
     /**
      * 解析退款回调数据并放到上下文中
      */
-    @Override
     public void resolveRefundData() {
         // 云闪付需要延迟半秒再进行处理, 不然会出现业务未处理完, 但回调已经到达的情况
         ThreadUtil.sleep(100);
 
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> callbackParam = callbackInfo.getCallbackParam();
-        // 网关订单号
-        callbackInfo.setGatewayOrderNo(callbackParam.get(QUERY_ID));
-        // 退款订单Id
-        callbackInfo.setOrderId(Long.valueOf(callbackParam.get(ORDER_ID)));
+        // 网关退款号
+        callbackInfo.setOutTradeNo(callbackParam.get(QUERY_ID));
+        // 退款订单号
+        callbackInfo.setTradeNo(callbackParam.get(ORDER_ID));
         // 退款金额
         callbackInfo.setAmount(callbackParam.get(TXN_AMT));
-
         // 交易状态
         String resultCode = callbackParam.get(UnionPayCode.RESP_CODE);
         RefundStatusEnum refundStatus = UnionPayCode.RESP_SUCCESS.equals(resultCode) ? RefundStatusEnum.SUCCESS : RefundStatusEnum.FAIL;
-        callbackInfo.setGatewayStatus(refundStatus.getCode());
+        callbackInfo.setOutStatus(refundStatus.getCode());
 
         // 退款时间
         String timeEnd = callbackParam.get(TXN_TIME);
@@ -140,16 +186,8 @@ public class UnionPayCallbackService extends AbsCallbackStrategy {
     /**
      * 返回响应结果
      */
-    @Override
     public String getReturnMsg() {
         return "success";
     }
 
-    /**
-     * 策略标识
-     */
-    @Override
-    public PayChannelEnum getChannel() {
-        return PayChannelEnum.UNION_PAY;
-    }
 }

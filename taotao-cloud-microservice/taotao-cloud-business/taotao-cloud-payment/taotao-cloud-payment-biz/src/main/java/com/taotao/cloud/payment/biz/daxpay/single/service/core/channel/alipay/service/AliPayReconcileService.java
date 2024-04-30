@@ -1,15 +1,16 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service;
 
-import cn.bootx.platform.daxpay.code.PayReconcileTradeEnum;
+import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
+import cn.bootx.platform.daxpay.code.ReconcileTradeEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.AliPayCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.dao.AliReconcileBillDetailManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.dao.AliReconcileBillTotalManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliReconcileBillDetail;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliReconcileBillTotal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.reconcile.entity.PayReconcileDetail;
+import cn.bootx.platform.daxpay.service.code.AliPayCode;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.dao.AliReconcileBillDetailManager;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.dao.AliReconcileBillTotalManager;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliReconcileBillDetail;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliReconcileBillTotal;
+import cn.bootx.platform.daxpay.service.core.order.reconcile.entity.ReconcileDetail;
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.text.csv.CsvReader;
 import cn.hutool.core.text.csv.CsvUtil;
@@ -30,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +46,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AliPayReconcileService {
-    private final AliPayConfigService configService;
 
     private final AliReconcileBillDetailManager reconcileBillDetailManager;
 
@@ -54,13 +55,10 @@ public class AliPayReconcileService {
      * 下载对账单, 并进行解析进行保存
      *
      * @param date 对账日期 yyyy-MM-dd 格式
-     * @param recordOrderId 对账订单ID
      */
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
-    public void downAndSave(String date, Long recordOrderId){
-        AliPayConfig config = configService.getConfig();
-        configService.initConfig(config);
+    public void downAndSave(String date){
 
         try {
             AlipayDataDataserviceBillDownloadurlQueryModel model = new AlipayDataDataserviceBillDownloadurlQueryModel();
@@ -94,7 +92,7 @@ public class AliPayReconcileService {
                 }
             }
             // 保存原始对账记录
-            this.save(billDetails, billTotals, recordOrderId);
+            this.save(billDetails, billTotals);
 
             // 将原始交易明细对账记录转换通用结构并保存到上下文中
             this.convertAndSave(billDetails);
@@ -104,13 +102,42 @@ public class AliPayReconcileService {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * 上传对账单解析并保存
+     */
+    @SneakyThrows
+    public void upload(byte[] bytes) {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(bytes),"GBK"));
+        List<String> strings = IoUtil.readLines(bufferedReader, new ArrayList<>());
+        List<AliReconcileBillDetail> billDetails = this.parseDetail(strings);
+        // 保存原始对账记录
+        this.saveBillDetail(billDetails);
+        // 将原始交易明细对账记录转换通用结构并保存到上下文中
+        this.convertAndSave(billDetails);
+    }
 
     /**
      * 保存原始对账记录
      */
-    private void save(List<AliReconcileBillDetail> billDetails, List<AliReconcileBillTotal> billTotals, Long recordOrderId){
+    private void save(List<AliReconcileBillDetail> billDetails, List<AliReconcileBillTotal> billTotals){
+       this.saveBillDetail(billDetails);
+       this.saveBillTotal(billTotals);
+    }
+
+    /**
+     * 保存原始对账明细记录
+     */
+    private void saveBillDetail(List<AliReconcileBillDetail> billDetails){
+        Long recordOrderId = PaymentContextLocal.get().getReconcileInfo().getReconcileOrder().getId();
         billDetails.forEach(o->o.setRecordOrderId(recordOrderId));
         reconcileBillDetailManager.saveAll(billDetails);
+    }
+
+    /**
+     * 保存原始对账汇总记录
+     */
+    private void saveBillTotal(List<AliReconcileBillTotal> billTotals){
+        Long recordOrderId = PaymentContextLocal.get().getReconcileInfo().getReconcileOrder().getId();
         billTotals.forEach(o->o.setRecordOrderId(recordOrderId));
         reconcileBillTotalManager.saveAll(billTotals);
     }
@@ -119,7 +146,7 @@ public class AliPayReconcileService {
      * 转换为通用对账记录对象
      */
     private void convertAndSave(List<AliReconcileBillDetail> billDetails){
-        List<PayReconcileDetail> collect = billDetails.stream()
+        List<ReconcileDetail> collect = billDetails.stream()
                 .map(this::convert)
                 .collect(Collectors.toList());
         // 写入到上下文中
@@ -129,34 +156,42 @@ public class AliPayReconcileService {
     /**
      * 转换为通用对账记录对象
      */
-    private PayReconcileDetail convert(AliReconcileBillDetail billDetail){
+    private ReconcileDetail convert(AliReconcileBillDetail billDetail){
         // 金额
         String orderAmount = billDetail.getOrderAmount();
         double v = Double.parseDouble(orderAmount) * 100;
         int amount = Math.abs(((int) v));
 
+
         // 默认为支付对账记录
-        PayReconcileDetail payReconcileDetail = new PayReconcileDetail()
+        ReconcileDetail reconcileDetail = new ReconcileDetail()
                 .setRecordOrderId(billDetail.getRecordOrderId())
-                .setPaymentId(billDetail.getOutTradeNo())
-                .setType(PayReconcileTradeEnum.PAY.getCode())
+                .setOrderId(billDetail.getOutTradeNo())
+                .setType(ReconcileTradeEnum.PAY.getCode())
                 .setAmount(amount)
                 .setTitle(billDetail.getSubject())
                 .setGatewayOrderNo(billDetail.getTradeNo());
-        // 退款覆盖更新对应的字段
-        if (Objects.equals(billDetail.getTradeType(), "退款")){
-            payReconcileDetail.setRefundId(billDetail.getBatchNo())
-                    .setType(PayReconcileTradeEnum.REFUND.getCode());
+
+        // 时间
+        String endTime = billDetail.getEndTime();
+        if (StrUtil.isNotBlank(endTime)) {
+            LocalDateTime time = LocalDateTimeUtil.parse(endTime, DatePattern.NORM_DATETIME_PATTERN);
+            reconcileDetail.setOrderTime(time);
         }
 
-        return payReconcileDetail;
+        // 退款覆盖更新对应的字段
+        if (Objects.equals(billDetail.getTradeType(), "退款")){
+            reconcileDetail.setOrderId(billDetail.getBatchNo())
+                    .setType(ReconcileTradeEnum.REFUND.getCode());
+        }
+        return reconcileDetail;
     }
 
 
     /**
      * 解析明细
      */
-    public List<AliReconcileBillDetail> parseDetail(List<String> list){
+    private List<AliReconcileBillDetail> parseDetail(List<String> list){
         // 截取需要进行解析的文本内容
         String billDetail = list.stream()
                 .collect(Collectors.joining(System.lineSeparator()));
@@ -171,7 +206,7 @@ public class AliPayReconcileService {
     /**
      * 解析汇总
      */
-    public List<AliReconcileBillTotal> parseTotal(List<String> list){
+    private List<AliReconcileBillTotal> parseTotal(List<String> list){
         // 去除前 4 行和后 2 行 然后合并是个一个字符串
         String billTotal = list.stream()
                 .collect(Collectors.joining(System.lineSeparator()));
@@ -183,4 +218,5 @@ public class AliPayReconcileService {
         CsvReader reader = CsvUtil.getReader();
         return reader.read(billTotal, AliReconcileBillTotal.class);
     }
+
 }

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.common.filter;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.annotation.Order;

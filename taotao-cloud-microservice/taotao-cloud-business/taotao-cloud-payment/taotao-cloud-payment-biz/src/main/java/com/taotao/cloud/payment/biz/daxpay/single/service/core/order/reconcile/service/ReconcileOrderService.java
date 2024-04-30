@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.reconcile.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.reconcile.service;
 
 import cn.bootx.platform.common.sequence.func.Sequence;
 import cn.bootx.platform.daxpay.service.core.order.reconcile.dao.ReconcileOrderManager;
@@ -21,7 +21,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReconcileOrderService {
     private final ReconcileOrderManager reconcileOrderManager;
-    private final Sequence sequence;
 
     /**
      * 更新, 开启一个新事务进行更新

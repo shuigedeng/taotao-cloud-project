@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.common.typehandler;
+package com.taotao.cloud.payment.biz.daxpay.single.service.common.typehandler;
 
 import cn.bootx.platform.common.mybatisplus.handler.JacksonTypeReferenceHandler;
 import cn.bootx.platform.daxpay.service.core.payment.reconcile.domain.ReconcileDiff;

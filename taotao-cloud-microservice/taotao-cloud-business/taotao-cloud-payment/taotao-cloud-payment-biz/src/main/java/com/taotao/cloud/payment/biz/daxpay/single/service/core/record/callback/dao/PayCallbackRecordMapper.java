@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.callback.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.callback.entity.PayCallbackRecord;
+import cn.bootx.platform.daxpay.service.core.record.callback.entity.PayCallbackRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.convert;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.convert;
 
 import cn.bootx.platform.daxpay.service.core.payment.allocation.entity.AllocationGroup;
 import cn.bootx.platform.daxpay.service.dto.allocation.AllocationGroupDto;

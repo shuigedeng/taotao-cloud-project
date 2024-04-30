@@ -4,8 +4,8 @@ import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;
 import cn.bootx.platform.common.mybatisplus.util.MpUtil;
 import cn.bootx.platform.common.query.generator.QueryGenerator;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.order.PayOrderQuery;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.param.order.PayOrderQuery;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,19 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class PayOrderManager extends BaseManager<PayOrderMapper, PayOrder> {
-    public Optional<PayOrder> findByBusinessNo(String businessNo) {
-        return findByField(PayOrder::getBusinessNo,businessNo);
+
+    /**
+     * 根据订单号查询
+     */
+    public Optional<PayOrder> findByOrderNo(String orderNo) {
+        return findByField(PayOrder::getOrderNo,orderNo);
+    }
+
+    /**
+     * 根据商户订单号查询
+     */
+    public Optional<PayOrder> findByBizOrderNo(String bizOrderNo) {
+        return findByField(PayOrder::getBizOrderNo,bizOrderNo);
     }
 
     /**
@@ -36,5 +47,13 @@ public class PayOrderManager extends BaseManager<PayOrderMapper, PayOrder> {
         Page<PayOrder> mpPage = MpUtil.getMpPage(pageParam, PayOrder.class);
         QueryWrapper<PayOrder> generator = QueryGenerator.generator(query);
         return page(mpPage, generator);
+    }
+
+    /**
+     * 强制更新 (忽略版本号)
+     */
+    public void updateForceById(PayOrder payOrder) {
+        payOrder.setVersion(null);
+        this.updateById(payOrder);
     }
 }

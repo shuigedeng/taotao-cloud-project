@@ -2,15 +2,17 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.e
 
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.WechatPayRecordTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.convert.WeChatConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat.WeChatPayRecordDto;
+import cn.bootx.platform.daxpay.service.code.TradeFlowRecordTypeEnum;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.convert.WeChatConvert;
+import cn.bootx.platform.daxpay.service.dto.channel.wechat.WeChatPayRecordDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * 微信支付记录
@@ -34,7 +36,7 @@ public class WeChatPayRecord extends MpCreateEntity implements EntityBaseFunctio
 
     /**
      * 业务类型
-     * @see WechatPayRecordTypeEnum
+     * @see TradeFlowRecordTypeEnum
      */
     @DbColumn(comment = "业务类型")
     private String type;
@@ -46,6 +48,10 @@ public class WeChatPayRecord extends MpCreateEntity implements EntityBaseFunctio
     /** 网关订单号 */
     @DbColumn(comment = "网关订单号")
     private String gatewayOrderNo;
+
+    /** 网关完成时间 */
+    @DbColumn(comment = "网关完成时间")
+    private LocalDateTime gatewayTime;
 
     @Override
     public WeChatPayRecordDto toDto() {

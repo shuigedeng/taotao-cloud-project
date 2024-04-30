@@ -2,8 +2,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.callback;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayCallbackStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PaymentTypeEnum;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,11 +20,11 @@ import lombok.experimental.Accessors;
 @Schema(title = "回调记录")
 public class PayCallbackRecordDto extends BaseDto {
 
-    @Schema(description = "本地订单ID")
-    private Long orderId;
+    @Schema(description = "交易号")
+    private String tradeNo;
 
-    @Schema(description = "支付网关订单号")
-    private String gatewayOrderNo;
+    @Schema(description = "外部交易号")
+    private String outTradeNo;
     /**
      * 支付通道
      * @see PayChannelEnum#getCode()
@@ -51,7 +51,7 @@ public class PayCallbackRecordDto extends BaseDto {
     private String status;
 
     @Schema(description = "修复号")
-    private String repairOrderNo;
+    private String repairNo;
 
     /** 提示信息 */
     @Schema(description = "提示信息")

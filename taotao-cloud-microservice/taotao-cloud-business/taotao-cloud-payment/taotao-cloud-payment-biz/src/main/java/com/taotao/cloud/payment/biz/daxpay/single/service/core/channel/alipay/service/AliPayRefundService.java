@@ -2,10 +2,10 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.s
 
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.AliPayCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.RefundLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.code.AliPayCode;
+import cn.bootx.platform.daxpay.service.common.context.RefundLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.domain.AlipayTradeRefundModel;
 import com.alipay.api.response.AlipayTradeRefundResponse;
@@ -29,13 +29,13 @@ public class AliPayRefundService {
     /**
      * 退款, 调用支付宝退款
      */
-    public void refund(RefundOrder refundOrder, int amount) {
+    public void refund(RefundOrder refundOrder) {
         RefundLocal refundInfo = PaymentContextLocal.get().getRefundInfo();
         AlipayTradeRefundModel refundModel = new AlipayTradeRefundModel();
-        refundModel.setOutTradeNo(String.valueOf(refundOrder.getPaymentId()));
-        refundModel.setOutRequestNo(String.valueOf(refundOrder.getId()));
+        refundModel.setOutTradeNo(refundOrder.getOrderNo());
+        refundModel.setOutRequestNo(refundOrder.getRefundNo());
         // 金额转换
-        String refundAmount = String.valueOf(amount*0.01);
+        String refundAmount = String.valueOf(refundOrder.getAmount()*0.01);
         refundModel.setRefundAmount(refundAmount);
 
         // 设置退款信息
@@ -49,7 +49,7 @@ public class AliPayRefundService {
             }
             // 默认为退款中状态
             refundInfo.setStatus(RefundStatusEnum.PROGRESS)
-                    .setGatewayOrderNo(response.getTradeNo());
+                    .setOutRefundNo(response.getTradeNo());
 
             // 接口返回fund_change=Y为退款成功，fund_change=N或无此字段值返回时需通过退款查询接口进一步确认退款状态
             if (response.getFundChange().equals("Y")){

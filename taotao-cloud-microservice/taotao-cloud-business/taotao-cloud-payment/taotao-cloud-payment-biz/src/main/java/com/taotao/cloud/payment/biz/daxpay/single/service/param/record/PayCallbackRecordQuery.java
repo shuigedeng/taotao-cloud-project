@@ -3,7 +3,7 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.param.record;
 import cn.bootx.platform.common.core.annotation.QueryParam;
 import cn.bootx.platform.common.core.rest.param.QueryOrder;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

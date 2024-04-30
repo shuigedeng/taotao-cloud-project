@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * 支付异步通知类
@@ -21,48 +20,60 @@ import java.util.List;
 @Schema(title = "支付异步通知类")
 public class PayNoticeResult {
 
-    @Schema(description = "支付ID")
-    private Long paymentId;
+    /** 订单号 */
+    @Schema(description = "订单号")
+    private String orderNo;
 
-    @Schema(description = "业务号")
-    private String businessNo;
+    /** 商户订单号 */
+    @Schema(description = "商户订单号")
+    private String bizOrderNo;
 
-    @Schema(description = "是否是异步支付")
-    private boolean asyncPay;
+    /** 标题 */
+    @Schema(description = "标题")
+    private String title;
 
     /**
-     * @see PayChannelEnum#ASYNC_TYPE_CODE
+     * 支付通道
+     * @see PayChannelEnum
      */
-    @Schema(description = "异步支付通道")
-    private String asyncChannel;
+    @Schema(description = "支付通道")
+    private String channel;
 
+    /** 支付方式 */
+    @Schema(description = "支付方式")
+    private String method;
+
+    /** 支付金额 */
     @Schema(description = "支付金额")
     private Integer amount;
 
-    @Schema(description = "支付通道信息")
-    private List<PayChannelResult> payChannels;
-
     /**
+     * 支付状态
      * @see PayStatusEnum
      */
     @Schema(description = "支付状态")
     private String status;
 
-    @Schema(description = "支付创建时间")
-    @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
-    private LocalDateTime createTime;
-
+    /** 支付成功时间 */
     @Schema(description = "支付成功时间")
     @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
     private LocalDateTime payTime;
 
+    /** 支付关闭时间 */
     @Schema(description = "支付关闭时间")
     @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
     private LocalDateTime closeTime;
 
+    /** 支付创建时间 */
+    @Schema(description = "支付创建时间")
+    @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
+    private LocalDateTime createTime;
+
+    /** 商户扩展参数,回调时会原样返回 */
     @Schema(description = "商户扩展参数,回调时会原样返回")
     private String attach;
 
+    /** 签名 */
     @Schema(description = "签名")
     private String sign;
 

@@ -3,8 +3,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.pay.serv
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.common.spring.exception.RetryableException;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.pay.dao.PayExpiredTimeRepository;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.payment.pay.dao.PayExpiredTimeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Retryable;
@@ -41,7 +41,7 @@ public class PayExpiredTimeService {
                 repository.store(payOrder.getId(), expiredTime);
             }
             catch (Exception e) {
-                log.error("注册支付单超时关闭失败");
+                log.error("注册支付单超时关闭失败",e);
                 throw new RetryableException();
             }
         }

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.configuration.ijpay;
+package com.taotao.cloud.payment.biz.daxpay.single.service.configuration.ijpay;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.net.SSLProtocols;

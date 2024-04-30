@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.dto.order.allocation;
+package com.taotao.cloud.payment.biz.daxpay.single.service.dto.order.allocation;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
 import cn.bootx.platform.daxpay.code.AllocationOrderResultEnum;

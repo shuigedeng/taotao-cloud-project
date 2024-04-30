@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.wechat.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.service;
 
 import cn.bootx.platform.common.core.function.CollectorsFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpIdEntity;
@@ -71,7 +71,7 @@ public class WeChatPayAllocationService {
                 .mch_id(config.getWxMchId())
                 .appid(config.getWxAppId())
                 .nonce_str(WxPayKit.generateStr())
-                .transaction_id(allocationOrder.getGatewayPayOrderNo())
+                .transaction_id(allocationOrder.getOutOrderNo())
                 .out_order_no(allocationOrder.getOrderNo())
                 .receivers(JSON.toJSONString(list))
                 .build()
@@ -92,7 +92,7 @@ public class WeChatPayAllocationService {
                 .mch_id(config.getWxMchId())
                 .appid(config.getWxAppId())
                 .nonce_str(WxPayKit.generateStr())
-                .transaction_id(allocationOrder.getGatewayPayOrderNo())
+                .transaction_id(allocationOrder.getOutOrderNo())
                 .out_order_no(allocationOrder.getOrderNo())
                 .description("分账完成")
                 .build()
@@ -113,7 +113,7 @@ public class WeChatPayAllocationService {
         Map<String, String> params = ProfitSharingModel.builder()
                 .mch_id(config.getWxMchId())
                 .nonce_str(WxPayKit.generateStr())
-                .transaction_id(allocationOrder.getGatewayPayOrderNo())
+                .transaction_id(allocationOrder.getOutOrderNo())
                 .out_order_no(allocationOrder.getOrderNo())
                 .build()
                 .createSign(config.getApiKeyV2(), SignType.HMACSHA256);

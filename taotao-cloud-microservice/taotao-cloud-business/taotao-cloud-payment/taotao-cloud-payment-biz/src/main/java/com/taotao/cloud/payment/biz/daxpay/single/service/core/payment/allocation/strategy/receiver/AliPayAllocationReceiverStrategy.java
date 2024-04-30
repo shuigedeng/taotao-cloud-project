@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.strategy.receiver;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.strategy.receiver;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.dto.allocation;
+package com.taotao.cloud.payment.biz.daxpay.single.service.dto.allocation;
 
 import cn.bootx.platform.daxpay.code.AllocationReceiverTypeEnum;
 import cn.bootx.platform.daxpay.code.AllocationRelationTypeEnum;

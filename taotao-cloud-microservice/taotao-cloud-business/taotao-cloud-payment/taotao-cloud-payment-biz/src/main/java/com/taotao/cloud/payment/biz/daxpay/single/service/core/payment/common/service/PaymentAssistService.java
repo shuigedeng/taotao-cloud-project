@@ -1,15 +1,13 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.common.service;
 
-import cn.bootx.platform.common.core.code.CommonCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.PlatformLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.RequestLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.PlatformConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service.PlatformConfigService;
 import cn.bootx.platform.daxpay.param.PaymentCommonParam;
+import cn.bootx.platform.daxpay.service.common.context.PlatformLocal;
+import cn.bootx.platform.daxpay.service.common.context.RequestLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.PlatformConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.service.PlatformConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +39,7 @@ public class PaymentAssistService {
         platform.setSignSecret(config.getSignSecret());
         platform.setNotifyUrl(config.getNotifyUrl());
         platform.setOrderTimeout(config.getOrderTimeout());
+        platform.setLimitAmount(config.getLimitAmount());
         platform.setWebsiteUrl(config.getWebsiteUrl());
     }
 
@@ -52,7 +51,6 @@ public class PaymentAssistService {
         RequestLocal request = PaymentContextLocal.get().getRequestInfo();
         request.setClientIp(paymentCommonParam.getClientIp())
                 .setSign(paymentCommonParam.getSign())
-                .setReqTime(paymentCommonParam.getReqTime())
-                .setReqId(MDC.get(CommonCode.TRACE_ID));
+                .setReqTime(paymentCommonParam.getReqTime());
     }
 }

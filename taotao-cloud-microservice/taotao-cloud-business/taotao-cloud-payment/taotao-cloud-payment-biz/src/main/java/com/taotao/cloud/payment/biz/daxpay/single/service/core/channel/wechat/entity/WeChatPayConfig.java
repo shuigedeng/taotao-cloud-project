@@ -5,8 +5,9 @@ import cn.bootx.platform.common.core.annotation.EncryptionField;
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.common.mybatisplus.handler.StringListTypeHandler;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.convert.WeChatConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat.WeChatPayConfigDto;
+import cn.bootx.platform.daxpay.service.code.WeChatPayCode;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.convert.WeChatConvert;
+import cn.bootx.platform.daxpay.service.dto.channel.wechat.WeChatPayConfigDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import cn.bootx.table.modify.mysql.annotation.DbMySqlFieldType;
@@ -45,6 +46,14 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
     @DbColumn(comment = "是否启用")
     private Boolean enable;
 
+    /** 是否支付分账 */
+    @DbColumn(comment = "是否支付分账")
+    private Boolean allocation;
+
+    /** 支付限额 */
+    @DbColumn(comment = "支付限额")
+    private Integer singleLimit;
+
     /**
      * 服务器异步通知页面路径, 需要填写本网关服务的地址, 不可以直接填写业务系统的地址
      * 1. 需http://或者https://格式的完整路径，
@@ -63,10 +72,12 @@ public class WeChatPayConfig extends MpBaseEntity implements EntityBaseFunction<
     @DbColumn(comment = "同步通知路径")
     private String returnUrl;
 
-    /** 接口版本, 使用v2还是v3接口 */
+    /**
+     * 接口版本, 使用v2还是v3接口
+     * @see WeChatPayCode#API_V2
+     */
     @DbColumn(comment = "接口版本")
     private String apiVersion;
-
 
     /** 商户平台「API安全」中的 APIv2 密钥 */
     @TableField(updateStrategy = FieldStrategy.ALWAYS)

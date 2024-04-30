@@ -1,36 +1,32 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.service;
 
-import cn.bootx.platform.common.core.function.CollectorsFunction;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PaymentTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.RefundRepairWayEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.RepairLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao.PayChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.service.PayOrderQueryService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.service.PayOrderService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.notice.service.ClientNoticeService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.factory.RefundRepairStrategyFactory;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.result.RefundRepairResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.entity.PayRepairRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.repair.service.PayRepairRecordService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundRepairStrategy;
-import cn.hutool.core.util.IdUtil;
+import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
+import cn.bootx.platform.daxpay.service.code.RefundRepairWayEnum;
+import cn.bootx.platform.daxpay.service.common.context.RepairLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderQueryService;
+import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderService;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.core.payment.notice.service.ClientNoticeService;
+import cn.bootx.platform.daxpay.service.core.payment.repair.result.RefundRepairResult;
+import cn.bootx.platform.daxpay.service.core.record.repair.entity.PayRepairRecord;
+import cn.bootx.platform.daxpay.service.core.record.repair.service.PayRepairRecordService;
+import cn.bootx.platform.daxpay.util.OrderNoGenerateUtil;
+import com.baomidou.lock.LockInfo;
+import com.baomidou.lock.LockTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 退款订单修复, 只有存在异步支付的退款订单才存在修复
@@ -48,68 +44,58 @@ public class RefundRepairService {
 
     private final ClientNoticeService clientNoticeService;
 
-    private final PayChannelOrderManager payChannelOrderManager;
-
     private final RefundOrderManager refundOrderManager;
 
-    private final RefundChannelOrderManager refundChannelOrderManager;
-
     private final PayRepairRecordService recordService;
+
+    private final LockTemplate lockTemplate;
 
     /**
      * 修复退款单
      */
     @Transactional(rollbackFor = Exception.class)
     public RefundRepairResult repair(RefundOrder refundOrder, RefundRepairWayEnum repairType){
-
-        // 获取关联支付单
-        PayOrder payOrder = payOrderQueryService.findById(refundOrder.getPaymentId())
-                .orElseThrow(() -> new RuntimeException("支付单不存在"));
-        // 关联支付通道支付单
-        Map<String, PayChannelOrder> payChannelOrderMap = payChannelOrderManager.findAllByPaymentId(refundOrder.getPaymentId())
-                .stream()
-                .collect(Collectors.toMap(PayChannelOrder::getChannel, Function.identity(), CollectorsFunction::retainLatest));
-        // 异步通道退款单
-        Map<String, RefundChannelOrder> refundChannelOrderMap = refundChannelOrderManager.findAllByRefundId(refundOrder.getId())
-                .stream()
-                .collect(Collectors.toMap(RefundChannelOrder::getChannel, Function.identity(), CollectorsFunction::retainLatest));
-
-        // 2 初始化修复参数
-        List<String> channels = new ArrayList<>(payChannelOrderMap.keySet());
-        List<AbsRefundRepairStrategy> repairStrategies = RefundRepairStrategyFactory.createAsyncLast(channels);
-        for (AbsRefundRepairStrategy repairStrategy : repairStrategies) {
-            PayChannelOrder payChannelOrder = payChannelOrderMap.get(repairStrategy.getChannel().getCode());
-            RefundChannelOrder refundChannelOrder = refundChannelOrderMap.get(repairStrategy.getChannel().getCode());
-            repairStrategy.initRepairParam(refundOrder, refundChannelOrder, payOrder, payChannelOrder);
+        // 添加分布式锁
+        LockInfo lock = lockTemplate.lock("repair:refund:" + refundOrder.getId(), 10000, 200);
+        if (Objects.isNull(lock)){
+            log.warn("当前退款单正在修复中: {}", refundOrder.getId());
+            return new RefundRepairResult();
         }
+        try {
+            // 获取关联支付单
+            PayOrder payOrder = payOrderQueryService.findById(refundOrder.getOrderId())
+                    .orElseThrow(() -> new RuntimeException("支付单不存在"));
 
-        // 根据不同的类型执行对应的修复逻辑
-        RefundRepairResult repairResult = new RefundRepairResult();
-        if (Objects.requireNonNull(repairType) == RefundRepairWayEnum.REFUND_SUCCESS) {
-            repairResult = this.success(refundOrder,payOrder,repairStrategies);
-        } else if (repairType == RefundRepairWayEnum.REFUND_FAIL) {
-            repairResult = this.close(refundOrder,payOrder,repairStrategies);
-        } else {
-            log.error("走到了理论上讲不会走到的分支");
+            // 根据不同的类型执行对应的修复逻辑
+            RefundRepairResult repairResult = new RefundRepairResult();
+            if (Objects.requireNonNull(repairType) == RefundRepairWayEnum.REFUND_SUCCESS) {
+                repairResult = this.success(refundOrder, payOrder);
+            } else if (repairType == RefundRepairWayEnum.REFUND_FAIL) {
+                repairResult = this.close(refundOrder, payOrder);
+            } else {
+                log.error("走到了理论上讲不会走到的分支");
+            }
+
+            // 设置修复ID并保存修复记录
+            repairResult.setRepairNo(OrderNoGenerateUtil.repair());
+            // 支付修复记录
+            PayRepairRecord payRepairRecord = this.payRepairRecord(payOrder, repairType, repairResult);
+            // 退款修复记录
+            PayRepairRecord refundRepairRecord = this.refundRepairRecord(refundOrder, repairType, repairResult);
+
+            // 发送通知
+            clientNoticeService.registerRefundNotice(refundOrder, null);
+            recordService.saveAllRecord(Arrays.asList(payRepairRecord, refundRepairRecord));
+            return repairResult;
+        } finally {
+            lockTemplate.releaseLock(lock);
         }
-
-        // 设置修复ID并保存修复记录
-        repairResult.setRepairNo(IdUtil.getSnowflakeNextIdStr());
-        // 支付修复记录
-        PayRepairRecord payRepairRecord = this.payRepairRecord(payOrder, repairType, repairResult);
-        // 退款修复记录
-        PayRepairRecord refundRepairRecord = this.refundRepairRecord(refundOrder, repairType, repairResult);
-
-        // 发送通知
-        clientNoticeService.registerRefundNotice(refundOrder, null, new ArrayList<>(refundChannelOrderMap.values()));
-        recordService.saveAllRecord(Arrays.asList(payRepairRecord, refundRepairRecord));
-        return repairResult;
     }
 
     /**
      * 退款成功, 更新退款单和支付单
      */
-    private RefundRepairResult success(RefundOrder refundOrder, PayOrder payOrder, List<AbsRefundRepairStrategy> repairStrategies) {
+    private RefundRepairResult success(RefundOrder refundOrder, PayOrder payOrder) {
         RepairLocal repairInfo = PaymentContextLocal.get().getRepairInfo();
         // 订单相关状态
         PayStatusEnum beforePayStatus = PayStatusEnum.findByCode(payOrder.getStatus());
@@ -124,30 +110,18 @@ public class RefundRepairService {
         }
         // 设置退款为完成状态和完成时间
         refundOrder.setStatus(RefundStatusEnum.SUCCESS.getCode())
-                .setRefundTime(repairInfo.getFinishTime());
+                .setFinishTime(repairInfo.getFinishTime());
         payOrder.setStatus(afterPayRefundStatus.getCode());
 
-        // 执行退款成功逻辑
-        repairStrategies.forEach(AbsRefundRepairStrategy::doSuccessHandler);
-        // 获取要更新的数据
-        List<PayChannelOrder> payChannelOrders = repairStrategies.stream()
-                .map(AbsRefundRepairStrategy::getPayChannelOrder)
-                .collect(Collectors.toList());
-        List<RefundChannelOrder> refundChannelOrders = repairStrategies
-                .stream()
-                .map(AbsRefundRepairStrategy::getRefundChannelOrder)
-                .collect(Collectors.toList());
 
         // 更新订单和退款相关订单
         payOrderService.updateById(payOrder);
         refundOrderManager.updateById(refundOrder);
-        payChannelOrderManager.updateAllById(payChannelOrders);
-        refundChannelOrderManager.updateAllById(refundChannelOrders);
 
         // 发送通知
         List<String> list = Arrays.asList(RefundStatusEnum.SUCCESS.getCode(), RefundStatusEnum.CLOSE.getCode(),  RefundStatusEnum.FAIL.getCode());
         if (list.contains(refundOrder.getStatus())){
-            clientNoticeService.registerRefundNotice(refundOrder, null, refundChannelOrders);
+            clientNoticeService.registerRefundNotice(refundOrder, null);
         }
 
         return new RefundRepairResult()
@@ -161,7 +135,7 @@ public class RefundRepairService {
     /**
      * 退款失败, 关闭退款单并将失败的退款金额归还回订单
      */
-    private RefundRepairResult close(RefundOrder refundOrder, PayOrder payOrder, List<AbsRefundRepairStrategy> repairStrategies) {
+    private RefundRepairResult close(RefundOrder refundOrder, PayOrder payOrder) {
         // 要返回的状态
         RefundRepairResult repairResult = new RefundRepairResult();
 
@@ -187,23 +161,9 @@ public class RefundRepairService {
         payOrder.setRefundableBalance(payOrderAmount);
         refundOrder.setStatus(RefundStatusEnum.CLOSE.getCode());
 
-        // 执行关闭退款逻辑
-        repairStrategies.forEach(AbsRefundRepairStrategy::doCloseHandler);
-
-        // 获取要更新的数据
-        List<PayChannelOrder> payChannelOrders = repairStrategies.stream()
-                .map(AbsRefundRepairStrategy::getPayChannelOrder)
-                .collect(Collectors.toList());
-        List<RefundChannelOrder> refundChannelOrders = repairStrategies
-                .stream()
-                .map(AbsRefundRepairStrategy::getRefundChannelOrder)
-                .collect(Collectors.toList());
-
         // 更新订单和退款相关订单
-        payChannelOrderManager.updateAllById(payChannelOrders);
         payOrderService.updateById(payOrder);
         refundOrderManager.updateById(refundOrder);
-        refundChannelOrderManager.updateAllById(refundChannelOrders);
         return repairResult;
     }
 
@@ -221,13 +181,13 @@ public class RefundRepairService {
                 .getRepairInfo()
                 .getSource().getCode();
         return new PayRepairRecord()
+                .setTradeId(order.getId())
+                .setTradeNo(order.getOrderNo())
                 .setRepairNo(repairResult.getRepairNo())
-                .setOrderId(order.getId())
                 .setRepairType(PaymentTypeEnum.PAY.getCode())
                 .setRepairSource(source)
                 .setRepairWay(repairType.getCode())
-                .setAsyncChannel(order.getAsyncChannel())
-                .setOrderNo(order.getBusinessNo())
+                .setChannel(order.getChannel())
                 .setBeforeStatus(beforeStatus)
                 .setAfterStatus(repairResult.getAfterPayStatus().getCode());
     }
@@ -244,9 +204,9 @@ public class RefundRepairService {
                 .getRepairInfo()
                 .getSource().getCode();
         return new PayRepairRecord()
-                .setOrderId(refundOrder.getId())
+                .setTradeId(refundOrder.getId())
                 .setRepairNo(repairResult.getRepairNo())
-                .setOrderNo(refundOrder.getRefundNo())
+                .setTradeNo(refundOrder.getRefundNo())
                 .setRepairType(PaymentTypeEnum.REFUND.getCode())
                 .setBeforeStatus(repairResult.getBeforeRefundStatus().getCode())
                 .setAfterStatus(afterStatus)

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.notice;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.ClientNoticeSendTypeEnum;
+import cn.bootx.platform.daxpay.service.code.ClientNoticeSendTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,7 +27,7 @@ public class ClientNoticeRecordDto extends BaseDto {
      * @see ClientNoticeSendTypeEnum
      */
     @Schema(description = "发送类型")
-    private String type;
+    private String sendType;
 
     /** 请求次数 */
     @Schema(description = "请求次数")

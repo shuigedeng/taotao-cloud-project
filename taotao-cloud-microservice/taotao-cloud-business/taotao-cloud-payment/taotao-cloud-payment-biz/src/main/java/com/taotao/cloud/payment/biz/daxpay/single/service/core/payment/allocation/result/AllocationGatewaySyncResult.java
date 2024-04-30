@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.result;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.result;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

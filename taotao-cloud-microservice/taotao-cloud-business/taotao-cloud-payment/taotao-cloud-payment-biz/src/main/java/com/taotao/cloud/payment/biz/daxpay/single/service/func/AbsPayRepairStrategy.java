@@ -1,7 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.func;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,17 +18,6 @@ public abstract class AbsPayRepairStrategy implements PayStrategy{
     /** 支付订单 */
     private PayOrder order = null;
 
-    /** 通道支付订单 */
-    private PayChannelOrder channelOrder = null;
-
-    /**
-     * 初始化修复参数
-     */
-    public void initRepairParam(PayOrder order, PayChannelOrder channelOrder){
-        this.order = order;
-        this.channelOrder = channelOrder;
-    }
-
     /**
      * 修复前处理
      */
@@ -38,29 +26,8 @@ public abstract class AbsPayRepairStrategy implements PayStrategy{
     }
 
     /**
-     * 支付成功处理
+     * 关闭三方系统的支付
      */
-    public void doPaySuccessHandler(){
-
-    }
-
-    /**
-     * 等待支付处理
-     */
-    public void doWaitPayHandler(){
-
-    }
-
-    /**
-     * 关闭本地支付
-     */
-    public abstract void doCloseLocalHandler();
-
-    /**
-     * 关闭本地支付和网关支付, 默认为关闭本地支付
-     */
-    public void doCloseGatewayHandler() {
-        this.doCloseLocalHandler();
-    }
+    public abstract void doCloseRemoteHandler();
 
 }

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.dto.channel.wechat;
+package com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat;
 
 import cn.bootx.platform.daxpay.code.AllocationReceiverTypeEnum;
 import cn.hutool.core.annotation.Alias;

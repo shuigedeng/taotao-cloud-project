@@ -1,7 +1,11 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.refund.strategy;
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundStrategy;
+import cn.bootx.platform.daxpay.service.core.channel.union.entity.UnionPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.union.service.UnionPayConfigService;
+import cn.bootx.platform.daxpay.service.core.channel.union.service.UnionPayRefundService;
+import cn.bootx.platform.daxpay.service.func.AbsRefundStrategy;
+import cn.bootx.platform.daxpay.service.sdk.union.api.UnionPayKit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,6 +21,13 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 @Component
 @RequiredArgsConstructor
 public class UnionRefundStrategy extends AbsRefundStrategy {
+
+    private final UnionPayRefundService unionPayRefundService;
+
+    private final UnionPayConfigService unionPayConfigService;
+
+    private UnionPayConfig unionPayConfig;
+
     /**
      * 策略标识
      *
@@ -28,11 +39,20 @@ public class UnionRefundStrategy extends AbsRefundStrategy {
     }
 
     /**
-     * 退款
+     * 退款前对处理, 初始化微信支付配置
+     */
+    @Override
+    public void doBeforeRefundHandler() {
+        this.unionPayConfig = unionPayConfigService.getAndCheckConfig();
+    }
+
+
+    /**
+     * 退款操作
      */
     @Override
     public void doRefundHandler() {
-
+        UnionPayKit unionPayKit = unionPayConfigService.initPayService(unionPayConfig);
+        unionPayRefundService.refund(this.getRefundOrder(), unionPayKit);
     }
-
 }

@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.dto.system.config;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayApiCallBackTypeEnum;
+import cn.bootx.platform.daxpay.service.code.PayApiCallBackTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

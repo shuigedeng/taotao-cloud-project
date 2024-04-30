@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.common.local;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.PaymentContext;
+import cn.bootx.platform.daxpay.service.common.context.PaymentContext;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.experimental.UtilityClass;
 

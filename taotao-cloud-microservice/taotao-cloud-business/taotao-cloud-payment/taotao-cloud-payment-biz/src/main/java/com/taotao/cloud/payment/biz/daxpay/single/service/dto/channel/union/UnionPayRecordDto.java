@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.dto.channel.union;
+package com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.union;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
 import cn.bootx.platform.daxpay.service.code.UnionPayRecordTypeEnum;

@@ -2,9 +2,11 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.enti
 
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.ClientNoticeTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.convert.ClientNoticeConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.notice.ClientNoticeTaskDto;
+import cn.bootx.platform.daxpay.code.PayStatusEnum;
+import cn.bootx.platform.daxpay.code.RefundStatusEnum;
+import cn.bootx.platform.daxpay.service.code.ClientNoticeTypeEnum;
+import cn.bootx.platform.daxpay.service.core.task.notice.convert.ClientNoticeConvert;
+import cn.bootx.platform.daxpay.service.dto.record.notice.ClientNoticeTaskDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import cn.bootx.table.modify.mysql.annotation.DbMySqlFieldType;
@@ -37,7 +39,15 @@ public class ClientNoticeTask extends MpBaseEntity implements EntityBaseFunction
      * @see ClientNoticeTypeEnum
      */
     @DbColumn(comment = "消息类型")
-    private String type;
+    private String noticeType;
+
+    /**
+     * 订单状态
+     * @see PayStatusEnum
+     * @see RefundStatusEnum
+     */
+    @DbColumn(comment = "订单状态")
+    private String orderStatus;
 
     /** 消息内容 */
     @DbColumn(comment = "消息内容")

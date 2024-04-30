@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.report.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.report.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

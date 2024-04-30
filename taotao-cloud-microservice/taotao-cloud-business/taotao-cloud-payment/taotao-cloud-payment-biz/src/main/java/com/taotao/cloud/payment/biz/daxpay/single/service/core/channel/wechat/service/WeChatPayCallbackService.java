@@ -3,26 +3,31 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.s
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PaymentTypeEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.CallbackLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsCallbackStrategy;
+import cn.bootx.platform.daxpay.code.RefundStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PayCallbackStatusEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairSourceEnum;
+import cn.bootx.platform.daxpay.service.code.PaymentTypeEnum;
+import cn.bootx.platform.daxpay.service.common.context.CallbackLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.payment.callback.service.PayCallbackService;
+import cn.bootx.platform.daxpay.service.core.payment.callback.service.RefundCallbackService;
+import cn.bootx.platform.daxpay.service.core.record.callback.service.PayCallbackRecordService;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.ijpay.core.enums.SignType;
 import com.ijpay.core.kit.WxPayKit;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.taotao.cloud.payment.biz.daxpay.single.service.code.WeChatPayCode.*;
+import static cn.bootx.platform.daxpay.service.code.WeChatPayCode.*;
 
 
 /**
@@ -33,23 +38,59 @@ import static com.taotao.cloud.payment.biz.daxpay.single.service.code.WeChatPayC
  */
 @Slf4j
 @Service
-public class WeChatPayCallbackService extends AbsCallbackStrategy {
-    @Resource
-    private WeChatPayConfigService weChatPayConfigService;
+@RequiredArgsConstructor
+public class WeChatPayCallbackService {
+    private final WeChatPayConfigService weChatPayConfigService;
 
+    private final PayCallbackRecordService callbackService;
+
+    private final PayCallbackService payCallbackService;
+
+    private final RefundCallbackService refundCallbackService;
 
     /**
-     * 策略标识
+     * 回调处理入口
      */
-    @Override
-    public PayChannelEnum getChannel() {
-        return PayChannelEnum.WECHAT;
+    public String callback(Map<String, String> params){
+        CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
+        try {
+            // 将参数写入到上下文中
+            callbackInfo.getCallbackParam().putAll(params);
+
+            // 判断并保存回调类型
+            PaymentTypeEnum callbackType = this.getCallbackType();
+            callbackInfo.setCallbackType(callbackType)
+                    .setChannel(PayChannelEnum.ALI.getCode());
+
+            // 验证消息
+            if (!this.verifyNotify()) {
+                callbackInfo.setCallbackStatus(PayCallbackStatusEnum.FAIL).setMsg("验证信息格式不通过");
+                // 消息有问题, 保存记录并返回
+                callbackService.saveCallbackRecord();
+                return null;
+            }
+            // 提前设置订单修复的来源
+            PaymentContextLocal.get().getRepairInfo().setSource(PayRepairSourceEnum.CALLBACK);
+
+            if (callbackType == PaymentTypeEnum.PAY){
+                // 解析支付数据并放处理
+                this.resolvePayData();
+                payCallbackService.payCallback();
+            } else {
+                // 解析退款数据并放处理
+                this.resolveRefundData();
+                refundCallbackService.refundCallback();
+            }
+            callbackService.saveCallbackRecord();
+            return this.getReturnMsg();
+        } catch (Exception e) {
+            log.error("回调处理失败", e);
+            callbackInfo.setCallbackStatus(PayCallbackStatusEnum.FAIL).setMsg("回调处理失败: "+e.getMessage());
+            callbackService.saveCallbackRecord();
+            throw e;
+        }
     }
 
-    /**
-     * 验证回调消息
-     */
-    @Override
     public boolean verifyNotify() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> params = callbackInfo.getCallbackParam();
@@ -79,18 +120,17 @@ public class WeChatPayCallbackService extends AbsCallbackStrategy {
     /**
      * 解析支付数据放到上下文中
      */
-    @Override
     public void resolvePayData() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> callbackParam = callbackInfo.getCallbackParam();
 
-        // 网关订单号
-        callbackInfo.setGatewayOrderNo(callbackParam.get(TRANSACTION_ID));
-        // 支付订单ID
-        callbackInfo.setOrderId(Long.valueOf(callbackParam.get(OUT_TRADE_NO)));
+        // 网关支付号
+        callbackInfo.setOutTradeNo(callbackParam.get(TRANSACTION_ID));
+        // 支付号
+        callbackInfo.setTradeNo(callbackParam.get(OUT_TRADE_NO));
         // 支付状态
         PayStatusEnum payStatus = WxPayKit.codeIsOk(callbackParam.get(RESULT_CODE)) ? PayStatusEnum.SUCCESS : PayStatusEnum.FAIL;
-        callbackInfo.setGatewayStatus(payStatus.getCode());
+        callbackInfo.setOutStatus(payStatus.getCode());
         // 支付金额
         callbackInfo.setAmount(callbackParam.get(TOTAL_FEE));
         String timeEnd = callbackParam.get(TIME_END);
@@ -105,7 +145,6 @@ public class WeChatPayCallbackService extends AbsCallbackStrategy {
     /**
      * 解析退款回调数据并放到上下文中, 微信退款通知返回的数据需要进行解密
      */
-    @Override
     public void resolveRefundData() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> callbackParam = callbackInfo.getCallbackParam();
@@ -119,16 +158,16 @@ public class WeChatPayCallbackService extends AbsCallbackStrategy {
         callbackParam = WxPayKit.xmlToMap(decryptData);
         callbackInfo.setCallbackParam(callbackParam);
         // 网关订单号
-        callbackInfo.setGatewayOrderNo(callbackParam.get(CALLBACK_REFUND_ID));
+        callbackInfo.setOutTradeNo(callbackParam.get(CALLBACK_REFUND_ID));
         // 退款订单Id
-        callbackInfo.setOrderId(Long.valueOf(callbackParam.get(CALLBACK_OUT_REFUND_NO)));
+        callbackInfo.setTradeNo(callbackParam.get(CALLBACK_OUT_REFUND_NO));
         // 退款金额
         callbackInfo.setAmount(callbackParam.get(CALLBACK_REFUND_FEE));
 
         // 交易状态
-        PayStatusEnum payStatus = Objects.equals(callbackParam.get(CALLBACK_REFUND_STATUS), REFUND_SUCCESS)
-                ? PayStatusEnum.SUCCESS : PayStatusEnum.FAIL;
-        callbackInfo.setGatewayStatus(payStatus.getCode());
+        RefundStatusEnum refundStatus = Objects.equals(callbackParam.get(CALLBACK_REFUND_STATUS), REFUND_SUCCESS)
+                ? RefundStatusEnum.SUCCESS : RefundStatusEnum.FAIL;
+        callbackInfo.setOutStatus(refundStatus.getCode());
 
         // 退款时间
         String timeEnd = callbackParam.get(CALLBACK_SUCCESS_TIME);
@@ -145,7 +184,6 @@ public class WeChatPayCallbackService extends AbsCallbackStrategy {
      *
      * @see PaymentTypeEnum
      */
-    @Override
     public PaymentTypeEnum getCallbackType() {
         CallbackLocal callbackInfo = PaymentContextLocal.get().getCallbackInfo();
         Map<String, String> callbackParam = callbackInfo.getCallbackParam();
@@ -159,7 +197,6 @@ public class WeChatPayCallbackService extends AbsCallbackStrategy {
     /**
      * 返回响应结果
      */
-    @Override
     public String getReturnMsg() {
         Map<String, String> xml = new HashMap<>(4);
         xml.put(RETURN_CODE, "SUCCESS");

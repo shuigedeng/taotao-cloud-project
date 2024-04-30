@@ -5,9 +5,9 @@ import cn.bootx.platform.common.core.annotation.EncryptionField;
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.common.mybatisplus.handler.StringListTypeHandler;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.AliPayCode;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.convert.AlipayConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.alipay.AliPayConfigDto;
+import cn.bootx.platform.daxpay.service.code.AliPayCode;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.convert.AlipayConvert;
+import cn.bootx.platform.daxpay.service.dto.channel.alipay.AliPayConfigDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import cn.bootx.table.modify.mysql.annotation.DbMySqlFieldType;
@@ -41,6 +41,14 @@ public class AliPayConfig extends MpBaseEntity implements EntityBaseFunction<Ali
     @DbColumn(comment = "是否启用")
     private Boolean enable;
 
+    /** 是否支付分账 */
+    @DbColumn(comment = "是否支付分账")
+    private Boolean allocation;
+
+    /** 支付限额 */
+    @DbColumn(comment = "支付限额")
+    private Integer singleLimit;
+
     /**
      * 服务器异步通知页面路径, 需要填写本网关服务的地址, 不可以直接填写业务系统的地址
      * 1. 需http://或者https://格式的完整路径，
@@ -73,6 +81,13 @@ public class AliPayConfig extends MpBaseEntity implements EntityBaseFunction<Ali
     /** 签名类型 RSA2 */
     @DbColumn(comment = "签名类型 RSA2")
     public String signType;
+
+    /**
+     * 是商家与支付宝签约后，商家获得的支付宝商家唯一识别码，以 2088 开头的 16 位数字组成，在开放平台中账户中心获取
+     */
+    @EncryptionField
+    @DbColumn(comment = "合作者身份ID")
+    private String alipayUserId;
 
     /** 支付宝公钥 */
     @BigField

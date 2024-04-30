@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.common.context;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayRepairSourceEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairSourceEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

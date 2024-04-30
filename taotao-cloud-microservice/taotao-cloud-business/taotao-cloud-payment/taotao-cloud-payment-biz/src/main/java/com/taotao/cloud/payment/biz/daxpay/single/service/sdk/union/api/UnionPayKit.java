@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.sdk.union.api;
+package com.taotao.cloud.payment.biz.daxpay.single.service.sdk.union.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.egzosn.pay.common.bean.*;
@@ -386,7 +386,7 @@ public class UnionPayKit extends UnionPayService {
             builder.build(pkixParams);
             return cert;
         }
-        catch (java.security.cert.CertPathBuilderException e) {
+        catch (CertPathBuilderException e) {
             LOG.error("verify certificate chain fail.", e);
         }
         catch (CertificateExpiredException e) {

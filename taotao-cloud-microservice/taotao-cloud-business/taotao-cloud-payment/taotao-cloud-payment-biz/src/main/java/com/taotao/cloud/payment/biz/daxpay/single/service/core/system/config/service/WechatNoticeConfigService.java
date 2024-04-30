@@ -1,9 +1,9 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service;
 
 import cn.bootx.platform.common.core.exception.DataNotExistException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.WechatNoticeConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.dao.WechatNoticeConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.system.config.WechatNoticeConfigParam;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.WechatNoticeConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.dao.WechatNoticeConfigManager;
+import cn.bootx.platform.daxpay.service.param.system.config.WechatNoticeConfigParam;
 import cn.hutool.core.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

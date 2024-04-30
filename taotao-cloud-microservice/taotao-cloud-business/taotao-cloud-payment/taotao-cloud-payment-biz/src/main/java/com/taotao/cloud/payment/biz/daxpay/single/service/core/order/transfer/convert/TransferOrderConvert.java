@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.transfer.convert;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.transfer.convert;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

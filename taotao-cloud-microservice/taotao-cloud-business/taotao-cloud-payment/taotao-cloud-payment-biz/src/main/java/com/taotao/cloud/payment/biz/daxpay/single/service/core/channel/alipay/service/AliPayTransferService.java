@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.alipay.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.service;
 
 import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
 import com.alipay.api.domain.AlipayFundAccountQueryModel;

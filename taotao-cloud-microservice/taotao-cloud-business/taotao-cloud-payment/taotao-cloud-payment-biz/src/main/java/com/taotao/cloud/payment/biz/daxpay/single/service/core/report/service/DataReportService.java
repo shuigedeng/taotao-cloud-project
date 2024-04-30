@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.report.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.report.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.param.report;
+package com.taotao.cloud.payment.biz.daxpay.single.service.param.report;
 
 import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.annotation.JsonFormat;

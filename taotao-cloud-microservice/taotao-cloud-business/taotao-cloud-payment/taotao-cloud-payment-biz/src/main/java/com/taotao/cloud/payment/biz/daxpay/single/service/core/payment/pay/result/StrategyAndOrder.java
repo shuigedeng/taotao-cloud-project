@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.pay.result;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.pay.result;
 
 import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
 import cn.bootx.platform.daxpay.service.func.AbsPayStrategy;

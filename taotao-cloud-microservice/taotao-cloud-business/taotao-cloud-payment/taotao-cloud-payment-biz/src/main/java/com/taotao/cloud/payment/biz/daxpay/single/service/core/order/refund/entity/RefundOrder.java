@@ -4,12 +4,10 @@ import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.convert.RefundOrderConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.order.refund.RefundOrderDto;
+import cn.bootx.platform.daxpay.service.core.order.refund.convert.RefundOrderConvert;
+import cn.bootx.platform.daxpay.service.dto.order.refund.RefundOrderDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
-import com.baomidou.mybatisplus.annotation.FieldStrategy;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,9 +16,7 @@ import lombok.experimental.Accessors;
 import java.time.LocalDateTime;
 
 /**
- * 退款记录
- * 主键作为退款的请求号
- *
+ * 退款订单
  * @author xxm
  * @since 2022/3/2
  */
@@ -31,39 +27,44 @@ import java.time.LocalDateTime;
 @TableName(value = "pay_refund_order", autoResultMap = true)
 public class RefundOrder extends MpBaseEntity implements EntityBaseFunction<RefundOrderDto> {
 
-    /** 原支付id */
-    @DbColumn(comment = "原支付id")
-    private Long paymentId;
+    /** 支付订单ID */
+    @DbColumn(comment = "支付订单ID")
+    private Long orderId;
 
-    /** 原支付业务号 */
-    @DbColumn(comment = "原支付业务号")
-    private String businessNo;
+    /** 支付订单号 */
+    @DbColumn(comment = "支付订单号")
+    private String orderNo;
 
-    /** 原支付标题 */
-    @DbColumn(comment = "原支付标题")
+    /** 商户支付订单号 */
+    @DbColumn(comment = "商户支付订单号")
+    private String bizOrderNo;
+
+    /** 外部支付订单号 */
+    @DbColumn(comment = "商户支付订单号")
+    private String outOrderNo;
+
+    /** 支付标题 */
+    @DbColumn(comment = "支付标题")
     private String title;
 
-    /**
-     * 需要保证全局唯一
-     */
+    /** 退款号 */
     @DbColumn(comment = "退款号")
     private String refundNo;
 
-    /** 退款时是否是含有异步通道 */
-    @DbColumn(comment = "是否含有异步通道")
-    private boolean asyncPay;
+    @DbColumn(comment = "商户退款号")
+    private String bizRefundNo;
+
+
+    /** 三方支付系统退款交易号 */
+    @DbColumn(comment = "三方支付系统退款交易号")
+    private String outRefundNo;
 
     /**
-     * 异步通道
-     * @see PayChannelEnum#ASYNC_TYPE_CODE
+     * 退款通道
+     * @see PayChannelEnum
      */
-    @DbColumn(comment = "异步通道")
-    private String asyncChannel;
-
-    /** 如果有异步通道, 保存关联的网关订单号 */
-    @DbColumn(comment = "网关订单号")
-    private String gatewayOrderNo;
-
+    @DbColumn(comment = "支付通道")
+    private String channel;
 
     /** 订单金额 */
     @DbColumn(comment = "订单金额")
@@ -73,18 +74,13 @@ public class RefundOrder extends MpBaseEntity implements EntityBaseFunction<Refu
     @DbColumn(comment = "退款金额")
     private Integer amount;
 
-    /** 剩余可退 */
-    @DbColumn(comment = "剩余可退")
-    @TableField(updateStrategy = FieldStrategy.ALWAYS)
-    private Integer refundableBalance;
-
     /** 退款原因 */
     @DbColumn(comment = "退款原因")
     private String reason;
 
-    /** 退款时间 */
+    /** 退款完成时间 */
     @DbColumn(comment = "退款完成时间")
-    private LocalDateTime refundTime;
+    private LocalDateTime finishTime;
 
     /**
      * 退款状态

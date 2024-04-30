@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliPayRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.alipay.AliPayConfigDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.alipay.AliPayRecordDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.alipay.AliPayConfigParam;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliPayConfig;
+import cn.bootx.platform.daxpay.service.core.payment.reconcile.domain.GeneralReconcileRecord;
+import cn.bootx.platform.daxpay.service.dto.channel.alipay.AliPayConfigDto;
+import cn.bootx.platform.daxpay.service.dto.channel.alipay.AliPayRecordDto;
+import cn.bootx.platform.daxpay.service.param.channel.alipay.AliPayConfigParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,10 +18,6 @@ import org.mapstruct.factory.Mappers;
 public interface AlipayConvert {
 
     AlipayConvert CONVERT = Mappers.getMapper(AlipayConvert.class);
-
-    AliPayConfig convert(AliPayConfigDto in);
-
-    AliPayRecordDto convert(AliPayRecord in);
 
     AliPayConfig convert(AliPayConfigParam in);
 

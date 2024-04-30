@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.entity.UnionPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.union.entity.UnionPayConfig;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

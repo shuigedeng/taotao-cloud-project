@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.sdk.wechat;
+package com.taotao.cloud.payment.biz.daxpay.single.service.sdk.wechat;
 
 import com.ijpay.core.model.BaseModel;
 import lombok.*;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.task;
+package com.taotao.cloud.payment.biz.daxpay.single.service.task;
 
 import cn.bootx.platform.daxpay.service.task.service.RefundSyncTaskService;
 import lombok.RequiredArgsConstructor;

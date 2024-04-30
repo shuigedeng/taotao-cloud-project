@@ -2,7 +2,6 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.alipay;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
 import cn.bootx.platform.starter.data.perm.sensitive.SensitiveInfo;
-import cn.bootx.table.modify.annotation.DbColumn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,8 +26,14 @@ public class AliPayConfigDto extends BaseDto implements Serializable {
     @SensitiveInfo
     private String appId;
 
-    @DbColumn(comment = "是否启用")
+    @Schema(description = "是否启用")
     private Boolean enable;
+
+    @Schema(description = "是否支付分账")
+    private Boolean allocation;
+
+    @Schema(description = "支付限额")
+    private Integer singleLimit;
 
     @Schema(description = "服务器异步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问")
     private String notifyUrl;
@@ -44,6 +49,10 @@ public class AliPayConfigDto extends BaseDto implements Serializable {
 
     @Schema(description = "签名类型")
     private String signType;
+
+    @Schema(description = "合作者身份ID")
+    @SensitiveInfo(value = SensitiveInfo.SensitiveType.OTHER, front = 15)
+    private String alipayUserId;
 
     @Schema(description = "支付宝公钥")
     @SensitiveInfo(value = SensitiveInfo.SensitiveType.OTHER, front = 15)

@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.WalletRecord;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.WalletRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

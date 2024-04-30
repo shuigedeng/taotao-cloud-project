@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.dao;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.alipay.entity.AliReconcileBillTotal;
+import cn.bootx.platform.daxpay.service.core.channel.alipay.entity.AliReconcileBillTotal;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

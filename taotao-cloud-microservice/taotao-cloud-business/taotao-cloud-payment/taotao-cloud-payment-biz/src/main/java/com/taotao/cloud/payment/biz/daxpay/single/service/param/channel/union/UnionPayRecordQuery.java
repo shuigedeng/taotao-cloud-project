@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.param.channel.union;
+package com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.union;
 
 import cn.bootx.platform.common.core.annotation.QueryParam;
 import cn.bootx.platform.common.core.rest.param.QueryOrder;

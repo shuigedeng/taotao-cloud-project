@@ -1,13 +1,17 @@
 package com.taotao.cloud.payment.biz.daxpay.single.gateway.controller;
 
-import cn.bootx.platform.common.core.annotation.CountTime;
 import cn.bootx.platform.common.core.annotation.IgnoreAuth;
 import cn.bootx.platform.daxpay.code.PaymentApiCode;
-import cn.bootx.platform.daxpay.param.pay.*;
-import cn.bootx.platform.daxpay.param.pay.allocation.AllocationFinishParam;
-import cn.bootx.platform.daxpay.param.pay.allocation.AllocationStartParam;
+import cn.bootx.platform.daxpay.param.payment.allocation.AllocationFinishParam;
+import cn.bootx.platform.daxpay.param.payment.allocation.AllocationStartParam;
+import cn.bootx.platform.daxpay.param.payment.pay.PayCloseParam;
+import cn.bootx.platform.daxpay.param.payment.pay.PayParam;
+import cn.bootx.platform.daxpay.param.payment.pay.PaySyncParam;
+import cn.bootx.platform.daxpay.param.payment.refund.RefundParam;
+import cn.bootx.platform.daxpay.param.payment.refund.RefundSyncParam;
 import cn.bootx.platform.daxpay.result.DaxResult;
 import cn.bootx.platform.daxpay.result.allocation.AllocationResult;
+import cn.bootx.platform.daxpay.result.pay.PayCloseResult;
 import cn.bootx.platform.daxpay.result.pay.PayResult;
 import cn.bootx.platform.daxpay.result.pay.RefundResult;
 import cn.bootx.platform.daxpay.result.pay.SyncResult;
@@ -46,7 +50,6 @@ public class UniPayController {
     private final AllocationService allocationService;
 
 
-    @CountTime
     @PaymentApi(PaymentApiCode.PAY)
     @Operation(summary = "统一支付接口")
     @PostMapping("/pay")
@@ -54,24 +57,13 @@ public class UniPayController {
         return DaxRes.ok(payService.pay(payParam));
     }
 
-    @CountTime
-    @PaymentApi(PaymentApiCode.SIMPLE_PAY)
-    @Operation(summary = "简单支付接口")
-    @PostMapping("/simplePay")
-    public DaxResult<PayResult> simplePay(@RequestBody SimplePayParam payParam){
-        return DaxRes.ok(payService.simplePay(payParam));
-    }
-
-    @CountTime
     @PaymentApi(PaymentApiCode.CLOSE)
     @Operation(summary = "支付关闭接口")
     @PostMapping("/close")
-    public DaxResult<Void> close(@RequestBody PayCloseParam param){
-        payCloseService.close(param);
-        return DaxRes.ok();
+    public DaxResult<PayCloseResult> close(@RequestBody PayCloseParam param){
+        return DaxRes.ok(payCloseService.close(param));
     }
 
-    @CountTime
     @PaymentApi(PaymentApiCode.REFUND)
     @Operation(summary = "统一退款接口")
     @PostMapping("/refund")
@@ -79,15 +71,6 @@ public class UniPayController {
         return DaxRes.ok(refundService.refund(param));
     }
 
-    @CountTime
-    @PaymentApi(PaymentApiCode.SIMPLE_REFUND)
-    @Operation(summary = "简单退款接口")
-    @PostMapping("/simpleRefund")
-    public DaxResult<RefundResult> simpleRefund(@RequestBody SimpleRefundParam param){
-        return DaxRes.ok(refundService.simpleRefund(param));
-    }
-
-    @CountTime
     @PaymentApi(PaymentApiCode.SYNC_PAY)
     @Operation(summary = "支付同步接口")
     @PostMapping("/syncPay")
@@ -95,7 +78,6 @@ public class UniPayController {
         return DaxRes.ok(paySyncService.sync(param));
     }
 
-    @CountTime
     @PaymentApi(PaymentApiCode.SYNC_REFUND)
     @Operation(summary = "退款同步接口")
     @PostMapping("/syncRefund")
@@ -103,7 +85,6 @@ public class UniPayController {
         return DaxRes.ok(refundSyncService.sync(param));
     }
 
-    @CountTime
     @PaymentApi(PaymentApiCode.ALLOCATION)
     @Operation(summary = "开启分账接口")
     @PostMapping("/allocation")
@@ -111,7 +92,6 @@ public class UniPayController {
         return DaxRes.ok(allocationService.allocation(param));
     }
 
-    @CountTime
     @PaymentApi(PaymentApiCode.ALLOCATION_FINISH)
     @Operation(summary = "分账完结接口")
     @PostMapping("/allocationFinish")

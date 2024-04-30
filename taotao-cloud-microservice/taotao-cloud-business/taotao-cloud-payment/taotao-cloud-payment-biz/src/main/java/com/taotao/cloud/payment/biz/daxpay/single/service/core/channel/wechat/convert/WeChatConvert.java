@@ -1,10 +1,11 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat.WeChatPayConfigDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat.WeChatPayRecordDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wechat.WeChatPayConfigParam;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayRecord;
+import cn.bootx.platform.daxpay.service.core.payment.reconcile.domain.GeneralReconcileRecord;
+import cn.bootx.platform.daxpay.service.dto.channel.wechat.WeChatPayConfigDto;
+import cn.bootx.platform.daxpay.service.dto.channel.wechat.WeChatPayRecordDto;
+import cn.bootx.platform.daxpay.service.param.channel.wechat.WeChatPayConfigParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -22,6 +23,8 @@ public interface WeChatConvert {
     WeChatPayConfig convert(WeChatPayConfigParam in);
 
     WeChatPayRecordDto convert(WeChatPayRecord in);
+
+    GeneralReconcileRecord convertReconcileRecord(WeChatPayRecord in);
 
     WeChatPayConfigDto convert(WeChatPayConfig in);
 

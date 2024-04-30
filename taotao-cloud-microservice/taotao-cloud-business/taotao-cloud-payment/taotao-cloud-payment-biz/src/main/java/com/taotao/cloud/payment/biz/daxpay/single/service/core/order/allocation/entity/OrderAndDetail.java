@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.allocation.entity;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.allocation.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

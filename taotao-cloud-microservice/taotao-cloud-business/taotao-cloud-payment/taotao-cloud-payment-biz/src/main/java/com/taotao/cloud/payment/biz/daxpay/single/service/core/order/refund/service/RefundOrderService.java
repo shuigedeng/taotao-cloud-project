@@ -1,43 +1,27 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.service;
 
 import cn.bootx.platform.common.core.exception.DataNotExistException;
-import cn.bootx.platform.common.core.exception.ValidationFailedException;
-import cn.bootx.platform.common.core.rest.PageResult;
-import cn.bootx.platform.common.core.rest.param.PageParam;
-import cn.bootx.platform.common.mybatisplus.util.MpUtil;
 import cn.bootx.platform.common.spring.util.WebServletUtil;
 import cn.bootx.platform.daxpay.code.PaymentApiCode;
-import cn.bootx.platform.daxpay.param.pay.QueryRefundParam;
-import cn.bootx.platform.daxpay.param.pay.RefundParam;
-import cn.bootx.platform.daxpay.result.order.RefundChannelOrderResult;
-import cn.bootx.platform.daxpay.result.order.RefundOrderResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.convert.RefundOrderConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.convert.RefundOrderChannelConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.dao.RefundOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.common.service.PaymentAssistService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.refund.service.RefundService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.dao.PayApiConfigManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.entity.PayApiConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.system.config.service.PayApiConfigService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.order.refund.RefundOrderDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.order.refund.RefundChannelOrderDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.order.PayOrderRefundParam;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.order.RefundOrderQuery;
-import cn.hutool.core.util.StrUtil;
+import cn.bootx.platform.daxpay.param.payment.refund.RefundParam;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderExtraManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrderExtra;
+import cn.bootx.platform.daxpay.service.core.payment.common.service.PaymentAssistService;
+import cn.bootx.platform.daxpay.service.core.payment.refund.service.RefundService;
+import cn.bootx.platform.daxpay.service.core.system.config.dao.PayApiConfigManager;
+import cn.bootx.platform.daxpay.service.core.system.config.entity.PayApiConfig;
+import cn.bootx.platform.daxpay.service.core.system.config.service.PayApiConfigService;
+import cn.bootx.platform.daxpay.service.param.order.PayOrderRefundParam;
+import cn.bootx.platform.daxpay.util.OrderNoGenerateUtil;
 import cn.hutool.extra.servlet.ServletUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * 退款
@@ -54,78 +38,15 @@ public class RefundOrderService {
     private final PayApiConfigService apiConfigService;
     private final PaymentAssistService paymentAssistService;
 
-    private final PayApiConfigManager apiConfigManager;
+    private final RefundOrderExtraManager refundOrderExtraManager;
+
     private final RefundOrderManager refundOrderManager;
-    private final RefundChannelOrderManager refundOrderChannelManager;
+
+    private final PayApiConfigManager apiConfigManager;
 
     /**
-     * 分页查询
-     */
-    public PageResult<RefundOrderDto> page(PageParam pageParam, RefundOrderQuery query) {
-        Page<RefundOrder> page = refundOrderManager.page(pageParam, query);
-        return MpUtil.convert2DtoPageResult(page);
-    }
-
-    /**
-     * 根据id查询
-     */
-    public RefundOrderDto findById(Long id) {
-        return refundOrderManager.findById(id).map(RefundOrder::toDto)
-                .orElseThrow(() -> new DataNotExistException("退款订单不存在"));
-    }
-
-    /**
-     * 通道退款订单列表查询
-     */
-    public List<RefundChannelOrderDto> listByChannel(Long refundId){
-        List<RefundChannelOrder> refundOrderChannels = refundOrderChannelManager.findAllByRefundId(refundId);
-        return refundOrderChannels.stream()
-                .map(RefundOrderChannelConvert.CONVERT::convert)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * 查询通道退款订单详情
-     */
-    public RefundChannelOrderDto findChannelById(Long id) {
-        return refundOrderChannelManager.findById(id)
-                .map(RefundChannelOrder::toDto)
-                .orElseThrow(() -> new DataNotExistException("通道退款订单不存在"));
-    }
-
-    /**
-     * 查询退款订单
-     */
-    public RefundOrderResult queryRefundOrder(QueryRefundParam param) {
-        // 校验参数
-        if (StrUtil.isBlank(param.getRefundNo()) && Objects.isNull(param.getRefundId())){
-            throw new ValidationFailedException("退款号或退款ID不能都为空");
-        }
-
-        // 查询退款单
-        RefundOrder refundOrder = null;
-        if (Objects.nonNull(param.getRefundId())){
-            refundOrder = refundOrderManager.findById(param.getRefundId())
-                    .orElseThrow(() -> new DataNotExistException("未查询到支付订单"));
-        }
-        if (Objects.isNull(refundOrder)){
-            refundOrder = refundOrderManager.findByRefundNo(param.getRefundNo())
-                    .orElseThrow(() -> new DataNotExistException("未查询到支付订单"));
-        }
-        // 查询退款明细
-        List<RefundChannelOrder> refundOrderChannels = refundOrderChannelManager.findAllByRefundId(refundOrder.getId());
-        List<RefundChannelOrderResult> channels = refundOrderChannels.stream()
-                .map(RefundOrderChannelConvert.CONVERT::convertResult)
-                .collect(Collectors.toList());
-
-        RefundOrderResult refundOrderResult = RefundOrderConvert.CONVERT.convertResult(refundOrder);
-        refundOrderResult.setRefundId(refundOrder.getId());
-        refundOrderResult.setChannels(channels);
-        return refundOrderResult;
-    }
-
-    /**
-     *  手动发起退款
+     * 手动发起退款
+     * 退款涉及到回调通知, 索所以需要手动初始化一下上下文
      */
     public void refund(PayOrderRefundParam param) {
 
@@ -134,11 +55,47 @@ public class RefundOrderService {
                 .orElse("未知");
 
         RefundParam refundParam = new RefundParam();
-        refundParam.setPaymentId(param.getPaymentId());
-        refundParam.setRefundChannels(param.getRefundChannels());
+        refundParam.setOrderNo(param.getOrderNo());
+        refundParam.setBizRefundNo(OrderNoGenerateUtil.refund());
+        refundParam.setAmount(param.getAmount());
         refundParam.setReason(param.getReason());
         refundParam.setReqTime(LocalDateTime.now());
         refundParam.setClientIp(ip);
+        // 手动初始化上下文
+        paymentAssistService.initContext(refundParam);
+        // 初始化接口信息为统一退款
+        PayApiConfig api = apiConfigManager.findByCode(PaymentApiCode.REFUND).orElseThrow(() -> new DataNotExistException("未找到统一退款接口信息"));
+        // 设置接口信息
+        apiConfigService.initApiInfo(api);
+        // 调用统一退款接口
+        refundService.refund(refundParam);
+    }
+
+    /**
+     * 重新退款
+     */
+    public void resetRefund(Long id){
+
+        // 查询扩展信息
+        RefundOrderExtra refundOrderExtra = refundOrderExtraManager.findById(id)
+                .orElseThrow(() -> new DataNotExistException("未找到退款订单"));
+
+        // 查询扩展信息
+        RefundOrder refundOrder = refundOrderManager.findById(id)
+                .orElseThrow(() -> new DataNotExistException("未找到退款订单"));
+
+        String ip = Optional.ofNullable(WebServletUtil.getRequest())
+                .map(ServletUtil::getClientIP)
+                .orElse("未知");
+
+        RefundParam refundParam = new RefundParam();
+        refundParam.setBizRefundNo(refundOrder.getBizRefundNo());
+        // 回调通知
+        refundParam.setNotifyUrl(refundOrderExtra.getNotifyUrl());
+        refundParam.setAttach(refundOrderExtra.getAttach());
+        refundParam.setReqTime(LocalDateTime.now());
+        refundParam.setClientIp(ip);
+
         // 手动初始化上下文
         paymentAssistService.initContext(refundParam);
         // 初始化接口信息为统一退款

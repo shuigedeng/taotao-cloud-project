@@ -1,14 +1,14 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.convert;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.Wallet;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.WalletConfig;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wallet.entity.WalletRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.wechat.entity.WeChatPayRecord;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wallet.WalletConfigDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wallet.WalletDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wallet.WalletRecordDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wechat.WeChatPayRecordDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.wechat.WalletConfigParam;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.Wallet;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.WalletConfig;
+import cn.bootx.platform.daxpay.service.core.channel.wallet.entity.WalletRecord;
+import cn.bootx.platform.daxpay.service.core.channel.wechat.entity.WeChatPayRecord;
+import cn.bootx.platform.daxpay.service.dto.channel.wallet.WalletConfigDto;
+import cn.bootx.platform.daxpay.service.dto.channel.wallet.WalletDto;
+import cn.bootx.platform.daxpay.service.dto.channel.wallet.WalletRecordDto;
+import cn.bootx.platform.daxpay.service.dto.channel.wechat.WeChatPayRecordDto;
+import cn.bootx.platform.daxpay.service.param.channel.wechat.WalletConfigParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

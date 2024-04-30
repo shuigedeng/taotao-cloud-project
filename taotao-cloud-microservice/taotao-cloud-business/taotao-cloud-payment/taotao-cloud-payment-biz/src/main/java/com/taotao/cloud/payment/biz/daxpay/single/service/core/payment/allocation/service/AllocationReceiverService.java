@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.service;
 
 import cn.bootx.platform.common.core.exception.BizException;
 import cn.bootx.platform.common.core.exception.DataNotExistException;

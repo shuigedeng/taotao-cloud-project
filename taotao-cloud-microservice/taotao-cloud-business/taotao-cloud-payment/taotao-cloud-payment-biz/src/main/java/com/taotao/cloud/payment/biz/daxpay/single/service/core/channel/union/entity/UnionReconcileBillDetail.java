@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.entity;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.entity;
 
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.order.reconcile.entity;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.order.reconcile.entity;
 
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpBaseEntity;

@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.reconcile.domain;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.reconcile.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

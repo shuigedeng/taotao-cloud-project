@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.allocation.dao;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.allocation.dao;
 
 import cn.bootx.platform.common.core.rest.param.PageParam;
 import cn.bootx.platform.common.mybatisplus.impl.BaseManager;

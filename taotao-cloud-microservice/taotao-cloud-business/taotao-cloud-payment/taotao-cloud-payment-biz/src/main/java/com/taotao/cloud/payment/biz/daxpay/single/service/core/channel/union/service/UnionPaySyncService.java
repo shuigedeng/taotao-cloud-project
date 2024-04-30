@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.service;
 
 import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
 import cn.bootx.platform.daxpay.code.PaySyncStatusEnum;
@@ -6,8 +6,8 @@ import cn.bootx.platform.daxpay.code.RefundSyncStatusEnum;
 import cn.bootx.platform.daxpay.service.code.UnionPayCode;
 import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
 import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
-import cn.bootx.platform.daxpay.service.core.payment.sync.result.PayGatewaySyncResult;
-import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundGatewaySyncResult;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.PaySyncResult;
+import cn.bootx.platform.daxpay.service.core.payment.sync.result.RefundSyncResult;
 import cn.bootx.platform.daxpay.service.sdk.union.api.UnionPayKit;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.map.MapUtil;
@@ -39,11 +39,11 @@ public class UnionPaySyncService {
     /**
      * 支付信息查询
      */
-    public PayGatewaySyncResult syncPayStatus(PayOrder order, UnionPayKit unionPayKit) {
-        PayGatewaySyncResult syncResult = new PayGatewaySyncResult().setSyncStatus(PaySyncStatusEnum.FAIL);
+    public PaySyncResult syncPayStatus(PayOrder order, UnionPayKit unionPayKit) {
+        PaySyncResult syncResult = new PaySyncResult().setSyncStatus(PaySyncStatusEnum.FAIL);
 
         AssistOrder query = new AssistOrder();
-        query.setOutTradeNo(String.valueOf(order.getId()));
+        query.setOutTradeNo(order.getOrderNo());
 
         Map<String, Object> result = unionPayKit.query(query);
         syncResult.setSyncInfo(JSONUtil.toJsonStr(result));
@@ -72,7 +72,7 @@ public class UnionPaySyncService {
             String queryId = MapUtil.getStr(result, QUERY_ID);
             String timeEnd = MapUtil.getStr(result, TXN_TIME);
             LocalDateTime time = LocalDateTimeUtil.parse(timeEnd, DatePattern.PURE_DATETIME_PATTERN);
-            return syncResult.setGatewayOrderNo(queryId).setPayTime(time).setSyncStatus(PaySyncStatusEnum.SUCCESS);
+            return syncResult.setOutOrderNo(queryId).setPayTime(time).setSyncStatus(PaySyncStatusEnum.SUCCESS);
         }
 
         // 支付超时  交易不在受理时间范围内
@@ -98,11 +98,11 @@ public class UnionPaySyncService {
      * 退款信息查询
      * 云闪付退款和支付查询接口是一个
      */
-    public RefundGatewaySyncResult syncRefundStatus(RefundOrder refundOrder, UnionPayKit unionPayKit){
-        RefundGatewaySyncResult syncResult = new RefundGatewaySyncResult();
+    public RefundSyncResult syncRefundStatus(RefundOrder refundOrder, UnionPayKit unionPayKit){
+        RefundSyncResult syncResult = new RefundSyncResult();
 
         AssistOrder query = new AssistOrder();
-        query.setOutTradeNo(String.valueOf(refundOrder.getId()));
+        query.setOutTradeNo(String.valueOf(refundOrder.getRefundNo()));
 
         Map<String, Object> result = unionPayKit.query(query);
 
@@ -132,7 +132,7 @@ public class UnionPaySyncService {
             String queryId = MapUtil.getStr(result, QUERY_ID);
             String timeEnd = MapUtil.getStr(result, TXN_TIME);
             LocalDateTime time = LocalDateTimeUtil.parse(timeEnd, DatePattern.PURE_DATETIME_PATTERN);
-            return syncResult.setGatewayOrderNo(queryId).setRefundTime(time).setSyncStatus(RefundSyncStatusEnum.SUCCESS);
+            return syncResult.setOutRefundNo(queryId).setFinishTime(time).setSyncStatus(RefundSyncStatusEnum.SUCCESS);
         }
 
         // 退款中

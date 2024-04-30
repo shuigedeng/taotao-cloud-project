@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.service;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.dao.ClientNoticeRecordManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.task.notice.entity.ClientNoticeRecord;
+import cn.bootx.platform.daxpay.service.core.task.notice.dao.ClientNoticeRecordManager;
+import cn.bootx.platform.daxpay.service.core.task.notice.entity.ClientNoticeRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

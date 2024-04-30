@@ -1,41 +1,38 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.refund.service;
 
-import cn.bootx.platform.common.core.exception.RepetitiveOperationException;
-import cn.bootx.platform.common.core.function.CollectorsFunction;
+import cn.bootx.platform.common.core.exception.DataNotExistException;
+import cn.bootx.platform.common.core.util.CollUtil;
 import cn.bootx.platform.common.core.util.ValidationUtil;
 import cn.bootx.platform.daxpay.code.PayStatusEnum;
 import cn.bootx.platform.daxpay.code.RefundStatusEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
-import cn.bootx.platform.daxpay.exception.pay.PayUnsupportedMethodException;
-import cn.bootx.platform.daxpay.param.pay.RefundChannelParam;
-import cn.bootx.platform.daxpay.param.pay.RefundParam;
-import cn.bootx.platform.daxpay.param.pay.SimpleRefundParam;
+import cn.bootx.platform.daxpay.param.payment.refund.RefundParam;
 import cn.bootx.platform.daxpay.result.pay.RefundResult;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.context.RefundLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.common.local.PaymentContextLocal;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.dao.PayChannelOrderManager;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.entity.PayOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.pay.service.PayOrderService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundChannelOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.order.refund.entity.RefundOrder;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.notice.service.ClientNoticeService;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.refund.factory.RefundStrategyFactory;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundStrategy;
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollectionUtil;
+import cn.bootx.platform.daxpay.service.common.context.RefundLocal;
+import cn.bootx.platform.daxpay.service.common.local.PaymentContextLocal;
+import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;
+import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderQueryService;
+import cn.bootx.platform.daxpay.service.core.order.pay.service.PayOrderService;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderExtraManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.dao.RefundOrderManager;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrder;
+import cn.bootx.platform.daxpay.service.core.order.refund.entity.RefundOrderExtra;
+import cn.bootx.platform.daxpay.service.core.payment.notice.service.ClientNoticeService;
+import cn.bootx.platform.daxpay.service.core.payment.refund.factory.RefundStrategyFactory;
+import cn.bootx.platform.daxpay.service.func.AbsRefundStrategy;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.lock.LockInfo;
 import com.baomidou.lock.LockTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 支付退款服务
@@ -53,202 +50,172 @@ public class RefundService {
 
     private final ClientNoticeService clientNoticeService;
 
-    private final PayChannelOrderManager payChannelOrderManager;
+    private final RefundOrderManager refundOrderManager;
+
+    private final PayOrderQueryService payOrderQueryService;
 
     private final LockTemplate lockTemplate;
+    private final RefundOrderExtraManager refundOrderExtraManager;
 
     /**
-     * 支付退款
+     * 分支付通道进行退款
+     * 1. 创建退款订单(单独事务)
+     * 2. 调用API发起退款(异步退款)
+     * 3. 根据API返回信息更新退款订单信息
      */
-    @Transactional(rollbackFor = Exception.class )
     public RefundResult refund(RefundParam param){
-        return this.refundAdapter(param,false);
-    }
-
-    /**
-     * 简单退款
-     */
-    @Transactional(rollbackFor = Exception.class )
-    public RefundResult simpleRefund(SimpleRefundParam param){
-        ValidationUtil.validateParam(param);
-        // 构建退款参数
-        RefundParam refundParam = new RefundParam();
-        BeanUtil.copyProperties(param,refundParam);
-        RefundChannelParam channelParam = new RefundChannelParam().setAmount(param.getAmount());
-        refundParam.setRefundChannels(Collections.singletonList(channelParam));
-        return this.refundAdapter(refundParam,true);
-    }
-
-    /**
-     * 支付退款适配方法, 处理简单退款与普通退款, 全部退款和部分退款的参数转换
-     * @param param 退款参数
-     * @param simple 是否简单退款
-     */
-    private RefundResult refundAdapter(RefundParam param, boolean simple){
-        // 获取支付订单
-        PayOrder payOrder = refundAssistService.getPayOrder(param);
-        // 第一次检查退款参数, 校验一些特殊情况
-        refundAssistService.checkAndDisposeParam(param, payOrder);
-
-        // 组装退款参数, 处理全部退款和简单退款情况
-        List<PayChannelOrder> payChannelOrders = payChannelOrderManager.findAllByPaymentId(payOrder.getId());
-        // 是否全部退款
-        if (param.isRefundAll()){
-            // 全部退款根据支付订单的退款信息构造退款参数
-            List<RefundChannelParam> channelParams = payChannelOrders
-                    .stream()
-                    .map(o -> new RefundChannelParam()
-                            .setChannel(o.getChannel())
-                            .setAmount(o.getAmount()))
-                    .collect(Collectors.toList());
-            param.setRefundChannels(channelParams);
-        } else if (simple) {
-            // 如果不是全部退款且是简单退款的情况下, 设置要退款金额
-            String channel = payChannelOrders.get(0).getChannel();
-            param.getRefundChannels().get(0).setChannel(channel);
-        }
-
+        RefundResult result = new RefundResult()
+                .setRefundNo(param.getBizRefundNo())
+                .setBizRefundNo(param.getBizRefundNo());
         // 参数校验
         ValidationUtil.validateParam(param);
-        // ----------------------------- 发起退款操作 --------------------------------------------
         // 加锁
-        LockInfo lock = lockTemplate.lock("payment:refund:" + payOrder.getId(),10000,200);
+        LockInfo lock = lockTemplate.lock("payment:refund:" + param.getBizRefundNo(),10000,200);
         if (Objects.isNull(lock)){
-            throw new RepetitiveOperationException("退款处理中，请勿重复操作");
+            result.setMsg("退款处理中，请勿重复操作");
+            return result;
         }
         try {
-            // 退款上下文初始化
-            refundAssistService.initRefundContext(param);
-            // 分支付通道进行退款
-            return this.refundByChannel(param,payOrder,payChannelOrders);
+            // 判断是否是首次发起退款
+            Optional<RefundOrder> refund = refundOrderManager.findByBizRefundNo(param.getBizRefundNo());
+            if (refund.isPresent()){
+                return this.repeatRefund(refund.get(),param);
+            } else {
+                return this.firstRefund(param);
+            }
         } finally {
             lockTemplate.releaseLock(lock);
         }
     }
 
     /**
-     * 分支付通道进行退款
-     * 1. 创建退款订单和通道订单并保存(单独事务)
-     * 2. 调用API发起退款(异步退款)
-     * 3. 根据API返回信息更新退款订单信息
+     * 首次退款
      */
-    public RefundResult refundByChannel(RefundParam refundParam, PayOrder payOrder, List<PayChannelOrder> payChannelOrders){
-        // 1.1 基础数据准备
-        Map<String, PayChannelOrder> orderChannelMap = payChannelOrders.stream()
-                .collect(Collectors.toMap(PayChannelOrder::getChannel, Function.identity(), CollectorsFunction::retainLatest));
-        List<RefundChannelParam> refundChannels = refundParam.getRefundChannels();
+    public RefundResult firstRefund(RefundParam param){
 
-        // 1.2获取退款参数方式，通过工厂生成对应的策略组
-        List<AbsRefundStrategy> payRefundStrategies = RefundStrategyFactory.createAsyncLast(refundChannels);
-        if (CollectionUtil.isEmpty(payRefundStrategies)) {
-            throw new PayUnsupportedMethodException();
-        }
-        // 1.3初始化退款策略的参数
-        for (AbsRefundStrategy refundStrategy : payRefundStrategies) {
-            PayChannelOrder payChannelOrder = orderChannelMap.get(refundStrategy.getChannel().getCode());
-            if (Objects.isNull(payChannelOrder)){
-                throw new PayFailureException("[数据异常]进行退款的通道没有对应的支付单, 无法退款");
-            }
-            refundStrategy.initRefundParam(payOrder, refundParam, payChannelOrder);
-        }
-
-        // 生成通道退款订单对象
-        payRefundStrategies.forEach(AbsRefundStrategy::generateChannelOrder);
-
-        // 退款操作的预处理, 使用独立的新事物进行发起, 返回创建成功的退款订单, 成功后才可以进行下一阶段的操作
-        RefundOrder refundOrder = SpringUtil.getBean(this.getClass()).preRefundMethod(refundParam, payOrder, payRefundStrategies);
-
-        // 设置退款订单对象
-        payRefundStrategies.forEach(r->r.setRefundOrder(refundOrder));
-
+        // 获取支付订单
+        PayOrder payOrder = payOrderQueryService.findByBizOrOrderNo(param.getOrderNo(), param.getBizOrderNo())
+                .orElseThrow(() -> new DataNotExistException("支付订单不存在"));
+        // 检查退款参数
+        refundAssistService.checkAndParam(param, payOrder);
+        // 通过退款参数获取退款策略
+        AbsRefundStrategy refundStrategy = RefundStrategyFactory.create(payOrder.getChannel());
+        // 进行退款前预处理
+        refundStrategy.doBeforeRefundHandler();
+        // 退款操作的预处理, 对支付订单进行预扣款, 返回创建成功的退款订单, 成功后才可以进行下一阶段的操作
+        RefundOrder refundOrder = SpringUtil.getBean(this.getClass()).preRefundMethod(param, payOrder);
+        refundStrategy.setRefundOrder(refundOrder);
         try {
-            // 3.1 退款前准备操作
-            payRefundStrategies.forEach(AbsRefundStrategy::doBeforeRefundHandler);
-            // 3.2 执行退款策略
-            payRefundStrategies.forEach(AbsRefundStrategy::doRefundHandler);
-            // 3.4 执行退款发起成功后操作
-            payRefundStrategies.forEach(AbsRefundStrategy::doSuccessHandler);
-
-            // 4.进行成功处理, 分别处理退款订单, 通道退款订单, 支付订单
-            List<RefundChannelOrder> refundChannelOrders = payRefundStrategies.stream()
-                    .map(AbsRefundStrategy::getRefundChannelOrder)
-                    .collect(Collectors.toList());
-            this.successHandler(refundOrder, refundChannelOrders, payOrder);
-            return new RefundResult()
-                    .setRefundId(refundOrder.getId())
-                    .setRefundNo(refundParam.getRefundNo());
-        }
-        catch (Exception e) {
-            // 5. 失败处理
+            // 执行退款策略
+            refundStrategy.doRefundHandler();
+        } catch (Exception e) {
+            log.error("退款出现错误", e);
+            // 记录处理失败状态
             PaymentContextLocal.get().getRefundInfo().setStatus(RefundStatusEnum.FAIL);
-            this.errorHandler(refundOrder);
-            throw e;
+            // 更新退款失败的记录
+            refundAssistService.updateOrderByError(refundOrder);
+            return refundAssistService.buildResult(refundOrder);
         }
+        SpringUtil.getBean(this.getClass()).successHandler(refundOrder, payOrder);
+        return refundAssistService.buildResult(refundOrder);
     }
 
     /**
-     * 退款一阶段: 进行支付订单和支付通道订单的预扣, 预创建退款订单并保存, 使用独立的新事物进行发起
+     * 退款一阶段: 进行支付订单退款金额的预扣, 创建退款订单并保存
      */
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class )
-    public RefundOrder preRefundMethod(RefundParam refundParam, PayOrder payOrder, List<AbsRefundStrategy> payRefundStrategies) {
+    @Transactional(rollbackFor = Exception.class )
+    public RefundOrder preRefundMethod(RefundParam refundParam, PayOrder payOrder) {
         // --------------------------- 支付订单 -------------------------------------
-        // 预扣支付相关订单要退款的金额并进行更新
-        payRefundStrategies.forEach(AbsRefundStrategy::doPreDeductOrderHandler);
-        List<PayChannelOrder> channelOrders = payRefundStrategies.stream()
-                .map(AbsRefundStrategy::getPayChannelOrder)
-                .collect(Collectors.toList());
-        payChannelOrderManager.updateAllById(channelOrders);
-        // 此次的总退款金额
-        Integer amount = refundParam.getRefundChannels()
-                .stream()
-                .map(RefundChannelParam::getAmount)
-                .reduce(0, Integer::sum);
-        int orderRefundableBalance = payOrder.getRefundableBalance() - amount;
+        // 预扣支付订单要退款的金额并进行更新
+        int orderRefundableBalance = payOrder.getRefundableBalance() - refundParam.getAmount();
         payOrder.setRefundableBalance(orderRefundableBalance)
                 .setStatus(PayStatusEnum.REFUNDING.getCode());
         payOrderService.updateById(payOrder);
-        // -----------------------   退款订单   -------------------------
-        List<RefundChannelOrder> refundChannelOrders = payRefundStrategies.stream()
-                .map(AbsRefundStrategy::getRefundChannelOrder)
-                .collect(Collectors.toList());
-        return refundAssistService.createOrderAndChannel(refundParam, payOrder,refundChannelOrders);
+        // -----------------------   退款订单创建   -------------------------
+        return refundAssistService.createOrder(refundParam, payOrder);
     }
 
     /**
-     * 成功处理, 更新退款订单, 退款通道订单, 支付订单, 支付通道订单
+     * 重新发起退款处理
+     * 1. 查出相关退款订单
+     * 2. 更新退款扩展参数
+     * 3. 构建退款策略, 发起退款
      */
-    private void successHandler(RefundOrder refundOrder, List<RefundChannelOrder> refundChannelOrders, PayOrder payOrder) {
+    public RefundResult repeatRefund(RefundOrder refundOrder, RefundParam param){
+        // 退款失败才可以重新发起退款, 重新发起退款
+        if (!Objects.equals(refundOrder.getStatus(), RefundStatusEnum.FAIL.getCode())){
+            throw new PayFailureException("只有失败状态的才可以重新发起退款");
+        }
+        // 获取支付订单
+        PayOrder payOrder = payOrderQueryService.findByBizOrOrderNo(refundOrder.getOrderNo(), refundOrder.getBizOrderNo())
+                .orElseThrow(() -> new DataNotExistException("支付订单不存在"));
+        RefundOrderExtra refundOrderExtra = refundOrderExtraManager.findById(refundOrder.getId())
+                .orElseThrow(() -> new DataNotExistException("退款订单扩展信息不存在"));
+        AbsRefundStrategy refundStrategy = RefundStrategyFactory.create(refundOrder.getChannel());
+        // 设置退款订单对象
+        refundStrategy.setRefundOrder(refundOrder);
+        // 退款前准备操作
+        refundStrategy.doBeforeRefundHandler();
+        // 进行发起退款前的操作, 更新扩展记录信息
+        this.updateExtra(refundOrderExtra, param);
+        try {
+            // 执行退款策略
+            refundStrategy.doRefundHandler();
+        }
+        catch (Exception e) {
+            log.error("重新退款失败:", e);
+            // 记录处理失败状态
+            PaymentContextLocal.get().getRefundInfo().setStatus(RefundStatusEnum.FAIL);
+            // 记录退款失败的记录
+            refundAssistService.updateOrderByError(refundOrder);
+            // 返回错误响应对象
+            return refundAssistService.buildResult(refundOrder);
+        }
+        // 退款发起成功处理
+        SpringUtil.getBean(this.getClass()).successHandler(refundOrder, payOrder);
+        return refundAssistService.buildResult(refundOrder);
+    }
+
+    /**
+     * 更新退款订单扩展信息
+     */
+    private void updateExtra(RefundOrderExtra refundOrderExtra, RefundParam param){
+        refundOrderExtra.setAttach(param.getAttach())
+                .setClientIp(param.getClientIp())
+                .setNotifyUrl(param.getNotifyUrl())
+                .setReqTime(param.getReqTime());
+        if (CollUtil.isNotEmpty(param.getExtraParam())){
+            refundOrderExtra.setExtraParam(JSONUtil.toJsonStr(param.getExtraParam()));
+        }
+        refundOrderExtraManager.updateById(refundOrderExtra);
+    }
+
+    /**
+     * 成功处理, 更新退款订单, 支付订单,
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void successHandler(RefundOrder refundOrder, PayOrder payOrder) {
         RefundLocal refundInfo = PaymentContextLocal.get().getRefundInfo();
         // 剩余可退款余额
-        int refundableBalance = refundOrder.getRefundableBalance();
+        int refundableBalance = payOrder.getRefundableBalance();
         // 设置支付订单状态
         if (refundInfo.getStatus() == RefundStatusEnum.PROGRESS) {
-            // 设置为退款中
             payOrder.setStatus(PayStatusEnum.REFUNDING.getCode());
         } else if (refundableBalance == 0) {
-            // 退款完成
             payOrder.setStatus(PayStatusEnum.REFUNDED.getCode());
         } else {
-            // 部分退款
             payOrder.setStatus(PayStatusEnum.PARTIAL_REFUND.getCode());
         }
         payOrderService.updateById(payOrder);
 
-        // 更新退款订单和相关通道订单
-        refundAssistService.updateOrderAndChannel(refundOrder,refundChannelOrders);
+        // 更新退款订单
+        refundAssistService.updateOrder(refundOrder);
 
         // 发送通知
         List<String> list = Arrays.asList(RefundStatusEnum.SUCCESS.getCode(), RefundStatusEnum.CLOSE.getCode(),  RefundStatusEnum.FAIL.getCode());
         if (list.contains(refundOrder.getStatus())){
-            clientNoticeService.registerRefundNotice(refundOrder, refundInfo.getRunOrderExtra(), refundChannelOrders);
+            clientNoticeService.registerRefundNotice(refundOrder, refundInfo.getRunOrderExtra());
         }
     }
 
-    /**
-     * 失败处理, 只更新退款订单, 通道订单不进行错误更新
-     */
-    private void errorHandler(RefundOrder refundOrder) {
-        // 记录退款失败的记录
-         refundAssistService.updateOrderByError(refundOrder);
-    }
 }

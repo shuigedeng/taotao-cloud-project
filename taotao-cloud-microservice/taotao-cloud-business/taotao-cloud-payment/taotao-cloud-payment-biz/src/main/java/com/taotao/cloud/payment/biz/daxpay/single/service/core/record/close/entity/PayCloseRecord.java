@@ -3,8 +3,8 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.record.close.ent
 import cn.bootx.platform.common.core.function.EntityBaseFunction;
 import cn.bootx.platform.common.mybatisplus.base.MpCreateEntity;
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.record.close.convert.PayCloseRecordConvert;
-import com.taotao.cloud.payment.biz.daxpay.single.service.dto.record.close.PayCloseRecordDto;
+import cn.bootx.platform.daxpay.service.core.record.close.convert.PayCloseRecordConvert;
+import cn.bootx.platform.daxpay.service.dto.record.close.PayCloseRecordDto;
 import cn.bootx.table.modify.annotation.DbColumn;
 import cn.bootx.table.modify.annotation.DbTable;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -24,20 +24,20 @@ import lombok.experimental.Accessors;
 @TableName("pay_close_record")
 public class PayCloseRecord extends MpCreateEntity implements EntityBaseFunction<PayCloseRecordDto> {
 
-    /** 支付记录id */
-    @DbColumn(comment = "支付记录id")
-    private Long paymentId;
+    /** 订单号 */
+    @DbColumn(comment = "订单号")
+    private String orderNo;
 
-    /** 业务号 */
-    @DbColumn(comment = "业务号")
-    private String businessNo;
+    /** 商户订单号 */
+    @DbColumn(comment = "商户订单号")
+    private String bizOrderNo;
 
     /**
-     * 关闭的异步支付通道, 可以为空
-     * @see PayChannelEnum#getCode()
+     * 关闭的支付通道
+     * @see PayChannelEnum
      */
-    @DbColumn(comment = "关闭的异步支付通道")
-    private String asyncChannel;
+    @DbColumn(comment = "关闭的支付通道")
+    private String channel;
 
     /**
      * 是否关闭成功
@@ -45,16 +45,17 @@ public class PayCloseRecord extends MpCreateEntity implements EntityBaseFunction
     @DbColumn(comment = "是否关闭成功")
     private boolean closed;
 
+    /** 错误码 */
+    @DbColumn(comment = "错误码")
+    private String errorCode;
+
+    /** 错误消息 */
     @DbColumn(comment = "错误消息")
     private String errorMsg;
 
     /** 客户端IP */
     @DbColumn(comment = "客户端IP")
     private String clientIp;
-
-    /** 请求链路ID */
-    @DbColumn(comment = "请求链路ID")
-    private String reqId;
 
     /**
      * 转换

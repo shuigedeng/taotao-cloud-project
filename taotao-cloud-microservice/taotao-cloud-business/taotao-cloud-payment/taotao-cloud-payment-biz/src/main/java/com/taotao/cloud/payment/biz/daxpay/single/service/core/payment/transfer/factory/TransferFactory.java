@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.payment.transfer.factory;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.transfer.factory;
 
 import lombok.experimental.UtilityClass;
 

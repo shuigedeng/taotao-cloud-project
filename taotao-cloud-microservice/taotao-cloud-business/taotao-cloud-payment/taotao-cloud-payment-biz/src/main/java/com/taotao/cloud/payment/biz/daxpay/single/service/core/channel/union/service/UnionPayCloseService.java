@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.core.channel.union.service;
+package com.taotao.cloud.payment.biz.daxpay.single.service.core.channel.union.service;
 
 import cn.bootx.platform.daxpay.exception.pay.PayFailureException;
 import cn.bootx.platform.daxpay.service.core.order.pay.entity.PayOrder;

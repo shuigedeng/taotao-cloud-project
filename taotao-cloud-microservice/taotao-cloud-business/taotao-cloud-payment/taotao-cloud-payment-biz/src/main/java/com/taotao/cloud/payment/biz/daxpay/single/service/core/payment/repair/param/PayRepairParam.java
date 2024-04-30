@@ -1,6 +1,6 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.repair.param;
 
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.PayRepairWayEnum;
+import cn.bootx.platform.daxpay.service.code.PayRepairWayEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;

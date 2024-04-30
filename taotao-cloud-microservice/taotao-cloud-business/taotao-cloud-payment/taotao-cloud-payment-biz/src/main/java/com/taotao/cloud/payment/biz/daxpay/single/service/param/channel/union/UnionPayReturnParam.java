@@ -1,4 +1,4 @@
-package cn.bootx.platform.daxpay.service.param.channel.union;
+package com.taotao.cloud.payment.biz.daxpay.single.service.param.channel.union;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

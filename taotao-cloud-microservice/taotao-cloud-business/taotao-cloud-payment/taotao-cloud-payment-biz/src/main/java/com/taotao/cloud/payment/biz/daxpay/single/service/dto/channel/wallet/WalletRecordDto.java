@@ -1,7 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.single.service.dto.channel.wallet;
 
 import cn.bootx.platform.common.core.rest.dto.BaseDto;
-import com.taotao.cloud.payment.biz.daxpay.single.service.code.WalletRecordTypeEnum;
+import cn.bootx.platform.daxpay.service.code.WalletRecordTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

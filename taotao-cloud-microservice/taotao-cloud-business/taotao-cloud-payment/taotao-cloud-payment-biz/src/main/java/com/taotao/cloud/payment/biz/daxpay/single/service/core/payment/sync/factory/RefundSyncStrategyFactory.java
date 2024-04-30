@@ -2,9 +2,10 @@ package com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.fac
 
 import cn.bootx.platform.daxpay.code.PayChannelEnum;
 import cn.bootx.platform.daxpay.exception.pay.PayUnsupportedMethodException;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.strategy.Refund.AliRefundSyncStrategy;
-import com.taotao.cloud.payment.biz.daxpay.single.service.core.payment.sync.strategy.Refund.WeChatRefundSyncStrategy;
-import com.taotao.cloud.payment.biz.daxpay.single.service.func.AbsRefundSyncStrategy;
+import cn.bootx.platform.daxpay.service.core.payment.sync.strategy.Refund.AliRefundSyncStrategy;
+import cn.bootx.platform.daxpay.service.core.payment.sync.strategy.Refund.UnionRefundSyncStrategy;
+import cn.bootx.platform.daxpay.service.core.payment.sync.strategy.Refund.WeChatRefundSyncStrategy;
+import cn.bootx.platform.daxpay.service.func.AbsRefundSyncStrategy;
 import cn.hutool.extra.spring.SpringUtil;
 import lombok.experimental.UtilityClass;
 
@@ -26,6 +27,9 @@ public class RefundSyncStrategyFactory {
         switch (channelEnum) {
             case ALI:
                 strategy = SpringUtil.getBean(AliRefundSyncStrategy.class);
+                break;
+            case UNION_PAY:
+                strategy = SpringUtil.getBean(UnionRefundSyncStrategy.class);
                 break;
             case WECHAT:
                 strategy = SpringUtil.getBean(WeChatRefundSyncStrategy.class);
