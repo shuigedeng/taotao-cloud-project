@@ -134,6 +134,10 @@ spring:
           message: '服务告警: #{instance.registration.name} #{instance.id} is #{event.statusInfo.status}'
       ui:
         title: taotao cloud admin
+        #brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>${spring.boot.admin.ui.title}</span>
+        #view-settings:
+        #  - name: "about"
+        #    enabled: false
         theme:
           color: '#14615A'
   mail:

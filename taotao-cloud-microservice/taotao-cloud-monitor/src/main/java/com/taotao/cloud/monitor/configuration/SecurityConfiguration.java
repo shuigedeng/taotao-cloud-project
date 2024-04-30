@@ -19,6 +19,7 @@ package com.taotao.cloud.monitor.configuration;
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -87,6 +88,8 @@ public class SecurityConfiguration {
                             // 5.忽略这些路径的csrf保护以便admin-client注册
                             .ignoringRequestMatchers(toRequestMatchers(csrfPatterns));
                 })
+			.rememberMe((rememberMe) -> rememberMe.key(UUID.randomUUID().toString()).tokenValiditySeconds(1209600))
+
                 .build();
     }
 
