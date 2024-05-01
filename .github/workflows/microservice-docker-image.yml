@@ -22,7 +22,7 @@ env:
   TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
   TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
   TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
-  TAOTAO_CLOUD_VERSION: 2024.04
+  TAOTAO_CLOUD_VERSION: 2024.05
 
 jobs:
   build:
@@ -96,7 +96,7 @@ jobs:
       #    gradle publishToMavenLocal
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.3.0
+        uses: gradle/actions/setup-gradle@v3.3.2
         with:
           gradle-version: 8.7
 
