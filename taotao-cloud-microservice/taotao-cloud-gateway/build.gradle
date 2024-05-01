@@ -27,6 +27,8 @@ dependencies {
 
     implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin'
 
+    //支持mvc
+    //implementation "org.springframework.cloud:spring-cloud-starter-gateway-mvc"
     implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
