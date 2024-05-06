@@ -1,6 +1,6 @@
 dependencies {
-    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.4'
-    implementation 'org.apache.seatunnel:seatunnel-api:2.3.4'
+    implementation 'org.apache.seatunnel:seatunnel-transforms-v2:2.3.5'
+    implementation 'org.apache.seatunnel:seatunnel-api:2.3.5'
 
     implementation 'cn.hutool:hutool-all:5.8.27'
 

@@ -79,7 +79,7 @@ dependencies {
     api("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    api 'com.alipay.sdk:alipay-sdk-java:4.38.170.ALL'
+    api 'com.alipay.sdk:alipay-sdk-java:4.39.60.ALL'
 
     api "com.github.binarywang:weixin-java-cp:4.6.1.B"
     api "com.github.binarywang:weixin-java-miniapp:4.6.1.B"
@@ -93,11 +93,11 @@ dependencies {
 //    implementation "org.apache.flink:flink-clients_2.11:1.14.3"
 //    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
 //    implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
-    api "com.xuxueli:xxl-job-core:2.4.0"
-    api 'de.siegmar:logback-gelf:5.0.1'
+    api "com.xuxueli:xxl-job-core:2.4.1"
+    api 'de.siegmar:logback-gelf:6.0.0'
     api 'io.springfox:springfox-boot-starter:3.0.0'
     api 'com.sun.mail:javax.mail:1.6.2'
-    api 'cn.monitor4all:log-record-springboot3-starter:1.6.1'
+    api 'cn.monitor4all:log-record-springboot3-starter:1.6.2'
     api 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
     api 'com.tencentcloudapi:tencentcloud-sdk-java:4.0.11'
     api "com.alibaba.fastjson2:fastjson2:2.0.49"
