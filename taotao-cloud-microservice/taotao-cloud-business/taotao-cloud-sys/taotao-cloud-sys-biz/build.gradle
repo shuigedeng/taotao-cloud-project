@@ -165,11 +165,11 @@ task packageZip(type: Zip) {
     from("${project.projectDir}/src/main/bin") {
         into "bin"
     }
-    from("${project.buildDir}/resources/main/conf") {
+    from("${project.layout.buildDirectory.asFile.get()}/resources/main/conf") {
         into "conf"
     }
 
-    from("${project.buildDir}/libs/${project.name}-${project.version}.jar") {
+    from("${project.layout.buildDirectory.asFile.get()}/libs/${project.name}-${project.version}.jar") {
         into "lib"
     }
     // 表示此任务的运行依赖其它 子任务。

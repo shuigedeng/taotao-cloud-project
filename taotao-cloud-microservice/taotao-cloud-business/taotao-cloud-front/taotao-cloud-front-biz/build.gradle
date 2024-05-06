@@ -37,7 +37,7 @@ task processFrontendResources(type: Copy) {
     var frontendProjectBuildDir = project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-front:taotao-cloud-front-ui").getProjectDir()
     println(frontendProjectBuildDir)
     var frontendBuildDir = file("${frontendProjectBuildDir}/dist")
-    var frontendResourcesDir = file("${buildDir}/resources/main/static")
+    var frontendResourcesDir = file("${project.layout.buildDirectory.asFile.get()}/resources/main/static")
 
     //group = "Frontend"
     //description = "Process frontend resources"

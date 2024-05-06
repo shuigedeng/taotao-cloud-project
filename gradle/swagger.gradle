@@ -6,5 +6,5 @@ resolve {
     outputFormat = 'JSON'
     prettyPrint = 'TRUE'
     classpath = sourceSets.main.runtimeClasspath
-    outputDir = file("$project.buildDir/swagger")
+    outputDir = file("${project.layout.buildDirectory.asFile.get()}/swagger")
 }

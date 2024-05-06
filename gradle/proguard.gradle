@@ -2,7 +2,7 @@ import proguard.gradle.ProGuardTask
 
 task proguard(type: ProGuardTask) {
     // 输出混淆前->混淆后的映射
-    printmapping "$buildDir/mapping.txt"
+    printmapping "${project.layout.buildDirectory.asFile.get()}/mapping.txt"
     // 混淆规则文件
     configuration rootProject.file('gradle/proguard.pro')
 
@@ -28,7 +28,7 @@ task proguard(type: ProGuardTask) {
 
 
     // 混淆输出
-    outjars "$buildDir/classes-pro"
+    outjars "${project.layout.buildDirectory.asFile.get()}/classes-pro"
 }
 
 // 清除现有的lib目录
@@ -81,7 +81,7 @@ tasks.register('makeProJar', Jar) {
     //指定生成的jar名
     baseName 'xx-pro'
     //从哪里打包class文件
-    from("$buildDir/classes-pro")
+    from("${project.layout.buildDirectory.asFile.get()}/classes-pro")
 
     dependsOn copyJar
 

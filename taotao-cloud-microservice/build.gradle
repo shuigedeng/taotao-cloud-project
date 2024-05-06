@@ -52,11 +52,11 @@ subprojects {
     tasks.register('createProperties') {
         dependsOn processResources
         doLast {
-            def fileDir = new File("$buildDir/resources/main");
+            def fileDir = new File("${project.layout.buildDirectory.asFile.get()}/resources/main");
             if (fileDir.exists() && fileDir.isDirectory()) {
                 def pro = ["application.properties", "bootstrap.properties"]
                 pro.forEach(item -> {
-                    new File("$buildDir/resources/main/$item").withWriter { w ->
+                    new File("${project.layout.buildDirectory.asFile.get()}/resources/main/$item").withWriter { w ->
                         def projectProperties = project.properties
                         Properties p = new Properties()
                         projectProperties.each { entry ->

@@ -14,7 +14,7 @@ pmd {
     //是否开启增量分析，允许值为true|false
     incrementalAnalysis = true
     //报告生成的路径。
-    reportsDir = file("$project.buildDir/code-analysis/pmdReportsDir")
+    reportsDir = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/pmdReportsDir")
     //https://github.com/pmd/pmd/releases
     // 要使用的PMD版本
     toolVersion = "7.0.0"

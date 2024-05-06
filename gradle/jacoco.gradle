@@ -4,7 +4,7 @@ apply plugin: 'jacoco'
 jacoco {
     //https://www.eclemma.org/jacoco/
     toolVersion = "0.8.12"
-    reportsDirectory = file("$buildDir/code-analysis/jacocoReportDir")
+    reportsDirectory = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/jacocoReportDir")
 }
 /**
  * 添加jacoco测试覆盖率
@@ -17,9 +17,9 @@ jacocoTestReport {
         csv.required = true
         html.required = true
 
-        xml.outputLocation = file("${buildDir}/code-analysis/jacoco/coverage-reports/jacoco.xml")
-        csv.outputLocation = file("${buildDir}/code-analysis/jacoco/coverage-reports/jacoco.csv")
-        html.outputLocation = file("${buildDir}/code-analysis/jacoco/coverage-reports/html")
+        xml.outputLocation = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/jacoco/coverage-reports/jacoco.xml")
+        csv.outputLocation = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/jacoco/coverage-reports/jacoco.csv")
+        html.outputLocation = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/jacoco/coverage-reports/html")
     }
 }
 tasks.check.dependsOn jacocoTestReport

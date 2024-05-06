@@ -72,7 +72,7 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
     tasks.register('javaxReplaceToJakarta') {
         doLast {
             def treeFile = fileTree(
-                    dir: "$buildDir/generated/source/proto/main/grpc",
+                    dir: "${project.layout.buildDirectory.asFile.get()}/generated/source/proto/main/grpc",
                     includes: ["**/*.java"])
 
             treeFile.each({

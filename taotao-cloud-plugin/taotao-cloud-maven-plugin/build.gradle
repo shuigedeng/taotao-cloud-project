@@ -56,7 +56,7 @@ dependencies {
 //    repositories {
 //        maven {
 //            name = "buildFolder"
-//            url = uri("$buildDir/repository")
+//            url = uri("${project.layout.buildDirectory.asFile.get()}/repository")
 //        }
 //    }
 //}

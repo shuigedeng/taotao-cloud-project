@@ -2,7 +2,7 @@ apply plugin: "org.springdoc.openapi-gradle-plugin"
 
 openApi {
     apiDocsUrl.set("https://localhost:9000/api/docs")
-    outputDir.set(file("$buildDir/docs"))
+    outputDir.set(file("${project.layout.buildDirectory.asFile.get()}/docs"))
     outputFileName.set("swagger.json")
     waitTimeInSeconds.set(10)
 //    groupedApiMappings.set(["https://localhost:8080/v3/api-docs/groupA" to "swagger-groupA.json",
