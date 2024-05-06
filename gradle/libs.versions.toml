@@ -36,7 +36,7 @@
 #redisson = "3.24.3"
 #clickhouse = "0.5.0"
 #spring-pulsar = "0.2.0"
-#spotbugs-annotations = "4.8.1"
+#spotbugs-annotations = "4.8.5"
 #mapstruct = "1.5.5.Final"
 #mapstruct-lombok = "0.2.0"
 #curator = "5.5.0"

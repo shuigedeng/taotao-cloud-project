@@ -9,7 +9,7 @@ dependencies {
     implementation 'com.alibaba:fastjson:2.0.49'
     implementation 'com.alipay.sofa:hessian:4.0.4'
     implementation "redis.clients:jedis:5.1.2"
-    implementation 'com.google.guava:guava:33.1.0-jre'
+    implementation 'com.google.guava:guava:33.2.0-jre'
     implementation 'org.rocksdb:rocksdbjni:5.17.2'
 
     implementation "org.projectlombok:lombok:1.18.32"
