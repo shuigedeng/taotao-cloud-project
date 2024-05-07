@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.authentication;
 
 import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -59,8 +59,8 @@ public class GatewayServerAuthenticationSuccessHandler implements ServerAuthenti
         MultiValueMap<String, String> headerValues = new LinkedMultiValueMap<>(4);
         Object principal = authentication.getPrincipal();
 
-        if (principal instanceof SecurityUser) {
-            SecurityUser user = (SecurityUser) authentication.getPrincipal();
+        if (principal instanceof TtcUser) {
+			TtcUser user = (TtcUser) authentication.getPrincipal();
             headerValues.add(CommonConstant.TTC_USER_ID_HEADER, String.valueOf(user.getUserId()));
             headerValues.add(CommonConstant.TTC_USER_HEADER, JSON.toJSONString(user));
             headerValues.add(CommonConstant.TTC_USER_NAME_HEADER, user.getUsername());

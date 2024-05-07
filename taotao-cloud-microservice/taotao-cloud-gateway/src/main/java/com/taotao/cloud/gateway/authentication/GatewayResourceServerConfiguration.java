@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
-import com.taotao.cloud.security.springsecurity.core.enums.Target;
+import com.taotao.cloud.security.springsecurity.enums.Target;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2AuthorizationProperties;
 import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
 import java.util.List;
