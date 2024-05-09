@@ -51,3 +51,54 @@ configurations {
         exclude group: "commons-logging", module: "commons-logging"
     }
 }
+
+bootDistZip{
+    archiveBaseName = "${project.name}"
+    archiveFileName = "${project.name}.zip"
+
+    from('src/main/resources/distribution/bin') {
+        include '**'
+
+        into "${project.name}/bin"
+    }
+
+    from('src/main/resources/distribution/conf') {
+        include '**'
+
+        into "${project.name}/conf"
+    }
+
+    from('build/libs') {
+        include '**'
+
+        into "${project.name}/target"
+    }
+
+    doLast {
+        delete "${project.name}/lib"
+    }
+}
+
+task dis(type: Zip, dependsOn: bootJar) {
+
+    archiveFileName = "${project.name}.zip"
+
+    from('src/main/resources/distribution/bin') {
+        include '**'
+
+        into "bin"
+    }
+
+    from('src/main/resources/distribution/conf') {
+        include '**'
+
+        into "conf"
+    }
+
+    from('build/libs') {
+        include '*.jar'
+
+        into "target"
+    }
+
+}
