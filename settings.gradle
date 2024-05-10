@@ -110,7 +110,7 @@ for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'plugin']
+def twoLayerProjects = ['bigdata', 'plugin', 'ttcmq', 'ttcrpc', 'ttctx']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
@@ -135,7 +135,7 @@ def excludedName(file){
             && file.name != ".frontend-gradle-plugin"
 }
 
-def threeLayerProjects = ['microservice', 'warehouse', 'custom']
+def threeLayerProjects = ['microservice', 'warehouse']
 for (project in threeLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
