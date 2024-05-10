@@ -97,16 +97,16 @@ dependencies {
     implementation("org.apache.paimon:paimon-format:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-codegen:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-codegen-loader:0.7.0-incubating")
-    implementation("org.apache.paimon:paimon-filesystems:0.7.0-incubating")
-    implementation("org.apache.paimon:paimon-flink-1.18:0.7.0-incubating")
+    implementation('org.apache.paimon:paimon-filesystems:0.8.0')
+    implementation('org.apache.paimon:paimon-flink-1.18:0.8.0')
     implementation("org.apache.paimon:paimon-flink-cdc:0.7.0-incubating")
-    implementation("org.apache.paimon:paimon-flink-action:0.7.0-incubating")
+    implementation('org.apache.paimon:paimon-flink-action:0.8.0')
     implementation("org.apache.paimon:paimon-hive:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-hive-catalog:0.7.0-incubating")
     implementation("org.apache.paimon:paimon-hive-connector-3.1:0.7.0-incubating")
-    implementation("org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.6.0-incubating")
-    implementation("org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.6.0-incubating")
-    implementation("org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.6.0-incubating")
+    implementation('org.apache.paimon:paimon-shade-guava-30:30.1.1-jre-0.8.0')
+    implementation('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
+    implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
     implementation 'org.apache.commons:commons-compress:1.26.1'
     implementation 'org.slf4j:slf4j-api:2.0.13'
