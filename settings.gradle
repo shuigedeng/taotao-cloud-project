@@ -31,7 +31,7 @@ pluginManagement {
 
 plugins {
     //https://plugins.gradle.org/plugin/com.gradle.enterprise
-    id "com.gradle.develocity" version "3.17.2"
+    id "com.gradle.develocity" version "3.17.3"
 }
 
 import com.gradle.scan.plugin.PublishedBuildScan
@@ -105,7 +105,7 @@ dependencyResolutionManagement {
     }
 }
 
-def oneLayerProjects = ['scala', 'python', 'designpatterns']
+def oneLayerProjects = ['scala', 'python', 'design-patterns']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }

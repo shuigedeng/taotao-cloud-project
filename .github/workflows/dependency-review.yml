@@ -11,7 +11,6 @@ name: 'Dependency Review'
 on:
   push:
     branches:
-      - dev
       - main
   #schedule:
   #  - cron: '29 9 * * 0'

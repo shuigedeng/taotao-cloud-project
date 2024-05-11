@@ -8,7 +8,7 @@ def getProperty(String key, String defaultValue) {
     }
     // 加载根路径自定义配置属性
     Properties envProps = new Properties()
-    envProps.load(new FileInputStream("${rootProject.projectDir.absolutePath}${File.separator}env${File.separator}env.properties"))
+    envProps.load(new FileInputStream("${rootProject.projectDir.absolutePath}${File.separator}taotao-cloud-microservice${File.separator}release.properties"))
 
     keyValue = envProps.getProperty(key, defaultValue)
     println("打包profile环境==============" + keyValue)

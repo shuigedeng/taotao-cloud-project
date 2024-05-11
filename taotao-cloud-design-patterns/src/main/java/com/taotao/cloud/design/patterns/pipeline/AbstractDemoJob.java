@@ -1,10 +1,8 @@
 package com.taotao.cloud.design.patterns.pipeline;
 
-import cn.hutool.core.util.ClassUtil;
-import cn.hutool.json.JSONUtil;
-import com.example.demo.pipeline.factory.DemoPipelineProduct;
-import com.example.demo.pipeline.model.PipelineJob;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.reflect.ClassUtil;
+import org.dromara.hutool.json.JSONUtil;
 
 /**
  * 管道任务-抽象层

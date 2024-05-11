@@ -72,7 +72,7 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.7
-IDEA_VERSION >= 2023.4
+IDEA_VERSION >= 2024.1.1
 ```
 
 Gradle:
@@ -182,16 +182,16 @@ Maven:
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
 * **日志分析**：集成`kafka、elk、prometheus、loki`等实时监控日志(请求日志、系统日志、数据变更日志、用户日志) 提供完善的企业微服务流量监控，日志监控能力
 * **分布式事务**：集成`spring cloud alibaba seata`分布式事务处理
+* **分布式任务**：集成`xxl-job、powerjob、quartz`等分布式定时任务处理
 * **mvc封装**：通用的 Controller、Service、Mapper、全局异常、全局序列化、反序列化规则，请求头传递、调用日志、灰度、统一配置编码解码规则等，AOP方式优雅记录操作日志、优雅缓存解决方案、防缓存击穿
 * **业务熔断**：采用`spring cloud alibaba Sentinel`实现业务熔断处理，避免服务之间出现雪崩
 * **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成`skywalking、sleuth、zipkin`链路监控
-* **分布式任务**：集成`xxl-job、powerjob、quartz`等分布式定时任务处理
 * **内部调用**：集成了`Feign`和`Dubbo`以及`grpc`等模式支持内部调用，并且可以实现无缝切换
 * **身份注入**：通过注解的方式，实现用户登录信息的快速注入
 * **网关支持**：支持流量控制、拉黑名单、过滤请求、灰度发布方案、防重复提交、命中缓存降级访问、网关统一鉴权等
 * **在线文档**：通过接入`Knife4j`，实现在线API文档的查看与调试，对swagger、knife4j二次封装，实现配置即文档
 * **业务监控**：利用`Spring Boot Admin`来监控各个独立Service的运行状态。
-* **代码生成**：基于`Mybatis-plus-generator`自动生成代码，提升开发效率，使用代码生成器可以一键生成 Java、Vue 前后端代码、SQL 脚本、接口文档，支持单表、树表、主子表；
+* **代码生成**：基于`Mybatis-plus-generator`自动生成代码，提升开发效率，使用代码生成器可以一键生成 Java、Vue 前后端代码、SQL 脚本、接口文档，支持单表、树表、主子表
 * **消息中心**：集成消息中间件`RocketMQ、kafka`，对业务进行异步处理
 * **实时通信**：实时通信，采用 Spring WebSocket 实现，内置 Token 身份校验，支持 WebSocket 集群
 * **业务分离**：采用前后端分离的框架设计，前端采用`react antd、taro`脚手架快速开放
@@ -213,11 +213,7 @@ Maven:
 ```
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
-│  ├─taotao-cloud-custom -- 自定义模块
-│  │  ├─taotao-cloud-sign-partterns  -- 设计模式
-│  │  ├─taotao-cloud-distributed-tx  -- 手写分布式事务
-│  │  ├─taotao-cloud-rpc  -- 手写rpc框架
-│  │  ├─taotao-cloud-raft  -- raft实现
+│  ├─taotao-cloud-design-partterns  -- 设计模式
 │  ├─taotao-cloud-microservice -- 微服务模块
 │  │  ├─taotao-cloud-ai  -- ai模块
 │  │  ├─taotao-cloud-bff-api  -- 基于bff架构的api模块
@@ -235,6 +231,9 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-plugin -- 插件模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-scala -- scala模块
+│  ├─taotao-cloud-ttcmq -- 分布式消息中间件
+│  ├─taotao-cloud-ttcrpc -- 分布式rpc框架
+│  ├─taotao-cloud-ttctx -- 分布式事务框架
 │  ├─taotao-cloud-warehouse -- 数仓模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
 │  │  ├─taotao-cloud-offline-weblog -- 离线日志分析模块

@@ -1,11 +1,11 @@
 package com.taotao.cloud.design.patterns.pipeline;
 
-import com.example.demo.pipeline.factory.PipelineForManagerSubmit;
 import com.taotao.cloud.design.patterns.pipeline.demo.DemoReq;
+import com.taotao.cloud.design.patterns.pipeline.demo.DemoResp;
+import com.taotao.cloud.design.patterns.pipeline.demo.PipelineForManagerSubmit;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 
 /**
  * 演示-API

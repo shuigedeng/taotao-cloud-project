@@ -1,8 +1,8 @@
 package com.taotao.cloud.design.patterns.pipeline;
 
 
-import com.example.demo.model.request.DemoReq;
-import com.example.demo.model.response.DemoResp;
+import com.taotao.cloud.design.patterns.pipeline.demo.DemoReq;
+import com.taotao.cloud.design.patterns.pipeline.demo.DemoResp;
 import lombok.*;
 
 /**

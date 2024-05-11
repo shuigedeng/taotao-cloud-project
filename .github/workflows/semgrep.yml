@@ -6,7 +6,6 @@ on:
   pull_request: {}
   push:
     branches:
-      - dev
       - master
     paths:
       - .github/workflows/semgrep.yml

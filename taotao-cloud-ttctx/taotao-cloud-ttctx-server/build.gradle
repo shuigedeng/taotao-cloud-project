@@ -1,8 +1,5 @@
 dependencies {
-    api 'org.springframework.boot:spring-boot-starter-web'
-    api 'org.springframework.boot:spring-boot-starter-aop'
-    api 'io.netty:netty-all'
-    api 'com.alibaba.fastjson2:fastjson2'
-
+    api project(":taotao-cloud-ttctx:taotao-cloud-ttctx-tm")
+    api project(":taotao-cloud-ttctx:taotao-cloud-ttctx-rm")
 }
 

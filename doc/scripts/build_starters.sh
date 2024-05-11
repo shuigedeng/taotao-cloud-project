@@ -3,8 +3,8 @@
 current_dir=`dirname $(pwd)`
 
 #JAVA_HOME="/opt/common/jdk-21"
-#JAVA_HOME="/Users/dengtao/software/jdk-21.1/Contents/Home"
-JAVA_HOME="/Users/dengtao/software/jdk-21.jdk/Contents/Home"
+#JAVA_HOME="/Users/shuigedeng/software/jdk-21.1/Contents/Home"
+JAVA_HOME="/Users/shuigedeng/software/jdk-21.jdk/Contents/Home"
 
 function install_dependencies() {
     cd $current_dir/taotao-cloud-dependencies

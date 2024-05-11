@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.common
  * Date: 2020/2/27 11:09
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.ttcrpc.common.common;
 
@@ -13,9 +13,8 @@ import io.netty.handler.codec.MessageToByteEncoder;
 /**
  * <br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
- * @create 2020/2/27 11:09
  */
 public class RpcEncoder extends MessageToByteEncoder {
 

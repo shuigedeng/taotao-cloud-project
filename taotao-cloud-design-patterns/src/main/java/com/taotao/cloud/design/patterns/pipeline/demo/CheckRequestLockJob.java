@@ -1,8 +1,7 @@
 package com.taotao.cloud.design.patterns.pipeline.demo;
 
-import cn.hutool.json.JSONUtil;
-import com.example.demo.pipeline.factory.DemoPipelineProduct;
 import com.taotao.cloud.design.patterns.pipeline.AbstractDemoJob;
+import com.taotao.cloud.design.patterns.pipeline.DemoPipelineProduct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

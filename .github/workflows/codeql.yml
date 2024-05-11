@@ -16,7 +16,6 @@ name: "CodeQL"
 on:
   push:
     branches:
-      - dev
       - master
       - 'releases/*'
   pull_request:

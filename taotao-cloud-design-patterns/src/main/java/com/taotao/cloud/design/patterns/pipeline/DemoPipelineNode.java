@@ -1,13 +1,11 @@
 package com.taotao.cloud.design.patterns.pipeline;
 
 
-import cn.hutool.core.util.ClassUtil;
-import cn.hutool.json.JSONUtil;
-import com.example.demo.pipeline.model.PipelineJob;
-import com.example.demo.pipeline.model.PipelineNode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Predicate;
+import org.dromara.hutool.core.reflect.ClassUtil;
+import org.dromara.hutool.json.JSONUtil;
 
 /**
  * 审核-管道节点

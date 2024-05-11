@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.common
  * Date: 2020/2/27 10:44
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.ttcrpc.common.common;
 
@@ -19,9 +19,8 @@ import org.objenesis.ObjenesisStd;
 /**
  * 序列化utils
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
- * @create 2020/2/27 10:44
  */
 public class SerializationUtil {
     private static Map<Class<?>, Schema<?>> cachedMap = new ConcurrentHashMap<>();
@@ -32,7 +31,7 @@ public class SerializationUtil {
      *
      * @param clazz 类型
      * @return com.dyuproject.protostuff.Schema<T>
-     * @author dengtao
+     * @author shuigedeng
      * @date 2020/2/27 11:03
      */
     public static <T> Schema<T> getSchema(Class<T> clazz) {
@@ -49,7 +48,7 @@ public class SerializationUtil {
      *
      * @param obj 类型
      * @return byte[]
-     * @author dengtao
+     * @author shuigedeng
      * @date 2020/2/27 11:02
      */
     public static <T> byte[] serialize(T obj) throws IllegalStateException {
@@ -71,7 +70,7 @@ public class SerializationUtil {
      * @param data  数据
      * @param clazz 类型
      * @return T 类
-     * @author dengtao
+     * @author shuigedeng
      * @date 2020/2/27 11:03
      */
     public static <T> T deserialize(byte[] data, Class<T> clazz) throws IllegalStateException {

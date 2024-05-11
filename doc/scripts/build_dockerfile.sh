@@ -3,7 +3,7 @@
 current_dir=`dirname $(pwd)`
 
 #JAVA_HOME="/opt/common/jdk-21"
-JAVA_HOME="/Users/dengtao/software/jdk-21.jdk/Contents/Home"
+JAVA_HOME="/Users/shuigedeng/software/jdk-21.jdk/Contents/Home"
 
 VERSION=2024.06
 

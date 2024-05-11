@@ -1,6 +1,5 @@
 package com.taotao.cloud.ttcrpc.common.idworker;
 
-import com.alibaba.nacos.common.utils.StringUtils;
 import com.taotao.cloud.ttcrpc.common.idworker.exception.WorkerIdCantApplyException;
 import com.taotao.cloud.ttcrpc.common.idworker.utils.JRedisHelper;
 import com.taotao.cloud.ttcrpc.common.idworker.utils.LRedisHelper;

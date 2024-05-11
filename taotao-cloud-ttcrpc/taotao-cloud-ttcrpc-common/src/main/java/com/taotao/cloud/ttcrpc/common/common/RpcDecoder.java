@@ -2,7 +2,7 @@
  * Project Name: my-projects
  * Package Name: com.taotao.rpc.common
  * Date: 2020/2/27 11:13
- * Author: dengtao
+ * Author: shuigedeng
  */
 package com.taotao.cloud.ttcrpc.common.common;
 
@@ -14,9 +14,8 @@ import java.util.List;
 /**
  * rpc解码<br>
  *
- * @author dengtao
+ * @author shuigedeng
  * @version v1.0.0
- * @create 2020/2/27 11:13
  */
 public class RpcDecoder extends ByteToMessageDecoder {
 
