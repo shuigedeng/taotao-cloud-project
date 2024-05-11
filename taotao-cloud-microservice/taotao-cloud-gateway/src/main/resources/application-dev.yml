@@ -1146,8 +1146,8 @@ springdoc:
   swagger-ui:
     enabled: true
     config-url: /v3/api-docs/swagger-config
-  webjars:
-    prefix: /tt/webjars #此处重写springdoc的webjars目的是 knife4j-ui和swagger-ui的webjars冲突 后者会重写前者的webjars请求路径
+#  webjars:
+#    prefix: /tt/webjars #此处重写springdoc的webjars目的是 knife4j-ui和swagger-ui的webjars冲突 后者会重写前者的webjars请求路径
 
 logging:
   file:
