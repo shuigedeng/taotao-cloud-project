@@ -14,11 +14,14 @@ task dis(type: Zip, dependsOn: jar) {
         into "bin"
     }
 
-    from('${project.parent.projectDir}/taotao-cloud-tx-distribution/conf') {
+    from("${project.parent.projectDir}/taotao-cloud-tx-distribution/conf") {
         include '**'
 
         into "conf"
     }
+
+    from "${project.parent.projectDir}/taotao-cloud-tx-distribution/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+    from "${project.parent.projectDir}/taotao-cloud-tx-distribution/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
 
     from('build/libs') {
         include '*.jar'
@@ -29,8 +32,31 @@ task dis(type: Zip, dependsOn: jar) {
 }
 
 tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts, type: Tar) {
-//    into "kafka_${versions.baseScala}-${archiveVersion.get()}"
-//    compression = Compression.GZIP
+
+    into "taotao-cloud-tx-server"
+    compression = Compression.GZIP
+
+    from("${project.parent.projectDir}/taotao-cloud-tx-distribution/bin") {
+        include '**'
+
+        into "bin"
+    }
+
+    from("${project.parent.projectDir}/taotao-cloud-tx-distribution/conf") {
+        include '**'
+
+        into "conf"
+    }
+
+    from "${project.parent.projectDir}/taotao-cloud-tx-distribution/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+    from "${project.parent.projectDir}/taotao-cloud-tx-distribution/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+
+    from('build/libs') {
+        include '*.jar'
+
+        into "target"
+    }
+
 //    from(project.file("$rootDir/bin")) { into "bin/" }
 //    from(project.file("$rootDir/config")) { into "config/" }
 //    from(project.file("$rootDir/licenses")) { into "licenses/" }
