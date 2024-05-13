@@ -1,0 +1,5 @@
+dependencies {
+    api project(":taotao-cloud-tx:taotao-cloud-tx-tm")
+    api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
+}
+

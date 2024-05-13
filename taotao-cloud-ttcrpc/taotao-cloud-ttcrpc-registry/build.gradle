@@ -1,4 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-ttcrpc:taotao-cloud-ttcrpc-core")
-}
-

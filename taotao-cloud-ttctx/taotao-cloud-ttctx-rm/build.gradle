@@ -1,5 +1,0 @@
-dependencies {
-    api project(":taotao-cloud-ttctx:taotao-cloud-ttctx-common")
-
-}
-

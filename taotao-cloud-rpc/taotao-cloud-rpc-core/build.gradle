@@ -1,0 +1,4 @@
+dependencies {
+    api project(":taotao-cloud-rpc:taotao-cloud-rpc-common")
+}
+

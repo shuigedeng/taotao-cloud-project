@@ -105,12 +105,12 @@ dependencyResolutionManagement {
     }
 }
 
-def oneLayerProjects = ['scala', 'python', 'design-patterns']
+def oneLayerProjects = ['scala', 'python', 'design-patterns','cache','jdbcpool']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'plugin', 'ttcmq', 'ttcrpc', 'ttctx']
+def twoLayerProjects = ['bigdata', 'plugin', 'mq', 'rpc', 'tx']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->
