@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.serialization;
+package com.taotao.cloud.rpc.serialization;
 
 public class a {
 

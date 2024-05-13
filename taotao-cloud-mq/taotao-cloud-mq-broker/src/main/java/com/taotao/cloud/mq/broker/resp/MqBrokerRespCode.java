@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.resp;
+package com.taotao.cloud.mq.broker.resp;
 
 import com.github.houbb.heaven.response.respcode.RespCode;
 

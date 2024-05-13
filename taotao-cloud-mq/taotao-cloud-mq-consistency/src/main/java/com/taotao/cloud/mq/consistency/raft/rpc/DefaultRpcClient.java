@@ -14,10 +14,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.rpc;
+package com.taotao.cloud.mq.consistency.raft.rpc;
 
 import com.alipay.remoting.exception.RemotingException;
-import com.taotao.cloud.ttcmq.consistency.raft.exception.RaftRemotingException;
+import com.taotao.cloud.mq.consistency.raft.exception.RaftRemotingException;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 

@@ -4,7 +4,7 @@
  * Date: 2020/2/27 11:04
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.common.common;
+package com.taotao.cloud.rpc.common.common;
 
 /**
  * rpc请求封装实体<br>

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.serializer;
+package com.taotao.cloud.rpc.common.serializer;
 
 
 /**

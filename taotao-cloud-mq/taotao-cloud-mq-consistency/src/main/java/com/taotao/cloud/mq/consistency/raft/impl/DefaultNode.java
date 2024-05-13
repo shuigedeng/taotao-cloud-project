@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.impl;
+package com.taotao.cloud.mq.consistency.raft.impl;
 
 import static com.taotao.cloud.raft.common.NodeStatus.FOLLOWER;
 import static com.taotao.cloud.raft.common.NodeStatus.LEADER;
@@ -22,21 +22,21 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import com.taotao.cloud.raft.entity.*;
 import com.taotao.cloud.raft.rpc.*;
-import com.taotao.cloud.ttcmq.consistency.raft.Consensus;
-import com.taotao.cloud.ttcmq.consistency.raft.LogModule;
-import com.taotao.cloud.ttcmq.consistency.raft.Node;
-import com.taotao.cloud.ttcmq.consistency.raft.StateMachine;
-import com.taotao.cloud.ttcmq.consistency.raft.changes.ClusterMembershipChanges;
-import com.taotao.cloud.ttcmq.consistency.raft.changes.Result;
-import com.taotao.cloud.ttcmq.consistency.raft.client.ClientKVAck;
-import com.taotao.cloud.ttcmq.consistency.raft.client.ClientKVReq;
-import com.taotao.cloud.ttcmq.consistency.raft.common.NodeConfig;
-import com.taotao.cloud.ttcmq.consistency.raft.common.NodeStatus;
-import com.taotao.cloud.ttcmq.consistency.raft.common.Peer;
-import com.taotao.cloud.ttcmq.consistency.raft.common.PeerSet;
-import com.taotao.cloud.ttcmq.consistency.raft.current.RaftThreadPool;
-import com.taotao.cloud.ttcmq.consistency.raft.exception.RaftRemotingException;
-import com.taotao.cloud.ttcmq.consistency.raft.util.LongConvert;
+import com.taotao.cloud.mq.consistency.raft.Consensus;
+import com.taotao.cloud.mq.consistency.raft.LogModule;
+import com.taotao.cloud.mq.consistency.raft.Node;
+import com.taotao.cloud.mq.consistency.raft.StateMachine;
+import com.taotao.cloud.mq.consistency.raft.changes.ClusterMembershipChanges;
+import com.taotao.cloud.mq.consistency.raft.changes.Result;
+import com.taotao.cloud.mq.consistency.raft.client.ClientKVAck;
+import com.taotao.cloud.mq.consistency.raft.client.ClientKVReq;
+import com.taotao.cloud.mq.consistency.raft.common.NodeConfig;
+import com.taotao.cloud.mq.consistency.raft.common.NodeStatus;
+import com.taotao.cloud.mq.consistency.raft.common.Peer;
+import com.taotao.cloud.mq.consistency.raft.common.PeerSet;
+import com.taotao.cloud.mq.consistency.raft.current.RaftThreadPool;
+import com.taotao.cloud.mq.consistency.raft.exception.RaftRemotingException;
+import com.taotao.cloud.mq.consistency.raft.util.LongConvert;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;

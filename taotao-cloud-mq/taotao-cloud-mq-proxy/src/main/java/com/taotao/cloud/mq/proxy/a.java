@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.proxy;
+package com.taotao.cloud.mq.proxy;
 
 public class a {
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.idworker.exception;
+package com.taotao.cloud.rpc.common.idworker.exception;
 
 /**
  * 时钟回拨异常

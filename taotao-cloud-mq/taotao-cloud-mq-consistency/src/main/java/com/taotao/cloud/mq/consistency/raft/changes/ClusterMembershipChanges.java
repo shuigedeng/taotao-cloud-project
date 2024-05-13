@@ -14,10 +14,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.changes;
+package com.taotao.cloud.mq.consistency.raft.changes;
 
 
-import com.taotao.cloud.ttcmq.consistency.raft.common.Peer;
+import com.taotao.cloud.mq.consistency.raft.common.Peer;
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.protocol;
+package com.taotao.cloud.rpc.common.protocol;
 
 import java.io.Serializable;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.dto.consumer;
+package com.taotao.cloud.mq.broker.dto.consumer;
 
 
 /**

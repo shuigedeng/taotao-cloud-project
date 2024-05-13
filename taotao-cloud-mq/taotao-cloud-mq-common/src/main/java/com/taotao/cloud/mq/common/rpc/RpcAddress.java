@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.rpc;
+package com.taotao.cloud.mq.common.rpc;
 
 import com.github.houbb.load.balance.support.server.IServer;
 

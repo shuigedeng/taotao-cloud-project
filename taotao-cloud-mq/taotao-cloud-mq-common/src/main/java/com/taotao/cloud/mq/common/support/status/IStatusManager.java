@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.support.status;
+package com.taotao.cloud.mq.common.support.status;
 
 /**
  * 状态管理

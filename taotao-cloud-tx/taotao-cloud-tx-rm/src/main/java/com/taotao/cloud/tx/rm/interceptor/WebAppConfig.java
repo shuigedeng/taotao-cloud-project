@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.rm.interceptor;
+package com.taotao.cloud.tx.rm.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

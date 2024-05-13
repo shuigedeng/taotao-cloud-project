@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.support.hook;
+package com.taotao.cloud.mq.common.support.hook;
 
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;

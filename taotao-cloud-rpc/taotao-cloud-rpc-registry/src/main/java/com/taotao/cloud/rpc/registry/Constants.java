@@ -4,7 +4,7 @@
  * Date: 2020/2/27 11:22
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.registry;
+package com.taotao.cloud.rpc.registry;
 
 /**
  * 静态常量

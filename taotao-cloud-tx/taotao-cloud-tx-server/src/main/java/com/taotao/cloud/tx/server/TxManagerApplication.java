@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.server;
+package com.taotao.cloud.tx.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

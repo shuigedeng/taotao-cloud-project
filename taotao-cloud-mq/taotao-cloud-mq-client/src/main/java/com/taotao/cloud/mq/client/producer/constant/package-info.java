@@ -2,4 +2,4 @@
  * @author shuigedeng
  * @since 2024.05
  */
-package com.taotao.cloud.ttcmq.client.producer.constant;
+package com.taotao.cloud.mq.client.producer.constant;

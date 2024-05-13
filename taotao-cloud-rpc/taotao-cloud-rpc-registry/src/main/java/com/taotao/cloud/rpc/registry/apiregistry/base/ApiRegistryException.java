@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.base;
+package com.taotao.cloud.rpc.registry.apiregistry.base;
 
 
 public class ApiRegistryException extends RuntimeException {

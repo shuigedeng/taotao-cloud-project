@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.anno;
+package com.taotao.cloud.rpc.registry.apiregistry.anno;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.producer.api;
+package com.taotao.cloud.mq.client.producer.api;
 
 
 import java.util.List;

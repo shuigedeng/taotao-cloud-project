@@ -1,10 +1,10 @@
-package com.taotao.cloud.ttcrpc.common.util;
+package com.taotao.cloud.rpc.common.util;
 
-import com.taotao.cloud.ttcrpc.common.enums.ResponseCode;
-import com.taotao.cloud.ttcrpc.common.exception.ReceiveResponseException;
-import com.taotao.cloud.ttcrpc.common.exception.RpcException;
-import com.taotao.cloud.ttcrpc.common.protocol.RpcRequest;
-import com.taotao.cloud.ttcrpc.common.protocol.RpcResponse;
+import com.taotao.cloud.rpc.common.enums.ResponseCode;
+import com.taotao.cloud.rpc.common.exception.ReceiveResponseException;
+import com.taotao.cloud.rpc.common.exception.RpcException;
+import com.taotao.cloud.rpc.common.protocol.RpcRequest;
+import com.taotao.cloud.rpc.common.protocol.RpcResponse;
 import java.io.UnsupportedEncodingException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;

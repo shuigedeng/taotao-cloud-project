@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.rm.annotation;
+package com.taotao.cloud.tx.rm.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

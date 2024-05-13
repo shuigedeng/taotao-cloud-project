@@ -3,7 +3,7 @@
  * rpc All rights reserved.
  */
 
-package com.taotao.cloud.ttcmq.broker.support.api;
+package com.taotao.cloud.mq.broker.support.api;
 
 
 import com.github.houbb.log.integration.core.Log;

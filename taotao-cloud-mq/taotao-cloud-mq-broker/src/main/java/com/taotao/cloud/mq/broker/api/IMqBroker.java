@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.api;
+package com.taotao.cloud.mq.broker.api;
 
 /**
  * 消息持久化

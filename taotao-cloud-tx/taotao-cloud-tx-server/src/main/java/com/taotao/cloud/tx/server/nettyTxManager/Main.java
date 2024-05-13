@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.server.nettyTxManager;
+package com.taotao.cloud.tx.server.nettyTxManager;
 
 // 事务管理者的启动类
 public class Main {

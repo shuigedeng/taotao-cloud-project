@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.exception;
+package com.taotao.cloud.rpc.common.exception;
 
 public class SerializerNotSetException extends RpcException {
 

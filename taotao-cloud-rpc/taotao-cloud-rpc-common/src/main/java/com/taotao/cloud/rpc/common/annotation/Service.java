@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.annotation;
+package com.taotao.cloud.rpc.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

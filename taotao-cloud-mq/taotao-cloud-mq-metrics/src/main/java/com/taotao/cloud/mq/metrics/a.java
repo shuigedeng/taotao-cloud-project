@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.metrics;
+package com.taotao.cloud.mq.metrics;
 
 public class a {
 

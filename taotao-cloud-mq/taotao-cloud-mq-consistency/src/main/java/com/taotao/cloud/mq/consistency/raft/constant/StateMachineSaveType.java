@@ -14,11 +14,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.constant;
+package com.taotao.cloud.mq.consistency.raft.constant;
 
-import com.taotao.cloud.ttcmq.consistency.raft.StateMachine;
-import com.taotao.cloud.ttcmq.consistency.raft.impl.DefaultStateMachine;
-import com.taotao.cloud.ttcmq.consistency.raft.impl.RedisStateMachine;
+import com.taotao.cloud.mq.consistency.raft.StateMachine;
+import com.taotao.cloud.mq.consistency.raft.impl.DefaultStateMachine;
+import com.taotao.cloud.mq.consistency.raft.impl.RedisStateMachine;
 
 /**
  *

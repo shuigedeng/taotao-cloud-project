@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.example.consumer;
+package com.taotao.cloud.mq.example.consumer;
 
 
 /**

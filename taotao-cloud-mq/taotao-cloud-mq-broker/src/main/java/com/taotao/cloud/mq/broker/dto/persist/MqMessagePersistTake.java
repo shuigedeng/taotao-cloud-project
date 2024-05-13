@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.dto.persist;
+package com.taotao.cloud.mq.broker.dto.persist;
 
 import java.util.List;
 

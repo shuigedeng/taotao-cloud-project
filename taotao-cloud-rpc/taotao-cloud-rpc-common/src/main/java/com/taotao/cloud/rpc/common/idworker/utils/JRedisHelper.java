@@ -1,8 +1,8 @@
-package com.taotao.cloud.ttcrpc.common.idworker.utils;
+package com.taotao.cloud.rpc.common.idworker.utils;
 
 
 import com.alibaba.nacos.common.utils.StringUtils;
-import com.taotao.cloud.ttcrpc.common.util.PropertiesConstants;
+import com.taotao.cloud.rpc.common.util.PropertiesConstants;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

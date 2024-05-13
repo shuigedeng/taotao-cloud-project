@@ -1,10 +1,10 @@
-package com.taotao.cloud.ttcrpc.common.idworker;
+package com.taotao.cloud.rpc.common.idworker;
 
-import com.taotao.cloud.ttcrpc.common.idworker.exception.WorkerIdCantApplyException;
-import com.taotao.cloud.ttcrpc.common.idworker.utils.JRedisHelper;
-import com.taotao.cloud.ttcrpc.common.idworker.utils.LRedisHelper;
-import com.taotao.cloud.ttcrpc.common.util.IpUtils;
-import com.taotao.cloud.ttcrpc.common.util.PropertiesConstants;
+import com.taotao.cloud.rpc.common.idworker.exception.WorkerIdCantApplyException;
+import com.taotao.cloud.rpc.common.idworker.utils.JRedisHelper;
+import com.taotao.cloud.rpc.common.idworker.utils.LRedisHelper;
+import com.taotao.cloud.rpc.common.util.IpUtils;
+import com.taotao.cloud.rpc.common.util.PropertiesConstants;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

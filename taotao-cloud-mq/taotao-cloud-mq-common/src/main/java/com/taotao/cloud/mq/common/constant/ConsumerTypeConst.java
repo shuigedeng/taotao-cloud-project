@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.constant;
+package com.taotao.cloud.mq.common.constant;
 
 /**
  * @author shuigedeng

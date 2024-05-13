@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.rm.netty;
+package com.taotao.cloud.tx.rm.netty;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

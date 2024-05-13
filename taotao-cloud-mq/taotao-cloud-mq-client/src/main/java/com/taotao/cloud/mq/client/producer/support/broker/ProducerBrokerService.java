@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.producer.support.broker;
+package com.taotao.cloud.mq.client.producer.support.broker;
 
 import com.alibaba.fastjson.JSON;
 import com.github.houbb.heaven.util.util.DateUtil;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.code;
+package com.taotao.cloud.rpc.registry.apiregistry.code;
 
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties;

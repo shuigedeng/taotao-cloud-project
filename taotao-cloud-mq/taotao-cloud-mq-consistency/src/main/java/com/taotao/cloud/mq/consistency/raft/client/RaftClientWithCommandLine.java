@@ -1,6 +1,6 @@
-package com.taotao.cloud.ttcmq.consistency.raft.client;
+package com.taotao.cloud.mq.consistency.raft.client;
 
-import com.taotao.cloud.ttcmq.consistency.raft.entity.LogEntry;
+import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 import java.util.Scanner;
 import lombok.extern.slf4j.Slf4j;
 

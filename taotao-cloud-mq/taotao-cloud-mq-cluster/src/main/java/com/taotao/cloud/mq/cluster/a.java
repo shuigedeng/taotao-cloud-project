@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.cluster;
+package com.taotao.cloud.mq.cluster;
 
 public class a {
 

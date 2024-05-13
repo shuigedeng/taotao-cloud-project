@@ -1,9 +1,9 @@
-package com.taotao.cloud.ttctx.rm.aspect;
+package com.taotao.cloud.tx.rm.aspect;
 
-import com.taotao.cloud.ttctx.rm.annotation.DistributedTransactional;
-import com.taotao.cloud.ttctx.rm.transactional.TransactionalType;
-import com.taotao.cloud.ttctx.rm.transactional.ZhuziTx;
-import com.taotao.cloud.ttctx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.annotation.DistributedTransactional;
+import com.taotao.cloud.tx.rm.transactional.TransactionalType;
+import com.taotao.cloud.tx.rm.transactional.ZhuziTx;
+import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
 import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

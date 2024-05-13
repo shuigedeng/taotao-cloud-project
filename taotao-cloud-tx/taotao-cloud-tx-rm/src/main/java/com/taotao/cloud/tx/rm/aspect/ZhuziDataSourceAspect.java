@@ -1,7 +1,7 @@
-package com.taotao.cloud.ttctx.rm.aspect;
+package com.taotao.cloud.tx.rm.aspect;
 
-import com.taotao.cloud.ttctx.rm.connection.ZhuziConnection;
-import com.taotao.cloud.ttctx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.connection.ZhuziConnection;
+import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
 import java.sql.Connection;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

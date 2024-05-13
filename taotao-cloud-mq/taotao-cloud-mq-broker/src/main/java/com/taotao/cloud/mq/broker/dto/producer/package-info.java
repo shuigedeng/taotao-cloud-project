@@ -2,4 +2,4 @@
  * @author shuigedeng
  * @since 2024.05
  */
-package com.taotao.cloud.ttcmq.broker.dto.producer;
+package com.taotao.cloud.mq.broker.dto.producer;

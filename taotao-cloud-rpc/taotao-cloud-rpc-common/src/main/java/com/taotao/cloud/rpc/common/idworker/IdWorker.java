@@ -1,7 +1,7 @@
-package com.taotao.cloud.ttcrpc.common.idworker;
+package com.taotao.cloud.rpc.common.idworker;
 
-import com.taotao.cloud.ttcrpc.common.factory.ThreadPoolFactory;
-import com.taotao.cloud.ttcrpc.common.idworker.exception.InvalidSystemClockException;
+import com.taotao.cloud.rpc.common.factory.ThreadPoolFactory;
+import com.taotao.cloud.rpc.common.idworker.exception.InvalidSystemClockException;
 import java.security.SecureRandom;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;

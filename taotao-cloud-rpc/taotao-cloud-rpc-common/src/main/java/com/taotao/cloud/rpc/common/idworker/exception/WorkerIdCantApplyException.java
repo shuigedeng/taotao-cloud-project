@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.idworker.exception;
+package com.taotao.cloud.rpc.common.idworker.exception;
 
 /**
  * 机器码节点无法申请，因为节点数已满足最大值

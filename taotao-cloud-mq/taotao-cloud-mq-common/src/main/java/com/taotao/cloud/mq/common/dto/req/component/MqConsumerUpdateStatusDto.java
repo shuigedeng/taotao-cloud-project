@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.dto.req.component;
+package com.taotao.cloud.mq.common.dto.req.component;
 
 /**
  * @author shuigedeng

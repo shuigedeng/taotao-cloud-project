@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.core.discovery;
+package com.taotao.cloud.rpc.core.discovery;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.pojo.Instance;

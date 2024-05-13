@@ -1,10 +1,10 @@
-package com.taotao.cloud.ttcmq.common.support.hook;
+package com.taotao.cloud.mq.common.support.hook;
 
 import com.github.houbb.heaven.util.util.DateUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
-import com.taotao.cloud.ttcmq.common.support.invoke.IInvokeService;
-import com.taotao.cloud.ttcmq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
+import com.taotao.cloud.mq.common.support.status.IStatusManager;
 
 /**
  * 默认的 hook 实现

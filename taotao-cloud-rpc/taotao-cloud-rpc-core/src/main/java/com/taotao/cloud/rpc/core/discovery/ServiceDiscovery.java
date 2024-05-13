@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.core.discovery;
+package com.taotao.cloud.rpc.core.discovery;
 
 import com.taotao.cloud.rpc.common.exception.RpcException;
 import com.taotao.cloud.rpc.common.loadbalancer.LoadBalancer;

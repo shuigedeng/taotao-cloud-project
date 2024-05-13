@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.core.registry;
+package com.taotao.cloud.rpc.core.registry;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.taotao.cloud.rpc.common.exception.RegisterFailedException;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.rpc;
+package com.taotao.cloud.mq.common.rpc;
 
 import io.netty.channel.ChannelFuture;
 

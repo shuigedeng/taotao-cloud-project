@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.core.provider;
+package com.taotao.cloud.rpc.core.provider;
 
 import com.taotao.cloud.rpc.common.exception.ServiceNotFoundException;
 import com.taotao.cloud.rpc.common.exception.ServiceNotImplException;

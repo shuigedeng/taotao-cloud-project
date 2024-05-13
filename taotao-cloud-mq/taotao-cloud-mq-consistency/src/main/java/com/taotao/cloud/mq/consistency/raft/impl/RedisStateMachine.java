@@ -14,12 +14,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.impl;
+package com.taotao.cloud.mq.consistency.raft.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.ttcmq.consistency.raft.StateMachine;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.Command;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.LogEntry;
+import com.taotao.cloud.mq.consistency.raft.StateMachine;
+import com.taotao.cloud.mq.consistency.raft.entity.Command;
+import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.Jedis;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.enums;
+package com.taotao.cloud.rpc.common.enums;
 
 
 public enum ResponseCode {

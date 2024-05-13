@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.factory;
+package com.taotao.cloud.rpc.common.factory;
 
 
 import java.util.HashMap;

@@ -1,8 +1,8 @@
-package com.taotao.cloud.ttcmq.client.consumer.support.listener;
+package com.taotao.cloud.mq.client.consumer.support.listener;
 
 
-import com.taotao.cloud.ttcmq.client.consumer.api.IMqConsumerListener;
-import com.taotao.cloud.ttcmq.client.consumer.api.IMqConsumerListenerContext;
+import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
+import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
 
 /**
  * @author shuigedeng

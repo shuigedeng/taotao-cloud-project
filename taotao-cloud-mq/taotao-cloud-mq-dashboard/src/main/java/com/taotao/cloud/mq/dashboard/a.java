@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.dashboard;
+package com.taotao.cloud.mq.dashboard;
 
 public class a {
 

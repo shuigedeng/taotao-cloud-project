@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.core.util;
+package com.taotao.cloud.rpc.core.util;
 
 import com.taotao.cloud.rpc.common.enums.PackageType;
 import com.taotao.cloud.rpc.common.exception.UnrecognizedException;

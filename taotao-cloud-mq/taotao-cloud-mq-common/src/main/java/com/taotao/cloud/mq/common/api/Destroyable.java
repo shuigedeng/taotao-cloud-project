@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.api;
+package com.taotao.cloud.mq.common.api;
 
 /**
  * 可销毁的

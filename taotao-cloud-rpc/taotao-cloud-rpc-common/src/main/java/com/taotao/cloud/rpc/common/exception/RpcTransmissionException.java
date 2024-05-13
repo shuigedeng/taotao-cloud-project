@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.exception;
+package com.taotao.cloud.rpc.common.exception;
 
 /**
  * 数据传输异常

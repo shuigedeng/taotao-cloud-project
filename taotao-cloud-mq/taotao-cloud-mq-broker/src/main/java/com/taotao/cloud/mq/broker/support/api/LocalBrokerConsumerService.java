@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.support.api;
+package com.taotao.cloud.mq.broker.support.api;
 
 import com.alibaba.fastjson.JSON;
 import io.netty.channel.Channel;

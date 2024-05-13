@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.support.hook;
+package com.taotao.cloud.mq.common.support.hook;
 
 /**
  * <p> project: rpc-ShutdownHooks </p>

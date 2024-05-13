@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.producer.handler;
+package com.taotao.cloud.mq.client.producer.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.github.houbb.heaven.util.lang.StringUtil;

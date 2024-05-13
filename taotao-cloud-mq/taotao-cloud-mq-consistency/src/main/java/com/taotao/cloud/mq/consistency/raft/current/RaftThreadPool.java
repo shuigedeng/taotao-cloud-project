@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.current;
+package com.taotao.cloud.mq.consistency.raft.current;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;

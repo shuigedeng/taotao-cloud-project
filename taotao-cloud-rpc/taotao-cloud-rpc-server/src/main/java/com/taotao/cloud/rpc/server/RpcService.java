@@ -5,7 +5,7 @@
  * Date: 2020/2/27 14:03
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.server;
+package com.taotao.cloud.rpc.server;
 
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,9 @@
-package com.taotao.cloud.ttctx.rm.transactional;
+package com.taotao.cloud.tx.rm.transactional;
 
 
 import com.alibaba.fastjson2.JSONObject;
-import com.taotao.cloud.ttctx.rm.netty.NettyClient;
-import com.taotao.cloud.ttctx.rm.util.ApplicationContextProvider;
+import com.taotao.cloud.tx.rm.netty.NettyClient;
+import com.taotao.cloud.tx.rm.util.ApplicationContextProvider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.producer.core;
+package com.taotao.cloud.mq.client.producer.core;
 
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.load.balance.api.ILoadBalance;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.idworker.utils;
+package com.taotao.cloud.rpc.common.idworker.utils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

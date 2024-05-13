@@ -1,6 +1,6 @@
-package com.taotao.cloud.ttctx.rm.interceptor;
+package com.taotao.cloud.tx.rm.interceptor;
 
-import com.taotao.cloud.ttctx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;

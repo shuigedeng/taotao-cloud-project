@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.cluster;
+package com.taotao.cloud.rpc.cluster;
 
 public class a {
 

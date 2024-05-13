@@ -1,7 +1,7 @@
-package com.taotao.cloud.ttcrpc.common.loadbalancer;
+package com.taotao.cloud.rpc.common.loadbalancer;
 
 import com.alibaba.nacos.api.naming.pojo.Instance;
-import com.taotao.cloud.ttcrpc.common.exception.RpcException;
+import com.taotao.cloud.rpc.common.exception.RpcException;
 import java.util.List;
 
 /**

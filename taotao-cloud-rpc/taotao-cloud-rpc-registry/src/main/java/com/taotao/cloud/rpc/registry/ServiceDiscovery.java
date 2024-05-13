@@ -4,7 +4,7 @@
  * Date: 2020/2/27 13:48
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.registry;
+package com.taotao.cloud.rpc.registry;
 
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;

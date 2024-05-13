@@ -1,8 +1,8 @@
-package com.taotao.cloud.ttcrpc.common.serializer;
+package com.taotao.cloud.rpc.common.serializer;
 
 import com.caucho.hessian.io.Hessian2Input;
 import com.caucho.hessian.io.Hessian2Output;
-import com.taotao.cloud.ttcrpc.common.enums.SerializerCode;
+import com.taotao.cloud.rpc.common.enums.SerializerCode;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 

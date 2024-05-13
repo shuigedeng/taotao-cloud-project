@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry;
+package com.taotao.cloud.rpc.registry.apiregistry;
 
 
 import java.util.HashMap;

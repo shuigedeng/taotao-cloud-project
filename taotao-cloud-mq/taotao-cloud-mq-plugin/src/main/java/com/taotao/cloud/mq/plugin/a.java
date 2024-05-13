@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.plugin;
+package com.taotao.cloud.mq.plugin;
 
 public class a {
 

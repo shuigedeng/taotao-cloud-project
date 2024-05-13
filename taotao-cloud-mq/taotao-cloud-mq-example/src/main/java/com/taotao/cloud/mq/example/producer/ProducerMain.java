@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.example.producer;
+package com.taotao.cloud.mq.example.producer;
 
 
 import java.nio.charset.StandardCharsets;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.plugin;
+package com.taotao.cloud.rpc.plugin;
 
 public class a {
 

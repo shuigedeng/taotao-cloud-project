@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.support.invoke;
+package com.taotao.cloud.mq.common.support.invoke;
 
 
 

@@ -14,12 +14,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.impl;
+package com.taotao.cloud.mq.consistency.raft.impl;
 
 import com.taotao.cloud.raft.entity.*;
-import com.taotao.cloud.ttcmq.consistency.raft.Consensus;
-import com.taotao.cloud.ttcmq.consistency.raft.common.NodeStatus;
-import com.taotao.cloud.ttcmq.consistency.raft.common.Peer;
+import com.taotao.cloud.mq.consistency.raft.Consensus;
+import com.taotao.cloud.mq.consistency.raft.common.NodeStatus;
+import com.taotao.cloud.mq.consistency.raft.common.Peer;
 import io.netty.util.internal.StringUtil;
 import java.util.concurrent.locks.ReentrantLock;
 import lombok.Getter;

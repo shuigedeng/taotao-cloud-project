@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.loadbalance;
+package com.taotao.cloud.rpc.registry.apiregistry.loadbalance;
 
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;

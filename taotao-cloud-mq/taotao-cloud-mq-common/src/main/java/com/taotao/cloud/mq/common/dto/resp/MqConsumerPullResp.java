@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.dto.resp;
+package com.taotao.cloud.mq.common.dto.resp;
 
 
 import java.io.Serializable;

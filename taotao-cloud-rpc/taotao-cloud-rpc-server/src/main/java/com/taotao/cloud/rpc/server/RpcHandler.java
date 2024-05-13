@@ -4,7 +4,7 @@
  * Date: 2020/2/27 14:40
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.server;
+package com.taotao.cloud.rpc.server;
 
 import com.taotao.rpc.common.RpcReponse;
 import com.taotao.rpc.common.RpcRequest;

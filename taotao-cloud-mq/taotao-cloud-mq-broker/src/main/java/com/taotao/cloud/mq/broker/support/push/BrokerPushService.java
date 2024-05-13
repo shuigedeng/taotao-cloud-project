@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.support.push;
+package com.taotao.cloud.mq.broker.support.push;
 
 import com.alibaba.fastjson.JSON;
 import com.github.houbb.log.integration.core.Log;

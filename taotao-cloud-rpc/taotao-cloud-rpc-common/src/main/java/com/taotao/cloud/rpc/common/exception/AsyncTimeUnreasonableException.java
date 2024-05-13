@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.exception;
+package com.taotao.cloud.rpc.common.exception;
 
 /**
  * 异步时间设置不合理异常

@@ -14,13 +14,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft;
+package com.taotao.cloud.mq.consistency.raft;
 
 
-import com.taotao.cloud.ttcmq.consistency.raft.entity.AentryParam;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.AentryResult;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.RvoteParam;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.RvoteResult;
+import com.taotao.cloud.mq.consistency.raft.entity.AentryParam;
+import com.taotao.cloud.mq.consistency.raft.entity.AentryResult;
+import com.taotao.cloud.mq.consistency.raft.entity.RvoteParam;
+import com.taotao.cloud.mq.consistency.raft.entity.RvoteResult;
 
 /**
  *

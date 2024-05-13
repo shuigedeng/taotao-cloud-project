@@ -14,12 +14,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.rpc;
+package com.taotao.cloud.mq.consistency.raft.rpc;
 
 import com.alipay.remoting.AsyncContext;
 import com.alipay.remoting.BizContext;
 import com.alipay.remoting.rpc.protocol.AbstractUserProcessor;
-import com.taotao.cloud.ttcmq.consistency.raft.exception.RaftNotSupportException;
+import com.taotao.cloud.mq.consistency.raft.exception.RaftNotSupportException;
 
 /**
  *

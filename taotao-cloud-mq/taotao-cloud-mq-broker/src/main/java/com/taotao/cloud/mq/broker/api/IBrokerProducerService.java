@@ -3,7 +3,7 @@
  * rpc All rights reserved.
  */
 
-package com.taotao.cloud.ttcmq.broker.api;
+package com.taotao.cloud.mq.broker.api;
 
 
 import io.netty.channel.Channel;

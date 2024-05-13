@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.support.invoke.impl;
+package com.taotao.cloud.mq.common.support.invoke.impl;
 
 import com.github.houbb.heaven.util.common.ArgUtil;
 

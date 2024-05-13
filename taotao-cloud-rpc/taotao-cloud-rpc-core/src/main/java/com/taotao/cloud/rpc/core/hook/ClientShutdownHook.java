@@ -1,7 +1,7 @@
-package com.taotao.cloud.ttcrpc.core.hook;
+package com.taotao.cloud.rpc.core.hook;
 
 import com.taotao.cloud.rpc.common.factory.ThreadPoolFactory;
-import com.taotao.cloud.ttcrpc.core.net.netty.client.ChannelProvider;
+import com.taotao.cloud.rpc.core.net.netty.client.ChannelProvider;
 import lombok.extern.slf4j.Slf4j;
 
 /**

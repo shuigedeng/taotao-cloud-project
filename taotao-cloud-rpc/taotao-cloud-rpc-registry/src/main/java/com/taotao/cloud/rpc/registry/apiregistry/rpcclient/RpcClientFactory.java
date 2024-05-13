@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.rpcclient;
+package com.taotao.cloud.rpc.registry.apiregistry.rpcclient;
 
 import com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;

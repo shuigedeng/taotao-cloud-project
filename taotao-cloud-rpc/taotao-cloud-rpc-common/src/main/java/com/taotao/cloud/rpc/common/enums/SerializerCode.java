@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.enums;
+package com.taotao.cloud.rpc.common.enums;
 
 public enum SerializerCode {
 	KRYO(0),// KRYO 序列化 方式

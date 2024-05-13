@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.consumer.support.broker;
+package com.taotao.cloud.mq.client.consumer.support.broker;
 
 import com.alibaba.fastjson.JSON;
 import com.github.houbb.heaven.util.net.NetUtil;

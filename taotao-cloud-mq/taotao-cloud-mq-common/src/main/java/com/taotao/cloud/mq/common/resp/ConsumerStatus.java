@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.resp;
+package com.taotao.cloud.mq.common.resp;
 
 
 /**

@@ -14,16 +14,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.rpc;
+package com.taotao.cloud.mq.consistency.raft.rpc;
 
 import com.alipay.remoting.BizContext;
 import com.alipay.remoting.rpc.RpcServer;
-import com.taotao.cloud.ttcmq.consistency.raft.changes.ClusterMembershipChanges;
-import com.taotao.cloud.ttcmq.consistency.raft.client.ClientKVReq;
-import com.taotao.cloud.ttcmq.consistency.raft.common.Peer;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.AentryParam;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.RvoteParam;
-import com.taotao.cloud.ttcmq.consistency.raft.impl.DefaultNode;
+import com.taotao.cloud.mq.consistency.raft.changes.ClusterMembershipChanges;
+import com.taotao.cloud.mq.consistency.raft.client.ClientKVReq;
+import com.taotao.cloud.mq.consistency.raft.common.Peer;
+import com.taotao.cloud.mq.consistency.raft.entity.AentryParam;
+import com.taotao.cloud.mq.consistency.raft.entity.RvoteParam;
+import com.taotao.cloud.mq.consistency.raft.impl.DefaultNode;
 import lombok.extern.slf4j.Slf4j;
 
 /**

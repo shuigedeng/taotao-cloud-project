@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.producer.dto;
+package com.taotao.cloud.mq.client.producer.dto;
 
 
 /**

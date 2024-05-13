@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.util;
+package com.taotao.cloud.mq.common.util;
 
 import com.github.houbb.heaven.util.util.CollectionUtil;
 import com.github.houbb.log.integration.core.Log;

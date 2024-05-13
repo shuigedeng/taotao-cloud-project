@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry;
+package com.taotao.cloud.rpc.registry.apiregistry;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.apiclient.Aspects;

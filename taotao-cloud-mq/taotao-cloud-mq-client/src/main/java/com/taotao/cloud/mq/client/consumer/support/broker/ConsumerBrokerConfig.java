@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.consumer.support.broker;
+package com.taotao.cloud.mq.client.consumer.support.broker;
 
 import com.github.houbb.load.balance.api.ILoadBalance;
 

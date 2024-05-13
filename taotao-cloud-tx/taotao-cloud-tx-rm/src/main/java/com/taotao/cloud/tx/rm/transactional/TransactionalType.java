@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.rm.transactional;
+package com.taotao.cloud.tx.rm.transactional;
 
 // 事务类型的枚举类
 public enum TransactionalType {

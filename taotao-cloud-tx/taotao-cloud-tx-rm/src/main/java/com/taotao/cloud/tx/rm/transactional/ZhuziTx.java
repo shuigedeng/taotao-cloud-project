@@ -1,7 +1,7 @@
-package com.taotao.cloud.ttctx.rm.transactional;
+package com.taotao.cloud.tx.rm.transactional;
 
 
-import com.taotao.cloud.ttctx.rm.util.Task;
+import com.taotao.cloud.tx.rm.util.Task;
 
 // 分布式事务 - 子事务对象
 public class ZhuziTx {

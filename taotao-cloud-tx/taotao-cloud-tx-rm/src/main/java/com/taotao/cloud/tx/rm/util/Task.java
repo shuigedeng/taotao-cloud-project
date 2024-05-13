@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttctx.rm.util;
+package com.taotao.cloud.tx.rm.util;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

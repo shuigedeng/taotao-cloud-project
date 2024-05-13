@@ -1,8 +1,8 @@
-package com.taotao.cloud.ttctx.rm.connection;
+package com.taotao.cloud.tx.rm.connection;
 
 
-import com.taotao.cloud.ttctx.rm.transactional.TransactionalType;
-import com.taotao.cloud.ttctx.rm.transactional.ZhuziTx;
+import com.taotao.cloud.tx.rm.transactional.TransactionalType;
+import com.taotao.cloud.tx.rm.transactional.ZhuziTx;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;

@@ -1,8 +1,8 @@
-package com.taotao.cloud.ttcrpc.common.idworker;
+package com.taotao.cloud.rpc.common.idworker;
 
 
-import com.taotao.cloud.ttcrpc.common.idworker.enums.ServerSelector;
-import com.taotao.cloud.ttcrpc.common.idworker.utils.TimeUtils;
+import com.taotao.cloud.rpc.common.idworker.enums.ServerSelector;
+import com.taotao.cloud.rpc.common.idworker.utils.TimeUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

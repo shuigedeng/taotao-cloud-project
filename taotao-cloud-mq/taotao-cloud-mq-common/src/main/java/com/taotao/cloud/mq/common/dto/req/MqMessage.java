@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.dto.req;
+package com.taotao.cloud.mq.common.dto.req;
 
 import java.util.List;
 

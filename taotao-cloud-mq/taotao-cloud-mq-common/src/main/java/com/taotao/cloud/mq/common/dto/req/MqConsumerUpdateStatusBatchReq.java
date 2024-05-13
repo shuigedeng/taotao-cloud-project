@@ -1,7 +1,7 @@
-package com.taotao.cloud.ttcmq.common.dto.req;
+package com.taotao.cloud.mq.common.dto.req;
 
 
-import com.taotao.cloud.ttcmq.common.dto.req.component.MqConsumerUpdateStatusDto;
+import com.taotao.cloud.mq.common.dto.req.component.MqConsumerUpdateStatusDto;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.constant;
+package com.taotao.cloud.mq.broker.constant;
 
 import com.github.houbb.heaven.response.respcode.RespCode;
 

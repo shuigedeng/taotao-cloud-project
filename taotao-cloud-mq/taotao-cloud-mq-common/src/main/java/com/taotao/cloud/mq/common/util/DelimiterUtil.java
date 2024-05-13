@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.util;
+package com.taotao.cloud.mq.common.util;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

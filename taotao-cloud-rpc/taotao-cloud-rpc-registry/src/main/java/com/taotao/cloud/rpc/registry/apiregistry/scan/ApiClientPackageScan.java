@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.scan;
+package com.taotao.cloud.rpc.registry.apiregistry.scan;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.reflect.ReflectUtils;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.apiclient;
+package com.taotao.cloud.rpc.registry.apiregistry.apiclient;
 
 import com.taotao.cloud.common.extension.StringUtils;
 import com.taotao.cloud.common.model.Callable;

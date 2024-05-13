@@ -1,13 +1,13 @@
-package com.taotao.cloud.ttcrpc.common.util;
+package com.taotao.cloud.rpc.common.util;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.common.utils.StringUtils;
-import com.taotao.cloud.ttcrpc.common.enums.LoadBalancerCode;
-import com.taotao.cloud.ttcrpc.common.exception.RpcException;
-import com.taotao.cloud.ttcrpc.common.loadbalancer.LoadBalancer;
+import com.taotao.cloud.rpc.common.enums.LoadBalancerCode;
+import com.taotao.cloud.rpc.common.exception.RpcException;
+import com.taotao.cloud.rpc.common.loadbalancer.LoadBalancer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

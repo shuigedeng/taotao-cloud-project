@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.factory;
+package com.taotao.cloud.rpc.common.factory;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.Map;

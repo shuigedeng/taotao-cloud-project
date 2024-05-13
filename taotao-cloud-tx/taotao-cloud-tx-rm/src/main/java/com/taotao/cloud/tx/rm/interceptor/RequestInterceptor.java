@@ -1,6 +1,6 @@
-package com.taotao.cloud.ttctx.rm.interceptor;
+package com.taotao.cloud.tx.rm.interceptor;
 
-import com.taotao.cloud.ttctx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;

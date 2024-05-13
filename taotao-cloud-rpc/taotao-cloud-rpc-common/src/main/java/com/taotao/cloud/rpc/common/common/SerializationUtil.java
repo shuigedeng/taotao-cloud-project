@@ -4,7 +4,7 @@
  * Date: 2020/2/27 10:44
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.common.common;
+package com.taotao.cloud.rpc.common.common;
 
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtobufIOUtil;

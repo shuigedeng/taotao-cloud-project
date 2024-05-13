@@ -4,7 +4,7 @@
  * Date: 2020/2/27 11:23
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.registry;
+package com.taotao.cloud.rpc.registry;
 
 import org.apache.zookeeper.*;
 import org.slf4j.Logger;

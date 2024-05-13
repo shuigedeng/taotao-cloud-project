@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.core;
+package com.taotao.cloud.mq.broker.core;
 
 import com.github.houbb.load.balance.api.ILoadBalance;
 import com.github.houbb.load.balance.api.impl.LoadBalances;

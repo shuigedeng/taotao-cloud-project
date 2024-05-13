@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.util;
+package com.taotao.cloud.mq.common.util;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;

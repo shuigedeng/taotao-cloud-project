@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.support.valid;
+package com.taotao.cloud.mq.broker.support.valid;
 
 
 /**

@@ -4,7 +4,7 @@
  * Date: 2020/2/27 11:09
  * Author: shuigedeng
  */
-package com.taotao.cloud.ttcrpc.common.common;
+package com.taotao.cloud.rpc.common.common;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

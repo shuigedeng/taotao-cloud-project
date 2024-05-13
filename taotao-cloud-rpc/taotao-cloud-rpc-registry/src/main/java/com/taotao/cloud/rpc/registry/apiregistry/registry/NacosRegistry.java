@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.registry;
+package com.taotao.cloud.rpc.registry.apiregistry.registry;
 
 import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.anno.INacosRegistry;

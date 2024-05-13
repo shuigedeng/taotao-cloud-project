@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.example.broker;
+package com.taotao.cloud.mq.example.broker;
 
 
 /**

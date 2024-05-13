@@ -14,10 +14,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package com.taotao.cloud.ttcmq.consistency.raft.client;
+package com.taotao.cloud.mq.consistency.raft.client;
 
-import com.taotao.cloud.ttcmq.consistency.raft.current.SleepHelper;
-import com.taotao.cloud.ttcmq.consistency.raft.entity.LogEntry;
+import com.taotao.cloud.mq.consistency.raft.current.SleepHelper;
+import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 import lombok.extern.slf4j.Slf4j;
 
 /**

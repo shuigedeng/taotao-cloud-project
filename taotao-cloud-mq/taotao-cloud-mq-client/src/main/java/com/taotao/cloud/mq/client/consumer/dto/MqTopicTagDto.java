@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.consumer.dto;
+package com.taotao.cloud.mq.client.consumer.dto;
 
 import java.util.Objects;
 

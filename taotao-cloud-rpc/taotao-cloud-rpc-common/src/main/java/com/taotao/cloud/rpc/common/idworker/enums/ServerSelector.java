@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.idworker.enums;
+package com.taotao.cloud.rpc.common.idworker.enums;
 
 /**
  * 锁常量

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.client.consumer.support.listener;
+package com.taotao.cloud.mq.client.consumer.support.listener;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.registry.apiregistry.loadbalance;
+package com.taotao.cloud.rpc.registry.apiregistry.loadbalance;
 
 import com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;

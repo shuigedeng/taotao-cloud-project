@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.broker.dto;
+package com.taotao.cloud.mq.broker.dto;
 
 import io.netty.channel.Channel;
 

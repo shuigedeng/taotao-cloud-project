@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcrpc.common.util;
+package com.taotao.cloud.rpc.common.util;
 
 /**
  * AES 加解密工具

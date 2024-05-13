@@ -1,4 +1,4 @@
-package com.taotao.cloud.ttcmq.common.support.hook;
+package com.taotao.cloud.mq.common.support.hook;
 
 /**
  * rpc 关闭 hook
