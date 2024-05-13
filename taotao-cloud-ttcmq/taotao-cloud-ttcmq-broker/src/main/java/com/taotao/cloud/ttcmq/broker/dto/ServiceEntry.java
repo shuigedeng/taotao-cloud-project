@@ -1,0 +1,30 @@
+package com.taotao.cloud.ttcmq.broker.dto;
+
+
+/**
+ * @author shuigedeng
+ * @since 2024.05
+ */
+public class ServiceEntry extends RpcAddress {
+
+    /**
+     * 分组名称
+     */
+    private String groupName;
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceEntry{" +
+                "groupName='" + groupName + '\'' +
+                "} " + super.toString();
+    }
+
+}
