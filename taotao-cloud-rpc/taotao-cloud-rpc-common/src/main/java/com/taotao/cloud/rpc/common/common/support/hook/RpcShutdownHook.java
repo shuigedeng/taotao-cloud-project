@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.support.hook;
+package com.taotao.cloud.rpc.common.common.support.hook;
 
 /**
  * rpc 关闭 hook

@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.config.application.impl;
+package com.taotao.cloud.rpc.common.common.config.application.impl;
 
-import com.github.houbb.rpc.common.config.application.ApplicationConfig;
+import com.taotao.cloud.rpc.common.common.config.application.ApplicationConfig;
 
 /**
  * 应用配置信息

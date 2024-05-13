@@ -1,6 +1,6 @@
-package com.github.houbb.thread.pool.datasource;
+package com.taotao.cloud.jdbcpool.datasource;
 
-import com.github.houbb.thread.pool.api.IDataSourceConfig;
+import com.taotao.cloud.jdbcpool.api.IDataSourceConfig;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;

@@ -1,13 +1,4 @@
-package com.github.houbb.rpc.client.support.calltype.impl;
-
-import com.github.houbb.heaven.annotation.ThreadSafe;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.client.support.calltype.CallTypeStrategy;
-import com.github.houbb.rpc.common.rpc.domain.RpcRequest;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
-import com.github.houbb.rpc.common.rpc.domain.impl.RpcResponses;
+package com.taotao.cloud.rpc.client.client.support.calltype.impl;
 
 /**
  * one way 调用服务实现类

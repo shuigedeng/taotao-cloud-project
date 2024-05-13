@@ -1,11 +1,8 @@
-package com.github.houbb.rpc.client.proxy.impl;
+package com.taotao.cloud.rpc.client.client.proxy.impl;
 
-import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
-import com.github.houbb.rpc.client.proxy.RemoteInvokeService;
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.common.rpc.domain.RpcChannelFuture;
-import com.github.houbb.rpc.common.rpc.domain.RpcRequest;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeService;
+import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
 import io.netty.channel.Channel;
 
 /**

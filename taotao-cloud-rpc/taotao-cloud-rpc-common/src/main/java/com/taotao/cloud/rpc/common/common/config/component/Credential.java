@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.config.component;
+package com.taotao.cloud.rpc.common.common.config.component;
 
 /**
  * 凭证信息

@@ -1,26 +1,14 @@
-package com.github.houbb.rpc.client.proxy.impl;
+package com.taotao.cloud.rpc.client.client.proxy.impl;
 
-import com.github.houbb.heaven.support.handler.IHandler;
-import com.github.houbb.heaven.util.id.impl.Ids;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.load.balance.api.ILoadBalance;
-import com.github.houbb.load.balance.api.impl.LoadBalanceContext;
-import com.github.houbb.load.balance.support.server.IServer;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
-import com.github.houbb.rpc.client.proxy.RemoteInvokeService;
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.client.support.calltype.CallTypeStrategy;
-import com.github.houbb.rpc.client.support.calltype.impl.CallTypeStrategyFactory;
-import com.github.houbb.rpc.client.support.fail.FailStrategy;
-import com.github.houbb.rpc.client.support.fail.impl.FailStrategyFactory;
-import com.github.houbb.rpc.client.support.filter.RpcFilter;
-import com.github.houbb.rpc.client.support.register.ClientRegisterManager;
-import com.github.houbb.rpc.common.rpc.domain.RpcChannelFuture;
-import com.github.houbb.rpc.common.rpc.domain.RpcRequest;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeService;
+import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
+import com.taotao.cloud.rpc.client.client.support.calltype.CallTypeStrategy;
+import com.taotao.cloud.rpc.client.client.support.calltype.impl.CallTypeStrategyFactory;
+import com.taotao.cloud.rpc.client.client.support.fail.FailStrategy;
+import com.taotao.cloud.rpc.client.client.support.fail.impl.FailStrategyFactory;
+import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
 import io.netty.channel.Channel;
 
 import java.util.List;

@@ -1,9 +1,5 @@
 package com.taotao.cloud.jdbcpool;
 
-import com.github.houbb.heaven.util.io.FileUtil;
-import java.util.Map;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
  * <p> project: jdbc-pool-GenTest </p>

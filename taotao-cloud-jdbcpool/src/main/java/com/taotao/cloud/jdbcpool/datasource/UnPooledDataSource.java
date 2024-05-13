@@ -1,6 +1,6 @@
-package com.github.houbb.thread.pool.datasource;
+package com.taotao.cloud.jdbcpool.datasource;
 
-import com.github.houbb.thread.pool.util.DriverClassUtil;
+import com.taotao.cloud.jdbcpool.util.DriverClassUtil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

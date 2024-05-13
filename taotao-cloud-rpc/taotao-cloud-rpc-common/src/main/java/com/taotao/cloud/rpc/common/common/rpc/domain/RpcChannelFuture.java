@@ -1,23 +1,13 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.common.rpc.domain;
+package com.taotao.cloud.rpc.common.common.rpc.domain;
 
-import com.github.houbb.load.balance.support.server.IServer;
-import com.github.houbb.rpc.common.api.Destroyable;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
+import com.taotao.cloud.rpc.common.common.api.Destroyable;
+import com.taotao.cloud.rpc.common.common.config.component.RpcAddress;
 
 import io.netty.channel.ChannelFuture;
 
 /**
  * <p> rpc channel future 接口</p>
- *
- * <pre> Created: 2019/10/26 9:39 上午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.9
  */
 public interface RpcChannelFuture extends IServer {

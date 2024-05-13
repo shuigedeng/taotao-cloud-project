@@ -1,4 +1,4 @@
-//package com.github.houbb.rpc.client.constant.enums;
+//package com.taotao.cloud.rpc.client.client.constant.enums;
 //
 ///**
 // * 调用方式枚举

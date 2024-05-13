@@ -1,6 +1,5 @@
 package com.taotao.cloud.mq.broker.dto.consumer;
 
-import com.github.houbb.load.balance.support.server.IServer;
 
 import java.util.Objects;
 

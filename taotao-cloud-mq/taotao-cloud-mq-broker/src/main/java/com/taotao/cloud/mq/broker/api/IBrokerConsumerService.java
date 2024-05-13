@@ -6,7 +6,6 @@
 package com.taotao.cloud.mq.broker.api;
 
 
-import com.github.houbb.load.balance.api.ILoadBalance;
 import io.netty.channel.Channel;
 
 import java.util.List;

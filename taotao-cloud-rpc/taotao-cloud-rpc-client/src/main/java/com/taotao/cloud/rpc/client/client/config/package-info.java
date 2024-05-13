@@ -1,1 +1,1 @@
-package com.github.houbb.rpc.client.config;
+package com.taotao.cloud.rpc.client.client.config;

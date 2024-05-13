@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.support.status.service;
+package com.taotao.cloud.rpc.common.common.support.status.service;
 
 /**
  * 状态管理

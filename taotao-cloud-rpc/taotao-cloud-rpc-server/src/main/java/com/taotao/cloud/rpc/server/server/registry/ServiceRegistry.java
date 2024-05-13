@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.server.registry;
+package com.taotao.cloud.rpc.server.server.registry;
 
-import com.github.houbb.rpc.server.config.service.ServiceConfig;
+import com.taotao.cloud.rpc.server.server.config.service.ServiceConfig;
 
 /**
  * 服务注册类

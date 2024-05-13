@@ -1,11 +1,6 @@
-package com.github.houbb.rpc.common.support.inteceptor.impl;
-
-import com.github.houbb.heaven.support.pipeline.Pipeline;
-import com.github.houbb.heaven.support.pipeline.impl.DefaultPipeline;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptor;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptorContext;
+package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
 
 import java.util.List;
 

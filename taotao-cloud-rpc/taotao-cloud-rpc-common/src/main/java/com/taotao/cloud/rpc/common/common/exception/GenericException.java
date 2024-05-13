@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.exception;
+package com.taotao.cloud.rpc.common.common.exception;
 
 /**
  * 泛化异常

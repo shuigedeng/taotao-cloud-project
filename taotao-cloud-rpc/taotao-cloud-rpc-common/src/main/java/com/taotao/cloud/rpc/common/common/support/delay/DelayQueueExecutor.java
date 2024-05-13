@@ -1,7 +1,5 @@
-package com.github.houbb.rpc.common.support.delay;
+package com.taotao.cloud.rpc.common.common.support.delay;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 
 import java.util.concurrent.DelayQueue;
 

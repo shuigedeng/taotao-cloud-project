@@ -1,6 +1,6 @@
-package com.github.houbb.thread.pool.connection;
+package com.taotao.cloud.jdbcpool.connection;
 
-import com.github.houbb.thread.pool.api.IPooledDataSourceConfig;
+import com.taotao.cloud.jdbcpool.api.IPooledDataSourceConfig;
 
 import java.sql.Connection;
 

@@ -1,8 +1,5 @@
 package com.taotao.cloud.mq.common.util;
 
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

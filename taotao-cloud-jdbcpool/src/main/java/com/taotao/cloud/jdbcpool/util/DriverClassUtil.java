@@ -1,8 +1,8 @@
-package com.github.houbb.thread.pool.util;
+package com.taotao.cloud.jdbcpool.util;
 
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.lang.StringUtil;
-import com.github.houbb.thread.pool.exception.JdbcPoolException;
+import com.taotao.cloud.heaven.util.common.ArgUtil;
+import com.taotao.cloud.heaven.util.lang.StringUtil;
+import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,5 @@
-package com.github.houbb.rpc.client.model;
+package com.taotao.cloud.rpc.client.client.model;
 
-import com.github.houbb.rpc.common.config.component.RpcAddress;
 
 import java.util.List;
 

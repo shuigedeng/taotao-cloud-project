@@ -1,4 +1,4 @@
-package com.github.houbb.thread.pool.model;
+package com.taotao.cloud.jdbcpool.model;
 
 import java.io.Serializable;
 

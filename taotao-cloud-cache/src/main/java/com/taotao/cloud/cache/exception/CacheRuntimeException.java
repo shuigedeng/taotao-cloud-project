@@ -1,4 +1,4 @@
-package com.github.houbb.cache.core.exception;
+package com.taotao.cloud.cache.exception;
 
 /**
  * 缓存运行时异常

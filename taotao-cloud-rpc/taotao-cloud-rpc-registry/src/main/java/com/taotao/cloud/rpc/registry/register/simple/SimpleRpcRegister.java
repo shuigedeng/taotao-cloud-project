@@ -1,25 +1,6 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.register.simple;
+package com.taotao.cloud.rpc.registry.register.simple;
 
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
-import com.github.houbb.rpc.common.rpc.domain.impl.DefaultRpcResponse;
-import com.github.houbb.rpc.common.util.IpUtils;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.ServerHeartbeatBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.client.RegisterClientService;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
-import com.github.houbb.rpc.register.simple.server.RegisterServerService;
-import com.github.houbb.rpc.register.simple.server.impl.DefaultRegisterServerService;
-import com.github.houbb.rpc.register.spi.RpcRegister;
 import io.netty.channel.Channel;
 
 import java.util.*;
@@ -38,7 +19,6 @@ import java.util.concurrent.TimeUnit;
  * （2）各种关系之间的通讯类
  * （3）domain 层
  *
- * @author houbinbin
  * @since 0.0.8
  */
 public class SimpleRpcRegister implements RpcRegister {

@@ -1,6 +1,6 @@
-package com.github.houbb.cache.core.model;
+package com.taotao.cloud.cache.model;
 
-import com.github.houbb.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.api.ICacheEntry;
 
 /**
  * key value 的明细信息

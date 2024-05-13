@@ -1,13 +1,10 @@
-package com.github.houbb.cache.core.support.struct.lru.impl;
+package com.taotao.cloud.cache.support.struct.lru.impl;
 
-import com.github.houbb.cache.api.ICacheEntry;
-import com.github.houbb.cache.core.exception.CacheRuntimeException;
-import com.github.houbb.cache.core.model.CacheEntry;
-import com.github.houbb.cache.core.model.CircleListNode;
-import com.github.houbb.cache.core.support.struct.lru.ILruMap;
-import com.github.houbb.heaven.util.lang.ObjectUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.exception.CacheRuntimeException;
+import com.taotao.cloud.cache.model.CacheEntry;
+import com.taotao.cloud.cache.model.CircleListNode;
+import com.taotao.cloud.cache.support.struct.lru.ILruMap;
 
 import java.util.HashMap;
 import java.util.Map;

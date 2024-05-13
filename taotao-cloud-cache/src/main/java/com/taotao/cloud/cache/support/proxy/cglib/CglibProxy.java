@@ -1,10 +1,10 @@
-package com.github.houbb.cache.core.support.proxy.cglib;
+package com.taotao.cloud.cache.support.proxy.cglib;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.core.support.proxy.ICacheProxy;
-import com.github.houbb.cache.core.support.proxy.bs.CacheProxyBs;
-import com.github.houbb.cache.core.support.proxy.bs.CacheProxyBsContext;
-import com.github.houbb.cache.core.support.proxy.bs.ICacheProxyBsContext;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.support.proxy.ICacheProxy;
+import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBs;
+import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBsContext;
+import com.taotao.cloud.cache.support.proxy.bs.ICacheProxyBsContext;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

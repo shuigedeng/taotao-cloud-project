@@ -1,14 +1,14 @@
-package com.github.houbb.thread.pool.datasource;
+package com.taotao.cloud.jdbcpool.datasource;
 
-import com.github.houbb.heaven.util.lang.StringUtil;
-import com.github.houbb.heaven.util.util.DateUtil;
-import com.github.houbb.heaven.util.util.Optional;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.thread.pool.connection.IPooledConnection;
-import com.github.houbb.thread.pool.connection.PooledConnection;
-import com.github.houbb.thread.pool.exception.JdbcPoolException;
-import com.github.houbb.thread.pool.util.DriverClassUtil;
+import com.taotao.cloud.heaven.util.lang.StringUtil;
+import com.taotao.cloud.heaven.util.util.DateUtil;
+import com.taotao.cloud.heaven.util.util.Optional;
+import com.taotao.cloud.log.integration.core.Log;
+import com.taotao.cloud.log.integration.core.LogFactory;
+import com.taotao.cloud.jdbcpool.connection.IPooledConnection;
+import com.taotao.cloud.jdbcpool.connection.PooledConnection;
+import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
+import com.taotao.cloud.jdbcpool.util.DriverClassUtil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

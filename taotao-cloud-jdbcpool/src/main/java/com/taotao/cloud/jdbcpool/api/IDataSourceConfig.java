@@ -1,5 +1,6 @@
-package com.github.houbb.thread.pool.api;
+package com.taotao.cloud.jdbcpool.api;
 
+import com.taotao.cloud.jdbcpool.api.IConfig;
 import javax.sql.DataSource;
 
 /**

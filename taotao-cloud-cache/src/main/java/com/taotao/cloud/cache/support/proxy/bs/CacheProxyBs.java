@@ -1,12 +1,12 @@
-package com.github.houbb.cache.core.support.proxy.bs;
+package com.taotao.cloud.cache.support.proxy.bs;
 
-import com.github.houbb.cache.annotation.CacheInterceptor;
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheInterceptor;
-import com.github.houbb.cache.api.ICachePersist;
-import com.github.houbb.cache.core.support.interceptor.CacheInterceptorContext;
-import com.github.houbb.cache.core.support.interceptor.CacheInterceptors;
-import com.github.houbb.cache.core.support.persist.CachePersistAof;
+import com.taotao.cloud.cache.annotation.CacheInterceptor;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheInterceptor;
+import com.taotao.cloud.cache.api.ICachePersist;
+import com.taotao.cloud.cache.support.interceptor.CacheInterceptorContext;
+import com.taotao.cloud.cache.support.interceptor.CacheInterceptors;
+import com.taotao.cloud.cache.support.persist.CachePersistAof;
 
 import java.util.List;
 

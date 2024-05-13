@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.rpc.domain.impl;
+package com.taotao.cloud.rpc.common.common.rpc.domain.impl;
 
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 
 /**
  * 默认 rpc 响应

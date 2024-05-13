@@ -1,6 +1,5 @@
 package com.taotao.cloud.mq.common.rpc;
 
-import com.github.houbb.load.balance.support.server.IServer;
 
 /**
  * @author shuigedeng

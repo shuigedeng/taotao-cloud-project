@@ -1,9 +1,7 @@
-package com.github.houbb.rpc.register.domain.message.impl;
+package com.taotao.cloud.rpc.registry.register.domain.message.impl;
 
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.id.impl.Ids;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.NotifyMessageHeader;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessage;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessageHeader;
 
 /**
  * 通知消息工具类

@@ -1,14 +1,6 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.common.config.component;
+package com.taotao.cloud.rpc.common.common.config.component;
 
-import com.github.houbb.heaven.constant.PunctuationConst;
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.heaven.util.lang.NumUtil;
 
 import java.util.List;
 

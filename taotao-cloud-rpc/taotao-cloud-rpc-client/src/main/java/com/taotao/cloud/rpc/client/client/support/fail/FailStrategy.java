@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.client.support.fail;
+package com.taotao.cloud.rpc.client.client.support.fail;
 
-import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
 
 /**
  * 失败策略

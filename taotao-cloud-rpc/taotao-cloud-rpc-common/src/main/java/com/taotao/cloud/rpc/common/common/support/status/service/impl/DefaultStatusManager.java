@@ -1,8 +1,7 @@
-package com.github.houbb.rpc.common.support.status.service.impl;
+package com.taotao.cloud.rpc.common.common.support.status.service.impl;
 
-import com.github.houbb.heaven.annotation.ThreadSafe;
-import com.github.houbb.rpc.common.support.status.enums.StatusEnum;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
+import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
+import com.taotao.cloud.rpc.common.common.support.status.service.StatusManager;
 
 /**
  * 状态管理

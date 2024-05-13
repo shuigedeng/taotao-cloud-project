@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.register.domain.message.body;
+package com.taotao.cloud.rpc.registry.register.domain.message.body;
 
 import java.io.Serializable;
 

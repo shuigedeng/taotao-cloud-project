@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.support.inteceptor.impl;
+package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 
 /**
  * 什么都不做的拦截器

@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.config.protocol.impl;
+package com.taotao.cloud.rpc.common.common.config.protocol.impl;
 
-import com.github.houbb.rpc.common.config.protocol.ProtocolConfig;
+import com.taotao.cloud.rpc.common.common.config.protocol.ProtocolConfig;
 
 /**
  * 协议配置信息

@@ -1,4 +1,4 @@
-package com.github.houbb.cache.api;
+package com.taotao.cloud.cache.api;
 
 /**
  * 缓存明细信息

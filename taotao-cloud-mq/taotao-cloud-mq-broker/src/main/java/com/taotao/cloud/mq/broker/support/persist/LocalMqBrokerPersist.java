@@ -1,11 +1,5 @@
 package com.taotao.cloud.mq.broker.support.persist;
 
-import com.alibaba.fastjson.JSON;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.heaven.util.util.MapUtil;
-import com.github.houbb.heaven.util.util.regex.RegexUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 import io.netty.channel.Channel;
 
 import java.util.ArrayList;

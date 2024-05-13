@@ -1,32 +1,12 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
+package com.taotao.cloud.rpc.client.client.handler;
 
-package com.github.houbb.rpc.client.handler;
-
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.client.support.register.ClientRegisterManager;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterAddNotifyBody;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterRemoveNotifyBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
+import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * <p> 客户端注册中心处理类 </p>
- *
- * <pre> Created: 2019/10/16 11:30 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.8
  */
 public class RpcClientRegisterHandler extends SimpleChannelInboundHandler {

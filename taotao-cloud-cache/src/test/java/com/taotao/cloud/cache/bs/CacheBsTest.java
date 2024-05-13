@@ -1,16 +1,5 @@
 package com.taotao.cloud.cache.bs;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.core.support.evict.CacheEvicts;
-import com.github.houbb.cache.core.support.load.CacheLoads;
-import com.github.houbb.cache.core.support.map.Maps;
-import com.github.houbb.cache.core.support.persist.CachePersists;
-import com.taotao.cloud.cache.listener.MyRemoveListener;
-import com.taotao.cloud.cache.listener.MySlowListener;
-import com.taotao.cloud.cache.load.MyCacheLoad;
-import java.util.concurrent.TimeUnit;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * 缓存引导类测试

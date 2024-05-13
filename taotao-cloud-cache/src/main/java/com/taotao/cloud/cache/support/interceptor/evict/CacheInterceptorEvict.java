@@ -1,10 +1,8 @@
-package com.github.houbb.cache.core.support.interceptor.evict;
+package com.taotao.cloud.cache.support.interceptor.evict;
 
-import com.github.houbb.cache.api.ICacheEvict;
-import com.github.houbb.cache.api.ICacheInterceptor;
-import com.github.houbb.cache.api.ICacheInterceptorContext;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICacheEvict;
+import com.taotao.cloud.cache.api.ICacheInterceptor;
+import com.taotao.cloud.cache.api.ICacheInterceptorContext;
 
 import java.lang.reflect.Method;
 

@@ -1,7 +1,5 @@
-package com.github.houbb.rpc.common.support.hook;
+package com.taotao.cloud.rpc.common.common.support.hook;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 
 /**
  * rpc 关闭 hook

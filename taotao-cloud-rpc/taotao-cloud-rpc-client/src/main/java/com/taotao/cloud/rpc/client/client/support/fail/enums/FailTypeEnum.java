@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.client.support.fail.enums;
+package com.taotao.cloud.rpc.client.client.support.fail.enums;
 
 /**
  * 失败类型枚举

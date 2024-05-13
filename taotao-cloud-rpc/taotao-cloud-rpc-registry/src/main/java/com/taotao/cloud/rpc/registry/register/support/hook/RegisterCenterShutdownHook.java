@@ -1,13 +1,11 @@
-package com.github.houbb.rpc.register.support.hook;
+package com.taotao.cloud.rpc.registry.register.support.hook;
 
-import com.github.houbb.heaven.util.net.NetUtil;
-import com.github.houbb.rpc.common.support.hook.AbstractShutdownHook;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterAddNotifyBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.client.RegisterClientService;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
-import com.github.houbb.rpc.register.simple.server.RegisterServerService;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessage;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterAddNotifyBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.impl.NotifyMessages;
+import com.taotao.cloud.rpc.registry.register.simple.client.RegisterClientService;
+import com.taotao.cloud.rpc.registry.register.simple.constant.MessageTypeConst;
+import com.taotao.cloud.rpc.registry.register.simple.server.RegisterServerService;
 import io.netty.channel.Channel;
 
 import java.util.Collection;

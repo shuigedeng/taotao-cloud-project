@@ -1,22 +1,13 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.register.spi;
+package com.taotao.cloud.rpc.registry.register.spi;
 
 
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.message.body.ServerHeartbeatBody;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.ServerHeartbeatBody;
 import io.netty.channel.Channel;
 
 /**
  * <p> 注册中心接口 </p>
- *
- * <pre> Created: 2019/10/23 8:01 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.8
  */
 public interface RpcRegister {

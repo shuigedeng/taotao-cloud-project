@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.register.simple.constant;
+package com.taotao.cloud.rpc.registry.register.simple.constant;
 
 /**
  * 注册消息枚举

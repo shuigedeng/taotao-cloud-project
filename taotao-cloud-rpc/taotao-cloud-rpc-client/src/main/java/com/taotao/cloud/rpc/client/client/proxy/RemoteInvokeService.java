@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.client.proxy;
+package com.taotao.cloud.rpc.client.client.proxy;
 
 /**
  * 远程调用服务

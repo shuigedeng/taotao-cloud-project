@@ -1,17 +1,10 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.client.support.register;
+package com.taotao.cloud.rpc.client.client.support.register;
 
-import com.github.houbb.rpc.client.model.ClientQueryServerChannelConfig;
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.common.rpc.domain.RpcChannelFuture;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterAddNotifyBody;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterRemoveNotifyBody;
+import com.taotao.cloud.rpc.client.client.model.ClientQueryServerChannelConfig;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterAddNotifyBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterRemoveNotifyBody;
 import io.netty.channel.Channel;
 
 import java.util.List;

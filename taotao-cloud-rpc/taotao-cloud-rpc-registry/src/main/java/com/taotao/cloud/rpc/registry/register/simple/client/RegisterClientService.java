@@ -3,10 +3,10 @@
  * rpc All rights reserved.
  */
 
-package com.github.houbb.rpc.register.simple.client;
+package com.taotao.cloud.rpc.registry.register.simple.client;
 
 
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 import io.netty.channel.Channel;
 
 import java.util.Collection;

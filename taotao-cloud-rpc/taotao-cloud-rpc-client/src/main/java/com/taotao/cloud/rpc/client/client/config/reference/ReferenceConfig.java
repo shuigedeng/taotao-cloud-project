@@ -1,10 +1,6 @@
-package com.github.houbb.rpc.client.config.reference;
+package com.taotao.cloud.rpc.client.client.config.reference;
 
-import com.github.houbb.load.balance.api.ILoadBalance;
-import com.github.houbb.rpc.client.support.fail.enums.FailTypeEnum;
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptor;
-import com.github.houbb.rpc.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
 
 /**
  * 引用配置类

@@ -1,11 +1,7 @@
-package com.github.houbb.rpc.common.support.resource.impl;
+package com.taotao.cloud.rpc.common.common.support.resource.impl;
 
-import com.github.houbb.heaven.annotation.ThreadSafe;
-import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.api.Destroyable;
-import com.github.houbb.rpc.common.support.resource.ResourceManager;
+import com.taotao.cloud.rpc.common.common.api.Destroyable;
+import com.taotao.cloud.rpc.common.common.support.resource.ResourceManager;
 
 import java.util.List;
 

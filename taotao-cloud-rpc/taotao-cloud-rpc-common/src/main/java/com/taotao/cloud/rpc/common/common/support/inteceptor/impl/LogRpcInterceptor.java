@@ -1,8 +1,6 @@
-package com.github.houbb.rpc.common.support.inteceptor.impl;
+package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptorContext;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
 
 import java.util.Arrays;
 

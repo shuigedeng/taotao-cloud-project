@@ -1,11 +1,7 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * async All rights reserved.
- */
 
-package com.github.houbb.cache.core.support.proxy.none;
+package com.taotao.cloud.cache.support.proxy.none;
 
-import com.github.houbb.cache.core.support.proxy.ICacheProxy;
+import com.taotao.cloud.cache.support.proxy.ICacheProxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -13,10 +9,6 @@ import java.lang.reflect.Method;
 /**
  * <p> 没有代理 </p>
  *
- * <pre> Created: 2019/3/5 10:23 PM  </pre>
- * <pre> Project: cache  </pre>
- *
- * @author houbinbin
  * @since 0.0.4
  */
 public class NoneProxy implements InvocationHandler, ICacheProxy {

@@ -1,7 +1,5 @@
-package com.github.houbb.rpc.common.util;
+package com.taotao.cloud.rpc.common.common.util;
 
-import com.github.houbb.heaven.annotation.CommonEager;
-import com.github.houbb.heaven.response.exception.CommonRuntimeException;
 
 import java.util.concurrent.TimeUnit;
 

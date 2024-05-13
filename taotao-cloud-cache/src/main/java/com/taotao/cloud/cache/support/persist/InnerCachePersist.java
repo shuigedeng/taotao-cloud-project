@@ -1,9 +1,7 @@
-package com.github.houbb.cache.core.support.persist;
+package com.taotao.cloud.cache.support.persist;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICachePersist;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICachePersist;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

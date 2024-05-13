@@ -1,7 +1,5 @@
 package com.taotao.cloud.jdbcpool;
 
-import com.github.houbb.heaven.util.util.DateUtil;
-import com.github.houbb.thread.pool.exception.JdbcPoolException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.Test;

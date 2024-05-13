@@ -1,25 +1,16 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * async All rights reserved.
- */
 
-package com.github.houbb.cache.core.support.proxy;
+package com.taotao.cloud.cache.support.proxy;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.core.support.proxy.cglib.CglibProxy;
-import com.github.houbb.cache.core.support.proxy.dynamic.DynamicProxy;
-import com.github.houbb.cache.core.support.proxy.none.NoneProxy;
-import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.support.proxy.cglib.CglibProxy;
+import com.taotao.cloud.cache.support.proxy.dynamic.DynamicProxy;
+import com.taotao.cloud.cache.support.proxy.none.NoneProxy;
 
 import java.lang.reflect.Proxy;
 
 /**
  * <p> 代理信息 </p>
  *
- * <pre> Created: 2019/3/8 10:38 AM  </pre>
- * <pre> Project: async  </pre>
- *
- * @author houbinbin
  * @since 0.0.4
  */
 public final class CacheProxy {

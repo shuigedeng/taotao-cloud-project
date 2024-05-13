@@ -1,16 +1,10 @@
-package com.github.houbb.rpc.server.support.register;
+package com.taotao.cloud.rpc.server.server.support.register;
 
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.net.NetUtil;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.ServerHeartbeatBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessage;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.ServerHeartbeatBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.impl.NotifyMessages;
+import com.taotao.cloud.rpc.registry.register.simple.constant.MessageTypeConst;
 import io.netty.channel.Channel;
 
 import java.util.Collection;

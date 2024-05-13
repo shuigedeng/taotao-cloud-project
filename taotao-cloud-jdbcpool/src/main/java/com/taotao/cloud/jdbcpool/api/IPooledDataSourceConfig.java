@@ -1,6 +1,6 @@
-package com.github.houbb.thread.pool.api;
+package com.taotao.cloud.jdbcpool.api;
 
-import com.github.houbb.thread.pool.connection.IPooledConnection;
+import com.taotao.cloud.jdbcpool.connection.IPooledConnection;
 
 /**
  * 池化的接口

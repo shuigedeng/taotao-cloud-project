@@ -1,8 +1,6 @@
-package com.github.houbb.rpc.client.support.calltype;
+package com.taotao.cloud.rpc.client.client.support.calltype;
 
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.common.rpc.domain.RpcRequest;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
+import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
 
 /**
  * 调用方式上下文

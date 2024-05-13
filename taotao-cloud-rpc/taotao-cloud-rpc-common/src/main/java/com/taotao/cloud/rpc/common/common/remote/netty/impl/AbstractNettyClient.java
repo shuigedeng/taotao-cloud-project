@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.remote.netty.impl;
+package com.taotao.cloud.rpc.common.common.remote.netty.impl;
 
-import com.github.houbb.rpc.common.remote.netty.NettyClient;
+import com.taotao.cloud.rpc.common.common.remote.netty.NettyClient;
 import io.netty.channel.ChannelHandler;
 
 /**

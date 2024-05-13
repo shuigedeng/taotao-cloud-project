@@ -1,13 +1,11 @@
-package com.github.houbb.cache.core.support.evict;
+package com.taotao.cloud.cache.support.evict;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheEntry;
-import com.github.houbb.cache.api.ICacheEvictContext;
-import com.github.houbb.cache.core.model.CacheEntry;
-import com.github.houbb.cache.core.support.struct.lru.ILruMap;
-import com.github.houbb.cache.core.support.struct.lru.impl.LruMapCircleList;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.model.CacheEntry;
+import com.taotao.cloud.cache.support.struct.lru.ILruMap;
+import com.taotao.cloud.cache.support.struct.lru.impl.LruMapCircleList;
 
 /**
  * 淘汰策略-clock 算法

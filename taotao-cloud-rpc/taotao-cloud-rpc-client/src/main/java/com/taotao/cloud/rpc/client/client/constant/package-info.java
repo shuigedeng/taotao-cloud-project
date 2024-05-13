@@ -1,1 +1,1 @@
-package com.github.houbb.rpc.client.constant;
+package com.taotao.cloud.rpc.client.client.constant;

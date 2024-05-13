@@ -1,7 +1,7 @@
-package com.github.houbb.cache.core.support.interceptor;
+package com.taotao.cloud.cache.support.interceptor;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheInterceptorContext;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheInterceptorContext;
 
 import java.lang.reflect.Method;
 

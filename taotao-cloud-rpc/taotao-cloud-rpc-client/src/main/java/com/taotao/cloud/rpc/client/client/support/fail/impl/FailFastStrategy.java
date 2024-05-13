@@ -1,9 +1,7 @@
-package com.github.houbb.rpc.client.support.fail.impl;
+package com.taotao.cloud.rpc.client.client.support.fail.impl;
 
-import com.github.houbb.heaven.annotation.ThreadSafe;
-import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
-import com.github.houbb.rpc.client.support.fail.FailStrategy;
-import com.github.houbb.rpc.common.rpc.domain.impl.RpcResponses;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
+import com.taotao.cloud.rpc.client.client.support.fail.FailStrategy;
 
 /**
  * 快速失败策略

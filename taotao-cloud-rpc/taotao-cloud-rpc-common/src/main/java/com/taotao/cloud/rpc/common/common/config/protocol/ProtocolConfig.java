@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.config.protocol;
+package com.taotao.cloud.rpc.common.common.config.protocol;
 
 /**
  * 协议配置信息

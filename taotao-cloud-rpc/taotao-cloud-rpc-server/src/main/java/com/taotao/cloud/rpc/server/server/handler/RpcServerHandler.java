@@ -1,16 +1,6 @@
-package com.github.houbb.rpc.server.handler;
+package com.taotao.cloud.rpc.server.server.handler;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
-import com.github.houbb.rpc.common.rpc.domain.RpcRequest;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
-import com.github.houbb.rpc.common.rpc.domain.impl.DefaultRpcResponse;
-import com.github.houbb.rpc.common.rpc.domain.impl.RpcResponseFactory;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.status.enums.StatusEnum;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
-import com.github.houbb.rpc.server.service.impl.DefaultServiceFactory;
+import com.taotao.cloud.rpc.server.server.service.impl.DefaultServiceFactory;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

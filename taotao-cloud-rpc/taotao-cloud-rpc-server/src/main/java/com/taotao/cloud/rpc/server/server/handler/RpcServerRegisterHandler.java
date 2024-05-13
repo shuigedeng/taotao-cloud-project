@@ -1,14 +1,6 @@
-package com.github.houbb.rpc.server.handler;
+package com.taotao.cloud.rpc.server.server.handler;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterAddNotifyBody;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterRemoveNotifyBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
-import com.github.houbb.rpc.server.support.register.ServerRegisterManager;
+import com.taotao.cloud.rpc.server.server.support.register.ServerRegisterManager;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

@@ -1,9 +1,9 @@
-package com.github.houbb.thread.pool.connection;
+package com.taotao.cloud.jdbcpool.connection;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.thread.pool.api.IPooledDataSourceConfig;
-import com.github.houbb.thread.pool.exception.JdbcPoolException;
+import com.taotao.cloud.log.integration.core.Log;
+import com.taotao.cloud.log.integration.core.LogFactory;
+import com.taotao.cloud.jdbcpool.api.IPooledDataSourceConfig;
+import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
 
 import java.sql.*;
 import java.util.Map;

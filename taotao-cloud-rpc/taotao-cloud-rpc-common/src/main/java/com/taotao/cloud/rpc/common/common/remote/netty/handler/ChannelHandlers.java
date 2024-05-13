@@ -1,11 +1,9 @@
-package com.github.houbb.rpc.common.remote.netty.handler;
+package com.taotao.cloud.rpc.common.common.remote.netty.handler;
 
-import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.common.remote.netty.impl.DefaultNettyClient;
-import com.github.houbb.rpc.common.rpc.domain.RpcChannelFuture;
-import com.github.houbb.rpc.common.rpc.domain.impl.DefaultRpcChannelFuture;
+import com.taotao.cloud.rpc.common.common.config.component.RpcAddress;
+import com.taotao.cloud.rpc.common.common.remote.netty.impl.DefaultNettyClient;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcChannelFuture;
+import com.taotao.cloud.rpc.common.common.rpc.domain.impl.DefaultRpcChannelFuture;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandler;

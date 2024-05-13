@@ -1,7 +1,7 @@
-package com.github.houbb.cache.core.support.load;
+package com.taotao.cloud.cache.support.load;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheLoad;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheLoad;
 
 /**
  * 加载策略-无

@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.server.config.service;
+package com.taotao.cloud.rpc.server.server.config.service;
 
 /**
  * 单个服务配置类

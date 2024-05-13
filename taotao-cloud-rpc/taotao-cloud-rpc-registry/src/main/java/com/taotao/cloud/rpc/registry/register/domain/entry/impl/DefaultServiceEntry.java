@@ -3,9 +3,9 @@
  * rpc All rights reserved.
  */
 
-package com.github.houbb.rpc.register.domain.entry.impl;
+package com.taotao.cloud.rpc.registry.register.domain.entry.impl;
 
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 
 /**
  * <p> 默认服务明细 </p>

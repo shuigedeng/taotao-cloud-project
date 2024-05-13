@@ -1,14 +1,6 @@
-package com.github.houbb.rpc.server.support.hook;
+package com.taotao.cloud.rpc.server.server.support.hook;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.support.hook.AbstractShutdownHook;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.resource.ResourceManager;
-import com.github.houbb.rpc.common.support.status.enums.StatusEnum;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
-import com.github.houbb.rpc.common.util.Waits;
-import com.github.houbb.rpc.server.support.register.ServerRegisterManager;
+import com.taotao.cloud.rpc.server.server.support.register.ServerRegisterManager;
 
 /**
  * 服务端默认的关闭钩子函数

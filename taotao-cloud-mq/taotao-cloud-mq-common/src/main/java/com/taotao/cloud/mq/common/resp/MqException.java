@@ -1,6 +1,5 @@
 package com.taotao.cloud.mq.common.resp;
 
-import com.github.houbb.heaven.response.respcode.RespCode;
 
 /**
  * @author shuigedeng

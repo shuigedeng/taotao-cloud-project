@@ -1,6 +1,6 @@
-package com.github.houbb.cache.core.support.struct.lru;
+package com.taotao.cloud.cache.support.struct.lru;
 
-import com.github.houbb.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.api.ICacheEntry;
 
 /**
  * LRU map 接口

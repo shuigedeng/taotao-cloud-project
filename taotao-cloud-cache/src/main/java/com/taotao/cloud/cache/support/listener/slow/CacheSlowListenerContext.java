@@ -1,6 +1,6 @@
-package com.github.houbb.cache.core.support.listener.slow;
+package com.taotao.cloud.cache.support.listener.slow;
 
-import com.github.houbb.cache.api.ICacheSlowListenerContext;
+import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
 
 /**
  * @author shuigedeng

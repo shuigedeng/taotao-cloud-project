@@ -1,11 +1,8 @@
-package com.github.houbb.cache.core.support.listener.slow;
+package com.taotao.cloud.cache.support.listener.slow;
 
-import com.alibaba.fastjson.JSON;
-import com.github.houbb.cache.api.ICacheSlowListener;
-import com.github.houbb.cache.api.ICacheSlowListenerContext;
-import com.github.houbb.cache.core.support.interceptor.common.CacheInterceptorCost;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICacheSlowListener;
+import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
+import com.taotao.cloud.cache.support.interceptor.common.CacheInterceptorCost;
 
 /**
  * 慢日志监听类

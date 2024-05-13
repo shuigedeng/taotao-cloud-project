@@ -1,9 +1,9 @@
-package com.github.houbb.thread.pool.bs;
+package com.taotao.cloud.jdbcpool.bs;
 
-import com.github.houbb.thread.pool.constant.DriverNameConst;
-import com.github.houbb.thread.pool.constant.PooledConst;
-import com.github.houbb.thread.pool.datasource.PooledDataSource;
-import com.github.houbb.thread.pool.datasource.UnPooledDataSource;
+import com.taotao.cloud.jdbcpool.constant.DriverNameConst;
+import com.taotao.cloud.jdbcpool.constant.PooledConst;
+import com.taotao.cloud.jdbcpool.datasource.PooledDataSource;
+import com.taotao.cloud.jdbcpool.datasource.UnPooledDataSource;
 
 import javax.sql.DataSource;
 

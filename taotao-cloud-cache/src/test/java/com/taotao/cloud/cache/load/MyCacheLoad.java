@@ -1,7 +1,5 @@
 package com.taotao.cloud.cache.load;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheLoad;
 
 /**
  * @author shuigedeng

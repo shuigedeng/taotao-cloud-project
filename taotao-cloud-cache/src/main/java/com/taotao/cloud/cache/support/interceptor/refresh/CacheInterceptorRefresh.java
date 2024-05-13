@@ -1,10 +1,8 @@
-package com.github.houbb.cache.core.support.interceptor.refresh;
+package com.taotao.cloud.cache.support.interceptor.refresh;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheInterceptor;
-import com.github.houbb.cache.api.ICacheInterceptorContext;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheInterceptor;
+import com.taotao.cloud.cache.api.ICacheInterceptorContext;
 
 /**
  * 刷新

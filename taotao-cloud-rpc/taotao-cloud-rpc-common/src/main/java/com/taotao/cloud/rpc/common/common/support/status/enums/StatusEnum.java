@@ -1,8 +1,6 @@
-package com.github.houbb.rpc.common.support.status.enums;
+package com.taotao.cloud.rpc.common.common.support.status.enums;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.exception.ShutdownException;
+import com.taotao.cloud.rpc.common.common.exception.ShutdownException;
 
 /**
  * <p> project: rpc-StatusEnum </p>
@@ -74,7 +72,7 @@ public enum StatusEnum {
     /**
      * 断言可用
      * @param statusCode 状态码
-     * @see com.github.houbb.rpc.common.exception.ShutdownException 关闭异常
+     * @see com.taotao.cloud.rpc.common.common.exception.ShutdownException 关闭异常
      * @since 0.1.4
      */
     public static void assertEnable(final int statusCode) {

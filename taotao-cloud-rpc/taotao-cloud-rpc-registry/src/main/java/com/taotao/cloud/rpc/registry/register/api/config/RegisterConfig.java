@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.register.api.config;
+package com.taotao.cloud.rpc.registry.register.api.config;
 
 /**
  * 注册配置接口信息

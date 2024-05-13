@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.register.domain.message.impl;
+package com.taotao.cloud.rpc.registry.register.domain.message.impl;
 
-import com.github.houbb.rpc.register.domain.message.NotifyMessageHeader;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessageHeader;
 
 /**
  * 默认通知消息頭

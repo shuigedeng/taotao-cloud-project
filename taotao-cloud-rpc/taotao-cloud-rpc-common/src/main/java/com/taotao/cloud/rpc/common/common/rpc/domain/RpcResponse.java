@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.rpc.domain;
+package com.taotao.cloud.rpc.common.common.rpc.domain;
 
 /**
  * 序列化相关处理

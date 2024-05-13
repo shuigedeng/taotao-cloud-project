@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.register.domain.message;
+package com.taotao.cloud.rpc.registry.register.domain.message;
 
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
+import com.taotao.cloud.rpc.registry.register.simple.constant.MessageTypeConst;
 
 import java.io.Serializable;
 

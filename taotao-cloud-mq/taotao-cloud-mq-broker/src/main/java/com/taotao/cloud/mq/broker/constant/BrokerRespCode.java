@@ -1,6 +1,5 @@
 package com.taotao.cloud.mq.broker.constant;
 
-import com.github.houbb.heaven.response.respcode.RespCode;
 
 /**
  * @author shuigedeng

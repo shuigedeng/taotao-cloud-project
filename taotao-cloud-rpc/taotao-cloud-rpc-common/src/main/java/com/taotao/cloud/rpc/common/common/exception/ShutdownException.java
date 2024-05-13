@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.exception;
+package com.taotao.cloud.rpc.common.common.exception;
 
 /**
  * 服务已经关闭的异常

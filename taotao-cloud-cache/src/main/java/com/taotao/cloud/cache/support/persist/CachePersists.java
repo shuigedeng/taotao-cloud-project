@@ -1,6 +1,6 @@
-package com.github.houbb.cache.core.support.persist;
+package com.taotao.cloud.cache.support.persist;
 
-import com.github.houbb.cache.api.ICachePersist;
+import com.taotao.cloud.cache.api.ICachePersist;
 
 /**
  * 缓存持久化工具类

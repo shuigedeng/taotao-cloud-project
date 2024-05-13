@@ -1,44 +1,14 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
+package com.taotao.cloud.rpc.server.server.core;
 
-package com.github.houbb.rpc.server.core;
-
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.heaven.util.net.NetUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.common.config.component.RpcAddressBuilder;
-import com.github.houbb.rpc.common.config.protocol.ProtocolConfig;
-import com.github.houbb.rpc.common.exception.RpcRuntimeException;
-import com.github.houbb.rpc.common.remote.netty.NettyServer;
-import com.github.houbb.rpc.common.remote.netty.handler.ChannelHandlers;
-import com.github.houbb.rpc.common.remote.netty.impl.DefaultNettyClient;
-import com.github.houbb.rpc.common.remote.netty.impl.DefaultNettyServer;
-import com.github.houbb.rpc.common.support.delay.DelayExecutor;
-import com.github.houbb.rpc.common.support.delay.DelayQueueExecutor;
-import com.github.houbb.rpc.common.support.hook.ShutdownHooks;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.invoke.impl.DefaultInvokeManager;
-import com.github.houbb.rpc.common.support.resource.ResourceManager;
-import com.github.houbb.rpc.common.support.resource.impl.DefaultResourceManager;
-import com.github.houbb.rpc.common.support.status.enums.StatusEnum;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
-import com.github.houbb.rpc.common.support.status.service.impl.DefaultStatusManager;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.entry.impl.ServiceEntryBuilder;
-import com.github.houbb.rpc.server.config.service.DefaultServiceConfig;
-import com.github.houbb.rpc.server.config.service.ServiceConfig;
-import com.github.houbb.rpc.server.handler.RpcServerHandler;
-import com.github.houbb.rpc.server.handler.RpcServerRegisterHandler;
-import com.github.houbb.rpc.server.registry.ServiceRegistry;
-import com.github.houbb.rpc.server.service.impl.DefaultServiceFactory;
-import com.github.houbb.rpc.server.support.hook.DefaultServerShutdownHook;
-import com.github.houbb.rpc.server.support.register.DefaultServerRegisterLocalManager;
-import com.github.houbb.rpc.server.support.register.ServerRegisterManager;
+import com.taotao.cloud.rpc.server.server.config.service.DefaultServiceConfig;
+import com.taotao.cloud.rpc.server.server.config.service.ServiceConfig;
+import com.taotao.cloud.rpc.server.server.handler.RpcServerHandler;
+import com.taotao.cloud.rpc.server.server.handler.RpcServerRegisterHandler;
+import com.taotao.cloud.rpc.server.server.registry.ServiceRegistry;
+import com.taotao.cloud.rpc.server.server.service.impl.DefaultServiceFactory;
+import com.taotao.cloud.rpc.server.server.support.hook.DefaultServerShutdownHook;
+import com.taotao.cloud.rpc.server.server.support.register.DefaultServerRegisterLocalManager;
+import com.taotao.cloud.rpc.server.server.support.register.ServerRegisterManager;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandler;
 
@@ -161,7 +131,7 @@ public class ServiceBs implements ServiceRegistry {
      * （1）主要用于后期服务调用
      * （2）如何根据 id 获取实现？非常简单，id 是唯一的。
      * 有就是有，没有就抛出异常，直接返回。
-     * （3）如果根据 {@link com.github.houbb.rpc.common.rpc.domain.RpcRequest} 获取对应的方法。
+     * （3）如果根据 {@link RpcRequest} 获取对应的方法。
      * <p>
      * 3.1 根据 serviceId 获取唯一的实现
      * 3.2 根据 {@link Class#getMethod(String, Class[])} 方法名称+参数类型唯一获取方法
@@ -195,7 +165,7 @@ public class ServiceBs implements ServiceRegistry {
      * （1）主要用于后期服务调用
      * （2）如何根据 id 获取实现？非常简单，id 是唯一的。
      * 有就是有，没有就抛出异常，直接返回。
-     * （3）如果根据 {@link com.github.houbb.rpc.common.rpc.domain.RpcRequest} 获取对应的方法。
+     * （3）如果根据 {@link RpcRequest} 获取对应的方法。
      * <p>
      * 3.1 根据 serviceId 获取唯一的实现
      * 3.2 根据 {@link Class#getMethod(String, Class[])} 方法名称+参数类型唯一获取方法

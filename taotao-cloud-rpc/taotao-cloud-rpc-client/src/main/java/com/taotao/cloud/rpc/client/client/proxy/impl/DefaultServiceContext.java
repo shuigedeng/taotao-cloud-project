@@ -1,14 +1,9 @@
-package com.github.houbb.rpc.client.proxy.impl;
+package com.taotao.cloud.rpc.client.client.proxy.impl;
 
-import com.github.houbb.load.balance.api.ILoadBalance;
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.client.support.fail.enums.FailTypeEnum;
-import com.github.houbb.rpc.client.support.filter.RpcFilter;
-import com.github.houbb.rpc.client.support.register.ClientRegisterManager;
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptor;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
+import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
+import com.taotao.cloud.rpc.client.client.support.fail.enums.FailTypeEnum;
+import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
 
 /**
  * 反射调用上下文

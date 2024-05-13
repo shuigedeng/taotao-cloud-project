@@ -1,8 +1,8 @@
-package com.github.houbb.cache.core.support.evict;
+package com.taotao.cloud.cache.support.evict;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheEvictContext;
-import com.github.houbb.cache.core.model.CacheEntry;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.model.CacheEntry;
 
 import java.util.LinkedList;
 import java.util.Queue;

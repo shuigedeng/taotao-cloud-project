@@ -3,7 +3,7 @@
  * rpc All rights reserved.
  */
 
-package com.github.houbb.rpc.register.domain.entry;
+package com.taotao.cloud.rpc.registry.register.domain.entry;
 
 import java.io.Serializable;
 

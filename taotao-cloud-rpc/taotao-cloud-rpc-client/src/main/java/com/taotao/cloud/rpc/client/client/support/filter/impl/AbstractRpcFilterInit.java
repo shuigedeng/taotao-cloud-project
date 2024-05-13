@@ -1,10 +1,7 @@
-package com.github.houbb.rpc.client.support.filter.impl;
+package com.taotao.cloud.rpc.client.client.support.filter.impl;
 
-import com.github.houbb.heaven.annotation.ThreadSafe;
-import com.github.houbb.heaven.support.pipeline.Pipeline;
-import com.github.houbb.heaven.support.pipeline.impl.DefaultPipeline;
-import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
-import com.github.houbb.rpc.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
+import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
 
 import java.util.List;
 

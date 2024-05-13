@@ -1,4 +1,4 @@
-package com.github.houbb.cache.core.model;
+package com.taotao.cloud.cache.model;
 
 import java.util.Objects;
 

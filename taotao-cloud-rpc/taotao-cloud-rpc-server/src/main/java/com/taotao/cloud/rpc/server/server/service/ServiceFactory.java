@@ -1,7 +1,7 @@
-package com.github.houbb.rpc.server.service;
+package com.taotao.cloud.rpc.server.server.service;
 
-import com.github.houbb.rpc.server.config.service.ServiceConfig;
-import com.github.houbb.rpc.server.registry.ServiceRegistry;
+import com.taotao.cloud.rpc.server.server.config.service.ServiceConfig;
+import com.taotao.cloud.rpc.server.server.registry.ServiceRegistry;
 
 import java.util.List;
 

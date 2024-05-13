@@ -1,20 +1,15 @@
-package com.github.houbb.rpc.client.proxy;
+package com.taotao.cloud.rpc.client.client.proxy;
 
-import com.github.houbb.load.balance.api.ILoadBalance;
-import com.github.houbb.rpc.client.support.fail.enums.FailTypeEnum;
-import com.github.houbb.rpc.client.support.register.ClientRegisterManager;
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptor;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
+import com.taotao.cloud.rpc.client.client.support.fail.enums.FailTypeEnum;
+import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
 
-import com.github.houbb.rpc.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
 
 /**
  * 反射调用上下文
  * @author shuigedeng
  * @since 0.0.6
- * @see com.github.houbb.rpc.client.config.reference.ReferenceConfig 对这里的信息进行一次转换。
+ * @see ReferenceConfig 对这里的信息进行一次转换。
  */
 public interface ServiceContext<T> {
 

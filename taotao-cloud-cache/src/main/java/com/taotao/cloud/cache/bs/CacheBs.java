@@ -1,14 +1,13 @@
-package com.github.houbb.cache.core.bs;
+package com.taotao.cloud.cache.bs;
 
-import com.github.houbb.cache.api.*;
-import com.github.houbb.cache.core.core.Cache;
-import com.github.houbb.cache.core.support.evict.CacheEvicts;
-import com.github.houbb.cache.core.support.listener.remove.CacheRemoveListeners;
-import com.github.houbb.cache.core.support.listener.slow.CacheSlowListeners;
-import com.github.houbb.cache.core.support.load.CacheLoads;
-import com.github.houbb.cache.core.support.persist.CachePersists;
-import com.github.houbb.cache.core.support.proxy.CacheProxy;
-import com.github.houbb.heaven.util.common.ArgUtil;
+import com.taotao.cloud.cache.api.*;
+import com.taotao.cloud.cache.core.Cache;
+import com.taotao.cloud.cache.support.evict.CacheEvicts;
+import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListeners;
+import com.taotao.cloud.cache.support.listener.slow.CacheSlowListeners;
+import com.taotao.cloud.cache.support.load.CacheLoads;
+import com.taotao.cloud.cache.support.persist.CachePersists;
+import com.taotao.cloud.cache.support.proxy.CacheProxy;
 
 import java.util.HashMap;
 import java.util.List;

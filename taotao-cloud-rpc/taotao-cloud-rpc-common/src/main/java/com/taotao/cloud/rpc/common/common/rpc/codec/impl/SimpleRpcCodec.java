@@ -1,8 +1,5 @@
-//package com.github.houbb.rpc.common.rpc.codec.impl;
+//package com.taotao.cloud.rpc.common.common.rpc.codec.impl;
 //
-//import com.github.houbb.heaven.annotation.ThreadSafe;
-//import com.github.houbb.json.bs.JsonBs;
-//import com.github.houbb.rpc.common.rpc.codec.RpcCodec;
 //
 ///**
 // * 默认序列化相关处理

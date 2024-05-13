@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.support.invoke;
+package com.taotao.cloud.rpc.common.common.support.invoke;
 
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 
 /**
  * 调用服务接口

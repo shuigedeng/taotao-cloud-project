@@ -1,1 +1,1 @@
-package com.github.houbb.rpc.server.config;
+package com.taotao.cloud.rpc.server.server.config;

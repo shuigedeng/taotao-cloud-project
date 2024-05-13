@@ -1,4 +1,4 @@
-package com.github.houbb.thread.pool.constant;
+package com.taotao.cloud.jdbcpool.constant;
 
 /**
  * 线程池常量

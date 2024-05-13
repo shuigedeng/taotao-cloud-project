@@ -1,7 +1,6 @@
-package com.github.houbb.rpc.server.support.register;
+package com.taotao.cloud.rpc.server.server.support.register;
 
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 import io.netty.channel.Channel;
 
 /**

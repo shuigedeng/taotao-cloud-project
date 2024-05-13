@@ -1,7 +1,7 @@
-package com.github.houbb.rpc.client.support.fail.impl;
+package com.taotao.cloud.rpc.client.client.support.fail.impl;
 
-import com.github.houbb.rpc.client.support.fail.FailStrategy;
-import com.github.houbb.rpc.client.support.fail.enums.FailTypeEnum;
+import com.taotao.cloud.rpc.client.client.support.fail.FailStrategy;
+import com.taotao.cloud.rpc.client.client.support.fail.enums.FailTypeEnum;
 
 /**
  * 快速失败策略工厂

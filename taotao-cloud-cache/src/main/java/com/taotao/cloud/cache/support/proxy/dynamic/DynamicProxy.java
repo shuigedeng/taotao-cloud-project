@@ -1,15 +1,11 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * async All rights reserved.
- */
 
-package com.github.houbb.cache.core.support.proxy.dynamic;
+package com.taotao.cloud.cache.support.proxy.dynamic;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.core.support.proxy.ICacheProxy;
-import com.github.houbb.cache.core.support.proxy.bs.CacheProxyBs;
-import com.github.houbb.cache.core.support.proxy.bs.CacheProxyBsContext;
-import com.github.houbb.cache.core.support.proxy.bs.ICacheProxyBsContext;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.support.proxy.ICacheProxy;
+import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBs;
+import com.taotao.cloud.cache.support.proxy.bs.CacheProxyBsContext;
+import com.taotao.cloud.cache.support.proxy.bs.ICacheProxyBsContext;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -22,10 +18,6 @@ import java.util.concurrent.CompletionService;
  * 1. 对于 executor 的抽象，使用 {@link CompletionService}
  * 2. 确保唯一初始化 executor，在任务执行的最后关闭 executor。
  * 3. 异步执行结果的获取，异常信息的获取。
- * <pre> Created: 2019/3/5 10:23 PM  </pre>
- * <pre> Project: async  </pre>
- *
- * @author houbinbin
  * @since 0.0.4
  */
 public class DynamicProxy implements InvocationHandler, ICacheProxy {

@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.support.generic;
+package com.taotao.cloud.rpc.common.common.support.generic;
 
-import com.github.houbb.rpc.common.exception.GenericException;
+import com.taotao.cloud.rpc.common.common.exception.GenericException;
 
 /**
  * 泛化调用接口

@@ -1,21 +1,8 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.register.core;
+package com.taotao.cloud.rpc.registry.register.core;
 
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.rpc.common.remote.netty.handler.ChannelHandlers;
-import com.github.houbb.rpc.common.remote.netty.impl.DefaultNettyServer;
-import com.github.houbb.rpc.register.api.config.RegisterConfig;
-import com.github.houbb.rpc.register.simple.client.RegisterClientService;
-import com.github.houbb.rpc.register.simple.client.impl.DefaultRegisterClientService;
-import com.github.houbb.rpc.register.simple.handler.RegisterCenterServerHandler;
-
-import com.github.houbb.rpc.register.simple.server.RegisterServerService;
-import com.github.houbb.rpc.register.simple.server.impl.DefaultRegisterServerService;
-import com.github.houbb.rpc.register.support.hook.RegisterCenterShutdownHook;
+import com.taotao.cloud.rpc.common.common.remote.netty.handler.ChannelHandlers;
+import com.taotao.cloud.rpc.common.common.remote.netty.impl.DefaultNettyServer;
 import io.netty.channel.ChannelHandler;
 
 /**
@@ -23,7 +10,7 @@ import io.netty.channel.ChannelHandler;
  * @author shuigedeng
  * @since 0.0.8
  */
-public class RegisterBs implements RegisterConfig {
+public class RegisterBs implements com.taotao.cloud.rpc.registry.register.api.config.RegisterConfig {
 
     /**
      * 服务启动端口信息
@@ -34,15 +21,15 @@ public class RegisterBs implements RegisterConfig {
     /**
      * 服务端
      */
-    private final RegisterServerService registerServerService;
+    private final com.taotao.cloud.rpc.registry.register.simple.server.RegisterServerService registerServerService;
     /**
      * 客户端
      */
-    private final RegisterClientService registerClientService;
+    private final com.taotao.cloud.rpc.registry.register.simple.client.RegisterClientService registerClientService;
 
     private RegisterBs(){
-        registerServerService = new DefaultRegisterServerService();
-        registerClientService = new DefaultRegisterClientService();
+        registerServerService = new com.taotao.cloud.rpc.registry.register.simple.server.impl.DefaultRegisterServerService();
+        registerClientService = new com.taotao.cloud.rpc.registry.register.simple.client.impl.DefaultRegisterClientService();
     }
 
     public static RegisterBs newInstance() {
@@ -61,7 +48,7 @@ public class RegisterBs implements RegisterConfig {
 
     @Override
     public RegisterBs start() {
-        ChannelHandler channelHandler = ChannelHandlers.objectCodecHandler(new RegisterCenterServerHandler());
+        ChannelHandler channelHandler = ChannelHandlers.objectCodecHandler(new com.taotao.cloud.rpc.registry.register.simple.handler.RegisterCenterServerHandler());
         DefaultNettyServer.newInstance(port, channelHandler).asyncRun();
 
         // 通知对应的服务端和客户端，服务启动。
@@ -73,7 +60,7 @@ public class RegisterBs implements RegisterConfig {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                new RegisterCenterShutdownHook(registerServerService, registerClientService, port).hook();
+                new com.taotao.cloud.rpc.registry.register.support.hook.RegisterCenterShutdownHook(registerServerService, registerClientService, port).hook();
             }
         });
 

@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.rpc.domain;
+package com.taotao.cloud.rpc.common.common.rpc.domain;
 
 import java.io.Serializable;
 

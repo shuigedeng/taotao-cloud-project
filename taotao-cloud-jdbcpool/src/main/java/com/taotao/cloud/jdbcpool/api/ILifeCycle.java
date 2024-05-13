@@ -1,4 +1,4 @@
-package com.github.houbb.thread.pool.api;
+package com.taotao.cloud.jdbcpool.api;
 
 /**
  * 生命周期管理

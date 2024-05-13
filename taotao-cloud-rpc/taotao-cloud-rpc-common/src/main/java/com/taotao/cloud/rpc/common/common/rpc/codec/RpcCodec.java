@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.rpc.codec;
+package com.taotao.cloud.rpc.common.common.rpc.codec;
 
 /**
  * 序列化相关处理

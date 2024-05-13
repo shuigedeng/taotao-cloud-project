@@ -9,4 +9,4 @@
  * （4）客户端配置-放在 client 中
  * @since 0.0.6
  */
-package com.github.houbb.rpc.common.config;
+package com.taotao.cloud.rpc.common.common.config;

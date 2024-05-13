@@ -1,8 +1,8 @@
-package com.github.houbb.rpc.common.rpc.domain.impl;
+package com.taotao.cloud.rpc.common.common.rpc.domain.impl;
 
-import com.github.houbb.rpc.common.exception.RpcTimeoutException;
-import com.github.houbb.rpc.common.exception.ShutdownException;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
+import com.taotao.cloud.rpc.common.common.exception.RpcTimeoutException;
+import com.taotao.cloud.rpc.common.common.exception.ShutdownException;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 
 /**
  * 响应工厂类

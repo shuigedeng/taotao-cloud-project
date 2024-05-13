@@ -1,4 +1,4 @@
-package com.github.houbb.thread.pool.exception;
+package com.taotao.cloud.jdbcpool.exception;
 
 /**
  * @author shuigedeng

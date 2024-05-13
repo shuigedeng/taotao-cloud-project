@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.config.component;
+package com.taotao.cloud.rpc.common.common.config.component;
 
 import java.util.Objects;
 

@@ -1,9 +1,8 @@
-package com.github.houbb.thread.pool.constant;
+package com.taotao.cloud.jdbcpool.constant;
 
 /**
  * 数据库加在类名称常量
  *
- * @author bbhou
  * date 2017/7/31
  * @since 0.0.1
  */

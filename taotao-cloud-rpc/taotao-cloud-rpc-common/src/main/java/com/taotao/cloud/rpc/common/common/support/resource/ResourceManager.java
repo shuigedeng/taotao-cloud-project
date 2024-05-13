@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.support.resource;
+package com.taotao.cloud.rpc.common.common.support.resource;
 
-import com.github.houbb.rpc.common.api.Destroyable;
+import com.taotao.cloud.rpc.common.common.api.Destroyable;
 
 /**
  * <p> project: rpc-ResourceManager </p>

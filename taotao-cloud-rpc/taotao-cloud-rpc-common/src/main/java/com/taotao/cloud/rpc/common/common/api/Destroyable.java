@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.api;
+package com.taotao.cloud.rpc.common.common.api;
 
 /**
  * 可销毁的

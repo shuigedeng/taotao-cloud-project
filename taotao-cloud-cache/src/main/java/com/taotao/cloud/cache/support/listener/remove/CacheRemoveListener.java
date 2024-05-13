@@ -1,9 +1,7 @@
-package com.github.houbb.cache.core.support.listener.remove;
+package com.taotao.cloud.cache.support.listener.remove;
 
-import com.github.houbb.cache.api.ICacheRemoveListener;
-import com.github.houbb.cache.api.ICacheRemoveListenerContext;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICacheRemoveListener;
+import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
 
 /**
  * 默认的删除监听类

@@ -1,44 +1,21 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.client.core;
+package com.taotao.cloud.rpc.client.client.core;
 
-import com.github.houbb.heaven.util.guava.Guavas;
-import com.github.houbb.load.balance.api.ILoadBalance;
-import com.github.houbb.load.balance.api.impl.LoadBalances;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.client.config.reference.ReferenceConfig;
-import com.github.houbb.rpc.client.model.ClientQueryServerChannelConfig;
-import com.github.houbb.rpc.client.proxy.ReferenceProxy;
-import com.github.houbb.rpc.client.proxy.RemoteInvokeService;
-import com.github.houbb.rpc.client.proxy.ServiceContext;
-import com.github.houbb.rpc.client.proxy.impl.DefaultReferenceProxy;
-import com.github.houbb.rpc.client.proxy.impl.DefaultServiceContext;
-import com.github.houbb.rpc.client.proxy.impl.GenericReferenceProxy;
-import com.github.houbb.rpc.client.proxy.impl.RemoteInvokeServiceImpl;
-import com.github.houbb.rpc.client.support.fail.enums.FailTypeEnum;
-import com.github.houbb.rpc.client.support.filter.RpcFilter;
-import com.github.houbb.rpc.client.support.filter.impl.RpcFilters;
-import com.github.houbb.rpc.client.support.hook.DefaultClientShutdownHook;
-import com.github.houbb.rpc.client.support.register.ClientRegisterManager;
-import com.github.houbb.rpc.client.support.register.impl.DefaultClientRegisterManager;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.common.config.component.RpcAddressBuilder;
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
-import com.github.houbb.rpc.common.support.hook.ShutdownHooks;
-import com.github.houbb.rpc.common.support.inteceptor.RpcInterceptor;
-import com.github.houbb.rpc.common.support.inteceptor.impl.RpcInterceptorAdaptor;
-import com.github.houbb.rpc.common.support.inteceptor.impl.RpcInterceptors;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.invoke.impl.DefaultInvokeManager;
-import com.github.houbb.rpc.common.support.resource.ResourceManager;
-import com.github.houbb.rpc.common.support.resource.impl.DefaultResourceManager;
-import com.github.houbb.rpc.common.support.status.enums.StatusEnum;
-import com.github.houbb.rpc.common.support.status.service.StatusManager;
-import com.github.houbb.rpc.common.support.status.service.impl.DefaultStatusManager;
+import com.taotao.cloud.rpc.client.client.config.reference.ReferenceConfig;
+import com.taotao.cloud.rpc.client.client.model.ClientQueryServerChannelConfig;
+import com.taotao.cloud.rpc.client.client.proxy.ReferenceProxy;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeService;
+import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
+import com.taotao.cloud.rpc.client.client.proxy.impl.DefaultReferenceProxy;
+import com.taotao.cloud.rpc.client.client.proxy.impl.DefaultServiceContext;
+import com.taotao.cloud.rpc.client.client.proxy.impl.GenericReferenceProxy;
+import com.taotao.cloud.rpc.client.client.proxy.impl.RemoteInvokeServiceImpl;
+import com.taotao.cloud.rpc.client.client.support.fail.enums.FailTypeEnum;
+import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.client.client.support.filter.impl.RpcFilters;
+import com.taotao.cloud.rpc.client.client.support.hook.DefaultClientShutdownHook;
+import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
+import com.taotao.cloud.rpc.client.client.support.register.impl.DefaultClientRegisterManager;
 
 import java.util.List;
 

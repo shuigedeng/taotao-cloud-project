@@ -1,8 +1,8 @@
-package com.github.houbb.thread.pool.datasource;
+package com.taotao.cloud.jdbcpool.datasource;
 
-import com.github.houbb.thread.pool.api.ILifeCycle;
-import com.github.houbb.thread.pool.api.IPooledDataSourceConfig;
-import com.github.houbb.thread.pool.constant.PooledConst;
+import com.taotao.cloud.jdbcpool.api.ILifeCycle;
+import com.taotao.cloud.jdbcpool.api.IPooledDataSourceConfig;
+import com.taotao.cloud.jdbcpool.constant.PooledConst;
 
 /**
  * @author shuigedeng

@@ -1,6 +1,6 @@
-package com.github.houbb.rpc.common.rpc.domain;
+package com.taotao.cloud.rpc.common.common.rpc.domain;
 
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
+import com.taotao.cloud.rpc.common.common.constant.enums.CallTypeEnum;
 
 import java.util.List;
 

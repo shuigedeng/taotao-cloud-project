@@ -3,21 +3,19 @@
  * rpc All rights reserved.
  */
 
-package com.github.houbb.rpc.register.simple.handler;
+package com.taotao.cloud.rpc.registry.register.simple.handler;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.ServerHeartbeatBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.SimpleRpcRegister;
-import com.github.houbb.rpc.register.simple.client.RegisterClientService;
-import com.github.houbb.rpc.register.simple.client.impl.DefaultRegisterClientService;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
-import com.github.houbb.rpc.register.simple.server.RegisterServerService;
-import com.github.houbb.rpc.register.simple.server.impl.DefaultRegisterServerService;
-import com.github.houbb.rpc.register.spi.RpcRegister;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessage;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.ServerHeartbeatBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.impl.NotifyMessages;
+import com.taotao.cloud.rpc.registry.register.simple.SimpleRpcRegister;
+import com.taotao.cloud.rpc.registry.register.simple.client.RegisterClientService;
+import com.taotao.cloud.rpc.registry.register.simple.client.impl.DefaultRegisterClientService;
+import com.taotao.cloud.rpc.registry.register.simple.constant.MessageTypeConst;
+import com.taotao.cloud.rpc.registry.register.simple.server.RegisterServerService;
+import com.taotao.cloud.rpc.registry.register.simple.server.impl.DefaultRegisterServerService;
+import com.taotao.cloud.rpc.registry.register.spi.RpcRegister;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

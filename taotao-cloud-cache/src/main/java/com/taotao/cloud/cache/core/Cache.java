@@ -1,15 +1,14 @@
-package com.github.houbb.cache.core.core;
+package com.taotao.cloud.cache.core;
 
-import com.github.houbb.cache.annotation.CacheInterceptor;
-import com.github.houbb.cache.api.*;
-import com.github.houbb.cache.core.constant.enums.CacheRemoveType;
-import com.github.houbb.cache.core.exception.CacheRuntimeException;
-import com.github.houbb.cache.core.support.evict.CacheEvictContext;
-import com.github.houbb.cache.core.support.expire.CacheExpire;
-import com.github.houbb.cache.core.support.listener.remove.CacheRemoveListenerContext;
-import com.github.houbb.cache.core.support.persist.InnerCachePersist;
-import com.github.houbb.cache.core.support.proxy.CacheProxy;
-import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.taotao.cloud.cache.annotation.CacheInterceptor;
+import com.taotao.cloud.cache.api.*;
+import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
+import com.taotao.cloud.cache.exception.CacheRuntimeException;
+import com.taotao.cloud.cache.support.evict.CacheEvictContext;
+import com.taotao.cloud.cache.support.expire.CacheExpire;
+import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
+import com.taotao.cloud.cache.support.persist.InnerCachePersist;
+import com.taotao.cloud.cache.support.proxy.CacheProxy;
 
 import java.util.*;
 

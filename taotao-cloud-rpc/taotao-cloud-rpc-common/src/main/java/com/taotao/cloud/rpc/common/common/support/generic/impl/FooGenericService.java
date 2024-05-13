@@ -1,9 +1,7 @@
-package com.github.houbb.rpc.common.support.generic.impl;
+package com.taotao.cloud.rpc.common.common.support.generic.impl;
 
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.common.exception.GenericException;
-import com.github.houbb.rpc.common.support.generic.GenericService;
+import com.taotao.cloud.rpc.common.common.exception.GenericException;
+import com.taotao.cloud.rpc.common.common.support.generic.GenericService;
 
 import java.util.Arrays;
 

@@ -1,8 +1,8 @@
-package com.github.houbb.cache.core.support.evict;
+package com.taotao.cloud.cache.support.evict;
 
-import com.github.houbb.cache.api.ICacheEntry;
-import com.github.houbb.cache.api.ICacheEvict;
-import com.github.houbb.cache.api.ICacheEvictContext;
+import com.taotao.cloud.cache.api.ICacheEntry;
+import com.taotao.cloud.cache.api.ICacheEvict;
+import com.taotao.cloud.cache.api.ICacheEvictContext;
 
 /**
  * 丢弃策略

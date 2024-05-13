@@ -1,8 +1,5 @@
 package com.taotao.cloud.cache.listener;
 
-import com.github.houbb.cache.api.ICacheRemoveListener;
-import com.github.houbb.cache.api.ICacheRemoveListenerContext;
-
 /**
  * @author shuigedeng
  * @since 0.0.6

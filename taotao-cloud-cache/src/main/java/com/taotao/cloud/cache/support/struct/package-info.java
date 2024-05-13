@@ -1,1 +1,1 @@
-package com.github.houbb.cache.core.support.struct;
+package com.taotao.cloud.cache.support.struct;

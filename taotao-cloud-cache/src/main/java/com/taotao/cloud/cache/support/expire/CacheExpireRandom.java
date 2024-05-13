@@ -1,17 +1,13 @@
-package com.github.houbb.cache.core.support.expire;
+package com.taotao.cloud.cache.support.expire;
 
-import com.github.houbb.cache.api.ICache;
-import com.github.houbb.cache.api.ICacheExpire;
-import com.github.houbb.cache.api.ICacheRemoveListener;
-import com.github.houbb.cache.api.ICacheRemoveListenerContext;
-import com.github.houbb.cache.core.constant.enums.CacheRemoveType;
-import com.github.houbb.cache.core.exception.CacheRuntimeException;
-import com.github.houbb.cache.core.support.evict.CacheEvictClock;
-import com.github.houbb.cache.core.support.listener.remove.CacheRemoveListenerContext;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.heaven.util.util.MapUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.api.ICacheExpire;
+import com.taotao.cloud.cache.api.ICacheRemoveListener;
+import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
+import com.taotao.cloud.cache.constant.enums.CacheRemoveType;
+import com.taotao.cloud.cache.exception.CacheRuntimeException;
+import com.taotao.cloud.cache.support.evict.CacheEvictClock;
+import com.taotao.cloud.cache.support.listener.remove.CacheRemoveListenerContext;
 
 import java.util.*;
 import java.util.concurrent.Executors;

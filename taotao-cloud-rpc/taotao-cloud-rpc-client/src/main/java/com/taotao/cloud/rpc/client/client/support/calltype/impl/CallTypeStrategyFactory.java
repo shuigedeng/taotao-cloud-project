@@ -1,7 +1,6 @@
-package com.github.houbb.rpc.client.support.calltype.impl;
+package com.taotao.cloud.rpc.client.client.support.calltype.impl;
 
-import com.github.houbb.rpc.client.support.calltype.CallTypeStrategy;
-import com.github.houbb.rpc.common.constant.enums.CallTypeEnum;
+import com.taotao.cloud.rpc.client.client.support.calltype.CallTypeStrategy;
 
 /**
  * callType 策略工厂类

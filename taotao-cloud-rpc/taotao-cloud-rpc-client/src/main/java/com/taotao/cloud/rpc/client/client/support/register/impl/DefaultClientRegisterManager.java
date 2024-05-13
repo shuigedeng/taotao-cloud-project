@@ -3,33 +3,19 @@
  * rpc All rights reserved.
  */
 
-package com.github.houbb.rpc.client.support.register.impl;
+package com.taotao.cloud.rpc.client.client.support.register.impl;
 
-import com.github.houbb.heaven.support.handler.IHandler;
-import com.github.houbb.heaven.util.common.ArgUtil;
-import com.github.houbb.heaven.util.util.CollectionUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.rpc.client.handler.RpcClientHandler;
-import com.github.houbb.rpc.client.handler.RpcClientRegisterHandler;
-import com.github.houbb.rpc.client.model.ClientQueryServerChannelConfig;
-import com.github.houbb.rpc.client.support.register.ClientRegisterManager;
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.common.exception.RpcRuntimeException;
-import com.github.houbb.rpc.common.remote.netty.handler.ChannelHandlerFactory;
-import com.github.houbb.rpc.common.remote.netty.handler.ChannelHandlers;
-import com.github.houbb.rpc.common.rpc.domain.RpcChannelFuture;
-import com.github.houbb.rpc.common.rpc.domain.RpcResponse;
-import com.github.houbb.rpc.common.rpc.domain.impl.RpcResponses;
-import com.github.houbb.rpc.common.support.invoke.InvokeManager;
-import com.github.houbb.rpc.common.support.resource.ResourceManager;
-import com.github.houbb.rpc.register.domain.entry.ServiceEntry;
-import com.github.houbb.rpc.register.domain.entry.impl.ServiceEntryBuilder;
-import com.github.houbb.rpc.register.domain.message.NotifyMessage;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterAddNotifyBody;
-import com.github.houbb.rpc.register.domain.message.body.RegisterCenterRemoveNotifyBody;
-import com.github.houbb.rpc.register.domain.message.impl.NotifyMessages;
-import com.github.houbb.rpc.register.simple.constant.MessageTypeConst;
+import com.taotao.cloud.rpc.client.client.handler.RpcClientHandler;
+import com.taotao.cloud.rpc.client.client.handler.RpcClientRegisterHandler;
+import com.taotao.cloud.rpc.client.client.model.ClientQueryServerChannelConfig;
+import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.entry.impl.ServiceEntryBuilder;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessage;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterAddNotifyBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterRemoveNotifyBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.impl.NotifyMessages;
+import com.taotao.cloud.rpc.registry.register.simple.constant.MessageTypeConst;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandler;

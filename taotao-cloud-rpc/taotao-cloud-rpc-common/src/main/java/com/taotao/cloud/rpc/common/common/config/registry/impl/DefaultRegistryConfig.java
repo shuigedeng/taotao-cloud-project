@@ -1,8 +1,8 @@
-package com.github.houbb.rpc.common.config.registry.impl;
+package com.taotao.cloud.rpc.common.common.config.registry.impl;
 
-import com.github.houbb.rpc.common.config.component.RpcAddress;
-import com.github.houbb.rpc.common.config.component.Credential;
-import com.github.houbb.rpc.common.config.registry.RegistryConfig;
+import com.taotao.cloud.rpc.common.common.config.component.RpcAddress;
+import com.taotao.cloud.rpc.common.common.config.component.Credential;
+import com.taotao.cloud.rpc.common.common.config.registry.RegistryConfig;
 
 import java.util.List;
 

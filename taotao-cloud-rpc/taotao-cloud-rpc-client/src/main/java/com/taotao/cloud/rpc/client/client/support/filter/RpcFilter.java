@@ -1,11 +1,7 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
-package com.github.houbb.rpc.client.support.filter;
+package com.taotao.cloud.rpc.client.client.support.filter;
 
-import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
+import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
 
 /**
  * <p> 调用上下文 </p>
@@ -20,13 +16,12 @@ import com.github.houbb.rpc.client.proxy.RemoteInvokeContext;
  *
  * 插件式实现：
  * （1）远程调用也认为是一次 filter，上下文中构建 filter-chain
- * （2）filter-chain 可以使用 {@link com.github.houbb.heaven.support.pipeline.Pipeline} 管理
+ * （2）filter-chain 可以使用 {@link Pipeline} 管理
  *
  *
  * 后期拓展：
  * （1）类似于 aop，用户可以自行定义 interceptor 拦截器
  *
- * @author houbinbin
  * @since 0.0.9
  */
 public interface RpcFilter {

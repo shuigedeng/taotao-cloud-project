@@ -1,7 +1,7 @@
-package com.github.houbb.cache.core.core;
+package com.taotao.cloud.cache.core;
 
-import com.github.houbb.cache.api.ICacheContext;
-import com.github.houbb.cache.api.ICacheEvict;
+import com.taotao.cloud.cache.api.ICacheContext;
+import com.taotao.cloud.cache.api.ICacheEvict;
 
 import java.util.Map;
 

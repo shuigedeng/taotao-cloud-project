@@ -1,6 +1,5 @@
-package com.github.houbb.rpc.register.domain.message;
+package com.taotao.cloud.rpc.registry.register.domain.message;
 
-import com.github.houbb.rpc.common.rpc.domain.BaseRpc;
 
 /**
  * 注册消息体

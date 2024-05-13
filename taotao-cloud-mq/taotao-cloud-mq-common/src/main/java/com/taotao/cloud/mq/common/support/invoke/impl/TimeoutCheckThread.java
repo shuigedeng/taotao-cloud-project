@@ -1,7 +1,5 @@
 package com.taotao.cloud.mq.common.support.invoke.impl;
 
-import com.github.houbb.heaven.util.common.ArgUtil;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

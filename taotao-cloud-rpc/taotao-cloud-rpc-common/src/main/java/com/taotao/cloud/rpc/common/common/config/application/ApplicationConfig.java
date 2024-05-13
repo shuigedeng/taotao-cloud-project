@@ -1,4 +1,4 @@
-package com.github.houbb.rpc.common.config.application;
+package com.taotao.cloud.rpc.common.common.config.application;
 
 /**
  * 应用配置信息
