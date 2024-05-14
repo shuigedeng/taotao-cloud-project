@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.registry.register.simple.handler;
 
@@ -34,7 +30,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * （3）当配置发生变化时，需要及时通知所有的 client 端。
  * 这里就需要知道哪些是客户端？？
  *
- * @author houbinbin
  * @since 0.0.8
  */
 @ChannelHandler.Sharable

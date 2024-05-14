@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.registry.register.domain.entry.impl;
 
@@ -11,10 +7,6 @@ import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 /**
  * <p> 服务明细工具类 </p>
  *
- * <pre> Created: 2019/10/23 8:26 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.8
  */
 public final class ServiceEntryBuilder {

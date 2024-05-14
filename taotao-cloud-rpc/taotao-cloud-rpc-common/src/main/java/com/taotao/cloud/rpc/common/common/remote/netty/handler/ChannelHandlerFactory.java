@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.common.common.remote.netty.handler;
 
@@ -10,10 +6,6 @@ import io.netty.channel.ChannelHandler;
 /**
  * <p> 用户构建 channel handler </p>
  *
- * <pre> Created: 2019/10/26 11:01 上午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.9
  */
 public interface ChannelHandlerFactory {

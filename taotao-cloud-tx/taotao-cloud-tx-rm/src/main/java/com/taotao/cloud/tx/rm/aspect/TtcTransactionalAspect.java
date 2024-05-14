@@ -2,8 +2,8 @@ package com.taotao.cloud.tx.rm.aspect;
 
 import com.taotao.cloud.tx.rm.annotation.DistributedTransactional;
 import com.taotao.cloud.tx.rm.transactional.TransactionalType;
-import com.taotao.cloud.tx.rm.transactional.ZhuziTx;
-import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.transactional.TtcTx;
+import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
 import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 // 负责拦截自定义注解的切面
 @Aspect
 @Component
-public class ZhuziTransactionalAspect implements Ordered {
+public class TtcTransactionalAspect implements Ordered {
 
-	@Around("@annotation(com.zhuzi.distributedtx.annotation.DistributedTransactional)")
+	@Around("@annotation(com.taotao.cloud.tx.rm.annotation.DistributedTransactional)")
 	public Integer invoke(ProceedingJoinPoint proceedingJoinPoint) {
 		System.out.println("分布式事务注解生效，切面成功拦截............");
 
@@ -31,15 +31,15 @@ public class ZhuziTransactionalAspect implements Ordered {
 		// 如果目前触发切面的方法，是一组全局事务的第一个子事务
 		if (zta.isStart()) {
 			// 则向事务管理者注册一个事务组
-			groupId = ZhuziTxParticipant.createZhuziTransactionalManagerGroup();
+			groupId = TtcTxParticipant.createTtcTransactionalManagerGroup();
 		}
 		// 否则获取当前事务所属的事务组ID
 		else {
-			groupId = ZhuziTxParticipant.getCurrentGroupId();
+			groupId = TtcTxParticipant.getCurrentGroupId();
 		}
 
 		// 创建子事务
-		ZhuziTx zhuziTx = ZhuziTxParticipant.createTransactional(groupId);
+		TtcTx ttcTx = TtcTxParticipant.createTransactional(groupId);
 
 		// spring会开启MySQL事务
 		try {
@@ -47,20 +47,22 @@ public class ZhuziTransactionalAspect implements Ordered {
 			Object result = proceedingJoinPoint.proceed();
 
 			// 没有抛出异常证明该事务可以提交，把子事务添加进事务组
-			ZhuziTxParticipant.addZhuziTransactional(zhuziTx, zta.isEnd(),
+			TtcTxParticipant.addTtcTransactional(ttcTx, zta.isEnd(),
 				TransactionalType.commit);
 
 			// 返回执行成功的结果
 			return (Integer) result;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			// 抛出异常证明该事务需要回滚，把子事务添加进事务组
-			ZhuziTxParticipant.addZhuziTransactional(zhuziTx, zta.isEnd(),
+			TtcTxParticipant.addTtcTransactional(ttcTx, zta.isEnd(),
 				TransactionalType.rollback);
-		} catch (Throwable throwable) {
+		}
+		catch (Throwable throwable) {
 			throwable.printStackTrace();
 			// 把子事务添加进事务组,抛出异常证明该事务需要回滚
-			ZhuziTxParticipant.addZhuziTransactional(zhuziTx, zta.isEnd(),
+			TtcTxParticipant.addTtcTransactional(ttcTx, zta.isEnd(),
 				TransactionalType.rollback);
 			// 返回执行失败的结果
 			return -1;

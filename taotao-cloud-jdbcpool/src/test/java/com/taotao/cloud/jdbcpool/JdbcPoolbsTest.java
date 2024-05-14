@@ -1,13 +1,9 @@
 package com.taotao.cloud.jdbcpool;
 
-import com.github.houbb.thread.pool.bs.JdbcPoolBs;
+import com.taotao.cloud.jdbcpool.bs.JdbcPoolBs;
 import javax.sql.DataSource;
-import org.junit.Ignore;
-import org.junit.Test;
 
 /**
- * <p> project: jdbc-pool-GenTest </p>
- * <p> create on 2020/7/18 9:25 </p>
  *
  * @author shuigedeng
  * @since 1.2.0

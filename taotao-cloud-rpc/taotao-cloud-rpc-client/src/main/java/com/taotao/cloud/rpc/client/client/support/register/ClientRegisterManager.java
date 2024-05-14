@@ -11,11 +11,6 @@ import java.util.List;
 
 /**
  * <p> 客户端注册中心服务接口 </p>
- *
- * <pre> Created: 2019/10/26 10:27 上午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.9
  */
 public interface ClientRegisterManager {

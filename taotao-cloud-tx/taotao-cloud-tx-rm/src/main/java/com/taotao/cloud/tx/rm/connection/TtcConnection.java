@@ -2,7 +2,7 @@ package com.taotao.cloud.tx.rm.connection;
 
 
 import com.taotao.cloud.tx.rm.transactional.TransactionalType;
-import com.taotao.cloud.tx.rm.transactional.ZhuziTx;
+import com.taotao.cloud.tx.rm.transactional.TtcTx;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -25,21 +25,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // 自定义的数据库连接类（必须要实现JDBC的Connection接口）
-public class ZhuziConnection implements Connection {
+public class TtcConnection implements Connection {
 
 	// 原本应该返回的数据库连接对象
 	private Connection connection;
 	// 存放参与分布式事务的子事务
-	private ZhuziTx zhuziTx;
+	private TtcTx ttcTx;
 
 	// 负责提交事务的线程
 	private ExecutorService commitT = Executors.newSingleThreadExecutor();
 	// 负责回滚事务的线程
 	private ExecutorService rollbackT = Executors.newSingleThreadExecutor();
 
-	public ZhuziConnection(Connection connection, ZhuziTx zhuziTx) {
+	public TtcConnection(Connection connection, TtcTx ttcTx) {
 		this.connection = connection;
-		this.zhuziTx = zhuziTx;
+		this.ttcTx = ttcTx;
 	}
 
 	@Override
@@ -48,9 +48,9 @@ public class ZhuziConnection implements Connection {
 		commitT.execute(() -> {
 			try {
 				// 阻塞线程，禁止提交
-				zhuziTx.getTask().waitTask();
+				ttcTx.getTask().waitTask();
 				// 如果管理者返回事务可以提交，则提交事务
-				if (zhuziTx.getTransactionalType().equals(TransactionalType.commit)) {
+				if (ttcTx.getTransactionalType().equals(TransactionalType.commit)) {
 					System.out.println("\n收到管理者最终决断：提交事务中\n");
 					connection.commit();
 					System.out.println("\n子事务提交事务成功...\n");
@@ -77,7 +77,7 @@ public class ZhuziConnection implements Connection {
 	public void rollback() throws SQLException {
 		// 交给线程池中的线程来做最终的事务回滚
 		rollbackT.execute(() -> {
-			zhuziTx.getTask().waitTask();
+			ttcTx.getTask().waitTask();
 			try {
 				connection.rollback();
 				System.out.println("\n\n子事务回滚事务成功...\n\n");

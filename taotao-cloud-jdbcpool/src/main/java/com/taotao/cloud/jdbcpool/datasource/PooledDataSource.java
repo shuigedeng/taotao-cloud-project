@@ -1,10 +1,5 @@
 package com.taotao.cloud.jdbcpool.datasource;
 
-import com.taotao.cloud.heaven.util.lang.StringUtil;
-import com.taotao.cloud.heaven.util.util.DateUtil;
-import com.taotao.cloud.heaven.util.util.Optional;
-import com.taotao.cloud.log.integration.core.Log;
-import com.taotao.cloud.log.integration.core.LogFactory;
 import com.taotao.cloud.jdbcpool.connection.IPooledConnection;
 import com.taotao.cloud.jdbcpool.connection.PooledConnection;
 import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;

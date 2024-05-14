@@ -1,7 +1,5 @@
 package com.taotao.cloud.jdbcpool.connection;
 
-import com.taotao.cloud.log.integration.core.Log;
-import com.taotao.cloud.log.integration.core.LogFactory;
 import com.taotao.cloud.jdbcpool.api.IPooledDataSourceConfig;
 import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
 

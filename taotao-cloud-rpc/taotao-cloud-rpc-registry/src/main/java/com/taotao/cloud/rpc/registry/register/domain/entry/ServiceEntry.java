@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.registry.register.domain.entry;
 
@@ -10,11 +6,7 @@ import java.io.Serializable;
 /**
  * <p> 注册服务信息 </p>
  *
- * <pre> Created: 2019/10/23 8:04 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
  * （1）每一个 serviceId 是可以对应多台 ip:port 信息的。
- * @author houbinbin
  * @since 0.0.8
  */
 public interface ServiceEntry extends Serializable {

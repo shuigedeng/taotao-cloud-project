@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.registry.register.simple.client;
 
@@ -14,11 +10,6 @@ import java.util.List;
 
 /**
  * <p> 客户端注册服务类 </p>
- *
- * <pre> Created: 2019/10/23 9:08 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.8
  */
 public interface RegisterClientService {

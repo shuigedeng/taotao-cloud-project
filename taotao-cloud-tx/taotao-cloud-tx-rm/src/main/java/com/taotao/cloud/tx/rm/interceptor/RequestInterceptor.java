@@ -1,6 +1,6 @@
 package com.taotao.cloud.tx.rm.interceptor;
 
-import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -19,8 +19,8 @@ public class RequestInterceptor implements HandlerInterceptor {
 		String transactionalCount = request.getHeader("transactionalCount");
 		// 如果上游服务传递了组ID，获取并放入自身的ThreadLocal中
 		if (null != groupId || !"".equals(groupId)) {
-			ZhuziTxParticipant.setCurrentGroupId(groupId);
-			ZhuziTxParticipant.setTransactionCount(
+			TtcTxParticipant.setCurrentGroupId(groupId);
+			TtcTxParticipant.setTransactionCount(
 				Integer.valueOf(transactionalCount == null ? "0" : transactionalCount));
 		}
 
@@ -40,11 +40,11 @@ public class RequestInterceptor implements HandlerInterceptor {
 //        String groupId = request.getHeader("groupId");
 //        String transactionalCount = request.getHeader("transactionalCount");
 
-//        if (ZhuziTxParticipant.getCurrentGroupId() == null){
+//        if (TtcTxParticipant.getCurrentGroupId() == null){
 //            if (null != groupId){
 //                // 把获取到的事务组ID，设置到前面的ThreadLocal对象中
-//                ZhuziTxParticipant.setCurrentGroupId(groupId);
-//                ZhuziTxParticipant.setTransactionCount(
+//                TtcTxParticipant.setCurrentGroupId(groupId);
+//                TtcTxParticipant.setTransactionCount(
 //                        Integer.valueOf(transactionalCount == null ? "0" : transactionalCount));
 //            }
 //        }
@@ -55,7 +55,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 		Object handler, Exception ex) throws Exception {
 //        // 当RPC调用结束后，会进入后置处理器
 //        System.out.println("我进入后置拦截器啦.......");
-//        System.err.println("后置拦截器：" + ZhuziTxParticipant.getCurrentGroupId());
+//        System.err.println("后置拦截器：" + TtcTxParticipant.getCurrentGroupId());
 	}
 
 

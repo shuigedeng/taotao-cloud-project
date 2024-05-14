@@ -1,6 +1,16 @@
 package com.taotao.cloud.cache.bs;
 
 
+import com.taotao.cloud.cache.api.ICache;
+import com.taotao.cloud.cache.listener.MyRemoveListener;
+import com.taotao.cloud.cache.listener.MySlowListener;
+import com.taotao.cloud.cache.load.MyCacheLoad;
+import com.taotao.cloud.cache.support.evict.CacheEvicts;
+import com.taotao.cloud.cache.support.load.CacheLoads;
+import com.taotao.cloud.cache.support.map.Maps;
+import com.taotao.cloud.cache.support.persist.CachePersists;
+import java.util.concurrent.TimeUnit;
+
 /**
  * 缓存引导类测试
  * @author shuigedeng
@@ -14,7 +24,7 @@ public class CacheBsTest {
      */
     @Test
     public void helloTest() {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache =CacheBs.<String,String>newInstance()
                 .size(2)
                 .build();
 
@@ -33,7 +43,7 @@ public class CacheBsTest {
      */
     @Test
     public void configTest() {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .map(Maps.<String,String>hashMap())
                 .evict(CacheEvicts.<String, String>fifo())
                 .size(2)
@@ -54,7 +64,7 @@ public class CacheBsTest {
      */
     @Test
     public void expireTest() throws InterruptedException {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .build();
 
@@ -75,7 +85,7 @@ public class CacheBsTest {
      */
     @Test
     public void cacheRemoveListenerTest() {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(1)
                 .addRemoveListener(new MyRemoveListener<String, String>())
                 .build();
@@ -90,7 +100,7 @@ public class CacheBsTest {
      */
     @Test
     public void loadTest() {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .load(new MyCacheLoad())
                 .build();
 
@@ -103,7 +113,7 @@ public class CacheBsTest {
      */
     @Test
     public void persistRdbTest() throws InterruptedException {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .load(new MyCacheLoad())
                 .persist(CachePersists.<String, String>dbJson("1.rdb"))
                 .build();
@@ -118,7 +128,7 @@ public class CacheBsTest {
      */
     @Test
     public void loadDbJsonTest() {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .load(CacheLoads.<String, String>dbJson("1.rdb"))
                 .build();
 
@@ -131,7 +141,7 @@ public class CacheBsTest {
      */
     @Test
     public void slowLogTest() {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .addSlowListener(new MySlowListener())
                 .build();
 
@@ -146,7 +156,7 @@ public class CacheBsTest {
      */
     @Test
     public void persistAofTest() throws InterruptedException {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .persist(CachePersists.<String, String>aof("1.aof"))
                 .build();
 
@@ -163,7 +173,7 @@ public class CacheBsTest {
      */
     @Test
     public void loadAofTest() throws InterruptedException {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .load(CacheLoads.<String, String>aof("default.aof"))
                 .build();
 
@@ -178,7 +188,7 @@ public class CacheBsTest {
      */
     @Test
     public void lruEvictTest() throws InterruptedException {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>lru())
                 .build();
@@ -197,7 +207,7 @@ public class CacheBsTest {
 
     @Test
     public void lruDoubleListMapTest() throws InterruptedException {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>lruDoubleListMap())
                 .build();
@@ -220,7 +230,7 @@ public class CacheBsTest {
      */
     @Test
     public void lruLinkedHashMapTest()  {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>lruLinkedHashMap())
                 .build();
@@ -243,7 +253,7 @@ public class CacheBsTest {
      */
     @Test
     public void lruQ2Test()  {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>lru2Q())
                 .build();
@@ -266,7 +276,7 @@ public class CacheBsTest {
      */
     @Test
     public void lru2Test()  {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>lru2())
                 .build();
@@ -289,7 +299,7 @@ public class CacheBsTest {
      */
     @Test
     public void lfuTest()  {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>lfu())
                 .build();
@@ -313,7 +323,7 @@ public class CacheBsTest {
      */
     @Test
     public void clockTest()  {
-        ICache<String, String> cache = com.github.houbb.cache.core.bs.CacheBs.<String,String>newInstance()
+        ICache<String, String> cache = CacheBs.<String,String>newInstance()
                 .size(3)
                 .evict(CacheEvicts.<String, String>clock())
                 .build();

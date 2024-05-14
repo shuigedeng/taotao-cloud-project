@@ -1,13 +1,8 @@
 package com.taotao.cloud.jdbcpool;
 
 
-/**
- * <p> project: jdbc-pool-GenTest </p>
- * <p> create on 2020/7/18 9:25 </p>
- *
- * @author shuigedeng
- * @since 1.2.0
- */
+import java.util.Map;
+
 @Ignore
 public class GenTest {
 

@@ -26,7 +26,7 @@ buildscript {
 
         springBootVersion = "3.2.5"
         querydslAptVersion = "5.1.0"
-        mapstructProcessorVersion = "1.6.0.Beta1"
+        mapstructProcessorVersion = "1.6.0.Beta2"
         lombokMapstructBindingVersion = "0.2.0"
         lombokVersion = "1.18.32"
         recordBuilderVersion = "41"
@@ -151,7 +151,7 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.ly.smart-doc
-    id "com.ly.smart-doc" version "3.0.3"
+    id "com.ly.smart-doc" version "3.0.4"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck

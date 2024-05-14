@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.client.client.support.register.impl;
 
@@ -28,11 +24,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <p> 默认客户端注册中心实现类 </p>
- *
- * <pre> Created: 2019/10/26 10:34 上午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.9
  */
 public class DefaultClientRegisterManager implements ClientRegisterManager {

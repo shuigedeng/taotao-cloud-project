@@ -1,5 +1,7 @@
 package com.taotao.cloud.jdbcpool;
 
+import com.taotao.cloud.jdbcpool.datasource.PooledDataSource;
+import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.Test;
@@ -12,7 +14,7 @@ public class PooledDataSourceTest {
 
     @Test
     public void simpleTest() throws SQLException {
-        com.github.houbb.thread.pool.datasource.PooledDataSource source = new com.github.houbb.thread.pool.datasource.PooledDataSource();
+        PooledDataSource source = new PooledDataSource();
         source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         source.setUser("root");
         source.setPassword("123456");
@@ -30,7 +32,7 @@ public class PooledDataSourceTest {
 
     @Test
     public void notWaitTest() throws SQLException {
-        com.github.houbb.thread.pool.datasource.PooledDataSource source = new com.github.houbb.thread.pool.datasource.PooledDataSource();
+        PooledDataSource source = new PooledDataSource();
         source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         source.setUser("root");
         source.setPassword("123456");
@@ -50,7 +52,7 @@ public class PooledDataSourceTest {
         DateUtil.sleep(100);
     }
 
-    private void newThreadExec(final com.github.houbb.thread.pool.datasource.PooledDataSource source) {
+    private void newThreadExec(final  PooledDataSource source) {
         // 另起一个线程
         new Thread(new Runnable() {
             @Override
@@ -69,7 +71,7 @@ public class PooledDataSourceTest {
 
     @Test
     public void waitTest() throws SQLException {
-        com.github.houbb.thread.pool.datasource.PooledDataSource source = new com.github.houbb.thread.pool.datasource.PooledDataSource();
+        PooledDataSource source = new PooledDataSource();
         source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         source.setUser("root");
         source.setPassword("123456");
@@ -95,7 +97,7 @@ public class PooledDataSourceTest {
 
     @Test
     public void testOnIdleTest() throws SQLException {
-        com.github.houbb.thread.pool.datasource.PooledDataSource source = new com.github.houbb.thread.pool.datasource.PooledDataSource();
+        PooledDataSource source = new PooledDataSource();
         source.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC");
         source.setUser("root");
         source.setPassword("123456");

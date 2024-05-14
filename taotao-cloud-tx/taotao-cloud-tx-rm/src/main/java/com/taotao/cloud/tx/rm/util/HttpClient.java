@@ -1,7 +1,5 @@
 package com.taotao.cloud.tx.rm.util;
 
-import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
-
 // HttpClient远程调用工具
 public class HttpClient {
 
@@ -13,8 +11,8 @@ public class HttpClient {
 //            CloseableHttpClient httpClient = HttpClients.createDefault();
 //            HttpGet httpGet = new HttpGet(url);
 ////            httpGet.addHeader("Content-type", "application/json");
-////            httpGet.addHeader("groupId", ZhuziTxParticipant.getCurrentGroupId());
-////            httpGet.addHeader("transactionalCount", String.valueOf(ZhuziTxParticipant.getTransactionCount()));
+////            httpGet.addHeader("groupId", TtcTxParticipant.getCurrentGroupId());
+////            httpGet.addHeader("transactionalCount", String.valueOf(TtcTxParticipant.getTransactionCount()));
 //            CloseableHttpResponse response = httpClient.execute(httpGet);
 //
 //            // 如果调用结果是返回OK，状态码为200
@@ -25,12 +23,12 @@ public class HttpClient {
 //                    // 从中找到上游服务传递的组ID、事务数量，并赋值给自己的子事务
 //                    if ("groupId".equals(header.getName())){
 //                        String groupId = header.getValue();
-//                        ZhuziTxParticipant.setCurrentGroupId(groupId);
-//                        System.err.println("参数：" + groupId + "，值：" + ZhuziTxParticipant.getCurrentGroupId());
+//                        TtcTxParticipant.setCurrentGroupId(groupId);
+//                        System.err.println("参数：" + groupId + "，值：" + TtcTxParticipant.getCurrentGroupId());
 //                    }
 //                    if ("transactionalCount".equals(header.getName())){
 //                        String transactionalCount = header.getValue();
-//                        ZhuziTxParticipant.setTransactionCount(
+//                        TtcTxParticipant.setTransactionCount(
 //                                Integer.valueOf(transactionalCount == null ? "0" : transactionalCount));
 //                    }
 //                }

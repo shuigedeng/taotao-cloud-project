@@ -4,7 +4,7 @@ package com.taotao.cloud.tx.rm.transactional;
 import com.taotao.cloud.tx.rm.util.Task;
 
 // 分布式事务 - 子事务对象
-public class ZhuziTx {
+public class TtcTx {
 
 	// 当前子事务属于哪个事务组
 	private String groupId;
@@ -15,20 +15,20 @@ public class ZhuziTx {
 	// 当前子事务的任务等待队列（基于此实现事务控制权）
 	private Task task;
 
-	public ZhuziTx(String groupId, String transactionalId, TransactionalType transactionalType) {
+	public TtcTx(String groupId, String transactionalId, TransactionalType transactionalType) {
 		this.groupId = groupId;
 		this.transactionalId = transactionalId;
 		this.transactionalType = transactionalType;
 		this.task = new Task();
 	}
 
-	public ZhuziTx(String groupId, String transactionalId) {
+	public TtcTx(String groupId, String transactionalId) {
 		this.groupId = groupId;
 		this.transactionalId = transactionalId;
 		this.task = new Task();
 	}
 
-	public ZhuziTx() {
+	public TtcTx() {
 	}
 
 	public String getGroupId() {

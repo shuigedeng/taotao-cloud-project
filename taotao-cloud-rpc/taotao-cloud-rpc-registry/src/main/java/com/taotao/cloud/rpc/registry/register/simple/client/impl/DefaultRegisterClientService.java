@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.registry.register.simple.client.impl;
 
@@ -17,11 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <p> 默认客户端注册服务实现类 </p>
- *
- * <pre> Created: 2019/10/23 9:42 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.8
  */
 public class DefaultRegisterClientService implements RegisterClientService {

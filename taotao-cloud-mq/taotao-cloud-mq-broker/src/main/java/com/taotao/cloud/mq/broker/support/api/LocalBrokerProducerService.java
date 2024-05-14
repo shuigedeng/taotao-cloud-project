@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.mq.broker.support.api;
 
@@ -14,10 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * <p> 生产者注册服务类 </p>
  *
- * <pre> Created: 2019/10/23 9:08 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 2024.05
  */
 public class LocalBrokerProducerService implements IBrokerProducerService {

@@ -15,7 +15,7 @@ public class RoundRobinLoadBalancer implements LoadBalancer {
 
 	@Override
 	public Instance selectService(List<Instance> instances) throws RpcException {
-		if (instances.size() == 0) {
+		if (instances.isEmpty()) {
 			throw new ServiceNotFoundException(
 				"service instances size is zero, can't provide service! please start server first!");
 		}

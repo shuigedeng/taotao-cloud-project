@@ -129,7 +129,7 @@ configurations {
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.49!!'
+        //implementation 'com.alibaba:fastjson:2.0.50!!'
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"

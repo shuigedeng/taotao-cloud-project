@@ -1,7 +1,5 @@
 package com.taotao.cloud.jdbcpool.util;
 
-import com.taotao.cloud.heaven.util.common.ArgUtil;
-import com.taotao.cloud.heaven.util.lang.StringUtil;
 import com.taotao.cloud.jdbcpool.exception.JdbcPoolException;
 
 import java.util.HashMap;
@@ -11,8 +9,6 @@ import java.util.Map;
  * 驱动类工具
  *
  * 1. 默认添加对应的驱动类信息
- * <p> project: jdbc-pool-JdbcDriveUtil </p>
- * <p> create on 2020/7/18 9:21 </p>
  *
  * @author shuigedeng
  * @since 1.2.0

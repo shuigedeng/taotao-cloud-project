@@ -1,6 +1,5 @@
 package com.taotao.cloud.cache.support.load;
 
-import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheLoad;
 import com.taotao.cloud.cache.model.PersistRdbEntry;

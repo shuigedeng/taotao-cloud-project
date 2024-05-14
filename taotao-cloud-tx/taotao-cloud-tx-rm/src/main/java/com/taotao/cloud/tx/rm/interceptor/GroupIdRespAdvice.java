@@ -1,6 +1,6 @@
 package com.taotao.cloud.tx.rm.interceptor;
 
-import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -26,11 +26,11 @@ public class GroupIdRespAdvice implements ResponseBodyAdvice {
 		ServerHttpResponse response) {
 		// 如果ThreadLocal中的事务组ID不为空，代表当前请求参与了分布式事务，
 		// 会获取对应的事务组ID放入到响应头中（对于普通请求不会改写响应头）
-		if (ZhuziTxParticipant.getCurrentGroupId() != null) {
+		if (TtcTxParticipant.getCurrentGroupId() != null) {
 			// 把需要传递的事务组ID、子事务数量放入响应头中
-			response.getHeaders().set("groupId", ZhuziTxParticipant.getCurrentGroupId());
+			response.getHeaders().set("groupId", TtcTxParticipant.getCurrentGroupId());
 			response.getHeaders().set("transactionalCount",
-				String.valueOf(ZhuziTxParticipant.getTransactionCount()));
+				String.valueOf(TtcTxParticipant.getTransactionCount()));
 		}
 		return body;
 	}

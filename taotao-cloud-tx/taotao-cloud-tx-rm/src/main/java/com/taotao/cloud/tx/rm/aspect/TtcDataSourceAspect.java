@@ -1,7 +1,7 @@
 package com.taotao.cloud.tx.rm.aspect;
 
-import com.taotao.cloud.tx.rm.connection.ZhuziConnection;
-import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.connection.TtcConnection;
+import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
 import java.sql.Connection;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 // 剥夺并接管Spring事务控制权的切面
 @Aspect
 @Component
-public class ZhuziDataSourceAspect {
+public class TtcDataSourceAspect {
 
 	@Around("execution(* javax.sql.DataSource.getConnection(..))")
 	public Connection dataSourceAround(ProceedingJoinPoint proceedingJoinPoint)
@@ -20,10 +20,10 @@ public class ZhuziDataSourceAspect {
 
 		// 如果当前调用事务接口的线程正在参与分布式事务，
 		// 则返回自定义的Connection对象接管事务控制权
-		if (ZhuziTxParticipant.getCurrent() != null) {
+		if (TtcTxParticipant.getCurrent() != null) {
 			System.out.println("返回自定义的Connection对象.......");
 			Connection connection = (Connection) proceedingJoinPoint.proceed();
-			return new ZhuziConnection(connection, ZhuziTxParticipant.getCurrent());
+			return new TtcConnection(connection, TtcTxParticipant.getCurrent());
 		}
 
 		// 如果当前线程没有参与分布式事务，让其正常提交/回滚事务

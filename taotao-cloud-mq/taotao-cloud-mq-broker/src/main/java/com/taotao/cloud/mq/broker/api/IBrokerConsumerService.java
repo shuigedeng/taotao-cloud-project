@@ -1,11 +1,12 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.mq.broker.api;
 
 
+import com.taotao.cloud.mq.broker.dto.ChannelGroupNameDto;
+import com.taotao.cloud.mq.broker.dto.ServiceEntry;
+import com.taotao.cloud.mq.broker.dto.consumer.ConsumerSubscribeBo;
+import com.taotao.cloud.mq.broker.dto.consumer.ConsumerSubscribeReq;
+import com.taotao.cloud.mq.broker.dto.consumer.ConsumerUnSubscribeReq;
 import io.netty.channel.Channel;
 
 import java.util.List;
@@ -14,10 +15,6 @@ import java.util.Map;
 /**
  * <p> 消费者注册服务类 </p>
  *
- * <pre> Created: 2019/10/23 9:08 下午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 2024.05
  */
 public interface IBrokerConsumerService {

@@ -1,7 +1,3 @@
-/*
- * Copyright (c)  2019. houbinbin Inc.
- * rpc All rights reserved.
- */
 
 package com.taotao.cloud.rpc.common.common.rpc.domain.impl;
 
@@ -14,11 +10,6 @@ import io.netty.channel.ChannelFuture;
 
 /**
  * <p> 默认的实现 </p>
- *
- * <pre> Created: 2019/10/26 9:42 上午  </pre>
- * <pre> Project: rpc  </pre>
- *
- * @author houbinbin
  * @since 0.0.9
  */
 public class DefaultRpcChannelFuture implements RpcChannelFuture {

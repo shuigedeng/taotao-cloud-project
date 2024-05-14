@@ -9,20 +9,20 @@ import java.util.Map;
 import java.util.UUID;
 
 // 事务参与者的核心实现类
-public class ZhuziTxParticipant {
+public class TtcTxParticipant {
 
 	// 获取前面伴随服务启动产生的NettyClient客户端
 	private static NettyClient nettyClient =
 		ApplicationContextProvider.getBean(NettyClient.class);
 
 	// 存储当前线程在执行的子事务对象
-	private static ThreadLocal<ZhuziTx> current = new ThreadLocal<>();
+	private static ThreadLocal<TtcTx> current = new ThreadLocal<>();
 	// 存储当前子事务所属的事务组ID值
 	private static ThreadLocal<String> currentGroupId = new ThreadLocal<>();
 	// 存储当前子事务所属的事务组子事务总量
 	private static ThreadLocal<Integer> transactionalCount = new ThreadLocal<>();
 	// 事务ID和子事务对象的映射组
-	private static Map<String, ZhuziTx> ZHUZI_TRANSACTIONAL_MAP = new HashMap();
+	private static Map<String, TtcTx> TTC_TRANSACTIONAL_MAP = new HashMap();
 
 
 	/**
@@ -30,7 +30,7 @@ public class ZhuziTxParticipant {
 	 *
 	 * @return
 	 */
-	public static String createZhuziTransactionalManagerGroup() {
+	public static String createTtcTransactionalManagerGroup() {
 		// 随机产生一个UUID作为事务组ID
 		String groupID = UUID.randomUUID().toString();
 		// 把事务组ID存在currentGroupId当中
@@ -52,25 +52,25 @@ public class ZhuziTxParticipant {
 	/***
 	 *  创建一个子事务对象
 	 */
-	public static ZhuziTx createTransactional(String groupId) {
+	public static TtcTx createTransactional(String groupId) {
 		// 随机产生一个UUID作为子事务ID
 		String transactionalId = UUID.randomUUID().toString();
 		// 示例化出一个子事务对象
-		ZhuziTx zhuziTransactional = new ZhuziTx(groupId, transactionalId);
+		TtcTx ttcTx = new TtcTx(groupId, transactionalId);
 		// 将创建出的子事务对象保存到相关的变量中
-		ZHUZI_TRANSACTIONAL_MAP.put(groupId, zhuziTransactional);
-		current.set(zhuziTransactional);
+		TTC_TRANSACTIONAL_MAP.put(groupId, ttcTx);
+		current.set(ttcTx);
 		// 对事务组数量+1
 		Integer integer = addTransactionCount();
 		System.out.println("创建子事务,目前事务组长度为：" + integer);
-		return zhuziTransactional;
+		return ttcTx;
 	}
 
 	/**
 	 * 注册事务（向事务管理者的事务组中添加子事务）
 	 */
-	public static ZhuziTx addZhuziTransactional(
-			ZhuziTx ztp,
+	public static TtcTx addTtcTransactional(
+			TtcTx ztp,
 		Boolean isEnd, TransactionalType type) {
 		// 通过JSON序列化一个对象
 		JSONObject sendData = new JSONObject();
@@ -80,7 +80,7 @@ public class ZhuziTxParticipant {
 		sendData.put("transactionalType", type);
 		sendData.put("command", "add");
 		sendData.put("isEnd", isEnd);
-		sendData.put("transactionalCount", ZhuziTxParticipant.getTransactionalCount());
+		sendData.put("transactionalCount", TtcTxParticipant.getTransactionalCount());
 		// 将封装好的JSON发送给事务管理者
 		nettyClient.send(sendData);
 		System.out.println(">>>>>向管理者发送添加子事务命令成功<<<<<");
@@ -101,7 +101,7 @@ public class ZhuziTxParticipant {
 		return transactionalCount.get();
 	}
 
-	public static ZhuziTx getCurrent() {
+	public static TtcTx getCurrent() {
 		return current.get();
 	}
 
@@ -121,7 +121,7 @@ public class ZhuziTxParticipant {
 		transactionalCount.set(i);
 	}
 
-	public static ZhuziTx getZhuziTransactional(String groupId) {
-		return ZHUZI_TRANSACTIONAL_MAP.get(groupId);
+	public static TtcTx getTtcTransactional(String groupId) {
+		return TTC_TRANSACTIONAL_MAP.get(groupId);
 	}
 }

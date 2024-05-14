@@ -3,8 +3,8 @@ package com.taotao.cloud.tx.rm.netty;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.taotao.cloud.tx.rm.transactional.TransactionalType;
-import com.taotao.cloud.tx.rm.transactional.ZhuziTx;
-import com.taotao.cloud.tx.rm.transactional.ZhuziTxParticipant;
+import com.taotao.cloud.tx.rm.transactional.TtcTx;
+import com.taotao.cloud.tx.rm.transactional.TtcTxParticipant;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -29,21 +29,21 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 		System.out.println("接收command：" + command);
 
 		// 对事务进行操作
-		ZhuziTx zhuziTx = ZhuziTxParticipant.getZhuziTransactional(groupId);
+		TtcTx ttcTx = TtcTxParticipant.getTtcTransactional(groupId);
 
 		// 如果事务管理者最终决定提交事务
 		if ("commit".equals(command)) {
 			// 根据groupID找到子事务并设置commit状态
-			zhuziTx.setTransactionalType(TransactionalType.commit);
+			ttcTx.setTransactionalType(TransactionalType.commit);
 		}
 		// 如果事务管理者最终决定回滚事务
 		else {
 			// 根据groupID找到子事务并设置rollback回滚状态
-			zhuziTx.setTransactionalType(TransactionalType.rollback);
+			ttcTx.setTransactionalType(TransactionalType.rollback);
 		}
 
 		// 唤醒在之前阻塞的、负责提交/回滚事务的线程
-		zhuziTx.getTask().signalTask();
+		ttcTx.getTask().signalTask();
 	}
 
 	public void sendData(JSONObject result) {
