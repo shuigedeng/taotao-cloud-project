@@ -32,8 +32,8 @@ dependencies {
 
     implementation 'org.springframework.session:spring-session-data-redis:3.2.2'
 
-    implementation 'com.github.binarywang:weixin-java-mp:4.6.1.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.6.1.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.6.2.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.6.2.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
