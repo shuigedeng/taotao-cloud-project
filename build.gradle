@@ -191,7 +191,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.2"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.10.1'
+    id 'org.graalvm.buildtools.native' version '0.10.2'
 
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.qqviaja.gradle.MybatisGenerator
