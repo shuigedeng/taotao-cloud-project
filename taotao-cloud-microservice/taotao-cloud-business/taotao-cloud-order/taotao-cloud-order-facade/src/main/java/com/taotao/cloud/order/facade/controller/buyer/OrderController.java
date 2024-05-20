@@ -21,7 +21,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;

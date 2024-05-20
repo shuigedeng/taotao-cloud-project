@@ -1196,46 +1196,53 @@ taotao:
     data:
       elasticsearch:
         enabled: true
-      mybatis-plus:
+      mybatis:
         enabled: true
         dynamic:
           enabled: false
-        auto-fill:
-          enabled: true
-          enable-insert-fill: true
-          enable-update-fill: true
         interceptor:
           enabled: true
-          pagination:
-            db-type: mysql
+          sqlLog:
             enabled: true
-            max-limit: 1000
-            optimize-join: true
-            overflow: true
-          block-attack:
+          sqlCollector:
             enabled: true
-          illegal-sql:
+          fieldEncrypt:
             enabled: true
-          optimistic-locker:
+          dataOperate:
             enabled: true
-          data-scope:
-            enabled: true
-          multi-tenant-line:
-            enabled: true
-          sql-log:
-            enabled: true
-          sql-collector:
-            enabled: true
-          field-encrypt:
-            enabled: true
-          data-operate:
-            enabled: true
-          slow-query:
+          slowQuery:
             enabled: true
             slow-sql-threshold-ms: 6000
-          big-result-query:
+          bigResultQuery:
             enabled: true
             size: 1000
+        mybatis-plus:
+          enabled: true
+          auto-fill:
+            enabled: true
+            enable-insert-fill: true
+            enable-update-fill: true
+          interceptor:
+            enabled: true
+            pagination:
+              db-type: mysql
+              enabled: true
+              max-limit: 1000
+              optimize-join: true
+              overflow: true
+            blockAttack:
+              enabled: true
+            illegalSql:
+              enabled: true
+            optimisticLocker:
+              enabled: true
+            dataScope:
+              enabled: true
+            multiTenant:
+              enabled: false
+            data-change:
+              enabled: true
+              types: logger
       jpa:
         enabled: true
         packages: com.taotao.cloud.sys.biz.model.entity
@@ -1363,7 +1370,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatis.logging.CustomStdOutImpl
     lazyLoadingEnabled: true  #查询时，关闭关联对象即时加载以提高性能
     aggressiveLazyLoading: false  #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
     multipleResultSetsEnabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果

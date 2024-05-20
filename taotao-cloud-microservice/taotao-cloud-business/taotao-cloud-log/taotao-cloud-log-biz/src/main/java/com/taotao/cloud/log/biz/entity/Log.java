@@ -17,8 +17,8 @@
 package com.taotao.cloud.log.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.data.mybatisplus.interceptor.datachanage.annotation.DataVersionLog;
-import com.taotao.cloud.data.mybatisplus.interceptor.encrypt.annotation.EncryptField;
+import com.taotao.cloud.data.mybatis.interceptor.datachanage.annotation.DataVersionLog;
+import com.taotao.cloud.data.mybatis.interceptor.encrypt.annotation.EncryptField;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

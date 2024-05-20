@@ -25,7 +25,7 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.workflow.api.vo.UserRelationEntity;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.common.database.util.DataSourceUtil;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.log.biz.log.core.db.service;
 
 import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.log.biz.log.core.db.convert.LogConvert;
 import com.taotao.cloud.log.biz.log.core.db.dao.LoginLogDbManager;
 import com.taotao.cloud.log.biz.log.core.db.entity.LoginLogDb;

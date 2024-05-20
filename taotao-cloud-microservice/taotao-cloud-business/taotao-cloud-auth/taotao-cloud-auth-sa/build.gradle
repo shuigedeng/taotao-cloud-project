@@ -19,7 +19,7 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"

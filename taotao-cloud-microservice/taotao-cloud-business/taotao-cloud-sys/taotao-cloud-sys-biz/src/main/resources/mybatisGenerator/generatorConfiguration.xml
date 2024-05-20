@@ -17,7 +17,7 @@
 		<plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
 		<!--可以自定义生成model的代码注释-->
-		<commentGenerator type="com.taotao.cloud.data.mybatisplus.mbg.CommentGenerator">
+		<commentGenerator type="com.taotao.cloud.data.mybatis.mbg.CommentGenerator">
 <!--		<commentGenerator type="org.mybatis.generator.internal.DefaultCommentGenerator">-->
 			<!-- 是否去除自动生成的注释 true：是 ：false:否 -->
 			<property name="suppressAllComments" value="true"/>

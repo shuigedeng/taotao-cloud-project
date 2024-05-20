@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.service;
 
 import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.data.mybatis.pagehelper.PageParam;
 import com.taotao.cloud.message.biz.ballcat.notify.model.dto.AnnouncementDTO;
 import com.taotao.cloud.message.biz.ballcat.notify.model.entity.Announcement;
 import com.taotao.cloud.message.biz.ballcat.notify.model.qo.AnnouncementQO;

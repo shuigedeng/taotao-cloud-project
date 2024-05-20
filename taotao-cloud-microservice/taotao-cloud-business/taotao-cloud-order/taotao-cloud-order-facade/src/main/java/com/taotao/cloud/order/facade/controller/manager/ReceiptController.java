@@ -19,7 +19,7 @@ package com.taotao.cloud.order.facade.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
 import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
 import com.taotao.cloud.order.application.service.order.IReceiptService;

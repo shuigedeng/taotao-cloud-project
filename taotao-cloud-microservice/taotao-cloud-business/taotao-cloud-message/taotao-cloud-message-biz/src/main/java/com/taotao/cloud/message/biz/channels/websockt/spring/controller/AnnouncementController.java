@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.controller;
 
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.data.mybatisplus.pagehelper.PageParam;
+import com.taotao.cloud.data.mybatis.pagehelper.PageParam;
 import com.taotao.cloud.message.biz.ballcat.notify.model.dto.AnnouncementDTO;
 import com.taotao.cloud.message.biz.ballcat.notify.model.qo.AnnouncementQO;
 import com.taotao.cloud.message.biz.ballcat.notify.model.vo.AnnouncementPageVO;

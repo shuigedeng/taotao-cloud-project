@@ -628,7 +628,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: com.taotao.cloud.data.mybatisplus.log.StandardStdOutImpl
+    log-impl: com.taotao.cloud.data.mybatis.log.StandardStdOutImpl
 
 feign:
   sentinel:

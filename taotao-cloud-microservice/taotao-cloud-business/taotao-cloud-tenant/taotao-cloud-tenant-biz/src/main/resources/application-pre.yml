@@ -731,7 +731,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志打印参数class  org.apache.ibatis.logging.slf4j.Slf4jImpl com.taotao.cloud.data.mybatis.logging.CustomStdOutImpl
     lazyLoadingEnabled: true  #查询时，关闭关联对象即时加载以提高性能
     aggressiveLazyLoading: false  #设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能
     multipleResultSetsEnabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果

@@ -21,7 +21,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.sys.model.page.order.OrderPageQuery;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;

@@ -22,7 +22,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    implementation("io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus") {
+    implementation("io.github.shuigedeng:taotao-cloud-starter-data-mybatis") {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"

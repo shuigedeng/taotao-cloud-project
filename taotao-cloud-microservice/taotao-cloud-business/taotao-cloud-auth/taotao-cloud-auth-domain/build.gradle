@@ -72,7 +72,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     api "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    api("io.github.shuigedeng:taotao-cloud-starter-data-mybatis-plus") {
+    api("io.github.shuigedeng:taotao-cloud-starter-data-mybatis") {
         exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
     api "io.github.shuigedeng:taotao-cloud-starter-cache-redis"

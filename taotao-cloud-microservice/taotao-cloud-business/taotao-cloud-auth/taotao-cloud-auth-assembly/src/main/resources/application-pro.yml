@@ -1315,7 +1315,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     # 日志打印参数class
-    #log-impl: com.taotao.cloud.data.mybatisplus.log.CustomStdOutImpl
+    #log-impl: com.taotao.cloud.data.mybatis.logging.CustomStdOutImpl
     #log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #查询时，关闭关联对象即时加载以提高性能

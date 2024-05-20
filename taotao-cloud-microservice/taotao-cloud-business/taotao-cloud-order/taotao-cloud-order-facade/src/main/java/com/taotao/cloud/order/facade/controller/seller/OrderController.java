@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.data.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.application.command.cart.OrderExportVO;
 import com.taotao.cloud.order.application.command.cart.TradeDTO;
 import com.taotao.cloud.order.application.command.order.OrderDetailVO;
