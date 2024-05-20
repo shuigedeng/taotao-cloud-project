@@ -19,20 +19,17 @@ public class PooledConnection implements IPooledConnection {
 
     /**
      * 是否繁忙
-     * @since 1.1.0
      */
     private volatile boolean isBusy;
 
     /**
      * 数据库链接信息
-     * @since 1.1.0
      */
     private Connection connection;
 
     /**
      * 对应的数据源信息
      *
-     * @since 1.1.0
      */
     private IPooledDataSourceConfig dataSource;
 

@@ -17,7 +17,6 @@ public final class DriverClassUtil {
 
     /**
      * 存放驱动类信息
-     * @since 1.2.0
      */
     private static final Map<String, String> DRIVER_CLASS_MAP;
 

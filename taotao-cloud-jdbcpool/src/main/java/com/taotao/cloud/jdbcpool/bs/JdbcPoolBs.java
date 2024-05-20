@@ -15,7 +15,6 @@ public class JdbcPoolBs {
 
     /**
      * 驱动类
-     * @since 0.0.9
      */
     private String driverClass = DriverNameConst.MYSQL_8;
 
@@ -27,55 +26,46 @@ public class JdbcPoolBs {
 
     /**
      * 最小尺寸
-     * @since 1.1.0
      */
     private int minSize = PooledConst.DEFAULT_MIN_SIZE;
 
     /**
      * 最大尺寸
-     * @since 1.1.0
      */
     private int maxSize = PooledConst.DEFAULT_MAX_SIZE;
 
     /**
      * 最大的等待时间
-     * @since 1.3.0
      */
     private long maxWaitMills = PooledConst.DEFAULT_MAX_WAIT_MILLS;
 
     /**
      * 验证查询
-     * @since 1.5.0
      */
     private String validQuery = PooledConst.DEFAULT_VALID_QUERY;
 
     /**
      * 验证的超时时间
-     * @since 1.5.0
      */
     private int validTimeOutSeconds = PooledConst.DEFAULT_VALID_TIME_OUT_SECONDS;
 
     /**
      * 获取时验证
-     * @since 1.5.0
      */
     private boolean testOnBorrow = PooledConst.DEFAULT_TEST_ON_BORROW;
 
     /**
      * 归还时验证
-     * @since 1.5.0
      */
     private boolean testOnReturn = PooledConst.DEFAULT_TEST_ON_RETURN;
 
     /**
      * 闲暇时验证
-     * @since 1.5.0
      */
     private boolean testOnIdle = PooledConst.DEFAULT_TEST_ON_IDLE;
 
     /**
      * 闲暇时验证的时间间隔
-     * @since 1.5.0
      */
     private long testOnIdleIntervalSeconds = PooledConst.DEFAULT_TEST_ON_IDLE_INTERVAL_SECONDS;
 

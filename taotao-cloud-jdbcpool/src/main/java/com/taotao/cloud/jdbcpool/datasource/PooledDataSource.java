@@ -26,7 +26,6 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 
     /**
      * 内置的队列
-     * @since 1.1.0
      */
     private List<IPooledConnection> pool = new ArrayList<>();
 

@@ -11,20 +11,17 @@ public class PersistAofEntry {
 
     /**
      * 参数信息
-     * @since 0.0.10
      */
     private Object[] params;
 
     /**
      * 方法名称
-     * @since 0.0.10
      */
     private String methodName;
 
     /**
      * 新建对象实例
      * @return this
-     * @since 0.0.10
      */
     public static PersistAofEntry newInstance() {
         return new PersistAofEntry();

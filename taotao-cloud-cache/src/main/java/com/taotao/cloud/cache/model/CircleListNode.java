@@ -11,31 +11,26 @@ public class CircleListNode<K,V> {
 
     /**
      * 键
-     * @since 0.0.15
      */
     private K key;
 
     /**
      * 值
-     * @since 0.0.15
      */
     private V value = null;
 
     /**
      * 是否被访问过
-     * @since 0.0.15
      */
     private boolean accessFlag = false;
 
     /**
      * 后一个节点
-     * @since 0.0.15
      */
     private CircleListNode<K, V> pre;
 
     /**
      * 后一个节点
-     * @since 0.0.15
      */
     private CircleListNode<K, V> next;
 

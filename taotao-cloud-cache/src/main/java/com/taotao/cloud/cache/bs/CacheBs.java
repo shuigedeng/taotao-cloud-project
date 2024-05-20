@@ -35,43 +35,36 @@ public final class CacheBs<K,V> {
 
     /**
      * map 实现
-     * @since 0.0.2
      */
     private Map<K,V> map = new HashMap<>();
 
     /**
      * 大小限制
-     * @since 0.0.2
      */
     private int size = Integer.MAX_VALUE;
 
     /**
      * 驱除策略
-     * @since 0.0.2
      */
     private ICacheEvict<K,V> evict = CacheEvicts.fifo();
 
     /**
      * 删除监听类
-     * @since 0.0.6
      */
     private final List<ICacheRemoveListener<K,V>> removeListeners = CacheRemoveListeners.defaults();
 
     /**
      * 慢操作监听类
-     * @since 0.0.9
      */
     private final List<ICacheSlowListener> slowListeners = CacheSlowListeners.none();
 
     /**
      * 加载策略
-     * @since 0.0.7
      */
     private ICacheLoad<K,V> load = CacheLoads.none();
 
     /**
      * 持久化实现策略
-     * @since 0.0.8
      */
     private ICachePersist<K,V> persist = CachePersists.none();
 

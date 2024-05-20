@@ -11,19 +11,16 @@ public class FreqNode<K,V> {
 
     /**
      * 键
-     * @since 0.0.14
      */
     private K key;
 
     /**
      * 值
-     * @since 0.0.14
      */
     private V value = null;
 
     /**
      * 频率
-     * @since 0.0.14
      */
     private int frequency = 1;
 

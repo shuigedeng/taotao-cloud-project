@@ -11,25 +11,21 @@ public class DataSourceConfigDto implements Serializable {
 
     /**
      * 驱动类
-     * @since 1.0.0
      */
     protected String driverClass;
 
     /**
      * jdbc url
-     * @since 1.0.0
      */
     protected String jdbcUrl;
 
     /**
      * 用户
-     * @since 1.0.0
      */
     protected String user;
 
     /**
      * 密码
-     * @since 1.0.0
      */
     protected String password;
 
