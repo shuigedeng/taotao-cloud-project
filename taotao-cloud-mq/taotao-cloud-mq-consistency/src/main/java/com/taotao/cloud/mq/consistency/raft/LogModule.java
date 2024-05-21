@@ -22,7 +22,7 @@ import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 /**
  *
  * @see cn.think.in.java.entity.LogEntry
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface LogModule extends LifeCycle {
 

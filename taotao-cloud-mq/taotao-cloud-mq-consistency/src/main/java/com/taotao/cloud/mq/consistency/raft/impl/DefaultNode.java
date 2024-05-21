@@ -59,7 +59,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 抽象机器节点, 初始为 follower, 角色随时变化.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Getter
 @Setter

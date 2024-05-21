@@ -8,10 +8,6 @@ import com.taotao.cloud.rpc.common.common.util.Waits;
 
 /**
  * 默认的 hook 实现
- * <p> project: rpc-ClientShutdownHook </p>
- * <p> create on 2019/10/30 20:26 </p>
- *
- * @author Administrator
  * @since 0.1.3
  */
 @Deprecated

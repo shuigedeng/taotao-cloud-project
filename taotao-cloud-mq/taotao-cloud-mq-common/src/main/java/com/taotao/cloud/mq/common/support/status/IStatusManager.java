@@ -2,11 +2,6 @@ package com.taotao.cloud.mq.common.support.status;
 
 /**
  * 状态管理
- *
- * <p> project: rpc-StatusManager </p>
- * <p> create on 2019/10/30 20:48 </p>
- *
- * @author Administrator
  * @since 2024.05
  */
 public interface IStatusManager {

@@ -4,10 +4,6 @@ package com.taotao.cloud.rpc.common.common.util;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p> project: rpc-Waits </p>
- * <p> create on 2019/10/30 21:16 </p>
- *
- * @author Administrator
  * @since 0.1.3
  */
 @CommonEager

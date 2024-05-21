@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 /**
  * 日志条目
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  * @see LogModule
  */
 @Data

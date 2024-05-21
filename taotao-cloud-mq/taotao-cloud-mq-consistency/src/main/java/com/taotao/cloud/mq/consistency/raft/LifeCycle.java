@@ -18,7 +18,7 @@ package com.taotao.cloud.mq.consistency.raft;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface LifeCycle {
 

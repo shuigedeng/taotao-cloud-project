@@ -20,7 +20,7 @@ package com.taotao.cloud.mq.consistency.raft.rpc;
 import com.taotao.cloud.mq.consistency.raft.LifeCycle;
 
 /**
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface RpcService extends LifeCycle {
 

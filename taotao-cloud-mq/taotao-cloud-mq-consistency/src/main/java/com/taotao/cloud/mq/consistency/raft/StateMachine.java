@@ -21,7 +21,7 @@ import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 
 /**
  * 状态机接口.
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface StateMachine extends LifeCycle {
 

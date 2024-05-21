@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 集群配置变更接口默认实现.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public class ClusterMembershipChangesImpl implements ClusterMembershipChanges {
 

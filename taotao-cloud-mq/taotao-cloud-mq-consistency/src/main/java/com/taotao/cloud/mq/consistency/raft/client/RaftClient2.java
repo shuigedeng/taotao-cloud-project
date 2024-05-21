@@ -20,7 +20,7 @@ import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Slf4j
 public class RaftClient2 {

@@ -34,7 +34,7 @@ import org.rocksdb.RocksDBException;
  *
  * 默认的日志实现. 日志模块不关心 key, 只关心 index.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  * @see cn.think.in.java.entity.LogEntry
  */
 @Setter

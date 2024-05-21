@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Slf4j
 public class DefaultRpcClient implements RpcClient {
@@ -50,7 +50,7 @@ public class DefaultRpcClient implements RpcClient {
 
     @Override
     public void init() {
-        CLIENT.init();
+        CLIENT.startup();
     }
 
     @Override

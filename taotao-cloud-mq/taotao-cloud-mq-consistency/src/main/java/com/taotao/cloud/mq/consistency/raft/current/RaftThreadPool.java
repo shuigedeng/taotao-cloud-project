@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public class RaftThreadPool {
 

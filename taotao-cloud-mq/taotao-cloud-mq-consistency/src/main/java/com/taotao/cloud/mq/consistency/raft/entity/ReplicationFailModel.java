@@ -22,7 +22,7 @@ import lombok.Builder;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Builder
 public class ReplicationFailModel {

@@ -23,7 +23,7 @@ import com.taotao.cloud.mq.consistency.raft.common.Peer;
  *
  * 集群配置变更接口.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface ClusterMembershipChanges {
 

@@ -25,7 +25,7 @@ import org.rocksdb.RocksDBException;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public class DefaultStateMachineTest {
     static DefaultStateMachine machine = DefaultStateMachine.getInstance();

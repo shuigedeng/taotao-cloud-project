@@ -5,10 +5,6 @@ import com.taotao.cloud.mq.common.support.status.IStatusManager;
 
 /**
  * 默认的 hook 实现
- * <p> project: rpc-ClientShutdownHook </p>
- * <p> create on 2019/10/30 20:26 </p>
- *
- * @author Administrator
  * @since 2024.05
  */
 public class DefaultShutdownHook extends AbstractShutdownHook {

@@ -3,10 +3,6 @@ package com.taotao.cloud.rpc.common.common.support.resource;
 import com.taotao.cloud.rpc.common.common.api.Destroyable;
 
 /**
- * <p> project: rpc-ResourceManager </p>
- * <p> create on 2019/10/30 21:25 </p>
- *
- * @author Administrator
  * @since 0.1.3
  */
 public interface ResourceManager {

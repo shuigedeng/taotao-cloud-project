@@ -18,7 +18,7 @@ package com.taotao.cloud.mq.consistency.raft.util;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public class LongConvert {
 

@@ -27,7 +27,7 @@ import lombok.ToString;
  *
  * 附加日志 RPC 参数. handlerAppendEntries
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  * @see Consensus#appendEntries(AentryParam)
  */
 @Getter

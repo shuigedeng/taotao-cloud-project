@@ -20,7 +20,7 @@ import lombok.Getter;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface NodeStatus {
 

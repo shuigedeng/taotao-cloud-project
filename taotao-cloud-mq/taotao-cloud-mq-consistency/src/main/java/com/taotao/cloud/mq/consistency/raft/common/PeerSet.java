@@ -24,7 +24,7 @@ import java.util.List;
  *
  * 节点集合. 去重.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public class PeerSet implements Serializable {
 

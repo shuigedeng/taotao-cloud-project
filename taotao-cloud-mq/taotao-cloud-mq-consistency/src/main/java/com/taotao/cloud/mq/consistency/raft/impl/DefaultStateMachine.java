@@ -29,7 +29,7 @@ import org.rocksdb.RocksDBException;
 /**
  * 默认的状态机实现.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Slf4j
 public class DefaultStateMachine implements StateMachine {

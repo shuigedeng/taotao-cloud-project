@@ -26,7 +26,7 @@ import lombok.Setter;
 /**
  * 请求投票 RPC 参数.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  * @see Consensus#requestVote(RvoteParam)
  */
 @Getter

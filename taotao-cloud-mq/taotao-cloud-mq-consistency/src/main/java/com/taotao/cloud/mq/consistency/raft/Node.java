@@ -26,7 +26,7 @@ import com.taotao.cloud.mq.consistency.raft.entity.RvoteResult;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface Node extends LifeCycle {
 

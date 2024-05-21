@@ -23,7 +23,7 @@ import com.taotao.cloud.mq.consistency.raft.exception.RaftNotSupportException;
 
 /**
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public abstract class RaftUserProcessor<T> extends AbstractUserProcessor<T> {
 

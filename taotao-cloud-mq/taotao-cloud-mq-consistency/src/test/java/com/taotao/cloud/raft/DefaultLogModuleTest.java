@@ -26,7 +26,7 @@ import org.junit.Test;
 
 
 /**
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public class DefaultLogModuleTest {
 

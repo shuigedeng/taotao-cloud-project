@@ -1,10 +1,6 @@
 package com.taotao.cloud.mq.common.support.hook;
 
 /**
- * <p> project: rpc-ShutdownHooks </p>
- * <p> create on 2019/10/30 21:36 </p>
- *
- * @author Administrator
  * @since 2024.05
  */
 public final class ShutdownHooks {

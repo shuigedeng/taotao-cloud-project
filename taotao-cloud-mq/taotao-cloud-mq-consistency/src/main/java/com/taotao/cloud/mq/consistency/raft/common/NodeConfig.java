@@ -26,7 +26,7 @@ import lombok.ToString;
  *
  * 节点配置
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Getter
 @Setter

@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Raft Server
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Slf4j
 public class DefaultRpcServiceImpl implements RpcService {

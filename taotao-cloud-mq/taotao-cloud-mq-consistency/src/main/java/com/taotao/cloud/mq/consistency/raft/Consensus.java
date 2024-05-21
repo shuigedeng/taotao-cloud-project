@@ -25,7 +25,7 @@ import com.taotao.cloud.mq.consistency.raft.entity.RvoteResult;
 /**
  *
  * Raft 一致性模块.
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 public interface Consensus {
 

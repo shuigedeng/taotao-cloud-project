@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  *
  * 默认的一致性模块实现.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Setter
 @Getter

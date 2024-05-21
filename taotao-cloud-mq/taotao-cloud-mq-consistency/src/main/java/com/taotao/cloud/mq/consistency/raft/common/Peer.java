@@ -23,7 +23,7 @@ import lombok.Setter;
 /**
  * 当前节点的 同伴.
  *
- * @author 莫那·鲁道
+ * @author shuigedeng
  */
 @Getter
 @Setter
