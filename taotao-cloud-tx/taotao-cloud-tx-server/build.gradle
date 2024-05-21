@@ -4,7 +4,7 @@ dependencies {
 }
 
 
-task dis(type: Zip, dependsOn: jar) {
+task releaseTarZip(type: Zip, dependsOn: jar) {
 
     archiveFileName = "${project.name}.zip"
 

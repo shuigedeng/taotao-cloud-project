@@ -1,4 +1,8 @@
 dependencies {
+    api project(":taotao-cloud-mq:taotao-cloud-mq-metrics")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-plugin")
+    api project(":taotao-cloud-mq:taotao-cloud-mq-proxy")
+
     testImplementation "junit:junit:4.13.2"
 
     implementation 'org.slf4j:slf4j-api:2.0.13'

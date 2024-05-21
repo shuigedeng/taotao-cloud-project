@@ -1,0 +1,102 @@
+name: Releases
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      #https://github.com/marketplace/actions/checkout
+      - name: Checkout Project
+        uses: actions/checkout@v4
+
+      - name: Get tag name from ref
+        shell: bash
+        run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+        id: get_tag
+
+      #https://github.com/marketplace/actions/github-action-for-graalvm
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      #https://github.com/marketplace/actions/cache
+      - name: Cache Gradle Packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.3.2
+        with:
+          gradle-version: 8.7
+
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: release taotao-cloud-tx
+        run: gradle -p taotao-cloud-tx/taotao-cloud-tx-server clean releaseTarZip -x test
+
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: release taotao-cloud-mq
+        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-dashboard clean releaseTarZip -x test
+
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: release taotao-cloud-rpc
+        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-dashboard clean releaseTarZip -x test
+
+      #https://github.com/ncipollo/release-action/tree/main
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/taotao-cloud-tx-server.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-server/build/taotao-cloud-rpc-server.tar.gz,foo/*.txt"
+          bodyFile: "doc/release/2024-05.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      #- name: Create Release
+      #  id: create_release
+      #  # 只有上一步获取到tag_name才继续
+      #  if: steps.prepare_release.outputs.tag_name
+      #  uses: actions/create-release@v1
+      #  env:
+      #    # GitHub 会自动创建 GITHUB_TOKEN 密码以在工作流程中使用
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    # 设置时区，默认是格林尼治时间
+      #    # TZ: Asia/Shanghai
+      #  with:
+      #    tag_name: ${{steps.prepare_release.outputs.tag_name}}
+      #    release_name: Release ${{steps.prepare_release.outputs.tag_name}} by zfb
+      #    draft: false
+      #    prerelease: false
+      ## 这一步是对上一步发布的release文件的补充，调用github api上传一个apk文件
+      #- name: Upload Release Asset
+      #  id: upload-release-asset
+      #  # 只有create_release成功得到输出才继续
+      #  if: steps.create_release.outputs.upload_url
+      #  uses: actions/upload-release-asset@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #    asset_path: ./app-debug-${{steps.prepare_release.outputs.tag_name}}.apk
+      #    asset_name: app-debug-${{steps.prepare_release.outputs.tag_name}}.apk
+      #    asset_content_type: application/vnd.android.package-archive
+      #- name: Create Release
+      #    id: create_release
+      #    uses: actions/create-release@v1
+      #    env:
+      #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      #    with:
+      #      tag_name: ${{ github.ref }}
+      #      release_name: ${{ github.ref }}
+      #      body: |
+      #        Please refer to [CHANGELOG.md](https://www.herodotus.cn/others/log/changelog.html) for details.
+      #      draft: false
+      #      prerelease: false
