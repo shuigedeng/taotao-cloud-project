@@ -56,8 +56,15 @@ jobs:
       #https://github.com/ncipollo/release-action/tree/main
       - uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
           artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/taotao-cloud-tx-server.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-server/build/taotao-cloud-rpc-server.tar.gz,foo/*.txt"
+          #body: "sdfsa"
           bodyFile: "doc/release/2024-05.md"
+          draft: false
+          generateReleaseNotes: false
+          prerelease: false
+          replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
       #- name: Create Release

@@ -1,4 +1,4 @@
-package com.taotao.cloud.mq.dashboard;
+package com.taotao.cloud.rpc.dashboard;
 
 public class Bootstrap {
 

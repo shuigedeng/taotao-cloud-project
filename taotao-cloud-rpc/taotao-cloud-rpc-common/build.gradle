@@ -1,5 +1,36 @@
 dependencies {
+    api('com.alibaba.nacos:nacos-client:2.3.2') {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
 
+    //作为 包验证，防止修改
+    api 'commons-codec:commons-codec:1.17.0'
+    // redis 分布式锁
+    api 'redis.clients:jedis:5.1.2'
+    //Lettuce Redis客户端
+    api('io.lettuce:lettuce-core:6.3.2.RELEASE') {
+        exclude group: 'io.netty', module: 'netty-handler'
+        exclude group: 'io.netty', module: 'netty-common'
+        exclude group: 'io.netty', module: 'netty-transport'
+    }
+    //json 转换工具
+    api 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+    api 'com.fasterxml.jackson.core:jackson-core:2.17.0'
+    //kryo 序列化 工具
+    api 'com.esotericsoftware:kryo:5.6.0'
+    //hessian 序列化 工具
+    api 'com.caucho:hessian:4.0.66'
+    // 日志框架
+    api 'ch.qos.logback:logback-classic:1.5.6'
+    api "com.google.guava:guava:33.2.0-jre"
+
+    api "io.netty:netty-all:4.1.109.Final"
+
+    api "org.projectlombok:lombok:1.18.32"
+    annotationProcessor "org.projectlombok:lombok:1.18.32"
+
+
+    testImplementation "junit:junit:4.13.2"
 
 }
 
