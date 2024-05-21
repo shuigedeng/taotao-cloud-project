@@ -78,7 +78,7 @@ dependencies {
     api "com.xkcoding.http:simple-http:1.0.5"
 
     //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java
-    api('com.alipay.sdk:alipay-sdk-java:4.39.70.ALL') {
+    api('com.alipay.sdk:alipay-sdk-java:4.39.74.ALL') {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"

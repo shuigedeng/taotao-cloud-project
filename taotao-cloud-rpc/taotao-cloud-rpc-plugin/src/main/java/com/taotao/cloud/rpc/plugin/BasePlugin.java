@@ -1,5 +1,5 @@
 package com.taotao.cloud.rpc.plugin;
 
-public class a {
+public class BasePlugin {
 
 }

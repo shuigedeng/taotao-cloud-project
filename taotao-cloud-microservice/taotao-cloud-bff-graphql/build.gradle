@@ -2,7 +2,7 @@
 //    id 'com.netflix.dgs.codegen' version '6.1.1'
 //}
 
-var apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
+def apiProjects = project.parent.findProject("taotao-cloud-business").subprojects
         .findAll {it -> it.name.endsWith("-api")}
 
 dependencies {

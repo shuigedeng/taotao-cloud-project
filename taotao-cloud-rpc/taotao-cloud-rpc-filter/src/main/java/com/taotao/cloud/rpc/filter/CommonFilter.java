@@ -1,5 +1,5 @@
 package com.taotao.cloud.rpc.filter;
 
-public class a {
+public class CommonFilter {
 
 }

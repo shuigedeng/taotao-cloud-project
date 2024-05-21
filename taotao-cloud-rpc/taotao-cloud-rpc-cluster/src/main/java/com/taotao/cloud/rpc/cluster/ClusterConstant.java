@@ -1,5 +1,5 @@
 package com.taotao.cloud.rpc.cluster;
 
-public class a {
+public class ClusterConstant {
 
 }

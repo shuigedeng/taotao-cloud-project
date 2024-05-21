@@ -79,7 +79,7 @@ dependencies {
     api("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    api 'com.alipay.sdk:alipay-sdk-java:4.39.70.ALL'
+    api 'com.alipay.sdk:alipay-sdk-java:4.39.74.ALL'
 
     api "com.github.binarywang:weixin-java-cp:4.6.2.B"
     api "com.github.binarywang:weixin-java-miniapp:4.6.2.B"

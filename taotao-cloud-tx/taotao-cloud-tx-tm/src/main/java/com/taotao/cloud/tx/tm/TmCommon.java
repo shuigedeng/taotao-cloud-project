@@ -1,5 +1,5 @@
 package com.taotao.cloud.tx.tm;
 
-public class a {
+public class TmCommon {
 
 }

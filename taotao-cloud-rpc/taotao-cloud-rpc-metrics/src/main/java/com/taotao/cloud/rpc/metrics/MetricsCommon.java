@@ -1,5 +1,5 @@
 package com.taotao.cloud.rpc.metrics;
 
-public class a {
+public class MetricsCommon {
 
 }

@@ -70,7 +70,7 @@ public class TtcTxParticipant {
 	 * 注册事务（向事务管理者的事务组中添加子事务）
 	 */
 	public static TtcTx addTtcTransactional(
-			TtcTx ztp,
+		TtcTx ztp,
 		Boolean isEnd, TransactionalType type) {
 		// 通过JSON序列化一个对象
 		JSONObject sendData = new JSONObject();

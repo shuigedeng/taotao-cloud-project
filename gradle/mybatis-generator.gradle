@@ -19,7 +19,7 @@ mybatisGenerator {
     // optional, here is the override dependencies for the plugin or you can add other database dependencies.
     dependencies {
         mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.4.2'
-        mybatisGenerator 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.5.0'
+        mybatisGenerator 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.5.1'
         mybatisGenerator 'io.github.shuigedeng:taotao-cloud-starter-data-mybatis:2024.06'
         mybatisGenerator 'mysql:mysql-connector-java:8.0.33'
         //mybatisGenerator 'org.postgresql:postgresql:42.7.3'

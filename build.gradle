@@ -87,7 +87,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.12"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.14"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.41"
@@ -199,7 +199,7 @@ plugins {
 
     //https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
-    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.21"
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.22"
 
     //alias(projectLibs.plugins.springboot)
     //alias(projectLibs.plugins.kotlin.jvm)

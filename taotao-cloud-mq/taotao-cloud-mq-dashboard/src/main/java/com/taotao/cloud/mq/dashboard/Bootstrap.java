@@ -1,5 +1,5 @@
 package com.taotao.cloud.mq.dashboard;
 
-public class a {
+public class Bootstrap {
 
 }

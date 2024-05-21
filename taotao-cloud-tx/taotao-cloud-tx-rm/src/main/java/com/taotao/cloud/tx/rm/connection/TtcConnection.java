@@ -61,12 +61,15 @@ public class TtcConnection implements Connection {
 					connection.rollback();
 					System.out.println("\n子事务回滚事务成功...\n");
 				}
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
-			} finally {
+			}
+			finally {
 				try {
 					connection.close();
-				} catch (SQLException e) {
+				}
+				catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -81,12 +84,15 @@ public class TtcConnection implements Connection {
 			try {
 				connection.rollback();
 				System.out.println("\n\n子事务回滚事务成功...\n\n");
-			} catch (SQLException e) {
+			}
+			catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
+			}
+			finally {
 				try {
 					connection.close();
-				} catch (SQLException e) {
+				}
+				catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}

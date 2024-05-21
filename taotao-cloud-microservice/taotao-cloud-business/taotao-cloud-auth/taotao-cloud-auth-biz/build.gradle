@@ -77,9 +77,9 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.39"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.39.1"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    implementation "com.nimbusds:oauth2-oidc-sdk:11.10.1"
+    implementation 'com.nimbusds:oauth2-oidc-sdk:11.12'
 
     implementation "org.apache.commons:commons-collections4"
 
@@ -89,7 +89,7 @@ dependencies {
 
     //百度人脸识别以及登录
     //https://search.maven.org/artifact/com.baidu.aip/java-sdk
-    implementation("com.baidu.aip:java-sdk:4.16.18") {
+    implementation('com.baidu.aip:java-sdk:4.16.19') {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"
