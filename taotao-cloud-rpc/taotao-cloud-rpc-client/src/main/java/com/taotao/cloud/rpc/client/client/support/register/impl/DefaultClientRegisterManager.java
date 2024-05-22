@@ -129,7 +129,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 //				log.info("开始定时更新本地的服务端 {} 连接信息", serviceId);
 				ClientQueryServerChannelConfig config = queryConfigMap.get(serviceId);
 				if (config == null) {
-					log.warn("serviceId: {} 对应的查询配置为空，忽略查询。", serviceId);
+//					log.warn("serviceId: {} 对应的查询配置为空，忽略查询。", serviceId);
 					continue;
 				}
 
@@ -175,7 +175,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 				//2.3 以前有，现在没有的
 				// 不用处理，这里直接以最新的为准，没有添加。
 				serverChannelFutureMap.put(serviceId, resultFutureList);
-				log.info("完成定时更新本地的服务端 {} 连接信息", serviceId);
+//				log.info("完成定时更新本地的服务端 {} 连接信息", serviceId);
 			}
 
 			log.info("完成定时更新本地的服务端连接信息");
@@ -195,22 +195,23 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 		List<RpcAddress> registerCenterList,
 		ClientQueryServerChannelConfig config) {
 		//1. 参数校验
-		ArgUtil.notEmpty(serviceId, "serviceId");
-		ArgUtil.notEmpty(registerCenterList, "registerCenterList");
+//		ArgUtil.notEmpty(serviceId, "serviceId");
+//		ArgUtil.notEmpty(registerCenterList, "registerCenterList");
 
 		//2. 查询服务信息
 		List<ServiceEntry> serviceEntries = lookUpServiceEntryList(serviceId,
 			registerCenterList, config);
-		log.info("[Client] register center serviceEntries: {}", serviceEntries);
+//		log.info("[Client] register center serviceEntries: {}", serviceEntries);
 
 		//3. 结果转换
-		return CollectionUtil.toList(serviceEntries, new IHandler<ServiceEntry, RpcAddress>() {
-			@Override
-			public RpcAddress handle(ServiceEntry serviceEntry) {
-				return new RpcAddress(serviceEntry.ip(),
-					serviceEntry.port(), serviceEntry.weight());
-			}
-		});
+//		return CollectionUtil.toList(serviceEntries, new IHandler<ServiceEntry, RpcAddress>() {
+//			@Override
+//			public RpcAddress handle(ServiceEntry serviceEntry) {
+//				return new RpcAddress(serviceEntry.ip(),
+//					serviceEntry.port(), serviceEntry.weight());
+//			}
+//		});
+		return null;
 	}
 
 	@Override
@@ -243,24 +244,24 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 		log.info("开始取消订阅所有服务端信息");
 
 		// TODO: 后续可以优化，添加对应的批处理。
-		if (CollectionUtil.isEmpty(subscribeServerIdSet)) {
-			log.info("订阅服务器的集合为空，忽略处理");
-		}
-		else {
-			for (String serviceId : subscribeServerIdSet) {
-				for (RpcChannelFuture rpcChannelFuture : this.registerCenterChannelMap.values()) {
-					ServiceEntry serviceEntry = ServiceEntryBuilder.of(serviceId);
-					NotifyMessage subscribeMessage = NotifyMessages.of(
-						MessageTypeConst.CLIENT_UN_SUBSCRIBE_REQ, serviceEntry);
-					// 这里可以直接 oneway
-					ChannelFuture future = rpcChannelFuture.channelFuture();
-					future.channel().writeAndFlush(subscribeMessage);
-					log.info("客户端 unSubscribe serviceId {} for register center address {}",
-						serviceId,
-						rpcChannelFuture.address());
-				}
-			}
-		}
+//		if (CollectionUtil.isEmpty(subscribeServerIdSet)) {
+//			log.info("订阅服务器的集合为空，忽略处理");
+//		}
+//		else {
+//			for (String serviceId : subscribeServerIdSet) {
+//				for (RpcChannelFuture rpcChannelFuture : this.registerCenterChannelMap.values()) {
+//					ServiceEntry serviceEntry = ServiceEntryBuilder.of(serviceId);
+//					NotifyMessage subscribeMessage = NotifyMessages.of(
+//						MessageTypeConst.CLIENT_UN_SUBSCRIBE_REQ, serviceEntry);
+//					// 这里可以直接 oneway
+//					ChannelFuture future = rpcChannelFuture.channelFuture();
+//					future.channel().writeAndFlush(subscribeMessage);
+////					log.info("客户端 unSubscribe serviceId {} for register center address {}",
+////						serviceId,
+////						rpcChannelFuture.address());
+//				}
+//			}
+//		}
 
 		log.info("完成取消订阅所有服务端信息");
 	}
@@ -268,13 +269,13 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	@Override
 	public void subscribeServer(String serviceId) {
 		Collection<RpcChannelFuture> registerChannelFutureList = registerCenterChannelMap.values();
-		if (CollectionUtil.isEmpty(registerChannelFutureList)) {
-			log.warn("注册中心连接列表为空，忽略处理。");
-			return;
-		}
+//		if (CollectionUtil.isEmpty(registerChannelFutureList)) {
+//			log.warn("注册中心连接列表为空，忽略处理。");
+//			return;
+//		}
 
 		if (subscribeServerIdSet.contains(serviceId)) {
-			log.info("serviceId: {} 对应的 subscribe 已经设置，本次忽略处理", serviceId);
+//			log.info("serviceId: {} 对应的 subscribe 已经设置，本次忽略处理", serviceId);
 		}
 		else {
 			for (RpcChannelFuture rpcChannelFuture : registerChannelFutureList) {
@@ -294,28 +295,28 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	 * @since 0.1.8
 	 */
 	private void subscribeServer(String serviceId, RpcChannelFuture rpcChannelFuture) {
-		log.info("开始推送关注，serviceId: {}, rpcAddress: {}", serviceId,
-			rpcChannelFuture.address());
+//		log.info("开始推送关注，serviceId: {}, rpcAddress: {}", serviceId,
+//			rpcChannelFuture.address());
 		ServiceEntry serviceEntry = ServiceEntryBuilder.of(serviceId);
 		NotifyMessage subscribeMessage = NotifyMessages.of(MessageTypeConst.CLIENT_SUBSCRIBE_REQ,
 			serviceEntry);
 		// 这里可以直接 oneway
 		ChannelFuture future = rpcChannelFuture.channelFuture();
 		future.channel().writeAndFlush(subscribeMessage);
-		log.info("客户端 subscribe serviceId {} for register center address {}", serviceId,
-			rpcChannelFuture.address());
+//		log.info("客户端 subscribe serviceId {} for register center address {}", serviceId,
+//			rpcChannelFuture.address());
 	}
 
 	@Override
 	public void serverRegisterNotify(ServiceEntry serviceEntry) {
 		// 新增
-		log.info("客户端接收到服务端注册通知:{}", serviceEntry);
+//		log.info("客户端接收到服务端注册通知:{}", serviceEntry);
 
 		// 如果已经包含
 		final String serviceId = serviceEntry.serviceId();
 		boolean contains = containsServerEntry(serviceEntry);
 		if (contains) {
-			log.warn("已经包含当前服务 {}, 跳过处理。", serviceEntry);
+//			log.warn("已经包含当前服务 {}, 跳过处理。", serviceEntry);
 			return;
 		}
 
@@ -349,9 +350,9 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 		String serviceId = serviceEntry.serviceId();
 
 		List<RpcChannelFuture> futureList = serverChannelFutureMap.get(serviceId);
-		if (CollectionUtil.isEmpty(futureList)) {
-			return false;
-		}
+//		if (CollectionUtil.isEmpty(futureList)) {
+//			return false;
+//		}
 
 		for (RpcChannelFuture rpcChannelFuture : futureList) {
 			RpcAddress rpcAddress = rpcChannelFuture.address();
@@ -365,15 +366,15 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 
 	@Override
 	public void serverUnRegisterNotify(ServiceEntry serviceEntry) {
-		log.info("客户端接收到服务端注销通知 :{}", serviceEntry);
+//		log.info("客户端接收到服务端注销通知 :{}", serviceEntry);
 		// 移除
 		String serviceId = serviceEntry.serviceId();
 
 		List<RpcChannelFuture> futureList = serverChannelFutureMap.get(serviceId);
-		if (CollectionUtil.isEmpty(futureList)) {
-			log.warn("serviceId: {} 对应的服务列表为空，无需处理。", serviceId);
-			return;
-		}
+//		if (CollectionUtil.isEmpty(futureList)) {
+//			log.warn("serviceId: {} 对应的服务列表为空，无需处理。", serviceId);
+//			return;
+//		}
 
 		// 遍历移除
 		Iterator<RpcChannelFuture> iterator = futureList.listIterator();
@@ -384,7 +385,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 			// 是否相同
 			boolean isTheSame = isTheSameIpPort(rpcAddress, serviceEntry);
 			if (isTheSame) {
-				log.info("移除服务端 {} 对应的 channel 信息", serviceEntry);
+//				log.info("移除服务端 {} 对应的 channel 信息", serviceEntry);
 				iterator.remove();
 			}
 		}
@@ -395,7 +396,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 
 	@Override
 	public void addRegisterChannel(RegisterCenterAddNotifyBody body, Channel channel) {
-		log.info("接收到注册中心新增机器的通知 {}", body);
+//		log.info("接收到注册中心新增机器的通知 {}", body);
 		String ip = body.ip();
 		int port = body.port();
 
@@ -419,18 +420,18 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 
 	@Override
 	public void removeRegisterChannel(RegisterCenterRemoveNotifyBody body) {
-		log.info("接收到注册中心移除机器的通知 {}", body);
+//		log.info("接收到注册中心移除机器的通知 {}", body);
 		String ip = body.ip();
 		int port = body.port();
 		for (Map.Entry<String, RpcChannelFuture> entry : registerCenterChannelMap.entrySet()) {
 			RpcChannelFuture future = entry.getValue();
 
 			if (isSameIpPort(future, ip, port)) {
-				log.info("开始移除注册中心注销的机器 ip: {}, port: {}", ip, port);
+//				log.info("开始移除注册中心注销的机器 ip: {}, port: {}", ip, port);
 				String key = entry.getKey();
 				future.destroyable().destroy();
 				registerCenterChannelMap.remove(key);
-				log.info("完成移除注册中心注销的机器 ip: {}, port: {}", ip, port);
+//				log.info("完成移除注册中心注销的机器 ip: {}, port: {}", ip, port);
 			}
 		}
 	}
@@ -503,10 +504,10 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 		// 检测可用性
 		if (check) {
 			//1. 列表为空
-			if (CollectionUtil.isEmpty(rpcAddressList)) {
-				log.error("[Rpc Client] rpc address list is empty!");
-				throw new RpcRuntimeException();
-			}
+//			if (CollectionUtil.isEmpty(rpcAddressList)) {
+//				log.error("[Rpc Client] rpc address list is empty!");
+//				throw new RpcRuntimeException();
+//			}
 
 			//2. 初始化
 			return ChannelHandlers.channelFutureList(rpcAddressList, new ChannelHandlerFactory() {
@@ -520,10 +521,10 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 
 		// 如果不检测可用性
 		List<RpcChannelFuture> resultList = new ArrayList<>();
-		if (CollectionUtil.isEmpty(rpcAddressList)) {
-			log.warn("[Rpc Client] rpc address list is empty, without check init.");
-			return resultList;
-		}
+//		if (CollectionUtil.isEmpty(rpcAddressList)) {
+//			log.warn("[Rpc Client] rpc address list is empty, without check init.");
+//			return resultList;
+//		}
 		// 如果异常，则捕获
 		for (RpcAddress rpcAddress : rpcAddressList) {
 			try {
@@ -539,8 +540,8 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 				resultList.add(future);
 			}
 			catch (Exception exception) {
-				log.error("[Rpc Client] rpc address init failed, without check init. {}",
-					rpcAddress, exception);
+//				log.error("[Rpc Client] rpc address init failed, without check init. {}",
+//					rpcAddress, exception);
 			}
 		}
 
@@ -559,9 +560,9 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 		final String serviceId = config.serviceId();
 
 		//0. 快速返回
-		if (CollectionUtil.isNotEmpty(rpcAddresses)) {
-			return rpcAddresses;
-		}
+//		if (CollectionUtil.isNotEmpty(rpcAddresses)) {
+//			return rpcAddresses;
+//		}
 
 		//1. 信息检查
 		registerCenterParamCheck(config);
@@ -579,7 +580,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 		final boolean subscribe = config.subscribe();
 		final String serviceId = config.serviceId();
 		if (!subscribe) {
-			log.error("[Rpc Client] no available services found for serviceId:{}", serviceId);
+//			log.error("[Rpc Client] no available services found for serviceId:{}", serviceId);
 			throw new RpcRuntimeException();
 		}
 	}

@@ -58,20 +58,20 @@ jobs:
       - name: release taotao-cloud-tx
         run: gradle -p taotao-cloud-tx/taotao-cloud-tx-server clean releaseTarZip -x test
 
-      ##https://github.com/marketplace/actions/gradle-build-action
-      #- name: release taotao-cloud-mq
-      #  run: gradle -p taotao-cloud-mq/taotao-cloud-mq-dashboard clean releaseTarZip -x test
-#
-      ##https://github.com/marketplace/actions/gradle-build-action
-      #- name: release taotao-cloud-rpc
-      #  run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-dashboard clean releaseTarZip -x test
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: release taotao-cloud-mq
+        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-dashboard clean releaseTarZip -x test
+
+      #https://github.com/marketplace/actions/gradle-build-action
+      - name: release taotao-cloud-rpc
+        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-dashboard clean releaseTarZip -x test
 
       #https://github.com/ncipollo/release-action/tree/main
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/distributions/taotao-cloud-tx-server.zip"
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/distributions/taotao-cloud-tx-server.zip,taotao-cloud-mq/taotao-cloud-mq-dashboard/build/distributions/taotao-cloud-mq-dashboard.zip,taotao-cloud-rpc/taotao-cloud-rpc-dashboard/build/distributions/taotao-cloud-rpc-dashboard.zip"
           #body: "sdfsa"
           bodyFile: "doc/release/2024-06.md"
           draft: false

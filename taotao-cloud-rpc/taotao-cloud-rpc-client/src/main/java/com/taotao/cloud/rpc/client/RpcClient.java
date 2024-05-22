@@ -17,7 +17,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import com.taotao.cloud.rpc.common.common.rpc.domain.RpcRequest;
+import com.taotao.cloud.rpc.common.common.RpcReponse;
+import com.taotao.cloud.rpc.common.common.RpcRequest;
 /**
  * client<br>
  *
