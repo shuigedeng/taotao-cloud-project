@@ -23,13 +23,13 @@ public final class RpcResponses {
     public static RpcResponse result(final Object object,
                                   final Class tClass) {
         DefaultRpcResponse rpcResponse = new DefaultRpcResponse();
-        if(ObjectUtil.isNotNull(object)) {
-            rpcResponse.result(object);
-        } else {
-            // 处理基本类型的默认值，避免 NPE
-            Object defaultVal = PrimitiveUtil.getDefaultValue(tClass);
-            rpcResponse.result(defaultVal);
-        }
+//        if(ObjectUtil.isNotNull(object)) {
+//            rpcResponse.result(object);
+//        } else {
+//            // 处理基本类型的默认值，避免 NPE
+//            Object defaultVal = PrimitiveUtil.getDefaultValue(tClass);
+//            rpcResponse.result(defaultVal);
+//        }
         return rpcResponse;
     }
 
@@ -43,23 +43,24 @@ public final class RpcResponses {
      */
     public static Object getResult(final RpcResponse rpcResponse,
                                   final Class returnType) {
-        if(ObjectUtil.isNull(rpcResponse)) {
-            // 根据返回类型处理
-            return PrimitiveUtil.getDefaultValue(returnType);
-        }
-
-        // 处理异常信息
-        Throwable throwable = rpcResponse.error();
-        if(ObjectUtil.isNotNull(throwable)) {
-            throw new RpcRuntimeException(throwable);
-        }
-
-        // 处理结果信息
-        Object result = rpcResponse.result();
-        if(ObjectUtil.isNotNull(result)) {
-            return result;
-        }
-        return PrimitiveUtil.getDefaultValue(returnType);
+//        if(ObjectUtil.isNull(rpcResponse)) {
+//            // 根据返回类型处理
+//            return PrimitiveUtil.getDefaultValue(returnType);
+//        }
+//
+//        // 处理异常信息
+//        Throwable throwable = rpcResponse.error();
+//        if(ObjectUtil.isNotNull(throwable)) {
+//            throw new RpcRuntimeException(throwable);
+//        }
+//
+//        // 处理结果信息
+//        Object result = rpcResponse.result();
+//        if(ObjectUtil.isNotNull(result)) {
+//            return result;
+//        }
+//        return PrimitiveUtil.getDefaultValue(returnType);
+		return null;
     }
 
     /**

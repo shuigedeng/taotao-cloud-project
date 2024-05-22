@@ -37,7 +37,7 @@ public class InvokeTimeoutCheckThread implements Runnable {
      */
     public InvokeTimeoutCheckThread(ConcurrentHashMap<String, Long> requestMap,
                                     ConcurrentHashMap<String, RpcResponse> responseMap) {
-        ArgUtil.notNull(requestMap, "requestMap");
+//        ArgUtil.notNull(requestMap, "requestMap");
 
         this.requestMap = requestMap;
         this.responseMap = responseMap;
@@ -47,14 +47,14 @@ public class InvokeTimeoutCheckThread implements Runnable {
     public void run() {
         for (Map.Entry<String, Long> entry : requestMap.entrySet()) {
             long expireTime = entry.getValue();
-            long currentTime = Times.systemTime();
-
-            if (currentTime > expireTime) {
-                final String key = entry.getKey();
-                // 结果设置为超时，从请求 map 中移除, 同时设置 response 为超时
-                responseMap.putIfAbsent(key, RpcResponseFactory.timeout());
-                requestMap.remove(key);
-            }
+//            long currentTime = Times.systemTime();
+//
+//            if (currentTime > expireTime) {
+//                final String key = entry.getKey();
+//                // 结果设置为超时，从请求 map 中移除, 同时设置 response 为超时
+//                responseMap.putIfAbsent(key, RpcResponseFactory.timeout());
+//                requestMap.remove(key);
+//            }
         }
     }
 

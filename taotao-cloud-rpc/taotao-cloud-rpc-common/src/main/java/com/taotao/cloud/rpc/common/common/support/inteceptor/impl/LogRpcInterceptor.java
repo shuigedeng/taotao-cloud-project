@@ -3,6 +3,8 @@ package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
 
 import java.util.Arrays;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * 日志拦截器
@@ -16,12 +18,12 @@ public class LogRpcInterceptor extends RpcInterceptorAdaptor {
 
     @Override
     public void before(RpcInterceptorContext context) {
-        log.info("[Interceptor] param {} for traceId {}", Arrays.toString(context.params()), context.traceId());
+//        log.info("[Interceptor] param {} for traceId {}", Arrays.toString(context.params()), context.traceId());
     }
 
     @Override
     public void after(RpcInterceptorContext context) {
-        log.info("[Interceptor] result {} for traceId {}", context.result(), context.traceId());
+//        log.info("[Interceptor] result {} for traceId {}", context.result(), context.traceId());
     }
 
 }

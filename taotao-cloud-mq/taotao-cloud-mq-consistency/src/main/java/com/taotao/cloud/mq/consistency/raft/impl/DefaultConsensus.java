@@ -16,10 +16,14 @@ limitations under the License.
  */
 package com.taotao.cloud.mq.consistency.raft.impl;
 
-import com.taotao.cloud.raft.entity.*;
 import com.taotao.cloud.mq.consistency.raft.Consensus;
 import com.taotao.cloud.mq.consistency.raft.common.NodeStatus;
 import com.taotao.cloud.mq.consistency.raft.common.Peer;
+import com.taotao.cloud.mq.consistency.raft.entity.AentryParam;
+import com.taotao.cloud.mq.consistency.raft.entity.AentryResult;
+import com.taotao.cloud.mq.consistency.raft.entity.LogEntry;
+import com.taotao.cloud.mq.consistency.raft.entity.RvoteParam;
+import com.taotao.cloud.mq.consistency.raft.entity.RvoteResult;
 import io.netty.util.internal.StringUtil;
 import java.util.concurrent.locks.ReentrantLock;
 import lombok.Getter;

@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @since 0.1.3
  */
-@CommonEager
+//@CommonEager
 public final class Waits {
 
     /**
@@ -19,7 +19,7 @@ public final class Waits {
         try {
             timeUnit.sleep(time);
         } catch (InterruptedException e) {
-            throw new CommonRuntimeException(e);
+//            throw new CommonRuntimeException(e);
         }
     }
 

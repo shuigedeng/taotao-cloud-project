@@ -107,9 +107,9 @@ public class DefaultRpcInterceptorContext implements RpcInterceptorContext {
     @SuppressWarnings("unchecked")
     public <T> T get(String key, Class<T> tClass) {
         Object object = this.get(key);
-        if(ObjectUtil.isNotNull(object)) {
-            return (T)object;
-        }
+//        if(ObjectUtil.isNotNull(object)) {
+//            return (T)object;
+//        }
         return null;
     }
 

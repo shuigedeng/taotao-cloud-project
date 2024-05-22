@@ -1,5 +1,6 @@
 package com.taotao.cloud.rpc.common.idworker;
 
+import com.alibaba.nacos.common.utils.StringUtils;
 import com.taotao.cloud.rpc.common.idworker.exception.WorkerIdCantApplyException;
 import com.taotao.cloud.rpc.common.idworker.utils.JRedisHelper;
 import com.taotao.cloud.rpc.common.idworker.utils.LRedisHelper;
@@ -40,17 +41,21 @@ public class WorkerIdServer {
 			if ("jedis".equals(redisClientWay) || "default".equals(redisClientWay)
 				|| StringUtils.isBlank(redisClientWay)) {
 				log.info("find redis client way attribute is jedis");
-			} else if ("lettuce".equals(redisClientWay)) {
+			}
+			else if ("lettuce".equals(redisClientWay)) {
 				log.info("find redis client way attribute is lettuce");
-			} else {
+			}
+			else {
 				throw new RuntimeException("redis client way attribute is illegal!");
 			}
 
-		} catch (MissingResourceException redisClientWayException) {
+		}
+		catch (MissingResourceException redisClientWayException) {
 			log.warn("redis client way attribute is missing");
 			log.info("use default redis client default way: jedis");
 			redisClientWay = "jedis";
-		} catch (IOException ioException) {
+		}
+		catch (IOException ioException) {
 			log.info("not found resource from resource path: {}",
 				currentWorkPath + "/config/resource.properties");
 			try {
@@ -60,13 +65,16 @@ public class WorkerIdServer {
 				if ("jedis".equals(redisClientWay) || "default".equals(redisClientWay)
 					|| StringUtils.isBlank(redisClientWay)) {
 					log.info("find redis client way attribute is jedis");
-				} else if ("lettuce".equals(redisClientWay)) {
+				}
+				else if ("lettuce".equals(redisClientWay)) {
 					log.info("find redis client way attribute is lettuce");
-				} else {
+				}
+				else {
 					throw new RuntimeException("redis client way attribute is illegal!");
 				}
 
-			} catch (MissingResourceException resourceException) {
+			}
+			catch (MissingResourceException resourceException) {
 				log.info("not found resource from resource path: {}", "resource.properties");
 				log.info("use default redis client way: jedis");
 				redisClientWay = "jedis";
@@ -90,7 +98,8 @@ public class WorkerIdServer {
 				if (JRedisHelper.existsWorkerId(hostName)) {
 					// 如果redis中存在该服务器名称，则直接取得workerId
 					workerId = Long.parseLong(JRedisHelper.getForHostName(hostName));
-				} else {
+				}
+				else {
 					/**
 					 * 采用 HashMap 哈希命中的 算法
 					 * 对 hash 值为负数取正
@@ -117,11 +126,13 @@ public class WorkerIdServer {
 						JRedisHelper.setWorkerIdSet(workerId);
 					}
 				}
-			} else {
+			}
+			else {
 				if (LRedisHelper.existsWorkerId(hostName) != 0L) {
 					// 如果redis中存在该服务器名称，则直接取得workerId
 					workerId = Long.parseLong(LRedisHelper.getForHostName(hostName));
-				} else {
+				}
+				else {
 					/**
 					 * 采用 HashMap 哈希命中的 算法
 					 * 对 hash 值为负数取正
@@ -166,7 +177,8 @@ public class WorkerIdServer {
 				if ("jedis".equals(redisClientWay) || "default".equals(redisClientWay)
 					|| StringUtils.isBlank(redisClientWay)) {
 					return Long.parseLong(JRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
-				} else {
+				}
+				else {
 					return Long.parseLong(LRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
 				}
 			}
@@ -177,7 +189,8 @@ public class WorkerIdServer {
 				if ("jedis".equals(redisClientWay) || "default".equals(redisClientWay)
 					|| StringUtils.isBlank(redisClientWay)) {
 					return Long.parseLong(JRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
-				} else {
+				}
+				else {
 					return Long.parseLong(LRedisHelper.getForHostName(IpUtils.getPubIpAddr()));
 				}
 			}

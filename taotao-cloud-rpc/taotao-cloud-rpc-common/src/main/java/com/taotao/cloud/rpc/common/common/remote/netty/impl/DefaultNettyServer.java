@@ -8,7 +8,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * netty 网络服务端
  * @author shuigedeng
@@ -50,8 +51,8 @@ public class DefaultNettyServer extends AbstractNettyServer {
 
     @Override
     public void run() {
-        LOG.info("[Netty Server] start with port: {} and channelHandler: {} ",
-                port, channelHandler.getClass().getSimpleName());
+//        LOG.info("[Netty Server] start with port: {} and channelHandler: {} ",
+//                port, channelHandler.getClass().getSimpleName());
 
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();

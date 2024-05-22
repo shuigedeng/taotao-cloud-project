@@ -1,13 +1,33 @@
 package com.taotao.cloud.mq.client.consumer.core;
 
-
+import com.taotao.cloud.mq.client.consumer.api.IMqConsumer;
+import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListener;
+import com.taotao.cloud.mq.client.consumer.constant.ConsumerConst;
+import com.taotao.cloud.mq.client.consumer.constant.ConsumerRespCode;
+import com.taotao.cloud.mq.client.consumer.support.broker.ConsumerBrokerConfig;
+import com.taotao.cloud.mq.client.consumer.support.broker.ConsumerBrokerService;
+import com.taotao.cloud.mq.client.consumer.support.broker.IConsumerBrokerService;
+import com.taotao.cloud.mq.client.consumer.support.listener.IMqListenerService;
+import com.taotao.cloud.mq.client.consumer.support.listener.MqListenerService;
+import com.taotao.cloud.mq.common.constant.ConsumerTypeConst;
+import com.taotao.cloud.mq.common.resp.MqException;
+import com.taotao.cloud.mq.common.rpc.RpcChannelFuture;
+import com.taotao.cloud.mq.common.support.hook.DefaultShutdownHook;
+import com.taotao.cloud.mq.common.support.hook.ShutdownHooks;
+import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
+import com.taotao.cloud.mq.common.support.invoke.impl.InvokeService;
+import com.taotao.cloud.mq.common.support.status.IStatusManager;
+import com.taotao.cloud.mq.common.support.status.StatusManager;
+import com.taotao.cloud.mq.common.tmp.ILoadBalance;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 推送消费策略
  *
  * @author shuigedeng
  * @since 2024.05
  */
-public class MqConsumerPush extends Thread implements IMqConsumer  {
+public class MqConsumerPush extends Thread implements IMqConsumer {
 
     private static final Log log = LogFactory.getLog(MqConsumerPush.class);
 
@@ -167,15 +187,15 @@ public class MqConsumerPush extends Thread implements IMqConsumer  {
      * 参数校验
      */
     private void paramCheck() {
-        ArgUtil.notEmpty(brokerAddress, "brokerAddress");
-        ArgUtil.notEmpty(groupName, "groupName");
+//        ArgUtil.notEmpty(brokerAddress, "brokerAddress");
+//        ArgUtil.notEmpty(groupName, "groupName");
     }
 
     @Override
     public void run() {
         // 启动服务端
-        log.info("MQ 消费者开始启动服务端 groupName: {}, brokerAddress: {}",
-                groupName, brokerAddress);
+//        log.info("MQ 消费者开始启动服务端 groupName: {}, brokerAddress: {}",
+//                groupName, brokerAddress);
 
         //1. 参数校验
         this.paramCheck();

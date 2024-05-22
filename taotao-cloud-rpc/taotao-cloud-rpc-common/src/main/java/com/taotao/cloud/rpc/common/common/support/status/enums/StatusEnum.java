@@ -1,6 +1,8 @@
 package com.taotao.cloud.rpc.common.common.support.status.enums;
 
 import com.taotao.cloud.rpc.common.common.exception.ShutdownException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p> project: rpc-StatusEnum </p>
@@ -77,7 +79,7 @@ public enum StatusEnum {
      */
     public static void assertEnable(final int statusCode) {
         if(StatusEnum.ENABLE.code() != statusCode) {
-            LOG.error("[Client] current status is: {} , not enable to send request", statusCode);
+//            LOG.error("[Client] current status is: {} , not enable to send request", statusCode);
             throw new ShutdownException("Status is not enable to send request, may be during shutdown.");
         }
     }

@@ -3,7 +3,11 @@ package com.taotao.cloud.rpc.common.common.support.resource.impl;
 import com.taotao.cloud.rpc.common.common.api.Destroyable;
 import com.taotao.cloud.rpc.common.common.support.resource.ResourceManager;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.concurrent.ThreadSafe;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p> project: rpc-DefaultResourceManager </p>
@@ -24,28 +28,29 @@ public class DefaultResourceManager implements ResourceManager {
      * 可销毁的列表
      * @since 0.1.3
      */
-    private List<Destroyable> destroyableList = Guavas.newArrayList();
+//    private List<Destroyable> destroyableList = Guavas.newArrayList();
+    private List<Destroyable> destroyableList = new ArrayList<>();
 
     @Override
     public synchronized ResourceManager addDestroy(Destroyable destroyable) {
-        LOG.info("[Resource] add destroyable: {}", destroyable);
+//        LOG.info("[Resource] add destroyable: {}", destroyable);
         destroyableList.add(destroyable);
         return this;
     }
 
     @Override
     public synchronized ResourceManager destroyAll() {
-        LOG.info("[Resource] destroyableList.size(): {}", destroyableList.size());
+//        LOG.info("[Resource] destroyableList.size(): {}", destroyableList.size());
 
         // 依次销毁
         for(Destroyable destroyable : destroyableList) {
-            LOG.info("[Resource] destroy destroyable: {}", destroyable);
+//            LOG.info("[Resource] destroy destroyable: {}", destroyable);
             destroyable.destroy();
         }
 
         // 清空列表
         LOG.info("[Resource] clear destroyableList");
-        this.destroyableList = Guavas.newArrayList();
+//        this.destroyableList = Guavas.newArrayList();
         return this;
     }
 

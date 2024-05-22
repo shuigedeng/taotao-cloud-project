@@ -1,4 +1,9 @@
-dependencies {
+subprojects {
+    dependencies {
 
+        implementation "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+
+    }
 }
-

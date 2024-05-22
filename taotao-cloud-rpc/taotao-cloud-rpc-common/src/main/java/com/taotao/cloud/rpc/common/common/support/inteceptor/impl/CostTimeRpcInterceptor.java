@@ -1,7 +1,8 @@
 package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 内置耗时 rpc 拦截器实现
  * @author shuigedeng
@@ -18,8 +19,8 @@ public class CostTimeRpcInterceptor extends RpcInterceptorAdaptor {
     @Override
     public void after(RpcInterceptorContext context) {
         long costMills = context.endTime() - context.startTime();
-        log.info("[Interceptor] cost time {} mills for traceId: {}", costMills,
-                context.traceId());
+//        log.info("[Interceptor] cost time {} mills for traceId: {}", costMills,
+//                context.traceId());
     }
 
 }

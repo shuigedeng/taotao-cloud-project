@@ -7,9 +7,9 @@ package com.taotao.cloud.mq.example.broker;
  */
 public class BrokerMain {
 
-    public static void main(String[] args) {
-        MqBroker broker = new MqBroker();
-        broker.start();
-    }
+	public static void main(String[] args) {
+		MqBroker broker = new MqBroker();
+		broker.start();
+	}
 
 }

@@ -2,6 +2,7 @@ package com.taotao.cloud.rpc.common.common.support.status.service.impl;
 
 import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
 import com.taotao.cloud.rpc.common.common.support.status.service.StatusManager;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * 状态管理

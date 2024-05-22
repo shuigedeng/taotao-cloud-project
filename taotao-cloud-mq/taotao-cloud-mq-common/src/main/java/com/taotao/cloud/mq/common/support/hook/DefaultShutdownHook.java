@@ -1,8 +1,10 @@
 package com.taotao.cloud.mq.common.support.hook;
 
+import com.taotao.cloud.mq.common.api.Destroyable;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 默认的 hook 实现
  * @since 2024.05
@@ -94,7 +96,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
             }
 
             logger.debug("[Shutdown] still remains request, wait for a while.");
-            DateUtil.sleep(100);
+           // DateUtil.sleep(100);
         }
 
         // 销毁

@@ -6,10 +6,8 @@
  */
 package com.taotao.cloud.rpc.client;
 
-import com.taotao.rpc.common.RpcReponse;
-import com.taotao.rpc.common.RpcRequest;
-import com.taotao.rpc.registry.ServiceDiscovery;
 
+import com.taotao.cloud.rpc.common.common.RpcReponse;
 import java.lang.reflect.Proxy;
 import java.util.UUID;
 

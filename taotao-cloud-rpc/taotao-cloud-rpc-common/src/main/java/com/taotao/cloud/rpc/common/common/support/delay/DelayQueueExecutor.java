@@ -2,7 +2,8 @@ package com.taotao.cloud.rpc.common.common.support.delay;
 
 
 import java.util.concurrent.DelayQueue;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 基于延迟队列的延迟实现
  * @since 0.1.7
@@ -28,10 +29,10 @@ public class DelayQueueExecutor implements DelayExecutor {
 
     @Override
     public void delay(long delayInMills, Runnable runnable) {
-        log.info("开始添加延迟 {}ms 的可运行对象", delayInMills);
+//        log.info("开始添加延迟 {}ms 的可运行对象", delayInMills);
         DelayElem delayElem = new DelayElem(delayInMills, runnable);
         delayQueue.add(delayElem);
-        log.info("完成添加延迟 {}ms 的可运行对象", delayInMills);
+//        log.info("完成添加延迟 {}ms 的可运行对象", delayInMills);
     }
 
     /**
@@ -50,10 +51,10 @@ public class DelayQueueExecutor implements DelayExecutor {
                 try {
                     DelayElem element = delayQueue.take();
                     long delayInMills = element.delayMills();
-                    log.info("开始获取延迟 {}ms 的可运行对象", delayInMills);
+//                    log.info("开始获取延迟 {}ms 的可运行对象", delayInMills);
                     Runnable runnable = element.msg();
                     runnable.run();
-                    log.info("完成获取延迟 {}ms 的可运行对象", delayInMills);
+//                    log.info("完成获取延迟 {}ms 的可运行对象", delayInMills);
                 } catch (InterruptedException e) {
                     log.error("延迟任务执行遇到异常", e);
                 }

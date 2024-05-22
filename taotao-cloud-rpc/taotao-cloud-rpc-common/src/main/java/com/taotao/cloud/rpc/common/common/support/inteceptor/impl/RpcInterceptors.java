@@ -1,5 +1,6 @@
 package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 
+import com.taotao.cloud.rpc.common.common.rpc.Pipeline;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
 
@@ -52,14 +53,14 @@ public final class RpcInterceptors {
             protected void init(Pipeline<RpcInterceptor> pipeline, RpcInterceptorContext context) {
                 pipeline.addLast(first);
 
-                if(ArrayUtil.isNotEmpty(others)) {
-                    for(RpcInterceptor other : others) {
-                        if(ObjectUtil.isNull(other)) {
-                            continue;
-                        }
-                        pipeline.addLast(other);
-                    }
-                }
+//                if(ArrayUtil.isNotEmpty(others)) {
+//                    for(RpcInterceptor other : others) {
+//                        if(ObjectUtil.isNull(other)) {
+//                            continue;
+//                        }
+//                        pipeline.addLast(other);
+//                    }
+//                }
             }
         };
     }

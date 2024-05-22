@@ -1,6 +1,7 @@
 package com.taotao.cloud.mq.common.rpc;
 
 
+import com.taotao.cloud.mq.common.resp.MqCommonRespCode;
 import java.io.Serializable;
 
 /**

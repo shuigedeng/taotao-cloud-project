@@ -1,6 +1,8 @@
 package com.taotao.cloud.mq.broker.resp;
 
 
+import com.taotao.cloud.mq.common.tmp.RespCode;
+
 /**
  * @author shuigedeng
  * @since 2024.05

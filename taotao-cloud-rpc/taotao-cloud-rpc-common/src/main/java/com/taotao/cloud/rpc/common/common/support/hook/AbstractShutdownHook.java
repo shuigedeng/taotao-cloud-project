@@ -1,5 +1,6 @@
 package com.taotao.cloud.rpc.common.common.support.hook;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * rpc 关闭 hook
