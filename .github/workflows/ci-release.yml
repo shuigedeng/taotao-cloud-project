@@ -5,6 +5,19 @@ on:
     tags:
       - "*"
 
+env:
+  TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
+  TAOTAO_CLOUD_OSSRH_PASSWORD: ${{ secrets.TAOTAO_CLOUD_OSSRH_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_USERNAME: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME }}
+  TAOTAO_CLOUD_MAVEN_USERNAME_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_USERNAME_NEW }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD }}
+  TAOTAO_CLOUD_MAVEN_PASSWORD_NEW: ${{ secrets.TAOTAO_CLOUD_MAVEN_PASSWORD_NEW }}
+  TAOTAO_CLOUD_GITHUB_USERNAME: ${{ secrets.TAOTAO_CLOUD_GITHUB_USERNAME }}
+  TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
+  TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
+  TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
+  TAOTAO_CLOUD_VERSION: 2024.06
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,22 +58,22 @@ jobs:
       - name: release taotao-cloud-tx
         run: gradle -p taotao-cloud-tx/taotao-cloud-tx-server clean releaseTarZip -x test
 
-      #https://github.com/marketplace/actions/gradle-build-action
-      - name: release taotao-cloud-mq
-        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-dashboard clean releaseTarZip -x test
-
-      #https://github.com/marketplace/actions/gradle-build-action
-      - name: release taotao-cloud-rpc
-        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-dashboard clean releaseTarZip -x test
+      ##https://github.com/marketplace/actions/gradle-build-action
+      #- name: release taotao-cloud-mq
+      #  run: gradle -p taotao-cloud-mq/taotao-cloud-mq-dashboard clean releaseTarZip -x test
+#
+      ##https://github.com/marketplace/actions/gradle-build-action
+      #- name: release taotao-cloud-rpc
+      #  run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-dashboard clean releaseTarZip -x test
 
       #https://github.com/ncipollo/release-action/tree/main
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/taotao-cloud-tx-server.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-server/build/taotao-cloud-rpc-server.tar.gz,foo/*.txt"
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/taotao-cloud-tx-server.zip"
           #body: "sdfsa"
-          bodyFile: "doc/release/2024-05.md"
+          bodyFile: "doc/release/2024-06.md"
           draft: false
           generateReleaseNotes: false
           prerelease: false
