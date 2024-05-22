@@ -71,7 +71,7 @@ jobs:
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/taotao-cloud-tx-server.zip"
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-server/build/distributions/taotao-cloud-tx-server.zip"
           #body: "sdfsa"
           bodyFile: "doc/release/2024-06.md"
           draft: false
