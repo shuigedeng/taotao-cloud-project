@@ -2,7 +2,10 @@ package com.taotao.cloud.rpc.client.client.support.fail.impl;
 
 import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
 import com.taotao.cloud.rpc.client.client.support.fail.FailStrategy;
-
+import com.taotao.cloud.rpc.common.common.rpc.domain.impl.RpcResponses;
+import javax.annotation.concurrent.ThreadSafe;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 快速失败策略
  * @author shuigedeng

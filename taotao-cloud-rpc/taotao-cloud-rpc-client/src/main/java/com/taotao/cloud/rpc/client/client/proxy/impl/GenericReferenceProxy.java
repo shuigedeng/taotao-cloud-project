@@ -3,8 +3,16 @@ package com.taotao.cloud.rpc.client.client.proxy.impl;
 import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeService;
 import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
 
+import com.taotao.cloud.rpc.common.common.exception.GenericException;
+import com.taotao.cloud.rpc.common.common.rpc.domain.impl.DefaultRpcRequest;
+import com.taotao.cloud.rpc.common.common.support.generic.GenericService;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.impl.DefaultRpcInterceptorContext;
+import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
 import java.util.List;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 泛化调用
  * TODO: 想办法对两个方法进行整合。
@@ -37,7 +45,7 @@ public class GenericReferenceProxy implements GenericService {
     @SuppressWarnings("unchecked")
     public Object $invoke(String method, String[] parameterTypes, Object[] args) throws GenericException {
         // 状态判断
-        final String traceId = Ids.uuid32();
+//        final String traceId = Ids.uuid32();
         final int statusCode = proxyContext.statusManager().status();
         StatusEnum.assertEnable(statusCode);
 
@@ -45,21 +53,21 @@ public class GenericReferenceProxy implements GenericService {
         //1. 拦截器
         final RpcInterceptor rpcInterceptor = proxyContext.interceptor();
         final RpcInterceptorContext rpcInterceptorContext = DefaultRpcInterceptorContext.newInstance()
-                .traceId(traceId);
+                .traceId("traceId");
         rpcInterceptor.before(rpcInterceptorContext);
 
         // 构建基本调用参数
-        final long createTime = Times.systemTime();
+//        final long createTime = Times.systemTime();
         Object[] actualArgs = new Object[]{method, parameterTypes, args};
         DefaultRpcRequest rpcRequest = new DefaultRpcRequest();
         rpcRequest.serviceId(proxyContext.serviceId());
-        rpcRequest.createTime(createTime);
+        rpcRequest.createTime(0L);
         rpcRequest.paramValues(actualArgs);
-        List<String> paramTypeNames = Guavas.newArrayList();
-        paramTypeNames.add("java.lang.String");
-        paramTypeNames.add("[Ljava.lang.String;");
-        paramTypeNames.add("[Ljava.lang.Object;");
-        rpcRequest.paramTypeNames(paramTypeNames);
+//        List<String> paramTypeNames = Guavas.newArrayList();
+//        paramTypeNames.add("java.lang.String");
+//        paramTypeNames.add("[Ljava.lang.String;");
+//        paramTypeNames.add("[Ljava.lang.Object;");
+//        rpcRequest.paramTypeNames(paramTypeNames);
         rpcRequest.methodName("$invoke");
         rpcRequest.returnType(Object.class);
         rpcRequest.timeout(proxyContext.timeout());
@@ -70,7 +78,7 @@ public class GenericReferenceProxy implements GenericService {
         // rpcRequest 因为要涉及到网络间传输，尽可能保证其简洁性。
         DefaultRemoteInvokeContext context = new DefaultRemoteInvokeContext();
         context.request(rpcRequest);
-        context.traceId(traceId);
+//        context.traceId(traceId);
         context.retryTimes(2);
         context.serviceProxyContext(proxyContext);
         context.remoteInvokeService(remoteInvokeService);

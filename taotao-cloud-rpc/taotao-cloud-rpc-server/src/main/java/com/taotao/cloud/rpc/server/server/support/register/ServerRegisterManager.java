@@ -1,5 +1,6 @@
 package com.taotao.cloud.rpc.server.server.support.register;
 
+import com.taotao.cloud.rpc.common.common.config.component.RpcAddress;
 import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 import io.netty.channel.Channel;
 

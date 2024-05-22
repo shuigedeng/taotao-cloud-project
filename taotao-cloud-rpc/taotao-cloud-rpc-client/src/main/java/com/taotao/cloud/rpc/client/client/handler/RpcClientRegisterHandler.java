@@ -1,10 +1,19 @@
 package com.taotao.cloud.rpc.client.client.handler;
 
 import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
+import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessage;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterAddNotifyBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterRemoveNotifyBody;
+import com.taotao.cloud.rpc.registry.register.domain.message.impl.NotifyMessages;
+import com.taotao.cloud.rpc.registry.register.simple.constant.MessageTypeConst;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 /**
  * <p> 客户端注册中心处理类 </p>
  * @since 0.0.8
@@ -37,15 +46,15 @@ public class RpcClientRegisterHandler extends SimpleChannelInboundHandler {
         Object body = notifyMessage.body();
         String type = NotifyMessages.type(notifyMessage);
         String seqId = notifyMessage.seqId();
-        log.info("[Register Client] received message type: {}, seqId: {} ", type,
-                seqId);
+//        log.info("[Register Client] received message type: {}, seqId: {} ", type,
+//                seqId);
 
         // 回写
         final Channel channel = ctx.channel();
         switch (type) {
             case MessageTypeConst.CLIENT_LOOK_UP_SERVER_RESP:
                 RpcResponse rpcResponse = (RpcResponse) body;
-                log.info("[Register Client] Register response is :{}", rpcResponse);
+//                log.info("[Register Client] Register response is :{}", rpcResponse);
                 invokeManager.addResponse(rpcResponse.seqId(), rpcResponse);
                 break;
 
@@ -70,8 +79,8 @@ public class RpcClientRegisterHandler extends SimpleChannelInboundHandler {
                 break;
 
             default:
-                log.warn("[Register Client] not support type: {} and seqId: {}",
-                        type, seqId);
+//                log.warn("[Register Client] not support type: {} and seqId: {}",
+//                        type, seqId);
         }
     }
 

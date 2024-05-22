@@ -1,6 +1,10 @@
 package com.taotao.cloud.rpc.client.client.config.reference;
 
+import com.taotao.cloud.rpc.client.client.support.fail.enums.FailTypeEnum;
 import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.common.common.constant.enums.CallTypeEnum;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
+import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
 
 /**
  * 引用配置类

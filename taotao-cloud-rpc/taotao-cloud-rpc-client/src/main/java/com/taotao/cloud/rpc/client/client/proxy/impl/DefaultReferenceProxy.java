@@ -3,9 +3,14 @@ import com.taotao.cloud.rpc.client.client.proxy.ReferenceProxy;
 import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeService;
 import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
 
+import com.taotao.cloud.rpc.common.common.rpc.domain.impl.DefaultRpcRequest;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
+import com.taotao.cloud.rpc.common.common.support.inteceptor.impl.DefaultRpcInterceptorContext;
+import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 参考：https://blog.csdn.net/u012240455/article/details/79210250
  *
@@ -49,25 +54,25 @@ public class DefaultReferenceProxy<T> implements ReferenceProxy<T> {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 状态判断
-        final String traceId = Ids.uuid32();
+//        final String traceId = Ids.uuid32();
         final int statusCode = proxyContext.statusManager().status();
         StatusEnum.assertEnable(statusCode);
-        final long createTime = Times.systemTime();
+//        final long createTime = Times.systemTime();
 
         //1. 拦截器
         final RpcInterceptor rpcInterceptor = proxyContext.interceptor();
         final DefaultRpcInterceptorContext interceptorContext = DefaultRpcInterceptorContext.newInstance()
-                .traceId(traceId)
+                .traceId("traceId")
                 .params(args)
-                .startTime(createTime);
+                .startTime(0L);
         rpcInterceptor.before(interceptorContext);
 
         // 构建基本调用参数
         DefaultRpcRequest rpcRequest = new DefaultRpcRequest();
         rpcRequest.serviceId(proxyContext.serviceId());
-        rpcRequest.createTime(createTime);
+//        rpcRequest.createTime(createTime);
         rpcRequest.paramValues(args);
-        rpcRequest.paramTypeNames(ReflectMethodUtil.getParamTypeNames(method));
+//        rpcRequest.paramTypeNames(ReflectMethodUtil.getParamTypeNames(method));
         rpcRequest.methodName(method.getName());
         rpcRequest.returnType(method.getReturnType());
         rpcRequest.timeout(proxyContext.timeout());
@@ -78,7 +83,7 @@ public class DefaultReferenceProxy<T> implements ReferenceProxy<T> {
         // rpcRequest 因为要涉及到网络间传输，尽可能保证其简洁性。
         DefaultRemoteInvokeContext<T> context = new DefaultRemoteInvokeContext<>();
         context.request(rpcRequest);
-        context.traceId(traceId);
+//        context.traceId(traceId);
         context.retryTimes(2);
         context.serviceProxyContext(proxyContext);
         context.remoteInvokeService(remoteInvokeService);
@@ -87,8 +92,8 @@ public class DefaultReferenceProxy<T> implements ReferenceProxy<T> {
         Object result = remoteInvokeService.remoteInvoke(context);
 
         //4. 拦截器结束
-        final long endTime = Times.systemTime();
-        interceptorContext.endTime(endTime)
+//        final long endTime = Times.systemTime();
+        interceptorContext.endTime(0L)
                 .result(result);
         rpcInterceptor.after(interceptorContext);
         return result;

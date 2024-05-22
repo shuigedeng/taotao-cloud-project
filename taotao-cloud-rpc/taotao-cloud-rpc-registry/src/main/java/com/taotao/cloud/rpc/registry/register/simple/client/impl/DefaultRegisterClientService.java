@@ -10,7 +10,8 @@ import io.netty.channel.Channel;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * <p> 默认客户端注册服务实现类 </p>
  * @since 0.0.8
@@ -46,9 +47,9 @@ public class DefaultRegisterClientService implements RegisterClientService {
 
         final String serviceId = clientEntry.serviceId();
         Set<Channel> channelSet = serviceClientChannelMap.get(serviceId);
-        if (ObjectUtil.isNull(channelSet)) {
-            channelSet = Guavas.newHashSet();
-        }
+//        if (ObjectUtil.isNull(channelSet)) {
+//            channelSet = Guavas.newHashSet();
+//        }
         channelSet.add(clientChannel);
         serviceClientChannelMap.put(serviceId, channelSet);
     }
@@ -59,12 +60,12 @@ public class DefaultRegisterClientService implements RegisterClientService {
 
         final String serviceId = clientEntry.serviceId();
         Set<Channel> channelSet = serviceClientChannelMap.get(serviceId);
-
-        if (CollectionUtil.isEmpty(channelSet)) {
-            // 服务列表为空
-            LOG.info("[unSubscribe Client] remove host set is empty. entry: {}", clientEntry);
-            return;
-        }
+//
+//        if (CollectionUtil.isEmpty(channelSet)) {
+//            // 服务列表为空
+//            LOG.info("[unSubscribe Client] remove host set is empty. entry: {}", clientEntry);
+//            return;
+//        }
 
         channelSet.remove(clientChannel);
         serviceClientChannelMap.put(serviceId, channelSet);
@@ -72,14 +73,14 @@ public class DefaultRegisterClientService implements RegisterClientService {
 
     @Override
     public void registerNotify(String serviceId, ServiceEntry serviceEntry) {
-        ArgUtil.notEmpty(serviceId, "serviceId");
+//        ArgUtil.notEmpty(serviceId, "serviceId");
 
         List<Channel> clientChannelList = clientChannelList(serviceId);
-        if (CollectionUtil.isEmpty(clientChannelList)) {
-            LOG.info("[Register] notify clients is empty for service: {}",
-                    serviceId);
-            return;
-        }
+//        if (CollectionUtil.isEmpty(clientChannelList)) {
+//            LOG.info("[Register] notify clients is empty for service: {}",
+//                    serviceId);
+//            return;
+//        }
 
         // 循环通知
         for(Channel channel : clientChannelList) {
@@ -90,14 +91,14 @@ public class DefaultRegisterClientService implements RegisterClientService {
 
     @Override
     public void unRegisterNotify(String serviceId, ServiceEntry serviceEntry) {
-        ArgUtil.notEmpty(serviceId, "serviceId");
+//        ArgUtil.notEmpty(serviceId, "serviceId");
 
         List<Channel> clientChannelList = clientChannelList(serviceId);
-        if (CollectionUtil.isEmpty(clientChannelList)) {
-            LOG.info("[UnRegister] notify clients is empty for service: {}",
-                    serviceId);
-            return;
-        }
+//        if (CollectionUtil.isEmpty(clientChannelList)) {
+//            LOG.info("[UnRegister] notify clients is empty for service: {}",
+//                    serviceId);
+//            return;
+//        }
 
         // 循环通知
         for(Channel channel : clientChannelList) {
@@ -112,9 +113,9 @@ public class DefaultRegisterClientService implements RegisterClientService {
 
         Collection<Set<Channel>> channelCollection =  serviceClientChannelMap.values();
         for(Set<Channel> set : channelCollection) {
-            if(CollectionUtil.isNotEmpty(set)) {
-                resultSet.addAll(set);
-            }
+//            if(CollectionUtil.isNotEmpty(set)) {
+//                resultSet.addAll(set);
+//            }
         }
         return resultSet;
     }
@@ -126,8 +127,8 @@ public class DefaultRegisterClientService implements RegisterClientService {
      * @since 0.0.8
      */
     private void paramCheck(final ServiceEntry serviceEntry) {
-        ArgUtil.notNull(serviceEntry, "serverEntry");
-        ArgUtil.notEmpty(serviceEntry.serviceId(), "serverEntry.serviceId");
+//        ArgUtil.notNull(serviceEntry, "serverEntry");
+//        ArgUtil.notEmpty(serviceEntry.serviceId(), "serverEntry.serviceId");
 //        ArgUtil.notEmpty(serviceEntry.ip(), "serverEntry.ip");
     }
 
@@ -138,10 +139,11 @@ public class DefaultRegisterClientService implements RegisterClientService {
      * @since 0.0.8
      */
     private List<Channel> clientChannelList(String serviceId) {
-        ArgUtil.notEmpty(serviceId, "serviceId");
-
-        Set<Channel> clientSet = serviceClientChannelMap.get(serviceId);
-        return Guavas.newArrayList(clientSet);
+//        ArgUtil.notEmpty(serviceId, "serviceId");
+//
+//        Set<Channel> clientSet = serviceClientChannelMap.get(serviceId);
+//        return Guavas.newArrayList(clientSet);
+		return null;
     }
 
 }

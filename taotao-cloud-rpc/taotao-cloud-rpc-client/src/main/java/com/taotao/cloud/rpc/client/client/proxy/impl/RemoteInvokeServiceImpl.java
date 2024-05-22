@@ -9,10 +9,18 @@ import com.taotao.cloud.rpc.client.client.support.fail.FailStrategy;
 import com.taotao.cloud.rpc.client.client.support.fail.impl.FailStrategyFactory;
 import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
 import com.taotao.cloud.rpc.client.client.support.register.ClientRegisterManager;
+import com.taotao.cloud.rpc.common.common.rpc.domain.IServer;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcChannelFuture;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcRequest;
+import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
+import com.taotao.cloud.rpc.common.protocol.RpcResponse;
+import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
+import com.taotao.cloud.rpc.common.tmp.LoadBalanceContext;
 import io.netty.channel.Channel;
-
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcRequest;
 import java.util.List;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 远程调用实现
  * @author shuigedeng
@@ -31,8 +39,8 @@ public class RemoteInvokeServiceImpl implements RemoteInvokeService {
 
 
         // 设置唯一标识
-        final String seqId = Ids.uuid32();
-        rpcRequest.seqId(seqId);
+//        final String seqId = Ids.uuid32();
+//        rpcRequest.seqId(seqId);
 
         // 构建 filter 相关信息,结合 pipeline 进行整合
         rpcFilter.filter(context);
@@ -40,20 +48,20 @@ public class RemoteInvokeServiceImpl implements RemoteInvokeService {
         // 负载均衡
         // 这里使用 load-balance 进行选择 channel 写入。
         final Channel channel = getLoadBalanceChannel(proxyContext);
-        LOG.info("[Client] start call channel id: {}", channel.id().asLongText());
+//        LOG.info("[Client] start call channel id: {}", channel.id().asLongText());
 
         // 对于信息的写入，实际上有着严格的要求。
         // writeAndFlush 实际是一个异步的操作，直接使用 sync() 可以看到异常信息。
         // 支持的必须是 ByteBuf
         channel.writeAndFlush(rpcRequest).syncUninterruptibly();
-        LOG.info("[Client] start call remote with request: {}", rpcRequest);
+//        LOG.info("[Client] start call remote with request: {}", rpcRequest);
         final InvokeManager invokeManager = proxyContext.invokeManager();
-        invokeManager.addRequest(seqId, proxyContext.timeout());
+        invokeManager.addRequest("seqId", proxyContext.timeout());
 
         // 获取结果
         CallTypeStrategy callTypeStrategy = CallTypeStrategyFactory.callTypeStrategy(proxyContext.callType());
         RpcResponse rpcResponse = callTypeStrategy.result(proxyContext, rpcRequest);
-        invokeManager.removeReqAndResp(seqId);
+//        invokeManager.removeReqAndResp(seqId);
 
         // 获取调用结果
         context.rpcResponse(rpcResponse);
@@ -75,19 +83,20 @@ public class RemoteInvokeServiceImpl implements RemoteInvokeService {
         List<RpcChannelFuture> channelFutures = clientRegisterManager.queryServerChannelFutures(serviceId);
 
         final ILoadBalance loadBalance = serviceContext.loadBalance();
-        List<IServer> servers = CollectionUtil.toList(channelFutures, new IHandler<RpcChannelFuture, IServer>() {
-            @Override
-            public IServer handle(RpcChannelFuture rpcChannelFuture) {
-                return rpcChannelFuture;
-            }
-        });
-        LoadBalanceContext context = LoadBalanceContext.newInstance()
-                .servers(servers);
+//        List<IServer> servers = CollectionUtil.toList(channelFutures, new IHandler<RpcChannelFuture, IServer>() {
+//            @Override
+//            public IServer handle(RpcChannelFuture rpcChannelFuture) {
+//                return rpcChannelFuture;
+//            }
+//        });
+//        LoadBalanceContext context = LoadBalanceContext.newInstance()
+//                .servers(servers);
 
-        IServer server = loadBalance.select(context);
-        LOG.info("负载均衡获取地址信息：{}", server.url());
-        RpcChannelFuture future = (RpcChannelFuture) server;
-        return future.channelFuture().channel();
+//        IServer server = loadBalance.select(context);
+//        LOG.info("负载均衡获取地址信息：{}", server.url());
+//        RpcChannelFuture future = (RpcChannelFuture) server;
+//        return future.channelFuture().channel();
+		return null;
     }
 
 }

@@ -1,14 +1,14 @@
 package com.taotao.cloud.rpc.registry.apiregistry.base;
 
 
-import com.taotao.cloud.common.extension.StringUtils;
 
 public class ApiRegistryHttpStateException extends ApiRegistryException {
     private String appName;
     private String url;
     private int stateCode;
     public ApiRegistryHttpStateException(String appName,String url,int stateCode){
-        super("url:"+ StringUtils.nullToEmpty(url)+",返回状态码:"+stateCode);
+//        super("url:"+ StringUtils.nullToEmpty(url)+",返回状态码:"+stateCode);
+        super("url:");
         this.appName = appName;
         this.url=url;
         this.stateCode=stateCode;

@@ -5,7 +5,9 @@ import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 /**
  * <p> 客户端处理类 </p>
  * @since 0.0.2
@@ -30,7 +32,7 @@ public class RpcClientHandler extends SimpleChannelInboundHandler {
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         RpcResponse rpcResponse = (RpcResponse)msg;
         invokeManager.addResponse(rpcResponse.seqId(), rpcResponse);
-        log.info("[Client] server response is :{}", rpcResponse);
+//        log.info("[Client] server response is :{}", rpcResponse);
     }
 
     @Override

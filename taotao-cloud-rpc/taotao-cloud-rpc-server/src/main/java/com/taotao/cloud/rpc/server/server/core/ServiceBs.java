@@ -1,5 +1,25 @@
 package com.taotao.cloud.rpc.server.server.core;
 
+import com.taotao.cloud.rpc.common.common.config.component.RpcAddress;
+import com.taotao.cloud.rpc.common.common.config.component.RpcAddressBuilder;
+import com.taotao.cloud.rpc.common.common.config.protocol.ProtocolConfig;
+import com.taotao.cloud.rpc.common.common.exception.RpcRuntimeException;
+import com.taotao.cloud.rpc.common.common.remote.netty.NettyServer;
+import com.taotao.cloud.rpc.common.common.remote.netty.handler.ChannelHandlers;
+import com.taotao.cloud.rpc.common.common.remote.netty.impl.DefaultNettyClient;
+import com.taotao.cloud.rpc.common.common.remote.netty.impl.DefaultNettyServer;
+import com.taotao.cloud.rpc.common.common.support.delay.DelayExecutor;
+import com.taotao.cloud.rpc.common.common.support.delay.DelayQueueExecutor;
+import com.taotao.cloud.rpc.common.common.support.hook.ShutdownHooks;
+import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
+import com.taotao.cloud.rpc.common.common.support.invoke.impl.DefaultInvokeManager;
+import com.taotao.cloud.rpc.common.common.support.resource.ResourceManager;
+import com.taotao.cloud.rpc.common.common.support.resource.impl.DefaultResourceManager;
+import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
+import com.taotao.cloud.rpc.common.common.support.status.service.StatusManager;
+import com.taotao.cloud.rpc.common.common.support.status.service.impl.DefaultStatusManager;
+import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
+import com.taotao.cloud.rpc.registry.register.domain.entry.impl.ServiceEntryBuilder;
 import com.taotao.cloud.rpc.server.server.config.service.DefaultServiceConfig;
 import com.taotao.cloud.rpc.server.server.config.service.ServiceConfig;
 import com.taotao.cloud.rpc.server.server.handler.RpcServerHandler;
@@ -14,7 +34,8 @@ import io.netty.channel.ChannelHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * 默认服务端注册类
  *
@@ -101,7 +122,7 @@ public class ServiceBs implements ServiceRegistry {
         // 初始化默认参数
         this.serviceConfigList = new ArrayList<>();
         this.rpcPort = 9527;
-        this.registerCenterList = Guavas.newArrayList();
+//        this.registerCenterList = Guavas.newArrayList();
 
         // manager 初始化
         this.statusManager = new DefaultStatusManager();
@@ -119,7 +140,7 @@ public class ServiceBs implements ServiceRegistry {
 
     @Override
     public ServiceRegistry port(int port) {
-        ArgUtil.positive(port, "port");
+//        ArgUtil.positive(port, "port");
 
         this.rpcPort = port;
         serverRegisterManager.port(rpcPort);
@@ -145,8 +166,8 @@ public class ServiceBs implements ServiceRegistry {
     @Override
     @SuppressWarnings("unchecked")
     public synchronized ServiceBs register(final String serviceId, final Object serviceImpl) {
-        ArgUtil.notEmpty(serviceId, "serviceId");
-        ArgUtil.notNull(serviceImpl, "serviceImpl");
+//        ArgUtil.notEmpty(serviceId, "serviceId");
+//        ArgUtil.notNull(serviceImpl, "serviceImpl");
 
         // 构建对应的其他信息
         ServiceConfig serviceConfig = new DefaultServiceConfig();
@@ -177,9 +198,9 @@ public class ServiceBs implements ServiceRegistry {
      */
     @SuppressWarnings("all")
     public synchronized ServiceBs register(final ServiceConfig serviceConfig) {
-        ArgUtil.notNull(serviceConfig, "serviceConfig");
-        ArgUtil.notNull(serviceConfig.reference(), "serviceConfig.reference");
-        ArgUtil.notNull(serviceConfig.id(), "serviceConfig.id");
+//        ArgUtil.notNull(serviceConfig, "serviceConfig");
+//        ArgUtil.notNull(serviceConfig.reference(), "serviceConfig.reference");
+//        ArgUtil.notNull(serviceConfig.id(), "serviceConfig.id");
 
         // 构建对应的其他信息
         addServiceConfig(serviceConfig);
@@ -229,8 +250,8 @@ public class ServiceBs implements ServiceRegistry {
         for (RpcAddress rpcAddress : registerCenterList) {
             RpcServerRegisterHandler rpcServerRegisterHandler = new RpcServerRegisterHandler(serverRegisterManager);
             ChannelHandler registerHandler = ChannelHandlers.objectCodecHandler(rpcServerRegisterHandler);
-            LOG.info("[Rpc Server] start register to {}:{}", rpcAddress.address(),
-                    rpcAddress.port());
+//            LOG.info("[Rpc Server] start register to {}:{}", rpcAddress.address(),
+//                    rpcAddress.port());
             //TODO: 针对配置中心可以进一步细化，比如某一个 ip 变更，做对应的销毁，但是没有必要，一般配置中心变动的可能性较小。
             DefaultNettyClient nettyClient = DefaultNettyClient.newInstance(rpcAddress.address(), rpcAddress.port(), registerHandler);
             ChannelFuture channelFuture = nettyClient.call();
@@ -247,8 +268,8 @@ public class ServiceBs implements ServiceRegistry {
             boolean register = config.register();
             final String serviceId = config.id();
             if (!register) {
-                LOG.info("[Rpc Server] serviceId: {} register config is false.",
-                        serviceId);
+//                LOG.info("[Rpc Server] serviceId: {} register config is false.",
+//                        serviceId);
                 continue;
             }
 
@@ -263,15 +284,15 @@ public class ServiceBs implements ServiceRegistry {
             delayExecutor.delay(delayMills, new Runnable() {
                 @Override
                 public void run() {
-                    LOG.info("[Rpc Server] serviceId: {} delay init start.", serviceId);
+//                    LOG.info("[Rpc Server] serviceId: {} delay init start.", serviceId);
                     // 服务端通知到注册中心
-                    final String hostIp = NetUtil.getLocalHost();
-                    ServiceEntry serviceEntry = ServiceEntryBuilder.of(config.id(), hostIp, rpcPort);
+//                    final String hostIp = NetUtil.getLocalHost();
+                    ServiceEntry serviceEntry = ServiceEntryBuilder.of(config.id(), "hostIp", rpcPort);
                     serverRegisterManager.register(serviceEntry);
 
                     // 4. 添加服务端钩子函数
                     statusManager.status(StatusEnum.ENABLE.code());
-                    LOG.info("[Rpc Server] serviceId: {} delay init end.", serviceId);
+//                    LOG.info("[Rpc Server] serviceId: {} delay init end.", serviceId);
                 }
             });
         }
@@ -297,7 +318,7 @@ public class ServiceBs implements ServiceRegistry {
         final String id = serviceConfig.id();
         for(ServiceConfig config : serviceConfigList) {
             if(config.id().equals(id)) {
-                LOG.error("serviceConfig id has been registered, please check for id: {}", id);
+//                LOG.error("serviceConfig id has been registered, please check for id: {}", id);
                 throw new RpcRuntimeException();
             }
         }

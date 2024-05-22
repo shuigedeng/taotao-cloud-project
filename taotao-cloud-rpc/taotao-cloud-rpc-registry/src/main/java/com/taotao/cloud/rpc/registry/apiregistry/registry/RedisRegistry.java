@@ -1,7 +1,5 @@
 package com.taotao.cloud.rpc.registry.apiregistry.registry;
 
-import com.taotao.cloud.common.extension.StringUtils;
-import com.taotao.cloud.common.utils.convert.ConvertUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
 import java.util.ArrayList;
@@ -27,11 +25,11 @@ public class RedisRegistry extends BaseRegistry {
 
     public RedisRegistry() {
         super();
-        String hostPort = ApiRegistryProperties.getRegistryRedisHost();
-        if (StringUtils.isEmpty(hostPort)) {
-            throw new ApiRegistryException("redis地址不能为空");
-        }
-        jedis = new Jedis(hostPort.split(":")[0], ConvertUtils.convert(hostPort.split(":")[1], Integer.class));
+//        String hostPort = ApiRegistryProperties.getRegistryRedisHost();
+//        if (StringUtils.isEmpty(hostPort)) {
+//            throw new ApiRegistryException("redis地址不能为空");
+//        }
+//        jedis = new Jedis(hostPort.split(":")[0], ConvertUtils.convert(hostPort.split(":")[1], Integer.class));
     }
 
     @Override
@@ -119,9 +117,9 @@ public class RedisRegistry extends BaseRegistry {
             for (int i=0;i<keys.length;i++) {
 				String key = keys[i];
 				String hostPort = values.get(i);
-                if (StringUtils.isEmpty(hostPort)) {
-                    continue;
-                }
+//                if (StringUtils.isEmpty(hostPort)) {
+//                    continue;
+//                }
 				String appName = getAppNameFromKey(key);
                 if (!serverList.containsKey(appName)) {
                     serverList.put(appName, new ArrayList<>());

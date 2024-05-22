@@ -21,8 +21,8 @@ public final class NotifyMessages {
      */
     public static NotifyMessage of(final String type,
                                    final Object body) {
-        String seqId = Ids.uuid32();
-        return of(type, seqId, body);
+//        String seqId = Ids.uuid32();
+        return of(type, "seqId", body);
     }
 
     /**
@@ -64,9 +64,9 @@ public final class NotifyMessages {
      * @since 0.0.8
      */
     private static NotifyMessageHeader header(final NotifyMessage notifyMessage) {
-        ArgUtil.notNull(notifyMessage, "registerMessage");
+//        ArgUtil.notNull(notifyMessage, "registerMessage");
         NotifyMessageHeader messageHeader = notifyMessage.header();
-        ArgUtil.notNull(messageHeader, "messageHeader");
+//        ArgUtil.notNull(messageHeader, "messageHeader");
         return messageHeader;
     }
 

@@ -1,7 +1,6 @@
 package com.taotao.cloud.rpc.common.common.support.invoke;
 
 import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
-
 /**
  * 调用服务接口
  * @author shuigedeng

@@ -1,8 +1,7 @@
 package com.taotao.cloud.rpc.registry.apiregistry.loadbalance;
 
-import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.core.support.Ref;
+import com.alibaba.nacos.client.naming.utils.Chooser;
+import com.alibaba.nacos.client.naming.utils.Chooser.Ref;
 import com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties;
 import com.taotao.cloud.rpc.registry.apiregistry.registry.BaseRegistry;
 import java.util.ArrayList;
@@ -64,26 +63,26 @@ public class BaseLoadBalance {
 	protected List<String> getAvailableHostPortList(String appName) {
 		List rs = new ArrayList<String>();
 		// 配置优先
-		for (String s : ApiRegistryProperties.getAppNameHosts(appName)) {
-			if (!StringUtils.isEmpty(s)) {
-				rs.add(s);
-			}
-		}
+//		for (String s : ApiRegistryProperties.getAppNameHosts(appName)) {
+////			if (!StringUtils.isEmpty(s)) {
+////				rs.add(s);
+////			}
+//		}
 		if (rs.size() > 0) {
 			return rs;
 		}
 		// 注册中心
-		BaseRegistry registry = ContextUtils.getBean(BaseRegistry.class, false);
-		if (registry != null) {
-			List<String> list = registry.getServerList().get(appName);
-			if (list != null) {
-				for (String s : list) {
-					if (!StringUtils.isEmpty(s)) {
-						rs.add(s);
-					}
-				}
-			}
-		}
+//		BaseRegistry registry = ContextUtils.getBean(BaseRegistry.class, false);
+//		if (registry != null) {
+//			List<String> list = registry.getServerList().get(appName);
+//			if (list != null) {
+//				for (String s : list) {
+//					if (!StringUtils.isEmpty(s)) {
+//						rs.add(s);
+//					}
+//				}
+//			}
+//		}
 		// 移除错误
 		List<String> fails = failsList.get(appName);
 		if (fails != null) {
@@ -98,7 +97,7 @@ public class BaseLoadBalance {
 			, "inner-114.linkmore.com"};
 		for (int i = 0; i < 1000; i++) {
 			for (String p : ports) {
-				Ref<Boolean> r = new Ref<>(false);
+//				Chooser.Ref<Boolean> r = new Ref<>(false);
 				// long time = TimeWatchUtils.time(() -> {
 				// 	r.setData(BaseLoadBalance.isConnectHostPort(p));
 				// });

@@ -1,5 +1,4 @@
 package com.taotao.cloud.rpc.common.common.support.invoke.impl;
-
 import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 import com.taotao.cloud.rpc.common.common.rpc.domain.impl.RpcResponseFactory;
 import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;

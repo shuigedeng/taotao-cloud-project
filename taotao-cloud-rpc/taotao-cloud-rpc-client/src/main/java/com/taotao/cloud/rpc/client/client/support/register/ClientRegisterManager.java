@@ -2,6 +2,7 @@
 package com.taotao.cloud.rpc.client.client.support.register;
 
 import com.taotao.cloud.rpc.client.client.model.ClientQueryServerChannelConfig;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcChannelFuture;
 import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterAddNotifyBody;
 import com.taotao.cloud.rpc.registry.register.domain.message.body.RegisterCenterRemoveNotifyBody;

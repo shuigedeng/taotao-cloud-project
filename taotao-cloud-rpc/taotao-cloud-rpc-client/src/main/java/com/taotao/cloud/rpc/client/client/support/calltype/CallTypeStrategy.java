@@ -1,6 +1,8 @@
 package com.taotao.cloud.rpc.client.client.support.calltype;
 
 import com.taotao.cloud.rpc.client.client.proxy.ServiceContext;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcRequest;
+import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 
 /**
  * 调用方式上下文

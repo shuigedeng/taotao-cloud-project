@@ -1,6 +1,5 @@
 package com.taotao.cloud.rpc.registry.apiregistry.registry;
 
-import com.taotao.cloud.common.utils.context.ContextUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.anno.INacosRegistry;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryException;
 import java.util.HashMap;
@@ -18,11 +17,11 @@ public class NacosRegistry extends BaseRegistry {
 	}
 
 	private INacosRegistry getNacosRegistryImpl() {
-		INacosRegistry o = ContextUtils.getBean(INacosRegistry.class, true);
-		if (o == null) {
-			throw new ApiRegistryException("nacos未开启或未加载实现包");
-		}
-		return o;
+//		INacosRegistry o = ContextUtils.getBean(INacosRegistry.class, true);
+//		if (o == null) {
+//			throw new ApiRegistryException("nacos未开启或未加载实现包");
+//		}
+		return null;
 	}
 
 	@Override
@@ -68,9 +67,9 @@ public class NacosRegistry extends BaseRegistry {
 	@Override
 	public void close() {
 		super.close();
-		INacosRegistry registry = ContextUtils.getBean(INacosRegistry.class, true);
-		if (registry != null) {
-			registry.close();
-		}
+//		INacosRegistry registry = ContextUtils.getBean(INacosRegistry.class, true);
+//		if (registry != null) {
+//			registry.close();
+//		}
 	}
 }

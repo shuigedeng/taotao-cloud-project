@@ -2,6 +2,7 @@ package com.taotao.cloud.rpc.client.client.support.filter.impl;
 
 import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
 import com.taotao.cloud.rpc.client.client.support.filter.RpcFilter;
+import com.taotao.cloud.rpc.common.common.rpc.Pipeline;
 
 /**
  * rpc 过滤器
@@ -32,14 +33,14 @@ public final class RpcFilters {
             protected void init(Pipeline<RpcFilter> pipeline, RemoteInvokeContext context) {
                 pipeline.addLast(firstFilter);
 
-                if(ArrayUtil.isNotEmpty(filters)) {
-                    for(RpcFilter filter : filters) {
-                        if(ObjectUtil.isNull(filter)) {
-                            continue;
-                        }
-                        pipeline.addLast(filter);
-                    }
-                }
+//                if(ArrayUtil.isNotEmpty(filters)) {
+//                    for(RpcFilter filter : filters) {
+//                        if(ObjectUtil.isNull(filter)) {
+//                            continue;
+//                        }
+//                        pipeline.addLast(filter);
+//                    }
+//                }
             }
         };
     }

@@ -1,6 +1,5 @@
 package com.taotao.cloud.rpc.registry.apiregistry.apiclient;
 
-import com.taotao.cloud.common.extension.StringUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.RequestInfo;
 import com.taotao.cloud.rpc.registry.apiregistry.base.BaseApiClientParser;
 import com.taotao.cloud.rpc.registry.apiregistry.code.CodeFactory;
@@ -11,6 +10,7 @@ import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Collection;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

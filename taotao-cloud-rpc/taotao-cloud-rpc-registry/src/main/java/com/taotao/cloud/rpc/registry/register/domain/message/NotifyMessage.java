@@ -1,6 +1,8 @@
 package com.taotao.cloud.rpc.registry.register.domain.message;
 
 
+import com.taotao.cloud.rpc.common.common.rpc.domain.BaseRpc;
+
 /**
  * 注册消息体
  * @author shuigedeng

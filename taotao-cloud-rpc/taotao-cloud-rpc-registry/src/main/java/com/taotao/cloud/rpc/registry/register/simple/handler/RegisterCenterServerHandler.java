@@ -16,7 +16,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 /**
  * <p> 注册中心服务器处理类 </p>
  *
@@ -59,8 +60,8 @@ public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
         Object body = notifyMessage.body();
         String type = NotifyMessages.type(notifyMessage);
         String seqId = notifyMessage.seqId();
-        LOG.info("[Register Server] received message type: {}, seqId: {} ", type,
-                seqId);
+//        LOG.info("[Register Server] received message type: {}, seqId: {} ", type,
+//                seqId);
 
         final Channel channel = ctx.channel();
 
@@ -91,8 +92,8 @@ public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
                 break;
 
             default:
-                LOG.warn("[Register Center] not support type: {} and seqId: {}",
-                        type, seqId);
+//                LOG.warn("[Register Center] not support type: {} and seqId: {}",
+//                        type, seqId);
         }
 
     }

@@ -1,8 +1,6 @@
 package com.taotao.cloud.rpc.registry.apiregistry;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.apiclient.Aspects;
-import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryApplicationRunner;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiRegistryHealthFilter;
 import com.taotao.cloud.rpc.registry.apiregistry.loadbalance.BaseLoadBalance;
 import com.taotao.cloud.rpc.registry.apiregistry.loadbalance.LoadBalanceFactory;
@@ -54,10 +52,10 @@ public class ApiRegistryConfiguration {
 		return RegistryFactory.create();
 	}
 
-	@Bean
-	public ApiRegistryApplicationRunner getApiRegistryApplicationRunner() {
-		return new ApiRegistryApplicationRunner();
-	}
+//	@Bean
+//	public ApiRegistryApplicationRunner getApiRegistryApplicationRunner() {
+//		return new ApiRegistryApplicationRunner();
+//	}
 
 	@ConditionalOnProperty(name = com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties.HealthEnabled, havingValue = "true",matchIfMissing = true)
 	@Bean
@@ -67,10 +65,10 @@ public class ApiRegistryConfiguration {
 		// 优先注入
 		filterRegistrationBean.setOrder(Ordered.LOWEST_PRECEDENCE-1);
 		filterRegistrationBean.setFilter(new ApiRegistryHealthFilter());
-		filterRegistrationBean.setName("bsfApiRegistryStatusFilter");
+		filterRegistrationBean.setName("ttcApiRegistryStatusFilter");
 		filterRegistrationBean.addUrlPatterns("/ttc/*");
-		LogUtils.info(com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties.Project,
-				"apiRegistry status filter注册成功!");
+//		LogUtils.info(com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties.Project,
+//				"apiRegistry status filter注册成功!");
 		return filterRegistrationBean;
 	}
 }

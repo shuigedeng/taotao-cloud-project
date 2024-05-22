@@ -1,5 +1,6 @@
 package com.taotao.cloud.rpc.server.server.service.impl;
 
+import com.taotao.cloud.rpc.common.common.exception.RpcRuntimeException;
 import com.taotao.cloud.rpc.server.server.config.service.ServiceConfig;
 import com.taotao.cloud.rpc.server.server.service.ServiceFactory;
 
@@ -46,7 +47,7 @@ public class DefaultServiceFactory implements ServiceFactory {
      */
     @Override
     public synchronized ServiceFactory registerServicesLocal(List<ServiceConfig> serviceConfigList) {
-        ArgUtil.notEmpty(serviceConfigList, "serviceConfigList");
+//        ArgUtil.notEmpty(serviceConfigList, "serviceConfigList");
 
         // 集合初始化
         serviceMap = new HashMap<>(serviceConfigList.size());
@@ -66,13 +67,13 @@ public class DefaultServiceFactory implements ServiceFactory {
             Method[] methods = reference.getClass().getMethods();
             for(Method method : methods) {
                 String methodName = method.getName();
-                if(ReflectMethodUtil.isIgnoreMethod(methodName)) {
-                    continue;
-                }
+//                if(ReflectMethodUtil.isIgnoreMethod(methodName)) {
+//                    continue;
+//                }
 
-                List<String> paramTypeNames = ReflectMethodUtil.getParamTypeNames(method);
-                String key = buildMethodKey(serviceId, methodName, paramTypeNames);
-                methodMap.put(key, method);
+//                List<String> paramTypeNames = ReflectMethodUtil.getParamTypeNames(method);
+//                String key = buildMethodKey(serviceId, methodName, paramTypeNames);
+//                methodMap.put(key, method);
             }
         }
 
@@ -83,8 +84,8 @@ public class DefaultServiceFactory implements ServiceFactory {
     @Override
     public Object invoke(String serviceId, String methodName, List<String> paramTypeNames, Object[] paramValues) {
         //参数校验
-        ArgUtil.notEmpty(serviceId, "serviceId");
-        ArgUtil.notEmpty(methodName, "methodName");
+//        ArgUtil.notEmpty(serviceId, "serviceId");
+//        ArgUtil.notEmpty(methodName, "methodName");
 
         // 提供 cache，可以根据前三个值快速定位对应的 method
         // 根据 method 进行反射处理。
@@ -110,9 +111,10 @@ public class DefaultServiceFactory implements ServiceFactory {
      * @since 0.0.6
      */
     private String buildMethodKey(String serviceId, String methodName, List<String> paramTypeNames) {
-        String param = CollectionUtil.join(paramTypeNames, PunctuationConst.AT);
-        return serviceId+PunctuationConst.COLON+methodName+PunctuationConst.COLON
-                +param;
+//        String param = CollectionUtil.join(paramTypeNames, PunctuationConst.AT);
+//        return serviceId+PunctuationConst.COLON+methodName+PunctuationConst.COLON
+//                +param;
+		return "";
     }
 
 }

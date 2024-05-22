@@ -1,7 +1,5 @@
 package com.taotao.cloud.rpc.registry.apiregistry.scan;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.reflect.ReflectUtils;
 import com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties;
 import com.taotao.cloud.rpc.registry.apiregistry.anno.ApiClient;
 import com.taotao.cloud.rpc.registry.apiregistry.base.ApiUtils;
@@ -31,14 +29,14 @@ public class ApiClientPackageScan {
 		@Override
 		public void registerBeanDefinitions(AnnotationMetadata annotationMetadata,
 			BeanDefinitionRegistry beanDefinitionRegistry) {
-			String[] basePackages = ApiRegistryProperties.getRpcClientBasePackages();
-			if (basePackages.length > 0) {
-				// 自定义的 包扫描器
-				ApiClientPackageScanHandle scanHandle = new ApiClientPackageScanHandle(
-					beanDefinitionRegistry, false);
-				// 扫描指定路径下的接口
-				scanHandle.doScan(basePackages);
-			}
+//			String[] basePackages = ApiRegistryProperties.getRpcClientBasePackages();
+//			if (basePackages.length > 0) {
+//				// 自定义的 包扫描器
+//				ApiClientPackageScanHandle scanHandle = new ApiClientPackageScanHandle(
+//					beanDefinitionRegistry, false);
+//				// 扫描指定路径下的接口
+//				scanHandle.doScan(basePackages);
+//			}
 		}
 	}
 
@@ -47,9 +45,9 @@ public class ApiClientPackageScan {
 		public ApiClientPackageScanHandle(BeanDefinitionRegistry registry,
 			boolean useDefaultFilters) {
 			super(registry, useDefaultFilters);
-			if (ApiRegistryProperties.getRpcClientTypeBeanNameEnabled()) {
-				this.setBeanNameGenerator(new FullyQualifiedAnnotationBeanNameGenerator());
-			}
+//			if (ApiRegistryProperties.getRpcClientTypeBeanNameEnabled()) {
+//				this.setBeanNameGenerator(new FullyQualifiedAnnotationBeanNameGenerator());
+//			}
 		}
 
 		@Override
@@ -57,10 +55,10 @@ public class ApiClientPackageScan {
 			// 添加过滤条件
 			addIncludeFilter(new AnnotationTypeFilter(ApiClient.class));
 			// 兼容@FeignClient
-			Class feignClientCls = ApiUtils.FeignClientAnnotationClass;
-			if (feignClientCls != null) {
-				addIncludeFilter(new AnnotationTypeFilter(feignClientCls));
-			}
+//			Class feignClientCls = ApiUtils.FeignClientAnnotationClass;
+//			if (feignClientCls != null) {
+//				addIncludeFilter(new AnnotationTypeFilter(feignClientCls));
+//			}
 			Set<BeanDefinitionHolder> beanDefinitionHolders = super.doScan(basePackages);
 			if (!beanDefinitionHolders.isEmpty()) {
 				// 给扫描出来的接口添加上代理对象
@@ -154,19 +152,19 @@ public class ApiClientPackageScan {
 		public Object invoke(Object proxy, Method method, Object[] args) {
 			try {
 				// 支持接口default默认实现
-				if (ReflectUtils.isDefaultMethod(method)) {
-					return ReflectUtils.invokeDefaultMethod(proxy, method, args);
-				}
-				if ("toString".equals(method.getName())) {
-					return this.toString();
-				}
-				LogUtils.error(ApiRegistryProperties.Project,
-					STR."未找到方法实现:\{getFullName(method)}");
+//				if (ReflectUtils.isDefaultMethod(method)) {
+//					return ReflectUtils.invokeDefaultMethod(proxy, method, args);
+//				}
+//				if ("toString".equals(method.getName())) {
+//					return this.toString();
+//				}
+//				LogUtils.error(ApiRegistryProperties.Project,
+//					STR."未找到方法实现:\{getFullName(method)}");
 				return null;
 			}
 			catch (Exception e) {
-				LogUtils.error(ApiRegistryProperties.Project,
-					STR."方法调用出错:\{getFullName(method)}");
+//				LogUtils.error(ApiRegistryProperties.Project,
+//					STR."方法调用出错:\{getFullName(method)}");
 				return null;
 			}
 		}

@@ -40,7 +40,7 @@ public class RegisterBs implements com.taotao.cloud.rpc.registry.register.api.co
 
     @Override
     public RegisterBs port(int port) {
-        ArgUtil.notNegative(port, "port");
+//        ArgUtil.notNegative(port, "port");
 
         this.port = port;
         return this;
@@ -57,12 +57,12 @@ public class RegisterBs implements com.taotao.cloud.rpc.registry.register.api.co
         // 如果使用 redis/database 等集中式的存储，或者进行数据同步，则有通知的必要性。
 
         // 添加对应的 shutdown hook
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                new com.taotao.cloud.rpc.registry.register.support.hook.RegisterCenterShutdownHook(registerServerService, registerClientService, port).hook();
-            }
-        });
+//        Runtime.getRuntime().addShutdownHook(new Thread() {
+//            @Override
+//            public void run() {
+//                new com.taotao.cloud.rpc.registry.register.support.hook.RegisterCenterShutdownHook(registerServerService, registerClientService, port).hook();
+//            }
+//        });
 
         return this;
     }
