@@ -39,6 +39,7 @@ tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts,
 
     into "taotao-cloud-mq-dashboard"
     compression = Compression.GZIP
+    archiveExtension = 'tar.gz'
 
     from("${project.parent.projectDir}/taotao-cloud-mq-distribution/bin") {
         include '**'

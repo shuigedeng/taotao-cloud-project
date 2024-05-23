@@ -83,7 +83,7 @@ tasks.create(name: "releaseTarGz", dependsOn: jar, type: Tar) {
 
     into "taotao-cloud-tx-server"
     compression = Compression.GZIP
-    extension = 'tar.gz'
+    //extension = 'tar.gz'
     archiveExtension = 'tar.gz'
 
     from("${project.parent.projectDir}/taotao-cloud-tx-distribution/bin") {

@@ -42,6 +42,7 @@ tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts,
 
     into "taotao-cloud-rpc-dashboard"
     compression = Compression.GZIP
+    archiveExtension = 'tar.gz'
 
     from("${project.parent.projectDir}/taotao-cloud-rpc-distribution/bin") {
         include '**'
