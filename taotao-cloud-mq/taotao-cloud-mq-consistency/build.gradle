@@ -7,7 +7,7 @@ dependencies {
 
     implementation 'org.slf4j:slf4j-api:2.0.13'
     implementation 'org.slf4j:slf4j-api:2.0.13'
-    implementation('com.alipay.sofa:bolt:1.6.9') {
+    implementation('com.alipay.sofa:bolt:1.6.10') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
     implementation 'com.alibaba:fastjson:2.0.50'

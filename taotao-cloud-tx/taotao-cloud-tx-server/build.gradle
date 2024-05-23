@@ -3,6 +3,53 @@ dependencies {
     api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
 }
 
+jar {
+    //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
+    //archivesBaseName = 'Example'//基本的文件名
+    //文件夹大于65535个，需要开启zip64
+    //zip64=true
+
+    manifest {
+        attributes 'Main-Class': "com.taotao.cloud.tx.server.TxManagerApplication"
+    }
+
+    //from sourceSets.main.output
+    //dependsOn configurations.runtimeClasspath
+
+    //gradle 处理重复文件，include 最后一个重复文件“胜出”的默认策略。
+    //duplicatesStrategy = 'include' // <<---- addition
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    //打包依赖包
+    from {
+        (configurations.runtimeClasspath).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    //delete "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
+    //from configurations.runtimeClasspath
+    //into "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
+    //from configurations.compileClasspath
+    //into "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
+
+    //into('lib') { // 将第三方jar放入 lib目录中
+    //    from configurations.compile
+    //}
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.taotao.cloud.tx.server.TxManagerApplication'
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.filter {
+            it.name.endsWith('.jar')
+        }
+    }
+    with jar
+}
 
 task releaseTarZip(type: Zip, dependsOn: jar) {
 
@@ -31,10 +78,13 @@ task releaseTarZip(type: Zip, dependsOn: jar) {
 
 }
 
-tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts, type: Tar) {
+//tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts, type: Tar) {
+tasks.create(name: "releaseTarGz", dependsOn: jar, type: Tar) {
 
     into "taotao-cloud-tx-server"
     compression = Compression.GZIP
+    extension = 'tar.gz'
+    archiveExtension = 'tar.gz'
 
     from("${project.parent.projectDir}/taotao-cloud-tx-distribution/bin") {
         include '**'
@@ -98,4 +148,5 @@ tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts,
 //    from(project(':tools:tools-api').jar) { into("libs/") }
 //    from(project(':tools:tools-api').configurations.runtimeClasspath) { into("libs/") }
     duplicatesStrategy 'exclude'
+
 }

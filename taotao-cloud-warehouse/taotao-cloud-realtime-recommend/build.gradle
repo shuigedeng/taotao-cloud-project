@@ -6,9 +6,9 @@ dependencies {
     implementation "org.apache.mahout:mahout-examples:0.13.0"
     implementation "junit:junit:4.13.2"
 
-    implementation 'org.springframework:spring-jdbc:6.1.7'
-    implementation "org.springframework:spring-core:6.1.7"
-    implementation "org.springframework:spring-context:6.1.7"
+    implementation 'org.springframework:spring-jdbc:6.1.8'
+    implementation "org.springframework:spring-core:6.1.8"
+    implementation "org.springframework:spring-context:6.1.8"
 
     implementation "javassist:javassist:3.12.1.GA"
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
