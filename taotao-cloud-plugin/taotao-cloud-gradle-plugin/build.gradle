@@ -25,7 +25,7 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
 
-    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.2.6"
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.3.0"
 }
 
 

@@ -31,6 +31,10 @@ tasks.create(name: "releaseTarGz", type: Tar) {
 
     into "${project.name}"
     compression = Compression.GZIP
+    archiveAppendix = "${project.name}"
+    archiveBaseName = "${project.name}"
+    archiveVersion = "${project.name}"
+    archiveClassifier = "${project.name}"
     archiveExtension = 'tar.gz'
 
     from("${project.projectDir}/bin") {
