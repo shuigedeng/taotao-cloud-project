@@ -70,7 +70,7 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.1'
 
-    implementation 'com.github.oshi:oshi-core:6.6.0'
+    implementation 'com.github.oshi:oshi-core:6.6.1'
 
     //implementation "io.github.shuigedeng:taotao-cloud-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-cloud-starter-apt")
@@ -107,7 +107,7 @@ dependencies {
     //implementation "org.apache.lucene:lucene-analyzers-common:4.2.0"
     //implementation "commons-dbutils:commons-dbutils:1.5"
     //implementation "com.github.jsqlparser:jsqlparser:4.9"
-    //implementation "com.alibaba:druid:1.2.22"
+    //implementation "com.alibaba:druid:1.2.23"
     //implementation("org.springframework.boot:spring-boot-starter-freemarker") {
     //    exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
     //}
