@@ -56,15 +56,15 @@ jobs:
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-tx
-        run: gradle -p taotao-cloud-tx/taotao-cloud-tx-server clean releaseTarGz -x test
+        run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distributions clean releaseTarGz -x test
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-mq
-        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-dashboard clean releaseTarGz -x test
+        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-distributions clean releaseTarGz -x test
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-rpc
-        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-dashboard clean releaseTarGz -x test
+        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-distributions clean releaseTarGz -x test
 
       #https://github.com/ncipollo/release-action/tree/main
       - uses: ncipollo/release-action@v1
