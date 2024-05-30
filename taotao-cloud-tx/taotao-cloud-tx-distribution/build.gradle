@@ -1,7 +1,7 @@
 task releaseTarZip(type: Zip) {
     dependsOn(':taotao-cloud-tx:taotao-cloud-tx-server:jar')
 
-    archiveFileName = "${project.name}.zip"
+    archiveFileName = "${project.name}-${project.version}.zip"
 
     from("${project.projectDir}/bin") {
         include '**'
@@ -27,14 +27,11 @@ task releaseTarZip(type: Zip) {
 }
 
 tasks.create(name: "releaseTarGz", type: Tar) {
-    dependsOn(':taotao-cloud-tx:taotao-cloud-tx-server:jar')
+    dependsOn('releaseTarZip')
 
     into "${project.name}"
     compression = Compression.GZIP
-    archiveAppendix = "${project.name}"
-    archiveBaseName = "${project.name}"
-    archiveVersion = "${project.name}"
-    archiveClassifier = "${project.name}"
+    //archiveVersion = ""
     archiveExtension = 'tar.gz'
 
     from("${project.projectDir}/bin") {

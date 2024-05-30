@@ -10,7 +10,7 @@ dependencies {
 
 task releaseTarZip(type: Zip, dependsOn: jar) {
 
-    archiveFileName = "${project.name}.zip"
+    archiveFileName = "${project.name}-${project.version}.zip"
 
     from("${project.parent.projectDir}/taotao-cloud-mq-distribution/bin") {
         include '**'

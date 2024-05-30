@@ -1,7 +1,7 @@
 task releaseTarZip(type: Zip) {
     dependsOn(':taotao-cloud-mq:taotao-cloud-mq-dashboard:jar')
 
-    archiveFileName = "${project.name}.zip"
+    archiveFileName = "${project.name}-${project.version}.zip"
 
     from("${project.projectDir}/bin") {
         include '**'
@@ -27,7 +27,7 @@ task releaseTarZip(type: Zip) {
 }
 
 tasks.create(name: "releaseTarGz", type: Tar) {
-    dependsOn(':taotao-cloud-mq:taotao-cloud-mq-dashboard:jar')
+    dependsOn('releaseTarZip')
 
     into "${project.name}"
     compression = Compression.GZIP
