@@ -56,22 +56,22 @@ jobs:
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-tx
-        run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distributions clean releaseTarGz -x test
+        run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distribution clean releaseTarGz -x test
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-mq
-        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-distributions clean releaseTarGz -x test
+        run: gradle -p taotao-cloud-mq/taotao-cloud-mq-distribution clean releaseTarGz -x test
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-rpc
-        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-distributions clean releaseTarGz -x test
+        run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-distribution clean releaseTarGz -x test
 
       #https://github.com/ncipollo/release-action/tree/main
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distributions/build/distributions/taotao-cloud-tx-distributions-2024.06.ziptaotao-cloud-tx/taotao-cloud-tx-distributions/build/distributions/taotao-cloud-tx-distributions-2024.06.tar.gz,taotao-cloud-mq/taotao-cloud-mq-distributions/build/distributions/taotao-cloud-mq-distributions-2024.06.zip,taotao-cloud-mq/taotao-cloud-mq-distributions/build/distributions/taotao-cloud-mq-distributions-2024.06.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-distributions/build/distributions/taotao-cloud-rpc-distributions-2024.06.zip,taotao-cloud-rpc/taotao-cloud-rpc-distributions/build/distributions/taotao-cloud-rpc-distributions-2024.06.tar.gz"
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distribution/taotao-cloud-tx-distribution-2024.06.ziptaotao-cloud-tx/taotao-cloud-tx-distribution/build/distribution/taotao-cloud-tx-distribution-2024.06.tar.gz,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distribution/taotao-cloud-mq-distribution-2024.06.zip,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distribution/taotao-cloud-mq-distribution-2024.06.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distribution/taotao-cloud-rpc-distribution-2024.06.zip,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distribution/taotao-cloud-rpc-distribution-2024.06.tar.gz"
           #body: "sdfsa"
           bodyFile: "doc/release/2024-06.md"
           draft: false
