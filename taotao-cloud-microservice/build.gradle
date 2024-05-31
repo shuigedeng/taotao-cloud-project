@@ -99,6 +99,8 @@ subprojects {
             exclude group: "com.baomidou", module: "mybatis-plus-spring-boot3-starter-test"
         }
 
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
         implementation "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"

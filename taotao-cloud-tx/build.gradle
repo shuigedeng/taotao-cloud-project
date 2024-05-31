@@ -5,13 +5,15 @@ subprojects {
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
+        //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
 
     jar {
+        enabled = true
         //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
         //archivesBaseName = 'Example'//基本的文件名
         //文件夹大于65535个，需要开启zip64
-        //zip64=true
+        zip64=true
 
         //from sourceSets.main.output
         //dependsOn configurations.runtimeClasspath
@@ -20,12 +22,19 @@ subprojects {
         //duplicatesStrategy = 'include' // <<---- addition
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-        //打包依赖包
-        from {
-            (configurations.runtimeClasspath).collect {
-                it.isDirectory() ? it : zipTree(it)
-            }
+        manifest {
+            attributes(
+                    'Implementation-Title': 'Gradle Jar Combine Example',
+                    'Implementation-Version': version
+            )
         }
+
+        //打包依赖包
+//        from {
+//            (configurations.runtimeClasspath).collect {
+//                it.isDirectory() ? it : zipTree(it)
+//            }
+//        }
 
         //delete "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
         //from configurations.runtimeClasspath

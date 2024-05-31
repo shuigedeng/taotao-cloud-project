@@ -5,3 +5,4 @@ dependencies {
     api 'com.alibaba.fastjson2:fastjson2'
 }
 
+

@@ -2,4 +2,3 @@ dependencies {
     api project(":taotao-cloud-tx:taotao-cloud-tx-common")
     api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
 }
-

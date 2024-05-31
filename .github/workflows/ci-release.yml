@@ -71,7 +71,7 @@ jobs:
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distribution/taotao-cloud-tx-distribution-2024.06.ziptaotao-cloud-tx/taotao-cloud-tx-distribution/build/distribution/taotao-cloud-tx-distribution-2024.06.tar.gz,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distribution/taotao-cloud-mq-distribution-2024.06.zip,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distribution/taotao-cloud-mq-distribution-2024.06.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distribution/taotao-cloud-rpc-distribution-2024.06.zip,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distribution/taotao-cloud-rpc-distribution-2024.06.tar.gz"
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2024.06.ziptaotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2024.06.tar.gz,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2024.06.zip,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2024.06.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2024.06.zip,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2024.06.tar.gz"
           #body: "sdfsa"
           bodyFile: "doc/release/2024-06.md"
           draft: false
