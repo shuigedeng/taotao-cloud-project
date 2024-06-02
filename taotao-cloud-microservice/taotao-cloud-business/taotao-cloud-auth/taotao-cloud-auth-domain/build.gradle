@@ -80,7 +80,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-micrometer"
     api "io.github.shuigedeng:taotao-cloud-starter-skywalking"
 
-    api 'org.springframework.session:spring-session-data-redis:3.2.2'
+    api 'org.springframework.session:spring-session-data-redis:3.3.0'
 
     api 'com.github.binarywang:weixin-java-mp:4.6.2.B'
     api 'com.github.binarywang:weixin-java-miniapp:4.6.2.B'
@@ -127,7 +127,7 @@ dependencies {
     api "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    api "com.nimbusds:nimbus-jose-jwt:9.39.1"
+    api "com.nimbusds:nimbus-jose-jwt:9.39.3"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
     api 'com.nimbusds:oauth2-oidc-sdk:11.12'
 

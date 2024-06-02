@@ -54,7 +54,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
     //使用OpenAI
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
+    //implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
     //使用PGVector作为向量数据库
     implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
     implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
@@ -83,7 +83,6 @@ archivesBaseName = 'taotao-cloud-ai'
 
 configurations {
     all {
-
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.querydsl", module: "querydsl-apt"

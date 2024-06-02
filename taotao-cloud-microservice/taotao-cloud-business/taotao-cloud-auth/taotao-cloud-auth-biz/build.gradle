@@ -30,7 +30,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
 
-    implementation 'org.springframework.session:spring-session-data-redis:3.2.2'
+    implementation 'org.springframework.session:spring-session-data-redis:3.3.0'
 
     implementation 'com.github.binarywang:weixin-java-mp:4.6.2.B'
     implementation 'com.github.binarywang:weixin-java-miniapp:4.6.2.B'
@@ -77,7 +77,7 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.39.1"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.39.3"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
     implementation 'com.nimbusds:oauth2-oidc-sdk:11.12'
 
