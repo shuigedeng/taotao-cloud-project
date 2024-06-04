@@ -50,7 +50,7 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.13.1'
-            force 'com.alibaba:fastjson:2.0.50'
+            force 'com.alibaba:fastjson:2.0.51'
 
         }
 

@@ -147,7 +147,7 @@ dependencies {
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.1'
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.50"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.51"
 }
 
 configurations {
