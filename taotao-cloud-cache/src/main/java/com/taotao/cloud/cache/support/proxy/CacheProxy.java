@@ -11,7 +11,7 @@ import java.lang.reflect.Proxy;
 /**
  * <p> 代理信息 </p>
  *
- * @since 0.0.4
+ * @since 2024.06
  */
 public final class CacheProxy {
 
@@ -23,7 +23,7 @@ public final class CacheProxy {
      * @param <V> 泛型 value
      * @param cache 对象代理
      * @return 代理信息
-     * @since 0.0.4
+     * @since 2024.06
      */
     @SuppressWarnings("all")
     public static <K,V> ICache<K,V> getProxy(final ICache<K,V> cache) {

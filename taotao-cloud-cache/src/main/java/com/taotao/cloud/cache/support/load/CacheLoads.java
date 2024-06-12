@@ -6,7 +6,7 @@ import com.taotao.cloud.cache.api.ICacheLoad;
  *
  * 加载策略工具类
  * @author shuigedeng
- * @since 0.0.7
+ * @since 2024.06
  */
 public final class CacheLoads {
 
@@ -17,7 +17,7 @@ public final class CacheLoads {
      * @param <K> key
      * @param <V> value
      * @return 值
-     * @since 0.0.7
+     * @since 2024.06
      */
     public static <K,V> ICacheLoad<K,V> none() {
         return new CacheLoadNone<>();
@@ -29,7 +29,7 @@ public final class CacheLoads {
      * @param <K> key
      * @param <V> value
      * @return 值
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static <K,V> ICacheLoad<K,V> dbJson(final String dbPath) {
         return new CacheLoadDbJson<>(dbPath);
@@ -41,7 +41,7 @@ public final class CacheLoads {
      * @param <K> key
      * @param <V> value
      * @return 值
-     * @since 0.0.10
+     * @since 2024.06
      */
     public static <K,V> ICacheLoad<K,V> aof(final String dbPath) {
         return new CacheLoadAof<>(dbPath);

@@ -3,7 +3,7 @@ package com.taotao.cloud.cache.constant.enums;
 /**
  * 删除类型
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public enum CacheRemoveType {
     EXPIRE("expire", "过期"),

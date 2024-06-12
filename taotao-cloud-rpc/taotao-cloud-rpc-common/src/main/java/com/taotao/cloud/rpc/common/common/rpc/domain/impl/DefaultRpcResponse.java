@@ -5,7 +5,7 @@ import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 /**
  * 默认 rpc 响应
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class DefaultRpcResponse implements RpcResponse {
 
@@ -13,19 +13,19 @@ public class DefaultRpcResponse implements RpcResponse {
 
     /**
      * 唯一标识
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String seqId;
 
     /**
      * 异常信息
-     * @since 0.0.6
+     * @since 2024.06
      */
     private Throwable error;
 
     /**
      * 响应结果
-     * @since 0.0.6
+     * @since 2024.06
      */
     private Object result;
 

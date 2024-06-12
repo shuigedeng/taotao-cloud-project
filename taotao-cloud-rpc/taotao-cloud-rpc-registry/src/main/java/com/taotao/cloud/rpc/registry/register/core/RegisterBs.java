@@ -8,13 +8,13 @@ import io.netty.channel.ChannelHandler;
 /**
  * 默认注册中心配置
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public class RegisterBs implements com.taotao.cloud.rpc.registry.register.api.config.RegisterConfig {
 
     /**
      * 服务启动端口信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private int port;
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.cache.model;
 /**
  * 双向链表节点
  * @author shuigedeng
- * @since 0.0.12
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
@@ -11,25 +11,25 @@ public class DoubleListNode<K,V> {
 
     /**
      * 键
-     * @since 0.0.12
+     * @since 2024.06
      */
     private K key;
 
     /**
      * 值
-     * @since 0.0.12
+     * @since 2024.06
      */
     private V value;
 
     /**
      * 前一个节点
-     * @since 0.0.12
+     * @since 2024.06
      */
     private DoubleListNode<K,V> pre;
 
     /**
      * 后一个节点
-     * @since 0.0.12
+     * @since 2024.06
      */
     private DoubleListNode<K,V> next;
 

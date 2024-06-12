@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 /**
  * netty 网络服务端
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public abstract class AbstractNettyServer implements NettyServer {
 

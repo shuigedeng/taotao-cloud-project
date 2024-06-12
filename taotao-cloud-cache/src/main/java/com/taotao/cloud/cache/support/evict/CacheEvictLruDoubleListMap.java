@@ -15,22 +15,22 @@ import java.util.Map;
  *
  * 实现方式：HashMap + list 实现策略
  * @author shuigedeng
- * @since 0.0.12
+ * @since 2024.06
  */
 public class CacheEvictLruDoubleListMap<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictLruDoubleListMap.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
 
 
     /**
      * 头结点
-     * @since 0.0.12
+     * @since 2024.06
      */
     private DoubleListNode<K,V> head;
 
     /**
      * 尾巴结点
-     * @since 0.0.12
+     * @since 2024.06
      */
     private DoubleListNode<K,V> tail;
 
@@ -39,7 +39,7 @@ public class CacheEvictLruDoubleListMap<K,V> extends AbstractCacheEvict<K,V> {
      *
      * key: 元素信息
      * value: 元素在 list 中对应的节点信息
-     * @since 0.0.12
+     * @since 2024.06
      */
     private Map<K, DoubleListNode<K,V>> indexMap;
 
@@ -81,7 +81,7 @@ public class CacheEvictLruDoubleListMap<K,V> extends AbstractCacheEvict<K,V> {
      * （2）新元素放到元素头部
      *
      * @param key 元素
-     * @since 0.0.12
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -113,7 +113,7 @@ public class CacheEvictLruDoubleListMap<K,V> extends AbstractCacheEvict<K,V> {
      * 2.2 删除 map 中的元素
      *
      * @param key 元素
-     * @since 0.0.12
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

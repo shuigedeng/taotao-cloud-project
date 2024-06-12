@@ -80,7 +80,7 @@ dependencies {
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
     //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    api "com.googlecode.aviator:aviator:5.4.1"
+    api "com.googlecode.aviator:aviator:5.4.3"
 
     //多线程并发编程框架。为企业高并发（电商）复杂场景提供快速解决方案。 可以完美应对多种多线程高并发场景
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter

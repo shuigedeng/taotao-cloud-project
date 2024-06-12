@@ -6,7 +6,7 @@ import com.taotao.cloud.cache.api.ICacheLoad;
 /**
  * 加载策略-无
  * @author shuigedeng
- * @since 0.0.7
+ * @since 2024.06
  */
 public class CacheLoadNone<K,V> implements ICacheLoad<K,V> {
 

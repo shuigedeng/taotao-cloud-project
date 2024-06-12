@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 地址信息工具类
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public final class RpcAddressBuilder {
 
@@ -17,7 +17,7 @@ public final class RpcAddressBuilder {
      * 将地址信息转换对对象信息
      * @param addresses 地址信息
      * @return 转换后的信息列表
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static List<RpcAddress> of(final String addresses) {
 //        ArgUtil.notEmpty(addresses, "addresses");

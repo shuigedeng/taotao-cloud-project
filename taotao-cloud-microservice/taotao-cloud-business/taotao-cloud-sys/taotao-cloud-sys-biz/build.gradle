@@ -41,7 +41,7 @@ dependencies {
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
     //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    implementation "com.googlecode.aviator:aviator:5.4.1"
+    implementation "com.googlecode.aviator:aviator:5.4.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
     implementation "com.google.protobuf:protobuf-java:4.27.1"
@@ -134,7 +134,7 @@ configurations {
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
-            force 'org.antlr:antlr4:4.13.1'
+            //force 'org.antlr:antlr4:4.13.1'
             force 'net.minidev:json-smart:2.5.1'
 
         }

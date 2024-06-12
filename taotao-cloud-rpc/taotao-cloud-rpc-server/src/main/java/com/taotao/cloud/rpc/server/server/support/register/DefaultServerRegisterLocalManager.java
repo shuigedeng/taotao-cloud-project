@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 默认的服务端注册管理实现
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DefaultServerRegisterLocalManager implements ServerRegisterManager {
 
-	private static final Log log = LogFactory.getLog(DefaultServerRegisterLocalManager.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultServerRegisterLocalManager.class);
 
 	/**
 	 * 存放对应的 map 信息

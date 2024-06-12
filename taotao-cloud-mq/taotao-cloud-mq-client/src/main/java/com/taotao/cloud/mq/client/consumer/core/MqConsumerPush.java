@@ -19,8 +19,8 @@ import com.taotao.cloud.mq.common.support.invoke.impl.InvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
 import com.taotao.cloud.mq.common.support.status.StatusManager;
 import com.taotao.cloud.mq.common.tmp.ILoadBalance;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 推送消费策略
  *
@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MqConsumerPush extends Thread implements IMqConsumer {
 
-    private static final Log log = LogFactory.getLog(MqConsumerPush.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MqConsumerPush.class);
 
     /**
      * 组名称

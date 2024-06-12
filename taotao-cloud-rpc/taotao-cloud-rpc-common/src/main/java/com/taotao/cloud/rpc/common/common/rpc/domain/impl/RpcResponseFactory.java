@@ -8,7 +8,7 @@ import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
  * 响应工厂类
  *
  * @author shuigedeng
- * @since 0.0.7
+ * @since 2024.06
  */
 public final class RpcResponseFactory {
 
@@ -18,7 +18,7 @@ public final class RpcResponseFactory {
 	/**
 	 * 超时异常信息
 	 *
-	 * @since 0.0.7
+	 * @since 2024.06
 	 */
 	private static final DefaultRpcResponse TIMEOUT;
 
@@ -51,7 +51,7 @@ public final class RpcResponseFactory {
 	 * 获取超时响应结果
 	 *
 	 * @return 响应结果
-	 * @since 0.0.7
+	 * @since 2024.06
 	 */
 	public static RpcResponse timeout() {
 		return TIMEOUT;

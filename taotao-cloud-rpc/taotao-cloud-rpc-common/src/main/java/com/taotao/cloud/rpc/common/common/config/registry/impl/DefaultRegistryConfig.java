@@ -9,19 +9,19 @@ import java.util.List;
 /**
  * 注册中心配置类
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class DefaultRegistryConfig implements RegistryConfig {
 
     /**
      * 地址配置列表
-     * @since 0.0.6
+     * @since 2024.06
      */
     private List<RpcAddress> rpcAddressList;
 
     /**
      * 凭证信息
-     * @since 0.0.6
+     * @since 2024.06
      */
     private Credential credential;
 

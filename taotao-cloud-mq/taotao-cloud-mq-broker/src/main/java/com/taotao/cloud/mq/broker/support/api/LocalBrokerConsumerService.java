@@ -29,8 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -38,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LocalBrokerConsumerService implements IBrokerConsumerService {
 
-	private static final Log log = LogFactory.getLog(LocalBrokerConsumerService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LocalBrokerConsumerService.class);
 
 	private final Map<String, BrokerServiceEntryChannel> registerMap = new ConcurrentHashMap<>();
 

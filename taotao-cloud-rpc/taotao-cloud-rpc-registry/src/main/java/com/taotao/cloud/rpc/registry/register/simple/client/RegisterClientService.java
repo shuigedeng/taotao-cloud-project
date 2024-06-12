@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p> 客户端注册服务类 </p>
- * @since 0.0.8
+ * @since 2024.06
  */
 public interface RegisterClientService {
 
@@ -21,7 +21,7 @@ public interface RegisterClientService {
      *
      * @param serviceEntry 客户端明细信息
      * @param clientChannel 客户端 channel 信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void subscribe(final ServiceEntry serviceEntry,
                    final Channel clientChannel);
@@ -33,7 +33,7 @@ public interface RegisterClientService {
      *
      * @param serviceEntry 客户端明细信息
      * @param clientChannel 客户端 channel 信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void unSubscribe(final ServiceEntry serviceEntry,
                      final Channel clientChannel);
@@ -47,7 +47,7 @@ public interface RegisterClientService {
      * （3）循环通知。
      * @param serviceId 服务信息（不可为空）
      * @param serviceEntry 服务明细
-     * @since 0.0.8
+     * @since 2024.06
      */
     void registerNotify(final String serviceId, final ServiceEntry serviceEntry);
 
@@ -60,7 +60,7 @@ public interface RegisterClientService {
      * （3）循环通知。
      * @param serviceId 服务信息（不可为空）
      * @param serviceEntry 服务明细
-     * @since 0.0.8
+     * @since 2024.06
      */
     void unRegisterNotify(final String serviceId, final ServiceEntry serviceEntry);
 

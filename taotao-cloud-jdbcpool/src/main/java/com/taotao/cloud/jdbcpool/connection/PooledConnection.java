@@ -15,7 +15,7 @@ import java.util.concurrent.Executor;
  */
 public class PooledConnection implements IPooledConnection {
 
-    private static final Log LOG = LogFactory.getLog(PooledConnection.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PooledConnection.class);
 
     /**
      * 是否繁忙

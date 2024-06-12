@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 默认 rpc 入参
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  * @see Class#getMethod(String, Class[]) 反射获取方法信息
  * @see java.lang.reflect.Method#invoke(Object, Object...) 方法反射调用
  */
@@ -20,38 +20,38 @@ public class DefaultRpcRequest implements RpcRequest {
     /**
      * 唯一标识号
      * （）
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String seqId;
 
     /**
      * 创建时间
-     * @since 0.0.6
+     * @since 2024.06
      * @see System#currentTimeMillis() 当前时间
      */
     private long createTime;
 
     /**
      * 服务名称唯一标识
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String serviceId;
 
     /**
      * 方法名称
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String methodName;
 
     /**
      * 参数类型名称列表
-     * @since 0.0.6
+     * @since 2024.06
      */
     private List<String> paramTypeNames;
 
     /**
      * 参数值
-     * @since 0.0.6
+     * @since 2024.06
      */
     private Object[] paramValues;
 

@@ -7,6 +7,6 @@
  * ------------------------------------
  * （3）服务端配置-放在 server 中
  * （4）客户端配置-放在 client 中
- * @since 0.0.6
+ * @since 2024.06
  */
 package com.taotao.cloud.rpc.common.common.config;

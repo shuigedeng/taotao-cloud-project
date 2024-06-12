@@ -3,7 +3,7 @@ package com.taotao.cloud.cache.exception;
 /**
  * 缓存运行时异常
  * @author shuigedeng
- * @since 0.0.1
+ * @since 2024.06
  */
 public class CacheRuntimeException extends RuntimeException {
 

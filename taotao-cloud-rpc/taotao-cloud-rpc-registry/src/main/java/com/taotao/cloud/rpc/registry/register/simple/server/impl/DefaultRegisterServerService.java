@@ -7,19 +7,19 @@ import io.netty.channel.Channel;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * <p> 默认服务注册类 </p>
- * @since 0.0.8
+ * @since 2024.06
  */
 public class DefaultRegisterServerService implements RegisterServerService {
 
-    private static final Log LOG = LogFactory.getLog(DefaultRegisterServerService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultRegisterServerService.class);
 
     /**
      * 存放对应的 map 信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final Map<String, Set<ServiceEntry>> map;
 
@@ -120,7 +120,7 @@ public class DefaultRegisterServerService implements RegisterServerService {
     /**
      * 参数校验
      * @param serviceEntry 服务明细
-     * @since 0.0.8
+     * @since 2024.06
      */
     private void paramCheck(final ServiceEntry serviceEntry) {
 //        ArgUtil.notNull(serviceEntry, "serviceEntry");

@@ -13,11 +13,11 @@ import com.taotao.cloud.cache.support.persist.CachePersistAof;
  *
  * AOF 持久化到文件，暂时不考虑 buffer 等特性。
  * @author shuigedeng
- * @since 0.0.10
+ * @since 2024.06
  */
 public class CacheInterceptorAof<K,V> implements ICacheInterceptor<K, V> {
 
-    private static final Log log = LogFactory.getLog(CacheInterceptorAof.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorAof.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

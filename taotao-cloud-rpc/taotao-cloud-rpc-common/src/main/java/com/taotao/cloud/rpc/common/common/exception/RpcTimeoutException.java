@@ -4,7 +4,7 @@ package com.taotao.cloud.rpc.common.common.exception;
  * rpc 超时异常
  *
  * @author shuigedeng
- * @since 0.0.7
+ * @since 2024.06
  */
 public class RpcTimeoutException extends RuntimeException {
 

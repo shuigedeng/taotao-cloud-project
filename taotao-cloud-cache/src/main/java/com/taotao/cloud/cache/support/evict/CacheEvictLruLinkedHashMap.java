@@ -14,22 +14,22 @@ import java.util.Map;
  *
  * 实现方式：LinkedHashMap
  * @author shuigedeng
- * @since 0.0.12
+ * @since 2024.06
  */
 public class CacheEvictLruLinkedHashMap<K,V> extends LinkedHashMap<K,V>
     implements ICacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictLruDoubleListMap.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLruDoubleListMap.class);
 
     /**
      * 是否移除标识
-     * @since 0.0.12
+     * @since 2024.06
      */
     private volatile boolean removeFlag = false;
 
     /**
      * 最旧的一个元素
-     * @since 0.0.12
+     * @since 2024.06
      */
     private transient Map.Entry<K, V> eldest = null;
 

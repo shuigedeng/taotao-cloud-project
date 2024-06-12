@@ -8,11 +8,11 @@ import com.taotao.cloud.cache.api.ICacheInterceptorContext;
  * 刷新
  *
  * @author shuigedeng
- * @since 0.0.5
+ * @since 2024.06
  */
 public class CacheInterceptorRefresh<K,V> implements ICacheInterceptor<K, V> {
 
-    private static final Log log = LogFactory.getLog(CacheInterceptorRefresh.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorRefresh.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

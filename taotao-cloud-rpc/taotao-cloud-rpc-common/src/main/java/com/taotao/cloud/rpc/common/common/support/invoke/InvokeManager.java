@@ -4,7 +4,7 @@ import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 /**
  * 调用服务接口
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public interface InvokeManager {
 
@@ -13,7 +13,7 @@ public interface InvokeManager {
      * @param seqId 序列号
      * @param timeoutMills 超时时间
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     InvokeManager addRequest(final String seqId,
                              final long timeoutMills);
@@ -23,7 +23,7 @@ public interface InvokeManager {
      * @param seqId 唯一标识
      * @param rpcResponse 响应结果
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     InvokeManager addResponse(final String seqId, final RpcResponse rpcResponse);
 
@@ -37,7 +37,7 @@ public interface InvokeManager {
      * 如果非要考虑非常细致，可以将移除的地方，单独暴露一个方法，但是个人觉得没有必要。
      * @param seqId 序列号
      * @return 结果
-     * @since 0.0.6
+     * @since 2024.06
      */
     RpcResponse getResponse(final String seqId);
 

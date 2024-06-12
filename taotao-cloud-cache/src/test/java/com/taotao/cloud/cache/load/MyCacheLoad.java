@@ -3,7 +3,7 @@ package com.taotao.cloud.cache.load;
 
 /**
  * @author shuigedeng
- * @since 0.0.7
+ * @since 2024.06
  */
 public class MyCacheLoad implements ICacheLoad<String,String> {
 

@@ -8,38 +8,38 @@ import java.lang.reflect.Method;
 /**
  * 代理引导类上下文
  * @author shuigedeng
- * @since 0.0.4
+ * @since 2024.06
  */
 public class CacheProxyBsContext implements ICacheProxyBsContext {
 
     /**
      * 目标
-     * @since 0.0.4
+     * @since 2024.06
      */
     private ICache target;
 
     /**
      * 入参
-     * @since 0.0.4
+     * @since 2024.06
      */
     private Object[] params;
 
     /**
      * 方法
-     * @since 0.0.4
+     * @since 2024.06
      */
     private Method method;
 
     /**
      * 拦截器
-     * @since 0.0.5
+     * @since 2024.06
      */
     private CacheInterceptor interceptor;
 
     /**
      * 新建对象
      * @return 对象
-     * @since 0.0.4
+     * @since 2024.06
      */
     public static CacheProxyBsContext newInstance(){
         return new CacheProxyBsContext();

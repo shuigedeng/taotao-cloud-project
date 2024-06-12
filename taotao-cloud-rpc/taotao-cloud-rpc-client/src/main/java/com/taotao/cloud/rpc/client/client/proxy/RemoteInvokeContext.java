@@ -36,7 +36,7 @@ public interface RemoteInvokeContext<T> {
 	 *
 	 * @param channelFuture 消息
 	 * @return this
-	 * @since 0.0.9
+	 * @since 2024.06
 	 */
 	RemoteInvokeContext<T> channelFuture(final RpcChannelFuture channelFuture);
 

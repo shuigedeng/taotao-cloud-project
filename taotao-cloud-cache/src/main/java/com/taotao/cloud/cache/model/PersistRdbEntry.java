@@ -3,25 +3,25 @@ package com.taotao.cloud.cache.model;
 /**
  * 持久化明细
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public class PersistRdbEntry<K,V> {
 
     /**
      * key
-     * @since 0.0.8
+     * @since 2024.06
      */
     private K key;
 
     /**
      * value
-     * @since 0.0.8
+     * @since 2024.06
      */
     private V value;
 
     /**
      * expire
-     * @since 0.0.8
+     * @since 2024.06
      */
     private Long expire;
 

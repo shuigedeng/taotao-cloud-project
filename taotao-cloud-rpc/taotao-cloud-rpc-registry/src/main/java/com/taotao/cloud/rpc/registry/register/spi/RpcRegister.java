@@ -8,7 +8,7 @@ import io.netty.channel.Channel;
 
 /**
  * <p> 注册中心接口 </p>
- * @since 0.0.8
+ * @since 2024.06
  */
 public interface RpcRegister {
 
@@ -17,14 +17,14 @@ public interface RpcRegister {
      * 订阅了这个 serviceId 的所有客户端
      * @param serviceEntry 注册当前服务信息
      * @param channel channel
-     * @since 0.0.8
+     * @since 2024.06
      */
     void register(final ServiceEntry serviceEntry, Channel channel);
 
     /**
      * 注销当前服务信息
      * @param serviceEntry 注册当前服务信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void unRegister(final ServiceEntry serviceEntry);
 
@@ -35,7 +35,7 @@ public interface RpcRegister {
      *
      * @param serviceEntry 客户端明细信息
      * @param channel 频道信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void subscribe(final ServiceEntry serviceEntry, final Channel channel);
 
@@ -46,7 +46,7 @@ public interface RpcRegister {
      *
      * @param server 客户端明细信息
      * @param channel 频道信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void unSubscribe(final ServiceEntry server, final Channel channel);
 
@@ -55,7 +55,7 @@ public interface RpcRegister {
      * @param seqId 请求标识
      * @param clientEntry 客户端查询明细
      * @param channel 频道信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void lookUp(String seqId, ServiceEntry clientEntry, final Channel channel);
 

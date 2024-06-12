@@ -9,7 +9,7 @@ import com.taotao.cloud.rpc.server.server.config.service.ServiceConfig;
  * 暂时不提供单个服务的特殊处理，后期可以考虑添加
  *
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public interface ServiceRegistry {
 
@@ -17,7 +17,7 @@ public interface ServiceRegistry {
      * 暴露的 rpc 服务端口信息
      * @param port 端口信息
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     ServiceRegistry port(final int port);
 
@@ -26,7 +26,7 @@ public interface ServiceRegistry {
      * @param serviceId 服务标识
      * @param serviceImpl 服务实现
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     ServiceRegistry register(final String serviceId, final Object serviceImpl);
 
@@ -44,7 +44,7 @@ public interface ServiceRegistry {
      * （2）启动服务端
      * （3）注册服务到注册中心
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     ServiceRegistry expose();
 
@@ -52,7 +52,7 @@ public interface ServiceRegistry {
      * 注册中心地址信息
      * @param addresses 地址信息
      * @return this
-     * @since 0.0.8
+     * @since 2024.06
      */
     ServiceRegistry registerCenter(final String addresses);
 

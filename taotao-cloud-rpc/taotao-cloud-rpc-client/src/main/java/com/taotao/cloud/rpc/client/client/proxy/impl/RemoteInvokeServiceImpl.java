@@ -18,8 +18,8 @@ import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
 import com.taotao.cloud.rpc.common.tmp.LoadBalanceContext;
 import io.netty.channel.Channel;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 远程调用实现
  * @author shuigedeng
@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RemoteInvokeServiceImpl implements RemoteInvokeService {
 
-    private static final Log LOG = LogFactory.getLog(RemoteInvokeServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RemoteInvokeServiceImpl.class);
 
     @Override
     @SuppressWarnings("all")

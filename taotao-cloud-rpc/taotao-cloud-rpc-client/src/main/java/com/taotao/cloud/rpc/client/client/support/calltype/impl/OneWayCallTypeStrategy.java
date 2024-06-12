@@ -6,8 +6,8 @@ import com.taotao.cloud.rpc.common.common.rpc.domain.RpcRequest;
 import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 import com.taotao.cloud.rpc.common.common.rpc.domain.impl.RpcResponses;
 import javax.annotation.concurrent.ThreadSafe;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * one way 调用服务实现类
@@ -18,7 +18,7 @@ import org.apache.commons.logging.LogFactory;
 @ThreadSafe
 class OneWayCallTypeStrategy implements CallTypeStrategy {
 
-	private static final Log LOG = LogFactory.getLog(OneWayCallTypeStrategy.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OneWayCallTypeStrategy.class);
 
 	/**
 	 * 实例

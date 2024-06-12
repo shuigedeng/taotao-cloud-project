@@ -1,9 +1,3 @@
-/**
- * Project Name: my-projects
- * Package Name: com.taotao.rpc.server
- * Date: 2020/2/27 14:06
- * Author: shuigedeng
- */
 package com.taotao.cloud.rpc.server;
 
 import com.taotao.cloud.rpc.common.common.RpcDecoder;

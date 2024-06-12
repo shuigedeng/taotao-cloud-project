@@ -13,32 +13,32 @@ import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
 /**
  * 反射调用上下文
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class DefaultServiceContext<T> implements ServiceContext<T> {
 
     /**
      * 服务唯一标识
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String serviceId;
 
     /**
      * 服务接口
-     * @since 0.0.6
+     * @since 2024.06
      */
     private Class<T> serviceInterface;
 
     /**
      * channel handler 信息
      *
-     * @since 0.0.6
+     * @since 2024.06
      */
     private InvokeManager invokeManager;
 
     /**
      * 超时时间
-     * @since 0.0.7
+     * @since 2024.06
      */
     private long timeout;
 

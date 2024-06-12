@@ -35,22 +35,22 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p> 默认客户端注册中心实现类 </p>
  *
- * @since 0.0.9
+ * @since 2024.06
  */
 public class DefaultClientRegisterManager implements ClientRegisterManager {
 
-	private static final Log log = LogFactory.getLog(DefaultClientRegisterManager.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultClientRegisterManager.class);
 
 	/**
 	 * 服务调用信息管理类
 	 *
-	 * @since 0.0.9
+	 * @since 2024.06
 	 */
 	private final InvokeManager invokeManager;
 
@@ -64,7 +64,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	/**
 	 * 注册中心超时时间
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private final long registerCenterTimeOut;
 
@@ -189,7 +189,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	 * @param registerCenterList 注册中心列表
 	 * @param config             配置信息
 	 * @return 服务端地址信息列表
-	 * @since 0.0.9
+	 * @since 2024.06
 	 */
 	private List<RpcAddress> queryServerAddressList(String serviceId,
 		List<RpcAddress> registerCenterList,
@@ -552,7 +552,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	 * 获取 rpc 地址信息列表 （1）默认直接通过指定的地址获取 （2）如果指定列表为空，且
 	 *
 	 * @return rpc 地址信息列表
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private List<RpcAddress> getRpcAddresses(ClientQueryServerChannelConfig config) {
 		final List<RpcAddress> rpcAddresses = config.rpcAddresses();
@@ -574,7 +574,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	/**
 	 * 注册中心参数检查 （1）如果可用列表为空，且没有指定自动发现，这个时候服务已经不可用了。
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private void registerCenterParamCheck(ClientQueryServerChannelConfig config) {
 		final boolean subscribe = config.subscribe();
@@ -591,7 +591,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	 * 1. 将需要 subscribe 的方法进行记录。 set 2. 获取对应的集合
 	 *
 	 * @return 服务明细列表
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	@SuppressWarnings("unchecked")
 	private List<ServiceEntry> lookUpServiceEntryList(final String serviceId,
@@ -636,7 +636,7 @@ public class DefaultClientRegisterManager implements ClientRegisterManager {
 	 *
 	 * @param registerCenterList 注册中心地址列表
 	 * @return 对应的结果列表
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private List<RpcChannelFuture> connectRegisterCenter(
 		final List<RpcAddress> registerCenterList) {

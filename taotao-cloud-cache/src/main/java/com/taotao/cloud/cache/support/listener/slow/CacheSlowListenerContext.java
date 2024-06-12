@@ -4,48 +4,48 @@ import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
 
 /**
  * @author shuigedeng
- * @since 0.0.9
+ * @since 2024.06
  */
 public class CacheSlowListenerContext implements ICacheSlowListenerContext {
 
     /**
      * 方法名称
-     * @since 0.0.9
+     * @since 2024.06
      */
     private String methodName;
 
     /**
      * 参数信息
-     * @since 0.0.9
+     * @since 2024.06
      */
     private Object[] params;
 
     /**
      * 方法结果
-     * @since 0.0.9
+     * @since 2024.06
      */
     private Object result;
 
     /**
      * 开始时间
-     * @since 0.0.9
+     * @since 2024.06
      */
     private long startTimeMills;
 
     /**
      * 结束时间
-     * @since 0.0.9
+     * @since 2024.06
      */
     private long endTimeMills;
 
     /**
      * 消耗时间
-     * @since 0.0.9
+     * @since 2024.06
      */
     private long costTimeMills;
 
     /**
-     * @since 0.0.9
+     * @since 2024.06
      * @return 实例
      */
     public static CacheSlowListenerContext newInstance() {

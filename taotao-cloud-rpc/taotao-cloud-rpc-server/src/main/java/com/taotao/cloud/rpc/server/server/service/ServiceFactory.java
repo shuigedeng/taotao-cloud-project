@@ -17,7 +17,7 @@ import java.util.List;
  *
  * （3）前期尽可能的少暴露方法。
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  * @see ServiceRegistry 服务注册，将服务信息放在这个类中，进行统一的管理。
  * @see ServiceMethod 方法信息
  */
@@ -27,7 +27,7 @@ public interface ServiceFactory {
      * 注册服务列表信息到本地
      * @param serviceConfigList 服务配置列表
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     ServiceFactory registerServicesLocal(final List<ServiceConfig> serviceConfigList);
 
@@ -40,7 +40,7 @@ public interface ServiceFactory {
      * @param paramTypeNames 参数类型名称列表
      * @param paramValues 参数值
      * @return 方法调用返回值
-     * @since 0.0.6
+     * @since 2024.06
      */
     Object invoke(final String serviceId, final String methodName,
                   List<String> paramTypeNames, final Object[] paramValues);

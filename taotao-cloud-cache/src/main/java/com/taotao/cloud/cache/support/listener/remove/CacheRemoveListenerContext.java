@@ -5,25 +5,25 @@ import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
 /**
  * 删除的监听器
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class CacheRemoveListenerContext<K,V> implements ICacheRemoveListenerContext<K,V> {
 
     /**
      * key
-     * @since 0.0.6
+     * @since 2024.06
      */
     private K key;
 
     /**
      * 值
-     * @since 0.0.6
+     * @since 2024.06
      */
     private V value;
 
     /**
      * 删除类型
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String type;
 
@@ -32,7 +32,7 @@ public class CacheRemoveListenerContext<K,V> implements ICacheRemoveListenerCont
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.6
+     * @since 2024.06
      */
     public static <K,V> CacheRemoveListenerContext<K,V> newInstance() {
         return new CacheRemoveListenerContext<>();

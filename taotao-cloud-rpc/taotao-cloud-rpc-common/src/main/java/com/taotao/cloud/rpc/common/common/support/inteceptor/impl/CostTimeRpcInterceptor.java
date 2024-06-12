@@ -1,8 +1,8 @@
 package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 内置耗时 rpc 拦截器实现
  * @author shuigedeng
@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CostTimeRpcInterceptor extends RpcInterceptorAdaptor {
 
-    private static final Log log = LogFactory.getLog(CostTimeRpcInterceptor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CostTimeRpcInterceptor.class);
 
     @Override
     public void before(RpcInterceptorContext context) {

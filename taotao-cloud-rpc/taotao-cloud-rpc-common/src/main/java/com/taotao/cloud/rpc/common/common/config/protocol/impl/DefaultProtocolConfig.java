@@ -5,7 +5,7 @@ import com.taotao.cloud.rpc.common.common.config.protocol.ProtocolConfig;
 /**
  * 协议配置信息
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class DefaultProtocolConfig implements ProtocolConfig {
 
@@ -14,7 +14,7 @@ public class DefaultProtocolConfig implements ProtocolConfig {
      * RPC
      * HTTP
      * HTTPS
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String name;
 

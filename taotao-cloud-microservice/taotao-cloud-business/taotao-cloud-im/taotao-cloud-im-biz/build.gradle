@@ -19,7 +19,7 @@ dependencies {
 
     implementation "com.tencentcloudapi:tencentcloud-sdk-java:4.0.11"
     implementation "com.google.zxing:core:3.5.3"
-    implementation 'com.getui.push:restful-sdk:1.0.2.0'
+    implementation 'com.getui.push:restful-sdk:1.0.2.1'
     //implementation "com.q3z3:core-upload:1.0.0"
     //implementation fileTree(dir: "src/main/resources/lib", includes: ["*.jar"])
     implementation "io.undertow:undertow-websockets-jsr"
@@ -40,10 +40,10 @@ configurations {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        resolutionStrategy {
-            //force "org.codehaus.groovy:groovy:4.0.0"
-            force 'org.antlr:antlr4:4.13.1'
-        }
+        //resolutionStrategy {
+        //    //force "org.codehaus.groovy:groovy:4.0.0"
+        //    force 'org.antlr:antlr4:4.13.1'
+        //}
 
         //exclude group: "log4j", module: "log4j"
         //exclude group: "log4j", module: "slf4j-simple"

@@ -7,7 +7,7 @@ import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 /**
  * 默认 rpc 响应结果
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public final class RpcResponses {
 
@@ -68,7 +68,7 @@ public final class RpcResponses {
      * @param rpcResponse 响应
      * @return 结果
      * 如果有异常，则直接抛出异常信息。
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static Object getResult(final RpcResponse rpcResponse) {
         return getResult(rpcResponse, Object.class);

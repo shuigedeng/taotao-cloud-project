@@ -7,7 +7,7 @@ import com.taotao.cloud.cache.api.ICacheEvictContext;
 /**
  * 丢弃策略
  * @author shuigedeng
- * @since 0.0.2
+ * @since 2024.06
  */
 public class CacheEvictNone<K,V> extends AbstractCacheEvict<K,V> {
 

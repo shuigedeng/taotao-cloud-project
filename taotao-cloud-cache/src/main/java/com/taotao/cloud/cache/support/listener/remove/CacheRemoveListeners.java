@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 缓存删除监听类
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class CacheRemoveListeners {
 
@@ -19,7 +19,7 @@ public class CacheRemoveListeners {
      * @return 监听类列表
      * @param <K> key
      * @param <V> value
-     * @since 0.0.6
+     * @since 2024.06
      */
     @SuppressWarnings("all")
     public static <K,V> List<ICacheRemoveListener<K,V>> defaults() {

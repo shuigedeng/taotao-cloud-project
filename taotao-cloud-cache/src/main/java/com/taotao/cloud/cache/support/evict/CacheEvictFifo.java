@@ -10,13 +10,13 @@ import java.util.Queue;
 /**
  * 丢弃策略-先进先出
  * @author shuigedeng
- * @since 0.0.2
+ * @since 2024.06
  */
 public class CacheEvictFifo<K,V> extends AbstractCacheEvict<K,V> {
 
     /**
      * queue 信息
-     * @since 0.0.2
+     * @since 2024.06
      */
     private final Queue<K> queue = new LinkedList<>();
 

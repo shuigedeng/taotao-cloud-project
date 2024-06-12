@@ -1,26 +1,27 @@
 
 package com.taotao.cloud.rpc.client.client.handler;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.taotao.cloud.rpc.common.common.rpc.domain.RpcResponse;
 /**
  * <p> 客户端处理类 </p>
- * @since 0.0.2
+ * @since 2024.06
  */
 @ChannelHandler.Sharable
 public class RpcClientHandler extends SimpleChannelInboundHandler {
 
-    private static final Log log = LogFactory.getLog(RpcClientHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RpcClientHandler.class);
 
     /**
      * 调用服务管理类
      *
-     * @since 0.0.6
+     * @since 2024.06
      */
     private final InvokeManager invokeManager;
 
@@ -37,7 +38,7 @@ public class RpcClientHandler extends SimpleChannelInboundHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.error("[Rpc Client] meet ex ", cause);
+		LOG.error("[Rpc Client] meet ex ", cause);
         ctx.close();
     }
 

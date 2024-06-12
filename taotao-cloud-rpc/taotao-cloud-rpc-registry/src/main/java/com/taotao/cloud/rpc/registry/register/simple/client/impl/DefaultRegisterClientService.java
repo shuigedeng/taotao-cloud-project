@@ -10,15 +10,15 @@ import io.netty.channel.Channel;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * <p> 默认客户端注册服务实现类 </p>
- * @since 0.0.8
+ * @since 2024.06
  */
 public class DefaultRegisterClientService implements RegisterClientService {
 
-    private static final Log LOG = LogFactory.getLog(DefaultRegisterClientService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultRegisterClientService.class);
 
     /**
      * 服务信息-客户端列表 map
@@ -33,7 +33,7 @@ public class DefaultRegisterClientService implements RegisterClientService {
      * （1）只有变更的时候，才会进行推送，保证实时性。
      * （2）客户端启动时拉取，作为保底措施。避免客户端不在线等情况。
      *
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final Map<String, Set<Channel>> serviceClientChannelMap;
 
@@ -124,7 +124,7 @@ public class DefaultRegisterClientService implements RegisterClientService {
      * 参数校验
      *
      * @param serviceEntry 入参信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private void paramCheck(final ServiceEntry serviceEntry) {
 //        ArgUtil.notNull(serviceEntry, "serverEntry");
@@ -136,7 +136,7 @@ public class DefaultRegisterClientService implements RegisterClientService {
      * 获取所有的客户端列表
      * @param serviceId 服务标识
      * @return 客户端列表标识
-     * @since 0.0.8
+     * @since 2024.06
      */
     private List<Channel> clientChannelList(String serviceId) {
 //        ArgUtil.notEmpty(serviceId, "serviceId");

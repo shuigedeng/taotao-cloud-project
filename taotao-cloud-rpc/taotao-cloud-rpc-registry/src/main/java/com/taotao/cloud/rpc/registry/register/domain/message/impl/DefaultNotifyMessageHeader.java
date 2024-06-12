@@ -5,7 +5,7 @@ import com.taotao.cloud.rpc.registry.register.domain.message.NotifyMessageHeader
 /**
  * 默认通知消息頭
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 class DefaultNotifyMessageHeader implements NotifyMessageHeader {
 
@@ -13,7 +13,7 @@ class DefaultNotifyMessageHeader implements NotifyMessageHeader {
 
     /**
      * 消息类型
-     * @since 0.0.8
+     * @since 2024.06
      */
     private String type;
 

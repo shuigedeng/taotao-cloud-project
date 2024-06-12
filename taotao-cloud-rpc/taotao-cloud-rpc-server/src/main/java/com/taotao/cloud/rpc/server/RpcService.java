@@ -1,10 +1,3 @@
-/**
- * Project Name: my-projects
- * Package Name: com.taotao.rpc.server
- * Descroption: 标注rpc服务
- * Date: 2020/2/27 14:03
- * Author: shuigedeng
- */
 package com.taotao.cloud.rpc.server;
 
 import org.springframework.stereotype.Component;

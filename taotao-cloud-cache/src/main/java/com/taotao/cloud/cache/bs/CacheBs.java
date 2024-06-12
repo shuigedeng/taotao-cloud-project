@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * 缓存引导类
  * @author shuigedeng
- * @since 0.0.2
+ * @since 2024.06
  */
 public final class CacheBs<K,V> {
 
@@ -27,7 +27,7 @@ public final class CacheBs<K,V> {
      * @param <K> key
      * @param <V> value
      * @return this
-     * @since 0.0.2
+     * @since 2024.06
      */
     public static <K,V> CacheBs<K,V> newInstance() {
         return new CacheBs<>();
@@ -72,7 +72,7 @@ public final class CacheBs<K,V> {
      * map 实现
      * @param map map
      * @return this
-     * @since 0.0.2
+     * @since 2024.06
      */
     public CacheBs<K, V> map(Map<K, V> map) {
         ArgUtil.notNull(map, "map");
@@ -85,7 +85,7 @@ public final class CacheBs<K,V> {
      * 设置 size 信息
      * @param size size
      * @return this
-     * @since 0.0.2
+     * @since 2024.06
      */
     public CacheBs<K, V> size(int size) {
         ArgUtil.notNegative(size, "size");
@@ -98,7 +98,7 @@ public final class CacheBs<K,V> {
      * 设置驱除策略
      * @param evict 驱除策略
      * @return this
-     * @since 0.0.2
+     * @since 2024.06
      */
     public CacheBs<K, V> evict(ICacheEvict<K, V> evict) {
         ArgUtil.notNull(evict, "evict");
@@ -111,7 +111,7 @@ public final class CacheBs<K,V> {
      * 设置加载
      * @param load 加载
      * @return this
-     * @since 0.0.7
+     * @since 2024.06
      */
     public CacheBs<K, V> load(ICacheLoad<K, V> load) {
         ArgUtil.notNull(load, "load");
@@ -124,7 +124,7 @@ public final class CacheBs<K,V> {
      * 添加删除监听器
      * @param removeListener 监听器
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     public CacheBs<K, V> addRemoveListener(ICacheRemoveListener<K,V> removeListener) {
         ArgUtil.notNull(removeListener, "removeListener");
@@ -137,7 +137,7 @@ public final class CacheBs<K,V> {
      * 添加慢日志监听器
      * @param slowListener 监听器
      * @return this
-     * @since 0.0.9
+     * @since 2024.06
      */
     public CacheBs<K, V> addSlowListener(ICacheSlowListener slowListener) {
         ArgUtil.notNull(slowListener, "slowListener");
@@ -150,7 +150,7 @@ public final class CacheBs<K,V> {
      * 设置持久化策略
      * @param persist 持久化
      * @return this
-     * @since 0.0.8
+     * @since 2024.06
      */
     public CacheBs<K, V> persist(ICachePersist<K, V> persist) {
         this.persist = persist;
@@ -160,7 +160,7 @@ public final class CacheBs<K,V> {
     /**
      * 构建缓存信息
      * @return 缓存信息
-     * @since 0.0.2
+     * @since 2024.06
      */
     public ICache<K,V> build() {
         Cache<K,V> cache = new Cache<>();

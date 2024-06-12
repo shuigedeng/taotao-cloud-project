@@ -14,13 +14,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * 缓存引导类测试
  * @author shuigedeng
- * @since 0.0.2
+ * @since 2024.06
  */
 public class CacheBsTest {
 
     /**
      * 大小指定测试
-     * @since 0.0.2
+     * @since 2024.06
      */
     @Test
     public void helloTest() {
@@ -39,7 +39,7 @@ public class CacheBsTest {
 
     /**
      * 配置指定测试
-     * @since 0.0.2
+     * @since 2024.06
      */
     @Test
     public void configTest() {
@@ -60,7 +60,7 @@ public class CacheBsTest {
 
     /**
      * 过期测试
-     * @since 0.0.3
+     * @since 2024.06
      */
     @Test
     public void expireTest() throws InterruptedException {
@@ -81,7 +81,7 @@ public class CacheBsTest {
 
     /**
      * 缓存删除监听器
-     * @since 0.0.6
+     * @since 2024.06
      */
     @Test
     public void cacheRemoveListenerTest() {
@@ -96,7 +96,7 @@ public class CacheBsTest {
 
     /**
      * 加载接口测试
-     * @since 0.0.7
+     * @since 2024.06
      */
     @Test
     public void loadTest() {
@@ -109,7 +109,7 @@ public class CacheBsTest {
 
     /**
      * 持久化接口测试
-     * @since 0.0.7
+     * @since 2024.06
      */
     @Test
     public void persistRdbTest() throws InterruptedException {
@@ -124,7 +124,7 @@ public class CacheBsTest {
 
     /**
      * 加载接口测试
-     * @since 0.0.8
+     * @since 2024.06
      */
     @Test
     public void loadDbJsonTest() {
@@ -137,7 +137,7 @@ public class CacheBsTest {
 
     /**
      * 慢日志接口测试
-     * @since 0.0.9
+     * @since 2024.06
      */
     @Test
     public void slowLogTest() {
@@ -152,7 +152,7 @@ public class CacheBsTest {
 
     /**
      * 持久化 AOF 接口测试
-     * @since 0.0.10
+     * @since 2024.06
      */
     @Test
     public void persistAofTest() throws InterruptedException {
@@ -169,7 +169,7 @@ public class CacheBsTest {
 
     /**
      * 加载 AOF 接口测试
-     * @since 0.0.10
+     * @since 2024.06
      */
     @Test
     public void loadAofTest() throws InterruptedException {
@@ -184,7 +184,7 @@ public class CacheBsTest {
 
     /**
      * LRU 驱除策略测试
-     * @since 0.0.10
+     * @since 2024.06
      */
     @Test
     public void lruEvictTest() throws InterruptedException {
@@ -226,7 +226,7 @@ public class CacheBsTest {
 
     /**
      * 基于 LinkedHashMap 实现
-     * @since 0.0.12
+     * @since 2024.06
      */
     @Test
     public void lruLinkedHashMapTest()  {
@@ -249,7 +249,7 @@ public class CacheBsTest {
 
     /**
      * 基于 LRU 2Q 实现
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Test
     public void lruQ2Test()  {
@@ -272,7 +272,7 @@ public class CacheBsTest {
 
     /**
      * 基于 LRU-2 实现
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Test
     public void lru2Test()  {
@@ -295,7 +295,7 @@ public class CacheBsTest {
 
     /**
      * 基于 LFU 实现
-     * @since 0.0.14
+     * @since 2024.06
      */
     @Test
     public void lfuTest()  {
@@ -319,7 +319,7 @@ public class CacheBsTest {
 
     /**
      * 基于 clock 算法 实现
-     * @since 0.0.15
+     * @since 2024.06
      */
     @Test
     public void clockTest()  {

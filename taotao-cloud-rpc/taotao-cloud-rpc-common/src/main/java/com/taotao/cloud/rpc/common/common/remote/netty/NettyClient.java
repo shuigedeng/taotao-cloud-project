@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 /**
  * netty 网络客户端
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  * @param <V> 泛型
  */
 public interface NettyClient<V> extends Callable<V>, Destroyable, Initializable {

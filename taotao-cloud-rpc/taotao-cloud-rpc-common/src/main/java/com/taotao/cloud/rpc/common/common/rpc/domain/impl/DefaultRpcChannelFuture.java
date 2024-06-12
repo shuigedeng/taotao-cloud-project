@@ -10,25 +10,25 @@ import io.netty.channel.ChannelFuture;
 
 /**
  * <p> 默认的实现 </p>
- * @since 0.0.9
+ * @since 2024.06
  */
 public class DefaultRpcChannelFuture implements RpcChannelFuture {
 
     /**
      * channel future 信息
-     * @since 0.0.9
+     * @since 2024.06
      */
     private ChannelFuture channelFuture;
 
     /**
      * 对应的地址信息
-     * @since 0.0.9
+     * @since 2024.06
      */
     private RpcAddress address;
 
     /**
      * 权重信息
-     * @since 0.0.9
+     * @since 2024.06
      */
     private int weight;
 

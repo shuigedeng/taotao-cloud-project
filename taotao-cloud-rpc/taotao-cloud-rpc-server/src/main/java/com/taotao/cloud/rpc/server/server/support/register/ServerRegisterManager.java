@@ -23,14 +23,14 @@ public interface ServerRegisterManager {
      * （1）将该服务通过 {@link ServiceEntry#serviceId()} 进行分组
      * 订阅了这个 serviceId 的所有客户端
      * @param serviceEntry 注册当前服务信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     void register(final ServiceEntry serviceEntry);
 
     /**
      * 注销当前服务信息
      * @param serviceId 服务标识
-     * @since 0.0.8
+     * @since 2024.06
      * @return 服务明细
      */
     ServiceEntry unRegister(final String serviceId);

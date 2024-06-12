@@ -12,7 +12,7 @@ package com.taotao.cloud.rpc.server.server.config.service;
  * （2）服务端超时时间
  *
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  * @param <T> 实现类泛型
  */
 public interface ServiceConfig<T> {
@@ -20,7 +20,7 @@ public interface ServiceConfig<T> {
     /**
      * 获取唯一标识
      * @return 获取唯一标识
-     * @since 0.0.6
+     * @since 2024.06
      */
     String id();
 
@@ -28,14 +28,14 @@ public interface ServiceConfig<T> {
      * 设置唯一标识
      * @param id 标识信息
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     ServiceConfig<T> id(String id);
 
     /**
      * 获取引用实体实现
      * @return 实体实现
-     * @since 0.0.6
+     * @since 2024.06
      */
     T reference();
 
@@ -43,21 +43,21 @@ public interface ServiceConfig<T> {
      * 设置引用实体实现
      * @param reference 引用实现
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     ServiceConfig<T> reference(T reference);
 
     /**
      * 设置是否注册到注册中心
      * @param register 是否注册到配置中心
-     * @since 0.0.8
+     * @since 2024.06
      * @return this
      */
     ServiceConfig<T> register(final boolean register);
 
     /**
      * 返回是否注册到注册中心
-     * @since 0.0.8
+     * @since 2024.06
      * @return 是否进行注册到注册中心
      */
     boolean register();

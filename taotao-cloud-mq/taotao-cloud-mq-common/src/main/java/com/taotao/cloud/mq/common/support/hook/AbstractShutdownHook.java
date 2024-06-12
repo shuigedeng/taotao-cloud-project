@@ -1,7 +1,7 @@
 package com.taotao.cloud.mq.common.support.hook;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * rpc 关闭 hook
  * （1）可以添加对应的 hook 管理类
@@ -13,7 +13,7 @@ public abstract class AbstractShutdownHook implements RpcShutdownHook {
     /**
      * AbstractShutdownHook logger
      */
-    private static final Log LOG = LogFactory.getLog(AbstractShutdownHook.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractShutdownHook.class);
 
     @Override
     public void hook() {

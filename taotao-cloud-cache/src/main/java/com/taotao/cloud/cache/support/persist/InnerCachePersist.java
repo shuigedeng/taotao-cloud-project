@@ -11,27 +11,27 @@ import java.util.concurrent.ScheduledExecutorService;
  * @author shuigedeng
  * @param <K> key
  * @param <V> value
- * @since 0.0.8
+ * @since 2024.06
  */
 public class InnerCachePersist<K,V> {
 
-    private static final Log log = LogFactory.getLog(InnerCachePersist.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InnerCachePersist.class);
 
     /**
      * 缓存信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final ICache<K,V> cache;
 
     /**
      * 缓存持久化策略
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final ICachePersist<K,V> persist;
 
     /**
      * 线程执行类
-     * @since 0.0.3
+     * @since 2024.06
      */
     private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
 
@@ -45,7 +45,7 @@ public class InnerCachePersist<K,V> {
 
     /**
      * 初始化
-     * @since 0.0.8
+     * @since 2024.06
      */
     private void init() {
         EXECUTOR_SERVICE.scheduleAtFixedRate(new Runnable() {

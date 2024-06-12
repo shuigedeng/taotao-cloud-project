@@ -10,11 +10,11 @@ import java.lang.reflect.Method;
  * 驱除策略拦截器
  *
  * @author shuigedeng
- * @since 0.0.11
+ * @since 2024.06
  */
 public class CacheInterceptorEvict<K,V> implements ICacheInterceptor<K, V> {
 
-    private static final Log log = LogFactory.getLog(CacheInterceptorEvict.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorEvict.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

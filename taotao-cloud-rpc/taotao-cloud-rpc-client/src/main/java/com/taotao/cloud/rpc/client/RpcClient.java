@@ -1,7 +1,3 @@
-/**
- * Project Name: my-projects Package Name: com.taotao.rpc.client Date: 2020/2/27 15:14 Author:
- * shuigedeng
- */
 package com.taotao.cloud.rpc.client;
 
 import com.taotao.cloud.rpc.common.common.RpcDecoder;
@@ -43,7 +39,7 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {
 	 * @param request request
 	 * @return com.taotao.rpc.common.RpcReponse
 	 * @author shuigedeng
-	 * @date 2020/2/27 15:19
+	 * @date 2024.06
 	 */
 	public RpcReponse send(RpcRequest request) throws Exception {
 		EventLoopGroup group = new NioEventLoopGroup();

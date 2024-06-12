@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 本地持久化策略
@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LocalMqBrokerPersist implements IMqBrokerPersist {
 
-	private static final Log log = LogFactory.getLog(LocalMqBrokerPersist.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LocalMqBrokerPersist.class);
 
 	/**
 	 * 队列 ps: 这里只是简化实现，暂时不考虑并发等问题。

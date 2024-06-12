@@ -7,7 +7,7 @@ import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 /**
  * <p> 服务明细工具类 </p>
  *
- * @since 0.0.8
+ * @since 2024.06
  */
 public final class ServiceEntryBuilder {
 
@@ -19,7 +19,7 @@ public final class ServiceEntryBuilder {
      * @param ip ip 地址
      * @param port 端口号
      * @return 服务明细
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static ServiceEntry of(final String serviceId,
                                   final String ip,
@@ -33,7 +33,7 @@ public final class ServiceEntryBuilder {
      * 指定服务标识
      * @param serviceId 服务标识
      * @return 服务明细
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static ServiceEntry of(final String serviceId) {
         return of(serviceId, null, 0);

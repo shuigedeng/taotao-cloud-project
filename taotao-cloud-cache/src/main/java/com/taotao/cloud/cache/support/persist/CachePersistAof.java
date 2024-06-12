@@ -9,21 +9,21 @@ import java.util.concurrent.TimeUnit;
 /**
  * 缓存持久化-AOF 持久化模式
  * @author shuigedeng
- * @since 0.0.10
+ * @since 2024.06
  */
 public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
 
-    private static final Log log = LogFactory.getLog(CachePersistAof.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CachePersistAof.class);
 
     /**
      * 缓存列表
-     * @since 0.0.10
+     * @since 2024.06
      */
     private final List<String> bufferList = new ArrayList<>();
 
     /**
      * 数据持久化路径
-     * @since 0.0.10
+     * @since 2024.06
      */
     private final String dbPath;
 
@@ -70,7 +70,7 @@ public class CachePersistAof<K,V> extends CachePersistAdaptor<K,V> {
     /**
      * 添加文件内容到 buffer 列表中
      * @param json json 信息
-     * @since 0.0.10
+     * @since 2024.06
      */
     public void append(final String json) {
         if(StringUtil.isNotEmpty(json)) {

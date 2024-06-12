@@ -1,7 +1,3 @@
-/**
- * Project Name: my-projects Package Name: com.taotao.rpc.client Date: 2020/2/27 15:08 Author:
- * shuigedeng
- */
 package com.taotao.cloud.rpc.client;
 
 
@@ -34,7 +30,7 @@ public class RpcProxy {
 	 * @param interfaceClass interfaceClass
 	 * @return T
 	 * @author shuigedeng
-	 * @date 2020/2/27 15:09
+	 * @date 2024.06
 	 */
 	public <T> T create(Class<?> interfaceClass) {
 		return (T) Proxy.newProxyInstance(

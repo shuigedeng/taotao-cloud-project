@@ -40,8 +40,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -49,7 +49,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ConsumerBrokerService implements IConsumerBrokerService {
 
-	private static final Log log = LogFactory.getLog(ConsumerBrokerService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ConsumerBrokerService.class);
 
 	/**
 	 * 分组名称

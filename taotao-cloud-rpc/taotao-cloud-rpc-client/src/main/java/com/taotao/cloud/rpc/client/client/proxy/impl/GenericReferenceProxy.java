@@ -11,8 +11,8 @@ import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorConte
 import com.taotao.cloud.rpc.common.common.support.inteceptor.impl.DefaultRpcInterceptorContext;
 import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 泛化调用
  * TODO: 想办法对两个方法进行整合。
@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GenericReferenceProxy implements GenericService {
 
-    private static final Log LOG = LogFactory.getLog(GenericReferenceProxy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GenericReferenceProxy.class);
 
     /**
      * 代理上下文

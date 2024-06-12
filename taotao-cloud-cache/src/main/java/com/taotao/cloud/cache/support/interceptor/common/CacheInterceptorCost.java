@@ -13,13 +13,13 @@ import java.util.List;
  * （1）耗时
  * （2）慢日志
  * @author shuigedeng
- * @since 0.0.5
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
 public class CacheInterceptorCost<K,V> implements ICacheInterceptor<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheInterceptorCost.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptorCost.class);
 
     @Override
     public void before(ICacheInterceptorContext<K,V> context) {

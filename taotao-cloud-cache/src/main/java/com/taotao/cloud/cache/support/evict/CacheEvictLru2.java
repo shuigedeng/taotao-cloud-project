@@ -12,21 +12,21 @@ import com.taotao.cloud.cache.support.struct.lru.impl.LruMapDoubleList;
  *
  * 实现方式：Lru2
  * @author shuigedeng
- * @since 0.0.13
+ * @since 2024.06
  */
 public class CacheEvictLru2<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictLru2.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLru2.class);
 
     /**
      * 第一次访问的 lru
-     * @since 0.0.13
+     * @since 2024.06
      */
     private final ILruMap<K,V> firstLruMap;
 
     /**
      * 2次及其以上的 lru
-     * @since 0.0.13
+     * @since 2024.06
      */
     private final ILruMap<K,V> moreLruMap;
 
@@ -72,7 +72,7 @@ public class CacheEvictLru2<K,V> extends AbstractCacheEvict<K,V> {
      * 3. 如果不在1、2中，说明是新元素，直接插入到 firstLruMap 的开始即可。
      *
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -99,7 +99,7 @@ public class CacheEvictLru2<K,V> extends AbstractCacheEvict<K,V> {
      * 2. 初次 lru 中存在，删除
      *
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

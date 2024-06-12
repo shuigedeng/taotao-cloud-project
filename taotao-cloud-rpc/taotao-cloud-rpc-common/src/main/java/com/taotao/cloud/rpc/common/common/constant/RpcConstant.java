@@ -2,7 +2,7 @@ package com.taotao.cloud.rpc.common.common.constant;
 
 /**
  * <p> rpc 常量 </p>
- * @since 0.0.3
+ * @since 2024.06
  */
 public final class RpcConstant {
 

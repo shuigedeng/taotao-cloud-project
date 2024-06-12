@@ -5,7 +5,7 @@ import com.taotao.cloud.cache.api.ICacheEntry;
 /**
  * key value 的明细信息
  * @author shuigedeng
- * @since 0.0.11
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
@@ -13,13 +13,13 @@ public class CacheEntry<K,V> implements ICacheEntry<K,V> {
 
     /**
      * key
-     * @since 0.0.11
+     * @since 2024.06
      */
     private final K key;
 
     /**
      * value
-     * @since 0.0.11
+     * @since 2024.06
      */
     private final V value;
 
@@ -30,7 +30,7 @@ public class CacheEntry<K,V> implements ICacheEntry<K,V> {
      * @param <K> 泛型
      * @param <V> 泛型
      * @return 结果
-     * @since 0.0.11
+     * @since 2024.06
      */
     public static <K,V> CacheEntry<K,V> of(final K key,
                                            final V value) {

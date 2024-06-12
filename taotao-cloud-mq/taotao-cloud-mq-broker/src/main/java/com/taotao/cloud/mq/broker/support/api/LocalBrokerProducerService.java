@@ -14,8 +14,8 @@ import com.taotao.cloud.mq.common.util.ChannelUtil;
 import io.netty.channel.Channel;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p> 生产者注册服务类 </p>
@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LocalBrokerProducerService implements IBrokerProducerService {
 
-	private static final Log log = LogFactory.getLog(LocalBrokerProducerService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LocalBrokerProducerService.class);
 
 	private final Map<String, BrokerServiceEntryChannel> registerMap = new ConcurrentHashMap<>();
 

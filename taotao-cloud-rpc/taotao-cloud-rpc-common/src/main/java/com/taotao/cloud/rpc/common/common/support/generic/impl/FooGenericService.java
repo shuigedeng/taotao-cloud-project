@@ -4,8 +4,8 @@ import com.taotao.cloud.rpc.common.common.exception.GenericException;
 import com.taotao.cloud.rpc.common.common.support.generic.GenericService;
 
 import java.util.Arrays;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 最简单的泛化调用实现
  *
@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class FooGenericService implements GenericService {
 
-    private static final Log LOG = LogFactory.getLog(FooGenericService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FooGenericService.class);
 
     @Override
     public Object $invoke(String method, String[] parameterTypes, Object[] args) throws GenericException {

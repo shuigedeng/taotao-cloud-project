@@ -56,7 +56,7 @@ public class ServiceDiscovery {
      * @param zk zk
      * @return void
      * @author shuigedeng
-     * @date 2020/2/27 14:01
+     * @date 2024.06
      */
 //    private void watchNode(final ZooKeeper zk) {
 //        try {
@@ -84,7 +84,7 @@ public class ServiceDiscovery {
      *
      * @return java.lang.String
      * @author shuigedeng
-     * @date 2020/2/27 14:02
+     * @date 2024.06
      */
     public String discover() {
         String data = null;

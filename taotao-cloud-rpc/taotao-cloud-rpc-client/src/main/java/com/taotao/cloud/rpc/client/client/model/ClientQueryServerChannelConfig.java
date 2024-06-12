@@ -21,21 +21,21 @@ public class ClientQueryServerChannelConfig {
 	 * <p>
 	 * 如果为 subscribe 可以自动发现，然后填充这个字段信息。
 	 *
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private List<RpcAddress> rpcAddresses;
 
 	/**
 	 * 是否进行订阅模式
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private boolean subscribe;
 
 	/**
 	 * 注册中心列表
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private List<RpcAddress> registerCenterList;
 

@@ -11,15 +11,15 @@ import com.taotao.cloud.cache.support.struct.lru.impl.LruMapCircleList;
  * 淘汰策略-clock 算法
  *
  * @author shuigedeng
- * @since 0.0.15
+ * @since 2024.06
  */
 public class CacheEvictClock<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictClock.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictClock.class);
 
     /**
      * 循环链表
-     * @since 0.0.15
+     * @since 2024.06
      */
     private final ILruMap<K,V> circleList;
 
@@ -49,7 +49,7 @@ public class CacheEvictClock<K,V> extends AbstractCacheEvict<K,V> {
     /**
      * 更新信息
      * @param key 元素
-     * @since 0.0.15
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -60,7 +60,7 @@ public class CacheEvictClock<K,V> extends AbstractCacheEvict<K,V> {
      * 移除元素
      *
      * @param key 元素
-     * @since 0.0.15
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

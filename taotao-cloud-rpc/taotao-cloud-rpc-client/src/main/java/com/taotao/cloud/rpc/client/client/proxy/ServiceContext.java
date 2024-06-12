@@ -15,7 +15,7 @@ import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
  *
  * @author shuigedeng
  * @see ReferenceConfig 对这里的信息进行一次转换。
- * @since 0.0.6
+ * @since 2024.06
  */
 public interface ServiceContext<T> {
 
@@ -23,7 +23,7 @@ public interface ServiceContext<T> {
 	 * 服务唯一标识
 	 *
 	 * @return 服务唯一标识
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	String serviceId();
 
@@ -31,7 +31,7 @@ public interface ServiceContext<T> {
 	 * 服务接口
 	 *
 	 * @return 服务接口
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	Class<T> serviceInterface();
 
@@ -39,7 +39,7 @@ public interface ServiceContext<T> {
 	 * 调用服务
 	 *
 	 * @return 调用服务
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	InvokeManager invokeManager();
 
@@ -47,7 +47,7 @@ public interface ServiceContext<T> {
 	 * 超时时间 单位：mills
 	 *
 	 * @return 超时时间
-	 * @since 0.0.7
+	 * @since 2024.06
 	 */
 	long timeout();
 

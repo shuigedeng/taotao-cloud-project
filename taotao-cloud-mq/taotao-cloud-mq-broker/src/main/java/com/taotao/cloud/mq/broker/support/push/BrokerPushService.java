@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BrokerPushService implements IBrokerPushService {
 
-	private static final Log log = LogFactory.getLog(BrokerPushService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(BrokerPushService.class);
 
 	private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
 

@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * channel 工具类
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public final class ChannelHandlers {
 
@@ -29,7 +29,7 @@ public final class ChannelHandlers {
      * 包含默认 object 编码解码的 handler
      * @param channelHandlers 用户自定义 handler
      * @return channel handler
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static ChannelHandler objectCodecHandler(final ChannelHandler ... channelHandlers) {
         return new ChannelInitializer<Channel>() {
@@ -49,7 +49,7 @@ public final class ChannelHandlers {
      * 包含默认 object 编码解码的 + 日志 handler
      * @param channelHandlers 用户自定义 handler
      * @return channel handler
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static ChannelHandler objectCodecLogHandler(final ChannelHandler ... channelHandlers) {
         final ChannelHandler objectCodecHandler = objectCodecHandler(channelHandlers);
@@ -72,7 +72,7 @@ public final class ChannelHandlers {
      * @param rpcAddressList 地址信息列表
      * @param handlerFactory 构建工厂
      * @return 信息列表
-     * @since 0.0.9
+     * @since 2024.06
      */
     public static List<RpcChannelFuture> channelFutureList(final List<RpcAddress> rpcAddressList, final ChannelHandlerFactory handlerFactory) {
 //        List<RpcChannelFuture> resultList = Guavas.newArrayList();

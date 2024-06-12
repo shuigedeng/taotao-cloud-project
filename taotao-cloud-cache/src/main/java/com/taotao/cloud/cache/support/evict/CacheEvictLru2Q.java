@@ -17,35 +17,35 @@ import java.util.Queue;
  *
  * 实现方式：Lru + FIFO
  * @author shuigedeng
- * @since 0.0.13
+ * @since 2024.06
  */
 public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictLru2Q.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLru2Q.class);
 
     /**
      * 队列大小限制
      *
      * 降低 O(n) 的消耗，避免耗时过长。
-     * @since 0.0.13
+     * @since 2024.06
      */
     private static final int LIMIT_QUEUE_SIZE = 1024;
 
     /**
      * 第一次访问的队列
-     * @since 0.0.13
+     * @since 2024.06
      */
     private Queue<K> firstQueue;
 
     /**
      * 头结点
-     * @since 0.0.13
+     * @since 2024.06
      */
     private DoubleListNode<K,V> head;
 
     /**
      * 尾巴结点
-     * @since 0.0.13
+     * @since 2024.06
      */
     private DoubleListNode<K,V> tail;
 
@@ -54,7 +54,7 @@ public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
      *
      * key: 元素信息
      * value: 元素在 list 中对应的节点信息
-     * @since 0.0.13
+     * @since 2024.06
      */
     private Map<K, DoubleListNode<K,V>> lruIndexMap;
 
@@ -108,7 +108,7 @@ public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
      * 3. 如果不在1、2中，说明是新元素，直接插入到 firstQueue 的开始即可。
      *
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -136,7 +136,7 @@ public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
     /**
      * 插入到 LRU Map 头部
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     private void addToLruMapHead(final K key) {
         //2. 新元素插入到头部
@@ -164,7 +164,7 @@ public class CacheEvictLru2Q<K,V> extends AbstractCacheEvict<K,V> {
      * 2.2 删除 map 中的元素
      *
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

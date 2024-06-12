@@ -5,7 +5,7 @@ import com.taotao.cloud.rpc.registry.register.domain.entry.ServiceEntry;
 
 /**
  * <p> 默认服务明细 </p>
- * @since 0.0.8
+ * @since 2024.06
  */
 class DefaultServiceEntry implements ServiceEntry {
 
@@ -13,13 +13,13 @@ class DefaultServiceEntry implements ServiceEntry {
 
     /**
      * 服务标识
-     * @since 0.0.8
+     * @since 2024.06
      */
     private String serviceId;
 
     /**
      * 服务描述
-     * @since 0.0.8
+     * @since 2024.06
      */
     private String description;
 
@@ -31,19 +31,19 @@ class DefaultServiceEntry implements ServiceEntry {
      *     String clientIP = insocket.getAddress().getHostAddress();
      * </pre>
      *
-     * @since 0.0.8
+     * @since 2024.06
      */
     private String ip;
 
     /**
      * 端口信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private int port;
 
     /**
      * 权重信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private int weight;
 

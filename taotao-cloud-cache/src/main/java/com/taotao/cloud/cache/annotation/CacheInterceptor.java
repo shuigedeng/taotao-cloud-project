@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 缓存拦截器
  * @author shuigedeng
- * @since 0.0.5
+ * @since 2024.06
  */
 @Documented
 @Inherited
@@ -21,14 +21,14 @@ public @interface CacheInterceptor {
      *
      * etc.
      * @return 默认开启
-     * @since 0.0.5
+     * @since 2024.06
      */
     boolean common() default true;
 
     /**
      * 是否启用刷新
      * @return false
-     * @since 0.0.5
+     * @since 2024.06
      */
     boolean refresh() default false;
 
@@ -37,7 +37,7 @@ public @interface CacheInterceptor {
      * 主要针对 cache 内容有变更的操作，不包括查询操作。
      * 包括删除，添加，过期等操作。
      * @return 是否
-     * @since 0.0.10
+     * @since 2024.06
      */
     boolean aof() default false;
 
@@ -46,7 +46,7 @@ public @interface CacheInterceptor {
      *
      * 主要用于 LRU/LFU 等驱除策略
      * @return 是否
-     * @since 0.0.11
+     * @since 2024.06
      */
     boolean evict() default false;
 

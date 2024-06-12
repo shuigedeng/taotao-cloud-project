@@ -7,8 +7,8 @@ import com.taotao.cloud.mq.client.consumer.api.IMqConsumerListenerContext;
 import com.taotao.cloud.mq.common.dto.req.MqMessage;
 import com.taotao.cloud.mq.common.resp.ConsumerStatus;
 import javax.annotation.concurrent.NotThreadSafe;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @author shuigedeng
  * @since 2024.05
@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
 @NotThreadSafe
 public class MqListenerService implements IMqListenerService {
 
-	private static final Log log = LogFactory.getLog(MqListenerService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MqListenerService.class);
 
 	private IMqConsumerListener mqConsumerListener;
 

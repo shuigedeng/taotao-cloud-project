@@ -34,34 +34,34 @@ import io.netty.channel.ChannelHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 默认服务端注册类
  *
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class ServiceBs implements ServiceRegistry {
 
     /**
      * 日志信息
      *
-     * @since 0.0.8
+     * @since 2024.06
      */
-    private static final Log LOG = LogFactory.getLog(ServiceBs.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ServiceBs.class);
 
     /**
      * 单例信息
      *
-     * @since 0.0.6
+     * @since 2024.06
      */
     private static final ServiceBs INSTANCE = new ServiceBs();
 
     /**
      * rpc 服务端端口号
      *
-     * @since 0.0.6
+     * @since 2024.06
      */
     private int rpcPort;
 
@@ -70,21 +70,21 @@ public class ServiceBs implements ServiceRegistry {
      * （1）默认只实现 tcp
      * （2）后期可以拓展实现 web-service/http/https 等等。
      *
-     * @since 0.0.6
+     * @since 2024.06
      */
     private ProtocolConfig protocolConfig;
 
     /**
      * 服务配置列表
      *
-     * @since 0.0.6
+     * @since 2024.06
      */
     private List<ServiceConfig> serviceConfigList;
 
     /**
      * 注册中心地址列表
      *
-     * @since 0.0.8
+     * @since 2024.06
      */
     private List<RpcAddress> registerCenterList;
 
@@ -161,7 +161,7 @@ public class ServiceBs implements ServiceRegistry {
      * @param serviceId   服务标识
      * @param serviceImpl 服务实现
      * @return this
-     * @since 0.0.6
+     * @since 2024.06
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -243,7 +243,7 @@ public class ServiceBs implements ServiceRegistry {
      * （2）如果 register 为 false，则不进行注册
      * （3）后期可以添加延迟暴露，但是感觉意义不大。
      *
-     * @since 0.0.8
+     * @since 2024.06
      */
     private void registerServiceCenter() {
         // 初始化服务端到注册中心的连接信息

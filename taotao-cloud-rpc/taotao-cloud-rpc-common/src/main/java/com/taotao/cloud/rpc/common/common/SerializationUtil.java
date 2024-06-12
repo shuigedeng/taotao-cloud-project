@@ -1,9 +1,3 @@
-///**
-// * Project Name: my-projects
-// * Package Name: com.taotao.rpc.common
-// * Date: 2020/2/27 10:44
-// * Author: shuigedeng
-// */
 //package com.taotao.cloud.rpc.common.common;
 //
 //import com.dyuproject.protostuff.LinkedBuffer;
@@ -32,7 +26,7 @@
 //     * @param clazz 类型
 //     * @return com.dyuproject.protostuff.Schema<T>
 //     * @author shuigedeng
-//     * @date 2020/2/27 11:03
+//     * @date 2024.06
 //     */
 //    public static <T> Schema<T> getSchema(Class<T> clazz) {
 //        Schema<T> schema = (Schema<T>) cachedMap.get(clazz);
@@ -49,7 +43,7 @@
 //     * @param obj 类型
 //     * @return byte[]
 //     * @author shuigedeng
-//     * @date 2020/2/27 11:02
+//     * @date 2024.06
 //     */
 //    public static <T> byte[] serialize(T obj) throws IllegalStateException {
 //        Class<T> clazz = (Class<T>) obj.getClass();

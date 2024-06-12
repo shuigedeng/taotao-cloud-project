@@ -9,15 +9,15 @@ import java.util.List;
 /**
  * 加载策略-文件路径
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public class CacheLoadDbJson<K,V> implements ICacheLoad<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheLoadDbJson.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheLoadDbJson.class);
 
     /**
      * 文件路径
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final String dbPath;
 

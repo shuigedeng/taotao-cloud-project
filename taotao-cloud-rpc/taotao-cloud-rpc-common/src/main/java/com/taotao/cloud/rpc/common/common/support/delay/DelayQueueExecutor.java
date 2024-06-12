@@ -2,8 +2,8 @@ package com.taotao.cloud.rpc.common.common.support.delay;
 
 
 import java.util.concurrent.DelayQueue;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 基于延迟队列的延迟实现
  * @since 0.1.7
@@ -15,7 +15,7 @@ public class DelayQueueExecutor implements DelayExecutor {
      *
      * @since 0.1.7
      */
-    private static final Log log = LogFactory.getLog(DelayQueueExecutor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DelayQueueExecutor.class);
 
     private final DelayQueue<DelayElem> delayQueue;
 

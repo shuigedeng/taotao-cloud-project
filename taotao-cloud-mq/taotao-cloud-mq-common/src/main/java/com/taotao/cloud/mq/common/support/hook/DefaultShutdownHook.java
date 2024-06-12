@@ -3,8 +3,8 @@ package com.taotao.cloud.mq.common.support.hook;
 import com.taotao.cloud.mq.common.api.Destroyable;
 import com.taotao.cloud.mq.common.support.invoke.IInvokeService;
 import com.taotao.cloud.mq.common.support.status.IStatusManager;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 默认的 hook 实现
  * @since 2024.05

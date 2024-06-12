@@ -12,21 +12,21 @@ import java.util.Map;
 /**
  * 基于双向列表的实现
  * @author shuigedeng
- * @since 0.0.13
+ * @since 2024.06
  */
 public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
 
-    private static final Log log = LogFactory.getLog(LruMapDoubleList.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LruMapDoubleList.class);
 
     /**
      * 头结点
-     * @since 0.0.13
+     * @since 2024.06
      */
     private DoubleListNode<K,V> head;
 
     /**
      * 尾巴结点
-     * @since 0.0.13
+     * @since 2024.06
      */
     private DoubleListNode<K,V> tail;
 
@@ -35,7 +35,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      *
      * key: 元素信息
      * value: 元素在 list 中对应的节点信息
-     * @since 0.0.13
+     * @since 2024.06
      */
     private Map<K, DoubleListNode<K,V>> indexMap;
 
@@ -73,7 +73,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      * （2）新元素放到元素头部
      *
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -105,7 +105,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
      * 2.2 删除 map 中的元素
      *
      * @param key 元素
-     * @since 0.0.13
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

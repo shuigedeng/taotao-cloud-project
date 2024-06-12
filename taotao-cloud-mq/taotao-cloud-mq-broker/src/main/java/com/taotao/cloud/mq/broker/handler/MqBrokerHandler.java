@@ -36,8 +36,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MqBrokerHandler extends SimpleChannelInboundHandler {
 
-	private static final Log log = LogFactory.getLog(MqBrokerHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MqBrokerHandler.class);
 
 	/**
 	 * 调用管理类

@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * <p> 服务端注册服务类 </p>
- * @since 0.0.8
+ * @since 2024.06
  */
 public interface RegisterServerService {
 
@@ -22,7 +22,7 @@ public interface RegisterServerService {
      * 订阅了这个 serviceId 的所有客户端
      * @param serviceEntry 注册当前服务信息
      * @param channel channel
-     * @since 0.0.8
+     * @since 2024.06
      * @return 更新后的服务信息列表
      */
     List<ServiceEntry> register(final ServiceEntry serviceEntry, Channel channel);
@@ -30,7 +30,7 @@ public interface RegisterServerService {
     /**
      * 注销当前服务信息
      * @param serviceEntry 注册当前服务信息
-     * @since 0.0.8
+     * @since 2024.06
      * @return 更新后的服务信息列表
      */
     List<ServiceEntry> unRegister(final ServiceEntry serviceEntry);
@@ -40,7 +40,7 @@ public interface RegisterServerService {
      * （1）如果对应的列表为空，则返回空列表。
      * @param serviceId 服务标识
      * @return 服务信息列表
-     * @since 0.0.8
+     * @since 2024.06
      */
     List<ServiceEntry> lookUp(final String serviceId);
 

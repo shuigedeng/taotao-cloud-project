@@ -7,7 +7,7 @@ import com.taotao.cloud.cache.api.ICacheEvictContext;
 /**
  * 丢弃策略-抽象实现类
  * @author shuigedeng
- * @since 0.0.11
+ * @since 2024.06
  */
 public abstract class AbstractCacheEvict<K,V> implements ICacheEvict<K,V> {
 
@@ -21,7 +21,7 @@ public abstract class AbstractCacheEvict<K,V> implements ICacheEvict<K,V> {
      * 执行移除
      * @param context 上下文
      * @return 结果
-     * @since 0.0.11
+     * @since 2024.06
      */
     protected abstract ICacheEntry<K,V> doEvict(ICacheEvictContext<K, V> context);
 

@@ -25,7 +25,7 @@ public class ServiceRegistry {
      *
      * @return org.apache.zookeeper.ZooKeeper
      * @author shuigedeng
-     * @date 2020/2/27 13:47
+     * @date 2024.06
      */
 //    private ZooKeeper connectZookeeper() {
 //        ZooKeeper zk = null;
@@ -74,7 +74,7 @@ public class ServiceRegistry {
      * @param data data
      * @return void
      * @author shuigedeng
-     * @date 2020/2/27 13:47
+     * @date 2024.06
      */
     public void registry(String data) {
 //        if (null != data) {

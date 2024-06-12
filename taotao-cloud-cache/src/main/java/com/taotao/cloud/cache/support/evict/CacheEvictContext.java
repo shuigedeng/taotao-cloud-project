@@ -11,7 +11,7 @@ import com.taotao.cloud.cache.api.ICacheEvictContext;
  * 3. 淘汰监听器
  *
  * @author shuigedeng
- * @since 0.0.2
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
@@ -19,19 +19,19 @@ public class CacheEvictContext<K,V> implements ICacheEvictContext<K,V> {
 
     /**
      * 新加的 key
-     * @since 0.0.2
+     * @since 2024.06
      */
     private K key;
 
     /**
      * cache 实现
-     * @since 0.0.2
+     * @since 2024.06
      */
     private ICache<K,V> cache;
 
     /**
      * 最大的大小
-     * @since 0.0.2
+     * @since 2024.06
      */
     private int size;
 

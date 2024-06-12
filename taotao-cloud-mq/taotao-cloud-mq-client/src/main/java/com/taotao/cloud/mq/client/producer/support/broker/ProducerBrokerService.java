@@ -33,8 +33,8 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ProducerBrokerService implements IProducerBrokerService {
 
-	private static final Log log = LogFactory.getLog(ProducerBrokerService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ProducerBrokerService.class);
 
 	/**
 	 * 分组名称

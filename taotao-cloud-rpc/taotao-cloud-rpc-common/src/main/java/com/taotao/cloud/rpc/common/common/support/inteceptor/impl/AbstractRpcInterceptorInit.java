@@ -5,9 +5,10 @@ import com.taotao.cloud.rpc.common.common.rpc.Pipeline;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptor;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 抽象的初始化拦截器
  *
@@ -16,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class AbstractRpcInterceptorInit extends RpcInterceptorAdaptor {
 
-	private static final Log log = LogFactory.getLog(AbstractRpcInterceptorInit.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractRpcInterceptorInit.class);
 
 	/**
 	 * 初始化监听器列表

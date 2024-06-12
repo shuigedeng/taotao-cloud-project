@@ -1,7 +1,3 @@
-/**
- * Project Name: my-projects Package Name: com.taotao.rpc.server Date: 2020/2/27 14:40 Author:
- * shuigedeng
- */
 package com.taotao.cloud.rpc.server;
 
 import com.taotao.cloud.rpc.common.common.RpcReponse;
@@ -36,7 +32,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
 	 * @param request request
 	 * @return void
 	 * @author shuigedeng
-	 * @date 2020/2/27 14:42
+	 * @date 2024.06
 	 */
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, RpcRequest request) throws Exception {
@@ -60,7 +56,7 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
 	 * @param request request
 	 * @return java.lang.Object
 	 * @author shuigedeng
-	 * @date 2020/2/27 14:46
+	 * @date 2024.06
 	 */
 	private Object doRequestHandle(RpcRequest request) throws Throwable {
 		String className = request.getClassName();

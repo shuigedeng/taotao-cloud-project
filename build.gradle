@@ -90,7 +90,7 @@ buildscript {
         classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.15"
 
         //https://github.com/spring-io/spring-javaformat/
-        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.41"
+        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.42"
 
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
@@ -151,7 +151,7 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.ly.smart-doc
-    id "com.ly.smart-doc" version "3.0.4"
+    id "com.ly.smart-doc" version "3.0.5"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * 缺点：惰性删除不友好
  *
  * @author shuigedeng
- * @since 0.0.3
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
@@ -23,7 +23,7 @@ public class CacheExpireSort<K,V> implements ICacheExpire<K,V> {
 
     /**
      * 单次清空的数量限制
-     * @since 0.0.3
+     * @since 2024.06
      */
     private static final int LIMIT = 100;
 
@@ -31,7 +31,7 @@ public class CacheExpireSort<K,V> implements ICacheExpire<K,V> {
      * 排序缓存存储
      *
      * 使用按照时间排序的缓存处理。
-     * @since 0.0.3
+     * @since 2024.06
      */
     private final Map<Long, List<K>> sortMap = new TreeMap<>(new Comparator<Long>() {
         @Override
@@ -44,19 +44,19 @@ public class CacheExpireSort<K,V> implements ICacheExpire<K,V> {
      * 过期 map
      *
      * 空间换时间
-     * @since 0.0.3
+     * @since 2024.06
      */
     private final Map<K, Long> expireMap = new HashMap<>();
 
     /**
      * 缓存实现
-     * @since 0.0.3
+     * @since 2024.06
      */
     private final ICache<K,V> cache;
 
     /**
      * 线程执行类
-     * @since 0.0.3
+     * @since 2024.06
      */
     private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
 
@@ -67,7 +67,7 @@ public class CacheExpireSort<K,V> implements ICacheExpire<K,V> {
 
     /**
      * 初始化任务
-     * @since 0.0.3
+     * @since 2024.06
      */
     private void init() {
         EXECUTOR_SERVICE.scheduleAtFixedRate(new ExpireThread(), 100, 100, TimeUnit.MILLISECONDS);
@@ -75,7 +75,7 @@ public class CacheExpireSort<K,V> implements ICacheExpire<K,V> {
 
     /**
      * 定时执行任务
-     * @since 0.0.3
+     * @since 2024.06
      */
     private class ExpireThread implements Runnable {
         @Override
@@ -164,7 +164,7 @@ public class CacheExpireSort<K,V> implements ICacheExpire<K,V> {
     /**
      * 移除过期信息
      * @param key key
-     * @since 0.0.10
+     * @since 2024.06
      */
     private void removeExpireKey(final K key) {
         Long expireTime = expireMap.get(key);

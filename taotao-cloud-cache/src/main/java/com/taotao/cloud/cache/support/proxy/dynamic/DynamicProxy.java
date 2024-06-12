@@ -18,7 +18,7 @@ import java.util.concurrent.CompletionService;
  * 1. 对于 executor 的抽象，使用 {@link CompletionService}
  * 2. 确保唯一初始化 executor，在任务执行的最后关闭 executor。
  * 3. 异步执行结果的获取，异常信息的获取。
- * @since 0.0.4
+ * @since 2024.06
  */
 public class DynamicProxy implements InvocationHandler, ICacheProxy {
 

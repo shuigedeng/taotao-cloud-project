@@ -15,17 +15,17 @@ import java.util.Map;
 /**
  * 加载策略-AOF文件模式
  * @author shuigedeng
- * @since 0.0.10
+ * @since 2024.06
  */
 public class CacheLoadAof<K,V> implements ICacheLoad<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheLoadAof.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheLoadAof.class);
 
     /**
      * 方法缓存
      *
      * 暂时比较简单，直接通过方法判断即可，不必引入参数类型增加复杂度。
-     * @since 0.0.10
+     * @since 2024.06
      */
     private static final Map<String, Method> METHOD_MAP = new HashMap<>();
 
@@ -49,7 +49,7 @@ public class CacheLoadAof<K,V> implements ICacheLoad<K,V> {
 
     /**
      * 文件路径
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final String dbPath;
 

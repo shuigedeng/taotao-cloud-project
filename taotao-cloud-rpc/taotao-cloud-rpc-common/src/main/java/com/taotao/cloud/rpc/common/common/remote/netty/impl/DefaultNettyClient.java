@@ -8,24 +8,24 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * netty 网络客户端
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public class DefaultNettyClient extends AbstractNettyClient<ChannelFuture> {
 
     /**
      * 工作线程池
-     * @since 0.0.8
+     * @since 2024.06
      */
     private EventLoopGroup workerGroup;
 
     /**
      * channel 信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private ChannelFuture channelFuture;
 
@@ -39,7 +39,7 @@ public class DefaultNettyClient extends AbstractNettyClient<ChannelFuture> {
      * @param port 端口
      * @param channelHandler 实现类
      * @return 对象实例
-     * @since 0.0.8
+     * @since 2024.06
      */
     public static DefaultNettyClient newInstance(String ip, int port,
                                                  ChannelHandler channelHandler) {
@@ -48,9 +48,9 @@ public class DefaultNettyClient extends AbstractNettyClient<ChannelFuture> {
 
     /**
      * 日志信息
-     * @since 0.0.8
+     * @since 2024.06
      */
-    private static final Log LOG = LogFactory.getLog(DefaultNettyClient.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultNettyClient.class);
 
     @Override
     public ChannelFuture call() {

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * 缓存过期-普通策略
  *
  * @author shuigedeng
- * @since 0.0.3
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
@@ -24,7 +24,7 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
 
     /**
      * 单次清空的数量限制
-     * @since 0.0.3
+     * @since 2024.06
      */
     private static final int LIMIT = 100;
 
@@ -32,19 +32,19 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
      * 过期 map
      *
      * 空间换时间
-     * @since 0.0.3
+     * @since 2024.06
      */
     private final Map<K, Long> expireMap = new HashMap<>();
 
     /**
      * 缓存实现
-     * @since 0.0.3
+     * @since 2024.06
      */
     private final ICache<K,V> cache;
 
     /**
      * 线程执行类
-     * @since 0.0.3
+     * @since 2024.06
      */
     private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
 
@@ -55,7 +55,7 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
 
     /**
      * 初始化任务
-     * @since 0.0.3
+     * @since 2024.06
      */
     private void init() {
         EXECUTOR_SERVICE.scheduleAtFixedRate(new ExpireThread(), 100, 100, TimeUnit.MILLISECONDS);
@@ -63,7 +63,7 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
 
     /**
      * 定时执行任务
-     * @since 0.0.3
+     * @since 2024.06
      */
     private class ExpireThread implements Runnable {
         @Override
@@ -119,7 +119,7 @@ public class CacheExpire<K,V> implements ICacheExpire<K,V> {
      * 过期处理 key
      * @param key key
      * @param expireAt 过期时间
-     * @since 0.0.3
+     * @since 2024.06
      */
     private void expireKey(final K key, final Long expireAt) {
         if(expireAt == null) {

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p> 客户端注册中心服务接口 </p>
- * @since 0.0.9
+ * @since 2024.06
  */
 public interface ClientRegisterManager {
 

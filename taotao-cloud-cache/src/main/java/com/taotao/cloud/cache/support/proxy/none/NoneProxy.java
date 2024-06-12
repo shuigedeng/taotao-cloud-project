@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * <p> 没有代理 </p>
  *
- * @since 0.0.4
+ * @since 2024.06
  */
 public class NoneProxy implements InvocationHandler, ICacheProxy {
 

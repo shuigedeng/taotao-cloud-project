@@ -9,8 +9,8 @@ import com.taotao.cloud.rpc.common.common.support.inteceptor.impl.DefaultRpcInte
 import com.taotao.cloud.rpc.common.common.support.status.enums.StatusEnum;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 参考：https://blog.csdn.net/u012240455/article/details/79210250
  *
@@ -18,16 +18,16 @@ import org.apache.commons.logging.LogFactory;
  * （2）直接根据反射即可处理相关信息。
  * （3）rpc 是一种强制根据接口进行编程的实现方式。
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class DefaultReferenceProxy<T> implements ReferenceProxy<T> {
 
-    private static final Log LOG = LogFactory.getLog(DefaultReferenceProxy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultReferenceProxy.class);
 
     /**
      * 代理上下文
      * （1）这个信息不应该被修改，应该和指定的 service 紧密关联。
-     * @since 0.0.6
+     * @since 2024.06
      */
     private final ServiceContext<T> proxyContext;
 
@@ -49,7 +49,7 @@ public class DefaultReferenceProxy<T> implements ReferenceProxy<T> {
      * @param args 参数
      * @return 结果
      * @throws Throwable 异常
-     * @since 0.0.6
+     * @since 2024.06
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 缓存接口
  * @author shuigedeng
- * @since 0.0.1
+ * @since 22024.06
  */
 public interface ICache<K, V> extends Map<K, V> {
 
@@ -45,7 +45,7 @@ public interface ICache<K, V> extends Map<K, V> {
      * @param key         key
      * @param timeInMills 毫秒时间之后过期
      * @return this
-     * @since 0.0.3
+     * @since 22024.06
      */
     ICache<K, V> expire(final K key, final long timeInMills);
 
@@ -54,49 +54,49 @@ public interface ICache<K, V> extends Map<K, V> {
      * @param key key
      * @param timeInMills 时间戳
      * @return this
-     * @since 0.0.3
+     * @since 22024.06
      */
     ICache<K, V> expireAt(final K key, final long timeInMills);
 
     /**
      * 获取缓存的过期处理类
      * @return 处理类实现
-     * @since 0.0.4
+     * @since 22024.06
      */
     ICacheExpire<K,V> expire();
 
     /**
      * 删除监听类列表
      * @return 监听器列表
-     * @since 0.0.6
+     * @since 22024.06
      */
     List<ICacheRemoveListener<K,V>> removeListeners();
 
     /**
      * 慢日志监听类列表
      * @return 监听器列表
-     * @since 0.0.9
+     * @since 22024.06
      */
     List<ICacheSlowListener> slowListeners();
 
     /**
      * 加载信息
      * @return 加载信息
-     * @since 0.0.7
+     * @since 22024.06
      */
     ICacheLoad<K,V> load();
 
     /**
      * 持久化类
      * @return 持久化类
-     * @since 0.0.10
+     * @since 22024.06
      */
     ICachePersist<K,V> persist();
 
     /**
      * 淘汰策略
      * @return 淘汰
-     * @since 0.0.11
+     * @since 22024.06
      */
     ICacheEvict<K,V> evict();
 

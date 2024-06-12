@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  * （1）耗时
  * （2）慢日志
  * @author shuigedeng
- * @since 0.0.5
+ * @since 2024.06
  * @param <K> key
  * @param <V> value
  */
@@ -21,31 +21,31 @@ public class CacheInterceptorContext<K,V> implements ICacheInterceptorContext<K,
 
     /**
      * 执行的方法信息
-     * @since 0.0.5
+     * @since 2024.06
      */
     private Method method;
 
     /**
      * 执行的参数
-     * @since 0.0.5
+     * @since 2024.06
      */
     private Object[] params;
 
     /**
      * 方法执行的结果
-     * @since 0.0.5
+     * @since 2024.06
      */
     private Object result;
 
     /**
      * 开始时间
-     * @since 0.0.5
+     * @since 2024.06
      */
     private long startMills;
 
     /**
      * 结束时间
-     * @since 0.0.5
+     * @since 2024.06
      */
     private long endMills;
 

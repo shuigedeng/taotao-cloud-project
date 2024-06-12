@@ -22,14 +22,14 @@ import com.taotao.cloud.rpc.client.client.proxy.RemoteInvokeContext;
  * 后期拓展：
  * （1）类似于 aop，用户可以自行定义 interceptor 拦截器
  *
- * @since 0.0.9
+ * @since 2024.06
  */
 public interface RpcFilter {
 
     /**
      * filter 处理
      * @param context 上下文
-     * @since 0.0.9
+     * @since 2024.06
      */
     void filter(final RemoteInvokeContext context);
 

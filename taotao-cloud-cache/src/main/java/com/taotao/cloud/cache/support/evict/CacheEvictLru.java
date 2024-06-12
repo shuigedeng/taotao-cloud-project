@@ -11,15 +11,15 @@ import java.util.List;
 /**
  * 丢弃策略-LRU 最近最少使用
  * @author shuigedeng
- * @since 0.0.11
+ * @since 2024.06
  */
 public class CacheEvictLru<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictLru.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLru.class);
 
     /**
      * list 信息
-     * @since 0.0.11
+     * @since 2024.06
      */
     private final List<K> list = new LinkedList<>();
 
@@ -44,7 +44,7 @@ public class CacheEvictLru<K,V> extends AbstractCacheEvict<K,V> {
      * （2）新元素放到元素头部
      *
      * @param key 元素
-     * @since 0.0.11
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -55,7 +55,7 @@ public class CacheEvictLru<K,V> extends AbstractCacheEvict<K,V> {
     /**
      * 移除元素
      * @param key 元素
-     * @since 0.0.11
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

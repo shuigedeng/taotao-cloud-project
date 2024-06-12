@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationHandler;
  * （2）直接根据反射即可处理相关信息。
  * （3）rpc 是一种强制根据接口进行编程的实现方式。
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  * @param <T> 泛型
  */
 public interface ReferenceProxy<T> extends InvocationHandler {
@@ -19,7 +19,7 @@ public interface ReferenceProxy<T> extends InvocationHandler {
      * （1）接口只是为了代理。
      * （2）实际调用中更加关心 的是 serviceId
      * @return 代理实例
-     * @since 0.0.6
+     * @since 2024.06
      */
     @SuppressWarnings("unchecked")
     T proxy();

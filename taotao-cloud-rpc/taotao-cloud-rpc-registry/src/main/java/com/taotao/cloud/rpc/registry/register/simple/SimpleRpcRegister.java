@@ -22,30 +22,30 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p> 简单的 rpc 注册 </p>
  * （1）各种关系的关系服务类 （2）各种关系之间的通讯类 （3）domain 层
  *
- * @since 0.0.8
+ * @since 2024.06
  */
 public class SimpleRpcRegister implements RpcRegister {
 
-	private static final Log log = LogFactory.getLog(DefaultRegisterServerService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultRegisterServerService.class);
 
 	/**
 	 * 服务端信息管理
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private final RegisterServerService registerServerService;
 
 	/**
 	 * 客户端信息管理
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private final RegisterClientService registerClientService;
 

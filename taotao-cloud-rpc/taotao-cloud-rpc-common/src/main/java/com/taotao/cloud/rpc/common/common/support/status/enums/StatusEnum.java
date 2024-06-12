@@ -1,8 +1,10 @@
 package com.taotao.cloud.rpc.common.common.support.status.enums;
 
 import com.taotao.cloud.rpc.common.common.exception.ShutdownException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p> project: rpc-StatusEnum </p>
@@ -54,7 +56,7 @@ public enum StatusEnum {
     SHUTDOWN_TIMEOUT(4),
     ;
 
-    private static final Log LOG = LogFactory.getLog(StatusEnum.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StatusEnum.class);
 
     /**
      * 编码信息

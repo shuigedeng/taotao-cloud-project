@@ -6,26 +6,26 @@ import io.netty.channel.ChannelHandler;
 /**
  * netty 网络服务端
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  * @param <V> 泛型
  */
 public abstract class AbstractNettyClient<V> implements NettyClient<V> {
 
     /**
      * ip 信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     protected String ip;
 
     /**
      * 端口信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     protected int port;
 
     /**
      * channel handler
-     * @since 0.0.8
+     * @since 2024.06
      */
     protected ChannelHandler channelHandler;
 

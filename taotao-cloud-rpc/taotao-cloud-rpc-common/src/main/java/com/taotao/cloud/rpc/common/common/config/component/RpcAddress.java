@@ -5,25 +5,25 @@ import java.util.Objects;
 /**
  * 地址信息
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class RpcAddress {
 
     /**
      * address 信息
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String address;
 
     /**
      * 端口号
-     * @since 0.0.6
+     * @since 2024.06
      */
     private int port;
 
     /**
      * 权重
-     * @since 0.0.6
+     * @since 2024.06
      */
     private int weight;
 

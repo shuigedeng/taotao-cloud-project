@@ -21,7 +21,7 @@ public abstract class AbstractRpcFilterInit implements RpcFilter {
 	 *
 	 * @param pipeline 泳道
 	 * @param context  重试信息
-	 * @since 0.0.7
+	 * @since 2024.06
 	 */
 	protected abstract void init(final Pipeline<RpcFilter> pipeline,
 		final RemoteInvokeContext context);

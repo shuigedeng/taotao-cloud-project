@@ -18,56 +18,56 @@ import java.util.*;
  * @author shuigedeng
  * @param <K> key
  * @param <V> value
- * @since 0.0.2
+ * @since 2024.06
  */
 public class Cache<K,V> implements ICache<K,V> {
 
     /**
      * map 信息
-     * @since 0.0.2
+     * @since 2024.06
      */
     private Map<K,V> map;
 
     /**
      * 大小限制
-     * @since 0.0.2
+     * @since 2024.06
      */
     private int sizeLimit;
 
     /**
      * 驱除策略
-     * @since 0.0.2
+     * @since 2024.06
      */
     private ICacheEvict<K,V> evict;
 
     /**
      * 过期策略
      * 暂时不做暴露
-     * @since 0.0.3
+     * @since 2024.06
      */
     private ICacheExpire<K,V> expire;
 
     /**
      * 删除监听类
-     * @since 0.0.6
+     * @since 2024.06
      */
     private List<ICacheRemoveListener<K,V>> removeListeners;
 
     /**
      * 慢日志监听类
-     * @since 0.0.9
+     * @since 2024.06
      */
     private List<ICacheSlowListener> slowListeners;
 
     /**
      * 加载类
-     * @since 0.0.7
+     * @since 2024.06
      */
     private ICacheLoad<K,V> load;
 
     /**
      * 持久化
-     * @since 0.0.8
+     * @since 2024.06
      */
     private ICachePersist<K,V> persist;
 
@@ -95,7 +95,7 @@ public class Cache<K,V> implements ICache<K,V> {
      * 设置驱除策略
      * @param cacheEvict 驱除策略
      * @return this
-     * @since 0.0.8
+     * @since 2024.06
      */
     public Cache<K, V> evict(ICacheEvict<K, V> cacheEvict) {
         this.evict = cacheEvict;
@@ -105,7 +105,7 @@ public class Cache<K,V> implements ICache<K,V> {
     /**
      * 获取持久化类
      * @return 持久化类
-     * @since 0.0.10
+     * @since 2024.06
      */
     @Override
     public ICachePersist<K, V> persist() {
@@ -116,7 +116,7 @@ public class Cache<K,V> implements ICache<K,V> {
     /**
      * 获取驱除策略
      * @return 驱除策略
-     * @since 0.0.11
+     * @since 2024.06
      */
     @Override
     public ICacheEvict<K, V> evict() {
@@ -126,7 +126,7 @@ public class Cache<K,V> implements ICache<K,V> {
     /**
      * 设置持久化策略
      * @param persist 持久化
-     * @since 0.0.8
+     * @since 2024.06
      */
     public void persist(ICachePersist<K, V> persist) {
         this.persist = persist;
@@ -165,7 +165,7 @@ public class Cache<K,V> implements ICache<K,V> {
 
     /**
      * 初始化
-     * @since 0.0.7
+     * @since 2024.06
      */
     public void init() {
         this.expire = new CacheExpire<>(this);
@@ -279,7 +279,7 @@ public class Cache<K,V> implements ICache<K,V> {
     /**
      * 是否已经达到大小最大的限制
      * @return 是否限制
-     * @since 0.0.2
+     * @since 2024.06
      */
     private boolean isSizeLimit() {
         final int currentSize = this.size();

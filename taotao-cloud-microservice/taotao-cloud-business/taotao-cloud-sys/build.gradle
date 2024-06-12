@@ -18,7 +18,7 @@ allprojects {
 
             resolutionStrategy {
                 //force "org.codehaus.groovy:groovy:4.0.0"
-                force 'org.antlr:antlr4:4.13.1'
+                //force 'org.antlr:antlr4:4.13.1'
                 force 'net.minidev:json-smart:2.5.1'
 
             }

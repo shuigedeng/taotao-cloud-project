@@ -10,8 +10,8 @@ import com.taotao.cloud.rpc.server.server.support.register.ServerRegisterManager
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 注册中心
  * （1）用于和注册中心建立长连接。
@@ -19,11 +19,11 @@ import org.apache.commons.logging.LogFactory;
  *
  * 后期可以调整为接收到影响为准，保证请求成功。
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public class RpcServerRegisterHandler extends SimpleChannelInboundHandler {
 
-    private static final Log LOG = LogFactory.getLog(RpcServerRegisterHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RpcServerRegisterHandler.class);
 
     private final ServerRegisterManager serverRegisterManager;
 

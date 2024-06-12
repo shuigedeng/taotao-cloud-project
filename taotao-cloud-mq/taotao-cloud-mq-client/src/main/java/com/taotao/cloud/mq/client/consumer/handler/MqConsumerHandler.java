@@ -18,15 +18,15 @@ import com.taotao.cloud.mq.common.util.DelimiterUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @author shuigedeng
  * @since 2024.05
  */
 public class MqConsumerHandler extends SimpleChannelInboundHandler {
 
-    private static final Log log = LogFactory.getLog(MqConsumerHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MqConsumerHandler.class);
 
     /**
      * 调用管理类

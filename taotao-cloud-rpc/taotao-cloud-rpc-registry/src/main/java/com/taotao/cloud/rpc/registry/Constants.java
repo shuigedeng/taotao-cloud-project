@@ -1,9 +1,3 @@
-/**
- * Project Name: my-projects
- * Package Name: com.taotao.rpc.registry
- * Date: 2020/2/27 11:22
- * Author: shuigedeng
- */
 package com.taotao.cloud.rpc.registry;
 
 /**

@@ -14,35 +14,35 @@ import java.util.List;
  * （1）上下文信息
  *
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public interface RpcRequest extends BaseRpc {
 
     /**
      * 创建时间
      * @return 创建时间
-     * @since 0.0.6
+     * @since 2024.06
      */
     long createTime();
 
     /**
      * 服务唯一标识
      * @return 服务唯一标识
-     * @since 0.0.6
+     * @since 2024.06
      */
     String serviceId();
 
     /**
      * 方法名称
      * @return 方法名称
-     * @since 0.0.6
+     * @since 2024.06
      */
     String methodName();
 
     /**
      * 方法类型名称列表
      * @return 名称列表
-     * @since 0.0.6
+     * @since 2024.06
      */
     List<String> paramTypeNames();
 
@@ -51,7 +51,7 @@ public interface RpcRequest extends BaseRpc {
     /**
      * 调用参数值
      * @return 参数值数组
-     * @since 0.0.6
+     * @since 2024.06
      */
     Object[] paramValues();
 

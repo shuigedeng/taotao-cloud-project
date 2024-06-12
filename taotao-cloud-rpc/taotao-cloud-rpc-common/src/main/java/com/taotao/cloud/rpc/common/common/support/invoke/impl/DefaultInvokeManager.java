@@ -6,17 +6,17 @@ import com.taotao.cloud.rpc.common.common.support.invoke.InvokeManager;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 调用服务接口
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class DefaultInvokeManager implements InvokeManager {
 
-    private static final Log LOG = LogFactory.getLog(DefaultInvokeManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultInvokeManager.class);
 
     /**
      * 请求序列号 map
@@ -25,13 +25,13 @@ public class DefaultInvokeManager implements InvokeManager {
      *
      * key: seqId 唯一标识一个请求
      * value: 存入该请求最长的有效时间。用于定时删除和超时判断。
-     * @since 0.0.7
+     * @since 2024.06
      */
     private final ConcurrentHashMap<String, Long> requestMap;
 
     /**
      * 响应结果
-     * @since 0.0.6
+     * @since 2024.06
      */
     private final ConcurrentHashMap<String, RpcResponse> responseMap;
 

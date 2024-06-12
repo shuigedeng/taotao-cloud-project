@@ -10,21 +10,21 @@ import java.util.concurrent.ConcurrentHashMap;
  * 超时检测线程
  *
  * @author shuigedeng
- * @since 0.0.7
+ * @since 2024.06
  */
 public class InvokeTimeoutCheckThread implements Runnable {
 
     /**
      * 请求信息
      *
-     * @since 0.0.7
+     * @since 2024.06
      */
     private final ConcurrentHashMap<String, Long> requestMap;
 
     /**
      * 请求信息
      *
-     * @since 0.0.7
+     * @since 2024.06
      */
     private final ConcurrentHashMap<String, RpcResponse> responseMap;
 
@@ -33,7 +33,7 @@ public class InvokeTimeoutCheckThread implements Runnable {
      *
      * @param requestMap  请求 Map
      * @param responseMap 结果 map
-     * @since 0.0.7
+     * @since 2024.06
      */
     public InvokeTimeoutCheckThread(ConcurrentHashMap<String, Long> requestMap,
                                     ConcurrentHashMap<String, RpcResponse> responseMap) {

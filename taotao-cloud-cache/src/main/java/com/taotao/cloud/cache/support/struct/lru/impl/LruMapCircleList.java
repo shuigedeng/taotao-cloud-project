@@ -12,21 +12,21 @@ import java.util.Map;
 /**
  * 基于循环列表的实现
  * @author shuigedeng
- * @since 0.0.15
+ * @since 2024.06
  */
 public class LruMapCircleList<K,V> implements ILruMap<K,V> {
 
-    private static final Log log = LogFactory.getLog(LruMapCircleList.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LruMapCircleList.class);
 
     /**
      * 头结点
-     * @since 0.0.15
+     * @since 2024.06
      */
     private CircleListNode<K,V> head;
 
     /**
      * 映射 map
-     * @since 0.0.15
+     * @since 2024.06
      */
     private Map<K, CircleListNode<K,V>> indexMap;
 
@@ -46,7 +46,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
      * （2）如果 accessFlag=1，则设置其值为0，循环下一个节点。
      *
      * @return 结果
-     * @since 0.0.15
+     * @since 2024.06
      */
     @Override
     public ICacheEntry<K, V> removeEldest() {
@@ -94,7 +94,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
      * （2）如果已经存在，则更新 accessFlag=1;
      *
      * @param key 元素
-     * @since 0.0.15
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -131,7 +131,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
      * 删除 2 之后：
      * head==1==head
      * @param key 元素
-     * @since 0.0.15
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

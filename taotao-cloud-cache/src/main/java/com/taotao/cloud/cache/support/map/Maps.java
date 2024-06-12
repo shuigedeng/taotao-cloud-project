@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * @author shuigedeng
- * @since 0.0.3
+ * @since 2024.06
  */
 public final class Maps {
 
@@ -16,7 +16,7 @@ public final class Maps {
      * @param <K> key
      * @param <V> value
      * @return map 实现
-     * @since 0.0.3
+     * @since 2024.06
      */
     public static <K,V> Map<K,V> hashMap() {
         return new HashMap<>();

@@ -3,7 +3,7 @@ package com.taotao.cloud.rpc.common.common.exception;
 /**
  * rpc 运行时异常
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class RpcRuntimeException extends RuntimeException{
 

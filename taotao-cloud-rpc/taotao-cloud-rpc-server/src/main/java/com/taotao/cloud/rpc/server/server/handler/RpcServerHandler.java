@@ -12,17 +12,17 @@ import com.taotao.cloud.rpc.server.server.service.impl.DefaultServiceFactory;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
- * @since 0.0.1
+ * @since 2024.06
  */
 @ChannelHandler.Sharable
 public class RpcServerHandler extends SimpleChannelInboundHandler {
 
-	private static final Log log = LogFactory.getLog(RpcServerHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RpcServerHandler.class);
 
 	/**
 	 * 调用管理类
@@ -92,7 +92,7 @@ public class RpcServerHandler extends SimpleChannelInboundHandler {
 	 *
 	 * @param rpcRequest 请求信息
 	 * @return 结果信息
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private RpcResponse handleRpcRequest(final RpcRequest rpcRequest) {
 		//1. 判断是否为 shutdown 状态

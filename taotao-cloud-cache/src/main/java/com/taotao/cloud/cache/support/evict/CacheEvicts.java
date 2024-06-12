@@ -6,7 +6,7 @@ import com.taotao.cloud.cache.api.ICacheEvict;
  * 丢弃策略
  *
  * @author shuigedeng
- * @since 0.0.2
+ * @since 2024.06
  */
 public final class CacheEvicts {
 
@@ -18,7 +18,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.2
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> none() {
         return new CacheEvictNone<>();
@@ -30,7 +30,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.2
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> fifo() {
         return new CacheEvictFifo<>();
@@ -42,7 +42,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.11
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> lru() {
         return new CacheEvictLru<>();
@@ -55,7 +55,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.12
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> lruDoubleListMap() {
         return new CacheEvictLruDoubleListMap<>();
@@ -69,7 +69,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.12
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> lruLinkedHashMap() {
         return new CacheEvictLruLinkedHashMap<>();
@@ -82,7 +82,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.13
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> lru2Q() {
         return new CacheEvictLru2Q<>();
@@ -95,7 +95,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.13
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> lru2() {
         return new CacheEvictLru2<>();
@@ -108,7 +108,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.14
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> lfu() {
         return new CacheEvictLfu<>();
@@ -119,7 +119,7 @@ public final class CacheEvicts {
      * @param <K> key
      * @param <V> value
      * @return 结果
-     * @since 0.0.15
+     * @since 2024.06
      */
     public static <K, V> ICacheEvict<K, V> clock() {
         return new CacheEvictClock<>();

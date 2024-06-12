@@ -3,8 +3,8 @@ package com.taotao.cloud.rpc.common.common.support.inteceptor.impl;
 import com.taotao.cloud.rpc.common.common.support.inteceptor.RpcInterceptorContext;
 
 import java.util.Arrays;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 日志拦截器
@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogRpcInterceptor extends RpcInterceptorAdaptor {
 
-    private static final Log log = LogFactory.getLog(LogRpcInterceptor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LogRpcInterceptor.class);
 
     @Override
     public void before(RpcInterceptorContext context) {

@@ -3,7 +3,7 @@ package com.taotao.cloud.rpc.common.common.config.protocol;
 /**
  * 协议配置信息
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public interface ProtocolConfig {
 
@@ -12,7 +12,7 @@ public interface ProtocolConfig {
      * RPC
      * HTTP
      * HTTPS
-     * @since 0.0.6
+     * @since 2024.06
      * @return 协议名称
      */
     String name();

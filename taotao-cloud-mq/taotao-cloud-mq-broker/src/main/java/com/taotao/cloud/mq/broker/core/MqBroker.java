@@ -31,8 +31,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author shuigedeng
@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MqBroker extends Thread implements IMqBroker {
 
-	private static final Log log = LogFactory.getLog(MqBroker.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MqBroker.class);
 
 	/**
 	 * 端口号

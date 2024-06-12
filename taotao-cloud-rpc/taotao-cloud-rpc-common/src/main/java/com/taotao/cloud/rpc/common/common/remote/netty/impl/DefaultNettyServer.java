@@ -8,36 +8,36 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * netty 网络服务端
  * @author shuigedeng
- * @since 0.0.8
+ * @since 2024.06
  */
 public class DefaultNettyServer extends AbstractNettyServer {
 
     /**
      * 日志信息
-     * @since 0.0.8
+     * @since 2024.06
      */
-    private static final Log LOG = LogFactory.getLog(DefaultNettyServer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultNettyServer.class);
 
     /**
      * channel 信息
-     * @since 0.0.8
+     * @since 2024.06
      */
     private ChannelFuture channelFuture;
 
     /**
      * boss 线程池
-     * @since 0.0.8
+     * @since 2024.06
      */
     private EventLoopGroup bossGroup;
 
     /**
      * worker 线程池
-     * @since 0.0.8
+     * @since 2024.06
      */
     private EventLoopGroup workerGroup;
 

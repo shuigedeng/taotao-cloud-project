@@ -31,9 +31,10 @@ import com.taotao.cloud.rpc.common.common.support.status.service.StatusManager;
 import com.taotao.cloud.rpc.common.common.support.status.service.impl.DefaultStatusManager;
 import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 引用配置类
  * <p>
@@ -48,26 +49,26 @@ import org.apache.commons.logging.LogFactory;
  *
  * @param <T> 接口泛型
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  */
 public class ClientBs<T> implements ReferenceConfig<T> {
 
 	/**
 	 * ClientBs logger
 	 */
-	private static final Log log = LogFactory.getLog(ClientBs.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClientBs.class);
 
 	/**
 	 * 服务唯一标识
 	 *
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private String serviceId;
 
 	/**
 	 * 服务接口
 	 *
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private Class<T> serviceInterface;
 
@@ -76,7 +77,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
 	 * <p>
 	 * 如果为 subscribe 可以自动发现，然后填充这个字段信息。
 	 *
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private List<RpcAddress> rpcAddresses;
 
@@ -84,35 +85,35 @@ public class ClientBs<T> implements ReferenceConfig<T> {
 	/**
 	 * 调用超时时间
 	 *
-	 * @since 0.0.7
+	 * @since 2024.06
 	 */
 	private long timeout;
 
 	/**
 	 * 是否进行订阅模式
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private boolean subscribe;
 
 	/**
 	 * 注册中心列表
 	 *
-	 * @since 0.0.8
+	 * @since 2024.06
 	 */
 	private List<RpcAddress> registerCenterList;
 
 	/**
 	 * 调用服务管理类
 	 *
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private InvokeManager invokeManager;
 
 	/**
 	 * 客户端注册中心服务类
 	 *
-	 * @since 0.0.9
+	 * @since 2024.06
 	 */
 	private ClientRegisterManager clientRegisterManager;
 
@@ -177,7 +178,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
 	 *
 	 * @param <T> 泛型
 	 * @return this
-	 * @since 0.0.9
+	 * @since 2024.06
 	 */
 	public static <T> ClientBs<T> newInstance() {
 		return new ClientBs<>();
@@ -263,7 +264,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
 	 * 获取对应的引用实现 （1）处理所有的反射代理信息-方法可以抽离，启动各自独立即可。 （2）启动对应的长连接
 	 *
 	 * @return 引用代理类
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -350,7 +351,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
 	 * 构建调用上下文
 	 *
 	 * @return 引用代理上下文
-	 * @since 0.0.6
+	 * @since 2024.06
 	 */
 	private ServiceContext<T> buildServiceProxyContext() {
 		DefaultServiceContext<T> serviceContext = new DefaultServiceContext<>();

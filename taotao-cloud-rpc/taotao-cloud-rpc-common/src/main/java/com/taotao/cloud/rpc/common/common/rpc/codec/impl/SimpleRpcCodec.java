@@ -5,7 +5,7 @@
 // * 默认序列化相关处理
 // * TODO: 对于 object 的处理会导致死循环。后期修复掉这个 bug。
 // * @author shuigedeng
-// * @since 0.0.6
+// * @since 2024.06
 // */
 //@ThreadSafe
 //public class SimpleRpcCodec implements RpcCodec {

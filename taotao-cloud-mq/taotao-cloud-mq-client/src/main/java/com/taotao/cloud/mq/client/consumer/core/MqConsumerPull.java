@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 拉取消费策略
@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MqConsumerPull extends MqConsumerPush {
 
-	private static final Log log = LogFactory.getLog(MqConsumerPull.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MqConsumerPull.class);
 
 	/**
 	 * 拉取定时任务

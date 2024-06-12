@@ -16,8 +16,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * <p> 注册中心服务器处理类 </p>
  *
@@ -31,16 +31,16 @@ import org.apache.commons.logging.LogFactory;
  * （3）当配置发生变化时，需要及时通知所有的 client 端。
  * 这里就需要知道哪些是客户端？？
  *
- * @since 0.0.8
+ * @since 2024.06
  */
 @ChannelHandler.Sharable
 public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
 
-    private static final Log LOG = LogFactory.getLog(RegisterCenterServerHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RegisterCenterServerHandler.class);
 
     /**
      * 注册中心服务
-     * @since 0.0.8
+     * @since 2024.06
      */
     private final RpcRegister rpcRegister;
 
@@ -101,7 +101,7 @@ public class RegisterCenterServerHandler extends SimpleChannelInboundHandler {
     /**
      * 构建简单注册实现类
      * @return 注册实现
-     * @since 0.0.8
+     * @since 2024.06
      */
     private RpcRegister buildSimpleRpcRegister() {
         final RegisterServerService registerServerService = new DefaultRegisterServerService();

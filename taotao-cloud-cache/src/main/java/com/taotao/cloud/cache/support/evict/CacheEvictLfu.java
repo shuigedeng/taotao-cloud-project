@@ -12,28 +12,28 @@ import java.util.*;
 /**
  * 丢弃策略-LFU 最少使用频次
  * @author shuigedeng
- * @since 0.0.14
+ * @since 2024.06
  */
 public class CacheEvictLfu<K,V> extends AbstractCacheEvict<K,V> {
 
-    private static final Log log = LogFactory.getLog(CacheEvictLfu.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheEvictLfu.class);
 
     /**
      * key 映射信息
-     * @since 0.0.14
+     * @since 2024.06
      */
     private final Map<K, FreqNode<K,V>> keyMap;
 
     /**
      * 频率 map
-     * @since 0.0.14
+     * @since 2024.06
      */
     private final Map<Integer, LinkedHashSet<FreqNode<K,V>>> freqMap;
 
     /**
      *
      * 最小频率
-     * @since 0.0.14
+     * @since 2024.06
      */
     private int minFreq;
 
@@ -65,7 +65,7 @@ public class CacheEvictLfu<K,V> extends AbstractCacheEvict<K,V> {
      * 获取最小频率的 节点
      *
      * @return 结果
-     * @since 0.0.14
+     * @since 2024.06
      */
     private FreqNode<K, V> getMinFreqNode() {
         LinkedHashSet<FreqNode<K,V>> set = freqMap.get(minFreq);
@@ -81,7 +81,7 @@ public class CacheEvictLfu<K,V> extends AbstractCacheEvict<K,V> {
     /**
      * 更新元素，更新 minFreq 信息
      * @param key 元素
-     * @since 0.0.14
+     * @since 2024.06
      */
     @Override
     public void updateKey(final K key) {
@@ -142,7 +142,7 @@ public class CacheEvictLfu<K,V> extends AbstractCacheEvict<K,V> {
      * 3. 更新 minFreq 信息
      *
      * @param key 元素
-     * @since 0.0.14
+     * @since 2024.06
      */
     @Override
     public void removeKey(final K key) {

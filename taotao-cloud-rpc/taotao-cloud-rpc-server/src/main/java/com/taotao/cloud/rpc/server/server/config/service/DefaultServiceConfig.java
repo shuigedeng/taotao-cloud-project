@@ -12,27 +12,27 @@ package com.taotao.cloud.rpc.server.server.config.service;
  * （2）服务端超时时间
  *
  * @author shuigedeng
- * @since 0.0.6
+ * @since 2024.06
  * @param <T> 实现类泛型
  */
 public class DefaultServiceConfig<T> implements ServiceConfig<T> {
 
     /**
      * 服务的唯一标识
-     * @since 0.0.6
+     * @since 2024.06
      */
     private String id;
 
     /**
      * 设置引用类
-     * @since 0.0.6
+     * @since 2024.06
      */
     private T reference;
 
     /**
      * 是否注册到配置中心
      * 默认：进行注册，如果注册中心可用的话。
-     * @since 0.0.8
+     * @since 2024.06
      */
     private boolean register = true;
 
