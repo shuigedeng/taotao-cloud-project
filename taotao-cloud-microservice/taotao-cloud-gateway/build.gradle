@@ -67,9 +67,9 @@ dependencies {
 
 configurations {
     all {
-        resolutionStrategy {
-            force 'net.minidev:json-smart:2.5.1'
-        }
+        //resolutionStrategy {
+        //    force 'net.minidev:json-smart:2.5.1'
+        //}
 
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"

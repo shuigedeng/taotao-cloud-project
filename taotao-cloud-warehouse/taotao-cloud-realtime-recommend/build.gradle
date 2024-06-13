@@ -11,7 +11,7 @@ dependencies {
     implementation "org.springframework:spring-context:6.1.8"
 
     implementation "javassist:javassist:3.12.1.GA"
-    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
     implementation "commons-lang:commons-lang:2.6"
     implementation "net.sf.barcode4j:barcode4j:2.1"
     implementation "org.jsoup:jsoup:1.17.2"
