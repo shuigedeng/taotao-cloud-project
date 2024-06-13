@@ -135,8 +135,9 @@ configurations {
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
             //force 'org.antlr:antlr4:4.13.1'
-            force 'net.minidev:json-smart:2.5.1'
-
+            //force 'net.minidev:json-smart:2.5.1'
+            //todo 临时使用
+            force "io.opentelemetry:opentelemetry-api-incubator:1.39.0-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"
