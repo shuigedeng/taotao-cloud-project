@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
 
       - name: show release
         run: lsb_release -a
@@ -41,7 +41,7 @@ jobs:
           native-image-job-reports: 'true'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.3.2
+        uses: gradle/actions/setup-gradle@v3.4.1
         with:
           gradle-version: 8.7
 
@@ -79,7 +79,7 @@ jobs:
     #    os: [ macos-latest, windows-latest, ubuntu-latest ]
     #steps:
     #  - name: Checkout Project
-    #    uses: actions/checkout@v3
+    #    uses: actions/checkout@v4.1.7
     #  - uses: graalvm/setup-graalvm@v1
     #    with:
     #      version: '22.3.2'
@@ -88,7 +88,7 @@ jobs:
     #      github-token: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
     #      native-image-job-reports: 'true'
     #  - name: Gradle BootJar taotao-cloud-monitor
-    #    uses: gradle/actions/setup-gradle@v3.3.2
+    #    uses: gradle/actions/setup-gradle@v3.4.1
     #    with:
     #      gradle-version: 7.6
     #      arguments: nativeBuild

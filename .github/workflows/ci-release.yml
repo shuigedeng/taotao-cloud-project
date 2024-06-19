@@ -26,7 +26,7 @@ jobs:
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
 
       - name: Get tag name from ref
         shell: bash
@@ -50,7 +50,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.3.2
+        uses: gradle/actions/setup-gradle@v3.4.1
         with:
           gradle-version: 8.7
 

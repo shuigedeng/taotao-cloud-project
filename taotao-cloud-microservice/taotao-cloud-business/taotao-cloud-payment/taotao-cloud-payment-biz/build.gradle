@@ -38,7 +38,7 @@ dependencies {
     implementation "com.paypal.sdk:checkout-sdk:2.0.0"
 
     //https://search.maven.org/artifact/com.yungouos.pay/yungouos-pay-sdk
-    implementation "com.yungouos.pay:yungouos-pay-sdk:2.0.33"
+    implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.34'
 
     //https://search.maven.org/artifact/jakarta.jms/jakarta.jms-api
     implementation 'jakarta.jms:jakarta.jms-api:3.1.0'
