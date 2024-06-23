@@ -110,7 +110,7 @@ for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }
 
-def twoLayerProjects = ['bigdata', 'plugin', 'mq', 'rpc', 'tx']
+def twoLayerProjects = ['bigdata', 'plugin', 'mq', 'rpc', 'tx', 'job']
 for (project in twoLayerProjects) {
     def dir = "taotao-cloud-${project}"
     file("${rootDir}/${dir}").eachDir { directory ->

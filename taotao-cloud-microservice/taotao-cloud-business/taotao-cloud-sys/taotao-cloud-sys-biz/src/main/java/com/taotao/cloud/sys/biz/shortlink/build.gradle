@@ -1,0 +1,58 @@
+package com.taotao.cloud.sys.biz.shortlink
+
+dependencies {
+    implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-shortlink:taotao-cloud-shortlink-api")
+
+    implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-eventbus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
+    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
+        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
+    }
+
+    annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
+    api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
+    api "jakarta.persistence:jakarta.persistence-api:3.1.0"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
+}
+
+mainClassName = "com.taotao.cloud.shortlink.biz.TaoTaoCloudShortlinkApplication"
+description = "短链接中心biz"
+archivesBaseName = 'taotao-cloud-shortlink'
+
+configurations {
+    all {
+        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
+
+        //resolutionStrategy {
+        //    //force "org.codehaus.groovy:groovy:4.0.0"
+        //    force 'org.antlr:antlr4:4.13.1'
+        //}
+
+        //exclude group: "log4j", module: "log4j"
+        //exclude group: "log4j", module: "slf4j-simple"
+        //exclude group: "org.slf4j", module: "slf4j-log4j12"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-slf4j-impl"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-to-slf4j"
+        //exclude group: "org.apache.logging.log4j", module: "log4j-api"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+}
+
+smartdoc {
+    configFile = file("src/main/resources/smart-doc.json")
+    // exclude artifact
+    //exclude "org.springframework.boot:xx"
+    //exclude "org.springframework.boot:ddd"
+    // 你可以使用include配置来让插件自动加载指定依赖的source.
+    //include "org.springframework.boot:spring-boot-starter-tomcat"
+}

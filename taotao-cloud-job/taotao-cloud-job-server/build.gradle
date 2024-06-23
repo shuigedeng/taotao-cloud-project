@@ -1,10 +1,8 @@
 dependencies {
+    api project(":taotao-cloud-job:taotao-cloud-job-common")
     api project(":taotao-cloud-job:taotao-cloud-job-core")
-    api project(":taotao-cloud-job:taotao-cloud-job-filter")
-    api project(":taotao-cloud-job:taotao-cloud-job-filter")
-    api project(":taotao-cloud-job:taotao-cloud-job-metrics")
-    api project(":taotao-cloud-job:taotao-cloud-job-plugin")
-    api project(":taotao-cloud-job:taotao-cloud-job-serialization")
-    api project(":taotao-cloud-job:taotao-cloud-job-registry")
+    api project(":taotao-cloud-job:taotao-cloud-job-retry")
+    api project(":taotao-cloud-job:taotao-cloud-job-api")
+    api project(":taotao-cloud-job:taotao-cloud-job-dag")
 }
 
