@@ -418,7 +418,116 @@ rocketmq:
       # 一次拉取消息最大值，注意是拉取消息的最大值而非消费最大值
       pull-batch-size: 10
 
+powerjob:
+  worker:
+    enabled: false
+    port: 27777
+    protocol: akka
+    app-name: ${spring.application.name}
+    server-address: 192.168.10.220:7700
+    store-strategy: disk
+    max-appended-wf-context-length: 8192
+    max-result-length: 8192
+
+elasticjob:
+  enabled: false   # 此处开启会通过 ElasticJobTracingConfiguration 注入一个tracingDataSource的bean 会和QuartzAutoConfiguration自动配置的的@ConditionalOnSingleCandidate(DataSource.class)冲突 启动会报错
+  #dump:
+  #  port: 9888
+  tracing:
+    type: RDB
+    #data-source:
+    #  type: com.zaxxer.hikari.HikariDataSource
+    #  url: jdbc:mysql://192.168.10.220:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #  driver-class-name: com.mysql.cj.jdbc.Driver
+    #  username: root
+    #  password: 123456
+    #  hikari:
+    #    auto-commit: true         # 从池返回的连接的默认自动提交行为 默认true
+    #    connection-timeout: 350000         # 客户端等待连接池的最大毫秒数
+    #    idle-timeout: 180000         # 允许连接在连接池中空闲的最大时间（毫秒）
+    #    login-timeout: 5
+    #    validation-timeout: 3000         # 连接测试活动的最大时间量
+    #    max-lifetime: 1800000         # 池中关闭连接后的最长生命周期
+    #    read-only: false
+    #    connection-test-query: SELECT 1
+    #    maximum-pool-size: 200
+    #    minimum-idle: 10
+    #    pool-name: DatebookHikariCP
+    #    register-mbeans: true
+    #    data-source-properties:
+    #      cachePrepStmts: true
+    #      prepStmtCacheSize: 250
+  reg-center:
+    server-lists: 192.168.10.220:2181
+    namespace: taotao-cloud-elasticjob
+  jobs:
+    taotao-cloud-simple-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.job.elastic.TaoTaoSimpleJob
+      jobBootstrapBeanName: taoTaoSimpleBootstrapJob
+      cron: 0 0/30 * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+      description: MySimpleJob
+      overwrite: false
+      job-parameter: hello javaboy!
+      jobExecutorServiceHandlerType: myJobExecutorServiceHandler
+      jobListenerTypes:
+        - myJobListener
+      jobErrorHandlerType: EMAIL
+      props:
+        dingtalk:
+          webhook: you_webhook
+          keyword: taotao-cloud
+          secret: you_secret
+          connectTimeout: 3000
+          readTimeout: 5000
+        email:
+          host: smtp.qq.com
+          port: 465
+          username: 981376577@qq.com
+          password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
+          useSsl: true
+          subject:
+          from: 981376577@qq.com
+          to: 981376577@qq.com
+          cc:
+          bcc:
+          debug: false
+    taotao-cloud-data-flow-job:
+      elastic-job-class: com.taotao.cloud.sys.biz.job.elastic.TaoTaoDataflowJob
+      jobBootstrapBeanName: taoTaoDataflowBootstrapJob
+      cron: 0 0/30 * * * ?
+      timeZone: GMT+08:00
+      shardingTotalCount: 3
+      shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+    taotao-cloud-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoScriptBootstrapJob
+      cron: 0 0/30 * * * ?
+      shardingTotalCount: 3
+      props:
+        script.command.line: "echo SCRIPT Job: "
+    taotao-cloud-manual-script-job:
+      elasticJobType: SCRIPT
+      jobBootstrapBeanName: taoTaoManualScriptBootstrapJob
+      shardingTotalCount: 9
+      props:
+        script.command.line: "echo Manual SCRIPT Job: "
+
 spring:
+  file-storage: #文件存储配置，不使用的情况下可以不写
+    default-platform: minio #默认使用的存储平台
+    thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
+    minio: # MinIO，由于 MinIO SDK 支持 AWS S3，其它兼容 AWS S3 协议的存储平台也都可配置在这里
+      - platform: minio # 存储平台标识
+        enable-storage: true  # 启用存储
+        access-key: xxx
+        secret-key: xxx
+        end-point: xxx
+        bucket-name: xxx
+        domain: xx/ # 访问域名，注意“/”结尾，例如：http://minio.abc.com/abc/
+        base-path: hy/ # 基础路径
   threads:
     virtual:
       #1.Tomcat将使用虚拟线程来处理HTTP请求。这意味着处理Web请求的应用程序代码（例如控制器中的方法）将在虚拟线程上运行。
@@ -1102,6 +1211,54 @@ art:
     enable: false
 taotao:
   cloud:
+    job:
+      scheduled:
+        enabled: true
+      quartz:
+        enabled: true
+      elastic:
+        enabled: true
+      xxl:
+        enabled: true
+        admin:
+          addresses: http://192.168.10.220:9110/xxl-job-admin/,http://192.168.10.220:9111/xxl-job-admin/
+        executor:
+          appname: ${spring.application.name}
+          ip:
+          port: 1114
+          access-token: f4snMzv6qazC0kxc1A8l51rK0ksJLs
+          log-path: ${user.home}/logs/xxl-job/${spring.application.name}
+    oss:
+      enabled: true
+      type: minio
+      minio:
+        url: xxx
+        access-key: xxx
+        secret-key: xxx
+        bucket-name: xtest
+      miniooss:
+        endpoint: xxxxxx
+        access-key: xxxx
+        secret-key: xxxx
+        bucket-name: xstest
+        #base-path: taotao-cloud-dev
+        slice-config:
+          task-num: 8
+          part-size: 104857600
+        client-config:
+          connect-timeout: 5000
+        #oss-config:
+        #  minio1:
+        #    endpoint: https://play.min.io
+        #    access-key: Q3AM3UQ867SPQQA43P2F
+        #    secret-key: zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
+        #    bucket-name: asiatrip
+        #    base-path: /test
+        #    slice-config:
+        #      task-num: 8
+        #      part-size: 104857600
+        #    client-config:
+        #      connect-timeout: 5000
     dinger:
       enabled: false
       httpclient:

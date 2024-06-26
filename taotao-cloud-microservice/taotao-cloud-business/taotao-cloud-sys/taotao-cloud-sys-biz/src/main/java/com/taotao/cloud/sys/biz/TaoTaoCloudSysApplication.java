@@ -59,6 +59,7 @@ import org.springframework.context.annotation.ComponentScan;
 	"com.taotao.cloud.sys.biz.repository.cls"
 })
 @TaoTaoCloudApplication
+@EnableFileStorage
 public class TaoTaoCloudSysApplication extends SpringBootServletInitializer {
 
 	@Override

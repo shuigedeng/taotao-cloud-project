@@ -15,33 +15,34 @@
  */
 
 package com.taotao.cloud.sys.biz.config.redis.delegate;
-//
-// import com.fasterxml.jackson.core.JsonProcessingException;
-// import com.taotao.cloud.common.utils.common.JsonUtils;
-// import com.taotao.cloud.sys.biz.model.entity.system.Log;
-// import com.taotao.cloud.sys.biz.service.business.ILogService;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Component;
-//
-/// **
-// * SensitiveWordsTopicMessageDelegate
-// *
-// * @author shuigedeng
-// * @version 2022.03
-// * @since 2022/02/09 20:46
-// */
-// @Component
-// public class RequestLogTopicMessageDelegate {
-//
-//	@Autowired
-//	private ILogService logService;
-//
-//	public void handleRequestLog(String message, String channel) {
-//		try {
-//			Log log = JsonUtils.MAPPER.readValue(message, Log.class);
-//			logService.save(log);
-//		} catch (JsonProcessingException e) {
-//			LogUtils.error(e);
-//		}
-//	}
-// }
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.log.biz.entity.Log;
+import com.taotao.cloud.log.biz.service.ILogService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * SensitiveWordsTopicMessageDelegate
+ *
+ * @author shuigedeng
+ * @version 2022.03
+ * @since 2022/02/09 20:46
+ */
+@Component
+public class RequestLogTopicMessageDelegate {
+
+    @Autowired
+    private ILogService logService;
+
+    public void handleRequestLog(String message, String channel) {
+        try {
+            Log log = JsonUtils.MAPPER.readValue(message, Log.class);
+            logService.save(log);
+        } catch (JsonProcessingException e) {
+            LogUtils.error(e);
+        }
+    }
+}
