@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultClientRegisterManager implements ClientRegisterManager {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultClientRegisterManager.class);
+	private static final Logger log = LoggerFactory.getLogger(DefaultClientRegisterManager.class);
 
 	/**
 	 * 服务调用信息管理类

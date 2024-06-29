@@ -46,7 +46,7 @@ public class RpcServerHandler extends SimpleChannelInboundHandler {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		final String id = ctx.channel().id().asLongText();
-		log.info("[Server] channel {} connected " + id);
+		LOG.info("[Server] channel {} connected " + id);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class RpcServerHandler extends SimpleChannelInboundHandler {
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		log.error("[Server] meet ex: ", cause);
+		LOG.error("[Server] meet ex: ", cause);
 		ctx.close();
 	}
 

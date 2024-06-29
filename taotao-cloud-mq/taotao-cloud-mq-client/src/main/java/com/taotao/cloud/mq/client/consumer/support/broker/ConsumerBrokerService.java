@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ConsumerBrokerService implements IConsumerBrokerService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ConsumerBrokerService.class);
+	private static final Logger log = LoggerFactory.getLogger(ConsumerBrokerService.class);
 
 	/**
 	 * 分组名称

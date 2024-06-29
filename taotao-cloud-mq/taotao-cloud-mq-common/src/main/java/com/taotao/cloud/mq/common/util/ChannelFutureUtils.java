@@ -74,7 +74,7 @@ public class ChannelFutureUtils {
 				list.add(rpcChannelFuture);
 			}
 			catch (Exception exception) {
-				log.error("注册到 broker 服务端异常", exception);
+				LOG.error("注册到 broker 服务端异常", exception);
 				if (check) {
 					throw new MqException(MqCommonRespCode.REGISTER_TO_BROKER_FAILED);
 				}

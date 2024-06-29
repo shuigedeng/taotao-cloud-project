@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MqBrokerHandler extends SimpleChannelInboundHandler {
 
-	private static final Logger LOG = LoggerFactory.getLogger(MqBrokerHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(MqBrokerHandler.class);
 
 	/**
 	 * 调用管理类

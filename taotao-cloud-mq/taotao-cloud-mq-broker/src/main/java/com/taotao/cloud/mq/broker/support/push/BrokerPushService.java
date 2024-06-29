@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BrokerPushService implements IBrokerPushService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BrokerPushService.class);
+	private static final Logger log = LoggerFactory.getLogger(BrokerPushService.class);
 
 	private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
 

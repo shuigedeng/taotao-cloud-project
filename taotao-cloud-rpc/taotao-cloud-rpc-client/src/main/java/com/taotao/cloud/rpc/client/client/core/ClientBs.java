@@ -288,7 +288,7 @@ public class ClientBs<T> implements ReferenceConfig<T> {
 			reference = referenceProxy.proxy();
 		}
 		else {
-			log.info("[Client] generic reference proxy created.");
+			LOG.info("[Client] generic reference proxy created.");
 			reference = (T) new GenericReferenceProxy(proxyContext, remoteInvokeService);
 		}
 		proxyContext.statusManager().status(StatusEnum.ENABLE.code());

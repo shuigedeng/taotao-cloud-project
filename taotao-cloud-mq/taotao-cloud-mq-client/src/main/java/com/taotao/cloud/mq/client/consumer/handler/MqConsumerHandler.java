@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MqConsumerHandler extends SimpleChannelInboundHandler {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MqConsumerHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(MqConsumerHandler.class);
 
     /**
      * 调用管理类

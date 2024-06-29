@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MqProducer extends Thread implements IMqProducer {
 
-	private static final Logger LOG = LoggerFactory.getLogger(MqProducer.class);
+	private static final Logger log = LoggerFactory.getLogger(MqProducer.class);
 
 	/**
 	 * 分组名称

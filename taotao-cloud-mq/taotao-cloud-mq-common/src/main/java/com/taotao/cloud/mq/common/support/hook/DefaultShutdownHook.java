@@ -14,7 +14,7 @@ public class DefaultShutdownHook extends AbstractShutdownHook {
     /**
      * DefaultShutdownHook logger
      */
-    private static final Log logger = LogFactory.getLog(DefaultShutdownHook.class);
+	private static final Logger logger = LoggerFactory.getLogger(DefaultShutdownHook.class);
 
     /**
      * 调用管理类

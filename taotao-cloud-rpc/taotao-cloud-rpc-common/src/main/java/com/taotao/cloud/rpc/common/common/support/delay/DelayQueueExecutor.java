@@ -56,7 +56,7 @@ public class DelayQueueExecutor implements DelayExecutor {
                     runnable.run();
 //                    log.info("完成获取延迟 {}ms 的可运行对象", delayInMills);
                 } catch (InterruptedException e) {
-                    log.error("延迟任务执行遇到异常", e);
+                    //log.error("延迟任务执行遇到异常", e);
                 }
             }
         }

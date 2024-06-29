@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TxManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TxManagerApplication.class, args);
+//		SpringApplication.run(TxManagerApplication.class, args);
 	}
 
 }

@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MqBroker extends Thread implements IMqBroker {
 
-	private static final Logger LOG = LoggerFactory.getLogger(MqBroker.class);
+	private static final Logger log = LoggerFactory.getLogger(MqBroker.class);
 
 	/**
 	 * 端口号

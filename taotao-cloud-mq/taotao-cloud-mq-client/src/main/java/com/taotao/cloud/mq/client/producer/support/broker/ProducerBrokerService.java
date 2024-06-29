@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ProducerBrokerService implements IProducerBrokerService {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ProducerBrokerService.class);
+	private static final Logger log = LoggerFactory.getLogger(ProducerBrokerService.class);
 
 	/**
 	 * 分组名称

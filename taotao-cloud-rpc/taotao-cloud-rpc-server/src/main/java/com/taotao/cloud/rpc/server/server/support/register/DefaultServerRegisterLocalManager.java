@@ -66,7 +66,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
 		@Override
 		public void run() {
 			//1. 每 2 秒钟，向 channel 发送请求信息
-			log.debug(("[HEARTBEAT] 开始定时执行心跳"));
+			LOG.debug(("[HEARTBEAT] 开始定时执行心跳"));
 //			String currentIp = NetUtil.getLocalIp();
 			ServerHeartbeatBody body = new ServerHeartbeatBody();
 			body.ip("currentIp");
@@ -78,7 +78,7 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
 			for (Channel channel : registerCenterChannelMap.values()) {
 				channel.writeAndFlush(notifyMessage);
 			}
-			log.debug("[HEARTBEAT] 完成定时执行心跳");
+			LOG.debug("[HEARTBEAT] 完成定时执行心跳");
 		}
 	}
 
@@ -181,9 +181,9 @@ public class DefaultServerRegisterLocalManager implements ServerRegisterManager 
 
 	@Override
 	public void clearRegisterChannel() {
-		log.info("[Rpc Server] 开始清空对应的注册中心 channel future");
+		LOG.info("[Rpc Server] 开始清空对应的注册中心 channel future");
 		this.registerCenterChannelMap.clear();
-		log.info("[Rpc Server] 完成清空对应的注册中心 channel future");
+		LOG.info("[Rpc Server] 完成清空对应的注册中心 channel future");
 	}
 
 	/**

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class InvokeService implements IInvokeService {
 
-	private static final Log logger = LogFactory.getLog(InvokeService.class);
+	private static final Logger logger = LoggerFactory.getLogger(InvokeService.class);
 
 	/**
 	 * 请求序列号 map （1）这里后期如果要添加超时检测，可以添加对应的超时时间。 可以把这里调整为 map

@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MqConsumerPush extends Thread implements IMqConsumer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MqConsumerPush.class);
+    private static final Logger log = LoggerFactory.getLogger(MqConsumerPush.class);
 
     /**
      * 组名称
