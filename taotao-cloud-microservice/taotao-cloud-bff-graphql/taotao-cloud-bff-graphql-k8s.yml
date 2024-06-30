@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-bff-graphql-configmap
 data:
   APPLICATION_NAME: "taotao-cloud-bff-graphql"
-  APPLICATION_VERSION: '2024.07'
+  APPLICATION_VERSION: '2024.08'
 ---
 apiVersion: v1
 kind: Secret
@@ -86,7 +86,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-bff-graphql:2024.07
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-bff-graphql:2024.08
           imagePullPolicy: IfNotPresent
           ports:
             - name: bff-graphql-port
