@@ -28,7 +28,7 @@ buildscript {
         querydslAptVersion = "5.1.0"
         mapstructProcessorVersion = "1.6.0.Beta2"
         lombokMapstructBindingVersion = "0.2.0"
-        lombokVersion = "1.18.32"
+        lombokVersion = "1.18.34"
         recordBuilderVersion = "41"
     }
 
@@ -147,7 +147,7 @@ plugins {
 
     //此插件在构建期间生成 json OpenAPI 描述
     // https://plugins.gradle.org/plugin/org.springdoc.openapi-gradle-plugin
-    id "org.springdoc.openapi-gradle-plugin" version "1.8.0"
+    id "org.springdoc.openapi-gradle-plugin" version "1.9.0"
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.ly.smart-doc

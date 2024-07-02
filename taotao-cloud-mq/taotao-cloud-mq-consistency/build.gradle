@@ -16,6 +16,6 @@ dependencies {
     implementation 'com.google.guava:guava:33.2.1-jre'
     implementation 'org.rocksdb:rocksdbjni:9.2.1'
 
-    implementation "org.projectlombok:lombok:1.18.32"
-    annotationProcessor "org.projectlombok:lombok:1.18.32"
+    implementation "org.projectlombok:lombok:1.18.34"
+    annotationProcessor "org.projectlombok:lombok:1.18.34"
 }
