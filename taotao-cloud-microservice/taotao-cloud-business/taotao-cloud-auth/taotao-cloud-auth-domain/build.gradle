@@ -129,7 +129,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     api "com.nimbusds:nimbus-jose-jwt:9.40"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    api 'com.nimbusds:oauth2-oidc-sdk:11.12'
+    api 'com.nimbusds:oauth2-oidc-sdk:11.13'
 
     api "org.apache.commons:commons-collections4"
 

@@ -127,7 +127,7 @@ Maven:
  Roketmq              | 5.2.0           
  Spring Security      | 6.3.2           
  Mybatis Plus         | 3.5.7         
- Hutool               | 6.0.0-M13         
+ Hutool               | 6.0.0-M14         
  Mysql                | 8.3.0          
  Querydsl             | 5.1.0           
  Swagger              | 3.0.0           

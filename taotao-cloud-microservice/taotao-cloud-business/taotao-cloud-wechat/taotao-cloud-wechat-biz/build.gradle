@@ -33,7 +33,7 @@ dependencies {
     implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.6.2.B"
 
     //https://github.com/lcy19930619/wechat-spring-boot-starter
-    //implementation 'net.jlxxw:wechat-spring-boot-starter:1.0.2.20230414'
+    //implementation 'net.jlxxw:wechat-spring-boot-starter:2.0.1.20240302'
 
     //开源的企业微信开放 API 的 Java 实现
     implementation 'cn.felord:wecom-sdk:1.2.7'

@@ -5,8 +5,8 @@ plugins {
 
     //https://github.com/siouan/frontend-gradle-plugin.git
     //https://siouan.github.io/frontend-gradle-plugin/
-    //https://plugins.gradle.org/plugin/org.siouan.frontend-jdk17
-    id "org.siouan.frontend-jdk17" version "8.0.0"
+    //https://plugins.gradle.org/plugin/org.siouan.frontend-jdk21
+    id "org.siouan.frontend-jdk21" version "8.1.0"
 }
 
 mainClassName = ""

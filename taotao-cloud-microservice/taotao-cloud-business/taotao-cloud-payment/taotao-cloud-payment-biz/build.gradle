@@ -21,14 +21,14 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java
-    implementation('com.alipay.sdk:alipay-sdk-java:4.39.74.ALL') {
+    implementation('com.alipay.sdk:alipay-sdk-java:4.39.123.ALL') {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"
     }
 
     //https://search.maven.org/artifact/com.github.javen205/IJPay-All
-    implementation "com.github.javen205:IJPay-All:2.9.10-17"
+    implementation "com.github.javen205:IJPay-All:2.9.11"
 
     //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
     implementation "com.github.binarywang:weixin-java-pay:4.6.2.B"

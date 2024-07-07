@@ -34,8 +34,8 @@ dependencies {
     implementation "com.github.whvcse:easy-captcha:1.6.2"
     implementation "jakarta.servlet:jakarta.servlet-api"
 
-    implementation "org.eclipse.jgit:org.eclipse.jgit:6.9.0.202403050737-r"
-    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:6.9.0.202403050737-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r"
+    implementation "org.eclipse.jgit:org.eclipse.jgit.archive:6.10.0.202406032230-r"
 
     implementation "org.springframework.boot:spring-boot-autoconfigure"
 

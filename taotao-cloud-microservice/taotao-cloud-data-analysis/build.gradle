@@ -12,7 +12,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
     //https://search.maven.org/artifact/com.clickhouse/clickhouse-jdbc
-    implementation "com.clickhouse:clickhouse-jdbc:0.6.1"
+    implementation "com.clickhouse:clickhouse-jdbc:0.6.2"
 
     //implementation "org.hibernate.common:hibernate-commons-annotations:6.0.5.Final"
     //implementation "jakarta.xml.bind:jakarta.xml.bind-api:4.0.0"
@@ -28,7 +28,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.1'
 
     //https://search.maven.org/artifact/org.apache.hbase/hbase-client
-    implementation 'org.apache.hbase:hbase-client:3.0.0-alpha-4'
+    implementation 'org.apache.hbase:hbase-client:3.0.0-beta-1'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
