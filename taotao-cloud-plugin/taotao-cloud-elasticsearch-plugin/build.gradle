@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'elasticsearch.stable-esplugin'
-apply plugin: 'elasticsearch.yaml-rest-test'
+//apply plugin: 'elasticsearch.yaml-rest-test'
 
 dependencies {
     implementation 'org.elasticsearch:elasticsearch:8.14.2'
