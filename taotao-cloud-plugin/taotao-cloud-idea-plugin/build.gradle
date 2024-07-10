@@ -1,3 +1,10 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 plugins {
     id "java"
     //https://plugins.gradle.org/plugin/org.jetbrains.intellij

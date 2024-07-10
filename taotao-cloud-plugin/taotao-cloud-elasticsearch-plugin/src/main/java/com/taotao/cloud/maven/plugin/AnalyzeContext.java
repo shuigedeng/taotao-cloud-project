@@ -1,3 +1,10 @@
+package com.taotao.cloud.maven.plugin;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.HashSet;
+import java.util.Set;
+
 public class AnalyzeContext {
 
     /**

@@ -1,3 +1,8 @@
+import com.sun.source.util.Plugin;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class CityPopulationAggregationPlugin extends Plugin {
  
     public CityPopulationAggregationPlugin(Settings settings) {

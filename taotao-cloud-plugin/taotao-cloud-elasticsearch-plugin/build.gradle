@@ -16,6 +16,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: "idea"
 apply plugin: 'elasticsearch.stable-esplugin'
 //apply plugin: 'elasticsearch.yaml-rest-test'
 
