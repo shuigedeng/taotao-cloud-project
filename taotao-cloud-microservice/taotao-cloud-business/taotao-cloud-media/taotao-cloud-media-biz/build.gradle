@@ -52,6 +52,10 @@ dependencies {
     //mqtt-spring-boot-starter https://github.com/tocrhz/mqtt-spring-boot-starter
     //https://search.maven.org/artifact/com.github.tocrhz/mqtt-spring-boot-starter
     //compile 'com.github.tocrhz:mqtt-spring-boot-starter:2.0.2'
+
+    //电子印章的一站式解决方案
+    //使用 Spring Boot 3.x 与图形学技术，添加电子印章防伪特征
+    implementation 'com.github.jai-imageio:jai-imageio-core:1.4.0'
 }
 
 mainClassName = "com.taotao.cloud.media.biz.TaotaoCloudMediaApplication"

@@ -43,7 +43,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.4.1
         with:
-          gradle-version: 8.7
+          gradle-version: 8.9
 
       - name: Example step
         run: |

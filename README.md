@@ -21,7 +21,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.8、jdk21, 支持graalvm21, 采用最新的spring 6.1.10、SpringBoot 3.3.1、SpringCloud 2023.0.3、SpringSecurity 6.3.1、Nacos 2.3.2、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.9、jdk21, 支持graalvm21, 采用最新的spring 6.1.11、SpringBoot 3.3.1、SpringCloud 2023.0.3、SpringSecurity 6.3.1、Nacos 2.3.2、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
@@ -71,7 +71,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
-GRALE_VERSION >= 8.8
+GRALE_VERSION >= 8.9
 IDEA_VERSION >= 2024.1.4
 ```
 
@@ -115,7 +115,7 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.1.10           
+ Spring               | 6.1.11           
  Spring Boot          | 3.3.01           
  Spring Cloud         | 2023.0.3        
  Spring Cloud Alibaba | 2023.0.1.0

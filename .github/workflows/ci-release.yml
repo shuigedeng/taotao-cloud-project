@@ -52,7 +52,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.4.1
         with:
-          gradle-version: 8.7
+          gradle-version: 8.9
 
       #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-tx
