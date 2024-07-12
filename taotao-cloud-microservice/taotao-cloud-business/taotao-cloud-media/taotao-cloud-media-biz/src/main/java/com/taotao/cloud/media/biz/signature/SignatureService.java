@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 public class SignatureService {
-
+	//为了实现防伪特征，我们将在生成电子印章时，通过图像处理技术添加独特的特征标示。
     // 生成带防伪特征的电子印章
     public void generateSeal(String text) throws IOException {
         int width = 200;
@@ -45,7 +45,7 @@ public class SignatureService {
     }
 
     // 添加防伪特征
-    private void addAntiForgeryFeature(Graphics2D g2d, int width, int height) {
+    private void addAntiForgeryFeature1(Graphics2D g2d, int width, int height) {
         // 生成唯一标示符
         String uniqueID = UUID.randomUUID().toString();
 
@@ -55,4 +55,30 @@ public class SignatureService {
 
         // 更复杂的图形处理逻辑可在此处添加
     }
+	//使用唯一标示符添加防伪特征
+	//给每个生成的电子印章添加一个唯一的标示符，如UUID。这是一个全局唯一的标示符，可以通过相应的算法生成。添加标示符的具体步骤如下：
+	//
+	//生成唯一标示符：使用Java中的UUID类生成一个唯一的标示符。
+	//
+	//标示符的图形化：我们可以将这个标示符直接以文本形式绘制到印章图像上，也可以将其转换为二维码图案并添加到印章中。
+	//
+	//位置选择：选择一个合适的位置绘制标示符，使得标示符不影响印章的整体视觉效果，同时不容易被故意覆盖或删除。
+	private void addAntiForgeryFeature(Graphics2D g2d, int width, int height) {
+		// 1. 生成唯一标示符
+		String uniqueID = UUID.randomUUID().toString();
+
+		// 2. 生成标示符的二维码图案（这里简单示例为字符串）
+		// 实际应用中可以集成二维码生成库，如ZXing
+		int fontSize = 10;
+		g2d.setFont(new Font("Serif", Font.PLAIN, fontSize));
+		int textWidth = g2d.getFontMetrics().stringWidth(uniqueID);
+
+		// 3. 设定绘图位置，比如印章的右下角
+		int x = width - textWidth - 10;
+		int y = height - 10;
+
+		// 设置防伪特征的颜色（如黑色）
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(uniqueID, x, y);
+	}
 }
