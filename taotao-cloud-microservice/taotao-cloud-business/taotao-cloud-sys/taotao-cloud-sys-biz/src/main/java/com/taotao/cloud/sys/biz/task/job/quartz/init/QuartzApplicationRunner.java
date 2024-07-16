@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.task.job.quartz.init;
 
-import com.taotao.cloud.job.biz.quartz.service.QuartzJobService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -17,8 +17,6 @@
 package com.taotao.cloud.sys.biz.supports.core.db.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.log.biz.log.core.db.convert.LogConvert;
-import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;

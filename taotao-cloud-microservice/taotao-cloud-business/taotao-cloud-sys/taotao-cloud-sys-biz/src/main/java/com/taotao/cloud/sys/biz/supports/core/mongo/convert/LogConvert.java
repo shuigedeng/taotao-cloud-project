@@ -16,14 +16,6 @@
 
 package com.taotao.cloud.sys.biz.supports.core.mongo.convert;
 
-import com.taotao.cloud.log.biz.log.core.mongo.entity.DataVersionLogMongo;
-import com.taotao.cloud.log.biz.log.core.mongo.entity.LoginLogMongo;
-import com.taotao.cloud.log.biz.log.core.mongo.entity.OperateLogMongo;
-import com.taotao.cloud.log.biz.log.dto.DataVersionLogDto;
-import com.taotao.cloud.log.biz.log.dto.LoginLogDto;
-import com.taotao.cloud.log.biz.log.dto.OperateLogDto;
-import com.taotao.cloud.log.biz.log.param.LoginLogParam;
-import com.taotao.cloud.log.biz.log.param.OperateLogParam;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -17,16 +17,9 @@
 package com.taotao.cloud.sys.biz.supports.largefile.template;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.file.biz.largefile.constant.FileConstant;
-import com.taotao.cloud.file.biz.largefile.po.FileUpload;
-import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
-import com.taotao.cloud.file.biz.largefile.strategy.SliceUploadStrategy;
-import com.taotao.cloud.file.biz.largefile.util.DateUtil;
-import com.taotao.cloud.file.biz.largefile.util.FileMD5Util;
-import com.taotao.cloud.file.biz.largefile.util.FilePathUtil;
-import com.taotao.cloud.file.biz.largefile.util.FileUtil;
-import com.taotao.cloud.file.biz.largefile.util.RedisUtil;
-import com.taotao.cloud.file.biz.largefile.util.SpringContextHolder;
+import com.taotao.cloud.sys.biz.supports.largefile.po.FileUploadRequest;
+import com.taotao.cloud.sys.biz.supports.largefile.strategy.SliceUploadStrategy;
+import com.taotao.cloud.sys.biz.supports.largefile.util.FilePathUtil;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;

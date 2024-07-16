@@ -20,8 +20,6 @@ import com.taotao.cloud.common.constant.RedisConstant;
 import com.taotao.cloud.common.support.thread.MDCThreadPoolExecutor;
 import com.taotao.cloud.common.support.thread.ThreadPoolFactory;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.log.biz.config.redis.delegate.DataVersionLogTopicMessageDelegate;
-import com.taotao.cloud.log.biz.config.redis.delegate.RequestLogTopicMessageDelegate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;

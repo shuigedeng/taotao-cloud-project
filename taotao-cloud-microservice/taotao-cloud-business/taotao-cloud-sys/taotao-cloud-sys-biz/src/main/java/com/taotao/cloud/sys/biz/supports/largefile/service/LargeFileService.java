@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.service;
 
-import com.taotao.cloud.file.biz.largefile.po.FileUpload;
-import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
 import java.io.IOException;
 
 public interface LargeFileService {

@@ -16,10 +16,8 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.template;
 
-import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
-import com.taotao.cloud.file.biz.largefile.util.FilePathUtil;
-import com.taotao.cloud.file.biz.largefile.util.FileUtil;
-import com.taotao.cloud.sys.biz.file.src.main.java.com.taotao.cloud.file.biz.largefile.template.SliceUploadTemplate;
+import com.taotao.cloud.sys.biz.supports.largefile.po.FileUploadRequest;
+import com.taotao.cloud.sys.biz.supports.largefile.util.FilePathUtil;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;

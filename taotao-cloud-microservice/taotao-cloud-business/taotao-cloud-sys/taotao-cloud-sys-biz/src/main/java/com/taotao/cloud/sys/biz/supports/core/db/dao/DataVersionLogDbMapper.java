@@ -17,7 +17,6 @@
 package com.taotao.cloud.sys.biz.supports.core.db.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.taotao.cloud.log.biz.log.core.db.entity.DataVersionLogDb;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

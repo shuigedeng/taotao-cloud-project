@@ -2,9 +2,6 @@ package com.taotao.cloud.sys.biz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
-import com.taotao.cloud.job.biz.quartz.entity.QuartzJob;
-import com.taotao.cloud.job.biz.quartz.mapper.QuartzJobMapper;
 import com.taotao.cloud.job.quartz.enums.QuartzJobCode;
 import io.seata.core.context.RootContext;
 import io.seata.rm.tcc.api.BusinessActionContext;

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.supports.core.mongo.dao;
 
-import com.taotao.cloud.log.biz.log.core.mongo.entity.LoginLogMongo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

@@ -16,15 +16,8 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.service.impl;
 
-import com.taotao.cloud.file.biz.largefile.callable.FileCallable;
-import com.taotao.cloud.file.biz.largefile.constant.FileConstant;
-import com.taotao.cloud.file.biz.largefile.enu.FileCheckMd5Status;
-import com.taotao.cloud.file.biz.largefile.enu.UploadModeEnum;
-import com.taotao.cloud.file.biz.largefile.po.FileUpload;
-import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
-import com.taotao.cloud.file.biz.largefile.properties.LargefileProperties;
-import com.taotao.cloud.file.biz.largefile.service.LargeFileService;
-import com.taotao.cloud.file.biz.largefile.util.*;
+import com.taotao.cloud.sys.biz.supports.largefile.service.LargeFileService;
+import com.taotao.cloud.sys.biz.supports.largefile.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.InitializingBean;

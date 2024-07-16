@@ -17,10 +17,6 @@
 package com.taotao.cloud.sys.biz.supports.core.db.dao;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.data.mybatis.mybatisplus.utils.BaseManager;
-import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
-import com.taotao.cloud.log.biz.log.core.db.entity.LoginLogDb;
-import com.taotao.cloud.log.biz.log.param.LoginLogParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.text.StrUtil;

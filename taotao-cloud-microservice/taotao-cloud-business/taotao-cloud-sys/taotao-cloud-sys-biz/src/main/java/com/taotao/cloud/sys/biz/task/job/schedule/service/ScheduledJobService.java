@@ -18,10 +18,6 @@ package com.taotao.cloud.sys.biz.task.job.schedule.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.job.api.model.dto.ScheduledJobDTO;
-import com.taotao.cloud.job.api.model.page.ScheduledJobPageQuery;
-import com.taotao.cloud.job.api.model.vo.ScheduledJobVO;
-import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
 
 /**
  * 计划工作服务

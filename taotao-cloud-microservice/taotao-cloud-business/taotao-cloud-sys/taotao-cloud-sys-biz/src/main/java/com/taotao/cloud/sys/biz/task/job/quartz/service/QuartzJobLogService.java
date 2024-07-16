@@ -18,8 +18,6 @@ package com.taotao.cloud.sys.biz.task.job.quartz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.job.api.model.page.QuartzJobLogPageQuery;
-import com.taotao.cloud.job.biz.quartz.entity.QuartzJobLog;
 
 /** 定时任务日志 */
 public interface QuartzJobLogService extends IService<QuartzJobLog> {

@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.task.job.schedule.model.convert;
 
-import com.taotao.cloud.job.api.model.vo.ScheduledJobVO;
-import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

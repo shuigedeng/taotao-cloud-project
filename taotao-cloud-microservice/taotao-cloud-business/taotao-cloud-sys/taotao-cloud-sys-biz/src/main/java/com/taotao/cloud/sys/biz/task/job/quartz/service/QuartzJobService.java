@@ -18,9 +18,9 @@ package com.taotao.cloud.sys.biz.task.job.quartz.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
-import com.taotao.cloud.job.api.model.page.QuartzJobPageQuery;
-import com.taotao.cloud.job.biz.quartz.entity.QuartzJob;
+import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
+import com.taotao.cloud.sys.api.model.page.QuartzJobPageQuery;
+import com.taotao.cloud.sys.biz.task.job.quartz.entity.QuartzJob;
 import org.quartz.SchedulerException;
 
 /**

@@ -19,7 +19,6 @@ package com.taotao.cloud.sys.biz.task;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.job.xxl.timetask.EveryHourExecute;
-import com.taotao.cloud.report.api.model.vo.OnlineMemberVO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

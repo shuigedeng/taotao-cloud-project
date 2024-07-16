@@ -16,10 +16,9 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.callable;
 
-import com.taotao.cloud.file.biz.largefile.context.UploadContext;
-import com.taotao.cloud.file.biz.largefile.enu.UploadModeEnum;
-import com.taotao.cloud.file.biz.largefile.po.FileUpload;
-import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
+import com.taotao.cloud.sys.biz.supports.largefile.context.UploadContext;
+import com.taotao.cloud.sys.biz.supports.largefile.enu.UploadModeEnum;
+import com.taotao.cloud.sys.biz.supports.largefile.po.FileUploadRequest;
 import java.util.concurrent.Callable;
 
 public class FileCallable implements Callable<FileUpload> {

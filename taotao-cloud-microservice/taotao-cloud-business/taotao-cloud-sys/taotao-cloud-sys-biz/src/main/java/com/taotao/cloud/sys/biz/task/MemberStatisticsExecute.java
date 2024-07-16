@@ -18,8 +18,6 @@ package com.taotao.cloud.sys.biz.task;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
-import com.taotao.cloud.report.api.feign.IFeignMemberStatisticsApi;
-import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
 import java.util.Calendar;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;

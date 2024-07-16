@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.annotation;
 
-import com.taotao.cloud.file.biz.largefile.enu.UploadModeEnum;
+import com.taotao.cloud.sys.biz.supports.largefile.enu.UploadModeEnum;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.sys.biz.mapper;
 
-import com.taotao.cloud.log.biz.entity.Log;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;

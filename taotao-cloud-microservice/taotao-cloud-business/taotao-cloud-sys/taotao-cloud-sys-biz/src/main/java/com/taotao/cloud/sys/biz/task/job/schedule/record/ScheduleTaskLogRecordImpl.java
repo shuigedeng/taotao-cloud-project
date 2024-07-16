@@ -16,8 +16,6 @@
 
 package com.taotao.cloud.sys.biz.task.job.schedule.record;
 
-import com.taotao.cloud.job.biz.schedule.entity.ScheduledJobLog;
-import com.taotao.cloud.job.biz.schedule.service.ScheduledJobLogService;
 import com.taotao.cloud.job.schedule.task.ScheduleTaskLogRecord;
 import java.time.LocalDateTime;
 import java.util.UUID;

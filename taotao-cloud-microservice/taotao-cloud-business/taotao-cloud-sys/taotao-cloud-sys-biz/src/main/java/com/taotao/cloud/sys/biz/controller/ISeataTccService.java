@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
+import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.rm.tcc.api.BusinessActionContextParameter;
 import io.seata.rm.tcc.api.LocalTCC;

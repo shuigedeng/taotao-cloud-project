@@ -17,11 +17,7 @@
 package com.taotao.cloud.sys.biz.supports.largefile.controller;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.file.biz.largefile.po.FileDownloadRequest;
-import com.taotao.cloud.file.biz.largefile.po.FileUpload;
-import com.taotao.cloud.file.biz.largefile.po.FileUploadRequest;
-import com.taotao.cloud.file.biz.largefile.service.LargeFileService;
-import com.taotao.cloud.file.biz.largefile.util.FileUtil;
+import com.taotao.cloud.sys.biz.supports.largefile.service.LargeFileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;

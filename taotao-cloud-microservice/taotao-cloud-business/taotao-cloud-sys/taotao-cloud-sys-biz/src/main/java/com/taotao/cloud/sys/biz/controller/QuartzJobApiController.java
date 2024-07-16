@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.cloud.job.api.feign.IFeignQuartzJobApi;
-import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
-import com.taotao.cloud.job.biz.quartz.service.QuartzJobService;
 import com.taotao.cloud.openfeign.annotation.FeignApi;
+import com.taotao.cloud.sys.api.feign.IFeignQuartzJobApi;
+import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
+import com.taotao.cloud.sys.biz.task.job.quartz.service.QuartzJobService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
