@@ -16,7 +16,8 @@
 
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.file.api.dubbo.response.DubboFileResponse;
+
+import com.taotao.cloud.sys.api.dubbo.response.DubboFileResponse;
 
 /**
  * ISysDictService

@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.file.api.feign.IFeignFileApi;
-import com.taotao.cloud.file.api.feign.response.FeignFileResponse;
+import com.taotao.cloud.sys.api.feign.IFeignFileApi;
+import com.taotao.cloud.sys.api.feign.response.FeignFileResponse;
 import io.seata.core.context.RootContext;
 import io.seata.core.exception.TransactionException;
 import io.seata.tm.api.GlobalTransactionContext;

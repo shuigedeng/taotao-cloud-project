@@ -21,11 +21,11 @@ import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_07;
 import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.file.api.feign.fallback.FeignFileApiFallback;
-import com.taotao.cloud.file.api.feign.response.FeignFileResponse;
 import com.taotao.cloud.openfeign.annotation.ApiInfo;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
+import com.taotao.cloud.sys.api.feign.fallback.FeignFileApiFallback;
+import com.taotao.cloud.sys.api.feign.response.FeignFileResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

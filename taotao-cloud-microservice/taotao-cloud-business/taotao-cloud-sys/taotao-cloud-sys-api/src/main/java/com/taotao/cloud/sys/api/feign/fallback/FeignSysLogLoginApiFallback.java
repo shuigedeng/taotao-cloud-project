@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import com.taotao.cloud.log.api.feign.IFeignSysLogLoginApi;
-import com.taotao.cloud.log.api.feign.request.FeignSysLogLoginRequest;
-import com.taotao.cloud.log.api.feign.response.FeignLogsResponse;
+import com.taotao.cloud.sys.api.feign.IFeignSysLogLoginApi;
+import com.taotao.cloud.sys.api.feign.request.FeignSysLogLoginRequest;
+import com.taotao.cloud.sys.api.feign.response.FeignLogsResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**

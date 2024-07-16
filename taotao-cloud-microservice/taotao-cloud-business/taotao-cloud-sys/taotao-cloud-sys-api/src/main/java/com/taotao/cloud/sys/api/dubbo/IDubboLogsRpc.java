@@ -16,8 +16,9 @@
 
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.log.api.dubbo.request.DubboLogsQueryRequest;
-import com.taotao.cloud.log.api.dubbo.response.DubboLogsResponse;
+
+import com.taotao.cloud.sys.api.dubbo.request.DubboLogsQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.response.DubboLogsResponse;
 
 /**
  * IDubboOrderService

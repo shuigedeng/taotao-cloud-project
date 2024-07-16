@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.job.api.feign.fallback.FeignQuartzJobFallbackImpl;
-import com.taotao.cloud.job.api.model.dto.QuartzJobDTO;
+import com.taotao.cloud.sys.api.feign.fallback.FeignQuartzJobFallbackImpl;
+import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
