@@ -24,6 +24,7 @@ import com.taotao.cloud.order.application.service.order.IOrderComplaintCommunica
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IOrderComplainCommunicationMapper;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintCommunication;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Service;
 
 /**

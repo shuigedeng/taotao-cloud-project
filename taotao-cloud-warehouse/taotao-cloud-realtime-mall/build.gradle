@@ -118,7 +118,7 @@ dependencies {
     implementation("org.apache.hudi:hudi-timeline-server-bundle:1.0.0-beta2")
     implementation("org.apache.hudi:hudi-utilities-bundle_2.13:1.0.0-beta2")
     implementation("org.apache.hudi:hudi-utilities-slim-bundle_2.13:1.0.0-beta2")
-    implementation("org.apache.hudi:hudi-utilities_2.13:1.0.0-beta2")
+    //implementation("org.apache.hudi:hudi-utilities_2.13:1.0.0-beta2")
     implementation("org.apache.hudi:hudi-sync:1.0.0-beta2")
 
     implementation("org.apache.paimon:paimon-format:0.8.2")

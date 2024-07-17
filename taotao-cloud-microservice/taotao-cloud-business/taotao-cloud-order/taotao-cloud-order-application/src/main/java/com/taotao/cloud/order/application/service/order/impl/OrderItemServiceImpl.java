@@ -22,7 +22,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.order.application.service.order.IOrderItemService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IOrderItemMapper;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItem;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,8 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItem> implements IOrderItemService {
+public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItem> implements
+	IOrderItemService {
 
     @Override
     public Boolean updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum) {

@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.taotao.cloud.order.facade.grpc;
 
-package com.taotao.cloud.order.integration.goods.adapter;
+import com.taotao.cloud.order.api.grpc.AfterSaleRequest;
+import com.taotao.cloud.order.api.grpc.AfterSaleResponse;
+import com.taotao.cloud.order.api.grpc.AfterSaleServiceGrpc.AfterSaleServiceImplBase;
+import io.grpc.stub.StreamObserver;
+import lombok.extern.slf4j.Slf4j;
+import org.lognet.springboot.grpc.GRpcService;
 
-import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
-import com.taotao.cloud.goods.api.grpc.CountStoreGoodsNumResponse;
-import com.taotao.cloud.order.integration.goods.vo.GoodsVO;
-import org.springframework.stereotype.Component;
+@Slf4j
+@GRpcService
+public class AfterSaleServiceGrpc extends AfterSaleServiceImplBase {
 
-@Component
-public class GoodsClientAdapter {
-
-    public GoodsVO convert(Long goodsNum , DubboGoodsQueryResponse goods , CountStoreGoodsNumResponse countStoreGoodsNumResponse) {
-		GoodsVO goodsVO = new GoodsVO();
-
-        return goodsVO;
-    }
+	@Override
+	public void insertDeviceFix(AfterSaleRequest request,
+		StreamObserver<AfterSaleResponse> responseObserver) {
+		super.insertDeviceFix(request, responseObserver);
+	}
 }

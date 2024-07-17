@@ -61,7 +61,9 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-sys"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
+ENV JAVA_OPTIONS="-Xms8g \
+                  -Xmx8g \
+                  -Xmn1280m \
                   -Xss512k \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \

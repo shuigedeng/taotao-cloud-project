@@ -58,6 +58,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    api "io.github.shuigedeng:taotao-cloud-starter-ddd"
     api "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     api "io.github.shuigedeng:taotao-cloud-starter-eventbus"
     api "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"

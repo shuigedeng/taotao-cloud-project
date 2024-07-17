@@ -17,6 +17,7 @@
 package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
 import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.Receipt;

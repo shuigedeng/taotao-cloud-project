@@ -201,7 +201,7 @@ plugins {
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.22"
 
-    id 'org.cyclonedx.bom' version '1.8.2'
+    //id 'org.cyclonedx.bom' version '1.8.2'
 
     //alias(projectLibs.plugins.springboot)
     //alias(projectLibs.plugins.kotlin.jvm)
@@ -330,7 +330,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
 
     apply plugin: "org.owasp.dependencycheck"
 
-    apply plugin: "org.cyclonedx.bom"
+    //apply plugin: "org.cyclonedx.bom"
 
     apply from: rootProject.file('gradle/jacoco.gradle')
     apply from: rootProject.file('gradle/publish-jar.gradle')
