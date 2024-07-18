@@ -12,7 +12,7 @@ import org.apache.flink.util.Collector;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KeybyDemo {

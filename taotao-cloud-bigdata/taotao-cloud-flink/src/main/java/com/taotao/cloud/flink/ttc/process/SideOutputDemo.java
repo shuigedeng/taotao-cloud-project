@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.process;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class SideOutputDemo {

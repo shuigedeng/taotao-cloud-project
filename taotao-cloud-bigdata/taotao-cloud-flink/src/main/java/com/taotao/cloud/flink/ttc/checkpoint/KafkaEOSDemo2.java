@@ -13,7 +13,7 @@ import java.time.Duration;
 /**
  * TODO flink去消费 被 两阶段提交的 topic，设置隔离级别
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KafkaEOSDemo2 {

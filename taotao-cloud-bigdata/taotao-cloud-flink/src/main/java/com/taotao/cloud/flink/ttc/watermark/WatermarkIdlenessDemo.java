@@ -1,8 +1,7 @@
 package com.taotao.cloud.flink.ttc.watermark;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
-import com.atguigu.partition.MyPartitioner;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -18,7 +17,7 @@ import java.time.Duration;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class WatermarkIdlenessDemo {

@@ -12,7 +12,7 @@ import org.apache.flink.util.Collector;
 /**
  * TODO DataStream实现Wordcount：读文件（有界流）
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class WordCountStreamDemo {

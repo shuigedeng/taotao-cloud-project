@@ -1,7 +1,8 @@
 package com.taotao.cloud.flink.ttc.window;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
+import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -14,7 +15,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class WindowReduceDemo {

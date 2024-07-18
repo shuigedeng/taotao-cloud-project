@@ -5,7 +5,7 @@ import org.apache.flink.api.common.functions.Partitioner;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class MyPartitioner implements Partitioner<String> {

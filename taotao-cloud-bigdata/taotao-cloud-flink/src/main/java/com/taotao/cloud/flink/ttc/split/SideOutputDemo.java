@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.split;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+import com.taotao.cloud.flink.ttc.functions.WaterSensorMapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.SideOutputDataStream;
@@ -14,7 +14,7 @@ import org.apache.flink.util.OutputTag;
 /**
  * TODO 分流： 奇数、偶数拆分成不同流
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class SideOutputDemo {

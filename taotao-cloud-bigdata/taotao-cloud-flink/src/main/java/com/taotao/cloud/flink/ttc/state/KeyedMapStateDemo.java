@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.state;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.state.ListState;
 import org.apache.flink.api.common.state.ListStateDescriptor;
@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * TODO 统计每种传感器每种水位值出现的次数
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KeyedMapStateDemo {

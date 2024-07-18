@@ -12,7 +12,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * TODO 在map算子中计算数据的个数
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class OperatorListStateDemo {

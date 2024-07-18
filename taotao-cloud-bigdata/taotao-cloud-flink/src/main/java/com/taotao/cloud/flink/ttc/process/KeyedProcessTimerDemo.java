@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.process;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.TimerService;
@@ -20,7 +20,7 @@ import java.time.Duration;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KeyedProcessTimerDemo {

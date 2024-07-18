@@ -1,8 +1,7 @@
 package com.taotao.cloud.flink.ttc.transfrom;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.FilterFunctionImpl;
-import com.atguigu.functions.MapFunctionImpl;
+import com.taotao.cloud.flink.ttc.functions.FilterFunctionImpl;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -12,7 +11,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class FilterDemo {

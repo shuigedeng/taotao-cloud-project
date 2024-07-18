@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.sink;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
 import org.apache.flink.connector.jdbc.JdbcExecutionOptions;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class SinkMySQL {

@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.state;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
@@ -17,7 +17,7 @@ import java.time.Duration;
 /**
  * TODO 检测每种传感器的水位值，如果连续的两个水位值超过10，就输出报警
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KeyedValueStateDemo {

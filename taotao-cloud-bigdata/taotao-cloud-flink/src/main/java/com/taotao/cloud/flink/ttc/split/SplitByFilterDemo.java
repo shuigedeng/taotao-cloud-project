@@ -8,7 +8,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * TODO 分流： 奇数、偶数拆分成不同流
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class SplitByFilterDemo {

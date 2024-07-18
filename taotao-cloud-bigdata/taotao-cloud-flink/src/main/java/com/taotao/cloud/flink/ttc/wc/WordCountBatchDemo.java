@@ -12,7 +12,7 @@ import org.apache.flink.util.Collector;
 /**
  * TODO DataSet API 实现 wordcount（不推荐）
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class WordCountBatchDemo {

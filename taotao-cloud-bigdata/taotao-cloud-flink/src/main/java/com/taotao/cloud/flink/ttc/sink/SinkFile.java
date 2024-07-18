@@ -23,7 +23,7 @@ import java.util.TimeZone;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class SinkFile {

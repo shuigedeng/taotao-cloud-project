@@ -18,7 +18,7 @@ import java.time.Duration;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KafkaEOSDemo {

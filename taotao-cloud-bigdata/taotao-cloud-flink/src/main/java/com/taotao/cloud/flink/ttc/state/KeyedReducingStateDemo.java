@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.state;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.common.state.MapState;
@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * TODO 计算每种传感器的水位和
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class KeyedReducingStateDemo {

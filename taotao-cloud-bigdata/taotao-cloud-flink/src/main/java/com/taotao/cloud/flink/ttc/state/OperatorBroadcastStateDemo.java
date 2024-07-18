@@ -1,7 +1,7 @@
 package com.taotao.cloud.flink.ttc.state;
 
 import com.taotao.cloud.flink.ttc.bean.WaterSensor;
-import com.atguigu.functions.WaterSensorMapFunction;
+
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.state.*;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -19,7 +19,7 @@ import org.apache.flink.util.Collector;
 /**
  * TODO 水位超过指定的阈值发送告警，阈值可以动态修改
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class OperatorBroadcastStateDemo {

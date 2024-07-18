@@ -31,14 +31,14 @@ dependencies {
     implementation "com.github.javen205:IJPay-All:2.9.11"
 
     //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
-    implementation "com.github.binarywang:weixin-java-pay:4.6.2.B"
-    implementation "com.github.binarywang:weixin-java-mp:4.6.2.B"
+    implementation "com.github.binarywang:weixin-java-pay:4.6.3.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.6.3.B"
 
     //https://search.maven.org/artifact/com.paypal.sdk/checkout-sdk
     implementation "com.paypal.sdk:checkout-sdk:2.0.0"
 
     //https://search.maven.org/artifact/com.yungouos.pay/yungouos-pay-sdk
-    implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.35'
+    implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.36'
 
     //https://search.maven.org/artifact/jakarta.jms/jakarta.jms-api
     implementation 'jakarta.jms:jakarta.jms-api:3.1.0'

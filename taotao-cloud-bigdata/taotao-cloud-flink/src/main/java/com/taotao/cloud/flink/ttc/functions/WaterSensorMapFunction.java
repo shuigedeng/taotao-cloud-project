@@ -6,7 +6,7 @@ import org.apache.flink.api.common.functions.MapFunction;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class WaterSensorMapFunction implements MapFunction<String,WaterSensor> {

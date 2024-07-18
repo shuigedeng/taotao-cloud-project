@@ -7,7 +7,7 @@ import org.apache.flink.api.common.eventtime.WatermarkOutput;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class MyPuntuatedWatermarkGenerator<T> implements WatermarkGenerator<T> {

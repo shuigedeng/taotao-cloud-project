@@ -15,7 +15,7 @@ import static org.apache.flink.streaming.api.environment.ExecutionCheckpointingO
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class CheckpointConfigDemo {

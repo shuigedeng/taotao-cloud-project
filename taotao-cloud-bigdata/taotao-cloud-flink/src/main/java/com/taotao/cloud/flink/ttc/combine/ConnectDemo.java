@@ -10,7 +10,7 @@ import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 /**
  * TODO
  *
- * @author cjp
+ * @author shuigedeng
  * @version 1.0
  */
 public class ConnectDemo {
