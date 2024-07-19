@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.biz.strategy.AbstractStrategyUserDetailsService;
 import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
 import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
 import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
-import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import com.taotao.cloud.sys.api.feign.UserApi;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -33,9 +33,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class RemoteUserDetailsService extends AbstractStrategyUserDetailsService {
 
-    private final IFeignUserApi userApi;
+    private final UserApi userApi;
 
-    public RemoteUserDetailsService(IFeignUserApi userApi) {
+    public RemoteUserDetailsService(UserApi userApi) {
         this.userApi = userApi;
     }
 

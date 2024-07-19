@@ -25,7 +25,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.date.DateUtils;
 import com.taotao.cloud.data.mybatis.mybatisplus.utils.PageUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;
@@ -63,7 +63,7 @@ public class CouponServiceImpl extends AbstractPromotionsServiceImpl<CouponMappe
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuApi;
+	private GoodsSkuApi goodsSkuApi;
 	/**
 	 * 促销商品
 	 */

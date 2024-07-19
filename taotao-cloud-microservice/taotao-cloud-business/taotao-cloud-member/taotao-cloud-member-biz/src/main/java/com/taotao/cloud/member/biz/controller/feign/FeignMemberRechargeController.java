@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
+import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.feign.response.FeignMemberRechargeResponse;
 import com.taotao.cloud.member.sys.model.vo.MemberRechargeVO;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "内部调用端-会员充值API", description = "内部调用端-会员充值API")
-public class FeignMemberRechargeController implements IFeignMemberRechargeApi {
+public class FeignMemberRechargeController implements MemberRechargeApi {
 
     private final IMemberService memberService;
 

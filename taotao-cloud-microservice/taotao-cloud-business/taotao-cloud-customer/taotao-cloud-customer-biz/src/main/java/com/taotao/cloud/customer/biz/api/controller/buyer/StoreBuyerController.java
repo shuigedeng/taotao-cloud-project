@@ -19,7 +19,7 @@ package com.taotao.cloud.customer.biz.api.controller.buyer;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
+import com.taotao.cloud.goods.api.feign.StoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.store.api.feign.IFeignStoreApi;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
@@ -55,7 +55,7 @@ public class StoreBuyerController {
     private IFeignStoreApi storeService;
     /** 店铺商品分类 */
     @Autowired
-    private IFeignStoreGoodsLabelApi storeGoodsLabelApi;
+    private StoreGoodsLabelApi storeGoodsLabelApi;
     /** 店铺详情 */
     @Autowired
     private IFeignStoreDetailApi storeDetailApi;

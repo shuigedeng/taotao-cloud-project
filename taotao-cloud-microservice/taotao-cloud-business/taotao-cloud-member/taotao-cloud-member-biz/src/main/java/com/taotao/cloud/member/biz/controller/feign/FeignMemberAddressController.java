@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.feign;
 
-import com.taotao.cloud.member.api.feign.IFeignMemberAddressApi;
+import com.taotao.cloud.member.api.feign.MemberAddressApi;
 import com.taotao.cloud.member.api.feign.response.FeignMemberAddressResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "内部调用端-会员地址API", description = "内部调用端-会员地址API")
-public class FeignMemberAddressController implements IFeignMemberAddressApi {
+public class FeignMemberAddressController implements MemberAddressApi {
 
     private final IMemberService memberService;
 

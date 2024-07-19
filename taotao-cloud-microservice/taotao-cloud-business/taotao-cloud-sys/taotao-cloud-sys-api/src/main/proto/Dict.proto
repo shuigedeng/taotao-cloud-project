@@ -15,7 +15,7 @@ option java_package = "com.taotao.cloud.sys.api.grpc";
 option java_outer_classname = "DictServiceProto";
 //option objc_class_prefix = "HLW";
 
-service DictService {
+service DictGrpcService {
   rpc findByCode (DictRequest) returns (DictResponse){}
   rpc test (DictTestRequest) returns (DictResponse){}
 }

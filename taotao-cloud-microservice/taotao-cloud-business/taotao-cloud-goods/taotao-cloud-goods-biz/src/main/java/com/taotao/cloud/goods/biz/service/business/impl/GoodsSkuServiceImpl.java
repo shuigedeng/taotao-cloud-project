@@ -27,14 +27,12 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.biz.model.dto.GoodsSkuStockDTO;
 import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecVO;
 import com.taotao.cloud.goods.biz.model.vo.SpecValueVO;
 import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsAttribute;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
@@ -55,11 +53,10 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.EsIndexUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
 import com.taotao.cloud.member.api.model.page.EvaluationPageQuery;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
@@ -82,12 +79,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.dynamictp.common.util.StringUtil;
 import org.dromara.hutool.core.convert.Convert;
 import org.dromara.hutool.core.map.MapUtil;
 import org.dromara.hutool.core.math.NumberUtil;
-import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.json.JSONObject;
 import org.dromara.hutool.json.JSONUtil;
 import org.springframework.context.ApplicationEventPublisher;
@@ -120,7 +115,7 @@ public class GoodsSkuServiceImpl
     private final IEsGoodsIndexService goodsIndexService;
 
     /** 会员评价服务 */
-    private final IFeignMemberEvaluationApi memberEvaluationApi;
+    private final MemberEvaluationApi memberEvaluationApi;
     /** 促销活动商品服务 */
     private final IFeignPromotionGoodsApi promotionGoodsApi;
 

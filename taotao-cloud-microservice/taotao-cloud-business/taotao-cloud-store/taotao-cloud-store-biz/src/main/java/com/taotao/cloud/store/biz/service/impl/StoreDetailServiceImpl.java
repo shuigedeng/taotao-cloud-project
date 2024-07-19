@@ -22,8 +22,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignCategoryApi;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
+import com.taotao.cloud.goods.api.feign.CategoryApi;
+import com.taotao.cloud.goods.api.feign.GoodsApi;
 import com.taotao.cloud.goods.api.model.vo.CategoryTreeVO;
 import com.taotao.cloud.store.api.model.dto.StoreAfterSaleAddressDTO;
 import com.taotao.cloud.store.api.model.dto.StoreSettingDTO;
@@ -59,10 +59,10 @@ public class StoreDetailServiceImpl extends ServiceImpl<StoreDetailMapper, Store
     private IStoreService storeService;
     /** 分类 */
     @Autowired
-    private IFeignCategoryApi categoryApi;
+    private CategoryApi categoryApi;
 
     @Autowired
-    private IFeignGoodsApi goodsApi;
+    private GoodsApi goodsApi;
 
     // @Autowired
     // private RocketmqCustomProperties rocketmqCustomProperties;

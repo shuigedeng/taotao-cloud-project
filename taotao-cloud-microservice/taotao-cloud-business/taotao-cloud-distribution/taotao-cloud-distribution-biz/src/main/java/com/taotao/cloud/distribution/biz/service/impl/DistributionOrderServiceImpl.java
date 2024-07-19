@@ -30,7 +30,7 @@ import com.taotao.cloud.distribution.biz.model.entity.DistributionOrder;
 import com.taotao.cloud.distribution.biz.service.IDistributionOrderService;
 import com.taotao.cloud.distribution.biz.service.IDistributionService;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.order.api.model.page.order.StoreFlowPageQuery;
 import com.taotao.cloud.sys.api.dto.DistributionSetting;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
@@ -47,7 +47,7 @@ public class DistributionOrderServiceImpl extends ServiceImpl<DistributionOrderM
 
     /** 订单 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
     /** 店铺流水 */
     @Autowired
     private StoreFlowService storeFlowService;

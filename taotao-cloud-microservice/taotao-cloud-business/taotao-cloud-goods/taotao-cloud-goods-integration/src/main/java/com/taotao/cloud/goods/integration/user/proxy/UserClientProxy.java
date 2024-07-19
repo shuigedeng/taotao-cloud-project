@@ -19,9 +19,9 @@ package com.taotao.cloud.goods.integration.user.proxy;
 import com.taotao.cloud.goods.integration.user.adapter.UserClientAdapter;
 import com.taotao.cloud.goods.integration.user.grpc.UserGrpcClient;
 import com.taotao.cloud.goods.integration.user.vo.UserBaseInfoVO;
-import com.taotao.cloud.sys.api.dubbo.IDubboDictRpc;
+import com.taotao.cloud.sys.api.dubbo.DictRpcService;
 import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
-import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import com.taotao.cloud.sys.api.feign.UserApi;
 import com.taotao.cloud.sys.api.grpc.HelloReply;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import jakarta.annotation.Resource;
@@ -32,13 +32,13 @@ import org.springframework.stereotype.Component;
 public class UserClientProxy {
 
 	@Resource
-	private IFeignUserApi feignUserApi;
+	private UserApi feignUserApi;
 	@Resource
 	private UserClientAdapter userIntegrationAdapter;
 	@Resource
 	private UserGrpcClient userGrpcClient;
 	@Reference
-	private IDubboDictRpc dubboDictRpc;
+	private DictRpcService dubboDictRpc;
 
 	// 查询用户
 	public UserBaseInfoVO getUserInfo(String username) {

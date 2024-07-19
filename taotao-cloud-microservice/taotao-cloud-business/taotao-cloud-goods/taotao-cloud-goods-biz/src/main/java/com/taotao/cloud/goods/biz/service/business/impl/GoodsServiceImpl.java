@@ -24,10 +24,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -49,16 +47,14 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.store.api.feign.IFeignFreightTemplateApi;
 import com.taotao.cloud.store.api.feign.IFeignStoreApi;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateVO;
-import com.taotao.cloud.store.api.model.vo.StoreVO;
-import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
@@ -96,13 +92,13 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl< Goods, Long,IGoodsMa
     private final IGoodsSkuService goodsSkuService;
 
     /** 设置 */
-    private final IFeignSettingApi settingApi;
+    private final SettingApi settingApi;
     /** 店铺详情 */
     private final IFeignStoreApi storeApi;
     /** 运费模板 */
     private final IFeignFreightTemplateApi freightTemplateApi;
     /** 会员评价 */
-    private final IFeignMemberEvaluationApi memberEvaluationApi;
+    private final MemberEvaluationApi memberEvaluationApi;
     /** rocketMq */
     private final RocketMQTemplate rocketMQTemplate;
     /** rocketMq配置 */

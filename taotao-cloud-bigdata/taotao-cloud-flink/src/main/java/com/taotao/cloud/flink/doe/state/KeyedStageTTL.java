@@ -18,7 +18,7 @@ import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
- * @Date: 2024/1/5
+ * @since: 2024/1/5
  * @Author: Hang.Nian.YY
  * @WX: 17710299606
  * @Tips: 学大数据 ,到多易教育

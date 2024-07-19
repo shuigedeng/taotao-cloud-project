@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;
@@ -82,7 +82,7 @@ public class PromotionServiceImpl implements IPromotionService {
     private IPointsGoodsService pointsGoodsService;
 
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     /**
      * 获取当前进行的所有促销活动信息

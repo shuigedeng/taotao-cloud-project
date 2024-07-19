@@ -15,7 +15,7 @@ option java_package = "com.taotao.cloud.sys.api.grpc";
 option java_outer_classname = "MenuServiceProto";
 //option objc_class_prefix = "HLW";
 
-service MenuService {
+service MenuGrpcService {
   rpc findResourceByCodes (MenuRequest) returns (MenuResponse){}
 }
 

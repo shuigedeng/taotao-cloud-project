@@ -21,7 +21,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
@@ -54,7 +54,7 @@ public class WalletPlugin implements Payment {
     private RefundLogService refundLogService;
     /** 会员余额 */
     @Autowired
-    private IFeignMemberWalletApi memberWalletApi;
+    private MemberWalletApi memberWalletApi;
     /** 收银台 */
     @Autowired
     private CashierSupport cashierSupport;

@@ -25,7 +25,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.sys.model.dto.cart.MemberCouponDTO;
@@ -46,7 +46,6 @@ import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.stereotype.Service;
@@ -69,7 +68,7 @@ public class TradeServiceImpl extends ServiceImpl<ITradeMapper, Trade> implement
     /** 订单 */
     private final IOrderService orderService;
     /** 会员 */
-    private final IFeignMemberApi memberApi;
+    private final MemberApi memberApi;
     /** 优惠券 */
     private final IFeignCouponApi couponApi;
     /** 会员优惠券 */

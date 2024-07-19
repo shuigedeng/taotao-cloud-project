@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.facade.feign;
 
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.member.api.feign.request.FeignMemberWalletUpdateRequest;
 import com.taotao.cloud.member.application.service.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "内部调用端-会员钱包API", description = "内部调用端-会员钱包API")
-public class FeignMemberWalletFacade implements IFeignMemberWalletApi {
+public class FeignMemberWalletFacade implements MemberWalletApi {
 
 	private final IMemberService memberService;
 

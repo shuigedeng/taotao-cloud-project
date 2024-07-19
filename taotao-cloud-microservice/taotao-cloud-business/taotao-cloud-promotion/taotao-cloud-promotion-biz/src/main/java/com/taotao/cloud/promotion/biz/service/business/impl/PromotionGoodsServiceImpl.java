@@ -25,7 +25,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.date.DateUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.order.api.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
@@ -70,7 +70,7 @@ public class PromotionGoodsServiceImpl extends ServiceImpl<PromotionGoodsMapper,
     private ISeckillApplyService seckillApplyService;
     /** 规格商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     @Autowired
     private IFullDiscountService fullDiscountService;

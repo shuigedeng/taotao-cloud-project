@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
+import com.taotao.cloud.goods.api.feign.StoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.store.api.model.dto.StoreBankDTO;
 import com.taotao.cloud.store.api.model.dto.StoreCompanyDTO;
@@ -59,7 +59,7 @@ public class StoreBuyerController {
     private IStoreService storeService;
     /** 店铺商品分类 */
     @Autowired
-    private IFeignStoreGoodsLabelApi storeGoodsLabelApi;
+    private StoreGoodsLabelApi storeGoodsLabelApi;
     /** 店铺详情 */
     @Autowired
     private IStoreDetailService storeDetailService;

@@ -31,7 +31,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
@@ -60,7 +60,7 @@ import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.WechatPaymentSetting;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -95,13 +95,13 @@ public class WechatPlugin implements Payment {
     private ApiProperties apiProperties;
     /** 配置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** 联合登陆 */
     @Autowired
     private IFeignConnectService connectService;
     /** 联合登陆 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
 
     @Override
     public Result<Object> h5pay(HttpServletRequest request, HttpServletResponse response1, PayParam payParam) {

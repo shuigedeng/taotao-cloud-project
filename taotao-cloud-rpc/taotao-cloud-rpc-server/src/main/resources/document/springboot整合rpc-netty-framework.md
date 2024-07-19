@@ -179,7 +179,7 @@ package cn.fyupeng.service;
 
 /**
  * @Auther: fyp
- * @Date: 2022/10/19
+ * @since: 2022/10/19
  * @Description: HelloWorld接口
  * @Package: cn.fyupeng.cn.fyupeng.controller
  * @Version: 1.0
@@ -217,7 +217,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @Auther: fyp
- * @Date: 2022/10/19
+ * @since: 2022/10/19
  * @Description: HelloWorld控制器
  * @Package: cn.fyupeng.cn.fyupeng.controller
  * @Version: 1.0
@@ -293,7 +293,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Auther: fyp
- * @Date: 2023/2/23
+ * @since: 2023/2/23
  * @Description: Spring容器上下文工具类
  * @Package: cn.fyupeng.util
  * @Version: 1.0
@@ -426,7 +426,7 @@ package cn.fyupeng.service;
 
 /**
  * @Auther: fyp
- * @Date: 2022/10/19
+ * @since: 2022/10/19
  * @Description: HelloWorld接口
  * @Package: cn.fyupeng.cn.fyupeng.controller
  * @Version: 1.0
@@ -449,7 +449,7 @@ import cn.fyupeng.service.HelloService;
 
 /**
  * @Auther: fyp
- * @Date: 2022/10/19
+ * @since: 2022/10/19
  * @Description: HelloWorld实现类
  * @Package: cn.fyupeng.cn.fyupeng.controller.impl
  * @Version: 1.0

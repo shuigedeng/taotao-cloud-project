@@ -78,7 +78,7 @@ import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
+import com.taotao.cloud.sys.api.feign.LogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
@@ -119,7 +119,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
     /** 订单货物 订单货物数据层 */
     private final IOrderItemService orderItemService;
     /** 物流公司 */
-    private final IFeignLogisticsApi logisticsApi;
+    private final LogisticsApi logisticsApi;
     /** 订单日志 */
     private final IOrderLogService orderLogService;
     /** RocketMQ */

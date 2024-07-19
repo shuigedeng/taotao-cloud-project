@@ -18,11 +18,7 @@ package com.taotao.cloud.order.facade.feign;
 
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
-import com.taotao.cloud.order.api.feign.request.FeignOrderItemSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderItemResponse;
+import com.taotao.cloud.order.api.feign.StoreFlowApi;
 import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
 import com.taotao.cloud.order.api.feign.response.FeingStoreFlowResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class FeignStoreFlowApi implements IFeignStoreFlowApi {
+public class FeignStoreFlowApi implements StoreFlowApi {
 
 
 	@Override

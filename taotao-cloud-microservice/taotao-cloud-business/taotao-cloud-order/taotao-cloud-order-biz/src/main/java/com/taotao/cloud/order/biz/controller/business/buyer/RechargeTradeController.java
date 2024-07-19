@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
+import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +47,7 @@ import java.math.BigDecimal;
 @RequestMapping("/order/buyer/recharge")
 public class RechargeTradeController {
 
-	private final IFeignMemberRechargeApi memberRechargeApi;
+	private final MemberRechargeApi memberRechargeApi;
 
 	@Operation(summary = "创建余额充值订单", description = "创建余额充值订单")
 	@RequestLogger

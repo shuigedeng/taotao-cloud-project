@@ -19,7 +19,7 @@ package com.taotao.cloud.payment.biz.controller.manger;
 import org.dromara.hutoolcore.util.PageUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PaymentLogManagerController {
 
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
 
     @Operation(summary = "分页获取支付日志", description = "分页获取支付日志")
     @RequestLogger

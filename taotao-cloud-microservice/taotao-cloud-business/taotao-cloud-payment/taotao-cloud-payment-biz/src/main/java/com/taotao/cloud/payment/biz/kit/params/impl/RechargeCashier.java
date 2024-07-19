@@ -19,7 +19,7 @@ package com.taotao.cloud.payment.biz.kit.params.impl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
+import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.payment.api.enums.CashierEnum;
@@ -28,7 +28,7 @@ import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.BaseSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,10 +39,10 @@ public class RechargeCashier implements CashierExecute {
 
     /** 余额 */
     @Autowired
-    private IFeignMemberRechargeApi memberRechargeApi;
+    private MemberRechargeApi memberRechargeApi;
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
 
     @Override
     public CashierEnum cashierEnum() {

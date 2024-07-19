@@ -7,7 +7,7 @@ option java_package = "com.taotao.cloud.order.api.grpc";
 option java_outer_classname = "AfterSaleServiceProto";
 //option objc_class_prefix = "HLW";
 
-service AfterSaleService {
+service AfterSaleGrpcService {
   rpc insertDeviceFix (AfterSaleRequest) returns (AfterSaleResponse){}
 }
 

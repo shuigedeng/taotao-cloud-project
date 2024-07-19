@@ -31,7 +31,7 @@ import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingItemVO;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import java.util.List;
@@ -52,7 +52,7 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
     private RocketmqCustomProperties rocketmqCustomProperties;
     /** 配置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** 会员 */
     @Autowired
     private IMemberService memberService;

@@ -20,9 +20,9 @@ import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.ExperienceSettingVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,13 +33,13 @@ public class MemberExperienceExecute implements MemberRegisterEvent {
 
     /** 配置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** 会员 */
     @Autowired
     private IMemberService memberService;
     /** 订单 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
 
     /**
      * 会员注册赠送经验值

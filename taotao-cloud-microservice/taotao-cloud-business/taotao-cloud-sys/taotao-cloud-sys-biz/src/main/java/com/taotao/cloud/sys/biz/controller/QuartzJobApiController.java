@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.cloud.openfeign.annotation.FeignApi;
-import com.taotao.cloud.sys.api.feign.IFeignQuartzJobApi;
+import com.taotao.cloud.sys.api.feign.QuartzJobApi;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import com.taotao.cloud.sys.biz.task.job.quartz.service.QuartzJobService;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping
-public class QuartzJobApiController implements IFeignQuartzJobApi {
+public class QuartzJobApiController implements QuartzJobApi {
 
     private final QuartzJobService quartzJobService;
     private final ISeataTccService seataTccService;

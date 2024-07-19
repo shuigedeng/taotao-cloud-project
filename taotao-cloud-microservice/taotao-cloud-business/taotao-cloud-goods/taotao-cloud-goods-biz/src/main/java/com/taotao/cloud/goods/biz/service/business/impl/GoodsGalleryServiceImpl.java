@@ -26,7 +26,7 @@ import com.taotao.cloud.goods.biz.repository.cls.GoodsGalleryRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IGoodsGalleryRepository;
 import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
@@ -50,7 +50,7 @@ public class GoodsGalleryServiceImpl
 
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

@@ -25,7 +25,7 @@ import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.member.sys.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.member.biz.mapper.IMemberRechargeMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberRecharge;
@@ -51,7 +51,7 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 
     /** 会员预存款 */
     @Autowired
-    private IFeignMemberWalletApi feignMemberWalletApi;
+    private MemberWalletApi feignMemberWalletApi;
 
     @Override
     public MemberRecharge recharge(BigDecimal price) {

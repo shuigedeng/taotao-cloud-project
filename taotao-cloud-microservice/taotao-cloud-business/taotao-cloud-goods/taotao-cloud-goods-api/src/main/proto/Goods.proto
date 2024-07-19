@@ -7,7 +7,7 @@ option java_package = "com.taotao.cloud.goods.api.grpc";
 option java_outer_classname = "GoodsServiceProto";
 //option objc_class_prefix = "HLW";
 
-service GoodsService {
+service GoodsGrpcService {
   // Sends a message
   rpc countStoreGoodsNum (CountStoreGoodsNumRequest) returns (CountStoreGoodsNumResponse){}
 }

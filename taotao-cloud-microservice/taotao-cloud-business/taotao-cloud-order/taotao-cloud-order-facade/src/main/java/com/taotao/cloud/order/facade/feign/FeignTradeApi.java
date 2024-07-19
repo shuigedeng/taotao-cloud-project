@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.order.facade.feign;
 
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
-import com.taotao.cloud.order.api.feign.IFeignTradeApi;
+import com.taotao.cloud.order.api.feign.TradeApi;
 import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
-import com.taotao.cloud.order.api.feign.response.FeingStoreFlowResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class FeignTradeApi implements IFeignTradeApi {
+public class FeignTradeApi implements TradeApi {
 
 	@Override
 	public FeignTradeResponse getBySn(String sn) {

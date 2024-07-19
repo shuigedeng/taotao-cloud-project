@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.api.feign.fallback;
 
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
+import com.taotao.cloud.order.api.feign.OrderItemApi;
 import com.taotao.cloud.order.api.feign.request.FeignOrderItemSaveRequest;
 import com.taotao.cloud.order.api.feign.response.FeignOrderItemResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -28,11 +28,11 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignOrderItemApiFallback implements FallbackFactory<IFeignOrderItemApi> {
+public class FeignOrderItemApiFallback implements FallbackFactory<OrderItemApi> {
 
 	@Override
-	public IFeignOrderItemApi create(Throwable throwable) {
-		return new IFeignOrderItemApi() {
+	public OrderItemApi create(Throwable throwable) {
+		return new OrderItemApi() {
 			@Override
 			public Boolean saveOrderItem(FeignOrderItemSaveRequest orderItemSaveDTO) {
 				return null;

@@ -24,7 +24,7 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.page.SeckillPageQuery;
@@ -47,7 +47,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 秒杀申请业务层实现
@@ -70,7 +69,7 @@ public class SeckillApplyServiceImpl extends ServiceImpl<SeckillApplyMapper, Sec
 	 * 规格商品
 	 */
 	@Autowired
-	private IFeignGoodsSkuApi goodsSkuApi;
+	private GoodsSkuApi goodsSkuApi;
 	/**
 	 * 促销商品
 	 */

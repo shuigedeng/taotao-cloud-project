@@ -21,8 +21,8 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
@@ -53,13 +53,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckDataRender implements ICartRenderStep {
 
-    private final IFeignGoodsSkuApi goodsSkuApi;
+    private final GoodsSkuApi goodsSkuApi;
 
     private final IOrderService orderService;
 
     private final IFeignPintuanApi pintuanApi;
 
-    private final IFeignMemberApi memberApi;
+    private final MemberApi memberApi;
 
     private final PointsGoodsService pointsGoodsService;
 

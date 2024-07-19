@@ -21,7 +21,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
@@ -31,7 +31,7 @@ import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.BaseSetting;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +43,10 @@ public class OrderCashier implements CashierExecute {
 
     /** 订单 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
 
     @Override
     public CashierEnum cashierEnum() {

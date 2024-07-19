@@ -7,7 +7,7 @@ option java_package = "com.taotao.cloud.member.api.grpc";
 option java_outer_classname = "MemberServiceProto";
 //option objc_class_prefix = "HLW";
 
-service MemberService {
+service MemberGrpcService {
   rpc insertMember (MemberRequest) returns (MemberResponse){}
 }
 

@@ -1,6 +1,5 @@
 package com.taotao.cloud.ai.config;
 
-import org.springframework.ai.embedding.EmbeddingClient;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.PgVectorStore;
 import org.springframework.ai.vectorstore.VectorStore;

@@ -39,7 +39,7 @@ public class RpcClient extends SimpleChannelInboundHandler<RpcReponse> {
 	 * @param request request
 	 * @return com.taotao.rpc.common.RpcReponse
 	 * @author shuigedeng
-	 * @date 2024.06
+	 * @since 2024.06
 	 */
 	public RpcReponse send(RpcRequest request) throws Exception {
 		EventLoopGroup group = new NioEventLoopGroup();

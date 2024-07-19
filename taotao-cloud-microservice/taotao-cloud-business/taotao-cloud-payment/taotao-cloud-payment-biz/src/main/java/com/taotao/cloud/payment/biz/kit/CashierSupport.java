@@ -22,14 +22,14 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.payment.api.enums.PaymentClientEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.kit.dto.PayParam;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;
 import com.taotao.cloud.payment.biz.kit.params.dto.CashierParam;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.PaymentSupportSetting;
@@ -51,10 +51,10 @@ public class CashierSupport {
     private List<CashierExecute> cashierExecuteList;
     /** 预存款 */
     @Autowired
-    private IFeignMemberWalletApi memberWalletApi;
+    private MemberWalletApi memberWalletApi;
     /** 配置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
 
     /**
      * 支付

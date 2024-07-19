@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.workflow.integration.sku.proxy;
 
-import com.taotao.cloud.goods.api.dubbo.IDubboGoodsRpc;
+import com.taotao.cloud.goods.api.dubbo.GoodsRpcService;
 import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
 import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.workflow.integration.sku.adapter.SkuClientAdapter;
@@ -33,18 +33,18 @@ import org.springframework.stereotype.Component;
 public class SkuClientProxy {
 
 	@Resource
-	private IFeignGoodsSkuApi goodsSkuApi;
+	private GoodsSkuApi goodsSkuApi;
 	@Resource
 	private SkuClientAdapter skuClientAdapter;
 	@Resource
 	private SkuGrpcClient skuGrpcClient;
 	@Reference
-	private IDubboGoodsRpc goodsRpc;
+	private GoodsRpcService goodsRpcService;
 
 	// 查询用户
 	public SkuVO getUserInfo(Long  skuId) {
 		GoodsSkuSpecGalleryVO user = goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
-		DubboGoodsQueryResponse goodsQueryResponse = goodsRpc.queryGoodsByParams(new DubboGoodsQueryRequest());
+		DubboGoodsQueryResponse goodsQueryResponse = goodsRpcService.queryGoodsByParams(new DubboGoodsQueryRequest());
 
 		HelloReply helloReply = skuGrpcClient.sayHello("");
 

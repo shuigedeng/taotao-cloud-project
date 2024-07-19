@@ -1,4 +1,4 @@
-package com.xx.plugin.es.enc.character;
+package com.taotao.cloud.maven.plugin.aa;
 
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
@@ -30,7 +30,7 @@ public class EncCharFilterFactory extends AbstractCharFilterFactory implements N
 
     @Override
     public Reader create(Reader reader) {
-        return new EncCharFilter(reader, normalizer);
+        return new com.caspar.es.plugin.hello.EncCharFilter(reader, normalizer);
     }
 }
 

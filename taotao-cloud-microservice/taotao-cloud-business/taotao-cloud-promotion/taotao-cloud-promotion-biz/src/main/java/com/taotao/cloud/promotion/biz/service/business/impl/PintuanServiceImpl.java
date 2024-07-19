@@ -20,11 +20,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.order.api.model.page.order.OrderPageQuery;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
@@ -64,13 +64,13 @@ public class PintuanServiceImpl extends AbstractPromotionsServiceImpl<PintuanMap
     private IPromotionGoodsService promotionGoodsService;
     /** 规格商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
     /** 会员 */
     @Autowired
-    private IFeignMemberApi memberApi;
+    private MemberApi memberApi;
     /** 订单 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
 
     /**
      * 获取当前拼团的会员

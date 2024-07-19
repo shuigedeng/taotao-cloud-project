@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
+import com.taotao.cloud.goods.api.feign.GoodsEsIndexApi;
 import com.taotao.cloud.goods.api.model.vo.EsGoodsIndexVO;
 import com.taotao.cloud.member.biz.mapper.IFootprintMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberBrowse;
@@ -46,7 +46,7 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 
     /** es商品业务层 */
     @Autowired
-    private IFeignEsGoodsIndexApi esGoodsIndexApi;
+    private GoodsEsIndexApi esGoodsIndexApi;
 
     @Override
     public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {

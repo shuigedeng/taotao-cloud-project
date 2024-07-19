@@ -3,7 +3,7 @@ package com.taotao.cloud.flink.doe.beans;
 
 
 /**
- * @Date: 2023/12/27
+ * @since: 2023/12/27
  * @Author: Hang.Nian.YY
  * @WX: 17710299606
  * @Tips: 学大数据 ,到多易教育

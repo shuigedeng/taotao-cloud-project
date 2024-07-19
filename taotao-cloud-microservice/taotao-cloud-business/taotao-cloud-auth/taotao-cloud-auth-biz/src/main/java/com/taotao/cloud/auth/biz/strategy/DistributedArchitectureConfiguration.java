@@ -23,7 +23,7 @@ import com.taotao.cloud.auth.biz.strategy.local.SysPermissionService;
 import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
 import com.taotao.cloud.auth.biz.strategy.remote.RemotePermissionDetailsService;
 import com.taotao.cloud.auth.biz.strategy.remote.RemoteUserDetailsService;
-import com.taotao.cloud.sys.api.feign.IFeignUserApi;
+import com.taotao.cloud.sys.api.feign.UserApi;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +83,7 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyUserDetailsService remoteUserDetailsService(IFeignUserApi userApi) {
+        public StrategyUserDetailsService remoteUserDetailsService(UserApi userApi) {
             log.debug(" Strategy [Remote User Details Service] Auto Configure.");
             return new RemoteUserDetailsService(userApi);
         }

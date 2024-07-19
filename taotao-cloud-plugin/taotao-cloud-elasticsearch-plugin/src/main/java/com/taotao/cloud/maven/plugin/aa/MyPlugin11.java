@@ -1,4 +1,6 @@
-import com.sun.source.util.Plugin;
+package com.taotao.cloud.maven.plugin.aa;
+
+import org.elasticsearch.plugins.Plugin;
 
 public class MyPlugin11 extends Plugin {
 

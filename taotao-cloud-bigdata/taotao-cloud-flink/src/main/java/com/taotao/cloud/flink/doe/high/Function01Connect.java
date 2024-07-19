@@ -8,7 +8,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.co.CoMapFunction;
 
 /**
- * @Date: 2024/1/3
+ * @since: 2024/1/3
  * @Author: Hang.Nian.YY
  * @WX: 17710299606
  * @Tips: 学大数据 ,到多易教育

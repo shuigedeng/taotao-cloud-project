@@ -14,7 +14,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
 
 /**
- * @Date: 2024/1/3
+ * @since: 2024/1/3
  * @Author: Hang.Nian.YY
  * @WX: 17710299606
  * @Tips: 学大数据 ,到多易教育

@@ -24,15 +24,13 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsOperationDTO;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
-import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsListVO;
 import com.taotao.cloud.promotion.api.model.page.KanjiaActivityGoodsPageQuery;
-import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import com.taotao.cloud.promotion.biz.mapper.KanJiaActivityGoodsMapper;
 import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
@@ -63,7 +61,7 @@ public class KanjiaActivityGoodsServiceImpl extends ServiceImpl<KanJiaActivityGo
 
     /** 规格商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     @Autowired
     private IPromotionGoodsService promotionGoodsService;

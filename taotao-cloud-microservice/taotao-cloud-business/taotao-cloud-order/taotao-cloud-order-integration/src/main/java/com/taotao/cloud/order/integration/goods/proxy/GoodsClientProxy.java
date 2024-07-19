@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.order.integration.goods.proxy;
 
-import com.taotao.cloud.goods.api.dubbo.IDubboGoodsRpc;
+import com.taotao.cloud.goods.api.dubbo.GoodsRpcService;
 import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
 import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
+import com.taotao.cloud.goods.api.feign.GoodsApi;
 import com.taotao.cloud.goods.api.grpc.CountStoreGoodsNumResponse;
 import com.taotao.cloud.order.integration.goods.adapter.GoodsClientAdapter;
 import com.taotao.cloud.order.integration.goods.grpc.GoodsGrpcClient;
@@ -32,18 +32,18 @@ import org.springframework.stereotype.Component;
 public class GoodsClientProxy {
 
 	@Resource
-	private IFeignGoodsApi goodsApi;
+	private GoodsApi goodsApi;
 	@Resource
 	private GoodsClientAdapter userIntegrationAdapter;
 	@Resource
 	private GoodsGrpcClient goodsGrpcClient;
 	@Reference
-	private IDubboGoodsRpc goodsRpc;
+	private GoodsRpcService goodsRpcService;
 
 	// 查询用户
 	public GoodsVO getGoodsVO(Long storeId) {
 		Long goodsNum = goodsApi.countStoreGoodsNum(storeId);
-		DubboGoodsQueryResponse goods = goodsRpc.queryGoodsByParams(new DubboGoodsQueryRequest());
+		DubboGoodsQueryResponse goods = goodsRpcService.queryGoodsByParams(new DubboGoodsQueryRequest());
 		CountStoreGoodsNumResponse helloReply = goodsGrpcClient.countStoreGoodsNum("sfdasdf");
 
 		return userIntegrationAdapter.convert(goodsNum, goods, helloReply);

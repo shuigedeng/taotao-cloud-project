@@ -30,7 +30,7 @@ import com.taotao.cloud.common.support.tuple.Tuple3;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
 import com.taotao.cloud.member.sys.model.dto.MemberEvaluationDTO;
@@ -46,8 +46,8 @@ import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
+import com.taotao.cloud.order.api.feign.OrderItemApi;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
 import com.taotao.cloud.sensitive.word.SensitiveWordsFilter;
@@ -76,13 +76,13 @@ public class MemberEvaluationServiceImpl extends ServiceImpl<IMemberEvaluationMa
     private IMemberService memberService;
     /** 订单 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
     /** 子订单 */
     @Autowired
-    private IFeignOrderItemApi orderItemApi;
+    private OrderItemApi orderItemApi;
     /** 商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
     /** rocketMq */
     @Autowired
     private RocketMQTemplate rocketMQTemplate;

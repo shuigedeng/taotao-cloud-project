@@ -4,7 +4,7 @@ package com.taotao.cloud.flink.doe.operator;
 import org.apache.flink.api.common.functions.Partitioner;
 
 /**
- * @Date: 2023/12/31
+ * @since: 2023/12/31
  * @Author: Hang.Nian.YY
  * @WX: 17710299606
  * @Tips: 学大数据 ,到多易教育

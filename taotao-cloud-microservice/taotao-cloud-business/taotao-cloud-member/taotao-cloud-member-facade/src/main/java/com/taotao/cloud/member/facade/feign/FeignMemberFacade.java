@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.facade.feign;
 
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.member.api.feign.response.FeignMemberResponse;
 import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "内部调用端-会员API", description = "内部调用端-会员API")
-public class FeignMemberFacade implements IFeignMemberApi {
+public class FeignMemberFacade implements MemberApi {
 
 	private final IMemberService memberService;
 

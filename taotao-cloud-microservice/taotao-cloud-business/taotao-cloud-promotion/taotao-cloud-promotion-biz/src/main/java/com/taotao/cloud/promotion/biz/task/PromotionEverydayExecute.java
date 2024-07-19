@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.promotion.biz.task;
 
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
+import com.taotao.cloud.goods.api.feign.GoodsEsIndexApi;
 import com.taotao.cloud.promotion.biz.model.entity.Seckill;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;
 import com.taotao.cloud.web.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +32,10 @@ public class PromotionEverydayExecute implements EveryDayExecute {
 
     /** ES商品索引 */
     @Autowired
-    private IFeignEsGoodsIndexApi esGoodsIndexApi;
+    private GoodsEsIndexApi esGoodsIndexApi;
     /** 系统设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** 秒杀活动 */
     @Autowired
     private ISeckillService seckillService;

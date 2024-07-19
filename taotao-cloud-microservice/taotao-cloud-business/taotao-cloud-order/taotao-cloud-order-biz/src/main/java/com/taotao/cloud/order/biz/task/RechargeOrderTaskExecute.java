@@ -17,10 +17,10 @@
 package com.taotao.cloud.order.biz.task;
 
 import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
-import com.taotao.cloud.member.api.feign.IFeignMemberRechargeApi;
+import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +38,10 @@ public class RechargeOrderTaskExecute implements EveryMinuteExecute {
 
     /** 充值 */
     @Autowired
-    private IFeignMemberRechargeApi memberRechargeApi;
+    private MemberRechargeApi memberRechargeApi;
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
 
     @Override
     public void execute() {

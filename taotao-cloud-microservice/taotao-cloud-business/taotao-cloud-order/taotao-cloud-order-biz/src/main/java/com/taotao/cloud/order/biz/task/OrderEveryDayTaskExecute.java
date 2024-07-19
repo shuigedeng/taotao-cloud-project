@@ -23,7 +23,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
+import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
 import com.taotao.cloud.member.api.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -36,10 +36,9 @@ import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.OrderSettingVO;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -61,10 +60,10 @@ public class OrderEveryDayTaskExecute implements EveryDayExecute {
     private IOrderItemService orderItemService;
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** 会员评价 */
     @Autowired
-    private IFeignMemberEvaluationApi memberEvaluationApi;
+    private MemberEvaluationApi memberEvaluationApi;
 
     @Autowired
     private IAfterSaleService afterSaleService;

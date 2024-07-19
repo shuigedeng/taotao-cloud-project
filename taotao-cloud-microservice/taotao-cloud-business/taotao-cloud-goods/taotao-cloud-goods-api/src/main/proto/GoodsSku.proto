@@ -8,7 +8,7 @@ option java_outer_classname = "GoodsSkuProto";
 //option objc_class_prefix = "HLW";
 
 // The device service definition.
-service GoodsSkuService {
+service GoodsSkuGrpcService {
     // Sends a message
     rpc updateGoodsStuck (DeviceFix) returns (BooleanReply){}
     rpc updateBatchById (DeviceFix) returns (BooleanReply){}

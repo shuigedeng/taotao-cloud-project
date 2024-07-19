@@ -26,7 +26,7 @@ import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.biz.mapper.IMemberAddressMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberAddress;
 import com.taotao.cloud.member.biz.service.business.IMemberAddressService;
-import com.taotao.cloud.sys.api.dubbo.IDubboUserRpc;
+import com.taotao.cloud.sys.api.dubbo.UserRpcService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ public class MemberAddressServiceImpl extends ServiceImpl<IMemberAddressMapper, 
         implements IMemberAddressService {
 
     @DubboReference
-    private IDubboUserRpc userRpc;
+    private UserRpcService userRpc;
 
     @Override
     public IPage<MemberAddress> queryPage(PageQuery page, Long memberId) {

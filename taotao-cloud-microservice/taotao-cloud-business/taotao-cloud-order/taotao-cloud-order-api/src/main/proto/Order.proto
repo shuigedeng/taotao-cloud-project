@@ -7,7 +7,7 @@ option java_package = "com.taotao.cloud.order.api.grpc";
 option java_outer_classname = "OrderServiceProto";
 //option objc_class_prefix = "HLW";
 
-service OrderService {
+service OrderGrpcService {
   rpc insertOrder (OrderRequest) returns (OrderResponse){}
 }
 

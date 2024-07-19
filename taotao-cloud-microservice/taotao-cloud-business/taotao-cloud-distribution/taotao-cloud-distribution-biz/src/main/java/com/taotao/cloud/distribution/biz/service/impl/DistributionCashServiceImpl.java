@@ -33,7 +33,7 @@ import com.taotao.cloud.distribution.biz.service.IDistributionService;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.enums.MemberWithdrawalDestinationEnum;
 import com.taotao.cloud.member.api.enums.WithdrawStatusEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;
 import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.stream.framework.rocketmq.tags.MemberTagsEnum;
@@ -56,7 +56,7 @@ public class DistributionCashServiceImpl extends ServiceImpl<DistributionCashMap
     private IDistributionService distributionService;
     /** 会员余额 */
     @Autowired
-    private IFeignMemberWalletApi memberWalletApi;
+    private MemberWalletApi memberWalletApi;
 
     @Autowired
     private RocketMQTemplate rocketMQTemplate;

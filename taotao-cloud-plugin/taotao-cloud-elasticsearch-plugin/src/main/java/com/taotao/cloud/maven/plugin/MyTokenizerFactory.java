@@ -1,3 +1,10 @@
+package com.taotao.cloud.maven.plugin;
+
+import org.apache.lucene.analysis.Tokenizer;
+import org.elasticsearch.env.Environment;
+import org.elasticsearch.index.IndexSettings;
+import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
+
 public class MyTokenizerFactory extends AbstractTokenizerFactory {
 
     private MyConfiguration configuration;

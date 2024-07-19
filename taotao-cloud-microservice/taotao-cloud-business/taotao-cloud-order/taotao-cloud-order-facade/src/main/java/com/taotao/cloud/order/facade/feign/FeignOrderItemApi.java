@@ -17,15 +17,10 @@
 package com.taotao.cloud.order.facade.feign;
 
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
+import com.taotao.cloud.order.api.feign.OrderItemApi;
 import com.taotao.cloud.order.api.feign.request.FeignOrderItemSaveRequest;
-import com.taotao.cloud.order.api.feign.request.FeignOrderSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderDetailResponse;
 import com.taotao.cloud.order.api.feign.response.FeignOrderItemResponse;
-import com.taotao.cloud.order.api.feign.response.FeignOrderResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class FeignOrderItemApi implements IFeignOrderItemApi {
+public class FeignOrderItemApi implements OrderItemApi {
 
 
 	@Override

@@ -27,11 +27,11 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsSearchApi;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsApi;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsEsSearchApi;
+import com.taotao.cloud.goods.api.feign.GoodsApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
-import com.taotao.cloud.member.api.feign.IFeignMemberAddressApi;
+import com.taotao.cloud.member.api.feign.MemberAddressApi;
 import com.taotao.cloud.member.api.model.vo.MemberAddressVO;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
@@ -84,17 +84,17 @@ public class CartServiceImpl implements ICartService {
     /** 会员优惠券 */
     private final IFeignMemberCouponApi memberCouponApi;
     /** 规格商品 */
-    private final IFeignGoodsSkuApi goodsSkuApi;
+    private final GoodsSkuApi goodsSkuApi;
     /** 促销商品 */
     private final IFeignPromotionGoodsApi promotionGoodsApi;
     /** 促销商品 */
     private final IFeignPointsGoodsApi pointsGoodsApi;
     /** 会员地址 */
-    private final IFeignMemberAddressApi memberAddressApi;
+    private final MemberAddressApi memberAddressApi;
     /** ES商品 */
-    private final IFeignEsGoodsSearchApi esGoodsSearchApi;
+    private final GoodsEsSearchApi esGoodsSearchApi;
     /** ES商品 */
-    private final IFeignGoodsApi goodsApi;
+    private final GoodsApi goodsApi;
     /** 拼团 */
     private final IFeignPintuanApi pintuanApi;
     /** 砍价活动 */

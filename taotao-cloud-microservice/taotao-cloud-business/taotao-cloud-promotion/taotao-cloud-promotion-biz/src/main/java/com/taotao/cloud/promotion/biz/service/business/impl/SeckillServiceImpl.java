@@ -24,7 +24,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
+import com.taotao.cloud.goods.api.feign.GoodsEsIndexApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsApplyStatusEnum;
 import com.taotao.cloud.promotion.api.model.vo.SeckillVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -34,7 +34,7 @@ import com.taotao.cloud.promotion.biz.model.entity.SeckillApply;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillApplyService;
 import com.taotao.cloud.promotion.biz.service.business.ISeckillService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.SeckillSetting;
 import com.taotao.cloud.sys.api.model.vo.setting.SettingVO;
 import java.util.Arrays;
@@ -58,10 +58,10 @@ public class SeckillServiceImpl extends AbstractPromotionsServiceImpl<SeckillMap
 
     /** 商品索引 */
     @Autowired
-    private IFeignEsGoodsIndexApi esGoodsIndexApi;
+    private GoodsEsIndexApi esGoodsIndexApi;
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
 
     @Autowired
     private ISeckillApplyService seckillApplyService;

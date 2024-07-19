@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.goods.api.feign.IFeignEsGoodsIndexApi;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsEsIndexApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
@@ -57,10 +57,10 @@ public class PointsGoodsServiceImpl extends AbstractPromotionsServiceImpl<Points
     private IPromotionGoodsService promotionGoodsService;
     /** 规格商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     @Autowired
-    private IFeignEsGoodsIndexApi esGoodsIndexApi;
+    private GoodsEsIndexApi esGoodsIndexApi;
 
     @Override
     public boolean savePointsGoodsBatch(List<PointsGoods> promotionsList) {

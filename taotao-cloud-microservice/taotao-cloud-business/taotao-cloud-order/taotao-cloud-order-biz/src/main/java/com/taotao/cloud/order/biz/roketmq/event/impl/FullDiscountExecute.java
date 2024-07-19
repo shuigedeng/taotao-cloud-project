@@ -22,10 +22,10 @@ import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderItemAfterSaleStatusEnum;
@@ -70,7 +70,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
     private RedisRepository redisRepository;
 
     @Autowired
-    private IFeignMemberApi memberApi;
+    private MemberApi memberApi;
 
     @Autowired
     private IOrderService orderService;
@@ -85,7 +85,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
     private IFeignMemberCouponApi memberCouponApi;
 
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     @Autowired
     private RocketmqCustomProperties rocketmqCustomProperties;

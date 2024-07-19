@@ -20,7 +20,7 @@ import org.springframework.core.Ordered;
 /**
  * @version : 2022-12-7 14:30
  * @author: chejiangyi * 
- * @date 2022-12-7
+ * @since 2022-12-7
  **/
 @Configuration
 @ConditionalOnProperty(name = com.taotao.cloud.rpc.registry.apiregistry.ApiRegistryProperties.Enabled, havingValue = "true")

@@ -23,8 +23,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.promotion.api.enums.KanJiaStatusEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityDTO;
@@ -67,10 +67,10 @@ public class KanjiaActivityServiceImpl extends ServiceImpl<KanJiaActivityMapper,
     private IKanjiaActivityLogService kanjiaActivityLogService;
 
     @Autowired
-    private IFeignMemberApi memberApi;
+    private MemberApi memberApi;
 
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     @Override
     public KanjiaActivity getKanjiaActivity(KanjiaActivitySearchQuery searchQuery) {

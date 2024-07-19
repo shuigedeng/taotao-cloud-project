@@ -7,7 +7,7 @@ option java_package = "com.taotao.cloud.goods.api.grpc";
 option java_outer_classname = "CategoryServiceProto";
 //option objc_class_prefix = "HLW";
 
-service CategoryService {
+service CategoryGrpcService {
   rpc firstCategory (FirstCategoryRequest) returns (FirstCategoryResponse){}
 }
 

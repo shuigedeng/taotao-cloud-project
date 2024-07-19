@@ -30,7 +30,7 @@ import com.taotao.cloud.distribution.biz.model.entity.Distribution;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionGoods;
 import com.taotao.cloud.distribution.biz.service.IDistributionGoodsService;
 import com.taotao.cloud.distribution.biz.service.IDistributionService;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -48,7 +48,7 @@ public class DistributionGoodsServiceImpl extends ServiceImpl<DistributionGoodsM
     private IDistributionService distributionService;
     /** 规格商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
 
     @Override
     public IPage<DistributionGoodsVO> goodsPage(DistributionGoodsPageQuery searchParams) {

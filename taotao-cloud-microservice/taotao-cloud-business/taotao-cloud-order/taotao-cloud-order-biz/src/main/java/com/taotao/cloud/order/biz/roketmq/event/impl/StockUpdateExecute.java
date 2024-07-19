@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
@@ -67,7 +67,7 @@ public class StockUpdateExecute implements OrderStatusChangeEvent {
     private IOrderService orderService;
     /** 规格商品 */
     @Autowired
-    private IFeignGoodsSkuApi goodsSkuApi;
+    private GoodsSkuApi goodsSkuApi;
     /** 促销商品 */
     @Autowired
     private IFeignPromotionGoodsApi promotionGoodsApi;

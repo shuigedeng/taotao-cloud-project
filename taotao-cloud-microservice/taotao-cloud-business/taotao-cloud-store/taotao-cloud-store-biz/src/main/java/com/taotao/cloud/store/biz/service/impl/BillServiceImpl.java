@@ -27,15 +27,12 @@ import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.order.FlowTypeEnum;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.feign.StoreFlowApi;
 import com.taotao.cloud.order.api.model.page.order.StoreFlowQuery;
 import com.taotao.cloud.store.api.enums.BillStatusEnum;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;
 import com.taotao.cloud.store.api.model.vo.StoreDetailInfoVO;
-import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
-import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
-import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
 import com.taotao.cloud.store.biz.mapper.BillMapper;
 import com.taotao.cloud.store.biz.model.entity.Bill;
 import com.taotao.cloud.store.biz.service.IBillService;
@@ -47,7 +44,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
@@ -71,7 +67,7 @@ public class BillServiceImpl extends ServiceImpl<BillMapper, Bill> implements IB
     private IStoreDetailService storeDetailService;
     /** 商家流水 */
     @Autowired
-    private IFeignStoreFlowApi storeFlowApi;
+    private StoreFlowApi storeFlowApi;
 
     @Override
     public void createBill(String storeId, LocalDateTime startTime, LocalDateTime endTime) {

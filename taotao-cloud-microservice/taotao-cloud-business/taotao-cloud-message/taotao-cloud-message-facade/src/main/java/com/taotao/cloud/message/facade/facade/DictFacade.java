@@ -6,7 +6,7 @@ import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.ratelimit.annotation.GuavaLimit;
 import com.taotao.cloud.ratelimit.annotation.Limit;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
-import com.taotao.cloud.sys.api.feign.IFeignDictApi;
+import com.taotao.cloud.sys.api.feign.DictApi;
 import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.yomahub.tlog.core.annotation.TLogAspect;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @RequestMapping("/sys/feign/dict")
-public class DictFacade  implements IFeignDictApi {
+public class DictFacade  implements DictApi {
 
 	@Override
 	@NotAuth

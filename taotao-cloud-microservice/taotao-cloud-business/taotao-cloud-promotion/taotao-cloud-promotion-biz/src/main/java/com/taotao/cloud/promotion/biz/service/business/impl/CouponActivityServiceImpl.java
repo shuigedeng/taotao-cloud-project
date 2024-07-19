@@ -20,7 +20,7 @@ import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;
 import com.taotao.cloud.promotion.api.enums.CouponActivityTypeEnum;
@@ -43,7 +43,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +67,7 @@ public class CouponActivityServiceImpl extends AbstractPromotionsServiceImpl<Cou
     private ICouponActivityItemService couponActivityItemService;
 
     @Autowired
-    private IFeignMemberApi memberApi;
+    private MemberApi memberApi;
 
     @Override
     public CouponActivityVO getCouponActivityVO(String couponActivityId) {

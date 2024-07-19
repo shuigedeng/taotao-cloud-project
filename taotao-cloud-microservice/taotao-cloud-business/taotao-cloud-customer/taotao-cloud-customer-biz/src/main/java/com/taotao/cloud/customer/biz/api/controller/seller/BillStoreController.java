@@ -23,7 +23,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.feign.StoreFlowApi;
 import com.taotao.cloud.order.api.web.vo.order.StoreFlowVO;
 import com.taotao.cloud.store.api.model.query.BillPageQuery;
 import com.taotao.cloud.store.api.model.vo.BillListVO;
@@ -58,7 +58,7 @@ public class BillStoreController {
     private BillService billService;
 
     @Autowired
-    private IFeignStoreFlowApi storeFlowApi;
+    private StoreFlowApi storeFlowApi;
 
     @Operation(summary = "获取结算单分页", description = "获取结算单分页")
     @RequestLogger

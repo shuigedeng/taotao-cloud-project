@@ -46,7 +46,7 @@ import com.taotao.cloud.payment.biz.properties.ApiProperties;
 import com.taotao.cloud.payment.biz.service.PaymentService;
 import com.taotao.cloud.payment.biz.service.RefundLogService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.payment.AlipayPaymentSetting;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -71,7 +71,7 @@ public class AliPayPlugin implements Payment {
     private CashierSupport cashierSupport;
     /** 设置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** API域名 */
     @Autowired
     private ApiProperties apiProperties;

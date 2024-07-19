@@ -15,7 +15,7 @@ option java_package = "com.taotao.cloud.sys.api.grpc";
 option java_outer_classname = "UserServiceProto";
 //option objc_class_prefix = "HLW";
 
-service UserService {
+service UserGrpcService {
   rpc findUserInfoByUsername (FindUserInfoByUsernameRequest) returns (FindUserInfoByUsernameResponse){}
   rpc getUserInfoBySocial (GetUserInfoBySocialRequest) returns (GetUserInfoBySocialResponse){}
   rpc getSysSecurityUser (GetSysSecurityUserRequest) returns (GetSysSecurityUserResponse){}

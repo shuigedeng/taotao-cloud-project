@@ -7,7 +7,7 @@ option java_package = "com.taotao.cloud.member.api.grpc";
 option java_outer_classname = "MemberWalletServiceProto";
 //option objc_class_prefix = "HLW";
 
-service MemberWalletService {
+service MemberWalletGrpcService {
   rpc insertDeviceFix (MemberWalletRequest) returns (MemberWalletResponse){}
 }
 

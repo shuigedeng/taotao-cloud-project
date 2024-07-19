@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.api.feign.fallback;
 
-import com.taotao.cloud.order.api.feign.IFeignTradeApi;
+import com.taotao.cloud.order.api.feign.TradeApi;
 import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -26,11 +26,11 @@ import org.springframework.cloud.openfeign.FallbackFactory;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignTradeApiFallback implements FallbackFactory<IFeignTradeApi> {
+public class FeignTradeApiFallback implements FallbackFactory<TradeApi> {
 
     @Override
-    public IFeignTradeApi create(Throwable throwable) {
-        return new IFeignTradeApi() {
+    public TradeApi create(Throwable throwable) {
+        return new TradeApi() {
 
             @Override
             public FeignTradeResponse getBySn(String sn) {

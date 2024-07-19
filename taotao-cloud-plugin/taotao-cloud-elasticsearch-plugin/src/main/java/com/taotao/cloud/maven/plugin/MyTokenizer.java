@@ -1,3 +1,12 @@
+package com.taotao.cloud.maven.plugin;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
+
 public final class MyTokenizer extends Tokenizer {
     //词元文本属性
     private final CharTermAttribute termAtt;

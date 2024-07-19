@@ -28,7 +28,7 @@ import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.api.feign.IFeignGoodsSkuApi;
+import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;
@@ -69,7 +69,7 @@ public class OrderComplaintServiceImpl extends ServiceImpl<IOrderComplaintMapper
     /** 订单货物 */
     private final IOrderItemService orderItemService;
     /** 商品规格 */
-    private final IFeignGoodsSkuApi goodsSkuApi;
+    private final GoodsSkuApi goodsSkuApi;
     /** 交易投诉沟通 */
     private final IOrderComplaintCommunicationService orderComplaintCommunicationService;
 

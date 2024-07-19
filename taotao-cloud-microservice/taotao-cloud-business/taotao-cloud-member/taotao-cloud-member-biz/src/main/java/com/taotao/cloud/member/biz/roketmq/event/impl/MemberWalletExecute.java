@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.roketmq.event.impl;
 
-import com.taotao.cloud.member.api.feign.IFeignMemberWalletApi;
+import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberRegisterEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class MemberWalletExecute implements MemberRegisterEvent {
 
     @Autowired
-    private IFeignMemberWalletApi memberWalletApi;
+    private MemberWalletApi memberWalletApi;
 
     @Override
     public void memberRegister(Member member) {

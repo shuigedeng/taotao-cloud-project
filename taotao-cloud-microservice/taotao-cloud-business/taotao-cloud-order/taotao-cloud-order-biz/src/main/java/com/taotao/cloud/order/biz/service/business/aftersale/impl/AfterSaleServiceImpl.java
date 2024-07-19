@@ -58,7 +58,7 @@ import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.api.feign.IFeignRefundSupportApi;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
-import com.taotao.cloud.sys.api.feign.IFeignLogisticsApi;
+import com.taotao.cloud.sys.api.feign.LogisticsApi;
 import com.taotao.cloud.sys.api.model.vo.logistics.LogisticsVO;
 import com.taotao.cloud.sys.api.model.vo.logistics.TracesVO;
 import lombok.AllArgsConstructor;
@@ -96,7 +96,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 物流公司
 	 */
-	private final IFeignLogisticsApi logisticsApi;
+	private final LogisticsApi logisticsApi;
 	/**
 	 * 店铺详情
 	 */

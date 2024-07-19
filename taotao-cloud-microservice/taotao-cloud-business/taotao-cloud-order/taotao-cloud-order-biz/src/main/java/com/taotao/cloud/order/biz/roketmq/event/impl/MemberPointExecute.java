@@ -19,7 +19,7 @@ package com.taotao.cloud.order.biz.roketmq.event.impl;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
-import com.taotao.cloud.member.api.feign.IFeignMemberApi;
+import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
@@ -30,7 +30,7 @@ import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.cloud.sys.api.feign.IFeignSettingApi;
+import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.PointSettingVO;
 import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +48,10 @@ public class MemberPointExecute implements OrderStatusChangeEvent, AfterSaleStat
 
     /** 配置 */
     @Autowired
-    private IFeignSettingApi settingApi;
+    private SettingApi settingApi;
     /** 会员 */
     @Autowired
-    private IFeignMemberApi memberApi;
+    private MemberApi memberApi;
     /** 订单 */
     @Autowired
     private IOrderService orderService;

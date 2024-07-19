@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.payment.biz.kit;
 
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
-import com.taotao.cloud.order.api.feign.IFeignOrderItemApi;
-import com.taotao.cloud.order.api.feign.IFeignStoreFlowApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
+import com.taotao.cloud.order.api.feign.OrderItemApi;
+import com.taotao.cloud.order.api.feign.StoreFlowApi;
 import com.taotao.cloud.order.api.model.vo.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderItemVO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
@@ -40,13 +40,13 @@ public class RefundSupport {
 
     /** 店铺流水 */
     @Autowired
-    private IFeignStoreFlowApi storeFlowApi;
+    private StoreFlowApi storeFlowApi;
     /** 订单 */
     @Autowired
-    private IFeignOrderApi orderApi;
+    private OrderApi orderApi;
     /** 子订单 */
     @Autowired
-    private IFeignOrderItemApi orderItemApi;
+    private OrderItemApi orderItemApi;
 
     /**
      * 售后退款

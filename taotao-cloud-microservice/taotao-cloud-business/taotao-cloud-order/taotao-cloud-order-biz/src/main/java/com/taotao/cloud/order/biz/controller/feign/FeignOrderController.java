@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.controller.feign;
 
-import com.taotao.cloud.order.api.feign.IFeignOrderApi;
+import com.taotao.cloud.order.api.feign.OrderApi;
 import com.taotao.cloud.order.sys.model.dto.order_info.OrderSaveDTO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderDetailVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RestController
 @Tag(name = "移动端-字典API", description = "移动端-字典API")
-public class FeignOrderController implements IFeignOrderApi {
+public class FeignOrderController implements OrderApi {
 
     @Override
     public OrderVO findOrderInfoByCode(String code) {
