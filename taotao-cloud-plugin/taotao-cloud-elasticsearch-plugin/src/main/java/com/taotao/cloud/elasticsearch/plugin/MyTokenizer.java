@@ -1,11 +1,12 @@
-package com.taotao.cloud.maven.plugin;
+package com.taotao.cloud.elasticsearch.plugin;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public final class MyTokenizer extends Tokenizer {
     //词元文本属性

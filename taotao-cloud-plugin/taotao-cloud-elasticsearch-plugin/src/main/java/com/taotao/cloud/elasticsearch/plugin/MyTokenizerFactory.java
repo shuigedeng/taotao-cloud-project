@@ -1,4 +1,4 @@
-package com.taotao.cloud.maven.plugin;
+package com.taotao.cloud.elasticsearch.plugin;
 
 import org.apache.lucene.analysis.Tokenizer;
 import org.elasticsearch.env.Environment;

@@ -34,10 +34,11 @@ dependencies {
     implementation 'org.apache.flink:flink-cep:1.19.1'
     implementation "org.apache.flink:flink-csv:1.19.1"
     implementation 'org.apache.flink:flink-parquet:1.19.1'
-    implementation 'org.apache.parquet:parquet-avro:1.13.1'
+    implementation 'org.apache.parquet:parquet-avro:1.14.1'
     implementation 'org.apache.flink:flink-avro:1.19.1'
     implementation 'org.apache.flink:flink-json:1.19.1'
     implementation 'org.apache.flink:flink-format-common:1.19.1'
+    implementation 'org.apache.flink:flink-compress:1.19.1'
 
     //flink连接器
     implementation 'org.apache.flink:flink-connector-datagen:1.19.1'
@@ -58,6 +59,9 @@ dependencies {
     //implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
 
     //flink cdc
+    implementation 'org.apache.flink:flink-cdc-base:3.1.1'
+    implementation 'org.apache.flink:flink-cdc-cli:3.1.1'
+    implementation 'org.apache.flink:flink-cdc-runtime:3.1.1'
     implementation 'org.apache.flink:flink-cdc-pipeline-connectors:3.1.1'
     implementation 'org.apache.flink:flink-cdc-pipeline-connector-doris:3.1.1'
     implementation 'org.apache.flink:flink-cdc-pipeline-connector-kafka:3.1.1'

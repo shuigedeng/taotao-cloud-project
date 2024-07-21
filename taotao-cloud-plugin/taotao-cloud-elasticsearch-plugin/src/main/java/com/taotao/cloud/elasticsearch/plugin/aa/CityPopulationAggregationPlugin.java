@@ -1,13 +1,14 @@
-package com.taotao.cloud.maven.plugin.aa;
+package com.taotao.cloud.elasticsearch.plugin.aa;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.SearchPlugin.AggregationSpec;
 import org.elasticsearch.search.aggregations.InternalAggregation;
 import org.elasticsearch.search.aggregations.bucket.terms.InternalTerms;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CityPopulationAggregationPlugin extends Plugin {
 

@@ -1,4 +1,4 @@
-package com.taotao.cloud.maven.plugin.aa;
+package com.taotao.cloud.elasticsearch.plugin.aa;
 
 public class EncNormalizerImpl extends EncNormalizer{
 }

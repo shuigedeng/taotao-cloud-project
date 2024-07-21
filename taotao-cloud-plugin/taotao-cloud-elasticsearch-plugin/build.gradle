@@ -1,4 +1,4 @@
-import org.elasticsearch.gradle.VersionProperties
+//import org.elasticsearch.gradle.VersionProperties
 
 buildscript {
     repositories {
@@ -9,15 +9,15 @@ buildscript {
         mavenCentral()
     }
 
-    dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:8.14.3"
-    }
+    //dependencies {
+    //    classpath "org.elasticsearch.gradle:build-tools:8.14.3"
+    //}
 
 }
 
 apply plugin: 'java'
 apply plugin: "idea"
-apply plugin: 'elasticsearch.stable-esplugin'
+//apply plugin: 'elasticsearch.stable-esplugin'
 //apply plugin: 'elasticsearch.yaml-rest-test'
 
 dependencies {
@@ -38,7 +38,7 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
 }
 
-esplugin {
-    name 'stable-analysis-plugin'
-    description 'An example analysis plugin using stable plugin api'
-}
+//esplugin {
+//    name 'stable-analysis-plugin'
+//    description 'An example analysis plugin using stable plugin api'
+//}

@@ -1,8 +1,9 @@
-package com.taotao.cloud.maven.plugin;
+package com.taotao.cloud.elasticsearch.plugin;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class AnalyzeContext {

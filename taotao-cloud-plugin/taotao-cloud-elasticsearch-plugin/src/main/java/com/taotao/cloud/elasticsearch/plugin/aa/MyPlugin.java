@@ -1,11 +1,12 @@
-package com.taotao.cloud.maven.plugin.aa;
+package com.taotao.cloud.elasticsearch.plugin.aa;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.elasticsearch.index.IndexModule;
 import org.elasticsearch.indices.analysis.AnalysisModule;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.SearchPlugin.AggregationSpec;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyPlugin extends Plugin {
 

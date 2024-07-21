@@ -1,11 +1,12 @@
-package com.taotao.cloud.maven.plugin.aa;
+package com.taotao.cloud.elasticsearch.plugin.aa;
 
-import java.io.IOException;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractTokenizerFactory;
+
+import java.io.IOException;
 
 public class LowercaseTokenizerFactory extends AbstractTokenizerFactory {
  

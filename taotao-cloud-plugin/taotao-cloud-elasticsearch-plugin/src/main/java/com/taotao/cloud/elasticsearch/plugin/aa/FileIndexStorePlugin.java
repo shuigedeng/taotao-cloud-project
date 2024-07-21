@@ -1,7 +1,7 @@
-package com.taotao.cloud.maven.plugin.aa;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
+package com.taotao.cloud.elasticsearch.plugin.aa;
+
+import org.apache.lucene.store.IndexInput;
+import org.apache.lucene.store.IndexOutput;
 import org.elasticsearch.client.internal.Client;
 import org.elasticsearch.cluster.service.ClusterService;
 import org.elasticsearch.common.io.stream.NamedWriteableRegistry;
@@ -10,6 +10,14 @@ import org.elasticsearch.script.ScriptService;
 import org.elasticsearch.threadpool.ThreadPool;
 import org.elasticsearch.watcher.ResourceWatcherService;
 import org.elasticsearch.xcontent.NamedXContentRegistry;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class FileIndexStorePlugin extends Plugin {
  

@@ -1,4 +1,4 @@
-package com.taotao.cloud.maven.plugin.aa;
+package com.taotao.cloud.elasticsearch.plugin.aa;
 
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;

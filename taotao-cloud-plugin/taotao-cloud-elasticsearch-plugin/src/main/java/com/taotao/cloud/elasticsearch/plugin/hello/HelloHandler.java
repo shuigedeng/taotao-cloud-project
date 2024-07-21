@@ -1,7 +1,5 @@
-package com.taotao.cloud.maven.plugin.hello;
+package com.taotao.cloud.elasticsearch.plugin.hello;
 
-import java.io.IOException;
-import java.util.Date;
 import org.elasticsearch.client.internal.node.NodeClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.rest.BaseRestHandler;
@@ -9,6 +7,9 @@ import org.elasticsearch.rest.RestController;
 import org.elasticsearch.rest.RestRequest;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.xcontent.XContentBuilder;
+
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author caspar
@@ -24,7 +25,7 @@ public class HelloHandler extends BaseRestHandler {
 
 
 	@Override
-	protected BaseRestHandler.RestChannelConsumer prepareRequest(RestRequest restRequest,
+	protected RestChannelConsumer prepareRequest(RestRequest restRequest,
 		NodeClient nodeClient) throws IOException {
 		//接收的参数
 		System.out.println("params==" + restRequest.params());
