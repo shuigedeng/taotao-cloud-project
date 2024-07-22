@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DubboChatbotQueryRequest implements Serializable {
+public class ChatbotQueryRpcRequest implements Serializable {
 
     private static final long serialVersionUID = 5126530068827085130L;
 

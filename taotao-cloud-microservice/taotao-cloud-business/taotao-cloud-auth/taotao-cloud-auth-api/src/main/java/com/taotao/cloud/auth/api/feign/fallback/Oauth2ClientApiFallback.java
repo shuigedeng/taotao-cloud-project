@@ -17,8 +17,8 @@
  package com.taotao.cloud.auth.api.feign.fallback;
 
  import com.taotao.cloud.auth.api.feign.Oauth2ClientApi;
- import com.taotao.cloud.auth.api.feign.request.FeignClientQueryRequest;
- import com.taotao.cloud.auth.api.feign.response.FeignClientResponse;
+ import com.taotao.cloud.auth.api.feign.request.FeignClientQueryApiRequest;
+ import com.taotao.cloud.auth.api.feign.response.ClientApiResponse;
  import org.springframework.cloud.openfeign.FallbackFactory;
 
  /**
@@ -33,7 +33,7 @@
      public Oauth2ClientApi create(Throwable throwable) {
          return new Oauth2ClientApi() {
 			 @Override
-			 public FeignClientResponse query(FeignClientQueryRequest feignClientQueryRequest) {
+			 public ClientApiResponse query(FeignClientQueryApiRequest feignClientQueryApiRequest) {
 				 return null;
 			 }
 		 };

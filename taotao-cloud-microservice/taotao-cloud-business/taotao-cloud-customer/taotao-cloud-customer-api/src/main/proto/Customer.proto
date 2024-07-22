@@ -8,14 +8,14 @@ option java_outer_classname = "CustomerGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service CustomerGrpcService {
-  rpc query (CustomerRequest) returns (CustomerResponse){}
+  rpc query (CustomerGrpcRequest) returns (CustomerGrpcResponse){}
 }
 
-message CustomerRequest {
+message CustomerGrpcRequest {
   string id = 1;
 }
 
-message CustomerResponse {
+message CustomerGrpcResponse {
   string id = 1;
   string serialNum = 2;
   string userNum = 3;

@@ -8,15 +8,15 @@ option java_outer_classname = "Oauth2GrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service Oauth2GrpcService {
-  rpc loginByWechat (Oauth2Request) returns (Oauth2Response){}
-  rpc loginByQQ (Oauth2Request) returns (BooleanReply){}
+  rpc loginByWechat (Oauth2GrpcRequest) returns (Oauth2GrpcResponse){}
+  rpc loginByQQ (Oauth2GrpcRequest) returns (BooleanReply){}
 }
 
-message Oauth2Request {
+message Oauth2GrpcRequest {
   string id = 1;
 }
 
-message Oauth2Response {
+message Oauth2GrpcResponse {
   string id = 1;
   string serialNum = 2;
   string userNum = 3;

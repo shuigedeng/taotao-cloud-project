@@ -7,7 +7,8 @@ import com.taotao.cloud.cache.api.ICacheInterceptorContext;
 import com.taotao.cloud.cache.api.ICachePersist;
 import com.taotao.cloud.cache.model.PersistAofEntry;
 import com.taotao.cloud.cache.support.persist.CachePersistAof;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 顺序追加模式
  *

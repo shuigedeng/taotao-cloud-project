@@ -3,7 +3,8 @@ package com.taotao.cloud.cache.support.listener.slow;
 import com.taotao.cloud.cache.api.ICacheSlowListener;
 import com.taotao.cloud.cache.api.ICacheSlowListenerContext;
 import com.taotao.cloud.cache.support.interceptor.common.CacheInterceptorCost;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 慢日志监听类
  * @author shuigedeng

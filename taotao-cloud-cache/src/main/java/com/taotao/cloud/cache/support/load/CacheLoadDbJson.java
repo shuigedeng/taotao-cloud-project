@@ -5,7 +5,8 @@ import com.taotao.cloud.cache.api.ICacheLoad;
 import com.taotao.cloud.cache.model.PersistRdbEntry;
 
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 加载策略-文件路径
  * @author shuigedeng

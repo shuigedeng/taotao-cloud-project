@@ -64,7 +64,7 @@ public class ChannelFutureUtils {
 					.connect(address, port)
 					.syncUninterruptibly();
 
-				//log.info("启动客户端完成，监听 address: {}, port：{}", address, port);
+				LOG.info("启动客户端完成，监听 address: {}, port：{}", address, port);
 
 				RpcChannelFuture rpcChannelFuture = new RpcChannelFuture();
 				rpcChannelFuture.setChannelFuture(channelFuture);

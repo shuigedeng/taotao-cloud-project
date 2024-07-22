@@ -9,7 +9,8 @@ import com.taotao.cloud.cache.model.DoubleListNode;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 丢弃策略-LRU 最近最少使用
  *

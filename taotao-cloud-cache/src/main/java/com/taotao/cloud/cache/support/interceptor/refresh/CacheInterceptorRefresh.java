@@ -3,7 +3,8 @@ package com.taotao.cloud.cache.support.interceptor.refresh;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheInterceptor;
 import com.taotao.cloud.cache.api.ICacheInterceptorContext;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 刷新
  *

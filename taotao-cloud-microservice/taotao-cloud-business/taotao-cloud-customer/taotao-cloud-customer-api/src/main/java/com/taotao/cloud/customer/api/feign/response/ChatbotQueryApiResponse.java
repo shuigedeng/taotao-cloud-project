@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.auth.api.dubbo.response;
+package com.taotao.cloud.customer.api.feign.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -26,7 +26,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * 公司查询VO
+ * 公司查询对象
  *
  * @author shuigedeng
  * @version 2021.10
@@ -38,25 +38,47 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "公司查询VO")
-public class DubboClientResponse implements Serializable {
+public class ChatbotQueryApiResponse implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
 
-    private Long id;
+    @Schema(description = "租户id")
+    private String tenantId;
 
-    /** 字典名称 */
-    private String dictName;
+    @Schema(description = "租户密钥")
+    private String tenantSecret;
 
-    /** 字典编码 */
-    private String dictCode;
+    @Schema(description = "公司名称")
+    private String name;
 
-    /** 描述 */
-    private String description;
+    @Schema(description = "企业全称")
+    private String fullName;
 
-    /** 排序值 */
-    private Integer sortNum;
+    @Schema(description = "信用代码")
+    private String creditCode;
 
-    /** 备注信息 */
-    private String remark;
+    @Schema(description = "邮箱")
+    private String email;
+
+    @Schema(description = "联系人")
+    private String username;
+
+    @Schema(description = "联系人手机号")
+    private String phone;
+
+    @Schema(description = "联系人地址")
+    private String address;
+
+    @Schema(description = "请求域名")
+    private String domain;
+
+    @Schema(description = "公司网址")
+    private String webSite;
+
+    @Schema(description = "所在地区")
+    private String regionInfo;
+
+    @Schema(description = "公司类型")
+    private Integer type;
 }

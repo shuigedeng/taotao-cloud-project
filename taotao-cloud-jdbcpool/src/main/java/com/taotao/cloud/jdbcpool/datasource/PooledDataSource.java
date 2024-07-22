@@ -101,7 +101,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 
 		// 设置为不繁忙
 		pooledConnection.setBusy(false);
-//        LOG.debug("归还连接，状态设置为不繁忙");
+        LOG.debug("归还连接，状态设置为不繁忙");
 	}
 
 	/**
@@ -114,13 +114,13 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 		for (IPooledConnection pc : pool) {
 			if (!pc.isBusy()) {
 				pc.setBusy(true);
-//                LOG.debug("从连接池中获取连接");
+				LOG.debug("从连接池中获取连接");
 
 				// 验证有效性
 				if (testOnBorrow) {
-//                    LOG.debug("Test on borrow start");
+					LOG.debug("Test on borrow start");
 					checkValid(pc);
-//                    LOG.debug("Test on borrow finish");
+					LOG.debug("Test on borrow finish");
 				}
 
 				return Optional.of(pc);
@@ -145,11 +145,11 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 			try {
 				// 如果连接无效，重新申请一个新的替代
 				if (!connection.isValid(super.validTimeOutSeconds)) {
-//                    LOG.debug("Old connection is inValid, start create one for it.");
+                    LOG.debug("Old connection is inValid, start create one for it.");
 
 					Connection newConnection = createConnection();
 					pooledConnection.setConnection(newConnection);
-//                    LOG.debug("Old connection is inValid, finish create one for it.");
+                    LOG.debug("Old connection is inValid, finish create one for it.");
 				}
 			}
 			catch (SQLException throwables) {
@@ -230,7 +230,7 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 					testOnIdleCheck();
 				}
 			}, super.testOnIdleIntervalSeconds, testOnIdleIntervalSeconds, TimeUnit.SECONDS);
-//            LOG.debug("Test on idle config with interval seconds: " + testOnIdleIntervalSeconds);
+			LOG.debug("Test on idle config with interval seconds: " + testOnIdleIntervalSeconds);
 		}
 	}
 
@@ -240,13 +240,13 @@ public class PooledDataSource extends AbstractPooledDataSourceConfig {
 	 * @since 1.5.0
 	 */
 	private void testOnIdleCheck() {
-//        LOG.debug("start check test on idle");
+		LOG.debug("start check test on idle");
 		for (IPooledConnection pc : this.pool) {
 			if (!pc.isBusy()) {
 				checkValid(pc);
 			}
 		}
-//        LOG.debug("finish check test on idle");
+		LOG.debug("finish check test on idle");
 	}
 
 }

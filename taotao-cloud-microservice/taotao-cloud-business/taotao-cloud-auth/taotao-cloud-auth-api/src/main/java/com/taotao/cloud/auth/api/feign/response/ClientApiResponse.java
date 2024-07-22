@@ -38,7 +38,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "公司查询VO")
-public class FeignClientResponse implements Serializable {
+public class ClientApiResponse implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;

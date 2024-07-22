@@ -69,7 +69,7 @@ public class InvokeService implements IInvokeService {
 
 		//2. 判断是否超时
 		if (System.currentTimeMillis() > expireTime) {
-			//logger.debug("[Invoke] seqId:{} 信息已超时，直接返回超时结果。", seqId);
+			logger.debug("[Invoke] seqId:{} 信息已超时，直接返回超时结果。", seqId);
 			rpcResponse = RpcMessageDto.timeout();
 		}
 
@@ -77,18 +77,18 @@ public class InvokeService implements IInvokeService {
 		// 如果 seqId 必须处理请求集合中，才允许放入。或者直接忽略丢弃。
 		// 通知所有等待方
 		responseMap.putIfAbsent(seqId, rpcResponse);
-//		logger.debug("[Invoke] 获取结果信息，seqId: {}, rpcResponse: {}", seqId,
-//			JSON.toJSON(rpcResponse));
-		//logger.debug("[Invoke] seqId:{} 信息已经放入，通知所有等待方", seqId);
+		logger.debug("[Invoke] 获取结果信息，seqId: {}, rpcResponse: {}", seqId,
+			JSON.toJSON(rpcResponse));
+		logger.debug("[Invoke] seqId:{} 信息已经放入，通知所有等待方", seqId);
 
 		// 移除对应的 requestMap
 		requestMap.remove(seqId);
-		//logger.debug("[Invoke] seqId:{} remove from request map", seqId);
+		logger.debug("[Invoke] seqId:{} remove from request map", seqId);
 
 		// 同步锁
 		synchronized (this) {
 			this.notifyAll();
-			//logger.debug("[Invoke] {} notifyAll()", seqId);
+			logger.debug("[Invoke] {} notifyAll()", seqId);
 		}
 
 		return this;
@@ -105,17 +105,17 @@ public class InvokeService implements IInvokeService {
 
 			// 进入等待
 			while (rpcResponse == null) {
-				//logger.debug("[Invoke] seq {} 对应结果为空，进入等待", seqId);
+				logger.debug("[Invoke] seq {} 对应结果为空，进入等待", seqId);
 
 				// 同步等待锁
 				synchronized (this) {
 					this.wait();
 				}
 
-				//logger.debug("[Invoke] {} wait has notified!", seqId);
+				logger.debug("[Invoke] {} wait has notified!", seqId);
 
 				rpcResponse = this.responseMap.get(seqId);
-				//logger.debug("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
+				logger.debug("[Invoke] seq {} 对应结果已经获取: {}", seqId, rpcResponse);
 			}
 
 			return rpcResponse;

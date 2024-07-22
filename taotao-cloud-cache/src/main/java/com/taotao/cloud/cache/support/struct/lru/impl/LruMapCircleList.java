@@ -8,7 +8,8 @@ import com.taotao.cloud.cache.support.struct.lru.ILruMap;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 基于循环列表的实现
  * @author shuigedeng
@@ -52,7 +53,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
     public ICacheEntry<K, V> removeEldest() {
         //fast-fail
         if(isEmpty()) {
-            log.error("当前列表为空，无法进行删除");
+            LOG.error("当前列表为空，无法进行删除");
             throw new CacheRuntimeException("不可删除头结点!");
         }
 
@@ -103,7 +104,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
         // 存在
         if(ObjectUtil.isNotNull(node)) {
             node.accessFlag(true);
-            log.debug("节点已存在，设置节点访问标识为 true, key: {}", key);
+            LOG.debug("节点已存在，设置节点访问标识为 true, key: {}", key);
         } else {
             // 不存在，则插入到最后
             node = new CircleListNode<>(key);
@@ -116,7 +117,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
 
             // 放入 indexMap 中，便于快速定位
             indexMap.put(key, node);
-            log.debug("节点不存在，新增节点到链表中：{}", key);
+            LOG.debug("节点不存在，新增节点到链表中：{}", key);
         }
     }
 
@@ -137,7 +138,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
     public void removeKey(final K key) {
         CircleListNode<K,V> node = indexMap.get(key);
         if(ObjectUtil.isNull(node)) {
-            log.warn("对应的删除信息不存在：{}", key);
+			LOG.warn("对应的删除信息不存在：{}", key);
             return;
         }
 
@@ -149,7 +150,7 @@ public class LruMapCircleList<K,V> implements ILruMap<K,V> {
         next.pre(pre);
         indexMap.remove(key);
 
-        log.debug("Key: {} 从循环链表中移除", key);
+		LOG.debug("Key: {} 从循环链表中移除", key);
     }
 
     @Override

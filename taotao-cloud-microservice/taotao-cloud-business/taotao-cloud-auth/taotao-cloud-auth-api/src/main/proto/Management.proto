@@ -8,12 +8,12 @@ option java_outer_classname = "ManagementGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service ManagementGrpcService {
-  rpc create (ManagementRequest) returns (ManagementResponse){}
+  rpc create (ManagementGrpcRequest) returns (ManagementGrpcResponse){}
 }
 
-message ManagementRequest {
+message ManagementGrpcRequest {
   string id = 1;
 }
-message ManagementResponse {
+message ManagementGrpcResponse {
   string id = 1;
 }

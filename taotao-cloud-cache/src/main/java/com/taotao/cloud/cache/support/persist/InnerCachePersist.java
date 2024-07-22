@@ -5,7 +5,8 @@ import com.taotao.cloud.cache.api.ICachePersist;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 内部缓存持久化类
  * @author shuigedeng

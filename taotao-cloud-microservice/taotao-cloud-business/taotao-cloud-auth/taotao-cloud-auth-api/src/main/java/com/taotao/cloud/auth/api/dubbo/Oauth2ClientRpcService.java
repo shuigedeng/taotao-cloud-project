@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.api.dubbo;
 
-import com.taotao.cloud.auth.api.dubbo.response.DubboClientResponse;
+import com.taotao.cloud.auth.api.dubbo.response.ClientRpcResponse;
 
 /**
  * 后台部门表服务接口
@@ -27,5 +27,5 @@ import com.taotao.cloud.auth.api.dubbo.response.DubboClientResponse;
  */
 public interface Oauth2ClientRpcService {
 
-	DubboClientResponse findById(Long id);
+	ClientRpcResponse findById(Long id);
 }

@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 淘汰策略-LRU 最近最少使用
  *

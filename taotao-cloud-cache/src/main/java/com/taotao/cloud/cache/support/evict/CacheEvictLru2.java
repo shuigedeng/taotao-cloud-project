@@ -6,7 +6,8 @@ import com.taotao.cloud.cache.api.ICacheEvictContext;
 import com.taotao.cloud.cache.model.CacheEntry;
 import com.taotao.cloud.cache.support.struct.lru.ILruMap;
 import com.taotao.cloud.cache.support.struct.lru.impl.LruMapDoubleList;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 淘汰策略-LRU 最近最少使用
  *

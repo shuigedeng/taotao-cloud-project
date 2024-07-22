@@ -59,9 +59,8 @@ public final class DriverClassUtil {
      * @since 1.2.0
      */
     public static void loadDriverClass(String driverClass, final String url) {
-        ArgUtil.notEmpty(url, url);
 
-        if(StringUtil.isEmptyTrim(driverClass)) {
+        if(StrUtil.isEmptyTrim(driverClass)) {
             driverClass = getDriverClassByUrl(url);
         }
 
@@ -82,7 +81,6 @@ public final class DriverClassUtil {
      * @return 驱动信息
      */
     private static String getDriverClassByUrl(final String url) {
-        ArgUtil.notEmpty(url, "url");
 
         for(Map.Entry<String, String> entry : DRIVER_CLASS_MAP.entrySet()) {
             String urlPrefix = entry.getKey();

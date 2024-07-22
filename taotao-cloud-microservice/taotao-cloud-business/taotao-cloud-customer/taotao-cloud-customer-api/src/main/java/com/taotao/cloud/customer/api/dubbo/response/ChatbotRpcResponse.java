@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.api.dubbo.response;
+package com.taotao.cloud.customer.api.dubbo.response;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
 import java.io.Serializable;
@@ -27,7 +27,7 @@ import java.io.Serializable;
  * @since 2021-10-19 20:47:05
  */
 @RecordBuilder
-public record MemberQueryGrpcResponse(
+public record ChatbotRpcResponse(
         /** 租户id */
         String tenantId,
 

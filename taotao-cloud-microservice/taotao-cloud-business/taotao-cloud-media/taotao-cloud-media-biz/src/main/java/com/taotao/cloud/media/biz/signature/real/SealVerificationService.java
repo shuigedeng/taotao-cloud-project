@@ -1,5 +1,7 @@
 package com.taotao.cloud.media.biz.signature.real;
 
+import com.taotao.cloud.media.biz.signature.DigitalSignatureService;
+import java.io.ByteArrayOutputStream;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;

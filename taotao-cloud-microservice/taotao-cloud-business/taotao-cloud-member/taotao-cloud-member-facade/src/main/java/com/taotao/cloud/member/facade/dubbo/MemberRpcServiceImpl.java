@@ -17,8 +17,8 @@
 package com.taotao.cloud.member.facade.dubbo;
 
 import com.taotao.cloud.member.api.dubbo.MemberRpcService;
-import com.taotao.cloud.member.api.dubbo.request.MemberQueryGrpcRequest;
-import com.taotao.cloud.member.api.dubbo.response.MemberQueryGrpcResponse;
+import com.taotao.cloud.member.api.dubbo.request.MemberQueryRpcRequest;
+import com.taotao.cloud.member.api.dubbo.response.MemberQueryRpcResponse;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 public class MemberRpcServiceImpl implements MemberRpcService {
 
 	@Override
-	public MemberQueryGrpcResponse findMemberByRequest(MemberQueryGrpcRequest memberQueryGrpcRequest) {
+	public MemberQueryRpcResponse findMemberByRequest(MemberQueryRpcRequest memberQueryGrpcRequest) {
 		return null;
 	}
 }

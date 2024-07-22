@@ -8,7 +8,8 @@ import com.taotao.cloud.cache.support.struct.lru.ILruMap;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 基于双向列表的实现
  * @author shuigedeng
@@ -53,7 +54,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
         // 获取尾巴节点的前一个元素
         DoubleListNode<K,V> tailPre = this.tail.pre();
         if(tailPre == this.head) {
-            log.error("当前列表为空，无法进行删除");
+            LOG.error("当前列表为空，无法进行删除");
             throw new CacheRuntimeException("不可删除头结点!");
         }
 
@@ -126,7 +127,7 @@ public class LruMapDoubleList<K,V> implements ILruMap<K,V> {
 
         // 删除 map 中对应信息
         this.indexMap.remove(key);
-        log.debug("从 LruMapDoubleList 中移除 key: {}", key);
+        LOG.debug("从 LruMapDoubleList 中移除 key: {}", key);
     }
 
     @Override

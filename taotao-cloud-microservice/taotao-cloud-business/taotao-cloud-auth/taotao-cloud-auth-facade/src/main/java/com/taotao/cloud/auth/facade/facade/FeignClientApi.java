@@ -1,8 +1,8 @@
 package com.taotao.cloud.auth.adapter.facade;
 
 import com.taotao.cloud.auth.api.feign.Oauth2ClientApi;
-import com.taotao.cloud.auth.api.feign.request.FeignClientQueryRequest;
-import com.taotao.cloud.auth.api.feign.response.FeignClientResponse;
+import com.taotao.cloud.auth.api.feign.request.FeignClientQueryApiRequest;
+import com.taotao.cloud.auth.api.feign.response.ClientApiResponse;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +17,7 @@ public class FeignClientApi implements Oauth2ClientApi {
 
 
 	@Override
-	public FeignClientResponse query(FeignClientQueryRequest feignClientQueryRequest) {
+	public ClientApiResponse query(FeignClientQueryApiRequest feignClientQueryApiRequest) {
 		return null;
 	}
 }

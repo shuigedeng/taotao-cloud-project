@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.customer.api.feign.response;
+package com.taotao.cloud.customer.api.feign.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Pattern;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -37,8 +38,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "公司查询VO")
-public class FeignChatbotQueryResponse implements Serializable {
+@Schema(description = "公司查询对象")
+public class ChatbotQueryApiRequest implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -4132785717179910025L;
@@ -55,6 +56,7 @@ public class FeignChatbotQueryResponse implements Serializable {
     @Schema(description = "企业全称")
     private String fullName;
 
+    @Pattern(regexp = "^|[a-zA-Z0-9]{18}$", message = "信用代码格式错误")
     @Schema(description = "信用代码")
     private String creditCode;
 

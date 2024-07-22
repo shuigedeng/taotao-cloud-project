@@ -2,7 +2,8 @@ package com.taotao.cloud.cache.support.listener.remove;
 
 import com.taotao.cloud.cache.api.ICacheRemoveListener;
 import com.taotao.cloud.cache.api.ICacheRemoveListenerContext;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 默认的删除监听类
  * @author shuigedeng

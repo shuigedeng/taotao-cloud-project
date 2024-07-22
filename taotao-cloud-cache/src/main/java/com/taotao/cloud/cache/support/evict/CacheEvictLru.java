@@ -7,7 +7,8 @@ import com.taotao.cloud.cache.model.CacheEntry;
 
 import java.util.LinkedList;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 丢弃策略-LRU 最近最少使用
  * @author shuigedeng

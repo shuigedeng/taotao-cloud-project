@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.api.dubbo.request;
+package com.taotao.cloud.message.api.dubbo.request;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -34,8 +35,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberQueryGrpcRequest implements Serializable {
+public class MessageQueryRpcRequest implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 5126530068827085130L;
 
     /** id */

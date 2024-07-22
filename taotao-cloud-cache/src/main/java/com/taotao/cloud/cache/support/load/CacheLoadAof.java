@@ -1,6 +1,5 @@
 package com.taotao.cloud.cache.support.load;
 
-import com.alibaba.fastjson.JSON;
 import com.taotao.cloud.cache.annotation.CacheInterceptor;
 import com.taotao.cloud.cache.api.ICache;
 import com.taotao.cloud.cache.api.ICacheLoad;
@@ -11,7 +10,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 加载策略-AOF文件模式
  * @author shuigedeng

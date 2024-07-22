@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.facade.dubbo;
 
 import com.taotao.cloud.auth.api.dubbo.Oauth2ClientRpcService;
-import com.taotao.cloud.auth.api.dubbo.response.DubboClientResponse;
+import com.taotao.cloud.auth.api.dubbo.response.ClientRpcResponse;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 public class DubboClientRpcService implements Oauth2ClientRpcService {
 
 	@Override
-	public DubboClientResponse findById(Long id) {
+	public ClientRpcResponse findById(Long id) {
 		return null;
 	}
 }

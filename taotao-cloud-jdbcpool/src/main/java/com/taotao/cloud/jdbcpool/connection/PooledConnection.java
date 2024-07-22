@@ -7,7 +7,8 @@ import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 池化的连接
  *

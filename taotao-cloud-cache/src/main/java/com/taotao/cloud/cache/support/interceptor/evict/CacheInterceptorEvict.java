@@ -5,7 +5,8 @@ import com.taotao.cloud.cache.api.ICacheInterceptor;
 import com.taotao.cloud.cache.api.ICacheInterceptorContext;
 
 import java.lang.reflect.Method;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 驱除策略拦截器
  *

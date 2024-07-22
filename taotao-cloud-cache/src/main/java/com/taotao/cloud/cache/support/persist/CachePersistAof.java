@@ -5,7 +5,8 @@ import com.taotao.cloud.cache.api.ICache;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 缓存持久化-AOF 持久化模式
  * @author shuigedeng
