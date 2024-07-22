@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
+import com.taotao.cloud.sys.api.feign.response.DictApiResponse;
 import com.taotao.cloud.sys.biz.model.dto.dict.DictSaveDTO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import org.mapstruct.Mapper;
@@ -37,7 +37,7 @@ public interface DictConvert {
     /** 实例 */
     DictConvert INSTANCE = Mappers.getMapper(DictConvert.class);
 
-    FeignDictResponse convert(Dict dict);
+    DictApiResponse convert(Dict dict);
 
     /// **
     // * DictDTO转SysDict

@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.controller.feign;
 
 import com.taotao.cloud.member.api.feign.MemberApi;
-import com.taotao.cloud.member.api.feign.response.FeignMemberResponse;
+import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -46,7 +46,7 @@ public class FeignMemberController implements MemberApi {
 	}
 
 	@Override
-	public FeignMemberResponse findMemberById(Long id) {
+	public MemberApiResponse findMemberById(Long id) {
 		return null;
 	}
 
@@ -56,12 +56,12 @@ public class FeignMemberController implements MemberApi {
 	}
 
 	@Override
-	public FeignMemberResponse findByUsername(String username) {
+	public MemberApiResponse findByUsername(String username) {
 		return null;
 	}
 
 	@Override
-	public FeignMemberResponse getById(Long memberId) {
+	public MemberApiResponse getById(Long memberId) {
 		return null;
 	}
 
@@ -71,7 +71,7 @@ public class FeignMemberController implements MemberApi {
 	}
 
 	@Override
-	public Boolean updateById(FeignMemberResponse member) {
+	public Boolean updateById(MemberApiResponse member) {
 		return null;
 	}
 

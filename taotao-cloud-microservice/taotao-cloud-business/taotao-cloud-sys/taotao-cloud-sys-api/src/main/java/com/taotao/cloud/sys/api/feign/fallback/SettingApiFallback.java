@@ -17,17 +17,17 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.sys.api.feign.SettingApi;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignAlipayPaymentSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignBaseSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignExperienceSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignGoodsSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignOrderSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignPointSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignQQConnectSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignSeckillSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignWechatConnectSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignWechatPaymentSettingResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.AlipayPaymentSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.BaseSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.ExperienceSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.GoodsSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.OrderSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.PointSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.QQConnectSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.SeckillSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.SettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.WechatConnectSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.WechatPaymentSettingApiResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -42,57 +42,57 @@ public class SettingApiFallback implements FallbackFactory<SettingApi> {
     public SettingApi create(Throwable throwable) {
         return new SettingApi() {
             @Override
-            public FeignSettingResponse get(String key) {
+            public SettingApiResponse get(String key) {
                 return null;
             }
 
             @Override
-            public FeignBaseSettingResponse getBaseSetting(String name) {
+            public BaseSettingApiResponse getBaseSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignGoodsSettingResponse getGoodsSetting(String name) {
+            public GoodsSettingApiResponse getGoodsSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignOrderSettingResponse getOrderSetting(String name) {
+            public OrderSettingApiResponse getOrderSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignExperienceSettingResponse getExperienceSetting(String name) {
+            public ExperienceSettingApiResponse getExperienceSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignPointSettingResponse getPointSetting(String name) {
+            public PointSettingApiResponse getPointSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignQQConnectSettingResponse getQQConnectSetting(String name) {
+            public QQConnectSettingApiResponse getQQConnectSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignWechatConnectSettingResponse getWechatConnectSetting(String name) {
+            public WechatConnectSettingApiResponse getWechatConnectSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignSeckillSettingResponse getSeckillSetting(String name) {
+            public SeckillSettingApiResponse getSeckillSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignAlipayPaymentSettingResponse getAlipayPaymentSetting(String name) {
+            public AlipayPaymentSettingApiResponse getAlipayPaymentSetting(String name) {
                 return null;
             }
 
             @Override
-            public FeignWechatPaymentSettingResponse getWechatPaymentSetting(String name) {
+            public WechatPaymentSettingApiResponse getWechatPaymentSetting(String name) {
                 return null;
             }
         };

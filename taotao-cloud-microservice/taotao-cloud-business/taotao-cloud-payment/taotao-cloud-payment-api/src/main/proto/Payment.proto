@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.taotao.cloud.payment.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.payment.api.grpc";
+option java_outer_classname = "PaymentGrpcServiceProto";
+//option objc_class_prefix = "HLW";
+
+service PaymentGrpcService {
+  rpc query (PaymentGrpcRequest) returns (PaymentGrpcResponse){}
+}
+
+message PaymentGrpcRequest {
+  string id = 1;
+}
+
+message PaymentGrpcResponse {
+  bool reply = 1;
+}
+

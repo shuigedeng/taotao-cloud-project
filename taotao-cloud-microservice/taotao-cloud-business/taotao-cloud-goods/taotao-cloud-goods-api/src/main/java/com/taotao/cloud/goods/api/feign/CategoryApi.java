@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.feign.response.FeignCategoryTreeResponse;
+import com.taotao.cloud.goods.api.feign.response.CategoryTreeApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +29,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author shuigedeng
  * @since 2020/5/2 16:42
  */
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = CategoryApiFallback.class)
+@FeignClient(
+	value = ServiceName.TAOTAO_CLOUD_GOODS,
+	fallbackFactory = CategoryApiFallback.class)
 public interface CategoryApi {
 
 	@GetMapping(value = "/category/first/id/{id:[0-9]*}")
-	List<FeignCategoryTreeResponse> firstCategory();
+	List<CategoryTreeApiResponse> firstCategory();
 }

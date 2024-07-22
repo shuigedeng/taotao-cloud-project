@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
+import com.taotao.cloud.goods.api.feign.fallback.GoodsApiFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +30,9 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-        contextId = "IFeignGoodsService",
+        contextId = "GoodsApi",
         value = ServiceName.TAOTAO_CLOUD_GOODS,
-        fallbackFactory = CategoryApiFallback.class)
+        fallbackFactory = GoodsApiFallback.class)
 public interface GoodsApi {
 
     @PostMapping(value = "/product/info/id/{id:[0-9]*}")

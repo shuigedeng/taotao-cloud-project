@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.api.dubbo;
 
-import com.taotao.cloud.member.api.dubbo.request.MemberQueryRequest;
-import com.taotao.cloud.member.api.dubbo.response.MemberQueryResponse;
+import com.taotao.cloud.member.api.dubbo.request.MemberQueryGrpcRequest;
+import com.taotao.cloud.member.api.dubbo.response.MemberQueryGrpcResponse;
 
 /**
  * 后台部门表服务接口
@@ -31,9 +31,9 @@ public interface MemberRpcService {
 	/**
 	 * 字典code查询
 	 *
-	 * @param memberQueryRequest 代码
-	 * @return {@link MemberQueryResponse }
+	 * @param memberQueryGrpcRequest 代码
+	 * @return {@link MemberQueryGrpcResponse }
 	 * @since 2022-06-29 21:45:44
 	 */
-	MemberQueryResponse findMemberByRequest(MemberQueryRequest memberQueryRequest);
+	MemberQueryGrpcResponse findMemberByRequest(MemberQueryGrpcRequest memberQueryGrpcRequest);
 }

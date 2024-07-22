@@ -18,8 +18,8 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
-import com.taotao.cloud.goods.api.feign.request.FeignGoodsSkuSpecGalleryRequest;
-import com.taotao.cloud.goods.api.feign.response.FeignGoodsSkuSpecGalleryResponse;
+import com.taotao.cloud.goods.api.feign.request.GoodsSkuSpecGalleryApiRequest;
+import com.taotao.cloud.goods.api.feign.response.GoodsSkuSpecGalleryApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,16 +38,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface GoodsSkuApi {
 
 	@PostMapping(value = "/product/updateGoodsStuck")
-	Boolean updateGoodsStuck(List<FeignGoodsSkuSpecGalleryRequest> goodsSkus);
+	Boolean updateGoodsStuck(List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
 
 	@PostMapping(value = "/product/updateBatchById}")
-	Boolean updateBatchById(List<FeignGoodsSkuSpecGalleryRequest> goodsSkus);
+	Boolean updateBatchById(List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
 
 	@GetMapping(value = "/product/getGoodsSkuByIdFromCache")
-	List<FeignGoodsSkuSpecGalleryResponse> getGoodsSkuByIdFromCache(List<Long> skuIds);
+	List<GoodsSkuSpecGalleryApiResponse> getGoodsSkuByIdFromCache(List<Long> skuIds);
 
 	@GetMapping(value = "/product/getGoodsSkuByIdFromCache}")
-	FeignGoodsSkuSpecGalleryResponse getGoodsSkuByIdFromCache(Long skuId);
+	GoodsSkuSpecGalleryApiResponse getGoodsSkuByIdFromCache(Long skuId);
 
 	@GetMapping(value = "/product/getStock")
 	Integer getStock(String skuId);

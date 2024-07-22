@@ -18,11 +18,11 @@ package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.member.api.feign.MemberEvaluationApi;
-import com.taotao.cloud.member.api.feign.request.FeignEvaluationPageQueryRequest;
-import com.taotao.cloud.member.api.feign.request.FeignMemberEvaluationRequest;
-import com.taotao.cloud.member.api.feign.response.FeignMemberEvaluationListResponse;
-import com.taotao.cloud.member.api.feign.response.FeignMemberEvaluationResponse;
-import com.taotao.cloud.member.api.feign.response.FeignStoreRatingResponse;
+import com.taotao.cloud.member.api.feign.request.EvaluationPageQueryApiRequest;
+import com.taotao.cloud.member.api.feign.request.MemberEvaluationApiRequest;
+import com.taotao.cloud.member.api.feign.response.MemberEvaluationListApiResponse;
+import com.taotao.cloud.member.api.feign.response.MemberEvaluationApiResponse;
+import com.taotao.cloud.member.api.feign.response.StoreRatingApiResponse;
 import java.util.List;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -47,7 +47,7 @@ public class MemberEvaluationApiFallback implements
 			}
 
 			@Override
-			public Long getEvaluationCount(FeignEvaluationPageQueryRequest queryParams) {
+			public Long getEvaluationCount(EvaluationPageQueryApiRequest queryParams) {
 				return null;
 			}
 
@@ -57,18 +57,18 @@ public class MemberEvaluationApiFallback implements
 			}
 
 			@Override
-			public Boolean addMemberEvaluation(FeignMemberEvaluationRequest memberEvaluationDTO,
+			public Boolean addMemberEvaluation(MemberEvaluationApiRequest memberEvaluationDTO,
 				boolean b) {
 				return null;
 			}
 
 			@Override
-			public FeignStoreRatingResponse getStoreRatingVO(Long id, String name) {
+			public StoreRatingApiResponse getStoreRatingVO(Long id, String name) {
 				return null;
 			}
 
 			@Override
-			public FeignMemberEvaluationResponse queryById(Long id) {
+			public MemberEvaluationApiResponse queryById(Long id) {
 				return null;
 			}
 
@@ -78,8 +78,8 @@ public class MemberEvaluationApiFallback implements
 			}
 
 			@Override
-			public PageResult<FeignMemberEvaluationListResponse> queryPage(
-				FeignEvaluationPageQueryRequest evaluationPageQuery) {
+			public PageResult<MemberEvaluationListApiResponse> queryPage(
+				EvaluationPageQueryApiRequest evaluationPageQuery) {
 				return null;
 			}
 		};

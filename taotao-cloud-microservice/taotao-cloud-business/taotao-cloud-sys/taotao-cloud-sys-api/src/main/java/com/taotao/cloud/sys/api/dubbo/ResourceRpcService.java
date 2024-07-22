@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import java.util.List;
 
 /**
@@ -35,5 +35,5 @@ public interface ResourceRpcService {
      * @return 菜单信息
      * @since 2022-03-25 14:13:34
      */
-    List<DubboMenuQueryRequest> queryAllById(Long id);
+    List<MenuQueryRpcRequest> queryAllById(Long id);
 }

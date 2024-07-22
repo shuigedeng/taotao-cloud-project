@@ -20,7 +20,7 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.feign.fallback.MemberApiFallback;
-import com.taotao.cloud.member.api.feign.response.FeignMemberResponse;
+import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import java.util.List;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -56,7 +56,7 @@ public interface MemberApi {
      * @since 2020/11/20 下午4:10
      */
     @GetMapping("/member/feign/info/id/{id:[0-9]*}")
-	FeignMemberResponse findMemberById(@PathVariable(value = "id") Long id);
+	MemberApiResponse findMemberById(@PathVariable(value = "id") Long id);
 
     /**
      * 更新成员点
@@ -76,10 +76,10 @@ public interface MemberApi {
             @RequestParam String s);
 
     @GetMapping(value = "/member/feign/username")
-	FeignMemberResponse findByUsername(@RequestParam String username);
+	MemberApiResponse findByUsername(@RequestParam String username);
 
     @GetMapping(value = "/member/feign/memberId")
-	FeignMemberResponse getById(@RequestParam Long memberId);
+	MemberApiResponse getById(@RequestParam Long memberId);
 
     /**
      * new LambdaUpdateWrapper<Member>() .eq(Member::getId, member.getId())
@@ -89,7 +89,7 @@ public interface MemberApi {
     Boolean update(@RequestParam Long memberId, @RequestParam Long storeId);
 
     @GetMapping(value = "/member/feign/updateById")
-    Boolean updateById(@RequestParam FeignMemberResponse member);
+    Boolean updateById(@RequestParam MemberApiResponse member);
 
     @GetMapping(value = "/member/feign/listFieldsByMemberIds")
     List<Map<String, Object>> listFieldsByMemberIds(@RequestParam String s, @RequestParam List<String> ids);

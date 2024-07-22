@@ -18,7 +18,7 @@ package com.taotao.cloud.member.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.MemberAddressApiFallback;
-import com.taotao.cloud.member.api.feign.response.FeignMemberAddressResponse;
+import com.taotao.cloud.member.api.feign.response.MemberAddressApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,5 +27,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface MemberAddressApi {
 
 	@GetMapping(value = "/member/feign/address/shippingAddressId")
-	FeignMemberAddressResponse getById(@RequestParam String shippingAddressId);
+	MemberAddressApiResponse getById(@RequestParam String shippingAddressId);
 }

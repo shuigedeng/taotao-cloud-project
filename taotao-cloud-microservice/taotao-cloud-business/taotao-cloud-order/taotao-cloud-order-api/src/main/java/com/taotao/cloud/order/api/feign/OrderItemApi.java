@@ -19,8 +19,8 @@ package com.taotao.cloud.order.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderItemApiFallback;
-import com.taotao.cloud.order.api.feign.request.FeignOrderItemSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderItemResponse;
+import com.taotao.cloud.order.api.feign.request.OrderItemSaveApiRequest;
+import com.taotao.cloud.order.api.feign.response.OrderItemApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,16 +37,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface OrderItemApi {
 
     @PostMapping(value = "/order/item")
-    Boolean saveOrderItem(@RequestBody FeignOrderItemSaveRequest orderItemSaveDTO);
+    Boolean saveOrderItem(@RequestBody OrderItemSaveApiRequest orderItemSaveDTO);
 
     @PutMapping(value = "/order/item")
-    Boolean updateById(@RequestBody FeignOrderItemSaveRequest orderItem);
+    Boolean updateById(@RequestBody OrderItemSaveApiRequest orderItem);
 
     @GetMapping(value = "/order/item")
-	FeignOrderItemResponse getByOrderSnAndSkuId(String orderSn, String skuId);
+	OrderItemApiResponse getByOrderSnAndSkuId(String orderSn, String skuId);
 
     @GetMapping(value = "/order/item")
-	FeignOrderItemResponse getBySn(String orderItemSn);
+	OrderItemApiResponse getBySn(String orderItemSn);
 
     @PutMapping(value = "/order/item")
     Boolean updateCommentStatus(String sn, CommentStatusEnum finished);

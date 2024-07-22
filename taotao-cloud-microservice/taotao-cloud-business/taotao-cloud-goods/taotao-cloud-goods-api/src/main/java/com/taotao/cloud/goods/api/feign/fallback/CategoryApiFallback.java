@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.api.feign.fallback;
 
 import com.taotao.cloud.goods.api.feign.CategoryApi;
-import com.taotao.cloud.goods.api.feign.response.FeignCategoryTreeResponse;
+import com.taotao.cloud.goods.api.feign.response.CategoryTreeApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -34,7 +34,7 @@ public class CategoryApiFallback implements FallbackFactory<CategoryApi> {
 		return new CategoryApi() {
 
 			@Override
-			public List<FeignCategoryTreeResponse> firstCategory() {
+			public List<CategoryTreeApiResponse> firstCategory() {
 				return null;
 			}
 		};

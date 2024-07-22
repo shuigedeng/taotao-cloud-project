@@ -20,11 +20,11 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.member.api.feign.fallback.MemberEvaluationApiFallback;
-import com.taotao.cloud.member.api.feign.request.FeignEvaluationPageQueryRequest;
-import com.taotao.cloud.member.api.feign.request.FeignMemberEvaluationRequest;
-import com.taotao.cloud.member.api.feign.response.FeignMemberEvaluationListResponse;
-import com.taotao.cloud.member.api.feign.response.FeignMemberEvaluationResponse;
-import com.taotao.cloud.member.api.feign.response.FeignStoreRatingResponse;
+import com.taotao.cloud.member.api.feign.request.EvaluationPageQueryApiRequest;
+import com.taotao.cloud.member.api.feign.request.MemberEvaluationApiRequest;
+import com.taotao.cloud.member.api.feign.response.MemberEvaluationListApiResponse;
+import com.taotao.cloud.member.api.feign.response.MemberEvaluationApiResponse;
+import com.taotao.cloud.member.api.feign.response.StoreRatingApiResponse;
 import java.util.List;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -62,7 +62,7 @@ public interface MemberEvaluationApi {
 	 * @since 2022-04-25 16:39:46
 	 */
 	@GetMapping(value = "/member/feign/evaluationPageQuery")
-	Long getEvaluationCount(@RequestParam FeignEvaluationPageQueryRequest queryParams);
+	Long getEvaluationCount(@RequestParam EvaluationPageQueryApiRequest queryParams);
 
 	/**
 	 * new QueryWrapper<MemberEvaluation>() .between("create_time", DateUtil.yesterday(), new
@@ -75,7 +75,7 @@ public interface MemberEvaluationApi {
 	List<Map<String, Object>> memberEvaluationNum();
 
 	@GetMapping(value = "/member/feign/memberEvaluationDTO")
-	Boolean addMemberEvaluation(@RequestParam FeignMemberEvaluationRequest memberEvaluationDTO,
+	Boolean addMemberEvaluation(@RequestParam MemberEvaluationApiRequest memberEvaluationDTO,
 		@RequestParam boolean b);
 
 	/**
@@ -88,16 +88,16 @@ public interface MemberEvaluationApi {
 	 * @return
 	 */
 	@GetMapping(value = "/member/feign/evaluation/getStoreRatingVO")
-	FeignStoreRatingResponse getStoreRatingVO(@RequestParam Long id, @RequestParam String name);
+	StoreRatingApiResponse getStoreRatingVO(@RequestParam Long id, @RequestParam String name);
 
 	@GetMapping(value = "/member/feign/evaluation/queryById")
-	FeignMemberEvaluationResponse queryById(@RequestParam Long id);
+	MemberEvaluationApiResponse queryById(@RequestParam Long id);
 
 	@GetMapping(value = "/member/feign/evaluation/reply")
 	boolean reply(@RequestParam Long id, @RequestParam String reply,
 		@RequestParam String replyImage);
 
 	@GetMapping(value = "/member/feign/evaluation/queryPage")
-	PageResult<FeignMemberEvaluationListResponse> queryPage(
-		@RequestParam FeignEvaluationPageQueryRequest evaluationPageQuery);
+	PageResult<MemberEvaluationListApiResponse> queryPage(
+		@RequestParam EvaluationPageQueryApiRequest evaluationPageQuery);
 }

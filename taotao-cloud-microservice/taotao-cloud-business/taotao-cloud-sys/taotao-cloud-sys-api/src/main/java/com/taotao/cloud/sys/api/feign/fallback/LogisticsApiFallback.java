@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.sys.api.feign.LogisticsApi;
-import com.taotao.cloud.sys.api.feign.response.FeignLogisticsResponse;
-import com.taotao.cloud.sys.api.feign.response.FeignTracesResponse;
+import com.taotao.cloud.sys.api.feign.response.LogisticsApiResponse;
+import com.taotao.cloud.sys.api.feign.response.TracesApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -34,17 +34,17 @@ public class LogisticsApiFallback implements FallbackFactory<LogisticsApi> {
         return new LogisticsApi() {
 
             @Override
-            public FeignLogisticsResponse getById(Long logisticsId) {
+            public LogisticsApiResponse getById(Long logisticsId) {
                 return null;
             }
 
             @Override
-            public FeignTracesResponse getLogistic(Long logisticsId, String logisticsNo) {
+            public TracesApiResponse getLogistic(Long logisticsId, String logisticsNo) {
                 return null;
             }
 
             @Override
-            public List<FeignLogisticsResponse> list() {
+            public List<LogisticsApiResponse> list() {
                 return null;
             }
         };

@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.UserApi;
-import com.taotao.cloud.sys.api.feign.response.FeignUserQueryResponse;
+import com.taotao.cloud.sys.api.feign.response.UserQueryApiResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -33,7 +33,7 @@ public class UserApiFallback implements FallbackFactory<UserApi> {
     public UserApi create(Throwable throwable) {
         return new UserApi() {
             @Override
-            public FeignUserQueryResponse findUserInfoByUsername(String username) {
+            public UserQueryApiResponse findUserInfoByUsername(String username) {
                 LogUtils.error("调用findUserInfoByUsername异常：{}", throwable, username);
                 return null;
             }

@@ -20,8 +20,8 @@ import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.order.api.feign.fallback.FeignStoreFlowFallback;
-import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
-import com.taotao.cloud.order.api.feign.response.FeingStoreFlowResponse;
+import com.taotao.cloud.order.api.feign.response.TradeApiResponse;
+import com.taotao.cloud.order.api.feign.response.StoreFlowApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -35,11 +35,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface StoreFlowApi {
 
     @GetMapping(value = "/trade")
-	FeignTradeResponse getBySn(String sn);
+	TradeApiResponse getBySn(String sn);
 
     @GetMapping(value = "/getStoreFlow")
-    PageResult<FeingStoreFlowResponse> getStoreFlow(String id, String flowType, PageQuery PageQuery);
+    PageResult<StoreFlowApiResponse> getStoreFlow(String id, String flowType, PageQuery PageQuery);
 
     @GetMapping(value = "/getDistributionFlow")
-    PageResult<FeingStoreFlowResponse> getDistributionFlow(String id, PageQuery PageQuery);
+    PageResult<StoreFlowApiResponse> getDistributionFlow(String id, PageQuery PageQuery);
 }

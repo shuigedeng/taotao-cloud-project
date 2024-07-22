@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
@@ -49,7 +49,7 @@ public interface IResourceService extends BaseSuperService<Resource, Long> {
      * @return 菜单列表
      * @since 2022-03-23 08:55:48
      */
-    List<DubboMenuQueryRequest> findAllById(Long id);
+    List<MenuQueryRpcRequest> findAllById(Long id);
 
     /**
      * 根据角色id列表获取角色列表

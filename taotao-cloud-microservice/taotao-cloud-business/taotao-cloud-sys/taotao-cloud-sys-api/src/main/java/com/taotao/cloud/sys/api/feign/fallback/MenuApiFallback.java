@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.MenuApi;
-import com.taotao.cloud.sys.api.feign.response.FeignMenuQueryResponse;
+import com.taotao.cloud.sys.api.feign.response.MenuQueryApiResponse;
 import java.util.List;
 import java.util.Set;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -34,7 +34,7 @@ public class MenuApiFallback implements FallbackFactory<MenuApi> {
     public MenuApi create(Throwable throwable) {
         return new MenuApi() {
             @Override
-            public List<FeignMenuQueryResponse> findResourceByCodes(Set<String> codes) {
+            public List<MenuQueryApiResponse> findResourceByCodes(Set<String> codes) {
                 LogUtils.error("调用findResourceByCodes异常：{}", throwable, codes);
                 return null;
             }

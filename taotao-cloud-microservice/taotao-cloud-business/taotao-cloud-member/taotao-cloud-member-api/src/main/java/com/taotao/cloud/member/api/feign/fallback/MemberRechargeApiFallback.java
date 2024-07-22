@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.member.api.feign.MemberRechargeApi;
-import com.taotao.cloud.member.api.feign.response.FeignMemberRechargeResponse;
+import com.taotao.cloud.member.api.feign.response.MemberRechargeApiResponse;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -42,17 +42,17 @@ public class MemberRechargeApiFallback implements FallbackFactory<MemberRecharge
             }
 
             @Override
-            public FeignMemberRechargeResponse getRecharge(String sn) {
+            public MemberRechargeApiResponse getRecharge(String sn) {
                 return null;
             }
 
             @Override
-            public FeignMemberRechargeResponse recharge(BigDecimal price) {
+            public MemberRechargeApiResponse recharge(BigDecimal price) {
                 return null;
             }
 
             @Override
-            public List<FeignMemberRechargeResponse> list(DateTime dateTime) {
+            public List<MemberRechargeApiResponse> list(DateTime dateTime) {
                 return null;
             }
 

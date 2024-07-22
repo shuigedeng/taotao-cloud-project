@@ -23,7 +23,7 @@ import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.dto.resource.ResourceSaveDTO;
 import com.taotao.cloud.sys.biz.model.dto.resource.ResourceUpdateDTO;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
@@ -186,7 +186,7 @@ public class ManagerResourceController
     @RequestLogger
     @GetMapping("/test/se")
     public Result<Boolean> testNotAuth() {
-        List<DubboMenuQueryRequest> allById = service().findAllById(1L);
+        List<MenuQueryRpcRequest> allById = service().findAllById(1L);
         return Result.success(true);
     }
 

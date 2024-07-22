@@ -17,8 +17,8 @@
 package com.taotao.cloud.order.facade.dubbo;
 
 import com.taotao.cloud.order.api.dubbo.OrderRpcService;
-import com.taotao.cloud.order.api.dubbo.request.OrderQueryRequest;
-import com.taotao.cloud.order.api.dubbo.response.OrderQueryResponse;
+import com.taotao.cloud.order.api.dubbo.request.OrderQueryRpcRequest;
+import com.taotao.cloud.order.api.dubbo.response.OrderQueryGrpcResponse;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 public class DubboOrderRpcService implements OrderRpcService {
 
 	@Override
-	public OrderQueryResponse query(OrderQueryRequest orderQueryRequest) {
+	public OrderQueryGrpcResponse query(OrderQueryRpcRequest orderQueryRpcRequest) {
 		return null;
 	}
 }

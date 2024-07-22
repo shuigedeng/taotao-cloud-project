@@ -4,21 +4,21 @@ package com.taotao.cloud.file.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.file.api.grpc";
-option java_outer_classname = "FileGrpcProto";
+option java_outer_classname = "FileGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service FileGrpcService {
-    rpc insertFile (File) returns (BooleanReply){}
-    rpc updateFile (File) returns (BooleanReply){}
-    rpc searchFile (ConditionsRequest) returns (File){}
-    rpc deleteFile (ConditionsRequest) returns (BooleanReply){}
+    rpc insertFile (ConditionsGrpcRequest) returns (FileGrpcResponse){}
+    rpc updateFile (ConditionsGrpcRequest) returns (FileGrpcResponse){}
+    rpc searchFile (ConditionsGrpcRequest) returns (FileGrpcResponse){}
+    rpc deleteFile (ConditionsGrpcRequest) returns (FileGrpcResponse){}
 }
 
-message ConditionsRequest {
+message ConditionsGrpcRequest {
     string id = 1;
 }
 
-message File {
+message FileGrpcResponse {
     string id = 1;
     string serialNum = 2;
     string userNum = 3;
@@ -29,10 +29,3 @@ message File {
     string updatetime = 8;
 }
 
-message BooleanReply {
-    bool reply = 1;
-}
-
-message ObjectReply {
-    bool reply = 1;
-}

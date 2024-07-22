@@ -17,9 +17,9 @@
 package com.taotao.cloud.order.facade.feign;
 
 import com.taotao.cloud.order.api.feign.OrderApi;
-import com.taotao.cloud.order.api.feign.request.FeignOrderSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderDetailResponse;
-import com.taotao.cloud.order.api.feign.response.FeignOrderResponse;
+import com.taotao.cloud.order.api.feign.request.OrderSaveApiRequest;
+import com.taotao.cloud.order.api.feign.response.OrderDetailApiResponse;
+import com.taotao.cloud.order.api.feign.response.OrderApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
@@ -39,17 +39,17 @@ public class FeignOrderApi implements OrderApi {
 
 
 	@Override
-	public FeignOrderResponse findOrderInfoByCode(String code) {
+	public OrderApiResponse findOrderInfoByCode(String code) {
 		return null;
 	}
 
 	@Override
-	public FeignOrderResponse saveOrder(FeignOrderSaveRequest orderDTO) {
+	public OrderApiResponse saveOrder(OrderSaveApiRequest orderDTO) {
 		return null;
 	}
 
 	@Override
-	public FeignOrderDetailResponse queryDetail(String sn) {
+	public OrderDetailApiResponse queryDetail(String sn) {
 		return null;
 	}
 
@@ -59,12 +59,12 @@ public class FeignOrderApi implements OrderApi {
 	}
 
 	@Override
-	public FeignOrderResponse getBySn(String sn) {
+	public OrderApiResponse getBySn(String sn) {
 		return null;
 	}
 
 	@Override
-	public List<FeignOrderResponse> getByTradeSn(String sn) {
+	public List<OrderApiResponse> getByTradeSn(String sn) {
 		return List.of();
 	}
 }

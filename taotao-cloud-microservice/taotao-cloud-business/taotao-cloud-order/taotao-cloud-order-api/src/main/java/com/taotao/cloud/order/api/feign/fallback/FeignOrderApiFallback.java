@@ -17,9 +17,9 @@
 package com.taotao.cloud.order.api.feign.fallback;
 
 import com.taotao.cloud.order.api.feign.OrderApi;
-import com.taotao.cloud.order.api.feign.request.FeignOrderSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderDetailResponse;
-import com.taotao.cloud.order.api.feign.response.FeignOrderResponse;
+import com.taotao.cloud.order.api.feign.request.OrderSaveApiRequest;
+import com.taotao.cloud.order.api.feign.response.OrderDetailApiResponse;
+import com.taotao.cloud.order.api.feign.response.OrderApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
@@ -35,17 +35,17 @@ public class FeignOrderApiFallback implements FallbackFactory<OrderApi> {
 	public OrderApi create(Throwable throwable) {
 		return new OrderApi() {
 			@Override
-			public FeignOrderResponse findOrderInfoByCode(String code) {
+			public OrderApiResponse findOrderInfoByCode(String code) {
 				return null;
 			}
 
 			@Override
-			public FeignOrderResponse saveOrder(FeignOrderSaveRequest orderDTO) {
+			public OrderApiResponse saveOrder(OrderSaveApiRequest orderDTO) {
 				return null;
 			}
 
 			@Override
-			public FeignOrderDetailResponse queryDetail(String sn) {
+			public OrderDetailApiResponse queryDetail(String sn) {
 				return null;
 			}
 
@@ -55,12 +55,12 @@ public class FeignOrderApiFallback implements FallbackFactory<OrderApi> {
 			}
 
 			@Override
-			public FeignOrderResponse getBySn(String sn) {
+			public OrderApiResponse getBySn(String sn) {
 				return null;
 			}
 
 			@Override
-			public List<FeignOrderResponse> getByTradeSn(String sn) {
+			public List<OrderApiResponse> getByTradeSn(String sn) {
 				return null;
 			}
 		};

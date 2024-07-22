@@ -18,8 +18,8 @@ package com.taotao.cloud.order.facade.feign;
 
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.OrderItemApi;
-import com.taotao.cloud.order.api.feign.request.FeignOrderItemSaveRequest;
-import com.taotao.cloud.order.api.feign.response.FeignOrderItemResponse;
+import com.taotao.cloud.order.api.feign.request.OrderItemSaveApiRequest;
+import com.taotao.cloud.order.api.feign.response.OrderItemApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,22 +38,22 @@ public class FeignOrderItemApi implements OrderItemApi {
 
 
 	@Override
-	public Boolean saveOrderItem(FeignOrderItemSaveRequest orderItemSaveDTO) {
+	public Boolean saveOrderItem(OrderItemSaveApiRequest orderItemSaveDTO) {
 		return null;
 	}
 
 	@Override
-	public Boolean updateById(FeignOrderItemSaveRequest orderItem) {
+	public Boolean updateById(OrderItemSaveApiRequest orderItem) {
 		return null;
 	}
 
 	@Override
-	public FeignOrderItemResponse getByOrderSnAndSkuId(String orderSn, String skuId) {
+	public OrderItemApiResponse getByOrderSnAndSkuId(String orderSn, String skuId) {
 		return null;
 	}
 
 	@Override
-	public FeignOrderItemResponse getBySn(String orderItemSn) {
+	public OrderItemApiResponse getBySn(String orderItemSn) {
 		return null;
 	}
 

@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.controller.feign;
 
 import com.taotao.cloud.member.api.feign.MemberWalletApi;
-import com.taotao.cloud.member.api.feign.request.FeignMemberWalletUpdateRequest;
+import com.taotao.cloud.member.api.feign.request.MemberWalletUpdateApiRequest;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class FeignMemberWalletController implements MemberWalletApi {
 	private final IMemberService memberService;
 
 	@Override
-	public boolean increase(FeignMemberWalletUpdateRequest memberWalletUpdateDTO) {
+	public boolean increase(MemberWalletUpdateApiRequest memberWalletUpdateDTO) {
 		return false;
 	}
 

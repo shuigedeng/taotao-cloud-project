@@ -17,14 +17,14 @@
 package com.taotao.cloud.goods.integration.user.adapter;
 
 import com.taotao.cloud.goods.integration.user.vo.UserBaseInfoVO;
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserClientAdapter {
 
-    public UserBaseInfoVO convert(UserQueryVO userInfo, DubboDictResponse dict) {
+    public UserBaseInfoVO convert(UserQueryVO userInfo, DictRpcResponse dict) {
         // 基础信息
         UserBaseInfoVO userBaseInfo = new UserBaseInfoVO();
         // 联系方式

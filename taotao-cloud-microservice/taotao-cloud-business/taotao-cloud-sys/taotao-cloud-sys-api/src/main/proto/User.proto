@@ -12,20 +12,20 @@ package com.taotao.cloud.sys.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.sys.api.grpc";
-option java_outer_classname = "UserServiceProto";
+option java_outer_classname = "UserGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service UserGrpcService {
-  rpc findUserInfoByUsername (FindUserInfoByUsernameRequest) returns (FindUserInfoByUsernameResponse){}
-  rpc getUserInfoBySocial (GetUserInfoBySocialRequest) returns (GetUserInfoBySocialResponse){}
-  rpc getSysSecurityUser (GetSysSecurityUserRequest) returns (GetSysSecurityUserResponse){}
+  rpc findUserInfoByUsername (FindUserInfoByUsernameGrpcRequest) returns (FindUserInfoByUsernameGrpcResponse){}
+  rpc getUserInfoBySocial (GetUserInfoBySocialGrpcRequest) returns (GetUserInfoBySocialGrpcResponse){}
+  rpc getSysSecurityUser (GetSysSecurityUserGrpcRequest) returns (GetSysSecurityUserGrpcResponse){}
 }
 
-message FindUserInfoByUsernameRequest {
+message FindUserInfoByUsernameGrpcRequest {
   string username = 1;
 }
 
-message FindUserInfoByUsernameResponse {
+message FindUserInfoByUsernameGrpcResponse {
   int64 id = 1;
   string nickname = 2;
   string username = 3;
@@ -33,12 +33,12 @@ message FindUserInfoByUsernameResponse {
   int32 sex = 5;
 }
 
-message GetUserInfoBySocialRequest {
+message GetUserInfoBySocialGrpcRequest {
   string providerId = 1;
   string providerUserId = 2;
 }
 
-message GetUserInfoBySocialResponse {
+message GetUserInfoBySocialGrpcResponse {
   int64 userId = 1;
   string account = 2;
   string username = 3;
@@ -46,11 +46,11 @@ message GetUserInfoBySocialResponse {
   string password = 5;
 }
 
-message GetSysSecurityUserRequest {
+message GetSysSecurityUserGrpcRequest {
   string nicknameOrUserNameOrPhoneOrEmail = 1;
 }
 
-message GetSysSecurityUserResponse {
+message GetSysSecurityUserGrpcResponse {
   int64 userId = 1;
   string account = 2;
   string username = 3;

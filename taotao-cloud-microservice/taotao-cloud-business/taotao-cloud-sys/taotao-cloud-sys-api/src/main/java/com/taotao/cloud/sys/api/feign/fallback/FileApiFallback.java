@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.FileApi;
-import com.taotao.cloud.sys.api.feign.response.FeignFileResponse;
+import com.taotao.cloud.sys.api.feign.response.FileApiResponse;
 import io.seata.core.context.RootContext;
 import io.seata.core.exception.TransactionException;
 import io.seata.tm.api.GlobalTransactionContext;
@@ -39,7 +39,7 @@ public class FileApiFallback implements FallbackFactory<FileApi> {
 
         return new FileApi() {
             @Override
-            public FeignFileResponse findByCode(String code) {
+            public FileApiResponse findByCode(String code) {
 
                 if (StrUtil.isNotBlank(RootContext.getXID())) {
                     try {

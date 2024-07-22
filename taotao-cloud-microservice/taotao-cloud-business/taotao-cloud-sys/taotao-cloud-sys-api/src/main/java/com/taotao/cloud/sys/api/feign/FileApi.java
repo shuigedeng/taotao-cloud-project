@@ -25,7 +25,7 @@ import com.taotao.cloud.openfeign.annotation.ApiInfo;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
 import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
 import com.taotao.cloud.sys.api.feign.fallback.FileApiFallback;
-import com.taotao.cloud.sys.api.feign.response.FeignFileResponse;
+import com.taotao.cloud.sys.api.feign.response.FileApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +46,7 @@ public interface FileApi {
      * 字典列表code查询
      *
      * @param code 代码
-     * @return {@link FeignFileResponse }
+     * @return {@link FileApiResponse }
      * @since 2022-06-29 21:40:21
      */
     @ApiInfo(
@@ -56,5 +56,5 @@ public interface FileApi {
                 @Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
             })
     @GetMapping("/file/feign/file/code")
-    FeignFileResponse findByCode(@RequestParam(value = "code") String code);
+		FileApiResponse findByCode(@RequestParam(value = "code") String code);
 }

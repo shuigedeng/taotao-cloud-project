@@ -4,10 +4,10 @@ package com.taotao.cloud.auth.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.auth.api.grpc";
-option java_outer_classname = "ManagementServiceProto";
+option java_outer_classname = "ManagementGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
-service ManagementService {
+service ManagementGrpcService {
   rpc create (ManagementRequest) returns (ManagementResponse){}
 }
 

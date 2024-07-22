@@ -19,8 +19,8 @@ package com.taotao.cloud.order.api.feign.fallback;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.order.api.feign.StoreFlowApi;
-import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
-import com.taotao.cloud.order.api.feign.response.FeingStoreFlowResponse;
+import com.taotao.cloud.order.api.feign.response.TradeApiResponse;
+import com.taotao.cloud.order.api.feign.response.StoreFlowApiResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -37,18 +37,18 @@ public class FeignStoreFlowFallback implements FallbackFactory<StoreFlowApi> {
 
 
 			@Override
-			public FeignTradeResponse getBySn(String sn) {
+			public TradeApiResponse getBySn(String sn) {
 				return null;
 			}
 
 			@Override
-			public PageResult<FeingStoreFlowResponse> getStoreFlow(String id, String flowType,
+			public PageResult<StoreFlowApiResponse> getStoreFlow(String id, String flowType,
 				PageQuery PageQuery) {
 				return null;
 			}
 
 			@Override
-			public PageResult<FeingStoreFlowResponse> getDistributionFlow(String id,
+			public PageResult<StoreFlowApiResponse> getDistributionFlow(String id,
 				PageQuery PageQuery) {
 				return null;
 			}

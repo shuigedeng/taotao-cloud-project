@@ -18,7 +18,7 @@ package com.taotao.cloud.member.api.feign.fallback;
 
 import com.taotao.cloud.common.model.BaseSecurityUser;
 import com.taotao.cloud.member.api.feign.MemberApi;
-import com.taotao.cloud.member.api.feign.response.FeignMemberResponse;
+import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import java.util.List;
 import java.util.Map;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -42,7 +42,7 @@ public class MemberApiFallback implements FallbackFactory<MemberApi> {
             }
 
             @Override
-            public FeignMemberResponse findMemberById(Long id) {
+            public MemberApiResponse findMemberById(Long id) {
                 return null;
             }
 
@@ -52,12 +52,12 @@ public class MemberApiFallback implements FallbackFactory<MemberApi> {
             }
 
             @Override
-            public FeignMemberResponse findByUsername(String username) {
+            public MemberApiResponse findByUsername(String username) {
                 return null;
             }
 
             @Override
-            public FeignMemberResponse getById(Long memberId) {
+            public MemberApiResponse getById(Long memberId) {
                 return null;
             }
 
@@ -67,7 +67,7 @@ public class MemberApiFallback implements FallbackFactory<MemberApi> {
             }
 
             @Override
-            public Boolean updateById(FeignMemberResponse member) {
+            public Boolean updateById(MemberApiResponse member) {
                 return false;
             }
 

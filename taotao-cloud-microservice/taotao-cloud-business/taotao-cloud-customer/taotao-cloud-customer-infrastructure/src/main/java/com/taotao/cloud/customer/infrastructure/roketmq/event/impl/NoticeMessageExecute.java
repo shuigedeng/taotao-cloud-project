@@ -23,7 +23,7 @@ import com.taotao.cloud.member.api.model.dto.MemberPointMessageDTO;
 import com.taotao.cloud.member.biz.roketmq.event.MemberPointChangeEvent;
 import com.taotao.cloud.member.biz.roketmq.event.MemberWithdrawalEvent;
 import com.taotao.cloud.message.api.enums.NoticeMessageNodeEnum;
-import com.taotao.cloud.message.api.feign.IFeignNoticeMessageApi;
+import com.taotao.cloud.message.api.feign.NoticeMessageApi;
 import com.taotao.cloud.message.api.model.dto.NoticeMessageDTO;
 import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 public class NoticeMessageExecute implements MemberPointChangeEvent, MemberWithdrawalEvent {
 
     @Autowired
-    private IFeignNoticeMessageApi noticeMessageService;
+    private NoticeMessageApi noticeMessageService;
 
     @Override
     public void memberPointChange(MemberPointMessageDTO memberPointMessageDTO) {

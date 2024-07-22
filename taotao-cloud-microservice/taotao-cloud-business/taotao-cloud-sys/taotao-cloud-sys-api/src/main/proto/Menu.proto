@@ -12,18 +12,18 @@ package com.taotao.cloud.sys.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.sys.api.grpc";
-option java_outer_classname = "MenuServiceProto";
+option java_outer_classname = "MenuGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service MenuGrpcService {
-  rpc findResourceByCodes (MenuRequest) returns (MenuResponse){}
+  rpc findResourceByCodes (MenuGrpcRequest) returns (MenuGrpcResponse){}
 }
 
-message MenuRequest {
+message MenuGrpcRequest {
   repeated string codes = 1;
 }
 
-message MenuResponse {
+message MenuGrpcResponse {
   int64 id = 1;
   string name = 2;
   int32 type = 3;

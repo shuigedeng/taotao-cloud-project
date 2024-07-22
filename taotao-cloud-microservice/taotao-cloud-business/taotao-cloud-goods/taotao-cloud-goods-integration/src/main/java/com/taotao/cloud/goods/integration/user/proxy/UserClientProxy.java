@@ -20,7 +20,7 @@ import com.taotao.cloud.goods.integration.user.adapter.UserClientAdapter;
 import com.taotao.cloud.goods.integration.user.grpc.UserGrpcClient;
 import com.taotao.cloud.goods.integration.user.vo.UserBaseInfoVO;
 import com.taotao.cloud.sys.api.dubbo.DictRpcService;
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
 import com.taotao.cloud.sys.api.feign.UserApi;
 import com.taotao.cloud.sys.api.grpc.HelloReply;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
@@ -43,7 +43,7 @@ public class UserClientProxy {
 	// 查询用户
 	public UserBaseInfoVO getUserInfo(String username) {
 		UserQueryVO user = feignUserApi.findUserInfoByUsername(username);
-		DubboDictResponse dict = dubboDictRpc.findByCode(22);
+		DictRpcResponse dict = dubboDictRpc.findByCode(22);
 
 		HelloReply helloReply = userGrpcClient.sayHello(username);
 

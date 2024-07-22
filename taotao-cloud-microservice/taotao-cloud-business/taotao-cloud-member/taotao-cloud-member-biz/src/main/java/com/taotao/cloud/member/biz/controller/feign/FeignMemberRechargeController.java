@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.controller.feign;
 
 import com.taotao.cloud.member.api.feign.MemberRechargeApi;
-import com.taotao.cloud.member.api.feign.response.FeignMemberRechargeResponse;
+import com.taotao.cloud.member.api.feign.response.MemberRechargeApiResponse;
 import com.taotao.cloud.member.sys.model.vo.MemberRechargeVO;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -47,17 +47,17 @@ public class FeignMemberRechargeController implements MemberRechargeApi {
     }
 
     @Override
-    public FeignMemberRechargeResponse getRecharge(String sn) {
+    public MemberRechargeApiResponse getRecharge(String sn) {
         return null;
     }
 
     @Override
-    public FeignMemberRechargeResponse recharge(BigDecimal price) {
+    public MemberRechargeApiResponse recharge(BigDecimal price) {
         return null;
     }
 
     @Override
-    public List<FeignMemberRechargeResponse> list(DateTime dateTime) {
+    public List<MemberRechargeApiResponse> list(DateTime dateTime) {
         return null;
     }
 

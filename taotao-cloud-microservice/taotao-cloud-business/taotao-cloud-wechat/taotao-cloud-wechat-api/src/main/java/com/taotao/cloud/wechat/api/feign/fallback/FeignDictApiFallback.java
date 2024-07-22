@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.api.feign.fallback;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.wechat.api.feign.IFeignDictApi;
+import com.taotao.cloud.wechat.api.feign.WechatApi;
 import com.taotao.cloud.wechat.api.feign.response.FeignDictResponse;
 import io.seata.core.context.RootContext;
 import io.seata.tm.api.GlobalTransactionContext;
@@ -31,12 +31,12 @@ import org.springframework.transaction.TransactionException;
  * @author shuigedeng
  * @since 2020/4/29 21:43
  */
-public class FeignDictApiFallback implements FallbackFactory<IFeignDictApi> {
+public class FeignDictApiFallback implements FallbackFactory<WechatApi> {
     @Override
-    public IFeignDictApi create(Throwable throwable) {
+    public WechatApi create(Throwable throwable) {
         LogUtils.info("throwablethrowablethrowablethrowablethrowable");
 
-        return new IFeignDictApi() {
+        return new WechatApi() {
             @Override
             public FeignDictResponse findByCode(String code) {
 

@@ -17,8 +17,8 @@
 package com.taotao.cloud.wechat.integration.goods.proxy;
 
 import com.taotao.cloud.goods.api.dubbo.GoodsRpcService;
-import com.taotao.cloud.goods.api.dubbo.request.DubboGoodsQueryRequest;
-import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
+import com.taotao.cloud.goods.api.dubbo.request.GoodsQueryRpcRequest;
+import com.taotao.cloud.goods.api.dubbo.response.GoodsQueryRpcResponse;
 import com.taotao.cloud.goods.api.feign.GoodsApi;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
 import com.taotao.cloud.wechat.integration.goods.adapter.GoodsClientAdapter;
@@ -43,7 +43,7 @@ public class GoodsClientProxy {
 	// 查询用户
 	public GoodsVO getGoodsVO(Long storeId) {
 		Long goodsNum = goodsApi.countStoreGoodsNum(storeId);
-		DubboGoodsQueryResponse goods = goodsRpcService.queryGoodsByParams(new DubboGoodsQueryRequest());
+		GoodsQueryRpcResponse goods = goodsRpcService.queryGoodsByParams(new GoodsQueryRpcRequest());
 		HelloReply helloReply = goodsGrpcClient.sayHello("sfdasdf");
 
 		return userIntegrationAdapter.convert(goodsNum, goods, helloReply);

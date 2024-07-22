@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.dubbo;
 
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
 
 /**
  * ISysDictService
@@ -31,8 +31,8 @@ public interface DictRpcService {
      * 字典code查询
      *
      * @param code 代码
-     * @return {@link DubboDictResponse }
+     * @return {@link DictRpcResponse }
      * @since 2022-06-29 21:45:44
      */
-    DubboDictResponse findByCode(Integer code);
+    DictRpcResponse findByCode(Integer code);
 }

@@ -19,8 +19,8 @@ package com.taotao.cloud.order.facade.feign;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.order.api.feign.StoreFlowApi;
-import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
-import com.taotao.cloud.order.api.feign.response.FeingStoreFlowResponse;
+import com.taotao.cloud.order.api.feign.response.TradeApiResponse;
+import com.taotao.cloud.order.api.feign.response.StoreFlowApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,18 +39,18 @@ public class FeignStoreFlowApi implements StoreFlowApi {
 
 
 	@Override
-	public FeignTradeResponse getBySn(String sn) {
+	public TradeApiResponse getBySn(String sn) {
 		return null;
 	}
 
 	@Override
-	public PageResult<FeingStoreFlowResponse> getStoreFlow(String id, String flowType,
+	public PageResult<StoreFlowApiResponse> getStoreFlow(String id, String flowType,
 		PageQuery PageQuery) {
 		return null;
 	}
 
 	@Override
-	public PageResult<FeingStoreFlowResponse> getDistributionFlow(String id, PageQuery PageQuery) {
+	public PageResult<StoreFlowApiResponse> getDistributionFlow(String id, PageQuery PageQuery) {
 		return null;
 	}
 }

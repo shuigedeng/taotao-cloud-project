@@ -4,10 +4,10 @@ package com.taotao.cloud.auth.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.auth.api.grpc";
-option java_outer_classname = "Oauth2ServiceProto";
+option java_outer_classname = "Oauth2GrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
-service Oauth2Service {
+service Oauth2GrpcService {
   rpc loginByWechat (Oauth2Request) returns (Oauth2Response){}
   rpc loginByQQ (Oauth2Request) returns (BooleanReply){}
 }

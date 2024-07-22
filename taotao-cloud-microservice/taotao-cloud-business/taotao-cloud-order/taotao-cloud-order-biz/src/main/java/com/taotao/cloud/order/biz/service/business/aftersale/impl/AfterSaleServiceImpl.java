@@ -55,7 +55,7 @@ import com.taotao.cloud.order.biz.service.business.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
-import com.taotao.cloud.payment.api.feign.IFeignRefundSupportApi;
+import com.taotao.cloud.payment.api.feign.RefundSupportApi;
 import com.taotao.cloud.store.api.feign.IFeignStoreDetailApi;
 import com.taotao.cloud.store.api.model.vo.StoreAfterSaleAddressVO;
 import com.taotao.cloud.sys.api.feign.LogisticsApi;
@@ -104,7 +104,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 售后支持，这里用于退款操作
 	 */
-	private final IFeignRefundSupportApi refundSupportApi;
+	private final RefundSupportApi refundSupportApi;
 	/**
 	 * RocketMQ配置
 	 */

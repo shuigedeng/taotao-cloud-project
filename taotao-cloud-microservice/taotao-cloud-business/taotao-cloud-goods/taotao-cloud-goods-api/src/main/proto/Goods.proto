@@ -4,19 +4,19 @@ package com.taotao.cloud.goods.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.goods.api.grpc";
-option java_outer_classname = "GoodsServiceProto";
+option java_outer_classname = "GoodsGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service GoodsGrpcService {
   // Sends a message
-  rpc countStoreGoodsNum (CountStoreGoodsNumRequest) returns (CountStoreGoodsNumResponse){}
+  rpc countStoreGoodsNum (CountStoreGoodsNumGrpcRequest) returns (CountStoreGoodsNumGrpcResponse){}
 }
 
-message CountStoreGoodsNumRequest {
+message CountStoreGoodsNumGrpcRequest {
   string id = 1;
 }
 
-message CountStoreGoodsNumResponse {
+message CountStoreGoodsNumGrpcResponse {
   string id = 1;
   string serialNum = 2;
   string userNum = 3;

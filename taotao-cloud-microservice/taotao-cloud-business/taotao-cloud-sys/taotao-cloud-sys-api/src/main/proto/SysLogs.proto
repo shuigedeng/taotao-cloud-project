@@ -4,21 +4,21 @@ package com.taotao.cloud.log.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.log.api.grpc";
-option java_outer_classname = "DeviceFixProto";
+option java_outer_classname = "LogGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service LogGrpcService {
-  rpc insertLog (Log) returns (BooleanReply){}
-  rpc updateLog (Log) returns (BooleanReply){}
-  rpc searchLog (LogRequest) returns (Log){}
-  rpc deleteLog (LogRequest) returns (BooleanReply){}
+  rpc insertLog (LogGrpcRequest) returns (LogGrpcResponse){}
+  rpc updateLog (LogGrpcRequest) returns (LogGrpcResponse){}
+  rpc searchLog (LogGrpcRequest) returns (LogGrpcResponse){}
+  rpc deleteLog (LogGrpcRequest) returns (LogGrpcResponse){}
 }
 
-message LogRequest {
+message LogGrpcRequest {
   string id = 1;
 }
 
-message Log {
+message LogGrpcResponse {
   string id = 1;
   string serialNum = 2;
   string userNum = 3;
@@ -27,12 +27,4 @@ message Log {
   string address = 6;
   string createtime = 7;
   string updatetime = 8;
-}
-
-message BooleanReply {
-  bool reply = 1;
-}
-
-message ObjectReply {
-  bool reply = 1;
 }

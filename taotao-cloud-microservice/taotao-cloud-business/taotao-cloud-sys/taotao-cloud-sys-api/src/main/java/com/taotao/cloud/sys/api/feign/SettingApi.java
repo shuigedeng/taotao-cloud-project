@@ -19,17 +19,17 @@ package com.taotao.cloud.sys.api.feign;
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.sys.api.feign.fallback.SettingApiFallback;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignAlipayPaymentSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignBaseSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignExperienceSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignGoodsSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignOrderSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignPointSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignQQConnectSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignSeckillSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignWechatConnectSettingResponse;
-import com.taotao.cloud.sys.api.feign.response.setting.FeignWechatPaymentSettingResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.AlipayPaymentSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.BaseSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.ExperienceSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.GoodsSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.OrderSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.PointSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.QQConnectSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.SeckillSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.SettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.WechatConnectSettingApiResponse;
+import com.taotao.cloud.sys.api.feign.response.setting.WechatPaymentSettingApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,42 +55,42 @@ public interface SettingApi {
      * @since 2022-03-25 14:10:22
      */
     @GetMapping("/sys/feign/tools/setting")
-	FeignSettingResponse get(@RequestParam(value = "key") String key);
+	SettingApiResponse get(@RequestParam(value = "key") String key);
 
     @GetMapping("/sys/feign/tools/setting/base")
-	FeignBaseSettingResponse getBaseSetting(String name);
+	BaseSettingApiResponse getBaseSetting(String name);
 
     /**
      * 获得商品设置
      *
      * @param name 名字
-     * @return {@link Result }<{@link FeignGoodsSettingResponse }>
+     * @return {@link Result }<{@link GoodsSettingApiResponse }>
      * @since 2022-04-25 16:47:40
      */
     @GetMapping("/sys/feign/tools/setting/goods")
-	FeignGoodsSettingResponse getGoodsSetting(String name);
+	GoodsSettingApiResponse getGoodsSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/order")
-	FeignOrderSettingResponse getOrderSetting(String name);
+	OrderSettingApiResponse getOrderSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/experience")
-	FeignExperienceSettingResponse getExperienceSetting(String name);
+	ExperienceSettingApiResponse getExperienceSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/point")
-	FeignPointSettingResponse getPointSetting(String name);
+	PointSettingApiResponse getPointSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/qq/connect")
-	FeignQQConnectSettingResponse getQQConnectSetting(String name);
+	QQConnectSettingApiResponse getQQConnectSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/wechat/connect")
-	FeignWechatConnectSettingResponse getWechatConnectSetting(String name);
+	WechatConnectSettingApiResponse getWechatConnectSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/seckill")
-	FeignSeckillSettingResponse getSeckillSetting(String name);
+	SeckillSettingApiResponse getSeckillSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/ali")
-	FeignAlipayPaymentSettingResponse getAlipayPaymentSetting(String name);
+		AlipayPaymentSettingApiResponse getAlipayPaymentSetting(String name);
 
     @GetMapping("/sys/feign/tools/setting/wechat")
-	FeignWechatPaymentSettingResponse getWechatPaymentSetting(String name);
+	WechatPaymentSettingApiResponse getWechatPaymentSetting(String name);
 }

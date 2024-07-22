@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.DictApi;
-import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
+import com.taotao.cloud.sys.api.feign.response.DictApiResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -34,7 +34,7 @@ public class DictApiFallback implements FallbackFactory<DictApi> {
 
         return new DictApi() {
             @Override
-            public FeignDictResponse findByCode(String code) {
+            public DictApiResponse findByCode(String code) {
 
 //                if (StrUtil.isNotBlank(RootContext.getXID())) {
 //                    try {
@@ -48,7 +48,7 @@ public class DictApiFallback implements FallbackFactory<DictApi> {
             }
 
             @Override
-            public FeignDictResponse test(String id) {
+            public DictApiResponse test(String id) {
                 return null;
             }
         };

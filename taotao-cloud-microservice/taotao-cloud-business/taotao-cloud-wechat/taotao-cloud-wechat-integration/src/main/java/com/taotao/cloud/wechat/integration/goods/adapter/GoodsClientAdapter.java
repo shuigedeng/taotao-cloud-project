@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.integration.goods.adapter;
 
-import com.taotao.cloud.goods.api.dubbo.response.DubboGoodsQueryResponse;
+import com.taotao.cloud.goods.api.dubbo.response.GoodsQueryRpcResponse;
 import com.taotao.cloud.goods.api.grpc.HelloReply;
 import com.taotao.cloud.wechat.integration.goods.vo.GoodsVO;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GoodsClientAdapter {
 
-    public GoodsVO convert(Long goodsNum , DubboGoodsQueryResponse goods , HelloReply helloReply) {
+    public GoodsVO convert(Long goodsNum , GoodsQueryRpcResponse goods , HelloReply helloReply) {
 		GoodsVO goodsVO = new GoodsVO();
 
         return goodsVO;

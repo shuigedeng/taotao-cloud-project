@@ -40,7 +40,7 @@ import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
 import com.taotao.cloud.order.biz.service.business.order.IOrderItemService;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;
 import com.taotao.cloud.order.biz.service.business.order.IStoreFlowService;
-import com.taotao.cloud.payment.api.feign.IFeignRefundLogApi;
+import com.taotao.cloud.payment.api.feign.RefundLogApi;
 import com.taotao.cloud.store.api.feign.IFeignBillApi;
 import com.taotao.cloud.store.api.model.vo.BillVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
@@ -67,7 +67,7 @@ public class StoreFlowServiceImpl extends ServiceImpl<IStoreFlowMapper, StoreFlo
     /** 订单货物 */
     private final IOrderItemService orderItemService;
     /** 退款日志 */
-    private final IFeignRefundLogApi feignRefundLogApi;
+    private final RefundLogApi feignRefundLogApi;
 
     private final IFeignBillApi feignBillApi;
 

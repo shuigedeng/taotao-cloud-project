@@ -23,7 +23,7 @@ import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
 import com.taotao.cloud.openfeign.annotation.FeignInner;
 import com.taotao.cloud.openfeign.annotation.FeignRetry;
 import com.taotao.cloud.sys.api.feign.fallback.DictApiFallback;
-import com.taotao.cloud.sys.api.feign.response.FeignDictResponse;
+import com.taotao.cloud.sys.api.feign.response.DictApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +47,7 @@ public interface DictApi {
 	 * 字典列表code查询
 	 *
 	 * @param code 代码
-	 * @return {@link FeignDictResponse }
+	 * @return {@link DictApiResponse }
 	 * @since 2022-06-29 21:40:21
 	 */
 	@ApiInfo(
@@ -59,13 +59,13 @@ public interface DictApi {
 	@FeignRetry(maxAttempt=  6, backoff = @FeignRetry.Backoff(delay = 500L, maxDelay = 20000L, multiplier = 4))
 	@FeignInner
 	@GetMapping("/sys/feign/dict/code")
-	FeignDictResponse findByCode(@RequestParam(value = "code") String code);
+	DictApiResponse findByCode(@RequestParam(value = "code") String code);
 
 	/**
 	 * 字典列表code查询
 	 *
 	 * @param id 代码
-	 * @return {@link FeignDictResponse }
+	 * @return {@link DictApiResponse }
 	 * @since 2022-06-29 21:40:21
 	 */
 	@ApiInfo(
@@ -75,5 +75,5 @@ public interface DictApi {
 			@Update(version = V2022_08, content = "主要修改了配置信息的接口查询08", date = "2022-07-01 17:11:55")
 		})
 	@GetMapping("/sys/feign/dict/code")
-	FeignDictResponse test(@RequestParam(value = "id") String id);
+	DictApiResponse test(@RequestParam(value = "id") String id);
 }

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.convert;
 
-import com.taotao.cloud.sys.api.dubbo.request.DubboMenuQueryRequest;
+import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
@@ -52,10 +52,10 @@ public interface ResourceConvert {
      * 实体查询bos
      *
      * @param resources 菜单
-     * @return {@link List }<{@link DubboMenuQueryRequest }>
+     * @return {@link List }<{@link MenuQueryRpcRequest }>
      * @since 2022-04-28 13:39:41
      */
-    List<DubboMenuQueryRequest> convertListRequest(List<Resource> resources);
+    List<MenuQueryRpcRequest> convertListRequest(List<Resource> resources);
 
     /**
      * 菜单bos

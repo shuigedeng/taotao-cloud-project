@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.taotao.cloud.wechat.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.wechat.api.grpc";
+option java_outer_classname = "WechatGrpcServiceProto";
+//option objc_class_prefix = "HLW";
+
+service WechatGrpcService {
+  rpc query (WechatRequest) returns (WechatResponse){}
+}
+
+message WechatRequest {
+  string id = 1;
+}
+
+message WechatResponse {
+  bool reply = 1;
+}
+

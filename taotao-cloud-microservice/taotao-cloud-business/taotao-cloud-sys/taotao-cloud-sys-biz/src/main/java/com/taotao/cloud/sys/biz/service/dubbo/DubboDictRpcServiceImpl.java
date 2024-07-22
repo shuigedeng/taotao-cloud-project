@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.service.dubbo;
 
 import com.taotao.cloud.sys.api.dubbo.DictRpcService;
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
 import com.taotao.cloud.sys.biz.mapper.IDictMapper;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
@@ -41,7 +41,7 @@ public class DubboDictRpcServiceImpl extends BaseSuperServiceImpl<Dict, Long,IDi
         implements DictRpcService {
 
     @Override
-    public DubboDictResponse findByCode(Integer code) {
-        return new DubboDictResponse();
+    public DictRpcResponse findByCode(Integer code) {
+        return new DictRpcResponse();
     }
 }

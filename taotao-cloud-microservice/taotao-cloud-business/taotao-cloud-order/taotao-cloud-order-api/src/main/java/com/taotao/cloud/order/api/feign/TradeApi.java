@@ -18,7 +18,7 @@ package com.taotao.cloud.order.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.order.api.feign.fallback.FeignTradeApiFallback;
-import com.taotao.cloud.order.api.feign.response.FeignTradeResponse;
+import com.taotao.cloud.order.api.feign.response.TradeApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface TradeApi {
 
 	@GetMapping(value = "/trade")
-	FeignTradeResponse getBySn(String sn);
+	TradeApiResponse getBySn(String sn);
 
 	@PostMapping(value = "/payTrade")
 	boolean payTrade(String sn, String paymentMethod, String receivableNo);

@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 
-import com.taotao.cloud.sys.api.dubbo.request.DubboLogsQueryRequest;
-import com.taotao.cloud.sys.api.dubbo.response.DubboLogsResponse;
+import com.taotao.cloud.sys.api.dubbo.request.LogsQueryRpcRequest;
+import com.taotao.cloud.sys.api.dubbo.response.LogsRpcResponse;
 
 /**
  * IDubboOrderService
@@ -33,8 +33,8 @@ public interface LogsRpcService {
      * 查询
      *
      * @param request request
-     * @return {@link DubboLogsResponse }
+     * @return {@link LogsRpcResponse }
      * @since 2022-04-28 09:21:20
      */
-    DubboLogsResponse query(DubboLogsQueryRequest request);
+    LogsRpcResponse query(LogsQueryRpcRequest request);
 }

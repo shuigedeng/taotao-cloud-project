@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.taotao.cloud.customer.api.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.customer.api.grpc";
+option java_outer_classname = "CustomerGrpcServiceProto";
+//option objc_class_prefix = "HLW";
+
+service CustomerGrpcService {
+  rpc query (CustomerRequest) returns (CustomerResponse){}
+}
+
+message CustomerRequest {
+  string id = 1;
+}
+
+message CustomerResponse {
+  string id = 1;
+  string serialNum = 2;
+  string userNum = 3;
+  int32  status = 4;
+  int32  type = 5;
+  string address = 6;
+  string createtime = 7;
+  string updatetime = 8;
+}
+
+message BooleanReply {
+  bool reply = 1;
+}
+

@@ -4,18 +4,18 @@ package com.taotao.cloud.goods.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.goods.api.grpc";
-option java_outer_classname = "CategoryServiceProto";
+option java_outer_classname = "CategoryGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service CategoryGrpcService {
-  rpc firstCategory (FirstCategoryRequest) returns (FirstCategoryResponse){}
+  rpc firstCategory (FirstCategoryGrpcRequest) returns (FirstCategoryGrpcResponse){}
 }
 
-message FirstCategoryRequest {
+message FirstCategoryGrpcRequest {
   string id = 1;
 }
 
-message FirstCategoryResponse {
+message FirstCategoryGrpcResponse {
   string id = 1;
   string serialNum = 2;
   string userNum = 3;

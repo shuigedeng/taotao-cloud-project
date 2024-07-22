@@ -4,18 +4,18 @@ package com.taotao.cloud.member.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.member.api.grpc";
-option java_outer_classname = "MemberWalletServiceProto";
+option java_outer_classname = "MemberWalletGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service MemberWalletGrpcService {
-  rpc insertDeviceFix (MemberWalletRequest) returns (MemberWalletResponse){}
+  rpc insertDeviceFix (MemberWalletGrpcRequest) returns (MemberWalletGrpcResponse){}
 }
 
-message MemberWalletRequest {
+message MemberWalletGrpcRequest {
   string id = 1;
 }
 
-message MemberWalletResponse {
+message MemberWalletGrpcResponse {
   bool reply = 1;
 }
 

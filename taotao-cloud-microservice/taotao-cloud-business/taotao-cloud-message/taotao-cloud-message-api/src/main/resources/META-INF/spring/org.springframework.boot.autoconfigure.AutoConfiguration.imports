@@ -1,2 +1,2 @@
-com.taotao.cloud.message.api.feign.fallback.FeignNoticeMessageApiFallback
-com.taotao.cloud.message.api.feign.fallback.FeignStoreMessageApiFallback
+com.taotao.cloud.message.api.feign.fallback.NoticeMessageApiFallback
+com.taotao.cloud.message.api.feign.fallback.StoreMessageApiFallback

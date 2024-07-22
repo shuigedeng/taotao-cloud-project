@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.api.feign.fallback;
 
 import com.taotao.cloud.sys.api.feign.SysLogLoginApi;
-import com.taotao.cloud.sys.api.feign.request.FeignSysLogLoginRequest;
-import com.taotao.cloud.sys.api.feign.response.FeignLogsResponse;
+import com.taotao.cloud.sys.api.feign.request.SysLogLoginApiRequest;
+import com.taotao.cloud.sys.api.feign.response.LogsApiResponse;
 import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
@@ -33,7 +33,7 @@ public class SysLogLoginApiFallback implements FallbackFactory<SysLogLoginApi> {
     public SysLogLoginApi create(Throwable cause) {
         return new SysLogLoginApi() {
             @Override
-            public FeignLogsResponse save(FeignSysLogLoginRequest feignSysLogLoginRequest) {
+            public LogsApiResponse save(SysLogLoginApiRequest sysLogLoginApiRequest) {
                 return null;
             }
         };

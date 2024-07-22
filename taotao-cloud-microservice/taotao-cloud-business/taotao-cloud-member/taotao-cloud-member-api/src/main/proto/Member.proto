@@ -4,17 +4,17 @@ package com.taotao.cloud.member.api.grpc;
 
 option java_multiple_files = true;
 option java_package = "com.taotao.cloud.member.api.grpc";
-option java_outer_classname = "MemberServiceProto";
+option java_outer_classname = "MemberGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
 service MemberGrpcService {
-  rpc insertMember (MemberRequest) returns (MemberResponse){}
+  rpc insertMember (MemberGrpcRequest) returns (MemberGrpcResponse){}
 }
 
-message MemberRequest {
+message MemberGrpcRequest {
   string id = 1;
 }
 
-message MemberResponse {
+message MemberGrpcResponse {
   bool reply = 1;
 }

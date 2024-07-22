@@ -16,11 +16,10 @@
 
 package com.taotao.cloud.store.biz.api.controller.manager;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.message.api.feign.IFeignStoreMessageApi;
+import com.taotao.cloud.message.api.feign.StoreMessageApi;
 import com.taotao.cloud.message.api.model.vo.StoreMessageQueryVO;
 import com.taotao.cloud.message.api.model.vo.StoreMessageVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
@@ -41,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreMessageManagerController {
 
     @Autowired
-    private IFeignStoreMessageApi storeMessageService;
+    private StoreMessageApi storeMessageService;
 
     @Operation(summary = "多条件分页获取", description = "多条件分页获取")
     @RequestLogger

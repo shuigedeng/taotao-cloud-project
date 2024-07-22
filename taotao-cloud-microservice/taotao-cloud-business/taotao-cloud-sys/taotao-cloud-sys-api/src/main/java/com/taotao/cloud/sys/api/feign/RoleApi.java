@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.sys.api.feign.fallback.RoleApiFallback;
-import com.taotao.cloud.sys.api.feign.response.FeignRoleQueryResponse;
+import com.taotao.cloud.sys.api.feign.response.RoleQueryApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,5 +45,5 @@ public interface RoleApi {
      * @since 2020/10/21 15:13
      */
     @GetMapping("/sys/feign/role/info/userId")
-    List<FeignRoleQueryResponse> findRoleByUserId(@RequestParam(value = "userId") Long userId);
+    List<RoleQueryApiResponse> findRoleByUserId(@RequestParam(value = "userId") Long userId);
 }

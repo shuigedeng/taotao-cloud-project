@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.api.dubbo;
 
 
-import com.taotao.cloud.sys.api.dubbo.response.DubboFileResponse;
+import com.taotao.cloud.sys.api.dubbo.response.FileRpcResponse;
 
 /**
  * ISysDictService
@@ -32,8 +32,8 @@ public interface FileRpcService {
      * 字典code查询
      *
      * @param code 代码
-     * @return {@link DubboFileResponse }
+     * @return {@link FileRpcResponse }
      * @since 2022-06-29 21:45:44
      */
-    DubboFileResponse findByCode(Integer code);
+    FileRpcResponse findByCode(Integer code);
 }

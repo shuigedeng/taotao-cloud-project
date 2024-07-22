@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.integration.user.vo;
 
-import com.taotao.cloud.sys.api.dubbo.response.DubboDictResponse;
+import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
 import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
 import lombok.Data;
 
@@ -24,5 +24,5 @@ import lombok.Data;
 public class UserBaseInfoVO {
 
     private UserQueryVO userQueryVO;
-    private DubboDictResponse dict;
+    private DictRpcResponse dict;
 }
