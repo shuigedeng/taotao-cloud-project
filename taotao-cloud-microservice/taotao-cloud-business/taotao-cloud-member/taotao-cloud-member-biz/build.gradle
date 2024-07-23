@@ -8,6 +8,7 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-promotion:taotao-cloud-promotion-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-report:taotao-cloud-report-api")
 
+    implementation "io.github.shuigedeng:taotao-cloud-starter-apollo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
@@ -28,9 +29,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
     implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //https://search.maven.org/artifact/com.xkcoding.http/simple-http
     implementation "com.xkcoding.http:simple-http:1.0.5"

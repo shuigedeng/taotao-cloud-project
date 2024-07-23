@@ -13,9 +13,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-office"
     implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
-    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
     //https://code.google.com/p/aviator/

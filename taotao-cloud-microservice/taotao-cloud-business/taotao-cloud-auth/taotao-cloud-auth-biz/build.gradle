@@ -22,9 +22,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    implementation("io.github.shuigedeng:taotao-cloud-starter-data-mybatis") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
@@ -143,6 +141,5 @@ configurations {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "org.bouncycastle", module: "bcpkix-jdk15on"
         exclude group: "org.bouncycastle", module: "bcutil-jdk15on"
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
     }
 }

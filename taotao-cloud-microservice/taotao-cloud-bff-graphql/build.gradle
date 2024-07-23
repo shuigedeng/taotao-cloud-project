@@ -19,9 +19,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
     testImplementation 'org.springframework.graphql:spring-graphql-test:1.3.2'

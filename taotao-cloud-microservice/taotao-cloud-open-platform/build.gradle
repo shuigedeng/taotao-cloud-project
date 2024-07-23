@@ -18,9 +18,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
     implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openapi"
-    implementation("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox
     implementation "org.apache.pdfbox:pdfbox:3.0.2"

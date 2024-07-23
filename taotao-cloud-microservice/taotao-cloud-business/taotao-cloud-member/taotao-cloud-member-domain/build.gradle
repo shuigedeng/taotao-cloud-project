@@ -55,6 +55,10 @@
 
 
 dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-common")
+
+    api "io.github.shuigedeng:taotao-cloud-starter-apollo"
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
@@ -76,9 +80,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-data-elasticsearch"
     api "io.github.shuigedeng:taotao-cloud-starter-grpc"
     api "io.github.shuigedeng:taotao-cloud-starter-lock"
-    api("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    api "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //https://search.maven.org/artifact/com.xkcoding.http/simple-http
     api "com.xkcoding.http:simple-http:1.0.5"

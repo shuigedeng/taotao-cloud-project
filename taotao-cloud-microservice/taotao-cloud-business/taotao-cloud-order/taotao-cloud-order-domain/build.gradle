@@ -55,10 +55,13 @@
 
 
 dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-common")
+
+    api "io.github.shuigedeng:taotao-cloud-starter-apollo"
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    api "io.github.shuigedeng:taotao-cloud-starter-ddd"
     api "io.github.shuigedeng:taotao-cloud-starter-dubbo"
     api "io.github.shuigedeng:taotao-cloud-starter-eventbus"
     api "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
@@ -79,9 +82,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-lock"
     api "io.github.shuigedeng:taotao-cloud-starter-statemachine"
     api "io.github.shuigedeng:taotao-cloud-starter-flowengine"
-    api("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    api "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
     //https://code.google.com/p/aviator/

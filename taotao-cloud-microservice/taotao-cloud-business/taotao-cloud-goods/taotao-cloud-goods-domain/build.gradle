@@ -55,6 +55,10 @@
 
 
 dependencies {
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-integration")
+    api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-common")
+
+    api "io.github.shuigedeng:taotao-cloud-starter-apollo"
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
@@ -76,9 +80,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-data-mongodb"
     api "io.github.shuigedeng:taotao-cloud-starter-grpc"
     api "io.github.shuigedeng:taotao-cloud-starter-lock"
-    api("io.github.shuigedeng:taotao-cloud-starter-web") {
-        exclude group: "com.baomidou", module: "dynamic-datasource-spring-boot3-starter"
-    }
+    api "io.github.shuigedeng:taotao-cloud-starter-web"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
