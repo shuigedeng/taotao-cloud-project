@@ -33,8 +33,8 @@ import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.member.application.service.IMemberEvaluationService;
 import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberEvaluationMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.Member;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluation;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPO;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluationPO;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -58,7 +58,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberEvaluationServiceImpl extends
-	ServiceImpl<IMemberEvaluationMapper, MemberEvaluation>
+	ServiceImpl<IMemberEvaluationMapper, MemberEvaluationPO>
 	implements IMemberEvaluationService {
 
 	/**
@@ -96,13 +96,13 @@ public class MemberEvaluationServiceImpl extends
 	private ThreadPoolExecutor asyncThreadPoolExecutor;
 
 	@Override
-	public IPage<MemberEvaluation> managerQuery(EvaluationPageQuery queryParams) {
+	public IPage<MemberEvaluationPO> managerQuery(EvaluationPageQuery queryParams) {
 		// 获取评价分页
 		return this.page(queryParams.buildMpPage(), QueryUtils.evaluationQueryWrapper(queryParams));
 	}
 
 	@Override
-	public IPage<MemberEvaluation> queryPage(EvaluationPageQuery evaluationPageQuery) {
+	public IPage<MemberEvaluationPO> queryPage(EvaluationPageQuery evaluationPageQuery) {
 		return this.baseMapper.getMemberEvaluationList(
 			evaluationPageQuery.buildMpPage(),
 			QueryUtils.evaluationQueryWrapper(evaluationPageQuery));
@@ -111,7 +111,7 @@ public class MemberEvaluationServiceImpl extends
 	@Override
 	public Boolean addMemberEvaluation(MemberEvaluationDTO memberEvaluationDTO) {
 		// 获取用户信息
-		Member member = memberService.getUserInfo();
+		MemberPO member = memberService.getUserInfo();
 
 		// 获取商品信息
 		CompletableFuture<GoodsSkuSpecGalleryVO> future1 = CompletableFuture.supplyAsync(
@@ -150,12 +150,12 @@ public class MemberEvaluationServiceImpl extends
 		// 检测是否可以添加会员评价
 		checkMemberEvaluation(orderItem, order);
 		// 新增用户评价
-		MemberEvaluation memberEvaluation = new MemberEvaluation(memberEvaluationDTO, goodsSku,
+		MemberEvaluationPO memberEvaluationPO = new MemberEvaluationPO(memberEvaluationDTO, goodsSku,
 			member, order);
 		// 过滤商品咨询敏感词
-		memberEvaluation.setContent(SensitiveWordsFilter.filter(memberEvaluation.getContent()));
+		memberEvaluationPO.setContent(SensitiveWordsFilter.filter(memberEvaluationPO.getContent()));
 		// 添加评价
-		this.save(memberEvaluation);
+		this.save(memberEvaluationPO);
 
 		// 修改订单货物评价状态为已评价
 		orderItemApi.updateCommentStatus(orderItem.sn(), CommentStatusEnum.FINISHED);
@@ -164,19 +164,19 @@ public class MemberEvaluationServiceImpl extends
 			rocketmqCustomProperties.getGoodsTopic() + ":"
 				+ GoodsTagsEnum.GOODS_COMMENT_COMPLETE.name();
 		rocketMQTemplate.asyncSend(
-			destination, JSONUtil.toJsonStr(memberEvaluation),
+			destination, JSONUtil.toJsonStr(memberEvaluationPO),
 			RocketmqSendCallbackBuilder.commonCallback());
 		return true;
 	}
 
 	@Override
-	public MemberEvaluation queryById(Long id) {
+	public MemberEvaluationPO queryById(Long id) {
 		return this.getById(id);
 	}
 
 	@Override
 	public Boolean updateStatus(Long id, String status) {
-		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
+		UpdateWrapper<MemberEvaluationPO> updateWrapper = Wrappers.update();
 		updateWrapper.eq("id", id);
 		updateWrapper.set(
 			"status", status.equals(SwitchEnum.OPEN.name()) ? SwitchEnum.OPEN.name()
@@ -186,15 +186,15 @@ public class MemberEvaluationServiceImpl extends
 
 	@Override
 	public Boolean delete(Long id) {
-		LambdaUpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.lambdaUpdate();
-		updateWrapper.set(MemberEvaluation::getDelFlag, true);
-		updateWrapper.eq(MemberEvaluation::getId, id);
+		LambdaUpdateWrapper<MemberEvaluationPO> updateWrapper = Wrappers.lambdaUpdate();
+		updateWrapper.set(MemberEvaluationPO::getDelFlag, true);
+		updateWrapper.eq(MemberEvaluationPO::getId, id);
 		return this.update(updateWrapper);
 	}
 
 	@Override
 	public Boolean reply(Long id, String reply, String replyImage) {
-		UpdateWrapper<MemberEvaluation> updateWrapper = Wrappers.update();
+		UpdateWrapper<MemberEvaluationPO> updateWrapper = Wrappers.update();
 		updateWrapper.set("reply_status", true);
 		updateWrapper.set("reply", reply);
 		if (StringUtils.isNotBlank(replyImage)) {
@@ -229,7 +229,7 @@ public class MemberEvaluationServiceImpl extends
 		evaluationNumberVO.setModerate(moderate);
 		evaluationNumberVO.setWorse(worse);
 		evaluationNumberVO.setHaveImage(this.count(
-			new QueryWrapper<MemberEvaluation>().eq("have_image", 1).eq("goods_id", goodsId)));
+			new QueryWrapper<MemberEvaluationPO>().eq("have_image", 1).eq("goods_id", goodsId)));
 
 		return evaluationNumberVO;
 	}

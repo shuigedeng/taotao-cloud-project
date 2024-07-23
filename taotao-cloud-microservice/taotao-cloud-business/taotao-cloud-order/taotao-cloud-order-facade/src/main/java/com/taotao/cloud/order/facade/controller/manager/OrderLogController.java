@@ -23,7 +23,7 @@ import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.application.command.order.OrderLogPageQuery;
 import com.taotao.cloud.order.application.command.order.OrderLogVO;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -55,7 +55,7 @@ public class OrderLogController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<OrderLog> get(@PathVariable String id) {
+	public Result<OrderLogPO> get(@PathVariable String id) {
 		return Result.success(orderLogService.getById(id));
 	}
 
@@ -64,7 +64,7 @@ public class OrderLogController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<OrderLogVO>> getByPage(OrderLogPageQuery orderLogPageQuery) {
-		IPage<OrderLog> orderLogPage = orderLogService.pageQuery(orderLogPageQuery);
+		IPage<OrderLogPO> orderLogPage = orderLogService.pageQuery(orderLogPageQuery);
 		return Result.success(MpUtils.convertMybatisPage(orderLogPage, OrderLogVO.class));
 	}
 }

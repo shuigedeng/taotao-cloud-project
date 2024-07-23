@@ -17,7 +17,6 @@
 package com.taotao.cloud.goods.infrastructure.util;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberGrade;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberGradePO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 会员等级数据层 */
-public interface IMemberGradeMapper extends BaseSuperMapper<MemberGrade, Long> {}
+public interface IMemberGradeMapper extends BaseSuperMapper<MemberGradePO, Long> {}

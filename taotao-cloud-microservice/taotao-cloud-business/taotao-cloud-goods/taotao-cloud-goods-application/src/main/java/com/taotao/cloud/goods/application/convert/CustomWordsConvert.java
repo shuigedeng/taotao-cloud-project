@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.application.convert;
 
-import com.taotao.cloud.goods.biz.model.vo.CustomWordsVO;
-import com.taotao.cloud.goods.biz.model.entity.CustomWords;
+import com.taotao.cloud.goods.application.model.vo.CustomWordsVO;
+import com.taotao.cloud.goods.application.model.entity.CustomWords;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

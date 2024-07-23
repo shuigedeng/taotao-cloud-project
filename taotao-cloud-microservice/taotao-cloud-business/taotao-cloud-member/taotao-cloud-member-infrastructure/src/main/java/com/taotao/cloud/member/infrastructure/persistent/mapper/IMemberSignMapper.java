@@ -18,14 +18,14 @@ package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberSign;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberSignPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员签到数据处理层 */
-public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
+public interface IMemberSignMapper extends BaseSuperMapper<MemberSignPO, Long> {
 
     /**
      * 获取会员之前签到信息
@@ -38,7 +38,7 @@ public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
 		FROM tt_member_sign
 		WHERE TO_DAYS( NOW( ) ) - TO_DAYS( create_time) = 1 and member_id = #{memberId}
 		""")
-    List<MemberSign> getBeforeMemberSign(Long memberId);
+    List<MemberSignPO> getBeforeMemberSign(Long memberId);
 
     /**
      * 获取会员签到
@@ -51,7 +51,7 @@ public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
 		from tt_member_sign
 		${ew.customSqlSegment}
 		""")
-    List<MemberSign> getTodayMemberSign(@Param(Constants.WRAPPER) Wrapper<MemberSign> queryWrapper);
+    List<MemberSignPO> getTodayMemberSign(@Param(Constants.WRAPPER) Wrapper<MemberSignPO> queryWrapper);
 
     /**
      * 获取当月的会员签到记录
@@ -65,5 +65,5 @@ public interface IMemberSignMapper extends BaseSuperMapper<MemberSign, Long> {
 		FROM tt_member_sign
 		WHERE DATE_FORMAT(create_time,'%Y%m') = #{time} and member_id = #{memberId}
 		""")
-    List<MemberSign> getMonthMemberSign(Long memberId, String time);
+    List<MemberSignPO> getMonthMemberSign(Long memberId, String time);
 }

@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.member.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberConnect;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberConnectPO;
 import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 
 public interface MemberPlatformSuperRepository extends
-	BaseInterfaceSuperRepository<MemberConnect, Long> {
+	BaseInterfaceSuperRepository<MemberConnectPO, Long> {
 
 }

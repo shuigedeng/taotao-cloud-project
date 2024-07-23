@@ -34,7 +34,7 @@ import com.taotao.cloud.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.member.application.config.aop.point.PointLogPoint;
 import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.Member;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPO;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -55,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implements
+public class MemberServiceImpl extends ServiceImpl<IMemberMapper, MemberPO> implements
 	IMemberService {
 
 	/**
@@ -95,23 +95,23 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	private RedisRepository redisRepository;
 
 	@Override
-	public Member findByUsername(String userName) {
-		QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+	public MemberPO findByUsername(String userName) {
+		QueryWrapper<MemberPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("username", userName);
 		return this.baseMapper.selectOne(queryWrapper);
 	}
 
 	@Override
-	public Member getUserInfo() {
+	public MemberPO getUserInfo() {
 		SecurityUser currentUser = SecurityUtils.getCurrentUser();
 		return this.findByUsername(currentUser.getUsername());
 	}
 
 	@Override
 	public boolean findByMobile(String uuid, String mobile) {
-		QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+		QueryWrapper<MemberPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("mobile", mobile);
-		Member member = this.baseMapper.selectOne(queryWrapper);
+		MemberPO member = this.baseMapper.selectOne(queryWrapper);
 		if (member == null) {
 			throw new BusinessException(ResultEnum.USER_NOT_PHONE);
 		}
@@ -122,7 +122,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Token usernameLogin(String username, String password) {
-		Member member = this.findMember(username);
+		MemberPO member = this.findMember(username);
 		// 判断用户是否存在
 		if (member == null || !member.getDisabled()) {
 			throw new BusinessException(ResultEnum.USER_NOT_EXIST);
@@ -137,7 +137,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Token usernameStoreLogin(String username, String password) {
-		Member member = this.findMember(username);
+		MemberPO member = this.findMember(username);
 		// 判断用户是否存在
 		if (member == null || !member.getDisabled()) {
 			throw new BusinessException(ResultEnum.USER_NOT_EXIST);
@@ -166,8 +166,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	 * @param userName 手机号或者用户名
 	 * @return 会员信息
 	 */
-	private Member findMember(String userName) {
-		QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+	private MemberPO findMember(String userName) {
+		QueryWrapper<MemberPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("username", userName).or().eq("mobile", userName);
 		return this.getOne(queryWrapper);
 	}
@@ -182,7 +182,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 		}
 		try {
 			String username = UUID.fastUUID().toString();
-			Member member = new Member(
+			MemberPO member = new MemberPO(
 				username,
 				UUID.fastUUID().toString(),
 				authUser.getAvatar(),
@@ -192,7 +192,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 					: 0);
 			// 保存会员
 			this.save(member);
-			Member loadMember = this.findByUsername(username);
+			MemberPO loadMember = this.findByUsername(username);
 			// 绑定登录方式
 			loginBindUser(loadMember, authUser.getUuid(), authUser.getSource());
 			return memberTokenGenerate.createToken(loadMember, false);
@@ -221,12 +221,12 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Token mobilePhoneLogin(String mobilePhone) {
-		QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+		QueryWrapper<MemberPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("mobile", mobilePhone);
-		Member member = this.baseMapper.selectOne(queryWrapper);
+		MemberPO member = this.baseMapper.selectOne(queryWrapper);
 		// 如果手机号不存在则自动注册用户
 		if (member == null) {
-			member = new Member(mobilePhone, UUID.fastUUID().toString(), mobilePhone);
+			member = new MemberPO(mobilePhone, UUID.fastUUID().toString(), mobilePhone);
 			// 保存会员
 			this.save(member);
 
@@ -243,7 +243,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	@Override
 	public Boolean editOwn(MemberEditDTO memberEditDTO) {
 		// 查询会员信息
-		Member member = this.findByUsername(SecurityUtils.getUsername());
+		MemberPO member = this.findByUsername(SecurityUtils.getUsername());
 		// 传递修改会员信息
 		BeanUtils.copyProperties(memberEditDTO, member);
 		// 修改会员
@@ -253,15 +253,15 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Boolean modifyPass(String oldPassword, String newPassword) {
-		Member member = this.getById(SecurityUtils.getUserId());
+		MemberPO member = this.getById(SecurityUtils.getUserId());
 		// 判断旧密码输入是否正确
 		if (!new BCryptPasswordEncoder().matches(oldPassword, member.getPassword())) {
 			throw new BusinessException(ResultEnum.USER_OLD_PASSWORD_ERROR);
 		}
 		// 修改会员密码
-		LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-		lambdaUpdateWrapper.eq(Member::getId, member.getId());
-		lambdaUpdateWrapper.set(Member::getPassword,
+		LambdaUpdateWrapper<MemberPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+		lambdaUpdateWrapper.eq(MemberPO::getId, member.getId());
+		lambdaUpdateWrapper.set(MemberPO::getPassword,
 			new BCryptPasswordEncoder().encode(newPassword));
 		this.update(lambdaUpdateWrapper);
 		return true;
@@ -272,7 +272,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 		// 检测会员信息
 		checkMember(userName, mobilePhone);
 		// 设置会员信息
-		Member member = new Member(userName, new BCryptPasswordEncoder().encode(password),
+		MemberPO member = new MemberPO(userName, new BCryptPasswordEncoder().encode(password),
 			mobilePhone);
 		// 注册成功后用户自动登录
 		if (this.save(member)) {
@@ -289,15 +289,15 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Boolean changeMobile(String mobile) {
-		Member member = this.findByUsername(SecurityUtils.getUsername());
+		MemberPO member = this.findByUsername(SecurityUtils.getUsername());
 		// 判断是否用户登录并且会员ID为当前登录会员ID
 		if (!Objects.equals(SecurityUtils.getUserId(), member.getId())) {
 			throw new BusinessException(ResultEnum.USER_NOT_LOGIN);
 		}
 		// 修改会员手机号
-		LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-		lambdaUpdateWrapper.eq(Member::getId, member.getId());
-		lambdaUpdateWrapper.set(Member::getMobile, mobile);
+		LambdaUpdateWrapper<MemberPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+		lambdaUpdateWrapper.eq(MemberPO::getId, member.getId());
+		lambdaUpdateWrapper.set(MemberPO::getMobile, mobile);
 		return this.update(lambdaUpdateWrapper);
 	}
 
@@ -307,9 +307,9 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 		// 根据手机号获取会员判定是否存在此会员
 		if (phone != null) {
 			// 修改密码
-			LambdaUpdateWrapper<Member> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-			lambdaUpdateWrapper.eq(Member::getMobile, phone);
-			lambdaUpdateWrapper.set(Member::getPassword,
+			LambdaUpdateWrapper<MemberPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+			lambdaUpdateWrapper.eq(MemberPO::getMobile, phone);
+			lambdaUpdateWrapper.set(MemberPO::getPassword,
 				new BCryptPasswordEncoder().encode(password));
 			return this.update(lambdaUpdateWrapper);
 		}
@@ -324,7 +324,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 		checkMember(memberAddDTO.getUsername(), memberAddDTO.getMobile());
 
 		// 添加会员
-		Member member = new Member(
+		MemberPO member = new MemberPO(
 			memberAddDTO.getUsername(),
 			new BCryptPasswordEncoder().encode(memberAddDTO.getPassword()),
 			memberAddDTO.getMobile());
@@ -355,7 +355,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 				new BCryptPasswordEncoder().encode(managerMemberEditDTO.getPassword()));
 		}
 		// 查询会员信息
-		Member member = this.findByUsername(managerMemberEditDTO.getUsername());
+		MemberPO member = this.findByUsername(managerMemberEditDTO.getUsername());
 		// 传递修改会员信息
 		BeanUtils.copyProperties(managerMemberEditDTO, member);
 		this.updateById(member);
@@ -363,8 +363,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	}
 
 	@Override
-	public IPage<Member> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
-		QueryWrapper<Member> queryWrapper = Wrappers.query();
+	public IPage<MemberPO> pageQuery(MemberSearchPageQuery memberSearchPageQuery) {
+		QueryWrapper<MemberPO> queryWrapper = Wrappers.query();
 		// 用户名查询
 		queryWrapper.like(
 			CharSequenceUtil.isNotBlank(memberSearchPageQuery.getUsername()),
@@ -393,7 +393,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	@PointLogPoint
 	public Boolean updateMemberPoint(Long point, String type, Long memberId, String content) {
 		// 获取当前会员信息
-		Member member = this.getById(memberId);
+		MemberPO member = this.getById(memberId);
 		if (member != null) {
 			// 积分变动后的会员积分
 			long currentPoint;
@@ -433,7 +433,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Boolean updateMemberStatus(List<Long> memberIds, Boolean status) {
-		UpdateWrapper<Member> updateWrapper = Wrappers.update();
+		UpdateWrapper<MemberPO> updateWrapper = Wrappers.update();
 		updateWrapper.set("disabled", status);
 		updateWrapper.in("id", memberIds);
 
@@ -446,8 +446,8 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	 * @param mobilePhone 手机号
 	 * @return 会员
 	 */
-	private Member findByPhone(String mobilePhone) {
-		QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+	private MemberPO findByPhone(String mobilePhone) {
+		QueryWrapper<MemberPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("mobile", mobilePhone);
 		return this.baseMapper.selectOne(queryWrapper);
 	}
@@ -474,7 +474,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	 * @param unionId unionId
 	 * @param type    状态
 	 */
-	private void loginBindUser(Member member, String unionId, String type) {
+	private void loginBindUser(MemberPO member, String unionId, String type) {
 		Connect connect = connectService.queryConnect(
 			ConnectQuery.builder().unionId(unionId).unionType(type).build());
 
@@ -489,7 +489,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	 *
 	 * @param member 会员
 	 */
-	private void loginBindUser(Member member) {
+	private void loginBindUser(MemberPO member) {
 		// 获取cookie存储的信息
 		String uuid = CookieUtils.getCookie(ConnectService.CONNECT_COOKIE,
 			RequestUtils.getRequest());
@@ -566,7 +566,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 
 	@Override
 	public Long getMemberNum(MemberSearchVO memberSearchVO) {
-		QueryWrapper<Member> queryWrapper = Wrappers.query();
+		QueryWrapper<MemberPO> queryWrapper = Wrappers.query();
 		// 用户名查询
 		queryWrapper.like(
 			CharSequenceUtil.isNotBlank(memberSearchVO.getUsername()), "username",
@@ -591,7 +591,7 @@ public class MemberServiceImpl extends ServiceImpl<IMemberMapper, Member> implem
 	 */
 	@Override
 	public List<Map<String, Object>> listFieldsByMemberIds(String columns, List<Long> memberIds) {
-		return this.listMaps(new QueryWrapper<Member>()
+		return this.listMaps(new QueryWrapper<MemberPO>()
 			.select(columns)
 			.in(memberIds != null && !memberIds.isEmpty(), "id", memberIds));
 	}

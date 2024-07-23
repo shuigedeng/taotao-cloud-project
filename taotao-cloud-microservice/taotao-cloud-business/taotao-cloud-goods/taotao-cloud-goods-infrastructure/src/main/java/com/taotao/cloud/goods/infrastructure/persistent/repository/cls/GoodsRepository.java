@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.cls;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -29,9 +29,9 @@ import org.springframework.stereotype.Repository;
  * @since 2021/10/13 22:50
  */
 @Repository
-public class GoodsRepository extends BaseClassSuperRepository<Goods, Long> {
+public class GoodsRepository extends BaseClassSuperRepository<GoodsPO, Long> {
 
     public GoodsRepository(EntityManager em) {
-        super(Goods.class, em);
+        super(GoodsPO.class, em);
     }
 }

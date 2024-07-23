@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.Parameters;
+import com.taotao.cloud.goods.infrastructure.persistent.po.ParametersPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 import java.util.List;
@@ -28,16 +28,16 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:00:58
  */
-public interface IParametersService extends BaseSuperService<Parameters, Long> {
+public interface IParametersService extends BaseSuperService<ParametersPO, Long> {
 
     /**
      * 更新参数组信息
      *
-     * @param parameters 参数组信息
+     * @param parametersPO 参数组信息
      * @return {@link boolean }
      * @since 2022-04-27 17:00:58
      */
-    boolean updateParameter(Parameters parameters);
+    boolean updateParameter(ParametersPO parametersPO);
 
-    List<Parameters> queryParametersByCategoryId(Long categoryId);
+    List<ParametersPO> queryParametersByCategoryId(Long categoryId);
 }

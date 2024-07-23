@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.aftersale;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
@@ -25,9 +25,9 @@ import jakarta.persistence.EntityManager;
  *
  * @author shuigedeng
  */
-public class AfterSaleRepository extends BaseClassSuperRepository<AfterSale, Long> {
+public class AfterSaleRepository extends BaseClassSuperRepository<AfterSalePO, Long> {
 
     public AfterSaleRepository(EntityManager em) {
-        super(AfterSale.class, em);
+        super(AfterSalePO.class, em);
     }
 }

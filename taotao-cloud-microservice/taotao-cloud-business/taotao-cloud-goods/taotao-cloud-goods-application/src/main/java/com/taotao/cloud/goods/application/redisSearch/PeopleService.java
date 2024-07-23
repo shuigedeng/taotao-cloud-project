@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.biz.redisSearch;
+package com.taotao.cloud.goods.application.redisSearch;
 
 import java.util.stream.Collectors;
 

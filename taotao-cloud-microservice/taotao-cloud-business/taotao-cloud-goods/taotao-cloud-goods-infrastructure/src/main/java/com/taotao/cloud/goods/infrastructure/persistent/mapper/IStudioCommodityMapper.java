@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodityPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-27 16:57:45
  */
-public interface IStudioCommodityMapper extends BaseSuperMapper<StudioCommodity, Long> {}
+public interface IStudioCommodityMapper extends BaseSuperMapper<StudioCommodityPO, Long> {}

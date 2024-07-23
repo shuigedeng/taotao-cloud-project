@@ -25,8 +25,8 @@ import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsItemDTO;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IParametersService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IParametersMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Parameters;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.ParametersPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.ParametersRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IParametersRepository;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
@@ -55,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ParametersServiceImpl
 	extends
-	BaseSuperServiceImpl<Parameters, Long, IParametersMapper, ParametersRepository, IParametersRepository>
+	BaseSuperServiceImpl<ParametersPO, Long, IParametersMapper, ParametersRepository, IParametersRepository>
 	implements IParametersService {
 
 	/**
@@ -68,16 +68,16 @@ public class ParametersServiceImpl
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean updateParameter(Parameters parameters) {
-		Parameters origin = this.getById(parameters.getId());
+	public boolean updateParameter(ParametersPO parametersPO) {
+		ParametersPO origin = this.getById(parametersPO.getId());
 		if (origin == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);
 		}
 
 		List<String> goodsIds = new ArrayList<>();
-		LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.select(Goods::getId, Goods::getParams);
-		queryWrapper.like(Goods::getParams, parameters.getGroupId());
+		LambdaQueryWrapper<GoodsPO> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.select(GoodsPO::getId, GoodsPO::getParams);
+		queryWrapper.like(GoodsPO::getParams, parametersPO.getGroupId());
 		List<Map<String, Object>> goodsList = this.goodsService.listMaps(queryWrapper);
 
 		if (!goodsList.isEmpty()) {
@@ -87,9 +87,9 @@ public class ParametersServiceImpl
 					GoodsParamsDTO.class);
 				List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
 					.filter(i -> i.getGroupId() != null && i.getGroupId()
-						.equals(parameters.getGroupId()))
+						.equals(parametersPO.getGroupId()))
 					.toList();
-				this.setGoodsItemDTOList(goodsParamsDTOList, parameters);
+				this.setGoodsItemDTOList(goodsParamsDTOList, parametersPO);
 				this.goodsService.updateGoodsParams(
 					Convert.toLong(goods.get("id")), JSONUtil.toJsonStr(goodsParamsDTOS));
 				goodsIds.add(goods.get("id").toString());
@@ -103,12 +103,12 @@ public class ParametersServiceImpl
 				destination, JSONUtil.toJsonStr(goodsIds),
 				RocketmqSendCallbackBuilder.commonCallback());
 		}
-		return this.updateById(parameters);
+		return this.updateById(parametersPO);
 	}
 
 	@Override
-	public List<Parameters> queryParametersByCategoryId(Long categoryId) {
-		QueryWrapper<Parameters> queryWrapper = new QueryWrapper<>();
+	public List<ParametersPO> queryParametersByCategoryId(Long categoryId) {
+		QueryWrapper<ParametersPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("category_id", categoryId);
 		return this.list(queryWrapper);
 	}
@@ -117,17 +117,17 @@ public class ParametersServiceImpl
 	 * 更新商品参数信息
 	 *
 	 * @param goodsParamsDTOList 商品参数项列表
-	 * @param parameters         参数信息
+	 * @param parametersPO         参数信息
 	 */
 	private void setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList,
-		Parameters parameters) {
+		ParametersPO parametersPO) {
 		for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
 			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList()
 				.stream()
-				.filter(i -> i.getParamId() != null && i.getParamId().equals(parameters.getId()))
+				.filter(i -> i.getParamId() != null && i.getParamId().equals(parametersPO.getId()))
 				.toList();
 			for (GoodsParamsItemDTO goodsParamsItemDTO : goodsParamsItemDTOList) {
-				this.setGoodsItemDTO(goodsParamsItemDTO, parameters);
+				this.setGoodsItemDTO(goodsParamsItemDTO, parametersPO);
 			}
 		}
 	}
@@ -136,25 +136,25 @@ public class ParametersServiceImpl
 	 * 更新商品参数详细信息
 	 *
 	 * @param goodsParamsItemDTO 商品参数项信息
-	 * @param parameters         参数信息
+	 * @param parametersPO         参数信息
 	 */
-	private void setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, Parameters parameters) {
-		if (goodsParamsItemDTO.getParamId().equals(parameters.getId())) {
-			goodsParamsItemDTO.setParamId(parameters.getId());
-			goodsParamsItemDTO.setParamName(parameters.getParamName());
-			goodsParamsItemDTO.setRequired(parameters.getRequired());
-			goodsParamsItemDTO.setIsIndex(parameters.getIsIndex());
-			goodsParamsItemDTO.setSort(parameters.getSort());
-			if (CharSequenceUtil.isNotEmpty(parameters.getOptions())
+	private void setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, ParametersPO parametersPO) {
+		if (goodsParamsItemDTO.getParamId().equals(parametersPO.getId())) {
+			goodsParamsItemDTO.setParamId(parametersPO.getId());
+			goodsParamsItemDTO.setParamName(parametersPO.getParamName());
+			goodsParamsItemDTO.setRequired(parametersPO.getRequired());
+			goodsParamsItemDTO.setIsIndex(parametersPO.getIsIndex());
+			goodsParamsItemDTO.setSort(parametersPO.getSort());
+			if (CharSequenceUtil.isNotEmpty(parametersPO.getOptions())
 				&& CharSequenceUtil.isNotEmpty(goodsParamsItemDTO.getParamValue())
-				&& !parameters.getOptions().contains(goodsParamsItemDTO.getParamValue())) {
-				if (parameters.getOptions().contains(",")) {
-					goodsParamsItemDTO.setParamValue(parameters
+				&& !parametersPO.getOptions().contains(goodsParamsItemDTO.getParamValue())) {
+				if (parametersPO.getOptions().contains(",")) {
+					goodsParamsItemDTO.setParamValue(parametersPO
 						.getOptions()
-						.substring(0, parameters.getOptions().indexOf(",")));
+						.substring(0, parametersPO.getOptions().indexOf(",")));
 				}
 				else {
-					goodsParamsItemDTO.setParamValue(parameters.getOptions());
+					goodsParamsItemDTO.setParamValue(parametersPO.getOptions());
 				}
 			}
 		}

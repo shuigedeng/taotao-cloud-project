@@ -16,15 +16,15 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.cls;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsWords;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsWordsPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GoodsWordsRepository extends BaseClassSuperRepository<GoodsWords, Long> {
+public class GoodsWordsRepository extends BaseClassSuperRepository<GoodsWordsPO, Long> {
 
     public GoodsWordsRepository(EntityManager em) {
-        super(GoodsWords.class, em);
+        super(GoodsWordsPO.class, em);
     }
 }

@@ -24,7 +24,7 @@ import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.member.application.service.IMemberSignService;
 import com.taotao.cloud.member.common.enums.SettingCategoryEnum;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberSignMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberSign;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberSignPO;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  * 会员签到业务层实现
  */
 @Service
-public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, MemberSign> implements
+public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, MemberSignPO> implements
 	IMemberSignService {
 
 	/**
@@ -69,36 +69,36 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 		AuthUser authUser = UserContext.getCurrentUser();
 		if (authUser != null) {
 
-			LambdaQueryWrapper<MemberSign> queryWrapper = new LambdaQueryWrapper<>();
-			queryWrapper.eq(MemberSign::getMemberId, authUser.getId());
-			List<MemberSign> signSize = this.baseMapper.getTodayMemberSign(queryWrapper);
+			LambdaQueryWrapper<MemberSignPO> queryWrapper = new LambdaQueryWrapper<>();
+			queryWrapper.eq(MemberSignPO::getMemberId, authUser.getId());
+			List<MemberSignPO> signSize = this.baseMapper.getTodayMemberSign(queryWrapper);
 			if (signSize.size() > 0) {
 				throw new ServiceException(ResultCode.MEMBER_SIGN_REPEAT);
 			}
 			// 当前签到天数的前一天日期
-			List<MemberSign> signs = this.baseMapper.getBeforeMemberSign(authUser.getId());
+			List<MemberSignPO> signs = this.baseMapper.getBeforeMemberSign(authUser.getId());
 			// 构建参数
-			MemberSign memberSign = new MemberSign();
-			memberSign.setMemberId(authUser.getId());
-			memberSign.setMemberName(authUser.getUsername());
+			MemberSignPO memberSignPO = new MemberSignPO();
+			memberSignPO.setMemberId(authUser.getId());
+			memberSignPO.setMemberName(authUser.getUsername());
 			// 如果size大于0 说明昨天已经签到过，获取昨天的签到数，反之新签到
 			if (!signs.isEmpty()) {
 				// 截止目前为止 签到总天数 不带今天
 				Integer signDay = signs.get(0).getSignDay();
-				memberSign.setSignDay(CurrencyUtil.add(signDay, 1).intValue());
+				memberSignPO.setSignDay(CurrencyUtil.add(signDay, 1).intValue());
 			}
 			else {
-				memberSign.setSignDay(1);
+				memberSignPO.setSignDay(1);
 			}
 
-			memberSign.setDay(DateUtil.getDayOfStart().intValue());
+			memberSignPO.setDay(DateUtil.getDayOfStart().intValue());
 			try {
-				this.baseMapper.insert(memberSign);
+				this.baseMapper.insert(memberSignPO);
 				// 签到成功后发送消息赠送积分
 				String destination =
 					rocketmqCustomProperties.getMemberTopic() + ":"
 						+ MemberTagsEnum.MEMBER_SING.name();
-				rocketMQTemplate.asyncSend(destination, memberSign,
+				rocketMQTemplate.asyncSend(destination, memberSignPO,
 					RocketmqSendCallbackBuilder.commonCallback());
 				return true;
 			}
@@ -111,9 +111,9 @@ public class MemberSignServiceImpl extends ServiceImpl<IMemberSignMapper, Member
 
 	@Override
 	public List<MemberSignVO> getMonthSignDay(String time) {
-		List<MemberSign> monthMemberSign = this.baseMapper.getMonthMemberSign(
+		List<MemberSignPO> monthMemberSignPO = this.baseMapper.getMonthMemberSign(
 			SecurityUtils.getUserId(), time);
-		return BeanUtils.copy(monthMemberSign, MemberSignVO.class);
+		return BeanUtils.copy(monthMemberSignPO, MemberSignVO.class);
 	}
 
 	@Override

@@ -17,9 +17,6 @@
 package com.taotao.cloud.goods.facade.controller.manager;
 
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.goods.biz.model.entity.Specification;
-import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
-import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

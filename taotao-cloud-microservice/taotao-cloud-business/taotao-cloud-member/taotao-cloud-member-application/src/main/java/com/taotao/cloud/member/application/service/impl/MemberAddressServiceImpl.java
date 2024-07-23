@@ -24,7 +24,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.application.service.IMemberAddressService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberAddressMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddress;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddressPO;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,59 +37,59 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-05-31 13:55:30
  */
 @Service
-public class MemberAddressServiceImpl extends ServiceImpl<IMemberAddressMapper, MemberAddress>
+public class MemberAddressServiceImpl extends ServiceImpl<IMemberAddressMapper, MemberAddressPO>
 	implements IMemberAddressService {
 
 	@DubboReference
 	private IDubboUserRpc userRpc;
 
 	@Override
-	public IPage<MemberAddress> queryPage(PageQuery page, Long memberId) {
-		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.eq(MemberAddress::getMemberId, memberId);
+	public IPage<MemberAddressPO> queryPage(PageQuery page, Long memberId) {
+		LambdaQueryWrapper<MemberAddressPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddressPO::getMemberId, memberId);
 		return this.page(page.buildMpPage(), lambdaQueryWrapper);
 	}
 
 	@Override
-	public MemberAddress getMemberAddress(Long id) {
-		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.eq(MemberAddress::getMemberId, SecurityUtils.getUserId());
-		lambdaQueryWrapper.eq(MemberAddress::getId, id);
+	public MemberAddressPO getMemberAddress(Long id) {
+		LambdaQueryWrapper<MemberAddressPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddressPO::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.eq(MemberAddressPO::getId, id);
 		return this.getOne(lambdaQueryWrapper);
 	}
 
 	@Override
-	public MemberAddress getDefaultMemberAddress() {
-		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.eq(MemberAddress::getMemberId, SecurityUtils.getUserId());
-		lambdaQueryWrapper.eq(MemberAddress::getDefaulted, true);
+	public MemberAddressPO getDefaultMemberAddress() {
+		LambdaQueryWrapper<MemberAddressPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddressPO::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.eq(MemberAddressPO::getDefaulted, true);
 		return this.getOne(lambdaQueryWrapper);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean saveMemberAddress(MemberAddress memberAddress) {
+	public Boolean saveMemberAddress(MemberAddressPO memberAddressPO) {
 		// 判断当前地址是否为默认地址，如果为默认需要将其他的地址修改为非默认
-		removeDefaultAddress(memberAddress);
+		removeDefaultAddress(memberAddressPO);
 
 		// 添加会员地址
-		return this.save(memberAddress);
+		return this.save(memberAddressPO);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Boolean updateMemberAddress(MemberAddress memberAddress) {
-		MemberAddress originalMemberAddress = this.getMemberAddress(memberAddress.getId());
+	public Boolean updateMemberAddress(MemberAddressPO memberAddressPO) {
+		MemberAddressPO originalMemberAddressPO = this.getMemberAddress(memberAddressPO.getId());
 
-		if (originalMemberAddress != null && originalMemberAddress.getMemberId()
+		if (originalMemberAddressPO != null && originalMemberAddressPO.getMemberId()
 			.equals(SecurityUtils.getUserId())) {
-			if (memberAddress.getDefaulted() == null) {
-				memberAddress.setDefaulted(false);
+			if (memberAddressPO.getDefaulted() == null) {
+				memberAddressPO.setDefaulted(false);
 			}
 
 			// 判断当前地址是否为默认地址，如果为默认需要将其他的地址修改为非默认
-			removeDefaultAddress(memberAddress);
-			this.saveOrUpdate(memberAddress);
+			removeDefaultAddress(memberAddressPO);
+			this.saveOrUpdate(memberAddressPO);
 		}
 
 		return true;
@@ -98,23 +98,23 @@ public class MemberAddressServiceImpl extends ServiceImpl<IMemberAddressMapper, 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean removeMemberAddress(Long id) {
-		LambdaQueryWrapper<MemberAddress> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-		lambdaQueryWrapper.eq(MemberAddress::getId, id);
+		LambdaQueryWrapper<MemberAddressPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+		lambdaQueryWrapper.eq(MemberAddressPO::getId, id);
 		return this.remove(lambdaQueryWrapper);
 	}
 
 	/**
 	 * 修改会员默认收件地址
 	 *
-	 * @param memberAddress 收件地址
+	 * @param memberAddressPO 收件地址
 	 */
-	private void removeDefaultAddress(MemberAddress memberAddress) {
+	private void removeDefaultAddress(MemberAddressPO memberAddressPO) {
 		// 如果不是默认地址不需要处理
-		if (Boolean.TRUE.equals(memberAddress.getDefaulted())) {
+		if (Boolean.TRUE.equals(memberAddressPO.getDefaulted())) {
 			// 将会员的地址修改为非默认地址
-			LambdaUpdateWrapper<MemberAddress> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-			lambdaUpdateWrapper.set(MemberAddress::getDefaulted, false);
-			lambdaUpdateWrapper.eq(MemberAddress::getMemberId, memberAddress.getMemberId());
+			LambdaUpdateWrapper<MemberAddressPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+			lambdaUpdateWrapper.set(MemberAddressPO::getDefaulted, false);
+			lambdaUpdateWrapper.eq(MemberAddressPO::getMemberId, memberAddressPO.getMemberId());
 			this.update(lambdaUpdateWrapper);
 		}
 	}

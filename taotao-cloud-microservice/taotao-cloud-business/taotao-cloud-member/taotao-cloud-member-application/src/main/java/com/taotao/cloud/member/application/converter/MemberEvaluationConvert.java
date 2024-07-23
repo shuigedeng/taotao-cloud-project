@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.application.converter;
 
 import com.taotao.cloud.member.facade.model.vo.MemberEvaluationVO;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluation;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluationPO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -37,5 +37,5 @@ public interface MemberEvaluationConvert {
 	 */
 	MemberEvaluationConvert INSTANCE = Mappers.getMapper(MemberEvaluationConvert.class);
 
-	MemberEvaluationVO convert(MemberEvaluation memberEvaluation);
+	MemberEvaluationVO convert(MemberEvaluationPO memberEvaluationPO);
 }

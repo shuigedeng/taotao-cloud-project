@@ -36,12 +36,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsApiImpl implements GoodsApi {
 
 	@Override
-	public Boolean updateStoreDetail(String id) {
+	public Boolean updateStoreDetail(Long id) {
 		return null;
 	}
 
 	@Override
-	public Boolean underStoreGoods(String id) {
+	public Boolean underStoreGoods(Long id) {
 		return null;
 	}
 

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.goods.application.convert;
 
-import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
-import com.taotao.cloud.goods.biz.model.vo.CategoryVO;
-import com.taotao.cloud.goods.biz.model.entity.Category;
+import com.taotao.cloud.goods.application.model.vo.CategoryTreeVO;
+import com.taotao.cloud.goods.application.model.vo.CategoryVO;
+import com.taotao.cloud.goods.application.model.entity.Category;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

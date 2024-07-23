@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabel;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabelPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +28,7 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 17:01:05
  */
-public interface IStoreGoodsLabelService extends BaseSuperService<StoreGoodsLabel, Long> {
+public interface IStoreGoodsLabelService extends BaseSuperService<StoreGoodsLabelPO, Long> {
 
 	/**
 	 * 根据商家ID获取店铺分类列表
@@ -44,7 +44,7 @@ public interface IStoreGoodsLabelService extends BaseSuperService<StoreGoodsLabe
 	 * @param ids 商家ID
 	 * @return 店铺分类列表
 	 */
-	List<StoreGoodsLabel> listByStoreIds(List<String> ids);
+	List<StoreGoodsLabelPO> listByStoreIds(List<String> ids);
 
 	/**
 	 * 根据分类id集合获取所有店铺分类根据层级排序
@@ -57,18 +57,18 @@ public interface IStoreGoodsLabelService extends BaseSuperService<StoreGoodsLabe
 	/**
 	 * 添加商品分类
 	 *
-	 * @param storeGoodsLabel 店铺商品分类
+	 * @param storeGoodsLabelPO 店铺商品分类
 	 * @return 店铺商品分类
 	 */
-	StoreGoodsLabel addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel);
+	StoreGoodsLabelPO addStoreGoodsLabel(StoreGoodsLabelPO storeGoodsLabelPO);
 
 	/**
 	 * 修改商品分类
 	 *
-	 * @param storeGoodsLabel 店铺商品分类
+	 * @param storeGoodsLabelPO 店铺商品分类
 	 * @return 店铺商品分类
 	 */
-	StoreGoodsLabel editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel);
+	StoreGoodsLabelPO editStoreGoodsLabel(StoreGoodsLabelPO storeGoodsLabelPO);
 
 	/**
 	 * 删除商品分类

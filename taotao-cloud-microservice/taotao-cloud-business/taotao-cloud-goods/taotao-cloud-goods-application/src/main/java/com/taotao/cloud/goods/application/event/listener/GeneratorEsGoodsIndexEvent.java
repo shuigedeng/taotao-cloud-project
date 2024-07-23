@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.listener;
+package com.taotao.cloud.goods.application.event.listener;
 
 import org.springframework.context.ApplicationEvent;
 

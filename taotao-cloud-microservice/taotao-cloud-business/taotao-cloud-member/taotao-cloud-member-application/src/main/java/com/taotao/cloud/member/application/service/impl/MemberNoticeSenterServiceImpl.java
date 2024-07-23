@@ -24,8 +24,8 @@ import com.taotao.cloud.member.application.service.IMemberNoticeSenterService;
 import com.taotao.cloud.member.application.service.IMemberNoticeService;
 import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberNoticeSenterMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberNotice;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeSenter;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticePO;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeSenterPO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class MemberNoticeSenterServiceImpl extends
-	ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenter>
+	ServiceImpl<IMemberNoticeSenterMapper, MemberNoticeSenterPO>
 	implements IMemberNoticeSenterService {
 
 	/**
@@ -54,22 +54,22 @@ public class MemberNoticeSenterServiceImpl extends
 	private IMemberNoticeService memberNoticeService;
 
 	@Override
-	public boolean customSave(MemberNoticeSenter memberNoticeSenter) {
-		if (this.saveOrUpdate(memberNoticeSenter)) {
-			List<MemberNotice> memberNotices = new ArrayList<>();
+	public boolean customSave(MemberNoticeSenterPO memberNoticeSenterPO) {
+		if (this.saveOrUpdate(memberNoticeSenterPO)) {
+			List<MemberNoticePO> memberNoticePOS = new ArrayList<>();
 			// 如果是选中会员发送
-			if (memberNoticeSenter.getSendType().equals(SendTypeEnum.SELECT.name())) {
+			if (memberNoticeSenterPO.getSendType().equals(SendTypeEnum.SELECT.name())) {
 				// 判定消息是否有效
-				if (!StringUtils.isEmpty(memberNoticeSenter.getMemberIds())) {
-					String[] ids = memberNoticeSenter.getMemberIds().split(",");
-					MemberNotice memberNotice;
+				if (!StringUtils.isEmpty(memberNoticeSenterPO.getMemberIds())) {
+					String[] ids = memberNoticeSenterPO.getMemberIds().split(",");
+					MemberNoticePO memberNoticePO;
 					for (String id : ids) {
-						memberNotice = new MemberNotice();
-						memberNotice.setRead(false);
-						memberNotice.setContent(memberNoticeSenter.getContent());
-						memberNotice.setMemberId(Long.valueOf(id));
-						memberNotice.setTitle(memberNoticeSenter.getTitle());
-						memberNotices.add(memberNotice);
+						memberNoticePO = new MemberNoticePO();
+						memberNoticePO.setRead(false);
+						memberNoticePO.setContent(memberNoticeSenterPO.getContent());
+						memberNoticePO.setMemberId(Long.valueOf(id));
+						memberNoticePO.setTitle(memberNoticeSenterPO.getTitle());
+						memberNoticePOS.add(memberNoticePO);
 					}
 				}
 				else {
@@ -78,20 +78,20 @@ public class MemberNoticeSenterServiceImpl extends
 			} // 否则是全部会员发送
 			else {
 				List<Member> members = memberService.list();
-				MemberNotice memberNotice;
+				MemberNoticePO memberNoticePO;
 				for (Member member : members) {
-					memberNotice = new MemberNotice();
-					memberNotice.setRead(false);
-					memberNotice.setContent(memberNoticeSenter.getContent());
-					memberNotice.setMemberId(member.getId());
-					memberNotice.setTitle(memberNoticeSenter.getTitle());
-					memberNotices.add(memberNotice);
+					memberNoticePO = new MemberNoticePO();
+					memberNoticePO.setRead(false);
+					memberNoticePO.setContent(memberNoticeSenterPO.getContent());
+					memberNoticePO.setMemberId(member.getId());
+					memberNoticePO.setTitle(memberNoticeSenterPO.getTitle());
+					memberNoticePOS.add(memberNoticePO);
 				}
 			}
 			// 防止没有会员导致报错
-			if (memberNotices.size() > 0) {
+			if (memberNoticePOS.size() > 0) {
 				// 批量保存
-				if (memberNoticeService.saveBatch(memberNotices)) {
+				if (memberNoticeService.saveBatch(memberNoticePOS)) {
 					return true;
 				}
 				else {

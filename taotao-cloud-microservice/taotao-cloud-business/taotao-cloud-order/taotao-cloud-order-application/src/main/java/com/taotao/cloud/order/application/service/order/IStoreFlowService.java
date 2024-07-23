@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.application.command.distribution.DistributionPageQuery;
 import com.taotao.cloud.order.application.command.order.StoreFlowPageQuery;
 import com.taotao.cloud.order.application.command.store.StorePageQuery;
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlow;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlowPO;
 import java.util.List;
 
 /**
@@ -32,7 +32,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:54:53
  */
-public interface IStoreFlowService extends IService<StoreFlow> {
+public interface IStoreFlowService extends IService<StoreFlowPO> {
 
 	/**
 	 * 支付订单
@@ -48,25 +48,25 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * @param afterSale 售后单
 	 * @since 2022-04-28 08:54:53
 	 */
-	void refundOrder(AfterSale afterSale);
+	void refundOrder(AfterSalePO afterSale);
 
 	/**
 	 * 获取商家流水
 	 *
 	 * @param storeFlowQueryDTO 查询参数
-	 * @return {@link IPage }<{@link StoreFlow }>
+	 * @return {@link IPage }<{@link StoreFlowPO }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	IPage<StoreFlow> getStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
+	IPage<StoreFlowPO> getStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
 
 	/**
 	 * 根据参数查询一条数据
 	 *
 	 * @param storeFlowQueryDTO 查询参数
-	 * @return {@link StoreFlow }
+	 * @return {@link StoreFlowPO }
 	 * @since 2022-04-28 08:54:53
 	 */
-	StoreFlow queryOne(StoreFlowPageQuery storeFlowQueryDTO);
+	StoreFlowPO queryOne(StoreFlowPageQuery storeFlowQueryDTO);
 
 	/**
 	 * 获取结算单地入账流水
@@ -91,26 +91,26 @@ public interface IStoreFlowService extends IService<StoreFlow> {
 	 * 根据结算单ID获取商家流水
 	 *
 	 * @param storePageQuery 存储页面查询
-	 * @return {@link IPage }<{@link StoreFlow }>
+	 * @return {@link IPage }<{@link StoreFlowPO }>
 	 * @since 2022-05-19 15:47:59
 	 */
-	IPage<StoreFlow> getStoreFlow(StorePageQuery storePageQuery);
+	IPage<StoreFlowPO> getStoreFlow(StorePageQuery storePageQuery);
 
 	/**
 	 * 根据结算单ID获取商家流水
 	 *
 	 * @param distributionPageQuery 分配页面查询
-	 * @return {@link IPage }<{@link StoreFlow }>
+	 * @return {@link IPage }<{@link StoreFlowPO }>
 	 * @since 2022-05-19 15:48:02
 	 */
-	IPage<StoreFlow> getDistributionFlow(DistributionPageQuery distributionPageQuery);
+	IPage<StoreFlowPO> getDistributionFlow(DistributionPageQuery distributionPageQuery);
 
 	/**
 	 * 获取店铺流水
 	 *
 	 * @param storeFlowQueryDTO 店铺流水查询参数
-	 * @return {@link List }<{@link StoreFlow }>
+	 * @return {@link List }<{@link StoreFlowPO }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	List<StoreFlow> listStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
+	List<StoreFlowPO> listStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
 }

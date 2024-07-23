@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecification;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Specification;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecificationPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -30,13 +30,13 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:55:35
  */
-public interface ICategorySpecificationMapper extends BaseSuperMapper<CategorySpecification, Long> {
+public interface ICategorySpecificationMapper extends BaseSuperMapper<CategorySpecificationPO, Long> {
 
 	/**
 	 * 根据分类id查分类绑定规格
 	 *
 	 * @param categoryId 分类id
-	 * @return {@link List }<{@link Specification }>
+	 * @return {@link List }<{@link SpecificationPO }>
 	 * @since 2022-04-27 16:55:35
 	 */
 	@Select("""
@@ -44,5 +44,5 @@ public interface ICategorySpecificationMapper extends BaseSuperMapper<CategorySp
 		from  tt_specification s
 		INNER join tt_category_specification cs on s.id = cs.specification_id and cs.category_id = #{categoryId}
 		""")
-	List<Specification> getCategorySpecList(@Param("categoryId") Long categoryId);
+	List<SpecificationPO> getCategorySpecList(@Param("categoryId") Long categoryId);
 }

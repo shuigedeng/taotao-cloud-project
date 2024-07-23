@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.DraftGoods;
+import com.taotao.cloud.goods.infrastructure.persistent.po.DraftGoodsPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-27 16:55:53
  */
-public interface IDraftGoodsMapper extends BaseSuperMapper<DraftGoods, Long> {}
+public interface IDraftGoodsMapper extends BaseSuperMapper<DraftGoodsPO, Long> {}

@@ -24,8 +24,8 @@ import com.taotao.cloud.goods.application.command.goods.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsPageQuery;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsSkuDTO;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsSkuStockDTO;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,7 @@ import java.util.Map;
  * @see BaseSuperService
  * @since 2023-08-18 16:00:58
  */
-public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
+public interface IGoodsSkuService extends BaseSuperService<GoodsSkuPO, Long> {
 	/**
 	 * 获取商品SKU缓存ID
 	 *
@@ -68,7 +68,7 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * @param goodsOperationDTO 商品操作信息
 	 * @since 2023-08-18 16:00:59
 	 */
-	boolean add(Goods goods, GoodsOperationDTO goodsOperationDTO);
+	boolean add(GoodsPO goods, GoodsOperationDTO goodsOperationDTO);
 
 	/**
 	 * 更新商品sku
@@ -77,15 +77,15 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * @param goodsOperationDTO 商品操作信息
 	 * @since 2023-08-18 16:00:59
 	 */
-	boolean update(Goods goods, GoodsOperationDTO goodsOperationDTO);
+	boolean update(GoodsPO goods, GoodsOperationDTO goodsOperationDTO);
 
 	/**
 	 * 更新商品sku
 	 *
-	 * @param goodsSku sku信息
+	 * @param goodsSkuPO sku信息
 	 * @since 2023-08-18 16:00:59
 	 */
-	boolean update(GoodsSku goodsSku);
+	boolean update(GoodsSkuPO goodsSkuPO);
 
 	/**
 	 * 清除sku缓存
@@ -99,19 +99,19 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * 从redis缓存中获取商品SKU信息
 	 *
 	 * @param id SkuId
-	 * @return {@link GoodsSku }
+	 * @return {@link GoodsSkuPO }
 	 * @since 2023-08-18 16:00:59
 	 */
-	GoodsSku getGoodsSkuByIdFromCache(Long skuId);
+	GoodsSkuPO getGoodsSkuByIdFromCache(Long skuId);
 
 	/**
 	 * 从缓存中获取可参与促销商品
 	 *
 	 * @param skuId skuid
-	 * @return {@link GoodsSku }
+	 * @return {@link GoodsSkuPO }
 	 * @since 2023-08-18 16:00:59
 	 */
-	GoodsSku getCanPromotionGoodsSkuByIdFromCache(Long skuId);
+	GoodsSkuPO getCanPromotionGoodsSkuByIdFromCache(Long skuId);
 
 	/**
 	 * 获取商品sku详情
@@ -127,10 +127,10 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * 批量从redis中获取商品SKU信息
 	 *
 	 * @param ids SkuId集合
-	 * @return {@link List }<{@link GoodsSku }>
+	 * @return {@link List }<{@link GoodsSkuPO }>
 	 * @since 2023-08-18 16:00:59
 	 */
-	List<GoodsSku> getGoodsSkuByIdFromCache(List<Long> ids);
+	List<GoodsSkuPO> getGoodsSkuByIdFromCache(List<Long> ids);
 
 	/**
 	 * 获取goodsId下所有的goodsSku
@@ -145,10 +145,10 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * 获取goodsId下所有的goodsSku
 	 *
 	 * @param goodsId 商品id
-	 * @return {@link List }<{@link GoodsSku }>
+	 * @return {@link List }<{@link GoodsSkuPO }>
 	 * @since 2023-08-18 16:00:59
 	 */
-	List<GoodsSku> getGoodsSkuListByGoodsId(Long goodsId);
+	List<GoodsSkuPO> getGoodsSkuListByGoodsId(Long goodsId);
 
 	/**
 	 * 根据goodsSku组装goodsSkuVO
@@ -157,25 +157,25 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * @return {@link List }<{@link GoodsSkuVO }>
 	 * @since 2023-08-18 16:00:59
 	 */
-	List<GoodsSkuVO> getGoodsSkuVOList(List<GoodsSku> list);
+	List<GoodsSkuVO> getGoodsSkuVOList(List<GoodsSkuPO> list);
 
 	/**
 	 * 根据goodsSku组装goodsSkuVO
 	 *
-	 * @param goodsSku 商品规格
+	 * @param goodsSkuPO 商品规格
 	 * @return {@link GoodsSkuVO }
 	 * @since 2023-08-18 16:00:59
 	 */
-	GoodsSkuVO getGoodsSkuVO(GoodsSku goodsSku);
+	GoodsSkuVO getGoodsSkuVO(GoodsSkuPO goodsSkuPO);
 
 	/**
 	 * 分页查询商品sku信息
 	 *
 	 * @param searchParams 查询参数
-	 * @return {@link IPage }<{@link GoodsSku }>
+	 * @return {@link IPage }<{@link GoodsSkuPO }>
 	 * @since 2023-08-18 16:00:59
 	 */
-	IPage<GoodsSku> getGoodsSkuByPage(GoodsPageQuery searchParams);
+	IPage<GoodsSkuPO> getGoodsSkuByPage(GoodsPageQuery searchParams);
 
 
 	/**
@@ -192,10 +192,10 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * 列表查询商品sku信息
 	 *
 	 * @param searchParams 查询参数
-	 * @return {@link List }<{@link GoodsSku }>
+	 * @return {@link List }<{@link GoodsSkuPO }>
 	 * @since 2023-08-18 16:00:59
 	 */
-	List<GoodsSku> getGoodsSkuByList(GoodsPageQuery searchParams);
+	List<GoodsSkuPO> getGoodsSkuByList(GoodsPageQuery searchParams);
 
 	/**
 	 * 更新商品sku状态
@@ -203,7 +203,7 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	 * @param goods 商品信息(Id,MarketEnable/AuthFlag)
 	 * @since 2023-08-18 16:00:59
 	 */
-	boolean updateGoodsSkuStatus(Goods goods);
+	boolean updateGoodsSkuStatus(GoodsPO goods);
 
 	/**
 	 * 更新商品sku状态根据店铺id
@@ -244,9 +244,9 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	/**
 	 * 修改商品库存字段
 	 *
-	 * @param goodsSkus
+	 * @param goodsSkusPOS
 	 */
-	boolean updateGoodsStuck(List<GoodsSku> goodsSkus);
+	boolean updateGoodsStuck(List<GoodsSkuPO> goodsSkusPOS);
 
 	/**
 	 * 更新SKU评价数量
@@ -266,9 +266,9 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	/**
 	 * 删除并且新增sku，即覆盖之前信息
 	 *
-	 * @param goodsSkus 商品sku集合
+	 * @param goodsSkusPOS 商品sku集合
 	 */
-	boolean deleteAndInsertGoodsSkus(List<GoodsSku> goodsSkus);
+	boolean deleteAndInsertGoodsSkus(List<GoodsSkuPO> goodsSkusPOS);
 
 	/**
 	 * 统计sku总数
@@ -281,8 +281,8 @@ public interface IGoodsSkuService extends BaseSuperService<GoodsSku, Long> {
 	/**
 	 * 批量渲染商品sku
 	 *
-	 * @param goodsSkuList SKU基础数据列表
+	 * @param goodsSkuPOList SKU基础数据列表
 	 * @param goodsOperationDTO 商品操作信息
 	 */
-	void renderGoodsSkuList(List<GoodsSku> goodsSkuList, GoodsOperationDTO goodsOperationDTO);
+	void renderGoodsSkuList(List<GoodsSkuPO> goodsSkuPOList, GoodsOperationDTO goodsOperationDTO);
 }

@@ -19,7 +19,7 @@ package com.taotao.cloud.member.infrastructure.persistent.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluation;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluationPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员商品评价数据处理层 */
-public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluation, Long> {
+public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluationPO, Long> {
 
     /**
      * 会员评价分页
@@ -41,8 +41,8 @@ public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluatio
 		from tt_member_evaluation as me
 		${ew.customSqlSegment}
 		""")
-    IPage<MemberEvaluation> getMemberEvaluationList(
-            IPage<MemberEvaluation> page, @Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
+    IPage<MemberEvaluationPO> getMemberEvaluationList(
+            IPage<MemberEvaluationPO> page, @Param(Constants.WRAPPER) Wrapper<MemberEvaluationPO> queryWrapper);
 
     /**
      * 评价数量
@@ -73,7 +73,7 @@ public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluatio
 		FROM tt_member_evaluation
 		${ew.customSqlSegment}
 		""")
-    StoreRatingVO getStoreRatingVO(@Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
+    StoreRatingVO getStoreRatingVO(@Param(Constants.WRAPPER) Wrapper<MemberEvaluationPO> queryWrapper);
 
     /**
      * 商品会员评价数量
@@ -86,5 +86,5 @@ public interface IMemberEvaluationMapper extends BaseSuperMapper<MemberEvaluatio
 		FROM tt_member_evaluation
 		GROUP BY goods_id
 		""")
-    List<Map<String, Object>> memberEvaluationNum(@Param(Constants.WRAPPER) Wrapper<MemberEvaluation> queryWrapper);
+    List<Map<String, Object>> memberEvaluationNum(@Param(Constants.WRAPPER) Wrapper<MemberEvaluationPO> queryWrapper);
 }

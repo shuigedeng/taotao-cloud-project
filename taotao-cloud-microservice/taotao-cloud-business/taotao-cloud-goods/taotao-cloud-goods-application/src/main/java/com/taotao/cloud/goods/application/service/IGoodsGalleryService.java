@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsGallery;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsGalleryPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 
@@ -27,7 +27,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:00:12
  */
-public interface IGoodsGalleryService extends BaseSuperService<GoodsGallery, Long> {
+public interface IGoodsGalleryService extends BaseSuperService<GoodsGalleryPO, Long> {
 
     /**
      * 添加商品相册
@@ -43,17 +43,17 @@ public interface IGoodsGalleryService extends BaseSuperService<GoodsGallery, Lon
      * 根据原图获取缩略图
      *
      * @param origin 原图地址
-     * @return {@link GoodsGallery }
+     * @return {@link GoodsGalleryPO }
      * @since 2022-04-27 17:00:12
      */
-    GoodsGallery getGoodsGallery(String origin);
+    GoodsGalleryPO getGoodsGallery(String origin);
 
     /**
      * 根据商品id查询商品相册原图
      *
      * @param goodsId 商品ID
-     * @return {@link List }<{@link GoodsGallery }>
+     * @return {@link List }<{@link GoodsGalleryPO }>
      * @since 2022-04-27 17:00:12
      */
-    List<GoodsGallery> goodsGalleryList(Long goodsId);
+    List<GoodsGalleryPO> goodsGalleryList(Long goodsId);
 }

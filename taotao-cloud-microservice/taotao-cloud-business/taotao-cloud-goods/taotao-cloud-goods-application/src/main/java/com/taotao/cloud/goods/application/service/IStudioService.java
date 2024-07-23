@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Studio;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StudioPO;
 import com.taotao.cloud.mq.stream.framework.trigger.message.BroadcastMessage;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
@@ -29,25 +29,25 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2022.04
  * @since 2022-04-27 17:01:11
  */
-public interface IStudioService extends BaseSuperService<Studio, Long> {
+public interface IStudioService extends BaseSuperService<StudioPO, Long> {
 
     /**
      * 创建直播间 直播间默认手机直播 默认开启：点赞、商品货架、评论、回放
      *
-     * @param studio 直播间
+     * @param studioPO 直播间
      * @return {@link boolean }
      * @since 2022-04-27 17:01:11
      */
-    boolean create(Studio studio);
+    boolean create(StudioPO studioPO);
 
     /**
      * 修改直播间 直播间默认手机直播
      *
-     * @param studio 直播间
+     * @param studioPO 直播间
      * @return {@link boolean }
      * @since 2022-04-27 17:01:11
      */
-    boolean edit(Studio studio);
+    boolean edit(StudioPO studioPO);
 
     /**
      * 获取直播间信息
@@ -95,10 +95,10 @@ public interface IStudioService extends BaseSuperService<Studio, Long> {
      * @param PageQuery 分页
      * @param recommend 是否推荐
      * @param status 直播间状态
-     * @return {@link IPage }<{@link Studio }>
+     * @return {@link IPage }<{@link StudioPO }>
      * @since 2022-04-27 17:01:12
      */
-    IPage<Studio> studioList(PageQuery PageQuery, Integer recommend, String status);
+    IPage<StudioPO> studioList(PageQuery PageQuery, Integer recommend, String status);
 
     /**
      * 修改直播间状态

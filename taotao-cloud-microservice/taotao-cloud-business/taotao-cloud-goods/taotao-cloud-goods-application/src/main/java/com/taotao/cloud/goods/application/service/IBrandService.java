@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Brand;
+import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +29,9 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 16:59:15
  */
-public interface IBrandService extends BaseSuperService<Brand, Long> {
+public interface IBrandService extends BaseSuperService<BrandPO, Long> {
 
-	IPage<Brand> brandsQueryPage(BrandPageQuery page);
+	IPage<BrandPO> brandsQueryPage(BrandPageQuery page);
 
 	/**
 	 * 根据条件分页获取品牌列表
@@ -39,11 +39,11 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param page 条件参数
 	 * @return 品牌列表
 	 */
-	IPage<Brand> getBrandsByPage(BrandPageQuery page);
+	IPage<BrandPO> getBrandsByPage(BrandPageQuery page);
 
-	List<Brand> getBrandsByCategorys(Long categoryIds);
+	List<BrandPO> getBrandsByCategorys(Long categoryIds);
 
-	List<Brand> getAllAvailable();
+	List<BrandPO> getAllAvailable();
 
 	/**
 	 * 删除品牌
@@ -58,7 +58,7 @@ public interface IBrandService extends BaseSuperService<Brand, Long> {
 	 * @param categoryId 分类ID
 	 * @return 品牌列表
 	 */
-	List<Brand> getBrandsByCategory(Long categoryId);
+	List<BrandPO> getBrandsByCategory(Long categoryId);
 
 	/**
 	 * 根据分类ID获取品牌列表

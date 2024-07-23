@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.elasticsearch.repository;
 
-import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
+import com.taotao.cloud.goods.application.elasticsearch.entity.EsGoodsIndex;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

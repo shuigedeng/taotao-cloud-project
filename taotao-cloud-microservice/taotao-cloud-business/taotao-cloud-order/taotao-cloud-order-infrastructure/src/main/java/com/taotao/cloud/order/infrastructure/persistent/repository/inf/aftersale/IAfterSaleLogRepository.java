@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf.aftersale;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLogPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -26,4 +26,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.04
  * @since 2022-04-28 08:49:21
  */
-public interface IAfterSaleLogRepository extends JpaRepository<AfterSaleLog, Long> {}
+public interface IAfterSaleLogRepository extends JpaRepository<AfterSaleLogPO, Long> {}

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf.aftersale;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReason;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /** 售后原因数据处理层 */
-public interface IAfterSaleReasonRepository extends JpaRepository<AfterSaleReason, Long> {}
+public interface IAfterSaleReasonRepository extends JpaRepository<AfterSaleReasonPO, Long> {}

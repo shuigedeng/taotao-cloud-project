@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.purchase;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 采购报价数据处理层 */
-public class PurchaseQuotedRepository extends BaseClassSuperRepository<PurchaseQuoted, Long> {
+public class PurchaseQuotedRepository extends BaseClassSuperRepository<PurchaseQuotedPO, Long> {
 
     public PurchaseQuotedRepository(EntityManager em) {
-        super(PurchaseQuoted.class, em);
+        super(PurchaseQuotedPO.class, em);
     }
 }

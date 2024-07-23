@@ -27,8 +27,8 @@ import com.taotao.cloud.goods.application.service.ICategoryService;
 import com.taotao.cloud.goods.application.service.ICategorySpecificationService;
 import com.taotao.cloud.goods.application.service.ISpecificationService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ISpecificationMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecification;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Specification;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecificationPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.SpecificationRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ISpecificationRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -49,7 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class SpecificationServiceImpl
         extends BaseSuperServiceImpl<
-	Specification, Long, ISpecificationMapper, SpecificationRepository, ISpecificationRepository>
+	SpecificationPO, Long, ISpecificationMapper, SpecificationRepository, ISpecificationRepository>
         implements ISpecificationService {
 
     /** 分类-规格绑定服务 */
@@ -62,8 +62,8 @@ public class SpecificationServiceImpl
         boolean result = false;
         for (Long id : ids) {
             // 如果此规格绑定分类则不允许删除
-            List<CategorySpecification> list = categorySpecificationService.list(
-                    new QueryWrapper<CategorySpecification>().eq("specification_id", id));
+            List<CategorySpecificationPO> list = categorySpecificationService.list(
+                    new QueryWrapper<CategorySpecificationPO>().eq("specification_id", id));
 
             if (!list.isEmpty()) {
                 List<Long> categoryIds = new ArrayList<>();
@@ -79,11 +79,11 @@ public class SpecificationServiceImpl
     }
 
     @Override
-    public IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery) {
-        LambdaQueryWrapper<Specification> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+    public IPage<SpecificationPO> getPage(SpecificationPageQuery specificationPageQuery) {
+        LambdaQueryWrapper<SpecificationPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.like(
                 StringUtils.isNotEmpty(specificationPageQuery.getSpecName()),
-                Specification::getSpecName,
+                SpecificationPO::getSpecName,
                 specificationPageQuery.getSpecName());
         return this.page(specificationPageQuery.buildMpPage(), lambdaQueryWrapper);
     }
@@ -91,17 +91,17 @@ public class SpecificationServiceImpl
     @Override
     @Transactional
     public boolean saveCategoryBrand(Long categoryId, String[] categorySpecs) {
-        QueryWrapper<CategorySpecification> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<CategorySpecificationPO> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("category_id", categoryId);
         // 删除分类规格绑定信息
         this.categorySpecificationService.remove(queryWrapper);
         // 绑定规格信息
         if (categorySpecs != null && categorySpecs.length > 0) {
-            List<CategorySpecification> categorySpecifications = new ArrayList<>();
+            List<CategorySpecificationPO> categorySpecificationPOS = new ArrayList<>();
             for (String categorySpec : categorySpecs) {
-                categorySpecifications.add(new CategorySpecification(categoryId, Long.valueOf(categorySpec)));
+                categorySpecificationPOS.add(new CategorySpecificationPO(categoryId, Long.valueOf(categorySpec)));
             }
-            categorySpecificationService.saveBatch(categorySpecifications);
+            categorySpecificationService.saveBatch(categorySpecificationPOS);
         }
         return true;
     }

@@ -27,9 +27,6 @@ import org.lognet.springboot.grpc.GRpcService;
 @GRpcService
 public class CategoryGrpcServiceImpl extends CategoryGrpcServiceImplBase {
 
-	// @Autowired
-	// private IDevicesFixService deviceService;
-
 	@Override
 	public void firstCategory(FirstCategoryRequest request,
 		StreamObserver<FirstCategoryResponse> responseObserver) {

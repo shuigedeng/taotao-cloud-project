@@ -19,7 +19,7 @@ package com.taotao.cloud.order.facade.controller.seller;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,7 +55,7 @@ public class OrderLogController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
-	public Result<List<OrderLog>> get(@PathVariable String orderSn) {
+	public Result<List<OrderLogPO>> get(@PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(orderLogService.getOrderLog(orderSn));
 	}

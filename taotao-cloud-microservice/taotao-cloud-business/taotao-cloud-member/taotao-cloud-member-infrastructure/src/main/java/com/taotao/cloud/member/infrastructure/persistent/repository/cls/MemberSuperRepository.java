@@ -19,13 +19,13 @@ package com.taotao.cloud.member.infrastructure.persistent.repository.cls;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
-import com.taotao.cloud.member.infrastructure.persistent.po.Member;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPO;
 
 
 @Repository
-public class MemberSuperRepository extends BaseClassSuperRepository<Member, Long> {
+public class MemberSuperRepository extends BaseClassSuperRepository<MemberPO, Long> {
 
 	public MemberSuperRepository(EntityManager em) {
-		super(Member.class, em);
+		super(MemberPO.class, em);
 	}
 }

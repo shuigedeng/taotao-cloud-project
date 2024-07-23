@@ -19,10 +19,10 @@ package com.taotao.cloud.order.infrastructure.persistent.mapper.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderPO;
 import com.taotao.cloud.order.sys.model.vo.cart.OrderExportVO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderSimpleVO;
 import com.taotao.cloud.order.sys.model.vo.order.PaymentLogVO;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Order;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +30,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /** 订单数据处理层 */
-public interface IOrderMapper extends BaseSuperMapper<Order, Long> {
+public interface IOrderMapper extends BaseSuperMapper<OrderPO, Long> {
 
     /**
      * 修改订单状态
@@ -106,5 +106,5 @@ public interface IOrderMapper extends BaseSuperMapper<Order, Long> {
 		FROM tt_order o INNER JOIN tt_order_item AS oi on o.sn = oi.order_sn
 		${ew.customSqlSegment}
 		""")
-    List<Order> queryListByParams(@Param(Constants.WRAPPER) Wrapper<Order> queryWrapper);
+    List<OrderPO> queryListByParams(@Param(Constants.WRAPPER) Wrapper<OrderPO> queryWrapper);
 }

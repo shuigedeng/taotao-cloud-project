@@ -19,7 +19,7 @@ package com.taotao.cloud.member.application.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.member.infrastructure.persistent.po.Member;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPO;
 import java.util.List;
 import java.util.Map;
 
@@ -28,14 +28,14 @@ import java.util.Map;
  *
  * @since 2020-02-25 14:10:16
  */
-public interface IMemberService extends IService<Member> {
+public interface IMemberService extends IService<MemberPO> {
 
 	/**
 	 * 获取当前登录的用户信息
 	 *
 	 * @return 会员信息
 	 */
-	Member getUserInfo();
+	MemberPO getUserInfo();
 
 	/**
 	 * 是否可以通过手机获取用户
@@ -52,7 +52,7 @@ public interface IMemberService extends IService<Member> {
 	 * @param username 用户名
 	 * @return 会员信息
 	 */
-	Member findByUsername(String username);
+	MemberPO findByUsername(String username);
 
 	/**
 	 * 登录：用户名、密码登录
@@ -145,7 +145,7 @@ public interface IMemberService extends IService<Member> {
 	 * @param memberSearchPageQuery 会员搜索VO
 	 * @return 会员分页
 	 */
-	IPage<Member> pageQuery(MemberSearchPageQuery memberSearchPageQuery);
+	IPage<MemberPO> pageQuery(MemberSearchPageQuery memberSearchPageQuery);
 
 	/**
 	 * 一键注册会员

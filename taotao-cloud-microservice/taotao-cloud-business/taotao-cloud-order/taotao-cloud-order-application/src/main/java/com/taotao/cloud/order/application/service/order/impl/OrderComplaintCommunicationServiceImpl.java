@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.application.command.order.OrderComplaintCommunicationPageQuery;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IOrderComplainCommunicationMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintCommunication;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintCommunicationPO;
 import lombok.AllArgsConstructor;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Service;
@@ -37,31 +37,31 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class OrderComplaintCommunicationServiceImpl
-        extends ServiceImpl<IOrderComplainCommunicationMapper, OrderComplaintCommunication>
+        extends ServiceImpl<IOrderComplainCommunicationMapper, OrderComplaintCommunicationPO>
         implements IOrderComplaintCommunicationService {
 
     @Override
-    public Boolean addCommunication(OrderComplaintCommunication orderComplaintCommunication) {
-        return this.save(orderComplaintCommunication);
+    public Boolean addCommunication(OrderComplaintCommunicationPO orderComplaintCommunicationPO) {
+        return this.save(orderComplaintCommunicationPO);
     }
 
     @Override
-    public IPage<OrderComplaintCommunication> getCommunication(
+    public IPage<OrderComplaintCommunicationPO> getCommunication(
 		OrderComplaintCommunicationPageQuery pageQuery) {
-        LambdaQueryWrapper<OrderComplaintCommunication> queryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<OrderComplaintCommunicationPO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(
                 StrUtil.isNotEmpty(pageQuery.getComplainId()),
-                OrderComplaintCommunication::getComplainId,
+                OrderComplaintCommunicationPO::getComplainId,
                 pageQuery.getComplainId());
         queryWrapper.eq(
-                StrUtil.isNotEmpty(pageQuery.getOwner()), OrderComplaintCommunication::getOwner, pageQuery.getOwner());
+                StrUtil.isNotEmpty(pageQuery.getOwner()), OrderComplaintCommunicationPO::getOwner, pageQuery.getOwner());
         queryWrapper.eq(
                 StrUtil.isNotEmpty(pageQuery.getOwnerName()),
-                OrderComplaintCommunication::getOwnerName,
+                OrderComplaintCommunicationPO::getOwnerName,
                 pageQuery.getOwnerName());
         queryWrapper.eq(
                 StrUtil.isNotEmpty(pageQuery.getOwnerId()),
-                OrderComplaintCommunication::getOwnerId,
+                OrderComplaintCommunicationPO::getOwnerId,
                 pageQuery.getOwnerId());
 
         return this.page(pageQuery.buildMpPage(), queryWrapper);

@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.aftersale;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReason;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 售后原因数据处理层 */
-public class AfterSaleReasonRepository extends BaseClassSuperRepository<AfterSaleReason, Long> {
+public class AfterSaleReasonRepository extends BaseClassSuperRepository<AfterSaleReasonPO, Long> {
 
     public AfterSaleReasonRepository(EntityManager em) {
-        super(AfterSaleReason.class, em);
+        super(AfterSaleReasonPO.class, em);
     }
 }

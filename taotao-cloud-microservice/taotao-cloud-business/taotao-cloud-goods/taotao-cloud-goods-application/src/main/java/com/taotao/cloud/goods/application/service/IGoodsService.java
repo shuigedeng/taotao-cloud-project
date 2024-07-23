@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.application.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsPageQuery;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 
@@ -30,16 +30,16 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:00:15
  */
-public interface IGoodsService extends BaseSuperService<Goods, Long> {
+public interface IGoodsService extends BaseSuperService<GoodsPO, Long> {
 
     /**
      * 根据品牌获取商品
      *
      * @param brandIds 品牌ids
-     * @return {@link List }<{@link Goods }>
+     * @return {@link List }<{@link GoodsPO }>
      * @since 2022-04-27 17:00:15
      */
-    List<Goods> getByBrandIds(List<Long> brandIds);
+    List<GoodsPO> getByBrandIds(List<Long> brandIds);
 
     /**
      * 下架所有商家商品
@@ -101,19 +101,19 @@ public interface IGoodsService extends BaseSuperService<Goods, Long> {
      * 商品查询
      *
      * @param goodsPageQuery 查询参数
-     * @return {@link IPage }<{@link Goods }>
+     * @return {@link IPage }<{@link GoodsPO }>
      * @since 2022-04-27 17:00:16
      */
-    IPage<Goods> goodsQueryPage(GoodsPageQuery goodsPageQuery);
+    IPage<GoodsPO> goodsQueryPage(GoodsPageQuery goodsPageQuery);
 
     /**
      * 商品查询
      *
      * @param goodsPageQuery 查询参数
-     * @return {@link List }<{@link Goods }>
+     * @return {@link List }<{@link GoodsPO }>
      * @since 2022-04-27 17:00:16
      */
-    List<Goods> queryListByParams(GoodsPageQuery goodsPageQuery);
+    List<GoodsPO> queryListByParams(GoodsPageQuery goodsPageQuery);
 
     /**
      * 批量审核商品

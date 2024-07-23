@@ -19,7 +19,7 @@ package com.taotao.cloud.order.application.service.purchase.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.application.service.purchase.IPurchaseOrderItemService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.purchase.IPurchaseOrderItemMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrderItem;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrderItemPO;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,17 +33,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class PurchaseOrderItemServiceImpl extends
-	ServiceImpl<IPurchaseOrderItemMapper, PurchaseOrderItem>
+	ServiceImpl<IPurchaseOrderItemMapper, PurchaseOrderItemPO>
 	implements IPurchaseOrderItemService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public boolean addPurchaseOrderItem(String purchaseOrderId,
-		List<PurchaseOrderItem> purchaseOrderItemList) {
+		List<PurchaseOrderItemPO> purchaseOrderItemPOList) {
 		// 添加采购单子内容
-		for (PurchaseOrderItem purchaseOrderItem : purchaseOrderItemList) {
-			purchaseOrderItem.setPurchaseOrderId(purchaseOrderId);
-			this.save(purchaseOrderItem);
+		for (PurchaseOrderItemPO purchaseOrderItemPO : purchaseOrderItemPOList) {
+			purchaseOrderItemPO.setPurchaseOrderId(purchaseOrderId);
+			this.save(purchaseOrderItemPO);
 		}
 		return true;
 	}

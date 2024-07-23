@@ -21,6 +21,7 @@ import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
 import com.taotao.cloud.goods.api.feign.fallback.GoodsApiFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -36,11 +37,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface GoodsApi {
 
     @PostMapping(value = "/product/info/id/{id:[0-9]*}")
-    Boolean updateStoreDetail(String id);
+    Boolean updateStoreDetail(@PathVariable Long id);
 
     @PostMapping(value = "/product/info/id/{id:[0-9]*}")
-    Boolean underStoreGoods(String id);
+    Boolean underStoreGoods(@PathVariable Long id);
 
-    @GetMapping(value = "/product/info/id/{id:[0-9]*}")
-    Long countStoreGoodsNum(Long storeId);
+    @GetMapping(value = "/product/info/id/{storeId:[0-9]*}")
+    Long countStoreGoodsNum(@PathVariable Long storeId);
 }

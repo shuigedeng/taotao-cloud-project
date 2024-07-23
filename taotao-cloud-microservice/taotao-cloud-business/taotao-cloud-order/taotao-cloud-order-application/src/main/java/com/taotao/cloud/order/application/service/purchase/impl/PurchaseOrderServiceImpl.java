@@ -24,7 +24,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.application.service.purchase.IPurchaseOrderItemService;
 import com.taotao.cloud.order.application.service.purchase.IPurchaseOrderService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.purchase.IPurchaseOrderMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrder;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrderPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-04-28 08:55:40
  */
 @Service
-public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, PurchaseOrder>
+public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, PurchaseOrderPO>
         implements IPurchaseOrderService {
 
     @Autowired
@@ -46,14 +46,14 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public PurchaseOrderVO addPurchaseOrder(PurchaseOrderVO purchaseOrderVO) {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
-        BeanUtil.copyProperties(purchaseOrderVO, purchaseOrder);
+        PurchaseOrderPO purchaseOrderPO = new PurchaseOrderPO();
+        BeanUtil.copyProperties(purchaseOrderVO, purchaseOrderPO);
         // 添加采购单
-        purchaseOrder.setStatus("OPEN");
-        purchaseOrder.setMemberId(UserContext.getCurrentUser().getId());
-        this.save(purchaseOrder);
+        purchaseOrderPO.setStatus("OPEN");
+        purchaseOrderPO.setMemberId(UserContext.getCurrentUser().getId());
+        this.save(purchaseOrderPO);
         // 添加采购单子内容
-        purchaseOrderItemService.addPurchaseOrderItem(purchaseOrder.getId(), purchaseOrderVO.getPurchaseOrderItems());
+        purchaseOrderItemService.addPurchaseOrderItem(purchaseOrderPO.getId(), purchaseOrderVO.getPurchaseOrderItems());
         return purchaseOrderVO;
     }
 
@@ -61,8 +61,8 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
     public PurchaseOrderVO getPurchaseOrder(String id) {
         PurchaseOrderVO purchaseOrderVO = new PurchaseOrderVO();
         // 获取采购单内容
-        PurchaseOrder purchaseOrder = this.getById(id);
-        BeanUtil.copyProperties(purchaseOrder, purchaseOrderVO);
+        PurchaseOrderPO purchaseOrderPO = this.getById(id);
+        BeanUtil.copyProperties(purchaseOrderPO, purchaseOrderVO);
 
         // 获取采购单子内容
         purchaseOrderVO.setPurchaseOrderItems(purchaseOrderItemService.list(
@@ -71,33 +71,33 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<IPurchaseOrderMapper, 
     }
 
     @Override
-    public IPage<PurchaseOrder> page(PurchaseOrderSearchParams purchaseOrderSearchParams) {
+    public IPage<PurchaseOrderPO> page(PurchaseOrderSearchParams purchaseOrderSearchParams) {
 
-        LambdaQueryWrapper<PurchaseOrder> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        LambdaQueryWrapper<PurchaseOrderPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
 
         lambdaQueryWrapper.eq(
                 purchaseOrderSearchParams.getMemberId() != null,
-                PurchaseOrder::getMemberId,
+                PurchaseOrderPO::getMemberId,
                 purchaseOrderSearchParams.getMemberId());
         lambdaQueryWrapper.eq(
                 purchaseOrderSearchParams.getCategoryId() != null,
-                PurchaseOrder::getCategoryId,
+                PurchaseOrderPO::getCategoryId,
                 purchaseOrderSearchParams.getCategoryId());
         lambdaQueryWrapper.eq(
                 purchaseOrderSearchParams.getStatus() != null,
-                PurchaseOrder::getStatus,
+                PurchaseOrderPO::getStatus,
                 purchaseOrderSearchParams.getStatus());
-        lambdaQueryWrapper.orderByDesc(PurchaseOrder::getCreateTime);
+        lambdaQueryWrapper.orderByDesc(PurchaseOrderPO::getCreateTime);
         return this.page(PageUtil.initPage(purchaseOrderSearchParams), lambdaQueryWrapper);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean close(String id) {
-        PurchaseOrder purchaseOrder = this.getById(id);
-        purchaseOrder.setStatus("CLOSE");
+        PurchaseOrderPO purchaseOrderPO = this.getById(id);
+        purchaseOrderPO.setStatus("CLOSE");
 
-        UpdateWrapper<PurchaseOrder> updateWrapper = new UpdateWrapper<>();
+        UpdateWrapper<PurchaseOrderPO> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id", id);
         updateWrapper.set("status", "CLOSE");
 

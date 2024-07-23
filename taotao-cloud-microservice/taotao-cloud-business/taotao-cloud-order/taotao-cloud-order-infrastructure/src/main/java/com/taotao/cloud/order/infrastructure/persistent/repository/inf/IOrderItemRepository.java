@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemBack;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemBackPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
@@ -28,4 +28,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IOrderItemRepository
-        extends JpaRepository<OrderItemBack, Long>, JpaSpecificationExecutor<OrderItemBack> {}
+        extends JpaRepository<OrderItemBackPO, Long>, JpaSpecificationExecutor<OrderItemBackPO> {}

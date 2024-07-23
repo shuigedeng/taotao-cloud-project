@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.application.convert;
 
-import com.taotao.cloud.goods.biz.model.vo.GoodsSkuParamsVO;
-import com.taotao.cloud.goods.biz.model.entity.Goods;
+import com.taotao.cloud.goods.application.model.vo.GoodsSkuParamsVO;
+import com.taotao.cloud.goods.application.model.entity.Goods;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

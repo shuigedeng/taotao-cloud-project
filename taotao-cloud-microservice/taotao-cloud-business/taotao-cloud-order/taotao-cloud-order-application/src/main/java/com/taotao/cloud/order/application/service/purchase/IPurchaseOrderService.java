@@ -18,7 +18,7 @@ package com.taotao.cloud.order.application.service.purchase;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrder;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrderPO;
 
 /**
  * 采购单业务层
@@ -27,7 +27,7 @@ import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrde
  * @version 2022.04
  * @since 2022-04-28 08:55:29
  */
-public interface IPurchaseOrderService extends IService<PurchaseOrder> {
+public interface IPurchaseOrderService extends IService<PurchaseOrderPO> {
 
     /**
      * 添加采购单
@@ -51,10 +51,10 @@ public interface IPurchaseOrderService extends IService<PurchaseOrder> {
      * 获取采购单分页列表
      *
      * @param purchaseOrderSearchParams 查询参数
-     * @return {@link IPage }<{@link PurchaseOrder }>
+     * @return {@link IPage }<{@link PurchaseOrderPO }>
      * @since 2022-04-28 08:55:29
      */
-    IPage<PurchaseOrder> page(PurchaseOrderSearchParams purchaseOrderSearchParams);
+    IPage<PurchaseOrderPO> page(PurchaseOrderSearchParams purchaseOrderSearchParams);
 
     /**
      * 关闭供求单

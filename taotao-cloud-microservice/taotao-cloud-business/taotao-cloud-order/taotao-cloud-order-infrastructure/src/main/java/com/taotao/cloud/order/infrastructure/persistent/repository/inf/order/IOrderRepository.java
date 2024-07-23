@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf.order;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Order;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /** 订单数据处理层 */
-public interface IOrderRepository extends JpaRepository<Order, Long> {}
+public interface IOrderRepository extends JpaRepository<OrderPO, Long> {}

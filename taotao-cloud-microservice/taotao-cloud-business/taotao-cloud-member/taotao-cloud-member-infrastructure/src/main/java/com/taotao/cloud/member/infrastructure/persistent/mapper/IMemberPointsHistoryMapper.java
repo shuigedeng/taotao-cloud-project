@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberPointsHistory;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPointsHistoryPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员积分历史数据处理层 */
-public interface IMemberPointsHistoryMapper extends BaseSuperMapper<MemberPointsHistory, Long> {
+public interface IMemberPointsHistoryMapper extends BaseSuperMapper<MemberPointsHistoryPO, Long> {
 
     /**
      * 获取所有用户的积分历史VO

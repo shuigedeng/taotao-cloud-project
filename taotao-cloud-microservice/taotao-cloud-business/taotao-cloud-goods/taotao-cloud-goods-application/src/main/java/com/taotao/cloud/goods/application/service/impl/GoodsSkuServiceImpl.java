@@ -30,16 +30,14 @@ import com.taotao.cloud.goods.application.service.IEsGoodsIndexService;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IGoodsSkuService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IGoodsSkuMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.GoodsSkuRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IGoodsSkuRepository;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.goods.biz.listener.GeneratorEsGoodsIndexEvent;
+import com.taotao.cloud.goods.application.listener.GeneratorEsGoodsIndexEvent;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -55,12 +53,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.dynamictp.common.util.StringUtil;
 import org.dromara.hutool.core.convert.Convert;
 import org.dromara.hutool.core.map.MapUtil;
 import org.dromara.hutool.core.math.NumberUtil;
-import org.dromara.hutool.core.text.StrUtil;
 import org.dromara.hutool.json.JSONObject;
 import org.dromara.hutool.json.JSONUtil;
 import org.springframework.context.ApplicationEventPublisher;
@@ -77,7 +73,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class GoodsSkuServiceImpl
-        extends BaseSuperServiceImpl<GoodsSku, Long, IGoodsSkuMapper, GoodsSkuRepository, IGoodsSkuRepository>
+        extends BaseSuperServiceImpl<GoodsSkuPO, Long, IGoodsSkuMapper, GoodsSkuRepository, IGoodsSkuRepository>
         implements IGoodsSkuService {
 
     private final GoodsSkuManager goodsSkuManager;
@@ -104,9 +100,9 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean add(List<Map<String, Object>> skuList, Goods goods) {
+    public boolean add(List<Map<String, Object>> skuList, GoodsPO goods) {
         // 检查是否需要生成索引
-        List<GoodsSku> newSkuList;
+        List<GoodsSkuPO> newSkuList;
         // 如果有规格
         if (skuList != null && !skuList.isEmpty()) {
             // 添加商品sku
@@ -124,12 +120,12 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(List<Map<String, Object>> skuList, Goods goods, boolean regeneratorSkuFlag) {
+    public boolean update(List<Map<String, Object>> skuList, GoodsPO goods, boolean regeneratorSkuFlag) {
         // 是否存在规格
         if (skuList == null || skuList.isEmpty()) {
             throw new BusinessException(ResultEnum.MUST_HAVE_GOODS_SKU);
         }
-        List<GoodsSku> newSkuList;
+        List<GoodsSkuPO> newSkuList;
         // 删除旧的sku信息
         if (boolean.TRUE.equals(regeneratorSkuFlag)) {
             List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = getGoodsListByGoodsId(goods.getId());
@@ -153,7 +149,7 @@ public class GoodsSkuServiceImpl
         } else {
             newSkuList = new ArrayList<>();
             for (Map<String, Object> map : skuList) {
-                GoodsSku sku = new GoodsSku();
+                GoodsSkuPO sku = new GoodsSkuPO();
                 // 设置商品信息
                 goodsInfo(sku, goods);
                 // 设置商品规格信息
@@ -178,10 +174,10 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(GoodsSku goodsSku) {
-        this.updateById(goodsSku);
-        redisRepository.del(getCacheKeys(goodsSku.getId()));
-        redisRepository.set(getCacheKeys(goodsSku.getId()), goodsSku);
+    public boolean update(GoodsSkuPO goodsSkuPO) {
+        this.updateById(goodsSkuPO);
+        redisRepository.del(getCacheKeys(goodsSkuPO.getId()));
+        redisRepository.set(getCacheKeys(goodsSkuPO.getId()), goodsSkuPO);
         return true;
     }
 
@@ -192,29 +188,29 @@ public class GoodsSkuServiceImpl
     }
 
     @Override
-    public GoodsSku getGoodsSkuByIdFromCache(Long skuId) {
+    public GoodsSkuPO getGoodsSkuByIdFromCache(Long skuId) {
         // 获取缓存中的sku
-        GoodsSku goodsSku = (GoodsSku) redisRepository.get(getCacheKeys(skuId));
+        GoodsSkuPO goodsSkuPO = (GoodsSkuPO) redisRepository.get(getCacheKeys(skuId));
         // 如果缓存中没有信息，则查询数据库，然后写入缓存
-        if (goodsSku == null) {
-            goodsSku = this.getById(skuId);
-            if (goodsSku == null) {
+        if (goodsSkuPO == null) {
+            goodsSkuPO = this.getById(skuId);
+            if (goodsSkuPO == null) {
                 return null;
             }
-            redisRepository.set(getCacheKeys(skuId), goodsSku);
+            redisRepository.set(getCacheKeys(skuId), goodsSkuPO);
         }
 
         // 获取商品库存
         Integer stock = (Integer) redisRepository.get(getStockCacheKey(skuId));
 
         // 库存不为空,库存与缓存中不一致
-        if (stock != null && !goodsSku.getQuantity().equals(stock)) {
+        if (stock != null && !goodsSkuPO.getQuantity().equals(stock)) {
             // 写入最新的库存信息
-            goodsSku.setQuantity(stock);
-            redisRepository.set(getCacheKeys(goodsSku.getId()), goodsSku);
+            goodsSkuPO.setQuantity(stock);
+            redisRepository.set(getCacheKeys(goodsSkuPO.getId()), goodsSkuPO);
         }
 
-        return goodsSku;
+        return goodsSkuPO;
     }
 
     @Override
@@ -228,9 +224,9 @@ public class GoodsSkuServiceImpl
         }
 
         // 从缓存拿商品Sku
-        GoodsSku goodsSku = this.getGoodsSkuByIdFromCache(skuId);
+        GoodsSkuPO goodsSkuPO = this.getGoodsSkuByIdFromCache(skuId);
         // 如果使用商品ID无法查询SKU则返回错误
-        if (goodsSkuParamsVO == null || goodsSku == null) {
+        if (goodsSkuParamsVO == null || goodsSkuPO == null) {
             throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
         }
 
@@ -244,11 +240,11 @@ public class GoodsSkuServiceImpl
         // 获取当前商品的索引信息
         EsGoodsIndex goodsIndex = goodsIndexService.findById(skuId);
         if (goodsIndex == null) {
-            goodsIndex = goodsIndexService.getResetEsGoodsIndex(goodsSku, goodsSkuParamsVO.getGoodsParamsDTOList());
+            goodsIndex = goodsIndexService.getResetEsGoodsIndex(goodsSkuPO, goodsSkuParamsVO.getGoodsParamsDTOList());
         }
 
         // 商品规格
-        GoodsSkuSpecGalleryVO goodsSkuDetail = this.getGoodsSkuVO(goodsSku);
+        GoodsSkuSpecGalleryVO goodsSkuDetail = this.getGoodsSkuVO(goodsSkuPO);
 
         Map<String, Object> promotionMap = goodsIndex.getPromotionMap();
         // 设置当前商品的促销价格
@@ -328,20 +324,20 @@ public class GoodsSkuServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateGoodsSkuStatus(Goods goods) {
-        LambdaUpdateWrapper<GoodsSku> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(GoodsSku::getGoodsId, goods.getId());
-        updateWrapper.set(GoodsSku::getMarketEnable, goods.getMarketEnable());
-        updateWrapper.set(GoodsSku::getIsAuth, goods.getIsAuth());
-        updateWrapper.set(GoodsSku::getDelFlag, goods.getDelFlag());
+    public boolean updateGoodsSkuStatus(GoodsPO goods) {
+        LambdaUpdateWrapper<GoodsSkuPO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(GoodsSkuPO::getGoodsId, goods.getId());
+        updateWrapper.set(GoodsSkuPO::getMarketEnable, goods.getMarketEnable());
+        updateWrapper.set(GoodsSkuPO::getIsAuth, goods.getIsAuth());
+        updateWrapper.set(GoodsSkuPO::getDelFlag, goods.getDelFlag());
         boolean update = this.update(updateWrapper);
         if (boolean.TRUE.equals(update)) {
-            List<GoodsSku> goodsSkus = this.getGoodsSkuListByGoodsId(goods.getId());
-            for (GoodsSku sku : goodsSkus) {
+            List<GoodsSkuPO> goodsSkusPOS = this.getGoodsSkuListByGoodsId(goods.getId());
+            for (GoodsSkuPO sku : goodsSkusPOS) {
                 redisRepository.del(getCacheKeys(sku.getId()));
                 redisRepository.set(getCacheKeys(sku.getId()), sku);
             }
-            if (!goodsSkus.isEmpty()) {
+            if (!goodsSkusPOS.isEmpty()) {
                 generateEs(goods);
             }
         }
@@ -349,16 +345,16 @@ public class GoodsSkuServiceImpl
     }
 
     @Override
-    public List<GoodsSku> getGoodsSkuByIdFromCache(List<Long> ids) {
+    public List<GoodsSkuPO> getGoodsSkuByIdFromCache(List<Long> ids) {
         List<String> keys = new ArrayList<>();
         for (Long id : ids) {
             keys.add(getCacheKeys(id));
         }
-        List<GoodsSku> list = redisRepository.mGet(keys);
+        List<GoodsSkuPO> list = redisRepository.mGet(keys);
         if (list == null || list.isEmpty()) {
             list = new ArrayList<>();
-            List<GoodsSku> goodsSkus = listByIds(ids);
-            for (GoodsSku skus : goodsSkus) {
+            List<GoodsSkuPO> goodsSkusPOS = listByIds(ids);
+            for (GoodsSkuPO skus : goodsSkusPOS) {
                 redisRepository.set(getCacheKeys(skus.getId()), skus);
                 list.add(skus);
             }
@@ -368,33 +364,34 @@ public class GoodsSkuServiceImpl
 
     @Override
     public List<GoodsSkuSpecGalleryVO> getGoodsListByGoodsId(Long goodsId) {
-        LambdaQueryWrapper<GoodsSku> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(GoodsSku::getGoodsId, goodsId);
-        List<GoodsSku> list = this.list(queryWrapper);
+        LambdaQueryWrapper<GoodsSkuPO> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(GoodsSkuPO::getGoodsId, goodsId);
+        List<GoodsSkuPO> list = this.list(queryWrapper);
         return this.getGoodsSkuVOList(list);
     }
 
     @Override
-    public List<GoodsSku> getGoodsSkuListByGoodsId(Long goodsId) {
-        return this.list(new LambdaQueryWrapper<GoodsSku>().eq(GoodsSku::getGoodsId, goodsId));
+    public List<GoodsSkuPO> getGoodsSkuListByGoodsId(Long goodsId) {
+        return this.list(new LambdaQueryWrapper<GoodsSkuPO>().eq(GoodsSkuPO::getGoodsId, goodsId));
     }
 
     @Override
-    public List<GoodsSkuSpecGalleryVO> getGoodsSkuVOList(List<GoodsSku> list) {
+    public List<GoodsSkuSpecGalleryVO> getGoodsSkuVOList(List<GoodsSkuPO> list) {
         List<GoodsSkuSpecGalleryVO> goodsSkuSpecGalleryVOS = new ArrayList<>();
-        for (GoodsSku goodsSku : list) {
-            GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO = this.getGoodsSkuVO(goodsSku);
+        for (GoodsSkuPO goodsSkuPO : list) {
+            GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO = this.getGoodsSkuVO(goodsSkuPO);
             goodsSkuSpecGalleryVOS.add(goodsSkuSpecGalleryVO);
         }
         return goodsSkuSpecGalleryVOS;
     }
 
     @Override
-    public GoodsSkuSpecGalleryVO getGoodsSkuVO(GoodsSku goodsSku) {
+    public GoodsSkuSpecGalleryVO getGoodsSkuVO(GoodsSkuPO goodsSkuPO) {
         // 初始化商品
-        GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO = GoodsSkuConvert.INSTANCE.convertGallery(goodsSku);
+        GoodsSkuSpecGalleryVO goodsSkuSpecGalleryVO = GoodsSkuConvert.INSTANCE.convertGallery(
+			goodsSkuPO);
         // 获取规格信息
-        JSONObject jsonObject = JSONUtil.parseObj(goodsSku.getSpecs());
+        JSONObject jsonObject = JSONUtil.parseObj(goodsSkuPO.getSpecs());
         // 规格值信息
         List<SpecValueVO> specValueVOs = new ArrayList<>();
         // sku相册信息
@@ -425,12 +422,12 @@ public class GoodsSkuServiceImpl
     }
 
     @Override
-    public IPage<GoodsSku> goodsSkuQueryPage(GoodsPageQuery searchParams) {
+    public IPage<GoodsSkuPO> goodsSkuQueryPage(GoodsPageQuery searchParams) {
         return this.page(searchParams.buildMpPage(), QueryUtil.goodsQueryWrapper(searchParams));
     }
 
     @Override
-    public List<GoodsSku> getGoodsSkuByList(GoodsPageQuery searchParams) {
+    public List<GoodsSkuPO> getGoodsSkuByList(GoodsPageQuery searchParams) {
         return this.list(QueryUtil.goodsQueryWrapper(searchParams));
     }
 
@@ -446,25 +443,25 @@ public class GoodsSkuServiceImpl
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateStock(Long skuId, Integer quantity) {
-        GoodsSku goodsSku = getGoodsSkuByIdFromCache(skuId);
-        if (goodsSku != null) {
+        GoodsSkuPO goodsSkuPO = getGoodsSkuByIdFromCache(skuId);
+        if (goodsSkuPO != null) {
             if (quantity <= 0) {
-                goodsIndexService.deleteIndexById(goodsSku.getId());
+                goodsIndexService.deleteIndexById(goodsSkuPO.getId());
             }
-            goodsSku.setQuantity(quantity);
-            boolean update = this.update(new LambdaUpdateWrapper<GoodsSku>()
-                    .eq(GoodsSku::getId, skuId)
-                    .set(GoodsSku::getQuantity, quantity));
+            goodsSkuPO.setQuantity(quantity);
+            boolean update = this.update(new LambdaUpdateWrapper<GoodsSkuPO>()
+                    .eq(GoodsSkuPO::getId, skuId)
+                    .set(GoodsSkuPO::getQuantity, quantity));
             if (update) {
-                redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsSku.getGoodsId());
+                redisRepository.del(CachePrefix.GOODS.getPrefix() + goodsSkuPO.getGoodsId());
             }
-            redisRepository.set(getCacheKeys(skuId), goodsSku);
+            redisRepository.set(getCacheKeys(skuId), goodsSkuPO);
             redisRepository.set(getStockCacheKey(skuId), quantity);
 
             // 更新商品库存
-            List<GoodsSku> goodsSkus = new ArrayList<>();
-            goodsSkus.add(goodsSku);
-            this.updateGoodsStuck(goodsSkus);
+            List<GoodsSkuPO> goodsSkusPOS = new ArrayList<>();
+            goodsSkusPOS.add(goodsSkuPO);
+            this.updateGoodsStuck(goodsSkusPOS);
         }
         return true;
     }
@@ -476,32 +473,32 @@ public class GoodsSkuServiceImpl
         if (stock != null) {
             return stock;
         } else {
-            GoodsSku goodsSku = getGoodsSkuByIdFromCache(skuId);
-            redisRepository.set(cacheKeys, goodsSku.getQuantity());
-            return goodsSku.getQuantity();
+            GoodsSkuPO goodsSkuPO = getGoodsSkuByIdFromCache(skuId);
+            redisRepository.set(cacheKeys, goodsSkuPO.getQuantity());
+            return goodsSkuPO.getQuantity();
         }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean updateGoodsStuck(List<GoodsSku> goodsSkus) {
+    public boolean updateGoodsStuck(List<GoodsSkuPO> goodsSkusPOS) {
         // 商品id集合 hashset 去重复
         Set<Long> goodsIds = new HashSet<>();
-        for (GoodsSku sku : goodsSkus) {
+        for (GoodsSkuPO sku : goodsSkusPOS) {
             goodsIds.add(sku.getGoodsId());
         }
         // 获取相关的sku集合
-        LambdaQueryWrapper<GoodsSku> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.in(GoodsSku::getGoodsId, goodsIds);
-        List<GoodsSku> goodsSkuList = this.list(lambdaQueryWrapper);
+        LambdaQueryWrapper<GoodsSkuPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(GoodsSkuPO::getGoodsId, goodsIds);
+        List<GoodsSkuPO> goodsSkuPOList = this.list(lambdaQueryWrapper);
 
         // 统计每个商品的库存
         for (Long goodsId : goodsIds) {
             // 库存
             Integer quantity = 0;
-            for (GoodsSku goodsSku : goodsSkuList) {
-                if (goodsId.equals(goodsSku.getGoodsId())) {
-                    quantity += goodsSku.getQuantity();
+            for (GoodsSkuPO goodsSkuPO : goodsSkuPOList) {
+                if (goodsId.equals(goodsSkuPO.getGoodsId())) {
+                    quantity += goodsSkuPO.getQuantity();
                 }
             }
             // 保存商品库存结果
@@ -514,38 +511,39 @@ public class GoodsSkuServiceImpl
     @Transactional(rollbackFor = Exception.class)
     public boolean updateGoodsSkuCommentNum(Long skuId) {
         // 获取商品信息
-        GoodsSku goodsSku = this.getGoodsSkuByIdFromCache(skuId);
+        GoodsSkuPO goodsSkuPO = this.getGoodsSkuByIdFromCache(skuId);
 
         EvaluationPageQuery queryParams = new EvaluationPageQuery();
         queryParams.setGrade(EvaluationGradeEnum.GOOD.name());
-        queryParams.setSkuId(goodsSku.getId());
+        queryParams.setSkuId(goodsSkuPO.getId());
         // 好评数量
         long highPraiseNum = memberEvaluationApi.getEvaluationCount(queryParams);
 
         // 更新商品评价数量
-        goodsSku.setCommentNum(goodsSku.getCommentNum() != null ? goodsSku.getCommentNum() + 1 : 1);
+        goodsSkuPO.setCommentNum(
+			goodsSkuPO.getCommentNum() != null ? goodsSkuPO.getCommentNum() + 1 : 1);
 
         // todo 此处需要修改 好评率
         BigDecimal grade = BigDecimal.valueOf(NumberUtil.mul(
-                NumberUtil.div(highPraiseNum, goodsSku.getCommentNum().doubleValue(), 2), 100));
-        goodsSku.setGrade(grade);
+                NumberUtil.div(highPraiseNum, goodsSkuPO.getCommentNum().doubleValue(), 2), 100));
+        goodsSkuPO.setGrade(grade);
         // 修改规格
-        this.update(goodsSku);
+        this.update(goodsSkuPO);
 
         // 修改规格索引,发送mq消息
         Map<String, Object> updateIndexFieldsMap = EsIndexUtil.getUpdateIndexFieldsMap(
                 MapUtil.builder(new HashMap<String, Object>())
-                        .put("id", goodsSku.getId())
+                        .put("id", goodsSkuPO.getId())
                         .build(),
                 MapUtil.builder(new HashMap<String, Object>())
-                        .put("commentNum", goodsSku.getCommentNum())
+                        .put("commentNum", goodsSkuPO.getCommentNum())
                         .put("highPraiseNum", highPraiseNum)
                         .put("grade", grade)
                         .build());
         goodsSkuManager.sendUpdateIndexFieldsMap(updateIndexFieldsMap);
 
         // 修改商品的评价数量
-        goodsService.updateGoodsCommentNum(goodsSku.getGoodsId());
+        goodsService.updateGoodsCommentNum(goodsSkuPO.getGoodsId());
         return true;
     }
 
@@ -555,7 +553,7 @@ public class GoodsSkuServiceImpl
     }
 
     @Override
-    public void generateEs(Goods goods) {
+    public void generateEs(GoodsPO goods) {
         // 不生成没有审核通过且没有上架的商品
         if (!GoodsStatusEnum.UPPER.name().equals(goods.getMarketEnable())
                 || !GoodsAuthEnum.PASS.name().equals(goods.getIsAuth())) {
@@ -567,18 +565,18 @@ public class GoodsSkuServiceImpl
     /**
      * 修改库存
      *
-     * @param goodsSkus 商品SKU
+     * @param goodsSkusPOS 商品SKU
      */
-    private void updateStock(List<GoodsSku> goodsSkus) {
+    private void updateStock(List<GoodsSkuPO> goodsSkusPOS) {
         // 总库存数量
         Integer quantity = 0;
-        for (GoodsSku sku : goodsSkus) {
+        for (GoodsSkuPO sku : goodsSkusPOS) {
             this.updateStock(sku.getId(), sku.getQuantity());
             quantity += sku.getQuantity();
         }
 
         // 修改商品库存
-        goodsService.updateStock(goodsSkus.get(0).getGoodsId(), quantity);
+        goodsService.updateStock(goodsSkusPOS.get(0).getGoodsId(), quantity);
     }
 
     /**
@@ -587,17 +585,17 @@ public class GoodsSkuServiceImpl
      * @param skuList sku列表
      * @param goods 商品信息
      */
-    List<GoodsSku> addGoodsSku(List<Map<String, Object>> skuList, Goods goods) {
-        List<GoodsSku> skus = new ArrayList<>();
+    List<GoodsSkuPO> addGoodsSku(List<Map<String, Object>> skuList, GoodsPO goods) {
+        List<GoodsSkuPO> skus = new ArrayList<>();
         for (Map<String, Object> skuVO : skuList) {
             Map<String, Object> resultMap = this.add(skuVO, goods);
-            GoodsSku goodsSku = (GoodsSku) resultMap.get("goodsSku");
+            GoodsSkuPO goodsSkuPO = (GoodsSkuPO) resultMap.get("goodsSku");
             if (goods.getSelfOperated() != null) {
-                goodsSku.setSelfOperated(goods.getSelfOperated());
+                goodsSkuPO.setSelfOperated(goods.getSelfOperated());
             }
-            goodsSku.setGoodsType(goods.getGoodsType());
-            skus.add(goodsSku);
-            redisRepository.set(getStockCacheKey(goodsSku.getId()), goodsSku.getQuantity());
+            goodsSkuPO.setGoodsType(goods.getGoodsType());
+            skus.add(goodsSkuPO);
+            redisRepository.set(getStockCacheKey(goodsSkuPO.getId()), goodsSkuPO.getQuantity());
         }
         this.saveBatch(skus);
         return skus;
@@ -610,9 +608,9 @@ public class GoodsSkuServiceImpl
      * @param goods 商品
      * @return 规格商品
      */
-    private Map<String, Object> add(Map<String, Object> map, Goods goods) {
+    private Map<String, Object> add(Map<String, Object> map, GoodsPO goods) {
         Map<String, Object> resultMap = new HashMap<>(2);
-        GoodsSku sku = new GoodsSku();
+        GoodsSkuPO sku = new GoodsSkuPO();
 
         // 商品索引
         EsGoodsIndex esGoodsIndex = new EsGoodsIndex();
@@ -634,7 +632,7 @@ public class GoodsSkuServiceImpl
      * @param sku 规格
      * @param goods 商品
      */
-    private void goodsInfo(GoodsSku sku, Goods goods) {
+    private void goodsInfo(GoodsSkuPO sku, GoodsPO goods) {
         // 商品基本信息
         sku.setGoodsId(goods.getId());
 
@@ -665,7 +663,7 @@ public class GoodsSkuServiceImpl
      * @param map 规格信息
      * @param esGoodsIndex 商品索引
      */
-    private void skuInfo(GoodsSku sku, Goods goods, Map<String, Object> map, EsGoodsIndex esGoodsIndex) {
+    private void skuInfo(GoodsSkuPO sku, GoodsPO goods, Map<String, Object> map, EsGoodsIndex esGoodsIndex) {
         // 规格简短信息
         StringBuilder simpleSpecs = new StringBuilder();
         // 商品名称
@@ -741,7 +739,7 @@ public class GoodsSkuServiceImpl
      * @param origin 图片
      * @param goods 商品
      */
-    private void setGoodsGalleryParam(String origin, Goods goods) {
+    private void setGoodsGalleryParam(String origin, GoodsPO goods) {
         GoodsGallery goodsGallery = goodsGalleryService.getGoodsGallery(origin);
         goods.setOriginal(goodsGallery.getOriginal());
         goods.setSmall(goodsGallery.getSmall());
@@ -753,7 +751,7 @@ public class GoodsSkuServiceImpl
      *
      * @param goods 商品
      */
-    public void checkGoods(Goods goods) {
+    public void checkGoods(GoodsPO goods) {
         // 判断商品类型
         switch (goods.getGoodsType()) {
             case "PHYSICAL_GOODS" -> {

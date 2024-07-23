@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodityPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2022.04
  * @since 2022-04-27 17:01:08
  */
-public interface IStudioCommodityService extends BaseSuperService<StudioCommodity, Long> {}
+public interface IStudioCommodityService extends BaseSuperService<StudioCommodityPO, Long> {}

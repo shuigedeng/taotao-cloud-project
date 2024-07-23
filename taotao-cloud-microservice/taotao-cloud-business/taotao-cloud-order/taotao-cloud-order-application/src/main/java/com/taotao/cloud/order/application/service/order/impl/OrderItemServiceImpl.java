@@ -24,7 +24,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.application.service.order.IOrderItemService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IOrderItemMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItem;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemPO;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,58 +40,58 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItem> implements
+public class OrderItemServiceImpl extends ServiceImpl<IOrderItemMapper, OrderItemPO> implements
 	IOrderItemService {
 
     @Override
     public Boolean updateCommentStatus(String orderItemSn, CommentStatusEnum commentStatusEnum) {
-        LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-        lambdaUpdateWrapper.set(OrderItem::getCommentStatus, commentStatusEnum.name());
-        lambdaUpdateWrapper.eq(OrderItem::getSn, orderItemSn);
+        LambdaUpdateWrapper<OrderItemPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+        lambdaUpdateWrapper.set(OrderItemPO::getCommentStatus, commentStatusEnum.name());
+        lambdaUpdateWrapper.eq(OrderItemPO::getSn, orderItemSn);
         return this.update(lambdaUpdateWrapper);
     }
 
     @Override
     public Boolean updateAfterSaleStatus(
             String orderItemSn, OrderItemAfterSaleStatusEnum orderItemAfterSaleStatusEnum) {
-        LambdaUpdateWrapper<OrderItem> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-        lambdaUpdateWrapper.set(OrderItem::getAfterSaleStatus, orderItemAfterSaleStatusEnum.name());
-        lambdaUpdateWrapper.eq(OrderItem::getSn, orderItemSn);
+        LambdaUpdateWrapper<OrderItemPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+        lambdaUpdateWrapper.set(OrderItemPO::getAfterSaleStatus, orderItemAfterSaleStatusEnum.name());
+        lambdaUpdateWrapper.eq(OrderItemPO::getSn, orderItemSn);
         return this.update(lambdaUpdateWrapper);
     }
 
     @Override
     public Boolean updateOrderItemsComplainStatus(
             String orderSn, Long skuId, Long complainId, OrderComplaintStatusEnum complainStatusEnum) {
-        LambdaQueryWrapper<OrderItem> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(OrderItem::getOrderSn, orderSn).eq(OrderItem::getSkuId, skuId);
-        OrderItem orderItem = getOne(queryWrapper);
-        if (orderItem == null) {
+        LambdaQueryWrapper<OrderItemPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(OrderItemPO::getOrderSn, orderSn).eq(OrderItemPO::getSkuId, skuId);
+        OrderItemPO orderItemPO = getOne(queryWrapper);
+        if (orderItemPO == null) {
             throw new BusinessException(ResultEnum.ORDER_ITEM_NOT_EXIST);
         }
-        orderItem.setComplainId(complainId);
-        orderItem.setComplainStatus(complainStatusEnum.name());
-        return updateById(orderItem);
+        orderItemPO.setComplainId(complainId);
+        orderItemPO.setComplainStatus(complainStatusEnum.name());
+        return updateById(orderItemPO);
     }
 
     @Override
-    public OrderItem getBySn(String sn) {
-        LambdaQueryWrapper<OrderItem> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(OrderItem::getSn, sn);
+    public OrderItemPO getBySn(String sn) {
+        LambdaQueryWrapper<OrderItemPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(OrderItemPO::getSn, sn);
         return this.getOne(lambdaQueryWrapper);
     }
 
     @Override
-    public List<OrderItem> getByOrderSn(String orderSn) {
-        LambdaQueryWrapper<OrderItem> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(OrderItem::getOrderSn, orderSn);
+    public List<OrderItemPO> getByOrderSn(String orderSn) {
+        LambdaQueryWrapper<OrderItemPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(OrderItemPO::getOrderSn, orderSn);
         return this.list(lambdaQueryWrapper);
     }
 
     @Override
-    public OrderItem getByOrderSnAndSkuId(String orderSn, Long skuId) {
-        return this.getOne(new LambdaQueryWrapper<OrderItem>()
-                .eq(OrderItem::getOrderSn, orderSn)
-                .eq(OrderItem::getSkuId, skuId));
+    public OrderItemPO getByOrderSnAndSkuId(String orderSn, Long skuId) {
+        return this.getOne(new LambdaQueryWrapper<OrderItemPO>()
+                .eq(OrderItemPO::getOrderSn, orderSn)
+                .eq(OrderItemPO::getSkuId, skuId));
     }
 }

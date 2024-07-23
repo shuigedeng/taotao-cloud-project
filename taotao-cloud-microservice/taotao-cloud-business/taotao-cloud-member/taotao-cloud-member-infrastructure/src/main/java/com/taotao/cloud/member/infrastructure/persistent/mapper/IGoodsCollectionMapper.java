@@ -19,13 +19,13 @@ package com.taotao.cloud.member.infrastructure.persistent.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberGoodsCollection;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberGoodsCollectionPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员收藏数据处理层 */
-public interface IGoodsCollectionMapper extends BaseSuperMapper<MemberGoodsCollection, Long> {
+public interface IGoodsCollectionMapper extends BaseSuperMapper<MemberGoodsCollectionPO, Long> {
 
     /**
      * 商品收藏VO分页

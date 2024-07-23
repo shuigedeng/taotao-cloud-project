@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderInfo;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderInfoPO;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,14 +28,14 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public interface IOrderInfoRepository extends JpaRepository<OrderInfo, Long> {
+public interface IOrderInfoRepository extends JpaRepository<OrderInfoPO, Long> {
 
     @Query(value = """
-			select u from OrderInfo u where u.id = ?#{[0]}
+			select u from OrderInfoPO u where u.id = ?#{[0]}
 		""")
-    List<OrderInfo> findOrderInfoById(Long id);
+    List<OrderInfoPO> findOrderInfoById(Long id);
 
-    OrderInfo findByCode(String code);
+    OrderInfoPO findByCode(String code);
 
     // @Query(value = """
     //        select new com.taotao.cloud.order.api.OrderDO(

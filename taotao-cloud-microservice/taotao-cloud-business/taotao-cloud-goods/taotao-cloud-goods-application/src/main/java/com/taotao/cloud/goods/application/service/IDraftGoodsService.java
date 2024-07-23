@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.application.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsDTO;
-import com.taotao.cloud.goods.infrastructure.persistent.po.DraftGoods;
+import com.taotao.cloud.goods.infrastructure.persistent.po.DraftGoodsPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 /**
@@ -29,7 +29,7 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2022.04
  * @since 2022-04-27 16:59:56
  */
-public interface IDraftGoodsService extends BaseSuperService<DraftGoods, Long> {
+public interface IDraftGoodsService extends BaseSuperService<DraftGoodsPO, Long> {
 
     /**
      * 添加草稿商品
@@ -80,8 +80,8 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoods, Long> {
      * 分页获取草稿商品
      *
      * @param searchParams 查询参数
-     * @return {@link IPage }<{@link DraftGoods }>
+     * @return {@link IPage }<{@link DraftGoodsPO }>
      * @since 2022-04-27 16:59:57
      */
-    IPage<DraftGoods> draftGoodsQueryPage(DraftGoodsPageQuery searchParams);
+    IPage<DraftGoodsPO> draftGoodsQueryPage(DraftGoodsPageQuery searchParams);
 }

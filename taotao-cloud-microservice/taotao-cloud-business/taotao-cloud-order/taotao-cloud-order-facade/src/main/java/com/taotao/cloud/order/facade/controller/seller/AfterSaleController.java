@@ -23,7 +23,7 @@ import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.application.command.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.application.converter.AfterSaleConvert;
 import com.taotao.cloud.order.application.service.aftersale.IAfterSaleService;
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.utils.OperationalJudgment;
@@ -63,7 +63,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> getAfterSaleBySn(@PathVariable String sn) {
-		AfterSale afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSaleBySn(sn));
+		AfterSalePO afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSaleBySn(sn));
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 
@@ -74,7 +74,7 @@ public class AfterSaleController {
 	public Result<PageResult<AfterSaleVO>> getByPage(AfterSalePageQuery searchParams) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
-		IPage<AfterSale> page = afterSaleService.pageQuery(searchParams);
+		IPage<AfterSalePO> page = afterSaleService.pageQuery(searchParams);
 		return Result.success(MpUtils.convertMybatisPage(page, AfterSaleVO.class));
 	}
 
@@ -85,7 +85,7 @@ public class AfterSaleController {
 	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery searchParams) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
 		searchParams.setStoreId(storeId);
-		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
+		List<AfterSalePO> afterSales = afterSaleService.exportAfterSaleOrder(searchParams);
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSales));
 	}
 

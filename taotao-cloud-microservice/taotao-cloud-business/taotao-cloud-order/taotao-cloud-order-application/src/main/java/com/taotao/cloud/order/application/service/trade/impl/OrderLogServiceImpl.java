@@ -23,7 +23,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.application.command.order.OrderLogPageQuery;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.trade.IOrderLogMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +35,19 @@ import org.springframework.stereotype.Service;
  * @since 2022-04-28 08:55:53
  */
 @Service
-public class OrderLogServiceImpl extends ServiceImpl<IOrderLogMapper, OrderLog> implements
+public class OrderLogServiceImpl extends ServiceImpl<IOrderLogMapper, OrderLogPO> implements
 	IOrderLogService {
 
     @Override
-    public List<OrderLog> getOrderLog(String orderSn) {
-        LambdaQueryWrapper<OrderLog> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(OrderLog::getOrderSn, orderSn);
+    public List<OrderLogPO> getOrderLog(String orderSn) {
+        LambdaQueryWrapper<OrderLogPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(OrderLogPO::getOrderSn, orderSn);
         return this.list(lambdaQueryWrapper);
     }
 
     @Override
-    public IPage<OrderLog> pageQuery(OrderLogPageQuery orderLogPageQuery) {
-        LambdaQueryWrapper<OrderLog> lambdaQueryWrapper = Wrappers.lambdaQuery();
+    public IPage<OrderLogPO> pageQuery(OrderLogPageQuery orderLogPageQuery) {
+        LambdaQueryWrapper<OrderLogPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
         // todo 需要设置条件
 
         return this.page(orderLogPageQuery.buildMpPage(), lambdaQueryWrapper);

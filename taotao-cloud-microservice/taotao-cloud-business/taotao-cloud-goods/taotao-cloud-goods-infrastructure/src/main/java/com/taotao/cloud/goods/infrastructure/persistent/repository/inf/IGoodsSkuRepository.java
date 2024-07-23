@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IGoodsSkuRepository extends JpaRepository<GoodsSku, Long> {}
+public interface IGoodsSkuRepository extends JpaRepository<GoodsSkuPO, Long> {}

@@ -18,7 +18,7 @@ package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberRecharge;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberRechargePO;
 import java.math.BigDecimal;
 
 /**
@@ -28,25 +28,25 @@ import java.math.BigDecimal;
  * @version 2022.06
  * @since 2022-05-31 13:21:47
  */
-public interface IMemberRechargeService extends IService<MemberRecharge> {
+public interface IMemberRechargeService extends IService<MemberRechargePO> {
 
 	/**
 	 * 创建充值订单
 	 *
 	 * @param price 价格
-	 * @return {@link MemberRecharge }
+	 * @return {@link MemberRechargePO }
 	 * @since 2022-05-31 13:21:47
 	 */
-	MemberRecharge recharge(BigDecimal price);
+	MemberRechargePO recharge(BigDecimal price);
 
 	/**
 	 * 查询充值订单列表
 	 *
 	 * @param rechargePageQuery 查询条件
-	 * @return {@link IPage }<{@link MemberRecharge }>
+	 * @return {@link IPage }<{@link MemberRechargePO }>
 	 * @since 2022-05-31 13:21:47
 	 */
-	IPage<MemberRecharge> rechargePage(RechargePageQuery rechargePageQuery);
+	IPage<MemberRechargePO> rechargePage(RechargePageQuery rechargePageQuery);
 
 	/**
 	 * 支付成功
@@ -62,10 +62,10 @@ public interface IMemberRechargeService extends IService<MemberRecharge> {
 	 * 根据充值订单号查询充值信息
 	 *
 	 * @param sn 充值订单号
-	 * @return {@link MemberRecharge }
+	 * @return {@link MemberRechargePO }
 	 * @since 2022-05-31 13:21:47
 	 */
-	MemberRecharge getRecharge(String sn);
+	MemberRechargePO getRecharge(String sn);
 
 	/**
 	 * 充值订单取消

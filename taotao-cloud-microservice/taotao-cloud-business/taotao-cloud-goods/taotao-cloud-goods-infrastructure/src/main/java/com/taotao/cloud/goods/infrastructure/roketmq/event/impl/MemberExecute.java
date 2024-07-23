@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.member.infratructure.roketmq.event.impl;
+package com.taotao.cloud.goods.infrastructure.roketmq.event.impl;
 
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.roketmq.event.MemberLoginEvent;

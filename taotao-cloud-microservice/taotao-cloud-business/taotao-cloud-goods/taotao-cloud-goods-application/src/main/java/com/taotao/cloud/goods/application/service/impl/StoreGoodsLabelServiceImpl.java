@@ -24,10 +24,9 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.application.service.IStoreGoodsLabelService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IStoreGoodsLabelMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabel;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabelPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.StoreGoodsLabelRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IStoreGoodsLabelRepository;
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StoreGoodsLabelServiceImpl
 	extends BaseSuperServiceImpl<
-	StoreGoodsLabel, Long, IStoreGoodsLabelMapper, StoreGoodsLabelRepository, IStoreGoodsLabelRepository>
+	StoreGoodsLabelPO, Long, IStoreGoodsLabelMapper, StoreGoodsLabelRepository, IStoreGoodsLabelRepository>
 	implements IStoreGoodsLabelService {
 
 	/**
@@ -65,7 +64,7 @@ public class StoreGoodsLabelServiceImpl
 				CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
 		}
 
-		List<StoreGoodsLabel> list = list(storeId);
+		List<StoreGoodsLabelPO> list = list(storeId);
 		List<StoreGoodsLabelVO> storeGoodsLabelVOList = new ArrayList<>();
 
 		// 循环列表判断是否为顶级，如果为顶级获取下级数据
@@ -106,38 +105,38 @@ public class StoreGoodsLabelServiceImpl
 	 * @return 店铺分类列表
 	 */
 	@Override
-	public List<StoreGoodsLabel> listByStoreIds(List<Long> ids) {
-		return this.list(new LambdaQueryWrapper<StoreGoodsLabel>()
-			.in(StoreGoodsLabel::getId, ids)
-			.orderByAsc(StoreGoodsLabel::getLevel));
+	public List<StoreGoodsLabelPO> listByStoreIds(List<Long> ids) {
+		return this.list(new LambdaQueryWrapper<StoreGoodsLabelPO>()
+			.in(StoreGoodsLabelPO::getId, ids)
+			.orderByAsc(StoreGoodsLabelPO::getLevel));
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
+	public boolean addStoreGoodsLabel(StoreGoodsLabelPO storeGoodsLabelPO) {
 		// 获取当前登录商家账号
 		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
-		storeGoodsLabel.setStoreId(tokenUser.getStoreId());
+		storeGoodsLabelPO.setStoreId(tokenUser.getStoreId());
 		// 保存店铺分类
-		this.save(storeGoodsLabel);
+		this.save(storeGoodsLabelPO);
 		// 清除缓存
-		removeCache(storeGoodsLabel.getStoreId());
+		removeCache(storeGoodsLabelPO.getStoreId());
 		return true;
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean editStoreGoodsLabel(StoreGoodsLabel storeGoodsLabel) {
+	public boolean editStoreGoodsLabel(StoreGoodsLabelPO storeGoodsLabelPO) {
 		// 修改当前店铺的商品分类
 		SecurityUser tokenUser = SecurityUtils.getCurrentUser();
 
-		LambdaUpdateWrapper<StoreGoodsLabel> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-		lambdaUpdateWrapper.eq(StoreGoodsLabel::getStoreId, tokenUser.getStoreId());
-		lambdaUpdateWrapper.eq(StoreGoodsLabel::getId, storeGoodsLabel.getId());
+		LambdaUpdateWrapper<StoreGoodsLabelPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+		lambdaUpdateWrapper.eq(StoreGoodsLabelPO::getStoreId, tokenUser.getStoreId());
+		lambdaUpdateWrapper.eq(StoreGoodsLabelPO::getId, storeGoodsLabelPO.getId());
 		// 修改店铺分类
-		this.update(storeGoodsLabel, lambdaUpdateWrapper);
+		this.update(storeGoodsLabelPO, lambdaUpdateWrapper);
 		// 清除缓存
-		removeCache(storeGoodsLabel.getStoreId());
+		removeCache(storeGoodsLabelPO.getStoreId());
 		return true;
 	}
 
@@ -162,10 +161,10 @@ public class StoreGoodsLabelServiceImpl
 	 * @param storeId 店铺ID
 	 * @return 店铺商品分类列表
 	 */
-	private List<StoreGoodsLabel> list(Long storeId) {
-		LambdaQueryWrapper<StoreGoodsLabel> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(StoreGoodsLabel::getStoreId, storeId);
-		queryWrapper.orderByDesc(StoreGoodsLabel::getSortOrder);
+	private List<StoreGoodsLabelPO> list(Long storeId) {
+		LambdaQueryWrapper<StoreGoodsLabelPO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(StoreGoodsLabelPO::getStoreId, storeId);
+		queryWrapper.orderByDesc(StoreGoodsLabelPO::getSortOrder);
 		return this.baseMapper.selectList(queryWrapper);
 	}
 

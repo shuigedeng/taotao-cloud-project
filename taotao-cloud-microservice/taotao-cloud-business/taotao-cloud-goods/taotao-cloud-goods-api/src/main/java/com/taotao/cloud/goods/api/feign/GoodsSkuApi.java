@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
+import com.taotao.cloud.goods.api.feign.fallback.GoodsSkuApiFallback;
 import com.taotao.cloud.goods.api.feign.request.GoodsSkuSpecGalleryApiRequest;
 import com.taotao.cloud.goods.api.feign.response.GoodsSkuSpecGalleryApiResponse;
 import java.util.List;
@@ -32,9 +33,9 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-	contextId = "IFeignGoodsSkuService",
+	contextId = "GoodsSkuApi",
 	value = ServiceName.TAOTAO_CLOUD_GOODS,
-	fallbackFactory = CategoryApiFallback.class)
+	fallbackFactory = GoodsSkuApiFallback.class)
 public interface GoodsSkuApi {
 
 	@PostMapping(value = "/product/updateGoodsStuck")

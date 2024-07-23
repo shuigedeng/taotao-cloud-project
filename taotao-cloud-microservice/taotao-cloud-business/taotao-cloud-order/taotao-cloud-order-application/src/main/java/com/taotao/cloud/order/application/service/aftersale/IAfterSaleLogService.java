@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.aftersale;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleLogPO;
 import java.util.List;
 
 /**
@@ -27,14 +27,14 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:49:07
  */
-public interface IAfterSaleLogService extends IService<AfterSaleLog> {
+public interface IAfterSaleLogService extends IService<AfterSaleLogPO> {
 
     /**
      * 获取售后日志
      *
      * @param sn 售后编号
-     * @return {@link List }<{@link AfterSaleLog }>
+     * @return {@link List }<{@link AfterSaleLogPO }>
      * @since 2022-04-28 08:49:07
      */
-    List<AfterSaleLog> getAfterSaleLog(String sn);
+    List<AfterSaleLogPO> getAfterSaleLog(String sn);
 }

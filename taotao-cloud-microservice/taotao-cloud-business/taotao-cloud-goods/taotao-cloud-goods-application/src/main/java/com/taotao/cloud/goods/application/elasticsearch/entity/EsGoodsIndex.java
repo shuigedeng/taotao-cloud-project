@@ -18,10 +18,10 @@ package com.taotao.cloud.goods.application.elasticsearch.entity;
 
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
-import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsGoodsAttribute;
-import com.taotao.cloud.goods.biz.elasticsearch.pojo.EsSuffix;
-import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
+import com.taotao.cloud.goods.application.model.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.application.elasticsearch.pojo.EsGoodsAttribute;
+import com.taotao.cloud.goods.application.elasticsearch.pojo.EsSuffix;
+import com.taotao.cloud.goods.application.model.entity.GoodsSku;
 import com.taotao.cloud.promotion.api.tools.PromotionTools;
 import java.io.Serial;
 import java.io.Serializable;

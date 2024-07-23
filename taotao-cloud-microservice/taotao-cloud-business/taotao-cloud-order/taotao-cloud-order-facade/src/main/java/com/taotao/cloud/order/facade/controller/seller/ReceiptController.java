@@ -23,7 +23,7 @@ import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
 import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.order.application.service.order.IReceiptService;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Receipt;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.ReceiptPO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.utils.OperationalJudgment;
@@ -70,7 +70,7 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<Receipt> get(@PathVariable String id) {
+	public Result<ReceiptPO> get(@PathVariable String id) {
 		return Result.success(OperationalJudgment.judgment(receiptService.getById(id)));
 	}
 
@@ -78,7 +78,7 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping(value = "/{id}/invoicing")
-	public Result<Receipt> invoicing(@PathVariable Long id) {
+	public Result<ReceiptPO> invoicing(@PathVariable Long id) {
 		OperationalJudgment.judgment(receiptService.getById(id));
 		return Result.success(receiptService.invoicing(id));
 	}
@@ -87,7 +87,7 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/orderSn/{orderSn}")
-	public Result<Receipt> getByOrderSn(@PathVariable String orderSn) {
+	public Result<ReceiptPO> getByOrderSn(@PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(receiptService.getByOrderSn(orderSn));
 	}

@@ -25,6 +25,4 @@ package com.taotao.cloud.goods.api.constant;
  */
 public interface GoodsConstants {
 
-    /** 邮件模块的名称 */
-    String PINYIN_MODULE_NAME = "kernel-d-pinyin";
 }

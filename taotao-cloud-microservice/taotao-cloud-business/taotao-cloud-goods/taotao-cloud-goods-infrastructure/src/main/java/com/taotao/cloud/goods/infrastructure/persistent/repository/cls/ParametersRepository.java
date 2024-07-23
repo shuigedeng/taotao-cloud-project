@@ -16,15 +16,15 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.cls;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.Parameters;
+import com.taotao.cloud.goods.infrastructure.persistent.po.ParametersPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ParametersRepository extends BaseClassSuperRepository<Parameters, Long> {
+public class ParametersRepository extends BaseClassSuperRepository<ParametersPO, Long> {
 
     public ParametersRepository(EntityManager em) {
-        super(Parameters.class, em);
+        super(ParametersPO.class, em);
     }
 }

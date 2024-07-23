@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroup;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroupPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICategoryParameterGroupRepository extends JpaRepository<CategoryParameterGroup, Long> {}
+public interface ICategoryParameterGroupRepository extends JpaRepository<CategoryParameterGroupPO, Long> {}

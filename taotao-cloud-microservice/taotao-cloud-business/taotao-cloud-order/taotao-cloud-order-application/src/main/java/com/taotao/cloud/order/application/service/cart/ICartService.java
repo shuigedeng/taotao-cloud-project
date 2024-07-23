@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.cart;
 
 import com.taotao.cloud.order.application.command.order.ReceiptVO;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Trade;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.TradePO;
 
 /**
  * 购物车业务层
@@ -195,8 +195,8 @@ public interface ICartService {
 	 * 4.交易信息存储到缓存中 5.创建交易 6.清除购物车选择数据
 	 *
 	 * @param tradeDTO 创建交易参数
-	 * @return {@link Trade }
+	 * @return {@link TradePO }
 	 * @since 2022-04-28 08:49:41
 	 */
-	Trade createTrade(TradeDTO tradeDTO);
+	TradePO createTrade(TradeDTO tradeDTO);
 }

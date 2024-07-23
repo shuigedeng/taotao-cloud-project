@@ -19,14 +19,14 @@ package com.taotao.cloud.member.infrastructure.persistent.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.member.infrastructure.persistent.po.Member;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 会员数据处理层 */
-public interface IMemberMapper extends BaseSuperMapper<Member, Long> {
+public interface IMemberMapper extends BaseSuperMapper<MemberPO, Long> {
 
     /**
      * 获取所有的会员手机号
@@ -44,5 +44,5 @@ public interface IMemberMapper extends BaseSuperMapper<Member, Long> {
 		from tt_member
 		${ew.customSqlSegment}
 		""")
-    IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page, @Param(Constants.WRAPPER) Wrapper<Member> queryWrapper);
+    IPage<MemberVO> pageByMemberVO(IPage<MemberVO> page, @Param(Constants.WRAPPER) Wrapper<MemberPO> queryWrapper);
 }

@@ -18,15 +18,19 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
+import com.taotao.cloud.goods.api.feign.fallback.StoreGoodsLabelApiFallback;
 import com.taotao.cloud.goods.api.feign.response.StoreGoodsLabelApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(value = ServiceName.TAOTAO_CLOUD_GOODS, fallbackFactory = CategoryApiFallback.class)
+@FeignClient(
+	contextId = "StoreGoodsLabelApi",
+	value = ServiceName.TAOTAO_CLOUD_GOODS,
+	fallbackFactory = StoreGoodsLabelApiFallback.class)
 public interface StoreGoodsLabelApi {
 
-    @GetMapping(value = "/product/info/id/{id}")
-    List<StoreGoodsLabelApiResponse> listByStoreId(@PathVariable String id);
+	@GetMapping(value = "/product/info/id/{id}")
+	List<StoreGoodsLabelApiResponse> listByStoreId(@PathVariable String id);
 }

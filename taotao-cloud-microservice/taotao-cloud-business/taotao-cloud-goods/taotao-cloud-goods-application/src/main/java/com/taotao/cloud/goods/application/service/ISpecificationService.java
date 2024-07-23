@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.application.command.specification.dto.SpecificationPageQuery;
+import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 17:01:01
  */
-public interface ISpecificationService extends BaseSuperService<Specification, Long> {
+public interface ISpecificationService extends BaseSuperService<SpecificationPO, Long> {
 
 	/**
 	 * 删除规格
@@ -43,10 +44,10 @@ public interface ISpecificationService extends BaseSuperService<Specification, L
 	 * 分页查询
 	 *
 	 * @param specificationPageQuery 查询条件
-	 * @return {@link IPage }<{@link Specification }>
+	 * @return {@link IPage }<{@link SpecificationPO }>
 	 * @since 2022-04-27 17:01:01
 	 */
-	IPage<Specification> getPage(SpecificationPageQuery specificationPageQuery);
+	IPage<SpecificationPO> getPage(SpecificationPageQuery specificationPageQuery);
 
 	boolean saveCategoryBrand(Long categoryId, String[] categorySpecs);
 }

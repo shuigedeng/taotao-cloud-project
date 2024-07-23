@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Repository;
  * @since 2022-04-27 16:57:22
  */
 @Repository
-public interface IGoodsSkuMapper extends BaseSuperMapper<GoodsSku, Long> {
+public interface IGoodsSkuMapper extends BaseSuperMapper<GoodsSkuPO, Long> {
 
     /**
      * 根据商品id获取全部skuId的集合

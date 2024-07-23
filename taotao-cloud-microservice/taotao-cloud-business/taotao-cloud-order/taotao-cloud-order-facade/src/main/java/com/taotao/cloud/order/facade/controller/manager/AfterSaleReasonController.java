@@ -25,7 +25,7 @@ import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonPageQ
 import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonVO;
 import com.taotao.cloud.order.application.converter.AfterSaleReasonConvert;
 import com.taotao.cloud.order.application.service.aftersale.IAfterSaleReasonService;
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReason;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -65,8 +65,8 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
 	public Result<AfterSaleReasonVO> getById(@PathVariable String id) {
-		AfterSaleReason afterSaleReason = afterSaleReasonService.getById(id);
-		return Result.success(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReason));
+		AfterSaleReasonPO afterSaleReasonPO = afterSaleReasonService.getById(id);
+		return Result.success(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonPO));
 	}
 
 	@Operation(summary = "分页获取售后原因", description = "分页获取售后原因")
@@ -75,7 +75,7 @@ public class AfterSaleReasonController {
 	@GetMapping(value = "/page")
 	public Result<PageResult<AfterSaleReasonVO>> getByPage(
 		@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
-		IPage<AfterSaleReason> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQuery);
+		IPage<AfterSaleReasonPO> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQuery);
 		return Result.success(MpUtils.convertMybatisPage(page, AfterSaleReasonVO.class));
 	}
 
@@ -95,10 +95,10 @@ public class AfterSaleReasonController {
 	public Result<Boolean> update(
 		@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO,
 		@PathVariable("id") Long id) {
-		AfterSaleReason afterSaleReason = AfterSaleReasonConvert.INSTANCE.convert(
+		AfterSaleReasonPO afterSaleReasonPO = AfterSaleReasonConvert.INSTANCE.convert(
 			afterSaleReasonDTO);
-		afterSaleReason.setId(id);
-		return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReason));
+		afterSaleReasonPO.setId(id);
+		return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReasonPO));
 	}
 
 	@Operation(summary = "删除售后原因", description = "删除售后原因")

@@ -29,20 +29,21 @@ public class GoodsApiFallback implements FallbackFactory<GoodsApi> {
     @Override
     public GoodsApi create(Throwable throwable) {
         return new GoodsApi() {
-            @Override
-            public Boolean updateStoreDetail(String id) {
-                return null;
-            }
 
-            @Override
-            public Boolean underStoreGoods(String id) {
-                return null;
-            }
+			@Override
+			public Boolean updateStoreDetail(Long id) {
+				return null;
+			}
 
-            @Override
-            public Long countStoreGoodsNum(Long storeId) {
-                return null;
-            }
-        };
+			@Override
+			public Boolean underStoreGoods(Long id) {
+				return null;
+			}
+
+			@Override
+			public Long countStoreGoodsNum(Long storeId) {
+				return 0;
+			}
+		};
     }
 }

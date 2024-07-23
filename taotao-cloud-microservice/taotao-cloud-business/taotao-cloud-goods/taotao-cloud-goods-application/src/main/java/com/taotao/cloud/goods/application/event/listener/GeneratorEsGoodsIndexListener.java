@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.goods.biz.listener;
+package com.taotao.cloud.goods.application.event.listener;
 
+import com.taotao.cloud.goods.application.listener.GeneratorEsGoodsIndexEvent;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;

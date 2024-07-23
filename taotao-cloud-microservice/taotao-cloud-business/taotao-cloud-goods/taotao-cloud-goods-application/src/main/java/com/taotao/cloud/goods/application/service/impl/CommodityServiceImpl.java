@@ -24,19 +24,20 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.application.service.ICommodityService;
 import com.taotao.cloud.goods.application.service.IGoodsSkuService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICommodityMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Commodity;
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSku;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CommodityRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICommodityRepository;
 import com.taotao.cloud.goods.infrastructure.util.WechatLivePlayerUtil;
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.dromara.hutool.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Service
 public class CommodityServiceImpl
-        extends BaseSuperServiceImpl<Commodity, Long, ICommodityMapper, CommodityRepository, ICommodityRepository>
+        extends BaseSuperServiceImpl<CommodityPO, Long, ICommodityMapper, CommodityRepository, ICommodityRepository>
         implements ICommodityService {
 
     private final WechatLivePlayerUtil wechatLivePlayerUtil;
@@ -59,39 +60,39 @@ public class CommodityServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addCommodity(List<Commodity> commodityList) {
+    public boolean addCommodity(List<CommodityPO> commodityPOList) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
-        for (Commodity commodity : commodityList) {
+        for (CommodityPO commodityPO : commodityPOList) {
             // 检测直播商品
-            checkCommodity(commodity);
-            commodity.setStoreId(storeId);
+            checkCommodity(commodityPO);
+            commodityPO.setStoreId(storeId);
 
             // 添加直播商品
-            JSONObject json = wechatLivePlayerUtil.addGoods(commodity);
+            JSONObject json = wechatLivePlayerUtil.addGoods(commodityPO);
             if (!"0".equals(json.getStr("errcode"))) {
                 log.error(json.getStr("errmsg"));
                 throw new BusinessException(ResultEnum.COMMODITY_ERROR);
             }
 
-            commodity.setLiveGoodsId(Convert.toLong(json.getStr("goodsId")));
-            commodity.setAuditId(json.getLong("auditId"));
+            commodityPO.setLiveGoodsId(Convert.toLong(json.getStr("goodsId")));
+            commodityPO.setAuditId(json.getLong("auditId"));
             // 默认为待审核状态
-            commodity.setAuditStatus("0");
-            this.save(commodity);
+            commodityPO.setAuditStatus("0");
+            this.save(commodityPO);
         }
         return true;
     }
 
-    private void checkCommodity(Commodity commodity) {
+    private void checkCommodity(CommodityPO commodityPO) {
         // 商品是否审核通过
-        GoodsSku goodsSku = goodsSkuService.getById(commodity.getSkuId());
-        if (!goodsSku.getIsAuth().equals(GoodsAuthEnum.PASS.name())) {
-            throw new BusinessException(goodsSku.getGoodsName() + " 未审核通过，不能添加直播商品");
+        GoodsSkuPO goodsSkuPO = goodsSkuService.getById(commodityPO.getSkuId());
+        if (!goodsSkuPO.getIsAuth().equals(GoodsAuthEnum.PASS.name())) {
+            throw new BusinessException(goodsSkuPO.getGoodsName() + " 未审核通过，不能添加直播商品");
         }
 
         // 是否已添加规格商品
-        if (this.count(new LambdaQueryWrapper<Commodity>().eq(Commodity::getSkuId, commodity.getSkuId())) > 0) {
-            throw new BusinessException(goodsSku.getGoodsName() + " 已添加规格商品，无法重复增加");
+        if (this.count(new LambdaQueryWrapper<CommodityPO>().eq(CommodityPO::getSkuId, commodityPO.getSkuId())) > 0) {
+            throw new BusinessException(goodsSkuPO.getGoodsName() + " 已添加规格商品，无法重复增加");
         }
     }
 
@@ -105,9 +106,9 @@ public class CommodityServiceImpl
 
         JSONObject json = wechatLivePlayerUtil.deleteGoods(goodsId);
         if ("0".equals(json.getStr("errcode"))) {
-            return this.remove(new LambdaQueryWrapper<Commodity>()
-                    .eq(Commodity::getLiveGoodsId, goodsId)
-                    .eq(Commodity::getStoreId, SecurityUtils.getCurrentUser().getStoreId()));
+            return this.remove(new LambdaQueryWrapper<CommodityPO>()
+                    .eq(CommodityPO::getLiveGoodsId, goodsId)
+                    .eq(CommodityPO::getStoreId, SecurityUtils.getCurrentUser().getStoreId()));
         }
         return false;
     }
@@ -124,9 +125,9 @@ public class CommodityServiceImpl
             List<CommodityDTO> commodityDTOList = JSONUtil.toList((JSONArray) json.get("goods"), CommodityDTO.class);
             for (CommodityDTO commodityDTO : commodityDTOList) {
                 // 修改审核状态
-                this.update(new LambdaUpdateWrapper<Commodity>()
-                        .eq(Commodity::getLiveGoodsId, commodityDTO.getGoodsId())
-                        .set(Commodity::getAuditStatus, commodityDTO.getAuditStatus()));
+                this.update(new LambdaUpdateWrapper<CommodityPO>()
+                        .eq(CommodityPO::getLiveGoodsId, commodityDTO.getGoodsId())
+                        .set(CommodityPO::getAuditStatus, commodityDTO.getAuditStatus()));
             }
         }
         return true;

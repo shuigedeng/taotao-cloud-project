@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.order;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Order;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 订单数据处理层 */
-public class OrderRepository extends BaseClassSuperRepository<Order, Long> {
+public class OrderRepository extends BaseClassSuperRepository<OrderPO, Long> {
 
     public OrderRepository(EntityManager em) {
-        super(Order.class, em);
+        super(OrderPO.class, em);
     }
 }

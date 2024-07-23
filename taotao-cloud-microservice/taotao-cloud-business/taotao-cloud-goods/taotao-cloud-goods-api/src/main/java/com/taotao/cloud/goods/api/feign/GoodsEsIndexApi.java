@@ -18,11 +18,13 @@ package com.taotao.cloud.goods.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
+import com.taotao.cloud.goods.api.feign.fallback.GoodsEsIndexApiFallback;
 import com.taotao.cloud.goods.api.feign.response.EsGoodsIndexApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用订单模块
@@ -31,14 +33,14 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-	contextId = "IFeignEsGoodsIndexService",
+	contextId = "GoodsEsIndexApi",
 	value = ServiceName.TAOTAO_CLOUD_GOODS,
-	fallbackFactory = CategoryApiFallback.class)
+	fallbackFactory = GoodsEsIndexApiFallback.class)
 public interface GoodsEsIndexApi {
 
-	@GetMapping(value = "/product/info/id/{id:[0-9]*}")
-	List<EsGoodsIndexApiResponse> getEsGoodsBySkuIds(List<String> skuIdList);
+	@GetMapping(value = "/product/info/skuIdList")
+	List<EsGoodsIndexApiResponse> getEsGoodsBySkuIds(@RequestParam List<String> skuIdList);
 
-	@PostMapping(value = "/product/info/id/{id:[0-9]*}")
+	@PostMapping(value = "/product/info/id")
 	Boolean cleanInvalidPromotion();
 }

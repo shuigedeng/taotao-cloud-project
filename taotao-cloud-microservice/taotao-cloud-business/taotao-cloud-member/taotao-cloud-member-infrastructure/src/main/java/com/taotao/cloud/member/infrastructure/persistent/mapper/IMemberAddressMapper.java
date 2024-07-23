@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddress;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddressPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 会员地址数据处理层 */
-public interface IMemberAddressMapper extends BaseSuperMapper<MemberAddress, Long> {}
+public interface IMemberAddressMapper extends BaseSuperMapper<MemberAddressPO, Long> {}

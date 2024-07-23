@@ -18,11 +18,11 @@ package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.member.application.command.member.dto.clientobject.MemberSignCO;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberSign;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberSignPO;
 import java.util.List;
 
 /** 会员签到业务层 */
-public interface IMemberSignService extends IService<MemberSign> {
+public interface IMemberSignService extends IService<MemberSignPO> {
 
     /**
      * 会员签到

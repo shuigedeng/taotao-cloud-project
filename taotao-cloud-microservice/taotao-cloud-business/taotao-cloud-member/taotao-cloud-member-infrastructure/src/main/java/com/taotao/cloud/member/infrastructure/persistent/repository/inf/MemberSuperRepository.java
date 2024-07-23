@@ -15,9 +15,9 @@
  */
 package com.taotao.cloud.member.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.member.infrastructure.persistent.po.Member;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPO;
 import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 
-public interface MemberSuperRepository extends BaseInterfaceSuperRepository<Member, Long> {
+public interface MemberSuperRepository extends BaseInterfaceSuperRepository<MemberPO, Long> {
 
 }

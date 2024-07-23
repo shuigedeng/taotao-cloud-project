@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Commodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 
@@ -29,42 +29,42 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:47
  */
-public interface ICommodityService extends BaseSuperService<Commodity, Long> {
+public interface ICommodityService extends BaseSuperService<CommodityPO, Long> {
 
-    /**
-     * 添加直播商品
-     *
-     * @param commodity 直播商品列表
-     * @return {@link boolean }
-     * @since 2022-04-27 16:59:47
-     */
-    boolean addCommodity(List<Commodity> commodity);
+	/**
+	 * 添加直播商品
+	 *
+	 * @param commodityPO 直播商品列表
+	 * @return {@link boolean }
+	 * @since 2022-04-27 16:59:47
+	 */
+	boolean addCommodity(List<CommodityPO> commodityPO);
 
-    /**
-     * 删除直播商品
-     *
-     * @param goodsId 直播商品ID
-     * @return {@link boolean }
-     * @since 2022-04-27 16:59:47
-     */
-    boolean deleteCommodity(Long goodsId);
+	/**
+	 * 删除直播商品
+	 *
+	 * @param goodsId 直播商品ID
+	 * @return {@link boolean }
+	 * @since 2022-04-27 16:59:47
+	 */
+	boolean deleteCommodity(Long goodsId);
 
-    /**
-     * 查询微信小程序直播商品审核状态
-     *
-     * @return {@link boolean }
-     * @since 2022-04-27 16:59:47
-     */
-    boolean getGoodsWareHouse();
+	/**
+	 * 查询微信小程序直播商品审核状态
+	 *
+	 * @return {@link boolean }
+	 * @since 2022-04-27 16:59:47
+	 */
+	boolean getGoodsWareHouse();
 
-    /**
-     * 查看直播商品分页
-     *
-     * @param PageQuery 分页
-     * @param name 商品名称
-     * @param auditStatus 审核状态
-     * @return {@link IPage }<{@link CommoditySkuVO }>
-     * @since 2022-04-27 16:59:47
-     */
-    IPage<CommoditySkuVO> commodityList(PageQuery PageQuery, String name, String auditStatus);
+	/**
+	 * 查看直播商品分页
+	 *
+	 * @param PageQuery   分页
+	 * @param name        商品名称
+	 * @param auditStatus 审核状态
+	 * @return {@link IPage }<{@link CommoditySkuVO }>
+	 * @since 2022-04-27 16:59:47
+	 */
+	IPage<CommoditySkuVO> commodityList(PageQuery PageQuery, String name, String auditStatus);
 }

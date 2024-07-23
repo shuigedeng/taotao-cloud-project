@@ -5,7 +5,9 @@ import com.taotao.cloud.goods.api.grpc.ConditionsRequest;
 import com.taotao.cloud.goods.api.grpc.DeviceFix;
 import com.taotao.cloud.goods.api.grpc.GoodsSkuGrpcServiceGrpc.GoodsSkuGrpcServiceImplBase;
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 
+@GRpcService
 public class GoodsSkuGrpcServiceImpl extends GoodsSkuGrpcServiceImplBase {
 
 	@Override

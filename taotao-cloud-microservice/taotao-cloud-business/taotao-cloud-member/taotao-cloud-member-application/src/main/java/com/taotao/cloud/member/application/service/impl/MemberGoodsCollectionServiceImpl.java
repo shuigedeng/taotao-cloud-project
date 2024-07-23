@@ -26,7 +26,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.application.service.IMemberGoodsCollectionService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IGoodsCollectionMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberGoodsCollection;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberGoodsCollectionPO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MemberGoodsCollectionServiceImpl extends
-	ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollection>
+	ServiceImpl<IGoodsCollectionMapper, MemberGoodsCollectionPO>
 	implements IMemberGoodsCollectionService {
 
 	@Override
@@ -55,45 +55,45 @@ public class MemberGoodsCollectionServiceImpl extends
 
 	@Override
 	public Boolean isCollection(Long skuId) {
-		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId());
-		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
+		LambdaQueryWrapper<MemberGoodsCollectionPO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(MemberGoodsCollectionPO::getMemberId, SecurityUtils.getUserId());
+		queryWrapper.eq(skuId != null, MemberGoodsCollectionPO::getSkuId, skuId);
 		return Optional.ofNullable(this.getOne(queryWrapper)).isPresent();
 	}
 
 	@Override
 	public Boolean addGoodsCollection(Long skuId) {
-		MemberGoodsCollection memberGoodsCollection = this.getOne(
-			new LambdaUpdateWrapper<MemberGoodsCollection>()
-				.eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId())
-				.eq(MemberGoodsCollection::getSkuId, skuId));
+		MemberGoodsCollectionPO memberGoodsCollectionPO = this.getOne(
+			new LambdaUpdateWrapper<MemberGoodsCollectionPO>()
+				.eq(MemberGoodsCollectionPO::getMemberId, SecurityUtils.getUserId())
+				.eq(MemberGoodsCollectionPO::getSkuId, skuId));
 
-		if (memberGoodsCollection == null) {
-			memberGoodsCollection = new MemberGoodsCollection(SecurityUtils.getUserId(), skuId);
-			return this.save(memberGoodsCollection);
+		if (memberGoodsCollectionPO == null) {
+			memberGoodsCollectionPO = new MemberGoodsCollectionPO(SecurityUtils.getUserId(), skuId);
+			return this.save(memberGoodsCollectionPO);
 		}
 		throw new BusinessException("用户不存在");
 	}
 
 	@Override
 	public Boolean deleteGoodsCollection(Long skuId) {
-		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberGoodsCollection::getMemberId, SecurityUtils.getUserId());
-		queryWrapper.eq(skuId != null, MemberGoodsCollection::getSkuId, skuId);
+		LambdaQueryWrapper<MemberGoodsCollectionPO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(MemberGoodsCollectionPO::getMemberId, SecurityUtils.getUserId());
+		queryWrapper.eq(skuId != null, MemberGoodsCollectionPO::getSkuId, skuId);
 		return this.remove(queryWrapper);
 	}
 
 	@Override
 	public Boolean deleteGoodsCollection(List<Long> goodsIds) {
-		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.in(MemberGoodsCollection::getSkuId, goodsIds);
+		LambdaQueryWrapper<MemberGoodsCollectionPO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.in(MemberGoodsCollectionPO::getSkuId, goodsIds);
 		return this.remove(queryWrapper);
 	}
 
 	@Override
 	public Boolean deleteSkuCollection(List<Long> skuIds) {
-		LambdaQueryWrapper<MemberGoodsCollection> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.in(MemberGoodsCollection::getSkuId, skuIds);
+		LambdaQueryWrapper<MemberGoodsCollectionPO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.in(MemberGoodsCollectionPO::getSkuId, skuIds);
 		return this.remove(queryWrapper);
 	}
 }

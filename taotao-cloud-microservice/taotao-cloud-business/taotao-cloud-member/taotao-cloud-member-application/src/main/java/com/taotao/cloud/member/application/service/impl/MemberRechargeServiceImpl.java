@@ -24,7 +24,7 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
 import com.taotao.cloud.member.application.service.IMemberRechargeService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberRechargeMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberRecharge;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberRechargePO;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import java.math.BigDecimal;
@@ -41,7 +41,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-01 13:48:28
  */
 @Service
-public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper, MemberRecharge>
+public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper, MemberRechargePO>
 	implements IMemberRechargeService {
 
 	/**
@@ -51,13 +51,13 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 	private IFeignMemberWalletApi feignMemberWalletApi;
 
 	@Override
-	public MemberRecharge recharge(BigDecimal price) {
+	public MemberRechargePO recharge(BigDecimal price) {
 		// 获取当前登录的会员
 		SecurityUser authUser = SecurityUtils.getCurrentUser();
 		// 构建sn
 		String sn = "Y" + IdGeneratorUtils.getId();
 		// 整合充值订单数据
-		MemberRecharge recharge = new MemberRecharge(sn, authUser.getUserId(),
+		MemberRechargePO recharge = new MemberRechargePO(sn, authUser.getUserId(),
 			authUser.getUsername(), price);
 		// 添加预存款充值账单
 		this.save(recharge);
@@ -66,9 +66,9 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 	}
 
 	@Override
-	public IPage<MemberRecharge> rechargePage(RechargePageQuery rechargePageQuery) {
+	public IPage<MemberRechargePO> rechargePage(RechargePageQuery rechargePageQuery) {
 		// 构建查询条件
-		QueryWrapper<MemberRecharge> queryWrapper = new QueryWrapper<>();
+		QueryWrapper<MemberRechargePO> queryWrapper = new QueryWrapper<>();
 		// 会员名称
 		queryWrapper.like(
 			!CharSequenceUtil.isEmpty(rechargePageQuery.getMemberName()),
@@ -100,8 +100,8 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 	@Override
 	public void paySuccess(String sn, String receivableNo, String paymentMethod) {
 		// 根据sn获取支付账单
-		MemberRecharge recharge = this.getOne(
-			new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
+		MemberRechargePO recharge = this.getOne(
+			new QueryWrapper<MemberRechargePO>().eq("recharge_sn", sn));
 		// 如果支付账单不为空则进行一下逻辑
 		if (recharge != null && !recharge.getPayStatus().equals(PayStatusEnum.PAID.name())) {
 			// 将此账单支付状态更改为已支付
@@ -121,9 +121,9 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 	}
 
 	@Override
-	public MemberRecharge getRecharge(String sn) {
-		MemberRecharge recharge = this.getOne(
-			new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
+	public MemberRechargePO getRecharge(String sn) {
+		MemberRechargePO recharge = this.getOne(
+			new QueryWrapper<MemberRechargePO>().eq("recharge_sn", sn));
 		if (recharge != null) {
 			return recharge;
 		}
@@ -132,8 +132,8 @@ public class MemberRechargeServiceImpl extends ServiceImpl<IMemberRechargeMapper
 
 	@Override
 	public void rechargeOrderCancel(String sn) {
-		MemberRecharge recharge = this.getOne(
-			new QueryWrapper<MemberRecharge>().eq("recharge_sn", sn));
+		MemberRechargePO recharge = this.getOne(
+			new QueryWrapper<MemberRechargePO>().eq("recharge_sn", sn));
 		if (recharge != null) {
 			recharge.setPayStatus(PayStatusEnum.CANCEL.name());
 			this.updateById(recharge);

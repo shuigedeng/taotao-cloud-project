@@ -24,7 +24,6 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IBrandRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;

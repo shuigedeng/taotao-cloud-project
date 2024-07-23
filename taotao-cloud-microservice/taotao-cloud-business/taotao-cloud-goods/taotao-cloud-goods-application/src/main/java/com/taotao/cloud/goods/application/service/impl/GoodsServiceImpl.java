@@ -24,17 +24,15 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 
 import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.enums.UserEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IGoodsSkuService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IGoodsMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.GoodsRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IGoodsRepository;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.common.utils.log.LogUtils;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
@@ -63,7 +61,7 @@ import java.util.Objects;
  */
 @Service
 @AllArgsConstructor
-public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMapper, GoodsRepository, IGoodsRepository>
+public class GoodsServiceImpl extends BaseSuperServiceImpl<GoodsPO, Long, IGoodsMapper, GoodsRepository, IGoodsRepository>
         implements IGoodsService {
     private final GoodsManager goodsManager;
 
@@ -90,9 +88,9 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     private final RedisRepository redisRepository;
 
     @Override
-    public List<Goods> getByBrandIds(List<Long> brandIds) {
-        LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.in(Goods::getBrandId, brandIds);
+    public List<GoodsPO> getByBrandIds(List<Long> brandIds) {
+        LambdaQueryWrapper<GoodsPO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(GoodsPO::getBrandId, brandIds);
         return list(lambdaQueryWrapper);
     }
 
@@ -115,15 +113,15 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateGoodsParams(Long goodsId, String params) {
-        LambdaUpdateWrapper<Goods> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(Goods::getId, goodsId);
-        updateWrapper.set(Goods::getParams, params);
+        LambdaUpdateWrapper<GoodsPO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(GoodsPO::getId, goodsId);
+        updateWrapper.set(GoodsPO::getParams, params);
         return this.update(updateWrapper);
     }
 
     @Override
     public final Long getGoodsCountByCategory(Long categoryId) {
-        QueryWrapper<Goods> queryWrapper = Wrappers.query();
+        QueryWrapper<GoodsPO> queryWrapper = Wrappers.query();
         queryWrapper.like("category_path", categoryId);
         queryWrapper.eq("delete_flag", false);
         return this.count(queryWrapper);
@@ -132,7 +130,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addGoods(GoodsOperationDTO goodsOperationDTO) {
-        Goods goods = new Goods(goodsOperationDTO);
+        GoodsPO goods = new GoodsPO(goodsOperationDTO);
         // 检查商品
         this.checkGoods(goods);
         // 向goods加入图片
@@ -158,7 +156,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId) {
-        Goods goods = new Goods(goodsOperationDTO);
+        GoodsPO goods = new GoodsPO(goodsOperationDTO);
         goods.setId(goodsId);
 
         // 检查商品信息
@@ -196,7 +194,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
         }
 
         // 查询商品信息
-        Goods goods = this.getById(goodsId);
+        GoodsPO goods = this.getById(goodsId);
         if (goods == null) {
             LogUtils.error("商品ID为" + goodsId + "的商品不存在");
             throw new BusinessException(ResultEnum.GOODS_NOT_EXIST);
@@ -238,12 +236,12 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     }
 
     @Override
-    public IPage<Goods> goodsQueryPage(GoodsPageQuery goodsPageQuery) {
+    public IPage<GoodsPO> goodsQueryPage(GoodsPageQuery goodsPageQuery) {
         return this.page(goodsPageQuery.buildMpPage(), goodsManager.goodsQueryWrapper(goodsPageQuery));
     }
 
     @Override
-    public List<Goods> queryListByParams(GoodsPageQuery goodsPageQuery) {
+    public List<GoodsPO> queryListByParams(GoodsPageQuery goodsPageQuery) {
         return this.list(goodsManager.goodsQueryWrapper(goodsPageQuery));
     }
 
@@ -252,7 +250,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     public boolean auditGoods(List<Long> goodsIds, GoodsAuthEnum goodsAuthEnum) {
         boolean result = false;
         for (Long goodsId : goodsIds) {
-            Goods goods = this.checkExist(goodsId);
+            GoodsPO goods = this.checkExist(goodsId);
             goods.setIsAuth(goodsAuthEnum.name());
             result = this.updateById(goods);
             goodsSkuService.updateGoodsSkuStatus(goods);
@@ -277,17 +275,17 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
             return true;
         }
 
-        LambdaUpdateWrapper<Goods> updateWrapper = this.getUpdateWrapperByStoreAuthority();
-        updateWrapper.set(Goods::getMarketEnable, goodsStatusEnum.name());
-        updateWrapper.set(Goods::getUnderMessage, underReason);
-        updateWrapper.in(Goods::getId, goodsIds);
+        LambdaUpdateWrapper<GoodsPO> updateWrapper = this.getUpdateWrapperByStoreAuthority();
+        updateWrapper.set(GoodsPO::getMarketEnable, goodsStatusEnum.name());
+        updateWrapper.set(GoodsPO::getUnderMessage, underReason);
+        updateWrapper.in(GoodsPO::getId, goodsIds);
         result = this.update(updateWrapper);
 
         // 修改规格商品
-        LambdaQueryWrapper<Goods> queryWrapper = this.getQueryWrapperByStoreAuthority();
-        queryWrapper.in(Goods::getId, goodsIds);
-        List<Goods> goodsList = this.list(queryWrapper);
-        for (Goods goods : goodsList) {
+        LambdaQueryWrapper<GoodsPO> queryWrapper = this.getQueryWrapperByStoreAuthority();
+        queryWrapper.in(GoodsPO::getId, goodsIds);
+        List<GoodsPO> goodsList = this.list(queryWrapper);
+        for (GoodsPO goods : goodsList) {
             goodsSkuService.updateGoodsSkuStatus(goods);
         }
 
@@ -311,17 +309,17 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
         // 检测管理员权限
         this.checkManagerAuthority();
 
-        LambdaUpdateWrapper<Goods> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.set(Goods::getMarketEnable, goodsStatusEnum.name());
-        updateWrapper.set(Goods::getUnderMessage, underReason);
-        updateWrapper.in(Goods::getId, goodsIds);
+        LambdaUpdateWrapper<GoodsPO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(GoodsPO::getMarketEnable, goodsStatusEnum.name());
+        updateWrapper.set(GoodsPO::getUnderMessage, underReason);
+        updateWrapper.in(GoodsPO::getId, goodsIds);
         result = this.update(updateWrapper);
 
         // 修改规格商品
-        LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.in(Goods::getId, goodsIds);
-        List<Goods> goodsList = this.list(queryWrapper);
-        for (Goods goods : goodsList) {
+        LambdaQueryWrapper<GoodsPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(GoodsPO::getId, goodsIds);
+        List<GoodsPO> goodsList = this.list(queryWrapper);
+        for (GoodsPO goods : goodsList) {
             goodsSkuService.updateGoodsSkuStatus(goods);
         }
         if (GoodsStatusEnum.DOWN.equals(goodsStatusEnum)) {
@@ -333,17 +331,17 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean deleteGoods(List<Long> goodsIds) {
-        LambdaUpdateWrapper<Goods> updateWrapper = this.getUpdateWrapperByStoreAuthority();
-        updateWrapper.set(Goods::getMarketEnable, GoodsStatusEnum.DOWN.name());
-        updateWrapper.set(Goods::getDelFlag, true);
-        updateWrapper.in(Goods::getId, goodsIds);
+        LambdaUpdateWrapper<GoodsPO> updateWrapper = this.getUpdateWrapperByStoreAuthority();
+        updateWrapper.set(GoodsPO::getMarketEnable, GoodsStatusEnum.DOWN.name());
+        updateWrapper.set(GoodsPO::getDelFlag, true);
+        updateWrapper.in(GoodsPO::getId, goodsIds);
         this.update(updateWrapper);
 
         // 修改规格商品
-        LambdaQueryWrapper<Goods> queryWrapper = this.getQueryWrapperByStoreAuthority();
-        queryWrapper.in(Goods::getId, goodsIds);
-        List<Goods> goodsList = this.list(queryWrapper);
-        for (Goods goods : goodsList) {
+        LambdaQueryWrapper<GoodsPO> queryWrapper = this.getQueryWrapperByStoreAuthority();
+        queryWrapper.in(GoodsPO::getId, goodsIds);
+        List<GoodsPO> goodsList = this.list(queryWrapper);
+        for (GoodsPO goods : goodsList) {
             // 修改SKU状态
             goodsSkuService.updateGoodsSkuStatus(goods);
         }
@@ -364,18 +362,18 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
         if (authUser != null && !freightTemplate.getStoreId().equals(authUser.getStoreId())) {
             throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
-        LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-        lambdaUpdateWrapper.set(Goods::getTemplateId, templateId);
-        lambdaUpdateWrapper.in(Goods::getId, goodsIds);
+        LambdaUpdateWrapper<GoodsPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+        lambdaUpdateWrapper.set(GoodsPO::getTemplateId, templateId);
+        lambdaUpdateWrapper.in(GoodsPO::getId, goodsIds);
 
         return this.update(lambdaUpdateWrapper);
     }
 
     @Override
     public boolean updateStock(Long goodsId, Integer quantity) {
-        LambdaUpdateWrapper<Goods> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
-        lambdaUpdateWrapper.set(Goods::getQuantity, quantity);
-        lambdaUpdateWrapper.eq(Goods::getId, goodsId);
+        LambdaUpdateWrapper<GoodsPO> lambdaUpdateWrapper = Wrappers.lambdaUpdate();
+        lambdaUpdateWrapper.set(GoodsPO::getQuantity, quantity);
+        lambdaUpdateWrapper.eq(GoodsPO::getId, goodsId);
         this.update(lambdaUpdateWrapper);
         return true;
     }
@@ -383,7 +381,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
     @Override
     public boolean updateGoodsCommentNum(Long goodsId) {
         // 获取商品信息
-        Goods goods = this.getById(goodsId);
+        GoodsPO goods = this.getById(goodsId);
         // 修改商品评价数量
         goods.setCommentNum(goods.getCommentNum() + 1);
 
@@ -401,7 +399,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
 
     @Override
     public boolean updateGoodsBuyCount(Long goodsId, int buyCount) {
-        this.update(new LambdaUpdateWrapper<Goods>().eq(Goods::getId, goodsId).set(Goods::getBuyCount, buyCount));
+        this.update(new LambdaUpdateWrapper<GoodsPO>().eq(GoodsPO::getId, goodsId).set(GoodsPO::getBuyCount, buyCount));
         return true;
     }
 
@@ -419,10 +417,10 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<Goods, Long, IGoodsMa
 
     @Override
     public Long countStoreGoodsNum(Long storeId) {
-        return this.count(new LambdaQueryWrapper<Goods>()
-                .eq(Goods::getStoreId, storeId)
+        return this.count(new LambdaQueryWrapper<GoodsPO>()
+                .eq(GoodsPO::getStoreId, storeId)
                 // .eq(Goods::getAuthFlag, GoodsAuthEnum.PASS.name())
-                .eq(Goods::getMarketEnable, GoodsStatusEnum.UPPER.name()));
+                .eq(GoodsPO::getMarketEnable, GoodsStatusEnum.UPPER.name()));
     }
 
 

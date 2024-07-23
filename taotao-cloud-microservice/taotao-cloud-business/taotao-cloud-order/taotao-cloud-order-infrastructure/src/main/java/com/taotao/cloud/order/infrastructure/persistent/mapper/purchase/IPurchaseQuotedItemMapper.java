@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.mapper.purchase;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedItem;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedItemPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /** 采购单子内容数据处理层 */
-public interface IPurchaseQuotedItemMapper extends BaseSuperMapper<PurchaseQuotedItem, Long> {}
+public interface IPurchaseQuotedItemMapper extends BaseSuperMapper<PurchaseQuotedItemPO, Long> {}

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.order.application.service.purchase.IPurchaseQuotedItemService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.purchase.IPurchaseQuotedItemMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedItem;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedItemPO;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,22 +33,22 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-04-28 08:55:42
  */
 @Service
-public class PurchaseQuotedItemServiceImpl extends ServiceImpl<IPurchaseQuotedItemMapper, PurchaseQuotedItem>
+public class PurchaseQuotedItemServiceImpl extends ServiceImpl<IPurchaseQuotedItemMapper, PurchaseQuotedItemPO>
         implements IPurchaseQuotedItemService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addPurchaseQuotedItem(String purchaseQuotedId, List<PurchaseQuotedItem> purchaseQuotedItemList) {
-        for (PurchaseQuotedItem purchaseQuotedItem : purchaseQuotedItemList) {
-            purchaseQuotedItem.setPurchaseQuotedId(purchaseQuotedId);
+    public boolean addPurchaseQuotedItem(String purchaseQuotedId, List<PurchaseQuotedItemPO> purchaseQuotedItemPOList) {
+        for (PurchaseQuotedItemPO purchaseQuotedItemPO : purchaseQuotedItemPOList) {
+            purchaseQuotedItemPO.setPurchaseQuotedId(purchaseQuotedId);
         }
 
-        return this.saveBatch(purchaseQuotedItemList);
+        return this.saveBatch(purchaseQuotedItemPOList);
     }
 
     @Override
-    public List<PurchaseQuotedItem> purchaseQuotedItemList(String purchaseQuotedId) {
-        return this.list(new LambdaQueryWrapper<PurchaseQuotedItem>()
-                .eq(PurchaseQuotedItem::getPurchaseQuotedId, purchaseQuotedId));
+    public List<PurchaseQuotedItemPO> purchaseQuotedItemList(String purchaseQuotedId) {
+        return this.list(new LambdaQueryWrapper<PurchaseQuotedItemPO>()
+                .eq(PurchaseQuotedItemPO::getPurchaseQuotedId, purchaseQuotedId));
     }
 }

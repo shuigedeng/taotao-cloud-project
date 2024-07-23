@@ -1,4 +1,4 @@
-package com.taotao.cloud.goods.biz.redisSearch;
+package com.taotao.cloud.goods.application.redisSearch;
 
 import com.redis.om.spring.search.stream.EntityStream;
 import com.redis.om.spring.search.stream.SearchStream;

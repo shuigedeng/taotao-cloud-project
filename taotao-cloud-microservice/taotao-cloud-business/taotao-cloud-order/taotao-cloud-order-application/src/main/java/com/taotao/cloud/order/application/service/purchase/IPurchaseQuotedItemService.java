@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.purchase;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedItem;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedItemPO;
 import java.util.List;
 
 /**
@@ -27,24 +27,24 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:55:32
  */
-public interface IPurchaseQuotedItemService extends IService<PurchaseQuotedItem> {
+public interface IPurchaseQuotedItemService extends IService<PurchaseQuotedItemPO> {
 
     /**
      * 添加报价单子内容
      *
      * @param PurchaseQuotedId 采购单ID
-     * @param purchaseQuotedItemList 采购单子内容列表
+     * @param purchaseQuotedItemPOList 采购单子内容列表
      * @return boolean
      * @since 2022-04-28 08:55:32
      */
-    boolean addPurchaseQuotedItem(String PurchaseQuotedId, List<PurchaseQuotedItem> purchaseQuotedItemList);
+    boolean addPurchaseQuotedItem(String PurchaseQuotedId, List<PurchaseQuotedItemPO> purchaseQuotedItemPOList);
 
     /**
      * 获取报价单子内容列表
      *
      * @param purchaseQuotedId 报价单ID
-     * @return {@link List }<{@link PurchaseQuotedItem }>
+     * @return {@link List }<{@link PurchaseQuotedItemPO }>
      * @since 2022-04-28 08:55:32
      */
-    List<PurchaseQuotedItem> purchaseQuotedItemList(String purchaseQuotedId);
+    List<PurchaseQuotedItemPO> purchaseQuotedItemList(String purchaseQuotedId);
 }

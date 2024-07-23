@@ -19,8 +19,8 @@ package com.taotao.cloud.goods.application.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.goods.application.service.ICategorySpecificationService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategorySpecificationMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecification;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Specification;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecificationPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CategorySpecificationRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICategorySpecificationRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -40,7 +40,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CategorySpecificationServiceImpl
 	extends BaseSuperServiceImpl<
-	CategorySpecification,
+	CategorySpecificationPO,
 	Long,
 	ICategorySpecificationMapper,
 	CategorySpecificationRepository,
@@ -48,13 +48,13 @@ public class CategorySpecificationServiceImpl
 	implements ICategorySpecificationService {
 
 	@Override
-	public List<Specification> getCategorySpecList(Long categoryId) {
+	public List<SpecificationPO> getCategorySpecList(Long categoryId) {
 		return im().getCategorySpecList(categoryId);
 	}
 
 	@Override
 	public boolean deleteByCategoryId(Long categoryId) {
-		return im().delete(new LambdaQueryWrapper<CategorySpecification>()
-			.eq(CategorySpecification::getCategoryId, categoryId)) > 0;
+		return im().delete(new LambdaQueryWrapper<CategorySpecificationPO>()
+			.eq(CategorySpecificationPO::getCategoryId, categoryId)) > 0;
 	}
 }

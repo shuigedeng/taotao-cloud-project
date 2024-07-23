@@ -25,7 +25,7 @@ import com.taotao.cloud.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.application.service.IMemberPointsHistoryService;
 import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IMemberPointsHistoryMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberPointsHistory;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberPointsHistoryPO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MemberPointsHistoryServiceImpl extends
-	ServiceImpl<IMemberPointsHistoryMapper, MemberPointsHistory>
+	ServiceImpl<IMemberPointsHistoryMapper, MemberPointsHistoryPO>
 	implements IMemberPointsHistoryService {
 
 	@Autowired
@@ -60,19 +60,19 @@ public class MemberPointsHistoryServiceImpl extends
 	}
 
 	@Override
-	public IPage<MemberPointsHistory> pageQuery(PageQuery pageQuery) {
-		LambdaQueryWrapper<MemberPointsHistory> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberPointsHistory::getMemberId, SecurityUtils.getUserId());
-		queryWrapper.orderByDesc(MemberPointsHistory::getCreateTime);
+	public IPage<MemberPointsHistoryPO> pageQuery(PageQuery pageQuery) {
+		LambdaQueryWrapper<MemberPointsHistoryPO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(MemberPointsHistoryPO::getMemberId, SecurityUtils.getUserId());
+		queryWrapper.orderByDesc(MemberPointsHistoryPO::getCreateTime);
 		return this.page(pageQuery.buildMpPage(), queryWrapper);
 	}
 
 	@Override
-	public IPage<MemberPointsHistory> memberPointsHistoryPageQuery(
+	public IPage<MemberPointsHistoryPO> memberPointsHistoryPageQuery(
 		PageQuery pageQuery, Long memberId, String memberName) {
-		LambdaQueryWrapper<MemberPointsHistory> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistory>()
-			.eq(memberId != null, MemberPointsHistory::getMemberId, memberId)
-			.like(memberName != null, MemberPointsHistory::getMemberName, memberName);
+		LambdaQueryWrapper<MemberPointsHistoryPO> lambdaQueryWrapper = new LambdaQueryWrapper<MemberPointsHistoryPO>()
+			.eq(memberId != null, MemberPointsHistoryPO::getMemberId, memberId)
+			.like(memberName != null, MemberPointsHistoryPO::getMemberName, memberName);
 
 		// 如果排序为空，则默认创建时间倒序
 		if (StringUtils.isNotBlank(pageQuery.getSort())) {

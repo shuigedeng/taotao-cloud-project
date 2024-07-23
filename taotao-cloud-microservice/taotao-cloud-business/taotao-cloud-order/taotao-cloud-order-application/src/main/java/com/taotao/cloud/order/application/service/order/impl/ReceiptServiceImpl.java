@@ -24,7 +24,7 @@ import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.order.application.service.order.IReceiptService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IReceiptMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Receipt;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.ReceiptPO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
  */
 @AllArgsConstructor
 @Service
-public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> implements
+public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, ReceiptPO> implements
 	IReceiptService {
 
     @Override
@@ -46,39 +46,39 @@ public class ReceiptServiceImpl extends ServiceImpl<IReceiptMapper, Receipt> imp
     }
 
     @Override
-    public Receipt getByOrderSn(String orderSn) {
-        LambdaQueryWrapper<Receipt> lambdaQueryWrapper = Wrappers.lambdaQuery();
-        lambdaQueryWrapper.eq(Receipt::getOrderSn, orderSn);
+    public ReceiptPO getByOrderSn(String orderSn) {
+        LambdaQueryWrapper<ReceiptPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+        lambdaQueryWrapper.eq(ReceiptPO::getOrderSn, orderSn);
         return this.getOne(lambdaQueryWrapper);
     }
 
     @Override
-    public Receipt getDetail(String id) {
+    public ReceiptPO getDetail(String id) {
         return this.getById(id);
     }
 
     @Override
-    public Boolean saveReceipt(Receipt receipt) {
-        LambdaQueryWrapper<Receipt> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Receipt::getReceiptTitle, receipt.getReceiptTitle());
-        queryWrapper.eq(Receipt::getMemberId, receipt.getMemberId());
-        if (receipt.getId() != null) {
-            queryWrapper.ne(Receipt::getId, receipt.getId());
+    public Boolean saveReceipt(ReceiptPO receiptPO) {
+        LambdaQueryWrapper<ReceiptPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ReceiptPO::getReceiptTitle, receiptPO.getReceiptTitle());
+        queryWrapper.eq(ReceiptPO::getMemberId, receiptPO.getMemberId());
+        if (receiptPO.getId() != null) {
+            queryWrapper.ne(ReceiptPO::getId, receiptPO.getId());
         }
         if (this.getOne(queryWrapper) == null) {
-            this.save(receipt);
+            this.save(receiptPO);
         }
         return true;
     }
 
     @Override
-    public Receipt invoicing(Long receiptId) {
+    public ReceiptPO invoicing(Long receiptId) {
         // 根据id查询发票信息
-        Receipt receipt = this.getById(receiptId);
-        if (receipt != null) {
-            receipt.setReceiptStatus(1);
-            this.saveOrUpdate(receipt);
-            return receipt;
+        ReceiptPO receiptPO = this.getById(receiptId);
+        if (receiptPO != null) {
+            receiptPO.setReceiptStatus(1);
+            this.saveOrUpdate(receiptPO);
+            return receiptPO;
         }
         throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
     }

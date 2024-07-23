@@ -7,7 +7,7 @@
         select *
         from gen_table_field
         where table_id = #{value}
-        order by sort
+        orderPO by sort
     </select>
 
     <delete id="deleteBatchTableIds">

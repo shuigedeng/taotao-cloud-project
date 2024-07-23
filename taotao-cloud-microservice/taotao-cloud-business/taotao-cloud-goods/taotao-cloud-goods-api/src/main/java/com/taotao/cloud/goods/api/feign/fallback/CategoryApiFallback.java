@@ -34,8 +34,8 @@ public class CategoryApiFallback implements FallbackFactory<CategoryApi> {
 		return new CategoryApi() {
 
 			@Override
-			public List<CategoryTreeApiResponse> firstCategory() {
-				return null;
+			public List<CategoryTreeApiResponse> firstCategory(Long id) {
+				return List.of();
 			}
 		};
 	}

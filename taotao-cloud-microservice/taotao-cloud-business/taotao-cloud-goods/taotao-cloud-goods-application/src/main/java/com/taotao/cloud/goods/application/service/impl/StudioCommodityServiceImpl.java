@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.application.service.impl;
 
 import com.taotao.cloud.goods.application.service.IStudioCommodityService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IStudioCommodityMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodityPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.StudioCommodityRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IStudioCommodityRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -34,5 +34,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudioCommodityServiceImpl
         extends BaseSuperServiceImpl<
-	StudioCommodity, Long, IStudioCommodityMapper, StudioCommodityRepository, IStudioCommodityRepository>
+	StudioCommodityPO, Long, IStudioCommodityMapper, StudioCommodityRepository, IStudioCommodityRepository>
         implements IStudioCommodityService {}

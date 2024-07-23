@@ -38,7 +38,7 @@ public class GoodsOperationAspect {
 
 	private final ApplicationEventPublisher publisher;
 
-	@After("@annotation(com.taotao.cloud.goods.biz.aop.GoodsLogPoint)")
+	@After("@annotation(com.taotao.cloud.goods.application.aop.GoodsLogPoint)")
 	public void doAfter(JoinPoint joinPoint) {
 		LogUtils.info("");
 	}

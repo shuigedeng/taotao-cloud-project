@@ -27,7 +27,7 @@ import com.taotao.cloud.goods.application.command.goods.dto.clientobject.CustomW
 import com.taotao.cloud.goods.application.convert.CustomWordsConvert;
 import com.taotao.cloud.goods.application.service.ICustomWordsService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICustomWordsMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWords;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWordsPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CustomWordsRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICustomWordsRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -46,33 +46,33 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class CustomWordsServiceImpl
-        extends BaseSuperServiceImpl<CustomWords, Long, ICustomWordsMapper, CustomWordsRepository, ICustomWordsRepository>
+        extends BaseSuperServiceImpl<CustomWordsPO, Long, ICustomWordsMapper, CustomWordsRepository, ICustomWordsRepository>
         implements ICustomWordsService {
 
     @Override
     public String deploy() {
-        LambdaQueryWrapper<CustomWords> queryWrapper =
-                new LambdaQueryWrapper<CustomWords>().eq(CustomWords::getDisabled, 1);
-        List<CustomWords> list = list(queryWrapper);
+        LambdaQueryWrapper<CustomWordsPO> queryWrapper =
+                new LambdaQueryWrapper<CustomWordsPO>().eq(CustomWordsPO::getDisabled, 1);
+        List<CustomWordsPO> list = list(queryWrapper);
 
         HttpServletResponse response = RequestUtils.getResponse();
         StringBuilder builder = new StringBuilder();
         if (list != null && !list.isEmpty()) {
             boolean flag = true;
-            for (CustomWords customWords : list) {
+            for (CustomWordsPO customWordsPO : list) {
                 if (flag) {
                     try {
                         response.setHeader(
-                                "Last-Modified", customWords.getCreateTime().toString());
+                                "Last-Modified", customWordsPO.getCreateTime().toString());
                         response.setHeader("ETag", Integer.toString(list.size()));
                     } catch (Exception e) {
                         LogUtils.error("自定义分词错误", e);
                     }
-                    builder.append(customWords.getName());
+                    builder.append(customWordsPO.getName());
                     flag = false;
                 } else {
                     builder.append("\n");
-                    builder.append(customWords.getName());
+                    builder.append(customWordsPO.getName());
                 }
             }
         }
@@ -83,9 +83,9 @@ public class CustomWordsServiceImpl
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addCustomWords(CustomWordsVO customWordsVO) {
-        LambdaQueryWrapper<CustomWords> queryWrapper =
-                new LambdaQueryWrapper<CustomWords>().eq(CustomWords::getName, customWordsVO.getName());
-        CustomWords one = this.getOne(queryWrapper, false);
+        LambdaQueryWrapper<CustomWordsPO> queryWrapper =
+                new LambdaQueryWrapper<CustomWordsPO>().eq(CustomWordsPO::getName, customWordsVO.getName());
+        CustomWordsPO one = this.getOne(queryWrapper, false);
         if (one != null && one.getDisabled().equals(1)) {
             throw new BusinessException(ResultEnum.CUSTOM_WORDS_EXIST_ERROR);
         } else if (one != null && !one.getDisabled().equals(1)) {
@@ -114,16 +114,16 @@ public class CustomWordsServiceImpl
     }
 
     @Override
-    public IPage<CustomWords> getCustomWordsByPage(String words, PageQuery pageQuery) {
-        LambdaQueryWrapper<CustomWords> queryWrapper =
-                new LambdaQueryWrapper<CustomWords>().like(CustomWords::getName, words);
+    public IPage<CustomWordsPO> getCustomWordsByPage(String words, PageQuery pageQuery) {
+        LambdaQueryWrapper<CustomWordsPO> queryWrapper =
+                new LambdaQueryWrapper<CustomWordsPO>().like(CustomWordsPO::getName, words);
         return this.page(pageQuery.buildMpPage(), queryWrapper);
     }
 
     @Override
     public boolean existWords(String words) {
-        LambdaQueryWrapper<CustomWords> queryWrapper =
-                new LambdaQueryWrapper<CustomWords>().eq(CustomWords::getName, words);
+        LambdaQueryWrapper<CustomWordsPO> queryWrapper =
+                new LambdaQueryWrapper<CustomWordsPO>().eq(CustomWordsPO::getName, words);
         long count = count(queryWrapper);
         return count > 0;
     }

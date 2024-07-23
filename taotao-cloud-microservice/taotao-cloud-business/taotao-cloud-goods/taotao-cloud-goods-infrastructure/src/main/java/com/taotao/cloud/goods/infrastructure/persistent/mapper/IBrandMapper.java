@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.Brand;
+import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
  * @version 2022.04
  * @since 2022-04-20 16:59:38
  */
-public interface IBrandMapper extends BaseSuperMapper<Brand, Long> {}
+public interface IBrandMapper extends BaseSuperMapper<BrandPO, Long> {}

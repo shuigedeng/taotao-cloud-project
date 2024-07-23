@@ -25,7 +25,7 @@ import com.taotao.cloud.goods.application.service.ICategoryParameterGroupService
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IParametersService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryParameterGroupMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroup;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroupPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CategoryParameterGroupRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICategoryParameterGroupRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -48,7 +48,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Service
 public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
-	CategoryParameterGroup,
+	CategoryParameterGroupPO,
 	Long,
 	ICategoryParameterGroupMapper,
 	CategoryParameterGroupRepository,
@@ -67,7 +67,7 @@ public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
 	@Override
 	public List<ParameterGroupVO> getCategoryParams(Long categoryId) {
 		// 根据id查询参数组
-		List<CategoryParameterGroup> groups = this.getCategoryGroup(categoryId);
+		List<CategoryParameterGroupPO> groups = this.getCategoryGroup(categoryId);
 		// 查询参数
 		List<Parameters> params = parametersService.queryParametersByCategoryId(categoryId);
 		// 组合参数vo
@@ -75,16 +75,16 @@ public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
 	}
 
 	@Override
-	public List<CategoryParameterGroup> getCategoryGroup(Long categoryId) {
-		QueryWrapper<CategoryParameterGroup> queryWrapper = new QueryWrapper<>();
+	public List<CategoryParameterGroupPO> getCategoryGroup(Long categoryId) {
+		QueryWrapper<CategoryParameterGroupPO> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("category_id", categoryId);
 		return this.list(queryWrapper);
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public boolean updateCategoryGroup(CategoryParameterGroup categoryParameterGroup) {
-		CategoryParameterGroup origin = this.getById(categoryParameterGroup.getId());
+	public boolean updateCategoryGroup(CategoryParameterGroupPO categoryParameterGroupPO) {
+		CategoryParameterGroupPO origin = this.getById(categoryParameterGroupPO.getId());
 		if (origin == null) {
 			throw new BusinessException(ResultEnum.CATEGORY_PARAMETER_NOT_EXIST);
 		}
@@ -101,20 +101,20 @@ public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
 				.filter(i -> i.getGroupId() != null && i.getGroupId().equals(origin.getId()))
 				.toList();
 			for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
-				goodsParamsDTO.setGroupName(categoryParameterGroup.getGroupName());
+				goodsParamsDTO.setGroupName(categoryParameterGroupPO.getGroupName());
 			}
 
 			this.goodsService.updateGoodsParams(
 				Long.valueOf(goods.get("id").toString()), JSONUtil.toJsonStr(goodsParamsDTOS));
 		}
 
-		return this.updateById(categoryParameterGroup);
+		return this.updateById(categoryParameterGroupPO);
 	}
 
 	@Override
 	public boolean deleteByCategoryId(Long categoryId) {
-		return this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroup>()
-			.eq(CategoryParameterGroup::getCategoryId, categoryId))
+		return this.baseMapper.delete(new LambdaUpdateWrapper<CategoryParameterGroupPO>()
+			.eq(CategoryParameterGroupPO::getCategoryId, categoryId))
 			> 0;
 	}
 
@@ -125,7 +125,7 @@ public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
 	 * @param paramList 商品参数list
 	 * @return 参数组和参数的返回值
 	 */
-	public List<ParameterGroupVO> convertParamList(List<CategoryParameterGroup> groupList, List<Parameters> paramList) {
+	public List<ParameterGroupVO> convertParamList(List<CategoryParameterGroupPO> groupList, List<Parameters> paramList) {
 		Map<Long, List<Parameters>> map = new HashMap<>(paramList.size());
 		for (Parameters param : paramList) {
 			List<Parameters> list = map.get(param.getGroupId());
@@ -137,7 +137,7 @@ public class CategoryParameterGroupServiceImpl extends BaseSuperServiceImpl<
 		}
 
 		List<ParameterGroupVO> resList = new ArrayList<>();
-		for (CategoryParameterGroup group : groupList) {
+		for (CategoryParameterGroupPO group : groupList) {
 			ParameterGroupVO groupVo = new ParameterGroupVO();
 			groupVo.setGroupId(group.getId());
 			groupVo.setGroupName(group.getGroupName());

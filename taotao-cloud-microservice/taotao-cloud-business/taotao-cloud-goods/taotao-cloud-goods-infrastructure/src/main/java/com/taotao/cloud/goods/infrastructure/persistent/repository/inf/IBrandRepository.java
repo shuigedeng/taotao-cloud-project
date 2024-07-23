@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.Brand;
+import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IBrandRepository extends JpaRepository<Brand, Long> {}
+public interface IBrandRepository extends JpaRepository<BrandPO, Long> {}

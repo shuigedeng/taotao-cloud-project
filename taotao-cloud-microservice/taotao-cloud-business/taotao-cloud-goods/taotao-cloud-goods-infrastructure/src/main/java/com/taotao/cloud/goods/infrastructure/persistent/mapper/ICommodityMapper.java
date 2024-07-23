@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Commodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -33,7 +33,7 @@ import org.apache.ibatis.annotations.Select;
  * @version 2022.04
  * @since 2022-04-27 16:55:41
  */
-public interface ICommodityMapper extends BaseSuperMapper<Commodity, Long> {
+public interface ICommodityMapper extends BaseSuperMapper<CommodityPO, Long> {
 
     /**
      * 获取直播商品ID列表
@@ -52,7 +52,7 @@ public interface ICommodityMapper extends BaseSuperMapper<Commodity, Long> {
      * 获取直播间关联直播商品列表
      *
      * @param roomId 直播间ID
-     * @return {@link List }<{@link Commodity }>
+     * @return {@link List }<{@link CommodityPO }>
      * @since 2022-04-27 16:55:41
      */
     @Select(
@@ -61,7 +61,7 @@ public interface ICommodityMapper extends BaseSuperMapper<Commodity, Long> {
 		FROM tt_commodity c INNER JOIN tt_studio_commodity sc ON sc.goods_id = c.live_goods_id
 		WHERE sc.room_id =#{roomId}
 		""")
-    List<Commodity> getCommodityByRoomId(Integer roomId);
+    List<CommodityPO> getCommodityByRoomId(Integer roomId);
 
     /**
      * 获取直播商品图片列表

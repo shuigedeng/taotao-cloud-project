@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrand;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrandPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 
@@ -27,7 +27,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:19
  */
-public interface ICategoryBrandService extends BaseSuperService<CategoryBrand, Long> {
+public interface ICategoryBrandService extends BaseSuperService<CategoryBrandPO, Long> {
 
     /**
      * 根据分类id查询品牌信息
@@ -51,10 +51,10 @@ public interface ICategoryBrandService extends BaseSuperService<CategoryBrand, L
      * 根据品牌ID获取分类品牌关联信息
      *
      * @param brandId 品牌ID
-     * @return {@link List }<{@link CategoryBrand }>
+     * @return {@link List }<{@link CategoryBrandPO }>
      * @since 2022-04-27 16:59:19
      */
-    List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId);
+    List<CategoryBrandPO> getCategoryBrandListByBrandId(List<Long> brandId);
 
     /**
      * 保存分类品牌关系

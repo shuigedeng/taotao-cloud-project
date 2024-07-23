@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsUnit;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsUnitPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 /**
@@ -26,4 +26,4 @@ import com.taotao.cloud.web.base.service.BaseSuperService;
  * @version 2022.04
  * @since 2022-04-27 17:00:52
  */
-public interface IGoodsUnitService extends BaseSuperService<GoodsUnit, Long> {}
+public interface IGoodsUnitService extends BaseSuperService<GoodsUnitPO, Long> {}

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemBack;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemBackPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -27,9 +27,9 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public class OrderItemRepository extends BaseClassSuperRepository<OrderItemBack, Long> {
+public class OrderItemRepository extends BaseClassSuperRepository<OrderItemBackPO, Long> {
 
     public OrderItemRepository(EntityManager em) {
-        super(OrderItemBack.class, em);
+        super(OrderItemBackPO.class, em);
     }
 }

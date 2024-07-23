@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf.aftersale;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -24,4 +24,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author shuigedeng
  */
-public interface IAfterSaleRepository extends JpaRepository<AfterSale, Long> {}
+public interface IAfterSaleRepository extends JpaRepository<AfterSalePO, Long> {}

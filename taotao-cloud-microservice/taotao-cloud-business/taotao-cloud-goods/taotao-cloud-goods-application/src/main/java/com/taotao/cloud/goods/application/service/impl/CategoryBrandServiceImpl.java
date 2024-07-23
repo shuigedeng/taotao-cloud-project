@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.application.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.cloud.goods.application.service.ICategoryBrandService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryBrandMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrand;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrandPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CategoryBrandRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICategoryBrandRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
@@ -38,7 +38,7 @@ import java.util.List;
  */
 @Service
 public class CategoryBrandServiceImpl extends BaseSuperServiceImpl<
-	CategoryBrand,
+	CategoryBrandPO,
 	Long,
 	ICategoryBrandMapper,
 	CategoryBrandRepository,
@@ -51,15 +51,15 @@ public class CategoryBrandServiceImpl extends BaseSuperServiceImpl<
 
 	@Override
 	public boolean deleteByCategoryId(Long categoryId) {
-		LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
-		wrapper.in(CategoryBrand::getCategoryId, categoryId);
+		LambdaQueryWrapper<CategoryBrandPO> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(CategoryBrandPO::getCategoryId, categoryId);
 		return im().delete(wrapper) > 0;
 	}
 
 	@Override
-	public List<CategoryBrand> getCategoryBrandListByBrandId(List<Long> brandId) {
-		LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<>();
-		wrapper.in(CategoryBrand::getBrandId, brandId);
+	public List<CategoryBrandPO> getCategoryBrandListByBrandId(List<Long> brandId) {
+		LambdaQueryWrapper<CategoryBrandPO> wrapper = new LambdaQueryWrapper<>();
+		wrapper.in(CategoryBrandPO::getBrandId, brandId);
 		return list(wrapper);
 	}
 
@@ -71,11 +71,11 @@ public class CategoryBrandServiceImpl extends BaseSuperServiceImpl<
 
 		// 绑定品牌信息
 		if (!brandIds.isEmpty()) {
-			List<CategoryBrand> categoryBrands = new ArrayList<>();
+			List<CategoryBrandPO> categoryBrandPOS = new ArrayList<>();
 			for (Long brandId : brandIds) {
-				categoryBrands.add(new CategoryBrand(categoryId, brandId));
+				categoryBrandPOS.add(new CategoryBrandPO(categoryId, brandId));
 			}
-			this.saveBatch(categoryBrands);
+			this.saveBatch(categoryBrandPOS);
 		}
 
 		return true;

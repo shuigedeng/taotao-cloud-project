@@ -23,7 +23,7 @@ import com.taotao.cloud.order.application.command.order.OrderComplaintOperationD
 import com.taotao.cloud.order.application.command.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.application.command.order.OrderComplaintVO;
 import com.taotao.cloud.order.application.command.order.StoreAppealDTO;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaint;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintPO;
 
 /**
  * 交易投诉业务层
@@ -32,16 +32,16 @@ import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaint;
  * @version 2022.04
  * @since 2022-04-28 08:54:36
  */
-public interface IOrderComplaintService extends IService<OrderComplaint> {
+public interface IOrderComplaintService extends IService<OrderComplaintPO> {
 
     /**
      * 分页获取交易投诉信息
      *
      * @param orderComplaintPageQuery 订单投诉页面查询
-     * @return {@link IPage }<{@link OrderComplaint }>
+     * @return {@link IPage }<{@link OrderComplaintPO }>
      * @since 2022-04-28 08:54:36
      */
-    IPage<OrderComplaint> pageQuery(OrderComplaintPageQuery orderComplaintPageQuery);
+    IPage<OrderComplaintPO> pageQuery(OrderComplaintPageQuery orderComplaintPageQuery);
 
     /**
      * 获取交易投诉详情
@@ -56,28 +56,28 @@ public interface IOrderComplaintService extends IService<OrderComplaint> {
      * 获取交易投诉详情
      *
      * @param storeId 店铺id
-     * @return {@link OrderComplaint }
+     * @return {@link OrderComplaintPO }
      * @since 2022-04-28 08:54:36
      */
-    OrderComplaint getOrderComplainByStoreId(Long storeId);
+    OrderComplaintPO getOrderComplainByStoreId(Long storeId);
 
     /**
      * 添加交易投诉
      *
      * @param orderComplaintDTO 交易投诉信息
-     * @return {@link OrderComplaint }
+     * @return {@link OrderComplaintPO }
      * @since 2022-04-28 08:54:36
      */
-    OrderComplaint addOrderComplain(OrderComplaintDTO orderComplaintDTO);
+    OrderComplaintPO addOrderComplain(OrderComplaintDTO orderComplaintDTO);
 
     /**
      * 更新交易投诉
      *
-     * @param orderComplaint 交易投诉信息
+     * @param orderComplaintPO 交易投诉信息
      * @return {@link Boolean }
      * @since 2022-04-28 08:54:36
      */
-    Boolean updateOrderComplain(OrderComplaint orderComplaint);
+    Boolean updateOrderComplain(OrderComplaintPO orderComplaintPO);
 
     /**
      * 修改交易投诉状态

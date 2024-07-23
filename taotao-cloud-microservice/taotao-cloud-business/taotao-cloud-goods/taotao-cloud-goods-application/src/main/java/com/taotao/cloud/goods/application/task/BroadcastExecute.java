@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.task;
 //
-// import com.taotao.cloud.goods.biz.service.business.ICommodityService;
+// import com.taotao.cloud.goods.application.service.business.ICommodityService;
 // import com.taotao.cloud.job.xxl.timetask.EveryHourExecute;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.stereotype.Component;

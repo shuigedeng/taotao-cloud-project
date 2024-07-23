@@ -18,12 +18,6 @@ package com.taotao.cloud.goods.facade.controller.seller;
 
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.goods.biz.model.dto.StoreGoodsLabelDTO;
-import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelInfoVO;
-import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
-import com.taotao.cloud.goods.biz.model.convert.GoodsLabelStoreConvert;
-import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
-import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

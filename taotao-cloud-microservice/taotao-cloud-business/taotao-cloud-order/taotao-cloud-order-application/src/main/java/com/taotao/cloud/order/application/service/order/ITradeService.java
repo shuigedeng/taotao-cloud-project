@@ -18,7 +18,7 @@ package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.application.command.cart.TradeDTO;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Trade;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.TradePO;
 
 /**
  * 交易业务层
@@ -27,7 +27,7 @@ import com.taotao.cloud.order.infrastructure.persistent.po.order.Trade;
  * @version 2022.04
  * @since 2022-04-28 08:54:55
  */
-public interface ITradeService extends IService<Trade> {
+public interface ITradeService extends IService<TradePO> {
 
     /**
      * 创建交易
@@ -40,19 +40,19 @@ public interface ITradeService extends IService<Trade> {
 	 * <p>7.发送交易创建消息
      *
      * @param tradeDTO 购物车视图
-     * @return {@link Trade }
+     * @return {@link TradePO }
      * @since 2022-04-28 08:54:55
      */
-    Trade createTrade(TradeDTO tradeDTO);
+    TradePO createTrade(TradeDTO tradeDTO);
 
     /**
      * 获取交易详情
      *
      * @param sn 交易编号
-     * @return {@link Trade }
+     * @return {@link TradePO }
      * @since 2022-04-28 08:54:55
      */
-    Trade getBySn(String sn);
+    TradePO getBySn(String sn);
 
     /**
      * 整笔交易付款

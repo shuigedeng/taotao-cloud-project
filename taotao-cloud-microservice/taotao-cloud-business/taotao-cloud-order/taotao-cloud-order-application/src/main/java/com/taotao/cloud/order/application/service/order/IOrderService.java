@@ -25,7 +25,7 @@ import com.taotao.cloud.order.application.command.order.OrderDetailVO;
 import com.taotao.cloud.order.application.command.order.OrderPageQuery;
 import com.taotao.cloud.order.application.command.order.OrderSimpleVO;
 import com.taotao.cloud.order.application.command.order.PaymentLogVO;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Order;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderPO;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,7 +39,7 @@ import zipkin2.storage.Traces;
  * @version 2022.04
  * @since 2022-04-28 08:54:47
  */
-public interface IOrderService extends IService<Order> {
+public interface IOrderService extends IService<OrderPO> {
 
     /**
      * 系统取消订单
@@ -54,10 +54,10 @@ public interface IOrderService extends IService<Order> {
      * 根据sn查询
      *
      * @param orderSn 订单编号
-     * @return {@link Order }
+     * @return {@link OrderPO }
      * @since 2022-04-28 08:54:47
      */
-    Order getBySn(String orderSn);
+    OrderPO getBySn(String orderSn);
 
     /**
      * 订单查询
@@ -72,10 +72,10 @@ public interface IOrderService extends IService<Order> {
      * 订单信息
      *
      * @param orderPageQuery 查询参数
-     * @return {@link List }<{@link Order }>
+     * @return {@link List }<{@link OrderPO }>
      * @since 2022-04-28 08:54:47
      */
-    List<Order> queryListByParams(OrderPageQuery orderPageQuery);
+    List<OrderPO> queryListByParams(OrderPageQuery orderPageQuery);
 
     /**
      * 根据促销查询订单
@@ -84,10 +84,10 @@ public interface IOrderService extends IService<Order> {
      * @param payStatus 支付状态
      * @param parentOrderSn 依赖订单编号
      * @param orderSn 订单编号
-     * @return {@link List }<{@link Order }>
+     * @return {@link List }<{@link OrderPO }>
      * @since 2022-04-28 08:54:47
      */
-    List<Order> queryListByPromotion(String orderPromotionType, String payStatus, String parentOrderSn, String orderSn);
+    List<OrderPO> queryListByPromotion(String orderPromotionType, String payStatus, String parentOrderSn, String orderSn);
 
     /**
      * 根据促销查询订单
@@ -105,10 +105,10 @@ public interface IOrderService extends IService<Order> {
      * 父级拼团订单分组
      *
      * @param pintuanId 拼团id
-     * @return {@link List }<{@link Order }>
+     * @return {@link List }<{@link OrderPO }>
      * @since 2022-04-28 08:54:47
      */
-    List<Order> queryListByPromotion(Long pintuanId);
+    List<OrderPO> queryListByPromotion(Long pintuanId);
 
     /**
      * 查询导出订单列表
@@ -161,7 +161,7 @@ public interface IOrderService extends IService<Order> {
      * @param reason 取消理由
      * @return 订单
      */
-    Order cancel(String orderSn, String reason);
+    OrderPO cancel(String orderSn, String reason);
 
     /**
      * 发货信息修改 日志功能内部实现
@@ -170,7 +170,7 @@ public interface IOrderService extends IService<Order> {
      * @param memberAddressDTO 收货地址信息
      * @return 订单
      */
-    Order updateConsignee(String orderSn, MemberAddressDTO memberAddressDTO);
+    OrderPO updateConsignee(String orderSn, MemberAddressDTO memberAddressDTO);
 
     /**
      * 订单发货
@@ -180,7 +180,7 @@ public interface IOrderService extends IService<Order> {
      * @param logisticsId 物流公司
      * @return 订单
      */
-    Order delivery(String orderSn, String invoiceNumber, Long logisticsId);
+    OrderPO delivery(String orderSn, String invoiceNumber, Long logisticsId);
 
     /**
      * 获取物流踪迹
@@ -197,7 +197,7 @@ public interface IOrderService extends IService<Order> {
      * @param orderSn 订单编号
      * @return 订单
      */
-    Order take(String orderSn, String verificationCode);
+    OrderPO take(String orderSn, String verificationCode);
 
     /**
      * 根据核验码获取订单信息
@@ -205,7 +205,7 @@ public interface IOrderService extends IService<Order> {
      * @param verificationCode 验证码
      * @return 订单
      */
-    Order getOrderByVerificationCode(String verificationCode);
+    OrderPO getOrderByVerificationCode(String verificationCode);
 
     /**
      * 订单完成
@@ -227,7 +227,7 @@ public interface IOrderService extends IService<Order> {
      * @param tradeSn 交易编号
      * @return 订单列表
      */
-    List<Order> getByTradeSn(String tradeSn);
+    List<OrderPO> getByTradeSn(String tradeSn);
 
     /**
      * 发送更新订单状态的信息

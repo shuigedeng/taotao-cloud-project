@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf.purchase;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /** 采购报价数据处理层 */
-public interface IPurchaseQuotedRepository extends JpaRepository<PurchaseQuoted, Long> {}
+public interface IPurchaseQuotedRepository extends JpaRepository<PurchaseQuotedPO, Long> {}

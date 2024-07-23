@@ -16,14 +16,14 @@
 
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.order;
 
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Trade;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.TradePO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 交易数据处理层 */
-public class TradeRepository extends BaseClassSuperRepository<Trade, Long> {
+public class TradeRepository extends BaseClassSuperRepository<TradePO, Long> {
 
     public TradeRepository(EntityManager em) {
-        super(Trade.class, em);
+        super(TradePO.class, em);
     }
 }

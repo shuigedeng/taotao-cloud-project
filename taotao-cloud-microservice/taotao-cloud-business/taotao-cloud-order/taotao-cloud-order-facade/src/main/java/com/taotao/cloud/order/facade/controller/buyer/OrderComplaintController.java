@@ -27,8 +27,8 @@ import com.taotao.cloud.order.application.command.order.OrderComplaintPageQuery;
 import com.taotao.cloud.order.application.command.order.OrderComplaintVO;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintService;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaint;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintCommunication;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintPO;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintCommunicationPO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.utils.OperationalJudgment;
@@ -86,7 +86,7 @@ public class OrderComplaintController {
 	@GetMapping("/page")
 	public Result<PageResult<OrderComplaintBaseVO>> get(
 		@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
-		IPage<OrderComplaint> orderComplainByPage = orderComplaintService.pageQuery(
+		IPage<OrderComplaintPO> orderComplainByPage = orderComplaintService.pageQuery(
 			orderComplaintPageQuery);
 		return Result.success(
 			MpUtils.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
@@ -96,7 +96,7 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<OrderComplaint> add(@Valid OrderComplaintDTO orderComplaintDTO) {
+	public Result<OrderComplaintPO> add(@Valid OrderComplaintDTO orderComplaintDTO) {
 		return Result.success(orderComplaintService.addOrderComplain(orderComplaintDTO));
 	}
 
@@ -108,7 +108,7 @@ public class OrderComplaintController {
 		@PathVariable("complainId") Long complainId,
 		@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
 		SecurityUser user = SecurityUtils.getCurrentUser();
-		OrderComplaintCommunication orderComplaintCommunication = OrderComplaintCommunication.builder()
+		OrderComplaintCommunicationPO orderComplaintCommunicationPO = OrderComplaintCommunicationPO.builder()
 			.complainId(complainId)
 			.content(orderComplaintCommunicationDTO.content())
 			.owner(CommunicationOwnerEnum.BUYER.name())
@@ -117,7 +117,7 @@ public class OrderComplaintController {
 			.build();
 
 		return Result.success(
-			orderComplaintCommunicationService.addCommunication(orderComplaintCommunication));
+			orderComplaintCommunicationService.addCommunication(orderComplaintCommunicationPO));
 	}
 
 	@Operation(summary = "取消售后", description = "取消售后")

@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.member.application.service.IMemberBrowseService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IFootprintMapper;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberBrowse;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberBrowsePO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -39,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, MemberBrowse>
+public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, MemberBrowsePO>
 	implements IMemberBrowseService {
 
 	/**
@@ -49,50 +49,50 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 	private IFeignEsGoodsIndexApi esGoodsIndexApi;
 
 	@Override
-	public MemberBrowse saveFootprint(MemberBrowse memberBrowse) {
-		LambdaQueryWrapper<MemberBrowse> queryWrapper = Wrappers.lambdaQuery();
-		queryWrapper.eq(MemberBrowse::getMemberId, memberBrowse.getMemberId());
-		queryWrapper.eq(MemberBrowse::getGoodsId, memberBrowse.getGoodsId());
+	public MemberBrowsePO saveFootprint(MemberBrowsePO memberBrowsePO) {
+		LambdaQueryWrapper<MemberBrowsePO> queryWrapper = Wrappers.lambdaQuery();
+		queryWrapper.eq(MemberBrowsePO::getMemberId, memberBrowsePO.getMemberId());
+		queryWrapper.eq(MemberBrowsePO::getGoodsId, memberBrowsePO.getGoodsId());
 		// 如果已存在某商品记录，则更新其修改时间
 		// 如果不存在则添加记录
-		List<MemberBrowse> oldPrints = list(queryWrapper);
+		List<MemberBrowsePO> oldPrints = list(queryWrapper);
 		if (oldPrints != null && !oldPrints.isEmpty()) {
-			MemberBrowse oldPrint = oldPrints.get(0);
-			oldPrint.setSkuId(memberBrowse.getSkuId());
+			MemberBrowsePO oldPrint = oldPrints.get(0);
+			oldPrint.setSkuId(memberBrowsePO.getSkuId());
 			this.updateById(oldPrint);
 			return oldPrint;
 		}
 		else {
-			memberBrowse.setCreateTime(LocalDateTime.now());
-			this.save(memberBrowse);
+			memberBrowsePO.setCreateTime(LocalDateTime.now());
+			this.save(memberBrowsePO);
 			// 删除超过100条后的记录
-			this.baseMapper.deleteLastFootPrint(memberBrowse.getMemberId());
-			return memberBrowse;
+			this.baseMapper.deleteLastFootPrint(memberBrowsePO.getMemberId());
+			return memberBrowsePO;
 		}
 	}
 
 	@Override
 	public Boolean clean() {
-		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
+		LambdaQueryWrapper<MemberBrowsePO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		lambdaQueryWrapper.eq(MemberBrowsePO::getMemberId, SecurityUtils.getUserId());
 		return this.remove(lambdaQueryWrapper);
 	}
 
 	@Override
 	public Boolean deleteByIds(List<Long> ids) {
-		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
-		lambdaQueryWrapper.in(MemberBrowse::getGoodsId, ids);
+		LambdaQueryWrapper<MemberBrowsePO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		lambdaQueryWrapper.eq(MemberBrowsePO::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.in(MemberBrowsePO::getGoodsId, ids);
 		this.remove(lambdaQueryWrapper);
 		return true;
 	}
 
 	@Override
 	public List<EsGoodsIndexVO> footPrintPage(PageQuery PageQuery) {
-		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
-		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
-		lambdaQueryWrapper.orderByDesc(MemberBrowse::getUpdateTime);
+		LambdaQueryWrapper<MemberBrowsePO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		lambdaQueryWrapper.eq(MemberBrowsePO::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.eq(MemberBrowsePO::getDelFlag, false);
+		lambdaQueryWrapper.orderByDesc(MemberBrowsePO::getUpdateTime);
 		List<String> skuIdList = this.baseMapper.footprintSkuIdList(PageQuery.buildMpPage(),
 			lambdaQueryWrapper);
 		if (!skuIdList.isEmpty()) {
@@ -106,9 +106,9 @@ public class MemberBrowseServiceImpl extends ServiceImpl<IFootprintMapper, Membe
 
 	@Override
 	public Long getFootprintNum() {
-		LambdaQueryWrapper<MemberBrowse> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(MemberBrowse::getMemberId, SecurityUtils.getUserId());
-		lambdaQueryWrapper.eq(MemberBrowse::getDelFlag, false);
+		LambdaQueryWrapper<MemberBrowsePO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		lambdaQueryWrapper.eq(MemberBrowsePO::getMemberId, SecurityUtils.getUserId());
+		lambdaQueryWrapper.eq(MemberBrowsePO::getDelFlag, false);
 		return this.count(lambdaQueryWrapper);
 	}
 }

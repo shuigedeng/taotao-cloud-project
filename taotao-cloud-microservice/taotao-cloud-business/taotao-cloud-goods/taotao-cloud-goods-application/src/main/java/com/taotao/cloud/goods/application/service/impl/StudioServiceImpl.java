@@ -30,10 +30,10 @@ import com.taotao.cloud.goods.application.service.IStudioCommodityService;
 import com.taotao.cloud.goods.application.service.IStudioService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICommodityMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IStudioMapper;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Commodity;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Goods;
-import com.taotao.cloud.goods.infrastructure.persistent.po.Studio;
-import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodity;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StudioPO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodityPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.StudioRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IStudioRepository;
 import com.taotao.cloud.goods.infrastructure.util.WechatLivePlayerUtil;
@@ -63,7 +63,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class StudioServiceImpl
-        extends BaseSuperServiceImpl<Studio, Long, IStudioMapper, StudioRepository, IStudioRepository>
+        extends BaseSuperServiceImpl<StudioPO, Long, IStudioMapper, StudioRepository, IStudioRepository>
         implements IStudioService {
 
     @Autowired
@@ -86,34 +86,36 @@ public class StudioServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean create(Studio studio) {
-        studio.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
+    public boolean create(StudioPO studioPO) {
+        studioPO.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
         // 创建小程序直播
-        Map<String, String> roomMap = wechatLivePlayerUtil.create(studio);
-        studio.setRoomId(Convert.toInt(roomMap.get("roomId")));
-        studio.setQrCodeUrl(roomMap.get("qrcodeUrl"));
-        studio.setStatus(StudioStatusEnum.NEW.name());
+        Map<String, String> roomMap = wechatLivePlayerUtil.create(studioPO);
+        studioPO.setRoomId(Convert.toInt(roomMap.get("roomId")));
+        studioPO.setQrCodeUrl(roomMap.get("qrcodeUrl"));
+        studioPO.setStatus(StudioStatusEnum.NEW.name());
         // 直播间添加成功发送直播间开启、关闭延时任务
-        if (this.save(studio)) {
+        if (this.save(studioPO)) {
             // 直播开启延时任务
-            BroadcastMessage broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.START.name());
+            BroadcastMessage broadcastMessage = new BroadcastMessage(studioPO.getId(), StudioStatusEnum.START.name());
             TimeTriggerMsg timeTriggerMsg = new TimeTriggerMsg(
                     TimeExecuteConstant.BROADCAST_EXECUTOR,
-                    Long.parseLong(studio.getStartTime()) * 1000L,
+                    Long.parseLong(studioPO.getStartTime()) * 1000L,
                     broadcastMessage,
-                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(studio.getId())),
+                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(
+						studioPO.getId())),
                     rocketmqCustomProperties.getPromotionTopic());
 
             // 发送促销活动开始的延时任务
             this.timeTrigger.addDelay(timeTriggerMsg);
 
             // 直播结束延时任务
-            broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.END.name());
+            broadcastMessage = new BroadcastMessage(studioPO.getId(), StudioStatusEnum.END.name());
             timeTriggerMsg = new TimeTriggerMsg(
                     TimeExecuteConstant.BROADCAST_EXECUTOR,
-                    Long.parseLong(studio.getEndTime()) * 1000L,
+                    Long.parseLong(studioPO.getEndTime()) * 1000L,
                     broadcastMessage,
-                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(studio.getId())),
+                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(
+						studioPO.getId())),
                     rocketmqCustomProperties.getPromotionTopic());
 
             // 发送促销活动开始的延时任务
@@ -124,31 +126,33 @@ public class StudioServiceImpl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean edit(Studio studio) {
-        Studio oldStudio = this.getById(studio.getId());
-        wechatLivePlayerUtil.editRoom(studio);
-        if (this.updateById(studio)) {
+    public boolean edit(StudioPO studioPO) {
+        StudioPO oldStudioPO = this.getById(studioPO.getId());
+        wechatLivePlayerUtil.editRoom(studioPO);
+        if (this.updateById(studioPO)) {
             // 发送更新延时任务
             // 直播间开始
-            BroadcastMessage broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.START.name());
+            BroadcastMessage broadcastMessage = new BroadcastMessage(studioPO.getId(), StudioStatusEnum.START.name());
             this.timeTrigger.edit(
                     TimeExecuteConstant.BROADCAST_EXECUTOR,
                     broadcastMessage,
-                    Long.parseLong(oldStudio.getStartTime()) * 1000L,
-                    Long.parseLong(studio.getStartTime()) * 1000L,
-                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(studio.getId())),
-                    DateUtils.getDelayTime(Long.parseLong(studio.getStartTime())),
+                    Long.parseLong(oldStudioPO.getStartTime()) * 1000L,
+                    Long.parseLong(studioPO.getStartTime()) * 1000L,
+                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(
+						studioPO.getId())),
+                    DateUtils.getDelayTime(Long.parseLong(studioPO.getStartTime())),
                     rocketmqCustomProperties.getPromotionTopic());
 
             // 直播间结束
-            broadcastMessage = new BroadcastMessage(studio.getId(), StudioStatusEnum.START.name());
+            broadcastMessage = new BroadcastMessage(studioPO.getId(), StudioStatusEnum.START.name());
             this.timeTrigger.edit(
                     TimeExecuteConstant.BROADCAST_EXECUTOR,
                     broadcastMessage,
-                    Long.parseLong(oldStudio.getEndTime()) * 1000L,
-                    Long.parseLong(studio.getEndTime()) * 1000L,
-                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(studio.getId())),
-                    DateUtils.getDelayTime(Long.parseLong(studio.getEndTime())),
+                    Long.parseLong(oldStudioPO.getEndTime()) * 1000L,
+                    Long.parseLong(studioPO.getEndTime()) * 1000L,
+                    DelayQueueTools.wrapperUniqueKey(DelayTypeEnums.BROADCAST, String.valueOf(
+						studioPO.getId())),
+                    DateUtils.getDelayTime(Long.parseLong(studioPO.getEndTime())),
                     rocketmqCustomProperties.getPromotionTopic());
         }
         return true;
@@ -157,25 +161,25 @@ public class StudioServiceImpl
     @Override
     public StudioCommodityVO getStudioVO(Long id) {
         StudioCommodityVO studioCommodityVO = new StudioCommodityVO();
-        Studio studio = this.getById(id);
+        StudioPO studioPO = this.getById(id);
         // 获取直播间信息
-        BeanUtils.copyProperties(studio, studioCommodityVO);
+        BeanUtils.copyProperties(studioPO, studioCommodityVO);
         // 获取直播间商品信息
-        List<Commodity> commodities = commodityMapper.getCommodityByRoomId(studioCommodityVO.getRoomId());
+        List<CommodityPO> commodities = commodityMapper.getCommodityByRoomId(studioCommodityVO.getRoomId());
         studioCommodityVO.setCommodityList(OrikaUtils.converts(commodities, CommodityVO.class));
         return studioCommodityVO;
     }
 
     @Override
     public String getLiveInfo(Integer roomId) {
-        Studio studio = this.getByRoomId(roomId);
+        StudioPO studioPO = this.getByRoomId(roomId);
         // 获取直播间并判断回放内容是否为空，如果为空则获取直播间回放并保存
-        if (studio.getMediaUrl() != null) {
-            return studio.getMediaUrl();
+        if (studioPO.getMediaUrl() != null) {
+            return studioPO.getMediaUrl();
         } else {
             String mediaUrl = wechatLivePlayerUtil.getLiveInfo(roomId);
-            studio.setMediaUrl(mediaUrl);
-            this.save(studio);
+            studioPO.setMediaUrl(mediaUrl);
+            this.save(studioPO);
             return mediaUrl;
         }
     }
@@ -184,15 +188,15 @@ public class StudioServiceImpl
     @Transactional(rollbackFor = Exception.class)
     public boolean push(Integer roomId, Long goodsId, Long storeId) {
         // 判断直播间是否已添加商品
-        if (studioCommodityService.getOne(new LambdaQueryWrapper<StudioCommodity>()
-                        .eq(StudioCommodity::getRoomId, roomId)
-                        .eq(StudioCommodity::getGoodsId, goodsId))
+        if (studioCommodityService.getOne(new LambdaQueryWrapper<StudioCommodityPO>()
+                        .eq(StudioCommodityPO::getRoomId, roomId)
+                        .eq(StudioCommodityPO::getGoodsId, goodsId))
                 != null) {
             throw new BusinessException(ResultEnum.STODIO_GOODS_EXIST_ERROR);
         }
 
-        Goods goods = goodsService.getOne(
-                new LambdaQueryWrapper<Goods>().eq(Goods::getId, goodsId).eq(Goods::getStoreId, storeId));
+        GoodsPO goods = goodsService.getOne(
+                new LambdaQueryWrapper<GoodsPO>().eq(GoodsPO::getId, goodsId).eq(GoodsPO::getStoreId, storeId));
         if (goods == null) {
             throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
@@ -201,13 +205,14 @@ public class StudioServiceImpl
         if (boolean.TRUE.equals(wechatLivePlayerUtil.pushGoods(roomId, goodsId))) {
             // studioCommodityService.save(new StudioCommodity(roomId, goodsId));
             // 添加直播间商品数量
-            Studio studio = this.getByRoomId(roomId);
-            studio.setRoomGoodsNum(studio.getRoomGoodsNum() != null ? studio.getRoomGoodsNum() + 1 : 1);
+            StudioPO studioPO = this.getByRoomId(roomId);
+            studioPO.setRoomGoodsNum(
+				studioPO.getRoomGoodsNum() != null ? studioPO.getRoomGoodsNum() + 1 : 1);
             // 设置直播间默认的商品（前台展示）只展示两个
-            if (studio.getRoomGoodsNum() < 3) {
-                studio.setRoomGoodsList(JSONUtil.toJsonStr(commodityMapper.getSimpleCommodityByRoomId(roomId)));
+            if (studioPO.getRoomGoodsNum() < 3) {
+                studioPO.setRoomGoodsList(JSONUtil.toJsonStr(commodityMapper.getSimpleCommodityByRoomId(roomId)));
             }
-            return this.updateById(studio);
+            return this.updateById(studioPO);
         }
         return false;
     }
@@ -215,30 +220,30 @@ public class StudioServiceImpl
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean goodsDeleteInRoom(Integer roomId, Long goodsId, Long storeId) {
-        Goods goods = goodsService.getOne(
-                new LambdaQueryWrapper<Goods>().eq(Goods::getId, goodsId).eq(Goods::getStoreId, storeId));
+        GoodsPO goods = goodsService.getOne(
+                new LambdaQueryWrapper<GoodsPO>().eq(GoodsPO::getId, goodsId).eq(GoodsPO::getStoreId, storeId));
         if (goods == null) {
             throw new BusinessException(ResultEnum.USER_AUTHORITY_ERROR);
         }
         // 调用微信接口删除直播间商品并进行记录
         if (boolean.TRUE.equals(wechatLivePlayerUtil.goodsDeleteInRoom(roomId, goodsId))) {
             studioCommodityService.remove(
-                    new QueryWrapper<StudioCommodity>().eq("room_id", roomId).eq("goods_id", goodsId));
+                    new QueryWrapper<StudioCommodityPO>().eq("room_id", roomId).eq("goods_id", goodsId));
             // 减少直播间商品数量
-            Studio studio = this.getByRoomId(roomId);
-            studio.setRoomGoodsNum(studio.getRoomGoodsNum() - 1);
+            StudioPO studioPO = this.getByRoomId(roomId);
+            studioPO.setRoomGoodsNum(studioPO.getRoomGoodsNum() - 1);
             // 设置直播间默认的商品（前台展示）只展示两个
-            if (studio.getRoomGoodsNum() < 3) {
-                studio.setRoomGoodsList(JSONUtil.toJsonStr(commodityMapper.getSimpleCommodityByRoomId(roomId)));
+            if (studioPO.getRoomGoodsNum() < 3) {
+                studioPO.setRoomGoodsList(JSONUtil.toJsonStr(commodityMapper.getSimpleCommodityByRoomId(roomId)));
             }
-            return this.updateById(studio);
+            return this.updateById(studioPO);
         }
         return false;
     }
 
     @Override
-    public IPage<Studio> studioList(PageQuery PageQuery, Integer recommend, String status) {
-        QueryWrapper<Studio> queryWrapper = new QueryWrapper<Studio>()
+    public IPage<StudioPO> studioList(PageQuery PageQuery, Integer recommend, String status) {
+        QueryWrapper<StudioPO> queryWrapper = new QueryWrapper<StudioPO>()
                 .eq(recommend != null, "recommend", true)
                 .eq(status != null, "status", status)
                 .orderByDesc("create_time");
@@ -251,9 +256,9 @@ public class StudioServiceImpl
 
     @Override
     public boolean updateStudioStatus(BroadcastMessage broadcastMessage) {
-        return this.update(new LambdaUpdateWrapper<Studio>()
-                .eq(Studio::getId, broadcastMessage.getStudioId())
-                .set(Studio::getStatus, broadcastMessage.getStatus()));
+        return this.update(new LambdaUpdateWrapper<StudioPO>()
+                .eq(StudioPO::getId, broadcastMessage.getStudioId())
+                .set(StudioPO::getStatus, broadcastMessage.getStatus()));
     }
 
     /**
@@ -262,7 +267,7 @@ public class StudioServiceImpl
      * @param roomId 直播间ID
      * @return 直播间
      */
-    private Studio getByRoomId(Integer roomId) {
-        return this.getOne(new LambdaQueryWrapper<Studio>().eq(Studio::getRoomId, roomId));
+    private StudioPO getByRoomId(Integer roomId) {
+        return this.getOne(new LambdaQueryWrapper<StudioPO>().eq(StudioPO::getRoomId, roomId));
     }
 }

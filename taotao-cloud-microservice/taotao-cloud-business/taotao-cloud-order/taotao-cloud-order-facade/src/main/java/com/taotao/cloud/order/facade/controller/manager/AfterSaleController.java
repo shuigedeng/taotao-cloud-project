@@ -23,7 +23,7 @@ import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
 import com.taotao.cloud.order.application.command.aftersale.AfterSaleVO;
 import com.taotao.cloud.order.application.converter.AfterSaleConvert;
 import com.taotao.cloud.order.application.service.aftersale.IAfterSaleService;
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -64,7 +64,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
 	public Result<PageResult<AfterSaleVO>> pageQuery(AfterSalePageQuery searchParams) {
-		IPage<AfterSale> page = afterSaleService.pageQuery(searchParams);
+		IPage<AfterSalePO> page = afterSaleService.pageQuery(searchParams);
 		return Result.success(MpUtils.convertMybatisPage(page, AfterSaleVO.class));
 	}
 
@@ -73,7 +73,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/exportAfterSaleOrder")
 	public Result<List<AfterSaleVO>> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery) {
-		List<AfterSale> afterSales = afterSaleService.exportAfterSaleOrder(afterSalePageQuery);
+		List<AfterSalePO> afterSales = afterSaleService.exportAfterSaleOrder(afterSalePageQuery);
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSales));
 	}
 
@@ -82,7 +82,7 @@ public class AfterSaleController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
 	public Result<AfterSaleVO> get(@NotNull(message = "售后单号") @PathVariable("sn") String sn) {
-		AfterSale afterSale = afterSaleService.getAfterSaleBySn(sn);
+		AfterSalePO afterSale = afterSaleService.getAfterSaleBySn(sn);
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
 	}
 

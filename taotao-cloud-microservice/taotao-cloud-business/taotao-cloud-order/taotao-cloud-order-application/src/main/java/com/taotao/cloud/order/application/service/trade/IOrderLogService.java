@@ -19,7 +19,7 @@ package com.taotao.cloud.order.application.service.trade;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.application.command.order.OrderLogPageQuery;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
 import java.util.List;
 
 /**
@@ -29,16 +29,16 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:55:50
  */
-public interface IOrderLogService extends IService<OrderLog> {
+public interface IOrderLogService extends IService<OrderLogPO> {
 
     /**
      * 根据订单编号获取订单日志列表
      *
      * @param orderSn 订单编号
-     * @return {@link List }<{@link OrderLog }>
+     * @return {@link List }<{@link OrderLogPO }>
      * @since 2022-04-28 08:55:50
      */
-    List<OrderLog> getOrderLog(String orderSn);
+    List<OrderLogPO> getOrderLog(String orderSn);
 
-    IPage<OrderLog> pageQuery(OrderLogPageQuery orderLogPageQuery);
+    IPage<OrderLogPO> pageQuery(OrderLogPageQuery orderLogPageQuery);
 }

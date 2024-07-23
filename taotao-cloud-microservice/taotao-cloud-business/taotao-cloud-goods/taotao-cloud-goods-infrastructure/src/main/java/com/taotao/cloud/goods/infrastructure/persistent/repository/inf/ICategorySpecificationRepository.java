@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecification;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecificationPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICategorySpecificationRepository extends JpaRepository<CategorySpecification, Long> {}
+public interface ICategorySpecificationRepository extends JpaRepository<CategorySpecificationPO, Long> {}

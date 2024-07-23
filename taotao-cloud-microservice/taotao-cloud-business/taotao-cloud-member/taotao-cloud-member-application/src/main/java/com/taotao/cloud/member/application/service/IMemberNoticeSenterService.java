@@ -17,16 +17,16 @@
 package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeSenter;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberNoticeSenterPO;
 
 /** 会员消息业务层 */
-public interface IMemberNoticeSenterService extends IService<MemberNoticeSenter> {
+public interface IMemberNoticeSenterService extends IService<MemberNoticeSenterPO> {
 
     /**
      * 自定义保存方法
      *
-     * @param memberNoticeSenter 会员消息
+     * @param memberNoticeSenterPO 会员消息
      * @return 操作状态
      */
-    boolean customSave(MemberNoticeSenter memberNoticeSenter);
+    boolean customSave(MemberNoticeSenterPO memberNoticeSenterPO);
 }

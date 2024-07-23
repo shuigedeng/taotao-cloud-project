@@ -18,10 +18,10 @@ package com.taotao.cloud.member.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberReceipt;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberReceiptPO;
 
 /** 会员发票业务层 */
-public interface IMemberReceiptService extends IService<MemberReceipt> {
+public interface IMemberReceiptService extends IService<MemberReceiptPO> {
 
     /**
      * 查询会员发票列表
@@ -29,7 +29,7 @@ public interface IMemberReceiptService extends IService<MemberReceipt> {
      * @param memberReceiptPageQuery 会员发票信息
      * @return 会员发票分页
      */
-    IPage<MemberReceipt> getPage(MemberReceiptPageQuery memberReceiptPageQuery);
+    IPage<MemberReceiptPO> getPage(MemberReceiptPageQuery memberReceiptPageQuery);
 
     /**
      * 添加会员发票信息

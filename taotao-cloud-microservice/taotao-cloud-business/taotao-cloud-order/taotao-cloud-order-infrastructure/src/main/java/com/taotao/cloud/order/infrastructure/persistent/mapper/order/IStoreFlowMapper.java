@@ -18,7 +18,7 @@ package com.taotao.cloud.order.infrastructure.persistent.mapper.order;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlow;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlowPO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
 import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
@@ -27,7 +27,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /** 商家订单流水数据处理层 */
-public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlow, Long> {
+public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlowPO, Long> {
 
     /**
      * 获取结算单的入账流水
@@ -36,7 +36,7 @@ public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlow, Long> {
      * @return 入账流水
      */
     @Select("SELECT * FROM tt_store_flow ${ew.customSqlSegment}")
-    List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(@Param(Constants.WRAPPER) Wrapper<StoreFlow> queryWrapper);
+    List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(@Param(Constants.WRAPPER) Wrapper<StoreFlowPO> queryWrapper);
 
     /**
      * 获取结算单的退款流水
@@ -46,5 +46,5 @@ public interface IStoreFlowMapper extends BaseSuperMapper<StoreFlow, Long> {
      */
     @Select("SELECT * FROM tt_store_flow ${ew.customSqlSegment}")
     List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(
-            @Param(Constants.WRAPPER) Wrapper<StoreFlow> queryWrapper);
+            @Param(Constants.WRAPPER) Wrapper<StoreFlowPO> queryWrapper);
 }

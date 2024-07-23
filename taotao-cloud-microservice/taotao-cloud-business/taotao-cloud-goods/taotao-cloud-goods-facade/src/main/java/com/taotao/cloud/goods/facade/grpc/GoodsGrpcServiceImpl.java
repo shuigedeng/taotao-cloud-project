@@ -7,7 +7,9 @@ import com.taotao.cloud.goods.api.grpc.GoodsGrpcServiceGrpc.GoodsGrpcServiceImpl
 import com.taotao.cloud.goods.api.grpc.FirstCategoryRequest;
 import com.taotao.cloud.goods.api.grpc.FirstCategoryResponse;
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 
+@GRpcService
 public class GoodsGrpcServiceImpl extends GoodsGrpcServiceImplBase {
 
 	@Override

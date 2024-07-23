@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
-import com.taotao.cloud.goods.infrastructure.persistent.po.Parameters;
+import com.taotao.cloud.goods.infrastructure.persistent.po.ParametersPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IParametersRepository extends JpaRepository<Parameters, Long> {}
+public interface IParametersRepository extends JpaRepository<ParametersPO, Long> {}

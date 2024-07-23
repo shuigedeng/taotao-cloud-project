@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.command.draft.dto.clientobject;
 
-import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.application.model.dto.GoodsParamsDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.util.List;

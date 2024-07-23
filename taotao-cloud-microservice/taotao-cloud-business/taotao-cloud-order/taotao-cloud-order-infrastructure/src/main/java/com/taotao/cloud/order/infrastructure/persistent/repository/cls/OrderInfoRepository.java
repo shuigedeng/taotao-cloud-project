@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls;
 
 import com.taotao.cloud.order.infrastructure.entity.QOrderInfo;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderInfo;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderInfoPO;
 import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -28,21 +28,21 @@ import org.springframework.stereotype.Repository;
  * @since 2020/10/22 12:46
  */
 @Repository
-public class OrderInfoRepository extends BaseClassSuperRepository<OrderInfo, Long> {
+public class OrderInfoRepository extends BaseClassSuperRepository<OrderInfoPO, Long> {
 
     public OrderInfoRepository(EntityManager em) {
-        super(OrderInfo.class, em);
+        super(OrderInfoPO.class, em);
     }
 
     public static final QOrderInfo ORDER_INFO = QOrderInfo.orderInfo;
 
-    public OrderInfo findOrderInfoById(Long id) {
-        OrderInfo fetch = jpaQueryFactory()
+    public OrderInfoPO findOrderInfoById(Long id) {
+        OrderInfoPO fetch = jpaQueryFactory()
                 .selectFrom(ORDER_INFO)
                 .where(ORDER_INFO.id.eq(id))
                 .fetchOne();
 
-        OrderInfo t = getById(id);
+        OrderInfoPO t = getById(id);
 
         return fetch;
     }

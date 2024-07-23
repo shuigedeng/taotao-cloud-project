@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItem;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemPO;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:54:41
  */
-public interface IOrderItemService extends IService<OrderItem> {
+public interface IOrderItemService extends IService<OrderItemPO> {
 
 	/**
 	 * 更新评论状态
@@ -67,27 +67,27 @@ public interface IOrderItemService extends IService<OrderItem> {
 	 * 根据子订单编号获取子订单信息
 	 *
 	 * @param sn 子订单编号
-	 * @return {@link OrderItem }
+	 * @return {@link OrderItemPO }
 	 * @since 2022-04-28 08:54:41
 	 */
-	OrderItem getBySn(String sn);
+	OrderItemPO getBySn(String sn);
 
 	/**
 	 * 根据订单编号获取子订单列表
 	 *
 	 * @param orderSn 订单编号
-	 * @return {@link List }<{@link OrderItem }>
+	 * @return {@link List }<{@link OrderItemPO }>
 	 * @since 2022-04-28 08:54:41
 	 */
-	List<OrderItem> getByOrderSn(String orderSn);
+	List<OrderItemPO> getByOrderSn(String orderSn);
 
 	/**
 	 * 子订单查询
 	 *
 	 * @param orderSn 订单编号
 	 * @param skuId   skuid
-	 * @return {@link OrderItem }
+	 * @return {@link OrderItemPO }
 	 * @since 2022-04-28 08:54:41
 	 */
-	OrderItem getByOrderSnAndSkuId(String orderSn, Long skuId);
+	OrderItemPO getByOrderSnAndSkuId(String orderSn, Long skuId);
 }

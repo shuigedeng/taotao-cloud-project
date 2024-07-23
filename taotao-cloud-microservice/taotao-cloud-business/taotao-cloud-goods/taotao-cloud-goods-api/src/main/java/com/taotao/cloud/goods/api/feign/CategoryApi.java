@@ -22,6 +22,7 @@ import com.taotao.cloud.goods.api.feign.response.CategoryTreeApiResponse;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 远程调用订单模块
@@ -30,10 +31,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
+	contextId = "CategoryApi",
 	value = ServiceName.TAOTAO_CLOUD_GOODS,
 	fallbackFactory = CategoryApiFallback.class)
 public interface CategoryApi {
 
 	@GetMapping(value = "/category/first/id/{id:[0-9]*}")
-	List<CategoryTreeApiResponse> firstCategory();
+	List<CategoryTreeApiResponse> firstCategory(@PathVariable Long id);
 }

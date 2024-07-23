@@ -24,7 +24,7 @@ import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.order.domain.cart.valueobject.CartVO;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
 import com.taotao.cloud.order.infrastructure.roketmq.event.OrderStatusChangeEvent;
 import com.taotao.cloud.order.infrastructure.roketmq.event.TradeEvent;
 import java.util.ArrayList;
@@ -209,7 +209,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		// 初始化订单对象/订单日志/自订单
 		Order order = new Order();
 		List<OrderItem> orderItems = new ArrayList<>();
-		List<OrderLog> orderLogs = new ArrayList<>();
+		List<OrderLogPO> orderLogPOS = new ArrayList<>();
 		// 初始化价格详情
 		PriceDetailDTO priceDetailDTO = new PriceDetailDTO();
 		// 复制通用属性
@@ -226,7 +226,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		order.setClientType(originOrder.getClientType());
 		// 订单日志
 		String message = "赠品订单[" + order.getSn() + "]创建";
-		orderLogs.add(new OrderLog(
+		orderLogPOS.add(new OrderLogPO(
 			order.getSn(),
 			originOrder.getMemberId(),
 			UserEnum.MEMBER.name(),
@@ -257,7 +257,7 @@ public class FullDiscountExecute implements TradeEvent, OrderStatusChangeEvent {
 		// 保存订单
 		orderService.save(order);
 		orderItemService.saveBatch(orderItems);
-		orderLogService.saveBatch(orderLogs);
+		orderLogService.saveBatch(orderLogPOS);
 
 		// 发送订单已付款消息（PS:不在这里处理逻辑是因为期望加交给消费者统一处理库存等等问题）
 		OrderMessage orderMessage = OrderMessageBuilder.builder()

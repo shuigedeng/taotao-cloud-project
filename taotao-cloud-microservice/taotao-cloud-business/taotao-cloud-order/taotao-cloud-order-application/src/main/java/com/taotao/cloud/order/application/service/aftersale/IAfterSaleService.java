@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.order.application.command.aftersale.AfterSaleApplyVO;
 import com.taotao.cloud.order.application.command.aftersale.AfterSaleDTO;
 import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
-import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSale;
+import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,34 +33,34 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:49:10
  */
-public interface IAfterSaleService extends IService<AfterSale> {
+public interface IAfterSaleService extends IService<AfterSalePO> {
 
     /**
      * 分页查询售后信息
      *
      * @param afterSalePageQuery 查询参数
-     * @return {@link IPage }<{@link AfterSale }>
+     * @return {@link IPage }<{@link AfterSalePO }>
      * @since 2022-04-28 08:49:10
      */
-    IPage<AfterSale> pageQuery(AfterSalePageQuery afterSalePageQuery);
+    IPage<AfterSalePO> pageQuery(AfterSalePageQuery afterSalePageQuery);
 
     /**
      * 查询导出售后信息
      *
      * @param afterSalePageQuery 查询参数
-     * @return {@link List }<{@link AfterSale }>
+     * @return {@link List }<{@link AfterSalePO }>
      * @since 2022-04-28 08:49:10
      */
-    List<AfterSale> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery);
+    List<AfterSalePO> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery);
 
     /**
      * 查询售后信息
      *
      * @param sn 售后单号
-     * @return {@link AfterSale }
+     * @return {@link AfterSalePO }
      * @since 2022-04-28 08:49:10
      */
-    AfterSale getAfterSaleBySn(String sn);
+    AfterSalePO getAfterSaleBySn(String sn);
 
     /**
      * 获取申请售后页面信息
@@ -99,10 +99,10 @@ public interface IAfterSaleService extends IService<AfterSale> {
      * @param logisticsNo 物流单号
      * @param logisticsId 物流公司ID
      * @param mDeliverTime 买家退货发货时间
-     * @return {@link AfterSale }
+     * @return {@link AfterSalePO }
      * @since 2022-04-28 08:49:10
      */
-    AfterSale buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId, LocalDateTime mDeliverTime);
+    AfterSalePO buyerDelivery(String afterSaleSn, String logisticsNo, Long logisticsId, LocalDateTime mDeliverTime);
 
     /**
      * 获取买家退货物流踪迹
@@ -138,10 +138,10 @@ public interface IAfterSaleService extends IService<AfterSale> {
      * 买家确认解决问题
      *
      * @param afterSaleSn 售后订单sn
-     * @return {@link AfterSale }
+     * @return {@link AfterSalePO }
      * @since 2022-04-28 08:49:11
      */
-    AfterSale complete(String afterSaleSn);
+    AfterSalePO complete(String afterSaleSn);
 
     /**
      * 买家取消售后

@@ -17,8 +17,7 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWords;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWordsPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
 import java.util.List;
@@ -30,7 +29,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-27 16:59:50
  */
-public interface ICustomWordsService extends BaseSuperService<CustomWords, Long> {
+public interface ICustomWordsService extends BaseSuperService<CustomWordsPO, Long> {
 
 	/**
 	 * 自定义分词部署替换
@@ -81,10 +80,10 @@ public interface ICustomWordsService extends BaseSuperService<CustomWords, Long>
 	/**
 	 * 批量插入自定义分词
 	 *
-	 * @param customWordsList 自定义分词列表
+	 * @param customWordsPOList 自定义分词列表
 	 * @return 受影响行数
 	 */
-	long insertBatchCustomWords(List<CustomWords> customWordsList);
+	long insertBatchCustomWords(List<CustomWordsPO> customWordsPOList);
 
 	/**
 	 * 分页查询自定义分词
@@ -93,5 +92,5 @@ public interface ICustomWordsService extends BaseSuperService<CustomWords, Long>
 	 * @param pageVo 分页信息
 	 * @return 自定义分词分页信息
 	 */
-	IPage<CustomWords> getCustomWordsByPage(String words, PageVO pageVo);
+	IPage<CustomWordsPO> getCustomWordsByPage(String words, PageVO pageVo);
 }

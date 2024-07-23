@@ -58,10 +58,10 @@ import com.taotao.cloud.order.application.service.order.check.CheckService;
 import com.taotao.cloud.order.application.service.order.check.ProductVO;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IOrderMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Order;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLog;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Receipt;
-import com.taotao.cloud.order.infrastructure.persistent.po.order.Trade;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderPO;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.ReceiptPO;
+import com.taotao.cloud.order.infrastructure.persistent.po.order.TradePO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import jakarta.servlet.ServletOutputStream;
@@ -92,7 +92,7 @@ import zipkin2.storage.Traces;
 @AllArgsConstructor
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implements IOrderService {
+public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> implements IOrderService {
 
 	private static final String ORDER_SN_COLUMN = "order_sn";
 
@@ -147,25 +147,25 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		Result result = checkService.paramCheckChain(new ProductVO());
 
 		// 存放购物车，即业务中的订单
-		List<Order> orders = new ArrayList<>(tradeDTO.getCartList().size());
+		List<OrderPO> orderPOS = new ArrayList<>(tradeDTO.getCartList().size());
 		// 存放自订单
 		List<OrderItem> orderItems = new ArrayList<>();
 		// 订单日志集合
-		List<OrderLog> orderLogs = new ArrayList<>();
+		List<OrderLogPO> orderLogPOS = new ArrayList<>();
 		// 订单集合
 		List<OrderVO> orderVOS = new ArrayList<>();
 
 		// 循环购物车
 		tradeDTO.getCartList().forEach(item -> {
-			Order order = new Order(item, tradeDTO);
+			OrderPO orderPO = new OrderPO(item, tradeDTO);
 			// 构建orderVO对象
 			OrderVO orderVO = new OrderVO();
-			BeanUtil.copyProperties(order, orderVO);
+			BeanUtil.copyProperties(orderPO, orderVO);
 			// 持久化DO
-			orders.add(order);
+			orderPOS.add(orderPO);
 			String message = "订单[" + item.getSn() + "]创建";
 			// 记录日志
-			orderLogs.add(new OrderLog(
+			orderLogPOS.add(new OrderLogPO(
 				item.getSn(),
 				SecurityUtils.getUserId(),
 				SecurityUtils.getCurrentUser().getType(),
@@ -180,11 +180,11 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		});
 		tradeDTO.setOrderVO(orderVOS);
 		// 批量保存订单
-		this.saveBatch(orders);
+		this.saveBatch(orderPOS);
 		// 批量保存 子订单
 		orderItemService.saveBatch(orderItems);
 		// 批量记录订单操作日志
-		orderLogService.saveBatch(orderLogs);
+		orderLogService.saveBatch(orderLogPOS);
 		return true;
 	}
 
@@ -197,44 +197,44 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public List<Order> queryListByParams(OrderPageQuery orderPageQuery) {
+	public List<OrderPO> queryListByParams(OrderPageQuery orderPageQuery) {
 		return this.baseMapper.queryListByParams(orderPageQuery.queryWrapper());
 	}
 
 	@Override
-	public List<Order> queryListByPromotion(
+	public List<OrderPO> queryListByPromotion(
 		String orderPromotionType, String payStatus, String parentOrderSn, String orderSn) {
-		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<OrderPO> queryWrapper = new LambdaQueryWrapper<>();
 		// 查找团长订单和已和当前拼团订单拼团的订单
 		queryWrapper
-			.eq(Order::getOrderPromotionType, orderPromotionType)
-			.eq(Order::getPayStatus, payStatus)
-			.and(i -> i.eq(Order::getParentOrderSn, parentOrderSn)
-				.or(j -> j.eq(Order::getSn, orderSn)));
+			.eq(OrderPO::getOrderPromotionType, orderPromotionType)
+			.eq(OrderPO::getPayStatus, payStatus)
+			.and(i -> i.eq(OrderPO::getParentOrderSn, parentOrderSn)
+				.or(j -> j.eq(OrderPO::getSn, orderSn)));
 		return this.list(queryWrapper);
 	}
 
 	@Override
 	public long queryCountByPromotion(
 		String orderPromotionType, String payStatus, String parentOrderSn, String orderSn) {
-		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<OrderPO> queryWrapper = new LambdaQueryWrapper<>();
 		// 查找团长订单和已和当前拼团订单拼团的订单
 		queryWrapper
-			.eq(Order::getOrderPromotionType, orderPromotionType)
-			.eq(Order::getPayStatus, payStatus)
-			.and(i -> i.eq(Order::getParentOrderSn, parentOrderSn)
-				.or(j -> j.eq(Order::getSn, orderSn)));
+			.eq(OrderPO::getOrderPromotionType, orderPromotionType)
+			.eq(OrderPO::getPayStatus, payStatus)
+			.and(i -> i.eq(OrderPO::getParentOrderSn, parentOrderSn)
+				.or(j -> j.eq(OrderPO::getSn, orderSn)));
 		return this.count(queryWrapper);
 	}
 
 	@Override
-	public List<Order> queryListByPromotion(Long pintuanId) {
-		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(Order::getOrderPromotionType, PromotionTypeEnum.PINTUAN.name());
-		queryWrapper.eq(Order::getPromotionId, pintuanId);
-		queryWrapper.nested(i -> i.eq(Order::getPayStatus, PayStatusEnum.PAID.name())
+	public List<OrderPO> queryListByPromotion(Long pintuanId) {
+		LambdaQueryWrapper<OrderPO> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.eq(OrderPO::getOrderPromotionType, PromotionTypeEnum.PINTUAN.name());
+		queryWrapper.eq(OrderPO::getPromotionId, pintuanId);
+		queryWrapper.nested(i -> i.eq(OrderPO::getPayStatus, PayStatusEnum.PAID.name())
 			.or()
-			.eq(Order::getOrderStatus, OrderStatusEnum.PAID.name()));
+			.eq(OrderPO::getOrderStatus, OrderStatusEnum.PAID.name()));
 		return this.list(queryWrapper);
 	}
 
@@ -245,8 +245,8 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public OrderDetailVO queryDetail(String orderSn) {
-		Order order = this.getBySn(orderSn);
-		if (order == null) {
+		OrderPO orderPO = this.getBySn(orderSn);
+		if (orderPO == null) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
 		}
 		QueryWrapper<OrderItem> orderItemWrapper = new QueryWrapper<>();
@@ -254,35 +254,35 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		// 查询订单项信息
 		List<OrderItem> orderItems = orderItemMapper.selectList(orderItemWrapper);
 		// 查询订单日志信息
-		List<OrderLog> orderLogs = orderLogService.getOrderLog(orderSn);
+		List<OrderLogPO> orderLogPOS = orderLogService.getOrderLog(orderSn);
 		// 查询发票信息
-		Receipt receipt = receiptService.getByOrderSn(orderSn);
+		ReceiptPO receiptPO = receiptService.getByOrderSn(orderSn);
 		// 查询订单和自订单，然后写入vo返回
-		return new OrderDetailVO(order, orderItems, orderLogs, receipt);
+		return new OrderDetailVO(orderPO, orderItems, orderLogPOS, receiptPO);
 	}
 
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']取消，原因为：'+#reason", orderSn = "#orderSn")
-	public Order cancel(String orderSn, String reason) {
-		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
+	public OrderPO cancel(String orderSn, String reason) {
+		OrderPO orderPO = OperationalJudgment.judgment(this.getBySn(orderSn));
 
 		// 如果订单促销类型不为空&&订单是拼团订单，并且订单未成团，则抛出异常
-		if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderPromotionType())
-			&& !order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
+		if (OrderPromotionTypeEnum.PINTUAN.name().equals(orderPO.getOrderPromotionType())
+			&& !orderPO.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 			throw new BusinessException(ResultEnum.ORDER_CAN_NOT_CANCEL);
 		}
 		if (CharSequenceUtil.equalsAny(
-			order.getOrderStatus(),
+			orderPO.getOrderStatus(),
 			OrderStatusEnum.UNDELIVERED.name(),
 			OrderStatusEnum.UNPAID.name(),
 			OrderStatusEnum.PAID.name())) {
 
-			order.setOrderStatus(OrderStatusEnum.CANCELLED.name());
-			order.setCancelReason(reason);
+			orderPO.setOrderStatus(OrderStatusEnum.CANCELLED.name());
+			orderPO.setCancelReason(reason);
 			// 修改订单
-			this.updateById(order);
-			orderStatusMessage(order);
-			return order;
+			this.updateById(orderPO);
+			orderStatusMessage(orderPO);
+			return orderPO;
 		}
 		else {
 			throw new BusinessException(ResultEnum.ORDER_CAN_NOT_CANCEL);
@@ -292,64 +292,64 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']系统取消，原因为：'+#reason", orderSn = "#orderSn")
 	public void systemCancel(String orderSn, String reason) {
-		Order order = this.getBySn(orderSn);
-		order.setOrderStatus(OrderStatusEnum.CANCELLED.name());
-		order.setCancelReason(reason);
-		this.updateById(order);
-		orderStatusMessage(order);
+		OrderPO orderPO = this.getBySn(orderSn);
+		orderPO.setOrderStatus(OrderStatusEnum.CANCELLED.name());
+		orderPO.setCancelReason(reason);
+		this.updateById(orderPO);
+		orderStatusMessage(orderPO);
 	}
 
 	@Override
-	public Order getBySn(String orderSn) {
-		return this.getOne(new LambdaQueryWrapper<Order>().eq(Order::getSn, orderSn));
+	public OrderPO getBySn(String orderSn) {
+		return this.getOne(new LambdaQueryWrapper<OrderPO>().eq(OrderPO::getSn, orderSn));
 	}
 
 	@Override
 	public void payOrder(String orderSn, String paymentMethod, String receivableNo) {
-		Order order = this.getBySn(orderSn);
+		OrderPO orderPO = this.getBySn(orderSn);
 		// 如果订单已支付，就不能再次进行支付
-		if (order.getPayStatus().equals(PayStatusEnum.PAID.name())) {
+		if (orderPO.getPayStatus().equals(PayStatusEnum.PAID.name())) {
 			throw new BusinessException(ResultEnum.PAY_ERROR);
 		}
 
 		// 修改订单状态
-		order.setPaymentTime(LocalDateTime.now());
-		order.setPaymentMethod(paymentMethod);
-		order.setPayStatus(PayStatusEnum.PAID.name());
-		order.setOrderStatus(OrderStatusEnum.PAID.name());
-		order.setReceivableNo(receivableNo);
-		order.setCanReturn(
-			!PaymentMethodEnum.BANK_TRANSFER.name().equals(order.getPaymentMethod()));
-		this.updateById(order);
+		orderPO.setPaymentTime(LocalDateTime.now());
+		orderPO.setPaymentMethod(paymentMethod);
+		orderPO.setPayStatus(PayStatusEnum.PAID.name());
+		orderPO.setOrderStatus(OrderStatusEnum.PAID.name());
+		orderPO.setReceivableNo(receivableNo);
+		orderPO.setCanReturn(
+			!PaymentMethodEnum.BANK_TRANSFER.name().equals(orderPO.getPaymentMethod()));
+		this.updateById(orderPO);
 
 		// 记录订单流水
 		storeFlowService.payOrder(orderSn);
 
 		// 发送订单已付款消息
 		OrderMessage orderMessage = new OrderMessage();
-		orderMessage.setOrderSn(order.getSn());
+		orderMessage.setOrderSn(orderPO.getSn());
 		orderMessage.setPaymentMethod(paymentMethod);
 		orderMessage.setNewStatus(OrderStatusEnum.PAID);
 		this.sendUpdateStatusMessage(orderMessage);
 
 		String message =
 			"订单付款，付款方式[" + PaymentMethodEnum.valueOf(paymentMethod).paymentName() + "]";
-		OrderLog orderLog = new OrderLog(orderSn, -1L, UserEnum.SYSTEM.name(), "系统操作", message);
-		orderLogService.save(orderLog);
+		OrderLogPO orderLogPO = new OrderLogPO(orderSn, -1L, UserEnum.SYSTEM.name(), "系统操作", message);
+		orderLogService.save(orderLogPO);
 	}
 
 	@Override
 	@OrderLogPoint(description = "'库存确认'", orderSn = "#orderSn")
 	public void afterOrderConfirm(String orderSn) {
-		Order order = this.getBySn(orderSn);
+		OrderPO orderPO = this.getBySn(orderSn);
 		// 判断是否为拼团订单，进行特殊处理
 		// 判断订单类型进行不同的订单确认操作
-		if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderPromotionType())) {
-			this.checkPintuanOrder(order.getPromotionId(), order.getParentOrderSn());
+		if (OrderPromotionTypeEnum.PINTUAN.name().equals(orderPO.getOrderPromotionType())) {
+			this.checkPintuanOrder(orderPO.getPromotionId(), orderPO.getParentOrderSn());
 		}
 		else {
 			// 判断订单类型
-			if (order.getOrderType().equals(OrderTypeEnum.NORMAL.name())) {
+			if (orderPO.getOrderType().equals(OrderTypeEnum.NORMAL.name())) {
 				normalOrderConfirm(orderSn);
 			}
 			else {
@@ -361,51 +361,51 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	@Override
 	// @SystemLogPoint(description = "修改订单", customerLog = "'订单[' + #orderSn +
 	// ']收货信息修改，修改为'+#memberAddressDTO.consigneeDetail+'")
-	public Order updateConsignee(String orderSn, MemberAddressDTO memberAddressDTO) {
-		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
+	public OrderPO updateConsignee(String orderSn, MemberAddressDTO memberAddressDTO) {
+		OrderPO orderPO = OperationalJudgment.judgment(this.getBySn(orderSn));
 
 		// 要记录之前的收货地址，所以需要以代码方式进行调用 不采用注解
 		String message = "订单["
 			+ orderSn
 			+ "]收货信息修改，由["
-			+ order.getConsigneeDetail()
+			+ orderPO.getConsigneeDetail()
 			+ "]修改为["
 			+ memberAddressDTO.getConsigneeDetail()
 			+ "]";
 		// 记录订单操作日志
-		BeanUtil.copyProperties(memberAddressDTO, order);
-		this.updateById(order);
+		BeanUtil.copyProperties(memberAddressDTO, orderPO);
+		this.updateById(orderPO);
 
-		OrderLog orderLog = new OrderLog(
+		OrderLogPO orderLogPO = new OrderLogPO(
 			orderSn,
 			UserContext.getCurrentUser().getId(),
 			UserContext.getCurrentUser().getRole().getRole(),
 			UserContext.getCurrentUser().getUsername(),
 			message);
-		orderLogService.save(orderLog);
+		orderLogService.save(orderLogPO);
 
-		return order;
+		return orderPO;
 	}
 
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']发货，发货单号['+#logisticsNo+']'", orderSn = "#orderSn")
-	public Order delivery(String orderSn, String logisticsNo, Long logisticsId) {
-		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
+	public OrderPO delivery(String orderSn, String logisticsNo, Long logisticsId) {
+		OrderPO orderPO = OperationalJudgment.judgment(this.getBySn(orderSn));
 		// 如果订单未发货，并且订单状态值等于待发货
-		if (order.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
-			&& order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
+		if (orderPO.getDeliverStatus().equals(DeliverStatusEnum.UNDELIVERED.name())
+			&& orderPO.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 			// 获取对应物流
 			LogisticsVO logistics = logisticsApi.getById(logisticsId);
 			if (logistics == null) {
 				throw new BusinessException(ResultEnum.ORDER_LOGISTICS_ERROR);
 			}
 			// 写入物流信息
-			order.setLogisticsCode(logistics.getCode());
-			order.setLogisticsName(logistics.getName());
-			order.setLogisticsNo(logisticsNo);
-			order.setLogisticsTime(LocalDateTime.now());
-			order.setDeliverStatus(DeliverStatusEnum.DELIVERED.name());
-			this.updateById(order);
+			orderPO.setLogisticsCode(logistics.getCode());
+			orderPO.setLogisticsName(logistics.getName());
+			orderPO.setLogisticsNo(logisticsNo);
+			orderPO.setLogisticsTime(LocalDateTime.now());
+			orderPO.setDeliverStatus(DeliverStatusEnum.DELIVERED.name());
+			this.updateById(orderPO);
 			// 修改订单状态为已发送
 			this.updateStatus(orderSn, OrderStatusEnum.DELIVERED);
 			// 修改订单货物可以进行售后、投诉
@@ -416,67 +416,67 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			// 发送订单状态改变消息
 			OrderMessage orderMessage = new OrderMessage();
 			orderMessage.setNewStatus(OrderStatusEnum.DELIVERED);
-			orderMessage.setOrderSn(order.getSn());
+			orderMessage.setOrderSn(orderPO.getSn());
 			this.sendUpdateStatusMessage(orderMessage);
 		}
 		else {
 			throw new BusinessException(ResultEnum.ORDER_DELIVER_ERROR);
 		}
-		return order;
+		return orderPO;
 	}
 
 	@Override
 	public Traces getTraces(String orderSn) {
 		// 获取订单信息
-		Order order = this.getBySn(orderSn);
+		OrderPO orderPO = this.getBySn(orderSn);
 		// 获取踪迹信息
-		return logisticsApi.getLogistic(order.getId(), order.getLogisticsNo());
+		return logisticsApi.getLogistic(orderPO.getId(), orderPO.getLogisticsNo());
 	}
 
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']核销，核销码['+#verificationCode+']'", orderSn = "#orderSn")
-	public Order take(String orderSn, String verificationCode) {
+	public OrderPO take(String orderSn, String verificationCode) {
 		// 获取订单信息
-		Order order = this.getBySn(orderSn);
+		OrderPO orderPO = this.getBySn(orderSn);
 		// 检测虚拟订单信息
-		checkVerificationOrder(order, verificationCode);
-		order.setOrderStatus(OrderStatusEnum.COMPLETED.name());
+		checkVerificationOrder(orderPO, verificationCode);
+		orderPO.setOrderStatus(OrderStatusEnum.COMPLETED.name());
 		// 订单完成
 		this.complete(orderSn);
-		return order;
+		return orderPO;
 	}
 
 	@Override
-	public Order getOrderByVerificationCode(String verificationCode) {
+	public OrderPO getOrderByVerificationCode(String verificationCode) {
 		String storeId = Objects.requireNonNull(UserContext.getCurrentUser()).getStoreId();
-		return this.getOne(new LambdaQueryWrapper<Order>()
-			.eq(Order::getOrderStatus, OrderStatusEnum.TAKE.name())
-			.eq(Order::getStoreId, storeId)
-			.eq(Order::getVerificationCode, verificationCode));
+		return this.getOne(new LambdaQueryWrapper<OrderPO>()
+			.eq(OrderPO::getOrderStatus, OrderStatusEnum.TAKE.name())
+			.eq(OrderPO::getStoreId, storeId)
+			.eq(OrderPO::getVerificationCode, verificationCode));
 	}
 
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']完成'", orderSn = "#orderSn")
 	public void complete(String orderSn) {
 		// 是否可以查询到订单
-		Order order = OperationalJudgment.judgment(this.getBySn(orderSn));
-		complete(order, orderSn);
+		OrderPO orderPO = OperationalJudgment.judgment(this.getBySn(orderSn));
+		complete(orderPO, orderSn);
 	}
 
 	@Override
 	@OrderLogPoint(description = "'订单['+#orderSn+']完成'", orderSn = "#orderSn")
 	public void systemComplete(String orderSn) {
-		Order order = this.getBySn(orderSn);
-		complete(order, orderSn);
+		OrderPO orderPO = this.getBySn(orderSn);
+		complete(orderPO, orderSn);
 	}
 
 	/**
 	 * 完成订单方法封装
 	 *
-	 * @param order   订单
+	 * @param orderPO   订单
 	 * @param orderSn 订单编号
 	 */
-	private void complete(Order order, String orderSn) { // 修改订单状态为完成
+	private void complete(OrderPO orderPO, String orderSn) { // 修改订单状态为完成
 		this.updateStatus(orderSn, OrderStatusEnum.COMPLETED);
 
 		// 修改订单货物可以进行评价
@@ -486,7 +486,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		// 发送订单状态改变消息
 		OrderMessage orderMessage = new OrderMessage();
 		orderMessage.setNewStatus(OrderStatusEnum.COMPLETED);
-		orderMessage.setOrderSn(order.getSn());
+		orderMessage.setOrderSn(orderPO.getSn());
 		this.sendUpdateStatusMessage(orderMessage);
 
 		// 发送当前商品购买完成的信息（用于更新商品数据）
@@ -497,7 +497,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 			goodsCompleteMessage.setGoodsId(orderItem.getGoodsId());
 			goodsCompleteMessage.setSkuId(orderItem.getSkuId());
 			goodsCompleteMessage.setBuyNum(orderItem.getNum());
-			goodsCompleteMessage.setMemberId(order.getMemberId());
+			goodsCompleteMessage.setMemberId(orderPO.getMemberId());
 			goodsCompleteMessageList.add(goodsCompleteMessage);
 		}
 		// 发送商品购买消息
@@ -514,9 +514,9 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	}
 
 	@Override
-	public List<Order> getByTradeSn(String tradeSn) {
-		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
-		return this.list(queryWrapper.eq(Order::getTradeSn, tradeSn));
+	public List<OrderPO> getByTradeSn(String tradeSn) {
+		LambdaQueryWrapper<OrderPO> queryWrapper = new LambdaQueryWrapper<>();
+		return this.list(queryWrapper.eq(OrderPO::getTradeSn, tradeSn));
 	}
 
 	@Override
@@ -531,13 +531,13 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public void deleteOrder(String sn) {
-		Order order = this.getBySn(sn);
-		if (order == null) {
+		OrderPO orderPO = this.getBySn(sn);
+		if (orderPO == null) {
 			log.error("订单号为" + sn + "的订单不存在！");
 			throw new BusinessException("订单号为" + sn + "的订单不存在！");
 		}
-		LambdaUpdateWrapper<Order> updateWrapper = new LambdaUpdateWrapper<>();
-		updateWrapper.eq(Order::getSn, sn).set(Order::getDelFlag, true);
+		LambdaUpdateWrapper<OrderPO> updateWrapper = new LambdaUpdateWrapper<>();
+		updateWrapper.eq(OrderPO::getSn, sn).set(OrderPO::getDelFlag, true);
 		this.update(updateWrapper);
 		LambdaUpdateWrapper<OrderItem> orderItemLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
 		orderItemLambdaUpdateWrapper.eq(OrderItem::getOrderSn, sn).set(OrderItem::getDelFlag, true);
@@ -547,11 +547,11 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	@Override
 	public Boolean invoice(String sn) {
 		// 根据订单号查询发票信息
-		Receipt receipt = receiptService.getByOrderSn(sn);
+		ReceiptPO receiptPO = receiptService.getByOrderSn(sn);
 		// 校验发票信息是否存在
-		if (receipt != null) {
-			receipt.setReceiptStatus(1);
-			return receiptService.updateById(receipt);
+		if (receiptPO != null) {
+			receiptPO.setReceiptStatus(1);
+			return receiptService.updateById(receiptPO);
 		}
 		throw new BusinessException(ResultEnum.USER_RECEIPT_NOT_EXIST);
 	}
@@ -561,7 +561,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		// 获取拼团配置
 		PintuanVO pintuan = feignPintuanApi.getById(pintuanId);
 
-		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
+		List<OrderPO> list = this.getPintuanOrder(pintuanId, parentOrderSn);
 		if (Boolean.TRUE.equals(pintuan.getFictitious())
 			&& pintuan.getRequiredNum() > list.size()) {
 			// 如果开启虚拟成团且当前订单数量不足成团数量，则认为拼团成功
@@ -644,12 +644,12 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 
 	@Override
 	public BigDecimal getPaymentTotal(String orderSn) {
-		Order order = this.getBySn(orderSn);
-		Trade trade = tradeService.getBySn(order.getTradeSn());
-		if (trade.getPayStatus().equals(PayStatusEnum.PAID.name())) {
-			return trade.getFlowPrice();
+		OrderPO orderPO = this.getBySn(orderSn);
+		TradePO tradePO = tradeService.getBySn(orderPO.getTradeSn());
+		if (tradePO.getPayStatus().equals(PayStatusEnum.PAID.name())) {
+			return tradePO.getFlowPrice();
 		}
-		return order.getFlowPrice();
+		return orderPO.getFlowPrice();
 	}
 
 	@Override
@@ -667,14 +667,14 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		List<LogisticsVO> logistics = logisticsApi.list();
 		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
 			// 查看订单号是否存在-是否是当前店铺的订单
-			Order order = this.getOne(new LambdaQueryWrapper<Order>()
-				.eq(Order::getStoreId, SecurityUtils.getCurrentUser().getStoreId())
-				.eq(Order::getSn, orderBatchDeliverDTO.getOrderSn()));
-			if (order == null) {
+			OrderPO orderPO = this.getOne(new LambdaQueryWrapper<OrderPO>()
+				.eq(OrderPO::getStoreId, SecurityUtils.getCurrentUser().getStoreId())
+				.eq(OrderPO::getSn, orderBatchDeliverDTO.getOrderSn()));
+			if (orderPO == null) {
 				throw new BusinessException(
 					"订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
 			}
-			else if (!order.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
+			else if (!orderPO.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 				throw new BusinessException(
 					"订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不能发货");
 			}
@@ -694,12 +694,12 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 订单状态变更消息
 	 *
-	 * @param order
+	 * @param orderPO
 	 */
-	private void orderStatusMessage(Order order) {
+	private void orderStatusMessage(OrderPO orderPO) {
 		OrderMessage orderMessage = new OrderMessage();
-		orderMessage.setOrderSn(order.getSn());
-		orderMessage.setNewStatus(OrderStatusEnum.valueOf(order.getOrderStatus()));
+		orderMessage.setOrderSn(orderPO.getSn());
+		orderMessage.setNewStatus(OrderStatusEnum.valueOf(orderPO.getOrderStatus()));
 		this.sendUpdateStatusMessage(orderMessage);
 	}
 
@@ -726,7 +726,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		}
 		// 获取拼团配置
 		PintuanVO pintuan = feignPintuanApi.getById(pintuanId);
-		List<Order> list = this.getPintuanOrder(pintuanId, parentOrderSn);
+		List<OrderPO> list = this.getPintuanOrder(pintuanId, parentOrderSn);
 		int count = list.size();
 		if (count == 1) {
 			// 如果为开团订单，则发布一个一小时的延时任务，时间到达后，如果未成团则自动结束（未开启虚拟成团的情况下）
@@ -757,16 +757,16 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 * @param parentOrderSn 拼团订单sn
 	 * @return 所有当前与当前拼团订单sn相关的订单
 	 */
-	private List<Order> getPintuanOrder(Long pintuanId, String parentOrderSn) {
+	private List<OrderPO> getPintuanOrder(Long pintuanId, String parentOrderSn) {
 		// 寻找拼团的所有订单
-		LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
+		LambdaQueryWrapper<OrderPO> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper
-			.eq(Order::getPromotionId, pintuanId)
-			.eq(Order::getOrderPromotionType, OrderPromotionTypeEnum.PINTUAN.name())
-			.eq(Order::getPayStatus, PayStatusEnum.PAID.name());
+			.eq(OrderPO::getPromotionId, pintuanId)
+			.eq(OrderPO::getOrderPromotionType, OrderPromotionTypeEnum.PINTUAN.name())
+			.eq(OrderPO::getPayStatus, PayStatusEnum.PAID.name());
 		// 拼团sn=开团订单sn 或者 参团订单的开团订单sn
-		queryWrapper.and(i -> i.eq(Order::getSn, parentOrderSn)
-			.or(j -> j.eq(Order::getParentOrderSn, parentOrderSn)));
+		queryWrapper.and(i -> i.eq(OrderPO::getSn, parentOrderSn)
+			.or(j -> j.eq(OrderPO::getParentOrderSn, parentOrderSn)));
 		// 参团后的订单数（人数）
 		return this.list(queryWrapper);
 	}
@@ -774,15 +774,15 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 根据提供的拼团订单列表更新拼团状态为拼团成功 循环订单列表根据不同的订单类型进行确认订单
 	 *
-	 * @param orderList 需要更新拼团状态为成功的拼团订单列表
+	 * @param orderPOList 需要更新拼团状态为成功的拼团订单列表
 	 */
-	private void pintuanOrderSuccess(List<Order> orderList) {
-		for (Order order : orderList) {
-			if (order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())) {
-				this.virtualOrderConfirm(order.getSn());
+	private void pintuanOrderSuccess(List<OrderPO> orderPOList) {
+		for (OrderPO orderPO : orderPOList) {
+			if (orderPO.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())) {
+				this.virtualOrderConfirm(orderPO.getSn());
 			}
-			else if (order.getOrderType().equals(OrderTypeEnum.NORMAL.name())) {
-				this.normalOrderConfirm(order.getSn());
+			else if (orderPO.getOrderType().equals(OrderTypeEnum.NORMAL.name())) {
+				this.normalOrderConfirm(orderPO.getSn());
 			}
 		}
 	}
@@ -792,10 +792,10 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 *
 	 * @param list 需要更新拼团状态为失败的拼团订单列表
 	 */
-	private void pintuanOrderFailed(List<Order> list) {
-		for (Order order : list) {
+	private void pintuanOrderFailed(List<OrderPO> list) {
+		for (OrderPO orderPO : list) {
 			try {
-				this.systemCancel(order.getSn(), "拼团人数不足，拼团失败！");
+				this.systemCancel(orderPO.getSn(), "拼团人数不足，拼团失败！");
 			}
 			catch (Exception e) {
 				log.error("拼团订单取消失败", e);
@@ -812,8 +812,8 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 		// 检测是否为拼团订单
 		if (tradeDTO.getParentOrderSn() != null) {
 			// 判断用户不能参与自己发起的拼团活动
-			Order parentOrder = this.getBySn(tradeDTO.getParentOrderSn());
-			if (parentOrder.getMemberId().equals(SecurityUtils.getUserId())) {
+			OrderPO parentOrderPO = this.getBySn(tradeDTO.getParentOrderSn());
+			if (parentOrderPO.getMemberId().equals(SecurityUtils.getUserId())) {
 				throw new BusinessException(ResultEnum.PINTUAN_JOIN_ERROR);
 			}
 		}
@@ -822,14 +822,14 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 检查交易信息
 	 *
-	 * @param order 订单
+	 * @param orderPO 订单
 	 */
-	private void checkOrder(Order order) {
+	private void checkOrder(OrderPO orderPO) {
 		// 订单类型为拼团订单，检测购买数量是否超过了限购数量
-		if (OrderPromotionTypeEnum.PINTUAN.name().equals(order.getOrderType())) {
-			PintuanVO pintuan = feignPintuanApi.getById(order.getPromotionId());
+		if (OrderPromotionTypeEnum.PINTUAN.name().equals(orderPO.getOrderType())) {
+			PintuanVO pintuan = feignPintuanApi.getById(orderPO.getPromotionId());
 			Integer limitNum = pintuan.getLimitNum();
-			if (limitNum != 0 && order.getGoodsNum() > limitNum) {
+			if (limitNum != 0 && orderPO.getGoodsNum() > limitNum) {
 				throw new BusinessException(ResultEnum.PINTUAN_LIMIT_NUM_ERROR);
 			}
 		}
@@ -842,9 +842,9 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 */
 	private void normalOrderConfirm(String orderSn) {
 		// 修改订单
-		this.update(new LambdaUpdateWrapper<Order>()
-			.eq(Order::getSn, orderSn)
-			.set(Order::getOrderStatus, OrderStatusEnum.UNDELIVERED.name()));
+		this.update(new LambdaUpdateWrapper<OrderPO>()
+			.eq(OrderPO::getSn, orderSn)
+			.set(OrderPO::getOrderStatus, OrderStatusEnum.UNDELIVERED.name()));
 		// 修改订单
 		OrderMessage orderMessage = new OrderMessage();
 		orderMessage.setNewStatus(OrderStatusEnum.UNDELIVERED);
@@ -859,9 +859,9 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	 */
 	private void virtualOrderConfirm(String orderSn) {
 		// 修改订单
-		this.update(new LambdaUpdateWrapper<Order>()
-			.eq(Order::getSn, orderSn)
-			.set(Order::getOrderStatus, OrderStatusEnum.TAKE.name()));
+		this.update(new LambdaUpdateWrapper<OrderPO>()
+			.eq(OrderPO::getSn, orderSn)
+			.set(OrderPO::getOrderStatus, OrderStatusEnum.TAKE.name()));
 		OrderMessage orderMessage = new OrderMessage();
 		orderMessage.setNewStatus(OrderStatusEnum.TAKE);
 		orderMessage.setOrderSn(orderSn);
@@ -871,24 +871,24 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, Order> implement
 	/**
 	 * 检测虚拟订单信息
 	 *
-	 * @param order            订单
+	 * @param orderPO            订单
 	 * @param verificationCode 验证码
 	 */
-	private void checkVerificationOrder(Order order, String verificationCode) {
+	private void checkVerificationOrder(OrderPO orderPO, String verificationCode) {
 		// 判断查询是否可以查询到订单
-		if (order == null) {
+		if (orderPO == null) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
 		}
 		// 判断是否为虚拟订单
-		else if (!order.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())) {
+		else if (!orderPO.getOrderType().equals(OrderTypeEnum.VIRTUAL.name())) {
 			throw new BusinessException(ResultEnum.ORDER_TAKE_ERROR);
 		}
 		// 判断虚拟订单状态
-		else if (!order.getOrderStatus().equals(OrderStatusEnum.TAKE.name())) {
+		else if (!orderPO.getOrderStatus().equals(OrderStatusEnum.TAKE.name())) {
 			throw new BusinessException(ResultEnum.ORDER_TAKE_ERROR);
 		}
 		// 判断验证码是否正确
-		else if (!verificationCode.equals(order.getVerificationCode())) {
+		else if (!verificationCode.equals(orderPO.getVerificationCode())) {
 			throw new BusinessException(ResultEnum.ORDER_TAKE_ERROR);
 		}
 	}

@@ -23,7 +23,7 @@ import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.application.service.purchase.IPurchaseQuotedItemService;
 import com.taotao.cloud.order.application.service.purchase.IPurchaseQuotedService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.purchase.IPurchaseQuotedMapper;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedPO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2022-04-28 08:55:44
  */
 @Service
-public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper, PurchaseQuoted>
+public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper, PurchaseQuotedPO>
 	implements IPurchaseQuotedService {
 
 	@Autowired
@@ -46,21 +46,21 @@ public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public PurchaseQuotedVO addPurchaseQuoted(PurchaseQuotedVO purchaseQuotedVO) {
-		PurchaseQuoted purchaseQuoted = new PurchaseQuoted();
-		BeanUtils.copyProperties(purchaseQuotedVO, purchaseQuoted);
+		PurchaseQuotedPO purchaseQuotedPO = new PurchaseQuotedPO();
+		BeanUtils.copyProperties(purchaseQuotedVO, purchaseQuotedPO);
 		// 添加报价单
-		this.save(purchaseQuoted);
+		this.save(purchaseQuotedPO);
 		// 添加采购单子内容
 		purchaseQuotedItemService.addPurchaseQuotedItem(
-			purchaseQuoted.getId(), purchaseQuotedVO.getPurchaseQuotedItems());
+			purchaseQuotedPO.getId(), purchaseQuotedVO.getPurchaseQuotedItems());
 		return purchaseQuotedVO;
 	}
 
 	@Override
-	public List<PurchaseQuoted> getByPurchaseOrderId(String purchaseOrderId) {
-		LambdaQueryWrapper<PurchaseQuoted> lambdaQueryWrapper = Wrappers.lambdaQuery();
-		lambdaQueryWrapper.eq(PurchaseQuoted::getPurchaseOrderId, purchaseOrderId);
-		lambdaQueryWrapper.orderByDesc(PurchaseQuoted::getCreateTime);
+	public List<PurchaseQuotedPO> getByPurchaseOrderId(String purchaseOrderId) {
+		LambdaQueryWrapper<PurchaseQuotedPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
+		lambdaQueryWrapper.eq(PurchaseQuotedPO::getPurchaseOrderId, purchaseOrderId);
+		lambdaQueryWrapper.orderByDesc(PurchaseQuotedPO::getCreateTime);
 		return this.list(lambdaQueryWrapper);
 	}
 
@@ -68,8 +68,8 @@ public class PurchaseQuotedServiceImpl extends ServiceImpl<IPurchaseQuotedMapper
 	public PurchaseQuotedVO getById(String id) {
 		// 获取报价单
 		PurchaseQuotedVO purchaseQuotedVO = new PurchaseQuotedVO();
-		PurchaseQuoted purchaseQuoted = this.baseMapper.selectById(id);
-		BeanUtils.copyProperties(purchaseQuoted, purchaseQuotedVO);
+		PurchaseQuotedPO purchaseQuotedPO = this.baseMapper.selectById(id);
+		BeanUtils.copyProperties(purchaseQuotedPO, purchaseQuotedVO);
 		// 获取报价单子内容
 		purchaseQuotedVO.setPurchaseQuotedItems(
 			purchaseQuotedItemService.purchaseQuotedItemList(id));

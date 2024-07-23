@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.purchase;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuoted;
+import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseQuotedPO;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ import java.util.List;
  * @version 2022.04
  * @since 2022-04-28 08:55:34
  */
-public interface IPurchaseQuotedService extends IService<PurchaseQuoted> {
+public interface IPurchaseQuotedService extends IService<PurchaseQuotedPO> {
     /**
      * 添加报价单
      *
@@ -41,10 +41,10 @@ public interface IPurchaseQuotedService extends IService<PurchaseQuoted> {
      * 根据采购单获取报价单列表
      *
      * @param purchaseOrderId 采购单ID
-     * @return {@link List }<{@link PurchaseQuoted }>
+     * @return {@link List }<{@link PurchaseQuotedPO }>
      * @since 2022-04-28 08:55:34
      */
-    List<PurchaseQuoted> getByPurchaseOrderId(String purchaseOrderId);
+    List<PurchaseQuotedPO> getByPurchaseOrderId(String purchaseOrderId);
 
     /**
      * 获取采购单VO

@@ -20,11 +20,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
+import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.cloud.member.application.command.address.dto.clientobject.MemberAddressCO;
 import com.taotao.cloud.member.application.converter.MemberAddressConvert;
 import com.taotao.cloud.member.application.service.IMemberAddressService;
-import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddress;
+import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddressPO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -65,7 +65,7 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping
 	public Result<PageResult<MemberAddressCO>> page(@Validated PageQuery page) {
-		IPage<MemberAddress> memberAddressPage = memberAddressService.queryPage(page,
+		IPage<MemberAddressPO> memberAddressPage = memberAddressService.queryPage(page,
 			SecurityUtils.getUserId());
 		return Result.success(
 			MpUtils.convertMybatisPage(memberAddressPage, MemberAddressConvert.INSTANCE::convert));
@@ -79,8 +79,8 @@ public class MemberAddressController {
 		@Parameter(description = "会员地址ID", required = true)
 		@NotNull(message = "id不能为空")
 		@PathVariable(value = "id") Long id) {
-		MemberAddress memberAddress = memberAddressService.getMemberAddress(id);
-		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
+		MemberAddressPO memberAddressPO = memberAddressService.getMemberAddress(id);
+		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddressPO));
 	}
 
 	@Operation(summary = "获取当前会员默认收件地址", description = "获取当前会员默认收件地址")
@@ -88,15 +88,15 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/default")
 	public Result<MemberAddressCO> getDefaultShippingAddress() {
-		MemberAddress memberAddress = memberAddressService.getDefaultMemberAddress();
-		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddress));
+		MemberAddressPO memberAddressPO = memberAddressService.getDefaultMemberAddress();
+		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddressPO));
 	}
 
 	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<Boolean> addShippingAddress(@Valid MemberAddress shippingAddress) {
+	public Result<Boolean> addShippingAddress(@Valid MemberAddressPO shippingAddress) {
 		// 添加会员地址
 		shippingAddress.setMemberId(SecurityUtils.getUserId());
 		if (shippingAddress.getDefaulted() == null) {
@@ -109,7 +109,7 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
-	public Result<Boolean> editShippingAddress(@Valid @RequestBody MemberAddress shippingAddress) {
+	public Result<Boolean> editShippingAddress(@Valid @RequestBody MemberAddressPO shippingAddress) {
 		return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
 	}
 
