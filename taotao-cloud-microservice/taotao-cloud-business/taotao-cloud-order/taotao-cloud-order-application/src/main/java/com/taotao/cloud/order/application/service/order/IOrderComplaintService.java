@@ -18,11 +18,11 @@ package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.order.OrderComplaintDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderComplaintVO;
-import com.taotao.cloud.order.application.command.order.StoreAppealDTO;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintOperationAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderComplaintCO;
+import com.taotao.cloud.order.application.command.order.dto.StoreAppealCmd;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintPO;
 
 /**
@@ -37,20 +37,20 @@ public interface IOrderComplaintService extends IService<OrderComplaintPO> {
     /**
      * 分页获取交易投诉信息
      *
-     * @param orderComplaintPageQuery 订单投诉页面查询
+     * @param orderComplaintPageQry 订单投诉页面查询
      * @return {@link IPage }<{@link OrderComplaintPO }>
      * @since 2022-04-28 08:54:36
      */
-    IPage<OrderComplaintPO> pageQuery(OrderComplaintPageQuery orderComplaintPageQuery);
+    IPage<OrderComplaintPO> pageQuery(OrderComplaintPageQry orderComplaintPageQry);
 
     /**
      * 获取交易投诉详情
      *
      * @param id 交易投诉ID
-     * @return {@link OrderComplaintVO }
+     * @return {@link OrderComplaintCO }
      * @since 2022-04-28 08:54:36
      */
-    OrderComplaintVO getOrderComplainById(Long id);
+    OrderComplaintCO getOrderComplainById(Long id);
 
     /**
      * 获取交易投诉详情
@@ -64,11 +64,11 @@ public interface IOrderComplaintService extends IService<OrderComplaintPO> {
     /**
      * 添加交易投诉
      *
-     * @param orderComplaintDTO 交易投诉信息
+     * @param orderComplaintAddCmd 交易投诉信息
      * @return {@link OrderComplaintPO }
      * @since 2022-04-28 08:54:36
      */
-    OrderComplaintPO addOrderComplain(OrderComplaintDTO orderComplaintDTO);
+    OrderComplaintPO addOrderComplain(OrderComplaintAddCmd orderComplaintAddCmd);
 
     /**
      * 更新交易投诉
@@ -82,11 +82,11 @@ public interface IOrderComplaintService extends IService<OrderComplaintPO> {
     /**
      * 修改交易投诉状态
      *
-     * @param orderComplaintOperationDTO 订单投诉操作dto
+     * @param orderComplaintOperationAddCmd 订单投诉操作dto
      * @return {@link Boolean }
      * @since 2022-04-28 08:54:36
      */
-    Boolean updateOrderComplainByStatus(OrderComplaintOperationDTO orderComplaintOperationDTO);
+    Boolean updateOrderComplainByStatus(OrderComplaintOperationAddCmd orderComplaintOperationAddCmd);
 
     /**
      * 待处理投诉数量
@@ -112,5 +112,5 @@ public interface IOrderComplaintService extends IService<OrderComplaintPO> {
      * @return {@link Boolean }
      * @since 2022-04-28 08:54:37
      */
-    Boolean appeal(StoreAppealDTO storeAppealDTO);
+    Boolean appeal(StoreAppealCmd storeAppealDTO);
 }

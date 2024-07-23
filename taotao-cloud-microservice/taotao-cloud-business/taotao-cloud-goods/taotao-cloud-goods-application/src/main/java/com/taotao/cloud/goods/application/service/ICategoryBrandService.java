@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
+import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryBrandCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrandPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
@@ -33,10 +34,10 @@ public interface ICategoryBrandService extends BaseSuperService<CategoryBrandPO,
      * 根据分类id查询品牌信息
      *
      * @param categoryId 分类id
-     * @return {@link List }<{@link CategoryBrandVO }>
+     * @return {@link List }<{@link CategoryBrandCO }>
      * @since 2022-04-27 16:59:19
      */
-    List<CategoryBrandVO> getCategoryBrandList(Long categoryId);
+    List<CategoryBrandCO> getCategoryBrandList(Long categoryId);
 
     /**
      * 通过分类ID删除关联品牌

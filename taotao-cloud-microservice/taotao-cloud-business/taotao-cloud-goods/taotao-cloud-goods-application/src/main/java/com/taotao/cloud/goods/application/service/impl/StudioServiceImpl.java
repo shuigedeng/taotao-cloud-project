@@ -25,6 +25,9 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.utils.bean.BeanUtils;
 import com.taotao.cloud.common.utils.common.OrikaUtils;
+import com.taotao.cloud.goods.api.enums.StudioStatusEnum;
+import com.taotao.cloud.goods.application.command.commodity.dto.clientobject.CommodityCO;
+import com.taotao.cloud.goods.application.command.store.dto.clientobject.StudioCommodityCO;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IStudioCommodityService;
 import com.taotao.cloud.goods.application.service.IStudioService;
@@ -158,16 +161,21 @@ public class StudioServiceImpl
         return true;
     }
 
-    @Override
-    public StudioCommodityVO getStudioVO(Long id) {
-        StudioCommodityVO studioCommodityVO = new StudioCommodityVO();
+	@Override
+	public StudioCommodityCO getStudioVO(Long id) {
+		return null;
+	}
+
+	@Override
+    public StudioCommodityCO getStudioCO(Long id) {
+        StudioCommodityCO studioCommodityCO = new StudioCommodityCO();
         StudioPO studioPO = this.getById(id);
         // 获取直播间信息
-        BeanUtils.copyProperties(studioPO, studioCommodityVO);
+        BeanUtils.copyProperties(studioPO, studioCommodityCO);
         // 获取直播间商品信息
-        List<CommodityPO> commodities = commodityMapper.getCommodityByRoomId(studioCommodityVO.getRoomId());
-        studioCommodityVO.setCommodityList(OrikaUtils.converts(commodities, CommodityVO.class));
-        return studioCommodityVO;
+        List<CommodityPO> commodities = commodityMapper.getCommodityByRoomId(studioCommodityCO.getRoomId());
+        studioCommodityCO.setCommodityList(OrikaUtils.converts(commodities, CommodityCO.class));
+        return studioCommodityCO;
     }
 
     @Override

@@ -17,6 +17,8 @@
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabelPO;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IStoreGoodsLabelRepository extends JpaRepository<StoreGoodsLabelPO, Long> {}
+public interface IStoreGoodsLabelRepository extends
+	BaseInterfaceSuperRepository<StoreGoodsLabelPO, Long> {}

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-/** 商品规格VO */
+/** 商品规格CO */
 @Setter
 @Getter
 @SuperBuilder
@@ -37,7 +37,7 @@ public class GoodsSkuSpecGalleryCO extends GoodsSkuCO {
     private static final long serialVersionUID = -7651149660489332344L;
 
     @Schema(description = "规格列表")
-    private List<SpecValueVO> specList;
+    private List<SpecValueCO> specList;
 
     @Schema(description = "商品图片")
     private List<String> goodsGalleryList;

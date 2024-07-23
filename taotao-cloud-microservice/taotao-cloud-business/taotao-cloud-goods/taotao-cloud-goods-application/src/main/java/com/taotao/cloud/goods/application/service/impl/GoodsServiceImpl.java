@@ -25,7 +25,8 @@ import com.taotao.cloud.cache.redis.repository.RedisRepository;
 
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.goods.application.command.goods.dto.GoodsOperationDTO;
+import com.taotao.cloud.goods.application.command.goods.dto.GoodsAddCmd;
+import com.taotao.cloud.goods.application.service.ICategoryService;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IGoodsSkuService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IGoodsMapper;
@@ -129,53 +130,53 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<GoodsPO, Long, IGoods
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addGoods(GoodsOperationDTO goodsOperationDTO) {
-        GoodsPO goods = new GoodsPO(goodsOperationDTO);
+    public boolean addGoods(GoodsAddCmd goodsAddCmd) {
+        GoodsPO goods = new GoodsPO(goodsAddCmd);
         // 检查商品
         this.checkGoods(goods);
         // 向goods加入图片
-        this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
+        this.setGoodsGalleryParam(goodsAddCmd.getGoodsGalleryList().get(0), goods);
         // 添加商品参数
-        if (goodsOperationDTO.getGoodsParamsDTOList() != null
-                && !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
+        if (goodsAddCmd.getGoodsParamsAddCmdList() != null
+                && !goodsAddCmd.getGoodsParamsAddCmdList().isEmpty()) {
             // 给商品参数填充值
-            goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
+            goods.setParams(JSONUtil.toJsonStr(goodsAddCmd.getGoodsParamsAddCmdList()));
         }
         // 添加商品
         this.save(goods);
         // 添加商品sku信息
-        this.goodsSkuService.add(goodsOperationDTO.getSkuList(), goods);
+        this.goodsSkuService.add(goodsAddCmd.getSkuList(), goods);
         // 添加相册
-        if (goodsOperationDTO.getGoodsGalleryList() != null
-                && !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
-            this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
+        if (goodsAddCmd.getGoodsGalleryList() != null
+                && !goodsAddCmd.getGoodsGalleryList().isEmpty()) {
+            this.goodsGalleryService.add(goodsAddCmd.getGoodsGalleryList(), goods.getId());
         }
         return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId) {
-        GoodsPO goods = new GoodsPO(goodsOperationDTO);
+    public boolean editGoods(GoodsAddCmd goodsAddCmd, Long goodsId) {
+        GoodsPO goods = new GoodsPO(goodsAddCmd);
         goods.setId(goodsId);
 
         // 检查商品信息
         this.checkGoods(goods);
         // 向goods加入图片
-        this.setGoodsGalleryParam(goodsOperationDTO.getGoodsGalleryList().get(0), goods);
+        this.setGoodsGalleryParam(goodsAddCmd.getGoodsGalleryList().get(0), goods);
         // 添加商品参数
-        if (goodsOperationDTO.getGoodsParamsDTOList() != null
-                && !goodsOperationDTO.getGoodsParamsDTOList().isEmpty()) {
-            goods.setParams(JSONUtil.toJsonStr(goodsOperationDTO.getGoodsParamsDTOList()));
+        if (goodsAddCmd.getGoodsParamsAddCmdList() != null
+                && !goodsAddCmd.getGoodsParamsAddCmdList().isEmpty()) {
+            goods.setParams(JSONUtil.toJsonStr(goodsAddCmd.getGoodsParamsAddCmdList()));
         }
         // 修改商品
         this.updateById(goods);
         // 修改商品sku信息
-        this.goodsSkuService.update(goodsOperationDTO.getSkuList(), goods, goodsOperationDTO.getRegeneratorSkuFlag());
+        this.goodsSkuService.update(goodsAddCmd.getSkuList(), goods, goodsAddCmd.getRegeneratorSkuFlag());
         // 添加相册
-        if (goodsOperationDTO.getGoodsGalleryList() != null
-                && !goodsOperationDTO.getGoodsGalleryList().isEmpty()) {
-            this.goodsGalleryService.add(goodsOperationDTO.getGoodsGalleryList(), goods.getId());
+        if (goodsAddCmd.getGoodsGalleryList() != null
+                && !goodsAddCmd.getGoodsGalleryList().isEmpty()) {
+            this.goodsGalleryService.add(goodsAddCmd.getGoodsGalleryList(), goods.getId());
         }
         if (GoodsAuthEnum.TOBEAUDITED.name().equals(goods.getIsAuth())) {
             this.deleteEsGoods(Collections.singletonList(goodsId));
@@ -185,12 +186,12 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<GoodsPO, Long, IGoods
     }
 
     @Override
-    public GoodsSkuParamsVO getGoodsVO(Long goodsId) {
+    public GoodsSkuParamsCO getGoodsCO(Long goodsId) {
         // 缓存获取，如果没有则读取缓存
-        GoodsSkuParamsVO goodsSkuParamsVO =
-                (GoodsSkuParamsVO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
-        if (goodsSkuParamsVO != null) {
-            return goodsSkuParamsVO;
+        GoodsSkuParamsCO goodsSkuParamsCO =
+                (GoodsSkuParamsCO) redisRepository.get(CachePrefix.GOODS.getPrefix() + goodsId);
+        if (goodsSkuParamsCO != null) {
+            return goodsSkuParamsCO;
         }
 
         // 查询商品信息
@@ -201,38 +202,38 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<GoodsPO, Long, IGoods
         }
 
         // 赋值
-        goodsSkuParamsVO = GoodsConvert.INSTANCE.convert(goods);
+        goodsSkuParamsCO = GoodsConvert.INSTANCE.convert(goods);
         // 商品id
-        goodsSkuParamsVO.setId(goods.getId());
+        goodsSkuParamsCO.setId(goods.getId());
         // 商品相册
         List<GoodsGallery> galleryList = goodsGalleryService.goodsGalleryList(goodsId);
-        goodsSkuParamsVO.setGoodsGalleryList(galleryList.stream()
+        goodsSkuParamsCO.setGoodsGalleryList(galleryList.stream()
                 .filter(Objects::nonNull)
                 .map(GoodsGallery::getOriginal)
                 .toList());
 
         // 商品sku赋值
-        List<GoodsSkuSpecGalleryVO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
+        List<GoodsSkuSpecGalleryCO> goodsListByGoodsId = goodsSkuService.getGoodsListByGoodsId(goodsId);
         if (goodsListByGoodsId != null && !goodsListByGoodsId.isEmpty()) {
-            goodsSkuParamsVO.setSkuList(goodsListByGoodsId);
+            goodsSkuParamsCO.setSkuList(goodsListByGoodsId);
         }
 
         // 商品分类名称赋值
         String categoryPath = goods.getCategoryPath();
         String[] strArray = categoryPath.split(",");
         List<Category> categories = categoryService.listByIds(Arrays.asList(strArray));
-        goodsSkuParamsVO.setCategoryName(categories.stream()
+        goodsSkuParamsCO.setCategoryName(categories.stream()
                 .filter(Objects::nonNull)
                 .map(Category::getName)
                 .toList());
 
         // 参数非空则填写参数
         if (StrUtil.isNotEmpty(goods.getParams())) {
-            goodsSkuParamsVO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
+            goodsSkuParamsCO.setGoodsParamsDTOList(JSONUtil.toList(goods.getParams(), GoodsParamsDTO.class));
         }
 
-        redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsVO);
-        return goodsSkuParamsVO;
+        redisRepository.set(CachePrefix.GOODS.getPrefix() + goodsId, goodsSkuParamsCO);
+        return goodsSkuParamsCO;
     }
 
     @Override
@@ -355,7 +356,7 @@ public class GoodsServiceImpl extends BaseSuperServiceImpl<GoodsPO, Long, IGoods
     public boolean freight(List<Long> goodsIds, Long templateId) {
         SecurityUser authUser = this.checkStoreAuthority();
 
-        FreightTemplateVO freightTemplate = freightTemplateApi.getById(templateId);
+        FreightTemplateCO freightTemplate = freightTemplateApi.getById(templateId);
         if (freightTemplate == null) {
             throw new BusinessException(ResultEnum.FREIGHT_TEMPLATE_NOT_EXIST);
         }

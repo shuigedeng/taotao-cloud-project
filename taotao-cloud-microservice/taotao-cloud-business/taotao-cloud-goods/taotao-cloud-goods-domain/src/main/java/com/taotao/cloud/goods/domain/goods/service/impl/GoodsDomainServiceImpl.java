@@ -1,9 +1,8 @@
 package com.taotao.cloud.goods.domain.goods.service.impl;
 
+import com.taotao.cloud.goods.domain.goods.entity.GoodsEntity;
+import com.taotao.cloud.goods.domain.goods.repository.GoodsDomainRepository;
 import com.taotao.cloud.goods.domain.goods.service.GoodsDomainService;
-import com.taotao.cloud.member.domain.member.entity.MemberEntity;
-import com.taotao.cloud.member.domain.member.repository.MemberDomainRepository;
-import com.taotao.cloud.member.domain.member.service.MemberDomainService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +10,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class GoodsDomainServiceImpl implements GoodsDomainService {
 
-	private MemberDomainRepository deptDomainRepository;
+	private GoodsDomainRepository deptDomainRepository;
 
 	@Override
-	public void create(MemberEntity dept) {
+	public void create(GoodsEntity dept) {
 
 	}
 
 	@Override
-	public void modify(MemberEntity dept) {
+	public void modify(GoodsEntity dept) {
 
 	}
 

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.goods.application.command.category.dto.clientobject;
 
+import com.taotao.cloud.goods.application.command.brand.dto.clientobject.BrandCO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Comparator;
 import java.util.List;
@@ -25,7 +26,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-/** 分类VO */
+/** 分类CO */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
@@ -42,7 +43,7 @@ public class CategoryTreeCO extends CategoryCO {
     private List<CategoryTreeCO> children;
 
     @Schema(description = "分类关联的品牌列表")
-    private List<BrandVO> brandList;
+    private List<BrandCO> brandList;
 
     public List<CategoryTreeCO> getChildren() {
         if (children != null) {

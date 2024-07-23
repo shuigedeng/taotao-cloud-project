@@ -19,8 +19,8 @@ package com.taotao.cloud.order.facade.controller.seller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
-import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
+import com.taotao.cloud.order.application.command.order.dto.OrderReceiptAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.ReceiptPageQry;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.order.application.service.order.IReceiptService;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.ReceiptPO;
@@ -60,10 +60,10 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageResult<OrderReceiptDTO>> getByPage(ReceiptPageQuery receiptPageQuery) {
-		receiptPageQuery.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
-		IPage<OrderReceiptDTO> page = receiptService.pageQuery(receiptPageQuery);
-		return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
+	public Result<PageResult<OrderReceiptAddCmd>> getByPage(ReceiptPageQry receiptPageQry) {
+		receiptPageQry.setStoreId(SecurityUtils.getCurrentUser().getStoreId());
+		IPage<OrderReceiptAddCmd> page = receiptService.pageQuery(receiptPageQry);
+		return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptAddCmd.class));
 	}
 
 	@Operation(summary = "通过id获取", description = "通过id获取")

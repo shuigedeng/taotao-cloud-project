@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 商品VO
+ * 商品CO
  *
  * @author shuigedeng
  * @version 2022.04
@@ -38,7 +38,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "商品VO")
+@Schema(description = "商品CO")
 public class GoodsSkuParamsCO extends GoodsCO {
 
     @Serial

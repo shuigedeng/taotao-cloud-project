@@ -18,7 +18,7 @@ package com.taotao.cloud.order.application.service.aftersale;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonPageQuery;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleReasonPageQry;
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
 import java.util.List;
 
@@ -52,9 +52,9 @@ public interface IAfterSaleReasonService extends IService<AfterSaleReasonPO> {
     /**
      * 分页查询售后原因
      *
-     * @param afterSaleReasonPageQuery 查询条件
+     * @param afterSaleReasonPageQry 查询条件
      * @return {@link IPage }<{@link AfterSaleReasonPO }>
      * @since 2022-04-28 08:49:03
      */
-    IPage<AfterSaleReasonPO> pageQuery(AfterSaleReasonPageQuery afterSaleReasonPageQuery);
+    IPage<AfterSaleReasonPO> pageQuery(AfterSaleReasonPageQry afterSaleReasonPageQry);
 }

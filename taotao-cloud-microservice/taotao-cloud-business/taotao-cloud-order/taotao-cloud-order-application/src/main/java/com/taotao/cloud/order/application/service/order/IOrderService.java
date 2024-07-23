@@ -19,12 +19,12 @@ package com.taotao.cloud.order.application.service.order;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.cart.OrderExportVO;
-import com.taotao.cloud.order.application.command.cart.TradeDTO.MemberAddressDTO;
-import com.taotao.cloud.order.application.command.order.OrderDetailVO;
-import com.taotao.cloud.order.application.command.order.OrderPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderSimpleVO;
-import com.taotao.cloud.order.application.command.order.PaymentLogVO;
+import com.taotao.cloud.order.application.command.cart.dto.clientobject.OrderExportCO;
+import com.taotao.cloud.order.application.command.cart.dto.TradeAddCmd.MemberAddressDTO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderDetailCO;
+import com.taotao.cloud.order.application.command.order.dto.OrderPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderSimpleCO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.PaymentLogCO;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderPO;
 import jakarta.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -62,20 +62,20 @@ public interface IOrderService extends IService<OrderPO> {
     /**
      * 订单查询
      *
-     * @param orderPageQuery 查询参数
-     * @return {@link IPage }<{@link OrderSimpleVO }>
+     * @param orderPageQry 查询参数
+     * @return {@link IPage }<{@link OrderSimpleCO }>
      * @since 2022-04-28 08:54:47
      */
-    IPage<OrderSimpleVO> pageQuery(OrderPageQuery orderPageQuery);
+    IPage<OrderSimpleCO> pageQuery(OrderPageQry orderPageQry);
 
     /**
      * 订单信息
      *
-     * @param orderPageQuery 查询参数
+     * @param orderPageQry 查询参数
      * @return {@link List }<{@link OrderPO }>
      * @since 2022-04-28 08:54:47
      */
-    List<OrderPO> queryListByParams(OrderPageQuery orderPageQuery);
+    List<OrderPO> queryListByParams(OrderPageQry orderPageQry);
 
     /**
      * 根据促销查询订单
@@ -113,20 +113,20 @@ public interface IOrderService extends IService<OrderPO> {
     /**
      * 查询导出订单列表
      *
-     * @param orderPageQuery 查询参数
-     * @return {@link List }<{@link OrderExportVO }>
+     * @param orderPageQry 查询参数
+     * @return {@link List }<{@link OrderExportCO }>
      * @since 2022-04-28 08:54:47
      */
-    List<OrderExportVO> queryExportOrder(OrderPageQuery orderPageQuery);
+    List<OrderExportCO> queryExportOrder(OrderPageQry orderPageQry);
 
     /**
      * 订单详细
      *
      * @param orderSn 订单SN
-     * @return {@link OrderDetailVO }
+     * @return {@link OrderDetailCO }
      * @since 2022-04-28 08:54:47
      */
-    OrderDetailVO queryDetail(String orderSn);
+    OrderDetailCO queryDetail(String orderSn);
 
     /**
      * 创建订单 1.检查交易信息 2.循环交易购物车列表，创建订单以及相关信息
@@ -290,5 +290,5 @@ public interface IOrderService extends IService<OrderPO> {
      * @param queryWrapper 查询条件
      * @return 订单支付记录分页
      */
-    IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page, Wrapper<PaymentLogVO> queryWrapper);
+    IPage<PaymentLogCO> queryPaymentLogs(IPage<PaymentLogCO> page, Wrapper<PaymentLogCO> queryWrapper);
 }

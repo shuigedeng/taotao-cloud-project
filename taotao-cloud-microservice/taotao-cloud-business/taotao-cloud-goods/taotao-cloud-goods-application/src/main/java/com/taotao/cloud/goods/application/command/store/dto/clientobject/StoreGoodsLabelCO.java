@@ -26,7 +26,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 店铺分类VO
+ * 店铺分类CO
  *
  * @author shuigedeng
  * @version 2022.04

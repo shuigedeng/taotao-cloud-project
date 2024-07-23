@@ -69,7 +69,7 @@ public class CategoryManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{parentId}/children/all")
-    public Result<List<CategoryVO>> childrenList(@PathVariable Long parentId) {
+    public Result<List<CategoryCO>> childrenList(@PathVariable Long parentId) {
         List<Category> categories = this.categoryService.childrenList(parentId);
         return Result.success(CategoryConvert.INSTANCE.convert(categories));
     }
@@ -81,7 +81,7 @@ public class CategoryManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/children/all")
-    public Result<List<CategoryTreeVO>> list() {
+    public Result<List<CategoryTreeCO>> list() {
         return Result.success(this.categoryService.listAllChildren());
     }
 
@@ -113,7 +113,7 @@ public class CategoryManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @PutMapping
-    public Result<Boolean> updateCategory(@Valid @RequestBody CategoryTreeVO category) {
+    public Result<Boolean> updateCategory(@Valid @RequestBody CategoryTreeCO category) {
         Category catTemp = categoryService.getById(category.getId());
         if (catTemp == null) {
             throw new BusinessException(ResultEnum.CATEGORY_NOT_EXIST);

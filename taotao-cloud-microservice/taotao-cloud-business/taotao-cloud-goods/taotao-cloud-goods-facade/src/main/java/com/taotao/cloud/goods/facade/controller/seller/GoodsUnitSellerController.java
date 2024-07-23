@@ -50,7 +50,7 @@ public class GoodsUnitSellerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/page")
-    public Result<PageResult<GoodsUnitVO>> getByPage(@Validated PageQuery pageQuery) {
+    public Result<PageResult<GoodsUnitCO>> getByPage(@Validated PageQuery pageQuery) {
         IPage<GoodsUnit> page = goodsUnitService.page(pageQuery.buildMpPage());
         return Result.success(MpUtils.convertMybatisPage(page, GoodsUnitConvert.INSTANCE::convert));
     }

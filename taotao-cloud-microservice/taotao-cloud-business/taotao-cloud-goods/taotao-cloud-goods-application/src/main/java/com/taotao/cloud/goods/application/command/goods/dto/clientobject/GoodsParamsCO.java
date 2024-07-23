@@ -25,7 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-/** 商品关联参数的VO */
+/** 商品关联参数的CO */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder

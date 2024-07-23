@@ -17,9 +17,9 @@
 package com.taotao.cloud.goods.application.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsDTO;
-import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsDTO;
+import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsPageQry;
+import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsAddCmd;
+import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsAddCmd;
 import com.taotao.cloud.goods.application.convert.DraftGoodsConvert;
 import com.taotao.cloud.goods.application.service.ICategoryService;
 import com.taotao.cloud.goods.application.service.IDraftGoodsService;
@@ -61,7 +61,7 @@ public class DraftGoodsServiceImpl
     private final IGoodsSkuService goodsSkuService;
 
     @Override
-    public boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+    public boolean addGoodsDraft(DraftGoodsSkuParamsAddCmd draftGoods) {
         draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
         draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
         draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -70,7 +70,7 @@ public class DraftGoodsServiceImpl
     }
 
     @Override
-    public boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+    public boolean updateGoodsDraft(DraftGoodsSkuParamsAddCmd draftGoods) {
         draftGoods.setGoodsGalleryListJson(JSONUtil.toJsonStr(draftGoods.getGoodsGalleryList()));
         draftGoods.setSkuListJson(JSONUtil.toJsonStr(draftGoods.getSkuList()));
         draftGoods.setGoodsParamsListJson(JSONUtil.toJsonStr(draftGoods.getGoodsParamsDTOList()));
@@ -83,7 +83,7 @@ public class DraftGoodsServiceImpl
     }
 
     @Override
-    public boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoods) {
+    public boolean saveGoodsDraft(DraftGoodsSkuParamsAddCmd draftGoods) {
         if (draftGoods.getGoodsGalleryList() != null
                 && !draftGoods.getGoodsGalleryList().isEmpty()) {
             GoodsGalleryPO goodsGalleryPO = goodsGalleryService.getGoodsGallery(
@@ -105,10 +105,10 @@ public class DraftGoodsServiceImpl
     }
 
     @Override
-    public DraftGoodsSkuParamsVO getDraftGoods(Long id) {
+    public DraftGoodsSkuParamsCO getDraftGoods(Long id) {
         DraftGoodsPO draftGoodsPO = this.getById(id);
-        DraftGoodsSkuParamsVO draftGoodsSkuParamsVO = new DraftGoodsSkuParamsVO();
-        BeanUtil.copyProperties(draftGoodsPO, draftGoodsSkuParamsVO);
+        DraftGoodsSkuParamsCO draftGoodsSkuParamsCO = new DraftGoodsSkuParamsCO();
+        BeanUtil.copyProperties(draftGoodsPO, draftGoodsSkuParamsCO);
 
         // 商品分类名称赋值
         List<String> categoryName = new ArrayList<>();
@@ -117,19 +117,19 @@ public class DraftGoodsServiceImpl
         for (Category category : categories) {
             categoryName.add(category.getName());
         }
-        draftGoodsSkuParamsVO.setCategoryName(categoryName);
-        draftGoodsSkuParamsVO.setGoodsParamsDTOList(
-                JSONUtil.toList(JSONUtil.parseArray(draftGoodsPO.getGoodsParamsListJson()), GoodsParamsDTO.class));
-        draftGoodsSkuParamsVO.setGoodsGalleryList(
+        draftGoodsSkuParamsCO.setCategoryName(categoryName);
+        draftGoodsSkuParamsCO.setGoodsParamsDTOList(
+                JSONUtil.toList(JSONUtil.parseArray(draftGoodsPO.getGoodsParamsListJson()), GoodsParamsAddCmd.class));
+        draftGoodsSkuParamsCO.setGoodsGalleryList(
                 JSONUtil.toList(JSONUtil.parseArray(draftGoodsPO.getGoodsGalleryListJson()), String.class));
         JSONArray jsonArray = JSONUtil.parseArray(draftGoodsPO.getSkuListJson());
         List<GoodsSkuPO> list = JSONUtil.toList(jsonArray, GoodsSkuPO.class);
-        draftGoodsSkuParamsVO.setSkuList(goodsSkuService.getGoodsSkuVOList(list));
-        return draftGoodsSkuParamsVO;
+        draftGoodsSkuParamsCO.setSkuList(goodsSkuService.getGoodsSkuCOList(list));
+        return draftGoodsSkuParamsCO;
     }
 
     @Override
-    public IPage<DraftGoodsPO> draftGoodsQueryPage(DraftGoodsPageQuery searchParams) {
+    public IPage<DraftGoodsPO> draftGoodsQueryPage(DraftGoodsPageQry searchParams) {
         return this.page(searchParams.buildMpPage(), QueryUtil.draftGoodsQueryWrapper(searchParams));
     }
 
@@ -141,8 +141,8 @@ public class DraftGoodsServiceImpl
      */
     private List<GoodsSkuPO> getGoodsSkuList(List<Map<String, Object>> skuList) {
         List<GoodsSkuPO> skus = new ArrayList<>();
-        for (Map<String, Object> skuVO : skuList) {
-            GoodsSkuPO add = this.add(skuVO);
+        for (Map<String, Object> skuCO : skuList) {
+            GoodsSkuPO add = this.add(skuCO);
             skus.add(add);
         }
         return skus;

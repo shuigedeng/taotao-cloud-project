@@ -18,9 +18,9 @@ package com.taotao.cloud.order.application.service.aftersale;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleApplyCO;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleAddCmd;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSalePageQry;
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,20 +38,20 @@ public interface IAfterSaleService extends IService<AfterSalePO> {
     /**
      * 分页查询售后信息
      *
-     * @param afterSalePageQuery 查询参数
+     * @param afterSalePageQry 查询参数
      * @return {@link IPage }<{@link AfterSalePO }>
      * @since 2022-04-28 08:49:10
      */
-    IPage<AfterSalePO> pageQuery(AfterSalePageQuery afterSalePageQuery);
+    IPage<AfterSalePO> pageQuery(AfterSalePageQry afterSalePageQry);
 
     /**
      * 查询导出售后信息
      *
-     * @param afterSalePageQuery 查询参数
+     * @param afterSalePageQry 查询参数
      * @return {@link List }<{@link AfterSalePO }>
      * @since 2022-04-28 08:49:10
      */
-    List<AfterSalePO> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery);
+    List<AfterSalePO> exportAfterSaleOrder(AfterSalePageQry afterSalePageQry);
 
     /**
      * 查询售后信息
@@ -66,19 +66,19 @@ public interface IAfterSaleService extends IService<AfterSalePO> {
      * 获取申请售后页面信息
      *
      * @param sn 订单编号
-     * @return {@link AfterSaleApplyVO }
+     * @return {@link AfterSaleApplyCO }
      * @since 2022-04-28 08:49:10
      */
-    AfterSaleApplyVO getAfterSaleVO(String sn);
+    AfterSaleApplyCO getAfterSaleVO(String sn);
 
     /**
      * 售后申请
      *
-     * @param afterSaleDTO 售后对象
+     * @param afterSaleAddCmd 售后对象
      * @return {@link Boolean }
      * @since 2022-04-28 08:49:10
      */
-    Boolean saveAfterSale(AfterSaleDTO afterSaleDTO);
+    Boolean saveAfterSale(AfterSaleAddCmd afterSaleAddCmd);
 
     /**
      * 商家审核售后申请

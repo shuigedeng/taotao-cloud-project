@@ -18,6 +18,7 @@ package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.goods.application.command.store.dto.clientobject.StudioCommodityCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.StudioPO;
 import com.taotao.cloud.mq.stream.framework.trigger.message.BroadcastMessage;
 import com.taotao.cloud.web.base.service.BaseSuperService;
@@ -56,7 +57,7 @@ public interface IStudioService extends BaseSuperService<StudioPO, Long> {
      * @return {@link StudioCommodityVO }
      * @since 2022-04-27 17:01:11
      */
-    StudioCommodityVO getStudioVO(Long id);
+    StudioCommodityCO getStudioVO(Long id);
 
     /**
      * 获取直播间回放

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
+import com.taotao.cloud.goods.application.command.store.dto.clientobject.StoreGoodsLabelCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabelPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
@@ -36,7 +37,7 @@ public interface IStoreGoodsLabelService extends BaseSuperService<StoreGoodsLabe
 	 * @param storeId 商家ID
 	 * @return 店铺分类列表
 	 */
-	List<StoreGoodsLabelVO> listByStoreId(String storeId);
+	List<StoreGoodsLabelCO> listByStoreId(String storeId);
 
 	/**
 	 * 根据分类id集合获取所有店铺分类根据层级排序

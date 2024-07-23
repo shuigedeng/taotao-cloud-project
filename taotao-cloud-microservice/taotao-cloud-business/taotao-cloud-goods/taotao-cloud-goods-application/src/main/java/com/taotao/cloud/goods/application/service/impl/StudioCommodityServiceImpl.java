@@ -33,6 +33,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StudioCommodityServiceImpl
-        extends BaseSuperServiceImpl<
+	extends BaseSuperServiceImpl<
 	StudioCommodityPO, Long, IStudioCommodityMapper, StudioCommodityRepository, IStudioCommodityRepository>
-        implements IStudioCommodityService {}
+	implements IStudioCommodityService {
+
+}

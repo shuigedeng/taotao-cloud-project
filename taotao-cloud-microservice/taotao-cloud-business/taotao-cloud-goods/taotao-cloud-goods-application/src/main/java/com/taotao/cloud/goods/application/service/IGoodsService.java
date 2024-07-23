@@ -17,8 +17,11 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.goods.application.command.goods.dto.GoodsOperationDTO;
-import com.taotao.cloud.goods.application.command.goods.dto.GoodsPageQuery;
+import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
+import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
+import com.taotao.cloud.goods.application.command.goods.dto.GoodsAddCmd;
+import com.taotao.cloud.goods.application.command.goods.dto.GoodsPageQry;
+import com.taotao.cloud.goods.application.command.goods.dto.clientobject.GoodsSkuParamsCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
@@ -72,48 +75,48 @@ public interface IGoodsService extends BaseSuperService<GoodsPO, Long> {
     /**
      * 添加商品
      *
-     * @param goodsOperationDTO 商品查询条件
+     * @param goodsAddCmd 商品查询条件
      * @return {@link boolean }
      * @since 2022-04-27 17:00:15
      */
-    boolean addGoods(GoodsOperationDTO goodsOperationDTO);
+    boolean addGoods(GoodsAddCmd goodsAddCmd);
 
     /**
      * 修改商品
      *
-     * @param goodsOperationDTO 商品查询条件
+     * @param goodsAddCmd 商品查询条件
      * @param goodsId 商品ID
      * @return {@link boolean }
      * @since 2022-04-27 17:00:15
      */
-    boolean editGoods(GoodsOperationDTO goodsOperationDTO, Long goodsId);
+    boolean editGoods(GoodsAddCmd goodsAddCmd, Long goodsId);
 
     /**
-     * 查询商品VO
+     * 查询商品CO
      *
      * @param goodsId 商品id
-     * @return {@link GoodsSkuParamsVO }
+     * @return {@link GoodsSkuParamsCO }
      * @since 2022-04-27 17:00:16
      */
-    GoodsSkuParamsVO getGoodsVO(Long goodsId);
+    GoodsSkuParamsCO getGoodsVO(Long goodsId);
 
     /**
      * 商品查询
      *
-     * @param goodsPageQuery 查询参数
+     * @param goodsPageQry 查询参数
      * @return {@link IPage }<{@link GoodsPO }>
      * @since 2022-04-27 17:00:16
      */
-    IPage<GoodsPO> goodsQueryPage(GoodsPageQuery goodsPageQuery);
+    IPage<GoodsPO> goodsQueryPage(GoodsPageQry goodsPageQry);
 
     /**
      * 商品查询
      *
-     * @param goodsPageQuery 查询参数
+     * @param goodsPageQry 查询参数
      * @return {@link List }<{@link GoodsPO }>
      * @since 2022-04-27 17:00:16
      */
-    List<GoodsPO> queryListByParams(GoodsPageQuery goodsPageQuery);
+    List<GoodsPO> queryListByParams(GoodsPageQry goodsPageQry);
 
     /**
      * 批量审核商品

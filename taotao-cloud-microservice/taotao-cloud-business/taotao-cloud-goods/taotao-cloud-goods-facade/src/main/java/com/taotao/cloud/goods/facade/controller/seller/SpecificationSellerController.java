@@ -56,7 +56,7 @@ public class SpecificationSellerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
-    public Result<List<SpecificationVO>> getSpecifications(@PathVariable Long categoryId) {
+    public Result<List<SpecificationCO>> getSpecifications(@PathVariable Long categoryId) {
         List<Specification> categorySpecList = categorySpecificationService.getCategorySpecList(categoryId);
         return Result.success(SpecificationConvert.INSTANCE.convert(categorySpecList));
     }

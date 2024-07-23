@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 商品计量VO
+ * 商品计量CO
  *
  * @author shuigedeng
  * @version 2022.04
@@ -37,7 +37,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "商品计量VO")
+@Schema(description = "商品计量CO")
 public class GoodsUnitCO implements Serializable {
 
     @Serial

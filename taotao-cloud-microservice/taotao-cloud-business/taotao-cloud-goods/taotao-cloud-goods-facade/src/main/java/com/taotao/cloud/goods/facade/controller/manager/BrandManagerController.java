@@ -19,6 +19,10 @@ package com.taotao.cloud.goods.facade.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.application.command.brand.dto.clientobject.BrandCO;
+import com.taotao.cloud.goods.application.convert.BrandConvert;
+import com.taotao.cloud.goods.application.service.IBrandService;
+import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,6 +32,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import nl.basjes.parse.useragent.clienthints.ClientHints.Brand;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,8 +69,8 @@ public class BrandManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}")
-    public Result<BrandVO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
-        Brand brand = brandService.getById(id);
+    public Result<BrandCO> getById(@NotBlank(message = "id不能为空") @PathVariable Long id) {
+        BrandPO brand = brandService.getById(id);
         return Result.success(BrandConvert.INSTANCE.convert(brand));
     }
 
@@ -76,8 +81,8 @@ public class BrandManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/all/available")
-    public Result<List<BrandVO>> getAllAvailable() {
-        List<Brand> list = brandService.getAllAvailable();
+    public Result<List<BrandCO>> getAllAvailable() {
+        List<BrandPO> list = brandService.getAllAvailable();
         return Result.success(BrandConvert.INSTANCE.convert(list));
     }
 
@@ -88,9 +93,9 @@ public class BrandManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/page")
-    public Result<PageResult<BrandVO>> brandsQueryPage(@Validated BrandPageQuery page) {
-        IPage<Brand> brandPage = brandService.brandsQueryPage(page);
-        return Result.success(MpUtils.convertMybatisPage(brandPage, BrandVO.class));
+    public Result<PageResult<BrandCO>> brandsQueryPage(@Validated BrandPageQuery page) {
+        IPage<BrandPO> brandPage = brandService.brandsQueryPage(page);
+        return Result.success(MpUtils.convertMybatisPage(brandPage, BrandCO.class));
     }
 
     @Operation(summary = "新增品牌", description = "新增品牌")

@@ -58,7 +58,7 @@ public class SpecificationManagerController {
     @RequestLogger("获取所有可用规格")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/all")
-    public Result<List<SpecificationVO>> getAll() {
+    public Result<List<SpecificationCO>> getAll() {
         List<Specification> specifications = specificationService.list();
         return Result.success(SpecificationConvert.INSTANCE.convert(specifications));
     }
@@ -67,7 +67,7 @@ public class SpecificationManagerController {
     @RequestLogger("搜索规格")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<PageResult<SpecificationVO>> page(@Validated SpecificationPageQuery specificationPageQuery) {
+    public Result<PageResult<SpecificationCO>> page(@Validated SpecificationPageQuery specificationPageQuery) {
         IPage<Specification> specificationPage = specificationService.getPage(specificationPageQuery);
         return Result.success(MpUtils.convertMybatisPage(specificationPage, SpecificationConvert.INSTANCE::convert));
     }

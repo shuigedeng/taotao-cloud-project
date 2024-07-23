@@ -17,6 +17,7 @@
 package com.taotao.cloud.goods.facade.controller.buyer;
 
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
 import com.taotao.cloud.goods.application.service.ICategoryService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +26,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -32,8 +34,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * 买家端,商品分类接口
@@ -61,7 +61,8 @@ public class CategoryBuyerController {
 	})
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{parentId}")
-	public Result<List<CategoryTreeVO>> list(@NotNull(message = "父ID不能为空") @PathVariable Long parentId) {
+	public Result<List<CategoryTreeCO>> list(
+		@NotNull(message = "父ID不能为空") @PathVariable Long parentId) {
 		return Result.success(categoryService.listAllChildren(parentId));
 	}
 }

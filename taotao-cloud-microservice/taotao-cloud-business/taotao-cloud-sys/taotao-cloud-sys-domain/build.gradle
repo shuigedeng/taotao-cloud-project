@@ -86,6 +86,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
     api "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
     api "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
+    api "io.github.shuigedeng:taotao-cloud-starter-job-snail"
     api "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255

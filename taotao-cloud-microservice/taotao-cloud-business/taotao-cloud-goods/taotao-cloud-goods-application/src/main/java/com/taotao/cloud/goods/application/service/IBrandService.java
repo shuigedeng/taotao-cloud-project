@@ -17,6 +17,9 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.goods.application.command.brand.dto.BrandAddCmd;
+import com.taotao.cloud.goods.application.command.brand.dto.BrandPageQry;
+import com.taotao.cloud.goods.application.command.brand.dto.BrandUpdateCmd;
 import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
@@ -31,7 +34,7 @@ import java.util.Map;
  */
 public interface IBrandService extends BaseSuperService<BrandPO, Long> {
 
-	IPage<BrandPO> brandsQueryPage(BrandPageQuery page);
+	IPage<BrandPO> brandsQueryPage(BrandPageQry page);
 
 	/**
 	 * 根据条件分页获取品牌列表
@@ -39,7 +42,7 @@ public interface IBrandService extends BaseSuperService<BrandPO, Long> {
 	 * @param page 条件参数
 	 * @return 品牌列表
 	 */
-	IPage<BrandPO> getBrandsByPage(BrandPageQuery page);
+	IPage<BrandPO> getBrandsByPage(BrandPageQry page);
 
 	List<BrandPO> getBrandsByCategorys(Long categoryIds);
 
@@ -66,7 +69,8 @@ public interface IBrandService extends BaseSuperService<BrandPO, Long> {
 	 * @param categoryIds 分类ID
 	 * @return 品牌列表
 	 */
-	List<Map<String, Object>> getBrandsMapsByCategory(List<Long> categoryIds, String columns);
+	List<Map<String, Object>> getBrandsMapsByCategory(List<Long> categoryIds,
+		String columns);
 
 	/**
 	 * 添加品牌
@@ -74,7 +78,7 @@ public interface IBrandService extends BaseSuperService<BrandPO, Long> {
 	 * @param brandVO 品牌信息
 	 * @return 添加结果
 	 */
-	boolean addBrand(BrandDTO brandVO);
+	boolean addBrand(BrandAddCmd brandAddCmd);
 
 	/**
 	 * 更新品牌
@@ -82,7 +86,7 @@ public interface IBrandService extends BaseSuperService<BrandPO, Long> {
 	 * @param brandVO 品牌信息
 	 * @return 更新结果
 	 */
-	boolean updateBrand(BrandDTO brandVO);
+	boolean updateBrand(BrandUpdateCmd brandUpdateCmd);
 
 	/**
 	 * 更新品牌是否可用

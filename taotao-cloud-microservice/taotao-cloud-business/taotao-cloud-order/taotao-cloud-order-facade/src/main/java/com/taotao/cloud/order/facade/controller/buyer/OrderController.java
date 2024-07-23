@@ -22,9 +22,9 @@ import com.taotao.cloud.common.exception.BusinessException;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
-import com.taotao.cloud.order.application.command.order.OrderDetailVO;
-import com.taotao.cloud.order.application.command.order.OrderPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderSimpleVO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderDetailCO;
+import com.taotao.cloud.order.application.command.order.dto.OrderPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderSimpleCO;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import com.taotao.cloud.web.utils.OperationalJudgment;
@@ -64,21 +64,21 @@ public class OrderController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/page")
-    public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
+    public Result<PageResult<OrderSimpleCO>> queryMineOrder(OrderPageQry orderPageQry) {
         SecurityUser currentUser = SecurityUtils.getCurrentUser();
-        orderPageQuery.setMemberId(currentUser.getUserId());
-        IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(page, OrderSimpleVO.class));
+        orderPageQry.setMemberId(currentUser.getUserId());
+        IPage<OrderSimpleCO> page = orderService.pageQuery(orderPageQry);
+        return Result.success(MpUtils.convertMybatisPage(page, OrderSimpleCO.class));
     }
 
     @Operation(summary = "订单明细", description = "订单明细")
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{orderSn}")
-    public Result<OrderDetailVO> detail(@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
-        OrderDetailVO orderDetailVO = orderService.queryDetail(orderSn);
-        OperationalJudgment.judgment(orderDetailVO.order());
-        return Result.success(orderDetailVO);
+    public Result<OrderDetailCO> detail(@NotNull(message = "订单编号不能为空") @PathVariable("orderSn") String orderSn) {
+        OrderDetailCO orderDetailCO = orderService.queryDetail(orderSn);
+        OperationalJudgment.judgment(orderDetailCO.order());
+        return Result.success(orderDetailCO);
     }
 
     @Operation(summary = "确认收货", description = "确认收货")

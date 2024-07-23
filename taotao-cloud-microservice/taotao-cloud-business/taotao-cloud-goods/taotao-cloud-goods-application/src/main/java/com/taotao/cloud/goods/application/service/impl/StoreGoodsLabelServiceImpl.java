@@ -22,6 +22,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.cloud.goods.application.command.store.dto.clientobject.StoreGoodsLabelCO;
 import com.taotao.cloud.goods.application.service.IStoreGoodsLabelService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IStoreGoodsLabelMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabelPO;
@@ -32,6 +33,7 @@ import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,8 +48,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class StoreGoodsLabelServiceImpl
-	extends BaseSuperServiceImpl<
-	StoreGoodsLabelPO, Long, IStoreGoodsLabelMapper, StoreGoodsLabelRepository, IStoreGoodsLabelRepository>
+	extends
+	BaseSuperServiceImpl<StoreGoodsLabelPO, Long, IStoreGoodsLabelMapper, StoreGoodsLabelRepository, IStoreGoodsLabelRepository>
 	implements IStoreGoodsLabelService {
 
 	/**
@@ -57,45 +59,45 @@ public class StoreGoodsLabelServiceImpl
 	private RedisRepository redisRepository;
 
 	@Override
-	public List<StoreGoodsLabelVO> listByStoreId(Long storeId) {
+	public List<StoreGoodsLabelCO> listByStoreId(Long storeId) {
 		// 从缓存中获取店铺分类
 		if (redisRepository.hasKey(CachePrefix.STORE_CATEGORY.getPrefix() + storeId)) {
-			return (List<StoreGoodsLabelVO>) redisRepository.get(
+			return (List<StoreGoodsLabelCO>) redisRepository.get(
 				CachePrefix.STORE_CATEGORY.getPrefix() + storeId);
 		}
 
 		List<StoreGoodsLabelPO> list = list(storeId);
-		List<StoreGoodsLabelVO> storeGoodsLabelVOList = new ArrayList<>();
+		List<StoreGoodsLabelCO> storeGoodsLabelCOList = new ArrayList<>();
 
 		// 循环列表判断是否为顶级，如果为顶级获取下级数据
 		list.stream().filter(storeGoodsLabel -> storeGoodsLabel.getLevel() == 0)
 			.forEach(storeGoodsLabel -> {
-				StoreGoodsLabelVO storeGoodsLabelVO = new StoreGoodsLabelVO(
+				StoreGoodsLabelCO storeGoodsLabelCO = new StoreGoodsLabelCO(
 					storeGoodsLabel.getId(),
 					storeGoodsLabel.getLabelName(),
 					storeGoodsLabel.getLevel(),
 					storeGoodsLabel.getSortOrder());
-				List<StoreGoodsLabelVO> storeGoodsLabelVOChildList = new ArrayList<>();
+				List<StoreGoodsLabelCO> storeGoodsLabelCOChildList = new ArrayList<>();
 				list.stream()
 					.filter(label -> label.getParentId().equals(storeGoodsLabel.getId()))
-					.forEach(storeGoodsLabelChild -> storeGoodsLabelVOChildList.add(
-						new StoreGoodsLabelVO(
+					.forEach(storeGoodsLabelChild -> storeGoodsLabelCOChildList.add(
+						new StoreGoodsLabelCO(
 							storeGoodsLabelChild.getId(),
 							storeGoodsLabelChild.getLabelName(),
 							storeGoodsLabelChild.getLevel(),
 							storeGoodsLabelChild.getSortOrder())));
-				storeGoodsLabelVO.setChildren(storeGoodsLabelVOChildList);
-				storeGoodsLabelVOList.add(storeGoodsLabelVO);
+				storeGoodsLabelCO.setChildren(storeGoodsLabelCOChildList);
+				storeGoodsLabelCOList.add(storeGoodsLabelCO);
 			});
 
 		// 调整店铺分类排序
-		storeGoodsLabelVOList.sort(Comparator.comparing(StoreGoodsLabelVO::getSortOrder));
+		storeGoodsLabelCOList.sort(Comparator.comparing(StoreGoodsLabelCO::getSortOrder));
 
-		if (!storeGoodsLabelVOList.isEmpty()) {
+		if (!storeGoodsLabelCOList.isEmpty()) {
 			redisRepository.set(CachePrefix.CATEGORY.getPrefix() + storeId + "tree",
-				storeGoodsLabelVOList);
+				storeGoodsLabelCOList);
 		}
-		return storeGoodsLabelVOList;
+		return storeGoodsLabelCOList;
 	}
 
 	/**
@@ -109,6 +111,21 @@ public class StoreGoodsLabelServiceImpl
 		return this.list(new LambdaQueryWrapper<StoreGoodsLabelPO>()
 			.in(StoreGoodsLabelPO::getId, ids)
 			.orderByAsc(StoreGoodsLabelPO::getLevel));
+	}
+
+	@Override
+	public List<StoreGoodsLabelCO> listByStoreId(String storeId) {
+		return List.of();
+	}
+
+	@Override
+	public List<StoreGoodsLabelPO> listByStoreIds(List<String> ids) {
+		return List.of();
+	}
+
+	@Override
+	public List<Map<String, Object>> listMapsByStoreIds(List<String> ids, String columns) {
+		return List.of();
 	}
 
 	@Override
@@ -138,6 +155,11 @@ public class StoreGoodsLabelServiceImpl
 		// 清除缓存
 		removeCache(storeGoodsLabelPO.getStoreId());
 		return true;
+	}
+
+	@Override
+	public void removeStoreGoodsLabel(String storeLabelId) {
+
 	}
 
 	@Override

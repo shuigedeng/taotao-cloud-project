@@ -17,6 +17,8 @@
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrandPO;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICategoryBrandRepository extends JpaRepository<CategoryBrandPO, Long> {}
+public interface ICategoryBrandRepository extends
+	BaseInterfaceSuperRepository<CategoryBrandPO, Long> {}

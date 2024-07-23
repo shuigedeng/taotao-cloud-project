@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsDTO;
-import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsItemDTO;
+import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsAddCmd;
+import com.taotao.cloud.goods.application.command.goods.dto.GoodsParamsItemAddCmd;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IParametersService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IParametersMapper;
@@ -83,15 +83,15 @@ public class ParametersServiceImpl
 		if (!goodsList.isEmpty()) {
 			for (Map<String, Object> goods : goodsList) {
 				String params = (String) goods.get("params");
-				List<GoodsParamsDTO> goodsParamsDTOS = JSONUtil.toList(params,
-					GoodsParamsDTO.class);
-				List<GoodsParamsDTO> goodsParamsDTOList = goodsParamsDTOS.stream()
+				List<GoodsParamsAddCmd> goodsParamsAddCmds = JSONUtil.toList(params,
+					GoodsParamsAddCmd.class);
+				List<GoodsParamsAddCmd> goodsParamsAddCmdList = goodsParamsAddCmds.stream()
 					.filter(i -> i.getGroupId() != null && i.getGroupId()
 						.equals(parametersPO.getGroupId()))
 					.toList();
-				this.setGoodsItemDTOList(goodsParamsDTOList, parametersPO);
+				this.setGoodsItemDTOList(goodsParamsAddCmdList, parametersPO);
 				this.goodsService.updateGoodsParams(
-					Convert.toLong(goods.get("id")), JSONUtil.toJsonStr(goodsParamsDTOS));
+					Convert.toLong(goods.get("id")), JSONUtil.toJsonStr(goodsParamsAddCmds));
 				goodsIds.add(goods.get("id").toString());
 			}
 
@@ -116,18 +116,18 @@ public class ParametersServiceImpl
 	/**
 	 * 更新商品参数信息
 	 *
-	 * @param goodsParamsDTOList 商品参数项列表
-	 * @param parametersPO         参数信息
+	 * @param goodsParamsAddCmdList 商品参数项列表
+	 * @param parametersPO       参数信息
 	 */
-	private void setGoodsItemDTOList(List<GoodsParamsDTO> goodsParamsDTOList,
+	private void setGoodsItemDTOList(List<GoodsParamsAddCmd> goodsParamsAddCmdList,
 		ParametersPO parametersPO) {
-		for (GoodsParamsDTO goodsParamsDTO : goodsParamsDTOList) {
-			List<GoodsParamsItemDTO> goodsParamsItemDTOList = goodsParamsDTO.getGoodsParamsItemDTOList()
+		for (GoodsParamsAddCmd goodsParamsAddCmd : goodsParamsAddCmdList) {
+			List<GoodsParamsItemAddCmd> goodsParamsItemAddCmdList = goodsParamsAddCmd.getGoodsParamsItemAddCmdList()
 				.stream()
 				.filter(i -> i.getParamId() != null && i.getParamId().equals(parametersPO.getId()))
 				.toList();
-			for (GoodsParamsItemDTO goodsParamsItemDTO : goodsParamsItemDTOList) {
-				this.setGoodsItemDTO(goodsParamsItemDTO, parametersPO);
+			for (GoodsParamsItemAddCmd goodsParamsItemAddCmd : goodsParamsItemAddCmdList) {
+				this.setGoodsItemDTO(goodsParamsItemAddCmd, parametersPO);
 			}
 		}
 	}
@@ -135,26 +135,26 @@ public class ParametersServiceImpl
 	/**
 	 * 更新商品参数详细信息
 	 *
-	 * @param goodsParamsItemDTO 商品参数项信息
-	 * @param parametersPO         参数信息
+	 * @param goodsParamsItemAddCmd 商品参数项信息
+	 * @param parametersPO       参数信息
 	 */
-	private void setGoodsItemDTO(GoodsParamsItemDTO goodsParamsItemDTO, ParametersPO parametersPO) {
-		if (goodsParamsItemDTO.getParamId().equals(parametersPO.getId())) {
-			goodsParamsItemDTO.setParamId(parametersPO.getId());
-			goodsParamsItemDTO.setParamName(parametersPO.getParamName());
-			goodsParamsItemDTO.setRequired(parametersPO.getRequired());
-			goodsParamsItemDTO.setIsIndex(parametersPO.getIsIndex());
-			goodsParamsItemDTO.setSort(parametersPO.getSort());
+	private void setGoodsItemDTO(GoodsParamsItemAddCmd goodsParamsItemAddCmd, ParametersPO parametersPO) {
+		if (goodsParamsItemAddCmd.getParamId().equals(parametersPO.getId())) {
+			goodsParamsItemAddCmd.setParamId(parametersPO.getId());
+			goodsParamsItemAddCmd.setParamName(parametersPO.getParamName());
+			goodsParamsItemAddCmd.setRequired(parametersPO.getRequired());
+			goodsParamsItemAddCmd.setIsIndex(parametersPO.getIsIndex());
+			goodsParamsItemAddCmd.setSort(parametersPO.getSort());
 			if (CharSequenceUtil.isNotEmpty(parametersPO.getOptions())
-				&& CharSequenceUtil.isNotEmpty(goodsParamsItemDTO.getParamValue())
-				&& !parametersPO.getOptions().contains(goodsParamsItemDTO.getParamValue())) {
+				&& CharSequenceUtil.isNotEmpty(goodsParamsItemAddCmd.getParamValue())
+				&& !parametersPO.getOptions().contains(goodsParamsItemAddCmd.getParamValue())) {
 				if (parametersPO.getOptions().contains(",")) {
-					goodsParamsItemDTO.setParamValue(parametersPO
+					goodsParamsItemAddCmd.setParamValue(parametersPO
 						.getOptions()
 						.substring(0, parametersPO.getOptions().indexOf(",")));
 				}
 				else {
-					goodsParamsItemDTO.setParamValue(parametersPO.getOptions());
+					goodsParamsItemAddCmd.setParamValue(parametersPO.getOptions());
 				}
 			}
 		}

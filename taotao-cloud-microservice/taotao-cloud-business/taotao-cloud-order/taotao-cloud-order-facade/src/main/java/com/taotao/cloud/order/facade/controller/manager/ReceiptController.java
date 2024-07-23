@@ -20,8 +20,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
-import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
-import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
+import com.taotao.cloud.order.application.command.order.dto.OrderReceiptAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.ReceiptPageQry;
 import com.taotao.cloud.order.application.service.order.IReceiptService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,8 +53,8 @@ public class ReceiptController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-	public Result<PageResult<OrderReceiptDTO>> getPage(ReceiptPageQuery receiptPageQuery) {
-		IPage<OrderReceiptDTO> page = this.receiptService.pageQuery(receiptPageQuery);
-		return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptDTO.class));
+	public Result<PageResult<OrderReceiptAddCmd>> getPage(ReceiptPageQry receiptPageQry) {
+		IPage<OrderReceiptAddCmd> page = this.receiptService.pageQuery(receiptPageQry);
+		return Result.success(MpUtils.convertMybatisPage(page, OrderReceiptAddCmd.class));
 	}
 }

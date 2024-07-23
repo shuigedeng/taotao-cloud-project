@@ -18,6 +18,7 @@ package com.taotao.cloud.member.facade.controller.buyer;
 
 import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.member.application.service.IMemberBrowseService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -47,39 +48,40 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/member/buyer/member/browse")
 public class MemberBrowseController {
 
-    private final IMemberBrowseService memberBrowseService;
+	private final IMemberBrowseService memberBrowseService;
 
-    @Operation(summary = "分页获取浏览历史", description = "分页获取浏览历史")
-    @RequestLogger
-    @PreAuthorize("@el.check('admin','timing:list')")
-    @GetMapping
-    public Result<List<EsGoodsIndexVO>> getByPage(PageQuery PageQuery) {
-        return Result.success(memberBrowseService.footPrintPage(PageQuery));
-    }
+	@Operation(summary = "分页获取浏览历史", description = "分页获取浏览历史")
+	@RequestLogger
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping
+	public Result<List<EsGoodsIndexVO>> getByPage(PageQuery PageQuery) {
+		return Result.success(memberBrowseService.footPrintPage(PageQuery));
+	}
 
-    @Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史")
-    @RequestLogger
-    @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping(value = "/{ids}")
-    public Result<Boolean> delAllByIds(
-            @Parameter(description = "会员地址ID", required = true) @NotEmpty(message = "商品ID不能为空") @PathVariable("ids")
-                    List<Long> ids) {
-        return Result.success(memberBrowseService.deleteByIds(ids));
-    }
+	@Operation(summary = "根据id删除浏览历史", description = "根据id删除浏览历史")
+	@RequestLogger
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@DeleteMapping(value = "/{ids}")
+	public Result<Boolean> delAllByIds(
+		@Parameter(description = "会员地址ID", required = true)
+		@NotEmpty(message = "商品ID不能为空") @PathVariable("ids")
+		List<Long> ids) {
+		return Result.success(memberBrowseService.deleteByIds(ids));
+	}
 
-    @Operation(summary = "清空足迹", description = "清空足迹")
-    @RequestLogger
-    @PreAuthorize("@el.check('admin','timing:list')")
-    @DeleteMapping
-    public Result<Boolean> deleteAll() {
-        return Result.success(memberBrowseService.clean());
-    }
+	@Operation(summary = "清空足迹", description = "清空足迹")
+	@RequestLogger
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@DeleteMapping
+	public Result<Boolean> deleteAll() {
+		return Result.success(memberBrowseService.clean());
+	}
 
-    @Operation(summary = "获取当前会员足迹数量", description = "获取当前会员足迹数量")
-    @RequestLogger
-    @PreAuthorize("@el.check('admin','timing:list')")
-    @GetMapping(value = "/current/foot/count")
-    public Result<Long> getFootprintNum() {
-        return Result.success(memberBrowseService.getFootprintNum());
-    }
+	@Operation(summary = "获取当前会员足迹数量", description = "获取当前会员足迹数量")
+	@RequestLogger
+	@PreAuthorize("@el.check('admin','timing:list')")
+	@GetMapping(value = "/current/foot/count")
+	public Result<Long> getFootprintNum() {
+		return Result.success(memberBrowseService.getFootprintNum());
+	}
 }

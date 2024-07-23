@@ -16,6 +16,11 @@
 
 package com.taotao.cloud.goods.application.service;
 
+import com.taotao.cloud.goods.application.command.category.dto.CategoryAddCmd;
+import com.taotao.cloud.goods.application.command.category.dto.CategorySearchQry;
+import com.taotao.cloud.goods.application.command.category.dto.CategoryUpdateCmd;
+import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
+import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +32,11 @@ import java.util.Map;
  * @version 2022.04
  * @since 2022-04-27 16:59:28
  */
-public interface ICategoryService extends BaseSuperService<Category, Long> {
+public interface ICategoryService extends BaseSuperService<CategoryPO, Long> {
 
-	List<Category> childrenList(Long parentId);
+	List<CategoryPO> childrenList(Long parentId);
 
-	Category getCategoryById(Long id);
+	CategoryPO getCategoryById(Long id);
 
 	boolean delete(Long id);
 
@@ -43,7 +48,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param parentId 分类父ID
 	 * @return 商品分类列表
 	 */
-	List<Category> dbList(String parentId);
+	List<CategoryPO> dbList(String parentId);
 
 	/**
 	 * 获取分类
@@ -53,7 +58,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @author shuigedeng
 	 * @since 2023-12-05 15:19
 	 */
-	Category getCategoryById(String id);
+	CategoryPO getCategoryById(String id);
 
 	/**
 	 * 根据分类id集合获取所有分类根据层级排序
@@ -61,7 +66,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param ids 分类ID集合
 	 * @return 商品分类列表
 	 */
-	List<Category> listByIdsOrderByLevel(List<Long> ids);
+	List<CategoryPO> listByIdsOrderByLevel(List<Long> ids);
 
 	/**
 	 * 根据分类id集合获取所有分类根据层级排序
@@ -69,14 +74,15 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param ids 分类ID集合
 	 * @return 商品分类列表
 	 */
-	List<Map<String, Object>> listMapsByIdsOrderByLevel(List<String> ids, String columns);
+	List<Map<String, Object>> listMapsByIdsOrderByLevel(List<String> ids,
+		String columns);
 
 	/**
 	 * 获取分类树
 	 *
 	 * @return 分类树
 	 */
-	List<CategoryTreeVO> categoryTree();
+	List<CategoryTreeCO> categoryTree();
 
 	/**
 	 * 查询所有的分类，父子关系
@@ -84,14 +90,14 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param parentId 分类父ID
 	 * @return 所有的分类，父子关系
 	 */
-	List<CategoryTreeVO> listAllChildren(Long parentId);
+	List<CategoryTreeCO> listAllChildren(Long parentId);
 
 	/**
 	 * 查询所有的分类，父子关系 数据库获取
 	 *
 	 * @return 所有的分类，父子关系
 	 */
-	List<CategoryTreeVO> listAllChildren();
+	List<CategoryTreeCO> listAllChildren();
 
 	/**
 	 * 获取指定分类的分类名称
@@ -107,7 +113,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param category 分类
 	 * @return 商品分类list
 	 */
-	List<Category> findByAllBySortOrder(Category category);
+	List<CategoryPO> findByAllBySortOrder(CategorySearchQry category);
 
 	/**
 	 * 添加商品分类
@@ -115,7 +121,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param category 商品分类信息
 	 * @return 添加结果
 	 */
-	boolean saveCategory(Category category);
+	boolean saveCategory(CategoryAddCmd category);
 
 	/**
 	 * 修改商品分类
@@ -123,7 +129,7 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param category 商品分类信息
 	 * @return 修改结果
 	 */
-	boolean updateCategory(Category category);
+	boolean updateCategory(CategoryUpdateCmd category);
 
 	/**
 	 * 批量删除分类
@@ -146,13 +152,13 @@ public interface ICategoryService extends BaseSuperService<Category, Long> {
 	 * @param categories 经营范围
 	 * @return 分类VO列表
 	 */
-	List<CategoryTreeVO> getStoreCategory(String[] categories);
+	List<CategoryTreeCO> getStoreCategory(String[] categories);
 
 	/**
 	 * 获取一级分类列表 用于商家入驻选择
 	 *
 	 * @return 分类列表
 	 */
-	List<Category> firstCategory();
+	List<CategoryPO> firstCategory();
 
 }

@@ -24,12 +24,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.cloud.goods.application.service.ICategoryService;
 import com.taotao.cloud.goods.application.service.ICustomWordsService;
+import com.taotao.cloud.goods.application.service.IEsGoodsIndexService;
 import com.taotao.cloud.goods.application.service.IGoodsSkuService;
 import com.taotao.cloud.goods.application.service.IStoreGoodsLabelService;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.CharSequenceUtil;
@@ -72,7 +75,8 @@ import static com.taotao.cloud.common.enums.CachePrefixEnum.INIT_INDEX_PROCESS;
  * @since 2022-04-27 17:02:27
  */
 @Service
-public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements IEsGoodsIndexService {
+public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
+	IEsGoodsIndexService {
 
 	private static final String IGNORE_FIELD = "serialVersionUID,promotionMap,id,goodsId";
 	private static final String KEY_SUCCESS = "success";
@@ -171,7 +175,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					List<GoodsSkuDTO> skus = skuIPage.getRecords();
 					List<String> categories = skus.stream().map(GoodsSkuDTO::getCategoryPath).toList();
 					List<String> skuIds = skus.stream().map(GoodsSkuDTO::getId).toList();
-					List<PromotionGoodsVO> skuValidPromotions = promotionGoodsApi.findSkuValidPromotions(categories, skuIds);
+					List<PromotionGoodsCO> skuValidPromotions = promotionGoodsApi.findSkuValidPromotions(categories, skuIds);
 
 					List<String> brandIds = new ArrayList<>();
 					List<String> categoryPaths = new ArrayList<>();
@@ -212,7 +216,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 						esGoodsIndex.setSkuSource(skuSource);
 
 						// 设置促销信息
-						List<PromotionGoodsVO> promotionGoods = skuValidPromotions.stream()
+						List<PromotionGoodsCO> promotionGoods = skuValidPromotions.stream()
 							.filter(j ->
 								(Objects.nonNull(j.getSkuId()) && j.getSkuId().equals(goodsSku.getId())) ||
 									(j.getScopeType().equals(PromotionsScopeTypeEnum.ALL.name()) && j.getStoreId().equals("0")) ||
@@ -509,7 +513,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	}
 
 	@Override
-	public UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotionsVO promotion, String key) {
+	public UpdateRequest updateEsGoodsIndexPromotions(String id, BasePromotionsCO promotion, String key) {
 		EsGoodsIndex goodsIndex = findById(id);
 		if (goodsIndex != null) {
 			// 批发商品不参与促销（除优惠券和满减）
@@ -532,7 +536,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param key       促销信息的key
 	 */
 	@Override
-	public void updateEsGoodsIndexPromotions(List<String> ids, BasePromotionsVO promotion, String key) {
+	public void updateEsGoodsIndexPromotions(List<String> ids, BasePromotionsCO promotion, String key) {
 		BulkRequest bulkRequest = new BulkRequest();
 		LogUtils.info("更新商品索引的促销信息----------");
 		LogUtils.info("商品ids: {}", ids);
@@ -549,7 +553,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 
 
 	@Override
-	public void updateEsGoodsIndexByList(List<PromotionGoodsVO> promotionGoodsList, BasePromotionsVO promotion, String key) {
+	public void updateEsGoodsIndexByList(List<PromotionGoodsCO> promotionGoodsList, BasePromotionsCO promotion, String key) {
 		BulkRequest bulkRequest = new BulkRequest();
 		LogUtils.info("修改商品活动索引");
 		LogUtils.info("促销商品信息: {}", promotionGoodsList);
@@ -557,7 +561,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		LogUtils.info("活动: {}", promotion);
 		if (promotionGoodsList != null) {
 			// 循环更新 促销商品索引
-			for (PromotionGoodsVO promotionGoods : promotionGoodsList) {
+			for (PromotionGoodsCO promotionGoods : promotionGoodsList) {
 				promotion.setStartTime(promotionGoods.getStartTime());
 				promotion.setEndTime(promotionGoods.getEndTime());
 				UpdateRequest updateRequest = this.updateEsGoodsIndexPromotions(promotionGoods.getSkuId(), promotion, key);
@@ -576,17 +580,17 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param key       促销信息的key
 	 */
 	@Override
-	public void updateEsGoodsIndexAllByList(BasePromotionsVO promotion, String key) {
+	public void updateEsGoodsIndexAllByList(BasePromotionsCO promotion, String key) {
 		ThreadUtil.execAsync(() -> this.executeUpdateEsGoodsIndexAll(promotion, key));
 
 	}
 
-	private void executeUpdateEsGoodsIndexAll(BasePromotionsVO promotion, String key) {
+	private void executeUpdateEsGoodsIndexAll(BasePromotionsCO promotion, String key) {
 		for (int i = 0; ; i++) {
 			List<String> skuIds;
-			PageVO pageVO = new PageVO();
-			pageVO.setPageNumber(i);
-			pageVO.setPageSize(1000);
+			PageCO pageCO = new PageCO();
+			pageCO.setPageNumber(i);
+			pageCO.setPageSize(1000);
 			EsGoodsSearchDTO searchDTO = new EsGoodsSearchDTO();
 			if (PromotionTools.isPromotionsTypeNeedsToChecked(key)) {
 				searchDTO.setSalesModel(GoodsSalesModeEnum.RETAIL.name());
@@ -597,7 +601,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 			}
 
 			// 查询出店铺商品
-			SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(searchDTO, pageVO);
+			SearchPage<EsGoodsIndex> esGoodsIndices = goodsSearchService.searchGoods(searchDTO, pageCO);
 
 			skuIds = esGoodsIndices.isEmpty() ? new ArrayList<>() :
 				esGoodsIndices.getContent().stream().map(SearchHit::getId).toList();
@@ -689,7 +693,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 					// 促销不为空则进行清洗
 					promotionMap.entrySet().removeIf(j -> {
 						JSONObject promotionJson = JSONUtil.parseObj(j.getValue());
-						BasePromotionsVO promotion = promotionJson.toBean(BasePromotionsVO.class);
+						BasePromotionsCO promotion = promotionJson.toBean(BasePromotionsCO.class);
 						return promotion.getEndTime() != null && promotion.getEndTime().getTime() < DateUtil.date().getTime();
 					});
 				}
@@ -749,7 +753,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 		List<String> promotionIds = new ArrayList<>();
 		// 写入促销id
 		for (String key : keyCollect) {
-			BasePromotionsVO promotion = (BasePromotionsVO) promotionMap.get(key);
+			BasePromotionsCO promotion = (BasePromotionsCO) promotionMap.get(key);
 			promotionIds.add(promotion.getId());
 		}
 		return promotionIds;
@@ -783,7 +787,7 @@ public class EsGoodsIndexServiceImpl extends BaseElasticsearchService implements
 	 * @param key        关键字
 	 * @param promotion  活动
 	 */
-	private UpdateRequest updateGoodsIndexPromotion(EsGoodsIndex goodsIndex, String key, BasePromotionsVO promotion) {
+	private UpdateRequest updateGoodsIndexPromotion(EsGoodsIndex goodsIndex, String key, BasePromotionsCO promotion) {
 		Map<String, Object> promotionMap;
 		// 数据非空处理，如果空给一个新的信息
 		if (goodsIndex.getOriginPromotionMap() == null || goodsIndex.getOriginPromotionMap().isEmpty()) {

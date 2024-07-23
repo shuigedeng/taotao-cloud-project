@@ -21,6 +21,8 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
+import com.taotao.cloud.member.application.command.address.dto.MemberAddressAddCmd;
+import com.taotao.cloud.member.application.command.address.dto.MemberAddressEditCmd;
 import com.taotao.cloud.member.application.command.address.dto.clientobject.MemberAddressCO;
 import com.taotao.cloud.member.application.converter.MemberAddressConvert;
 import com.taotao.cloud.member.application.service.IMemberAddressService;
@@ -79,8 +81,8 @@ public class MemberAddressController {
 		@Parameter(description = "会员地址ID", required = true)
 		@NotNull(message = "id不能为空")
 		@PathVariable(value = "id") Long id) {
-		MemberAddressPO memberAddressPO = memberAddressService.getMemberAddress(id);
-		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddressPO));
+		MemberAddressPO memberAddressPo = memberAddressService.getMemberAddress(id);
+		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddressPo));
 	}
 
 	@Operation(summary = "获取当前会员默认收件地址", description = "获取当前会员默认收件地址")
@@ -88,15 +90,15 @@ public class MemberAddressController {
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@GetMapping(value = "/current/default")
 	public Result<MemberAddressCO> getDefaultShippingAddress() {
-		MemberAddressPO memberAddressPO = memberAddressService.getDefaultMemberAddress();
-		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddressPO));
+		MemberAddressPO memberAddressPo = memberAddressService.getDefaultMemberAddress();
+		return Result.success(MemberAddressConvert.INSTANCE.convert(memberAddressPo));
 	}
 
 	@Operation(summary = "新增会员收件地址", description = "新增会员收件地址")
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PostMapping
-	public Result<Boolean> addShippingAddress(@Valid MemberAddressPO shippingAddress) {
+	public Result<Boolean> addShippingAddress(@Valid MemberAddressAddCmd shippingAddress) {
 		// 添加会员地址
 		shippingAddress.setMemberId(SecurityUtils.getUserId());
 		if (shippingAddress.getDefaulted() == null) {
@@ -109,7 +111,7 @@ public class MemberAddressController {
 	@RequestLogger
 	@PreAuthorize("@el.check('admin','timing:list')")
 	@PutMapping
-	public Result<Boolean> editShippingAddress(@Valid @RequestBody MemberAddressPO shippingAddress) {
+	public Result<Boolean> editShippingAddress(@Valid @RequestBody MemberAddressEditCmd shippingAddress) {
 		return Result.success(memberAddressService.updateMemberAddress(shippingAddress));
 	}
 

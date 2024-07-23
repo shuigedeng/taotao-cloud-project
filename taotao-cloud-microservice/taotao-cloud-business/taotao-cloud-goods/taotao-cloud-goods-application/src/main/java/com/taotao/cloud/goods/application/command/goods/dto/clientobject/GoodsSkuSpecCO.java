@@ -23,7 +23,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** 商品规格VO */
+/** 商品规格CO */
 @Data
 @Builder
 @AllArgsConstructor
@@ -34,7 +34,7 @@ public class GoodsSkuSpecCO {
     private Long skuId;
 
     @Schema(description = "商品sku所包含规格")
-    private List<SpecValueVO> specValues;
+    private List<SpecValueCO> specValues;
 
     @Schema(description = "库存")
     private Integer quantity;

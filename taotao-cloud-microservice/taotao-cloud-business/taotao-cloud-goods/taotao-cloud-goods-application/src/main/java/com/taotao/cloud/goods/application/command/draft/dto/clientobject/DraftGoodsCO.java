@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 草稿商品基础VO
+ * 草稿商品基础CO
  *
  * @author shuigedeng
  * @version 2022.04

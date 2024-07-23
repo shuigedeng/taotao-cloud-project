@@ -21,13 +21,13 @@ import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
-import com.taotao.cloud.order.application.command.order.OrderComplaintBaseVO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintCommunicationDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintOperationDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderComplaintVO;
-import com.taotao.cloud.order.application.command.order.StoreAppealDTO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderComplaintBaseCO;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintCommunicationAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintOperationAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderComplaintCO;
+import com.taotao.cloud.order.application.command.order.dto.StoreAppealCmd;
 import com.taotao.cloud.order.application.converter.OrderComplainConvert;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintService;
@@ -77,7 +77,7 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<OrderComplaintVO> getOrderComplainById(@PathVariable Long id) {
+	public Result<OrderComplaintCO> getOrderComplainById(@PathVariable Long id) {
 		return Result.success(
 			OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id)));
 	}
@@ -86,12 +86,12 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageResult<OrderComplaintBaseVO>> get(
-		OrderComplaintPageQuery orderComplaintPageQuery) {
+	public Result<PageResult<OrderComplaintBaseCO>> get(
+		OrderComplaintPageQry orderComplaintPageQry) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
-		orderComplaintPageQuery.setStoreId(storeId);
-		IPage<OrderComplaintPO> page = orderComplaintService.pageQuery(orderComplaintPageQuery);
-		return Result.success(MpUtils.convertMybatisPage(page, OrderComplaintBaseVO.class));
+		orderComplaintPageQry.setStoreId(storeId);
+		IPage<OrderComplaintPO> page = orderComplaintService.pageQuery(orderComplaintPageQry);
+		return Result.success(MpUtils.convertMybatisPage(page, OrderComplaintBaseCO.class));
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")
@@ -100,11 +100,11 @@ public class OrderComplaintController {
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(
 		@PathVariable("complainId") Long complainId,
-		@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
+		@Validated @RequestBody OrderComplaintCommunicationAddCmd orderComplaintCommunicationAddCmd) {
 		SecurityUser user = SecurityUtils.getCurrentUser();
 		OrderComplaintCommunicationPO orderComplaintCommunicationPO = OrderComplaintCommunicationPO.builder()
 			.complainId(complainId)
-			.content(orderComplaintCommunicationDTO.content())
+			.content(orderComplaintCommunicationAddCmd.content())
 			.owner(CommunicationOwnerEnum.STORE.name())
 			.ownerName(user.getUsername())
 			.ownerId(user.getStoreId())
@@ -118,9 +118,10 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(@PathVariable Long id,
-		@Validated @RequestBody OrderComplaintDTO orderComplaintDTO) {
+		@Validated @RequestBody OrderComplaintAddCmd orderComplaintAddCmd) {
 		Long storeId = SecurityUtils.getCurrentUser().getStoreId();
-		OrderComplaintPO orderComplaintPO = OrderComplainConvert.INSTANCE.convert(orderComplaintDTO);
+		OrderComplaintPO orderComplaintPO = OrderComplainConvert.INSTANCE.convert(
+			orderComplaintAddCmd);
 		orderComplaintPO.setStoreId(storeId);
 		return Result.success(orderComplaintService.updateOrderComplain(orderComplaintPO));
 	}
@@ -129,7 +130,7 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping("/appeal")
-	public Result<OrderComplaintVO> appeal(@Validated @RequestBody StoreAppealDTO storeAppealDTO) {
+	public Result<OrderComplaintCO> appeal(@Validated @RequestBody StoreAppealCmd storeAppealDTO) {
 		orderComplaintService.appeal(storeAppealDTO);
 		return Result.success(
 			orderComplaintService.getOrderComplainById(storeAppealDTO.orderComplaintId()));
@@ -140,8 +141,8 @@ public class OrderComplaintController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping(value = "/status")
 	public Result<Boolean> updateStatus(
-		@Validated @RequestBody OrderComplaintOperationDTO orderComplaintOperationDTO) {
+		@Validated @RequestBody OrderComplaintOperationAddCmd orderComplaintOperationAddCmd) {
 		return Result.success(
-			orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationDTO));
+			orderComplaintService.updateOrderComplainByStatus(orderComplaintOperationAddCmd));
 	}
 }

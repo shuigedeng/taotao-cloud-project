@@ -61,7 +61,7 @@ public class CategoryParameterGroupManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
-    public Result<List<ParameterGroupVO>> getCategoryParam(@PathVariable Long categoryId) {
+    public Result<List<ParameterGroupCO>> getCategoryParam(@PathVariable Long categoryId) {
         return Result.success(categoryParameterGroupService.getCategoryParams(categoryId));
     }
 

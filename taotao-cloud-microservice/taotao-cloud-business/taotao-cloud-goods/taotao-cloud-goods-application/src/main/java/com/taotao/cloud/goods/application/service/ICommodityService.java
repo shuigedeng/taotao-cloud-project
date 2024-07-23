@@ -18,6 +18,8 @@ package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.cloud.goods.application.command.commodity.dto.CommodityAddCmd;
+import com.taotao.cloud.goods.application.command.commodity.dto.clientobject.CommoditySkuCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
@@ -38,7 +40,7 @@ public interface ICommodityService extends BaseSuperService<CommodityPO, Long> {
 	 * @return {@link boolean }
 	 * @since 2022-04-27 16:59:47
 	 */
-	boolean addCommodity(List<CommodityPO> commodityPO);
+	boolean addCommodity(List<CommodityAddCmd> commodityAddCmdList);
 
 	/**
 	 * 删除直播商品
@@ -63,8 +65,9 @@ public interface ICommodityService extends BaseSuperService<CommodityPO, Long> {
 	 * @param PageQuery   分页
 	 * @param name        商品名称
 	 * @param auditStatus 审核状态
-	 * @return {@link IPage }<{@link CommoditySkuVO }>
+	 * @return {@link IPage }<{@link CommoditySkuCO }>
 	 * @since 2022-04-27 16:59:47
 	 */
-	IPage<CommoditySkuVO> commodityList(PageQuery PageQuery, String name, String auditStatus);
+	IPage<CommoditySkuCO> commodityList(PageQuery PageQuery,
+		String name, String auditStatus);
 }

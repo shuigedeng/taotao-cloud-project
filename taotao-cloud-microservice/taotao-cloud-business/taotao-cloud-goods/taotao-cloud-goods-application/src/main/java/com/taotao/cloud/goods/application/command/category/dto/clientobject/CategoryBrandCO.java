@@ -22,12 +22,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** 分类品牌VO */
+/** 分类品牌CO */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "分类品牌VO")
+@Schema(description = "分类品牌CO")
 public class CategoryBrandCO {
 
     @Schema(description = "品牌id")

@@ -17,6 +17,8 @@
 package com.taotao.cloud.goods.facade.controller.manager;
 
 import com.taotao.cloud.common.model.Result;
+import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryBrandCO;
+import com.taotao.cloud.goods.application.service.ICategoryBrandService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -58,7 +60,7 @@ public class CategoryBrandManagerController {
     @RequestLogger
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{categoryId}")
-    public Result<List<CategoryBrandVO>> getCategoryBrandList(
+    public Result<List<CategoryBrandCO>> getCategoryBrandList(
             @NotBlank(message = "分类id不能为空") @PathVariable(value = "categoryId") Long categoryId) {
         return Result.success(categoryBrandService.getCategoryBrandList(categoryId));
     }

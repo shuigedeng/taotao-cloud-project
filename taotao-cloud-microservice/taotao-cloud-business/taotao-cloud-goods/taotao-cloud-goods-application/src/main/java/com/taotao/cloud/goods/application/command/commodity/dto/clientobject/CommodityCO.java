@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "小程序直播商品VO")
+@Schema(description = "小程序直播商品CO")
 public class CommodityCO {
 
     /** 图片 */

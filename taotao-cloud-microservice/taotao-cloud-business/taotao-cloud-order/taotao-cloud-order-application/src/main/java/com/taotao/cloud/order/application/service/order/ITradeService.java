@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.cart.TradeDTO;
+import com.taotao.cloud.order.application.command.cart.dto.TradeAddCmd;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.TradePO;
 
 /**
@@ -39,11 +39,11 @@ public interface ITradeService extends IService<TradePO> {
 	 * <p>6.将交易写入缓存供消费者调用
 	 * <p>7.发送交易创建消息
      *
-     * @param tradeDTO 购物车视图
+     * @param tradeAddCmd 购物车视图
      * @return {@link TradePO }
      * @since 2022-04-28 08:54:55
      */
-    TradePO createTrade(TradeDTO tradeDTO);
+    TradePO createTrade(TradeAddCmd tradeAddCmd);
 
     /**
      * 获取交易详情

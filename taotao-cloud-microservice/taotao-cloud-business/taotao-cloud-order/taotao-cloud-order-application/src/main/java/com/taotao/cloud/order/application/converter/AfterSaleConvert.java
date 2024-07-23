@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.converter;
 
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleCO;
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import java.util.List;
 import org.mapstruct.Mapper;
@@ -35,7 +35,7 @@ public interface AfterSaleConvert {
 
     AfterSaleConvert INSTANCE = Mappers.getMapper(AfterSaleConvert.class);
 
-    AfterSaleVO convert(AfterSalePO afterSale);
+    AfterSaleCO convert(AfterSalePO afterSale);
 
-    List<AfterSaleVO> convert(List<AfterSalePO> afterSales);
+    List<AfterSaleCO> convert(List<AfterSalePO> afterSales);
 }

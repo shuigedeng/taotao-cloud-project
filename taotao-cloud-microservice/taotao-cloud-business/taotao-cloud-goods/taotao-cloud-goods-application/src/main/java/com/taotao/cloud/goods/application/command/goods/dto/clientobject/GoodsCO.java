@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 商品基础VO
+ * 商品基础CO
  *
  * @author shuigedeng
  * @version 2021.10
@@ -37,7 +37,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "商品基础VO")
+@Schema(description = "商品基础CO")
 public class GoodsCO implements Serializable {
 
     @Serial

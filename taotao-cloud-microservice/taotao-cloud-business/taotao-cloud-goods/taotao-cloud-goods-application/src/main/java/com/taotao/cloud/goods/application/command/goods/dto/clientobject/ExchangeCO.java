@@ -23,7 +23,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** 兑换VO */
+/** 兑换CO */
 @Data
 @Builder
 @AllArgsConstructor

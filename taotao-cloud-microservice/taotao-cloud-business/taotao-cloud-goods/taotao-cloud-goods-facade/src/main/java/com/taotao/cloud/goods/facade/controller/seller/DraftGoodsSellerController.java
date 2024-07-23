@@ -57,18 +57,18 @@ public class DraftGoodsSellerController {
     @RequestLogger("分页获取草稿商品列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/page")
-    public Result<PageResult<DraftGoodsVO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
+    public Result<PageResult<DraftGoodsCO>> getDraftGoodsByPage(DraftGoodsPageQuery draftGoodsPageQuery) {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         draftGoodsPageQuery.setStoreId(storeId);
         IPage<DraftGoods> draftGoods = draftGoodsService.draftGoodsQueryPage(draftGoodsPageQuery);
-        return Result.success(MpUtils.convertMybatisPage(draftGoods, DraftGoodsVO.class));
+        return Result.success(MpUtils.convertMybatisPage(draftGoods, DraftGoodsCO.class));
     }
 
     @Operation(summary = "获取草稿商品", description = "获取草稿商品")
     @RequestLogger("获取草稿商品")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping(value = "/{id}")
-    public Result<DraftGoodsSkuParamsVO> getDraftGoods(@PathVariable Long id) {
+    public Result<DraftGoodsSkuParamsCO> getDraftGoods(@PathVariable Long id) {
         return Result.success(draftGoodsService.getDraftGoods(id));
     }
 

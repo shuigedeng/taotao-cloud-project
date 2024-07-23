@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * 商品sku基础VO
+ * 商品sku基础CO
  *
  * @author shuigedeng
  * @version 2022.04
@@ -39,7 +39,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "商品sku基础VO")
+@Schema(description = "商品sku基础CO")
 public class GoodsSkuCO implements Serializable {
 
     @Serial

@@ -16,34 +16,30 @@
 
 package com.taotao.cloud.goods.application.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.goods.application.service.ICategoryBrandService;
-import com.taotao.cloud.goods.application.service.ICategoryParameterGroupService;
-import com.taotao.cloud.goods.application.service.ICategorySpecificationService;
+import com.taotao.cloud.goods.application.command.category.dto.CategoryAddCmd;
+import com.taotao.cloud.goods.application.command.category.dto.CategorySearchQry;
+import com.taotao.cloud.goods.application.command.category.dto.CategoryUpdateCmd;
+import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
+import com.taotao.cloud.goods.application.command.category.executor.query.CategoryChildrenCmdExe;
+import com.taotao.cloud.goods.application.command.category.executor.CategoryDelCmdExe;
+import com.taotao.cloud.goods.application.command.category.executor.CategorySaveCmdExe;
+import com.taotao.cloud.goods.application.command.category.executor.query.CategoryTreeCmdExe;
+import com.taotao.cloud.goods.application.command.category.executor.CategoryUpdateCmdExe;
+import com.taotao.cloud.goods.application.command.category.executor.query.CategorySearchQryExe;
+import com.taotao.cloud.goods.application.service.IBrandService;
+import com.taotao.cloud.goods.application.service.ICategoryService;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryPO;
+import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CategorytRepository;
+import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICategoryRepository;
 import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
-import org.dromara.hutool.core.text.CharSequenceUtil;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.util.*;
-
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY;
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 
 /**
  * 商品分类业务层实现
@@ -55,53 +51,46 @@ import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 @AllArgsConstructor
 @Service
 @CacheConfig(cacheNames = "{category}")
-public class CategoryServiceImpl extends BaseSuperServiceImpl<CategoryPO, Long, ICategoryMapper, CategorytRepository, ICategoryRepository>
+public class CategoryServiceImpl extends
+	BaseSuperServiceImpl<CategoryPO, Long, ICategoryMapper, CategorytRepository, ICategoryRepository>
 	implements ICategoryService {
-
-	private static final String DELETE_FLAG_COLUMN = "delete_flag";
 
 	private final RedisRepository redisRepository;
 	/**
 	 * 商品品牌业务层
 	 */
 	private final IBrandService brandService;
-	/**
-	 * 分类品牌服务
-	 */
-	private final ICategoryBrandService categoryBrandService;
-	/**
-	 * 分类绑定参数服务
-	 */
-	private final ICategoryParameterGroupService categoryParameterGroupService;
-	/**
-	 * 分类规格服务
-	 */
-	private final ICategorySpecificationService categorySpecificationService;
+
+	private final CategoryTreeCmdExe categoryTreeCmdExe;
+	private final CategoryChildrenCmdExe categoryChildrenCmdExe;
+	private final CategorySearchQryExe categorySearchQryExe;
+	private final CategoryUpdateCmdExe categoryUpdateCmdExe;
+	private final CategorySaveCmdExe categorySaveCmdExe;
+	private final CategoryDelCmdExe categoryDelCmdExe;
 
 	@Override
 	public List<CategoryPO> childrenList(Long parentId) {
-		LambdaQueryWrapper<CategoryPO> wrapper = new LambdaQueryWrapper<>();
-		wrapper.eq(CategoryPO::getParentId, parentId);
-		return this.list(wrapper);
+		return categoryChildrenCmdExe.childrenList(parentId);
 	}
 
 	@Override
-	@Cacheable(key = "#id")
 	public CategoryPO getCategoryById(Long id) {
 		return this.getById(id);
 	}
 
 	@Override
-	public List<CategoryPO> listByIdsOrderByLevel(List<Long> ids) {
-		LambdaQueryWrapper<CategoryPO> wrapper = new LambdaQueryWrapper<>();
-		wrapper.in(CategoryPO::getId, ids);
-		wrapper.orderByAsc(CategoryPO::getLevel);
-		return this.list(wrapper);
+	public boolean delete(Long id) {
+		return false;
+	}
+
+	@Override
+	public boolean updateCategoryStatus(Long categoryId, boolean enableOperations) {
+		return categoryUpdateCmdExe.updateCategoryStatus(categoryId,enableOperations);
 	}
 
 	@Override
 	public List<CategoryPO> dbList(String parentId) {
-		return null;
+		return List.of();
 	}
 
 	@Override
@@ -110,46 +99,62 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<CategoryPO, Long, 
 	}
 
 	@Override
+	public List<CategoryPO> listByIdsOrderByLevel(List<Long> ids) {
+		return categorySearchQryExe.listByIdsOrderByLevel(ids);
+	}
+
+	@Override
 	public List<Map<String, Object>> listMapsByIdsOrderByLevel(List<String> ids, String columns) {
-		return null;
+		return List.of();
 	}
 
 	@Override
-	public List<CategoryTreeVO> categoryTree() {
-		// 获取缓存数据
-		List<CategoryTreeVO> categoryTreeVOList = redisRepository.lGet(
-			CATEGORY.getPrefix(), 0L, redisRepository.lGetListSize(CATEGORY.getPrefix()));
-		if (categoryTreeVOList != null) {
-			return categoryTreeVOList;
-		}
-
-		// 获取全部分类
-		LambdaQueryWrapper<CategoryPO> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(CategoryPO::getDelFlag, false);
-		List<CategoryPO> list = this.list(queryWrapper);
-
-		// 构造分类树
-		categoryTreeVOList = new ArrayList<>();
-		for (CategoryPO categoryPO : list) {
-			if (Long.valueOf(0).equals(categoryPO.getParentId())) {
-				CategoryTreeVO categoryTreeVO = CategoryConvert.INSTANCE.convert(categoryPO);
-				categoryTreeVO.setParentTitle(categoryPO.getName());
-				categoryTreeVO.setChildren(findChildren(list, categoryTreeVO));
-				categoryTreeVOList.add(categoryTreeVO);
-			}
-		}
-
-		categoryTreeVOList.sort(Comparator.comparing(CategoryTreeVO::getSortOrder));
-
-		if (!categoryTreeVOList.isEmpty()) {
-			redisRepository.lSet(CATEGORY.getPrefix(), categoryTreeVOList);
-			redisRepository.lSet(CATEGORY_ARRAY.getPrefix(), list);
-		}
-		return categoryTreeVOList;
+	public List<CategoryTreeCO> categoryTree() {
+		return categoryTreeCmdExe.categoryTree();
 	}
 
 	@Override
-	public List<CategoryTreeVO> getStoreCategory(String[] categories) {
+	public List<CategoryTreeCO> listAllChildren(Long parentId) {
+		return categoryChildrenCmdExe.listAllChildren(parentId);
+	}
+
+	@Override
+	public List<CategoryTreeCO> listAllChildren() {
+		return categoryChildrenCmdExe.listAllChildren();
+	}
+
+	@Override
+	public List<String> getCategoryNameByIds(List<Long> ids) {
+		return categorySearchQryExe.getCategoryNameByIds(ids);
+	}
+
+	@Override
+	public List<CategoryPO> findByAllBySortOrder(CategorySearchQry category) {
+		return categorySearchQryExe.findByAllBySortOrder(categoryPO);
+	}
+
+	@Override
+	public boolean saveCategory(CategoryAddCmd category) {
+		return categorySaveCmdExe.saveCategory(categoryPO);
+	}
+
+	@Override
+	public boolean updateCategory(CategoryUpdateCmd category) {
+		return categoryUpdateCmdExe.updateCategory(categoryPO);
+	}
+
+	@Override
+	public void delete(String id) {
+		categoryDelCmdExe.delete(id);
+	}
+
+	@Override
+	public void updateCategoryStatus(String categoryId, boolean enableOperations) {
+		return categoryUpdateCmdExe.updateCategoryStatus(categoryId,enableOperations);
+	}
+
+	@Override
+	public List<CategoryTreeCO> getStoreCategory(String[] categories) {
 		List<String> arr = Arrays.asList(categories.clone());
 		return categoryTree().stream()
 			.filter(item -> arr.contains(item.getId()))
@@ -158,261 +163,6 @@ public class CategoryServiceImpl extends BaseSuperServiceImpl<CategoryPO, Long, 
 
 	@Override
 	public List<CategoryPO> firstCategory() {
-		QueryWrapper<CategoryPO> queryWrapper = Wrappers.query();
-		queryWrapper.eq("level", 0);
-		return list(queryWrapper);
-	}
-
-	@Override
-	public List<CategoryTreeVO> listAllChildren(Long parentId) {
-		if (Long.valueOf(0).equals(parentId)) {
-			return categoryTree();
-		}
-
-		// 循环代码，找到对象，把他的子分类返回
-		List<CategoryTreeVO> topCatList = categoryTree();
-		for (CategoryTreeVO item : topCatList) {
-			if (item.getId().equals(parentId)) {
-				return item.getChildren();
-			} else {
-				return getChildren(parentId, item.getChildren());
-			}
-		}
-		return new ArrayList<>();
-	}
-
-	@Override
-	public List<CategoryTreeVO> listAllChildren() {
-		// 获取全部分类
-		List<CategoryPO> list = this.list();
-
-		// 构造分类树
-		List<CategoryTreeVO> categoryTreeVOList = new ArrayList<>();
-		for (CategoryPO categoryPO : list) {
-			if (Long.valueOf(0).equals(categoryPO.getParentId())) {
-				// CategoryVO categoryVO = new CategoryVO(category);
-				CategoryTreeVO categoryTreeVO = new CategoryTreeVO();
-				categoryTreeVO.setChildren(findChildren(list, categoryTreeVO));
-				categoryTreeVOList.add(categoryTreeVO);
-			}
-		}
-		categoryTreeVOList.sort(Comparator.comparing(CategoryTreeVO::getSortOrder));
-		return categoryTreeVOList;
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<String> getCategoryNameByIds(List<Long> ids) {
-		List<String> categoryName = new ArrayList<>();
-		List<CategoryPO> categoryPOVOList = (List<CategoryPO>) redisRepository.get(CATEGORY_ARRAY.getPrefix());
-		// 如果缓存中为空，则重新获取缓存
-		if (categoryPOVOList == null) {
-			categoryTree();
-			categoryPOVOList = (List<CategoryPO>) redisRepository.get(CATEGORY_ARRAY.getPrefix());
-		}
-
-		// 还为空的话，直接返回
-		if (categoryPOVOList == null) {
-			return new ArrayList<>();
-		}
-
-		// 循环顶级分类
-		for (CategoryPO categoryPO : categoryPOVOList) {
-			// 循环查询的id匹配
-			for (Long id : ids) {
-				if (categoryPO.getId().equals(id)) {
-					// 写入商品分类
-					categoryName.add(categoryPO.getName());
-				}
-			}
-		}
-		return categoryName;
-	}
-
-	@Override
-	public List<CategoryPO> findByAllBySortOrder(CategoryPO categoryPO) {
-		QueryWrapper<CategoryPO> queryWrapper = new QueryWrapper<>();
-		queryWrapper
-			.eq(categoryPO.getLevel() != null, "level", categoryPO.getLevel())
-			.eq(CharSequenceUtil.isNotBlank(categoryPO.getName()), "name", categoryPO.getName())
-			.eq(categoryPO.getParentId() != null, "parent_id", categoryPO.getParentId())
-			.ne(categoryPO.getId() != null, "id", categoryPO.getId())
-			.eq(DELETE_FLAG_COLUMN, false)
-			.orderByAsc("sort_order");
-		return this.baseMapper.selectList(queryWrapper);
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public boolean saveCategory(CategoryPO categoryPO) {
-		// 判断分类佣金是否正确
-		if (categoryPO.getCommissionRate().compareTo(BigDecimal.ZERO) < 0) {
-			throw new BusinessException(ResultEnum.CATEGORY_COMMISSION_RATE_ERROR);
-		}
-
-		// 子分类与父分类的状态一致
-		if (categoryPO.getParentId() != null && !Long.valueOf(0).equals(categoryPO.getParentId())) {
-			CategoryPO parentCategoryPO = this.getById(categoryPO.getParentId());
-			categoryPO.setDelFlag(parentCategoryPO.getDelFlag());
-		}
-		this.save(categoryPO);
-		removeCache();
-		return true;
-	}
-
-	@Override
-	@CacheEvict(key = "#categoryPO.id")
-	@Transactional(rollbackFor = Exception.class)
-	public boolean updateCategory(CategoryPO categoryPO) {
-		// 判断分类佣金是否正确
-		if (categoryPO.getCommissionRate().compareTo(BigDecimal.ZERO) < 0) {
-			throw new BusinessException(ResultEnum.CATEGORY_COMMISSION_RATE_ERROR);
-		}
-
-		// 判断父分类与子分类的状态是否一致
-		if (categoryPO.getParentId() != null && !Long.valueOf(0).equals(categoryPO.getParentId())) {
-			CategoryPO parentCategoryPO = this.getById(categoryPO.getParentId());
-			if (!parentCategoryPO.getDelFlag().equals(categoryPO.getDelFlag())) {
-				throw new BusinessException(ResultEnum.CATEGORY_DELETE_FLAG_ERROR);
-			}
-		}
-
-		UpdateWrapper<CategoryPO> updateWrapper = new UpdateWrapper<>();
-		updateWrapper
-			.eq("id", categoryPO.getId())
-			.set("name", categoryPO.getName())
-			.set("image", categoryPO.getImage())
-			.set("sort_order", categoryPO.getSortOrder())
-			.set(DELETE_FLAG_COLUMN, categoryPO.getDelFlag())
-			.set("commission_rate", categoryPO.getCommissionRate());
-		this.baseMapper.update(categoryPO, updateWrapper);
-		removeCache();
-		return true;
-	}
-
-	@Override
-	public void delete(String id) {
-
-	}
-
-	@Override
-	public void updateCategoryStatus(String categoryId, boolean enableOperations) {
-
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public boolean delete(Long id) {
-		this.removeById(id);
-		removeCache();
-
-		// 删除关联关系
-		categoryParameterGroupService.deleteByCategoryId(id);
-		categorySpecificationService.deleteByCategoryId(id);
-		return categoryBrandService.deleteByCategoryId(id);
-	}
-
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public boolean updateCategoryStatus(Long categoryId, boolean enableOperations) {
-		// 禁用子分类
-		CategoryPO categoryPO = this.getById(categoryId);
-		CategoryTreeVO categoryTreeVO = BeanUtils.copy(categoryPO, CategoryTreeVO.class);
-		List<Long> ids = new ArrayList<>();
-
-		assert categoryTreeVO != null;
-
-		ids.add(categoryTreeVO.getId());
-		this.findAllChild(categoryTreeVO);
-		this.findAllChildIds(categoryTreeVO, ids);
-		LambdaUpdateWrapper<CategoryPO> updateWrapper = new LambdaUpdateWrapper<>();
-		updateWrapper.in(CategoryPO::getId, ids);
-		updateWrapper.set(CategoryPO::getDelFlag, enableOperations);
-		this.update(updateWrapper);
-		removeCache();
-
-		return true;
-	}
-
-	/**
-	 * 递归树形VO
-	 *
-	 * @param categories     分类列表
-	 * @param categoryTreeVO 分类VO
-	 * @return 分类VO列表
-	 */
-	private List<CategoryTreeVO> findChildren(List<CategoryPO> categories, CategoryTreeVO categoryTreeVO) {
-		List<CategoryTreeVO> children = new ArrayList<>();
-		categories.forEach(item -> {
-			if (item.getParentId().equals(categoryTreeVO.getId())) {
-				CategoryTreeVO temp = CategoryConvert.INSTANCE.convert(item);
-				temp.setParentTitle(item.getName());
-				temp.setChildren(findChildren(categories, temp));
-				children.add(temp);
-			}
-		});
-
-		return children;
-	}
-
-	/**
-	 * 条件查询分类
-	 *
-	 * @param category 分类VO
-	 */
-	private void findAllChild(CategoryTreeVO category) {
-		LambdaQueryWrapper<CategoryPO> queryWrapper = new LambdaQueryWrapper<>();
-		queryWrapper.eq(CategoryPO::getParentId, category.getId());
-		List<CategoryPO> categories = this.list(queryWrapper);
-		List<CategoryTreeVO> categoryTreeVOList = new ArrayList<>();
-		for (CategoryPO categoryPO1 : categories) {
-			categoryTreeVOList.add(BeanUtils.copy(categoryPO1, CategoryTreeVO.class));
-		}
-		category.setChildren(categoryTreeVOList);
-		if (!categoryTreeVOList.isEmpty()) {
-			categoryTreeVOList.forEach(this::findAllChild);
-		}
-	}
-
-	/**
-	 * 获取所有的子分类ID
-	 *
-	 * @param category 分类
-	 * @param ids      ID列表
-	 */
-	private void findAllChildIds(CategoryTreeVO category, List<Long> ids) {
-		if (category.getChildren() != null && !category.getChildren().isEmpty()) {
-			for (CategoryTreeVO child : category.getChildren()) {
-				ids.add(child.getId());
-				this.findAllChildIds(child, ids);
-			}
-		}
-	}
-
-	/**
-	 * 递归自身，找到id等于parentId的对象，获取他的children 返回
-	 *
-	 * @param parentId           父ID
-	 * @param categoryTreeVOList 分类VO
-	 * @return 子分类列表VO
-	 */
-	private List<CategoryTreeVO> getChildren(Long parentId, List<CategoryTreeVO> categoryTreeVOList) {
-		for (CategoryTreeVO item : categoryTreeVOList) {
-			if (item.getId().equals(parentId)) {
-				return item.getChildren();
-			}
-
-			if (item.getChildren() != null && !item.getChildren().isEmpty()) {
-				return getChildren(parentId, categoryTreeVOList);
-			}
-		}
-		return categoryTreeVOList;
-	}
-
-	/**
-	 * 清除缓存
-	 */
-	private void removeCache() {
-		redisRepository.del(CATEGORY.getPrefix());
+		return categorySearchQryExe.firstCategory();
 	}
 }

@@ -18,9 +18,9 @@ package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.distribution.DistributionPageQuery;
-import com.taotao.cloud.order.application.command.order.StoreFlowPageQuery;
-import com.taotao.cloud.order.application.command.store.StorePageQuery;
+import com.taotao.cloud.order.application.command.distribution.dto.DistributionPageQry;
+import com.taotao.cloud.order.application.command.order.dto.StoreFlowPageQry;
+import com.taotao.cloud.order.application.command.store.dto.StorePageQry;
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSalePO;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.StoreFlowPO;
 import java.util.List;
@@ -57,7 +57,7 @@ public interface IStoreFlowService extends IService<StoreFlowPO> {
 	 * @return {@link IPage }<{@link StoreFlowPO }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	IPage<StoreFlowPO> getStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
+	IPage<StoreFlowPO> getStoreFlow(StoreFlowPageQry storeFlowQueryDTO);
 
 	/**
 	 * 根据参数查询一条数据
@@ -66,7 +66,7 @@ public interface IStoreFlowService extends IService<StoreFlowPO> {
 	 * @return {@link StoreFlowPO }
 	 * @since 2022-04-28 08:54:53
 	 */
-	StoreFlowPO queryOne(StoreFlowPageQuery storeFlowQueryDTO);
+	StoreFlowPO queryOne(StoreFlowPageQry storeFlowQueryDTO);
 
 	/**
 	 * 获取结算单地入账流水
@@ -75,7 +75,7 @@ public interface IStoreFlowService extends IService<StoreFlowPO> {
 	 * @return {@link List }<{@link StoreFlowPayDownloadVO }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowPageQuery storeFlowQueryDTO);
+	List<StoreFlowPayDownloadVO> getStoreFlowPayDownloadVO(StoreFlowPageQry storeFlowQueryDTO);
 
 	/**
 	 * 获取结算单的退款流水
@@ -85,25 +85,25 @@ public interface IStoreFlowService extends IService<StoreFlowPO> {
 	 * @since 2022-04-28 08:54:53
 	 */
 	List<StoreFlowRefundDownloadVO> getStoreFlowRefundDownloadVO(
-		StoreFlowPageQuery storeFlowQueryDTO);
+		StoreFlowPageQry storeFlowQueryDTO);
 
 	/**
 	 * 根据结算单ID获取商家流水
 	 *
-	 * @param storePageQuery 存储页面查询
+	 * @param storePageQry 存储页面查询
 	 * @return {@link IPage }<{@link StoreFlowPO }>
 	 * @since 2022-05-19 15:47:59
 	 */
-	IPage<StoreFlowPO> getStoreFlow(StorePageQuery storePageQuery);
+	IPage<StoreFlowPO> getStoreFlow(StorePageQry storePageQry);
 
 	/**
 	 * 根据结算单ID获取商家流水
 	 *
-	 * @param distributionPageQuery 分配页面查询
+	 * @param distributionPageQry 分配页面查询
 	 * @return {@link IPage }<{@link StoreFlowPO }>
 	 * @since 2022-05-19 15:48:02
 	 */
-	IPage<StoreFlowPO> getDistributionFlow(DistributionPageQuery distributionPageQuery);
+	IPage<StoreFlowPO> getDistributionFlow(DistributionPageQry distributionPageQry);
 
 	/**
 	 * 获取店铺流水
@@ -112,5 +112,5 @@ public interface IStoreFlowService extends IService<StoreFlowPO> {
 	 * @return {@link List }<{@link StoreFlowPO }>
 	 * @since 2022-04-28 08:54:53
 	 */
-	List<StoreFlowPO> listStoreFlow(StoreFlowPageQuery storeFlowQueryDTO);
+	List<StoreFlowPO> listStoreFlow(StoreFlowPageQry storeFlowQueryDTO);
 }

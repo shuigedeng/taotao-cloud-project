@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.goods.application.command.goods.dto.EsGoodsSearchQuery;
-import com.taotao.cloud.goods.application.command.hotwords.dto.HotWordsDTO;
+import com.taotao.cloud.goods.application.command.goods.dto.EsGoodsSearchQry;
+import com.taotao.cloud.goods.application.command.hotwords.dto.HotWordsPageQry;
 import com.taotao.cloud.goods.application.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.application.elasticsearch.pojo.EsGoodsRelatedInfo;
 import java.util.List;
@@ -35,11 +35,11 @@ public interface IEsGoodsSearchService {
     /**
      * 商品搜索
      *
-     * @param esGoodsSearchQuery 搜索参数
+     * @param esGoodsSearchQry 搜索参数
      * @return {@link SearchPage }<{@link EsGoodsIndex }>
      * @since 2022-04-27 17:00:07
      */
-    SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchQuery esGoodsSearchQuery);
+    SearchPage<EsGoodsIndex> searchGoods(EsGoodsSearchQry esGoodsSearchQry);
 
     /**
      * 获取热门关键词
@@ -57,7 +57,7 @@ public interface IEsGoodsSearchService {
      * @return {@link boolean }
      * @since 2022-04-27 17:00:07
      */
-    boolean setHotWords(HotWordsDTO hotWords);
+    boolean setHotWords(HotWordsPageQry hotWords);
 
     /**
      * 删除热门关键词
@@ -71,11 +71,11 @@ public interface IEsGoodsSearchService {
     /**
      * 获取筛选器
      *
-     * @param esGoodsSearchQuery 搜索条件
+     * @param esGoodsSearchQry 搜索条件
      * @return {@link EsGoodsRelatedInfo }
      * @since 2022-04-27 17:00:07
      */
-    EsGoodsRelatedInfo getSelector(EsGoodsSearchQuery esGoodsSearchQuery);
+    EsGoodsRelatedInfo getSelector(EsGoodsSearchQry esGoodsSearchQry);
 
     /**
      * 根据SkuID列表获取ES商品

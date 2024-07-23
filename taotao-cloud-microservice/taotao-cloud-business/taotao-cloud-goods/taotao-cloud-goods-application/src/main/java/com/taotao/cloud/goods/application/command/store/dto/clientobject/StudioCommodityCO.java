@@ -24,7 +24,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-/** 直播间VO */
+/** 直播间CO */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
@@ -33,5 +33,5 @@ import lombok.experimental.SuperBuilder;
 public class StudioCommodityCO extends StudioCO {
 
     @Schema(description = "直播间商品列表")
-    private List<CommodityVO> commodityList;
+    private List<CommodityCO> commodityList;
 }

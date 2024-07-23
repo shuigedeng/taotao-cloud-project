@@ -24,12 +24,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** 品牌VO */
+/** 品牌CO */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "品牌VO")
+@Schema(description = "品牌CO")
 public class BrandCO implements Serializable {
 
     @Serial

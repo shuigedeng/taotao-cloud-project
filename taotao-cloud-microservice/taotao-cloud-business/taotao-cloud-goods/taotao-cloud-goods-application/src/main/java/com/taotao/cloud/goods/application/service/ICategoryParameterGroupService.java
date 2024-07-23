@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.goods.application.service;
 
+import com.taotao.cloud.goods.application.command.category.dto.CategoryParameterGroupAddCmd;
+import com.taotao.cloud.goods.application.command.parameter.dto.clientobject.ParameterGroupCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroupPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
@@ -34,10 +36,10 @@ public interface ICategoryParameterGroupService extends BaseSuperService<Categor
      * 查询分类绑定参数集合
      *
      * @param categoryId 分类Id
-     * @return {@link List }<{@link ParameterGroupVO }>
+     * @return {@link List }<{@link ParameterGroupCO }>
      * @since 2022-04-27 16:59:23
      */
-    List<ParameterGroupVO> getCategoryParams(Long categoryId);
+    List<ParameterGroupCO> getCategoryParams(Long categoryId);
 
     /**
      * 查询分类绑定参数组信息
@@ -55,7 +57,7 @@ public interface ICategoryParameterGroupService extends BaseSuperService<Categor
      * @return {@link boolean }
      * @since 2022-04-27 16:59:23
      */
-    boolean updateCategoryGroup(CategoryParameterGroupPO categoryParameterGroupPO);
+    boolean updateCategoryGroup(CategoryParameterGroupAddCmd categoryParameterGroupAddCmd);
 
     /**
      * 通过分类ID删除关联品牌

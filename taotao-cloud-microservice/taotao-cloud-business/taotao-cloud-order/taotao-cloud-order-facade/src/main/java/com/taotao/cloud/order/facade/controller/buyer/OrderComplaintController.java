@@ -20,11 +20,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.order.api.enums.order.CommunicationOwnerEnum;
-import com.taotao.cloud.order.application.command.order.OrderComplaintBaseVO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintCommunicationDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintDTO;
-import com.taotao.cloud.order.application.command.order.OrderComplaintPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderComplaintVO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderComplaintBaseCO;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintCommunicationAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderComplaintCO;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintService;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintPO;
@@ -74,30 +74,30 @@ public class OrderComplaintController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<OrderComplaintVO> get(@PathVariable Long id) {
-		OrderComplaintVO orderComplaintVO =
+	public Result<OrderComplaintCO> get(@PathVariable Long id) {
+		OrderComplaintCO orderComplaintCO =
 			OperationalJudgment.judgment(orderComplaintService.getOrderComplainById(id));
-		return Result.success(orderComplaintVO);
+		return Result.success(orderComplaintCO);
 	}
 
 	@Operation(summary = "分页获取", description = "分页获取")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageResult<OrderComplaintBaseVO>> get(
-		@Validated OrderComplaintPageQuery orderComplaintPageQuery) {
+	public Result<PageResult<OrderComplaintBaseCO>> get(
+		@Validated OrderComplaintPageQry orderComplaintPageQry) {
 		IPage<OrderComplaintPO> orderComplainByPage = orderComplaintService.pageQuery(
-			orderComplaintPageQuery);
+			orderComplaintPageQry);
 		return Result.success(
-			MpUtils.convertMybatisPage(orderComplainByPage, OrderComplaintBaseVO.class));
+			MpUtils.convertMybatisPage(orderComplainByPage, OrderComplaintBaseCO.class));
 	}
 
 	@Operation(summary = "添加交易投诉", description = "添加交易投诉")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<OrderComplaintPO> add(@Valid OrderComplaintDTO orderComplaintDTO) {
-		return Result.success(orderComplaintService.addOrderComplain(orderComplaintDTO));
+	public Result<OrderComplaintPO> add(@Valid OrderComplaintAddCmd orderComplaintAddCmd) {
+		return Result.success(orderComplaintService.addOrderComplain(orderComplaintAddCmd));
 	}
 
 	@Operation(summary = "添加交易投诉对话", description = "添加交易投诉对话")
@@ -106,11 +106,11 @@ public class OrderComplaintController {
 	@PostMapping("/communication/{complainId}")
 	public Result<Boolean> addCommunication(
 		@PathVariable("complainId") Long complainId,
-		@Validated @RequestBody OrderComplaintCommunicationDTO orderComplaintCommunicationDTO) {
+		@Validated @RequestBody OrderComplaintCommunicationAddCmd orderComplaintCommunicationAddCmd) {
 		SecurityUser user = SecurityUtils.getCurrentUser();
 		OrderComplaintCommunicationPO orderComplaintCommunicationPO = OrderComplaintCommunicationPO.builder()
 			.complainId(complainId)
-			.content(orderComplaintCommunicationDTO.content())
+			.content(orderComplaintCommunicationAddCmd.content())
 			.owner(CommunicationOwnerEnum.BUYER.name())
 			.ownerName(user.getNickname())
 			.ownerId(user.getUserId())

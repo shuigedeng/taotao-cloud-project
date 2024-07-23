@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.application.command.order.OrderLogPageQuery;
+import com.taotao.cloud.order.application.command.order.dto.OrderLogPageQry;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.trade.IOrderLogMapper;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
@@ -46,10 +46,10 @@ public class OrderLogServiceImpl extends ServiceImpl<IOrderLogMapper, OrderLogPO
     }
 
     @Override
-    public IPage<OrderLogPO> pageQuery(OrderLogPageQuery orderLogPageQuery) {
+    public IPage<OrderLogPO> pageQuery(OrderLogPageQry orderLogPageQry) {
         LambdaQueryWrapper<OrderLogPO> lambdaQueryWrapper = Wrappers.lambdaQuery();
         // todo 需要设置条件
 
-        return this.page(orderLogPageQuery.buildMpPage(), lambdaQueryWrapper);
+        return this.page(orderLogPageQry.buildMpPage(), lambdaQueryWrapper);
     }
 }

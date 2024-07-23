@@ -17,6 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.StudioPO;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IStudioRepository extends JpaRepository<StudioPO, Long> {}
+public interface IStudioRepository extends BaseInterfaceSuperRepository<StudioPO, Long> {}

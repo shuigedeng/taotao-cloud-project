@@ -130,4 +130,6 @@ public interface GoodsConstants {
 
     /** 需要 */
     String REQUIRE = "1";
+
+	String DELETE_FLAG_COLUMN = "delete_flag";
 }

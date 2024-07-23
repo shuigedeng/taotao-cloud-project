@@ -17,6 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
+import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -26,4 +27,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 2022.03
  * @since 2021/10/13 22:50
  */
-public interface IGoodsRepository extends JpaRepository<GoodsPO, Long> {}
+public interface IGoodsRepository extends BaseInterfaceSuperRepository<GoodsPO, Long> {}

@@ -70,7 +70,7 @@ public class GoodsGalleryServiceImpl
     public GoodsGalleryPO getGoodsGallery(String origin) {
         GoodsGalleryPO goodsGalleryPO = new GoodsGalleryPO();
         // 获取商品系统配置决定是否审核
-        GoodsSettingVO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
+        GoodsSettingCO goodsSetting = settingApi.getGoodsSetting(SettingCategoryEnum.GOODS_SETTING.name());
         // 缩略图
         String thumbnail = FileUtils.getUrl(
                 origin, goodsSetting.getAbbreviationPictureWidth(), goodsSetting.getAbbreviationPictureHeight());

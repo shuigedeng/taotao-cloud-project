@@ -17,8 +17,11 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsPageQuery;
-import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsDTO;
+import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsPageQry;
+import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsAddCmd;
+import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsSaveCmd;
+import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsUpdateCmd;
+import com.taotao.cloud.goods.application.command.draft.dto.clientobject.DraftGoodsSkuParamsCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.DraftGoodsPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 
@@ -38,7 +41,7 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoodsPO, Long>
      * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    boolean addGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
+    boolean addGoodsDraft(DraftGoodsSkuParamsAddCmd draftGoods);
 
     /**
      * 更新草稿商品
@@ -47,7 +50,7 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoodsPO, Long>
      * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    boolean updateGoodsDraft(DraftGoodsSkuParamsDTO draftGoods);
+    boolean updateGoodsDraft(DraftGoodsSkuParamsUpdateCmd draftGoods);
 
     /**
      * 保存草稿商品
@@ -56,7 +59,7 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoodsPO, Long>
      * @return {@link boolean }
      * @since 2022-04-27 16:59:56
      */
-    boolean saveGoodsDraft(DraftGoodsSkuParamsDTO draftGoodsVO);
+    boolean saveGoodsDraft(DraftGoodsSkuParamsSaveCmd draftGoodsVO);
 
     /**
      * 根据ID删除草稿商品
@@ -71,10 +74,10 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoodsPO, Long>
      * 获取草稿商品详情
      *
      * @param id 草稿商品ID
-     * @return {@link DraftGoodsSkuParamsVO }
+     * @return {@link DraftGoodsSkuParamsCO }
      * @since 2022-04-27 16:59:57
      */
-    DraftGoodsSkuParamsVO getDraftGoods(Long id);
+    DraftGoodsSkuParamsCO getDraftGoods(Long id);
 
     /**
      * 分页获取草稿商品
@@ -83,5 +86,5 @@ public interface IDraftGoodsService extends BaseSuperService<DraftGoodsPO, Long>
      * @return {@link IPage }<{@link DraftGoodsPO }>
      * @since 2022-04-27 16:59:57
      */
-    IPage<DraftGoodsPO> draftGoodsQueryPage(DraftGoodsPageQuery searchParams);
+    IPage<DraftGoodsPO> draftGoodsQueryPage(DraftGoodsPageQry searchParams);
 }

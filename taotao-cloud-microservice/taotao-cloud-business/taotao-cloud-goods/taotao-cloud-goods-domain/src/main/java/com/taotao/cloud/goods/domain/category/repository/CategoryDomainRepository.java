@@ -1,21 +1,22 @@
 package com.taotao.cloud.goods.domain.category.repository;
 
-import com.taotao.cloud.member.domain.member.entity.MemberEntity;
+import com.taotao.cloud.goods.domain.category.entity.CategoryEntity;
 
 public interface CategoryDomainRepository {
+
 	/**
 	 * 新增部门.
 	 *
-	 * @param dept 部门对象
+	 * @param categoryEntity 部门对象
 	 */
-	void create(MemberEntity dept);
+	void create(CategoryEntity categoryEntity);
 
 	/**
 	 * 修改部门.
 	 *
-	 * @param dept 部门对象
+	 * @param categoryEntity 部门对象
 	 */
-	void modify(MemberEntity dept);
+	void modify(CategoryEntity categoryEntity);
 
 	/**
 	 * 根据ID删除部门.

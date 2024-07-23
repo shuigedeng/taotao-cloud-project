@@ -20,9 +20,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonDTO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonPageQuery;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonVO;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleReasonUpdateCmd;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleReasonPageQry;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleReasonCO;
 import com.taotao.cloud.order.application.converter.AfterSaleReasonConvert;
 import com.taotao.cloud.order.application.service.aftersale.IAfterSaleReasonService;
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
@@ -64,7 +64,7 @@ public class AfterSaleReasonController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{id}")
-	public Result<AfterSaleReasonVO> getById(@PathVariable String id) {
+	public Result<AfterSaleReasonCO> getById(@PathVariable String id) {
 		AfterSaleReasonPO afterSaleReasonPO = afterSaleReasonService.getById(id);
 		return Result.success(AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonPO));
 	}
@@ -73,19 +73,19 @@ public class AfterSaleReasonController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<AfterSaleReasonVO>> getByPage(
-		@Validated AfterSaleReasonPageQuery afterSaleReasonPageQuery) {
-		IPage<AfterSaleReasonPO> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQuery);
-		return Result.success(MpUtils.convertMybatisPage(page, AfterSaleReasonVO.class));
+	public Result<PageResult<AfterSaleReasonCO>> getByPage(
+		@Validated AfterSaleReasonPageQry afterSaleReasonPageQry) {
+		IPage<AfterSaleReasonPO> page = afterSaleReasonService.pageQuery(afterSaleReasonPageQry);
+		return Result.success(MpUtils.convertMybatisPage(page, AfterSaleReasonCO.class));
 	}
 
 	@Operation(summary = "添加售后原因", description = "添加售后原因")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PostMapping
-	public Result<Boolean> save(@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO) {
+	public Result<Boolean> save(@Validated @RequestBody AfterSaleReasonUpdateCmd afterSaleReasonUpdateCmd) {
 		return Result.success(afterSaleReasonService.save(
-			AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonDTO)));
+			AfterSaleReasonConvert.INSTANCE.convert(afterSaleReasonUpdateCmd)));
 	}
 
 	@Operation(summary = "修改售后原因", description = "修改售后原因")
@@ -93,10 +93,10 @@ public class AfterSaleReasonController {
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@PutMapping("/{id}")
 	public Result<Boolean> update(
-		@Validated @RequestBody AfterSaleReasonDTO afterSaleReasonDTO,
+		@Validated @RequestBody AfterSaleReasonUpdateCmd afterSaleReasonUpdateCmd,
 		@PathVariable("id") Long id) {
 		AfterSaleReasonPO afterSaleReasonPO = AfterSaleReasonConvert.INSTANCE.convert(
-			afterSaleReasonDTO);
+			afterSaleReasonUpdateCmd);
 		afterSaleReasonPO.setId(id);
 		return Result.success(afterSaleReasonService.editAfterSaleReason(afterSaleReasonPO));
 	}

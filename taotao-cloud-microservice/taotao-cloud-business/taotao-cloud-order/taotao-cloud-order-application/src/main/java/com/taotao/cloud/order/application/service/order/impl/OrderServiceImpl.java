@@ -40,14 +40,14 @@ import com.taotao.cloud.mq.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.mq.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.mq.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.order.application.command.cart.OrderExportVO;
-import com.taotao.cloud.order.application.command.cart.TradeDTO.MemberAddressDTO;
-import com.taotao.cloud.order.application.command.order.OrderBatchDeliverDTO;
-import com.taotao.cloud.order.application.command.order.OrderDetailVO;
-import com.taotao.cloud.order.application.command.order.OrderPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderSimpleVO;
-import com.taotao.cloud.order.application.command.order.OrderVO;
-import com.taotao.cloud.order.application.command.order.PaymentLogVO;
+import com.taotao.cloud.order.application.command.cart.dto.clientobject.OrderExportCO;
+import com.taotao.cloud.order.application.command.cart.dto.TradeAddCmd.MemberAddressDTO;
+import com.taotao.cloud.order.application.command.order.dto.OrderBatchDeliverAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderDetailCO;
+import com.taotao.cloud.order.application.command.order.dto.OrderPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderSimpleCO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderCO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.PaymentLogCO;
 import com.taotao.cloud.order.application.config.aop.order.OrderLogPoint;
 import com.taotao.cloud.order.application.service.order.IOrderItemService;
 import com.taotao.cloud.order.application.service.order.IOrderService;
@@ -153,14 +153,14 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 		// 订单日志集合
 		List<OrderLogPO> orderLogPOS = new ArrayList<>();
 		// 订单集合
-		List<OrderVO> orderVOS = new ArrayList<>();
+		List<OrderCO> orderCOS = new ArrayList<>();
 
 		// 循环购物车
 		tradeDTO.getCartList().forEach(item -> {
 			OrderPO orderPO = new OrderPO(item, tradeDTO);
 			// 构建orderVO对象
-			OrderVO orderVO = new OrderVO();
-			BeanUtil.copyProperties(orderPO, orderVO);
+			OrderCO orderCO = new OrderCO();
+			BeanUtil.copyProperties(orderPO, orderCO);
 			// 持久化DO
 			orderPOS.add(orderPO);
 			String message = "订单[" + item.getSn() + "]创建";
@@ -174,11 +174,11 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 			item.getCheckedSkuList()
 				.forEach(sku -> orderItems.add(new OrderItem(sku, item, tradeDTO)));
 			// 写入子订单信息
-			orderVO.setOrderItems(orderItems);
+			orderCO.setOrderItems(orderItems);
 			// orderVO 记录
-			orderVOS.add(orderVO);
+			orderCOS.add(orderCO);
 		});
-		tradeDTO.setOrderVO(orderVOS);
+		tradeDTO.setOrderVO(orderCOS);
 		// 批量保存订单
 		this.saveBatch(orderPOS);
 		// 批量保存 子订单
@@ -189,16 +189,16 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 	}
 
 	@Override
-	public IPage<OrderSimpleVO> pageQuery(OrderPageQuery orderPageQuery) {
-		QueryWrapper<OrderSimpleVO> queryWrapper = orderPageQuery.queryWrapper();
+	public IPage<OrderSimpleCO> pageQuery(OrderPageQry orderPageQry) {
+		QueryWrapper<OrderSimpleCO> queryWrapper = orderPageQry.queryWrapper();
 		queryWrapper.groupBy("o.id");
 		queryWrapper.orderByDesc("o.id");
-		return this.baseMapper.queryByParams(PageUtil.initPage(orderPageQuery), queryWrapper);
+		return this.baseMapper.queryByParams(PageUtil.initPage(orderPageQry), queryWrapper);
 	}
 
 	@Override
-	public List<OrderPO> queryListByParams(OrderPageQuery orderPageQuery) {
-		return this.baseMapper.queryListByParams(orderPageQuery.queryWrapper());
+	public List<OrderPO> queryListByParams(OrderPageQry orderPageQry) {
+		return this.baseMapper.queryListByParams(orderPageQry.queryWrapper());
 	}
 
 	@Override
@@ -239,12 +239,12 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 	}
 
 	@Override
-	public List<OrderExportVO> queryExportOrder(OrderPageQuery orderPageQuery) {
-		return this.baseMapper.queryExportOrder(orderPageQuery.queryWrapper());
+	public List<OrderExportCO> queryExportOrder(OrderPageQry orderPageQry) {
+		return this.baseMapper.queryExportOrder(orderPageQry.queryWrapper());
 	}
 
 	@Override
-	public OrderDetailVO queryDetail(String orderSn) {
+	public OrderDetailCO queryDetail(String orderSn) {
 		OrderPO orderPO = this.getBySn(orderSn);
 		if (orderPO == null) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
@@ -258,7 +258,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 		// 查询发票信息
 		ReceiptPO receiptPO = receiptService.getByOrderSn(orderSn);
 		// 查询订单和自订单，然后写入vo返回
-		return new OrderDetailVO(orderPO, orderItems, orderLogPOS, receiptPO);
+		return new OrderDetailCO(orderPO, orderItems, orderLogPOS, receiptPO);
 	}
 
 	@Override
@@ -611,7 +611,7 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 	@Override
 	public Boolean batchDeliver(MultipartFile files) {
 		InputStream inputStream = null;
-		List<OrderBatchDeliverDTO> orderBatchDeliverDTOList = new ArrayList<>();
+		List<OrderBatchDeliverAddCmd> orderBatchDeliverAddCmdList = new ArrayList<>();
 		try {
 			inputStream = files.getInputStream();
 			// 2.应用HUtool ExcelUtil获取ExcelReader指定输入流和sheet
@@ -620,24 +620,24 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 			// 3.读取第二行到最后一行数据
 			List<List<Object>> read = excelReader.read(1, excelReader.getRowCount());
 			for (List<Object> objects : read) {
-				OrderBatchDeliverDTO orderBatchDeliverDTO = new OrderBatchDeliverDTO();
-				orderBatchDeliverDTO.setOrderSn(objects.get(0).toString());
-				orderBatchDeliverDTO.setLogisticsName(objects.get(1).toString());
-				orderBatchDeliverDTO.setLogisticsNo(objects.get(2).toString());
-				orderBatchDeliverDTOList.add(orderBatchDeliverDTO);
+				OrderBatchDeliverAddCmd orderBatchDeliverAddCmd = new OrderBatchDeliverAddCmd();
+				orderBatchDeliverAddCmd.setOrderSn(objects.get(0).toString());
+				orderBatchDeliverAddCmd.setLogisticsName(objects.get(1).toString());
+				orderBatchDeliverAddCmd.setLogisticsNo(objects.get(2).toString());
+				orderBatchDeliverAddCmdList.add(orderBatchDeliverAddCmd);
 			}
 		}
 		catch (Exception e) {
 			throw new BusinessException(ResultEnum.ORDER_BATCH_DELIVER_ERROR);
 		}
 		// 循环检查是否符合规范
-		checkBatchDeliver(orderBatchDeliverDTOList);
+		checkBatchDeliver(orderBatchDeliverAddCmdList);
 		// 订单批量发货
-		for (OrderBatchDeliverDTO orderBatchDeliverDTO : orderBatchDeliverDTOList) {
+		for (OrderBatchDeliverAddCmd orderBatchDeliverAddCmd : orderBatchDeliverAddCmdList) {
 			this.delivery(
-				orderBatchDeliverDTO.getOrderSn(),
-				orderBatchDeliverDTO.getLogisticsNo(),
-				orderBatchDeliverDTO.getLogisticsId());
+				orderBatchDeliverAddCmd.getOrderSn(),
+				orderBatchDeliverAddCmd.getLogisticsNo(),
+				orderBatchDeliverAddCmd.getLogisticsId());
 		}
 		return true;
 	}
@@ -653,8 +653,8 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 	}
 
 	@Override
-	public IPage<PaymentLogVO> queryPaymentLogs(IPage<PaymentLogVO> page,
-		Wrapper<PaymentLogVO> queryWrapper) {
+	public IPage<PaymentLogCO> queryPaymentLogs(IPage<PaymentLogCO> page,
+		Wrapper<PaymentLogCO> queryWrapper) {
 		return baseMapper.queryPaymentLogs(page, queryWrapper);
 	}
 
@@ -663,30 +663,30 @@ public class OrderServiceImpl extends ServiceImpl<IOrderMapper, OrderPO> impleme
 	 *
 	 * @param list 待发货订单列表
 	 */
-	private void checkBatchDeliver(List<OrderBatchDeliverDTO> list) {
+	private void checkBatchDeliver(List<OrderBatchDeliverAddCmd> list) {
 		List<LogisticsVO> logistics = logisticsApi.list();
-		for (OrderBatchDeliverDTO orderBatchDeliverDTO : list) {
+		for (OrderBatchDeliverAddCmd orderBatchDeliverAddCmd : list) {
 			// 查看订单号是否存在-是否是当前店铺的订单
 			OrderPO orderPO = this.getOne(new LambdaQueryWrapper<OrderPO>()
 				.eq(OrderPO::getStoreId, SecurityUtils.getCurrentUser().getStoreId())
-				.eq(OrderPO::getSn, orderBatchDeliverDTO.getOrderSn()));
+				.eq(OrderPO::getSn, orderBatchDeliverAddCmd.getOrderSn()));
 			if (orderPO == null) {
 				throw new BusinessException(
-					"订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不存在");
+					"订单编号：'" + orderBatchDeliverAddCmd.getOrderSn() + " '不存在");
 			}
 			else if (!orderPO.getOrderStatus().equals(OrderStatusEnum.UNDELIVERED.name())) {
 				throw new BusinessException(
-					"订单编号：'" + orderBatchDeliverDTO.getOrderSn() + " '不能发货");
+					"订单编号：'" + orderBatchDeliverAddCmd.getOrderSn() + " '不能发货");
 			}
 			// 获取物流公司
 			logistics.forEach(item -> {
-				if (item.getName().equals(orderBatchDeliverDTO.getLogisticsName())) {
-					orderBatchDeliverDTO.setLogisticsId(item.getId());
+				if (item.getName().equals(orderBatchDeliverAddCmd.getLogisticsName())) {
+					orderBatchDeliverAddCmd.setLogisticsId(item.getId());
 				}
 			});
-			if (StringUtils.isEmpty(orderBatchDeliverDTO.getLogisticsId())) {
+			if (StringUtils.isEmpty(orderBatchDeliverAddCmd.getLogisticsId())) {
 				throw new BusinessException(
-					"物流公司：'" + orderBatchDeliverDTO.getLogisticsName() + " '不存在");
+					"物流公司：'" + orderBatchDeliverAddCmd.getLogisticsName() + " '不存在");
 			}
 		}
 	}

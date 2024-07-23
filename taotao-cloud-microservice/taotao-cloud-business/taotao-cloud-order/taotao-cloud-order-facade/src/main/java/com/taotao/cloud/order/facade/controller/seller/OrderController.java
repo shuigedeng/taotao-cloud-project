@@ -20,11 +20,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.common.utils.servlet.RequestUtils;
-import com.taotao.cloud.order.application.command.cart.OrderExportVO;
-import com.taotao.cloud.order.application.command.cart.TradeDTO;
-import com.taotao.cloud.order.application.command.order.OrderDetailVO;
-import com.taotao.cloud.order.application.command.order.OrderPageQuery;
-import com.taotao.cloud.order.application.command.order.OrderSimpleVO;
+import com.taotao.cloud.order.application.command.cart.dto.clientobject.OrderExportCO;
+import com.taotao.cloud.order.application.command.cart.dto.TradeAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderDetailCO;
+import com.taotao.cloud.order.application.command.order.dto.OrderPageQry;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderSimpleCO;
 import com.taotao.cloud.order.application.service.order.IOrderPriceService;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
@@ -83,16 +83,16 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/page")
-	public Result<PageResult<OrderSimpleVO>> queryMineOrder(OrderPageQuery orderPageQuery) {
-		IPage<OrderSimpleVO> page = orderService.pageQuery(orderPageQuery);
-		return Result.success(MpUtils.convertMybatisPage(page, OrderSimpleVO.class));
+	public Result<PageResult<OrderSimpleCO>> queryMineOrder(OrderPageQry orderPageQry) {
+		IPage<OrderSimpleCO> page = orderService.pageQuery(orderPageQry);
+		return Result.success(MpUtils.convertMybatisPage(page, OrderSimpleCO.class));
 	}
 
 	@Operation(summary = "订单明细", description = "订单明细")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{orderSn}")
-	public Result<OrderDetailVO> getBySn(@NotNull @PathVariable String orderSn) {
+	public Result<OrderDetailCO> getBySn(@NotNull @PathVariable String orderSn) {
 		OperationalJudgment.judgment(orderService.getBySn(orderSn));
 		return Result.success(orderService.queryDetail(orderSn));
 	}
@@ -103,7 +103,7 @@ public class OrderController {
 	@PostMapping(value = "/update/{orderSn}/consignee")
 	public Result<Order> consignee(
 		@NotNull(message = "参数非法") @PathVariable String orderSn,
-		@Valid TradeDTO.MemberAddressDTO memberAddressDTO) {
+		@Valid TradeAddCmd.MemberAddressDTO memberAddressDTO) {
 		return Result.success(orderService.updateConsignee(orderSn, memberAddressDTO));
 	}
 
@@ -185,7 +185,7 @@ public class OrderController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/queryExportOrder")
-	public Result<List<OrderExportVO>> queryExportOrder(OrderPageQuery orderPageQuery) {
-		return Result.success(orderService.queryExportOrder(orderPageQuery));
+	public Result<List<OrderExportCO>> queryExportOrder(OrderPageQry orderPageQry) {
+		return Result.success(orderService.queryExportOrder(orderPageQry));
 	}
 }

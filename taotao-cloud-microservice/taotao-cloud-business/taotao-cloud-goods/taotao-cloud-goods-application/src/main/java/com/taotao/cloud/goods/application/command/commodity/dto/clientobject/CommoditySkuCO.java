@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-/** 直播商品VO */
+/** 直播商品CO */
 @Setter
 @Getter
 @SuperBuilder

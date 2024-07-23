@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.service.cart;
 
-import com.taotao.cloud.order.application.command.order.ReceiptVO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.ReceiptCO;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.TradePO;
 
 /**
@@ -152,12 +152,12 @@ public interface ICartService {
 	/**
 	 * 选择发票
 	 *
-	 * @param receiptVO 发票信息
+	 * @param receiptCO 发票信息
 	 * @param way       购物车类型
 	 * @return {@link Boolean }
 	 * @since 2022-05-16 16:44:02
 	 */
-	boolean shippingReceipt(ReceiptVO receiptVO, String way);
+	boolean shippingReceipt(ReceiptCO receiptCO, String way);
 
 	/**
 	 * 选择配送方式

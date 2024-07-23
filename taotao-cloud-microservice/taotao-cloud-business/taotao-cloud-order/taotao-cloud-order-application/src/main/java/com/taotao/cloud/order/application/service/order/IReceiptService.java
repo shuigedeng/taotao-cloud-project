@@ -18,8 +18,8 @@ package com.taotao.cloud.order.application.service.order;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.order.application.command.order.OrderReceiptDTO;
-import com.taotao.cloud.order.application.command.order.ReceiptPageQuery;
+import com.taotao.cloud.order.application.command.order.dto.OrderReceiptAddCmd;
+import com.taotao.cloud.order.application.command.order.dto.ReceiptPageQry;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.ReceiptPO;
 
 /**
@@ -34,11 +34,11 @@ public interface IReceiptService extends IService<ReceiptPO> {
     /**
      * 根据条件获取发票信息列表
      *
-     * @param receiptPageQuery 发票查询参数
-     * @return {@link IPage }<{@link OrderReceiptDTO }>
+     * @param receiptPageQry 发票查询参数
+     * @return {@link IPage }<{@link OrderReceiptAddCmd }>
      * @since 2022-04-28 08:54:50
      */
-    IPage<OrderReceiptDTO> pageQuery(ReceiptPageQuery receiptPageQuery);
+    IPage<OrderReceiptAddCmd> pageQuery(ReceiptPageQry receiptPageQry);
 
     /**
      * 根据订单编号获取发票信息

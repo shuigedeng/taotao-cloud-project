@@ -24,9 +24,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.cloud.common.enums.ResultEnum;
 import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleApplyCO;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleAddCmd;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSalePageQry;
 import com.taotao.cloud.order.application.config.aop.aftersale.AfterSaleLogPoint;
 import com.taotao.cloud.order.application.service.aftersale.IAfterSaleService;
 import com.taotao.cloud.order.application.service.order.IOrderItemService;
@@ -98,13 +98,14 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	private final RocketMQTemplate rocketMQTemplate;
 
 	@Override
-	public IPage<AfterSalePO> pageQuery(AfterSalePageQuery afterSalePageQuery) {
-		return baseMapper.queryByParams(afterSalePageQuery.buildMpPage(), afterSaleManager.queryWrapper(afterSalePageQuery));
+	public IPage<AfterSalePO> pageQuery(AfterSalePageQry afterSalePageQry) {
+		return baseMapper.queryByParams(
+			afterSalePageQry.buildMpPage(), afterSaleManager.queryWrapper(afterSalePageQry));
 	}
 
 	@Override
-	public List<AfterSalePO> exportAfterSaleOrder(AfterSalePageQuery afterSalePageQuery) {
-		return this.list(afterSaleManager.queryWrapper(afterSalePageQuery));
+	public List<AfterSalePO> exportAfterSaleOrder(AfterSalePageQry afterSalePageQry) {
+		return this.list(afterSaleManager.queryWrapper(afterSalePageQry));
 	}
 
 	@Override
@@ -115,7 +116,7 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	}
 
 	@Override
-	public AfterSaleApplyVO getAfterSaleVO(String sn) {
+	public AfterSaleApplyCO getAfterSaleVO(String sn) {
 		AfterSaleApplyVOBuilder afterSaleApplyVOBuilder = AfterSaleApplyVOBuilder.builder();
 
 		// 获取订单货物判断是否可申请售后
@@ -162,11 +163,11 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 
 	@Override
 	@AfterSaleLogPoint(sn = "#rvt.sn", description = "'售后申请:售后编号['+#rvt.sn+']'")
-	public Boolean saveAfterSale(AfterSaleDTO afterSaleDTO) {
+	public Boolean saveAfterSale(AfterSaleAddCmd afterSaleAddCmd) {
 		// 检查当前订单是否可申请售后
-		this.checkAfterSaleType(afterSaleDTO);
+		this.checkAfterSaleType(afterSaleAddCmd);
 		// 添加售后
-		addAfterSale(afterSaleDTO);
+		addAfterSale(afterSaleAddCmd);
 		return true;
 	}
 
@@ -362,22 +363,22 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 创建售后
 	 *
-	 * @param afterSaleDTO 售后
+	 * @param afterSaleAddCmd 售后
 	 * @return 售后
 	 */
-	private AfterSalePO addAfterSale(AfterSaleDTO afterSaleDTO) {
+	private AfterSalePO addAfterSale(AfterSaleAddCmd afterSaleAddCmd) {
 		// 写入其他属性
 		SecurityUser user = SecurityUtils.getCurrentUser();
 
 		AfterSalePO afterSale = new AfterSalePO();
-		BeanUtils.copyProperties(afterSaleDTO, afterSale);
+		BeanUtils.copyProperties(afterSaleAddCmd, afterSale);
 
 		// 写入会员信息
 		afterSale.setMemberId(user.getUserId());
 		afterSale.setMemberName(user.getNickname());
 
 		// 写入商家信息
-		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.orderItemSn());
+		OrderItem orderItem = orderItemService.getBySn(afterSaleAddCmd.orderItemSn());
 		Order order = OperationalJudgment.judgment(orderService.getBySn(orderItem.getOrderSn()));
 		afterSale.setStoreId(order.getStoreId());
 		afterSale.setStoreName(order.getStoreName());
@@ -403,8 +404,8 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		afterSale.setSn(IdGeneratorUtils.createStr("A"));
 
 		// 是否包含图片
-		if (afterSaleDTO.images() != null) {
-			afterSale.setAfterSaleImage(afterSaleDTO.images());
+		if (afterSaleAddCmd.images() != null) {
+			afterSale.setAfterSaleImage(afterSaleAddCmd.images());
 		}
 
 		if (afterSale.getNum().equals(orderItem.getNum())) {
@@ -454,16 +455,16 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 检查当前订单状态是否为可申请当前售后类型的状态
 	 *
-	 * @param afterSaleDTO 售后
+	 * @param afterSaleAddCmd 售后
 	 */
-	private void checkAfterSaleType(AfterSaleDTO afterSaleDTO) {
+	private void checkAfterSaleType(AfterSaleAddCmd afterSaleAddCmd) {
 		// 判断数据是否为空
-		if (null == afterSaleDTO || CharSequenceUtil.isEmpty(afterSaleDTO.orderItemSn())) {
+		if (null == afterSaleAddCmd || CharSequenceUtil.isEmpty(afterSaleAddCmd.orderItemSn())) {
 			throw new BusinessException(ResultEnum.ORDER_NOT_EXIST);
 		}
 
 		// 获取订单货物判断是否可申请售后
-		OrderItem orderItem = orderItemService.getBySn(afterSaleDTO.orderItemSn());
+		OrderItem orderItem = orderItemService.getBySn(afterSaleAddCmd.orderItemSn());
 
 		// 未申请售后或部分售后订单货物才能进行申请
 		if (!orderItem.getAfterSaleStatus().equals(OrderItemAfterSaleStatusEnum.NOT_APPLIED.name())
@@ -472,20 +473,20 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 		}
 
 		// 申请商品数量不能超过商品总数量-售后商品数量
-		if (afterSaleDTO.num() > (orderItem.getNum() - orderItem.getReturnGoodsNumber())) {
+		if (afterSaleAddCmd.num() > (orderItem.getNum() - orderItem.getReturnGoodsNumber())) {
 			throw new BusinessException(ResultEnum.AFTER_GOODS_NUMBER_ERROR);
 		}
 
 		// 获取售后类型
 		Order order = orderService.getBySn(orderItem.getOrderSn());
-		AfterSaleTypeEnum afterSaleTypeEnum = AfterSaleTypeEnum.valueOf(afterSaleDTO.serviceType());
+		AfterSaleTypeEnum afterSaleTypeEnum = AfterSaleTypeEnum.valueOf(afterSaleAddCmd.serviceType());
 		switch (afterSaleTypeEnum) {
 			case RETURN_MONEY -> {
 				// 只处理已付款的售后
 				if (!PayStatusEnum.PAID.name().equals(order.getPayStatus())) {
 					throw new BusinessException(ResultEnum.AFTER_SALES_BAN);
 				}
-				this.checkAfterSaleReturnMoneyParam(afterSaleDTO);
+				this.checkAfterSaleReturnMoneyParam(afterSaleAddCmd);
 			}
 			case RETURN_GOODS -> {
 				// 是否为有效状态
@@ -503,14 +504,14 @@ public class AfterSaleServiceImpl extends ServiceImpl<IAfterSaleMapper, AfterSal
 	/**
 	 * 检测售后-退款参数
 	 *
-	 * @param afterSaleDTO 售后DTO
+	 * @param afterSaleAddCmd 售后DTO
 	 */
-	private void checkAfterSaleReturnMoneyParam(AfterSaleDTO afterSaleDTO) {
+	private void checkAfterSaleReturnMoneyParam(AfterSaleAddCmd afterSaleAddCmd) {
 		// 如果为线下支付银行信息不能为空
-		if (AfterSaleRefundWayEnum.OFFLINE.name().equals(afterSaleDTO.refundWay())) {
-			boolean emptyBankParam = CharSequenceUtil.isEmpty(afterSaleDTO.bankDepositName())
-				|| CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountName())
-				|| CharSequenceUtil.isEmpty(afterSaleDTO.bankAccountNumber());
+		if (AfterSaleRefundWayEnum.OFFLINE.name().equals(afterSaleAddCmd.refundWay())) {
+			boolean emptyBankParam = CharSequenceUtil.isEmpty(afterSaleAddCmd.bankDepositName())
+				|| CharSequenceUtil.isEmpty(afterSaleAddCmd.bankAccountName())
+				|| CharSequenceUtil.isEmpty(afterSaleAddCmd.bankAccountNumber());
 			if (emptyBankParam) {
 				throw new BusinessException(ResultEnum.RETURN_MONEY_OFFLINE_BANK_ERROR);
 			}

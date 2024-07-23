@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.goods.application.command.specification.dto.SpecificationPageQuery;
+import com.taotao.cloud.goods.application.command.specification.dto.SpecificationPageQry;
 import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
 import java.util.List;
@@ -43,11 +43,11 @@ public interface ISpecificationService extends BaseSuperService<SpecificationPO,
 	/**
 	 * 分页查询
 	 *
-	 * @param specificationPageQuery 查询条件
+	 * @param specificationPageQry 查询条件
 	 * @return {@link IPage }<{@link SpecificationPO }>
 	 * @since 2022-04-27 17:01:01
 	 */
-	IPage<SpecificationPO> getPage(SpecificationPageQuery specificationPageQuery);
+	IPage<SpecificationPO> getPage(SpecificationPageQry specificationPageQry);
 
 	boolean saveCategoryBrand(Long categoryId, String[] categorySpecs);
 }

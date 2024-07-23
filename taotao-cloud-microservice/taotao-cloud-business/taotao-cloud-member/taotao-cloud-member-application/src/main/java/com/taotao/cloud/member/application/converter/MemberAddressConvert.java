@@ -37,5 +37,5 @@ public interface MemberAddressConvert {
 	 */
 	MemberAddressConvert INSTANCE = Mappers.getMapper(MemberAddressConvert.class);
 
-	MemberAddressCO convert(MemberAddressPO memberAddressPO);
+	MemberAddressCO convert(MemberAddressPO memberAddressPo);
 }

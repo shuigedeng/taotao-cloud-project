@@ -12,7 +12,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-c-jobloud-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
@@ -29,7 +29,12 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
     implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
-
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-elastic"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-job-snail"
     implementation 'org.springframework.session:spring-session-data-redis:3.3.1'
 
     implementation 'com.github.binarywang:weixin-java-mp:4.6.3.B'

@@ -20,12 +20,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.PageResult;
 import com.taotao.cloud.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleApplyVO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleDTO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleLogVO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSalePageQuery;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleReasonVO;
-import com.taotao.cloud.order.application.command.aftersale.AfterSaleVO;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleApplyCO;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleAddCmd;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleLogCO;
+import com.taotao.cloud.order.application.command.aftersale.dto.AfterSalePageQry;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleReasonCO;
+import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleCO;
 import com.taotao.cloud.order.application.converter.AfterSaleConvert;
 import com.taotao.cloud.order.application.converter.AfterSaleLogConvert;
 import com.taotao.cloud.order.application.converter.AfterSaleReasonConvert;
@@ -86,7 +86,7 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/{sn}")
-	public Result<AfterSaleVO> getAfterSaleBySn(
+	public Result<AfterSaleCO> getAfterSaleBySn(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		AfterSalePO afterSale = OperationalJudgment.judgment(afterSaleService.getAfterSaleBySn(sn));
 		return Result.success(AfterSaleConvert.INSTANCE.convert(afterSale));
@@ -96,17 +96,17 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/page")
-	public Result<PageResult<AfterSaleVO>> pageQuery(
-		@Validated AfterSalePageQuery afterSalePageQuery) {
-		IPage<AfterSalePO> afterSalePages = afterSaleService.pageQuery(afterSalePageQuery);
-		return Result.success(MpUtils.convertMybatisPage(afterSalePages, AfterSaleVO.class));
+	public Result<PageResult<AfterSaleCO>> pageQuery(
+		@Validated AfterSalePageQry afterSalePageQry) {
+		IPage<AfterSalePO> afterSalePages = afterSaleService.pageQuery(afterSalePageQry);
+		return Result.success(MpUtils.convertMybatisPage(afterSalePages, AfterSaleCO.class));
 	}
 
 	@Operation(summary = "获取申请售后页面信息", description = "获取申请售后页面信息")
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/apply-aftersale-info/{sn}")
-	public Result<AfterSaleApplyVO> applyAfterSaleInfo(
+	public Result<AfterSaleApplyCO> applyAfterSaleInfo(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		return Result.success(afterSaleService.getAfterSaleVO(sn));
 	}
@@ -117,11 +117,11 @@ public class AfterSaleController {
 	@PostMapping(value = "/{orderItemSn}")
 	public Result<Boolean> saveAfterSale(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String orderItemSn,
-		@Validated @RequestBody AfterSaleDTO afterSaleDTO) {
-		afterSaleDTO = AfterSaleDTOBuilder.builder(afterSaleDTO)
+		@Validated @RequestBody AfterSaleAddCmd afterSaleAddCmd) {
+		afterSaleAddCmd = AfterSaleDTOBuilder.builder(afterSaleAddCmd)
 			.orderItemSn(orderItemSn)
 			.build();
-		return Result.success(afterSaleService.saveAfterSale(afterSaleDTO));
+		return Result.success(afterSaleService.saveAfterSale(afterSaleAddCmd));
 	}
 
 	@Operation(summary = "买家 退回 物流信息", description = "买家 退回 物流信息")
@@ -160,7 +160,7 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleReason/{serviceType}")
-	public Result<List<AfterSaleReasonVO>> getAfterSaleReason(
+	public Result<List<AfterSaleReasonCO>> getAfterSaleReason(
 		@NotBlank(message = "售后类型不能为空") @PathVariable String serviceType) {
 		List<AfterSaleReasonPO> afterSaleReasonPOS = afterSaleReasonService.afterSaleReasonList(
 			serviceType);
@@ -171,7 +171,7 @@ public class AfterSaleController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping(value = "/afterSaleLog/{sn}")
-	public Result<List<AfterSaleLogVO>> getAfterSaleLog(
+	public Result<List<AfterSaleLogCO>> getAfterSaleLog(
 		@NotBlank(message = "售后单号不能为空") @PathVariable String sn) {
 		List<AfterSaleLogPO> afterSaleLogPOList = afterSaleLogService.getAfterSaleLog(sn);
 		return Result.success(AfterSaleLogConvert.INSTANCE.convert(afterSaleLogPOList));

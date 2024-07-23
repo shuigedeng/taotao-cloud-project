@@ -17,9 +17,11 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.taotao.cloud.goods.application.command.goods.dto.CustomWordsAddCmd;
+import com.taotao.cloud.goods.application.command.goods.dto.CustomWordsUpdateCmd;
+import com.taotao.cloud.goods.application.command.goods.dto.clientobject.CustomWordsVO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWordsPO;
 import com.taotao.cloud.web.base.service.BaseSuperService;
-
 import java.util.List;
 
 /**
@@ -33,12 +35,14 @@ public interface ICustomWordsService extends BaseSuperService<CustomWordsPO, Lon
 
 	/**
 	 * 自定义分词部署替换
+	 *
 	 * @return 替换的内容
 	 */
 	String deploy();
 
 	/**
 	 * 是否存在分词
+	 *
 	 * @param words 分词
 	 * @return 是否存在
 	 */
@@ -50,7 +54,7 @@ public interface ICustomWordsService extends BaseSuperService<CustomWordsPO, Lon
 	 * @param customWordsVO 自定义分词信息
 	 * @return 是否添加成功
 	 */
-	boolean addCustomWords(CustomWordsVO customWordsVO);
+	boolean addCustomWords(CustomWordsAddCmd customWordsAddCmd);
 
 
 	/**
@@ -59,7 +63,7 @@ public interface ICustomWordsService extends BaseSuperService<CustomWordsPO, Lon
 	 * @param customWordsVO 自定义分词信息
 	 * @return 是否修改成功
 	 */
-	boolean updateCustomWords(CustomWordsVO customWordsVO);
+	boolean updateCustomWords(CustomWordsUpdateCmd customWordsUpdateCmd);
 
 	/**
 	 * 删除自定义分词
@@ -88,7 +92,7 @@ public interface ICustomWordsService extends BaseSuperService<CustomWordsPO, Lon
 	/**
 	 * 分页查询自定义分词
 	 *
-	 * @param words 分词
+	 * @param words  分词
 	 * @param pageVo 分页信息
 	 * @return 自定义分词分页信息
 	 */

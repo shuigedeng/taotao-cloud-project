@@ -55,7 +55,7 @@ public class GoodsLabelSellerController {
     @RequestLogger("获取当前店铺商品分类列表")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping
-    public Result<List<StoreGoodsLabelVO>> list() {
+    public Result<List<StoreGoodsLabelCO>> list() {
         Long storeId = SecurityUtils.getCurrentUser().getStoreId();
         return Result.success(storeGoodsLabelService.listByStoreId(storeId));
     }
@@ -64,7 +64,7 @@ public class GoodsLabelSellerController {
     @RequestLogger("获取店铺商品分类详情")
     @PreAuthorize("hasAuthority('dept:tree:data')")
     @GetMapping("/{id}")
-    public Result<StoreGoodsLabelInfoVO> getStoreGoodsLabel(@PathVariable Long id) {
+    public Result<StoreGoodsLabelInfoCO> getStoreGoodsLabel(@PathVariable Long id) {
         StoreGoodsLabel storeGoodsLabel = storeGoodsLabelService.getById(id);
         return Result.success(GoodsLabelStoreConvert.INSTANCE.convert(storeGoodsLabel));
     }

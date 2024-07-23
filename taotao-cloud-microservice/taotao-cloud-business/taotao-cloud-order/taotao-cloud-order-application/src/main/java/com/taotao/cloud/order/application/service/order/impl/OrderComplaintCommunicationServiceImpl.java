@@ -19,7 +19,7 @@ package com.taotao.cloud.order.application.service.order.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.order.application.command.order.OrderComplaintCommunicationPageQuery;
+import com.taotao.cloud.order.application.command.order.dto.OrderComplaintCommunicationPageQry;
 import com.taotao.cloud.order.application.service.order.IOrderComplaintCommunicationService;
 import com.taotao.cloud.order.infrastructure.persistent.mapper.order.IOrderComplainCommunicationMapper;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderComplaintCommunicationPO;
@@ -47,7 +47,7 @@ public class OrderComplaintCommunicationServiceImpl
 
     @Override
     public IPage<OrderComplaintCommunicationPO> getCommunication(
-		OrderComplaintCommunicationPageQuery pageQuery) {
+		OrderComplaintCommunicationPageQry pageQuery) {
         LambdaQueryWrapper<OrderComplaintCommunicationPO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(
                 StrUtil.isNotEmpty(pageQuery.getComplainId()),

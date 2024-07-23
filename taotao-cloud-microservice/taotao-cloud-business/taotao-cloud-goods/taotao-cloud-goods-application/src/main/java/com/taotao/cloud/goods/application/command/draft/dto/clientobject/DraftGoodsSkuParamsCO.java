@@ -26,7 +26,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-/** 草稿商品VO */
+/** 草稿商品CO */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
@@ -47,5 +47,5 @@ public class DraftGoodsSkuParamsCO extends DraftGoodsCO {
     private List<String> goodsGalleryList;
 
     @Schema(description = "sku列表")
-    private List<GoodsSkuSpecGalleryVO> skuList;
+    private List<GoodsSkuSpecGalleryCO> skuList;
 }

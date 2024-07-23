@@ -18,7 +18,7 @@ package com.taotao.cloud.order.facade.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.order.application.command.order.PaymentLogVO;
+import com.taotao.cloud.order.application.command.order.dto.clientobject.PaymentLogCO;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,7 +50,7 @@ public class PaymentLogController {
 	@RequestLogger
 	@PreAuthorize("hasAuthority('dept:tree:data')")
 	@GetMapping("/tree")
-	public Result<IPage<PaymentLogVO>> getByPage(Order order, SearchVO searchVo) {
+	public Result<IPage<PaymentLogCO>> getByPage(Order order, SearchVO searchVo) {
 		return Result.success(
 			orderService.queryPaymentLogs(PageUtil.initPage(page),
 				PageUtil.initWrapper(order, searchVo)));

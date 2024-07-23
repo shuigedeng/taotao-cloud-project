@@ -1,5 +1,7 @@
 package com.taotao.cloud.goods.domain.category.service.impl;
 
+import com.taotao.cloud.goods.domain.category.entity.CategoryEntity;
+import com.taotao.cloud.goods.domain.category.repository.CategoryDomainRepository;
 import com.taotao.cloud.goods.domain.category.service.CategoryDomainService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,15 +10,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CategoryDomainServiceImpl implements CategoryDomainService {
 
-	private MemberDomainRepository deptDomainRepository;
+	private CategoryDomainRepository categoryDomainRepository;
 
 	@Override
-	public void create(MemberEntity dept) {
+	public void create(CategoryEntity dept) {
 
 	}
 
 	@Override
-	public void modify(MemberEntity dept) {
+	public void modify(CategoryEntity dept) {
 
 	}
 
