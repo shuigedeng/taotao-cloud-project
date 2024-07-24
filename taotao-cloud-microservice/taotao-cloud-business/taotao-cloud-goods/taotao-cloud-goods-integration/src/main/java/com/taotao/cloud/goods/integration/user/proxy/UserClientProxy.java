@@ -22,10 +22,9 @@ import com.taotao.cloud.goods.integration.user.vo.UserBaseInfoVO;
 import com.taotao.cloud.sys.api.dubbo.DictRpcService;
 import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
 import com.taotao.cloud.sys.api.feign.UserApi;
-import com.taotao.cloud.sys.api.grpc.HelloReply;
-import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.api.feign.response.UserQueryApiResponse;
 import jakarta.annotation.Resource;
-import org.openjdk.nashorn.internal.ir.annotations.Reference;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -37,15 +36,15 @@ public class UserClientProxy {
 	private UserClientAdapter userIntegrationAdapter;
 	@Resource
 	private UserGrpcClient userGrpcClient;
-	@Reference
+	@DubboReference
 	private DictRpcService dubboDictRpc;
 
 	// 查询用户
 	public UserBaseInfoVO getUserInfo(String username) {
-		UserQueryVO user = feignUserApi.findUserInfoByUsername(username);
+		UserQueryApiResponse user = feignUserApi.findUserInfoByUsername(username);
 		DictRpcResponse dict = dubboDictRpc.findByCode(22);
 
-		HelloReply helloReply = userGrpcClient.sayHello(username);
+		//HelloReply helloReply = userGrpcClient.sayHello(username);
 
 		return userIntegrationAdapter.convert(user, dict);
 	}

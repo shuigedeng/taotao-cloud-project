@@ -17,12 +17,12 @@
 package com.taotao.cloud.goods.integration.user.vo;
 
 import com.taotao.cloud.sys.api.dubbo.response.DictRpcResponse;
-import com.taotao.cloud.sys.api.model.vo.user.UserQueryVO;
+import com.taotao.cloud.sys.api.feign.response.UserQueryApiResponse;
 import lombok.Data;
 
 @Data
 public class UserBaseInfoVO {
 
-    private UserQueryVO userQueryVO;
+    private UserQueryApiResponse userQueryVO;
     private DictRpcResponse dict;
 }

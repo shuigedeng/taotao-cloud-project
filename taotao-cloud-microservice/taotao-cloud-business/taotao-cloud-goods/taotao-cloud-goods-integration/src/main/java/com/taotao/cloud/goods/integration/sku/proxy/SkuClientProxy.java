@@ -21,10 +21,6 @@ import com.taotao.cloud.goods.api.dubbo.request.GoodsQueryRpcRequest;
 import com.taotao.cloud.goods.api.dubbo.response.GoodsQueryRpcResponse;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.feign.response.GoodsSkuSpecGalleryApiResponse;
-import com.taotao.cloud.goods.api.grpc.BooleanReply;
-import com.taotao.cloud.member.integration.sku.adapter.SkuClientAdapter;
-import com.taotao.cloud.member.integration.sku.grpc.SkuGrpcClient;
-import com.taotao.cloud.member.integration.sku.vo.SkuVO;
 import jakarta.annotation.Resource;
 import org.openjdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Component;
@@ -32,22 +28,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class SkuClientProxy {
 
-	@Resource
-	private GoodsSkuApi goodsSkuApi;
-	@Resource
-	private SkuClientAdapter skuClientAdapter;
-	@Resource
-	private SkuGrpcClient skuGrpcClient;
-	@Reference
-	private GoodsRpcService goodsRpcService;
 
-	// 查询用户
-	public SkuVO getUserInfo(Long  skuId) {
-		GoodsSkuSpecGalleryApiResponse user = goodsSkuApi.getGoodsSkuByIdFromCache(skuId);
-		GoodsQueryRpcResponse goodsQueryResponse = goodsRpcService.queryGoodsByParams(new GoodsQueryRpcRequest());
-
-		BooleanReply helloReply = skuGrpcClient.getGoodsSkuByIdFromCache("");
-
-		return skuClientAdapter.convert(user, goodsQueryResponse, helloReply);
-	}
 }
