@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.sys.facade.grpc;
 
+import com.taotao.cloud.sys.api.grpc.DictGrpcRequest;
+import com.taotao.cloud.sys.api.grpc.DictGrpcResponse;
 import com.taotao.cloud.sys.api.grpc.DictGrpcServiceGrpc.DictGrpcServiceImplBase;
-import com.taotao.cloud.sys.api.grpc.DictRequest;
-import com.taotao.cloud.sys.api.grpc.DictResponse;
-import com.taotao.cloud.sys.api.grpc.DictTestRequest;
+import com.taotao.cloud.sys.api.grpc.DictTestGrpcRequest;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.lognet.springboot.grpc.GRpcService;
@@ -32,18 +32,20 @@ public class DictGrpcServiceImpl extends DictGrpcServiceImplBase {
 	// private IDevicesFixService deviceService;
 
 	@Override
-	public void findByCode(DictRequest request, StreamObserver<DictResponse> responseObserver) {
+	public void findByCode(DictGrpcRequest request,
+		StreamObserver<DictGrpcResponse> responseObserver) {
 		super.findByCode(request, responseObserver);
 
 		log.info("findByCode:{}", request.toString());
 		boolean replyTag = false;
-		DictResponse reply = DictResponse.newBuilder().setId(1).build();
+		DictGrpcResponse reply = DictGrpcResponse.newBuilder().setId(1).build();
 		responseObserver.onNext(reply);
 		responseObserver.onCompleted();
 	}
 
 	@Override
-	public void test(DictTestRequest request, StreamObserver<DictResponse> responseObserver) {
+	public void test(DictTestGrpcRequest request,
+		StreamObserver<DictGrpcResponse> responseObserver) {
 		super.test(request, responseObserver);
 	}
 }
