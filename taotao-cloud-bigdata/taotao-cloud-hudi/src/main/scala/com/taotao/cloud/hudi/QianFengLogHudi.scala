@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.hudi
 
-import com.taotao.cloud.bigdata.hudi.util.{HudiUtil, MetaUtil, SparkHelper}
+import com.taotao.cloud.hudi.util.{HudiUtil, MetaUtil, SparkHelper}
 import org.apache.hudi.DataSourceWriteOptions
 import org.apache.hudi.config.{HoodieIndexConfig, HoodieWriteConfig}
 import org.apache.hudi.index.HoodieIndex

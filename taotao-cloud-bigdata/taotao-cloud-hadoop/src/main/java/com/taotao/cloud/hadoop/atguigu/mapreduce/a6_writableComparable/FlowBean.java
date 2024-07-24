@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a6_writableComparable;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a6_writableComparable;
 
 import org.apache.hadoop.io.WritableComparable;
 

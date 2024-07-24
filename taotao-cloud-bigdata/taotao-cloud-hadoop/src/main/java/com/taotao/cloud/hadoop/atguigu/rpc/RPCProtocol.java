@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.rpc;
+package com.taotao.cloud.hadoop.atguigu.rpc;
 
 public interface RPCProtocol {
 

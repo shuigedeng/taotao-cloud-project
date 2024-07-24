@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a1_wordcount;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a1_wordcount;
 
 import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;

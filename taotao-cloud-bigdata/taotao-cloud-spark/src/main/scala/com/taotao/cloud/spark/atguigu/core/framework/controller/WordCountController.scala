@@ -1,7 +1,7 @@
 package com.taotao.cloud.spark.atguigu.core.framework.controller
 
-import com.taotao.cloud.bigdata.spark.atguigu.core.framework.common.TController
-import com.taotao.cloud.bigdata.spark.atguigu.core.framework.service.WordCountService
+import com.taotao.cloud.spark.atguigu.core.framework.common.TController
+import com.taotao.cloud.spark.atguigu.core.framework.service.WordCountService
 
 
 /**

@@ -105,11 +105,11 @@ configurations {
     }
 }
 
-//mainClassName = "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
+//mainClassName = "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"
 
 jar {
     manifest {
-        attributes 'Main-Class': "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
+        attributes 'Main-Class': "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"
     }
     from sourceSets.main.output
     dependsOn configurations.runtimeClasspath
@@ -123,7 +123,7 @@ shadowJar {
     //version = 1.0
     manifest {
         attributes(
-                "Main-Class": "com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi"
+                "Main-Class": "com.taotao.cloud.hudi.TaoTaoCloudLogHudi"
         )
     }
     zip64 true

@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a11_mapjoin;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a11_mapjoin;
 
 
 import java.io.BufferedReader;

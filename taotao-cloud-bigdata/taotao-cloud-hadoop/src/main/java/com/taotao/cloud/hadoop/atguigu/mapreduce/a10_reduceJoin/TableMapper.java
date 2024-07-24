@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a10_reduceJoin;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a10_reduceJoin;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;

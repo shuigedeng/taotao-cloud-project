@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.hdfs.configuration;
+package com.taotao.cloud.hadoop.hdfs.configuration;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

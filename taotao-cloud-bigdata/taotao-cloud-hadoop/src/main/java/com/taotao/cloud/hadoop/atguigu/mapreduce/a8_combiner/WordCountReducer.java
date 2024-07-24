@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a8_combiner;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a8_combiner;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;

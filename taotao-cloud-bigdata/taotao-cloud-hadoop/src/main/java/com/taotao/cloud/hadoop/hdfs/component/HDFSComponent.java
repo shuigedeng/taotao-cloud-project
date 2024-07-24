@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.hdfs.component;
+package com.taotao.cloud.hadoop.hdfs.component;
 
-import com.taotao.cloud.bigdata.hadoop.hdfs.configuration.HdfsConfiguration;
-import com.taotao.cloud.bigdata.hadoop.hdfs.utils.HDFSUtil;
+import com.taotao.cloud.hadoop.hdfs.configuration.HdfsConfiguration;
+import com.taotao.cloud.hadoop.hdfs.utils.HDFSUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

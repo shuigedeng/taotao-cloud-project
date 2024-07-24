@@ -1,7 +1,7 @@
 package com.taotao.cloud.spark.atguigu.core.framework.service
 
-import com.taotao.cloud.bigdata.spark.atguigu.core.framework.common.TService
-import com.taotao.cloud.bigdata.spark.atguigu.core.framework.dao.WordCountDao
+import com.taotao.cloud.spark.atguigu.core.framework.common.TService
+import com.taotao.cloud.spark.atguigu.core.framework.dao.WordCountDao
 import org.apache.spark.rdd.RDD
 
 /**

@@ -1,6 +1,6 @@
 package com.taotao.cloud.spark.atguigu.streaming
 
-import com.taotao.cloud.bigdata.spark.atguigu.util.JDBCUtil
+import com.taotao.cloud.spark.atguigu.util.JDBCUtil
 
 import java.sql.ResultSet
 import java.text.SimpleDateFormat

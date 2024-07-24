@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.yarn;
+package com.taotao.cloud.hadoop.atguigu.yarn;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.util.Tool;

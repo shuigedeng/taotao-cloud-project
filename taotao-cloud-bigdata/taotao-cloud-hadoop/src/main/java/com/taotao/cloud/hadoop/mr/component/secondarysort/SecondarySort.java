@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.mr.component.secondarysort;
+package com.taotao.cloud.hadoop.mr.component.secondarysort;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.conf.Configuration;

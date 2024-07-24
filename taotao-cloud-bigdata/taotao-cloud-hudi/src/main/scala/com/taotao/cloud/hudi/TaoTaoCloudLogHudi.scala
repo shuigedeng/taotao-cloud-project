@@ -15,7 +15,7 @@
  */
 package com.taotao.cloud.hudi
 
-import com.taotao.cloud.bigdata.hudi.util.{SparkHelper, TaoTaoCloudUtil}
+import com.taotao.cloud.hudi.util.{SparkHelper, TaoTaoCloudUtil}
 import org.apache.spark.sql.functions.from_json
 import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
@@ -27,9 +27,9 @@ TaoTaoCloudLogConsole
 *
 *   -e dev -b host:9092 -t taotao-cloud-sys-log -m 0
 *
-*   spark-submit --master spark://192.168.10.200:7077 --class com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi  taotao-cloud-hudi-1.8.0.jar
+*   spark-submit --master spark://192.168.10.200:7077 --class com.taotao.cloud.hudi.TaoTaoCloudLogHudi  taotao-cloud-hudi-1.8.0.jar
 *
-*   java -cp taotao-cloud-hudi-1.8.0.jar  com.taotao.cloud.bigdata.hudi.TaoTaoCloudLogHudi
+*   java -cp taotao-cloud-hudi-1.8.0.jar  com.taotao.cloud.hudi.TaoTaoCloudLogHudi
 *
 *
 *

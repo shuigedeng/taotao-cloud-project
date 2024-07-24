@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a7_partitionerandwritableComparable;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a7_partitionerandwritableComparable;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

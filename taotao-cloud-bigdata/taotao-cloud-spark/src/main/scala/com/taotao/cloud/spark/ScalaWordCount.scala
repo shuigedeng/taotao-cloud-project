@@ -30,7 +30,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * 3.上传jar包提交集群运行
  * <p>
  * ./bin/spark-submit \
- * --class com.taotao.cloud.bigdata.spark.ScalaWordCount \
+ * --class com.taotao.cloud.spark.ScalaWordCount \
  * --master spark://192.168.10.200:7077 \
  * --deploy-mode client \
  * --driver-memory 2g \

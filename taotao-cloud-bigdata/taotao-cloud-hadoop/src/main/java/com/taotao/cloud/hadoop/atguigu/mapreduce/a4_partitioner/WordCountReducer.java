@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a4_partitioner;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a4_partitioner;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;

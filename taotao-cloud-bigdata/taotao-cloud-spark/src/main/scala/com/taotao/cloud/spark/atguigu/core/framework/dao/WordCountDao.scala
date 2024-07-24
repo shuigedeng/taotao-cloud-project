@@ -1,6 +1,6 @@
 package com.taotao.cloud.spark.atguigu.core.framework.dao
 
-import com.taotao.cloud.bigdata.spark.atguigu.core.framework.common.TDao
+import com.taotao.cloud.spark.atguigu.core.framework.common.TDao
 
 
 // 持久层

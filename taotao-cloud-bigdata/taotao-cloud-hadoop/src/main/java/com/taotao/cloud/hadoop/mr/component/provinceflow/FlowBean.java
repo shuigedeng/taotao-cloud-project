@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.mr.component.provinceflow;
+package com.taotao.cloud.hadoop.mr.component.provinceflow;
 
 import java.io.DataInput;
 import java.io.DataOutput;

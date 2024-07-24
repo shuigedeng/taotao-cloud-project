@@ -42,7 +42,7 @@ public class GoodsApiFallback implements FallbackFactory<GoodsApi> {
 
 			@Override
 			public Long countStoreGoodsNum(Long storeId) {
-				return 0;
+				return 0L;
 			}
 		};
     }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a9_outputformat;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a9_outputformat;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;

@@ -1,6 +1,6 @@
 package com.taotao.cloud.spark.atguigu.core.framework.common
 
-import com.taotao.cloud.bigdata.spark.atguigu.core.framework.util.EnvUtil
+import com.taotao.cloud.spark.atguigu.core.framework.util.EnvUtil
 import org.apache.spark.{SparkConf, SparkContext}
 
 trait TApplication {

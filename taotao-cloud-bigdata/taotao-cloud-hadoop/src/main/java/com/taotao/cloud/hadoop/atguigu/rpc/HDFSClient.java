@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.rpc;
+package com.taotao.cloud.hadoop.atguigu.rpc;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;

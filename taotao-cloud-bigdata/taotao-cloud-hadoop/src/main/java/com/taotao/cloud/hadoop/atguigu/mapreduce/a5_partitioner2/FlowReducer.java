@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a5_partitioner2;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a5_partitioner2;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;

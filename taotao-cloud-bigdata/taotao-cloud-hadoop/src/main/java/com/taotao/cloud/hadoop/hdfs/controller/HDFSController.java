@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.hdfs.controller;
+package com.taotao.cloud.hadoop.hdfs.controller;
 
 import com.taotao.cloud.common.utils.LogUtil;
 import com.taotao.cloud.core.model.Result;
-import com.taotao.cloud.bigdata.hadoop.hdfs.model.User;
-import com.taotao.cloud.bigdata.hadoop.hdfs.service.HdfsService;
+import com.taotao.cloud.hadoop.hdfs.model.User;
+import com.taotao.cloud.hadoop.hdfs.service.HdfsService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.fs.BlockLocation;
 import org.springframework.beans.factory.annotation.Autowired;

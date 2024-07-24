@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a2_writable;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a2_writable;
 
 import org.apache.hadoop.io.Writable;
 

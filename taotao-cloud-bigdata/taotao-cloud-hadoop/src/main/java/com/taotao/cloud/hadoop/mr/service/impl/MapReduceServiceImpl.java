@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.mr.service.impl;
+package com.taotao.cloud.hadoop.mr.service.impl;
 
-import com.taotao.cloud.bigdata.hadoop.mr.component.ReduceJobsUtils;
-import com.taotao.cloud.bigdata.hadoop.mr.service.MapReduceService;
+import com.taotao.cloud.hadoop.mr.component.ReduceJobsUtils;
+import com.taotao.cloud.hadoop.mr.service.MapReduceService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;

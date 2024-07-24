@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.taotao.cloud.bigdata.hadoop.hdfs.service.impl;
+package com.taotao.cloud.hadoop.hdfs.service.impl;
 
-import com.taotao.cloud.bigdata.hadoop.hdfs.service.HdfsService;
-import com.taotao.cloud.bigdata.hadoop.hdfs.utils.HDFSUtil;
+import com.taotao.cloud.hadoop.hdfs.service.HdfsService;
+import com.taotao.cloud.hadoop.hdfs.utils.HDFSUtil;
 import java.util.List;
 import java.util.Map;
 import org.apache.hadoop.fs.BlockLocation;

@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.hdfs;
+package com.taotao.cloud.hadoop.atguigu.hdfs;
 
 import java.io.IOException;
 import java.net.URI;

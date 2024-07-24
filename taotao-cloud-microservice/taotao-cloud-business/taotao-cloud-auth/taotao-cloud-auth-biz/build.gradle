@@ -12,9 +12,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
     implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
     implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation "io.github.shuigedeng:taotao-c-jobloud-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
-
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
     implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"

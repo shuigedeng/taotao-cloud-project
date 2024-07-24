@@ -1,6 +1,6 @@
 package com.taotao.cloud.hudi
 
-import com.taotao.cloud.bigdata.hudi.util.SparkHelper
+import com.taotao.cloud.hudi.util.SparkHelper
 import org.apache.spark.sql.streaming.OutputMode
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.slf4j.{Logger, LoggerFactory}

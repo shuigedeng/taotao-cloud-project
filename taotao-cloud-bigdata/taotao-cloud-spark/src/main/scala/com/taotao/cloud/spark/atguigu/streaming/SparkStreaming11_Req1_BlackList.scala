@@ -1,6 +1,6 @@
 package com.taotao.cloud.spark.atguigu.streaming
 
-import com.taotao.cloud.bigdata.spark.atguigu.util.JDBCUtil
+import com.taotao.cloud.spark.atguigu.util.JDBCUtil
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.InputDStream

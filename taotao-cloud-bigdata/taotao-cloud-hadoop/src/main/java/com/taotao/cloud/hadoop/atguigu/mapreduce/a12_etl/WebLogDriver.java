@@ -1,6 +1,6 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a12_etl;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a12_etl;
 
-import com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a9_outputformat.LogDriver;
+import com.taotao.cloud.hadoop.atguigu.mapreduce.a9_outputformat.LogDriver;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;

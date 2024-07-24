@@ -1,4 +1,4 @@
-package com.taotao.cloud.bigdata.hadoop.atguigu.mapreduce.a13_yasuo;
+package com.taotao.cloud.hadoop.atguigu.mapreduce.a13_yasuo;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;

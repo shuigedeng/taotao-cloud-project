@@ -1,6 +1,6 @@
 package com.taotao.cloud.flink.cep;
 
-import static com.taotao.cloud.bigdata.flink.cep.Constants.*;
+import static com.taotao.cloud.flink.cep.Constants.*;
 
 import com.taotao.cloud.flink.cep.dynamic.JDBCPeriodicPatternProcessorDiscovererFactory;
 import com.taotao.cloud.flink.cep.event.Event;
