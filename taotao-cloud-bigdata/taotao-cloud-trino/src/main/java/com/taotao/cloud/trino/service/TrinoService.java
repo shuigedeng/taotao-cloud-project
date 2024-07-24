@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.trino.service;
 
-import com.taotao.cloud.data.analysis.datasource.trino.TrinoJdbcBaseDaoImpl;
+import com.taotao.cloud.datasource.trino.TrinoJdbcBaseDaoImpl;
 import org.springframework.stereotype.Service;
 
 @Service

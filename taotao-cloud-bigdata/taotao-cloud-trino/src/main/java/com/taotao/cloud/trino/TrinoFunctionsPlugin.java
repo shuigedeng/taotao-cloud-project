@@ -17,15 +17,15 @@
 package com.taotao.cloud.trino;
 
 import com.google.common.collect.ImmutableSet;
-import com.taotao.cloud.data.analysis.trino.udaf.avg.AvgAggregationFunctions;
-import com.taotao.cloud.data.analysis.trino.udaf.collect_list.CollectListAggregationFunctions;
-import com.taotao.cloud.data.analysis.trino.udaf.decode_bit_set.DecodeBitSetAggregationFunctions;
-import com.taotao.cloud.data.analysis.trino.udaf.decode_bit_set.RouteUserGroupAggregationFunctions;
-import com.taotao.cloud.data.analysis.trino.udaf.funnel.FunnelAggregationsFunctions;
-import com.taotao.cloud.data.analysis.trino.udaf.funnel.FunnelMergeAggregationsFunctions;
-import com.taotao.cloud.data.analysis.trino.udaf.sum_double.SumDoubleAggregationsFunctions;
-import com.taotao.cloud.data.analysis.trino.udf.hive_to_date.HiveToDateScalarFunctions;
-import com.taotao.cloud.data.analysis.trino.udf.str_upper.StrUpperScalarFunctions;
+import com.taotao.cloud.trino.udaf.avg.AvgAggregationFunctions;
+import com.taotao.cloud.trino.udaf.collect_list.CollectListAggregationFunctions;
+import com.taotao.cloud.trino.udaf.decode_bit_set.DecodeBitSetAggregationFunctions;
+import com.taotao.cloud.trino.udaf.decode_bit_set.RouteUserGroupAggregationFunctions;
+import com.taotao.cloud.trino.udaf.funnel.FunnelAggregationsFunctions;
+import com.taotao.cloud.trino.udaf.funnel.FunnelMergeAggregationsFunctions;
+import com.taotao.cloud.trino.udaf.sum_double.SumDoubleAggregationsFunctions;
+import com.taotao.cloud.trino.udf.hive_to_date.HiveToDateScalarFunctions;
+import com.taotao.cloud.trino.udf.str_upper.StrUpperScalarFunctions;
 import io.trino.spi.Plugin;
 import java.util.Set;
 

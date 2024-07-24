@@ -20,7 +20,7 @@ import com.taotao.cloud.goods.api.dubbo.GoodsRpcService;
 import com.taotao.cloud.goods.api.dubbo.request.GoodsQueryRpcRequest;
 import com.taotao.cloud.goods.api.dubbo.response.GoodsQueryRpcResponse;
 import com.taotao.cloud.goods.api.feign.GoodsApi;
-import com.taotao.cloud.goods.api.grpc.CountStoreGoodsNumResponse;
+import com.taotao.cloud.goods.api.grpc.CountStoreGoodsNumGrpcResponse;
 import com.taotao.cloud.order.integration.goods.adapter.GoodsClientAdapter;
 import com.taotao.cloud.order.integration.goods.grpc.GoodsGrpcClient;
 import com.taotao.cloud.order.integration.goods.vo.GoodsVO;
@@ -44,7 +44,7 @@ public class GoodsClientProxy {
 	public GoodsVO getGoodsVO(Long storeId) {
 		Long goodsNum = goodsApi.countStoreGoodsNum(storeId);
 		GoodsQueryRpcResponse goods = goodsRpcService.queryGoodsByParams(new GoodsQueryRpcRequest());
-		CountStoreGoodsNumResponse helloReply = goodsGrpcClient.countStoreGoodsNum("sfdasdf");
+		CountStoreGoodsNumGrpcResponse helloReply = goodsGrpcClient.countStoreGoodsNum("sfdasdf");
 
 		return userIntegrationAdapter.convert(goodsNum, goods, helloReply);
 	}

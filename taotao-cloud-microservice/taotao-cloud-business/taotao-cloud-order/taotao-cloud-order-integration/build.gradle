@@ -20,4 +20,5 @@ dependencies {
 
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     api "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    api "io.github.shuigedeng:taotao-cloud-starter-dubbo"
 }

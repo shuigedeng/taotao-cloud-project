@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.tidb.mapper;
 
-import com.taotao.cloud.data.analysis.tidb.model.TidbUser;
+import com.taotao.cloud.tidb.model.TidbUser;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

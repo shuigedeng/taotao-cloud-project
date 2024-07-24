@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.doris.controller;
 
-import com.taotao.cloud.data.analysis.doris.mapper.DorisUserMapper;
-import com.taotao.cloud.data.analysis.doris.model.DorisUser;
+import com.taotao.cloud.doris.mapper.DorisUserMapper;
+import com.taotao.cloud.doris.model.DorisUser;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

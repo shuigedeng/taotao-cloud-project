@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.tidb.service;
 
-import com.taotao.cloud.data.analysis.clickhouse.mapper.CkUserMapper;
-import com.taotao.cloud.data.analysis.clickhouse.model.CkUser;
-import com.taotao.cloud.data.analysis.datasource.ck.ClickHouseJdbcBaseDaoImpl;
+import com.taotao.cloud.clickhouse.mapper.CkUserMapper;
+import com.taotao.cloud.clickhouse.model.CkUser;
+import com.taotao.cloud.datasource.ck.ClickHouseJdbcBaseDaoImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

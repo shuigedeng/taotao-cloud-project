@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.trino.controller;
 
-import com.taotao.cloud.data.analysis.trino.service.TrinoService;
+import com.taotao.cloud.trino.service.TrinoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

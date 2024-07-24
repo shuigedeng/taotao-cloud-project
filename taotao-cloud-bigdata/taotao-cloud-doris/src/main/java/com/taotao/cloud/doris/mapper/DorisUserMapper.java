@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.doris.mapper;
 
-import com.taotao.cloud.data.analysis.doris.model.DorisUser;
+import com.taotao.cloud.doris.model.DorisUser;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
