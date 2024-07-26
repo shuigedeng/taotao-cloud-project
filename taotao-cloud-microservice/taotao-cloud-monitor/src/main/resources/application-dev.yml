@@ -274,8 +274,28 @@ management:
       enabled: true
     env:
       enabled: true
+    git:
+      enabled: true
+      mode: "full"
+    os:
+      enabled: true
+    build:
+      enabled: true
+    defaults:
+      enabled: true
+    process:
+      enabled: true
   endpoints:
+    beans:
+      cache:
+        time-to-live: "10s"
     web:
+      #base-path: "/manage"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "GET,POST"
+      discovery:
+        enabled: true
       exposure:
         include: '*'
   endpoint:

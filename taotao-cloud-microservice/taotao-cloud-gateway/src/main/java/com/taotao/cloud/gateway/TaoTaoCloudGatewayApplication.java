@@ -47,6 +47,9 @@ public class TaoTaoCloudGatewayApplication {
 		System.setProperty(ReactorNetty.IO_SELECT_COUNT, "1");
 		//System.setProperty(ReactorNetty.IO_WORKER_COUNT, "1");
 
+		//要想查看Reactor Netty访问时的日志信息，你必须设置如下系统属性：
+		//-Dreactor.netty.http.server.accessLogEnabled=true
+
 		//SpringApplication.run(TaoTaoCloudGatewayApplication.class, args);
 		new StartupSpringApplication(TaoTaoCloudGatewayApplication.class)
 			.setTtcBanner()

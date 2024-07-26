@@ -251,6 +251,20 @@ spring:
           response-status: 200
           response-body: "{'data': null, 'code': 429,'message': 'scg访问频繁,进入系统熔断'}"
     gateway:
+      #请求窃听
+      #Reactor Netty HttpClient 和 HttpServer 可以启用窃听功能。如果将 reactor.netty 日志级别设置为 DEBUG 或 TRACE，就能记录信息，如下配置：
+      httpserver:
+        wiretap: true
+      httpclient:
+        response-timeout: 5s
+        connect-timeout: 30000
+        wiretap: true
+      #要启用 RouteDefinition 指标，请将 spring-boot-starter-actuator 添加为项目依赖关系。默认情况下，只要属性 spring.cloud.gateway.metrics.enabled 设为 true，指标就会可用。将添加名为 spring.cloud.gateway.routes.count 的度量指标，其值为 RouteDefinition 的数量。该指标可从 /actuator/metrics/spring.cloud.gateway.routes.count获取，如下示例：
+      metrics:
+        enabled: true
+      #Gateway会自动注册一个路由刷新的监听事件（RouteRefreshListener）。该监听器接受到相关的事件后，会再次发布路由刷新的事件对象（RefreshRoutesEvent）。一旦触发了该事件则会对当前环境中的路由进行重新加载，有些时候你可能并不希望进行刷新路由，这在Gateway4.1.2之前的版本中要禁止路由的刷新相对比较麻烦，自4.1.2起提供了如下的可配置属性进行控制：
+      route-refresh-listener:
+        enabled: false
       loadbalancer:
         use404: false
       discovery:
@@ -928,9 +942,7 @@ spring:
       #                redis-rate-limiter.burstCapacity: 5
       default-filters:
         - AddRequestHeader=X-Request-taotao-cloud, ${ttcVersion}
-      httpclient:
-        response-timeout: 5s
-        connect-timeout: 30000
+
 
 taotao:
   cloud:
@@ -1077,10 +1089,34 @@ knife4j:
 
 # 配置断路器
 resilience4j:
+  #配置断路器
   circuitbreaker:
+    instances:
+      #cloud-product:
+      #  base-config: default
+      #明确定义了一个名为 backendA 的 Circuit Breaker 实例，并为其指定了具体的配置参数。这意味着，这个配置只适用于名为 backendA 的 Circuit Breaker 实例，而其他 Circuit Breaker 实例将使用默认配置（如果存在）。
+      backendA:
+        registerHealthIndicator: true
+        slidingWindowSize: 100
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
     configs:
       # 默认断路器配置
       default:
+        #是否注册 Circuit Breaker 的健康指标，默认为 false。设置为 true 可以通过 Actuator 端点监控 Circuit Breaker 的状态。
+        registerHealthIndicator: true
+        #滑动窗口的大小，用于计算失败率。这里设置为 100，表示最近 100 个请求会被用来计算失败率。
+        slidingWindowSize: 100
+        #在滑动窗口内，至少需要有这么多请求才能开始计算失败率。这里设置为 10，表示至少需要 10 个请求后才会开始计算失败率。
+        minimumNumberOfCalls: 10
+        #失败率阈值，当失败率超过这个值时，Circuit Breaker 会进入 OPEN 状态。这里设置为 50，表示当失败率超过 50% 时，Circuit Breaker 会打开。
+        failureRateThreshold: 50
+        #Circuit Breaker 处于 OPEN 状态时的等待时间，单位毫秒。这里设置为 10000，表示 Circuit Breaker 打开后会等待 10 秒钟。
+        waitDurationInOpenState: 10000
+        #Circuit Breaker 处于 HALF_OPEN 状态时允许的请求数。这里设置为 3，表示 Circuit Breaker 半开状态时允许 3 个请求通过。
+        permittedNumberOfCallsInHalfOpenState: 3
         # 断路器方式 计数的方式
         sliding-window-type: count_based
         # 统计数量周期
@@ -1098,19 +1134,58 @@ resilience4j:
         # 计数的异常
         record-exceptions:
           - java.lang.Exception
-    instances:
-      cloud-product:
-        base-config: default
+  #配置限流器：
   ratelimiter:
+    instances:
+      #cloud-product:
+      #  base-config: default
+      #Resilience4j 使用令牌桶算法实现限流。RateLimiter 会维护一个固定数量的令牌，每个令牌代表一个请求的许可。当请求到达时，RateLimiter 会尝试获取令牌。如果获取成功，则允许请求继续执行；如果获取失败，则请求会被拒绝或延迟处理。
+      #假设 limitForPeriod 为 10，limitRefreshPeriod 为 5000。那么，在任意的 5 秒内，系统最多只会处理 10 个请求。如果在 5 秒内收到超过 10 个请求，则后面的请求会被拒绝或延迟处理。
+      backendA:
+        #在限流周期内允许的最大请求数。这里设置为 10，表示在 5 秒内最多允许 10 个请求。
+        limitForPeriod: 10
+        #限流周期的持续时间，单位毫秒。这里设置为 5000，表示限流周期为 5 秒。
+        #配置含义
+        limitRefreshPeriod: 5000
     configs:
       # 默认每秒只能通过1个请求
       default:
         limit-for-period: 10
         limit-refresh-period: 1s
         timeout-duration: 1
+  #配置舱壁隔离：
+  bulkhead:
     instances:
-      cloud-product:
-        base-config: default
+      #假设 maxConcurrentCalls 为 25，maxWaitDuration 为 100。那么，backendA 服务最多可以同时处理 25 个并发请求。如果在同一时刻收到超过 25 个请求，则后面的请求会尝试等待 100 毫秒。如果在 100 毫秒内仍然无法获得处理资源，则会被拒绝或抛出异常。
+      #假设 limitForPeriod 为 10，limitRefreshPeriod 为 5000。那么，在任意的 5 秒内，系统最多只会处理 10 个请求。如果在 5 秒内收到超过 10 个请求，则后面的请求会被拒绝或延迟处理。
+      backendA:
+        #同时允许的最大并发调用数。这里设置为 25，表示 backendA 服务最多可以同时处理 25 个并发请求。
+        maxConcurrentCalls: 25
+        #当并发请求超过 maxConcurrentCalls 限制时，新请求最长等待时间，单位毫秒。这里设置为 100，表示新请求最多等待 100 毫秒，如果仍然无法获得处理资源，则会被拒绝或抛出异常。
+        maxWaitDuration: 100
+  #配置重试：
+  retry:
+    instances:
+      #这段配置定义了一个名为 backendA 的 Retry 实例，用于对 backendA 服务或资源的调用进行重试操作。
+      #重试流程:
+      #当调用 backendA 服务发生异常时，Retry 实例会进行重试。
+      #重试之前，会等待 waitDuration 指定的时间。
+      #重试时，会再次调用 backendA 服务。
+      #如果重试成功，则返回结果并结束。
+      #如果重试 maxAttempts 次后仍然失败，则抛出异常
+      backendA:
+        #最大重试次数，包括第一次调用在内。这里设置为 3，表示当 backendA 服务调用失败时，最多会重试 2 次。
+        maxAttempts: 3
+        #重试间隔时间，单位毫秒。这里设置为 500，表示每次重试之前会等待 500 毫秒。
+        waitDuration: 500
+  #配置时间限制器：
+  timelimiter:
+    instances:
+      #这段配置定义了一个名为 backendA 的 TimeLimiter 实例，用于对 backendA 服务或资源的调用进行超时控制。
+      #假设 timeoutDuration 为 1000。那么，当调用 backendA 服务时，如果超过 1 秒仍然没有完成，则会被 TimeLimiter 实例视为超时，并抛出 TimeoutException 异常。
+      backendA:
+        #操作的超时时间，单位毫秒。这里设置为 1000，表示 backendA 服务的调用必须在 1 秒内完成，否则会被视为超时。
+        timeoutDuration: 1000
 
 #knife4j:
 #  enable: true
@@ -1161,6 +1236,14 @@ logging:
       total-size-cap: 20GB
   level:
     root: INFO
+    #如上配置后，当你访问任何路由时都将输出非常详细的信息。
+    web: debug
+    '[org.springframework.cloud.gateway]': debug
+    '[org.springframework.http.server.reactive]': debug
+    '[org.springframework.web.reactive]': debug
+    '[org.springframework.boot.autoconfigure.web]': debug
+    '[reactor.netty]': debug
+    '[redisratelimiter]': debug
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
@@ -1206,6 +1289,14 @@ management:
     git:
       enabled: true
       mode: "full"
+    os:
+      enabled: true
+    build:
+      enabled: true
+    defaults:
+      enabled: true
+    process:
+      enabled: true
   endpoints:
     beans:
       cache:
@@ -1227,6 +1318,8 @@ management:
     health:
       show-details: ALWAYS
     shutdown:
+      enabled: true
+    gateway:
       enabled: true
   metrics:
     tags:

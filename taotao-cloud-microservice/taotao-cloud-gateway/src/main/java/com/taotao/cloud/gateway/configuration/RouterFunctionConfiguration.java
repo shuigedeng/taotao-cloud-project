@@ -16,6 +16,8 @@
 
 package com.taotao.cloud.gateway.configuration;
 
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR;
+
 import com.taotao.cloud.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.captcha.util.CaptchaUtils;
 import com.taotao.cloud.common.constant.RedisConstant;
@@ -41,6 +43,7 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.dromara.hutool.http.meta.HttpStatus;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.cloud.gateway.support.TimeoutException;
 import org.springframework.context.annotation.Bean;
@@ -143,6 +146,9 @@ public class RouterFunctionConfiguration {
 
 		@Override
 		public Mono<ServerResponse> handle(ServerRequest serverRequest) {
+			Route route = serverRequest.exchange().getAttribute(GATEWAY_ROUTE_ATTR) ;
+			System.out.printf("路由元数据: %s%n", route.getMetadata()) ;
+
 			String originalUris =
 				serverRequest.exchange()
 					.getAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);

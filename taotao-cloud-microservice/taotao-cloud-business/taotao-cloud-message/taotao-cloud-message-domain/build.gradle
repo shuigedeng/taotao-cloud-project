@@ -83,7 +83,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-lock"
     api "io.github.shuigedeng:taotao-cloud-starter-web"
 
-    api 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.0'
+    api 'org.apache.rocketmq:rocketmq-spring-boot-starter:2.3.1'
     api("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
