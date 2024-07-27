@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CacheInterceptor {
 
+
     /**
      * 通用拦截器
      *

@@ -11,6 +11,7 @@ import org.dromara.hutool.json.JSONUtil;
 @Slf4j
 public abstract class AbstractDemoJob implements PipelineJob<DemoPipelineProduct> {
 
+
     /**
      * 公共执行逻辑
      *

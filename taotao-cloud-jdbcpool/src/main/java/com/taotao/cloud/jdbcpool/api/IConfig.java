@@ -7,6 +7,7 @@ package com.taotao.cloud.jdbcpool.api;
  */
 public interface IConfig {
 
+
     /**
      * 设置驱动类
      *
