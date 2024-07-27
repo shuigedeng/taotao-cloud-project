@@ -21,6 +21,7 @@ import java.util.List;
  */
 public interface IBrokerConsumerService {
 
+
 	/**
 	 * 设置负载均衡策略
 	 *
