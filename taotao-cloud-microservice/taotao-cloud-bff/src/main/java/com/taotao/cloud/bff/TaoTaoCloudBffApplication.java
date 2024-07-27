@@ -32,6 +32,7 @@ public class TaoTaoCloudBffApplication {
 
     public static void main(String[] args) {
 
+
 		new StartupSpringApplication(TaoTaoCloudBffApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
