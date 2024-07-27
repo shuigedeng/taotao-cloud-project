@@ -18,6 +18,7 @@ target/
 *.log
 *.hprof
 
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
