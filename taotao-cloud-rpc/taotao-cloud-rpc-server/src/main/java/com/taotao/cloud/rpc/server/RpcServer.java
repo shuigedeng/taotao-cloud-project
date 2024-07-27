@@ -30,6 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RpcServer implements InitializingBean, ApplicationContextAware {
     public static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
+
     private String serverAddress;
 //    private ServiceRegistry serviceRegistry;
     private Map<String, Object> handleMap = new ConcurrentHashMap<>();
