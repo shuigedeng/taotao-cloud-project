@@ -61,6 +61,7 @@ public class JBatchWordCount {
 			}
 		});
 
+
 		KeyedStream<String, String> keyedBy = dso.keyBy(new KeySelector<String, String>() {
 			@Override
 			public String getKey(String value) throws Exception {
