@@ -7,6 +7,7 @@ from datetime import datetime
 def return_customer_addr(database_type):
     fake = Faker(locale='zh_CN')
 
+
     # 邮编
     postcode = fake.postcode()
 
