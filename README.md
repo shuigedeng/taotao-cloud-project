@@ -4,19 +4,20 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/spring-6.1.10-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-3.3.1-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud-2023.0.2-yellowgree" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.1.0-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/taotao--cloud--project-2024.08-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.11-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.3.2-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud-2023.0.3-yellowgree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.1.2-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-1.14.0--2023.0.0--RC2-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.111.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.112.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_security-6.3.1-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.11.4-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.7-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.32.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M13-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.33.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M14-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
@@ -116,23 +117,23 @@ Maven:
  依赖                   | 版本              
 ----------------------|-----------------
  Spring               | 6.1.11           
- Spring Boot          | 3.3.01           
+ Spring Boot          | 3.3.2           
  Spring Cloud         | 2023.0.3        
- Spring Cloud Alibaba | 2023.0.1.0
+ Spring Cloud Alibaba | 2023.0.1.2
  Spring Cloud Tencent | 1.14.0-2023.0.0-RC2
- Spring Cloud huawei  | 1.11.7-2023.0.x
+ Spring Cloud huawei  | 1.11.8-2023.0.x
  Seata                | 2.0.0
  Sentinel             | 1.8.8           
  Spring-kafka         | 3.2.1         
  Roketmq              | 5.2.0           
- Spring Security      | 6.3.2           
+ Spring Security      | 6.3.1           
  Mybatis Plus         | 3.5.7         
  Hutool               | 6.0.0-M14         
- Mysql                | 8.3.0          
+ Mysql                | 8.4.0          
  Querydsl             | 5.1.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.5.0           
- Redisson             | 3.32.0         
+ Redisson             | 3.33.0         
  Lettuce              | 6.3.1.RELEASE   
  Elasticsearch        | 8.11.5           
  Xxl-job              | 2.4.1           
@@ -144,7 +145,7 @@ Maven:
  Elasticjob           | 3.0.4           
  Powerjob             | 5.0.1-beta           
  Forest               | 1.5.36          
- Netty                | 4.1.111.Final
+ Netty                | 4.1.112.Final
 
 ## 6. 演示地址
 
@@ -176,7 +177,7 @@ Maven:
 ## 7. 功能特点
 
 * **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
-* **主体框架**：采用最新的`Spring Boot 3.3.2`、`Spring Cloud 2023.0.3`、`Spring Cloud Alibaba 2023.0.1.0` 版本进行设计
+* **主体框架**：采用最新的`Spring Boot 3.3.2`、`Spring Cloud 2023.0.3`、`Spring Cloud Alibaba 2023.0.1.2` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、支持支付宝、钉钉、码云、GitHub、GitLab、QQ、微信、企业微信、微博等第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等 优化Spring Security内部实现 ,实现API调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
@@ -218,8 +219,7 @@ taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-jdbcpool  -- jdbcpool模块
 │  ├─taotao-cloud-microservice -- 微服务模块
 │  │  ├─taotao-cloud-ai  -- ai模块
-│  │  ├─taotao-cloud-bff-api  -- 基于bff架构的api模块
-│  │  ├─taotao-cloud-bff-graphql  -- 基于bff架构的graphql模块
+│  │  ├─taotao-cloud-bff  -- bff模块
 │  │  ├─taotao-cloud-business  -- 所有的业务模块
 │  │  ├─taotao-cloud-data-sync  -- 数据同步模块
 │  │  ├─taotao-cloud-data-analysis  -- 数据分析模块
@@ -243,7 +243,7 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-realtime-datalake  -- 准实时数据湖模块
 │  │  ├─taotao-cloud-realtime-mall -- 商城日志分析模块
 │  │  ├─taotao-cloud-realtime-recommend -- 实时推荐模块
-│  │  ├─taotao-cloud-realtime-travel -- 实时旅游模块
+│  │  ├─taotao-cloud-realtime-warehouse -- 实时旅游模块
 ```
 
 ## 9.开源共建
