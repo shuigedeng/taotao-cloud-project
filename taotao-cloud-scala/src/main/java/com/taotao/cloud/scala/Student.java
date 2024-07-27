@@ -15,6 +15,7 @@ package com.taotao.cloud.scala;/*
  */
 
 public class Student {
+
     private String name;
     private Integer age;
     private static String school = "atguigu";
