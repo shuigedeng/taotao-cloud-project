@@ -33,6 +33,7 @@ import com.taotao.cloud.rpc.common.tmp.ILoadBalance;
  */
 public interface ReferenceConfig<T> {
 
+
     /**
      * 获取对应的引用实现
      * @return 引用代理类
