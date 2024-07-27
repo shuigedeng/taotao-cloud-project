@@ -6,9 +6,10 @@ access: default
 vars:
   region: cn-hangzhou
 
+
 # Define the Serverless-Devs services. Each service is a FC function.
 services:
-  mall-admin:
+  taotao-cloud-file:
     component: devsapp/fc
     props:
       region: ${vars.region}
@@ -50,7 +51,7 @@ services:
               methods:
                 - GET
                 - POST
-  mall-portal:
+  taotao-cloud-order:
     component: devsapp/fc
     props:
       region: ${vars.region}
@@ -92,7 +93,7 @@ services:
               methods:
                 - GET
                 - POST
-  mall-search:
+  taotao-cloud-goods:
     component: devsapp/fc
     props:
       region: ${vars.region}
