@@ -6,7 +6,7 @@ dependencies {
     //作为 包验证，防止修改
     api 'commons-codec:commons-codec:1.17.0'
     // redis 分布式锁
-    api 'redis.clients:jedis:5.1.3'
+    api 'redis.clients:jedis:5.1.4'
     //Lettuce Redis客户端
     api('io.lettuce:lettuce-core:6.3.2.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'

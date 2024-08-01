@@ -21,7 +21,7 @@ jobs:
 
       #https://github.com/marketplace/actions/qodana-scan
       - name: Qodana Scan
-        uses: JetBrains/qodana-action@v2024.1
+        uses: JetBrains/qodana-action@v2024.1.8
         with:
           #args: "--project-dir ${{ github.workflow }}/taotao-cloud-microservice"
           results-dir: ${{ github.workspace }}/qodana/results
@@ -41,7 +41,7 @@ jobs:
 
       #https://github.com/marketplace/actions/ssh-deploy
       - name: Deploy To Server
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@5.1.0
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"

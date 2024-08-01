@@ -34,7 +34,7 @@ jobs:
         id: get_tag
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1
+      - uses: graalvm/setup-graalvm@v1.2.1
         with:
           java-version: '21'
           distribution: 'graalvm'
@@ -43,31 +43,30 @@ jobs:
 
       #https://github.com/marketplace/actions/cache
       - name: Cache Gradle Packages
-        uses: actions/cache@v4
+        uses: actions/cache@v4.0.2
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
+      #https://github.com/marketplace/actions/gradle-build-action
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.5.0
         with:
           gradle-version: 8.9
 
-      #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-tx
         run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distribution  releaseTarGz
 
-      #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-mq
         run: gradle -p taotao-cloud-mq/taotao-cloud-mq-distribution releaseTarGz
 
-      #https://github.com/marketplace/actions/gradle-build-action
       - name: release taotao-cloud-rpc
         run: gradle -p taotao-cloud-rpc/taotao-cloud-rpc-distribution releaseTarGz
 
       #https://github.com/ncipollo/release-action/tree/main
-      - uses: ncipollo/release-action@v1
+      #https://github.com/marketplace/actions/create-release
+      - uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true

@@ -12,7 +12,7 @@ dependencies {
     }
     implementation 'com.alibaba:fastjson:2.0.52'
     implementation 'com.alipay.sofa:hessian:4.0.4'
-    implementation "redis.clients:jedis:5.1.3"
+    implementation "redis.clients:jedis:5.1.4"
     implementation 'com.google.guava:guava:33.2.1-jre'
     implementation 'org.rocksdb:rocksdbjni:9.4.0'
 
