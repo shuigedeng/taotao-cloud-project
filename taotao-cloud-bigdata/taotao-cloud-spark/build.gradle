@@ -50,8 +50,8 @@ dependencies {
     implementation "org.scala-lang:scala-compiler:2.13.14"
     implementation "org.scala-lang:scala-reflect:2.13.14"
 
-    implementation 'org.slf4j:slf4j-api:2.0.13'
-    implementation 'org.slf4j:slf4j-reload4j:2.0.13'
+    implementation 'org.slf4j:slf4j-api:2.0.14'
+    implementation 'org.slf4j:slf4j-reload4j:2.0.14'
 
     implementation "com.alibaba.fastjson2:fastjson2:2.0.52"
 }

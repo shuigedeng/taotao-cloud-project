@@ -5,8 +5,8 @@ dependencies {
 
     testImplementation "junit:junit:4.13.2"
 
-    implementation 'org.slf4j:slf4j-api:2.0.13'
-    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'org.slf4j:slf4j-api:2.0.14'
+    implementation 'org.slf4j:slf4j-api:2.0.14'
     implementation('com.alipay.sofa:bolt:1.6.10') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
