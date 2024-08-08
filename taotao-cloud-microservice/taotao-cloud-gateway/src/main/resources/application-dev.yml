@@ -1277,8 +1277,8 @@ info:
   app:
     encoding: "UTF-8"
     java:
-      source: "17"
-      target: "17"
+      source: "21"
+      target: "21"
 
 management:
   info:
