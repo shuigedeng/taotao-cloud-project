@@ -73,7 +73,7 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.9
-IDEA_VERSION >= 2024.1.4
+IDEA_VERSION >= 2024.2
 ```
 
 Gradle:

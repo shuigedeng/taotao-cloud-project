@@ -4,7 +4,7 @@ apply plugin: 'application'
 apply plugin: "idea"
 apply plugin: "com.github.johnrengelman.shadow"
 
-//https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/configuration/overview/
+//https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/configuration/overview/
 dependencies {
     // flinksql本地运行需要的依赖
     implementation "org.apache.flink:flink-core:1.20.0"
@@ -46,7 +46,7 @@ dependencies {
     implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.0'
     implementation 'org.apache.flink:flink-connector-mongodb:1.2.0-1.19'
     implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
-    implementation 'org.apache.doris:flink-doris-connector-1.19:1.6.1'
+    implementation 'org.apache.doris:flink-doris-connector-1.19:1.6.2'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.1-1.17"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
     implementation "org.apache.flink:flink-sql-connector-kafka:3.2.0-1.19"
@@ -132,7 +132,7 @@ dependencies {
     //implementation("org.apache.hudi:hudi-utilities_2.13:1.0.0-beta2")
     implementation("org.apache.hudi:hudi-sync:1.0.0-beta2")
 
-    implementation("x:0.8.2")
+    implementation("org.apache.paimon:paimon-bundle:0.8.2")
     implementation("org.apache.paimon:paimon-format:0.8.2")
     implementation("org.apache.paimon:paimon-codegen:0.8.2")
     implementation("org.apache.paimon:paimon-codegen-loader:0.8.2")

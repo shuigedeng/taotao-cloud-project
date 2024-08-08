@@ -19,7 +19,7 @@ dependencies {
     //implementation "org.antlr:antlr4-runtime:4.11.1"
 
     //https://search.maven.org/artifact/io.airlift/slice
-    implementation "io.airlift:slice:2.2"
+    implementation "io.airlift:slice:2.3"
     //https://search.maven.org/artifact/io.airlift/units
     implementation "io.airlift:units:1.10"
     //https://search.maven.org/artifact/com.google.guava/guava

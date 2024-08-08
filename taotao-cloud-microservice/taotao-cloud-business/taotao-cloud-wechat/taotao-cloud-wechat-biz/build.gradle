@@ -40,6 +40,7 @@ dependencies {
     //implementation 'net.jlxxw:wechat-spring-boot-starter:2.0.1.20240302'
 
     //开源的企业微信开放 API 的 Java 实现
+    //https://search.maven.org/artifact/cn.felord/wecom-sdk
     implementation 'cn.felord:wecom-sdk:1.2.8'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
@@ -59,7 +60,7 @@ configurations {
 
         //resolutionStrategy {
         //    //force "org.codehaus.groovy:groovy:4.0.0"
-        //    force 'org.antlr:antlr4:4.13.1'
+        //    force 'org.antlr:antlr4:4.13.2'
         //}
 
         //exclude group: "log4j", module: "log4j"
