@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package com.taotao.cloud.file.api.grpc;
+package com.taotao.cloud.sys.api.grpc;
 
 option java_multiple_files = true;
-option java_package = "com.taotao.cloud.file.api.grpc";
+option java_package = "com.taotao.cloud.sys.api.grpc";
 option java_outer_classname = "FileGrpcServiceProto";
 //option objc_class_prefix = "HLW";
 
