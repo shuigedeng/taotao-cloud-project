@@ -59,6 +59,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
+//@ComponentScan(basePackages = {
+//	"com.taotao.cloud.sys.infrastructure.persistent.*.repository.cls"
+//})
 @MapperScan(basePackages = {"com.taotao.cloud.sys.infrastructure.persistent.*.mapper"})
 @EnableJpaRepositories(
 	basePackages = {"com.taotao.cloud.sys.infrastructure.persistent.*.repository.inf"},
@@ -74,7 +77,7 @@ public class TaoTaoCloudSysDDDApplication {
 		new StartupSpringApplication(TaoTaoCloudSysDDDApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-sys-ddd")
+			.setTtcApplicationProperty("taotao-cloud-sys")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}

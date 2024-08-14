@@ -5,7 +5,11 @@ import com.taotao.cloud.common.model.PageQuery;
 import com.taotao.cloud.sys.domain.dict.entity.DictEntity;
 import com.taotao.cloud.sys.domain.dict.repository.DictRepository;
 import com.taotao.cloud.sys.domain.dict.service.DictDomainService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@AllArgsConstructor
 public class DictDomainServiceImpl implements DictDomainService {
 
 	private DictRepository dictRepository;

@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
 public class DictListQryExe {
 
 	private final DictDomainService dictDomainService;
-	private final DictAdapter dictAdapter;
-	private final DictConvert dictConvert;
+	//private final DictAdapter dictAdapter;
+	//private final DictConvert dictConvert;
 	private final DictMapper dictMapper;
 
 	/**
@@ -34,9 +34,11 @@ public class DictListQryExe {
 	 */
 //	@DS(TENANT)
 	public IPage<DictCO> execute(DictListQry qry) {
-		DictEntity dictEntity = dictConvert.convert(qry);
-		IPage<DictEntity> data = dictDomainService.list(dictEntity, qry);
-		return data.convert(dictConvert::convert);
+//		DictEntity dictEntity = dictConvert.convert(qry);
+//		IPage<DictEntity> data = dictDomainService.list(dictEntity, qry);
+//		return data.convert(dictConvert::convert);
+
+		return null;
 	}
 
 }

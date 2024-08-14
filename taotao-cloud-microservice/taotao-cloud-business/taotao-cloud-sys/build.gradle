@@ -1,7 +1,6 @@
 description = "系统中心"
 
 allprojects {
-
     configurations {
         all {
             resolutionStrategy.cacheChangingModulesFor 0, "seconds"

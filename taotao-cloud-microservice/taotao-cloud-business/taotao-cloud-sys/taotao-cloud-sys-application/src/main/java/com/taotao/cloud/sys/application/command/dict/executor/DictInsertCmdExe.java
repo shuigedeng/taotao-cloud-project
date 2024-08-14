@@ -27,8 +27,8 @@ import org.springframework.stereotype.Component;
 public class DictInsertCmdExe {
 
 	private final DictDomainService dictDomainService;
-	private final DictAdapter dictAdapter;
-	private final DictConvert dictConvert;
+	//private final DictAdapter dictAdapter;
+	//private final DictConvert dictConvert;
 	private final DictMapper dictMapper;
 
 	/**

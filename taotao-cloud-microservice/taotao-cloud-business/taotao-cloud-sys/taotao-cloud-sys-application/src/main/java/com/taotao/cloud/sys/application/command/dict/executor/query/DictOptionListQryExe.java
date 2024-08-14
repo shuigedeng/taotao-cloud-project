@@ -28,8 +28,8 @@ import java.util.List;
 public class DictOptionListQryExe {
 
 	private final DictDomainService dictDomainService;
-	private final DictAdapter dictAdapter;
-	private final DictConvert dictConvert;
+	//private final DictAdapter dictAdapter;
+	//private final DictConvert dictConvert;
 	private final DictMapper dictMapper;
 
 	/**

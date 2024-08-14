@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
 public class DictGetQryExe {
 
 	private final DictDomainService dictDomainService;
-	private final DictAdapter dictAdapter;
-	private final DictConvert dictConvert;
+	//private final DictAdapter dictAdapter;
+	//private final DictConvert dictConvert;
 	private final DictMapper dictMapper;
 
 	/**
@@ -32,7 +32,8 @@ public class DictGetQryExe {
 	 */
 	//@DS(TENANT)
 	public DictCO execute(DictGetQry qry) {
-		return dictConvert.convert(dictDomainService.getById(qry.getId()));
+//		return dictConvert.convert(dictDomainService.getById(qry.getId()));
+		return null;
 	}
 
 }
