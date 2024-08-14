@@ -15,16 +15,24 @@ def getProperty(String key, String defaultValue) {
     return keyValue
 }
 
-subprojects {
-    apply from: rootProject.file('gradle/springboot.gradle')
-    apply from: rootProject.file('gradle/smart-doc.gradle')
-    apply from: rootProject.file('gradle/springdoc-openapi.gradle')
-    apply from: rootProject.file('gradle/docker.gradle')
-    apply from: rootProject.file('gradle/google-tools-jib.gradle')
-    //apply from: rootProject.file('gradle/sonar.gradle')
-    apply from: rootProject.file('gradle/shadow.gradle')
-    apply from: rootProject.file('gradle/graalvm.gradle')
-    apply from: rootProject.file('gradle/swagger.gradle')
+configure(subprojects){ project ->
+    if(!(project.name.endsWith("-api")  ||
+            project.name.endsWith("-application")  ||
+            project.name.endsWith("-common")  ||
+            project.name.endsWith("-domain")  ||
+            project.name.endsWith("-facade")  ||
+            project.name.endsWith("-infrastructure")  ||
+            project.name.endsWith("-integration"))){
+        //apply from: rootProject.file('gradle/sonar.gradle')
+        apply from: rootProject.file('gradle/shadow.gradle')
+        apply from: rootProject.file('gradle/graalvm.gradle')
+        apply from: rootProject.file('gradle/swagger.gradle')
+        apply from: rootProject.file('gradle/smart-doc.gradle')
+        apply from: rootProject.file('gradle/springdoc-openapi.gradle')
+        apply from: rootProject.file('gradle/docker.gradle')
+        apply from: rootProject.file('gradle/google-tools-jib.gradle')
+        apply from: rootProject.file('gradle/springboot.gradle')
+    }
 
     //多项目分环境打包
     //gradle构建过程中的默认任务processResources，重写
