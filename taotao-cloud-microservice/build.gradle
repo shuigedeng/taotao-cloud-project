@@ -32,6 +32,7 @@ configure(subprojects){ project ->
         apply from: rootProject.file('gradle/docker.gradle')
         apply from: rootProject.file('gradle/google-tools-jib.gradle')
         apply from: rootProject.file('gradle/springboot.gradle')
+        apply from: rootProject.file('gradle/mybatis-generator.gradle')
     }
 
     //多项目分环境打包

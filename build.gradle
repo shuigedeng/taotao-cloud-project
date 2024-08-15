@@ -26,7 +26,7 @@ buildscript {
 
         springBootVersion = "3.3.2"
         querydslAptVersion = "5.1.0"
-        mapstructProcessorVersion = "1.6.0.Beta2"
+        mapstructProcessorVersion = "1.6.0"
         lombokMapstructBindingVersion = "0.2.0"
         lombokVersion = "1.18.34"
         recordBuilderVersion = "42"
@@ -90,7 +90,7 @@ buildscript {
         classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.19"
 
         //https://github.com/spring-io/spring-javaformat/
-        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.42"
+        classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.43"
 
         //代码混淆工具
         //https://github.com/Guardsquare/proguard

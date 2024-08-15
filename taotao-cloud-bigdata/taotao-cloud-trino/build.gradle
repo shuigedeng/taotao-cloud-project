@@ -1,5 +1,4 @@
 dependencies {
-
     //https://search.maven.org/artifact/io.trino/trino-jdbc
     implementation 'io.trino:trino-jdbc:448'
     implementation 'io.trino:trino-spi:448'

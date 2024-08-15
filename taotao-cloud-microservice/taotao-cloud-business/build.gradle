@@ -1,10 +1,10 @@
-subprojects {
-    dependencies {
-        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test")
-    }
-
-    apply from: rootProject.file('gradle/mybatis-generator.gradle')
-}
+//subprojects {
+//    dependencies {
+//        testImplementation("io.github.shuigedeng:taotao-cloud-starter-test")
+//    }
+//
+//    apply from: rootProject.file('gradle/mybatis-generator.gradle')
+//}
 
 description = "业务中心"
 
@@ -120,15 +120,15 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
 
 }
 
-tasks.register('spotlessJavaAll') {
-    def subprojectList = subprojects.findAll { it.name.endsWith("-sys-biz") }
-
-    subprojectList.forEach {subp-> {
-        def tasks = subp.getTasksByName("spotlessJava", false)
-        dependsOn tasks.iterator().next()
-    }}
-
-    println("spotlessJavaAll==============================")
-}
+//tasks.register('spotlessJavaAll') {
+//    def subprojectList = subprojects.findAll { it.name.endsWith("-sys-biz") }
+//
+//    subprojectList.forEach {subp-> {
+//        def tasks = subp.getTasksByName("spotlessJava", false)
+//        dependsOn tasks.iterator().next()
+//    }}
+//
+//    println("spotlessJavaAll==============================")
+//}
 
 

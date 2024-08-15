@@ -2,7 +2,6 @@ apply plugin: "scala"
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "idea"
-apply plugin: "com.github.johnrengelman.shadow"
 
 //https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/configuration/overview/
 dependencies {
@@ -151,8 +150,8 @@ dependencies {
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
     implementation 'org.apache.commons:commons-compress:1.26.2'
-    implementation 'org.slf4j:slf4j-api:2.0.14'
-    implementation 'org.slf4j:slf4j-reload4j:2.0.14'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'org.slf4j:slf4j-reload4j:2.0.16'
 
     implementation "org.scala-lang:scala-library:2.13.14"
     implementation "org.scala-lang:scala-compiler:2.13.14"

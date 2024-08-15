@@ -1,3 +1,5 @@
+apply from: rootProject.file('gradle/shadow.gradle')
+
 task releaseTarZip(type: Zip) {
     dependsOn(':taotao-cloud-mq:taotao-cloud-mq-dashboard:jar')
 
