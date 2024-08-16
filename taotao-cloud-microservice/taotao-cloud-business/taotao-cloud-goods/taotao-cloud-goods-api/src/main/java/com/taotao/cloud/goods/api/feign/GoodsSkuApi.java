@@ -41,13 +41,13 @@ public interface GoodsSkuApi {
 	@PostMapping(value = "/product/updateGoodsStuck")
 	Boolean updateGoodsStuck(List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
 
-	@PostMapping(value = "/product/updateBatchById}")
+	@PostMapping(value = "/product/updateBatchById")
 	Boolean updateBatchById(List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
 
-	@GetMapping(value = "/product/getGoodsSkuByIdFromCache")
+	@GetMapping(value = "/product/getGoodsSkuByIdFromCache/sku-ids")
 	List<GoodsSkuSpecGalleryApiResponse> getGoodsSkuByIdFromCache(List<Long> skuIds);
 
-	@GetMapping(value = "/product/getGoodsSkuByIdFromCache}")
+	@GetMapping(value = "/product/getGoodsSkuByIdFromCache/sku-id")
 	GoodsSkuSpecGalleryApiResponse getGoodsSkuByIdFromCache(Long skuId);
 
 	@GetMapping(value = "/product/getStock")

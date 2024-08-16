@@ -36,12 +36,12 @@ import org.springframework.web.bind.annotation.PostMapping;
         fallbackFactory = GoodsApiFallback.class)
 public interface GoodsApi {
 
-    @PostMapping(value = "/product/info/id/{id:[0-9]*}")
-    Boolean updateStoreDetail(@PathVariable Long id);
+    @PostMapping(value = "/product/strore/detail/{id:[0-9]*}")
+    Boolean updateStoreDetail(@PathVariable("id") Long id);
 
-    @PostMapping(value = "/product/info/id/{id:[0-9]*}")
-    Boolean underStoreGoods(@PathVariable Long id);
+    @PostMapping(value = "/product/strore/goods/{id:[0-9]*}")
+    Boolean underStoreGoods(@PathVariable("id") Long id);
 
-    @GetMapping(value = "/product/info/id/{storeId:[0-9]*}")
-    Long countStoreGoodsNum(@PathVariable Long storeId);
+    @GetMapping(value = "/product/strore/goods/num/{storeId:[0-9]*}")
+    Long countStoreGoodsNum(@PathVariable("storeId") Long storeId);
 }

@@ -31,6 +31,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 	fallbackFactory = StoreGoodsLabelApiFallback.class)
 public interface StoreGoodsLabelApi {
 
-	@GetMapping(value = "/product/info/id/{id}")
+	@GetMapping(value = "/store/{id}")
 	List<StoreGoodsLabelApiResponse> listByStoreId(@PathVariable String id);
 }

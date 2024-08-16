@@ -37,5 +37,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CategoryApi {
 
 	@GetMapping(value = "/category/first/id/{id:[0-9]*}")
-	List<CategoryTreeApiResponse> firstCategory(@PathVariable Long id);
+	List<CategoryTreeApiResponse> firstCategory(@PathVariable("id") Long id);
 }

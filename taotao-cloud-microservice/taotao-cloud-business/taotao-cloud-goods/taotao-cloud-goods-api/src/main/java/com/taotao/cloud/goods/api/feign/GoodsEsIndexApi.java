@@ -38,9 +38,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 	fallbackFactory = GoodsEsIndexApiFallback.class)
 public interface GoodsEsIndexApi {
 
-	@GetMapping(value = "/product/info/skuIdList")
+	@GetMapping(value = "/es/goods/sku/ids")
 	List<EsGoodsIndexApiResponse> getEsGoodsBySkuIds(@RequestParam List<String> skuIdList);
 
-	@PostMapping(value = "/product/info/id")
+	@PostMapping(value = "/es/clean/invalid-promotion")
 	Boolean cleanInvalidPromotion();
 }
