@@ -32,5 +32,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface StoreGoodsLabelApi {
 
 	@GetMapping(value = "/store/{id}")
-	List<StoreGoodsLabelApiResponse> listByStoreId(@PathVariable String id);
+	List<StoreGoodsLabelApiResponse> listByStoreId(@PathVariable("id") String id);
 }

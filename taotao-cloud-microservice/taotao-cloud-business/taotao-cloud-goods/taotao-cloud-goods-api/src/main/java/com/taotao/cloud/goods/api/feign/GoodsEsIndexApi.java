@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface GoodsEsIndexApi {
 
 	@GetMapping(value = "/es/goods/sku/ids")
-	List<EsGoodsIndexApiResponse> getEsGoodsBySkuIds(@RequestParam List<String> skuIdList);
+	List<EsGoodsIndexApiResponse> getEsGoodsBySkuIds(@RequestParam("skuIdList") List<String> skuIdList);
 
 	@PostMapping(value = "/es/clean/invalid-promotion")
 	Boolean cleanInvalidPromotion();

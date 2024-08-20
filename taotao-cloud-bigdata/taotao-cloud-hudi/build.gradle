@@ -90,7 +90,7 @@ configurations {
 
         resolutionStrategy {
             force "org.apache.avro:avro:1.11.3"
-            force "com.google.guava:guava:33.2.1-jre"
+            force "com.google.guava:guava:33.3.0-jre"
             force "org.codehaus.janino:janino:3.1.12"
             force "org.apache.spark:spark-core_2.13:3.5.2"
         }

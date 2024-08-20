@@ -28,7 +28,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-        contextId = "GoodsEsSearchApi",
+	contextId = "GoodsEsSearchApi",
         value = ServiceName.TAOTAO_CLOUD_GOODS,
         fallbackFactory = GoodsEsSearchApiFallback.class)
 public interface GoodsEsSearchApi {}

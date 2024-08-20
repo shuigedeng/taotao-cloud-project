@@ -21,8 +21,8 @@ dependencies {
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.5.6'
-    api "com.google.guava:guava:33.2.1-jre"
+    api 'ch.qos.logback:logback-classic:1.5.7'
+    api "com.google.guava:guava:33.3.0-jre"
 
     api 'io.netty:netty-all:4.1.112.Final'
 

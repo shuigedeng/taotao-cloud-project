@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @since 2020/5/2 16:42
  */
 @FeignClient(
-        contextId = "GoodsApi",
+	contextId = "GoodsApi",
         value = ServiceName.TAOTAO_CLOUD_GOODS,
         fallbackFactory = GoodsApiFallback.class)
 public interface GoodsApi {

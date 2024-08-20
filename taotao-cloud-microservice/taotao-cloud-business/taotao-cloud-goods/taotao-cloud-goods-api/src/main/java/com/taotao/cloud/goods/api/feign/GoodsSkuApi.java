@@ -25,6 +25,8 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 远程调用订单模块
@@ -39,17 +41,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface GoodsSkuApi {
 
 	@PostMapping(value = "/product/updateGoodsStuck")
-	Boolean updateGoodsStuck(List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
+	Boolean updateGoodsStuck(@RequestBody List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
 
 	@PostMapping(value = "/product/updateBatchById")
-	Boolean updateBatchById(List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
+	Boolean updateBatchById(@RequestBody List<GoodsSkuSpecGalleryApiRequest> goodsSkus);
 
 	@GetMapping(value = "/product/getGoodsSkuByIdFromCache/sku-ids")
-	List<GoodsSkuSpecGalleryApiResponse> getGoodsSkuByIdFromCache(List<Long> skuIds);
+	List<GoodsSkuSpecGalleryApiResponse> getGoodsSkuByIdFromCache(@RequestParam("skuIds")  List<Long> skuIds);
 
 	@GetMapping(value = "/product/getGoodsSkuByIdFromCache/sku-id")
-	GoodsSkuSpecGalleryApiResponse getGoodsSkuByIdFromCache(Long skuId);
+	GoodsSkuSpecGalleryApiResponse getGoodsSkuByIdFromCache(@RequestParam("skuId") Long skuId);
 
 	@GetMapping(value = "/product/getStock")
-	Integer getStock(String skuId);
+	Integer getStock(@RequestParam("skuId") String skuId);
 }

@@ -33,70 +33,71 @@ configure(subprojects){ project ->
         apply from: rootProject.file('gradle/google-tools-jib.gradle')
         apply from: rootProject.file('gradle/springboot.gradle')
         apply from: rootProject.file('gradle/mybatis-generator.gradle')
-    }
-
-    //多项目分环境打包
-    //gradle构建过程中的默认任务processResources，重写
-    //gradle build -x test -Pprofile=dev
-    //gradle -x test clean bootJar -Pprofile=dev
-    processResources {
-        doFirst {
-            //过滤器会将用 @var@ 包裹的变量，替换为指定的值。
-            filter ReplaceTokens, tokens: [activeProfile: getProperty("profile", "dev")]
 
 
-            //${profile}变量
-            //filesMatching("**/*.yml"){
-            //    expand(project.properties)
-            //}
+        //多项目分环境打包
+        //gradle构建过程中的默认任务processResources，重写
+        //gradle build -x test -Pprofile=dev
+        //gradle -x test clean bootJar -Pprofile=dev
+        processResources {
+            doFirst {
+                //过滤器会将用 @var@ 包裹的变量，替换为指定的值。
+                filter ReplaceTokens, tokens: [activeProfile: getProperty("profile", "dev")]
 
-            //inputs.property('version', version)
 
-            //filesMatching("**/version.properties") {
-            //    expand version: version
-            //}
-        }
-    }
+                //${profile}变量
+                //filesMatching("**/*.yml"){
+                //    expand(project.properties)
+                //}
 
-    tasks.register('createProperties') {
-        dependsOn processResources
-        doLast {
-            def fileDir = new File("${project.layout.buildDirectory.asFile.get()}/resources/main");
-            if (fileDir.exists() && fileDir.isDirectory()) {
-                def pro = ["application.properties", "bootstrap.properties"]
-                pro.forEach(item -> {
-                    new File("${project.layout.buildDirectory.asFile.get()}/resources/main/$item").withWriter { w ->
-                        def projectProperties = project.properties
-                        Properties p = new Properties()
-                        projectProperties.each { entry ->
-                            p[entry.key.toString()] = entry.value.toString()
-                        }
+                //inputs.property('version', version)
 
-                        p.store w, null
-                    }
-                })
+                //filesMatching("**/version.properties") {
+                //    expand version: version
+                //}
             }
         }
-    }
 
-    classes {
-        dependsOn 'createProperties'
-    }
+        tasks.register('createProperties') {
+            dependsOn processResources
+            doLast {
+                def fileDir = new File("${project.layout.buildDirectory.asFile.get()}/resources/main");
+                if (fileDir.exists() && fileDir.isDirectory()) {
+                    def pro = ["application.properties", "bootstrap.properties"]
+                    pro.forEach(item -> {
+                        new File("${project.layout.buildDirectory.asFile.get()}/resources/main/$item").withWriter { w ->
+                            def projectProperties = project.properties
+                            Properties p = new Properties()
+                            projectProperties.each { entry ->
+                                p[entry.key.toString()] = entry.value.toString()
+                            }
 
-    task bootJarTest {
-        dependsOn 'clean'
-        doFirst {
-            System.setProperty("profile", "test")
+                            p.store w, null
+                        }
+                    })
+                }
+            }
         }
-        finalizedBy("bootJar")
-    }
 
-    task bootJarProduction {
-        dependsOn 'clean'
-        doFirst {
-            System.setProperty("profile", "prod")
+        classes {
+            dependsOn 'createProperties'
         }
-        finalizedBy("bootJar")
+
+        task bootJarTest {
+            dependsOn 'clean'
+            doFirst {
+                System.setProperty("profile", "test")
+            }
+            finalizedBy("bootJar")
+        }
+
+        task bootJarProduction {
+            dependsOn 'clean'
+            doFirst {
+                System.setProperty("profile", "prod")
+            }
+            finalizedBy("bootJar")
+        }
     }
 
     dependencies {

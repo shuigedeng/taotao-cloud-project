@@ -110,7 +110,7 @@ dependencies {
     api 'com.tencentcloudapi:tencentcloud-sdk-java:4.0.11'
     api "com.alibaba.fastjson2:fastjson2:2.0.52"
     api 'com.squareup.okhttp3:okhttp:4.12.0'
-    api 'com.google.guava:guava:33.2.1-jre'
+    api 'com.google.guava:guava:33.3.0-jre'
     api 'org.dromara.hutool:hutool-all'
     api 'com.mysql:mysql-connector-j'
 
