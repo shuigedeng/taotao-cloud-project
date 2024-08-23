@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.paimon;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudPaimonApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

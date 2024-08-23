@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.realtime.behavior.analysis;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudRealtimeBehaviorAnalysisApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

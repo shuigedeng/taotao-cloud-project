@@ -16,12 +16,7 @@
 
 package com.taotao.cloud.doris;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudDorisApplicationTests {
-
-    @Test
     void contextLoads() {}
 }

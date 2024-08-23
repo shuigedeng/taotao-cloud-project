@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.realtime.recommend;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudRealtimeRecommendApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

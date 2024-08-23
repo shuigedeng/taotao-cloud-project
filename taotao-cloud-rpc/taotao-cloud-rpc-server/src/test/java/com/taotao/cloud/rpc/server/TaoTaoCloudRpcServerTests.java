@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.rpc.server;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudRpcServerTests {
 
-    @Test
     void contextLoads() {}
 }

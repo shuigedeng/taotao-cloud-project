@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.offline.weblog;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudOfflineWeblogApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.flume;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudFlumeApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.flink;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudFlinkApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

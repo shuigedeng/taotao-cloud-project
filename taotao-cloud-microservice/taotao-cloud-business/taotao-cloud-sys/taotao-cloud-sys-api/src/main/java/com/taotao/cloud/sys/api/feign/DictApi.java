@@ -17,9 +17,9 @@
 package com.taotao.cloud.sys.api.feign;
 
 import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.openfeign.annotation.ApiInfo;
-import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
-import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
+import com.taotao.cloud.common.support.info.ApiInfo;
+import com.taotao.cloud.common.support.info.Create;
+import com.taotao.cloud.common.support.info.Update;
 import com.taotao.cloud.openfeign.annotation.FeignInner;
 import com.taotao.cloud.openfeign.annotation.FeignRetry;
 import com.taotao.cloud.sys.api.feign.fallback.DictApiFallback;
@@ -28,8 +28,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_07;
-import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
+import static com.taotao.cloud.common.support.info.ApiVersionEnum.V2022_07;
+import static com.taotao.cloud.common.support.info.ApiVersionEnum.V2022_08;
 
 
 /**

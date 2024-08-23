@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.tidb;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudTidbApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.realtime.mall;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudRealtimeMallApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

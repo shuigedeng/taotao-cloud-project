@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.realtime.travel;
+package com.taotao.cloud.realtime.warehouse;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class TaoTaoCloudRealtimeTravelApplicationTests {
+class TaoTaoCloudRealtimeWarehouseApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

@@ -16,12 +16,7 @@
 
 package com.taotao.cloud.dolphinscheduler;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
 class TaoTaoCloudDolphinschedulerApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

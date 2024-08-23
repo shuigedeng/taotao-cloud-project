@@ -20,9 +20,9 @@ package com.taotao.cloud.sys.biz.controller.business.tools;
 import com.taotao.cloud.cache.redis.delay.config.RedissonTemplate;
 import com.taotao.cloud.cache.redis.redisson.RedisDelayQueue;
 import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.openfeign.annotation.ApiInfo;
-import com.taotao.cloud.openfeign.annotation.ApiInfo.Create;
-import com.taotao.cloud.openfeign.annotation.ApiInfo.Update;
+import com.taotao.cloud.common.support.info.ApiInfo;
+import com.taotao.cloud.common.support.info.Create;
+import com.taotao.cloud.common.support.info.Update;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.dto.email.EmailDTO;
 import com.taotao.cloud.sys.biz.model.vo.alipay.EmailVO;
@@ -37,8 +37,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_07;
-import static com.taotao.cloud.openfeign.annotation.ApiVersionEnum.V2022_08;
+import static com.taotao.cloud.common.support.info.ApiVersionEnum.V2022_07;
+import static com.taotao.cloud.common.support.info.ApiVersionEnum.V2022_08;
 
 /**
  * EmailController

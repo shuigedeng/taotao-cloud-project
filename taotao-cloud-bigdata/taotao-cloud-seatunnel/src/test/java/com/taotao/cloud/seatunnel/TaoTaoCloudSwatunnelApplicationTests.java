@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.seatunnel;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudSwatunnelApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

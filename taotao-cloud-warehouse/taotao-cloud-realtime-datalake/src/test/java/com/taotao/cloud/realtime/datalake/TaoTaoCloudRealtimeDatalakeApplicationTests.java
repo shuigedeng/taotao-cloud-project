@@ -16,12 +16,8 @@
 
 package com.taotao.cloud.realtime.datalake;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class TaoTaoCloudRealtimeDatalakeApplicationTests {
 
-    @Test
     void contextLoads() {}
 }

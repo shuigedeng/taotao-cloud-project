@@ -1,6 +1,5 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
-
 def getProperty(String key, String defaultValue) {
     def keyValue = findProperty(key) ?: System.getenv(key)
     if (keyValue != null) {
@@ -16,7 +15,8 @@ def getProperty(String key, String defaultValue) {
 }
 
 configure(subprojects){ project ->
-    if(!(project.name.endsWith("-api")  ||
+    if(!(project.name.endsWith("-ui")  ||
+            project.name.endsWith("-api")  ||
             project.name.endsWith("-application")  ||
             project.name.endsWith("-common")  ||
             project.name.endsWith("-domain")  ||
@@ -33,7 +33,6 @@ configure(subprojects){ project ->
         apply from: rootProject.file('gradle/google-tools-jib.gradle')
         apply from: rootProject.file('gradle/springboot.gradle')
         apply from: rootProject.file('gradle/mybatis-generator.gradle')
-
 
         //多项目分环境打包
         //gradle构建过程中的默认任务processResources，重写
