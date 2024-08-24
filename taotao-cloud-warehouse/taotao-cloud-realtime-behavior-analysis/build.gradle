@@ -148,7 +148,7 @@ dependencies {
     //implementation('org.apache.paimon:paimon-shade-jackson-2:2.14.2-0.8.0')
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
-    implementation 'org.apache.commons:commons-compress:1.26.2'
+    implementation 'org.apache.commons:commons-compress:1.27.1'
     implementation 'org.slf4j:slf4j-api:2.0.16'
     implementation 'org.slf4j:slf4j-reload4j:2.0.16'
 
