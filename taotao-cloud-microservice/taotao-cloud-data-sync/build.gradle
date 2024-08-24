@@ -14,8 +14,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
-    implementation 'org.springframework.integration:spring-integration-core:6.3.2'
-    implementation 'org.springframework.integration:spring-integration-jdbc:6.3.2'
+    implementation 'org.springframework.integration:spring-integration-core:6.3.3'
+    implementation 'org.springframework.integration:spring-integration-jdbc:6.3.3'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
 
@@ -126,7 +126,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:8.4.0'
-    implementation 'redis.clients:jedis:5.1.4'
+    implementation 'redis.clients:jedis:5.1.5'
     implementation 'org.apache.hive:hive-exec:4.0.0'
 
     implementation 'org.apache.hadoop:hadoop-common:3.4.0'
