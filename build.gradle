@@ -185,7 +185,7 @@ plugins {
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
-    id "com.diffplug.spotless" version "7.0.0.BETA1"
+    id "com.diffplug.spotless" version "7.0.0.BETA2"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
     id "com.gorylenko.gradle-git-properties" version "2.4.2"
