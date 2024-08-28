@@ -14,14 +14,25 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.report.biz;
+package com.taotao.cloud.tenant.biz;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import org.springframework.boot.SpringApplication;
 
-@SpringBootTest
-class TaoTaoCloudReportApplicationTests {
+/**
+ * 租户管理中心
+ *
+ * @author shuigedeng
+ * @version 2023.04
+ * @since 2023-05-10 11:04:28
+ */
+@TaoTaoCloudApplication
+public class TaoTaoCloudIotApplication {
 
-    @Test
-    void contextLoads() {}
+    public static void main(String[] args) {
+        PropertyUtils.setDefaultProperty("taotao-cloud-iot");
+
+        SpringApplication.run(TaoTaoCloudIotApplication.class, args);
+    }
 }
