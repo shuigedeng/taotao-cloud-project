@@ -880,7 +880,7 @@ spring:
 
 taotao:
   cloud:
-    dinger:
+    dingtalk:
       enabled: true
       httpclient:
         enabled: true

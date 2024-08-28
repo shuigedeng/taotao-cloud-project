@@ -346,7 +346,7 @@ taotao:
       context-restart-enabled: false
       async:
         enabled: true
-    dinger:
+    dingtalk:
       enabled: true
       httpclient:
         enabled: true

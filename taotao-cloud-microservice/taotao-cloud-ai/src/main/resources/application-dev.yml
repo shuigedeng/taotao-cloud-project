@@ -262,7 +262,7 @@ taotao:
       type: redis
     prometheus:
       enabled: true
-    dinger:
+    dingtalk:
       enabled: true
       httpclient:
         enabled: true

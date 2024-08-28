@@ -417,7 +417,7 @@ spring:
 
 taotao:
   cloud:
-    dinger:
+    dingtalk:
       enabled: false
       project-id: ${spring.application.name}
       dingers:

@@ -686,7 +686,7 @@ spring:
 
 taotao:
   cloud:
-    dinger:
+    dingtalk:
       enabled: false
       httpclient:
         enabled: true

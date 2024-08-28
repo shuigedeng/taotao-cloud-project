@@ -1105,7 +1105,7 @@ art:
     enable: false
 taotao:
   cloud:
-    dinger:
+    dingtalk:
       enabled: false
       httpclient:
         enabled: false

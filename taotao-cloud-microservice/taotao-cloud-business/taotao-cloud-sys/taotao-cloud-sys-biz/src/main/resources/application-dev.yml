@@ -1262,7 +1262,7 @@ taotao:
         #      part-size: 104857600
         #    client-config:
         #      connect-timeout: 5000
-    dinger:
+    dingtalk:
       enabled: false
       httpclient:
         enabled: false
