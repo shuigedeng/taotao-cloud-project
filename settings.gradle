@@ -34,7 +34,6 @@ plugins {
     id "com.gradle.develocity" version "3.18"
 }
 
-
 import com.gradle.scan.plugin.PublishedBuildScan
 
 develocity {
