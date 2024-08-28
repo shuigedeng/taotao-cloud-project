@@ -4,25 +4,25 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/taotao--cloud--project-2024.08-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.1.11-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-3.3.2-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/taotao--cloud--project-2024.09-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.12-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.3.3-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2023.0.3-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.1.2-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-1.14.0--2023.0.0--RC2-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/netty-4.1.112.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.3.1-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.3.2-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.11.4-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.7-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/redisson-3.33.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M14-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M15-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.10、jdk21, 支持graalvm21, 采用最新的spring 6.1.12、SpringBoot 3.3.3、SpringCloud 2023.0.3、SpringSecurity 6.3.1、Nacos 2.3.2、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
+`taotao-cloud` (taotao云平台) 基于gradle8.10、jdk21, 支持graalvm21, 采用最新的spring 6.1.12、SpringBoot 3.3.3、SpringCloud 2023.0.3、SpringSecurity 6.3.2、Nacos 2.4.1、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
 具备服务注册&发现、配置中心、服务限流、熔断降级、监控报警、多数据源、工作流、高亮搜索、定时任务、分布式缓存、分布式事务、分布式存储等功能，用于快速构建微服务项目。
 
@@ -73,7 +73,7 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.10
-IDEA_VERSION >= 2024.2
+IDEA_VERSION >= 2024.2.0.2
 ```
 
 Gradle:
@@ -121,12 +121,12 @@ Maven:
  Spring Cloud         | 2023.0.3        
  Spring Cloud Alibaba | 2023.0.1.2
  Spring Cloud Tencent | 1.14.0-2023.0.0-RC2
- Spring Cloud huawei  | 1.11.8-2023.0.x
+ Spring Cloud huawei  | 1.11.9-2023.0.x
  Seata                | 2.0.0
  Sentinel             | 1.8.8           
- Spring-kafka         | 3.2.1         
+ Spring-kafka         | 3.2.2         
  Roketmq              | 5.2.0           
- Spring Security      | 6.3.1           
+ Spring Security      | 6.3.2           
  Mybatis Plus         | 3.5.7         
  Hutool               | 6.0.0-M15         
  Mysql                | 8.4.0          
@@ -139,15 +139,15 @@ Maven:
  Xxl-job              | 2.4.1           
  EasyCaptcha          | 1.6.2           
  Guava                | 33.3.0-jre       
- Grpc                 | 1.65.1          
- Arthas               | 3.7.2           
+ Grpc                 | 1.66.0          
+ Arthas               | 4.0.0           
  Dynamic-tp           | 1.1.7-3.x           
  Elasticjob           | 3.0.4           
  Powerjob             | 5.0.1-beta           
  Forest               | 1.5.36          
  Netty                | 4.1.112.Final
 
-## 6. 演示地址
+## 6. 演示地址 (云服务器已到期)
 
 * TaotaoCloud脚手架：[https://start.taotaocloud.top/](https://start.taotaocloud.top/)
 * 文档地址：[https://docs.taotaocloud.top](https://docs.taotaocloud.top)
@@ -214,9 +214,9 @@ Maven:
 ```
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
-│  ├─taotao-cloud-cache -- cache模块
+│  ├─taotao-cloud-cache -- 手写cache模块
 │  ├─taotao-cloud-design-partterns  -- 设计模式
-│  ├─taotao-cloud-jdbcpool  -- jdbcpool模块
+│  ├─taotao-cloud-jdbcpool  -- 手写jdbcpool模块
 │  ├─taotao-cloud-microservice -- 微服务模块
 │  │  ├─taotao-cloud-ai  -- ai模块
 │  │  ├─taotao-cloud-bff  -- bff模块
@@ -230,13 +230,13 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-shell  -- shell模块
 │  │  ├─taotao-cloud-xxljob  -- xxl-job模块
-│  ├─taotao-cloud-mq -- 分布式消息中间件
+│  ├─taotao-cloud-mq -- 手写分布式消息中间件
 │  ├─taotao-cloud-plugin -- 插件模块
-│  ├─taotao-cloud-job -- job模块
+│  ├─taotao-cloud-job -- 手写分布式任务调度模块
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-scala -- scala模块
-│  ├─taotao-cloud-rpc -- 分布式rpc框架
-│  ├─taotao-cloud-tx -- 分布式事务框架
+│  ├─taotao-cloud-rpc -- 手写分布式rpc框架
+│  ├─taotao-cloud-tx -- 手写分布式事务框架
 │  ├─taotao-cloud-warehouse -- 数仓模块
 │  │  ├─taotao-cloud-offline-warehouse  -- 离线仓库模块
 │  │  ├─taotao-cloud-offline-weblog -- 离线日志分析模块
