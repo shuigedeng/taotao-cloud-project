@@ -6,9 +6,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.framework.common.utils.JsonUtils;
-import net.maku.iot.communication.dto.TcpMsgDTO;
-import net.maku.iot.communication.tcp.factory.TcpMessageHandlerFactory;
+import com.taotao.cloud.iot.biz.communication.dto.TcpMsgDTO;
+import com.taotao.cloud.iot.biz.communication.tcp.factory.TcpMessageHandlerFactory;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
@@ -17,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * TCP服务器连接处理器
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Slf4j
 public class ConnectionHandler extends ChannelInboundHandlerAdapter {

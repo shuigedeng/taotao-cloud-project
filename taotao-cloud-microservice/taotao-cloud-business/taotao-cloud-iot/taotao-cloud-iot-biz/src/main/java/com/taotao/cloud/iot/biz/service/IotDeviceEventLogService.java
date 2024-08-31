@@ -1,18 +1,16 @@
 package com.taotao.cloud.iot.biz.service;
 
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.mybatis.service.BaseService;
-import net.maku.iot.entity.IotDeviceEventLogEntity;
-import net.maku.iot.enums.DeviceEventTypeEnum;
-import net.maku.iot.query.IotDeviceEventLogQuery;
-import net.maku.iot.vo.IotDeviceEventLogVO;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEventLogEntity;
+import com.taotao.cloud.iot.biz.enums.DeviceEventTypeEnum;
+import com.taotao.cloud.iot.biz.query.IotDeviceEventLogQuery;
+import com.taotao.cloud.iot.biz.vo.IotDeviceEventLogVO;
 
 import java.util.List;
 
 /**
  * 设备事件日志
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface IotDeviceEventLogService extends BaseService<IotDeviceEventLogEntity> {
 

@@ -1,14 +1,14 @@
 package com.taotao.cloud.iot.biz.communication.service;
 
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.enums.DeviceCommandEnum;
-import net.maku.iot.communication.dto.DeviceCommandResponseDTO;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.enums.DeviceCommandEnum;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
 
 
 /**
  * 通信协议具备功能
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface BaseCommunication {
 

@@ -3,7 +3,7 @@ package com.taotao.cloud.iot.biz.communication.mqtt.handler;
 /**
  * MQTT订阅消息处理接口
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface MqttMessageHandler {
     /**

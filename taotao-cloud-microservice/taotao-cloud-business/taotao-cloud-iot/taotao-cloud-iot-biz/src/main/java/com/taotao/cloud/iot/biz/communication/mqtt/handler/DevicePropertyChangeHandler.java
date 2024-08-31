@@ -1,12 +1,12 @@
 package com.taotao.cloud.iot.biz.communication.mqtt.handler;
 
 
-import net.maku.iot.communication.dto.DevicePropertyDTO;
+import com.taotao.cloud.iot.biz.communication.dto.DevicePropertyDTO;
 
 /**
  * 设备属性变化处理器
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface DevicePropertyChangeHandler {
     /**

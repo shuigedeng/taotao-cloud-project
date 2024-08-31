@@ -1,7 +1,7 @@
 package com.taotao.cloud.iot.biz.convert;
 
-import net.maku.iot.entity.IotDeviceServiceLogEntity;
-import net.maku.iot.vo.IotDeviceServiceLogVO;
+import com.taotao.cloud.iot.biz.entity.IotDeviceServiceLogEntity;
+import com.taotao.cloud.iot.biz.vo.IotDeviceServiceLogVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 设备服务日志
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Mapper
 public interface IotDeviceServiceLogConvert {

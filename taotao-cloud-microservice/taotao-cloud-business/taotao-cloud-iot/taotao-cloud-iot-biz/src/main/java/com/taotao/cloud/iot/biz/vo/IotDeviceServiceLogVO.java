@@ -3,8 +3,7 @@ package com.taotao.cloud.iot.biz.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import net.maku.framework.common.utils.DateUtils;
-import net.maku.iot.enums.DeviceCommandEnum;
+import com.taotao.cloud.iot.biz.enums.DeviceCommandEnum;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * 设备服务日志
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Schema(description = "设备服务日志")

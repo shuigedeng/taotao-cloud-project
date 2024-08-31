@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * tcp通讯数据包
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Schema(description = "tcp通讯数据包装类")

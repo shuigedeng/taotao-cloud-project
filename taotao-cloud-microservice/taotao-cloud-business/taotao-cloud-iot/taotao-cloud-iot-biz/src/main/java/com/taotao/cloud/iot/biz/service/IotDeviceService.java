@@ -1,22 +1,20 @@
 package com.taotao.cloud.iot.biz.service;
 
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.mybatis.service.BaseService;
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.communication.dto.DeviceCommandResponseDTO;
-import net.maku.iot.query.IotDeviceQuery;
-import net.maku.iot.communication.service.BaseCommunication;
-import net.maku.iot.vo.DeviceCommandResponseAttributeDataVO;
-import net.maku.iot.vo.DeviceCommandVO;
-import net.maku.iot.vo.DeviceReportAttributeDataVO;
-import net.maku.iot.vo.IotDeviceVO;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
+import com.taotao.cloud.iot.biz.query.IotDeviceQuery;
+import com.taotao.cloud.iot.biz.communication.service.BaseCommunication;
+import com.taotao.cloud.iot.biz.vo.DeviceCommandResponseAttributeDataVO;
+import com.taotao.cloud.iot.biz.vo.DeviceCommandVO;
+import com.taotao.cloud.iot.biz.vo.DeviceReportAttributeDataVO;
+import com.taotao.cloud.iot.biz.vo.IotDeviceVO;
 
 import java.util.List;
 
 /**
  * 设备表
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface IotDeviceService extends BaseService<IotDeviceEntity> {
 

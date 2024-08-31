@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 设备指令
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Schema(description = "设备指令VO")

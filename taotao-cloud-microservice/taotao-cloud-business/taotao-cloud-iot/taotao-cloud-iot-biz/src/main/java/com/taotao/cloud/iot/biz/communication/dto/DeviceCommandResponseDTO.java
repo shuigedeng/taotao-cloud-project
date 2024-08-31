@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.maku.iot.enums.DeviceCommandEnum;
+import com.taotao.cloud.iot.biz.enums.DeviceCommandEnum;
 
 /**
  * 设备命令响应DTO
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

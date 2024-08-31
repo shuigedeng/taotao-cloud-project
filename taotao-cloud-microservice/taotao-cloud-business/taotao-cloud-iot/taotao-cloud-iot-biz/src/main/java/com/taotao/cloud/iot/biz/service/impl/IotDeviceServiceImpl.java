@@ -9,26 +9,23 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.framework.common.exception.ServerException;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.mybatis.service.impl.BaseServiceImpl;
-import net.maku.iot.convert.IotDeviceConvert;
-import net.maku.iot.dao.IotDeviceDao;
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.enums.*;
-import net.maku.iot.communication.dto.DeviceCommandResponseDTO;
-import net.maku.iot.communication.dto.DevicePropertyDTO;
-import net.maku.iot.communication.mqtt.handler.DeviceCommandResponseHandler;
-import net.maku.iot.communication.mqtt.handler.DevicePropertyChangeHandler;
-import net.maku.iot.query.IotDeviceQuery;
-import net.maku.iot.communication.service.BaseCommunication;
-import net.maku.iot.communication.service.CommunicationServiceFactory;
-import net.maku.iot.service.IotDeviceEventLogService;
-import net.maku.iot.service.IotDeviceService;
-import net.maku.iot.vo.DeviceCommandResponseAttributeDataVO;
-import net.maku.iot.vo.DeviceCommandVO;
-import net.maku.iot.vo.DeviceReportAttributeDataVO;
-import net.maku.iot.vo.IotDeviceVO;
+import com.taotao.cloud.iot.biz.convert.IotDeviceConvert;
+import com.taotao.cloud.iot.biz.dao.IotDeviceDao;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.enums.*;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
+import com.taotao.cloud.iot.biz.communication.dto.DevicePropertyDTO;
+import com.taotao.cloud.iot.biz.communication.mqtt.handler.DeviceCommandResponseHandler;
+import com.taotao.cloud.iot.biz.communication.mqtt.handler.DevicePropertyChangeHandler;
+import com.taotao.cloud.iot.biz.query.IotDeviceQuery;
+import com.taotao.cloud.iot.biz.communication.service.BaseCommunication;
+import com.taotao.cloud.iot.biz.communication.service.CommunicationServiceFactory;
+import com.taotao.cloud.iot.biz.service.IotDeviceEventLogService;
+import com.taotao.cloud.iot.biz.service.IotDeviceService;
+import com.taotao.cloud.iot.biz.vo.DeviceCommandResponseAttributeDataVO;
+import com.taotao.cloud.iot.biz.vo.DeviceCommandVO;
+import com.taotao.cloud.iot.biz.vo.DeviceReportAttributeDataVO;
+import com.taotao.cloud.iot.biz.vo.IotDeviceVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +35,7 @@ import java.util.List;
 /**
  * 设备服务类
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Service
 @Slf4j

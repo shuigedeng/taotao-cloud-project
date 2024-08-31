@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.dubbo;
+package com.taotao.cloud.iot.api.dubbo;
 
 /**
  * IDubboOrderService

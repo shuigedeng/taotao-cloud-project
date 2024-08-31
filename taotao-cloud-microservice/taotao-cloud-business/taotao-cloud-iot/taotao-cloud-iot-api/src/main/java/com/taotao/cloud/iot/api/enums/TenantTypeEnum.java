@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.enums;
+package com.taotao.cloud.iot.api.enums;
 
 /** 搜索类型 */
 public enum TenantTypeEnum {

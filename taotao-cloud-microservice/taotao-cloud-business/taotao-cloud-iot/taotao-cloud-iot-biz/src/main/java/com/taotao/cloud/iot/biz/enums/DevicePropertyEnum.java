@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * 设备属性枚举
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Getter
 @RequiredArgsConstructor

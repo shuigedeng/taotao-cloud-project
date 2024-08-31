@@ -2,10 +2,8 @@ package com.taotao.cloud.iot.biz.communication.tcp;
 
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.framework.common.exception.ServerException;
-import net.maku.framework.common.utils.JsonUtils;
-import net.maku.iot.communication.dto.DeviceCommandDTO;
-import net.maku.iot.communication.dto.TcpMsgDTO;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandDTO;
+import com.taotao.cloud.iot.biz.communication.dto.TcpMsgDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * TCP 网关
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Component
 @Slf4j

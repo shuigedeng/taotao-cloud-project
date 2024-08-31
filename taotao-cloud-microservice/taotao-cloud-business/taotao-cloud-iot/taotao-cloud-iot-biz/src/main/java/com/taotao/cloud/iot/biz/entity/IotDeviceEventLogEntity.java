@@ -3,14 +3,13 @@ package com.taotao.cloud.iot.biz.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import net.maku.framework.mybatis.entity.BaseEntity;
 
 import java.time.LocalDateTime;
 
 /**
  * 设备事件日志
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @EqualsAndHashCode(callSuper = false)
 @Data

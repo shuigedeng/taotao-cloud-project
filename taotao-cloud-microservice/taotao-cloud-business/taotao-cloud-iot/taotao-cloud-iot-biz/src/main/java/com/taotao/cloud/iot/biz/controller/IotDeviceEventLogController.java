@@ -4,13 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.common.utils.Result;
-import net.maku.iot.convert.IotDeviceEventLogConvert;
-import net.maku.iot.entity.IotDeviceEventLogEntity;
-import net.maku.iot.query.IotDeviceEventLogQuery;
-import net.maku.iot.service.IotDeviceEventLogService;
-import net.maku.iot.vo.IotDeviceEventLogVO;
+import com.taotao.cloud.iot.biz.convert.IotDeviceEventLogConvert;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEventLogEntity;
+import com.taotao.cloud.iot.biz.query.IotDeviceEventLogQuery;
+import com.taotao.cloud.iot.biz.service.IotDeviceEventLogService;
+import com.taotao.cloud.iot.biz.vo.IotDeviceEventLogVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +18,7 @@ import java.util.List;
 /**
  * 设备事件日志
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @RestController
 @RequestMapping("iot/device_event_log")

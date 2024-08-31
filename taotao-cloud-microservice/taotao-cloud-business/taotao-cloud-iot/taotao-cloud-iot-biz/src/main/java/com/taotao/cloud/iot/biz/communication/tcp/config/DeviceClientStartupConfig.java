@@ -10,7 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 /**
  *  Netty启动顺序配置
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Configuration
 @Slf4j

@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.maku.iot.dto.DeviceClientDTO;
+import com.taotao.cloud.iot.biz.dto.DeviceClientDTO;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 设备消息主题类型枚举
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Getter
 @RequiredArgsConstructor
@@ -38,7 +38,7 @@ public enum DeviceTopicEnum {
     /**
      * 设备信息上报主题前缀
      */
-    public static final String TOPIC_PREFIX = "/maku/device";
+    public static final String TOPIC_PREFIX = "/iot/device";
 
 
     /**

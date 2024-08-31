@@ -24,6 +24,8 @@ plugins {
 
 apply plugin: "io.freefair.maven-plugin"
 
+description = "Maven插件模块"
+
 dependencies {
     implementation 'org.apache.maven:maven-core:3.9.9'
     implementation 'org.apache.maven:maven-model:3.9.9'

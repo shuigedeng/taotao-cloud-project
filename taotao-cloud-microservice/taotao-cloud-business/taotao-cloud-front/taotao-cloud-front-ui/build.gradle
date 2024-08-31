@@ -11,6 +11,8 @@ plugins {
 
 import org.siouan.frontendgradleplugin.infrastructure.gradle.RunPnpm
 
+description = "前端PC UI"
+
 frontend {
     nodeVersion.set("20.14.0")
     assembleScript.set("run build")

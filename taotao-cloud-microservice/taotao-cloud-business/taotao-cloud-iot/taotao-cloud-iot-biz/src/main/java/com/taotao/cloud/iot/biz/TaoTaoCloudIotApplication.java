@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.biz;
+package com.taotao.cloud.iot.biz;
 
 import com.taotao.cloud.common.utils.common.PropertyUtils;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;

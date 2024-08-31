@@ -4,9 +4,9 @@ import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.iot.communication.dto.DevicePropertyDTO;
-import net.maku.iot.communication.mqtt.factory.DevicePropertyChangeHandlerFactory;
-import net.maku.iot.enums.DeviceTopicEnum;
+import com.taotao.cloud.iot.biz.communication.dto.DevicePropertyDTO;
+import com.taotao.cloud.iot.biz.communication.mqtt.factory.DevicePropertyChangeHandlerFactory;
+import com.taotao.cloud.iot.biz.enums.DeviceTopicEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * 设备属性上报消息处理器
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Slf4j
 @Component

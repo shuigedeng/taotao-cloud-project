@@ -1,7 +1,7 @@
 package com.taotao.cloud.iot.biz.communication.mqtt.factory;
 
 import lombok.RequiredArgsConstructor;
-import net.maku.iot.communication.mqtt.handler.MqttMessageHandler;
+import com.taotao.cloud.iot.biz.communication.mqtt.handler.MqttMessageHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * MQTT消息处理器工厂，自动获取所有实现的处理器实例
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Component
 @RequiredArgsConstructor

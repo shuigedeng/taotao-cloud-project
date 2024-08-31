@@ -4,16 +4,15 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.framework.common.exception.ServerException;
-import net.maku.iot.communication.dto.CommandResponseChan;
-import net.maku.iot.communication.dto.DeviceCommandDTO;
-import net.maku.iot.communication.dto.DeviceCommandResponseDTO;
-import net.maku.iot.communication.mqtt.MqttGateway;
-import net.maku.iot.dto.DeviceClientDTO;
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.enums.DeviceCommandEnum;
-import net.maku.iot.enums.DeviceTopicEnum;
-import net.maku.iot.service.IotDeviceServiceLogService;
+import com.taotao.cloud.iot.biz.communication.dto.CommandResponseChan;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandDTO;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
+import com.taotao.cloud.iot.biz.communication.mqtt.MqttGateway;
+import com.taotao.cloud.iot.biz.dto.DeviceClientDTO;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.enums.DeviceCommandEnum;
+import com.taotao.cloud.iot.biz.enums.DeviceTopicEnum;
+import com.taotao.cloud.iot.biz.service.IotDeviceServiceLogService;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -21,7 +20,7 @@ import java.util.UUID;
 /**
  * MQTT协议服务类
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Slf4j
 @Component

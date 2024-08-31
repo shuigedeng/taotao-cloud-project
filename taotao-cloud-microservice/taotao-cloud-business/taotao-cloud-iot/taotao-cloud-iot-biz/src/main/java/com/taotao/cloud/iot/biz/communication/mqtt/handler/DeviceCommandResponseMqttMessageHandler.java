@@ -3,11 +3,10 @@ package com.taotao.cloud.iot.biz.communication.mqtt.handler;
 import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.framework.common.utils.JsonUtils;
-import net.maku.iot.communication.service.MQTTService;
-import net.maku.iot.communication.dto.DeviceCommandResponseDTO;
-import net.maku.iot.communication.mqtt.factory.DeviceCommandResponseHandlerFactory;
-import net.maku.iot.enums.DeviceTopicEnum;
+import com.taotao.cloud.iot.biz.communication.service.MQTTService;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
+import com.taotao.cloud.iot.biz.communication.mqtt.factory.DeviceCommandResponseHandlerFactory;
+import com.taotao.cloud.iot.biz.enums.DeviceTopicEnum;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -15,7 +14,7 @@ import java.util.Optional;
 /**
  * 设备命令响应处理器
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Slf4j
 @Component

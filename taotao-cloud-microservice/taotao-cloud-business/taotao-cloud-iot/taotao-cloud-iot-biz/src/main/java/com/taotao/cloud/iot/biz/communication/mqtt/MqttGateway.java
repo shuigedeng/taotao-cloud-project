@@ -1,7 +1,7 @@
 package com.taotao.cloud.iot.biz.communication.mqtt;
 
 import jakarta.annotation.Resource;
-import net.maku.iot.communication.mqtt.config.MqttConfig;
+import com.taotao.cloud.iot.biz.communication.mqtt.config.MqttConfig;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.integration.support.MessageBuilder;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * MQTT网关
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Component
 @MessagingGateway(defaultRequestChannel = MqttConfig.OUTBOUND_CHANNEL)

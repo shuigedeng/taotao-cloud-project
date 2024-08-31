@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.model.dto;
+package com.taotao.cloud.iot.api.model.dto;
 
 import com.taotao.cloud.common.enums.GlobalStatusEnum;
 import java.io.Serializable;

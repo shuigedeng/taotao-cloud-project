@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.model.vo;
+package com.taotao.cloud.iot.api.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;

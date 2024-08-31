@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * 设备类型枚举,新增的设备类型枚举命名不允许使用"_"
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Getter
 @RequiredArgsConstructor

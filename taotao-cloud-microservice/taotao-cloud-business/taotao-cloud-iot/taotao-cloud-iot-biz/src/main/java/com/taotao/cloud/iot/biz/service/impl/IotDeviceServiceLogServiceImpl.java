@@ -5,16 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
-import net.maku.framework.common.utils.JsonUtils;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.mybatis.service.impl.BaseServiceImpl;
-import net.maku.iot.convert.IotDeviceServiceLogConvert;
-import net.maku.iot.dao.IotDeviceServiceLogDao;
-import net.maku.iot.entity.IotDeviceServiceLogEntity;
-import net.maku.iot.enums.DeviceCommandEnum;
-import net.maku.iot.query.IotDeviceServiceLogQuery;
-import net.maku.iot.service.IotDeviceServiceLogService;
-import net.maku.iot.vo.IotDeviceServiceLogVO;
+import com.taotao.cloud.iot.biz.convert.IotDeviceServiceLogConvert;
+import com.taotao.cloud.iot.biz.dao.IotDeviceServiceLogDao;
+import com.taotao.cloud.iot.biz.entity.IotDeviceServiceLogEntity;
+import com.taotao.cloud.iot.biz.enums.DeviceCommandEnum;
+import com.taotao.cloud.iot.biz.query.IotDeviceServiceLogQuery;
+import com.taotao.cloud.iot.biz.service.IotDeviceServiceLogService;
+import com.taotao.cloud.iot.biz.vo.IotDeviceServiceLogVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +21,7 @@ import java.util.List;
 /**
  * 设备服务日志
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Service
 @AllArgsConstructor

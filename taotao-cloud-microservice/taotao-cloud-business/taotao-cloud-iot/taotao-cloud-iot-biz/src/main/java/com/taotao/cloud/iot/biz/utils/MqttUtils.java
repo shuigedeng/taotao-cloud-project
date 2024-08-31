@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * Mqtt工具类
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Component
 @RequiredArgsConstructor

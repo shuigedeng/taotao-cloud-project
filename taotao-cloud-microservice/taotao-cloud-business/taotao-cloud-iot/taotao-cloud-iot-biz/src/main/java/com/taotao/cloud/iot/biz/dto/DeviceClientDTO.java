@@ -4,15 +4,15 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import lombok.Builder;
 import lombok.Data;
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.enums.DeviceTypeEnum;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.enums.DeviceTypeEnum;
 
 import java.util.List;
 
 /**
  * 设备客户端信息
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Builder

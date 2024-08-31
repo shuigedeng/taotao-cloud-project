@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.dubbo.response;
+package com.taotao.cloud.iot.api.dubbo.response;
 
 import io.soabase.recordbuilder.core.RecordBuilder;
 import java.io.Serializable;

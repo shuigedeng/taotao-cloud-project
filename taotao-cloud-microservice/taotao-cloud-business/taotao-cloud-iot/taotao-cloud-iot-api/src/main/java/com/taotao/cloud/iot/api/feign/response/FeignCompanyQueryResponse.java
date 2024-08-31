@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.feign.response;
+package com.taotao.cloud.iot.api.feign.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

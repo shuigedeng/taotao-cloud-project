@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tenant.api.dubbo.request;
+package com.taotao.cloud.iot.api.dubbo.request;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

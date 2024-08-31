@@ -1,12 +1,12 @@
 package com.taotao.cloud.iot.biz.communication.mqtt.handler;
 
 
-import net.maku.iot.communication.dto.DeviceCommandResponseDTO;
+import com.taotao.cloud.iot.biz.communication.dto.DeviceCommandResponseDTO;
 
 /**
  * 设备命令响应处理器
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface DeviceCommandResponseHandler {
     /**

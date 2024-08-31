@@ -4,7 +4,7 @@ package com.taotao.cloud.iot.biz.communication.tcp.handler;
 /**
  * TCP消息处理接口
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 public interface TCPMessageHandler {
 

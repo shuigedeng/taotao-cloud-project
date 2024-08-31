@@ -4,15 +4,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.maku.framework.common.utils.PageResult;
-import net.maku.framework.common.utils.Result;
-import net.maku.iot.convert.IotDeviceConvert;
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.query.IotDeviceQuery;
-import net.maku.iot.service.IotDeviceService;
-import net.maku.iot.vo.DeviceCommandVO;
-import net.maku.iot.vo.DeviceReportAttributeDataVO;
-import net.maku.iot.vo.IotDeviceVO;
+import com.taotao.cloud.iot.biz.convert.IotDeviceConvert;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.query.IotDeviceQuery;
+import com.taotao.cloud.iot.biz.service.IotDeviceService;
+import com.taotao.cloud.iot.biz.vo.DeviceCommandVO;
+import com.taotao.cloud.iot.biz.vo.DeviceReportAttributeDataVO;
+import com.taotao.cloud.iot.biz.vo.IotDeviceVO;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +20,7 @@ import java.util.List;
 /**
  * 设备表
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @RestController
 @RequestMapping("iot/device")

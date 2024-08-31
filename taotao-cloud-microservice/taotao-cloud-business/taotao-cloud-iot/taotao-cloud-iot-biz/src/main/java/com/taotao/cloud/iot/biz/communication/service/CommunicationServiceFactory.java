@@ -1,13 +1,12 @@
 package com.taotao.cloud.iot.biz.communication.service;
 
 import lombok.AllArgsConstructor;
-import net.maku.framework.common.exception.ServerException;
 import org.springframework.stereotype.Service;
 
 /**
  * 设备协议服务工厂
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Service
 @AllArgsConstructor

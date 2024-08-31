@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.report.biz;
+package com.taotao.cloud.iot.biz;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -2,12 +2,12 @@ package com.taotao.cloud.iot.biz.communication.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import net.maku.iot.enums.DevicePropertyEnum;
+import com.taotao.cloud.iot.biz.enums.DevicePropertyEnum;
 
 /**
  * 设备属性对象
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Schema(description = "设备属性对象")

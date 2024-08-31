@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 设备上报属性数据
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Schema(description = "设备上报属性数据VO")

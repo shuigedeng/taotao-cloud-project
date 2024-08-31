@@ -12,15 +12,14 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
-import net.maku.framework.common.utils.JsonUtils;
-import net.maku.iot.communication.dto.DevicePropertyDTO;
-import net.maku.iot.communication.dto.TcpMsgDTO;
-import net.maku.iot.dto.DeviceClientDTO;
-import net.maku.iot.entity.IotDeviceEntity;
-import net.maku.iot.enums.DevicePropertyEnum;
-import net.maku.iot.enums.DeviceRunningStatusEnum;
-import net.maku.iot.enums.DeviceTopicEnum;
-import net.maku.iot.service.IotDeviceService;
+import com.taotao.cloud.iot.biz.communication.dto.DevicePropertyDTO;
+import com.taotao.cloud.iot.biz.communication.dto.TcpMsgDTO;
+import com.taotao.cloud.iot.biz.dto.DeviceClientDTO;
+import com.taotao.cloud.iot.biz.entity.IotDeviceEntity;
+import com.taotao.cloud.iot.biz.enums.DevicePropertyEnum;
+import com.taotao.cloud.iot.biz.enums.DeviceRunningStatusEnum;
+import com.taotao.cloud.iot.biz.enums.DeviceTopicEnum;
+import com.taotao.cloud.iot.biz.service.IotDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ import java.util.Map;
 /**
  * 设备模拟器配置，用于启动模拟设备，方便调试，默认启动系统所有的TCP设备
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Slf4j
 @Configuration

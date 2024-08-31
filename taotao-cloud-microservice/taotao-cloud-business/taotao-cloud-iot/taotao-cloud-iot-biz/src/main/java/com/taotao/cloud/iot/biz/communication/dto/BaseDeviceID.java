@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 设备ID
  *
- * @author LSF maku_lsf@163.com
+ * @author 
  */
 @Data
 @Schema(description = "设备ID")
