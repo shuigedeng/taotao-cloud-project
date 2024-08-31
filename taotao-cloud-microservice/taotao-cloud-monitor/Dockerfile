@@ -2,9 +2,9 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-monitor-2024.09.jar ./
+ADD ./build/libs/taotao-cloud-monitor-2024.10.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.09.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.10.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64
@@ -13,7 +13,7 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-monitor
-ARG APP_VERSION=2024.09
+ARG APP_VERSION=2024.10
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=8081
 ARG APP_PRROFILES=dev
@@ -211,6 +211,6 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.09.jar"]
-#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.09.jar
+#ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.10.jar"]
+#ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.10.jar
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
