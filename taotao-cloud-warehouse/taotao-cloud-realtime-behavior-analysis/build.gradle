@@ -98,7 +98,7 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-mysql:3.0.1'
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
-    implementation 'com.mysql:mysql-connector-j:8.4.0'
+    implementation 'com.mysql:mysql-connector-j:9.0.0'
     implementation 'redis.clients:jedis:5.1.5'
     implementation 'org.apache.hive:hive-exec:4.0.0'
 

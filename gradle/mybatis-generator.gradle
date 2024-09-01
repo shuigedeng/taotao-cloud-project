@@ -21,7 +21,7 @@ mybatisGenerator {
         mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.4.2'
         mybatisGenerator 'org.mybatis.dynamic-sql:mybatis-dynamic-sql:1.5.2'
         mybatisGenerator 'io.github.shuigedeng:taotao-cloud-starter-data-mybatis:2024.10'
-        mybatisGenerator 'com.mysql:mysql-connector-j:8.4.0'
+        mybatisGenerator 'com.mysql:mysql-connector-j:9.0.0'
         //mybatisGenerator 'org.postgresql:postgresql:42.7.3'
         //mybatisGenerator  // Here add your mariadb dependencies or else
     }

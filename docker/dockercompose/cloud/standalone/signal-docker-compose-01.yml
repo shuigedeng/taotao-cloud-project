@@ -1,0 +1,278 @@
+# 新建网络 docker-compose -f  3-zk-kafka-cluster.yml up -d
+# docker network ls #查看当前网络
+# docker network create --driver bridge --subnet 172.11.0.0/16 --gateway 172.11.0.1 taotao-cluster-network
+
+version: '3.8'
+services:
+  #https://www.pudn.com/news/632d53b0272bb74d44e90b24.html    需要执行 START SLAVE ; SHOW SLAVE STATUS\G
+  mysql8:
+    hostname: mysql8
+    image: mysql:8.4
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: master
+      MYSQL_PASSWORD: 123456
+    command:
+      --bind-address=172.11.0.10
+      --mysql-native-password=ON
+      --max_connections=1000
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --default-time-zone='+8:00'
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    restart: always
+    container_name: mysql8
+    ports:
+      - "3306:3306"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.10
+
+  #redis:
+  #  image: redis:7.0.12
+  #  container_name: redis
+  #  environment:
+  #    TZ: Asia/Shanghai
+  #  ports:
+  #    - "6379:6379"
+  #  #command: [ "redis-server","/etc/redis/redis.conf" ]
+  #  restart: always
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.11
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    restart: always
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.12
+
+  nacos:
+    image: nacos/nacos-server:v2.4.1
+    restart: always
+    container_name: nacos
+    privileged: true
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.11.0.10
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: "nacos2.4.1"
+      MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.13
+
+  sentinel-dashboard:
+    image: bladex/sentinel-dashboard:1.8.7
+    container_name: sentinel-dashboard
+    ports:
+      - "8858:8858"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.14
+
+  #seata:
+  #  container_name: seata
+  #  image: seataio/seata-server:2.0.0
+  #  restart: always
+  #  ports:
+  #    - "8091:8091"
+  #    - "7091:7091"
+  #  volumes:
+  #    - "/usr/share/zoneinfo/Asia/Shanghai:/etc/localtime"        #设置系统时区
+  #    - "/usr/share/zoneinfo/Asia/Shanghai:/etc/timezone"  #设置时区
+  #    - /root/compose/seata/application.yml:/seata-server/resources/application.yml
+  #  environment:
+  #    STORE_MODE: db
+  #    SEATA_PORT: 8091
+  #    SEATA_IP: 192.168.10.220
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.1
+
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.16
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  kafka:
+    image: "bitnami/kafka:latest"
+    container_name: kafka3
+    restart: always
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      - BITNAMI_DEBUG=yes
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=CONTROLLER://:9094,BROKER://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=BROKER://192.168.218.2:9092,EXTERNAL://192.168.218.2:9093
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=BROKER
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@127.0.0.1:9094
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.17
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    #restart: always
+    ports:
+      - "9091:8080"
+    environment:
+      # 集群名称
+      - KAFKA_CLUSTERS_0_NAME=local
+      # 集群地址
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.218.2:9092
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.18
+
+  rocketmq-nameserv:
+    image: apache/rocketmq:5.1.0
+    container_name: rocketmq-nameserv
+    ports:
+      - "9876:9876"
+    restart: always
+    privileged: true
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
+    command: [ "sh","mqnamesrv" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.19
+  rocketmq-broker:
+    image: apache/rocketmq:5.1.0
+    container_name: rocketmq-broker
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+    restart: always
+    privileged: true
+    volumes:
+      - /root/compose/rocketmq/broker.conf:/home/rocketmq/broker.conf
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      NAMESRV_ADDR: 172.11.0.35:9876
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
+    command: [ "sh","mqbroker","-c","/home/rocketmq/broker.conf", "autoCreateTopicEnable=true" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.20
+  rocketmq-dashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: rocketmq-dashboard
+    ports:
+      - "8082:8080"
+    restart: always
+    privileged: true
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=172.11.0.35:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.21
+
+  powerjob:
+    container_name: powerjob-server
+    image: powerjob/powerjob-server:latest
+    restart: always
+    environment:
+      JVMOPTIONS: "-Xmx512m"
+      PARAMS: "--spring.profiles.active=product --oms.mongodb.enable=false --spring.datasource.core.jdbc-url=jdbc:mysql://172.11.0.10:3306/powerjob-product?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai --spring.datasource.core.username=root --spring.datasource.core.password=123456"
+    ports:
+      - "7700:7700"
+      - "10086:10086"
+      - "10010:10010"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.22
+
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    restart: always
+    command: server /data --console-address ":9090"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.60
+
+  dubbo-admin:
+    image: apache/dubbo-admin:0.6.0
+    container_name: dubbo-admin
+    ports:
+      - "18080:8080"
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      # nacos config, add parameters to url like username=nacos&password=nacos
+      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.registry.group=DUBBO_REGISTRY_GROUP
+      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.config-center.group=DUBBO_REGISTRY_GROUP
+      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
+      - admin.root.user.name=admin
+      - admin.root.user.password=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.48
+
+  arthas:
+    image: hengyunabc/arthas:latest
+    container_name: arthas
+    restart: always
+    ports:
+      - "4040:4040"
+    command:
+      - "java -jar /opt/arthas/arthas-boot.jar"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.42  #volumes:
+networks:
+  taotao-cluster-network:
+    external: true
