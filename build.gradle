@@ -87,7 +87,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.20"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.21"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.43"
@@ -155,7 +155,7 @@ plugins {
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
-    id "org.owasp.dependencycheck" version "10.0.3"
+    id "org.owasp.dependencycheck" version "10.0.4"
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application

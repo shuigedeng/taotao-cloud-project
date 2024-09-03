@@ -2,7 +2,7 @@ dependencies {
 
     implementation 'io.netty:netty-all'
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.52'
-    implementation "org.dromara.hutool:hutool-all:6.0.0-M15"
+    implementation "org.dromara.hutool:hutool-all:6.0.0-M16"
 
     implementation "org.projectlombok:lombok:1.18.34"
     annotationProcessor "org.projectlombok:lombok:1.18.34"
