@@ -25,7 +25,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-web"
 
     //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java
-    implementation('com.alipay.sdk:alipay-sdk-java:4.39.188.ALL') {
+    implementation('com.alipay.sdk:alipay-sdk-java:4.39.200.ALL') {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"
@@ -35,8 +35,8 @@ dependencies {
     implementation "com.github.javen205:IJPay-All:2.9.11"
 
     //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
-    implementation "com.github.binarywang:weixin-java-pay:4.6.3.B"
-    implementation "com.github.binarywang:weixin-java-mp:4.6.3.B"
+    implementation "com.github.binarywang:weixin-java-pay:4.6.4.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.6.4.B"
 
     //https://search.maven.org/artifact/com.paypal.sdk/checkout-sdk
     implementation "com.paypal.sdk:checkout-sdk:2.0.0"

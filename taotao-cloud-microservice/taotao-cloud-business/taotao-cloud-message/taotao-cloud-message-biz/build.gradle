@@ -30,11 +30,11 @@ dependencies {
     implementation("com.aliyun:alibaba-dingtalk-service-sdk:2.0.0") {
         exclude group: "com.sun.jmx", module: "jmxri"
     }
-    implementation 'com.alipay.sdk:alipay-sdk-java:4.39.188.ALL'
+    implementation 'com.alipay.sdk:alipay-sdk-java:4.39.200.ALL'
 
-    implementation "com.github.binarywang:weixin-java-cp:4.6.3.B"
-    implementation "com.github.binarywang:weixin-java-miniapp:4.6.3.B"
-    implementation "com.github.binarywang:weixin-java-mp:4.6.3.B"
+    implementation "com.github.binarywang:weixin-java-cp:4.6.4.B"
+    implementation "com.github.binarywang:weixin-java-miniapp:4.6.4.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.6.4.B"
 
     implementation 'com.ctrip.framework.apollo:apollo-client-config-data:2.3.0'
     implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.1.7-3.x'
@@ -45,7 +45,7 @@ dependencies {
 //    implementation "org.apache.flink:flink-streaming-java_2.11:1.14.3"
 //    implementation "org.apache.flink:flink-walkthrough-common_2.11:1.14.3"
     implementation "com.xuxueli:xxl-job-core:2.4.1"
-    implementation 'de.siegmar:logback-gelf:6.0.1'
+    implementation 'de.siegmar:logback-gelf:6.1.0'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'com.sun.mail:javax.mail:1.6.2'
     implementation 'cn.monitor4all:log-record-springboot3-starter:1.7.0'

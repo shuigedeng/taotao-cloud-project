@@ -88,8 +88,8 @@ dependencies {
 
     api 'org.springframework.session:spring-session-data-redis:3.3.1'
 
-    api 'com.github.binarywang:weixin-java-mp:4.6.3.B'
-    api 'com.github.binarywang:weixin-java-miniapp:4.6.3.B'
+    api 'com.github.binarywang:weixin-java-mp:4.6.4.B'
+    api 'com.github.binarywang:weixin-java-miniapp:4.6.4.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -135,7 +135,7 @@ dependencies {
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
     api "com.nimbusds:nimbus-jose-jwt:9.40"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    api 'com.nimbusds:oauth2-oidc-sdk:11.18'
+    api 'com.nimbusds:oauth2-oidc-sdk:11.19.1'
 
     api "org.apache.commons:commons-collections4"
 
