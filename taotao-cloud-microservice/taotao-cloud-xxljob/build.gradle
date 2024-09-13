@@ -1,16 +1,19 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dingtalk"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mail"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
+    //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-core"
+    implementation "io.github.shuigedeng:taotao-boot-starter-logger"
+    implementation "io.github.shuigedeng:taotao-boot-starter-dingtalk"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mail"
+    implementation "io.github.shuigedeng:taotao-boot-starter-data-p6spy"
+    implementation "io.github.shuigedeng:taotao-boot-starter-idgenerator"
+    implementation "io.github.shuigedeng:taotao-boot-starter-lock"
+    implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
+    implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
+    implementation "io.github.shuigedeng:taotao-boot-starter-micrometer"
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-freemarker"

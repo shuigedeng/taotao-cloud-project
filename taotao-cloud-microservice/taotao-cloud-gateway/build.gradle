@@ -1,44 +1,44 @@
 dependencies {
-    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-monitor"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-useragent"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-idgenerator"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-prometheus"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-actuator"
-
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-springsecurity"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-caffeine"
-
-    //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
-    //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
-
+    //cloud
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
         exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
     }
-
     implementation 'org.apache.skywalking:apm-spring-cloud-gateway-3.x-plugin'
-
+    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
+    implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
     //支持mvc
     //implementation "org.springframework.cloud:spring-cloud-starter-gateway-mvc"
     implementation("org.springframework.cloud:spring-cloud-starter-gateway") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-web"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-webflux"
     }
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    implementation "org.springframework.cloud:spring-cloud-starter-loadbalancer"
-    implementation 'org.springframework.cloud:spring-cloud-starter-function-webflux'
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
     implementation "io.github.resilience4j:resilience4j-ratelimiter:2.2.0"
+
+    //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
+    //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-core"
+    implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
+    implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-boot-starter-logger"
+    implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
+    implementation "io.github.shuigedeng:taotao-boot-starter-useragent"
+    implementation "io.github.shuigedeng:taotao-boot-starter-idgenerator"
+    implementation "io.github.shuigedeng:taotao-boot-starter-lock"
+    implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
+    implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
+    implementation "io.github.shuigedeng:taotao-boot-starter-security-spring"
+    implementation "io.github.shuigedeng:taotao-boot-starter-micrometer"
+    implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
+    implementation "io.github.shuigedeng:taotao-boot-starter-cache-caffeine"
+
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
 
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-api'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
@@ -87,10 +87,10 @@ archivesBaseName = 'taotao-cloud-gateway'
 
 //apache-shenyu网关中心配置
 //dependencies {
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-monitor"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-captcha"
-//    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+//    implementation "io.github.shuigedeng:taotao-boot-starter-core"
+//    implementation "io.github.shuigedeng:taotao-boot-starter-monitor"
+//    implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
+//    implementation "io.github.shuigedeng:taotao-boot-starter-logger"
 //
 //    api "org.springframework.boot:spring-boot-starter-webflux"
 //    api "org.springframework.boot:spring-boot-starter-actuator"

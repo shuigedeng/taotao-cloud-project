@@ -3,15 +3,15 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     implementation "io.github.shuigedeng:taotao-cloud-starter-canal"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-eventbus"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
+    implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-boot-starter-lock"
+    implementation "io.github.shuigedeng:taotao-boot-starter-web"
 
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
     implementation 'org.springframework.integration:spring-integration-core:6.3.3'
@@ -70,7 +70,7 @@ dependencies {
     implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.0'
     implementation 'org.apache.flink:flink-connector-mongodb:1.2.0-1.19'
     implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
-    implementation 'org.apache.doris:flink-doris-connector-1.19:1.6.2'
+    implementation 'org.apache.doris:flink-doris-connector-1.19:24.0.0'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
     implementation "org.apache.flink:flink-sql-connector-kafka:3.2.0-1.19"

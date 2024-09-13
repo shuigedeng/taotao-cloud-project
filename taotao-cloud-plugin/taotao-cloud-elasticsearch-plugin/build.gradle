@@ -23,7 +23,7 @@ apply plugin: "idea"
 dependencies {
     implementation 'org.elasticsearch:elasticsearch:8.15.1'
 
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:8.1.0"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:8.15.1"
     compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.15.1"
     compileOnly "org.apache.lucene:lucene-analysis-common:9.11.1"
 

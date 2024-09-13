@@ -4,21 +4,24 @@ def apiProjects = project.parent.findProject("taotao-cloud-business").subproject
 dependencies {
     implementation apiProjects
 
+    //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-eventbus"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-pulsar"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-rocketmq"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-lock"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-third-client"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-openapi"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-web"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
+    implementation "io.github.shuigedeng:taotao-boot-starter-lock"
+    implementation "io.github.shuigedeng:taotao-boot-starter-third-client"
+    implementation "io.github.shuigedeng:taotao-boot-starter-openapi"
+    implementation "io.github.shuigedeng:taotao-boot-starter-web"
 
     //https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox
     implementation "org.apache.pdfbox:pdfbox:3.0.3"

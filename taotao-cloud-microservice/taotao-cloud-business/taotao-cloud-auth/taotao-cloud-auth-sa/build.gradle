@@ -2,11 +2,11 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-core"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-logger"
+    implementation "io.github.shuigedeng:taotao-boot-starter-core"
+    implementation "io.github.shuigedeng:taotao-boot-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
     implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-dubbo"
+    implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-office"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
@@ -15,15 +15,15 @@ dependencies {
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-p6spy"
+    implementation "io.github.shuigedeng:taotao-boot-starter-data-p6spy"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
     implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-mq-kafka"
+    implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-micrometer"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-skywalking"
+    implementation "io.github.shuigedeng:taotao-boot-starter-micrometer"
+    implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
