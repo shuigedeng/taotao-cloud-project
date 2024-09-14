@@ -3,26 +3,28 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-apollo"
+    //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-job-snail"
+    implementation "io.github.shuigedeng:taotao-boot-starter-job-xxl"
+    implementation "io.github.shuigedeng:taotao-boot-starter-job-schedule"
+    implementation "io.github.shuigedeng:taotao-boot-starter-job-quartz"
+    implementation "io.github.shuigedeng:taotao-boot-starter-job-powerjob"
+    implementation "io.github.shuigedeng:taotao-boot-starter-job-snail"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-websocket"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-statemachine"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-flowengine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-websocket"
+    implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"

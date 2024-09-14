@@ -2,16 +2,17 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-tenant:taotao-cloud-tenant-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-xxl"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-schedule"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-quartz"

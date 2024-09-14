@@ -4,16 +4,17 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"

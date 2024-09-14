@@ -1,4 +1,3 @@
-
 /**
  * DDD: domain 领域层 这一层就是最为核心的业务逻辑层， 这一层不包含任何和技术相关的内容，只包含业务逻辑。
  * 领域层主要负责表达业务概念,业务状态信息和业务规则。
@@ -58,17 +57,18 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-integration")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-common")
 
-    api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
+    api "io.github.shuigedeng:taotao-cloud-starter-stream"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
+    api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
     api "io.github.shuigedeng:taotao-boot-starter-eventbus"
     api "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     api "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     api "io.github.shuigedeng:taotao-boot-starter-mq-rabbitmq"
     api "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    api "io.github.shuigedeng:taotao-cloud-starter-stream"
     api "io.github.shuigedeng:taotao-boot-starter-job-elastic"
     api "io.github.shuigedeng:taotao-boot-starter-job-xxl"
     api "io.github.shuigedeng:taotao-boot-starter-job-schedule"

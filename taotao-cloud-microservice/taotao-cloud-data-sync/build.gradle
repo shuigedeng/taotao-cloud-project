@@ -4,6 +4,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation 'org.springframework.cloud:spring-cloud-starter-task'
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-canal"
@@ -19,8 +20,6 @@ dependencies {
     //https://search.maven.org/artifact/org.springframework.integration/spring-integration-core
     implementation 'org.springframework.integration:spring-integration-core:6.3.3'
     implementation 'org.springframework.integration:spring-integration-jdbc:6.3.3'
-
-    implementation 'org.springframework.cloud:spring-cloud-starter-task'
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation 'org.springframework.batch:spring-batch-infrastructure:5.1.2'
