@@ -59,7 +59,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-common")
 
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    api "io.github.shuigedeng:taotao-cloud-starter-apollo"
+    api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
@@ -69,19 +69,19 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-mq-rabbitmq"
     api "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     api "io.github.shuigedeng:taotao-cloud-starter-stream"
-    api "io.github.shuigedeng:taotao-cloud-starter-job-elastic"
-    api "io.github.shuigedeng:taotao-cloud-starter-job-xxl"
-    api "io.github.shuigedeng:taotao-cloud-starter-job-schedule"
-    api "io.github.shuigedeng:taotao-cloud-starter-job-quartz"
-    api "io.github.shuigedeng:taotao-cloud-starter-job-powerjob"
-    api "io.github.shuigedeng:taotao-cloud-starter-job-snail"
+    api "io.github.shuigedeng:taotao-boot-starter-job-elastic"
+    api "io.github.shuigedeng:taotao-boot-starter-job-xxl"
+    api "io.github.shuigedeng:taotao-boot-starter-job-schedule"
+    api "io.github.shuigedeng:taotao-boot-starter-job-quartz"
+    api "io.github.shuigedeng:taotao-boot-starter-job-powerjob"
+    api "io.github.shuigedeng:taotao-boot-starter-job-snail"
     api "io.github.shuigedeng:taotao-boot-starter-grpc"
     api "io.github.shuigedeng:taotao-boot-starter-lock"
     api "io.github.shuigedeng:taotao-boot-starter-dingtalk"
     api "io.github.shuigedeng:taotao-boot-starter-laytpl"
     api "io.github.shuigedeng:taotao-boot-starter-elk"
     api "io.github.shuigedeng:taotao-boot-starter-captcha"
-    api "io.github.shuigedeng:taotao-cloud-starter-office"
+    api "io.github.shuigedeng:taotao-boot-starter-office"
     api "io.github.shuigedeng:taotao-boot-starter-third-client"
     api "io.github.shuigedeng:taotao-boot-starter-web"
 
@@ -120,8 +120,8 @@ dependencies {
 
     api 'com.github.oshi:oshi-core:6.6.3'
 
-    //api "io.github.shuigedeng:taotao-cloud-starter-apt")
-    //annotationProcessor "io.github.shuigedeng:taotao-cloud-starter-apt")
+    //api "io.github.shuigedeng:taotao-boot-starter-apt")
+    //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

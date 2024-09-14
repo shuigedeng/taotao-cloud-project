@@ -59,7 +59,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-common")
 
     api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
-    api "io.github.shuigedeng:taotao-cloud-starter-apollo"
+    api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-cloud-starter-seata"
     api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"

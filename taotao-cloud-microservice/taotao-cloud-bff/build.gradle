@@ -8,15 +8,18 @@ def apiProjects = project.parent.findProject("taotao-cloud-business").subproject
 dependencies {
     implementation apiProjects
 
+    //cloud
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+
+    //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
@@ -24,29 +27,29 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-graphql"
     testImplementation 'org.springframework.graphql:spring-graphql-test:1.3.2'
 
+    //implementation "org.springframework.boot:spring-boot-starter-webflux"
+    //implementation("org.springframework.boot:spring-boot-starter-web") {
+    //    exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    //}
+    //implementation "org.springframework.boot:spring-boot-starter-actuator"
+    //implementation "org.springframework.boot:spring-boot-starter-undertow"
+
+    //implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
+
+    //implementation "org.springframework.boot:spring-boot-starter-graphql"
+
+    //implementation "org.springframework.cloud:spring-cloud-context"
+    //implementation "org.springframework.boot:spring-boot-autoconfigure"
+
+    //implementation "jakarta.servlet:jakarta.servlet-api"
+
+    //developmentOnly "org.springframework.boot:spring-boot-devtools"
+    //runtimeOnly "com.h2database:h2"
+
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
-
-    //    implementation "org.springframework.boot:spring-boot-starter-webflux"
-//    implementation("org.springframework.boot:spring-boot-starter-web") {
-//        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
-//    }
-//    implementation "org.springframework.boot:spring-boot-starter-actuator"
-//    implementation "org.springframework.boot:spring-boot-starter-undertow"
-//
-//    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
-//
-//    implementation "org.springframework.boot:spring-boot-starter-graphql"
-//
-//    implementation "org.springframework.cloud:spring-cloud-context"
-//    implementation "org.springframework.boot:spring-boot-autoconfigure"
-//
-//    implementation "jakarta.servlet:jakarta.servlet-api"
-//
-//    developmentOnly "org.springframework.boot:spring-boot-devtools"
-//    runtimeOnly "com.h2database:h2"
 }
 
 mainClassName = "com.taotao.cloud.bff.api.TaoTaoCloudBffApplication"

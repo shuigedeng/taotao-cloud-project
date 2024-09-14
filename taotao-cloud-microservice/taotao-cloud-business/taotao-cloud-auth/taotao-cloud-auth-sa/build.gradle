@@ -5,9 +5,9 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
     implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-springdoc"
+    implementation "io.github.shuigedeng:taotao-boot-starter-springdoc"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-office"
+    implementation "io.github.shuigedeng:taotao-boot-starter-office"
 
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-facility-tencent"
@@ -16,10 +16,10 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
     implementation "io.github.shuigedeng:taotao-boot-starter-data-p6spy"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-jpa"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-data-mybatis"
+    implementation "io.github.shuigedeng:taotao-boot-starter-data-jpa"
+    implementation "io.github.shuigedeng:taotao-boot-starter-data-mybatis"
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-cache-redis"
+    implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
 
     implementation "io.github.shuigedeng:taotao-boot-starter-micrometer"
@@ -28,8 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-satoken"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-security-justauth"
+    implementation "io.github.shuigedeng:taotao-boot-starter-security-satoken"
+    implementation "io.github.shuigedeng:taotao-boot-starter-security-justauth"
 
     // Sa-Token-OAuth2.0 模块
     //https://search.maven.org/artifact/cn.dev33/sa-token-oauth2

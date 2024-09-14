@@ -57,7 +57,7 @@ dependencies {
     //网关限流 https://search.maven.org/artifact/com.eeeffff.limiter/ip-limiter-core-spring-gateway
     //implementation "com.eeeffff.limiter:ip-limiter-core-spring-gateway:1.1.3"
 
-    //implementation("io.github.shuigedeng:taotao-cloud-starter-security-satoken") {
+    //implementation("io.github.shuigedeng:taotao-boot-starter-security-satoken") {
     //    exclude group: "cn.dev33", module: "sa-token-spring-boot3-starter"
     //    exclude group: "cn.dev33", module: "sa-token-jakarta-servlet"
     //}
