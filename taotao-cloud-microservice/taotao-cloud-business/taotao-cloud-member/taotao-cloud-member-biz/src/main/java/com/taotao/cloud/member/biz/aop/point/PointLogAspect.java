@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.aop.point;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.biz.model.entity.Member;
 import com.taotao.cloud.member.biz.model.entity.MemberPointsHistory;

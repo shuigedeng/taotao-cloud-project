@@ -17,16 +17,16 @@
 package com.taotao.cloud.data.sync.canal;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.annotation.AlertTableListenPoint;
-import com.taotao.cloud.canal.annotation.CanalEventListener;
-import com.taotao.cloud.canal.annotation.CreateIndexListenPoint;
-import com.taotao.cloud.canal.annotation.CreateTableListenPoint;
-import com.taotao.cloud.canal.annotation.DeleteListenPoint;
-import com.taotao.cloud.canal.annotation.DropTableListenPoint;
-import com.taotao.cloud.canal.annotation.InsertListenPoint;
-import com.taotao.cloud.canal.annotation.UpdateListenPoint;
-import com.taotao.cloud.canal.model.CanalMsg;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.canal.annotation.AlertTableListenPoint;
+import com.taotao.boot.canal.annotation.CanalEventListener;
+import com.taotao.boot.canal.annotation.CreateIndexListenPoint;
+import com.taotao.boot.canal.annotation.CreateTableListenPoint;
+import com.taotao.boot.canal.annotation.DeleteListenPoint;
+import com.taotao.boot.canal.annotation.DropTableListenPoint;
+import com.taotao.boot.canal.annotation.InsertListenPoint;
+import com.taotao.boot.canal.annotation.UpdateListenPoint;
+import com.taotao.boot.canal.model.CanalMsg;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.List;
 import org.springframework.util.CollectionUtils;
 

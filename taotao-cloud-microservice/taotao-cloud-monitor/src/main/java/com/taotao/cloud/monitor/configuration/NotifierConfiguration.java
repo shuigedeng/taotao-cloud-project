@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.monitor.configuration;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.date.DateUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.date.DateUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.dingtalk.entity.DingerRequest;
 import com.taotao.cloud.dingtalk.enums.MessageSubType;
 import com.taotao.cloud.dingtalk.model.DingerSender;

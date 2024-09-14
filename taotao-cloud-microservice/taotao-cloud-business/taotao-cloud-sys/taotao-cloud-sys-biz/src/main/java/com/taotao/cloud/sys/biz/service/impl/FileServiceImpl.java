@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.service.impl;
 
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.entity.File;
 import com.taotao.cloud.file.biz.mapper.IFileMapper;

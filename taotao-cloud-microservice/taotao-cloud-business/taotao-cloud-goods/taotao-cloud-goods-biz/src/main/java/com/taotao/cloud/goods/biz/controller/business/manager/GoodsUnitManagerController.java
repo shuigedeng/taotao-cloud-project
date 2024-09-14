@@ -17,9 +17,9 @@
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.goods.biz.model.entity.GoodsUnit;
 import com.taotao.cloud.goods.biz.service.business.IGoodsUnitService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

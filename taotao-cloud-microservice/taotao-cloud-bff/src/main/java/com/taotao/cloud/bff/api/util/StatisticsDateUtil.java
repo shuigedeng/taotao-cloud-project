@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.bff.api.util;
 
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.report.api.enums.SearchTypeEnum;
 import com.taotao.cloud.report.api.model.dto.StatisticsQueryParam;
 

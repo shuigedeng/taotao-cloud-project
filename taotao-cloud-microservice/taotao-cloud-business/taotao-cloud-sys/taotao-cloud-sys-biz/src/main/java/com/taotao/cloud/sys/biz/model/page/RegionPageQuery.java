@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.page;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

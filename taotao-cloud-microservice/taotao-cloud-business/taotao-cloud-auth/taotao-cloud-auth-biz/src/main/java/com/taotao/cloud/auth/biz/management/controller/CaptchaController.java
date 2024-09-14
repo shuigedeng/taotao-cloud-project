@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.auth.biz.management.controller;
 
-import com.taotao.cloud.captcha.support.core.dto.Captcha;
-import com.taotao.cloud.captcha.support.core.dto.Verification;
-import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.captcha.support.core.dto.Captcha;
+import com.taotao.boot.captcha.support.core.dto.Verification;
+import com.taotao.boot.captcha.support.core.processor.CaptchaRendererFactory;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

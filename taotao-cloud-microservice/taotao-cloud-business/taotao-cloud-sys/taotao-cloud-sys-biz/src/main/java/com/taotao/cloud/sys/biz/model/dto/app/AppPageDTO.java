@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.model.dto.app;
 
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.ValidationGroups;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.ValidationGroups;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

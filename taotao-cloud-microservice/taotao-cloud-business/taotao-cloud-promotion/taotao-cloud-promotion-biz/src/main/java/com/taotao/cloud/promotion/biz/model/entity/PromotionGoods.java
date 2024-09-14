@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.model.dto.KanjiaActivityGoodsDTO;

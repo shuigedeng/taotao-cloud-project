@@ -31,7 +31,7 @@ package com.taotao.cloud.order.biz.controller.business.mall; // /*
 //  */
 // package com.taotao.cloud.order.biz.controller;
 //
-// import com.taotao.cloud.common.model.BaseQuery;
+// import com.taotao.boot.common.model.BaseQuery;
 // import com.taotao.cloud.order.api.dto.order_item.OrderItemSaveDTO;
 // import com.taotao.cloud.order.api.dto.order_item.OrderItemUpdateDTO;
 // import com.taotao.cloud.order.api.vo.order_item.OrderItemVO;

@@ -8,10 +8,10 @@ import static com.taotao.cloud.goods.common.constant.GoodsConstants.DELETE_FLAG_
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
 import com.taotao.cloud.goods.application.command.category.executor.query.CategoryChildrenCmdExe;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryMapper;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
 import org.elasticsearch.action.update.UpdateRequest;
 
 import java.util.List;

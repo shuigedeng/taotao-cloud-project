@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.supports.grpc;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.log.api.grpc.BooleanReply;
 import com.taotao.cloud.log.api.grpc.Log;
 import com.taotao.cloud.log.api.grpc.LogGrpcServiceGrpc;

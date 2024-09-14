@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.generator.mbg;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;

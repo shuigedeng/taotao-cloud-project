@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.goods.biz.util;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;

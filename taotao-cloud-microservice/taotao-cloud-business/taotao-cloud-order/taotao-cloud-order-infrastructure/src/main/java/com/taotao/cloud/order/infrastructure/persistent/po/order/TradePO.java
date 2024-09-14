@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.po.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;

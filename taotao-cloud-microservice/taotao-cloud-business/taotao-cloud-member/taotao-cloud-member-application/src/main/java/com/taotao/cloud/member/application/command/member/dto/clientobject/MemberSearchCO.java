@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.application.command.member.dto.clientobject;
 
-import com.taotao.cloud.common.enums.SwitchEnum;
+import com.taotao.boot.common.enums.SwitchEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

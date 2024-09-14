@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.stream.rocketmq; // package com.taotao.cloud.order.application.rocketmq;
 //
-// import com.taotao.cloud.common.utils.JsonUtil;
+// import com.taotao.boot.common.utils.JsonUtil;
 //
 // @RocketMQTransactionListener(
 // txProducerGroup = "msgRoducerGroup",

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.infrastructure.roketmq.listener;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
 import com.taotao.cloud.order.infrastructure.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.infrastructure.roketmq.event.AfterSaleStatusChangeEvent;

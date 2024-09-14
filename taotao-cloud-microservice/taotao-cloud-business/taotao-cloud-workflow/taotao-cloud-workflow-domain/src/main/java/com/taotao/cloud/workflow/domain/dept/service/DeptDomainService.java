@@ -17,7 +17,7 @@
 package com.taotao.cloud.workflow.domain.dept.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.workflow.domain.dept.entity.DeptEntity;
 
 public interface DeptDomainService {

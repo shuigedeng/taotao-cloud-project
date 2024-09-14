@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.report.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.report.api.feign.fallback.FeignMemberStatisticsFallbackImpl;
 import com.taotao.cloud.report.api.model.dto.MemberStatisticsDTO;
 import com.taotao.cloud.report.api.model.vo.MemberStatisticsVO;

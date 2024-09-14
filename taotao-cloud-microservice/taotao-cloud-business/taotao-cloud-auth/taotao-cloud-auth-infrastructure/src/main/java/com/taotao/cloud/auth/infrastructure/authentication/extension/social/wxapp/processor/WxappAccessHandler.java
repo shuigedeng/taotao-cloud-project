@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxapp.processor;
 
-import static com.taotao.cloud.common.constant.SymbolConstant.FORWARD_SLASH;
+import static com.taotao.boot.common.constant.SymbolConstant.FORWARD_SLASH;
 
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;

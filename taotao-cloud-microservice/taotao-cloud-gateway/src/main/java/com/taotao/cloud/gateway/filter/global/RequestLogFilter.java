@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import static com.taotao.cloud.common.constant.CommonConstant.TTC_TRACE_ID;
+import static com.taotao.boot.common.constant.CommonConstant.TTC_TRACE_ID;
 
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.TraceUtils;
+import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import java.util.ArrayList;
 import java.util.List;

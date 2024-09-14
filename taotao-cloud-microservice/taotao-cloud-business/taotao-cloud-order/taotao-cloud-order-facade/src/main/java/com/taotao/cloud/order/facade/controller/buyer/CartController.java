@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.facade.controller.buyer;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.application.service.cart.ICartService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

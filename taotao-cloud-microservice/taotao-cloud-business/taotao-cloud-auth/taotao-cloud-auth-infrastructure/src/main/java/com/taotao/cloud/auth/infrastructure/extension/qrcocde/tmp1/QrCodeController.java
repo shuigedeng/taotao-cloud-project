@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.extension.qrcocde.tmp1;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

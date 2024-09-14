@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.promotion.biz.service.business.impl;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.member.api.model.vo.MemberVO;
 import com.taotao.cloud.promotion.api.enums.CouponActivitySendTypeEnum;

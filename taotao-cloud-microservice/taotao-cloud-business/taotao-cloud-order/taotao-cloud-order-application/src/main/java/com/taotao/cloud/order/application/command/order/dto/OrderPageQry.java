@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.command.order.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderPromotionTypeEnum;
 import com.taotao.cloud.order.api.enums.order.OrderTypeEnum;

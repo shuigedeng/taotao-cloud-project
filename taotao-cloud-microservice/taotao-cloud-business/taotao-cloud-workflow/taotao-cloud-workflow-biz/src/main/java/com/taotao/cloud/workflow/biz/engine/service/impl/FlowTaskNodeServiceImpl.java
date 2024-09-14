@@ -20,7 +20,7 @@ import org.dromara.hutoolcore.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.shuntjson.nodejson.ChildNodeList;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskNodeEntity;
 import com.taotao.cloud.workflow.biz.engine.enums.FlowNodeEnum;

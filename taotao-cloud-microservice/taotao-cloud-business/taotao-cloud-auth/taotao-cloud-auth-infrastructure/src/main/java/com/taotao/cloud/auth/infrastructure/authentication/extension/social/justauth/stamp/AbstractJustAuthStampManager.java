@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.stamp;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.captcha.support.core.definition.AbstractRenderer;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import com.taotao.cloud.security.springsecurity.exception.MaximumLimitExceededException;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;

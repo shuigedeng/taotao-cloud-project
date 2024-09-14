@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.model.vo.monitor;
 
-import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstant;
 import lombok.Data;
 import org.dromara.hutool.core.math.NumberUtil;
 import oshi.hardware.CentralProcessor;

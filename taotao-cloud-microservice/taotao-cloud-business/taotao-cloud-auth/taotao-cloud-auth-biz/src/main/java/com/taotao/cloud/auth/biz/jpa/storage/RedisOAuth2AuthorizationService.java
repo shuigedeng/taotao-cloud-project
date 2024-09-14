@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.biz.jpa.storage;
 
 import com.taotao.cloud.auth.biz.jpa.service.TtcAuthorizationService;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.concurrent.TimeUnit;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2RefreshToken;

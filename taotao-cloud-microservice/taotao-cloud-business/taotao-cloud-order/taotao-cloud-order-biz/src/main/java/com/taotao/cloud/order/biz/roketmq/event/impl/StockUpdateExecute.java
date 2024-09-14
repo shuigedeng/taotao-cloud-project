@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.message.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.PageResult;
+import com.taotao.boot.common.constant.ServiceName;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.PageResult;
 import com.taotao.cloud.message.api.feign.fallback.StoreMessageApiFallback;
 import com.taotao.cloud.message.api.feign.response.StoreMessageApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;

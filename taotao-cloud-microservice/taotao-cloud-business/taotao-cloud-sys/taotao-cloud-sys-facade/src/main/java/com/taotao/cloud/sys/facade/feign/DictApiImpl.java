@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.facade.feign;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.ratelimit.guava.GuavaLimit;
 import com.taotao.cloud.ratelimit.guava.Limit;

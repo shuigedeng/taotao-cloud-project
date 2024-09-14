@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.promotion.api.model.vo;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

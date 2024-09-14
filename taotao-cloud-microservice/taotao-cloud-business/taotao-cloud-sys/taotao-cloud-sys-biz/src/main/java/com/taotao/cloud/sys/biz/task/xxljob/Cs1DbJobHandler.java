@@ -31,7 +31,7 @@ package com.taotao.cloud.sys.biz.task.xxljob;
  * limitations under the License.
  */
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.util.concurrent.CountDownLatch;

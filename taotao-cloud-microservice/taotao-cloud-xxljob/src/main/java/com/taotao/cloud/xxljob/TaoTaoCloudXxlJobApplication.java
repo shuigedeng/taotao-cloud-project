@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.xxljob;
 
-import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

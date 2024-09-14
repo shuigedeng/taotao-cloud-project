@@ -17,7 +17,7 @@
 package com.taotao.cloud.gateway.utils;
 
 import com.alibaba.fastjson2.JSON;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.util.Arrays;

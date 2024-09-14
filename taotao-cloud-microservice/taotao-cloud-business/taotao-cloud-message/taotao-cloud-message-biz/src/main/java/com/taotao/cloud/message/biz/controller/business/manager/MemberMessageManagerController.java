@@ -18,8 +18,8 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
                                                                   // com.taotao.cloud.message.biz.controller.manager;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
-// import com.taotao.cloud.common.constant.CommonConstant;
-// import com.taotao.cloud.common.model.Result;
+// import com.taotao.boot.common.constant.CommonConstant;
+// import com.taotao.boot.common.model.Result;
 // import com.taotao.cloud.logger.annotation.RequestLogger;
 // import com.taotao.cloud.message.api.vo.MemberMessageQueryVO;
 // import com.taotao.cloud.message.biz.entity.MemberMessage;

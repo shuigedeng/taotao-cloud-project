@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.service.business;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;

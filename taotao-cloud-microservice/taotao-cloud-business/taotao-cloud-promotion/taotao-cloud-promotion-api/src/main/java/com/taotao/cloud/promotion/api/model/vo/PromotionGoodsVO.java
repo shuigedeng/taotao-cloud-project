@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.api.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.common.constant;
 
-import com.taotao.cloud.common.constant.RuleConstant;
+import com.taotao.boot.common.constant.RuleConstant;
 import com.taotao.cloud.sys.api.constant.PinyinConstants;
 
 /**

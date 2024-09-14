@@ -24,7 +24,7 @@ import com.taotao.cloud.auth.biz.authentication.processor.RSACryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampManager;
 import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampManager;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;

@@ -18,8 +18,8 @@ package com.taotao.cloud.member.application.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.application.service.IMemberService;
 import com.taotao.cloud.member.application.service.IMemberSignService;
 import com.taotao.cloud.member.common.enums.SettingCategoryEnum;

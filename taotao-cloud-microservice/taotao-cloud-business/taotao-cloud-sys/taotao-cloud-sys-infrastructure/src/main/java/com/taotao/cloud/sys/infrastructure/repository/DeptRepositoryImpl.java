@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.infrastructure.repository;
 
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.data.mybatis.utils.MybatisUtil;
 import com.taotao.cloud.data.mybatis.utils.TransactionalUtil;
 import com.taotao.cloud.sys.domain.dept.entity.DeptEntity;

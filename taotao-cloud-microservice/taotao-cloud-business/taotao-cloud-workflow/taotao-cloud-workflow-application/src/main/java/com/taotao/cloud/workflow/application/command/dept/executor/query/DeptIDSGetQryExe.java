@@ -4,7 +4,7 @@ package com.taotao.cloud.sys.application.command.dept.executor.query;
 
 
 import com.baomidou.dynamic.datasource.annotation.DS;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sys.application.command.dept.dto.DeptIDSGetQry;
 import com.taotao.cloud.sys.domain.dept.service.DeptDomainService;
 import java.util.List;

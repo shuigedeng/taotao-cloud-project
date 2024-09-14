@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.media.api.feign.fallback;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.media.api.feign.IFeignMediaService;
 import com.taotao.cloud.media.api.model.vo.FileVO;
 import org.springframework.cloud.openfeign.FallbackFactory;

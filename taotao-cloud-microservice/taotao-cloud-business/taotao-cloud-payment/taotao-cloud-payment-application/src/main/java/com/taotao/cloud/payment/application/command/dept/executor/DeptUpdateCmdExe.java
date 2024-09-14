@@ -4,7 +4,7 @@ package com.taotao.cloud.sys.application.command.dept.executor;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.sys.application.command.dept.dto.DeptUpdateCmd;
 import com.taotao.cloud.sys.application.command.dept.dto.clientobject.DeptCO;
 import com.taotao.cloud.sys.application.converter.DeptConvert;

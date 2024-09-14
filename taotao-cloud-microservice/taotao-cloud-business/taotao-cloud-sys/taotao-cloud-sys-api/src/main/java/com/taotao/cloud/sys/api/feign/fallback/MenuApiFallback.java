@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.MenuApi;
 import com.taotao.cloud.sys.api.feign.response.MenuQueryApiResponse;
 import java.util.List;

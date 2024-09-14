@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.supports.aggregate;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.aggregate.AggregateQueries;
 import com.taotao.cloud.data.mybatis.mybatisplus.aggregate.PaginationDTO;
 import org.springframework.web.bind.annotation.PostMapping;

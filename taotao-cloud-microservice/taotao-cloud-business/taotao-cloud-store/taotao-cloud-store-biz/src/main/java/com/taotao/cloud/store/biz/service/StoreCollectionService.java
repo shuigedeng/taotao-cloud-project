@@ -18,7 +18,7 @@ package com.taotao.cloud.store.biz.service; // package com.taotao.cloud.store.bi
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.baomidou.mybatisplus.extension.service.IService;
-// import com.taotao.cloud.common.model.PageQuery;
+// import com.taotao.boot.common.model.PageQuery;
 // import com.taotao.cloud.store.api.vo.StoreCollectionVO;
 // import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 //

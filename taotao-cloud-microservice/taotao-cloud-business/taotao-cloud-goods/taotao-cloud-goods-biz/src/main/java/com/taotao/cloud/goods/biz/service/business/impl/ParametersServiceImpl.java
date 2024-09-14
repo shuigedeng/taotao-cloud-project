@@ -18,8 +18,8 @@ package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsDTO;
 import com.taotao.cloud.goods.biz.model.dto.GoodsParamsItemDTO;
 import com.taotao.cloud.goods.biz.mapper.IParametersMapper;

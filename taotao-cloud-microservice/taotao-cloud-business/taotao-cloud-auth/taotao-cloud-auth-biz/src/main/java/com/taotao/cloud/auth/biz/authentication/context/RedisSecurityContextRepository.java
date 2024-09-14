@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.authentication.context;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.function.Supplier;

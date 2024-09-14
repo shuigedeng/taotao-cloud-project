@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.schedule.task;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.job.schedule.model.ScheduledTask;
 import com.taotao.cloud.job.schedule.task.TaskManager;
 import java.time.LocalDateTime;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shorlink.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.shorlink.api.feign.fallback.FeignShortLinkApiFallback;
 import com.taotao.cloud.shorlink.api.feign.request.FeignSysLogRequest;
 import com.taotao.cloud.shorlink.api.feign.response.FeignLogsResponse;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.service.impl;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.goods.application.command.category.dto.CategoryAddCmd;
 import com.taotao.cloud.goods.application.command.category.dto.CategorySearchQry;
 import com.taotao.cloud.goods.application.command.category.dto.CategoryUpdateCmd;

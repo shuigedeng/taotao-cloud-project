@@ -21,10 +21,10 @@ package com.taotao.cloud.member.application.service.impl; // package
 // import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 // import com.baomidou.mybatisplus.core.metadata.IPage;
 // import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
-// import com.taotao.cloud.common.model.PageQuery;
-// import com.taotao.cloud.common.utils.common.SecurityUtil;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
+// import com.taotao.boot.common.model.PageQuery;
+// import com.taotao.boot.common.utils.common.SecurityUtil;
 // import com.taotao.cloud.store.api.vo.StoreCollectionVO;
 // import com.taotao.cloud.member.biz.entity.MemberStoreCollection;
 // import com.taotao.cloud.member.biz.mapper.StoreCollectionMapper;

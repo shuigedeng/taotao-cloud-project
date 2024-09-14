@@ -17,7 +17,7 @@
 package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.store.api.model.dto.AdminStoreApplyDTO;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.JpaEntityListener;

@@ -17,9 +17,9 @@
 package com.taotao.cloud.order.facade.controller.seller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.order.application.command.cart.dto.clientobject.OrderExportCO;
 import com.taotao.cloud.order.application.command.cart.dto.TradeAddCmd;
 import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderDetailCO;

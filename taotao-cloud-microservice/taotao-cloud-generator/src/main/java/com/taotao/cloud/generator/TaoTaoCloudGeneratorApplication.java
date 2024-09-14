@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.generator;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import net.maku.generator.autoconfigure.GeneratorAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;

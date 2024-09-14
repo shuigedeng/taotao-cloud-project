@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.payment.biz.kit.plugin.wallet;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.DepositServiceTypeEnum;
 import com.taotao.cloud.member.api.feign.MemberWalletApi;
 import com.taotao.cloud.member.api.model.dto.MemberWalletUpdateDTO;

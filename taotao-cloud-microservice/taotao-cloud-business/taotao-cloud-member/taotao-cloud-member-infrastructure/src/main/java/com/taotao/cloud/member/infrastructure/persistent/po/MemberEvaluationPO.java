@@ -18,8 +18,8 @@ package com.taotao.cloud.member.infrastructure.persistent.po;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.enums.SwitchEnum;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

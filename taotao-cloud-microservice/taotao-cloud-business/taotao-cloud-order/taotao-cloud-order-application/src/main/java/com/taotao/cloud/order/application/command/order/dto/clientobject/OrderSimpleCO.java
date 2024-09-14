@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.command.order.dto.clientobject;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.enums.order.DeliverStatusEnum;
 import com.taotao.cloud.order.api.enums.order.OrderComplaintStatusEnum;

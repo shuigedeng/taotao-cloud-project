@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.order.api.feign.fallback.FeignTradeApiFallback;
 import com.taotao.cloud.order.api.feign.response.TradeApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -16,7 +16,7 @@
 //
 //package com.taotao.cloud.sys.biz.controller.feign;
 //
-//import com.taotao.cloud.common.model.BaseSecurityUser;
+//import com.taotao.boot.common.model.BaseSecurityUser;
 //import com.taotao.cloud.sys.api.feign.IFeignUserApi;
 //import com.taotao.cloud.sys.biz.model.vo.user.UserQueryVO;
 //import com.taotao.cloud.sys.biz.model.entity.system.User;

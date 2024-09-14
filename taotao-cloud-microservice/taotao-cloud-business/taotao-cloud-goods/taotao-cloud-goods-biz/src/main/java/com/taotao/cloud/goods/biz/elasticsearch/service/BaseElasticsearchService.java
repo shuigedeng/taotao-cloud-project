@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.elasticsearch.service;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

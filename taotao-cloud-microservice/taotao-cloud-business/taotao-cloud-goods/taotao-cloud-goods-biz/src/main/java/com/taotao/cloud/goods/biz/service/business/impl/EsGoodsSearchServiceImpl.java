@@ -17,9 +17,9 @@
 package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.alibaba.druid.util.StringUtils;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.biz.model.dto.HotWordsDTO;

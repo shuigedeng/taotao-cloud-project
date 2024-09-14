@@ -17,19 +17,19 @@
 package com.taotao.cloud.sys.api.feign;
 
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.BaseSecurityUser;
-import com.taotao.cloud.common.support.info.ApiInfo;
-import com.taotao.cloud.common.support.info.Create;
-import com.taotao.cloud.common.support.info.Update;
+import com.taotao.boot.common.constant.ServiceName;
+import com.taotao.boot.common.model.BaseSecurityUser;
+import com.taotao.boot.common.support.info.ApiInfo;
+import com.taotao.boot.common.support.info.Create;
+import com.taotao.boot.common.support.info.Update;
 import com.taotao.cloud.sys.api.feign.fallback.UserApiFallback;
 import com.taotao.cloud.sys.api.feign.response.UserQueryApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static com.taotao.cloud.common.support.info.ApiVersionEnum.V2022_07;
-import static com.taotao.cloud.common.support.info.ApiVersionEnum.V2022_08;
+import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_07;
+import static com.taotao.boot.common.support.info.ApiVersionEnum.V2022_08;
 
 /**
  * 远程调用后台用户模块

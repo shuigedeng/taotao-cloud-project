@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.SwitchEnum;
+import com.taotao.boot.common.enums.SwitchEnum;
 import com.taotao.cloud.message.api.enums.NoticeMessageParameterEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import com.taotao.cloud.web.base.entity.JpaEntityListener;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

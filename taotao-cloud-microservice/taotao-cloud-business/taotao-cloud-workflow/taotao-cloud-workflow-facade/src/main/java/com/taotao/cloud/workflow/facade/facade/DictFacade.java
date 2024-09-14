@@ -1,7 +1,7 @@
 package com.taotao.cloud.workflow.facade.facade;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.idempotent.annotation.Idempotent;
 import com.taotao.cloud.ratelimit.annotation.GuavaLimit;
 import com.taotao.cloud.ratelimit.annotation.Limit;

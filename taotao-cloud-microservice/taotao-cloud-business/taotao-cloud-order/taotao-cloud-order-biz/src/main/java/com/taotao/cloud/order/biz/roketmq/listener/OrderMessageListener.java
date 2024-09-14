@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.biz.roketmq.listener;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.message.OrderMessage;
 import com.taotao.cloud.order.biz.roketmq.event.OrderStatusChangeEvent;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.vo.menu;
 
-import com.taotao.cloud.common.tree.MapperNode;
+import com.taotao.boot.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sys.biz.model.dto.LoginLogDto;
 import com.taotao.cloud.sys.biz.model.param.LoginLogParam;
 import com.taotao.cloud.sys.biz.service.LoginLogService;

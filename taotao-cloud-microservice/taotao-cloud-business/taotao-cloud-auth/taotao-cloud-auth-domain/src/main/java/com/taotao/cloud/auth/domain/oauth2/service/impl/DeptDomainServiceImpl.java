@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.auth.domain.oauth2.entity.DeptEntity;
 import com.taotao.cloud.auth.domain.oauth2.repository.DeptRepository;
 import com.taotao.cloud.auth.domain.oauth2.service.DeptDomainService;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 
 public class DeptDomainServiceImpl implements DeptDomainService {
 

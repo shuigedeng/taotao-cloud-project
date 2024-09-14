@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.facade.controller.management;
 
 import com.taotao.cloud.auth.api.model.dto.SignInErrorPrompt;
 import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

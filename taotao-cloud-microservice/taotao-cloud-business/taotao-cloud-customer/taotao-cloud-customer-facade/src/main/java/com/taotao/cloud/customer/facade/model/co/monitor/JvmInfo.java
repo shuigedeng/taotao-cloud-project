@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.adapter.model.co.monitor;
 
-import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstant;
 import java.lang.management.ManagementFactory;
 import java.math.BigDecimal;
 import lombok.Data;

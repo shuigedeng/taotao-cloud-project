@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.infrastructure.extension.face.baidu;
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.face.MatchRequest;
 import com.baidu.aip.util.Base64Util;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;

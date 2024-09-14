@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.finishedproduct.FinishedProductEntryEntityInfoModel;
 import com.taotao.cloud.workflow.biz.common.model.form.finishedproduct.FinishedProductForm;
 import com.taotao.cloud.workflow.biz.common.model.form.finishedproduct.FinishedProductInfoVO;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.anti_reptile.util;
 
-import com.taotao.cloud.captcha.captcha.utils.CaptchaUtil;
+import com.taotao.boot.captcha.captcha.utils.CaptchaUtil;
 import com.taotao.cloud.gateway.anti_reptile.module.VerifyImageDTO;
 import java.io.ByteArrayOutputStream;
 import java.time.Duration;

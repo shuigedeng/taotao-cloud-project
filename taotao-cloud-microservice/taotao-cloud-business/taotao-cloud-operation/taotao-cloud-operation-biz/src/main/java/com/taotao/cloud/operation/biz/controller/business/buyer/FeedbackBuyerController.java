@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.biz.controller.business.buyer;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.operation.biz.model.entity.Feedback;
 import com.taotao.cloud.operation.biz.service.business.FeedbackService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

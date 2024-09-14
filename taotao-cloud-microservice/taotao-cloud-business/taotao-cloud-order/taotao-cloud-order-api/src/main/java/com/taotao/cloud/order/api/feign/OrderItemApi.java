@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.order.api.enums.order.CommentStatusEnum;
 import com.taotao.cloud.order.api.feign.fallback.FeignOrderItemApiFallback;
 import com.taotao.cloud.order.api.feign.request.OrderItemSaveApiRequest;

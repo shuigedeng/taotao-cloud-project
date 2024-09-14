@@ -21,9 +21,9 @@ package com.taotao.cloud.message.biz.service.business.impl; // package
 // import org.dromara.hutooljson.JSONObject;
 // import org.dromara.hutooljson.JSONUtil;
 // import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-// import com.taotao.cloud.common.enums.ClientTypeEnum;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
+// import com.taotao.boot.common.enums.ClientTypeEnum;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
 // import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
 // import com.taotao.cloud.message.biz.entity.WechatMessage;
 // import com.taotao.cloud.message.biz.mapper.WechatMessageMapper;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.command.recharge.dto;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

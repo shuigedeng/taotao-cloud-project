@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.goods.application.command.commodity.dto.CommodityAddCmd;
 import com.taotao.cloud.goods.application.command.commodity.dto.clientobject.CommoditySkuCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;

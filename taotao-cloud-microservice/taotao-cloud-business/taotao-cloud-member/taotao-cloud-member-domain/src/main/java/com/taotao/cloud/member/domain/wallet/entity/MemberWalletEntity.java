@@ -3,7 +3,7 @@ package com.taotao.cloud.member.domain.wallet.entity;
 
 import static lombok.AccessLevel.PRIVATE;
 
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.ddd.domain.model.AggregateRoot;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

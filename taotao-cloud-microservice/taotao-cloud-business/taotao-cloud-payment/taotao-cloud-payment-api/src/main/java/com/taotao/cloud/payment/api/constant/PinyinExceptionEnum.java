@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.api.constant;
 
 
-import static com.taotao.cloud.common.constant.RuleConstant.THIRD_ERROR_TYPE_CODE;
+import static com.taotao.boot.common.constant.RuleConstant.THIRD_ERROR_TYPE_CODE;
 
 /**
  * 拼音工具相关异常

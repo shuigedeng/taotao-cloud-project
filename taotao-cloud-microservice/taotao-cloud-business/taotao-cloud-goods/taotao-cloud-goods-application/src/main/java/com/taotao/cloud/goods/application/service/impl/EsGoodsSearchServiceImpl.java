@@ -17,9 +17,9 @@
 package com.taotao.cloud.goods.application.service.impl;
 
 import com.alibaba.druid.util.StringUtils;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.application.elasticsearch.entity.EsGoodsIndex;
 import com.taotao.cloud.goods.application.elasticsearch.pojo.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.application.service.IEsGoodsIndexService;

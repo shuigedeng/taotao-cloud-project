@@ -19,7 +19,7 @@ package com.taotao.cloud.member.application.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.member.application.service.IMemberBrowseService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IFootprintMapper;
 import com.taotao.cloud.member.infrastructure.persistent.po.MemberBrowsePO;

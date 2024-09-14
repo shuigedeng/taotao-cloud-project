@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.application.command.specification.dto.clientobject;
 
-import com.taotao.cloud.common.model.PageResult;
+import com.taotao.boot.common.model.PageResult;
 import com.taotao.cloud.goods.application.command.goods.dto.clientobject.GoodsSkuCO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

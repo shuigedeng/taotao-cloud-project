@@ -19,8 +19,8 @@ package com.taotao.cloud.message.biz.controller.business.manager; // package
 //
 // import org.dromara.hutoolcore.util.PageUtil;
 // import com.baomidou.mybatisplus.core.metadata.IPage;
-// import com.taotao.cloud.common.constant.CommonConstant;
-// import com.taotao.cloud.common.model.Result;
+// import com.taotao.boot.common.constant.CommonConstant;
+// import com.taotao.boot.common.model.Result;
 // import com.taotao.cloud.logger.annotation.RequestLogger;
 // import io.swagger.v3.oas.annotations.Operation;
 // import io.swagger.v3.oas.annotations.tags.Tag;

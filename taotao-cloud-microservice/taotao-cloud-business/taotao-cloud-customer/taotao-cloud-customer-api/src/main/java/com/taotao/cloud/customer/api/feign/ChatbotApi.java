@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.customer.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.constant.ServiceName;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.customer.api.feign.fallback.ChatbotApiFallback;
 import com.taotao.cloud.customer.api.model.vo.ChatbotVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -40,7 +40,7 @@ public interface ChatbotApi {
      * 根据id查询机器人客服信息o
      *
      * @param id id
-     * @return com.taotao.cloud.core.model.Result<ChatbotVO>
+     * @return com.taotao.boot.core.model.Result<ChatbotVO>
      * @author shuigedeng
      * @version 2022.03
      * @since 2020/11/20 上午10:45

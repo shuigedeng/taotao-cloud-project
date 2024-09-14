@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.xxljob;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
 import org.springframework.stereotype.Component;
 

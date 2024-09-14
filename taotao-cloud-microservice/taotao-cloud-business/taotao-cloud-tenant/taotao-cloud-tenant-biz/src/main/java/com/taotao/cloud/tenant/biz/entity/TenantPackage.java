@@ -17,7 +17,7 @@
 package com.taotao.cloud.tenant.biz.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.GlobalStatusEnum;
+import com.taotao.boot.common.enums.GlobalStatusEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import lombok.Data;
 

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.media.api.model.query;
 
-import com.taotao.cloud.common.enums.SwitchEnum;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.enums.SwitchEnum;
+import com.taotao.boot.common.model.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

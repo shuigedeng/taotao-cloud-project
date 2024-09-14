@@ -24,7 +24,7 @@ import com.taotao.cloud.auth.application.service.impl.Oauth2ClientDetailsService
 import com.taotao.cloud.auth.infrastructure.authentication.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.TtcUserDetailsService;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.StrategyUserDetailsService;
-import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
+import com.taotao.boot.captcha.support.core.processor.CaptchaRendererFactory;
 import com.taotao.cloud.security.springsecurity.authentication.filter.ExtensionLoginRefreshTokenFilter;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.ExtensionLoginFilterSecurityConfigurer;
 import com.taotao.cloud.security.springsecurity.authentication.login.extension.account.service.AccountUserDetailsService;

@@ -3,13 +3,13 @@
 package com.taotao.cloud.goods.application.command.category.executor.query;
 
 
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
+import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 import static com.taotao.cloud.goods.common.constant.GoodsConstants.DELETE_FLAG_COLUMN;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryPO;
 import java.util.ArrayList;

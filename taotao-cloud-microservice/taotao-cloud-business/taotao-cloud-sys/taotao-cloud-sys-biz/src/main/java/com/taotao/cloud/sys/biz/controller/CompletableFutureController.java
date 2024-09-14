@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;

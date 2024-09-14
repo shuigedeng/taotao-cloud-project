@@ -21,10 +21,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.biz.model.convert.CategoryConvert;
@@ -44,8 +44,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY;
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
+import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY;
+import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 
 /**
  * 商品分类业务层实现

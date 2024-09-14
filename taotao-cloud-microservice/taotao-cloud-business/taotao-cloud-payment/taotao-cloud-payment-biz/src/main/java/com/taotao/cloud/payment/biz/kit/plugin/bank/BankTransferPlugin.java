@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.kit.plugin.bank;
 
-import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.entity.RefundLog;
 import com.taotao.cloud.payment.biz.kit.Payment;

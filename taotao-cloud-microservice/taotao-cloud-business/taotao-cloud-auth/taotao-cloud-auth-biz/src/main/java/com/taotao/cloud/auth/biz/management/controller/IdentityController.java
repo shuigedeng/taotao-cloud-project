@@ -24,7 +24,7 @@ import com.taotao.cloud.auth.biz.management.dto.SessionCreate;
 import com.taotao.cloud.auth.biz.management.dto.SessionExchange;
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
 import com.taotao.cloud.auth.biz.management.service.InterfaceSecurityService;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

@@ -4,8 +4,8 @@ package com.taotao.cloud.sys.application.command.dict.executor;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sys.application.adapter.DictAdapter;
 import com.taotao.cloud.sys.application.command.dict.dto.DictInsertCmd;
 import com.taotao.cloud.sys.application.command.dict.dto.clientobject.DictCO;

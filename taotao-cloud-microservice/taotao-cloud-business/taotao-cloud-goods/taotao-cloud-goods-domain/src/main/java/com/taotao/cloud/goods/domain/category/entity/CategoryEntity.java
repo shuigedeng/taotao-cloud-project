@@ -3,7 +3,7 @@ package com.taotao.cloud.goods.domain.category.entity;
 
 import static lombok.AccessLevel.PRIVATE;
 
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

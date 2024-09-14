@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.operation.api.model.dto;
 
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.cloud.operation.api.enums.PageEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

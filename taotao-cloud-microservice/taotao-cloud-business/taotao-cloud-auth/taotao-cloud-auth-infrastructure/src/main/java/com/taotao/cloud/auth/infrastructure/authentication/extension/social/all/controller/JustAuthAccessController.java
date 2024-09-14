@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.infrastructure.authentication.extension.social.all
 import com.google.common.collect.ImmutableMap;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.event.AutomaticSignInEvent;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.processor.JustAuthProcessor;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

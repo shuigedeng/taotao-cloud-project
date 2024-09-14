@@ -1,7 +1,7 @@
 package com.taotao.cloud.wechat.domain.dict.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.wechat.domain.dict.entity.DictEntity;
 import com.taotao.cloud.wechat.domain.dict.repository.DictRepository;
 import com.taotao.cloud.wechat.domain.dict.service.DictDomainService;

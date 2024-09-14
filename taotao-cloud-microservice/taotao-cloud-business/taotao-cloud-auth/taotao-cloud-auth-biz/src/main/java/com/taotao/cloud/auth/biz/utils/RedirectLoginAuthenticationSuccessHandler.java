@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.utils;
 
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

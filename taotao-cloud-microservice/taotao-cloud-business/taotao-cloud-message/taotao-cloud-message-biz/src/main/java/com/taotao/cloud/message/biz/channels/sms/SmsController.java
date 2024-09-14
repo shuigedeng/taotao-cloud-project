@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.web;
 
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.sms.common.exception.VerificationCodeIsNullException;
 import com.taotao.cloud.sms.common.exception.VerifyFailException;
 import com.taotao.cloud.sms.common.model.NoticeInfo;

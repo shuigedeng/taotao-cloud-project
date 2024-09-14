@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.util;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowModel;
 import com.taotao.cloud.workflow.biz.common.util.context.SpringContext;
 import com.taotao.cloud.workflow.biz.engine.service.FlowTaskNewService;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.service.business.impl;
 
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.sys.api.dubbo.request.MenuQueryRpcRequest;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;

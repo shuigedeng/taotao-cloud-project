@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.member.api.feign.fallback.MemberWalletApiFallback;
 import com.taotao.cloud.member.api.feign.request.MemberWalletUpdateApiRequest;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.infrastructure.extension.face.baidu;
 
-import com.taotao.cloud.common.utils.io.ResourceUtils;
-import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.io.ResourceUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.File;
 import java.io.IOException;

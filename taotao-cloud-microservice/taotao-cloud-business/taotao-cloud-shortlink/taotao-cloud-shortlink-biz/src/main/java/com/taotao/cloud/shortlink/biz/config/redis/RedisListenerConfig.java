@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.shortlink.biz.config.redis;
 
-import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
-import com.taotao.cloud.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
+import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolExecutor;
+import com.taotao.boot.core.configuration.MonitorAutoConfiguration.MonitorThreadPoolFactory;
 import com.taotao.cloud.shortlink.biz.config.redis.delegate.RequestLogTopicMessageDelegate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

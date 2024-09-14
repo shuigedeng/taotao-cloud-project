@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.recommend;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.cloud.recommend.dto.ItemDTO;
 import com.taotao.cloud.recommend.service.Recommend;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;

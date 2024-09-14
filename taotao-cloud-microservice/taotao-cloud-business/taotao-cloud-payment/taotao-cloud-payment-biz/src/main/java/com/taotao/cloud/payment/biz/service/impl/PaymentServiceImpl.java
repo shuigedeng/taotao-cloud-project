@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.service.impl;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;
 import com.taotao.cloud.payment.biz.kit.dto.PaymentSuccessParams;
 import com.taotao.cloud.payment.biz.kit.params.CashierExecute;

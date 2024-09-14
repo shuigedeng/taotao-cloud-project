@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.infrastructure.extension.qrcocde.tmp1;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.exception.BaseException;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;

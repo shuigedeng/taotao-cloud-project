@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.facade.controller.seller;
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage;
-// import com.taotao.cloud.common.model.Result;
+// import com.taotao.boot.common.model.Result;
 // import com.taotao.cloud.web.utils.OperationalJudgment;
 // import com.taotao.cloud.logger.annotation.RequestLogger;
 // import com.taotao.cloud.store.api.query.BillPageQuery;

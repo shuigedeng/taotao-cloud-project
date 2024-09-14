@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.application.command.order.dto.clientobject;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.cloud.order.api.enums.order.PayStatusEnum;
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,8 +1,8 @@
 package com.taotao.cloud.gateway.authentication;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;

@@ -18,9 +18,9 @@ package com.taotao.cloud.member.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.sys.model.vo.MemberSignVO;
 import com.taotao.cloud.member.biz.mapper.IMemberSignMapper;

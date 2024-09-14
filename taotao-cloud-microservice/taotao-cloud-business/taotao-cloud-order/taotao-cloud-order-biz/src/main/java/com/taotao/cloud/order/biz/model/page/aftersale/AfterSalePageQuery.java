@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.model.page.aftersale;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleStatusEnum;
 import com.taotao.cloud.order.api.enums.trade.AfterSaleTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;

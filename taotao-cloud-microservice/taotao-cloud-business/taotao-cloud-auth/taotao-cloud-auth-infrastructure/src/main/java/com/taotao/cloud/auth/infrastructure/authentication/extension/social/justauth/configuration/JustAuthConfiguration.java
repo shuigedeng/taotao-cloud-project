@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.infrastructure.authentication.extension.social.just
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.processor.JustAuthProcessor;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.properties.JustAuthProperties;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.stamp.JustAuthStateStampManager;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

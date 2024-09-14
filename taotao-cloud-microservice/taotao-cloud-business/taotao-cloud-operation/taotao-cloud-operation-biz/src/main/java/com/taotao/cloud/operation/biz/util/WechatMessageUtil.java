@@ -20,10 +20,10 @@ package com.taotao.cloud.operation.biz.util; // package com.taotao.cloud.message
 // import org.dromara.hutooljson.JSONObject;
 // import org.dromara.hutooljson.JSONUtil;
 // import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-// import com.taotao.cloud.common.enums.ClientTypeEnum;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
-// import com.taotao.cloud.common.utils.date.DateUtils;
+// import com.taotao.boot.common.enums.ClientTypeEnum;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
+// import com.taotao.boot.common.utils.date.DateUtils;
 // import com.taotao.cloud.message.api.enums.WechatMessageItemEnums;
 // import com.taotao.cloud.message.biz.entity.WechatMPMessage;
 // import com.taotao.cloud.message.biz.entity.WechatMessage;

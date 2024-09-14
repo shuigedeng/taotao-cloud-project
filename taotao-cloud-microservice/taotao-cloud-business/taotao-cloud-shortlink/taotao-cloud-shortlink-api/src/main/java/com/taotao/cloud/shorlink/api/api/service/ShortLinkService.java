@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shorlink.api.api.service;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.shorlink.api.api.common.PageResult;
 import com.taotao.cloud.shorlink.api.api.dto.ShortLinkDTO;
 import com.taotao.cloud.shorlink.api.api.request.ShortLinkCreateRequest;

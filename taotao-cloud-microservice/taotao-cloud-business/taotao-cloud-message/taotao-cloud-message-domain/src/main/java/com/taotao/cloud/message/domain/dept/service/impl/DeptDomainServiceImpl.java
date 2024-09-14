@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.domain.dept.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.message.domain.dept.entity.DeptEntity;
 import com.taotao.cloud.message.domain.dept.repository.DeptRepository;
 import com.taotao.cloud.message.domain.dept.service.DeptDomainService;

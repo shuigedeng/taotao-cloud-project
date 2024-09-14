@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.exception.InvalidTokenException;
 import com.taotao.cloud.security.springsecurity.access.security.SecurityConfigAttribute;
 import com.taotao.cloud.security.springsecurity.access.security.SecurityRequest;

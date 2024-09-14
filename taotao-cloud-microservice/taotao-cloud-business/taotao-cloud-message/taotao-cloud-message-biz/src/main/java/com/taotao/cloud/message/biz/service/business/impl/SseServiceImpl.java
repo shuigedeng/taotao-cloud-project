@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.service.business.impl;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.message.biz.service.business.SseService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;

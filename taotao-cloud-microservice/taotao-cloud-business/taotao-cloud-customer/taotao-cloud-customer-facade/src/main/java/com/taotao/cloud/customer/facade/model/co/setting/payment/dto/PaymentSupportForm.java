@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.adapter.model.co.setting.payment.dto;
 
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;

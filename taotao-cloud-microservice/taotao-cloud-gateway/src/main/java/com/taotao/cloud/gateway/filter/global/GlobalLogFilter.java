@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.ai;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

@@ -20,10 +20,10 @@ package com.taotao.cloud.im.biz.service.impl; // package com.taotao.cloud.wechat
 // import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 // import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 // 
-// import com.taotao.cloud.common.enums.ClientTypeEnum;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
-// import com.taotao.cloud.common.utils.number.CurrencyUtil;
+// import com.taotao.boot.common.enums.ClientTypeEnum;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
+// import com.taotao.boot.common.utils.number.CurrencyUtil;
 // import com.taotao.cloud.wechat.biz.mapper.PlatformViewMapper;
 // import com.taotao.cloud.wechat.biz.model.entity.PlatformViewData;
 // import com.taotao.cloud.wechat.biz.service.MemberStatisticsService;

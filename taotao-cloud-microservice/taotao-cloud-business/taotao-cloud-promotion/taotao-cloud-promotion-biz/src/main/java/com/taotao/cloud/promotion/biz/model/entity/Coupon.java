@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;
 import com.taotao.cloud.promotion.api.enums.CouponTypeEnum;

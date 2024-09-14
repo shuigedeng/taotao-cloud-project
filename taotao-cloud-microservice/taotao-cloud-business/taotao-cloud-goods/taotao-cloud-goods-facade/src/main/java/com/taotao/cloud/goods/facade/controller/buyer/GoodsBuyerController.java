@@ -17,8 +17,8 @@
 package com.taotao.cloud.goods.facade.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.cloud.goods.application.command.goods.dto.clientobject.GoodsCO;
 import com.taotao.cloud.goods.application.command.goods.dto.clientobject.GoodsSkuParamsCO;

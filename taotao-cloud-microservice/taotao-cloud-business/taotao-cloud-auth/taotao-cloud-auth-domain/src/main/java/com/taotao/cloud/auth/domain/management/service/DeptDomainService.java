@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.domain.management.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.auth.domain.management.entity.DeptEntity;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 
 public interface DeptDomainService {
 

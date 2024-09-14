@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.service.cart.render;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.order.application.service.order.ITradeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

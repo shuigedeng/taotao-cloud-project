@@ -1,7 +1,7 @@
 package com.taotao.cloud.sys.biz.controller.async;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.core.configuration.AsyncAutoConfiguration;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.core.configuration.AsyncAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;

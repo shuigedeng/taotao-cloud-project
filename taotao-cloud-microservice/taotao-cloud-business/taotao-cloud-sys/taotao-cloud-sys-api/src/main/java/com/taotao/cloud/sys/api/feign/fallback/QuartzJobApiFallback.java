@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.feign.fallback;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.QuartzJobApi;
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
 import org.springframework.cloud.openfeign.FallbackFactory;

@@ -20,9 +20,9 @@ package com.taotao.cloud.message.biz.util; // package com.taotao.cloud.message.b
 // import org.dromara.hutooljson.JSONObject;
 // import com.google.gson.Gson;
 // 
-// import com.taotao.cloud.common.enums.ClientTypeEnum;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
+// import com.taotao.boot.common.enums.ClientTypeEnum;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
 // import com.taotao.cloud.redis.repository.RedisRepository;
 // import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 // import com.taotao.cloud.sys.api.setting.connect.WechatConnectSetting;

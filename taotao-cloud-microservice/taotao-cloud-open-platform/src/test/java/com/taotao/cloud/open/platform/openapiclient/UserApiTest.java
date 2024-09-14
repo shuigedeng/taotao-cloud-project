@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.open.platform.openapiclient;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.openapi.client.OpenApiClient;
 import com.taotao.cloud.openapi.client.OpenApiClientBuilder;
 import com.taotao.cloud.openapi.client.model.Gender;

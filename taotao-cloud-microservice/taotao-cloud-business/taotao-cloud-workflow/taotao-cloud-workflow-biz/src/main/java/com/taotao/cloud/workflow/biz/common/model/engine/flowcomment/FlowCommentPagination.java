@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.common.model.engine.flowcomment;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import lombok.Data;
 
 /** */

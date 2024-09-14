@@ -17,10 +17,10 @@
 package com.taotao.cloud.sys.biz.controller;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.model.ValidList;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.model.ValidList;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.vo.UploadFileVO;
 import com.taotao.cloud.sys.biz.config.properties.TestProperties;

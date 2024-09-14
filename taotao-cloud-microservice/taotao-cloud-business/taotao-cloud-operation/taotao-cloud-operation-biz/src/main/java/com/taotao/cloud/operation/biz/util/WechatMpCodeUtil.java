@@ -17,10 +17,10 @@
 package com.taotao.cloud.operation.biz.util; // package com.taotao.cloud.message.biz.util;
 //
 // import com.alibaba.fastjson.JSON;
-// import com.taotao.cloud.common.enums.ClientTypeEnum;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
-// import com.taotao.cloud.common.utils.log.LogUtils;
+// import com.taotao.boot.common.enums.ClientTypeEnum;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
+// import com.taotao.boot.common.utils.log.LogUtils;
 // import com.taotao.cloud.message.biz.entity.ShortLink;
 // import com.taotao.cloud.message.biz.service.ShortLinkService;
 // import lombok.SneakyThrows;

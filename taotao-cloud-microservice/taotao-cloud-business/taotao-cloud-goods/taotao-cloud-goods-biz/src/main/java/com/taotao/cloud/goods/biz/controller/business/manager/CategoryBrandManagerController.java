@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.controller.business.manager;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.goods.biz.model.vo.CategoryBrandVO;
 import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.facade.controller.seller;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;

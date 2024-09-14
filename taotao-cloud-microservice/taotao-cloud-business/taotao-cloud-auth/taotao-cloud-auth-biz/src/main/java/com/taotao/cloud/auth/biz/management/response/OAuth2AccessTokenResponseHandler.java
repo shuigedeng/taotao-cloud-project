@@ -19,8 +19,8 @@ package com.taotao.cloud.auth.biz.management.response;
 import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
 
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.BaseConstants;
 import com.taotao.cloud.security.springsecurity.core.constants.HttpHeaders;
 import com.taotao.cloud.security.springsecurity.core.domain.PrincipalDetails;

@@ -24,7 +24,7 @@ import com.taotao.cloud.auth.infrastructure.compliance.listener.AuthenticationSu
 import com.taotao.cloud.auth.infrastructure.crypto.AESCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.stamp.SignInFailureLimitedStampManager;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

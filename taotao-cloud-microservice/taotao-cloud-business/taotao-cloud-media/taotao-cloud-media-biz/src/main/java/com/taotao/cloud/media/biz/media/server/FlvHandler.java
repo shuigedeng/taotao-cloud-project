@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.biz.media.server;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.media.common.MediaConstant;
 import com.taotao.cloud.media.biz.media.dto.CameraDto;
 import com.taotao.cloud.media.biz.media.service.MediaService;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.infratructure.persistent.member.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

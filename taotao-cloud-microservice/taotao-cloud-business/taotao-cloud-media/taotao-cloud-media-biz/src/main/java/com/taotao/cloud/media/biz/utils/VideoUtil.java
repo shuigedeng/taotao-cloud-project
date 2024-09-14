@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.biz.utils;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;

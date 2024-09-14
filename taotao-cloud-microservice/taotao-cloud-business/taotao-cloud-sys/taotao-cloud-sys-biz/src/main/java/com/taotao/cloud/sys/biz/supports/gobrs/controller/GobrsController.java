@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.supports.gobrs.controller;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.supports.gobrs.service.GobrsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

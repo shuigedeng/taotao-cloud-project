@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.sys.biz.config.redis;
 
-import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.support.thread.MDCThreadPoolExecutor;
-import com.taotao.cloud.common.support.thread.ThreadPoolFactory;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.support.thread.MDCThreadPoolExecutor;
+import com.taotao.boot.common.support.thread.ThreadPoolFactory;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;

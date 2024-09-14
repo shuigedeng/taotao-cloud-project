@@ -23,7 +23,7 @@ import com.taotao.cloud.auth.application.login.extension.qrcocde.tmp.entity.User
 import com.taotao.cloud.auth.application.login.extension.qrcocde.tmp.utils.CommonUtil;
 import com.taotao.cloud.auth.application.login.extension.qrcocde.tmp.utils.HostHolder;
 import com.taotao.cloud.auth.application.login.extension.qrcocde.tmp.utils.LoginConstant;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;

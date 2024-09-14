@@ -19,7 +19,7 @@ package com.taotao.cloud.promotion.biz.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.promotion.biz.mapper.PointsGoodsCategoryMapper;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoodsCategory;
 import com.taotao.cloud.promotion.biz.service.business.IPointsGoodsCategoryService;

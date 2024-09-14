@@ -2,11 +2,11 @@
 
 package com.taotao.cloud.goods.application.command.category.executor.query;
 
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY;
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
+import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY;
+import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY_ARRAY;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
 import com.taotao.cloud.goods.application.convert.CategoryConvert;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryMapper;

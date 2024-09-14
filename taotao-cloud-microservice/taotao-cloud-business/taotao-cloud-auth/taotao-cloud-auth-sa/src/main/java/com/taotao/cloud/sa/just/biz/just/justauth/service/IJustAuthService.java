@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sa.just.biz.just.justauth.service;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocial;
 import com.taotao.cloud.sa.just.biz.just.justauth.entity.JustAuthSocialUser;
 import jakarta.validation.constraints.NotBlank;

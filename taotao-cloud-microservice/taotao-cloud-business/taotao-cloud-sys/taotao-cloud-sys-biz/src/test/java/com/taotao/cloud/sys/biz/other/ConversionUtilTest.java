@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.other;
 import static shorturl.server.server.application.util.ConversionUtil.decode;
 import static shorturl.server.server.application.util.ConversionUtil.encode;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.Test;
 import shorturl.server.server.application.util.DefaultIdWorker;

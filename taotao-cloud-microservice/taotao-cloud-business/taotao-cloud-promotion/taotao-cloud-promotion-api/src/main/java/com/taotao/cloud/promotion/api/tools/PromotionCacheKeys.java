@@ -17,7 +17,7 @@
 package com.taotao.cloud.promotion.api.tools;
 
 
-import static com.taotao.cloud.common.enums.CachePrefixEnum.*;
+import static com.taotao.boot.common.enums.CachePrefixEnum.*;
 
 /** 满额活动缓存Key */
 public class PromotionCacheKeys {

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.tenant.api.feign.fallback;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import org.springframework.cloud.openfeign.FallbackFactory;

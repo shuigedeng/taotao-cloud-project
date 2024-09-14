@@ -43,7 +43,7 @@ import com.taotao.cloud.auth.biz.management.processor.Oauth2ClientDetailsService
 import com.taotao.cloud.auth.biz.management.processor.SecurityUserDetailsService;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.biz.strategy.StrategyUserDetailsService;
-import com.taotao.cloud.captcha.support.core.processor.CaptchaRendererFactory;
+import com.taotao.boot.captcha.support.core.processor.CaptchaRendererFactory;
 import com.taotao.cloud.security.springsecurity.core.response.SecurityAccessDeniedHandler;
 import com.taotao.cloud.security.springsecurity.core.response.SecurityAuthenticationEntryPoint;
 import com.taotao.cloud.security.springsecurity.customizer.SecurityTokenStrategyConfigurer;

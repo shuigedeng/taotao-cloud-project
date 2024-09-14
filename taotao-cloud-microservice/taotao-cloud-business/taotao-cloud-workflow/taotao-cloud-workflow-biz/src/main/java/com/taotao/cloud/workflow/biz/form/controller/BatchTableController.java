@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.common.model.form.batchtable.BatchTableForm;
 import com.taotao.cloud.workflow.biz.common.model.form.batchtable.BatchTableInfoVO;

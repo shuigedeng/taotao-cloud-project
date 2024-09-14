@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.message.biz.web;
 
-import com.taotao.cloud.common.utils.lang.StringUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sms.common.model.NoticeInfo;
 import com.taotao.cloud.sms.common.model.VerifyInfo;
 import java.lang.reflect.Method;

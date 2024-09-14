@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.biz.authentication.stamp;
 
 import com.taotao.cloud.auth.biz.exception.MaximumLimitExceededException;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.captcha.support.core.definition.AbstractRenderer;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.crypto.SecureUtil;

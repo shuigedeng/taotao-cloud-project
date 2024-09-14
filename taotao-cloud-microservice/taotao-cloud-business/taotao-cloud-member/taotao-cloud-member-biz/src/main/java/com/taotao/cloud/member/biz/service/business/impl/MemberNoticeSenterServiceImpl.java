@@ -17,9 +17,9 @@
 package com.taotao.cloud.member.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.member.api.enums.SendTypeEnum;
 import com.taotao.cloud.member.biz.mapper.IMemberNoticeSenterMapper;
 import com.taotao.cloud.member.biz.model.entity.Member;

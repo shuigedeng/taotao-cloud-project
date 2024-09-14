@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.biz.opencv.demo;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.opencv.common.BaseController;
 import com.taotao.cloud.media.biz.opencv.common.utils.Constants;
 import jakarta.servlet.http.HttpServletRequest;

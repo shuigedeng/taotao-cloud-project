@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.sql.SqlInjectionUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.sql.SqlInjectionUtils;
 import com.taotao.cloud.gateway.utils.WebFluxUtil;
 import io.netty.buffer.ByteBufAllocator;
 import java.net.URI;

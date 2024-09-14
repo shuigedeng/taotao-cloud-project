@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.wechat.facade.model.co.dept;
 
-import com.taotao.cloud.common.tree.INode;
-import com.taotao.cloud.common.tree.MapperNode;
+import com.taotao.boot.common.tree.INode;
+import com.taotao.boot.common.tree.MapperNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.time.LocalDateTime;

@@ -17,8 +17,8 @@
 package com.taotao.cloud.wechat.biz.util; // package com.taotao.cloud.wechat.biz.util;
 //
 //
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.exception.BusinessException;
 //
 // import java.util.Calendar;
 // import java.util.Date;

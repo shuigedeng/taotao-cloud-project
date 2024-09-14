@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit.params.dto;
 
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

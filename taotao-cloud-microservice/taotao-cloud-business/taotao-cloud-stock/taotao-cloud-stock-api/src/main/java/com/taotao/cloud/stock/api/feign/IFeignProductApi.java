@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.stock.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.stock.api.feign.fallback.FeignProductFallback;
 import com.taotao.cloud.stock.api.model.dto.ProductDTO;
 import com.taotao.cloud.stock.api.model.vo.ProductVO;
@@ -42,7 +42,7 @@ public interface IFeignProductApi {
      * 根据id查询商品信息
      *
      * @param id id
-     * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
+     * @return com.taotao.boot.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
      * @author shuigedeng
      * @since 2020/11/20 下午3:23
      * @version 2022.03
@@ -54,7 +54,7 @@ public interface IFeignProductApi {
      * 添加商品信息
      *
      * @param productDTO productDTO
-     * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
+     * @return com.taotao.boot.core.model.Result<com.taotao.cloud.product.api.vo.ProductVO>
      * @author shuigedeng
      * @since 2020/11/20 下午3:23
      * @version 2022.03

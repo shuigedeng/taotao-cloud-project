@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.config.stream;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;

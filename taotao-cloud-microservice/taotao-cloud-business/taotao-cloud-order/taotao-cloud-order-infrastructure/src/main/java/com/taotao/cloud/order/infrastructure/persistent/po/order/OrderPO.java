@@ -17,9 +17,9 @@
 package com.taotao.cloud.order.infrastructure.persistent.po.order;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.CartTypeEnum;
 import com.taotao.cloud.order.api.enums.cart.DeliveryMethodEnum;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.form.controller;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.workflow.biz.common.model.form.rewardpunishment.RewardPunishmentForm;
 import com.taotao.cloud.workflow.biz.common.model.form.rewardpunishment.RewardPunishmentInfoVO;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskOperatorEntity;

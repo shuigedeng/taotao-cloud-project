@@ -18,13 +18,13 @@ package com.taotao.cloud.gateway.configuration;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.captcha.util.CaptchaUtils;
-import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.context.ContextUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.captcha.util.CaptchaUtils;
+import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.context.ContextUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.anti_reptile.constant.AntiReptileConsts;
 import com.taotao.cloud.gateway.anti_reptile.handler.RefreshFormHandler;
 import com.taotao.cloud.gateway.anti_reptile.handler.ValidateFormHandler;

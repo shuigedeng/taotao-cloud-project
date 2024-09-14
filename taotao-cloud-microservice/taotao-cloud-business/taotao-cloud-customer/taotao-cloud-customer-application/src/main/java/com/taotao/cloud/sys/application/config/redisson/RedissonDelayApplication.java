@@ -16,17 +16,17 @@
 
 package com.taotao.cloud.sys.application.config.redisson;
 
-import com.taotao.cloud.cache.redis.delay.MessageConversionException;
-import com.taotao.cloud.cache.redis.delay.annotation.RedissonListener;
-import com.taotao.cloud.cache.redis.delay.config.RedissonQueue;
-import com.taotao.cloud.cache.redis.delay.message.DefaultRedissonMessageConverter;
-import com.taotao.cloud.cache.redis.delay.message.MessageConverter;
-import com.taotao.cloud.cache.redis.delay.message.QueueMessage;
-import com.taotao.cloud.cache.redis.delay.message.QueueMessageBuilder;
-import com.taotao.cloud.cache.redis.delay.message.RedissonHeaders;
-import com.taotao.cloud.cache.redis.delay.message.RedissonMessage;
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.delay.MessageConversionException;
+import com.taotao.boot.cache.redis.delay.annotation.RedissonListener;
+import com.taotao.boot.cache.redis.delay.config.RedissonQueue;
+import com.taotao.boot.cache.redis.delay.message.DefaultRedissonMessageConverter;
+import com.taotao.boot.cache.redis.delay.message.MessageConverter;
+import com.taotao.boot.cache.redis.delay.message.QueueMessage;
+import com.taotao.boot.cache.redis.delay.message.QueueMessageBuilder;
+import com.taotao.boot.cache.redis.delay.message.RedissonHeaders;
+import com.taotao.boot.cache.redis.delay.message.RedissonMessage;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Map;
 import lombok.Data;
 import org.springframework.context.annotation.Bean;

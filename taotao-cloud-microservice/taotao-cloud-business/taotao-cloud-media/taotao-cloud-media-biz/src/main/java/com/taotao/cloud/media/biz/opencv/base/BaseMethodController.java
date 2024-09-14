@@ -24,7 +24,7 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.media.biz.opencv.common.BaseController;
 import com.taotao.cloud.media.biz.opencv.common.utils.CommonUtil;
 import com.taotao.cloud.media.biz.opencv.common.utils.Constants;

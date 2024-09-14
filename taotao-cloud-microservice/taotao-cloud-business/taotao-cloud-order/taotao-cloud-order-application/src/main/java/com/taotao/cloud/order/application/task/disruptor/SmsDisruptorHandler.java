@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.task.disruptor;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.eventbus.disruptor.tmp3.annotation.EventRule;
 import com.taotao.cloud.eventbus.disruptor.tmp3.event.DisruptorBindEvent;
 import com.taotao.cloud.eventbus.disruptor.tmp3.handler.DisruptorHandler;

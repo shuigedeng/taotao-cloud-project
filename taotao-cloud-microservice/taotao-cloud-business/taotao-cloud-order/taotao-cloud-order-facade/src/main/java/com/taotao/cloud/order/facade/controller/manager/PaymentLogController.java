@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.facade.controller.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.order.application.command.order.dto.clientobject.PaymentLogCO;
 import com.taotao.cloud.order.application.service.order.IOrderService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

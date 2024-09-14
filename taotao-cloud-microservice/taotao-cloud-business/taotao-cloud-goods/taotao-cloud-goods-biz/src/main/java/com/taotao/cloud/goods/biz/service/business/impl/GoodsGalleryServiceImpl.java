@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.service.business.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.common.utils.io.FileUtils;
+import com.taotao.boot.common.utils.io.FileUtils;
 import com.taotao.cloud.goods.biz.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
 import com.taotao.cloud.goods.biz.repository.cls.GoodsGalleryRepository;

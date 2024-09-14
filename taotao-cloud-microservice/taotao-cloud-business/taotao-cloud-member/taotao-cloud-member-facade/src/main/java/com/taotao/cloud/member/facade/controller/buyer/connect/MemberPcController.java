@@ -17,11 +17,11 @@
 package com.taotao.cloud.member.facade.controller.buyer.connect; // package
                                                                        // com.taotao.cloud.member.biz.controller.buyer.connect;
 //
-// import com.taotao.cloud.common.constant.CommonConstant;
-// import com.taotao.cloud.common.enums.ResultEnum;
-// import com.taotao.cloud.common.enums.UserEnum;
-// import com.taotao.cloud.common.exception.BusinessException;
-// import com.taotao.cloud.common.model.Result;
+// import com.taotao.boot.common.constant.CommonConstant;
+// import com.taotao.boot.common.enums.ResultEnum;
+// import com.taotao.boot.common.enums.UserEnum;
+// import com.taotao.boot.common.exception.BusinessException;
+// import com.taotao.boot.common.model.Result;
 // import com.taotao.cloud.logger.annotation.RequestLogger;
 // import com.taotao.cloud.member.api.dto.MemberEditDTO;
 // import com.taotao.cloud.member.biz.entity.Member;

@@ -15,7 +15,7 @@
  */
 
 package com.taotao.cloud.sys.biz.utils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

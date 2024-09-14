@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.data.mybatis.interceptor.easylog.common.audit.DataAuditLogging;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;

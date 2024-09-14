@@ -20,8 +20,8 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.sys.biz.model.dto.user.RestPasswordUserDTO;
 import com.taotao.cloud.sys.biz.manager.UserManager;
 import com.taotao.cloud.sys.biz.mapper.IUserMapper;
@@ -41,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 /**
  * UserServiceImpl
  *

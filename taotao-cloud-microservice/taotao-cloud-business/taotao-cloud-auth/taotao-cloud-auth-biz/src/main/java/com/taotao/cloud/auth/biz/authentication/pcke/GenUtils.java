@@ -22,7 +22,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import org.springframework.security.crypto.keygen.Base64StringKeyGenerator;
 import org.springframework.security.crypto.keygen.StringKeyGenerator;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 public class GenUtils {
 
     public static String genCode() throws NoSuchAlgorithmException {

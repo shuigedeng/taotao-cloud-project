@@ -18,10 +18,10 @@ package com.taotao.cloud.promotion.biz.controller.business.seller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.security.springsecurity.model.SecurityUser;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.promotion.api.model.page.CouponPageQuery;

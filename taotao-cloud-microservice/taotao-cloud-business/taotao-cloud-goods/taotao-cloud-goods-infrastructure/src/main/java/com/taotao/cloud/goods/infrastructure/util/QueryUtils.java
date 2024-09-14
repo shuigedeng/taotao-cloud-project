@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.util;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import java.util.Objects;
 
 /**

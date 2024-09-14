@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.cloud.data.jpa.extend.JpaExtendRepositoryFactoryBean;
 import com.taotao.cloud.security.springsecurity.annotation.EnableSecurityConfiguration;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;

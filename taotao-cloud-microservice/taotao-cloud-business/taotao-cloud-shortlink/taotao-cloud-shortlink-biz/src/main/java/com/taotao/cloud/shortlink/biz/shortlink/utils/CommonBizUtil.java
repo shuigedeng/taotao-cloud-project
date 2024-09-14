@@ -17,7 +17,7 @@
 package com.taotao.cloud.shortlink.biz.shortlink.utils;
 
 import com.google.common.hash.Hashing;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;

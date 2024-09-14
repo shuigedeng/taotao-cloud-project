@@ -17,7 +17,7 @@
 package com.taotao.cloud.open.platform.openapiclient;
 
 import org.dromara.hutoolcore.io.FileUtil;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.openapi.common.model.FileBinary;
 import java.io.File;
 import java.util.ArrayList;

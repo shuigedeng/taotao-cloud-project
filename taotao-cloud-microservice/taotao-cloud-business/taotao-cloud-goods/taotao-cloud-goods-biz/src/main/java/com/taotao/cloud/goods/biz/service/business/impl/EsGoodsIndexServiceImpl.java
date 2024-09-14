@@ -21,9 +21,9 @@ import cn.hutool.core.util.ReflectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsSalesModeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -79,8 +79,8 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static com.taotao.cloud.common.enums.CachePrefixEnum.INIT_INDEX_FLAG;
-import static com.taotao.cloud.common.enums.CachePrefixEnum.INIT_INDEX_PROCESS;
+import static com.taotao.boot.common.enums.CachePrefixEnum.INIT_INDEX_FLAG;
+import static com.taotao.boot.common.enums.CachePrefixEnum.INIT_INDEX_PROCESS;
 
 /**
  * 商品索引业务层实现

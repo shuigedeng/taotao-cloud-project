@@ -1,7 +1,7 @@
 package com.taotao.cloud.gateway.filter.global;
 
 import com.alibaba.fastjson.JSON;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.VisitRecordService;

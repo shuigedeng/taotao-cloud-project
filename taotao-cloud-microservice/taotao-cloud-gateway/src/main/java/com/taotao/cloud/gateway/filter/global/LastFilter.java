@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
-import com.taotao.cloud.common.utils.servlet.TraceUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.common.utils.servlet.TraceUtils;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-import static com.taotao.cloud.common.constant.CommonConstant.TTC_TRACE_ID;
+import static com.taotao.boot.common.constant.CommonConstant.TTC_TRACE_ID;
 
 /**
  * 最后执行 生成日志链路追踪id

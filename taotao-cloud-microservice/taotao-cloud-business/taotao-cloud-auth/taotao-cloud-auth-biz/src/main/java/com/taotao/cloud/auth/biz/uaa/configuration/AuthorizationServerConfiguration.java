@@ -42,9 +42,9 @@ import com.taotao.cloud.auth.biz.management.response.OAuth2AccessTokenResponseHa
 import com.taotao.cloud.auth.biz.management.response.OAuth2AuthenticationFailureResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OAuth2DeviceVerificationResponseHandler;
 import com.taotao.cloud.auth.biz.management.response.OidcClientRegistrationResponseHandler;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.utils.io.ResourceUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.utils.io.ResourceUtils;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.constants.DefaultConstants;
 import com.taotao.cloud.security.springsecurity.core.enums.Certificate;
 import com.taotao.cloud.security.springsecurity.core.response.SecurityLoginUrlAuthenticationEntryPoint;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.data.sync.otherBatch.support;
 
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

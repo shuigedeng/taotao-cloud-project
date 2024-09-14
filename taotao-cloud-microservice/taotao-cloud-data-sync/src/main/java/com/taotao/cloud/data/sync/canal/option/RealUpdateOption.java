@@ -17,8 +17,8 @@
 package com.taotao.cloud.data.sync.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.taotao.cloud.canal.option.UpdateOption;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.canal.option.UpdateOption;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.List;
 import org.springframework.stereotype.Component;
 

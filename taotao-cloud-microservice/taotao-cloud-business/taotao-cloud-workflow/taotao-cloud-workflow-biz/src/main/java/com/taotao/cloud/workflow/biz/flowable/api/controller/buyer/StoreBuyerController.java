@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.workflow.biz.flowable.api.controller.buyer;
 
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;

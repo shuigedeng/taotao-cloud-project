@@ -17,7 +17,7 @@
 package com.taotao.cloud.tenant.biz.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.enums.GlobalStatusEnum;
+import com.taotao.boot.common.enums.GlobalStatusEnum;
 import com.taotao.cloud.sys.api.feign.RoleApi;
 import com.taotao.cloud.sys.api.feign.UserApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;

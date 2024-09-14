@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.api.feign.fallback;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.wechat.api.feign.WechatApi;
 import com.taotao.cloud.wechat.api.feign.response.FeignDictResponse;
 import io.seata.core.context.RootContext;

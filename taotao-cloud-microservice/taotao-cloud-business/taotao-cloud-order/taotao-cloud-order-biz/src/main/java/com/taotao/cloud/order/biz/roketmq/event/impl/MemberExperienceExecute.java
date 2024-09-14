@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import com.taotao.cloud.common.utils.number.CurrencyUtils;
+import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.member.api.enums.PointTypeEnum;
 import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;

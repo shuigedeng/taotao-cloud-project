@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.properties;
 
-import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.boot.common.utils.context.ContextUtils;
 import jakarta.annotation.PostConstruct;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;

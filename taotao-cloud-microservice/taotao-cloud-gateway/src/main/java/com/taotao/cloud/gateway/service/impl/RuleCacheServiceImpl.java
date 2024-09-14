@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.gateway.service.impl;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.cloud.gateway.model.BlackList;
 import com.taotao.cloud.gateway.model.RuleConstant;
 import com.taotao.cloud.gateway.service.IRuleCacheService;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.open.platform.biz;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
-import com.taotao.cloud.core.startup.StartupSpringApplication;
+import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 

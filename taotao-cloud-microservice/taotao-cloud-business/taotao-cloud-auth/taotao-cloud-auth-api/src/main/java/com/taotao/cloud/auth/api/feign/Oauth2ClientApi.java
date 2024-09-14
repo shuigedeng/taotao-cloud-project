@@ -19,7 +19,7 @@
  import com.taotao.cloud.auth.api.feign.fallback.Oauth2ClientApiFallback;
  import com.taotao.cloud.auth.api.feign.request.FeignClientQueryApiRequest;
  import com.taotao.cloud.auth.api.feign.response.ClientApiResponse;
- import com.taotao.cloud.common.constant.ServiceName;
+ import com.taotao.boot.common.constant.ServiceName;
  import org.springframework.cloud.openfeign.FeignClient;
 
  /**

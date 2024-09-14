@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.monitor.api;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.model.TargetGroup;
 import java.util.*;
 import org.springframework.web.bind.annotation.*;

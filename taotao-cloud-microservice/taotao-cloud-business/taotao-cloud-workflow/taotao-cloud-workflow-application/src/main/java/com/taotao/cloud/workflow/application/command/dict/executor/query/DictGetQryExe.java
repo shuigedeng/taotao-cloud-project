@@ -2,7 +2,7 @@
 
 package com.taotao.cloud.sys.application.command.dict.executor.query;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sys.application.adapter.DictAdapter;
 import com.taotao.cloud.sys.application.command.dict.dto.DictGetQry;
 import com.taotao.cloud.sys.application.command.dict.dto.clientobject.DictCO;

@@ -17,9 +17,9 @@
 package com.taotao.cloud.distribution.biz.api.controller.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
 import com.taotao.cloud.distribution.biz.service.IDistributionCashService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

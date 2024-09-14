@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.api.feign.fallback;
 
-import com.taotao.cloud.common.model.BaseSecurityUser;
+import com.taotao.boot.common.model.BaseSecurityUser;
 import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import java.util.List;

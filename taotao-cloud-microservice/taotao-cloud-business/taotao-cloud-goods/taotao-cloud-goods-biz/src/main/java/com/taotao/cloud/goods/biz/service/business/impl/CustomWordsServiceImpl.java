@@ -18,11 +18,11 @@ package com.taotao.cloud.goods.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.goods.biz.model.vo.CustomWordsVO;
 import com.taotao.cloud.goods.biz.mapper.ICustomWordsMapper;
 import com.taotao.cloud.goods.biz.model.convert.CustomWordsConvert;

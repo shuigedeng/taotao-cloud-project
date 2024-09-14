@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.milliondataexport.mybatis;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 

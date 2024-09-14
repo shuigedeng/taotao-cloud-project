@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.tenant.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.tenant.api.feign.fallback.FeignTenantFallbackImpl;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.controller.business.buyer;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.web.request.annotation.RequestLogger;

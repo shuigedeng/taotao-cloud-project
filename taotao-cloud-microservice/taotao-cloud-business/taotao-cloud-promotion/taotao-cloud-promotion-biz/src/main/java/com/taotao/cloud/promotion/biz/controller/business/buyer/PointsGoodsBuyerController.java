@@ -17,8 +17,8 @@
 package com.taotao.cloud.promotion.biz.controller.business.buyer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.promotion.api.model.page.PointsGoodsPageQuery;
 import com.taotao.cloud.promotion.api.model.vo.PointsGoodsVO;
 import com.taotao.cloud.promotion.biz.model.entity.PointsGoods;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.storage;
 
 import com.taotao.cloud.auth.biz.jpa.service.TtcRegisteredClientService;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

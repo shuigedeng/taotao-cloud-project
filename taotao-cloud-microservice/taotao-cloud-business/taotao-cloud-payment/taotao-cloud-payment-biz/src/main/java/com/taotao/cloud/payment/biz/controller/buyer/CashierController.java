@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.controller.buyer;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.payment.api.enums.PaymentClientEnum;
 import com.taotao.cloud.payment.api.enums.PaymentMethodEnum;
 import com.taotao.cloud.payment.biz.kit.CashierSupport;

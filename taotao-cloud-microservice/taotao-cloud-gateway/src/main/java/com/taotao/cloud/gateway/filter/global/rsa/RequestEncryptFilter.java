@@ -1,7 +1,7 @@
 package com.taotao.cloud.gateway.filter.global.rsa;
 
 import com.alibaba.cloud.commons.lang.StringUtils;
-import com.taotao.cloud.common.utils.secure.RSAUtils;
+import com.taotao.boot.common.utils.secure.RSAUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

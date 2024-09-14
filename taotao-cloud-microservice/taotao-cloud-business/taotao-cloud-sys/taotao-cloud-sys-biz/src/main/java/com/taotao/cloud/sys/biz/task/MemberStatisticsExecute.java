@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
 import java.util.Calendar;
 import java.util.Date;

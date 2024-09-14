@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.service.business;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.sys.biz.model.vo.monitor.OnlineUserInfo;
 import com.taotao.cloud.sys.biz.model.vo.monitor.RedisCacheInfoDTO;
 import com.taotao.cloud.sys.biz.model.vo.monitor.ServerInfo;

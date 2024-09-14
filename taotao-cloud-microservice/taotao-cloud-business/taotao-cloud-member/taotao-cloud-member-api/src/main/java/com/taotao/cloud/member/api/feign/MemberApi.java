@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.member.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.BaseSecurityUser;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.constant.ServiceName;
+import com.taotao.boot.common.model.BaseSecurityUser;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.member.api.feign.fallback.MemberApiFallback;
 import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import java.util.List;

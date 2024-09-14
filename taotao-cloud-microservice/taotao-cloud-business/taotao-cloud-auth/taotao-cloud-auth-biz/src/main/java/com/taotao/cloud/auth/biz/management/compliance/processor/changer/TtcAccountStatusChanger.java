@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.compliance.processor.changer;
 
-import com.taotao.cloud.common.utils.context.ContextUtils;
+import com.taotao.boot.common.utils.context.ContextUtils;
 import com.taotao.cloud.security.springsecurity.event.LocalChangeUserStatusEvent;
 import com.taotao.cloud.security.springsecurity.event.RemoteChangeUserStatusEvent;
 import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;

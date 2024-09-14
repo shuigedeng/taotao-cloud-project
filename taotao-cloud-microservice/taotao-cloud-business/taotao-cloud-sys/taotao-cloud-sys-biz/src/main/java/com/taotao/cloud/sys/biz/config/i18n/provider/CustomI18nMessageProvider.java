@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.config.i18n.provider;
 
-import com.taotao.cloud.cache.redis.listener.AbstractMessageEventListener;
+import com.taotao.boot.cache.redis.listener.AbstractMessageEventListener;
 import com.taotao.cloud.sys.api.constant.I18nRedisKeyConstants;
 import com.taotao.cloud.sys.biz.model.dto.I18nDataUnique;
 import com.taotao.cloud.sys.biz.model.entity.i18n.I18nData;

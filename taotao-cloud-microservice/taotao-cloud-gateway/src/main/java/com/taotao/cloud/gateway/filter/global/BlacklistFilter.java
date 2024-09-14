@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
-import com.taotao.cloud.common.utils.servlet.TraceUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import com.taotao.cloud.gateway.service.ISafeRuleService;
 import com.taotao.cloud.gateway.skywalking.SkywalkingUtil;

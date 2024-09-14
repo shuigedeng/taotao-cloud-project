@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.config.aware;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;

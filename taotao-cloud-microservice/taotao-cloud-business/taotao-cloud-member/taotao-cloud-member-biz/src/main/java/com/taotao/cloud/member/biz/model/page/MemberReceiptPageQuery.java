@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.model.page;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.member.api.enums.MemberReceiptEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

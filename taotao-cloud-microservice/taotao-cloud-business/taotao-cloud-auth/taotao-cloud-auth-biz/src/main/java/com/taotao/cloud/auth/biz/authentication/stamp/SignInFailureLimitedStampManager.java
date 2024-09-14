@@ -18,10 +18,10 @@ package com.taotao.cloud.auth.biz.authentication.stamp;
 
 import com.taotao.cloud.auth.api.model.dto.SignInErrorStatus;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.captcha.support.core.definition.domain.Metadata;
-import com.taotao.cloud.captcha.support.core.dto.Captcha;
-import com.taotao.cloud.captcha.support.core.dto.Verification;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
+import com.taotao.boot.captcha.support.core.dto.Captcha;
+import com.taotao.boot.captcha.support.core.dto.Verification;
 import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;

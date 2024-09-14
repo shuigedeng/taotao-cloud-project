@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.api.feign.response;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
 import com.taotao.cloud.goods.api.enums.GoodsTypeEnum;
 import java.io.Serial;
 import java.io.Serializable;

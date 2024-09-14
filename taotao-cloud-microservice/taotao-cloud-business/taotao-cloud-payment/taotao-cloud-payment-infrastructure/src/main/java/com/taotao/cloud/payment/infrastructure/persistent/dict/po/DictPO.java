@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.infrastructure.persistent.dict.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;
 import jakarta.annotation.PreDestroy;
 import jakarta.persistence.Column;

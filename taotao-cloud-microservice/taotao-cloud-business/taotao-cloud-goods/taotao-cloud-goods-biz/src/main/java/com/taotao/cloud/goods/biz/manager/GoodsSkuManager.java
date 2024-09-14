@@ -2,10 +2,10 @@ package com.taotao.cloud.goods.biz.manager;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.enums.UserEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecVO;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;

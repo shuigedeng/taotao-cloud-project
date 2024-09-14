@@ -5,7 +5,7 @@ import org.dromara.hutoolcore.text.StrPool;
 import org.dromara.hutoolcore.util.IdUtil;
 import com.alibaba.excel.enums.BooleanEnum;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.data.mybatis.pagehelper.PageParam;
 import com.taotao.cloud.message.biz.ballcat.notify.converter.AnnouncementConverter;
 import com.taotao.cloud.message.biz.ballcat.notify.converter.NotifyInfoConverter;

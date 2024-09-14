@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.task.job.quartz.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageResult;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.PageResult;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.cloud.job.quartz.utils.CronUtils;
 import com.taotao.cloud.web.annotation.BusinessApi;

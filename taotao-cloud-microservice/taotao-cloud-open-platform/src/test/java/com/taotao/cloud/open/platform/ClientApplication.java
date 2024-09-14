@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.open.platform;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.open.platform.openapiclient.FileApiTest;
 import com.taotao.cloud.open.platform.openapiclient.UserApiTest;
 import com.taotao.cloud.open.platform.openapiclient.UserApiTest2;

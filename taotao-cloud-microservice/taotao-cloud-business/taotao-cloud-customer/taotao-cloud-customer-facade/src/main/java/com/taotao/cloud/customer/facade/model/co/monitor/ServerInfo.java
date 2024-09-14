@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.adapter.model.co.monitor;
 
-import com.taotao.cloud.common.constant.CommonConstant;
+import com.taotao.boot.common.constant.CommonConstant;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;

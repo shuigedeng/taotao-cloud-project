@@ -19,7 +19,7 @@ package com.taotao.cloud.store.biz.task;
 // import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 // import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 // import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-// import com.taotao.cloud.common.enums.SwitchEnum;
+// import com.taotao.boot.common.enums.SwitchEnum;
 // import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 // import com.taotao.cloud.member.api.model.vo.StoreRatingVO;
 // import com.taotao.cloud.store.api.enums.StoreStatusEnum;

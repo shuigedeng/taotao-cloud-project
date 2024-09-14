@@ -18,7 +18,7 @@ package com.taotao.cloud.gateway.filter.global;
 
 import static com.taotao.cloud.gateway.utils.WebFluxUtils.isJsonRequest;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import java.nio.charset.StandardCharsets;

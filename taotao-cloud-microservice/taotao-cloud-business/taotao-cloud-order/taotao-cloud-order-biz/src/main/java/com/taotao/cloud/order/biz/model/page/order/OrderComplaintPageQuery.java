@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.model.page.order;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.order.api.enums.aftersale.ComplaintStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

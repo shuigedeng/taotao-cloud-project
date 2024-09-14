@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.stream.consumer;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.function.Consumer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;

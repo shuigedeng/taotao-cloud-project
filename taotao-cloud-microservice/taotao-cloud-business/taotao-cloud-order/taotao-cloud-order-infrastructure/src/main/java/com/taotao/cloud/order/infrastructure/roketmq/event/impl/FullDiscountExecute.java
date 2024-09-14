@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.order.infrastructure.roketmq.event.impl;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.UserEnum;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.enums.UserEnum;
+import com.taotao.boot.common.utils.common.IdGeneratorUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.OrderTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.gateway.filter.global;
 
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.common.IdGeneratorUtils;
-import com.taotao.cloud.common.utils.servlet.TraceUtils;
+import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.utils.common.IdGeneratorUtils;
+import com.taotao.boot.common.utils.servlet.TraceUtils;
 import com.taotao.cloud.gateway.properties.FilterProperties;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.annotation.Value;

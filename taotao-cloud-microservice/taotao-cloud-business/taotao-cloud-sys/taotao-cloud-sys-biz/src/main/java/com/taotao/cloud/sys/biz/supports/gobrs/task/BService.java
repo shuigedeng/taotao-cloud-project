@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.supports.gobrs.task;
 import com.gobrs.async.core.TaskSupport;
 import com.gobrs.async.core.anno.Task;
 import com.gobrs.async.core.task.AsyncTask;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**

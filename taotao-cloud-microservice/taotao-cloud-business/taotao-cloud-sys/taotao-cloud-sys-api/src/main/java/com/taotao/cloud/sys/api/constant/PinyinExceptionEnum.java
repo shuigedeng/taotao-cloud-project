@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.constant;
 
-import com.taotao.cloud.common.constant.RuleConstant;
+import com.taotao.boot.common.constant.RuleConstant;
 
 /**
  * 拼音工具相关异常

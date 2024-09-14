@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.kit.core.kit;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.payment.biz.kit.core.http.AbstractHttpDelegate;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;

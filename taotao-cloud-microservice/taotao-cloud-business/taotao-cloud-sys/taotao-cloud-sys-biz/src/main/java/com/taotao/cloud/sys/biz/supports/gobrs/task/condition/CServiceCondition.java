@@ -22,7 +22,7 @@ import com.gobrs.async.core.common.domain.AnyConditionResult;
 import com.gobrs.async.core.common.domain.AnyConditionResult.AnyConditionResultBuilder;
 import com.gobrs.async.core.common.domain.TaskResult;
 import com.gobrs.async.core.task.AsyncTask;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import lombok.SneakyThrows;
 
 /**

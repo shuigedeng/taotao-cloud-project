@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.filter.gateway;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.filter.gateway.RequestTimeGatewayFilterFactory.Config;
 import java.util.Collections;
 import java.util.List;

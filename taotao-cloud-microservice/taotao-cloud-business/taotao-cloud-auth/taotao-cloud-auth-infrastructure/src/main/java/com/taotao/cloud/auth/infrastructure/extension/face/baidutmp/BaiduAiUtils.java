@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.extension.face.baidutmp;
 
 import com.baidu.aip.face.AipFace;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import jakarta.annotation.PostConstruct;
 import java.util.HashMap;
 import org.json.JSONArray;

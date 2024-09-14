@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.model.vo.aftersale;
 
-import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.boot.common.enums.UserEnum;
 import io.soabase.recordbuilder.core.RecordBuilder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

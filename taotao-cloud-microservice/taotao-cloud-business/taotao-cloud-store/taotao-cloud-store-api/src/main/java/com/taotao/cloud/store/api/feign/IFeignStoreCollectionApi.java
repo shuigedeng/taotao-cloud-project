@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.store.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.PageResult;
+import com.taotao.boot.common.constant.ServiceName;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.PageResult;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
 import com.taotao.cloud.store.api.model.vo.StoreCollectionVO;
 import org.springframework.cloud.openfeign.FeignClient;

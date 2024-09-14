@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.media.biz;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.boot.common.utils.common.PropertyUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;

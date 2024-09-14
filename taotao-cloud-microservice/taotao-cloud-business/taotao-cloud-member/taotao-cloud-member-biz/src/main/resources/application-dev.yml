@@ -1080,4 +1080,4 @@ logging:
 springdoc:
   packages-to-exclude:
     - cn.afterturn.easypoi.wps.controller
-    - com.taotao.cloud.captcha.controller
+    - com.taotao.boot.captcha.controller

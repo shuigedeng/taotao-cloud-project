@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.customer.facade.model.co.menu;
 
-import com.taotao.cloud.common.tree.MapperNode;
+import com.taotao.boot.common.tree.MapperNode;
 import com.taotao.cloud.sys.adapter.model.co.menu.MenuMetaVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;

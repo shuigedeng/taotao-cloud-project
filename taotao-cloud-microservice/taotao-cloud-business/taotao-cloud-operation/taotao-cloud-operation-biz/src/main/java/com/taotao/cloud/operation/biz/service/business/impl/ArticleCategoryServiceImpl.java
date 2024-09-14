@@ -18,10 +18,10 @@ package com.taotao.cloud.operation.biz.service.business.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.operation.api.enums.ArticleCategoryEnum;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
 import com.taotao.cloud.operation.api.model.vo.ArticleCategoryVO;

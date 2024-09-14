@@ -3,7 +3,7 @@ package com.taotao.cloud.order.integration.goods.grpc;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.grpc.CountStoreGoodsNumGrpcRequest;
 import com.taotao.cloud.goods.api.grpc.CountStoreGoodsNumGrpcResponse;
 import com.taotao.cloud.goods.api.grpc.GoodsGrpcServiceGrpc;

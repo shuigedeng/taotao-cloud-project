@@ -20,7 +20,7 @@ import com.gobrs.async.core.GobrsAsync;
 import com.gobrs.async.core.common.domain.AsyncResult;
 import com.gobrs.async.core.engine.RuleThermalLoad;
 import com.gobrs.async.core.property.RuleConfig;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;

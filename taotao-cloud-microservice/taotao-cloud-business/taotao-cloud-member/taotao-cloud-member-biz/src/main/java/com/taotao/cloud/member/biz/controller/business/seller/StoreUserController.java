@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.biz.controller.business.seller;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
 import com.taotao.cloud.member.sys.model.vo.MemberVO;
 import com.taotao.cloud.member.biz.model.convert.MemberConvert;

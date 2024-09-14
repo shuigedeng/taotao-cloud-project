@@ -6,7 +6,7 @@ import static com.baomidou.mybatisplus.generator.config.ConstVal.UTF8;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.generator.config.GenConstants;
 import com.taotao.cloud.generator.entity.GenTable;
 import com.taotao.cloud.generator.entity.GenTableColumn;

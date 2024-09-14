@@ -2,7 +2,7 @@ package com.taotao.cloud.gateway.service;
 
 
 import com.alibaba.cloud.commons.lang.StringUtils;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.model.AccessRecord;
 import java.net.InetSocketAddress;
 import java.net.URI;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.application.service.cart.render.impl;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.utils.number.CurrencyUtils;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.application.command.cart.dto.clientobject.CartSkuCO;
 import com.taotao.cloud.order.application.command.cart.dto.clientobject.CartCO;
 import com.taotao.cloud.order.application.command.cart.dto.clientobject.FullDiscountCO;

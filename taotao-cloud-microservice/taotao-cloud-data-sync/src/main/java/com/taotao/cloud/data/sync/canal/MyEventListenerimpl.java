@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.data.sync.canal;
 
-import com.taotao.cloud.canal.listener.DealCanalEventListener;
-import com.taotao.cloud.canal.option.DeleteOption;
-import com.taotao.cloud.canal.option.InsertOption;
-import com.taotao.cloud.canal.option.UpdateOption;
+import com.taotao.boot.canal.listener.DealCanalEventListener;
+import com.taotao.boot.canal.option.DeleteOption;
+import com.taotao.boot.canal.option.InsertOption;
+import com.taotao.boot.canal.option.UpdateOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

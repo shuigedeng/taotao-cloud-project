@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.roketmq.event.impl;
 
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.order.OrderVO;
 import com.taotao.cloud.order.sys.model.vo.order.ReceiptVO;

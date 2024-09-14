@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.stream.pulsar;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import io.github.majusko.pulsar.PulsarMessage;
 import io.github.majusko.pulsar.annotation.PulsarConsumer;
 import org.springframework.stereotype.Service;

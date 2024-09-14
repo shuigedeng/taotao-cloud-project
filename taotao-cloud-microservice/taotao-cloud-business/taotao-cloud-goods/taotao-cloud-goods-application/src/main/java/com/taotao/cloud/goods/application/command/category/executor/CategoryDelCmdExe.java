@@ -2,14 +2,14 @@
 
 package com.taotao.cloud.goods.application.command.category.executor;
 
-import static com.taotao.cloud.common.enums.CachePrefixEnum.CATEGORY;
+import static com.taotao.boot.common.enums.CachePrefixEnum.CATEGORY;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
 import com.taotao.cloud.goods.application.service.ICategoryBrandService;
 import com.taotao.cloud.goods.application.service.ICategoryParameterGroupService;

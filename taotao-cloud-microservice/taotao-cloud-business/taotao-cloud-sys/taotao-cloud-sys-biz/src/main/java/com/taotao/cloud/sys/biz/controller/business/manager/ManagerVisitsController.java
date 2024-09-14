@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.biz.controller.business.manager;
 
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.sys.biz.service.business.IVisitsService;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;

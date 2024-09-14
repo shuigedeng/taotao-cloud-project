@@ -3,7 +3,7 @@ package com.taotao.cloud.member.integration.sku.grpc;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.grpc.GoodsSkuGrpcRequest;
 import com.taotao.cloud.goods.api.grpc.GoodsSkuGrpcResponse;
 import com.taotao.cloud.goods.api.grpc.GoodsSkuGrpcServiceGrpc;

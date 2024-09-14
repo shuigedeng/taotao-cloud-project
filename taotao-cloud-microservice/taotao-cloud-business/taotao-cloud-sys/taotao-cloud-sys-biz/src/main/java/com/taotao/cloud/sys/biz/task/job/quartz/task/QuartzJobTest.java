@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.quartz.task;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 
 /**

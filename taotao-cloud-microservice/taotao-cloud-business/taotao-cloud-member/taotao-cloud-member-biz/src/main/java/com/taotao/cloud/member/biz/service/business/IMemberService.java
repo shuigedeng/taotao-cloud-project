@@ -18,7 +18,7 @@ package com.taotao.cloud.member.biz.service.business;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.boot.common.enums.UserEnum;
 import com.taotao.cloud.member.sys.model.dto.ManagerMemberEditDTO;
 import com.taotao.cloud.member.sys.model.dto.MemberAddDTO;
 import com.taotao.cloud.member.sys.model.dto.MemberEditDTO;

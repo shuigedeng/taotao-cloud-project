@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.im.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.constant.ServiceName;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.im.api.feign.fallback.FeignMediaFallback;
 import com.taotao.cloud.im.api.model.vo.FileVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -40,7 +40,7 @@ public interface IFeignMediaService {
 	 * 根据id查询文件信息
 	 *
 	 * @param id id
-	 * @return com.taotao.cloud.core.model.Result<com.taotao.cloud.dfs.api.vo.FileVO>
+	 * @return com.taotao.boot.core.model.Result<com.taotao.cloud.dfs.api.vo.FileVO>
 	 * @author shuigedeng
 	 * @since 2020/11/20 上午11:17
 	 */

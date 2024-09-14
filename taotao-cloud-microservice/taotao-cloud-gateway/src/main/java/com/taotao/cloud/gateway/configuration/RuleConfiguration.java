@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.configuration;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.cloud.gateway.service.IRuleCacheService;
 import com.taotao.cloud.gateway.service.impl.RuleCacheServiceImpl;
 import org.springframework.context.annotation.Bean;

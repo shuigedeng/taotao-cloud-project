@@ -17,10 +17,10 @@
 package com.taotao.cloud.promotion.biz.controller.business.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.model.PageQuery;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.model.PageQuery;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.promotion.api.model.dto.CouponActivityDTO;
 import com.taotao.cloud.promotion.api.model.vo.CouponActivityVO;
 import com.taotao.cloud.promotion.biz.model.entity.CouponActivity;

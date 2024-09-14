@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.iot.api.model.dto;
 
-import com.taotao.cloud.common.enums.GlobalStatusEnum;
+import com.taotao.boot.common.enums.GlobalStatusEnum;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;

@@ -18,10 +18,10 @@ package com.taotao.cloud.auth.facade.controller.oauth2;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.constant.RedisConstant;
-import com.taotao.cloud.common.exception.BaseException;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.constant.RedisConstant;
+import com.taotao.boot.common.exception.BaseException;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -43,7 +43,7 @@ import org.springframework.security.oauth2.jwt.JwtClaimNames;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 /**
  * Oath2Controller
  *

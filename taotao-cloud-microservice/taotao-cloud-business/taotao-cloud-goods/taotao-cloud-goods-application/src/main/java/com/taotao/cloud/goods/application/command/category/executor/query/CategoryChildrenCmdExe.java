@@ -3,7 +3,7 @@
 package com.taotao.cloud.goods.application.command.category.executor.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryPO;

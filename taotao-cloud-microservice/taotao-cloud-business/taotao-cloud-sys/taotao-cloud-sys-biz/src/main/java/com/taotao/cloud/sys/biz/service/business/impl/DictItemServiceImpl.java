@@ -18,8 +18,8 @@ package com.taotao.cloud.sys.biz.service.business.impl;
 
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.taotao.cloud.common.exception.BusinessException;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemDTO;
 import com.taotao.cloud.sys.biz.model.page.DictItemPageQuery;
 import com.taotao.cloud.sys.biz.model.query.DictItemQuery;

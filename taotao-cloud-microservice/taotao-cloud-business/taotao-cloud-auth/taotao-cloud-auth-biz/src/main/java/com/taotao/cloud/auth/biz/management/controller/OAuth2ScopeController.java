@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.biz.management.dto.OAuth2ScopeDto;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ScopeService;
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

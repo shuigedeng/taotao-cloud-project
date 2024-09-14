@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.biz.utils;
 
-import com.taotao.cloud.common.tree.TreeNode;
-import com.taotao.cloud.common.utils.bean.BeanUtils;
-import com.taotao.cloud.common.utils.common.OrikaUtils;
+import com.taotao.boot.common.tree.TreeNode;
+import com.taotao.boot.common.utils.bean.BeanUtils;
+import com.taotao.boot.common.utils.common.OrikaUtils;
 import com.taotao.cloud.sys.api.enums.ResourceTypeEnum;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuMetaVO;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;

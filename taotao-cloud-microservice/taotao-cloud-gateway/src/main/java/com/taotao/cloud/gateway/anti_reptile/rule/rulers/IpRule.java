@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.gateway.anti_reptile.rule.rulers;
 
-import com.taotao.cloud.common.utils.servlet.RequestUtils;
+import com.taotao.boot.common.utils.servlet.RequestUtils;
 import com.taotao.cloud.gateway.anti_reptile.AntiReptileProperties;
 import com.taotao.cloud.gateway.anti_reptile.rule.AbstractRule;
 import java.time.Duration;

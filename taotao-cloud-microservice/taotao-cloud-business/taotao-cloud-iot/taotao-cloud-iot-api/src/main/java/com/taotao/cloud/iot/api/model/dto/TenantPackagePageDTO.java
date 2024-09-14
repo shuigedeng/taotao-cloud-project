@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.iot.api.model.dto;
 
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;

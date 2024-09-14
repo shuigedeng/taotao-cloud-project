@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.infrastructure.extension.qrcocde.tmp.service;
 
 import com.taotao.cloud.auth.application.login.extension.qrcocde.tmp.entity.User;
 import com.taotao.cloud.auth.application.login.extension.qrcocde.tmp.utils.CommonUtil;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserService {

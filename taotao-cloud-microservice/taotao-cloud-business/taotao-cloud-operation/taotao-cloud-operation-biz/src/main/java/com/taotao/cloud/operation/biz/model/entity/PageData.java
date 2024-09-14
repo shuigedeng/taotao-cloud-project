@@ -18,8 +18,8 @@ package com.taotao.cloud.operation.biz.model.entity;
 
 import org.dromara.hutoolhttp.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.ClientTypeEnum;
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.boot.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.operation.api.enums.PageEnum;
 import com.taotao.cloud.operation.api.enums.SwitchEnum;
 import com.taotao.cloud.web.base.entity.BaseSuperEntity;

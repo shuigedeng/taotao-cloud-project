@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.gateway.error;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources;

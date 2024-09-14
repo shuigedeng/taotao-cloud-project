@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.sys.api.constant;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BaseException;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BaseException;
 
 /**
  * 拼音异常

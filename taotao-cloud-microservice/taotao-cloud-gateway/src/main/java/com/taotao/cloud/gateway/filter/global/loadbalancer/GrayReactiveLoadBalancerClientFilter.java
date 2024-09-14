@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.gateway.filter.global.loadbalancer;
 
-import com.taotao.cloud.common.constant.CommonConstant;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.constant.CommonConstant;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.beans.factory.ObjectProvider;

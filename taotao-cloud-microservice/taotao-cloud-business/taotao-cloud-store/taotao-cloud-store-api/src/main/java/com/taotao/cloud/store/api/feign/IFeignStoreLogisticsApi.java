@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.store.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.store.api.feign.fallback.FeignStoreApiFallback;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;

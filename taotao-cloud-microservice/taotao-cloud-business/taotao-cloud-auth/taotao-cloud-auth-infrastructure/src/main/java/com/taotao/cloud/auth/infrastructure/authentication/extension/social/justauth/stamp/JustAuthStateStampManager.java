@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.stamp;
 
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.justauth.properties.JustAuthProperties;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 import java.util.concurrent.TimeUnit;
 import me.zhyd.oauth.cache.AuthStateCache;
 import org.springframework.beans.factory.InitializingBean;

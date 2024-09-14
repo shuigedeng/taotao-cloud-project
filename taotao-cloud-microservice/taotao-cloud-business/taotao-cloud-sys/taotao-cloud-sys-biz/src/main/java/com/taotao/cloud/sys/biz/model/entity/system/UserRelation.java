@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.common.enums.UserObjectEnum;
+import com.taotao.boot.common.enums.UserObjectEnum;
 import com.taotao.cloud.web.base.entity.SuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -2,7 +2,7 @@ package com.taotao.cloud.gateway.filter.global.rsa;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Charsets;
-import com.taotao.cloud.common.utils.secure.RSAUtils;
+import com.taotao.boot.common.utils.secure.RSAUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 import java.net.URI;
 import java.util.Map;
 import java.util.Objects;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 //@Component
 @Slf4j
 public class ResponseEncryptFilter implements GlobalFilter, Ordered {

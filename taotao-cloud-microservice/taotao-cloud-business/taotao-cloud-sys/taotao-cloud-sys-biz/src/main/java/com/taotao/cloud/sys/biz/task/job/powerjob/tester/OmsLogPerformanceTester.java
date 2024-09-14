@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.task.job.powerjob.tester;
 
 import com.alibaba.fastjson.JSONObject;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.springframework.stereotype.Component;
 import tech.powerjob.worker.core.processor.ProcessResult;
 import tech.powerjob.worker.core.processor.TaskContext;

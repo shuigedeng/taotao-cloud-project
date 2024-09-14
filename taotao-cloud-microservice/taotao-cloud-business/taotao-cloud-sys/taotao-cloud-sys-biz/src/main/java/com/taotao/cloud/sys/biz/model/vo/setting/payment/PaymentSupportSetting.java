@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.model.vo.setting.payment;
 
-import com.taotao.cloud.common.enums.ClientTypeEnum;
+import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.cloud.sys.biz.model.vo.setting.payment.dto.PaymentSupportForm;
 import com.taotao.cloud.sys.biz.model.vo.setting.payment.dto.PaymentSupportItem;
 import java.util.ArrayList;

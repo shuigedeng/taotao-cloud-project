@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.elasticsearch.pojo;
 
-import com.taotao.cloud.common.utils.lang.StringUtils;
+import com.taotao.boot.common.utils.lang.StringUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.HashMap;
 import java.util.List;

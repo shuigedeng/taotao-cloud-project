@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.facade.controller.buy;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

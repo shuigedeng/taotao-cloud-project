@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.monitor.configuration;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.monitor.api.PrometheusApi;
 import com.taotao.cloud.monitor.api.ReactivePrometheusApi;
 import com.taotao.cloud.monitor.model.AlertMessage;

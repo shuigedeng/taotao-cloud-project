@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.powerjob.processors;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import tech.powerjob.common.utils.NetUtils;

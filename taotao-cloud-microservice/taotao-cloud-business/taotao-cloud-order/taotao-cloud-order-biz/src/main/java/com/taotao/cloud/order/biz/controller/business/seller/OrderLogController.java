@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.controller.business.seller;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.web.utils.OperationalJudgment;
 import com.taotao.cloud.order.biz.model.entity.order.OrderLog;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;

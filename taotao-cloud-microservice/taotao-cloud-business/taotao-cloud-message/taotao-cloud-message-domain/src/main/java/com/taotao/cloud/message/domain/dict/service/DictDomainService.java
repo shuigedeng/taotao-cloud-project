@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.domain.dict.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.common.model.PageQuery;
+import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.message.domain.dict.entity.DictEntity;
 
 public interface DictDomainService {

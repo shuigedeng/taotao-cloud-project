@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.data.sync.batch.mybatis;
 
-import static com.taotao.cloud.common.utils.lang.StringUtils.format;
+import static com.taotao.boot.common.utils.lang.StringUtils.format;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ItemReadListener;

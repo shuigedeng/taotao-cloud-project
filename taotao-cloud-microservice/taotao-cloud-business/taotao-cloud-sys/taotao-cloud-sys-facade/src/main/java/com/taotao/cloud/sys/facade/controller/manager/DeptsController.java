@@ -1,7 +1,7 @@
 
 package com.taotao.cloud.sys.facade.controller.manager;
 
-import com.taotao.cloud.common.model.Result;
+import com.taotao.boot.common.model.Result;
 import com.taotao.cloud.sys.application.command.dept.dto.DeptCreateCmd;
 import com.taotao.cloud.sys.application.command.dept.dto.DeptGetQry;
 import com.taotao.cloud.sys.application.command.dept.dto.DeptIdsGetQry;

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.member.biz.controller.business.buyer;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

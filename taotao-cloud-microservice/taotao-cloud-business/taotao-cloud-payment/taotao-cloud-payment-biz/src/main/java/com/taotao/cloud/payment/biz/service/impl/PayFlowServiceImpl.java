@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.payment.biz.service.impl;
 
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.payment.biz.repository.cls.PayFlowSuperRepository;
 import com.taotao.cloud.payment.biz.service.IPayFlowService;

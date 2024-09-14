@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.service.cart.render.impl;
 
-import com.taotao.cloud.common.utils.number.CurrencyUtils;
+import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.application.service.cart.render.ICartRenderStep;
 import java.math.BigDecimal;
 import java.util.ArrayList;

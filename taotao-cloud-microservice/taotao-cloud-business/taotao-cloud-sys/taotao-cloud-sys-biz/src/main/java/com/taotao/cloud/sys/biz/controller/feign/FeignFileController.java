@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.controller.feign;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.file.api.feign.IFeignFileApi;
 import com.taotao.cloud.file.api.feign.response.FeignFileResponse;
 import com.taotao.cloud.file.api.grpc.ConditionsRequest;

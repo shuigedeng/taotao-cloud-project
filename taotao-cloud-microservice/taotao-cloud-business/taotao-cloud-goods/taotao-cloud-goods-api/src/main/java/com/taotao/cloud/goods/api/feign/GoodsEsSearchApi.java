@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.goods.api.feign.fallback.CategoryApiFallback;
 import com.taotao.cloud.goods.api.feign.fallback.GoodsEsSearchApiFallback;
 import org.springframework.cloud.openfeign.FeignClient;

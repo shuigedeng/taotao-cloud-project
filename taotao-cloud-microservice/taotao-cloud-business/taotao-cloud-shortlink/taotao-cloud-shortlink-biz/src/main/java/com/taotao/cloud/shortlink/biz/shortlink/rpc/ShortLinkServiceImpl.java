@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shortlink.biz.shortlink.rpc;
 
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.log.api.api.dto.DomainDTO;
 import com.taotao.cloud.log.api.api.dto.ShortLinkDTO;
 import com.taotao.cloud.log.api.api.enums.BooleanEnum;

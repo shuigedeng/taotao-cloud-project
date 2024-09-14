@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.biz.management.response;
 
 import com.taotao.cloud.auth.biz.authentication.utils.OAuth2EndpointUtils;
-import com.taotao.cloud.common.model.Result;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.common.model.Result;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.core.exception.SecurityGlobalExceptionHandler;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

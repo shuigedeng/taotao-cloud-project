@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.api.feign;
 
-import com.taotao.cloud.common.constant.ServiceName;
+import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.cloud.message.api.feign.fallback.NoticeMessageApiFallback;
 import com.taotao.cloud.message.api.feign.request.NoticeMessageApiRequest;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.application.command.order.dto.clientobject;
 
-import com.taotao.cloud.common.enums.UserEnum;
+import com.taotao.boot.common.enums.UserEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -38,9 +38,9 @@ import com.taotao.cloud.auth.infrastructure.authorization.token.TtcJwtTokenCusto
 import com.taotao.cloud.auth.infrastructure.authorization.token.TtcOpaqueTokenCustomizer;
 import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2ConfigurerUtils;
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.common.utils.io.ResourceUtils;
-import com.taotao.cloud.common.utils.servlet.ResponseUtils;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.common.utils.io.ResourceUtils;
+import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.cloud.security.springsecurity.authentication.login.form.OAuth2FormLoginUrlConfigurer;
 import com.taotao.cloud.security.springsecurity.authentication.response.SecurityLoginUrlAuthenticationEntryPoint;
 import com.taotao.cloud.security.springsecurity.constants.DefaultConstants;

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.order.biz.service.business.cart.render.impl;
 
-import com.taotao.cloud.cache.redis.repository.RedisRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
 
-import com.taotao.cloud.common.utils.number.CurrencyUtils;
+import com.taotao.boot.common.utils.number.CurrencyUtils;
 import com.taotao.cloud.order.api.enums.cart.RenderStepEnum;
 import com.taotao.cloud.order.sys.model.dto.cart.TradeDTO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;

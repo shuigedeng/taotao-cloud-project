@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sa.just.biz;
 
-import com.taotao.cloud.common.utils.common.PropertyUtils;
+import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

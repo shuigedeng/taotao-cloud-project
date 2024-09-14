@@ -1,6 +1,6 @@
 package com.taotao.cloud.sys.biz.config.event.transactional;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import java.util.Objects;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;

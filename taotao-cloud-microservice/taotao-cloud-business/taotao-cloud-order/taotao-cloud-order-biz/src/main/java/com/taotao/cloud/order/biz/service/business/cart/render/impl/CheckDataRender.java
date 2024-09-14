@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.order.biz.service.business.cart.render.impl;
 
-import com.taotao.cloud.common.enums.PromotionTypeEnum;
-import com.taotao.cloud.common.enums.ResultEnum;
-import com.taotao.cloud.common.exception.BusinessException;
+import com.taotao.boot.common.enums.PromotionTypeEnum;
+import com.taotao.boot.common.enums.ResultEnum;
+import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;

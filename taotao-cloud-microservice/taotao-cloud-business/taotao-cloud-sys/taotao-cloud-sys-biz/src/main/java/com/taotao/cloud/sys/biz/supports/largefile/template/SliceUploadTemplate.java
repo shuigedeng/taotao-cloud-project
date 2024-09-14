@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.supports.largefile.template;
 
-import com.taotao.cloud.common.utils.log.LogUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.biz.supports.largefile.po.FileUploadRequest;
 import com.taotao.cloud.sys.biz.supports.largefile.strategy.SliceUploadStrategy;
 import com.taotao.cloud.sys.biz.supports.largefile.util.FilePathUtil;

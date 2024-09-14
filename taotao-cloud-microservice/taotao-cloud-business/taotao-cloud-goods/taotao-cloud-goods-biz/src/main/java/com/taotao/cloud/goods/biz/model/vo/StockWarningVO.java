@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.goods.biz.model.vo;
 
-import com.taotao.cloud.common.model.PageResult;
+import com.taotao.boot.common.model.PageResult;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
 import java.io.Serializable;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.wxmpp.processor;
 
-import com.taotao.cloud.common.utils.common.JsonUtils;
+import com.taotao.boot.common.utils.common.JsonUtils;
 import java.util.Map;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
