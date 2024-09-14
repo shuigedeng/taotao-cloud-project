@@ -31,13 +31,13 @@ package com.taotao.cloud.message.biz.dingtalk; /// *
 // */
 // package com.taotao.cloud.demo.dingtalk;
 //
-// import com.taotao.cloud.dingtalk.annatations.DingerMarkdown;
-// import com.taotao.cloud.dingtalk.annatations.DingerText;
-// import com.taotao.cloud.dingtalk.annatations.MultiDinger;
-// import com.taotao.cloud.dingtalk.annatations.MultiHandler;
-// import com.taotao.cloud.dingtalk.annatations.Parameter;
-// import com.taotao.cloud.dingtalk.entity.DingerResponse;
-// import com.taotao.cloud.dingtalk.enums.DingerType;
+// import com.taotao.boot.dingtalk.annatations.DingerMarkdown;
+// import com.taotao.boot.dingtalk.annatations.DingerText;
+// import com.taotao.boot.dingtalk.annatations.MultiDinger;
+// import com.taotao.boot.dingtalk.annatations.MultiHandler;
+// import com.taotao.boot.dingtalk.annatations.Parameter;
+// import com.taotao.boot.dingtalk.entity.DingerResponse;
+// import com.taotao.boot.dingtalk.enums.DingerType;
 //
 /// **
 // * UserDinger

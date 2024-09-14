@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.batch.mybatis;
+package com.taotao.boot.data.sync.batch.mybatis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

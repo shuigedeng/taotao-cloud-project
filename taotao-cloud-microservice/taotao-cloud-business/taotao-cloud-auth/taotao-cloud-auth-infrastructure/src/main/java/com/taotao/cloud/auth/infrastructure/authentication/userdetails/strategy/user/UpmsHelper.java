@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user;
 
-import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
+import com.taotao.boot.data.jpa.tenant.DataItemStatus;
 import com.taotao.cloud.security.springsecurity.core.authority.TtcGrantedAuthority;
 import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
 import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;

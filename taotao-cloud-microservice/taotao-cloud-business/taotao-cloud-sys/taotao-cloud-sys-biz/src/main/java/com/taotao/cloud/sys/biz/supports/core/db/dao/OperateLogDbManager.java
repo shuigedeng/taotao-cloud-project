@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.supports.core.db.dao;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.taotao.cloud.data.mybatis.mybatisplus.BaseManager;
+import com.taotao.boot.data.mybatis.mybatisplus.BaseManager;
 import com.taotao.cloud.sys.biz.model.param.OperateLogParam;
 import com.taotao.cloud.sys.biz.supports.core.db.entity.OperateLogDb;
 import java.util.Objects;

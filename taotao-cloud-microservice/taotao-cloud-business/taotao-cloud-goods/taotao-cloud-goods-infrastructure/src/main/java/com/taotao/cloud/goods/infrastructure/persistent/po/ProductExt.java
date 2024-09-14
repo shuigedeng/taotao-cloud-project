@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.po; // package com.taotao.cloud.goods.biz.entity;
 //
 //
-// import com.taotao.cloud.data.jpa.entity.JpaSuperEntity;
+// import com.taotao.boot.data.jpa.entity.JpaSuperEntity;
 //
 // import jakarta.persistence.Column;
 // import jakarta.persistence.Table;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.batch.multi;
+package com.taotao.boot.data.sync.batch.multi;
 
 import java.util.ArrayList;
 import java.util.List;

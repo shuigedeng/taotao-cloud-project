@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.analysis.tidb.service;
+package com.taotao.boot.data.analysis.tidb.service;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.data.analysis.clickhouse.mapper.CkUserMapper;
-import com.taotao.cloud.data.analysis.clickhouse.model.CkUser;
-import com.taotao.cloud.data.datasource.ext.ck.ClickHouseJdbcBaseDaoImpl;
+import com.taotao.boot.data.analysis.clickhouse.mapper.CkUserMapper;
+import com.taotao.boot.data.analysis.clickhouse.model.CkUser;
+import com.taotao.boot.data.datasource.ext.ck.ClickHouseJdbcBaseDaoImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

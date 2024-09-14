@@ -1191,7 +1191,7 @@ taotao:
       dateformat: yyyy-MM-dd HH:mm:ss
       driverlist: com.mysql.cj.jdbc.Driver
       database-dialect-date-format: yyyy-MM-dd HH:mm:ss
-      appender: com.taotao.cloud.data.p6spy.logger.KafkaLogger
+      appender: com.taotao.boot.data.p6spy.logger.KafkaLogger
       logfile: ${user.home}/logs/${spring.application.name}/p6spy/p6spy.log
     oss:
       enabled: false
@@ -1315,7 +1315,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     # 日志打印参数class
-    #log-impl: com.taotao.cloud.data.mybatis.log.CustomStdOutImpl
+    #log-impl: com.taotao.boot.data.mybatis.log.CustomStdOutImpl
     #log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #查询时，关闭关联对象即时加载以提高性能

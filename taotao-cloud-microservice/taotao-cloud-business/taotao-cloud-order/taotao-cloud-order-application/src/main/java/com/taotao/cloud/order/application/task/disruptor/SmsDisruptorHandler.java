@@ -17,10 +17,10 @@
 package com.taotao.cloud.order.application.task.disruptor;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.eventbus.disruptor.tmp3.annotation.EventRule;
-import com.taotao.cloud.eventbus.disruptor.tmp3.event.DisruptorBindEvent;
-import com.taotao.cloud.eventbus.disruptor.tmp3.handler.DisruptorHandler;
-import com.taotao.cloud.eventbus.disruptor.tmp3.handler.HandlerChain;
+import com.taotao.boot.eventbus.disruptor.tmp3.annotation.EventRule;
+import com.taotao.boot.eventbus.disruptor.tmp3.event.DisruptorBindEvent;
+import com.taotao.boot.eventbus.disruptor.tmp3.handler.DisruptorHandler;
+import com.taotao.boot.eventbus.disruptor.tmp3.handler.HandlerChain;
 import org.springframework.stereotype.Component;
 
 /**

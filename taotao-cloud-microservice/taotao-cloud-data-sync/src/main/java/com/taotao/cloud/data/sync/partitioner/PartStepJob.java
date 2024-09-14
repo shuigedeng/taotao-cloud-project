@@ -1,4 +1,4 @@
-package com.taotao.cloud.data.sync.partitioner;
+package com.taotao.boot.data.sync.partitioner;
 
 import com.taotao.boot.common.utils.log.LogUtils;
 import org.springframework.batch.core.Job;

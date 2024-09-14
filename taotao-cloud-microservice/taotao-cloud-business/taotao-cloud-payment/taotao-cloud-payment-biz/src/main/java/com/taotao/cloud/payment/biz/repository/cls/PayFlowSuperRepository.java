@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.repository.cls;
 
-import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.payment.biz.entity.PayFlow;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

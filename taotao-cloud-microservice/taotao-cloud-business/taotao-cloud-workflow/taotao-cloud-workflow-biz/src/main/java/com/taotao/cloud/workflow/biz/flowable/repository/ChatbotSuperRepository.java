@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.flowable.repository;
 
-import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import com.taotao.cloud.flowable.biz.model.entity.Chatbot;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

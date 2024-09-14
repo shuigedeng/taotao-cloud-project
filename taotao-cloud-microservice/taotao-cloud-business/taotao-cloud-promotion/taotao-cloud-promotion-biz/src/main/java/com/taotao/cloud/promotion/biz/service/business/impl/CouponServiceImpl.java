@@ -24,7 +24,7 @@ import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.PageQuery;
 import com.taotao.boot.common.utils.date.DateUtils;
-import com.taotao.cloud.data.mybatis.mybatisplus.utils.PageUtils;
+import com.taotao.boot.data.mybatis.mybatisplus.utils.PageUtils;
 import com.taotao.cloud.goods.api.feign.GoodsSkuApi;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.promotion.api.enums.CouponRangeDayEnum;

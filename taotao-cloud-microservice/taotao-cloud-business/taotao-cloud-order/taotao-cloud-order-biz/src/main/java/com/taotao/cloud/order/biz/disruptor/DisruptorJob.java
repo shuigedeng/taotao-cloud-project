@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.order.biz.disruptor;
 
-import com.taotao.cloud.eventbus.disruptor.tmp3.context.DisruptorTemplate;
-import com.taotao.cloud.eventbus.disruptor.tmp3.event.DisruptorBindEvent;
+import com.taotao.boot.eventbus.disruptor.tmp3.context.DisruptorTemplate;
+import com.taotao.boot.eventbus.disruptor.tmp3.event.DisruptorBindEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 

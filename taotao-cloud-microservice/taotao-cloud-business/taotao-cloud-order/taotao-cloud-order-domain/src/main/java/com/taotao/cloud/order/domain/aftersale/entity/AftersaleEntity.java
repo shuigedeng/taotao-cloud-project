@@ -4,7 +4,7 @@ package com.taotao.cloud.order.domain.aftersale.entity;
 import static lombok.AccessLevel.PRIVATE;
 
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.cloud.ddd.domain.model.AggregateRoot;
+import com.taotao.boot.ddd.domain.model.AggregateRoot;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

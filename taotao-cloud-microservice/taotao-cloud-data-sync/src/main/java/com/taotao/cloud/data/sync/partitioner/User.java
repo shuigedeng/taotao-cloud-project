@@ -1,4 +1,4 @@
-package com.taotao.cloud.data.sync.partitioner;
+package com.taotao.boot.data.sync.partitioner;
 
 import lombok.Data;
 import lombok.ToString;

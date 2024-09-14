@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.otherBatch.controller;
+package com.taotao.boot.data.sync.otherBatch.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

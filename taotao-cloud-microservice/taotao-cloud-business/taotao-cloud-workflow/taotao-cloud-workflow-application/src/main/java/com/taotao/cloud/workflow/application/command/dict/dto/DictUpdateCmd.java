@@ -2,7 +2,7 @@
 
 package com.taotao.cloud.sys.application.command.dict.dto;
 
-import com.taotao.cloud.ddd.application.model.CommonCommand;
+import com.taotao.boot.ddd.application.model.CommonCommand;
 import com.taotao.cloud.sys.application.command.dict.dto.clientobject.DictCO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

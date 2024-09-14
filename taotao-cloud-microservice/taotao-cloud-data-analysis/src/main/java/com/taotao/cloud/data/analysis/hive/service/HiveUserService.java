@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.analysis.hive.service;
+package com.taotao.boot.data.analysis.hive.service;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.data.datasource.ext.hive.HiveJdbcBaseDaoImpl;
+import com.taotao.boot.data.datasource.ext.hive.HiveJdbcBaseDaoImpl;
 import org.springframework.stereotype.Service;
 
 @Service

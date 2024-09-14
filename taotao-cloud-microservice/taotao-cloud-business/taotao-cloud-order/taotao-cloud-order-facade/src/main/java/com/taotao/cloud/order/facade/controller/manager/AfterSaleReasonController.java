@@ -19,7 +19,7 @@ package com.taotao.cloud.order.facade.controller.manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.boot.common.model.Result;
-import com.taotao.cloud.data.mybatis.mybatisplus.utils.MpUtils;
+import com.taotao.boot.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleReasonUpdateCmd;
 import com.taotao.cloud.order.application.command.aftersale.dto.AfterSaleReasonPageQry;
 import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.AfterSaleReasonCO;

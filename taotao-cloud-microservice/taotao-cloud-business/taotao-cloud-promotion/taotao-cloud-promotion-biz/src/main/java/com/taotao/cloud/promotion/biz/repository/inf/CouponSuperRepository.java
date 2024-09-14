@@ -32,7 +32,7 @@ package com.taotao.cloud.promotion.biz.repository.inf; /// *
 // package com.taotao.cloud.coupon.biz.repository;
 //
 // import com.taotao.cloud.coupon.biz.entity.Coupon;
-// import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
+// import com.taotao.boot.data.jpa.repository.JpaSuperRepository;
 // import org.springframework.stereotype.Repository;
 //
 // import jakarta.persistence.EntityManager;

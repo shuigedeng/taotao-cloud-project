@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.infrastructure.persistent.authorization.po;
 
 import com.google.common.base.MoreObjects;
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.generator.TtcAuthorizationUuidGenerator;
-import com.taotao.cloud.data.jpa.tenant.AbstractEntity;
+import com.taotao.boot.data.jpa.tenant.AbstractEntity;
 import com.taotao.cloud.security.springsecurity.constants.OAuth2Constants;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;

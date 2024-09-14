@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.manager;
 
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.boot.common.model.Result;
-import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
+import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.cloud.sys.biz.model.dto.app.AppDTO;
 import com.taotao.cloud.sys.biz.model.dto.app.AppPageDTO;
 import com.taotao.cloud.sys.biz.service.business.AppService;

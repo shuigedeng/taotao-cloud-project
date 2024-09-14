@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.jpa.entity;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.taotao.cloud.auth.biz.jpa.generator.TtcAuthorizationConsentId;
-import com.taotao.cloud.data.jpa.tenant.AbstractEntity;
+import com.taotao.boot.data.jpa.tenant.AbstractEntity;
 import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

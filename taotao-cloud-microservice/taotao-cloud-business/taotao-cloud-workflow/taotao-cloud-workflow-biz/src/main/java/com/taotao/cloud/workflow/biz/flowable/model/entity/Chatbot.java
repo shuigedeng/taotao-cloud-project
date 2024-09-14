@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.flowable.model.entity;
 
-import com.taotao.cloud.data.jpa.base.entity.JpaSuperEntity;
+import com.taotao.boot.data.jpa.base.entity.JpaSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.otherBatch.config;
-import com.taotao.cloud.data.sync.otherBatch.domain.User;
-import com.taotao.cloud.data.sync.otherBatch.support.CsvBeanValidator;
-import com.taotao.cloud.data.sync.otherBatch.support.CsvItemProcessor;
-import com.taotao.cloud.data.sync.otherBatch.support.CsvLineMapper;
-import com.taotao.cloud.data.sync.otherBatch.support.JobCompletionListener;
-import com.taotao.cloud.data.sync.otherBatch.support.JobReadListener;
-import com.taotao.cloud.data.sync.otherBatch.support.JobWriteListener;
+package com.taotao.boot.data.sync.otherBatch.config;
+import com.taotao.boot.data.sync.otherBatch.domain.User;
+import com.taotao.boot.data.sync.otherBatch.support.CsvBeanValidator;
+import com.taotao.boot.data.sync.otherBatch.support.CsvItemProcessor;
+import com.taotao.boot.data.sync.otherBatch.support.CsvLineMapper;
+import com.taotao.boot.data.sync.otherBatch.support.JobCompletionListener;
+import com.taotao.boot.data.sync.otherBatch.support.JobReadListener;
+import com.taotao.boot.data.sync.otherBatch.support.JobWriteListener;
 import java.io.FileNotFoundException;
 import javax.sql.DataSource;
 import org.springframework.batch.core.Job;

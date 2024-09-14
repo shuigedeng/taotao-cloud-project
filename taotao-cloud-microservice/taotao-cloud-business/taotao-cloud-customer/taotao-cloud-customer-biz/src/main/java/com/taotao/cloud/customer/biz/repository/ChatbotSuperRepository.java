@@ -17,7 +17,7 @@
 package com.taotao.cloud.customer.biz.repository;
 
 import com.taotao.cloud.customer.biz.model.entity.Chatbot;
-import com.taotao.cloud.data.jpa.base.repository.JpaSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 

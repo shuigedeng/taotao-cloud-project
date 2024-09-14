@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.infratructure.persistent.member.repository.inf; // package
                                                     // com.taotao.cloud.member.biz.repository;
 //
-// import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
+// import com.taotao.boot.data.jpa.repository.JpaSuperRepository;
 // import com.taotao.cloud.member.biz.entity.MemberAddressBack;
 // import org.springframework.stereotype.Repository;
 //

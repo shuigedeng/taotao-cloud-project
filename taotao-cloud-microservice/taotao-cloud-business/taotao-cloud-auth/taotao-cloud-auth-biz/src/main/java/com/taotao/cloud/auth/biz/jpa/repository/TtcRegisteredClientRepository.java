@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.repository;
 
 import com.taotao.cloud.auth.biz.jpa.entity.TtcRegisteredClient;
-import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;

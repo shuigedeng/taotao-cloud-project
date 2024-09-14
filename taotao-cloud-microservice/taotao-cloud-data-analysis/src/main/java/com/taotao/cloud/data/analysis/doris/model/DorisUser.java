@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.analysis.doris.model;
+package com.taotao.boot.data.analysis.doris.model;
 
 import java.util.Objects;
 

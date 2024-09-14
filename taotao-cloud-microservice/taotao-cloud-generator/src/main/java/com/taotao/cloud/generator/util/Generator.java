@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
-import com.taotao.cloud.data.jpa.tenant.BaseEntity;
+import com.taotao.boot.data.jpa.tenant.BaseEntity;
 import java.util.Collections;
 import java.util.HashMap;
 

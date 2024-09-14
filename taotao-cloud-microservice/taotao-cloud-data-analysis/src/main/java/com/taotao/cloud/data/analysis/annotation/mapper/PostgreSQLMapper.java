@@ -1,6 +1,6 @@
-package com.taotao.cloud.data.analysis.annotation.mapper;
+package com.taotao.boot.data.analysis.annotation.mapper;
 
-import com.taotao.cloud.data.analysis.annotation.PostgreSQL;
+import com.taotao.boot.data.analysis.annotation.PostgreSQL;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

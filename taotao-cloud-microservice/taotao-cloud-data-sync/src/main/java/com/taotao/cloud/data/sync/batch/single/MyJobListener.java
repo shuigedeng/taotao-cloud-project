@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.batch.single;
+package com.taotao.boot.data.sync.batch.single;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

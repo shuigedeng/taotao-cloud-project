@@ -192,7 +192,7 @@ dependencies {
     implementation "com.alibaba.fastjson2:fastjson2:2.0.52"
 }
 
-mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
+mainClassName = "com.taotao.boot.data.sync.TaoTaoCloudDataSyncApplication"
 description = "数据同步中心"
 archivesBaseName = 'taotao-cloud-data-sync'
 

@@ -1,6 +1,6 @@
 package com.taotao.cloud.generator.entity;
 
-import com.taotao.cloud.data.jpa.tenant.BaseEntity;
+import com.taotao.boot.data.jpa.tenant.BaseEntity;
 import com.taotao.cloud.generator.config.GenConstants;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;

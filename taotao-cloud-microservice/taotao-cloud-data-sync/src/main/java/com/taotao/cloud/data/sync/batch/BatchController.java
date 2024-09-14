@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.batch;
+package com.taotao.boot.data.sync.batch;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;

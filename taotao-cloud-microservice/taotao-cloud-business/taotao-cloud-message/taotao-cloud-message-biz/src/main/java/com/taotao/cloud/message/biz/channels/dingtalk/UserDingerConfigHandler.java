@@ -31,10 +31,10 @@ package com.taotao.cloud.message.biz.dingtalk; /// *
 // */
 // package com.taotao.cloud.demo.dingtalk;
 //
-// import com.taotao.cloud.dingtalk.model.DingerConfig;
-// import com.taotao.cloud.dingtalk.multi.AlgorithmHandler;
-// import com.taotao.cloud.dingtalk.multi.DingerConfigHandler;
-// import com.taotao.cloud.dingtalk.multi.RoundRobinHandler;
+// import com.taotao.boot.dingtalk.model.DingerConfig;
+// import com.taotao.boot.dingtalk.multi.AlgorithmHandler;
+// import com.taotao.boot.dingtalk.multi.DingerConfigHandler;
+// import com.taotao.boot.dingtalk.multi.RoundRobinHandler;
 // import java.util.ArrayList;
 // import java.util.List;
 //

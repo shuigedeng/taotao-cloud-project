@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.strategy.local;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.AccountType;
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialUserDetails;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
-import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
+import com.taotao.boot.data.jpa.tenant.DataItemStatus;
 import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
 import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;

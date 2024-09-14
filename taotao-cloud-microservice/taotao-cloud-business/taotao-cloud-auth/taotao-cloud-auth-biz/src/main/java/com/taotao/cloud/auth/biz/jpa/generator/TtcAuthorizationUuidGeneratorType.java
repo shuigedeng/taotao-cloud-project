@@ -3,7 +3,7 @@
 package com.taotao.cloud.auth.biz.jpa.generator;
 
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorization;
-import com.taotao.cloud.data.jpa.hibernate.identifier.AbstractUuidGenerator;
+import com.taotao.boot.data.jpa.hibernate.identifier.AbstractUuidGenerator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;

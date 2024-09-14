@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.message.biz.channels.websockt.stomp.base;
 
-import com.taotao.cloud.data.jpa.tenant.BaseEntity;
+import com.taotao.boot.data.jpa.tenant.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

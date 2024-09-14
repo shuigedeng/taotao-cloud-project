@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.mapper;
 
-import com.taotao.cloud.dubbo.biz.entity.PayFlow;
+import com.taotao.boot.dubbo.biz.entity.PayFlow;
 import com.taotao.cloud.payment.api.vo.PayFlowVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

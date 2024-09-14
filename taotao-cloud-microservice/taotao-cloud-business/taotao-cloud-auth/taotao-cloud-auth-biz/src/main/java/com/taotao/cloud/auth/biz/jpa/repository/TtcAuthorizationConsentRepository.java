@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.jpa.repository;
 
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorizationConsent;
 import com.taotao.cloud.auth.biz.jpa.generator.TtcAuthorizationConsentId;
-import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
-import com.taotao.cloud.data.jpa.extend.MyQuery;
+import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.extend.MyQuery;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;

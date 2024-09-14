@@ -31,7 +31,7 @@ package com.taotao.cloud.member.biz.repository.cls; /// *
 // */
 // package com.taotao.cloud.member.biz.repository;
 //
-// import com.taotao.cloud.data.jpa.repository.JpaSuperRepository;
+// import com.taotao.boot.data.jpa.repository.JpaSuperRepository;
 // import com.taotao.cloud.member.biz.entity.MemberBack;
 // import org.springframework.stereotype.Repository;
 //

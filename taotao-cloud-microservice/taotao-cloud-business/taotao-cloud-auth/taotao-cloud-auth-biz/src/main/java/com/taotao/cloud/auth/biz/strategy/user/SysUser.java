@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.biz.strategy.user;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.common.base.MoreObjects;
-import com.taotao.cloud.data.jpa.tenant.DataItemStatus;
+import com.taotao.boot.data.jpa.tenant.DataItemStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

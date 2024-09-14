@@ -18,9 +18,9 @@ package com.taotao.cloud.xxljob.event;
 
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.dingtalk.entity.DingerRequest;
-import com.taotao.cloud.dingtalk.enums.MessageSubType;
-import com.taotao.cloud.dingtalk.model.DingerSender;
+import com.taotao.boot.dingtalk.entity.DingerRequest;
+import com.taotao.boot.dingtalk.enums.MessageSubType;
+import com.taotao.boot.dingtalk.model.DingerSender;
 import com.taotao.cloud.xxljob.core.conf.XxlJobAdminConfig;
 import com.taotao.cloud.xxljob.core.model.XxlJobGroup;
 import com.taotao.cloud.xxljob.core.model.XxlJobInfo;

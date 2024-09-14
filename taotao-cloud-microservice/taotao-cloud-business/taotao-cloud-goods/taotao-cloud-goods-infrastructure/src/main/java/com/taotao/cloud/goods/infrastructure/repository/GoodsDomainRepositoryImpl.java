@@ -1,7 +1,7 @@
 package com.taotao.cloud.goods.infrastructure.repository;
 
-import com.taotao.cloud.data.mybatis.utils.MybatisUtil;
-import com.taotao.cloud.data.mybatis.utils.TransactionalUtil;
+import com.taotao.boot.data.mybatis.utils.MybatisUtil;
+import com.taotao.boot.data.mybatis.utils.TransactionalUtil;
 import com.taotao.cloud.goods.domain.goods.entity.GoodsEntity;
 import com.taotao.cloud.goods.domain.goods.repository.GoodsDomainRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IGoodsMapper;

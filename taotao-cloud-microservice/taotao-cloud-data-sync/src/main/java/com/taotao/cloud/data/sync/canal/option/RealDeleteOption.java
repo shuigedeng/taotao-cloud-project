@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.canal.option;
+package com.taotao.boot.data.sync.canal.option;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.taotao.boot.canal.option.DeleteOption;

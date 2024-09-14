@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.infrastructure.persistent.authorization.repository
 
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.generator.TtcAuthorizationConsentId;
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.po.TtcAuthorizationConsent;
-import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import jakarta.persistence.QueryHint;
 import java.util.Optional;
 import org.hibernate.jpa.AvailableHints;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.persistent.management.repository;
 
-import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Product;
 
 /**

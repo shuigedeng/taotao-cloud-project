@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.sync.otherBatch.support;
+package com.taotao.boot.data.sync.otherBatch.support;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;

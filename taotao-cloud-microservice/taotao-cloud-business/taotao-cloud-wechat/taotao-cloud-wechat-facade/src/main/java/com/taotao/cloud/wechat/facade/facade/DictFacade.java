@@ -2,7 +2,7 @@ package com.taotao.cloud.wechat.facade.facade;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.idempotent.annotation.Idempotent;
+import com.taotao.boot.idempotent.annotation.Idempotent;
 import com.taotao.cloud.ratelimit.annotation.GuavaLimit;
 import com.taotao.cloud.ratelimit.annotation.Limit;
 import com.taotao.cloud.security.springsecurity.annotation.NotAuth;

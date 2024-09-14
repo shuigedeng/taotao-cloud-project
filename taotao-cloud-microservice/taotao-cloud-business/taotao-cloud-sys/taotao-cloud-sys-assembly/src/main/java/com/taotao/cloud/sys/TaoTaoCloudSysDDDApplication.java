@@ -18,7 +18,7 @@ package com.taotao.cloud.sys;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.cloud.data.jpa.extend.JpaExtendRepositoryFactoryBean;
+import com.taotao.boot.data.jpa.extend.JpaExtendRepositoryFactoryBean;
 import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.management.repository;
 
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
-import com.taotao.cloud.data.jpa.base.repository.JpaInterfaceSuperRepository;
+import com.taotao.boot.data.jpa.base.repository.JpaInterfaceSuperRepository;
 
 /**
  * <p>ActionAuditRepository </p>

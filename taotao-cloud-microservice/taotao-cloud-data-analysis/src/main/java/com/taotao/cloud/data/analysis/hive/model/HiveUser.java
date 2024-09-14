@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.analysis.hive.model;
+package com.taotao.boot.data.analysis.hive.model;
 
 import java.util.Objects;
 

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.data.analysis.doris.mapper;
+package com.taotao.boot.data.analysis.doris.mapper;
 
-import com.taotao.cloud.data.analysis.doris.model.DorisUser;
+import com.taotao.boot.data.analysis.doris.model.DorisUser;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

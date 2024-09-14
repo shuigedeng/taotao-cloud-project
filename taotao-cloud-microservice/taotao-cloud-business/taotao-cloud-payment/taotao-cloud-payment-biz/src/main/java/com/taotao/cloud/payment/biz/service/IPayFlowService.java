@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.payment.biz.service;
 
-import com.taotao.cloud.dubbo.biz.entity.PayFlow;
+import com.taotao.boot.dubbo.biz.entity.PayFlow;
 
 /**
  * @author shuigedeng

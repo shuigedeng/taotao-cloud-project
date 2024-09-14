@@ -1,4 +1,4 @@
-package com.taotao.cloud.data.sync.parallel;
+package com.taotao.boot.data.sync.parallel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.batch.core.Job;

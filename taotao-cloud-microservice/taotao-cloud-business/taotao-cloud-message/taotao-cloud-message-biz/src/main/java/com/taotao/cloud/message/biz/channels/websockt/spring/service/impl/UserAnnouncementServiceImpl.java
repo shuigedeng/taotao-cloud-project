@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.service.impl;
 
-import com.taotao.cloud.data.mybatis.pagehelper.PageParam;
+import com.taotao.boot.data.mybatis.pagehelper.PageParam;
 import com.taotao.cloud.message.biz.ballcat.notify.enums.UserAnnouncementStateEnum;
 import com.taotao.cloud.message.biz.ballcat.notify.mapper.UserAnnouncementMapper;
 import com.taotao.cloud.message.biz.ballcat.notify.model.entity.UserAnnouncement;

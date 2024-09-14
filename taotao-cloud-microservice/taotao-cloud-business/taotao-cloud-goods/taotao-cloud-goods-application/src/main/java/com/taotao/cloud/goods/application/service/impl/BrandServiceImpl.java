@@ -24,7 +24,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.data.mybatis.mybatisplus.MpUtils;
+import com.taotao.boot.data.mybatis.mybatisplus.MpUtils;
 import com.taotao.cloud.goods.application.convert.BrandConvert;
 import com.taotao.cloud.goods.application.service.IBrandService;
 import com.taotao.cloud.goods.application.service.ICategoryBrandService;
