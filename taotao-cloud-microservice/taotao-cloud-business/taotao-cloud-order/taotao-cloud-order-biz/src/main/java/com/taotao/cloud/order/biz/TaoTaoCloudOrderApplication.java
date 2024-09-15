@@ -18,7 +18,8 @@ package com.taotao.cloud.order.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,7 @@ import org.springframework.context.annotation.Bean;
  * @since 2022-04-28 08:48:21
  */
 // @EnableBinding({TaoTaoCloudSink.class, TaoTaoCloudSource.class})
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudOrderApplication {
 

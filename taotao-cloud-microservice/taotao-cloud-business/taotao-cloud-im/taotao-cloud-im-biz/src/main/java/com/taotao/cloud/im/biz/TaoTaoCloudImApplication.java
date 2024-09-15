@@ -17,10 +17,12 @@
 package com.taotao.cloud.im.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /** https://gitee.com/lakaola/im-platform */
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudImApplication {
 

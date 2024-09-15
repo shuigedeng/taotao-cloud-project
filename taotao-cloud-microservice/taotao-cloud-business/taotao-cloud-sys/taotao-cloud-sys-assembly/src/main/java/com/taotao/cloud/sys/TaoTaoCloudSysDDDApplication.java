@@ -19,7 +19,8 @@ package com.taotao.cloud.sys;
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.data.jpa.extend.JpaExtendRepositoryFactoryBean;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
@@ -70,6 +71,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //	"com.taotao.cloud.sys.biz.repository.cls"
 //} )
 //@EnableFeignClients(basePackages = {"com.taotao.cloud.sys.api.feign"})
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudSysDDDApplication {
 

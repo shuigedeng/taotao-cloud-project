@@ -18,7 +18,8 @@ package com.taotao.cloud.message;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 
 /**
  * 系统管理中心
@@ -54,6 +55,7 @@ import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
  * @version 2022.03
  * @since 2020/11/30 下午3:33
  */
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudMessageDDDApplication {
 

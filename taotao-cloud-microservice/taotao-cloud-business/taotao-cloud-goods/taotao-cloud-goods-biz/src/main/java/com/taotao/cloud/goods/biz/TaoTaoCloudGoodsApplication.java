@@ -19,7 +19,8 @@ package com.taotao.cloud.goods.biz;
 import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.boot.common.constant.StarterName;
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**
@@ -29,6 +30,7 @@ import org.springframework.boot.SpringApplication;
  * @version 2022.03
  * @since 2022-03-15 20:59:38
  */
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudGoodsApplication {
 

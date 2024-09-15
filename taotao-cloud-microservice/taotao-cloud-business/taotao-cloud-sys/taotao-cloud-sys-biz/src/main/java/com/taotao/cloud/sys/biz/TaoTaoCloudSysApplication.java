@@ -17,7 +17,8 @@
 package com.taotao.cloud.sys.biz;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.dromara.x.file.storage.spring.EnableFileStorage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -59,6 +60,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
 	"com.taotao.cloud.sys.biz.repository.cls"
 })
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 @EnableFileStorage
 public class TaoTaoCloudSysApplication extends SpringBootServletInitializer {

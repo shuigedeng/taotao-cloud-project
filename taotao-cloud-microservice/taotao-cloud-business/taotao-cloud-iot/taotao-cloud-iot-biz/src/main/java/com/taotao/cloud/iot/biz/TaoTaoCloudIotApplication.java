@@ -17,7 +17,8 @@
 package com.taotao.cloud.iot.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**
@@ -27,6 +28,7 @@ import org.springframework.boot.SpringApplication;
  * @version 2023.04
  * @since 2023-05-10 11:04:28
  */
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudIotApplication {
 

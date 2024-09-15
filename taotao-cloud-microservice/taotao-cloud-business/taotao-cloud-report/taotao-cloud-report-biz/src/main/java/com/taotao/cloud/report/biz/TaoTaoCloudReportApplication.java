@@ -17,9 +17,11 @@
 package com.taotao.cloud.report.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudReportApplication {
 

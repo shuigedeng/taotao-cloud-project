@@ -21,7 +21,8 @@ import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.cloud.recommend.dto.ItemDTO;
 import com.taotao.cloud.recommend.service.Recommend;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import java.util.List;
 import org.springframework.boot.SpringApplication;
 
@@ -32,6 +33,7 @@ import org.springframework.boot.SpringApplication;
  * @version 2023.04
  * @since 2023-05-11 17:46:59
  */
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudRecommendApplication {
 

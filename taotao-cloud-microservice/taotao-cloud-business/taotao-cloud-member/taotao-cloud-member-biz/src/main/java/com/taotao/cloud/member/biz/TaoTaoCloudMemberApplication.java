@@ -17,7 +17,8 @@
 package com.taotao.cloud.member.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoBootApplication;
+import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -29,6 +30,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
 @EnableJpaRepositories(basePackages = "com.taotao.cloud.member.biz.repository.inf")
+@TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudMemberApplication {
 
