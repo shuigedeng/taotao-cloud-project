@@ -26,7 +26,7 @@ import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.PageQuery;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.bean.BeanUtils;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.distribution.api.enums.DistributionStatusEnum;
 import com.taotao.cloud.distribution.api.model.dto.DistributionApplyDTO;
 import com.taotao.cloud.distribution.api.model.query.DistributionPageQuery;

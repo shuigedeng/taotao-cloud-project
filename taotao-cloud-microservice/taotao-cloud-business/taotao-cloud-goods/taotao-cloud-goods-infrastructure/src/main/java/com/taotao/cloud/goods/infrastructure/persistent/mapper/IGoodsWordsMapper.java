@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsWordsPO;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 
 /**
  * 商品关键字数据处理层

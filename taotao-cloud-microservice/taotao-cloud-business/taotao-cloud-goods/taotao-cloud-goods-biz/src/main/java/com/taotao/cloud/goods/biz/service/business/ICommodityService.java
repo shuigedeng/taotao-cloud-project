@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.goods.biz.model.vo.CommoditySkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Commodity;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 
 /**

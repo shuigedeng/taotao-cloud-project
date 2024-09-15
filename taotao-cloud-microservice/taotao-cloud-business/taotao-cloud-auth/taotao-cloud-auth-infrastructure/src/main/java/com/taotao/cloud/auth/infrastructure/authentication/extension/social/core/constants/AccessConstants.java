@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.constants;
 
 
-import com.taotao.cloud.security.springsecurity.constants.BaseConstants;
+import com.taotao.boot.security.spring.constants.BaseConstants;
 
 /**
  * <p>接入模块常量 </p>

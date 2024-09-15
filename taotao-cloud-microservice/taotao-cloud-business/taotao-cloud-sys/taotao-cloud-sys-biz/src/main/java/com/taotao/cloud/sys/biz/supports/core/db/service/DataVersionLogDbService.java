@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.supports.core.db.service;
 
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.boot.common.utils.common.JsonUtils;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;

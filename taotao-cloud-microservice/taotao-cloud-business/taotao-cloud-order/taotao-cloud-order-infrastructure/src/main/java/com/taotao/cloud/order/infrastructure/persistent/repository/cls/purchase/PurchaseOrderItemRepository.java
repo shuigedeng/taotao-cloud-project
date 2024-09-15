@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.purchase;
 
 import com.taotao.cloud.order.infrastructure.persistent.po.purchase.PurchaseOrderItemPO;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 采购单子内容数据处理层 */

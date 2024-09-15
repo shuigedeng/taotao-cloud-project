@@ -21,7 +21,7 @@ import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.goods.application.command.commodity.dto.CommodityAddCmd;
 import com.taotao.cloud.goods.application.command.commodity.dto.clientobject.CommoditySkuCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CommodityPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 
 /**

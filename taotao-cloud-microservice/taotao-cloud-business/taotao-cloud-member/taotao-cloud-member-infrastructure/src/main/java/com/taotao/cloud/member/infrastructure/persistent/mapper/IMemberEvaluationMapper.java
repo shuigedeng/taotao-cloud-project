@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.infrastructure.persistent.po.MemberEvaluationPO;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;

@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.infrastructure.persistent.authorization.converter;
 
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.jackson2.OAuth2JacksonProcessor;
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.po.TtcAuthorization;
-import com.taotao.cloud.security.springsecurity.utils.OAuth2AuthorizationUtils;
+import com.taotao.boot.security.spring.utils.OAuth2AuthorizationUtils;
 import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;

@@ -16,10 +16,10 @@
 
 package com.taotao.cloud.open.platform.biz.config;
 
-import com.taotao.cloud.openapi.common.enums.AsymmetricCryEnum;
-import com.taotao.cloud.openapi.common.enums.CryModeEnum;
-import com.taotao.cloud.openapi.common.enums.SymmetricCryEnum;
-import com.taotao.cloud.openapi.server.config.OpenApiServerConfig;
+import com.taotao.boot.openapi.common.enums.AsymmetricCryEnum;
+import com.taotao.boot.openapi.common.enums.CryModeEnum;
+import com.taotao.boot.openapi.common.enums.SymmetricCryEnum;
+import com.taotao.boot.openapi.server.config.OpenApiServerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

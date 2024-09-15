@@ -28,7 +28,7 @@ import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

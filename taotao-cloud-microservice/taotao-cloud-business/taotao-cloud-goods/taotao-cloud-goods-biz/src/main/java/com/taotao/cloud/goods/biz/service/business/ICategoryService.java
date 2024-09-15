@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz.service.business;
 import com.taotao.cloud.goods.biz.model.vo.CategoryTreeVO;
 import com.taotao.cloud.goods.biz.model.vo.CategoryVO;
 import com.taotao.cloud.goods.biz.model.entity.Category;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

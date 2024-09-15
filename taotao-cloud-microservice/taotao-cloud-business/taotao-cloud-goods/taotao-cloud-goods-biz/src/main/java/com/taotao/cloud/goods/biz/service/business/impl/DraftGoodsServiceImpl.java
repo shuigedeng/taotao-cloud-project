@@ -34,7 +34,7 @@ import com.taotao.cloud.goods.biz.service.business.IDraftGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsGalleryService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.QueryUtil;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.taotao.cloud.security.springsecurity.authentication.login.form.sms.Oauth2FormSmsLoginAuthenticationToken;
+import com.taotao.boot.security.spring.authentication.login.form.sms.Oauth2FormSmsLoginAuthenticationToken;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

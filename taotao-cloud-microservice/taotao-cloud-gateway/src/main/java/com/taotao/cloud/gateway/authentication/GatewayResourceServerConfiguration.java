@@ -18,9 +18,9 @@ package com.taotao.cloud.gateway.authentication;
 
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.gateway.properties.SecurityProperties;
-import com.taotao.cloud.security.springsecurity.enums.Target;
-import com.taotao.cloud.security.springsecurity.properties.OAuth2AuthorizationProperties;
-import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.enums.Target;
+import com.taotao.boot.security.spring.properties.OAuth2AuthorizationProperties;
+import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;

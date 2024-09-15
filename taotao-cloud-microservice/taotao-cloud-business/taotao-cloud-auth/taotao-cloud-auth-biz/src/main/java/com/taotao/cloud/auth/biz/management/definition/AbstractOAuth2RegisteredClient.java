@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.management.definition;
 
 import com.taotao.cloud.auth.biz.jpa.entity.AbstractRegisteredClient;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
-import com.taotao.cloud.security.springsecurity.core.enums.Signature;
-import com.taotao.cloud.security.springsecurity.core.enums.TokenFormat;
+import com.taotao.boot.security.spring.core.enums.Signature;
+import com.taotao.boot.security.spring.core.enums.TokenFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;

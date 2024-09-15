@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.order.biz.model.entity.order.StoreFlow;
 import com.taotao.cloud.store.api.model.vo.StoreFlowPayDownloadVO;
 import com.taotao.cloud.store.api.model.vo.StoreFlowRefundDownloadVO;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

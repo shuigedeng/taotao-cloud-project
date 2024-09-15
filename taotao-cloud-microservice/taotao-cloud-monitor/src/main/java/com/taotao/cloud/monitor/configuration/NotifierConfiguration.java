@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.monitor.configuration;
+package com.taotao.boot.monitor.configuration;
 
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.date.DateUtils;

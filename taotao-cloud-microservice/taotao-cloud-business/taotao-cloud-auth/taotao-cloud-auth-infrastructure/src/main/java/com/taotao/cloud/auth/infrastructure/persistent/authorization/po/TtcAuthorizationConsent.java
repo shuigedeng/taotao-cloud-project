@@ -20,7 +20,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.generator.TtcAuthorizationConsentId;
 import com.taotao.boot.data.jpa.tenant.AbstractEntity;
-import com.taotao.cloud.security.springsecurity.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.constants.OAuth2Constants;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

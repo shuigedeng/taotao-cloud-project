@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.order.biz.task;
 
-import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
+import com.taotao.boot.job.xxl.timetask.EveryMinuteExecute;
 import com.taotao.cloud.member.api.feign.MemberRechargeApi;
 import com.taotao.cloud.member.api.model.vo.MemberRechargeVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;

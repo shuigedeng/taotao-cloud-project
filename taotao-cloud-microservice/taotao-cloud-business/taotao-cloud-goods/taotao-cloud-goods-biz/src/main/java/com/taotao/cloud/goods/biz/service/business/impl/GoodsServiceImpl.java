@@ -25,7 +25,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.goods.api.enums.GoodsAuthEnum;
 import com.taotao.cloud.goods.api.enums.GoodsStatusEnum;
@@ -56,7 +56,7 @@ import com.taotao.cloud.store.api.feign.IFeignStoreApi;
 import com.taotao.cloud.store.api.model.vo.FreightTemplateVO;
 import com.taotao.cloud.sys.api.feign.SettingApi;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.dromara.hutool.core.math.NumberUtil;

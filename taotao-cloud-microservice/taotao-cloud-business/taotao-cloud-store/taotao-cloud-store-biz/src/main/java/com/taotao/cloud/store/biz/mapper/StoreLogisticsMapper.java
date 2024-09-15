@@ -20,7 +20,7 @@ import com.taotao.cloud.store.api.model.vo.StoreLogisticsVO;
 import com.taotao.cloud.store.biz.model.entity.StoreLogistics;
 import java.util.List;
 
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Select;
 
 /** 物流公司数据处理层 */

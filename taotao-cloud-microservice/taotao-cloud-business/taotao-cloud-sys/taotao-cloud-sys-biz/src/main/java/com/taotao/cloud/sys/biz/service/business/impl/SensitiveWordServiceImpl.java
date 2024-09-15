@@ -23,7 +23,7 @@ import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
 import com.taotao.cloud.sys.biz.repository.cls.SensitiveWordRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ISensitiveWordRepository;
 import com.taotao.cloud.sys.biz.service.business.ISensitiveWordService;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;

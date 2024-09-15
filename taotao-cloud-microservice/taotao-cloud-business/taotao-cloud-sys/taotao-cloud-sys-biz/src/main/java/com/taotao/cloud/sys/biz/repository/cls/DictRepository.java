@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.repository.cls;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import java.util.Optional;
 import org.springframework.data.jpa.domain.Specification;

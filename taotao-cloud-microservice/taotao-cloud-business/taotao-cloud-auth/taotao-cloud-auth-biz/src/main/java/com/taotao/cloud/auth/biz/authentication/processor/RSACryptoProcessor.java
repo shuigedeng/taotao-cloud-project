@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.authentication.processor;
 
 import com.taotao.cloud.auth.biz.management.entity.SecretKey;
-import com.taotao.cloud.security.springsecurity.core.constants.SymbolConstants;
+import com.taotao.boot.security.spring.core.constants.SymbolConstants;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.hutool.core.codec.binary.Base64;

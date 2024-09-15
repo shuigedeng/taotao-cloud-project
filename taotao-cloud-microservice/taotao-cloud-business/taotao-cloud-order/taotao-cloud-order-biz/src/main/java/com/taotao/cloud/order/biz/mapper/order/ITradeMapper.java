@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.mapper.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.Trade;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Update;
 
 /** 交易数据处理层 */

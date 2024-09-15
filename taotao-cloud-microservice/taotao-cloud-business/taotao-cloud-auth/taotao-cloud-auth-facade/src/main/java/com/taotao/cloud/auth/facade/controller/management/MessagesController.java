@@ -19,7 +19,7 @@ package com.taotao.cloud.auth.facade.controller.management;
 import com.taotao.cloud.auth.application.service.impl.TtcAuthorizationConsentService;
 import com.taotao.boot.common.model.Result;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
+import com.taotao.boot.security.spring.annotation.NotAuth;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

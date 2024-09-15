@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.model.entity.setting;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.web.base.entity.BaseSuperEntity;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

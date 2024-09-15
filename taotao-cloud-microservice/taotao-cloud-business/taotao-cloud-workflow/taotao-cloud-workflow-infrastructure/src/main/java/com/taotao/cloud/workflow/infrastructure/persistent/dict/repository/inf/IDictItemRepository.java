@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.infrastructure.persistent.dict.repository.inf;
 
-import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
 import com.taotao.cloud.workflow.infrastructure.persistent.dict.po.DictItemPO;
 
 /**

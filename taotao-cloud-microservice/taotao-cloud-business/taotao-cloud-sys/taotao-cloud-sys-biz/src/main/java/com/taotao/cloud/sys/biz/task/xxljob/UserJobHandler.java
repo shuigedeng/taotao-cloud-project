@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.task.xxljob;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.job.xxl.executor.annotation.XxlRegister;
+import com.taotao.boot.job.xxl.executor.annotation.XxlRegister;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;

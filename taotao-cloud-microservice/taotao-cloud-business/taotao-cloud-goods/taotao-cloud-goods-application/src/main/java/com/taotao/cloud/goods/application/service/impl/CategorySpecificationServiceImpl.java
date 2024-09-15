@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.po.CategorySpecification
 import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CategorySpecificationRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICategorySpecificationRepository;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

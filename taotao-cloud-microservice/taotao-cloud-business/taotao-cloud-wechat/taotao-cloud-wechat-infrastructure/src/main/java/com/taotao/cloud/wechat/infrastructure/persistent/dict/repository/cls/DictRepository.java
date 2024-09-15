@@ -17,7 +17,7 @@
 package com.taotao.cloud.wechat.infrastructure.persistent.dict.repository.cls;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dict.po.DictPO;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import java.util.Optional;
 import org.springframework.data.jpa.domain.Specification;

@@ -22,7 +22,7 @@ import com.taotao.cloud.sys.biz.model.dto.position.PositionUpdateDTO;
 import com.taotao.cloud.sys.biz.model.vo.position.PositionQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.sys.biz.service.business.IPositionService;
-import com.taotao.cloud.web.base.controller.BaseSuperController;
+import com.taotao.boot.web.base.controller.BaseSuperController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;

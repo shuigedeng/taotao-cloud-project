@@ -26,7 +26,7 @@ import com.taotao.cloud.log.api.model.dto.LogQueryCriteria;
 import com.taotao.cloud.log.biz.entity.Log;
 import com.taotao.cloud.log.biz.mapper.ILogMapper;
 import com.taotao.cloud.log.biz.service.ILogService;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;

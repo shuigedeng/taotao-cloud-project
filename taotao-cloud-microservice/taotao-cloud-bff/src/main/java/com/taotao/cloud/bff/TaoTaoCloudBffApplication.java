@@ -17,7 +17,7 @@
 package com.taotao.cloud.bff;
 
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
 // @EnableTaoTaoCloudJpa
 // @EnableTaoTaoCloudP6spy
 // @EnableTaoTaoCloudFeign

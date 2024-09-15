@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.Position;
 import com.taotao.cloud.sys.biz.repository.cls.JobRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IJobRepository;
 import com.taotao.cloud.sys.biz.service.business.IPositionService;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

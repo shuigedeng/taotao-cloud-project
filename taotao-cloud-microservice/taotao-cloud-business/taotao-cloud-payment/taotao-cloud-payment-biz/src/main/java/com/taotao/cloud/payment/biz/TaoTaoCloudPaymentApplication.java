@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

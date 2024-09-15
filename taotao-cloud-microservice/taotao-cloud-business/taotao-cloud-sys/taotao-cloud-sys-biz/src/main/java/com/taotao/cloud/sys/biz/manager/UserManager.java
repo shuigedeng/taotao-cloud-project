@@ -20,8 +20,8 @@ import com.taotao.cloud.sys.biz.mapper.IUserMapper;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.repository.cls.UserRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRepository;
-import com.taotao.cloud.web.annotation.Manager;
-import com.taotao.cloud.web.base.manager.BaseSuperManager;
+import com.taotao.boot.web.annotation.Manager;
+import com.taotao.boot.web.base.manager.BaseSuperManager;
 import lombok.AllArgsConstructor;
 
 /**

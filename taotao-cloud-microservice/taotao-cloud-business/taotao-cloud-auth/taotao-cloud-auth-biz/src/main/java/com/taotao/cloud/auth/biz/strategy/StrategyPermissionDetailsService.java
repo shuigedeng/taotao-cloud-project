@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-import com.taotao.cloud.security.springsecurity.core.domain.TtcPermission;
+import com.taotao.boot.security.spring.core.domain.TtcPermission;
 import java.util.List;
 
 /**

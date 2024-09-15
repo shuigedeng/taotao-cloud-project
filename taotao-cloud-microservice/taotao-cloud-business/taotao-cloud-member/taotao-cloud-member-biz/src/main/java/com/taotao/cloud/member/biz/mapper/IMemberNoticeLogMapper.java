@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.biz.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberNoticeLog;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 
 /** 会员消息数据处理层 */
 public interface IMemberNoticeLogMapper extends BaseSuperMapper<MemberNoticeLog, Long> {}

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.gateway.authentication;
 
-import com.taotao.cloud.security.springsecurity.constants.BaseConstants;
-import com.taotao.cloud.security.springsecurity.core.authority.TtcGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.properties.OAuth2EndpointProperties;
+import com.taotao.boot.security.spring.constants.BaseConstants;
+import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

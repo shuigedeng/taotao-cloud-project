@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.repository.cls;
 
 import com.taotao.cloud.goods.biz.model.entity.CategorySpecification;
-import com.taotao.cloud.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 

@@ -1043,7 +1043,7 @@ taotao:
 tlog:
   pattern: "$preApp:$preIp:$spanId:$traceId"
   enableInvokeTimePrint: false
-  idGenerator: com.taotao.cloud.logger.tlog.TlogIdGenerator
+  idGenerator: com.taotao.boot.logger.tlog.TlogIdGenerator
   mdcEnable: true
 
 sa-token:

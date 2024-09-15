@@ -29,7 +29,7 @@ import com.taotao.boot.common.utils.common.CodeUtil;
 import com.taotao.boot.common.utils.common.IdGeneratorUtils;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.common.RandomUtils;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.workflow.api.vo.entity.DictionaryDataEntity;
 import com.taotao.cloud.workflow.biz.common.constant.MsgCode;
 import com.taotao.cloud.workflow.biz.common.model.engine.flowengine.FlowEngineListVO;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.po.purchase;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

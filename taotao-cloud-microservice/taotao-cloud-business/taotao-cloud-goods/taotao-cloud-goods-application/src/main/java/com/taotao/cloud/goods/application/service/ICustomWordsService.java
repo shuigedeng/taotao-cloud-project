@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.application.command.goods.dto.CustomWordsAddCmd;
 import com.taotao.cloud.goods.application.command.goods.dto.CustomWordsUpdateCmd;
 import com.taotao.cloud.goods.application.command.goods.dto.clientobject.CustomWordsVO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWordsPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 
 /**

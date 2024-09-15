@@ -23,7 +23,7 @@ import com.taotao.boot.common.utils.io.FileUtils;
 import com.taotao.cloud.goods.infrastructure.persistent.mapper.IGoodsGalleryMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsGalleryPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IGoodsGalleryRepository;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

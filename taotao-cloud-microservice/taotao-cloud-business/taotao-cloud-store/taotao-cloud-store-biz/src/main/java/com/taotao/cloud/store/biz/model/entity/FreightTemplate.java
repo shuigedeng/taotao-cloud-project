@@ -18,8 +18,8 @@ package com.taotao.cloud.store.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.store.api.enums.FreightTemplateEnum;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.base.entity.JpaEntityListener;
+import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.web.base.entity.JpaEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;

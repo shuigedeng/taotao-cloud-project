@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.mapper.trade;
 
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 
 /** 订单日志数据处理层 */
 public interface IOrderLogMapper extends BaseSuperMapper<OrderLogPO, Long> {}

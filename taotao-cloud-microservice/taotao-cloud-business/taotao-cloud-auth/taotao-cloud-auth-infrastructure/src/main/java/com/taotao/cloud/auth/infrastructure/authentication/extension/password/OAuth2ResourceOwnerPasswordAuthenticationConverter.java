@@ -16,13 +16,13 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.password;
 
-import static com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType.PASSWORD;
+import static com.taotao.boot.security.spring.oauth2.TtcAuthorizationGrantType.PASSWORD;
 
 import com.taotao.cloud.auth.infrastructure.authentication.extension.OAuth2AbstractAuthenticationConverter;
 import com.taotao.cloud.auth.infrastructure.crypto.HttpCryptoProcessor;
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2EndpointUtils;
-import com.taotao.cloud.security.springsecurity.constants.HttpHeaders;
-import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
+import com.taotao.boot.security.spring.constants.HttpHeaders;
+import com.taotao.boot.security.spring.oauth2.TtcAuthorizationGrantType;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;

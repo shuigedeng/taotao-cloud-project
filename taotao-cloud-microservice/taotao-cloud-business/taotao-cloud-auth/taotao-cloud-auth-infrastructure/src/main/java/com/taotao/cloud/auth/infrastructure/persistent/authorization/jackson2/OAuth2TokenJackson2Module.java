@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.persistent.authorization.jackson2;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.taotao.cloud.security.springsecurity.utils.Jackson2Constants;
+import com.taotao.boot.security.spring.utils.Jackson2Constants;
 import org.springframework.security.jackson2.SecurityJackson2Modules;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;

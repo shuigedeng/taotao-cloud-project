@@ -26,7 +26,7 @@ import com.taotao.cloud.order.application.command.aftersale.dto.clientobject.Aft
 import com.taotao.cloud.order.application.converter.AfterSaleReasonConvert;
 import com.taotao.cloud.order.application.service.aftersale.IAfterSaleReasonService;
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

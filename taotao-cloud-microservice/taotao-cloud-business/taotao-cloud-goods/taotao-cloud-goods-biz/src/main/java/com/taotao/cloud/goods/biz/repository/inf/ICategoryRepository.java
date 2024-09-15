@@ -17,6 +17,6 @@
 package com.taotao.cloud.goods.biz.repository.inf;
 
 import com.taotao.cloud.goods.biz.model.entity.Category;
-import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
 
 public interface ICategoryRepository extends BaseInterfaceSuperRepository<Category, Long> {}

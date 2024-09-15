@@ -17,10 +17,10 @@
 package com.taotao.cloud.sys.biz.task.job.schedule.record;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.job.biz.schedule.entity.ScheduledJob;
-import com.taotao.cloud.job.biz.schedule.service.ScheduledJobService;
-import com.taotao.cloud.job.schedule.model.ScheduledTask;
-import com.taotao.cloud.job.schedule.task.ScheduleTaskRecord;
+import com.taotao.boot.job.biz.schedule.entity.ScheduledJob;
+import com.taotao.boot.job.biz.schedule.service.ScheduledJobService;
+import com.taotao.boot.job.schedule.model.ScheduledTask;
+import com.taotao.boot.job.schedule.task.ScheduleTaskRecord;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.dromara.hutool.core.bean.BeanUtil;

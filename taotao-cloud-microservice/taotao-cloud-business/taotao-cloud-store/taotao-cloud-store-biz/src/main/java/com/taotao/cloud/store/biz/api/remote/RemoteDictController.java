@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.store.biz.api.remote;
 
-import com.taotao.cloud.web.base.controller.BaseBusinessController;
+import com.taotao.boot.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;

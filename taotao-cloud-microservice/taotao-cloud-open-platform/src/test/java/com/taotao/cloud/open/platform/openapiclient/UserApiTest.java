@@ -17,14 +17,14 @@
 package com.taotao.cloud.open.platform.openapiclient;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.openapi.client.OpenApiClient;
-import com.taotao.cloud.openapi.client.OpenApiClientBuilder;
-import com.taotao.cloud.openapi.client.model.Gender;
-import com.taotao.cloud.openapi.client.model.User;
-import com.taotao.cloud.openapi.common.enums.AsymmetricCryEnum;
-import com.taotao.cloud.openapi.common.enums.CryModeEnum;
-import com.taotao.cloud.openapi.common.enums.SymmetricCryEnum;
-import com.taotao.cloud.openapi.common.model.OutParams;
+import com.taotao.boot.openapi.client.OpenApiClient;
+import com.taotao.boot.openapi.client.OpenApiClientBuilder;
+import com.taotao.boot.openapi.client.model.Gender;
+import com.taotao.boot.openapi.client.model.User;
+import com.taotao.boot.openapi.common.enums.AsymmetricCryEnum;
+import com.taotao.boot.openapi.common.enums.CryModeEnum;
+import com.taotao.boot.openapi.common.enums.SymmetricCryEnum;
+import com.taotao.boot.openapi.common.model.OutParams;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;

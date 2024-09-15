@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.metadata.processor;
 
-import com.taotao.cloud.security.springsecurity.event.domain.RequestMapping;
+import com.taotao.boot.security.spring.event.domain.RequestMapping;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

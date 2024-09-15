@@ -24,7 +24,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.constant.RedisConstant;
 import com.taotao.boot.common.exception.BaseException;
 import com.taotao.boot.common.model.Result;
-import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
+import com.taotao.boot.security.spring.core.utils.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 

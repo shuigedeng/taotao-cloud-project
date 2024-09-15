@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
 import com.taotao.cloud.distribution.biz.model.entity.DistributionCash;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 
 /**
  * 分销佣金数据处理层

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.handler;
 
-import com.taotao.cloud.security.springsecurity.core.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.core.AccessPrincipal;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**

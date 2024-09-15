@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.entity;
 
 import com.google.common.base.MoreObjects;
 import com.taotao.cloud.auth.biz.jpa.generator.TtcRegisteredClientUuidGenerator;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.core.constants.OAuth2Constants;
 import jakarta.persistence.*;
 import java.util.Objects;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

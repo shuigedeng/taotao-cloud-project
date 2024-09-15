@@ -35,7 +35,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrandPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.BrandRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IBrandRepository;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

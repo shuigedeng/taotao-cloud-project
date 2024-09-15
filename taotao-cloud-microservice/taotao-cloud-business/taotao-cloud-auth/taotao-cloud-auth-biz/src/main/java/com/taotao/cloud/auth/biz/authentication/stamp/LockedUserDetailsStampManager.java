@@ -22,7 +22,7 @@ import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.core.constants.OAuth2Constants;
 import java.time.Duration;
 import org.dromara.hutool.core.data.id.IdUtil;
 import org.springframework.beans.factory.InitializingBean;

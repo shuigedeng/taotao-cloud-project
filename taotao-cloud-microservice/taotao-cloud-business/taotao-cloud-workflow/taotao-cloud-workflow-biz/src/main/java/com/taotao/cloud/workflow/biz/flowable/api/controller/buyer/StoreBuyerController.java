@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.api.controller.buyer;
 
 import com.taotao.boot.common.model.PageResult;
 import com.taotao.boot.common.model.Result;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.api.feign.IFeignStoreGoodsLabelApi;
 import com.taotao.cloud.goods.api.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.store.api.feign.IFeignStoreApi;
@@ -31,7 +31,7 @@ import com.taotao.cloud.store.api.model.vo.StoreBasicInfoVO;
 import com.taotao.cloud.store.api.model.vo.StoreDetailVO;
 import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

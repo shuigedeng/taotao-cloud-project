@@ -24,7 +24,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.PageQuery;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.member.sys.model.vo.GoodsCollectionVO;
 import com.taotao.cloud.member.biz.mapper.IGoodsCollectionMapper;
 import com.taotao.cloud.member.biz.model.entity.MemberGoodsCollection;

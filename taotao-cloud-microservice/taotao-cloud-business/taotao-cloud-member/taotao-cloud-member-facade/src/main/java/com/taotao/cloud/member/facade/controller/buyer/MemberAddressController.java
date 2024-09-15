@@ -27,8 +27,8 @@ import com.taotao.cloud.member.application.command.address.dto.clientobject.Memb
 import com.taotao.cloud.member.application.converter.MemberAddressConvert;
 import com.taotao.cloud.member.application.service.IMemberAddressService;
 import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddressPO;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

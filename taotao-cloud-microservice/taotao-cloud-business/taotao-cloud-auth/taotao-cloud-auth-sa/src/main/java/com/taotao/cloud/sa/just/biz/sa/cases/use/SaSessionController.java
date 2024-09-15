@@ -20,7 +20,7 @@ import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.session.SaSessionCustomUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.taotao.cloud.security.satoken.model.SysUser;
+import com.taotao.boot.security.satoken.model.SysUser;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;

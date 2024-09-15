@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.biz.model.entity.CategoryBrand;
 import com.taotao.cloud.goods.biz.repository.cls.CategoryBrandRepository;
 import com.taotao.cloud.goods.biz.repository.inf.ICategoryBrandRepository;
 import com.taotao.cloud.goods.biz.service.business.ICategoryBrandService;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.facade.controller.management;
 
-import com.taotao.cloud.security.springsecurity.constants.DefaultConstants;
-import com.taotao.cloud.security.springsecurity.constants.SymbolConstants;
+import com.taotao.boot.security.spring.constants.DefaultConstants;
+import com.taotao.boot.security.spring.constants.SymbolConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.stereotype.Controller;

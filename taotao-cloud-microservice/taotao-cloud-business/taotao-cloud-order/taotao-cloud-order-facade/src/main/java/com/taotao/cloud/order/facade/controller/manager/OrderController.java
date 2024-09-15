@@ -27,7 +27,7 @@ import com.taotao.cloud.order.application.command.order.dto.OrderPageQry;
 import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderSimpleCO;
 import com.taotao.cloud.order.application.service.order.IOrderPriceService;
 import com.taotao.cloud.order.application.service.order.IOrderService;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

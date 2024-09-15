@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.application.service;
 import com.taotao.cloud.goods.application.command.category.dto.CategoryParameterGroupAddCmd;
 import com.taotao.cloud.goods.application.command.parameter.dto.clientobject.ParameterGroupCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroupPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 
 import java.util.List;
 

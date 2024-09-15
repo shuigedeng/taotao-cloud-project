@@ -1428,7 +1428,7 @@ test:
 tlog:
   pattern: "$preApp:$preIp:$spanId:$traceId"
   enableInvokeTimePrint: false
-  idGenerator: com.taotao.cloud.logger.tlog.TlogIdGenerator
+  idGenerator: com.taotao.boot.logger.tlog.TlogIdGenerator
   mdcEnable: true
 
 pagehelper:
@@ -1443,7 +1443,7 @@ kylin:
     expire: 30000               #过期时间，默认值30000L 单位：毫秒
     retry-interval: 100         #获取锁失败时重试时间间隔，默认值100L 单位：毫秒
     lock-key-prefix: kylin-lock #锁前缀 默认配置
-    primary-executor: com.taotao.cloud.lock.kylin.executor.redisson.RedissonLockExecutor #默认执行器。默认redisson>zookeeper
+    primary-executor: com.taotao.boot.lock.kylin.executor.redisson.RedissonLockExecutor #默认执行器。默认redisson>zookeeper
     redisson: true              #是否开启redisson 默认true
     #zookeeper:
     #  zk-servers: 127.0.0.1:2181 #zk的server地址，多个server之间使用英文逗号分隔开 。配置地址则开启zookeeper

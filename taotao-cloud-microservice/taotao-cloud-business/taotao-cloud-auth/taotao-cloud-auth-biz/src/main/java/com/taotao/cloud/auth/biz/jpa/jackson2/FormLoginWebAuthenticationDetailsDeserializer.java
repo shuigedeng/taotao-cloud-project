@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.MissingNode;
-import com.taotao.cloud.security.springsecurity.core.details.FormLoginWebAuthenticationDetails;
+import com.taotao.boot.security.spring.core.details.FormLoginWebAuthenticationDetails;
 import java.io.IOException;
 
 /**

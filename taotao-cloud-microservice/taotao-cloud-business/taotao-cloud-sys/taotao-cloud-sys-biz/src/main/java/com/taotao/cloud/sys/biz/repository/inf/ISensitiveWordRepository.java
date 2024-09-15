@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.repository.inf;
 
 import com.taotao.cloud.sys.biz.model.entity.sensitive.SensitiveWord;
-import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

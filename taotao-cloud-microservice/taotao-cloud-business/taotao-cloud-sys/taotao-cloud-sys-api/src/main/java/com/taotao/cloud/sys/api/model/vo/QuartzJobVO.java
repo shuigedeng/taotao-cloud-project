@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.api.model.vo;
 
-//import com.taotao.cloud.job.quartz.enums.QuartzJobCode;
+//import com.taotao.boot.job.quartz.enums.QuartzJobCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

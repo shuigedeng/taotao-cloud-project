@@ -20,8 +20,8 @@ import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.all.enums.Ac
 import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialUserDetails;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
 import com.taotao.boot.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
-import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
+import com.taotao.boot.security.spring.core.domain.TtcUser;
+import com.taotao.boot.security.spring.core.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.hutool.core.data.id.IdUtil;

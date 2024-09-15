@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.task;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
+import com.taotao.boot.job.xxl.timetask.EveryDayExecute;
 import java.util.Calendar;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;

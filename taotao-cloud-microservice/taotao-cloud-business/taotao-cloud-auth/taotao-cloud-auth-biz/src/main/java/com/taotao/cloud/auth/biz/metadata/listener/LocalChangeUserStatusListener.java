@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.metadata.listener;
 
 import com.taotao.cloud.auth.biz.strategy.local.SysUserService;
 import com.taotao.boot.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.event.LocalChangeUserStatusEvent;
-import com.taotao.cloud.security.springsecurity.event.domain.UserStatus;
+import com.taotao.boot.security.spring.event.LocalChangeUserStatusEvent;
+import com.taotao.boot.security.spring.event.domain.UserStatus;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

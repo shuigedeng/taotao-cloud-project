@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.infrastructure.authentication.extension.password;
 
-import com.taotao.cloud.security.springsecurity.oauth2.TtcAuthorizationGrantType;
+import com.taotao.boot.security.spring.oauth2.TtcAuthorizationGrantType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;

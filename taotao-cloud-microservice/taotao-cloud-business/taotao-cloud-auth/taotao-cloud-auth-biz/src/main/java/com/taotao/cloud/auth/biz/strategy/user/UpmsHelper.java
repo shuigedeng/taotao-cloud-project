@@ -17,9 +17,9 @@
 package com.taotao.cloud.auth.biz.strategy.user;
 
 import com.taotao.boot.data.jpa.tenant.DataItemStatus;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
-import com.taotao.cloud.security.springsecurity.core.utils.SecurityUtils;
+import com.taotao.boot.security.spring.core.domain.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.core.domain.TtcUser;
+import com.taotao.boot.security.spring.core.utils.SecurityUtils;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;

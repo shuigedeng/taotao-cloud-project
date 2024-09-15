@@ -16,11 +16,11 @@
 
 package com.taotao.cloud.open.platform.openapiclient;
 
-import com.taotao.cloud.openapi.client.annotation.OpenApiMethod;
-import com.taotao.cloud.openapi.client.annotation.OpenApiRef;
-import com.taotao.cloud.openapi.client.model.Gender;
-import com.taotao.cloud.openapi.client.model.User;
-import com.taotao.cloud.openapi.common.enums.CryModeEnum;
+import com.taotao.boot.openapi.client.annotation.OpenApiMethod;
+import com.taotao.boot.openapi.client.annotation.OpenApiRef;
+import com.taotao.boot.openapi.client.model.Gender;
+import com.taotao.boot.openapi.client.model.User;
+import com.taotao.boot.openapi.common.enums.CryModeEnum;
 import java.util.List;
 import java.util.Map;
 

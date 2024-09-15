@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.mapper;
 import com.taotao.cloud.sys.biz.model.bo.DictDeptBO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.model.params.DictDeptParams;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

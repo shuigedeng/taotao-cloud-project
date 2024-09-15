@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.task;
 
 import com.taotao.boot.cache.redis.repository.RedisRepository;
-import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
+import com.taotao.boot.job.xxl.timetask.EveryDayExecute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

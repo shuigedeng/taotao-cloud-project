@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
-import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IGoodsSkuRepository extends BaseInterfaceSuperRepository<GoodsSkuPO, Long> {}

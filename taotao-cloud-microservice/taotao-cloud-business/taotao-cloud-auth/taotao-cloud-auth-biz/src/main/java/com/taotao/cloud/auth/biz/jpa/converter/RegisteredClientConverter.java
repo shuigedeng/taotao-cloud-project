@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.jpa.converter;
 
 import com.taotao.cloud.auth.biz.jpa.entity.RegisteredClientDetails;
-import com.taotao.cloud.security.springsecurity.core.utils.OAuth2AuthorizationUtils;
+import com.taotao.boot.security.spring.core.utils.OAuth2AuthorizationUtils;
 import java.util.Set;
 import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.core.convert.converter.Converter;

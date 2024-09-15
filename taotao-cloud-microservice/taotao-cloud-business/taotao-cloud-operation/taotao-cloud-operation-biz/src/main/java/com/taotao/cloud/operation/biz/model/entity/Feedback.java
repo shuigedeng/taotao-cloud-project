@@ -18,9 +18,9 @@ package com.taotao.cloud.operation.biz.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.operation.api.enums.FeedbackTypeEnum;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
-import com.taotao.cloud.web.enums.SensitiveStrategy;
-import com.taotao.cloud.web.sensitive.desensitize.Sensitive;
+import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.web.enums.SensitiveStrategy;
+import com.taotao.boot.web.sensitive.desensitize.Sensitive;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

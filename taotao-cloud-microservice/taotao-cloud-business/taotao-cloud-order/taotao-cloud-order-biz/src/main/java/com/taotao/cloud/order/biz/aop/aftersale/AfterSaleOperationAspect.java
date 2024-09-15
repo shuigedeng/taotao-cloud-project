@@ -24,8 +24,8 @@ import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSaleLog;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.model.SecurityUser;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

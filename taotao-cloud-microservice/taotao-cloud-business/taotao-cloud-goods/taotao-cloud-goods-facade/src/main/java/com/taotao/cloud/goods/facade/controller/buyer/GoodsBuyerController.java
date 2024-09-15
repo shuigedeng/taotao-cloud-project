@@ -27,7 +27,7 @@ import com.taotao.cloud.goods.application.elasticsearch.pojo.EsGoodsRelatedInfo;
 import com.taotao.cloud.goods.application.service.IEsGoodsSearchService;
 import com.taotao.cloud.goods.application.service.IGoodsService;
 import com.taotao.cloud.goods.application.service.IGoodsSkuService;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

@@ -17,8 +17,8 @@
 package com.taotao.cloud.order.biz.task;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.taotao.cloud.job.xxl.timetask.EveryMinuteExecute;
-import com.taotao.cloud.lock.support.DistributedLock;
+import com.taotao.boot.job.xxl.timetask.EveryMinuteExecute;
+import com.taotao.boot.lock.support.DistributedLock;
 import com.taotao.cloud.order.api.enums.order.OrderStatusEnum;
 import com.taotao.cloud.order.biz.model.entity.order.Order;
 import com.taotao.cloud.order.biz.service.business.order.IOrderService;

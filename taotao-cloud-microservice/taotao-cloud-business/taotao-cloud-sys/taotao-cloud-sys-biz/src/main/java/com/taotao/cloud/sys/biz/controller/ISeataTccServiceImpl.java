@@ -2,7 +2,7 @@ package com.taotao.cloud.sys.biz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.job.quartz.enums.QuartzJobCode;
+import com.taotao.boot.job.quartz.enums.QuartzJobCode;
 import io.seata.core.context.RootContext;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import io.seata.rm.tcc.api.BusinessActionContextParameter;

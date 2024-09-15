@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.application.command.brand.dto.clientobject.BrandCO
 import com.taotao.cloud.goods.application.convert.BrandConvert;
 import com.taotao.cloud.goods.application.service.IBrandService;
 import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

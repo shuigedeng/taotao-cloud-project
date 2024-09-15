@@ -19,7 +19,7 @@ package com.taotao.cloud.goods.biz;
 import com.taotao.boot.common.constant.ServiceName;
 import com.taotao.boot.common.constant.StarterName;
 import com.taotao.boot.common.utils.common.PropertyUtils;
-import com.taotao.cloud.web.annotation.TaoTaoCloudApplication;
+import com.taotao.boot.web.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
 
 /**

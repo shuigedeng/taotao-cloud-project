@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.cloud.auth.biz.utils.JsonNodeUtils;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.core.domain.TtcGrantedAuthority;
 import java.io.IOException;
 import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;

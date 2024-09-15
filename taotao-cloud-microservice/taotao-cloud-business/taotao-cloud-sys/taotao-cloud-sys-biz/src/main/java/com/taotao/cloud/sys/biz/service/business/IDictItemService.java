@@ -20,7 +20,7 @@ import com.taotao.cloud.sys.biz.model.dto.dictItem.DictItemDTO;
 import com.taotao.cloud.sys.biz.model.page.DictItemPageQuery;
 import com.taotao.cloud.sys.biz.model.query.DictItemQuery;
 import com.taotao.cloud.sys.biz.model.entity.dict.DictItem;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.infrastructure.persistent.dept.mapper;
 
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.wechat.infrastructure.persistent.dept.po.DeptPO;
 
 /**

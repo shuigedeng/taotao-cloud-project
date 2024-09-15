@@ -17,7 +17,7 @@
 package com.taotao.cloud.distribution.biz.mapper;
 
 import com.taotao.cloud.distribution.biz.model.entity.DistributionSelectedGoods;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 
 /**
  * 选择分销商品数据处理层

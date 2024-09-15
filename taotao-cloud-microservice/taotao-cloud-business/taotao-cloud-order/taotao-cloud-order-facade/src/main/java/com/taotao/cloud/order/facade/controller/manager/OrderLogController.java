@@ -24,7 +24,7 @@ import com.taotao.cloud.order.application.command.order.dto.OrderLogPageQry;
 import com.taotao.cloud.order.application.command.order.dto.clientobject.OrderLogCO;
 import com.taotao.cloud.order.application.service.trade.IOrderLogService;
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

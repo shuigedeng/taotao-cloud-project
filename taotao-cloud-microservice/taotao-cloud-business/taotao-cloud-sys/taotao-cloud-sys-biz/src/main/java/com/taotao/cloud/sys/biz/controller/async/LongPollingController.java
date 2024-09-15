@@ -8,7 +8,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.threadpool.properties.ThreadPoolProperties;
+import com.taotao.boot.threadpool.properties.ThreadPoolProperties;
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

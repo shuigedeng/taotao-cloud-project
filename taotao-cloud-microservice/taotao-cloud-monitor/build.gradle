@@ -32,7 +32,7 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 }
 
-mainClassName = "com.taotao.cloud.monitor.TaoTaoCloudMonitorApplication"
+mainClassName = "com.taotao.boot.monitor.TaoTaoCloudMonitorApplication"
 description = "监控中心"
 archivesBaseName = 'taotao-cloud-monitor'
 

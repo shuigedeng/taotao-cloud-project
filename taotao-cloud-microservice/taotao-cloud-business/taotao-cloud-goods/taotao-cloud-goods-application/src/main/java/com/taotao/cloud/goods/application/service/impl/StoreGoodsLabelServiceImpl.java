@@ -28,8 +28,8 @@ import com.taotao.cloud.goods.infrastructure.persistent.mapper.IStoreGoodsLabelM
 import com.taotao.cloud.goods.infrastructure.persistent.po.StoreGoodsLabelPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.StoreGoodsLabelRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IStoreGoodsLabelRepository;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

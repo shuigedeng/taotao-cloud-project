@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.biz.engine.mapper;
 
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.workflow.biz.engine.entity.FlowTaskCirculateEntity;
 
 /** 流程传阅 */

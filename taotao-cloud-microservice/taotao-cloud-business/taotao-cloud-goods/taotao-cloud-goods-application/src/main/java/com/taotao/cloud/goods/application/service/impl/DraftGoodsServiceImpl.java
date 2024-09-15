@@ -31,7 +31,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsGalleryPO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.DraftGoodsRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IDraftGoodsRepository;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

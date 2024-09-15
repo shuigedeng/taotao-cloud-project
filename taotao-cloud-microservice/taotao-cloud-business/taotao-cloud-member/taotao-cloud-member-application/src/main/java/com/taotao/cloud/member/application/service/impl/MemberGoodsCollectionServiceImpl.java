@@ -27,7 +27,7 @@ import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.member.application.service.IMemberGoodsCollectionService;
 import com.taotao.cloud.member.infrastructure.persistent.mapper.IGoodsCollectionMapper;
 import com.taotao.cloud.member.infrastructure.persistent.po.MemberGoodsCollectionPO;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;

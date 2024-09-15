@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.service.feign;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 
 /**
  * ISysDictService

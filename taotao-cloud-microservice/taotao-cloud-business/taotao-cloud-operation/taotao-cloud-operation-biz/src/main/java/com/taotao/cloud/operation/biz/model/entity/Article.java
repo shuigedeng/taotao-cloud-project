@@ -20,7 +20,7 @@ import org.dromara.hutoolcore.text.CharSequenceUtil;
 import org.dromara.hutoolhttp.HtmlUtil;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.operation.api.enums.ArticleEnum;
-import com.taotao.cloud.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.web.base.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

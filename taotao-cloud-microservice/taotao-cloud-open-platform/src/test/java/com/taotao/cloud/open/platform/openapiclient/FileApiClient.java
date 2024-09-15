@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.open.platform.openapiclient;
 
-import com.taotao.cloud.openapi.client.annotation.OpenApiMethod;
-import com.taotao.cloud.openapi.client.annotation.OpenApiRef;
-import com.taotao.cloud.openapi.common.model.FileBinary;
+import com.taotao.boot.openapi.client.annotation.OpenApiMethod;
+import com.taotao.boot.openapi.client.annotation.OpenApiRef;
+import com.taotao.boot.openapi.common.model.FileBinary;
 import java.util.List;
 
 /**

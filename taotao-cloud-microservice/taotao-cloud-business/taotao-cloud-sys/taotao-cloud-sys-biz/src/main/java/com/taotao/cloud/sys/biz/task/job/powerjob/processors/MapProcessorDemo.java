@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.task.job.powerjob.processors;
 
 import com.google.common.collect.Lists;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.job.biz.powerjob.MysteryService;
+import com.taotao.boot.job.biz.powerjob.MysteryService;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.infrastructure.persistent.dept.mapper;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 
 /**
  * CompanyMapper

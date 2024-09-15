@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
-import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

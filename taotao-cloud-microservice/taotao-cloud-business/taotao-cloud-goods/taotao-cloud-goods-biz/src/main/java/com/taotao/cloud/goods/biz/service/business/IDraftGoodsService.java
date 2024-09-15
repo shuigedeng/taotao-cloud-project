@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.biz.model.dto.DraftGoodsSkuParamsDTO;
 import com.taotao.cloud.goods.biz.model.page.DraftGoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.DraftGoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.entity.DraftGoods;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 
 /**
  * 草稿商品业务层

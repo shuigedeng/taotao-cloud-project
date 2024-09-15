@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.mapper.IGoodsWordsMapper
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsWordsPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.GoodsWordsRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IGoodsWordsRepository;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

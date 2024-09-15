@@ -17,8 +17,8 @@
 package com.taotao.cloud.sys.biz.task.job.quartz.record;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.job.quartz.entity.QuartzTaskLog;
-import com.taotao.cloud.job.quartz.utils.QuartzLogRecord;
+import com.taotao.boot.job.quartz.entity.QuartzTaskLog;
+import com.taotao.boot.job.quartz.utils.QuartzLogRecord;
 import lombok.AllArgsConstructor;
 import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.stereotype.Component;

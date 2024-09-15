@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.task;
 
 import com.taotao.cloud.goods.application.service.business.IGoodsService;
-import com.taotao.cloud.job.xxl.timetask.EveryDayExecute;
+import com.taotao.boot.job.xxl.timetask.EveryDayExecute;
 import com.taotao.cloud.member.api.feign.IFeignMemberEvaluationApi;
 import jakarta.annotation.Resource;
 import java.util.List;

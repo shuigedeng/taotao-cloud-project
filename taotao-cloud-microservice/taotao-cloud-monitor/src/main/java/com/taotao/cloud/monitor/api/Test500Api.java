@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.monitor.api;
+package com.taotao.boot.monitor.api;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.monitor.model.TargetGroup;
+import com.taotao.boot.monitor.model.TargetGroup;
 import java.util.*;
 import org.springframework.web.bind.annotation.*;
 

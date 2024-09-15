@@ -23,15 +23,15 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 
 import com.taotao.boot.common.enums.ResultEnum;
 import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.model.SecurityUser;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.mapper.IStoreGoodsLabelMapper;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.repository.cls.StoreGoodsLabelRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IStoreGoodsLabelRepository;
 import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.application.command.goods.dto.GoodsAddCmd;
 import com.taotao.cloud.goods.application.command.goods.dto.GoodsPageQry;
 import com.taotao.cloud.goods.application.command.goods.dto.clientobject.GoodsSkuParamsCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 
 /**

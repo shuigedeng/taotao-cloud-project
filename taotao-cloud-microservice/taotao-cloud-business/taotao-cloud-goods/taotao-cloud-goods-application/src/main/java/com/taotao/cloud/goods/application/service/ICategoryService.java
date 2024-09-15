@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.application.command.category.dto.CategorySearchQry
 import com.taotao.cloud.goods.application.command.category.dto.CategoryUpdateCmd;
 import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryTreeCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
 

@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy
 
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysUser;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.UpmsHelper;
-import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

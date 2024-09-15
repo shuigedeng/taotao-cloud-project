@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.application.command.brand.dto.BrandAddCmd;
 import com.taotao.cloud.goods.application.command.brand.dto.BrandPageQry;
 import com.taotao.cloud.goods.application.command.brand.dto.BrandUpdateCmd;
 import com.taotao.cloud.goods.infrastructure.persistent.po.BrandPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
 

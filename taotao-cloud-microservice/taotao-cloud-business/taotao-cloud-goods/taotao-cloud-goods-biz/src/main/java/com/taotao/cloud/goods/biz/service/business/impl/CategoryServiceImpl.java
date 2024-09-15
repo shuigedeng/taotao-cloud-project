@@ -32,7 +32,7 @@ import com.taotao.cloud.goods.biz.model.entity.Category;
 import com.taotao.cloud.goods.biz.repository.cls.CategorytRepository;
 import com.taotao.cloud.goods.biz.repository.inf.ICategoryRepository;
 import com.taotao.cloud.goods.biz.service.business.*;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.dromara.hutool.core.text.CharSequenceUtil;
 import org.springframework.cache.annotation.CacheConfig;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.infrastructure.persistent.dict.repository.inf;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dict.po.DictItemPO;
-import com.taotao.cloud.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
 
 /**
  * CompanyMapper

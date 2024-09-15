@@ -17,9 +17,9 @@
 package com.taotao.cloud.auth.biz.strategy.remote;
 
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyUserDetailsService;
-import com.taotao.cloud.security.springsecurity.core.domain.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcGrantedAuthority;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcUser;
+import com.taotao.boot.security.spring.core.domain.AccessPrincipal;
+import com.taotao.boot.security.spring.core.domain.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.core.domain.TtcUser;
 import com.taotao.cloud.sys.api.feign.UserApi;
 import java.util.ArrayList;
 import java.util.Collection;

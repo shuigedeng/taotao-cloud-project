@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.compliance.event;
 
-import com.taotao.cloud.security.springsecurity.event.LocalApplicationEvent;
+import com.taotao.boot.security.spring.event.LocalApplicationEvent;
 import java.time.Clock;
 
 /**

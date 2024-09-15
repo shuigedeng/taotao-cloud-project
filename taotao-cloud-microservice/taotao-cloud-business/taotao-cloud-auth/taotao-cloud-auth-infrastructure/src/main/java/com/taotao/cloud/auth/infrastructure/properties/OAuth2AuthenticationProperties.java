@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.infrastructure.properties;
 
 import com.google.common.base.MoreObjects;
-import com.taotao.cloud.security.springsecurity.constants.OAuth2Constants;
-import com.taotao.cloud.security.springsecurity.constants.SymbolConstants;
+import com.taotao.boot.security.spring.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.constants.SymbolConstants;
 import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;

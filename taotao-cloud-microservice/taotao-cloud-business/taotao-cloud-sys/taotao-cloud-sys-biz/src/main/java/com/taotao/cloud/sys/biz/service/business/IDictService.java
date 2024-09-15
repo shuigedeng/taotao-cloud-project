@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.service.business;
 import com.taotao.cloud.sys.biz.model.page.DictPageQuery;
 import com.taotao.cloud.sys.biz.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.concurrent.Future;

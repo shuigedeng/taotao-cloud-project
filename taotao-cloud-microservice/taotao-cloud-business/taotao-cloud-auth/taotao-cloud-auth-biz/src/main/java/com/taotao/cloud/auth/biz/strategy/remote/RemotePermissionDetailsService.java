@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.strategy.remote;
 
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyPermissionDetailsService;
-import com.taotao.cloud.security.springsecurity.core.domain.TtcPermission;
+import com.taotao.boot.security.spring.core.domain.TtcPermission;
 import java.util.ArrayList;
 import java.util.List;
 

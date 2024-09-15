@@ -44,11 +44,11 @@ import com.taotao.cloud.auth.biz.management.processor.SecurityUserDetailsService
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
 import com.taotao.cloud.auth.biz.strategy.StrategyUserDetailsService;
 import com.taotao.boot.captcha.support.core.processor.CaptchaRendererFactory;
-import com.taotao.cloud.security.springsecurity.core.response.SecurityAccessDeniedHandler;
-import com.taotao.cloud.security.springsecurity.core.response.SecurityAuthenticationEntryPoint;
-import com.taotao.cloud.security.springsecurity.customizer.SecurityTokenStrategyConfigurer;
-import com.taotao.cloud.security.springsecurity.processor.SecurityAuthorizationManager;
-import com.taotao.cloud.security.springsecurity.processor.SecurityMatcherConfigurer;
+import com.taotao.boot.security.spring.core.response.SecurityAccessDeniedHandler;
+import com.taotao.boot.security.spring.core.response.SecurityAuthenticationEntryPoint;
+import com.taotao.boot.security.spring.customizer.SecurityTokenStrategyConfigurer;
+import com.taotao.boot.security.spring.processor.SecurityAuthorizationManager;
+import com.taotao.boot.security.spring.processor.SecurityMatcherConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taotao.cloud.security.springsecurity.utils.JsonNodeUtils;
+import com.taotao.boot.security.spring.utils.JsonNodeUtils;
 import java.io.IOException;
 import java.util.Map;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;

@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.infrastructure.authentication.service.OAuth2Applica
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Application;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Permission;
 import com.taotao.cloud.auth.infrastructure.persistent.management.po.OAuth2Scope;
-import com.taotao.cloud.security.springsecurity.core.authority.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;

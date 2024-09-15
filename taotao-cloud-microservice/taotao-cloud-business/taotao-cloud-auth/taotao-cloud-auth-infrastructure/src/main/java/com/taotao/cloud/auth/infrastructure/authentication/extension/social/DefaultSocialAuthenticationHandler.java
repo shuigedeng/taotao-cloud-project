@@ -26,10 +26,10 @@ import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.local.SysUserService;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysSocialUser;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysUser;
-import com.taotao.cloud.security.springsecurity.core.AccessPrincipal;
-import com.taotao.cloud.security.springsecurity.core.userdetails.TtcUser;
-import com.taotao.cloud.security.springsecurity.exception.SocialCredentialsParameterBindingFailedException;
-import com.taotao.cloud.security.springsecurity.exception.UsernameAlreadyExistsException;
+import com.taotao.boot.security.spring.core.AccessPrincipal;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.exception.SocialCredentialsParameterBindingFailedException;
+import com.taotao.boot.security.spring.exception.UsernameAlreadyExistsException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.hutool.core.bean.BeanUtil;

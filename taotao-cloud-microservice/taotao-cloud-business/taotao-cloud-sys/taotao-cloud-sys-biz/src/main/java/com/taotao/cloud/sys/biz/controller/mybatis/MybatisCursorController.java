@@ -17,7 +17,7 @@
 //package com.taotao.cloud.sys.biz.controller.mybatis;
 //
 //import com.taotao.boot.common.model.Result;
-//import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
+//import com.taotao.boot.security.spring.annotation.NotAuth;
 //import io.swagger.v3.oas.annotations.tags.Tag;
 //import lombok.AllArgsConstructor;
 //import org.apache.pulsar.shade.io.swagger.annotations.ApiOperation;

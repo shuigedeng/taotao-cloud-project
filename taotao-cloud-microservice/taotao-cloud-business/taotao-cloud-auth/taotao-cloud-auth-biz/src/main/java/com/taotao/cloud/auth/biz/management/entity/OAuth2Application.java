@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.management.entity;
 
 import com.google.common.base.MoreObjects;
 import com.taotao.cloud.auth.biz.management.definition.AbstractOAuth2RegisteredClient;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
-import com.taotao.cloud.security.springsecurity.core.enums.ApplicationType;
+import com.taotao.boot.security.spring.core.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.core.enums.ApplicationType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

@@ -18,10 +18,10 @@ package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.boot.common.exception.BusinessException;
 import com.taotao.boot.common.model.Result;
-import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
+import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.cloud.sys.api.model.vo.FileVO;
 import com.taotao.cloud.sys.biz.service.IFileService;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

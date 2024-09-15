@@ -17,8 +17,8 @@
 package com.taotao.cloud.auth.infrastructure.persistent.management.po;
 
 import com.taotao.cloud.auth.infrastructure.persistent.authorization.po.AbstractRegisteredClient;
-import com.taotao.cloud.security.springsecurity.enums.Signature;
-import com.taotao.cloud.security.springsecurity.enums.TokenFormat;
+import com.taotao.boot.security.spring.enums.Signature;
+import com.taotao.boot.security.spring.enums.TokenFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;

@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.controller.business.seller;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.cloud.web.base.controller.BaseBusinessController;
+import com.taotao.boot.web.base.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;

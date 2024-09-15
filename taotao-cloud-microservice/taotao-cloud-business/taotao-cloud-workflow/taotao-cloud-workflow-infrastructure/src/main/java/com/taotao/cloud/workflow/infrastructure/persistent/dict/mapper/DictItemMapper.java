@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.infrastructure.persistent.dict.mapper;
 
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import com.taotao.cloud.workflow.infrastructure.persistent.dict.po.DictItemPO;
 
 /**

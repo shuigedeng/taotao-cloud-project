@@ -19,7 +19,7 @@ package com.taotao.cloud.member.biz.controller.feign;
 import com.taotao.cloud.member.api.feign.MemberApi;
 import com.taotao.cloud.member.api.feign.response.MemberApiResponse;
 import com.taotao.cloud.member.biz.service.business.IMemberService;
-import com.taotao.cloud.security.springsecurity.model.SecurityUser;
+import com.taotao.boot.security.spring.model.SecurityUser;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Map;

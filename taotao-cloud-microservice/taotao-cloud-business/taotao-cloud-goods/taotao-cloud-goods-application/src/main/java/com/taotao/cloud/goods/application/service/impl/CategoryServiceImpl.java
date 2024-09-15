@@ -33,7 +33,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICategoryMapper;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CategorytRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICategoryRepository;
-import com.taotao.cloud.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

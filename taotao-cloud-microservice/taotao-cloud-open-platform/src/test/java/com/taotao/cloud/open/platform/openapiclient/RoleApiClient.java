@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.open.platform.openapiclient;
 
-import com.taotao.cloud.openapi.client.annotation.OpenApiMethod;
-import com.taotao.cloud.openapi.client.annotation.OpenApiRef;
-import com.taotao.cloud.openapi.client.model.Role;
+import com.taotao.boot.openapi.client.annotation.OpenApiMethod;
+import com.taotao.boot.openapi.client.annotation.OpenApiRef;
+import com.taotao.boot.openapi.client.model.Role;
 
 /**
  *

@@ -18,7 +18,7 @@ package com.taotao.cloud.sys.biz.controller.async;
 
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.security.springsecurity.annotation.NotAuth;
+import com.taotao.boot.security.spring.annotation.NotAuth;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.AsyncEvent;

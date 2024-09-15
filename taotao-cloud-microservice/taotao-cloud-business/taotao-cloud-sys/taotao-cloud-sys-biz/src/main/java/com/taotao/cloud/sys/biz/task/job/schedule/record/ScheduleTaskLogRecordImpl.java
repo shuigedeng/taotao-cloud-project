@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.schedule.record;
 
-import com.taotao.cloud.job.schedule.task.ScheduleTaskLogRecord;
+import com.taotao.boot.job.schedule.task.ScheduleTaskLogRecord;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.slf4j.Logger;

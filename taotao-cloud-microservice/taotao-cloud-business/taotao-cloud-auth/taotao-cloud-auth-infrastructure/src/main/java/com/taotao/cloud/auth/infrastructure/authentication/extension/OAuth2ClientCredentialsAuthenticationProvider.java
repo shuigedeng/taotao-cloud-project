@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension;
 
 import com.taotao.cloud.auth.infrastructure.utils.OAuth2AuthenticationProviderUtils;
-import com.taotao.cloud.security.springsecurity.core.authority.TtcGrantedAuthority;
+import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;

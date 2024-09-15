@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.cloud.goods.biz.model.dto.BrandDTO;
 import com.taotao.cloud.goods.biz.model.page.BrandPageQuery;
 import com.taotao.cloud.goods.biz.model.entity.Brand;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 
 import java.util.List;
 import java.util.Map;

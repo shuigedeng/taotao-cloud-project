@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.operation.api.model.vo.PageDataListVO;
 import com.taotao.cloud.operation.api.model.vo.PageDataVO;
 import com.taotao.cloud.operation.biz.model.entity.PageData;
-import com.taotao.cloud.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.web.base.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

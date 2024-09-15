@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.management.entity;
 
 import com.google.common.base.MoreObjects;
 import com.taotao.boot.data.jpa.tenant.BaseSysEntity;
-import com.taotao.cloud.security.springsecurity.core.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.core.constants.OAuth2Constants;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

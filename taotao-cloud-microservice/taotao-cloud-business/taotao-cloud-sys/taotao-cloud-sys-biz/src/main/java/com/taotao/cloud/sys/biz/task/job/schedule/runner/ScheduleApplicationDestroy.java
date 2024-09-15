@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.biz.task.job.schedule.runner;
 
-import com.taotao.cloud.job.schedule.task.TaskManager;
+import com.taotao.boot.job.schedule.task.TaskManager;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

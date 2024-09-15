@@ -18,8 +18,8 @@ package com.taotao.cloud.auth.biz.metadata.listener;
 
 import com.taotao.cloud.auth.biz.metadata.processor.RequestMappingStoreProcessor;
 import com.taotao.boot.common.utils.common.JsonUtils;
-import com.taotao.cloud.security.springsecurity.event.RemoteRequestMappingGatherEvent;
-import com.taotao.cloud.security.springsecurity.event.domain.RequestMapping;
+import com.taotao.boot.security.spring.event.RemoteRequestMappingGatherEvent;
+import com.taotao.boot.security.spring.event.domain.RequestMapping;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

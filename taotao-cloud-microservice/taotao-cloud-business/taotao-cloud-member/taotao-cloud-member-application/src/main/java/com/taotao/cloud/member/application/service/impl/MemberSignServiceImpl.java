@@ -28,7 +28,7 @@ import com.taotao.cloud.member.infrastructure.persistent.po.MemberSignPO;
 import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
 import com.taotao.cloud.mq.stream.framework.rocketmq.tags.MemberTagsEnum;
 import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
-import com.taotao.cloud.security.springsecurity.utils.SecurityUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
 import java.util.List;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.hibernate.service.spi.ServiceException;

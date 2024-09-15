@@ -22,7 +22,7 @@ package com.taotao.cloud.member.biz.controller.business.buyer.connect; // packag
 // import com.taotao.boot.common.enums.UserEnum;
 // import com.taotao.boot.common.exception.BusinessException;
 // import com.taotao.boot.common.model.Result;
-// import com.taotao.cloud.logger.annotation.RequestLogger;
+// import com.taotao.boot.logger.annotation.RequestLogger;
 // import com.taotao.cloud.member.api.dto.MemberEditDTO;
 // import com.taotao.cloud.member.biz.entity.Member;
 // import com.taotao.cloud.member.biz.service.business.MemberService;

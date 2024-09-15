@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsS
 import com.taotao.cloud.goods.application.command.draft.dto.DraftGoodsSkuParamsUpdateCmd;
 import com.taotao.cloud.goods.application.command.draft.dto.clientobject.DraftGoodsSkuParamsCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.DraftGoodsPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 
 /**
  * 草稿商品业务层

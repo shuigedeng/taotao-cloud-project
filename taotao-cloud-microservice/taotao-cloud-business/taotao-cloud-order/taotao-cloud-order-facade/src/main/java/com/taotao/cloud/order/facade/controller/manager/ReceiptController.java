@@ -23,7 +23,7 @@ import com.taotao.boot.data.mybatis.mybatisplus.utils.MpUtils;
 import com.taotao.cloud.order.application.command.order.dto.OrderReceiptAddCmd;
 import com.taotao.cloud.order.application.command.order.dto.ReceiptPageQry;
 import com.taotao.cloud.order.application.service.order.IReceiptService;
-import com.taotao.cloud.web.request.annotation.RequestLogger;
+import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

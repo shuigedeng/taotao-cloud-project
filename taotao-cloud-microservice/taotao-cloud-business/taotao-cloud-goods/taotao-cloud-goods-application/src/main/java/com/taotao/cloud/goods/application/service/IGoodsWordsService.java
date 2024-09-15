@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsWordsPO;
-import com.taotao.cloud.web.base.service.BaseSuperService;
+import com.taotao.boot.web.base.service.BaseSuperService;
 
 /**
  * 商品关键字业务层
