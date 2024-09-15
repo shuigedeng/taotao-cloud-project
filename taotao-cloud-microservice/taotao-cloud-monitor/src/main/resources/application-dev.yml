@@ -248,7 +248,7 @@ spring:
       missing-topics-fatal: false
 
 taotao:
-  cloud:
+  boot:
     idgenerator:
       enabled: true
       type: redis

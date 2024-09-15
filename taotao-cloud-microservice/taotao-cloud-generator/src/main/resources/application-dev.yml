@@ -685,7 +685,7 @@ spring:
       enabled: true
 
 taotao:
-  cloud:
+  boot:
     dingtalk:
       enabled: false
       httpclient:

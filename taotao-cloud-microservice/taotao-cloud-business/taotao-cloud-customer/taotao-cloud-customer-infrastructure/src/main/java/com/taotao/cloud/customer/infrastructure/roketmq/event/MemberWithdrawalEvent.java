@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.member.infratructure.roketmq.event;
 
-import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
+import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
 
 /** 会员提现消息 */
 public interface MemberWithdrawalEvent {

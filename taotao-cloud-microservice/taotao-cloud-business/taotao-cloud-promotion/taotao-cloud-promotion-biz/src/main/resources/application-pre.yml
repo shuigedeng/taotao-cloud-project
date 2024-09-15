@@ -416,7 +416,7 @@ spring:
           brokers:
 
 taotao:
-  cloud:
+  boot:
     dingtalk:
       enabled: false
       project-id: ${spring.application.name}

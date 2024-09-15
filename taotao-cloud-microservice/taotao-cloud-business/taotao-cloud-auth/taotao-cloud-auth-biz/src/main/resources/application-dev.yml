@@ -879,7 +879,7 @@ spring:
       enabled: true
 
 taotao:
-  cloud:
+  boot:
     dingtalk:
       enabled: true
       httpclient:

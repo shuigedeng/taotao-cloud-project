@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.roketmq.listener;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.mq.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
+import com.taotao.cloud.stream.framework.rocketmq.tags.AfterSaleTagsEnum;
 import com.taotao.cloud.order.biz.model.entity.aftersale.AfterSale;
 import com.taotao.cloud.order.biz.roketmq.event.AfterSaleStatusChangeEvent;
 import java.util.List;

@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.taotao.boot.common.model.PageQuery;
 import com.taotao.cloud.goods.biz.model.vo.StudioCommodityVO;
 import com.taotao.cloud.goods.biz.model.entity.Studio;
-import com.taotao.cloud.mq.stream.framework.trigger.message.BroadcastMessage;
+import com.taotao.cloud.stream.framework.trigger.message.BroadcastMessage;
 import com.taotao.boot.web.base.service.BaseSuperService;
 
 /**

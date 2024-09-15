@@ -98,9 +98,9 @@ dependencies {
     api "com.googlecode.aviator:aviator:5.4.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    api "com.google.protobuf:protobuf-java:4.28.0"
+    api "com.google.protobuf:protobuf-java:4.28.1"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    api "com.google.protobuf:protobuf-java-util:4.28.0"
+    api "com.google.protobuf:protobuf-java-util:4.28.1"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //api "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 

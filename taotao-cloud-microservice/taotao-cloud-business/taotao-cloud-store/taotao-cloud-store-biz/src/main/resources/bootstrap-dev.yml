@@ -292,7 +292,7 @@ security:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 taotao:
-  cloud:
+  boot:
     oauth2:
       security:
         enabled: true

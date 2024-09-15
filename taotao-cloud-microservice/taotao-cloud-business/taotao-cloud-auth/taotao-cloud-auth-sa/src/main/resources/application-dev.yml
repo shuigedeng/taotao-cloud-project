@@ -464,7 +464,7 @@ spring:
       enabled: true
 
 taotao:
-  cloud:
+  boot:
     data:
       p6spy:
         enabled: true

@@ -237,7 +237,7 @@ security:
       token-info-uri: http://taotao-cloud-auth-service/oauth/check_token
 
 taotao:
-  cloud:
+  boot:
     # 认证模块
     oauth2:
       token:

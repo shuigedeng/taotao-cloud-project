@@ -613,7 +613,7 @@ art:
       - /file/common/application
 
 taotao:
-  cloud:
+  boot:
     sensitive:
       enabled: true
     lock:

@@ -1261,7 +1261,7 @@ spring:
             consumer:
               txCommitRecovered: true
 taotao:
-  cloud:
+  boot:
     zookeeper:
       enabled: true
       connectString: 127.0.0.1:2181

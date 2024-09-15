@@ -1101,7 +1101,7 @@ art:
   xss:
     enable: false
 taotao:
-  cloud:
+  boot:
     dingtalk:
       enabled: false
       httpclient:

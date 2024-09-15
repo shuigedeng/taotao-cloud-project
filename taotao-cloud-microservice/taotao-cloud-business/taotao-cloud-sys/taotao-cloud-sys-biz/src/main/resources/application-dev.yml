@@ -1213,7 +1213,7 @@ art:
   xss:
     enable: false
 taotao:
-  cloud:
+  boot:
     job:
       scheduled:
         enabled: true

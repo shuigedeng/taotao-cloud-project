@@ -35,9 +35,9 @@ import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.GoodsRepo
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IGoodsRepository;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;

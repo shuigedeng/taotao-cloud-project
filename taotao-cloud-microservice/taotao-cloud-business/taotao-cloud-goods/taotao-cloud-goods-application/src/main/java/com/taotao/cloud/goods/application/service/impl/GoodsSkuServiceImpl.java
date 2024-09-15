@@ -48,8 +48,8 @@ import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.GoodsSkuR
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.IGoodsSkuRepository;
 import com.taotao.cloud.goods.infrastructure.util.EsIndexUtil;
 import com.taotao.cloud.member.api.enums.EvaluationGradeEnum;
-import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
 import com.taotao.cloud.promotion.api.enums.CouponGetEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;

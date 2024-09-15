@@ -316,7 +316,7 @@ spring:
       missing-topics-fatal: false
 
 taotao:
-  cloud:
+  boot:
     canal:
       enabled: false
       instances:

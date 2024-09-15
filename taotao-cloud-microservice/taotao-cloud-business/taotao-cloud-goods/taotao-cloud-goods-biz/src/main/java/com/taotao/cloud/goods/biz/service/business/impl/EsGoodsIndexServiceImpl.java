@@ -38,9 +38,9 @@ import com.taotao.cloud.goods.biz.elasticsearch.service.BaseElasticsearchService
 import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
 import com.taotao.cloud.goods.biz.service.business.*;
-import com.taotao.cloud.mq.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
-import com.taotao.cloud.mq.stream.framework.rocketmq.tags.GoodsTagsEnum;
-import com.taotao.cloud.mq.stream.properties.RocketmqCustomProperties;
+import com.taotao.cloud.stream.framework.rocketmq.RocketmqSendCallbackBuilder;
+import com.taotao.cloud.stream.framework.rocketmq.tags.GoodsTagsEnum;
+import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
 import com.taotao.cloud.promotion.api.feign.IFeignPromotionApi;

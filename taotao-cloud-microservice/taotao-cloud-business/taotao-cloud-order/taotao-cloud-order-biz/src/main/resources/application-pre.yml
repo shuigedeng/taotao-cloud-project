@@ -508,7 +508,7 @@ spring:
               txCommitRecovered: true
 
 taotao:
-  cloud:
+  boot:
     elasticsearch:
       enabled: true
     mongodb:

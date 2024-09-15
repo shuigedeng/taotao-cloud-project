@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.application.event.roketmq.handler.impl;
 
-import com.taotao.cloud.mq.stream.message.MemberWithdrawalMessage;
+import com.taotao.cloud.stream.message.MemberWithdrawalMessage;
 import com.taotao.cloud.sys.application.event.roketmq.handler.MemberPointChangeEventHandler;
 import com.taotao.cloud.sys.application.event.roketmq.handler.MemberWithdrawalEventHandler;
 import org.springframework.stereotype.Service;

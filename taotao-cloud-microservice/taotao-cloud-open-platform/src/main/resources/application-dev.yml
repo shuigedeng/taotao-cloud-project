@@ -667,7 +667,7 @@ spring:
       enabled: true
 
 taotao:
-  cloud:
+  boot:
     openapi:
       enabled: true
       server: true

@@ -323,7 +323,7 @@ xxl:
 
 
 taotao:
-  cloud:
+  boot:
     idgenerator:
       enabled: true
       type: redis

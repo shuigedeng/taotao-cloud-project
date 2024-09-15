@@ -89,8 +89,8 @@ dependencies {
 
     api 'org.springframework.session:spring-session-data-redis:3.3.1'
 
-    api 'com.github.binarywang:weixin-java-mp:4.6.4.B'
-    api 'com.github.binarywang:weixin-java-miniapp:4.6.4.B'
+    api 'com.github.binarywang:weixin-java-mp:4.6.5.B'
+    api 'com.github.binarywang:weixin-java-miniapp:4.6.5.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 

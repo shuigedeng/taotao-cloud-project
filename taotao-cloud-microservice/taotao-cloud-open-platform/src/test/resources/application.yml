@@ -5,7 +5,7 @@ spring:
 
 ##openapi配置
 taotao:
-  cloud:
+  boot:
     openapi:
       client:
         config:
