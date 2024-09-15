@@ -17,12 +17,12 @@
 package com.taotao.cloud.message.biz.web;
 
 import com.taotao.boot.common.utils.lang.StringUtils;
-import com.taotao.cloud.sms.common.exception.VerificationCodeIsNullException;
-import com.taotao.cloud.sms.common.exception.VerifyFailException;
-import com.taotao.cloud.sms.common.model.NoticeInfo;
-import com.taotao.cloud.sms.common.model.VerifyInfo;
-import com.taotao.cloud.sms.common.service.NoticeService;
-import com.taotao.cloud.sms.common.service.VerificationCodeService;
+import com.taotao.boot.sms.common.exception.VerificationCodeIsNullException;
+import com.taotao.boot.sms.common.exception.VerifyFailException;
+import com.taotao.boot.sms.common.model.NoticeInfo;
+import com.taotao.boot.sms.common.model.VerifyInfo;
+import com.taotao.boot.sms.common.service.NoticeService;
+import com.taotao.boot.sms.common.service.VerificationCodeService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;

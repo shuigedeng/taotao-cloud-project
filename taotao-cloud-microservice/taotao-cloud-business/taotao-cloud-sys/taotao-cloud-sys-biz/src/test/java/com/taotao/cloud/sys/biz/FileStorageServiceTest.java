@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.sys.biz;
 
-import com.taotao.cloud.oss.common.storage.FileInfo;
-import com.taotao.cloud.oss.common.storage.FileStorageService;
-import com.taotao.cloud.oss.common.storage.UploadPretreatment;
+import com.taotao.boot.oss.common.storage.FileInfo;
+import com.taotao.boot.oss.common.storage.FileStorageService;
+import com.taotao.boot.oss.common.storage.UploadPretreatment;
 import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutoolcore.bean.BeanUtil;

@@ -26,7 +26,7 @@ import com.taotao.cloud.file.biz.service.IFileService;
 import com.taotao.cloud.file.biz.service.ISeataTccService;
 import com.taotao.boot.job.api.feign.IFeignQuartzJobApi;
 import com.taotao.boot.job.api.model.dto.QuartzJobDTO;
-import com.taotao.cloud.oss.common.exception.UploadFileException;
+import com.taotao.boot.oss.common.exception.UploadFileException;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
 import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;

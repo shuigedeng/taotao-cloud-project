@@ -18,8 +18,8 @@ package com.taotao.cloud.message.biz.web;
 
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.cloud.sms.common.model.NoticeInfo;
-import com.taotao.cloud.sms.common.model.VerifyInfo;
+import com.taotao.boot.sms.common.model.NoticeInfo;
+import com.taotao.boot.sms.common.model.VerifyInfo;
 import java.lang.reflect.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
