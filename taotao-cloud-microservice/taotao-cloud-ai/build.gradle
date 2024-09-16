@@ -44,7 +44,7 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'com.github.oshi:oshi-core:6.6.3'
+    implementation 'com.github.oshi:oshi-core:6.6.4'
 
     //引入PDF解析器
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
