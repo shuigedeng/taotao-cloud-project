@@ -151,7 +151,7 @@ plugins {
 
     //smart-doc gradle 插件
     // https://plugins.gradle.org/plugin/com.ly.smart-doc
-    id "com.ly.smart-doc" version "3.0.7-release"
+    id "com.ly.smart-doc" version "3.0.8"
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
@@ -201,7 +201,7 @@ plugins {
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.23"
 
-    //id 'org.cyclonedx.bom' version '1.8.2'
+    //id 'org.cyclonedx.bom' version '1.10.0'
 
     //alias(projectLibs.plugins.springboot)
     //alias(projectLibs.plugins.kotlin.jvm)
