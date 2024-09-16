@@ -4,7 +4,7 @@ import org.dromara.hutoolcore.collection.CollUtil;
 import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDO;
 import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
 import com.taotao.cloud.message.biz.ballcat.common.websocket.message.JsonWebSocketMessage;
-import com.taotao.cloud.websocket.ballcat.notify.model.domain.NotifyInfo;
+import com.taotao.boot.websocket.ballcat.notify.model.domain.NotifyInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.ParameterizedType;

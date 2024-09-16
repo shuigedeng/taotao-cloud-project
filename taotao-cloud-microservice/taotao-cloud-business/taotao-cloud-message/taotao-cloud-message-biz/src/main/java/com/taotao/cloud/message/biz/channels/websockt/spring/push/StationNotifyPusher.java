@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.channels.websockt.spring.push;
 
 import com.taotao.cloud.message.biz.ballcat.notify.enums.NotifyChannelEnum;
 import com.taotao.cloud.message.biz.ballcat.notify.event.StationNotifyPushEvent;
-import com.taotao.cloud.websocket.ballcat.notify.model.domain.NotifyInfo;
+import com.taotao.boot.websocket.ballcat.notify.model.domain.NotifyInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

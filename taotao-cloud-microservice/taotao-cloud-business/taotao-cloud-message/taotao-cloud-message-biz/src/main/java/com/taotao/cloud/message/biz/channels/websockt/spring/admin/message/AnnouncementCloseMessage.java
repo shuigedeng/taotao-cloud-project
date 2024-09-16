@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.admin.message;
 
-import com.taotao.cloud.websocket.ballcat.common.websocket.message.JsonWebSocketMessage;
+import com.taotao.boot.websocket.ballcat.common.websocket.message.JsonWebSocketMessage;
 import lombok.Getter;
 import lombok.Setter;
 

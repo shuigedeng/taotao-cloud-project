@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.admin.listener;
 
 import com.taotao.cloud.message.biz.ballcat.common.websocket.distribute.MessageDistributor;
-import com.taotao.cloud.websocket.spring.common.distribute.MessageDO;
+import com.taotao.boot.websocket.spring.common.distribute.MessageDO;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 

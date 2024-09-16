@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.original;
 
-import com.taotao.cloud.websocket.original.WebsocketService;
+import com.taotao.boot.websocket.original.WebsocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

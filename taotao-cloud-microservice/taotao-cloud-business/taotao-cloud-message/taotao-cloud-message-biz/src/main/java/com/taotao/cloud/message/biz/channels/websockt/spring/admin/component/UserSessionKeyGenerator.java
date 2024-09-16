@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.admin.component;
-import com.taotao.cloud.websocket.spring.admin.constant.AdminWebSocketConstants;
-import com.taotao.cloud.websocket.spring.common.session.SessionKeyGenerator;
+import com.taotao.boot.websocket.spring.admin.constant.AdminWebSocketConstants;
+import com.taotao.boot.websocket.spring.common.session.SessionKeyGenerator;
 import org.springframework.web.socket.WebSocketSession;
 
 /**

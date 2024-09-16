@@ -142,7 +142,7 @@ spring:
       missing-topics-fatal: false
 
 taotao:
-  cloud:
+  boot:
     prometheus:
       enabled: true
     dinger:

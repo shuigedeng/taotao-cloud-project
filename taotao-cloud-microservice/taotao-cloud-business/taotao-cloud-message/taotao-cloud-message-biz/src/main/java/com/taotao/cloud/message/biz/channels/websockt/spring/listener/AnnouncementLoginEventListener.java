@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.channels.websockt.spring.listener;
 
-import com.taotao.cloud.websocket.ballcat.notify.enums.NotifyChannelEnum;
-import com.taotao.cloud.websocket.ballcat.notify.model.entity.Announcement;
-import com.taotao.cloud.websocket.ballcat.notify.model.entity.UserAnnouncement;
-import com.taotao.cloud.websocket.ballcat.notify.recipient.RecipientHandler;
-import com.taotao.cloud.websocket.ballcat.notify.service.AnnouncementService;
-import com.taotao.cloud.websocket.ballcat.notify.service.UserAnnouncementService;
+import com.taotao.boot.websocket.ballcat.notify.enums.NotifyChannelEnum;
+import com.taotao.boot.websocket.ballcat.notify.model.entity.Announcement;
+import com.taotao.boot.websocket.ballcat.notify.model.entity.UserAnnouncement;
+import com.taotao.boot.websocket.ballcat.notify.recipient.RecipientHandler;
+import com.taotao.boot.websocket.ballcat.notify.service.AnnouncementService;
+import com.taotao.boot.websocket.ballcat.notify.service.UserAnnouncementService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

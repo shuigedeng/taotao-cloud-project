@@ -6,7 +6,7 @@ import com.taotao.cloud.message.biz.ballcat.notify.model.dto.AnnouncementDTO;
 import com.taotao.cloud.message.biz.ballcat.notify.model.qo.AnnouncementQO;
 import com.taotao.cloud.message.biz.ballcat.notify.model.vo.AnnouncementPageVO;
 import com.taotao.cloud.message.biz.ballcat.notify.service.AnnouncementService;
-import com.taotao.cloud.websocket.ballcat.notify.model.entity.Announcement;
+import com.taotao.boot.websocket.ballcat.notify.model.entity.Announcement;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
