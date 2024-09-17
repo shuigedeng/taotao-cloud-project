@@ -22,7 +22,7 @@ import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
-import com.taotao.boot.security.spring.core.constants.OAuth2Constants;
+import com.taotao.boot.security.spring.constants.OAuth2Constants;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.hutool.crypto.SecureUtil;

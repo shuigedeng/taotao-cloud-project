@@ -16,37 +16,33 @@
 
 package com.taotao.cloud.auth.biz.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.cloud.auth.biz.authentication.federation.Oauth2ThirdAccount;
-import com.taotao.cloud.auth.biz.authentication.federation.Oauth2UserinfoResult;
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.constant.RedisConstant;
 import com.taotao.boot.common.exception.BaseException;
 import com.taotao.boot.common.model.Result;
-import com.taotao.boot.security.spring.core.utils.SecurityUtils;
+import com.taotao.boot.common.utils.log.LogUtils;
+import com.taotao.boot.security.spring.utils.SecurityUtils;
+import com.taotao.cloud.auth.biz.authentication.federation.Oauth2UserinfoResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import java.security.Principal;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-
-import org.dromara.hutool.core.util.ObjUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.jwt.JwtClaimNames;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import com.taotao.boot.common.utils.log.LogUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 /**
  * Oath2Controller
  *
@@ -60,29 +56,29 @@ import com.taotao.boot.common.utils.log.LogUtils;
 @RequestMapping("/auth/oauth2")
 public class Oauth2Controller {
 
-    @Autowired
-    private RedisRepository redisRepository;
+	@Autowired
+	private RedisRepository redisRepository;
 
-    /**
-     * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
-     *
-     * @param user OAuth2用户信息
-     * @return OAuth2用户信息
-     */
-    @Operation(summary = "获取当前认证的OAuth2用户信息", description = "获取当前认证的OAuth2用户信息")
-    // @RequestLogger
-    @PreAuthorize("hasAuthority('express:company:info:id')")
-    @GetMapping("/user")
-    public Result<OAuth2User> user(@AuthenticationPrincipal OAuth2User user) {
-        return Result.success(user);
-    }
+	/**
+	 * 获取当前认证的OAuth2用户信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
+	 *
+	 * @param user OAuth2用户信息
+	 * @return OAuth2用户信息
+	 */
+	@Operation(summary = "获取当前认证的OAuth2用户信息", description = "获取当前认证的OAuth2用户信息")
+	// @RequestLogger
+	@PreAuthorize("hasAuthority('express:company:info:id')")
+	@GetMapping("/user")
+	public Result<OAuth2User> user(@AuthenticationPrincipal OAuth2User user) {
+		return Result.success(user);
+	}
 
-    /**
-     * 获取当前认证的OAuth2客户端信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
-     *
-     * @param oAuth2AuthorizedClient OAuth2客户端信息
-     * @return OAuth2客户端信息
-     */
+	/**
+	 * 获取当前认证的OAuth2客户端信息，默认是保存在{@link jakarta.servlet.http.HttpSession}中的
+	 *
+	 * @param oAuth2AuthorizedClient OAuth2客户端信息
+	 * @return OAuth2客户端信息
+	 */
 //    @Operation(summary = "获取当前认证的OAuth2客户端信息", description = "v")
 //    // @RequestLogger
 //    @PreAuthorize("hasAuthority('express:company:info:id')")
@@ -91,35 +87,34 @@ public class Oauth2Controller {
 //            @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient oAuth2AuthorizedClient) {
 //        return Result.success(oAuth2AuthorizedClient);
 //    }
+	@Operation(summary = "退出系统", description = "退出系统")
+	// @RequestLogger
+	@PostMapping("/logout")
+	public Result<Boolean> logout() {
+		Authentication authentication = SecurityUtils.getAuthentication();
+		if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+			Jwt jwt = jwtAuthenticationToken.getToken();
+			String kid = (String) jwt.getHeaders().get("kid");
+			try {
+				long epochSecond = jwt.getExpiresAt().getEpochSecond();
+				long nowTime =
+					LocalDateTime.now().toInstant(ZoneOffset.of("+8")).getEpochSecond();
 
-    @Operation(summary = "退出系统", description = "退出系统")
-    // @RequestLogger
-    @PostMapping("/logout")
-    public Result<Boolean> logout() {
-        Authentication authentication = SecurityUtils.getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            Jwt jwt = jwtAuthenticationToken.getToken();
-            String kid = (String) jwt.getHeaders().get("kid");
-            try {
-                long epochSecond = jwt.getExpiresAt().getEpochSecond();
-                long nowTime =
-                        LocalDateTime.now().toInstant(ZoneOffset.of("+8")).getEpochSecond();
+				// 标识jwt令牌失效
+				redisRepository.setEx(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "", epochSecond - nowTime);
 
-                // 标识jwt令牌失效
-                redisRepository.setEx(RedisConstant.LOGOUT_JWT_KEY_PREFIX + kid, "", epochSecond - nowTime);
+				// 添加用户退出日志
 
-                // 添加用户退出日志
+				// 删除用户在线信息
 
-                // 删除用户在线信息
+				return Result.success(true);
+			} catch (Exception e) {
+				LogUtils.error(e);
+			}
+		}
 
-                return Result.success(true);
-            } catch (Exception e) {
-                LogUtils.error(e);
-            }
-        }
-
-        throw new BaseException("退出失败");
-    }
+		throw new BaseException("退出失败");
+	}
 
 	@ResponseBody
 	@GetMapping("/userInfo")

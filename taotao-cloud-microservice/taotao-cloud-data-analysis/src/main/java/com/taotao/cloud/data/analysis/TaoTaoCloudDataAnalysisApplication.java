@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis;
+package com.taotao.cloud.data.analysis;
 
-import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**

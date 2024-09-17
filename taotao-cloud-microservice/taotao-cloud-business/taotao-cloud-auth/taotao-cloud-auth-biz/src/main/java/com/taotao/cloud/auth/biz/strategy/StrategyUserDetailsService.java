@@ -16,8 +16,7 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-import com.taotao.boot.security.spring.core.domain.AccessPrincipal;
-import com.taotao.boot.security.spring.core.domain.TtcUser;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import org.springframework.security.core.AuthenticationException;
 
 /**

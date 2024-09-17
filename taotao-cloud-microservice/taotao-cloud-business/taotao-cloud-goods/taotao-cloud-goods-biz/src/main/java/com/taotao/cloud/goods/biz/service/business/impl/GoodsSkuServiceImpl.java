@@ -80,7 +80,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.dromara.dynamictp.common.util.StringUtil;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.dromara.hutool.core.map.MapUtil;
 import org.dromara.hutool.core.math.NumberUtil;
 import org.dromara.hutool.json.JSONObject;

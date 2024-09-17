@@ -15,12 +15,8 @@ import com.taotao.cloud.generator.service.IGenTableService;
 import com.taotao.cloud.generator.util.CxSelect;
 import com.taotao.cloud.generator.util.StringUtils;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.io.IOUtils;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +26,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成 操作处理
@@ -113,7 +114,7 @@ public class GenController {
 	@PostMapping("/importTable")
 	@ResponseBody
 	public Result<Boolean> importTableSave(String tables) {
-		String[] tableNames = Convert.toStrArray(tables);
+		String[] tableNames = ConvertUtil.toStrArray(tables);
 		// 查询表信息
 		List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames);
 //		String operName = Convert.toStr(PermissionUtils.getPrincipalProperty("loginName"));
@@ -239,7 +240,7 @@ public class GenController {
 	@GetMapping("/batchGenCode")
 	@ResponseBody
 	public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
-		String[] tableNames = Convert.toStrArray(tables);
+		String[] tableNames = ConvertUtil.toStrArray(tables);
 		byte[] data = genTableService.downloadCode(tableNames);
 		genCode(response, data);
 	}

@@ -18,7 +18,7 @@ package com.taotao.cloud.generator.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 
 /**
  * 数据库助手
@@ -61,7 +61,7 @@ public class DataBaseHelper {
 
     public static String findInSet(Object var1, String var2) {
         DataBaseType dataBasyType = getDataBaseType();
-        String var = Convert.toStr(var1);
+        String var = ConvertUtil.toStr(var1);
         if (dataBasyType == DataBaseType.SQL_SERVER) {
             // charindex(',100,' , ',0,100,101,') <> 0
             return "charindex('," + var + ",' , ','+" + var2 + "+',') <> 0";

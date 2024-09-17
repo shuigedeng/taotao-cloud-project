@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.10、jdk21, 支持graalvm21, 采用最新的spring 6.1.12、SpringBoot 3.3.3、SpringCloud 2023.0.3、SpringSecurity 6.3.2、Nacos 2.4.1、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 
+`taotao-cloud` (taotao云平台) 基于gradle8.10、jdk21, 支持graalvm21, 采用最新的spring 6.1.13、SpringBoot 3.3.3、SpringCloud 2023.0.3、SpringSecurity 6.3.2、Nacos 2.4.1、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
@@ -83,24 +83,46 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.10
-IDEA_VERSION >= 2024.2.0.2
+IDEA_VERSION >= 2024.2.1
 ```
 
 Gradle:
 
 ```
+BOOT: 
+dependencyManagement{
+  imports {
+    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2024.10"
+  }
+}
+
+CLOUD:
 dependencyManagement{
   imports {
     mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2024.10"
   }
 }
 
-api "io.github.shuigedeng:taotao-cloud-starter-web"
+api "io.github.shuigedeng:taotao-boot-starter-web"
 ```
 
 Maven:
 
 ```
+BOOT:
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.github.shuigedeng</groupId>
+      <artifactId>taotao-boot-dependencies</artifactId>
+      <version>2024.10</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+CLOUD:
 <dependencyManagement>
   <dependencies>
     <dependency>
@@ -113,11 +135,10 @@ Maven:
   </dependencies>
 </dependencyManagement>
 
-
 <dependencies>
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
-      <artifactId>taotao-cloud-starter-web</artifactId>
+      <artifactId>taotao-boot-starter-web</artifactId>
     </dependency>
 </dependencies>
 ```
@@ -126,7 +147,7 @@ Maven:
 
  依赖                   | 版本              
 ----------------------|-----------------
- Spring               | 6.1.12           
+ Spring               | 6.1.13           
  Spring Boot          | 3.3.3           
  Spring Cloud         | 2023.0.3        
  Spring Cloud Alibaba | 2023.0.1.2
@@ -134,12 +155,12 @@ Maven:
  Spring Cloud huawei  | 1.11.9-2023.0.x
  Seata                | 2.0.0
  Sentinel             | 1.8.8           
- Spring-kafka         | 3.2.2         
+ Spring-kafka         | 3.2.3         
  Roketmq              | 5.2.0           
  Spring Security      | 6.3.2           
  Mybatis Plus         | 3.5.7         
  Hutool               | 6.0.0-M15         
- Mysql                | 8.4.0          
+ Mysql                | 9.0.0          
  Querydsl             | 5.1.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.5.0           
@@ -147,14 +168,9 @@ Maven:
  Lettuce              | 6.3.1.RELEASE   
  Elasticsearch        | 8.11.5           
  Xxl-job              | 2.4.1           
- EasyCaptcha          | 1.6.2           
  Guava                | 33.3.0-jre       
  Grpc                 | 1.66.0          
  Arthas               | 4.0.0           
- Dynamic-tp           | 1.1.7-3.x           
- Elasticjob           | 3.0.4           
- Powerjob             | 5.0.1-beta           
- Forest               | 1.5.36          
  Netty                | 4.1.112.Final
 
 ## 6. 演示地址 (云服务器已到期)
@@ -186,33 +202,33 @@ Maven:
 
 ## 7. 功能特点
 
-* **微服务技术框架**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
+* **微服务技术架构**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
 * **主体框架**：采用最新的`Spring Boot 3.3.3`、`Spring Cloud 2023.0.3`、`Spring Cloud Alibaba 2023.0.1.2` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
-* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如账号密码，验证码登陆、支持支付宝、钉钉、码云、GitHub、GitLab、QQ、微信、企业微信、微博等第三方登录，微信登录，指纹登录，手势登录，手机号码登录，人脸识别登录等 优化Spring Security内部实现 ,实现API调用的统一出口和权限认证授权中心
+* **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如`账号密码`，`验证码登陆`、`支付宝`、`钉钉`、`码云`、`GitHub`、`GitLab`、`QQ`、`微信`、`企业微信`、`微博`等第三方登录，`微信小程序登录`，`指纹登录`，`手势登录`，`手机号码登录`，`人脸识别登录`等 优化Spring Security内部实现 ,实现API调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
 * **日志分析**：集成`kafka、elk、prometheus、loki`等实时监控日志(请求日志、系统日志、数据变更日志、用户日志) 提供完善的企业微服务流量监控，日志监控能力
 * **分布式事务**：集成`spring cloud alibaba seata`分布式事务处理
-* **分布式任务**：集成`xxl-job、powerjob、quartz`等分布式定时任务处理
+* **分布式任务**：集成`xxl-job、powerjob、quartz`分布式定时任务处理
 * **mvc封装**：通用的 Controller、Service、Mapper、全局异常、全局序列化、反序列化规则，请求头传递、调用日志、灰度、统一配置编码解码规则等，AOP方式优雅记录操作日志、优雅缓存解决方案、防缓存击穿
 * **业务熔断**：采用`spring cloud alibaba Sentinel`实现业务熔断处理，避免服务之间出现雪崩
 * **链路追踪**：自定义traceId的方式，实现简单的链路追踪功能、集成`skywalking、sleuth、zipkin`链路监控
 * **内部调用**：集成了`Feign`和`Dubbo`以及`grpc`等模式支持内部调用，并且可以实现无缝切换
 * **身份注入**：通过注解的方式，实现用户登录信息的快速注入
 * **网关支持**：支持流量控制、拉黑名单、过滤请求、灰度发布方案、防重复提交、命中缓存降级访问、网关统一鉴权等
-* **在线文档**：通过接入`Knife4j`，实现在线API文档的查看与调试，对swagger、knife4j二次封装，实现配置即文档
+* **在线文档**：通过接入`Knife4j`，实现在线API文档的查看与调试，对`swagger`、`knife4j`二次封装，实现配置即文档
 * **业务监控**：利用`Spring Boot Admin`来监控各个独立Service的运行状态。
-* **代码生成**：基于`Mybatis-plus-generator`自动生成代码，提升开发效率，使用代码生成器可以一键生成 Java、Vue 前后端代码、SQL 脚本、接口文档，支持单表、树表、主子表
-* **消息中心**：集成消息中间件`RocketMQ、kafka`，对业务进行异步处理
-* **实时通信**：实时通信，采用 Spring WebSocket 实现，内置 Token 身份校验，支持 WebSocket 集群
+* **代码生成**：基于`Mybatis-plus-generator`自动生成代码，提升开发效率，使用代码生成器可以一键生成 `Java、Vue` 前后端代码、SQL 脚本、接口文档，支持单表、树表、主子表
+* **消息中心**：集成消息中间件`RocketMQ、kafka、plusar`，对业务进行异步处理
+* **实时通信**：实时通信，采用 `Spring WebSocket` 实现，内置 Token 身份校验，支持`WebSocket`集群
 * **业务分离**：采用前后端分离的框架设计，前端采用`react antd、taro`脚手架快速开放
 * **多租户功能**：集成`Mybatis Plus`、`jpa`,实现saas多租户功能 可自定义每个租户的权限，提供透明化的多租户底层封装
 * **前端支持**：采用 `taro` 方案，一份代码多终端适配，同时支持 APP、小程序、H5！
-* **前后端流水线支持**：包含基于github、 GitLab Runner 的 kubernetes（k8s）、Docker、Shell 等执行器执行 CI/CD 流水线进行自动构建、制作 Docker 镜像、发布
+* **前后端流水线支持**：包含基于`github、 GitLab Runner` 的 `kubernetes（k8s）、Docker、Shell` 等执行器执行 CI/CD 流水线进行自动构建、制作 Docker 镜像、发布
 * **工作流功能**：工作流使用 `Flowable`，支持动态表单、在线设计流程、会签 / 或签、多种任务分配方式
 * **短信和oss支持**：集成阿里云、腾讯云等短信渠道，集成 `MinIO`、阿里云、腾讯云、七牛云等云存储服务
 * **容器化支持**: 提供对常见容器化支持 `Docker、docker-compose、Kubernetes、Rancher2`支持 完善的微服务部署方案
-* **webflux支持**: lambda、stream api、webflux 的生产实践
+* **webflux支持**: `lambda、stream api、webflux` 的生产实践
 * **开放平台**: 提供应用管理，方便第三方系统接入，**支持多租户(应用隔离)**
 * **组件化**: 引入组件化的思想实现高内聚低耦合并且高度可配置化
 * **代码规范**: 注重代码规范，严格控制包依赖
@@ -323,44 +339,69 @@ taotao-cloud-project -- 父项目
 ## 12.基础组件starter项目模块 (暂未开源)
 
 ```
++--- Project ':taotao-boot-demo'
++--- Project ':taotao-boot-dependencies'
++--- Project ':taotao-boot-starter-actuator'
++--- Project ':taotao-boot-starter-agent'
++--- Project ':taotao-boot-starter-apollo'
++--- Project ':taotao-boot-starter-apt'
++--- Project ':taotao-boot-starter-cache'
++--- Project ':taotao-boot-starter-canal'
++--- Project ':taotao-boot-starter-common'
++--- Project ':taotao-boot-starter-core'
++--- Project ':taotao-boot-starter-data'
++--- Project ':taotao-boot-starter-ddd'
++--- Project ':taotao-boot-starter-dingtalk'
++--- Project ':taotao-boot-starter-dubbo'
++--- Project ':taotao-boot-starter-eventbus'
++--- Project ':taotao-boot-starter-flowengine'
++--- Project ':taotao-boot-starter-grpc'
++--- Project ':taotao-boot-starter-idempotent'
++--- Project ':taotao-boot-starter-idgenerator'
++--- Project ':taotao-boot-starter-job'
++--- Project ':taotao-boot-starter-lock'
++--- Project ':taotao-boot-starter-logger'
++--- Project ':taotao-boot-starter-metrics'
++--- Project ':taotao-boot-starter-micrometer'
++--- Project ':taotao-boot-starter-monitor'
++--- Project ':taotao-boot-starter-mq'
++--- Project ':taotao-boot-starter-netty'
++--- Project ':taotao-boot-starter-office'
++--- Project ':taotao-boot-starter-openapi'
++--- Project ':taotao-boot-starter-oss'
++--- Project ':taotao-boot-starter-pay'
++--- Project ':taotao-boot-starter-plugin'
++--- Project ':taotao-boot-starter-prometheus'
++--- Project ':taotao-boot-starter-ratelimit'
++--- Project ':taotao-boot-starter-security'
++--- Project ':taotao-boot-starter-sensitive'
++--- Project ':taotao-boot-starter-skywalking'
++--- Project ':taotao-boot-starter-springdoc'
++--- Project ':taotao-boot-starter-statemachine'
++--- Project ':taotao-boot-starter-test'
++--- Project ':taotao-boot-starter-threadpool'
++--- Project ':taotao-boot-starter-translation'
++--- Project ':taotao-boot-starter-useragent'
++--- Project ':taotao-boot-starter-web'
++--- Project ':taotao-boot-starter-websocket'
++--- Project ':taotao-boot-starter-websocket-netty'
++--- Project ':taotao-boot-starter-xss'
++--- Project ':taotao-boot-starter-zookeeper'
++--- Project ':taotao-cloud-demo'
 +--- Project ':taotao-cloud-dependencies'
-+--- Project ':taotao-cloud-starter-agent'
-+--- Project ':taotao-cloud-starter-apt'
-+--- Project ':taotao-cloud-starter-cache'
-+--- Project ':taotao-cloud-starter-canal'
-+--- Project ':taotao-cloud-starter-common'
-+--- Project ':taotao-cloud-starter-core'
 +--- Project ':taotao-cloud-starter-bootstrap'
-+--- Project ':taotao-cloud-starter-data'
-+--- Project ':taotao-cloud-starter-dingtalk'
-+--- Project ':taotao-cloud-starter-dubbo'
-+--- Project ':taotao-cloud-starter-grpc'
-+--- Project ':taotao-cloud-starter-idempotent'
-+--- Project ':taotao-cloud-starter-ip2region'
-+--- Project ':taotao-cloud-starter-job'
-+--- Project ':taotao-cloud-starter-limit'
-+--- Project ':taotao-cloud-starter-lock'
-+--- Project ':taotao-cloud-starter-logger'
-+--- Project ':taotao-cloud-starter-metrics'
-+--- Project ':taotao-cloud-starter-monitor'
-+--- Project ':taotao-cloud-starter-mq'
-+--- Project ':taotao-cloud-starter-office'
-+--- Project ':taotao-cloud-starter-openai'
-+--- Project ':taotao-cloud-starter-openapi'
++--- Project ':taotao-cloud-starter-facility-alibaba'
++--- Project ':taotao-cloud-starter-facility-huawei'
++--- Project ':taotao-cloud-starter-facility-tencent'
++--- Project ':taotao-cloud-starter-facility-zookeeper'
 +--- Project ':taotao-cloud-starter-openfeign'
-+--- Project ':taotao-cloud-starter-oss'
-+--- Project ':taotao-cloud-starter-pay'
-+--- Project ':taotao-cloud-starter-prometheus'
-+--- Project ':taotao-cloud-starter-retry'
-+--- Project ':taotao-cloud-starter-security'
-+--- Project ':taotao-cloud-starter-sms'
-+--- Project ':taotao-cloud-starter-springdoc'
-+--- Project ':taotao-cloud-starter-third-client'
-+--- Project ':taotao-cloud-starter-tracing'
-+--- Project ':taotao-cloud-starter-translation'
-+--- Project ':taotao-cloud-starter-web'
-+--- Project ':taotao-cloud-starter-websocket'
-+--- Project ':taotao-cloud-starter-websocket-netty'
-\--- Project ':taotao-cloud-starter-zookeeper'
++--- Project ':taotao-cloud-starter-seata'
++--- Project ':taotao-cloud-starter-sentinel'
++--- Project ':taotao-cloud-starter-stream'
++--- Project ':taotao-cloud-starter-ttc-circuitbreaker'
++--- Project ':taotao-cloud-starter-ttc-config'
++--- Project ':taotao-cloud-starter-ttc-discovery'
++--- Project ':taotao-cloud-starter-ttc-ratelimit'
+\--- Project ':taotao-cloud-starter-ttc-router'
 
 ```

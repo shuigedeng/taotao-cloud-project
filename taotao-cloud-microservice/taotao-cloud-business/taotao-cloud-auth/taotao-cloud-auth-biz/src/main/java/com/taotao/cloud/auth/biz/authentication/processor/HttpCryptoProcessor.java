@@ -24,7 +24,6 @@ import com.taotao.boot.captcha.support.core.definition.AbstractRenderer;
 import com.taotao.boot.captcha.support.core.definition.domain.Metadata;
 import com.taotao.boot.captcha.support.core.dto.Captcha;
 import com.taotao.boot.captcha.support.core.dto.Verification;
-import com.taotao.boot.security.spring.core.utils.RestConstants;
 import java.time.Duration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

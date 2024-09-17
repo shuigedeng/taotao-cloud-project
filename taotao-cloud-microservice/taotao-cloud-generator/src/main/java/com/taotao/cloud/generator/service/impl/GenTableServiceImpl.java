@@ -33,7 +33,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,8 +141,8 @@ public class GenTableServiceImpl implements IGenTableService {
 	@Override
 	@Transactional
 	public void deleteGenTableByIds(String ids) {
-		genTableMapper.deleteGenTableByIds(Convert.toLongArray(ids));
-		genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
+		genTableMapper.deleteGenTableByIds(ConvertUtil.toLongArray(ids));
+		genTableColumnMapper.deleteGenTableColumnByIds(ConvertUtil.toLongArray(ids));
 	}
 
 	/**

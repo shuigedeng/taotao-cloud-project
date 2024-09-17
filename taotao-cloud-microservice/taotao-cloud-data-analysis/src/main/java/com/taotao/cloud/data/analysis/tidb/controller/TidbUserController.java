@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.tidb.controller;
+package com.taotao.cloud.data.analysis.tidb.controller;
 
-import com.taotao.boot.data.analysis.tidb.mapper.TidbUserMapper;
-import com.taotao.boot.data.analysis.tidb.model.TidbUser;
+import com.taotao.cloud.data.analysis.tidb.mapper.TidbUserMapper;
+import com.taotao.cloud.data.analysis.tidb.model.TidbUser;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.taotao.boot.data.analysis.annotation;
+package com.taotao.cloud.data.analysis.annotation;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import java.lang.annotation.ElementType;

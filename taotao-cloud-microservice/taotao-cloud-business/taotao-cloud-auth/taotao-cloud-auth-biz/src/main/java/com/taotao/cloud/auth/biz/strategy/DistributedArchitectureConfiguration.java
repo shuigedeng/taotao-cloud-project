@@ -16,7 +16,6 @@
 
 package com.taotao.cloud.auth.biz.strategy;
 
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialAuthenticationHandler;
 import com.taotao.cloud.auth.biz.strategy.local.LocalPermissionDetailsService;
 import com.taotao.cloud.auth.biz.strategy.local.LocalUserDetailsService;
 import com.taotao.cloud.auth.biz.strategy.local.SysPermissionService;

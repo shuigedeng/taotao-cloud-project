@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.remote;
 
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.AbstractStrategyUserDetailsService;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.userdetails.TtcUser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;

@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.auth.biz.management.service;
 
-import com.taotao.boot.security.spring.core.enums.*;
+import com.taotao.boot.security.spring.enums.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

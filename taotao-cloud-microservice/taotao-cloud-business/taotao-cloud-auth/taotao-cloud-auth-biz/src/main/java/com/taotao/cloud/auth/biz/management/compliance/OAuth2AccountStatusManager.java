@@ -16,12 +16,12 @@
 
 package com.taotao.cloud.auth.biz.management.compliance;
 
+import com.taotao.boot.common.enums.DataItemStatus;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.event.domain.UserStatus;
 import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampManager;
 import com.taotao.cloud.auth.biz.management.compliance.processor.changer.AccountStatusChanger;
 import com.taotao.cloud.auth.biz.management.processor.EnhanceUserDetailsService;
-import com.taotao.boot.data.jpa.tenant.DataItemStatus;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
-import com.taotao.boot.security.spring.event.domain.UserStatus;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

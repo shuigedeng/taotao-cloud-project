@@ -26,8 +26,8 @@ import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.local.SysUserService;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysSocialUser;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysUser;
-import com.taotao.boot.security.spring.core.AccessPrincipal;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.AccessPrincipal;
+import com.taotao.boot.security.spring.userdetails.TtcUser;
 import com.taotao.boot.security.spring.exception.SocialCredentialsParameterBindingFailedException;
 import com.taotao.boot.security.spring.exception.UsernameAlreadyExistsException;
 import org.apache.commons.lang3.ObjectUtils;

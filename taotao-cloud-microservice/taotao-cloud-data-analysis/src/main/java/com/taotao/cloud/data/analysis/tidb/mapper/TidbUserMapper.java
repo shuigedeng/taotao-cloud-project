@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.tidb.mapper;
+package com.taotao.cloud.data.analysis.tidb.mapper;
 
-import com.taotao.boot.data.analysis.tidb.model.TidbUser;
+import com.taotao.cloud.data.analysis.tidb.model.TidbUser;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

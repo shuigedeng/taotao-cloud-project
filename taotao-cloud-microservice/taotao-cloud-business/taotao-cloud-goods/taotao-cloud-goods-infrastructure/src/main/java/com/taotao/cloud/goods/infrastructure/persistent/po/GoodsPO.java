@@ -37,7 +37,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.dromara.hutool.core.text.CharSequenceUtil;
 import org.dromara.hutool.http.html.HtmlUtil;
 import org.dromara.hutool.json.JSONUtil;

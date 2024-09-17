@@ -16,19 +16,15 @@
 
 package com.taotao.cloud.auth.biz.authentication.configuration;
 
-import com.taotao.cloud.auth.biz.authentication.login.form.OAuth2FormLoginUrlConfigurer;
-import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateClientRegistrationRepository;
+import com.taotao.boot.cache.redis.repository.RedisRepository;
+import com.taotao.boot.security.spring.authentication.login.social.oauth2client.SocialDelegateClientRegistrationRepository;
 import com.taotao.cloud.auth.biz.authentication.processor.AESCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.processor.RSACryptoProcessor;
 import com.taotao.cloud.auth.biz.authentication.properties.OAuth2AuthenticationProperties;
 import com.taotao.cloud.auth.biz.authentication.stamp.LockedUserDetailsStampManager;
 import com.taotao.cloud.auth.biz.authentication.stamp.SignInFailureLimitedStampManager;
-import com.taotao.boot.cache.redis.repository.RedisRepository;
 import jakarta.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +34,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>OAuth2 认证基础模块配置 </p>

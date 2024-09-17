@@ -20,7 +20,7 @@ import com.taotao.cloud.auth.infrastructure.authentication.extension.social.all.
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.handler.SocialUserDetails;
 import com.taotao.cloud.auth.infrastructure.authentication.userdetails.strategy.user.SysUser;
 import com.taotao.boot.data.jpa.tenant.DataItemStatus;
-import com.taotao.boot.security.spring.core.userdetails.TtcUser;
+import com.taotao.boot.security.spring.userdetails.TtcUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

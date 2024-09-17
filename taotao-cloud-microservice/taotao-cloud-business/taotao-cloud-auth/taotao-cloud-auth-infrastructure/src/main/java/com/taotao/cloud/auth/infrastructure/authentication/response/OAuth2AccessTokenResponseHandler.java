@@ -21,7 +21,7 @@ import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
 import com.taotao.boot.security.spring.constants.BaseConstants;
 import com.taotao.boot.security.spring.constants.HttpHeaders;
-import com.taotao.boot.security.spring.core.PrincipalDetails;
+import com.taotao.boot.security.spring.PrincipalDetails;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -16,21 +16,15 @@
 
 package com.taotao.cloud.auth.biz.management.response;
 
-import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
-
-import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import com.taotao.boot.common.utils.common.JsonUtils;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
-import com.taotao.boot.security.spring.core.constants.BaseConstants;
-import com.taotao.boot.security.spring.core.constants.HttpHeaders;
-import com.taotao.boot.security.spring.core.domain.PrincipalDetails;
+import com.taotao.boot.security.spring.constants.BaseConstants;
+import com.taotao.boot.security.spring.constants.HttpHeaders;
+import com.taotao.boot.security.spring.core.PrincipalDetails;
+import com.taotao.cloud.auth.biz.authentication.processor.HttpCryptoProcessor;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -53,6 +47,13 @@ import org.springframework.security.oauth2.core.http.converter.OAuth2AccessToken
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import java.io.IOException;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.taotao.cloud.auth.biz.utils.JsonNodeUtils.STRING_OBJECT_MAP;
 
 /**
  * <p>自定义 Security 认证成功处理器 </p>

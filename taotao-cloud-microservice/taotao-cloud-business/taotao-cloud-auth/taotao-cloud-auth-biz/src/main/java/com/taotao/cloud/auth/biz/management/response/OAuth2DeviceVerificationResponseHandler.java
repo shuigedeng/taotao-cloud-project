@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.biz.management.response;
 
 import com.taotao.cloud.auth.biz.management.service.OAuth2DeviceService;
-import com.taotao.boot.security.spring.core.constants.DefaultConstants;
+import com.taotao.boot.security.spring.constants.DefaultConstants;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

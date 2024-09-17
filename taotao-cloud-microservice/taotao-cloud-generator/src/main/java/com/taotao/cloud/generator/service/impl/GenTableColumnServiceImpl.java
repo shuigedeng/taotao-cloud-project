@@ -1,7 +1,7 @@
 package com.taotao.cloud.generator.service.impl;
 
 import java.util.List;
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.taotao.cloud.generator.entity.GenTableColumn;
@@ -64,6 +64,6 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
     @Override
     public int deleteGenTableColumnByIds(String ids)
     {
-        return genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
+        return genTableColumnMapper.deleteGenTableColumnByIds(ConvertUtil.toLongArray(ids));
     }
 }

@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.jpa.converter;
 
+import com.taotao.boot.security.spring.utils.OAuth2AuthorizationUtils;
 import com.taotao.cloud.auth.biz.jpa.entity.TtcAuthorization;
 import com.taotao.cloud.auth.biz.jpa.jackson2.OAuth2JacksonProcessor;
-import com.taotao.boot.security.spring.core.utils.OAuth2AuthorizationUtils;
 import org.dromara.hutool.core.date.DateUtil;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;

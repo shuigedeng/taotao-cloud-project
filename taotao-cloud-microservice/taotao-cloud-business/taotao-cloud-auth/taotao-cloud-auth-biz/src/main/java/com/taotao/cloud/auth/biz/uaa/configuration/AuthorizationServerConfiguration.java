@@ -45,9 +45,9 @@ import com.taotao.cloud.auth.biz.management.response.OidcClientRegistrationRespo
 import com.taotao.boot.cache.redis.repository.RedisRepository;
 import com.taotao.boot.common.utils.io.ResourceUtils;
 import com.taotao.boot.common.utils.servlet.ResponseUtils;
-import com.taotao.boot.security.spring.core.constants.DefaultConstants;
-import com.taotao.boot.security.spring.core.enums.Certificate;
-import com.taotao.boot.security.spring.core.response.SecurityLoginUrlAuthenticationEntryPoint;
+import com.taotao.boot.security.spring.constants.DefaultConstants;
+import com.taotao.boot.security.spring.enums.Certificate;
+import com.taotao.boot.security.spring.response.SecurityLoginUrlAuthenticationEntryPoint;
 import com.taotao.boot.security.spring.customizer.SecurityTokenStrategyConfigurer;
 import com.taotao.boot.security.spring.properties.OAuth2AuthorizationProperties;
 import com.taotao.boot.security.spring.properties.OAuth2EndpointProperties;

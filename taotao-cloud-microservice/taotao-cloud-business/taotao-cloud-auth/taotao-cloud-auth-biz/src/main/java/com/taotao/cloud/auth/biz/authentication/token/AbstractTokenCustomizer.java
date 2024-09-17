@@ -16,11 +16,8 @@
 
 package com.taotao.cloud.auth.biz.authentication.token;
 
-import com.taotao.boot.security.spring.core.constants.BaseConstants;
-import com.taotao.boot.security.spring.core.domain.TtcUser;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.taotao.boot.security.spring.constants.BaseConstants;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +25,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
+
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p>TokenCustomizer 通用处理 </p>

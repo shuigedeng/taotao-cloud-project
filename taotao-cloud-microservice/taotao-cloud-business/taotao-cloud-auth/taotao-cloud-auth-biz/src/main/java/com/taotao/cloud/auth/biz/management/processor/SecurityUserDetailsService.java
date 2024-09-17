@@ -16,9 +16,9 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
+import com.taotao.boot.security.spring.core.AccessPrincipal;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import com.taotao.cloud.auth.biz.strategy.StrategyUserDetailsService;
-import com.taotao.boot.security.spring.core.domain.AccessPrincipal;
-import com.taotao.boot.security.spring.core.domain.TtcUser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,32 +43,32 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class SecurityUserDetailsService implements EnhanceUserDetailsService {
 
-    private static final Logger log = LoggerFactory.getLogger(SecurityUserDetailsService.class);
+	private static final Logger log = LoggerFactory.getLogger(SecurityUserDetailsService.class);
 
-    private final StrategyUserDetailsService strategyUserDetailsService;
+	private final StrategyUserDetailsService strategyUserDetailsService;
 
-    public SecurityUserDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
-        this.strategyUserDetailsService = strategyUserDetailsService;
-    }
+	public SecurityUserDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+		this.strategyUserDetailsService = strategyUserDetailsService;
+	}
 
-    @Override
-    public UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal)
-            throws UsernameNotFoundException {
-        TtcUser TtcUser = strategyUserDetailsService.findUserDetailsBySocial(
-                StringUtils.toRootUpperCase(source), accessPrincipal);
-        log.info("UserDetailsService loaded social user : [{}]", TtcUser.getUsername());
-        return TtcUser;
-    }
+	@Override
+	public UserDetails loadUserBySocial(String source, AccessPrincipal accessPrincipal)
+		throws UsernameNotFoundException {
+		TtcUser TtcUser = strategyUserDetailsService.findUserDetailsBySocial(
+			StringUtils.toRootUpperCase(source), accessPrincipal);
+		log.info("UserDetailsService loaded social user : [{}]", TtcUser.getUsername());
+		return TtcUser;
+	}
 
-    @Override
-    public TtcUser loadTtcUserByUsername(String username) throws UsernameNotFoundException {
-        TtcUser TtcUser = strategyUserDetailsService.findUserDetailsByUsername(username);
-        log.info("UserDetailsService loaded user : [{}]", username);
-        return TtcUser;
-    }
+	@Override
+	public TtcUser loadTtcUserByUsername(String username) throws UsernameNotFoundException {
+		TtcUser TtcUser = strategyUserDetailsService.findUserDetailsByUsername(username);
+		log.info("UserDetailsService loaded user : [{}]", username);
+		return TtcUser;
+	}
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return loadTtcUserByUsername(username);
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return loadTtcUserByUsername(username);
+	}
 }

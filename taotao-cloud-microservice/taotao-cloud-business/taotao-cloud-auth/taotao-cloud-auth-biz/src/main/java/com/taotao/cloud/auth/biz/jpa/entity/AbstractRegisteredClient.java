@@ -18,7 +18,7 @@ package com.taotao.cloud.auth.biz.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.taotao.boot.data.jpa.tenant.BaseSysEntity;
-import com.taotao.boot.security.spring.core.constants.DefaultConstants;
+import com.taotao.boot.security.spring.constants.DefaultConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

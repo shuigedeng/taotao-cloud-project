@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.tidb.model;
+package com.taotao.cloud.data.analysis.tidb.model;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.taotao.boot.data.analysis.annotation;
+package com.taotao.cloud.data.analysis.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

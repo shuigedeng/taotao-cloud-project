@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.clickhouse.controller;
+package com.taotao.cloud.data.analysis.clickhouse.controller;
 
-import com.taotao.boot.data.analysis.clickhouse.service.CkUserService;
+import com.taotao.cloud.data.analysis.clickhouse.service.CkUserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.clickhouse.mapper;
+package com.taotao.cloud.data.analysis.clickhouse.mapper;
 
-import com.taotao.boot.data.analysis.clickhouse.model.CkUser;
+import com.taotao.cloud.data.analysis.clickhouse.model.CkUser;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -21,7 +21,7 @@ import com.taotao.cloud.auth.infrastructure.authentication.extension.social.core
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.definition.AccessResponse;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.definition.AccessUserDetails;
 import com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.exception.AccessIdentityVerificationFailedException;
-import com.taotao.boot.security.spring.core.AccessPrincipal;
+import com.taotao.boot.security.spring.AccessPrincipal;
 
 /**
  * <p>手机短信接入处理器 </p>

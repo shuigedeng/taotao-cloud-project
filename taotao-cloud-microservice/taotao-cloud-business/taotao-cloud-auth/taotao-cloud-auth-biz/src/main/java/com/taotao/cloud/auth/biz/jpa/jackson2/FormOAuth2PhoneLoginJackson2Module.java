@@ -18,13 +18,12 @@ package com.taotao.cloud.auth.biz.jpa.jackson2;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.taotao.cloud.auth.biz.authentication.login.form.sms.Oauth2FormSmsLoginAuthenticationToken;
-import org.springframework.security.jackson2.*;
+import org.springframework.security.jackson2.SecurityJackson2Modules;
 
 /**
  * Jackson module for spring-security-core. This module register
  * {@link AnonymousAuthenticationTokenMixin}, {@link RememberMeAuthenticationTokenMixin},
- * {@link SimpleGrantedAuthorityMixin}, {@link UnmodifiableSetMixin}, {@link UserMixin}
+ * {@link SimpleGrantedAuthorityMixin}, , {@link UserMixin}
  * and {@link FormOAuth2PhoneAuthenticationTokenMixin}. If no default typing enabled by
  * default then it'll enable it because typing info is needed to properly
  * serialize/deserialize objects. In order to use this module just add this module into
@@ -37,19 +36,19 @@ import org.springframework.security.jackson2.*;
  * of all security modules.</b>
  *
  * @author Jitendra Singh.
- * @since 4.2
  * @see SecurityJackson2Modules
+ * @since 4.2
  */
 @SuppressWarnings("serial")
 public class FormOAuth2PhoneLoginJackson2Module extends SimpleModule {
 
-    public FormOAuth2PhoneLoginJackson2Module() {
-        super(FormOAuth2PhoneLoginJackson2Module.class.getName(), new Version(1, 0, 0, null, null, null));
-    }
+	public FormOAuth2PhoneLoginJackson2Module() {
+		super(FormOAuth2PhoneLoginJackson2Module.class.getName(), new Version(1, 0, 0, null, null, null));
+	}
 
-    @Override
-    public void setupModule(SetupContext context) {
-        context.setMixInAnnotations(
-                Oauth2FormSmsLoginAuthenticationToken.class, FormOAuth2PhoneAuthenticationTokenMixin.class);
-    }
+	@Override
+	public void setupModule(SetupContext context) {
+		context.setMixInAnnotations(
+			Oauth2FormSmsLoginAuthenticationToken.class, FormOAuth2PhoneAuthenticationTokenMixin.class);
+	}
 }

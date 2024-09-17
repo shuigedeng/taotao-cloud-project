@@ -16,16 +16,14 @@
 
 package com.taotao.cloud.auth.biz.management.service;
 
+import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.google.common.net.HttpHeaders;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Compliance;
 import com.taotao.cloud.auth.biz.management.repository.OAuth2ComplianceRepository;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.http.server.servlet.JakartaServletUtil;
 import org.dromara.hutool.http.useragent.UserAgent;
 import org.dromara.hutool.http.useragent.UserAgentUtil;
 import org.slf4j.Logger;
@@ -35,6 +33,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>ActionAuditService </p>

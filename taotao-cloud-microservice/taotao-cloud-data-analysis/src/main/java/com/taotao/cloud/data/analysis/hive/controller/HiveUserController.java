@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.hive.controller;
+package com.taotao.cloud.data.analysis.hive.controller;
 
-import com.taotao.boot.data.analysis.hive.service.HiveUserService;
+import com.taotao.cloud.data.analysis.hive.service.HiveUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

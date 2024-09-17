@@ -16,16 +16,17 @@
 
 package com.taotao.cloud.auth.biz.management.processor;
 
+import com.taotao.boot.security.spring.core.authority.TtcGrantedAuthority;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Application;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Permission;
 import com.taotao.cloud.auth.biz.management.entity.OAuth2Scope;
 import com.taotao.cloud.auth.biz.management.service.OAuth2ApplicationService;
-import com.taotao.boot.security.spring.core.domain.TtcGrantedAuthority;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * <p>客户端交互处理器 </p>

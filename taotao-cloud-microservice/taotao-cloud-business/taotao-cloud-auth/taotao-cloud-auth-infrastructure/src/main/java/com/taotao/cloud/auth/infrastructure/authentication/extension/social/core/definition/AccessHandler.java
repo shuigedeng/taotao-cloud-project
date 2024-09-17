@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.authentication.extension.social.core.definition;
 
 
-import com.taotao.boot.security.spring.core.AccessPrincipal;
+import com.taotao.boot.security.spring.AccessPrincipal;
 
 /**
  * <p>外部应用接入处理器 </p>

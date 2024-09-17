@@ -16,36 +16,34 @@
 
 package com.taotao.cloud.auth.biz.strategy.local;
 
-import com.taotao.cloud.auth.biz.authentication.login.oauth2.social.handler.SocialAuthenticationHandler;
+import com.taotao.boot.security.spring.core.AccessPrincipal;
+import com.taotao.boot.security.spring.core.userdetails.TtcUser;
 import com.taotao.cloud.auth.biz.strategy.AbstractStrategyUserDetailsService;
 import com.taotao.cloud.auth.biz.strategy.user.SysUser;
-import com.taotao.boot.security.spring.core.domain.AccessPrincipal;
-import com.taotao.boot.security.spring.core.domain.TtcUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * <p>UserDetail本地直联服务 </p>
- *
  */
 public class LocalUserDetailsService extends AbstractStrategyUserDetailsService {
 
-    private final SysUserService sysUserService;
-    private final SocialAuthenticationHandler socialAuthenticationHandler;
+	private final SysUserService sysUserService;
+	private final SocialAuthenticationHandler socialAuthenticationHandler;
 
-    public LocalUserDetailsService(
-            SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
-        this.sysUserService = sysUserService;
-        this.socialAuthenticationHandler = socialAuthenticationHandler;
-    }
+	public LocalUserDetailsService(
+		SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
+		this.sysUserService = sysUserService;
+		this.socialAuthenticationHandler = socialAuthenticationHandler;
+	}
 
-    @Override
-    public TtcUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
-        SysUser sysUser = sysUserService.findByUserName(userName);
-        return this.convertSysUser(sysUser, userName);
-    }
+	@Override
+	public TtcUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
+		SysUser sysUser = sysUserService.findByUserName(userName);
+		return this.convertSysUser(sysUser, userName);
+	}
 
-    @Override
-    public TtcUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal) {
-        return socialAuthenticationHandler.authentication(source, accessPrincipal);
-    }
+	@Override
+	public TtcUser findUserDetailsBySocial(String source, AccessPrincipal accessPrincipal) {
+		return socialAuthenticationHandler.authentication(source, accessPrincipal);
+	}
 }

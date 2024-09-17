@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.analysis.doris.controller;
+package com.taotao.cloud.data.analysis.doris.controller;
 
-import com.taotao.boot.data.analysis.doris.mapper.DorisUserMapper;
-import com.taotao.boot.data.analysis.doris.model.DorisUser;
+import com.taotao.cloud.data.analysis.doris.mapper.DorisUserMapper;
+import com.taotao.cloud.data.analysis.doris.model.DorisUser;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
