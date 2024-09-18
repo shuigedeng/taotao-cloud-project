@@ -10,7 +10,7 @@ dependencies {
     implementation('com.alipay.sofa:bolt:1.6.10') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
-    implementation 'com.alibaba:fastjson:2.0.52'
+    implementation 'com.alibaba:fastjson:2.0.53'
     implementation 'com.alipay.sofa:hessian:3.5.4'
     implementation "redis.clients:jedis:5.1.5"
     implementation 'com.google.guava:guava:33.3.0-jre'

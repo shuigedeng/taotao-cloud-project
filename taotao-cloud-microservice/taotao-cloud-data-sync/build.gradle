@@ -189,10 +189,10 @@ dependencies {
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.3'
 
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.52"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.53"
 }
 
-mainClassName = "com.taotao.boot.data.sync.TaoTaoCloudDataSyncApplication"
+mainClassName = "com.taotao.cloud.data.sync.TaoTaoCloudDataSyncApplication"
 description = "数据同步中心"
 archivesBaseName = 'taotao-cloud-data-sync'
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.otherBatch.domain;
+package com.taotao.cloud.data.sync.otherBatch.domain;
 
 import lombok.Data;
 

@@ -334,7 +334,7 @@ taotao:
 
 mybatis-plus:
   #实体扫描 多个package用户逗号或者分号分割
-  typeAliasesPackage: com.taotao.boot.data.sync
+  typeAliasesPackage: com.taotao.cloud.data.sync
   # mapper xml 地址
   mapperLocations: classpath:mapper/*.xml
   global-config:

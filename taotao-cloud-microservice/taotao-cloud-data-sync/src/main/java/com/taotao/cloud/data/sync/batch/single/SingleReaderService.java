@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.batch.single;
+package com.taotao.cloud.data.sync.batch.single;
 
 import org.springframework.batch.item.ItemReader;
 

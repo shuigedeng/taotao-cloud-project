@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.otherBatch.support;
+package com.taotao.cloud.data.sync.otherBatch.support;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ItemReadListener;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import com.taotao.boot.data.sync.otherBatch.domain.User;
+import com.taotao.cloud.data.sync.otherBatch.domain.User;
 /**
  * <p>
  * JobReadListener

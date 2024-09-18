@@ -1,4 +1,4 @@
-package com.taotao.boot.data.sync.parallel;
+package com.taotao.cloud.data.sync.parallel;
 
 import lombok.Data;
 import lombok.ToString;

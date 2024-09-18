@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.batch.mybatis;
+package com.taotao.cloud.data.sync.batch.mybatis;
 
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.otherBatch.support;
+package com.taotao.cloud.data.sync.otherBatch.support;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.BatchStatus;

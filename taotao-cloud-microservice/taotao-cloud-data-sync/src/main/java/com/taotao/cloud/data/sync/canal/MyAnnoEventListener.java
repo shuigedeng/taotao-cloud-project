@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.canal;
+package com.taotao.cloud.data.sync.canal;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.taotao.boot.canal.annotation.AlertTableListenPoint;

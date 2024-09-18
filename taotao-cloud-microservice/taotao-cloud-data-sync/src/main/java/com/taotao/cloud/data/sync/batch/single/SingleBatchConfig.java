@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.batch.single;
+package com.taotao.cloud.data.sync.batch.single;
 
-import com.taotao.boot.data.sync.batch.multi.MyJobListener;
+import com.taotao.cloud.data.sync.batch.multi.MyJobListener;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -56,9 +56,9 @@ public class SingleBatchConfig {
     public Step uppercaseStep() {
         return new StepBuilder("uppercaseStep", jobRepository)
                 .<String, String>chunk(1, platformTransactionManager)
-                .reader(new SingleReaderService())
-                .processor(new SingleProcessorService())
-                .writer(new SingleWriterService())
+                .reader(new com.taotao.cloud.data.sync.batch.single.SingleReaderService())
+                .processor(new com.taotao.cloud.data.sync.batch.single.SingleProcessorService())
+                .writer(new com.taotao.cloud.data.sync.batch.single.SingleWriterService())
                 .build();
     }
 }

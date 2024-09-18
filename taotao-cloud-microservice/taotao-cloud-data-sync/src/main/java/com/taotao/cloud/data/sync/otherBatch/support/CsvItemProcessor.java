@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.data.sync.otherBatch.support;
+package com.taotao.cloud.data.sync.otherBatch.support;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
 import org.springframework.lang.NonNull;
-import com.taotao.boot.data.sync.otherBatch.domain.User;
+import com.taotao.cloud.data.sync.otherBatch.domain.User;
 import java.util.Date;
 
 /**
