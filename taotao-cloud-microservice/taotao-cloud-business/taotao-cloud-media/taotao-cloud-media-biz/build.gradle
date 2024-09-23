@@ -62,46 +62,39 @@ dependencies {
     //使用 Spring Boot 3.x 与图形学技术，添加电子印章防伪特征
     implementation 'com.github.jai-imageio:jai-imageio-core:1.4.0'
 
-
-	//jave-all-deps 库提供了一个简洁而强大的解决方案，让 Java 开发者能够轻松地进行音视频文件的转码和处理。
-	//jave-all-deps 是 JAVE2（Java Audio Video Encoder）项目的一部分，它是一个基于 ffmpeg 项目的 Java 封装库。JAVE2 通过		//提供一套简单易用的 API，允许 Java 开发者在不直接处理 ffmpeg 复杂命令的情况下，进行音视频文件的格式转换、转码、剪辑等操作。
-	//整体上来说，jave-all-deps 帮我们解决了三大类问题：
-	//跨平台兼容性问题：音视频处理往往涉及到不同的操作系统和硬件架构，jave-all-deps 库提供了针对不同平台的预编译 ffmpeg 二进制文	//	使得开发者无需担心平台兼容性问题。
-	//复杂的命令行操作：ffmpeg 虽然功能强大，但其命令行接口复杂且难以记忆。jave-all-deps 通过封装 ffmpeg 的命令行操作，提供了简洁易	//	用的 Java API，降低了使用门槛。
-	//依赖管理：在项目中集成音视频处理功能时，往往需要处理多个依赖项。jave-all-deps 库将核心代码和所有必要的二进制文件打包在一起，简化	//	了依赖管理。
-<<<<<<< HEAD
-
-	//库中包含了不同平台所依赖的库的内容。
+    //jave-all-deps 库提供了一个简洁而强大的解决方案，让 Java 开发者能够轻松地进行音视频文件的转码和处理。
+    // jave-all-deps 是 JAVE2（Java Audio Video Encoder）项目的一部分，它是一个基于 ffmpeg 项目的 Java 封装库。JAVE2 通过		//提供一套简单易用的 API，允许 Java 开发者在不直接处理 ffmpeg 复杂命令的情况下，进行音视频文件的格式转换、转码、剪辑等操作。
+    // 整体上来说，jave-all-deps 帮我们解决了三大类问题：
+    // 跨平台兼容性问题：音视频处理往往涉及到不同的操作系统和硬件架构，jave-all-deps 库提供了针对不同平台的预编译 ffmpeg 二进制文	//	使得开发者无需担心平台兼容性问题。
+    // 复杂的命令行操作：ffmpeg 虽然功能强大，但其命令行接口复杂且难以记忆。jave-all-deps 通过封装 ffmpeg 的命令行操作，提供了简洁易	//	用的 Java API，降低了使用门槛。
+    // 依赖管理：在项目中集成音视频处理功能时，往往需要处理多个依赖项。jave-all-deps 库将核心代码和所有必要的二进制文件打包在一起，简化	//	了依赖管理。
+    // 库中包含了不同平台所依赖的库的内容。
     //implementation 'ws.schild:jave-all-deps:3.5.0'
-	//根据自己平台选择不同的依赖库，这种方式需要首先添加 java-core
+    // 根据自己平台选择不同的依赖库，这种方式需要首先添加 java-core
     //implementation 'ws.schild:jave-core:3.5.0'
-	//Linux 64 位 amd/intel：
+    // Linux 64 位 amd/intel：
     //implementation 'jave-nativebin-linux64:3.5.0'
-	//Linux 64 位 arm：
+    // Linux 64 位 arm：
     //implementation 'jave-nativebin-linux-arm64:3.5.0'
-	//Linux 32 位 arm：
+    // Linux 32 位 arm：
     //implementation 'jave-nativebin-linux-arm32:3.5.0'
-	//Windows 64 位：
+    // Windows 64 位：
     //implementation 'jave-nativebin-win64:3.5.0'
-	//MacOS 64 位：
-=======
-	////库中包含了不同平台所依赖的库的内容。
+    // MacOS 64 位：
+    // //库中包含了不同平台所依赖的库的内容。
     //implementation 'ws.schild:jave-all-deps:3.5.0'
-	////根据自己平台选择不同的依赖库，这种方式需要首先添加 java-core
+    // //根据自己平台选择不同的依赖库，这种方式需要首先添加 java-core
     //implementation 'ws.schild:jave-core:3.5.0'
-	////Linux 64 位 amd/intel：
+    // //Linux 64 位 amd/intel：
     //implementation 'jave-nativebin-linux64:3.5.0'
-	////Linux 64 位 arm：
+    // //Linux 64 位 arm：
     //implementation 'jave-nativebin-linux-arm64:3.5.0'
-	////Linux 32 位 arm：
+    // //Linux 32 位 arm：
     //implementation 'jave-nativebin-linux-arm32:3.5.0'
-	////Windows 64 位：
-    //implementation 'jave-nativebin-win64:3.5.0'
-	////MacOS 64 位：
->>>>>>> c13330fcf37459dee98577a5b71e9114585ff9e7
+    // //Windows 64 位：
+    //implementation 'jave-nativebin-win64:3.5.0'////MacOS 64 位：
     //implementation 'jave-nativebin-osx64:3.5.0'
 
-	
 }
 
 mainClassName = "com.taotao.cloud.media.biz.TaotaoCloudMediaApplication"

@@ -21,18 +21,18 @@ repositories {
 }
 
 dependencies {
-    implementation("org.apache.spark:spark-core_2.13:3.5.2")
-    implementation("org.apache.spark:spark-catalyst_2.13:3.5.2")
-    implementation("org.apache.spark:spark-graphx_2.13:3.5.2")
-    implementation("org.apache.spark:spark-sql_2.13:3.5.2") {
+    implementation("org.apache.spark:spark-core_2.13:3.5.3")
+    implementation("org.apache.spark:spark-catalyst_2.13:3.5.3")
+    implementation("org.apache.spark:spark-graphx_2.13:3.5.3")
+    implementation("org.apache.spark:spark-sql_2.13:3.5.3") {
         exclude group: "org.codehaus.janino", module: "janino"
     }
-    implementation("org.apache.spark:spark-streaming_2.13:3.5.2")
-    implementation("org.apache.spark:spark-mllib_2.13:3.5.2")
-    implementation("org.apache.spark:spark-hive_2.13:3.5.2")
-    implementation("org.apache.spark:spark-avro_2.13:3.5.2")
-    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.13:3.5.2")
-    implementation("org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.2")
+    implementation("org.apache.spark:spark-streaming_2.13:3.5.3")
+    implementation("org.apache.spark:spark-mllib_2.13:3.5.3")
+    implementation("org.apache.spark:spark-hive_2.13:3.5.3")
+    implementation("org.apache.spark:spark-avro_2.13:3.5.3")
+    implementation("org.apache.spark:spark-streaming-kafka-0-10_2.13:3.5.3")
+    implementation("org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.3")
 
     implementation "org.apache.hudi:hudi-spark3.5-bundle_2.13:1.0.0-beta2"
 
@@ -45,9 +45,9 @@ dependencies {
     implementation "org.apache.hadoop:hadoop-mapreduce-client-common:3.4.0"
     implementation "org.apache.hadoop:hadoop-hdfs:3.4.0"
 
-    implementation "org.scala-lang:scala-library:2.13.14"
-    implementation "org.scala-lang:scala-compiler:2.13.14"
-    implementation "org.scala-lang:scala-reflect:2.13.14"
+    implementation "org.scala-lang:scala-library:2.13.15"
+    implementation "org.scala-lang:scala-compiler:2.13.15"
+    implementation "org.scala-lang:scala-reflect:2.13.15"
 
     implementation 'org.slf4j:slf4j-api:2.0.16'
     implementation 'org.slf4j:slf4j-reload4j:2.0.16'
