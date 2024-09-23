@@ -71,19 +71,19 @@ dependencies {
 	//依赖管理：在项目中集成音视频处理功能时，往往需要处理多个依赖项。jave-all-deps 库将核心代码和所有必要的二进制文件打包在一起，简化	//	了依赖管理。
 
 	//库中包含了不同平台所依赖的库的内容。
-    implementation 'ws.schild:jave-all-deps:3.5.0'
+    //implementation 'ws.schild:jave-all-deps:3.5.0'
 	//根据自己平台选择不同的依赖库，这种方式需要首先添加 java-core
-    implementation 'ws.schild:jave-core:3.5.0'
+    //implementation 'ws.schild:jave-core:3.5.0'
 	//Linux 64 位 amd/intel：
-    implementation 'jave-nativebin-linux64:3.5.0'
+    //implementation 'jave-nativebin-linux64:3.5.0'
 	//Linux 64 位 arm：
-    implementation 'jave-nativebin-linux-arm64:3.5.0'
+    //implementation 'jave-nativebin-linux-arm64:3.5.0'
 	//Linux 32 位 arm：
-    implementation 'jave-nativebin-linux-arm32:3.5.0'
+    //implementation 'jave-nativebin-linux-arm32:3.5.0'
 	//Windows 64 位：
-    implementation 'jave-nativebin-win64:3.5.0'
+    //implementation 'jave-nativebin-win64:3.5.0'
 	//MacOS 64 位：
-    implementation 'jave-nativebin-osx64:3.5.0'
+    //implementation 'jave-nativebin-osx64:3.5.0'
 
 	
 }

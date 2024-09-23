@@ -780,6 +780,8 @@ spring:
   jpa:
     database: mysql
     database-platform: mysql
+    #hibernate.show_sql 配置属性，因为它基本上等同于使用 System.out.println 打印 SQL 查询
+    #如果要记录SQL，请不要使用show_sql方式，它是不会记录到日志文件中的，只会输出到控制台中
     show-sql: true
     open-in-view: true
     generate-ddl: true
@@ -1643,6 +1645,11 @@ logging:
       total-size-cap: 20GB
   level:
     root: INFO
+    '[org.hibernate.SQL]': debug
+    # hibernate 6
+    '[org.hibernate.orm.jdbc.bind]': trace
+    # hibernate 5
+    '[org.hibernate.type.descriptor.sql]': trace
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
