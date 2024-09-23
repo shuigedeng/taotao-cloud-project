@@ -63,7 +63,7 @@ services:
         ipv4_address: 172.11.0.12
 
   nacos:
-    image: nacos/nacos-server:v2.4.1
+    image: nacos/nacos-server:v2.4.2
     restart: always
     container_name: nacos
     privileged: true
@@ -82,6 +82,10 @@ services:
       MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
       JVM_XMS: 256m
       JVM_XMX: 512m
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_TOKEN: SecretKey01234567890123456789012345345678999987654901234567890123456789
+      NACOS_AUTH_IDENTITY_KEY: nacos
+      NACOS_AUTH_IDENTITY_VALUE: nacos
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.13
