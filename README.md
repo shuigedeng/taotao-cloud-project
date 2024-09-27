@@ -92,14 +92,14 @@ Gradle:
 BOOT: 
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2024.10"
+    mavenBom "io.github.shuigedeng:taotao-boot-dependencies:2024.11"
   }
 }
 
 CLOUD:
 dependencyManagement{
   imports {
-    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2024.10"
+    mavenBom "io.github.shuigedeng:taotao-cloud-dependencies:2024.11"
   }
 }
 
@@ -115,7 +115,7 @@ BOOT:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-boot-dependencies</artifactId>
-      <version>2024.10</version>
+      <version>2024.11</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -128,7 +128,7 @@ CLOUD:
     <dependency>
       <groupId>io.github.shuigedeng</groupId>
       <artifactId>taotao-cloud-dependencies</artifactId>
-      <version>2024.10</version>
+      <version>2024.11</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>

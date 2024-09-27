@@ -16,7 +16,7 @@ env:
   TAOTAO_CLOUD_GITHUB_TOKEN: ${{ secrets.TAOTAO_CLOUD_GITHUB_TOKEN }}
   TAOTAO_CLOUD_REGISTRY_USERNAME: ${{ secrets.TAOTAO_CLOUD_REGISTRY_USERNAME }}
   TAOTAO_CLOUD_REGISTRY_PASSWORD: ${{ secrets.TAOTAO_CLOUD_REGISTRY_PASSWORD }}
-  TAOTAO_CLOUD_VERSION: 2024.10
+  TAOTAO_CLOUD_VERSION: 2024.11
 
 jobs:
   build:
@@ -71,9 +71,9 @@ jobs:
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2024.10.zip,taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2024.10.tar.gz,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2024.10.zip,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2024.10.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2024.10.zip,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2024.10.tar.gz"
+          artifacts: "taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2024.11.zip,taotao-cloud-tx/taotao-cloud-tx-distribution/build/distributions/taotao-cloud-tx-distribution-2024.11.tar.gz,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2024.11.zip,taotao-cloud-mq/taotao-cloud-mq-distribution/build/distributions/taotao-cloud-mq-distribution-2024.11.tar.gz,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2024.11.zip,taotao-cloud-rpc/taotao-cloud-rpc-distribution/build/distributions/taotao-cloud-rpc-distribution-2024.11.tar.gz"
           #body: "sdfsa"
-          bodyFile: "doc/release/2024-10.md"
+          bodyFile: "doc/release/2024-11.md"
           draft: false
           generateReleaseNotes: false
           prerelease: false
