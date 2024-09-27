@@ -1,6 +1,9 @@
 dependencies {
-    //cloud
+    //alibaba ai
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M2"
+
+	//cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
 

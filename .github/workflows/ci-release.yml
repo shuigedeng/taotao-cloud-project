@@ -53,7 +53,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.10.1"
+          gradle-version: "8.10.2"
 
       - name: release taotao-cloud-tx
         run: gradle -p taotao-cloud-tx/taotao-cloud-tx-distribution  releaseTarGz
