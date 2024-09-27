@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
 
       - name: show release
         run: lsb_release -a
@@ -79,7 +79,7 @@ jobs:
     #    os: [ macos-latest, windows-latest, ubuntu-latest ]
     #steps:
     #  - name: Checkout Project
-    #    uses: actions/checkout@v4.1.7
+    #    uses: actions/checkout@v4.2.0
     #  - uses: graalvm/setup-graalvm@v1
     #    with:
     #      version: '22.3.2'

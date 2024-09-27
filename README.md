@@ -4,25 +4,25 @@
 
 <p align="center">
   <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
-  <img src="https://img.shields.io/badge/taotao--cloud--project-2024.09-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.1.12-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/taotao--cloud--project-2024.10-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.1.13-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-3.3.3-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2023.0.3-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.1.2-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-1.14.0--2023.0.0--RC2-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.112.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.3.2-brightgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/elasticsearch-8.11.4-green" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/mybatis_plus-3.5.7-yellow" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.113.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.3.3-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/elasticsearch-8.15.2-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/mybatis_plus-3.5.8-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.33.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M15-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.36.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M16-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.10、jdk21, 支持graalvm21, 采用最新的spring 6.1.13、SpringBoot 3.3.4、SpringCloud 2023.0.3、SpringSecurity 6.3.2、Nacos 2.4.1、Mybatis-Plus 3.5.7、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 
+`taotao-cloud` (taotao云平台) 基于gradle8.10.2、jdk21, 支持graalvm21, 采用最新的spring 6.1.13、SpringBoot 3.3.4、SpringCloud 2023.0.3、SpringSecurity 6.3.3、Nacos 2.4.2、Mybatis-Plus 3.5.8、Redis 7等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
@@ -82,8 +82,8 @@ Requires:
 
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
-GRALE_VERSION >= 8.10
-IDEA_VERSION >= 2024.2.1
+GRALE_VERSION >= 8.10.2
+IDEA_VERSION >= 2024.2.3
 ```
 
 Gradle:
@@ -153,25 +153,25 @@ CLOUD:
  Spring Cloud Alibaba | 2023.0.1.2
  Spring Cloud Tencent | 1.14.0-2023.0.0-RC2
  Spring Cloud huawei  | 1.11.9-2023.0.x
- Seata                | 2.0.0
+ Seata                | 2.1.0
  Sentinel             | 1.8.8           
- Spring-kafka         | 3.2.3         
+ Spring-kafka         | 3.2.4         
  Roketmq              | 5.2.0           
- Spring Security      | 6.3.2           
- Mybatis Plus         | 3.5.7         
- Hutool               | 6.0.0-M15         
+ Spring Security      | 6.3.3           
+ Mybatis Plus         | 3.5.8         
+ Hutool               | 6.0.0-M16         
  Mysql                | 9.0.0          
  Querydsl             | 5.1.0           
  Swagger              | 3.0.0           
  Knife4j              | 4.5.0           
- Redisson             | 3.33.0         
+ Redisson             | 3.36.0         
  Lettuce              | 6.3.1.RELEASE   
- Elasticsearch        | 8.11.5           
+ Elasticsearch        | 8.15.2           
  Xxl-job              | 2.4.1           
- Guava                | 33.3.0-jre       
- Grpc                 | 1.66.0          
- Arthas               | 4.0.0           
- Netty                | 4.1.112.Final
+ Guava                | 33.3.1-jre       
+ Grpc                 | 1.68.0          
+ Arthas               | 4.0.1           
+ Netty                | 4.1.113.Final
 
 ## 6. 演示地址 (云服务器已到期)
 

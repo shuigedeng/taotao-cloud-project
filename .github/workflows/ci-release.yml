@@ -26,7 +26,7 @@ jobs:
     steps:
       #https://github.com/marketplace/actions/checkout
       - name: Checkout Project
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
 
       - name: Get tag name from ref
         shell: bash

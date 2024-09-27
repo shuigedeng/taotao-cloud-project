@@ -16,7 +16,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
 
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
-    implementation 'org.apache.velocity:velocity-engine-core:2.3'
+    implementation 'org.apache.velocity:velocity-engine-core:2.4'
     //https://search.maven.org/artifact/com.baomidou/mybatis-plus-generator
     implementation "com.baomidou:mybatis-plus-generator:3.5.8"
     //https://search.maven.org/artifact/net.maku/maku-generator-boot-starter
