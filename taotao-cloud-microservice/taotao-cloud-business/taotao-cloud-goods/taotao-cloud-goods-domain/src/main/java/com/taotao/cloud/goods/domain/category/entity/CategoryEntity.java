@@ -1,14 +1,15 @@
 
 package com.taotao.cloud.goods.domain.category.entity;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import com.taotao.boot.common.exception.BusinessException;
+import com.taotao.boot.ddd.domain.model.AggregateRoot;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Data
 @Builder

@@ -17,10 +17,10 @@ public class GoodsDomainServiceImpl implements GoodsDomainService {
 
 	}
 
-	@Override
-	public void modify(GoodsEntity dept) {
-
-	}
+	//@Override
+	//public void modify(GoodsEntity dept) {
+	//
+	//}
 
 	@Override
 	public void remove(Long[] ids) {
