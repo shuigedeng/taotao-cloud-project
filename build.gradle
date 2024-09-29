@@ -60,7 +60,7 @@ buildscript {
 
         maven {
             allowInsecureProtocol = true
-            url "http://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
+            url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
         }
 
         maven {
@@ -294,7 +294,7 @@ allprojects {
 
         maven {
             allowInsecureProtocol = true
-            url "http://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
+            url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
         }
 
         maven {
