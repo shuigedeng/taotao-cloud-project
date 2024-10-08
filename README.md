@@ -159,7 +159,7 @@ CLOUD:
  Roketmq              | 5.2.0           
  Spring Security      | 6.3.3           
  Mybatis Plus         | 3.5.8         
- Hutool               | 6.0.0-M16         
+ Hutool               | 6.0.0-M17         
  Mysql                | 9.0.0          
  Querydsl             | 5.1.0           
  Swagger              | 3.0.0           
