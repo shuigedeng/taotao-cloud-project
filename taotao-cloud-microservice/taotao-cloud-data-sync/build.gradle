@@ -128,8 +128,8 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
     implementation 'com.mysql:mysql-connector-j:9.0.0'
-    implementation 'redis.clients:jedis:5.1.5'
-    implementation 'org.apache.hive:hive-exec:4.0.0'
+    implementation 'redis.clients:jedis:5.2.0'
+    implementation 'org.apache.hive:hive-exec:4.0.1'
 
     implementation 'org.apache.hadoop:hadoop-common:3.4.0'
     implementation 'org.apache.hadoop:hadoop-client:3.4.0'
