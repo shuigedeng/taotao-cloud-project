@@ -103,10 +103,7 @@ configure(subprojects){ project ->
         //developmentOnly "org.springframework.boot:spring-boot-devtools"
         //developmentOnly "org.springframework.boot:spring-boot-docker-compose"
 
-        testImplementation("io.github.shuigedeng:taotao-boot-starter-test") {
-            exclude group: "org.mybatis.spring.boot", module: "mybatis-spring-boot-starter-test"
-            exclude group: "com.baomidou", module: "mybatis-plus-spring-boot3-starter-test"
-        }
+        testImplementation "io.github.shuigedeng:taotao-boot-starter-test"
 
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
