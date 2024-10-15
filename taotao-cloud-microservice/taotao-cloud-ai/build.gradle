@@ -1,7 +1,7 @@
 dependencies {
     //alibaba ai
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M2"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M2.1"
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
@@ -47,7 +47,7 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'com.github.oshi:oshi-core:6.6.4'
+    implementation 'com.github.oshi:oshi-core:6.6.5'
 
     //引入PDF解析器
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'

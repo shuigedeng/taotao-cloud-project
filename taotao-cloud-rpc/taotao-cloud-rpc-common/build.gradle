@@ -1,5 +1,5 @@
 dependencies {
-    api('com.alibaba.nacos:nacos-client:2.4.2') {
+    api('com.alibaba.nacos:nacos-client:2.4.3') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
 
@@ -21,7 +21,7 @@ dependencies {
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.5.7'
+    api 'ch.qos.logback:logback-classic:1.5.9'
     api "com.google.guava:guava:33.3.1-jre"
 
     api 'io.netty:netty-all:4.1.113.Final'

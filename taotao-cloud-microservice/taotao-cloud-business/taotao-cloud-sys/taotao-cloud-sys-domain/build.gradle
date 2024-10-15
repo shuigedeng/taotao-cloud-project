@@ -132,7 +132,7 @@ dependencies {
     api 'org.zalando:logbook-openfeign:3.9.0'
     api 'org.zalando:logbook-spring-webflux:3.9.0'
 
-    api 'com.github.oshi:oshi-core:6.6.4'
+    api 'com.github.oshi:oshi-core:6.6.5'
 
     //api "io.github.shuigedeng:taotao-boot-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
