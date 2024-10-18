@@ -15,7 +15,7 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-stock:taotao-cloud-stock-api")
 
-    api "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    api "io.github.shuigedeng:taotao-cloud-starter-alibaba"
 
     api "io.github.shuigedeng:taotao-boot-starter-grpc"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"

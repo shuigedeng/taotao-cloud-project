@@ -2,10 +2,10 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-im:taotao-cloud-im-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-api")
 
-    implementation "io.github.shuigedeng:taotao-cloud-starter-seata"
+    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-facility-alibaba"
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
 
     implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
