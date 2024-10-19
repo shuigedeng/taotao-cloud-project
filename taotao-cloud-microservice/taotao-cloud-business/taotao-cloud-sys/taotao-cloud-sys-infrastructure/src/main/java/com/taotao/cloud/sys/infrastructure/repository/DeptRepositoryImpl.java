@@ -1,22 +1,8 @@
 package com.taotao.cloud.sys.infrastructure.repository;
 
-import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.taotao.boot.common.exception.BusinessException;
-import com.taotao.boot.data.mybatis.utils.MybatisUtil;
-import com.taotao.boot.data.mybatis.utils.TransactionalUtil;
 import com.taotao.cloud.sys.domain.dept.entity.DeptEntity;
 import com.taotao.cloud.sys.domain.dept.repository.DeptDomainRepository;
-import com.taotao.cloud.sys.infrastructure.persistent.dept.converter.DeptConvertor;
-import com.taotao.cloud.sys.infrastructure.persistent.dept.mapper.DeptMapper;
-import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
-import com.taotao.cloud.sys.infrastructure.persistent.dept.repository.cls.DeptRepository;
-import com.taotao.cloud.sys.infrastructure.persistent.dept.repository.inf.IDeptRepository;
-import java.util.Arrays;
-import java.util.List;
 import lombok.AllArgsConstructor;
-import org.dromara.hutool.core.collection.CollUtil;
-import org.dromara.hutool.log.LogUtil;
 import org.springframework.stereotype.Service;
 
 @Service
