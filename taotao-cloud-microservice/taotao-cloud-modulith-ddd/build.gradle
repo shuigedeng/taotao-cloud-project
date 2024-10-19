@@ -1,10 +1,12 @@
 dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
     //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"

@@ -2,12 +2,15 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+    //cloud
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-tencent"
-    //implementation "io.github.shuigedeng:taotao-cloud-starter-zookeeper"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
     implementation "io.github.shuigedeng:taotao-boot-starter-springdoc"

@@ -87,7 +87,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.23"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.25"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.43"
@@ -95,7 +95,7 @@ buildscript {
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
-        classpath "com.guardsquare:proguard-gradle:7.5.0"
+        classpath "com.guardsquare:proguard-gradle:7.6.0"
 
         //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
         //https://plugins.gradle.org/plugin/org.jetbrains.intellij
@@ -139,7 +139,7 @@ plugins {
     // *******************************************第三方插件************************************************************
     //google出品的一个插件，可以直接将SpringBoot构建推送到Docker仓库
     //https://plugins.gradle.org/plugin/com.google.cloud.tools.jib
-    id "com.google.cloud.tools.jib" version "3.4.3"
+    id "com.google.cloud.tools.jib" version "3.4.4"
 
     //用于创建和管理外部进程的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.github.johnrengelman.processes
@@ -185,7 +185,7 @@ plugins {
 
     //https://github.com/diffplug/spotless/blob/main/plugin-gradle/README.md
     //https://plugins.gradle.org/plugin/com.diffplug.spotless
-    id "com.diffplug.spotless" version "7.0.0.BETA2"
+    id "com.diffplug.spotless" version "7.0.0.BETA3"
 
     //https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
     id "com.gorylenko.gradle-git-properties" version "2.4.2"
@@ -199,7 +199,7 @@ plugins {
 
     //https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
-    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.24"
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.25"
 
     //id 'org.cyclonedx.bom' version '1.10.0'
 
@@ -224,7 +224,7 @@ allprojects {
     // 统一group和version
     //group = "com.terra.ns.imp"
     //version = pLibs.versions.imp.service.get()
-    //java.sourceCompatibility = JavaVersion.VERSION_17
+    //java.sourceCompatibility = JavaVersion.VERSION_21
 
     //dependencies {
     //    // bom 管理着一组依赖的版本，各模块按需引入其中的依赖即可，由bom统一约束着版本，

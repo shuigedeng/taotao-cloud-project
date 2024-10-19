@@ -58,11 +58,15 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-integration")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-common")
 
-    api "io.github.shuigedeng:taotao-boot-starter-seata"
+    //cloud
     api "io.github.shuigedeng:taotao-cloud-starter-stream"
-    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    api "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    api "io.github.shuigedeng:taotao-boot-starter-seata"
+    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
     api "io.github.shuigedeng:taotao-boot-starter-eventbus"

@@ -57,10 +57,15 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-integration")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-common")
 
-    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
-    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+    //cloud
+    api "io.github.shuigedeng:taotao-cloud-starter-stream"
     api "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    api "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    api "io.github.shuigedeng:taotao-boot-starter-seata"
+    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-core"
     api "io.github.shuigedeng:taotao-boot-starter-logger"
     api "io.github.shuigedeng:taotao-boot-starter-springdoc"
@@ -86,6 +91,8 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     api "io.github.shuigedeng:taotao-boot-starter-micrometer"
     api "io.github.shuigedeng:taotao-boot-starter-skywalking"
+    api "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    api "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     api 'org.springframework.session:spring-session-data-redis:3.3.1'
 

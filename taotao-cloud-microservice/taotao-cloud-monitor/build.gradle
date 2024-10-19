@@ -1,6 +1,7 @@
 dependencies {
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"

@@ -1,11 +1,15 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-media:taotao-cloud-media-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
+    //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
@@ -20,6 +24,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
+    implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //开源OCR识别框架Tess4j
     //https://tess4j.sourceforge.net/

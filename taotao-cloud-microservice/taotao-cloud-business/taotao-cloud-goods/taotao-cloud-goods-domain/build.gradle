@@ -58,11 +58,15 @@ dependencies {
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-integration")
     api project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-common")
 
-    api "io.github.shuigedeng:taotao-boot-starter-seata"
-    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
+    //cloud
     api "io.github.shuigedeng:taotao-cloud-starter-stream"
     api "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    api "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    api "io.github.shuigedeng:taotao-boot-starter-seata"
+    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-boot-starter-cache-redis"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
@@ -81,6 +85,8 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-data-mongodb"
     api "io.github.shuigedeng:taotao-boot-starter-grpc"
     api "io.github.shuigedeng:taotao-boot-starter-lock"
+    api "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    api "io.github.shuigedeng:taotao-boot-starter-flowengine"
     api "io.github.shuigedeng:taotao-boot-starter-web"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"

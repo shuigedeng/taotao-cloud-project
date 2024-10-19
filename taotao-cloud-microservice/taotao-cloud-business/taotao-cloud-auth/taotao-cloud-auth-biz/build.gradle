@@ -4,10 +4,13 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-member:taotao-cloud-member-api")
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+    //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-core"
     implementation "io.github.shuigedeng:taotao-boot-starter-logger"
     implementation "io.github.shuigedeng:taotao-boot-starter-springdoc"
@@ -33,6 +36,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-job-quartz"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-powerjob"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-snail"
+    implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     implementation 'org.springframework.session:spring-session-data-redis:3.3.2'
 

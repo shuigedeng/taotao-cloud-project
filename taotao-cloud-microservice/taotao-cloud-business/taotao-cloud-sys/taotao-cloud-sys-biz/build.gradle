@@ -9,14 +9,18 @@ plugins {
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    //cloud
     //implementation "io.github.shuigedeng:taotao-cloud-starter-tencent"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-zookeeper"
     //implementation "io.github.shuigedeng:taotao-cloud-starter-huawei"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
@@ -44,6 +48,8 @@ dependencies {
     //implementation "io.github.shuigedeng:taotao-boot-starter-security-satoken"
     implementation "io.github.shuigedeng:taotao-boot-starter-data-elasticsearch"
     implementation "io.github.shuigedeng:taotao-boot-starter-data-mongodb"
+    implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255

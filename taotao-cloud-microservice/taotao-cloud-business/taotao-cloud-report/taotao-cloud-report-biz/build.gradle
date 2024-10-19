@@ -1,11 +1,15 @@
 dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-report:taotao-cloud-report-api")
 
-    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
+    //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
 
+    //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-apollo"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
@@ -19,6 +23,8 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-job-snail"
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
+    implementation "io.github.shuigedeng:taotao-boot-starter-statemachine"
+    implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"

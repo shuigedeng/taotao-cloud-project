@@ -22,11 +22,11 @@ subprojects {
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
         //打包依赖包
-//        from {
-//            (configurations.runtimeClasspath).collect {
-//                it.isDirectory() ? it : zipTree(it)
-//            }
-//        }
+        //from {
+        //    (configurations.runtimeClasspath).collect {
+        //        it.isDirectory() ? it : zipTree(it)
+        //    }
+        //}
 
         //delete "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
         //from configurations.runtimeClasspath

@@ -1,5 +1,10 @@
 dependencies {
     //cloud
+    //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
+    //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
+    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+
     implementation "com.alibaba.csp:sentinel-datasource-nacos"
     implementation "com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway"
     implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {
@@ -17,10 +22,6 @@ dependencies {
 
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
     implementation "io.github.resilience4j:resilience4j-ratelimiter:2.2.0"
-
-    //implementation 'com.tencent.cloud:spring-cloud-tencent-gateway-plugin'
-    //implementation 'com.tencent.cloud:spring-cloud-tencent-featureenv-plugin'
-    implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
 
     //boot
     implementation "io.github.shuigedeng:taotao-boot-starter-core"

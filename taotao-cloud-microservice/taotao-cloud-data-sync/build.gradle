@@ -1,12 +1,15 @@
 dependencies {
     //cloud
-    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
-    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-ttc"
+    implementation "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+
     implementation 'org.springframework.cloud:spring-cloud-starter-task'
 
     //boot
+    implementation "io.github.shuigedeng:taotao-boot-starter-seata"
+    implementation "io.github.shuigedeng:taotao-boot-starter-sentinel"
     implementation "io.github.shuigedeng:taotao-boot-starter-canal"
     implementation "io.github.shuigedeng:taotao-boot-starter-dubbo"
     implementation "io.github.shuigedeng:taotao-boot-starter-eventbus"
@@ -75,7 +78,7 @@ dependencies {
     implementation 'org.apache.doris:flink-doris-connector-1.19:24.0.1'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
-    implementation "org.apache.flink:flink-sql-connector-kafka:3.2.0-1.19"
+    implementation 'org.apache.flink:flink-sql-connector-kafka:3.3.0-1.20'
     //implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-sql-connector-mongodb:1.2.0-1.19'
     implementation 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
