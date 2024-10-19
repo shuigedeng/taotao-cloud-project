@@ -94,7 +94,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-statemachine"
     api "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
-    api 'org.springframework.session:spring-session-data-redis:3.3.1'
+    api 'org.springframework.session:spring-session-data-redis:3.3.2'
 
     api 'com.github.binarywang:weixin-java-mp:4.6.5.B'
     api 'com.github.binarywang:weixin-java-miniapp:4.6.5.B'
