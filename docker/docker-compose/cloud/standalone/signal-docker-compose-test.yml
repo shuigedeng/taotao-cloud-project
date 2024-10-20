@@ -50,6 +50,66 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.12
 
+  nacos:
+    image: nacos/nacos-server:v2.4.2
+    restart: always
+    container_name: nacos
+    privileged: true
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: 172.11.0.10
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: 123456
+      MYSQL_SERVICE_DB_NAME: "nacos2.4.2"
+      SQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+      JVM_XMS: 256m
+      JVM_XMX: 512m
+      NACOS_AUTH_ENABLE: true
+      NACOS_AUTH_TOKEN: SecretKey01234567890123456789012345345678999987654901234567890123456789
+      NACOS_AUTH_IDENTITY_KEY: nacos
+      NACOS_AUTH_IDENTITY_VALUE: nacos
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.13
+
+  sentinel-dashboard:
+    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-sentinel:v1.8.8
+    container_name: sentinel-dashboard
+    ports:
+      - "8858:8858"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.14
+
+  dubbo-admin:
+    image: apache/dubbo-admin:0.6.0
+    container_name: dubbo-admin
+    ports:
+      - "38080:38080"
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      # nacos config, add parameters to url like username=nacos&password=nacos
+      - admin.registry.address=nacos://192.168.218.2:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.registry.group=DUBBO_REGISTRY_GROUP
+      - admin.config-center=nacos://192.168.218.2:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.config-center.group=DUBBO_REGISTRY_GROUP
+      - admin.metadata-report.address=nacos://192.168.218.2:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
+      - admin.root.user.name=admin
+      - admin.root.user.password=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.15
+
+  ####################################################################
+
   redis-stack:
     image: redis/redis-stack:latest
     container_name: redis-stack
@@ -128,14 +188,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.15
 
-  sentinel-dashboard:
-    image: dreamkaylee/sentinel-dashboard:1.8.7
-    container_name: sentinel-dashboard
-    ports:
-      - "8858:8858"
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.31
+
 
   rocketmq-nameserv:
     image: apache/rocketmq:5.1.0
@@ -198,34 +251,6 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.52
-
-  nacos:
-    image: nacos/nacos-server:v2.2.3
-    restart: always
-    container_name: nacos
-    privileged: true
-    ports:
-      - "8848:8848"
-      - "9848:9848"
-      - "9849:9849"
-    environment:
-      MODE: standalone
-      SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.11.0.10
-      MYSQL_SERVICE_PORT: 3306
-      MYSQL_SERVICE_USER: root
-      MYSQL_SERVICE_PASSWORD: 123456
-      MYSQL_SERVICE_DB_NAME: taotao-cloud-nacos
-      MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=10000&socketTimeout=30000&autoReconnect=true&useSSL=false
-      JVM_XMS: 256m
-      JVM_XMX: 512m
-      NACOS_AUTH_ENABLE: true
-      NACOS_AUTH_IDENTITY_KEY: example
-      NACOS_AUTH_IDENTITY_VALUE: bb
-      NACOS_AUTH_TOKEN: SecretKey01234567890123456789012345345678999987654901234567890123456789
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.16
 
   seata:
     container_name: seata
@@ -316,26 +341,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.60
 
-  dubbo-admin:
-    image: apache/dubbo-admin:0.5.0
-    container_name: dubbo-admin
-    ports:
-      - "18080:8080"
-    privileged: true
-    environment:
-      - TZ=Asia/Shanghai
-      # nacos config, add parameters to url like username=nacos&password=nacos
-      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
-      - admin.registry.group=DUBBO_REGISTRY_GROUP
-      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
-      - admin.config-center.group=DUBBO_REGISTRY_GROUP
-      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
-      - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
-      - admin.root.user.name=admin
-      - admin.root.user.password=123456
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.48
+
 
   skywalking-oap:
     image: apache/skywalking-oap-server:9.5.0

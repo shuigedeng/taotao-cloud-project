@@ -63,10 +63,10 @@ dependencies {
     api "io.github.shuigedeng:taotao-cloud-starter-alibaba"
     api "io.github.shuigedeng:taotao-cloud-starter-ttc"
     api "io.github.shuigedeng:taotao-cloud-starter-openfeign"
+    api "io.github.shuigedeng:taotao-cloud-starter-seata"
+    api "io.github.shuigedeng:taotao-cloud-starter-sentinel"
 
     //boot
-    api "io.github.shuigedeng:taotao-boot-starter-seata"
-    api "io.github.shuigedeng:taotao-boot-starter-sentinel"
     api "io.github.shuigedeng:taotao-boot-starter-apollo"
     api "io.github.shuigedeng:taotao-boot-starter-dubbo"
     api "io.github.shuigedeng:taotao-boot-starter-eventbus"

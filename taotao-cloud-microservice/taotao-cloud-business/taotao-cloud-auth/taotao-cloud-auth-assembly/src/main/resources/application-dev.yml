@@ -1106,10 +1106,6 @@ taotao:
   boot:
     dingtalk:
       enabled: true
-      httpclient:
-        enabled: true
-      threadpool:
-        enabled: true
       project-id: ${spring.application.name}
       dingers:
         dingtalk:
