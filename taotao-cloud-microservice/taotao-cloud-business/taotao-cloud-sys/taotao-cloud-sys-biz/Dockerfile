@@ -65,6 +65,7 @@ ENV JAVA_OPTIONS="-Xms8g \
                   -Xmx8g \
                   -Xmn1280m \
                   -Xss512k \
+                  -Xlog:async \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -89,7 +90,6 @@ ENV JAVA_OPTIONS="-Xms8g \
                   -XX:+HeapDumpOnOutOfMemoryError \
                   -XX:+ShowCodeDetailsInExceptionMessages \
                   -XX:ParallelGCThreads=4 \
-                  -Xlog:async \
                   -XX:AsyncLogBufferSize=409600 \
                   -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
                   -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
@@ -116,8 +116,9 @@ ENV JAVA_OPTIONS="-Xms8g \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${APP_PRROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar "
+                  -javaagent:/skywalking/agent/skywalking-agent.jar"
 
+#######################################################################################################
 #远程debug选项 只能在测试环境使用
 #1.使用容器部署时 ENTRYPOINT后面加上DEBUG_OPTIONS
 #2.使用jar部署时 java -XDebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889 -jar demo
@@ -189,13 +190,55 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
 
 
-
-#JVM 包含多种不同类型的参数选项
+#######################################################################################################
+#JVM 包含多种不同类型的参数选项、
+#-- 用来设置应用参数，
 #-D 用来设置系统属性，属于标准选项
-#-X 设置非标准选项，支持的选项范围跟具体的 JVM 实现有关
-#-XX 设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关
+#-X 非标准参数，支持的选项范围跟具体的 JVM 实现有关
+#-XX 非标准参数，设置高级选项，允许开发者调整 JVM 的行为、性能、输出调试信息，支持的选项范围也跟具体的 JVM 实现有关
 #布尔类型的高级选项是起到功能的开关作用，不带参数。使用 + 启用功能，使用 - 禁用功能；对于带参数的高级选项，需要指定参数值
 #使用 java -XX:+UnlockDiagnosticVMOptions -XX:+UnlockExperimentalVMOptions -XX:+PrintFlagsFinal -version 命令可以查看 JVM 所有的选项
+
+#1.标准参数
+#-client和-server：设置JVM使用client模式或server模式。client模式启动快，但性能和内存管理效率不高，适用于桌面应用；
+#server模式启动慢，但性能和内存管理效率高，适用于服务器。64位的JVM只有server模式
+#-verbose：查询GC（垃圾回收）问题最常用的命令之一，常用于排查GC问题。
+#例如，-verbose:gc输出每次GC的相关情况，-verbose:class输出JVM载入类的相关信息，-verbose:jni输出native方法调用的相关情况
+#
+#2.非标准参数（-X）
+#-Xms：设置初始堆内存大小，即程序启动时占用内存大小，默认是物理内存的1/64。
+#-Xmx：设置最大堆内存大小，即程序运行期间最大可占用的内存大小。如果程序运行需要占用更多的内存，超出了这个设置值，就会抛出OutOfMemory异常，默认是物理内存的1/4。
+#-Xmn：设置年轻代大小，增大年轻代会减少老年代大小，官网推荐整堆的3/8。
+#-Xss：设置单个线程栈内存大小，默认是1MB。
+#
+#3.非标准参数（-XX） 高级选项
+#	性能参数：
+#		-XX:+UseSerialGC：使用串行垃圾收集器。
+#		-XX:+UseParallelGC：使用并行垃圾收集器（年轻代）。
+#		-XX:+UseParallelOldGC：使用并行垃圾收集器（老年代），JDK6.0以上支持。
+#		-XX:+UseConcMarkSweepGC：使用CMS（Concurrent Mark Sweep）垃圾收集器，适用于多CPU，并要求缩短因GC造成程序停滞的时间。
+#		-XX:+UseG1GC：使用G1垃圾收集器。
+#		-XX:+HeapDumpOnOutOfMemoryError：这个参数告诉JVM在内存溢出错误发生时生成堆转储文件。
+#		-XX:HeapDumpPath={HEAP-DUMP-FILE-PATH} ：这个参数指定了堆转储文件的存储路径。需要将{HEAP-DUMP-FILE-PATH}替换为实际的文件路径。
+#	行为参数：
+#		-XX:NewRatio：设置年轻代（包括Eden和两个Survivor区）与老年代的比值（除去持久代）。例如，设置为4，则年轻代与老年代所占比值为1:4。
+#		-XX:SurvivorRatio：设置年轻代中Eden区与Survivor区的大小比值。例如，设置为4，则两个Survivor区与一个Eden区的比值为2:4。
+#		-XX:MaxTenuringThreshold：设置垃圾最大年龄。如果设置为0，则年轻代对象不经过Survivor区，直接进入老年代。
+#		-XX:PermSize 和 -XX:MaxPermSize：设置持久代（PermGen space）的初始大小和最大大小。
+#			不过，在Java 8中，PermGen space被元空间（Metaspace）所替代，相关参数变为-XX:MetaspaceSize和-XX:MaxMetaspaceSize。
+#	调试参数：
+#		-XX:+PrintGC：每次触发GC时打印相关日志。
+#		-XX:+PrintGCDetails：打印更详细的GC日志。
+#		-XX:+PrintGCTimeStamps：打印GC发生的时间戳。
+#		-Xloggc:filename：将GC日志输出到指定文件。例如，-Xloggc:/data/gclog/gc.log表示将GC日志输出到指定路径。
+#		-XX:+DisableExplicitGC：禁用System.gc()调用，防止显式触发Full GC。
+#		
+#	辅助指令jinfo
+#		jinfo：查看或修改正在运行的JVM配置。例如，jinfo -flag
+#		HeapDumpOnOutOfMemoryError 870778用于查看进程号为870778的JVM是否开启了HeapDumpOnOutOfMemoryError配置。	
+#		
+#		
+#
 
 
 #ENV JAVA_OPTIONS="
