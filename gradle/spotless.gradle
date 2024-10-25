@@ -28,7 +28,7 @@ spotless {
         //eclipse('4.26').configFile('eclipse-prefs.xml')
 
         // apply a specific flavor of google-java-format
-        //googleJavaFormat('1.16.0').aosp().reflowLongStrings().groupArtifact('com.google.googlejavaformat:google-java-format')
+        //googleJavaFormat('1.24.0').aosp().reflowLongStrings().groupArtifact('com.google.googlejavaformat:google-java-format')
 
         //https://search.maven.org/artifact/com.palantir.javaformat/palantir-java-format/
         palantirJavaFormat('2.50.0')
