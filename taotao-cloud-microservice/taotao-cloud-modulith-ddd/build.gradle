@@ -46,13 +46,13 @@ dependencies {
     implementation 'org.jmolecules:jmolecules-ddd:1.9.0'
     implementation 'org.jmolecules:jmolecules-events:1.9.0'
 
-    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.23'
-    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.23'
-    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.23'
-    implementation 'org.jmolecules.integrations:jmolecules-spring:0.23'
-    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.23'
-    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.23'
-    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.23'
+    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.23.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.23.0'
+    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.23.0'
+    implementation 'org.jmolecules.integrations:jmolecules-spring:0.23.0'
+    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.23.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.23.0'
+    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.23.0'
 
     testImplementation "com.tngtech.archunit:archunit-junit5:1.3.0"
 

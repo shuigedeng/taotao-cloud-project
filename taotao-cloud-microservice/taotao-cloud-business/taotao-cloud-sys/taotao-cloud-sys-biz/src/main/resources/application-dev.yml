@@ -424,7 +424,7 @@ powerjob:
     port: 27777
     protocol: akka
     app-name: ${spring.application.name}
-    server-address: 192.168.10.220:7700
+    server-address: 127.0.0.1:7700
     store-strategy: disk
     max-appended-wf-context-length: 8192
     max-result-length: 8192
@@ -437,7 +437,7 @@ elasticjob:
     type: RDB
     #data-source:
     #  type: com.zaxxer.hikari.HikariDataSource
-    #  url: jdbc:mysql://192.168.10.220:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #  url: jdbc:mysql://127.0.0.1:13306/taotao-cloud-elasticjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     #  driver-class-name: com.mysql.cj.jdbc.Driver
     #  username: root
     #  password: 123456
@@ -458,7 +458,7 @@ elasticjob:
     #      cachePrepStmts: true
     #      prepStmtCacheSize: 250
   reg-center:
-    server-lists: 192.168.10.220:2181
+    server-lists: 127.0.0.1:2181
     namespace: taotao-cloud-elasticjob
   jobs:
     taotao-cloud-simple-job:
@@ -1226,7 +1226,7 @@ taotao:
       xxl:
         enabled: true
         admin:
-          addresses: http://192.168.10.220:9110/xxl-job-admin/,http://192.168.10.220:9111/xxl-job-admin/
+          addresses: http://127.0.0.1:9110/xxl-job-admin/,http://127.0.0.1:9111/xxl-job-admin/
         executor:
           appname: ${spring.application.name}
           ip:

@@ -25,7 +25,7 @@ source /opt/cloud/zipkin/mysql.sql
 # --zipkin.collector.rabbitmq.username=xxx
 # --zipkin.collector.rabbitmq.password=xxx
 # --STORAGE_TYPE=mysql
-# --MYSQL_HOST=192.168.10.220
+# --MYSQL_HOST=127.0.0.1
 # --MYSQL_TCP_PORT=3306
 # --MYSQL_DB=cloud-zipkin
 # --MYSQL_USER=root

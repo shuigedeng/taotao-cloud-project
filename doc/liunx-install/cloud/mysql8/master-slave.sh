@@ -113,7 +113,7 @@ flush privileges; // 刷新权限
 #### master
 show variables like 'server_id';
 
-mysql -uroot -p -h192.168.10.220 -P3307
+mysql -uroot -p -h127.0.0.1 -P3307
 create user 'slave'@'%' identified with mysql_native_password by '123456';
 grant replication slave on *.* to 'slave'@'%';
 flush privileges;
@@ -122,7 +122,7 @@ show master status;
 show master status\G
 
 stop slave;
-change master to master_host='192.168.10.220',master_port=3307,master_user='slave',master_password='123456',master_log_file='mysql-bin.000003',master_log_pos=1596;
+change master to master_host='127.0.0.1',master_port=3307,master_user='slave',master_password='123456',master_log_file='mysql-bin.000003',master_log_pos=1596;
 start slave;
 
 show slave status;

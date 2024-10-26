@@ -192,7 +192,7 @@ services:
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
       ### broker配置
       # 定义外网访问地址（宿主机ip地址和端口）
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.10.220:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
       # broker.id，必须唯一
       - KAFKA_BROKER_ID=1
       - KAFKA_CFG_NODE_ID=1
@@ -210,7 +210,7 @@ services:
       # 集群名称
       - KAFKA_CLUSTERS_0_NAME=local
       # 集群地址
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.10.220:9092
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=127.0.0.1:9092
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.15
@@ -293,7 +293,7 @@ services:
     environment:
       STORE_MODE: db
       SEATA_PORT: 8091
-      SEATA_IP: 192.168.10.220
+      SEATA_IP: 127.0.0.1
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
@@ -391,8 +391,8 @@ services:
       - "8080:8080"
     environment:
       - TZ=Asia/Shanghai
-      - SW_OAP_ADDRESS=http://192.168.10.220:12800
-      - SW_ZIPKIN_ADDRESS=http://192.168.10.220:9412
+      - SW_OAP_ADDRESS=http://127.0.0.1:12800
+      - SW_ZIPKIN_ADDRESS=http://127.0.0.1:9412
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.62

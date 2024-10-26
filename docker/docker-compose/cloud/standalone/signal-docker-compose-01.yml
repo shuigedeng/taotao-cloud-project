@@ -113,7 +113,7 @@ services:
   #  environment:
   #    STORE_MODE: db
   #    SEATA_PORT: 8091
-  #    SEATA_IP: 192.168.10.220
+  #    SEATA_IP: 127.0.0.1
   #  networks:
   #    taotao-cluster-network:
   #      ipv4_address: 172.11.0.1
@@ -254,11 +254,11 @@ services:
     environment:
       - TZ=Asia/Shanghai
       # nacos config, add parameters to url like username=nacos&password=nacos
-      - admin.registry.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.registry.address=nacos://127.0.0.1:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
       - admin.registry.group=DUBBO_REGISTRY_GROUP
-      - admin.config-center=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.config-center=nacos://127.0.0.1:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
       - admin.config-center.group=DUBBO_REGISTRY_GROUP
-      - admin.metadata-report.address=nacos://192.168.10.220:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
+      - admin.metadata-report.address=nacos://127.0.0.1:8848?namespace=taotao-cloud-dubbo&username=nacos&password=nacos
       - admin.metadata-report.group=DUBBO_REGISTRY_GROUP
       - admin.root.user.name=admin
       - admin.root.user.password=123456

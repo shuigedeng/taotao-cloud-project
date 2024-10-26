@@ -13,7 +13,7 @@ vim flink-conf.yaml
 jobmanager.rpc.address: 192.168.1.5
 
 vim slave
-192.168.10.220
+127.0.0.1
 
 sql-client.sh \
 embedded -j /opt/github/hudi-release-0.8.0/packaging/hudi-flink-bundle/target/hudi-flink-bundle_2.12-0.8.0.jar \

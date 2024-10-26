@@ -51,7 +51,7 @@ nohup hive --service hiveserver2 >/opt/bigdata/apache-hive-3.1.2-bin/logs/hivese
 
 hive --hiveconf hive.root.logger=DEBUG,console
 
-beeline -i ~/.hiverc -u jdbc:hive2://192.168.10.220:10000 -n root
+beeline -i ~/.hiverc -u jdbc:hive2://127.0.0.1:10000 -n root
 
 
 ###########################################

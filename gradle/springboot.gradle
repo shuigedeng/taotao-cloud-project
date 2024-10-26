@@ -157,7 +157,7 @@ bootBuildImage {
                     "-Dskywalking.logging.file_name=taotao-cloud-monitor.skywalking.log " +
                     "-Dskywalking.logging.level=INFO " +
                     "-Dskywalking.logging.dir=/root/logs/taotao-cloud-monitor " +
-                    "-Dskywalking.collector.backend_service=192.168.10.220:11800 " +
+                    "-Dskywalking.collector.backend_service=127.0.0.1:11800 " +
                     "-Dspring.profiles.active=dev ",
 
             "BP_JVM_VERSION"                   : "11.*",

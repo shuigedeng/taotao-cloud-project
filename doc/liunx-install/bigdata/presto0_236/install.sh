@@ -13,7 +13,7 @@ cd presto0.236/etc
 # 添加hudi支持
 cp hudi-presto-bundle-0.6.2-incubating.jar presto0.236/plugins/hive-hadoop2
 
-http://192.168.10.220:28081/ui
+http://127.0.0.1:28081/ui
 
 # 客户端安装
 mv presto-cli-0.236-executable.jar presto

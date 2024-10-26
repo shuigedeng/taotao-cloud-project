@@ -41,7 +41,7 @@ JAVA_OPTS="
 -Dskywalking.logging.file_name=${LOG_FILE}/${APP_NAME}\.skywalking.log
 -Dskywalking.logging.level=INFO
 -Dskywalking.logging.dir=${JAR_PATH}
--Dskywalking.collector.backend_service=192.168.10.220:11800
+-Dskywalking.collector.backend_service=127.0.0.1:11800
 "
 
 # 根据实际情况来修改以上配置信息 ##################################

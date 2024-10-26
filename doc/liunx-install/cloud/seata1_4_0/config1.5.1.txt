@@ -25,7 +25,7 @@ transport.compressor=none
 #Transaction routing rules configuration, only for the client
 service.vgroupMapping.taotao_cloud_tx_group=SC
 #If you use a registry, you can ignore it
-service.SC.grouplist=192.168.10.220:8091
+service.SC.grouplist=127.0.0.1:8091
 service.enableDegrade=false
 service.disableGlobalTransaction=false
 
@@ -84,7 +84,7 @@ store.file.sessionReloadReadSize=100
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://192.168.10.220:3307/taotao-cloud-seata-1.5.1?useUnicode=true&rewriteBatchedStatements=true
+store.db.url=jdbc:mysql://127.0.0.1:3307/taotao-cloud-seata-1.5.1?useUnicode=true&rewriteBatchedStatements=true
 store.db.user=root
 store.db.password=123456
 store.db.minConn=5

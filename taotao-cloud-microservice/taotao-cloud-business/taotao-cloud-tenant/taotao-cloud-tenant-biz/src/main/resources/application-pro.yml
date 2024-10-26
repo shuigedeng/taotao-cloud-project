@@ -77,7 +77,7 @@ redisson:
   attemptTimeout: 10000   #等待获取锁超时时间,-1则是一直等待
   dataValidTime: 1800000
   single_server_config:
-    address: "192.168.10.220:6379"     #服务器地址,必填ip:port
+    address: "127.0.0.1:6379"     #服务器地址,必填ip:port
     subscription_connection_minimum_idle_size: 1     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_pool_size: 50     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
     connection_minimum_idle_size: 24     #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
@@ -94,7 +94,7 @@ arthas:
   ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.220:7777/ws
+  tunnel-server: ws://127.0.0.1:7777/ws
 
 dubbo:
   enabled: true
@@ -116,7 +116,7 @@ dubbo:
     shutwait: 3000
     dump-directory: ${user.home}/logs/${spring.application.name}/dubbo/
   registry:
-    address: nacos://192.168.10.220:8848
+    address: nacos://127.0.0.1:8848
     group: DUBBO_REGISTRY_GROUP
     cluster: CQ
     parameters:
@@ -183,14 +183,14 @@ dubbo:
     export-async: true
   monitor:
     id: ${spring.application.name}
-    address: 192.168.10.220:18080
+    address: 127.0.0.1:18080
     username: admin
     password: 123456
     group: taotao-cloud-dev
     version: ${ttcVersion}
   metadata-report:
     id: ${spring.application.name}
-    address: nacos://192.168.10.220:8848
+    address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -199,7 +199,7 @@ dubbo:
       cluster-name: CQ
   config-center:
     id: ${spring.application.name}
-    address: nacos://192.168.10.220:8848
+    address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -234,7 +234,7 @@ seata:
   data-source-proxy-mode: AT
   service:
     grouplist:
-      SC: 192.168.10.220:8091
+      SC: 127.0.0.1:8091
     vgroupMapping:
       taotao_cloud_tx_group: SC   # TC 集群（必须与seata-server保持一致）
     enable-degrade: false     # 降级开关
@@ -243,7 +243,7 @@ seata:
     type: nacos
     nacos:
       namespace: taotao-cloud-seata
-      server-addr: 192.168.10.220:8848
+      server-addr: 127.0.0.1:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -253,7 +253,7 @@ seata:
     nacos:
       namespace: taotao-cloud-seata
       application: seata-server
-      server-addr: 192.168.10.220:8848
+      server-addr: 127.0.0.1:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -354,11 +354,11 @@ spring:
       max-request-size: 200MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #url: jdbc:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
+    #url: jdbc:mysql://127.0.0.1:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
     #driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:p6spy:mysql://192.168.10.220:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #url: jdbc:p6spy:mysql://127.0.0.1:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:mysql://192.168.10.220:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -418,7 +418,7 @@ spring:
     #      use_jdbc_metadata_defaults: false
   data:
     redis:
-      host: 192.168.10.220
+      host: 127.0.0.1
       port: 6379
       database: 1
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -427,7 +427,7 @@ spring:
       #  master:
       #  nodes:
       #cluster:
-      #  nodes: 192.168.10.220:6381,192.168.10.220:6382,192.168.10.220:6383,192.168.10.220:6384,192.168.10.220:6385,192.168.10.220:6386
+      #  nodes: 127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385,127.0.0.1:6386
       #  max-redirects: 3
       client-type: lettuce
       lettuce:
@@ -457,7 +457,7 @@ spring:
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://192.168.10.220:6379"
+            address: "redis://127.0.0.1:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -482,7 +482,7 @@ spring:
           lockWatchdogTimeout: 10000
   kafka:
     enabled: true
-    bootstrap-servers: 192.168.10.220:9092
+    bootstrap-servers: 127.0.0.1:9092
     producer:
       retries: 1
       batch-size: 16384
@@ -514,7 +514,7 @@ spring:
         opaquetoken:
           client-id: 25953fda237841689743a94871915661
           client-secret: a667ed5606f44e159db062239ed5a838
-          introspection-uri: http://192.168.10.220
+          introspection-uri: http://127.0.0.1
   cloud:
     openfeign:
       micrometer:
@@ -560,7 +560,7 @@ taotao:
           secret: ${DINGDING_SECRET:xxxx}
     zookeeper:
       enabled: false
-      connectString: 192.168.10.220:2181
+      connectString: 127.0.0.1:2181
     sensitive:
       enabled: false
     lock:
@@ -813,7 +813,7 @@ management:
 #        enabled: true
 #  zipkin:
 #    enabled: true
-#    base-url: http://192.168.10.220:9411/
+#    base-url: http://127.0.0.1:9411/
 #    discoveryClientEnabled: false
 #    sender:
 #      type: WEB

@@ -9,7 +9,7 @@ mv mysqld_exporter-0.13.0.linux-amd64 mysqld_exporter
 
 vim /mysqld_exporter/my.cnf
 [client]
-host=192.168.10.220
+host=127.0.0.1
 user=root
 port=3306
 password=123456
@@ -23,7 +23,7 @@ netstat -lnptu | grep 9104
 
 - job_name: 'mysql-node2'
   static_configs:
-    - targets: ['192.168.10.220:9104']
+    - targets: ['127.0.0.1:9104']
       labels:
         instance: db-02
 

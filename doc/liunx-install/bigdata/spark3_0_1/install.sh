@@ -17,19 +17,19 @@ export SCALA_HOME="/opt/common/scala-2.12.14"
 export HADOOP_HOME="/opt/bigdata/hadoop-3.3.0"
 export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 export YARN_CONF_DIR="$HADOOP_HOME/etc/hadoop"
-export SPARK_MASTER_HOST=192.168.10.220
+export SPARK_MASTER_HOST=127.0.0.1
 export SPARK_HOME="/opt/bigdata/spark-3.0.0-bin-hadoop3.2"
 export SPARK_LOG_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/logs"
 export SPARK_PID_DIR="/opt/bigdata/spark-3.0.0-bin-hadoop3.2/pid"
 # 该目录需要事先在hdfs上创建好
-export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://192.168.10.220:8020/spark/historylog"
+export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=18080 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://127.0.0.1:8020/spark/historylog"
 
 # history server 配置
 vim spark-default.conf
 spark.eventLog.enabled true
 spark.eventLog.compress true
 # 该目录需要事先在hdfs上创建好
-spark.eventLog.dir hdfs://192.168.10.220:8020/spark/historylog
+spark.eventLog.dir hdfs://127.0.0.1:8020/spark/historylog
 
 cp slaves.template slaves && vim slaves && 192.168.10.200
 # 日志配置
