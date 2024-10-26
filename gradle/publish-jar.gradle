@@ -232,6 +232,16 @@ publishing {
                 name = project.name
                 description = project.name
                 url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
+                properties = [
+                        "java.version": JavaVersion.VERSION_21.toString(),
+                        "maven.compiler.source": JavaVersion.VERSION_21.toString(),
+                        "maven.compiler.target": JavaVersion.VERSION_21.toString(),
+                        "project.build.sourceEncoding": "UTF-8",
+                        "project.reporting.outputEncoding": "UTF-8",
+                        "spring-boot-dependencies.version"   : "3.3.5",
+                        "taotao-cloud-dependencies.version"   : rootProject.version,
+                        "taotao-boot-dependencies.version"   : rootProject.version
+                ]
 
                 licenses {
                     license {
@@ -253,7 +263,6 @@ publishing {
                     developerConnection = 'scm:git:ssh://git@github.com:shuigedeng/taotao-cloud-project.git'
                     url = 'https://github.com/shuigedeng/taotao-cloud-project.git'
                 }
-
             }
         }
     }
