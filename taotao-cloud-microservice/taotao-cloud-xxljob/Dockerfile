@@ -58,57 +58,45 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-xxljob"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-ENV JAVA_OPTIONS="-Xms1g -Xmx2g \
-                  -Xss512k \
-                  -XX:MaxDirectMemorySize=1024m \
-                  -XX:MetaspaceSize=256m \
-                  -XX:MaxMetaspaceSize=512m \
-                  -XX:ReservedCodeCacheSize=256m \
-                  -XX:+DisableExplicitGC \
-                  -XX:+UseZGC  \
-                  -XX:MaxGCPauseMillis=50 \
-                  -XX:GuaranteedSafepointInterval=0  \
-                  -XX:FlightRecorderOptions=maxchunksize=128m  \
-                  -XX:+UseCountedLoopSafepoints \
-                  -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
-                  -XX:-OmitStackTraceInFastThrow \
+ENV JAVA_OPTIONS="-Xms1g \
+                  -Xmx2g \
+                  -Xss256k \
+                  -XX:ReservedCodeCacheSize=2048m \
+                  -XX:+UseZGC \
+                  -XX:MaxDirectMemorySize=256m \
+                  -XX:SoftRefLRUPolicyMSPerMB=50 \
+                  -XX:CICompilerCount=2  \
                   -XX:SurvivorRatio=8 \
                   -XX:+UseCompressedOops \
                   -XX:+UseCompressedClassPointers \
                   -XX:+SegmentedCodeCache \
                   -XX:+PrintCommandLineFlags \
                   -XX:+ExplicitGCInvokesConcurrent \
+                  -XX:-OmitStackTraceInFastThrow\
                   -XX:+HeapDumpOnOutOfMemoryError \
                   -XX:+ShowCodeDetailsInExceptionMessages \
                   -XX:ParallelGCThreads=4 \
                   -Xlog:async \
                   -XX:AsyncLogBufferSize=409600 \
-                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
-                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
-                  -Xlog:safepoint=debug:file=/root/logs/${APP_NAME}/safepoint%t.log:utctime,level,tags:filecount=10,filesize=10M \
+                  -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.gc.log:utctime,level,tags:filecount=50,filesize=100M \
+                  -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/${APP_NAME}.jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
+                  -XX:MetaspaceSize=256m \
+                  -XX:MaxMetaspaceSize=256m \
                   -verbose:gc \
-                  -Dnetworkaddress.cache.ttl=10 \
                   -Djava.security.egd=file:/dev/./urandom \
                   -Dfile.encoding=utf-8 \
-                  --add-opens java.base/java.security=ALL-UNNAMED \
-                  --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
-                  --add-opens java.base/java.text=ALL-UNNAMED \
-                  --add-opens java.base/java.nio=ALL-UNNAMED \
-                  --add-opens java.base/jdk.internal.access=ALL-UNNAMED \
-                  --add-opens java.base/java.time=ALL-UNNAMED \
-                  --add-opens java.base/java.io=ALL-UNNAMED \
-                  --add-opens java.base/java.net=ALL-UNNAMED \
                   --add-opens java.base/java.lang=ALL-UNNAMED \
                   --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
                   --add-opens java.base/java.util=ALL-UNNAMED \
                   --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED \
-                  --add-opens java.base/sun.reflect.annotation=ALL-UNNAMED \
-                  --add-opens java.base/sun.net=ALL-UNNAMED \
-                  --add-opens java.base/java.math=ALL-UNNAMED \
-                  --add-exports java.desktop/sun.awt=ALL-UNNAMED \
-                  --add-opens java.desktop/sun.awt=ALL-UNNAMED \
-                  -Dspring.profiles.active=${APP_PRROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar "
+                  -Dspring.profiles.active=${PRROFILES} \
+                  -javaagent:/skywalking/agent/skywalking-agent.jar \
+                  -Dskywalking.agent.service_name=${APP_NAME} \
+                  -Dskywalking.agent.authentication=${AGENT_AUTHENTICATION} \
+                  -Dskywalking.logging.file_name=skywalking.log \
+                  -Dskywalking.logging.level=INFO \
+                  -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
+                  -Dskywalking.collector.backend_service=${BACKEND_SERVICE} "
 
 USER root
 
