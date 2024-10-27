@@ -108,32 +108,58 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.15
 
-  sentinel-dashboard:
-    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2024.11
-    container_name: taotao-cloud-monitor
+  skywalking-oap:
+    image: apache/skywalking-oap-server:9.7.0-java17
+    container_name: skywalking-oap
+    restart: always
     ports:
-      - "33334:33334"
+      - "11800:11800"
+      - "12800:12800"
+      - "9412:9412"
+    environment:
+      - TZ=Asia/Shanghai
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.16
-		
-  sentinel-dashboard:
-    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.11
-    container_name: taotao-cloud-xxljob
+  skywalking-ui:
+    image: apache/skywalking-ui:9.7.0-java17
+    container_name: skywalking-ui
+    restart: always
     ports:
-      - "33335:33335"
+      - "18080:8080"
+    environment:
+      - TZ=Asia/Shanghai
+      - SW_OAP_ADDRESS=http://172.11.0.16:12800
     networks:
       taotao-cluster-network:
-        ipv4_address: 172.11.0.17	
-		
-  sentinel-dashboard:
-    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.11
-    container_name: taotao-cloud-gateway
-    ports:
-      - "33336:33336"
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.18
+        ipv4_address: 172.11.0.17
+
+#  sentinel-dashboard:
+#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2024.11
+#    container_name: taotao-cloud-monitor
+#    ports:
+#      - "33334:33334"
+#    networks:
+#      taotao-cluster-network:
+#        ipv4_address: 172.11.0.16
+#
+#  sentinel-dashboard:
+#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.11
+#    container_name: taotao-cloud-xxljob
+#    ports:
+#      - "33335:33335"
+#    networks:
+#      taotao-cluster-network:
+#        ipv4_address: 172.11.0.17
+#
+#  sentinel-dashboard:
+#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.11
+#    container_name: taotao-cloud-gateway
+#    ports:
+#      - "33336:33336"
+#    networks:
+#      taotao-cluster-network:
+#        ipv4_address: 172.11.0.18
 		
   ####################################################################
 
@@ -370,32 +396,7 @@ services:
 
 
 
-  skywalking-oap:
-    image: apache/skywalking-oap-server:9.7.0-java17
-    container_name: skywalking-oap
-    restart: always
-    ports:
-      - "11800:11800"
-      - "12800:12800"
-      - "9412:9412"
-    environment:
-      - TZ=Asia/Shanghai
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.61
-  skywalking-ui:
-    image: apache/skywalking-oap-server:9.7.0-java17
-    container_name: skywalking-ui
-    restart: always
-    ports:
-      - "8080:8080"
-    environment:
-      - TZ=Asia/Shanghai
-      - SW_OAP_ADDRESS=http://127.0.0.1:12800
-      - SW_ZIPKIN_ADDRESS=http://127.0.0.1:9412
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.62
+
 #
 #  elasticsearch:
 #    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0
