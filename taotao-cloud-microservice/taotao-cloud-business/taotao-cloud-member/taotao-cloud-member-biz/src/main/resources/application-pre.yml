@@ -1,5 +1,5 @@
 server:
-  port: 33338
+  port: 33409
   http2:
     enabled: true
   undertow:
@@ -581,7 +581,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
   #mail:
   #  host: smtp.qq.com
   #  password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}

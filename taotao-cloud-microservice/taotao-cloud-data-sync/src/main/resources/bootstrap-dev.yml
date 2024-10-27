@@ -1,5 +1,5 @@
 server:
-  port: 33334
+  port: 33304
 
 spring:
   main:

@@ -58,9 +58,9 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * </pre>
  * <p>
  * <p>
- * //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=message.read&redirect_uri=http%3A%2F%2F127.0.0.1%3A8090%2Fauthorized
- * //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile&state=46ge_TeI-dHuAnyv67nVmCcAmFgCVSZAqjTi9Om-1aA=&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Fdante-cloud-upms%2Fopen%2Fauthorized&code_challenge=KJlktPdfHdPPenXDN3HARjV6pzM7ljfHs-L-bFao3zM&code_challenge_method=S256
- * //http://127.0.0.1:33336/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile,read-user-by-page&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Fdante-cloud-upms%2Fopen%2Fauthorized&code_challenge=GMBkW4F_Ap4Us75TZ7nDhSUd87HXAt7cLMG-R_2VGwE&code_challenge_method=S256
+ * //http://127.0.0.1:33401/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=message.read&redirect_uri=http%3A%2F%2F127.0.0.1%3A8090%2Fauthorized
+ * //http://127.0.0.1:33401/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile&state=46ge_TeI-dHuAnyv67nVmCcAmFgCVSZAqjTi9Om-1aA=&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Ftaotao-cloud-upms%2Fopen%2Fauthorized&code_challenge=KJlktPdfHdPPenXDN3HARjV6pzM7ljfHs-L-bFao3zM&code_challenge_method=S256
+ * //http://127.0.0.1:33401/oauth2/authorize?client_id=67601992f3574c75809a3d79888bf16e&response_type=code&scope=profile,read-user-by-page&redirect_uri=http%3A%2F%2F192.168.101.10%3A8847%2Ftaotao-cloud-upms%2Fopen%2Fauthorized&code_challenge=GMBkW4F_Ap4Us75TZ7nDhSUd87HXAt7cLMG-R_2VGwE&code_challenge_method=S256
  *
  * @author shuigedeng
  * @version 2022.03

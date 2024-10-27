@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 33313
   http2:
     enabled: true
   undertow:

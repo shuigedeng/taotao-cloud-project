@@ -98,7 +98,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - name: order-port
-              containerPort: 33338
+              containerPort: 33409
           volumeMounts:
             - name: taotao-cloud-member-hostpath
               mountPath: /root/logs
@@ -151,7 +151,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 33338
+              port: 33409
               scheme: HTTP
             initialDelaySeconds: 30
             timeoutSeconds: 5
@@ -161,7 +161,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 33338
+              port: 33409
             initialDelaySeconds: 30
             timeoutSeconds: 5
             periodSeconds: 30
@@ -194,6 +194,6 @@ spec:
   ports:
     - name: order-port
       protocol: TCP
-      port: 33338
-      targetPort: 33338
-      nodePort: 33338
+      port: 33409
+      targetPort: 33409
+      nodePort: 33409

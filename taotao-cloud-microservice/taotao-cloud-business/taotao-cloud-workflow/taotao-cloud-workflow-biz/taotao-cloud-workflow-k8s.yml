@@ -90,7 +90,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - name: oauth2-port
-              containerPort: 33336
+              containerPort: 33424
           volumeMounts:
             - name: taotao-cloud-auth-hostpath
               mountPath: /root/logs
@@ -128,7 +128,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 33336
+              port: 33424
               scheme: HTTP
             initialDelaySeconds: 30
             timeoutSeconds: 5
@@ -138,7 +138,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 33336
+              port: 33424
             initialDelaySeconds: 30
             timeoutSeconds: 5
             periodSeconds: 30
@@ -171,6 +171,6 @@ spec:
   ports:
     - name: oauth2-port
       protocol: TCP
-      port: 33336
-      targetPort: 33336
-      nodePort: 33336
+      port: 33424
+      targetPort: 33424
+      nodePort: 33424

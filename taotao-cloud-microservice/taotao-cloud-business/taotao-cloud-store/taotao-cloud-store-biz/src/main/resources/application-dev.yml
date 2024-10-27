@@ -1,5 +1,5 @@
 server:
-  port: 33337
+  port: 33419
   shutdown: graceful
   http2:
     enabled: true
@@ -940,7 +940,7 @@ spring:
         jwt:
           issuer-uri: ${herodotus.endpoint.issuer-uri}
           #jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
-          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
         opaquetoken:
           client-id: 25953fda237841689743a94871915661
           client-secret: a667ed5606f44e159db062239ed5a838
@@ -1320,23 +1320,23 @@ taotao:
     security:
       oauth2:
         endpoint:
-          uaa-service-name: dante-cloud-uaa
-          upms-service-name: dante-cloud-upms
-          gateway-service-uri: http://127.0.0.1:33336
-          uaa-service-uri: http://127.0.0.1:33336/
-          upms-service-uri: http://127.0.0.1:33336/${herodotus.endpoint.upms-service-name}
-          access-token-uri: http://127.0.0.1:33336/oauth2/token
-          authorization-uri: http://127.0.0.1:33336/oauth2/authorize
-          token-revocation-uri: http://127.0.0.1:33336/oauth2/revoke
-          token-introspection-uri: http://127.0.0.1:33336/oauth2/introspect
-          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+          uaa-service-name: taotao-cloud-uaa
+          upms-service-name: taotao-cloud-upms
+          gateway-service-uri: http://127.0.0.1:33401
+          uaa-service-uri: http://127.0.0.1:33401/
+          upms-service-uri: http://127.0.0.1:333401/${herodotus.endpoint.upms-service-name}
+          access-token-uri: http://127.0.0.1:33401/oauth2/token
+          authorization-uri: http://127.0.0.1:33401/oauth2/authorize
+          token-revocation-uri: http://127.0.0.1:33401/oauth2/revoke
+          token-introspection-uri: http://127.0.0.1:33401/oauth2/introspect
+          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
           issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-          oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
-          oidc-user-info-uri: http://127.0.0.1:33336/userinfo
-          #device-authorization-uri: http://127.0.0.1:33336/oauth2/device_authorization
-          #device-authorization-endpoint: http://127.0.0.1:33336/oauth2/device_authorization
-          #device-verification-uri: http://127.0.0.1:33336/oauth2/device_verification
-          #device-verification-endpoint: http://127.0.0.1:33336/oauth2/device_verification
+          oidc-client-registration-uri: http://127.0.0.1:33401/connect/register
+          oidc-user-info-uri: http://127.0.0.1:33401/userinfo
+          #device-authorization-uri: http://127.0.0.1:33401/oauth2/device_authorization
+          #device-authorization-endpoint: http://127.0.0.1:33401/oauth2/device_authorization
+          #device-verification-uri: http://127.0.0.1:33401/oauth2/device_verification
+          #device-verification-endpoint: http://127.0.0.1:33401/oauth2/device_verification
         authentication:
           form-login:
             category: HUTOOL_GIF
@@ -1708,19 +1708,19 @@ grpc:
 
 herodotus:
   endpoint:
-    uaa-service-name: dante-cloud-uaa
-    upms-service-name: dante-cloud-upms
-    gateway-service-uri: http://127.0.0.1:33336
-    uaa-service-uri: http://127.0.0.1:33336/
-    upms-service-uri: http://127.0.0.1:33336/${herodotus.endpoint.upms-service-name}
-    access-token-uri: http://127.0.0.1:33336/oauth2/token
-    authorization-uri: http://127.0.0.1:33336/oauth2/authorize
-    token-revocation-uri: http://127.0.0.1:33336/oauth2/revoke
-    token-introspection-uri: http://127.0.0.1:33336/oauth2/introspect
-    jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+    uaa-service-name: taotao-cloud-uaa
+    upms-service-name: taotao-cloud-upms
+    gateway-service-uri: http://127.0.0.1:33401
+    uaa-service-uri: http://127.0.0.1:33401/
+    upms-service-uri: http://127.0.0.1:333401/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://127.0.0.1:33401/oauth2/token
+    authorization-uri: http://127.0.0.1:33401/oauth2/authorize
+    token-revocation-uri: http://127.0.0.1:33401/oauth2/revoke
+    token-introspection-uri: http://127.0.0.1:33401/oauth2/introspect
+    jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-    oidc-client-registration-uri: http://127.0.0.1:33336/connect/register
-    oidc-user-info-uri: http://127.0.0.1:33336/userinfo
+    oidc-client-registration-uri: http://127.0.0.1:33401/connect/register
+    oidc-user-info-uri: http://127.0.0.1:33401/userinfo
   oauth2:
     authentication:
       form-login:

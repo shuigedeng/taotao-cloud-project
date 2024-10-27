@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: taotao-cloud-auth-configmap
 data:
-  APPLICATION_NAME: taotao-cloud-auth
-  APPLICATION_VERSION: '2024.06'
+  APPLICATION_NAME: "taotao-cloud-auth"
+  APPLICATION_VERSION: '2024.11'
 ---
 apiVersion: v1
 kind: Secret
@@ -86,11 +86,11 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2024.06
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2024.11
           imagePullPolicy: IfNotPresent
           ports:
             - name: oauth2-port
-              containerPort: 33336
+              containerPort: 33411
           volumeMounts:
             - name: taotao-cloud-auth-hostpath
               mountPath: /root/logs
@@ -128,7 +128,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 33336
+              port: 33411
               scheme: HTTP
             initialDelaySeconds: 30
             timeoutSeconds: 5
@@ -138,7 +138,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 33336
+              port: 33411
             initialDelaySeconds: 30
             timeoutSeconds: 5
             periodSeconds: 30
@@ -171,6 +171,6 @@ spec:
   ports:
     - name: oauth2-port
       protocol: TCP
-      port: 33336
-      targetPort: 33336
-      nodePort: 33336
+      port: 33411
+      targetPort: 33411
+      nodePort: 33411

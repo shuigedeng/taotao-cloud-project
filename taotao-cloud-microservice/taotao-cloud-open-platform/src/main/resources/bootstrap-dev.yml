@@ -1,5 +1,5 @@
 server:
-  port: 33339
+  port: 33309
   http2:
     enabled: true
   undertow:

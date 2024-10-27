@@ -1,5 +1,5 @@
 server:
-  port: 33338
+  port: 33305
   shutdown: graceful
   http2:
     enabled: false

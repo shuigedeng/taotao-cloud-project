@@ -1,26 +1,29 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: taotao-cloud-auth-configmap
+  name: taotao-cloud-member-configmap
 data:
-  APPLICATION_NAME: "taotao-cloud-auth"
+  APPLICATION_NAME: "taotao-cloud-member"
   APPLICATION_VERSION: '2024.11'
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: taotao-cloud-auth-secret
+  name: taotao-cloud-member-secret
 type: Opaque
 data:
   ADMIN_USERNAME: YWRtaW4=
   ADMIN_PASSWORD: MTIzNDU2
+  TAOTAO_CLOUD_MAIL_PASSWORD: dndkcm1zdm1ldm9zYmVlZA==
+  DINGDING_TOKEN_ID: MmY4MWExOGZkMjM1ZmZiZWNjMDA1MTlkNTNiYjgwNTRhN2ZmM2U1MGYzMjg3ZTNlNGM1ZmVmNmU1YzhlMTAxNg==
+  DINGDING_SECRET: U0VDMmVjMTQ5YjZlYWFiMjZhMTZiM2Q2Yzc4ODQ1ODQ4MjUxZDA2NjdmYjhhYTI4OGIwZTc5ZDg2NzVlNDYwOGQ4MA==
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: taotao-cloud-auth
+  name: taotao-cloud-member
   labels:
-    app: taotao-cloud-auth
+    app: taotao-cloud-member
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -28,7 +31,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: taotao-cloud-auth
+      app: taotao-cloud-member
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -39,7 +42,7 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
       labels:
-        app: taotao-cloud-auth
+        app: taotao-cloud-member
     spec:
       terminationGracePeriodSeconds: 30
       schedulerName: default-scheduler
@@ -67,15 +70,20 @@ spec:
                       values:
                         - ops-nginx-api
       volumes:
-        - name: taotao-cloud-auth-hostpath
+        - name: taotao-cloud-member-hostpath
           hostPath:
-            path: /tmp/logs/taotao-cloud-auth
+            path: /tmp/logs/taotao-cloud-member
             type: Directory
-        - name: taotao-cloud-auth-secret
+        - name: taotao-cloud-member-secret
           secret:
-            secretName: taotao-cloud-auth-secret
+            secretName: taotao-cloud-member-secret
+      initContainers:
+        - name: taotao-cloud-member-init
+          image: yauritux/busybox-curl:latest
+          imagePullPolicy: IfNotPresent
+          command: [ "/bin/sh", "-c", "until curl taotao-cloud-xxljob.default:33335/actuator/health; do echo waiting for admin; sleep 10; done;" ]
       containers:
-        - name: taotao-cloud-auth
+        - name: taotao-cloud-member
           stdin: true
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
@@ -86,38 +94,53 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2024.11
-          imagePullPolicy: IfNotPresent
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-member:2024.11
+          imagePullPolicy: Always
           ports:
-            - name: oauth2-port
-              containerPort: 33336
+            - name: order-port
+              containerPort: 33409
           volumeMounts:
-            - name: taotao-cloud-auth-hostpath
+            - name: taotao-cloud-member-hostpath
               mountPath: /root/logs
-            - name: taotao-cloud-auth-secret
+            - name: taotao-cloud-member-secret
               mountPath: /etc/secret
               readOnly: true
           env:
             - name: APPLICATION_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-auth-configmap
+                  name: taotao-cloud-member-configmap
                   key: APPLICATION_NAME
             - name: APPLICATION_VERSION
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-auth-configmap
+                  name: taotao-cloud-member-configmap
                   key: APPLICATION_VERSION
             - name: ADMIN_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-auth-secret
+                  name: taotao-cloud-member-secret
                   key: ADMIN_USERNAME
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-auth-secret
+                  name: taotao-cloud-member-secret
                   key: ADMIN_PASSWORD
+            - name: DINGDING_TOKEN_ID
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: DINGDING_TOKEN_ID
+            - name: DINGDING_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: DINGDING_SECRET
+            - name: TAOTAO_CLOUD_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: taotao-cloud-member-secret
+                  key: TAOTAO_CLOUD_MAIL_PASSWORD
           resources:
             requests:
               cpu: '1'
@@ -128,7 +151,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 33336
+              port: 33409
               scheme: HTTP
             initialDelaySeconds: 30
             timeoutSeconds: 5
@@ -138,7 +161,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 33336
+              port: 33409
             initialDelaySeconds: 30
             timeoutSeconds: 5
             periodSeconds: 30
@@ -150,27 +173,27 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - mkdir -p /root/logs/taotao-cloud-auth && touch /root/logs/taotao-cloud-auth/jit.compile.log /root/logs/taotao-cloud-auth/gc.log
+                  - mkdir -p /root/logs/taotao-cloud-member && touch /root/logs/taotao-cloud-member/jit.compile.log /root/logs/taotao-cloud-member/gc.log
             preStop:
               exec:
                 command:
                   - sh
                   - -c
-                  - sleep 10
+                  - sleep 30
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: taotao-cloud-auth
+  name: taotao-cloud-member
   labels:
-    app: taotao-cloud-auth
+    app: taotao-cloud-member
 spec:
   type: NodePort
   selector:
-    app: taotao-cloud-auth
+    app: taotao-cloud-member
   ports:
-    - name: oauth2-port
+    - name: order-port
       protocol: TCP
-      port: 33336
-      targetPort: 33336
-      nodePort: 33336
+      port: 33409
+      targetPort: 33409
+      nodePort: 33409

@@ -1,5 +1,5 @@
 server:
-  port: 33337
+  port: 33424
   shutdown: graceful
   http2:
     enabled: true
@@ -842,7 +842,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
   shardingsphere:
     enabled: false
     schema:

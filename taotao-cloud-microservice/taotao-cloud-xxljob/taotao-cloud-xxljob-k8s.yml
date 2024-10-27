@@ -90,7 +90,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - name: xxljob-port
-              containerPort: 8082
+              containerPort: 33313
           volumeMounts:
             - name: taotao-cloud-xxljob-hostpath
               mountPath: /root/logs
@@ -128,7 +128,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 8082
+              port: 33313
               scheme: HTTP
             initialDelaySeconds: 30
             timeoutSeconds: 5
@@ -138,7 +138,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
-              port: 8082
+              port: 33313
             initialDelaySeconds: 30
             timeoutSeconds: 5
             periodSeconds: 30
@@ -171,6 +171,6 @@ spec:
   ports:
     - name: xxljob-port
       protocol: TCP
-      port: 8082
-      targetPort: 8082
-      nodePort: 8082
+      port: 33313
+      targetPort: 33313
+      nodePort: 33313
