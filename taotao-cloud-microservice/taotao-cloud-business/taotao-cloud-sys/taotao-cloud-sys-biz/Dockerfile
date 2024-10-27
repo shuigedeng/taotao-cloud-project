@@ -62,8 +62,8 @@ ENV PYROSCOPE_LOG_LEVEL=info
 ENV PYROSCOPE_LABELS="APP=taotao-cloud-sys"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
-ENV JAVA_OPTIONS="-Xms8g \
-                  -Xmx8g \
+ENV JAVA_OPTIONS="-Xms1g \
+                  -Xmx2g \
                   -Xmn1280m \
                   -Xss512k \
                   -Xlog:async \
@@ -75,7 +75,6 @@ ENV JAVA_OPTIONS="-Xms8g \
                   -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
-                  -XX:-UseBiasedLocking \
                   -XX:GuaranteedSafepointInterval=0  \
                   -XX:FlightRecorderOptions=maxchunksize=128m  \
                   -XX:+UseCountedLoopSafepoints \
