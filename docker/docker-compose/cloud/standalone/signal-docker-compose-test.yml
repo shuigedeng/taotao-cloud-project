@@ -134,15 +134,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
 
-#  sentinel-dashboard:
-#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor:2024.11
-#    container_name: taotao-cloud-monitor
-#    ports:
-#      - "33334:33334"
-#    networks:
-#      taotao-cluster-network:
-#        ipv4_address: 172.11.0.16
-#
+
 #  sentinel-dashboard:
 #    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.11
 #    container_name: taotao-cloud-xxljob

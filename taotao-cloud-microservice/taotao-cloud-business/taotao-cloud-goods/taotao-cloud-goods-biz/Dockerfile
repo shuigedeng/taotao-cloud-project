@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64 as builder
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest as builder
 
 WORKDIR /root
 
@@ -7,7 +7,7 @@ ADD ./build/libs/taotao-cloud-goods-2024.11.jar ./
 RUN java -Djarmode=layertools -jar taotao-cloud-goods-2024.11.jar extract
 
 # FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-# FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64
+# FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:9.1.0
 
 ARG BACKEND_SERVICE=192.168.10.200:11800

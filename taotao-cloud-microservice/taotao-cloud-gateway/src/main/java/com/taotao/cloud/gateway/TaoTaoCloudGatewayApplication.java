@@ -26,8 +26,8 @@ import reactor.netty.ReactorNetty;
 /**
  * 网关系统中心
  *
- * <p>http://127.0.0.1:33333/swagger-ui.html</p>
- * <p>http://127.0.0.1:33333/doc.html</p>
+ * <p>http://192.168.218.2:33333/swagger-ui.html</p>
+ * <p>http://192.168.218.2:33333/doc.html</p>
  * <p>
  *
  * 启动问题查找 org.springframework.context.support.AbstractApplicationContext.refresh方法

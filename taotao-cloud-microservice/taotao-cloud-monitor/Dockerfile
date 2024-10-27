@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64 as builder
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest as builder
 
 WORKDIR /root
 
@@ -7,8 +7,9 @@ ADD ./build/libs/taotao-cloud-monitor-2024.11.jar ./
 RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.11.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest
 
 ARG SKYWALKING_BACKEND_SERVICE=192.168.218.2:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
@@ -171,21 +172,21 @@ USER root
 WORKDIR /root
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
-	  && echo $TZ > /etc/timezone \
+	&& echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
+	&& touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/
 #清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
-RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
-    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
-    && set -eux \
-    && apk update --allow-untrusted \
-    && apk add curl --allow-untrusted \
-    && apk add libstdc++ --allow-untrusted \
-    && apk add --no-cache --update fontconfig ttf-dejavu \
-    && apk add --no-cache --update tzdata
+#RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
+#    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
+#    && set -eux \
+#    && apk update --allow-untrusted \
+#    && apk add curl --allow-untrusted \
+#    && apk add libstdc++ --allow-untrusted \
+#    && apk add --no-cache --update fontconfig ttf-dejavu \
+#    && apk add --no-cache --update tzdata
 
 VOLUME /root/logs
 
@@ -207,10 +208,10 @@ RUN true
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
 #HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 60; kill -s 9 -1)'
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.11.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.11.jar
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 60; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher

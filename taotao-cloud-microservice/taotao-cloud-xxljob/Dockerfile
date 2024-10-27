@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64 as builder
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest as builder
 
 WORKDIR /root
 
@@ -7,10 +7,11 @@ ADD ./build/libs/taotao-cloud-xxljob-2024.11.jar ./
 RUN java -Djarmode=layertools -jar taotao-cloud-xxljob-2024.11.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
-#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest
 
-ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
+ARG SKYWALKING_BACKEND_SERVICE=192.168.218.2:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
 ARG APP_NAME=taotao-cloud-xxljob
 ARG APP_VERSION=2024.11
@@ -37,7 +38,7 @@ ENV SW_AGENT_AUTHENTICATION=${SKYWALKING_AGENT_AUTHENTICATION}
 ENV SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_BACKEND_SERVICE}
 ENV SW_AGENT_TRACE_IGNORE_PATH="Redisson/PING,/actuator/**,/admin/**"
 #日志数据的grpc服务器的主机
-ENV SW_GRPC_LOG_SERVER_HOST=127.0.0.1
+ENV SW_GRPC_LOG_SERVER_HOST=192.168.218.2
 #日志数据的grpc服务器的端口
 ENV SW_GRPC_LOG_SERVER_PORT=11800
 #日志数据的最大大小
@@ -49,7 +50,7 @@ ENV SW_LOGGING_FILE_NAME=skywalking.log
 ENV SW_LOGGING_DIR=/root/logs/${APP_NAME}
 #****************************pyroscope 从env中获取配置数据****************************
 ENV PYROSCOPE_APPLICATION_NAME=${APP_NAME}
-ENV PYROSCOPE_SERVER_ADDRESS=http://127.0.0.1:4040
+ENV PYROSCOPE_SERVER_ADDRESS=http://192.168.218.2:4040
 ENV PYROSCOPE_PROFILING_INTERVAL=10ms
 ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
 ENV PYROSCOPE_UPLOAD_INTERVAL=10s
@@ -151,9 +152,9 @@ RUN true
 #timeout: 20s #一次检查运行的最大时间(ms|s|m|h)(默认为0s)
 #retries: 3   #连续失败次数后报告不健康
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
-#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
+#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
+HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 10; kill -s 9 -1)'
 
 
 #HEALTHCHECK --start-period=30s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh

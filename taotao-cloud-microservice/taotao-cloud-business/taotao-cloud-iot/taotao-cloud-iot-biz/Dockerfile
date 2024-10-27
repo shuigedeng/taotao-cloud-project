@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64 as builder
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest as builder
 
 WORKDIR /root
 
@@ -6,7 +6,8 @@ ADD ./build/libs/taotao-cloud-iot-2024.11.jar ./
 
 RUN java -Djarmode=layertools -jar taotao-cloud-iot-2024.11.jar extract
 
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest
 
 ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud

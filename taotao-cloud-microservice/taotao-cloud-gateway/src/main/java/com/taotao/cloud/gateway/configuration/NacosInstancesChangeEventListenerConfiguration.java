@@ -135,9 +135,9 @@ public class NacosInstancesChangeEventListenerConfiguration {
 				Map<String, Object> metadata = routeDefinition.getMetadata();
 				String requestUriPrefix = (String) metadata.get("request_uri_prefix");
 
-				String uri = "http://127.0.0.1:33333" + baseUri + "/" + requestUriPrefix + "/"
+				String uri = "http://192.168.218.2:33333" + baseUri + "/" + requestUriPrefix + "/"
 					+ "request/gateway/test";
-				String uri1 = "http://127.0.0.1:33333" + baseUri + "/" + requestUriPrefix + "/"
+				String uri1 = "http://192.168.218.2:33333" + baseUri + "/" + requestUriPrefix + "/"
 					+ "v3/api-docs";
 
 				new Thread(() -> {

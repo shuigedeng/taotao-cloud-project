@@ -55,7 +55,7 @@ buildscript {
                 username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
                 password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
             }
-            url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
+            url 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
         }
 
         maven {
@@ -289,7 +289,7 @@ allprojects {
                 username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
                 password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
             }
-            url 'https://packages.aliyun.com/maven/repository/2085441-release-8V0qBs/'
+            url 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
         }
 
         maven {

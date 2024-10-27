@@ -26,7 +26,7 @@ package com.taotao.cloud.gateway.model;
 public class RuleConstant {
 
     public static final String LOCALHOST = "localhost";
-    public static final String LOCALHOST_IP = "127.0.0.1";
+    public static final String LOCALHOST_IP = "192.168.218.2";
 
     public static final String ALL = "all";
     public static final String BLACKLIST_OPEN = "0";
