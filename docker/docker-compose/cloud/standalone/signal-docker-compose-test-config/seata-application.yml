@@ -51,8 +51,8 @@ seata:
       key: seata.properties
     apollo:
       appId: seata-server
-      apollo-meta: http://192.168.1.204:8801
-      apollo-config-service: http://192.168.1.204:8080
+      apollo-meta: http://127.0.0.1:8801
+      apollo-config-service: http://127.0.0.1:8080
       namespace: application
       apollo-access-key-secret:
       cluster: seata

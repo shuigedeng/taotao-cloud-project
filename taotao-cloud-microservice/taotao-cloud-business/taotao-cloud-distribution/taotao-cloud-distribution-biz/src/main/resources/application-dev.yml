@@ -564,7 +564,7 @@ spring:
         jwt:
           issuer-uri: ${herodotus.endpoint.issuer-uri}
           #jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
-          jwk-set-uri: http://192.168.10.45:33336/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
         opaquetoken:
           client-id: 14a9cf797931430896ad13a6b1855611
           client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
@@ -1061,7 +1061,7 @@ grpc:
   #  max-inbound-message-size: 10MB
   #  primary-listen-address: 10.10.15.23:0
   #  additional-listen-addresses:
-  #    - 192.168.0.100:6767
+  #    - 127.0.0.1:6767
   #  on-collision-prefer-shaded-netty: false
 
 

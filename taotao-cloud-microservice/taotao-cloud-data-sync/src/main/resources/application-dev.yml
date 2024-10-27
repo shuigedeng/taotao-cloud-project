@@ -143,7 +143,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.200:7777/ws
+  tunnel-server: ws://127.0.0.1:7777/ws
 
 spring:
   batch:
@@ -203,7 +203,7 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
@@ -283,7 +283,7 @@ spring:
       password: lyy-single+node
       connect-timeout: 60000
       #cluster:
-      #  nodes: 192.168.10.200:7100
+      #  nodes: 127.0.0.1:7100
       #  max-redirects: 3
       #sentinel:
       #  master:
@@ -296,7 +296,7 @@ spring:
           max-idle: 500
           min-idle: 100
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:127.0.0.1}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 1
       batch-size: 16384
@@ -324,8 +324,8 @@ taotao:
       instances:
         example:
           clusterEnabled: false
-          zookeeperAddress: 192.168.10.200:2181
-          host: 192.168.10.200
+          zookeeperAddress: 127.0.0.1:2181
+          host: 127.0.0.1
           port: 11111
           userName: canal
           password: 123456

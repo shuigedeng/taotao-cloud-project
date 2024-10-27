@@ -1,4 +1,4 @@
-# /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -a taotao-cloud --cluster create 192.168.10.200:6381 192.168.10.200:6382 192.168.10.200:6383 192.168.10.200:6384 192.168.10.200:6385 192.168.10.200:6386 --cluster-replicas 1
+# /opt/cloud/redis_cluster/redis-6.0.9/src/redis-cli -a taotao-cloud --cluster create 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384 127.0.0.1:6385 127.0.0.1:6386 --cluster-replicas 1
 
 version: '3.8'
 services:
@@ -13,7 +13,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 192.168.10.200 \
+      --cluster-announce-ip 127.0.0.1 \
       --cluster-announce-port 6381 \
       --cluster-announce-bus-port 16381"
   node2:
@@ -27,7 +27,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 192.168.10.200 \
+      --cluster-announce-ip 127.0.0.1 \
       --cluster-announce-port 6382 \
       --cluster-announce-bus-port 16382"
   node3:
@@ -41,7 +41,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 192.168.10.200 \
+      --cluster-announce-ip 127.0.0.1 \
       --cluster-announce-port 6383 \
       --cluster-announce-bus-port 16383"
   node4:
@@ -55,7 +55,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 192.168.10.200 \
+      --cluster-announce-ip 127.0.0.1 \
       --cluster-announce-port 6384 \
       --cluster-announce-bus-port 16384"
   node5:
@@ -69,7 +69,7 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 192.168.10.200 \
+      --cluster-announce-ip 127.0.0.1 \
       --cluster-announce-port 6385 \
       --cluster-announce-bus-port 16385"
   node6:
@@ -83,6 +83,6 @@ services:
       --cluster-enabled yes \
       --cluster-config-file nodes.conf \
       --cluster-node-timeout 15000 \
-      --cluster-announce-ip 192.168.10.200 \
+      --cluster-announce-ip 127.0.0.1 \
       --cluster-announce-port 6386 \
       --cluster-announce-bus-port 16386"

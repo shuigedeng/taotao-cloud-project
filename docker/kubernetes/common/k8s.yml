@@ -12,7 +12,7 @@ spec:
   #persistentVolumeReclaimPolicy: Retain # 当声明被释放，pv将保留(不清理和删除)
   persistentVolumeReclaimPolicy: Recycle # 当声明被释放，空间将回收再利用
   nfs:
-    server: 192.168.10.200
+    server: 127.0.0.1
     path: /nfs/mysql8/mysql-0
 ---
 apiVersion: v1
@@ -29,7 +29,7 @@ spec:
   #persistentVolumeReclaimPolicy: Retain # 当声明被释放，pv将保留(不清理和删除)
   persistentVolumeReclaimPolicy: Recycle # 当声明被释放，空间将回收再利用
   nfs:
-    server: 192.168.10.200
+    server: 127.0.0.1
     path: /nfs/mysql8/mysql-1
 ---
 apiVersion: v1
@@ -46,7 +46,7 @@ spec:
   #persistentVolumeReclaimPolicy: Retain # 当声明被释放，pv将保留(不清理和删除)
   persistentVolumeReclaimPolicy: Recycle # 当声明被释放，空间将回收再利用
   nfs:
-    server: 192.168.10.200
+    server: 127.0.0.1
     path: /nfs/mysql8/mysql-2
 ---
 apiVersion: v1

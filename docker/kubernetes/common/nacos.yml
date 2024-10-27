@@ -68,7 +68,7 @@ spec:
     spec:
       initContainers:
         - name: init-mysql
-          image: 192.168.145.28:1603/lego/mysql/mysql:5.7
+          image: 127.0.0.1:1603/lego/mysql/mysql:5.7
           command:
             - bash
             - "-c"
@@ -92,7 +92,7 @@ spec:
             - name: mysql-configmap
               mountPath: /mnt/config-map
         - name: clone-mysql
-          image: 192.168.145.28:1603/lego/mysql/twoeo/gcr.io-google-samples-xtrabackup:latest
+          image: 127.0.0.1:1603/lego/mysql/twoeo/gcr.io-google-samples-xtrabackup:latest
           command:
             - bash
             - "-c"
@@ -116,7 +116,7 @@ spec:
               mountPath: /etc/mysql/conf.d
       containers:
         - name: mysql
-          image: 192.168.145.28:1603/lego/mysql/mysql:5.7
+          image: 127.0.0.1:1603/lego/mysql/mysql:5.7
           env:
             #- name: MYSQL_ROOT_PASSWORD
             #  value: 123456
@@ -157,7 +157,7 @@ spec:
             periodSeconds: 2
             timeoutSeconds: 1
         - name: xtrabackup
-          image: 192.168.145.28:1603/lego/mysql/twoeo/gcr.io-google-samples-xtrabackup:latest
+          image: 127.0.0.1:1603/lego/mysql/twoeo/gcr.io-google-samples-xtrabackup:latest
           ports:
             - name: xtrabackup
               containerPort: 3307

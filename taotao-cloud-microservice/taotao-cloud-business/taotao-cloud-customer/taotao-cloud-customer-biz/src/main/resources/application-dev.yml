@@ -24,14 +24,14 @@ jasypt:
 
 redisson:
   single-server-config:
-    address: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}:${TAOTAO_CLOUD_REDIS_PORT:6379}
+    address: ${TAOTAO_CLOUD_REDIS_HOST:127.0.0.1}:${TAOTAO_CLOUD_REDIS_PORT:6379}
 
 dubbo:
   application:
     name: ${spring.application.name}
     qos-enable: false
   registry:
-    address: spring-cloud://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:192.168.10.200}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
+    address: spring-cloud://${TAOTAO_CLOUD_NACOS_DISCOVERY_HOST:127.0.0.1}:${TAOTAO_CLOUD_NACOS_DISCOVERY_PORT:8848}
     timeout: 15000
   protocol:
     name: dubbo
@@ -51,14 +51,14 @@ seata:
   enable-auto-data-source-proxy: true
   service:
     grouplist:
-      default: ${TAOTAO_CLOUD_SEATA_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_PORT:8091}
+      default: ${TAOTAO_CLOUD_SEATA_HOST:127.0.0.1}:${TAOTAO_CLOUD_SEATA_PORT:8091}
     vgroup-mapping:
       taotao_cloud_tx_group: default
   config:
     type: nacos
     nacos:
       namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
-      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
+      server-addr: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PORT:8848}
       group: SEATA_GROUP
       username: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_USERNAME:nacos}
       password: ${TAOTAO_CLOUD_SEATA_CONFIG_NACOS_PASSWORD:nacos}
@@ -66,7 +66,7 @@ seata:
     type: nacos
     nacos:
       application: taotao-cloud-seata
-      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:192.168.10.200}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
+      server-addr: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_HOST:127.0.0.1}:${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_PORT:8848}
       group: SEATA_GROUP
       namespace: 6f9ac92d-8a72-4581-92b0-af71dbd67e2e
       username: ${TAOTAO_CLOUD_SEATA_REGISTRY_NACOS_USERNAME:nacos}
@@ -83,7 +83,7 @@ arthas:
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.10.200:7777/ws
+  tunnel-server: ws://127.0.0.1:7777/ws
 
 spring:
   application:
@@ -109,13 +109,13 @@ spring:
       probability: 1.0
   zipkin:
     enabled: true
-    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:192.168.10.200}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
+    base-url: http://${TAOTAO_CLOUD_ZIPKIN_HOST:127.0.0.1}:${TAOTAO_CLOUD_ZIPKIN_PORT:9411}
     discoveryClientEnabled: false
     sender:
       type: WEB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:127.0.0.1}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
     password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -139,7 +139,7 @@ spring:
       datasource:
         master:
           type: com.zaxxer.hikari.HikariDataSource
-          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.10.200}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:127.0.0.1}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
           password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -171,7 +171,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   redis:
-    host: ${TAOTAO_CLOUD_REDIS_HOST:192.168.10.200}
+    host: ${TAOTAO_CLOUD_REDIS_HOST:127.0.0.1}
     port: ${TAOTAO_CLOUD_REDIS_PORT:6379}
     database: 1
     password: ${TAOTAO-CLOUD-REDIS-PASSWORD:taotao-cloud}
@@ -189,7 +189,7 @@ spring:
       client:
         reactive:
           endpoints:
-            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:192.168.10.200}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
+            - ${TAOTAO_CLOUD_ELASTICSEARCH_HOST:127.0.0.1}:${TAOTAO_CLOUD_ELASTICSEARCH_PORT:9200}
           connection-timeout: 5
           username: ${TAOTAO_CLOUD_ELASTICSEARCH_USERNAME:root}
           password: ${TAOTAO_CLOUD_ELASTICSEARCH_PASSWORD:123456}
@@ -197,7 +197,7 @@ spring:
       database:
       host:
   kafka:
-    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:192.168.10.200}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
+    bootstrap-servers: ${TAOTAO_CLOUD_KAFKA_HOST:127.0.0.1}:${TAOTAO_CLOUD_KAFKA_PORT:9092}
     producer:
       retries: 1
       batch-size: 16384
@@ -224,7 +224,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://192.168.10.200:9998/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:9998/oauth2/jwks
   mail:
     host: smtp.qq.com
     password: ${TAOTAO_CLOUD_MAIL_PASSWORD:taotao-cloud}
@@ -246,7 +246,7 @@ spring:
       names: mysql-master-1,mysql-slave-1,mysql-master-2,mysql-slave-2
       mysql-master-1:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3306}/m1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3306}/m1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -268,7 +268,7 @@ spring:
             prepStmtCacheSize: 250
       mysql-slave-1:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3307}/s1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3307}/s1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -290,7 +290,7 @@ spring:
             prepStmtCacheSize: 250
       mysql-master-2:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3308}/m2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3308}/m2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -312,7 +312,7 @@ spring:
             prepStmtCacheSize: 250
       mysql-slave-2:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:192.168.99.230}:${TAOTAO-CLOUD-NACOS-PORT:3309}/s2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        jdbc-url: jdbc:mysql://${TAOTAO-CLOUD-MYSQL-HOST:127.0.0.1}:${TAOTAO-CLOUD-NACOS-PORT:3309}/s2?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
         username: ${TAOTAO-CLOUD-MYSQL-USERNAME:root}
         password: ${TAOTAO-CLOUD-MYSQL-PASSWORD:123456}
         driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -447,8 +447,8 @@ taotao:
       instances:
         example:
           clusterEnabled: false
-          zookeeperAddress: 192.168.10.200:2181
-          host: 192.168.10.200
+          zookeeperAddress: 127.0.0.1:2181
+          host: 127.0.0.1
           port: 11111
           userName: canal
           password: 123456

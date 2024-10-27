@@ -10,7 +10,7 @@
 #  # 切换至指定目录
 # cd /usr/local/bin/
 #
-# redis-cli -a 123456 --cluster create 主机ip:6371 192.168.10.10:6372 192.168.10.10:6373 192.168.10.11:6374 192.168.10.11:6375 192.168.10.11:6376 --cluster-replicas 1
+# redis-cli -a 123456 --cluster create 主机ip:6371 127.0.0.1:6372 127.0.0.1:6373 127.0.0.1:6374 127.0.0.1:6375 127.0.0.1:6376 --cluster-replicas 1
 
 version: '3.7'
 services:

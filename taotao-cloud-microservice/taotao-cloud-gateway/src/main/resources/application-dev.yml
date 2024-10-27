@@ -973,8 +973,8 @@ taotao:
             enabled: true
             expiration-time: 5000
             ignore-ip:
-              - 192.168.1.10
-              - 192.168.1.11
+              - 127.0.0.1
+              - 127.0.0.1
             lock-expire: 5000
             request-max-size: 20
           ua-rule:

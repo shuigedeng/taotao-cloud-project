@@ -18,7 +18,7 @@ stages:
   - name: Build
     steps:
       - runScriptConfig:
-          image: 192.168.99.240:8443/taotao-cloud/taotao-cloud-maven:latest
+          image: 127.0.0.1:8443/taotao-cloud/taotao-cloud-maven:latest
           shellScript: echo `mvn -version` && mvn package deploy -Dmaven.test.skip=true
         cpuRequest: 100m
         cpuLimit: "1"
@@ -69,7 +69,7 @@ stages:
           buildContext: ./taotao-cloud-auth
           tag: taotao-cloud/taotao-cloud-auth:${CICD_EXECUTION_SEQUENCE}
           pushRemote: true
-          registry: 192.168.99.240:8443
+          registry: 127.0.0.1:8443
         env:
           PLUGIN_DEBUG: "true"
           PLUGIN_INSECURE: "true"
@@ -78,7 +78,7 @@ stages:
           buildContext: ./taotao-cloud-sys
           tag: taotao-cloud/taotao-cloud-sys:${CICD_EXECUTION_SEQUENCE}
           pushRemote: true
-          registry: 192.168.99.240:8443
+          registry: 127.0.0.1:8443
         env:
           PLUGIN_DEBUG: "true"
           PLUGIN_INSECURE: "true"
@@ -87,7 +87,7 @@ stages:
           buildContext: ./taotao-cloud-order
           tag: taotao-cloud/taotao-cloud-order:${CICD_EXECUTION_SEQUENCE}
           pushRemote: true
-          registry: 192.168.99.240:8443
+          registry: 127.0.0.1:8443
         env:
           PLUGIN_DEBUG: "true"
           PLUGIN_INSECURE: "true"

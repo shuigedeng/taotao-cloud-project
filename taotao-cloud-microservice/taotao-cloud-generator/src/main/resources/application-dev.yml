@@ -655,7 +655,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://192.168.10.45:33336/oauth2/jwks
+          jwk-set-uri: http://127.0.0.1:33336/oauth2/jwks
   cloud:
     openfeign:
       micrometer:

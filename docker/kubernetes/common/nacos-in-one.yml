@@ -77,7 +77,7 @@ spec:
       containers:
         - name: k8snacos
           imagePullPolicy: Always
-          image: 192.168.145.28:1603/lego/nacos/nacos-server:latest
+          image: 127.0.0.1:1603/lego/nacos/nacos-server:latest
           resources:
             requests:
               memory: "2Gi"
