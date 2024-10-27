@@ -125,14 +125,14 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/
 #清华TUNA镜像源 https://mirror.tuna.tsinghua.edu.cn/alpine/v3.14/main
-RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
-    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
-    && set -eux \
-    && apk update --allow-untrusted \
-    && apk add curl --allow-untrusted \
-    && apk add libstdc++ --allow-untrusted \
-    && apk add --no-cache --update fontconfig ttf-dejavu \
-    && apk add --no-cache --update tzdata
+#RUN echo 'http://mirrors.aliyun.com/alpine/v3.14/main' > /etc/apk/repositories \
+#    && echo 'http://mirrors.aliyun.com/alpine/v3.14/community' >>/etc/apk/repositories \
+#    && set -eux \
+#    && apk update --allow-untrusted \
+#    && apk add curl --allow-untrusted \
+#    && apk add libstdc++ --allow-untrusted \
+#    && apk add --no-cache --update fontconfig ttf-dejavu \
+#    && apk add --no-cache --update tzdata
 
 VOLUME /root/logs
 
