@@ -34,6 +34,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableAdminServer
 @SpringBootApplication
 public class TaoTaoCloudMonitorApplication {
+	
 	public static void main(String[] args) {
 		new StartupSpringApplication(TaoTaoCloudMonitorApplication.class)
 			.setTtcBanner()

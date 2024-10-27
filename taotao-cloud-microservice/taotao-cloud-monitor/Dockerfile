@@ -198,4 +198,4 @@ RUN true
 
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.11.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.11.jar
-ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
