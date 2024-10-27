@@ -118,7 +118,6 @@ ENV JAVA_OPTIONS="-Xms1g -Xmx2g \
                   -XX:MaxMetaspaceSize=512m \
                   -XX:ReservedCodeCacheSize=256m \
                   -XX:+DisableExplicitGC \
-                  -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
                   -XX:GuaranteedSafepointInterval=0  \
@@ -126,7 +125,6 @@ ENV JAVA_OPTIONS="-Xms1g -Xmx2g \
                   -XX:+UseCountedLoopSafepoints \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d \
                   -XX:-OmitStackTraceInFastThrow \
-                  -XX:+UnlockExperimentalVMOptions \
                   -XX:SurvivorRatio=8 \
                   -XX:+UseCompressedOops \
                   -XX:+UseCompressedClassPointers \
