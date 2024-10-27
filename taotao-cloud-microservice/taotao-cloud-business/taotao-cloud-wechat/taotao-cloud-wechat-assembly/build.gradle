@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-wechat:taotao-cloud-wechat-common")
 }
 
+mainClassName = "com.taotao.cloud.wechat.TaoTaoCloudWechatDDDApplication"
+description = "微信中心biz"
+archivesBaseName = 'taotao-cloud-wechat'

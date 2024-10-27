@@ -60,9 +60,11 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 public class TaoTaoCloudWechatDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
 		new StartupSpringApplication(TaoTaoCloudWechatDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-wechat")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

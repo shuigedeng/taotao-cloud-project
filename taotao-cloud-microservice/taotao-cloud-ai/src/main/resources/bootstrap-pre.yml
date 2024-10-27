@@ -13,7 +13,7 @@ spring:
     banner-mode: off
     register-shutdown-hook: true
   application:
-    name: taotao-cloud-monitor
+    name: taotao-cloud-ai
   cloud:
     loadbalancer:
       enabled: true

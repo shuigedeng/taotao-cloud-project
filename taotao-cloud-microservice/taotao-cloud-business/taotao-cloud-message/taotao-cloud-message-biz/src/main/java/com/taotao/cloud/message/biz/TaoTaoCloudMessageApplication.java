@@ -17,6 +17,7 @@
 package com.taotao.cloud.message.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
@@ -32,9 +33,13 @@ import org.springframework.boot.SpringApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudMessageApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-message");
 
-        SpringApplication.run(TaoTaoCloudMessageApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudMessageApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-message")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

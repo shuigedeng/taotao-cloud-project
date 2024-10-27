@@ -17,6 +17,7 @@
 package com.taotao.cloud.shortlink.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
@@ -32,9 +33,13 @@ import org.springframework.boot.SpringApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudShortLinkApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-log");
 
-        SpringApplication.run(TaoTaoCloudShortLinkApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudShortLinkApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-short-link")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

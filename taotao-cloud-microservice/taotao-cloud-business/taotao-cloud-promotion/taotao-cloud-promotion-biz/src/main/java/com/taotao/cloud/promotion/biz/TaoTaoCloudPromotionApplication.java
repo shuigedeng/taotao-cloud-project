@@ -17,6 +17,7 @@
 package com.taotao.cloud.promotion.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
@@ -32,9 +33,12 @@ import org.springframework.boot.SpringApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudPromotionApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-promotion");
-
-        SpringApplication.run(TaoTaoCloudPromotionApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudPromotionApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-promotion")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

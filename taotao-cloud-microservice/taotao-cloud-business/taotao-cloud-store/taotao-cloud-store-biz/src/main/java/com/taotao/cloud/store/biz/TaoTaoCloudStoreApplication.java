@@ -17,6 +17,7 @@
 package com.taotao.cloud.store.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.springframework.boot.SpringApplication;
@@ -32,9 +33,13 @@ import org.springframework.boot.SpringApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudStoreApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-store");
 
-        SpringApplication.run(TaoTaoCloudStoreApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudStoreApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-store")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

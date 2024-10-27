@@ -60,9 +60,11 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 public class TaoTaoCloudWorkflowDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
 		new StartupSpringApplication(TaoTaoCloudWorkflowDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-workflow")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

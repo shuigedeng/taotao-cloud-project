@@ -2,15 +2,15 @@ FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk
 
 WORKDIR /root
 
-ADD ./build/libs/taotao-cloud-auth-2024.11.jar ./
+ADD ./build/libs/taotao-cloud-report-2024.11.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-auth-2024.11.jar extract
+RUN java -Djarmode=layertools -jar taotao-cloud-report-2024.11.jar extract
 
 FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
 
 ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
-ARG APP_NAME=taotao-cloud-auth
+ARG APP_NAME=taotao-cloud-report
 ARG APP_VERSION=2024.11
 ARG APP_JAR_NAME=${APP_NAME}-${APP_VERSION}.jar
 ARG APP_PORT=33414
@@ -52,7 +52,7 @@ ENV PYROSCOPE_PROFILING_INTERVAL=10ms
 ENV PYROSCOPE_PROFILER_EVENT=cpu,alloc,lock,wall,itimer
 ENV PYROSCOPE_UPLOAD_INTERVAL=10s
 ENV PYROSCOPE_LOG_LEVEL=info
-ENV PYROSCOPE_LABELS="APP=taotao-cloud-auth"
+ENV PYROSCOPE_LABELS="APP=taotao-cloud-report"
 #ENV PYROSCOPE_AUTH_TOKEN=info
 
 ENV DEBUG_OPTIONS = "-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8889"

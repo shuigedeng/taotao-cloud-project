@@ -59,10 +59,13 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 @TaoTaoCloudApplication
 public class TaoTaoCloudGoodsDDDApplication {
 
+
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
 		new StartupSpringApplication(TaoTaoCloudGoodsDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-goods")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

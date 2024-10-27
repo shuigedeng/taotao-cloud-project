@@ -17,6 +17,7 @@
 package com.taotao.cloud.payment.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
@@ -29,9 +30,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @TaoTaoCloudApplication
 public class TaoTaoCloudPaymentApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-payment");
-
-        SpringApplication.run(TaoTaoCloudPaymentApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudPaymentApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-payment")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

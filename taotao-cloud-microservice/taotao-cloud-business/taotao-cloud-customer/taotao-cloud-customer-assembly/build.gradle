@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-customer:taotao-cloud-customer-common")
 }
 
+mainClassName = "com.taotao.cloud.customer.TaoTaoCloudCustomerDDDApplication"
+description = "客服中心biz"
+archivesBaseName = 'taotao-cloud-customer'

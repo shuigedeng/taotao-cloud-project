@@ -603,7 +603,7 @@ spring:
     cloud-platform: kubernetes
     web-application-type: servlet
   application:
-    name: taotao-cloud-sys
+    name: taotao-cloud-modulith
     admin:
       enabled: true
   jackson:

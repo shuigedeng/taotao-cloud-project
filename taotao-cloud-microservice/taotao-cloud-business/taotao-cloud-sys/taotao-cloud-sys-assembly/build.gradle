@@ -7,6 +7,10 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-sys:taotao-cloud-sys-common")
 }
 
+mainClassName = "com.taotao.cloud.sys.TaoTaoCloudSysDDDApplication"
+description = "系统中心biz"
+archivesBaseName = 'taotao-cloud-sys'
+
 configurations {
     all {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"

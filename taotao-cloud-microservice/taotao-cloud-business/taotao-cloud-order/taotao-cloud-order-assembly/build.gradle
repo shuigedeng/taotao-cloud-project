@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-order:taotao-cloud-order-common")
 }
 
+mainClassName = "com.taotao.cloud.order.TaoTaoCloudOrderDDDApplication"
+description = "订单中心biz"
+archivesBaseName = 'taotao-cloud-order'

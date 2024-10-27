@@ -229,9 +229,9 @@ security:
       client-secret: server
       scope: server
       grant-type: client_credentials
-      access-token-uri: http://taotao-cloud-auth-service/oauth/token
+      access-token-uri: http://taotao-cloud-payment-service/oauth/token
     resource:
-      token-info-uri: http://taotao-cloud-auth-service/oauth/check_token
+      token-info-uri: http://taotao-cloud-payment-service/oauth/check_token
 
 taotao:
   boot:

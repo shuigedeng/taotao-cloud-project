@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-workflow:taotao-cloud-workflow-common")
 }
 
+mainClassName = "com.taotao.cloud.workflow.TaoTaoCloudWorkflowDDDApplication"
+description = "工作流中心"
+archivesBaseName = 'taotao-cloud-workflow'

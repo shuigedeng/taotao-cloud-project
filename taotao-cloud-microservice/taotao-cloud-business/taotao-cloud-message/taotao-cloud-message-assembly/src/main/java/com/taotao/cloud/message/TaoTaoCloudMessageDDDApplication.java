@@ -60,9 +60,11 @@ import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 public class TaoTaoCloudMessageDDDApplication {
 
 	public static void main(String[] args) {
-		PropertyUtils.setDefaultProperty("taotao-cloud-ddd");
 		new StartupSpringApplication(TaoTaoCloudMessageDDDApplication.class)
-			.setDefaultBanner()
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-message")
+			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}
 }

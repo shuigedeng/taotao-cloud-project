@@ -63,7 +63,7 @@ public class TaoTaoCloudOrderDDDApplication {
 		new StartupSpringApplication(TaoTaoCloudOrderDDDApplication.class)
 			.setTtcBanner()
 			.setTtcProfileIfNotExists("dev")
-			.setTtcApplicationProperty("taotao-cloud-order-ddd")
+			.setTtcApplicationProperty("taotao-cloud-order")
 			.setTtcAllowBeanDefinitionOverriding(true)
 			.run(args);
 	}

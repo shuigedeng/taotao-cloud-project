@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-payment:taotao-cloud-payment-common")
 }
 
+mainClassName = "com.taotao.cloud.payment.TaoTaoCloudPaymentDDDApplication"
+description = "支付中心biz"
+archivesBaseName = 'taotao-cloud-payment'

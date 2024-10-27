@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-goods:taotao-cloud-goods-common")
 }
 
+mainClassName = "com.taotao.cloud.goods.TaoTaoCloudGoodsDDDApplication"
+description = "商品中心biz"
+archivesBaseName = 'taotao-cloud-goods'

@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-message:taotao-cloud-message-common")
 }
 
+mainClassName = "com.taotao.cloud.message.TaoTaoCloudMessageDDDApplication"
+description = "消息中心biz"
+archivesBaseName = 'taotao-cloud-message'

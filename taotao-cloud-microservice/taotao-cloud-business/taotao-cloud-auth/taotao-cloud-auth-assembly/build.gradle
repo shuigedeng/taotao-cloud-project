@@ -7,3 +7,6 @@ dependencies {
     implementation project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-auth:taotao-cloud-auth-common")
 }
 
+mainClassName = "com.taotao.cloud.auth.TaoTaoCloudAuthDDDApplication"
+description = "认证中心biz"
+archivesBaseName = 'taotao-cloud-auth'

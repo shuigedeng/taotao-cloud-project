@@ -17,6 +17,7 @@
 package com.taotao.cloud.member.biz;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import com.taotao.boot.web.annotation.TaoTaoBootApplication;
 import com.taotao.cloud.bootstrap.annotation.TaoTaoCloudApplication;
 import org.mybatis.spring.annotation.MapperScan;
@@ -28,15 +29,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version 2022.03
  * @since 2020/11/20 下午3:47
  */
-@MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
-@EnableJpaRepositories(basePackages = "com.taotao.cloud.member.biz.repository.inf")
+//@MapperScan(basePackages = "com.taotao.cloud.sys.biz.mapper")
+//@EnableJpaRepositories(basePackages = "com.taotao.cloud.member.biz.repository.inf")
 @TaoTaoBootApplication
 @TaoTaoCloudApplication
 public class TaoTaoCloudMemberApplication {
 
-    public static void main(String[] args) {
-        PropertyUtils.setDefaultProperty("taotao-cloud-member");
-
-        SpringApplication.run(TaoTaoCloudMemberApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudMemberApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-member")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 }

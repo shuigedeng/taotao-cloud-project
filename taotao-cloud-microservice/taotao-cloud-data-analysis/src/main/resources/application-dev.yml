@@ -230,13 +230,13 @@ dubbo:
     status: server
     payload: 83886080
     threadpool: fixed
-    threadname: taotao-cloud-bff-graphql-dubbo-protocol-executor
+    threadname: taotao-cloud-data-analysis-graphql-dubbo-protocol-executor
     threads: 200
   provider:
     timeout: 3000
     version: ${ttcVersion}
     threads: 500
-    group: taotao-cloud-bff-graphql-dev
+    group: taotao-cloud-data-analysis-graphql-dev
     #delay: 3000     #延时注册服务（毫秒）
     protocol: dubbo
     retries: 3
@@ -245,7 +245,7 @@ dubbo:
     accesslog: ${user.home}/logs/${spring.application.name}/dubbo/provider.log
     owner: 981376577
     threadpool: fixed
-    threadname: taotao-cloud-bff-graphql-dubbo-provider-executor
+    threadname: taotao-cloud-data-analysis-graphql-dubbo-provider-executor
   consumer:
     check: false
     timeout: 3000
@@ -441,7 +441,7 @@ spring:
       monitorInterval: 5            # 监控时间间隔（报警判断、指标采集），默认5s
       configType: yml               # 配置文件类型，非cloud nacos 和 apollo需配置，其他不用配
       nacos: # nacos配置，不配置有默认值（规则appname-dev.yml这样），cloud应用不需要配置
-        dataId: taotao-cloud-bff-graphql-dev.yml
+        dataId: taotao-cloud-data-analysis-graphql-dev.yml
         group: SYS_GROUP
         namespace: taotao-cloud-dev
       apollo: # apollo配置，不配置默认拿apollo配置第一个namespace
@@ -460,19 +460,19 @@ spring:
         - platform: email
           receivers: "981376577@qq.com"            # 接受人邮箱 多个逗号连接
       tomcat-tp: # tomcat webserver线程池配置
-        threadPoolName: taotao-cloud-bff-graphql-tomcat-executor
+        threadPoolName: taotao-cloud-data-analysis-graphql-tomcat-executor
         threadPoolAliasName: tomcat线程池
         corePoolSize: 100
         maximumPoolSize: 200
         keepAliveTime: 60
       jettyTp: # jetty weberver线程池配置
-        threadPoolName: taotao-cloud-bff-graphql-jetty-executor
+        threadPoolName: taotao-cloud-data-analysis-graphql-jetty-executor
         threadPoolAliasName: jetty线程池
         corePoolSize: 100
         maximumPoolSize: 200
         keepAliveTime: 60
       undertowTp: # undertow webserver线程池配置
-        threadPoolName: taotao-cloud-bff-graphql-undertow-executor
+        threadPoolName: taotao-cloud-data-analysis-graphql-undertow-executor
         threadPoolAliasName: undertow线程池
         corePoolSize: 100
         maximumPoolSize: 200
@@ -507,8 +507,8 @@ spring:
               platforms: [ ding,wechat,email ]             # 可选配置，不配置默认拿上层platforms配置的所以平台
               interval: 120                        # 报警间隔（单位：s）
       executors: # 动态线程池配置，都有默认值，采用默认值的可以不配置该项，减少配置量
-        - threadPoolName: taotao-cloud-bff-graphql-executor
-          threadNamePrefix: taotao-cloud-bff-graphql-executor  # 线程名前缀
+        - threadPoolName: taotao-cloud-data-analysis-graphql-executor
+          threadNamePrefix: taotao-cloud-data-analysis-graphql-executor  # 线程名前缀
           threadPoolAliasName: 测试线程池             # 线程池别名
           executorType: common                     # 线程池类型common、eager：适用于io密集型
           corePoolSize: 6
@@ -596,7 +596,7 @@ spring:
     cloud-platform: kubernetes
     web-application-type: servlet
   application:
-    name: taotao-cloud-bff-graphql
+    name: taotao-cloud-data-analysis-graphql
     admin:
       enabled: true
   jackson:

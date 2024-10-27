@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: taotao-cloud-auth-configmap
+  name: taotao-cloud-message-configmap
 data:
-  APPLICATION_NAME: "taotao-cloud-auth"
+  APPLICATION_NAME: "taotao-cloud-message"
   APPLICATION_VERSION: '2024.11'
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: taotao-cloud-auth-secret
+  name: taotao-cloud-message-secret
 type: Opaque
 data:
   ADMIN_USERNAME: YWRtaW4=
@@ -18,9 +18,9 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: taotao-cloud-auth
+  name: taotao-cloud-message
   labels:
-    app: taotao-cloud-auth
+    app: taotao-cloud-message
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -28,7 +28,7 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: taotao-cloud-auth
+      app: taotao-cloud-message
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -39,7 +39,7 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
       labels:
-        app: taotao-cloud-auth
+        app: taotao-cloud-message
     spec:
       terminationGracePeriodSeconds: 30
       schedulerName: default-scheduler
@@ -67,15 +67,15 @@ spec:
                       values:
                         - ops-nginx-api
       volumes:
-        - name: taotao-cloud-auth-hostpath
+        - name: taotao-cloud-message-hostpath
           hostPath:
-            path: /tmp/logs/taotao-cloud-auth
+            path: /tmp/logs/taotao-cloud-message
             type: Directory
-        - name: taotao-cloud-auth-secret
+        - name: taotao-cloud-message-secret
           secret:
-            secretName: taotao-cloud-auth-secret
+            secretName: taotao-cloud-message-secret
       containers:
-        - name: taotao-cloud-auth
+        - name: taotao-cloud-message
           stdin: true
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
@@ -86,37 +86,37 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-auth:2024.11
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-message:2024.11
           imagePullPolicy: IfNotPresent
           ports:
             - name: oauth2-port
               containerPort: 33411
           volumeMounts:
-            - name: taotao-cloud-auth-hostpath
+            - name: taotao-cloud-message-hostpath
               mountPath: /root/logs
-            - name: taotao-cloud-auth-secret
+            - name: taotao-cloud-message-secret
               mountPath: /etc/secret
               readOnly: true
           env:
             - name: APPLICATION_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-auth-configmap
+                  name: taotao-cloud-message-configmap
                   key: APPLICATION_NAME
             - name: APPLICATION_VERSION
               valueFrom:
                 configMapKeyRef:
-                  name: taotao-cloud-auth-configmap
+                  name: taotao-cloud-message-configmap
                   key: APPLICATION_VERSION
             - name: ADMIN_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-auth-secret
+                  name: taotao-cloud-message-secret
                   key: ADMIN_USERNAME
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: taotao-cloud-auth-secret
+                  name: taotao-cloud-message-secret
                   key: ADMIN_PASSWORD
           resources:
             requests:
@@ -150,7 +150,7 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - mkdir -p /root/logs/taotao-cloud-auth && touch /root/logs/taotao-cloud-auth/jit.compile.log /root/logs/taotao-cloud-auth/gc.log
+                  - mkdir -p /root/logs/taotao-cloud-message && touch /root/logs/taotao-cloud-message/jit.compile.log /root/logs/taotao-cloud-message/gc.log
             preStop:
               exec:
                 command:
@@ -161,13 +161,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: taotao-cloud-auth
+  name: taotao-cloud-message
   labels:
-    app: taotao-cloud-auth
+    app: taotao-cloud-message
 spec:
   type: NodePort
   selector:
-    app: taotao-cloud-auth
+    app: taotao-cloud-message
   ports:
     - name: oauth2-port
       protocol: TCP

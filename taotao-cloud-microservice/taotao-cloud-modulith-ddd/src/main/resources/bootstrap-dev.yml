@@ -18,7 +18,7 @@ spring:
     banner-mode: OFF
     register-shutdown-hook: true
   application:
-    name: taotao-cloud-sys
+    name: taotao-cloud-modulith
   cloud:
     circuitbreaker:
       sentinel:
