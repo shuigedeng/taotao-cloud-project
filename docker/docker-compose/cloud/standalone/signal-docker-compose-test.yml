@@ -134,6 +134,21 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.17
 
+  zipkin:
+    image: openzipkin/zipkin:3.4.2
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_DB=taotao-cloud-zipkin-3.4.2
+      - MYSQL_USER=root
+      - MYSQL_PASS=123456
+      - MYSQL_HOST=172.11.0.10
+      - MYSQL_TCP_PORT=3306
+    ports:
+      - "9411:9411"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.18
 
 #  sentinel-dashboard:
 #    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.11
