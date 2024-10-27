@@ -81,7 +81,6 @@ ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
                   -XX:ReservedCodeCacheSize=256m  \
                   -XX:+DisableExplicitGC  \
                   -XX:+UseZGC  \
-                  -XX:-UseBiasedLocking  \
                   -XX:GuaranteedSafepointInterval=0  \
                   -XX:+UseCountedLoopSafepoints  \
                   -XX:StartFlightRecording=disk=true,maxsize=4096m,maxage=3d  \
@@ -112,7 +111,7 @@ ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
                   -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
 
-ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
+ENV JAVA_OPTIONS="-Xms1g -Xmx2g \
                   -Xss512k \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
@@ -122,7 +121,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
-                  -XX:-UseBiasedLocking \
                   -XX:GuaranteedSafepointInterval=0  \
                   -XX:FlightRecorderOptions=maxchunksize=128m  \
                   -XX:+UseCountedLoopSafepoints \
@@ -208,10 +206,10 @@ RUN true
 #start_period: 10s #容器初始化的起始周期(ms|s|m|h)(默认0)
 #HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || exit 1
 #使用healthcheck.sh
-HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 60; kill -s 9 -1)'
+#HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://192.168.218.2:${APP_PORT}/actuator/health || /bin/sh -c 'kill -s 15 -1 && (sleep 30; kill -s 9 -1)'
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.11.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.11.jar
-ENTRYPOINT sleep 60; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
