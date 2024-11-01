@@ -187,7 +187,7 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
 
 
 #######################################################################################################

@@ -213,4 +213,4 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-ai-2024.11.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-ai-2024.11.jar
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.JarLauncher
+ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher

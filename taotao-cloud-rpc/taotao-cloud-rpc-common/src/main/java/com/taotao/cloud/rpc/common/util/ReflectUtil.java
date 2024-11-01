@@ -52,7 +52,7 @@ public class ReflectUtil {
 	 * org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) stack info:
 	 * org.springframework.boot.loader.Launcher.launch(Launcher.java:87) stack info:
 	 * org.springframework.boot.loader.Launcher.launch(Launcher.java:50) stack info:
-	 * org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+	 * org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:51)
 	 *
 	 * @return
 	 */
