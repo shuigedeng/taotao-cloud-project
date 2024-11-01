@@ -167,7 +167,8 @@ services:
 #    networks:
 #      taotao-cluster-network:
 #        ipv4_address: 172.11.0.18
-		
+
+
   ####################################################################
 
   redis-stack:
