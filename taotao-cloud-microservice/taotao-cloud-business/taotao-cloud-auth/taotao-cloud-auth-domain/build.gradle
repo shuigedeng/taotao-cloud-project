@@ -94,66 +94,68 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-statemachine"
     api "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
-    api 'org.springframework.session:spring-session-data-redis:3.3.2'
+    //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
+    implementation 'org.springframework.session:spring-session-data-redis:3.3.3'
 
-    api 'com.github.binarywang:weixin-java-mp:4.6.5.B'
-    api 'com.github.binarywang:weixin-java-miniapp:4.6.5.B'
+    //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
+    implementation 'com.github.binarywang:weixin-java-mp:4.6.6.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.6.6.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
     //https://search.maven.org/artifact/org.webjars/jquery
-    api "org.webjars:jquery:3.7.1"
+    implementation "org.webjars:jquery:3.7.1"
     //https://search.maven.org/artifact/org.webjars/bootstrap
-    api "org.webjars:bootstrap:5.3.3"
+    implementation "org.webjars:bootstrap:5.3.3"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-core
-    api "org.webjars:webjars-locator-core:0.55"
-    api 'org.webjars:animate.css:3.7.2'
-    api 'org.webjars:font-awesome:6.5.1'
-    api 'org.webjars:jquery-backstretch:2.1.16'
-    api 'org.webjars:uniform:2.1.2-1'
-    api "org.webjars.npm:mdi__font:7.3.67"
-    api 'org.webjars.npm:quasar:2.14.0'
-    api("org.webjars.npm:vue:3.4.7") {
+    implementation "org.webjars:webjars-locator-core:0.58"
+    implementation 'org.webjars:font-awesome:6.5.1'
+    implementation 'org.webjars.bower:jquery-backstretch:2.1.17'
+    implementation 'org.webjars:uniform:2.1.2-1'
+    implementation 'org.webjars.npm:animate.css:4.1.1'
+    implementation "org.webjars.npm:mdi__font:7.4.47"
+    implementation 'org.webjars.npm:quasar:2.15.1'
+    implementation("org.webjars.npm:vue:3.4.21") {
         exclude group: "org.webjars.npm", module: "babel__parser"
     }
-    api 'org.webjars.npm:babel__parser:7.23.6'
+    implementation 'org.webjars.npm:babel__parser:7.24.0'
 
-    api 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
-    api "org.springframework.boot:spring-boot-starter-thymeleaf"
-    api 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
 
-    api("org.springframework.boot:spring-boot-starter-web") {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
-    api "org.springframework.boot:spring-boot-starter-undertow"
-    api "org.springframework.boot:spring-boot-starter-actuator"
-    api "org.springframework.boot:spring-boot-starter-thymeleaf"
-    api "org.springframework.boot:spring-boot-starter-validation"
-    api "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-undertow"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
 
-    api "org.springframework.boot:spring-boot-starter-security"
-    api 'org.springframework.security:spring-security-crypto'
-    api "org.springframework.security:spring-security-oauth2-jose"
-    api "org.springframework.boot:spring-boot-starter-oauth2-client"
-    api "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    api "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation 'org.springframework.security:spring-security-crypto'
+    implementation "org.springframework.security:spring-security-oauth2-jose"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
 
-    api "com.github.ulisesbocchio:jasypt-spring-boot-starter"
+    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    api "com.nimbusds:nimbus-jose-jwt:9.40"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.44"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
-    api 'com.nimbusds:oauth2-oidc-sdk:11.19.1'
+    implementation 'com.nimbusds:oauth2-oidc-sdk:11.20.1'
 
-    api "org.apache.commons:commons-collections4"
+    implementation "org.apache.commons:commons-collections4"
 
-    api "org.springframework:spring-webflux"
-    api "io.projectreactor.netty:reactor-netty-http"
-    api "io.projectreactor.netty:reactor-netty"
+    implementation "org.springframework:spring-webflux"
+    implementation "io.projectreactor.netty:reactor-netty-http"
+    implementation "io.projectreactor.netty:reactor-netty"
 
     //百度人脸识别以及登录
     //https://search.maven.org/artifact/com.baidu.aip/java-sdk
-    api('com.baidu.aip:java-sdk:4.16.19') {
+    implementation('com.baidu.aip:java-sdk:4.16.19') {
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "org.slf4j", module: "slf4j-simple"
         exclude group: "org.slf4j", module: "slf4j-api"
@@ -161,7 +163,7 @@ dependencies {
 
     // 阿里云app手机一键登录
     //https://search.maven.org/artifact/com.aliyun/dypnsapi20170525
-    api 'com.aliyun:dypnsapi20170525:1.2.1'
+    implementation 'com.aliyun:dypnsapi20170525:1.2.3'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

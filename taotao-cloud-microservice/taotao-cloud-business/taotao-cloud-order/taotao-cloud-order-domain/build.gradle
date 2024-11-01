@@ -93,27 +93,29 @@ dependencies {
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
     //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    api "com.googlecode.aviator:aviator:5.4.3"
+    implementation "com.googlecode.aviator:aviator:5.4.3"
 
     //多线程并发编程框架。为企业高并发（电商）复杂场景提供快速解决方案。 可以完美应对多种多线程高并发场景
     //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    api "io.github.memorydoc:gobrs-async-starter:1.3.1-RELEASE"
-    api 'io.github.memorydoc:gobrs-async-skywalking-plugin:1.3.1-RELEASE'
-    api 'io.github.memorydoc:gobrs-async-trace-plugin:1.3.1-RELEASE'
-    api 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
+    implementation "io.github.memorydoc:gobrs-async-starter:1.3.1-RELEASE"
+    implementation 'io.github.memorydoc:gobrs-async-skywalking-plugin:1.3.1-RELEASE'
+    implementation 'io.github.memorydoc:gobrs-async-trace-plugin:1.3.1-RELEASE'
+    implementation 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
 
     //https://search.maven.org/artifact/cn.afterturn/easypoi-spring-boot-starter
-    api "cn.afterturn:easypoi-spring-boot-starter:4.5.0"
-    api "cn.afterturn:easypoi-base:4.5.0"
-    api "cn.afterturn:easypoi-annotation:4.5.0"
+    implementation "cn.afterturn:easypoi-spring-boot-starter:4.5.0"
+    implementation "cn.afterturn:easypoi-base:4.5.0"
+    implementation "cn.afterturn:easypoi-annotation:4.5.0"
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    api 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
 
-    implementation 'com.jd.easyflow:easyflow-flow:1.2.2'
-    implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.2.2'
-    implementation 'com.jd.easyflow:easyflow-flow-extension:1.2.2'
-    implementation 'com.jd.easyflow:easyflow-fsm:1.2.2'
+    implementation 'com.jd.easyflow:easyflow-flow:1.3.1'
+    implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.3.1'
+    implementation 'com.jd.easyflow:easyflow-flow-extension:1.3.1'
+    implementation 'com.jd.easyflow:easyflow-fsm:1.3.1'
+
+    //implementation 'org.smartboot.flow:smart-flow-springboot-starter:1.1.4'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

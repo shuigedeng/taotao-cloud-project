@@ -14,14 +14,14 @@ dependencies {
         exclude group: 'io.netty', module: 'netty-transport'
     }
     //json 转换工具
-    api 'com.fasterxml.jackson.core:jackson-databind:2.18.0'
-    api 'com.fasterxml.jackson.core:jackson-core:2.18.0'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.18.1'
+    api 'com.fasterxml.jackson.core:jackson-core:2.18.1'
     //kryo 序列化 工具
     api 'com.esotericsoftware:kryo:5.6.0'
     //hessian 序列化 工具
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
-    api 'ch.qos.logback:logback-classic:1.5.11'
+    api 'ch.qos.logback:logback-classic:1.5.12'
     api "com.google.guava:guava:33.3.1-jre"
 
     api 'io.netty:netty-all:4.1.113.Final'

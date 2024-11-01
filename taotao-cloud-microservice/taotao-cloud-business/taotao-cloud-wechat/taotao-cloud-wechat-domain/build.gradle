@@ -92,6 +92,29 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-flowengine"
     api "io.github.shuigedeng:taotao-boot-starter-web"
 
+    // 小程序开发
+    //https://search.maven.org/artifact/com.github.binarywang/wx-java-miniapp-spring-boot-starter
+    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:4.6.6.B"
+    // 公众号开发
+    //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
+    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:4.6.6.B"
+    // 微信开放平台
+    //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
+    implementation "com.github.binarywang:wx-java-open-spring-boot-starter:4.6.6.B"
+    // 微信企业号开发
+    //https://search.maven.org/artifact/com.github.binarywang/wx-java-cp-spring-boot-starter
+    implementation "com.github.binarywang:wx-java-cp-spring-boot-starter:4.6.6.B"
+    // 腾讯企点开发
+    //https://search.maven.org/artifact/com.github.binarywang/wx-java-qidian-spring-boot-starter
+    implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.6.6.B"
+
+    //https://github.com/lcy19930619/wechat-spring-boot-starter
+    //implementation 'net.jlxxw:wechat-spring-boot-starter:2.0.1.20240302'
+
+    //开源的企业微信开放 API 的 Java 实现
+    //https://search.maven.org/artifact/cn.felord/wecom-sdk
+    implementation 'cn.felord:wecom-sdk:1.2.9'
+
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
     //https://code.google.com/p/aviator/
     //http://code.google.com/p/aviator/wiki/User_Guide_zh
@@ -117,7 +140,7 @@ dependencies {
     api 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
 
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
-    api 'org.apache.velocity:velocity-engine-core:2.4'
+    api 'org.apache.velocity:velocity-engine-core:2.4.1'
 
     //https://search.maven.org/artifact/org.freemarker/freemarker
     api 'org.springframework.boot:spring-boot-starter-freemarker'

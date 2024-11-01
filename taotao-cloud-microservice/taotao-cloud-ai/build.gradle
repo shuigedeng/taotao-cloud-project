@@ -1,7 +1,7 @@
 dependencies {
     //alibaba ai
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M2.1"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.1"
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
@@ -44,7 +44,7 @@ dependencies {
     implementation "io.protostuff:protostuff-runtime:1.8.0"
 
     //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
-    implementation 'org.apache.velocity:velocity-engine-core:2.4'
+    implementation 'org.apache.velocity:velocity-engine-core:2.4.1'
 
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'

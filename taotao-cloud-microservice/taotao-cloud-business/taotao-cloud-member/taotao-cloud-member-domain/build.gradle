@@ -90,17 +90,17 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-web"
 
     //https://search.maven.org/artifact/com.xkcoding.http/simple-http
-    api "com.xkcoding.http:simple-http:1.0.5"
+    implementation "com.xkcoding.http:simple-http:1.0.5"
 
     //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java
-    api('com.alipay.sdk:alipay-sdk-java:4.39.74.ALL') {
+    implementation('com.alipay.sdk:alipay-sdk-java:4.39.246.ALL') {
         exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
         exclude group: "commons-logging", module: "commons-logging"
         exclude group: "xml-apis", module: "xml-apis"
     }
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    api 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

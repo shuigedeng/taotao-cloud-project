@@ -42,7 +42,7 @@ dependencies {
     //flink连接器
     implementation 'org.apache.flink:flink-connector-datagen:1.20.0'
     implementation 'org.apache.flink:flink-connector-files:1.20.0'
-    implementation "org.apache.flink:flink-connector-kafka:3.2.0-1.19"
+    implementation "org.apache.flink:flink-connector-kafka:3.3.0-1.20"
     implementation 'org.apache.flink:flink-connector-jdbc:3.2.0-1.19'
     implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.0'
     implementation 'org.apache.flink:flink-connector-mongodb:1.2.0-1.19'
@@ -52,7 +52,7 @@ dependencies {
     implementation 'org.apache.flink:flink-sql-connector-hive-3.1.3_2.12:1.20.0'
     implementation 'org.apache.flink:flink-sql-connector-mongodb:1.2.0-1.19'
     implementation 'org.apache.flink:flink-sql-connector-pulsar:4.1.0-1.18'
-    implementation "org.apache.flink:flink-sql-connector-kafka:3.2.0-1.19"
+    implementation "org.apache.flink:flink-connector-kafka:3.3.0-1.20"
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
     //implementation 'org.apache.flink:flink-sql-connector-hbase-2.2:3.0.0-1.17'
@@ -103,13 +103,13 @@ dependencies {
     //implementation 'com.ververica:flink-cdc-pipeline-connector-mysql:3.0.1'
     //implementation 'com.ververica:flink-cdc-pipeline-connector-values:3.0.1'
 
-    implementation 'com.mysql:mysql-connector-j:9.0.0'
+    implementation 'com.mysql:mysql-connector-j:9.1.0'
     implementation 'redis.clients:jedis:5.2.0'
     implementation 'org.apache.hive:hive-exec:4.0.1'
 
-    implementation 'org.apache.hadoop:hadoop-common:3.4.0'
-    implementation 'org.apache.hadoop:hadoop-client:3.4.0'
-    implementation 'org.apache.hadoop:hadoop-hdfs:3.4.0'
+    implementation 'org.apache.hadoop:hadoop-common:3.4.1'
+    implementation 'org.apache.hadoop:hadoop-client:3.4.1'
+    implementation 'org.apache.hadoop:hadoop-hdfs:3.4.1'
     //implementation 'org.apache.flink:flink-shaded-hadoop-2-uber:3.4.0'
     // https://mvnrepository.com/artifact/org.apache.flink/flink-shaded-hadoop-3-uber
     //implementation group: 'org.apache.flink', name: 'flink-shaded-hadoop-3-uber', version: '3.1.1.7.2.9.0-173-9.0'

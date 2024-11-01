@@ -91,43 +91,28 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-flowengine"
     api "io.github.shuigedeng:taotao-boot-starter-web"
 
-    //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
-    //https://code.google.com/p/aviator/
-    //http://code.google.com/p/aviator/wiki/User_Guide_zh
-    //https://search.maven.org/artifact/com.googlecode.aviator/aviator
-    api "com.googlecode.aviator:aviator:5.4.3"
+    //https://search.maven.org/artifact/com.alipay.sdk/alipay-sdk-java
+    implementation('com.alipay.sdk:alipay-sdk-java:4.39.246.ALL') {
+        exclude group: "org.bouncycastle", module: "bcprov-jdk15on"
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "xml-apis", module: "xml-apis"
+    }
 
-    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    api "com.google.protobuf:protobuf-java:4.28.2"
-    //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    api "com.google.protobuf:protobuf-java-util:4.28.2"
-    //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
-    //api "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
+    //https://search.maven.org/artifact/com.github.javen205/IJPay-All
+    implementation "com.github.javen205:IJPay-All:2.9.11"
 
-    //https://search.maven.org/artifact/io.protostuff/protostuff-core
-    api "io.protostuff:protostuff-core:1.8.0"
-    //https://search.maven.org/artifact/io.protostuff/protostuff-runtime
-    api "io.protostuff:protostuff-runtime:1.8.0"
+    //https://search.maven.org/artifact/com.github.binarywang/weixin-java-pay
+    implementation "com.github.binarywang:weixin-java-pay:4.6.6.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.6.6.B"
 
-    //https://search.maven.org/artifact/io.github.memorydoc/gobrs-async-starter
-    api "io.github.memorydoc:gobrs-async-starter:1.3.1-RELEASE"
-    api 'io.github.memorydoc:gobrs-async-skywalking-plugin:1.3.1-RELEASE'
-    api 'io.github.memorydoc:gobrs-async-trace-plugin:1.3.1-RELEASE'
-    api 'io.github.memorydoc:gobrs-async-monitor-plugin:1.3.1-RELEASE'
+    //https://search.maven.org/artifact/com.paypal.sdk/checkout-sdk
+    implementation "com.paypal.sdk:checkout-sdk:2.0.0"
 
-    //https://search.maven.org/artifact/org.apache.velocity/velocity-engine-core
-    api 'org.apache.velocity:velocity-engine-core:2.4'
+    //https://search.maven.org/artifact/com.yungouos.pay/yungouos-pay-sdk
+    implementation 'com.yungouos.pay:yungouos-pay-sdk:2.0.38'
 
-    //https://search.maven.org/artifact/org.freemarker/freemarker
-    api 'org.springframework.boot:spring-boot-starter-freemarker'
-
-    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    api 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
-
-    api 'com.github.oshi:oshi-core:6.6.5'
-
-    //api "io.github.shuigedeng:taotao-boot-starter-apt")
-    //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
+    //https://search.maven.org/artifact/jakarta.jms/jakarta.jms-api
+    implementation 'jakarta.jms:jakarta.jms-api:3.1.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
