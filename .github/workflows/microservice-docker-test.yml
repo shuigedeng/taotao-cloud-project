@@ -7,9 +7,9 @@ on:
   push:
     paths:
       - 'taotao-cloud-microservice/**'
-    branches: [ dev ]
+    branches: [ master ]
   pull_request:
-    branches: [ dev ]
+    branches: [ master ]
 
 env:
   TAOTAO_CLOUD_OSSRH_USERNAME: ${{ secrets.TAOTAO_CLOUD_OSSRH_USERNAME }}
