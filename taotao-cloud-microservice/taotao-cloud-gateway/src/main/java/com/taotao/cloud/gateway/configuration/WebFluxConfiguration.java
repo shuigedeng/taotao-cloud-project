@@ -53,7 +53,7 @@ import reactor.core.publisher.Mono;
     FilterProperties.class,
     SecurityProperties.class,
     HttpsProperties.class,
-    NacosConfigProperties.class
+    //NacosConfigProperties.class
 })
 public class WebFluxConfiguration {
 

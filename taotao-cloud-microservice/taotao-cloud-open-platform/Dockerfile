@@ -8,7 +8,7 @@ RUN java -Djarmode=layertools -jar taotao-cloud-open-platform-2024.11.jar extrac
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:9.1.0
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest
 
 ARG BACKEND_SERVICE=192.168.10.200:11800
 ARG AGENT_AUTHENTICATION=taotao-cloud
@@ -71,9 +71,9 @@ USER root
 WORKDIR /root
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
-	  && echo $TZ > /etc/timezone \
+    && echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log \
+    && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
     && apk add curl
 
@@ -92,4 +92,4 @@ RUN true
 
 HEALTHCHECK --interval=60s --timeout=60s --retries=5 CMD curl -fs http://127.0.0.1:${APP_PORT}/actuator/health || exit 1
 
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
+ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher

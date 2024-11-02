@@ -117,9 +117,9 @@ USER root
 WORKDIR /root
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
-	  && echo $TZ > /etc/timezone \
+    && echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
+    && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/
@@ -157,4 +157,4 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #HEALTHCHECK --start-period=60s --interval=10s --timeout=3s --retries=50 CMD /bin/sh /healthcheck.sh
 
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
+ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher

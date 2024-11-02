@@ -8,7 +8,8 @@ RUN java -Djarmode=layertools -jar taotao-cloud-ai-2024.11.jar extract
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
-FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+#FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:skywalking9.1.0-pyroscope0.13.0-jre-font
+FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21-skywalking-9-3-0:latest
 
 ARG SKYWALKING_BACKEND_SERVICE=127.0.0.1:11800
 ARG SKYWALKING_AGENT_AUTHENTICATION=taotao-cloud
@@ -111,8 +112,11 @@ ENV ZGC_OPTIONS = "-XX:+UnlockDiagnosticVMOptions  \
                   -Dskywalking.logging.dir=/root/logs/${APP_NAME} \
                   -Dskywalking.collector.backend_service=${SKYWALKING_BACKEND_SERVICE} "
 
-ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
+ENV JAVA_OPTIONS="-Xms1g \
+                  -Xmx2g \
+                  -Xmn1280m \
                   -Xss512k \
+                  -Xlog:async \
                   -XX:MaxDirectMemorySize=1024m \
                   -XX:MetaspaceSize=256m \
                   -XX:MaxMetaspaceSize=512m \
@@ -121,7 +125,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+UnlockDiagnosticVMOptions \
                   -XX:+UseZGC  \
                   -XX:MaxGCPauseMillis=50 \
-                  -XX:-UseBiasedLocking \
                   -XX:GuaranteedSafepointInterval=0  \
                   -XX:FlightRecorderOptions=maxchunksize=128m  \
                   -XX:+UseCountedLoopSafepoints \
@@ -137,7 +140,6 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   -XX:+HeapDumpOnOutOfMemoryError \
                   -XX:+ShowCodeDetailsInExceptionMessages \
                   -XX:ParallelGCThreads=4 \
-                  -Xlog:async \
                   -XX:AsyncLogBufferSize=409600 \
                   -Xlog:gc*=debug:file=/root/logs/${APP_NAME}/gc.log:utctime,level,tags:filecount=50,filesize=100M \
                   -Xlog:jit+compilation=debug:file=/root/logs/${APP_NAME}/jit.compile.log:utctime,level,tags:filecount=10,filesize=100M \
@@ -164,16 +166,16 @@ ENV JAVA_OPTIONS="-Xms2048m -Xmx2048m -Xmn1280m \
                   --add-exports java.desktop/sun.awt=ALL-UNNAMED \
                   --add-opens java.desktop/sun.awt=ALL-UNNAMED \
                   -Dspring.profiles.active=${APP_PRROFILES} \
-                  -javaagent:/skywalking/agent/skywalking-agent.jar "
+                  -javaagent:/skywalking/agent/skywalking-agent.jar"
 
 USER root
 
 WORKDIR /root
 
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
-	  && echo $TZ > /etc/timezone \
+	&& echo $TZ > /etc/timezone \
     && mkdir -p /root/logs/${APP_NAME} \
-	  && touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
+	&& touch /root/logs/${APP_NAME}/jit.compile.log /root/logs/${APP_NAME}/gc.log
 
 #https://mirrors.aliyun.com/alpine/v3.14/main
 #https://mirrors.ustc.edu.cn/alpine/v3.14/main/
@@ -213,4 +215,4 @@ HEALTHCHECK --interval=60s --timeout=30s --retries=5 CMD curl -fs http://127.0.0
 
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-ai-2024.11.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-ai-2024.11.jar
-ENTRYPOINT sleep 10; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
+ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
