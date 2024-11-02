@@ -151,7 +151,7 @@ services:
         ipv4_address: 172.11.0.18
 
 #  sentinel-dashboard:
-#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.11
+#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.12
 #    container_name: taotao-cloud-xxljob
 #    ports:
 #      - "33335:33335"
@@ -160,7 +160,7 @@ services:
 #        ipv4_address: 172.11.0.17
 #
 #  sentinel-dashboard:
-#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.11
+#    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.12
 #    container_name: taotao-cloud-gateway
 #    ports:
 #      - "33336:33336"
@@ -603,7 +603,7 @@ services:
 
 
   gateway:
-    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.11
+    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.12
     container_name: taotao-cloud-gateway
     restart: always
     environment:
