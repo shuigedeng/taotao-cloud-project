@@ -150,6 +150,137 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.18
 
+  rocketmq-nameserv:
+    image: apache/rocketmq:4.9.6
+    container_name: rocketmq-nameserv
+    ports:
+      - "9876:9876"
+    restart: always
+    privileged: true
+    command: [ "sh","mqnamesrv" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.19
+  rocketmq-broker:
+    image: apache/rocketmq:4.9.6
+    container_name: rocketmq-broker
+    ports:
+      - "10909:10909"
+      - "10911:10911"
+      - "10912:10912"
+    restart: always
+    privileged: true
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      NAMESRV_ADDR: 172.11.0.19:9876
+    #broker.conf    brokerIP1=172.11.0.20  
+    volumes:
+      - ./rocketmq/broker.conf:/home/rocketmq/rocketmq-4.9.6/conf/broker.conf 
+    command: [ "sh","mqbroker","-c","/home/rocketmq/rocketmq-4.9.6/conf/broker.conf", "autoCreateTopicEnable=true" ]
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.20
+  rocketmq-dashboard:
+    image: apacherocketmq/rocketmq-dashboard:latest
+    container_name: rocketmq-dashboard
+    ports:
+      - "8082:8080"
+    restart: always
+    privileged: true
+    depends_on:
+      - 'rocketmq-nameserv'
+    environment:
+      JAVA_OPTS: '-Drocketmq.namesrv.addr=172.11.0.19:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.21
+
+  arthas:
+    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-arthas:4.0.2
+    container_name: arthas
+    restart: always
+    ports:
+      - "7777:7777"
+      - "8083:8080"
+    command:
+      - "java -jar /arthas-tunnel-server.jar"
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.22
+
+  zookeeper:
+    image: bitnami/zookeeper:3.8
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.23
+
+  kafka:
+    image: bitnami/kafka:3.7
+    container_name: kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093"	  
+    environment:
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@localhost:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://192.168.218.2:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_NUM_PARTITIONS=1
+      - KAFKA_CFG_DEFAULT_REPLICATION_FACTOR=1
+      - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+      - KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=1
+      - KAFKA_CFG_MIN_INSYNC_REPLICAS=1
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.24
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui
+    restart: always
+    ports:
+      - "8084:8080"
+    environment:
+      # 集群名称
+      - KAFKA_CLUSTERS_0_NAME=kafkaCluster
+      # 集群地址
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=192.168.218.2:9092
+      - DYNAMIC_CONFIG_ENABLED=true
+      - AUTH_TYPE=LOGIN_FORM
+      - SPRING_SECURITY_USER_NAME=admin
+      - SPRING_SECURITY_USER_PASSWORD=123456
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.25
+
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    restart: always
+    command: server /data --console-address ":9090"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    networks:
+      taotao-cluster-network:
+        ipv4_address: 172.11.0.26	
+  		
+
 #  sentinel-dashboard:
 #    image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-xxljob:2024.12
 #    container_name: taotao-cloud-xxljob
@@ -184,119 +315,113 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.64
 
-  zookeeper:
-    image: docker.io/bitnami/zookeeper:3.8
-    container_name: zookeeper
-    restart: always
-    ports:
-      - "2181:2181"
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.13
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-
-  kafka:
-    image: docker.io/bitnami/kafka:3.5
-    container_name: kafka
-    ports:
-      - "9092:9092"
-      - "9093:9093"
-    environment:
-      ### 通用配置
-      # 允许使用kraft，即Kafka替代Zookeeper
-      - KAFKA_ENABLE_KRAFT=yes
-      # kafka角色，做broker，也要做controller
-      - KAFKA_CFG_PROCESS_ROLES=broker,controller
-      # 指定供外部使用的控制类请求信息
-      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-      # 定义kafka服务端socket监听端口
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-      # 定义安全协议
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      # 使用Kafka时的集群id，集群内的Kafka都要用这个id做初始化，生成一个UUID即可
-      - KAFKA_KRAFT_CLUSTER_ID=LelM2dIFQkiUFvXCEcqRWA
-      # 集群地址
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@172.11.0.14:9093
-      # 允许使用PLAINTEXT监听器，默认false，不建议在生产环境使用
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      # 设置broker最大内存，和初始内存
-      #- KAFKA_HEAP_OPTS=-Xmx512M -Xms256M
-      # 不允许自动创建主题
-      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
-      ### broker配置
-      # 定义外网访问地址（宿主机ip地址和端口）
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      # broker.id，必须唯一
-      - KAFKA_BROKER_ID=1
-      - KAFKA_CFG_NODE_ID=1
-    restart: always
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.14
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    container_name: kafka-ui
-    restart: always
-    ports:
-      - "9091:8080"
-    environment:
-      # 集群名称
-      - KAFKA_CLUSTERS_0_NAME=local
-      # 集群地址
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=127.0.0.1:9092
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.15
 
 
+  #kafka:
+  #  image: bitnami/kafka:3.7
+  #  container_name: kafka
+  #  ports:
+  #    - "9092:9092"
+  #    - "9093:9093"
+  #  environment:
+  #    ### 通用配置
+  #    # 允许使用kraft，即Kafka替代Zookeeper
+  #    - KAFKA_ENABLE_KRAFT=yes
+  #    # kafka角色，做broker，也要做controller
+  #    - KAFKA_CFG_PROCESS_ROLES=broker,controller
+  #    # 指定供外部使用的控制类请求信息
+  #    - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+  #    # 定义kafka服务端socket监听端口
+  #    - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+  #    # 定义安全协议
+  #    - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+  #    # 使用Kafka时的集群id，集群内的Kafka都要用这个id做初始化，生成一个UUID即可
+  #    - KAFKA_KRAFT_CLUSTER_ID=LelM2dIFQkiUFvXCEcqRWA
+  #    # 集群地址
+  #    - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@172.11.0.14:9093
+  #    # 允许使用PLAINTEXT监听器，默认false，不建议在生产环境使用
+  #    - ALLOW_PLAINTEXT_LISTENER=yes
+  #    # 设置broker最大内存，和初始内存
+  #    #- KAFKA_HEAP_OPTS=-Xmx512M -Xms256M
+  #    # 不允许自动创建主题
+  #    - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
+  #    ### broker配置
+  #    # 定义外网访问地址（宿主机ip地址和端口）
+  #    - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+  #    # broker.id，必须唯一
+  #    - KAFKA_BROKER_ID=1
+  #    - KAFKA_CFG_NODE_ID=1
+  #  restart: always
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.14
+  #kafka-ui:
+  #  image: provectuslabs/kafka-ui:v0.7.2
+  #  container_name: kafka-ui
+  #  restart: always
+  #  ports:
+  #    - "8084:8080"
+  #  environment:
+  #    # 集群名称
+  #    - KAFKA_CLUSTERS_0_NAME=kafkaCluster
+  #    # 集群地址
+  #    - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=127.0.0.1:9092
+  #    - DYNAMIC_CONFIG_ENABLED=true
+  #    - AUTH_TYPE=LOGIN_FORM
+  #    - SPRING_SECURITY_USER_NAME=admin
+  #    - SPRING_SECURITY_USER_PASSWORD=123456
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.15
+  #
 
-  rocketmq-nameserv:
-    image: apache/rocketmq:5.1.0
-    container_name: rocketmq-nameserv
-    ports:
-      - "9876:9876"
-    restart: always
-    privileged: true
-    environment:
-      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
-    command: [ "sh","mqnamesrv" ]
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.35
-  rocketmq-broker:
-    image: apache/rocketmq:5.1.0
-    container_name: rocketmq-broker
-    ports:
-      - "10909:10909"
-      - "10911:10911"
-    restart: always
-    privileged: true
-    volumes:
-      - /root/compose/rocketmq/broker.conf:/home/rocketmq/broker.conf
-    depends_on:
-      - 'rocketmq-nameserv'
-    environment:
-      NAMESRV_ADDR: 172.11.0.35:9876
-      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
-    command: [ "sh","mqbroker","-c","/home/rocketmq/broker.conf", "autoCreateTopicEnable=true" ]
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.36
-  rocketmq-dashboard:
-    image: apacherocketmq/rocketmq-dashboard:latest
-    container_name: rocketmq-dashboard
-    ports:
-      - "8082:8080"
-    restart: always
-    privileged: true
-    depends_on:
-      - 'rocketmq-nameserv'
-    environment:
-      JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=172.11.0.35:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.37
+
+  #rocketmq-nameserv:
+  #  image: apache/rocketmq:5.3.0
+  #  container_name: rocketmq-nameserv
+  #  ports:
+  #    - "9876:9876"
+  #  restart: always
+  #  privileged: true
+  #  environment:
+  #    JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
+  #  command: [ "sh","mqnamesrv" ]
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.35
+  #rocketmq-broker:
+  #  image: apache/rocketmq:5.1.0
+  #  container_name: rocketmq-broker
+  #  ports:
+  #    - "10909:10909"
+  #    - "10911:10911"
+  #  restart: always
+  #  privileged: true
+  #  volumes:
+  #    - /root/compose/rocketmq/broker.conf:/home/rocketmq/broker.conf
+  #  depends_on:
+  #    - 'rocketmq-nameserv'
+  #  environment:
+  #    NAMESRV_ADDR: 172.11.0.35:9876
+  #    JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms256M -Xmx256M -Xmn128m"
+  #  command: [ "sh","mqbroker","-c","/home/rocketmq/broker.conf", "autoCreateTopicEnable=true" ]
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.36
+  #rocketmq-dashboard:
+  #  image: apacherocketmq/rocketmq-dashboard:latest
+  #  container_name: rocketmq-dashboard
+  #  ports:
+  #    - "8082:8080"
+  #  restart: always
+  #  privileged: true
+  #  depends_on:
+  #    - 'rocketmq-nameserv'
+  #  environment:
+  #    JAVA_OPTS: '-Xmx256M -Xms256M -Xmn128M -Drocketmq.namesrv.addr=172.11.0.35:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false'
+  #  networks:
+  #    taotao-cluster-network:
+  #      ipv4_address: 172.11.0.37
 
   powerjob:
     container_name: powerjob-server
@@ -315,7 +440,7 @@ services:
 
   seata:
     container_name: seata
-    image: seataio/seata-server:1.7.0
+    image: seataio/seata-server:2.2.0
     restart: always
     ports:
       - "8091:8091"
@@ -387,20 +512,7 @@ services:
       taotao-cluster-network:
         ipv4_address: 172.11.0.20
 
-  minio:
-    image: quay.io/minio/minio:latest
-    container_name: minio
-    ports:
-      - "9000:9000"
-      - "9090:9090"
-    restart: always
-    command: server /data --console-address ":9090"
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.60
+
 
 
 
@@ -424,36 +536,6 @@ services:
 #      memlock:
 #        soft: -1
 #        hard: -1
-#  skywalking-oap-server:
-#    image: apache/skywalking-oap-server:9.4.0
-#    container_name: skywalking-oap-server
-#    depends_on:
-#      - elasticsearch
-#    links:
-#      - elasticsearch
-#    restart: always
-#    ports:
-#      - 11800:11800
-#      - 12800:12800
-#    environment:
-#      SW_CORE_RECORD_DATA_TTL: 7 #记录数据的有效期，单位天
-#      SW_CORE_METRICS_DATA_TTL: 7 #分析指标数据的有效期，单位天
-#      SW_STORAGE: elasticsearch  #指定存储为es，此参数可以传到skywalking中的配置
-#      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200 #指定es服务端口
-#      TZ: Asia/Shanghai
-#  skywalking-ui:
-#    image: apache/skywalking-ui:9.4.0
-#    container_name: skywalking-ui
-#    depends_on:
-#      - skywalking-oap-server
-#    links:
-#      - skywalking-oap-server
-#    restart: always
-#    ports:
-#      - 8080:8080
-#    environment:
-#      SW_OAP_ADDRESS: http://skywalking-oap-server:12800
-#      TZ: Asia/Shanghai
 
   rabbitmq:
     image: rabbitmq:3.12.2-management
@@ -587,19 +669,6 @@ services:
     networks:
       taotao-cluster-network:
         ipv4_address: 172.11.0.100
-
-  arthas:
-    image: hengyunabc/arthas:latest
-    container_name: arthas
-    restart: always
-    ports:
-      - "4040:4040"
-    command:
-      - "java -jar /opt/arthas/arthas-boot.jar"
-    networks:
-      taotao-cluster-network:
-        ipv4_address: 172.11.0.42
-
 
 
   gateway:

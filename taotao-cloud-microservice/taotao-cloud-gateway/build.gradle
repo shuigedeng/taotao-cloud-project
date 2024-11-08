@@ -86,6 +86,7 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-adapter"
+        exclude group: "com.alibaba.csp", module: "sentinel-spring-webmvc-v6x-adapter"
         exclude group: "com.querydsl", module: "querydsl-apt"
         exclude group: "commons-logging", module: "commons-logging"
     }
