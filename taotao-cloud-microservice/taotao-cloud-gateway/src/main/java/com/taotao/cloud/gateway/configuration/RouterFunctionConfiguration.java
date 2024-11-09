@@ -185,7 +185,7 @@ public class RouterFunctionConfiguration {
 			message.append(request.uri());
 			MultiValueMap<String, String> params = request.queryParams();
 			Map<String, String> map = params.toSingleValueMap();
-			if (map.size() > 0) {
+			if (!map.isEmpty()) {
 				message.append(" 请求参数: ");
 				String serialize = JsonUtils.toJSONString(message);
 				message.append(serialize);

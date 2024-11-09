@@ -1237,13 +1237,13 @@ logging:
   level:
     root: INFO
     #如上配置后，当你访问任何路由时都将输出非常详细的信息。
-    web: debug
-    '[org.springframework.cloud.gateway]': debug
-    '[org.springframework.http.server.reactive]': debug
-    '[org.springframework.web.reactive]': debug
-    '[org.springframework.boot.autoconfigure.web]': debug
-    '[reactor.netty]': debug
-    '[redisratelimiter]': debug
+#    web: debug
+#    '[org.springframework.cloud.gateway]': debug
+#    '[org.springframework.http.server.reactive]': debug
+#    '[org.springframework.web.reactive]': debug
+#    '[org.springframework.boot.autoconfigure.web]': debug
+#    '[reactor.netty]': debug
+#    '[redisratelimiter]': debug
     org.apache.zookeeper.ZooKeeper: info
     com.taotao.cloud.sys.api.feign: debug
     net.ttddyy.dsproxy.listener: debug
