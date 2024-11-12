@@ -84,7 +84,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
 
     api 'org.zalando:logbook-spring-boot-starter:3.9.0'
     api 'org.zalando:logbook-httpclient5:3.9.0'

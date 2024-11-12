@@ -49,7 +49,7 @@ dependencies {
     }
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"

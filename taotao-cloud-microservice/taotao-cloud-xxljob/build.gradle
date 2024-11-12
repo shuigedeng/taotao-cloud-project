@@ -22,7 +22,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-undertow"
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
 
     //https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3"

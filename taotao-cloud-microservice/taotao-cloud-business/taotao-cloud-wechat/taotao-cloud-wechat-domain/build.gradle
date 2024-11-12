@@ -94,19 +94,19 @@ dependencies {
 
     // 小程序开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-miniapp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:4.6.6.B"
+    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:4.6.7.B"
     // 公众号开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:4.6.6.B"
+    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:4.6.7.B"
     // 微信开放平台
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-mp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-open-spring-boot-starter:4.6.6.B"
+    implementation "com.github.binarywang:wx-java-open-spring-boot-starter:4.6.7.B"
     // 微信企业号开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-cp-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-cp-spring-boot-starter:4.6.6.B"
+    implementation "com.github.binarywang:wx-java-cp-spring-boot-starter:4.6.7.B"
     // 腾讯企点开发
     //https://search.maven.org/artifact/com.github.binarywang/wx-java-qidian-spring-boot-starter
-    implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.6.6.B"
+    implementation "com.github.binarywang:wx-java-qidian-spring-boot-starter:4.6.7.B"
 
     //https://github.com/lcy19930619/wechat-spring-boot-starter
     //implementation 'net.jlxxw:wechat-spring-boot-starter:2.0.1.20240302'
@@ -146,7 +146,7 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-freemarker'
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    api 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    api 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
 
     api 'com.github.oshi:oshi-core:6.6.5'
 

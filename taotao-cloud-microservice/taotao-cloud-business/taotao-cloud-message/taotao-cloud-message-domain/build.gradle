@@ -97,9 +97,9 @@ dependencies {
     }
     implementation 'com.alipay.sdk:alipay-sdk-java:4.39.246.ALL'
 
-    implementation "com.github.binarywang:weixin-java-cp:4.6.6.B"
-    implementation "com.github.binarywang:weixin-java-miniapp:4.6.6.B"
-    implementation "com.github.binarywang:weixin-java-mp:4.6.6.B"
+    implementation "com.github.binarywang:weixin-java-cp:4.6.7.B"
+    implementation "com.github.binarywang:weixin-java-miniapp:4.6.7.B"
+    implementation "com.github.binarywang:weixin-java-mp:4.6.7.B"
 
     implementation 'com.ctrip.framework.apollo:apollo-client-config-data:2.3.0'
     implementation 'org.dromara.dynamictp:dynamic-tp-spring-boot-starter-apollo:1.1.9.1-3.x'
@@ -123,7 +123,7 @@ dependencies {
     implementation 'com.mysql:mysql-connector-j'
 
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.9.2'
+    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
 
     annotationProcessor "com.querydsl:querydsl-apt:5.1.0:jakarta"
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
