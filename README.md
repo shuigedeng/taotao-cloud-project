@@ -34,32 +34,36 @@
 
 **仓库的目的**: 工作以来的技术总结和技术沉淀(业余时间进行开发) **仓库代码中不涉及公司任何业务代码**
 
-主要包括如下几部分
+主要包括如下几部分:
 
 - **微服务模块** 基于**spring cloud alibaba**微服务基础脚手架框架,用于基础服务的集成和跟业务无关的基础技术集成,
   提供**大量的starters组件**作为技术底层支持,同时基础框架集中统一优化中间件相关服务及使用,
   提供高性能,更方便的基础服务接口及工具，完全可以在实际工作中使用
 
 
-- **saas商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署,
+- **SASS商城模块** 基于**微服务模块**构建的前后端分离的B2B2C商城系统, 支持商家入驻支, 持分布式部署,
   使用**github action CI/CD**持续集成, 前后端均使用**kubernetes**部署，
   各个API独立, 管理前端使用**vue3 ant-design-vue**开发, 移动端使用**taro taro-ui**开发, **
   系统全端全部代码开源**
 
 
-- **大数据模块** 集成基于**hadoop、hive、dolphinscheduler**的离线批量日志数据处理和分析, 用于用户行为分析、推荐系统, 
-    **flink、flink cdc、flink cep、spark streaming、presto、seatunnel**流式处理计算框架, **tidb、doris**离线数据仓库, **hudi、paimon**数据湖等大数据处理
-
-
-- **数仓模块**  基于Doris、Piamon、Hudi的离线数仓和实时数仓(数据湖)
-  * 数据源模块：业务数据写入 **MySQL** 数据库,生成的日志数据被写入 **Kafka**, **rocketmq** 消息队列
-  * 数据采集模块：**Dinky**开发**FlinkSQL**，消费**Kafka**中的日志数据，并将其写入**Doris**、**Paimon** 、**Hudi**的在线数据存储（ODS）层。使用**DolphinScheduler**配置**SeaTunnel**任务，同步**MySQL**中的业务数据到**Doris**的ODS层。**FlinkSQL/CDC**从**Kafka**和**MySQL**采集数据，分别写入**Paimon** 、**Hudi**的ODS层。
-  * 数仓模块：遵循标准的ODS(数据存储)->DWD(数据仓库明细层)/DIM(维度数据层)->DWS(数据服务层)->ADS(应用数据存储)的四级数据分层架构。数据在**Doris** 、**Paimon**、**Hudi**中通过批量和实时两种调度方式流转。  
-  * 数据可视化：ADS层和DWS层的数据可以利用**SuperSet**和**DataRT**工具进行报表和数据大屏的制作、展示
-
-
-- **sass商城多端前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**
+- **SASS商城多端前端模块** 主要使用**react antd**进行前后端分离开发, 集成以**taro, taro-ui, react native**
   为主的多端合一框架。
+
+
+- **大数据模块** 集成基于**hadoop、hive、dolphinscheduler**的离线批量日志数据处理和分析, 用于用户行为分析、推荐系统,
+  **flink、flink cdc、flink cep、spark streaming、presto、seatunnel**流式处理计算框架, **tidb、doris**离线数据仓库, **hudi、paimon**数据湖等大数据处理
+
+
+- **数仓模块**  基于**Doris、Piamon、Hudi**的离线数仓和实时数仓(数据湖)
+
+  > 数据源模块：业务数据写入 **MySQL** 数据库,生成的日志数据被写入 **Kafka**, **rocketmq** 消息队列
+
+  > 数据采集模块：**Dinky**开发**FlinkSQL**，消费**Kafka**中的日志数据，并将其写入**Doris**、**Paimon** 、**Hudi**的在线数据存储（ODS）层。使用**DolphinScheduler**配置**SeaTunnel**任务，同步**MySQL**中的业务数据到**Doris**的ODS层。**FlinkSQL/CDC**从**Kafka**和**MySQL**采集数据，分别写入**Paimon** 、**Hudi**的ODS层。
+
+  > 数仓模块：遵循标准的ODS(数据存储)->DWD(数据仓库明细层)/DIM(维度数据层)->DWS(数据服务层)->ADS(应用数据存储)的四级数据分层架构。数据在**Doris** 、**Paimon**、**Hudi**中通过批量和实时两种调度方式流转。  
+
+  > 数据可视化：ADS层和DWS层的数据可以利用**SuperSet**和**DataRT**工具进行报表和数据大屏的制作、展示
 
 
 - **python模块** 主要是集成了基于**django**的web开发, 基于**scrapy**爬虫开发, **homeassistant**
@@ -82,7 +86,7 @@ Requires:
 
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
-GRALE_VERSION >= 8.10.2
+GRALE_VERSION >= 8.11
 IDEA_VERSION >= 2024.2.4
 ```
 
@@ -145,33 +149,33 @@ CLOUD:
 
 ## 5. 核心依赖
 
- 依赖                   | 版本              
-----------------------|-----------------
- Spring               | 6.1.14           
- Spring Boot          | 3.3.5           
- Spring Cloud         | 2023.0.3        
- Spring Cloud Alibaba | 2023.0.1.3
- Spring Cloud Tencent | 1.14.0-2023.0.0-RC2
- Spring Cloud huawei  | 1.11.10-2023.0.x
- Seata                | 2.2.0
- Sentinel             | 1.8.8           
- Spring-kafka         | 3.2.4         
- Roketmq              | 5.2.0           
- Spring Security      | 6.3.4           
- Mybatis Plus         | 3.5.9         
- Hutool               | 6.0.0-M17         
- Mysql                | 9.1.0          
- Querydsl             | 5.1.0           
- Swagger              | 3.0.0           
- Knife4j              | 4.5.0           
- Redisson             | 3.38.1         
- Lettuce              | 6.4.1.RELEASE   
- Elasticsearch        | 8.15.3           
- Xxl-job              | 2.4.1           
- Guava                | 33.3.1-jre       
- Grpc                 | 1.68.0          
- Arthas               | 4.0.2           
- Netty                | 4.1.114.Final
+| 依赖                   | 版本                  |
+|----------------------|---------------------|
+| Spring               | 6.1.14              |
+| Spring Boot          | 3.3.5               |
+| Spring Cloud         | 2023.0.3            |
+| Spring Cloud Alibaba | 2023.0.1.3          |
+| Spring Cloud Tencent | 1.14.0-2023.0.0-RC2 |
+| Spring Cloud huawei  | 1.11.10-2023.0.x    |
+| Seata                | 2.2.0               |
+| Sentinel             | 1.8.8               |
+| Spring-kafka         | 3.2.4               |
+| Roketmq              | 5.2.0               |
+| Spring Security      | 6.3.4               |
+| Mybatis Plus         | 3.5.9               |
+| Hutool               | 6.0.0-M17           |
+| Mysql                | 9.1.0               |
+| Querydsl             | 5.1.0               |
+| Swagger              | 3.0.0               |
+| Knife4j              | 4.5.0               |
+| Redisson             | 3.38.1              |
+| Lettuce              | 6.4.1.RELEASE       |
+| Elasticsearch        | 8.15.3              |
+| Xxl-job              | 2.4.1               |
+| Guava                | 33.3.1-jre          |
+| Grpc                 | 1.68.0              |
+| Arthas               | 4.0.2               |
+| Netty                | 4.1.114.Final       |
 
 ## 6. 演示地址 (云服务器已到期)
 
@@ -390,10 +394,10 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-cloud-demo'
 +--- Project ':taotao-cloud-dependencies'
 +--- Project ':taotao-cloud-starter-bootstrap'
-+--- Project ':taotao-cloud-starter-facility-alibaba'
-+--- Project ':taotao-cloud-starter-facility-huawei'
-+--- Project ':taotao-cloud-starter-facility-tencent'
-+--- Project ':taotao-cloud-starter-facility-zookeeper'
++--- Project ':taotao-cloud-starter-alibaba'
++--- Project ':taotao-cloud-starter-huawei'
++--- Project ':taotao-cloud-starter-tencent'
++--- Project ':taotao-cloud-starter-zookeeper'
 +--- Project ':taotao-cloud-starter-openfeign'
 +--- Project ':taotao-cloud-starter-seata'
 +--- Project ':taotao-cloud-starter-sentinel'

@@ -158,7 +158,7 @@ dependencies {
     implementation "org.scala-lang:scala-compiler:2.13.15"
     implementation "org.scala-lang:scala-reflect:2.13.15"
 
-    //implementation 'com.alibaba.ververica:flink-cep:1.15-vvr-6.0.4'
+    //implementation 'com.alibaba.ververica:flink-cep:1.17-vvr-8.0.8'
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.3'
 

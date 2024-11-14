@@ -1,8 +1,4 @@
 dependencies {
-    //alibaba ai
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.1"
-
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
@@ -51,14 +47,25 @@ dependencies {
 
     implementation 'com.github.oshi:oshi-core:6.6.5'
 
+    //alibaba ai
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.1"
+
+    //spring ai
+    // https://repo.spring.io/milestone    https://repo.spring.io/snapshot
     //引入PDF解析器
     implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
     //使用OpenAI
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
+    //redis
+    implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
+    implementation 'org.springframework.ai:spring-ai-redis-store-spring-boot-starter'
     //使用PGVector作为向量数据库
     implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
+    //使用transformers
     implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
+    //使用ollama
+    implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-azure-vector-store-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter'
@@ -66,7 +73,7 @@ dependencies {
     //implementation 'org.springframework.ai:spring-ai-milvus-store-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-neo4j-store-spring-boot-starter'
-    //implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
+
     //implementation 'org.springframework.ai:spring-ai-pinecone-store-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-postgresml-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-qdrant-store-spring-boot-starter'
