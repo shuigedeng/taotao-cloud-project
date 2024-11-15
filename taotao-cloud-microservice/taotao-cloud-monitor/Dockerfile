@@ -4,7 +4,8 @@ WORKDIR /root
 
 ADD ./build/libs/taotao-cloud-monitor-2024.12.jar ./
 
-RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.12.jar extract
+#RUN java -Djarmode=layertools -jar taotao-cloud-monitor-2024.12.jar extract
+RUN java -Djarmode=tools -jar taotao-cloud-monitor-2024.12.jar extract --layers --destination extracted
 
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-skywalking:openjdk-17-8.6.0
 #FROM registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:latest
@@ -192,13 +193,13 @@ VOLUME /root/logs
 
 EXPOSE ${APP_PORT}
 
-COPY --from=builder /root/dependencies/ ./
+COPY --from=builder /root/extracted/dependencies/ ./
 RUN true
-COPY --from=builder /root/spring-boot-loader/ ./
+COPY --from=builder /root/extracted/spring-boot-loader/ ./
 RUN true
-COPY --from=builder /root/snapshot-dependencies/ ./
+COPY --from=builder /root/extracted/snapshot-dependencies/ ./
 RUN true
-COPY --from=builder /root/application/ ./
+COPY --from=builder /root/extracted/application/ ./
 RUN true
 
 #docker inspect --format='{{json .State.Health}}' file
@@ -215,3 +216,7 @@ RUN true
 #ENTRYPOINT ["java","${ZGC_OPTIONS}","-jar","taotao-cloud-monitor-2024.12.jar"]
 #ENTRYPOINT java ${ZGC_OPTIONS} -jar taotao-cloud-monitor-2024.12.jar
 ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
+
+#cds
+RUN java -XX:ArchiveClassesAtExit=taotao-cloud-monitor.jsa -Dspring.context.exit=onRefresh -jar taotao-cloud-monitor-2024.12.jar
+ENTRYPOINT ["java", "-XX:SharedArchiveFile=taotao-cloud-monitor.jsa", "-jar", "taotao-cloud-monitor-2024.12.jar"]

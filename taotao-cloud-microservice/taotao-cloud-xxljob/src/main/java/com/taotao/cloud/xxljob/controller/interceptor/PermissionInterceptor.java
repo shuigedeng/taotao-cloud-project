@@ -4,6 +4,9 @@ import com.taotao.cloud.xxljob.controller.annotation.PermissionLimit;
 import com.taotao.cloud.xxljob.core.model.XxlJobUser;
 import com.taotao.cloud.xxljob.core.util.I18nUtil;
 import com.taotao.cloud.xxljob.service.LoginService;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 权限拦截
@@ -55,5 +59,17 @@ public class PermissionInterceptor implements AsyncHandlerInterceptor {
 
 		return true;	// proceed with the next interceptor
 	}
-	
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		if (modelAndView != null) {
+			Map<String, Object> attributes = new HashMap<>();
+			Enumeration<String> enumeration = request.getAttributeNames();
+			while (enumeration.hasMoreElements()) {
+				String key = enumeration.nextElement();
+				attributes.put(key, request.getAttribute(key));
+			}
+			modelAndView.addObject("Request", attributes);
+		}
+	}
 }
