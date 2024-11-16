@@ -53,19 +53,18 @@ dependencies {
 
     //spring ai
     // https://repo.spring.io/milestone    https://repo.spring.io/snapshot
-    //引入PDF解析器
-    implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
     //使用OpenAI
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
-    //redis
-    implementation 'org.springframework.ai:spring-ai-redis-spring-boot-starter'
-    implementation 'org.springframework.ai:spring-ai-redis-store-spring-boot-starter'
-    //使用PGVector作为向量数据库
-    implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
     //使用transformers
     implementation 'org.springframework.ai:spring-ai-transformers-spring-boot-starter'
     //使用ollama
     implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
+    //redis
+    implementation 'org.springframework.ai:spring-ai-redis-store-spring-boot-starter'
+    //使用PGVector作为向量数据库
+    implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
+    //引入PDF解析器
+    implementation 'org.springframework.ai:spring-ai-pdf-document-reader'
     //implementation 'org.springframework.ai:spring-ai-azure-openai-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-azure-vector-store-spring-boot-starter'
     //implementation 'org.springframework.ai:spring-ai-bedrock-ai-spring-boot-starter'
