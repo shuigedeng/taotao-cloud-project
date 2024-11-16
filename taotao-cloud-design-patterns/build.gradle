@@ -4,6 +4,6 @@ dependencies {
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.53'
     implementation "org.dromara.hutool:hutool-all:6.0.0-M18"
 
-    implementation "org.projectlombok:lombok:1.18.34"
-    annotationProcessor "org.projectlombok:lombok:1.18.34"
+    implementation "org.projectlombok:lombok:1.18.36"
+    annotationProcessor "org.projectlombok:lombok:1.18.36"
 }

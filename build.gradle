@@ -26,9 +26,9 @@ buildscript {
 
         springBootVersion = "3.3.5"
         querydslAptVersion = "5.1.0"
-        mapstructProcessorVersion = "1.6.2"
+        mapstructProcessorVersion = "1.6.3"
         lombokMapstructBindingVersion = "0.2.0"
-        lombokVersion = "1.18.34"
+        lombokVersion = "1.18.36"
         recordBuilderVersion = "43"
     }
 
