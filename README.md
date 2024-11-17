@@ -3,21 +3,21 @@
 [comment]: <> (# <center>**taotao-cloud-project**</center>)
 
 <p align="center">
-  <img src='https://img.shields.io/badge/license-Apache%202-green' alt='License'/>
+  <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2024.12-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.1.14-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.2.0-red" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_boot-3.3.5-orange" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud-2023.0.3-yellowgree" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.1.3-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_cloud_tencent-1.14.0--2023.0.0--RC2-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.114.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.115.Final-blue" alt="Downloads"/>
   <img src="https://img.shields.io/badge/spring_security-6.3.4-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/elasticsearch-8.15.3-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.9-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.38.1-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M17-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.39.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M18-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
