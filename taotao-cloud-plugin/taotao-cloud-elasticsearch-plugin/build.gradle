@@ -21,14 +21,14 @@ apply plugin: "idea"
 //apply plugin: 'elasticsearch.yaml-rest-test'
 
 dependencies {
-    implementation 'org.elasticsearch:elasticsearch:8.15.3'
+    implementation 'org.elasticsearch:elasticsearch:8.16.0'
 
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:8.15.3"
-    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.15.3"
-    compileOnly "org.apache.lucene:lucene-analysis-common:9.11.1"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-api:8.16.0"
+    compileOnly "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.16.0"
+    compileOnly "org.apache.lucene:lucene-analysis-common:10.0.0"
 
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:8.15.3"
-    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.15.3"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-api:8.16.0"
+    testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.16.0"
     testImplementation "org.apache.lucene:lucene-analysis-common:10.0.0"
 
     testImplementation ('junit:junit:4.13.2'){

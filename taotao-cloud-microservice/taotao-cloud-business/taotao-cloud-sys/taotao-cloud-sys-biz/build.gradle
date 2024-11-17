@@ -86,13 +86,13 @@ dependencies {
     //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
     implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
 
-    api 'org.zalando:logbook-spring-boot-starter:3.9.0'
-    api 'org.zalando:logbook-httpclient5:3.9.0'
-    api 'org.zalando:logbook-netty:3.9.0'
-    api 'org.zalando:logbook-okhttp:3.9.0'
-    api 'org.zalando:logbook-okhttp2:3.9.0'
-    api 'org.zalando:logbook-openfeign:3.9.0'
-    api 'org.zalando:logbook-spring-webflux:3.9.0'
+    implementation 'org.zalando:logbook-spring-boot-starter:3.10.0'
+    implementation 'org.zalando:logbook-httpclient5:3.10.0'
+    implementation 'org.zalando:logbook-netty:3.10.0'
+    implementation 'org.zalando:logbook-okhttp:3.10.0'
+    implementation 'org.zalando:logbook-okhttp2:3.10.0'
+    implementation 'org.zalando:logbook-openfeign:3.10.0'
+    implementation 'org.zalando:logbook-spring-webflux:3.10.0'
 
     implementation 'com.github.oshi:oshi-core:6.6.5'
 
