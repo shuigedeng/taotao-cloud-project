@@ -40,7 +40,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "tt_chatbot")
-// @org.hibernate.annotations.Table(appliesTo = "tt_chatbot", comment = "机器人客服表")
+@org.springframework.data.relational.core.mapping.Table(name = "tt_chatbot", comment = "机器人客服表")
 public class Chatbot extends JpaSuperEntity {
 
     private static final long serialVersionUID = 6887296988458221221L;

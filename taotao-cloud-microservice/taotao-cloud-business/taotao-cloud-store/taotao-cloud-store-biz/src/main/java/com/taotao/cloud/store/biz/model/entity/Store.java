@@ -49,7 +49,7 @@ import org.hibernate.Hibernate;
 @Table(name = Store.TABLE_NAME)
 @TableName(Store.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-// @org.hibernate.annotations.Table(appliesTo = Store.TABLE_NAME, comment = "店铺表")
+@org.springframework.data.relational.core.mapping.Table(name = Store.TABLE_NAME, comment = "店铺表")
 public class Store extends BaseSuperEntity<Store, String> {
 
     public static final String TABLE_NAME = "tt_store";

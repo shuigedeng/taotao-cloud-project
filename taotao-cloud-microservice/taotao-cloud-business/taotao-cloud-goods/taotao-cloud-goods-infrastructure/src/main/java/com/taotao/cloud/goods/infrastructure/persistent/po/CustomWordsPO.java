@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = CustomWordsPO.TABLE_NAME)
 @TableName(CustomWordsPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = CustomWords.TABLE_NAME, comment = "自定义分词表")
+@org.springframework.data.relational.core.mapping.Table(name = CustomWordsPO.TABLE_NAME)
 public class CustomWordsPO extends BaseSuperEntity<CustomWordsPO, Long> {
 
     public static final String TABLE_NAME = "tt_custom_words";

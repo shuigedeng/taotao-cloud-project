@@ -1,8 +1,8 @@
 package com.taotao.cloud.sys.biz.service.impl;
 
 import com.taotao.cloud.file.biz.service.IBussinessService;
-import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
+import org.apache.seata.core.context.RootContext;
+import org.apache.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

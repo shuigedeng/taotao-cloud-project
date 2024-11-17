@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = KanjiaActivityGoods.TABLE_NAME)
 @TableName(KanjiaActivityGoods.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = KanjiaActivityGoods.TABLE_NAME, comment = "砍价活动商品对象")
+@org.springframework.data.relational.core.mapping.Table(name = KanjiaActivityGoods.TABLE_NAME, comment = "砍价活动商品对象")
 public class KanjiaActivityGoods extends BasePromotions<KanjiaActivityGoods, Long> {
 
     public static final String TABLE_NAME = "tt_kanjia_activity_goods";

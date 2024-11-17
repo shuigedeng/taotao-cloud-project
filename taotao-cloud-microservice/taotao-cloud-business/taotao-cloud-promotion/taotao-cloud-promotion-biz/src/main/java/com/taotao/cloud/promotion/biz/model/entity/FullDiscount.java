@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = FullDiscount.TABLE_NAME)
 @TableName(FullDiscount.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = FullDiscount.TABLE_NAME, comment = "满优惠活动实体类")
+@org.springframework.data.relational.core.mapping.Table(name = FullDiscount.TABLE_NAME, comment = "满优惠活动实体类")
 public class FullDiscount extends BasePromotions<FullDiscount, Long> {
 
     public static final String TABLE_NAME = "tt_full_discount";

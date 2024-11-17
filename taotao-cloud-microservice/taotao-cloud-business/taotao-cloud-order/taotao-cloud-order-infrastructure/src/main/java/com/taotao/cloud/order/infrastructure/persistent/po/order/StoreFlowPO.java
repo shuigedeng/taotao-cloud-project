@@ -50,7 +50,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = StoreFlowPO.TABLE_NAME)
 @TableName(StoreFlowPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = StoreFlow.TABLE_NAME, comment = "商家订单流水表")
+@org.springframework.data.relational.core.mapping.Table(name = StoreFlowPO.TABLE_NAME, comment = "商家订单流水表")
 public class StoreFlowPO extends BaseSuperEntity<StoreFlowPO, Long> {
 
     public static final String TABLE_NAME = "tt_store_flow";

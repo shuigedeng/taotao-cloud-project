@@ -49,7 +49,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = DistributionCash.TABLE_NAME)
 @TableName(DistributionCash.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = DistributionCash.TABLE_NAME, comment = "分销佣金表")
+@org.springframework.data.relational.core.mapping.Table(name = DistributionCash.TABLE_NAME, comment = "分销佣金表")
 public class DistributionCash extends BaseSuperEntity<DistributionCash, Long> {
 
     public static final String TABLE_NAME = "tt_distribution_cash";

@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Special.TABLE_NAME)
 @TableName(Special.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Special.TABLE_NAME, comment = "专题活动表")
+@org.springframework.data.relational.core.mapping.Table(name = Special.TABLE_NAME, comment = "专题活动表")
 public class Special extends BaseSuperEntity<Special, Long> {
 
     public static final String TABLE_NAME = "tt_special";

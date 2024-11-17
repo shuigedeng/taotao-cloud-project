@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = AfterSaleLog.TABLE_NAME)
 @TableName(AfterSaleLog.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = AfterSaleLog.TABLE_NAME, comment = "售后日志")
+@org.springframework.data.relational.core.mapping.Table(name = AfterSaleLog.TABLE_NAME, comment = "售后日志")
 public class AfterSaleLog extends BaseSuperEntity<AfterSaleLog, Long> {
 
     public static final String TABLE_NAME = "tt_after_sale_log";

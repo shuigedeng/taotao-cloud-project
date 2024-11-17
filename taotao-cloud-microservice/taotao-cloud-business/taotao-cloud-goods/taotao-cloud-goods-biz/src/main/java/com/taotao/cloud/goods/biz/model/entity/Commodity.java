@@ -41,7 +41,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Commodity.TABLE_NAME)
 @TableName(Commodity.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Commodity.TABLE_NAME, comment = "小程序直播商品表")
+@org.springframework.data.relational.core.mapping.Table(name = Commodity.TABLE_NAME)
 public class Commodity extends BaseSuperEntity<Commodity, Long> {
 
     public static final String TABLE_NAME = "tt_commodity";

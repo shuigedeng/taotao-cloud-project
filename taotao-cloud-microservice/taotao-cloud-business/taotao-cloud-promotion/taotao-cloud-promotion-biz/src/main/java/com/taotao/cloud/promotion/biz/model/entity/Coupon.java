@@ -52,7 +52,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Coupon.TABLE_NAME)
 @TableName(Coupon.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Coupon.TABLE_NAME, comment = "优惠券活动实体类")
+@org.springframework.data.relational.core.mapping.Table(name = Coupon.TABLE_NAME, comment = "优惠券活动实体类")
 public class Coupon extends BasePromotions<Coupon, Long> {
 
     public static final String TABLE_NAME = "tt_coupon";

@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @TableName(OrderWaitEvent.TABLE_NAME)
 @Table(name = OrderWaitEvent.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = OrderWaitEvent.TABLE_NAME, comment = "订单定时任务处理表")
+@org.springframework.data.relational.core.mapping.Table(name = OrderWaitEvent.TABLE_NAME, comment = "订单定时任务处理表")
 public class OrderWaitEvent extends BaseSuperEntity<OrderWaitEvent, Long> {
 
     public static final String TABLE_NAME = "order_wait_event";

@@ -39,7 +39,7 @@ import lombok.ToString;
 @Table(name = ShortLink.TABLE_NAME)
 @TableName(ShortLink.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-// @org.hibernate.annotations.Table(appliesTo = ShortLink.TABLE_NAME, comment = "短链接/暂时只用于小程序二维码业务表")
+@org.springframework.data.relational.core.mapping.Table(name = ShortLink.TABLE_NAME, comment = "短链接/暂时只用于小程序二维码业务表")
 public class ShortLink extends BaseSuperEntity<ShortLink, Long> {
 
     public static final String TABLE_NAME = "tt_short_link";

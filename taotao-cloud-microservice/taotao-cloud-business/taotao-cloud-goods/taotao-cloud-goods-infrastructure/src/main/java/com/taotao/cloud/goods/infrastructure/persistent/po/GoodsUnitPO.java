@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = GoodsUnitPO.TABLE_NAME)
 @TableName(GoodsUnitPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = GoodsUnit.TABLE_NAME, comment = "商品计量单位表")
+@org.springframework.data.relational.core.mapping.Table(name = GoodsUnitPO.TABLE_NAME)
 public class GoodsUnitPO extends BaseSuperEntity<GoodsUnitPO, Long> {
 
     public static final String TABLE_NAME = "tt_goods_unit";

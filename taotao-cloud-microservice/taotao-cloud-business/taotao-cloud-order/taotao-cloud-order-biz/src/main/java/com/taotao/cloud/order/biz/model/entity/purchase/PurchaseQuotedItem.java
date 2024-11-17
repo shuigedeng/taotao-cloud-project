@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = PurchaseQuotedItem.TABLE_NAME)
 @TableName(PurchaseQuotedItem.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = PurchaseQuotedItem.TABLE_NAME, comment = "供求单报价表")
+@org.springframework.data.relational.core.mapping.Table(name = PurchaseQuotedItem.TABLE_NAME, comment = "供求单报价表")
 public class PurchaseQuotedItem extends BaseSuperEntity<PurchaseQuotedItem, Long> {
 
     public static final String TABLE_NAME = "tt_purchase_quoted_item";

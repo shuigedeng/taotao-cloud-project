@@ -41,7 +41,7 @@ import lombok.Setter;
 @Entity
 @Table(name = DataVersionLogDb.TABLE_NAME)
 @TableName(DataVersionLogDb.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = DataVersionLogDb.TABLE_NAME, comment = "app配置表")
+@org.springframework.data.relational.core.mapping.Table(name = DataVersionLogDb.TABLE_NAME, comment = "app配置表")
 public class DataVersionLogDb extends BaseSuperEntity<DataVersionLogDb, Long> {
 
     public static final String TABLE_NAME = "tt_data_version_log";

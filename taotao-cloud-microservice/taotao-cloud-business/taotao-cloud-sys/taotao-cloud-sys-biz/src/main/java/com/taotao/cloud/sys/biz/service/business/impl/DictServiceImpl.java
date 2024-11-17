@@ -43,7 +43,7 @@ import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
 import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
-import io.seata.spring.annotation.GlobalTransactional;
+import org.apache.seata.spring.annotation.GlobalTransactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -39,7 +39,7 @@ import lombok.ToString;
 @Table(name = WechatMPMessage.TABLE_NAME)
 @TableName(WechatMPMessage.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-// @org.hibernate.annotations.Table(appliesTo = WechatMPMessage.TABLE_NAME, comment = "微信小程序消息订阅表")
+@org.springframework.data.relational.core.mapping.Table(name = WechatMPMessage.TABLE_NAME, comment = "微信小程序消息订阅表")
 public class WechatMPMessage extends BaseSuperEntity<WechatMPMessage, Long> {
 
     public static final String TABLE_NAME = "tt_wechat_mp_message";

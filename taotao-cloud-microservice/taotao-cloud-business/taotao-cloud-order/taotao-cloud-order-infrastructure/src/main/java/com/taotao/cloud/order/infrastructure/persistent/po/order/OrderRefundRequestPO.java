@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @Entity
 @TableName(OrderRefundRequestPO.TABLE_NAME)
 @Table(name = OrderRefundRequestPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = OrderRefundRequest.TABLE_NAME, comment = "售后申请表")
+@org.springframework.data.relational.core.mapping.Table(name = OrderRefundRequestPO.TABLE_NAME, comment = "售后申请表")
 public class OrderRefundRequestPO extends BaseSuperEntity<OrderRefundRequestPO, Long> {
 
     public static final String TABLE_NAME = "order_refund_request";

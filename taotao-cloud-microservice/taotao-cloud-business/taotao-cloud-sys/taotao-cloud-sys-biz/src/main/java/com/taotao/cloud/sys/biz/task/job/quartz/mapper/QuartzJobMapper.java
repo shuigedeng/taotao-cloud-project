@@ -17,8 +17,12 @@
 package com.taotao.cloud.sys.biz.task.job.quartz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.taotao.cloud.sys.biz.task.job.quartz.entity.QuartzJob;
 import org.apache.ibatis.annotations.Mapper;
 
-/** 定时任务 */
+/**
+ * 定时任务
+ */
 @Mapper
-public interface QuartzJobMapper extends BaseMapper<QuartzJob> {}
+public interface QuartzJobMapper extends BaseMapper<QuartzJob> {
+}

@@ -18,10 +18,10 @@ package com.taotao.cloud.sys.biz.service;
 
 import com.taotao.cloud.file.api.model.vo.UploadFileVO;
 import com.taotao.cloud.file.biz.entity.File;
-import io.seata.rm.tcc.api.BusinessActionContext;
-import io.seata.rm.tcc.api.BusinessActionContextParameter;
-import io.seata.rm.tcc.api.LocalTCC;
-import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
+import org.apache.seata.rm.tcc.api.BusinessActionContext;
+import org.apache.seata.rm.tcc.api.BusinessActionContextParameter;
+import org.apache.seata.rm.tcc.api.LocalTCC;
+import org.apache.seata.rm.tcc.api.TwoPhaseBusinessAction;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

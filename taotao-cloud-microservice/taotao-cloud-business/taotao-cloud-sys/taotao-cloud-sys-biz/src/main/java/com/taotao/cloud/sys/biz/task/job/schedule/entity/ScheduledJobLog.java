@@ -27,6 +27,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * Scheduled任务日志表
+ */
 @Getter
 @Setter
 @ToString(callSuper = true)
@@ -35,7 +38,7 @@ import lombok.ToString;
 @Entity
 @Table(name = ScheduledJobLog.TABLE_NAME)
 @TableName(ScheduledJobLog.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = ScheduledJobLog.TABLE_NAME, comment = "Scheduled任务日志表")
+@org.springframework.data.relational.core.mapping.Table(name = ScheduledJobLog.TABLE_NAME)
 public class ScheduledJobLog extends BaseSuperEntity<ScheduledJobLog, String> {
 
     public static final String TABLE_NAME = "tt_scheduled_job_log";

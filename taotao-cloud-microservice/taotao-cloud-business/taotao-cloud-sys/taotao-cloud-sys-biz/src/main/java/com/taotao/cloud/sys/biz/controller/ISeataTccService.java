@@ -17,10 +17,10 @@
 package com.taotao.cloud.sys.biz.controller;
 
 import com.taotao.cloud.sys.api.model.dto.QuartzJobDTO;
-import io.seata.rm.tcc.api.BusinessActionContext;
-import io.seata.rm.tcc.api.BusinessActionContextParameter;
-import io.seata.rm.tcc.api.LocalTCC;
-import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
+import org.apache.seata.rm.tcc.api.BusinessActionContext;
+import org.apache.seata.rm.tcc.api.BusinessActionContextParameter;
+import org.apache.seata.rm.tcc.api.LocalTCC;
+import org.apache.seata.rm.tcc.api.TwoPhaseBusinessAction;
 
 /**
  * @LocalTCC:一定需要注解在接口上，否则不生效，此接口可以是寻常的业务接口，只要实现了TCC的两阶段提交对应方法便可，适用于SpringCloud+Feign模式下的TCC。

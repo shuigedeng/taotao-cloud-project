@@ -50,7 +50,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = OrderComplaintPO.TABLE_NAME)
 @TableName(OrderComplaintPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = OrderComplaint.TABLE_NAME, comment = "订单交易投诉表")
+@org.springframework.data.relational.core.mapping.Table(name = OrderComplaintPO.TABLE_NAME, comment = "订单交易投诉表")
 public class OrderComplaintPO extends BaseSuperEntity<OrderComplaintPO, Long> {
 
     public static final String TABLE_NAME = "tt_order_complaint";

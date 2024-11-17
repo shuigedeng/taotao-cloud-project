@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Receipt.TABLE_NAME)
 @TableName(Receipt.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Receipt.TABLE_NAME, comment = "发票表")
+@org.springframework.data.relational.core.mapping.Table(name = Receipt.TABLE_NAME, comment = "发票表")
 public class Receipt extends BaseSuperEntity<Receipt, Long> {
 
     public static final String TABLE_NAME = "tt_receipt";

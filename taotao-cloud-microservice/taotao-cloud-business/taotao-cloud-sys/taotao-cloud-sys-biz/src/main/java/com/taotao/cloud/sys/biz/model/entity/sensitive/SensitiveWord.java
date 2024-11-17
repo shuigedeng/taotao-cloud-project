@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = SensitiveWord.TABLE_NAME)
 @TableName(SensitiveWord.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = SensitiveWord.TABLE_NAME, comment = "敏感词表")
+@org.springframework.data.relational.core.mapping.Table(name = SensitiveWord.TABLE_NAME, comment = "敏感词表")
 public class SensitiveWord extends BaseSuperEntity<SensitiveWord, Long> {
 
     public static final String TABLE_NAME = "tt_sensitive_words";

@@ -50,7 +50,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = DataScope.TABLE_NAME)
 @TableName(value = DataScope.TABLE_NAME, autoResultMap = true)
-// @org.hibernate.annotations.Table(appliesTo = DataScope.TABLE_NAME, comment = "数据权限表")
+@org.springframework.data.relational.core.mapping.Table(name = DataScope.TABLE_NAME, comment = "数据权限表")
 public class DataScope extends BaseSuperEntity<DataScope, Long> {
 
     public static final String TABLE_NAME = "tt_data_scope";

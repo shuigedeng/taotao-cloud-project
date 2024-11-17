@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = User.TABLE_NAME)
 @TableName(User.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = User.TABLE_NAME, comment = "用户表")
+@org.springframework.data.relational.core.mapping.Table(name = User.TABLE_NAME, comment = "用户表")
 public class User extends BaseSuperEntity<User, Long> {
 
     public static final String TABLE_NAME = "tt_user";

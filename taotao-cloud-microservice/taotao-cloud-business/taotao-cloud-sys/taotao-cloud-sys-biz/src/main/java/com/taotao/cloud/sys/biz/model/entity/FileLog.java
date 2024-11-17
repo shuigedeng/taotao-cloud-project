@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = FileLog.TABLE_NAME)
 @TableName(FileLog.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = FileLog.TABLE_NAME, comment = "文件表")
+@org.springframework.data.relational.core.mapping.Table(name = FileLog.TABLE_NAME, comment = "文件表")
 public class FileLog extends BaseSuperEntity<FileLog, Long> {
 
     public static final String TABLE_NAME = "tt_file_log";

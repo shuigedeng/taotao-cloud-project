@@ -43,7 +43,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberPointsHistory.TABLE_NAME)
 @TableName(MemberPointsHistory.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberPointsHistory.TABLE_NAME, comment = "会员积分历史表")
+@org.springframework.data.relational.core.mapping.Table(name = MemberPointsHistory.TABLE_NAME, comment = "会员积分历史表")
 public class MemberPointsHistory extends BaseSuperEntity<MemberPointsHistory, Long> {
 
     public static final String TABLE_NAME = "tt_member_points_history";

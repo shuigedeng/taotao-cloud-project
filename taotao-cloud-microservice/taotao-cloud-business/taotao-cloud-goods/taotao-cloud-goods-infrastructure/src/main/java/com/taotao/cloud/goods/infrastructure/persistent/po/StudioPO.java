@@ -47,7 +47,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = StudioPO.TABLE_NAME)
 @TableName(StudioPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Studio.TABLE_NAME, comment = "小程序直播间表")
+@org.springframework.data.relational.core.mapping.Table(name = StudioPO.TABLE_NAME, comment = "小程序直播间表")
 public class StudioPO extends BaseSuperEntity<StudioPO, Long> {
 
     public static final String TABLE_NAME = "tt_studio";

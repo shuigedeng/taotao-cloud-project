@@ -41,7 +41,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberConnectPO.TABLE_NAME)
 @TableName(MemberConnectPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberConnect.TABLE_NAME, comment = "联合登陆表表")
+@org.springframework.data.relational.core.mapping.Table(name = MemberConnect.TABLE_NAME, comment = "联合登陆表表")
 public class MemberConnectPO extends BaseSuperEntity<MemberConnectPO, Long> {
 
     public static final String TABLE_NAME = "tt_member_connect";

@@ -19,9 +19,9 @@ package com.taotao.cloud.sys.api.feign.fallback;
 import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.sys.api.feign.FileApi;
 import com.taotao.cloud.sys.api.feign.response.FileApiResponse;
-import io.seata.core.context.RootContext;
-import io.seata.core.exception.TransactionException;
-import io.seata.tm.api.GlobalTransactionContext;
+import org.apache.seata.core.context.RootContext;
+import org.apache.seata.core.exception.TransactionException;
+import org.apache.seata.tm.api.GlobalTransactionContext;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cloud.openfeign.FallbackFactory;
 

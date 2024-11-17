@@ -42,7 +42,7 @@ package com.taotao.cloud.goods.infrastructure.persistent.po; // package com.taot
 // @NoArgsConstructor
 //// @Entity
 // @Table(name = "tt_product_ext")
-// // @org.hibernate.annotations.Table(appliesTo = "tt_product_ext", comment = "商品信息扩展表")
+// @org.springframework.data.relational.core.mapping.Table(name = "tt_product_ext", comment = "商品信息扩展表")
 // public class ProductExt extends JpaSuperEntity {
 //
 //	@Column(name = "member_id", columnDefinition = "varchar(255) not null comment '会员ID'")

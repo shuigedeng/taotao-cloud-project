@@ -34,7 +34,7 @@ package com.taotao.cloud.goods.infrastructure.persistent.po; // package com.taot
 // @NoArgsConstructor
 //// @Entity
 // @Table(name = "tt_product_moments")
-// // @org.hibernate.annotations.Table(appliesTo = "tt_product_moments", comment = "商品信息扩展表")
+// @org.springframework.data.relational.core.mapping.Table(name = "tt_product_moments", comment = "商品信息扩展表")
 // public class ProductMoments extends JpaSuperEntity {
 //	@Column(name = "member_id", columnDefinition = "varchar(255) not null comment '会员ID'")
 //    private Long productId;

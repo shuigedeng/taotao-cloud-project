@@ -18,8 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.server.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.seata.common.util.StringUtils;
-import io.seata.core.context.RootContext;
+import org.apache.seata.core.context.RootContext;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -52,7 +52,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = Trade.TABLE_NAME)
 @TableName(Trade.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Trade.TABLE_NAME, comment = "交易表")
+@org.springframework.data.relational.core.mapping.Table(name = Trade.TABLE_NAME, comment = "交易表")
 public class Trade extends BaseSuperEntity<Trade, Long> {
 
     public static final String TABLE_NAME = "tt_trade";

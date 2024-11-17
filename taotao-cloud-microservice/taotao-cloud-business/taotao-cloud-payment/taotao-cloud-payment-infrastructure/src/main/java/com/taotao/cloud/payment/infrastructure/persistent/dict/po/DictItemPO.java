@@ -48,7 +48,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = DictItemPO.TABLE_NAME)
 @TableName(DictItemPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = DictItem.TABLE_NAME, comment = "字典项表")
+@org.springframework.data.relational.core.mapping.Table(name = DictItem.TABLE_NAME, comment = "字典项表")
 public class DictItemPO extends BaseSuperEntity<DictItemPO, Long> {
 
     public static final String TABLE_NAME = "tt_dict_item";

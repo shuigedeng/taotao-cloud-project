@@ -41,7 +41,7 @@ import lombok.ToString;
 @Table(name = NoticeMessage.TABLE_NAME)
 @TableName(NoticeMessage.TABLE_NAME)
 @EntityListeners({JpaEntityListener.class})
-// @org.hibernate.annotations.Table(appliesTo = NoticeMessage.TABLE_NAME, comment = "通知类消息模板表")
+@org.springframework.data.relational.core.mapping.Table(name = NoticeMessage.TABLE_NAME, comment = "通知类消息模板表")
 public class NoticeMessage extends BaseSuperEntity<NoticeMessage, Long> {
 
     public static final String TABLE_NAME = "tt_notice_message";

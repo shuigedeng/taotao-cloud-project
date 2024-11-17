@@ -54,7 +54,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = MemberCoupon.TABLE_NAME)
 @TableName(MemberCoupon.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberCoupon.TABLE_NAME, comment = "会员优惠券")
+@org.springframework.data.relational.core.mapping.Table(name = MemberCoupon.TABLE_NAME, comment = "会员优惠券")
 public class MemberCoupon extends BaseSuperEntity<MemberCoupon, Long> {
 
     public static final String TABLE_NAME = "tt_member_coupon";

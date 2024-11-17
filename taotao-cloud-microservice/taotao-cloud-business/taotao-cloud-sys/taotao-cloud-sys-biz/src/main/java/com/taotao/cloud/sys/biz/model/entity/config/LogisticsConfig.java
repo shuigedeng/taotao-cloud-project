@@ -36,7 +36,7 @@ import lombok.Setter;
 @Entity
 @Table(name = LogisticsConfig.TABLE_NAME)
 @TableName(LogisticsConfig.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = LogisticsConfig.TABLE_NAME, comment = "物流公司表")
+@org.springframework.data.relational.core.mapping.Table(name = LogisticsConfig.TABLE_NAME, comment = "物流公司表")
 public class LogisticsConfig extends BaseSuperEntity<LogisticsConfig, Long> {
 
     public static final String TABLE_NAME = "tt_logistics_config";

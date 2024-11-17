@@ -49,7 +49,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = ArticleCategory.TABLE_NAME)
 @TableName(ArticleCategory.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = ArticleCategory.TABLE_NAME, comment = "文章分类表")
+@org.springframework.data.relational.core.mapping.Table(name = ArticleCategory.TABLE_NAME, comment = "文章分类表")
 public class ArticleCategory extends BaseSuperEntity<ArticleCategory, Long> {
 
     public static final String TABLE_NAME = "tt_article_category";

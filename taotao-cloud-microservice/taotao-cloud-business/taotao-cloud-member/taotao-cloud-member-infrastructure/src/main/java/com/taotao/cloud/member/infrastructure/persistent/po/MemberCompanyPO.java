@@ -43,7 +43,7 @@ import lombok.Setter;
 @Entity
 @TableName(MemberCompanyPO.TABLE_NAME)
 @Table(name = MemberCompanyPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberCompany.TABLE_NAME, comment = "会员公司表")
+@org.springframework.data.relational.core.mapping.Table(name = MemberCompany.TABLE_NAME, comment = "会员公司表")
 public class MemberCompanyPO extends BaseSuperEntity<MemberCompanyPO, Long> {
 
     public static final String TABLE_NAME = "tt_member_company";

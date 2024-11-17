@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = ParametersPO.TABLE_NAME)
 @TableName(ParametersPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = Parameters.TABLE_NAME, comment = "商品参数表")
+@org.springframework.data.relational.core.mapping.Table(name = ParametersPO.TABLE_NAME)
 public class ParametersPO extends BaseSuperEntity<ParametersPO, Long> {
 
     public static final String TABLE_NAME = "tt_parameters";

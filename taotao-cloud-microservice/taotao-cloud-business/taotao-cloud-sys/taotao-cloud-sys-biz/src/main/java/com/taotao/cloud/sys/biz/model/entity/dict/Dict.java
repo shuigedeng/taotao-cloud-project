@@ -137,7 +137,7 @@ import org.hibernate.annotations.NamedQuery;
 @EntityListeners({Dict.DictEntityListener.class})
 //@NamedQuery(name = "User.findByEmailAddress",
 //	query = "select u from User u where u.emailAddress = ?1")
-// @org.hibernate.annotations.Table(appliesTo = Dict.TABLE_NAME, comment = "字典表")
+@org.springframework.data.relational.core.mapping.Table(name = Dict.TABLE_NAME, comment = "字典表")
 public class Dict extends BaseSuperEntity<Dict, Long> {
 
     public static final String TABLE_NAME = "tt_dict";

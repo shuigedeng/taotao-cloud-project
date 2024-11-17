@@ -44,7 +44,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberWithdrawApplyPO.TABLE_NAME)
 @TableName(MemberWithdrawApplyPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberWithdrawApply.TABLE_NAME, comment = "会员提现申请表")
+@org.springframework.data.relational.core.mapping.Table(name = MemberWithdrawApply.TABLE_NAME, comment = "会员提现申请表")
 public class MemberWithdrawApplyPO extends BaseSuperEntity<MemberWithdrawApplyPO, Long> {
 
     public static final String TABLE_NAME = "tt_member_withdraw_apply";

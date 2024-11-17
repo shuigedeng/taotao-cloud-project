@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.distribution.biz.service.impl;
 
+import com.taotao.boot.common.utils.log.LogUtils;
 import com.taotao.cloud.distribution.biz.service.ICreateHtmlService;
-import io.seata.core.model.Result;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;

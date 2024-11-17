@@ -40,7 +40,7 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = SmsSign.TABLE_NAME)
 @TableName(SmsSign.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = SmsSign.TABLE_NAME, comment = "短信签名表")
+@org.springframework.data.relational.core.mapping.Table(name = SmsSign.TABLE_NAME, comment = "短信签名表")
 public class SmsSign extends BaseSuperEntity<SmsSign, Long> {
 
     public static final String TABLE_NAME = "tt_tt_sms_sign";

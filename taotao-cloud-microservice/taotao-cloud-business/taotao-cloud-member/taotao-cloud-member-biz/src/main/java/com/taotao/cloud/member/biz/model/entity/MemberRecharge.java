@@ -45,7 +45,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberReceipt.TABLE_NAME)
 @TableName(MemberReceipt.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberReceipt.TABLE_NAME, comment = "预存款充值记录")
+@org.springframework.data.relational.core.mapping.Table(name = MemberReceipt.TABLE_NAME, comment = "预存款充值记录")
 public class MemberRecharge extends BaseSuperEntity<MemberRecharge, Long> {
 
     public static final String TABLE_NAME = "tt_recharge";

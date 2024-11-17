@@ -52,7 +52,7 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = Setting.TABLE_NAME)
 @TableName(value = Setting.TABLE_NAME, autoResultMap = true)
-// @org.hibernate.annotations.Table(appliesTo = Setting.TABLE_NAME, comment = "配置表")
+@org.springframework.data.relational.core.mapping.Table(name = Setting.TABLE_NAME, comment = "配置表")
 public class Setting extends BaseSuperEntity<Setting, Long> {
 
     public static final String TABLE_NAME = "tt_setting";

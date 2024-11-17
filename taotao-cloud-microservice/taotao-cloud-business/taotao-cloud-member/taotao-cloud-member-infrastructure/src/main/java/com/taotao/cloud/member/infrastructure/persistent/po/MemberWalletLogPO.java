@@ -43,7 +43,7 @@ import lombok.Setter;
 @Entity
 @Table(name = MemberWalletLogPO.TABLE_NAME)
 @TableName(MemberWalletLogPO.TABLE_NAME)
-// @org.hibernate.annotations.Table(appliesTo = MemberWalletLog.TABLE_NAME, comment = "钱包变动日志表")
+@org.springframework.data.relational.core.mapping.Table(name = MemberWalletLog.TABLE_NAME, comment = "钱包变动日志表")
 public class MemberWalletLogPO extends BaseSuperEntity<MemberWalletLogPO, Long> {
 
     public static final String TABLE_NAME = "tt_wallet_log";

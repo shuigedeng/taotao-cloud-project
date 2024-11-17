@@ -21,7 +21,6 @@ import com.taotao.boot.job.xxl.executor.annotation.XxlRegister;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import io.seata.spring.annotation.GlobalTransactional;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -30,6 +29,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Component;
 
 /**

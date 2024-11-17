@@ -24,7 +24,7 @@ import com.taotao.cloud.file.api.grpc.File;
 import com.taotao.cloud.file.api.grpc.FileGrpcServiceGrpc;
 import com.taotao.cloud.file.biz.grpc.FileGrpcService;
 import com.taotao.cloud.file.biz.service.IFileService;
-import com.taotao.cloud.openfeign.annotation.FeignApi;
+import com.taotao.boot.web.annotation.FeignApi;
 import com.taotao.boot.web.base.controller.BaseFeignController;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
