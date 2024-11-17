@@ -22,7 +22,7 @@
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-`taotao-cloud` (taotao云平台) 基于gradle8.10.2、jdk21, 支持graalvm21, 采用最新的spring 6.1.14、SpringBoot 3.3.5、SpringCloud 2023.0.3、SpringSecurity 6.3.4、Nacos 2.4.3、Mybatis-Plus 3.5.9、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
+`taotao-cloud` (taotao云平台) 基于gradle8.11、jdk21, 支持graalvm21, 采用最新的spring 6.2.0、SpringBoot 3.3.5、SpringCloud 2023.0.3、SpringSecurity 6.3.4、Nacos 2.4.3、Mybatis-Plus 3.5.9、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
@@ -87,7 +87,7 @@ Requires:
 ```
 JAVA_VERSION >= 21 (推荐使用graalvm-jdk-21)
 GRALE_VERSION >= 8.11
-IDEA_VERSION >= 2024.2.4
+IDEA_VERSION >= 2024.3
 ```
 
 Gradle:
@@ -151,7 +151,7 @@ CLOUD:
 
 | 依赖                   | 版本                  |
 |----------------------|---------------------|
-| Spring               | 6.1.14              |
+| Spring               | 6.2.0               |
 | Spring Boot          | 3.3.5               |
 | Spring Cloud         | 2023.0.3            |
 | Spring Cloud Alibaba | 2023.0.1.3          |
@@ -163,19 +163,19 @@ CLOUD:
 | Roketmq              | 5.2.0               |
 | Spring Security      | 6.3.4               |
 | Mybatis Plus         | 3.5.9               |
-| Hutool               | 6.0.0-M17           |
+| Hutool               | 6.0.0-M18           |
 | Mysql                | 9.1.0               |
 | Querydsl             | 5.1.0               |
 | Swagger              | 3.0.0               |
 | Knife4j              | 4.5.0               |
-| Redisson             | 3.38.1              |
+| Redisson             | 3.39.0              |
 | Lettuce              | 6.4.1.RELEASE       |
 | Elasticsearch        | 8.15.3              |
-| Xxl-job              | 2.4.1               |
+| Xxl-job              | 2.4.2               |
 | Guava                | 33.3.1-jre          |
-| Grpc                 | 1.68.0              |
+| Grpc                 | 1.68.1              |
 | Arthas               | 4.0.2               |
-| Netty                | 4.1.114.Final       |
+| Netty                | 4.1.115.Final       |
 
 ## 6. 演示地址 (云服务器已到期)
 
