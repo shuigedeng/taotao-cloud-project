@@ -7,10 +7,9 @@ import java.util.function.Function;
  * @author kl
  * @version 1.0.0
  * @description ConcurrentHashMap util
- * @since 2023/2/6 10:01
+ * @date 2023/2/6 10:01
  */
 public class ConcurrentHashMapUtils {
-
     private static boolean IS_JAVA8;
 
     static {
@@ -20,6 +19,9 @@ public class ConcurrentHashMapUtils {
             // exception is ignored
             IS_JAVA8 = true;
         }
+    }
+
+    private ConcurrentHashMapUtils() {
     }
 
     /**

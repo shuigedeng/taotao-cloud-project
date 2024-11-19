@@ -1,29 +1,29 @@
 package com.taotao.cloud.message.biz.austin.web.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.enums.AuditStatus;
-import com.java3y.austin.common.enums.MessageStatus;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.enums.TemplateType;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.cron.xxl.entity.XxlJobInfo;
-import com.java3y.austin.cron.xxl.service.CronTaskService;
-import com.java3y.austin.cron.xxl.utils.XxlJobUtils;
-import com.java3y.austin.support.dao.MessageTemplateDao;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.web.service.MessageTemplateService;
-import com.java3y.austin.web.vo.MessageTemplateParam;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.enums.AuditStatus;
+import com.taotao.cloud.message.biz.austin.common.enums.MessageStatus;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.enums.TemplateType;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
+import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
+import com.taotao.cloud.message.biz.austin.cron.xxl.utils.XxlJobUtils;
+import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.web.service.MessageTemplateService;
+import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.criteria.Predicate;
+import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,8 +31,8 @@ import java.util.Objects;
 /**
  * 消息模板管理 Service
  *
- * @author 3y
- * @since 2022/1/22
+ * @author shuigedeng
+ * @date 2022/1/22
  */
 @Service
 public class MessageTemplateServiceImpl implements MessageTemplateService {
@@ -50,11 +50,11 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
     @Override
     public Page<MessageTemplate> queryList(MessageTemplateParam param) {
         PageRequest pageRequest = PageRequest.of(param.getPage() - 1, param.getPerPage());
-        String creator = StrUtil.isBlank(param.getCreator()) ? AustinConstant.DEFAULT_CREATOR : param.getCreator();
+        String creator = CharSequenceUtil.isBlank(param.getCreator()) ? AustinConstant.DEFAULT_CREATOR : param.getCreator();
         return messageTemplateDao.findAll((Specification<MessageTemplate>) (root, query, cb) -> {
             List<Predicate> predicateList = new ArrayList<>();
             // 加搜索条件
-            if (StrUtil.isNotBlank(param.getKeywords())) {
+            if (CharSequenceUtil.isNotBlank(param.getKeywords())) {
                 predicateList.add(cb.like(root.get("name").as(String.class), "%" + param.getKeywords() + "%"));
             }
             predicateList.add(cb.equal(root.get("isDeleted").as(Integer.class), CommonConstant.FALSE));
@@ -161,12 +161,12 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
      * @param messageTemplate
      */
     private void initStatus(MessageTemplate messageTemplate) {
-        messageTemplate.setFlowId(StrUtil.EMPTY)
+        messageTemplate.setFlowId(CharSequenceUtil.EMPTY)
                 .setMsgStatus(MessageStatus.INIT.getCode()).setAuditStatus(AuditStatus.WAIT_AUDIT.getCode())
-                .setCreator(StrUtil.isBlank(messageTemplate.getCreator()) ? AustinConstant.DEFAULT_CREATOR : messageTemplate.getCreator())
-                .setUpdator(StrUtil.isBlank(messageTemplate.getUpdator()) ? AustinConstant.DEFAULT_UPDATOR : messageTemplate.getUpdator())
-                .setTeam(StrUtil.isBlank(messageTemplate.getTeam()) ? AustinConstant.DEFAULT_TEAM : messageTemplate.getTeam())
-                .setAuditor(StrUtil.isBlank(messageTemplate.getAuditor()) ? AustinConstant.DEFAULT_AUDITOR : messageTemplate.getAuditor())
+                .setCreator(CharSequenceUtil.isBlank(messageTemplate.getCreator()) ? AustinConstant.DEFAULT_CREATOR : messageTemplate.getCreator())
+                .setUpdator(CharSequenceUtil.isBlank(messageTemplate.getUpdator()) ? AustinConstant.DEFAULT_UPDATOR : messageTemplate.getUpdator())
+                .setTeam(CharSequenceUtil.isBlank(messageTemplate.getTeam()) ? AustinConstant.DEFAULT_TEAM : messageTemplate.getTeam())
+                .setAuditor(CharSequenceUtil.isBlank(messageTemplate.getAuditor()) ? AustinConstant.DEFAULT_AUDITOR : messageTemplate.getAuditor())
                 .setCreated(Math.toIntExact(DateUtil.currentSeconds()))
                 .setIsDeleted(CommonConstant.FALSE);
 

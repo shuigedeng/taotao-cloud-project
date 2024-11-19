@@ -3,18 +3,20 @@ package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.EnterpriseWeChatContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.SendMessageType;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.model.EnterpriseWeChatContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.SendMessageType;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.support.config.SupportThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.error.WxMpErrorMsgEnum;
+import me.chanjar.weixin.common.error.WxCpErrorMsgEnum;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpMessageServiceImpl;
 import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
@@ -25,21 +27,29 @@ import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
 import me.chanjar.weixin.cp.config.impl.WxCpDefaultConfigImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 企业微信推送处理
+ * https://developer.work.weixin.qq.com/document/path/90235
  */
 @Component
 @Slf4j
-public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
+public class EnterpriseWeChatHandler extends BaseHandler{
 
+    private static final String WE_CHAT_RECALL_KEY_PREFIX = "WECHAT_RECALL_";
+    private static final String WE_CHAT_RECALL_BIZ_TYPE = "EnterpriseWeChatHandler#recall";
     @Autowired
     private AccountUtils accountUtils;
+    @Autowired
+    private LogUtils logUtils;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     public EnterpriseWeChatHandler() {
         channelCode = ChannelType.ENTERPRISE_WE_CHAT.getCode();
@@ -51,11 +61,13 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
             WxCpDefaultConfigImpl accountConfig = accountUtils.getAccountById(taskInfo.getSendAccount(), WxCpDefaultConfigImpl.class);
             WxCpMessageServiceImpl messageService = new WxCpMessageServiceImpl(initService(accountConfig));
             WxCpMessageSendResult result = messageService.send(buildWxCpMessage(taskInfo, accountConfig.getAgentId()));
-            if (Integer.valueOf(WxMpErrorMsgEnum.CODE_0.getCode()).equals(result.getErrCode())) {
+
+            // 发送成功后记录TaskId，用于消息撤回(支持24小时之内)
+            if (Integer.valueOf(WxCpErrorMsgEnum.CODE_0.getCode()).equals(result.getErrCode())) {
+                saveRecallInfo(WE_CHAT_RECALL_KEY_PREFIX, taskInfo.getMessageTemplateId(), String.valueOf(result.getMsgId()), CommonConstant.ONE_DAY_SECOND);
                 return true;
             }
-            // 常见的错误 应当 关联至 AnchorState,由austin后台统一透出失败原因
-            log.error("EnterpriseWeChatHandler#handler fail!result:{},params:{}", JSON.toJSONString(result), JSON.toJSONString(taskInfo));
+            logUtils.print(AnchorInfo.builder().bizId(taskInfo.getBizId()).messageId(taskInfo.getMessageId()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(result.getErrCode()).build());
         } catch (Exception e) {
             log.error("EnterpriseWeChatHandler#handler fail:{},params:{}",
                     Throwables.getStackTraceAsString(e), JSON.toJSONString(taskInfo));
@@ -93,8 +105,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         EnterpriseWeChatContentModel contentModel = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
 
         // 通用配置
-        WxCpMessage wxCpMessage = null;
-
+        WxCpMessage wxCpMessage = new WxCpMessage();
         if (SendMessageType.TEXT.getCode().equals(contentModel.getSendType())) {
             wxCpMessage = WxCpMessage.TEXT().content(contentModel.getContent()).build();
         } else if (SendMessageType.IMAGE.getCode().equals(contentModel.getSendType())) {
@@ -119,17 +130,44 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
             Map contentItems = JSON.parseObject(contentModel.getContentItems(), Map.class);
             wxCpMessage = WxCpMessage.newMiniProgramNoticeBuilder().appId(contentModel.getAppId()).page(contentModel.getPage()).emphasisFirstItem(contentModel.getEmphasisFirstItem()).contentItems(contentItems).title(contentModel.getTitle()).description(contentModel.getDescription()).build();
         } else if (SendMessageType.TEMPLATE_CARD.getCode().equals(contentModel.getSendType())) {
-            // WxJava 未支持
+
         }
+
         wxCpMessage.setAgentId(agentId);
         wxCpMessage.setToUser(userId);
         return wxCpMessage;
     }
 
 
+    /**
+     * 撤回企业微信应用消息；
+     * https://developer.work.weixin.qq.com/document/path/94867
+     *
+     * @param recallTaskInfo
+     */
     @Override
     public void recall(RecallTaskInfo recallTaskInfo) {
+        SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
+            try {
+                WxCpDefaultConfigImpl accountConfig = accountUtils.getAccountById(recallTaskInfo.getSendAccount(), WxCpDefaultConfigImpl.class);
+                WxCpMessageServiceImpl messageService = new WxCpMessageServiceImpl(initService(accountConfig));
 
+                // 优先撤回messageId，如果未传入messageId，则按照模板id撤回
+                if (CollUtil.isNotEmpty(recallTaskInfo.getRecallMessageId())) {
+                    for (String messageId : recallTaskInfo.getRecallMessageId()) {
+                        String msgId = redisTemplate.opsForValue().get(WE_CHAT_RECALL_KEY_PREFIX + messageId);
+                        messageService.recall(msgId);
+                    }
+                } else {
+                    while (redisTemplate.opsForList().size(WE_CHAT_RECALL_KEY_PREFIX + recallTaskInfo.getMessageTemplateId()) > 0) {
+                        String msgId = redisTemplate.opsForList().leftPop(WE_CHAT_RECALL_KEY_PREFIX + recallTaskInfo.getMessageTemplateId());
+                        messageService.recall(msgId);
+                    }
+                }
+            } catch (Exception e) {
+                log.error("EnterpriseWeChatHandler#recall fail:{}", Throwables.getStackTraceAsString(e));
+            }
+        });
     }
 }
 

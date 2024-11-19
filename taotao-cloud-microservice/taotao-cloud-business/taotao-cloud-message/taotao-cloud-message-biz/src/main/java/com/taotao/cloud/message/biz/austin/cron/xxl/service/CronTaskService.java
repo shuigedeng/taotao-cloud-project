@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.service;
 
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.cron.xxl.entity.XxlJobGroup;
-import com.java3y.austin.cron.xxl.entity.XxlJobInfo;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
 
 /**
  * 定时任务服务
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface CronTaskService {
 

@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.limit;
 
 import cn.hutool.core.util.IdUtil;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
-import com.java3y.austin.handler.deduplication.service.AbstractDeduplicationService;
-import com.java3y.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.service.AbstractDeduplicationService;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -18,9 +18,10 @@ import java.util.Set;
 
 /**
  * 滑动窗口去重器（内容去重采用基于redis中zset的滑动窗口去重，可以做到严格控制单位时间内的频次。）
- *
+ * 业务逻辑：5分钟内相同用户如果收到相同的内容，则应该被过滤掉
+ * 技术方案：由lua脚本实现
  * @author cao
- * @since 2022-04-20 11:34
+ * @date 2022-04-20 11:34
  */
 @Service(value = "SlideWindowLimitService")
 public class SlideWindowLimitService extends AbstractLimitService {
@@ -36,7 +37,7 @@ public class SlideWindowLimitService extends AbstractLimitService {
 
     @PostConstruct
     public void init() {
-        redisScript = new DefaultRedisScript();
+        redisScript = new DefaultRedisScript<>();
         redisScript.setResultType(Long.class);
         redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("limit.lua")));
     }
@@ -57,7 +58,10 @@ public class SlideWindowLimitService extends AbstractLimitService {
             String key = LIMIT_TAG + deduplicationSingleKey(service, taskInfo, receiver);
             String scoreValue = String.valueOf(IdUtil.getSnowflake().nextId());
             String score = String.valueOf(nowTime);
-            if (redisUtils.execLimitLua(redisScript, Collections.singletonList(key), String.valueOf(param.getDeduplicationTime() * 1000), score, String.valueOf(param.getCountNum()), scoreValue)) {
+
+            final Boolean result = redisUtils.execLimitLua(redisScript, Collections.singletonList(key),
+                    String.valueOf(param.getDeduplicationTime() * 1000), score, String.valueOf(param.getCountNum()), scoreValue);
+            if (Boolean.TRUE.equals(result)) {
                 filterReceiver.add(receiver);
             }
 

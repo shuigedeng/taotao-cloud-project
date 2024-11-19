@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 /**
  * 创建个推账号时的元信息
  *
- * @author 3y
+ * @author shuigedeng
  * <p>
  * （在调用个推的api时需要用到部分的参数）
  * <p>

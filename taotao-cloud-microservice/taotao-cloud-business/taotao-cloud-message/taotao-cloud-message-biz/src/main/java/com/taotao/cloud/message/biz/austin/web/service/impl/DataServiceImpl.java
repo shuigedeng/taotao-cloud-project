@@ -4,28 +4,29 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrPool;
-import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.domain.SimpleAnchorInfo;
-import com.java3y.austin.common.enums.AnchorState;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.EnumUtil;
-import com.java3y.austin.service.api.domain.TraceResponse;
-import com.java3y.austin.service.api.service.TraceService;
-import com.java3y.austin.support.dao.MessageTemplateDao;
-import com.java3y.austin.support.dao.SmsRecordDao;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.utils.RedisUtils;
-import com.java3y.austin.support.utils.TaskInfoUtils;
-import com.java3y.austin.web.service.DataService;
-import com.java3y.austin.web.utils.Convert4Amis;
-import com.java3y.austin.web.vo.DataParam;
-import com.java3y.austin.web.vo.amis.EchartsVo;
-import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
-import com.java3y.austin.web.vo.amis.UserTimeLineVo;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.EnumUtil;
+import com.taotao.cloud.message.biz.austin.service.api.domain.TraceResponse;
+import com.taotao.cloud.message.biz.austin.service.api.service.TraceService;
+import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
+import com.taotao.cloud.message.biz.austin.support.dao.SmsRecordDao;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils;
+import com.taotao.cloud.message.biz.austin.web.service.DataService;
+import com.taotao.cloud.message.biz.austin.web.utils.AnchorStateUtils;
+import com.taotao.cloud.message.biz.austin.web.utils.Convert4Amis;
+import com.taotao.cloud.message.biz.austin.web.vo.DataParam;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.SmsTimeLineVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.UserTimeLineVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
 /**
  * 数据链路追踪获取接口 实现类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Service
 public class DataServiceImpl implements DataService {
@@ -70,7 +71,7 @@ public class DataServiceImpl implements DataService {
         }
 
         // 0. 按时间排序
-        List<SimpleAnchorInfo> sortAnchorList = userInfoList.stream().map(s -> JSON.parseObject(s, SimpleAnchorInfo.class)).sorted((o1, o2) -> Math.toIntExact(o1.getTimestamp() - o2.getTimestamp())).collect(Collectors.toList());
+        List<SimpleAnchorInfo> sortAnchorList = userInfoList.stream().map(s -> JSON.parseObject(s, SimpleAnchorInfo.class)).sorted(Comparator.comparing(SimpleAnchorInfo::getTimestamp).reversed()).collect(Collectors.toList());
         return buildUserTimeLineVo(sortAnchorList);
     }
 
@@ -91,7 +92,7 @@ public class DataServiceImpl implements DataService {
          */
         Map<Object, Object> anchorResult = redisUtils.hGetAll(getRealBusinessId(businessId));
 
-        return Convert4Amis.getEchartsVo(anchorResult, optional.get().getName(), businessId);
+        return Convert4Amis.getEchartsVo(anchorResult, optional.get(), businessId);
     }
 
     @Override
@@ -100,10 +101,10 @@ public class DataServiceImpl implements DataService {
         Integer sendDate = Integer.valueOf(DateUtil.format(new Date(dataParam.getDateTime() * 1000L), DatePattern.PURE_DATE_PATTERN));
         List<SmsRecord> smsRecordList = smsRecordDao.findByPhoneAndSendDate(Long.valueOf(dataParam.getReceiver()), sendDate);
         if (CollUtil.isEmpty(smsRecordList)) {
-            return SmsTimeLineVo.builder().items(Arrays.asList(SmsTimeLineVo.ItemsVO.builder().build())).build();
+            return SmsTimeLineVo.builder().items(Collections.singletonList(SmsTimeLineVo.ItemsVO.builder().build())).build();
         }
 
-        Map<String, List<SmsRecord>> maps = smsRecordList.stream().collect(Collectors.groupingBy((o) -> o.getPhone() + o.getSeriesId()));
+        Map<String, List<SmsRecord>> maps = smsRecordList.stream().collect(Collectors.groupingBy(o -> o.getPhone() + o.getSeriesId()));
         return Convert4Amis.getSmsTimeLineVo(maps);
     }
 
@@ -151,12 +152,13 @@ public class DataServiceImpl implements DataService {
                     sb.append(StrPool.CRLF);
                 }
                 String startTime = DateUtil.format(new Date(simpleAnchorInfo.getTimestamp()), DatePattern.NORM_DATETIME_PATTERN);
-                String stateDescription = EnumUtil.getDescriptionByCode(simpleAnchorInfo.getState(), AnchorState.class);
+                String stateDescription = AnchorStateUtils.getDescriptionByState(messageTemplate.getSendChannel(), simpleAnchorInfo.getState());
+
                 sb.append(startTime).append(StrPool.C_COLON).append(stateDescription).append("==>");
             }
 
             for (String detail : sb.toString().split(StrPool.CRLF)) {
-                if (StrUtil.isNotBlank(detail)) {
+                if (CharSequenceUtil.isNotBlank(detail)) {
                     UserTimeLineVo.ItemsVO itemsVO = UserTimeLineVo.ItemsVO.builder()
                             .businessId(entry.getKey())
                             .sendType(EnumUtil.getEnumByCode(messageTemplate.getSendChannel(), ChannelType.class).getDescription())

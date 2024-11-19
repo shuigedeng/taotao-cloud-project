@@ -3,20 +3,20 @@ package com.taotao.cloud.message.biz.austin.api.impl.action.recall;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.service.api.impl.domain.RecallTaskModel;
-import com.java3y.austin.support.mq.SendMqService;
-import com.java3y.austin.support.pipeline.BusinessProcess;
-import com.java3y.austin.support.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.pipeline.BusinessProcess;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.service.api.impl.domain.RecallTaskModel;
+import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 将撤回消息发送到MQ
  */
 @Slf4j
@@ -37,7 +37,7 @@ public class RecallMqAction implements BusinessProcess<RecallTaskModel> {
     public void process(ProcessContext<RecallTaskModel> context) {
         RecallTaskInfo recallTaskInfo = context.getProcessModel().getRecallTaskInfo();
         try {
-            String message = JSON.toJSONString(recallTaskInfo, new SerializerFeature[]{SerializerFeature.WriteClassName});
+            String message = JSON.toJSONString(recallTaskInfo, SerializerFeature.WriteClassName);
             sendMqService.send(austinRecall, message, tagId);
         } catch (Exception e) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));

@@ -6,17 +6,15 @@ import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaRedisBetterConfigImpl;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AccessTokenPrefixConstant;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.dto.account.WeChatMiniProgramAccount;
-import com.java3y.austin.common.dto.account.WeChatOfficialAccount;
-import com.java3y.austin.common.dto.account.sms.SmsAccount;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.support.dao.ChannelAccountDao;
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatMiniProgramAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatOfficialAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.account.sms.SmsAccount;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.support.dao.ChannelAccountDao;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.redis.RedisTemplateWxRedisOps;
-
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpRedisConfigImpl;
@@ -33,7 +31,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * 获取账号信息工具类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Slf4j
 @Configuration
@@ -47,12 +45,12 @@ public class AccountUtils {
     /**
      * 消息的小程序/微信服务号账号
      */
-    private ConcurrentMap<ChannelAccount, WxMpService> officialAccountServiceMap = new ConcurrentHashMap<>();
-    private ConcurrentMap<ChannelAccount, WxMaService> miniProgramServiceMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<ChannelAccount, WxMpService> officialAccountServiceMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<ChannelAccount, WxMaService> miniProgramServiceMap = new ConcurrentHashMap<>();
 
     @Bean
     public RedisTemplateWxRedisOps redisTemplateWxRedisOps() {
-        return new RedisTemplateWxRedisOps(redisTemplate);
+        return new RedisTemplateWxRedisOps(this.redisTemplate);
     }
 
     /**
@@ -121,7 +119,7 @@ public class AccountUtils {
      */
     public WxMpService initOfficialAccountService(WeChatOfficialAccount officialAccount) {
         WxMpService wxMpService = new WxMpServiceImpl();
-        WxMpRedisConfigImpl config = new WxMpRedisConfigImpl(redisTemplateWxRedisOps(), AccessTokenPrefixConstant.OFFICIAL_ACCOUNT_ACCESS_TOKEN_PREFIX);
+        WxMpRedisConfigImpl config = new WxMpRedisConfigImpl(redisTemplateWxRedisOps(), ChannelType.OFFICIAL_ACCOUNT.getAccessTokenPrefix());
         config.setAppId(officialAccount.getAppId());
         config.setSecret(officialAccount.getSecret());
         config.setToken(officialAccount.getToken());
@@ -138,7 +136,7 @@ public class AccountUtils {
      */
     private WxMaService initMiniProgramService(WeChatMiniProgramAccount miniProgramAccount) {
         WxMaService wxMaService = new WxMaServiceImpl();
-        WxMaRedisBetterConfigImpl config = new WxMaRedisBetterConfigImpl(redisTemplateWxRedisOps(), AccessTokenPrefixConstant.MINI_PROGRAM_TOKEN_PREFIX);
+        WxMaRedisBetterConfigImpl config = new WxMaRedisBetterConfigImpl(redisTemplateWxRedisOps(), ChannelType.MINI_PROGRAM.getAccessTokenPrefix());
         config.setAppid(miniProgramAccount.getAppId());
         config.setSecret(miniProgramAccount.getAppSecret());
         config.useStableAccessToken(true);

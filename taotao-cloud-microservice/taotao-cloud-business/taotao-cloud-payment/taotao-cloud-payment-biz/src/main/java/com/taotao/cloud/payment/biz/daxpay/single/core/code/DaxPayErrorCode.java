@@ -1,77 +1,77 @@
 package com.taotao.cloud.payment.biz.daxpay.single.core.code;
 
 /**
- * 错误码
- *
+ * 公共错误码
  * @author xxm
- * @since 2020/12/7
+ * @since 2024/6/17
  */
 public interface DaxPayErrorCode {
+    /** 未归类的错误 */
+    int UNCLASSIFIED_ERROR = 20000;
 
-    /**
-     * 支付失败
-     */
-    int PAY_FAILURE = 20000;
+    /** 不存在的支付通道 */
+    int CHANNEL_NOT_EXIST = 20011;
 
-    /**
-     * 支付金额异常
-     */
-    int PAYMENT_AMOUNT_ABNORMAL = 28100;
+    /** 不存在的支付方式 */
+    int METHOD_NOT_EXIST = 20012;
 
-    /**
-     * 支付记录不存在
-     */
-    int PAYMENT_RECORD_NOT_EXISTED = 28101;
+    /** 不存在的状态 */
+    int STATUS_NOT_EXIST = 20013;
 
-    /**
-     * 支付在进行中
-     */
-    int PAYMENT_IS_PROCESSING = 28102;
+    /** 支付通道未启用 */
+    int CHANNEL_NOT_ENABLE = 20021;
 
-    /**
-     * 支付已经存在
-     */
-    int PAYMENT_HAS_EXISTED = 28104;
+    /** 支付方式未启用 */
+    int METHOD_NOT_ENABLE = 20022;
 
-    /**
-     * 支付手动取消
-     */
-    int PAYMENT_CANCEL = 28105;
+    /** 配置未启用 */
+    int CONFIG_NOT_ENABLE = 20023;
 
-    /**
-     * 不支持的支付方式
-     */
-    int PAYMENT_METHOD_UNSUPPORT = 28106;
-    /**
-     * 钱包已存在
-     */
-    int WALLET_ALREADY_EXISTS = 28814;
+    /** 配置错误 */
+    int CONFIG_ERROR = 20024;
 
-    /**
-     * 钱包不存在
-     */
-    int WALLET_NOT_EXISTS = 28815;
+    /** 配置不存在 */
+    int CONFIG_NOT_EXIST = 20025;
 
-    /**
-     * 钱包已被禁用
-     */
-    int WALLET_BANNED = 28816;
+    /** 不支持该能力 */
+    int UNSUPPORTED_ABILITY = 20030;
 
-    /**
-     * 钱包余额不足
-     */
-    int WALLET_BALANCE_NOT_ENOUGH = 28817;
+    /** 交易不存在 */
+    int TRADE_NOT_EXIST = 20041;
 
-    /**
-     * wallet 信息不存在
-     */
-    int WALLET_INFO_NOT_EXISTS = 28819;
+    /** 交易已关闭 */
+    int TRADE_CLOSED = 20042;
 
-    /**
-     * 钱包日志异常(类型不正确，或者充值金额小于0等场景)
-     */
-    int WALLET_LOG_ERROR = 28827;
+    /** 交易处理中, 请勿重复操作 */
+    int TRADE_PROCESSING = 20043;
 
+    /** 交易状态错误 */
+    int TRADE_STATUS_ERROR = 20044;
 
+    /** 交易失败 */
+    int TRADE_FAIL = 20045;
 
+    /** 验签失败 */
+    int VERIFY_SIGN_FAILED = 20052;
+
+    /** 金额超过限额 */
+    int AMOUNT_EXCEED_LIMIT = 20060;
+
+    /** 对账失败 */
+    int RECONCILE_FAIL = 20071;
+
+    /** 操作失败 */
+    int OPERATION_FAIL = 20080;
+
+    /** 操作处理中, 请勿重复操作 */
+    int OPERATION_PROCESSING = 20081;
+
+    /** 不支持的操作 */
+    int OPERATION_UNSUPPORTED = 20082;
+
+    /** 数据错误 */
+    int DATA_ERROR = 20091;
+
+    /** 未知异常，系统无法处理 */
+    int SYSTEM_UNKNOWN_ERROR = 30000;
 }

@@ -1,4 +1,4 @@
-package com.taotao.cloud.realtime.warehouse.warehousev2.flink.udf;
+package org.bigdatatechcir.warehousev2.flink.udf;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

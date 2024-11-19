@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.dao;
 
 
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 渠道账号信息 Dao
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface ChannelAccountDao extends JpaRepository<ChannelAccount, Long> {
 

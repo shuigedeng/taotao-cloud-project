@@ -59,7 +59,7 @@ dependencies {
     implementation 'org.apache.flink:flink-cep:1.20.0'
     implementation "org.apache.flink:flink-csv:1.20.0"
     implementation 'org.apache.flink:flink-parquet:1.20.0'
-    implementation 'org.apache.parquet:parquet-avro:1.14.1'
+    implementation 'org.apache.parquet:parquet-avro:1.14.4'
     implementation 'org.apache.flink:flink-avro:1.20.0'
     implementation 'org.apache.flink:flink-json:1.20.0'
     implementation 'org.apache.flink:flink-format-common:1.20.0'

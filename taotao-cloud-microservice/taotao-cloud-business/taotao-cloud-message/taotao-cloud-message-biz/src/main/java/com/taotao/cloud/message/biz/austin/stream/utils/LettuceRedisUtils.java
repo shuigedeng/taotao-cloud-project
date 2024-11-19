@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.stream.utils;
 
-import com.java3y.austin.stream.callback.RedisPipelineCallBack;
-import com.java3y.austin.stream.constants.AustinFlinkConstant;
+import com.taotao.cloud.message.biz.austin.stream.callback.RedisPipelineCallBack;
+import com.taotao.cloud.message.biz.austin.stream.constants.AustinFlinkConstant;
 import io.lettuce.core.LettuceFutures;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author 3y
- * @since 2022/2/22
+ * @author shuigedeng
+ * @date 2022/2/22
  * 无Spring环境下使用Redis，基于Lettuce封装
  */
 public class LettuceRedisUtils {
@@ -23,29 +23,32 @@ public class LettuceRedisUtils {
     /**
      * 初始化 redisClient
      */
-    private static RedisClient redisClient;
+    private static final RedisClient REDIS_CLIENT;
 
     static {
         RedisURI redisUri = RedisURI.Builder.redis(AustinFlinkConstant.REDIS_IP)
-                .withPort(Integer.valueOf(AustinFlinkConstant.REDIS_PORT))
+                .withPort(Integer.parseInt(AustinFlinkConstant.REDIS_PORT))
                 .withPassword(AustinFlinkConstant.REDIS_PASSWORD.toCharArray())
                 .build();
-        redisClient = RedisClient.create(redisUri);
+        REDIS_CLIENT = RedisClient.create(redisUri);
     }
 
+    private LettuceRedisUtils() {
+
+    }
 
     /**
      * 封装pipeline操作
      */
     public static void pipeline(RedisPipelineCallBack pipelineCallBack) {
-        StatefulRedisConnection<byte[], byte[]> connect = redisClient.connect(new ByteArrayCodec());
+        StatefulRedisConnection<byte[], byte[]> connect = REDIS_CLIENT.connect(new ByteArrayCodec());
         RedisAsyncCommands<byte[], byte[]> commands = connect.async();
 
         List<RedisFuture<?>> futures = pipelineCallBack.invoke(commands);
 
         commands.flushCommands();
         LettuceFutures.awaitAll(10, TimeUnit.SECONDS,
-                futures.toArray(new RedisFuture[futures.size()]));
+                futures.toArray(new RedisFuture[0]));
         connect.close();
     }
 

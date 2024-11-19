@@ -2,21 +2,21 @@ package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.text.StrPool;
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.RateLimiter;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.EmailContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.enums.RateLimitStrategy;
-import com.java3y.austin.handler.flowcontrol.FlowControlParam;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.utils.AccountUtils;
-import com.java3y.austin.support.utils.AustinFileUtils;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.model.EmailContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
+import com.taotao.cloud.message.biz.austin.handler.flowcontrol.FlowControlParam;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.AustinFileUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,11 @@ import java.util.List;
 /**
  * 邮件发送处理
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Component
 @Slf4j
-public class EmailHandler extends BaseHandler implements Handler {
+public class EmailHandler extends BaseHandler{
 
     @Autowired
     private AccountUtils accountUtils;
@@ -45,7 +45,7 @@ public class EmailHandler extends BaseHandler implements Handler {
         channelCode = ChannelType.EMAIL.getCode();
 
         // 按照请求限流，默认单机 3 qps （具体数值配置在apollo动态调整)
-        Double rateInitValue = Double.valueOf(3);
+        double rateInitValue = 3.0;
         flowControlParam = FlowControlParam.builder().rateInitValue(rateInitValue)
                 .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
                 .rateLimiter(RateLimiter.create(rateInitValue)).build();
@@ -57,9 +57,14 @@ public class EmailHandler extends BaseHandler implements Handler {
         EmailContentModel emailContentModel = (EmailContentModel) taskInfo.getContentModel();
         MailAccount account = getAccountConfig(taskInfo.getSendAccount());
         try {
-            List<File> files = StrUtil.isNotBlank(emailContentModel.getUrl()) ? AustinFileUtils.getRemoteUrl2File(dataPath, StrUtil.split(emailContentModel.getUrl(), StrUtil.COMMA)) : null;
-            String result = CollUtil.isEmpty(files) ? MailUtil.send(account, taskInfo.getReceiver(), emailContentModel.getTitle(), emailContentModel.getContent(), true) :
-                    MailUtil.send(account, taskInfo.getReceiver(), emailContentModel.getTitle(), emailContentModel.getContent(), true, files.toArray(new File[files.size()]));
+            List<File> files = CharSequenceUtil.isNotBlank(emailContentModel.getUrl()) ? AustinFileUtils.getRemoteUrl2File(dataPath, CharSequenceUtil.split(emailContentModel.getUrl(), StrPool.COMMA)) : null;
+            if (CollUtil.isEmpty(files)) {
+                MailUtil.send(account, taskInfo.getReceiver(), emailContentModel.getTitle(), emailContentModel.getContent(), true);
+            } else {
+                MailUtil.send(account, taskInfo.getReceiver(), emailContentModel.getTitle(), emailContentModel.getContent(), true, files.toArray(new File[0]));
+            }
+
+
         } catch (Exception e) {
             log.error("EmailHandler#handler fail!{},params:{}", Throwables.getStackTraceAsString(e), taskInfo);
             return false;
@@ -85,7 +90,10 @@ public class EmailHandler extends BaseHandler implements Handler {
         return account;
     }
 
-
+    /**
+     * 邮箱 api 不支持撤回消息
+     * @param recallTaskInfo
+     */
     @Override
     public void recall(RecallTaskInfo recallTaskInfo) {
 

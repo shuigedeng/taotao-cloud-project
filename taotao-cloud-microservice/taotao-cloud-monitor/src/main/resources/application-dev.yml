@@ -76,7 +76,7 @@ redisson:
   dataValidTime: 1800000
   single_server_config:
     #服务器地址,必填ip:port
-    address: "192.168.218.2:6379"
+    address: "127.0.0.1:6379"
     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_minimum_idle_size: 1
     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
@@ -96,11 +96,11 @@ arthas:
   # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
   telnetPort: -1
   httpPort: -1
-  # 192.168.218.2只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
   ip: 0.0.0.0
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://192.168.218.2:7777/ws
+  tunnel-server: ws://127.0.0.1:7777/ws
 
 spring:
   config:
@@ -163,7 +163,7 @@ spring:
       password: 123456
   data:
     redis:
-      host: 192.168.218.2
+      host: 127.0.0.1
       port: 6379
       #sentinel:
       #  master:
@@ -172,7 +172,7 @@ spring:
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
       connect-timeout: 60000
       #cluster:
-      #  nodes: 192.168.218.2:6381,192.168.218.2:6382,192.168.218.2:6383,192.168.218.2:6384,192.168.218.2:6385,192.168.218.2:6386
+      #  nodes: 127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385,127.0.0.1:6386
       #  max-redirects: 3
       client-type: lettuce
       lettuce:
@@ -202,7 +202,7 @@ spring:
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://192.168.218.2:6379"
+            address: "redis://127.0.0.1:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -226,7 +226,7 @@ spring:
           # 配置看门狗的默认超时时间为30s，这里改为 10s
           lockWatchdogTimeout: 10000
   kafka:
-    bootstrap-servers: 192.168.218.2:9092
+    bootstrap-servers: 127.0.0.1:9092
     producer:
       retries: 1
       batch-size: 16384

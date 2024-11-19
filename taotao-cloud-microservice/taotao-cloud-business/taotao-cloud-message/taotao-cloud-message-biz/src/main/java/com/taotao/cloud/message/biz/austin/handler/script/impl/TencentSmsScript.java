@@ -6,12 +6,12 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.dto.account.sms.TencentSmsAccount;
-import com.java3y.austin.common.enums.SmsStatus;
-import com.java3y.austin.handler.domain.sms.SmsParam;
-import com.java3y.austin.handler.script.SmsScript;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.dto.account.sms.TencentSmsAccount;
+import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
+import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author 3y
- * @since 2021/11/6
+ * @author shuigedeng
+ * @date 2021/11/6
  * 1. 发送短信接入文档：https://cloud.tencent.com/document/api/382/55981
  * 2. 推荐直接使用SDK调用
  * 3. 推荐使用API Explorer 生成代码
@@ -54,7 +54,7 @@ public class TencentSmsScript implements SmsScript {
             return assembleSendSmsRecord(smsParam, response, tencentSmsAccount);
         } catch (Exception e) {
             log.error("TencentSmsScript#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -68,7 +68,7 @@ public class TencentSmsScript implements SmsScript {
             return assemblePullSmsRecord(account, resp);
         } catch (Exception e) {
             log.error("TencentSmsReceipt#pull fail!{}", Throwables.getStackTraceAsString(e));
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -81,11 +81,12 @@ public class TencentSmsScript implements SmsScript {
      * @return
      */
     private List<SmsRecord> assembleSendSmsRecord(SmsParam smsParam, SendSmsResponse response, TencentSmsAccount tencentSmsAccount) {
-        if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getSendStatusSet())) {
-            return null;
-        }
 
         List<SmsRecord> smsRecordList = new ArrayList<>();
+        if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getSendStatusSet())) {
+            return smsRecordList;
+        }
+
         for (SendStatus sendStatus : response.getSendStatusSet()) {
 
             // 腾讯返回的电话号有前缀，这里取巧直接翻转获取手机号
@@ -139,8 +140,7 @@ public class TencentSmsScript implements SmsScript {
         httpProfile.setEndpoint(account.getUrl());
         ClientProfile clientProfile = new ClientProfile();
         clientProfile.setHttpProfile(httpProfile);
-        SmsClient client = new SmsClient(cred, account.getRegion(), clientProfile);
-        return client;
+        return new SmsClient(cred, account.getRegion(), clientProfile);
     }
 
     /**
@@ -152,7 +152,7 @@ public class TencentSmsScript implements SmsScript {
      */
     private List<SmsRecord> assemblePullSmsRecord(TencentSmsAccount account, PullSmsSendStatusResponse resp) {
         List<SmsRecord> smsRecordList = new ArrayList<>();
-        if (Objects.nonNull(resp) && Objects.nonNull(resp.getPullSmsSendStatusSet()) && resp.getPullSmsSendStatusSet().length > 0) {
+        if (Objects.nonNull(resp) && Objects.nonNull(resp.getPullSmsSendStatusSet())) {
             for (PullSmsSendStatus pullSmsSendStatus : resp.getPullSmsSendStatusSet()) {
                 SmsRecord smsRecord = SmsRecord.builder()
                         .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))

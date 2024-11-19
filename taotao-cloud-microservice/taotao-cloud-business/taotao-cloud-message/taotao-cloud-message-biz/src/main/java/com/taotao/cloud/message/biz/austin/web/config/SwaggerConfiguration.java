@@ -15,7 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 /**
  * swagger配置类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Component
 @EnableOpenApi
@@ -38,7 +38,7 @@ public class SwaggerConfiguration {
                 //配置文档的元信息
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.java3y.austin.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.taotao.cloud.message.biz.austin.web.controller"))
                 //正则匹配请求路径，并分配到当前项目组
                 //.paths(PathSelectors.ant("/api/**"))
                 .build();

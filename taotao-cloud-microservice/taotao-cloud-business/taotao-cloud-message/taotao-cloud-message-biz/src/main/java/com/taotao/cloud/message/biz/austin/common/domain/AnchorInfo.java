@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 埋点信息
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder
@@ -36,7 +36,7 @@ public class AnchorInfo {
     /**
      * 具体点位
      *
-     * @see com.java3y.austin.common.enums.AnchorState
+     * @see com.taotao.cloud.message.biz.austin.common.enums.AnchorState
      */
     private int state;
 

@@ -12,7 +12,7 @@ import lombok.Data;
  * @version v1.0.0
  * @DATE 2022/11/24-15:58
  * @Description
- * @see com.java3y.austin.handler.domain.sms austin
+ * @see com.taotao.cloud.message.biz.austin.handler.domain.sms austin
  */
 @Data
 @Builder

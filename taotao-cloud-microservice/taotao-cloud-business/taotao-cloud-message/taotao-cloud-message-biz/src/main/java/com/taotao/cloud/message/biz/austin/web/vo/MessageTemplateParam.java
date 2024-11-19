@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 /**
  * 消息模板管理 请求参数
  *
- * @author 3y
- * @since 2022/1/22
+ * @author shuigedeng
+ * @date 2022/1/22
  */
 @Data
 @Builder

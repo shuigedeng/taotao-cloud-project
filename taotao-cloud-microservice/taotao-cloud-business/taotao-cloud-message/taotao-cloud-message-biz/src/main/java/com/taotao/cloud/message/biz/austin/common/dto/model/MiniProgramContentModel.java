@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Map;
 
 /**
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder
@@ -18,7 +18,7 @@ public class MiniProgramContentModel extends ContentModel {
     /**
      * 模板消息发送的数据
      */
-    Map<String, String> miniProgramParam;
+    private Map<String, String> miniProgramParam;
 
     /**
      * 模板Id

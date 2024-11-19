@@ -1,23 +1,22 @@
 package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.StrPool;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.account.DingDingRobotAccount;
-import com.java3y.austin.common.dto.model.DingDingRobotContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.SendMessageType;
-import com.java3y.austin.handler.domain.dingding.DingDingRobotParam;
-import com.java3y.austin.handler.domain.dingding.DingDingRobotResult;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.account.DingDingRobotAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.model.DingDingRobotContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.SendMessageType;
+import com.taotao.cloud.message.biz.austin.handler.domain.dingding.DingDingRobotParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.dingding.DingDingRobotResult;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +25,18 @@ import org.springframework.stereotype.Service;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 钉钉消息自定义机器人 消息处理器
- *
- * @author 3y
+ * https://open.dingtalk.com/document/group/custom-robot-access
+ * @author shuigedeng
  */
 @Slf4j
 @Service
-public class DingDingRobotHandler extends BaseHandler implements Handler {
+public class DingDingRobotHandler extends BaseHandler{
 
     @Autowired
     private AccountUtils accountUtils;
@@ -124,11 +124,11 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
     private String assembleSign(long currentTimeMillis, String secret) {
         String sign = "";
         try {
-            String stringToSign = currentTimeMillis + String.valueOf(StrUtil.C_LF) + secret;
+            String stringToSign = currentTimeMillis + String.valueOf(StrPool.C_LF) + secret;
             Mac mac = Mac.getInstance(CommonConstant.HMAC_SHA256_ENCRYPTION_ALGO);
-            mac.init(new SecretKeySpec(secret.getBytes(CommonConstant.CHARSET_NAME), CommonConstant.HMAC_SHA256_ENCRYPTION_ALGO));
-            byte[] signData = mac.doFinal(stringToSign.getBytes(CommonConstant.CHARSET_NAME));
-            sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)), CommonConstant.CHARSET_NAME);
+            mac.init(new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), CommonConstant.HMAC_SHA256_ENCRYPTION_ALGO));
+            byte[] signData = mac.doFinal(stringToSign.getBytes(StandardCharsets.UTF_8));
+            sign = URLEncoder.encode(new String(Base64.encodeBase64(signData), StandardCharsets.UTF_8), CommonConstant.CHARSET_UTF_8);
         } catch (Exception e) {
             log.error("DingDingHandler#assembleSign fail!:{}", Throwables.getStackTraceAsString(e));
         }
@@ -136,6 +136,11 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
     }
 
 
+    /**
+     * 钉钉自定义机器人 不支持撤回消息
+     * https://open.dingtalk.com/document/group/custom-robot-access
+     * @param recallTaskInfo
+     */
     @Override
     public void recall(RecallTaskInfo recallTaskInfo) {
 

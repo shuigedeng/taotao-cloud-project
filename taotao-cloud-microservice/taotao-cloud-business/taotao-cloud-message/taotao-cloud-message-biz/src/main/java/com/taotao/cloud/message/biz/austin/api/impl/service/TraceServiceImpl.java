@@ -1,14 +1,15 @@
 package com.taotao.cloud.message.biz.austin.api.impl.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.constant.AustinConstant;
-import com.java3y.austin.common.domain.SimpleAnchorInfo;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.service.api.domain.TraceResponse;
-import com.java3y.austin.service.api.service.TraceService;
-import com.java3y.austin.support.utils.RedisUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.AustinConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.service.api.domain.TraceResponse;
+import com.taotao.cloud.message.biz.austin.service.api.service.TraceService;
+import com.taotao.cloud.message.biz.austin.support.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,10 @@ public class TraceServiceImpl implements TraceService {
 
     @Override
     public TraceResponse traceByMessageId(String messageId) {
-        if (StrUtil.isBlank(messageId)) {
+        if (CharSequenceUtil.isBlank(messageId)) {
             return new TraceResponse(RespStatusEnum.CLIENT_BAD_PARAMETERS.getCode(), RespStatusEnum.CLIENT_BAD_PARAMETERS.getMsg(), null);
         }
-        String redisMessageKey = StrUtil.join(StrUtil.COLON, AustinConstant.CACHE_KEY_PREFIX, AustinConstant.MESSAGE_ID, messageId);
+        String redisMessageKey = CharSequenceUtil.join(StrUtil.COLON, AustinConstant.CACHE_KEY_PREFIX, AustinConstant.MESSAGE_ID, messageId);
         List<String> messageList = redisUtils.lRange(redisMessageKey, 0, -1);
         if (CollUtil.isEmpty(messageList)) {
             return new TraceResponse(RespStatusEnum.FAIL.getCode(), RespStatusEnum.FAIL.getMsg(), null);

@@ -12,7 +12,7 @@ import java.util.Map;
  * 消息参数
  * single
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Accessors(chain = true)

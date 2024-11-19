@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.cron.handler.RefreshDingDingAccessTokenHandler;
-import com.java3y.austin.cron.handler.RefreshGeTuiAccessTokenHandler;
-import com.java3y.austin.web.annotation.AustinAspect;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.cron.handler.RefreshDingDingAccessTokenHandler;
+import com.taotao.cloud.message.biz.austin.cron.handler.RefreshGeTuiAccessTokenHandler;
+import com.taotao.cloud.message.biz.austin.web.annotation.AustinAspect;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * @author 3y
+ * @author shuigedeng
  */
 
 @AustinAspect
@@ -28,7 +28,7 @@ public class RefreshTokenController {
     private RefreshGeTuiAccessTokenHandler refreshGeTuiAccessTokenHandler;
 
     /**
-     * 按照不同的渠道刷新对应的Token，channelType取值来源com.java3y.austin.common.enums.ChannelType
+     * 按照不同的渠道刷新对应的Token，channelType取值来源com.taotao.cloud.message.biz.austin.common.enums.ChannelType
      *
      * @param channelType
      * @return

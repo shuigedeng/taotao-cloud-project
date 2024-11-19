@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 对于每种消息类型的 短信配置
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder

@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * 业务服务
+ * 业务实现层
  * @author xxm
- * @since 2023/12/15
+ * @since 2024/5/23
  */
 @ConfigurationPropertiesScan
 @MapperScan(annotationClass = Mapper.class)

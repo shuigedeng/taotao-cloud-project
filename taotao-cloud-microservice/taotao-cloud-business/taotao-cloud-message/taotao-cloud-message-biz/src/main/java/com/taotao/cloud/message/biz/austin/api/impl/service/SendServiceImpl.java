@@ -1,17 +1,19 @@
 package com.taotao.cloud.message.biz.austin.api.impl.service;
 
 import cn.monitor4all.logRecord.annotation.OperationLog;
-import com.taotao.cloud.message.biz.austin.api.domain.SendRequest;
-import com.taotao.cloud.message.biz.austin.api.domain.SendResponse;
-import com.taotao.cloud.message.biz.austin.api.impl.domain.SendTaskModel;
-import com.taotao.cloud.message.biz.austin.api.service.SendService;
 import com.taotao.cloud.message.biz.austin.common.domain.SimpleTaskInfo;
 import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessController;
 import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
-import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessContext;
-import com.taotao.cloud.message.biz.austin.support.pipeline.ProcessController;
+import com.taotao.cloud.message.biz.austin.service.api.domain.BatchSendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendResponse;
+import com.taotao.cloud.message.biz.austin.service.api.impl.domain.SendTaskModel;
+import com.taotao.cloud.message.biz.austin.service.api.service.SendService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -20,12 +22,13 @@ import java.util.List;
 /**
  * 发送接口
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Service
 public class SendServiceImpl implements SendService {
 
     @Autowired
+    @Qualifier("apiProcessController")
     private ProcessController processController;
 
     @Override

@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.support.utils;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -22,15 +22,13 @@ import java.util.Properties;
 @Slf4j
 @Component
 public class NacosUtils {
+    private final Properties properties = new Properties();
     @NacosInjected
     private ConfigService configService;
-
     @Value("${nacos.group}")
     private String nacosGroup;
     @Value("${nacos.data-id}")
     private String nacosDataId;
-
-    private final Properties properties = new Properties();
 
     public String getProperty(String key, String defaultValue) {
         try {
@@ -42,7 +40,7 @@ public class NacosUtils {
             log.error("Nacos error:{}", ExceptionUtils.getStackTrace(e));
         }
         String property = properties.getProperty(key);
-        return StrUtil.isBlank(property) ? defaultValue : property;
+        return CharSequenceUtil.isBlank(property) ? defaultValue : property;
     }
 
     private String getContext() {

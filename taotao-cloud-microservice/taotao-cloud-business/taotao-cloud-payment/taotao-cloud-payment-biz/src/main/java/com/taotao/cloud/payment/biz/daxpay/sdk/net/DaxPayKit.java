@@ -1,10 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.net;
 
-import cn.bootx.platform.daxpay.sdk.code.SignTypeEnum;
-import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
-import cn.bootx.platform.daxpay.sdk.util.PaySignUtil;
+import cn.daxpay.single.sdk.code.SignTypeEnum;
+import cn.daxpay.single.sdk.response.DaxPayResult;
+import cn.daxpay.single.sdk.util.JsonUtil;
+import cn.daxpay.single.sdk.util.PaySignUtil;
 import cn.hutool.http.*;
-import cn.hutool.json.JSONUtil;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +32,7 @@ public class DaxPayKit {
      * @return DaxPayResult 响应类
      * @param <T> 业务对象
      */
-    public <T extends DaxPayResponseModel> DaxPayResult<T> execute(DaxPayRequest<T> request){
+    public <T> DaxPayResult<T> execute(DaxPayRequest<T> request){
         return execute(request, true);
     }
 
@@ -43,31 +43,38 @@ public class DaxPayKit {
      * @return DaxPayResult 响应类
      * @param <T> 业务对象
      */
-    public <T extends DaxPayResponseModel> DaxPayResult<T> execute(DaxPayRequest<T> request, boolean sign){
+    public <T> DaxPayResult<T> execute(DaxPayRequest<T> request, boolean sign){
+        // 判断是否需要填充和应用号
+        if (Objects.isNull(request.getAppId())){
+            request.setAppId(config.getAppId());
+        }
         // 判断是是否进行签名
         if (sign) {
-            if (Objects.equals(SignTypeEnum.MD5, config.getSignType())){
-                String md5Sign = PaySignUtil.md5Sign(request, config.getSignSecret());
-                request.setSign(md5Sign);
-            } else {
-                String hmacSha256Sign = PaySignUtil.hmacSha256Sign(request, config.getSignSecret());
-                request.setSign(hmacSha256Sign);
+            if (Objects.equals(SignTypeEnum.MD5,config.getSignType())){
+                request.setSign(PaySignUtil.md5Sign(request, config.getSignSecret()));
+            } else if (Objects.equals(SignTypeEnum.HMAC_SHA256,config.getSignType())){
+                request.setSign(PaySignUtil.hmacSha256Sign(request, config.getSignSecret()));
+            } else if (Objects.equals(SignTypeEnum.SM3,config.getSignType())){
+                request.setSign(PaySignUtil.sm3Sign(request, config.getSignSecret()));
             }
         }
-        String data = JSONUtil.toJsonStr(request);
+        // 参数序列化
+        String data = JsonUtil.toJsonStr(request);
         log.debug("请求参数:{}", data);
+
         String path = config.getServiceUrl() + request.path();
-        HttpResponse execute = HttpUtil.createPost(path)
+        String body;
+        try (HttpResponse execute = HttpUtil.createPost(path)
                 .body(data, ContentType.JSON.getValue())
                 .timeout(config.getReqTimeout())
-                .execute();
-        // 响应码只有200 才可以进行支付
-        if (execute.getStatus() != HttpStatus.HTTP_OK){
-            log.error("请求第三方支付平台失败，请排查配置的支付网关地址是否正常");
-            throw new HttpException("请求失败，内部异常");
+                .execute()) {
+            // 响应码只有200 才可以进行支付
+            if (execute.getStatus() != HttpStatus.HTTP_OK) {
+                log.error("请求第支付网关失败，请排查配置的支付网关地址是否正常");
+                throw new HttpException("请求失败，内部异常");
+            }
+            body = execute.body();
         }
-        String body = execute.body();
-
         log.debug("响应参数:{}", body);
         return request.toModel(body);
     }

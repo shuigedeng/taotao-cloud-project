@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.austin.api.service;
 
-import com.java3y.austin.service.api.domain.BatchSendRequest;
-import com.java3y.austin.service.api.domain.SendRequest;
-import com.java3y.austin.service.api.domain.SendResponse;
+import com.taotao.cloud.message.biz.austin.service.api.domain.BatchSendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendResponse;
 
 /**
  * 发送接口
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface SendService {
 

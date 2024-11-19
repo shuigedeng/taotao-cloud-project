@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 发送/撤回接口的参数
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Accessors(chain = true)
@@ -24,7 +24,7 @@ public class SendRequest {
     /**
      * 执行业务类型
      *
-     * @see com.java3y.austin.service.api.enums.BusinessCode
+     * @see com.taotao.cloud.message.biz.austin.service.api.enums.BusinessCode
      * send:发送消息
      * recall:撤回消息
      */

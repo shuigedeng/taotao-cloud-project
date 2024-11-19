@@ -7,7 +7,7 @@ import lombok.ToString;
 /**
  * 去重类型枚举
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Getter
 @ToString

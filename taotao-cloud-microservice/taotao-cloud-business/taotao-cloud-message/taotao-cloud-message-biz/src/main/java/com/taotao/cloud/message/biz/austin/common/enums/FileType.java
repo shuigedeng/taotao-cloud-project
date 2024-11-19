@@ -8,7 +8,7 @@ import lombok.ToString;
 /**
  * 文件类型
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Getter
 @ToString

@@ -1,9 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.pending;
 
+import com.dtp.core.DtpRegistry;
 import com.dtp.core.thread.DtpExecutor;
-import com.java3y.austin.handler.config.HandlerThreadPoolConfig;
-import com.java3y.austin.handler.utils.GroupIdMappingUtils;
-import com.java3y.austin.support.utils.ThreadPoolUtils;
+import com.taotao.cloud.message.biz.austin.handler.config.HandlerThreadPoolConfig;
+import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.ThreadPoolUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,19 +18,16 @@ import java.util.concurrent.ExecutorService;
 /**
  * 存储 每种消息类型 与 TaskPending 的关系
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Component
 public class TaskPendingHolder {
-    @Autowired
-    private ThreadPoolUtils threadPoolUtils;
-
-    private Map<String, ExecutorService> taskPendingHolder = new HashMap<>(32);
-
     /**
      * 获取得到所有的groupId
      */
     private static List<String> groupIds = GroupIdMappingUtils.getAllGroupIds();
+    @Autowired
+    private ThreadPoolUtils threadPoolUtils;
 
     /**
      * 给每个渠道，每种消息类型初始化一个线程池
@@ -44,8 +42,6 @@ public class TaskPendingHolder {
         for (String groupId : groupIds) {
             DtpExecutor executor = HandlerThreadPoolConfig.getExecutor(groupId);
             threadPoolUtils.register(executor);
-
-            taskPendingHolder.put(groupId, executor);
         }
     }
 
@@ -56,7 +52,7 @@ public class TaskPendingHolder {
      * @return
      */
     public ExecutorService route(String groupId) {
-        return taskPendingHolder.get(groupId);
+        return DtpRegistry.getExecutor(HandlerThreadPoolConfig.PRE_FIX + groupId);
     }
 
 

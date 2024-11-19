@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.web.handler;
 
-import com.java3y.austin.common.constant.OfficialAccountParamConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpMessageHandler;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 微信服务号扫码处理器
  */
 @Component("scanHandler")

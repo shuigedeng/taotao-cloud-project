@@ -4,24 +4,21 @@ package com.taotao.cloud.message.biz.austin.api.impl.action.send;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.IdType;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.service.api.impl.domain.SendTaskModel;
-import com.java3y.austin.support.pipeline.BusinessProcess;
-import com.java3y.austin.support.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.IdType;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.pipeline.BusinessProcess;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.service.api.impl.domain.SendTaskModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * <p>
  * 后置参数检查
  */
@@ -29,16 +26,19 @@ import java.util.stream.Collectors;
 @Service
 public class SendAfterCheckAction implements BusinessProcess<SendTaskModel> {
 
+    public static final String PHONE_REGEX_EXP = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[0-9])|(18[0-9])|(19[1,8,9]))\\d{8}$";
+    public static final String EMAIL_REGEX_EXP = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     /**
      * 邮件和手机号正则
      */
-    public static final HashMap<Integer, String> CHANNEL_REGEX_EXP = new HashMap<>();
-    public static final String PHONE_REGEX_EXP = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[0-9])|(18[0-9])|(19[1,8,9]))\\d{8}$";
-    public static final String EMAIL_REGEX_EXP = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    protected static final Map<Integer, String> CHANNEL_REGEX_EXP;
 
     static {
-        CHANNEL_REGEX_EXP.put(IdType.PHONE.getCode(), PHONE_REGEX_EXP);
-        CHANNEL_REGEX_EXP.put(IdType.EMAIL.getCode(), EMAIL_REGEX_EXP);
+        Map<Integer, String> tempMap = new HashMap<>();
+        tempMap.put(IdType.PHONE.getCode(), PHONE_REGEX_EXP);
+        tempMap.put(IdType.EMAIL.getCode(), EMAIL_REGEX_EXP);
+        // 初始化为不可变集合，避免被恶意修改
+        CHANNEL_REGEX_EXP = Collections.unmodifiableMap(tempMap);
     }
 
 
@@ -51,7 +51,6 @@ public class SendAfterCheckAction implements BusinessProcess<SendTaskModel> {
         filterIllegalReceiver(taskInfo);
         if (CollUtil.isEmpty(taskInfo)) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS, "手机号或邮箱不合法, 无有效的发送任务"));
-            return;
         }
 
     }

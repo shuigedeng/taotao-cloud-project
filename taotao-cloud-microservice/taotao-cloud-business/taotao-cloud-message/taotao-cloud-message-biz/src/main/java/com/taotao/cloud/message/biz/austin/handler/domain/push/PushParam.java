@@ -1,14 +1,14 @@
 package com.taotao.cloud.message.biz.austin.handler.domain.push;
 
 
-import com.java3y.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * push的参数
  */
 @NoArgsConstructor

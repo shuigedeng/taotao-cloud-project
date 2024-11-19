@@ -1,25 +1,26 @@
 package com.taotao.cloud.message.biz.austin.api.impl.action.send;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.ReflectUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.model.ContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.service.api.domain.MessageParam;
-import com.java3y.austin.service.api.impl.domain.SendTaskModel;
-import com.java3y.austin.support.dao.MessageTemplateDao;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.pipeline.BusinessProcess;
-import com.java3y.austin.support.pipeline.ProcessContext;
-import com.java3y.austin.support.utils.ContentHolderUtil;
-import com.java3y.austin.support.utils.TaskInfoUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.model.ContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.pipeline.BusinessProcess;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessContext;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.service.api.impl.domain.SendTaskModel;
+import com.taotao.cloud.message.biz.austin.support.dao.MessageTemplateDao;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.utils.ContentHolderUtil;
+import com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,8 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * @author 3y
- * @since 2021/11/22
+ * @author shuigedeng
+ * @date 2021/11/22
  * @description 拼装参数
  */
 @Slf4j
@@ -40,6 +41,42 @@ public class SendAssembleAction implements BusinessProcess<SendTaskModel> {
 
     @Autowired
     private MessageTemplateDao messageTemplateDao;
+
+    /**
+     * 获取 contentModel，替换模板msgContent中占位符信息
+     */
+    private static ContentModel getContentModelValue(MessageTemplate messageTemplate, MessageParam messageParam) {
+
+        // 得到真正的ContentModel 类型
+        Integer sendChannel = messageTemplate.getSendChannel();
+        Class<? extends ContentModel> contentModelClass = ChannelType.getChanelModelClassByCode(sendChannel);
+
+        // 得到模板的 msgContent 和 入参
+        Map<String, String> variables = messageParam.getVariables();
+        JSONObject jsonObject = JSON.parseObject(messageTemplate.getMsgContent());
+
+
+        // 通过反射 组装出 contentModel
+        Field[] fields = ReflectUtil.getFields(contentModelClass);
+        ContentModel contentModel = ReflectUtil.newInstance(contentModelClass);
+        for (Field field : fields) {
+            String originValue = jsonObject.getString(field.getName());
+
+            if (CharSequenceUtil.isNotBlank(originValue)) {
+                String resultValue = ContentHolderUtil.replacePlaceHolder(originValue, variables);
+                Object resultObj = JSONUtil.isJsonObj(resultValue) ? JSONUtil.toBean(resultValue, field.getType()) : resultValue;
+                ReflectUtil.setFieldValue(contentModel, field, resultObj);
+            }
+        }
+
+        // 如果 url 字段存在，则在url拼接对应的埋点参数
+        String url = (String) ReflectUtil.getFieldValue(contentModel, LINK_NAME);
+        if (CharSequenceUtil.isNotBlank(url)) {
+            String resultUrl = TaskInfoUtils.generateUrl(url, messageTemplate.getId(), messageTemplate.getTemplateType());
+            ReflectUtil.setFieldValue(contentModel, LINK_NAME, resultUrl);
+        }
+        return contentModel;
+    }
 
     @Override
     public void process(ProcessContext<SendTaskModel> context) {
@@ -78,7 +115,7 @@ public class SendAssembleAction implements BusinessProcess<SendTaskModel> {
                     .bizId(messageParam.getBizId())
                     .messageTemplateId(messageTemplate.getId())
                     .businessId(TaskInfoUtils.generateBusinessId(messageTemplate.getId(), messageTemplate.getTemplateType()))
-                    .receiver(new HashSet<>(Arrays.asList(messageParam.getReceiver().split(String.valueOf(StrUtil.C_COMMA)))))
+                    .receiver(new HashSet<>(Arrays.asList(messageParam.getReceiver().split(String.valueOf(StrPool.C_COMMA)))))
                     .idType(messageTemplate.getIdType())
                     .sendChannel(messageTemplate.getSendChannel())
                     .templateType(messageTemplate.getTemplateType())
@@ -87,7 +124,7 @@ public class SendAssembleAction implements BusinessProcess<SendTaskModel> {
                     .sendAccount(messageTemplate.getSendAccount())
                     .contentModel(getContentModelValue(messageTemplate, messageParam)).build();
 
-            if (StrUtil.isBlank(taskInfo.getBizId())) {
+            if (CharSequenceUtil.isBlank(taskInfo.getBizId())) {
                 taskInfo.setBizId(taskInfo.getMessageId());
             }
 
@@ -96,42 +133,5 @@ public class SendAssembleAction implements BusinessProcess<SendTaskModel> {
 
         return taskInfoList;
 
-    }
-
-
-    /**
-     * 获取 contentModel，替换模板msgContent中占位符信息
-     */
-    private static ContentModel getContentModelValue(MessageTemplate messageTemplate, MessageParam messageParam) {
-
-        // 得到真正的ContentModel 类型
-        Integer sendChannel = messageTemplate.getSendChannel();
-        Class<? extends ContentModel> contentModelClass = ChannelType.getChanelModelClassByCode(sendChannel);
-
-        // 得到模板的 msgContent 和 入参
-        Map<String, String> variables = messageParam.getVariables();
-        JSONObject jsonObject = JSON.parseObject(messageTemplate.getMsgContent());
-
-
-        // 通过反射 组装出 contentModel
-        Field[] fields = ReflectUtil.getFields(contentModelClass);
-        ContentModel contentModel = ReflectUtil.newInstance(contentModelClass);
-        for (Field field : fields) {
-            String originValue = jsonObject.getString(field.getName());
-
-            if (StrUtil.isNotBlank(originValue)) {
-                String resultValue = ContentHolderUtil.replacePlaceHolder(originValue, variables);
-                Object resultObj = JSONUtil.isJsonObj(resultValue) ? JSONUtil.toBean(resultValue, field.getType()) : resultValue;
-                ReflectUtil.setFieldValue(contentModel, field, resultObj);
-            }
-        }
-
-        // 如果 url 字段存在，则在url拼接对应的埋点参数
-        String url = (String) ReflectUtil.getFieldValue(contentModel, LINK_NAME);
-        if (StrUtil.isNotBlank(url)) {
-            String resultUrl = TaskInfoUtils.generateUrl(url, messageTemplate.getId(), messageTemplate.getTemplateType());
-            ReflectUtil.setFieldValue(contentModel, LINK_NAME, resultUrl);
-        }
-        return contentModel;
     }
 }

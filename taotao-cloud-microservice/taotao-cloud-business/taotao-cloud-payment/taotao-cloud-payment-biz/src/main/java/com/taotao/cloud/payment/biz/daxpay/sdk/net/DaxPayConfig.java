@@ -1,6 +1,7 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.net;
 
-import cn.bootx.platform.daxpay.sdk.code.SignTypeEnum;
+import cn.daxpay.single.sdk.code.SignTypeEnum;
+import cn.hutool.core.util.StrUtil;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,9 +17,12 @@ public class DaxPayConfig {
     /** 服务地址 */
     private String serviceUrl;
 
+    /** 应用号 */
+    private String appId;
+
     /** 签名方式 */
     @Builder.Default
-    private SignTypeEnum signType = SignTypeEnum.MD5;
+    private SignTypeEnum signType = SignTypeEnum.HMAC_SHA256;
 
     /** 签名秘钥 */
     private String signSecret;
@@ -26,4 +30,9 @@ public class DaxPayConfig {
     /** 请求超时时间 */
     @Builder.Default
     private int reqTimeout = 30000;
+
+
+    public String getServiceUrl() {
+        return StrUtil.removeSuffix(serviceUrl, "/");
+    }
 }

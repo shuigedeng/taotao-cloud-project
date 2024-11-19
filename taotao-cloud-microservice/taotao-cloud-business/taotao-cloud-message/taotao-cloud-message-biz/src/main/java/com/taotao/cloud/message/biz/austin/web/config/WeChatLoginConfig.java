@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.austin.web.config;
 
-import com.java3y.austin.common.constant.OfficialAccountParamConstant;
-import com.java3y.austin.common.dto.account.WeChatOfficialAccount;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.WeChatOfficialAccount;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.Data;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpMessageHandler;
@@ -23,7 +23,7 @@ import java.util.Map;
  * 使用微信服务号作为登录的媒介
  * (测试环境 && 开启了配置才使用)
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Profile("test")
 @Configuration("weChatLoginConfig")

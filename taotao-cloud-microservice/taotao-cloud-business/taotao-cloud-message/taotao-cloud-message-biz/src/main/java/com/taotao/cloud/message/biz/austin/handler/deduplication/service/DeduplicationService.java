@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.austin.handler.deduplication.service;
 
 
-import com.java3y.austin.handler.deduplication.DeduplicationParam;
+import com.taotao.cloud.message.biz.austin.handler.deduplication.DeduplicationParam;
 
 /**
  * @author huskey
- * @since 2022/1/18
+ * @date 2022/1/18
  */
 public interface DeduplicationService {
 

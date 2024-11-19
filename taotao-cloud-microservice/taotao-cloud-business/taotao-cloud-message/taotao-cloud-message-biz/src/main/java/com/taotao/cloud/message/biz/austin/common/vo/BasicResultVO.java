@@ -1,10 +1,12 @@
 package com.taotao.cloud.message.biz.austin.common.vo;
 
-import com.java3y.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * @author zzb
@@ -15,7 +17,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public final class BasicResultVO<T> {
+public final class BasicResultVO<T> implements Serializable {
 
     /**
      * 响应状态

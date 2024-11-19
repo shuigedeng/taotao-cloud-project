@@ -1,11 +1,11 @@
 package com.taotao.cloud.message.biz.austin.handler.receipt.stater.impl;
 
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.handler.impl.DingDingWorkNoticeHandler;
-import com.java3y.austin.handler.receipt.stater.ReceiptMessageStater;
-import com.java3y.austin.support.dao.ChannelAccountDao;
-import com.java3y.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.handler.handler.impl.DingDingWorkNoticeHandler;
+import com.taotao.cloud.message.biz.austin.handler.receipt.stater.ReceiptMessageStater;
+import com.taotao.cloud.message.biz.austin.support.dao.ChannelAccountDao;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 拉取 钉钉工作消息的回执 内容 【未完成】
  *
- * @author 3y
+ * @author shuigedeng
  */
 public class DingDingWorkReceiptStaterImpl implements ReceiptMessageStater {
 

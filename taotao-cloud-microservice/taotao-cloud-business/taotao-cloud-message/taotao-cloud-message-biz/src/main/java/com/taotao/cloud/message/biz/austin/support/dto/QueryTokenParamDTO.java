@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 /**
  * 请求token时的参数
  *
- * @author 3y
+ * @author shuigedeng
  * https://docs.getui.com/getui/server/rest_v2/token/
  */
 @NoArgsConstructor

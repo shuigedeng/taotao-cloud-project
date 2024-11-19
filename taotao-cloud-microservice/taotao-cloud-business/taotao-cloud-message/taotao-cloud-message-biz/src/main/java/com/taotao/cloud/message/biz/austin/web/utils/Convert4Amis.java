@@ -4,27 +4,28 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.java3y.austin.common.enums.AnchorState;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.EnumUtil;
-import com.java3y.austin.common.enums.SmsStatus;
-import com.java3y.austin.support.domain.ChannelAccount;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.utils.TaskInfoUtils;
-import com.java3y.austin.web.vo.amis.CommonAmisVo;
-import com.java3y.austin.web.vo.amis.EchartsVo;
-import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
+import com.alipay.api.domain.MerchantMsgTemplateVO;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.EnumUtil;
+import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
+import com.taotao.cloud.message.biz.austin.support.domain.ChannelAccount;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.utils.TaskInfoUtils;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.CommonAmisVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.SmsTimeLineVo;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.subscribemsg.TemplateInfo;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * 【该类的逻辑不用看，没有什么意义】
@@ -32,8 +33,8 @@ import java.util.stream.Collectors;
  * 编写工具类将 List/Object 铺平成 Map 以及相关的格式
  * https://baidu.gitee.io/amis/zh-CN/components/form/index#%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96
  *
- * @author 3y
- * @since 2022/1/23
+ * @author shuigedeng
+ * @date 2022/1/23
  */
 @Slf4j
 public class Convert4Amis {
@@ -56,7 +57,7 @@ public class Convert4Amis {
      * 需要打散的字段(将json字符串打散为一个一个字段返回）
      * (主要是用于回显数据)
      */
-    private static final List<String> FLAT_FIELD_NAME = Arrays.asList("msgContent");
+    private static final List<String> FLAT_FIELD_NAME = Collections.singletonList("msgContent");
 
     /**
      * 需要格式化为jsonArray返回的字段
@@ -116,7 +117,7 @@ public class Convert4Amis {
         for (Field field : fields) {
             if (FLAT_FIELD_NAME.contains(field.getName())) {
                 String fieldValue = (String) ReflectUtil.getFieldValue(obj, field);
-                JSONObject jsonObject = JSONObject.parseObject(fieldValue);
+                JSONObject jsonObject = JSON.parseObject(fieldValue);
                 for (String key : jsonObject.keySet()) {
                     /**
                      * 钉钉OA消息回显
@@ -160,7 +161,7 @@ public class Convert4Amis {
         CommonAmisVo officialAccountParam = null;
         for (WxMpTemplate wxMpTemplate : allPrivateTemplate) {
             if (wxTemplateId.equals(wxMpTemplate.getTemplateId())) {
-                String[] data = wxMpTemplate.getContent().split(StrUtil.LF);
+                String[] data = wxMpTemplate.getContent().split(StrPool.LF);
                 officialAccountParam = CommonAmisVo.builder()
                         .type("input-table")
                         .name("officialAccountParam")
@@ -229,62 +230,57 @@ public class Convert4Amis {
      * @return
      */
     public static Set<String> getPlaceholderList(String content) {
-        char[] textChars = content.toCharArray();
-        StringBuilder textSofar = new StringBuilder();
+
+        // 内容为空，直接返回
+        if (content == null || content.isEmpty()) {
+            return Collections.emptySet();
+        }
+
         StringBuilder sb = new StringBuilder();
-        // 存储占位符 位置信息集合
-        List<String> placeholderList = new ArrayList<>();
-        // 当前标识
+        Set<String> placeholderSet = new HashSet<>();
         int modeTg = IGNORE_TG;
-        for (int m = 0; m < textChars.length; m++) {
-            char c = textChars[m];
-            textSofar.append(c);
+
+        for (char c : content.toCharArray()) {
             switch (c) {
-                case '{': {
-                    modeTg = START_TG;
-                    sb.append(c);
-                }
-                break;
-                case '$': {
+                case '{':
+                    if (modeTg == IGNORE_TG) {
+                        sb.append(c);
+                        modeTg = START_TG;
+                    }
+                    break;
+                case '$':
                     if (modeTg == START_TG) {
                         sb.append(c);
                         modeTg = READ_TG;
                     } else {
-                        if (modeTg == READ_TG) {
-                            sb = new StringBuilder();
-                            modeTg = IGNORE_TG;
-                        }
-                    }
-                }
-                break;
-                case '}': {
-                    if (modeTg == READ_TG) {
+                        sb.setLength(0);
                         modeTg = IGNORE_TG;
-                        sb.append(c);
-                        String str = sb.toString();
-                        if (StrUtil.isNotEmpty(str)) {
-                            placeholderList.add(str);
-                            textSofar = new StringBuilder();
-                        }
-                        sb = new StringBuilder();
-                    } else if (modeTg == START_TG) {
-                        modeTg = IGNORE_TG;
-                        sb = new StringBuilder();
                     }
                     break;
-                }
-                default: {
+                case '}':
+                    if (modeTg == READ_TG) {
+                        sb.append(c);
+                        String placeholder = sb.toString();
+                        placeholderSet.add(placeholder.replaceAll("[\\{\\$\\}]", ""));
+                        sb.setLength(0);
+                        modeTg = IGNORE_TG;
+                    } else if (modeTg == START_TG) {
+                        sb.setLength(0);
+                        modeTg = IGNORE_TG;
+                    }
+                    break;
+                default:
                     if (modeTg == READ_TG) {
                         sb.append(c);
                     } else if (modeTg == START_TG) {
+                        sb.setLength(0);
                         modeTg = IGNORE_TG;
-                        sb = new StringBuilder();
                     }
-                }
+                    break;
             }
         }
-        Set<String> result = placeholderList.stream().map(s -> s.replaceAll("\\{", "").replaceAll("\\$", "").replaceAll("\\}", "")).collect(Collectors.toSet());
-        return result;
+
+        return placeholderSet;
     }
 
     /**
@@ -316,6 +312,45 @@ public class Convert4Amis {
                             .name(name).type("input-text").required(true).quickEdit(true).label(label).build();
                     columnsDtoS.add(columnsDTO);
                 }
+                officialAccountParam.setColumns(columnsDtoS);
+
+            }
+        }
+        return officialAccountParam;
+
+    }
+
+    /**
+     * 【这个方法不用看】，纯粹为了适配amis前端
+     * <p>
+     * 得到模板的参数 组装好 返回给前端展示
+     *
+     * @param alipayTemplateId
+     * @param templateList
+     * @return
+     */
+    public static CommonAmisVo getAlipayTemplateParam(String alipayTemplateId,  List<MerchantMsgTemplateVO> templateList) {
+        CommonAmisVo officialAccountParam = null;
+        for (MerchantMsgTemplateVO templateInfo : templateList) {
+            if (alipayTemplateId.equals(templateInfo.getTemplateId())) {
+                String[] data = templateInfo.getKeywordDesc().split(StrUtil.COMMA);
+                officialAccountParam = CommonAmisVo.builder()
+                        .type("input-table")
+                        .name("miniProgramParam")
+                        .addable(true)
+                        .editable(true)
+                        .needConfirm(false)
+                        .build();
+                List<CommonAmisVo.ColumnsDTO> columnsDtoS = new ArrayList<>();
+                //使用i作为变量循环
+                for (int i=0;i<data.length;i++) {
+                    String name ="keyword"+ (i + 1);
+                    String label = data[i];
+                    CommonAmisVo.ColumnsDTO columnsDTO = CommonAmisVo.ColumnsDTO.builder()
+                            .name(name).type("input-text").required(true).quickEdit(true).label(label).build();
+                    columnsDtoS.add(columnsDTO);
+                }
+
                 officialAccountParam.setColumns(columnsDtoS);
 
             }
@@ -386,25 +421,25 @@ public class Convert4Amis {
      * @param businessId
      * @return
      */
-    public static EchartsVo getEchartsVo(Map<Object, Object> anchorResult, String templateName, String businessId) {
+    public static EchartsVo getEchartsVo(Map<Object, Object> anchorResult, MessageTemplate messageTemplate, String businessId) {
         List<String> xAxisList = new ArrayList<>();
         List<Integer> actualData = new ArrayList<>();
         if (CollUtil.isNotEmpty(anchorResult)) {
             anchorResult = MapUtil.sort(anchorResult);
             for (Map.Entry<Object, Object> entry : anchorResult.entrySet()) {
-                String description = EnumUtil.getDescriptionByCode(Integer.valueOf(String.valueOf(entry.getKey())), AnchorState.class);
+                String description = AnchorStateUtils.getDescriptionByState(messageTemplate.getSendChannel(), Integer.valueOf(String.valueOf(entry.getKey())));
                 xAxisList.add(description);
                 actualData.add(Integer.valueOf(String.valueOf(entry.getValue())));
             }
         }
 
-        String title = "【" + templateName + "】在" + DateUtil.format(DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))), DatePattern.CHINESE_DATE_FORMATTER) + "的下发情况：";
+        String title = "【" + messageTemplate.getName() + "】在" + DateUtil.format(DateUtil.parse(String.valueOf(TaskInfoUtils.getDateFromBusinessId(Long.valueOf(businessId)))), DatePattern.CHINESE_DATE_FORMATTER) + "的下发情况：";
 
         return EchartsVo.builder()
                 .title(EchartsVo.TitleVO.builder().text(title).build())
-                .legend(EchartsVo.LegendVO.builder().data(Arrays.asList("人数")).build())
+                .legend(EchartsVo.LegendVO.builder().data(Collections.singletonList("人数")).build())
                 .xAxis(EchartsVo.XaxisVO.builder().data(xAxisList).build())
-                .series(Arrays.asList(EchartsVo.SeriesVO.builder().name("人数").type("bar").data(actualData).build()))
+                .series(Collections.singletonList(EchartsVo.SeriesVO.builder().name("人数").type("bar").data(actualData).build()))
                 .yAxis(EchartsVo.YaxisVO.builder().build())
                 .tooltip(EchartsVo.TooltipVO.builder().build())
                 .build();
@@ -430,11 +465,11 @@ public class Convert4Amis {
                     itemsVO.setBusinessId(String.valueOf(smsRecord.getMessageTemplateId()));
                     itemsVO.setContent(smsRecord.getMsgContent());
                     itemsVO.setSendType(EnumUtil.getDescriptionByCode(smsRecord.getStatus(), SmsStatus.class));
-                    itemsVO.setSendTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getCreated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
+                    itemsVO.setSendTime(DateUtil.format(new Date(smsRecord.getCreated() * 1000L), DatePattern.NORM_DATETIME_PATTERN));
                 } else {
                     itemsVO.setReceiveType(EnumUtil.getDescriptionByCode(smsRecord.getStatus(), SmsStatus.class));
                     itemsVO.setReceiveContent(smsRecord.getReportContent());
-                    itemsVO.setReceiveTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getUpdated() * 1000L)), DatePattern.NORM_DATETIME_PATTERN));
+                    itemsVO.setReceiveTime(DateUtil.format(new Date(smsRecord.getUpdated() * 1000L), DatePattern.NORM_DATETIME_PATTERN));
                 }
             }
             itemsVoS.add(itemsVO);

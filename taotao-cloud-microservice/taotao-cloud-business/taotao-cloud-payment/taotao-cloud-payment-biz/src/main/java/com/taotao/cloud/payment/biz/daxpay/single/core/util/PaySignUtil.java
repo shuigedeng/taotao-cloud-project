@@ -1,20 +1,21 @@
 package com.taotao.cloud.payment.biz.daxpay.single.core.util;
 
-import cn.bootx.platform.common.core.util.LocalDateTimeUtil;
+import cn.bootx.platform.core.util.JsonUtil;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.LocalDateTimeUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.digest.HmacAlgorithm;
-import cn.hutool.json.JSONUtil;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static cn.bootx.platform.daxpay.code.DaxPayCode.FIELD_SIGN;
 
 /**
  * 如果需要进行签名,
@@ -26,6 +27,9 @@ import static cn.bootx.platform.daxpay.code.DaxPayCode.FIELD_SIGN;
  */
 @UtilityClass
 public class PaySignUtil {
+
+    private final String FIELD_SIGN  = "sign";
+
 
     /**
      * 将参数转换为map对象. 使用ChatGPT生成
@@ -59,17 +63,23 @@ public class PaySignUtil {
                         map.put(fieldName, fieldValueString);
 
                     }
-                    // java8时间类型 转为时间戳
+                    // java8时间类型 转为 yyyy-MM-dd HH:mm:ss 格式
                     else if (field.getType().equals(LocalDateTime.class)) {
                         LocalDateTime localDateTime = (LocalDateTime) fieldValue;
-                        long timestamp = LocalDateTimeUtil.timestamp(localDateTime)/1000;
-                        map.put(fieldName, String.valueOf(timestamp));
+                        String datetime = LocalDateTimeUtil.format(localDateTime, DatePattern.NORM_DATETIME_PATTERN);
+                        map.put(fieldName, datetime);
                     }
                     // map类型
                     else if (Map.class.isAssignableFrom(field.getType())) {
                         Map<String, String> m = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                         m.putAll((Map) fieldValue);
-                        map.put(fieldName, JSONUtil.toJsonStr(m));
+                        map.put(fieldName, JsonUtil.toJsonStr(m));
+                    }
+                    // BigDecimal类型
+                    else if (field.getType().equals(BigDecimal.class)) {
+                        BigDecimal bigDecimal = (BigDecimal) fieldValue;
+                        String decimalString = bigDecimal.toString();
+                        map.put(fieldName, decimalString);
                     }
                     // 集合类型
                     else if (Collection.class.isAssignableFrom(field.getType())) {
@@ -83,13 +93,13 @@ public class PaySignUtil {
                                         return nestedMap;
                                     })
                                     .collect(Collectors.toList());
-                            map.put(fieldName,  JSONUtil.toJsonStr(maps));
+                            map.put(fieldName,  JsonUtil.toJsonStr(maps));
                         }
                         // 其他类型直接转换为json
                     } else {
                         Map<String, String> nestedMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                         toMap(fieldValue, nestedMap);
-                        String nestedJson = JSONUtil.toJsonStr(fieldValue);
+                        String nestedJson = JsonUtil.toJsonStr(fieldValue);
                         map.put(fieldName, nestedJson);
                     }
                 }
@@ -150,6 +160,17 @@ public class PaySignUtil {
         return SecureUtil.hmac(HmacAlgorithm.HmacSHA256, signKey).digestHex(data);
     }
 
+
+    /**
+     * 生成16进制 sm3 字符串
+     *
+     * @param data 数据
+     * @return SM3方式进行签名 字符串
+     */
+    public String sm3(String data) {
+        return SmUtil.sm3(data);
+    }
+
     /**
      * 生成待签名字符串
      * @param object 待签名对象
@@ -188,6 +209,16 @@ public class PaySignUtil {
     }
 
     /**
+     * sm3方式进行签名
+     *
+     * @return 签名值
+     */
+    public String sm3Sign(Object object, String signKey){
+        String data = signString(object, signKey);
+        return sm3(data);
+    }
+
+    /**
      * MD5签名验证
      */
     public boolean verifyMd5Sign(Object object, String signKey, String sign){
@@ -203,4 +234,12 @@ public class PaySignUtil {
         return hmacSha256Sign.equals(sign);
     }
 
+
+    /**
+     * SM3签名验证
+     */
+    public boolean verifySm3Sign(Object object, String signKey, String sign){
+        String sm3Sign = sm3Sign(object, signKey);
+        return sm3Sign.equals(sign);
+    }
 }

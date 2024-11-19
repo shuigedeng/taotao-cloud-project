@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 企业微信 机器人 账号信息
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder

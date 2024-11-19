@@ -2,30 +2,26 @@ package com.taotao.cloud.message.biz.austin.handler.handler.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.AccessTokenPrefixConstant;
-import com.java3y.austin.common.constant.SendChanelUrlConstant;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.dto.account.GeTuiAccount;
-import com.java3y.austin.common.dto.model.PushContentModel;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.handler.domain.push.PushParam;
-import com.java3y.austin.handler.domain.push.getui.BatchSendPushParam;
-import com.java3y.austin.handler.domain.push.getui.SendPushParam;
-import com.java3y.austin.handler.domain.push.getui.SendPushResult;
-import com.java3y.austin.handler.handler.BaseHandler;
-import com.java3y.austin.handler.handler.Handler;
-import com.java3y.austin.support.utils.AccessTokenUtils;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.SendChanelUrlConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.dto.account.GeTuiAccount;
+import com.taotao.cloud.message.biz.austin.common.dto.model.PushContentModel;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.handler.domain.push.PushParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.push.getui.BatchSendPushParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.push.getui.SendPushParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.push.getui.SendPushResult;
+import com.taotao.cloud.message.biz.austin.handler.handler.BaseHandler;
+import com.taotao.cloud.message.biz.austin.support.utils.AccessTokenUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -34,29 +30,30 @@ import java.util.Set;
  * 通知栏消息发送处理
  * <p>
  * (目前具体的实现是个推服务商，安卓端已验证)
+ * 个推：https://docs.getui.com/getui/start/devcenter/
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Component
 @Slf4j
-public class PushHandler extends BaseHandler implements Handler {
+public class PushHandler extends BaseHandler{
+
+    private static final String HEADER_TOKEN_NAME = "token";
+    @Autowired
+    private AccountUtils accountUtils;
+    @Autowired
+    private AccessTokenUtils accessTokenUtils;
 
     public PushHandler() {
         channelCode = ChannelType.PUSH.getCode();
     }
-
-    @Autowired
-    private AccountUtils accountUtils;
-    @Autowired
-    private StringRedisTemplate redisTemplate;
-
 
     @Override
     public boolean handler(TaskInfo taskInfo) {
 
         try {
             GeTuiAccount account = accountUtils.getAccountById(taskInfo.getSendAccount(), GeTuiAccount.class);
-            String token = getAccessToken(taskInfo, account);
+            String token = accessTokenUtils.getAccessToken(taskInfo.getSendChannel(), taskInfo.getSendAccount(), account, false);
             PushParam pushParam = PushParam.builder().token(token).appId(account.getAppId()).taskInfo(taskInfo).build();
 
             String result;
@@ -87,12 +84,11 @@ public class PushHandler extends BaseHandler implements Handler {
     private String singlePush(PushParam pushParam) {
         String url = SendChanelUrlConstant.GE_TUI_BASE_URL + pushParam.getAppId() + SendChanelUrlConstant.GE_TUI_SINGLE_PUSH_PATH;
         SendPushParam sendPushParam = assembleParam((PushContentModel) pushParam.getTaskInfo().getContentModel(), pushParam.getTaskInfo().getReceiver());
-        String body = HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                .header("token", pushParam.getToken())
+        return HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                .header(HEADER_TOKEN_NAME, pushParam.getToken())
                 .body(JSON.toJSONString(sendPushParam))
                 .timeout(2000)
                 .execute().body();
-        return body;
     }
 
 
@@ -109,12 +105,11 @@ public class PushHandler extends BaseHandler implements Handler {
                 .taskId(taskId)
                 .isAsync(true)
                 .audience(BatchSendPushParam.AudienceVO.builder().cid(pushParam.getTaskInfo().getReceiver()).build()).build();
-        String body = HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                .header("token", pushParam.getToken())
+        return HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
+                .header(HEADER_TOKEN_NAME, pushParam.getToken())
                 .body(JSON.toJSONString(batchSendPushParam))
                 .timeout(2000)
                 .execute().body();
-        return body;
     }
 
 
@@ -130,7 +125,7 @@ public class PushHandler extends BaseHandler implements Handler {
         String taskId = "";
         try {
             String body = HttpRequest.post(url).header(Header.CONTENT_TYPE.getValue(), ContentType.JSON.getValue())
-                    .header("token", pushParam.getToken())
+                    .header(HEADER_TOKEN_NAME, pushParam.getToken())
                     .body(JSON.toJSONString(param))
                     .timeout(2000)
                     .execute().body();
@@ -141,27 +136,6 @@ public class PushHandler extends BaseHandler implements Handler {
         }
 
         return taskId;
-    }
-
-    /**
-     * 获取第三方token
-     *
-     * @param taskInfo 发送任务信息
-     * @param account  个推账号时的元信息
-     * @return token
-     */
-    private String getAccessToken(TaskInfo taskInfo, GeTuiAccount account) {
-        String token = redisTemplate.opsForValue().get(AccessTokenPrefixConstant.GE_TUI_ACCESS_TOKEN_PREFIX + taskInfo.getSendAccount());
-        if (StrUtil.isNotBlank(token)) {
-            return token;
-        }
-        token = AccessTokenUtils.getGeTuiAccessToken(account);
-        if (StrUtil.isNotBlank(token)) {
-            redisTemplate.opsForValue().set(AccessTokenPrefixConstant.GE_TUI_ACCESS_TOKEN_PREFIX + taskInfo.getSendAccount(), token);
-        } else {
-            log.error("PushHandler#getAccessToken fail taskInfo:{} account:{}", taskInfo, account);
-        }
-        return token;
     }
 
     private SendPushParam assembleParam(PushContentModel pushContentModel) {
@@ -182,6 +156,12 @@ public class PushHandler extends BaseHandler implements Handler {
     }
 
 
+    /**
+     * 对正处于推送状态 未接收的消息停止下发（只支持批量推和群推任务）
+     * 【未实现】
+     * https://docs.getui.com/getui/server/rest_v2/push/
+     * @param recallTaskInfo
+     */
     @Override
     public void recall(RecallTaskInfo recallTaskInfo) {
 

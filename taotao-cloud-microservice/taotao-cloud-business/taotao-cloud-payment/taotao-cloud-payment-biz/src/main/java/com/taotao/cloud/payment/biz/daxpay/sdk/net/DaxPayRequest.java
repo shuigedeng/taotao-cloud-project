@@ -1,9 +1,10 @@
 package com.taotao.cloud.payment.biz.daxpay.sdk.net;
 
-import cn.bootx.platform.daxpay.sdk.response.DaxPayResult;
-import cn.hutool.core.date.DateUtil;
+import cn.daxpay.single.sdk.response.DaxPayResult;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 /**
  * 请求接口
@@ -12,8 +13,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public abstract class DaxPayRequest<T extends DaxPayResponseModel> {
+public abstract class DaxPayRequest<T> {
 
+    /** 应用号 */
+    private String appId;
 
     /** 客户端ip */
     private String clientIp;
@@ -21,8 +24,11 @@ public abstract class DaxPayRequest<T extends DaxPayResponseModel> {
     /** 签名 */
     private String sign;
 
-    /** 请求时间，传输时间戳 */
-    private Long reqTime = DateUtil.currentSeconds();
+    /** 请求时间，yyyy-MM-dd HH:mm:ss 格式 */
+    private LocalDateTime reqTime = LocalDateTime.now();
+
+    /** 随机数 */
+    private String nonceStr;
 
     /**
      * 方法请求路径

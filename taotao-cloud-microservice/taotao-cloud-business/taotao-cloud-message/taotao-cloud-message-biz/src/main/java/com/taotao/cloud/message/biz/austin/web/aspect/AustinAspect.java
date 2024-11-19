@@ -4,7 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.java3y.austin.web.vo.RequestLogDTO;
+import com.taotao.cloud.message.biz.austin.web.vo.RequestLogDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -26,25 +26,24 @@ import java.util.List;
  * @author kl
  * @version 1.0.0
  * @description 切面类
- * @since 2023/2/23 9:17
+ * @date 2023/2/23 9:17
  */
 @Slf4j
 @Aspect
 @Component
 public class AustinAspect {
 
+    /**
+     * 同一个请求的KEY
+     */
+    private static final String REQUEST_ID_KEY = "request_unique_id";
     @Autowired
     private HttpServletRequest request;
 
     /**
-     * 同一个请求的KEY
-     */
-    private final String REQUEST_ID_KEY = "request_unique_id";
-
-    /**
      * 只切AustinAspect注解
      */
-    @Pointcut("@within(com.java3y.austin.web.annotation.AustinAspect) || @annotation(com.java3y.austin.web.annotation.AustinAspect)")
+    @Pointcut("@within(com.taotao.cloud.message.biz.austin.web.annotation.AustinAspect) || @annotation(com.taotao.cloud.message.biz.austin.web.annotation.AustinAspect)")
     public void executeService() {
     }
 

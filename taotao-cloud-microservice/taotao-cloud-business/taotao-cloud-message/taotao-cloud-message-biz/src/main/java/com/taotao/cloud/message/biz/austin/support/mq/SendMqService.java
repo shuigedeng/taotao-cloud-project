@@ -2,7 +2,7 @@ package com.taotao.cloud.message.biz.austin.support.mq;
 
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 发送数据至消息队列
  */
 public interface SendMqService {

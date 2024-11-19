@@ -1,5 +1,6 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.entity;
 
+import cn.hutool.core.text.StrPool;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.*;
 /**
  * 执行器组信息
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Accessors(chain = true)
@@ -42,7 +43,7 @@ public class XxlJobGroup {
 
     public List<String> getRegistryList() {
         if (Objects.nonNull(addressList) && addressList.trim().length() > 0) {
-            registryList = new ArrayList<String>(Arrays.asList(addressList.split(",")));
+            registryList = new ArrayList<>(Arrays.asList(addressList.split(StrPool.COMMA)));
         }
         return registryList;
     }

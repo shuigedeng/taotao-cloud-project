@@ -12,7 +12,7 @@ import java.util.List;
  * 发送接口的参数
  * batch
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Accessors(chain = true)

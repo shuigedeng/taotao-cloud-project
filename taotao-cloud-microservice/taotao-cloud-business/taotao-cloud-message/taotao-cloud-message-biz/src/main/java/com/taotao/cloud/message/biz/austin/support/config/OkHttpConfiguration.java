@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * @author 3y
- * @since 2021/11/4
+ * @author shuigedeng
+ * @date 2021/11/4
  */
 @Configuration
 public class OkHttpConfiguration {
@@ -82,7 +82,7 @@ public class OkHttpConfiguration {
             sslContext.init(null, new TrustManager[]{x509TrustManager()}, new SecureRandom());
             return sslContext.getSocketFactory();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            LogUtils.error(e);
+            e.printStackTrace();
         }
         return null;
     }

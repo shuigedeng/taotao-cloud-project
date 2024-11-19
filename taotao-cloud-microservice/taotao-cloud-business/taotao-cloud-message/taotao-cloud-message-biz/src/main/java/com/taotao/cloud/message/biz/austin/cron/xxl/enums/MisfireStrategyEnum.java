@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.enums;
 /**
  * 调度过期策略
  *
- * @author 3y
+ * @author shuigedeng
  */
 public enum MisfireStrategyEnum {
 

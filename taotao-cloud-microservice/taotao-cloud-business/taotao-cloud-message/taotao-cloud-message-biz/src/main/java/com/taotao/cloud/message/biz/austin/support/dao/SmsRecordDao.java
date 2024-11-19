@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.dao;
 
 
-import com.java3y.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 短信记录的Dao
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface SmsRecordDao extends CrudRepository<SmsRecord, Long> {
 

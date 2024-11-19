@@ -5,7 +5,7 @@ import com.dtp.common.em.QueueTypeEnum;
 import com.dtp.common.em.RejectedTypeEnum;
 import com.dtp.core.thread.DtpExecutor;
 import com.dtp.core.thread.ThreadPoolBuilder;
-import com.java3y.austin.common.constant.ThreadPoolConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.ThreadPoolConstant;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 动态线程池配置。实际的具体配置以apollo的为准！实际的具体配置以apollo的为准！实际的具体配置以apollo的为准
  */
 public class CronAsyncThreadPoolConfig {
@@ -23,6 +23,8 @@ public class CronAsyncThreadPoolConfig {
      */
     public static final String EXECUTE_XXL_THREAD_POOL_NAME = "execute-xxl-thread-pool";
 
+    private CronAsyncThreadPoolConfig() {
+    }
 
     /**
      * 业务：消费pending队列实际的线程池
@@ -35,7 +37,7 @@ public class CronAsyncThreadPoolConfig {
         return ExecutorBuilder.create()
                 .setCorePoolSize(ThreadPoolConstant.COMMON_CORE_POOL_SIZE)
                 .setMaxPoolSize(ThreadPoolConstant.COMMON_MAX_POOL_SIZE)
-                .setWorkQueue(new LinkedBlockingQueue(ThreadPoolConstant.BIG_QUEUE_SIZE))
+                .setWorkQueue(new LinkedBlockingQueue<>(ThreadPoolConstant.BIG_QUEUE_SIZE))
                 .setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
                 .setAllowCoreThreadTimeOut(true)
                 .setKeepAliveTime(ThreadPoolConstant.SMALL_KEEP_LIVE_TIME, TimeUnit.SECONDS)

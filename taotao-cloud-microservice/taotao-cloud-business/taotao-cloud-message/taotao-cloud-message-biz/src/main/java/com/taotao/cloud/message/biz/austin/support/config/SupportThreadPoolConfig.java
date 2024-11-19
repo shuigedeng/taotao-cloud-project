@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.support.config;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import com.java3y.austin.common.constant.ThreadPoolConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.ThreadPoolConstant;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -9,10 +9,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * support 线程池配置类
  */
 public class SupportThreadPoolConfig {
+
+    private SupportThreadPoolConfig() {
+    }
 
     /**
      * 业务：实现pending队列的单线程池
@@ -23,7 +26,7 @@ public class SupportThreadPoolConfig {
         return ExecutorBuilder.create()
                 .setCorePoolSize(ThreadPoolConstant.SINGLE_CORE_POOL_SIZE)
                 .setMaxPoolSize(ThreadPoolConstant.SINGLE_MAX_POOL_SIZE)
-                .setWorkQueue(new LinkedBlockingQueue(ThreadPoolConstant.BIG_QUEUE_SIZE))
+                .setWorkQueue(new LinkedBlockingQueue<>(ThreadPoolConstant.BIG_QUEUE_SIZE))
                 .setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
                 .setAllowCoreThreadTimeOut(true)
                 .setKeepAliveTime(ThreadPoolConstant.SMALL_KEEP_LIVE_TIME, TimeUnit.SECONDS)

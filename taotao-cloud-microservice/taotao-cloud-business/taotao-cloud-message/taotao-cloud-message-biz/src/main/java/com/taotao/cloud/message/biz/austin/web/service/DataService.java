@@ -1,14 +1,14 @@
 package com.taotao.cloud.message.biz.austin.web.service;
 
-import com.java3y.austin.web.vo.DataParam;
-import com.java3y.austin.web.vo.amis.EchartsVo;
-import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
-import com.java3y.austin.web.vo.amis.UserTimeLineVo;
+import com.taotao.cloud.message.biz.austin.web.vo.DataParam;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.SmsTimeLineVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.UserTimeLineVo;
 
 /**
  * 数据链路追踪获取接口
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface DataService {
 

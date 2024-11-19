@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 企业微信 应用消息
  * https://developer.work.weixin.qq.com/document/path/90372#%E6%8E%A5%E5%8F%A3%E5%AE%9A%E4%B9%89
  */

@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.stream;
 
-import com.java3y.austin.common.domain.AnchorInfo;
-import com.java3y.austin.stream.constants.AustinFlinkConstant;
-import com.java3y.austin.stream.function.AustinFlatMapFunction;
-import com.java3y.austin.stream.sink.AustinSink;
-import com.java3y.austin.stream.utils.MessageQueueUtils;
+import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
+import com.taotao.cloud.message.biz.austin.stream.constants.AustinFlinkConstant;
+import com.taotao.cloud.message.biz.austin.stream.function.AustinFlatMapFunction;
+import com.taotao.cloud.message.biz.austin.stream.sink.AustinSink;
+import com.taotao.cloud.message.biz.austin.stream.utils.MessageQueueUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.connector.kafka.source.KafkaSource;
@@ -15,7 +15,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * flink启动类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Slf4j
 public class AustinBootStrap {

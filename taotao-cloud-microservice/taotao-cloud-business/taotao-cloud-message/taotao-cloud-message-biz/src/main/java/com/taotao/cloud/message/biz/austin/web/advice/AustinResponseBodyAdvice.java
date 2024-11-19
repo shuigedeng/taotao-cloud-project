@@ -1,7 +1,7 @@
 package com.taotao.cloud.message.biz.austin.web.advice;
 
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.web.annotation.AustinResult;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.web.annotation.AustinResult;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -15,9 +15,9 @@ import java.util.Objects;
  * @author kl
  * @version 1.0.0
  * @description 统一返回结构
- * @since 2023/2/9 19:00
+ * @date 2023/2/9 19:00
  */
-@ControllerAdvice(basePackages = "com.java3y.austin.web.controller")
+@ControllerAdvice(basePackages = "com.taotao.cloud.message.biz.austin.web.controller")
 public class AustinResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     private static final String RETURN_CLASS = "BasicResultVO";

@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.api.domain;
 
-import com.java3y.austin.common.domain.SimpleAnchorInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.SimpleAnchorInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

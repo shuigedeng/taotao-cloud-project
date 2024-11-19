@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 3y
- * @since 2022/5/8
+ * @author shuigedeng
+ * @date 2022/5/8
  * <p>
  * https://docs.getui.com/getui/server/rest_v2/token/
  */

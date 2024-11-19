@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
-import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.web.annotation.AustinAspect;
-import com.java3y.austin.web.annotation.AustinResult;
-import com.java3y.austin.web.service.DataService;
-import com.java3y.austin.web.vo.DataParam;
-import com.java3y.austin.web.vo.amis.EchartsVo;
-import com.java3y.austin.web.vo.amis.SmsTimeLineVo;
-import com.java3y.austin.web.vo.amis.UserTimeLineVo;
+import cn.hutool.core.text.CharSequenceUtil;
+import com.taotao.cloud.message.biz.austin.web.annotation.AustinAspect;
+import com.taotao.cloud.message.biz.austin.web.annotation.AustinResult;
+import com.taotao.cloud.message.biz.austin.web.service.DataService;
+import com.taotao.cloud.message.biz.austin.web.vo.DataParam;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.EchartsVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.SmsTimeLineVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.UserTimeLineVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import java.util.Objects;
 /**
  * 获取数据接口（全链路追踪)
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Slf4j
 @AustinAspect
@@ -39,7 +39,7 @@ public class DataController {
     @PostMapping("/message")
     @ApiOperation("/获取【72小时】发送消息的全链路数据")
     public UserTimeLineVo getMessageData(@RequestBody DataParam dataParam) {
-        if (Objects.isNull(dataParam) || StrUtil.isBlank(dataParam.getMessageId())) {
+        if (Objects.isNull(dataParam) || CharSequenceUtil.isBlank(dataParam.getMessageId())) {
             return UserTimeLineVo.builder().items(new ArrayList<>()).build();
         }
         return dataService.getTraceMessageInfo(dataParam.getMessageId());
@@ -48,7 +48,7 @@ public class DataController {
     @PostMapping("/user")
     @ApiOperation("/获取【当天】用户接收消息的全链路数据")
     public UserTimeLineVo getUserData(@RequestBody DataParam dataParam) {
-        if (Objects.isNull(dataParam) || StrUtil.isBlank(dataParam.getReceiver())) {
+        if (Objects.isNull(dataParam) || CharSequenceUtil.isBlank(dataParam.getReceiver())) {
             return UserTimeLineVo.builder().items(new ArrayList<>()).build();
         }
         return dataService.getTraceUserInfo(dataParam.getReceiver());
@@ -58,7 +58,7 @@ public class DataController {
     @ApiOperation("/获取消息模板全链路数据")
     public EchartsVo getMessageTemplateData(@RequestBody DataParam dataParam) {
         EchartsVo echartsVo = EchartsVo.builder().build();
-        if (StrUtil.isNotBlank(dataParam.getBusinessId())) {
+        if (CharSequenceUtil.isNotBlank(dataParam.getBusinessId())) {
             echartsVo = dataService.getTraceMessageTemplateInfo(dataParam.getBusinessId());
         }
         return echartsVo;
@@ -67,7 +67,7 @@ public class DataController {
     @PostMapping("/sms")
     @ApiOperation("/获取短信下发数据")
     public SmsTimeLineVo getSmsData(@RequestBody DataParam dataParam) {
-        if (Objects.isNull(dataParam) || Objects.isNull(dataParam.getDateTime()) || StrUtil.isBlank(dataParam.getReceiver())) {
+        if (Objects.isNull(dataParam) || Objects.isNull(dataParam.getDateTime()) || CharSequenceUtil.isBlank(dataParam.getReceiver())) {
             return SmsTimeLineVo.builder().items(Lists.newArrayList()).build();
         }
         return dataService.getTraceSmsInfo(dataParam);

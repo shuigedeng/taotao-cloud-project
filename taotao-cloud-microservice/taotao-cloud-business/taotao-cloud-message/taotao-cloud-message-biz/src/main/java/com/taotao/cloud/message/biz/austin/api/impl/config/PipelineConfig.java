@@ -1,15 +1,15 @@
 package com.taotao.cloud.message.biz.austin.api.impl.config;
 
 
-import com.java3y.austin.service.api.enums.BusinessCode;
-import com.java3y.austin.service.api.impl.action.recall.RecallAssembleAction;
-import com.java3y.austin.service.api.impl.action.recall.RecallMqAction;
-import com.java3y.austin.service.api.impl.action.send.SendAfterCheckAction;
-import com.java3y.austin.service.api.impl.action.send.SendAssembleAction;
-import com.java3y.austin.service.api.impl.action.send.SendMqAction;
-import com.java3y.austin.service.api.impl.action.send.SendPreCheckAction;
-import com.java3y.austin.support.pipeline.ProcessController;
-import com.java3y.austin.support.pipeline.ProcessTemplate;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessController;
+import com.taotao.cloud.message.biz.austin.common.pipeline.ProcessTemplate;
+import com.taotao.cloud.message.biz.austin.service.api.enums.BusinessCode;
+import com.taotao.cloud.message.biz.austin.service.api.impl.action.recall.RecallAssembleAction;
+import com.taotao.cloud.message.biz.austin.service.api.impl.action.recall.RecallMqAction;
+import com.taotao.cloud.message.biz.austin.service.api.impl.action.send.SendAfterCheckAction;
+import com.taotao.cloud.message.biz.austin.service.api.impl.action.send.SendAssembleAction;
+import com.taotao.cloud.message.biz.austin.service.api.impl.action.send.SendMqAction;
+import com.taotao.cloud.message.biz.austin.service.api.impl.action.send.SendPreCheckAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * api层的pipeline配置类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Configuration
 public class PipelineConfig {
@@ -78,8 +78,8 @@ public class PipelineConfig {
      *
      * @return
      */
-    @Bean
-    public ProcessController processController() {
+    @Bean("apiProcessController")
+    public ProcessController apiProcessController() {
         ProcessController processController = new ProcessController();
         Map<String, ProcessTemplate> templateConfig = new HashMap<>(4);
         templateConfig.put(BusinessCode.COMMON_SEND.getCode(), commonSendTemplate());

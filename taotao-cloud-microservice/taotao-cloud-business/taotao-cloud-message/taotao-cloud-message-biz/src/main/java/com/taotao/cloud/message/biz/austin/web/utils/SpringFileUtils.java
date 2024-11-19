@@ -1,20 +1,22 @@
 package com.taotao.cloud.message.biz.austin.web.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Objects;
+import java.nio.file.Files;
 
 
 /**
- * @author 3y
+ * @author shuigedeng
  * multipartFile 转成 File 对象
  */
+@Slf4j
 public class SpringFileUtils {
-
+    private SpringFileUtils() {
+    }
 
     /**
      * multipartFile 转成 File 对象
@@ -25,23 +27,14 @@ public class SpringFileUtils {
     public static File getFile(MultipartFile multipartFile) {
         String fileName = multipartFile.getOriginalFilename();
         File file = new File(fileName);
-        OutputStream out = null;
-        try {
-            out = new FileOutputStream(file);
+        try (OutputStream out = Files.newOutputStream(file.toPath())){
             byte[] ss = multipartFile.getBytes();
-            for (int i = 0; i < ss.length; i++) {
-                out.write(ss[i]);
+            for (byte s : ss) {
+                out.write(s);
             }
         } catch (IOException e) {
-            LogUtils.error(e);
-        } finally {
-            if (Objects.nonNull(out)) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    LogUtils.error(e);
-                }
-            }
+            log.error("SpringFileUtils#getFile multipartFile is converted to File error:{}", e.toString());
+            return null;
         }
         return file;
     }

@@ -1,28 +1,30 @@
 package com.taotao.cloud.message.biz.austin.web.controller;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.service.api.domain.MessageParam;
-import com.java3y.austin.service.api.domain.SendRequest;
-import com.java3y.austin.service.api.domain.SendResponse;
-import com.java3y.austin.service.api.enums.BusinessCode;
-import com.java3y.austin.service.api.service.RecallService;
-import com.java3y.austin.service.api.service.SendService;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.web.annotation.AustinAspect;
-import com.java3y.austin.web.annotation.AustinResult;
-import com.java3y.austin.web.exception.CommonException;
-import com.java3y.austin.web.service.MessageTemplateService;
-import com.java3y.austin.web.utils.Convert4Amis;
-import com.java3y.austin.web.utils.LoginUtils;
-import com.java3y.austin.web.vo.MessageTemplateParam;
-import com.java3y.austin.web.vo.MessageTemplateVo;
-import com.java3y.austin.web.vo.amis.CommonAmisVo;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.service.api.domain.MessageParam;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendRequest;
+import com.taotao.cloud.message.biz.austin.service.api.domain.SendResponse;
+import com.taotao.cloud.message.biz.austin.service.api.enums.BusinessCode;
+import com.taotao.cloud.message.biz.austin.service.api.service.RecallService;
+import com.taotao.cloud.message.biz.austin.service.api.service.SendService;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
+import com.taotao.cloud.message.biz.austin.web.annotation.AustinAspect;
+import com.taotao.cloud.message.biz.austin.web.annotation.AustinResult;
+import com.taotao.cloud.message.biz.austin.web.exception.CommonException;
+import com.taotao.cloud.message.biz.austin.web.service.MessageTemplateService;
+import com.taotao.cloud.message.biz.austin.web.utils.Convert4Amis;
+import com.taotao.cloud.message.biz.austin.web.utils.LoginUtils;
+import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateParam;
+import com.taotao.cloud.message.biz.austin.web.vo.MessageTemplateVo;
+import com.taotao.cloud.message.biz.austin.web.vo.amis.CommonAmisVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,14 +36,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
 /**
  * 消息模板管理Controller
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Slf4j
 @AustinAspect
@@ -73,7 +78,7 @@ public class MessageTemplateController {
     @PostMapping("/save")
     @ApiOperation("/保存数据")
     public MessageTemplate saveOrUpdate(@RequestBody MessageTemplate messageTemplate) {
-        if (loginUtils.needLogin() && StrUtil.isBlank(messageTemplate.getCreator())) {
+        if (loginUtils.needLogin() && CharSequenceUtil.isBlank(messageTemplate.getCreator())) {
             throw new CommonException(RespStatusEnum.NO_LOGIN.getCode(), RespStatusEnum.NO_LOGIN.getMsg());
         }
         return messageTemplateService.saveOrUpdate(messageTemplate);
@@ -85,7 +90,7 @@ public class MessageTemplateController {
     @GetMapping("/list")
     @ApiOperation("/列表页")
     public MessageTemplateVo queryList(@Validated MessageTemplateParam messageTemplateParam) {
-        if (loginUtils.needLogin() && StrUtil.isBlank(messageTemplateParam.getCreator())) {
+        if (loginUtils.needLogin() && CharSequenceUtil.isBlank(messageTemplateParam.getCreator())) {
             throw new CommonException(RespStatusEnum.NO_LOGIN.getCode(), RespStatusEnum.NO_LOGIN.getMsg());
         }
         Page<MessageTemplate> messageTemplates = messageTemplateService.queryList(messageTemplateParam);
@@ -119,8 +124,8 @@ public class MessageTemplateController {
     @DeleteMapping("delete/{id}")
     @ApiOperation("/根据Ids删除")
     public void deleteByIds(@PathVariable("id") String id) {
-        if (StrUtil.isNotBlank(id)) {
-            List<Long> idList = Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).collect(Collectors.toList());
+        if (CharSequenceUtil.isNotBlank(id)) {
+            List<Long> idList = Arrays.stream(id.split(StrPool.COMMA)).map(Long::valueOf).collect(Collectors.toList());
             messageTemplateService.deleteByIds(idList);
         }
     }
@@ -133,7 +138,7 @@ public class MessageTemplateController {
     @ApiOperation("/测试发送接口")
     public SendResponse test(@RequestBody MessageTemplateParam messageTemplateParam) {
 
-        Map<String, String> variables = JSON.parseObject(messageTemplateParam.getMsgContent(), Map.class);
+        Map<String, String> variables = JSON.parseObject(messageTemplateParam.getMsgContent(), new TypeReference<Map<String, String>>() {});
         MessageParam messageParam = MessageParam.builder().receiver(messageTemplateParam.getReceiver()).variables(variables).build();
         SendRequest sendRequest = SendRequest.builder().code(BusinessCode.COMMON_SEND.getCode()).messageTemplateId(messageTemplateParam.getId()).messageParam(messageParam).build();
         SendResponse response = sendService.send(sendRequest);
@@ -155,7 +160,7 @@ public class MessageTemplateController {
 
 
     /**
-     * 撤回接口
+     * 撤回接口（根据模板id撤回）
      */
     @PostMapping("recall/{id}")
     @ApiOperation("/撤回消息接口")
@@ -192,12 +197,16 @@ public class MessageTemplateController {
      */
     @PostMapping("upload")
     @ApiOperation("/上传人群文件")
-    public HashMap<Object, Object> upload(@RequestParam("file") MultipartFile file) {
+    public Map<Object, Object> upload(@RequestParam("file") MultipartFile file) {
         String filePath = dataPath + IdUtil.fastSimpleUUID() + file.getOriginalFilename();
         try {
             File localFile = new File(filePath);
             if (!localFile.exists()) {
-                localFile.mkdirs();
+                boolean res = localFile.mkdirs();
+                if (!res) {
+                    log.error("MessageTemplateController#upload fail! Failed to create folder.");
+                    throw new CommonException(RespStatusEnum.SERVICE_ERROR);
+                }
             }
             file.transferTo(localFile);
         } catch (Exception e) {

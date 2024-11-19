@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.api.service;
 
-import com.java3y.austin.service.api.domain.TraceResponse;
+import com.taotao.cloud.message.biz.austin.service.api.domain.TraceResponse;
 
 /**
  * 链路查询接口

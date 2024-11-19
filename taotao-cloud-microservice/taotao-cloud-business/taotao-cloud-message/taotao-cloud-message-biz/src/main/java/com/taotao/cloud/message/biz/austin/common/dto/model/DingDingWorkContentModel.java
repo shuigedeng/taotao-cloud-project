@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 钉钉 工作通知
  * <p>
  * https://open.dingtalk.com/document/orgapp-server/asynchronous-sending-of-enterprise-session-messages

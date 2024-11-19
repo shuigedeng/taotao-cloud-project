@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * 简单的埋点信息
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder

@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.austin.support.mq.eventbus;
 
 
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 
 import java.util.List;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 监听器
  */
 public interface EventBusListener {

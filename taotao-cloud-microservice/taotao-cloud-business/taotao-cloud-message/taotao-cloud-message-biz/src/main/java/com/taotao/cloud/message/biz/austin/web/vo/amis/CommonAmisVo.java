@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * amis的通用转化类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder

@@ -13,7 +13,7 @@ import java.util.List;
  * @author kl
  * @version 1.0.0
  * @description 通用配置
- * @since 2023/2/23 10:40
+ * @date 2023/2/23 10:40
  */
 @Configuration
 public class CommonConfiguration {

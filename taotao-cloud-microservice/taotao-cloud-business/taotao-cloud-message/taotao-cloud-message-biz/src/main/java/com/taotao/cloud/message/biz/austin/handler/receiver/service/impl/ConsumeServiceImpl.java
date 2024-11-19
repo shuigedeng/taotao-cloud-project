@@ -1,17 +1,17 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import com.java3y.austin.common.domain.AnchorInfo;
-import com.java3y.austin.common.domain.LogParam;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.AnchorState;
-import com.java3y.austin.handler.handler.HandlerHolder;
-import com.java3y.austin.handler.pending.Task;
-import com.java3y.austin.handler.pending.TaskPendingHolder;
-import com.java3y.austin.handler.receiver.service.ConsumeService;
-import com.java3y.austin.handler.utils.GroupIdMappingUtils;
-import com.java3y.austin.support.utils.LogUtils;
+import com.taotao.cloud.message.biz.austin.common.domain.AnchorInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.LogParam;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.AnchorState;
+import com.taotao.cloud.message.biz.austin.handler.handler.HandlerHolder;
+import com.taotao.cloud.message.biz.austin.handler.pending.Task;
+import com.taotao.cloud.message.biz.austin.handler.pending.TaskPendingHolder;
+import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
+import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.taotao.cloud.message.biz.austin.support.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author 3y
+ * @author shuigedeng
  */
 @Service
 public class ConsumeServiceImpl implements ConsumeService {

@@ -2,11 +2,12 @@ package com.taotao.cloud.message.biz.austin.handler.receiver.kafka;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.receiver.service.ConsumeService;
-import com.java3y.austin.handler.utils.GroupIdMappingUtils;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.receiver.MessageReceiver;
+import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
+import com.taotao.cloud.message.biz.austin.handler.utils.GroupIdMappingUtils;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 消费MQ的消息
  */
 @Slf4j
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
-public class Receiver {
+public class Receiver implements MessageReceiver {
     @Autowired
     private ConsumeService consumeService;
 

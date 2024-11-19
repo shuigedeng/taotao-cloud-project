@@ -2,21 +2,22 @@ package com.taotao.cloud.message.biz.austin.handler.script.impl;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.net.URLEncodeUtil;
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.dto.account.sms.YunPianSmsAccount;
-import com.java3y.austin.common.enums.SmsStatus;
-import com.java3y.austin.handler.domain.sms.SmsParam;
-import com.java3y.austin.handler.domain.sms.YunPianSendResult;
-import com.java3y.austin.handler.script.SmsScript;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.sms.YunPianSmsAccount;
+import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.YunPianSendResult;
+import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,21 +28,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author 3y
- * @since 2022年5月23日
+ * @author shuigedeng
+ * @date 2022年5月23日
  * 发送短信接入文档：https://www.yunpian.com/official/document/sms/zh_CN/domestic_list
  */
 @Component("YunPianSmsScript")
 public class YunPianSmsScript implements SmsScript {
 
-    private static Logger log = LoggerFactory.getLogger(YunPianSmsScript.class);
-
+    private static final String PARAMS_SPLIT_KEY = "{|}";
+    private static final String PARAMS_KV_SPLIT_KEY = "{:}";
+    private static final Logger log = LoggerFactory.getLogger(YunPianSmsScript.class);
     @Autowired
     private AccountUtils accountUtils;
-
-    private static final String PARAMS_SPLIT_KEY = "{|}";
-
-    private static final String PARAMS_KV_SPLIT_KEY = "{:}";
 
     @Override
     public List<SmsRecord> send(SmsParam smsParam) {
@@ -61,7 +59,7 @@ public class YunPianSmsScript implements SmsScript {
             return assembleSmsRecord(smsParam, yunPianSendResult, account);
         } catch (Exception e) {
             log.error("YunPianSmsScript#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
-            return null;
+            return new ArrayList<>();
         }
 
     }
@@ -69,7 +67,7 @@ public class YunPianSmsScript implements SmsScript {
     @Override
     public List<SmsRecord> pull(Integer accountId) {
         // .....
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -82,19 +80,22 @@ public class YunPianSmsScript implements SmsScript {
     private Map<String, Object> assembleParam(SmsParam smsParam, YunPianSmsAccount account) {
         Map<String, Object> params = new HashMap<>(8);
         params.put("apikey", account.getApikey());
-        params.put("mobile", StringUtils.join(smsParam.getPhones(), StrUtil.C_COMMA));
+        params.put("mobile", StringUtils.join(smsParam.getPhones(), StrPool.COMMA));
         params.put("tpl_id", account.getTplId());
-        params.put("tpl_value", getTplValue(smsParam));
+        if (CharSequenceUtil.isNotBlank(smsParam.getContent()) && smsParam.getContent().contains(PARAMS_KV_SPLIT_KEY)) {
+            params.put("tpl_value", getTplValue(smsParam));
+        }
         return params;
     }
 
 
     private List<SmsRecord> assembleSmsRecord(SmsParam smsParam, YunPianSendResult response, YunPianSmsAccount account) {
-        if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getData())) {
-            return null;
-        }
 
         List<SmsRecord> smsRecordList = new ArrayList<>();
+        if (Objects.isNull(response) || ArrayUtil.isEmpty(response.getData())) {
+            return smsRecordList;
+        }
+
 
         for (YunPianSendResult.DataDTO datum : response.getData()) {
             SmsRecord smsRecord = SmsRecord.builder()
@@ -121,10 +122,10 @@ public class YunPianSmsScript implements SmsScript {
 
     private String getTplValue(SmsParam smsParam) {
         String tplValue = "";
-        if (StrUtil.isNotBlank(smsParam.getContent())) {
-            tplValue = StrUtil.split(smsParam.getContent(), PARAMS_SPLIT_KEY).stream().map(item -> {
-                List<String> kv = StrUtil.splitTrim(item, PARAMS_KV_SPLIT_KEY, 2);
-                return String.join("=", URLUtil.encodeQuery(kv.get(0)), URLUtil.encodeQuery(kv.get(1)));
+        if (CharSequenceUtil.isNotBlank(smsParam.getContent())) {
+            tplValue = CharSequenceUtil.split(smsParam.getContent(), PARAMS_SPLIT_KEY).stream().map(item -> {
+                List<String> kv = CharSequenceUtil.splitTrim(item, PARAMS_KV_SPLIT_KEY, 2);
+                return String.join("=", URLEncodeUtil.encodeQuery(kv.get(0)), URLEncodeUtil.encodeQuery(kv.get(1)));
             }).collect(Collectors.joining("&"));
         }
         return tplValue;

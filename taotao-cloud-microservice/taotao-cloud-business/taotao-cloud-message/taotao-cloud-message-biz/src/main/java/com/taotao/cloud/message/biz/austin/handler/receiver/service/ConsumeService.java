@@ -1,15 +1,15 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.service;
 
 
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
 
 import java.util.List;
 
 /**
  * 消费消息服务
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface ConsumeService {
 

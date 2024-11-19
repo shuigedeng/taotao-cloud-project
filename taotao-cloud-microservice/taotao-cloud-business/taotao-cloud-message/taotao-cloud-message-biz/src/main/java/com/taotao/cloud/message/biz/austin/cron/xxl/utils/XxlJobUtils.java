@@ -1,16 +1,16 @@
 package com.taotao.cloud.message.biz.austin.cron.xxl.utils;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.enums.RespStatusEnum;
-import com.java3y.austin.common.vo.BasicResultVO;
-import com.java3y.austin.cron.xxl.constants.XxlJobConstant;
-import com.java3y.austin.cron.xxl.entity.XxlJobGroup;
-import com.java3y.austin.cron.xxl.entity.XxlJobInfo;
-import com.java3y.austin.cron.xxl.enums.*;
-import com.java3y.austin.cron.xxl.service.CronTaskService;
-import com.java3y.austin.support.domain.MessageTemplate;
+import cn.hutool.core.text.CharSequenceUtil;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.vo.BasicResultVO;
+import com.taotao.cloud.message.biz.austin.cron.xxl.constants.XxlJobConstant;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobGroup;
+import com.taotao.cloud.message.biz.austin.cron.xxl.entity.XxlJobInfo;
+import com.taotao.cloud.message.biz.austin.cron.xxl.enums.*;
+import com.taotao.cloud.message.biz.austin.cron.xxl.service.CronTaskService;
+import com.taotao.cloud.message.biz.austin.support.domain.MessageTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import java.util.Objects;
 /**
  * xxlJob工具类
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Component
 public class XxlJobUtils {
@@ -63,10 +63,10 @@ public class XxlJobUtils {
                 .executorFailRetryCount(XxlJobConstant.RETRY_COUNT)
                 .glueType(GlueTypeEnum.BEAN.name())
                 .triggerStatus(CommonConstant.FALSE)
-                .glueRemark(StrUtil.EMPTY)
-                .glueSource(StrUtil.EMPTY)
-                .alarmEmail(StrUtil.EMPTY)
-                .childJobId(StrUtil.EMPTY).build();
+                .glueRemark(CharSequenceUtil.EMPTY)
+                .glueSource(CharSequenceUtil.EMPTY)
+                .alarmEmail(CharSequenceUtil.EMPTY)
+                .childJobId(CharSequenceUtil.EMPTY).build();
 
         if (Objects.nonNull(messageTemplate.getCronTaskId())) {
             xxlJobInfo.setId(messageTemplate.getCronTaskId());
@@ -80,14 +80,14 @@ public class XxlJobUtils {
      * @return
      */
     private Integer queryJobGroupId() {
-        BasicResultVO basicResultVO = cronTaskService.getGroupId(appName, jobHandlerName);
+        BasicResultVO<Integer> basicResultVO = cronTaskService.getGroupId(appName, jobHandlerName);
         if (Objects.isNull(basicResultVO.getData())) {
             XxlJobGroup xxlJobGroup = XxlJobGroup.builder().appname(appName).title(jobHandlerName).addressType(CommonConstant.FALSE).build();
             if (RespStatusEnum.SUCCESS.getCode().equals(cronTaskService.createGroup(xxlJobGroup).getStatus())) {
-                return (int) cronTaskService.getGroupId(appName, jobHandlerName).getData();
+                return (Integer) cronTaskService.getGroupId(appName, jobHandlerName).getData();
             }
         }
-        return (Integer) basicResultVO.getData();
+        return basicResultVO.getData();
     }
 
 }

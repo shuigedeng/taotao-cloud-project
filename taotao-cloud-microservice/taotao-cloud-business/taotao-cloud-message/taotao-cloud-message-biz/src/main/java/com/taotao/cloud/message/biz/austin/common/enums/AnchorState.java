@@ -7,14 +7,15 @@ import lombok.ToString;
 
 /**
  * 打点信息枚举
+ * <p>
+ * com.taotao.cloud.message.biz.austin.web.utils.AnchorStateUtils#getDescriptionByState
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Getter
 @ToString
 @AllArgsConstructor
 public enum AnchorState implements PowerfulEnum {
-
     /**
      * 消息接收成功（获取到请求）
      */
@@ -56,8 +57,7 @@ public enum AnchorState implements PowerfulEnum {
     /**
      * 点击（下发的消息被点击）
      */
-    CLICK(64, "消息被点击"),
-    ;
+    CLICK(64, "消息被点击");
 
 
     private final Integer code;

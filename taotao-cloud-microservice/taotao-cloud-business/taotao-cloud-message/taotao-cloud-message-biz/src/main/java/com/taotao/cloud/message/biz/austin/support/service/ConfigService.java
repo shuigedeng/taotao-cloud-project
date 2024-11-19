@@ -4,7 +4,7 @@ package com.taotao.cloud.message.biz.austin.support.service;
 /**
  * 读取配置服务
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface ConfigService {
 

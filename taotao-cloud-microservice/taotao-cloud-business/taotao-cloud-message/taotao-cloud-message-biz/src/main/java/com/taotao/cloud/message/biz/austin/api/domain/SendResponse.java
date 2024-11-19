@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.api.domain;
 
-import com.java3y.austin.common.domain.SimpleTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.SimpleTaskInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 发送接口返回值
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Accessors(chain = true)

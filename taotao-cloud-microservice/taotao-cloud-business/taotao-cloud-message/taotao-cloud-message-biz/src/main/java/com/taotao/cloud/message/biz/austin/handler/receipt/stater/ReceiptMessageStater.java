@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.handler.receipt.stater;
 /**
  * 拉取回执信息 启动器
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface ReceiptMessageStater {
 

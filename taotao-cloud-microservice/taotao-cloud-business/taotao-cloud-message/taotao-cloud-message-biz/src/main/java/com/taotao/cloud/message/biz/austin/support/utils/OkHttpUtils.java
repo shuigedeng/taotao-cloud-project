@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author 3y
- * @since 2021/11/4
+ * @author shuigedeng
+ * @date 2021/11/4
  */
 @Slf4j
 @Component
@@ -70,12 +70,12 @@ public class OkHttpUtils {
         StringBuilder sb = new StringBuilder(url);
         if (Objects.nonNull(params) && params.keySet().size() > 0) {
             boolean firstFlag = true;
-            for (String key : params.keySet()) {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
                 if (firstFlag) {
-                    sb.append("?").append(key).append("=").append(params.get(key));
+                    sb.append("?").append(entry.getKey()).append("=").append(entry.getValue());
                     firstFlag = false;
                 } else {
-                    sb.append("&").append(key).append("=").append(params.get(key));
+                    sb.append("&").append(entry.getKey()).append("=").append(entry.getValue());
                 }
             }
         }
@@ -98,8 +98,8 @@ public class OkHttpUtils {
         FormBody.Builder formBuilder = new FormBody.Builder();
 
         if (Objects.nonNull(params) && params.keySet().size() > 0) {
-            for (String key : params.keySet()) {
-                formBuilder.add(key, params.get(key));
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                formBuilder.add(entry.getKey(), entry.getValue());
             }
         }
         Request.Builder builder = getBuilderWithHeaders(headers);
@@ -177,7 +177,7 @@ public class OkHttpUtils {
     private String execute(Request request) {
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.isSuccessful()) {
-                return response.body().string();
+                return String.valueOf(response.body());
             }
         } catch (Exception e) {
             log.error(Throwables.getStackTraceAsString(e));

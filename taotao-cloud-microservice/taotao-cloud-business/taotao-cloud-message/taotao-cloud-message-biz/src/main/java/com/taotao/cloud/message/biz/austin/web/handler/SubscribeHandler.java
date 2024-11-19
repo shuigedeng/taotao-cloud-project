@@ -2,8 +2,8 @@ package com.taotao.cloud.message.biz.austin.web.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.constant.OfficialAccountParamConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpMessageHandler;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 微信服务号 关注 事件 处理器
  * 将eventKey 存储在 redis
  */

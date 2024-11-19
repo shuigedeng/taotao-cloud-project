@@ -1,8 +1,9 @@
 package com.taotao.cloud.message.biz.austin.web.utils;
 
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.constant.OfficialAccountParamConstant;
-import com.java3y.austin.web.config.WeChatLoginConfig;
+import com.google.common.base.Throwables;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.constant.OfficialAccountParamConstant;
+import com.taotao.cloud.message.biz.austin.web.config.WeChatLoginConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * @author 3y
- * @since 2022/12/22
+ * @author shuigedeng
+ * @date 2022/12/22
  * 微信服务号登录的Utils
  */
 @Component
@@ -48,11 +49,14 @@ public class LoginUtils {
      */
     public boolean needLogin() {
         try {
-            WeChatLoginConfig bean = applicationContext.getBean(OfficialAccountParamConstant.WE_CHAT_LOGIN_CONFIG, WeChatLoginConfig.class);
-            if (CommonConstant.ENV_TEST.equals(env) && Objects.nonNull(bean)) {
-                return true;
+            if (CommonConstant.ENV_TEST.equals(env)) {
+                WeChatLoginConfig bean = applicationContext.getBean(OfficialAccountParamConstant.WE_CHAT_LOGIN_CONFIG, WeChatLoginConfig.class);
+                if (Objects.nonNull(bean)) {
+                    return true;
+                }
             }
         } catch (Exception e) {
+            log.error("LoginUtils#needLogin fail:{}", Throwables.getStackTraceAsString(e));
         }
         return false;
     }

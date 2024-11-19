@@ -2,11 +2,10 @@ package com.taotao.cloud.message.biz.austin.support.mq.eventbus;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.EventBus;
-import com.java3y.austin.common.domain.RecallTaskInfo;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
-import com.java3y.austin.support.domain.MessageTemplate;
-import com.java3y.austin.support.mq.SendMqService;
+import com.taotao.cloud.message.biz.austin.common.domain.RecallTaskInfo;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,14 +14,14 @@ import org.springframework.stereotype.Service;
 
 
 /**
- * @author 3y
+ * @author shuigedeng
  * EventBus 发送实现类
  */
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "austin.mq.pipeline", havingValue = MessageQueuePipeline.EVENT_BUS)
 public class EventBusSendMqServiceImpl implements SendMqService {
-    private EventBus eventBus = new EventBus();
+    private final EventBus eventBus = new EventBus();
 
     @Autowired
     private EventBusListener eventBusListener;

@@ -7,7 +7,7 @@ import lombok.ToString;
 /**
  * 短信状态信息
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Getter
 @ToString

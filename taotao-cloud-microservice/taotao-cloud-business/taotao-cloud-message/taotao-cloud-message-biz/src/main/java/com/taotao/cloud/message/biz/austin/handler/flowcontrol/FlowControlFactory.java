@@ -3,13 +3,13 @@ package com.taotao.cloud.message.biz.austin.handler.flowcontrol;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.util.concurrent.RateLimiter;
-import com.java3y.austin.common.constant.CommonConstant;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.EnumUtil;
-import com.java3y.austin.handler.enums.RateLimitStrategy;
-import com.java3y.austin.handler.flowcontrol.annotations.LocalRateLimit;
-import com.java3y.austin.support.service.ConfigService;
+import com.taotao.cloud.message.biz.austin.common.constant.CommonConstant;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.EnumUtil;
+import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
+import com.taotao.cloud.message.biz.austin.handler.flowcontrol.annotations.LocalRateLimit;
+import com.taotao.cloud.message.biz.austin.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
@@ -24,8 +24,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author 3y
- * @since 2022/4/18
+ * @author shuigedeng
+ * @date 2022/4/18
  */
 @Service
 @Slf4j
@@ -73,7 +73,7 @@ public class FlowControlFactory implements ApplicationContextAware {
      * <p>
      * apollo配置样例     key：flowControl value：{"flow_control_40":1}
      * <p>
-     * 渠道枚举可看：com.java3y.austin.common.enums.ChannelType
+     * 渠道枚举可看：com.taotao.cloud.message.biz.austin.common.enums.ChannelType
      *
      * @param channelCode
      */

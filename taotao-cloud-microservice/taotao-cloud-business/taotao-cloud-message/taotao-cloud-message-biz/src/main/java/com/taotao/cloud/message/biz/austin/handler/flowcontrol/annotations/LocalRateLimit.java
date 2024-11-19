@@ -1,6 +1,6 @@
 package com.taotao.cloud.message.biz.austin.handler.flowcontrol.annotations;
 
-import com.java3y.austin.handler.enums.RateLimitStrategy;
+import com.taotao.cloud.message.biz.austin.handler.enums.RateLimitStrategy;
 import org.springframework.stereotype.Service;
 
 import java.lang.annotation.*;

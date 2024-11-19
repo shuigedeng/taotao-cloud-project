@@ -1,13 +1,13 @@
 package com.taotao.cloud.message.biz.austin.web.exception;
 
-import com.java3y.austin.common.enums.RespStatusEnum;
+import com.taotao.cloud.message.biz.austin.common.enums.RespStatusEnum;
 import lombok.Getter;
 
 /**
  * @author kl
  * @version 1.0.0
  * @description 通用异常
- * @since 2023/2/9 19:00
+ * @date 2023/2/9 19:00
  */
 @Getter
 public class CommonException extends RuntimeException {

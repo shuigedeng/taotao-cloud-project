@@ -1,9 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.receiver.rocketmq;
 
 import com.alibaba.fastjson.JSON;
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.handler.receiver.service.ConsumeService;
-import com.java3y.austin.support.constans.MessageQueuePipeline;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.handler.receiver.MessageReceiver;
+import com.taotao.cloud.message.biz.austin.handler.receiver.service.ConsumeService;
+import com.taotao.cloud.message.biz.austin.support.constans.MessageQueuePipeline;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.annotation.SelectorType;
@@ -27,7 +28,7 @@ import java.util.List;
         selectorType = SelectorType.TAG,
         selectorExpression = "${austin.business.tagId.value}"
 )
-public class RocketMqBizReceiver implements RocketMQListener<String> {
+public class RocketMqBizReceiver implements RocketMQListener<String>, MessageReceiver {
 
     @Autowired
     private ConsumeService consumeService;

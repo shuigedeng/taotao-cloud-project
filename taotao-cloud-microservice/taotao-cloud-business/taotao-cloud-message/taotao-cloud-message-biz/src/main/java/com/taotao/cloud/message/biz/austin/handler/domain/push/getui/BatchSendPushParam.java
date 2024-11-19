@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * 批量推送消息的param
  *
- * @author 3y
+ * @author shuigedeng
  * https://docs.getui.com/getui/server/rest_v2/push/
  */
 @NoArgsConstructor

@@ -3,7 +3,7 @@ package com.taotao.cloud.message.biz.austin.cron.xxl.enums;
 /**
  * 调度类型
  *
- * @author 3y
+ * @author shuigedeng
  */
 public enum ScheduleTypeEnum {
 

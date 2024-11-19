@@ -3,8 +3,8 @@ package com.taotao.cloud.message.biz.austin.handler.config;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayConfig;
 import com.alipay.api.DefaultAlipayClient;
-import com.java3y.austin.common.constant.SendChanelUrlConstant;
-import com.java3y.austin.common.dto.account.AlipayMiniProgramAccount;
+import com.taotao.cloud.message.biz.austin.common.constant.SendChanelUrlConstant;
+import com.taotao.cloud.message.biz.austin.common.dto.account.AlipayMiniProgramAccount;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,21 +13,20 @@ import java.util.Map;
  * 初始化支付宝小程序 单例
  *
  * @author 丁新东
- * @since 2022-12-07
+ * @date 2022-12-07
  */
 public class AlipayClientSingleton {
 
-    private static volatile DefaultAlipayClient alipayClientSingleton;
 
-    private static Map<String, DefaultAlipayClient> alipayClientMap = new HashMap<>();
+    private static final Map<String, DefaultAlipayClient> ALIPAY_CLIENT_MAP = new HashMap<>();
 
     private AlipayClientSingleton() {
     }
 
     public static DefaultAlipayClient getSingleton(AlipayMiniProgramAccount alipayMiniProgramAccount) throws AlipayApiException {
-        if (!alipayClientMap.containsKey(alipayMiniProgramAccount.getAppId())) {
+        if (!ALIPAY_CLIENT_MAP.containsKey(alipayMiniProgramAccount.getAppId())) {
             synchronized (DefaultAlipayClient.class) {
-                if (!alipayClientMap.containsKey(alipayMiniProgramAccount.getAppId())) {
+                if (!ALIPAY_CLIENT_MAP.containsKey(alipayMiniProgramAccount.getAppId())) {
                     AlipayConfig alipayConfig = new AlipayConfig();
                     alipayConfig.setServerUrl(SendChanelUrlConstant.ALI_MINI_PROGRAM_GATEWAY_URL);
                     alipayConfig.setAppId(alipayMiniProgramAccount.getAppId());
@@ -36,12 +35,10 @@ public class AlipayClientSingleton {
                     alipayConfig.setAlipayPublicKey(alipayMiniProgramAccount.getAlipayPublicKey());
                     alipayConfig.setCharset("utf-8");
                     alipayConfig.setSignType("RSA2");
-                    alipayClientSingleton = new DefaultAlipayClient(alipayConfig);
-                    alipayClientMap.put(alipayMiniProgramAccount.getAppId(), alipayClientSingleton);
-                    return alipayClientSingleton;
+                    ALIPAY_CLIENT_MAP.put(alipayMiniProgramAccount.getAppId(), new DefaultAlipayClient(alipayConfig));
                 }
             }
         }
-        return alipayClientMap.get(alipayMiniProgramAccount.getAppId());
+        return ALIPAY_CLIENT_MAP.get(alipayMiniProgramAccount.getAppId());
     }
 }

@@ -2,13 +2,13 @@ package com.taotao.cloud.message.biz.austin.support.domain;
 
 import lombok.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
- * @author 3y
+ * @author shuigedeng
  * 渠道账号信息
  */
 @Data
@@ -30,7 +30,8 @@ public class ChannelAccount {
 
     /**
      * 发送渠道
-     * 枚举值：com.java3y.austin.common.enums.ChannelType
+     *
+     * @see com.taotao.cloud.message.biz.austin.common.enums.ChannelType
      */
     private Integer sendChannel;
 

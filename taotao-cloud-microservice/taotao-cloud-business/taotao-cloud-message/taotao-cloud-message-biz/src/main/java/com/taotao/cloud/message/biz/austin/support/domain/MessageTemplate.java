@@ -7,10 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Data
@@ -22,7 +22,7 @@ import java.io.Serializable;
 /**
  *
  * 消息模板DO
- * @author 3y
+ * @author shuigedeng
  */
 public class MessageTemplate implements Serializable {
 

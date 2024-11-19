@@ -1,10 +1,10 @@
 package com.taotao.cloud.message.biz.austin.handler.utils;
 
 
-import com.java3y.austin.common.domain.TaskInfo;
-import com.java3y.austin.common.enums.ChannelType;
-import com.java3y.austin.common.enums.EnumUtil;
-import com.java3y.austin.common.enums.MessageType;
+import com.taotao.cloud.message.biz.austin.common.domain.TaskInfo;
+import com.taotao.cloud.message.biz.austin.common.enums.ChannelType;
+import com.taotao.cloud.message.biz.austin.common.enums.EnumUtil;
+import com.taotao.cloud.message.biz.austin.common.enums.MessageType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,11 @@ import java.util.List;
 /**
  * groupId 标识着每一个消费者组
  *
- * @author 3y
+ * @author shuigedeng
  */
 public class GroupIdMappingUtils {
+    private GroupIdMappingUtils() {
+    }
 
     /**
      * 获取所有的groupIds

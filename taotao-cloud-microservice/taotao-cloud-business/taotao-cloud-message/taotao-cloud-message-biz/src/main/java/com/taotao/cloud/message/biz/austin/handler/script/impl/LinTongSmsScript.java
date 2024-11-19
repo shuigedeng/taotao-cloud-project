@@ -9,14 +9,14 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
-import com.java3y.austin.common.dto.account.sms.LinTongSmsAccount;
-import com.java3y.austin.common.enums.SmsStatus;
-import com.java3y.austin.handler.domain.sms.LinTongSendMessage;
-import com.java3y.austin.handler.domain.sms.LinTongSendResult;
-import com.java3y.austin.handler.domain.sms.SmsParam;
-import com.java3y.austin.handler.script.SmsScript;
-import com.java3y.austin.support.domain.SmsRecord;
-import com.java3y.austin.support.utils.AccountUtils;
+import com.taotao.cloud.message.biz.austin.common.dto.account.sms.LinTongSmsAccount;
+import com.taotao.cloud.message.biz.austin.common.enums.SmsStatus;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.LinTongSendMessage;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.LinTongSendResult;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
+import com.taotao.cloud.message.biz.austin.handler.script.SmsScript;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,7 +32,7 @@ import java.util.*;
  * @version v1.0.0
  * @DATE 2022/11/24-14:29
  * @Description
- * @see com.java3y.austin.handler.script.impl austin
+ * @see com.taotao.cloud.message.biz.austin.handler.script.impl austin
  */
 @Slf4j
 @Component("LinTongSmsScript")
@@ -62,7 +62,7 @@ public class LinTongSmsScript implements SmsScript {
             return assembleSmsRecord(smsParam, linTongSendResult, linTongSmsAccount);
         } catch (Exception e) {
             log.error("LinTongSmsAccount#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
-            return null;
+            return new ArrayList<>();
         }
 
     }
@@ -75,7 +75,7 @@ public class LinTongSmsScript implements SmsScript {
      */
     @Override
     public List<SmsRecord> pull(Integer id) {
-        return null;
+        return new ArrayList<>();
     }
 
 
@@ -100,7 +100,7 @@ public class LinTongSmsScript implements SmsScript {
 
     private List<SmsRecord> assembleSmsRecord(SmsParam smsParam, LinTongSendResult response, LinTongSmsAccount account) {
         if (response == null || ArrayUtil.isEmpty(response.getDtoList())) {
-            return null;
+            return new ArrayList<>();
         }
 
         List<SmsRecord> smsRecordList = new ArrayList<>();

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 撤回任务信息
  *
- * @author 3y
+ * @author shuigedeng
  */
 @Data
 @Builder
@@ -24,6 +24,7 @@ public class RecallTaskInfo {
 
     /**
      * 需要撤回的消息ids
+     * （有传入消息ids时，优先撤回dis）
      */
     private List<String> recallMessageId;
 

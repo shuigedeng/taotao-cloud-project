@@ -16,7 +16,7 @@ import java.util.List;
  * @version v1.0.0
  * @DATE 2022/11/24-15:24
  * @Description
- * @see com.java3y.austin.handler.domain.sms austin
+ * @see com.taotao.cloud.message.biz.austin.handler.domain.sms austin
  */
 @Data
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class LinTongSendResult {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public class DataDTO {
+    public static class DataDTO {
         Integer code;
         String message;
         Long msgId;

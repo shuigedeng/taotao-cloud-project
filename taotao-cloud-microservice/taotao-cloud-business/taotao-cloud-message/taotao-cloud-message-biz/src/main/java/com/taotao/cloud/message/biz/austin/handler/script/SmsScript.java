@@ -1,8 +1,8 @@
 package com.taotao.cloud.message.biz.austin.handler.script;
 
 
-import com.java3y.austin.handler.domain.sms.SmsParam;
-import com.java3y.austin.support.domain.SmsRecord;
+import com.taotao.cloud.message.biz.austin.handler.domain.sms.SmsParam;
+import com.taotao.cloud.message.biz.austin.support.domain.SmsRecord;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 短信脚本 接口
  *
- * @author 3y
+ * @author shuigedeng
  */
 public interface SmsScript {
 
