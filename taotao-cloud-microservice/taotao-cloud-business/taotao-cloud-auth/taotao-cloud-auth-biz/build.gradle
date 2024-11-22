@@ -40,7 +40,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
-    implementation 'org.springframework.session:spring-session-data-redis:3.3.3'
+    implementation 'org.springframework.session:spring-session-data-redis:3.4.0'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
     implementation 'com.github.binarywang:weixin-java-mp:4.6.7.B'
