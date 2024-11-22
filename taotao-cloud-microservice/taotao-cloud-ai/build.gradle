@@ -49,7 +49,7 @@ dependencies {
 
     //alibaba ai
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.1"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.2"
 
     //spring ai
     // https://repo.spring.io/milestone    https://repo.spring.io/snapshot

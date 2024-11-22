@@ -43,7 +43,7 @@ configurations {
 
         resolutionStrategy {
             //force "org.codehaus.groovy:groovy:4.0.0"
-            //force "com.alibaba.nacos:nacos-client:2.1.0"
+            //force "com.alibaba.nacos:nacos-client:2.4.3"
         }
 
 

@@ -282,9 +282,6 @@ management:
     process:
       enabled: true
   endpoints:
-    beans:
-      cache:
-        time-to-live: "10s"
     web:
       #base-path: "/manage"
       cors:
@@ -294,6 +291,8 @@ management:
         enabled: true
       exposure:
         include: '*'
+    access:
+      default: read_only
   endpoint:
     scheduledtasks:
       enabled: true
@@ -306,9 +305,13 @@ management:
     health:
       show-details: ALWAYS
     shutdown:
-      enabled: true
+      access: read_only
     loggers:
-      enabled: true
+      access: read_only
+    beans:
+      access: read_only
+      cache:
+        time-to-live: "10s"
   metrics:
     tags:
       application: ${spring.application.name}

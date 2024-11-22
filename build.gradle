@@ -24,7 +24,7 @@ buildscript {
         ttcVersion = version
         ttcGroup = "io.github.shuigedeng"
 
-        springBootVersion = "3.3.5"
+        springBootVersion = "3.4.0"
         querydslAptVersion = "5.1.0"
         mapstructProcessorVersion = "1.6.3"
         lombokMapstructBindingVersion = "0.2.0"
@@ -167,13 +167,13 @@ plugins {
 
     //用于运行 SonarQube 分析的 Gradle 插件。
     //https://plugins.gradle.org/plugin/org.sonarqube
-    id "org.sonarqube" version "5.1.0.4882"
+    id "org.sonarqube" version "6.0.0.5145"
 
     //Spring Boot 可以轻松创建独立的、生产级的基于 Spring 的应用程序，您可以“直接运行”
     // 我们对 Spring 平台和第三方库持固执己见的看法，
     // 大多数 Spring Boot 应用程序只需要很少的 Spring 配置
     //https://plugins.gradle.org/plugin/org.springframework.boot
-    id "org.springframework.boot" version "3.3.5"
+    id "org.springframework.boot" version "3.4.0"
 
     //一个 Gradle 插件，提供类似 Maven 的依赖管理功能
     //https://plugins.gradle.org/plugin/io.spring.dependency-management
@@ -199,7 +199,7 @@ plugins {
 
     //https://plugins.gradle.org/plugin/io.swagger.core.v3.swagger-gradle-plugin
     //https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-gradle-plugin
-    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.25"
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.26"
 
     //id 'org.cyclonedx.bom' version '1.10.0'
 

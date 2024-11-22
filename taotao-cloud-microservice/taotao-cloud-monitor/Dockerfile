@@ -218,6 +218,8 @@ RUN true
 ENTRYPOINT sleep 30; java ${JAVA_OPTIONS} org.springframework.boot.loader.launch.JarLauncher
 
 #cds
+#https://docs.spring.io/spring-boot/reference/packaging/class-data-sharing.html
+#https://docs.spring.io/spring-boot/reference/packaging/container-images/dockerfiles.html
 RUN java -XX:ArchiveClassesAtExit=taotao-cloud-monitor.jsa -Dspring.context.exit=onRefresh -jar taotao-cloud-monitor-2024.12.jar
 
 ENTRYPOINT ["java", "-XX:SharedArchiveFile=taotao-cloud-monitor.jsa", "-jar", "taotao-cloud-monitor-2024.12.jar"]
