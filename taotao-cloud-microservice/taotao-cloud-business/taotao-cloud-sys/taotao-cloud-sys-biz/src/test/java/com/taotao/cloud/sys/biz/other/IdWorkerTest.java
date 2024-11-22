@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.other;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import shorturl.server.server.application.util.IdWorker;
 import shorturl.server.server.application.util.IdWorkerInstance;
 

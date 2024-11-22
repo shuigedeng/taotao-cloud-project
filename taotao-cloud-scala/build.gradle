@@ -14,4 +14,9 @@ dependencies {
     implementation 'com.typesafe.akka:akka-slf4j_2.13:2.8.8'
     implementation 'com.typesafe.akka:akka-actor_2.13:2.8.8'
     implementation 'com.typesafe.akka:akka-remote_2.13:2.8.8'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
 }

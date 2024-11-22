@@ -53,8 +53,6 @@ dependencies {
     testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.24.0'
     testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.24.0'
 
-    testImplementation "com.tngtech.archunit:archunit-junit5:1.3.0"
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

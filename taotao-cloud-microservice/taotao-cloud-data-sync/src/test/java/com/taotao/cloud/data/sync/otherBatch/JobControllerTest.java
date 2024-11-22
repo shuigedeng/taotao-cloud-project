@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.data.sync.otherBatch;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,7 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,7 +55,7 @@ class JobControllerTest {
 			.stream()
 			.map(map -> map.get("user_name").toString())
 			.toList();
-		assertLinesMatch(List.of("张三", "李四", "王雪", "孙云", "赵柳", "孙雪"), names);
+		Assertions.assertLinesMatch(List.of("张三", "李四", "王雪", "孙云", "赵柳", "孙雪"), names);
 	}
 
 }

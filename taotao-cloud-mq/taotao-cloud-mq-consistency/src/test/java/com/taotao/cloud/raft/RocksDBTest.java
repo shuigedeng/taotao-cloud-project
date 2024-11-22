@@ -21,8 +21,7 @@ import java.io.File;
 import com.alibaba.fastjson.JSON;
 
 import com.taotao.cloud.raft.impl.DefaultStateMachine;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;

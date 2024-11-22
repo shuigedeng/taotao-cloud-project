@@ -2,7 +2,6 @@ package com.taotao.cloud.modulith.borrow;
 
 import static com.taotao.cloud.modulith.borrow.domain.Book.BookStatus.AVAILABLE;
 import static com.taotao.cloud.modulith.borrow.domain.Book.BookStatus.ON_HOLD;
-import static org.assertj.core.api.Assertions.assertThat;
 import com.taotao.cloud.modulith.borrow.application.CirculationDesk;
 import com.taotao.cloud.modulith.borrow.application.HoldDto;
 import com.taotao.cloud.modulith.borrow.domain.Book;
@@ -19,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +42,8 @@ class CirculationDeskTest {
     void patronCanPlaceHold() {
 		Hold.PlaceHold command = new Hold.PlaceHold(new Book.Barcode("12345"), LocalDate.now(), new PatronId(UUID.randomUUID()));
 		HoldDto holdDto = circulationDesk.placeHold(command);
-        assertThat(holdDto.getBookBarcode()).isEqualTo("12345");
-        assertThat(holdDto.getDateOfHold()).isNotNull();
+		Assertions.assertThat(holdDto.getBookBarcode()).isEqualTo("12345");
+		Assertions.assertThat(holdDto.getDateOfHold()).isNotNull();
     }
 
     @Test
@@ -52,7 +53,7 @@ class CirculationDeskTest {
         circulationDesk.handle(new BookPlacedOnHold(hold.getId().id(), hold.getOnBook().barcode(), hold.getDateOfHold()));
         //noinspection OptionalGetWithoutIsPresent
 		Book book = bookRepository.findByBarcode("12345").get();
-        assertThat(book.getStatus()).isEqualTo(ON_HOLD);
+		Assertions.assertThat(book.getStatus()).isEqualTo(ON_HOLD);
     }
 
 //    @Test

@@ -48,7 +48,7 @@ class FileStorageServiceTest {
         uploadPretreatment.thumbnail();
         uploadPretreatment.putAttr("role", "admin");
         FileInfo fileInfo = uploadPretreatment.upload();
-        Assert.notNull(fileInfo, "文件上传失败！");
+        Assertions.notNull(fileInfo, "文件上传失败！");
         log.info("文件上传成功：{}", fileInfo.toString());
     }
 
@@ -62,7 +62,7 @@ class FileStorageServiceTest {
         uploadPretreatment.setObjectId("0");
         uploadPretreatment.setObjectType("0");
         FileInfo fileInfo = uploadPretreatment.upload();
-        Assert.notNull(fileInfo, "文件上传失败！");
+        Assertions.notNull(fileInfo, "文件上传失败！");
         log.info("文件上传成功：{}", fileInfo.toString());
     }
 
@@ -79,11 +79,11 @@ class FileStorageServiceTest {
         uploadPretreatment.putAttr("role", "admin");
         uploadPretreatment.thumbnail(200, 200);
         FileInfo fileInfo = uploadPretreatment.upload();
-        Assert.notNull(fileInfo, "文件上传失败！");
+        Assertions.notNull(fileInfo, "文件上传失败！");
 
         log.info("尝试删除已存在的文件：{}", fileInfo);
         boolean delete = fileStorageService.delete(fileInfo.getUrl());
-        Assert.isTrue(delete, "文件删除失败！" + fileInfo.getUrl());
+        Assertions.isTrue(delete, "文件删除失败！" + fileInfo.getUrl());
         log.info("文件删除成功：{}", fileInfo);
 
         fileInfo = BeanUtil.copyProperties(fileInfo, FileInfo.class);
@@ -91,7 +91,7 @@ class FileStorageServiceTest {
         fileInfo.setUrl(fileInfo.getUrl() + "111.tmp");
         log.info("尝试删除不存在的文件：{}", fileInfo);
         delete = fileStorageService.delete(fileInfo);
-        Assert.isTrue(delete, "文件删除失败！" + fileInfo.getUrl());
+        Assertions.isTrue(delete, "文件删除失败！" + fileInfo.getUrl());
         log.info("文件删除成功：{}", fileInfo);
     }
 
@@ -106,17 +106,17 @@ class FileStorageServiceTest {
         uploadPretreatment.setObjectId("0");
         uploadPretreatment.setObjectType("0");
         FileInfo fileInfo = uploadPretreatment.upload();
-        Assert.notNull(fileInfo, "文件上传失败！");
+        Assertions.notNull(fileInfo, "文件上传失败！");
         boolean exists = fileStorageService.exists(fileInfo);
         log.info("文件是否存在，应该存在，实际为：{}，文件：{}", exists, fileInfo);
-        Assert.isTrue(exists, "文件是否存在，应该存在，实际为：{}，文件：{}", exists, fileInfo);
+        Assertions.isTrue(exists, "文件是否存在，应该存在，实际为：{}，文件：{}", exists, fileInfo);
 
         fileInfo = BeanUtil.copyProperties(fileInfo, FileInfo.class);
         fileInfo.setFilename(fileInfo.getFilename() + "111.cc");
         fileInfo.setUrl(fileInfo.getUrl() + "111.cc");
         exists = fileStorageService.exists(fileInfo);
         log.info("文件是否存在，不该存在，实际为：{}，文件：{}", exists, fileInfo);
-        Assert.isFalse(exists, "文件是否存在，不该存在，实际为：{}，文件：{}", exists, fileInfo);
+        Assertions.isFalse(exists, "文件是否存在，不该存在，实际为：{}，文件：{}", exists, fileInfo);
     }
 
     /** 测试上传并下载文件 */
@@ -133,14 +133,14 @@ class FileStorageServiceTest {
         uploadPretreatment.setSaveThFilename("bbb");
         uploadPretreatment.thumbnail(200, 200);
         FileInfo fileInfo = uploadPretreatment.upload();
-        Assert.notNull(fileInfo, "文件上传失败！");
+        Assertions.notNull(fileInfo, "文件上传失败！");
 
         byte[] bytes = fileStorageService
                 .download(fileInfo)
                 .setProgressMonitor((progressSize, allSize) ->
                         log.info("文件下载进度：{} {}%", progressSize, progressSize * 100 / allSize))
                 .bytes();
-        Assert.notNull(bytes, "文件下载失败！");
+        Assertions.notNull(bytes, "文件下载失败！");
         log.info("文件下载成功，文件大小：{}", bytes.length);
 
         byte[] thBytes = fileStorageService
@@ -148,7 +148,7 @@ class FileStorageServiceTest {
                 .setProgressMonitor((progressSize, allSize) ->
                         log.info("缩略图文件下载进度：{} {}%", progressSize, progressSize * 100 / allSize))
                 .bytes();
-        Assert.notNull(thBytes, "缩略图文件下载失败！");
+        Assertions.notNull(thBytes, "缩略图文件下载失败！");
         log.info("缩略图文件下载成功，文件大小：{}", thBytes.length);
     }
 }

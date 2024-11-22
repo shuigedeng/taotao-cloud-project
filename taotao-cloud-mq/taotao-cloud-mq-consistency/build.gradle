@@ -3,8 +3,6 @@ dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-plugin")
     api project(":taotao-cloud-mq:taotao-cloud-mq-proxy")
 
-    testImplementation "junit:junit:4.13.2"
-
     implementation 'org.slf4j:slf4j-api:2.0.16'
     implementation 'org.slf4j:slf4j-api:2.0.16'
     implementation('com.alipay.sofa:bolt:1.6.10') {
@@ -18,4 +16,9 @@ dependencies {
 
     implementation "org.projectlombok:lombok:1.18.36"
     annotationProcessor "org.projectlombok:lombok:1.18.36"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
 }

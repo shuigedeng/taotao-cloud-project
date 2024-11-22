@@ -3,7 +3,7 @@ package com.taotao.cloud.jdbcpool;
 import com.taotao.cloud.jdbcpool.datasource.UnPooledDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author shuigedeng

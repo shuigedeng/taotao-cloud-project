@@ -33,7 +33,7 @@ public class CacheBsTest {
         cache.put("3", "3");
         cache.put("4", "4");
 
-        Assert.assertEquals(2, cache.size());
+        Assertions.assertEquals(2, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -54,7 +54,7 @@ public class CacheBsTest {
         cache.put("3", "3");
         cache.put("4", "4");
 
-        Assert.assertEquals(2, cache.size());
+        Assertions.assertEquals(2, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -72,10 +72,10 @@ public class CacheBsTest {
         cache.put("2", "2");
 
         cache.expire("1", 40);
-        Assert.assertEquals(2, cache.size());
+        Assertions.assertEquals(2, cache.size());
 
         TimeUnit.MILLISECONDS.sleep(50);
-        Assert.assertEquals(1, cache.size());
+        Assertions.assertEquals(1, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -104,7 +104,7 @@ public class CacheBsTest {
                 .load(new MyCacheLoad())
                 .build();
 
-        Assert.assertEquals(2, cache.size());
+        Assertions.assertEquals(2, cache.size());
     }
 
     /**
@@ -118,7 +118,7 @@ public class CacheBsTest {
                 .persist(CachePersists.<String, String>dbJson("1.rdb"))
                 .build();
 
-        Assert.assertEquals(2, cache.size());
+        Assertions.assertEquals(2, cache.size());
         TimeUnit.SECONDS.sleep(5);
     }
 
@@ -132,7 +132,7 @@ public class CacheBsTest {
                 .load(CacheLoads.<String, String>dbJson("1.rdb"))
                 .build();
 
-        Assert.assertEquals(2, cache.size());
+        Assertions.assertEquals(2, cache.size());
     }
 
     /**
@@ -177,7 +177,7 @@ public class CacheBsTest {
                 .load(CacheLoads.<String, String>aof("default.aof"))
                 .build();
 
-        Assert.assertEquals(1, cache.size());
+        Assertions.assertEquals(1, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -201,7 +201,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -220,7 +220,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -243,7 +243,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -266,7 +266,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -289,7 +289,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -312,7 +312,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 
@@ -336,7 +336,7 @@ public class CacheBsTest {
         cache.get("A");
         cache.put("D", "LRU");
 
-        Assert.assertEquals(3, cache.size());
+        Assertions.assertEquals(3, cache.size());
         System.out.println(cache.keySet());
     }
 

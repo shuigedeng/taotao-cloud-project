@@ -19,10 +19,7 @@ package com.taotao.cloud.raft;
 import com.taotao.cloud.raft.entity.Command;
 import com.taotao.cloud.raft.entity.LogEntry;
 import com.taotao.cloud.raft.impl.DefaultLogModule;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**

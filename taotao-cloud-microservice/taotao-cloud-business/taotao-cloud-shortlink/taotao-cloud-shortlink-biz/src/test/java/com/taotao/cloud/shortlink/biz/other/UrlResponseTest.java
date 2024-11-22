@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.shortlink.biz.other;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import shorturl.server.server.application.dto.UrlResponse;
 
 public class UrlResponseTest {

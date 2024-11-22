@@ -17,7 +17,7 @@
 package com.taotao.cloud.seatunnel;
 
 
-class TaoTaoCloudSwatunnelApplicationTests {
+class TaoTaoCloudSeatunnelApplicationTests {
 
     void contextLoads() {}
 }

@@ -1,13 +1,13 @@
 package com.taotao.cloud.modulith.catalog;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.taotao.cloud.modulith.catalog.application.BookDto;
 import com.taotao.cloud.modulith.catalog.application.CatalogManagement;
 import com.taotao.cloud.modulith.catalog.domain.CatalogBook.Barcode;
 import com.taotao.cloud.modulith.catalog.domain.CatalogRepository;
 import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.modulith.test.ApplicationModuleTest;
@@ -37,17 +37,17 @@ class CatalogIntegrationTests {
                 .andCleanup(bookDto -> repository.deleteById(bookDto.id()))
                 .andWaitForEventOfType(BookAddedToCatalog.class)
                 .toArriveAndVerify((event, dto) -> {
-                    assertThat(event.title()).isEqualTo("A title");
-                    assertThat(event.inventoryNumber()).isEqualTo("999");
-                    assertThat(event.isbn()).isEqualTo("654");
-                    assertThat(event.author()).isEqualTo("An author");
-                    assertThat(dto.id()).isNotNull();
+                    Assertions.assertThat(event.title()).isEqualTo("A title");
+                    Assertions.assertThat(event.inventoryNumber()).isEqualTo("999");
+                    Assertions.assertThat(event.isbn()).isEqualTo("654");
+                    Assertions.assertThat(event.author()).isEqualTo("An author");
+                    Assertions.assertThat(dto.id()).isNotNull();
                 });
     }
 
     @Test
     void shouldListBooks() {
 		List<BookDto> issuedBooks = books.fetchBooks();
-        assertThat(issuedBooks).hasSizeBetween(3, 4);
+		Assertions.assertThat(issuedBooks).hasSizeBetween(3, 4);
     }
 }

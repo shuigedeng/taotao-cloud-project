@@ -1,7 +1,5 @@
 package com.taotao.cloud.modulith.borrow;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.taotao.cloud.modulith.borrow.application.CirculationDesk;
 import com.taotao.cloud.modulith.borrow.domain.Book;
 import com.taotao.cloud.modulith.borrow.domain.BookPlacedOnHold;
@@ -12,6 +10,8 @@ import com.taotao.cloud.modulith.borrow.domain.Patron.PatronId;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.UUID;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ class CirculationDeskIT {
 		scenario.stimulate(() -> circulationDesk.placeHold(command))
 			.andWaitForEventOfType(BookPlacedOnHold.class)
 			.toArriveAndVerify(
-				(event, dto) -> assertThat(event.inventoryNumber()).isEqualTo("13268510"));
+				(event, dto) -> Assertions.assertThat(event.inventoryNumber()).isEqualTo("13268510"));
 	}
 
 	@Test
@@ -63,9 +63,9 @@ class CirculationDeskIT {
 			.customize(it -> it.atMost(Duration.ofMillis(200)))
 			.andWaitForStateChange(() -> books.findByBarcode("64321704"))
 			.andVerify(book -> {
-				assertThat(book).isNotEmpty();
-				assertThat(book.get().getInventoryNumber().barcode()).isEqualTo("64321704");
-				assertThat(book.get().getStatus()).isEqualTo(Book.BookStatus.ON_HOLD);
+				Assertions.assertThat(book).isNotEmpty();
+				Assertions.assertThat(book.get().getInventoryNumber().barcode()).isEqualTo("64321704");
+				Assertions.assertThat(book.get().getStatus()).isEqualTo(Book.BookStatus.ON_HOLD);
 			});
 	}
 }
