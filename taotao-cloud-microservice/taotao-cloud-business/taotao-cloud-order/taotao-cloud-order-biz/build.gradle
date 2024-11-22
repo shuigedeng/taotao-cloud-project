@@ -26,7 +26,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-pulsar"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-boot-starter-mq-rabbitmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-xxl"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-schedule"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-quartz"
