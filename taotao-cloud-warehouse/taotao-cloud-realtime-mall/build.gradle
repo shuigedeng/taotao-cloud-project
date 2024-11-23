@@ -145,8 +145,6 @@ dependencies {
     //implementation('org.apache.paimon:paimon-shade-caffeine-2:2.9.3-0.8.0')
 
     implementation 'org.apache.commons:commons-compress:1.27.1'
-    implementation 'org.slf4j:slf4j-api:2.0.16'
-    implementation 'org.slf4j:slf4j-reload4j:2.0.16'
 
     implementation "org.scala-lang:scala-library:2.13.15"
     implementation "org.scala-lang:scala-compiler:2.13.15"
@@ -162,7 +160,7 @@ dependencies {
     // 如果保存检查点到hdfs上，需要引入此依赖
     implementation "org.apache.hadoop:hadoop-client:3.4.1"
     implementation 'org.slf4j:slf4j-api:2.0.16'
-    implementation 'org.slf4j:slf4j-reload4j:2.0.16'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.16'
     implementation "org.apache.logging.log4j:log4j-to-slf4j:2.23.1"
 
     implementation "commons-beanutils:commons-beanutils:1.9.4"
@@ -175,6 +173,14 @@ dependencies {
     implementation 'com.clickhouse:clickhouse-jdbc:0.7.1-patch1'
 
     implementation "com.janeluo:ikanalyzer:2012_u6"
+
+    //implementation 'org.slf4j:slf4j-api:2.0.16'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.16'
+
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'ch.qos.logback:logback-core:1.5.12'
+    implementation 'ch.qos.logback:logback-access:1.5.12'
+    implementation 'ch.qos.logback:logback-classic:1.5.12'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
