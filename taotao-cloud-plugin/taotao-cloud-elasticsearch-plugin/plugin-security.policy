@@ -18,7 +18,7 @@ grant codeBase "file:${{java.ext.dirs}}/*" {
 // default permissions granted to all domains
 grant {
     // allows anyone to listen on dynamic ports
-    permission java.net.SocketPermission "localhost:0", "listen";
+    permission java.net.SocketPermission "127.0.0.1:0", "listen";
 
     // "standard" properies that can be read by anyone
     permission java.util.PropertyPermission "java.version", "read";

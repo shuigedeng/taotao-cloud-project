@@ -58,7 +58,7 @@ public class PartitionDemo {
                 option("hoodie.datasource.hive_sync.table", tableName).
                 option("hoodie.datasource.hive_sync.username", "root").
                 option("hoodie.datasource.hive_sync.password", "123456").
-                option("hoodie.datasource.hive_sync.jdbcurl", "jdbc:hive2://localhost:10000").
+                option("hoodie.datasource.hive_sync.jdbcurl", "jdbc:hive2://127.0.0.1:10000").
                 option("hoodie.datasource.hive_sync.partition_fields", hivePartitionFields).
                 option("hoodie.datasource.write.table.type", "COPY_ON_WRITE").
                 option("hoodie.embed.timeline.server", false).

@@ -19,7 +19,7 @@
 
 # Simple examples of HoodieDeltaStreamer which read data from kafka,
 # create the source topic using: kafka-topics.sh --create --zookeeper zk:2181 --replication-factor 3 --partitions 1 --topic hoodie-source-topic
-# insert data using: kafka-console-producer.sh --broker-list localhost:9092 --topic hoodie-source-topic
+# insert data using: kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic hoodie-source-topic
 # start the delta-streamer
 
 BASE_PATH=$(cd `dirname $0`; pwd)

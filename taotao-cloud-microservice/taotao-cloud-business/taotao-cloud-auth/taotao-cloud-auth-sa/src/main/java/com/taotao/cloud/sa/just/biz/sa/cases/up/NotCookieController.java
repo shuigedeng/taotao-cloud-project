@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/NotCookie/")
 public class NotCookieController {
 
-    // 前后端一体模式的登录样例    ---- http://localhost:8081/NotCookie/doLogin?name=zhang&pwd=123456
+    // 前后端一体模式的登录样例    ---- http://127.0.0.1:8081/NotCookie/doLogin?name=zhang&pwd=123456
     @RequestMapping("doLogin")
     public SaResult doLogin(String name, String pwd) {
         if ("zhang".equals(name) && "123456".equals(pwd)) {
@@ -43,7 +43,7 @@ public class NotCookieController {
         return SaResult.error("登录失败");
     }
 
-    // 前后端分离模式的登录样例    ---- http://localhost:8081/NotCookie/doLogin2?name=zhang&pwd=123456
+    // 前后端分离模式的登录样例    ---- http://127.0.0.1:8081/NotCookie/doLogin2?name=zhang&pwd=123456
     @RequestMapping("doLogin2")
     public SaResult doLogin2(String name, String pwd) {
 

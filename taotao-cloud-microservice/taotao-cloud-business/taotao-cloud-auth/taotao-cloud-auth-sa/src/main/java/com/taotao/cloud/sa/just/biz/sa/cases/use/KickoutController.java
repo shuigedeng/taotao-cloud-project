@@ -33,10 +33,10 @@ public class KickoutController {
 
     /*
      * 前提：首先调用登录接口进行登录，代码在 com.pj.cases.use.LoginAuthController 中有详细解释，此处不再赘述
-     * 		---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
+     * 		---- http://127.0.0.1:8081/acc/doLogin?name=zhang&pwd=123456
      */
 
-    // 将指定账号强制注销   ---- http://localhost:8081/kickout/logout?userId=10001
+    // 将指定账号强制注销   ---- http://127.0.0.1:8081/kickout/logout?userId=10001
     @RequestMapping("logout")
     public SaResult logout(long userId) {
 
@@ -47,7 +47,7 @@ public class KickoutController {
         return SaResult.ok();
     }
 
-    // 将指定账号踢下线   ---- http://localhost:8081/kickout/kickout?userId=10001
+    // 将指定账号踢下线   ---- http://127.0.0.1:8081/kickout/kickout?userId=10001
     @RequestMapping("kickout")
     public SaResult kickout(long userId) {
 
@@ -60,11 +60,11 @@ public class KickoutController {
 
     /*
      * 你可以分别在强制注销和踢人下线后，再次访问一下登录校验接口，对比一下两者返回的提示信息有何不同
-     * 		---- http://localhost:8081/acc/checkLogin
+     * 		---- http://127.0.0.1:8081/acc/checkLogin
      */
 
     // 根据 Token 值踢人    ----
-    // http://localhost:8081/kickout/kickoutByTokenValue?tokenValue=xxxx-xxxx-xxxx-xxxx已登录账号的token值
+    // http://127.0.0.1:8081/kickout/kickoutByTokenValue?tokenValue=xxxx-xxxx-xxxx-xxxx已登录账号的token值
     @RequestMapping("kickoutByTokenValue")
     public SaResult kickoutByTokenValue(String tokenValue) {
 

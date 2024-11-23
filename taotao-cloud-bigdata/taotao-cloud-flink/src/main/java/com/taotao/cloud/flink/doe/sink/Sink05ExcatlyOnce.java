@@ -87,7 +87,7 @@ public class Sink05ExcatlyOnce {
             @Override
             public XADataSource get() {
                 MysqlXADataSource mysqlXADataSource = new MysqlXADataSource();
-                mysqlXADataSource.setUrl("jdbc:mysql://localhost:3306/doe44");
+                mysqlXADataSource.setUrl("jdbc:mysql://127.0.0.1:3306/doe44");
                 mysqlXADataSource.setPassword("root");
                 mysqlXADataSource.setUser("root");
                 return mysqlXADataSource;

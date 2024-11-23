@@ -132,7 +132,7 @@ spring:
           client-id: 14a9cf797931430896ad13a6b1855611
           client-secret: 14a9cf797931430896ad13a6b1855611asdfasfd
           introspection-uri: http://192.168.218.2/oauth2/introspect
-          #introspection-uri: http://localhost:8080/oauth/check_token
+          #introspection-uri: http://127.0.0.1:8080/oauth/check_token
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -619,8 +619,8 @@ spring:
                 name: myCircuitBreaker
                 fallbackUri: forward:/myfallback
         #- id: json-grpc
-        #  uri: https://localhost:6565
-        #  #curl -XPOST 'https://localhost:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
+        #  uri: https://127.0.0.1:6565
+        #  #curl -XPOST 'https://127.0.0.1:8091/json/hello' -d '{"firstName":"Duff","lastName":"McKagan"}' -k -H"Content-Type: application/json" -v
         #  metadata:
         #    name: 测试grpc接口
         #  predicates:
@@ -786,7 +786,7 @@ spring:
       #            - RequestTime=true
       #            - PreserveHostHeader
       #        - id: openapi
-      #          uri: http://localhost:${server.port}
+      #          uri: http://127.0.0.1:${server.port}
       #          predicates:
       #            - Path=/v3/api-docs/**
       #          filters:
@@ -1339,7 +1339,7 @@ management:
     tracing:
       connect-timeout: 1
       read-timeout: 10
-      endpoint: http://localhost:9411/api/v2/spans
+      endpoint: http://127.0.0.1:9411/api/v2/spans
   tracing:
     enabled: true
     sampling:

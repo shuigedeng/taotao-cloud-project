@@ -27,4 +27,4 @@ CMD echo "****** start run ... " & \
     -Dauth.username=${SENTINEL_AUTH_USERNAME} -Dauth.password=${SENTINEL_AUTH_PASSWORD} \
     -Dnacos.server-addr=${NACOS_SERVER_ADDR} -Dnacos.namespace=${NACOS_NAMESPACE} -Dnacos.group=${NACOS_GROUP} \
     -Dnacos.username=${NACOS_USERNAME} -Dnacos.password=${NACOS_PASSWORD} \
-    -Dserver.port=8858 -Dcsp.sentinel.api.port=8719 -Dcsp.sentinel.dashboard.server=localhost:8858 -Dproject.name=sentinel-dashboard -jar /app.jar
+    -Dserver.port=8858 -Dcsp.sentinel.api.port=8719 -Dcsp.sentinel.dashboard.server=127.0.0.1:8858 -Dproject.name=sentinel-dashboard -jar /app.jar

@@ -1,7 +1,7 @@
 $(function(){
 	socket.init();
 });
-var basePath = "ws://localhost:8080/seckill/";
+var basePath = "ws://127.0.0.1:8080/seckill/";
 socket = {
 	webSocket : "",
 	init : function() {

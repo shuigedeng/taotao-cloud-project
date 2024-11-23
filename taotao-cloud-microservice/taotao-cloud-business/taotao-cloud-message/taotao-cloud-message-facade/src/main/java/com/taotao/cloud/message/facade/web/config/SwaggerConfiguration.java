@@ -24,7 +24,7 @@ public class SwaggerConfiguration {
     /**
      * 对C端用户的接口文档
      * <p>
-     * 地址：http://localhost:8080/swagger-ui/index.html
+     * 地址：http://127.0.0.1:8080/swagger-ui/index.html
      *
      * @return
      */

@@ -33,13 +33,13 @@ public class HttpBasicController {
 
     /*
     * 测试步骤：
-    	1、访问资源接口，被拦截，无法返回数据信息    ---- http://localhost:8081/basic/getInfo
+    	1、访问资源接口，被拦截，无法返回数据信息    ---- http://127.0.0.1:8081/basic/getInfo
     	2、浏览器弹出窗口，要求输入账号密码，输入：账号=sa，密码=123456，确认
     	3、后端返回数据信息
     	4、后续再次访问接口时，无需重复输入账号密码
     */
 
-    // 资源接口  ---- http://localhost:8081/basic/getInfo
+    // 资源接口  ---- http://127.0.0.1:8081/basic/getInfo
     @RequestMapping("getInfo")
     public SaResult login() {
         // 1、Http Basic 认证校验，账号=sa，密码=123456

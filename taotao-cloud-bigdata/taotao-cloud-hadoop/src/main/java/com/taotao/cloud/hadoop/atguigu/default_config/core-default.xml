@@ -2765,7 +2765,7 @@
 
   <property>
     <name>hadoop.registry.zk.quorum</name>
-    <value>localhost:2181</value>
+    <value>127.0.0.1:2181</value>
     <description>
       List of hostname:port pairs defining the
       zookeeper quorum binding for the registry

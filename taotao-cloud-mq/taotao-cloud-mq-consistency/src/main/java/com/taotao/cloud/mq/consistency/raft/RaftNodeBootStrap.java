@@ -42,7 +42,7 @@ public class RaftNodeBootStrap {
         String[] peerAddr;
 
         if (StringUtil.isNullOrEmpty(property)) {
-            peerAddr = new String[]{"localhost:8775", "localhost:8776", "localhost:8777", "localhost:8778", "localhost:8779"};
+            peerAddr = new String[]{"127.0.0.1:8775", "127.0.0.1:8776", "127.0.0.1:8777", "127.0.0.1:8778", "127.0.0.1:8779"};
         } else {
             peerAddr = property.split(",");
         }

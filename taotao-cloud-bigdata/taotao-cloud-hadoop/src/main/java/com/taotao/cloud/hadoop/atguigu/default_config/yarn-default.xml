@@ -548,7 +548,7 @@
     as the value for yarn.resourcemanager.store.class</description>
     <name>yarn.resourcemanager.fs.state-store.uri</name>
     <value>${hadoop.tmp.dir}/yarn/system/rmstore</value>
-    <!--value>hdfs://localhost:9000/rmstore</value-->
+    <!--value>hdfs://127.0.0.1:9000/rmstore</value-->
   </property>
 
   <property>
@@ -3697,7 +3697,7 @@
       For more details.
     </description>
     <name>yarn.nodemanager.resource-plugins.gpu.docker-plugin.nvidia-docker-v1.endpoint</name>
-    <value>http://localhost:3476/v1.0/docker/cli</value>
+    <value>http://127.0.0.1:3476/v1.0/docker/cli</value>
   </property>
 
   <property>

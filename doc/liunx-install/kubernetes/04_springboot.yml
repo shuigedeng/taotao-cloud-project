@@ -382,7 +382,7 @@ spec:
       #image: yauritux/busybox-curl:latest
       #imagePullPolicy: IfNotPresent
       #command: [ "/bin/sh", "-c", "until curl 127.0.0.0:33334/actuator/health;; do echo waiting for admin; sleep 20; done;" ]
-      #args: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != '200' ]]; do echo Waiting for springboot;sleep 5; done; echo springboot available
+      #args: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 127.0.0.1:8080)" != '200' ]]; do echo Waiting for springboot;sleep 5; done; echo springboot available
       containers:
         - name: taotao-cloud-gateway
           image: "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-gateway:2024.12"

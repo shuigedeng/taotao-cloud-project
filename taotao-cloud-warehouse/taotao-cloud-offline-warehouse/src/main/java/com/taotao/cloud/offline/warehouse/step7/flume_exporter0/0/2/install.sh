@@ -16,7 +16,7 @@ vim  config.yml
 # - name: "flume-agents"
 #   enabled: true
 # # multiple urls can be separated by ,
-#   urls: ["http://localhost:31001/metrics","http://localhost:31002/metrics]
+#   urls: ["http://127.0.0.1:31001/metrics","http://127.0.0.1:31002/metrics]
 
 
 ##################### flume_exporter.sh #############################

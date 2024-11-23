@@ -91,7 +91,7 @@ public class JeepayMgrApplication {
 
 
     /**
-     * 功能描述:  API访问地址： http://localhost:9217/doc.html
+     * 功能描述:  API访问地址： http://127.0.0.1:9217/doc.html
      *
      * @Return: springfox.documentation.spring.web.plugins.Docket
      * @Author: terrfly

@@ -31,7 +31,7 @@ id：<input id="id_txt" type="text"/>
         const sign = MD5(data + requestId + timestamp);
 
         encrypt.encrypt(param);
-        const url = "http://localhost:9000/api/user/detail?param=" + encrypt.encrypt(param);
+        const url = "http://127.0.0.1:9000/api/user/detail?param=" + encrypt.encrypt(param);
         $.ajax({
             url: url,
             beforeSend: function (XMLHttpRequest) {

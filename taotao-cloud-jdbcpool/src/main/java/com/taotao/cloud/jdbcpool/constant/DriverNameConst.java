@@ -24,7 +24,7 @@ public final class DriverNameConst {
     /**
      * MYSQL 8.0 及其以后的版本
      */
-    //jdbc.url=jdbc:mysql://localhost:3306/k3c?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&serverTimezone=Hongkong
+    //jdbc.url=jdbc:mysql://127.0.0.1:3306/k3c?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&serverTimezone=Hongkong
     public static final String MYSQL_8 = "com.mysql.cj.jdbc.Driver";
 
     /**

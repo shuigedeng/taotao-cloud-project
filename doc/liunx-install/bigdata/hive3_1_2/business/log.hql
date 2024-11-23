@@ -19,7 +19,7 @@
 --             "project": "taotao-cloud-backend",
 --             "$screen_height": 900,
 --             "$lib": "js",
---             "current_url": "http://localhost:3000/login",
+--             "current_url": "http://127.0.0.1:3000/login",
 --             "$device_id": "174489e063d961-0903670dbb0a25-15306251-1296000-174489e063ed42",
 --             "$latest_landing_page": "url???domain????????????",
 --             "$title": "React Index",
@@ -27,7 +27,7 @@
 --             "$lib_version": "1.15.16",
 --             "$latest_search_keyword": "url???domain????????????",
 --             "$latest_traffic_source_type": "url???domain????????????",
---             "$url": "http://localhost:3000/login",
+--             "$url": "http://127.0.0.1:3000/login",
 --             "$latest_referrer": "url???domain????????????",
 --             "$latest_referrer_host": "????????????"
 --             }

@@ -1,6 +1,6 @@
 # Spring Cloud Alibaba AI Output
 
-`TongYiController` 接受一个 HTTP GET 请求 `http://localhost:8080/ai/output`。
+`TongYiController` 接受一个 HTTP GET 请求 `http://127.0.0.1:8080/ai/output`。
 `controller` 将会调用 `TongYiService` 中的 `genOutputParse` 方法，完成服务请求得到响应。
 
 有一个可选的 `actor` 参数为演员的名字，其默认值为“Jeff Bridges”。 
@@ -49,7 +49,7 @@ ActorsFilms actorsFilms = outputParser.parse(content);
 使用 curl 工具对接口发起请求：
 
 ```shell
-$ curl http://localhost:8080/ai/output
+$ curl http://127.0.0.1:8080/ai/output
 ```
 
 响应结果为：
@@ -98,7 +98,7 @@ $ curl http://localhost:8080/ai/output
 现在使用 actor 参数：
 
 ```shell
-$ curl --get --data-urlencode 'actor=Bill Murray' http://localhost:8080/ai/output
+$ curl --get --data-urlencode 'actor=Bill Murray' http://127.0.0.1:8080/ai/output
 
 ```
 

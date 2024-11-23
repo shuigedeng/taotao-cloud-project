@@ -14,13 +14,13 @@ JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m -XX:MetaspaceSize=128m 
 # 测试RocketMQ
 发送消息
   # 1.设置环境变量
-  export NAMESRV_ADDR=localhost:9876
+  export NAMESRV_ADDR=127.0.0.1:9876
   # 2.使用安装包的Demo发送消息
   sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer
 
 接收消息
   # 1.设置环境变量
-  export NAMESRV_ADDR=localhost:9876
+  export NAMESRV_ADDR=127.0.0.1:9876
   # 2.接收消息
   sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer
 

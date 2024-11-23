@@ -1,12 +1,12 @@
 apply plugin: "org.springdoc.openapi-gradle-plugin"
 
 openApi {
-    apiDocsUrl.set("https://localhost:9000/api/docs")
+    apiDocsUrl.set("https://127.0.0.1:9000/api/docs")
     outputDir.set(file("${project.layout.buildDirectory.asFile.get()}/docs"))
     outputFileName.set("swagger.json")
     waitTimeInSeconds.set(10)
-    //groupedApiMappings.set(["https://localhost:8080/v3/api-docs/groupA" to "swagger-groupA.json",
-    //                        "https://localhost:8080/v3/api-docs/groupB" to "swagger-groupB.json"])
+    //groupedApiMappings.set(["https://127.0.0.1:8080/v3/api-docs/groupA" to "swagger-groupA.json",
+    //                        "https://127.0.0.1:8080/v3/api-docs/groupB" to "swagger-groupB.json"])
     customBootRun {
         args.set(["--spring.profiles.active=dev"])
     }

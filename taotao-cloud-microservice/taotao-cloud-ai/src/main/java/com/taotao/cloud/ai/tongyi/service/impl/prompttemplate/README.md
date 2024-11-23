@@ -1,6 +1,6 @@
 # Spring Cloud Alibaba AI Prompt Template
 
-`TongYiController` 接受一个 HTTP GET 请求 `http://localhost:8080/ai/prompt-tmpl`。
+`TongYiController` 接受一个 HTTP GET 请求 `http://127.0.0.1:8080/ai/prompt-tmpl`。
 `controller` 将会调用 `TongYiService` 中的 `genPromptTemplates` 方法，完成服务请求得到响应。
 
 本示例代码展示如何使用 `StringTemplate` 引擎和 `Spring AI PromptTemplate` 类。目录中 `resources\prompts` 文件为 `joke-prompt`。此文件由 Spring 加载：
@@ -33,7 +33,7 @@ Tell me a {adjective} joke about {topic}.
 使用 curl 工具对接口发起请求：
 
 ```shell
-$ curl http://localhost:8080/ai/prompt-tmpl
+$ curl http://127.0.0.1:8080/ai/prompt-tmpl
 ```
 
 响应结果为：
@@ -50,7 +50,7 @@ $ curl http://localhost:8080/ai/prompt-tmpl
 现在使用 adjective 和 topic 参数：
 
 ```shell
-$ curl --get --data-urlencode message='Tell me about 3 famous physicists' --data-urlencode name='yuluo' --data-urlencode voice='Rick Sanchez' http://localhost:8080/ai/roles
+$ curl --get --data-urlencode message='Tell me about 3 famous physicists' --data-urlencode name='yuluo' --data-urlencode voice='Rick Sanchez' http://127.0.0.1:8080/ai/roles
 ```
 
 Response：

@@ -49,8 +49,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-// http://localhost:8866/live?url=rtsp://admin:VZCDOY@192.168.2.84:554/Streaming/Channels/102
-// ws://localhost:8866/live?url=rtsp://admin:VZCDOY@192.168.2.84:554/Streaming/Channels/102
+// http://127.0.0.1:8866/live?url=rtsp://admin:VZCDOY@192.168.2.84:554/Streaming/Channels/102
+// ws://127.0.0.1:8866/live?url=rtsp://admin:VZCDOY@192.168.2.84:554/Streaming/Channels/102
 @Service
 @Sharable // 不new，采用共享handler
 public class FlvHandler extends SimpleChannelInboundHandler<Object> {
@@ -208,7 +208,7 @@ public class FlvHandler extends SimpleChannelInboundHandler<Object> {
 
     /**
      * 解析参数，构建camera，&&&参数必须加在url参数值后面，&&&autoClose=false&&&hls=true
-     * ws://localhost:8866/live?url=rtsp://admin:VZCDOY@192.168.2.84:554/Streaming/Channels/102&&&autoClose=false
+     * ws://127.0.0.1:8866/live?url=rtsp://admin:VZCDOY@192.168.2.84:554/Streaming/Channels/102&&&autoClose=false
      *
      * @param url
      * @return

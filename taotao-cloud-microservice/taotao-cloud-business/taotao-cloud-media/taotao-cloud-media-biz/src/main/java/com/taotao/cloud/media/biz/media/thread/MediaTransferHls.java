@@ -64,7 +64,7 @@ public class MediaTransferHls extends MediaTransfer {
     /**
      * String cmd = "ffmpeg -i rtsp://admin:VZCDOY@192.168.2.120:554/Streaming/Channels/102 -r 25 -g
      * 25 -c:v libx264 -c:a aac -f hls -hls_list_size 1 -hls_wrap 6 -hls_time 1 -hls_base_url
-     * /ts/"+22+"/ -method put http://localhost:8888/record/"+22+"/out.m3u8";
+     * /ts/"+22+"/ -method put http://127.0.0.1:8888/record/"+22+"/out.m3u8";
      */
     private void buildCommand() {
 
@@ -91,7 +91,7 @@ public class MediaTransferHls extends MediaTransfer {
         command.add("/ts/" + cameraDto.getMediaKey() + "/");
         command.add("-method");
         command.add("put");
-        command.add("http://localhost:" + port + "/record/" + cameraDto.getMediaKey() + "/out.m3u8");
+        command.add("http://127.0.0.1:" + port + "/record/" + cameraDto.getMediaKey() + "/out.m3u8");
     }
 
     /** 执行 */

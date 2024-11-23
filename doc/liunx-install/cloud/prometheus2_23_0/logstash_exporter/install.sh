@@ -4,9 +4,9 @@ cd /root/taotao-cloud/logstash_exporter
 go get -u github.com/BonnierNews/logstash_exporter
 cd $GOPATH/src/github.com/BonnierNews/logstash_exporter
 make
-./logstash_exporter -exporter.bind_address :1234 -logstash.endpoint http://localhost:1235
+./logstash_exporter -exporter.bind_address :1234 -logstash.endpoint http://127.0.0.1:1235
 
-http://localhost:9198/metrics
+http://127.0.0.1:9198/metrics
 
 - job_name: 'prometheus'
     # metrics_path defaults to '/metrics'

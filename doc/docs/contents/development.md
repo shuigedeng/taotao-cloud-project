@@ -60,6 +60,6 @@ docsify serve -p 80 docs
 游览器打开输入访问地址，http://{你的ID地址}:{你指定的端口}
 
 ```
-http://localhost:3000
+http://127.0.0.1:3000
 ```
 

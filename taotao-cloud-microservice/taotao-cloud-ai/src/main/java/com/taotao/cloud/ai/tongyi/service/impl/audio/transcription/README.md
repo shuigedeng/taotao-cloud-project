@@ -1,6 +1,6 @@
 # Spring Cloud Alibaba AI Audio Transcription
 
-`TongYiController` 接受一个 HTTP GET 请求 `http://localhost:8080/ai/audio/transcription`
+`TongYiController` 接受一个 HTTP GET 请求 `http://127.0.0.1:8080/ai/audio/transcription`
 `controller` 将会调用 `TongYiService` 中的 `audioTranscription` 方法，完成服务请求得到响应。
 
 可设置`file_urls`参数，提供一个或多个需要进行语音识别的音视频文件。
@@ -15,7 +15,7 @@
 使用 curl 工具对接口发起请求：
 
 ```shell
-$ curl -X GET "http://localhost:8080/ai/audio/transcription?audioUrls=url1&audioUrls=url2"
+$ curl -X GET "http://127.0.0.1:8080/ai/audio/transcription?audioUrls=url1&audioUrls=url2"
 
 # Response:
 D:\Code\spring-cloud-alibaba\05-13-20-47-08.txt

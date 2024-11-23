@@ -2,7 +2,7 @@
 
 ## 使用效果：
 
-1. 用户访问客户端：GET http://localhost:8081/user/hello?name="张三来访"
+1. 用户访问客户端：GET http://127.0.0.1:8081/user/hello?name="张三来访"
 
 ![image-20221020170500139](https://yupeng-tuchuang.oss-cn-shenzhen.aliyuncs.com/image-20221020170500139.png)
 

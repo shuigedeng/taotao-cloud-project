@@ -42,7 +42,7 @@ public class SinkTest4_Jdbc {
 
         @Override
         public void open(Configuration parameters) throws Exception {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "123456");
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root", "123456");
             insertStmt = connection.prepareStatement("insert into sensor_temp (id, temp) values (?, ?)");
             updateStmt = connection.prepareStatement("update sensor_temp set temp = ? where id = ?");
         }

@@ -1,37 +1,37 @@
 // 授权码模式
 ###
-http://localhost:9800/oauth/authorize?client_id=third_client_1&client_secret=123456&response_type=code&scope=all
-http://localhost:9800/oauth/token?client_id=third_client_1&client_secret=123456&grant_type=authorization_code&redirect_uri=http://www.baidu.com&code=TkWDrU
+http://127.0.0.1:9800/oauth/authorize?client_id=third_client_1&client_secret=123456&response_type=code&scope=all
+http://127.0.0.1:9800/oauth/token?client_id=third_client_1&client_secret=123456&grant_type=authorization_code&redirect_uri=http://www.baidu.com&code=TkWDrU
 
 ###
 // 密码模式
-http://localhost:9800/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
+http://127.0.0.1:9800/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
 
 
 ###
 // 客户端模式
-http://localhost:9800/oauth/token?grant_type=client_credentials&client_id=server&client_secret=123456
+http://127.0.0.1:9800/oauth/token?grant_type=client_credentials&client_id=server&client_secret=123456
 
 
 ###
-http://localhost:9900/api/v1.0/auth/oauth/authorize?client_id=third_client_1&client_secret=123456&response_type=code&scope=all
+http://127.0.0.1:9900/api/v1.0/auth/oauth/authorize?client_id=third_client_1&client_secret=123456&response_type=code&scope=all
 
 ###
-http://localhost:9900/api/v1.0/auth/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
+http://127.0.0.1:9900/api/v1.0/auth/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
 
 <> 2020-12-17T013308.200.json
 
 
 ###
-http://localhost:9800/api/oauth2/authorization/github
-http://localhost:9800/api/login/oauth2/code/github?code=feaea404324a8fbb96f3&state=9sXAoPfAa0qgpLgJGox73khQwFCcE6fEYkYes8DIOuQ%3D
+http://127.0.0.1:9800/api/oauth2/authorization/github
+http://127.0.0.1:9800/api/login/oauth2/code/github?code=feaea404324a8fbb96f3&state=9sXAoPfAa0qgpLgJGox73khQwFCcE6fEYkYes8DIOuQ%3D
 
-http://localhost:9800/api/oauth2/authorization/gitee
-http://localhost:9800/api/login/oauth2/code/gitee?code=da2d20e8a5d899e0888612bf0114d7cb7c62e3808cb290a07d70bed39f009964&state=8N0mQWvW8NzDHDFuR2KQylPKxa0ilZA-6CgHwKw62PA%3D
+http://127.0.0.1:9800/api/oauth2/authorization/gitee
+http://127.0.0.1:9800/api/login/oauth2/code/gitee?code=da2d20e8a5d899e0888612bf0114d7cb7c62e3808cb290a07d70bed39f009964&state=8N0mQWvW8NzDHDFuR2KQylPKxa0ilZA-6CgHwKw62PA%3D
 <POST https://gitee.com/oauth/token,{grant_type=[authorization_code], code=[bed981c10894b13f20fc70fffb25782f52873a2d71ba8b782a39f70842ce7b96], redirect_uri=[http://b086e8ba3be2.ngrok.io/api/login/oauth2/code/gitee], client_id=[81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b], client_secret=[6cf101f97728215e3455d19bf84e4b277be505a9690cf0e9558bc24904dd6ad6]},[Accept:"application/json;charset=UTF-8", Content-Type:"application/x-www-form-urlencoded;charset=UTF-8"]>
 
 
-https://gitee.com/oauth/authorize?client_id=81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b&redirect_uri=http://localhost:9800/api/login/oauth2/code/gitee&response_type=code
+https://gitee.com/oauth/authorize?client_id=81bc2a5852cbcd35f94fa77512e1efb776b57102e1fb9b82105acf7b412f072b&redirect_uri=http://127.0.0.1:9800/api/login/oauth2/code/gitee&response_type=code
 
 
 ###

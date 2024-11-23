@@ -30,7 +30,7 @@
   "displayActualType": false,
   "appToken": "c16931fa6590483fb7a4e85340fcbfef",
   "isReplace": true,
-  "openUrl": "http://localhost:7700/api",
+  "openUrl": "http://127.0.0.1:7700/api",
   "debugEnvName": "测试环境",
   "debugEnvUrl": "http://127.0.0.1",
   "tornaDebug": false,

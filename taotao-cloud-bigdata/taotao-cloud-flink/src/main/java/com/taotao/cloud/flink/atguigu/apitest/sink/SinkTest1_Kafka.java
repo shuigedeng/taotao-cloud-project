@@ -13,7 +13,7 @@ public class SinkTest1_Kafka {
 //        DataStream<String> inputStream = env.readTextFile("D:\\Projects\\BigData\\FlinkTutorial\\src\\main\\resources\\sensor.txt");
 
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "localhost:9092");
+        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
         properties.setProperty("group.id", "consumer-group");
         properties.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
@@ -28,7 +28,7 @@ public class SinkTest1_Kafka {
         //     return new SensorReading(fields[0], new Long(fields[1]), new Double(fields[2])).toString();
         // });
 		//
-        // dataStream.addSink( new FlinkKafkaProducer011<String>("localhost:9092", "sinktest", new SimpleStringSchema()));
+        // dataStream.addSink( new FlinkKafkaProducer011<String>("127.0.0.1:9092", "sinktest", new SimpleStringSchema()));
 		//
         // env.execute();
     }

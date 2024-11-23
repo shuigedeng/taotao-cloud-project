@@ -72,7 +72,7 @@ public class InitServer implements CommandLineRunner {
                         + "\t EasyMedia is running! Access address: \n"
                         + "\t media port at : \t {} \n"
                         + "\t http port at : \t {} \n"
-                        + "\t web Local: \t http://localhost:{} \n"
+                        + "\t web Local: \t http://127.0.0.1:{} \n"
                         + "\t web External: \t http://{}:{}{} \n"
                         + "\t httpflv: \t http://{}:{}/live?url={您的源地址} \n"
                         + "\t wsflv: \t ws://{}:{}/live?url={您的源地址} \n"

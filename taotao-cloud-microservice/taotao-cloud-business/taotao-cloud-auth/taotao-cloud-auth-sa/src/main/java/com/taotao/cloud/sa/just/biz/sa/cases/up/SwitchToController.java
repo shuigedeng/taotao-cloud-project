@@ -33,10 +33,10 @@ public class SwitchToController {
 
     /*
      * 前提：首先调用登录接口进行登录，代码在 com.pj.cases.use.LoginAuthController 中有详细解释，此处不再赘述
-     * 		---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
+     * 		---- http://127.0.0.1:8081/acc/doLogin?name=zhang&pwd=123456
      */
 
-    // 身份切换    ---- http://localhost:8081/SwitchTo/switchTo?userId=10044
+    // 身份切换    ---- http://127.0.0.1:8081/SwitchTo/switchTo?userId=10044
     @RequestMapping("switchTo")
     public SaResult switchTo(long userId) {
         // 将当前会话 [身份临时切换] 为其它账号
@@ -56,7 +56,7 @@ public class SwitchToController {
         return SaResult.ok();
     }
 
-    // 以 lambda 表达式的方式身份切换    ---- http://localhost:8081/SwitchTo/switchTo2?userId=10044
+    // 以 lambda 表达式的方式身份切换    ---- http://127.0.0.1:8081/SwitchTo/switchTo2?userId=10044
     @RequestMapping("switchTo2")
     public SaResult switchTo2(long userId) {
 

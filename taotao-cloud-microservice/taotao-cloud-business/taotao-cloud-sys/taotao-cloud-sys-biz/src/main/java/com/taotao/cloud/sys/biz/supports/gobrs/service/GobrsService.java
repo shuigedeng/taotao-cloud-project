@@ -66,7 +66,7 @@ public class GobrsService {
         return resp;
     }
 
-    /** gobrsTest 可以使用 jmeter 一直访问着 然后在浏览器调用 http://localhost:9999/gobrs/updateRule 看规则变更效果 */
+    /** gobrsTest 可以使用 jmeter 一直访问着 然后在浏览器调用 http://127.0.0.1:9999/gobrs/updateRule 看规则变更效果 */
     public void updateRule() {
         RuleConfig r = new RuleConfig();
         r.setName("anyConditionGeneral");

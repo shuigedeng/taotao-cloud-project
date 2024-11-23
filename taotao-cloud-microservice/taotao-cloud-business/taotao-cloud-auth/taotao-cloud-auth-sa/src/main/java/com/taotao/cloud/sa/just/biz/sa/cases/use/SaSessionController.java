@@ -38,10 +38,10 @@ public class SaSessionController {
 
     /*
      * 前提：首先调用登录接口进行登录，代码在 com.pj.cases.use.LoginAuthController 中有详细解释，此处不再赘述
-     * 		---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
+     * 		---- http://127.0.0.1:8081/acc/doLogin?name=zhang&pwd=123456
      */
 
-    // 简单存取值   ---- http://localhost:8081/session/getValue
+    // 简单存取值   ---- http://127.0.0.1:8081/session/getValue
     @RequestMapping("getValue")
     public SaResult getValue() {
         // 获取当前登录账号的专属 SaSession 对象
@@ -78,7 +78,7 @@ public class SaSessionController {
         return SaResult.data(list);
     }
 
-    // 复杂存取值   ---- http://localhost:8081/session/getModel
+    // 复杂存取值   ---- http://127.0.0.1:8081/session/getModel
     @RequestMapping("getModel")
     public SaResult getModel() {
         // 实例化
@@ -97,7 +97,7 @@ public class SaSessionController {
         return SaResult.data(user2);
     }
 
-    // 自定义Session   ---- http://localhost:8081/session/customSession
+    // 自定义Session   ---- http://127.0.0.1:8081/session/customSession
     @RequestMapping("customSession")
     public SaResult customSession() {
 

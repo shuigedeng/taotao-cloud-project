@@ -38,17 +38,17 @@ public class SearchSessionController {
     /*
     * 测试步骤：
     	1、先登录5个账号
-    		 ---- http://localhost:8081/search/login?userId=10001&张三&age=18
-    		 ---- http://localhost:8081/search/login?userId=10002&李四&age=20
-    		 ---- http://localhost:8081/search/login?userId=10003&王五&age=22
-    		 ---- http://localhost:8081/search/login?userId=10004&赵六&age=24
-    		 ---- http://localhost:8081/search/login?userId=10005&冯七&age=26
+    		 ---- http://127.0.0.1:8081/search/login?userId=10001&张三&age=18
+    		 ---- http://127.0.0.1:8081/search/login?userId=10002&李四&age=20
+    		 ---- http://127.0.0.1:8081/search/login?userId=10003&王五&age=22
+    		 ---- http://127.0.0.1:8081/search/login?userId=10004&赵六&age=24
+    		 ---- http://127.0.0.1:8081/search/login?userId=10005&冯七&age=26
 
     	2、根据分页参数获取会话列表
-    		http://localhost:8081/search/getList?start=0&size=10
+    		http://127.0.0.1:8081/search/getList?start=0&size=10
     */
 
-    // 会话登录接口  ---- http://localhost:8081/search/login?userId=10001&张三&age=18
+    // 会话登录接口  ---- http://127.0.0.1:8081/search/login?userId=10001&张三&age=18
     @RequestMapping("login")
     public SaResult login(long userId, String name, int age) {
         // 先登录上
@@ -65,7 +65,7 @@ public class SearchSessionController {
         return SaResult.ok("账号登录成功");
     }
 
-    // 会话查询接口  ---- http://localhost:8081/search/getList?start=0&size=10
+    // 会话查询接口  ---- http://127.0.0.1:8081/search/getList?start=0&size=10
     @RequestMapping("getList")
     public SaResult getList(int start, int size) {
         // 创建集合
@@ -82,7 +82,7 @@ public class SearchSessionController {
         return SaResult.data(sessionList);
     }
 
-    // 会话查询接口  ---- http://localhost:8081/disable/logout
+    // 会话查询接口  ---- http://127.0.0.1:8081/disable/logout
     @RequestMapping("logout")
     public SaResult logout() {
         StpUtil.logout();

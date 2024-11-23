@@ -23,7 +23,7 @@
     function merge(uuid, fileName) {
     uploading.html('文件分片已上传完成，正在合并');
     $.ajax({
-    url: "http://localhost:28869/spider-api/file/merge",
+    url: "http://127.0.0.1:28869/spider-api/file/merge",
     type: "GET",
     data: {uuid: uuid, newFileName: fileName},
     async: true,
@@ -72,7 +72,7 @@
     form.append("total", shardCount);
     form.append("index", i + 1);
     $.ajax({
-    url: "http://localhost:28869/spider-api/file/upload/slice",
+    url: "http://127.0.0.1:28869/spider-api/file/upload/slice",
     type: "POST",
     data: form,
     async: true,

@@ -223,7 +223,7 @@ public class DefaultNode implements Node, ClusterMembershipChanges {
 		for (String s : config.getPeerAddrs()) {
 			Peer peer = new Peer(s);
 			peerSet.addPeer(peer);
-			if (s.equals("localhost:" + config.getSelfPort())) {
+			if (s.equals("127.0.0.1:" + config.getSelfPort())) {
 				peerSet.setSelf(peer);
 			}
 		}

@@ -68,7 +68,7 @@
                             <div class="tab-content">
 {#                                {{ enrollment_form.errors }}#}
                                 {% if response.step == 2 %}
-                                      <pre> 请将此报名链接发给学员进行填写 http://localhost:9000{% url 'stu_enrollment' response.enroll_obj.id %} </pre>
+                                      <pre> 请将此报名链接发给学员进行填写 http://127.0.0.1:9000{% url 'stu_enrollment' response.enroll_obj.id %} </pre>
                                 {% endif %}
                                 {{ response }}
                                 <!--First tab-->

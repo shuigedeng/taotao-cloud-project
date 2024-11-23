@@ -101,7 +101,7 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
     static_configs:
-    - targets: ['localhost:9090']
+    - targets: ['127.0.0.1:9090']
 
   - job_name: 'taotao-cloud-weblog-collect'
     scrape_interval: 30s
@@ -132,7 +132,7 @@ agents:
 - name: "flume-agents"
   enabled: true
 # multiple urls can be separated by ,
-  urls: ["http://localhost:31001/metrics","http://localhost:31002/metrics]
+  urls: ["http://127.0.0.1:31001/metrics","http://127.0.0.1:31002/metrics]
 
 
 vim /root/taotao-common/prometheus2.23.0/prometheus.yml
@@ -140,7 +140,7 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
     static_configs:
-    - targets: ['localhost:9090']
+    - targets: ['127.0.0.1:9090']
 
   - job_name: 'taotao-cloud-weblog-collect'
     scrape_interval: 30s

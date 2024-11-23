@@ -1,6 +1,6 @@
 # Spring Cloud Alibaba AI Hello World
 
-`TongYiController` 接受一个 HTTP GET 请求 `http://localhost:8080/ai/example`。
+`TongYiController` 接受一个 HTTP GET 请求 `http://127.0.0.1:8080/ai/example`。
 `controller` 将会调用 `TongYiService` 中的 `completion` 方法，完成服务请求得到响应。
 
 有一个可选的 `message` 参数，其默认值为“告诉我一个笑话”。 请求响应来自 Alibaba TongYi models 服务。
@@ -15,7 +15,7 @@
 使用 curl 工具对接口发起请求：
 
 ```shell
-$ curl http://localhost:8080/ai/example
+$ curl http://127.0.0.1:8080/ai/example
 
 # Response: 
 Sure, here's one for you:
@@ -28,7 +28,7 @@ Because they make up everything!
 现在使用 message 参数：
 
 ```shell
-$ curl --get  --data-urlencode 'message=Tell me a joke about a cow.' http://localhost:8080/ai/example
+$ curl --get  --data-urlencode 'message=Tell me a joke about a cow.' http://127.0.0.1:8080/ai/example
 
 # Response:
 Here's a classic cow joke for you:

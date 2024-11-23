@@ -15,7 +15,7 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
     static_configs:
-    - targets: ['localhost:9090']
+    - targets: ['127.0.0.1:9090']
 
   - job_name: 'taotao-cloud-weblog-collect'
     scrape_interval: 30s

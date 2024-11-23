@@ -1,5 +1,5 @@
 ###
-POST http://localhost:1000/sys/addRobot
+POST http://127.0.0.1:1000/sys/addRobot
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 <> 2020-09-23T052239.200.json
 
 ###
-GET http://localhost:9700/user/info/security?username=root
+GET http://127.0.0.1:9700/user/info/security?username=root
 
 <> 2020-10-19T045320.200.json
 <> 2020-10-19T044907.200.json
@@ -25,22 +25,22 @@ GET http://localhost:9700/user/info/security?username=root
 GET http://localhost/user/info
 
 ###
-GET http://localhost:1100/exportActivity
+GET http://127.0.0.1:1100/exportActivity
 
 ###
 GET http://127.0.0.1:1100/exportActivity
 
 ###
-GET http://localhost:33338/order/info/aaa
+GET http://127.0.0.1:33338/order/info/aaa
 
 ###
-GET http://localhost:33338/order/info/11
+GET http://127.0.0.1:33338/order/info/11
 
 ###
-GET http://localhost:33338/order/order/xxxx
+GET http://127.0.0.1:33338/order/order/xxxx
 
 ###
-GET http://localhost:33338/order/order/xxxx?memberId=1&code='1221'
+GET http://127.0.0.1:33338/order/order/xxxx?memberId=1&code='1221'
 
 ###
 POST http://127.0.0.1:33333/api/v2024.12/orde♡r/excel/export
@@ -54,10 +54,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:33338/order/page
+POST http://127.0.0.1:33338/order/page
 
 ###
-POST http://localhost:33338/order/batch
+POST http://127.0.0.1:33338/order/batch
 Content-Type: application/json
 
 {
@@ -65,10 +65,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:33337/sys/tools/email
+POST http://127.0.0.1:33337/sys/tools/email
 
 ###
-POST http://localhost:33337/sys/tools/setting/save
+POST http://127.0.0.1:33337/sys/tools/setting/save
 
 ###
 POST http://127.0.0.1:33333/api/v2024.12/auth/api/test/messages

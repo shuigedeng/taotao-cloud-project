@@ -10,7 +10,7 @@ var socket = {
     /**
      * 这个是我们的ws的地址
      * */
-    ws_url: "ws://localhost:9000/ws",
+    ws_url: "ws://127.0.0.1:9000/ws",
 
     userid: null,
 

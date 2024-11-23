@@ -111,12 +111,12 @@ nacos.naming.empty-service.clean.period-time-ms=30000
 
 ### Metrics for elastic search
 management.metrics.export.elastic.enabled=false
-#management.metrics.export.elastic.host=http://localhost:9200
+#management.metrics.export.elastic.host=http://127.0.0.1:9200
 
 ### Metrics for influx
 management.metrics.export.influx.enabled=false
 #management.metrics.export.influx.db=springboot
-#management.metrics.export.influx.uri=http://localhost:8086
+#management.metrics.export.influx.uri=http://127.0.0.1:8086
 #management.metrics.export.influx.auto-create-db=true
 #management.metrics.export.influx.consistency=one
 #management.metrics.export.influx.compressed=true
@@ -146,7 +146,7 @@ nacos.core.auth.enabled=false
 
 ### worked when nacos.core.auth.system.type=ldap，{0} is Placeholder,replace login username
 #nacos.core.auth.system.type=ldap
-#nacos.core.auth.ldap.url=ldap://localhost:389
+#nacos.core.auth.ldap.url=ldap://127.0.0.1:389
 #nacos.core.auth.ldap.basedc=dc=example,dc=org
 #nacos.core.auth.ldap.userDn=cn=admin,${nacos.core.auth.ldap.basedc}
 #nacos.core.auth.ldap.password=admin

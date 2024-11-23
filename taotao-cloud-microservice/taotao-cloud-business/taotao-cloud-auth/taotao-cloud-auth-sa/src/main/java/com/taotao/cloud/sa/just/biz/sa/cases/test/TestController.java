@@ -29,14 +29,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test/")
 public class TestController {
 
-    // 测试   浏览器访问： http://localhost:8081/test/test
+    // 测试   浏览器访问： http://127.0.0.1:8081/test/test
     @RequestMapping("test")
     public SaResult test() {
         LogUtils.info("------------进来了");
         return SaResult.ok();
     }
 
-    // 测试   浏览器访问： http://localhost:8081/test/test2
+    // 测试   浏览器访问： http://127.0.0.1:8081/test/test2
     @RequestMapping("test2")
     public SaResult test2() {
         LogUtils.info("------------进来了");

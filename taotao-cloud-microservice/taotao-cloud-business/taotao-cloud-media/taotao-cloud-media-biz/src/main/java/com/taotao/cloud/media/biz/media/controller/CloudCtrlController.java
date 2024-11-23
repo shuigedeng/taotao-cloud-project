@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CloudCtrlController {
 
-    //	http://localhost:8888/hk/ctrl?ip=192.168.2.120&op=left&username=admin&password=VZCDOY
+    //	http://127.0.0.1:8888/hk/ctrl?ip=192.168.2.120&op=left&username=admin&password=VZCDOY
 
     /**
      * 云台控制接口

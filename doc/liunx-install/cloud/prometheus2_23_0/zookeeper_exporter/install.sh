@@ -71,7 +71,7 @@ export SERVER_JVMFLAGS="$SERVER_JVMFLAGS -javaagent:$JMX_DIR/jmx_prometheus_java
 
 # 重启bin/zkServer.sh
 
-# curl ‘http://localhost:30001’
+# curl ‘http://127.0.0.1:30001’
 
 - job_name: 'zookeeper'
   static_configs:
@@ -123,7 +123,7 @@ zk_pending_syncs	阻塞中的sync操作
 """
 
 nohup /opt/taotao-cloud/zookeeper_exporter/zookeeper_exporter  \
--bind-addr :9141 -zookeeper localhost:2181 \
+-bind-addr :9141 -zookeeper 127.0.0.1:2181 \
 >/opt/taotao-cloud/zookeeper_exporter/zookeeper_exporter.out 2>&1 &
 
 # grafana导入模板模板编号9236

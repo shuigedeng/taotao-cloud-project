@@ -23,4 +23,4 @@ EXPOSE 8858
 
 # 运行🏃🏃🏃
 CMD echo "****** start run ... " & \
-    java -Djava.security.egd=file:/dev/./urandom -Dauth.username=${SENTINEL_AUTH_USERNAME} -Dauth.password=${SENTINEL_AUTH_PASSWORD} -Dmysql.host=${MYSQL_SERVICE_HOST} -Dmysql.port=${MYSQL_SERVICE_PORT} -Dmysql.username=${MYSQL_SERVICE_USER} -Dmysql.password=${MYSQL_SERVICE_PASSWORD} -Dmysql.db-name=${MYSQL_SERVICE_DB_NAME} -Dserver.port=8858 -Dcsp.sentinel.api.port=8719 -Dcsp.sentinel.dashboard.server=localhost:8858 -Dproject.name=sentinel-dashboard -jar /app.jar
+    java -Djava.security.egd=file:/dev/./urandom -Dauth.username=${SENTINEL_AUTH_USERNAME} -Dauth.password=${SENTINEL_AUTH_PASSWORD} -Dmysql.host=${MYSQL_SERVICE_HOST} -Dmysql.port=${MYSQL_SERVICE_PORT} -Dmysql.username=${MYSQL_SERVICE_USER} -Dmysql.password=${MYSQL_SERVICE_PASSWORD} -Dmysql.db-name=${MYSQL_SERVICE_DB_NAME} -Dserver.port=8858 -Dcsp.sentinel.api.port=8719 -Dcsp.sentinel.dashboard.server=127.0.0.1:8858 -Dproject.name=sentinel-dashboard -jar /app.jar

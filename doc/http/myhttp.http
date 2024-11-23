@@ -14,23 +14,23 @@ Cache-Control: no-cache
 <> 2019-09-16T092643.200.html
 
 ###
-GET http://localhost:80/api/item
+GET http://127.0.0.1:80/api/item
 Cookie:
 Authorization:
 Accept: application/json
 
 ###
-GET http://localhost:80/api/item?id=99
+GET http://127.0.0.1:80/api/item?id=99
 Accept: application/json
 
 ###
-POST http://localhost:80/api/item
+POST http://127.0.0.1:80/api/item
 Content-Type: application/json
 
 {}
 
 ###
-POST http://localhost:80/api/item
+POST http://127.0.0.1:80/api/item
 Content-Type: application/x-www-form-urlencoded
 
 id=99&content=new-element
@@ -39,7 +39,7 @@ id=99&content=new-element
 GET http://{{hostname}}
 
 ###
-GET http://localhost:3000/user/list
+GET http://127.0.0.1:3000/user/list
 
 <> 2020-12-25T120738.404.html
 ###

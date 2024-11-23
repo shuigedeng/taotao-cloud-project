@@ -1,16 +1,16 @@
 ### authorization_code模式
-GET http://localhost:33336/oauth2/authorize?client_id=authorization-code-messaging-client&
+GET http://127.0.0.1:33336/oauth2/authorize?client_id=authorization-code-messaging-client&
     client_secret=secret2&
     response_type=code&redirect_uri=http://127.0.0.1:8080/springauthserverclient/authorized
 
 ###
-POST http://localhost:33336/oauth2/token
+POST http://127.0.0.1:33336/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=authorization_code&code=qAqEK1RedsFMje7yD8SPA7XNT1FcPrQHy0x3gfsW2OSHf1_2xd2QvY3xnTIxDU93uhFNTLMErSJinRYKs32s2anMSUzPDV9Igdiodre4jwM1h8ns3pvIR8o7r7TbEsP1&redirect_uri=http://127.0.0.1:8080/springauthserverclient/authorized
 
 ### client-credential模式
-POST http://localhost:8080/oauth2/token
+POST http://127.0.0.1:8080/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=client_credentials&client_id=client&client_secret=123456
@@ -28,7 +28,7 @@ Content-Type:  application/x-www-form-urlencoded
 grant_type=mobile&type=2&mobile=15730445330&verification_code=123&client_id=password-messaging-client&client_secret=secret3
 
 ### refresh_token模式
-POST http://localhost:8080/oauth2/token
+POST http://127.0.0.1:8080/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=refresh_token&client_id=client&client_secret=123456&refresh_token=H-MfxBSKWLk5YJT1HbP6mnBmEa2z13N2QL913jJRyBPuOD99CbRFsHXxRgCwUUvjd8XlRL8i8ElZjZMpBd_lFq5O5H-SqGwunkqv6T-Jq1LGVNXZ54m2qN3po36d1RGP
@@ -36,19 +36,19 @@ grant_type=refresh_token&client_id=client&client_secret=123456&refresh_token=H-M
 ###
 
 ### authorization_code 认证第一步
-GET http://localhost:33336/oauth2/authorize?client_id=authorization-code-messaging-client&
+GET http://127.0.0.1:33336/oauth2/authorize?client_id=authorization-code-messaging-client&
     client_secret=secret2&
     response_type=code&redirect_uri=http://127.0.0.1:8080/springauthserverclient/authorized
 
 ###
 ### authorization_code 认证第二步
-POST http://localhost:33336/oauth2/token
+POST http://127.0.0.1:33336/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=authorization_code&client_id=authorization-code-messaging-client&client_secret=secret2&redirect_uri=http://127.0.0.1:8080/springauthserverclient/authorized&code=aHFaI96h8f7L7Rukt69DFBilnXDopp2bA2DvRm77-AWFybwqqKQiB-bdZkB0OFtWWNtxyCdU7MmnR_1OUP8_8yV5Kc9zQdLWGUCPDpDgl3HiyAzPVGmsR2cWGZIkPMC3
 
 ### 自定义client-credential认证示例
-POST http://localhost:8080/oauth2/token
+POST http://127.0.0.1:8080/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=client_credentials&client_id=client&client_secret=123456
@@ -60,7 +60,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=password&type=1&verification_code=123&client_id=client&client_secret=123456&username=admin&password=123456
 
 ### 自定义 refresh_token 认证示例
-POST http://localhost:8080/oauth2/token
+POST http://127.0.0.1:8080/oauth2/token
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=refresh_token&client_id=client&client_secret=123456&refresh_token=H-MfxBSKWLk5YJT1HbP6mnBmEa2z13N2QL913jJRyBPuOD99CbRFsHXxRgCwUUvjd8XlRL8i8ElZjZMpBd_lFq5O5H-SqGwunkqv6T-Jq1LGVNXZ54m2qN3po36d1RGP

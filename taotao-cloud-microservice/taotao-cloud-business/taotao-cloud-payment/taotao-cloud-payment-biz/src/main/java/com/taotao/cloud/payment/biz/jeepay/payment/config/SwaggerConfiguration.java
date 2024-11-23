@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * knife4j 自定义文档配置
- * API访问地址： http://localhost:9216/doc.html
+ * API访问地址： http://127.0.0.1:9216/doc.html
  * @author yr
  */
 @Configuration
@@ -26,7 +26,7 @@ public class SwaggerConfiguration {
     private OpenApiExtensionResolver openApiExtensionResolver;
 
     /**
-     * 功能描述:  API访问地址： http://localhost:9216/doc.html
+     * 功能描述:  API访问地址： http://127.0.0.1:9216/doc.html
      *
      * @Return: springfox.documentation.spring.web.plugins.Docket
      * @Author: terrfly

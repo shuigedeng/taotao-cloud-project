@@ -1304,7 +1304,7 @@
 <!-- Job Notification Configuration -->
 <property>
  <name>mapreduce.job.end-notification.url</name>
- <!--<value>http://localhost:8080/jobstatus.php?jobId=$jobId&amp;jobStatus=$jobStatus</value>-->
+ <!--<value>http://127.0.0.1:8080/jobstatus.php?jobId=$jobId&amp;jobStatus=$jobStatus</value>-->
  <description>Indicates url which will be called on completion of job to inform
               end status of job.
               User can give at most 2 variables with URI : $jobId and $jobStatus.
@@ -1873,7 +1873,7 @@
 <property>
   <name>mapreduce.jobhistory.recovery.store.fs.uri</name>
   <value>${hadoop.tmp.dir}/mapred/history/recoverystore</value>
-  <!--value>hdfs://localhost:9000/mapred/history/recoverystore</value-->
+  <!--value>hdfs://127.0.0.1:9000/mapred/history/recoverystore</value-->
   <description>The URI where history server state will be stored if
   HistoryServerFileSystemStateStoreService is configured as the recovery
   storage class.</description>

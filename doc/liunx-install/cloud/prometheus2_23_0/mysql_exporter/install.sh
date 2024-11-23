@@ -33,7 +33,7 @@ netstat -lnptu | grep 9104
       labels:
         instance: db-01
 
-curl  -X POST localhost:9090/-/reload
+curl  -X POST 127.0.0.1:9090/-/reload
 
 # grafana导入模板模板编号7362
 

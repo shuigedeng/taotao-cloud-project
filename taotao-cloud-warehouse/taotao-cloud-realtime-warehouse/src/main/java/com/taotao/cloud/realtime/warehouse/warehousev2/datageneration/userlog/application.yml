@@ -8,7 +8,7 @@ mock.date: "2024-05-01"
 #mock.type: "http"
 mock.type: "kafka"
   #http模式下，发送的地址
-mock.url: "http://localhost:8090/applog"
+mock.url: "http://127.0.0.1:8090/applog"
 
 mock:
   kafka-server: "192.168.244.129:9092"

@@ -1,9 +1,9 @@
 # Spring Cloud Alibaba AI Roles
 
-`TongYiController` 接受一个 HTTP GET 请求 `http://localhost:8080/ai/roles`。
+`TongYiController` 接受一个 HTTP GET 请求 `http://127.0.0.1:8080/ai/roles`。
 `controller` 将会调用 `TongYiService` 中的 `genRole` 方法，完成服务请求得到响应。
 
-接受带有三个可选参数的PromptTemplateControllerHTTP GET 请求http://localhost:8080/ai/roles
+接受带有三个可选参数的PromptTemplateControllerHTTP GET 请求http://127.0.0.1:8080/ai/roles
 
 `message` 用户请求消息，默认值为 `Tell me about three famous pirates from the Golden Age of Piracy and why they did.  Write at least a sentence for each pirate.`;
 `name` AI助手的名字，默认值为 `Bob`；
@@ -49,7 +49,7 @@ Prompt prompt = new Prompt(List.of(userMessage, systemMessage));
 使用 curl 工具对接口发起请求：
 
 ```shell
-$ curl http://localhost:8080/ai/roles
+$ curl http://127.0.0.1:8080/ai/roles
 ```
 
 Response: 
@@ -66,7 +66,7 @@ Response:
 现在使用 message, name, voice 参数：
 
 ```shell
-$ curl --get --data-urlencode message=="Tell me about 3 famous physicists" name=="yuluo" voice=="Rick Sanchez" http://localhost:8080/ai/roles
+$ curl --get --data-urlencode message=="Tell me about 3 famous physicists" name=="yuluo" voice=="Rick Sanchez" http://127.0.0.1:8080/ai/roles
 ```
 
 Response:

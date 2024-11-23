@@ -17,7 +17,7 @@ public class UrlMapController {
 	/**
 	 * 前端传入一个长链接,后端根据长链接生成对应的短链接键值,并且将短链接键值接入到对应的 url 后面
 	 *
-	 * @param longUrl 对应的长链接 http://localhost:8888/urlmap/shorten?longUrl="www.baidu.com"
+	 * @param longUrl 对应的长链接 http://127.0.0.1:8888/urlmap/shorten?longUrl="www.baidu.com"
 	 * @return 对应生成的短链接 http://127.0.0.1:8888/000001
 	 */
 	@PostMapping("/shorten")

@@ -1,36 +1,36 @@
 # 密码模式
 ###
-POST http://localhost:9800/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
+POST http://127.0.0.1:9800/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
 
 ###
-POST http://localhost:9800/oauth/login?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all&user_type=backend
+POST http://127.0.0.1:9800/oauth/login?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all&user_type=backend
 
 <> 2020-10-23T102357.200.json
 <> 2020-10-22T095649.200.json
 
 ###
-POST http://localhost:9800/oauth/check_token?token=dd3093ba-2b62-440f-9b8e-4ff1383ef501
+POST http://127.0.0.1:9800/oauth/check_token?token=dd3093ba-2b62-440f-9b8e-4ff1383ef501
 
 
 ###
-POST http://localhost:9800/oauth/token?grant_type=refresh_token&refresh_token=6546d7d9-71fc-435d-bb71-5e00433f2c49&client_id=backend&client_secret=123456&scope=all
+POST http://127.0.0.1:9800/oauth/token?grant_type=refresh_token&refresh_token=6546d7d9-71fc-435d-bb71-5e00433f2c49&client_id=backend&client_secret=123456&scope=all
 
 
 ###
-POST http://localhost:9900/api/v1.0/auth/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
+POST http://127.0.0.1:9900/api/v1.0/auth/oauth/token?grant_type=password&client_id=backend&client_secret=123456&username=root&password=123456&scope=all
 
 
 # 客户端模式
 ###
-POST http://localhost:9800/oauth/token?grant_type=client_credentials&client_id=server&client_secret=123456
+POST http://127.0.0.1:9800/oauth/token?grant_type=client_credentials&client_id=server&client_secret=123456
 
 ###
-POST http://localhost:9900/api/v1.0/auth/oauth/token?grant_type=client_credentials&client_id=server&client_secret=123456
+POST http://127.0.0.1:9900/api/v1.0/auth/oauth/token?grant_type=client_credentials&client_id=server&client_secret=123456
 
 
 # 授权码模式
 ###
-GET http://localhost:9800/oauth/authorize?client_id=third_client_1&client_secret=123456&response_type=code&scope=all
+GET http://127.0.0.1:9800/oauth/authorize?client_id=third_client_1&client_secret=123456&response_type=code&scope=all
 
 
 ###

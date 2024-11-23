@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/acc/")
 public class LoginAuthController {
 
-    // 会话登录接口  ---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
+    // 会话登录接口  ---- http://127.0.0.1:8081/acc/doLogin?name=zhang&pwd=123456
     @RequestMapping("doLogin")
     public SaResult doLogin(String name, String pwd) {
 
@@ -51,7 +51,7 @@ public class LoginAuthController {
         return SaResult.error("登录失败");
     }
 
-    // 查询当前登录状态  ---- http://localhost:8081/acc/isLogin
+    // 查询当前登录状态  ---- http://127.0.0.1:8081/acc/isLogin
     @RequestMapping("isLogin")
     public SaResult isLogin() {
         // StpUtil.isLogin() 查询当前客户端是否登录，返回 true 或 false
@@ -59,7 +59,7 @@ public class LoginAuthController {
         return SaResult.ok("当前客户端是否登录：" + isLogin);
     }
 
-    // 校验当前登录状态  ---- http://localhost:8081/acc/checkLogin
+    // 校验当前登录状态  ---- http://127.0.0.1:8081/acc/checkLogin
     @RequestMapping("checkLogin")
     public SaResult checkLogin() {
         // 检验当前会话是否已经登录, 如果未登录，则抛出异常：`NotLoginException`
@@ -69,7 +69,7 @@ public class LoginAuthController {
         return SaResult.ok("校验登录成功，这行字符串是只有登录后才会返回的信息");
     }
 
-    // 获取当前登录的账号是谁  ---- http://localhost:8081/acc/getLoginId
+    // 获取当前登录的账号是谁  ---- http://127.0.0.1:8081/acc/getLoginId
     @RequestMapping("getLoginId")
     public SaResult getLoginId() {
         // 需要注意的是，StpUtil.getLoginId() 自带登录校验效果
@@ -100,7 +100,7 @@ public class LoginAuthController {
         return SaResult.ok("当前客户端登录的账号id是：" + userId);
     }
 
-    // 查询 Token 信息  ---- http://localhost:8081/acc/tokenInfo
+    // 查询 Token 信息  ---- http://127.0.0.1:8081/acc/tokenInfo
     @RequestMapping("tokenInfo")
     public SaResult tokenInfo() {
         // TokenName 是 Token 名称的意思，此值也决定了前端提交 Token 时应该使用的参数名称
@@ -134,7 +134,7 @@ public class LoginAuthController {
         return SaResult.data(StpUtil.getTokenInfo());
     }
 
-    // 会话注销  ---- http://localhost:8081/acc/logout
+    // 会话注销  ---- http://127.0.0.1:8081/acc/logout
     @RequestMapping("logout")
     public SaResult logout() {
         // 退出登录会清除三个地方的数据：

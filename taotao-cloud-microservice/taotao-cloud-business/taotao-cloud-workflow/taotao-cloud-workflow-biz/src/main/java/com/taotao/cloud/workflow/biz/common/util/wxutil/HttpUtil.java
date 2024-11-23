@@ -507,7 +507,7 @@ public class HttpUtil {
         //        String s = param.toString();
         //        String encode = URLEncoder.encode("引sdadsa迈", "UTF-8");
         //        JSONObject jsonObject =
-        // httpRequest("http://localhost:30000/api/permission/Users/getUserList"
+        // httpRequest("http://127.0.0.1:30000/api/permission/Users/getUserList"
         ////                + encode
         //                , "POST", s1, "bearer
         // eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJzaW5nbGVMb2dpbiI6IjEiLCJleHAiOjE2NDY0MjEwMDYsImp0aSI6Ijg4ZDFmMzY5LWRlYzQtNDI2Ny1iNjlkLTMwMzFjNWYzMGU3YyIsImNsaWVudF9pZCI6ImFkbWluIiwidG9rZW4iOiJsb2dpbl90b2tlbl8yNjk0NDc5Nzk0ODI0ODYyMTMifQ.G0cmAtOJxC9k6SoUyc-aS4Q-Us8xE-D5ojpa-1DXmoQRqTvKb7BCYThwrMglNY53c24Qk8HvOBvivzgsfB7Dhtm9CxhK89mDqf_tK34OjHkvH95_mdstItCcKm6uwFa02AsfZRIVoa_d1cYInLCcEDK7Q9pKS9QqkYJCUVxHjeZgD430JaX_wdhtSyTqqA59-OWslTpHSDji4keQcz5Y-Vw1k4jquzNWvBn1BX6HIAnksGpApTZ9uyVB2I5gPKqIs8Z3rHEun2rbQPkwbxZBUrAvKz2pbu74q8LMi2i7HdHxj9lTV2mwbFZURt1K_WH8xt-tfz4LYnaoHz8sQ_VXEA");

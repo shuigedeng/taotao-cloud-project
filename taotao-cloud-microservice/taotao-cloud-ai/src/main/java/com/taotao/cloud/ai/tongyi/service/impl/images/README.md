@@ -1,6 +1,6 @@
 # Spring Cloud Alibaba AI Image
 
-`TongYiController` 接受一个 HTTP GET 请求 `http://localhost:8080/ai/img`。
+`TongYiController` 接受一个 HTTP GET 请求 `http://127.0.0.1:8080/ai/img`。
 `controller` 将会调用 `TongYiService` 中的 `genImg` 方法，完成服务请求得到响应。
 
 有一个可选的 `prompt` 参数为生成图片的提示信息，其默认值为“Painting a picture of blue water and blue sky.”。
@@ -15,7 +15,7 @@
 使用 curl 工具对接口发起请求：
 
 ```shell
-$ curl http://localhost:8080/ai/img
+$ curl http://127.0.0.1:8080/ai/img
 ```
 
 响应结果为：(base64 数据太多，使用 `xxx` 代替)

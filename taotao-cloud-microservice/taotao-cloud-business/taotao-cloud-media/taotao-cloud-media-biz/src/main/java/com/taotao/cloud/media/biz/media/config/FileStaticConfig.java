@@ -50,7 +50,7 @@ package com.taotao.cloud.media.biz.media.config; // package com.zj.config;
 //    	}
 //
 //        /**
-//         *  /ts/xxx   指文件的访问方式  如：localhost:8080/ts/abc.wav
+//         *  /ts/xxx   指文件的访问方式  如：127.0.0.1:8080/ts/abc.wav
 //         *  file:d/voice/  指静态文件存放在服务器上的位置
 //         */
 ////        registry.addResourceHandler("/ts/**").addResourceLocations("file:"+"d:/flv/out/");

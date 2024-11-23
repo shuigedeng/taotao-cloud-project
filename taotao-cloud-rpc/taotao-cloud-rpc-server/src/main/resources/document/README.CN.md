@@ -263,7 +263,7 @@ cn.fyupeng.nacos.cluster.load-balancer=round
 cn.fyupeng.nacos.cluster.nodes=192.168.43.33:8847|192.168.43.33.1:8848;192.168.43.33.1:8849
 
 # 实现分布式缓存（必要，不做默认开启与否）
-cn.fyupeng.redis.server-addr=localhost:6379
+cn.fyupeng.redis.server-addr=127.0.0.1:6379
 cn.fyupeng.redis.server-auth=true
 cn.fyupeng.redis.server-pwd=yupengRedis
 cn.fyupeng.redis.server-way=lettuce
@@ -386,7 +386,7 @@ public class MyClient {
 
 主机名使用`localhost`或`127.0.0.1`指定
 ```properties
-cn.fyupeng.nacos.register-addr=localhost:8848
+cn.fyupeng.nacos.register-addr=127.0.0.1:8848
 ```
 
 - `Jar`方式启动

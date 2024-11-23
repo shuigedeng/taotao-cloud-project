@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RouterCheckController {
 
-    // 路由拦截鉴权测试   ---- http://localhost:8081/xxx
+    // 路由拦截鉴权测试   ---- http://127.0.0.1:8081/xxx
     @RequestMapping({
         "/user/doLogin",
         "/user/doLogin2",

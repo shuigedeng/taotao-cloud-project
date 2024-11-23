@@ -632,7 +632,7 @@
 #      #            - RequestTime=true
 #      #            - PreserveHostHeader
 #      #        - id: openapi
-#      #          uri: http://localhost:${server.port}
+#      #          uri: http://127.0.0.1:${server.port}
 #      #          predicates:
 #      #            - Path=/v3/api-docs/**
 #      #          filters:
@@ -881,7 +881,7 @@
 #    enableSwaggerModels: true
 #    enableDocumentManage: true
 #    enableHost: false
-#    enableHostText: http://localhost:18568
+#    enableHostText: http://127.0.0.1:18568
 #    enableRequestCache: true
 #    enableFilterMultipartApis: false
 #    enableFilterMultipartApiMethodType: POST
@@ -951,7 +951,7 @@
 #    tracing:
 #      connect-timeout: 1
 #      read-timeout: 10
-#      endpoint: http://localhost:9411/api/v2/spans
+#      endpoint: http://127.0.0.1:9411/api/v2/spans
 #  tracing:
 #    enabled: true
 #    sampling:

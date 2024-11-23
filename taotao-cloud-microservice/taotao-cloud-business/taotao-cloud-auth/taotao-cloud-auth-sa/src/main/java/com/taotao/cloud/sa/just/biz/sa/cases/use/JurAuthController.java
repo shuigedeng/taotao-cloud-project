@@ -34,7 +34,7 @@ public class JurAuthController {
 
     /*
      * 前提1：首先调用登录接口进行登录，代码在 com.pj.cases.use.LoginAuthController 中有详细解释，此处不再赘述
-     * 		---- http://localhost:8081/acc/doLogin?name=zhang&pwd=123456
+     * 		---- http://127.0.0.1:8081/acc/doLogin?name=zhang&pwd=123456
      *
      * 前提2：项目实现 StpInterface 接口，代码在  com.pj.satoken.StpInterfaceImpl
      * 		Sa-Token 将从此实现类获取 每个账号拥有哪些权限。
@@ -42,7 +42,7 @@ public class JurAuthController {
      * 然后我们就可以使用以下示例中的代码进行鉴权了
      */
 
-    // 查询权限   ---- http://localhost:8081/jur/getPermission
+    // 查询权限   ---- http://127.0.0.1:8081/jur/getPermission
     @RequestMapping("getPermission")
     public SaResult getPermission() {
         // 查询权限信息 ，如果当前会话未登录，会返回一个空集合
@@ -57,7 +57,7 @@ public class JurAuthController {
         return SaResult.ok().set("roleList", roleList).set("permissionList", permissionList);
     }
 
-    // 权限校验  ---- http://localhost:8081/jur/checkPermission
+    // 权限校验  ---- http://127.0.0.1:8081/jur/checkPermission
     @RequestMapping("checkPermission")
     public SaResult checkPermission() {
 
@@ -76,7 +76,7 @@ public class JurAuthController {
         return SaResult.ok();
     }
 
-    // 角色校验  ---- http://localhost:8081/jur/checkRole
+    // 角色校验  ---- http://127.0.0.1:8081/jur/checkRole
     @RequestMapping("checkRole")
     public SaResult checkRole() {
 
@@ -95,7 +95,7 @@ public class JurAuthController {
         return SaResult.ok();
     }
 
-    // 权限通配符  ---- http://localhost:8081/jur/wildcardPermission
+    // 权限通配符  ---- http://127.0.0.1:8081/jur/wildcardPermission
     @RequestMapping("wildcardPermission")
     public SaResult wildcardPermission() {
 

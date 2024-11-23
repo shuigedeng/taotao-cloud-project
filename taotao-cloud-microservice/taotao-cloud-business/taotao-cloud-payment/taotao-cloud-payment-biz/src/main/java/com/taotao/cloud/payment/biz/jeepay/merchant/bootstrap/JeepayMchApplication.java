@@ -90,7 +90,7 @@ public class JeepayMchApplication {
 
 
     /**
-     * 功能描述:  API访问地址： http://localhost:9218/doc.html
+     * 功能描述:  API访问地址： http://127.0.0.1:9218/doc.html
      *
      * @Return: springfox.documentation.spring.web.plugins.Docket
      * @Author: terrfly

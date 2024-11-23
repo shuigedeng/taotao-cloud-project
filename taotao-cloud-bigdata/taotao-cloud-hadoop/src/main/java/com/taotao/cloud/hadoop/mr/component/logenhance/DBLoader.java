@@ -46,7 +46,7 @@ public class DBLoader {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/urldb", "root", "root");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/urldb", "root", "root");
 			st = conn.createStatement();
 			res = st.executeQuery("select url,content from url_rule");
 			while (res.next()) {

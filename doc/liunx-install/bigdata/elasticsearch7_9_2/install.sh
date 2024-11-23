@@ -81,7 +81,7 @@ function start_elasticsearch() {
 function stop_elasticsearch() {
      ps -ef | grep seata|grep -v elastic|awk '{print $2}' |xargs kill -9
 
-     # curl -XPOST 'http://localhost:9200/_shutdown'
+     # curl -XPOST 'http://127.0.0.1:9200/_shutdown'
 
      sleep 10
      echo "elasticsearch stoped"

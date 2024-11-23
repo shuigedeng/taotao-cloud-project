@@ -7,7 +7,7 @@ else
     exec_date=`date -d "1 days ago" +%Y-%m-%d`
 fi
 
-HIVE_HOST=localhost:10000
+HIVE_HOST=127.0.0.1:10000
 HIVE_USER=root
 
 LOG_PARQUET_SQL="

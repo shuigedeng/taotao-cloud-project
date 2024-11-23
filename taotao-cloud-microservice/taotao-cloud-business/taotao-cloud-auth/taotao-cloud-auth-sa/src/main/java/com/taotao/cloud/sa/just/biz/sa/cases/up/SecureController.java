@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/secure/")
 public class SecureController {
 
-    // 摘要加密   ---- http://localhost:8081/secure/digest
+    // 摘要加密   ---- http://127.0.0.1:8081/secure/digest
     @RequestMapping("digest")
     public SaResult digest() {
         // md5加密
@@ -47,7 +47,7 @@ public class SecureController {
         return SaResult.ok();
     }
 
-    // AES加密   ---- http://localhost:8081/secure/aes
+    // AES加密   ---- http://127.0.0.1:8081/secure/aes
     @RequestMapping("aes")
     public SaResult aes() {
         // 定义秘钥和明文
@@ -65,7 +65,7 @@ public class SecureController {
         return SaResult.ok();
     }
 
-    // RSA加密   ---- http://localhost:8081/secure/rsa
+    // RSA加密   ---- http://127.0.0.1:8081/secure/rsa
     @RequestMapping("rsa")
     public SaResult rsa() {
         // 定义私钥和公钥
@@ -88,7 +88,7 @@ public class SecureController {
         return SaResult.ok();
     }
 
-    // Base64 编码   ---- http://localhost:8081/secure/base64
+    // Base64 编码   ---- http://127.0.0.1:8081/secure/base64
     @RequestMapping("base64")
     public SaResult base64() {
         // 文本

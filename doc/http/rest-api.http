@@ -3,24 +3,24 @@ GET http://192.168.99.146:9999/sa.gif?project=taotao-cloud-backend-ui&data=eyJka
 
 ###
 
-GET http://localhost:9900/api/1.0/auth/oauth/token?username=admin&password=admin&grant_type=password&scope=app&client_id=webApp&client_secret=webApp
+GET http://127.0.0.1:9900/api/1.0/auth/oauth/token?username=admin&password=admin&grant_type=password&scope=app&client_id=webApp&client_secret=webApp
 Accept: */*
 Cache-Control: no-cache
 
 <> 2019-09-16T092532.200.html
 
 ###
-GET http://localhost:9900/api/1.0/auth/oauth/token/user?code=10&t=1589966331703&username=admin&password=admin
+GET http://127.0.0.1:9900/api/1.0/auth/oauth/token/user?code=10&t=1589966331703&username=admin&password=admin
 Content-Type: application/json
 BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
 ###
-GET http://localhost:9900/api/1.0/auth/oauth/token/list?page=1&limit=10
+GET http://127.0.0.1:9900/api/1.0/auth/oauth/token/list?page=1&limit=10
 Content-Type: application/json
 BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
 ###
-GET http://localhost:9800/oauth/token/user?username=admin&password=admin
+GET http://127.0.0.1:9800/oauth/token/user?username=admin&password=admin
 Content-Type: application/json
 BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
@@ -30,23 +30,23 @@ BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
 ###
 
-GET http://localhost:9900/api/1.0/auth/oauth/token/mobile?mobile=15730445330&smsCode=820724
+GET http://127.0.0.1:9900/api/1.0/auth/oauth/token/mobile?mobile=15730445330&smsCode=820724
 Content-Type: application/json
 BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
 ###
 
-GET http://localhost:9900/api/1.0/auth/sms/code?mobile=15730445339
+GET http://127.0.0.1:9900/api/1.0/auth/sms/code?mobile=15730445339
 Content-Type: application/json
 #BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
 ###
-GET http://localhost:9700/user/info/15730445330
+GET http://127.0.0.1:9700/user/info/15730445330
 Content-Type: application/json
 #BasicAuthorization: Basic d2ViQXBwOndlYkFwcA==
 
 ###access:
-GET http://localhost:9100/oath2/client
+GET http://127.0.0.1:9100/oath2/client
 Authorization: bearer eyJraWQiOiIwNzUyNDhlMC05NGEwLTRhZTktYjAxOS05YjM2YjM1ZTEwYzkiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTYxNzE3MjkxMiwic2NvcGUiOlsibWVzc2FnZS5yZWFkIl0sImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo5MDAwIiwiZXhwIjoxNjE3MjMyOTEyLCJpYXQiOjE2MTcxNzI5MTIsImp0aSI6IjE5YTk1OTUwLWU3ODItNGY2MC1iZjRkLWExZDhiZGU1N2U3NSJ9.Y6izfSvOHhv-KM_aLpE7cLwZgquJBdkswuQWq8YstwOw6E79Is1A6Ykn7Ajxfe8lBdc-hsRdyyfDptvCj4fmplzW3Hs7Z4icU16fsJjYYQ9S5oVrQMcVCgKBV9rNBXpTtsS8gpsPzCgN7wp4_JyB9PpyEBghJsi9DxWg3Eavu7MkO0ZoI1P5nMmlcw4k7PBoF7owpDQ08293epSowQ1He0BhFtTGZGRJiUnOa-KVrPfIlpepCJqN_O27G_j0AZhaJyy45D-tFp-BU5srgO4ckevrwJlj6uylb7yj11LyGImby5WABUIE-uLTJ0CPVzZ-nfVhQ-N7zbYRj4v3tiFHYw
 #Authorization: bearer eyJraWQiOiJkMDY0MDc4My0wNzhlLTRmYzEtOTBkZS00OGM5NWNmOGU0YTYiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9eyJraWQiOiJkMDY0MDc4My0wNzhlLTRmYzEtOTBkZS00OGM5NWNmOGU0YTYiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1ZCI6ImNsaWVudCIsIm5iZiI6MTYxNzE2MTY1OCwic2NvcGUiOlsibWVzc2FnZS5yZWFkIl0sImlzcyI6Imh0dHA6XC9cLzEyNy4wLjAuMTo5MDAwIiwiZXhwIjoxNjE3MTYxOTU4LCJpYXQiOjE2MTcxNjE2NTgsImp0aSI6IjA2ODRmMjM3LTFjMzctNDU1OS04ZWViLTNmYjNjYzFkYTRiZSJ9.XDtdoyj4wy-XJ56E7JXZd6qUeHTkfa4Pt5pb5kkl_Am4ZKZvCDiVi-FwxvHKcJw1_AoXltmDfWQnegsoNuMT-T_KhsD8HJFBGxwQZw2jg0ZYSgkys5HfF6s2ZjcKysRWYcQl_GLSUuBAWKph0hOxLLIvK6J-T0gRlbQ1Dec_3z_k6f5NnjPuvsjmU7CZIVEQ37DtSakSuaeHNPar02ZZEYIf2WBGrsZuSqjyN5Exsan8HKewNjHFUjPWs1itVl-N1sEgnVVDWsBE2-m0b6OV3S4hKmWdv_WXWLh0L7Oec6QxoWChUcFA1wD89FCsiFQHb3iKJoapI_-VBFiGW2vMiA
 
@@ -74,7 +74,7 @@ Authorization: bearer eyJraWQiOiIwNzUyNDhlMC05NGEwLTRhZTktYjAxOS05YjM2YjM1ZTEwYz
 
 ###
 
-GET http://localhost:9900/oauth/token?grant_type=refresh_token&refresh_token=62c11745-af01-4dbd-bc07-04d0152e8e6b&client_id=webApp&client_secret=webApp
+GET http://127.0.0.1:9900/oauth/token?grant_type=refresh_token&refresh_token=62c11745-af01-4dbd-bc07-04d0152e8e6b&client_id=webApp&client_secret=webApp
 Accept: */*
 Cache-Control: no-cache
 
@@ -82,7 +82,7 @@ Cache-Control: no-cache
 
 ###
 
-GET http://localhost:9900/oauth/token?grant_type=client_credentials&scope=app&client_id=webApp&client_secret=webApp
+GET http://127.0.0.1:9900/oauth/token?grant_type=client_credentials&scope=app&client_id=webApp&client_secret=webApp
 Accept: */*
 Cache-Control: no-cache
 
@@ -90,23 +90,23 @@ Cache-Control: no-cache
 
 ###
 
-GET  http://localhost:9900/api-uc/job?page=1&pageSize=5
+GET  http://127.0.0.1:9900/api-uc/job?page=1&pageSize=5
 Authorization: bearer a7548a98-cab0-470c-9882-55a657dee03e
 
 ###
-GET  http://localhost:9900/code
+GET  http://127.0.0.1:9900/code
 #Authorization: bearer 4c0d01ef-818c-48c6-8d5a-1cc62c15c2d6
 
 ###
-GET  http://localhost:9900/api-auth/social/auth?loginType=gitee
+GET  http://127.0.0.1:9900/api-auth/social/auth?loginType=gitee
 #Authorization: bearer 4c0d01ef-818c-48c6-8d5a-1cc62c15c2d6
 
 ###
-GET  http://localhost:9900/fallback
+GET  http://127.0.0.1:9900/fallback
 #Authorization: bearer 4c0d01ef-818c-48c6-8d5a-1cc62c15c2d6
 
 ###
-GET  http://localhost:9900/api/1.0/uc/api-docs
+GET  http://127.0.0.1:9900/api/1.0/uc/api-docs
 
 ###
 GET  http://127.0.0.1:9900/api/1.0/auth/oauth/token/third?code=36a2bf693a3704625014c98bc90235ae7d94c48019085282bb074d58bdf17935&state=gitee
@@ -122,7 +122,7 @@ Authorization: Bearer ec7561c2-e2a5-4a22-9f8f-061b6a66975c
 }
 
 ###
-GET http://localhost:9900/oauth/token
+GET http://127.0.0.1:9900/oauth/token
 
 ###
 GET http://127.0.0.1:9900/api/v1.0/uc/role?roleName=管理员
@@ -134,8 +134,8 @@ GET http://127.0.0.1:9900/api/v1.0/auth/oauth/token?username=admin&password=admi
 <> 2020-08-27T052108.401.xml
 
 ###
-#GET http://localhost:9900/api/v1.0/auth/oauth/authorize?response_type=code&client_id=third_client_1&redirect_uri=http://www.baidu.com&state=state&scope=all
-    http://localhost:9900/api/v1.0/auth/oauth/authorize?response_type=code&client_id=third_client_1&client_secret=third_client_1&redirect_uri=http://www.baidu.com
+#GET http://127.0.0.1:9900/api/v1.0/auth/oauth/authorize?response_type=code&client_id=third_client_1&redirect_uri=http://www.baidu.com&state=state&scope=all
+    http://127.0.0.1:9900/api/v1.0/auth/oauth/authorize?response_type=code&client_id=third_client_1&client_secret=third_client_1&redirect_uri=http://www.baidu.com
 
 ###
 POST http://127.0.0.1:9900/api/v1.0/uc/backend/user/list
@@ -158,7 +158,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:9700/role
+POST http://127.0.0.1:9700/role
 Content-Type: application/json
 
 {
@@ -199,14 +199,14 @@ GET http://192.168.99.146:9999/sa.gif?project=taotao-cloud-backend-ui&data=eyJka
 
 
 ###
-GET http://localhost:9900/api/v1.0/uc/role/exist/code/3
+GET http://127.0.0.1:9900/api/v1.0/uc/role/exist/code/3
 
 <> 2020-12-04T040356.200.json
 <> 2020-12-04T040138.200.json
 <> 2020-12-04T035614.200.json
 
 ###
-GET http://localhost:9900/api/v1.0/order/order/info/3
+GET http://127.0.0.1:9900/api/v1.0/order/order/info/3
 
 
 ###

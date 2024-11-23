@@ -43,7 +43,7 @@
 
 
         $.ajax({
-            url: "http://localhost:9000/api/user/login",
+            url: "http://127.0.0.1:9000/api/user/login",
             beforeSend: function (XMLHttpRequest) {
                 XMLHttpRequest.setRequestHeader("timestamp", timestamp);
                 XMLHttpRequest.setRequestHeader("requestId", requestId);

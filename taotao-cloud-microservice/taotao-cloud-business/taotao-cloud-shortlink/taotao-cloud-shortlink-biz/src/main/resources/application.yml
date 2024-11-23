@@ -91,7 +91,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: defaultDataSource
     password: Zc123456
-    url: jdbc:mysql://localhost:3306/Test?serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/Test?serverTimezone=UTC&useSSL=false
     username: root
   rabbitmq:
     first:

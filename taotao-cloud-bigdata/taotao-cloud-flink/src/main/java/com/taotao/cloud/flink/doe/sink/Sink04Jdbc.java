@@ -85,7 +85,7 @@ public class Sink04Jdbc {
                 .build();
    // 连接数据库的信息
         JdbcConnectionOptions connectionOptions = new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
-                .withUrl("jdbc:mysql://localhost:3306/doe44")  // 8  JDBC 使用的URL
+                .withUrl("jdbc:mysql://127.0.0.1:3306/doe44")  // 8  JDBC 使用的URL
                 .withUsername("root")
                 .withPassword("root")
                 //  .withDriverName() 指定连接数据库的类型  驱动类

@@ -10,7 +10,7 @@ taotao:
       client:
         config:
           openApiRefPath: openapi.example.client.openapiclient
-          baseUrl: http://localhost:8080
+          baseUrl: http://127.0.0.1:8080
           selfPrivateKey: ${keys.local.rsa.privateKey}
           remotePublicKey: ${keys.remote.rsa.publicKey}
           asymmetricCryEnum: RSA

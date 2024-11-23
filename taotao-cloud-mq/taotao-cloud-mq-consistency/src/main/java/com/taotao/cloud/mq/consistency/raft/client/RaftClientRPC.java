@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class RaftClientRPC {
 
-    private static List<String> list = Lists.newArrayList("localhost:8777", "localhost:8778", "localhost:8779");
+    private static List<String> list = Lists.newArrayList("127.0.0.1:8777", "127.0.0.1:8778", "127.0.0.1:8779");
 
     private final static RpcClient CLIENT = new DefaultRpcClient();
 

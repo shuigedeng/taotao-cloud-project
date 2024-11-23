@@ -37,7 +37,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         // 数据源配置
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306/sharding-db0?serverTimezone=GMT%2B8", "root", "admin")
+        FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/sharding-db0?serverTimezone=GMT%2B8", "root", "admin")
                 .dataSourceConfig(builder -> {
                     builder.dbQuery(new MySqlQuery())
                             .schema("mybatis-plus")

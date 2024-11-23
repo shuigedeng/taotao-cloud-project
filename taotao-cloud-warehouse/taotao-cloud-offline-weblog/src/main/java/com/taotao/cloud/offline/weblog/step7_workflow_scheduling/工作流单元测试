@@ -6,7 +6,7 @@ total 12
 drwxrwxr-x. 2 hadoop hadoop 4096 Nov 23 16:32 hive2-dw
 drwxrwxr-x. 2 hadoop hadoop 4096 Nov 23 16:32 hive2-etl
 drwxrwxr-x. 3 hadoop hadoop 4096 Nov 23 11:24 weblog
-[hadoop@hdp-node-01 wf-oozie]$ export OOZIE_URL=http://localhost:11000/oozie
+[hadoop@hdp-node-01 wf-oozie]$ export OOZIE_URL=http://127.0.0.1:11000/oozie
 
 2、工作流单元提交启动
 oozie job -D inpath=/weblog/input -D outpath=/weblog/outpre -config weblog/job.properties  -run

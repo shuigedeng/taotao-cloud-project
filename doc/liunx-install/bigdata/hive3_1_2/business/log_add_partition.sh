@@ -9,7 +9,7 @@ fi
 
 SQL_DATE=${exec_date}
 
-HIVE_HOST=localhost:10000
+HIVE_HOST=127.0.0.1:10000
 HIVE_USER=root
 
 ADD_PARTITION_SQL="

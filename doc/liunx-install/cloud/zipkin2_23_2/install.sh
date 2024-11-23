@@ -33,7 +33,7 @@ source /opt/cloud/zipkin/mysql.sql
 
 # zipkin elasticsearch
 java -jar zipkin-server-2.23.2-exec.jar
-#--KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+#--KAFKA_BOOTSTRAP_SERVERS=127.0.0.1:9092
 --STORAGE_TYPE=elasticsearch
 --ES_HOSTS=http://127.0.0.1:9200
 
