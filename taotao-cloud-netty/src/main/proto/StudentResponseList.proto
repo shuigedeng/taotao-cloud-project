@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.taotao.cloud.netty.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.netty.grpc";
+option java_outer_classname = "StudentResponseListServiceProto";
+//option objc_class_prefix = "HLW";
+
+service StudentResponseListService {
+  rpc requestOauth2 (StudentResponseListRequest) returns (StudentResponseListResponse){}
+}
+
+message StudentResponseListRequest {
+  string id = 1;
+}
+
+message StudentResponseListResponse {
+  string id = 1;
+}
+
+

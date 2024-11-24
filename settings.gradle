@@ -105,7 +105,7 @@ dependencyResolutionManagement {
     }
 }
 
-def oneLayerProjects = ['scala', 'python', 'design-patterns','cache','jdbcpool']
+def oneLayerProjects = ['scala', 'python', 'design-patterns','cache','jdbcpool', 'netty']
 for (project in oneLayerProjects) {
     include "taotao-cloud-${project}"
 }

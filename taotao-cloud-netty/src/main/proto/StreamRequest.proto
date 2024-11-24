@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.taotao.cloud.netty.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.netty.grpc";
+option java_outer_classname = "StreamRequestServiceProto";
+//option objc_class_prefix = "HLW";
+
+service StreamRequestService {
+  rpc request (StreamRequestcRequest) returns (StreamRequestcResponse){}
+}
+
+message StreamRequestcRequest {
+  string id = 1;
+}
+
+message StreamRequestcResponse {
+  string id = 1;
+}
+
+

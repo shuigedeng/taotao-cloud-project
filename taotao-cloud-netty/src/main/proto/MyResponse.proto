@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.taotao.cloud.netty.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.taotao.cloud.netty.grpc";
+option java_outer_classname = "MyResponseServiceProto";
+//option objc_class_prefix = "HLW";
+
+service MyResponseService {
+  rpc request (MyResponseGrpcRequest) returns (MyResponseGrpcResponse){}
+}
+
+message MyResponseGrpcRequest {
+  string id = 1;
+}
+
+message MyResponseGrpcResponse {
+  string id = 1;
+  string serialNum = 2;
+}
+
