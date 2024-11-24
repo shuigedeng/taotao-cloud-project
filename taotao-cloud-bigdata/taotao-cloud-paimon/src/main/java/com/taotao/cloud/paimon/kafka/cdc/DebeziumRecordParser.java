@@ -17,7 +17,7 @@
 
 package com.taotao.cloud.paimon.kafka.cdc;
 
-import io.connect.paimon.data.CdcRecord;
+import com.taotao.cloud.paimon.kafka.data.CdcRecord;
 import org.apache.kafka.connect.data.Field;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.errors.ConnectException;

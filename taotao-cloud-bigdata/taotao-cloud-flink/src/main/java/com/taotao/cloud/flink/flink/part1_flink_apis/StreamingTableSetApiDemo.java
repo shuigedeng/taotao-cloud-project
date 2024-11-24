@@ -5,7 +5,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-import org.bigdatatechcir.learn_flink.util.WordCountData;
+import com.taotao.cloud.flink.flink.util.WordCountData;
 
 public class StreamingTableSetApiDemo {
     /**

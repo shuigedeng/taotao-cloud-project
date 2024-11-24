@@ -26,7 +26,7 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
-import org.bigdatatechcir.learn_flink.util.DruidUtil;
+import com.taotao.cloud.flink.learn_flink.util.DruidUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

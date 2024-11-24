@@ -11,6 +11,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 @Slf4j
 public class Server1 {
@@ -40,6 +41,11 @@ public class Server1 {
             worker.shutdownGracefully();
         }
     }
+
+	@Test
+	public void test() {
+		start();
+	}
 
     public static void main(String[] args) {
         new Server1().start();
