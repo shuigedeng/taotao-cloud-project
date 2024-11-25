@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -25,6 +26,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
+    testImplementation "org.assertj:assertj-core:3.26.3"
 }
 
 //version "3.2022.15"

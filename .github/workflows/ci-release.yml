@@ -34,7 +34,7 @@ jobs:
         id: get_tag
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.2.5
+      - uses: graalvm/setup-graalvm@v1.2.6
         with:
           java-version: '21'
           distribution: 'graalvm'
