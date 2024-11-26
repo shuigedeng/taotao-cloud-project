@@ -295,21 +295,22 @@ management:
       default: read_only
   endpoint:
     scheduledtasks:
-      enabled: true
+      access: unrestricted
     logfile:
-      enabled: true
+      access: unrestricted
     metrics:
-      enabled: true
+      access: unrestricted
     prometheus:
-      enabled: true
+      access: unrestricted
     health:
       show-details: ALWAYS
+      access: unrestricted
     shutdown:
-      access: read_only
+      access: unrestricted
     loggers:
-      access: read_only
+      access: unrestricted
     beans:
-      access: read_only
+      access: unrestricted
       cache:
         time-to-live: "10s"
   metrics:
