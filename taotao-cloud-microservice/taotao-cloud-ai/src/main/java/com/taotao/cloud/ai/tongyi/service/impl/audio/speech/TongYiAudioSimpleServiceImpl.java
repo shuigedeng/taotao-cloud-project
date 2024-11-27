@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.audio.speech;
+package com.taotao.cloud.ai.tongyi.service.impl.audio.speech;
 
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
-import com.alibaba.cloud.ai.example.tongyi.service.TongYiService;
 import com.alibaba.cloud.ai.tongyi.audio.speech.api.SpeechModel;
 import com.alibaba.dashscope.audio.tts.SpeechSynthesisAudioFormat;
 import org.slf4j.Logger;

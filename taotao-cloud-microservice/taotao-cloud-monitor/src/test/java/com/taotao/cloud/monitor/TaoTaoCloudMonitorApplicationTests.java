@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor;
+package com.taotao.cloud.monitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

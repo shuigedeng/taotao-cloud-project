@@ -1,4 +1,4 @@
-package com.et.service;
+package com.taotao.cloud.ai.redisvectorstore.service;
 
 
 import org.springframework.ai.document.Document;

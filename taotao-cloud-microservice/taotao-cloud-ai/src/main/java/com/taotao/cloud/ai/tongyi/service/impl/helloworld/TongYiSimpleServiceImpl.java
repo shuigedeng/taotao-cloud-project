@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.helloworld;
+package com.taotao.cloud.ai.tongyi.service.impl.helloworld;
 
 import java.util.Map;
 
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
@@ -29,7 +28,8 @@ import org.springframework.ai.chat.model.StreamingChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 /**
  * The Chat simple example service implementation.
  * There is optional message parameter whose default value is "Tell me a joke".

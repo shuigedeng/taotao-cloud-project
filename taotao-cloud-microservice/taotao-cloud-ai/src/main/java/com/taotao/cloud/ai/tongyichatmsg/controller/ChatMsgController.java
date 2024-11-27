@@ -17,6 +17,7 @@
 package com.taotao.cloud.ai.tongyichatmsg.controller;
 
 
+import com.taotao.cloud.ai.tongyichatmsg.service.ChatMsgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

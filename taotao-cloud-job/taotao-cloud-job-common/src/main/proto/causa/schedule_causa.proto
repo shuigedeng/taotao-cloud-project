@@ -1,0 +1,49 @@
+//使用proto3语法
+syntax = "proto3";
+
+//生成多个java文件
+//option java_multiple_files = true;
+//把生成的文件放到哪个包下
+option java_package = "com.taotao.cloud.remote.protos";
+//输出的类名
+//option java_outer_classname = "GrpcParams";
+
+// 定义 Response 消息
+
+
+// req
+message WorkerHeartbeat {
+  string workerAddress = 1;
+  string appName = 2;
+  int64 appId = 3;
+  int64 heartbeatTime = 4;
+  string client = 8;
+  bool isOverload = 10;
+  int32 lightTaskTrackerNum = 11;
+  SystemMetrics systemMetrics = 13;
+  string serverIpAddress = 14;
+}
+message SystemMetrics {
+  int32 cpu_processors = 1;
+  double cpu_load = 2;
+  double jvm_used_memory = 3;
+  double jvm_max_memory = 4;
+  double jvm_memory_usage = 5;
+  double disk_used = 6;
+  double disk_total = 7;
+  double disk_usage = 8;
+  string extra = 9;
+  int32 score = 10;
+}
+
+message ServerScheduleJobReq {
+  string workerAddress = 1;
+  int64 jobId = 3;
+  int64 instanceId = 5;
+  string processorType = 7;
+  string processorInfo = 8;
+  string jobParams = 10;
+  int32 taskRetryNum = 13;
+  string timeExpressionType = 14;
+  string timeExpression = 15;
+}

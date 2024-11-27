@@ -146,7 +146,7 @@ public class OAuth2AuthenticationConfiguration {
 	 */
 	@Bean
 	public OAuth2FormLoginUrlConfigurer auth2FormLoginParameterConfigurer(
-		OAuth2AuthenticationProperties authenticationProperties) {
+		OAuth2AuthenticationProperties authenticationProperties) {z
 		OAuth2FormLoginUrlConfigurer configurer = new OAuth2FormLoginUrlConfigurer(
 			authenticationProperties);
 		log.info("Bean [OAuth2 FormLogin Parameter Configurer] Auto Configure.");

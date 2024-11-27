@@ -3,6 +3,7 @@ package com.taotao.cloud.ai.springai.service.impl;
 import com.taotao.cloud.ai.springai.constants.ChatRequestConstant;
 import com.taotao.cloud.ai.springai.model.enums.MessageRoleEnum;
 import com.taotao.cloud.ai.springai.model.query.AiMessageQuery;
+import com.taotao.cloud.ai.springai.service.AiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.messages.*;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Service("aiService")
 @RequiredArgsConstructor
-public class AiServiceImpl implements com.yf.service.AiService {
+public class AiServiceImpl implements AiService {
 
     private final OllamaChatModel ollamaChatModel;
 

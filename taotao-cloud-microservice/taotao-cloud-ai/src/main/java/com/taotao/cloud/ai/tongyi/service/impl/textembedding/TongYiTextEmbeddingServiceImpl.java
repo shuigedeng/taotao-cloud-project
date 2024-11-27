@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.textembedding;
+package com.taotao.cloud.ai.tongyi.service.impl.textembedding;
 
 import java.util.List;
 
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.stereotype.Service;

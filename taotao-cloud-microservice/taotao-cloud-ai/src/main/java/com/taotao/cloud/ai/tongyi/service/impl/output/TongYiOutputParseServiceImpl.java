@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.output;
+package com.taotao.cloud.ai.tongyi.service.impl.output;
 
+import com.taotao.cloud.ai.tongyi.models.ActorsFilms;
 import java.util.Map;
 
-import com.alibaba.cloud.ai.example.tongyi.models.ActorsFilms;
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

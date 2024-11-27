@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.roles;
+package com.taotao.cloud.ai.tongyi.service.impl.roles;
 
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.UserMessage;

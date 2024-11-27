@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor.model;
+package com.taotao.cloud.monitor.model;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor.api;
+package com.taotao.cloud.monitor.api;
 
-import com.taotao.boot.monitor.model.AlertMessage;
-import com.taotao.boot.monitor.model.TargetGroup;
+import com.taotao.cloud.monitor.model.AlertMessage;
+import com.taotao.cloud.monitor.model.TargetGroup;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.cloud.client.ServiceInstance;

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.audio.transcription;
+package com.taotao.cloud.ai.tongyi.service.impl.audio.transcription;
 
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,8 +28,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
-import com.alibaba.cloud.ai.example.tongyi.service.TongYiService;
 import com.alibaba.cloud.ai.tongyi.audio.transcription.TongYiAudioTranscriptionModel;
 import com.alibaba.cloud.ai.tongyi.audio.transcription.api.AudioTranscriptionPrompt;
 import com.alibaba.cloud.ai.tongyi.audio.transcription.api.AudioTranscriptionResult;

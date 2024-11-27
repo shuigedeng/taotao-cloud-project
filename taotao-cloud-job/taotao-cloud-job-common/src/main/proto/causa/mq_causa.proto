@@ -1,0 +1,59 @@
+syntax = "proto3";
+option java_package = "com.taotao.cloud.remote.protos";
+// req
+  message Message{
+    MessageType messageType = 1;
+    oneof body{
+      CreateJobReq createJobReq = 2;
+      UpdateJobReq updateJobReq = 3;
+      DeleteJobReq deleteJobReq = 4;
+    }
+    int32 retryTime = 5;
+  }
+message CreateJobReq{
+  string appName = 1;
+  string jobName = 2;
+  string jobDescription = 3;
+  string jobParams = 4;
+  TimeExpressionType timeExpressionType = 5;
+  string timeExpression = 6;
+  string lifeCycle = 7;
+  string processorInfo = 8;
+  int32 maxInstanceNum = 9;
+  int64 jobId = 10;
+}
+
+message UpdateJobReq{
+  string appName = 1;
+  string jobName = 2;
+  string jobDescription = 3;
+  string jobParams = 4;
+  TimeExpressionType timeExpressionType = 5;
+  string timeExpression = 6;
+  string lifeCycle = 7;
+  string processorInfo = 8;
+  int32 maxInstanceNum = 9;
+  int64 jobId = 10;
+}
+message DeleteJobReq{
+    int64 jobId = 1;
+}
+
+// 定义 TimeExpressionType 枚举
+enum TimeExpressionType {
+    CRON = 0;
+    FIXED_RATE = 1;
+    FIXED_DELAY = 2;
+    DAILY_TIME_INTERVAL = 3;
+  // 根据具体需求添加其他类型
+}
+enum MessageType {
+    JOB_CREATE = 0;
+    JOB_UPDATE = 1;
+    JOB_DELETE = 2;
+}
+
+// response
+message CreateJobRes{
+  int64 jobId = 1;
+}

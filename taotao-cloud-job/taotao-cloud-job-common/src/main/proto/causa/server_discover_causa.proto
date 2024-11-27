@@ -1,0 +1,124 @@
+//使用proto3语法
+syntax = "proto3";
+
+//生成多个java文件
+//option java_multiple_files = true;
+//把生成的文件放到哪个包下
+option java_package = "com.taotao.cloud.remote.protos";
+//输出的类名
+//option java_outer_classname = "GrpcParams";
+
+
+// req
+message HeartbeatCheck {
+  int64 appId = 1;
+  string currentServer = 2;
+}
+message AppName {
+  string appName = 1;
+  string subAppName = 2;
+  string targetServer = 3;
+}
+message Ping {
+  string targetServer = 1;
+}
+message ServerChangeReq{
+  string appName = 1;
+  string targetServer = 2;
+}
+
+
+
+
+// response
+message WorkInfo {
+  int64 appId = 1;
+}
+message AvailableServer {
+  string availableServer = 1;
+}
+message Pong {}
+
+
+//
+//// 定义 JobReq 消息
+//message JobReq {
+//  // 任务 ID
+//  string id = 1;
+//
+//  string job_name = 2;
+//
+//  string job_description = 3;
+//
+//  string job_params = 4;
+//
+//  TimeExpressionType time_expression_type = 5;
+//
+//  string time_expression = 6;
+//
+//  ExecuteType execute_type = 7;
+//
+//  ProcessorType processor_type = 8;
+//
+//  string processor_info = 9;
+//
+//  int32 max_instance_num = 10;
+//
+//  int32 concurrency = 11;
+//
+//  int64 instance_time_limit = 12;
+//
+//  int32 instance_retry_num = 13;
+//
+//  int32 task_retry_num = 14;
+//
+//  int32 min_cpu_cores = 15;
+//
+//  int32 min_memory_space = 16;
+//
+//  int32 min_disk_space = 17;
+//
+//  repeated string designated_workers = 18;
+//
+//  int32 max_worker_count = 19;
+//
+//  repeated int64 notify_user_ids = 20;
+//
+//  bool enable = 21;
+//
+//  DispatchStrategy dispatch_strategy = 22;
+//
+//  string life_cycle = 23;
+//  int64 appId = 24;
+//}
+//
+//// 定义时间表达式类型枚举
+//enum TimeExpressionType {
+//  CRON = 0;
+//  FIXED_RATE = 1;
+//}
+//
+//// 定义执行类型枚举
+//enum ExecuteType {
+//  STANDALONE = 0;
+//  MAP_REDUCE = 1;
+//}
+//
+//// 定义处理器类型枚举
+//enum ProcessorType {
+//  BUILT_IN = 0;
+//  JAVA = 1;
+//  SHELL = 2;
+//  HTTP = 3;
+//}
+//
+//// 定义调度策略枚举
+//enum DispatchStrategy {
+//  RANDOM = 0;
+//  HEALTHY_FIRST = 1;
+//}
+//
+//
+//message ReminderJobResponse {
+//  int32 id = 1;
+//}

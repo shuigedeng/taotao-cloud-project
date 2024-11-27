@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor;
+package com.taotao.cloud.monitor;
 
 import com.taotao.boot.common.utils.common.PropertyUtils;
 import com.taotao.boot.core.startup.StartupSpringApplication;

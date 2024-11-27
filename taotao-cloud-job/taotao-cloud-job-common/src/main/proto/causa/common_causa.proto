@@ -1,0 +1,29 @@
+//使用proto3语法
+syntax = "proto3";
+import "causa/schedule_causa.proto";
+import "causa/register_causa.proto";
+import "causa/server_discover_causa.proto";
+import "causa/mq_causa.proto";
+
+//生成多个java文件
+//option java_multiple_files = true;
+//把生成的文件放到哪个包下
+option java_package = "com.taotao.cloud.remote.protos";
+
+//输出的类名
+//option java_outer_classname = "GrpcParams";
+
+// 定义 Response 消息
+message Response {
+  int32 code = 1; // 状态码
+  string message = 2;
+  oneof data { // 允许多种数据类型
+
+    WorkInfo work_info = 3;
+    AvailableServer availableServer = 4;
+    Pong pong= 5;
+    WorkerSubscribeResponse workerSubscribeResponse = 6;
+    ServerAddressList serverAddressList = 7;
+    CreateJobRes createJobRes= 8;
+  }
+}

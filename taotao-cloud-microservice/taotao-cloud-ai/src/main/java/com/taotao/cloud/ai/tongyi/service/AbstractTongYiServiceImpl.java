@@ -16,10 +16,11 @@
 
 package com.taotao.cloud.ai.tongyi.service;
 
+import com.taotao.cloud.ai.tongyi.models.ActorsFilms;
 import java.util.List;
 import java.util.Map;
 
-
+import com.taotao.cloud.ai.tongyi.models.Completion;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.image.ImageResponse;
 

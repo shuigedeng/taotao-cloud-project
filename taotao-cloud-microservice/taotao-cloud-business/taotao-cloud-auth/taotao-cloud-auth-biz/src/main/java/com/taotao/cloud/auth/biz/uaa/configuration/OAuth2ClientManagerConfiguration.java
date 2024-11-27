@@ -16,8 +16,8 @@
 
 package com.taotao.cloud.auth.biz.uaa.configuration;
 
-import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateMapOAuth2AccessTokenResponseConverter;
-import com.taotao.cloud.auth.biz.authentication.login.social.SocialDelegateOAuth2RefreshTokenRequestEntityConverter;
+import com.taotao.boot.security.spring.authentication.login.social.oauth2client.SocialDelegateMapOAuth2AccessTokenResponseConverter;
+import com.taotao.boot.security.spring.authentication.login.social.oauth2client.SocialDelegateOAuth2RefreshTokenRequestEntityConverter;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

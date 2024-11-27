@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.ai.example.tongyi.service.impl.stuff;
+package com.taotao.cloud.ai.tongyi.service.impl.stuff;
 
+import com.taotao.cloud.ai.tongyi.models.Completion;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.alibaba.cloud.ai.example.tongyi.models.Completion;
-import com.alibaba.cloud.ai.example.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.AbstractTongYiServiceImpl;
+import com.taotao.cloud.ai.tongyi.service.TongYiService;
 
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.Generation;

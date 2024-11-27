@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor.configuration;
+package com.taotao.cloud.monitor.configuration;
 
 import com.taotao.boot.common.utils.log.LogUtils;
-import com.taotao.boot.monitor.api.PrometheusApi;
-import com.taotao.boot.monitor.api.ReactivePrometheusApi;
-import com.taotao.boot.monitor.model.AlertMessage;
-import com.taotao.boot.monitor.properties.PrometheusProperties;
+import com.taotao.cloud.monitor.api.PrometheusApi;
+import com.taotao.cloud.monitor.api.ReactivePrometheusApi;
+import com.taotao.cloud.monitor.model.AlertMessage;
+import com.taotao.cloud.monitor.properties.PrometheusProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -1,4 +1,4 @@
-package com.et.controller;
+package com.taotao.cloud.ai.redisvectorstore.controller;
 
 import com.et.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;

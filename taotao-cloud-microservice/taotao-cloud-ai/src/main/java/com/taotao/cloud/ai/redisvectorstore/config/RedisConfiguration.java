@@ -1,4 +1,4 @@
-package com.et.config;
+package com.taotao.cloud.ai.redisvectorstore.config;
 
 import org.springframework.ai.autoconfigure.vectorstore.redis.RedisVectorStoreProperties;
 import org.springframework.ai.chat.ChatClient;

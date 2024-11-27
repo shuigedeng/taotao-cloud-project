@@ -1,0 +1,98 @@
+package com.taotao.cloud.job.core.worker.core.schedule;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import com.taotao.cloud.common.domain.WorkerHeartbeat;
+import com.taotao.cloud.common.enhance.SafeRunnable;
+import com.taotao.cloud.common.module.SystemMetrics;
+import com.taotao.cloud.common.utils.net.MyNetUtil;
+import com.taotao.cloud.remote.protos.ScheduleCausa;
+import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.worker.common.constant.TransportTypeEnum;
+import com.taotao.cloud.worker.common.grpc.strategies.StrategyCaller;
+import com.taotao.cloud.worker.common.utils.SystemInfoUtils;
+import com.taotao.cloud.worker.core.discover.ServerDiscoverService;
+
+
+/**
+ * Worker健康度定时上报
+ *
+ * @author shuigedeng
+ * @since 2020/3/25
+ */
+@Slf4j
+@RequiredArgsConstructor
+public class WorkerHealthReporter extends SafeRunnable {
+
+    private final ServerDiscoverService serverDiscoverService;
+    private final TtcJobWorkerConfig config;
+
+    @Override
+    public void run0() {
+
+        // 没有可用Server，无法上报
+        String currentServer = serverDiscoverService.getCurrentServerAddress();
+        if (StringUtils.isEmpty(currentServer)) {
+            log.warn("[WorkerHealthReporter] no available server,fail to report health info!");
+            return;
+        }
+
+        SystemMetrics systemMetrics;
+        systemMetrics = SystemInfoUtils.getSystemMetrics();
+
+        WorkerHeartbeat heartbeat = new WorkerHeartbeat();
+        heartbeat.setServerIpAddress(currentServer);
+        heartbeat.setSystemMetrics(systemMetrics);
+        heartbeat.setAppName(config.getAppName());
+        heartbeat.setAppId(serverDiscoverService.getCurrentAppId());
+        heartbeat.setHeartbeatTime(System.currentTimeMillis());
+        heartbeat.setWorkerAddress(MyNetUtil.address);
+        heartbeat.setClient("KingPenguin");
+//        heartbeat.setTag(config.getWorkerConfig().getTag());
+
+        // 上报 Tracker 数量
+//        heartbeat.setLightTaskTrackerNum(LightTaskTrackerManager.currentTaskTrackerSize());
+////        heartbeat.setHeavyTaskTrackerNum(HeavyTaskTrackerManager.currentTaskTrackerSize());
+//        // 是否超载
+//        if (config.getMaxLightweightTaskNum() <= LightTaskTrackerManager.currentTaskTrackerSize() || config.getMaxHeavyweightTaskNum() <= HeavyTaskTrackerManager.currentTaskTrackerSize()){
+//            heartbeat.setOverload(true);
+//        }
+
+        // 发送请求
+        if (StringUtils.isEmpty(currentServer)) {
+            return;
+        }
+        // log
+        log.info("[WorkerHealthReporter] report health status,appId:{},appName:{},isOverload:{},maxLightweightTaskNum:{},currentLightweightTaskNum:{},maxHeavyweightTaskNum:{}",
+                heartbeat.getAppId(),
+                heartbeat.getAppName(),
+                heartbeat.isOverload(),
+                config.getMaxLightweightTaskNum(),
+                heartbeat.getLightTaskTrackerNum(),
+                config.getMaxHeavyweightTaskNum()
+        );
+
+        ScheduleCausa.SystemMetrics builder0 = ScheduleCausa.SystemMetrics.newBuilder()
+                .setCpuLoad(heartbeat.getSystemMetrics().getCpuLoad())
+                .setCpuProcessors(heartbeat.getSystemMetrics().getCpuProcessors())
+                .setDiskTotal(heartbeat.getSystemMetrics().getDiskTotal())
+                .setDiskUsage(heartbeat.getSystemMetrics().getDiskUsage())
+                .setScore(heartbeat.getSystemMetrics().getScore())
+                .setJvmMaxMemory(heartbeat.getSystemMetrics().getJvmMaxMemory())
+                .setJvmUsedMemory(heartbeat.getSystemMetrics().getJvmUsedMemory())
+                .setJvmMemoryUsage(heartbeat.getSystemMetrics().getJvmMemoryUsage()).build();
+        ScheduleCausa.WorkerHeartbeat builder = ScheduleCausa.WorkerHeartbeat.newBuilder()
+                .setServerIpAddress(currentServer)
+                .setAppId(heartbeat.getAppId())
+                .setAppName(heartbeat.getAppName())
+                .setHeartbeatTime(heartbeat.getHeartbeatTime())
+                .setClient(heartbeat.getClient())
+                .setIsOverload(heartbeat.isOverload())
+                .setWorkerAddress(heartbeat.getWorkerAddress())
+                .setSystemMetrics(builder0)
+                .build();
+
+        StrategyCaller.call(TransportTypeEnum.HEARTBEAT_HEALTH_REPORT, builder);
+    }
+}

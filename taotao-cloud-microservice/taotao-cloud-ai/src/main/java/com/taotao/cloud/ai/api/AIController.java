@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AIController {
 
-//	@Resource
-//	private OllamaChatClient ollamaChatClient;
-//
-//	@GetMapping("/chat")
-//	public String chat(@RequestParam(name = "message") String message) {
-//		return ollamaChatClient.call(message);
-//	}
+	@Resource
+	private OllamaChatClient ollamaChatClient;
+
+	@GetMapping("/chat")
+	public String chat(@RequestParam(name = "message") String message) {
+		return ollamaChatClient.call(message);
+	}
 
 }
 

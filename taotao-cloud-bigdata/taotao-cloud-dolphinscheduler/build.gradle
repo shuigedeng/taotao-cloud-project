@@ -1,3 +1,5 @@
 dependencies {
+    implementation 'org.apache.dolphinscheduler:dolphinscheduler-api:3.2.1'
+
 
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor.configuration;
+package com.taotao.cloud.monitor.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import java.util.Arrays;

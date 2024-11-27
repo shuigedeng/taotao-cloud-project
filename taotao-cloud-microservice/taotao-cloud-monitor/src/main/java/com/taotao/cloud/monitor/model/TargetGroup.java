@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.taotao.boot.monitor.model;
+package com.taotao.cloud.monitor.model;
 
 import java.util.List;
 import java.util.Map;
