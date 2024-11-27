@@ -110,12 +110,12 @@ intellij {
 
     // 用到的插件
     // plugins.set(listOf())
-    plugins = ['com.intellij.java',
-               'com.intellij.database' ,
-               'com.intellij.spring' ,
-               'com.intellij.spring.boot' ,
-               'org.jetbrains.plugins.yaml' ,
-               'org.intellij.intelliLang']
+    plugins = [ 'com.intellij.java',
+                'com.intellij.database' ,
+                'com.intellij.spring' ,
+                'com.intellij.spring.boot' ,
+                'org.jetbrains.plugins.yaml' ,
+                'org.intellij.intelliLang' ]
 }
 
 patchPluginXml {
