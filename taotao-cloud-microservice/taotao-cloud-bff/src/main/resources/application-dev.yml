@@ -135,6 +135,7 @@ redisson:
   #  scanInterval: 1000
 
 spring:
+  .
   config:
     activate:
       on-profile: dev
@@ -308,6 +309,19 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false
+  graphql:
+    path: /graphql
+    graphiql:
+      enabled: true
+      path: /graphiql
+    websocket:
+      path: /subscriptions
+    cors:
+      allowed-origins: *
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: *
+      max-age: 3600
+      allow-credentials: true
 
 mybatis:
   mapper-locations: classpath:/mybatis-mapper/*Mapper.xml

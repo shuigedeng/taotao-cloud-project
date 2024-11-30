@@ -21,6 +21,9 @@ public class ChatController {
 
     private final ChatClient chatClient;
 
+	@Value("classpath:your-prompt-template.st")
+	Resource promptTemplateResource;
+
     @Autowired
     public ChatController(ChatClient.Builder builder) {
         this.chatClient = builder.build();
@@ -28,12 +31,17 @@ public class ChatController {
 
     @GetMapping("/chatStream")
     public Flux<String> chatSteam(@RequestParam String input) {
-        PromptTemplate promptTemplate = new PromptTemplate("我想知道{company}的最新财务状况");
-		DashscopeChatOptionsBuilder opsBuilder = DashScopeChatOptions.builder()
-                .withFunction("xueQiuFinanceFunction");
-        DashScopeChatOptions ops = opsBuilder.build();
-        Map<String, Object> map = Map.of("company", input);
-        Prompt promp = promptTemplate.create(map, ops);
-        return chatClient.prompt(promp).stream().content();
+
+		PromptTemplate promptTemplate = new PromptTemplate(promptTemplateResource);
+		Prompt prompt = promptTemplate.create(Map.of("input", input));
+		return chatClient.prompt(prompt).stream().content();
+
+        //PromptTemplate promptTemplate = new PromptTemplate("我想知道{company}的最新财务状况");
+		//DashscopeChatOptionsBuilder opsBuilder = DashScopeChatOptions.builder()
+        //        .withFunction("xueQiuFinanceFunction");
+        //DashScopeChatOptions ops = opsBuilder.build();
+        //Map<String, Object> map = Map.of("company", input);
+        //Prompt promp = promptTemplate.create(map, ops);
+        //return chatClient.prompt(promp).stream().content();
     }
 }

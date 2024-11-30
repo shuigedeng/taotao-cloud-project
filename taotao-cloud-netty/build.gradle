@@ -69,13 +69,13 @@ apply plugin: "com.google.protobuf"
 
 dependencies {
     implementation "io.netty:netty-all:4.1.115.Final"
-    implementation "com.google.protobuf:protobuf-java:4.28.3"
-    implementation "com.google.protobuf:protobuf-java-util:4.28.3"
+    implementation "com.google.protobuf:protobuf-java:4.29.0"
+    implementation "com.google.protobuf:protobuf-java-util:4.29.0"
     implementation "org.apache.thrift:libthrift:0.21.0"
-    implementation "io.grpc:grpc-netty:1.68.1"
-    implementation "io.grpc:grpc-protobuf:1.68.1"
-    implementation "io.grpc:grpc-protobuf:1.68.1"
-    implementation "io.grpc:grpc-stub:1.68.1"
+    implementation "io.grpc:grpc-netty:1.68.2"
+    implementation "io.grpc:grpc-protobuf:1.68.2"
+    implementation "io.grpc:grpc-protobuf:1.68.2"
+    implementation "io.grpc:grpc-stub:1.68.2"
     implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'com.google.guava:guava:33.3.1-jre'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
@@ -103,7 +103,7 @@ protobuf {
     protoc {
         //https://repo1.maven.org/maven2/com/google/protobuf/protoc/
         //直接使用Maven Central上已经编译好的protoc编译器，
-        artifact = "com.google.protobuf:protoc:4.28.3"
+        artifact = "com.google.protobuf:protoc:4.29.0"
         //指定本地已经安装的protoc编译器
         //path = '/usr/local/bin/protoc'
     }
@@ -114,7 +114,7 @@ protobuf {
     //指定protoc运行插件
     plugins {
         grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.68.1"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.68.2"
         }
         //javalite {
         //    // The codegen for lite comes as a separate artifact
@@ -130,12 +130,12 @@ protobuf {
 
 //protobuf {
 //    protoc {
-//        artifact = "com.google.protobuf:protoc:4.28.3"
+//        artifact = "com.google.protobuf:protoc:4.29.0"
 //    }
 //
 //    plugins {
 //        grpc {
-//            artifact = "io.grpc:protoc-gen-grpc-java:1.68.1"
+//            artifact = "io.grpc:protoc-gen-grpc-java:1.68.2"
 //        }
 //    }
 //

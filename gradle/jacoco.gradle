@@ -1,11 +1,25 @@
 //https://docs.gradle.org/current/userguide/jacoco_plugin.html
+
 apply plugin: 'jacoco'
+
+//JaCoCo (Java Code Coverage) 是一个开源的 Java 代码覆盖率工具，广泛应用于测试过程中。
+//它可以帮助开发者分析测试代码的覆盖情况，包括哪些代码被测试覆盖了，哪些没有，提供详细的覆盖率报告。
+//代码覆盖率是一种软件测试的衡量指标，用于衡量测试用例运行时覆盖了多少应用代码。常见的覆盖率指标包括：
+// 行覆盖率：被执行的代码行占总代码行的百分比。
+// 方法覆盖率：被测试方法占总方法的百分比。
+// 分支覆盖率：测试代码覆盖到的逻辑分支占总分支的百分比。
+//JaCoCo 的核心功能
+// 代码覆盖率分析：支持行、方法、分支等多种覆盖率统计。
+// HTML/CSV/XML 报告：提供友好的覆盖率报告格式。
+// 便捷集成：与 Maven、Gradle 等构建工具轻松集成。
+// 支持多种测试框架：可与 JUnit、TestNG 等无缝配合。
 
 jacoco {
     //https://www.eclemma.org/jacoco/
     toolVersion = "0.8.12"
     reportsDirectory = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/jacocoReportDir")
 }
+
 /**
  * 添加jacoco测试覆盖率
  */
@@ -22,7 +36,12 @@ jacocoTestReport {
         html.outputLocation = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/jacoco/coverage-reports/html")
     }
 }
-tasks.check.dependsOn jacocoTestReport
+
+//tasks.check.dependsOn jacocoTestReport
+//
+//tasks.withType(Test) {
+//    finalizedBy jacocoTestReport // 测试任务后执行覆盖率报告任务
+//}
 
 //JaCoCo覆盖率计数器
 //JaCoCo 包含了多种尺度的覆盖率计数器（Coverage Counters），
@@ -33,23 +52,45 @@ tasks.check.dependsOn jacocoTestReport
 // 方法（Methods）、
 // 类（Classes）。
 // 具体可参考JaCoCo覆盖率计数器。 https://www.cnblogs.com/ycyzharry/p/10995582.html
+//jacocoTestCoverageVerification 是 JaCoCo 插件中的一个任务，用于验证代码覆盖率是否满足预定义的规则
 jacocoTestCoverageVerification {
     violationRules {
+        // 可以添加多个 rule
         rule {
+            enabled = true
+            element = 'METHOD'
             limit {
-                minimum = 0.5
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.9
             }
         }
 
         rule {
+            // 启用规则
             enabled = false
+            // 指定要检查的元素类型（如 CLASS, METHOD, PACKAGE 等）
             element = 'CLASS'
-            includes = ['org.gradle.*']
+            // 可以排除某些类或包
+            //excludes = [
+            //        'com.example.somepackage.*',
+            //        'com.example.SomeClass'
+            //]
+            // 设置覆盖率阈值
+            limit {
+                // 覆盖率计数器类型（如 INSTRUCTION, LINE, BRANCH 等）
+                counter = 'LINE'
+                // 覆盖率值类型（如 COVEREDRATIO, MISSEDCOUNT 等）
+                value = 'TOTALCOUNT'
+                // 最小覆盖率阈值（例如 80%
+                maximum = 0.3
+            }
 
+            //行覆盖率不得低于 80%
             limit {
                 counter = 'LINE'
-                value = 'TOTALCOUNT'
-                maximum = 0.3
+                value = 'COVEREDRATIO'
+                minimum = 0.8
             }
         }
 

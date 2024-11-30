@@ -45,13 +45,13 @@ dependencies {
     implementation 'org.jmolecules:jmolecules-ddd:1.10.0'
     implementation 'org.jmolecules:jmolecules-events:1.10.0'
 
-    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.24.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.24.0'
-    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.24.0'
-    implementation 'org.jmolecules.integrations:jmolecules-spring:0.24.0'
-    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.24.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.24.0'
-    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.24.0'
+    implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.24.1'
+    implementation 'org.jmolecules.integrations:jmolecules-jackson:0.24.1'
+    implementation 'org.jmolecules.integrations:jmolecules-jpa:0.24.1'
+    implementation 'org.jmolecules.integrations:jmolecules-spring:0.24.1'
+    implementation 'org.jmolecules.integrations:jmolecules-starter-ddd:0.24.1'
+    testImplementation 'org.jmolecules.integrations:jmolecules-archunit:0.24.1'
+    testImplementation 'org.jmolecules.integrations:jmolecules-starter-test:0.24.1'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

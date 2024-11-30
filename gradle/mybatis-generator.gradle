@@ -8,13 +8,13 @@ mybatisGenerator {
     verbose = true
     configFile = 'src/main/resources/mybatisGenerator/generatorConfiguration.xml'
 
-//    mybatisProperties = ['key1' : "value1",'key2' : "value2"]
-//    mybatisProperties = [
-//            'jdbcUrl'        : 'jdbc:postgresql:.....',
-//            'jdbcDriverClass': 'org.postgresql.Driver',
-//            'jdbcUsername'   : '...',
-//            'jdbcPassword'   : '...',
-//    ]
+    //mybatisProperties = ['key1' : "value1",'key2' : "value2"]
+    //mybatisProperties = [
+    //        'jdbcUrl'        : 'jdbc:postgresql:.....',
+    //        'jdbcDriverClass': 'org.postgresql.Driver',
+    //        'jdbcUsername'   : '...',
+    //        'jdbcPassword'   : '...',
+    //]
 
     // optional, here is the override dependencies for the plugin or you can add other database dependencies.
     dependencies {
