@@ -3,7 +3,6 @@ package com.taotao.cloud.job.server.jobserver.common.config;
 import lombok.Getter;
 import com.taotao.cloud.common.constant.RemoteConstant;
 import com.taotao.cloud.common.utils.net.MyNetUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.annotation.PostConstruct;

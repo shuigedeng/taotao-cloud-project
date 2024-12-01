@@ -26,7 +26,7 @@ dependencies {
     implementation("org.apache.spark:spark-streaming-kafka-0-10_2.13:3.5.3")
     implementation("org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.3")
 
-    implementation "org.elasticsearch:elasticsearch-spark-30_2.13:8.15.0"
+    implementation "org.elasticsearch:elasticsearch-spark-30_2.13:8.16.1"
 
     implementation("org.apache.hudi:hudi-common:1.0.0-beta2")
     implementation("org.apache.hudi:hudi-client:1.0.0-beta2")
