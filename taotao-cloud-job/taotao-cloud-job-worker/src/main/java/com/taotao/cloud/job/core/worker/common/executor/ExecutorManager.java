@@ -2,7 +2,6 @@ package com.taotao.cloud.job.core.worker.common.executor;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.Getter;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
 
 import java.util.concurrent.*;
 

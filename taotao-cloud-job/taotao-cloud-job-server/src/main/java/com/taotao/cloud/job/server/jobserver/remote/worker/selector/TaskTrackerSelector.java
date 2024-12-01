@@ -1,9 +1,5 @@
 package com.taotao.cloud.job.server.jobserver.remote.worker.selector;
 
-import com.taotao.cloud.common.enums.DispatchStrategy;
-import com.taotao.cloud.server.common.module.WorkerInfo;
-import com.taotao.cloud.server.persistence.domain.InstanceInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
 
 import java.util.List;
 

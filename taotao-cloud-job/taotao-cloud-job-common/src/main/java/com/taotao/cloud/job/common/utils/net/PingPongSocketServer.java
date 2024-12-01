@@ -1,7 +1,7 @@
 package com.taotao.cloud.job.common.utils.net;
 
+import com.taotao.cloud.job.common.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.utils.CommonUtils;
 
 
 import java.io.IOException;

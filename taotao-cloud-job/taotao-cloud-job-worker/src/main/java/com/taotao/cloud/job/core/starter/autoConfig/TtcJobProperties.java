@@ -73,7 +73,7 @@ public class TtcJobProperties {
     public static class Worker {
 
         /**
-         * Whether to enable kJob Worker
+         * Whether to enable ttcJob Worker
          */
         private boolean enabled = true;
 

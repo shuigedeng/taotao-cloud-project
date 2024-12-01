@@ -1,15 +1,15 @@
 package com.taotao.cloud.job.core.worker.common;
 
+import com.taotao.cloud.job.common.constant.RemoteConstant;
+import com.taotao.cloud.job.core.worker.processor.ProcessResult;
+import com.taotao.cloud.job.core.worker.processor.ProcessorLoader;
+import com.taotao.cloud.job.core.worker.processor.factory.ProcessorFactory;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.taotao.cloud.common.constant.RemoteConstant;
-import com.taotao.cloud.worker.processor.ProcessResult;
-import com.taotao.cloud.worker.processor.ProcessorLoader;
-import com.taotao.cloud.worker.processor.factory.ProcessorFactory;
 
 @Getter
 @Setter

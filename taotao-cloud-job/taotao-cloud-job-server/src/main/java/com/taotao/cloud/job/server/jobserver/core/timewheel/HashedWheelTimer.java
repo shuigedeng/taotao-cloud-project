@@ -4,8 +4,6 @@ import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.utils.CommonUtils;
-import com.taotao.cloud.server.extension.threadpool.RejectedExecutionHandlerFactory;
 
 import java.util.LinkedList;
 import java.util.Queue;

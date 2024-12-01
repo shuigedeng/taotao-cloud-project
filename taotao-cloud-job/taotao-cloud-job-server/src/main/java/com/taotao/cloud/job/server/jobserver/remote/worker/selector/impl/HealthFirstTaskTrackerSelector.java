@@ -1,11 +1,10 @@
 package com.taotao.cloud.job.server.jobserver.remote.worker.selector.impl;
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.common.enums.DispatchStrategy;
-import com.taotao.cloud.server.common.module.WorkerInfo;
-import com.taotao.cloud.server.persistence.domain.InstanceInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
-import com.taotao.cloud.server.remote.worker.selector.TaskTrackerSelector;
+import com.taotao.cloud.job.common.enums.DispatchStrategy;
+import com.taotao.cloud.job.server.jobserver.common.module.WorkerInfo;
+import com.taotao.cloud.job.server.jobserver.persistence.domain.JobInfo;
+import com.taotao.cloud.job.server.jobserver.remote.worker.selector.TaskTrackerSelector;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

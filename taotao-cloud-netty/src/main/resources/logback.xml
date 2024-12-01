@@ -12,7 +12,7 @@
     <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         &lt;!&ndash; 日志文件名称 &ndash;&gt;
         <file>logFile.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             &lt;!&ndash; 每天产生一个新的日志文件 &ndash;&gt;
             <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
             &lt;!&ndash; 保留 15 天的日志 &ndash;&gt;

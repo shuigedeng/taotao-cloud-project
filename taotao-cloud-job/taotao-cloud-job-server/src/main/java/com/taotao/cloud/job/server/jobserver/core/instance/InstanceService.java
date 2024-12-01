@@ -2,10 +2,6 @@ package com.taotao.cloud.job.server.jobserver.core.instance;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.enums.InstanceStatus;
-import com.taotao.cloud.server.core.uid.IdGenerateService;
-import com.taotao.cloud.server.persistence.domain.InstanceInfo;
-import com.taotao.cloud.server.persistence.mapper.InstanceInfoMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

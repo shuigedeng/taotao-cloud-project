@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.core.worker.processor;
 
+import com.taotao.cloud.job.common.exception.TtcJobException;
+import com.taotao.cloud.job.core.worker.processor.factory.ProcessorFactory;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.exception.TtcJobException;
-import com.taotao.cloud.worker.processor.factory.ProcessorFactory;
 
 import java.util.List;
 import java.util.Map;

@@ -21,21 +21,21 @@ import java.util.concurrent.*;
 public class ServerRegisterStarter implements InitializingBean {
 
     @Autowired
-    TtcJobServerConfig kJobServerConfig;
+    TtcJobServerConfig ttcJobServerConfig;
     @Override
     public void afterPropertiesSet() throws Exception {
         ThreadFactory registerThreadFactory = new ThreadFactoryBuilder().setNameFormat("ttcjob-server-register-%d").build();
         ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(3, registerThreadFactory);
 
         // get stub
-        String s = kJobServerConfig.getNameServerAddress().split(":")[0];
+        String s = ttcJobServerConfig.getNameServerAddress().split(":")[0];
         RegisterToNameServerGrpc.RegisterToNameServerBlockingStub stubSingleton = GrpcStubSingletonPool.getStubSingleton(s, RegisterToNameServerGrpc.class, RegisterToNameServerGrpc.RegisterToNameServerBlockingStub.class, RemoteConstant.NAMESERVER);
         scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 try {
                     RegisterCausa.ServerRegisterReporter build = RegisterCausa.ServerRegisterReporter.newBuilder()
-                            .setServerIpAddress(kJobServerConfig.getAddress() + ":" + kJobServerConfig.getServerPort())
+                            .setServerIpAddress(ttcJobServerConfig.getAddress() + ":" + ttcJobServerConfig.getServerPort())
                             .build();
                     CommonCausa.Response response = stubSingleton.serverRegister(build);
                     log.info("server register to nameServer success");

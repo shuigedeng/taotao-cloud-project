@@ -1,18 +1,17 @@
 package com.taotao.cloud.job.core.worker;
 
 import com.google.common.collect.Lists;
+import com.taotao.cloud.job.core.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.job.core.worker.common.executor.ExecutorManager;
+import com.taotao.cloud.job.core.worker.common.grpc.RpcInitializer;
+import com.taotao.cloud.job.core.worker.core.discover.TtcJobServerDiscoverService;
+import com.taotao.cloud.job.core.worker.core.schedule.WorkerHealthReporter;
+import com.taotao.cloud.job.core.worker.processor.ProcessorLoader;
+import com.taotao.cloud.job.core.worker.processor.TtcJobProcessorLoader;
+import com.taotao.cloud.job.core.worker.processor.factory.BuiltInDefaultProcessorFactory;
+import com.taotao.cloud.job.core.worker.processor.factory.ProcessorFactory;
+import com.taotao.cloud.job.core.worker.subscribe.WorkerSubscribeStarter;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.domain.WorkerAppInfo;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
-import com.taotao.cloud.worker.common.grpc.RpcInitializer;
-import com.taotao.cloud.worker.common.executor.ExecutorManager;
-import com.taotao.cloud.worker.core.discover.TtcJobServerDiscoverService;
-import com.taotao.cloud.worker.core.schedule.WorkerHealthReporter;
-import com.taotao.cloud.worker.processor.TtcJobProcessorLoader;
-import com.taotao.cloud.worker.processor.ProcessorLoader;
-import com.taotao.cloud.worker.processor.factory.BuiltInDefaultProcessorFactory;
-import com.taotao.cloud.worker.processor.factory.ProcessorFactory;
-import com.taotao.cloud.worker.subscribe.WorkerSubscribeStarter;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,14 +36,14 @@ public class TtcJobWorker {
         rpcInitializer.initRpcStrategies();
         rpcInitializer.initRpcServer(config);
 
-        TtcJobServerDiscoverService kJobServerDiscoverService = new TtcJobServerDiscoverService(config);
+        TtcJobServerDiscoverService ttcJobServerDiscoverService = new TtcJobServerDiscoverService(config);
 
         try{
             // subscribe to nameServer
             WorkerSubscribeStarter.start(config.getAppName());
 
             // get appId
-            kJobServerDiscoverService.assertApp();
+            ttcJobServerDiscoverService.assertApp();
 
             // init ThreadPool
             ExecutorManager.initExecutorManager();
@@ -54,13 +53,13 @@ public class TtcJobWorker {
             TtcJobWorkerConfig.setProcessorLoader(processorLoader);
 
             // connect server
-            kJobServerDiscoverService.heartbeatCheck(ExecutorManager.getHeartbeatExecutor());
+            ttcJobServerDiscoverService.heartbeatCheck(ExecutorManager.getHeartbeatExecutor());
 
             // init health reporter
-            ExecutorManager.getHealthReportExecutor().scheduleAtFixedRate(new WorkerHealthReporter(kJobServerDiscoverService, config), 0, config.getHealthReportInterval(), TimeUnit.SECONDS);
+            ExecutorManager.getHealthReportExecutor().scheduleAtFixedRate(new WorkerHealthReporter(ttcJobServerDiscoverService, config), 0, config.getHealthReportInterval(), TimeUnit.SECONDS);
 
         } catch (Exception e){
-            log.error("[kJob] start error");
+            log.error("[ttcJob] start error");
         }
 
 

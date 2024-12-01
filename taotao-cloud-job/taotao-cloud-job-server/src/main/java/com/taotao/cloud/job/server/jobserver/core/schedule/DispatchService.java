@@ -3,22 +3,11 @@ package com.taotao.cloud.job.server.jobserver.core.schedule;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.job.server.jobserver.persistence.mapper.InstanceInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
-import com.taotao.cloud.common.SystemInstanceResult;
-import com.taotao.cloud.common.enums.TimeExpressionType;
-import com.taotao.cloud.remote.protos.ScheduleCausa;
-import com.taotao.cloud.server.common.Holder;
-import com.taotao.cloud.server.common.grpc.ServerScheduleJobRpcClient;
-import com.taotao.cloud.server.common.module.WorkerInfo;
-import com.taotao.cloud.server.extension.lock.LockService;
-import com.taotao.cloud.server.persistence.domain.InstanceInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
-import com.taotao.cloud.server.persistence.mapper.InstanceInfoMapper;
-import com.taotao.cloud.server.remote.worker.WorkerClusterQueryService;
-import com.taotao.cloud.server.remote.worker.selector.TaskTrackerSelectorService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -26,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.taotao.cloud.common.enums.InstanceStatus.*;
 
 
 /**

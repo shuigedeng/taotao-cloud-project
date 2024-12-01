@@ -5,15 +5,6 @@ import com.google.common.collect.Sets;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import com.taotao.cloud.common.constant.RemoteConstant;
-import com.taotao.cloud.common.exception.TtcJobException;
-import com.taotao.cloud.remote.protos.CommonCausa;
-import com.taotao.cloud.remote.protos.ServerDiscoverCausa;
-import com.taotao.cloud.server.common.config.TtcJobServerConfig;
-import com.taotao.cloud.server.common.grpc.PingServerRpcClient;
-import com.taotao.cloud.server.extension.lock.LockService;
-import com.taotao.cloud.server.persistence.domain.AppInfo;
-import com.taotao.cloud.server.persistence.mapper.AppInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +25,7 @@ public class HeartbeatHandler implements RpcHandler{
     @Autowired
     PingServerRpcClient pingServerRpcService;
     @Autowired
-    TtcJobServerConfig kJobServerConfig;
+    TtcJobServerConfig ttcJobServerConfig;
 
     @Override
     public void handle(Object req,StreamObserver<CommonCausa.Response> responseObserver) {
@@ -142,7 +133,7 @@ public class HeartbeatHandler implements RpcHandler{
 
     private boolean checkLocalServer(String currentServer) {
         // 获取本机的InetAddress对象
-        ownerIp = kJobServerConfig.getAddress();
+        ownerIp = ttcJobServerConfig.getAddress();
         return Objects.equals(ownerIp, currentServer);
     }
 }

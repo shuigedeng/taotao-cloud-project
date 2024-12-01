@@ -1,17 +1,10 @@
 package com.taotao.cloud.job.core.worker.core.schedule.tracker.task;
 
-import com.google.common.collect.Maps;
-import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.K;
-import com.taotao.cloud.common.enums.InstanceStatus;
-import com.taotao.cloud.common.utils.JsonUtils;
+import com.taotao.cloud.job.core.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.job.core.worker.common.module.InstanceInfo;
 import com.taotao.cloud.remote.protos.ScheduleCausa;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
-import com.taotao.cloud.worker.common.module.InstanceInfo;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -21,69 +14,69 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Slf4j
 public abstract class TaskTracker {
 
-    /**
-     * TaskTracker创建时间
-     */
-    protected final long createTime;
-    /**
-     * 任务实例ID，使用频率过高，从 InstanceInfo 提取出来单独保存一份
-     */
-    protected final long instanceId;
-    /**
-     * 任务实例信息
-     */
-    protected final InstanceInfo instanceInfo;
+	/**
+	 * TaskTracker创建时间
+	 */
+	protected final long createTime;
+	/**
+	 * 任务实例ID，使用频率过高，从 InstanceInfo 提取出来单独保存一份
+	 */
+	protected final long instanceId;
+	/**
+	 * 任务实例信息
+	 */
+	protected final InstanceInfo instanceInfo;
 
 
-    /**
-     * worker 运行时元数据
-     */
-    protected final TtcJobWorkerConfig config;
-    /**
-     * 是否结束
-     */
-    protected final AtomicBoolean finished;
-    /**
-     * 连续上报多次失败后放弃上报，视为结果不可达，TaskTracker down
-     */
-    protected int reportFailedCnt = 0;
+	/**
+	 * worker 运行时元数据
+	 */
+	protected final TtcJobWorkerConfig config;
+	/**
+	 * 是否结束
+	 */
+	protected final AtomicBoolean finished;
+	/**
+	 * 连续上报多次失败后放弃上报，视为结果不可达，TaskTracker down
+	 */
+	protected int reportFailedCnt = 0;
 
-    protected static final int MAX_REPORT_FAILED_THRESHOLD = 5;
+	protected static final int MAX_REPORT_FAILED_THRESHOLD = 5;
 
-    protected TaskTracker(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
-        this.createTime = System.currentTimeMillis();
-        this.config = config;
-        this.instanceId = req.getInstanceId();
+	protected TaskTracker(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
+		this.createTime = System.currentTimeMillis();
+		this.config = config;
+		this.instanceId = req.getInstanceId();
 
-        this.instanceInfo = new InstanceInfo();
+		this.instanceInfo = new InstanceInfo();
 
-        instanceInfo.setJobId(req.getJobId());
-        instanceInfo.setInstanceId(req.getInstanceId());
-        instanceInfo.setProcessorType(req.getProcessorType());
-        instanceInfo.setProcessorInfo(req.getProcessorInfo());
-        instanceInfo.setJobParams(req.getJobParams());
-
-
-        this.finished = new AtomicBoolean(false);
-    }
-
-    /**
-     * 销毁
-     */
-    public abstract void destroy();
-
-    /**
-     * 停止任务
-     */
-    public abstract void stopTask();
+		instanceInfo.setJobId(req.getJobId());
+		instanceInfo.setInstanceId(req.getInstanceId());
+		instanceInfo.setProcessorType(req.getProcessorType());
+		instanceInfo.setProcessorInfo(req.getProcessorInfo());
+		instanceInfo.setJobParams(req.getJobParams());
 
 
-    /**
-     * 查询任务实例的详细运行状态
-     *
-     * @return 任务实例的详细运行状态
-     */
-    //public abstract InstanceDetail fetchRunningStatus(ServerQueryInstanceStatusReq req);
+		this.finished = new AtomicBoolean(false);
+	}
+
+	/**
+	 * 销毁
+	 */
+	public abstract void destroy();
+
+	/**
+	 * 停止任务
+	 */
+	public abstract void stopTask();
+
+
+	/**
+	 * 查询任务实例的详细运行状态
+	 *
+	 * @return 任务实例的详细运行状态
+	 */
+	//public abstract InstanceDetail fetchRunningStatus(ServerQueryInstanceStatusReq req);
 
 
 //    public static void reportCreateErrorToServer(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config, Exception e) {

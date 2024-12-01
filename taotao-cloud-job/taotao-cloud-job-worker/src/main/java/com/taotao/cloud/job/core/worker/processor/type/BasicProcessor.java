@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.core.worker.processor.type;
 
 
-import com.taotao.cloud.worker.processor.ProcessResult;
-import com.taotao.cloud.worker.processor.task.TaskContext;
+import com.taotao.cloud.job.core.worker.processor.ProcessResult;
+import com.taotao.cloud.job.core.worker.processor.task.TaskContext;
 
 /**
  * 基础的处理器，适用于单机执行

@@ -3,7 +3,6 @@ package com.taotao.cloud.job.server.jobserver.remote.worker;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.domain.WorkerHeartbeat;
 
 import java.util.List;
 import java.util.Map;

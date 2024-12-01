@@ -1,8 +1,6 @@
 package com.taotao.cloud.job.server.jobserver.remote.worker.filter;
 
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.server.common.module.WorkerInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
 import org.springframework.stereotype.Component;
 
 /**

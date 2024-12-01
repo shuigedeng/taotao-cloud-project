@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.core.starter.autoConfig;
 
 //import com.taotao.cloud.common.utils.NetUtils;
-import com.taotao.cloud.worker.TtcJobSpringWorker;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.job.core.worker.TtcJobSpringWorker;
+import com.taotao.cloud.job.core.worker.common.TtcJobWorkerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

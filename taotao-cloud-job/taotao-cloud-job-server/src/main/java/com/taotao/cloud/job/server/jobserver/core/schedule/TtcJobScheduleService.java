@@ -3,18 +3,8 @@ package com.taotao.cloud.job.server.jobserver.core.schedule;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.taotao.cloud.job.server.jobserver.persistence.mapper.JobInfoMapper;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.enums.TimeExpressionType;
-import com.taotao.cloud.common.module.LifeCycle;
-import com.taotao.cloud.server.common.config.TtcJobServerConfig;
-import com.taotao.cloud.server.common.constant.SwitchableStatus;
-import com.taotao.cloud.server.core.instance.InstanceService;
-import com.taotao.cloud.server.core.timewheel.holder.InstanceTimeWheelService;
-import com.taotao.cloud.server.extension.lock.LockService;
-import com.taotao.cloud.server.persistence.domain.AppInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
-import com.taotao.cloud.server.persistence.mapper.AppInfoMapper;
-import com.taotao.cloud.server.persistence.mapper.JobInfoMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +21,9 @@ public class TtcJobScheduleService {
     @Autowired
     AppInfoMapper appInfoMapper;
     @Autowired
-    TtcJobServerConfig kJobServerConfig;
+    TtcJobServerConfig ttcJobServerConfig;
     @Autowired
-    JobInfoMapper jobInfoMapper;
+	JobInfoMapper jobInfoMapper;
     @Autowired
     InstanceService instanceService;
     @Autowired
@@ -47,7 +37,7 @@ public class TtcJobScheduleService {
         // 调度 CRON 表达式 JOB
         try {
             Map<Long, String> allAppInfos = appInfoMapper.selectList(new QueryWrapper<AppInfo>().lambda()
-                    .eq(AppInfo::getCurrentServer, kJobServerConfig.getAddress()))
+                    .eq(AppInfo::getCurrentServer, ttcJobServerConfig.getAddress()))
                     .stream().collect(Collectors.toMap(AppInfo::getId, AppInfo::getAppName));
             if (CollectionUtils.isEmpty(allAppInfos)) {
                 log.info("[NormalScheduler] current server has no app's job to schedule.");

@@ -1,10 +1,10 @@
 package com.taotao.cloud.job.core.worker;
 
 import com.google.common.collect.Lists;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
-import com.taotao.cloud.worker.processor.factory.ProcessorFactory;
-import com.taotao.cloud.worker.processor.factory.BuildInSpringMethodProcessorFactory;
-import com.taotao.cloud.worker.processor.factory.BuiltInSpringProcessorFactory;
+import com.taotao.cloud.job.core.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.job.core.worker.processor.factory.BuildInSpringMethodProcessorFactory;
+import com.taotao.cloud.job.core.worker.processor.factory.BuiltInSpringProcessorFactory;
+import com.taotao.cloud.job.core.worker.processor.factory.ProcessorFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -22,9 +22,9 @@ import java.util.Optional;
 public class TtcJobSpringWorker implements InitializingBean, DisposableBean, ApplicationContextAware{
 
     /**
-     * 组合优于继承，持有 kJobWorker，设置ProcessFactoryList，这里可以自定义工厂
+     * 组合优于继承，持有 ttcJobWorker，设置ProcessFactoryList，这里可以自定义工厂
      */
-    private TtcJobWorker kJobWorker;
+    private TtcJobWorker ttcJobWorker;
     private final TtcJobWorkerConfig config;
 
 
@@ -34,8 +34,8 @@ public class TtcJobSpringWorker implements InitializingBean, DisposableBean, App
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        kJobWorker = new TtcJobWorker(config);
-        kJobWorker.init();
+        ttcJobWorker = new TtcJobWorker(config);
+        ttcJobWorker.init();
     }
 
     @Override
@@ -54,6 +54,6 @@ public class TtcJobSpringWorker implements InitializingBean, DisposableBean, App
 
     @Override
     public void destroy() throws Exception {
-        kJobWorker.destroy();
+        ttcJobWorker.destroy();
     }
 }

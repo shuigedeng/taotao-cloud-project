@@ -1,6 +1,5 @@
 package com.taotao.cloud.job.server.jobserver.persistence.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.taotao.cloud.server.persistence.domain.JobInfo;
 
 /**

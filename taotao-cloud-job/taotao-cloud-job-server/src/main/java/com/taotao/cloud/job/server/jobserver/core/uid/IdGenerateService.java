@@ -1,7 +1,6 @@
 package com.taotao.cloud.job.server.jobserver.core.uid;
 
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.server.common.config.TtcJobServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +21,8 @@ public class IdGenerateService {
     private static final int DATA_CENTER_ID = 0;
 
 
-    public IdGenerateService(TtcJobServerConfig kJobServerConfig){
-        String ip = kJobServerConfig.getAddress();
+    public IdGenerateService(TtcJobServerConfig ttcJobServerConfig){
+        String ip = ttcJobServerConfig.getAddress();
         snowFlakeIdGenerator = new SnowFlakeIdGenerator(DATA_CENTER_ID, ip);
         log.info("[IdGenerateService] initialize IdGenerateService successfully, IP:{}", ip);
     }

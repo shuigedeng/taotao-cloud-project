@@ -1,7 +1,6 @@
 package com.taotao.cloud.job.server.jobserver.persistence.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import com.taotao.cloud.server.persistence.domain.InstanceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

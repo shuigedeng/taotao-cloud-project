@@ -1,12 +1,9 @@
 package com.taotao.cloud.job.server.nameserver.grpc;
 
+import com.taotao.cloud.job.server.nameserver.balance.ServerIpAddressManagerService;
+import com.taotao.cloud.job.server.nameserver.module.ReBalanceInfo;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import com.taotao.cloud.nameserver.balance.ServerIpAddressManagerService;
-import com.taotao.cloud.nameserver.module.ReBalanceInfo;
-import com.taotao.cloud.remote.api.RegisterToNameServerGrpc;
-import com.taotao.cloud.remote.protos.CommonCausa;
-import com.taotao.cloud.remote.protos.RegisterCausa;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.List;
 @GrpcService
 public class RegisterGrpcService extends RegisterToNameServerGrpc.RegisterToNameServerImplBase {
     @Autowired
-    ServerIpAddressManagerService service;
+	ServerIpAddressManagerService service;
     @Override
     public void serverRegister(RegisterCausa.ServerRegisterReporter request, StreamObserver<CommonCausa.Response> responseObserver) {
         if(!service.getServerAddressSet().contains(request.getServerIpAddress())){

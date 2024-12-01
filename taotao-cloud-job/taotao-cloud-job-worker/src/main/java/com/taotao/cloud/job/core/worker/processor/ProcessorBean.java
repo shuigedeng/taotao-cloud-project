@@ -1,9 +1,9 @@
 package com.taotao.cloud.job.core.worker.processor;
 
+import com.taotao.cloud.job.core.worker.processor.type.BasicProcessor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import com.taotao.cloud.worker.processor.type.BasicProcessor;
 
 /**
  * 处理器对象

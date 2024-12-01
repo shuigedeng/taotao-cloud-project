@@ -1,11 +1,12 @@
 package com.taotao.cloud.job.core.worker.processor.factory;
 
+import com.taotao.cloud.job.core.worker.processor.type.BasicProcessor;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.worker.processor.ProcessorBean;
-import com.taotao.cloud.worker.processor.ProcessorDefinition;
-import com.taotao.cloud.worker.processor.type.BasicProcessor;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
+import com.taotao.cloud.job.common.enums.ProcessorType;
+import com.taotao.cloud.job.core.worker.processor.ProcessorBean;
+import com.taotao.cloud.job.core.worker.processor.ProcessorDefinition;
 
 /**
  * 内建的 SpringBean 处理器工厂，用于加载 Spring 相关的Bean，非核心依赖

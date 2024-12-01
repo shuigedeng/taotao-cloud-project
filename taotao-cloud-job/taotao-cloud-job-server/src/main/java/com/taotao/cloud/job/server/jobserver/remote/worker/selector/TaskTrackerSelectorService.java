@@ -1,9 +1,6 @@
 package com.taotao.cloud.job.server.jobserver.remote.worker.selector;
 
 import com.google.common.collect.Maps;
-import com.taotao.cloud.server.common.module.WorkerInfo;
-import com.taotao.cloud.server.persistence.domain.InstanceInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.core.worker.common.grpc.strategies;
 
 
+import com.taotao.cloud.job.core.worker.common.constant.TransportTypeEnum;
 import io.grpc.ManagedChannel;
-import com.taotao.cloud.worker.common.constant.TransportTypeEnum;
 
 public interface GrpcStrategy<T> {
 

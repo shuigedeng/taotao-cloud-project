@@ -3,12 +3,6 @@ package com.taotao.cloud.job.server.jobserver.service.handler;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
-import com.taotao.cloud.common.constant.RemoteConstant;
-import com.taotao.cloud.remote.protos.CommonCausa;
-import com.taotao.cloud.remote.protos.ServerDiscoverCausa;
-import com.taotao.cloud.server.persistence.domain.AppInfo;
-
-import com.taotao.cloud.server.persistence.mapper.AppInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

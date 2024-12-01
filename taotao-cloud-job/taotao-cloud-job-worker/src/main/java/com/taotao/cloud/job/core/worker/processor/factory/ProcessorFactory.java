@@ -1,9 +1,9 @@
 package com.taotao.cloud.job.core.worker.processor.factory;
 
 
-import com.taotao.cloud.common.enums.ProcessorType;
-import com.taotao.cloud.worker.processor.ProcessorBean;
-import com.taotao.cloud.worker.processor.ProcessorDefinition;
+import com.taotao.cloud.job.common.enums.ProcessorType;
+import com.taotao.cloud.job.core.worker.processor.ProcessorBean;
+import com.taotao.cloud.job.core.worker.processor.ProcessorDefinition;
 
 import java.util.Set;
 
@@ -17,18 +17,20 @@ import java.util.Set;
  */
 public interface ProcessorFactory {
 
-    /**
-     * 支持的处理器类型，类型不匹配则跳过该 ProcessorFactory 的加载逻辑
-     * 对应的是控制台的'处理器类型' TAB，不做任何定制的情况下，取值范围为 {@link ProcessorType#name()}
-     * @return 支持的处理器类型
-     */
-    Set<String> supportTypes();
+	/**
+	 * 支持的处理器类型，类型不匹配则跳过该 ProcessorFactory 的加载逻辑
+	 * 对应的是控制台的'处理器类型' TAB，不做任何定制的情况下，取值范围为 {@link ProcessorType#name()}
+	 *
+	 * @return 支持的处理器类型
+	 */
+	Set<String> supportTypes();
 
-    /**
-     * 根据处理器定义构建处理器对象
-     * 注意：Processor 为单例对象，即 PowerJob 对每一个 ProcessorBean 只调用一次 build 方法
-     * @param processorDefinition 处理器定义
-     * @return null or ProcessorBean
-     */
-    ProcessorBean build(ProcessorDefinition processorDefinition);
+	/**
+	 * 根据处理器定义构建处理器对象
+	 * 注意：Processor 为单例对象，即 PowerJob 对每一个 ProcessorBean 只调用一次 build 方法
+	 *
+	 * @param processorDefinition 处理器定义
+	 * @return null or ProcessorBean
+	 */
+	ProcessorBean build(ProcessorDefinition processorDefinition);
 }

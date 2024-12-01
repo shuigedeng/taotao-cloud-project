@@ -1,15 +1,8 @@
 package com.taotao.cloud.job.server.jobserver.consumer;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.taotao.cloud.job.server.jobserver.persistence.service.JobInfoService;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.enums.DispatchStrategy;
-import com.taotao.cloud.common.enums.SwitchableStatus;
-import com.taotao.cloud.common.enums.TimeExpressionType;
-import com.taotao.cloud.common.module.LifeCycle;
-import com.taotao.cloud.remote.protos.MqCausa;
-import com.taotao.cloud.server.core.schedule.TimingStrategyService;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
-import com.taotao.cloud.server.persistence.service.JobInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +13,7 @@ import java.util.Date;
 @Slf4j
 public class Consumer {
     @Autowired
-    JobInfoService jobInfoService;
+	JobInfoService jobInfoService;
     @Autowired
     TimingStrategyService timingStrategyService;
 

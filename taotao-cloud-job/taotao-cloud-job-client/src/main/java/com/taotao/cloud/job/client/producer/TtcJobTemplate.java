@@ -71,7 +71,7 @@ public class TtcJobTemplate {
 
 
     public static void main(String[] args) {
-        TtcJobTemplate kJobTemplate = new TtcJobTemplate("127.0.0.1:9083");
+        TtcJobTemplate ttcJobTemplate = new TtcJobTemplate("127.0.0.1:9083");
         JobUpdateReq build = JobUpdateReq.builder()
                 .appName("root")
                 .jobDescription("hahah")
@@ -82,6 +82,6 @@ public class TtcJobTemplate {
                 .maxInstanceNum(5)
                 .jobParams("ewew")
                 .timeExpressionType(TimeExpressionType.CRON).build();
-        kJobTemplate.createJob(build);
+        ttcJobTemplate.createJob(build);
     }
 }

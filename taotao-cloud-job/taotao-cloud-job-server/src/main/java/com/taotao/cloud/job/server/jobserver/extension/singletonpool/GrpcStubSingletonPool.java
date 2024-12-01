@@ -1,9 +1,9 @@
 package com.taotao.cloud.job.server.jobserver.extension.singletonpool;
 
+import com.taotao.cloud.job.common.constant.RemoteConstant;
+import com.taotao.cloud.job.server.jobserver.common.config.TtcJobServerConfig;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import com.taotao.cloud.common.constant.RemoteConstant;
-import com.taotao.cloud.server.common.config.TtcJobServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

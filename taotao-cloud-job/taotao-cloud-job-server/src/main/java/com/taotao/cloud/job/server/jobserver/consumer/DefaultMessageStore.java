@@ -3,9 +3,6 @@ package com.taotao.cloud.job.server.jobserver.consumer;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.remote.protos.MqCausa;
-import com.taotao.cloud.server.consumer.entity.FlushRequest;
-import com.taotao.cloud.server.consumer.entity.Response;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

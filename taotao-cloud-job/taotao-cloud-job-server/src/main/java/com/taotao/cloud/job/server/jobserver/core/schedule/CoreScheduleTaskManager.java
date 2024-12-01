@@ -2,7 +2,6 @@ package com.taotao.cloud.job.server.jobserver.core.schedule;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.enums.TimeExpressionType;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +15,14 @@ import java.util.List;
 public class CoreScheduleTaskManager implements InitializingBean, DisposableBean {
     private final List<Thread> coreThreadContainer = new ArrayList<>();
     @Autowired
-    TtcJobScheduleService kJobScheduleService;
+    TtcJobScheduleService ttcJobScheduleService;
 
     @SuppressWarnings("AlibabaAvoidManuallyCreateThread")
     @Override
     public void afterPropertiesSet() {
         // 定时调度
-        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleCronJob", TtcJobScheduleService.SCHEDULE_RATE, () -> kJobScheduleService.scheduleNormalJob(TimeExpressionType.CRON)), "Thread-ScheduleCronJob"));
-        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleDailyTimeIntervalJob", TtcJobScheduleService.SCHEDULE_RATE, () -> kJobScheduleService.scheduleNormalJob(TimeExpressionType.DAILY_TIME_INTERVAL)), "Thread-ScheduleDailyTimeIntervalJob"));
+        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleCronJob", TtcJobScheduleService.SCHEDULE_RATE, () -> ttcJobScheduleService.scheduleNormalJob(TimeExpressionType.CRON)), "Thread-ScheduleCronJob"));
+        coreThreadContainer.add(new Thread(new LoopRunnable("ScheduleDailyTimeIntervalJob", TtcJobScheduleService.SCHEDULE_RATE, () -> ttcJobScheduleService.scheduleNormalJob(TimeExpressionType.DAILY_TIME_INTERVAL)), "Thread-ScheduleDailyTimeIntervalJob"));
         coreThreadContainer.forEach(Thread::start);
 
     }

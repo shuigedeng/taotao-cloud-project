@@ -1,9 +1,9 @@
 package com.taotao.cloud.job.core.starter;
 
+import com.taotao.cloud.job.core.worker.processor.ProcessResult;
+import com.taotao.cloud.job.core.worker.processor.task.TaskContext;
+import com.taotao.cloud.job.core.worker.processor.type.BasicProcessor;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.worker.processor.ProcessResult;
-import com.taotao.cloud.worker.processor.task.TaskContext;
-import com.taotao.cloud.worker.processor.type.BasicProcessor;
 import org.springframework.stereotype.Component;
 
 @Slf4j

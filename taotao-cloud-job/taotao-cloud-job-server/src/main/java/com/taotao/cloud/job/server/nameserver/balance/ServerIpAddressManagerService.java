@@ -2,8 +2,6 @@ package com.taotao.cloud.job.server.nameserver.balance;
 
 import com.google.common.collect.Maps;
 import lombok.Getter;
-import com.taotao.cloud.nameserver.module.ReBalanceInfo;
-import com.taotao.cloud.remote.protos.RegisterCausa;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.core.worker.common.grpc.strategies;
 
+import com.taotao.cloud.job.common.exception.TtcJobException;
+import com.taotao.cloud.job.core.worker.common.constant.TransportTypeEnum;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.common.exception.TtcJobException;
-import com.taotao.cloud.worker.common.constant.TransportTypeEnum;
 
 import java.util.HashMap;
 import java.util.Map;

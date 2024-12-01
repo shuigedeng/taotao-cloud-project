@@ -1,23 +1,21 @@
 package com.taotao.cloud.job.core.worker.common.grpc;
 
 
+import com.taotao.cloud.job.core.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.job.core.worker.common.constant.TransportTypeEnum;
+import com.taotao.cloud.job.core.worker.common.grpc.strategies.GrpcStrategy;
+import com.taotao.cloud.job.core.worker.common.grpc.strategies.StrategyManager;
+import com.taotao.cloud.job.core.worker.service.WorkerScheduleGrpcService;
 import io.grpc.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.remote.api.ServerDiscoverGrpc;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
-import com.taotao.cloud.worker.common.constant.TransportTypeEnum;
-import com.taotao.cloud.worker.common.grpc.strategies.GrpcStrategy;
-import com.taotao.cloud.worker.common.grpc.strategies.StrategyManager;
-import com.taotao.cloud.worker.common.grpc.strategies.strategy.AssertAppRpcService;
-import com.taotao.cloud.worker.service.WorkerScheduleGrpcService;
-import org.reflections.Reflections;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 @Slf4j
@@ -56,8 +54,10 @@ public class RpcInitializer {
             ip2ChannelsMap.put(server,channel);
         }
 
-        Reflections reflections = new Reflections("com.taotao.cloud.worker.common.grpc.strategies.strategy");
-        Set<Class<? extends GrpcStrategy>> strategyClasses = reflections.getSubTypesOf(GrpcStrategy.class);
+		//todo 注册策略
+        //Reflections reflections = new Reflections("com.taotao.cloud.worker.common.grpc.strategies.strategy");
+        //Set<Class<? extends GrpcStrategy>> strategyClasses = reflections.getSubTypesOf(GrpcStrategy.class);
+        Set<Class<? extends GrpcStrategy>> strategyClasses = new HashSet<>();
 
         for (Class<? extends GrpcStrategy> strategyClass : strategyClasses) {
             try {

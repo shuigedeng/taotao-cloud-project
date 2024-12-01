@@ -1,9 +1,9 @@
 package com.taotao.cloud.job.server.jobserver.persistence.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
-import com.taotao.cloud.server.persistence.service.JobInfoService;
-import com.taotao.cloud.server.persistence.mapper.JobInfoMapper;
+import com.taotao.cloud.job.server.jobserver.persistence.domain.JobInfo;
+import com.taotao.cloud.job.server.jobserver.persistence.mapper.JobInfoMapper;
+import com.taotao.cloud.job.server.jobserver.persistence.service.JobInfoService;
 import org.springframework.stereotype.Service;
 
 /**

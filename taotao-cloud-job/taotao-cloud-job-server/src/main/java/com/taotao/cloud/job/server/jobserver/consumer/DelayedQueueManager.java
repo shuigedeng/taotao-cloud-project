@@ -2,7 +2,6 @@ package com.taotao.cloud.job.server.jobserver.consumer;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import com.taotao.cloud.remote.protos.MqCausa;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

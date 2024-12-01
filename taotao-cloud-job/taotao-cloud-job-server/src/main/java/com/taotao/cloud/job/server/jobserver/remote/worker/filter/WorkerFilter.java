@@ -1,8 +1,8 @@
 package com.taotao.cloud.job.server.jobserver.remote.worker.filter;
 
 
-import com.taotao.cloud.server.common.module.WorkerInfo;
-import com.taotao.cloud.server.persistence.domain.JobInfo;
+import com.taotao.cloud.job.server.jobserver.common.module.WorkerInfo;
+import com.taotao.cloud.job.server.jobserver.persistence.domain.JobInfo;
 
 /**
  * filter worker by system metrics or other info

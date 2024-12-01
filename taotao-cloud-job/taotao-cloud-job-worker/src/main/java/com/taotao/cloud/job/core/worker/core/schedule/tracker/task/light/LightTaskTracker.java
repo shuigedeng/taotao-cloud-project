@@ -1,26 +1,21 @@
 package com.taotao.cloud.job.core.worker.core.schedule.tracker.task.light;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomUtils;
-import org.apache.commons.lang3.StringUtils;
-import com.taotao.cloud.common.SystemInstanceResult;
-import com.taotao.cloud.common.enums.InstanceStatus;
+import com.taotao.cloud.job.common.SystemInstanceResult;
+import com.taotao.cloud.job.core.worker.common.TtcJobWorkerConfig;
+import com.taotao.cloud.job.core.worker.common.executor.ExecutorManager;
+import com.taotao.cloud.job.core.worker.core.schedule.tracker.manager.LightTaskTrackerManager;
+import com.taotao.cloud.job.core.worker.core.schedule.tracker.task.TaskTracker;
+import com.taotao.cloud.job.core.worker.processor.ProcessResult;
+import com.taotao.cloud.job.core.worker.processor.ProcessorBean;
+import com.taotao.cloud.job.core.worker.processor.ProcessorDefinition;
+import com.taotao.cloud.job.core.worker.processor.task.TaskConstant;
+import com.taotao.cloud.job.core.worker.processor.task.TaskContext;
+import com.taotao.cloud.job.core.worker.processor.task.TaskStatus;
+import com.taotao.cloud.job.core.worker.subscribe.WorkerSubscribeManager;
 import com.taotao.cloud.remote.protos.ScheduleCausa;
-import com.taotao.cloud.worker.common.TtcJobWorkerConfig;
-import com.taotao.cloud.worker.common.executor.ExecutorManager;
-import com.taotao.cloud.worker.core.schedule.tracker.manager.LightTaskTrackerManager;
-import com.taotao.cloud.worker.processor.ProcessResult;
-import com.taotao.cloud.worker.core.schedule.tracker.task.TaskTracker;
-import com.taotao.cloud.worker.processor.ProcessorBean;
-import com.taotao.cloud.worker.processor.ProcessorDefinition;
-import com.taotao.cloud.worker.processor.task.TaskConstant;
-import com.taotao.cloud.worker.processor.task.TaskContext;
-import com.taotao.cloud.worker.processor.task.TaskStatus;
-import com.taotao.cloud.worker.subscribe.WorkerSubscribeManager;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -30,196 +25,196 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @Slf4j
 public class LightTaskTracker extends TaskTracker {
-    /**
-     * statusReportScheduledFuture
-     */
+	/**
+	 * statusReportScheduledFuture
+	 */
 //    private final ScheduledFuture<?> statusReportScheduledFuture;
 //    /**
 //     * timeoutCheckScheduledFuture
 //     */
 //    private final ScheduledFuture<?> timeoutCheckScheduledFuture;
-    /**
-     * processFuture
-     */
-    private final Future<ProcessResult> processFuture;
-    /**
-     * 执行线程
-     */
-    private final AtomicReference<Thread> executeThread;
-    /**
-     * 处理器信息
-     */
-    private final ProcessorBean processorBean;
-    /**
-     * 上下文
-     */
-    private final TaskContext taskContext;
-    /**
-     * 任务状态
-     */
-    private TaskStatus status;
-    /**
-     * 任务开始执行的时间
-     */
-    private Long taskStartTime;
-    /**
-     * 任务执行结束的时间 或者 任务被 kill 掉的时间
-     */
-    private Long taskEndTime;
-    /**
-     * 任务处理结果
-     */
-    private ProcessResult result;
+	/**
+	 * processFuture
+	 */
+	private final Future<ProcessResult> processFuture;
+	/**
+	 * 执行线程
+	 */
+	private final AtomicReference<Thread> executeThread;
+	/**
+	 * 处理器信息
+	 */
+	private final ProcessorBean processorBean;
+	/**
+	 * 上下文
+	 */
+	private final TaskContext taskContext;
+	/**
+	 * 任务状态
+	 */
+	private TaskStatus status;
+	/**
+	 * 任务开始执行的时间
+	 */
+	private Long taskStartTime;
+	/**
+	 * 任务执行结束的时间 或者 任务被 kill 掉的时间
+	 */
+	private Long taskEndTime;
+	/**
+	 * 任务处理结果
+	 */
+	private ProcessResult result;
 
-    private final AtomicBoolean timeoutFlag = new AtomicBoolean(false);
+	private final AtomicBoolean timeoutFlag = new AtomicBoolean(false);
 
-    protected final AtomicBoolean stopFlag = new AtomicBoolean(false);
+	protected final AtomicBoolean stopFlag = new AtomicBoolean(false);
 
-    protected final AtomicBoolean destroyFlag = new AtomicBoolean(false);
+	protected final AtomicBoolean destroyFlag = new AtomicBoolean(false);
 
 
-    public LightTaskTracker(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
-        super(req, config);
-        try {
-            taskContext = constructTaskContext(req);
-            // 等待处理
-            status = TaskStatus.WORKER_RECEIVED;
-            // 加载 Processor
-            processorBean = TtcJobWorkerConfig.getProcessorLoader().load(new ProcessorDefinition().setProcessorType(req.getProcessorType()).setProcessorInfo(req.getProcessorInfo()));
-            executeThread = new AtomicReference<>();
+	public LightTaskTracker(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
+		super(req, config);
+		try {
+			taskContext = constructTaskContext(req);
+			// 等待处理
+			status = TaskStatus.WORKER_RECEIVED;
+			// 加载 Processor
+			processorBean = TtcJobWorkerConfig.getProcessorLoader().load(new ProcessorDefinition().setProcessorType(req.getProcessorType()).setProcessorInfo(req.getProcessorInfo()));
+			executeThread = new AtomicReference<>();
 //            long delay = Integer.parseInt(System.getProperty(PowerJobDKey.WORKER_STATUS_CHECK_PERIOD, "15")) * 1000L;
 //            // 初始延迟加入随机值，避免在高并发场景下所有请求集中在一个时间段
 //            long initDelay = RandomUtils.nextInt(5000, 10000);
 //            // 上报任务状态
 //            statusReportScheduledFuture = ExecutorManager.getLightweightTaskStatusCheckExecutor().scheduleWithFixedDelay(new SafeRunnableWrapper(this::checkAndReportStatus), initDelay, delay, TimeUnit.MILLISECONDS);
 
-            // 提交任务到线程池
-            processFuture = ExecutorManager.getLightweightTaskExecutorService().submit(this::processTask);
-        } catch (Exception e) {
-            log.error("[TaskTracker-{}] fail to create TaskTracker for req:{} ", instanceId, req);
-            destroy();
-            throw e;
-        }
+			// 提交任务到线程池
+			processFuture = ExecutorManager.getLightweightTaskExecutorService().submit(this::processTask);
+		} catch (Exception e) {
+			log.error("[TaskTracker-{}] fail to create TaskTracker for req:{} ", instanceId, req);
+			destroy();
+			throw e;
+		}
 
-    }
+	}
 
-    /**
-     * 静态方法创建 TaskTracker
-     *
-     * @param req 服务端调度任务请求
-     * @return LightTaskTracker
-     */
-
-
-    public static LightTaskTracker create(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
-        try {
-            return new LightTaskTracker(req, config);
-        } catch (Exception e) {
-           // reportCreateErrorToServer(req, workerRuntime, e);
-        }
-        return null;
-    }
+	/**
+	 * 静态方法创建 TaskTracker
+	 *
+	 * @param req 服务端调度任务请求
+	 * @return LightTaskTracker
+	 */
 
 
-    @Override
-    public void destroy() {
-        if (!destroyFlag.compareAndSet(false, true)) {
-            log.warn("[TaskTracker-{}] This TaskTracker has been destroyed!", instanceId);
-            return;
-        }
+	public static LightTaskTracker create(ScheduleCausa.ServerScheduleJobReq req, TtcJobWorkerConfig config) {
+		try {
+			return new LightTaskTracker(req, config);
+		} catch (Exception e) {
+			// reportCreateErrorToServer(req, workerRuntime, e);
+		}
+		return null;
+	}
+
+
+	@Override
+	public void destroy() {
+		if (!destroyFlag.compareAndSet(false, true)) {
+			log.warn("[TaskTracker-{}] This TaskTracker has been destroyed!", instanceId);
+			return;
+		}
 //        if (statusReportScheduledFuture != null) {
 //            statusReportScheduledFuture.cancel(true);
 //        }
 //        if (timeoutCheckScheduledFuture != null) {
 //            timeoutCheckScheduledFuture.cancel(true);
 //        }
-        if (processFuture != null) {
-            processFuture.cancel(true);
-        }
-        LightTaskTrackerManager.removeTaskTracker(instanceId);
-        // 最后一列为总耗时（即占用资源的耗时，当前时间减去创建时间）
-        log.info("[TaskTracker-{}] remove TaskTracker,task status {},start time:{},end time:{},real cost:{},total time:{}", instanceId, status, taskStartTime, taskEndTime, taskEndTime != null ? taskEndTime - taskStartTime : "unknown", System.currentTimeMillis() - createTime);
-    }
+		if (processFuture != null) {
+			processFuture.cancel(true);
+		}
+		LightTaskTrackerManager.removeTaskTracker(instanceId);
+		// 最后一列为总耗时（即占用资源的耗时，当前时间减去创建时间）
+		log.info("[TaskTracker-{}] remove TaskTracker,task status {},start time:{},end time:{},real cost:{},total time:{}", instanceId, status, taskStartTime, taskEndTime, taskEndTime != null ? taskEndTime - taskStartTime : "unknown", System.currentTimeMillis() - createTime);
+	}
 
-    @Override
-    public void stopTask() {
+	@Override
+	public void stopTask() {
 
-        // 已经执行完成，忽略
-        if (finished.get()) {
-            log.warn("[TaskTracker-{}] fail to stop task,task is finished!result:{}", instanceId, result);
-            return;
-        }
-        if (!stopFlag.compareAndSet(false, true)) {
-            log.warn("[TaskTracker-{}] task has been mark as stopped,ignore this request!", instanceId);
-            return;
-        }
-        // 当前任务尚未执行
-        if (status == TaskStatus.WORKER_RECEIVED) {
-            log.warn("[TaskTracker-{}] task is not started,destroy this taskTracker directly!", instanceId);
-            destroy();
-            return;
-        }
-        // 正在执行
-        if (processFuture != null) {
-            // 尝试打断
-            log.info("[TaskTracker-{}] try to interrupt task!", instanceId);
-            processFuture.cancel(true);
-        }
-    }
+		// 已经执行完成，忽略
+		if (finished.get()) {
+			log.warn("[TaskTracker-{}] fail to stop task,task is finished!result:{}", instanceId, result);
+			return;
+		}
+		if (!stopFlag.compareAndSet(false, true)) {
+			log.warn("[TaskTracker-{}] task has been mark as stopped,ignore this request!", instanceId);
+			return;
+		}
+		// 当前任务尚未执行
+		if (status == TaskStatus.WORKER_RECEIVED) {
+			log.warn("[TaskTracker-{}] task is not started,destroy this taskTracker directly!", instanceId);
+			destroy();
+			return;
+		}
+		// 正在执行
+		if (processFuture != null) {
+			// 尝试打断
+			log.info("[TaskTracker-{}] try to interrupt task!", instanceId);
+			processFuture.cancel(true);
+		}
+	}
 
 
-    private ProcessResult processTask() {
-        executeThread.set(Thread.currentThread());
-        // 设置任务开始执行的时间
-        taskStartTime = System.currentTimeMillis();
-        status = TaskStatus.WORKER_PROCESSING;
-        // 开始执行时，提交任务判断是否超时
-        ProcessResult res = null;
-        do {
-            Thread.currentThread().setContextClassLoader(processorBean.getClassLoader());
-            if (res != null && !res.isSuccess()) {
-                // 重试
-                taskContext.setCurrentRetryTimes(taskContext.getCurrentRetryTimes() + 1);
-                log.warn("[TaskTracker-{}] process failed, TaskTracker will have a retry,current retryTimes : {}", instanceId, taskContext.getCurrentRetryTimes());
-            }
-            try {
-                res = processorBean.getProcessor().process(taskContext);
-            } catch (InterruptedException e) {
-                log.warn("[TaskTracker-{}] task has been interrupted !", instanceId, e);
-                Thread.currentThread().interrupt();
-                if (timeoutFlag.get()) {
-                    res = new ProcessResult(false, SystemInstanceResult.INSTANCE_EXECUTE_TIMEOUT_INTERRUPTED);
-                } else if (stopFlag.get()) {
-                    res = new ProcessResult(false, SystemInstanceResult.USER_STOP_INSTANCE_INTERRUPTED);
-                } else {
-                    res = new ProcessResult(false, e.toString());
-                }
-            } catch (Exception e) {
-                log.warn("[TaskTracker-{}] process failed !", instanceId, e);
-                res = new ProcessResult(false, e.toString());
-            }
-            if (res == null) {
-                log.warn("[TaskTracker-{}] processor return null !", instanceId);
-                res = new ProcessResult(false, "Processor return null");
-            }
-        } while (!res.isSuccess() && taskContext.getCurrentRetryTimes() < taskContext.getMaxRetryTimes() && !timeoutFlag.get() && !stopFlag.get());
-        executeThread.set(null);
-        taskEndTime = System.currentTimeMillis();
-        finished.set(true);
-        result = res;
-        status = result.isSuccess() ? TaskStatus.WORKER_PROCESS_SUCCESS : TaskStatus.WORKER_PROCESS_FAILED;
-        if(result.isSuccess()){
-            destroy();
-        }
+	private ProcessResult processTask() {
+		executeThread.set(Thread.currentThread());
+		// 设置任务开始执行的时间
+		taskStartTime = System.currentTimeMillis();
+		status = TaskStatus.WORKER_PROCESSING;
+		// 开始执行时，提交任务判断是否超时
+		ProcessResult res = null;
+		do {
+			Thread.currentThread().setContextClassLoader(processorBean.getClassLoader());
+			if (res != null && !res.isSuccess()) {
+				// 重试
+				taskContext.setCurrentRetryTimes(taskContext.getCurrentRetryTimes() + 1);
+				log.warn("[TaskTracker-{}] process failed, TaskTracker will have a retry,current retryTimes : {}", instanceId, taskContext.getCurrentRetryTimes());
+			}
+			try {
+				res = processorBean.getProcessor().process(taskContext);
+			} catch (InterruptedException e) {
+				log.warn("[TaskTracker-{}] task has been interrupted !", instanceId, e);
+				Thread.currentThread().interrupt();
+				if (timeoutFlag.get()) {
+					res = new ProcessResult(false, SystemInstanceResult.INSTANCE_EXECUTE_TIMEOUT_INTERRUPTED);
+				} else if (stopFlag.get()) {
+					res = new ProcessResult(false, SystemInstanceResult.USER_STOP_INSTANCE_INTERRUPTED);
+				} else {
+					res = new ProcessResult(false, e.toString());
+				}
+			} catch (Exception e) {
+				log.warn("[TaskTracker-{}] process failed !", instanceId, e);
+				res = new ProcessResult(false, e.toString());
+			}
+			if (res == null) {
+				log.warn("[TaskTracker-{}] processor return null !", instanceId);
+				res = new ProcessResult(false, "Processor return null");
+			}
+		} while (!res.isSuccess() && taskContext.getCurrentRetryTimes() < taskContext.getMaxRetryTimes() && !timeoutFlag.get() && !stopFlag.get());
+		executeThread.set(null);
+		taskEndTime = System.currentTimeMillis();
+		finished.set(true);
+		result = res;
+		status = result.isSuccess() ? TaskStatus.WORKER_PROCESS_SUCCESS : TaskStatus.WORKER_PROCESS_FAILED;
+		if (result.isSuccess()) {
+			destroy();
+		}
 //        // 取消超时检查任务
 //        if (timeoutCheckScheduledFuture != null) {
 //            timeoutCheckScheduledFuture.cancel(true);
 //        }
-        log.info("[TaskTracker-{}] task complete ! create time:{},queue time:{},use time:{},result:{}", instanceId, createTime, taskStartTime - createTime, System.currentTimeMillis() - taskStartTime, result);
-        // 执行完成后记录调度次数
-        WorkerSubscribeManager.addScheduleTimes();
-        return result;
-    }
+		log.info("[TaskTracker-{}] task complete ! create time:{},queue time:{},use time:{},result:{}", instanceId, createTime, taskStartTime - createTime, System.currentTimeMillis() - taskStartTime, result);
+		// 执行完成后记录调度次数
+		WorkerSubscribeManager.addScheduleTimes();
+		return result;
+	}
 
 
 //    private synchronized void checkAndReportStatus() {
@@ -326,18 +321,18 @@ public class LightTaskTracker extends TaskTracker {
 //        }
 //    }
 
-    private TaskContext constructTaskContext(ScheduleCausa.ServerScheduleJobReq req) {
-        final TaskContext context = new TaskContext();
-        context.setTaskId(req.getJobId() + "#" + req.getInstanceId());
-        context.setJobId(req.getJobId());
-        context.setJobParams(req.getJobParams());
-        context.setInstanceId(req.getInstanceId());
-        context.setTaskName(TaskConstant.ROOT_TASK_NAME);
-        context.setMaxRetryTimes(req.getTaskRetryNum());
-        context.setCurrentRetryTimes(0);
-        // 轻量级任务不会涉及到任务分片的处理，不需要处理子任务相关的信息
-        return context;
-    }
+	private TaskContext constructTaskContext(ScheduleCausa.ServerScheduleJobReq req) {
+		final TaskContext context = new TaskContext();
+		context.setTaskId(req.getJobId() + "#" + req.getInstanceId());
+		context.setJobId(req.getJobId());
+		context.setJobParams(req.getJobParams());
+		context.setInstanceId(req.getInstanceId());
+		context.setTaskName(TaskConstant.ROOT_TASK_NAME);
+		context.setMaxRetryTimes(req.getTaskRetryNum());
+		context.setCurrentRetryTimes(0);
+		// 轻量级任务不会涉及到任务分片的处理，不需要处理子任务相关的信息
+		return context;
+	}
 
 //    private String suit(String result) {
 //        if (StringUtils.isEmpty(result)) {
@@ -352,12 +347,12 @@ public class LightTaskTracker extends TaskTracker {
 //        return result.substring(0, maxLength).concat("...");
 //    }
 
-    /**
-     * try force stop thread
-     *
-     * @param thread thread
-     * @return stop result
-     */
+	/**
+	 * try force stop thread
+	 *
+	 * @param thread thread
+	 * @return stop result
+	 */
 //    private boolean tryForceStopThread(Thread thread) {
 //
 //        String threadName = thread.getName();

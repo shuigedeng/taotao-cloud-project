@@ -1,6 +1,7 @@
 package com.taotao.cloud.job.core.worker.common.grpc.strategies;
 
-import com.taotao.cloud.worker.common.constant.TransportTypeEnum;
+
+import com.taotao.cloud.job.core.worker.common.constant.TransportTypeEnum;
 
 public class StrategyCaller {
 

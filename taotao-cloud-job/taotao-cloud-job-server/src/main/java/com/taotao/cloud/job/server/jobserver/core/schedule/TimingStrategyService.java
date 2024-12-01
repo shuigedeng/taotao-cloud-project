@@ -1,10 +1,8 @@
 package com.taotao.cloud.job.server.jobserver.core.schedule;
 
+import com.taotao.cloud.job.common.enums.TimeExpressionType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import com.taotao.cloud.common.enums.TimeExpressionType;
-import com.taotao.cloud.common.exception.TtcJobException;
-import com.taotao.cloud.server.core.schedule.auxiliary.TimingStrategyHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
