@@ -66,11 +66,11 @@ jasypt:
 #        minIdle: 5
 #        maxIdle: 20
 #        maxTotal: 50
-#      host: 127.0.0.1
+#      host: 192.168.218.2
 #      port: 6379
 
 pulsar:
-  service-url: pulsar://127.0.0.1:6650
+  service-url: pulsar://192.168.218.2:6650
   io-threads: 10
   listener-threads: 10
   enable-tcp-no-delay: false
@@ -124,7 +124,7 @@ redisson:
   attemptTimeout: 10000   #等待获取锁超时时间,-1则是一直等待
   dataValidTime: 1800000
   single_server_config:
-    address: "127.0.0.1:6379"     #服务器地址,必填ip:port
+    address: "192.168.218.2:6379"     #服务器地址,必填ip:port
     subscription_connection_minimum_idle_size: 1     #用于发布和订阅连接的最小保持连接数（长连接）。Redisson内部经常通过发布和订阅来实现许多功能。长期保持一定数量的发布订阅连接是必须的。
     subscription_connection_pool_size: 50     #用于发布和订阅连接的连接池最大容量。连接池的连接数量自动弹性伸缩。
     connection_minimum_idle_size: 24     #最小保持连接数（长连接）。长期保持一定数量的连接有利于提高瞬时写入反应速度。
@@ -157,16 +157,16 @@ redisson:
   #  #监测DNS的变化情况的时间间隔。
   #  dnsMonitoringInterval: 5000
   #  #服务器节点地址.必填
-  #  #redisson.multiple-server-config.node-addresses[0]=127.0.0.1:6379
-  #  #redisson.multiple-server-config.node-addresses[1]=127.0.0.1:6380
-  #  #redisson.multiple-server-config.node-addresses[2]=127.0.0.1:6381
+  #  #redisson.multiple-server-config.node-addresses[0]=192.168.218.2:6379
+  #  #redisson.multiple-server-config.node-addresses[1]=192.168.218.2:6380
+  #  #redisson.multiple-server-config.node-addresses[2]=192.168.218.2:6381
   #  nodeAddresses:
-  #    - "127.0.0.1:6381"
-  #    - "127.0.0.1:6382"
-  #    - "127.0.0.1:6383"
-  #    - "127.0.0.1:6384"
-  #    - "127.0.0.1:6385"
-  #    - "127.0.0.1:6386"
+  #    - "192.168.218.2:6381"
+  #    - "192.168.218.2:6382"
+  #    - "192.168.218.2:6383"
+  #    - "192.168.218.2:6384"
+  #    - "192.168.218.2:6385"
+  #    - "192.168.218.2:6386"
   #  #(哨兵模式,云托管,主从模式特有)尝试连接的数据库编号。
   #  database: 1
   #  #(哨兵模式特有)主服务器的名称是哨兵进程中用来监测主从服务切换情况的。
@@ -180,10 +180,10 @@ arthas:
   # ~/logs/arthas/arthas.log (用户目录下面)里可以找到具体端口日志
   telnetPort: -1
   httpPort: -1
-  ip: 0.0.0.0   # 127.0.0.1只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
+  ip: 0.0.0.0   # 192.168.218.2只能本地访问，0.0.0.0则可网络访问，但是存在安全问题
   agent-id: ${spring.application.name}
   app-name: ${spring.application.name}
-  tunnel-server: ws://127.0.0.1:7777/ws
+  tunnel-server: ws://192.168.218.2:7777/ws
 
 dubbo:
   scan:
@@ -204,7 +204,7 @@ dubbo:
     shutwait: 3000
     dump-directory: ${user.home}/logs/${spring.application.name}/dubbo/
   registry:
-    address: nacos://127.0.0.1:8848
+    address: nacos://192.168.218.2:8848
     group: DUBBO_REGISTRY_GROUP
     cluster: CQ
     parameters:
@@ -271,14 +271,14 @@ dubbo:
     export-async: true
   monitor:
     id: ${spring.application.name}
-    address: 127.0.0.1:18080
+    address: 192.168.218.2:18080
     username: admin
     password: 123456
     group: DUBBO_REGISTRY_GROUP
     version: ${ttcVersion}
   metadata-report:
     id: ${spring.application.name}
-    address: nacos://127.0.0.1:8848
+    address: nacos://192.168.218.2:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -287,7 +287,7 @@ dubbo:
       cluster-name: CQ
   config-center:
     id: ${spring.application.name}
-    address: nacos://127.0.0.1:8848
+    address: nacos://192.168.218.2:8848
     username: nacos
     password: nacos
     group: DUBBO_REGISTRY_GROUP
@@ -328,7 +328,7 @@ seata:
   data-source-proxy-mode: AT
   service:
     grouplist:
-      SC: 127.0.0.1:8091
+      SC: 192.168.218.2:8091
     vgroupMapping:
       taotao_cloud_tx_group: SC   # TC 集群（必须与seata-server保持一致）
     enable-degrade: false     # 降级开关
@@ -337,7 +337,7 @@ seata:
     type: nacos
     nacos:
       namespace: taotao-cloud-seata
-      server-addr: 127.0.0.1:8848
+      server-addr: 192.168.218.2:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -347,7 +347,7 @@ seata:
     nacos:
       namespace: taotao-cloud-seata
       application: seata-server
-      server-addr: 127.0.0.1:8848
+      server-addr: 192.168.218.2:8848
       group: SEATA_GROUP
       username: nacos
       password: nacos
@@ -395,7 +395,7 @@ seata:
     enable-client-batch-send-request: true     # 客户端事务消息请求是否批量合并发送（默认true）
 
 rocketmq:
-  name-server: http://127.0.0.1:9876
+  name-server: http://192.168.218.2:9876
   producer:
     # 发送同一类消息的设置为同一个group，保证唯一
     group: ${spring.application.name}     # 组名称
@@ -625,11 +625,11 @@ spring:
       max-request-size: 200MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    #url: jdbc:mysql://127.0.0.1:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
+    #url: jdbc:mysql://192.168.218.2:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&queryInterceptors=brave.mysql8.TracingQueryInterceptor&exceptionInterceptors=brave.mysql8.TracingExceptionInterceptor
     #driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:p6spy:mysql://127.0.0.1:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
+    #url: jdbc:p6spy:mysql://192.168.218.2:13306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&rewriteBatchedStatements=true
     #driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:mysql://127.0.0.1:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true
+    url: jdbc:mysql://192.168.218.2:3306/${spring.application.name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true&zeroDateTimeBehavior=convertToNull&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&autoReconnect=true&useCursorFetch=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
@@ -654,7 +654,7 @@ spring:
       datasource:
         master:
           type: com.zaxxer.hikari.HikariDataSource
-          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:127.0.0.1}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+          url: jdbc:p6spy:mysql://${TAOTAO_CLOUD_MYSQL_HOST:192.168.218.2}:${TAOTAO_CLOUD_MYSQL_PORT:3306}/${spring.application.name}?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
           username: ${TAOTAO_CLOUD_MYSQL_USERNAME:root}
           password: ${TAOTAO_CLOUD_MYSQL_PASSWORD:123456}
           driver-class-name: com.p6spy.engine.spy.P6SpyDriver
@@ -741,7 +741,7 @@ spring:
 
   data:
     redis:
-      host: 127.0.0.1
+      host: 192.168.218.2
       port: 6379
       database: 1
       #password: ${TAOTAO_CLOUD_REDIS_PASSWORD:taotao-cloud}
@@ -750,7 +750,7 @@ spring:
       #  master:
       #  nodes:
       #cluster:
-      #  nodes: 127.0.0.1:6381,127.0.0.1:6382,127.0.0.1:6383,127.0.0.1:6384,127.0.0.1:6385,127.0.0.1:6386
+      #  nodes: 192.168.218.2:6381,192.168.218.2:6382,192.168.218.2:6383,192.168.218.2:6384,192.168.218.2:6385,192.168.218.2:6386
       #  max-redirects: 3
       client-type: lettuce
       lettuce:
@@ -780,7 +780,7 @@ spring:
             # 客户端名称
             clientName: "taotao-cloud-redis-client"
             # 节点地址
-            address: "redis://127.0.0.1:6379"
+            address: "redis://192.168.218.2:6379"
             # 发布和订阅连接的最小空闲连接数
             subscriptionConnectionMinimumIdleSize: 1
             # 发布和订阅连接池大小
@@ -804,7 +804,7 @@ spring:
           # 配置看门狗的默认超时时间为30s，这里改为 10s
           lockWatchdogTimeout: 10000
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.218.2
     port: 5672
     #注意：guest用户只能链接本地服务器 比如localhost  不可以连接远程服务器
     username: root
@@ -860,7 +860,7 @@ spring:
           #最长等待多长时间再尝试重新发送消息。这个参数的默认值是 10 秒。
   kafka:
     enabled: true
-    bootstrap-servers: 127.0.0.1:9092 #kafka的地址 多个逗号连接
+    bootstrap-servers: 192.168.218.2:9092 #kafka的地址 多个逗号连接
     producer:
       retries: 1 # 消息发送重试次数
       # 当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算。
@@ -943,11 +943,11 @@ spring:
         jwt:
           issuer-uri: ${herodotus.endpoint.issuer-uri}
           #jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
-          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
+          jwk-set-uri: http://192.168.218.2:33401/oauth2/jwks
         opaquetoken:
           client-id: 25953fda237841689743a94871915661
           client-secret: a667ed5606f44e159db062239ed5a838
-          introspection-uri: http://127.0.0.1
+          introspection-uri: http://192.168.218.2
   cloud:
     openfeign:
       circuitbreaker: #如果 Spring Cloud CircuitBreaker 在 classpath 上，并且feign.circuitbreaker.enabled=true Feign 将使用断路器包装所有方法。
@@ -1039,7 +1039,7 @@ spring:
           binder: kafka
       rocketmq:
         binder:
-          name-server: 127.0.0.1:9876
+          name-server: 192.168.218.2:9876
           vip-channel-enabled: false
           group: demo
         #RocketMQSpecificPropertiesProvider
@@ -1068,7 +1068,7 @@ spring:
               sync: true
       rabbit:
         binder:
-          admin-addresses: 127.0.0.1:5672
+          admin-addresses: 192.168.218.2:5672
         bindings:
           sms-output:
             producer:
@@ -1082,7 +1082,7 @@ spring:
               #republish-to-dlq: true # 重投到死信队列并带有报错信息
       kafka:
         binder:
-          brokers: 127.0.0.1:9092
+          brokers: 192.168.218.2:9092
           auto-create-topics: true
         bindings:
           order-output:
@@ -1120,7 +1120,7 @@ taotao:
           secret: ${DINGDING_SECRET:xxxx}
     zookeeper:
       enabled: false
-      connectString: 127.0.0.1:2181
+      connectString: 192.168.218.2:2181
     sensitive:
       enabled: true
     lock:
@@ -1329,21 +1329,21 @@ taotao:
         endpoint:
           uaa-service-name: taotao-cloud-uaa
           upms-service-name: taotao-cloud-upms
-          gateway-service-uri: http://127.0.0.1:33401
-          uaa-service-uri: http://127.0.0.1:33401/
-          upms-service-uri: http://127.0.0.1:333401/${herodotus.endpoint.upms-service-name}
-          access-token-uri: http://127.0.0.1:33401/oauth2/token
-          authorization-uri: http://127.0.0.1:33401/oauth2/authorize
-          token-revocation-uri: http://127.0.0.1:33401/oauth2/revoke
-          token-introspection-uri: http://127.0.0.1:33401/oauth2/introspect
-          jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
+          gateway-service-uri: http://192.168.218.2:33401
+          uaa-service-uri: http://192.168.218.2:33401/
+          upms-service-uri: http://192.168.218.2:333401/${herodotus.endpoint.upms-service-name}
+          access-token-uri: http://192.168.218.2:33401/oauth2/token
+          authorization-uri: http://192.168.218.2:33401/oauth2/authorize
+          token-revocation-uri: http://192.168.218.2:33401/oauth2/revoke
+          token-introspection-uri: http://192.168.218.2:33401/oauth2/introspect
+          jwk-set-uri: http://192.168.218.2:33401/oauth2/jwks
           issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-          oidc-client-registration-uri: http://127.0.0.1:33401/connect/register
-          oidc-user-info-uri: http://127.0.0.1:33401/userinfo
-          #device-authorization-uri: http://127.0.0.1:33401/oauth2/device_authorization
-          #device-authorization-endpoint: http://127.0.0.1:33401/oauth2/device_authorization
-          #device-verification-uri: http://127.0.0.1:33401/oauth2/device_verification
-          #device-verification-endpoint: http://127.0.0.1:33401/oauth2/device_verification
+          oidc-client-registration-uri: http://192.168.218.2:33401/connect/register
+          oidc-user-info-uri: http://192.168.218.2:33401/userinfo
+          #device-authorization-uri: http://192.168.218.2:33401/oauth2/device_authorization
+          #device-authorization-endpoint: http://192.168.218.2:33401/oauth2/device_authorization
+          #device-verification-uri: http://192.168.218.2:33401/oauth2/device_verification
+          #device-verification-endpoint: http://192.168.218.2:33401/oauth2/device_verification
         authentication:
           form-login:
             category: HUTOOL_GIF
@@ -1427,7 +1427,7 @@ management:
     tracing:
       connect-timeout: 1
       read-timeout: 10
-      endpoint: http://127.0.0.1:9411/api/v2/spans
+      endpoint: http://192.168.218.2:9411/api/v2/spans
   tracing:
     enabled: true
     sampling:
@@ -1467,7 +1467,7 @@ management:
 #        enabled: true
 #  zipkin:
 #    enabled: true
-#    base-url: http://127.0.0.1:9411/
+#    base-url: http://192.168.218.2:9411/
 #    discoveryClientEnabled: false
 #    sender:
 #      type: WEB
@@ -1551,7 +1551,7 @@ kylin:
     primary-executor: com.taotao.boot.lock.kylin.executor.redisson.RedissonLockExecutor #默认执行器。默认redisson>zookeeper
     redisson: true              #是否开启redisson 默认true
     #zookeeper:
-    #  zk-servers: 127.0.0.1:2181 #zk的server地址，多个server之间使用英文逗号分隔开 。配置地址则开启zookeeper
+    #  zk-servers: 192.168.218.2:2181 #zk的server地址，多个server之间使用英文逗号分隔开 。配置地址则开启zookeeper
     #  session-timeout: 60000     #会话超时时间，默认值60000 单位：毫秒
     #  connection-timeout: 15000  #连接超时时间，默认值15000 单位：毫秒
     #  base-sleep-time-ms: 5000   #初始sleep时间，默认值5000 单位：毫秒
@@ -1661,7 +1661,7 @@ knife4j:
     enableSwaggerModels: true
     enableDocumentManage: true
     enableHost: false
-    enableHostText: http://127.0.0.1:18568
+    enableHostText: http://192.168.218.2:18568
     enableRequestCache: true
     enableFilterMultipartApis: false
     enableFilterMultipartApiMethodType: POST
@@ -1695,11 +1695,11 @@ grpc:
 #    #inProcess:
 #    #  address: in-process:test #这允许客户端在同一应用程序内使用以下配置连接到服务器：
 #    grpc-server:
-#      address: 'static://127.0.0.1:9898'
+#      address: 'static://192.168.218.2:9898'
 #    # 服务名（不同服务名可对应不同配置）
 #    #grpc-sb-server:
 #    #  # 服务端地址
-#    #  address: 'static://127.0.0.1:9898'
+#    #  address: 'static://192.168.218.2:9898'
 #    #  # 是否开启保持连接（长连接）
 #    #  enableKeepAlive: true
 #    #  # 保持连接时长（默认20s）
@@ -1717,17 +1717,17 @@ herodotus:
   endpoint:
     uaa-service-name: taotao-cloud-uaa
     upms-service-name: taotao-cloud-upms
-    gateway-service-uri: http://127.0.0.1:33401
-    uaa-service-uri: http://127.0.0.1:33401/
-    upms-service-uri: http://127.0.0.1:333401/${herodotus.endpoint.upms-service-name}
-    access-token-uri: http://127.0.0.1:33401/oauth2/token
-    authorization-uri: http://127.0.0.1:33401/oauth2/authorize
-    token-revocation-uri: http://127.0.0.1:33401/oauth2/revoke
-    token-introspection-uri: http://127.0.0.1:33401/oauth2/introspect
-    jwk-set-uri: http://127.0.0.1:33401/oauth2/jwks
+    gateway-service-uri: http://192.168.218.2:33401
+    uaa-service-uri: http://192.168.218.2:33401/
+    upms-service-uri: http://192.168.218.2:333401/${herodotus.endpoint.upms-service-name}
+    access-token-uri: http://192.168.218.2:33401/oauth2/token
+    authorization-uri: http://192.168.218.2:33401/oauth2/authorize
+    token-revocation-uri: http://192.168.218.2:33401/oauth2/revoke
+    token-introspection-uri: http://192.168.218.2:33401/oauth2/introspect
+    jwk-set-uri: http://192.168.218.2:33401/oauth2/jwks
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-    oidc-client-registration-uri: http://127.0.0.1:33401/connect/register
-    oidc-user-info-uri: http://127.0.0.1:33401/userinfo
+    oidc-client-registration-uri: http://192.168.218.2:33401/connect/register
+    oidc-user-info-uri: http://192.168.218.2:33401/userinfo
   oauth2:
     authentication:
       form-login:

@@ -46,8 +46,8 @@ dependencies {
 
     implementation 'com.github.oshi:oshi-core:6.6.5'
 
-    //alibaba ai
-    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
+    //todo更新版本之后没这个了 后面应该会加上  alibaba ai
+    //implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.2"
 
     //spring ai

@@ -16,6 +16,7 @@
 
 package com.taotao.cloud.shell;
 
+import com.taotao.boot.core.startup.StartupSpringApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -37,9 +38,14 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 public class TaoTaoCloudShellApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(TaoTaoCloudShellApplication.class, args);
-    }
+	public static void main(String[] args) {
+		new StartupSpringApplication(TaoTaoCloudShellApplication.class)
+			.setTtcBanner()
+			.setTtcProfileIfNotExists("dev")
+			.setTtcApplicationProperty("taotao-cloud-shell")
+			.setTtcAllowBeanDefinitionOverriding(true)
+			.run(args);
+	}
 
     @Bean
     public CorsFilter corsFilter() {

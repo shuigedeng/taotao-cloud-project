@@ -19,7 +19,7 @@ spring:
       enabled: true
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.218.2:8848
         metadata:
           version: ${ttcVersion}
           user.name: "admin"
@@ -32,7 +32,7 @@ spring:
         naming-load-cache-at-start: false
       config:
         enabled: true
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.218.2:8848
         namespace: taotao-cloud-dev
         username: nacos
         password: nacos
