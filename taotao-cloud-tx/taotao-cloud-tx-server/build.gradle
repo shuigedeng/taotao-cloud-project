@@ -1,3 +1,5 @@
+apply plugin: 'application'
+
 dependencies {
     api project(":taotao-cloud-tx:taotao-cloud-tx-tm")
     api project(":taotao-cloud-tx:taotao-cloud-tx-rm")
@@ -59,6 +61,50 @@ dependencies {
 //combineJars.dependsOn(
 //        subprojects.collect { it.tasks.findByName('jar') }
 //)
+
+
+// 方案1：打包成jar，包含依赖，即运行：./gradlew fatJar
+//create a single Jar with all dependencies
+/*
+//./gradlew fatJar
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Fat Jar',
+        	'Implementation-Version': version,
+        	'Main-Class': 'Python_Patch_Parser.Main'
+    }
+    baseName = project.name + '-jar-with-dependencies'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+*/
+
+// 方案2：打包成Jar，包含依赖，即运行：./gradlew jar -PallInOne
+//jar {
+//    manifestContentCharset 'utf-8'
+//    metadataCharset 'utf-8'
+//    manifest {
+//        attributes "Main-Class": mainClassName
+//    }
+//    if (project.hasProperty("allInOne")) { // ./gradlew jar -PallInOne
+//        baseName = project.name + '-jar-with-dependencies'
+//        from {
+//            configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//        }
+//    }
+//}
+
+//configurations {
+//    externalLib.extendsFrom(implementation)
+//}
+//
+//task copyLibs(type: Copy){
+//    from configurations.externalLib{
+//        into '<dest-dir-name>'
+//
+//        exclude('<if any jars need to be excluded>')
+//    }
+//}
 
 task fatJar(type: Jar) {
     manifest {

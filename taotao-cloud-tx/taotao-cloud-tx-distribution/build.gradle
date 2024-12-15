@@ -1,5 +1,7 @@
 apply from: rootProject.file('gradle/shadow.gradle')
 
+apply plugin: 'application'
+
 task releaseTarZip(type: Zip) {
     dependsOn(':taotao-cloud-tx:taotao-cloud-tx-server:jar')
 
