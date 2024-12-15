@@ -16,9 +16,7 @@
 
 package com.taotao.cloud.tx.server;
 
-
 class TaoTaoCloudTxServerTests {
-
 
     void contextLoads() {}
 }

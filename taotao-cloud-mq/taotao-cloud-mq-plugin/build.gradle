@@ -2,4 +2,7 @@ dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-common")
 
 }
+jar {
+    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-common:jar")
 
+}

@@ -1,6 +1,6 @@
 package com.taotao.cloud.paimon.kafka.sink.naming;
 
-import io.connect.paimon.sink.PaimonSinkConfig;
+import com.taotao.cloud.paimon.kafka.sink.PaimonSinkConfig;
 import io.debezium.data.Envelope;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.errors.DataException;

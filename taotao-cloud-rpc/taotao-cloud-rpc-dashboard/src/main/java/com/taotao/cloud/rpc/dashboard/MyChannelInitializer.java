@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.taotao.cloud.tx.server.nettyTxManager;
+package com.taotao.cloud.rpc.dashboard;
 
-// 事务管理者的启动类
-public class Main {
-    public static void main(String[] args) {
-        // 这个是自定义的一个服务端
-        NettyServer nettyServer = new NettyServer();
-        // 为其绑定IP和端口号
-        nettyServer.start("localhost", 8080);
-        System.out.println("\n>>>>>>事务管理者启动成功<<<<<<\n");
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.socket.SocketChannel;
+
+public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
+
+    @Override
+    protected void initChannel(SocketChannel channel) {
+        System.out.println("链接报告开始");
+        System.out.println("链接报告信息：有一客户端链接到本服务端");
+        System.out.println("链接报告IP:" + channel.localAddress().getHostString());
+        System.out.println("链接报告Port:" + channel.localAddress().getPort());
+        System.out.println("链接报告完毕");
     }
 }

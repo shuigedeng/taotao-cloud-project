@@ -17,9 +17,9 @@
 
 package com.taotao.cloud.paimon.kafka.sink;
 
-import io.connect.paimon.common.PropertyUtil;
-import io.connect.paimon.sink.naming.DebeziumTableNamingStrategy;
-import io.connect.paimon.sink.naming.TableNamingStrategy;
+import com.taotao.cloud.paimon.kafka.common.PropertyUtil;
+import com.taotao.cloud.paimon.kafka.sink.naming.DebeziumTableNamingStrategy;
+import com.taotao.cloud.paimon.kafka.sink.naming.TableNamingStrategy;
 import org.apache.kafka.common.config.AbstractConfig;
 import org.apache.kafka.common.config.ConfigDef;
 

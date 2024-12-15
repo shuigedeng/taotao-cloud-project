@@ -17,7 +17,7 @@
 
 package com.taotao.cloud.paimon.kafka.sink.naming;
 
-import io.connect.paimon.sink.PaimonSinkConfig;
+import com.taotao.cloud.paimon.kafka.sink.PaimonSinkConfig;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.paimon.catalog.Identifier;
 

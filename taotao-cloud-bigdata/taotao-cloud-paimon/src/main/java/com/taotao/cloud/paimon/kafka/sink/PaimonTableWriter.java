@@ -16,9 +16,8 @@
  */
 
 package com.taotao.cloud.paimon.kafka.sink;
-
-import io.connect.paimon.data.CdcRecord;
-import io.connect.paimon.cdc.DebeziumRecordParser;
+import com.taotao.cloud.paimon.kafka.data.CdcRecord;
+import com.taotao.cloud.paimon.kafka.cdc.DebeziumRecordParser;
 import org.apache.kafka.connect.errors.ConnectException;
 import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.paimon.catalog.Catalog;

@@ -22,7 +22,7 @@ subprojects {
         //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
         //archivesBaseName = 'Example'//基本的文件名
         //文件夹大于65535个，需要开启zip64
-        //zip64=true
+        zip64=true
 
         //from sourceSets.main.output
         //dependsOn configurations.runtimeClasspath

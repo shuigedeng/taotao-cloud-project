@@ -3,3 +3,6 @@ dependencies {
 
 }
 
+jar {
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-core:jar")
+}

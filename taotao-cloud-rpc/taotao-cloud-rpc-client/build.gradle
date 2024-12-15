@@ -1,10 +1,17 @@
 dependencies {
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-core")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-filter")
-    api project(":taotao-cloud-rpc:taotao-cloud-rpc-filter")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-metrics")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-plugin")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-serialization")
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-registry")
 }
 
+jar {
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-core:jar")
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-filter:jar")
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-metrics:jar")
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-plugin:jar")
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-serialization:jar")
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-registry:jar")
+}

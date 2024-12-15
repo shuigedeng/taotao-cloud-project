@@ -2,3 +2,7 @@ dependencies {
     api project(":taotao-cloud-rpc:taotao-cloud-rpc-core")
 }
 
+jar {
+    dependsOn(":taotao-cloud-rpc:taotao-cloud-rpc-core:jar")
+
+}

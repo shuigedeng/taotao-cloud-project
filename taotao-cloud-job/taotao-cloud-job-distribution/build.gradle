@@ -1,7 +1,7 @@
 apply from: rootProject.file('gradle/shadow.gradle')
 
 task releaseTarZip(type: Zip) {
-    dependsOn(':taotao-cloud-rpc:taotao-cloud-rpc-dashboard:jar')
+    dependsOn(':taotao-cloud-job:taotao-cloud-job-dashboard:jar')
 
     archiveFileName = "${project.name}-${project.version}.zip"
 
@@ -20,7 +20,7 @@ task releaseTarZip(type: Zip) {
     from "${project.projectDir}/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
     from "${project.projectDir}/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
 
-    from("${project.parent.projectDir}/taotao-cloud-rpc-dashboard/build/libs") {
+    from("${project.parent.projectDir}/taotao-cloud-job-dashboard/build/libs") {
         include '*.jar'
 
         into "target"
@@ -50,7 +50,7 @@ tasks.create(name: "releaseTarGz", type: Tar) {
     from "${project.projectDir}/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
     from "${project.projectDir}/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
 
-    from("${project.parent.projectDir}/taotao-cloud-rpc-dashboard/build/libs") {
+    from("${project.parent.projectDir}/taotao-cloud-job-dashboard/build/libs") {
         include '*.jar'
 
         into "target"

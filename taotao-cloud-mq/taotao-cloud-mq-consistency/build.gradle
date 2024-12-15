@@ -28,3 +28,10 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
     testImplementation "org.assertj:assertj-core:3.26.3"
 }
+
+jar {
+    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-metrics:jar")
+    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-plugin:jar")
+    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-proxy:jar")
+
+}
