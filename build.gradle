@@ -155,7 +155,7 @@ plugins {
 
     //OWASP 依赖检查插件。
     //https://plugins.gradle.org/plugin/org.owasp.dependencycheck
-    id "org.owasp.dependencycheck" version "11.1.0"
+    id "org.owasp.dependencycheck" version "11.1.1"
 
     //用于管理 Docker 镜像和容器的 Gradle 插件。
     //https://plugins.gradle.org/plugin/com.bmuschko.docker-spring-boot-application
@@ -191,7 +191,7 @@ plugins {
     id "com.gorylenko.gradle-git-properties" version "2.4.2"
 
     //https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html
-    id 'org.graalvm.buildtools.native' version '0.10.3'
+    id 'org.graalvm.buildtools.native' version '0.10.4'
 
     //https://github.com/kimichen13/mybatis-generator-plugin
     //https://plugins.gradle.org/plugin/com.qqviaja.gradle.MybatisGenerator
