@@ -87,13 +87,13 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
 
-    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.4.0"
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.4.1"
 
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.3'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
-    testImplementation "org.assertj:assertj-core:3.26.3"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
+    testImplementation "org.assertj:assertj-core:3.27.0"
 }
 
 

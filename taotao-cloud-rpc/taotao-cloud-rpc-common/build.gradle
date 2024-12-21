@@ -22,9 +22,9 @@ dependencies {
     api 'com.caucho:hessian:4.0.66'
     // 日志框架
     api 'ch.qos.logback:logback-classic:1.5.12'
-    api "com.google.guava:guava:33.3.1-jre"
+    api "com.google.guava:guava:33.4.0-jre"
 
-    api 'io.netty:netty-all:4.1.115.Final'
+    api 'io.netty:netty-all:4.1.116.Final'
 
     api "org.projectlombok:lombok:1.18.36"
     annotationProcessor "org.projectlombok:lombok:1.18.36"

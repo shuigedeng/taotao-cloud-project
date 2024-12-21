@@ -95,11 +95,11 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
-    implementation 'org.springframework.session:spring-session-data-redis:3.4.0'
+    implementation 'org.springframework.session:spring-session-data-redis:3.4.1'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
-    implementation 'com.github.binarywang:weixin-java-mp:4.6.7.B'
-    implementation 'com.github.binarywang:weixin-java-miniapp:4.6.7.B'
+    implementation 'com.github.binarywang:weixin-java-mp:4.6.9.B'
+    implementation 'com.github.binarywang:weixin-java-miniapp:4.6.9.B'
 
     //implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
 
@@ -143,7 +143,7 @@ dependencies {
     implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter"
 
     //https://search.maven.org/artifact/com.nimbusds/nimbus-jose-jwt
-    implementation "com.nimbusds:nimbus-jose-jwt:9.47"
+    implementation "com.nimbusds:nimbus-jose-jwt:9.48"
     //https://search.maven.org/artifact/com.nimbusds/oauth2-oidc-sdk
     implementation 'com.nimbusds:oauth2-oidc-sdk:11.20.1'
 
