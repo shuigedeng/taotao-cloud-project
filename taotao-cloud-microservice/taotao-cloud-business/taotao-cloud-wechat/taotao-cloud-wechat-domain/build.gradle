@@ -112,7 +112,7 @@ dependencies {
 
     //开源的企业微信开放 API 的 Java 实现
     //https://search.maven.org/artifact/cn.felord/wecom-sdk
-    implementation 'cn.felord:wecom-sdk:1.2.9'
+    implementation 'cn.felord:wecom-sdk:1.3.0'
 
     //AVIATOR——轻量级JAVA表达式求值引擎 https://blog.csdn.net/ZhangQingmu/article/details/125087255
     //https://code.google.com/p/aviator/
