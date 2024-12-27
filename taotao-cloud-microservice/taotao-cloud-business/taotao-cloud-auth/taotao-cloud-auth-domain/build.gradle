@@ -89,7 +89,7 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-data-mybatis"
     api "io.github.shuigedeng:taotao-boot-starter-cache-redis"
     api "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    api "io.github.shuigedeng:taotao-boot-starter-micrometer"
+    api "io.github.shuigedeng:taotao-boot-starter-tracer"
     api "io.github.shuigedeng:taotao-boot-starter-skywalking"
     api "io.github.shuigedeng:taotao-boot-starter-statemachine"
     api "io.github.shuigedeng:taotao-boot-starter-flowengine"

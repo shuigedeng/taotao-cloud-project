@@ -163,7 +163,7 @@ CLOUD:
 | Roketmq              | 5.2.1               |
 | Spring Security      | 6.4.1               |
 | Mybatis Plus         | 3.5.9               |
-| Hutool               | 6.0.0-M18           |
+| Hutool               | 6.0.0-M19           |
 | Mysql                | 9.1.0               |
 | Querydsl             | 5.1.0               |
 | Swagger              | 3.0.0               |
@@ -387,7 +387,7 @@ taotao-cloud-project -- 父项目
 +--- Project ':taotao-boot-starter-lock'
 +--- Project ':taotao-boot-starter-logger'
 +--- Project ':taotao-boot-starter-metrics'
-+--- Project ':taotao-boot-starter-micrometer'
++--- Project ':taotao-boot-starter-tracer'
 +--- Project ':taotao-boot-starter-monitor'
 +--- Project ':taotao-boot-starter-mq'
 +--- Project ':taotao-boot-starter-netty'

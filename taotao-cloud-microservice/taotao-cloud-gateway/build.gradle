@@ -35,7 +35,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-prometheus"
     implementation "io.github.shuigedeng:taotao-boot-starter-actuator"
     implementation "io.github.shuigedeng:taotao-boot-starter-security-spring"
-    implementation "io.github.shuigedeng:taotao-boot-starter-micrometer"
+    implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-caffeine"
 

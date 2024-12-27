@@ -28,7 +28,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-data-mybatis"
     implementation "io.github.shuigedeng:taotao-boot-starter-cache-redis"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
-    implementation "io.github.shuigedeng:taotao-boot-starter-micrometer"
+    implementation "io.github.shuigedeng:taotao-boot-starter-tracer"
     implementation "io.github.shuigedeng:taotao-boot-starter-skywalking"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-elastic"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-xxl"
