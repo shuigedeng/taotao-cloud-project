@@ -5,8 +5,8 @@ subprojects {
         implementation "io.github.shuigedeng:taotao-boot-starter-data-mybatis"
 
         implementation "io.netty:netty-all:4.1.116.Final"
-        implementation "com.google.protobuf:protobuf-java:4.29.1"
-        implementation "com.google.protobuf:protobuf-java-util:4.29.1"
+        implementation "com.google.protobuf:protobuf-java:4.29.2"
+        implementation "com.google.protobuf:protobuf-java-util:4.29.2"
         implementation "org.apache.thrift:libthrift:0.21.0"
         implementation "io.grpc:grpc-api:1.69.0"
         implementation "io.grpc:grpc-context:1.69.0"
@@ -24,9 +24,9 @@ subprojects {
         implementation 'javax.xml.ws:jaxws-api:2.3.1'
 
         implementation 'org.slf4j:slf4j-api:2.0.16'
-        implementation 'ch.qos.logback:logback-core:1.5.12'
-        implementation 'ch.qos.logback:logback-access:1.5.12'
-        implementation 'ch.qos.logback:logback-classic:1.5.12'
+        implementation 'ch.qos.logback:logback-core:1.5.15'
+        implementation 'ch.qos.logback:logback-access:1.5.15'
+        implementation 'ch.qos.logback:logback-classic:1.5.15'
 
         testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
         testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'

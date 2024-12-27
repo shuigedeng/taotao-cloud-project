@@ -76,8 +76,8 @@ jar {
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Fat Jar',
-        	'Implementation-Version': version,
-        	'Main-Class': 'Python_Patch_Parser.Main'
+        'Implementation-Version': version,
+        'Main-Class': 'Python_Patch_Parser.Main'
     }
     baseName = project.name + '-jar-with-dependencies'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }

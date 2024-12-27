@@ -95,7 +95,7 @@ intellij {
     //sandboxDir = "${rootProject.rootDir}/idea-sandbox"
 
     // IDEA 的版本
-    version = "2024.2"
+    version = "2024.3"
     // 这里 IU 是指付费版, 也可以选择 IC 对应社区版
     type = "IU"
 
@@ -131,9 +131,9 @@ patchPluginXml {
 
     //最低支持的版本 当前插件的起止 IDE 版本支持
     //版本参考：https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html?from=jetbrains.org#intellij-platform-based-products-of-recent-ide-versions
-    sinceBuild.set("242")
+    sinceBuild.set("243")
     //最高支持的版本，不能不设置，不设置是默认为 project.version
-    untilBuild.set("242.*")
+    untilBuild.set("243.*")
 }
 
 // https://plugins.jetbrains.com/docs/intellij/plugin-signing.html
