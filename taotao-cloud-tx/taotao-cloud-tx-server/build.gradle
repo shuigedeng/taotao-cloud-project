@@ -6,8 +6,10 @@ dependencies {
 }
 
 jar {
-    dependsOn(':taotao-cloud-tx:taotao-cloud-tx-tm:jar')
-    dependsOn(':taotao-cloud-tx:taotao-cloud-tx-rm:jar')
+    from(project(':taotao-cloud-tx:taotao-cloud-tx-common').jar) { into("lib/") }
+    from(project(':taotao-cloud-tx:taotao-cloud-tx-raft').jar) { into("lib/") }
+    from(project(':taotao-cloud-tx:taotao-cloud-tx-rm').jar) { into("lib/") }
+    from(project(':taotao-cloud-tx:taotao-cloud-tx-tm').jar) { into("lib/") }
 
     //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
     //基本的文件名

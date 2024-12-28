@@ -1,50 +1,66 @@
-package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao.cloud.server.core.instance;
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.taotao.cloud.job.server.jobserver.core.instance; // package com.taotao.cloud.server.core.instance;
 //
-//import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
-//import org.apache.commons.lang3.StringUtils;
-//import org.springframework.beans.BeanUtils;
-//import org.springframework.stereotype.Service;
-//import tech.powerjob.common.enums.InstanceStatus;
-//import tech.powerjob.common.enums.TimeExpressionType;
-//import tech.powerjob.common.model.LifeCycle;
-//import tech.powerjob.common.request.ServerStopInstanceReq;
-//import tech.powerjob.common.request.TaskTrackerReportInstanceStatusReq;
-//import tech.powerjob.common.utils.CommonUtils;
-//import tech.powerjob.remote.framework.base.URL;
-//import tech.powerjob.server.common.module.WorkerInfo;
-//import tech.powerjob.server.common.timewheel.holder.HashedWheelTimerHolder;
-//import tech.powerjob.server.common.utils.SpringUtils;
-//import tech.powerjob.server.core.alarm.AlarmCenter;
-//import tech.powerjob.server.core.alarm.AlarmUtils;
-//import tech.powerjob.server.core.alarm.module.JobInstanceAlarm;
-//import tech.powerjob.server.core.service.UserService;
-//import tech.powerjob.server.core.workflow.WorkflowInstanceManager;
-//import tech.powerjob.server.persistence.remote.model.InstanceInfoDO;
-//import tech.powerjob.server.persistence.remote.model.JobInfoDO;
-//import tech.powerjob.server.persistence.remote.model.UserInfoDO;
-//import tech.powerjob.server.persistence.remote.repository.InstanceInfoRepository;
-//import tech.powerjob.server.remote.aware.TransportServiceAware;
-//import tech.powerjob.server.remote.transporter.TransportService;
-//import tech.powerjob.server.remote.transporter.impl.ServerURLFactory;
-//import tech.powerjob.server.remote.worker.WorkerClusterQueryService;
+// import lombok.RequiredArgsConstructor;
+// import lombok.extern.slf4j.Slf4j;
+// import org.apache.commons.lang3.StringUtils;
+// import org.springframework.beans.BeanUtils;
+// import org.springframework.stereotype.Service;
+// import tech.powerjob.common.enums.InstanceStatus;
+// import tech.powerjob.common.enums.TimeExpressionType;
+// import tech.powerjob.common.model.LifeCycle;
+// import tech.powerjob.common.request.ServerStopInstanceReq;
+// import tech.powerjob.common.request.TaskTrackerReportInstanceStatusReq;
+// import tech.powerjob.common.utils.CommonUtils;
+// import tech.powerjob.remote.framework.base.URL;
+// import tech.powerjob.server.common.module.WorkerInfo;
+// import tech.powerjob.server.common.timewheel.holder.HashedWheelTimerHolder;
+// import tech.powerjob.server.common.utils.SpringUtils;
+// import tech.powerjob.server.core.alarm.AlarmCenter;
+// import tech.powerjob.server.core.alarm.AlarmUtils;
+// import tech.powerjob.server.core.alarm.module.JobInstanceAlarm;
+// import tech.powerjob.server.core.service.UserService;
+// import tech.powerjob.server.core.workflow.WorkflowInstanceManager;
+// import tech.powerjob.server.persistence.remote.model.InstanceInfoDO;
+// import tech.powerjob.server.persistence.remote.model.JobInfoDO;
+// import tech.powerjob.server.persistence.remote.model.UserInfoDO;
+// import tech.powerjob.server.persistence.remote.repository.InstanceInfoRepository;
+// import tech.powerjob.server.remote.aware.TransportServiceAware;
+// import tech.powerjob.server.remote.transporter.TransportService;
+// import tech.powerjob.server.remote.transporter.impl.ServerURLFactory;
+// import tech.powerjob.server.remote.worker.WorkerClusterQueryService;
 //
-//import java.util.Date;
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.concurrent.ExecutionException;
-//import java.util.concurrent.TimeUnit;
+// import java.util.Date;
+// import java.util.List;
+// import java.util.Optional;
+// import java.util.concurrent.ExecutionException;
+// import java.util.concurrent.TimeUnit;
 //
-///**
+/// **
 // * 管理被调度的任务实例（状态更新相关）
 // *
 // * @author shuigedeng
 // * @since 2020/4/7
 // */
-//@Slf4j
-//@Service
-//@RequiredArgsConstructor
-//public class InstanceManager implements TransportServiceAware {
+// @Slf4j
+// @Service
+// @RequiredArgsConstructor
+// public class InstanceManager implements TransportServiceAware {
 //
 //    private final AlarmCenter alarmCenter;
 //
@@ -86,7 +102,8 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //
 //        // 考虑极端情况：Processor 处理耗时小于 server 写 DB 耗时，会导致状态上报时无 taskTracker 地址，此处等待后重新从DB获取数据 GitHub#620
 //        if (StringUtils.isEmpty(instanceInfo.getTaskTrackerAddress())) {
-//            log.warn("[InstanceManager-{}] TaskTrackerAddress is empty, server will wait then acquire again!", instanceId);
+//            log.warn("[InstanceManager-{}] TaskTrackerAddress is empty, server will wait then acquire again!",
+// instanceId);
 //            CommonUtils.easySleep(277);
 //            instanceInfo = instanceInfoRepository.findByInstanceId(instanceId);
 //        }
@@ -94,12 +111,14 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //        int originStatus = instanceInfo.getStatus();
 //        // 丢弃过期的上报数据
 //        if (req.getReportTime() <= instanceInfo.getLastReportTime()) {
-//            log.warn("[InstanceManager-{}] receive the expired status report request: {}, this report will be dropped.", instanceId, req);
+//            log.warn("[InstanceManager-{}] receive the expired status report request: {}, this report will be
+// dropped.", instanceId, req);
 //            return;
 //        }
 //        // 丢弃非目标 TaskTracker 的上报数据（脑裂情况）
 //        if (!req.getSourceAddress().equals(instanceInfo.getTaskTrackerAddress())) {
-//            log.warn("[InstanceManager-{}] receive the other TaskTracker's report: {}, but current TaskTracker is {}, this report will be dropped.", instanceId, req, instanceInfo.getTaskTrackerAddress());
+//            log.warn("[InstanceManager-{}] receive the other TaskTracker's report: {}, but current TaskTracker is {},
+// this report will be dropped.", instanceId, req, instanceInfo.getTaskTrackerAddress());
 //            return;
 //        }
 //
@@ -116,7 +135,8 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //            // 如果实例处于失败状态，则说明该 worker 失联了一段时间，被 server 判定为宕机，而此时该秒级任务有可能已经重新派发了，故需要 Kill 掉该实例
 //            // fix issue 375
 //            if (instanceInfo.getStatus() == InstanceStatus.FAILED.getV()) {
-//                log.warn("[InstanceManager-{}] receive TaskTracker's report: {}, but current instance is already failed, this instance should be killed.", instanceId, req);
+//                log.warn("[InstanceManager-{}] receive TaskTracker's report: {}, but current instance is already
+// failed, this instance should be killed.", instanceId, req);
 //                stopInstance(instanceId, instanceInfo);
 //                return;
 //            }
@@ -133,7 +153,8 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //            instanceInfoRepository.saveAndFlush(instanceInfo);
 //            // 任务需要告警
 //            if (req.isNeedAlert()) {
-//                log.info("[InstanceManager-{}] receive frequent task alert req,time:{},content:{}", instanceId, req.getReportTime(), req.getAlertContent());
+//                log.info("[InstanceManager-{}] receive frequent task alert req,time:{},content:{}", instanceId,
+// req.getReportTime(), req.getAlertContent());
 //                alert(instanceId, req.getAlertContent());
 //            }
 //            return;
@@ -156,7 +177,8 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //            // 当前重试次数 <= 最大重试次数，进行重试 （第一次运行，runningTimes为1，重试一次，instanceRetryNum也为1，故需要 =）
 //            if (instanceInfo.getRunningTimes() <= jobInfo.getInstanceRetryNum()) {
 //
-//                log.info("[InstanceManager-{}] instance execute failed but will take the {}th retry.", instanceId, instanceInfo.getRunningTimes());
+//                log.info("[InstanceManager-{}] instance execute failed but will take the {}th retry.", instanceId,
+// instanceInfo.getRunningTimes());
 //
 //                // 延迟10S重试（由于重试不改变 instanceId，如果派发到同一台机器，上一个 TaskTracker 还处于资源释放阶段，无法创建新的TaskTracker，任务失败）
 //                instanceInfo.setExpectedTriggerTime(System.currentTimeMillis() + 10000);
@@ -166,7 +188,8 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //                instanceInfo.setStatus(InstanceStatus.WAITING_DISPATCH.getV());
 //            } else {
 //                instanceInfo.setResult(req.getResult());
-//                instanceInfo.setFinishedTime(req.getEndTime() == null ? System.currentTimeMillis() : req.getEndTime());
+//                instanceInfo.setFinishedTime(req.getEndTime() == null ? System.currentTimeMillis() :
+// req.getEndTime());
 //                finished = true;
 //                log.info("[InstanceManager-{}] instance execute failed and have no chance to retry.", instanceId);
 //            }
@@ -179,14 +202,19 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 //            return;
 //        }
 //        // 带条件更新
-//        final int i = instanceInfoRepository.updateStatusChangeInfoByInstanceIdAndStatus(instanceInfo.getLastReportTime(), instanceInfo.getGmtModified(), instanceInfo.getRunningTimes(), instanceInfo.getStatus(), instanceInfo.getInstanceId(), originStatus);
+//        final int i =
+// instanceInfoRepository.updateStatusChangeInfoByInstanceIdAndStatus(instanceInfo.getLastReportTime(),
+// instanceInfo.getGmtModified(), instanceInfo.getRunningTimes(), instanceInfo.getStatus(),
+// instanceInfo.getInstanceId(), originStatus);
 //        if (i == 0) {
-//            log.warn("[InstanceManager-{}] update instance status failed, maybe the instance status has been changed by other thread. discard this status change,{}", instanceId, instanceInfo);
+//            log.warn("[InstanceManager-{}] update instance status failed, maybe the instance status has been changed
+// by other thread. discard this status change,{}", instanceId, instanceInfo);
 //        }
 //    }
 //
 //    private void stopInstance(Long instanceId, InstanceInfoDO instanceInfo) {
-//        Optional<WorkerInfo> workerInfoOpt = workerClusterQueryService.getWorkerInfoByAddress(instanceInfo.getAppId(), instanceInfo.getTaskTrackerAddress());
+//        Optional<WorkerInfo> workerInfoOpt = workerClusterQueryService.getWorkerInfoByAddress(instanceInfo.getAppId(),
+// instanceInfo.getTaskTrackerAddress());
 //        if (workerInfoOpt.isPresent()) {
 //            ServerStopInstanceReq stopInstanceReq = new ServerStopInstanceReq(instanceId);
 //            WorkerInfo workerInfo = workerInfoOpt.get();
@@ -230,7 +258,8 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 ////        JobInstanceAlarm content = new JobInstanceAlarm();
 ////        BeanUtils.copyProperties(jobInfo, content);
 ////        BeanUtils.copyProperties(instanceInfo, content);
-////        List<UserInfoDO> userList = SpringUtils.getBean(UserService.class).fetchNotifyUserList(jobInfo.getNotifyUserIds());
+////        List<UserInfoDO> userList =
+// SpringUtils.getBean(UserService.class).fetchNotifyUserList(jobInfo.getNotifyUserIds());
 ////        if (!StringUtils.isEmpty(alertContent)) {
 ////            content.setResult(alertContent);
 ////        }
@@ -241,4 +270,4 @@ package com.taotao.cloud.job.server.jobserver.core.instance;//package com.taotao
 ////    public void setTransportService(TransportService transportService) {
 ////        this.transportService = transportService;
 ////    }
-//}
+// }

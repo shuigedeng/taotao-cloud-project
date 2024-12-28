@@ -1,16 +1,33 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.server.jobserver.core.timewheel;
 
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import lombok.extern.slf4j.Slf4j;
-
+import com.taotao.cloud.job.common.utils.CommonUtils;
+import com.taotao.cloud.job.server.jobserver.extension.threadpool.RejectedExecutionHandlerFactory;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HashedWheelTimer implements Timer {
@@ -53,15 +70,22 @@ public class HashedWheelTimer implements Timer {
         // 初始化执行线程池
         if (processThreadNum <= 0) {
             taskProcessPool = null;
-        }else {
-            ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("HashedWheelTimer-Executor-%d").build();
+        } else {
+            ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                    .setNameFormat("HashedWheelTimer-Executor-%d")
+                    .build();
             // 这里需要调整一下队列大小
             BlockingQueue<Runnable> queue = Queues.newLinkedBlockingQueue(8192);
             int core = Math.max(Runtime.getRuntime().availableProcessors(), processThreadNum);
             // 基本都是 io 密集型任务
-            taskProcessPool = new ThreadPoolExecutor(core, 2 * core,
-                    60, TimeUnit.SECONDS,
-                    queue, threadFactory, RejectedExecutionHandlerFactory.newCallerRun("TtcJobTimeWheelPool"));
+            taskProcessPool = new ThreadPoolExecutor(
+                    core,
+                    2 * core,
+                    60,
+                    TimeUnit.SECONDS,
+                    queue,
+                    threadFactory,
+                    RejectedExecutionHandlerFactory.newCallerRun("TtcJobTimeWheelPool"));
         }
 
         startTime = System.currentTimeMillis();
@@ -95,7 +119,7 @@ public class HashedWheelTimer implements Timer {
         while (!taskProcessPool.isTerminated()) {
             try {
                 Thread.sleep(100);
-            }catch (Exception ignore) {
+            } catch (Exception ignore) {
             }
         }
         return indicator.getUnprocessedTasks();
@@ -104,7 +128,7 @@ public class HashedWheelTimer implements Timer {
     /**
      * 包装 TimerTask，维护预期执行时间、总圈数等数据
      */
-    private  final class HashedWheelTimerFuture implements TimerFuture {
+    private final class HashedWheelTimerFuture implements TimerFuture {
 
         // 预期执行时间
         private final long targetTime;
@@ -185,7 +209,7 @@ public class HashedWheelTimer implements Timer {
                     try {
                         // 提交执行
                         runTask(timerFuture);
-                    }catch (Exception ignore) {
+                    } catch (Exception ignore) {
                     } finally {
                         timerFuture.status = HashedWheelTimerFuture.FINISHED;
                     }
@@ -194,7 +218,6 @@ public class HashedWheelTimer implements Timer {
 
                 return false;
             });
-
         }
     }
 
@@ -202,7 +225,7 @@ public class HashedWheelTimer implements Timer {
         timerFuture.status = HashedWheelTimerFuture.RUNNING;
         if (taskProcessPool == null) {
             timerFuture.timerTask.run();
-        }else {
+        } else {
             taskProcessPool.submit(timerFuture.timerTask);
         }
     }
@@ -233,7 +256,7 @@ public class HashedWheelTimer implements Timer {
                 HashedWheelBucket bucket = wheel[currentIndex];
                 bucket.expireTimerTasks(tick);
 
-                tick ++;
+                tick++;
             }
             latch.countDown();
         }
@@ -250,7 +273,7 @@ public class HashedWheelTimer implements Timer {
             if (sleepTime > 0) {
                 try {
                     Thread.sleep(sleepTime);
-                }catch (Exception ignore) {
+                } catch (Exception ignore) {
                 }
             }
         }
@@ -302,7 +325,7 @@ public class HashedWheelTimer implements Timer {
         public Set<TimerTask> getUnprocessedTasks() {
             try {
                 latch.await();
-            }catch (Exception ignore) {
+            } catch (Exception ignore) {
             }
 
             Set<TimerTask> tasks = Sets.newHashSet();

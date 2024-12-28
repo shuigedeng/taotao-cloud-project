@@ -1,5 +1,10 @@
 subprojects {
     dependencies {
+        api 'org.springframework.boot:spring-boot-starter-web'
+        api 'org.springframework.boot:spring-boot-starter-aop'
+        api 'io.netty:netty-all'
+        api 'com.alibaba.fastjson2:fastjson2'
+
         implementation 'org.slf4j:slf4j-api:2.0.16'
         implementation 'ch.qos.logback:logback-core:1.5.15'
         implementation 'ch.qos.logback:logback-access:1.5.15'
@@ -18,42 +23,4 @@ subprojects {
         annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
     }
 
-    jar {
-        enabled = true
-        //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
-        //archivesBaseName = 'Example'//基本的文件名
-        //文件夹大于65535个，需要开启zip64
-        zip64=true
-
-        //from sourceSets.main.output
-        //dependsOn configurations.runtimeClasspath
-
-        //gradle 处理重复文件，include 最后一个重复文件“胜出”的默认策略。
-        //duplicatesStrategy = 'include' // <<---- addition
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-        manifest {
-            attributes(
-                    'Implementation-Title': 'Gradle Jar Combine Example',
-                    'Implementation-Version': version
-            )
-        }
-
-        //打包依赖包
-        //from {
-        //    (configurations.runtimeClasspath).collect {
-        //        it.isDirectory() ? it : zipTree(it)
-        //    }
-        //}
-
-        //delete "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
-        //from configurations.runtimeClasspath
-        //into "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
-        //from configurations.compileClasspath
-        //into "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
-
-        //into('lib') { // 将第三方jar放入 lib目录中
-        //    from configurations.compile
-        //}
-    }
 }

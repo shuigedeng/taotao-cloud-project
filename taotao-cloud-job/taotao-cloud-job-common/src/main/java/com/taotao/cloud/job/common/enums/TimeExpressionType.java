@@ -16,9 +16,6 @@ import java.util.List;
  * @author shuigedeng
  * @since 2020/3/30
  */
-@Getter
-@AllArgsConstructor
-@ToString
 public enum TimeExpressionType {
 
     CRON(0),
@@ -55,4 +52,12 @@ public enum TimeExpressionType {
         }
         throw new IllegalArgumentException("unknown TimeExpressionType of " + v);
     }
+
+	TimeExpressionType(int v) {
+		this.v = v;
+	}
+
+	public int getV() {
+		return v;
+	}
 }

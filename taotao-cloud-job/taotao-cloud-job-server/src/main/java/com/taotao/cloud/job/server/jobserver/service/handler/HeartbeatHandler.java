@@ -1,34 +1,61 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.server.jobserver.service.handler;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Sets;
+import com.taotao.cloud.job.common.constant.RemoteConstant;
+import com.taotao.cloud.job.common.exception.TtcJobException;
+import com.taotao.cloud.job.server.jobserver.common.config.TtcJobServerConfig;
+import com.taotao.cloud.job.server.jobserver.common.grpc.PingServerRpcClient;
+import com.taotao.cloud.job.server.jobserver.extension.lock.LockService;
+import com.taotao.cloud.job.server.jobserver.persistence.domain.AppInfo;
+import com.taotao.cloud.job.server.jobserver.persistence.mapper.AppInfoMapper;
+import com.taotao.cloud.remote.protos.CommonCausa;
+import com.taotao.cloud.remote.protos.ServerDiscoverCausa;
 import io.grpc.stub.StreamObserver;
+import java.util.Objects;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-import java.util.Set;
-
 @Component
 @Slf4j
-public class HeartbeatHandler implements RpcHandler{
+public class HeartbeatHandler implements RpcHandler {
     private static final int RETRY_TIMES = 10;
     private static final String SERVER_ELECT_LOCK = "server_elect_%d";
     private String ownerIp;
 
     @Autowired
     private LockService lockService;
+
     @Autowired
     AppInfoMapper appInfoMapper;
+
     @Autowired
     PingServerRpcClient pingServerRpcService;
+
     @Autowired
     TtcJobServerConfig ttcJobServerConfig;
 
     @Override
-    public void handle(Object req,StreamObserver<CommonCausa.Response> responseObserver) {
+    public void handle(Object req, StreamObserver<CommonCausa.Response> responseObserver) {
         ServerDiscoverCausa.HeartbeatCheck request = (ServerDiscoverCausa.HeartbeatCheck) req;
         // if is local ,return now
         if (checkLocalServer(request.getCurrentServer())) {
@@ -45,8 +72,8 @@ public class HeartbeatHandler implements RpcHandler{
         for (int i = 0; i < RETRY_TIMES; i++) {
 
             // get server in db
-            AppInfo appInfo = appInfoMapper.selectOne(new QueryWrapper<AppInfo>()
-                    .lambda().eq(AppInfo::getId, appId));
+            AppInfo appInfo =
+                    appInfoMapper.selectOne(new QueryWrapper<AppInfo>().lambda().eq(AppInfo::getId, appId));
             if (appInfo == null) {
                 throw new TtcJobException(appId + " is not registered!");
             }
@@ -73,8 +100,8 @@ public class HeartbeatHandler implements RpcHandler{
             try {
 
                 // double check
-                appInfo = appInfoMapper.selectOne(new QueryWrapper<AppInfo>()
-                        .lambda().eq(AppInfo::getId, appId));
+                appInfo = appInfoMapper.selectOne(
+                        new QueryWrapper<AppInfo>().lambda().eq(AppInfo::getId, appId));
                 String address = activeAddress(appInfo.getCurrentServer(), downServerCache);
                 if (StringUtils.isNotEmpty(address)) {
                     parseResponse(address, responseObserver);
@@ -85,7 +112,10 @@ public class HeartbeatHandler implements RpcHandler{
 
                 appInfo.setCurrentServer(ownerIp);
                 appInfoMapper.updateById(appInfo);
-                log.info("[ServerElection] this server({}) become the new server for app(appId={}).", appInfo.getCurrentServer(), appId);
+                log.info(
+                        "[ServerElection] this server({}) become the new server for app(appId={}).",
+                        appInfo.getCurrentServer(),
+                        appId);
                 parseResponse(ownerIp, responseObserver);
                 return;
 
@@ -107,7 +137,9 @@ public class HeartbeatHandler implements RpcHandler{
             return null;
         }
 
-        ServerDiscoverCausa.Ping ping = ServerDiscoverCausa.Ping.newBuilder().setTargetServer(serverAddress).build();
+        ServerDiscoverCausa.Ping ping = ServerDiscoverCausa.Ping.newBuilder()
+                .setTargetServer(serverAddress)
+                .build();
 
         // ping the targetServer
         CommonCausa.Response response = (CommonCausa.Response) pingServerRpcService.call(ping);
@@ -116,19 +148,17 @@ public class HeartbeatHandler implements RpcHandler{
         }
         downServerCache.add(serverAddress);
         return null;
-
-
     }
 
     private void parseResponse(String currentServer, StreamObserver<CommonCausa.Response> responseObserver) {
         CommonCausa.Response response = CommonCausa.Response.newBuilder()
                 .setCode(RemoteConstant.SUCCESS)
-                .setAvailableServer(
-                        ServerDiscoverCausa.AvailableServer.newBuilder().setAvailableServer(currentServer).build()
-                ).build();
+                .setAvailableServer(ServerDiscoverCausa.AvailableServer.newBuilder()
+                        .setAvailableServer(currentServer)
+                        .build())
+                .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
-
     }
 
     private boolean checkLocalServer(String currentServer) {

@@ -1,20 +1,34 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.server.jobserver.extension.lock.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.annotation.PostConstruct;
+import com.taotao.cloud.job.server.jobserver.extension.lock.LockService;
+import com.taotao.cloud.job.server.jobserver.persistence.domain.DistributedLock;
+import com.taotao.cloud.job.server.jobserver.persistence.mapper.DistributedLockMapper;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
+import javax.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
@@ -23,7 +37,6 @@ public class DBLockService extends ServiceImpl<DistributedLockMapper, Distribute
 
     @Autowired
     DistributedLockMapper distributedLockMapper;
-
 
     @PostConstruct
     public void init() throws UnknownHostException {
@@ -75,5 +88,4 @@ public class DBLockService extends ServiceImpl<DistributedLockMapper, Distribute
             }
         }
     }
-
 }

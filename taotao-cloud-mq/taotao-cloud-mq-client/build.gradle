@@ -8,14 +8,3 @@ dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-broker")
 }
 
-jar {
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-common:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-cluster:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-consistency:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-metrics:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-plugin:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-proxy:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-client:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-broker:jar")
-
-}

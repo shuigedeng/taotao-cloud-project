@@ -1,8 +1,3 @@
 dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-common")
 }
-
-jar {
-    dependsOn(":taotao-cloud-job:taotao-cloud-job-common:jar")
-
-}

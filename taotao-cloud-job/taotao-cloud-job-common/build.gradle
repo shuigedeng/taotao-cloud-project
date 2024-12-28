@@ -1,72 +1,93 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-
-        maven {
-            url "https://repo1.maven.org/maven2"
-        }
-
-        maven {
-            allowInsecureProtocol = true
-            url 'https://maven.aliyun.com/repository/public'
-        }
-        maven {
-            allowInsecureProtocol = true
-
-            credentials {
-                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
-                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
-            }
-            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
-        }
-        //阿里云新的仓库
-        maven {
-            credentials {
-                username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
-                password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
-            }
-            url 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
-        }
-
-        maven {
-            allowInsecureProtocol = true
-            url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
-        }
-
-        maven {
-            allowInsecureProtocol = true
-            url "https://mirrors.huaweicloud.com/repository/maven/"
-        }
-
-        maven { url "https://repo.spring.io/snapshot" }
-        maven { url "https://repo.spring.io/milestone" }
-        maven { url 'https://repo.spring.io/release' }
-
-        maven { url "https://maven.aliyun.com/repository/central" }
-        maven { url "https://maven.aliyun.com/repository/public" }
-        maven { url "https://maven.aliyun.com/repository/google" }
-        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
-        maven { url "https://maven.aliyun.com/repository/spring" }
-        maven { url "https://maven.aliyun.com/repository/spring-plugin" }
-        maven { url "https://maven.aliyun.com/repository/grails-core" }
-        maven { url "https://maven.aliyun.com/repository/apache-snapshots" }
-
-        maven { url "https://repository.aspose.com/repo/" }
-        maven { url "https://repo.e-iceblue.cn/repository/maven-public/" }
-
-        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
-    }
-
-    dependencies {
-        classpath "com.google.protobuf:protobuf-gradle-plugin:0.9.4"
-    }
-}
+//buildscript {
+//    repositories {
+//        mavenLocal()
+//        mavenCentral()
+//
+//        maven {
+//            url "https://repo1.maven.org/maven2"
+//        }
+//
+//        maven {
+//            allowInsecureProtocol = true
+//            url 'https://maven.aliyun.com/repository/public'
+//        }
+//        maven {
+//            allowInsecureProtocol = true
+//
+//            credentials {
+//                username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+//                password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+//            }
+//            url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+//        }
+//        //阿里云新的仓库
+//        maven {
+//            credentials {
+//                username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+//                password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+//            }
+//            url 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
+//        }
+//
+//        maven {
+//            allowInsecureProtocol = true
+//            url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
+//        }
+//
+//        maven {
+//            allowInsecureProtocol = true
+//            url "https://mirrors.huaweicloud.com/repository/maven/"
+//        }
+//
+//        maven { url "https://repo.spring.io/snapshot" }
+//        maven { url "https://repo.spring.io/milestone" }
+//        maven { url 'https://repo.spring.io/release' }
+//
+//        maven { url "https://maven.aliyun.com/repository/central" }
+//        maven { url "https://maven.aliyun.com/repository/public" }
+//        maven { url "https://maven.aliyun.com/repository/google" }
+//        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+//        maven { url "https://maven.aliyun.com/repository/spring" }
+//        maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+//        maven { url "https://maven.aliyun.com/repository/grails-core" }
+//        maven { url "https://maven.aliyun.com/repository/apache-snapshots" }
+//
+//        maven { url "https://repository.aspose.com/repo/" }
+//        maven { url "https://repo.e-iceblue.cn/repository/maven-public/" }
+//
+//        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+//    }
+//
+//    dependencies {
+//        classpath "com.google.protobuf:protobuf-gradle-plugin:0.9.4"
+//    }
+//}
 
 apply plugin: "com.google.protobuf"
 
 dependencies {
+    api "io.github.shuigedeng:taotao-boot-starter-core"
+    api "io.github.shuigedeng:taotao-boot-starter-grpc"
+    api "io.github.shuigedeng:taotao-boot-starter-data-mybatis"
 
+    api "io.netty:netty-all:4.1.116.Final"
+    api "com.google.protobuf:protobuf-java:4.29.2"
+    api "com.google.protobuf:protobuf-java-util:4.29.2"
+    api "org.apache.thrift:libthrift:0.21.0"
+    api "io.grpc:grpc-api:1.69.0"
+    api "io.grpc:grpc-context:1.69.0"
+    api "io.grpc:grpc-core:1.69.0"
+    api "io.grpc:grpc-netty:1.69.0"
+    api "io.grpc:grpc-netty-shaded:1.69.0"
+    api "io.grpc:grpc-protobuf:1.69.0"
+    api "io.grpc:grpc-protobuf-lite:1.69.0"
+    api "io.grpc:grpc-stub:1.69.0"
+    api "io.grpc:grpc-services:1.69.0"
+    testImplementation("io.grpc:grpc-testing:1.69.0")
+    api 'com.google.code.gson:gson:2.11.0'
+    api 'com.google.guava:guava:33.4.0-jre'
+    api 'javax.annotation:javax.annotation-api:1.3.2'
+    api 'javax.xml.ws:jaxws-api:2.3.1'
 }
 
 protobuf {

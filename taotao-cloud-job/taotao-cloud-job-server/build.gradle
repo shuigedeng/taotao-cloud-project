@@ -5,12 +5,3 @@ dependencies {
     api project(":taotao-cloud-job:taotao-cloud-job-api")
     api project(":taotao-cloud-job:taotao-cloud-job-dag")
 }
-
-jar {
-    dependsOn(":taotao-cloud-job:taotao-cloud-job-common:jar")
-    dependsOn(":taotao-cloud-job:taotao-cloud-job-worker:jar")
-    dependsOn(":taotao-cloud-job:taotao-cloud-job-retry:jar")
-    dependsOn(":taotao-cloud-job:taotao-cloud-job-api:jar")
-    dependsOn(":taotao-cloud-job:taotao-cloud-job-dag:jar")
-
-}

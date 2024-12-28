@@ -8,7 +8,6 @@ import org.springframework.boot.json.JsonParser;
  * @author shuigedeng
  * @since 2022/3/22
  */
-@Data
 public class LifeCycle {
 
     public static final LifeCycle EMPTY_LIFE_CYCLE = new LifeCycle();
@@ -27,4 +26,19 @@ public class LifeCycle {
         }
     }
 
+	public Long getStart() {
+		return start;
+	}
+
+	public void setStart(Long start) {
+		this.start = start;
+	}
+
+	public Long getEnd() {
+		return end;
+	}
+
+	public void setEnd(Long end) {
+		this.end = end;
+	}
 }

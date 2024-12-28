@@ -1,7 +1,23 @@
+/*
+ * Copyright (c) 2020-2030, Shuigedeng (981376577@qq.com & https://blog.taotaocloud.top/).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.taotao.cloud.job.server.jobserver.core.uid;
 
+import com.taotao.cloud.job.server.jobserver.common.config.TtcJobServerConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,8 +36,7 @@ public class IdGenerateService {
 
     private static final int DATA_CENTER_ID = 0;
 
-
-    public IdGenerateService(TtcJobServerConfig ttcJobServerConfig){
+    public IdGenerateService(TtcJobServerConfig ttcJobServerConfig) {
         String ip = ttcJobServerConfig.getAddress();
         snowFlakeIdGenerator = new SnowFlakeIdGenerator(DATA_CENTER_ID, ip);
         log.info("[IdGenerateService] initialize IdGenerateService successfully, IP:{}", ip);
@@ -29,10 +44,10 @@ public class IdGenerateService {
 
     /**
      * 分配分布式唯一ID
+     *
      * @return 分布式唯一ID
      */
     public long allocate() {
         return snowFlakeIdGenerator.nextId();
     }
-
 }

@@ -9,13 +9,15 @@ dependencies {
 }
 
 jar {
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-common:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-cluster:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-consistency:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-metrics:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-plugin:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-proxy:jar")
-    dependsOn(":taotao-cloud-mq:taotao-cloud-mq-client:jar")
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-broker").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-client").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-cluster").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-common").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-consistency").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-metrics").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-plugin").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-proxy").jar) { into("lib/") }
+    from(project(":taotao-cloud-mq:taotao-cloud-mq-raft").jar) { into("lib/") }
 
     //详细信息参考 https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html
     //基本的文件名
