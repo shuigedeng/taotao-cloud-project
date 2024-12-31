@@ -87,7 +87,7 @@ buildscript {
         /* 添加插件依赖路径（通过jar方式） */
 
         //https://plugins.gradle.org/m2/com/github/spotbugs/snom/spotbugs-gradle-plugin/
-        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.26"
+        classpath "com.github.spotbugs.snom:spotbugs-gradle-plugin:6.0.27"
 
         //https://github.com/spring-io/spring-javaformat/
         classpath "io.spring.javaformat:spring-javaformat-gradle-plugin:0.0.43"
@@ -95,7 +95,7 @@ buildscript {
         //代码混淆工具
         //https://github.com/Guardsquare/proguard
         //https://www.guardsquare.com/manual/quickstart
-        classpath "com.guardsquare:proguard-gradle:7.6.0"
+        classpath "com.guardsquare:proguard-gradle:7.6.1"
 
         //https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration-intellij-extension
         //https://plugins.gradle.org/plugin/org.jetbrains.intellij

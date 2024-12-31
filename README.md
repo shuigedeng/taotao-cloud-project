@@ -5,24 +5,24 @@
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache%202-green" alt="License"/>
   <img src="https://img.shields.io/badge/taotao--cloud--project-2025.01-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring-6.2.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_boot-3.4.0-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud-2023.0.4-yellowgree" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.1.3-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_cloud_tencent-1.14.0--2023.0.0--RC2-orange" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/netty-4.1.115.Final-blue" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/spring_security-6.4.1-brightgreen" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/elasticsearch-8.16.1-green" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring-6.2.1-red" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_boot-3.4.1-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud-2024.0.0-yellowgree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_alibaba-2023.0.3.2-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_cloud_tencent-2.0.0.0--2022.0.5-orange" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/netty-4.1.116.Final-blue" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/spring_security-6.4.2-brightgreen" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/elasticsearch-8.17.0-green" alt="Downloads"/>
   <img src="https://img.shields.io/badge/mybatis_plus-3.5.9-yellow" alt="Downloads"/>
   <img src="https://img.shields.io/badge/knife4j-4.5.0-brightgreen" alt="Downloads"/>
   <img src="https://img.shields.io/badge/swagger-3.0.0-red" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/redisson-3.39.0-lightgrey" alt="Downloads"/>
-  <img src="https://img.shields.io/badge/hutool-6.0.0--M18-gree" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/redisson-3.41.0-lightgrey" alt="Downloads"/>
+  <img src="https://img.shields.io/badge/hutool-6.0.0--M19-gree" alt="Downloads"/>
 </p>
 
 ## 1. 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
-**taotao-cloud** (taotao云平台) 基于gradle8.12、jdk21, 支持graalvm21, 采用最新的spring 6.2.0、SpringBoot 3.4.0、SpringCloud 2023.0.4、SpringSecurity 6.4.1、Nacos 2.4.3、Mybatis-Plus 3.5.9、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
+**taotao-cloud** (taotao云平台) 基于gradle8.12、jdk21, 支持graalvm21, 采用最新的spring 6.2.1、SpringBoot 3.4.1、SpringCloud 2024.0.0、SpringSecurity 6.4.2、Nacos 2.4.3、Mybatis-Plus 3.5.9、Redis 7.4.0等框架，开发的一款企业级微服务架构的云服务平台， 
 
 具有组件化、高性能、功能丰富的特点。代码简洁，架构清晰，组件可自由搭配，遵循SpringBoot编程思想，高度模块化和可配置化。
 
@@ -149,33 +149,33 @@ CLOUD:
 
 ## 5. 核心依赖
 
-| 依赖                   | 版本                  |
-|----------------------|---------------------|
-| Spring               | 6.2.0               |
-| Spring Boot          | 3.4.0               |
-| Spring Cloud         | 2023.0.4            |
-| Spring Cloud Alibaba | 2023.0.1.3          |
-| Spring Cloud Tencent | 1.14.0-2023.0.0-RC2 |
-| Spring Cloud huawei  | 1.11.10-2023.0.x    |
-| Seata                | 2.2.0               |
-| Sentinel             | 1.8.8               |
-| Spring-kafka         | 3.3.0               |
-| Roketmq              | 5.2.1               |
-| Spring Security      | 6.4.1               |
-| Mybatis Plus         | 3.5.9               |
-| Hutool               | 6.0.0-M19           |
-| Mysql                | 9.1.0               |
-| Querydsl             | 5.1.0               |
-| Swagger              | 3.0.0               |
-| Knife4j              | 4.5.0               |
-| Redisson             | 3.39.0              |
-| Lettuce              | 6.4.1.RELEASE       |
-| Elasticsearch        | 8.16.1              |
-| Xxl-job              | 2.4.2               |
-| Guava                | 33.3.1-jre          |
-| Grpc                 | 1.68.1              |
-| Arthas               | 4.0.3               |
-| Netty                | 4.1.115.Final       |
+| 依赖                   | 版本               |
+|----------------------|------------------|
+| Spring               | 6.2.1            |
+| Spring Boot          | 3.4.1            |
+| Spring Cloud         | 2024.0.0         |
+| Spring Cloud Alibaba | 2023.0.3.2       |
+| Spring Cloud Tencent | 2.0.0.0-2022.0.5 |
+| Spring Cloud huawei  | 1.11.10-2023.0.x |
+| Seata                | 2.2.0            |
+| Sentinel             | 1.8.8            |
+| Spring-kafka         | 3.3.1            |
+| Roketmq              | 5.2.1            |
+| Spring Security      | 6.4.2            |
+| Mybatis Plus         | 3.5.9            |
+| Hutool               | 6.0.0-M19        |
+| Mysql                | 9.1.0            |
+| Querydsl             | 5.1.0            |
+| Swagger              | 3.0.0            |
+| Knife4j              | 4.5.0            |
+| Redisson             | 3.41.0           |
+| Lettuce              | 6.5.2.RELEASE    |
+| Elasticsearch        | 8.17.0           |
+| Xxl-job              | 2.4.2            |
+| Guava                | 33.4.0-jre       |
+| Grpc                 | 1.69.0           |
+| Arthas               | 4.0.3            |
+| Netty                | 4.1.116.Final    |
 
 ## 6. 演示地址 (云服务器已到期)
 
@@ -207,7 +207,7 @@ CLOUD:
 ## 7. 功能特点
 
 * **微服务技术架构**: 前后端分离的企业级微服务架构、主要针对解决微服务和业务开发时常见的 **非功能性需求** 简化开发工作、提高生产率、解决通用问题
-* **主体框架**：采用最新的`Spring Boot 3.4.0`、`Spring Cloud 2023.0.4`、`Spring Cloud Alibaba 2023.0.1.3` 版本进行设计
+* **主体框架**：采用最新的`Spring Boot 3.4.1`、`Spring Cloud 2024.0.0`、`Spring Cloud Alibaba 2023.0.3.2` 版本进行设计
 * **统一注册**：支持`spring cloud alibaba Nacos`作为注册中心，实现多配置、分群组、分命名空间、多业务模块的注册和发现功能
 * **统一认证**：统一Oauth2认证协议，采用jwt的方式，实现统一认证，完备的RBAC权限管理、数据权限处理、网关统一鉴权、灰度发布。 支持多种登录方式，如`账号密码`，`验证码登陆`、`支付宝`、`钉钉`、`码云`、`GitHub`、`GitLab`、`QQ`、`微信`、`企业微信`、`微博`等第三方登录，`微信小程序登录`，`指纹登录`，`手势登录`，`手机号码登录`，`人脸识别登录`等 优化Spring Security内部实现 ,实现API调用的统一出口和权限认证授权中心
 * **业务监控**：利用`Spring Boot admin`监控各个独立服务的运行状态
@@ -252,6 +252,12 @@ CLOUD:
 * **taotao-cloud-member**: [https://github.com/shuigedeng/taotao-cloud-member](https://github.com/shuigedeng/taotao-cloud-member)
 
 
+* **taotao-cloud-auth**: [https://github.com/shuigedeng/taotao-cloud-auth](https://github.com/shuigedeng/taotao-cloud-auth)
+
+
+* **taotao-cloud-sys**: [https://github.com/shuigedeng/taotao-cloud-sys](https://github.com/shuigedeng/taotao-cloud-sys)
+
+
 > PS: 借鉴了其他开源项目
 
 
@@ -260,7 +266,7 @@ CLOUD:
 ```
 taotao-cloud-project -- 父项目
 │  ├─taotao-cloud-bigdata -- 大数据模块
-│  ├─taotao-cloud-cache -- 本地缓存模块
+│  ├─taotao-cloud-cache -- 本地缓存中间件
 │  ├─taotao-cloud-design-partterns  -- 设计模式
 │  ├─taotao-cloud-jdbcpool  -- jdbcpool模块
 │  ├─taotao-cloud-microservice -- 微服务模块
@@ -276,11 +282,11 @@ taotao-cloud-project -- 父项目
 │  │  ├─taotao-cloud-recommend  -- 推荐模块
 │  │  ├─taotao-cloud-shell  -- shell模块
 │  │  ├─taotao-cloud-xxljob  -- job模块
-│  ├─taotao-cloud-mq -- 分布式消息中间件
 │  ├─taotao-cloud-plugin -- 插件模块
-│  ├─taotao-cloud-job -- 分布式任务调度中间件
 │  ├─taotao-cloud-python -- python模块
 │  ├─taotao-cloud-scala -- scala模块
+│  ├─taotao-cloud-mq -- 分布式消息中间件
+│  ├─taotao-cloud-job -- 分布式任务调度中间件
 │  ├─taotao-cloud-rpc -- 分布式rpc中间件
 │  ├─taotao-cloud-tx -- 分布式事务中间件
 │  ├─taotao-cloud-warehouse -- 数仓模块
