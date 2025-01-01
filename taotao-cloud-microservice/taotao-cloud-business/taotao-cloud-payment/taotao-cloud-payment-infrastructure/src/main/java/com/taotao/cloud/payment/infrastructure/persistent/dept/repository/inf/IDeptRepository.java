@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.infrastructure.persistent.dept.repository.inf;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dept.po.DeptPO;
-import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

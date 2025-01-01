@@ -29,7 +29,7 @@ import com.taotao.cloud.sys.biz.model.entity.dict.QDictItem;
 import com.taotao.cloud.sys.biz.repository.cls.DictItemRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictItemRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

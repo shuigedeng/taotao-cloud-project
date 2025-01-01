@@ -49,7 +49,7 @@ import com.taotao.cloud.stream.framework.trigger.model.TimeExecuteConstant;
 import com.taotao.cloud.stream.framework.trigger.model.TimeTriggerMsg;
 import com.taotao.cloud.stream.framework.trigger.util.DelayQueueTools;
 import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;

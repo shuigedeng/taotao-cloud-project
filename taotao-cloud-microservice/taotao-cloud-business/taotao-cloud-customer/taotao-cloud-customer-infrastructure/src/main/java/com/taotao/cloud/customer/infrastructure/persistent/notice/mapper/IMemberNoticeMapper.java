@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.infratructure.persistent.notice.mapper;
 
 import com.taotao.cloud.member.biz.model.entity.MemberNotice;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /** 会员站内信数据处理层 */
 public interface IMemberNoticeMapper extends BaseSuperMapper<MemberNotice, Long> {}

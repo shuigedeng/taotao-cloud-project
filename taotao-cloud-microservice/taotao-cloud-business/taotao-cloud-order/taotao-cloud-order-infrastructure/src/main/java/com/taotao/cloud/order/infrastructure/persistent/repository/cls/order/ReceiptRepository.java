@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.order;
 
 import com.taotao.cloud.order.infrastructure.persistent.po.order.ReceiptPO;
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 发票数据处理层 */

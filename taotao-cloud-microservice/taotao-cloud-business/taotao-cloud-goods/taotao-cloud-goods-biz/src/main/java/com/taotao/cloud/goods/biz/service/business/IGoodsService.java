@@ -23,7 +23,7 @@ import com.taotao.cloud.goods.biz.model.dto.GoodsOperationDTO;
 import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuParamsVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 
 /**

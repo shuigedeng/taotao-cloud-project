@@ -18,8 +18,8 @@ package com.taotao.cloud.promotion.biz.model.entity;
 
 import com.taotao.cloud.promotion.api.enums.PromotionsScopeTypeEnum;
 import com.taotao.cloud.promotion.api.enums.PromotionsStatusEnum;
-import com.taotao.boot.web.base.entity.BaseSuperEntity;
-import com.taotao.boot.web.base.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.SuperEntity;
 import jakarta.persistence.Column;
 import java.io.Serial;
 import java.io.Serializable;

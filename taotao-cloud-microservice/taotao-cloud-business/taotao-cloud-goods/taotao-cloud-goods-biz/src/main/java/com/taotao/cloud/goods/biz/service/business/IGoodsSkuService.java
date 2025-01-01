@@ -28,7 +28,7 @@ import com.taotao.cloud.goods.biz.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.goods.biz.model.vo.GoodsSkuVO;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.model.entity.GoodsSku;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
 

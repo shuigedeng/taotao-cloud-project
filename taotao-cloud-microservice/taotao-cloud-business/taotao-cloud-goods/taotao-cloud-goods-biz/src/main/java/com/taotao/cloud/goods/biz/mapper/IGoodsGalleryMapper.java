@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.mapper;
 
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /**
  * 商品相册数据处理层

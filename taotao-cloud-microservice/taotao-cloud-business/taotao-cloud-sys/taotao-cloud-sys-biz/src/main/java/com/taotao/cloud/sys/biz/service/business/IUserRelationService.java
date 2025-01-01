@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.service.business;
 
 import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.Set;
 
 /**

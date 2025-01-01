@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.service.feign;
 
 import com.taotao.cloud.sys.biz.model.entity.system.User;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 
 /**
  * ISysDictService

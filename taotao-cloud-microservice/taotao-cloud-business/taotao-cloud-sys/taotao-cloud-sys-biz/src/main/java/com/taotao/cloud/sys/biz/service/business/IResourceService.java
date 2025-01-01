@@ -21,7 +21,7 @@ import com.taotao.cloud.sys.biz.model.vo.menu.MenuQueryVO;
 import com.taotao.cloud.sys.biz.model.vo.menu.MenuTreeVO;
 import com.taotao.cloud.sys.biz.model.bo.MenuBO;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 import java.util.Set;
 

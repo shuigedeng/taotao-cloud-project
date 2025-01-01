@@ -23,7 +23,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.RoleResource;
 import com.taotao.cloud.sys.biz.repository.cls.RoleResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IRoleResourceRepository;
 import com.taotao.cloud.sys.biz.service.business.IRoleResourceService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import java.util.Set;
 import lombok.AllArgsConstructor;

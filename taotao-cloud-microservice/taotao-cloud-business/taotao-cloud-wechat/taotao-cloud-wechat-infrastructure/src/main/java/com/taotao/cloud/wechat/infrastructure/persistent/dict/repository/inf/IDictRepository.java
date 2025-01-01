@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.infrastructure.persistent.dict.repository.inf;
 
-import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
 import com.taotao.cloud.wechat.infrastructure.persistent.dict.po.DictPO;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.QueryRewriter;

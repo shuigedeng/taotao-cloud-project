@@ -55,7 +55,7 @@ import com.taotao.cloud.promotion.api.feign.IFeignPromotionGoodsApi;
 import com.taotao.cloud.promotion.api.model.page.PromotionGoodsPageQuery;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;

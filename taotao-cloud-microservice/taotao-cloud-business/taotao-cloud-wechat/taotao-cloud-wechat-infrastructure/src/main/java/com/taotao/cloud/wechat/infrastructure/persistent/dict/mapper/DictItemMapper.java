@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.wechat.infrastructure.persistent.dict.mapper;
 
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import com.taotao.cloud.wechat.infrastructure.persistent.dict.po.DictItemPO;
 
 /**

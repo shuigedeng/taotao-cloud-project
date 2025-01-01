@@ -30,7 +30,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.mapper.ICustomWordsMappe
 import com.taotao.cloud.goods.infrastructure.persistent.po.CustomWordsPO;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.CustomWordsRepository;
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICustomWordsRepository;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;

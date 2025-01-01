@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.application.service;
 
 import com.taotao.cloud.goods.application.command.category.dto.clientobject.CategoryBrandCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryBrandPO;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 
 /**

@@ -25,6 +25,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-grpc"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
     implementation "io.github.shuigedeng:taotao-boot-starter-web"
+    implementation "io.github.shuigedeng:taotao-boot-starter-webagg"
 
     implementation "org.springframework.boot:spring-boot-starter-graphql"
     testImplementation 'org.springframework.graphql:spring-graphql-test:1.3.3'

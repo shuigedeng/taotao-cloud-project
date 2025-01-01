@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.repository.cls.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaint;
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 订单投诉数据处理层 */

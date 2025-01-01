@@ -19,7 +19,7 @@ package com.taotao.cloud.sys.biz.supports.core.db.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.taotao.cloud.log.biz.log.core.db.convert.LogConvert;
 import com.taotao.cloud.log.biz.log.dto.OperateLogDto;
-import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;

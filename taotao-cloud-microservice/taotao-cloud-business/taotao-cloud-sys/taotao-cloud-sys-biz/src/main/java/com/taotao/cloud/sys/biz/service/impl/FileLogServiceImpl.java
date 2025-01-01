@@ -21,7 +21,7 @@ import com.taotao.cloud.file.biz.mapper.IFileLogMapper;
 import com.taotao.cloud.file.biz.repository.cls.FileLogRepository;
 import com.taotao.cloud.file.biz.repository.inf.IFileLogRepository;
 import com.taotao.cloud.file.biz.service.IFileLogService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 
 /**
  * 文件上传服务

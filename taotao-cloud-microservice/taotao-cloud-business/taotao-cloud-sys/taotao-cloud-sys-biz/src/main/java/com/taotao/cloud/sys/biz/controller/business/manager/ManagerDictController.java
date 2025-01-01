@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.biz.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.model.vo.dict.DictQueryVO;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.boot.web.base.controller.BaseSuperController;
+import com.taotao.boot.webagg.controller.BaseSuperController;
 import com.taotao.boot.web.utils.CollectionUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

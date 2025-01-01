@@ -31,7 +31,7 @@ import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
 import com.taotao.cloud.goods.biz.repository.cls.StoreGoodsLabelRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IStoreGoodsLabelRepository;
 import com.taotao.cloud.goods.biz.service.business.IStoreGoodsLabelService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

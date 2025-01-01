@@ -64,7 +64,7 @@ import com.taotao.cloud.promotion.api.model.vo.PromotionGoodsVO;
 import com.taotao.cloud.store.api.model.vo.StoreVO;
 import com.taotao.cloud.sys.api.enums.SettingCategoryEnum;
 import com.taotao.cloud.sys.api.model.vo.setting.GoodsSettingVO;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;

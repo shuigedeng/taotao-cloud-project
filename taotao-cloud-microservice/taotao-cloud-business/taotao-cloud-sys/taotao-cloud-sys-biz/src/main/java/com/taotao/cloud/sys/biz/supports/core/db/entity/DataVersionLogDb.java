@@ -17,7 +17,7 @@
 package com.taotao.cloud.sys.biz.supports.core.db.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

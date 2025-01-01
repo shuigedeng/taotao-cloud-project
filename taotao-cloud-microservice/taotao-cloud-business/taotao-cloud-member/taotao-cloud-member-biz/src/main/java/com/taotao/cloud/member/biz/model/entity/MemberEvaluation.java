@@ -23,7 +23,7 @@ import com.taotao.boot.common.utils.bean.BeanUtils;
 import com.taotao.cloud.goods.api.model.vo.GoodsSkuSpecGalleryVO;
 import com.taotao.cloud.member.sys.model.dto.MemberEvaluationDTO;
 import com.taotao.cloud.order.api.model.vo.order.OrderVO;
-import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

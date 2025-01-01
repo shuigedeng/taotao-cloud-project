@@ -18,7 +18,7 @@ package com.taotao.cloud.goods.biz.service.business;
 
 import com.taotao.cloud.goods.biz.model.vo.StoreGoodsLabelVO;
 import com.taotao.cloud.goods.biz.model.entity.StoreGoodsLabel;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
 

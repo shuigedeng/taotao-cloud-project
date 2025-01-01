@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.member.sys.model.vo.StoreRatingVO;
 import com.taotao.cloud.member.biz.model.entity.MemberEvaluation;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;

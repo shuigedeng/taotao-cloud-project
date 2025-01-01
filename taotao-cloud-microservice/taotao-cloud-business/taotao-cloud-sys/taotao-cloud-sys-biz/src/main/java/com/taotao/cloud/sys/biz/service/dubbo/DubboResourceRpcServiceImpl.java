@@ -24,7 +24,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.QResource;
 import com.taotao.cloud.sys.biz.model.entity.system.Resource;
 import com.taotao.cloud.sys.biz.repository.cls.ResourceRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IResourceRepository;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.DubboService;

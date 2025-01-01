@@ -17,7 +17,7 @@
 package com.taotao.cloud.store.biz.mapper;
 
 import com.taotao.cloud.store.biz.model.entity.StoreAddress;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /** 店铺地址(自提点）数据处理层 */
 public interface StoreAddressMapper extends BaseSuperMapper<StoreAddress, String> {}

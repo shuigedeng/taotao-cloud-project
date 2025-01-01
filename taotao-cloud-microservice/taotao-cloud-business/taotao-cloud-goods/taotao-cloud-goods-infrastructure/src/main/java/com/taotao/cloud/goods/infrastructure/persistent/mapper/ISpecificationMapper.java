@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.SpecificationPO;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /**
  * 规格数据处理层

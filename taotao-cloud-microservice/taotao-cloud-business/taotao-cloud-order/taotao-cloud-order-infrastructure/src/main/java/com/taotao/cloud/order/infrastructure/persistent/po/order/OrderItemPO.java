@@ -26,7 +26,7 @@ import com.taotao.cloud.order.sys.model.dto.order.PriceDetailDTO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartSkuVO;
 import com.taotao.cloud.order.sys.model.vo.cart.CartVO;
 import com.taotao.cloud.promotion.api.model.vo.PromotionSkuVO;
-import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls;
 
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderItemBackPO;
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 

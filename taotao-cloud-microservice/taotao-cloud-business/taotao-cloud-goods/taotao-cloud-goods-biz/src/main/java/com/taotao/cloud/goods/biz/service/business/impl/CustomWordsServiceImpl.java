@@ -30,7 +30,7 @@ import com.taotao.cloud.goods.biz.model.entity.CustomWords;
 import com.taotao.cloud.goods.biz.repository.cls.CustomWordsRepository;
 import com.taotao.cloud.goods.biz.repository.inf.ICustomWordsRepository;
 import com.taotao.cloud.goods.biz.service.business.ICustomWordsService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;

@@ -24,7 +24,7 @@ import com.taotao.cloud.store.api.model.vo.StoreOtherVO;
 import com.taotao.cloud.store.biz.model.entity.StoreDetail;
 import java.util.List;
 
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

@@ -29,7 +29,7 @@ import com.taotao.boot.job.api.model.dto.QuartzJobDTO;
 import com.taotao.boot.oss.common.exception.UploadFileException;
 import com.taotao.cloud.tenant.api.feign.TenantServiceApi;
 import com.taotao.cloud.tenant.api.model.dto.TenantDTO;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.apache.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

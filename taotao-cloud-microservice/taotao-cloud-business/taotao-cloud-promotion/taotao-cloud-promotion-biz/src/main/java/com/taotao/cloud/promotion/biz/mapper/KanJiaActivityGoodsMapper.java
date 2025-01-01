@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.taotao.cloud.promotion.api.model.vo.KanjiaActivityGoodsListVO;
 import com.taotao.cloud.promotion.biz.model.bo.KanjiaActivityGoodsBO;
 import com.taotao.cloud.promotion.biz.model.entity.KanjiaActivityGoods;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.aftersale;
 
 import com.taotao.cloud.order.infrastructure.persistent.po.aftersale.AfterSaleReasonPO;
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 售后原因数据处理层 */

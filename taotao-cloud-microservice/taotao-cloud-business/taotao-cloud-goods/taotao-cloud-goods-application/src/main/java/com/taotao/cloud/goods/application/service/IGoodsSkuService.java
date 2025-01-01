@@ -27,7 +27,7 @@ import com.taotao.cloud.goods.application.command.goods.dto.GoodsSkuStockUpdateC
 import com.taotao.cloud.goods.application.command.goods.dto.clientobject.GoodsSkuCO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsPO;
 import com.taotao.cloud.goods.infrastructure.persistent.po.GoodsSkuPO;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 import java.util.Map;
 

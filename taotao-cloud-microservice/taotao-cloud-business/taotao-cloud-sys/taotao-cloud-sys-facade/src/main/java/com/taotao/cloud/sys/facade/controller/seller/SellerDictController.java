@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.sys.facade.controller.seller;
 
-import com.taotao.boot.web.base.controller.BaseBusinessController;
+import com.taotao.boot.webagg.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;

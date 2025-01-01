@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.service.feign;
 
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 
 /**
  * ISysDictService

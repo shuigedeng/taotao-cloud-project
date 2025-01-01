@@ -18,7 +18,7 @@ package com.taotao.cloud.workflow.biz.flowable.api.remote;
 
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.IDictService;
-import com.taotao.boot.web.base.controller.BaseBusinessController;
+import com.taotao.boot.webagg.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.biz.model.bo.RoleBO;
 import com.taotao.cloud.sys.biz.model.convert.RoleConvert;
 import com.taotao.cloud.sys.biz.model.entity.system.Role;
 import com.taotao.cloud.sys.biz.service.business.IRoleService;
-import com.taotao.boot.web.base.controller.BaseSuperController;
+import com.taotao.boot.webagg.controller.BaseSuperController;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

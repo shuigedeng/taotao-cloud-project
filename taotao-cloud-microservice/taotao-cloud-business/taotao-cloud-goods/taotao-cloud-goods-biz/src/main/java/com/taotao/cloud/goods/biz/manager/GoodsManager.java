@@ -6,7 +6,7 @@ import com.taotao.cloud.goods.biz.model.page.GoodsPageQuery;
 import com.taotao.cloud.goods.biz.mapper.IGoodsMapper;
 import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.boot.web.annotation.Manager;
-import com.taotao.boot.web.base.manager.BaseManager;
+import com.taotao.boot.webagg.manager.BaseManager;
 import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;

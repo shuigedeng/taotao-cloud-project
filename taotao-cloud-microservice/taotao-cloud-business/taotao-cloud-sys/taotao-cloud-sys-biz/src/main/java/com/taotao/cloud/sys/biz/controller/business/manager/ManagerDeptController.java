@@ -25,7 +25,7 @@ import com.taotao.cloud.sys.biz.model.vo.dept.DeptQueryVO;
 import com.taotao.cloud.sys.biz.model.vo.dept.DeptTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.system.Dept;
 import com.taotao.cloud.sys.biz.service.business.IDeptService;
-import com.taotao.boot.web.base.controller.BaseSuperController;
+import com.taotao.boot.webagg.controller.BaseSuperController;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

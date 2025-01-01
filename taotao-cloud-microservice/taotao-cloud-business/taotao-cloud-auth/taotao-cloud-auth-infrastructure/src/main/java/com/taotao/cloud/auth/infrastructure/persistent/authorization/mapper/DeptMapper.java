@@ -17,7 +17,7 @@
 package com.taotao.cloud.auth.infrastructure.persistent.authorization.mapper;
 
 import com.taotao.cloud.auth.infrastructure.persistent.dept.po.DeptPO;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /**
  * CompanyMapper

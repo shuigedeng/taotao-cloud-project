@@ -23,7 +23,7 @@ import com.taotao.cloud.sys.biz.model.entity.config.LogisticsConfig;
 import com.taotao.cloud.sys.biz.repository.cls.LogisticsRepository;
 import com.taotao.cloud.sys.biz.repository.inf.ILogisticsRepository;
 import com.taotao.cloud.sys.biz.service.business.ILogisticsService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

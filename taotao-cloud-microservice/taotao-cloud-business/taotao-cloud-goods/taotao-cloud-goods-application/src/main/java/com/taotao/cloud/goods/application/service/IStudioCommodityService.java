@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.application.service;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.StudioCommodityPO;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 
 /**
  * 直播间-商品关联业务层

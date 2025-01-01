@@ -17,7 +17,7 @@
 package com.taotao.cloud.message.biz.mapper;
 
 import com.taotao.cloud.message.biz.model.entity.WechatMessage;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import org.apache.ibatis.annotations.Delete;
 
 /** 微信消息 Dao层 */

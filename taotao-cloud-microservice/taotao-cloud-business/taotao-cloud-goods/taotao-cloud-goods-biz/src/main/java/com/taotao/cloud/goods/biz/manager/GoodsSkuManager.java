@@ -17,7 +17,7 @@ import com.taotao.cloud.stream.properties.RocketmqCustomProperties;
 import com.taotao.boot.security.spring.model.SecurityUser;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
 import com.taotao.boot.web.annotation.Manager;
-import com.taotao.boot.web.base.manager.BaseManager;
+import com.taotao.boot.webagg.manager.BaseManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

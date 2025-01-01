@@ -31,7 +31,7 @@ import com.taotao.cloud.goods.biz.repository.inf.ISpecificationRepository;
 import com.taotao.cloud.goods.biz.service.business.ICategoryService;
 import com.taotao.cloud.goods.biz.service.business.ICategorySpecificationService;
 import com.taotao.cloud.goods.biz.service.business.ISpecificationService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;

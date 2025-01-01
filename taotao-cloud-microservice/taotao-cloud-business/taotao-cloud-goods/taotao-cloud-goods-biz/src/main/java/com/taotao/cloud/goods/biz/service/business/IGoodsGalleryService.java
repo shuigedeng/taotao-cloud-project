@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.biz.service.business;
 
 import com.taotao.cloud.goods.biz.model.entity.GoodsGallery;
-import com.taotao.boot.web.base.service.BaseSuperService;
+import com.taotao.boot.webagg.service.BaseSuperService;
 import java.util.List;
 
 /**

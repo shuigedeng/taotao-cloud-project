@@ -42,7 +42,7 @@ import com.taotao.cloud.sys.biz.repository.cls.DictRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IDictRepository;
 import com.taotao.cloud.sys.biz.service.business.IDictItemService;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.apache.seata.spring.annotation.GlobalTransactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

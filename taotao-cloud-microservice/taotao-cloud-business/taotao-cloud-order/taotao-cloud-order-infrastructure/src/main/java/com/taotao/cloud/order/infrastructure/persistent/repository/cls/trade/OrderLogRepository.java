@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.infrastructure.persistent.repository.cls.trade;
 
 import com.taotao.cloud.order.infrastructure.persistent.po.order.OrderLogPO;
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 订单日志数据处理层 */

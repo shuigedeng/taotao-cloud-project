@@ -16,7 +16,7 @@
 
 package com.taotao.cloud.workflow.infrastructure.persistent.dict.repository.cls;
 
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import com.taotao.cloud.workflow.infrastructure.persistent.dict.po.DictItemPO;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

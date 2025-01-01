@@ -27,7 +27,7 @@ import com.taotao.cloud.sys.biz.model.vo.region.RegionQueryVO;
 import com.taotao.cloud.sys.biz.model.vo.region.RegionTreeVO;
 import com.taotao.cloud.sys.biz.model.entity.region.Region;
 import com.taotao.cloud.sys.biz.service.business.IRegionService;
-import com.taotao.boot.web.base.controller.BaseSuperController;
+import com.taotao.boot.webagg.controller.BaseSuperController;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

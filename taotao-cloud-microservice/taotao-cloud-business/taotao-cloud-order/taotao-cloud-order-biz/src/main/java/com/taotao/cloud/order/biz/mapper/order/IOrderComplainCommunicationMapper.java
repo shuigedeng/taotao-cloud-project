@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.mapper.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.OrderComplaintCommunication;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /** 交易投诉通信数据处理层 */
 public interface IOrderComplainCommunicationMapper extends BaseSuperMapper<OrderComplaintCommunication, Long> {}

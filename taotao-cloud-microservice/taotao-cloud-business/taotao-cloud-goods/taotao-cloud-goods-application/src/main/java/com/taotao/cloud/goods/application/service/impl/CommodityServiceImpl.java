@@ -35,7 +35,7 @@ import com.taotao.cloud.goods.infrastructure.persistent.repository.cls.Commodity
 import com.taotao.cloud.goods.infrastructure.persistent.repository.inf.ICommodityRepository;
 import com.taotao.cloud.goods.infrastructure.util.WechatLivePlayerUtil;
 import com.taotao.boot.security.spring.utils.SecurityUtils;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.dromara.hutool.json.JSONObject;

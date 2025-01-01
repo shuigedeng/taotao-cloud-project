@@ -17,7 +17,7 @@
 package com.taotao.cloud.order.biz.repository.cls.order;
 
 import com.taotao.cloud.order.biz.model.entity.order.Order;
-import com.taotao.boot.web.base.repository.BaseClassSuperRepository;
+import com.taotao.boot.webagg.repository.BaseClassSuperRepository;
 import jakarta.persistence.EntityManager;
 
 /** 订单数据处理层 */

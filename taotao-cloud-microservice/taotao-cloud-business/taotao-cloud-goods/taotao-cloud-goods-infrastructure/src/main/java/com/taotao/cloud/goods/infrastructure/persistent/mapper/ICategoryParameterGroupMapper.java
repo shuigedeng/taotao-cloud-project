@@ -17,7 +17,7 @@
 package com.taotao.cloud.goods.infrastructure.persistent.mapper;
 
 import com.taotao.cloud.goods.infrastructure.persistent.po.CategoryParameterGroupPO;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /**
  * 分类绑定参数组数据处理层

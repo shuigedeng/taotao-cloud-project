@@ -37,7 +37,7 @@ import com.taotao.cloud.goods.biz.repository.inf.ICommodityRepository;
 import com.taotao.cloud.goods.biz.service.business.ICommodityService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsSkuService;
 import com.taotao.cloud.goods.biz.util.WechatLivePlayerUtil;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

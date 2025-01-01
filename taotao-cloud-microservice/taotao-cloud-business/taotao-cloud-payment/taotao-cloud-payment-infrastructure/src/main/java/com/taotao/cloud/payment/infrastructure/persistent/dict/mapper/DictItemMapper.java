@@ -17,7 +17,7 @@
 package com.taotao.cloud.payment.infrastructure.persistent.dict.mapper;
 
 import com.taotao.cloud.sys.infrastructure.persistent.dict.po.DictItemPO;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 
 /**
  * CompanyMapper

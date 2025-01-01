@@ -33,7 +33,7 @@ import com.taotao.cloud.sys.biz.model.dto.user.UserUpdateDTO;
 import com.taotao.cloud.sys.biz.model.entity.system.User;
 import com.taotao.cloud.sys.biz.model.vo.user.UserQueryVO;
 import com.taotao.cloud.sys.biz.service.business.IUserService;
-import com.taotao.boot.web.base.controller.BaseSuperController;
+import com.taotao.boot.webagg.controller.BaseSuperController;
 import com.taotao.boot.web.request.annotation.RequestLogger;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

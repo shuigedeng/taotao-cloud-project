@@ -19,7 +19,7 @@ package com.taotao.cloud.workflow.biz.engine.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.taotao.boot.web.base.entity.SuperEntity;
+import com.taotao.boot.webagg.entity.SuperEntity;
 import lombok.Data;
 
 /** 流程候选人 */

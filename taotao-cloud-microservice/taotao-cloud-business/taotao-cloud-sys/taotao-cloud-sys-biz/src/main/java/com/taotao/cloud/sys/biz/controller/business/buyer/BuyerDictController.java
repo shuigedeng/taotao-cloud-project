@@ -22,7 +22,7 @@ import com.taotao.boot.security.spring.annotation.NotAuth;
 import com.taotao.cloud.sys.biz.model.query.DictQuery;
 import com.taotao.cloud.sys.biz.model.entity.dict.Dict;
 import com.taotao.cloud.sys.biz.service.business.IDictService;
-import com.taotao.boot.web.base.controller.BaseBusinessController;
+import com.taotao.boot.webagg.controller.BaseBusinessController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.sql.SQLIntegrityConstraintViolationException;

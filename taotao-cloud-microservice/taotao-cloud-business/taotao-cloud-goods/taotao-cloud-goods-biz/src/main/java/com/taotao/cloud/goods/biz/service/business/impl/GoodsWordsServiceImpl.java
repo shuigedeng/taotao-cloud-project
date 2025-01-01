@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.biz.model.entity.GoodsWords;
 import com.taotao.cloud.goods.biz.repository.cls.GoodsWordsRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IGoodsWordsRepository;
 import com.taotao.cloud.goods.biz.service.business.IGoodsWordsService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

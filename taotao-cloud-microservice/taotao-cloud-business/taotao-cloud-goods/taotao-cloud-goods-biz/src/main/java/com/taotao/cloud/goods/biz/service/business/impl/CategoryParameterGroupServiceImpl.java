@@ -33,7 +33,7 @@ import com.taotao.cloud.goods.biz.repository.inf.ICategoryParameterGroupReposito
 import com.taotao.cloud.goods.biz.service.business.ICategoryParameterGroupService;
 import com.taotao.cloud.goods.biz.service.business.IGoodsService;
 import com.taotao.cloud.goods.biz.service.business.IParametersService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

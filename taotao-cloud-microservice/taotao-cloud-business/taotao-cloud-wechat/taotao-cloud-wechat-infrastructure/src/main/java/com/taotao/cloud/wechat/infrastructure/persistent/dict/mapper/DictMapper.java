@@ -19,7 +19,7 @@ package com.taotao.cloud.wechat.infrastructure.persistent.dict.mapper;
 import com.taotao.cloud.sys.infrastructure.persistent.dict.dataobject.DictDeptDO;
 import com.taotao.cloud.sys.infrastructure.persistent.dict.params.DictDeptParams;
 import com.taotao.cloud.sys.infrastructure.persistent.dict.po.DictPO;
-import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

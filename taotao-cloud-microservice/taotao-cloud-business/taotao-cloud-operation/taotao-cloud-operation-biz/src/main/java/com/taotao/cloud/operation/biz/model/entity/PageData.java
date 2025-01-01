@@ -22,7 +22,7 @@ import com.taotao.boot.common.enums.ClientTypeEnum;
 import com.taotao.boot.common.utils.lang.StringUtils;
 import com.taotao.cloud.operation.api.enums.PageEnum;
 import com.taotao.cloud.operation.api.enums.SwitchEnum;
-import com.taotao.boot.web.base.entity.BaseSuperEntity;
+import com.taotao.boot.webagg.entity.BaseSuperEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

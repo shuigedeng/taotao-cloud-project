@@ -23,7 +23,7 @@ import com.taotao.cloud.sys.biz.model.entity.system.UserRelation;
 import com.taotao.cloud.sys.biz.repository.cls.UserRelationRepository;
 import com.taotao.cloud.sys.biz.repository.inf.IUserRelationRepository;
 import com.taotao.cloud.sys.biz.service.business.IUserRelationService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

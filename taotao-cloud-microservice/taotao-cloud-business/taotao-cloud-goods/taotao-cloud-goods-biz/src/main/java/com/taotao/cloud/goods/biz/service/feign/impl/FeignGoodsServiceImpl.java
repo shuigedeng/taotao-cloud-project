@@ -21,7 +21,7 @@ import com.taotao.cloud.goods.biz.model.entity.Goods;
 import com.taotao.cloud.goods.biz.repository.cls.GoodsRepository;
 import com.taotao.cloud.goods.biz.repository.inf.IGoodsRepository;
 import com.taotao.cloud.goods.biz.service.feign.IFeignGoodsService;
-import com.taotao.boot.web.base.service.impl.BaseSuperServiceImpl;
+import com.taotao.boot.webagg.service.impl.BaseSuperServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

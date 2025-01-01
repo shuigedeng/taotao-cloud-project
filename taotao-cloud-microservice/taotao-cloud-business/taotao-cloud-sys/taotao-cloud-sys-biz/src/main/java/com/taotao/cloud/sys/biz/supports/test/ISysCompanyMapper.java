@@ -38,7 +38,7 @@ package com.taotao.cloud.sys.biz.supports.test; /// *
 // import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 // import com.taotao.cloud.sys.biz.entity.SysCompany;
 // import com.taotao.cloud.sys.biz.entity.User;
-// import com.taotao.boot.web.base.mapper.BaseSuperMapper;
+// import com.taotao.boot.webagg.mapper.BaseSuperMapper;
 // import java.time.LocalDate;
 // import java.util.List;
 // import org.apache.ibatis.annotations.Many;

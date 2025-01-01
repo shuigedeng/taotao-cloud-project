@@ -17,7 +17,7 @@
 package com.taotao.cloud.member.infrastructure.persistent.repository.inf;
 
 import com.taotao.cloud.member.infrastructure.persistent.po.MemberAddressPO;
-import com.taotao.boot.web.base.repository.BaseInterfaceSuperRepository;
+import com.taotao.boot.webagg.repository.BaseInterfaceSuperRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
