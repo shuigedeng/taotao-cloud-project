@@ -32,7 +32,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-dingtalk"
     //implementation "io.github.shuigedeng:taotao-boot-starter-rxjava"
     implementation "io.github.shuigedeng:taotao-boot-starter-oss-minio"
-    implementation "io.github.shuigedeng:taotao-boot-starter-laytpl"
     implementation "io.github.shuigedeng:taotao-boot-starter-elk"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-elastic"
     implementation "io.github.shuigedeng:taotao-boot-starter-job-xxl"

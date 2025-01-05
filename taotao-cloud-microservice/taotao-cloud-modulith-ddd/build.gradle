@@ -12,7 +12,6 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-rocketmq"
     implementation "io.github.shuigedeng:taotao-boot-starter-mq-kafka"
     implementation "io.github.shuigedeng:taotao-boot-starter-lock"
-    implementation "io.github.shuigedeng:taotao-boot-starter-laytpl"
     implementation "io.github.shuigedeng:taotao-boot-starter-elk"
     implementation "io.github.shuigedeng:taotao-boot-starter-captcha"
     implementation "io.github.shuigedeng:taotao-boot-starter-third-client"

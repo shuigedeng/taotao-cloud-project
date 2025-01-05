@@ -79,7 +79,6 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-job-quartz"
     api "io.github.shuigedeng:taotao-boot-starter-job-powerjob"
     api "io.github.shuigedeng:taotao-boot-starter-job-snail"
-    api "io.github.shuigedeng:taotao-boot-starter-laytpl"
     api "io.github.shuigedeng:taotao-boot-starter-office"
     api "io.github.shuigedeng:taotao-boot-starter-third-client"
     api "io.github.shuigedeng:taotao-boot-starter-data-elasticsearch"

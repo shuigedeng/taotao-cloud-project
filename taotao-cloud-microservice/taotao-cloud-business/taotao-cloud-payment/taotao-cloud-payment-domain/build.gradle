@@ -81,7 +81,6 @@ dependencies {
     api "io.github.shuigedeng:taotao-boot-starter-grpc"
     api "io.github.shuigedeng:taotao-boot-starter-lock"
     api "io.github.shuigedeng:taotao-boot-starter-dingtalk"
-    api "io.github.shuigedeng:taotao-boot-starter-laytpl"
     api "io.github.shuigedeng:taotao-boot-starter-elk"
     api "io.github.shuigedeng:taotao-boot-starter-captcha"
     api "io.github.shuigedeng:taotao-boot-starter-office"
