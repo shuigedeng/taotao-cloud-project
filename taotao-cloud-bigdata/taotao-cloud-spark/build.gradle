@@ -16,11 +16,6 @@ apply plugin: "idea"
 //    }
 //}
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
 dependencies {
     implementation("org.apache.spark:spark-core_2.13:3.5.4")
     implementation("org.apache.spark:spark-catalyst_2.13:3.5.4")

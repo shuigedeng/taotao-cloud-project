@@ -45,7 +45,7 @@ sonarqube {
 //}
 
 //查询sonar分析工程是否通过
-task queryStatus() {
+tasks.register('queryStatus') {
     try {
         //先创建出了一个URL对象，urlPath：是我们访问接口地址
         String urlPath = sonar.host + "/api/qualitygates/project_status?projectKey=" + sonar.projectkey

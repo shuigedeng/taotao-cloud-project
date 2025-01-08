@@ -172,7 +172,7 @@ dependencies {
 }
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
@@ -182,7 +182,7 @@ configurations {
     }
 }
 
-tasks.withType(ScalaCompile) {
+tasks.withType(ScalaCompile).configureEach {
     scalaCompileOptions.additionalParameters = ['-unchecked', '-deprecation']
 }
 
@@ -218,8 +218,9 @@ jar {
     //}
 }
 
-task fatJar(type: Jar, dependsOn: jar) {
-    zip64=true
+tasks.register('fatJar', Jar) {
+    dependsOn jar
+    zip64 = true
     manifest {
         attributes 'Main-Class': "com.taotao.cloud.flink.JStreamWordCount"
     }
@@ -230,7 +231,7 @@ task fatJar(type: Jar, dependsOn: jar) {
 //    }
 }
 
-task customFatJar(type: Jar) {
+tasks.register('customFatJar', Jar) {
     manifest {
         attributes 'Main-Class': 'com.taotao.cloud.flink.JStreamWordCount'
     }
@@ -240,7 +241,8 @@ task customFatJar(type: Jar) {
             it.name.endsWith('.jar')
         }
     }
-    with jar
+
+    finalizedBy("jar")
 }
 
 mainClassName = "com.taotao.cloud.flink.JStreamWordCount"
@@ -276,7 +278,7 @@ shadowJar {
     //archiveFileName = "test-${version}.jar"
 }
 
-task packageZip(type: Zip) {
+tasks.register('packageZip', Zip) {
     archiveFileName = "${project.name}-${project.version}.zip"
     destinationDirectory = file("${project.layout.buildDirectory.asFile.get()}/result")
 

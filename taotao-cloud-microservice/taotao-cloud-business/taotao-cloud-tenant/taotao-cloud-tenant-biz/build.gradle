@@ -40,14 +40,14 @@ description = "租户中心biz"
 archivesBaseName = 'taotao-cloud-tenant'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
-        //resolutionStrategy {
-        //    //force "org.codehaus.groovy:groovy:4.0.0"
-        //    force 'org.antlr:antlr4:4.13.2'
-        //}
+        resolutionStrategy {
+            //force "org.codehaus.groovy:groovy:4.0.0"
+            force 'org.antlr:antlr4:4.13.2'
+        }
 
         //exclude group: "log4j", module: "log4j"
         //exclude group: "log4j", module: "slf4j-simple"

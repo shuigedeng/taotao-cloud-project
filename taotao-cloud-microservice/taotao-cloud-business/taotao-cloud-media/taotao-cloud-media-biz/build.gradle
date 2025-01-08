@@ -109,7 +109,7 @@ description = "多媒体中心biz"
 archivesBaseName = 'taotao-cloud-media'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 

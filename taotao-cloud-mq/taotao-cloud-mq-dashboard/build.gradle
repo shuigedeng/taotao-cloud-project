@@ -56,7 +56,8 @@ jar {
     //}
 }
 
-task releaseTarZip(type: Zip, dependsOn: jar) {
+tasks.register('releaseTarZip', Zip) {
+    dependsOn jar
 
     archiveFileName = "${project.name}-${project.version}.zip"
 
@@ -72,8 +73,8 @@ task releaseTarZip(type: Zip, dependsOn: jar) {
         into "conf"
     }
 
-    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
-    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/LICENSE-BIN" rename { String filename -> filename.replace("-BIN", "") }
+    from "${project.parent.projectDir}/taotao-cloud-mq-distribution/NOTICE-BIN" rename { String filename -> filename.replace("-BIN", "") }
 
     from('build/libs') {
         include '*.jar'
@@ -83,7 +84,9 @@ task releaseTarZip(type: Zip, dependsOn: jar) {
 
 }
 
-tasks.create(name: "releaseTarGz", dependsOn: configurations.archives.artifacts, type: Tar) {
+tasks.register("releaseTarGz", Tar) {
+
+    dependsOn configurations.archives.artifacts
 
     into "taotao-cloud-mq-dashboard"
     compression = Compression.GZIP

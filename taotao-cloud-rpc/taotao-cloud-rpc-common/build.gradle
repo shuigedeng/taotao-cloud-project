@@ -8,7 +8,7 @@ dependencies {
     // redis 分布式锁
     api 'redis.clients:jedis:5.2.0'
     //Lettuce Redis客户端
-    api('io.lettuce:lettuce-core:6.4.0.RELEASE') {
+    api('io.lettuce:lettuce-core:6.5.2.RELEASE') {
         exclude group: 'io.netty', module: 'netty-handler'
         exclude group: 'io.netty', module: 'netty-common'
         exclude group: 'io.netty', module: 'netty-transport'

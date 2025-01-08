@@ -23,7 +23,7 @@ checkstyle {
     reportsDir = file("${project.layout.buildDirectory.asFile.get()}/code-analysis/checkstyleReportsDir")
 }
 
-tasks.withType(Checkstyle) {
+tasks.withType(Checkstyle).configureEach {
     reports {
         xml.required = false
         html.required = true

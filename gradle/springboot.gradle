@@ -9,7 +9,7 @@ apply plugin: 'org.springframework.boot'
 
 // gradle打jar包，去掉外部依赖的jar 将依赖包复制到lib目录 其中$JAVA_HOME/jre/lib/ext是固定的，后面追加冒号，冒号后面跟上外部依赖jar包所在路径
 //nohup java -Djava.ext.dirs=$JAVA_HOME/jre/lib/ext:/data/middleplateform/hicon-area/lib -jar hicon-area-1.0-SNAPSHOT.jar &
-task copyJar(type: Copy) {
+tasks.register('copyJar', Copy) {
     // 清除现有的lib目录
     delete "${project.layout.buildDirectory.asFile.get()}\\libs\\lib"
     from configurations.runtimeClasspath
@@ -189,14 +189,14 @@ bootBuildImage {
         //bindHostToBuilder = true
 
         builderRegistry {
-            username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-            password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+            username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+            password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
             url = "registry.cn-hangzhou.aliyuncs.com"
         }
 
         publishRegistry {
-            username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
-            password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
+            username = findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME")
+            password = findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD")
             url = "registry.cn-hangzhou.aliyuncs.com"
         }
     }

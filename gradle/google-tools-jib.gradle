@@ -6,16 +6,16 @@ jib {
     from {
         image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-openjdk21:amd64"
         auth {
-            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
-            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
+            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
+            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
         }
     }
     to {
         image = "registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-monitor"
         tags = ["${project.name}-${project.version}"]
         auth {
-            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
-            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
+            username findProperty("TAOTAO_CLOUD_REGISTRY_USERNAME").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_USERNAME") ?: ""
+            password findProperty("TAOTAO_CLOUD_REGISTRY_PASSWORD").toString() ?: System.getenv("TAOTAO_CLOUD_REGISTRY_PASSWORD") ?: ""
         }
     }
     container {

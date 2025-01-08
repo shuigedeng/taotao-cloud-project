@@ -39,7 +39,7 @@ description = "短链接中心biz"
 archivesBaseName = 'taotao-cloud-shortlink'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 

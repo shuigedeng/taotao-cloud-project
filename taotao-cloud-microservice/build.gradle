@@ -82,7 +82,7 @@ configure(subprojects){ project ->
             dependsOn 'createProperties'
         }
 
-        task bootJarTest {
+        tasks.register('bootJarTest') {
             dependsOn 'clean'
             doFirst {
                 System.setProperty("profile", "test")
@@ -90,7 +90,7 @@ configure(subprojects){ project ->
             finalizedBy("bootJar")
         }
 
-        task bootJarProduction {
+        tasks.register('bootJarProduction') {
             dependsOn 'clean'
             doFirst {
                 System.setProperty("profile", "prod")

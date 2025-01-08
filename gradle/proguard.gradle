@@ -1,6 +1,6 @@
 import proguard.gradle.ProGuardTask
 
-task proguard(type: ProGuardTask) {
+tasks.register('proguard', ProGuardTask) {
     // 输出混淆前->混淆后的映射
     printmapping "${project.layout.buildDirectory.asFile.get()}/mapping.txt"
     // 混淆规则文件

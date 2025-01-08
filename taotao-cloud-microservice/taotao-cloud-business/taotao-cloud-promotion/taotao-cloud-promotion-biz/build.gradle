@@ -43,7 +43,7 @@ description = "促销中心biz"
 archivesBaseName = 'taotao-cloud-promotion'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 

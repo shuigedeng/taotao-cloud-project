@@ -347,7 +347,7 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
     }
 
     configurations {
-        all {
+        configureEach {
             resolutionStrategy {
                 cacheChangingModulesFor 0, "seconds"
                 cacheDynamicVersionsFor 0, "seconds"
@@ -378,12 +378,12 @@ configure(subprojects.findAll { (!excludeSubProjects.contains(it.name)) }) { pro
 
     // 执行
     def enablePreview = '--enable-preview'
-    tasks.withType(JavaExec) {
+    tasks.withType(JavaExec).configureEach {
         jvmArgs += enablePreview
     }
 
     // 测试
-    tasks.withType(Test).all {
+    tasks.withType(Test).configureEach {
         jvmArgs += enablePreview
     }
 }

@@ -1,6 +1,6 @@
 apply from: rootProject.file('gradle/shadow.gradle')
 
-task releaseTarZip(type: Zip) {
+tasks.register('releaseTarZip', Zip) {
     dependsOn(':taotao-cloud-job:taotao-cloud-job-dashboard:jar')
 
     archiveFileName = "${project.name}-${project.version}.zip"
@@ -17,8 +17,8 @@ task releaseTarZip(type: Zip) {
         into "conf"
     }
 
-    from "${project.projectDir}/LICENSE-BIN" rename {String filename -> filename.replace("-BIN", "")}
-    from "${project.projectDir}/NOTICE-BIN" rename {String filename -> filename.replace("-BIN", "")}
+    from "${project.projectDir}/LICENSE-BIN" rename { String filename -> filename.replace("-BIN", "") }
+    from "${project.projectDir}/NOTICE-BIN" rename { String filename -> filename.replace("-BIN", "") }
 
     from("${project.parent.projectDir}/taotao-cloud-job-dashboard/build/libs") {
         include '*.jar'
@@ -28,7 +28,7 @@ task releaseTarZip(type: Zip) {
 
 }
 
-tasks.create(name: "releaseTarGz", type: Tar) {
+tasks.register("releaseTarGz", Tar) {
     dependsOn('releaseTarZip')
 
     into "${project.name}"

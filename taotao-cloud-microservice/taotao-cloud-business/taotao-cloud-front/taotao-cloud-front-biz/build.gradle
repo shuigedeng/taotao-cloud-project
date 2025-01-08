@@ -32,7 +32,7 @@ description = "前端PC biz中心"
 archivesBaseName = 'taotao-cloud-front'
 
 
-task processFrontendResources(type: Copy) {
+tasks.register('processFrontendResources', Copy) {
     // Directory containing the artifacts produced by the frontend project
     var frontendProjectBuildDir = project(":taotao-cloud-microservice:taotao-cloud-business:taotao-cloud-front:taotao-cloud-front-ui").getProjectDir()
     println(frontendProjectBuildDir)

@@ -103,7 +103,7 @@ processResources {
 }
 */
 
-tasks.withType(Jar) {
+tasks.withType(Jar).configureEach {
     from(project.rootDir) {
         include 'LICENSE.txt'
         include 'NOTICE.txt'
@@ -139,21 +139,23 @@ jar {
 }
 
 // ci 自动发布 版本
-task publishJar(type: GradleBuild) {
+tasks.register('publishJar', GradleBuild) {
     def names = ['test', 'compileTestJava']
     startParameter.setExcludedTaskNames(names)
 
     tasks = ['clean', 'build', 'publishAllPublicationsToSonatypeRepository']
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
     //from sourceSets.main.allJava
     from sourceSets.main.allSource
 
     archiveClassifier = 'sources'
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
     from javadoc
     archiveClassifier = 'javadoc'
 }

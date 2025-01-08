@@ -12,7 +12,7 @@ description = "系统中心biz"
 archivesBaseName = 'taotao-cloud-sys'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
@@ -26,9 +26,9 @@ configurations {
         //implementation 'com.alibaba:fastjson:2.0.53!!'
 
         resolutionStrategy {
-            //force "org.codehaus.groovy:groovy:4.0.0"
-            //force 'org.antlr:antlr4:4.13.2'
-            //force 'net.minidev:json-smart:2.5.1'
+            force "org.codehaus.groovy:groovy:4.0.0"
+            force 'org.antlr:antlr4:4.13.2'
+            force 'net.minidev:json-smart:2.5.1'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.45.0-alpha"
         }
@@ -41,8 +41,5 @@ configurations {
         //exclude group: "org.apache.logging.log4j", module: "log4j-api"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "commons-logging", module: "commons-logging"
-        exclude group: "io.zipkin.brave", module: "brave"
-        exclude group: "io.zipkin.reporter2", module: "zipkin-reporter-brave"
-        exclude group: "io.micrometer", module: "micrometer-tracing-bridge-brave"
     }
 }

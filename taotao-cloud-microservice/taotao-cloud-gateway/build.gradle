@@ -77,10 +77,14 @@ dependencies {
 }
 
 configurations {
-    all {
-        //resolutionStrategy {
-        //    force 'net.minidev:json-smart:2.5.1'
-        //}
+    configureEach {
+        resolutionStrategy {
+            force "org.codehaus.groovy:groovy:4.0.0"
+            force 'org.antlr:antlr4:4.13.2'
+            force 'net.minidev:json-smart:2.5.1'
+            //todo 临时使用
+            force "io.opentelemetry:opentelemetry-api-incubator:1.45.0-alpha"
+        }
 
         exclude group: "org.springframework", module: "spring-webmvc"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"

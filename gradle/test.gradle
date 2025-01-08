@@ -83,7 +83,7 @@ test {
 /**
  * clean 命令时删除 logs 目录
  */
-task cleanOutDir(type: Delete) {
+tasks.register('cleanOutDir', Delete) {
     delete "${projectDir}/logs"
     delete "${projectDir}/arthas-output"
     delete "${rootDir}/logs"

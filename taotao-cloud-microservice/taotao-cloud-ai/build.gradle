@@ -93,7 +93,7 @@ description = "ai中心"
 archivesBaseName = 'taotao-cloud-ai'
 
 configurations {
-    all {
+    configureEach {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.querydsl", module: "querydsl-apt"

@@ -167,7 +167,7 @@ dependencies {
 }
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
@@ -177,7 +177,7 @@ configurations {
     }
 }
 
-tasks.withType(ScalaCompile) {
+tasks.withType(ScalaCompile).configureEach {
     scalaCompileOptions.additionalParameters = ['-unchecked', '-deprecation']
 }
 

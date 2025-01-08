@@ -43,7 +43,7 @@ description = "店铺中心biz"
 archivesBaseName = 'taotao-cloud-store'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 

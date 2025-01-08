@@ -38,7 +38,7 @@ description = "监控中心"
 archivesBaseName = 'taotao-cloud-monitor'
 
 configurations {
-    all {
+    configureEach {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-data-jpa"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         exclude group: "com.querydsl", module: "querydsl-apt"
@@ -73,7 +73,8 @@ bootDistZip{
     }
 }
 
-task dis(type: Zip, dependsOn: bootJar) {
+tasks.register('dis', Zip) {
+    dependsOn bootJar
 
     archiveFileName = "${project.name}.zip"
 

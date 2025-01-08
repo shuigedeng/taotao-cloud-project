@@ -23,6 +23,8 @@ dependencies {
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
 
+    //https://github.com/spring-projects/spring-modulith
+    //https://central.sonatype.com/artifact/org.springframework.modulith/spring-modulith-starter-core
     implementation 'org.springframework.modulith:spring-modulith-starter-core:1.3.1'
     implementation 'org.springframework.modulith:spring-modulith-starter-insight:1.3.1'
     implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:1.3.1'
@@ -39,12 +41,16 @@ dependencies {
     implementation 'org.springframework.modulith:spring-modulith-actuator:1.3.1'
     testImplementation 'org.springframework.modulith:spring-modulith-starter-test:1.3.1'
 
+    //https://github.com/xmolecules/jmolecules
+    //https://central.sonatype.com/artifact/org.jmolecules/jmolecules-ddd
     implementation 'org.jmolecules:jmolecules-layered-architecture:1.10.0'
     implementation 'org.jmolecules:jmolecules-hexagonal-architecture:1.10.0'
     implementation 'org.jmolecules:jmolecules-onion-architecture:1.10.0'
     implementation 'org.jmolecules:jmolecules-ddd:1.10.0'
     implementation 'org.jmolecules:jmolecules-events:1.10.0'
 
+    //https://github.com/xmolecules/jmolecules-integrations
+    //https://central.sonatype.com/artifact/org.jmolecules.integrations/jmolecules-spring
     implementation 'org.jmolecules.integrations:jmolecules-bytebuddy:0.24.1'
     implementation 'org.jmolecules.integrations:jmolecules-jackson:0.24.1'
     implementation 'org.jmolecules.integrations:jmolecules-jpa:0.24.1'
@@ -61,7 +67,7 @@ description = "Modulith中心"
 archivesBaseName = 'taotao-cloud-modulith'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
@@ -75,9 +81,9 @@ configurations {
         //implementation 'com.alibaba:fastjson:2.0.53!!'
 
         resolutionStrategy {
-            //force "org.codehaus.groovy:groovy:4.0.0"
-            //force 'org.antlr:antlr4:4.13.2'
-            //force 'net.minidev:json-smart:2.5.1'
+            force "org.codehaus.groovy:groovy:4.0.0"
+            force 'org.antlr:antlr4:4.13.2'
+            force 'net.minidev:json-smart:2.5.1'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.45.0-alpha"
         }
@@ -91,8 +97,5 @@ configurations {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
         //Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
         exclude group: "commons-logging", module: "commons-logging"
-        exclude group: "io.zipkin.brave", module: "brave"
-        exclude group: "io.zipkin.reporter2", module: "zipkin-reporter-brave"
-        exclude group: "io.micrometer", module: "micrometer-tracing-bridge-brave"
     }
 }

@@ -48,7 +48,7 @@ description = "sa认证中心biz"
 archivesBaseName = 'taotao-cloud-sajust'
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 

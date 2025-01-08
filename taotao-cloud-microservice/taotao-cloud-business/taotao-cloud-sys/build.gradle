@@ -2,7 +2,7 @@ description = "系统中心"
 
 allprojects {
     configurations {
-        all {
+        configureEach {
             resolutionStrategy.cacheChangingModulesFor 0, "seconds"
             resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
@@ -15,11 +15,11 @@ allprojects {
             //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
             //implementation 'com.alibaba:fastjson:2.0.53!!'
 
-            //resolutionStrategy {
-            //    //force "org.codehaus.groovy:groovy:4.0.0"
-            //    //force 'org.antlr:antlr4:4.13.2'
-            //    force 'net.minidev:json-smart:2.5.1'
-            //}
+            resolutionStrategy {
+                force "org.codehaus.groovy:groovy:4.0.0"
+                force 'org.antlr:antlr4:4.13.2'
+                force 'net.minidev:json-smart:2.5.1'
+            }
 
             //exclude group: "log4j", module: "log4j"
             //exclude group: "log4j", module: "slf4j-simple"
@@ -29,9 +29,6 @@ allprojects {
             //exclude group: "org.apache.logging.log4j", module: "log4j-api"
             exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
             exclude group: "commons-logging", module: "commons-logging"
-            exclude group: "io.zipkin.brave", module: "brave"
-            exclude group: "io.zipkin.reporter2", module: "zipkin-reporter-brave"
-            exclude group: "io.micrometer", module: "micrometer-tracing-bridge-brave"
         }
     }
 }

@@ -37,7 +37,7 @@ archivesBaseName = 'taotao-cloud-xxljob'
 
 
 configurations {
-    all {
+    configureEach {
         resolutionStrategy.cacheChangingModulesFor 0, "seconds"
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
