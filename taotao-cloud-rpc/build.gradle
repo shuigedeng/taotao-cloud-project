@@ -1,15 +1,15 @@
 subprojects {
     dependencies {
         implementation 'org.slf4j:slf4j-api:2.0.16'
-        implementation 'ch.qos.logback:logback-core:1.5.15'
-        implementation 'ch.qos.logback:logback-access:1.5.15'
-        implementation 'ch.qos.logback:logback-classic:1.5.15'
+        implementation 'ch.qos.logback:logback-core:1.5.16'
+        implementation 'ch.qos.logback:logback-access:1.5.16'
+        implementation 'ch.qos.logback:logback-classic:1.5.16'
 
         testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
         testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
         testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.4'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
-        testImplementation "org.assertj:assertj-core:3.27.0"
+        testImplementation "org.assertj:assertj-core:3.27.2"
 
         compileOnly "org.projectlombok:lombok:1.18.36"
         annotationProcessor "org.projectlombok:lombok:1.18.36"
