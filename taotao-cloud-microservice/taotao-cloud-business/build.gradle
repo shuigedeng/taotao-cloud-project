@@ -57,13 +57,16 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         }
         generateProtoTasks {
             all()*.plugins {
-                grpc {}
+                grpc {
+                    option 'jakarta_omit'
+                    option '@generated=omit'
+                }
             }
         }
     }
 
     configurations {
-    configureEach {
+        configureEach {
             //resolutionStrategy {
             //    //force "org.codehaus.groovy:groovy:4.0.0"
             //    force 'jakarta.annotation:jakarta.annotation-api:1.3.5'
@@ -75,24 +78,24 @@ configure(subprojects.findAll { (it.name.endsWith("-api")) }) { project ->
         }
     }
 
-    tasks.register('javaxReplaceToJakarta') {
-        doLast {
-            def treeFile = fileTree(
-                    dir: "${project.layout.buildDirectory.asFile.get()}/generated/source/proto/main/grpc",
-                    includes: ["**/*.java"])
-
-            treeFile.each({
-                File f ->
-                    {
-                        def text = f.text
-                        text = text.replaceAll("javax", "jakarta")
-                        f.write(text, "UTF-8")
-                    }
-            })
-        }
-    }
-
-    generateProto.finalizedBy javaxReplaceToJakarta
+    //tasks.register('javaxReplaceToJakarta') {
+    //    doLast {
+    //        def treeFile = fileTree(
+    //                dir: "${project.layout.buildDirectory.asFile.get()}/generated/source/proto/main/grpc",
+    //                includes: ["**/*.java"])
+//
+    //        treeFile.each({
+    //            File f ->
+    //                {
+    //                    def text = f.text
+    //                    text = text.replaceAll("javax", "jakarta")
+    //                    f.write(text, "UTF-8")
+    //                }
+    //        })
+    //    }
+    //}
+//
+    //generateProto.finalizedBy javaxReplaceToJakarta
 
     //// Optional
     //eclipse {

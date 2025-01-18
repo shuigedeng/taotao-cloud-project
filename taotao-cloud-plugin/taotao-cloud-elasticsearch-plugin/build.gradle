@@ -85,7 +85,7 @@ dependencies {
     testImplementation "org.elasticsearch.plugin:elasticsearch-plugin-analysis-api:8.17.0"
     testImplementation "org.apache.lucene:lucene-analysis-common:10.0.0"
 
-    testImplementation 'org.mockito:mockito-core:5.14.2'
+    testImplementation 'org.mockito:mockito-core:5.15.2'
     testImplementation 'org.hamcrest:hamcrest:3.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'

@@ -317,8 +317,6 @@ allprojects {
 
         maven { url "https://repository.aspose.com/repo/" }
         maven { url "https://repo.e-iceblue.cn/repository/maven-public/" }
-
-        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
 

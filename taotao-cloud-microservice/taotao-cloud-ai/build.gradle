@@ -1,4 +1,65 @@
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven {
+        url "https://repo1.maven.org/maven2"
+    }
+
+    maven {
+        allowInsecureProtocol = true
+        url 'https://maven.aliyun.com/repository/public'
+    }
+    maven {
+        allowInsecureProtocol = true
+
+        credentials {
+            username = findProperty("mavenUsername") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME")
+            password = findProperty("mavenPassword") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD")
+        }
+        url 'https://repo.rdc.aliyun.com/repository/136936-release-reey0l/'
+    }
+    //阿里云新的仓库
+    maven {
+        credentials {
+            username = findProperty("mavenUsernameNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_USERNAME_NEW")
+            password = findProperty("mavenPasswordNew") ?: System.getenv("TAOTAO_CLOUD_MAVEN_PASSWORD_NEW")
+        }
+        url 'https://packages.aliyun.com/60516c4824e1e6fbecd22990/maven/2085441-release-8v0qbs'
+    }
+
+    maven {
+        allowInsecureProtocol = true
+        url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"
+    }
+
+    maven {
+        allowInsecureProtocol = true
+        url "https://mirrors.huaweicloud.com/repository/maven/"
+    }
+
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url 'https://repo.spring.io/release' }
+
+    maven { url "https://maven.aliyun.com/repository/central" }
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://maven.aliyun.com/repository/google" }
+    maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+    maven { url "https://maven.aliyun.com/repository/spring" }
+    maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+    maven { url "https://maven.aliyun.com/repository/grails-core" }
+    maven { url "https://maven.aliyun.com/repository/apache-snapshots" }
+
+    maven { url "https://repository.aspose.com/repo/" }
+    maven { url "https://repo.e-iceblue.cn/repository/maven-public/" }
+
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+}
+
 dependencies {
+    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M4")
+
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
     implementation "io.github.shuigedeng:taotao-cloud-starter-alibaba"
@@ -46,12 +107,11 @@ dependencies {
 
     implementation 'com.github.oshi:oshi-core:6.6.5'
 
-    //todo更新版本之后没这个了 后面应该会加上  alibaba ai
-    //implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M5.1"
 
     //spring ai
-    // https://repo.spring.io/milestone    https://repo.spring.io/snapshot
+    // https://repo.spring.io/milestone
+    // https://repo.spring.io/snapshot
     //使用OpenAI
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
     //使用transformers
