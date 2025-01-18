@@ -1,7 +1,7 @@
 apply plugin: "com.github.spotbugs"
 
 dependencies {
-    compileOnly "com.github.spotbugs:spotbugs-annotations:4.8.6"
+    compileOnly "com.github.spotbugs:spotbugs-annotations:4.9.0"
     spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:1.13.0"
 }
 

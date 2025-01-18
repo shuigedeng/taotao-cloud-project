@@ -129,9 +129,9 @@ configurations {
             force "org.codehaus.groovy:groovy:4.0.0"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.1'
-            force 'org.bouncycastle:bcprov-jdk18on:1.79'
-            force 'org.bouncycastle:bcpkix-jdk18on:1.79'
-            force 'org.bouncycastle:bcutil-jdk18on:1.79'
+            force 'org.bouncycastle:bcprov-jdk18on:1.80'
+            force 'org.bouncycastle:bcpkix-jdk18on:1.80'
+            force 'org.bouncycastle:bcutil-jdk18on:1.80'
             force 'org.webjars.npm:csstype:3.1.3'
             force 'org.webjars.npm:postcss:8.4.39'
             force 'org.webjars.npm:nanoid:4.0.2'

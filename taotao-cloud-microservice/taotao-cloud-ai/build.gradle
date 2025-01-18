@@ -27,9 +27,9 @@ dependencies {
     implementation "com.googlecode.aviator:aviator:5.4.3"
 
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java
-    implementation "com.google.protobuf:protobuf-java:4.29.2"
+    implementation "com.google.protobuf:protobuf-java:4.29.3"
     //https://search.maven.org/artifact/com.google.protobuf/protobuf-java-util
-    implementation "com.google.protobuf:protobuf-java-util:4.29.2"
+    implementation "com.google.protobuf:protobuf-java-util:4.29.3"
     //https://search.maven.org/artifact/com.googlecode.protobuf-java-format/protobuf-java-format
     //implementation "com.googlecode.protobuf-java-format:protobuf-java-format:1.4"
 
@@ -48,7 +48,7 @@ dependencies {
 
     //todo更新版本之后没这个了 后面应该会加上  alibaba ai
     //implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-ai'
-    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M3.3"
+    implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M5.1"
 
     //spring ai
     // https://repo.spring.io/milestone    https://repo.spring.io/snapshot

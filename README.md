@@ -173,7 +173,7 @@ CLOUD:
 | Elasticsearch        | 8.17.0           |
 | Xxl-job              | 2.4.2            |
 | Guava                | 33.4.0-jre       |
-| Grpc                 | 1.69.0           |
+| Grpc                 | 1.69.1           |
 | Arthas               | 4.0.3            |
 | Netty                | 4.1.116.Final    |
 
