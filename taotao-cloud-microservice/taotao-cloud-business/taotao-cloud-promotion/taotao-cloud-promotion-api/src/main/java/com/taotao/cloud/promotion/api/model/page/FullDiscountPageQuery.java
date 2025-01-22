@@ -29,7 +29,7 @@ import lombok.Setter;
 /** 满优惠查询通用类 */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class FullDiscountPageQuery extends BasePromotionsSearchQuery implements Serializable {

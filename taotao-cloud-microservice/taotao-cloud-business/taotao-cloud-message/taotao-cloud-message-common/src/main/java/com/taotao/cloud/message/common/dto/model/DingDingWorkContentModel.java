@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * https://open.dingtalk.com/document/orgapp-server/asynchronous-sending-of-enterprise-session-messages
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class DingDingWorkContentModel extends ContentModel {

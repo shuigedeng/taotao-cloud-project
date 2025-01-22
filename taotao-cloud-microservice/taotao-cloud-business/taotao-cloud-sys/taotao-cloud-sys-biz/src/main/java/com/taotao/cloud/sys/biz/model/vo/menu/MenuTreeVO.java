@@ -31,7 +31,7 @@ import lombok.*;
  * @since 2020/10/21 11:09
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

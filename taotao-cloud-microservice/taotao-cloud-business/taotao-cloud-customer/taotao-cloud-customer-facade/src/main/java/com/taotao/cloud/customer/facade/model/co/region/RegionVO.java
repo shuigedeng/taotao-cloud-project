@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 地区VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * @author 3y
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class FeiShuRobotAccount {

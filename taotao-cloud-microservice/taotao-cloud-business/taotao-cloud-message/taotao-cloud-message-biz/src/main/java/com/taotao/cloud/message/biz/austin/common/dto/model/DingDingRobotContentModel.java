@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * https://open.dingtalk.com/document/group/custom-robot-access
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class DingDingRobotContentModel extends ContentModel {

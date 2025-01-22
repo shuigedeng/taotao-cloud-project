@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class FlowContModel {
     /** 审批类型 */
     private Integer type;

@@ -32,7 +32,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class ShortLinkListRequest implements Serializable {
 
     private Set<String> shortLinkCodeSet;

@@ -15,7 +15,7 @@ import lombok.Data;
  * @see com.taotao.cloud.message.biz.austin.handler.domain.sms austin
  */
 @Data
-@Builder
+@Accessors(chain=true)
 public class LinTongSendMessage {
     String phone;
     String content;

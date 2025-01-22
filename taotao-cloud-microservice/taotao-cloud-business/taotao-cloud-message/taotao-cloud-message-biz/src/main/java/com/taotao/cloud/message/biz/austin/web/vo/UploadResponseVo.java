@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  *
  * @author shuigedeng
  */
-@Builder
+@Accessors(chain=true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
  * @since 2021-10-09 15:32:25
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

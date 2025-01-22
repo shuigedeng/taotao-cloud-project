@@ -35,7 +35,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "订单投诉查询参数")

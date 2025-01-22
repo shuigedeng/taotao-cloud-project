@@ -27,7 +27,7 @@ import lombok.Setter;
 /** 积分商品查询通用类 */
 @Getter
 @Setter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsPageQuery extends BasePromotionsSearchQuery {

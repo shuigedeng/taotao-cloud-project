@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-05-25 15:46:55
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "消息")

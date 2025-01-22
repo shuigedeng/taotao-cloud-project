@@ -18,7 +18,7 @@ import java.util.Map;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class MessageParam {
 
     /**

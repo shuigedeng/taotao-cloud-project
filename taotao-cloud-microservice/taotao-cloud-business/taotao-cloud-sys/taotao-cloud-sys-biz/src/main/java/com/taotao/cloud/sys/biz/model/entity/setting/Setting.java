@@ -77,7 +77,7 @@ public class Setting extends BaseSuperEntity<Setting, Long> {
         super.setId(id);
     }
 
-    @Builder
+    @Accessors(chain=true)
     public Setting(
             Long id,
             LocalDateTime createTime,

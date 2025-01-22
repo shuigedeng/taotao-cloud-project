@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
  * @author shuigedeng
  * https://docs.getui.com/getui/server/rest_v2/common_args/?id=doc-title-1
  */
-@Builder
+@Accessors(chain=true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -58,7 +58,7 @@ public class RoleResource extends SuperEntity<RoleResource, Long> {
     @Column(name = "resource_id", columnDefinition = "bigint not null comment '菜单ID'")
     private Long resourceId;
 
-    @Builder
+    @Accessors(chain=true)
     public RoleResource(Long id, Long roleId, Long resourceId) {
         super(id);
         this.roleId = roleId;

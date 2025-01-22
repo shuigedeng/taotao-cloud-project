@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 流量数据展示VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlatformViewVO {
@@ -41,7 +41,7 @@ public class PlatformViewVO {
     @Schema(description = "uv数量")
     private Long uvNum;
 
-    @Builder.Default
+    
     @Schema(description = "店铺id")
     private Long storeId = 1L;
 

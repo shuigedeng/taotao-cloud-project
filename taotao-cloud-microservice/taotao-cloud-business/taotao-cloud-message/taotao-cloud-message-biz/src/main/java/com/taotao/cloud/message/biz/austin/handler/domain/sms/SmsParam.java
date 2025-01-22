@@ -11,7 +11,7 @@ import java.util.Set;
  * 发送短信参数
  */
 @Data
-@Builder
+@Accessors(chain=true)
 public class SmsParam {
 
     /**

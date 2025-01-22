@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author shuigedeng
  */
 @Data
-@Builder
+@Accessors(chain=true)
 public class AustinSpringEventSource implements Serializable {
     private String topic;
     private String jsonValue;

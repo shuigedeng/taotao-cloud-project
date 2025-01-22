@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 会员发票添加VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员发票")

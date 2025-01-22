@@ -12,7 +12,7 @@ import java.util.List;
  * @author 3y
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserTimeLineVo {
@@ -26,7 +26,7 @@ public class UserTimeLineVo {
      * ItemsVO
      */
     @Data
-    @Builder
+    @Accessors(chain=true)
     public static class ItemsVO {
         /**
          * 业务ID

@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
  * @since 2021/1/28 09:21
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class RefundLogVO {

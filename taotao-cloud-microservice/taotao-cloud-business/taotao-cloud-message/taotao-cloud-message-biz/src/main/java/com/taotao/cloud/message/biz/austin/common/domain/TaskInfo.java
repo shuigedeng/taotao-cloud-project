@@ -16,7 +16,7 @@ import java.util.Set;
  * @author shuigedeng
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskInfo implements Serializable, ProcessModel {

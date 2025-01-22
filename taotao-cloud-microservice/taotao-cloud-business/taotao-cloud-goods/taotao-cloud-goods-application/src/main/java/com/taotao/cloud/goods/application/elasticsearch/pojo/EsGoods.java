@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
  * 商品搜索结果实体
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class EsGoods {

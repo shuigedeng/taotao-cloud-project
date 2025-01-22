@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class FeiShuRobotResult {
 
     /**

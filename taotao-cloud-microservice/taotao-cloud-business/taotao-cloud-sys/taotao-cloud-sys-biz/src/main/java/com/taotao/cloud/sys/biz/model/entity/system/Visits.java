@@ -63,7 +63,7 @@ public class Visits extends BaseSuperEntity<Visits, Long> {
     @Column(name = "week_day", columnDefinition = "varchar(64) not null comment '天'")
     private String weekDay;
 
-    @Builder
+    @Accessors(chain=true)
     public Visits(
             Long id,
             LocalDateTime createTime,

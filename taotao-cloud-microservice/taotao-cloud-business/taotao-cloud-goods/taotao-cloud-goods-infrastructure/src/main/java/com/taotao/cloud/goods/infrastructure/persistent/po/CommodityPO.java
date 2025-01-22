@@ -37,7 +37,7 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Entity
 @Table(name = CommodityPO.TABLE_NAME)
 @TableName(CommodityPO.TABLE_NAME)

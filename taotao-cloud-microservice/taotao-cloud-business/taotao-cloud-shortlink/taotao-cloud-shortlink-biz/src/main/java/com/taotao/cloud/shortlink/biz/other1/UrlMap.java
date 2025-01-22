@@ -12,7 +12,7 @@ import java.time.Instant;
 @Table(name = "t_url_map", indexes = {@Index(columnList = "longUrl", unique = true),
 	@Index(columnList = "expireTime", unique = false)})
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class UrlMap {

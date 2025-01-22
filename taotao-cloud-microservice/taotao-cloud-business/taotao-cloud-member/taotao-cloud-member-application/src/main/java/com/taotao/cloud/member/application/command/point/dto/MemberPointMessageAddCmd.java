@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-05-30 13:37:11
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "租户id")

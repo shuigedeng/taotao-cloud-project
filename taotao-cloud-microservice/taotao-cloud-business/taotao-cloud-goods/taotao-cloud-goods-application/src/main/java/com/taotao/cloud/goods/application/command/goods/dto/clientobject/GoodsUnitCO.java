@@ -34,7 +34,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "商品计量CO")

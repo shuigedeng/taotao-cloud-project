@@ -99,7 +99,7 @@ public class FileLog extends BaseSuperEntity<FileLog, Long> {
     @Column(name = "size", columnDefinition = "bigint not null comment '大小'")
     private Long size;
 
-    @Builder
+    @Accessors(chain=true)
     public FileLog(
             Long id,
             LocalDateTime createTime,

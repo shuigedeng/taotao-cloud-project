@@ -38,7 +38,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Entity
 @Table(name = Specification.TABLE_NAME)
 @TableName(Specification.TABLE_NAME)

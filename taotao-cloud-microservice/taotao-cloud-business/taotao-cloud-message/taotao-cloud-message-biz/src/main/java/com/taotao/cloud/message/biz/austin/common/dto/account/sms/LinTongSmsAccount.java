@@ -16,7 +16,7 @@ import java.util.Objects;
  * @see com.taotao.cloud.message.biz.austin.common.dto.account austin
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class LinTongSmsAccount extends SmsAccount {

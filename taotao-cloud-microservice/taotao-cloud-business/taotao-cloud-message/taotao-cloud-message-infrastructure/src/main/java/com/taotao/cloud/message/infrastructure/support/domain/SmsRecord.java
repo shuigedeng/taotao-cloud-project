@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

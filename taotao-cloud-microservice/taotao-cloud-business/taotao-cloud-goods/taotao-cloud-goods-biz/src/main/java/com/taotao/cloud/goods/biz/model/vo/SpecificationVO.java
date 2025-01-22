@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 规格项表规格项 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "参数组关联的参数集合")

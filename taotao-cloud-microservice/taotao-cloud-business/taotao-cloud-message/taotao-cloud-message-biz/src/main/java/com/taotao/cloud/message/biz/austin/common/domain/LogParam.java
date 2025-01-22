@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @author shuigedeng
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class LogParam {

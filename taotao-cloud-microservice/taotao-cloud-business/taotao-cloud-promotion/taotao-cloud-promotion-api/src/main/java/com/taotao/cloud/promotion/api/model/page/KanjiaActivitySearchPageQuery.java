@@ -26,7 +26,7 @@ import lombok.Setter;
 /** 砍价活动搜索参数 */
 @Getter
 @Setter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivitySearchPageQuery extends BasePromotionsSearchQuery {

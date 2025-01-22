@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Data
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

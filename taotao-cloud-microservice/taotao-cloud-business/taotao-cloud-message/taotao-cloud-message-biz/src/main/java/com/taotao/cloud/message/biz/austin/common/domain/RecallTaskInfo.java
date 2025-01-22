@@ -13,7 +13,7 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecallTaskInfo {

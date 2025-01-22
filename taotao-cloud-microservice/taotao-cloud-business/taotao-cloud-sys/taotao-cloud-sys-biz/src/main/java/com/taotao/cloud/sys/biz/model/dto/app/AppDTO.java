@@ -28,7 +28,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(title = "系统应用")

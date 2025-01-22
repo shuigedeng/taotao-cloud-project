@@ -22,7 +22,7 @@ import lombok.Data;
 
 /** 商品对象 */
 @Data
-@Builder
+@Accessors(chain=true)
 public class ProductVO {
     /** 商品SKU，唯一 */
     private Long skuId;

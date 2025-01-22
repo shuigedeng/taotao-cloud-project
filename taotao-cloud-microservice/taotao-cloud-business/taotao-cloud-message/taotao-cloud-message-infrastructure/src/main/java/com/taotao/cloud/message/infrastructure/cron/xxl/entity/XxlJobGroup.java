@@ -18,7 +18,7 @@ import java.util.*;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class XxlJobGroup {
 
     private int id;

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 运费模板子配置 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "运费模板子配置vo")

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 拼图会员分享对象 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PintuanShareVO implements Serializable {

@@ -29,7 +29,7 @@ import lombok.Setter;
 /** 分销员对象 */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销订单查询对象")

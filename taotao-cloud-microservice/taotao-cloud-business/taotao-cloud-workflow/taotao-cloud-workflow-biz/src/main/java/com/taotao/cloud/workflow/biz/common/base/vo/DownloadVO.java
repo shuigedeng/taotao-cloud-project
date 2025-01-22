@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /** */
 @Data
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class DownloadVO {

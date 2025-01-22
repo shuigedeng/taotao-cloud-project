@@ -32,7 +32,7 @@ import org.mapstruct.factory.Mappers;
  * @since 2022-04-27 16:58:21
  */
 @Mapper(
-        builder = @Builder(disableBuilder = true),
+        builder = @Accessors(chain=true)(disableBuilder = true),
         unmappedSourcePolicy = ReportingPolicy.IGNORE,
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommodityConvert {

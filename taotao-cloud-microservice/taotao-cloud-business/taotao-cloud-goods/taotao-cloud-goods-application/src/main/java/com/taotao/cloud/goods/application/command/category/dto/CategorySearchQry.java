@@ -36,7 +36,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-25 16:33:05
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategorySearchQry implements Serializable {

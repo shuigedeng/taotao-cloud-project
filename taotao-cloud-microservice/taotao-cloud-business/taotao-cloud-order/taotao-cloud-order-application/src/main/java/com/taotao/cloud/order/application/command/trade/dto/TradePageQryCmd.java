@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 
 /** 交易参数 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "交易参数")

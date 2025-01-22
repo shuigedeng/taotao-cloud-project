@@ -36,7 +36,7 @@ import org.hibernate.validator.constraints.Length;
  * @since 2021-10-09 15:21:15
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

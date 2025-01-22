@@ -39,7 +39,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @since 2022-03-14 11:25:33
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员信息修改DTO")

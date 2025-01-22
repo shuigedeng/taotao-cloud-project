@@ -19,7 +19,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class XxlJobInfo implements Serializable {
 
     /**

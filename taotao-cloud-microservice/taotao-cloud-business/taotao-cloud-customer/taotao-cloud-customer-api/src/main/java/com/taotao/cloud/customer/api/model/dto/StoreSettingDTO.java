@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/12/16 15:15
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺设置")

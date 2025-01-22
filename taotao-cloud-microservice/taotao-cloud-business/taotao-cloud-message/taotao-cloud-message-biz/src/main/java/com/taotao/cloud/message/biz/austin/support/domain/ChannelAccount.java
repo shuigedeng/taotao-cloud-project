@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * 渠道账号信息
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

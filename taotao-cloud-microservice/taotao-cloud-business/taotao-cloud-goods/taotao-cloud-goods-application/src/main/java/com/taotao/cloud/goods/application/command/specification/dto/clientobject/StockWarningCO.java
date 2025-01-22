@@ -34,7 +34,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-14 21:52:39
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class StockWarningCO implements Serializable {

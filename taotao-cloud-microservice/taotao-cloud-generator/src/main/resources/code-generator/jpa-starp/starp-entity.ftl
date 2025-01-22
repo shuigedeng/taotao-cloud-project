@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;</#if>
  * @date ${.now?string('yyyy-MM-dd')}
  */
 @Entity
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 <#if isLombok?exists && isLombok==true>@Data</#if>
 <#if isComment?exists && isComment==true>@Table(name="${classInfo.originTableName}")</#if><#if isSwagger?exists && isSwagger==true>

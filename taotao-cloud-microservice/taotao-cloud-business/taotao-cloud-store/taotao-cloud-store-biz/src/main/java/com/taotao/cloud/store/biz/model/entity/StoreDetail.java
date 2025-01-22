@@ -46,7 +46,7 @@ import org.hibernate.validator.constraints.Length;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Entity
 @Table(name = StoreDetail.TABLE_NAME)
 @TableName(StoreDetail.TABLE_NAME)

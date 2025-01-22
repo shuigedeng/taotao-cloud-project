@@ -28,7 +28,7 @@ import lombok.Setter;
 /** 售后原因搜索参数 */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "售后原因搜索参数")

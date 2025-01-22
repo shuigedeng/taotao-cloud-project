@@ -37,7 +37,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class StoreFlowVO {

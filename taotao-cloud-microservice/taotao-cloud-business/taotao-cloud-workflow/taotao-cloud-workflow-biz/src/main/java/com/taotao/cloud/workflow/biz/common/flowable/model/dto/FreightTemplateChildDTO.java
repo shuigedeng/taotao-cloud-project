@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
  * @since 2018-08-22 15:10:51
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "模版详细配置")

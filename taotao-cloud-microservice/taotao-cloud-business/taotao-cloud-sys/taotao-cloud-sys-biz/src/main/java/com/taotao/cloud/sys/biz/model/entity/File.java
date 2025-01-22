@@ -95,7 +95,7 @@ public class File extends BaseSuperEntity<File, Long> {
     @Column(name = "length", columnDefinition = "bigint null comment '大小'")
     private Long length;
 
-    @Builder
+    @Accessors(chain=true)
     public File(
             Long id,
             LocalDateTime createTime,

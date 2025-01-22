@@ -12,7 +12,7 @@ import java.util.List;
  * @author shuigedeng
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class SmsTimeLineVo {
@@ -26,7 +26,7 @@ public class SmsTimeLineVo {
      * ItemsVO
      */
     @Data
-    @Builder
+    @Accessors(chain=true)
     public static class ItemsVO {
         /**
          * 业务ID

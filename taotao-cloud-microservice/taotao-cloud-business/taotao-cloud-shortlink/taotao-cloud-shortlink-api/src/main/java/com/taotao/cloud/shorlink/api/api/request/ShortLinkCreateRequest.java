@@ -32,7 +32,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class ShortLinkCreateRequest implements Serializable {
 
     /** 用户ID */

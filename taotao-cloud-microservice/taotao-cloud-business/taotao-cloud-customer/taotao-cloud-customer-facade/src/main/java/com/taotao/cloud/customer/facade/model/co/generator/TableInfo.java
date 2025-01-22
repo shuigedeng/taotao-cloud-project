@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-03-25 14:05:48
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class TableInfo {

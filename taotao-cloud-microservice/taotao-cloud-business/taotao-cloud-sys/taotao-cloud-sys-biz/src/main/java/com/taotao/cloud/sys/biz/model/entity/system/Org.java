@@ -96,7 +96,7 @@ public class Org extends BaseSuperEntity<Org, Long> {
     @Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
     private String tenantId;
 
-    @Builder
+    @Accessors(chain=true)
     public Org(
             Long id,
             LocalDateTime createTime,

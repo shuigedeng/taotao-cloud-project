@@ -85,7 +85,7 @@ public class DeptPO extends BaseSuperEntity<DeptPO, Long> {
 
 	private String path;
 
-    @Builder
+    @Accessors(chain=true)
     public DeptPO(
             Long id,
             LocalDateTime createTime,

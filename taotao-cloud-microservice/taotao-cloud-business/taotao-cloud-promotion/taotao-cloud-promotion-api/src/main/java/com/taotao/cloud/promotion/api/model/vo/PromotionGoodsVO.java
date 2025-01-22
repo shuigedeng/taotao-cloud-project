@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 
 /** 促销活动商品实 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PromotionGoodsVO implements Serializable {

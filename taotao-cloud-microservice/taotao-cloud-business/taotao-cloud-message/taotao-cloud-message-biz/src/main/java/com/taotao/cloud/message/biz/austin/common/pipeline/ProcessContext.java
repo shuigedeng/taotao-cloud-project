@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Accessors(chain = true)
 public class ProcessContext<T extends ProcessModel> implements Serializable {
     /**

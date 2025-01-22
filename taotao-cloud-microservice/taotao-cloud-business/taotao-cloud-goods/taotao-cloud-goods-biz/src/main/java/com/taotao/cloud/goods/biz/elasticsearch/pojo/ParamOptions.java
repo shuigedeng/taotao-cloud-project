@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /** 参数属性选择器 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParamOptions {

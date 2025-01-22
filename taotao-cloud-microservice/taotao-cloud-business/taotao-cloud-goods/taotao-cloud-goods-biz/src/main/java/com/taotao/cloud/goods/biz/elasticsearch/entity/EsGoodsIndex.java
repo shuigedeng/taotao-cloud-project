@@ -53,7 +53,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "#{@elasticsearchProperties.indexPrefix}_" + EsSuffix.GOODS_INDEX_NAME)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Accessors(chain = true)
 public class EsGoodsIndex implements Serializable {
 

@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 
 /** 优惠券视图对象 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "优惠券")

@@ -70,7 +70,7 @@ public class SmsSign extends BaseSuperEntity<SmsSign, Long> {
     @Column(name = "reason", columnDefinition = "varchar(2000) not null comment '审核备注'")
     private String reason;
 
-    @Builder
+    @Accessors(chain=true)
     public SmsSign(
             Long id,
             LocalDateTime createTime,

@@ -30,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /** 会员vo */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "MemberVO")

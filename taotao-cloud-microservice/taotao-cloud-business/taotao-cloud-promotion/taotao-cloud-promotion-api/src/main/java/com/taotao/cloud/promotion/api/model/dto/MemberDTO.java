@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /** 会员dto */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO implements Serializable {

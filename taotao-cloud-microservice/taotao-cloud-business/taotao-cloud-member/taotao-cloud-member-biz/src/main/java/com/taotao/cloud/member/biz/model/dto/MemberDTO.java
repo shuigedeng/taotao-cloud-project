@@ -36,7 +36,7 @@ import org.hibernate.validator.constraints.Length;
  * @since 2022-03-14 11:25:41
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "MemberDTO", description = "会员注册DTO")

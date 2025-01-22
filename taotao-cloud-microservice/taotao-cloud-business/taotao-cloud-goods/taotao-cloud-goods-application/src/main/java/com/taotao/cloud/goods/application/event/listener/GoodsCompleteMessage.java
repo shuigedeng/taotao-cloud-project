@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品购买完成信息 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsCompleteMessage {

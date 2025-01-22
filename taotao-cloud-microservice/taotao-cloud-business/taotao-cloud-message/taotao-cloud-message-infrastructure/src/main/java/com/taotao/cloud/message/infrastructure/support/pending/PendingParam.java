@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Accessors(chain = true)
 public class PendingParam<T> {
 

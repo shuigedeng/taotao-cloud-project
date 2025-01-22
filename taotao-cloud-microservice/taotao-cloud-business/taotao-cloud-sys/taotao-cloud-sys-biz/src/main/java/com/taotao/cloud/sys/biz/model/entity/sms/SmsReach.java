@@ -63,7 +63,7 @@ public class SmsReach extends BaseSuperEntity<SmsReach, Long> {
     @Column(name = "num", columnDefinition = "varchar(2000) not null comment '预计发送条数'")
     private String num;
 
-    @Builder
+    @Accessors(chain=true)
     public SmsReach(
             Long id,
             LocalDateTime createTime,

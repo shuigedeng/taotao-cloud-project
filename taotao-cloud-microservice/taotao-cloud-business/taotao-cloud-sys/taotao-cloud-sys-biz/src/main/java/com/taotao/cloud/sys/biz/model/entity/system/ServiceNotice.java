@@ -63,7 +63,7 @@ public class ServiceNotice extends BaseSuperEntity<ServiceNotice, Long> {
     @Column(name = "content", columnDefinition = "varchar(255) not null default '' comment '站内信内容(富文本框编辑，可以上传图片的html)'")
     private String content;
 
-    @Builder
+    @Accessors(chain=true)
     public ServiceNotice(
             Long id,
             LocalDateTime createTime,

@@ -32,7 +32,7 @@ import me.chanjar.weixin.mp.bean.tag.WxUserTag;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@Builder
+@Accessors(chain=true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class MpTagDO extends BaseDO {

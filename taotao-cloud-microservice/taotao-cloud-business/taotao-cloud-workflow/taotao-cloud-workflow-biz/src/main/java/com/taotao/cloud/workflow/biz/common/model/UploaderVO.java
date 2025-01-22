@@ -22,7 +22,7 @@ import lombok.Data;
 
 /** */
 @Data
-@Builder
+@Accessors(chain=true)
 public class UploaderVO {
     @Schema(description = "名称")
     private String name;

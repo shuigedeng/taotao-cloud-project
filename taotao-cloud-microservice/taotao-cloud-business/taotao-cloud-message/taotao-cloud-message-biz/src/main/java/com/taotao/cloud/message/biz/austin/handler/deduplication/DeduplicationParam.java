@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  * @date 2021/12/11
  * 去重服务所需要的参数
  */
-@Builder
+@Accessors(chain=true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 分销商品信息 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销商品信息")

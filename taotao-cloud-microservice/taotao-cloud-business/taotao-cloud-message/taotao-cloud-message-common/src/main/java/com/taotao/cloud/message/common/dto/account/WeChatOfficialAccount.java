@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  * * @author zyg
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class WeChatOfficialAccount {

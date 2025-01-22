@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /** 店铺售后收件地址 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺售后收件地址")

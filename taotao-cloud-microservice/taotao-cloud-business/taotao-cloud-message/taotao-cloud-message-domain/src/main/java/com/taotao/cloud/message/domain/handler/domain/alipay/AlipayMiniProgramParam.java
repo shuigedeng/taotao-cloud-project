@@ -11,7 +11,7 @@ import java.util.Set;
  * 支付宝小程序参数
  */
 @Data
-@Builder
+@Accessors(chain=true)
 public class AlipayMiniProgramParam {
     /**
      * 业务Id

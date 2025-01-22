@@ -46,7 +46,7 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Entity
 @Table(name = Distribution.TABLE_NAME)
 @TableName(Distribution.TABLE_NAME)
@@ -77,15 +77,15 @@ public class Distribution extends BaseSuperEntity<Distribution, Long> {
     private String idNumber;
     /** 分销总额 */
     @Column(name = "rebate_total", columnDefinition = "decimal(10,2) not null  comment '分销总额'")
-    @Builder.Default
+    
     private BigDecimal rebateTotal = BigDecimal.ZERO;
     /** 可提现金额 */
     @Column(name = "can_rebate", columnDefinition = "decimal(10,2) not null  comment '可提现金额'")
-    @Builder.Default
+    
     private BigDecimal canRebate = BigDecimal.ZERO;
     /** 冻结金额 */
     @Column(name = "commission_frozen", columnDefinition = "decimal(10,2) not null  comment '冻结金额'")
-    @Builder.Default
+    
     private BigDecimal commissionFrozen = BigDecimal.ZERO;
     /** 分销订单数 */
     @Column(name = "distribution_order_count", columnDefinition = "int not null  comment '分销订单数'")

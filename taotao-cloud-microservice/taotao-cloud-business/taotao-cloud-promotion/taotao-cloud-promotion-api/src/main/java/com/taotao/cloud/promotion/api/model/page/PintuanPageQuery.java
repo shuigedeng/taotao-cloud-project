@@ -28,7 +28,7 @@ import lombok.Setter;
 /** 拼团查询通用类 */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PintuanPageQuery extends BasePromotionsSearchQuery {

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 评价数量VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "评价数量VO")

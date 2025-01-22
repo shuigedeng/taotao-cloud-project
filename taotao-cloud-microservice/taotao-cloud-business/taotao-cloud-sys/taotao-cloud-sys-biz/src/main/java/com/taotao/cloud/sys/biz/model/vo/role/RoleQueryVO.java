@@ -30,7 +30,7 @@ import lombok.*;
  * @since 2021-10-09 15:23:58
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

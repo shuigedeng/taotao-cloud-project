@@ -29,7 +29,7 @@ import lombok.*;
  * @since 2021-10-09 15:18:07
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

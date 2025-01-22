@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * https://developer.work.weixin.qq.com/document/path/91770#%E6%96%87%E6%9C%AC%E7%B1%BB%E5%9E%8B
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnterpriseWeChatRobotContentModel extends ContentModel {

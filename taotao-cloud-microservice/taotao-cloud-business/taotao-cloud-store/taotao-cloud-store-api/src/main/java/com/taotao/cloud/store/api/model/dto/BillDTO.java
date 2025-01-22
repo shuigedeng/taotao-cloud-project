@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/11/17 4:26 下午
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "结算单传输对象")

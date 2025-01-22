@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 微信小程序直播商品DTO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsInfoAddCmd {

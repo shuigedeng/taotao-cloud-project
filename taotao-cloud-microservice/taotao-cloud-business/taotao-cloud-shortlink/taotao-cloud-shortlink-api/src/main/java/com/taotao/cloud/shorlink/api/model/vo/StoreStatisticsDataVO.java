@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 
 /** 商品统计VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class StoreStatisticsDataVO {

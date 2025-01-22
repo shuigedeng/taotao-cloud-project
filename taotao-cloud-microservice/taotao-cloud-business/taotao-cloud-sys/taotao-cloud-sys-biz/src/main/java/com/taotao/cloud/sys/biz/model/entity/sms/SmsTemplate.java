@@ -70,7 +70,7 @@ public class SmsTemplate extends BaseSuperEntity<SmsTemplate, Long> {
     @Column(name = "reason", columnDefinition = "varchar(2000) not null comment '审核备注'")
     private String reason;
 
-    @Builder
+    @Accessors(chain=true)
     public SmsTemplate(
             Long id,
             LocalDateTime createTime,

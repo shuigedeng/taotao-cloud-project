@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * 通知栏消息推送
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PushContentModel extends ContentModel {

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品规格CO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsSkuSpecCO {

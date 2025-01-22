@@ -126,7 +126,7 @@ public enum DeviceTopicEnum {
     }
 
     @Data
-    @Builder
+    @Accessors(chain=true)
     public static class DeviceTopicContext {
         /**
          * 设备客户端信息

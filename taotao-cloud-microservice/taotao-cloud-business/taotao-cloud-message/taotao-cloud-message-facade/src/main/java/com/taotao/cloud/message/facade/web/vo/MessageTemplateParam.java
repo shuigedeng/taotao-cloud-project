@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @date 2022/1/22
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class MessageTemplateParam {

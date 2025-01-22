@@ -115,7 +115,7 @@ public class Region extends BaseSuperEntity<Region, Long> {
     @Column(name = "depth", columnDefinition = "int not null default 0 comment '当前深度 已1开始'")
     private Integer depth;
 
-    @Builder
+    @Accessors(chain=true)
     public Region(
             Long id,
             LocalDateTime createTime,

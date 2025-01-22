@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
  * @since 2021/2/20 3:24 下午
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺结算日")

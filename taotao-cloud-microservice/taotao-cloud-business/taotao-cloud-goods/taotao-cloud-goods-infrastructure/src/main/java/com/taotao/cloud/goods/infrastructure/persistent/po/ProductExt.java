@@ -37,7 +37,7 @@ package com.taotao.cloud.goods.infrastructure.persistent.po; // package com.taot
 // */
 // @Setter
 // @Getter
-// @Builder
+// @Accessors(chain=true)
 // @AllArgsConstructor
 // @NoArgsConstructor
 //// @Entity

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * @Version 1.0.0
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class SimpleTaskInfo {

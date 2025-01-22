@@ -37,7 +37,7 @@ import lombok.Setter;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Getter
 @Setter
 @Entity

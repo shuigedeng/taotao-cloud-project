@@ -29,7 +29,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivitySearchQuery extends BasePromotionsSearchQuery {

@@ -30,7 +30,7 @@ import lombok.Setter;
 /** 物流公司设置 */
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Getter
 @Setter
 @Entity

@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 订单统计概述 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderOverviewVO {

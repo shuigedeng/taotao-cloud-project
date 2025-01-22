@@ -22,7 +22,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-04-28 09:19:50
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺流水查询DTO")

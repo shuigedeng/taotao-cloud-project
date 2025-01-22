@@ -11,7 +11,7 @@ import lombok.Getter;
  * @since 2024/2/2
  */
 @Getter
-@Builder
+@Accessors(chain=true)
 public class DaxPayConfig {
 
     /** 服务地址 */
@@ -21,14 +21,14 @@ public class DaxPayConfig {
     private String appId;
 
     /** 签名方式 */
-    @Builder.Default
+    
     private SignTypeEnum signType = SignTypeEnum.HMAC_SHA256;
 
     /** 签名秘钥 */
     private String signSecret;
 
     /** 请求超时时间 */
-    @Builder.Default
+    
     private int reqTimeout = 30000;
 
 

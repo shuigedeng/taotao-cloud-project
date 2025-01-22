@@ -37,7 +37,7 @@ import org.hibernate.validator.constraints.Length;
 
 /** 商品编辑DTO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsOperationDTO implements Serializable {

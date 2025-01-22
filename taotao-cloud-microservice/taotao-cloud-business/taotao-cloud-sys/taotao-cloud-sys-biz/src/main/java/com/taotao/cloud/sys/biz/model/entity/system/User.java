@@ -116,7 +116,7 @@ public class User extends BaseSuperEntity<User, Long> {
     // @Column(name = "job_id", columnDefinition = "bigint not null comment '岗位ID'")
     // private Long jobId;
 
-    @Builder
+    @Accessors(chain=true)
     public User(
             Long id,
             LocalDateTime createTime,

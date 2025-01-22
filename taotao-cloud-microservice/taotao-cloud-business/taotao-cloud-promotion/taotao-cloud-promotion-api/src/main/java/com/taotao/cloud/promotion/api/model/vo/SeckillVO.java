@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 秒杀活动视图对象 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeckillVO {

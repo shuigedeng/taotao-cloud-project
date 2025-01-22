@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 店铺经营范围 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺经营范围")

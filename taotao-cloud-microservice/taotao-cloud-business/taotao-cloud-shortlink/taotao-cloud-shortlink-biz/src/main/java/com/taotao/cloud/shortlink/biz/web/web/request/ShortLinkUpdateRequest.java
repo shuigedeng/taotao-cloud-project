@@ -31,7 +31,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class ShortLinkUpdateRequest implements Serializable {
 
     /** ID */

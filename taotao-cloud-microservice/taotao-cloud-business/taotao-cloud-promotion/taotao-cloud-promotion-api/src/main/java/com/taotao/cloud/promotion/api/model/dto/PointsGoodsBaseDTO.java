@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 /** 积分商品实体类 */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class PointsGoodsBaseDTO implements Serializable {

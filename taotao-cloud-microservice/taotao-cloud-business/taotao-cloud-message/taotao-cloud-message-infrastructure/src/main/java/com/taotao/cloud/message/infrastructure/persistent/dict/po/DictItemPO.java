@@ -81,7 +81,7 @@ public class DictItemPO extends BaseSuperEntity<DictItemPO, Long> {
     @Column(name = "sort_num", columnDefinition = "int not null default 1 comment '排序值'")
     private Integer sortNum;
 
-    @Builder
+    @Accessors(chain=true)
     public DictItemPO(
             Long id,
             LocalDateTime createTime,

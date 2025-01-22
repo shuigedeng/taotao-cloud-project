@@ -33,7 +33,7 @@ import lombok.Setter;
 /** 会员优惠券查询通用类 */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCouponSearchPageQuery extends BasePromotionsSearchQuery implements Serializable {

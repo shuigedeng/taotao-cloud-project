@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/6/15 11:00
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

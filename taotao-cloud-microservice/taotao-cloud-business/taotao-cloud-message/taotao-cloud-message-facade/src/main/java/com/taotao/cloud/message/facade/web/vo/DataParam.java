@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * @date 2022/2/22
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class DataParam {

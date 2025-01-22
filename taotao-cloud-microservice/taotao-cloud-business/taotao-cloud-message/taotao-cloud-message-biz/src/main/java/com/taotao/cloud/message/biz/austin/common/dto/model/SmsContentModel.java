@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  * 在前端填写的时候分开，但最后处理的时候会将url拼接在content上
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class SmsContentModel extends ContentModel {

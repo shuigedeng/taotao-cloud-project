@@ -34,7 +34,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "评价查询条件")

@@ -39,7 +39,7 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Accessors(chain = true)
 public class EsGoodsIndexCO implements Serializable {
 

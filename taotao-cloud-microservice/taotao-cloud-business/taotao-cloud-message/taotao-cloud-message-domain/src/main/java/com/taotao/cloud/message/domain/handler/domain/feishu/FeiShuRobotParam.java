@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class FeiShuRobotParam {
 
     /**
@@ -41,7 +41,7 @@ public class FeiShuRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Builder
+    @Accessors(chain=true)
     public static class ContentDTO {
         /**
          * text
@@ -70,7 +70,7 @@ public class FeiShuRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Builder
+        @Accessors(chain=true)
         public static class PostDTO {
             /**
              * zhCn
@@ -84,7 +84,7 @@ public class FeiShuRobotParam {
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
-            @Builder
+            @Accessors(chain=true)
             public static class ZhCnDTO {
                 /**
                  * title
@@ -103,7 +103,7 @@ public class FeiShuRobotParam {
                 @NoArgsConstructor
                 @Data
                 @AllArgsConstructor
-                @Builder
+                @Accessors(chain=true)
                 public static class PostContentDTO {
                     /**
                      * tag
@@ -136,7 +136,7 @@ public class FeiShuRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
-    @Builder
+    @Accessors(chain=true)
     public static class CardDTO {
         /**
          * config
@@ -160,7 +160,7 @@ public class FeiShuRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Builder
+        @Accessors(chain=true)
         public static class ConfigDTO {
             /**
              * wideScreenMode
@@ -180,7 +180,7 @@ public class FeiShuRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Builder
+        @Accessors(chain=true)
         public static class HeaderDTO {
             /**
              * title
@@ -194,7 +194,7 @@ public class FeiShuRobotParam {
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
-            @Builder
+            @Accessors(chain=true)
             public static class TitleDTO {
                 /**
                  * content
@@ -215,7 +215,7 @@ public class FeiShuRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
-        @Builder
+        @Accessors(chain=true)
         public static class ElementsDTO {
             /**
              * tag
@@ -239,7 +239,7 @@ public class FeiShuRobotParam {
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
-            @Builder
+            @Accessors(chain=true)
             public static class TextDTO {
                 /**
                  * content
@@ -259,7 +259,7 @@ public class FeiShuRobotParam {
             @NoArgsConstructor
             @Data
             @AllArgsConstructor
-            @Builder
+            @Accessors(chain=true)
             public static class ActionsDTO {
                 /**
                  * tag

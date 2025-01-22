@@ -25,7 +25,7 @@ import lombok.Data;
  * @since 2021/3/28 15:50
  */
 @Data
-@Builder
+@Accessors(chain=true)
 public class FlowCommentDto implements Serializable {
 
     /** 意见类别 0 正常意见 1 退回意见 2 驳回意见 */

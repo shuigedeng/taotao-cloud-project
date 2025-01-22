@@ -23,7 +23,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
+@Accessors(chain=true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

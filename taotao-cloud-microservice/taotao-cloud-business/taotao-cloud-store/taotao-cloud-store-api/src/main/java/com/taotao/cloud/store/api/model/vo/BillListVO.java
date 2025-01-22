@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 结算单VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "结算单VO")

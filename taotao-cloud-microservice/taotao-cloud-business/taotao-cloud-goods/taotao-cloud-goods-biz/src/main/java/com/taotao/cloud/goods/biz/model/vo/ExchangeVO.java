@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 
 /** 兑换VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExchangeVO {

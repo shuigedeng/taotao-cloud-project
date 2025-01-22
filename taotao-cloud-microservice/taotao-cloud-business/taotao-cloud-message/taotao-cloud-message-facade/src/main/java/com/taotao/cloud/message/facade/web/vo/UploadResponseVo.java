@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  *
  * @author 3y
  */
-@Builder
+@Accessors(chain=true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

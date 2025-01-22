@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 
 /** MemberCouponVO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCouponVO implements Serializable {

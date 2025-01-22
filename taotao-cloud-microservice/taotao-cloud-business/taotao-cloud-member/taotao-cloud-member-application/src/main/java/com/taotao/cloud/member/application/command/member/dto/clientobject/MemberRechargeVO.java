@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 /** 会员搜索VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "会员搜索VO")

@@ -28,7 +28,7 @@ import lombok.Setter;
 /** 结算单 */
 @Setter
 @Getter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class BillVO {

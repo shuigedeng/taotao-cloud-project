@@ -42,7 +42,7 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Entity
 @Table(name = PurchaseQuoted.TABLE_NAME)
 @TableName(PurchaseQuoted.TABLE_NAME)

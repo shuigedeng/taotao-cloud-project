@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * 菜单查询对象
@@ -31,7 +32,7 @@ import lombok.NoArgsConstructor;
  * @since 2021-10-09 15:27:42
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberQueryRequest implements Serializable {

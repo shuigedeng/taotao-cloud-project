@@ -26,7 +26,7 @@ import lombok.Setter;
 /** 分销佣金查询信息 */
 @Getter
 @Setter
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "分销佣金查询信息")

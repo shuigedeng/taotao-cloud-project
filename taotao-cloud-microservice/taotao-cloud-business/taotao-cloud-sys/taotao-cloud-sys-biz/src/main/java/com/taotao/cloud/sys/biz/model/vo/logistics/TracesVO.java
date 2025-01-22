@@ -24,7 +24,7 @@ import lombok.*;
 
 /** 物流信息 */
 @Data
-@Builder
+@Accessors(chain=true)
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

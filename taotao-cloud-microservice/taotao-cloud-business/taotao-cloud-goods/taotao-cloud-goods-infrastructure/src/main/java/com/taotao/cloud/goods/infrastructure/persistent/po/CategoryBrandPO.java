@@ -42,7 +42,7 @@ import org.hibernate.Hibernate;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 @Entity
 @Table(name = CategoryBrandPO.TABLE_NAME)
 @TableName(CategoryBrandPO.TABLE_NAME)

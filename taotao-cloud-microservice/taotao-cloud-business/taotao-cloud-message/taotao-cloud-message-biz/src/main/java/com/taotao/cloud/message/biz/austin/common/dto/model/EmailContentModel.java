@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
  * 邮件消息体
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailContentModel extends ContentModel {

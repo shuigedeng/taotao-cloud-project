@@ -41,7 +41,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class ArticleCategoryVO extends ArticleCategoryBaseVO {
 
-    @Builder.Default
+    
     @Schema(description = "子菜单")
     private List<ArticleCategoryVO> children = new ArrayList<>();
 

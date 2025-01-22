@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
  * @since 2020-08-22 15:10:51
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺售后收件地址")

@@ -38,7 +38,7 @@ import java.time.LocalDateTime;
  * @since 2023-07-04 09:43:59
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class BasePromotionsVO implements Serializable {

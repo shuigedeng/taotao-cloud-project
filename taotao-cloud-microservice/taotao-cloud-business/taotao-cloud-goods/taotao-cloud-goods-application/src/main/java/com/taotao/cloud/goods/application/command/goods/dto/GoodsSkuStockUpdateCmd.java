@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 
 /** 商品库存DTO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsSkuStockUpdateCmd {

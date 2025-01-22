@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 
 /** 店铺VO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "店铺VO")

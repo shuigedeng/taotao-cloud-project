@@ -71,7 +71,7 @@ public class UserRelation extends SuperEntity<UserRelation, Long> {
     @Column(name = "sort_code", columnDefinition = "int null comment '排序值'")
     private Integer sortCode;
 
-    @Builder
+    @Accessors(chain=true)
     public UserRelation(Long id, Long userId, String objectType, Long objectId, Integer sortCode) {
         super(id);
         this.userId = userId;

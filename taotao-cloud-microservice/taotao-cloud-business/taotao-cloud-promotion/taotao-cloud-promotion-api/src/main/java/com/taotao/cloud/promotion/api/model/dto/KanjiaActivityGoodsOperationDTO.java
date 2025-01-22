@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 
 /** 砍价活动商品操作DTO */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class KanjiaActivityGoodsOperationDTO implements Serializable {

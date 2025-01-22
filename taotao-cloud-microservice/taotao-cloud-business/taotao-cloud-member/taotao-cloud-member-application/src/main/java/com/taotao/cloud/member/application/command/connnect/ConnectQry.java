@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
  * @since 2022-03-14 11:21:35
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "联合登录查询dto")

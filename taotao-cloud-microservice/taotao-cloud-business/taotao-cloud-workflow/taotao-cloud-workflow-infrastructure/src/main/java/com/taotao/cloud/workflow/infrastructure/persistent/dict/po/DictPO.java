@@ -161,7 +161,7 @@ public class DictPO extends BaseSuperEntity<DictPO, Long> {
     @Column(name = "remark", columnDefinition = "varchar(255) comment '备注信息'")
     private String remark;
 
-    @Builder
+    @Accessors(chain=true)
     public DictPO(
             Long id,
             LocalDateTime createTime,

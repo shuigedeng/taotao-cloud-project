@@ -31,7 +31,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Accessors(chain=true)
 public class ShortLinkUrlQueryRequest implements Serializable {
 
     private String originUrl;

@@ -47,7 +47,7 @@ import lombok.Data;
  * @since 2022-04-28 09:17:07
  */
 @Data
-@Builder
+@Accessors(chain=true)
 @AllArgsConstructor
 @Schema(description = "购物车视图")
 public class TradeAddCmd implements Serializable {

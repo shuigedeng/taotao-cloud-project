@@ -83,7 +83,7 @@ public class DeptPO extends BaseSuperEntity<DeptPO, Long> {
     @Column(name = "tenant_id", unique = true, columnDefinition = "varchar(32) COMMENT '租户id'")
     private String tenantId;
 
-    @Builder
+    @Accessors(chain=true)
     public DeptPO(
             Long id,
             LocalDateTime createTime,
