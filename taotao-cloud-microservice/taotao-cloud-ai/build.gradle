@@ -105,7 +105,7 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'com.github.oshi:oshi-core:6.6.5'
+    implementation 'com.github.oshi:oshi-core:6.6.6'
 
     implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:1.0.0-M5.1"
 
