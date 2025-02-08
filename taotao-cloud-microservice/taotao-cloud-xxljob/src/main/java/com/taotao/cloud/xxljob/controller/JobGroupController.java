@@ -9,14 +9,14 @@ import com.taotao.cloud.xxljob.dao.XxlJobInfoDao;
 import com.taotao.cloud.xxljob.dao.XxlJobRegistryDao;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.enums.RegistryConfig;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -44,9 +44,10 @@ public class JobGroupController {
 	@ResponseBody
 	@PermissionLimit(adminuser = true)
 	public Map<String, Object> pageList(HttpServletRequest request,
-										@RequestParam(required = false, defaultValue = "0") int start,
-										@RequestParam(required = false, defaultValue = "10") int length,
-										String appname, String title) {
+										@RequestParam(value = "start", required = false, defaultValue = "0") int start,
+										@RequestParam(value = "length", required = false, defaultValue = "10") int length,
+										@RequestParam("appname") String appname,
+										@RequestParam("title") String title) {
 
 		// page query
 		List<XxlJobGroup> list = xxlJobGroupDao.pageList(start, length, appname, title);
@@ -176,7 +177,7 @@ public class JobGroupController {
 	@RequestMapping("/remove")
 	@ResponseBody
 	@PermissionLimit(adminuser = true)
-	public ReturnT<String> remove(int id){
+	public ReturnT<String> remove(@RequestParam("id") int id){
 
 		// valid
 		int count = xxlJobInfoDao.pageListCount(0, 10, id, -1,  null, null, null);
@@ -196,7 +197,7 @@ public class JobGroupController {
 	@RequestMapping("/loadById")
 	@ResponseBody
 	@PermissionLimit(adminuser = true)
-	public ReturnT<XxlJobGroup> loadById(int id){
+	public ReturnT<XxlJobGroup> loadById(@RequestParam("id") int id){
 		XxlJobGroup jobGroup = xxlJobGroupDao.load(id);
 		return jobGroup!=null?new ReturnT<XxlJobGroup>(jobGroup):new ReturnT<XxlJobGroup>(ReturnT.FAIL_CODE, null);
 	}

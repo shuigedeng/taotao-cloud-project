@@ -3,6 +3,8 @@ package com.taotao.cloud.xxljob.controller.resolver;
 import com.taotao.cloud.xxljob.core.exception.XxlJobException;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.taotao.cloud.xxljob.core.util.JacksonUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,8 +13,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -25,8 +25,7 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 	private static transient Logger logger = LoggerFactory.getLogger(WebExceptionResolver.class);
 
 	@Override
-	public ModelAndView resolveException(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex) {
+	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
 		if (!(ex instanceof XxlJobException)) {
 			logger.error("WebExceptionResolver:{}", ex);

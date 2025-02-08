@@ -321,6 +321,7 @@ xxl:
       password: 123456
     accessToken: default_token
     i18n: zh_CN
+    timeout: 3
     #触发池
     triggerpool:
       fast:

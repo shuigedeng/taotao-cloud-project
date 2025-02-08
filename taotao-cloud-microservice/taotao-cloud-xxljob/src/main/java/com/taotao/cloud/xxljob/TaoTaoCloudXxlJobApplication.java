@@ -36,8 +36,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableDiscoveryClient
 @SpringBootApplication
 public class TaoTaoCloudXxlJobApplication {
-
-
 	public static void main(String[] args) {
 		new StartupSpringApplication(TaoTaoCloudXxlJobApplication.class)
 			.setTtcBanner()
