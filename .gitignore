@@ -7,7 +7,6 @@ target/
 
 !.mvn/wrapper/maven-wrapper.jar
 
-!taotao-cloud-microservice/taotao-cloud-xxljob/src/main/resources/static/adminlte/dist
 
 ### STS ###
 .apt_generated
@@ -68,3 +67,5 @@ help.md
 **/vendor/
 
 **/target
+
+!taotao-cloud-microservice/taotao-cloud-xxljob/src/main/resources/static/adminlte/dist
