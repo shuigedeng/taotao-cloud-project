@@ -59,9 +59,6 @@ dependencies {
     implementation "cn.afterturn:easypoi-base:4.5.0"
     implementation "cn.afterturn:easypoi-annotation:4.5.0"
 
-    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
-
     implementation 'com.jd.easyflow:easyflow-flow:1.4.1'
     implementation 'com.jd.easyflow:easyflow-flow-bpmn:1.4.1'
     implementation 'com.jd.easyflow:easyflow-flow-extension:1.4.1'

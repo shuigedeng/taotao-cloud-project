@@ -82,9 +82,6 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    //https://search.maven.org/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter
-    implementation 'com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.10.0'
-
     implementation 'org.zalando:logbook-spring-boot-starter:3.10.0'
     implementation 'org.zalando:logbook-httpclient5:3.10.0'
     implementation 'org.zalando:logbook-netty:3.10.0'
@@ -93,8 +90,6 @@ dependencies {
     implementation 'org.zalando:logbook-openfeign:3.10.0'
     implementation 'org.zalando:logbook-spring-webflux:3.10.0'
 
-    implementation 'com.github.oshi:oshi-core:6.6.6'
-
     //implementation "io.github.shuigedeng:taotao-boot-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
 
@@ -102,7 +97,6 @@ dependencies {
     api "com.querydsl:querydsl-jpa:5.1.0:jakarta"
     api "jakarta.persistence:jakarta.persistence-api:3.1.0"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api:3.1.0"
-
 
     //implementation 'com.maciejwalkowiak.spring:spring-boot-startup-report:0.2.0'
     //implementation "io.github.linyimin0812:spring-async-bean-starter:2.0.4"
@@ -152,7 +146,7 @@ configurations {
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.54!!'
+        //implementation 'com.alibaba:fastjson:2.0.55!!'
 
         resolutionStrategy {
             force "org.codehaus.groovy:groovy:4.0.0"
