@@ -52,16 +52,16 @@ public class CollectListStatsFactory implements AccumulatorStateFactory<CollectL
     public static class GroupState implements GroupedAccumulatorState, CollectListAggregationFunctions.CollectState {
 
         private final ObjectBigArray<CollectListStats> collectStatsList = new ObjectBigArray<>();
-        private long size;
-        private long groupId;
+        private int size;
+        private int groupId;
 
         @Override
-        public void setGroupId(long groupId) {
+        public void setGroupId(int groupId) {
             this.groupId = groupId;
         }
 
         @Override
-        public void ensureCapacity(long size) {
+        public void ensureCapacity(int size) {
             collectStatsList.ensureCapacity(size);
         }
 
@@ -84,7 +84,7 @@ public class CollectListStatsFactory implements AccumulatorStateFactory<CollectL
         public long getEstimatedSize() {
             return size + collectStatsList.sizeOf();
         }
-    }
+	}
 
     public static class SingleState implements CollectListAggregationFunctions.CollectState {
 

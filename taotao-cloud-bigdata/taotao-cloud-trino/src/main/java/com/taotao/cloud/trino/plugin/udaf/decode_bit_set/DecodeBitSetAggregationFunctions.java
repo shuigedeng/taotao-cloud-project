@@ -90,7 +90,7 @@ public class DecodeBitSetAggregationFunctions {
         }
 
         int byteArrayNum = slice.length() / Long.BYTES;
-        BlockBuilder blockBuilder = out.beginBlockEntry();
+        BlockBuilder blockBuilder = out.buildValueBlock();
 
         for (int i = 0; i < byteArrayNum; ++i) {
             int offset = i * Long.BYTES;

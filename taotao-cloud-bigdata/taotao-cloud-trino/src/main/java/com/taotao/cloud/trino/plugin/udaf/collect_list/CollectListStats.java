@@ -36,7 +36,7 @@ public class CollectListStats {
             (int) ClassLayout.parseClass(CollectListStats.class).instanceSize();
     // <id,<key,value>>
     private final Map<Integer, Map<String, Integer>> collectContainer = new HashMap<>();
-    private long contentEstimatedSize = 0;
+    private int contentEstimatedSize = 0;
     private int keyByteLen = 0;
     private int keyListLen = 0;
 
