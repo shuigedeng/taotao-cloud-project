@@ -4,28 +4,28 @@ apply plugin: "java"
 
 dependencies {
     // flinksql本地运行需要的依赖
-    implementation "org.apache.flink:flink-core:1.20.0"
-    implementation "org.apache.flink:flink-clients:1.20.0"
-    implementation "org.apache.flink:flink-java:1.20.0"
-    implementation "org.apache.flink:flink-streaming-java:1.20.0"
-    implementation "org.apache.flink:flink-scala_2.12:1.20.0"
-    implementation "org.apache.flink:flink-streaming-scala_2.12:1.20.0"
+    implementation "org.apache.flink:flink-core:1.20.1"
+    implementation "org.apache.flink:flink-clients:1.20.1"
+    implementation "org.apache.flink:flink-java:1.20.1"
+    implementation "org.apache.flink:flink-streaming-java:1.20.1"
+    implementation "org.apache.flink:flink-scala_2.12:1.20.1"
+    implementation "org.apache.flink:flink-streaming-scala_2.12:1.20.1"
     //状态后端管理器
-    implementation "org.apache.flink:flink-statebackend-rocksdb:1.20.0"
+    implementation "org.apache.flink:flink-statebackend-rocksdb:1.20.1"
     //flink本地运行时 提供的web功能
-    implementation "org.apache.flink:flink-runtime-web:1.20.0"
+    implementation "org.apache.flink:flink-runtime-web:1.20.1"
 
     //flink sql
-    implementation 'org.apache.flink:flink-table-api-java:1.20.0'
-    implementation 'org.apache.flink:flink-table-runtime:1.20.0'
-    implementation 'org.apache.flink:flink-table-api-java-bridge:1.20.0'
-    implementation "org.apache.flink:flink-table-planner_2.12:1.20.0"
-    implementation "org.apache.flink:flink-table-planner-loader:1.20.0"
-    implementation 'org.apache.flink:flink-sql-gateway-api:1.20.0'
+    implementation 'org.apache.flink:flink-table-api-java:1.20.1'
+    implementation 'org.apache.flink:flink-table-runtime:1.20.1'
+    implementation 'org.apache.flink:flink-table-api-java-bridge:1.20.1'
+    implementation "org.apache.flink:flink-table-planner_2.12:1.20.1"
+    implementation "org.apache.flink:flink-table-planner-loader:1.20.1"
+    implementation 'org.apache.flink:flink-sql-gateway-api:1.20.1'
 
     //使用alibaba 动态cep
-    implementation 'org.apache.flink:flink-cep:1.20.0'
-    implementation "org.apache.flink:flink-csv:1.20.0"
+    implementation 'org.apache.flink:flink-cep:1.20.1'
+    implementation "org.apache.flink:flink-csv:1.20.1"
     implementation 'org.apache.flink:flink-parquet:1.20.0'
     implementation 'org.apache.parquet:parquet-avro:1.14.4'
     implementation 'org.apache.flink:flink-avro:1.20.0'

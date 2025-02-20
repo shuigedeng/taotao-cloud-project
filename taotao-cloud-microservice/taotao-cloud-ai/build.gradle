@@ -58,7 +58,7 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M5")
+    implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-M6")
 
     //cloud
     implementation "io.github.shuigedeng:taotao-cloud-starter-stream"
