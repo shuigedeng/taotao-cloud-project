@@ -87,7 +87,7 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
 
-    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.4.2"
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.4.3"
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
