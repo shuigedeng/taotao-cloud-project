@@ -59,7 +59,7 @@ dependencies {
     implementation 'cn.monitor4all:log-record-springboot3-starter:1.7.0'
     implementation 'com.alibaba.boot:nacos-config-spring-boot-starter:0.3.0-RC'
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.1.1143'
-    implementation "com.alibaba.fastjson2:fastjson2:2.0.55"
+    implementation "com.alibaba.fastjson2:fastjson2:2.0.56"
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'com.google.guava:guava:33.4.0-jre'
     implementation 'org.dromara.hutool:hutool-all'
@@ -81,7 +81,7 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            //force "org.codehaus.groovy:groovy:4.0.0"
+            //force "org.codehaus.groovy:groovy:3.0.23"
             force 'org.antlr:antlr4:4.13.2'
         }
 

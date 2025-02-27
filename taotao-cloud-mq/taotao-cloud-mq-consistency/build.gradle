@@ -3,12 +3,12 @@ dependencies {
     api project(":taotao-cloud-mq:taotao-cloud-mq-plugin")
     api project(":taotao-cloud-mq:taotao-cloud-mq-proxy")
 
-    api 'org.slf4j:slf4j-api:2.0.16'
-    api 'org.slf4j:slf4j-api:2.0.16'
+    api 'org.slf4j:slf4j-api:2.0.17'
+    api 'org.slf4j:slf4j-api:2.0.17'
     api('com.alipay.sofa:bolt:1.6.10') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
     }
-    api 'com.alibaba:fastjson:2.0.55'
+    api 'com.alibaba:fastjson:2.0.56'
     api 'com.alipay.sofa:hessian:3.5.5'
     api "redis.clients:jedis:5.2.0"
     api 'com.google.guava:guava:33.4.0-jre'

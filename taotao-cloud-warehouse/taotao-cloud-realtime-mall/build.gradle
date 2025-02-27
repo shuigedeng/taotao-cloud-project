@@ -23,7 +23,7 @@ dependencies {
     implementation 'org.apache.flink:flink-cep:1.20.1'
     implementation "org.apache.flink:flink-csv:1.20.1"
     implementation 'org.apache.flink:flink-parquet:1.20.1'
-    implementation 'org.apache.parquet:parquet-avro:1.14.4'
+    implementation 'org.apache.parquet:parquet-avro:1.15.0'
     implementation 'org.apache.flink:flink-avro:1.20.1'
     implementation 'org.apache.flink:flink-json:1.20.1'
     implementation 'org.apache.flink:flink-format-common:1.20.1'
@@ -35,10 +35,10 @@ dependencies {
     implementation "org.apache.flink:flink-connector-kafka:3.3.0-1.20"
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc:3.2.0-1.19'
-    implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.0'
+    implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.1'
     implementation 'org.apache.flink:flink-connector-mongodb:1.2.0-1.19'
     implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
-    implementation 'org.apache.doris:flink-doris-connector-1.20:24.0.1'
+    implementation 'org.apache.doris:flink-doris-connector-1.20:25.0.0'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
 
@@ -154,13 +154,13 @@ dependencies {
     //implementation(project(":taotao-cloud-bigdata:taotao-cloud-flink-cep"))
     implementation 'com.googlecode.aviator:aviator:5.4.3'
 
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.55'
-    implementation "com.alibaba.fastjson2:fastjson2-extension-spring6:2.0.55"
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.56'
+    implementation "com.alibaba.fastjson2:fastjson2-extension-spring6:2.0.56"
 
     // 如果保存检查点到hdfs上，需要引入此依赖
     implementation "org.apache.hadoop:hadoop-client:3.4.1"
-    implementation 'org.slf4j:slf4j-api:2.0.16'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.16'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
     implementation "org.apache.logging.log4j:log4j-to-slf4j:2.23.1"
 
     implementation "commons-beanutils:commons-beanutils:1.10.0"
@@ -174,6 +174,6 @@ dependencies {
 
     implementation "com.janeluo:ikanalyzer:2012_u6"
 
-    //implementation 'org.slf4j:slf4j-api:2.0.16'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.16'
+    //implementation 'org.slf4j:slf4j-api:2.0.17'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
 }

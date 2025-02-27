@@ -25,21 +25,21 @@ dependencies {
 
     //https://github.com/spring-projects/spring-modulith
     //https://central.sonatype.com/artifact/org.springframework.modulith/spring-modulith-starter-core
-    implementation 'org.springframework.modulith:spring-modulith-starter-core:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-starter-insight:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-starter-jpa:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-events-kafka:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-events-amqp:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-events-jpa:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-events-jdbc:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-events-mongodb:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-moments:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-observability:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-docs:1.3.2'
-    implementation 'org.springframework.modulith:spring-modulith-actuator:1.3.2'
-    testImplementation 'org.springframework.modulith:spring-modulith-starter-test:1.3.2'
+    implementation 'org.springframework.modulith:spring-modulith-starter-core:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-starter-insight:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-starter-jdbc:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-starter-jpa:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-starter-mongodb:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-events-kafka:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-events-amqp:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-events-jpa:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-events-jdbc:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-events-mongodb:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-moments:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-observability:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-docs:1.3.3'
+    implementation 'org.springframework.modulith:spring-modulith-actuator:1.3.3'
+    testImplementation 'org.springframework.modulith:spring-modulith-starter-test:1.3.3'
 
     //https://github.com/xmolecules/jmolecules
     //https://central.sonatype.com/artifact/org.jmolecules/jmolecules-ddd
@@ -78,12 +78,12 @@ configurations {
         //    }
         //}
         //或者简写为 force 的优先级会比较高，会覆盖 strictly 策略
-        //implementation 'com.alibaba:fastjson:2.0.55!!'
+        //implementation 'com.alibaba:fastjson:2.0.56!!'
 
         resolutionStrategy {
-            force "org.codehaus.groovy:groovy:4.0.0"
+            force "org.codehaus.groovy:groovy:3.0.23"
             force 'org.antlr:antlr4:4.13.2'
-            force 'net.minidev:json-smart:2.5.1'
+            force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.47.0-alpha"
         }

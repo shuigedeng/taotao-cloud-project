@@ -79,9 +79,9 @@ dependencies {
 configurations {
     configureEach {
         resolutionStrategy {
-            force "org.codehaus.groovy:groovy:4.0.0"
+            force "org.codehaus.groovy:groovy:3.0.23"
             force 'org.antlr:antlr4:4.13.2'
-            force 'net.minidev:json-smart:2.5.1'
+            force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用
             force "io.opentelemetry:opentelemetry-api-incubator:1.47.0-alpha"
         }

@@ -6,8 +6,8 @@ dependencies {
     implementation "org.scala-lang:scala-library:2.13.16"
     implementation "org.scala-lang:scala-reflect:2.13.16"
 
-    implementation 'org.slf4j:slf4j-api:2.0.16'
-    //implementation 'org.slf4j:slf4j-reload4j:2.0.16'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    //implementation 'org.slf4j:slf4j-reload4j:2.0.17'
 
     //implementation "org.scala-lang:scala-implementationr:2.12.8"
 
@@ -15,10 +15,10 @@ dependencies {
     implementation 'com.typesafe.akka:akka-actor_2.13:2.8.8'
     implementation 'com.typesafe.akka:akka-remote_2.13:2.8.8'
 
-    implementation 'org.slf4j:slf4j-api:2.0.16'
-    implementation 'ch.qos.logback:logback-core:1.5.16'
-    implementation 'ch.qos.logback:logback-access:1.5.16'
-    implementation 'ch.qos.logback:logback-classic:1.5.16'
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    implementation 'ch.qos.logback:logback-core:1.5.17'
+    implementation 'ch.qos.logback:logback-access:1.5.17'
+    implementation 'ch.qos.logback:logback-classic:1.5.17'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'

@@ -33,22 +33,22 @@ dependencies {
     implementation 'org.apache.flink:flink-cep:1.20.1'
     implementation "org.apache.flink:flink-csv:1.20.1"
     implementation 'org.apache.flink:flink-parquet:1.20.1'
-    implementation 'org.apache.parquet:parquet-avro:1.14.4'
+    implementation 'org.apache.parquet:parquet-avro:1.15.0'
     implementation 'org.apache.flink:flink-avro:1.20.1'
     implementation 'org.apache.flink:flink-json:1.20.1'
     implementation 'org.apache.flink:flink-format-common:1.20.1'
     implementation 'org.apache.flink:flink-compress:1.20.1'
 
     //flink连接器
-    implementation 'org.apache.flink:flink-connector-datagen:1.20.0'
-    implementation 'org.apache.flink:flink-connector-files:1.20.0'
+    implementation 'org.apache.flink:flink-connector-datagen:1.20.1'
+    implementation 'org.apache.flink:flink-connector-files:1.20.1'
     implementation "org.apache.flink:flink-connector-kafka:3.3.0-1.20"
     //implementation 'org.apache.flink:flink-connector-hbase-2.2:3.0.0-1.17'
     implementation 'org.apache.flink:flink-connector-jdbc:3.2.0-1.19'
-    implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.0'
+    implementation 'org.apache.flink:flink-connector-hive_2.12:1.20.1'
     implementation 'org.apache.flink:flink-connector-mongodb:1.2.0-1.19'
     implementation 'org.apache.flink:flink-connector-pulsar:4.1.0-1.18'
-    implementation 'org.apache.doris:flink-doris-connector-1.20:24.0.1'
+    implementation 'org.apache.doris:flink-doris-connector-1.20:25.0.0'
     //implementation "org.apache.flink:flink-connector-elasticsearch7:3.0.0-1.16"
     //implementation "org.apache.flink:flink-connector-redis_2.11:1.1.5"
 
