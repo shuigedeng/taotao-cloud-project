@@ -40,7 +40,7 @@ jobs:
       #    distribution: 'temurin'
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@1.3.1
+      - uses: graalvm/setup-graalvm@v1.3.1
         with:
           java-version: '21'
           distribution: 'graalvm'
