@@ -82,13 +82,13 @@ dependencies {
     //https://search.maven.org/artifact/org.freemarker/freemarker
     implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 
-    implementation 'org.zalando:logbook-spring-boot-starter:3.10.0'
-    implementation 'org.zalando:logbook-httpclient5:3.10.0'
-    implementation 'org.zalando:logbook-netty:3.10.0'
-    implementation 'org.zalando:logbook-okhttp:3.10.0'
-    implementation 'org.zalando:logbook-okhttp2:3.10.0'
-    implementation 'org.zalando:logbook-openfeign:3.10.0'
-    implementation 'org.zalando:logbook-spring-webflux:3.10.0'
+    implementation 'org.zalando:logbook-spring-boot-starter:3.11.0'
+    implementation 'org.zalando:logbook-httpclient5:3.11.0'
+    implementation 'org.zalando:logbook-netty:3.11.0'
+    implementation 'org.zalando:logbook-okhttp:3.11.0'
+    implementation 'org.zalando:logbook-okhttp2:3.11.0'
+    implementation 'org.zalando:logbook-openfeign:3.11.0'
+    implementation 'org.zalando:logbook-spring-webflux:3.11.0'
 
     //implementation "io.github.shuigedeng:taotao-boot-starter-apt")
     //annotationProcessor "io.github.shuigedeng:taotao-boot-starter-apt")
