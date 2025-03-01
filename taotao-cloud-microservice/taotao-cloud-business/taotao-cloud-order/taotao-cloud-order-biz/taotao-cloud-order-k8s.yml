@@ -4,7 +4,7 @@ metadata:
   name: taotao-cloud-order-configmap
 data:
   APPLICATION_NAME: "taotao-cloud-order"
-  APPLICATION_VERSION: '2025.03'
+  APPLICATION_VERSION: '2025.04'
 ---
 apiVersion: v1
 kind: Secret
@@ -94,7 +94,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
-          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2025.03
+          image: registry.cn-hangzhou.aliyuncs.com/taotao-cloud-project/taotao-cloud-order:2025.04
           imagePullPolicy: Always
           ports:
             - name: order-port
