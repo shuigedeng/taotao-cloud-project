@@ -34,7 +34,7 @@ jobs:
         id: get_tag
 
       #https://github.com/marketplace/actions/github-action-for-graalvm
-      - uses: graalvm/setup-graalvm@v1.2.6
+      - uses: graalvm/setup-graalvm@1.3.1
         with:
           java-version: '21'
           distribution: 'graalvm'
@@ -43,7 +43,7 @@ jobs:
 
       #https://github.com/marketplace/actions/cache
       - name: Cache Gradle Packages
-        uses: actions/cache@v4.2.0
+        uses: actions/cache@v4.2.2
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
@@ -70,7 +70,7 @@ jobs:
 
       #https://github.com/ncipollo/release-action/tree/main
       #https://github.com/marketplace/actions/create-release
-      - uses: ncipollo/release-action@v1.14.0
+      - uses: ncipollo/release-action@v1.16.0
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true

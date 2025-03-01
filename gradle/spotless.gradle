@@ -31,7 +31,7 @@ spotless {
         //googleJavaFormat('1.24.0').aosp().reflowLongStrings().groupArtifact('com.google.googlejavaformat:google-java-format')
 
         //https://search.maven.org/artifact/com.palantir.javaformat/palantir-java-format/
-        palantirJavaFormat('2.50.0')
+        palantirJavaFormat('2.55.0')
         licenseHeaderFile rootProject.file('code-analysis/spotless/license-header')
     }
 
