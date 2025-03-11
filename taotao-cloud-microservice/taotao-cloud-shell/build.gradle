@@ -69,11 +69,11 @@ configurations {
         //implementation 'com.alibaba:fastjson:2.0.56!!'
 
         resolutionStrategy {
-            force "org.codehaus.groovy:groovy:3.0.23"
+            force "org.codehaus.groovy:groovy::3.0.24"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
             //todo 临时使用
-            force "io.opentelemetry:opentelemetry-api-incubator:1.47.0-alpha"
+            force "io.opentelemetry:opentelemetry-api-incubator:1.48.0-alpha"
         }
 
         //exclude group: "log4j", module: "log4j"
