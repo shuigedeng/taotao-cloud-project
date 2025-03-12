@@ -40,7 +40,7 @@ dependencies {
     implementation "io.github.shuigedeng:taotao-boot-starter-flowengine"
 
     //https://central.sonatype.com/artifact/org.springframework.session/spring-session-data-redis
-    implementation 'org.springframework.session:spring-session-data-redis:3.4.1'
+    implementation 'org.springframework.session:spring-session-data-redis:3.4.2'
 
     //https://central.sonatype.com/artifact/com.github.binarywang/weixin-java-pay?smo=true
     implementation 'com.github.binarywang:weixin-java-mp:4.7.2.B'
@@ -53,7 +53,7 @@ dependencies {
     //https://search.maven.org/artifact/org.webjars/bootstrap
     implementation "org.webjars:bootstrap:5.3.3"
     //https://search.maven.org/artifact/org.webjars/webjars-locator-lite
-    implementation "org.webjars:webjars-locator-lite:1.0.1"
+    implementation "org.webjars:webjars-locator-lite:1.1.0"
     implementation 'org.webjars:font-awesome:6.5.1'
     implementation 'org.webjars.bower:jquery-backstretch:2.1.17'
     implementation 'org.webjars:uniform:2.1.2-1'
@@ -126,7 +126,7 @@ configurations {
         resolutionStrategy.cacheDynamicVersionsFor 0, "seconds"
 
         resolutionStrategy {
-            force "org.codehaus.groovy:groovy::3.0.24"
+            force "org.codehaus.groovy:groovy:3.0.24"
             force 'org.antlr:antlr4:4.13.2'
             force 'net.minidev:json-smart:2.5.2'
             force 'org.bouncycastle:bcprov-jdk18on:1.80'
